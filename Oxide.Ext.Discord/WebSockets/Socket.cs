@@ -1,6 +1,7 @@
 ﻿namespace Oxide.Ext.Discord.WebSockets
 {
     using System;
+    using Oxide.Core;
     using Oxide.Ext.Discord.Exceptions;
     using WebSocketSharp;
 
@@ -13,6 +14,8 @@
         private SocketListner listner;
 
         public bool hasConnectedOnce = false;
+
+        public bool Connecting;
 
         public Socket(DiscordClient client)
         {
@@ -27,10 +30,23 @@
             }
 
             if (socket != null && socket.ReadyState != WebSocketState.Closed && socket.ReadyState != WebSocketState.Closing)
+            if (IsConnecting())
+            {
+                if (client.Settings.Debugging)
+                {
+                    Interface.Oxide.LogWarning($"[Discord Extension] [Debug] Tried to connect to websocket while already connecting: Connecting: {Connecting}  Socket State: {socket.ReadyState}");
+                }
+                return;
+            }
+            
+            Connecting = true;
+            if (socket != null)
             {
                 //throw new SocketRunningException(client);
                 // Assume force-reconenct
                 socket?.Close(CloseStatusCode.Abnormal);
+                // Assume force-reconnect
+                Disconnect(false);
             }
             client.DestroyHeartbeat();
 
@@ -71,6 +87,21 @@
             if (socket == null)
                 return false;
             return socket.ReadyState == WebSocketState.Open;
+        }
+        
+        public bool IsConnecting()
+        {
+            if (Connecting)
+            {
+                return true;
+            }
+            
+            if (socket == null)
+            {
+                return false;
+            }
+            
+            return socket.ReadyState == WebSocketState.Connecting;
         }
 
         public bool IsClosing()

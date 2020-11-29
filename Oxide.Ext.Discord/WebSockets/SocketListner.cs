@@ -35,11 +35,16 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             Interface.Oxide.LogWarning("[Discord Extension] Discord socket opened!");
 
+            
+            webSocket.Connecting = false;
+            
             client.CallHook("DiscordSocket_WebSocketOpened");
         }
 
         public void SocketClosed(object sender, CloseEventArgs e)
         {
+            webSocket.Connecting = false;
+            
             if (e.Code == 4004)
             {
                 Interface.Oxide.LogError("[Discord Extension] Given Bot token is invalid!");
