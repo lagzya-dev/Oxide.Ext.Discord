@@ -41,7 +41,6 @@
 
         public void Queue(Request request)
         {
-            this.Add(request);
             lock (this)
             {
                 this.Add(request);
@@ -83,12 +82,9 @@
             {
                 return;
             }
-            
-            if (this.Any(x => x.InProgress))
 
             lock (this)
             {
-                return;
                 if (this.Any(x => x.InProgress))
                 {
                     return;

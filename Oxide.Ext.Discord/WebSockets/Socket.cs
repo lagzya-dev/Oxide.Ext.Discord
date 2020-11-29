@@ -29,7 +29,6 @@
                 throw new NoURLException();
             }
 
-            if (socket != null && socket.ReadyState != WebSocketState.Closed && socket.ReadyState != WebSocketState.Closing)
             if (IsConnecting())
             {
                 if (client.Settings.Debugging)
@@ -42,9 +41,6 @@
             Connecting = true;
             if (socket != null)
             {
-                //throw new SocketRunningException(client);
-                // Assume force-reconenct
-                socket?.Close(CloseStatusCode.Abnormal);
                 // Assume force-reconnect
                 Disconnect(false);
             }

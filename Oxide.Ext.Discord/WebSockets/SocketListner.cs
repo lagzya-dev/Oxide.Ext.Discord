@@ -360,17 +360,8 @@ namespace Oxide.Ext.Discord.WebSockets
                             GuildMemberUpdate memberUpdated = payload.EventData.ToObject<GuildMemberUpdate>();
 
                             GuildMember newMember = client.GetGuild(memberUpdated.guild_id)?.members.FirstOrDefault(x => x.user.id == memberUpdated.user.id);
-                            GuildMember oldMember = Newtonsoft.Json.Linq.JObject.FromObject(newMember).ToObject<GuildMember>(); // lazy way to copy the object
-                            if (newMember != null)
                             if (newMember == null)
                             {
-                                if (memberUpdated.user != null)
-                                    newMember.user = memberUpdated.user;
-                                if (memberUpdated.nick != null)
-                                    newMember.nick = memberUpdated.nick;
-                                if (memberUpdated.roles != null)
-                                    newMember.roles = memberUpdated.roles;
-                             }
                                 Interface.Oxide.LogWarning($"[Discord Extension] Tried to update a user who doesn't exist.  Guild ID: {memberUpdated.guild_id} Member ID: {memberUpdated.user.id}");
                                 break;
                             }
@@ -542,7 +533,6 @@ namespace Oxide.Ext.Discord.WebSockets
                             foreach(Guild g in guilds)
                             {
                                 GuildMember memberUpdate = g.members.FirstOrDefault(x => x.user.id == userUpdate.id);
-                                memberUpdate.user = userUpdate;
                                 if (memberUpdate != null)
                                 {
                                     memberUpdate.user = userUpdate;
