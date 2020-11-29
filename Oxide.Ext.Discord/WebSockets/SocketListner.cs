@@ -241,6 +241,7 @@ namespace Oxide.Ext.Discord.WebSockets
                             Channel channelDelete = payload.EventData.ToObject<Channel>();
 
                             client.GetGuild(channelDelete.guild_id).channels.Remove(channelDelete);
+                            client.GetGuild(channelDelete.guild_id).channels.RemoveAll(c => c.id == channelDelete.id);
 
                             client.CallHook("Discord_ChannelDelete", null, channelDelete);
                             break;
