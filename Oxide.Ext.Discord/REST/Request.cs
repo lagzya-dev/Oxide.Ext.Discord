@@ -117,6 +117,11 @@
 
             this.ParseResponse(response);
             response.Close();
+            if (response != null)
+            {
+                this.ParseResponse(response);
+                response.Close();
+            }
 
             try
             {
