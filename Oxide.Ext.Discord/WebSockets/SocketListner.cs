@@ -108,19 +108,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if(e.Exception is NoURLException)
             {
                 Interface.Oxide.LogError("[Discord Extension] Error: WSSURL not present! Retrying..");
-                DiscordObjects.Gateway.GetGateway(client, (gateway) =>
-                {
-                    // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                    string fullURL = $"{gateway.URL}/?{Connect.Serialize()}";
-
-                    if (client.Settings.Debugging)
-                    {
-                        Interface.Oxide.LogDebug($"Got Gateway url: {fullURL}");
-                    }
-
-                    client.UpdateWSSURL(fullURL);
-                    webSocket.Connect(client.WSSURL);
-                });
+                client.ConnectToWssUrl();
                 return;
             }
             

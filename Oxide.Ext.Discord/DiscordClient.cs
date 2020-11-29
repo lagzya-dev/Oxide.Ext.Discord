@@ -97,12 +97,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            this.GetURL(url =>
-            {
-                UpdateWSSURL(url);
-
-                _webSocket.Connect(WSSURL);
-            });
+            ConnectToWssUrl();
 
             /*Discord.PendingTokens.Add(settings.ApiToken); // Not efficient, will re-do later
             Timer t2 = new Timer() { AutoReset = false, Interval = 5000f, Enabled = true };
@@ -240,6 +235,15 @@ namespace Oxide.Ext.Discord
                 }
 
                 callback.Invoke(fullURL);
+            });
+        }
+        
+        internal void ConnectToWssUrl()
+        {
+            GetURL(url =>
+            {
+                UpdateWSSURL(url);
+                _webSocket.Connect(WSSURL);
             });
         }
 
