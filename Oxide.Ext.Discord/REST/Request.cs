@@ -93,7 +93,6 @@
                     // Interface.Oxide.LogError($"[Discord Ext] Exception message: {ex.Message}");
 
                     this.Close(++retries >= 3);
-                    httpResponse.Close();
                     return;
                 }
 
