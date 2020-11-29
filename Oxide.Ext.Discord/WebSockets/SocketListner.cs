@@ -543,6 +543,10 @@ namespace Oxide.Ext.Discord.WebSockets
                             {
                                 GuildMember memberUpdate = g.members.FirstOrDefault(x => x.user.id == userUpdate.id);
                                 memberUpdate.user = userUpdate;
+                                if (memberUpdate != null)
+                                {
+                                    memberUpdate.user = userUpdate;
+                                }
                             }
 
                             client.CallHook("Discord_UserUpdate", null, userUpdate);
