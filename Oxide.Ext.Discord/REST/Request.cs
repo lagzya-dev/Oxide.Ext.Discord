@@ -142,6 +142,10 @@
             if (remove)
             {
                 this.bucket.Remove(this);
+                lock (this.bucket)
+                {
+                    this.bucket.Remove(this);
+                }
             }
 
             this.InProgress = false;
