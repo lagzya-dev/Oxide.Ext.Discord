@@ -149,31 +149,36 @@ namespace Oxide.Ext.Discord
             Plugins.Add(plugin);
         }
 
-        public object CallHook(string hookname, Plugin specificPlugin = null, params object[] args)
+        public void CallHook(string hookName, Plugin specificPlugin = null, params object[] args)
         {
-            if (specificPlugin != null)
+            //Run from next tick so we can be sure it's ran on the main thread.
+            Interface.Oxide.NextTick(() =>
             {
-                if (!specificPlugin.IsLoaded) return null;
+                if (specificPlugin != null)
+                {
+                    if (!specificPlugin.IsLoaded)
+                    {
+                        return;
+                    }
 
-                return specificPlugin.CallHook(hookname, args);
-            }
+                    specificPlugin.CallHook(hookName, args);
+                    return;
+                }
 
-            Dictionary<string, object> returnValues = new Dictionary<string, object>();
+                Dictionary<string, object> returnValues = new Dictionary<string, object>();
 
-            foreach (var plugin in Plugins.Where(x => x.IsLoaded))
-            {
-                var retVal = plugin.CallHook(hookname, args);
-                returnValues.Add(plugin.Title, retVal);
-            }
+                foreach (var plugin in Plugins.Where(x => x.IsLoaded))
+                {
+                    var retVal = plugin.CallHook(hookName, args);
+                    returnValues.Add(plugin.Title, retVal);
+                }
 
-            if (returnValues.Count(x => x.Value != null) > 1)
-            {
-                string conflicts = string.Join("\n", returnValues.Select(x => $"Plugin {x.Key} - {x.Value}").ToArray());
-                Interface.Oxide.LogWarning($"[Discord Extension] A hook conflict was triggered on {hookname} between:\n{conflicts}");
-                return null;
-            }
-
-            return returnValues.FirstOrDefault(x => x.Value != null).Value;
+                if (returnValues.Count(x => x.Value != null) > 1)
+                {
+                    string conflicts = string.Join("\n", returnValues.Select(x => $"Plugin {x.Key} - {x.Value}").ToArray());
+                    Interface.Oxide.LogWarning($"[Discord Extension] A hook conflict was triggered on {hookName} between:\n{conflicts}");
+                }
+            });
         }
 
         public string GetPluginNames(string delimiter = ", ") => string.Join(delimiter, Plugins.Select(x => x.Name).ToArray());
