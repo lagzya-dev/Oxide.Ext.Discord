@@ -15,8 +15,6 @@
 
         public bool hasConnectedOnce = false;
 
-        public bool Connecting;
-
         public Socket(DiscordClient client)
         {
             this.client = client;
@@ -29,16 +27,6 @@
                 throw new NoURLException();
             }
 
-            if (IsConnecting())
-            {
-                if (client.Settings.Debugging)
-                {
-                    Interface.Oxide.LogWarning($"[Discord Extension] [Debug] Tried to connect to websocket while already connecting: Connecting: {Connecting}  Socket State: {socket.ReadyState}");
-                }
-                return;
-            }
-            
-            Connecting = true;
             if (socket != null)
             {
                 // Assume force-reconnect
@@ -66,6 +54,13 @@
             socket?.CloseAsync(normal ? CloseStatusCode.Normal : CloseStatusCode.Abnormal);
         }
 
+        public void ReconnectRequested()
+        {
+            if (IsClosed() || IsClosing()) return;
+
+            socket?.CloseAsync(4000, "Discord server requested reconnect");
+        }
+
         public void Dispose()
         {
             listner = null;
@@ -75,7 +70,7 @@
         public void Send(string message, Action<bool> completed = null)
         {
             if (IsAlive())
-                socket?.SendAsync(message, completed);
+                socket.SendAsync(message, completed);
         }
 
         public bool IsAlive()
@@ -83,21 +78,6 @@
             if (socket == null)
                 return false;
             return socket.ReadyState == WebSocketState.Open;
-        }
-        
-        public bool IsConnecting()
-        {
-            if (Connecting)
-            {
-                return true;
-            }
-            
-            if (socket == null)
-            {
-                return false;
-            }
-            
-            return socket.ReadyState == WebSocketState.Connecting;
         }
 
         public bool IsClosing()

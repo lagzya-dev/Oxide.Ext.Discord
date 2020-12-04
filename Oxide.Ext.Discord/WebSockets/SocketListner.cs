@@ -35,16 +35,11 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             Interface.Oxide.LogWarning("[Discord Extension] Discord socket opened!");
 
-            
-            webSocket.Connecting = false;
-            
             client.CallHook("DiscordSocket_WebSocketOpened");
         }
 
         public void SocketClosed(object sender, CloseEventArgs e)
         {
-            webSocket.Connecting = false;
-            
             if (e.Code == 4004)
             {
                 Interface.Oxide.LogError("[Discord Extension] Given Bot token is invalid!");
@@ -603,7 +598,8 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     Interface.Oxide.LogInfo($"[Discord Extension] Reconnect has been called (opcode 7)! Reconnecting...");
                     webSocket.hasConnectedOnce = true; // attempt resume opcode
-                    webSocket.Connect(client.WSSURL);
+                    client.requestReconnect = true;
+                    webSocket.ReconnectRequested(); //If we disconnect normally our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
                     break;
                 }
 
