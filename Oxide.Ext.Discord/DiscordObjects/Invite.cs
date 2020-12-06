@@ -20,10 +20,5 @@
         {
             client.REST.DoRequest($"/invites/{code}", RequestMethod.DELETE, null, callback);
         }
-
-        public void AcceptInvite(DiscordClient client, Action<Invite> callback = null)
-        {
-            client.REST.DoRequest($"/invites/{code}", RequestMethod.POST, null, callback);
-        }
     }
 }
