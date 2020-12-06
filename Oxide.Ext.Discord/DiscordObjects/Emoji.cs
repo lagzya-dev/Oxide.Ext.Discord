@@ -17,5 +17,7 @@
         public bool? managed { get; set; }
 
         public bool? animated { get; set; }
+        
+        public bool? available { get; set; }
     }
 }

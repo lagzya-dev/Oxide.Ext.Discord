@@ -379,6 +379,31 @@
         {
             client.REST.DoRequest($"/guilds/{id}/vanity-url", RequestMethod.GET, null, callback);
         }
+        
+        public void ListGuildEmojis(DiscordClient client, Action<List<Emoji>> callback = null)
+        {
+            client.REST.DoRequest($"/guilds/{id}/emojis", RequestMethod.GET, null, callback);
+        }
+        
+        public void GetGuildEmoji(DiscordClient client, string emjoiId, Action<Emoji> callback = null)
+        {
+            client.REST.DoRequest($"/guilds/{id}/emojis/{emjoiId}", RequestMethod.GET, null, callback);
+        }
+        
+        public void CreateGuildEmoji(DiscordClient client, EmojiCreate emoji, Action<Emoji> callback = null)
+        {
+            client.REST.DoRequest($"/guilds/{id}/emojis", RequestMethod.POST, emoji, callback);
+        }
+        
+        public void UpdateGuildEmoji(DiscordClient client, string emojiId, EmojiUpdate emoji, Action<Emoji> callback = null)
+        {
+            client.REST.DoRequest($"/guilds/{id}/emojis/{emojiId}", RequestMethod.POST, emoji, callback);
+        }
+        
+        public void DeleteGuildEmoji(DiscordClient client, string emojiId, Action callback = null)
+        {
+            client.REST.DoRequest($"/guilds/{id}/emojis/{emojiId}", RequestMethod.DELETE, null, callback);
+        }
 
         public void Update(Guild UpdatedGuild)
         {
