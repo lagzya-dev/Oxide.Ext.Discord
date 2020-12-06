@@ -13,6 +13,10 @@
         USER_PREMIUM_GUILD_SUBSCRIPTION = 8,
         USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1 = 9,
         USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2 = 10,
-        USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3 = 11
+        USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3 = 11,
+        ChannelFollowAdd = 12,
+        GuildDiscoveryDisqualified = 14,
+        GuildDiscoveryRequalified = 15,
+        Reply = 19 //Note: Will not be used until we switch to V8 API
     }
 }
