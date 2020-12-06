@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.DiscordObjects
+﻿using Newtonsoft.Json;
+
+namespace Oxide.Ext.Discord.DiscordObjects
 {
     using System;
     using System.Collections.Generic;
@@ -31,9 +33,12 @@
         public List<User> mentions { get; set; }
 
         public List<string> mention_roles { get; set; }
+        
+        [JsonProperty("mention_channels")]
+        public List<ChannelMention> MentionsChannels { get; set; }
 
         public List<Attachment> attachments { get; set; }
-
+        
         public Embed embed { get; set; }
 
         public List<Embed> embeds { get; set; }
@@ -47,6 +52,24 @@
         public string webhook_id { get; set; }
 
         public MessageType? type { get; set; }
+        
+        [JsonProperty("activity")]
+        public MessageActivity Activity { get; set; }
+        
+        [JsonProperty("application")]
+        public MessageApplication Application { get; set; }
+        
+        [JsonProperty("message_reference")]
+        public MessageReference MessageReference { get; set; }
+        
+        [JsonProperty("flags")]
+        public MessageFlags Flags { get; set; }
+        
+        [JsonProperty("stickers")]
+        public List<MessageSticker> Stickers { get; set; }
+        
+        [JsonProperty("referenced_message")]
+        public Message ReferencedMessage { get; set; }
 
         public void Reply(DiscordClient client, Message message, bool ping = true, Action<Message> callback = null)
         {
