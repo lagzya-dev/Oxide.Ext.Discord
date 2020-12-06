@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.DiscordObjects
+﻿using Newtonsoft.Json;
+
+namespace Oxide.Ext.Discord.DiscordObjects
 {
     using System;
     using System.Collections.Generic;
@@ -16,6 +18,9 @@
         public string avatar { get; set; }
 
         public bool? bot { get; set; }
+        
+        [JsonProperty("system")]
+        public bool? System { get; set; }
 
         public bool? mfa_enabled { get; set; }
 
@@ -25,7 +30,13 @@
 
         public string email { get; set; }
 
+        [JsonProperty("flags")]
+        public UserFlags? Flags { get; set; }
+        
         public UserPremiumType? premium_type { get; set; }
+        
+        [JsonProperty("public_flags")]
+        public UserFlags? PublicFlags { get; set; }
 
         public static void GetCurrentUser(DiscordClient client, Action<User> callback = null)
         {
