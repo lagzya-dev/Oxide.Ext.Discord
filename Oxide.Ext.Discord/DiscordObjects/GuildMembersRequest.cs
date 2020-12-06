@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.DiscordObjects
+﻿using System.Collections.Generic;
+
+namespace Oxide.Ext.Discord.DiscordObjects
 {
     using Newtonsoft.Json;
 
@@ -12,5 +14,14 @@
 
         [JsonProperty("limit")]
         public int Limit { get; set; }
+        
+        [JsonProperty("presences")]
+        public bool? Presences { get; set; }
+        
+        [JsonProperty("user_ids")]
+        public List<string> UserIds { get; set; }        
+        
+        [JsonProperty("nonce")]
+        public string Nonce { get; set; }
     }
 }

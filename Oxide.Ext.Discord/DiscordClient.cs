@@ -327,13 +327,16 @@ namespace Oxide.Ext.Discord
             }
         }
         
-        public void RequestGuildMembers(string guild_id, string query = "", int limit = 0)
+        public void RequestGuildMembers(string guildId, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)
         {
-            var requestGuildMembers = new GuildMembersRequest()
+            var requestGuildMembers = new GuildMembersRequest
             {
-                GuildID = guild_id,
+                GuildID = guildId,
                 Query = query,
-                Limit = limit
+                Limit = limit,
+                Presences = presences,
+                UserIds = userIds,
+                Nonce = nonce
             };
 
             var packet = new RPayload()
