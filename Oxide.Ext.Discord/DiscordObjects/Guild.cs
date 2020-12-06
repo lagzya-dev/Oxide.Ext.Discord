@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.DiscordObjects
+﻿using Newtonsoft.Json;
+
+namespace Oxide.Ext.Discord.DiscordObjects
 {
     using System;
     using System.Collections.Generic;
@@ -12,32 +14,41 @@
         public string name { get; set; }
 
         public string icon { get; set; }
+        
+        [JsonProperty("icon_Hash")]
+        public string IconHash { get; set; }
 
         public string splash { get; set; }
 
         public string discovery_splash { get; set; }
 
-        public bool owner { get; set; }
+        public bool? owner { get; set; }
 
         public string owner_id { get; set; }
 
-        public int? permissions { get; set; }
+        public string permissions { get; set; }
 
         public string region { get; set; }
 
         public string afk_channel_id { get; set; }
 
         public int? afk_timeout { get; set; }
-
+        
         public bool? embed_enabled { get; set; }
-
+        
         public string embed_channel_id { get; set; }
+        
+        public bool? widget_enabled { get; set; }
 
-        public GuildVerificationLevel? verification_level { get; set; }
+        public string widget_channel_id { get; set; }
 
-        public int? default_message_notifications { get; set; }
+        public GuildVerificationLevel verification_level { get; set; }
 
-        public int? explicit_content_filter { get; set; }
+        //TODO: Move to enum
+        public int default_message_notifications { get; set; }
+
+        //TODO: Move to enum
+        public int explicit_content_filter { get; set; }
 
         public List<Role> roles { get; set; }
 
@@ -48,12 +59,11 @@
         public GuildMFALevel? mfa_level { get; set; }
 
         public string application_id { get; set; }
-
-        public bool? widget_enabled { get; set; }
-
-        public string widget_channel_id { get; set; }
-
+        
         public string system_channel_id { get; set; }
+
+        [JsonProperty("system_channel_flags")]
+        public SystemChannelFlags SystemChannelFlags { get; set; }
 
         public string rules_channel_id { get; set; }
 
@@ -90,6 +100,15 @@
         public string preferred_locale { get; set; }
 
         public string public_updates_channel_id { get; set; }
+        
+        [JsonProperty("max_video_channel_users")]
+        public int? MaxVideoChannelUsers { get; set; }
+        
+        [JsonProperty("approximate_member_count")]
+        public int? ApproximateMemberCount { get; set; }
+        
+        [JsonProperty("approximate_presence_count")]
+        public int? ApproximatePresenceCount { get; set; }
 
         public static void CreateGuild(DiscordClient client, string name, string region, string icon, GuildVerificationLevel? verificationLevel, int? defaultMessageNotifications, List<Role> roles, List<Channel> channels, Action<Guild> callback = null)
         {
@@ -405,78 +424,93 @@
             client.REST.DoRequest($"/guilds/{id}/emojis/{emojiId}", RequestMethod.DELETE, null, callback);
         }
 
-        public void Update(Guild UpdatedGuild)
+        public void Update(Guild updatedGuild)
         {
-            if (UpdatedGuild.name != null)
-                this.name = UpdatedGuild.name;
-            if (UpdatedGuild.icon != null)
-                this.icon = UpdatedGuild.icon;
-            if (UpdatedGuild.splash != null)
-                this.splash = UpdatedGuild.splash;
-            if (UpdatedGuild.owner_id != null)
-                this.owner_id = UpdatedGuild.owner_id;
-            if (UpdatedGuild.region != null)
-                this.region = UpdatedGuild.region;
-            if (UpdatedGuild.afk_channel_id != null)
-                this.afk_channel_id = UpdatedGuild.afk_channel_id;
-            if (UpdatedGuild.afk_timeout != null)
-                this.afk_timeout = UpdatedGuild.afk_timeout;
-            if (UpdatedGuild.embed_enabled != null)
-                this.embed_enabled = UpdatedGuild.embed_enabled;
-            if (UpdatedGuild.embed_channel_id != null)
-                this.embed_channel_id = UpdatedGuild.embed_channel_id;
-            if (UpdatedGuild.verification_level != null)
-                this.verification_level = UpdatedGuild.verification_level;
-            if (UpdatedGuild.default_message_notifications != null)
-                this.default_message_notifications = UpdatedGuild.default_message_notifications;
-            if (UpdatedGuild.explicit_content_filter != null)
-                this.explicit_content_filter = UpdatedGuild.explicit_content_filter;
-            if (UpdatedGuild.roles != null)
-                this.roles = UpdatedGuild.roles;
-            if (UpdatedGuild.emojis != null)
-                this.emojis = UpdatedGuild.emojis;
-            if (UpdatedGuild.features != null)
-                this.features = UpdatedGuild.features;
-            if (UpdatedGuild.mfa_level != null)
-                this.mfa_level = UpdatedGuild.mfa_level;
-            if (UpdatedGuild.application_id != null)
-                this.application_id = UpdatedGuild.application_id;
-            if (UpdatedGuild.widget_enabled != null)
-                this.widget_enabled = UpdatedGuild.widget_enabled;
-            if (UpdatedGuild.widget_channel_id != null)
-                this.widget_channel_id = UpdatedGuild.widget_channel_id;
-            if (UpdatedGuild.system_channel_id != null)
-                this.system_channel_id = UpdatedGuild.system_channel_id;
-            if (UpdatedGuild.joined_at != null)
-                this.joined_at = UpdatedGuild.joined_at;
-            if (UpdatedGuild.large != null)
-                this.large = UpdatedGuild.large;
-            if (UpdatedGuild.unavailable != null)
-                this.unavailable = UpdatedGuild.unavailable;
-            if (UpdatedGuild.member_count != null)
-                this.member_count = UpdatedGuild.member_count;
-            if (UpdatedGuild.voice_states != null)
-                this.voice_states = UpdatedGuild.voice_states;
-            if (UpdatedGuild.members != null)
-                this.members = UpdatedGuild.members;
-            if (UpdatedGuild.channels != null)
-                this.channels = UpdatedGuild.channels;
-            if (UpdatedGuild.presences != null)
-                this.presences = UpdatedGuild.presences;
-            if (UpdatedGuild.max_presences != null)
-                this.max_presences = UpdatedGuild.max_presences;
-            if (UpdatedGuild.max_members != null)
-                this.max_members = UpdatedGuild.max_members;
-            if (UpdatedGuild.vanity_url_code != null)
-                this.vanity_url_code = UpdatedGuild.vanity_url_code;
-            if (UpdatedGuild.description != null)
-                this.description = UpdatedGuild.description;
-            if (UpdatedGuild.banner != null)
-                this.banner = UpdatedGuild.banner;
-            if (UpdatedGuild.premium_tier != null)
-                this.premium_tier = UpdatedGuild.premium_tier;
-            if (UpdatedGuild.premium_subscription_count != null)
-                this.premium_subscription_count = UpdatedGuild.premium_subscription_count;
+            if (updatedGuild.name != null)
+                this.name = updatedGuild.name;
+            if (updatedGuild.icon != null)
+                this.icon = updatedGuild.icon;
+            if (updatedGuild.IconHash != null)
+                this.IconHash = updatedGuild.IconHash;
+            if (updatedGuild.splash != null)
+                this.splash = updatedGuild.splash;
+            if (updatedGuild.discovery_splash != null)
+                this.discovery_splash = updatedGuild.discovery_splash;
+            if (updatedGuild.owner_id != null)
+                this.owner_id = updatedGuild.owner_id;
+            if (updatedGuild.region != null)
+                this.region = updatedGuild.region;
+            if (updatedGuild.afk_channel_id != null)
+                this.afk_channel_id = updatedGuild.afk_channel_id;
+            if (updatedGuild.afk_timeout != null)
+                this.afk_timeout = updatedGuild.afk_timeout;
+            if (updatedGuild.embed_enabled != null)
+                this.embed_enabled = updatedGuild.embed_enabled;
+            if (updatedGuild.embed_channel_id != null)
+                this.embed_channel_id = updatedGuild.embed_channel_id;
+            if (updatedGuild.widget_enabled != null)
+                this.widget_enabled = updatedGuild.widget_enabled;
+            if (updatedGuild.widget_channel_id != null)
+                this.widget_channel_id = updatedGuild.widget_channel_id;
+            this.verification_level = updatedGuild.verification_level;
+            this.default_message_notifications = updatedGuild.default_message_notifications;
+            this.explicit_content_filter = updatedGuild.explicit_content_filter;
+            if (updatedGuild.roles != null)
+                this.roles = updatedGuild.roles;
+            if (updatedGuild.emojis != null)
+                this.emojis = updatedGuild.emojis;
+            if (updatedGuild.features != null)
+                this.features = updatedGuild.features;
+            if (updatedGuild.mfa_level != null)
+                this.mfa_level = updatedGuild.mfa_level;
+            if (updatedGuild.application_id != null)
+                this.application_id = updatedGuild.application_id;
+            if (updatedGuild.system_channel_id != null)
+                this.system_channel_id = updatedGuild.system_channel_id;
+            this.SystemChannelFlags = updatedGuild.SystemChannelFlags;
+            if (this.rules_channel_id != null)
+                this.rules_channel_id = updatedGuild.rules_channel_id;
+            if (updatedGuild.joined_at != null)
+                this.joined_at = updatedGuild.joined_at;
+            if (updatedGuild.large != null)
+                this.large = updatedGuild.large;
+            if (updatedGuild.unavailable != null)
+                this.unavailable = updatedGuild.unavailable;
+            if (updatedGuild.member_count != null)
+                this.member_count = updatedGuild.member_count;
+            if (updatedGuild.voice_states != null)
+                this.voice_states = updatedGuild.voice_states;
+            if (updatedGuild.members != null)
+                this.members = updatedGuild.members;
+            if (updatedGuild.channels != null)
+                this.channels = updatedGuild.channels;
+            if (updatedGuild.presences != null)
+                this.presences = updatedGuild.presences;
+            if (updatedGuild.max_presences != null)
+                this.max_presences = updatedGuild.max_presences;
+            if (updatedGuild.max_members != null)
+                this.max_members = updatedGuild.max_members;
+            if (updatedGuild.vanity_url_code != null)
+                this.vanity_url_code = updatedGuild.vanity_url_code;
+            if (updatedGuild.description != null)
+                this.description = updatedGuild.description;
+            if (updatedGuild.banner != null)
+                this.banner = updatedGuild.banner;
+            if (updatedGuild.premium_tier != null)
+                this.premium_tier = updatedGuild.premium_tier;
+            if (updatedGuild.premium_subscription_count != null)
+                this.premium_subscription_count = updatedGuild.premium_subscription_count;
+            if (updatedGuild.preferred_locale != null)
+                this.preferred_locale = updatedGuild.preferred_locale;
+            if (updatedGuild.public_updates_channel_id != null)
+                this.public_updates_channel_id = updatedGuild.public_updates_channel_id;
+            if (updatedGuild.MaxVideoChannelUsers != null)
+                this.MaxVideoChannelUsers = updatedGuild.MaxVideoChannelUsers;
+            if (updatedGuild.ApproximateMemberCount != null)
+                this.ApproximateMemberCount = updatedGuild.ApproximateMemberCount;
+            if (updatedGuild.ApproximatePresenceCount != null)
+                this.ApproximatePresenceCount = updatedGuild.ApproximatePresenceCount;
+
         }
     }
 }
