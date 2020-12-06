@@ -18,7 +18,7 @@
 
         public override string Author => "PsychoTea & DylanSMR & Tricky";
 
-        public override VersionNumber Version => new VersionNumber(1, 0, 6);
+        public override VersionNumber Version => new VersionNumber(1, 0, 7);
 
         public override void OnModLoad()
         {
