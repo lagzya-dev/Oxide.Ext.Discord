@@ -34,7 +34,7 @@
             }
             client.DestroyHeartbeat();
 
-            socket = new WebSocket($"{url}/?v=6&encoding=json");
+            socket = new WebSocket($"{url}/?{Gateway.Connect.Serialize()}");
 
             if(listner == null)
                 listner = new SocketListner(client, this);

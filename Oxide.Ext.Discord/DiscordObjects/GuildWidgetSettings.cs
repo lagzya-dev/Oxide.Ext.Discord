@@ -1,6 +1,6 @@
 ﻿namespace Oxide.Ext.Discord.DiscordObjects
 {
-    public class GuildEmbed
+    public class GuildWidgetSettings
     {
         public bool enabled { get; set; }
 

@@ -263,6 +263,7 @@ namespace Oxide.Ext.Discord
                     Browser = "Oxide.Ext.Discord",
                     Device = "Oxide.Ext.Discord"
                 },
+                Intents = Settings.Intents,
                 Compress = false,
                 LargeThreshold = 50,
                 Shard = new List<int>() { 0, 1 }
@@ -349,7 +350,7 @@ namespace Oxide.Ext.Discord
             _webSocket.Send(payload);
         }
 
-        public void RequestGuildMembers(Guild guild, string query = "", int limit = 0)
+        public void RequestGuildMembers(Guild guild, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)
         {
             RequestGuildMembers(guild.id, query, limit);
         }

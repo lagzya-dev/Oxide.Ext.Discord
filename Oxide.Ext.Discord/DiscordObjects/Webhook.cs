@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.DiscordObjects
+﻿using Newtonsoft.Json;
+
+namespace Oxide.Ext.Discord.DiscordObjects
 {
     using System;
     using System.Collections.Generic;
@@ -7,6 +9,9 @@
     public class Webhook
     {
         public string id { get; set; }
+        
+        [JsonProperty("type")]
+        public WebhookType Type { get; set; }
 
         public string guild_id { get; set; }
 
@@ -19,6 +24,9 @@
         public string avatar { get; set; }
 
         public string token { get; set; }
+        
+        [JsonProperty("application_id")]
+        public string ApplicationId { get; set; }
 
         public static void CreateWebhook(DiscordClient client, string channelID, string name, string avatar, Action<Webhook> callback = null)
         {

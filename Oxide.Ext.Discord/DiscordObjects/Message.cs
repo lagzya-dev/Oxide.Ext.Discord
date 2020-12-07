@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.DiscordObjects
     using Oxide.Ext.Discord.Helpers;
     using Oxide.Ext.Discord.REST;
     
-    public class Message
+    public class Message : MessageCreate
     {
         public string id { get; set; }
 
@@ -20,13 +20,9 @@ namespace Oxide.Ext.Discord.DiscordObjects
 
         public GuildMember member { get; set; }
 
-        public string content { get; set; }
-
         public string timestamp { get; set; }
 
         public string edited_timestamp { get; set; }
-
-        public bool tts { get; set; }
 
         public bool mention_everyone { get; set; }
 
@@ -38,14 +34,10 @@ namespace Oxide.Ext.Discord.DiscordObjects
         public List<ChannelMention> MentionsChannels { get; set; }
 
         public List<Attachment> attachments { get; set; }
-        
-        public Embed embed { get; set; }
 
         public List<Embed> embeds { get; set; }
 
         public List<Reaction> reactions { get; set; }
-
-        public string nonce { get; set; }
 
         public bool pinned { get; set; }
 
@@ -58,10 +50,7 @@ namespace Oxide.Ext.Discord.DiscordObjects
         
         [JsonProperty("application")]
         public MessageApplication Application { get; set; }
-        
-        [JsonProperty("message_reference")]
-        public MessageReference MessageReference { get; set; }
-        
+
         [JsonProperty("flags")]
         public MessageFlags Flags { get; set; }
         
@@ -69,29 +58,39 @@ namespace Oxide.Ext.Discord.DiscordObjects
         public List<MessageSticker> Stickers { get; set; }
         
         [JsonProperty("referenced_message")]
-        public Message ReferencedMessage { get; set; }
+        public Message ReferencedMessage { get; private set; }
 
-        public void Reply(DiscordClient client, Message message, bool ping = true, Action<Message> callback = null)
+        public void Reply(DiscordClient client, Message message, bool ping = true, string messageId = null, Action<Message> callback = null)
         {
             if (ping && !string.IsNullOrEmpty(message.content) && !message.content.Contains($"<@{author.id}>"))
             {
                 message.content = $"<@{author.id}> {message.content}";
             }
 
+            if (!string.IsNullOrEmpty(messageId))
+            {
+                message.MessageReference = new MessageReference {MessageId = messageId};
+            }
+
             client.REST.DoRequest($"/channels/{channel_id}/messages", RequestMethod.POST, message, callback);
         }
 
-        public void Reply(DiscordClient client, string message, bool ping = true, Action<Message> callback = null)
+        public void Reply(DiscordClient client, string message, bool ping = true, string messageId = null, Action<Message> callback = null)
         {
             Message newMessage = new Message()
             {
                 content = ping ? $"<@{author.id}> {message}" : message
             };
+            
+            if (!string.IsNullOrEmpty(messageId))
+            {
+                newMessage.MessageReference = new MessageReference {MessageId = messageId};
+            }
 
-            Reply(client, newMessage, ping, callback);
+            Reply(client, newMessage, ping, messageId, callback);
         }
 
-        public void Reply(DiscordClient client, Embed embed, bool ping = true, Action<Message> callback = null)
+        public void Reply(DiscordClient client, Embed embed, bool ping = true, string messageId = null, Action<Message> callback = null)
         {
             Message newMessage = new Message()
             {
@@ -99,17 +98,33 @@ namespace Oxide.Ext.Discord.DiscordObjects
                 embed = embed
             };
 
-            Reply(client, newMessage, ping, callback);
+            Reply(client, newMessage, ping, messageId, callback);
+        }
+        
+        public void CrossPostMessage(DiscordClient client, string messageId, Action<Message> callback = null)
+        {
+            client.REST.DoRequest($"/channels/{id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback);
+        }
+        
+        public void CrossPostMessage(DiscordClient client, Message message, Action<Message> callback = null)
+        {
+            CrossPostMessage(client, message.id, callback);
         }
 
         public void CreateReaction(DiscordClient client, string emoji, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{channel_id}/messages/{id}/reactions/{emoji}/@me", RequestMethod.PUT, null, callback);
+            byte[] encodedEmoji = Encoding.UTF8.GetBytes(emoji);
+            string hexString = HttpUtility.UrlEncode(encodedEmoji);
+            
+            client.REST.DoRequest($"/channels/{channel_id}/messages/{id}/reactions/{hexString}/@me", RequestMethod.PUT, null, callback);
         }
 
         public void DeleteOwnReaction(DiscordClient client, string emoji, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{channel_id}/messages/{id}/reactions/{emoji}/@me", RequestMethod.DELETE, null, callback);
+            byte[] encodedEmoji = Encoding.UTF8.GetBytes(emoji);
+            string hexString = HttpUtility.UrlEncode(encodedEmoji);
+            
+            client.REST.DoRequest($"/channels/{channel_id}/messages/{id}/reactions/{hexString}/@me", RequestMethod.DELETE, null, callback);
         }
 
         public void DeleteUserReaction(DiscordClient client, string emoji, User user, Action callback = null) => DeleteUserReaction(client, emoji, user.id, callback);
@@ -130,6 +145,14 @@ namespace Oxide.Ext.Discord.DiscordObjects
         public void DeleteAllReactions(DiscordClient client, Action callback = null)
         {
             client.REST.DoRequest($"/channels/{channel_id}/messages/{id}/reactions", RequestMethod.DELETE, null, callback);
+        }
+        
+        public void DeleteAllReactionsForEmoji(DiscordClient client, string emoji, Action callback = null)
+        {
+            byte[] encodedEmoji = Encoding.UTF8.GetBytes(emoji);
+            string hexString = HttpUtility.UrlEncode(encodedEmoji);
+            
+            client.REST.DoRequest($"/channels/{channel_id}/messages/{id}/reactions/{hexString}", RequestMethod.DELETE, null, callback);
         }
 
         public void EditMessage(DiscordClient client, Action<Message> callback = null)

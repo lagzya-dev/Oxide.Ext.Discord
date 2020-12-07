@@ -14,6 +14,7 @@
     public class Request
     {
         private const string URLBase = "https://discordapp.com/api";
+        private const string ApiVersion = "v8";
 
         private const double RequestMaxLength = 10d;
 
@@ -23,7 +24,7 @@
 
         public string Endpoint { get; }
 
-        public string RequestURL => URLBase + Route + Endpoint;
+        public string RequestURL => URLBase + "/" + ApiVersion + Route + Endpoint;
 
         public Dictionary<string, string> Headers { get; }
 
@@ -203,7 +204,7 @@
 
                 if (limit.global)
                 {
-                    GlobalRateLimit.Reached(rateRetryAfter);
+                    GlobalRateLimit.Reached(rateRetryAfter * 1000);
                 }
             }
 

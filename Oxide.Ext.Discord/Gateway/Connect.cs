@@ -5,7 +5,7 @@
     class Connect
     {
         [JsonProperty("v")]
-        public static int Version { get; } = 6;
+        public static int Version { get; } = 8;
 
         [JsonProperty("encoding")]
         public static string Encoding { get; } = "json";

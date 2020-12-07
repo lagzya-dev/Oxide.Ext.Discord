@@ -13,16 +13,22 @@
         public Properties Properties;
 
         [JsonProperty("compress")]
-        public bool Compress;
+        public bool? Compress;
 
         [JsonProperty("large_threshold")]
-        public int LargeThreshold;
+        public int? LargeThreshold;
 
         [JsonProperty("shard")]
         public List<int> Shard;
 
         [JsonProperty("presence")]
         public Presence Presence;
+        
+        [JsonProperty("guild_subscriptions")]
+        public bool? GuildSubscriptions { get; set; }
+        
+        [JsonProperty("intents")]
+        public BotIntents Intents { get; set; }
     }
 
     public class Properties
