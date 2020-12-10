@@ -214,7 +214,8 @@ namespace Oxide.Ext.Discord
 
         private void HeartbeatElapsed(object sender, ElapsedEventArgs e)
         {
-            if (!_webSocket.IsAlive() ||
+            if (_webSocket == null ||
+                !_webSocket.IsAlive() ||
                 _webSocket.IsClosing() ||
                 _webSocket.IsClosed())
             {
@@ -280,7 +281,7 @@ namespace Oxide.Ext.Discord
             };
             var payload = JsonConvert.SerializeObject(opcode);
 
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
         
         public void Resume()
@@ -299,7 +300,7 @@ namespace Oxide.Ext.Discord
             };
 
             string payload = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
         
         public void SendHeartbeat()
@@ -320,7 +321,7 @@ namespace Oxide.Ext.Discord
 
             HeartbeatACK = false;
             string message = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(message);
+            _webSocket?.Send(message);
 
             _lastHeartbeat = Time.TimeSinceEpoch();
 
@@ -351,7 +352,7 @@ namespace Oxide.Ext.Discord
             };
 
             string payload = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
 
         public void RequestGuildMembers(Guild guild, string query = "", int limit = 0)
@@ -376,7 +377,7 @@ namespace Oxide.Ext.Discord
             };
 
             string payload = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
 
         public void UpdateStatus(Presence presence)
@@ -388,7 +389,7 @@ namespace Oxide.Ext.Discord
             };
 
             var payload = JsonConvert.SerializeObject(opcode);
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
 
         public Guild GetGuild(string id)
