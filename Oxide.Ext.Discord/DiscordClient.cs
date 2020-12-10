@@ -216,22 +216,6 @@ namespace Oxide.Ext.Discord
             SendHeartbeat();
         }
 
-        private void GetURL(Action<string> callback)
-        {
-            DiscordObjects.Gateway.GetGateway(this, (gateway) =>
-            {
-                // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                string fullURL = $"{gateway.URL}/?{Connect.Serialize()}";
-
-                if (Settings.Debugging)
-                {
-                    Interface.Oxide.LogDebug($"Got Gateway url: {fullURL}");
-                }
-
-                callback.Invoke(fullURL);
-            });
-        }
-        
         internal void ConnectToWebSocket()
         {
             if (!string.IsNullOrEmpty(WebSocketUrl))
@@ -245,10 +229,26 @@ namespace Oxide.Ext.Discord
         
         internal void ConnectToWebsocketUrl()
         {
-            GetURL(url =>
+            GetGatewayUrl(url =>
             {
                 UpdateWebsocketUrl(url);
                 ConnectToWebSocket();
+            });
+        }
+        
+        private void GetGatewayUrl(Action<string> callback)
+        {
+            DiscordObjects.Gateway.GetGateway(this, (gateway) =>
+            {
+                // Example: wss://gateway.discord.gg/?v=6&encoding=json
+                string url = $"{gateway.URL}/?{Connect.Serialize()}";
+
+                if (Settings.Debugging)
+                {
+                    Interface.Oxide.LogDebug($"Got Gateway url: {url}");
+                }
+
+                callback.Invoke(url);
             });
         }
 
