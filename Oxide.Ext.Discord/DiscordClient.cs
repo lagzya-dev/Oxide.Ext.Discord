@@ -182,7 +182,7 @@ namespace Oxide.Ext.Discord
 
             _lastHeartbeat = Time.TimeSinceEpoch();
             HeartbeatACK = true;
-
+            
             _timer = new Timer()
             {
                 Interval = heartbeatInterval
@@ -198,18 +198,13 @@ namespace Oxide.Ext.Discord
                 _timer.Dispose();
                 _timer = null;
             }
-            return;
         }
 
         private void HeartbeatElapsed(object sender, ElapsedEventArgs e)
         {
-            if (_webSocket == null ||
-                !_webSocket.IsAlive() ||
-                _webSocket.IsClosing() ||
-                _webSocket.IsClosed())
+            if (_webSocket == null || !_webSocket.IsAlive())
             {
-                _timer.Dispose();
-                _timer = null;
+                DestroyHeartbeat();
                 return;
             }
 
