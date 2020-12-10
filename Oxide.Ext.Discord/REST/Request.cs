@@ -21,9 +21,7 @@
 
         public string Route { get; }
 
-        public string Endpoint { get; }
-
-        public string RequestURL => URLBase + Route + Endpoint;
+        public string RequestURL => URLBase + Route;
 
         public Dictionary<string, string> Headers { get; }
 
@@ -41,11 +39,10 @@
 
         private byte retries = 0;
 
-        public Request(RequestMethod method, string route, string endpoint, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
+        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
         {
             this.Method = method;
             this.Route = route;
-            this.Endpoint = endpoint;
             this.Headers = headers;
             this.Data = data;
             this.Callback = callback;
@@ -200,10 +197,15 @@
                 rateLimitGlobal)
             {
                 var limit = response.ParseData<RateLimit>();
-
                 if (limit.global)
                 {
-                    GlobalRateLimit.Reached(rateRetryAfter);
+                    BotRateLimit botRateLimit;
+                    lock (RESTHandler.GlobalRateLimit)
+                    {
+                        botRateLimit = RESTHandler.GlobalRateLimit[bucket.ApiKey];
+                    }
+                    
+                    botRateLimit.ReachedRateLimit();
                 }
             }
 

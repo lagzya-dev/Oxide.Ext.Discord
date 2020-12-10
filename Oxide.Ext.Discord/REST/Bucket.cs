@@ -22,12 +22,15 @@
 
         public bool Disposed { get; set; } = false;
 
+        public readonly string ApiKey;
+
         private Thread thread;
 
-        public Bucket(RequestMethod method, string route)
+        public Bucket(RequestMethod method, string route, string apiKey)
         {
             this.Method = method;
             this.Route = route;
+            ApiKey = apiKey;
 
             thread = new Thread(() => RunThread());
             thread.Start();
@@ -72,15 +75,23 @@
         private void FireRequests()
         {
             ////this.CleanRequests();
-            
-            if (GlobalRateLimit.Hit)
+
+            if (Remaining == 0 && Reset >= Time.TimeSinceEpoch())
             {
+                Thread.Sleep(Reset - Time.TimeSinceEpoch());
                 return;
             }
             
-            if (Remaining == 0 && Reset >= Time.TimeSinceEpoch())
+            BotRateLimit rateLimit;
+            lock (RESTHandler.GlobalRateLimit)
             {
-                return;
+                rateLimit = RESTHandler.GlobalRateLimit[ApiKey];
+            }
+
+            if (rateLimit.HasReachedRateLimit)
+            {
+                Remaining = 0;
+                Reset = rateLimit.NextBucketReset;
             }
 
             lock (this)
@@ -90,7 +101,10 @@
                     return;
                 }
             }
+            
+            
 
+            rateLimit.FiredRequest();
             var nextItem = this.First();
             nextItem.Fire(this);
         }

@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord
+﻿using Oxide.Ext.Discord.REST;
+
+namespace Oxide.Ext.Discord
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -76,6 +78,32 @@
         public static void CloseClient(DiscordClient client)
         {
             if (client == null) return;
+            
+            string apiKey = client.Settings.ApiToken;
+
+            bool apiKeyExists = false;
+            for (int i = 0; i < Clients.Count; i++)
+            {
+                DiscordClient existing = Clients[i];
+                if (existing == client)
+                {
+                    continue;
+                }
+
+                if (existing.Settings.ApiToken == apiKey)
+                {
+                    apiKeyExists = true;
+                    break;
+                }
+            }
+
+            if (!apiKeyExists)
+            {
+                lock (RESTHandler.GlobalRateLimit)
+                {
+                    RESTHandler.GlobalRateLimit.Remove(apiKey);
+                }
+            }
 
             client.Disconnect();
             Clients.Remove(client);
