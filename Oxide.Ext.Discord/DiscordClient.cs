@@ -244,6 +244,11 @@ namespace Oxide.Ext.Discord
 
         public void UpdateWSSURL(string fullURL)
         {
+            if (string.IsNullOrEmpty(fullURL))
+            {
+                return;
+            }
+            
             WSSURL = fullURL;
         }
 
