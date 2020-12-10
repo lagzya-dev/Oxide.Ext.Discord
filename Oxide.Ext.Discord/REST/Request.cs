@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.REST
+﻿using System.Threading;
+
+namespace Oxide.Ext.Discord.REST
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +17,7 @@
     {
         private const string URLBase = "https://discordapp.com/api";
 
-        private const double RequestMaxLength = 10d;
+        private const double RequestMaxLength = 30;
 
         public RequestMethod Method { get; }
 
@@ -35,7 +37,7 @@
 
         public DateTime? StartTime { get; private set; } = null;
 
-        public bool InProgress { get; private set; } = false;
+        public bool InProgress { get; set; } = false;
 
         private Bucket bucket;
 
@@ -62,30 +64,29 @@
             req.ContentType = "application/json";
             req.Timeout = 20000;
             req.ContentLength = 0;
-
-            if (this.Headers != null)
-            {
-                req.SetRawHeaders(this.Headers);
-            }
-
-            if (this.Data != null)
-            {
-                WriteRequestData(req, this.Data);
-            }
-            else
-            {
-                req.ContentLength = 0;
-            }
             
             HttpWebResponse response;
             try
             {
+                if (this.Headers != null)
+                {
+                    req.SetRawHeaders(this.Headers);
+                }
+
+                if (this.Data != null)
+                {
+                    WriteRequestData(req, this.Data);
+                }
+                else
+                {
+                    req.ContentLength = 0;
+                }
+                
                 response = req.GetResponse() as HttpWebResponse;
             }
             catch (WebException ex)
             {
-                var httpResponse = ex.Response as HttpWebResponse;
-
+                using var httpResponse = ex.Response as HttpWebResponse;
                 if (httpResponse == null)
                 {
                     Interface.Oxide.LogException($"[Discord Extension] A web request exception occured (internal error) [RETRY={retries}/3].", ex);
@@ -93,6 +94,7 @@
                     // Interface.Oxide.LogError($"[Discord Ext] Exception message: {ex.Message}");
 
                     this.Close(++retries >= 3);
+                    Thread.Sleep(250);
                     return;
                 }
 
@@ -146,15 +148,17 @@
             }
 
             this.InProgress = false;
+            this.StartTime = null;
         }
 
         public bool HasTimedOut()
         {
-            if (!this.InProgress || StartTime == null) return false;
+            if (!InProgress || StartTime == null)
+            {
+                return false;
+            }
 
-            var timeSpan = DateTime.UtcNow - StartTime;
-
-            return timeSpan.HasValue && (timeSpan.Value.TotalSeconds > RequestMaxLength);
+            return (DateTime.UtcNow - StartTime.Value).TotalSeconds > RequestMaxLength;
         }
 
         private void WriteRequestData(WebRequest request, object data)
@@ -167,19 +171,20 @@
             byte[] bytes = Encoding.UTF8.GetBytes(contents);
             request.ContentLength = bytes.Length;
 
-            using (var stream = request.GetRequestStream())
-            {
-                stream.Write(bytes, 0, bytes.Length);
-            }
+            using var stream = request.GetRequestStream();
+            stream.Write(bytes, 0, bytes.Length);
         }
 
         private string ParseResponse(WebResponse response)
         {
-            string message;
-            using (var reader = new StreamReader(response.GetResponseStream()))
+            var stream = response.GetResponseStream();
+            if (stream == null)
             {
-                message = reader.ReadToEnd().Trim();
+                return null;
             }
+            
+            using var reader = new StreamReader(stream);
+            string message = reader.ReadToEnd().Trim();
 
             this.Response = new RestResponse(message);
 

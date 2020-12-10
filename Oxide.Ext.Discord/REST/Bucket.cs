@@ -85,9 +85,17 @@
 
             lock (this)
             {
-                if (this.Any(x => x.InProgress))
+                foreach (Request request in this)
                 {
-                    return;
+                    if (request.HasTimedOut())
+                    {
+                        request.Close(false);
+                    }
+
+                    if (request.InProgress)
+                    {
+                        return;
+                    }
                 }
             }
 
