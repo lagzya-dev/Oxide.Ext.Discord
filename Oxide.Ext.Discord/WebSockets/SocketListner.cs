@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if (client.requestReconnect)
             {
                 client.requestReconnect = false;
-                webSocket.Connect(client.WSSURL);
+                client.ConnectToWebSocket();
                 return;
             }
 
@@ -63,7 +63,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 webSocket.hasConnectedOnce = false;
                 Interface.Oxide.LogWarning("[Discord Extension] Discord session no longer valid... Reconnecting...");
                 client.REST.Shutdown(); // Clean up buckets
-                webSocket.Connect(client.WSSURL);
+                client.ConnectToWebSocket();
                 client.CallHook("DiscordSocket_WebSocketClosed", null, e.Reason, e.Code, e.WasClean);
                 return;
             }
@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         retries = 0;
                         Interface.Oxide.LogWarning($"[Discord Extension] Attempting to reconnect to Discord...");
                         client.REST.Shutdown(); // Clean up buckets
-                        webSocket.Connect(client.WSSURL);
+                        client.ConnectToWebSocket();
                     };
                     reconnecttimer.Start();
                     return;
@@ -91,7 +91,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
                 Interface.Oxide.LogWarning($"[Discord Extension] Attempting to reconnect to Discord...");
                 client.REST.Shutdown(); // Clean up buckets
-                webSocket.Connect(client.WSSURL);
+                client.ConnectToWebSocket();
             }
             else
             {
@@ -107,8 +107,8 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             if(e.Exception is NoURLException)
             {
-                Interface.Oxide.LogError("[Discord Extension] Error: WSSURL not present! Retrying..");
-                client.ConnectToWssUrl();
+                Interface.Oxide.LogError("[Discord Extension] Error: WebSocketUrl not present! Retrying..");
+                client.ConnectToWebsocketUrl();
                 return;
             }
             
@@ -120,7 +120,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if (retries > 0) return; // Retry timer is already triggered
             Interface.Oxide.LogWarning($"[Discord Extension] Attempting to reconnect to Discord...");
             client.REST.Shutdown(); // Clean up buckets
-            webSocket.Connect(client.WSSURL);
+            client.ConnectToWebSocket();
         }
 
         public void SocketMessage(object sender, MessageEventArgs e)

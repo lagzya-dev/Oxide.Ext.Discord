@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord
 
         public RESTHandler REST { get; private set; }
 
-        public string WSSURL { get; private set; }
+        private static string WebSocketUrl { get; set; }
 
         public DiscordSettings Settings { get; set; } = new DiscordSettings();
 
@@ -90,14 +90,8 @@ namespace Oxide.Ext.Discord
 
             REST = new RESTHandler(Settings.ApiToken);
             _webSocket = new Socket(this);
-
-            if (!string.IsNullOrEmpty(WSSURL))
-            {
-                _webSocket.Connect(WSSURL);
-                return;
-            }
-
-            ConnectToWssUrl();
+            
+            ConnectToWebSocket();
 
             /*Discord.PendingTokens.Add(settings.ApiToken); // Not efficient, will re-do later
             Timer t2 = new Timer() { AutoReset = false, Interval = 5000f, Enabled = true };
@@ -115,7 +109,7 @@ namespace Oxide.Ext.Discord
             _webSocket?.Dispose();
             _webSocket = null;
 
-            WSSURL = string.Empty;
+            WebSocketUrl = string.Empty;
 
             REST?.Shutdown();
         }
@@ -238,23 +232,34 @@ namespace Oxide.Ext.Discord
             });
         }
         
-        internal void ConnectToWssUrl()
+        internal void ConnectToWebSocket()
+        {
+            if (!string.IsNullOrEmpty(WebSocketUrl))
+            {
+                _webSocket.Connect(WebSocketUrl);
+                return;
+            }
+            
+            ConnectToWebsocketUrl();
+        }
+        
+        internal void ConnectToWebsocketUrl()
         {
             GetURL(url =>
             {
-                UpdateWSSURL(url);
-                _webSocket.Connect(WSSURL);
+                UpdateWebsocketUrl(url);
+                ConnectToWebSocket();
             });
         }
 
-        public void UpdateWSSURL(string fullURL)
+        public void UpdateWebsocketUrl(string url)
         {
-            if (string.IsNullOrEmpty(fullURL))
+            if (string.IsNullOrEmpty(url))
             {
                 return;
             }
             
-            WSSURL = fullURL;
+            WebSocketUrl = url;
         }
 
         #region Discord Events
