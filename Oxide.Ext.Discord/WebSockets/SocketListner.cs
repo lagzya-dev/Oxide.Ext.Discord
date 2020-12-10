@@ -123,7 +123,8 @@ namespace Oxide.Ext.Discord.WebSockets
                 });
                 return;
             }
-            Interface.Oxide.LogWarning($"[Discord Extension] An error has occured: Response: {e.Message}");
+            
+            Interface.Oxide.LogWarning($"[Discord Extension] An error has occured: Response: {e.Message}\n{e.Exception}");
 
             client.CallHook("DiscordSocket_WebSocketErrored", null, e.Exception, e.Message);
 
