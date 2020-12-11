@@ -58,6 +58,11 @@ namespace Oxide.Ext.Discord
 
         public void Initialize(Plugin plugin, DiscordSettings settings)
         {
+            if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
+            {
+                _logger.LogWarning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
+            }
+            
             if (plugin == null)
             {
                 throw new PluginNullException();
