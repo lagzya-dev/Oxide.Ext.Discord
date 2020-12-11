@@ -87,6 +87,7 @@ namespace Oxide.Ext.Discord.REST
                 }
 
                 Callback?.Invoke(Response);
+                Close();
             }
             catch (WebException ex)
             {
