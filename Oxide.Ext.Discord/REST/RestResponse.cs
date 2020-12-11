@@ -8,9 +8,9 @@
 
         public RestResponse(string data)
         {
-            this.Data = data;
+            Data = data;
         }
 
-        public T ParseData<T>() => JsonConvert.DeserializeObject<T>(this.Data);
+        public T ParseData<T>() => JsonConvert.DeserializeObject<T>(Data);
     }
 }
