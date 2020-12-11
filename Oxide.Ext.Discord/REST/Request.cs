@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.DiscordObjects;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.REST
 {
@@ -41,6 +42,11 @@ namespace Oxide.Ext.Discord.REST
         private const int RequestMaxLength = 30;
 
         private readonly ILogger _logger;
+        
+        private static readonly JsonSerializerSettings DefaultSerializerSettings = new JsonSerializerSettings()
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
 
         public Request(RequestMethod method, string route, string endpoint, Dictionary<string, string> headers, object data, Action<RestResponse> callback, LogLevel logLevel)
         {
