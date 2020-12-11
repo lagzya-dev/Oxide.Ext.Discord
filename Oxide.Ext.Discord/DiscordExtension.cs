@@ -8,8 +8,12 @@
 
     public class DiscordExtension : Extension
     {
+        private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 7);
+        private const string TestVersion = "Beta.2";
+        
         public DiscordExtension(ExtensionManager manager) : base(manager)
         {
+            
         }
 
         ////public override bool SupportsReloading => true;
@@ -18,7 +22,9 @@
 
         public override string Author => "PsychoTea & DylanSMR & Tricky";
 
-        public override VersionNumber Version => new VersionNumber(1, 0, 7);
+        public override VersionNumber Version => ExtensionVersion;
+
+        public static string GetExtensionVersion => ExtensionVersion + "." + TestVersion; 
 
         public override void OnModLoad()
         {
