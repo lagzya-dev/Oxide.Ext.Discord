@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Logging
 
         private void Log(LogLevel level, string message, object data = null)
         {
-            if (level > _logLevel)
+            if (level < _logLevel)
             {
                 return;
             }
@@ -47,18 +47,16 @@ namespace Oxide.Ext.Discord.Logging
             string log;
             if (level == LogLevel.Error || level == LogLevel.Exception)
             {
-                log = $"{DateTime.Now:T} | [Discord Extension] [{typeof(T).Name}] [{level}]: {message}";
+                log = $"{DateTime.Now:HH:mm:ss} [Discord Extension] [{typeof(T).Name}] [{level}]: {message}";
             }
             else
             {
-                log = $"{DateTime.Now:T} | [Discord Extension] [{level}]: {message}";
+                log = $"{DateTime.Now:HH:mm:ss} [Discord Extension] [{level}]: {message}";
             }
 
             switch (level)
             {
                 case LogLevel.Debug:
-                    Interface.Oxide.LogDebug(log);
-                    break;
                 case LogLevel.Warning:
                     Interface.Oxide.LogWarning(log);
                     break;
