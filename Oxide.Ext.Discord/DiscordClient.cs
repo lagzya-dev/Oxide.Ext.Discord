@@ -58,11 +58,6 @@ namespace Oxide.Ext.Discord
 
         public void Initialize(Plugin plugin, DiscordSettings settings)
         {
-            if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
-            {
-                _logger.LogWarning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
-            }
-            
             if (plugin == null)
             {
                 throw new PluginNullException();
@@ -79,6 +74,11 @@ namespace Oxide.Ext.Discord
             }
             
             _logger = new Logger<DiscordClient>(settings.LogLevel);
+            
+            if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
+            {
+                _logger.LogWarning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
+            }
 
             /*if(Discord.PendingTokens.Contains(settings.ApiToken)) // Not efficient, will re-do later
             {
