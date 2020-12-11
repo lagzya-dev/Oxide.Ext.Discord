@@ -32,6 +32,7 @@ namespace Oxide.Ext.Discord
 
         public override void OnModLoad()
         {
+            _logger.LogInfo($"Using Discord Extension Version: {GetExtensionVersion}");
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
                 _logger.LogException("An exception was thrown!", exception.ExceptionObject as Exception);
