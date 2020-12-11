@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.REST
+﻿using Oxide.Ext.Discord.Logging;
+
+namespace Oxide.Ext.Discord.REST
 {
     using System;
     using System.Collections.Generic;
@@ -41,7 +43,9 @@
 
         private byte retries = 0;
 
-        public Request(RequestMethod method, string route, string endpoint, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
+        private readonly ILogger _logger;
+
+        public Request(RequestMethod method, string route, string endpoint, Dictionary<string, string> headers, object data, Action<RestResponse> callback, LogLevel logLevel)
         {
             this.Method = method;
             this.Route = route;
@@ -49,6 +53,7 @@
             this.Headers = headers;
             this.Data = data;
             this.Callback = callback;
+            _logger = new Logger<Request>(logLevel);
         }
 
         public void Fire(Bucket bucket)
@@ -88,9 +93,8 @@
 
                 if (httpResponse == null)
                 {
-                    Interface.Oxide.LogException($"[Discord Extension] A web request exception occured (internal error) [RETRY={retries}/3].", ex);
-                    Interface.Oxide.LogError($"[Discord Extension] Request URL: [{Method.ToString()}] {RequestURL}");
-                    // Interface.Oxide.LogError($"[Discord Ext] Exception message: {ex.Message}");
+                    _logger.LogException($"A web request exception occured (internal error) [RETRY={retries}/3]\n", ex);
+                    _logger.LogError($"Request URL: [{Method.ToString()}] {RequestURL}");
 
                     this.Close(++retries >= 3);
                     return;
@@ -100,11 +104,11 @@
 
                 if ((int)httpResponse.StatusCode == 429)
                 {
-                    Interface.Oxide.LogInfo($"[Discord Extension] Discord ratelimit reached. (Ratelimit info: remaining: {bucket.Remaining}, limit: {bucket.Limit}, reset: {bucket.Reset}, time now: {Helpers.Time.TimeSinceEpoch()}");
+                    _logger.LogInfo($"Discord ratelimit reached. (Ratelimit info: remaining: {bucket.Remaining}, limit: {bucket.Limit}, reset: {bucket.Reset}, time now: {Helpers.Time.TimeSinceEpoch()}");
                 }
                 else
                 {
-                    Interface.Oxide.LogWarning($"[Discord Extension] An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
+                    _logger.LogWarning($"An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
                 }
 
                 httpResponse.Close();
@@ -127,7 +131,7 @@
             }
             catch (Exception ex)
             {
-                Interface.Oxide.LogException("[Discord Extension] Request callback raised an exception", ex);
+                _logger.LogException("Request callback raised an exception", ex);
             }
             finally
             {
@@ -229,8 +233,8 @@
                 bucket.Reset = rateReset;
             }
 
-            ////Interface.Oxide.LogInfo($"Recieved ratelimit deets: {bucket.Limit}, {bucket.Remaining}, {bucket.Reset}, time now: {bucket.TimeSinceEpoch()}");
-            ////Interface.Oxide.LogInfo($"Time until reset: {(bucket.Reset - (int)bucket.TimeSinceEpoch())}");
+            ////_logger.LogInfo($"Recieved ratelimit deets: {bucket.Limit}, {bucket.Remaining}, {bucket.Reset}, time now: {bucket.TimeSinceEpoch()}");
+            ////_logger.LogInfo($"Time until reset: {(bucket.Reset - (int)bucket.TimeSinceEpoch())}");
         }
     }
 }

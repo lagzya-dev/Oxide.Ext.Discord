@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Logging;
+
 namespace Oxide.Ext.Discord
 {
     using System;
@@ -52,6 +54,8 @@ namespace Oxide.Ext.Discord
 
         public bool requestReconnect = false;
 
+        private ILogger _logger;
+
         public void Initialize(Plugin plugin, DiscordSettings settings)
         {
             if (plugin == null)
@@ -68,15 +72,17 @@ namespace Oxide.Ext.Discord
             {
                 throw new APIKeyException();
             }
+            
+            _logger = new Logger<DiscordClient>(settings.LogLevel);
 
             /*if(Discord.PendingTokens.Contains(settings.ApiToken)) // Not efficient, will re-do later
             {
-                Interface.Oxide.LogWarning($"[Discord Extension] Connection with same token in short period.. Connection delayed for {plugin.Name}");
+                _logger.LogWarning($"[Discord Extension] Connection with same token in short period.. Connection delayed for {plugin.Name}");
                 Timer t = new Timer() { AutoReset = false, Interval = 5000f, Enabled = true};
                 t.Elapsed += (object sender, ElapsedEventArgs e) =>
                 {
                     // TODO: Check if the connection still persists or cancelled
-                    Interface.Oxide.LogWarning($"[Discord Extension] Delayed connection for {plugin.Name} is being resumed..");
+                    _logger.LogWarning($"[Discord Extension] Delayed connection for {plugin.Name} is being resumed..");
                     Initialize(plugin, settings);
                 };
                 return;
@@ -88,7 +94,7 @@ namespace Oxide.Ext.Discord
 
             Settings = settings;
 
-            REST = new RESTHandler(Settings.ApiToken);
+            REST = new RESTHandler(Settings.ApiToken, Settings.LogLevel);
             _webSocket = new Socket(this);
 
             if (!string.IsNullOrEmpty(WSSURL))
@@ -176,7 +182,7 @@ namespace Oxide.Ext.Discord
                 if (returnValues.Count(x => x.Value != null) > 1)
                 {
                     string conflicts = string.Join("\n", returnValues.Select(x => $"Plugin {x.Key} - {x.Value}").ToArray());
-                    Interface.Oxide.LogWarning($"[Discord Extension] A hook conflict was triggered on {hookName} between:\n{conflicts}");
+                    _logger.LogWarning($"A hook conflict was triggered on {hookName} between:\n{conflicts}");
                 }
             });
         }
@@ -187,7 +193,7 @@ namespace Oxide.Ext.Discord
         {
             if (_timer != null)
             {
-                Interface.Oxide.LogWarning($"[Discord Extension] Warning: tried to create a heartbeat when one is already registered.");
+                _logger.LogWarning($"[Discord Extension] Warning: tried to create a heartbeat when one is already registered.");
                 return;
             }
 
@@ -233,10 +239,7 @@ namespace Oxide.Ext.Discord
                 // Example: wss://gateway.discord.gg/?v=6&encoding=json
                 string fullURL = $"{gateway.URL}/?{Connect.Serialize()}";
 
-                if (Settings.Debugging)
-                {
-                    Interface.Oxide.LogDebug($"Got Gateway url: {fullURL}");
-                }
+                _logger.LogDebug($"Got Gateway url: {fullURL}");
 
                 callback.Invoke(fullURL);
             });
@@ -302,7 +305,7 @@ namespace Oxide.Ext.Discord
             if(!HeartbeatACK)
             {
                 // Didn't receive an ACK, thus connection can be considered zombie, thus destructing.
-                Interface.Oxide.LogError("[Discord Extension] Discord did not respond to Heartbeat! Disconnecting..");
+                _logger.LogError("[Discord Extension] Discord did not respond to Heartbeat! Disconnecting..");
                 requestReconnect = true;
                 _webSocket.Disconnect(false);
                 return;
@@ -321,10 +324,7 @@ namespace Oxide.Ext.Discord
 
             this.CallHook("DiscordSocket_HeartbeatSent");
 
-            if (Settings.Debugging)
-            {
-                Interface.Oxide.LogDebug($"[Discord Extension] Heartbeat sent - {_timer.Interval}ms interval.");
-            }
+            _logger.LogDebug($"[Discord Extension] Heartbeat sent - {_timer.Interval}ms interval.");
         }
         
         public void RequestGuildMembers(string guildId, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)
