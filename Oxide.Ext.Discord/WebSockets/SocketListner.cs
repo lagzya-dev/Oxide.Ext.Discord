@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if (client.requestReconnect)
             {
                 client.requestReconnect = false;
-                webSocket.Connect(client.WSSURL);
+                client.ConnectToWebSocket();
                 return;
             }
 
@@ -60,7 +60,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 webSocket.hasConnectedOnce = false;
                 _logger.LogWarning("Discord session no longer valid... Reconnecting...");
                 client.REST.Shutdown(); // Clean up buckets
-                webSocket.Connect(client.WSSURL);
+                client.ConnectToWebSocket();
                 client.CallHook("DiscordSocket_WebSocketClosed", null, e.Reason, e.Code, e.WasClean);
                 return;
             }
@@ -79,7 +79,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         retries = 0;
                         _logger.LogWarning("Attempting to reconnect to Discord...");
                         client.REST.Shutdown(); // Clean up buckets
-                        webSocket.Connect(client.WSSURL);
+                        client.ConnectToWebSocket();
                     };
                     reconnecttimer.Start();
                     return;
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
                 _logger.LogWarning("Attempting to reconnect to Discord...");
                 client.REST.Shutdown(); // Clean up buckets
-                webSocket.Connect(client.WSSURL);
+                client.ConnectToWebSocket();
             }
             else
             {
@@ -104,20 +104,12 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             if(e.Exception is NoURLException)
             {
-                _logger.LogError("Error: Websocket Url not present! Retrying..");
-                DiscordObjects.Gateway.GetGateway(client, (gateway) =>
-                {
-                    // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                    string fullURL = $"{gateway.URL}/?{Connect.Serialize()}";
-                    
-                    _logger.LogDebug($"Got Gateway url: {fullURL}");
-                    
-                    client.UpdateWSSURL(fullURL);
-                    webSocket.Connect(client.WSSURL);
-                });
+                _logger.LogError("[Discord Extension] Error: WebSocketUrl not present! Retrying..");
+                client.ConnectToWebsocketUrl();
                 return;
             }
-            _logger.LogWarning($"An error has occured: Response: {e.Message}");
+            
+            _logger.LogWarning($"[Discord Extension] An error has occured: Response: {e.Message}\n{e.Exception}");
 
             client.CallHook("DiscordSocket_WebSocketErrored", null, e.Exception, e.Message);
 
@@ -125,7 +117,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if (retries > 0) return; // Retry timer is already triggered
             _logger.LogWarning("Attempting to reconnect to Discord...");
             client.REST.Shutdown(); // Clean up buckets
-            webSocket.Connect(client.WSSURL);
+            client.ConnectToWebSocket();
         }
 
         public void SocketMessage(object sender, MessageEventArgs e)

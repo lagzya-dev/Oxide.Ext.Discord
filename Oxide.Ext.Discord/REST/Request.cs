@@ -1,31 +1,24 @@
-﻿using Oxide.Ext.Discord.Logging;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Text;
+using Newtonsoft.Json;
+using Oxide.Core;
+using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.DiscordObjects;
 
 namespace Oxide.Ext.Discord.REST
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Net;
-    using System.Text;
-    using Newtonsoft.Json;
-    using Oxide.Core;
-    using Oxide.Core.Libraries;
-    using Oxide.Ext.Discord.DiscordObjects;
-    using Oxide.Ext.Discord.Helpers;
-
     public class Request
     {
-        private const string URLBase = "https://discordapp.com/api";
-
-        private const double RequestMaxLength = 10d;
-
         public RequestMethod Method { get; }
 
         public string Route { get; }
 
         public string Endpoint { get; }
 
-        public string RequestURL => URLBase + Route + Endpoint;
+        public string RequestUrl => UrlBase + Route + Endpoint;
 
         public Dictionary<string, string> Headers { get; }
 
@@ -35,13 +28,17 @@ namespace Oxide.Ext.Discord.REST
 
         public Action<RestResponse> Callback { get; }
 
-        public DateTime? StartTime { get; private set; } = null;
+        public DateTime? StartTime { get; private set; }
 
-        public bool InProgress { get; private set; } = false;
+        public bool InProgress { get; set; }
 
-        private Bucket bucket;
+        private Bucket _bucket;
 
-        private byte retries = 0;
+        private byte _retries;
+        
+        private const string UrlBase = "https://discordapp.com/api";
+
+        private const int RequestMaxLength = 30;
 
         private readonly ILogger _logger;
 
@@ -58,84 +55,76 @@ namespace Oxide.Ext.Discord.REST
 
         public void Fire(Bucket bucket)
         {
-            this.bucket = bucket;
-            this.InProgress = true;
-            this.StartTime = DateTime.UtcNow;
+            _bucket = bucket;
+            InProgress = true;
+            StartTime = DateTime.UtcNow;
 
-            var req = WebRequest.Create(RequestURL);
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(RequestUrl);
             req.Method = Method.ToString();
             req.ContentType = "application/json";
-            req.Timeout = 20000;
+            req.Timeout = RequestMaxLength * 1000;
             req.ContentLength = 0;
 
-            if (this.Headers != null)
+            if (Headers != null)
             {
-                req.SetRawHeaders(this.Headers);
-            }
-
-            if (this.Data != null)
-            {
-                WriteRequestData(req, this.Data);
-            }
-            else
-            {
-                req.ContentLength = 0;
+                req.SetRawHeaders(Headers);
             }
             
-            HttpWebResponse response;
             try
             {
-                response = req.GetResponse() as HttpWebResponse;
+                //Can timeout while writing request data
+                if (Data != null)
+                {
+                    WriteRequestData(req, Data);
+                }
+                
+                using HttpWebResponse response = req.GetResponse() as HttpWebResponse;
+                if (response != null)
+                {
+                    ParseResponse(response);
+                }
+
+                Callback?.Invoke(Response);
+                Close();
             }
             catch (WebException ex)
             {
-                var httpResponse = ex.Response as HttpWebResponse;
-
+                using HttpWebResponse httpResponse = ex.Response as HttpWebResponse;
                 if (httpResponse == null)
                 {
-                    _logger.LogException($"A web request exception occured (internal error) [RETRY={retries}/3]\n", ex);
-                    _logger.LogError($"Request URL: [{Method.ToString()}] {RequestURL}");
+                    _logger.LogException($"[Discord Extension] A web request exception occured (internal error) [RETRY={_retries}/3].", ex);
+                    _logger.LogError($"[Discord Extension] Request URL: [{Method.ToString()}] {RequestUrl}");
 
-                    this.Close(++retries >= 3);
+                    Close(++_retries >= 3);
                     return;
                 }
-
-                string message = this.ParseResponse(ex.Response);
-
-                if ((int)httpResponse.StatusCode == 429)
+                
+                string message = ParseResponse(ex.Response);
+                
+                bool isRateLimit = (int) httpResponse.StatusCode == 429;
+                if (isRateLimit)
                 {
                     _logger.LogInfo($"Discord ratelimit reached. (Ratelimit info: remaining: {bucket.Remaining}, limit: {bucket.Limit}, reset: {bucket.Reset}, time now: {Helpers.Time.TimeSinceEpoch()}");
                 }
                 else
                 {
-                    _logger.LogWarning($"An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
+                    DiscordApiError apiError = Response.ParseData<DiscordApiError>();
+                    if (!string.IsNullOrEmpty(apiError.Code))
+                    {
+                        _logger.LogWarning($"[Discord Extension] Discord has returned error Code - {apiError.Code}: {apiError.Message} - {req.RequestUri} (code {httpResponse.StatusCode})");
+                    }
+                    else
+                    {
+                        _logger.LogWarning($"[Discord Extension] An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
+                    }
                 }
-
-                httpResponse.Close();
-
-                bool shouldRemove = (int)httpResponse.StatusCode != 429;
-                this.Close(shouldRemove);
-
-                return;
-            }
-
-            if (response != null)
-            {
-                this.ParseResponse(response);
-                response.Close();
-            }
-
-            try
-            {
-                Callback?.Invoke(this.Response);
+                
+                Close(!isRateLimit);
             }
             catch (Exception ex)
             {
-                _logger.LogException("Request callback raised an exception", ex);
-            }
-            finally
-            {
-                this.Close();
+                _logger.LogException("[Discord Extension] Request callback raised an exception", ex);
+                Close();
             }
         }
 
@@ -143,51 +132,51 @@ namespace Oxide.Ext.Discord.REST
         {
             if (remove)
             {
-                lock (this.bucket)
+                lock (_bucket)
                 {
-                    this.bucket.Remove(this);
+                    _bucket.Remove(this);
                 }
             }
 
-            this.InProgress = false;
+            InProgress = false;
+            StartTime = null;
         }
 
         public bool HasTimedOut()
         {
-            if (!this.InProgress || StartTime == null) return false;
+            if (!InProgress || StartTime == null)
+            {
+                return false;
+            }
 
-            var timeSpan = DateTime.UtcNow - StartTime;
-
-            return timeSpan.HasValue && (timeSpan.Value.TotalSeconds > RequestMaxLength);
+            return (DateTime.UtcNow - StartTime.Value).TotalSeconds > RequestMaxLength;
         }
 
-        private void WriteRequestData(WebRequest request, object data)
+        private void WriteRequestData(HttpWebRequest request, object data)
         {
-            string contents = JsonConvert.SerializeObject(data, new JsonSerializerSettings()
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
+            string contents = JsonConvert.SerializeObject(data, DefaultSerializerSettings);
 
             byte[] bytes = Encoding.UTF8.GetBytes(contents);
             request.ContentLength = bytes.Length;
 
-            using (var stream = request.GetRequestStream())
-            {
-                stream.Write(bytes, 0, bytes.Length);
-            }
+            using Stream stream = request.GetRequestStream();
+            stream.Write(bytes, 0, bytes.Length);
         }
 
         private string ParseResponse(WebResponse response)
         {
-            string message;
-            using (var reader = new StreamReader(response.GetResponseStream()))
+            using Stream stream = response.GetResponseStream();
+            if (stream == null)
             {
-                message = reader.ReadToEnd().Trim();
+                return null;
             }
+            
+            using StreamReader reader = new StreamReader(stream);
+            string message = reader.ReadToEnd().Trim();
 
-            this.Response = new RestResponse(message);
+            Response = new RestResponse(message);
 
-            this.ParseHeaders(response.Headers, this.Response);
+            ParseHeaders(response.Headers, Response);
 
             return message;
         }
@@ -203,8 +192,7 @@ namespace Oxide.Ext.Discord.REST
                 bool.TryParse(rateLimitGlobalHeader, out bool rateLimitGlobal) &&
                 rateLimitGlobal)
             {
-                var limit = response.ParseData<RateLimit>();
-
+                RateLimit limit = response.ParseData<RateLimit>();
                 if (limit.global)
                 {
                     GlobalRateLimit.Reached(rateRetryAfter);
@@ -218,19 +206,19 @@ namespace Oxide.Ext.Discord.REST
             if (!string.IsNullOrEmpty(rateLimitHeader) &&
                 int.TryParse(rateLimitHeader, out int rateLimit))
             {
-                bucket.Limit = rateLimit;
+                _bucket.Limit = rateLimit;
             }
 
             if (!string.IsNullOrEmpty(rateRemainingHeader) &&
                 int.TryParse(rateRemainingHeader, out int rateRemaining))
             {
-                bucket.Remaining = rateRemaining;
+                _bucket.Remaining = rateRemaining;
             }
 
             if (!string.IsNullOrEmpty(rateResetHeader) &&
                 int.TryParse(rateResetHeader, out int rateReset))
             {
-                bucket.Reset = rateReset;
+                _bucket.Reset = rateReset;
             }
 
             ////_logger.LogInfo($"Recieved ratelimit deets: {bucket.Limit}, {bucket.Remaining}, {bucket.Reset}, time now: {bucket.TimeSinceEpoch()}");
