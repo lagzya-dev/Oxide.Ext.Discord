@@ -36,12 +36,7 @@ namespace Oxide.Ext.Discord.Logging
         {
             Log(LogLevel.Exception, message, ex);
         }
-        
-        public void LogMessage(string message)
-        {
-            Log(LogLevel.Message, message);
-        }
-        
+
         private void Log(LogLevel level, string message, object data = null)
         {
             if (level > _logLevel)

@@ -7,7 +7,6 @@ namespace Oxide.Ext.Discord.Logging
         Warning,
         Error,
         Exception,
-        Message,
         None
     }
 }

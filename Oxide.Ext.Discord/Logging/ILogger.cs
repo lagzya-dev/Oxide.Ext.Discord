@@ -9,6 +9,5 @@ namespace Oxide.Ext.Discord.Logging
         void LogWarning(string message);
         void LogError(string message);
         void LogException(string message, Exception ex);
-        void LogMessage(string message);
     }
 }
