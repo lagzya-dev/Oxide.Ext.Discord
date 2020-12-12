@@ -97,21 +97,25 @@ namespace Oxide.Ext.Discord.REST
                 Remaining = 0;
                 Reset = rateLimit.NextBucketReset;
             }
-
-            lock (this)
+            
+            for (int index = 0; index < Count; index++)
             {
-                foreach (Request request in this)
+                Request request = this[index];
+                if (request.HasTimedOut())
                 {
-                    if (request.HasTimedOut())
-                    {
-                        request.Close(false);
-                    }
-
-                    if (request.InProgress)
-                    {
-                        return;
-                    }
+                    request.Close(false);
                 }
+
+                if (request.InProgress)
+                {
+                    return;
+                }
+            }
+
+            //It's possible we removed a request that has timed out.
+            if (Count == 0)
+            {
+                return;
             }
             
             rateLimit.FiredRequest();
