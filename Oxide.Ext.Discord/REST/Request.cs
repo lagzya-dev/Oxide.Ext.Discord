@@ -4,7 +4,6 @@ using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
-using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.DiscordObjects;
 using Oxide.Ext.Discord.Logging;
@@ -17,7 +16,7 @@ namespace Oxide.Ext.Discord.REST
 
         public string Route { get; }
 
-        public string RequestURL => URLBase + Route;
+        public string RequestUrl => UrlBase + Route;
 
         public Dictionary<string, string> Headers { get; }
 
@@ -46,7 +45,7 @@ namespace Oxide.Ext.Discord.REST
             NullValueHandling = NullValueHandling.Ignore
         };
 
-        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
+        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, LogLevel logLevel)
         {
             this.Method = method;
             this.Route = route;
@@ -201,7 +200,7 @@ namespace Oxide.Ext.Discord.REST
                     BotRateLimit botRateLimit;
                     lock (RESTHandler.GlobalRateLimit)
                     {
-                        botRateLimit = RESTHandler.GlobalRateLimit[bucket.ApiKey];
+                        botRateLimit = RESTHandler.GlobalRateLimit[_bucket.ApiKey];
                     }
                     
                     botRateLimit.ReachedRateLimit();

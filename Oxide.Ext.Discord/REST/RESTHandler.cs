@@ -1,6 +1,7 @@
 using System.Text;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Plugins;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.REST
 {
@@ -75,7 +76,7 @@ namespace Oxide.Ext.Discord.REST
 
         private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
         {
-            var request = new Request(method, url, headers, data, callback);
+            var request = new Request(method, url, headers, data, callback, _logLevel);
             BucketRequest(request);
         }
 
