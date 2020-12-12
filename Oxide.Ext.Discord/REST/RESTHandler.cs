@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.REST
 
     public class RESTHandler
     {
-        public static Hash<string, BotRateLimit> GlobalRateLimit = new Hash<string, BotRateLimit>();
+        public static readonly Hash<string, BotRateLimit> GlobalRateLimit = new Hash<string, BotRateLimit>();
         
         private Hash<string, Bucket> buckets = new Hash<string, Bucket>();
 
@@ -96,7 +96,7 @@ namespace Oxide.Ext.Discord.REST
                             case "reactions":
                                 return bucket.ToString();
                         
-                            // Literal IDs should only be taken account if they are the Major ID (the Channel/Guild ID/ Webhook ID)
+                            // Literal IDs should only be taken account if they are the Major ID (Channel ID / Guild ID / Webhook ID)
                             case "guilds":
                             case "channels": 
                             case "webhooks":
