@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord.REST
                     Interface.Oxide.LogError($"[Discord Extension] Request URL: [{Method.ToString()}] {RequestUrl}");
                     // Interface.Oxide.LogError($"[Discord Ext] Exception message: {ex.Message}");
 
-                    Close(++_retries >= 3);
+                    Close(false);
                     return;
                 }
                 
@@ -133,16 +133,19 @@ namespace Oxide.Ext.Discord.REST
 
         public void Close(bool remove = true)
         {
-            if (remove)
+            if (remove || _retries >= 3)
             {
                 lock (_bucket)
                 {
                     _bucket.Remove(this);
                 }
             }
-
-            InProgress = false;
-            StartTime = null;
+            else
+            {
+                _retries += 1;
+                InProgress = false;
+                StartTime = null;
+            }
         }
 
         public bool HasTimedOut()
