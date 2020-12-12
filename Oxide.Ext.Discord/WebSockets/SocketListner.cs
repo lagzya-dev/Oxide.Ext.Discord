@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Logging;
+
 namespace Oxide.Ext.Discord.WebSockets
 {
     using System;
@@ -19,21 +21,19 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private int retries;
 
+        private readonly ILogger _logger;
+
         public SocketListner(DiscordClient client, Socket socket)
         {
             this.client = client;
             this.webSocket = socket;
             retries = 0;
+            _logger = new Logger<SocketListner>(client.Settings.LogLevel);
         }
 
         public void SocketOpened(object sender, EventArgs e)
         {
-
-            if (client.Settings.Debugging)
-            {
-                Interface.Oxide.LogDebug($"Discord WebSocket opened.");
-            }
-            Interface.Oxide.LogWarning("[Discord Extension] Discord socket opened!");
+            _logger.LogWarning("Discord socket opened!");
 
             client.CallHook("DiscordSocket_WebSocketOpened");
         }
@@ -42,56 +42,53 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             if (e.Code == 4004)
             {
-                Interface.Oxide.LogError("[Discord Extension] Given Bot token is invalid!");
+                _logger.LogError("Given Bot token is invalid!");
                 throw new APIKeyException();
             }
 
-            if (client.Settings.Debugging)
-            {
-                Interface.Oxide.LogDebug($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
-            }
+            _logger.LogDebug($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
 
             if (client.requestReconnect)
             {
                 client.requestReconnect = false;
-                webSocket.Connect(client.WSSURL);
+                client.ConnectToWebSocket();
                 return;
             }
 
             if (e.Code == 4006)
             {
                 webSocket.hasConnectedOnce = false;
-                Interface.Oxide.LogWarning("[Discord Extension] Discord session no longer valid... Reconnecting...");
+                _logger.LogWarning("Discord session no longer valid... Reconnecting...");
                 client.REST.Shutdown(); // Clean up buckets
-                webSocket.Connect(client.WSSURL);
+                client.ConnectToWebSocket();
                 client.CallHook("DiscordSocket_WebSocketClosed", null, e.Reason, e.Code, e.WasClean);
                 return;
             }
 
             if (!e.WasClean)
             {
-                Interface.Oxide.LogWarning($"[Discord Extension] Discord connection closed uncleanly: code {e.Code}, Reason: {e.Reason}");
+                _logger.LogWarning($"Discord connection closed uncleanly: code {e.Code}, Reason: {e.Reason}");
 
                 if(retries >= 5)
                 {
-                    Interface.Oxide.LogError("[Discord Extension] Exceeded number of retries... Attempting in 15 seconds.");
+                    _logger.LogError("Exceeded number of retries... Attempting in 15 seconds.");
                     Timer reconnecttimer = new Timer() { Interval = 15000f, AutoReset = false };
                     reconnecttimer.Elapsed += (object a, ElapsedEventArgs b) =>
                     {
                         if (client == null) return;
                         retries = 0;
-                        Interface.Oxide.LogWarning($"[Discord Extension] Attempting to reconnect to Discord...");
+                        _logger.LogWarning("Attempting to reconnect to Discord...");
                         client.REST.Shutdown(); // Clean up buckets
-                        webSocket.Connect(client.WSSURL);
+                        client.ConnectToWebSocket();
                     };
                     reconnecttimer.Start();
                     return;
                 }
                 retries++;
 
-                Interface.Oxide.LogWarning($"[Discord Extension] Attempting to reconnect to Discord...");
+                _logger.LogWarning("Attempting to reconnect to Discord...");
                 client.REST.Shutdown(); // Clean up buckets
-                webSocket.Connect(client.WSSURL);
+                client.ConnectToWebSocket();
             }
             else
             {
@@ -107,31 +104,20 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             if(e.Exception is NoURLException)
             {
-                Interface.Oxide.LogError("[Discord Extension] Error: WSSURL not present! Retrying..");
-                DiscordObjects.Gateway.GetGateway(client, (gateway) =>
-                {
-                    // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                    string fullURL = $"{gateway.URL}/?{Connect.Serialize()}";
-
-                    if (client.Settings.Debugging)
-                    {
-                        Interface.Oxide.LogDebug($"Got Gateway url: {fullURL}");
-                    }
-
-                    client.UpdateWSSURL(fullURL);
-                    webSocket.Connect(client.WSSURL);
-                });
+                _logger.LogError("[Discord Extension] Error: WebSocketUrl not present! Retrying..");
+                client.ConnectToWebsocketUrl();
                 return;
             }
-            Interface.Oxide.LogWarning($"[Discord Extension] An error has occured: Response: {e.Message}");
+            
+            _logger.LogWarning($"[Discord Extension] An error has occured: Response: {e.Message}\n{e.Exception}");
 
             client.CallHook("DiscordSocket_WebSocketErrored", null, e.Exception, e.Message);
 
             if (client == null) return;
             if (retries > 0) return; // Retry timer is already triggered
-            Interface.Oxide.LogWarning($"[Discord Extension] Attempting to reconnect to Discord...");
+            _logger.LogWarning("Attempting to reconnect to Discord...");
             client.REST.Shutdown(); // Clean up buckets
-            webSocket.Connect(client.WSSURL);
+            client.ConnectToWebSocket();
         }
 
         public void SocketMessage(object sender, MessageEventArgs e)
@@ -143,20 +129,14 @@ namespace Oxide.Ext.Discord.WebSockets
                 client.Sequence = payload.Sequence.Value;
             }
 
-            if (client.Settings.Debugging)
-            {
-                Interface.Oxide.LogDebug($"Recieved socket message, OpCode: {payload.OpCode}");
-            }
+            _logger.LogDebug($"Recieved socket message, OpCode: {payload.OpCode}");
 
             switch (payload.OpCode)
             {
                 // Dispatch (dispatches an event)
                 case OpCodes.Dispatch:
                 {
-                    if (client.Settings.Debugging)
-                    {
-                        Interface.Oxide.LogDebug($"Recieved OpCode 0, event: {payload.EventName}");
-                    }
+                    _logger.LogDebug($"Recieved OpCode 0, event: {payload.EventName}");
 
                     // Listed here: https://discordapp.com/developers/docs/topics/gateway#commands-and-events-gateway-events
                     switch (payload.EventName)
@@ -173,12 +153,12 @@ namespace Oxide.Ext.Discord.WebSockets
 
                             if (ready.Guilds.Count != 0)
                             {
-                                Interface.Oxide.LogWarning($"[Discord Extension] Your bot was found in {ready.Guilds.Count} Guilds!");
+                                _logger.LogWarning($"Your bot was found in {ready.Guilds.Count} Guilds!");
                             }
 
-                            if (ready.Guilds.Count == 0 && client.Settings.Debugging)
+                            if (ready.Guilds.Count == 0)
                             {
-                                Interface.Oxide.LogDebug($"[Discord Extension] Ready event but no Guilds sent.");
+                                _logger.LogDebug("Ready event but no Guilds sent.");
                             }
 
                             client.DiscordServers = ready.Guilds;
@@ -191,7 +171,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         case "RESUMED":
                         {
                             Resumed resumed = payload.EventData.ToObject<Resumed>();
-                            Interface.Oxide.LogWarning("[Discord Extension] Session resumed!");
+                            _logger.LogWarning("Session resumed!");
                             client.CallHook("Discord_Resumed", null, resumed);
                             break;
                         }
@@ -257,14 +237,12 @@ namespace Oxide.Ext.Discord.WebSockets
                             if(client.GetGuild(g_id) == null)
                             {
                                 client.DiscordServers.Add(guildCreate);
-                                if (client.Settings.Debugging)
-                                    Interface.Oxide.LogDebug($"[Discord Extension] Guild ID ({g_id}) added to list.");
+                                _logger.LogDebug($"Guild ID ({g_id}) added to list.");
                             }
                             else if(g_unavail == false && (client.GetGuild(g_id)?.unavailable ?? false) == true)
                             {
                                 client.UpdateGuild(g_id, guildCreate);
-                                if (client.Settings.Debugging)
-                                    Interface.Oxide.LogDebug($"[Discord Extension] Guild ID ({g_id}) updated to list.");
+                                _logger.LogDebug($"Guild ID ({g_id}) updated to list.");
                             }
                             client.CallHook("Discord_GuildCreate", null, guildCreate);
                             break;
@@ -284,12 +262,12 @@ namespace Oxide.Ext.Discord.WebSockets
                             Guild guildDelete = payload.EventData.ToObject<Guild>();
                             if(guildDelete.unavailable ?? false == true) // outage
                             {
-                                Interface.Oxide.LogDebug($"[DEBUG] Guild ID {guildDelete.id} outage!");
+                                _logger.LogDebug($"Guild ID {guildDelete.id} outage!");
                                 client.UpdateGuild(guildDelete.id, guildDelete);
                             }
                             else
                             {
-                                Interface.Oxide.LogDebug($"[DEBUG] Guild ID {guildDelete.id} removed from list");
+                                _logger.LogDebug($"Guild ID {guildDelete.id} removed from list");
                                 client.DiscordServers.Remove(client.GetGuild(guildDelete.id)); // guildDelete may not be same reference
                             }
                             client.CallHook("Discord_GuildDelete", null, guildDelete);
@@ -356,7 +334,7 @@ namespace Oxide.Ext.Discord.WebSockets
                             GuildMember newMember = client.GetGuild(memberUpdated.guild_id)?.members.FirstOrDefault(x => x.user.id == memberUpdated.user.id);
                             if (newMember == null)
                             {
-                                Interface.Oxide.LogWarning($"[Discord Extension] Tried to update a user who doesn't exist.  Guild ID: {memberUpdated.guild_id} Member ID: {memberUpdated.user.id}");
+                                _logger.LogWarning($"Tried to update a user who doesn't exist.  Guild ID: {memberUpdated.guild_id} Member ID: {memberUpdated.user.id}");
                                 break;
                             }
                             
@@ -575,7 +553,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         default:
                         {
                             client.CallHook("Discord_UnhandledEvent", null, payload);
-                            Interface.Oxide.LogWarning($"[Discord Extension] [Debug] Unhandled event: {payload.EventName}");
+                            _logger.LogWarning($"Unhandled event: {payload.EventName}");
                             break;
                         }
                     }
@@ -587,7 +565,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 // https://discordapp.com/developers/docs/topics/gateway#gateway-heartbeat
                 case OpCodes.Heartbeat:
                 {
-                    Interface.Oxide.LogInfo($"[Discord Extension] Manully sent heartbeat (received opcode 1)");
+                    _logger.LogInfo("Manually sent heartbeat (received opcode 1)");
                     client.SendHeartbeat();
                     break;
                 }
@@ -596,7 +574,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 // we should immediately reconnect here
                 case OpCodes.Reconnect:
                 {
-                    Interface.Oxide.LogInfo($"[Discord Extension] Reconnect has been called (opcode 7)! Reconnecting...");
+                    _logger.LogInfo("Reconnect has been called (opcode 7)! Reconnecting...");
                     webSocket.hasConnectedOnce = true; // attempt resume opcode
                     client.requestReconnect = true;
                     webSocket.ReconnectRequested(); //If we disconnect normally our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
@@ -606,7 +584,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 // Invalid Session (used to notify client they have an invalid session ID)
                 case OpCodes.InvalidSession:
                 {
-                    Interface.Oxide.LogInfo($"[Discord Extension] Invalid Session ID opcode recieved!");
+                    _logger.LogWarning("Invalid Session ID opcode recieved!");
                     client.requestReconnect = true;
                     webSocket.hasConnectedOnce = false;
                     webSocket.Disconnect(false);
@@ -622,7 +600,7 @@ namespace Oxide.Ext.Discord.WebSockets
                     //client.Identify();
                     if (webSocket.hasConnectedOnce)
                     {
-                        Interface.Oxide.LogWarning("[Discord Extension] Attempting resume opcode...");
+                        _logger.LogWarning("Attempting resume opcode...");
                         client.Resume();
                     }
                     else
@@ -644,7 +622,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
                 default:
                 {
-                    Interface.Oxide.LogInfo($"[Discord Extension] Unhandled OP code: code {payload.OpCode}");
+                    _logger.LogInfo($"Unhandled OP code: code {payload.OpCode}");
                     break;
                 }
             }

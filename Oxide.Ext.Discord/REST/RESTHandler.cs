@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Plugins;
 
@@ -17,10 +17,13 @@ namespace Oxide.Ext.Discord.REST
 
         private Dictionary<string, string> headers;
 
-        public RESTHandler(string apiKey)
+        private readonly LogLevel _logLevel;
+
+        public RESTHandler(string apiKey, LogLevel logLevel)
         {
             this.apiKey = apiKey;
-
+            _logLevel = logLevel;
+            
             // Version
             string version = "";
             var exts = Oxide.Core.Interface.Oxide.GetAllExtensions();
