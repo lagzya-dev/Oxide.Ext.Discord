@@ -1,37 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.REST
 {
     public class Bucket : List<Request>
     {
-        public RequestMethod Method { get; }
-
-        public string Route { get; }
-
         public int Limit { get; set; }
 
         public int Remaining { get; set; }
-
-        public int Reset { get; set; }
-
-        public bool Initialized { get; private set; }
-
-        public bool Disposed { get; set; }
-
-        public readonly string ApiKey;
         
+        public double Reset { get; set; }
+
+        public readonly BotRestHandler Handler;
+
         private Thread _thread;
+        
+        public string BucketId { get; }
 
-        public Bucket(RequestMethod method, string route, string apiKey)
+        private readonly Logger<Bucket> _logger;
+
+        public Bucket(BotRestHandler handler, string bucketId, LogLevel logLevel)
         {
-            Method = method;
-            Route = route;
-            ApiKey = apiKey;
-
-            _thread = new Thread(RunThread);
-            _thread.Start();
+            Handler = handler;
+            BucketId = bucketId;
+            _logger = new Logger<Bucket>(logLevel);
+            _logger.LogDebug($"New Bucket Created with id: {bucketId}");
         }
 
         public void Close()
@@ -40,6 +36,8 @@ namespace Oxide.Ext.Discord.REST
             _thread = null;
         }
 
+        public bool ShouldCleanup(double currentTime) => (_thread == null || !_thread.IsAlive) && currentTime > Reset;
+
         public void Queue(Request request)
         {
             lock (this)
@@ -47,57 +45,40 @@ namespace Oxide.Ext.Discord.REST
                 Add(request);
             }
 
-            if (!Initialized)
+            if (_thread == null || !_thread.IsAlive)
             {
-                Initialized = true;
+                _thread = new Thread(RunThread);
+                _thread.Start();
             }
         }
 
         private void RunThread()
         {
-            // 'Initialized' basically allows us to start the while
-            // loop from the constructor even when this.Count = 0
-            // (eg after the bucket is created, before requests are added)
-            while (!Initialized || Count > 0)
+            while (Count > 0)
             {
-                if (Disposed)
-                {
-                    break;
-                }
-
-                if (!Initialized)
-                {
-                    continue;
-                }
-
                 FireRequests();
             }
-
-            Disposed = true;
         }
 
         private void FireRequests()
         {
-            ////this.CleanRequests();
-
-            if (Remaining == 0 && Reset >= Time.TimeSinceEpoch())
+            double timeSince = Time.TimeSinceEpoch();
+            if (Handler.RateLimit.HasReachedRateLimit)
             {
-                Thread.Sleep(Reset - Time.TimeSinceEpoch());
+                int resetIn = (int) ((Handler.RateLimit.NextBucketReset - timeSince) * 1000);
+                _logger.LogDebug($"Global Rate limit hit. Sleeping until Reset: {resetIn}ms ");
+                Thread.Sleep(resetIn);
                 return;
             }
             
-            BotRateLimit rateLimit;
-            lock (RESTHandler.GlobalRateLimit)
+            if (Remaining == 0 && Reset > timeSince)
             {
-                rateLimit = RESTHandler.GlobalRateLimit[ApiKey];
+                int resetIn = (int) ((Reset - timeSince) * 1000);
+                _logger.LogDebug($"Bucket Rate limit hit. Sleeping until Reset: {resetIn}ms ");
+                Thread.Sleep(resetIn);
+                return;
             }
 
-            if (rateLimit.HasReachedRateLimit)
-            {
-                Remaining = 0;
-                Reset = rateLimit.NextBucketReset;
-            }
-            
             for (int index = 0; index < Count; index++)
             {
                 Request request = this[index];
@@ -118,19 +99,8 @@ namespace Oxide.Ext.Discord.REST
                 return;
             }
             
-            rateLimit.FiredRequest();
+            Handler.RateLimit.FiredRequest();
             this[0].Fire(this);
         }
-
-        ////private void CleanRequests()
-        ////{
-        ////    var requests = new List<Request>(this);
-
-        ////    foreach (var req in requests.Where(x => x.HasTimedOut()))
-        ////    {
-        ////        Interface.Oxide.LogWarning($"[Discord Ext] Closing request (timed out): {req.Route + req.Endpoint} [{req.Method}]");
-        ////        req.Close();
-        ////    }
-        ////}
     }
 }

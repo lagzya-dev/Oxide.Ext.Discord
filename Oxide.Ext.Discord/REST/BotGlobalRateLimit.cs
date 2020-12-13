@@ -1,50 +1,57 @@
 using System;
 using System.Timers;
-using Oxide.Core;
 using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.REST
 {
-    public class BotRateLimit
+    public class BotGlobalRateLimit
     {
         public int Global;
 
         private Timer _timer;
+        private double _lastReset;
+        private double _retryAfter;
 
         private const int MaxRequestsPerMinute = 110;
-        private const int ResetInterval = 60 * 1000;
+        private const int ResetInterval = ResetIntervalSeconds * 1000;
+        private const int ResetIntervalSeconds = 60;
 
-        private DateTime _lastReset;
-
-        public BotRateLimit()
+        public BotGlobalRateLimit()
         {
             _timer = new Timer(ResetInterval);
             _timer.Elapsed += ResetGlobal;
-            _lastReset = DateTime.UtcNow;
+            _timer.Start();
+            _lastReset = Time.TimeSinceEpoch();
         }
 
         private void ResetGlobal(object sender, ElapsedEventArgs e)
         {
-            Global = 0;
-            _lastReset = DateTime.UtcNow;
+            lock (this)
+            {
+                Global = 0;
+                _lastReset = Time.TimeSinceEpoch();
+            }
         }
 
         public void FiredRequest()
         {
-            Global += 1;
+            lock (this)
+            {
+                Global += 1;
+            }
         }
 
-        public void ReachedRateLimit()
+        public void ReachedRateLimit(double retryAfter)
         {
-            Interface.Oxide.LogError($"[Discord Extension] [Error] Bot has reached rate limit... Remaining Requests: {MaxRequestsPerMinute - Global}");
             Global = MaxRequestsPerMinute;
+            _retryAfter = retryAfter;
         }
 
         public bool HasReachedRateLimit => Global >= MaxRequestsPerMinute;
 
-        public int NextBucketReset => Time.TimeSinceEpoch(_lastReset + TimeSpan.FromSeconds(ResetInterval));
+        public double NextBucketReset => Math.Max(_lastReset + ResetIntervalSeconds, Time.TimeSinceEpoch() + _retryAfter) ;
 
-        public void CloseBucket()
+        public void Shutdown()
         {
             if (_timer == null)
             {

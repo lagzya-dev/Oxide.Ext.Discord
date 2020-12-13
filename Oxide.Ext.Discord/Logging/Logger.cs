@@ -47,11 +47,11 @@ namespace Oxide.Ext.Discord.Logging
             string log;
             if (level == LogLevel.Error || level == LogLevel.Exception)
             {
-                log = $"{DateTime.Now:HH:mm:ss} [Discord Extension] [{typeof(T).Name}] [{level}]: {message}";
+                log = $"[Discord Extension] [{typeof(T).Name}] [{level}]: {message}";
             }
             else
             {
-                log = $"{DateTime.Now:HH:mm:ss} [Discord Extension] [{level}]: {message}";
+                log = $"[Discord Extension] [{level}]: {message}";
             }
 
             switch (level)

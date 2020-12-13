@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.DiscordObjects;
 using Oxide.Ext.Discord.Logging;
+using Time = Oxide.Ext.Discord.Helpers.Time;
 
 namespace Oxide.Ext.Discord.REST
 {
@@ -29,6 +30,8 @@ namespace Oxide.Ext.Discord.REST
         public DateTime? StartTime { get; private set; }
 
         public bool InProgress { get; set; }
+        
+        public DiscordClient Owner { get; }
 
         private Bucket _bucket;
 
@@ -45,8 +48,9 @@ namespace Oxide.Ext.Discord.REST
             NullValueHandling = NullValueHandling.Ignore
         };
 
-        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, LogLevel logLevel)
+        public Request(DiscordClient client, RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, LogLevel logLevel)
         {
+            Owner = client;
             this.Method = method;
             this.Route = route;
             this.Headers = headers;
@@ -188,52 +192,50 @@ namespace Oxide.Ext.Discord.REST
 
         private void ParseHeaders(WebHeaderCollection headers, RestResponse response)
         {
-            string rateRetryAfterHeader = headers.Get("Retry-After");
-            string rateLimitGlobalHeader = headers.Get("X-RateLimit-Global");
+            string globalRetryAfterHeader = headers.Get("Retry-After");
+            string isGlobalRateLimitHeader = headers.Get("X-RateLimit-Global");
 
-            if (!string.IsNullOrEmpty(rateRetryAfterHeader) &&
-                !string.IsNullOrEmpty(rateLimitGlobalHeader) &&
-                int.TryParse(rateRetryAfterHeader, out int rateRetryAfter) &&
-                bool.TryParse(rateLimitGlobalHeader, out bool rateLimitGlobal) &&
-                rateLimitGlobal)
+            if (!string.IsNullOrEmpty(globalRetryAfterHeader) &&
+                !string.IsNullOrEmpty(isGlobalRateLimitHeader) &&
+                int.TryParse(globalRetryAfterHeader, out int globalRetryAfter) &&
+                bool.TryParse(isGlobalRateLimitHeader, out bool isGlobalRateLimit) &&
+                isGlobalRateLimit)
             {
                 RateLimit limit = response.ParseData<RateLimit>();
                 if (limit.global)
                 {
-                    BotRateLimit botRateLimit;
-                    lock (RESTHandler.GlobalRateLimit)
-                    {
-                        botRateLimit = RESTHandler.GlobalRateLimit[_bucket.ApiKey];
-                    }
-                    
-                    botRateLimit.ReachedRateLimit();
+                    _bucket.Handler.RateLimit.ReachedRateLimit(globalRetryAfter);
                 }
             }
 
-            string rateLimitHeader = headers.Get("X-RateLimit-Limit");
-            string rateRemainingHeader = headers.Get("X-RateLimit-Remaining");
-            string rateResetHeader = headers.Get("X-RateLimit-Reset");
+            string bucketLimitHeader = headers.Get("X-RateLimit-Limit");
+            string bucketRemainingHeader = headers.Get("X-RateLimit-Remaining");
+            string bucketResetAfterHeader = headers.Get("X-RateLimit-Reset-After");
 
-            if (!string.IsNullOrEmpty(rateLimitHeader) &&
-                int.TryParse(rateLimitHeader, out int rateLimit))
+            if (!string.IsNullOrEmpty(bucketLimitHeader) &&
+                int.TryParse(bucketLimitHeader, out int bucketLimit))
             {
-                _bucket.Limit = rateLimit;
+                _bucket.Limit = bucketLimit;
             }
 
-            if (!string.IsNullOrEmpty(rateRemainingHeader) &&
-                int.TryParse(rateRemainingHeader, out int rateRemaining))
+            if (!string.IsNullOrEmpty(bucketRemainingHeader) &&
+                int.TryParse(bucketRemainingHeader, out int bucketRemaining))
             {
-                _bucket.Remaining = rateRemaining;
+                _bucket.Remaining = bucketRemaining;
             }
 
-            if (!string.IsNullOrEmpty(rateResetHeader) &&
-                int.TryParse(rateResetHeader, out int rateReset))
+            double timeSince = Time.TimeSinceEpoch();
+            if (!string.IsNullOrEmpty(bucketResetAfterHeader) &&
+                double.TryParse(bucketResetAfterHeader, out double bucketResetAfter))
             {
-                _bucket.Reset = rateReset;
+                double resetTime = timeSince + bucketResetAfter;
+                if (resetTime > _bucket.Reset)
+                {
+                    _bucket.Reset = resetTime;
+                }
             }
-
-            ////_logger.LogInfo($"Recieved ratelimit deets: {bucket.Limit}, {bucket.Remaining}, {bucket.Reset}, time now: {bucket.TimeSinceEpoch()}");
-            ////_logger.LogInfo($"Time until reset: {(bucket.Reset - (int)bucket.TimeSinceEpoch())}");
+            
+            _logger.LogDebug($"Route: {Route} Internal Bucket Id: {_bucket.BucketId} Limit: {_bucket.Limit} Remaining: {_bucket.Remaining} Reset: {_bucket.Reset} Time: {Time.TimeSinceEpoch()}");
         }
     }
 }

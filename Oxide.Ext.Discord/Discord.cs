@@ -1,4 +1,4 @@
-﻿using Oxide.Ext.Discord.REST;
+﻿using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord
 {
@@ -27,7 +27,8 @@ namespace Oxide.Ext.Discord
 
             var settings = new DiscordSettings()
             {
-                ApiToken = apiKey
+                ApiToken = apiKey,
+                LogLevel = LogLevel.Info
             };
 
             CreateClient(plugin, settings);
@@ -51,7 +52,7 @@ namespace Oxide.Ext.Discord
             }
 
             // Find an existing DiscordClient and update it 
-            var client = Clients.FirstOrDefault(x => x.Plugins.Any(p => p.Title == plugin.Title));
+            var client = Clients.FirstOrDefault(x => x.Plugins.Any(p => p.Name == plugin.Name));
             if (client != null)
             {
                 if (client.Settings.ApiToken != settings.ApiToken)
@@ -78,33 +79,6 @@ namespace Oxide.Ext.Discord
         public static void CloseClient(DiscordClient client)
         {
             if (client == null) return;
-            
-            string apiKey = client.Settings.ApiToken;
-
-            bool apiKeyExists = false;
-            for (int i = 0; i < Clients.Count; i++)
-            {
-                DiscordClient existing = Clients[i];
-                if (existing == client)
-                {
-                    continue;
-                }
-
-                if (existing.Settings.ApiToken == apiKey)
-                {
-                    apiKeyExists = true;
-                    break;
-                }
-            }
-
-            if (!apiKeyExists)
-            {
-                lock (RESTHandler.GlobalRateLimit)
-                {
-                    RESTHandler.GlobalRateLimit.Remove(apiKey);
-                }
-            }
-
             client.Disconnect();
             Clients.Remove(client);
         }

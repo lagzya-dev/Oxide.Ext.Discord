@@ -59,7 +59,6 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 webSocket.hasConnectedOnce = false;
                 _logger.LogWarning("Discord session no longer valid... Reconnecting...");
-                client.REST.Shutdown(); // Clean up buckets
                 client.ConnectToWebSocket();
                 client.CallHook("DiscordSocket_WebSocketClosed", null, e.Reason, e.Code, e.WasClean);
                 return;
@@ -78,7 +77,6 @@ namespace Oxide.Ext.Discord.WebSockets
                         if (client == null) return;
                         retries = 0;
                         _logger.LogWarning("Attempting to reconnect to Discord...");
-                        client.REST.Shutdown(); // Clean up buckets
                         client.ConnectToWebSocket();
                     };
                     reconnecttimer.Start();
@@ -87,7 +85,6 @@ namespace Oxide.Ext.Discord.WebSockets
                 retries++;
 
                 _logger.LogWarning("Attempting to reconnect to Discord...");
-                client.REST.Shutdown(); // Clean up buckets
                 client.ConnectToWebSocket();
             }
             else
@@ -116,7 +113,6 @@ namespace Oxide.Ext.Discord.WebSockets
             if (client == null) return;
             if (retries > 0) return; // Retry timer is already triggered
             _logger.LogWarning("Attempting to reconnect to Discord...");
-            client.REST.Shutdown(); // Clean up buckets
             client.ConnectToWebSocket();
         }
 
