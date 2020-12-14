@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.REST
 
         private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
         {
-            Request request = new Request(_client, method, url, headers, data, callback, _logLevel);
+            Request request = new Request(method, url, headers, data, callback, _logLevel);
             _handler.CleanupExpired();
             _handler.QueueRequest(request, _logLevel);
         }

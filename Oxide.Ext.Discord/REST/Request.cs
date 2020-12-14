@@ -30,8 +30,6 @@ namespace Oxide.Ext.Discord.REST
         public DateTime? StartTime { get; private set; }
 
         public bool InProgress { get; set; }
-        
-        public DiscordClient Owner { get; }
 
         private Bucket _bucket;
 
@@ -48,9 +46,8 @@ namespace Oxide.Ext.Discord.REST
             NullValueHandling = NullValueHandling.Ignore
         };
 
-        public Request(DiscordClient client, RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, LogLevel logLevel)
+        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, LogLevel logLevel)
         {
-            Owner = client;
             this.Method = method;
             this.Route = route;
             this.Headers = headers;
@@ -98,8 +95,7 @@ namespace Oxide.Ext.Discord.REST
                 using HttpWebResponse httpResponse = ex.Response as HttpWebResponse;
                 if (httpResponse == null)
                 {
-                    _logger.LogException($"[Discord Extension] A web request exception occured (internal error) [RETRY={_retries}/3].", ex);
-                    _logger.LogError($"[Discord Extension] Request URL: [{Method.ToString()}] {RequestUrl}");
+                    _logger.LogException($"[Discord Extension] A web request exception occured (internal error) [RETRY={_retries}/3].\nRequest URL: [{Method.ToString()}] {req.RequestUri}", ex);
 
                     Close(false);
                     return;
@@ -110,18 +106,18 @@ namespace Oxide.Ext.Discord.REST
                 bool isRateLimit = (int) httpResponse.StatusCode == 429;
                 if (isRateLimit)
                 {
-                    _logger.LogInfo($"Discord ratelimit reached. (Ratelimit info: remaining: {bucket.Remaining}, limit: {bucket.Limit}, reset: {bucket.Reset}, time now: {Helpers.Time.TimeSinceEpoch()}");
+                    _logger.LogWarning($"Discord rate limit reached. (Rate limit info: remaining: Route:{req.RequestUri}, {bucket.Remaining}, limit: {bucket.Limit}, reset: {bucket.Reset}, time now: {Time.TimeSinceEpoch()}");
                 }
                 else
                 {
                     DiscordApiError apiError = Response.ParseData<DiscordApiError>();
                     if (!string.IsNullOrEmpty(apiError.Code))
                     {
-                        _logger.LogWarning($"[Discord Extension] Discord has returned error Code - {apiError.Code}: {apiError.Message} - {req.RequestUri} (code {httpResponse.StatusCode})");
+                        _logger.LogError($"[Discord Extension] Discord has returned error Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})");
                     }
                     else
                     {
-                        _logger.LogWarning($"[Discord Extension] An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
+                        _logger.LogError($"[Discord Extension] An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
                     }
                 }
                 
@@ -211,6 +207,7 @@ namespace Oxide.Ext.Discord.REST
             string bucketLimitHeader = headers.Get("X-RateLimit-Limit");
             string bucketRemainingHeader = headers.Get("X-RateLimit-Remaining");
             string bucketResetAfterHeader = headers.Get("X-RateLimit-Reset-After");
+            string bucketNameHeader = headers.Get("X-RateLimit-Bucket");
 
             if (!string.IsNullOrEmpty(bucketLimitHeader) &&
                 int.TryParse(bucketLimitHeader, out int bucketLimit))
@@ -235,7 +232,7 @@ namespace Oxide.Ext.Discord.REST
                 }
             }
             
-            _logger.LogDebug($"Route: {Route} Internal Bucket Id: {_bucket.BucketId} Limit: {_bucket.Limit} Remaining: {_bucket.Remaining} Reset: {_bucket.Reset} Time: {Time.TimeSinceEpoch()}");
+            _logger.LogDebug($"Method: {Method} Route: {Route} Internal Bucket Id: {_bucket.BucketId} Limit: {_bucket.Limit} Remaining: {_bucket.Remaining} Reset: {_bucket.Reset} Time: {Time.TimeSinceEpoch()} Bucket: {bucketNameHeader}");
         }
     }
 }
