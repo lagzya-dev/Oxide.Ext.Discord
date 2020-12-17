@@ -1,4 +1,7 @@
-﻿namespace Oxide.Ext.Discord.WebSockets
+﻿using Newtonsoft.Json;
+using Oxide.Ext.Discord.Gateway;
+
+namespace Oxide.Ext.Discord.WebSockets
 {
     using System;
     using Oxide.Core;
@@ -67,10 +70,28 @@
             socket = null;
         }
 
+        public void Send(OpCodes opCode, object data, Action<bool> completed = null)
+        {
+            if (!IsAlive())
+            {
+                return;
+            }
+            
+            SPayload opcode = new SPayload()
+            {
+                OP = OpCodes.Identify,
+                Payload = data
+            };
+            
+            socket.SendAsync(JsonConvert.SerializeObject(opcode), completed);
+        }
+
         public void Send(string message, Action<bool> completed = null)
         {
             if (IsAlive())
+            {
                 socket.SendAsync(message, completed);
+            }
         }
 
         public bool IsAlive()

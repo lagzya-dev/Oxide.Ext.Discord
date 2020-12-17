@@ -285,15 +285,8 @@ namespace Oxide.Ext.Discord
                 LargeThreshold = 50,
                 Shard = new List<int>() { 0, 1 }
             };
-
-            var opcode = new SPayload()
-            {
-                OP = OpCodes.Identify,
-                Payload = identify
-            };
-            var payload = JsonConvert.SerializeObject(opcode);
-
-            _webSocket?.Send(payload);
+            
+            _webSocket.Send(OpCodes.Identify, identify);
         }
         
         public void Resume()
@@ -305,14 +298,7 @@ namespace Oxide.Ext.Discord
                 Token = Settings.ApiToken
             };
 
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.Resume,
-                Data = resume
-            };
-
-            string payload = JsonConvert.SerializeObject(packet);
-            _webSocket?.Send(payload);
+            _webSocket.Send(OpCodes.Resume, resume);
         }
         
         public void SendHeartbeat()
@@ -325,15 +311,10 @@ namespace Oxide.Ext.Discord
                 _webSocket.Disconnect(false);
                 return;
             }
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.Heartbeat,
-                Data = this.Sequence
-            };
-
+            
             HeartbeatACK = false;
-            string message = JsonConvert.SerializeObject(packet);
-            _webSocket?.Send(message);
+            
+            _webSocket.Send(OpCodes.Heartbeat, Sequence);
 
             _lastHeartbeat = Time.TimeSinceEpoch();
 
@@ -354,14 +335,7 @@ namespace Oxide.Ext.Discord
                 Nonce = nonce
             };
 
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.RequestGuildMembers,
-                Data = requestGuildMembers
-            };
-
-            string payload = JsonConvert.SerializeObject(packet);
-            _webSocket?.Send(payload);
+            _webSocket.Send(OpCodes.RequestGuildMembers, requestGuildMembers);
         }
 
         public void RequestGuildMembers(Guild guild, string query = "", int limit = 0)
@@ -378,27 +352,13 @@ namespace Oxide.Ext.Discord
                 SelfDeaf = selfDeaf,
                 SelfMute = selfMute
             };
-
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.VoiceStateUpdate,
-                Data = voiceState
-            };
-
-            string payload = JsonConvert.SerializeObject(packet);
-            _webSocket?.Send(payload);
+            
+            _webSocket.Send(OpCodes.VoiceStateUpdate, voiceState);
         }
 
         public void UpdateStatus(Presence presence)
         {
-            var opcode = new SPayload()
-            {
-                OP = OpCodes.StatusUpdate,
-                Payload = presence
-            };
-
-            var payload = JsonConvert.SerializeObject(opcode);
-            _webSocket?.Send(payload);
+            _webSocket.Send(OpCodes.StatusUpdate, presence);
         }
 
         public Guild GetGuild(string id)
