@@ -187,7 +187,7 @@ namespace Oxide.Ext.Discord
         {
             if (_timer != null)
             {
-                _logger.LogWarning($"[Discord Extension] Warning: tried to create a heartbeat when one is already registered.");
+                _logger.LogWarning($"Warning: tried to create a heartbeat when one is already registered.");
                 return;
             }
 
@@ -306,7 +306,7 @@ namespace Oxide.Ext.Discord
             if(!HeartbeatACK)
             {
                 // Didn't receive an ACK, thus connection can be considered zombie, thus destructing.
-                _logger.LogError("[Discord Extension] Discord did not respond to Heartbeat! Disconnecting..");
+                _logger.LogError("Discord did not respond to Heartbeat! Disconnecting..");
                 requestReconnect = true;
                 _webSocket.Disconnect(false);
                 return;
@@ -320,7 +320,7 @@ namespace Oxide.Ext.Discord
 
             this.CallHook("DiscordSocket_HeartbeatSent");
 
-            _logger.LogDebug($"[Discord Extension] Heartbeat sent - {_timer.Interval}ms interval.");
+            _logger.LogDebug($"Heartbeat sent - {_timer.Interval}ms interval.");
         }
         
         public void RequestGuildMembers(string guildId, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)

@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord
                 Discord.CloseClient(client);
             }
 
-            _logger.LogInfo("[Discord Extension] Disconnected all clients - server shutdown.");
+            _logger.LogInfo("Disconnected all clients - server shutdown.");
         }
     }
 }
