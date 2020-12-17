@@ -308,7 +308,7 @@ namespace Oxide.Ext.Discord
                 // Didn't receive an ACK, thus connection can be considered zombie, thus destructing.
                 _logger.LogError("Discord did not respond to Heartbeat! Disconnecting..");
                 requestReconnect = true;
-                _webSocket.Disconnect(false);
+                _webSocket.ReconnectRequested();
                 return;
             }
             
