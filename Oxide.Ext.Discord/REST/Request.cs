@@ -95,7 +95,7 @@ namespace Oxide.Ext.Discord.REST
                 using HttpWebResponse httpResponse = ex.Response as HttpWebResponse;
                 if (httpResponse == null)
                 {
-                    _logger.LogException($"[Discord Extension] A web request exception occured (internal error) [RETRY={_retries}/3].\nRequest URL: [{Method.ToString()}] {req.RequestUri}", ex);
+                    _logger.LogException($"A web request exception occured (internal error) [RETRY={_retries}/3].\nRequest URL: [{Method.ToString()}] {req.RequestUri}", ex);
 
                     Close(false);
                     return;
@@ -113,11 +113,11 @@ namespace Oxide.Ext.Discord.REST
                     DiscordApiError apiError = Response.ParseData<DiscordApiError>();
                     if (!string.IsNullOrEmpty(apiError.Code))
                     {
-                        _logger.LogError($"[Discord Extension] Discord has returned error Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})");
+                        _logger.LogError($"Discord has returned error Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})");
                     }
                     else
                     {
-                        _logger.LogError($"[Discord Extension] An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
+                        _logger.LogError($"An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
                     }
                 }
                 
@@ -125,7 +125,7 @@ namespace Oxide.Ext.Discord.REST
             }
             catch (Exception ex)
             {
-                _logger.LogException("[Discord Extension] Request callback raised an exception", ex);
+                _logger.LogException("Request callback raised an exception", ex);
                 Close();
             }
         }
