@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private Socket webSocket;
 
-        internal int retries;
+        private int retries;
 
         private readonly ILogger _logger;
 
@@ -35,6 +35,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _logger.LogWarning("Discord socket opened!");
 
             client.CallHook("DiscordSocket_WebSocketOpened");
+            retries = 0;
         }
 
         public void SocketClosed(object sender, CloseEventArgs e)

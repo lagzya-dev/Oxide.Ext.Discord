@@ -38,8 +38,6 @@
 
             if(listner == null)
                 listner = new SocketListner(client, this);
-            
-            listner.retries = 0;
 
             socket.OnOpen += listner.SocketOpened;
             socket.OnClose += listner.SocketClosed;
