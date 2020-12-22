@@ -1,13 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Oxide.Ext.Discord.Gateway;
+using Oxide.Ext.Discord.Exceptions;
+using WebSocketSharp;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
-    using System;
-    using Oxide.Core;
-    using Oxide.Ext.Discord.Exceptions;
-    using WebSocketSharp;
-
     public class Socket
     {
         private readonly DiscordClient _client;
@@ -41,7 +39,6 @@ namespace Oxide.Ext.Discord.WebSockets
             _socket = new WebSocket($"{url}/?v=6&encoding=json");
 
             _listener ??= new SocketListener(_client, this);
-            _listener.Retries = 0;
 
             _socket.OnOpen += _listener.SocketOpened;
             _socket.OnClose += _listener.SocketClosed;
@@ -76,16 +73,16 @@ namespace Oxide.Ext.Discord.WebSockets
             _socket = null;
         }
 
-        public void Send(OpCodes opCode, object data, Action<bool> completed = null)
+        public void Send(SendOpCode opCode, object data, Action<bool> completed = null)
         {
             if (!IsAlive())
             {
                 return;
             }
             
-            SPayload opcode = new SPayload()
+            SPayload opcode = new SPayload
             {
-                OP = opCode,
+                OpCode = opCode,
                 Payload = data
             };
             
