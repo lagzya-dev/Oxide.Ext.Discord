@@ -119,9 +119,6 @@ namespace Oxide.Ext.Discord
             DestroyHeartbeat();
             _webSocket?.Dispose();
             _webSocket = null;
-
-            WebSocketUrl = string.Empty;
-
             REST?.Shutdown();
         }
 
