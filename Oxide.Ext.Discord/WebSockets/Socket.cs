@@ -63,7 +63,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             if (IsClosed() || IsClosing()) return;
 
-            socket?.CloseAsync(4000, "Discord server requested reconnect");
+            socket?.CloseAsync(4199, "Discord server requested reconnect");
         }
 
         public void Dispose()
