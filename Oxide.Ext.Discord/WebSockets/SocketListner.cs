@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private Socket webSocket;
 
-        private int retries;
+        internal int retries;
 
         private readonly ILogger _logger;
 
@@ -27,7 +27,6 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             this.client = client;
             this.webSocket = socket;
-            retries = 0;
             _logger = new Logger<SocketListner>(client.Settings.LogLevel);
         }
 
