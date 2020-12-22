@@ -36,6 +36,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _logger.LogWarning("Discord socket opened!");
 
             client.CallHook("DiscordSocket_WebSocketOpened");
+            retries = 0;
         }
 
         public void SocketClosed(object sender, CloseEventArgs e)
