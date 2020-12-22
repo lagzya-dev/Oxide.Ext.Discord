@@ -91,19 +91,29 @@ namespace Oxide.Ext.Discord.DiscordObjects
             client.REST.DoRequest($"/webhooks/{id}/{token}", RequestMethod.DELETE, null, callback);
         }
 
-        public void ExecuteWebhook(DiscordClient client, bool wait, WebhookPayload payload, Action callback = null)
+        public void ExecuteWebhook(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{id}/{token}?wait={wait}", RequestMethod.POST, payload, callback);
+            client.REST.DoRequest($"/webhooks/{id}/{token}?wait=true", RequestMethod.POST, payload, callback);
         }
 
-        public void ExecuteWebhookSlack(DiscordClient client, bool wait, WebhookPayload payload, Action callback = null)
+        public void ExecuteWebhookSlack(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{id}/{token}/slack?wait={wait}", RequestMethod.POST, payload, callback);
+            client.REST.DoRequest($"/webhooks/{id}/{token}/slack?wait=true", RequestMethod.POST, payload, callback);
         }
 
-        public void ExecuteWebhookGitHub(DiscordClient client, bool wait, WebhookPayload payload, Action callback = null)
+        public void ExecuteWebhookGitHub(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{id}/{token}/github?wait={wait}", RequestMethod.POST, payload, callback);
+            client.REST.DoRequest($"/webhooks/{id}/{token}/github?wait=true", RequestMethod.POST, payload, callback);
+        }
+
+        public void EditWebhookMessage(DiscordClient client, string messageId, WebhookPayload payload, Action<Message> callback = null)
+        {
+            client.REST.DoRequest($"/webhooks/{id}/{token}/messages/{messageId}", RequestMethod.PATCH, payload, callback);
+        }
+        
+        public void DeleteWebhookMessage(DiscordClient client, string messageId, Action callback = null)
+        {
+            client.REST.DoRequest($"/webhooks/{id}/{token}/messages/{messageId}", RequestMethod.DELETE, null, callback);
         }
     }
 }

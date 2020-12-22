@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.DiscordObjects.Interaction;
+
 namespace Oxide.Ext.Discord.WebSockets
 {
     using System;
@@ -571,6 +573,11 @@ namespace Oxide.Ext.Discord.WebSockets
                             client.CallHook("Discord_InviteDeleted", null, invitedeletedUpdate);
                             break;
                         }
+                        
+                        case "INTERACTION_CREATE":
+                            Interaction interaction = payload.EventData.ToObject<Interaction>();
+                            client.CallHook("Discord_InteractionCreated", null, interaction);
+                            break;
 
                         default:
                         {
