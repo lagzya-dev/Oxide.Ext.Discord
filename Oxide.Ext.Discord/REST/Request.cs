@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.REST
 
         public string Endpoint { get; }
 
-        public string RequestUrl => URLBase + "/" + ApiVersion + Route + Endpoint;
+        public string RequestUrl => UrlBase + "/" + ApiVersion + Route + Endpoint;
 
         public Dictionary<string, string> Headers { get; }
 
@@ -38,6 +38,7 @@ namespace Oxide.Ext.Discord.REST
         private byte _retries;
         
         private const string UrlBase = "https://discordapp.com/api";
+        private const string ApiVersion = "v8";
 
         private const int RequestMaxLength = 30;
 
