@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.DiscordEvents
+﻿using Oxide.Ext.Discord.DiscordObjects.SlashCommands;
+
+namespace Oxide.Ext.Discord.DiscordEvents
 {
     using System.Collections.Generic;
     using Newtonsoft.Json;
@@ -21,7 +23,10 @@
         [JsonProperty("session_id")]
         public string SessionID { get; set; }
 
-        [JsonProperty("_trace")]
-        public string[] Trace { get; set; }
+        [JsonProperty("shard")]
+        public List<int> Shard { get; set; }
+        
+        [JsonProperty("application")]
+        public Application Application { get; set; }
     }
 }

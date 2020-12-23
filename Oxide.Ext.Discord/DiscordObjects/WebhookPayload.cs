@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.DiscordObjects
+﻿using Newtonsoft.Json;
+
+namespace Oxide.Ext.Discord.DiscordObjects
 {
     using System.Collections.Generic;
 
@@ -15,5 +17,8 @@
         public string file { get; set; }
 
         public List<Embed> embeds { get; set; }
+        
+        [JsonProperty("allowed_mentions")]
+        public AllowedMentions AllowedMentions { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.DiscordObjects
+﻿using Newtonsoft.Json;
+
+namespace Oxide.Ext.Discord.DiscordObjects
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +13,9 @@
         public List<User> users { get; set; }
 
         public List<AuditLogEntry> audit_log_entries { get; set; }
+        
+        [JsonProperty("integrations")]
+        public List<Integration> Integrations { get; set; }
 
         public static void GetGuildAuditLog(DiscordClient client, Guild guild, Action<AuditLog> callback = null) => GetGuildAuditLog(client, guild.id, callback);
 

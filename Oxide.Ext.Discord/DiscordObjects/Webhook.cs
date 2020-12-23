@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.DiscordObjects
+﻿using Newtonsoft.Json;
+
+namespace Oxide.Ext.Discord.DiscordObjects
 {
     using System;
     using System.Collections.Generic;
@@ -7,6 +9,9 @@
     public class Webhook
     {
         public string id { get; set; }
+        
+        [JsonProperty("type")]
+        public WebhookType Type { get; set; }
 
         public string guild_id { get; set; }
 
@@ -19,6 +24,9 @@
         public string avatar { get; set; }
 
         public string token { get; set; }
+        
+        [JsonProperty("application_id")]
+        public string ApplicationId { get; set; }
 
         public static void CreateWebhook(DiscordClient client, string channelID, string name, string avatar, Action<Webhook> callback = null)
         {
@@ -83,19 +91,29 @@
             client.REST.DoRequest($"/webhooks/{id}/{token}", RequestMethod.DELETE, null, callback);
         }
 
-        public void ExecuteWebhook(DiscordClient client, bool wait, WebhookPayload payload, Action callback = null)
+        public void ExecuteWebhook(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{id}/{token}?wait={wait}", RequestMethod.POST, payload, callback);
+            client.REST.DoRequest($"/webhooks/{id}/{token}?wait=true", RequestMethod.POST, payload, callback);
         }
 
-        public void ExecuteWebhookSlack(DiscordClient client, bool wait, WebhookPayload payload, Action callback = null)
+        public void ExecuteWebhookSlack(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{id}/{token}/slack?wait={wait}", RequestMethod.POST, payload, callback);
+            client.REST.DoRequest($"/webhooks/{id}/{token}/slack?wait=true", RequestMethod.POST, payload, callback);
         }
 
-        public void ExecuteWebhookGitHub(DiscordClient client, bool wait, WebhookPayload payload, Action callback = null)
+        public void ExecuteWebhookGitHub(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{id}/{token}/github?wait={wait}", RequestMethod.POST, payload, callback);
+            client.REST.DoRequest($"/webhooks/{id}/{token}/github?wait=true", RequestMethod.POST, payload, callback);
+        }
+
+        public void EditWebhookMessage(DiscordClient client, string messageId, WebhookPayload payload, Action<Message> callback = null)
+        {
+            client.REST.DoRequest($"/webhooks/{id}/{token}/messages/{messageId}", RequestMethod.PATCH, payload, callback);
+        }
+        
+        public void DeleteWebhookMessage(DiscordClient client, string messageId, Action callback = null)
+        {
+            client.REST.DoRequest($"/webhooks/{id}/{token}/messages/{messageId}", RequestMethod.DELETE, null, callback);
         }
     }
 }

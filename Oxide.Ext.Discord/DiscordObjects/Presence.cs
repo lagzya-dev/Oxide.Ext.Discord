@@ -1,14 +1,16 @@
-﻿namespace Oxide.Ext.Discord.DiscordObjects
+﻿using System.Collections.Generic;
+
+namespace Oxide.Ext.Discord.DiscordObjects
 {
     using Newtonsoft.Json;
 
     public class Presence
     {
         [JsonProperty("status")]
-        public string Status { get; set; } = "online";
+        public PresenceStatus Status { get; set; } = PresenceStatus.Online;
 
-        [JsonProperty("game")]
-        public Game Game { get; set; }
+        [JsonProperty("activities")]
+        public List<Activity> Activities { get; set; }
 
         [JsonProperty("since")]
         public int? Since { get; set; }

@@ -73,6 +73,7 @@ namespace Oxide.Ext.Discord.DiscordObjects
             client.REST.DoRequest($"/users/@me/guilds/{guildID}", RequestMethod.DELETE, null, callback);
         }
 
+        //No longer works for bots
         public void GetUserDMs(DiscordClient client, Action<List<Channel>> callback = null)
         {
             client.REST.DoRequest($"/users/@me/channels", RequestMethod.GET, null, callback);

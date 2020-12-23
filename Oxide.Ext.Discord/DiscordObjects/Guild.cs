@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Linq;
+using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.DiscordObjects
 {
@@ -7,13 +8,9 @@ namespace Oxide.Ext.Discord.DiscordObjects
     using Newtonsoft.Json.Linq;
     using Oxide.Ext.Discord.REST;
 
-    public class Guild
+    public class Guild : GuildCreate
     {
         public string id { get; set; }
-
-        public string name { get; set; }
-
-        public string icon { get; set; }
         
         [JsonProperty("icon_Hash")]
         public string IconHash { get; set; }
@@ -28,29 +25,9 @@ namespace Oxide.Ext.Discord.DiscordObjects
 
         public string permissions { get; set; }
 
-        public string region { get; set; }
-
-        public string afk_channel_id { get; set; }
-
-        public int? afk_timeout { get; set; }
-        
-        public bool? embed_enabled { get; set; }
-        
-        public string embed_channel_id { get; set; }
-        
         public bool? widget_enabled { get; set; }
 
         public string widget_channel_id { get; set; }
-
-        public GuildVerificationLevel verification_level { get; set; }
-
-        //TODO: Move to enum
-        public int default_message_notifications { get; set; }
-
-        //TODO: Move to enum
-        public int explicit_content_filter { get; set; }
-
-        public List<Role> roles { get; set; }
 
         public List<Emoji> emojis { get; set; }
 
@@ -60,8 +37,6 @@ namespace Oxide.Ext.Discord.DiscordObjects
 
         public string application_id { get; set; }
         
-        public string system_channel_id { get; set; }
-
         [JsonProperty("system_channel_flags")]
         public SystemChannelFlags SystemChannelFlags { get; set; }
 
@@ -78,9 +53,7 @@ namespace Oxide.Ext.Discord.DiscordObjects
         public List<VoiceState> voice_states { get; set; }
 
         public List<GuildMember> members { get; set; }
-
-        public List<Channel> channels { get; set; }
-
+        
         public List<Presence> presences { get; set; }
 
         public int? max_presences { get; set; }
@@ -110,25 +83,19 @@ namespace Oxide.Ext.Discord.DiscordObjects
         [JsonProperty("approximate_presence_count")]
         public int? ApproximatePresenceCount { get; set; }
 
-        public static void CreateGuild(DiscordClient client, string name, string region, string icon, GuildVerificationLevel? verificationLevel, int? defaultMessageNotifications, List<Role> roles, List<Channel> channels, Action<Guild> callback = null)
+        public static void CreateGuild(DiscordClient client, GuildCreate create, Action<Guild> callback = null)
         {
-            var jsonObj = new Dictionary<string, object>()
-            {
-                { "name", name },
-                { "region", region },
-                { "icon", icon },
-                { "verification_level", verificationLevel },
-                { "default_message_notifications", defaultMessageNotifications },
-                { "roles", roles },
-                { "channels", channels }
-            };
-
-            client.REST.DoRequest($"/guilds", RequestMethod.POST, jsonObj, callback);
+            client.REST.DoRequest($"/guilds", RequestMethod.POST, create, callback);
         }
 
         public static void GetGuild(DiscordClient client, string guildID, Action<Guild> callback = null)
         {
             client.REST.DoRequest($"/guilds/{guildID}", RequestMethod.GET, null, callback);
+        }
+        
+        public static void GetGuildPreview(DiscordClient client, string guildID, Action<Guild> callback = null)
+        {
+            client.REST.DoRequest($"/guilds/{guildID}/preview", RequestMethod.GET, null, callback);
         }
 
         public void ModifyGuild(DiscordClient client, Action<Guild> callback = null)
@@ -146,21 +113,9 @@ namespace Oxide.Ext.Discord.DiscordObjects
             client.REST.DoRequest($"/guilds/{id}/channels", RequestMethod.GET, null, callback);
         }
 
-        public void CreateGuildChannel(DiscordClient client, Channel channel, Action<Channel> callback = null) => CreateGuildChannel(client, channel.name, channel.type, channel.bitrate, channel.user_limit, channel.permission_overwrites, channel.parent_id, callback);
-
-        public void CreateGuildChannel(DiscordClient client, string name, ChannelType? type, int? bitrate, int? userLimit, List<Overwrite> permissionOverwrites, string parent_id, Action<Channel> callback = null)
+        public void CreateGuildChannel(DiscordClient client, ChannelCreate channel, Action<Channel> callback = null)
         {
-            var jsonObj = new Dictionary<string, object>()
-            {
-                { "name", name },
-                { "type", type },
-                { "bitrate", bitrate },
-                { "user_limit", userLimit },
-                { "permission_overwrites", permissionOverwrites },
-                { "parent_id", parent_id }
-            };
-
-            client.REST.DoRequest($"/guilds/{id}/channels", RequestMethod.POST, jsonObj, callback);
+            client.REST.DoRequest($"/guilds/{id}/channels", RequestMethod.POST, channel, callback);
         }
 
         public void ModifyGuildChannelPositions(DiscordClient client, List<ObjectPosition> positions, Action callback = null)
@@ -173,25 +128,26 @@ namespace Oxide.Ext.Discord.DiscordObjects
             client.REST.DoRequest($"/guilds/{id}/members/{userID}", RequestMethod.GET, null, callback);
         }
 
-        public void ListGuildMembers(DiscordClient client, Action<List<GuildMember>> callback = null)
+        public void ListGuildMembers(DiscordClient client, string afterSnowflake = "0", Action<List<GuildMember>> callback = null)
         {
-            client.REST.DoRequest($"/guilds/{id}/members?limit=1000", RequestMethod.GET, null, callback);
+            client.REST.DoRequest($"/guilds/{id}/members?limit=1000&after={afterSnowflake}", RequestMethod.GET, null, callback);
         }
 
-        public void AddGuildMember(DiscordClient client, GuildMember member, string accessToken, List<Role> roles, Action<GuildMember> callback = null) => this.AddGuildMember(client, member.user.id, accessToken, member.nick, roles, member.mute, member.deaf, callback);
-
-        public void AddGuildMember(DiscordClient client, string userID, string accessToken, string nick, List<Role> roles, bool mute, bool deaf, Action<GuildMember> callback = null)
+        public void AddGuildMember(DiscordClient client, GuildMember member, string accessToken, List<Role> roles, Action<GuildMember> callback = null)
         {
-            var jsonObj = new Dictionary<string, object>()
+            AddGuildMember(client, member.user.id, new AddGuildMember
             {
-                { "access_token", accessToken },
-                { "nick", nick },
-                { "roles", roles },
-                { "mute", mute },
-                { "deaf", deaf }
-            };
+                Deaf = member.deaf,
+                Mute = member.mute,
+                Nick = member.nick,
+                AccessToken = accessToken,
+                Roles = roles.Select(r => r.id).ToList()
+            }, callback);
+        }
 
-            client.REST.DoRequest($"/guilds/{id}/members/{userID}", RequestMethod.PUT, jsonObj, callback);
+        public void AddGuildMember(DiscordClient client, string userId, AddGuildMember member, Action<GuildMember> callback = null)
+        {
+            client.REST.DoRequest($"/guilds/{id}/members/{userId}", RequestMethod.PUT, member, callback);
         }
 
         public void ModifyGuildMember(DiscordClient client, GuildMember member, List<string> roles, string channelId, Action callback = null) => this.ModifyGuildMember(client, member.user.id, member.nick, roles, member.deaf, member.mute, channelId, callback);
@@ -256,16 +212,11 @@ namespace Oxide.Ext.Discord.DiscordObjects
             client.REST.DoRequest($"/guilds/{id}/bans", RequestMethod.GET, null, callback);
         }
 
-        public void CreateGuildBan(DiscordClient client, GuildMember member, int? deleteMessageDays, Action callback = null) => CreateGuildBan(client, member.user.id, deleteMessageDays, callback);
+        public void CreateGuildBan(DiscordClient client, GuildMember member, GuildBan ban, Action callback = null) => CreateGuildBan(client, member.user.id, ban, callback);
 
-        public void CreateGuildBan(DiscordClient client, string userID, int? deleteMessageDays, Action callback = null)
+        public void CreateGuildBan(DiscordClient client, string userID, GuildBan ban, Action callback = null)
         {
-            var jsonObj = new Dictionary<string, object>()
-            {
-                { "delete-message-days", deleteMessageDays }
-            };
-
-            client.REST.DoRequest($"/guilds/{id}/bans/{userID}", RequestMethod.PUT, jsonObj, callback);
+            client.REST.DoRequest($"/guilds/{id}/bans/{userID}", RequestMethod.PUT, ban, callback);
         }
 
         public void RemoveGuildBan(DiscordClient client, string userID, Action callback = null)
@@ -275,30 +226,24 @@ namespace Oxide.Ext.Discord.DiscordObjects
 
         public void GetGuildRoles(DiscordClient client, Action<List<Role>> callback = null)
         {
-            client.REST.DoRequest<List<Role>>($"/guilds/{id}/roles", RequestMethod.GET, null, (returnValue) =>
-            {
-                callback?.Invoke(returnValue as List<Role>);
-            });
+            client.REST.DoRequest($"/guilds/{id}/roles", RequestMethod.GET, null, callback);
         }
 
         public void CreateGuildRole(DiscordClient client, Role role, Action<Role> callback = null)
         {
-            client.REST.DoRequest<Role>($"/guilds/{id}/roles", RequestMethod.POST, role, callback);
+            client.REST.DoRequest($"/guilds/{id}/roles", RequestMethod.POST, role, callback);
         }
 
         public void ModifyGuildRolePositions(DiscordClient client, List<ObjectPosition> positions, Action<List<Role>> callback = null)
         {
-            client.REST.DoRequest<List<Role>>($"/guilds/{id}/roles", RequestMethod.PATCH, positions, callback);
+            client.REST.DoRequest($"/guilds/{id}/roles", RequestMethod.PATCH, positions, callback);
         }
 
         public void ModifyGuildRole(DiscordClient client, Role role, Action<Role> callback = null) => ModifyGuildRole(client, role.id, role, callback);
 
         public void ModifyGuildRole(DiscordClient client, string roleID, Role role, Action<Role> callback = null)
         {
-            client.REST.DoRequest<Role>($"/guilds/{id}/roles/{roleID}", RequestMethod.PATCH, role, (returnValue) =>
-            {
-                callback?.Invoke(returnValue as Role);
-            });
+            client.REST.DoRequest<Role>($"/guilds/{id}/roles/{roleID}", RequestMethod.PATCH, role, callback);
         }
 
         public void DeleteGuildRole(DiscordClient client, Role role, Action callback = null) => DeleteGuildRole(client, role.id, callback);
@@ -308,22 +253,20 @@ namespace Oxide.Ext.Discord.DiscordObjects
             client.REST.DoRequest($"/guilds/{id}/roles/{roleID}", RequestMethod.DELETE, null, callback);
         }
 
-        public void GetGuildPruneCount(DiscordClient client, int? days, Action<int?> callback = null)
+        public void GetGuildPruneCount(DiscordClient client, GuildPruneGet prune, Action<int?> callback = null)
         {
-            client.REST.DoRequest<JObject>($"/guilds/{id}/prune?days={days}", RequestMethod.GET, null, (returnValue) =>
+            client.REST.DoRequest<JObject>($"/guilds/{id}/prune?{prune.ToQueryString()}", RequestMethod.GET, null, (returnValue) =>
             {
-                var pruned = returnValue.GetValue("pruned").ToObject<int?>();
-
+                int? pruned = returnValue.GetValue("pruned").ToObject<int?>();
                 callback?.Invoke(pruned);
             });
         }
 
-        public void BeginGuildPrune(DiscordClient client, int? days, Action<int?> callback = null)
+        public void BeginGuildPrune(DiscordClient client, GuildPruneBegin prune, Action<int?> callback = null)
         {
-            client.REST.DoRequest<JObject>($"/guilds/{id}/prune?days={days}", RequestMethod.POST, null, (returnValue) =>
+            client.REST.DoRequest<JObject>($"/guilds/{id}/prune?{prune.ToQueryString()}", RequestMethod.POST, null, (returnValue) =>
             {
-                var pruned = returnValue.GetValue("pruned").ToObject<int?>();
-
+                int? pruned = returnValue.GetValue("pruned").ToObject<int?>();
                 callback?.Invoke(pruned);
             });
         }
@@ -363,7 +306,7 @@ namespace Oxide.Ext.Discord.DiscordObjects
             var jsonObj = new Dictionary<string, object>()
             {
                 { "expire_behaviour", expireBehaviour },
-                { "expire_grace_peroid", expireGracePeroid },
+                { "expire_grace_period", expireGracePeroid },
                 { "enable_emoticons", enableEmoticons }
             };
 
@@ -383,15 +326,20 @@ namespace Oxide.Ext.Discord.DiscordObjects
         {
             client.REST.DoRequest($"/guilds/{id}/integrations/{integrationID}/sync", RequestMethod.POST, null, callback);
         }
-
-        public void GetGuildEmbed(DiscordClient client, Action<GuildEmbed> callback = null)
+        
+        public void GetGuildWidgetSettings(DiscordClient client, Action<GuildWidgetSettings> callback = null)
         {
-            client.REST.DoRequest($"/guilds/{id}/embed", RequestMethod.GET, null, callback);
+            client.REST.DoRequest($"/guilds/{id}/widget", RequestMethod.GET, null, callback);
+        }
+        
+        public void ModifyGuildWidget(DiscordClient client, GuildWidget widget, Action<GuildWidget> callback = null)
+        {
+            client.REST.DoRequest($"/guilds/{id}/widget", RequestMethod.PATCH, widget, callback);
         }
 
-        public void ModifyGuildEmbed(DiscordClient client, GuildEmbed guildEmbed, Action<GuildEmbed> callback = null)
+        public void GetGuildWidget(DiscordClient client, Action<GuildWidget> callback = null)
         {
-            client.REST.DoRequest($"/guilds/{id}/embed", RequestMethod.PATCH, guildEmbed, callback);
+            client.REST.DoRequest($"/guilds/{id}/widget.json", RequestMethod.GET, null, callback);
         }
 
         public void GetGuildVanityURL(DiscordClient client, Action<Invite> callback = null)
@@ -416,7 +364,7 @@ namespace Oxide.Ext.Discord.DiscordObjects
         
         public void UpdateGuildEmoji(DiscordClient client, string emojiId, EmojiUpdate emoji, Action<Emoji> callback = null)
         {
-            client.REST.DoRequest($"/guilds/{id}/emojis/{emojiId}", RequestMethod.POST, emoji, callback);
+            client.REST.DoRequest($"/guilds/{id}/emojis/{emojiId}", RequestMethod.PATCH, emoji, callback);
         }
         
         public void DeleteGuildEmoji(DiscordClient client, string emojiId, Action callback = null)
@@ -444,10 +392,6 @@ namespace Oxide.Ext.Discord.DiscordObjects
                 this.afk_channel_id = updatedGuild.afk_channel_id;
             if (updatedGuild.afk_timeout != null)
                 this.afk_timeout = updatedGuild.afk_timeout;
-            if (updatedGuild.embed_enabled != null)
-                this.embed_enabled = updatedGuild.embed_enabled;
-            if (updatedGuild.embed_channel_id != null)
-                this.embed_channel_id = updatedGuild.embed_channel_id;
             if (updatedGuild.widget_enabled != null)
                 this.widget_enabled = updatedGuild.widget_enabled;
             if (updatedGuild.widget_channel_id != null)

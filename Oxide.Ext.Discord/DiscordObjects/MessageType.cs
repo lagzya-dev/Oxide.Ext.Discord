@@ -17,6 +17,6 @@
         ChannelFollowAdd = 12,
         GuildDiscoveryDisqualified = 14,
         GuildDiscoveryRequalified = 15,
-        Reply = 19 //Note: Will not be used until we switch to V8 API
+        Reply = 19
     }
 }

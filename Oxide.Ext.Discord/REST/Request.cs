@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.REST
 
         public string Endpoint { get; }
 
-        public string RequestUrl => UrlBase + Route + Endpoint;
+        public string RequestUrl => UrlBase + "/" + ApiVersion + Route + Endpoint;
 
         public Dictionary<string, string> Headers { get; }
 
@@ -38,6 +38,7 @@ namespace Oxide.Ext.Discord.REST
         private byte _retries;
         
         private const string UrlBase = "https://discordapp.com/api";
+        private const string ApiVersion = "v8";
 
         private const int RequestMaxLength = 30;
 
@@ -204,7 +205,7 @@ namespace Oxide.Ext.Discord.REST
                 RateLimit limit = response.ParseData<RateLimit>();
                 if (limit.global)
                 {
-                    GlobalRateLimit.Reached(rateRetryAfter);
+                    GlobalRateLimit.Reached(rateRetryAfter * 1000);
                 }
             }
 
