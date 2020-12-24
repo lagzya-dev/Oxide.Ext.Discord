@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord
     public class DiscordExtension : Extension
     {
         private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 7);
-        public const string TestVersion = "RC.1";
+        public const string TestVersion = "RC.2";
         
         private readonly ILogger _logger;
         
