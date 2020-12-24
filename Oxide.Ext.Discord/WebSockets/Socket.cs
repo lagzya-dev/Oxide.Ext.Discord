@@ -1,23 +1,24 @@
-﻿namespace Oxide.Ext.Discord.WebSockets
-{
-    using System;
-    using Oxide.Core;
-    using Oxide.Ext.Discord.Exceptions;
-    using WebSocketSharp;
+﻿using System;
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Gateway;
+using Oxide.Ext.Discord.Exceptions;
+using WebSocketSharp;
 
+namespace Oxide.Ext.Discord.WebSockets
+{
     public class Socket
     {
-        private DiscordClient client;
+        private readonly DiscordClient _client;
 
-        private WebSocket socket;
+        private WebSocket _socket;
 
-        private SocketListner listner;
+        private SocketListener _listener;
 
-        public bool hasConnectedOnce = false;
+        public bool ShouldAttemptResume;
 
         public Socket(DiscordClient client)
         {
-            this.client = client;
+            _client = client;
         }
 
         public void Connect(string url)
@@ -27,71 +28,93 @@
                 throw new NoURLException();
             }
 
-            if (socket != null)
+            if (_socket != null)
             {
                 // Assume force-reconnect
                 Disconnect(false);
             }
-            client.DestroyHeartbeat();
+            
+            _client.DestroyHeartbeat();
 
-            socket = new WebSocket($"{url}/?v=6&encoding=json");
+            _socket = new WebSocket($"{url}/?v=6&encoding=json");
 
-            if(listner == null)
-                listner = new SocketListner(client, this);
+            _listener ??= new SocketListener(_client, this);
 
-            socket.OnOpen += listner.SocketOpened;
-            socket.OnClose += listner.SocketClosed;
-            socket.OnError += listner.SocketErrored;
-            socket.OnMessage += listner.SocketMessage;
-
-            socket.ConnectAsync();
+            _socket.OnOpen += _listener.SocketOpened;
+            _socket.OnClose += _listener.SocketClosed;
+            _socket.OnError += _listener.SocketErrored;
+            _socket.OnMessage += _listener.SocketMessage;
+            _socket.ConnectAsync();
         }
 
         public void Disconnect(bool normal = true)
         {
-            if (IsClosed() || IsClosing()) return;
+            if (IsClosingOrClosed())
+            {
+                return;
+            }
 
-            socket?.CloseAsync(normal ? CloseStatusCode.Normal : CloseStatusCode.Abnormal);
+            _socket.CloseAsync(normal ? CloseStatusCode.Normal : CloseStatusCode.Abnormal);
         }
 
         public void ReconnectRequested()
         {
-            if (IsClosed() || IsClosing()) return;
+            if (IsClosingOrClosed())
+            {
+                return;
+            }
 
-            socket?.CloseAsync(4000, "Discord server requested reconnect");
+            _socket?.CloseAsync(4199, "Discord server requested reconnect");
         }
 
         public void Dispose()
         {
-            listner = null;
-            socket = null;
+            _listener = null;
+            _socket = null;
+        }
+
+        public void Send(SendOpCode opCode, object data, Action<bool> completed = null)
+        {
+            if (!IsAlive())
+            {
+                return;
+            }
+            
+            SPayload opcode = new SPayload
+            {
+                OpCode = opCode,
+                Payload = data
+            };
+            
+            _socket.SendAsync(JsonConvert.SerializeObject(opcode), completed);
         }
 
         public void Send(string message, Action<bool> completed = null)
         {
             if (IsAlive())
-                socket.SendAsync(message, completed);
+            {
+                _socket.SendAsync(message, completed);
+            }
         }
 
         public bool IsAlive()
         {
-            if (socket == null)
+            if (_socket == null)
+            {
                 return false;
-            return socket.ReadyState == WebSocketState.Open;
+            }
+            
+            return _socket.ReadyState == WebSocketState.Open;
         }
 
-        public bool IsClosing()
+        public bool IsClosingOrClosed()
         {
-            if (socket == null)
+            if (_socket == null)
+            {
                 return false;
-            return socket.ReadyState == WebSocketState.Closing;
-        }
+            }
 
-        public bool IsClosed()
-        {
-            if (socket == null)
-                return true;
-            return socket.ReadyState == WebSocketState.Closed;
+            return _socket.ReadyState == WebSocketState.Closing || _socket.ReadyState == WebSocketState.Closed;
         }
     }
 }

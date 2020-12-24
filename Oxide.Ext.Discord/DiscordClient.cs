@@ -1,24 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Timers;
+using Oxide.Core;
+using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.DiscordEvents;
+using Oxide.Ext.Discord.DiscordObjects;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Gateway;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.WebSockets;
 
 namespace Oxide.Ext.Discord
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Timers;
-    using Newtonsoft.Json;
-    using Oxide.Core;
-    using Oxide.Core.Plugins;
-    using Oxide.Ext.Discord.Attributes;
-    using Oxide.Ext.Discord.DiscordEvents;
-    using Oxide.Ext.Discord.DiscordObjects;
-    using Oxide.Ext.Discord.Exceptions;
-    using Oxide.Ext.Discord.Gateway;
-    using Oxide.Ext.Discord.Helpers;
-    using Oxide.Ext.Discord.REST;
-    using Oxide.Ext.Discord.WebSockets;
-
     public class DiscordClient
     {
         public List<Plugin> Plugins { get; private set; } = new List<Plugin>();
@@ -30,7 +28,7 @@ namespace Oxide.Ext.Discord
         public DiscordSettings Settings { get; set; } = new DiscordSettings();
 
         public List<Guild> DiscordServers { get; set; } = new List<Guild>();
-        public List<Channel> DMs { get; set; } = new List<Channel>();
+        public List<Channel> DMs { get; } = new List<Channel>();
         
         public Guild DiscordServer
         {
@@ -55,6 +53,8 @@ namespace Oxide.Ext.Discord
         public bool requestReconnect = false;
 
         private ILogger _logger;
+
+        internal bool Disconnected;
 
         public void Initialize(Plugin plugin, DiscordSettings settings)
         {
@@ -93,6 +93,7 @@ namespace Oxide.Ext.Discord
                 return;
             }*/
 
+            Disconnected = false;
             RegisterPlugin(plugin);
             UpdatePluginReference(plugin);
             CallHook("DiscordSocket_Initialized");
@@ -115,6 +116,7 @@ namespace Oxide.Ext.Discord
 
         public void Disconnect()
         {
+            Disconnected = true;
             _webSocket?.Disconnect();
             DestroyHeartbeat();
             _webSocket?.Dispose();
@@ -282,15 +284,8 @@ namespace Oxide.Ext.Discord
                 LargeThreshold = 50,
                 Shard = new List<int>() { 0, 1 }
             };
-
-            var opcode = new SPayload()
-            {
-                OP = OpCodes.Identify,
-                Payload = identify
-            };
-            var payload = JsonConvert.SerializeObject(opcode);
-
-            _webSocket?.Send(payload);
+            
+            _webSocket.Send(SendOpCode.Identify, identify);
         }
         
         public void Resume()
@@ -302,14 +297,7 @@ namespace Oxide.Ext.Discord
                 Token = Settings.ApiToken
             };
 
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.Resume,
-                Data = resume
-            };
-
-            string payload = JsonConvert.SerializeObject(packet);
-            _webSocket?.Send(payload);
+            _webSocket.Send(SendOpCode.Resume, resume);
         }
         
         public void SendHeartbeat()
@@ -319,18 +307,13 @@ namespace Oxide.Ext.Discord
                 // Didn't receive an ACK, thus connection can be considered zombie, thus destructing.
                 _logger.LogError("Discord did not respond to Heartbeat! Disconnecting..");
                 requestReconnect = true;
-                _webSocket.Disconnect(false);
+                _webSocket.ReconnectRequested();
                 return;
             }
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.Heartbeat,
-                Data = this.Sequence
-            };
-
+            
             HeartbeatACK = false;
-            string message = JsonConvert.SerializeObject(packet);
-            _webSocket?.Send(message);
+            
+            _webSocket.Send(SendOpCode.Heartbeat, Sequence);
 
             _lastHeartbeat = Time.TimeSinceEpoch();
 
@@ -351,14 +334,7 @@ namespace Oxide.Ext.Discord
                 Nonce = nonce
             };
 
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.RequestGuildMembers,
-                Data = requestGuildMembers
-            };
-
-            string payload = JsonConvert.SerializeObject(packet);
-            _webSocket?.Send(payload);
+            _webSocket.Send(SendOpCode.RequestGuildMembers, requestGuildMembers);
         }
 
         public void RequestGuildMembers(Guild guild, string query = "", int limit = 0)
@@ -375,27 +351,13 @@ namespace Oxide.Ext.Discord
                 SelfDeaf = selfDeaf,
                 SelfMute = selfMute
             };
-
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.VoiceStateUpdate,
-                Data = voiceState
-            };
-
-            string payload = JsonConvert.SerializeObject(packet);
-            _webSocket?.Send(payload);
+            
+            _webSocket.Send(SendOpCode.VoiceStateUpdate, voiceState);
         }
 
         public void UpdateStatus(Presence presence)
         {
-            var opcode = new SPayload()
-            {
-                OP = OpCodes.StatusUpdate,
-                Payload = presence
-            };
-
-            var payload = JsonConvert.SerializeObject(opcode);
-            _webSocket?.Send(payload);
+            _webSocket.Send(SendOpCode.StatusUpdate, presence);
         }
 
         public Guild GetGuild(string id)
