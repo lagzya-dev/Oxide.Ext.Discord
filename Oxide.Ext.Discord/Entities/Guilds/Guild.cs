@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
+using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
@@ -100,6 +101,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         
         [JsonProperty("approximate_presence_count")]
         public int? ApproximatePresenceCount { get; set; }
+
+        public string IconUrl => DiscordCdn.GetGuildIconUrl(Id, Icon);
+        public string SplashUrl => DiscordCdn.GetGuildSplashUrl(Id, Splash);
+        public string DiscoverySplashUrl => DiscordCdn.GetGuildIconUrl(Id, DiscoverySplash);
+        public string BannerUrl => DiscordCdn.GetGuildIconUrl(Id, Banner);
 
         public static void CreateGuild(DiscordClient client, GuildCreate create, Action<Guild> callback = null)
         {

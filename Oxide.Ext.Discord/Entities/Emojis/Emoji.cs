@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers.Cdn;
 
 namespace Oxide.Ext.Discord.Entities.Emojis
 {
@@ -22,5 +23,7 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         
         [JsonProperty("available")]
         public bool? Available { get; set; }
+        
+        public string Url => DiscordCdn.GetCustomEmojiUrl(Id, Animated.HasValue && Animated.Value ? ImageFormat.Gif : ImageFormat.Png);
     }
 }

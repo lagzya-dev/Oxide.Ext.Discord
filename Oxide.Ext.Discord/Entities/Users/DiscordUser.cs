@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users.Connections;
+using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Users
@@ -48,6 +49,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         
         [JsonProperty("public_flags")]
         public UserFlags? PublicFlags { get; set; }
+
+        public string GetDefaultAvatarUrl => DiscordCdn.GetUserDefaultAvatarUrl(Id, Discriminator);
+        public string GetAvatarUrl => DiscordCdn.GetUserAvatarUrl(Id, Avatar);
 
         public static void GetCurrentUser(DiscordClient client, Action<DiscordUser> callback = null)
         {

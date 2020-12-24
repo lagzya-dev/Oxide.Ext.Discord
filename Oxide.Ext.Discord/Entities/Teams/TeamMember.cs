@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
 
-namespace Oxide.Ext.Discord.Entities.Team
+namespace Oxide.Ext.Discord.Entities.Teams
 {
     public class TeamMember
     {

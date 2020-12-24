@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Teams;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.SlashCommands
@@ -40,7 +42,7 @@ namespace Oxide.Ext.Discord.Entities.SlashCommands
         public string Verify { get; set; }
         
         [JsonProperty("team")]
-        public Team.Team Team { get; set; }
+        public Team Team { get; set; }
         
         [JsonProperty("guild_id")]
         public string GuildId { get; set; }
@@ -55,7 +57,9 @@ namespace Oxide.Ext.Discord.Entities.SlashCommands
         public string CoverImage { get; set; } 
         
         [JsonProperty("flags")]
-        public int Flags { get; set; } 
+        public int Flags { get; set; }
+
+        public string GetApplicationIconUrl => DiscordCdn.GetApplicationIconUrl(Id, Icon);
         
         public void GetGlobalApplicationCommands(DiscordClient client, Action<List<ApplicationCommand>> callback = null)
         {

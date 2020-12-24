@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Team
+namespace Oxide.Ext.Discord.Entities.Teams
 {
     public enum TeamMembershipState
     {
