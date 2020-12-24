@@ -336,7 +336,7 @@ namespace Oxide.Ext.Discord
 
         public void UpdateStatus(StatusUpdate statusUpdate)
         {
-            _webSocket.Send(SendOpCode.StatusUpdate, presence);
+            _webSocket.Send(SendOpCode.StatusUpdate, statusUpdate);
         }
 
         public Guild GetGuild(string id)

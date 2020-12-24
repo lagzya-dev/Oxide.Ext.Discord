@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Oxide.Core;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.REST
 {

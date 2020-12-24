@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
 using Time = Oxide.Ext.Discord.Helpers.Time;
 

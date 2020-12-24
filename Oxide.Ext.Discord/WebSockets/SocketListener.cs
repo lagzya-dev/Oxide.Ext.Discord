@@ -4,10 +4,15 @@ using System.Linq;
 using System.Timers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Oxide.Ext.Discord.DiscordEvents;
-using Oxide.Ext.Discord.DiscordObjects;
+using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities.Roles;
+using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Gateway;
 using Oxide.Ext.Discord.Logging;
 using WebSocketSharp;
 
@@ -239,7 +244,7 @@ namespace Oxide.Ext.Discord.WebSockets
                             }
 
                             _client.DiscordServers = ready.Guilds;
-                            _client.SessionID = ready.SessionID;
+                            _client.SessionID = ready.SessionId;
                             
                             _client.CallHook("Discord_Ready", null, ready);
                             break;
@@ -256,13 +261,13 @@ namespace Oxide.Ext.Discord.WebSockets
                         case "CHANNEL_CREATE":
                         {
                             Channel channel = payload.EventData.ToObject<Channel>();
-                            if (channel.type == ChannelType.DM || channel.type == ChannelType.GROUP_DM)
+                            if (channel.Type == ChannelType.DM || channel.Type == ChannelType.GROUP_DM)
                             {
                                 _client.DMs.Add(channel);
                             }
                             else
                             {
-                                _client.GetGuild(channel.guild_id).channels.Add(channel);
+                                _client.GetGuild(channel.GuildId).Channels.Add(channel);
                             }
                             _client.CallHook("Discord_ChannelCreate", null, channel);
                             break;
@@ -271,29 +276,29 @@ namespace Oxide.Ext.Discord.WebSockets
                         case "CHANNEL_UPDATE":
                         {
                             Channel channelUpdated = payload.EventData.ToObject<Channel>();
-                            Channel channelPrevious = (channelUpdated.type == ChannelType.DM || channelUpdated.type == ChannelType.GROUP_DM)
-                                ? _client.DMs.FirstOrDefault(x => x.id == channelUpdated.id)
-                                : _client.GetGuild(channelUpdated.guild_id).channels.FirstOrDefault(x => x.id == channelUpdated.id);
+                            Channel channelPrevious = (channelUpdated.Type == ChannelType.DM || channelUpdated.Type == ChannelType.GROUP_DM)
+                                ? _client.DMs.FirstOrDefault(x => x.Id == channelUpdated.Id)
+                                : _client.GetGuild(channelUpdated.GuildId).Channels.FirstOrDefault(x => x.Id == channelUpdated.Id);
 
                             if (channelPrevious != null)
                             {
-                                if (channelUpdated.type == ChannelType.DM || channelUpdated.type == ChannelType.GROUP_DM)
+                                if (channelUpdated.Type == ChannelType.DM || channelUpdated.Type == ChannelType.GROUP_DM)
                                 {
                                     _client.DMs.Remove(channelPrevious);
                                 }
                                 else
                                 {
-                                    _client.GetGuild(channelUpdated.guild_id).channels.Remove(channelPrevious);
+                                    _client.GetGuild(channelUpdated.GuildId).Channels.Remove(channelPrevious);
                                 }
                             }
 
-                            if (channelUpdated.type == ChannelType.DM || channelUpdated.type == ChannelType.GROUP_DM)
+                            if (channelUpdated.Type == ChannelType.DM || channelUpdated.Type == ChannelType.GROUP_DM)
                             {
                                 _client.DMs.Add(channelUpdated);
                             }
                             else
                             {
-                                _client.GetGuild(channelUpdated.guild_id).channels.Add(channelUpdated);
+                                _client.GetGuild(channelUpdated.GuildId).Channels.Add(channelUpdated);
                             }
 
                             _client.CallHook("Discord_ChannelUpdate", null, channelUpdated, channelPrevious);
@@ -304,7 +309,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         {
                             Channel channel = payload.EventData.ToObject<Channel>();
                             
-                            _client.GetGuild(channel.guild_id).channels.RemoveAll(c => c.id == channel.id);
+                            _client.GetGuild(channel.GuildId).Channels.RemoveAll(c => c.Id == channel.Id);
 
                             _client.CallHook("Discord_ChannelDelete", null, channel);
                             break;
@@ -321,14 +326,14 @@ namespace Oxide.Ext.Discord.WebSockets
                         case "GUILD_CREATE":
                         {
                             Guild guild = payload.EventData.ToObject<Guild>();
-                            string id = guild.id;
-                            bool unavailable = guild.unavailable ?? false;
+                            string id = guild.Id;
+                            bool unavailable = guild.Unavailable ?? false;
                             if(_client.GetGuild(id) == null)
                             {
                                 _client.DiscordServers.Add(guild);
                                 _logger.LogDebug($"Guild ID ({id}) added to list.");
                             }
-                            else if(unavailable == false && (_client.GetGuild(id)?.unavailable ?? false))
+                            else if(unavailable == false && (_client.GetGuild(id)?.Unavailable ?? false))
                             {
                                 _client.UpdateGuild(id, guild);
                                 _logger.LogDebug($"Guild ID ({id}) updated to list.");
@@ -340,7 +345,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         case "GUILD_UPDATE":
                         {
                             Guild guildUpdate = payload.EventData.ToObject<Guild>();
-                            _client.GetGuild(guildUpdate.id).Update(guildUpdate);
+                            _client.GetGuild(guildUpdate.Id).Update(guildUpdate);
                             _client.CallHook("Discord_GuildUpdate", null, guildUpdate);
                             break;
                         }
@@ -348,15 +353,15 @@ namespace Oxide.Ext.Discord.WebSockets
                         case "GUILD_DELETE":
                         {
                             Guild guildDelete = payload.EventData.ToObject<Guild>();
-                            if(guildDelete.unavailable ?? false) // outage
+                            if(guildDelete.Unavailable ?? false) // outage
                             {
-                                _logger.LogDebug($"Guild ID {guildDelete.id} outage!");
-                                _client.UpdateGuild(guildDelete.id, guildDelete);
+                                _logger.LogDebug($"Guild ID {guildDelete.Id} outage!");
+                                _client.UpdateGuild(guildDelete.Id, guildDelete);
                             }
                             else
                             {
-                                _logger.LogDebug($"Guild ID {guildDelete.id} removed from list");
-                                _client.DiscordServers.Remove(_client.GetGuild(guildDelete.id)); // guildDelete may not be same reference
+                                _logger.LogDebug($"Guild ID {guildDelete.Id} removed from list");
+                                _client.DiscordServers.Remove(_client.GetGuild(guildDelete.Id)); // guildDelete may not be same reference
                             }
                             _client.CallHook("Discord_GuildDelete", null, guildDelete);
                             break;
@@ -364,14 +369,14 @@ namespace Oxide.Ext.Discord.WebSockets
 
                         case "GUILD_BAN_ADD":
                         {
-                            User user = payload.EventData.ToObject<BanObject>().user;
+                            DiscordUser user = payload.EventData.ToObject<GuildBanEvent>().User;
                             _client.CallHook("Discord_GuildBanAdd", null, user);
                             break;
                         }
 
                         case "GUILD_BAN_REMOVE":
                         {
-                            User user = payload.EventData.ToObject<BanObject>().user;
+                            DiscordUser user = payload.EventData.ToObject<GuildBanEvent>().User;
                             _client.CallHook("Discord_GuildBanRemove", null, user);
                             break;
                         }
@@ -394,7 +399,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         {
                             GuildMemberAdd memberAdded = payload.EventData.ToObject<GuildMemberAdd>();
 
-                            _client.GetGuild(memberAdded.guild_id)?.members.Add(memberAdded);
+                            _client.GetGuild(memberAdded.GuildId)?.Members.Add(memberAdded);
 
                             _client.CallHook("Discord_MemberAdded", null, memberAdded);
                             break;
@@ -404,10 +409,10 @@ namespace Oxide.Ext.Discord.WebSockets
                         {
                             GuildMemberRemove memberRemoved = payload.EventData.ToObject<GuildMemberRemove>();
 
-                            GuildMember member = _client.GetGuild(memberRemoved.guild_id)?.members.FirstOrDefault(x => x.user.id == memberRemoved.user.id);
+                            GuildMember member = _client.GetGuild(memberRemoved.GuildId)?.Members.FirstOrDefault(x => x.User.Id == memberRemoved.User.Id);
                             if (member != null)
                             {
-                                _client.GetGuild(memberRemoved.guild_id)?.members.Remove(member);
+                                _client.GetGuild(memberRemoved.GuildId)?.Members.Remove(member);
                             }
 
                             _client.CallHook("Discord_MemberRemoved", null, member);
@@ -418,16 +423,16 @@ namespace Oxide.Ext.Discord.WebSockets
                         {
                             GuildMemberUpdate memberUpdated = payload.EventData.ToObject<GuildMemberUpdate>();
 
-                            GuildMember newMember = _client.GetGuild(memberUpdated.guild_id)?.members.FirstOrDefault(x => x.user.id == memberUpdated.user.id);
+                            GuildMember newMember = _client.GetGuild(memberUpdated.GuildId)?.Members.FirstOrDefault(x => x.User.Id == memberUpdated.User.Id);
                             if (newMember != null)
                             {
                                 GuildMember oldMember = JObject.FromObject(newMember).ToObject<GuildMember>(); // lazy way to copy the object
-                                if (memberUpdated.user != null)
-                                    newMember.user = memberUpdated.user;
-                                if (memberUpdated.nick != null)
-                                    newMember.nick = memberUpdated.nick;
-                                if (memberUpdated.roles != null)
-                                    newMember.roles = memberUpdated.roles;
+                                if (memberUpdated.User != null)
+                                    newMember.User = memberUpdated.User;
+                                if (memberUpdated.Nick != null)
+                                    newMember.Nick = memberUpdated.Nick;
+                                if (memberUpdated.Roles != null)
+                                    newMember.Roles = memberUpdated.Roles;
                                 _client.CallHook("Discord_GuildMemberUpdate", null, memberUpdated, oldMember);
                             }
 
@@ -445,24 +450,24 @@ namespace Oxide.Ext.Discord.WebSockets
                         {
                             GuildRoleCreate role = payload.EventData.ToObject<GuildRoleCreate>();
 
-                            _client.GetGuild(role.guild_id)?.roles.Add(role.role);
+                            _client.GetGuild(role.GuildId)?.Roles.Add(role.Role);
 
-                            _client.CallHook("Discord_GuildRoleCreate", null, role.role);
+                            _client.CallHook("Discord_GuildRoleCreate", null, role.Role);
                             break;
                         }
 
                         case "GUILD_ROLE_UPDATE":
                         {
                             GuildRoleUpdate update = payload.EventData.ToObject<GuildRoleUpdate>();
-                            Role updatedRole = update.role;
+                            Role updatedRole = update.Role;
 
-                            Role oldRole = _client.GetGuild(update.guild_id).roles.FirstOrDefault(x => x.id == updatedRole.id);
+                            Role oldRole = _client.GetGuild(update.GuildId).Roles.FirstOrDefault(x => x.Id == updatedRole.Id);
                             if (oldRole != null)
                             {
-                                _client.GetGuild(update.guild_id).roles.Remove(oldRole);
+                                _client.GetGuild(update.GuildId).Roles.Remove(oldRole);
                             }
 
-                            _client.GetGuild(update.guild_id).roles.Add(updatedRole);
+                            _client.GetGuild(update.GuildId).Roles.Add(updatedRole);
 
                             _client.CallHook("Discord_GuildRoleUpdate", null, updatedRole, oldRole);
                             break;
@@ -472,10 +477,10 @@ namespace Oxide.Ext.Discord.WebSockets
                         {
                             GuildRoleDelete guildRoleDelete = payload.EventData.ToObject<GuildRoleDelete>();
 
-                            Role deletedRole = _client.GetGuild(guildRoleDelete.guild_id)?.roles.FirstOrDefault(x => x.id == guildRoleDelete.role_id);
+                            Role deletedRole = _client.GetGuild(guildRoleDelete.GuildId)?.Roles.FirstOrDefault(x => x.Id == guildRoleDelete.RoleId);
                             if (deletedRole != null)
                             {
-                                _client.GetGuild(guildRoleDelete.guild_id).roles.Remove(deletedRole);
+                                _client.GetGuild(guildRoleDelete.GuildId).Roles.Remove(deletedRole);
                             }
 
                             _client.CallHook("Discord_GuildRoleDelete", null, deletedRole);
@@ -485,13 +490,13 @@ namespace Oxide.Ext.Discord.WebSockets
                         case "MESSAGE_CREATE":
                         {
                             Message messageCreate = payload.EventData.ToObject<Message>();
-                            Channel channel = messageCreate.guild_id != null ? 
-                                _client.GetGuild(messageCreate.guild_id)?.channels.FirstOrDefault(x => x.id == messageCreate.channel_id) : 
-                                _client.DMs.FirstOrDefault(x => x.id == messageCreate.channel_id);
+                            Channel channel = messageCreate.GuildId != null ? 
+                                _client.GetGuild(messageCreate.GuildId)?.Channels.FirstOrDefault(x => x.Id == messageCreate.ChannelId) : 
+                                _client.DMs.FirstOrDefault(x => x.Id == messageCreate.ChannelId);
                             
                             if (channel != null)
                             {
-                                channel.last_message_id = messageCreate.id;
+                                channel.LastMessageId = messageCreate.Id;
                             }
                             
                             _client.CallHook("Discord_MessageCreate", null, messageCreate);
@@ -521,14 +526,14 @@ namespace Oxide.Ext.Discord.WebSockets
 
                         case "MESSAGE_REACTION_ADD":
                         {
-                            MessageReactionUpdate reaction = payload.EventData.ToObject<MessageReactionUpdate>();
+                            MessageReactionAdd reaction = payload.EventData.ToObject<MessageReactionAdd>();
                             _client.CallHook("Discord_MessageReactionAdd", null, reaction);
                             break;
                         }
 
                         case "MESSAGE_REACTION_REMOVE":
                         {
-                            MessageReactionUpdate reaction = payload.EventData.ToObject<MessageReactionUpdate>();
+                            MessageReactionRemove reaction = payload.EventData.ToObject<MessageReactionRemove>();
                             _client.CallHook("Discord_MessageReactionRemove", null, reaction);
                             break;
                         }
@@ -551,12 +556,12 @@ namespace Oxide.Ext.Discord.WebSockets
                         {
                             PresenceUpdate presenceUpdate = payload.EventData.ToObject<PresenceUpdate>();
 
-                            User updatedPresence = presenceUpdate?.user;
+                            DiscordUser updatedPresence = presenceUpdate?.User;
 
                             if (updatedPresence != null)
                             {
-                                GuildMember updatedMember = _client.GetGuild(presenceUpdate.guild_id)?.members.FirstOrDefault(x => x.user.id == updatedPresence.id);
-                                updatedMember?.user.Update(updatedPresence);
+                                GuildMember updatedMember = _client.GetGuild(presenceUpdate.GuildId)?.Members.FirstOrDefault(x => x.User.Id == updatedPresence.Id);
+                                updatedMember?.User.Update(updatedPresence);
                             }
 
                             _client.CallHook("Discord_PresenceUpdate", null, updatedPresence);
@@ -576,15 +581,15 @@ namespace Oxide.Ext.Discord.WebSockets
 
                         case "USER_UPDATE":
                         {
-                            User user = payload.EventData.ToObject<User>();
+                            DiscordUser user = payload.EventData.ToObject<DiscordUser>();
                             
-                            List<Guild> guilds = _client.DiscordServers.Where(x => x.members.FirstOrDefault(y => y.user.id == user.id) != null).ToList();
+                            List<Guild> guilds = _client.DiscordServers.Where(x => x.Members.FirstOrDefault(y => y.User.Id == user.Id) != null).ToList();
                             foreach(Guild g in guilds)
                             {
-                                GuildMember memberUpdate = g.members.FirstOrDefault(x => x.user.id == user.id);
+                                GuildMember memberUpdate = g.Members.FirstOrDefault(x => x.User.Id == user.Id);
                                 if (memberUpdate != null)
                                 {
-                                    memberUpdate.user = user;
+                                    memberUpdate.User = user;
                                 }
                             }
 

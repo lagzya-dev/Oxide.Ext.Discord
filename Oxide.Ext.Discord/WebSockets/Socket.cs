@@ -1,8 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Gateway;
-using Oxide.Ext.Discord.Exceptions;
 using WebSocketSharp;
 
 namespace Oxide.Ext.Discord.WebSockets
