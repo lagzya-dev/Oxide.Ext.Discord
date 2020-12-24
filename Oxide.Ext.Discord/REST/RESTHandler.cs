@@ -6,57 +6,63 @@ using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.REST
 {
-    public class RESTHandler
+    public class RestHandler
     {
-        private List<Bucket> buckets = new List<Bucket>();
-
-        private string apiKey;
-
-        private Dictionary<string, string> headers;
-
+        private readonly Dictionary<string, string> _headers;
         private readonly LogLevel _logLevel;
+        private readonly BotRestHandler _handler;
+        private readonly DiscordClient _client;
+        private readonly string _apiKey;
+        
+        internal static readonly Hash<string, BotRestHandler> BotHandlers = new Hash<string, BotRestHandler>();
 
-        public RESTHandler(string apiKey, LogLevel logLevel)
+        public RestHandler(DiscordClient client, string apiKey, LogLevel logLevel)
         {
-            this.apiKey = apiKey;
+            _client = client;
             _logLevel = logLevel;
-            
-            // Version
-            string version = "";
-            var exts = Interface.Oxide.GetAllExtensions();
-            foreach (var ext in exts)
-            {
-                if (ext.Name != "Discord") continue;
-                version = $"{ext.Version.Major}.{ext.Version.Minor}.{ext.Version.Patch}";
-                break;
-            }
-            //-
+            _apiKey = apiKey;
 
-            headers = new Dictionary<string, string>()
+            _headers = new Dictionary<string, string>
             {
-                { "Authorization", $"Bot {this.apiKey}" },
+                { "Authorization", $"Bot {apiKey}" },
                 { "Content-Type", "application/json" },
-                { "User-Agent", $"DiscordBot (https://github.com/Trickyyy/Oxide.Ext.Discord, {version})" }
+                { "User-Agent", $"DiscordBot (https://github.com/Trickyyy/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})" }
             };
+
+            lock (BotHandlers)
+            {
+                _handler = BotHandlers[apiKey];
+                if (_handler == null)
+                {
+                    _handler = new BotRestHandler();
+                    BotHandlers[apiKey] = _handler;
+                }
+                
+                _handler.AddClient(_client);
+            }
         }
 
-        public void Shutdown()
+        public void Disconnect()
         {
-            buckets.ForEach(x =>
+            _handler.RemoveClient(_client);
+            if (_handler.IsEmpty)
             {
-                x.Disposed = true;
-                x.Close();
-            });
+                _handler.Shutdown();
+                lock (BotHandlers)
+                {
+                    BotHandlers.Remove(_apiKey);
+                }
+            }
         }
 
         public void DoRequest(string url, RequestMethod method, object data, Action callback)
         {
-            CreateRequest(method, url, headers, data, response => callback?.Invoke());
+            CreateRequest(method, url, _headers, data, response => callback?.Invoke());
         }
 
         public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback)
         {
-            CreateRequest(method, url, headers, data, response =>
+            CreateRequest(method, url, _headers, data, response =>
             {
                 callback?.Invoke(response.ParseData<T>());
             });
@@ -64,40 +70,9 @@ namespace Oxide.Ext.Discord.REST
 
         private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
         {
-            // this is bad I know, but I'm way too fucking lazy to go 
-            // and rewrite every single fucking REST request call
-            string[] parts = url.Split('/');
-
-            string route = string.Join("/", parts.Take(3).ToArray());
-            route = route.TrimEnd('/');
-
-            string endpoint = "/" + string.Join("/", parts.Skip(3).ToArray());
-            endpoint = endpoint.TrimEnd('/');
-
-            var request = new Request(method, route, endpoint, headers, data, callback, _logLevel);
-            BucketRequest(request);
-        }
-
-        private void BucketRequest(Request request)
-        {
-            foreach (var item in new List<Bucket>(buckets).Where(x => x.Disposed))
-            {
-                buckets.Remove(item);
-            }
-
-            var bucket = buckets.SingleOrDefault(x => x.Method == request.Method &&
-                                                      x.Route == request.Route);
-
-            if (bucket != null)
-            {
-                bucket.Queue(request);
-                return;
-            }
-
-            var newBucket = new Bucket(request.Method, request.Route);
-            buckets.Add(newBucket);
-
-            newBucket.Queue(request);
+            Request request = new Request(method, url, headers, data, callback, _logLevel);
+            _handler.CleanupExpired();
+            _handler.QueueRequest(request, _logLevel);
         }
     }
 }
