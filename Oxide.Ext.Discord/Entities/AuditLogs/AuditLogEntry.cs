@@ -1,21 +1,29 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.AuditLogs
 {
     public class AuditLogEntry
     {
-        public string target_id { get; set; }
+        [JsonProperty("target_id")]
+        public string TargetId { get; set; }
 
-        public List<AuditLogChange> changes { get; set; }
+        [JsonProperty("changes")]
+        public List<AuditLogChange> Changes { get; set; }
 
-        public string user_id { get; set; }
+        [JsonProperty("user_id")]
+        public string UserId { get; set; }
 
-        public string id { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
-        public int? action_type { get; set; }
+        [JsonProperty("action_type")]
+        public int? ActionType { get; set; }
 
-        public OptionalAuditEntryInfo options { get; set; }
+        [JsonProperty("options")]
+        public OptionalAuditEntryInfo Options { get; set; }
 
-        public string reason { get; set; }
+        [JsonProperty("reason")]
+        public string Reason { get; set; }
     }
 }
