@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
     public class PresenceUpdate
     {
         [JsonProperty("user")]
-        public User User { get; set; }
+        public DiscordUser User { get; set; }
 
         [JsonProperty("guild_id")]
         public string GuildId { get; set; }

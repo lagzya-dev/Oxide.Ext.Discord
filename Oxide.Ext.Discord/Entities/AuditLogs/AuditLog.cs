@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs
         public List<Webhook> Webhooks { get; set; }
 
         [JsonProperty("users")]
-        public List<User> Users { get; set; }
+        public List<DiscordUser> Users { get; set; }
 
         [JsonProperty("audit_log_entries")]
         public List<AuditLogEntry> AuditLogEntries { get; set; }

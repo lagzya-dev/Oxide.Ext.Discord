@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         public List<string> Roles { get; set; }
         
         [JsonProperty("user")]
-        public User User { get; set; }
+        public DiscordUser User { get; set; }
         
         [JsonProperty("nick")]
         public string Nick { get; set; }

@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         public string Id { get; set; }
 
         [JsonProperty("user")]
-        public User User { get; set; }
+        public DiscordUser User { get; set; }
 
         [JsonProperty("require_colons")]
         public bool? RequireColons { get; set; }

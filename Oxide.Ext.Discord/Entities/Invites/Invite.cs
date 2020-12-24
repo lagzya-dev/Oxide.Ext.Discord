@@ -19,10 +19,10 @@ namespace Oxide.Ext.Discord.Entities.Invites
         public Channel Channel { get; set; }
         
         [JsonProperty("inviter")]
-        public User Inviter { get; set; }
+        public DiscordUser Inviter { get; set; }
         
         [JsonProperty("target_user")]
-        public User TargetUser { get; set; }
+        public DiscordUser TargetUser { get; set; }
         
         [JsonProperty("target_user_type")]
         public TargetUserType? UserTargetType { get; set; }

@@ -204,14 +204,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             client.REST.DoRequest($"/guilds/{Id}/members/@me/nick", RequestMethod.PATCH, jsonObj, callback);
         }
 
-        public void AddGuildMemberRole(DiscordClient client, User user, Role role, Action callback = null) => AddGuildMemberRole(client, user.Id, role.Id, callback);
+        public void AddGuildMemberRole(DiscordClient client, DiscordUser user, Role role, Action callback = null) => AddGuildMemberRole(client, user.Id, role.Id, callback);
 
         public void AddGuildMemberRole(DiscordClient client, string userId, string roleId, Action callback = null)
         {
             client.REST.DoRequest($"/guilds/{Id}/members/{userId}/roles/{roleId}", RequestMethod.PUT, null, callback);
         }
 
-        public void RemoveGuildMemberRole(DiscordClient client, User user, Role role, Action callback = null) => RemoveGuildMemberRole(client, user.Id, role.Id, callback);
+        public void RemoveGuildMemberRole(DiscordClient client, DiscordUser user, Role role, Action callback = null) => RemoveGuildMemberRole(client, user.Id, role.Id, callback);
 
         public void RemoveGuildMemberRole(DiscordClient client, string userId, string roleId, Action callback = null)
         {

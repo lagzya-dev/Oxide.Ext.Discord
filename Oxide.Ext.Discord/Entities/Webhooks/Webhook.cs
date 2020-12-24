@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public string ChannelId { get; set; }
         
         [JsonProperty("user")]
-        public User User { get; set; }
+        public DiscordUser User { get; set; }
         
         [JsonProperty("name")]
         public string Name { get; set; }

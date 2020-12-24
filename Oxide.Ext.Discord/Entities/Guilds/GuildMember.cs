@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     public class GuildMember
     {
         [JsonProperty("user")]
-        public User User { get; set; }
+        public DiscordUser User { get; set; }
 
         [JsonProperty("nick")]
         public string Nick { get; set; }

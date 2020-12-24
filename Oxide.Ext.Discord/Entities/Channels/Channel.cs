@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public string LastMessageId { get; set; }
                 
         [JsonProperty("recipients")]
-        public List<User> Recipients { get; set; }
+        public List<DiscordUser> Recipients { get; set; }
         
         [JsonProperty("icon")]
         public string Icon { get; set; }
@@ -152,7 +152,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
             client.REST.DoRequest<List<Message>>($"/channels/{Id}/pins", RequestMethod.GET, null, callback);
         }
 
-        public void GroupDmAddRecipient(DiscordClient client, User user, string accessToken, Action callback = null) => GroupDmAddRecipient(client, user.Id, accessToken, user.Username, callback);
+        public void GroupDmAddRecipient(DiscordClient client, DiscordUser user, string accessToken, Action callback = null) => GroupDmAddRecipient(client, user.Id, accessToken, user.Username, callback);
 
         public void GroupDmAddRecipient(DiscordClient client, string userId, string accessToken, string nick, Action callback = null)
         {

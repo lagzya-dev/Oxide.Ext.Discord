@@ -9,6 +9,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         public string GuildId { get; set; }
 
         [JsonProperty("user")]
-        public User User { get; set; }
+        public DiscordUser User { get; set; }
     }
 }

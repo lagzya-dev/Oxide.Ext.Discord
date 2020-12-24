@@ -33,7 +33,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.Integrations
         public int? ExpireGracePeriod { get; set; }
 
         [JsonProperty("user")]
-        public User User { get; set; }
+        public DiscordUser User { get; set; }
 
         [JsonProperty("account")]
         public Account Account { get; set; }

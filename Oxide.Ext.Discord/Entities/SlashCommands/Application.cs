@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Entities.SlashCommands
         public bool BotRequireCodeGrant { get; set; }
         
         [JsonProperty("owner")]
-        public User Owner { get; set; }
+        public DiscordUser Owner { get; set; }
         
         [JsonProperty("summary")]
         public string Summary { get; set; }

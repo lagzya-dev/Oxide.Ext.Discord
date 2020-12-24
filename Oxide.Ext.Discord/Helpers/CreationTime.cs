@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Helpers
 
     public class CreationTime
     {
-        public static DateTime? GetFromUser(User user) => GetFromID(user.Id);
+        public static DateTime? GetFromUser(DiscordUser user) => GetFromID(user.Id);
 
         public static DateTime? GetFromID(string ID)
         {

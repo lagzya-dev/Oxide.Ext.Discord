@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         public string GuildId { get; set; }
 
         [JsonProperty("inviter")]
-        public User Inviter { get; set; }
+        public DiscordUser Inviter { get; set; }
 
         [JsonProperty("max_age")]
         public int? MaxAge { get; set; }
@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         public int? MaxUses { get; set; }
 
         [JsonProperty("target_user")]
-        public User TargetUser { get; set; }
+        public DiscordUser TargetUser { get; set; }
 
         [JsonProperty("target_user")]
         public TargetUserType TargetUserType { get; set; }

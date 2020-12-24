@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public string GuildId { get; set; }
 
         [JsonProperty("author")]
-        public User Author { get; set; }
+        public DiscordUser Author { get; set; }
 
         [JsonProperty("member")]
         public GuildMember Member { get; set; }
@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public bool MentionEveryone { get; set; }
 
         [JsonProperty("mentions")]
-        public List<User> Mentions { get; set; }
+        public List<DiscordUser> Mentions { get; set; }
 
         [JsonProperty("mention_roles")]
         public List<string> MentionRoles { get; set; }
@@ -147,14 +147,14 @@ namespace Oxide.Ext.Discord.Entities.Messages
             client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{hexString}/@me", RequestMethod.DELETE, null, callback);
         }
 
-        public void DeleteUserReaction(DiscordClient client, string emoji, User user, Action callback = null) => DeleteUserReaction(client, emoji, user.Id, callback);
+        public void DeleteUserReaction(DiscordClient client, string emoji, DiscordUser user, Action callback = null) => DeleteUserReaction(client, emoji, user.Id, callback);
 
         public void DeleteUserReaction(DiscordClient client, string emoji, string userId, Action callback = null)
         {
             client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback);
         }
 
-        public void GetReactions(DiscordClient client, string emoji, Action<List<User>> callback = null)
+        public void GetReactions(DiscordClient client, string emoji, Action<List<DiscordUser>> callback = null)
         {
             byte[] encodedEmoji = Encoding.UTF8.GetBytes(emoji);
             string hexString = HttpUtility.UrlEncode(encodedEmoji);

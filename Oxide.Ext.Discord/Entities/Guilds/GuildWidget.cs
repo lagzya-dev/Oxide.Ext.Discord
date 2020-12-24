@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public List<Channels.Channel> Channels { get; set; }
         
         [JsonProperty("members")]
-        public List<User> Members { get; set; }
+        public List<DiscordUser> Members { get; set; }
         
         [JsonProperty("presence_count")]
         public int PresenceCount { get; set; }

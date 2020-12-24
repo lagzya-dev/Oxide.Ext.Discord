@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Users
 {
-    public class User
+    public class DiscordUser
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -49,19 +49,19 @@ namespace Oxide.Ext.Discord.Entities.Users
         [JsonProperty("public_flags")]
         public UserFlags? PublicFlags { get; set; }
 
-        public static void GetCurrentUser(DiscordClient client, Action<User> callback = null)
+        public static void GetCurrentUser(DiscordClient client, Action<DiscordUser> callback = null)
         {
             client.REST.DoRequest($"/users/@me", RequestMethod.GET, null, callback);
         }
 
-        public static void GetUser(DiscordClient client, string userId, Action<User> callback = null)
+        public static void GetUser(DiscordClient client, string userId, Action<DiscordUser> callback = null)
         {
             client.REST.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback);
         }
 
-        public void ModifyCurrentUser(DiscordClient client, Action<User> callback = null) => ModifyCurrentUser(client, this.Username, this.Avatar, callback);
+        public void ModifyCurrentUser(DiscordClient client, Action<DiscordUser> callback = null) => ModifyCurrentUser(client, this.Username, this.Avatar, callback);
 
-        public void ModifyCurrentUser(DiscordClient client, string username = "", string avatarData = "", Action<User> callback = null)
+        public void ModifyCurrentUser(DiscordClient client, string username = "", string avatarData = "", Action<DiscordUser> callback = null)
         {
             var jsonObj = new Dictionary<string, string>()
             {
@@ -138,7 +138,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             client.REST.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback);
         }
 
-        public void Update(User updateduser)
+        public void Update(DiscordUser updateduser)
         {
             if (updateduser.Avatar != null)
                 this.Avatar = updateduser.Avatar;

@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         public int Version { get; private set; }
         
         [JsonProperty("user")]
-        public User User { get; set; }
+        public DiscordUser User { get; set; }
 
         [JsonProperty("private_channels")]
         public List<Channel> PrivateChannels { get; set; }

@@ -21,6 +21,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds.Integrations
         public string Summary { get; set; }
         
         [JsonProperty("bot")]
-        public User Bot { get; set; }
+        public DiscordUser Bot { get; set; }
     }
 }
