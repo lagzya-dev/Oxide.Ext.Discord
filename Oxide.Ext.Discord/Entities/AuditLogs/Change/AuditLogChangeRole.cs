@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Roles;
 
 namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
 {
@@ -8,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
         public string Permissions { get; set; }
             
         [JsonProperty("color")]
-        public int Color { get; set; }
+        public DiscordColor Color { get; set; }
             
         [JsonProperty("hoist")]
         public bool Hoist { get; set; }

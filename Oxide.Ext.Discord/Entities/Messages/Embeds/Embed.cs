@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Roles;
 
 namespace Oxide.Ext.Discord.Entities.Messages.Embeds
 {
@@ -21,7 +22,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         public string Timestamp { get; set; }
 
         [JsonProperty("color")]
-        public int? Color { get; set; }
+        public DiscordColor Color { get; set; }
 
         [JsonProperty("footer")]
         public EmbedFooter Footer { get; set; }

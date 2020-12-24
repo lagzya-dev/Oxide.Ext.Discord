@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
 
-namespace Oxide.Ext.Discord.Entities.Guilds.Roles
+namespace Oxide.Ext.Discord.Entities.Roles
 {
     public class Role
     {
@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.Roles
         public string Name { get; set; }
 
         [JsonProperty("color")]
-        public int? Color { get; set; }
+        public DiscordColor Color { get; set; }
 
         [JsonProperty("hoist")]
         public bool? Hoist { get; set; }

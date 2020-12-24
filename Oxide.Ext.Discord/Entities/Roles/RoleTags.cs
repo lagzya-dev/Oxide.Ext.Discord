@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Guilds.Roles
+namespace Oxide.Ext.Discord.Entities.Roles
 {
     public class RoleTags
     {

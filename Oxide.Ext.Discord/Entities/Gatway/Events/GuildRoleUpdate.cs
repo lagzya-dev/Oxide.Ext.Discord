@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Guilds.Roles;
+using Oxide.Ext.Discord.Entities.Roles;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
