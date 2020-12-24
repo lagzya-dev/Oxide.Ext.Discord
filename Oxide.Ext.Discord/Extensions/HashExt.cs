@@ -15,5 +15,17 @@ namespace Oxide.Ext.Discord.Extensions
                 dict.Remove(key);
             }
         }
+
+        public static Hash<TKey, TValue> ToHash<TKey, TValue>(this List<TValue> list, Func<TValue, TKey> key)
+        {
+            Hash<TKey, TValue> hash = new Hash<TKey, TValue>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                TValue value = list[i];
+                hash[key(value)] = value;
+            }
+
+            return hash;
+        }
     }
 }

@@ -15,6 +15,8 @@ using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.REST;
 using Oxide.Ext.Discord.WebSockets;
+using Oxide.Plugins;
+using Timer = System.Timers.Timer;
 
 namespace Oxide.Ext.Discord
 {
@@ -26,16 +28,8 @@ namespace Oxide.Ext.Discord
 
         public DiscordSettings Settings { get; set; } = new DiscordSettings();
 
-        public List<Guild> DiscordServers { get; set; } = new List<Guild>();
+        public Hash<string, Guild> DiscordServers { get; set; } = new Hash<string, Guild>();
         public List<Channel> DMs { get; } = new List<Channel>();
-        
-        public Guild DiscordServer
-        {
-            get
-            {
-                return this.DiscordServers?.FirstOrDefault();
-            }
-        }
 
         public int Sequence;
 
@@ -341,16 +335,12 @@ namespace Oxide.Ext.Discord
 
         public Guild GetGuild(string id)
         {
-            return this.DiscordServers?.FirstOrDefault(x => x.Id == id);
+            return DiscordServers[id];
         }
 
-        public void UpdateGuild(string g_id, Guild newguild)
+        public void AddGuild(Guild guild)
         {
-            Guild g = this.GetGuild(g_id);
-            if (g == null) return;
-            int idx = DiscordServers?.IndexOf(g) ?? -1;
-            if (idx == -1) return;
-            this.DiscordServers[idx] = newguild;
+            DiscordServers[guild.Id] = guild;
         }
 
         #endregion

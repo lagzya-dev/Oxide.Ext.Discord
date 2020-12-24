@@ -243,7 +243,7 @@ namespace Oxide.Ext.Discord.WebSockets
                                 _logger.LogDebug("Ready event but no Guilds sent.");
                             }
 
-                            _client.DiscordServers = ready.Guilds;
+                            _client.DiscordServers = ready.Guilds.ToHash(key => key.Id);
                             _client.SessionID = ready.SessionId;
                             
                             _client.CallHook("Discord_Ready", null, ready);
@@ -330,12 +330,12 @@ namespace Oxide.Ext.Discord.WebSockets
                             bool unavailable = guild.Unavailable ?? false;
                             if(_client.GetGuild(id) == null)
                             {
-                                _client.DiscordServers.Add(guild);
+                                _client.AddGuild(guild);
                                 _logger.LogDebug($"Guild ID ({id}) added to list.");
                             }
                             else if(unavailable == false && (_client.GetGuild(id)?.Unavailable ?? false))
                             {
-                                _client.UpdateGuild(id, guild);
+                                _client.AddGuild(guild);
                                 _logger.LogDebug($"Guild ID ({id}) updated to list.");
                             }
                             _client.CallHook("Discord_GuildCreate", null, guild);
@@ -356,12 +356,12 @@ namespace Oxide.Ext.Discord.WebSockets
                             if(guildDelete.Unavailable ?? false) // outage
                             {
                                 _logger.LogDebug($"Guild ID {guildDelete.Id} outage!");
-                                _client.UpdateGuild(guildDelete.Id, guildDelete);
+                                _client.AddGuild(guildDelete);
                             }
                             else
                             {
                                 _logger.LogDebug($"Guild ID {guildDelete.Id} removed from list");
-                                _client.DiscordServers.Remove(_client.GetGuild(guildDelete.Id)); // guildDelete may not be same reference
+                                _client.DiscordServers.Remove(guildDelete.Id); // guildDelete may not be same reference
                             }
                             _client.CallHook("Discord_GuildDelete", null, guildDelete);
                             break;
@@ -583,7 +583,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         {
                             DiscordUser user = payload.EventData.ToObject<DiscordUser>();
                             
-                            List<Guild> guilds = _client.DiscordServers.Where(x => x.Members.FirstOrDefault(y => y.User.Id == user.Id) != null).ToList();
+                            List<Guild> guilds = _client.DiscordServers.Values.Where(x => x.Members.FirstOrDefault(y => y.User.Id == user.Id) != null).ToList();
                             foreach(Guild g in guilds)
                             {
                                 GuildMember memberUpdate = g.Members.FirstOrDefault(x => x.User.Id == user.Id);
