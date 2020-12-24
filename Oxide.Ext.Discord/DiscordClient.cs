@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord
     {
         public List<Plugin> Plugins { get; private set; } = new List<Plugin>();
 
-        public RESTHandler REST { get; private set; }
+        public RestHandler REST { get; private set; }
 
         private static string WebSocketUrl { get; set; }
 
@@ -99,7 +99,7 @@ namespace Oxide.Ext.Discord
 
             Settings = settings;
 
-            REST = new RESTHandler(Settings.ApiToken, Settings.LogLevel);
+            REST = new RestHandler(this, Settings.ApiToken, Settings.LogLevel);
             _webSocket = new Socket(this);
             
             ConnectToWebSocket();
@@ -119,7 +119,7 @@ namespace Oxide.Ext.Discord
             DestroyHeartbeat();
             _webSocket?.Dispose();
             _webSocket = null;
-            REST?.Shutdown();
+            REST?.Disconnect();
         }
 
         public void UpdatePluginReference(Plugin plugin = null)
