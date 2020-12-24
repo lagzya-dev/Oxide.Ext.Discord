@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.WebSockets
         public void DisconnectWebsocket(bool shouldReconnect, bool shouldResume, bool discordRequestedReconnect = false)
         {
             _client.requestReconnect = shouldReconnect;
-            _webSocket.ShouldAttemptResume = shouldReconnect;
+            _webSocket.ShouldAttemptResume = shouldResume;
 
             if (discordRequestedReconnect)
             {
