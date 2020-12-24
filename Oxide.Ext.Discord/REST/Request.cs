@@ -6,7 +6,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Libraries;
-using Oxide.Ext.Discord.DiscordObjects;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.REST
@@ -203,7 +203,7 @@ namespace Oxide.Ext.Discord.REST
                 rateLimitGlobal)
             {
                 RateLimit limit = response.ParseData<RateLimit>();
-                if (limit.global)
+                if (limit.Global)
                 {
                     GlobalRateLimit.Reached(rateRetryAfter * 1000);
                 }

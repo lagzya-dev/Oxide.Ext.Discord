@@ -1,11 +1,12 @@
-﻿namespace Oxide.Ext.Discord.Helpers
+﻿using Oxide.Ext.Discord.Entities.Users;
+
+namespace Oxide.Ext.Discord.Helpers
 {
-    using Oxide.Ext.Discord.DiscordObjects;
     using System;
 
     public class CreationTime
     {
-        public static DateTime? GetFromUser(User user) => GetFromID(user.id);
+        public static DateTime? GetFromUser(User user) => GetFromID(user.Id);
 
         public static DateTime? GetFromID(string ID)
         {

@@ -1,4 +1,5 @@
-﻿using Oxide.Ext.Discord.Logging;
+﻿using System;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord
 {
@@ -17,12 +18,12 @@ namespace Oxide.Ext.Discord
         {
             if (plugin == null)
             {
-                throw new PluginNullException();
+                throw new ArgumentNullException(nameof(plugin));
             }
 
             if (string.IsNullOrEmpty(apiKey))
             {
-                throw new APIKeyException();
+                throw new ArgumentNullException(nameof(apiKey));
             }
 
             var settings = new DiscordSettings()
@@ -38,17 +39,17 @@ namespace Oxide.Ext.Discord
         {
             if (plugin == null)
             {
-                throw new PluginNullException();
+                throw new ArgumentNullException(nameof(plugin));
             }
-            
+
             if (settings == null)
             {
-                throw new SettingsNullException();
+                throw new ArgumentNullException(nameof(settings));
             }
 
             if (string.IsNullOrEmpty(settings.ApiToken))
             {
-                throw new APIKeyException();
+                throw new ArgumentNullException(nameof(settings.ApiToken));
             }
 
             // Find an existing DiscordClient and update it 

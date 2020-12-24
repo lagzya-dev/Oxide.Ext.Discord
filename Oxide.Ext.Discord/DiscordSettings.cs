@@ -1,6 +1,7 @@
 ﻿using System;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.DiscordObjects;
 
 namespace Oxide.Ext.Discord
 {

@@ -1,3 +1,8 @@
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord
@@ -11,10 +16,7 @@ namespace Oxide.Ext.Discord
     using Oxide.Core;
     using Oxide.Core.Plugins;
     using Oxide.Ext.Discord.Attributes;
-    using Oxide.Ext.Discord.DiscordEvents;
-    using Oxide.Ext.Discord.DiscordObjects;
     using Oxide.Ext.Discord.Exceptions;
-    using Oxide.Ext.Discord.Gateway;
     using Oxide.Ext.Discord.Helpers;
     using Oxide.Ext.Discord.REST;
     using Oxide.Ext.Discord.WebSockets;
@@ -60,17 +62,17 @@ namespace Oxide.Ext.Discord
         {
             if (plugin == null)
             {
-                throw new PluginNullException();
+                throw new ArgumentNullException(nameof(plugin));
             }
 
             if (settings == null)
             {
-                throw new SettingsNullException();
+                throw new ArgumentNullException(nameof(settings));
             }
 
             if (string.IsNullOrEmpty(settings.ApiToken))
             {
-                throw new APIKeyException();
+                throw new ArgumentNullException(nameof(settings.ApiToken));
             }
             
             _logger = new Logger<DiscordClient>(settings.LogLevel);
@@ -241,7 +243,7 @@ namespace Oxide.Ext.Discord
         
         private void GetGatewayUrl(Action<string> callback)
         {
-            DiscordObjects.Gateway.GetGateway(this, (gateway) =>
+            Entities.Gatway.Gateway.GetGateway(this, (gateway) =>
             {
                 // Example: wss://gateway.discord.gg/?v=6&encoding=json
                 string url = $"{gateway.URL}/?{Connect.Serialize()}";
@@ -299,7 +301,7 @@ namespace Oxide.Ext.Discord
             var resume = new Resume()
             {
                 Sequence = this.Sequence,
-                SessionID = this.SessionID,
+                SessionId = this.SessionID,
                 Token = Settings.ApiToken
             };
 
@@ -344,7 +346,7 @@ namespace Oxide.Ext.Discord
         {
             var requestGuildMembers = new GuildMembersRequest
             {
-                GuildID = guildId,
+                GuildId = guildId,
                 Query = query,
                 Limit = limit,
                 Presences = presences,
@@ -364,15 +366,15 @@ namespace Oxide.Ext.Discord
 
         public void RequestGuildMembers(Guild guild, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)
         {
-            RequestGuildMembers(guild.id, query, limit);
+            RequestGuildMembers(guild.Id, query, limit);
         }
 
         public void UpdateVoiceState(string guildID, string channelId, bool selfDeaf, bool selfMute)
         {
             var voiceState = new VoiceStateUpdate()
             {
-                ChannelID = channelId,
-                GuildID = guildID,
+                ChannelId = channelId,
+                GuildId = guildID,
                 SelfDeaf = selfDeaf,
                 SelfMute = selfMute
             };
@@ -387,12 +389,12 @@ namespace Oxide.Ext.Discord
             _webSocket?.Send(payload);
         }
 
-        public void UpdateStatus(Presence presence)
+        public void UpdateStatus(StatusUpdate statusUpdate)
         {
             var opcode = new SPayload()
             {
                 OP = OpCodes.StatusUpdate,
-                Payload = presence
+                Payload = statusUpdate
             };
 
             var payload = JsonConvert.SerializeObject(opcode);
@@ -401,7 +403,7 @@ namespace Oxide.Ext.Discord
 
         public Guild GetGuild(string id)
         {
-            return this.DiscordServers?.FirstOrDefault(x => x.id == id);
+            return this.DiscordServers?.FirstOrDefault(x => x.Id == id);
         }
 
         public void UpdateGuild(string g_id, Guild newguild)
