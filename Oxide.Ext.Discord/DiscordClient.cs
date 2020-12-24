@@ -27,8 +27,6 @@ namespace Oxide.Ext.Discord
 
         public RESTHandler REST { get; private set; }
 
-        private static string WebSocketUrl { get; set; }
-
         public DiscordSettings Settings { get; set; } = new DiscordSettings();
 
         public List<Guild> DiscordServers { get; set; } = new List<Guild>();
@@ -223,45 +221,24 @@ namespace Oxide.Ext.Discord
 
         internal void ConnectToWebSocket()
         {
-            if (!string.IsNullOrEmpty(WebSocketUrl))
+            if (!string.IsNullOrEmpty(Gateway.WebsocketUrl))
             {
-                _webSocket.Connect(WebSocketUrl);
+                _webSocket.Connect(Gateway.WebsocketUrl);
                 return;
             }
             
-            ConnectToWebsocketUrl();
+            UpdateGatewayUrl(ConnectToWebSocket);
         }
-        
-        internal void ConnectToWebsocketUrl()
+
+        internal void UpdateGatewayUrl(Action callback)
         {
-            GetGatewayUrl(url =>
-            {
-                UpdateWebsocketUrl(url);
-                ConnectToWebSocket();
-            });
-        }
-        
-        private void GetGatewayUrl(Action<string> callback)
-        {
-            Entities.Gatway.Gateway.GetGateway(this, (gateway) =>
+            Gateway.GetGateway(this, gateway =>
             {
                 // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                string url = $"{gateway.URL}/?{Connect.Serialize()}";
-
-                _logger.LogDebug($"Got Gateway url: {url}");
-
-                callback.Invoke(url);
+                Gateway.WebsocketUrl = $"{gateway.URL}/?{Connect.Serialize()}";
+                _logger.LogDebug($"Got Gateway url: {gateway.URL}");
+                callback.Invoke();
             });
-        }
-
-        public void UpdateWebsocketUrl(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-            {
-                return;
-            }
-            
-            WebSocketUrl = url;
         }
 
         #region Discord Events

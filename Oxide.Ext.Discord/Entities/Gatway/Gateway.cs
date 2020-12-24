@@ -8,6 +8,8 @@ namespace Oxide.Ext.Discord.Entities.Gatway
     {
         [JsonProperty("url")]
         public string URL { get; private set; }
+        
+        public static string WebsocketUrl { get; internal set; }
 
         public static void GetGateway(DiscordClient client, Action<Gateway> callback)
         {

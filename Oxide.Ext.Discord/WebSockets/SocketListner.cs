@@ -107,13 +107,6 @@ namespace Oxide.Ext.Discord.WebSockets
 
         public void SocketErrored(object sender, ErrorEventArgs e)
         {
-            if(e.Exception is NoURLException)
-            {
-                _logger.LogError("Error: WebSocketUrl not present! Retrying..");
-                client.ConnectToWebsocketUrl();
-                return;
-            }
-            
             _logger.LogWarning($"An error has occured: Response: {e.Message}\n{e.Exception}");
 
             client.CallHook("DiscordSocket_WebSocketErrored", null, e.Exception, e.Message);

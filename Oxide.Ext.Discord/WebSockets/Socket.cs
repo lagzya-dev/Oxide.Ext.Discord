@@ -24,7 +24,8 @@
         {
             if (string.IsNullOrEmpty(url))
             {
-                throw new NoURLException();
+                client.UpdateGatewayUrl(client.ConnectToWebSocket);
+                return;
             }
 
             if (socket != null)
