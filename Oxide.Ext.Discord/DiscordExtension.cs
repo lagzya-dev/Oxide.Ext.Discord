@@ -1,13 +1,11 @@
-﻿using Oxide.Ext.Discord.Logging;
+﻿using System;
+using System.Collections.Generic;
+using Oxide.Core;
+using Oxide.Core.Extensions;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using Oxide.Core;
-    using Oxide.Core.Extensions;
-
     public class DiscordExtension : Extension
     {
         private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 7);

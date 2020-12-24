@@ -1,7 +1,7 @@
-﻿namespace Oxide.Ext.Discord.Helpers
-{
-    using System;
+﻿using System;
 
+namespace Oxide.Ext.Discord.Helpers
+{
     public static class Time
     {
         private static DateTime _epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);

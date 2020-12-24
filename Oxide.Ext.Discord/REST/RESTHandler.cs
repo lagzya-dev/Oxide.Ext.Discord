@@ -1,11 +1,11 @@
-﻿using Oxide.Ext.Discord.Logging;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Oxide.Core;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.REST
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     public class RESTHandler
     {
         private List<Bucket> buckets = new List<Bucket>();
@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.REST
             
             // Version
             string version = "";
-            var exts = Oxide.Core.Interface.Oxide.GetAllExtensions();
+            var exts = Interface.Oxide.GetAllExtensions();
             foreach (var ext in exts)
             {
                 if (ext.Name != "Discord") continue;

@@ -1,10 +1,8 @@
-﻿namespace Oxide.Ext.Discord.WebSockets
-{
-    using System;
-    using Oxide.Core;
-    using Oxide.Ext.Discord.Exceptions;
-    using WebSocketSharp;
+﻿using System;
+using WebSocketSharp;
 
+namespace Oxide.Ext.Discord.WebSockets
+{
     public class Socket
     {
         private DiscordClient client;

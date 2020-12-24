@@ -1,9 +1,8 @@
-﻿using Oxide.Ext.Discord.Entities.Users;
+﻿using System;
+using Oxide.Ext.Discord.Entities.Users;
 
 namespace Oxide.Ext.Discord.Helpers
 {
-    using System;
-
     public class CreationTime
     {
         public static DateTime? GetFromUser(DiscordUser user) => GetFromID(user.Id);

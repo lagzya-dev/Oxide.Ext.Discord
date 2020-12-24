@@ -1,4 +1,8 @@
-using Oxide.Ext.Discord.Entities;
+using System;
+using System.Linq;
+using System.Timers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
@@ -9,17 +13,10 @@ using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Logging;
+using WebSocketSharp;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
-    using System;
-    using System.Linq;
-    using System.Timers;
-    using Newtonsoft.Json;
-    using Oxide.Core;
-    using Oxide.Ext.Discord.Exceptions;
-    using WebSocketSharp;
-
     public class SocketListner
     {
         private DiscordClient client;
@@ -336,7 +333,7 @@ namespace Oxide.Ext.Discord.WebSockets
                                 break;
                             }
                             
-                            GuildMember oldMember = Newtonsoft.Json.Linq.JObject.FromObject(newMember).ToObject<GuildMember>(); // lazy way to copy the object
+                            GuildMember oldMember = JObject.FromObject(newMember).ToObject<GuildMember>(); // lazy way to copy the object
                             if (memberUpdated.User != null)
                                 newMember.User = memberUpdated.User;
                             if (memberUpdated.Nick != null)

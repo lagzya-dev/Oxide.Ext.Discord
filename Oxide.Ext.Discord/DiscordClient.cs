@@ -1,26 +1,23 @@
-using Oxide.Ext.Discord.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Timers;
+using Newtonsoft.Json;
+using Oxide.Core;
+using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.WebSockets;
 
 namespace Oxide.Ext.Discord
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Timers;
-    using Newtonsoft.Json;
-    using Oxide.Core;
-    using Oxide.Core.Plugins;
-    using Oxide.Ext.Discord.Attributes;
-    using Oxide.Ext.Discord.Exceptions;
-    using Oxide.Ext.Discord.Helpers;
-    using Oxide.Ext.Discord.REST;
-    using Oxide.Ext.Discord.WebSockets;
-
     public class DiscordClient
     {
         public List<Plugin> Plugins { get; private set; } = new List<Plugin>();
