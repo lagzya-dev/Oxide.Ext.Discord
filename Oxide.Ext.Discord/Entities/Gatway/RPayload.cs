@@ -17,8 +17,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
 
         [JsonProperty("s")]
         public int? Sequence { get; set; }
-
-        [JsonIgnore]
+        
         public JObject EventData => Data as JObject;
     }
 }
