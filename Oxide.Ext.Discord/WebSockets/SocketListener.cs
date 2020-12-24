@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private readonly Socket _webSocket;
 
-        private int _retries;
+        internal int Retries;
 
         private readonly ILogger _logger;
 
@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _logger.LogWarning("Discord socket opened!");
             _client.CallHook("DiscordSocket_WebSocketOpened");
-            _retries = 0;
+            Retries = 0;
         }
 
         public void SocketClosed(object sender, CloseEventArgs e)
@@ -79,7 +79,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             if (!_client.Disconnected)
             {
-                if (_retries < 3)
+                if (Retries < 3)
                 {
                     _logger.LogWarning("Attempting to reconnect to Discord...");
                     _client.ConnectToWebSocket();
@@ -103,7 +103,7 @@ namespace Oxide.Ext.Discord.WebSockets
                     };
                 }
                 
-                _retries++;
+                Retries++;
             }
         }
 
