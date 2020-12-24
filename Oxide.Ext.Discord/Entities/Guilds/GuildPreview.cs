@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class GuildPreview : GuildCreate
     {
         [JsonProperty("owner_id")]

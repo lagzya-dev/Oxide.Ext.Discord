@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class GuildPruneBegin : GuildPruneGet
     {
         [JsonProperty("compute_prune_count")]

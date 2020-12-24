@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class AuditLogChangeInvite
     {
         [JsonProperty("code")]

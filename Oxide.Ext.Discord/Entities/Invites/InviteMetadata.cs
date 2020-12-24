@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Invites
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InviteMetadata : Invite
     {
         [JsonProperty("uses")]

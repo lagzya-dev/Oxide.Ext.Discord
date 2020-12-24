@@ -3,6 +3,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 
 namespace Oxide.Ext.Discord.Entities.Voice
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class VoiceState
     {
         [JsonProperty("guild_id")]

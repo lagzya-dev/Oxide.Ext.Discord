@@ -2,6 +2,7 @@
 
 namespace Oxide.Ext.Discord.Entities.Guilds.Integrations
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Account
     {
         [JsonProperty("id")]

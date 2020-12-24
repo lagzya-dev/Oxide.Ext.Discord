@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Entities.Roles;
 
 namespace Oxide.Ext.Discord.Entities.Messages.Embeds
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Embed
     {
         [JsonProperty("title")]

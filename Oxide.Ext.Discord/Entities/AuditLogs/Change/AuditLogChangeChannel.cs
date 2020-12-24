@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Entities.Channels;
 
 namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class AuditLogChangeChannel
     {
         [JsonProperty("position")]

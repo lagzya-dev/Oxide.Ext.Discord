@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Roles
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class RoleTags
     {
         [JsonProperty("bot_id")]

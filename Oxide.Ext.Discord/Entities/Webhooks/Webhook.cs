@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Webhook
     {
         [JsonProperty("id")]

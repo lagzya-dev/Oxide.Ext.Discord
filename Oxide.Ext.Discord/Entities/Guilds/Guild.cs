@@ -16,6 +16,7 @@ using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Guild : GuildPreview
     {
         [JsonProperty("id")]

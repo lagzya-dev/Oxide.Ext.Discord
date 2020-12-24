@@ -2,6 +2,7 @@
 
 namespace Oxide.Ext.Discord.Entities.Messages.Attachments
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Attachment
     {
         [JsonProperty("id")]

@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class MessageActivity
     {
         [JsonProperty("type")]

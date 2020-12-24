@@ -4,18 +4,16 @@ using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Entities.Activities
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ActivityTimestamps
     {
         [JsonProperty("start")]
         public int Start { get; set; }
-
-        [JsonIgnore]
-        public DateTime StartDateTime => Start.ToDateTime();
         
         [JsonProperty("end")]
         public int End { get; set; }
-
-        [JsonIgnore]
+        
+        public DateTime StartDateTime => Start.ToDateTime();
         public DateTime EndDateTime => Start.ToDateTime();
     }
 }

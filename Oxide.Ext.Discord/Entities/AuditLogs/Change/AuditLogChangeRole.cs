@@ -3,6 +3,7 @@ using Oxide.Ext.Discord.Entities.Roles;
 
 namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class AuditLogChangeRole
     {
         [JsonProperty("permissions")]

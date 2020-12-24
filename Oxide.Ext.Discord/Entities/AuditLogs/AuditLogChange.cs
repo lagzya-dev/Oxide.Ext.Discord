@@ -3,6 +3,7 @@ using Oxide.Ext.Discord.Entities.AuditLogs.Change;
 
 namespace Oxide.Ext.Discord.Entities.AuditLogs
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class AuditLogChange
     {
         [JsonProperty("new_value")]

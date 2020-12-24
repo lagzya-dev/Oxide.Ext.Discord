@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ChannelInvite
     {
         [JsonProperty("max_age")]

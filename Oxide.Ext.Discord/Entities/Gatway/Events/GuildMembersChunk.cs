@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class GuildMembersChunk
     {
         [JsonProperty("guild_id")]

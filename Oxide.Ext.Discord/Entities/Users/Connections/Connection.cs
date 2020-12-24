@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Entities.Guilds.Integrations;
 
 namespace Oxide.Ext.Discord.Entities.Users.Connections
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Connection
     {
         [JsonProperty("id")]

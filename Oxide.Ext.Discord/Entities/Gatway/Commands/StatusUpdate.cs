@@ -5,6 +5,8 @@ using Oxide.Ext.Discord.Entities.Users;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Commands
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+
     public class StatusUpdate
     {
         [JsonProperty("status")]

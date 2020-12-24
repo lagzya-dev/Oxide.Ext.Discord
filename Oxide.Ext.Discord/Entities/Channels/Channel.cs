@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Channel : ChannelCreate
     {
         [JsonProperty("id")]

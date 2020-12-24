@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Voice
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class VoiceRegion
     {
         [JsonProperty("id")]

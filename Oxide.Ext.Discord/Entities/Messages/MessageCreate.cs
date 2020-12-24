@@ -3,6 +3,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class MessageCreate
     {
         [JsonProperty("content")]

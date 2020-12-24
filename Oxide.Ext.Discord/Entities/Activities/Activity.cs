@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Entities.Activities
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Activity
     {
         [JsonProperty("name")]
@@ -19,8 +20,7 @@ namespace Oxide.Ext.Discord.Entities.Activities
 
         [JsonProperty("created_at")]
         public int CreatedAt { get; set; }
-
-        [JsonIgnore]
+        
         public DateTime CreatedAtDt => CreatedAt.ToDateTime();
         
         [JsonProperty("timestamps")]

@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Messages.Embeds
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class EmbedImage
     {
         [JsonProperty("url")]

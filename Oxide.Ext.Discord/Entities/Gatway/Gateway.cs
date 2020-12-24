@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Gatway
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     class Gateway
     {
         [JsonProperty("url")]

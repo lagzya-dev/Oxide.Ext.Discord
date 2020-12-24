@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class AddGuildMember
     {
         [JsonProperty("access_token")]

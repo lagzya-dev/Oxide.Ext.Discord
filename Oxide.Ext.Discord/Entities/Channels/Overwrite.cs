@@ -2,6 +2,8 @@
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+
     public class Overwrite
     {
         [JsonProperty("id")]

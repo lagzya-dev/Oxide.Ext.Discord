@@ -4,6 +4,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class AllowedMentions
     {
         [JsonConverter(typeof(StringEnumConverter))]

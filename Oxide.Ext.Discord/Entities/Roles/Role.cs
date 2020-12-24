@@ -3,6 +3,7 @@ using Oxide.Ext.Discord.Entities.Channels;
 
 namespace Oxide.Ext.Discord.Entities.Roles
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Role
     {
         [JsonProperty("id")]

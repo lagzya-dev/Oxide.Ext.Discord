@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Entities.SlashCommands;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ApplicationCommandInteractionDataOption
     {
         [JsonProperty("name")]

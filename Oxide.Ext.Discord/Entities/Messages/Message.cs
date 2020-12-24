@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Message : MessageCreate
     {
         [JsonProperty("id")]

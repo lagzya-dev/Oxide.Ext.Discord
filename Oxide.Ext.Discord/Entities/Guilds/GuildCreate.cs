@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Entities.Roles;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class GuildCreate
     {
         [JsonProperty("name")]

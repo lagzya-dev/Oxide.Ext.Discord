@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ApplicationCommandInteractionData
     {
         [JsonProperty("id")]

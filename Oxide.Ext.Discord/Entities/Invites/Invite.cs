@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Invites
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Invite
     {
         [JsonProperty("code")]

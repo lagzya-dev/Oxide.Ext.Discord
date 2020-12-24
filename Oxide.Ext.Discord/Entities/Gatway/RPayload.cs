@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Oxide.Ext.Discord.Entities.Gatway
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class RPayload
     {
         [JsonProperty("op")]

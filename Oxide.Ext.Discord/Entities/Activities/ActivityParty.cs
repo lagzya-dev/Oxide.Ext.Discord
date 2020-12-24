@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Activities
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ActivityParty
     {
         [JsonProperty("id")]

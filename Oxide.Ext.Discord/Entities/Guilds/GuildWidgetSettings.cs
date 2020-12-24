@@ -2,6 +2,7 @@
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class GuildWidgetSettings
     {
         [JsonProperty("enabled")]

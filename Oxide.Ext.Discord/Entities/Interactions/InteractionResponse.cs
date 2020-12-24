@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InteractionResponse
     {
         [JsonProperty("type")]

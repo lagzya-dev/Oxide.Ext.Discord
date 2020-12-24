@@ -4,6 +4,8 @@ using Oxide.Ext.Discord.Entities.Emojis;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+
     public class GuildEmojisUpdate
     {
         [JsonProperty("guild_id")]

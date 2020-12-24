@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class WebhookPayload
     {
         [JsonProperty("content")]

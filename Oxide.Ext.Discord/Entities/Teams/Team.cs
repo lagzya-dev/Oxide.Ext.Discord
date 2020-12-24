@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Helpers.Cdn;
 
 namespace Oxide.Ext.Discord.Entities.Teams
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Team
     {
         [JsonProperty("id")]

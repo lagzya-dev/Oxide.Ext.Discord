@@ -3,6 +3,8 @@ using Oxide.Ext.Discord.Entities.Users;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+
     public class GuildBanEvent
     {
         [JsonProperty("guild_id")]

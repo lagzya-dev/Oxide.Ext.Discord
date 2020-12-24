@@ -3,6 +3,7 @@ using Oxide.Ext.Discord.Entities.Users;
 
 namespace Oxide.Ext.Discord.Entities.Guilds.Integrations
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Integration
     {
         [JsonProperty("id")]

@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InteractionApplicationCommandCallbackData
     {
         [JsonProperty("tts")]

@@ -3,6 +3,7 @@ using Oxide.Ext.Discord.Entities.Emojis;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class MessageReactionRemoveEmoji
     {
         [JsonProperty("channel_id")]

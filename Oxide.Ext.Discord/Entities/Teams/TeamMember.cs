@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Entities.Users;
 
 namespace Oxide.Ext.Discord.Entities.Teams
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class TeamMember
     {
         [JsonProperty("membership_state")]

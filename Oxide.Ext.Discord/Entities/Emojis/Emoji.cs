@@ -4,6 +4,8 @@ using Oxide.Ext.Discord.Helpers.Cdn;
 
 namespace Oxide.Ext.Discord.Entities.Emojis
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+
     public class Emoji : EmojiUpdate
     {
         [JsonProperty("id")]

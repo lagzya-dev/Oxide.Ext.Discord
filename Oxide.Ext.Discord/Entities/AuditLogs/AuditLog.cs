@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.AuditLogs
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class AuditLog
     {
         [JsonProperty("webhooks")]
