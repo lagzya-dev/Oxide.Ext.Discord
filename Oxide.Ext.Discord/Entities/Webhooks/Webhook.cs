@@ -100,22 +100,22 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             client.REST.DoRequest($"/webhooks/{Id}/{Token}", RequestMethod.DELETE, null, callback);
         }
 
-        public void ExecuteWebhook(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback = null)
         {
             client.REST.DoRequest($"/webhooks/{Id}/{Token}?wait=true", RequestMethod.POST, payload, callback);
         }
 
-        public void ExecuteWebhookSlack(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
+        public void ExecuteWebhookSlack(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback = null)
         {
             client.REST.DoRequest($"/webhooks/{Id}/{Token}/slack?wait=true", RequestMethod.POST, payload, callback);
         }
 
-        public void ExecuteWebhookGitHub(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
+        public void ExecuteWebhookGitHub(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback = null)
         {
             client.REST.DoRequest($"/webhooks/{Id}/{Token}/github?wait=true", RequestMethod.POST, payload, callback);
         }
 
-        public void EditWebhookMessage(DiscordClient client, string messageId, WebhookPayload payload, Action<Message> callback = null)
+        public void EditWebhookMessage(DiscordClient client, string messageId, WebhookEditMessage payload, Action<Message> callback = null)
         {
             client.REST.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.PATCH, payload, callback);
         }

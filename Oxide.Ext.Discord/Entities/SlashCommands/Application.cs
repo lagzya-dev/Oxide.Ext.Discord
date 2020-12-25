@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Teams;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Entities.Webhooks;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.REST;
 
@@ -126,5 +129,42 @@ namespace Oxide.Ext.Discord.Entities.SlashCommands
         {
             DeleteGuildApplicationCommands(client, guild.Id, delete.Id, callback);
         }
+
+        public void EditOriginalInteractionResponse(DiscordClient client, string interactionToken, WebhookEditMessage message, Action<Message> callback = null)
+        {
+            client.REST.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/@original", RequestMethod.PATCH, message, callback);
+        }
+
+        public void EditOriginalInteractionResponse(DiscordClient client, Interaction interaction, WebhookEditMessage message, Action<Message> callback = null) => EditOriginalInteractionResponse(client, interaction.Token, message, callback);
+        
+        public void DeleteOriginalInteractionResponse(DiscordClient client, string interactionToken, Action callback = null)
+        {
+            client.REST.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/@original", RequestMethod.DELETE, null, callback);
+        }
+
+        public void DeleteOriginalInteractionResponse(DiscordClient client, Interaction interaction, Action callback = null) => DeleteOriginalInteractionResponse(client, interaction.Token, callback);
+        
+        public void CreateFollowUpMessage(DiscordClient client, string interactionToken, WebhookCreateMessage message, Action<Message> callback = null)
+        {
+            client.REST.DoRequest($"/webhooks/{Id}/{interactionToken}", RequestMethod.POST, message, callback);
+        }
+
+        public void CreateFollowUpMessage(DiscordClient client, Interaction interaction, WebhookCreateMessage message, Action<Message> callback = null) => CreateFollowUpMessage(client, interaction.Token, message, callback);
+        
+        public void EditFollowUpMessage(DiscordClient client, string interactionToken, string messageId, WebhookEditMessage edit, Action<Message> callback = null)
+        {
+            client.REST.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.PATCH, edit, callback);
+        }
+
+        public void EditFollowUpMessage(DiscordClient client, Interaction interaction, string messageId, WebhookEditMessage edit, Action<Message> callback = null) => EditFollowUpMessage(client, interaction.Token, messageId, edit, callback);
+        public void EditFollowUpMessage(DiscordClient client, Interaction interaction, Message message, WebhookEditMessage edit, Action<Message> callback = null) => EditFollowUpMessage(client, interaction.Token, message.Id, edit, callback);
+        
+        public void DeleteFollowUpMessage(DiscordClient client, string interactionToken, string messageId, Action callback = null)
+        {
+            client.REST.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.DELETE, null, callback);
+        }
+
+        public void DeleteFollowUpMessage(DiscordClient client, Interaction interaction, string messageId, Action callback = null) => DeleteFollowUpMessage(client, interaction.Token, messageId, callback);
+        public void DeleteFollowUpMessage(DiscordClient client, Interaction interaction, Message message, Action callback = null) => DeleteFollowUpMessage(client, interaction.Token, message.Id, callback);
     }
 }
