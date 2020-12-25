@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Interactions

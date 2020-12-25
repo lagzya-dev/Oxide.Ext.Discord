@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.REST;
@@ -30,6 +31,8 @@ namespace Oxide.Ext.Discord
 
         public Hash<string, Guild> DiscordServers { get; set; } = new Hash<string, Guild>();
         public Hash<string, Channel> DMs { get; } = new  Hash<string, Channel>();
+        
+        public Application Application { get; internal set; }
 
         public int Sequence;
 

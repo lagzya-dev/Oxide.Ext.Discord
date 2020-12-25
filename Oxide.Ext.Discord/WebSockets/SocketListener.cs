@@ -245,6 +245,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
                             _client.DiscordServers = ready.Guilds.ToHash(key => key.Id);
                             _client.SessionID = ready.SessionId;
+                            _client.Application = ready.Application;
                             
                             _client.CallHook("Discord_Ready", null, ready);
                             break;

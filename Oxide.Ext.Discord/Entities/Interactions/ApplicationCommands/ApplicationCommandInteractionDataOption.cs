@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.SlashCommands;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ApplicationCommandInteractionDataOption
