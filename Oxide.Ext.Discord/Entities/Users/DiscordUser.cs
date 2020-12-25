@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users.Connections;
 using Oxide.Ext.Discord.Helpers.Cdn;
@@ -64,7 +65,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             client.REST.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback);
         }
 
-        public void ModifyCurrentUser(DiscordClient client, Action<DiscordUser> callback = null) => ModifyCurrentUser(client, this.Username, this.Avatar, callback);
+        public void ModifyCurrentUser(DiscordClient client, Action<DiscordUser> callback = null) => ModifyCurrentUser(client, Username, Avatar, callback);
 
         public void ModifyCurrentUser(DiscordClient client, string username = "", string avatarData = "", Action<DiscordUser> callback = null)
         {
@@ -89,23 +90,19 @@ namespace Oxide.Ext.Discord.Entities.Users
             client.REST.DoRequest($"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback);
         }
 
-        //No longer works for bots
-        public void GetUserDMs(DiscordClient client, Action<List<Channels.Channel>> callback = null)
-        {
-            client.REST.DoRequest($"/users/@me/channels", RequestMethod.GET, null, callback);
-        }
+        public void CreateDm(DiscordClient client, Action<Channel> callback = null) => CreateDm(client, Id, callback);
 
-        public void CreateDm(DiscordClient client, Action<Channels.Channel> callback = null)
+        public static void CreateDm(DiscordClient client, string userId, Action<Channel> callback = null)
         {
-            var jsonObj = new Dictionary<string, string>()
+            Dictionary<string, string> data = new Dictionary<string, string>()
             {
-                { "recipient_id", this.Id }
+                { "recipient_id", userId }
             };
 
-            client.REST.DoRequest("/users/@me/channels", RequestMethod.POST, jsonObj, callback);
+            client.REST.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback);
         }
 
-        public void CreateGroupDm(DiscordClient client, string[] accessTokens, List<NickId> nicks, Action<Channels.Channel> callback = null)
+        public void CreateGroupDm(DiscordClient client, string[] accessTokens, List<NickId> nicks, Action<Channel> callback = null)
         {
             var nickDict = nicks.ToDictionary(k => k.Id, v => v.Nick);
 
@@ -115,15 +112,15 @@ namespace Oxide.Ext.Discord.Entities.Users
                 { "nicks", nickDict }
             };
 
-            client.REST.DoRequest($"/users/@me/channels", RequestMethod.POST, jsonObj, callback);
+            client.REST.DoRequest("/users/@me/channels", RequestMethod.POST, jsonObj, callback);
         }
 
         public void GetUserConnections(DiscordClient client, Action<List<Connection>> callback = null)
         {
-            client.REST.DoRequest($"/users/@me/connections", RequestMethod.GET, null, callback);
+            client.REST.DoRequest("/users/@me/connections", RequestMethod.GET, null, callback);
         }
 
-        public void GroupDmAddRecipient(DiscordClient client, Channels.Channel channel, string accessToken, Action callback = null) => GroupDmAddRecipient(client, channel.Id, accessToken, this.Username, callback);
+        public void GroupDmAddRecipient(DiscordClient client, Channel channel, string accessToken, Action callback = null) => GroupDmAddRecipient(client, channel.Id, accessToken, Username, callback);
 
         public void GroupDmAddRecipient(DiscordClient client, string channelId, string accessToken, string nick, Action callback = null)
         {
@@ -136,33 +133,33 @@ namespace Oxide.Ext.Discord.Entities.Users
             client.REST.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, jsonObj, callback);
         }
 
-        public void GroupDmRemoveRecipient(DiscordClient client, Channels.Channel channel) => GroupDmRemoveRecipient(client, channel.Id);
+        public void GroupDmRemoveRecipient(DiscordClient client, Channel channel) => GroupDmRemoveRecipient(client, channel.Id);
 
         public void GroupDmRemoveRecipient(DiscordClient client, string channelId, Action callback = null)
         {
             client.REST.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback);
         }
 
-        public void Update(DiscordUser updateduser)
+        public void Update(DiscordUser update)
         {
-            if (updateduser.Avatar != null)
-                this.Avatar = updateduser.Avatar;
-            if (updateduser.Bot != null)
-                this.Bot = updateduser.Bot;
-            if (updateduser.Discriminator != null)
-                this.Discriminator = updateduser.Discriminator;
-            if (updateduser.Email != null)
-                this.Email = updateduser.Email;
-            if (updateduser.Locale != null)
-                this.Locale = updateduser.Locale;
-            if (updateduser.MfaEnabled != null)
-                this.MfaEnabled = updateduser.MfaEnabled;
-            if (updateduser.PremiumType != null)
-                this.PremiumType = updateduser.PremiumType;
-            if (updateduser.Username != null)
-                this.Username = updateduser.Username;
-            if (updateduser.Verified != null)
-                this.Verified = updateduser.Verified;
+            if (update.Avatar != null)
+                Avatar = update.Avatar;
+            if (update.Bot != null)
+                Bot = update.Bot;
+            if (update.Discriminator != null)
+                Discriminator = update.Discriminator;
+            if (update.Email != null)
+                Email = update.Email;
+            if (update.Locale != null)
+                Locale = update.Locale;
+            if (update.MfaEnabled != null)
+                MfaEnabled = update.MfaEnabled;
+            if (update.PremiumType != null)
+                PremiumType = update.PremiumType;
+            if (update.Username != null)
+                Username = update.Username;
+            if (update.Verified != null)
+                Verified = update.Verified;
         }
     }
 }

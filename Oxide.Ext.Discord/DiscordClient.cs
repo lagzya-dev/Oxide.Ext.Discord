@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord
         public DiscordSettings Settings { get; set; } = new DiscordSettings();
 
         public Hash<string, Guild> DiscordServers { get; set; } = new Hash<string, Guild>();
-        public List<Channel> DMs { get; } = new List<Channel>();
+        public Hash<string, Channel> DMs { get; } = new  Hash<string, Channel>();
 
         public int Sequence;
 
@@ -230,8 +230,8 @@ namespace Oxide.Ext.Discord
             Gateway.GetGateway(this, gateway =>
             {
                 // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                Gateway.WebsocketUrl = $"{gateway.URL}/?{Connect.Serialize()}";
-                _logger.LogDebug($"Got Gateway url: {gateway.URL}");
+                Gateway.WebsocketUrl = $"{gateway.Url}/?{Connect.Serialize()}";
+                _logger.LogDebug($"Got Gateway url: {gateway.Url}");
                 callback.Invoke();
             });
         }
@@ -342,7 +342,6 @@ namespace Oxide.Ext.Discord
         {
             DiscordServers[guild.Id] = guild;
         }
-
         #endregion
     }
 }

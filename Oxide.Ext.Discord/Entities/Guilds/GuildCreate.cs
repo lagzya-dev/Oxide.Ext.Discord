@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Roles;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
@@ -29,7 +30,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public List<Role> Roles { get; set; }
                 
         [JsonProperty("channels")]
-        public List<Channels.Channel> Channels { get; set; }
+        public List<Channel> Channels { get; set; }
                 
         [JsonProperty("afk_channel_id")]
         public string AfkChannelId { get; set; }
