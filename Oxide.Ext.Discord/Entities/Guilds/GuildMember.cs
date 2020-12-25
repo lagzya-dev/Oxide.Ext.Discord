@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Ext.Discord.Helpers.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GuildMember
+    public class GuildMember : IGetEntityId
     {
         [JsonProperty("user")]
         public DiscordUser User { get; set; }
@@ -24,5 +26,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         [JsonProperty("mute")]
         public bool Mute { get; set; }
+
+        public string GetEntityId()
+        {
+            return User.Id;
+        }
     }
 }

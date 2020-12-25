@@ -12,7 +12,9 @@ using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Helpers.Cdn;
+using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.REST;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -70,8 +72,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonProperty("voice_states")]
         public List<VoiceState> VoiceStates { get; set; }
   
+        [JsonConverter(typeof(HashListConverter<GuildMember>))]
         [JsonProperty("members")]
-        public List<GuildMember> Members { get; set; }
+        public Hash<string, GuildMember> Members { get; set; }
+        
+        [JsonConverter(typeof(HashListConverter<Channel>))]
+        [JsonProperty("channels")]
+        public new Hash<string, Channel> Channels { get; set; }
           
         [JsonProperty("presences")]
         public List<StatusUpdate> Presences { get; set; }

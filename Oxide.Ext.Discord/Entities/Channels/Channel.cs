@@ -5,12 +5,13 @@ using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers.Interfaces;
 using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Channel : ChannelCreate
+    public class Channel : ChannelCreate, IGetEntityId
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -169,6 +170,11 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public void GroupDmRemoveRecipient(DiscordClient client, string userId, Action callback)
         {
             client.REST.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.DELETE, null, callback);
+        }
+
+        public string GetEntityId()
+        {
+            return Id;
         }
     }
 }
