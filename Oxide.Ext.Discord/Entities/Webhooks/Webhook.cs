@@ -100,19 +100,14 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             client.REST.DoRequest($"/webhooks/{Id}/{Token}", RequestMethod.DELETE, null, callback);
         }
 
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback = null)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action callback = null, WebhookSendType sendType = WebhookSendType.Default)
         {
-            client.REST.DoRequest($"/webhooks/{Id}/{Token}?wait=true", RequestMethod.POST, payload, callback);
+            client.REST.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}", RequestMethod.POST, payload, callback);
         }
-
-        public void ExecuteWebhookSlack(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback = null)
+        
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback, WebhookSendType sendType = WebhookSendType.Default)
         {
-            client.REST.DoRequest($"/webhooks/{Id}/{Token}/slack?wait=true", RequestMethod.POST, payload, callback);
-        }
-
-        public void ExecuteWebhookGitHub(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback = null)
-        {
-            client.REST.DoRequest($"/webhooks/{Id}/{Token}/github?wait=true", RequestMethod.POST, payload, callback);
+            client.REST.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}?wait=true", RequestMethod.POST, payload, callback);
         }
 
         public void EditWebhookMessage(DiscordClient client, string messageId, WebhookEditMessage payload, Action<Message> callback = null)
@@ -123,6 +118,21 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public void DeleteWebhookMessage(DiscordClient client, string messageId, Action callback = null)
         {
             client.REST.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback);
+        }
+
+        private string GetWebhookFormat(WebhookSendType type)
+        {
+            switch (type)
+            {
+                case WebhookSendType.Default:
+                    return string.Empty;
+                case WebhookSendType.Slack:
+                    return "/slack";
+                case WebhookSendType.Github:
+                    return "/github";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
     }
 }
