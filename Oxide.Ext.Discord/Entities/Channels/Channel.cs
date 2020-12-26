@@ -13,13 +13,13 @@ namespace Oxide.Ext.Discord.Entities.Channels
     public class Channel : ChannelCreate
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
         
         [JsonProperty("last_message_id")]        
-        public string LastMessageId { get; set; }
+        public Snowflake LastMessageId { get; set; }
                 
         [JsonProperty("recipients")]
         public List<DiscordUser> Recipients { get; set; }
@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public string Icon { get; set; }
         
         [JsonProperty("owner_id")]
-        public string OwnerId { get; set; }
+        public Snowflake OwnerId { get; set; }
         
         [JsonProperty("application_id")]
         public string ApplicationId { get; set; }
@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         [JsonProperty("last_pin_timestamp")]
         public DateTime? LastPinTimestamp { get; set; } 
 
-        public static void GetChannel(DiscordClient client, string channelId, Action<Channel> callback = null)
+        public static void GetChannel(DiscordClient client, Snowflake channelId, Action<Channel> callback = null)
         {
             client.REST.DoRequest($"/channels/{channelId}", RequestMethod.GET, null, callback);
         }
@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
 
         public void GetChannelMessage(DiscordClient client, Message message, Action<Message> callback = null) => GetChannelMessage(client, message.Id, callback);
 
-        public void GetChannelMessage(DiscordClient client, string messageId, Action<Message> callback = null)
+        public void GetChannelMessage(DiscordClient client, Snowflake messageId, Action<Message> callback = null)
         {
             client.REST.DoRequest($"/channels/{Id}/messages/{messageId}", RequestMethod.GET, null, callback);
         }
@@ -103,7 +103,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
             client.REST.DoRequest($"/channels/{Id}/permissions/{overwrite.Id}", RequestMethod.PUT, overwrite, callback);
         }
 
-        public void EditChannelPermissions(DiscordClient client, string overwriteId, PermissionFlags allow, PermissionFlags deny, PermissionType type, Action callback = null)
+        public void EditChannelPermissions(DiscordClient client, Snowflake overwriteId, PermissionFlags allow, PermissionFlags deny, PermissionType type, Action callback = null)
         {
             Overwrite overwrite = new Overwrite
             {
@@ -118,7 +118,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
 
         public void GetChannelInvites(DiscordClient client, Action<List<Invite>> callback = null)
         {
-            if (Type == ChannelType.DM || Type == ChannelType.GROUP_DM)
+            if (Type == ChannelType.Dm || Type == ChannelType.GroupDm)
             {
                 throw new Exception("You can only get channel invites for guild channels.");
             }
@@ -133,12 +133,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
 
         public void DeleteChannelPermission(DiscordClient client, Overwrite overwrite, Action callback) => DeleteChannelPermission(client, overwrite.Id, callback);
 
-        public void DeleteChannelPermission(DiscordClient client, string overwriteId, Action callback)
+        public void DeleteChannelPermission(DiscordClient client, Snowflake overwriteId, Action callback)
         {
             client.REST.DoRequest($"/channels/{Id}/permissions/{overwriteId}", RequestMethod.DELETE, null, callback);
         }
 
-        public void FollowNewsChannel(DiscordClient client, string webhookChannelId, Action<FollowedChannel> callback)
+        public void FollowNewsChannel(DiscordClient client, Snowflake webhookChannelId, Action<FollowedChannel> callback)
         {
             client.REST.DoRequest($"/channels/{Id}/followers?webhook_channel_id={webhookChannelId}", RequestMethod.POST, null, callback);
         }
@@ -155,7 +155,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
 
         public void GroupDmAddRecipient(DiscordClient client, DiscordUser user, string accessToken, Action callback = null) => GroupDmAddRecipient(client, user.Id, accessToken, user.Username, callback);
 
-        public void GroupDmAddRecipient(DiscordClient client, string userId, string accessToken, string nick, Action callback = null)
+        public void GroupDmAddRecipient(DiscordClient client, Snowflake userId, string accessToken, string nick, Action callback = null)
         {
             var jsonObj = new Dictionary<string, string>()
             {
@@ -166,7 +166,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
             client.REST.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.PUT, jsonObj, callback);
         }
 
-        public void GroupDmRemoveRecipient(DiscordClient client, string userId, Action callback)
+        public void GroupDmRemoveRecipient(DiscordClient client, Snowflake userId, Action callback)
         {
             client.REST.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.DELETE, null, callback);
         }

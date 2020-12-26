@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
@@ -29,8 +30,8 @@ namespace Oxide.Ext.Discord
 
         public DiscordSettings Settings { get; set; } = new DiscordSettings();
 
-        public Hash<string, Guild> DiscordServers { get; set; } = new Hash<string, Guild>();
-        public Hash<string, Channel> DMs { get; } = new  Hash<string, Channel>();
+        public Hash<Snowflake, Guild> DiscordServers { get; set; } = new Hash<Snowflake, Guild>();
+        public Hash<Snowflake, Channel> DMs { get; } = new  Hash<Snowflake, Channel>();
         
         public Application Application { get; internal set; }
 
@@ -298,7 +299,7 @@ namespace Oxide.Ext.Discord
             _logger.LogDebug($"Heartbeat sent - {_timer.Interval}ms interval.");
         }
         
-        public void RequestGuildMembers(string guildId, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)
+        public void RequestGuildMembers(Snowflake guildId, string query = "", int limit = 0, bool? presences = null, List<Snowflake> userIds = null, string nonce = null)
         {
             var requestGuildMembers = new GuildMembersRequest
             {
@@ -318,12 +319,12 @@ namespace Oxide.Ext.Discord
             RequestGuildMembers(guild.Id, query, limit);
         }
 
-        public void UpdateVoiceState(string guildID, string channelId, bool selfDeaf, bool selfMute)
+        public void UpdateVoiceState(Snowflake guildId, Snowflake channelId, bool selfDeaf, bool selfMute)
         {
             var voiceState = new VoiceStateUpdate()
             {
                 ChannelId = channelId,
-                GuildId = guildID,
+                GuildId = guildId,
                 SelfDeaf = selfDeaf,
                 SelfMute = selfMute
             };
@@ -336,7 +337,7 @@ namespace Oxide.Ext.Discord
             _webSocket.Send(SendOpCode.StatusUpdate, statusUpdate);
         }
 
-        public Guild GetGuild(string id)
+        public Guild GetGuild(Snowflake id)
         {
             return DiscordServers[id];
         }

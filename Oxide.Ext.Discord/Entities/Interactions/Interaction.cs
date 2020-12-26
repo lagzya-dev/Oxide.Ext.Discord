@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
     public class Interaction
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("type")]
         public InteractionType Type { get; set; }
@@ -35,12 +35,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         public void CreateResponse(DiscordClient client, InteractionResponse response, Action callback = null)
         {
-            client.REST.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
-        }
-        
-        public void EditResponse(DiscordClient client, InteractionResponse response, Action callback = null)
-        {
-            client.REST.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
+            client.REST.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, response, callback);
         }
     }
 }

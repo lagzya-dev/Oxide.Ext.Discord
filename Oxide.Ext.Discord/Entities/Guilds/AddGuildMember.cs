@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public string Nick { get; set; }
         
         [JsonProperty("roles")]
-        public List<string> Roles { get; set; }
+        public List<Snowflake> Roles { get; set; }
         
         [JsonProperty("mute")]
         public bool Mute { get; set; }

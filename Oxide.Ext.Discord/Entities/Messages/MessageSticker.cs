@@ -6,10 +6,10 @@ namespace Oxide.Ext.Discord.Entities.Messages
     public class MessageSticker
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("pack_id")]
-        public string PackId { get; set; }
+        public Snowflake PackId { get; set; }
         
         [JsonProperty("name")]
         public string Name { get; set; }

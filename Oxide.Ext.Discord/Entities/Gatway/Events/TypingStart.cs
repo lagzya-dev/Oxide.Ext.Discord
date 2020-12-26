@@ -7,13 +7,13 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
     public class TypingStart
     {
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
         
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
         
         [JsonProperty("user_id")]
-        public string UserId { get; set; }
+        public Snowflake UserId { get; set; }
 
         [JsonProperty("timestamp")]
         public int? Timestamp { get; set; }

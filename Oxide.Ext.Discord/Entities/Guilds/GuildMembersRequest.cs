@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     public class GuildMembersRequest
     {
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
 
         [JsonProperty("query")]
         public string Query { get; set; }
@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public bool? Presences { get; set; }
         
         [JsonProperty("user_ids")]
-        public List<string> UserIds { get; set; }        
+        public List<Snowflake> UserIds { get; set; }        
         
         [JsonProperty("nonce")]
         public string Nonce { get; set; }

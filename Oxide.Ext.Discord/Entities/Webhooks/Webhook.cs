@@ -11,16 +11,16 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
     public class Webhook
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("type")]
         public WebhookType Type { get; set; }
         
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
         
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
         
         [JsonProperty("user")]
         public DiscordUser User { get; set; }
@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public string Token { get; set; }
         
         [JsonProperty("application_id")]
-        public string ApplicationId { get; set; }
+        public Snowflake ApplicationId { get; set; }
 
         public static void CreateWebhook(DiscordClient client, string channelId, string name, string avatar, Action<Webhook> callback = null)
         {

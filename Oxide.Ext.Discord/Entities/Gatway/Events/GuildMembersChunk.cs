@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
     public class GuildMembersChunk
     {
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
 
         [JsonProperty("members")]
         public List<GuildMember> Members { get; set; }

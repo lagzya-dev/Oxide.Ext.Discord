@@ -7,13 +7,13 @@ namespace Oxide.Ext.Discord.Entities.Voice
     public class VoiceState
     {
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
 
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
 
         [JsonProperty("user_id")]
-        public string UserId { get; set; }
+        public Snowflake UserId { get; set; }
         
         [JsonProperty("member")]
         public GuildMember Member { get; set; }

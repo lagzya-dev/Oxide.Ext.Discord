@@ -17,13 +17,13 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
         public string SplashHash { get; set; }
 
         [JsonProperty("owner_id")]
-        public string OwnerId { get; set; }
+        public Snowflake OwnerId { get; set; }
 
         [JsonProperty("region")]
         public string Region { get; set; }
 
         [JsonProperty("afk_channel_id")]
-        public string AfkChannelId { get; set; }
+        public Snowflake AfkChannelId { get; set; }
 
         [JsonProperty("afk_timeout")]
         public int? AfkTimeout { get; set; }

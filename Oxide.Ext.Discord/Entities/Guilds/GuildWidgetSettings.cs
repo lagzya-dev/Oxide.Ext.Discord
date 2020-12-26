@@ -9,6 +9,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public bool Enabled { get; set; }
 
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
     }
 }

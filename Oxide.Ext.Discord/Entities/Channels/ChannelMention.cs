@@ -6,10 +6,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
     public class ChannelMention
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
         
         [JsonProperty("type")]
         public ChannelType Type { get; set; }

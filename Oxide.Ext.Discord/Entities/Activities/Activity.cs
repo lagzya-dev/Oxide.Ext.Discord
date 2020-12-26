@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Activities
         public List<ActivityTimestamps> Timestamps { get; set; }
         
         [JsonProperty("application_id")]
-        public string ApplicationId { get; set; }
+        public Snowflake ApplicationId { get; set; }
         
         [JsonProperty("details")]
         public string Details { get; set; }

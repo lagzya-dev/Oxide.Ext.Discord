@@ -16,13 +16,13 @@ namespace Oxide.Ext.Discord.Entities.Messages
     public class Message : MessageCreate
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
 
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
 
         [JsonProperty("author")]
         public DiscordUser Author { get; set; }
@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public bool Pinned { get; set; }
 
         [JsonProperty("webhook_id")]
-        public string WebhookId { get; set; }
+        public Snowflake WebhookId { get; set; }
 
         [JsonProperty("type")]
         public MessageType? Type { get; set; }
@@ -81,48 +81,33 @@ namespace Oxide.Ext.Discord.Entities.Messages
         [JsonProperty("referenced_message")]
         public Message ReferencedMessage { get; private set; }
 
-        public void Reply(DiscordClient client, Message message, bool ping = true, string messageId = null, Action<Message> callback = null)
+        public void Reply(DiscordClient client, Message message, Snowflake messageId, Action<Message> callback = null)
         {
-            if (ping && !string.IsNullOrEmpty(message.Content) && !message.Content.Contains($"<@{Author.Id}>"))
-            {
-                message.Content = $"<@{Author.Id}> {message.Content}";
-            }
-
-            if (!string.IsNullOrEmpty(messageId))
-            {
-                message.MessageReference = new MessageReference {MessageId = messageId};
-            }
-
+            message.MessageReference = new MessageReference {MessageId = messageId};
             client.REST.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback);
         }
 
-        public void Reply(DiscordClient client, string message, bool ping = true, string messageId = null, Action<Message> callback = null)
+        public void Reply(DiscordClient client, string message, Snowflake messageId, Action<Message> callback = null)
         {
             Message newMessage = new Message()
             {
-                Content = ping ? $"<@{Author.Id}> {message}" : message
+                Content = message
             };
-            
-            if (!string.IsNullOrEmpty(messageId))
-            {
-                newMessage.MessageReference = new MessageReference {MessageId = messageId};
-            }
 
-            Reply(client, newMessage, ping, messageId, callback);
+            Reply(client, newMessage, messageId, callback);
         }
 
-        public void Reply(DiscordClient client, Embed embed, bool ping = true, string messageId = null, Action<Message> callback = null)
+        public void Reply(DiscordClient client, Embed embed, Snowflake messageId, Action<Message> callback = null)
         {
             Message newMessage = new Message()
             {
-                Content = ping ? $"<@{Author.Id}>" : null,
                 Embed = embed
             };
 
-            Reply(client, newMessage, ping, messageId, callback);
+            Reply(client, newMessage, messageId, callback);
         }
         
-        public void CrossPostMessage(DiscordClient client, string messageId, Action<Message> callback = null)
+        public void CrossPostMessage(DiscordClient client, Snowflake messageId, Action<Message> callback = null)
         {
             client.REST.DoRequest($"/channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback);
         }
@@ -150,7 +135,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
         public void DeleteUserReaction(DiscordClient client, string emoji, DiscordUser user, Action callback = null) => DeleteUserReaction(client, emoji, user.Id, callback);
 
-        public void DeleteUserReaction(DiscordClient client, string emoji, string userId, Action callback = null)
+        public void DeleteUserReaction(DiscordClient client, string emoji, Snowflake userId, Action callback = null)
         {
             client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback);
         }

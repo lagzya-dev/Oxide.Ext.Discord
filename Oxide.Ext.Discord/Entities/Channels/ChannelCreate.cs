@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public string Name { get; set; }
         
         [JsonProperty("type")]
-        public ChannelType? Type { get; set; }
+        public ChannelType Type { get; set; }
         
         [JsonProperty("topic")]        
         public string Topic { get; set; }
@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public List<Overwrite> PermissionOverwrites { get; set; }
                 
         [JsonProperty("parent_id")]
-        public string ParentId { get; set; }
+        public Snowflake ParentId { get; set; }
         
         [JsonProperty("nsfw")]
         public bool? Nsfw { get; set; }

@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         public string Token { get; set; }
 
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
 
         [JsonProperty("endpoint")]
         public string Endpoint { get; set; }

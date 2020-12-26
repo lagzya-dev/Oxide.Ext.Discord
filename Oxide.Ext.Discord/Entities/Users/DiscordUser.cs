@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Users
     public class DiscordUser
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         [JsonProperty("username")]
         public string Username { get; set; }
@@ -60,7 +60,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             client.REST.DoRequest($"/users/@me", RequestMethod.GET, null, callback);
         }
 
-        public static void GetUser(DiscordClient client, string userId, Action<DiscordUser> callback = null)
+        public static void GetUser(DiscordClient client, Snowflake userId, Action<DiscordUser> callback = null)
         {
             client.REST.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback);
         }
@@ -85,18 +85,18 @@ namespace Oxide.Ext.Discord.Entities.Users
 
         public void LeaveGuild(DiscordClient client, Guild guild, Action callback = null) => LeaveGuild(client, guild.Id, callback);
 
-        public void LeaveGuild(DiscordClient client, string guildId, Action callback = null)
+        public void LeaveGuild(DiscordClient client, Snowflake guildId, Action callback = null)
         {
             client.REST.DoRequest($"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback);
         }
 
         public void CreateDm(DiscordClient client, Action<Channel> callback = null) => CreateDm(client, Id, callback);
 
-        public static void CreateDm(DiscordClient client, string userId, Action<Channel> callback = null)
+        public static void CreateDm(DiscordClient client, Snowflake userId, Action<Channel> callback = null)
         {
             Dictionary<string, string> data = new Dictionary<string, string>()
             {
-                { "recipient_id", userId }
+                { "recipient_id", userId.ToString() }
             };
 
             client.REST.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback);
@@ -122,7 +122,7 @@ namespace Oxide.Ext.Discord.Entities.Users
 
         public void GroupDmAddRecipient(DiscordClient client, Channel channel, string accessToken, Action callback = null) => GroupDmAddRecipient(client, channel.Id, accessToken, Username, callback);
 
-        public void GroupDmAddRecipient(DiscordClient client, string channelId, string accessToken, string nick, Action callback = null)
+        public void GroupDmAddRecipient(DiscordClient client, Snowflake channelId, string accessToken, string nick, Action callback = null)
         {
             var jsonObj = new Dictionary<string, string>()
             {
@@ -135,7 +135,7 @@ namespace Oxide.Ext.Discord.Entities.Users
 
         public void GroupDmRemoveRecipient(DiscordClient client, Channel channel) => GroupDmRemoveRecipient(client, channel.Id);
 
-        public void GroupDmRemoveRecipient(DiscordClient client, string channelId, Action callback = null)
+        public void GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId, Action callback = null)
         {
             client.REST.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback);
         }

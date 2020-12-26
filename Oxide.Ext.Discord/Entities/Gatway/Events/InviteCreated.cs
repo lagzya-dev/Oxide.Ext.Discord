@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
     public class InviteCreated
     {
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
 
         [JsonProperty("code")]
         public string Code { get; set; }
@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         public DateTime CreatedAt { get; set; }
 
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
 
         [JsonProperty("inviter")]
         public DiscordUser Inviter { get; set; }

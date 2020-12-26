@@ -6,10 +6,10 @@ namespace Oxide.Ext.Discord.Entities.Roles
     public class RoleTags
     {
         [JsonProperty("bot_id")]
-        public string BotId { get; set; }
+        public Snowflake BotId { get; set; }
         
         [JsonProperty("integration_id")]
-        public string IntegrationId { get; set; }
+        public Snowflake IntegrationId { get; set; }
         
         [JsonProperty("premium_subscriber")]
         public bool PremiumSubscriber { get; set; }

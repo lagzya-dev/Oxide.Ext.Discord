@@ -33,12 +33,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public List<Channel> Channels { get; set; }
                 
         [JsonProperty("afk_channel_id")]
-        public string AfkChannelId { get; set; }
+        public Snowflake AfkChannelId { get; set; }
                 
         [JsonProperty("afk_timeout")]
         public int? AfkTimeout { get; set; }
                 
         [JsonProperty("system_channel_id")]
-        public string SystemChannelId { get; set; }
+        public Snowflake SystemChannelId { get; set; }
     }
 }

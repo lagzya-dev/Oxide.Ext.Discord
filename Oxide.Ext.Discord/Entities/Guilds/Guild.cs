@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     public class Guild : GuildPreview
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("icon_Hash")]
         public string IconHash { get; set; }
@@ -50,13 +50,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public GuildMFALevel? MfaLevel { get; set; }
   
         [JsonProperty("application_id")]
-        public string ApplicationId { get; set; }
+        public Snowflake ApplicationId { get; set; }
         
         [JsonProperty("system_channel_flags")]
         public SystemChannelFlags SystemChannelFlags { get; set; }
 
         [JsonProperty("joined_at")]
-        public string JoinedAt { get; set; }
+        public DateTime JoinedAt { get; set; }
   
         [JsonProperty("large")]
         public bool? Large { get; set; }
@@ -170,14 +170,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             }, callback);
         }
 
-        public void AddGuildMember(DiscordClient client, string userId, AddGuildMember member, Action<GuildMember> callback = null)
+        public void AddGuildMember(DiscordClient client, Snowflake userId, AddGuildMember member, Action<GuildMember> callback = null)
         {
             client.REST.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.PUT, member, callback);
         }
 
-        public void ModifyGuildMember(DiscordClient client, GuildMember member, List<string> roles, string channelId, Action callback = null) => this.ModifyGuildMember(client, member.User.Id, member.Nick, roles, member.Deaf, member.Mute, channelId, callback);
+        public void ModifyGuildMember(DiscordClient client, GuildMember member, List<string> roles, Snowflake channelId, Action callback = null) => this.ModifyGuildMember(client, member.User.Id, member.Nick, roles, member.Deaf, member.Mute, channelId, callback);
 
-        public void ModifyGuildMember(DiscordClient client, string userId, string nick, List<string> roles, bool mute, bool deaf, string channelId, Action callback = null)
+        public void ModifyGuildMember(DiscordClient client, Snowflake userId, string nick, List<string> roles, bool mute, bool deaf, Snowflake channelId, Action callback = null)
         {
             var jsonObj = new Dictionary<string, object>()
             {
@@ -191,7 +191,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             client.REST.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.PATCH, jsonObj, callback);
         }
 
-        public void ModifyUsersNick(DiscordClient client, string userId, string nick, Action callback = null)
+        public void ModifyUsersNick(DiscordClient client, Snowflake userId, string nick, Action callback = null)
         {
             var jsonObj = new Dictionary<string, object>()
             {
@@ -213,21 +213,21 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         public void AddGuildMemberRole(DiscordClient client, DiscordUser user, Role role, Action callback = null) => AddGuildMemberRole(client, user.Id, role.Id, callback);
 
-        public void AddGuildMemberRole(DiscordClient client, string userId, string roleId, Action callback = null)
+        public void AddGuildMemberRole(DiscordClient client, Snowflake userId, Snowflake roleId, Action callback = null)
         {
             client.REST.DoRequest($"/guilds/{Id}/members/{userId}/roles/{roleId}", RequestMethod.PUT, null, callback);
         }
 
         public void RemoveGuildMemberRole(DiscordClient client, DiscordUser user, Role role, Action callback = null) => RemoveGuildMemberRole(client, user.Id, role.Id, callback);
 
-        public void RemoveGuildMemberRole(DiscordClient client, string userId, string roleId, Action callback = null)
+        public void RemoveGuildMemberRole(DiscordClient client, Snowflake userId, Snowflake roleId, Action callback = null)
         {
             client.REST.DoRequest($"/guilds/{Id}/members/{userId}/roles/{roleId}", RequestMethod.DELETE, null, callback);
         }
 
         public void RemoveGuildMember(DiscordClient client, GuildMember member, Action callback = null) => RemoveGuildMember(client, member.User.Id, callback);
 
-        public void RemoveGuildMember(DiscordClient client, string userId, Action callback = null)
+        public void RemoveGuildMember(DiscordClient client, Snowflake userId, Action callback = null)
         {
             client.REST.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.DELETE, null, callback);
         }
@@ -239,7 +239,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         public void CreateGuildBan(DiscordClient client, GuildMember member, GuildBan ban, Action callback = null) => CreateGuildBan(client, member.User.Id, ban, callback);
 
-        public void CreateGuildBan(DiscordClient client, string userId, GuildBan ban, Action callback = null)
+        public void CreateGuildBan(DiscordClient client, Snowflake userId, GuildBan ban, Action callback = null)
         {
             client.REST.DoRequest($"/guilds/{Id}/bans/{userId}", RequestMethod.PUT, ban, callback);
         }
@@ -266,14 +266,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         public void ModifyGuildRole(DiscordClient client, Role role, Action<Role> callback = null) => ModifyGuildRole(client, role.Id, role, callback);
 
-        public void ModifyGuildRole(DiscordClient client, string roleId, Role role, Action<Role> callback = null)
+        public void ModifyGuildRole(DiscordClient client, Snowflake roleId, Role role, Action<Role> callback = null)
         {
             client.REST.DoRequest<Role>($"/guilds/{Id}/roles/{roleId}", RequestMethod.PATCH, role, callback);
         }
 
         public void DeleteGuildRole(DiscordClient client, Role role, Action callback = null) => DeleteGuildRole(client, role.Id, callback);
 
-        public void DeleteGuildRole(DiscordClient client, string roleId, Action callback = null)
+        public void DeleteGuildRole(DiscordClient client, Snowflake roleId, Action callback = null)
         {
             client.REST.DoRequest($"/guilds/{Id}/roles/{roleId}", RequestMethod.DELETE, null, callback);
         }
@@ -313,7 +313,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         public void CreateGuildIntegration(DiscordClient client, Integration integration, Action callback = null) => CreateGuildIntegration(client, integration.Type, integration.Id, callback);
 
-        public void CreateGuildIntegration(DiscordClient client, IntegrationType type, string id, Action callback = null)
+        public void CreateGuildIntegration(DiscordClient client, IntegrationType type, Snowflake id, Action callback = null)
         {
             var jsonObj = new Dictionary<string, object>()
             {
@@ -326,12 +326,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         public void ModifyGuildIntegration(DiscordClient client, Integration integration, bool? enableEmoticons, Action callback = null) => ModifyGuildIntegration(client, integration.Id, integration.ExpireBehaviour, integration.ExpireGracePeriod, enableEmoticons, callback);
 
-        public void ModifyGuildIntegration(DiscordClient client, string integrationId, int? expireBehaviour, int? expireGracePeroid, bool? enableEmoticons, Action callback = null)
+        public void ModifyGuildIntegration(DiscordClient client, Snowflake integrationId, int? expireBehaviour, int? expireGracePeriod, bool? enableEmoticons, Action callback = null)
         {
             var jsonObj = new Dictionary<string, object>()
             {
                 { "expire_behaviour", expireBehaviour },
-                { "expire_grace_period", expireGracePeroid },
+                { "expire_grace_period", expireGracePeriod },
                 { "enable_emoticons", enableEmoticons }
             };
 
@@ -340,14 +340,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         public void DeleteGuildIntegration(DiscordClient client, Integration integration, Action callback = null) => DeleteGuildIntegration(client, integration.Id, callback);
 
-        public void DeleteGuildIntegration(DiscordClient client, string integrationId, Action callback = null)
+        public void DeleteGuildIntegration(DiscordClient client, Snowflake integrationId, Action callback = null)
         {
             client.REST.DoRequest($"/guilds/{Id}/integrations/{integrationId}", RequestMethod.DELETE, null, callback);
         }
 
         public void SyncGuildIntegration(DiscordClient client, Integration integration, Action callback = null) => SyncGuildIntegration(client, integration.Id, callback);
 
-        public void SyncGuildIntegration(DiscordClient client, string integrationId, Action callback = null)
+        public void SyncGuildIntegration(DiscordClient client, Snowflake integrationId, Action callback = null)
         {
             client.REST.DoRequest($"/guilds/{Id}/integrations/{integrationId}/sync", RequestMethod.POST, null, callback);
         }

@@ -7,6 +7,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
     public class GuildMemberAdd : GuildMember
     {
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
     }
 }

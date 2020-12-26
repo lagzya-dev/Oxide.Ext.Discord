@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
     public class AuditLogChangeBase
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         [JsonProperty("type")]
         public int? Type { get; set; }

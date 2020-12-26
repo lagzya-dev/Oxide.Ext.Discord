@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     public class MessageApplication
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("cover_image")]
         public string CoverImage { get; set; }      

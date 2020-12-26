@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Attachments
     public class Attachment
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         [JsonProperty("filename")]
         public string Filename { get; set; }

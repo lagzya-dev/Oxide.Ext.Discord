@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Emojis
     public class Emoji : EmojiUpdate
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         [JsonProperty("user")]
         public DiscordUser User { get; set; }

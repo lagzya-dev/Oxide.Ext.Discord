@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     public class Overwrite
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("allow")]
         public PermissionFlags? Allow { get; set; }

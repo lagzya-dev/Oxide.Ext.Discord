@@ -7,12 +7,12 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
     public class MessageDeleteBulk
     {
         [JsonProperty("ids")]
-        public List<string> Ids { get; set; }
+        public List<Snowflake> Ids { get; set; }
 
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
         
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     public class GuildPreview : GuildCreate
     {
         [JsonProperty("owner_id")]
-        public string OwnerId { get; set; }
+        public Snowflake OwnerId { get; set; }
         
         [JsonProperty("splash")]
         public string Splash { get; set; }

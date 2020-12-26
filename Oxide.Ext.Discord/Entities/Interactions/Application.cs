@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
     public class Application
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -49,10 +49,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public Team Team { get; set; }
         
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
         
         [JsonProperty("primary_sku_id")]
-        public string PrimarySkuId { get; set; }
+        public Snowflake PrimarySkuId { get; set; }
         
         [JsonProperty("slug")]
         public string Slug { get; set; }
@@ -80,7 +80,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             client.REST.DoRequest($"/applications/{Id}/commands", RequestMethod.PATCH, update, callback);
         }
         
-        public void DeleteGlobalApplicationCommand(DiscordClient client, string commandId, Action<ApplicationCommand> callback = null)
+        public void DeleteGlobalApplicationCommand(DiscordClient client, Snowflake commandId, Action<ApplicationCommand> callback = null)
         {
             client.REST.DoRequest($"/applications/{Id}/commands/{commandId}", RequestMethod.PATCH, null, callback);
         }
@@ -90,7 +90,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             DeleteGlobalApplicationCommand(client, delete.Id, callback);
         }
 
-        public void GetGuildApplicationCommands(DiscordClient client, string guildId, Action<List<ApplicationCommand>> callback = null)
+        public void GetGuildApplicationCommands(DiscordClient client, Snowflake guildId, Action<List<ApplicationCommand>> callback = null)
         {
             client.REST.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.GET, null, callback);
         }
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             GetGuildApplicationCommands(client, guild.Id, callback);
         }
         
-        public void CreateGuildApplicationCommands(DiscordClient client, string guildId, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null)
+        public void CreateGuildApplicationCommands(DiscordClient client, Snowflake guildId, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null)
         {
             client.REST.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.POST, create, callback);
         }
@@ -110,7 +110,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             CreateGuildApplicationCommands(client, guild.Id, create, callback);
         }
         
-        public void EditGuildApplicationCommands(DiscordClient client, string guildId, ApplicationCommand update, Action<ApplicationCommand> callback = null)
+        public void EditGuildApplicationCommands(DiscordClient client, Snowflake guildId, ApplicationCommand update, Action<ApplicationCommand> callback = null)
         {
             client.REST.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.PATCH, update, callback);
         }
@@ -120,7 +120,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             EditGuildApplicationCommands(client, guild.Id, update, callback);
         }
         
-        public void DeleteGuildApplicationCommands(DiscordClient client, string guildId, string commandId, Action callback = null)
+        public void DeleteGuildApplicationCommands(DiscordClient client, Snowflake guildId, Snowflake commandId, Action callback = null)
         {
             client.REST.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}", RequestMethod.DELETE, null, callback);
         }
@@ -151,20 +151,20 @@ namespace Oxide.Ext.Discord.Entities.Interactions
 
         public void CreateFollowUpMessage(DiscordClient client, Interaction interaction, WebhookCreateMessage message, Action<Message> callback = null) => CreateFollowUpMessage(client, interaction.Token, message, callback);
         
-        public void EditFollowUpMessage(DiscordClient client, string interactionToken, string messageId, WebhookEditMessage edit, Action<Message> callback = null)
+        public void EditFollowUpMessage(DiscordClient client, string interactionToken, Snowflake messageId, WebhookEditMessage edit, Action<Message> callback = null)
         {
             client.REST.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.PATCH, edit, callback);
         }
 
-        public void EditFollowUpMessage(DiscordClient client, Interaction interaction, string messageId, WebhookEditMessage edit, Action<Message> callback = null) => EditFollowUpMessage(client, interaction.Token, messageId, edit, callback);
+        public void EditFollowUpMessage(DiscordClient client, Interaction interaction, Snowflake messageId, WebhookEditMessage edit, Action<Message> callback = null) => EditFollowUpMessage(client, interaction.Token, messageId, edit, callback);
         public void EditFollowUpMessage(DiscordClient client, Interaction interaction, Message message, WebhookEditMessage edit, Action<Message> callback = null) => EditFollowUpMessage(client, interaction.Token, message.Id, edit, callback);
         
-        public void DeleteFollowUpMessage(DiscordClient client, string interactionToken, string messageId, Action callback = null)
+        public void DeleteFollowUpMessage(DiscordClient client, string interactionToken, Snowflake messageId, Action callback = null)
         {
             client.REST.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.DELETE, null, callback);
         }
 
-        public void DeleteFollowUpMessage(DiscordClient client, Interaction interaction, string messageId, Action callback = null) => DeleteFollowUpMessage(client, interaction.Token, messageId, callback);
+        public void DeleteFollowUpMessage(DiscordClient client, Interaction interaction, Snowflake messageId, Action callback = null) => DeleteFollowUpMessage(client, interaction.Token, messageId, callback);
         public void DeleteFollowUpMessage(DiscordClient client, Interaction interaction, Message message, Action callback = null) => DeleteFollowUpMessage(client, interaction.Token, message.Id, callback);
     }
 }

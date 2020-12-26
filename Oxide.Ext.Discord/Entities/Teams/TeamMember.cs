@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Teams
         public List<string> Permissions { get; set; }
         
         [JsonProperty("team_id")]
-        public string TeamId { get; set; }
+        public Snowflake TeamId { get; set; }
         
         [JsonProperty("user")]
         public DiscordUser User { get; set; } 

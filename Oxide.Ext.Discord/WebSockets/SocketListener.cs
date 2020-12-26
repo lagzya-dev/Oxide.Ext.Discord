@@ -4,6 +4,7 @@ using System.Linq;
 using System.Timers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
@@ -304,7 +305,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         case "GUILD_CREATE":
                         {
                             Guild guild = payload.EventData.ToObject<Guild>();
-                            string id = guild.Id;
+                            Snowflake id = guild.Id;
                             bool unavailable = guild.Unavailable ?? false;
                             if(_client.GetGuild(id) == null)
                             {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -11,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public int Days { get; set; }
         
         [JsonProperty("include_roles")]
-        public List<string> IncludeRoles { get; set; }
+        public List<Snowflake> IncludeRoles { get; set; }
         
         public virtual string ToQueryString()
         {
@@ -20,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
             if (IncludeRoles != null)
             {
-                sb.Append($"&include_roles={string.Join(",", IncludeRoles.ToArray())}");
+                sb.Append($"&include_roles={string.Join(",", IncludeRoles.Select(r => r.ToString()).ToArray())}");
             }
             
             return sb.ToString();

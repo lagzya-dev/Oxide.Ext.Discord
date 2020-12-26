@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     public class ApplicationCommandInteractionData
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("name")]
         public string Name { get; set; }

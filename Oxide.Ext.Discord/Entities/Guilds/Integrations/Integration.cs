@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.Integrations
     public class Integration
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
