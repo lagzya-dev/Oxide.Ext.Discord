@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Policy;
 using System.Text;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -134,18 +135,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
         public void CreateReaction(DiscordClient client, string emoji, Action callback = null)
         {
-            byte[] encodedEmoji = Encoding.UTF8.GetBytes(emoji);
-            string hexString = HttpUtility.UrlEncode(encodedEmoji);
-            
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{hexString}/@me", RequestMethod.PUT, null, callback);
+            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.PUT, null, callback);
         }
 
         public void DeleteOwnReaction(DiscordClient client, string emoji, Action callback = null)
         {
-            byte[] encodedEmoji = Encoding.UTF8.GetBytes(emoji);
-            string hexString = HttpUtility.UrlEncode(encodedEmoji);
-            
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{hexString}/@me", RequestMethod.DELETE, null, callback);
+            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.DELETE, null, callback);
         }
 
         public void DeleteUserReaction(DiscordClient client, string emoji, DiscordUser user, Action callback = null) => DeleteUserReaction(client, emoji, user.Id, callback);
@@ -157,10 +152,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
         public void GetReactions(DiscordClient client, string emoji, Action<List<DiscordUser>> callback = null)
         {
-            byte[] encodedEmoji = Encoding.UTF8.GetBytes(emoji);
-            string hexString = HttpUtility.UrlEncode(encodedEmoji);
-
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{hexString}", RequestMethod.GET, null, callback);
+            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.GET, null, callback);
         }
 
         public void DeleteAllReactions(DiscordClient client, Action callback = null)
@@ -170,10 +162,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         
         public void DeleteAllReactionsForEmoji(DiscordClient client, string emoji, Action callback = null)
         {
-            byte[] encodedEmoji = Encoding.UTF8.GetBytes(emoji);
-            string hexString = HttpUtility.UrlEncode(encodedEmoji);
-            
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{hexString}", RequestMethod.DELETE, null, callback);
+            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.DELETE, null, callback);
         }
 
         public void EditMessage(DiscordClient client, Action<Message> callback = null)
