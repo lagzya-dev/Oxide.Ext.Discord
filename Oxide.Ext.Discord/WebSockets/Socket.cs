@@ -1,6 +1,7 @@
 ﻿namespace Oxide.Ext.Discord.WebSockets
 {
     using System;
+    using Oxide.Core;
     using Oxide.Ext.Discord.Exceptions;
     using WebSocketSharp;
 
@@ -26,11 +27,10 @@
                 throw new NoURLException();
             }
 
-            if (socket != null && socket.ReadyState != WebSocketState.Closed && socket.ReadyState != WebSocketState.Closing)
+            if (socket != null)
             {
-                //throw new SocketRunningException(client);
-                // Assume force-reconenct
-                socket?.Close(CloseStatusCode.Abnormal);
+                // Assume force-reconnect
+                Disconnect(false);
             }
             client.DestroyHeartbeat();
 
@@ -54,6 +54,13 @@
             socket?.CloseAsync(normal ? CloseStatusCode.Normal : CloseStatusCode.Abnormal);
         }
 
+        public void ReconnectRequested()
+        {
+            if (IsClosed() || IsClosing()) return;
+
+            socket?.CloseAsync(4000, "Discord server requested reconnect");
+        }
+
         public void Dispose()
         {
             listner = null;
@@ -63,7 +70,7 @@
         public void Send(string message, Action<bool> completed = null)
         {
             if (IsAlive())
-                socket?.SendAsync(message, completed);
+                socket.SendAsync(message, completed);
         }
 
         public bool IsAlive()

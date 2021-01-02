@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord
+﻿using Oxide.Ext.Discord.Logging;
+
+namespace Oxide.Ext.Discord
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -25,7 +27,8 @@
 
             var settings = new DiscordSettings()
             {
-                ApiToken = apiKey
+                ApiToken = apiKey,
+                LogLevel = LogLevel.Info
             };
 
             CreateClient(plugin, settings);
