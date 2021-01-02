@@ -83,11 +83,13 @@ namespace Oxide.Ext.Discord.REST
                 {
                     WriteRequestData(req, Data);
                 }
-                
-                using HttpWebResponse response = req.GetResponse() as HttpWebResponse;
-                if (response != null)
+
+                using (HttpWebResponse response = req.GetResponse() as HttpWebResponse)
                 {
-                    ParseResponse(response);
+                    if (response != null)
+                    {
+                        ParseResponse(response);
+                    }
                 }
 
                 Callback?.Invoke(Response);
@@ -95,37 +97,39 @@ namespace Oxide.Ext.Discord.REST
             }
             catch (WebException ex)
             {
-                using HttpWebResponse httpResponse = ex.Response as HttpWebResponse;
-                if (httpResponse == null)
+                using (HttpWebResponse httpResponse = ex.Response as HttpWebResponse)
                 {
-                    _logger.LogException($"A web request exception occured (internal error) [RETRY={_retries}/3].", ex);
-                    _logger.LogError($"Request URL: [{Method.ToString()}] {RequestUrl}");
-
-                    Close(false);
-                    return;
-                }
-                
-                string message = ParseResponse(ex.Response);
-                
-                bool isRateLimit = (int) httpResponse.StatusCode == 429;
-                if (isRateLimit)
-                {
-                    _logger.LogInfo($"Discord ratelimit reached. (Ratelimit info: remaining: {bucket.Remaining}, limit: {bucket.Limit}, reset: {bucket.Reset}, time now: {Helpers.Time.TimeSinceEpoch()}");
-                }
-                else
-                {
-                    DiscordApiError apiError = Response.ParseData<DiscordApiError>();
-                    if (!string.IsNullOrEmpty(apiError.Code))
+                    if (httpResponse == null)
                     {
-                        _logger.LogWarning($"Discord has returned error Code - {apiError.Code}: {apiError.Message} - {req.RequestUri} (code {httpResponse.StatusCode})");
+                        _logger.LogException($"A web request exception occured (internal error) [RETRY={_retries}/3].", ex);
+                        _logger.LogError($"Request URL: [{Method.ToString()}] {RequestUrl}");
+
+                        Close(false);
+                        return;
+                    }
+
+                    string message = ParseResponse(ex.Response);
+
+                    bool isRateLimit = (int) httpResponse.StatusCode == 429;
+                    if (isRateLimit)
+                    {
+                        _logger.LogInfo($"Discord ratelimit reached. (Ratelimit info: remaining: {bucket.Remaining}, limit: {bucket.Limit}, reset: {bucket.Reset}, time now: {Helpers.Time.TimeSinceEpoch()}");
                     }
                     else
                     {
-                        _logger.LogWarning($"An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
+                        DiscordApiError apiError = Response.ParseData<DiscordApiError>();
+                        if (!string.IsNullOrEmpty(apiError.Code))
+                        {
+                            _logger.LogWarning($"Discord has returned error Code - {apiError.Code}: {apiError.Message} - {req.RequestUri} (code {httpResponse.StatusCode})");
+                        }
+                        else
+                        {
+                            _logger.LogWarning($"An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
+                        }
                     }
+
+                    Close(!isRateLimit);
                 }
-                
-                Close(!isRateLimit);
             }
             catch (Exception ex)
             {
@@ -168,26 +172,32 @@ namespace Oxide.Ext.Discord.REST
             byte[] bytes = Encoding.UTF8.GetBytes(contents);
             request.ContentLength = bytes.Length;
 
-            using Stream stream = request.GetRequestStream();
-            stream.Write(bytes, 0, bytes.Length);
+            using (Stream stream = request.GetRequestStream())
+            {
+                stream.Write(bytes, 0, bytes.Length);
+            }
+            
         }
 
         private string ParseResponse(WebResponse response)
         {
-            using Stream stream = response.GetResponseStream();
-            if (stream == null)
+            using (Stream stream = response.GetResponseStream())
             {
-                return null;
+                if (stream == null)
+                {
+                    return null;
+                }
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string message = reader.ReadToEnd().Trim();
+                    Response = new RestResponse(message);
+
+                    ParseHeaders(response.Headers, Response);
+
+                    return message;
+                }
             }
-            
-            using StreamReader reader = new StreamReader(stream);
-            string message = reader.ReadToEnd().Trim();
-
-            Response = new RestResponse(message);
-
-            ParseHeaders(response.Headers, Response);
-
-            return message;
         }
 
         private void ParseHeaders(WebHeaderCollection headers, RestResponse response)
