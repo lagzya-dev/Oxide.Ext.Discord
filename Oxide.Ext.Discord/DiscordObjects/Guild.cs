@@ -15,7 +15,13 @@
 
         public string splash { get; set; }
 
+        public string discovery_splash { get; set; }
+
+        public bool owner { get; set; }
+
         public string owner_id { get; set; }
+
+        public int? permissions { get; set; }
 
         public string region { get; set; }
 
@@ -49,6 +55,8 @@
 
         public string system_channel_id { get; set; }
 
+        public string rules_channel_id { get; set; }
+
         public string joined_at { get; set; }
 
         public bool? large { get; set; }
@@ -78,6 +86,10 @@
         public GuildPremiumTier? premium_tier { get; set; }
 
         public int? premium_subscription_count { get; set; }
+
+        public string preferred_locale { get; set; }
+
+        public string public_updates_channel_id { get; set; }
 
         public static void CreateGuild(DiscordClient client, string name, string region, string icon, GuildVerificationLevel? verificationLevel, int? defaultMessageNotifications, List<Role> roles, List<Channel> channels, Action<Guild> callback = null)
         {
@@ -115,9 +127,9 @@
             client.REST.DoRequest($"/guilds/{id}/channels", RequestMethod.GET, null, callback);
         }
 
-        public void CreateGuildChannel(DiscordClient client, Channel channel, Action<Channel> callback = null) => CreateGuildChannel(client, channel.name, channel.type, channel.bitrate, channel.user_limit, channel.permission_overwrites, callback);
+        public void CreateGuildChannel(DiscordClient client, Channel channel, Action<Channel> callback = null) => CreateGuildChannel(client, channel.name, channel.type, channel.bitrate, channel.user_limit, channel.permission_overwrites, channel.parent_id, callback);
 
-        public void CreateGuildChannel(DiscordClient client, string name, ChannelType? type, int? bitrate, int? userLimit, List<Overwrite> permissionOverwrites, Action<Channel> callback = null)
+        public void CreateGuildChannel(DiscordClient client, string name, ChannelType? type, int? bitrate, int? userLimit, List<Overwrite> permissionOverwrites, string parent_id, Action<Channel> callback = null)
         {
             var jsonObj = new Dictionary<string, object>()
             {
@@ -125,7 +137,8 @@
                 { "type", type },
                 { "bitrate", bitrate },
                 { "user_limit", userLimit },
-                { "permission_overwrites", permissionOverwrites }
+                { "permission_overwrites", permissionOverwrites },
+                { "parent_id", parent_id }
             };
 
             client.REST.DoRequest($"/guilds/{id}/channels", RequestMethod.POST, jsonObj, callback);

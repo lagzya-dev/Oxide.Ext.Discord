@@ -17,8 +17,10 @@
         [JsonProperty("s")]
         public int? Sequence { get; set; }
 
+        [JsonIgnore]
         public JObject EventData => _data as JObject;
 
+        [JsonIgnore]
         public object Data
         {
             get { return _data; }

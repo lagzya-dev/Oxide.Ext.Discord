@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.REST
+﻿using Oxide.Ext.Discord.Logging;
+
+namespace Oxide.Ext.Discord.REST
 {
     using System;
     using System.Collections.Generic;
@@ -12,10 +14,13 @@
 
         private Dictionary<string, string> headers;
 
-        public RESTHandler(string apiKey)
+        private readonly LogLevel _logLevel;
+
+        public RESTHandler(string apiKey, LogLevel logLevel)
         {
             this.apiKey = apiKey;
-
+            _logLevel = logLevel;
+            
             // Version
             string version = "";
             var exts = Oxide.Core.Interface.Oxide.GetAllExtensions();
@@ -69,7 +74,7 @@
             string endpoint = "/" + string.Join("/", parts.Skip(3).ToArray());
             endpoint = endpoint.TrimEnd('/');
 
-            var request = new Request(method, route, endpoint, headers, data, callback);
+            var request = new Request(method, route, endpoint, headers, data, callback, _logLevel);
             BucketRequest(request);
         }
 

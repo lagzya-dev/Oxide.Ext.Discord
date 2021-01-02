@@ -105,7 +105,7 @@
             client.REST.DoRequest($"/channels/{id}/messages/bulk-delete", RequestMethod.POST, jsonObj, callback);
         }
 
-        public void EditChannelPermissions(DiscordClient client, Overwrite overwrite, int? allow, int? deny, string type) => EditChannelPermissions(client, overwrite, allow, deny, type);
+        public void EditChannelPermissions(DiscordClient client, Overwrite overwrite, int? allow, int? deny, string type) => EditChannelPermissions(client, overwrite.id, allow, deny, type);
 
         public void EditChannelPermissions(DiscordClient client, string overwriteID, int? allow, int? deny, string type, Action callback = null)
         {

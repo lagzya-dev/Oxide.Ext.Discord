@@ -1,11 +1,9 @@
-﻿namespace Oxide.Ext.Discord.REST
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using Oxide.Ext.Discord.Helpers;
+﻿using System.Collections.Generic;
+using System.Threading;
+using Oxide.Ext.Discord.Helpers;
 
+namespace Oxide.Ext.Discord.REST
+{
     public class Bucket : List<Request>
     {
         public RequestMethod Method { get; }
@@ -18,34 +16,37 @@
 
         public int Reset { get; set; }
 
-        public bool Initialized { get; private set; } = false;
+        public bool Initialized { get; private set; }
 
-        public bool Disposed { get; set; } = false;
+        public bool Disposed { get; set; }
 
-        private Thread thread;
+        private Thread _thread;
 
         public Bucket(RequestMethod method, string route)
         {
-            this.Method = method;
-            this.Route = route;
+            Method = method;
+            Route = route;
 
-            thread = new Thread(() => RunThread());
-            thread.Start();
+            _thread = new Thread(RunThread);
+            _thread.Start();
         }
 
         public void Close()
         {
-            thread?.Abort();
-            thread = null;
+            _thread?.Abort();
+            _thread = null;
         }
 
         public void Queue(Request request)
         {
-            this.Add(request);
-
-            if (!this.Initialized)
+            lock (this)
             {
-                this.Initialized = true;
+                Add(request);
+            }
+
+            if (!Initialized)
+            {
+                Initialized = true;
             }
         }
 
@@ -54,16 +55,22 @@
             // 'Initialized' basically allows us to start the while
             // loop from the constructor even when this.Count = 0
             // (eg after the bucket is created, before requests are added)
-            while (!Initialized || (this.Count > 0))
+            while (!Initialized || Count > 0)
             {
-                if (Disposed) break;
+                if (Disposed)
+                {
+                    break;
+                }
 
-                if (!Initialized) continue;
+                if (!Initialized)
+                {
+                    continue;
+                }
 
                 FireRequests();
             }
 
-            this.Disposed = true;
+            Disposed = true;
         }
 
         private void FireRequests()
@@ -80,13 +87,27 @@
                 return;
             }
             
-            if (this.Any(x => x.InProgress))
+            for (int index = 0; index < Count; index++)
+            {
+                Request request = this[index];
+                if (request.HasTimedOut())
+                {
+                    request.Close(false);
+                }
+
+                if (request.InProgress)
+                {
+                    return;
+                }
+            }
+
+            //It's possible we removed a request that has timed out.
+            if (Count == 0)
             {
                 return;
             }
-
-            var nextItem = this.First();
-            nextItem.Fire(this);
+            
+            this[0].Fire(this);
         }
 
         ////private void CleanRequests()

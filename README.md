@@ -68,7 +68,7 @@ namespace Oxide.Plugins
         void Discord_MessageCreate(Message message)
         {
             // Add a sad reaction to the message
-            message.CreateReaction(Client, ":sad:");
+            message.CreateReaction(Client, "<emoji_name:id>");
 
             // Post the message to chat
             server.Broadcast($"Discord Message: {message.author.username} - {message.content}");
@@ -166,7 +166,7 @@ void Discord_Resumed(Resumed resumed)
 ### Discord_ChannelCreate
 
 ```csharp
-void Discord_ChannelCreated(Channel channel)
+void Discord_ChannelCreate(Channel channel)
 {
     Puts("Discord Channel Created");
 }

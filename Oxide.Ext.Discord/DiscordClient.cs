@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Logging;
+
 namespace Oxide.Ext.Discord
 {
     using System;
@@ -23,7 +25,7 @@ namespace Oxide.Ext.Discord
 
         public RESTHandler REST { get; private set; }
 
-        public string WSSURL { get; private set; }
+        private static string WebSocketUrl { get; set; }
 
         public DiscordSettings Settings { get; set; } = new DiscordSettings();
 
@@ -52,6 +54,8 @@ namespace Oxide.Ext.Discord
 
         public bool requestReconnect = false;
 
+        private ILogger _logger;
+
         public void Initialize(Plugin plugin, DiscordSettings settings)
         {
             if (plugin == null)
@@ -68,15 +72,22 @@ namespace Oxide.Ext.Discord
             {
                 throw new APIKeyException();
             }
+            
+            _logger = new Logger<DiscordClient>(settings.LogLevel);
+            
+            if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
+            {
+                _logger.LogWarning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
+            }
 
             /*if(Discord.PendingTokens.Contains(settings.ApiToken)) // Not efficient, will re-do later
             {
-                Interface.Oxide.LogWarning($"[Discord Extension] Connection with same token in short period.. Connection delayed for {plugin.Name}");
+                _logger.LogWarning($"[Discord Extension] Connection with same token in short period.. Connection delayed for {plugin.Name}");
                 Timer t = new Timer() { AutoReset = false, Interval = 5000f, Enabled = true};
                 t.Elapsed += (object sender, ElapsedEventArgs e) =>
                 {
                     // TODO: Check if the connection still persists or cancelled
-                    Interface.Oxide.LogWarning($"[Discord Extension] Delayed connection for {plugin.Name} is being resumed..");
+                    _logger.LogWarning($"[Discord Extension] Delayed connection for {plugin.Name} is being resumed..");
                     Initialize(plugin, settings);
                 };
                 return;
@@ -88,21 +99,10 @@ namespace Oxide.Ext.Discord
 
             Settings = settings;
 
-            REST = new RESTHandler(Settings.ApiToken);
+            REST = new RESTHandler(Settings.ApiToken, Settings.LogLevel);
             _webSocket = new Socket(this);
-
-            if (!string.IsNullOrEmpty(WSSURL))
-            {
-                _webSocket.Connect(WSSURL);
-                return;
-            }
-
-            this.GetURL(url =>
-            {
-                UpdateWSSURL(url);
-
-                _webSocket.Connect(WSSURL);
-            });
+            
+            ConnectToWebSocket();
 
             /*Discord.PendingTokens.Add(settings.ApiToken); // Not efficient, will re-do later
             Timer t2 = new Timer() { AutoReset = false, Interval = 5000f, Enabled = true };
@@ -119,9 +119,6 @@ namespace Oxide.Ext.Discord
             DestroyHeartbeat();
             _webSocket?.Dispose();
             _webSocket = null;
-
-            WSSURL = string.Empty;
-
             REST?.Shutdown();
         }
 
@@ -149,31 +146,36 @@ namespace Oxide.Ext.Discord
             Plugins.Add(plugin);
         }
 
-        public object CallHook(string hookname, Plugin specificPlugin = null, params object[] args)
+        public void CallHook(string hookName, Plugin specificPlugin = null, params object[] args)
         {
-            if (specificPlugin != null)
+            //Run from next tick so we can be sure it's ran on the main thread.
+            Interface.Oxide.NextTick(() =>
             {
-                if (!specificPlugin.IsLoaded) return null;
+                if (specificPlugin != null)
+                {
+                    if (!specificPlugin.IsLoaded)
+                    {
+                        return;
+                    }
 
-                return specificPlugin.CallHook(hookname, args);
-            }
+                    specificPlugin.CallHook(hookName, args);
+                    return;
+                }
 
-            Dictionary<string, object> returnValues = new Dictionary<string, object>();
+                Dictionary<string, object> returnValues = new Dictionary<string, object>();
 
-            foreach (var plugin in Plugins.Where(x => x.IsLoaded))
-            {
-                var retVal = plugin.CallHook(hookname, args);
-                returnValues.Add(plugin.Title, retVal);
-            }
+                foreach (var plugin in Plugins.Where(x => x.IsLoaded))
+                {
+                    var retVal = plugin.CallHook(hookName, args);
+                    returnValues.Add(plugin.Title, retVal);
+                }
 
-            if (returnValues.Count(x => x.Value != null) > 1)
-            {
-                string conflicts = string.Join("\n", returnValues.Select(x => $"Plugin {x.Key} - {x.Value}").ToArray());
-                Interface.Oxide.LogWarning($"[Discord Extension] A hook conflict was triggered on {hookname} between:\n{conflicts}");
-                return null;
-            }
-
-            return returnValues.FirstOrDefault(x => x.Value != null).Value;
+                if (returnValues.Count(x => x.Value != null) > 1)
+                {
+                    string conflicts = string.Join("\n", returnValues.Select(x => $"Plugin {x.Key} - {x.Value}").ToArray());
+                    _logger.LogWarning($"A hook conflict was triggered on {hookName} between:\n{conflicts}");
+                }
+            });
         }
 
         public string GetPluginNames(string delimiter = ", ") => string.Join(delimiter, Plugins.Select(x => x.Name).ToArray());
@@ -182,13 +184,13 @@ namespace Oxide.Ext.Discord
         {
             if (_timer != null)
             {
-                Interface.Oxide.LogWarning($"[Discord Extension] Warning: tried to create a heartbeat when one is already registered.");
+                _logger.LogWarning($"Warning: tried to create a heartbeat when one is already registered.");
                 return;
             }
 
             _lastHeartbeat = Time.TimeSinceEpoch();
             HeartbeatACK = true;
-
+            
             _timer = new Timer()
             {
                 Interval = heartbeatInterval
@@ -204,42 +206,60 @@ namespace Oxide.Ext.Discord
                 _timer.Dispose();
                 _timer = null;
             }
-            return;
         }
 
         private void HeartbeatElapsed(object sender, ElapsedEventArgs e)
         {
-            if (!_webSocket.IsAlive() ||
-                _webSocket.IsClosing() ||
-                _webSocket.IsClosed())
+            if (_webSocket == null || !_webSocket.IsAlive())
             {
-                _timer.Dispose();
-                _timer = null;
+                DestroyHeartbeat();
                 return;
             }
 
             SendHeartbeat();
         }
 
-        private void GetURL(Action<string> callback)
+        internal void ConnectToWebSocket()
+        {
+            if (!string.IsNullOrEmpty(WebSocketUrl))
+            {
+                _webSocket.Connect(WebSocketUrl);
+                return;
+            }
+            
+            ConnectToWebsocketUrl();
+        }
+        
+        internal void ConnectToWebsocketUrl()
+        {
+            GetGatewayUrl(url =>
+            {
+                UpdateWebsocketUrl(url);
+                ConnectToWebSocket();
+            });
+        }
+        
+        private void GetGatewayUrl(Action<string> callback)
         {
             DiscordObjects.Gateway.GetGateway(this, (gateway) =>
             {
                 // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                string fullURL = $"{gateway.URL}/?{Connect.Serialize()}";
+                string url = $"{gateway.URL}/?{Connect.Serialize()}";
 
-                if (Settings.Debugging)
-                {
-                    Interface.Oxide.LogDebug($"Got Gateway url: {fullURL}");
-                }
+                _logger.LogDebug($"Got Gateway url: {url}");
 
-                callback.Invoke(fullURL);
+                callback.Invoke(url);
             });
         }
 
-        public void UpdateWSSURL(string fullURL)
+        public void UpdateWebsocketUrl(string url)
         {
-            WSSURL = fullURL;
+            if (string.IsNullOrEmpty(url))
+            {
+                return;
+            }
+            
+            WebSocketUrl = url;
         }
 
         #region Discord Events
@@ -270,7 +290,7 @@ namespace Oxide.Ext.Discord
             };
             var payload = JsonConvert.SerializeObject(opcode);
 
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
         
         public void Resume()
@@ -289,7 +309,7 @@ namespace Oxide.Ext.Discord
             };
 
             string payload = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
         
         public void SendHeartbeat()
@@ -297,7 +317,7 @@ namespace Oxide.Ext.Discord
             if(!HeartbeatACK)
             {
                 // Didn't receive an ACK, thus connection can be considered zombie, thus destructing.
-                Interface.Oxide.LogError("[Discord Extension] Discord did not respond to Heartbeat! Disconnecting..");
+                _logger.LogError("Discord did not respond to Heartbeat! Disconnecting..");
                 requestReconnect = true;
                 _webSocket.Disconnect(false);
                 return;
@@ -310,25 +330,25 @@ namespace Oxide.Ext.Discord
 
             HeartbeatACK = false;
             string message = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(message);
+            _webSocket?.Send(message);
 
             _lastHeartbeat = Time.TimeSinceEpoch();
 
             this.CallHook("DiscordSocket_HeartbeatSent");
 
-            if (Settings.Debugging)
-            {
-                Interface.Oxide.LogDebug($"[Discord Extension] Heartbeat sent - {_timer.Interval}ms interval.");
-            }
+            _logger.LogDebug($"Heartbeat sent - {_timer.Interval}ms interval.");
         }
         
-        public void RequestGuildMembers(string guild_id, string query = "", int limit = 0)
+        public void RequestGuildMembers(string guildId, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)
         {
-            var requestGuildMembers = new GuildMembersRequest()
+            var requestGuildMembers = new GuildMembersRequest
             {
-                GuildID = guild_id,
+                GuildID = guildId,
                 Query = query,
-                Limit = limit
+                Limit = limit,
+                Presences = presences,
+                UserIds = userIds,
+                Nonce = nonce
             };
 
             var packet = new RPayload()
@@ -338,7 +358,7 @@ namespace Oxide.Ext.Discord
             };
 
             string payload = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
 
         public void RequestGuildMembers(Guild guild, string query = "", int limit = 0)
@@ -363,7 +383,7 @@ namespace Oxide.Ext.Discord
             };
 
             string payload = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
 
         public void UpdateStatus(Presence presence)
@@ -375,7 +395,7 @@ namespace Oxide.Ext.Discord
             };
 
             var payload = JsonConvert.SerializeObject(opcode);
-            _webSocket.Send(payload);
+            _webSocket?.Send(payload);
         }
 
         public Guild GetGuild(string id)
