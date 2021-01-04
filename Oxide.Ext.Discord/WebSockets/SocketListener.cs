@@ -387,6 +387,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         {
                             GuildIntergrationsUpdate integration = payload.EventData.ToObject<GuildIntergrationsUpdate>();
                             _client.CallHook("Discord_GuildIntergrationsUpdate", null, integration);
+                            _client.CallHook("Discord_GuildIntegrationsUpdate", null, integration);
                             break;
                         }
 

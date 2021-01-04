@@ -179,9 +179,9 @@ void Discord_GuildEmojisUpdate(GuildEmojisUpdate update)
 
  - Called when the emoji's in a guild have been updated.
  
-## Discord_GuildIntergrationsUpdate
+## Discord_GuildIntegrationsUpdate
 ```csharp
-void Discord_GuildIntergrationsUpdate(GuildIntergrationsUpdate update)
+void Discord_GuildIntegrationsUpdate(GuildIntergrationsUpdate update)
 {
     Puts("Guild Intergrations Updated!");
 }
