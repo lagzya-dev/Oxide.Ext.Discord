@@ -187,7 +187,7 @@ void Discord_GuildIntegrationsUpdate(GuildIntergrationsUpdate update)
 }
 ```
 
- - Called when the intergrations in a guild have been updated?
+ - Called when the integration in a guild have been updated?
  
 ## Discord_MemberAdded
 ```csharp
