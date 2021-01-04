@@ -626,6 +626,12 @@ namespace Oxide.Ext.Discord.WebSockets
                             _client.CallHook("Discord_InviteDeleted", null, invite);
                             break;
                         }
+                        
+                        case "INTEGRATION_CREATE":
+                        case "INTEGRATION_UPDATE":
+                        case "INTEGRATION_DELETE":
+                        case "INTERACTION_CREATE":
+                            break;
 
                         default:
                         {
