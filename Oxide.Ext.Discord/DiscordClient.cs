@@ -164,18 +164,9 @@ namespace Oxide.Ext.Discord
                     return;
                 }
 
-                Dictionary<string, object> returnValues = new Dictionary<string, object>();
-
-                foreach (var plugin in Plugins.Where(x => x.IsLoaded))
+                foreach (Plugin plugin in Plugins.Where(x => x.IsLoaded))
                 {
-                    var retVal = plugin.CallHook(hookName, args);
-                    returnValues.Add(plugin.Title, retVal);
-                }
-
-                if (returnValues.Count(x => x.Value != null) > 1)
-                {
-                    string conflicts = string.Join("\n", returnValues.Select(x => $"Plugin {x.Key} - {x.Value}").ToArray());
-                    _logger.LogWarning($"A hook conflict was triggered on {hookName} between:\n{conflicts}");
+                    plugin.CallHook(hookName, args);
                 }
             });
         }
