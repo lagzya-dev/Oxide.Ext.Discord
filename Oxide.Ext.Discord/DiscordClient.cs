@@ -23,8 +23,6 @@ namespace Oxide.Ext.Discord
 
         public RestHandler REST { get; private set; }
 
-        private static string WebSocketUrl { get; set; }
-
         public DiscordSettings Settings { get; set; } = new DiscordSettings();
 
         public List<Guild> DiscordServers { get; set; } = new List<Guild>();
@@ -46,9 +44,7 @@ namespace Oxide.Ext.Discord
 
         private Timer _timer;
 
-        private double _lastHeartbeat;
-
-        public bool HeartbeatACK = false;
+        public bool HeartbeatAcknowledged = false;
 
         public bool requestReconnect = false;
 
@@ -103,7 +99,7 @@ namespace Oxide.Ext.Discord
             REST = new RestHandler(this, Settings.ApiToken, Settings.LogLevel);
             _webSocket = new Socket(this);
             
-            ConnectToWebSocket();
+            ConnectWebSocket();
 
             /*Discord.PendingTokens.Add(settings.ApiToken); // Not efficient, will re-do later
             Timer t2 = new Timer() { AutoReset = false, Interval = 5000f, Enabled = true };
@@ -112,6 +108,16 @@ namespace Oxide.Ext.Discord
                 if (Discord.PendingTokens.Contains(settings.ApiToken))
                     Discord.PendingTokens.Remove(settings.ApiToken);
             };*/
+        }
+        
+        public void ConnectWebSocket()
+        {
+            _webSocket?.Connect();
+        }
+
+        public void DisconnectWebsocket()
+        {
+            _webSocket?.Disconnect();
         }
 
         public void Disconnect()
@@ -173,29 +179,27 @@ namespace Oxide.Ext.Discord
 
         public string GetPluginNames(string delimiter = ", ") => string.Join(delimiter, Plugins.Select(x => x.Name).ToArray());
 
+        #region Heartbeat
         public void CreateHeartbeat(float heartbeatInterval)
         {
             if (_timer != null)
             {
-                _logger.LogWarning($"Warning: tried to create a heartbeat when one is already registered.");
-                return;
+                _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(CreateHeartbeat)} Previous heartbeat timer exists.");
+                DestroyHeartbeat();
             }
 
-            _lastHeartbeat = Time.TimeSinceEpoch();
-            HeartbeatACK = true;
-            
-            _timer = new Timer()
-            {
-                Interval = heartbeatInterval
-            };
+            HeartbeatAcknowledged = true;
+            _timer = new Timer(heartbeatInterval);
             _timer.Elapsed += HeartbeatElapsed;
             _timer.Start();
+            _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(CreateHeartbeat)} Creating heartbeat with interval {heartbeatInterval}ms.");
         }
 
         public void DestroyHeartbeat()
         {
             if(_timer != null)
             {
+                _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(DestroyHeartbeat)} Destroy Heartbeat");
                 _timer.Dispose();
                 _timer = null;
             }
@@ -203,56 +207,59 @@ namespace Oxide.Ext.Discord
 
         private void HeartbeatElapsed(object sender, ElapsedEventArgs e)
         {
-            if (_webSocket == null || !_webSocket.IsAlive())
+            _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} heartbeat Elapsed");
+            if (!_webSocket.IsAlive() && !_webSocket.IsConnecting())
             {
-                DestroyHeartbeat();
+                if (!_webSocket.IsReconnectTimerActive())
+                {
+                    _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Websocket is offline and is NOT connecting. Start reconnect timer.");
+                    _webSocket.StartReconnectTimer(1f, () => UpdateGatewayUrl(ConnectWebSocket));
+                }
+                else
+                {
+                    _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Websocket is offline and is waiting to connect.");
+                }
+
                 return;
             }
 
             SendHeartbeat();
         }
-
-        internal void ConnectToWebSocket()
+        
+        public void SendHeartbeat()
         {
-            if (!string.IsNullOrEmpty(WebSocketUrl))
+            if(!HeartbeatAcknowledged)
             {
-                _webSocket.Connect(WebSocketUrl);
+                //Discord did not acknowledge our last sent heartbeat. This is a zombie connection we should reconnect.
+                if (!_webSocket.IsReconnectTimerActive())
+                {
+                    _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and bot is not online or connecting.");
+                    _webSocket.StartReconnectTimer(1f, ConnectWebSocket);
+                }
+                else
+                {
+                    _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and bot is not online but is waiting to connect.");
+                }
+                
                 return;
             }
             
-            ConnectToWebsocketUrl();
+            HeartbeatAcknowledged = false;
+            _webSocket.Send(SendOpCode.Heartbeat, Sequence);
+            CallHook("DiscordSocket_HeartbeatSent");
+            _logger.LogDebug($"Heartbeat sent - {_timer.Interval}ms interval.");
         }
-        
-        internal void ConnectToWebsocketUrl()
+        #endregion
+
+        internal void UpdateGatewayUrl(Action callback)
         {
-            GetGatewayUrl(url =>
-            {
-                UpdateWebsocketUrl(url);
-                ConnectToWebSocket();
-            });
-        }
-        
-        private void GetGatewayUrl(Action<string> callback)
-        {
-            DiscordObjects.Gateway.GetGateway(this, (gateway) =>
+            Oxide.Ext.Discord.DiscordObjects.Gateway.GetGateway(this, gateway =>
             {
                 // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                string url = $"{gateway.URL}/?{Connect.Serialize()}";
-
-                _logger.LogDebug($"Got Gateway url: {url}");
-
-                callback.Invoke(url);
+                Oxide.Ext.Discord.DiscordObjects.Gateway.WebSocketUrl = $"{gateway.URL}/?{Connect.Serialize()}";
+                _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(UpdateGatewayUrl)} Got Gateway url: {gateway.URL}");
+                callback.Invoke();
             });
-        }
-
-        public void UpdateWebsocketUrl(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-            {
-                return;
-            }
-            
-            WebSocketUrl = url;
         }
 
         #region Discord Events
@@ -290,29 +297,7 @@ namespace Oxide.Ext.Discord
 
             _webSocket.Send(SendOpCode.Resume, resume);
         }
-        
-        public void SendHeartbeat()
-        {
-            if(!HeartbeatACK)
-            {
-                // Didn't receive an ACK, thus connection can be considered zombie, thus destructing.
-                _logger.LogError("Discord did not respond to Heartbeat! Disconnecting..");
-                requestReconnect = true;
-                _webSocket.ReconnectRequested();
-                return;
-            }
-            
-            HeartbeatACK = false;
-            
-            _webSocket.Send(SendOpCode.Heartbeat, Sequence);
 
-            _lastHeartbeat = Time.TimeSinceEpoch();
-
-            this.CallHook("DiscordSocket_HeartbeatSent");
-
-            _logger.LogDebug($"Heartbeat sent - {_timer.Interval}ms interval.");
-        }
-        
         public void RequestGuildMembers(string guildId, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)
         {
             var requestGuildMembers = new GuildMembersRequest

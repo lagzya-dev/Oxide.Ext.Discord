@@ -23,8 +23,6 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private readonly ILogger _logger;
 
-        private Timer _reconnectTimer;
-
         public SocketListener(DiscordClient client, Socket socket)
         {
             _client = client;
@@ -61,7 +59,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if (_client.requestReconnect)
             {
                 _client.requestReconnect = false;
-                _client.ConnectToWebSocket();
+                _client.ConnectWebSocket();
                 return;
             }
             
@@ -79,31 +77,20 @@ namespace Oxide.Ext.Discord.WebSockets
 
             if (!_client.Disconnected)
             {
-                if (Retries < 3)
+                _webSocket.StartReconnectTimer(Retries < 3 ? 1f : 15f, () =>
                 {
-                    _logger.LogWarning("Attempting to reconnect to Discord...");
-                    _client.ConnectToWebSocket();
-                }
-                else
-                {
-                    if (_reconnectTimer != null && _reconnectTimer.Enabled)
+                    _logger.LogWarning($"Attempting to reconnect to Discord... [Retry={Retries + 1}]");
+                    if (Retries < 8)
                     {
-                        return;
+                        _client.ConnectWebSocket();
                     }
-
-                    _reconnectTimer = new Timer
+                    else
                     {
-                        Interval = 15000f,
-                        AutoReset = false
-                    };
-                    _reconnectTimer.Elapsed += (_, __) =>
-                    {
-                        _logger.LogWarning("Attempting to reconnect to Discord...");
-                        _client.ConnectToWebSocket();
-                    };
-                }
-                
-                Retries++;
+                        //If more than 8 tries something could be wrong on discords end. Try and fetch the websocket url
+                        _client.UpdateGatewayUrl(_client.ConnectWebSocket);
+                    }
+                    Retries++;
+                });
             }
         }
 
@@ -189,7 +176,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if (reconnect)
             {
                 _webSocket.ShouldAttemptResume = false;
-                _client.ConnectToWebSocket();
+                _client.ConnectWebSocket();
             }
             
             return true;
@@ -669,7 +656,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 case ReceiveOpCode.InvalidSession:
                 {
                     _logger.LogWarning("Invalid Session ID opcode received!");
-                    DisconnectWebsocket(true, payload.EventData.ToObject<bool>());
+                    DisconnectWebsocket(true, payload.TokenData?.ToObject<bool>() ?? false);
                     break;
                 }
 
@@ -678,7 +665,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     Hello hello = payload.EventData.ToObject<Hello>();
                     _client.CreateHeartbeat(hello.HeartbeatInterval);
-                    
+
                     // Client should now perform identification
                     if (_webSocket.ShouldAttemptResume)
                     {
@@ -698,7 +685,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 // (See 'zombied or failed connections')
                 case ReceiveOpCode.HeartbeatAcknowledge:
                 {
-                    _client.HeartbeatACK = true;
+                    _client.HeartbeatAcknowledged = true;
                     break;
                 }
 

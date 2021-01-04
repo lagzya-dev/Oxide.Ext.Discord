@@ -19,5 +19,8 @@
 
         [JsonIgnore]
         public JObject EventData => Data as JObject;
+        
+        [JsonIgnore]
+        public JToken TokenData => Data as JToken;
     }
 }

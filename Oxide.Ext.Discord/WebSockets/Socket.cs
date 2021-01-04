@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Gateway;
 using Oxide.Ext.Discord.Exceptions;
@@ -16,16 +17,20 @@ namespace Oxide.Ext.Discord.WebSockets
 
         public bool ShouldAttemptResume;
 
+        internal Timer ReconnectTimer;
+        
         public Socket(DiscordClient client)
         {
             _client = client;
         }
 
-        public void Connect(string url)
+        public void Connect()
         {
+            string url = DiscordObjects.Gateway.WebSocketUrl;
             if (string.IsNullOrEmpty(url))
             {
-                throw new NoURLException();
+                _client.UpdateGatewayUrl(_client.ConnectWebSocket);
+                return;
             }
 
             if (_socket != null)
@@ -33,8 +38,6 @@ namespace Oxide.Ext.Discord.WebSockets
                 // Assume force-reconnect
                 Disconnect(false);
             }
-            
-            _client.DestroyHeartbeat();
 
             _socket = new WebSocket($"{url}/?v=6&encoding=json");
 
@@ -52,6 +55,13 @@ namespace Oxide.Ext.Discord.WebSockets
 
         public void Disconnect(bool normal = true)
         {
+            if (ReconnectTimer != null)
+            {
+                ReconnectTimer?.Stop();
+                ReconnectTimer?.Dispose();
+                ReconnectTimer = null;
+            }
+            
             if (IsClosingOrClosed())
             {
                 return;
@@ -109,6 +119,16 @@ namespace Oxide.Ext.Discord.WebSockets
             
             return _socket.ReadyState == WebSocketState.Open;
         }
+        
+        public bool IsConnecting()
+        {
+            if (_socket == null)
+            {
+                return false;
+            }
+            
+            return _socket.ReadyState == WebSocketState.Connecting;
+        }
 
         public bool IsClosingOrClosed()
         {
@@ -119,5 +139,30 @@ namespace Oxide.Ext.Discord.WebSockets
 
             return _socket.ReadyState == WebSocketState.Closing || _socket.ReadyState == WebSocketState.Closed;
         }
+        
+        public bool IsReconnectTimerActive()
+        {
+            return ReconnectTimer != null && ReconnectTimer.Enabled;
+        }
+
+        public void StartReconnectTimer(float seconds, Action callback)
+        {
+            if (IsReconnectTimerActive())
+            {
+                return;
+            }
+            
+            ReconnectTimer = new Timer
+            {
+                Interval = seconds * 1000,
+                AutoReset = false
+            };
+            ReconnectTimer.Elapsed += (_, __) =>
+            {
+                callback.Invoke();
+            };
+            
+            ReconnectTimer.Start();
+        } 
     }
 }
