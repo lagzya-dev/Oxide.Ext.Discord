@@ -481,10 +481,10 @@ namespace Oxide.Ext.Discord.WebSockets
                                 Channel channel = _client.DMs[message.ChannelId];
                                 if (channel == null)
                                 {
-                                    Channel.GetChannel(_client, message.ChannelId, channel =>
+                                    Channel.GetChannel(_client, message.ChannelId, dmChannel =>
                                     {
-                                        _client.DMs[channel.Id] = channel;
-                                        channel.LastMessageId = message.Id;
+                                        _client.DMs[dmChannel.Id] = dmChannel;
+                                        dmChannel.LastMessageId = message.Id;
                                     });
                                 }
                                 else
