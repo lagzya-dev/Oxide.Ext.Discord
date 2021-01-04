@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord
     public class DiscordExtension : Extension
     {
         private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 8);
-        public const string TestVersion = "Alpha.1";
+        public const string TestVersion = ".Alpha.1";
         
         private readonly ILogger _logger;
         
@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord
 
         public override VersionNumber Version => ExtensionVersion;
 
-        public static string GetExtensionVersion => ExtensionVersion + "." + TestVersion; 
+        public static string GetExtensionVersion => ExtensionVersion + TestVersion; 
 
         public override void OnModLoad()
         {

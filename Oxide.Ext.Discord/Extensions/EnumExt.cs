@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Extensions
             where TEnum : struct, IConvertible
         {
             bool retValue = value != null && Enum.IsDefined(typeof(TEnum), value);
-            result = retValue ? (TEnum)Enum.Parse(typeof(TEnum), value) : default;
+            result = retValue ? (TEnum)Enum.Parse(typeof(TEnum), value) : default(TEnum);
             return retValue;
         }
     }
