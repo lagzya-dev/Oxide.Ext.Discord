@@ -27,8 +27,7 @@ namespace Oxide.Ext.Discord.REST
         
         public void CleanupExpired()
         {
-            double timeSince = Time.TimeSinceEpoch();
-            Buckets.RemoveAll(b => b.ShouldCleanup(timeSince));
+            Buckets.RemoveAll(b => b.ShouldCleanup(Time.TimeSinceEpoch()));
         }
 
         public void QueueRequest(Request request, LogLevel logLevel)
@@ -57,36 +56,34 @@ namespace Oxide.Ext.Discord.REST
         
         private string GetBucketId(string route)
         {
-            StringBuilder bucket = new StringBuilder();
             string[] routeSegments = route.Split('/');
-            string previousSegment = null;
+            StringBuilder bucket = new StringBuilder(routeSegments[0]);
+            bucket.Append("/");
+            string previousSegment = routeSegments[0];
             for (int index = 0; index < routeSegments.Length; index++)
             {
                 string segment = routeSegments[index];
-                if (index != 0)
+                switch (previousSegment)
                 {
-                    switch (previousSegment)
-                    {
-                        // Reactions routes and sub-routes all share the same bucket
-                        case "reactions":
-                            return bucket.ToString();
+                    // Reactions routes and sub-routes all share the same bucket
+                    case "reactions":
+                        return bucket.ToString();
                         
-                        // Literal IDs should only be taken account if they are the Major ID (Channel ID / Guild ID / Webhook ID)
-                        case "guilds":
-                        case "channels": 
-                        case "webhooks":
-                            break;
+                    // Literal IDs should only be taken account if they are the Major ID (Channel ID / Guild ID / Webhook ID)
+                    case "guilds":
+                    case "channels": 
+                    case "webhooks":
+                        break;
                             
-                        default:
-                            if (ulong.TryParse(segment, out ulong _))
-                            {
-                                bucket.Append("id/");
-                                previousSegment = segment;
-                                continue;
-                            }
+                    default:
+                        if (ulong.TryParse(segment, out ulong _))
+                        {
+                            bucket.Append("id/");
+                            previousSegment = segment;
+                            continue;
+                        }
 
-                            break;
-                    }
+                        break;
                 }
                 
                 // All other parts of the route should be considered as part of the bucket identifier
