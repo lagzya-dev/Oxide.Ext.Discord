@@ -37,7 +37,7 @@ namespace Oxide.Ext.Discord.REST
         
         private const string UrlBase = "https://discordapp.com/api";
         
-        private const int RequestMaxLength = 30;
+        private const int RequestMaxLength = 15;
 
         private readonly ILogger _logger;
         
@@ -98,9 +98,9 @@ namespace Oxide.Ext.Discord.REST
                 {
                     if (httpResponse == null)
                     {
-                        _logger.LogException($"A web request exception occured (internal error) [RETRY={_retries}/3].\nRequest URL: [{Method.ToString()}] {req.RequestUri}", ex);
-
+                        bucket.ErrorResendDelayUntil = Time.TimeSinceEpoch() + 1;
                         Close(false);
+                        _logger.LogException($"A web request exception occured (internal error) [RETRY={_retries}/3].\nRequest URL: [{Method.ToString()}] {req.RequestUri}", ex);
                         return;
                     }
 
@@ -109,7 +109,7 @@ namespace Oxide.Ext.Discord.REST
                     bool isRateLimit = (int) httpResponse.StatusCode == 429;
                     if (isRateLimit)
                     {
-                        _logger.LogWarning($"Discord rate limit reached. (Rate limit info: remaining: Route:{req.RequestUri}, {bucket.Remaining}, limit: {bucket.Limit}, reset: {bucket.Reset}, time now: {Time.TimeSinceEpoch()}");
+                        _logger.LogWarning($"Discord rate limit reached. (Rate limit info: remaining: Route:{req.RequestUri}, {bucket.RateLimitRemaining}, limit: {bucket.RateLimit}, reset: {bucket.RateLimitReset}, time now: {Time.TimeSinceEpoch()}");
                     }
                     else
                     {
@@ -136,6 +136,7 @@ namespace Oxide.Ext.Discord.REST
 
         public void Close(bool remove = true)
         {
+            _retries += 1;
             if (remove || _retries >= 3)
             {
                 lock (_bucket)
@@ -145,7 +146,6 @@ namespace Oxide.Ext.Discord.REST
             }
             else
             {
-                _retries += 1;
                 InProgress = false;
                 StartTime = null;
             }
@@ -222,13 +222,13 @@ namespace Oxide.Ext.Discord.REST
             if (!string.IsNullOrEmpty(bucketLimitHeader) &&
                 int.TryParse(bucketLimitHeader, out int bucketLimit))
             {
-                _bucket.Limit = bucketLimit;
+                _bucket.RateLimit = bucketLimit;
             }
 
             if (!string.IsNullOrEmpty(bucketRemainingHeader) &&
                 int.TryParse(bucketRemainingHeader, out int bucketRemaining))
             {
-                _bucket.Remaining = bucketRemaining;
+                _bucket.RateLimitRemaining = bucketRemaining;
             }
 
             double timeSince = Time.TimeSinceEpoch();
@@ -236,13 +236,13 @@ namespace Oxide.Ext.Discord.REST
                 double.TryParse(bucketResetAfterHeader, out double bucketResetAfter))
             {
                 double resetTime = timeSince + bucketResetAfter;
-                if (resetTime > _bucket.Reset)
+                if (resetTime > _bucket.RateLimitReset)
                 {
-                    _bucket.Reset = resetTime;
+                    _bucket.RateLimitReset = resetTime;
                 }
             }
             
-            _logger.LogDebug($"Method: {Method} Route: {Route} Internal Bucket Id: {_bucket.BucketId} Limit: {_bucket.Limit} Remaining: {_bucket.Remaining} Reset: {_bucket.Reset} Time: {Time.TimeSinceEpoch()} Bucket: {bucketNameHeader}");
+            _logger.LogDebug($"Method: {Method} Route: {Route} Internal Bucket Id: {_bucket.BucketId} Limit: {_bucket.RateLimit} Remaining: {_bucket.RateLimitRemaining} Reset: {_bucket.RateLimitReset} Time: {Time.TimeSinceEpoch()} Bucket: {bucketNameHeader}");
         }
     }
 }

@@ -8,11 +8,13 @@ namespace Oxide.Ext.Discord.REST
 {
     public class Bucket : List<Request>
     {
-        public int Limit { get; set; }
+        public int RateLimit;
 
-        public int Remaining { get; set; }
-        
-        public double Reset { get; set; }
+        public int RateLimitRemaining;
+
+        public double RateLimitReset;
+
+        public double ErrorResendDelayUntil;
 
         public readonly BotRestHandler Handler;
 
@@ -36,7 +38,7 @@ namespace Oxide.Ext.Discord.REST
             _thread = null;
         }
 
-        public bool ShouldCleanup(double currentTime) => (_thread == null || !_thread.IsAlive) && currentTime > Reset;
+        public bool ShouldCleanup(double currentTime) => (_thread == null || !_thread.IsAlive) && currentTime > RateLimitReset;
 
         public void Queue(Request request)
         {
@@ -54,9 +56,16 @@ namespace Oxide.Ext.Discord.REST
 
         private void RunThread()
         {
-            while (Count > 0)
+            try
             {
-                FireRequests();
+                while (Count > 0)
+                {
+                    FireRequests();
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                _logger.LogInfo("Bucket thread has been aborted.");
             }
         }
 
@@ -66,15 +75,23 @@ namespace Oxide.Ext.Discord.REST
             if (Handler.RateLimit.HasReachedRateLimit)
             {
                 int resetIn = (int) ((Handler.RateLimit.NextBucketReset - timeSince) * 1000);
-                _logger.LogDebug($"Global Rate limit hit. Sleeping until Reset: {resetIn}ms ");
+                _logger.LogDebug($"Global Rate limit hit. Sleeping until Reset: {resetIn}ms");
                 Thread.Sleep(resetIn);
                 return;
             }
             
-            if (Remaining == 0 && Reset > timeSince)
+            if (RateLimitRemaining == 0 && RateLimitReset > timeSince)
             {
-                int resetIn = (int) ((Reset - timeSince) * 1000);
-                _logger.LogDebug($"Bucket Rate limit hit. Sleeping until Reset: {resetIn}ms ");
+                int resetIn = (int) ((RateLimitReset - timeSince) * 1000);
+                _logger.LogDebug($"Bucket Rate limit hit. Sleeping until Reset: {resetIn}ms");
+                Thread.Sleep(resetIn);
+                return;
+            }
+
+            if (ErrorResendDelayUntil > timeSince)
+            {
+                int resetIn = (int) ((ErrorResendDelayUntil - timeSince) * 1000);
+                _logger.LogDebug($"Web request error occured delaying next send until: {resetIn}ms ");
                 Thread.Sleep(resetIn);
                 return;
             }
@@ -85,11 +102,6 @@ namespace Oxide.Ext.Discord.REST
                 if (request.HasTimedOut())
                 {
                     request.Close(false);
-                }
-
-                if (request.InProgress)
-                {
-                    return;
                 }
             }
 
