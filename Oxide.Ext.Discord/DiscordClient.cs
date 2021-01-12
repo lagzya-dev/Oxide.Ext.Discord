@@ -46,8 +46,6 @@ namespace Oxide.Ext.Discord
 
         public bool HeartbeatAcknowledged = false;
 
-        public bool requestReconnect = false;
-
         private ILogger _logger;
 
         internal bool Disconnected;
@@ -112,18 +110,24 @@ namespace Oxide.Ext.Discord
         
         public void ConnectWebSocket()
         {
-            _webSocket?.Connect();
+            if (!Disconnected)
+            {
+                _webSocket.Connect();
+            }
         }
 
-        public void DisconnectWebsocket()
+        public void DisconnectWebsocket(bool attemptReconnect, bool attemptResume)
         {
-            _webSocket?.Disconnect();
+            if (!Disconnected)
+            {
+                _webSocket?.Disconnect(attemptReconnect, attemptResume);
+            }
         }
 
         public void Disconnect()
         {
             Disconnected = true;
-            _webSocket?.Disconnect();
+            _webSocket?.Disconnect(false, false);
             DestroyHeartbeat();
             _webSocket?.Dispose();
             _webSocket = null;
@@ -269,9 +273,14 @@ namespace Oxide.Ext.Discord
             // Sent immediately after connecting. Opcode 2: Identify
             // Ref: https://discordapp.com/developers/docs/topics/gateway#identifying
 
+            if (Disconnected)
+            {
+                return;
+            }
+            
             Identify identify = new Identify()
             {
-                Token = this.Settings.ApiToken,
+                Token = Settings.ApiToken,
                 Properties = new Properties()
                 {
                     OS = "Oxide.Ext.Discord",
@@ -288,6 +297,11 @@ namespace Oxide.Ext.Discord
         
         public void Resume()
         {
+            if (Disconnected)
+            {
+                return;
+            }
+            
             var resume = new Resume()
             {
                 Sequence = this.Sequence,
@@ -300,6 +314,11 @@ namespace Oxide.Ext.Discord
 
         public void RequestGuildMembers(string guildId, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)
         {
+            if (Disconnected)
+            {
+                return;
+            }
+            
             var requestGuildMembers = new GuildMembersRequest
             {
                 GuildID = guildId,
@@ -315,11 +334,21 @@ namespace Oxide.Ext.Discord
 
         public void RequestGuildMembers(Guild guild, string query = "", int limit = 0)
         {
+            if (Disconnected)
+            {
+                return;
+            }
+            
             RequestGuildMembers(guild.id, query, limit);
         }
 
         public void UpdateVoiceState(string guildID, string channelId, bool selfDeaf, bool selfMute)
         {
+            if (Disconnected)
+            {
+                return;
+            }
+            
             var voiceState = new VoiceStateUpdate()
             {
                 ChannelID = channelId,
@@ -333,6 +362,11 @@ namespace Oxide.Ext.Discord
 
         public void UpdateStatus(Presence presence)
         {
+            if (Disconnected)
+            {
+                return;
+            }
+            
             _webSocket.Send(SendOpCode.StatusUpdate, presence);
         }
 

@@ -30,21 +30,6 @@ namespace Oxide.Ext.Discord.WebSockets
             _logger = new Logger<SocketListener>(client.Settings.LogLevel);
         }
 
-        public void DisconnectWebsocket(bool shouldReconnect, bool shouldResume, bool discordRequestedReconnect = false)
-        {
-            _client.requestReconnect = shouldReconnect;
-            _webSocket.ShouldAttemptResume = shouldResume;
-
-            if (discordRequestedReconnect)
-            {
-                _webSocket.ReconnectRequested();
-            }
-            else
-            {
-                _webSocket.Disconnect();
-            }
-        }
-
         public void SocketOpened(object sender, EventArgs e)
         {
             _logger.LogWarning("Discord socket opened!");
@@ -56,9 +41,11 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _logger.LogDebug($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
             
-            if (_client.requestReconnect)
+            _webSocket.DisposeSocket();
+            
+            if (_webSocket.RequestReconnect)
             {
-                _client.requestReconnect = false;
+                _webSocket.RequestReconnect = false;
                 _client.ConnectWebSocket();
                 return;
             }
@@ -188,7 +175,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.CallHook("DiscordSocket_WebSocketErrored", null, e.Exception, e.Message);
 
             _logger.LogWarning("Attempting to reconnect to Discord...");
-            DisconnectWebsocket(true, false);
+            _webSocket.Disconnect(true, false);
         }
 
         public void SocketMessage(object sender, MessageEventArgs e)
@@ -646,9 +633,8 @@ namespace Oxide.Ext.Discord.WebSockets
                 case ReceiveOpCode.Reconnect:
                 {
                     _logger.LogInfo("Reconnect has been called (opcode 7)! Reconnecting...");
-                    _webSocket.ShouldAttemptResume = true; // attempt resume opcode
-                    _client.requestReconnect = true;
-                    _webSocket.ReconnectRequested(); //If we disconnect normally our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
+                    //If we disconnect normally our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
+                    _webSocket.Disconnect(true, true, true);
                     break;
                 }
 
@@ -656,7 +642,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 case ReceiveOpCode.InvalidSession:
                 {
                     _logger.LogWarning("Invalid Session ID opcode received!");
-                    DisconnectWebsocket(true, payload.TokenData?.ToObject<bool>() ?? false);
+                    _webSocket.Disconnect(true, payload.TokenData?.ToObject<bool>() ?? false);
                     break;
                 }
 

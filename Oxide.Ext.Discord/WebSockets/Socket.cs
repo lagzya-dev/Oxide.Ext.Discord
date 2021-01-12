@@ -9,16 +9,18 @@ namespace Oxide.Ext.Discord.WebSockets
 {
     public class Socket
     {
+        public bool RequestReconnect;
+        
+        public bool ShouldAttemptResume;
+        
+        internal Timer ReconnectTimer;
+        
         private readonly DiscordClient _client;
 
         private WebSocket _socket;
 
         private SocketListener _listener;
 
-        public bool ShouldAttemptResume;
-
-        internal Timer ReconnectTimer;
-        
         public Socket(DiscordClient client)
         {
             _client = client;
@@ -29,14 +31,15 @@ namespace Oxide.Ext.Discord.WebSockets
             string url = DiscordObjects.Gateway.WebSocketUrl;
             if (string.IsNullOrEmpty(url))
             {
-                _client.UpdateGatewayUrl(_client.ConnectWebSocket);
+                _client.UpdateGatewayUrl(Connect);
                 return;
             }
 
             if (_socket != null)
             {
+                throw new SocketRunningException(_client);
                 // Assume force-reconnect
-                Disconnect(false);
+                //Disconnect(false);
             }
 
             _socket = new WebSocket($"{url}/?v=6&encoding=json");
@@ -52,13 +55,16 @@ namespace Oxide.Ext.Discord.WebSockets
             _socket.OnMessage += _listener.SocketMessage;
             _socket.ConnectAsync();
         }
-
-        public void Disconnect(bool normal = true)
+        
+        public void Disconnect(bool attemptReconnect, bool shouldResume, bool disconnectRequested = false)
         {
+            RequestReconnect = attemptReconnect;
+            ShouldAttemptResume = shouldResume;
+            
             if (ReconnectTimer != null)
             {
-                ReconnectTimer?.Stop();
-                ReconnectTimer?.Dispose();
+                ReconnectTimer.Stop();
+                ReconnectTimer.Dispose();
                 ReconnectTimer = null;
             }
             
@@ -67,23 +73,30 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
 
-            _socket.CloseAsync(normal ? CloseStatusCode.Normal : CloseStatusCode.Abnormal);
-        }
-
-        public void ReconnectRequested()
-        {
-            if (IsClosingOrClosed())
+            if (disconnectRequested)
             {
-                return;
+                _socket.CloseAsync(4199, "Discord server requested reconnect");
+            }
+            else
+            {
+                _socket.CloseAsync(CloseStatusCode.Normal);
             }
 
-            _socket?.CloseAsync(4199, "Discord server requested reconnect");
+            _socket = null;
         }
 
         public void Dispose()
         {
             _listener = null;
             _socket = null;
+        }
+
+        public void DisposeSocket()
+        {
+            if (IsClosingOrClosed())
+            {
+                _socket = null;
+            }
         }
 
         public void Send(SendOpCode opCode, object data, Action<bool> completed = null)
@@ -134,7 +147,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             if (_socket == null)
             {
-                return false;
+                return true;
             }
 
             return _socket.ReadyState == WebSocketState.Closing || _socket.ReadyState == WebSocketState.Closed;
