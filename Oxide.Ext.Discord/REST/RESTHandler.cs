@@ -8,17 +8,17 @@ namespace Oxide.Ext.Discord.REST
     public class RestHandler
     {
         private readonly Dictionary<string, string> _headers;
-        private readonly LogLevel _logLevel;
+        private readonly ILogger _logger;
         private readonly BotRestHandler _handler;
         private readonly DiscordClient _client;
         private readonly string _apiKey;
         
         internal static readonly Hash<string, BotRestHandler> BotHandlers = new Hash<string, BotRestHandler>();
 
-        public RestHandler(DiscordClient client, string apiKey, LogLevel logLevel)
+        public RestHandler(DiscordClient client, string apiKey)
         {
             _client = client;
-            _logLevel = logLevel;
+            _logger = new Logger(client.Settings.LogLevel);
             _apiKey = apiKey;
 
             _headers = new Dictionary<string, string>
@@ -69,9 +69,9 @@ namespace Oxide.Ext.Discord.REST
 
         private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
         {
-            Request request = new Request(method, url, headers, data, callback, _logLevel);
+            Request request = new Request(method, url, headers, data, callback, _logger);
             _handler.CleanupExpired();
-            _handler.QueueRequest(request, _logLevel);
+            _handler.QueueRequest(request, _logger);
         }
     }
 }

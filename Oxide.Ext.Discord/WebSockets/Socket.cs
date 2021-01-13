@@ -3,6 +3,7 @@ using System.Timers;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Gateway;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Logging;
 using WebSocketSharp;
 
 namespace Oxide.Ext.Discord.WebSockets
@@ -21,9 +22,12 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private SocketListener _listener;
 
+        private ILogger _logger;
+
         public Socket(DiscordClient client)
         {
             _client = client;
+            _logger = new Logging.Logger(client.Settings.LogLevel);
         }
 
         public void Connect()
@@ -46,7 +50,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             if (_listener == null)
             {
-                _listener = new SocketListener(_client, this);
+                _listener = new SocketListener(_client, this, _logger);
             }
 
             _socket.OnOpen += _listener.SocketOpened;

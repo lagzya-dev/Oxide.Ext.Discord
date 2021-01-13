@@ -4,10 +4,11 @@ namespace Oxide.Ext.Discord.Logging
 {
     public interface ILogger
     {
-        void LogDebug(string message);
-        void LogInfo(string message);
-        void LogWarning(string message);
-        void LogError(string message);
-        void LogException(string message, Exception ex);
+        void Verbose(string message);
+        void Debug(string message);
+        void Info(string message);
+        void Warning(string message);
+        void Error(string message);
+        void Exception(string message, Exception ex);
     }
 }

@@ -30,13 +30,13 @@ namespace Oxide.Ext.Discord.REST
             Buckets.RemoveAll(b => b.ShouldCleanup(Time.TimeSinceEpoch()));
         }
 
-        public void QueueRequest(Request request, LogLevel logLevel)
+        public void QueueRequest(Request request, ILogger logger)
         {
             string bucketId = GetBucketId(request.Route);
             Bucket bucket = Buckets[bucketId];
             if (bucket == null)
             {
-                bucket = new Bucket(this, bucketId, logLevel);
+                bucket = new Bucket(this, bucketId, logger);
                 Buckets[bucketId] = bucket;
             }
 
