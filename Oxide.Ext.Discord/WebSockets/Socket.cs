@@ -56,7 +56,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _socket.ConnectAsync();
         }
         
-        public void Disconnect(bool attemptReconnect, bool shouldResume, bool disconnectRequested = false)
+        public void Disconnect(bool attemptReconnect, bool shouldResume, bool requested = false)
         {
             RequestReconnect = attemptReconnect;
             ShouldAttemptResume = shouldResume;
@@ -73,7 +73,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
 
-            if (disconnectRequested)
+            if (requested)
             {
                 _socket.CloseAsync(4199, "Discord server requested reconnect");
             }
@@ -82,6 +82,9 @@ namespace Oxide.Ext.Discord.WebSockets
                 _socket.CloseAsync(CloseStatusCode.Normal);
             }
 
+            _socket.OnOpen -= _listener.SocketOpened;
+            _socket.OnError -= _listener.SocketErrored;
+            _socket.OnMessage -= _listener.SocketMessage;
             _socket = null;
         }
 
