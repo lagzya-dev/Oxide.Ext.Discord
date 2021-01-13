@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord
         {
             get
             {
-                return this.DiscordServers?.FirstOrDefault();
+                return this.DiscordServers.FirstOrDefault();
             }
         }
 
@@ -235,7 +235,11 @@ namespace Oxide.Ext.Discord
             if(!HeartbeatAcknowledged)
             {
                 //Discord did not acknowledge our last sent heartbeat. This is a zombie connection we should reconnect.
-                if (!_webSocket.IsReconnectTimerActive())
+                if (_webSocket.IsAlive())
+                {
+                    _webSocket.Disconnect(true, true, true);
+                }
+                else if (!_webSocket.IsReconnectTimerActive())
                 {
                     _logger.LogDebug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and bot is not online or connecting.");
                     _webSocket.StartReconnectTimer(1f, ConnectWebSocket);
@@ -372,16 +376,21 @@ namespace Oxide.Ext.Discord
 
         public Guild GetGuild(string id)
         {
-            return this.DiscordServers?.FirstOrDefault(x => x.id == id);
+            return this.DiscordServers.FirstOrDefault(x => x.id == id);
         }
 
         public void UpdateGuild(string g_id, Guild newguild)
         {
             Guild g = this.GetGuild(g_id);
             if (g == null) return;
-            int idx = DiscordServers?.IndexOf(g) ?? -1;
+            int idx = DiscordServers.IndexOf(g);
             if (idx == -1) return;
             this.DiscordServers[idx] = newguild;
+        }
+
+        internal void RemoveGuild(string guildId)
+        {
+            DiscordServers.RemoveAll(g => g.id == guildId);
         }
 
         #endregion
