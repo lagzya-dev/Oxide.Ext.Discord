@@ -48,7 +48,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
             
-            _client.CallHook("DiscordSocket_WebSocketClosed", null, e.Reason, e.Code, e.WasClean);
+            _client.CallHook("DiscordSocket_WebSocketClosed", e.Reason, e.Code, e.WasClean);
             
             if (HandleDiscordClosedSocket(e.Code, e.Reason))
             {
@@ -60,7 +60,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 _logger.Warning($"Discord connection closed uncleanly: code {e.Code}, Reason: {e.Reason}");
             }
 
-            if (!_client.Disconnected)
+            if (_client.Initialized)
             {
                 _webSocket.StartReconnectTimer(Retries < 3 ? 1f : 15f, () =>
                 {
@@ -170,7 +170,7 @@ namespace Oxide.Ext.Discord.WebSockets
         public void SocketErrored(object sender, ErrorEventArgs e)
         {
             _logger.Exception("An error has occured in the websocket", e.Exception);
-            _client.CallHook("DiscordSocket_WebSocketErrored", null, e.Exception, e.Message);
+            _client.CallHook("DiscordSocket_WebSocketErrored", e.Exception, e.Message);
 
             _logger.Warning("Attempting to reconnect to Discord...");
             _webSocket.Disconnect(true, false);
@@ -408,7 +408,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.DiscordServers = ready.Guilds;
             _client.SessionID = ready.SessionID;
             _logger.Warning($"Your bot was found in {ready.Guilds.Count} Guilds!");
-            _client.CallHook("Discord_Ready", null, ready);
+            _client.CallHook("Discord_Ready", ready);
         }
 
         //https://discord.com/developers/docs/topics/gateway#resumed
@@ -416,7 +416,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             Resumed resumed = payload.EventData.ToObject<Resumed>();
             _logger.Warning("Session resumed successfully!");
-            _client.CallHook("Discord_Resumed", null, resumed);
+            _client.CallHook("Discord_Resumed", resumed);
         }
 
         //https://discord.com/developers/docs/topics/gateway#channel-create
@@ -433,7 +433,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelCreate)} CHANNEL_CREATE: ID: {channel.id} Type: {channel.type}.");
-            _client.CallHook("Discord_ChannelCreate", null, channel);
+            _client.CallHook("Discord_ChannelCreate", channel);
         }
 
         //https://discord.com/developers/docs/topics/gateway#channel-update
@@ -467,7 +467,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelUpdate)} CHANNEL_UPDATE: ID: {update.id} Type: {update.type}.");
-            _client.CallHook("Discord_ChannelUpdate", null, update, previous);
+            _client.CallHook("Discord_ChannelUpdate", update, previous);
         }
 
         //https://discord.com/developers/docs/topics/gateway#channel-delete
@@ -476,7 +476,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Channel channel = payload.EventData.ToObject<Channel>();
             _client.GetGuild(channel.guild_id)?.channels.RemoveAll(c => c.id == channel.id);
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelDelete)} CHANNEL_DELETE: ID: {channel.id} Type: {channel.type}.");
-            _client.CallHook("Discord_ChannelDelete", null, channel);
+            _client.CallHook("Discord_ChannelDelete", channel);
         }
 
         //https://discord.com/developers/docs/topics/gateway#channel-pins-update
@@ -484,7 +484,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             ChannelPinsUpdate pins = payload.EventData.ToObject<ChannelPinsUpdate>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelPinUpdate)} CHANNEL_PINS_UPDATE: Channel ID: {pins.channel_id}");
-            _client.CallHook("Discord_ChannelPinsUpdate", null, pins);
+            _client.CallHook("Discord_ChannelPinsUpdate", pins);
         }
 
         // NOTE: Some elements of Guild object is only sent with GUILD_CREATE
@@ -505,7 +505,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} GUILD_CREATE: Guild found but was unavailable. Updating guild in list.");
             }
 
-            _client.CallHook("Discord_GuildCreate", null, guild);
+            _client.CallHook("Discord_GuildCreate", guild);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-update
@@ -514,7 +514,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Guild guild = payload.EventData.ToObject<Guild>();
             _client.GetGuild(guild.id)?.Update(guild);
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildUpdate)} GUILD_UPDATE: Guild was Updated.");
-            _client.CallHook("Discord_GuildUpdate", null, guild);
+            _client.CallHook("Discord_GuildUpdate", guild);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-delete
@@ -532,7 +532,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 _client.RemoveGuild(guild.id);
             }
 
-            _client.CallHook("Discord_GuildDelete", null, guild);
+            _client.CallHook("Discord_GuildDelete", guild);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-ban-add
@@ -541,7 +541,7 @@ namespace Oxide.Ext.Discord.WebSockets
             //TODO: Pass Guild ID of the banned user
             BanObject ban = payload.EventData.ToObject<BanObject>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanAdd)} GUILD_BAN_ADD: User was banned from the guild. Guild ID: {ban.guild_id} User ID: {ban.user.id}.");
-            _client.CallHook("Discord_GuildBanAdd", null, ban.user);
+            _client.CallHook("Discord_GuildBanAdd", ban.user);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-ban-remove
@@ -550,7 +550,7 @@ namespace Oxide.Ext.Discord.WebSockets
             //TODO: Pass Guild ID of the banned user
             BanObject ban = payload.EventData.ToObject<BanObject>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanRemove)} GUILD_BAN_REMOVE: User was unbanned from the guild. Guild ID: {ban.guild_id} User ID: {ban.user.id}.");
-            _client.CallHook("Discord_GuildBanRemove", null, ban.user);
+            _client.CallHook("Discord_GuildBanRemove", ban.user);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-emojis-update
@@ -558,7 +558,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildEmojisUpdate emojis = payload.EventData.ToObject<GuildEmojisUpdate>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildEmojisUpdate)} GUILD_EMOJIS_UPDATE: Guild ID: {emojis.guild_id}");
-            _client.CallHook("Discord_GuildEmojisUpdate", null, emojis);
+            _client.CallHook("Discord_GuildEmojisUpdate", emojis);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-integrations-update
@@ -566,8 +566,8 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildIntergrationsUpdate integration = payload.EventData.ToObject<GuildIntergrationsUpdate>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildIntegrationsUpdate)} GUILD_INTEGRATIONS_UPDATE: Guild ID: {integration.guild_id}");
-            _client.CallHook("Discord_GuildIntergrationsUpdate", null, integration); //TODO: Remove Deprecated Hook Call
-            _client.CallHook("Discord_GuildIntegrationsUpdate", null, integration);
+            _client.CallHook("Discord_GuildIntergrationsUpdate", integration); //TODO: Remove Deprecated Hook Call
+            _client.CallHook("Discord_GuildIntegrationsUpdate", integration);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-member-add
@@ -576,7 +576,7 @@ namespace Oxide.Ext.Discord.WebSockets
             GuildMemberAdd member = payload.EventData.ToObject<GuildMemberAdd>();
             _client.GetGuild(member.guild_id)?.members.Add(member);
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberAdd)} GUILD_MEMBER_ADD: Guild ID: {member.guild_id} User ID: {member.user.id}");
-            _client.CallHook("Discord_MemberAdded", null, member);
+            _client.CallHook("Discord_MemberAdded", member);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-member-remove
@@ -593,7 +593,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 }
 
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberRemove)} GUILD_MEMBER_REMOVE: Guild ID: {remove.guild_id} User ID: {remove.user.id}");
-                _client.CallHook("Discord_MemberRemoved", null, member);
+                _client.CallHook("Discord_MemberRemoved", member);
             }
         }
 
@@ -613,7 +613,7 @@ namespace Oxide.Ext.Discord.WebSockets
                     member.nick = update.nick;
                 if (update.roles != null)
                     member.roles = update.roles;
-                _client.CallHook("Discord_GuildMemberUpdate", null, update, oldMember);
+                _client.CallHook("Discord_GuildMemberUpdate", update, oldMember);
             }
         }
 
@@ -622,7 +622,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildMembersChunk chunk = payload.EventData.ToObject<GuildMembersChunk>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMembersChunk)} GUILD_MEMBER_UPDATE: Guild ID: {chunk.guild_id} Nonce: {chunk.Nonce}");
-            _client.CallHook("Discord_GuildMembersChunk", null, chunk);
+            _client.CallHook("Discord_GuildMembersChunk", chunk);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-role-create
@@ -631,7 +631,7 @@ namespace Oxide.Ext.Discord.WebSockets
             GuildRoleCreate role = payload.EventData.ToObject<GuildRoleCreate>();
             _client.GetGuild(role.guild_id)?.roles.Add(role.role);
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleCreate)} GUILD_ROLE_CREATE: Guild ID: {role.guild_id} Role ID: {role.role.id} Role Name: {role.role.name}");
-            _client.CallHook("Discord_GuildRoleCreate", null, role.role);
+            _client.CallHook("Discord_GuildRoleCreate", role.role);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-role-update
@@ -651,7 +651,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 guild.roles.Add(updatedRole);
 
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleUpdate)} GUILD_ROLE_UPDATE: Guild ID: {update.guild_id} Role ID: {update.role.id} Role Name: {update.role.name}");
-                _client.CallHook("Discord_GuildRoleUpdate", null, updatedRole, oldRole);
+                _client.CallHook("Discord_GuildRoleUpdate", updatedRole, oldRole);
             }
         }
 
@@ -665,7 +665,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 guild.roles.Remove(role);
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleDelete)} GUILD_ROLE_UPDATE: Guild ID: {role.guild_id} Role ID: {role.id} Role Name: {role.name}");
-                _client.CallHook("Discord_GuildRoleDelete", null, role);
+                _client.CallHook("Discord_GuildRoleDelete", role);
             }
         }
 
@@ -681,7 +681,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} MESSAGE_CREATE: Guild ID: {message.guild_id} Channel ID: {message.channel_id} Message ID: {message.id}");
-            _client.CallHook("Discord_MessageCreate", null, message);
+            _client.CallHook("Discord_MessageCreate", message);
         }
 
         //https://discord.com/developers/docs/topics/gateway#message-update
@@ -689,7 +689,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             Message message = payload.EventData.ToObject<Message>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageUpdate)} MESSAGE_UPDATE: Guild ID: {message.guild_id} Channel ID: {message.channel_id} Message ID: {message.id}");
-            _client.CallHook("Discord_MessageUpdate", null, message);
+            _client.CallHook("Discord_MessageUpdate", message);
         }
 
         //https://discord.com/developers/docs/topics/gateway#message-delete
@@ -697,7 +697,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             MessageDelete message = payload.EventData.ToObject<MessageDelete>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageDelete)} MESSAGE_DELETE: Channel ID: {message.channel_id} Message ID: {message.id}");
-            _client.CallHook("Discord_MessageDelete", null, message);
+            _client.CallHook("Discord_MessageDelete", message);
         }
 
         //https://discord.com/developers/docs/topics/gateway#message-delete-bulk
@@ -705,7 +705,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             MessageDeleteBulk bulkDelete = payload.EventData.ToObject<MessageDeleteBulk>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageDeleteBulk)} MESSAGE_DELETE: Channel ID: {bulkDelete.channel_id}");
-            _client.CallHook("Discord_MessageDeleteBulk", null, bulkDelete);
+            _client.CallHook("Discord_MessageDeleteBulk", bulkDelete);
         }
 
         //https://discord.com/developers/docs/topics/gateway#message-reaction-add
@@ -713,7 +713,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             MessageReactionUpdate reaction = payload.EventData.ToObject<MessageReactionUpdate>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionAdd)} MESSAGE_REACTION_ADD: Channel ID: {reaction.channel_id} Message ID: {reaction.message_id} User ID: {reaction.user_id}");
-            _client.CallHook("Discord_MessageReactionAdd", null, reaction);
+            _client.CallHook("Discord_MessageReactionAdd", reaction);
         }
 
         //https://discord.com/developers/docs/topics/gateway#message-reaction-remove
@@ -721,7 +721,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             MessageReactionUpdate reaction = payload.EventData.ToObject<MessageReactionUpdate>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionRemove)} MESSAGE_REACTION_REMOVE: Channel ID: {reaction.channel_id} Message ID: {reaction.message_id} User ID: {reaction.user_id}");
-            _client.CallHook("Discord_MessageReactionRemove", null, reaction);
+            _client.CallHook("Discord_MessageReactionRemove", reaction);
         }
 
         //https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all
@@ -729,7 +729,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             MessageReactionRemoveAll reaction = payload.EventData.ToObject<MessageReactionRemoveAll>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionRemoveAll)} MESSAGE_REACTION_REMOVE_ALL: Channel ID: {reaction.channel_id} Message ID: {reaction.message_id}");
-            _client.CallHook("Discord_MessageReactionRemoveAll", null, reaction);
+            _client.CallHook("Discord_MessageReactionRemoveAll", reaction);
         }
 
         /// <summary>
@@ -752,7 +752,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchPresenceUpdate)} PRESENCE_UPDATE: Guild ID: {update.guild_id} User ID: {update.user} Status: {update.status}");
             }
 
-            _client.CallHook("Discord_PresenceUpdate", null, updateUser);
+            _client.CallHook("Discord_PresenceUpdate", updateUser);
         }
 
         //https://discord.com/developers/docs/topics/gateway#typing-start
@@ -760,7 +760,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             TypingStart typing = payload.EventData.ToObject<TypingStart>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchTypingStart)} TYPING_START: Channel ID: {typing.channel_id} User ID: {typing.user_id}");
-            _client.CallHook("Discord_TypingStart", null, typing);
+            _client.CallHook("Discord_TypingStart", typing);
         }
 
         //https://discord.com/developers/docs/topics/gateway#user-update
@@ -778,7 +778,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 }
             }
 
-            _client.CallHook("Discord_UserUpdate", null, user);
+            _client.CallHook("Discord_UserUpdate", user);
         }
 
         //https://discord.com/developers/docs/topics/gateway#voice-state-update
@@ -786,7 +786,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             VoiceState voice = payload.EventData.ToObject<VoiceState>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchVoiceStateUpdate)} USER_UPDATE: Guild ID: {voice.guild_id} Channel ID: {voice.channel_id} User ID: {voice.user_id}");
-            _client.CallHook("Discord_VoiceStateUpdate", null, voice);
+            _client.CallHook("Discord_VoiceStateUpdate", voice);
         }
 
         //https://discord.com/developers/docs/topics/gateway#voice-server-update
@@ -794,7 +794,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             VoiceServerUpdate voice = payload.EventData.ToObject<VoiceServerUpdate>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchVoiceServerUpdate)} USER_UPDATE: Guild ID: {voice.guild_id}");
-            _client.CallHook("Discord_VoiceServerUpdate", null, voice);
+            _client.CallHook("Discord_VoiceServerUpdate", voice);
         }
 
         //https://discord.com/developers/docs/topics/gateway#webhooks-update
@@ -802,7 +802,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             WebhooksUpdate webhook = payload.EventData.ToObject<WebhooksUpdate>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchWebhooksUpdate)} USER_UPDATE: Guild ID: {webhook.guild_id} Channel ID: {webhook.channel_id}");
-            _client.CallHook("Discord_WebhooksUpdate", null, webhook);
+            _client.CallHook("Discord_WebhooksUpdate", webhook);
         }
 
         //https://discord.com/developers/docs/topics/gateway#invite-create
@@ -810,7 +810,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             InviteCreated invite = payload.EventData.ToObject<InviteCreated>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteCreate)} INVITE_CREATE: Guild ID: {invite.guild_id} Channel ID: {invite.channel_id} Code: {invite.code}");
-            _client.CallHook("Discord_InviteCreated", null, invite);
+            _client.CallHook("Discord_InviteCreated", invite);
         }
 
         //https://discord.com/developers/docs/topics/gateway#invite-delete
@@ -818,12 +818,12 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             InviteDeleted invite = payload.EventData.ToObject<InviteDeleted>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteDelete)} INVITE_DELETE: Guild ID: {invite.guild_id} Channel ID: {invite.channel_id} Code: {invite.code}");
-            _client.CallHook("Discord_InviteDeleted", null, invite);
+            _client.CallHook("Discord_InviteDeleted", invite);
         }
 
         private void HandleDispatchUnhandledEvent(RPayload payload)
         {
-            _client.CallHook("Discord_UnhandledEvent", null, payload);
+            _client.CallHook("Discord_UnhandledEvent", payload);
             _logger.Warning($"Unhandled Dispatch Event: {payload.EventName}. Please contact Discord Extension authors.");
         }
 

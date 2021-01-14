@@ -39,6 +39,8 @@ namespace Oxide.Ext.Discord
         public int Sequence;
 
         public string SessionID;
+        
+        internal bool Initialized;
 
         private Socket _webSocket;
 
@@ -47,8 +49,6 @@ namespace Oxide.Ext.Discord
         public bool HeartbeatAcknowledged = false;
 
         private ILogger _logger;
-
-        internal bool Disconnected;
 
         public void Initialize(Plugin plugin, DiscordSettings settings)
         {
@@ -87,7 +87,7 @@ namespace Oxide.Ext.Discord
                 return;
             }*/
 
-            Disconnected = false;
+            Initialized = true;
             RegisterPlugin(plugin);
             UpdatePluginReference(plugin);
             CallHook("DiscordSocket_Initialized");
@@ -110,28 +110,28 @@ namespace Oxide.Ext.Discord
         
         public void ConnectWebSocket()
         {
-            if (!Disconnected)
+            if (Initialized)
             {
                 _webSocket.Connect();
             }
         }
 
-        public void DisconnectWebsocket(bool attemptReconnect, bool attemptResume)
+        public void DisconnectWebsocket(bool attemptReconnect = false, bool attemptResume = false)
         {
-            if (!Disconnected)
+            if (Initialized)
             {
-                _webSocket?.Disconnect(attemptReconnect, attemptResume);
+                _webSocket.Disconnect(attemptReconnect, attemptResume);
             }
         }
 
         public void Disconnect()
         {
-            Disconnected = true;
-            _webSocket?.Disconnect(false, false);
+            Initialized = false;
             DestroyHeartbeat();
-            _webSocket?.Dispose();
+            _webSocket?.Shutdown();
             _webSocket = null;
             REST?.Disconnect();
+            REST = null;
         }
 
         public void UpdatePluginReference(Plugin plugin = null)
@@ -158,23 +158,14 @@ namespace Oxide.Ext.Discord
             Plugins.Add(plugin);
         }
 
-        public void CallHook(string hookName, Plugin specificPlugin = null, params object[] args)
+        public void CallHook(string hookName, params object[] args)
         {
+            Plugins.RemoveAll(p => p == null || !p.IsLoaded);
+            
             //Run from next tick so we can be sure it's ran on the main thread.
             Interface.Oxide.NextTick(() =>
             {
-                if (specificPlugin != null)
-                {
-                    if (!specificPlugin.IsLoaded)
-                    {
-                        return;
-                    }
-
-                    specificPlugin.CallHook(hookName, args);
-                    return;
-                }
-
-                foreach (Plugin plugin in Plugins.Where(x => x.IsLoaded))
+                foreach (Plugin plugin in Plugins)
                 {
                     plugin.CallHook(hookName, args);
                 }
@@ -277,7 +268,7 @@ namespace Oxide.Ext.Discord
             // Sent immediately after connecting. Opcode 2: Identify
             // Ref: https://discordapp.com/developers/docs/topics/gateway#identifying
 
-            if (Disconnected)
+            if (!Initialized)
             {
                 return;
             }
@@ -301,7 +292,7 @@ namespace Oxide.Ext.Discord
         
         public void Resume()
         {
-            if (Disconnected)
+            if (!Initialized)
             {
                 return;
             }
@@ -318,7 +309,7 @@ namespace Oxide.Ext.Discord
 
         public void RequestGuildMembers(string guildId, string query = "", int limit = 0, bool? presences = null, List<string> userIds = null, string nonce = null)
         {
-            if (Disconnected)
+            if (!Initialized)
             {
                 return;
             }
@@ -338,7 +329,7 @@ namespace Oxide.Ext.Discord
 
         public void RequestGuildMembers(Guild guild, string query = "", int limit = 0)
         {
-            if (Disconnected)
+            if (!Initialized)
             {
                 return;
             }
@@ -348,7 +339,7 @@ namespace Oxide.Ext.Discord
 
         public void UpdateVoiceState(string guildID, string channelId, bool selfDeaf, bool selfMute)
         {
-            if (Disconnected)
+            if (!Initialized)
             {
                 return;
             }
@@ -366,7 +357,7 @@ namespace Oxide.Ext.Discord
 
         public void UpdateStatus(Presence presence)
         {
-            if (Disconnected)
+            if (!Initialized)
             {
                 return;
             }

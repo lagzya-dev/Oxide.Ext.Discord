@@ -86,22 +86,30 @@ namespace Oxide.Ext.Discord.WebSockets
                 _socket.CloseAsync(CloseStatusCode.Normal);
             }
 
-            _socket.OnOpen -= _listener.SocketOpened;
-            _socket.OnError -= _listener.SocketErrored;
-            _socket.OnMessage -= _listener.SocketMessage;
-            _socket = null;
+            DisposeSocket();
         }
 
-        public void Dispose()
+        public void Shutdown()
         {
+            if (ReconnectTimer != null)
+            {
+                ReconnectTimer.Stop();
+                ReconnectTimer.Dispose();
+                ReconnectTimer = null;
+            }
+            
+            Disconnect(false, false);
             _listener = null;
             _socket = null;
         }
 
         public void DisposeSocket()
         {
-            if (IsClosingOrClosed())
+            if (_socket != null)
             {
+                _socket.OnOpen -= _listener.SocketOpened;
+                _socket.OnError -= _listener.SocketErrored;
+                _socket.OnMessage -= _listener.SocketMessage;
                 _socket = null;
             }
         }
@@ -183,6 +191,6 @@ namespace Oxide.Ext.Discord.WebSockets
             };
             
             ReconnectTimer.Start();
-        } 
+        }
     }
 }

@@ -66,7 +66,7 @@ namespace Oxide.Ext.Discord
                 client.RegisterPlugin(plugin);
                 client.UpdatePluginReference(plugin);
                 client.Settings = settings;
-                client.CallHook("DiscordSocket_Initialized", plugin);
+                plugin.CallHook("DiscordSocket_Initialized");
                 return;
             }
 
