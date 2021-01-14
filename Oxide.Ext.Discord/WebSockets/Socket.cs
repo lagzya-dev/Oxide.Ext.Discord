@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private SocketListener _listener;
 
-        private ILogger _logger;
+        private readonly ILogger _logger;
 
         public Socket(DiscordClient client)
         {

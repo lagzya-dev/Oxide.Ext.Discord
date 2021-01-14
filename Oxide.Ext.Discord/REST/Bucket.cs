@@ -8,6 +8,8 @@ namespace Oxide.Ext.Discord.REST
 {
     public class Bucket : List<Request>
     {
+        public string BucketId;
+        
         public int RateLimit;
 
         public int RateLimitRemaining;
@@ -19,8 +21,6 @@ namespace Oxide.Ext.Discord.REST
         public readonly BotRestHandler Handler;
 
         private Thread _thread;
-        
-        public string BucketId { get; }
 
         private readonly ILogger _logger;
 
@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.REST
             _thread = null;
         }
 
-        public bool ShouldCleanup(double currentTime) => (_thread == null || !_thread.IsAlive) && currentTime > RateLimitReset;
+        public bool ShouldCleanup() => (_thread == null || !_thread.IsAlive) && Time.TimeSinceEpoch() > RateLimitReset;
 
         public void Queue(Request request)
         {

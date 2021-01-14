@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.REST
         
         public void CleanupExpired()
         {
-            Buckets.RemoveAll(b => b.ShouldCleanup(Time.TimeSinceEpoch()));
+            Buckets.RemoveAll(b => b.ShouldCleanup());
         }
 
         public void QueueRequest(Request request, ILogger logger)
