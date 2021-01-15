@@ -160,11 +160,10 @@ namespace Oxide.Ext.Discord
 
         public void CallHook(string hookName, params object[] args)
         {
-            Plugins.RemoveAll(p => p == null || !p.IsLoaded);
-            
             //Run from next tick so we can be sure it's ran on the main thread.
             Interface.Oxide.NextTick(() =>
             {
+                Plugins.RemoveAll(p => p == null || !p.IsLoaded);
                 foreach (Plugin plugin in Plugins)
                 {
                     plugin.CallHook(hookName, args);
