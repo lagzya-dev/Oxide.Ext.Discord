@@ -14,6 +14,6 @@ namespace Oxide.Ext.Discord
             set => LogLevel = value ? LogLevel.Debug : LogLevel.Info;
         }
 
-        public LogLevel LogLevel;
+        public LogLevel LogLevel = LogLevel.Info;
     }
 }
