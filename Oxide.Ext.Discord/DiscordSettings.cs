@@ -1,5 +1,4 @@
 ﻿using System;
-using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Logging;
 
@@ -16,7 +15,7 @@ namespace Oxide.Ext.Discord
             set => LogLevel = value ? LogLevel.Debug : LogLevel.Info;
         }
 
-        public LogLevel LogLevel;
+        public LogLevel LogLevel = LogLevel.Info;
         
         public BotIntents Intents = BotIntents.All;
     }

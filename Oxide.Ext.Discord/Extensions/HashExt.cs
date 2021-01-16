@@ -9,10 +9,14 @@ namespace Oxide.Ext.Discord.Extensions
     {
         public static void RemoveAll<TKey, TValue>(this Hash<TKey, TValue> dict, Func<TValue, bool> predicate)
         {
-            List<TKey> keys = dict.Keys.Where(k => predicate(dict[k])).ToList();
-            foreach (TKey key in keys)
+            if (dict == null)
             {
-                dict.Remove(key);
+                return;
+            }
+            
+            foreach (KeyValuePair<TKey, TValue> key in dict.Where(k => predicate(k.Value)).ToList())
+            {
+                dict.Remove(key.Key);
             }
         }
 

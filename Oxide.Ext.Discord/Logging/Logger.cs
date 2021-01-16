@@ -3,7 +3,7 @@ using Oxide.Core;
 
 namespace Oxide.Ext.Discord.Logging
 {
-    public class Logger<T> : ILogger
+    public class Logger : ILogger
     {
         private readonly LogLevel _logLevel;
         
@@ -12,27 +12,32 @@ namespace Oxide.Ext.Discord.Logging
             _logLevel = logLevel;
         }
 
-        public void LogDebug(string message)
+        public void Verbose(string message)
+        {
+            Log(LogLevel.Verbose, message);
+        }
+
+        public void Debug(string message)
         {
             Log(LogLevel.Debug, message);
         }
         
-        public void LogInfo(string message)
+        public void Info(string message)
         {
             Log(LogLevel.Info, message);
         }
         
-        public void LogWarning(string message)
+        public void Warning(string message)
         {
             Log(LogLevel.Warning, message);
         }
         
-        public void LogError(string message)
+        public void Error(string message)
         {
             Log(LogLevel.Error, message);
         }
         
-        public void LogException(string message, Exception ex)
+        public void Exception(string message, Exception ex)
         {
             Log(LogLevel.Exception, message, ex);
         }
@@ -44,16 +49,7 @@ namespace Oxide.Ext.Discord.Logging
                 return;
             }
 
-            string log;
-            if (level == LogLevel.Error || level == LogLevel.Exception)
-            {
-                log = $"[Discord Extension] [{typeof(T).Name}] [{level}]: {message}";
-            }
-            else
-            {
-                log = $"[Discord Extension] [{level}]: {message}";
-            }
-
+            string log= $"[Discord Extension] [{level}]: {message}";
             switch (level)
             {
                 case LogLevel.Debug:
