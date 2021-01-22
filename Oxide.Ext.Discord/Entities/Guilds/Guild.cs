@@ -71,6 +71,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public List<VoiceState> VoiceStates { get; set; }
   
         [JsonProperty("members")]
+        //TODO: Fix FirstOrDefault errors again
         public List<GuildMember> Members { get; set; }
           
         [JsonProperty("presences")]

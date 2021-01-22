@@ -2,6 +2,7 @@
 using System.Timers;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Logging;
 using WebSocketSharp;
 
 namespace Oxide.Ext.Discord.WebSockets
@@ -30,7 +31,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         public void Connect()
         {
-            string url = Gateway.WebSocketUrl;
+            string url = Gateway.WebsocketUrl;
             if (string.IsNullOrEmpty(url))
             {
                 _client.UpdateGatewayUrl(Connect);
@@ -39,13 +40,13 @@ namespace Oxide.Ext.Discord.WebSockets
 
             if (_socket != null)
             {
-                throw new SocketRunningException(_client);
+                throw new Exception("Socket is already running. Please disconnect before attempting to connect.");
                 // Assume force-reconnect
                 //Disconnect(false);
             }
             _client.DestroyHeartbeat();
 
-            _socket = new WebSocket($"{url}/?{Gatway.Connect.Serialize()}");
+            _socket = new WebSocket($"{url}/?{Entities.Gatway.Connect.Serialize()}");
 
             if (_listener == null)
             {

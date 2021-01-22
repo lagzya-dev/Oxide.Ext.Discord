@@ -410,8 +410,8 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchReady(RPayload payload)
         {
             Ready ready = payload.EventData.ToObject<Ready>();
-            _client.DiscordServers = ready.Guilds;
-            _client.SessionID = ready.SessionID;
+            _client.DiscordServers = ready.Guilds.ToHash(g => g.Id);
+            _client.SessionID = ready.SessionId;
             _logger.Warning($"Your bot was found in {ready.Guilds.Count} Guilds!");
             _client.CallHook("Discord_Ready", ready);
         }
@@ -428,16 +428,16 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchChannelCreate(RPayload payload)
         {
             Channel channel = payload.EventData.ToObject<Channel>();
-            if (channel.type == ChannelType.DM || channel.type == ChannelType.GROUP_DM)
+            if (channel.Type == ChannelType.DM || channel.Type == ChannelType.GROUP_DM)
             {
-                _client.DMs.Add(channel);
+                _client.DMs[channel.Id] = channel;
             }
             else
             {
-                _client.GetGuild(channel.guild_id)?.channels.Add(channel);
+                _client.GetGuild(channel.GuildId)?.Channels.Add(channel);
             }
 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelCreate)} CHANNEL_CREATE: ID: {channel.id} Type: {channel.type}.");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelCreate)} CHANNEL_CREATE: ID: {channel.Id} Type: {channel.Type}.");
             _client.CallHook("Discord_ChannelCreate", channel);
         }
 
@@ -446,32 +446,32 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             Channel update = payload.EventData.ToObject<Channel>();
             Channel previous = null;
-            if (update.type == ChannelType.DM || update.type == ChannelType.GROUP_DM)
+            if (update.Type == ChannelType.DM || update.Type == ChannelType.GROUP_DM)
             {
-                previous = _client.DMs.FirstOrDefault(c => c.id == update.id);
+                previous = _client.DMs[update.Id];
                 if (previous != null)
                 {
-                    _client.DMs.Remove(previous);
+                    _client.DMs.Remove(update.Id);
                 }
 
-                _client.DMs.Add(update);
+                _client.DMs[update.Id] = update;
             }
             else
             {
-                Guild guild = _client.GetGuild(update.guild_id);
+                Guild guild = _client.GetGuild(update.GuildId);
                 if (guild != null)
                 {
-                    previous = guild.channels.FirstOrDefault(c => c.id == update.id);
+                    previous = guild.Channels.FirstOrDefault(c => c.Id == update.Id);
                     if (previous != null)
                     {
-                        guild.channels.Remove(previous);
+                        guild.Channels.Remove(previous);
                     }
 
-                    guild.channels.Add(update);
+                    guild.Channels.Add(update);
                 }
             }
 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelUpdate)} CHANNEL_UPDATE: ID: {update.id} Type: {update.type}.");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelUpdate)} CHANNEL_UPDATE: ID: {update.Id} Type: {update.Type}.");
             _client.CallHook("Discord_ChannelUpdate", update, previous);
         }
 
@@ -479,8 +479,8 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchChannelDelete(RPayload payload)
         {
             Channel channel = payload.EventData.ToObject<Channel>();
-            _client.GetGuild(channel.guild_id)?.channels.RemoveAll(c => c.id == channel.id);
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelDelete)} CHANNEL_DELETE: ID: {channel.id} Type: {channel.type}.");
+            _client.GetGuild(channel.GuildId)?.Channels.RemoveAll(c => c.Id == channel.Id);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelDelete)} CHANNEL_DELETE: ID: {channel.Id} Type: {channel.Type}.");
             _client.CallHook("Discord_ChannelDelete", channel);
         }
 
@@ -488,7 +488,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchChannelPinUpdate(RPayload payload)
         {
             ChannelPinsUpdate pins = payload.EventData.ToObject<ChannelPinsUpdate>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelPinUpdate)} CHANNEL_PINS_UPDATE: Channel ID: {pins.channel_id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelPinUpdate)} CHANNEL_PINS_UPDATE: Channel ID: {pins.GuildId}");
             _client.CallHook("Discord_ChannelPinsUpdate", pins);
         }
 
@@ -497,16 +497,16 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildCreate(RPayload payload)
         {
             Guild guild = payload.EventData.ToObject<Guild>();
-            bool unavailable = guild.unavailable ?? false;
-            Guild existing = _client.GetGuild(guild.id);
+            bool unavailable = guild.Unavailable ?? false;
+            Guild existing = _client.GetGuild(guild.Id);
             if (existing == null)
             {
-                _client.DiscordServers.Add(guild);
+                _client.AddGuild(guild);
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} GUILD_CREATE: Guild not found adding to list.");
             }
-            else if (!unavailable && (existing.unavailable ?? false))
+            else if (!unavailable && (existing.Unavailable ?? false))
             {
-                _client.UpdateGuild(guild.id, guild);
+                _client.AddGuild(guild);
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} GUILD_CREATE: Guild found but was unavailable. Updating guild in list.");
             }
 
@@ -517,7 +517,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildUpdate(RPayload payload)
         {
             Guild guild = payload.EventData.ToObject<Guild>();
-            _client.GetGuild(guild.id)?.Update(guild);
+            _client.GetGuild(guild.Id)?.Update(guild);
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildUpdate)} GUILD_UPDATE: Guild was Updated.");
             _client.CallHook("Discord_GuildUpdate", guild);
         }
@@ -526,15 +526,15 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildDelete(RPayload payload)
         {
             Guild guild = payload.EventData.ToObject<Guild>();
-            if (guild.unavailable ?? false) // There is an outage with Discord
+            if (guild.Unavailable ?? false) // There is an outage with Discord
             {
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildDelete)} GUILD_DELETE: There is an outage with the guild.");
-                _client.UpdateGuild(guild.id, guild);
+                _client.AddGuild(guild);
             }
             else
             {
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildDelete)} GUILD_DELETE: User was removed from the guild.");
-                _client.RemoveGuild(guild.id);
+                _client.RemoveGuild(guild.Id);
             }
 
             _client.CallHook("Discord_GuildDelete", guild);
@@ -544,25 +544,25 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildBanAdd(RPayload payload)
         {
             //TODO: Pass Guild ID of the banned user
-            BanObject ban = payload.EventData.ToObject<BanObject>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanAdd)} GUILD_BAN_ADD: User was banned from the guild. Guild ID: {ban.guild_id} User ID: {ban.user.id}.");
-            _client.CallHook("Discord_GuildBanAdd", ban.user);
+            GuildBanEvent ban = payload.EventData.ToObject<GuildBanEvent>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanAdd)} GUILD_BAN_ADD: User was banned from the guild. Guild ID: {ban.GuildId} User ID: {ban.User.Id}.");
+            _client.CallHook("Discord_GuildBanAdd", ban.User);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-ban-remove
         private void HandleDispatchGuildBanRemove(RPayload payload)
         {
             //TODO: Pass Guild ID of the banned user
-            BanObject ban = payload.EventData.ToObject<BanObject>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanRemove)} GUILD_BAN_REMOVE: User was unbanned from the guild. Guild ID: {ban.guild_id} User ID: {ban.user.id}.");
-            _client.CallHook("Discord_GuildBanRemove", ban.user);
+            GuildBanEvent ban = payload.EventData.ToObject<GuildBanEvent>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanRemove)} GUILD_BAN_REMOVE: User was unbanned from the guild. Guild ID: {ban.GuildId} User ID: {ban.User.Id}.");
+            _client.CallHook("Discord_GuildBanRemove", ban.User);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-emojis-update
         private void HandleDispatchGuildEmojisUpdate(RPayload payload)
         {
             GuildEmojisUpdate emojis = payload.EventData.ToObject<GuildEmojisUpdate>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildEmojisUpdate)} GUILD_EMOJIS_UPDATE: Guild ID: {emojis.guild_id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildEmojisUpdate)} GUILD_EMOJIS_UPDATE: Guild ID: {emojis.GuildId}");
             _client.CallHook("Discord_GuildEmojisUpdate", emojis);
         }
 
@@ -570,7 +570,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildIntegrationsUpdate(RPayload payload)
         {
             GuildIntergrationsUpdate integration = payload.EventData.ToObject<GuildIntergrationsUpdate>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildIntegrationsUpdate)} GUILD_INTEGRATIONS_UPDATE: Guild ID: {integration.guild_id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildIntegrationsUpdate)} GUILD_INTEGRATIONS_UPDATE: Guild ID: {integration.GuildId}");
             _client.CallHook("Discord_GuildIntergrationsUpdate", integration); //TODO: Remove Deprecated Hook Call
             _client.CallHook("Discord_GuildIntegrationsUpdate", integration);
         }
@@ -579,8 +579,8 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildMemberAdd(RPayload payload)
         {
             GuildMemberAdd member = payload.EventData.ToObject<GuildMemberAdd>();
-            _client.GetGuild(member.guild_id)?.members.Add(member);
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberAdd)} GUILD_MEMBER_ADD: Guild ID: {member.guild_id} User ID: {member.user.id}");
+            _client.GetGuild(member.GuildId)?.Members.Add(member);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberAdd)} GUILD_MEMBER_ADD: Guild ID: {member.GuildId} User ID: {member.User.Id}");
             _client.CallHook("Discord_MemberAdded", member);
         }
 
@@ -588,16 +588,16 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildMemberRemove(RPayload payload)
         {
             GuildMemberRemove remove = payload.EventData.ToObject<GuildMemberRemove>();
-            Guild guild = _client.GetGuild(remove.guild_id);
+            Guild guild = _client.GetGuild(remove.GuildId);
             if (guild != null)
             {
-                GuildMember member = guild.members.FirstOrDefault(x => x.user.id == remove.user.id);
+                GuildMember member = guild.Members.FirstOrDefault(x => x.User.Id == remove.User.Id);
                 if (member != null)
                 {
-                    guild.members.Remove(member);
+                    guild.Members.Remove(member);
                 }
 
-                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberRemove)} GUILD_MEMBER_REMOVE: Guild ID: {remove.guild_id} User ID: {remove.user.id}");
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberRemove)} GUILD_MEMBER_REMOVE: Guild ID: {remove.GuildId} User ID: {remove.User.Id}");
                 _client.CallHook("Discord_MemberRemoved", member);
             }
         }
@@ -606,18 +606,18 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildMemberUpdate(RPayload payload)
         {
             GuildMemberUpdate update = payload.EventData.ToObject<GuildMemberUpdate>();
-            Guild guild = _client.GetGuild(update.guild_id);
-            GuildMember member = guild?.members.FirstOrDefault(x => x.user.id == update.user.id);
+            Guild guild = _client.GetGuild(update.GuildId);
+            GuildMember member = guild?.Members.FirstOrDefault(x => x.User.Id == update.User.Id);
             if (member != null)
             {
-                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberUpdate)} GUILD_MEMBER_UPDATE: Guild ID: {update.guild_id} User ID: {update.user.id}");
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberUpdate)} GUILD_MEMBER_UPDATE: Guild ID: {update.GuildId} User ID: {update.User.Id}");
                 GuildMember oldMember = JObject.FromObject(member).ToObject<GuildMember>(); // lazy way to copy the object
-                if (update.user != null)
-                    member.user = update.user;
-                if (update.nick != null)
-                    member.nick = update.nick;
-                if (update.roles != null)
-                    member.roles = update.roles;
+                if (update.User != null)
+                    member.User = update.User;
+                if (update.Nick != null)
+                    member.Nick = update.Nick;
+                if (update.Roles != null)
+                    member.Roles = update.Roles;
                 _client.CallHook("Discord_GuildMemberUpdate", update, oldMember);
             }
         }
@@ -626,7 +626,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildMembersChunk(RPayload payload)
         {
             GuildMembersChunk chunk = payload.EventData.ToObject<GuildMembersChunk>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMembersChunk)} GUILD_MEMBER_UPDATE: Guild ID: {chunk.guild_id} Nonce: {chunk.Nonce}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMembersChunk)} GUILD_MEMBER_UPDATE: Guild ID: {chunk.GuildId} Nonce: {chunk.Nonce}");
             _client.CallHook("Discord_GuildMembersChunk", chunk);
         }
 
@@ -634,28 +634,28 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildRoleCreate(RPayload payload)
         {
             GuildRoleCreate role = payload.EventData.ToObject<GuildRoleCreate>();
-            _client.GetGuild(role.guild_id)?.roles.Add(role.role);
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleCreate)} GUILD_ROLE_CREATE: Guild ID: {role.guild_id} Role ID: {role.role.id} Role Name: {role.role.name}");
-            _client.CallHook("Discord_GuildRoleCreate", role.role);
+            _client.GetGuild(role.GuildId)?.Roles.Add(role.Role);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleCreate)} GUILD_ROLE_CREATE: Guild ID: {role.GuildId} Role ID: {role.Role.Id} Role Name: {role.Role.Name}");
+            _client.CallHook("Discord_GuildRoleCreate", role.Role);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-role-update
         private void HandleDispatchGuildRoleUpdate(RPayload payload)
         {
             GuildRoleUpdate update = payload.EventData.ToObject<GuildRoleUpdate>();
-            Role updatedRole = update.role;
-            Guild guild = _client.GetGuild(update.guild_id);
+            Role updatedRole = update.Role;
+            Guild guild = _client.GetGuild(update.GuildId);
             if (guild != null)
             {
-                Role oldRole = guild.roles.FirstOrDefault(x => x.id == updatedRole.id);
+                Role oldRole = guild.Roles.FirstOrDefault(x => x.Id == updatedRole.Id);
                 if (oldRole != null)
                 {
-                    guild.roles.Remove(oldRole);
+                    guild.Roles.Remove(oldRole);
                 }
 
-                guild.roles.Add(updatedRole);
+                guild.Roles.Add(updatedRole);
 
-                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleUpdate)} GUILD_ROLE_UPDATE: Guild ID: {update.guild_id} Role ID: {update.role.id} Role Name: {update.role.name}");
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleUpdate)} GUILD_ROLE_UPDATE: Guild ID: {update.GuildId} Role ID: {update.Role.Id} Role Name: {update.Role.Name}");
                 _client.CallHook("Discord_GuildRoleUpdate", updatedRole, oldRole);
             }
         }
@@ -664,12 +664,12 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildRoleDelete(RPayload payload)
         {
             GuildRoleDelete delete = payload.EventData.ToObject<GuildRoleDelete>();
-            Guild guild = _client.GetGuild(delete.guild_id);
-            Role role = guild?.roles.FirstOrDefault(x => x.id == delete.role_id);
+            Guild guild = _client.GetGuild(delete.GuildId);
+            Role role = guild?.Roles.FirstOrDefault(x => x.Id == delete.RoleId);
             if (role != null)
             {
-                guild.roles.Remove(role);
-                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleDelete)} GUILD_ROLE_UPDATE: Guild ID: {role.guild_id} Role ID: {role.id} Role Name: {role.name}");
+                guild.Roles.Remove(role);
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleDelete)} GUILD_ROLE_UPDATE: Guild ID: {delete.GuildId} Role ID: {role.Id} Role Name: {role.Name}");
                 _client.CallHook("Discord_GuildRoleDelete", role);
             }
         }
@@ -678,14 +678,14 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchMessageCreate(RPayload payload)
         {
             Message message = payload.EventData.ToObject<Message>();
-            Channel channel = message.guild_id != null ? _client.GetGuild(message.guild_id)?.channels.FirstOrDefault(x => x.id == message.channel_id) : _client.DMs.FirstOrDefault(x => x.id == message.channel_id);
+            Channel channel = message.GuildId != null ? _client.GetGuild(message.GuildId)?.Channels.FirstOrDefault(x => x.Id == message.ChannelId) : _client.DMs[message.ChannelId];
 
             if (channel != null)
             {
-                channel.last_message_id = message.id;
+                channel.LastMessageId = message.Id;
             }
 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} MESSAGE_CREATE: Guild ID: {message.guild_id} Channel ID: {message.channel_id} Message ID: {message.id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} MESSAGE_CREATE: Guild ID: {message.GuildId} Channel ID: {message.ChannelId} Message ID: {message.Id}");
             _client.CallHook("Discord_MessageCreate", message);
         }
 
@@ -693,7 +693,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchMessageUpdate(RPayload payload)
         {
             Message message = payload.EventData.ToObject<Message>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageUpdate)} MESSAGE_UPDATE: Guild ID: {message.guild_id} Channel ID: {message.channel_id} Message ID: {message.id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageUpdate)} MESSAGE_UPDATE: Guild ID: {message.GuildId} Channel ID: {message.ChannelId} Message ID: {message.Id}");
             _client.CallHook("Discord_MessageUpdate", message);
         }
 
@@ -701,7 +701,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchMessageDelete(RPayload payload)
         {
             MessageDelete message = payload.EventData.ToObject<MessageDelete>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageDelete)} MESSAGE_DELETE: Channel ID: {message.channel_id} Message ID: {message.id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageDelete)} MESSAGE_DELETE: Channel ID: {message.ChannelId} Message ID: {message.Id}");
             _client.CallHook("Discord_MessageDelete", message);
         }
 
@@ -709,23 +709,23 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchMessageDeleteBulk(RPayload payload)
         {
             MessageDeleteBulk bulkDelete = payload.EventData.ToObject<MessageDeleteBulk>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageDeleteBulk)} MESSAGE_DELETE: Channel ID: {bulkDelete.channel_id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageDeleteBulk)} MESSAGE_DELETE: Channel ID: {bulkDelete.ChannelId}");
             _client.CallHook("Discord_MessageDeleteBulk", bulkDelete);
         }
 
         //https://discord.com/developers/docs/topics/gateway#message-reaction-add
         private void HandleDispatchMessageReactionAdd(RPayload payload)
         {
-            MessageReactionUpdate reaction = payload.EventData.ToObject<MessageReactionUpdate>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionAdd)} MESSAGE_REACTION_ADD: Channel ID: {reaction.channel_id} Message ID: {reaction.message_id} User ID: {reaction.user_id}");
+            MessageReactionAdd reaction = payload.EventData.ToObject<MessageReactionAdd>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionAdd)} MESSAGE_REACTION_ADD: Channel ID: {reaction.ChannelId} Message ID: {reaction.MessageId} User ID: {reaction.UserId}");
             _client.CallHook("Discord_MessageReactionAdd", reaction);
         }
 
         //https://discord.com/developers/docs/topics/gateway#message-reaction-remove
         private void HandleDispatchMessageReactionRemove(RPayload payload)
         {
-            MessageReactionUpdate reaction = payload.EventData.ToObject<MessageReactionUpdate>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionRemove)} MESSAGE_REACTION_REMOVE: Channel ID: {reaction.channel_id} Message ID: {reaction.message_id} User ID: {reaction.user_id}");
+            MessageReactionRemove reaction = payload.EventData.ToObject<MessageReactionRemove>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionRemove)} MESSAGE_REACTION_REMOVE: Channel ID: {reaction.ChannelId} Message ID: {reaction.MessageId} User ID: {reaction.UserId}");
             _client.CallHook("Discord_MessageReactionRemove", reaction);
         }
 
@@ -733,7 +733,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchMessageReactionRemoveAll(RPayload payload)
         {
             MessageReactionRemoveAll reaction = payload.EventData.ToObject<MessageReactionRemoveAll>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionRemoveAll)} MESSAGE_REACTION_REMOVE_ALL: Channel ID: {reaction.channel_id} Message ID: {reaction.message_id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionRemoveAll)} MESSAGE_REACTION_REMOVE_ALL: Channel ID: {reaction.ChannelId} Message ID: {reaction.MessageId}");
             _client.CallHook("Discord_MessageReactionRemoveAll", reaction);
         }
 
@@ -749,12 +749,12 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             PresenceUpdate update = payload.EventData.ToObject<PresenceUpdate>();
 
-            User updateUser = update?.user;
+            DiscordUser updateUser = update?.User;
             if (updateUser != null)
             {
-                GuildMember member = _client.GetGuild(update.guild_id)?.members.FirstOrDefault(x => x.user.id == updateUser.id);
-                member?.user.Update(updateUser);
-                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchPresenceUpdate)} PRESENCE_UPDATE: Guild ID: {update.guild_id} User ID: {update.user} Status: {update.status}");
+                GuildMember member = _client.GetGuild(update.GuildId)?.Members.FirstOrDefault(x => x.User.Id == updateUser.Id);
+                member?.User.Update(updateUser);
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchPresenceUpdate)} PRESENCE_UPDATE: Guild ID: {update.GuildId} User ID: {update.User} Status: {update.Status}");
             }
 
             _client.CallHook("Discord_PresenceUpdate", updateUser);
@@ -764,22 +764,22 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchTypingStart(RPayload payload)
         {
             TypingStart typing = payload.EventData.ToObject<TypingStart>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchTypingStart)} TYPING_START: Channel ID: {typing.channel_id} User ID: {typing.user_id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchTypingStart)} TYPING_START: Channel ID: {typing.ChannelId} User ID: {typing.UserId}");
             _client.CallHook("Discord_TypingStart", typing);
         }
 
         //https://discord.com/developers/docs/topics/gateway#user-update
         private void HandleDispatchUserUpdate(RPayload payload)
         {
-            User user = payload.EventData.ToObject<User>();
+            DiscordUser user = payload.EventData.ToObject<DiscordUser>();
 
             foreach (Guild guild in _client.DiscordServers.Values)
             {
-                GuildMember memberUpdate = guild.members.FirstOrDefault(x => x.user.id == user.id);
+                GuildMember memberUpdate = guild.Members.FirstOrDefault(x => x.User.Id == user.Id);
                 if (memberUpdate != null)
                 {
-                    _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchUserUpdate)} USER_UPDATE: Guild ID: {guild.id} User ID: {user.id}");
-                    memberUpdate.user = user;
+                    _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchUserUpdate)} USER_UPDATE: Guild ID: {guild.Id} User ID: {user.Id}");
+                    memberUpdate.User = user;
                 }
             }
 
@@ -790,7 +790,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchVoiceStateUpdate(RPayload payload)
         {
             VoiceState voice = payload.EventData.ToObject<VoiceState>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchVoiceStateUpdate)} USER_UPDATE: Guild ID: {voice.guild_id} Channel ID: {voice.channel_id} User ID: {voice.user_id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchVoiceStateUpdate)} USER_UPDATE: Guild ID: {voice.GuildId} Channel ID: {voice.ChannelId} User ID: {voice.UserId}");
             _client.CallHook("Discord_VoiceStateUpdate", voice);
         }
 
@@ -798,7 +798,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchVoiceServerUpdate(RPayload payload)
         {
             VoiceServerUpdate voice = payload.EventData.ToObject<VoiceServerUpdate>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchVoiceServerUpdate)} USER_UPDATE: Guild ID: {voice.guild_id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchVoiceServerUpdate)} USER_UPDATE: Guild ID: {voice.GuildId}");
             _client.CallHook("Discord_VoiceServerUpdate", voice);
         }
 
@@ -806,7 +806,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchWebhooksUpdate(RPayload payload)
         {
             WebhooksUpdate webhook = payload.EventData.ToObject<WebhooksUpdate>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchWebhooksUpdate)} USER_UPDATE: Guild ID: {webhook.guild_id} Channel ID: {webhook.channel_id}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchWebhooksUpdate)} USER_UPDATE: Guild ID: {webhook.GuildId} Channel ID: {webhook.ChannelId}");
             _client.CallHook("Discord_WebhooksUpdate", webhook);
         }
 
@@ -814,7 +814,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchInviteCreate(RPayload payload)
         {
             InviteCreated invite = payload.EventData.ToObject<InviteCreated>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteCreate)} INVITE_CREATE: Guild ID: {invite.guild_id} Channel ID: {invite.channel_id} Code: {invite.code}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteCreate)} INVITE_CREATE: Guild ID: {invite.GuildId} Channel ID: {invite.ChannelId} Code: {invite.Code}");
             _client.CallHook("Discord_InviteCreated", invite);
         }
 
@@ -822,7 +822,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchInviteDelete(RPayload payload)
         {
             InviteDeleted invite = payload.EventData.ToObject<InviteDeleted>();
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteDelete)} INVITE_DELETE: Guild ID: {invite.guild_id} Channel ID: {invite.channel_id} Code: {invite.code}");
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteDelete)} INVITE_DELETE: Guild ID: {invite.GuildId} Channel ID: {invite.ChannelId} Code: {invite.Code}");
             _client.CallHook("Discord_InviteDeleted", invite);
         }
 
