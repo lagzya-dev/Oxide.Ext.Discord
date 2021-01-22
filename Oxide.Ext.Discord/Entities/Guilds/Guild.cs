@@ -71,7 +71,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public List<VoiceState> VoiceStates { get; set; }
   
         [JsonProperty("members")]
-        //TODO: Fix FirstOrDefault errors again
         public List<GuildMember> Members { get; set; }
           
         [JsonProperty("presences")]
@@ -398,6 +397,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             client.REST.DoRequest($"/guilds/{Id}/emojis/{emojiId}", RequestMethod.DELETE, null, callback);
         }
 
+        #region Helpers
         public void Update(Guild updatedGuild)
         {
             if (updatedGuild.Name != null)
@@ -480,7 +480,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 this.ApproximateMemberCount = updatedGuild.ApproximateMemberCount;
             if (updatedGuild.ApproximatePresenceCount != null)
                 this.ApproximatePresenceCount = updatedGuild.ApproximatePresenceCount;
-
         }
+
+        public bool IsAvailable => Unavailable.HasValue && !Unavailable.Value;
+        #endregion
     }
 }
