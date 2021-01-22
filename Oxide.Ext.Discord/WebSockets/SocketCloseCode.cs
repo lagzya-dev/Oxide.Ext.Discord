@@ -1,5 +1,6 @@
 namespace Oxide.Ext.Discord.WebSockets
 {
+    //https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes
     public enum SocketCloseCode
     {
         UnknownError = 4000, //We're not sure what went wrong. Try reconnecting?
@@ -15,6 +16,7 @@ namespace Oxide.Ext.Discord.WebSockets
         ShardingRequired = 4011, //The session would have handled too many guilds - you are required to shard your connection in order to connect.
         InvalidApiVersion = 4012, //You sent an invalid version for the gateway.
         InvalidIntents = 4013, //You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated the bitwise value.
-        DisallowedIntent = 4014 //You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not enabled or are not whitelisted for.
+        DisallowedIntent = 4014, //You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not enabled or are not whitelisted for.
+        UnknownCloseCode = 4999 //Used when a code is sent that we don't have yet.
     }
 }

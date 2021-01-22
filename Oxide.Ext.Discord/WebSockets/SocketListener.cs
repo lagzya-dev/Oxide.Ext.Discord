@@ -88,7 +88,14 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             if (!code.ToString().TryParse(out SocketCloseCode closeCode))
             {
-                return false;
+                if(code >= 4000 && code < 5000)
+                {
+                    closeCode = SocketCloseCode.UnknownCloseCode;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             bool reconnect = false;
@@ -157,6 +164,10 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case SocketCloseCode.DisallowedIntent:
                     _logger.Error("The plugin is asking for an intent you have not granted your bot. Please go to your bot and enable the privileged gateway intents: https://support.discord.com/hc/en-us/articles/360040720412-Bot-Verification-and-Data-Whitelisting#privileged-intent-whitelisting");
+                    break;
+                
+                case SocketCloseCode.UnknownCloseCode:
+                    _logger.Error($"Discord has closed the gateway with a code we do not recognize. Code: {code}. Please Contact Discord Extension Authors.");
                     break;
                 
                 default:
