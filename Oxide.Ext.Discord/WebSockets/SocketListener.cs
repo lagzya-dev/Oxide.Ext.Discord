@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Users;
@@ -407,8 +408,8 @@ namespace Oxide.Ext.Discord.WebSockets
                 case "INTEGRATION_UPDATE":
                 case "INTEGRATION_DELETE":
                     
-                //Part of new slash command system. Not implemented yet.
                 case "INTERACTION_CREATE":
+                    HandleDispatchInteractionCreate(payload);
                     break;
 
                 default:
@@ -875,6 +876,13 @@ namespace Oxide.Ext.Discord.WebSockets
             InviteDeleted invite = payload.EventData.ToObject<InviteDeleted>();
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteDelete)} INVITE_DELETE: Guild ID: {invite.GuildId} Channel ID: {invite.ChannelId} Code: {invite.Code}");
             _client.CallHook("Discord_InviteDeleted", invite);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#interaction-create
+        private void HandleDispatchInteractionCreate(RPayload payload)
+        {
+            Interaction interaction = payload.EventData.ToObject<Interaction>();
+            _client.CallHook("Discord_InteractionCreate", interaction);
         }
 
         private void HandleDispatchUnhandledEvent(RPayload payload)

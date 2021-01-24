@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public string ChannelId { get; set; }
         
         [JsonProperty("member")]
-        public GuildMember GuildMember { get; set; }
+        public GuildMember Member { get; set; }
         
         [JsonProperty("token")]
         public string Token { get; set; } 
