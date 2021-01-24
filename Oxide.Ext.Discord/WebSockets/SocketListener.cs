@@ -449,7 +449,11 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             else
             {
-                _client.GetGuild(channel.GuildId)?.Channels.Add(channel);
+                Guild guild = _client.GetGuild(channel.GuildId);
+                if (guild != null && guild.IsAvailable)
+                {
+                    guild.Channels[channel.Id] = channel;
+                }
             }
 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelCreate)} CHANNEL_CREATE: ID: {channel.Id} Type: {channel.Type}.");
@@ -476,13 +480,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 Guild guild = _client.GetGuild(update.GuildId);
                 if (guild != null && guild.IsAvailable)
                 {
-                    previous = guild.Channels.FirstOrDefault(c => c.Id == update.Id);
-                    if (previous != null)
-                    {
-                        guild.Channels.Remove(previous);
-                    }
-
-                    guild.Channels.Add(update);
+                    guild.Channels[update.Id] = update;
                 }
             }
 
@@ -601,7 +599,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Guild guild = _client.GetGuild(member.GuildId);
             if (guild != null && guild.IsAvailable)
             {
-                guild.Members.Add(member);
+                guild.Members[member.User.Id] = member;
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberAdd)} GUILD_MEMBER_ADD: Guild ID: {member.GuildId} User ID: {member.User.Id}");
                 _client.CallHook("Discord_MemberAdded", member);
             }
@@ -614,10 +612,10 @@ namespace Oxide.Ext.Discord.WebSockets
             Guild guild = _client.GetGuild(remove.GuildId);
             if (guild != null && guild.IsAvailable)
             {
-                GuildMember member = guild.Members.FirstOrDefault(x => x.User.Id == remove.User.Id);
+                GuildMember member = guild.Members[remove.User.Id];
                 if (member != null)
                 {
-                    guild.Members.Remove(member);
+                    guild.Members.Remove(remove.User.Id);
                 }
 
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberRemove)} GUILD_MEMBER_REMOVE: Guild ID: {remove.GuildId} User ID: {remove.User.Id}");
@@ -632,7 +630,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Guild guild = _client.GetGuild(update.GuildId);
             if (guild != null && guild.IsAvailable)
             {
-                GuildMember member = guild.Members.FirstOrDefault(x => x.User.Id == update.User.Id);
+                GuildMember member = guild.Members[update.User.Id];
                 if (member != null)
                 {
                     _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberUpdate)} GUILD_MEMBER_UPDATE: Guild ID: {update.GuildId} User ID: {update.User.Id}");
@@ -714,10 +712,10 @@ namespace Oxide.Ext.Discord.WebSockets
             Channel channel = null;
             if (message.GuildId != null)
             {
-                var guild = _client.GetGuild(message.GuildId);
+                Guild guild = _client.GetGuild(message.GuildId);
                 if (guild != null && guild.IsAvailable)
                 {
-                    channel = guild.Channels.FirstOrDefault(c => c.Id == message.ChannelId);
+                    channel = guild.Channels[message.ChannelId];
                 }
             }
             else
@@ -800,7 +798,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 Guild guild = _client.GetGuild(update.GuildId);
                 if (guild != null && guild.IsAvailable)
                 {
-                    GuildMember member = guild.Members.FirstOrDefault(x => x.User.Id == updateUser.Id);
+                    GuildMember member = guild.Members[updateUser.Id];
                     member?.User.Update(updateUser);
                 }
 
@@ -827,7 +825,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 if (guild.IsAvailable)
                 {
-                    GuildMember memberUpdate = guild.Members.FirstOrDefault(x => x.User.Id == user.Id);
+                    GuildMember memberUpdate = guild.Members[user.Id];
                     if (memberUpdate != null)
                     {
                         _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchUserUpdate)} USER_UPDATE: Guild ID: {guild.Id} User ID: {user.Id}");
