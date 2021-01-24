@@ -403,15 +403,16 @@ namespace Oxide.Ext.Discord.WebSockets
                     HandleDispatchInviteDelete(payload);
                     break;
                 
-                //Currently sent by discord but are not yet documented in the Discord API docs..
-                case "INTEGRATION_CREATE":
-                case "INTEGRATION_UPDATE":
-                case "INTEGRATION_DELETE":
-                    
                 case "INTERACTION_CREATE":
                     HandleDispatchInteractionCreate(payload);
                     break;
 
+                //Currently sent by discord but are not yet documented in the Discord API docs..
+                case "INTEGRATION_CREATE":
+                case "INTEGRATION_UPDATE":
+                case "INTEGRATION_DELETE":
+                    break;
+                
                 default:
                     HandleDispatchUnhandledEvent(payload);
                     break;
