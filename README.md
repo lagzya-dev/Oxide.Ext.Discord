@@ -513,7 +513,7 @@ void Discord_UnhandledEvent(JObject messageObject)
 }
 ```
 
- - Called when an event that is not handlded by the extension was raised
+ - Called when an event that is not handled by the extension was raised
  - Please create an issue on the GitHub if this error ever occurs
 
 ## Contributing

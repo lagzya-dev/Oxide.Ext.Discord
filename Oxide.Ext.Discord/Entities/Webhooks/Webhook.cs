@@ -45,27 +45,27 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 { "avatar", avatar }
             };
 
-            client.REST.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.POST, jsonObj, callback);
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.POST, jsonObj, callback);
         }
 
         public static void GetChannelWebhooks(DiscordClient client, string channelId, Action<List<Webhook>> callback = null)
         {
-            client.REST.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.GET, null, callback);
         }
 
         public static void GetGuildWebhooks(DiscordClient client, string guildId, Action<List<Webhook>> callback = null)
         {
-            client.REST.DoRequest($"/guilds/{guildId}/webhooks", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/guilds/{guildId}/webhooks", RequestMethod.GET, null, callback);
         }
 
         public static void GetWebhook(DiscordClient client, string webhookId, Action<Webhook> callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{webhookId}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{webhookId}", RequestMethod.GET, null, callback);
         }
 
         public static void GetWebhookWithToken(DiscordClient client, string webhookId, string webhookToken, Action<Webhook> callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{webhookId}/{webhookToken}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{webhookId}/{webhookToken}", RequestMethod.GET, null, callback);
         }
 
         public void ModifyWebhook(DiscordClient client, string name, string avatar, Action<Webhook> callback = null)
@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 { "avatar", avatar }
             };
 
-            client.REST.DoRequest($"/webhooks/{Id}", RequestMethod.POST, jsonObj, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}", RequestMethod.POST, jsonObj, callback);
         }
 
         public void ModifyWebhookWithToken(DiscordClient client, string name, string avatar, Action<Webhook> callback = null)
@@ -87,42 +87,52 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 { "avatar", avatar }
             };
 
-            client.REST.DoRequest<Webhook>($"/webhooks/{Id}/{Token}", RequestMethod.POST, jsonObj, callback);
+            client.Bot.Rest.DoRequest<Webhook>($"/webhooks/{Id}/{Token}", RequestMethod.POST, jsonObj, callback);
         }
 
         public void DeleteWebhook(DiscordClient client, Action callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{Id}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}", RequestMethod.DELETE, null, callback);
         }
 
         public void DeleteWebhookWithToken(DiscordClient client, Action callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{Id}/{Token}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}", RequestMethod.DELETE, null, callback);
         }
 
-        public void ExecuteWebhook(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action callback = null, WebhookSendType sendType = WebhookSendType.Default)
         {
-            client.REST.DoRequest($"/webhooks/{Id}/{Token}?wait=true", RequestMethod.POST, payload, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}", RequestMethod.POST, payload, callback);
+        }
+        
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback, WebhookSendType sendType = WebhookSendType.Default)
+        {
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}?wait=true", RequestMethod.POST, payload, callback);
         }
 
-        public void ExecuteWebhookSlack(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
+        public void EditWebhookMessage(DiscordClient client, string messageId, WebhookEditMessage payload, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{Id}/{Token}/slack?wait=true", RequestMethod.POST, payload, callback);
-        }
-
-        public void ExecuteWebhookGitHub(DiscordClient client, WebhookPayload payload, Action<Message> callback = null)
-        {
-            client.REST.DoRequest($"/webhooks/{Id}/{Token}/github?wait=true", RequestMethod.POST, payload, callback);
-        }
-
-        public void EditWebhookMessage(DiscordClient client, string messageId, WebhookPayload payload, Action<Message> callback = null)
-        {
-            client.REST.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.PATCH, payload, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.PATCH, payload, callback);
         }
         
         public void DeleteWebhookMessage(DiscordClient client, string messageId, Action callback = null)
         {
-            client.REST.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback);
+        }
+
+        private string GetWebhookFormat(WebhookSendType type)
+        {
+            switch (type)
+            {
+                case WebhookSendType.Default:
+                    return string.Empty;
+                case WebhookSendType.Slack:
+                    return "/slack";
+                case WebhookSendType.Github:
+                    return "/github";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
     }
 }

@@ -9,6 +9,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public InteractionResponseType Type { get; set; }
         
         [JsonProperty("data")]
-        public InteractionApplicationCommandCallbackData Data { get; set; }
+        public ApplicationCommandCallbackData Data { get; set; }
     }
 }

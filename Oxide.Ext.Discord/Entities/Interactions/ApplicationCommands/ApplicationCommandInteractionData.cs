@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ApplicationCommandInteractionData

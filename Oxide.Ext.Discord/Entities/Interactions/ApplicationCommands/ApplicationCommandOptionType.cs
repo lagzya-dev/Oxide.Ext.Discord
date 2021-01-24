@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.SlashCommands
+namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
     public enum ApplicationCommandOptionType
     {

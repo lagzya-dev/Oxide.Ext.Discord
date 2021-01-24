@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Roles
 {
     [JsonConverter(typeof(DiscordColorConverter))]
-    public readonly struct DiscordColor
+    public struct DiscordColor
     {
         public static readonly DiscordColor Default = new DiscordColor(0);
         public static readonly DiscordColor Teal = new DiscordColor(0x1ABC9C);

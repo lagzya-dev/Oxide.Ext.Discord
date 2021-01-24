@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.REST;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -24,7 +25,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public string ChannelId { get; set; }
         
         [JsonProperty("member")]
-        public GuildMember GuildMember { get; set; }
+        public GuildMember Member { get; set; }
         
         [JsonProperty("token")]
         public string Token { get; set; } 
@@ -34,12 +35,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         public void CreateResponse(DiscordClient client, InteractionResponse response, Action callback = null)
         {
-            client.REST.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
+            client.Bot.Rest.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
         }
         
         public void EditResponse(DiscordClient client, InteractionResponse response, Action callback = null)
         {
-            client.REST.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
+            client.Bot.Rest.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
         }
     }
 }
