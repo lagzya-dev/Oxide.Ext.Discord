@@ -38,34 +38,34 @@ namespace Oxide.Ext.Discord.Entities.Channels
 
         public static void GetChannel(DiscordClient client, string channelId, Action<Channel> callback = null)
         {
-            client.REST.DoRequest($"/channels/{channelId}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{channelId}", RequestMethod.GET, null, callback);
         }
 
         public void ModifyChannel(DiscordClient client, ChannelCreate newChannel, Action<Channel> callback = null)
         {
-            client.REST.DoRequest($"/channels/{Id}", RequestMethod.PATCH, newChannel, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}", RequestMethod.PATCH, newChannel, callback);
         }
 
         public void DeleteChannel(DiscordClient client, Action<Channel> callback = null)
         {
-            client.REST.DoRequest($"/channels/{Id}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}", RequestMethod.DELETE, null, callback);
         }
 
         public void GetChannelMessages(DiscordClient client, Action<List<Message>> callback = null)
         {
-            client.REST.DoRequest($"/channels/{Id}/messages", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.GET, null, callback);
         }
 
         public void GetChannelMessage(DiscordClient client, Message message, Action<Message> callback = null) => GetChannelMessage(client, message.Id, callback);
 
         public void GetChannelMessage(DiscordClient client, string messageId, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/channels/{Id}/messages/{messageId}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages/{messageId}", RequestMethod.GET, null, callback);
         }
 
         public void CreateMessage(DiscordClient client, MessageCreate message, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, message, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, message, callback);
         }
 
         public void CreateMessage(DiscordClient client, string message, Action<Message> callback = null)
@@ -75,7 +75,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Content = message
             };
 
-            client.REST.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback);
         }
 
         public void CreateMessage(DiscordClient client, Embed embed, Action<Message> callback = null)
@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Embed = embed
             };
 
-            client.REST.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback);
         }
 
         public void BulkDeleteMessages(DiscordClient client, string[] messageIds, Action callback = null)
@@ -95,12 +95,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 { "messages", messageIds }
             };
 
-            client.REST.DoRequest($"/channels/{Id}/messages/bulk-delete", RequestMethod.POST, jsonObj, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages/bulk-delete", RequestMethod.POST, jsonObj, callback);
         }
 
         public void EditChannelPermissions(DiscordClient client, Overwrite overwrite, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{Id}/permissions/{overwrite.Id}", RequestMethod.PUT, overwrite, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/permissions/{overwrite.Id}", RequestMethod.PUT, overwrite, callback);
         }
 
         public void EditChannelPermissions(DiscordClient client, string overwriteId, PermissionFlags allow, PermissionFlags deny, PermissionType type, Action callback = null)
@@ -123,34 +123,34 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 throw new Exception("You can only get channel invites for guild channels.");
             }
             
-            client.REST.DoRequest($"/channels/{Id}/invites", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/invites", RequestMethod.GET, null, callback);
         }
 
         public void CreateChannelInvite(DiscordClient client, ChannelInvite invite, Action<Invite> callback = null)
         {
-            client.REST.DoRequest<Invite>($"/channels/{Id}/invites", RequestMethod.POST, invite, callback);
+            client.Bot.Rest.DoRequest<Invite>($"/channels/{Id}/invites", RequestMethod.POST, invite, callback);
         }
 
         public void DeleteChannelPermission(DiscordClient client, Overwrite overwrite, Action callback) => DeleteChannelPermission(client, overwrite.Id, callback);
 
         public void DeleteChannelPermission(DiscordClient client, string overwriteId, Action callback)
         {
-            client.REST.DoRequest($"/channels/{Id}/permissions/{overwriteId}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/permissions/{overwriteId}", RequestMethod.DELETE, null, callback);
         }
 
         public void FollowNewsChannel(DiscordClient client, string webhookChannelId, Action<FollowedChannel> callback)
         {
-            client.REST.DoRequest($"/channels/{Id}/followers?webhook_channel_id={webhookChannelId}", RequestMethod.POST, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/followers?webhook_channel_id={webhookChannelId}", RequestMethod.POST, null, callback);
         }
 
         public void TriggerTypingIndicator(DiscordClient client, Action callback)
         {
-            client.REST.DoRequest($"/channels/{Id}/typing", RequestMethod.POST, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/typing", RequestMethod.POST, null, callback);
         }
 
         public void GetPinnedMessages(DiscordClient client, Action<List<Message>> callback = null)
         {
-            client.REST.DoRequest<List<Message>>($"/channels/{Id}/pins", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest<List<Message>>($"/channels/{Id}/pins", RequestMethod.GET, null, callback);
         }
 
         public void GroupDmAddRecipient(DiscordClient client, DiscordUser user, string accessToken, Action callback = null) => GroupDmAddRecipient(client, user.Id, accessToken, user.Username, callback);
@@ -163,12 +163,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 { "nick", nick }
             };
 
-            client.REST.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.PUT, jsonObj, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.PUT, jsonObj, callback);
         }
 
         public void GroupDmRemoveRecipient(DiscordClient client, string userId, Action callback)
         {
-            client.REST.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.DELETE, null, callback);
         }
     }
 }

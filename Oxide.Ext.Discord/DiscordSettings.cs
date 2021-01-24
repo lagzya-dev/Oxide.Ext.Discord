@@ -18,5 +18,7 @@ namespace Oxide.Ext.Discord
         public LogLevel LogLevel = LogLevel.Info;
         
         public BotIntents Intents = BotIntents.All;
+        
+        public bool CloseOnUnload = true;
     }
 }

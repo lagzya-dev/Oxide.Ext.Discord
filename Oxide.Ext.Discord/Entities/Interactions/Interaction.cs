@@ -35,12 +35,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         public void CreateResponse(DiscordClient client, InteractionResponse response, Action callback = null)
         {
-            client.REST.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
+            client.Bot.Rest.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
         }
         
         public void EditResponse(DiscordClient client, InteractionResponse response, Action callback = null)
         {
-            client.REST.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
+            client.Bot.Rest.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, null, callback);
         }
     }
 }

@@ -94,7 +94,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 message.MessageReference = new MessageReference {MessageId = messageId};
             }
 
-            client.REST.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback);
         }
 
         public void Reply(DiscordClient client, string message, bool ping = true, string messageId = null, Action<Message> callback = null)
@@ -125,7 +125,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         
         public void CrossPostMessage(DiscordClient client, string messageId, Action<Message> callback = null)
         {
-            client.REST.DoRequest($"/channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback);
         }
         
         public void CrossPostMessage(DiscordClient client, Message message, Action<Message> callback = null)
@@ -135,54 +135,54 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
         public void CreateReaction(DiscordClient client, string emoji, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.PUT, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.PUT, null, callback);
         }
 
         public void DeleteOwnReaction(DiscordClient client, string emoji, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.DELETE, null, callback);
         }
 
         public void DeleteUserReaction(DiscordClient client, string emoji, DiscordUser user, Action callback = null) => DeleteUserReaction(client, emoji, user.Id, callback);
 
         public void DeleteUserReaction(DiscordClient client, string emoji, string userId, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback);
         }
 
         public void GetReactions(DiscordClient client, string emoji, Action<List<DiscordUser>> callback = null)
         {
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.GET, null, callback);
         }
 
         public void DeleteAllReactions(DiscordClient client, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions", RequestMethod.DELETE, null, callback);
         }
         
         public void DeleteAllReactionsForEmoji(DiscordClient client, string emoji, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.DELETE, null, callback);
         }
 
         public void EditMessage(DiscordClient client, Action<Message> callback = null)
         {
-            client.REST.DoRequest<Message>($"/channels/{ChannelId}/messages/{Id}", RequestMethod.PATCH, this, callback);
+            client.Bot.Rest.DoRequest<Message>($"/channels/{ChannelId}/messages/{Id}", RequestMethod.PATCH, this, callback);
         }
 
         public void DeleteMessage(DiscordClient client, Action<Message> callback = null)
         {
-            client.REST.DoRequest<Message>($"/channels/{ChannelId}/messages/{Id}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest<Message>($"/channels/{ChannelId}/messages/{Id}", RequestMethod.DELETE, null, callback);
         }
 
         public void AddPinnedChannelMessage(DiscordClient client, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.PUT, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.PUT, null, callback);
         }
 
         public void DeletePinnedChannelMessage(DiscordClient client, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.DELETE, null, callback);
         }
     }
 }

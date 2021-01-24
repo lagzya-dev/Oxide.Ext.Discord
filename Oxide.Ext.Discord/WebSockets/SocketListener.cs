@@ -20,13 +20,13 @@ namespace Oxide.Ext.Discord.WebSockets
     {
         internal int Retries;
         
-        private readonly DiscordClient _client;
+        private readonly BotClient _client;
 
         private readonly Socket _webSocket;
 
         private readonly ILogger _logger;
 
-        public SocketListener(DiscordClient client, Socket socket, ILogger logger)
+        public SocketListener(BotClient client, Socket socket, ILogger logger)
         {
             _client = client;
             _webSocket = socket;
@@ -421,17 +421,19 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchReady(RPayload payload)
         {
             Ready ready = payload.EventData.ToObject<Ready>();
-            _client.DiscordServers = ready.Guilds.ToHash(g => g.Id);
-            _client.SessionID = ready.SessionId;
-            _logger.Warning($"Your bot was found in {ready.Guilds.Count} Guilds!");
-            _client.CallHook("Discord_Ready", ready);
+            _client.Servers = ready.Guilds.ToHash(g => g.Id);
+            _client.SessionId = ready.SessionId;
+            _client.ReadyData = ready;
+            _client.Application = ready.Application;
+            _logger.Info($"Your bot was found in {ready.Guilds.Count} Guilds!");
+            _client.CallHook("Discord_Ready", ready, false);
         }
 
         //https://discord.com/developers/docs/topics/gateway#resumed
         private void HandleDispatchResumed(RPayload payload)
         {
             Resumed resumed = payload.EventData.ToObject<Resumed>();
-            _logger.Warning("Session resumed successfully!");
+            _logger.Info("Session resumed successfully!");
             _client.CallHook("Discord_Resumed", resumed);
         }
 
@@ -441,7 +443,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Channel channel = payload.EventData.ToObject<Channel>();
             if (channel.Type == ChannelType.DM || channel.Type == ChannelType.GROUP_DM)
             {
-                _client.DMs[channel.Id] = channel;
+                _client.DirectMessages[channel.Id] = channel;
             }
             else
             {
@@ -459,13 +461,13 @@ namespace Oxide.Ext.Discord.WebSockets
             Channel previous = null;
             if (update.Type == ChannelType.DM || update.Type == ChannelType.GROUP_DM)
             {
-                previous = _client.DMs[update.Id];
+                previous = _client.DirectMessages[update.Id];
                 if (previous != null)
                 {
-                    _client.DMs.Remove(update.Id);
+                    _client.DirectMessages.Remove(update.Id);
                 }
 
-                _client.DMs[update.Id] = update;
+                _client.DirectMessages[update.Id] = update;
             }
             else
             {
@@ -718,7 +720,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             else
             {
-                channel = _client.DMs[message.ChannelId];
+                channel = _client.DirectMessages[message.ChannelId];
             }
             
             if (channel != null)
@@ -819,7 +821,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             DiscordUser user = payload.EventData.ToObject<DiscordUser>();
 
-            foreach (Guild guild in _client.DiscordServers.Values)
+            foreach (Guild guild in _client.Servers.Values)
             {
                 if (guild.IsAvailable)
                 {
@@ -907,7 +909,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleHello(RPayload payload)
         {
             Hello hello = payload.EventData.ToObject<Hello>();
-            _client.CreateHeartbeat(hello.HeartbeatInterval);
+            _client.SetupHeartbeat(hello.HeartbeatInterval);
 
             // Client should now perform identification
             if (_webSocket.ShouldAttemptResume)

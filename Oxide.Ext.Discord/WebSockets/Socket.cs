@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.WebSockets
         
         internal Timer ReconnectTimer;
         
-        private readonly DiscordClient _client;
+        private readonly BotClient _client;
 
         private WebSocket _socket;
 
@@ -23,10 +23,10 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private readonly ILogger _logger;
 
-        public Socket(DiscordClient client)
+        public Socket(BotClient client, ILogger logger)
         {
             _client = client;
-            _logger = new Logging.Logger(client.Settings.LogLevel);
+            _logger = logger;
         }
 
         public void Connect()

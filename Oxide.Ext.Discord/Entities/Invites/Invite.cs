@@ -36,12 +36,12 @@ namespace Oxide.Ext.Discord.Entities.Invites
 
         public static void GetInvite(DiscordClient client, string inviteCode, Action<Invite> callback = null)
         {
-            client.REST.DoRequest($"/invites/{inviteCode}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/invites/{inviteCode}", RequestMethod.GET, null, callback);
         }
 
         public void DeleteInvite(DiscordClient client, Action<Invite> callback = null)
         {
-            client.REST.DoRequest($"/invites/{Code}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/invites/{Code}", RequestMethod.DELETE, null, callback);
         }
     }
 }

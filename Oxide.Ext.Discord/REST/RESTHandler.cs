@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -7,51 +9,24 @@ namespace Oxide.Ext.Discord.REST
 {
     public class RestHandler
     {
+        public readonly BotGlobalRateLimit RateLimit = new BotGlobalRateLimit();
+        public readonly Hash<string, Bucket> Buckets = new Hash<string, Bucket>();
+
         private readonly Dictionary<string, string> _headers;
         private readonly ILogger _logger;
-        private readonly BotRestHandler _handler;
-        private readonly DiscordClient _client;
-        private readonly string _apiKey;
-        
-        internal static readonly Hash<string, BotRestHandler> BotHandlers = new Hash<string, BotRestHandler>();
+        private readonly BotClient _client;
 
-        public RestHandler(DiscordClient client, string apiKey)
+        public RestHandler(BotClient client, ILogger logger)
         {
             _client = client;
             _logger = new Logger(client.Settings.LogLevel);
-            _apiKey = apiKey;
 
             _headers = new Dictionary<string, string>
             {
-                { "Authorization", $"Bot {apiKey}" },
+                { "Authorization", $"Bot {client.Settings.ApiToken}" },
                 { "Content-Type", "application/json" },
                 { "User-Agent", $"DiscordBot (https://github.com/Trickyyy/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})" }
             };
-
-            lock (BotHandlers)
-            {
-                _handler = BotHandlers[apiKey];
-                if (_handler == null)
-                {
-                    _handler = new BotRestHandler();
-                    BotHandlers[apiKey] = _handler;
-                }
-                
-                _handler.AddClient(_client);
-            }
-        }
-
-        public void Disconnect()
-        {
-            _handler.RemoveClient(_client);
-            if (_handler.IsEmpty)
-            {
-                _handler.Shutdown();
-                lock (BotHandlers)
-                {
-                    BotHandlers.Remove(_apiKey);
-                }
-            }
         }
 
         public void DoRequest(string url, RequestMethod method, object data, Action callback)
@@ -70,8 +45,76 @@ namespace Oxide.Ext.Discord.REST
         private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
         {
             Request request = new Request(method, url, headers, data, callback, _logger);
-            _handler.CleanupExpired();
-            _handler.QueueRequest(request, _logger);
+            CleanupExpired();
+            QueueRequest(request, _logger);
+        }
+        
+        public void CleanupExpired()
+        {
+            Buckets.RemoveAll(b => b.ShouldCleanup());
+        }
+
+        public void QueueRequest(Request request, ILogger logger)
+        {
+            string bucketId = GetBucketId(request.Route);
+            Bucket bucket = Buckets[bucketId];
+            if (bucket == null)
+            {
+                bucket = new Bucket(this, bucketId, logger);
+                Buckets[bucketId] = bucket;
+            }
+
+            bucket.Queue(request);
+        }
+        
+        public void Shutdown()
+        {
+            foreach (Bucket bucket in Buckets.Values)
+            {
+                bucket.Close();
+            }
+            Buckets.Clear();
+            RateLimit.Shutdown();
+        }
+        
+        private string GetBucketId(string route)
+        {
+            string[] routeSegments = route.Split('/');
+            StringBuilder bucket = new StringBuilder(routeSegments[0]);
+            bucket.Append("/");
+            string previousSegment = routeSegments[0];
+            for (int index = 0; index < routeSegments.Length; index++)
+            {
+                string segment = routeSegments[index];
+                switch (previousSegment)
+                {
+                    // Reactions routes and sub-routes all share the same bucket
+                    case "reactions":
+                        return bucket.ToString();
+                        
+                    // Literal IDs should only be taken account if they are the Major ID (Channel ID / Guild ID / Webhook ID)
+                    case "guilds":
+                    case "channels": 
+                    case "webhooks":
+                        break;
+                            
+                    default:
+                        if (ulong.TryParse(segment, out ulong _))
+                        {
+                            bucket.Append("id/");
+                            previousSegment = segment;
+                            continue;
+                        }
+
+                        break;
+                }
+                
+                // All other parts of the route should be considered as part of the bucket identifier
+                bucket.Append(previousSegment = segment);
+                bucket.Append("/");
+            }
+
+            return bucket.ToString();
         }
     }
 }

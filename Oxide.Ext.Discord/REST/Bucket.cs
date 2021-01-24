@@ -18,13 +18,13 @@ namespace Oxide.Ext.Discord.REST
 
         public double ErrorResendDelayUntil;
 
-        public readonly BotRestHandler Handler;
+        public readonly RestHandler Handler;
 
         private Thread _thread;
 
         private readonly ILogger _logger;
 
-        public Bucket(BotRestHandler handler, string bucketId, ILogger logger)
+        public Bucket(RestHandler handler, string bucketId, ILogger logger)
         {
             Handler = handler;
             BucketId = bucketId;

@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Logging
 {
     public class Logger : ILogger
     {
-        private readonly LogLevel _logLevel;
+        private LogLevel _logLevel;
         
         public Logger(LogLevel logLevel)
         {
@@ -66,6 +66,11 @@ namespace Oxide.Ext.Discord.Logging
                     Interface.Oxide.LogInfo(log);
                     break;
             }
+        }
+
+        public void UpdateLogLevel(LogLevel level)
+        {
+            _logLevel = level;
         }
     }
 }

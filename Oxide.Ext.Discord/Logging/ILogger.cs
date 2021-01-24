@@ -10,5 +10,6 @@ namespace Oxide.Ext.Discord.Logging
         void Warning(string message);
         void Error(string message);
         void Exception(string message, Exception ex);
+        void UpdateLogLevel(LogLevel level);
     }
 }

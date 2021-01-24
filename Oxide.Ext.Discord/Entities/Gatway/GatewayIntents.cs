@@ -5,6 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
     [Flags]
     public enum BotIntents
     {
+        None = 0,
         Guilds = 1 << 0,
         GuildMembers = 1 << 1,
         GuildBans = 1 << 2,

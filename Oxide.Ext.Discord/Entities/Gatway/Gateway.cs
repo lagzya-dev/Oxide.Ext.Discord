@@ -11,9 +11,9 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         
         public static string WebsocketUrl { get; internal set; }
 
-        public static void GetGateway(DiscordClient client, Action<Gateway> callback)
+        public static void GetGateway(BotClient client, Action<Gateway> callback)
         {
-            client.REST.DoRequest("/gateway", REST.RequestMethod.GET, null, callback);
+            client.Rest.DoRequest("/gateway", REST.RequestMethod.GET, null, callback);
         }
     }
 }

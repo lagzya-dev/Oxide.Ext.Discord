@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Oxide.Core;
 using Oxide.Core.Extensions;
 using Oxide.Ext.Discord.Logging;
@@ -11,11 +12,11 @@ namespace Oxide.Ext.Discord
         private static readonly VersionNumber ExtensionVersion = new VersionNumber(2, 0, 0);
         public const string TestVersion = ".PreAlpha.1";
         
-        private readonly ILogger _logger;
+        public static ILogger GlobalLogger;
         
         public DiscordExtension(ExtensionManager manager) : base(manager)
         {
-            _logger = new Logger(LogLevel.Debug);
+            
         }
 
         ////public override bool SupportsReloading => true;
@@ -30,22 +31,36 @@ namespace Oxide.Ext.Discord
 
         public override void OnModLoad()
         {
-            _logger.Info($"Using Discord Extension Version: {GetExtensionVersion}");
+            if (string.IsNullOrEmpty(TestVersion))
+            {
+                GlobalLogger = new Logger(LogLevel.Warning);
+            }
+            else
+            {
+                GlobalLogger = new Logger(LogLevel.Debug);
+            }
+            
+            GlobalLogger.Warning($"Using Discord Extension Version: {GetExtensionVersion}");
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
-                _logger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);
+                GlobalLogger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);
             };
+            
+            Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
+            Interface.Oxide.RootPluginManager.OnPluginRemoved +=  DiscordClient.OnPluginRemoved;
         }
 
         public override void OnShutdown()
         {
-            // new List prevents against InvalidOperationException
-            foreach (var client in new List<DiscordClient>(Discord.Clients))
+            foreach (DiscordClient client in DiscordClient.Clients.Values.ToList())
             {
-                Discord.CloseClient(client);
+                DiscordClient.CloseClient(client);
             }
+            
+            Interface.Oxide.RootPluginManager.OnPluginAdded -= DiscordClient.OnPluginAdded;
+            Interface.Oxide.RootPluginManager.OnPluginRemoved -=  DiscordClient.OnPluginRemoved;
 
-            _logger.Info("Disconnected all clients - server shutdown.");
+            GlobalLogger.Info("Disconnected all clients - server shutdown.");
         }
     }
 }
