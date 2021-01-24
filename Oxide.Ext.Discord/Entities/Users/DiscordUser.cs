@@ -57,12 +57,12 @@ namespace Oxide.Ext.Discord.Entities.Users
 
         public static void GetCurrentUser(DiscordClient client, Action<DiscordUser> callback = null)
         {
-            client.REST.DoRequest($"/users/@me", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.GET, null, callback);
         }
 
         public static void GetUser(DiscordClient client, Snowflake userId, Action<DiscordUser> callback = null)
         {
-            client.REST.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback);
         }
 
         public void ModifyCurrentUser(DiscordClient client, Action<DiscordUser> callback = null) => ModifyCurrentUser(client, Username, Avatar, callback);
@@ -75,19 +75,19 @@ namespace Oxide.Ext.Discord.Entities.Users
                 { "avatar", avatarData }
             };
 
-            client.REST.DoRequest($"/users/@me", RequestMethod.PATCH, jsonObj, callback);
+            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.PATCH, jsonObj, callback);
         }
 
         public void GetCurrentUserGuilds(DiscordClient client, Action<List<Guild>> callback = null)
         {
-            client.REST.DoRequest($"/users/@me/guilds", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/users/@me/guilds", RequestMethod.GET, null, callback);
         }
 
         public void LeaveGuild(DiscordClient client, Guild guild, Action callback = null) => LeaveGuild(client, guild.Id, callback);
 
         public void LeaveGuild(DiscordClient client, Snowflake guildId, Action callback = null)
         {
-            client.REST.DoRequest($"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback);
         }
 
         public void CreateDm(DiscordClient client, Action<Channel> callback = null) => CreateDm(client, Id, callback);
@@ -99,7 +99,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 { "recipient_id", userId.ToString() }
             };
 
-            client.REST.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback);
+            client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback);
         }
 
         public void CreateGroupDm(DiscordClient client, string[] accessTokens, List<NickId> nicks, Action<Channel> callback = null)
@@ -112,12 +112,12 @@ namespace Oxide.Ext.Discord.Entities.Users
                 { "nicks", nickDict }
             };
 
-            client.REST.DoRequest("/users/@me/channels", RequestMethod.POST, jsonObj, callback);
+            client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, jsonObj, callback);
         }
 
         public void GetUserConnections(DiscordClient client, Action<List<Connection>> callback = null)
         {
-            client.REST.DoRequest("/users/@me/connections", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest("/users/@me/connections", RequestMethod.GET, null, callback);
         }
 
         public void GroupDmAddRecipient(DiscordClient client, Channel channel, string accessToken, Action callback = null) => GroupDmAddRecipient(client, channel.Id, accessToken, Username, callback);
@@ -130,14 +130,14 @@ namespace Oxide.Ext.Discord.Entities.Users
                 { "nick", nick }
             };
 
-            client.REST.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, jsonObj, callback);
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, jsonObj, callback);
         }
 
         public void GroupDmRemoveRecipient(DiscordClient client, Channel channel) => GroupDmRemoveRecipient(client, channel.Id);
 
         public void GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId, Action callback = null)
         {
-            client.REST.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback);
         }
 
         public void Update(DiscordUser update)

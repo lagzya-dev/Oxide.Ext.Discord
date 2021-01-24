@@ -16,9 +16,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         [JsonProperty("user")]
         public DiscordUser User { get; set; }
 
-        [JsonProperty("private_channels")]
-        public List<Channel> PrivateChannels { get; set; }
-        
         [JsonProperty("guilds")]
         public List<Guild> Guilds { get; set; }
 

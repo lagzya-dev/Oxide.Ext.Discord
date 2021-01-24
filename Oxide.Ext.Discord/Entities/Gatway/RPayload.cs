@@ -19,5 +19,8 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         public int? Sequence { get; set; }
         
         public JObject EventData => Data as JObject;
+        
+        [JsonIgnore]
+        public JToken TokenData => Data as JToken;
     }
 }

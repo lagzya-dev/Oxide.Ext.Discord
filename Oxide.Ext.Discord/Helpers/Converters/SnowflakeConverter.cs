@@ -19,10 +19,10 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                         return snowflake;
                     }
 
-                    throw new JsonException();
+                    throw new JsonException("Snowflake string JSON token failed to parse to snowflake");
                 
                 default:
-                    throw new JsonException();
+                    throw new JsonException("Token type does not match snowflake valid types of string or integer");
             }
         }
         

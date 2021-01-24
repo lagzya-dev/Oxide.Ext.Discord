@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Helpers.Converters;
 namespace Oxide.Ext.Discord.Entities
 {
     [JsonConverter(typeof(SnowflakeConverter))]
-    public readonly struct Snowflake : IComparable<Snowflake>, IEquatable<Snowflake>, IComparable<ulong>, IEquatable<ulong>
+    public struct Snowflake : IComparable<Snowflake>, IEquatable<Snowflake>, IComparable<ulong>, IEquatable<ulong>
     {
         public readonly ulong Id;
 
@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Entities
                 return true;
             }
 
-            snowflake = default;
+            snowflake = default(Snowflake);
             return false;
         }
 

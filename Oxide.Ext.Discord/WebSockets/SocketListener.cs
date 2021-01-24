@@ -1,14 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Timers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Users;
@@ -21,57 +19,42 @@ namespace Oxide.Ext.Discord.WebSockets
 {
     public class SocketListener
     {
-        private readonly DiscordClient _client;
+        internal int Retries;
+        
+        private readonly BotClient _client;
 
         private readonly Socket _webSocket;
 
-        internal int Retries;
-
         private readonly ILogger _logger;
 
-        private Timer _reconnectTimer;
-
-        public SocketListener(DiscordClient client, Socket socket)
+        public SocketListener(BotClient client, Socket socket, ILogger logger)
         {
             _client = client;
             _webSocket = socket;
-            _logger = new Logger<SocketListener>(client.Settings.LogLevel);
-        }
-
-        public void DisconnectWebsocket(bool shouldReconnect, bool shouldResume, bool discordRequestedReconnect = false)
-        {
-            _client.requestReconnect = shouldReconnect;
-            _webSocket.ShouldAttemptResume = shouldResume;
-
-            if (discordRequestedReconnect)
-            {
-                _webSocket.ReconnectRequested();
-            }
-            else
-            {
-                _webSocket.Disconnect();
-            }
+            _logger = logger;
         }
 
         public void SocketOpened(object sender, EventArgs e)
         {
-            _logger.LogWarning("Discord socket opened!");
+            _logger.Warning("Discord socket opened!");
             _client.CallHook("DiscordSocket_WebSocketOpened");
             Retries = 0;
         }
 
         public void SocketClosed(object sender, CloseEventArgs e)
         {
-            _logger.LogDebug($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
+            _logger.Debug($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
             
-            if (_client.requestReconnect)
+            _webSocket.DisposeSocket();
+            
+            if (_webSocket.RequestReconnect)
             {
-                _client.requestReconnect = false;
-                _client.ConnectToWebSocket();
+                _webSocket.RequestReconnect = false;
+                _client.ConnectWebSocket();
                 return;
             }
             
-            _client.CallHook("DiscordSocket_WebSocketClosed", null, e.Reason, e.Code, e.WasClean);
+            _client.CallHook("DiscordSocket_WebSocketClosed", e.Reason, e.Code, e.WasClean);
             
             if (HandleDiscordClosedSocket(e.Code, e.Reason))
             {
@@ -80,36 +63,25 @@ namespace Oxide.Ext.Discord.WebSockets
 
             if (!e.WasClean)
             {
-                _logger.LogWarning($"Discord connection closed uncleanly: code {e.Code}, Reason: {e.Reason}");
+                _logger.Warning($"Discord connection closed uncleanly: code {e.Code}, Reason: {e.Reason}");
             }
 
-            if (!_client.Disconnected)
+            if (_client.Initialized)
             {
-                if (Retries < 3)
+                _webSocket.StartReconnectTimer(Retries < 3 ? 1f : 15f, () =>
                 {
-                    _logger.LogWarning("Attempting to reconnect to Discord...");
-                    _client.ConnectToWebSocket();
-                }
-                else
-                {
-                    if (_reconnectTimer != null && _reconnectTimer.Enabled)
+                    Retries++;
+                    _logger.Warning($"Attempting to reconnect to Discord... [Retry={Retries}]");
+                    if (Retries <= 8)
                     {
-                        return;
+                        _client.ConnectWebSocket();
                     }
-
-                    _reconnectTimer = new Timer
+                    else
                     {
-                        Interval = 15000f,
-                        AutoReset = false
-                    };
-                    _reconnectTimer.Elapsed += (_, __) =>
-                    {
-                        _logger.LogWarning("Attempting to reconnect to Discord...");
-                        _client.ConnectToWebSocket();
-                    };
-                }
-                
-                Retries++;
+                        //If more than 8 tries something could be wrong on discords end. Try and fetch the websocket url
+                        _client.UpdateGatewayUrl(_client.ConnectWebSocket);
+                    }
+                });
             }
         }
 
@@ -117,7 +89,14 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             if (!code.ToString().TryParse(out SocketCloseCode closeCode))
             {
-                return false;
+                if(code >= 4000 && code < 5000)
+                {
+                    closeCode = SocketCloseCode.UnknownCloseCode;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             bool reconnect = false;
@@ -125,67 +104,71 @@ namespace Oxide.Ext.Discord.WebSockets
             switch (closeCode)
             {
                 case SocketCloseCode.UnknownError: 
-                    _logger.LogError("Discord had an unknown error. Reconnecting.");
+                    _logger.Error("Discord had an unknown error. Reconnecting.");
                     reconnect = true;
                     break;
                 
                 case SocketCloseCode.UnknownOpcode: 
-                    _logger.LogError($"Unknown gateway opcode sent: {reason}");
+                    _logger.Error($"Unknown gateway opcode sent: {reason}");
                     reconnect = true;
                     break;
                 
                 case SocketCloseCode.DecodeError: 
-                    _logger.LogError($"Invalid gateway payload sent: {reason}");
+                    _logger.Error($"Invalid gateway payload sent: {reason}");
                     reconnect = true;
                     break;
                 
                 case SocketCloseCode.NotAuthenticated: 
-                    _logger.LogError($"Tried to send a payload before identifying: {reason}");
+                    _logger.Error($"Tried to send a payload before identifying: {reason}");
                     reconnect = true;
                     break;
                 
                 case SocketCloseCode.AuthenticationFailed: 
-                    _logger.LogError($"The given bot token is invalid. Please enter a valid token: {reason}");
+                    _logger.Error($"The given bot token is invalid. Please enter a valid token: {reason}");
                     break;
                 
                 case SocketCloseCode.AlreadyAuthenticated: 
-                    _logger.LogError($"The bot has already authenticated. Please don't identify more than once.: {reason}");
+                    _logger.Error($"The bot has already authenticated. Please don't identify more than once.: {reason}");
                     reconnect = true;
                     break;
                 
                 case SocketCloseCode.InvalidSequence: 
-                    _logger.LogError($"Invalid resume sequence. Doing full reconnect.: {reason}");
+                    _logger.Error($"Invalid resume sequence. Doing full reconnect.: {reason}");
                     reconnect = true;
                     break;
                 
                 case SocketCloseCode.RateLimited: 
-                    _logger.LogError($"You're being rate limited. Please slow down how quickly you're sending requests: {reason}");
+                    _logger.Error($"You're being rate limited. Please slow down how quickly you're sending requests: {reason}");
                     break;
                 
                 case SocketCloseCode.SessionTimedOut: 
-                    _logger.LogError($"Session has timed out. Starting a new one: {reason}");
+                    _logger.Error($"Session has timed out. Starting a new one: {reason}");
                     reconnect = true;
                     break;
                 
                 case SocketCloseCode.InvalidShard: 
-                    _logger.LogError($"Invalid shared has been specified: {reason}");
+                    _logger.Error($"Invalid shared has been specified: {reason}");
                     reconnect = true;
                     break;
                 
                 case SocketCloseCode.ShardingRequired: 
-                    _logger.LogError($"Bot is in too many guilds. You must shard your bot: {reason}");
+                    _logger.Error($"Bot is in too many guilds. You must shard your bot: {reason}");
                     break;
                 
                 case SocketCloseCode.InvalidApiVersion: 
-                    _logger.LogError("Gateway is using invalid API version. Please contact Discord Extension Devs immediately!");
+                    _logger.Error("Gateway is using invalid API version. Please contact Discord Extension Devs immediately!");
                     break;
                 
                 case SocketCloseCode.InvalidIntents: 
-                    _logger.LogError("Invalid intent(s) specified for the gateway. Please check that you're using valid intents in the connect.");
+                    _logger.Error("Invalid intent(s) specified for the gateway. Please check that you're using valid intents in the connect.");
                     break;
                 
                 case SocketCloseCode.DisallowedIntent:
-                    _logger.LogError("The plugin is asking for an intent you have not granted your bot. Please go to your bot and enable the privileged gateway intents: https://support.discord.com/hc/en-us/articles/360040720412-Bot-Verification-and-Data-Whitelisting#privileged-intent-whitelisting");
+                    _logger.Error("The plugin is asking for an intent you have not granted your bot. Please go to your bot and enable the privileged gateway intents: https://support.discord.com/hc/en-us/articles/360040720412-Bot-Verification-and-Data-Whitelisting#privileged-intent-whitelisting");
+                    break;
+                
+                case SocketCloseCode.UnknownCloseCode:
+                    _logger.Error($"Discord has closed the gateway with a code we do not recognize. Code: {code}. Please Contact Discord Extension Authors.");
                     break;
                 
                 default:
@@ -195,7 +178,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if (reconnect)
             {
                 _webSocket.ShouldAttemptResume = false;
-                _client.ConnectToWebSocket();
+                _client.ConnectWebSocket();
             }
             
             return true;
@@ -203,504 +186,762 @@ namespace Oxide.Ext.Discord.WebSockets
 
         public void SocketErrored(object sender, ErrorEventArgs e)
         {
-            _logger.LogError($"An error has occured in the websocket: {e.Message}\n{e.Exception}");
-            _client.CallHook("DiscordSocket_WebSocketErrored", null, e.Exception, e.Message);
+            _logger.Exception("An error has occured in the websocket", e.Exception);
+            _client.CallHook("DiscordSocket_WebSocketErrored", e.Exception, e.Message);
 
-            _logger.LogWarning("Attempting to reconnect to Discord...");
-            DisconnectWebsocket(true, false);
+            _logger.Warning("Attempting to reconnect to Discord...");
+            _webSocket.Disconnect(true, false);
         }
 
         public void SocketMessage(object sender, MessageEventArgs e)
         {
             RPayload payload = JsonConvert.DeserializeObject<RPayload>(e.Data);
-
             if (payload.Sequence.HasValue)
             {
                 _client.Sequence = payload.Sequence.Value;
             }
 
-            _logger.LogDebug($"Received socket message, OpCode: {payload.OpCode}");
+            _logger.Debug($"Received socket message, OpCode: {payload.OpCode}");
 
-            switch (payload.OpCode)
+            try
             {
-                // Dispatch (dispatches an event)
-                case ReceiveOpCode.Dispatch:
+                switch (payload.OpCode)
                 {
-                    _logger.LogDebug($"Received OpCode 0, event: {payload.EventName}");
-
-                    // Listed here: https://discordapp.com/developers/docs/topics/gateway#commands-and-events-gateway-events
-                    switch (payload.EventName)
-                    {
-                        case "READY":
-                        {
-                            Ready ready = payload.EventData.ToObject<Ready>();
-                            if (ready.Guilds.Count != 0)
-                            {
-                                _logger.LogWarning($"Your bot was found in {ready.Guilds.Count} Guilds!");
-                            }
-
-                            if (ready.Guilds.Count == 0)
-                            {
-                                _logger.LogDebug("Ready event but no Guilds sent.");
-                            }
-
-                            _client.DiscordServers = ready.Guilds.ToHash(key => key.Id);
-                            _client.SessionID = ready.SessionId;
-                            _client.Application = ready.Application;
-                            
-                            _client.CallHook("Discord_Ready", null, ready);
-                            break;
-                        }
-
-                        case "RESUMED":
-                        {
-                            Resumed resumed = payload.EventData.ToObject<Resumed>();
-                            _logger.LogWarning("Session resumed!");
-                            _client.CallHook("Discord_Resumed", null, resumed);
-                            break;
-                        }
-
-                        case "CHANNEL_CREATE":
-                        {
-                            Channel channel = payload.EventData.ToObject<Channel>();
-                            _client.GetGuild(channel.GuildId).Channels.Add(channel);
-                            _client.CallHook("Discord_ChannelCreate", null, channel);
-                            break;
-                        }
-
-                        case "CHANNEL_UPDATE":
-                        {
-                            Channel update = payload.EventData.ToObject<Channel>();
-                            Channel previous = _client.GetGuild(update.GuildId).Channels.FirstOrDefault(x => x.Id == update.Id);
-
-                            if (previous != null)
-                            {
-                                _client.GetGuild(update.GuildId).Channels.Remove(previous);
-                            }
-
-                            _client.GetGuild(update.GuildId).Channels.Add(update);
-
-                            _client.CallHook("Discord_ChannelUpdate", null, update, previous);
-                            break;
-                        }
-
-                        case "CHANNEL_DELETE":
-                        {
-                            Channel channel = payload.EventData.ToObject<Channel>();
-                            
-                            _client.GetGuild(channel.GuildId).Channels.RemoveAll(c => c.Id == channel.Id);
-
-                            _client.CallHook("Discord_ChannelDelete", null, channel);
-                            break;
-                        }
-
-                        case "CHANNEL_PINS_UPDATE":
-                        {
-                            ChannelPinsUpdate pins = payload.EventData.ToObject<ChannelPinsUpdate>();
-                            _client.CallHook("Discord_ChannelPinsUpdate", null, pins);
-                            break;
-                        }
-
-                        // NOTE: Some elements of Guild object is only sent with GUILD_CREATE
-                        case "GUILD_CREATE":
-                        {
-                            Guild guild = payload.EventData.ToObject<Guild>();
-                            Snowflake id = guild.Id;
-                            bool unavailable = guild.Unavailable ?? false;
-                            if(_client.GetGuild(id) == null)
-                            {
-                                _client.AddGuild(guild);
-                                _logger.LogDebug($"Guild ID ({id}) added to list.");
-                            }
-                            else if(unavailable == false && (_client.GetGuild(id)?.Unavailable ?? false))
-                            {
-                                _client.AddGuild(guild);
-                                _logger.LogDebug($"Guild ID ({id}) updated to list.");
-                            }
-                            _client.CallHook("Discord_GuildCreate", null, guild);
-                            break;
-                        }
-
-                        case "GUILD_UPDATE":
-                        {
-                            Guild guildUpdate = payload.EventData.ToObject<Guild>();
-                            _client.GetGuild(guildUpdate.Id).Update(guildUpdate);
-                            _client.CallHook("Discord_GuildUpdate", null, guildUpdate);
-                            break;
-                        }
-
-                        case "GUILD_DELETE":
-                        {
-                            Guild guildDelete = payload.EventData.ToObject<Guild>();
-                            if(guildDelete.Unavailable ?? false) // outage
-                            {
-                                _logger.LogDebug($"Guild ID {guildDelete.Id} outage!");
-                                _client.AddGuild(guildDelete);
-                            }
-                            else
-                            {
-                                _logger.LogDebug($"Guild ID {guildDelete.Id} removed from list");
-                                _client.DiscordServers.Remove(guildDelete.Id); // guildDelete may not be same reference
-                            }
-                            _client.CallHook("Discord_GuildDelete", null, guildDelete);
-                            break;
-                        }
-
-                        case "GUILD_BAN_ADD":
-                        {
-                            DiscordUser user = payload.EventData.ToObject<GuildBanEvent>().User;
-                            _client.CallHook("Discord_GuildBanAdd", null, user);
-                            break;
-                        }
-
-                        case "GUILD_BAN_REMOVE":
-                        {
-                            DiscordUser user = payload.EventData.ToObject<GuildBanEvent>().User;
-                            _client.CallHook("Discord_GuildBanRemove", null, user);
-                            break;
-                        }
-
-                        case "GUILD_EMOJIS_UPDATE":
-                        {
-                            GuildEmojisUpdate emojis = payload.EventData.ToObject<GuildEmojisUpdate>();
-                            _client.CallHook("Discord_GuildEmojisUpdate", null, emojis);
-                            break;
-                        }
-
-                        case "GUILD_INTEGRATIONS_UPDATE":
-                        {
-                            GuildIntergrationsUpdate integration = payload.EventData.ToObject<GuildIntergrationsUpdate>();
-                            _client.CallHook("Discord_GuildIntergrationsUpdate", null, integration);
-                            break;
-                        }
-
-                        case "GUILD_MEMBER_ADD":
-                        {
-                            GuildMemberAdd memberAdded = payload.EventData.ToObject<GuildMemberAdd>();
-
-                            _client.GetGuild(memberAdded.GuildId)?.Members.Add(memberAdded);
-
-                            _client.CallHook("Discord_MemberAdded", null, memberAdded);
-                            break;
-                        }
-
-                        case "GUILD_MEMBER_REMOVE":
-                        {
-                            GuildMemberRemove memberRemoved = payload.EventData.ToObject<GuildMemberRemove>();
-
-                            GuildMember member = _client.GetGuild(memberRemoved.GuildId)?.Members.FirstOrDefault(x => x.User.Id == memberRemoved.User.Id);
-                            if (member != null)
-                            {
-                                _client.GetGuild(memberRemoved.GuildId)?.Members.Remove(member);
-                            }
-
-                            _client.CallHook("Discord_MemberRemoved", null, member);
-                            break;
-                        }
-
-                        case "GUILD_MEMBER_UPDATE":
-                        {
-                            GuildMemberUpdate memberUpdated = payload.EventData.ToObject<GuildMemberUpdate>();
-
-                            GuildMember newMember = _client.GetGuild(memberUpdated.GuildId)?.Members.FirstOrDefault(x => x.User.Id == memberUpdated.User.Id);
-                            if (newMember != null)
-                            {
-                                GuildMember oldMember = JObject.FromObject(newMember).ToObject<GuildMember>(); // lazy way to copy the object
-                                if (memberUpdated.User != null)
-                                    newMember.User = memberUpdated.User;
-                                if (memberUpdated.Nick != null)
-                                    newMember.Nick = memberUpdated.Nick;
-                                if (memberUpdated.Roles != null)
-                                    newMember.Roles = memberUpdated.Roles;
-                                _client.CallHook("Discord_GuildMemberUpdate", null, memberUpdated, oldMember);
-                            }
-
-                            break;
-                        }
-
-                        case "GUILD_MEMBERS_CHUNK":
-                        {
-                            GuildMembersChunk guildMembersChunk = payload.EventData.ToObject<GuildMembersChunk>();
-                            _client.CallHook("Discord_GuildMembersChunk", null, guildMembersChunk);
-                            break;
-                        }
-
-                        case "GUILD_ROLE_CREATE":
-                        {
-                            GuildRoleCreate role = payload.EventData.ToObject<GuildRoleCreate>();
-
-                            _client.GetGuild(role.GuildId)?.Roles.Add(role.Role);
-
-                            _client.CallHook("Discord_GuildRoleCreate", null, role.Role);
-                            break;
-                        }
-
-                        case "GUILD_ROLE_UPDATE":
-                        {
-                            GuildRoleUpdate update = payload.EventData.ToObject<GuildRoleUpdate>();
-                            Role updatedRole = update.Role;
-
-                            Role oldRole = _client.GetGuild(update.GuildId).Roles.FirstOrDefault(x => x.Id == updatedRole.Id);
-                            if (oldRole != null)
-                            {
-                                _client.GetGuild(update.GuildId).Roles.Remove(oldRole);
-                            }
-
-                            _client.GetGuild(update.GuildId).Roles.Add(updatedRole);
-
-                            _client.CallHook("Discord_GuildRoleUpdate", null, updatedRole, oldRole);
-                            break;
-                        }
-
-                        case "GUILD_ROLE_DELETE":
-                        {
-                            GuildRoleDelete guildRoleDelete = payload.EventData.ToObject<GuildRoleDelete>();
-
-                            Role deletedRole = _client.GetGuild(guildRoleDelete.GuildId)?.Roles.FirstOrDefault(x => x.Id == guildRoleDelete.RoleId);
-                            if (deletedRole != null)
-                            {
-                                _client.GetGuild(guildRoleDelete.GuildId).Roles.Remove(deletedRole);
-                            }
-
-                            _client.CallHook("Discord_GuildRoleDelete", null, deletedRole);
-                            break;
-                        }
-
-                        case "MESSAGE_CREATE":
-                        {
-                            Message message = payload.EventData.ToObject<Message>();
-                            if (message.GuildId != null)
-                            {
-                                Channel channel = _client.GetGuild(message.GuildId)?.Channels.FirstOrDefault(x => x.Id == message.ChannelId);
-                                if (channel != null)
-                                {
-                                    channel.LastMessageId = message.Id;
-                                }
-                            }
-                            else
-                            {
-                                Channel channel = _client.DMs[message.ChannelId];
-                                if (channel == null)
-                                {
-                                    Channel.GetChannel(_client, message.ChannelId, channel =>
-                                    {
-                                        _client.DMs[channel.Id] = channel;
-                                        channel.LastMessageId = message.Id;
-                                    });
-                                }
-                                else
-                                {
-                                    channel.LastMessageId = message.Id;
-                                }
-                            }
-
-                            _client.CallHook("Discord_MessageCreate", null, message);
-                            break;
-                        }
-
-                        case "MESSAGE_UPDATE":
-                        {
-                            Message message = payload.EventData.ToObject<Message>();
-                            _client.CallHook("Discord_MessageUpdate", null, message);
-                            break;
-                        }
-
-                        case "MESSAGE_DELETE":
-                        {
-                            MessageDelete message = payload.EventData.ToObject<MessageDelete>();
-                            _client.CallHook("Discord_MessageDelete", null, message);
-                            break;
-                        }
-
-                        case "MESSAGE_DELETE_BULK":
-                        {
-                            MessageDeleteBulk bulkDelete = payload.EventData.ToObject<MessageDeleteBulk>();
-                            _client.CallHook("Discord_MessageDeleteBulk", null, bulkDelete);
-                            break;
-                        }
-
-                        case "MESSAGE_REACTION_ADD":
-                        {
-                            MessageReactionAdd reaction = payload.EventData.ToObject<MessageReactionAdd>();
-                            _client.CallHook("Discord_MessageReactionAdd", null, reaction);
-                            break;
-                        }
-
-                        case "MESSAGE_REACTION_REMOVE":
-                        {
-                            MessageReactionRemove reaction = payload.EventData.ToObject<MessageReactionRemove>();
-                            _client.CallHook("Discord_MessageReactionRemove", null, reaction);
-                            break;
-                        }
-
-                        case "MESSAGE_REACTION_REMOVE_ALL":
-                        {
-                            MessageReactionRemoveAll reaction = payload.EventData.ToObject<MessageReactionRemoveAll>();
-                            _client.CallHook("Discord_MessageReactionRemoveAll", null, reaction);
-                            break;
-                        }
-
-                        /*
-                         * From Discord API docs:
-                         * The user object within this event can be partial, the only field which must be sent is the id field, everything else is optional.
-                         * Along with this limitation, no fields are required, and the types of the fields are not validated.
-                         * Your client should expect any combination of fields and types within this event.
-                        */
-
-                        case "PRESENCE_UPDATE":
-                        {
-                            PresenceUpdate presenceUpdate = payload.EventData.ToObject<PresenceUpdate>();
-
-                            DiscordUser updatedPresence = presenceUpdate?.User;
-
-                            if (updatedPresence != null)
-                            {
-                                GuildMember updatedMember = _client.GetGuild(presenceUpdate.GuildId)?.Members.FirstOrDefault(x => x.User.Id == updatedPresence.Id);
-                                updatedMember?.User.Update(updatedPresence);
-                            }
-
-                            _client.CallHook("Discord_PresenceUpdate", null, updatedPresence);
-                            break;
-                        }
-
-                        // Bots should ignore this
-                        case "PRESENCES_REPLACE":
-                            break;
-
-                        case "TYPING_START":
-                        {
-                            TypingStart typing = payload.EventData.ToObject<TypingStart>();
-                            _client.CallHook("Discord_TypingStart", null, typing);
-                            break;
-                        }
-
-                        case "USER_UPDATE":
-                        {
-                            DiscordUser user = payload.EventData.ToObject<DiscordUser>();
-                            
-                            List<Guild> guilds = _client.DiscordServers.Values.Where(x => x.Members.FirstOrDefault(y => y.User.Id == user.Id) != null).ToList();
-                            foreach(Guild g in guilds)
-                            {
-                                GuildMember memberUpdate = g.Members.FirstOrDefault(x => x.User.Id == user.Id);
-                                if (memberUpdate != null)
-                                {
-                                    memberUpdate.User = user;
-                                }
-                            }
-
-                            _client.CallHook("Discord_UserUpdate", null, user);
-                            break;
-                        }
-
-                        case "VOICE_STATE_UPDATE":
-                        {
-                            VoiceState voice = payload.EventData.ToObject<VoiceState>();
-                            _client.CallHook("Discord_VoiceStateUpdate", null, voice);
-                            break;
-                        }
-
-                        case "VOICE_SERVER_UPDATE":
-                        {
-                            VoiceServerUpdate voice = payload.EventData.ToObject<VoiceServerUpdate>();
-                            _client.CallHook("Discord_VoiceServerUpdate", null, voice);
-                            break;
-                        }
-
-                        case "WEBHOOKS_UPDATE":
-                        {
-                            WebhooksUpdate webhook = payload.EventData.ToObject<WebhooksUpdate>();
-                            _client.CallHook("Discord_WebhooksUpdate", null, webhook);
-                            break;
-                        }
-
-                        case "INVITE_CREATE":
-                        {
-                            InviteCreated invite = payload.EventData.ToObject<InviteCreated>();
-                            _client.CallHook("Discord_InviteCreated", null, invite);
-                            break;
-                        }
-
-                        case "INVITE_DELETE":
-                        {
-                            InviteDeleted invite = payload.EventData.ToObject<InviteDeleted>();
-                            _client.CallHook("Discord_InviteDeleted", null, invite);
-                            break;
-                        }
-
-                        default:
-                        {
-                            _client.CallHook("Discord_UnhandledEvent", null, payload);
-                            _logger.LogWarning($"Unhandled event: {payload.EventName}");
-                            break;
-                        }
-                    }
-
-                    break;
-                }
-
-                // Heartbeat
-                // https://discordapp.com/developers/docs/topics/gateway#gateway-heartbeat
-                case ReceiveOpCode.Heartbeat:
-                {
-                    _logger.LogInfo("Manually sent heartbeat (received opcode 1)");
-                    _client.SendHeartbeat();
-                    break;
-                }
-
-                // Reconnect (used to tell clients to reconnect to the gateway)
-                // we should immediately reconnect here
-                case ReceiveOpCode.Reconnect:
-                {
-                    _logger.LogInfo("Reconnect has been called (opcode 7)! Reconnecting...");
-                    _webSocket.ShouldAttemptResume = true; // attempt resume opcode
-                    _client.requestReconnect = true;
-                    _webSocket.ReconnectRequested(); //If we disconnect normally our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
-                    break;
-                }
-
-                // Invalid Session (used to notify client they have an invalid session ID)
-                case ReceiveOpCode.InvalidSession:
-                {
-                    _logger.LogWarning("Invalid Session ID opcode received!");
-                    DisconnectWebsocket(true, payload.EventData.ToObject<bool>());
-                    break;
-                }
-
-                // Hello (sent immediately after connecting, contains heartbeat and server debug information)
-                case ReceiveOpCode.Hello:
-                {
-                    Hello hello = payload.EventData.ToObject<Hello>();
-                    _client.CreateHeartbeat(hello.HeartbeatInterval);
-                    
-                    // Client should now perform identification
-                    if (_webSocket.ShouldAttemptResume)
-                    {
-                        _logger.LogWarning("Attempting resume opcode...");
-                        _client.Resume();
-                    }
-                    else
-                    {
-                        _client.Identify();
-                        _webSocket.ShouldAttemptResume = true;
-                    }
-                    break;
-                }
-
-                // Heartbeat ACK (sent immediately following a client heartbeat
-                // that was received)
-                // (See 'zombied or failed connections')
-                case ReceiveOpCode.HeartbeatAcknowledge:
-                {
-                    _client.HeartbeatACK = true;
-                    break;
-                }
-
-                default:
-                {
-                    _logger.LogInfo($"Unhandled OP code: code {payload.OpCode}");
-                    break;
+                    // Dispatch (dispatches an event)
+                    case ReceiveOpCode.Dispatch:
+                        HandleDispatch(payload);
+                        break;
+
+                    // Heartbeat
+                    // https://discordapp.com/developers/docs/topics/gateway#gateway-heartbeat
+                    case ReceiveOpCode.Heartbeat:
+                        HandleHeartbeat(payload);
+                        break;
+
+                    // Reconnect (used to tell clients to reconnect to the gateway)
+                    // we should immediately reconnect here
+                    case ReceiveOpCode.Reconnect:
+                        HandleReconnect(payload);
+                        break;
+
+                    // Invalid Session (used to notify client they have an invalid session ID)
+                    case ReceiveOpCode.InvalidSession:
+                        HandleInvalidSession(payload);
+                        break;
+
+                    // Hello (sent immediately after connecting, contains heartbeat and server debug information)
+                    case ReceiveOpCode.Hello:
+                        HandleHello(payload);
+                        break;
+
+                    // Heartbeat ACK (sent immediately following a client heartbeat
+                    // that was received)
+                    // (See 'zombied or failed connections')
+                    case ReceiveOpCode.HeartbeatAcknowledge:
+                        HandleHeartbeatAcknowledge(payload);
+                        break;
+
+                    default:
+                        UnhandledOpCode(payload);
+                        break;
                 }
             }
+            catch (Exception ex)
+            {
+                _logger.Exception($"{nameof(SocketListener)}.{nameof(SocketMessage)} Exception Occured. Please give error message below to Discord Extension Authors:\n", ex);
+            }
+        }
+
+        private void HandleDispatch(RPayload payload)
+        {
+            _logger.Debug($"Received OpCode: Dispatch, event: {payload.EventName}");
+
+            // Listed here: https://discordapp.com/developers/docs/topics/gateway#commands-and-events-gateway-events
+            switch (payload.EventName)
+            {
+                case "READY":
+                    HandleDispatchReady(payload);
+                    break;
+
+                case "RESUMED":
+                    HandleDispatchResumed(payload);
+                    break;
+
+                case "CHANNEL_CREATE":
+                    HandleDispatchChannelCreate(payload);
+                    break;
+
+                case "CHANNEL_UPDATE":
+                    HandleDispatchChannelUpdate(payload);
+                    break;
+
+                case "CHANNEL_DELETE":
+                    HandleDispatchChannelDelete(payload);
+                    break;
+
+                case "CHANNEL_PINS_UPDATE":
+                    HandleDispatchChannelPinUpdate(payload);
+                    break;
+
+                case "GUILD_CREATE":
+                    HandleDispatchGuildCreate(payload);
+                    break;
+
+                case "GUILD_UPDATE":
+                    HandleDispatchGuildUpdate(payload);
+                    break;
+
+                case "GUILD_DELETE":
+                    HandleDispatchGuildDelete(payload);
+                    break;
+
+                case "GUILD_BAN_ADD":
+                    HandleDispatchGuildBanAdd(payload);
+                    break;
+
+                case "GUILD_BAN_REMOVE":
+                    HandleDispatchGuildBanRemove(payload);
+                    break;
+
+                case "GUILD_EMOJIS_UPDATE":
+                    HandleDispatchGuildEmojisUpdate(payload);
+                    break;
+
+                case "GUILD_INTEGRATIONS_UPDATE":
+                    HandleDispatchGuildIntegrationsUpdate(payload);
+                    break;
+
+                case "GUILD_MEMBER_ADD":
+                    HandleDispatchGuildMemberAdd(payload);
+                    break;
+
+                case "GUILD_MEMBER_REMOVE":
+                    HandleDispatchGuildMemberRemove(payload);
+                    break;
+
+                case "GUILD_MEMBER_UPDATE":
+                    HandleDispatchGuildMemberUpdate(payload);
+                    break;
+
+                case "GUILD_MEMBERS_CHUNK":
+                    HandleDispatchGuildMembersChunk(payload);
+                    break;
+
+                case "GUILD_ROLE_CREATE":
+                    HandleDispatchGuildRoleCreate(payload);
+                    break;
+
+                case "GUILD_ROLE_UPDATE":
+                    HandleDispatchGuildRoleUpdate(payload);
+                    break;
+
+                case "GUILD_ROLE_DELETE":
+                    HandleDispatchGuildRoleDelete(payload);
+                    break;
+
+                case "MESSAGE_CREATE":
+                    HandleDispatchMessageCreate(payload);
+                    break;
+
+                case "MESSAGE_UPDATE":
+                    HandleDispatchMessageUpdate(payload);
+                    break;
+
+                case "MESSAGE_DELETE":
+                    HandleDispatchMessageDelete(payload);
+                    break;
+
+                case "MESSAGE_DELETE_BULK":
+                    HandleDispatchMessageDeleteBulk(payload);
+                    break;
+
+                case "MESSAGE_REACTION_ADD":
+                    HandleDispatchMessageReactionAdd(payload);
+                    break;
+
+                case "MESSAGE_REACTION_REMOVE":
+                    HandleDispatchMessageReactionRemove(payload);
+                    break;
+
+                case "MESSAGE_REACTION_REMOVE_ALL":
+                    HandleDispatchMessageReactionRemoveAll(payload);
+                    break;
+
+                case "PRESENCE_UPDATE":
+                    HandleDispatchPresenceUpdate(payload);
+                    break;
+
+                // Bots should ignore this
+                case "PRESENCES_REPLACE":
+                    break;
+
+                case "TYPING_START":
+                    HandleDispatchTypingStart(payload);
+                    break;
+
+                case "USER_UPDATE":
+                    HandleDispatchUserUpdate(payload);
+                    break;
+
+                case "VOICE_STATE_UPDATE":
+                    HandleDispatchVoiceStateUpdate(payload);
+                    break;
+
+                case "VOICE_SERVER_UPDATE":
+                    HandleDispatchVoiceServerUpdate(payload);
+                    break;
+
+                case "WEBHOOKS_UPDATE":
+                    HandleDispatchWebhooksUpdate(payload);
+                    break;
+
+                case "INVITE_CREATE":
+                    HandleDispatchInviteCreate(payload);
+                    break;
+
+                case "INVITE_DELETE":
+                    HandleDispatchInviteDelete(payload);
+                    break;
+                
+                case "INTERACTION_CREATE":
+                    HandleDispatchInteractionCreate(payload);
+                    break;
+
+                //Currently sent by discord but are not yet documented in the Discord API docs..
+                case "INTEGRATION_CREATE":
+                case "INTEGRATION_UPDATE":
+                case "INTEGRATION_DELETE":
+                    break;
+                
+                default:
+                    HandleDispatchUnhandledEvent(payload);
+                    break;
+            }
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#ready
+        private void HandleDispatchReady(RPayload payload)
+        {
+            Ready ready = payload.EventData.ToObject<Ready>();
+            _client.Servers = ready.Guilds.ToHash(g => g.Id);
+            _client.SessionId = ready.SessionId;
+            _client.ReadyData = ready;
+            _client.Application = ready.Application;
+            _logger.Info($"Your bot was found in {ready.Guilds.Count} Guilds!");
+            _client.CallHook("Discord_Ready", ready, false);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#resumed
+        private void HandleDispatchResumed(RPayload payload)
+        {
+            Resumed resumed = payload.EventData.ToObject<Resumed>();
+            _logger.Info("Session resumed successfully!");
+            _client.CallHook("Discord_Resumed", resumed);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#channel-create
+        private void HandleDispatchChannelCreate(RPayload payload)
+        {
+            Channel channel = payload.EventData.ToObject<Channel>();
+            if (channel.Type == ChannelType.Dm || channel.Type == ChannelType.GroupDm)
+            {
+                _client.DirectMessages[channel.Id] = channel;
+            }
+            else
+            {
+                _client.GetGuild(channel.GuildId)?.Channels.Add(channel);
+            }
+
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelCreate)} CHANNEL_CREATE: ID: {channel.Id} Type: {channel.Type}.");
+            _client.CallHook("Discord_ChannelCreate", channel);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#channel-update
+        private void HandleDispatchChannelUpdate(RPayload payload)
+        {
+            Channel update = payload.EventData.ToObject<Channel>();
+            Channel previous = null;
+            if (update.Type == ChannelType.Dm || update.Type == ChannelType.GroupDm)
+            {
+                previous = _client.DirectMessages[update.Id];
+                if (previous != null)
+                {
+                    _client.DirectMessages.Remove(update.Id);
+                }
+
+                _client.DirectMessages[update.Id] = update;
+            }
+            else
+            {
+                Guild guild = _client.GetGuild(update.GuildId);
+                if (guild != null && guild.IsAvailable)
+                {
+                    previous = guild.Channels.FirstOrDefault(c => c.Id == update.Id);
+                    if (previous != null)
+                    {
+                        guild.Channels.Remove(previous);
+                    }
+
+                    guild.Channels.Add(update);
+                }
+            }
+
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelUpdate)} CHANNEL_UPDATE: ID: {update.Id} Type: {update.Type}.");
+            _client.CallHook("Discord_ChannelUpdate", update, previous);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#channel-delete
+        private void HandleDispatchChannelDelete(RPayload payload)
+        {
+            Channel channel = payload.EventData.ToObject<Channel>();
+            _client.GetGuild(channel.GuildId)?.Channels.RemoveAll(c => c.Id == channel.Id);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelDelete)} CHANNEL_DELETE: ID: {channel.Id} Type: {channel.Type}.");
+            _client.CallHook("Discord_ChannelDelete", channel);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#channel-pins-update
+        private void HandleDispatchChannelPinUpdate(RPayload payload)
+        {
+            ChannelPinsUpdate pins = payload.EventData.ToObject<ChannelPinsUpdate>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelPinUpdate)} CHANNEL_PINS_UPDATE: Channel ID: {pins.GuildId}");
+            _client.CallHook("Discord_ChannelPinsUpdate", pins);
+        }
+
+        // NOTE: Some elements of Guild object is only sent with GUILD_CREATE
+        //https://discord.com/developers/docs/topics/gateway#guild-create
+        private void HandleDispatchGuildCreate(RPayload payload)
+        {
+            Guild guild = payload.EventData.ToObject<Guild>();
+            Guild existing = _client.GetGuild(guild.Id);
+            if (existing == null)
+            {
+                _client.AddGuild(guild);
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} GUILD_CREATE: Guild not found adding to list.");
+            }
+            else
+            {
+                existing.Unavailable = guild.Unavailable;
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} GUILD_CREATE: Guild updating to unavailable.");
+            }
+
+            _client.CallHook("Discord_GuildCreate", guild);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-update
+        private void HandleDispatchGuildUpdate(RPayload payload)
+        {
+            Guild guild = payload.EventData.ToObject<Guild>();
+            _client.GetGuild(guild.Id)?.Update(guild);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildUpdate)} GUILD_UPDATE: Guild was Updated.");
+            _client.CallHook("Discord_GuildUpdate", guild);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-delete
+        private void HandleDispatchGuildDelete(RPayload payload)
+        {
+            Guild guild = payload.EventData.ToObject<Guild>();
+            if (guild.Unavailable ?? false) // There is an outage with Discord
+            {
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildDelete)} GUILD_DELETE: There is an outage with the guild.");
+                Guild existing = _client.GetGuild(guild.Id);
+                if (existing != null)
+                {
+                    existing.Unavailable = guild.Unavailable;
+                }
+                else
+                {
+                    _client.AddGuild(guild);
+                }
+            }
+            else
+            {
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildDelete)} GUILD_DELETE: User was removed from the guild.");
+                _client.RemoveGuild(guild.Id);
+            }
+
+            _client.CallHook("Discord_GuildDelete", guild);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-ban-add
+        private void HandleDispatchGuildBanAdd(RPayload payload)
+        {
+            GuildBanEvent ban = payload.EventData.ToObject<GuildBanEvent>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanAdd)} GUILD_BAN_ADD: User was banned from the guild. Guild ID: {ban.GuildId} User ID: {ban.User.Id}.");
+            _client.CallHook("Discord_GuildBanAdd", ban.User, ban.GuildId);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-ban-remove
+        private void HandleDispatchGuildBanRemove(RPayload payload)
+        {
+            GuildBanEvent ban = payload.EventData.ToObject<GuildBanEvent>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanRemove)} GUILD_BAN_REMOVE: User was unbanned from the guild. Guild ID: {ban.GuildId} User ID: {ban.User.Id}.");
+            _client.CallHook("Discord_GuildBanRemove", ban.User, ban.GuildId);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-emojis-update
+        private void HandleDispatchGuildEmojisUpdate(RPayload payload)
+        {
+            GuildEmojisUpdate emojis = payload.EventData.ToObject<GuildEmojisUpdate>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildEmojisUpdate)} GUILD_EMOJIS_UPDATE: Guild ID: {emojis.GuildId}");
+            _client.CallHook("Discord_GuildEmojisUpdate", emojis);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-integrations-update
+        private void HandleDispatchGuildIntegrationsUpdate(RPayload payload)
+        {
+            GuildIntergrationsUpdate integration = payload.EventData.ToObject<GuildIntergrationsUpdate>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildIntegrationsUpdate)} GUILD_INTEGRATIONS_UPDATE: Guild ID: {integration.GuildId}");
+            _client.CallHook("Discord_GuildIntegrationsUpdate", integration);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-member-add
+        private void HandleDispatchGuildMemberAdd(RPayload payload)
+        {
+            GuildMemberAdd member = payload.EventData.ToObject<GuildMemberAdd>();
+            Guild guild = _client.GetGuild(member.GuildId);
+            if (guild != null && guild.IsAvailable)
+            {
+                guild.Members.Add(member);
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberAdd)} GUILD_MEMBER_ADD: Guild ID: {member.GuildId} User ID: {member.User.Id}");
+                _client.CallHook("Discord_MemberAdded", member);
+            }
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-member-remove
+        private void HandleDispatchGuildMemberRemove(RPayload payload)
+        {
+            GuildMemberRemove remove = payload.EventData.ToObject<GuildMemberRemove>();
+            Guild guild = _client.GetGuild(remove.GuildId);
+            if (guild != null && guild.IsAvailable)
+            {
+                GuildMember member = guild.Members.FirstOrDefault(x => x.User.Id == remove.User.Id);
+                if (member != null)
+                {
+                    guild.Members.Remove(member);
+                }
+
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberRemove)} GUILD_MEMBER_REMOVE: Guild ID: {remove.GuildId} User ID: {remove.User.Id}");
+                _client.CallHook("Discord_MemberRemoved", member);
+            }
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-member-update
+        private void HandleDispatchGuildMemberUpdate(RPayload payload)
+        {
+            GuildMemberUpdate update = payload.EventData.ToObject<GuildMemberUpdate>();
+            Guild guild = _client.GetGuild(update.GuildId);
+            if (guild != null && guild.IsAvailable)
+            {
+                GuildMember member = guild.Members.FirstOrDefault(x => x.User.Id == update.User.Id);
+                if (member != null)
+                {
+                    _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberUpdate)} GUILD_MEMBER_UPDATE: Guild ID: {update.GuildId} User ID: {update.User.Id}");
+                    GuildMember oldMember = JObject.FromObject(member).ToObject<GuildMember>(); // lazy way to copy the object
+                    if (update.User != null)
+                        member.User = update.User;
+                    if (update.Nick != null)
+                        member.Nick = update.Nick;
+                    if (update.Roles != null)
+                        member.Roles = update.Roles;
+                    _client.CallHook("Discord_GuildMemberUpdate", update, oldMember);
+                }
+            }
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-members-chunk
+        private void HandleDispatchGuildMembersChunk(RPayload payload)
+        {
+            GuildMembersChunk chunk = payload.EventData.ToObject<GuildMembersChunk>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMembersChunk)} GUILD_MEMBER_UPDATE: Guild ID: {chunk.GuildId} Nonce: {chunk.Nonce}");
+            _client.CallHook("Discord_GuildMembersChunk", chunk);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-role-create
+        private void HandleDispatchGuildRoleCreate(RPayload payload)
+        {
+            GuildRoleCreate role = payload.EventData.ToObject<GuildRoleCreate>();
+            Guild guild = _client.GetGuild(role.GuildId);
+            if (guild != null && guild.IsAvailable)
+            {
+                guild.Roles.Add(role.Role);
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleCreate)} GUILD_ROLE_CREATE: Guild ID: {role.GuildId} Role ID: {role.Role.Id} Role Name: {role.Role.Name}");
+                _client.CallHook("Discord_GuildRoleCreate", role.Role);
+            }
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-role-update
+        private void HandleDispatchGuildRoleUpdate(RPayload payload)
+        {
+            GuildRoleUpdate update = payload.EventData.ToObject<GuildRoleUpdate>();
+            Role updatedRole = update.Role;
+            Guild guild = _client.GetGuild(update.GuildId);
+            if (guild != null && guild.IsAvailable)
+            {
+                Role oldRole = guild.Roles.FirstOrDefault(x => x.Id == updatedRole.Id);
+                if (oldRole != null)
+                {
+                    guild.Roles.Remove(oldRole);
+                }
+
+                guild.Roles.Add(updatedRole);
+
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleUpdate)} GUILD_ROLE_UPDATE: Guild ID: {update.GuildId} Role ID: {update.Role.Id} Role Name: {update.Role.Name}");
+                _client.CallHook("Discord_GuildRoleUpdate", updatedRole, oldRole);
+            }
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#guild-role-delete
+        private void HandleDispatchGuildRoleDelete(RPayload payload)
+        {
+            GuildRoleDelete delete = payload.EventData.ToObject<GuildRoleDelete>();
+            Guild guild = _client.GetGuild(delete.GuildId);
+            if (guild != null && guild.IsAvailable)
+            {
+                Role role = guild.Roles.FirstOrDefault(x => x.Id == delete.RoleId);
+                if (role != null)
+                {
+                    guild.Roles.Remove(role);
+                    _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleDelete)} GUILD_ROLE_UPDATE: Guild ID: {delete.GuildId} Role ID: {role.Id} Role Name: {role.Name}");
+                    _client.CallHook("Discord_GuildRoleDelete", role);
+                }
+            }
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#message-create
+        private void HandleDispatchMessageCreate(RPayload payload)
+        {
+            Message message = payload.EventData.ToObject<Message>();
+            Channel channel = null;
+            if (message.GuildId != null)
+            {
+                Guild guild = _client.GetGuild(message.GuildId.Value);
+                if (guild != null && guild.IsAvailable)
+                {
+                    channel = guild.Channels.FirstOrDefault(c => c.Id == message.ChannelId);
+                }
+            }
+            else
+            {
+                channel = _client.DirectMessages[message.ChannelId];
+            }
+            
+            if (channel != null)
+            {
+                channel.LastMessageId = message.Id;
+            }
+
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} MESSAGE_CREATE: Guild ID: {message.GuildId} Channel ID: {message.ChannelId} Message ID: {message.Id}");
+            _client.CallHook("Discord_MessageCreate", message);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#message-update
+        private void HandleDispatchMessageUpdate(RPayload payload)
+        {
+            Message message = payload.EventData.ToObject<Message>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageUpdate)} MESSAGE_UPDATE: Guild ID: {message.GuildId} Channel ID: {message.ChannelId} Message ID: {message.Id}");
+            _client.CallHook("Discord_MessageUpdate", message);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#message-delete
+        private void HandleDispatchMessageDelete(RPayload payload)
+        {
+            MessageDelete message = payload.EventData.ToObject<MessageDelete>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageDelete)} MESSAGE_DELETE: Channel ID: {message.ChannelId} Message ID: {message.Id}");
+            _client.CallHook("Discord_MessageDelete", message);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#message-delete-bulk
+        private void HandleDispatchMessageDeleteBulk(RPayload payload)
+        {
+            MessageDeleteBulk bulkDelete = payload.EventData.ToObject<MessageDeleteBulk>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageDeleteBulk)} MESSAGE_DELETE: Channel ID: {bulkDelete.ChannelId}");
+            _client.CallHook("Discord_MessageDeleteBulk", bulkDelete);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#message-reaction-add
+        private void HandleDispatchMessageReactionAdd(RPayload payload)
+        {
+            MessageReactionAdd reaction = payload.EventData.ToObject<MessageReactionAdd>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionAdd)} MESSAGE_REACTION_ADD: Channel ID: {reaction.ChannelId} Message ID: {reaction.MessageId} User ID: {reaction.UserId}");
+            _client.CallHook("Discord_MessageReactionAdd", reaction);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#message-reaction-remove
+        private void HandleDispatchMessageReactionRemove(RPayload payload)
+        {
+            MessageReactionRemove reaction = payload.EventData.ToObject<MessageReactionRemove>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionRemove)} MESSAGE_REACTION_REMOVE: Channel ID: {reaction.ChannelId} Message ID: {reaction.MessageId} User ID: {reaction.UserId}");
+            _client.CallHook("Discord_MessageReactionRemove", reaction);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all
+        private void HandleDispatchMessageReactionRemoveAll(RPayload payload)
+        {
+            MessageReactionRemoveAll reaction = payload.EventData.ToObject<MessageReactionRemoveAll>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageReactionRemoveAll)} MESSAGE_REACTION_REMOVE_ALL: Channel ID: {reaction.ChannelId} Message ID: {reaction.MessageId}");
+            _client.CallHook("Discord_MessageReactionRemoveAll", reaction);
+        }
+
+        /// <summary>
+        ///  * From Discord API docs:
+        ///  * The user object within this event can be partial, the only field which must be sent is the id field, everything else is optional.
+        ///  * Along with this limitation, no fields are required, and the types of the fields are not validated.
+        ///  * Your client should expect any combination of fields and types within this event
+        /// </summary>
+        /// <param name="payload"></param>
+        /// https://discord.com/developers/docs/topics/gateway#presence-update
+        private void HandleDispatchPresenceUpdate(RPayload payload)
+        {
+            PresenceUpdate update = payload.EventData.ToObject<PresenceUpdate>();
+
+            DiscordUser updateUser = update?.User;
+            if (updateUser != null)
+            {
+                Guild guild = _client.GetGuild(update.GuildId);
+                if (guild != null && guild.IsAvailable)
+                {
+                    GuildMember member = guild.Members.FirstOrDefault(x => x.User.Id == updateUser.Id);
+                    member?.User.Update(updateUser);
+                }
+
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchPresenceUpdate)} PRESENCE_UPDATE: Guild ID: {update.GuildId} User ID: {update.User} Status: {update.Status}");
+            }
+
+            _client.CallHook("Discord_PresenceUpdate", updateUser);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#typing-start
+        private void HandleDispatchTypingStart(RPayload payload)
+        {
+            TypingStart typing = payload.EventData.ToObject<TypingStart>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchTypingStart)} TYPING_START: Channel ID: {typing.ChannelId} User ID: {typing.UserId}");
+            _client.CallHook("Discord_TypingStart", typing);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#user-update
+        private void HandleDispatchUserUpdate(RPayload payload)
+        {
+            DiscordUser user = payload.EventData.ToObject<DiscordUser>();
+
+            foreach (Guild guild in _client.Servers.Values)
+            {
+                if (guild.IsAvailable)
+                {
+                    GuildMember memberUpdate = guild.Members.FirstOrDefault(x => x.User.Id == user.Id);
+                    if (memberUpdate != null)
+                    {
+                        _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchUserUpdate)} USER_UPDATE: Guild ID: {guild.Id} User ID: {user.Id}");
+                        memberUpdate.User = user;
+                    }
+                }
+            }
+
+            _client.CallHook("Discord_UserUpdate", user);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#voice-state-update
+        private void HandleDispatchVoiceStateUpdate(RPayload payload)
+        {
+            VoiceState voice = payload.EventData.ToObject<VoiceState>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchVoiceStateUpdate)} USER_UPDATE: Guild ID: {voice.GuildId} Channel ID: {voice.ChannelId} User ID: {voice.UserId}");
+            _client.CallHook("Discord_VoiceStateUpdate", voice);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#voice-server-update
+        private void HandleDispatchVoiceServerUpdate(RPayload payload)
+        {
+            VoiceServerUpdate voice = payload.EventData.ToObject<VoiceServerUpdate>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchVoiceServerUpdate)} USER_UPDATE: Guild ID: {voice.GuildId}");
+            _client.CallHook("Discord_VoiceServerUpdate", voice);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#webhooks-update
+        private void HandleDispatchWebhooksUpdate(RPayload payload)
+        {
+            WebhooksUpdate webhook = payload.EventData.ToObject<WebhooksUpdate>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchWebhooksUpdate)} USER_UPDATE: Guild ID: {webhook.GuildId} Channel ID: {webhook.ChannelId}");
+            _client.CallHook("Discord_WebhooksUpdate", webhook);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#invite-create
+        private void HandleDispatchInviteCreate(RPayload payload)
+        {
+            InviteCreated invite = payload.EventData.ToObject<InviteCreated>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteCreate)} INVITE_CREATE: Guild ID: {invite.GuildId} Channel ID: {invite.ChannelId} Code: {invite.Code}");
+            _client.CallHook("Discord_InviteCreated", invite);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#invite-delete
+        private void HandleDispatchInviteDelete(RPayload payload)
+        {
+            InviteDeleted invite = payload.EventData.ToObject<InviteDeleted>();
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteDelete)} INVITE_DELETE: Guild ID: {invite.GuildId} Channel ID: {invite.ChannelId} Code: {invite.Code}");
+            _client.CallHook("Discord_InviteDeleted", invite);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#interaction-create
+        private void HandleDispatchInteractionCreate(RPayload payload)
+        {
+            Interaction interaction = payload.EventData.ToObject<Interaction>();
+            _client.CallHook("Discord_InteractionCreate", interaction);
+        }
+
+        private void HandleDispatchUnhandledEvent(RPayload payload)
+        {
+            _client.CallHook("Discord_UnhandledEvent", payload);
+            _logger.Warning($"Unhandled Dispatch Event: {payload.EventName}. Please contact Discord Extension authors.");
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#heartbeat
+        private void HandleHeartbeat(RPayload payload)
+        {
+            _logger.Info("Manually sent heartbeat (received opcode 1)");
+            _client.SendHeartbeat();
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#reconnect
+        private void HandleReconnect(RPayload payload)
+        {
+            _logger.Info("Reconnect has been called (opcode 7)! Reconnecting...");
+            //If we disconnect normally our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
+            _webSocket.Disconnect(true, true, true);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#invalid-session
+        private void HandleInvalidSession(RPayload payload)
+        {
+            _logger.Warning("Invalid Session ID opcode received!");
+            _webSocket.Disconnect(true, payload.TokenData?.ToObject<bool>() ?? false);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#hello
+        private void HandleHello(RPayload payload)
+        {
+            Hello hello = payload.EventData.ToObject<Hello>();
+            _client.SetupHeartbeat(hello.HeartbeatInterval);
+
+            // Client should now perform identification
+            if (_webSocket.ShouldAttemptResume)
+            {
+                _logger.Warning("Attempting resume opcode...");
+                _client.Resume();
+            }
+            else
+            {
+                _client.Identify();
+                _webSocket.ShouldAttemptResume = true;
+            }
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#heartbeating
+        private void HandleHeartbeatAcknowledge(RPayload payload)
+        {
+            _client.HeartbeatAcknowledged = true;
+        }
+
+        private void UnhandledOpCode(RPayload payload)
+        {
+            _logger.Warning($"Unhandled OP code: {payload.OpCode}. Please contact Discord Extension authors.");
         }
     }
 }
