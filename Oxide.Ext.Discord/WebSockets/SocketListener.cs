@@ -406,11 +406,17 @@ namespace Oxide.Ext.Discord.WebSockets
                 case "INTERACTION_CREATE":
                     HandleDispatchInteractionCreate(payload);
                     break;
-
-                //Currently sent by discord but are not yet documented in the Discord API docs..
+                
                 case "INTEGRATION_CREATE":
+                    HandleDispatchIntegrationCreate(payload);
+                    break;
+                
                 case "INTEGRATION_UPDATE":
+                    HandleDispatchIntegrationUpdate(payload);
+                    break;
+                
                 case "INTEGRATION_DELETE":
+                    HandleDispatchIntegrationDelete(payload);
                     break;
                 
                 default:
@@ -884,6 +890,27 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             Interaction interaction = payload.EventData.ToObject<Interaction>();
             _client.CallHook("Discord_InteractionCreate", interaction);
+        }
+        
+        //TODO: Add Link
+        private void HandleDispatchIntegrationDelete(RPayload payload)
+        {
+            IntegrationCreate integration = payload.EventData.ToObject<IntegrationCreate>();
+            _client.CallHook("Discord_IntegrationCreate", integration);
+        }
+
+        //TODO: Add Link
+        private void HandleDispatchIntegrationUpdate(RPayload payload)
+        {
+            IntegrationUpdate integration = payload.EventData.ToObject<IntegrationUpdate>();
+            _client.CallHook("Discord_IntegrationUpdate", integration);
+        }
+
+        //TODO: Add Link
+        private void HandleDispatchIntegrationCreate(RPayload payload)
+        {
+            IntegrationDelete integration = payload.EventData.ToObject<IntegrationDelete>();
+            _client.CallHook("Discord_IntegrationDelete", integration);
         }
 
         private void HandleDispatchUnhandledEvent(RPayload payload)
