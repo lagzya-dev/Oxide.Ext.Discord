@@ -60,11 +60,12 @@ namespace Oxide.Ext.Discord
             Bot = BotClient.GetOrCreate(this);
 
             RegisterPluginForHooks(Owner);
-            CallHook("DiscordSocket_Initialized");
+            Interface.Call("Discord_ClientConnect", Owner, this);
         }
         
         public void Disconnect()
         {
+            Interface.Call("Discord_ClientDisconnect", Owner, this);
             Bot?.RemoveClient(this);
         }
 
@@ -91,7 +92,15 @@ namespace Oxide.Ext.Discord
             });
         }
 
-       internal static void OnPluginAdded(Plugin plugin)
+        #region Plugin Handling
+        public static DiscordClient GetClient(Plugin plugin) => GetClient(plugin?.Name);
+
+        public static DiscordClient GetClient(string pluginName)
+        {
+            return Clients[pluginName];
+        }
+        
+        internal static void OnPluginAdded(Plugin plugin)
         {
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
@@ -145,5 +154,6 @@ namespace Oxide.Ext.Discord
                 Clients.Remove(client.Owner.Name);
             }
         }
+        #endregion
     }
 }
