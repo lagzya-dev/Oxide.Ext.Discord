@@ -113,9 +113,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the logged in user</param>
-        public static void GetCurrentUser(DiscordClient client, Action<DiscordUser> callback = null)
+        public static void GetCurrentUser(DiscordClient client, Action<DiscordUser> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.GET, null, callback, onError);
         }
 
         /// <summary>
@@ -125,9 +125,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to lookup</param>
         /// <param name="callback">Callback with the looked up user</param>
-        public static void GetUser(DiscordClient client, string userId, Action<DiscordUser> callback = null)
+        public static void GetUser(DiscordClient client, string userId, Action<DiscordUser> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback, onError);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the updated user</param>
-        public void ModifyCurrentUser(DiscordClient client, Action<DiscordUser> callback = null) => ModifyCurrentUser(client, Username, Avatar, callback);
+        public void ModifyCurrentUser(DiscordClient client, Action<DiscordUser> callback = null, Action<RestError> onError = null) => ModifyCurrentUser(client, Username, Avatar, callback, onError);
 
         /// <summary>
         /// Modify the currently logged in user
@@ -146,7 +146,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="username">Username to set</param>
         /// <param name="avatarData">Avatar data to set</param>
         /// <param name="callback">Callback with the updated user</param>
-        public void ModifyCurrentUser(DiscordClient client, string username = "", string avatarData = "", Action<DiscordUser> callback = null)
+        public void ModifyCurrentUser(DiscordClient client, string username = "", string avatarData = "", Action<DiscordUser> callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, string> data = new Dictionary<string, string>
             {
@@ -154,7 +154,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["avatar"] = avatarData
             };
 
-            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.PATCH, data, callback);
+            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.PATCH, data, callback, onError);
         }
 
         /// <summary>
@@ -163,9 +163,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the list of guilds</param>
-        public void GetCurrentUserGuilds(DiscordClient client, Action<List<Guild>> callback = null)
+        public void GetCurrentUserGuilds(DiscordClient client, Action<List<Guild>> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/users/@me/guilds", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/users/@me/guilds", RequestMethod.GET, null, callback, onError);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="guild">Guild to leave</param>
         /// <param name="callback">callback when the action is completed</param>
-        public void LeaveGuild(DiscordClient client, Guild guild, Action callback = null) => LeaveGuild(client, guild.Id, callback);
+        public void LeaveGuild(DiscordClient client, Guild guild, Action callback = null, Action<RestError> onError = null) => LeaveGuild(client, guild.Id, callback, onError);
         
         /// <summary>
         /// Leave the guild that the currently logged in user is in
@@ -184,9 +184,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to leave</param>
         /// <param name="callback">callback when the action is completed</param>
-        public void LeaveGuild(DiscordClient client, string guildId, Action callback = null)
+        public void LeaveGuild(DiscordClient client, string guildId, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback, onError);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the direct message channel</param>
-        public void CreateDirectMessage(DiscordClient client, Action<Channel> callback = null) => CreateDirectMessage(client, Id, callback);
+        public void CreateDirectMessage(DiscordClient client, Action<Channel> callback = null, Action<RestError> onError = null) => CreateDirectMessage(client, Id, callback, onError);
 
         /// <summary>
         /// Create a Direct Message to the current User
@@ -204,14 +204,14 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to send the message to</param>
         /// <param name="callback">Callback with the direct message channel</param>
-        public static void CreateDirectMessage(DiscordClient client, string userId, Action<Channel> callback = null)
+        public static void CreateDirectMessage(DiscordClient client, string userId, Action<Channel> callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, string> data = new Dictionary<string, string>()
             {
                 ["recipient_id"] = userId 
             };
 
-            client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback);
+            client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback, onError);
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="accessTokens">access tokens of users that have granted your app the gdm.join scope</param>
         /// <param name="nicks">a list of user ids to their respective nicknames</param>
         /// <param name="callback">Callback with the direct message channel</param>
-        public void CreateGroupDm(DiscordClient client, string[] accessTokens, List<NickId> nicks, Action<Channel> callback = null)
+        public void CreateGroupDm(DiscordClient client, string[] accessTokens, List<NickId> nicks, Action<Channel> callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>()
             {
@@ -229,7 +229,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["nicks"] = nicks.ToDictionary(k => k.Id, v => v.Nick) 
             };
 
-            client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback);
+            client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback, onError);
         }
 
         /// <summary>
@@ -238,9 +238,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the list of connections</param>
-        public void GetUserConnections(DiscordClient client, Action<List<Connection>> callback = null)
+        public void GetUserConnections(DiscordClient client, Action<List<Connection>> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest("/users/@me/connections", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest("/users/@me/connections", RequestMethod.GET, null, callback, onError);
         }
 
         internal void Update(DiscordUser update)

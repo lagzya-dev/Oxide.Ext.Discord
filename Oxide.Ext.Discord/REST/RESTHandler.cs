@@ -29,22 +29,22 @@ namespace Oxide.Ext.Discord.REST
             };
         }
 
-        public void DoRequest(string url, RequestMethod method, object data, Action callback)
+        public void DoRequest(string url, RequestMethod method, object data, Action callback, Action<RestError> onError)
         {
-            CreateRequest(method, url, _headers, data, response => callback?.Invoke());
+            CreateRequest(method, url, _headers, data, response => callback?.Invoke(), onError);
         }
 
-        public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback)
+        public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback, Action<RestError> onError)
         {
             CreateRequest(method, url, _headers, data, response =>
             {
                 callback?.Invoke(response.ParseData<T>());
-            });
+            }, onError);
         }
 
-        private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
+        private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> onError)
         {
-            Request request = new Request(method, url, headers, data, callback, _logger);
+            Request request = new Request(method, url, headers, data, callback, onError, _logger);
             CleanupExpired();
             QueueRequest(request, _logger);
         }

@@ -26,12 +26,15 @@ namespace Oxide.Ext.Discord.REST
         public RestResponse Response { get; private set; }
 
         public Action<RestResponse> Callback { get; }
+        
+        public Action<RestError> OnError { get; }
 
         public DateTime? StartTime { get; private set; }
 
         public bool InProgress { get; set; }
 
         private Bucket _bucket;
+        private RestError LastError;
 
         private byte _retries;
         
@@ -47,13 +50,14 @@ namespace Oxide.Ext.Discord.REST
             NullValueHandling = NullValueHandling.Ignore
         };
 
-        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, ILogger logger)
+        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> onError, ILogger logger)
         {
-            this.Method = method;
-            this.Route = route;
-            this.Headers = headers;
-            this.Data = data;
-            this.Callback = callback;
+            Method = method;
+            Route = route;
+            Headers = headers;
+            Data = data;
+            Callback = callback;
+            OnError = onError;
             _logger = logger;
         }
 
@@ -97,35 +101,42 @@ namespace Oxide.Ext.Discord.REST
             {
                 using (HttpWebResponse httpResponse = ex.Response as HttpWebResponse)
                 {
+                    LastError = new RestError(ex, req.RequestUri, Method, Data);
                     if (httpResponse == null)
                     {
                         bucket.ErrorResendDelayUntil = Time.TimeSinceEpoch() + 1;
                         Close(false);
                         _logger.Exception($"A web request exception occured (internal error) [RETRY={_retries}/3].\nRequest URL: [{Method.ToString()}] {req.RequestUri}", ex);
-                        return;
-                    }
-
-                    string message = ParseResponse(ex.Response);
-
-                    bool isRateLimit = (int) httpResponse.StatusCode == 429;
-                    if (isRateLimit)
-                    {
-                        _logger.Warning($"Discord rate limit reached. (Rate limit info: remaining: Route:{req.RequestUri}, {bucket.RateLimitRemaining}, limit: {bucket.RateLimit}, reset: {bucket.RateLimitReset}, time now: {Time.TimeSinceEpoch()}");
                     }
                     else
                     {
-                        DiscordApiError apiError = Response.ParseData<DiscordApiError>();
-                        if (!string.IsNullOrEmpty(apiError.Code))
+                        int statusCode = (int) httpResponse.StatusCode;
+                        LastError.HttpStatusCode = statusCode;
+                        
+                        string message = ParseResponse(ex.Response);
+                        LastError.Message = message;
+                        
+                        bool isRateLimit = statusCode == 429;
+                        if (isRateLimit)
                         {
-                            _logger.Error($"Discord has returned error Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})\nErrors: {apiError.Errors}");
+                            _logger.Warning($"Discord rate limit reached. (Rate limit info: remaining: Route:{req.RequestUri}, {bucket.RateLimitRemaining}, limit: {bucket.RateLimit}, reset: {bucket.RateLimitReset}, time now: {Time.TimeSinceEpoch()}");
                         }
                         else
                         {
-                            _logger.Error($"An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
+                            DiscordApiError apiError = Response.ParseData<DiscordApiError>();
+                            LastError.DiscordApiError = apiError;
+                            if (!string.IsNullOrEmpty(apiError.Code))
+                            {
+                                _logger.Error($"Discord has returned error Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})\nErrors: {apiError.Errors}");
+                            }
+                            else
+                            {
+                                _logger.Error($"An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
+                            }
                         }
-                    }
 
-                    Close(!isRateLimit);
+                        Close(!isRateLimit);
+                    }
                 }
             }
             catch (Exception ex)
@@ -140,6 +151,11 @@ namespace Oxide.Ext.Discord.REST
             _retries += 1;
             if (remove || _retries >= 3)
             {
+                if (_retries >= 3)
+                {
+                    OnError?.Invoke(LastError);
+                }
+                
                 lock (_bucket)
                 {
                     _bucket.Remove(this);
@@ -173,7 +189,6 @@ namespace Oxide.Ext.Discord.REST
             {
                 stream.Write(bytes, 0, bytes.Length);
             }
-            
         }
 
         private string ParseResponse(WebResponse response)

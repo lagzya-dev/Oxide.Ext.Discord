@@ -172,14 +172,14 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="message">Message to send</param>
         /// <param name="callback">Callback with the message</param>
-        public void Reply(DiscordClient client, MessageCreate message, Action<Message> callback = null)
+        public void Reply(DiscordClient client, MessageCreate message, Action<Message> callback = null, Action<RestError> onError = null)
         {
             if (message.MessageReference == null)
             {
                 message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId};
             }
             
-            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback, onError);
         }
         
         /// <summary>
@@ -189,14 +189,14 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="message">Message text to send</param>
         /// <param name="callback">Callback with the message</param>
-        public void Reply(DiscordClient client, string message, Action<Message> callback = null)
+        public void Reply(DiscordClient client, string message, Action<Message> callback = null, Action<RestError> onError = null)
         {
             Message newMessage = new Message
             {
                 Content = message
             };
 
-            Reply(client, newMessage, callback);
+            Reply(client, newMessage, callback, onError);
         }
 
         /// <summary>
@@ -206,14 +206,14 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="embed">Embed to send</param>
         /// <param name="callback">Callback with the message</param>
-        public void Reply(DiscordClient client, Embed embed, Action<Message> callback = null)
+        public void Reply(DiscordClient client, Embed embed, Action<Message> callback = null, Action<RestError> onError = null)
         {
             Message newMessage = new Message
             {
                 Embed = embed,
             };
 
-            Reply(client, newMessage, callback);
+            Reply(client, newMessage, callback, onError);
         }
         
         /// <summary>
@@ -224,9 +224,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID to cross post</param>
         /// <param name="callback">Callback with the cross posted message</param>
-        public void CrossPostMessage(DiscordClient client, string messageId, Action<Message> callback = null)
+        public void CrossPostMessage(DiscordClient client, string messageId, Action<Message> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback, onError);
         }
         
         /// <summary>
@@ -237,9 +237,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="message">Message to cross post</param>
         /// <param name="callback">Callback with the cross posted message</param>
-        public void CrossPostMessage(DiscordClient client, Message message, Action<Message> callback = null)
+        public void CrossPostMessage(DiscordClient client, Message message, Action<Message> callback = null, Action<RestError> onError = null)
         {
-            CrossPostMessage(client, message.Id, callback);
+            CrossPostMessage(client, message.Id, callback, onError);
         }
 
         /// <summary>
@@ -251,9 +251,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to react with</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void CreateReaction(DiscordClient client, string emoji, Action callback = null)
+        public void CreateReaction(DiscordClient client, string emoji, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.PUT, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.PUT, null, callback, onError);
         }
 
         /// <summary>
@@ -263,9 +263,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void DeleteOwnReaction(DiscordClient client, string emoji, Action callback = null)
+        public void DeleteOwnReaction(DiscordClient client, string emoji, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.DELETE, null, callback, onError);
         }
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="emoji">Emoji to delete</param>
         /// <param name="user">User who add the reaction</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void DeleteUserReaction(DiscordClient client, string emoji, DiscordUser user, Action callback = null) => DeleteUserReaction(client, emoji, user.Id, callback);
+        public void DeleteUserReaction(DiscordClient client, string emoji, DiscordUser user, Action callback = null, Action<RestError> onError = null) => DeleteUserReaction(client, emoji, user.Id, callback, onError);
 
         /// <summary>
         /// Deletes another user's reaction.
@@ -288,9 +288,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="emoji">Emoji to delete</param>
         /// <param name="userId">User ID who add the reaction</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void DeleteUserReaction(DiscordClient client, string emoji, string userId, Action callback = null)
+        public void DeleteUserReaction(DiscordClient client, string emoji, string userId, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback, onError);
         }
 
         /// <summary>
@@ -300,9 +300,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to get the list for</param>
         /// <param name="callback">Callback with a list of users who reacted</param>
-        public void GetReactions(DiscordClient client, string emoji, Action<List<DiscordUser>> callback = null)
+        public void GetReactions(DiscordClient client, string emoji, Action<List<DiscordUser>> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.GET, null, callback, onError);
         }
 
         /// <summary>
@@ -311,9 +311,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void DeleteAllReactions(DiscordClient client, Action callback = null)
+        public void DeleteAllReactions(DiscordClient client, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions", RequestMethod.DELETE, null, callback, onError);
         }
         
         /// <summary>
@@ -324,9 +324,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to delete all reactions for</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void DeleteAllReactionsForEmoji(DiscordClient client, string emoji, Action callback = null)
+        public void DeleteAllReactionsForEmoji(DiscordClient client, string emoji, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.DELETE, null, callback, onError);
         }
 
         /// <summary>
@@ -339,9 +339,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the updated message</param>
-        public void EditMessage(DiscordClient client, Action<Message> callback = null)
+        public void EditMessage(DiscordClient client, Action<Message> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest<Message>($"/channels/{ChannelId}/messages/{Id}", RequestMethod.PATCH, this, callback);
+            client.Bot.Rest.DoRequest<Message>($"/channels/{ChannelId}/messages/{Id}", RequestMethod.PATCH, this, callback, onError);
         }
 
         /// <summary>
@@ -351,9 +351,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the delete message</param>
-        public void DeleteMessage(DiscordClient client, Action<Message> callback = null)
+        public void DeleteMessage(DiscordClient client, Action<Message> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest<Message>($"/channels/{ChannelId}/messages/{Id}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest<Message>($"/channels/{ChannelId}/messages/{Id}", RequestMethod.DELETE, null, callback, onError);
         }
 
         /// <summary>
@@ -363,9 +363,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback when the action is completed</param>
-        public void AddPinnedChannelMessage(DiscordClient client, Action callback = null)
+        public void AddPinnedChannelMessage(DiscordClient client, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.PUT, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.PUT, null, callback, onError);
         }
 
         /// <summary>
@@ -375,9 +375,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void DeletePinnedChannelMessage(DiscordClient client, Action callback = null)
+        public void DeletePinnedChannelMessage(DiscordClient client, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.DELETE, null, callback, onError);
         }
     }
 }

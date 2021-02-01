@@ -80,7 +80,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="name">Name of the webhook (1-80 characters)</param>
         /// <param name="avatar">Image for the default webhook avatar</param>
         /// <param name="callback">Callback with the completed webhook</param>
-        public static void CreateWebhook(DiscordClient client, string channelId, string name, string avatar = null, Action<Webhook> callback = null)
+        public static void CreateWebhook(DiscordClient client, string channelId, string name, string avatar = null, Action<Webhook> callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, string> data = new Dictionary<string, string>
             {
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 ["avatar"] = avatar
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.POST, data, callback);
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.POST, data, callback, onError);
         }
 
         /// <summary>
@@ -98,9 +98,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to get webhooks for</param>
         /// <param name="callback">Callback with a list of channel webhooks</param>
-        public static void GetChannelWebhooks(DiscordClient client, string channelId, Action<List<Webhook>> callback = null)
+        public static void GetChannelWebhooks(DiscordClient client, string channelId, Action<List<Webhook>> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.GET, null, callback, onError);
         }
 
         /// <summary>
@@ -110,9 +110,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to get webhooks for</param>
         /// <param name="callback">Callback with the list of guild webhooks</param>
-        public static void GetGuildWebhooks(DiscordClient client, string guildId, Action<List<Webhook>> callback = null)
+        public static void GetGuildWebhooks(DiscordClient client, string guildId, Action<List<Webhook>> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{guildId}/webhooks", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/guilds/{guildId}/webhooks", RequestMethod.GET, null, callback, onError);
         }
 
         /// <summary>
@@ -122,9 +122,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="client">Client to use</param>
         /// <param name="webhookId">Webhook ID to get</param>
         /// <param name="callback">Callback with the webhook</param>
-        public static void GetWebhook(DiscordClient client, string webhookId, Action<Webhook> callback = null)
+        public static void GetWebhook(DiscordClient client, string webhookId, Action<Webhook> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{webhookId}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{webhookId}", RequestMethod.GET, null, callback, onError);
         }
 
         /// <summary>
@@ -137,9 +137,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="webhookId">Webhook ID to get</param>
         /// <param name="webhookToken">Webhook Token</param>
         /// <param name="callback">Callback with the webhook</param>
-        public static void GetWebhookWithToken(DiscordClient client, string webhookId, string webhookToken, Action<Webhook> callback = null)
+        public static void GetWebhookWithToken(DiscordClient client, string webhookId, string webhookToken, Action<Webhook> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{webhookId}/{webhookToken}", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{webhookId}/{webhookToken}", RequestMethod.GET, null, callback, onError);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="avatar">New avatar image</param>
         /// <param name="channelId">Channel to move the webhook to</param>
         /// <param name="callback">Callback with the updated webhook</param>
-        public void ModifyWebhook(DiscordClient client, string name = null, string avatar = null, string channelId = null, Action<Webhook> callback = null)
+        public void ModifyWebhook(DiscordClient client, string name = null, string avatar = null, string channelId = null, Action<Webhook> callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -161,7 +161,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 ["channel_id"] = channelId
             };
 
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}", RequestMethod.PATCH, data, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}", RequestMethod.PATCH, data, callback, onError);
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="name">New webhook name</param>
         /// <param name="avatar">New avatar image</param>
         /// <param name="callback">Callback with the updated webhook</param>
-        public void ModifyWebhookWithToken(DiscordClient client, string name = null, string avatar = null, Action<Webhook> callback = null)
+        public void ModifyWebhookWithToken(DiscordClient client, string name = null, string avatar = null, Action<Webhook> callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -181,7 +181,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 ["avatar"] = avatar
             };
 
-            client.Bot.Rest.DoRequest<Webhook>($"/webhooks/{Id}/{Token}", RequestMethod.PATCH, data, callback);
+            client.Bot.Rest.DoRequest<Webhook>($"/webhooks/{Id}/{Token}", RequestMethod.PATCH, data, callback, onError);
         }
 
         /// <summary>
@@ -191,9 +191,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void DeleteWebhook(DiscordClient client, Action callback = null)
+        public void DeleteWebhook(DiscordClient client, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}", RequestMethod.DELETE, null, callback, onError);
         }
 
         /// <summary>
@@ -203,9 +203,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void DeleteWebhookWithToken(DiscordClient client, Action callback = null)
+        public void DeleteWebhookWithToken(DiscordClient client, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}", RequestMethod.DELETE, null, callback, onError);
         }
 
         /// <summary>
@@ -216,9 +216,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="payload">Message data</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="sendType">Which type of webhook to execute</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action callback = null, WebhookSendType sendType = WebhookSendType.Discord)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action callback = null, Action<RestError> onError = null, WebhookSendType sendType = WebhookSendType.Discord)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}", RequestMethod.POST, payload, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}", RequestMethod.POST, payload, callback, onError);
         }
         
         /// <summary>
@@ -229,9 +229,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="payload">Message data</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="sendType">Which type of webhook to execute</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback, WebhookSendType sendType = WebhookSendType.Discord)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action<Message> callback, Action<RestError> onError = null, WebhookSendType sendType = WebhookSendType.Discord)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}?wait=true", RequestMethod.POST, payload, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}?wait=true", RequestMethod.POST, payload, callback, onError);
         }
 
         /// <summary>
@@ -242,9 +242,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="messageId">Message ID to edit</param>
         /// <param name="payload">The updated message</param>
         /// <param name="callback">Callback with the edited message</param>
-        public void EditWebhookMessage(DiscordClient client, string messageId, WebhookEditMessage payload, Action<Message> callback = null)
+        public void EditWebhookMessage(DiscordClient client, string messageId, WebhookEditMessage payload, Action<Message> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.PATCH, payload, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.PATCH, payload, callback, onError);
         }
         
         /// <summary>
@@ -253,9 +253,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
-        public void DeleteWebhookMessage(DiscordClient client, string messageId, Action callback = null)
+        public void DeleteWebhookMessage(DiscordClient client, string messageId, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback, onError);
         }
 
         private string GetWebhookFormat(WebhookSendType type)

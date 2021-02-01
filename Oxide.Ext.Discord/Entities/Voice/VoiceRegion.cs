@@ -53,9 +53,9 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with a list of voice regions</param>
-        public static void ListVoiceRegions(DiscordClient client, Action<List<VoiceRegion>> callback = null)
+        public static void ListVoiceRegions(DiscordClient client, Action<List<VoiceRegion>> callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/voice/regions", RequestMethod.GET, null, callback);
+            client.Bot.Rest.DoRequest($"/voice/regions", RequestMethod.GET, null, callback, onError);
         }
     }
 }
