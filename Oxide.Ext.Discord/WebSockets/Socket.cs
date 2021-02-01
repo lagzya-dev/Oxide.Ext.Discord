@@ -28,6 +28,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _client = client;
             _logger = logger;
+            _listener = new SocketListener(_client, this, _logger);
         }
 
         public void Connect()
@@ -48,11 +49,6 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.DestroyHeartbeat();
 
             _socket = new WebSocket($"{url}/?{Entities.Gatway.Connect.Serialize()}");
-
-            if (_listener == null)
-            {
-                _listener = new SocketListener(_client, this, _logger);
-            }
 
             _socket.OnOpen += _listener.SocketOpened;
             _socket.OnClose += _listener.SocketClosed;
