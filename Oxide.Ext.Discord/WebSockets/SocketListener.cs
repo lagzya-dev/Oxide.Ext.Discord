@@ -14,7 +14,6 @@ using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using WebSocketSharp;
-using GuildMemberAdd = Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberAdd;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
@@ -604,7 +603,7 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#guild-member-add
         private void HandleDispatchGuildMemberAdd(EventPayload payload)
         {
-            GuildMemberAdd member = payload.EventData.ToObject<GuildMemberAdd>();
+            GuildMemberAddEvent member = payload.EventData.ToObject<GuildMemberAddEvent>();
             Guild guild = _client.GetGuild(member.GuildId);
             if (guild != null && guild.IsAvailable)
             {
