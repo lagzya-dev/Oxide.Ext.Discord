@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Users;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
@@ -53,11 +54,38 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonProperty("mute")]
         public bool Mute { get; set; }
         
-        
         /// <summary>
         /// Whether the user has not yet passed the guild's Membership Screening requirements
         /// </summary>
         [JsonProperty("pending")]
         public bool? Pending { get; set; }
+
+        internal void Update(GuildMemberUpdateEvent update)
+        {
+            if (update.User != null)
+            {
+                User.Update(update.User);
+            }
+                    
+            if (update.Nick != null)
+            {
+                Nick = update.Nick;
+            }
+                    
+            if (update.Roles != null)
+            {
+                Roles = update.Roles;
+            }
+                    
+            if (update.PremiumSince != null)
+            {
+                PremiumSince = update.PremiumSince;
+            }
+
+            if (update.Pending != null)
+            {
+                Pending = update.Pending;
+            }
+        }
     }
 }

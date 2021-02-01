@@ -643,12 +643,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberUpdate)} GUILD_MEMBER_UPDATE: Guild ID: {update.GuildId} User ID: {update.User.Id}");
                     GuildMember oldMember = JObject.FromObject(member).ToObject<GuildMember>(); // lazy way to copy the object
-                    if (update.User != null)
-                        member.User = update.User;
-                    if (update.Nick != null)
-                        member.Nick = update.Nick;
-                    if (update.Roles != null)
-                        member.Roles = update.Roles;
+                    member.Update(update);
                     _client.CallHook("Discord_GuildMemberUpdate", update, oldMember);
                 }
             }

@@ -245,24 +245,60 @@ namespace Oxide.Ext.Discord.Entities.Users
 
         internal void Update(DiscordUser update)
         {
-            if (update.Avatar != null)
-                Avatar = update.Avatar;
-            if (update.Bot != null)
-                Bot = update.Bot;
-            if (update.Discriminator != null)
-                Discriminator = update.Discriminator;
-            if (update.Email != null)
-                Email = update.Email;
-            if (update.Locale != null)
-                Locale = update.Locale;
-            if (update.MfaEnabled != null)
-                MfaEnabled = update.MfaEnabled;
-            if (update.PremiumType != null)
-                PremiumType = update.PremiumType;
             if (update.Username != null)
+            {
                 Username = update.Username;
+            }
+            
+            if (update.Discriminator != null)
+            {
+                Discriminator = update.Discriminator;
+            }
+
+            if (update.Avatar != null)
+            {
+                Avatar = update.Avatar;
+            }
+
+            if (update.Bot != null)
+            {
+                Bot = update.Bot;
+            }
+
+            if (update.MfaEnabled != null)
+            {
+                MfaEnabled = update.MfaEnabled;
+            }
+            
+            if (update.Locale != null)
+            {
+                Locale = update.Locale;
+            }
+            
             if (update.Verified != null)
+            {
                 Verified = update.Verified;
+            }
+
+            if (update.Email != null)
+            {
+                Email = update.Email;
+            }
+
+            if (update.Flags != null)
+            {
+                Flags = update.Flags;
+            }
+
+            if (update.PremiumType != null)
+            {
+                PremiumType = update.PremiumType;
+            }
+            
+            if (update.PublicFlags != null)
+            {
+                PublicFlags = update.PublicFlags;
+            }
         }
     }
 }
