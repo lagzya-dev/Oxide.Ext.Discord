@@ -262,7 +262,7 @@ namespace Oxide.Ext.Discord
             }
             
             HeartbeatAcknowledged = false;
-            _webSocket.Send(SendOpCode.Heartbeat, Sequence);
+            _webSocket.Send(GatewayCommandCode.Heartbeat, Sequence);
             CallHook("DiscordSocket_HeartbeatSent");
             _logger.Debug($"Heartbeat sent - {_timer.Interval}ms interval.");
         }
@@ -304,7 +304,7 @@ namespace Oxide.Ext.Discord
                 Shard = new List<int>() { 0, 1 }
             };
             
-            _webSocket.Send(SendOpCode.Identify, identify);
+            _webSocket.Send(GatewayCommandCode.Identify, identify);
         }
         
         public void Resume()
@@ -321,7 +321,7 @@ namespace Oxide.Ext.Discord
                 Token = Settings.ApiToken
             };
 
-            _webSocket.Send(SendOpCode.Resume, resume);
+            _webSocket.Send(GatewayCommandCode.Resume, resume);
         }
         
         public void RequestGuildMembers(GuildMembersRequest request)
@@ -331,7 +331,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            _webSocket.Send(SendOpCode.RequestGuildMembers, request);
+            _webSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
         }
 
         public void UpdateVoiceState( VoiceStateUpdate voiceState)
@@ -341,7 +341,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            _webSocket.Send(SendOpCode.VoiceStateUpdate, voiceState);
+            _webSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
         }
 
         public void UpdateStatus(StatusUpdate statusUpdate)
@@ -351,7 +351,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
             
-            _webSocket.Send(SendOpCode.StatusUpdate, statusUpdate);
+            _webSocket.Send(GatewayCommandCode.StatusUpdate, statusUpdate);
         }
 
         public Guild GetGuild(string id)

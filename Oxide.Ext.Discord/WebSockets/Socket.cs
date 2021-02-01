@@ -2,6 +2,7 @@
 using System.Timers;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
 using WebSocketSharp;
 
@@ -114,14 +115,14 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
 
-        public void Send(SendOpCode opCode, object data, Action<bool> completed = null)
+        public void Send(GatewayCommandCode opCode, object data, Action<bool> completed = null)
         {
             if (!IsAlive())
             {
                 return;
             }
             
-            SPayload opcode = new SPayload
+            CommandPayload opcode = new CommandPayload
             {
                 OpCode = opCode,
                 Payload = data

@@ -2,26 +2,122 @@ using System;
 
 namespace Oxide.Ext.Discord.Entities.Gatway
 {
+    /// <summary>
+    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#gateway-intents">Gateway Intents</a>
+    /// These are used to indicate which events your bot / application wants to listen to / have access to
+    /// </summary>
     [Flags]
     public enum BotIntents
     {
+        /// <summary>
+        /// Represents No Intents
+        /// </summary>
         None = 0,
+        
+        /// <summary>
+        /// - GUILD_CREATE
+        /// - GUILD_UPDATE
+        /// - GUILD_DELETE
+        /// - GUILD_ROLE_CREATE
+        /// - GUILD_ROLE_UPDATE
+        /// - GUILD_ROLE_DELETE
+        /// - CHANNEL_CREATE
+        /// - CHANNEL_UPDATE
+        /// - CHANNEL_DELETE
+        /// - CHANNEL_PINS_UPDATE
+        /// </summary>
         Guilds = 1 << 0,
+        
+        /// <summary>
+        /// - GUILD_MEMBER_ADD
+        /// - GUILD_MEMBER_UPDATE
+        /// - GUILD_MEMBER_REMOVE
+        /// </summary>
         GuildMembers = 1 << 1,
+        
+        /// <summary>
+        /// - GUILD_BAN_ADD
+        /// - GUILD_BAN_REMOVE
+        /// </summary>
         GuildBans = 1 << 2,
-        GuildEmjois = 1 << 3,
+        
+        /// <summary>
+        /// - GUILD_EMOJIS_UPDATE
+        /// </summary>
+        GuildEmojis = 1 << 3,
+        
+        /// <summary>
+        /// - GUILD_INTEGRATIONS_UPDATE
+        /// </summary>
         GuildIntegrations = 1 << 4,
+        
+        /// <summary>
+        /// - WEBHOOKS_UPDATE
+        /// </summary>
         GuildWebhooks = 1 << 5,
+        
+        /// <summary>
+        /// - INVITE_CREATE
+        /// - INVITE_DELETE
+        /// </summary>
         GuildInvites = 1 << 6,
+        
+        /// <summary>
+        /// - VOICE_STATE_UPDATE
+        /// </summary>
         GuildVoiceStates = 1 << 7,
+        
+        /// <summary>
+        /// - PRESENCE_UPDATE
+        /// </summary>
         GuildPresences = 1 << 8,
+        
+        /// <summary>
+        /// - MESSAGE_CREATE
+        /// - MESSAGE_UPDATE
+        /// - MESSAGE_DELETE
+        /// - MESSAGE_DELETE_BULK
+        /// </summary>
         GuildMessages = 1 << 9,
+        
+        /// <summary>
+        /// - MESSAGE_REACTION_ADD
+        /// - MESSAGE_REACTION_REMOVE
+        /// - MESSAGE_REACTION_REMOVE_ALL
+        /// - MESSAGE_REACTION_REMOVE_EMOJI
+        /// </summary>
         GuildMessageReactions = 1 << 10,
+        
+        /// <summary>
+        /// - TYPING_START
+        /// </summary>
         GuildMessageTyping = 1 << 11,
+        
+        /// <summary>
+        /// - MESSAGE_CREATE
+        /// - MESSAGE_UPDATE
+        /// - MESSAGE_DELETE
+        /// - CHANNEL_PINS_UPDATE
+        /// </summary>
         DirectMessages = 1 << 12,
+        
+        /// <summary>
+        ///   - MESSAGE_REACTION_ADD
+        /// - MESSAGE_REACTION_REMOVE
+        /// - MESSAGE_REACTION_REMOVE_ALL
+        /// - MESSAGE_REACTION_REMOVE_EMOJI
+        /// </summary>
         DirectMessageReactions = 1 << 13,
+        
+        /// <summary>
+        /// - TYPING_START
+        /// </summary>
         DirectMessageTyping = 1 << 14,
-        All = Guilds | GuildMembers | GuildBans | GuildEmjois | GuildIntegrations | GuildWebhooks | GuildInvites | GuildVoiceStates | GuildPresences
+        
+        /// <summary>
+        /// Represents all Intents
+        /// </summary>
+        All = Guilds | GuildMembers | GuildBans | GuildEmojis | GuildIntegrations | GuildWebhooks | GuildInvites | GuildVoiceStates | GuildPresences
             | GuildMessages | GuildMessageReactions | GuildMessageTyping | DirectMessages | DirectMessageReactions | DirectMessageTyping
     }
 }
