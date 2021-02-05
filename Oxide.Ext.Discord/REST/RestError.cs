@@ -8,15 +8,15 @@ namespace Oxide.Ext.Discord.REST
         public int HttpStatusCode { get; set; }
         public RequestMethod RequestMethod { get; } 
         public WebException Exception { get; }
-        public Uri Uri { get; }
+        public Uri Url { get; }
         public object Data { get; }
-        public DiscordApiError DiscordApiError { get; set; }
+        public DiscordApiError DiscordError { get; set; }
         public string Message { get; set; }
         
-        public RestError(WebException exception, Uri uri, RequestMethod requestMethod, object data)
+        public RestError(WebException exception, Uri url, RequestMethod requestMethod, object data)
         {
             Exception = exception;
-            Uri = uri;
+            Url = url;
             RequestMethod = requestMethod;
             Data = data;
         }

@@ -126,6 +126,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with list of application commands</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void GetGlobalApplicationCommands(DiscordClient client, Action<List<ApplicationCommand>> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.GET, null, callback, onError);
@@ -140,6 +141,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void CreateGlobalApplicationCommand(DiscordClient client, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.POST, create, callback, onError);
@@ -153,6 +155,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="update">Command Update</param>
         /// <param name="callback">Callback with updated command</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void EditGlobalApplicationCommand(DiscordClient client, ApplicationCommandCreate update, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PATCH, update, callback, onError);
@@ -165,6 +168,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="commandId">Command to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void DeleteGlobalApplicationCommand(DiscordClient client, string commandId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands/{commandId}", RequestMethod.PATCH, null, callback, onError);
@@ -177,6 +181,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="guildId">ID of the guild to get commands for</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void GetGuildApplicationCommands(DiscordClient client, string guildId, Action<List<ApplicationCommand>> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.GET, null, callback, onError);
@@ -189,6 +194,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="guild">Guild to get commands for</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void GetGuildApplicationCommands(DiscordClient client, Guild guild, Action<List<ApplicationCommand>> callback = null, Action<RestError> onError = null)
         {
             GetGuildApplicationCommands(client, guild.Id, callback, onError);
@@ -203,6 +209,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="guildId">Guild ID to create the command in</param>
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void CreateGuildApplicationCommands(DiscordClient client, string guildId, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.POST, create, callback, onError);
@@ -217,6 +224,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="guild">Guild to create the command in</param>
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void CreateGuildApplicationCommands(DiscordClient client, Guild guild, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
         {
             CreateGuildApplicationCommands(client, guild.Id, create, callback, onError);
@@ -231,6 +239,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="guildId">Guild ID to update the command in</param>
         /// <param name="update">Command update</param>
         /// <param name="callback">Callback with updated command</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void EditGuildApplicationCommands(DiscordClient client, string guildId, ApplicationCommand update, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{update.Id}", RequestMethod.PATCH, update, callback, onError);
@@ -245,6 +254,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="guild">Guild to update the command in</param>
         /// <param name="update">Command update</param>
         /// <param name="callback">Callback with updated command</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void EditGuildApplicationCommands(DiscordClient client, Guild guild, ApplicationCommand update, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
         {
             EditGuildApplicationCommands(client, guild.Id, update, callback, onError);
@@ -258,6 +268,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="guildId">Guild ID to delete command from</param>
         /// <param name="commandId">Command ID to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void DeleteGuildApplicationCommands(DiscordClient client, string guildId, string commandId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}", RequestMethod.DELETE, null, callback, onError);
@@ -271,6 +282,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="guild">Guild to delete command from</param>
         /// <param name="delete">Command to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void DeleteGuildApplicationCommands(DiscordClient client, Guild guild, ApplicationCommand delete, Action callback = null, Action<RestError> onError = null)
         {
             DeleteGuildApplicationCommands(client, guild.Id, delete.Id, callback, onError);
@@ -284,6 +296,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="interactionToken">Interaction token to edit</param>
         /// <param name="message">Updated message</param>
         /// <param name="callback">Callback with the created message</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void EditOriginalInteractionResponse(DiscordClient client, string interactionToken, WebhookEditMessage message, Action<Message> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/@original", RequestMethod.PATCH, message, callback, onError);
@@ -297,6 +310,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="interaction">Interaction to edit</param>
         /// <param name="message">Updated message</param>
         /// <param name="callback">Callback with the created message</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void EditOriginalInteractionResponse(DiscordClient client, Interaction interaction, WebhookEditMessage message, Action<Message> callback = null, Action<RestError> onError = null) => EditOriginalInteractionResponse(client, interaction.Token, message, callback, onError);
         
         /// <summary>
@@ -306,6 +320,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="interactionToken">Interaction token to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void DeleteOriginalInteractionResponse(DiscordClient client, string interactionToken, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/@original", RequestMethod.DELETE, null, callback, onError);
@@ -318,6 +333,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="interaction">Interaction to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void DeleteOriginalInteractionResponse(DiscordClient client, Interaction interaction, Action callback = null, Action<RestError> onError = null) => DeleteOriginalInteractionResponse(client, interaction.Token, callback, onError);
         
         /// <summary>
@@ -328,6 +344,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="interactionToken">Interaction token to follow up</param>
         /// <param name="message">Message to follow up with</param>
         /// <param name="callback">Callback with the message</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void CreateFollowUpMessage(DiscordClient client, string interactionToken, WebhookCreateMessage message, Action<Message> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}", RequestMethod.POST, message, callback, onError);
@@ -341,6 +358,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="interaction">Interaction to follow up</param>
         /// <param name="message">Message to follow up with</param>
         /// <param name="callback">Callback with the message</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void CreateFollowUpMessage(DiscordClient client, Interaction interaction, WebhookCreateMessage message, Action<Message> callback = null, Action<RestError> onError = null) => CreateFollowUpMessage(client, interaction.Token, message, callback, onError);
         
         /// <summary>
@@ -352,6 +370,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="messageId">Message ID of the follow up message</param>
         /// <param name="edit">Updated message</param>
         /// <param name="callback">Callback with the updated message</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void EditFollowUpMessage(DiscordClient client, string interactionToken, string messageId, WebhookEditMessage edit, Action<Message> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.PATCH, edit, callback, onError);
@@ -365,6 +384,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="interactionToken">Interaction token of the message to delete</param>
         /// <param name="messageId">Message ID to delete</param>
         /// <param name="callback">Callback with the updated message</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void DeleteFollowUpMessage(DiscordClient client, string interactionToken, string messageId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.DELETE, null, callback, onError);

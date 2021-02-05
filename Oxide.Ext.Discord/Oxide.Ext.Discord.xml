@@ -318,6 +318,7 @@
             <param name="client">Client to use</param>
             <param name="channelId">ID of the channel to get</param>
             <param name="callback">Callback with the channel object</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ModifyChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -328,6 +329,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to be made to the channel. All fields are optional</param>
             <param name="callback">Callback with the updated channel</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannel(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -337,6 +339,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the deleted channel</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannelMessages(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Message}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -347,6 +350,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with list of channel messages</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannelMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -357,6 +361,7 @@
             <param name="client">Client to use</param>
             <param name="messageId">Message ID of the message</param>
             <param name="callback">Callback with the message for the ID</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -368,6 +373,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message to be created</param>
             <param name="callback">Callback with the created message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -379,6 +385,7 @@
             <param name="client">Client to use</param>
             <param name="message">Content of the message</param>
             <param name="callback">Callback with the created message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -390,6 +397,7 @@
             <param name="client">Client to use</param>
             <param name="embed">Embed to be send in the message</param>
             <param name="callback">Callback with the created message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.BulkDeleteMessages(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.ICollection{System.String},System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -400,6 +408,7 @@
             <param name="client">Client to use</param>
             <param name="messageIds">Collect of message ids to delete (Between 2 - 100)</param>
             <param name="callback">Callback once the action is complete</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -411,6 +420,7 @@
             <param name="client">Client to use</param>
             <param name="overwrite">Overwrite to edit with changes</param>
             <param name="callback">Callback once the action is complete</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Channels.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionType,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -425,6 +435,7 @@
             <param name="deny">Deny Permission Flags</param>
             <param name="type">Permission Type Flag</param>
             <param name="callback">Callback once the action is complete</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannelInvites(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Invites.Invite}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -436,6 +447,7 @@
             <param name="client">Client to use</param>
             <param name="callback">Callback with list of invites for the channel</param>
             <exception cref="T:System.Exception">Thrown when the channel type is Dm or GroupDm</exception>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateChannelInvite(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelInvite,System.Action{Oxide.Ext.Discord.Entities.Invites.Invite},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -447,6 +459,7 @@
             <param name="client">Client to use</param>
             <param name="invite">Invite to create</param>
             <param name="callback">Callback with the created invite</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannelPermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -458,6 +471,7 @@
             <param name="client">Client to use</param>
             <param name="overwrite">Overwrite to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannelPermission(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -469,6 +483,7 @@
             <param name="client">Client to use</param>
             <param name="overwriteId">Overwrite ID to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.FollowNewsChannel(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Channels.FollowedChannel},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -479,6 +494,7 @@
             <param name="client">Client to use</param>
             <param name="webhookChannelId">ID of target channel</param>
             <param name="callback">callback with the followed channel</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.TriggerTypingIndicator(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -488,6 +504,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetPinnedMessages(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Message}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -496,6 +513,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback of all the pinned messages</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -506,6 +524,7 @@
             <param name="user">User to add</param>
             <param name="accessToken">Users access token</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -517,6 +536,7 @@
             <param name="accessToken">Users access token</param>
             <param name="nick">User nickname</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GroupDmRemoveRecipient(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -525,6 +545,7 @@
             <param name="client">Client to use</param>
             <param name="userId">User ID to remove</param>
             <param name="callback">callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
             <summary>
@@ -1091,6 +1112,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with list of application commands</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1102,6 +1124,7 @@
             <param name="client">Client to use</param>
             <param name="create">Command to create</param>
             <param name="callback">Callback with the created command</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1112,6 +1135,7 @@
             <param name="client">Client to use</param>
             <param name="update">Command Update</param>
             <param name="callback">Callback with updated command</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1121,6 +1145,7 @@
             <param name="client">Client to use</param>
             <param name="commandId">Command to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1130,6 +1155,7 @@
             <param name="client">Client to use</param>
             <param name="guildId">ID of the guild to get commands for</param>
             <param name="callback">Callback with a list of guild application commands</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1139,6 +1165,7 @@
             <param name="client">Client to use</param>
             <param name="guild">Guild to get commands for</param>
             <param name="callback">Callback with a list of guild application commands</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1150,6 +1177,7 @@
             <param name="guildId">Guild ID to create the command in</param>
             <param name="create">Command to create</param>
             <param name="callback">Callback with the created command</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1161,6 +1189,7 @@
             <param name="guild">Guild to create the command in</param>
             <param name="create">Command to create</param>
             <param name="callback">Callback with the created command</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1172,6 +1201,7 @@
             <param name="guildId">Guild ID to update the command in</param>
             <param name="update">Command update</param>
             <param name="callback">Callback with updated command</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1183,6 +1213,7 @@
             <param name="guild">Guild to update the command in</param>
             <param name="update">Command update</param>
             <param name="callback">Callback with updated command</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1193,6 +1224,7 @@
             <param name="guildId">Guild ID to delete command from</param>
             <param name="commandId">Command ID to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1203,6 +1235,7 @@
             <param name="guild">Guild to delete command from</param>
             <param name="delete">Command to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1213,6 +1246,7 @@
             <param name="interactionToken">Interaction token to edit</param>
             <param name="message">Updated message</param>
             <param name="callback">Callback with the created message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Interaction,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1223,6 +1257,7 @@
             <param name="interaction">Interaction to edit</param>
             <param name="message">Updated message</param>
             <param name="callback">Callback with the created message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1232,6 +1267,7 @@
             <param name="client">Client to use</param>
             <param name="interactionToken">Interaction token to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Interaction,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1241,6 +1277,7 @@
             <param name="client">Client to use</param>
             <param name="interaction">Interaction to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1251,6 +1288,7 @@
             <param name="interactionToken">Interaction token to follow up</param>
             <param name="message">Message to follow up with</param>
             <param name="callback">Callback with the message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Interaction,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1261,6 +1299,7 @@
             <param name="interaction">Interaction to follow up</param>
             <param name="message">Message to follow up with</param>
             <param name="callback">Callback with the message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditFollowUpMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1272,6 +1311,7 @@
             <param name="messageId">Message ID of the follow up message</param>
             <param name="edit">Updated message</param>
             <param name="callback">Callback with the updated message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteFollowUpMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1282,6 +1322,7 @@
             <param name="interactionToken">Interaction token of the message to delete</param>
             <param name="messageId">Message ID to delete</param>
             <param name="callback">Callback with the updated message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand">
             <summary>
@@ -1306,6 +1347,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with updated command</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -1314,6 +1356,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCallbackData">
             <summary>
@@ -1563,6 +1606,7 @@
             <param name="client">Client to use</param>
             <param name="response">Response to respond with</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionResponse">
             <summary>
@@ -1637,6 +1681,26 @@
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.Payload">
             <summary>
             Payload datal
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.ClientStatus">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway#client-status-object">Client Status Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.ClientStatus.Desktop">
+            <summary>
+            The user's status set for an active desktop (Windows, Linux, Mac) application session
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.ClientStatus.Mobile">
+            <summary>
+            The user's status set for an active mobile (iOS, Android) application session
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.ClientStatus.Web">
+            <summary>
+            The user's status set for an active web (browser, bot account) application session
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode">
@@ -2898,6 +2962,7 @@
             <param name="client">Client to use</param>
             <param name="create">Guild Create Object</param>
             <param name="callback">Callback with the created guild</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuild(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Guilds.Guild},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2907,6 +2972,7 @@
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to lookup</param>
             <param name="callback">callback with the guild for the given ID</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildPreview(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildPreview},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2916,6 +2982,7 @@
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to get preview for</param>
             <param name="callback">Callback with the guild preview for the ID</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuild(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.Guild},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2925,6 +2992,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the updated guild</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuild(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2934,6 +3002,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildChannels(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Channel}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2942,6 +3011,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the list of channels</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2952,6 +3022,7 @@
             <param name="client">Client to use</param>
             <param name="channel">Channel to create</param>
             <param name="callback">Callback with created channel</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ObjectPosition},System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2963,6 +3034,7 @@
             <param name="client">Client to use</param>
             <param name="positions">List new channel positions for each channel</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildMember(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2972,6 +3044,7 @@
             <param name="client">Client to use</param>
             <param name="userId">UserID to get guild member for</param>
             <param name="callback">Callback with guild member matching user Id</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ListGuildMembers(Oxide.Ext.Discord.DiscordClient,System.Int32,System.String,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildMember}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2982,6 +3055,7 @@
             <param name="limit">max number of members to return (1-1000)</param>
             <param name="afterSnowflake">The highest user id in the previous page</param>
             <param name="callback"></param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,System.String,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -2993,6 +3067,7 @@
             <param name="accessToken">Member access token</param>
             <param name="roles">List of roles to grant</param>
             <param name="callback">Callback with the added guild member</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Guilds.GuildMemberAdd,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3003,6 +3078,7 @@
             <param name="userId">User ID of the user to add</param>
             <param name="member">Member to copy from</param>
             <param name="callback">Callback with the added guild member</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildMember(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Guilds.GuildMemberUpdate,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3013,6 +3089,7 @@
             <param name="userId">User ID of the user to update</param>
             <param name="update">Changes to make to the user</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyUsersNick(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3023,6 +3100,7 @@
             <param name="userId">User ID of the user to update</param>
             <param name="nick">Nickname for the user</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyCurrentUsersNick(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.String},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3032,6 +3110,7 @@
             <param name="client">Client to use</param>
             <param name="nick">New user nickname</param>
             <param name="callback">Callback with updated nickname</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Roles.Role,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3043,6 +3122,7 @@
             <param name="user">User to add role to</param>
             <param name="role">Role to add</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3054,6 +3134,7 @@
             <param name="userId">User ID to add role to</param>
             <param name="roleId">Role ID to add</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Roles.Role,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3065,6 +3146,7 @@
             <param name="user">User to remove role form</param>
             <param name="role">Role to remove</param>
             <param name="callback">callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3076,6 +3158,7 @@
             <param name="userId">User ID to remove role form</param>
             <param name="roleId">Role ID to remove</param>
             <param name="callback">callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3086,6 +3169,7 @@
             <param name="client">Client to use</param>
             <param name="member">Guild Member to remove</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMember(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3096,6 +3180,7 @@
             <param name="client">Client to use</param>
             <param name="userId">User ID of the user to remove</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildBans(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildBan}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3104,6 +3189,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the list of guild bans</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildBan(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildBan},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3114,6 +3200,7 @@
             <param name="client">Client to use</param>
             <param name="userId">User ID to get guild ban for</param>
             <param name="callback">Callback with the guild ban for the user</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3125,6 +3212,7 @@
             <param name="member">Guild Member to ban</param>
             <param name="ban">User ban information</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildBan(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3136,6 +3224,7 @@
             <param name="userId">User ID to ban</param>
             <param name="ban">User ban information</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildBan(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3146,6 +3235,7 @@
             <param name="client">Client to use</param>
             <param name="userId">User ID of the user to unban</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildRoles(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3154,6 +3244,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with a list of role objects</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.Role,System.Action{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3165,6 +3256,7 @@
             <param name="client">Client to use</param>
             <param name="role">New role to create</param>
             <param name="callback">Callback with the created role</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ObjectPosition},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3176,6 +3268,7 @@
             <param name="client">Client to use</param>
             <param name="positions">List of role with updated positions</param>
             <param name="callback">Callback with a list of all guild role objects</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.Role,System.Action{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3187,6 +3280,7 @@
             <param name="client">Client to use</param>
             <param name="role">Role to update</param>
             <param name="callback">Callback with the updated role</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Roles.Role,System.Action{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3199,6 +3293,7 @@
             <param name="roleId">Role ID to update</param>
             <param name="role">Role to update</param>
             <param name="callback">Callback with the updated role</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.Role,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3209,6 +3304,7 @@
             <param name="client">Client to use</param>
             <param name="role">Role to Delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3219,6 +3315,7 @@
             <param name="client">Client to use</param>
             <param name="roleId">Role ID to Delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildPruneCount(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneGet,System.Action{System.Nullable{System.Int32}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3229,6 +3326,7 @@
             <param name="client">Client to use</param>
             <param name="prune">Prune get request</param>
             <param name="callback">Callback with the number of members that would be pruned</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.BeginGuildPrune(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneBegin,System.Action{System.Nullable{System.Int32}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3239,6 +3337,7 @@
             <param name="client">Client to use</param>
             <param name="prune">Prune begin request</param>
             <param name="callback">Callback with number of pruned members</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildVoiceRegions(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Voice.VoiceRegion}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3248,6 +3347,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with list of guild voice regions</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildInvites(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Invites.InviteMetadata}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3257,6 +3357,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with a list of guild invites</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildIntegrations(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Integrations.Integration}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3266,6 +3367,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with a list of guild integrations</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3275,6 +3377,7 @@
             <param name="client">Client to use</param>
             <param name="integration">Integration to create in the guild</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.IntegrationType,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3285,6 +3388,7 @@
             <param name="type">Type of integration to create</param>
             <param name="id">Id of the integration</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildIntegration(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Integrations.IntegrationUpdate,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3295,7 +3399,8 @@
             <param name="client">Client to use</param>
             <param name="integrationId">ID of the integration</param>
             <param name="update">Update to make to the integration</param>
-            <param name="callback"></param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3307,6 +3412,7 @@
             <param name="client">Client to use</param>
             <param name="integration">Integration to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildIntegration(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3318,6 +3424,7 @@
             <param name="client">Client to use</param>
             <param name="integrationId">Integration ID to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.SyncGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3328,6 +3435,7 @@
             <param name="client">Client to use</param>
             <param name="integration">Integration to sync</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.SyncGuildIntegration(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3338,6 +3446,7 @@
             <param name="client">Client to use</param>
             <param name="integrationId">Integration ID to sync</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildWidgetSettings(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWidgetSettings},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3347,6 +3456,7 @@
             </summary>
             <param name="client">client to use</param>
             <param name="callback">Callback with guild widget settings</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildWidget(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildWidget,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWidget},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3357,6 +3467,7 @@
             <param name="client">Client to use</param>
             <param name="widget">Updated widget</param>
             <param name="callback">Callback with update guild widget</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildWidget(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWidget},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3365,6 +3476,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with guild widget</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildVanityUrl(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Invites.InviteMetadata},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3374,6 +3486,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with invite </param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ListGuildEmojis(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Emojis.Emoji}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3382,6 +3495,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with list of guild emojis</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildEmoji(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Emojis.Emoji},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3391,6 +3505,7 @@
             <param name="client">Client to use</param>
             <param name="emjoiId">Emoji to lookup</param>
             <param name="callback">Callback with the guild emoji</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.EmojiCreate,System.Action{Oxide.Ext.Discord.Entities.Emojis.Emoji},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3402,6 +3517,7 @@
             <param name="client">Client to use</param>
             <param name="emoji">Emoji to create</param>
             <param name="callback">Callback with the created emoji</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.UpdateGuildEmoji(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Emojis.EmojiUpdate,System.Action{Oxide.Ext.Discord.Entities.Emojis.Emoji},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3414,6 +3530,7 @@
             <param name="emojiId">Emoji ID to update</param>
             <param name="emoji">Emoji update</param>
             <param name="callback">Callback with the updated emoji</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildEmoji(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -3424,6 +3541,7 @@
             <param name="client">Client to use</param>
             <param name="emojiId">Emoji ID to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.IsAvailable">
             <summary>
@@ -4179,6 +4297,7 @@
             <param name="client">Client to use</param>
             <param name="inviteCode">Invite code</param>
             <param name="callback">Callback with the invite</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Invites.Invite.DeleteInvite(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Invites.Invite},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4189,6 +4308,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the deleted invite</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Invites.InviteMetadata">
             <summary>
@@ -4686,6 +4806,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message to send</param>
             <param name="callback">Callback with the message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.Reply(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4695,6 +4816,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message text to send</param>
             <param name="callback">Callback with the message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.Reply(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4704,6 +4826,7 @@
             <param name="client">Client to use</param>
             <param name="embed">Embed to send</param>
             <param name="callback">Callback with the message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.CrossPostMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4714,6 +4837,7 @@
             <param name="client">Client to use</param>
             <param name="messageId">Message ID to cross post</param>
             <param name="callback">Callback with the cross posted message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.CrossPostMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Message,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4724,6 +4848,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message to cross post</param>
             <param name="callback">Callback with the cross posted message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.CreateReaction(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4735,6 +4860,7 @@
             <param name="client">Client to use</param>
             <param name="emoji">Emoji to react with</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.DeleteOwnReaction(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4744,6 +4870,7 @@
             <param name="client">Client to use</param>
             <param name="emoji">Emoji to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.DeleteUserReaction(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Users.DiscordUser,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4755,6 +4882,7 @@
             <param name="emoji">Emoji to delete</param>
             <param name="user">User who add the reaction</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.DeleteUserReaction(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4766,6 +4894,7 @@
             <param name="emoji">Emoji to delete</param>
             <param name="userId">User ID who add the reaction</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.GetReactions(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.DiscordUser}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4775,6 +4904,7 @@
             <param name="client">Client to use</param>
             <param name="emoji">Emoji to get the list for</param>
             <param name="callback">Callback with a list of users who reacted</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.DeleteAllReactions(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4783,6 +4913,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.DeleteAllReactionsForEmoji(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4793,6 +4924,7 @@
             <param name="client">Client to use</param>
             <param name="emoji">Emoji to delete all reactions for</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.EditMessage(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4805,6 +4937,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the updated message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.DeleteMessage(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4814,6 +4947,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the delete message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.AddPinnedChannelMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4823,6 +4957,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback when the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.DeletePinnedChannelMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -4832,6 +4967,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageActivity">
             <summary>
@@ -5649,6 +5785,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the logged in user</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetUser(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5658,6 +5795,7 @@
             <param name="client">Client to use</param>
             <param name="userId">User ID to lookup</param>
             <param name="callback">Callback with the looked up user</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.ModifyCurrentUser(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5666,6 +5804,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the updated user</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.ModifyCurrentUser(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5676,6 +5815,7 @@
             <param name="username">Username to set</param>
             <param name="avatarData">Avatar data to set</param>
             <param name="callback">Callback with the updated user</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetCurrentUserGuilds(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.Guild}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5684,6 +5824,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the list of guilds</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.LeaveGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5693,6 +5834,7 @@
             <param name="client">Client to use</param>
             <param name="guild">Guild to leave</param>
             <param name="callback">callback when the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.LeaveGuild(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5702,6 +5844,7 @@
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to leave</param>
             <param name="callback">callback when the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateDirectMessage(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5710,6 +5853,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the direct message channel</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateDirectMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5719,6 +5863,7 @@
             <param name="client">Client to use</param>
             <param name="userId">User ID to send the message to</param>
             <param name="callback">Callback with the direct message channel</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateGroupDm(Oxide.Ext.Discord.DiscordClient,System.String[],System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.NickId},System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5728,6 +5873,7 @@
             <param name="accessTokens">access tokens of users that have granted your app the gdm.join scope</param>
             <param name="nicks">a list of user ids to their respective nicknames</param>
             <param name="callback">Callback with the direct message channel</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetUserConnections(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.Connections.Connection}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -5736,6 +5882,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the list of connections</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.NickId">
             <summary>
@@ -5919,6 +6066,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with a list of voice regions</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Voice.VoiceState">
             <summary>
@@ -6049,6 +6197,7 @@
             <param name="name">Name of the webhook (1-80 characters)</param>
             <param name="avatar">Image for the default webhook avatar</param>
             <param name="callback">Callback with the completed webhook</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetChannelWebhooks(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Webhooks.Webhook}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6058,6 +6207,7 @@
             <param name="client">Client to use</param>
             <param name="channelId">Channel ID to get webhooks for</param>
             <param name="callback">Callback with a list of channel webhooks</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetGuildWebhooks(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Webhooks.Webhook}},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6067,6 +6217,7 @@
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to get webhooks for</param>
             <param name="callback">Callback with the list of guild webhooks</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetWebhook(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6076,6 +6227,7 @@
             <param name="client">Client to use</param>
             <param name="webhookId">Webhook ID to get</param>
             <param name="callback">Callback with the webhook</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetWebhookWithToken(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6088,6 +6240,7 @@
             <param name="webhookId">Webhook ID to get</param>
             <param name="webhookToken">Webhook Token</param>
             <param name="callback">Callback with the webhook</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ModifyWebhook(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6100,6 +6253,7 @@
             <param name="avatar">New avatar image</param>
             <param name="channelId">Channel to move the webhook to</param>
             <param name="callback">Callback with the updated webhook</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ModifyWebhookWithToken(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6111,6 +6265,7 @@
             <param name="name">New webhook name</param>
             <param name="avatar">New avatar image</param>
             <param name="callback">Callback with the updated webhook</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.DeleteWebhook(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6120,6 +6275,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.DeleteWebhookWithToken(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6129,6 +6285,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError},Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType)">
             <summary>
@@ -6139,6 +6296,7 @@
             <param name="payload">Message data</param>
             <param name="callback">Callback once the action is completed</param>
             <param name="sendType">Which type of webhook to execute</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError},Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType)">
             <summary>
@@ -6149,6 +6307,7 @@
             <param name="payload">Message data</param>
             <param name="callback">Callback with the created message</param>
             <param name="sendType">Which type of webhook to execute</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6159,6 +6318,7 @@
             <param name="messageId">Message ID to edit</param>
             <param name="payload">The updated message</param>
             <param name="callback">Callback with the edited message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.DeleteWebhookMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6167,6 +6327,7 @@
             <param name="client">Client to use</param>
             <param name="messageId">Message ID to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage">
             <summary>
