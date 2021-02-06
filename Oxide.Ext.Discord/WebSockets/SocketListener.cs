@@ -417,6 +417,18 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case "INTEGRATION_DELETE":
                     HandleDispatchIntegrationDelete(payload);
+                    break;         
+                
+                case "APPLICATION_COMMAND_CREATE":
+                    HandleDispatchApplicationCommandCreate(payload);
+                    break;                
+                
+                case "APPLICATION_COMMAND_UPDATE":
+                    HandleDispatchApplicationCommandUpdate(payload);
+                    break;                
+                
+                case "APPLICATION_COMMAND_DELETE":
+                    HandleDispatchApplicationCommandDelete(payload);
                     break;
                 
                 default:
@@ -906,6 +918,27 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             IntegrationDelete integration = payload.EventData.ToObject<IntegrationDelete>();
             _client.CallHook("Discord_IntegrationDelete", integration);
+        }
+        
+        //TODO: Add Link
+        private void HandleDispatchApplicationCommandCreate(EventPayload payload)
+        {
+            ApplicationCommandEvent commandEvent = payload.EventData.ToObject<ApplicationCommandEvent>();
+            _client.CallHook("Discord_ApplicationCommandCreate", commandEvent);
+        }
+        
+        //TODO: Add Link
+        private void HandleDispatchApplicationCommandUpdate(EventPayload payload)
+        {
+            ApplicationCommandEvent commandEvent = payload.EventData.ToObject<ApplicationCommandEvent>();
+            _client.CallHook("Discord_ApplicationCommandUpdate", commandEvent);
+        }
+        
+        //TODO: Add Link
+        private void HandleDispatchApplicationCommandDelete(EventPayload payload)
+        {
+            ApplicationCommandEvent commandEvent = payload.EventData.ToObject<ApplicationCommandEvent>();
+            _client.CallHook("Discord_ApplicationCommandDelete", commandEvent);
         }
 
         private void HandleDispatchUnhandledEvent(EventPayload payload)

@@ -13,6 +13,12 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; }
+        
+        /// <summary>
+        /// Source url of video
+        /// </summary>
+        [JsonProperty("proxy_url")]
+        public string ProxyUrl { get; set; }
 
         /// <summary>
         /// Height of video

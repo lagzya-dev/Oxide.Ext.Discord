@@ -431,7 +431,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="update">Changes to make to the user</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void ModifyGuildMember(DiscordClient client, string userId, GuildMemberUpdate update, Action callback = null, Action<RestError> onError = null)
+        public void ModifyGuildMember(DiscordClient client, string userId, GuildMemberUpdate update, Action<GuildMember> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.PATCH, update, callback, onError);
         }
@@ -445,7 +445,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="nick">Nickname for the user</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void ModifyUsersNick(DiscordClient client, string userId, string nick, Action callback = null, Action<RestError> onError = null)
+        public void ModifyUsersNick(DiscordClient client, string userId, string nick, Action<GuildMember> callback = null, Action<RestError> onError = null)
         {
             GuildMemberUpdate update = new GuildMemberUpdate
             {

@@ -26,5 +26,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("guild_id")]
         public string GuildId { get; set; }
+        
+        /// <summary>
+        /// When sending, whether to error if the referenced message doesn't exist instead of sending as a normal (non-reply) message, default true
+        /// </summary>
+        [JsonProperty("fail_if_not_exists")]
+        public bool? FailIfNotExists { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     public class GuildPruneGet
     {
         /// <summary>
-        /// Number of days to count prune for (1 or more)
+        /// Number of days to count prune for (1 - 30)
         /// </summary>
         [JsonProperty("days")]
         public int Days { get; set; }

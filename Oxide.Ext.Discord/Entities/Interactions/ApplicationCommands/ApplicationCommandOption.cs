@@ -27,14 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
-        
-        /// <summary>
-        /// The first required option for the user to complete
-        /// Only one option can be default
-        /// </summary>
-        [JsonProperty("default")]
-        public bool? Default { get; set; }
-        
+
         /// <summary>
         /// If the parameter is required or optional
         /// </summary>
