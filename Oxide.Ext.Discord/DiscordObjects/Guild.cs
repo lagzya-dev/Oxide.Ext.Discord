@@ -39,7 +39,7 @@
 
         public int? explicit_content_filter { get; set; }
 
-        public List<Role> roles { get; set; }
+        public List<Role> roles { get; set; } = new List<Role>();
 
         public List<Emoji> emojis { get; set; }
 
@@ -67,9 +67,9 @@
 
         public List<VoiceState> voice_states { get; set; }
 
-        public List<GuildMember> members { get; set; }
+        public List<GuildMember> members { get; set; } = new List<GuildMember>();
 
-        public List<Channel> channels { get; set; }
+        public List<Channel> channels { get; set; } = new List<Channel>();
 
         public List<Presence> presences { get; set; }
 

@@ -5,7 +5,7 @@
     public class SPayload
     {
         [JsonProperty("op")]
-        public OpCodes OP;
+        public SendOpCode OpCode;
 
         [JsonProperty("d")]
         public object Payload;

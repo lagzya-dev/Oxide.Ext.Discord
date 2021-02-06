@@ -10,14 +10,14 @@ namespace Oxide.Ext.Discord
 
     public class DiscordExtension : Extension
     {
-        private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 7);
+        private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 8);
         public const string TestVersion = "";
         
         private readonly ILogger _logger;
         
         public DiscordExtension(ExtensionManager manager) : base(manager)
         {
-            _logger = new Logger<DiscordExtension>(LogLevel.Debug);
+            _logger = new Logger(LogLevel.Debug);
         }
 
         ////public override bool SupportsReloading => true;
@@ -32,10 +32,10 @@ namespace Oxide.Ext.Discord
 
         public override void OnModLoad()
         {
-            _logger.LogInfo($"Using Discord Extension Version: {GetExtensionVersion}");
+            _logger.Info($"Using Discord Extension Version: {GetExtensionVersion}");
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
-                _logger.LogException("An exception was thrown!", exception.ExceptionObject as Exception);
+                _logger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);
             };
         }
 
@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord
                 Discord.CloseClient(client);
             }
 
-            _logger.LogInfo("Disconnected all clients - server shutdown.");
+            _logger.Info("Disconnected all clients - server shutdown.");
         }
     }
 }
