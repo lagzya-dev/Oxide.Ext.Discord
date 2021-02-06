@@ -1,97 +1,196 @@
-﻿namespace Oxide.Ext.Discord.WebSockets
-{
-    using System;
-    using Oxide.Core;
-    using Oxide.Ext.Discord.Exceptions;
-    using WebSocketSharp;
+﻿using System;
+using System.Timers;
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Gateway;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Logging;
+using WebSocketSharp;
 
+namespace Oxide.Ext.Discord.WebSockets
+{
     public class Socket
     {
-        private DiscordClient client;
+        public bool RequestReconnect;
+        
+        public bool ShouldAttemptResume;
+        
+        internal Timer ReconnectTimer;
+        
+        private readonly DiscordClient _client;
 
-        private WebSocket socket;
+        private WebSocket _socket;
 
-        private SocketListner listner;
+        private SocketListener _listener;
 
-        public bool hasConnectedOnce = false;
+        private readonly ILogger _logger;
 
         public Socket(DiscordClient client)
         {
-            this.client = client;
+            _client = client;
+            _logger = new Logging.Logger(client.Settings.LogLevel);
         }
 
-        public void Connect(string url)
+        public void Connect()
         {
+            string url = DiscordObjects.Gateway.WebSocketUrl;
             if (string.IsNullOrEmpty(url))
             {
-                throw new NoURLException();
+                _client.UpdateGatewayUrl(Connect);
+                return;
             }
 
-            if (socket != null)
+            if (_socket != null)
             {
+                throw new SocketRunningException(_client);
                 // Assume force-reconnect
-                Disconnect(false);
+                //Disconnect(false);
             }
-            client.DestroyHeartbeat();
 
-            socket = new WebSocket($"{url}/?v=6&encoding=json");
+            _socket = new WebSocket($"{url}/?v=6&encoding=json");
 
-            if(listner == null)
-                listner = new SocketListner(client, this);
+            if (_listener == null)
+            {
+                _listener = new SocketListener(_client, this, _logger);
+            }
 
-            socket.OnOpen += listner.SocketOpened;
-            socket.OnClose += listner.SocketClosed;
-            socket.OnError += listner.SocketErrored;
-            socket.OnMessage += listner.SocketMessage;
+            _socket.OnOpen += _listener.SocketOpened;
+            _socket.OnClose += _listener.SocketClosed;
+            _socket.OnError += _listener.SocketErrored;
+            _socket.OnMessage += _listener.SocketMessage;
+            _socket.ConnectAsync();
+        }
+        
+        public void Disconnect(bool attemptReconnect, bool shouldResume, bool requested = false)
+        {
+            RequestReconnect = attemptReconnect;
+            ShouldAttemptResume = shouldResume;
+            
+            if (ReconnectTimer != null)
+            {
+                ReconnectTimer.Stop();
+                ReconnectTimer.Dispose();
+                ReconnectTimer = null;
+            }
+            
+            if (IsClosingOrClosed())
+            {
+                return;
+            }
 
-            socket.ConnectAsync();
+            if (requested)
+            {
+                _socket.CloseAsync(4199, "Discord server requested reconnect");
+            }
+            else
+            {
+                _socket.CloseAsync(CloseStatusCode.Normal);
+            }
+
+            DisposeSocket();
         }
 
-        public void Disconnect(bool normal = true)
+        public void Shutdown()
         {
-            if (IsClosed() || IsClosing()) return;
-
-            socket?.CloseAsync(normal ? CloseStatusCode.Normal : CloseStatusCode.Abnormal);
+            if (ReconnectTimer != null)
+            {
+                ReconnectTimer.Stop();
+                ReconnectTimer.Dispose();
+                ReconnectTimer = null;
+            }
+            
+            Disconnect(false, false);
+            _listener = null;
+            _socket = null;
         }
 
-        public void ReconnectRequested()
+        public void DisposeSocket()
         {
-            if (IsClosed() || IsClosing()) return;
-
-            socket?.CloseAsync(4000, "Discord server requested reconnect");
+            if (_socket != null)
+            {
+                _socket.OnOpen -= _listener.SocketOpened;
+                _socket.OnError -= _listener.SocketErrored;
+                _socket.OnMessage -= _listener.SocketMessage;
+                _socket = null;
+            }
         }
 
-        public void Dispose()
+        public void Send(SendOpCode opCode, object data, Action<bool> completed = null)
         {
-            listner = null;
-            socket = null;
+            if (!IsAlive())
+            {
+                return;
+            }
+            
+            SPayload opcode = new SPayload
+            {
+                OpCode = opCode,
+                Payload = data
+            };
+            
+            _socket.SendAsync(JsonConvert.SerializeObject(opcode), completed);
         }
 
         public void Send(string message, Action<bool> completed = null)
         {
             if (IsAlive())
-                socket.SendAsync(message, completed);
+            {
+                _socket.SendAsync(message, completed);
+            }
         }
 
         public bool IsAlive()
         {
-            if (socket == null)
+            if (_socket == null)
+            {
                 return false;
-            return socket.ReadyState == WebSocketState.Open;
+            }
+            
+            return _socket.ReadyState == WebSocketState.Open;
+        }
+        
+        public bool IsConnecting()
+        {
+            if (_socket == null)
+            {
+                return false;
+            }
+            
+            return _socket.ReadyState == WebSocketState.Connecting;
         }
 
-        public bool IsClosing()
+        public bool IsClosingOrClosed()
         {
-            if (socket == null)
-                return false;
-            return socket.ReadyState == WebSocketState.Closing;
-        }
-
-        public bool IsClosed()
-        {
-            if (socket == null)
+            if (_socket == null)
+            {
                 return true;
-            return socket.ReadyState == WebSocketState.Closed;
+            }
+
+            return _socket.ReadyState == WebSocketState.Closing || _socket.ReadyState == WebSocketState.Closed;
+        }
+        
+        public bool IsReconnectTimerActive()
+        {
+            return ReconnectTimer != null && ReconnectTimer.Enabled;
+        }
+
+        public void StartReconnectTimer(float seconds, Action callback)
+        {
+            if (IsReconnectTimerActive())
+            {
+                return;
+            }
+            
+            ReconnectTimer = new Timer
+            {
+                Interval = seconds * 1000,
+                AutoReset = false
+            };
+            ReconnectTimer.Elapsed += (_, __) =>
+            {
+                callback.Invoke();
+            };
+            
+            ReconnectTimer.Start();
         }
     }
 }

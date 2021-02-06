@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord
             }
 
             // Find an existing DiscordClient and update it 
-            var client = Clients.FirstOrDefault(x => x.Plugins.Any(p => p.Title == plugin.Title));
+            var client = Clients.FirstOrDefault(x => x.Plugins.Any(p => p.Name == plugin.Name));
             if (client != null)
             {
                 if (client.Settings.ApiToken != settings.ApiToken)
@@ -66,7 +66,7 @@ namespace Oxide.Ext.Discord
                 client.RegisterPlugin(plugin);
                 client.UpdatePluginReference(plugin);
                 client.Settings = settings;
-                client.CallHook("DiscordSocket_Initialized", plugin);
+                plugin.CallHook("DiscordSocket_Initialized");
                 return;
             }
 
@@ -79,7 +79,6 @@ namespace Oxide.Ext.Discord
         public static void CloseClient(DiscordClient client)
         {
             if (client == null) return;
-
             client.Disconnect();
             Clients.Remove(client);
         }
