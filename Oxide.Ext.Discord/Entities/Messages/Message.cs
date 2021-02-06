@@ -165,6 +165,65 @@ namespace Oxide.Ext.Discord.Entities.Messages
         [JsonProperty("referenced_message")]
         public Message ReferencedMessage { get; internal set; }
 
+        
+        /// <summary>
+        /// Post a message to a guild text or DM channel.
+        /// If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+        /// If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channelId">Channel ID to send the message to</param>
+        /// <param name="message">Message to be created</param>
+        /// <param name="callback">Callback with the created message</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
+        public static void CreateMessage(DiscordClient client, string channelId, MessageCreate message, Action<Message> callback = null, Action<RestError> onError = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, message, callback, onError);
+        }
+
+        /// <summary>
+        /// Post a message to a guild text or DM channel.
+        /// If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+        /// If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channelId">Channel ID to send the message to</param>
+        /// <param name="message">Content of the message</param>
+        /// <param name="callback">Callback with the created message</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
+        public static void CreateMessage(DiscordClient client, string channelId, string message, Action<Message> callback = null, Action<RestError> onError = null)
+        {
+            MessageCreate createMessage = new MessageCreate
+            {
+                Content = message
+            };
+
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, createMessage, callback, onError);
+        }
+
+        /// <summary>
+        /// Post a message to a guild text or DM channel.
+        /// If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+        /// If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channelId">Channel ID to send the message to</param>
+        /// <param name="embed">Embed to be send in the message</param>
+        /// <param name="callback">Callback with the created message</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
+        public static void CreateMessage(DiscordClient client, string channelId, Embed embed, Action<Message> callback = null, Action<RestError> onError = null)
+        {
+            MessageCreate createMessage = new MessageCreate
+            {
+                Embed = embed
+            };
+
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, createMessage, callback, onError);
+        }
+        
         /// <summary>
         /// Replies to a previously sent message
         /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>

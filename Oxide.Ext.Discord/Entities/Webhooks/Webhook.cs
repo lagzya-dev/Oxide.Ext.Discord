@@ -148,6 +148,25 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         }
 
         /// <summary>
+        /// Returns the webhook with the given ID &amp; Token
+        /// This call does not required authentication
+        /// No user is returned in webhook object
+        /// See <a href="https://discord.com/developers/docs/resources/webhook#get-webhook-with-token">Get Webhook with Token</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="webhookUrl">Returns the webhook for the specified URL</param>
+        /// <param name="callback">Callback with the webhook</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
+        public static void GetWebhookWithUrl(DiscordClient client, string webhookUrl, Action<Webhook> callback = null, Action<RestError> onError = null)
+        {
+            string[] webhookInfo = webhookUrl.Split('/');
+            string id = webhookInfo[webhookInfo.Length - 2];
+            string token = webhookInfo[webhookInfo.Length - 1];
+            
+            client.Bot.Rest.DoRequest($"/webhooks/{id}/{token}", RequestMethod.GET, null, callback, onError);
+        }
+
+        /// <summary>
         /// Modify a webhook.
         /// Requires the MANAGE_WEBHOOKS permission.
         /// See <a href="https://discord.com/developers/docs/resources/webhook#modify-webhook">Modify Webhook</a>

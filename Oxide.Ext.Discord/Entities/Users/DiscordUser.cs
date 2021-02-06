@@ -215,7 +215,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="onError">Callback when an error occurs with error information</param>
         public static void CreateDirectMessage(DiscordClient client, string userId, Action<Channel> callback = null, Action<RestError> onError = null)
         {
-            Dictionary<string, string> data = new Dictionary<string, string>()
+            Dictionary<string, string> data = new Dictionary<string, string>
             {
                 ["recipient_id"] = userId 
             };

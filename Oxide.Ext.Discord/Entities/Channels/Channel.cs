@@ -65,6 +65,21 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public DateTime? LastPinTimestamp { get; set; }
 
         /// <summary>
+        /// Create a new channel object for the guild.
+        /// Requires the MANAGE_CHANNELS permission.
+        /// See <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel">Create Guild Channel</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="guildId">Guild to create the channel in</param>
+        /// <param name="channel">Channel to create</param>
+        /// <param name="callback">Callback with created channel</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
+        public static void CreateGuildChannel(DiscordClient client, string guildId, ChannelCreate channel, Action<Channel> callback = null, Action<RestError> onError = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{guildId}/channels", RequestMethod.POST, channel, callback, onError);
+        }
+        
+        /// <summary>
         /// Get a channel by ID
         /// See <a href="https://discord.com/developers/docs/resources/channel#get-channel">Get Channel</a>
         /// </summary>

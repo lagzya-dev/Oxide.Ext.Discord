@@ -310,6 +310,18 @@
             This may be null in events such as GUILD_CREATE when a message is not pinned.
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Channels.ChannelCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Create a new channel object for the guild.
+            Requires the MANAGE_CHANNELS permission.
+            See <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel">Create Guild Channel</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to create the channel in</param>
+            <param name="channel">Channel to create</param>
+            <param name="callback">Callback with created channel</param>
+            <param name="onError">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannel(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
             Get a channel by ID
@@ -3738,6 +3750,11 @@
             When the user started boosting the guild
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Permissions">
+            <summary>
+            Total permissions of the member in the channel, including overrides, returned when in the interaction object
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Deaf">
             <summary>
             Whether the user is deafened in voice channels
@@ -4797,6 +4814,45 @@
             <summary>
             The message associated with the message_reference
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.CreateMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Post a message to a guild text or DM channel.
+            If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+            If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken.
+            See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="channelId">Channel ID to send the message to</param>
+            <param name="message">Message to be created</param>
+            <param name="callback">Callback with the created message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.CreateMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Post a message to a guild text or DM channel.
+            If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+            If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken.
+            See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="channelId">Channel ID to send the message to</param>
+            <param name="message">Content of the message</param>
+            <param name="callback">Callback with the created message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.CreateMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Post a message to a guild text or DM channel.
+            If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+            If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken.
+            See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="channelId">Channel ID to send the message to</param>
+            <param name="embed">Embed to be send in the message</param>
+            <param name="callback">Callback with the created message</param>
+            <param name="onError">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Message.Reply(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.Message},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
@@ -6239,6 +6295,18 @@
             <param name="client">Client to use</param>
             <param name="webhookId">Webhook ID to get</param>
             <param name="webhookToken">Webhook Token</param>
+            <param name="callback">Callback with the webhook</param>
+            <param name="onError">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetWebhookWithUrl(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Returns the webhook with the given ID &amp; Token
+            This call does not required authentication
+            No user is returned in webhook object
+            See <a href="https://discord.com/developers/docs/resources/webhook#get-webhook-with-token">Get Webhook with Token</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="webhookUrl">Returns the webhook for the specified URL</param>
             <param name="callback">Callback with the webhook</param>
             <param name="onError">Callback when an error occurs with error information</param>
         </member>

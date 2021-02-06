@@ -43,6 +43,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public DateTime? PremiumSince { get; set; }
         
         /// <summary>
+        /// Total permissions of the member in the channel, including overrides, returned when in the interaction object
+        /// </summary>
+        [JsonProperty("permissions")]
+        public string Permissions { get; set; }
+        
+        /// <summary>
         /// Whether the user is deafened in voice channels
         /// </summary>
         [JsonProperty("deaf")]
