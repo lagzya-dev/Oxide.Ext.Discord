@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.REST
             {
                 { "Authorization", $"Bot {client.Settings.ApiToken}" },
                 { "Content-Type", "application/json" },
-                { "User-Agent", $"DiscordBot (https://github.com/Trickyyy/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})" }
+                { "User-Agent", $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})" }
             };
         }
 
