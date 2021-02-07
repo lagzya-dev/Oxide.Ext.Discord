@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Policy;
-using System.Text;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
@@ -13,7 +11,7 @@ using Oxide.Ext.Discord.REST;
 namespace Oxide.Ext.Discord.Entities.Messages
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object">Message Structure</a>  sent in a channel within Discord..
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object">Message Structure</a> sent in a channel within Discord..
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Message : MessageCreate
@@ -310,19 +308,28 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Create a reaction for the message.
         /// This endpoint requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user.
         /// Additionally, if nobody else has reacted to the message using this emoji, this endpoint requires the 'ADD_REACTIONS' permission to be present on the current user.
+        /// Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
         /// See <a href="https://discord.com/developers/docs/resources/channel#create-reaction">Create Reaction</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="emoji">Emoji to react with</param>
+        /// <param name="emoji">Emoji to react with.</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
         public void CreateReaction(DiscordClient client, string emoji, Action callback = null, Action<RestError> onError = null)
         {
+            string error = Validation.ValidateEmoji(emoji);
+            if (!string.IsNullOrEmpty(error))
+            {
+                client.Logger.Error($"{nameof(Message)}.{nameof(CreateReaction)} Failed emoji validation with error:\n{emoji}");
+                return;
+            }
+            
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.PUT, null, callback, onError);
         }
 
         /// <summary>
         /// Delete a reaction the current user has made for the message
+        /// Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
         /// See <a href="https://discord.com/developers/docs/resources/channel#delete-own-reaction">Delete Own Reaction</a>
         /// </summary>
         /// <param name="client">Client to use</param>
@@ -331,12 +338,20 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="onError">Callback when an error occurs with error information</param>
         public void DeleteOwnReaction(DiscordClient client, string emoji, Action callback = null, Action<RestError> onError = null)
         {
+            string error = Validation.ValidateEmoji(emoji);
+            if (!string.IsNullOrEmpty(error))
+            {
+                client.Logger.Error($"{nameof(Message)}.{nameof(DeleteOwnReaction)} Failed emoji validation with error:\n{emoji}");
+                return;
+            }
+            
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}/@me", RequestMethod.DELETE, null, callback, onError);
         }
 
         /// <summary>
         /// Deletes another user's reaction.
         /// This endpoint requires the 'MANAGE_MESSAGES' permission to be present on the current user.
+        /// Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
         /// See <a href="https://discord.com/developers/docs/resources/channel#delete-user-reaction">Delete User Reaction</a>
         /// </summary>
         /// <param name="client">Client to use</param>
@@ -349,6 +364,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// Deletes another user's reaction.
         /// This endpoint requires the 'MANAGE_MESSAGES' permission to be present on the current user.
+        /// Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
         /// See <a href="https://discord.com/developers/docs/resources/channel#delete-user-reaction">Delete User Reaction</a>
         /// </summary>
         /// <param name="client">Client to use</param>
@@ -358,11 +374,19 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="onError">Callback when an error occurs with error information</param>
         public void DeleteUserReaction(DiscordClient client, string emoji, string userId, Action callback = null, Action<RestError> onError = null)
         {
+            string error = Validation.ValidateEmoji(emoji);
+            if (!string.IsNullOrEmpty(error))
+            {
+                client.Logger.Error($"{nameof(Message)}.{nameof(DeleteUserReaction)} Failed emoji validation with error:\n{emoji}");
+                return;
+            }
+            
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback, onError);
         }
 
         /// <summary>
         /// Get a list of users that reacted with this emoji
+        /// Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
         /// See <a href="https://discord.com/developers/docs/resources/channel#get-reactions">Get Reactions</a>
         /// </summary>
         /// <param name="client">Client to use</param>
@@ -371,6 +395,13 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="onError">Callback when an error occurs with error information</param>
         public void GetReactions(DiscordClient client, string emoji, Action<List<DiscordUser>> callback = null, Action<RestError> onError = null)
         {
+            string error = Validation.ValidateEmoji(emoji);
+            if (!string.IsNullOrEmpty(error))
+            {
+                client.Logger.Error($"{nameof(Message)}.{nameof(GetReactions)} Failed emoji validation with error:\n{emoji}");
+                return;
+            }
+            
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.GET, null, callback, onError);
         }
 
@@ -389,6 +420,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// Deletes all the reactions for a given emoji on a message.
         /// This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
+        /// Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
         /// See <a href="https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji">Delete All Reactions for Emoji</a>
         /// </summary>
         /// <param name="client">Client to use</param>
@@ -397,6 +429,13 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="onError">Callback when an error occurs with error information</param>
         public void DeleteAllReactionsForEmoji(DiscordClient client, string emoji, Action callback = null, Action<RestError> onError = null)
         {
+            string error = Validation.ValidateEmoji(emoji);
+            if (!string.IsNullOrEmpty(error))
+            {
+                client.Logger.Error($"{nameof(Message)}.{nameof(DeleteAllReactionsForEmoji)} Failed emoji validation with error:\n{emoji}");
+                return;
+            }
+            
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{Uri.EscapeDataString(emoji)}", RequestMethod.DELETE, null, callback, onError);
         }
 

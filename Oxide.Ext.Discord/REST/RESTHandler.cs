@@ -14,18 +14,16 @@ namespace Oxide.Ext.Discord.REST
 
         private readonly Dictionary<string, string> _headers;
         private readonly ILogger _logger;
-        private readonly BotClient _client;
 
         public RestHandler(BotClient client, ILogger logger)
         {
-            _client = client;
-            _logger = new Logger(client.Settings.LogLevel);
+            _logger = logger;
 
             _headers = new Dictionary<string, string>
             {
-                { "Authorization", $"Bot {client.Settings.ApiToken}" },
-                { "Content-Type", "application/json" },
-                { "User-Agent", $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})" }
+                ["Authorization"] = $"Bot {client.Settings.ApiToken}",
+                ["Content-Type"] = "application/json",
+                ["User-Agent"] = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})"
             };
         }
 

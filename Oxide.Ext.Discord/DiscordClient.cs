@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord
         public BotClient Bot { get; private set; }
         public DiscordSettings Settings { get; private set; } = new DiscordSettings();
         
-        private ILogger _logger;
+        internal ILogger Logger;
 
         public DiscordClient(Plugin plugin)
         {
@@ -42,20 +42,20 @@ namespace Oxide.Ext.Discord
         public void Connect(DiscordSettings settings)
         {
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
-            _logger = new Logger(settings.LogLevel);
+            Logger = new Logger(settings.LogLevel);
             
             if (string.IsNullOrEmpty(Settings.ApiToken))
             {
-                _logger.Error("API Token is null or empty!");
+                Logger.Error("API Token is null or empty!");
                 return;
             }
 
             if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
             {
-                _logger.Warning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
+                Logger.Warning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
             }
             
-            _logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {Owner.Name}");
+            Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {Owner.Name}");
 
             Bot = BotClient.GetOrCreate(this);
 

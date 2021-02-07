@@ -25,11 +25,11 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="channelId">Channel ID to mention</param>
         /// <returns>Mention channel formatted string</returns>
         public static string MentionChannel(string channelId) => $"<#{channelId}>";
-        
+
         /// <summary>
         /// Mention the the role with the given ID
         /// </summary>
-        /// <param name="channelId">Role ID to mention</param>
+        /// <param name="roleId">Role ID to mention</param>
         /// <returns>Mention role formatted string</returns>
         public static string MentionRole(string roleId) => $"<@&{roleId}>";
 
