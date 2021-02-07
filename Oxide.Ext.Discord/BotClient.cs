@@ -364,6 +364,19 @@ namespace Oxide.Ext.Discord
             Servers[guild.Id] = guild;
         }
         
+        public void AddGuildOrUpdate(Guild guild)
+        {
+            Guild existing = Servers[guild.Id];
+            if (existing != null)
+            {
+                existing.Update(guild);
+            }
+            else
+            {
+                Servers[guild.Id] = guild;
+            }
+        }
+        
         internal void RemoveGuild(string guildId)
         {
             Servers.Remove(guildId);

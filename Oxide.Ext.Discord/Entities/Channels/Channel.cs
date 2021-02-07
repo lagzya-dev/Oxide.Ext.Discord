@@ -416,5 +416,58 @@ namespace Oxide.Ext.Discord.Entities.Channels
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.DELETE, null, callback, onError);
         }
+
+        internal void Update(Channel channel)
+        {
+            if (channel.Name != null)
+            {
+                Name = channel.Name;
+            }
+
+            if (channel.Type != null)
+            {
+                Type = channel.Type;
+            }
+
+            if (channel.Position != null)
+            {
+                Position = channel.Position;
+            }
+            
+            if (channel.Topic != null)
+            {
+                Topic = channel.Topic;
+            }
+            
+            if (channel.Nsfw != null)
+            {
+                Nsfw = channel.Nsfw;
+            }
+            
+            if (channel.RateLimitPerUser != null)
+            {
+                RateLimitPerUser = channel.RateLimitPerUser;
+            }
+            
+            if (channel.Bitrate != null)
+            {
+                Bitrate = channel.Bitrate;
+            }
+            
+            if (channel.UserLimit != null)
+            {
+                UserLimit = channel.UserLimit;
+            }
+            
+            if (channel.PermissionOverwrites != null)
+            {
+                PermissionOverwrites = channel.PermissionOverwrites;
+            }
+            
+            if (channel.ParentId != null)
+            {
+                ParentId = channel.ParentId;
+            }
+        }
     }
 }

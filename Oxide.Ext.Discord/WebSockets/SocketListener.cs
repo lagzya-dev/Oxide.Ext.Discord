@@ -441,7 +441,10 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchReady(EventPayload payload)
         {
             Ready ready = payload.EventData.ToObject<Ready>();
-            _client.Servers = ready.Guilds.ToHash(g => g.Id);
+            foreach (Guild guild in ready.Guilds)
+            {
+                _client.AddGuildOrUpdate(guild);
+            }
             _client.SessionId = ready.SessionId;
             _client.ReadyData = ready;
             _client.Application = ready.Application;
@@ -484,10 +487,12 @@ namespace Oxide.Ext.Discord.WebSockets
                 previous = _client.DirectMessages[update.Id];
                 if (previous != null)
                 {
-                    _client.DirectMessages.Remove(update.Id);
+                    previous.Update(update);
                 }
-
-                _client.DirectMessages[update.Id] = update;
+                else
+                {
+                    _client.DirectMessages[update.Id] = update;
+                }
             }
             else
             {
@@ -497,10 +502,12 @@ namespace Oxide.Ext.Discord.WebSockets
                     previous = guild.Channels.FirstOrDefault(c => c.Id == update.Id);
                     if (previous != null)
                     {
-                        guild.Channels.Remove(previous);
+                        previous.Update(update);
                     }
-
-                    guild.Channels.Add(update);
+                    else
+                    {
+                        guild.Channels.Add(update);
+                    }
                 }
             }
 
