@@ -684,6 +684,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildMembersChunk chunk = payload.EventData.ToObject<GuildMembersChunk>();
             
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMembersChunk)} GUILD_MEMBER_UPDATE: Guild ID: {chunk.GuildId} Nonce: {chunk.Nonce}");
             //Used to load all members in the discord server
             if (chunk.Nonce == "DiscordExtension")
             {
@@ -698,9 +699,10 @@ namespace Oxide.Ext.Discord.WebSockets
                         }
                     }
                 }
+
+                return;
             }
 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMembersChunk)} GUILD_MEMBER_UPDATE: Guild ID: {chunk.GuildId} Nonce: {chunk.Nonce}");
             _client.CallHook("Discord_GuildMembersChunk", chunk);
         }
 
