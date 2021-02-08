@@ -10,30 +10,64 @@ using Time = Oxide.Ext.Discord.Helpers.Time;
 
 namespace Oxide.Ext.Discord.REST
 {
+    /// <summary>
+    /// Represent a Discord API request
+    /// </summary>
     public class Request
     {
+        /// <summary>
+        /// HTTP request method
+        /// </summary>
         public RequestMethod Method { get; }
 
+        /// <summary>
+        /// Route on the API
+        /// </summary>
         public string Route { get; }
 
+        /// <summary>
+        /// Full Request URl to the API
+        /// </summary>
         public string RequestUrl => UrlBase + "/" + ApiVersion + Route;
 
+        /// <summary>
+        /// Header to be added to the request
+        /// </summary>
         public Dictionary<string, string> Headers { get; }
 
+        /// <summary>
+        /// Data to be sent with the request
+        /// </summary>
         public object Data { get; }
 
+        /// <summary>
+        /// Response from the request
+        /// </summary>
         public RestResponse Response { get; private set; }
 
+        /// <summary>
+        /// Callback to call if the request completed successfully
+        /// </summary>
         public Action<RestResponse> Callback { get; }
         
+        /// <summary>
+        /// Callback to call if the request errored with the last error message
+        /// </summary>
         public Action<RestError> OnError { get; }
 
+        /// <summary>
+        /// The DateTime the request was started
+        /// Used for request timeout
+        /// </summary>
         public DateTime? StartTime { get; private set; }
 
+        /// <summary>
+        /// Returns if the request is currently in progress
+        /// </summary>
         public bool InProgress { get; set; }
 
         private Bucket _bucket;
-        private RestError LastError;
+        private RestError _lastError;
 
         private byte _retries;
         
@@ -49,6 +83,16 @@ namespace Oxide.Ext.Discord.REST
             NullValueHandling = NullValueHandling.Ignore
         };
 
+        /// <summary>
+        /// Creates a new request
+        /// </summary>
+        /// <param name="method">HTTP method to call</param>
+        /// <param name="route">Route to call on the API</param>
+        /// <param name="headers">Headers to be added to the request</param>
+        /// <param name="data">Data for the request</param>
+        /// <param name="callback">Callback once the request completes successfully</param>
+        /// <param name="onError">Callback when the request errors</param>
+        /// <param name="logger">Logger for the request</param>
         public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> onError, ILogger logger)
         {
             Method = method;
@@ -60,6 +104,10 @@ namespace Oxide.Ext.Discord.REST
             _logger = logger;
         }
 
+        /// <summary>
+        /// Fires the request off
+        /// </summary>
+        /// <param name="bucket">Bucket the request is in</param>
         public void Fire(Bucket bucket)
         {
             _bucket = bucket;
@@ -100,7 +148,7 @@ namespace Oxide.Ext.Discord.REST
             {
                 using (HttpWebResponse httpResponse = ex.Response as HttpWebResponse)
                 {
-                    LastError = new RestError(ex, req.RequestUri, Method, Data);
+                    _lastError = new RestError(ex, req.RequestUri, Method, Data);
                     if (httpResponse == null)
                     {
                         bucket.ErrorResendDelayUntil = Time.TimeSinceEpoch() + 1;
@@ -110,10 +158,10 @@ namespace Oxide.Ext.Discord.REST
                     else
                     {
                         int statusCode = (int) httpResponse.StatusCode;
-                        LastError.HttpStatusCode = statusCode;
+                        _lastError.HttpStatusCode = statusCode;
                         
                         string message = ParseResponse(ex.Response);
-                        LastError.Message = message;
+                        _lastError.Message = message;
                         
                         bool isRateLimit = statusCode == 429;
                         if (isRateLimit)
@@ -123,7 +171,7 @@ namespace Oxide.Ext.Discord.REST
                         else
                         {
                             DiscordApiError apiError = Response.ParseData<DiscordApiError>();
-                            LastError.DiscordError = apiError;
+                            _lastError.DiscordError = apiError;
                             if (!string.IsNullOrEmpty(apiError.Code))
                             {
                                 _logger.Error($"Discord has returned error Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})\nErrors: {apiError.Errors}");
@@ -145,6 +193,10 @@ namespace Oxide.Ext.Discord.REST
             }
         }
 
+        /// <summary>
+        /// Closes the request and removes it from the bucket
+        /// </summary>
+        /// <param name="remove"></param>
         public void Close(bool remove = true)
         {
             _retries += 1;
@@ -152,7 +204,7 @@ namespace Oxide.Ext.Discord.REST
             {
                 if (_retries >= 3)
                 {
-                    OnError?.Invoke(LastError);
+                    OnError?.Invoke(_lastError);
                 }
                 
                 lock (_bucket)
@@ -167,6 +219,10 @@ namespace Oxide.Ext.Discord.REST
             }
         }
 
+        /// <summary>
+        /// Returns true if the request has timed out
+        /// </summary>
+        /// <returns></returns>
         public bool HasTimedOut()
         {
             if (!InProgress || StartTime == null)

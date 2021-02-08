@@ -9,6 +9,344 @@
             Used to identify which field in a plugin to create a discord client for and set the client to.
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.BotClient">
+            <summary>
+            Represents a bot that is connected to discord
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.ActiveBots">
+            <summary>
+            List of active bots by bot API key
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.SessionId">
+            <summary>
+            The current session ID for the connected bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.Sequence">
+            <summary>
+            The current sequence number for the websocket
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.Initialized">
+            <summary>
+            If the connection is initialized and not disconnected
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.HeartbeatAcknowledged">
+            <summary>
+            Discord Acknowledged our heartbeat successfully 
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.Settings">
+            <summary>
+            The settings for this bot of all the combined clients
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.Servers">
+            <summary>
+            All the servers that this bot is in
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.DirectMessages">
+            <summary>
+            All the direct messages that we have seen
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.Clients">
+            <summary>
+            List of all clients that are using this bot client
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.BotClient.Application">
+            <summary>
+            Application reference for this bot
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.BotClient.Rest">
+            <summary>
+            Rest handler for all discord API calls
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.#ctor(Oxide.Ext.Discord.DiscordSettings)">
+            <summary>
+            Creates a new bot client for the given settings
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.GetOrCreate(Oxide.Ext.Discord.DiscordClient)">
+            <summary>
+            Gets or creates a new bot client for the given discord client
+            </summary>
+            <param name="client">Client to use for creating / loading the bot client</param>
+            <returns>Bot client that is created or already exists</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.ConnectWebSocket">
+            <summary>
+            Connects the websocket to discord. Should only be called if the websocket is disconnected
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.DisconnectWebsocket(System.Boolean,System.Boolean)">
+            <summary>
+            Close the websocket with discord
+            </summary>
+            <param name="attemptReconnect">Should we attempt to reconnect to discord after closing</param>
+            <param name="attemptResume">Should we attempt to resume the previous session</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.ShutdownBot">
+            <summary>
+            Called when bot client is no longer used by any client and can be shutdown.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.AddClient(Oxide.Ext.Discord.DiscordClient)">
+            <summary>
+            Add a client to this bot client
+            </summary>
+            <param name="client">Client to add to the bot</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.RemoveClient(Oxide.Ext.Discord.DiscordClient)">
+            <summary>
+            Remove a client from the bot client
+            If not clients are left bot will shutdown
+            </summary>
+            <param name="client">Client to remove from bot client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.CallHook(System.String,System.Object[])">
+            <summary>
+            Call a hook on all clients using this bot
+            </summary>
+            <param name="hookName">Hook to call</param>
+            <param name="args">Args for the hook</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.SetupHeartbeat(System.Single)">
+            <summary>
+            Setup a heartbeat for this bot with the given interval
+            </summary>
+            <param name="heartbeatInterval"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.DestroyHeartbeat">
+            <summary>
+            Destroy the heartbeat on this bot
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.SendHeartbeat">
+            <summary>
+            Sends a heartbeat to discord.
+            If the previous heartbeat wasn't acknowledged then we will attempt to reconnect
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.Identify">
+            <summary>
+            Used to Identify the bot with discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.Resume">
+            <summary>
+            Used to resume the current session with discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.RequestGuildMembers(Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequest)">
+            <summary>
+            Used to request guild members from discord for a specific guild
+            </summary>
+            <param name="request">Request for guild members</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.UpdateVoiceState(Oxide.Ext.Discord.Entities.Gatway.Commands.VoiceStateUpdate)">
+            <summary>
+            Used to update the voice state for the bot
+            </summary>
+            <param name="voiceState"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.UpdateStatus(Oxide.Ext.Discord.Entities.Gatway.Commands.StatusUpdate)">
+            <summary>
+            Used to update the bots status in discord
+            </summary>
+            <param name="statusUpdate"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.GetGuild(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns a guild for the specific ID
+            </summary>
+            <param name="id">ID of the guild</param>
+            <returns>Guild with the specified ID</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.AddGuild(Oxide.Ext.Discord.Entities.Guilds.Guild)">
+            <summary>
+            Adds a guild to the list of servers a bot is in
+            </summary>
+            <param name="guild"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.AddGuildOrUpdate(Oxide.Ext.Discord.Entities.Guilds.Guild)">
+            <summary>
+            Adds a guild if it does not exist or updates the guild with
+            </summary>
+            <param name="guild"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.RemoveGuild(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Removes guild from the list of servers a bot is in
+            </summary>
+            <param name="guildId">Guild to remove from bot</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.DiscordClient">
+            <summary>
+            Represents the object a plugin uses to connects to discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.DiscordClient.Owner">
+            <summary>
+            Which plugin is the owner of this client
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.DiscordClient.RegisteredForHooks">
+            <summary>
+            List of plugins that are registered to receive hook calls for this client
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.DiscordClient.Bot">
+            <summary>
+            The bot client that is unique to the Token used
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.DiscordClient.Settings">
+            <summary>
+            Settings used to connect to discord and configure the extension
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.#ctor(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Constructor for a discord client
+            </summary>
+            <param name="plugin">Plugin that will own this discord client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.Connect(System.String,Oxide.Ext.Discord.Entities.Gatway.BotIntents)">
+            <summary>
+            Starts a connection to discord with the given apiKey and intents
+            </summary>
+            <param name="apiKey">API key for the connecting bot</param>
+            <param name="intents">Intents the bot needs in order to function</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.Connect(Oxide.Ext.Discord.DiscordSettings)">
+            <summary>
+            Starts a connection to discord with the given discord settings
+            </summary>
+            <param name="settings">Discord connection settings</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.Disconnect">
+            <summary>
+            Disconnects this client from discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.RegisterPluginForHooks(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Registers a plugin to receive hook calls for this client
+            </summary>
+            <param name="plugin"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.CallHook(System.String,System.Object[])">
+            <summary>
+            Call a hook for all plugins registered to receive hook calls for this client
+            </summary>
+            <param name="hookName"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.GetClient(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Gets the client for the given plugin
+            </summary>
+            <param name="plugin">Plugin to get client for</param>
+            <returns>Discord client for the plugin</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.GetClient(System.String)">
+            <summary>
+            Gets the client for the given plugin name
+            </summary>
+            <param name="pluginName">Plugin Name to get client for</param>
+            <returns>Discord client for the plugin name</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.DiscordExtension">
+            <summary>
+            Discord Extension that is loaded by Oxide
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.DiscordExtension.TestVersion">
+            <summary>
+            Test version information if using test version
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.DiscordExtension.ExtensionVersion">
+            <summary>
+            Version number of the extension
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.DiscordExtension.GlobalLogger">
+            <summary>
+            Global logger for areas that aren't part of a client connection
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordExtension.#ctor(Oxide.Core.Extensions.ExtensionManager)">
+            <summary>
+            Constructor for the extension
+            </summary>
+            <param name="manager">Oxide extension manager</param>
+        </member>
+        <member name="P:Oxide.Ext.Discord.DiscordExtension.Name">
+            <summary>
+            Name of the extension
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.DiscordExtension.Author">
+            <summary>
+            Authors for the extension
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.DiscordExtension.Version">
+            <summary>
+            Version number used by oxide
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.DiscordExtension.GetExtensionVersion">
+            <summary>
+            Gets full extension version including test information
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordExtension.OnModLoad">
+            <summary>
+            Called when mod is loaded
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordExtension.OnShutdown">
+            <summary>
+            Called when server is shutdown
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.DiscordSettings">
+            <summary>
+            Represents settings used to connect to discord
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.DiscordSettings.ApiToken">
+            <summary>
+            API token for the bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.DiscordSettings.LogLevel">
+            <summary>
+            Discord Extension Logging Level.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.DiscordSettings.Intents">
+            <summary>
+            Intents that your bot needs to work
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.DiscordSettings.CloseOnUnload">
+            <summary>
+            If the client should be shutdown on plugin unload.
+            Recommend not changing this unless you know what you're doing
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.Activity">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object">Activity Structure</a>
@@ -263,6 +601,416 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Activities.ActivityType.Competing">
             Competing in {name}
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog.Webhooks">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog.Users">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog.AuditLogEntries">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog.Integrations">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog.GetGuildAuditLog(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,System.Action{Oxide.Ext.Discord.Entities.AuditLogs.AuditLog})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog.GetGuildAuditLog(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.AuditLogs.AuditLog},System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogChange">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogChange.NewValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogChange.OldValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogChange.Key">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogEntry">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogEntry.TargetId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogEntry.Changes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogEntry.UserId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogEntry.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogEntry.ActionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogEntry.Options">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogEntry.Reason">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeBase.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeBase.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeChannel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeChannel.Position">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeChannel.Topic">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeChannel.Bitrate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeChannel.PermissionOverwrites">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeChannel.Nsfw">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeChannel.ApplicationId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeChannel.RateLimitPerUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.IconHash">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.SplashHash">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.OwnerId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.Region">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.AfkChannelId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.AfkTimeout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.MfaLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.VerificationLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.ExplicitContentFilter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.DefaultMessageNotifications">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.VanityUrlCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.Add">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.Remove">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.PruneDeleteDays">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.WidgetEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.WidgetChannelId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeGuild.SystemChannelId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeIntegration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeIntegration.EnableEmoticons">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeIntegration.ExpireBehavior">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeIntegration.ExpireGracePeriod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeInvite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeInvite.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeInvite.ChannelId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeInvite.InviterId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeInvite.MaxUses">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeInvite.Uses">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeInvite.MaxAge">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeInvite.Temporary">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeRole">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeRole.Permissions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeRole.Color">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeRole.Hoist">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeRole.Mentionable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeRole.Allow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeRole.Deny">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeUser.Deaf">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeUser.Mute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeUser.Nick">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.Change.AuditLogChangeUser.AvatarHash">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo.DeleteMemberDays">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo.MembersRemoved">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo.ChannelId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo.MessageId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo.Count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo.RoleName">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Channel">
             <summary>
@@ -564,6 +1312,12 @@
             <param name="callback">callback once the action is completed</param>
             <param name="onError">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params">Guild Channel Create Structure</a>
@@ -681,6 +1435,12 @@
             The name of the channel
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.ChannelMention.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelType">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-channel-types">Types of Channels</a>
@@ -765,6 +1525,12 @@
             <summary>
             Permission Type <see cref="T:Oxide.Ext.Discord.Entities.Channels.PermissionType"/>
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Overwrite.GetEntityId">
+            <summary>
+            Returns the entity ID for the entity
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.PermissionFlags">
             <summary>
@@ -1003,6 +1769,12 @@
             <summary>
             Url to the emoji image
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Emojis.Emoji.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Emojis.EmojiCreate">
             <summary>
@@ -3791,6 +4563,12 @@
             Whether the user has not yet passed the guild's Membership Screening requirements
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildMember.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMemberAdd">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#add-guild-member-json-params">Guild Member Add</a>
@@ -4519,6 +5297,12 @@
             <summary>
             Width of file (if image)
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Attachment.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed">
             <summary>
@@ -5307,6 +6091,12 @@
             <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType"/>
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageSticker.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types">Message Sticker Format Types</a>
@@ -5437,6 +6227,12 @@
             Emoji information
             <see cref="P:Oxide.Ext.Discord.Entities.Messages.Reaction.Emoji"/>
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Reaction.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Roles.DiscordColor">
             <summary>
@@ -5653,6 +6449,12 @@
             <summary>
             The tags this role has
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Roles.Role.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Roles.RoleTags">
             <summary>
@@ -6111,7 +6913,7 @@
             <param name="callback">Callback with the list of guilds</param>
             <param name="onError">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.LeaveGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,System.Action)">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.LeaveGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
             Leave the guild that the currently logged in user is in
             See <a href="https://discord.com/developers/docs/resources/user#leave-guild">Leave Guild</a>
@@ -6168,6 +6970,53 @@
             <param name="client">Client to use</param>
             <param name="callback">Callback with the list of connections</param>
             <param name="onError">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Channel,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Adds a recipient to a Group DM using their access token
+            See <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient">Group DM Add Recipient</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="channel">Channel to add recipient to</param>
+            <param name="accessToken">Users access token</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Adds a recipient to a Group DM using their access token
+            See <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient">Group DM Add Recipient</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="channelId">Channel ID to add user to</param>
+            <param name="accessToken">Users access token</param>
+            <param name="nick">User nickname</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmRemoveRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Channel,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Removes a recipient from a Group DM
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="channel">Channel to remove recipient from</param>
+            <param name="callback">callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmRemoveRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Removes a recipient from a Group DM
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="channelId">Channel ID to remove recipient from</param>
+            <param name="callback">callback once the action is completed</param>
+            <param name="onError">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.NickId">
             <summary>
@@ -6417,6 +7266,12 @@
             <summary>
             Whether this user is muted by the current user
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Voice.VoiceState.GetEntityId">
+            <summary>
+            Returns the ID for this entity
+            </summary>
+            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.Webhook">
             <summary>
@@ -6701,6 +7556,34 @@
             Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.EnumExt">
+            <summary>
+            Extensions for enums
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.EnumExt.TryParse``1(System.String,``0@)">
+            <summary>
+            Try to parse the enum value from string value
+            </summary>
+            <param name="value">string to parse</param>
+            <param name="result">Resulting enum value</param>
+            <typeparam name="TEnum">Enum Type</typeparam>
+            <returns>True if successfully parsed; false otherwise</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.HashExt">
+            <summary>
+            Hash extensions
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.HashExt.RemoveAll``2(Oxide.Plugins.Hash{``0,``1},System.Func{``1,System.Boolean})">
+            <summary>
+            Remove all records from the hash with the given predicate fulter
+            </summary>
+            <param name="hash">Hash to have data removed from</param>
+            <param name="predicate">Filter of which values to remove</param>
+            <typeparam name="TKey">Key type of the hash</typeparam>
+            <typeparam name="TValue">Value type of the hash</typeparam>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn">
             <summary>
             Represents Discord <a href="https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints">CDN Endpoints</a>
@@ -6856,6 +7739,68 @@
             Return image as GIF
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.Converters.HashListConverter`1">
+            <summary>
+            Converts to and from a list in JSON to a hash
+            </summary>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.HashListConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Write a hash as a list in JSOn
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.HashListConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Read an array in JSON as a hash
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.HashListConverter`1.CanConvert(System.Type)">
+            <summary>
+            Can we convert the given type
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.Converters.SnowflakeConverter">
+            <summary>
+            Converts a snowflake to and from it's JSON string value
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.SnowflakeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON string and converts it to a snowflake
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+            <exception cref="T:Newtonsoft.Json.JsonException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.SnowflakeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes a snowflake as a JSON string
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.SnowflakeConverter.CanConvert(System.Type)">
+            <summary>
+            Returns if we can convert this type
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Formatting">
             <summary>
             Represents <a href="https://discord.com/developers/docs/reference#message-formatting-formats">Message text formatting options</a>
@@ -7008,6 +7953,47 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.Time">
+            <summary>
+            Helper methods relating to time
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.Time.DiscordEpoch">
+            <summary>
+            DateTimeOffset since discord Epoch
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.Time.Epoch">
+            <summary>
+            DateTime since linux epoch
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Time.TimeSinceEpoch">
+            <summary>
+            Gets how many seconds since the linux epoch
+            </summary>
+            <returns>Seconds since linux epoch</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Time.TimeSinceEpoch(System.DateTime)">
+            <summary>
+            Gets the time since the linux epoch and the given date time
+            </summary>
+            <param name="time">DateTime to get total second for</param>
+            <returns>Total seconds since linux epoch for date time</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Time.ToDateTime(System.Int32)">
+            <summary>
+            Converts the seconds since linux epoch to a DateTime
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Time.ToUnixTimeStamp(System.DateTime)">
+            <summary>
+            Gets the time since the linux epoch and the given date time
+            </summary>
+            <param name="date">DateTime to get total second for</param>
+            <returns>Total seconds since linux epoch for date time</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Validation">
             <summary>
             Provides helper methods for validation
@@ -7019,6 +8005,774 @@
             </summary>
             <param name="emoji"></param>
             <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Logging.ILogger">
+            <summary>
+            Represents an interface for a logger
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Verbose(System.String)">
+            <summary>
+            Log a verbose message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Debug(System.String)">
+            <summary>
+            Log a Debug message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Info(System.String)">
+            <summary>
+            Log a Info message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Warning(System.String)">
+            <summary>
+            Log a Warning message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Error(System.String)">
+            <summary>
+            Log a Error message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Exception(System.String,System.Exception)">
+            <summary>
+            Log a Exception message
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="ex">Exception to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.UpdateLogLevel(Oxide.Ext.Discord.Logging.LogLevel)">
+            <summary>
+            Updates the log level for the current logger
+            </summary>
+            <param name="level">Level to update the logger to</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Logging.Logger">
+            <summary>
+            Represents a discord extension logger
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.#ctor(Oxide.Ext.Discord.Logging.LogLevel)">
+            <summary>
+            Creates a new logger with the given log level
+            </summary>
+            <param name="logLevel">Log level of the logger</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.Verbose(System.String)">
+            <summary>
+            Log a verbose message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.Debug(System.String)">
+            <summary>
+            Log a Debug message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.Info(System.String)">
+            <summary>
+            Log a Info message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.Warning(System.String)">
+            <summary>
+            Log a Warning message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.Error(System.String)">
+            <summary>
+            Log a Error message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.Exception(System.String,System.Exception)">
+            <summary>
+            Log a Exception message
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="ex">Exception to log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.UpdateLogLevel(Oxide.Ext.Discord.Logging.LogLevel)">
+            <summary>
+            Updates the log level for the current logger
+            </summary>
+            <param name="level">Level to update the logger to</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Logging.LogLevel">
+            <summary>
+            Represents the log level for a logger
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Verbose">
+            <summary>
+            Verbose log level displays all message
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Debug">
+            <summary>
+            Debug log level display all messages up to and include Debug
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Info">
+            <summary>
+            Info log level display all messages up to and include Info
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Warning">
+            <summary>
+            Warning log level display all messages up to and include Warning
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Error">
+            <summary>
+            Error log level display all messages up to and include Error
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Exception">
+            <summary>
+            Exception log level display all messages up to and include Exception
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Off">
+            <summary>
+            Disables all logging
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.REST.BotGlobalRateLimit">
+            <summary>
+            Represents a global rate limit handler for a bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.BotGlobalRateLimit.Global">
+            <summary>
+            How many requests have been made globally for the bot since the last 60 second period wiped it
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.BotGlobalRateLimit.#ctor">
+            <summary>
+            Creates a new global rate limit for a bot
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.BotGlobalRateLimit.FiredRequest">
+            <summary>
+            Called when an API request is fired
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.BotGlobalRateLimit.ReachedRateLimit(System.Double)">
+            <summary>
+            Called if we receive a header notifying us of hitting the rate limit
+            </summary>
+            <param name="retryAfter">How long until we should retry API request again</param>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.BotGlobalRateLimit.HasReachedRateLimit">
+            <summary>
+            Returns true if we have reached the global rate limit 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.BotGlobalRateLimit.NextBucketReset">
+            <summary>
+            Returns how long until the current rate limit period will expire
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.BotGlobalRateLimit.Shutdown">
+            <summary>
+            Called when a bot is shutting down
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.REST.Bucket">
+            <summary>
+            Represents a discord API buck for a group of requests
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.Bucket.BucketId">
+            <summary>
+            The ID of this bucket which is based on the route
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.Bucket.RateLimit">
+            <summary>
+            The number of requests that can be made
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.Bucket.RateLimitRemaining">
+            <summary>
+            How many requests are remaining before hitting the rate limit for the bucket
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.Bucket.RateLimitReset">
+            <summary>
+            How long until the rate limit resets
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.Bucket.ErrorResendDelayUntil">
+            <summary>
+            How long to wait before retrying request since there was a web exception
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.Bucket.Handler">
+            <summary>
+            Rest Handler for the bucker
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.Bucket.#ctor(Oxide.Ext.Discord.REST.RestHandler,System.String,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a new bucket for the given rest handler and bucket ID
+            </summary>
+            <param name="handler">Rest Handler for the bucket</param>
+            <param name="bucketId">ID of the bucket</param>
+            <param name="logger">Logger for the client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.Bucket.Close">
+            <summary>
+            Close the bucket and abort the thread
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.Bucket.ShouldCleanup">
+            <summary>
+            Returns if this bucket is ready to be cleaned up.
+            Should be cleaned up if the thread is not null and the RateLimitReset has expired
+            </summary>
+            <returns>True if we should cleanup the bucket; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.Bucket.Queue(Oxide.Ext.Discord.REST.Request)">
+            <summary>
+            Queues a new request for the buck
+            </summary>
+            <param name="request">Request to be queued</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.REST.DiscordApiError">
+            <summary>
+            Represents and error from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.DiscordApiError.Code">
+            <summary>
+            Error code from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.DiscordApiError.Message">
+            <summary>
+            Error message from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.DiscordApiError.Errors">
+            <summary>
+            An JObject containing the errors that occured
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.REST.RateLimit">
+            <summary>
+            Represents RateLimit entity when the rate limit is hit
+            <a href="https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure">https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RateLimit.Message">
+            <summary>
+            A message saying you are being rate limited.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RateLimit.RetryAfter">
+            <summary>
+            The number of seconds to wait before submitting another request.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RateLimit.Global">
+            <summary>
+            A value indicating if you are being globally rate limited or not
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.REST.Request">
+            <summary>
+            Represent a Discord API request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.Method">
+            <summary>
+            HTTP request method
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.Route">
+            <summary>
+            Route on the API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.RequestUrl">
+            <summary>
+            Full Request URl to the API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.Headers">
+            <summary>
+            Header to be added to the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.Data">
+            <summary>
+            Data to be sent with the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.Response">
+            <summary>
+            Response from the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.Callback">
+            <summary>
+            Callback to call if the request completed successfully
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.OnError">
+            <summary>
+            Callback to call if the request errored with the last error message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.StartTime">
+            <summary>
+            The DateTime the request was started
+            Used for request timeout
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.Request.InProgress">
+            <summary>
+            Returns if the request is currently in progress
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.Request.#ctor(Oxide.Ext.Discord.REST.RequestMethod,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object,System.Action{Oxide.Ext.Discord.REST.RestResponse},System.Action{Oxide.Ext.Discord.REST.RestError},Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a new request
+            </summary>
+            <param name="method">HTTP method to call</param>
+            <param name="route">Route to call on the API</param>
+            <param name="headers">Headers to be added to the request</param>
+            <param name="data">Data for the request</param>
+            <param name="callback">Callback once the request completes successfully</param>
+            <param name="onError">Callback when the request errors</param>
+            <param name="logger">Logger for the request</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.Request.Fire(Oxide.Ext.Discord.REST.Bucket)">
+            <summary>
+            Fires the request off
+            </summary>
+            <param name="bucket">Bucket the request is in</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.Request.Close(System.Boolean)">
+            <summary>
+            Closes the request and removes it from the bucket
+            </summary>
+            <param name="remove"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.Request.HasTimedOut">
+            <summary>
+            Returns true if the request has timed out
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.REST.RequestMethod">
+            <summary>
+            HTTP request method
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.GET">
+            <summary>
+            Request Method Get
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.POST">
+            <summary>
+            Request Method POST
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.PUT">
+            <summary>
+            Request Method PUT
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.PATCH">
+            <summary>
+            Request Method PATCH
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.DELETE">
+            <summary>
+            Request Method DELETE
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.REST.RestError">
+            <summary>
+            Error object that is returned to the caller when a request fails
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RestError.HttpStatusCode">
+            <summary>
+            HTTP Status code
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RestError.RequestMethod">
+            <summary>
+            The request method that was called
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RestError.Exception">
+            <summary>
+            The web exception from the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RestError.Url">
+            <summary>
+            The URI that was called
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RestError.Data">
+            <summary>
+            What data was passed to the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RestError.DiscordError">
+            <summary>
+            If discord returned an error this will contain that error message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RestError.Message">
+            <summary>
+            Full string response if we received one
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestError.#ctor(System.Net.WebException,System.Uri,Oxide.Ext.Discord.REST.RequestMethod,System.Object)">
+            <summary>
+            Creates a new rest error
+            </summary>
+            <param name="exception">The web exception we received</param>
+            <param name="url">Url that was called</param>
+            <param name="requestMethod">Request method that was used</param>
+            <param name="data">Data passed to the request</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.REST.RestHandler">
+            <summary>
+            Represents a REST handler for a bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.RestHandler.RateLimit">
+            <summary>
+            Global Rate Limit for the bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.REST.RestHandler.Buckets">
+            <summary>
+            The request buckets for the bot
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a new REST handler for a bot client
+            </summary>
+            <param name="client">Client the request is for</param>
+            <param name="logger">Logger from the client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestHandler.DoRequest(System.String,Oxide.Ext.Discord.REST.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Creates a new request and queues it to be ran
+            </summary>
+            <param name="url">URL of the request</param>
+            <param name="method">HTTP method of the request</param>
+            <param name="data">Data to be sent with the request</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Error callback if an error occurs</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestHandler.DoRequest``1(System.String,Oxide.Ext.Discord.REST.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Creates a new request and queues it to be ran
+            </summary>
+            <param name="url">URL of the request</param>
+            <param name="method">HTTP method of the request</param>
+            <param name="data">Data to be sent with the request</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Error callback if an error occurs</param>
+            <typeparam name="T">The type that is expected to be returned</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestHandler.CreateRequest(Oxide.Ext.Discord.REST.RequestMethod,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object,System.Action{Oxide.Ext.Discord.REST.RestResponse},System.Action{Oxide.Ext.Discord.REST.RestError})">
+            <summary>
+            Creates a new request and queues it to be ran
+            </summary>
+            <param name="url">URL of the request</param>
+            <param name="method">HTTP method of the request</param>
+            <param name="headers">Headers to be sent in the request</param>
+            <param name="data">Data to be sent with the request</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="onError">Error callback if an error occurs</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestHandler.CleanupExpired">
+            <summary>
+            Removed buckets that are old and not being used
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestHandler.QueueRequest(Oxide.Ext.Discord.REST.Request,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Queues the request
+            </summary>
+            <param name="request">Request to queue</param>
+            <param name="logger">Logger to use</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestHandler.Shutdown">
+            <summary>
+            Shutdown the REST handler
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.REST.RestResponse">
+            <summary>
+            Represents a REST response from discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.REST.RestResponse.Data">
+            <summary>
+            Data discord sent us
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestResponse.#ctor(System.String)">
+            <summary>
+            Create new REST response with the given data
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.REST.RestResponse.ParseData``1">
+            <summary>
+            Parse the data to it's given object
+            </summary>
+            <typeparam name="T">Type to be parsed as</typeparam>
+            <returns>Data string parsed to JSON</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.WebSockets.Socket">
+            <summary>
+            Represents a websocket that connects to discord
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.Socket.RequestReconnect">
+            <summary>
+            If we should attempt to reconnect to discord on disconnect
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.Socket.ShouldAttemptResume">
+            <summary>
+            If we should attempt to resume our previous session after connecting
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.Socket.ReconnectTimer">
+            <summary>
+            Timer to use when attempting to reconnect to discord due to an error
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Socket used by the BotClient
+            </summary>
+            <param name="client">Client using the socket</param>
+            <param name="logger">Logger for the bot client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Connect">
+            <summary>
+            Connect tot the websocket
+            </summary>
+            <exception cref="T:System.Exception">Thrown if the socket still exists. Must call disconnect before trying to connect</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Disconnect(System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Disconnects the websocket from discord
+            </summary>
+            <param name="attemptReconnect">Should we attempt to reconnect to discord after disconnecting</param>
+            <param name="shouldResume">Should we attempt to resume our previous session</param>
+            <param name="requested">If discord requested that we reconnect to discord</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Shutdown">
+            <summary>
+            Shutdowns the websocket completely. Used when bot is being shutdown
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.DisposeSocket">
+            <summary>
+            Disposes of the previous websocket
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Send(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object,System.Action{System.Boolean})">
+            <summary>
+            Send a command to discord over the websocket
+            </summary>
+            <param name="opCode">Command code to send</param>
+            <param name="data">Data to send</param>
+            <param name="completed">Action once the action is completed and if it was successful</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsAlive">
+            <summary>
+            Returns if the websocket is in the open state
+            </summary>
+            <returns>Returns if the websocket is in open state</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsConnecting">
+            <summary>
+            Returns if the websocket is in the connecting state
+            </summary>
+            <returns>Returns if the websocket is in connecting state</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsClosingOrClosed">
+            <summary>
+            Returns if the websocket is null or is currently closing / closed
+            </summary>
+            <returns>Returns if the websocket is null or is currently closing / closed</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsReconnectTimerActive">
+            <summary>
+            Returns if there is a reconnect timer active for the websocket
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.StartReconnectTimer(System.Single,System.Action)">
+            <summary>
+            Starts a reconnect timer to reconnect to perform the reconnect action after the timer has elapsed
+            </summary>
+            <param name="seconds">How many seconds until we fire the action</param>
+            <param name="callback">Callback to run once the timer is completed</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.WebSockets.SocketCloseCode">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes">Socket Close Event Codes</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.UnknownError">
+            <summary>
+            We're not sure what went wrong. Try reconnecting?
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.UnknownOpcode">
+            <summary>
+            You sent an invalid Gateway opcode or an invalid payload for an opcode. Don't do that!
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.DecodeError">
+            <summary>
+            You sent an invalid payload to us. Don't do that!
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.NotAuthenticated">
+            <summary>
+            You sent us a payload prior to identifying.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.AuthenticationFailed">
+            <summary>
+            The account token sent with your identify payload is incorrect.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.AlreadyAuthenticated">
+            <summary>
+            You sent more than one identify payload. Don't do that!
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.InvalidSequence">
+            <summary>
+            The sequence sent when resuming the session was invalid. Reconnect and start a new session.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.RateLimited">
+            <summary>
+            Woah nelly! You're sending payloads to us too quickly. Slow it down! You will be disconnected on receiving this.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.SessionTimedOut">
+            <summary>
+            Your session timed out. Reconnect and start a new one.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.InvalidShard">
+            <summary>
+            You sent us an invalid shard when identifying.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.ShardingRequired">
+            <summary>
+            The session would have handled too many guilds - you are required to shard your connection in order to connect.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.InvalidApiVersion">
+            <summary>
+            You sent an invalid version for the gateway.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.InvalidIntents">
+            <summary>
+            You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated the bitwise value.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.DisallowedIntent">
+            <summary>
+            You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not enabled or are not whitelisted for.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.UnknownCloseCode">
+            <summary>
+            Used when a code is sent that we don't have yet.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.WebSockets.SocketListener">
+            <summary>
+            Represents a listens for socket events
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener.Retries">
+            <summary>
+            How many times we have tried to reconnect to discord unsuccessfully
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a new socket listener
+            </summary>
+            <param name="client">Client this listener is for</param>
+            <param name="socket">Socket this listener is for</param>
+            <param name="logger">Logger for the client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SocketOpened(System.Object,System.EventArgs)">
+            <summary>
+            Called when a socket is open
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SocketClosed(System.Object,WebSocketSharp.CloseEventArgs)">
+            <summary>
+            Called when a socket is closed
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.HandleDiscordClosedSocket(System.Int32,System.String)">
+            <summary>
+            Parse out the closing reason if discord closed the socket
+            </summary>
+            <param name="code">Socket close code</param>
+            <param name="reason">Socket close reason</param>
+            <returns>True if discord closed the socket with one of it's close codes</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SocketErrored(System.Object,WebSocketSharp.ErrorEventArgs)">
+            <summary>
+            Called when an error occurs on a socket
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SocketMessage(System.Object,WebSocketSharp.MessageEventArgs)">
+            <summary>
+            Called when a socket receives a message
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.EventPayload)">
             <summary>

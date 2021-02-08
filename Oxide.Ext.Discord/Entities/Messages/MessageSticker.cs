@@ -58,6 +58,10 @@ namespace Oxide.Ext.Discord.Entities.Messages
         [JsonProperty("format_type")]
         public MessageStickerFormatType FormatType { get; set; }
 
+        /// <summary>
+        /// Returns the ID for this entity
+        /// </summary>
+        /// <returns>ID for this entity</returns>
         public Snowflake GetEntityId()
         {
             return Id;

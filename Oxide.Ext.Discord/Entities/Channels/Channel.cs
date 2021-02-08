@@ -475,6 +475,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
             ParentId = channel.ParentId;
         }
 
+        /// <summary>
+        /// Returns the ID for this entity
+        /// </summary>
+        /// <returns>ID for this entity</returns>
         public Snowflake GetEntityId()
         {
             return Id;

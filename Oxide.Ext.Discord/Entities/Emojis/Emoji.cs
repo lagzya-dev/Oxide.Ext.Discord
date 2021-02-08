@@ -52,6 +52,10 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         /// </summary>
         public string Url => DiscordCdn.GetCustomEmojiUrl(Id, Animated.HasValue && Animated.Value ? ImageFormat.Gif : ImageFormat.Png);
 
+        /// <summary>
+        /// Returns the ID for this entity
+        /// </summary>
+        /// <returns>ID for this entity</returns>
         public Snowflake GetEntityId()
         {
             return Id;

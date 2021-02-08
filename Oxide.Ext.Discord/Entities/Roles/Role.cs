@@ -84,6 +84,10 @@ namespace Oxide.Ext.Discord.Entities.Roles
             }
         }
         
+        /// <summary>
+        /// Returns the ID for this entity
+        /// </summary>
+        /// <returns>ID for this entity</returns>
         public Snowflake GetEntityId()
         {
             return Id;

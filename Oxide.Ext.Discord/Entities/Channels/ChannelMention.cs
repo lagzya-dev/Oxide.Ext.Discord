@@ -34,6 +34,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Returns the ID for this entity
+        /// </summary>
+        /// <returns>ID for this entity</returns>
         public Snowflake GetEntityId()
         {
             return Id;

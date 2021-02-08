@@ -29,6 +29,10 @@ namespace Oxide.Ext.Discord.Entities.Messages
         [JsonProperty("emoji")]
         public Emoji Emoji { get; set; }
 
+        /// <summary>
+        /// Returns the ID for this entity
+        /// </summary>
+        /// <returns>ID for this entity</returns>
         public Snowflake GetEntityId()
         {
             return Emoji.GetEntityId();

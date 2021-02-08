@@ -11,22 +11,49 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord
 {
+    /// <summary>
+    /// Represents the object a plugin uses to connects to discord
+    /// </summary>
     public class DiscordClient
     {
         internal static Hash<string, DiscordClient> Clients { get; } = new Hash<string, DiscordClient>();
         
+        /// <summary>
+        /// Which plugin is the owner of this client
+        /// </summary>
         public Plugin Owner { get; }
+        
+        /// <summary>
+        /// List of plugins that are registered to receive hook calls for this client
+        /// </summary>
         public List<Plugin> RegisteredForHooks { get; } = new List<Plugin>();
+        
+        /// <summary>
+        /// The bot client that is unique to the Token used
+        /// </summary>
         public BotClient Bot { get; private set; }
-        public DiscordSettings Settings { get; private set; } = new DiscordSettings();
+        
+        /// <summary>
+        /// Settings used to connect to discord and configure the extension
+        /// </summary>
+        public DiscordSettings Settings { get; private set; }
         
         internal ILogger Logger;
 
+        /// <summary>
+        /// Constructor for a discord client
+        /// </summary>
+        /// <param name="plugin">Plugin that will own this discord client</param>
         public DiscordClient(Plugin plugin)
         {
             Owner = plugin;
         }
         
+        /// <summary>
+        /// Starts a connection to discord with the given apiKey and intents
+        /// </summary>
+        /// <param name="apiKey">API key for the connecting bot</param>
+        /// <param name="intents">Intents the bot needs in order to function</param>
         public void Connect(string apiKey, BotIntents intents)
         {
             DiscordSettings settings = new DiscordSettings
@@ -39,6 +66,10 @@ namespace Oxide.Ext.Discord
             Connect(settings);
         }
         
+        /// <summary>
+        /// Starts a connection to discord with the given discord settings
+        /// </summary>
+        /// <param name="settings">Discord connection settings</param>
         public void Connect(DiscordSettings settings)
         {
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
@@ -63,23 +94,30 @@ namespace Oxide.Ext.Discord
             Interface.Call("Discord_ClientConnect", Owner, this);
         }
         
+        /// <summary>
+        /// Disconnects this client from discord
+        /// </summary>
         public void Disconnect()
         {
             Interface.Call("Discord_ClientDisconnect", Owner, this);
             Bot?.RemoveClient(this);
         }
 
+        /// <summary>
+        /// Registers a plugin to receive hook calls for this client
+        /// </summary>
+        /// <param name="plugin"></param>
         public void RegisterPluginForHooks(Plugin plugin)
         {
             RegisteredForHooks.RemoveAll(p => p.Name == plugin.Name);
             RegisteredForHooks.Add(plugin);
         }
 
-        public void CloseClient()
-        {
-            Bot.RemoveClient(this);
-        }
-
+        /// <summary>
+        /// Call a hook for all plugins registered to receive hook calls for this client
+        /// </summary>
+        /// <param name="hookName"></param>
+        /// <param name="args"></param>
         public void CallHook(string hookName, params object[] args)
         {
             //Run from next tick so we can be sure it's ran on the main thread.
@@ -93,8 +131,18 @@ namespace Oxide.Ext.Discord
         }
 
         #region Plugin Handling
+        /// <summary>
+        /// Gets the client for the given plugin
+        /// </summary>
+        /// <param name="plugin">Plugin to get client for</param>
+        /// <returns>Discord client for the plugin</returns>
         public static DiscordClient GetClient(Plugin plugin) => GetClient(plugin?.Name);
 
+        /// <summary>
+        /// Gets the client for the given plugin name
+        /// </summary>
+        /// <param name="pluginName">Plugin Name to get client for</param>
+        /// <returns>Discord client for the plugin name</returns>
         public static DiscordClient GetClient(string pluginName)
         {
             return Clients[pluginName];

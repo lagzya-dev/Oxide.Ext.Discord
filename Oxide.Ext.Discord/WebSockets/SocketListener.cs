@@ -17,9 +17,15 @@ using WebSocketSharp;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
+    /// <summary>
+    /// Represents a listens for socket events
+    /// </summary>
     public class SocketListener
     {
-        internal int Retries;
+        /// <summary>
+        /// How many times we have tried to reconnect to discord unsuccessfully
+        /// </summary>
+        private int Retries;
         
         private readonly BotClient _client;
 
@@ -27,6 +33,12 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private readonly ILogger _logger;
 
+        /// <summary>
+        /// Creates a new socket listener
+        /// </summary>
+        /// <param name="client">Client this listener is for</param>
+        /// <param name="socket">Socket this listener is for</param>
+        /// <param name="logger">Logger for the client</param>
         public SocketListener(BotClient client, Socket socket, ILogger logger)
         {
             _client = client;
@@ -34,6 +46,11 @@ namespace Oxide.Ext.Discord.WebSockets
             _logger = logger;
         }
 
+        /// <summary>
+        /// Called when a socket is open
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void SocketOpened(object sender, EventArgs e)
         {
             _logger.Warning("Discord socket opened!");
@@ -41,6 +58,11 @@ namespace Oxide.Ext.Discord.WebSockets
             Retries = 0;
         }
 
+        /// <summary>
+        /// Called when a socket is closed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void SocketClosed(object sender, CloseEventArgs e)
         {
             _logger.Debug($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
@@ -85,6 +107,12 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
 
+        /// <summary>
+        /// Parse out the closing reason if discord closed the socket
+        /// </summary>
+        /// <param name="code">Socket close code</param>
+        /// <param name="reason">Socket close reason</param>
+        /// <returns>True if discord closed the socket with one of it's close codes</returns>
         private bool HandleDiscordClosedSocket(int code, string reason)
         {
             if (!code.ToString().TryParse(out SocketCloseCode closeCode))
@@ -184,6 +212,11 @@ namespace Oxide.Ext.Discord.WebSockets
             return true;
         }
 
+        /// <summary>
+        /// Called when an error occurs on a socket
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void SocketErrored(object sender, ErrorEventArgs e)
         {
             _logger.Exception("An error has occured in the websocket", e.Exception);
@@ -193,6 +226,11 @@ namespace Oxide.Ext.Discord.WebSockets
             _webSocket.Disconnect(true, false);
         }
 
+        /// <summary>
+        /// Called when a socket receives a message
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void SocketMessage(object sender, MessageEventArgs e)
         {
             EventPayload payload = JsonConvert.DeserializeObject<EventPayload>(e.Data);

@@ -33,6 +33,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
         [JsonProperty("type")]
         public PermissionType Type { get; set; }
 
+        /// <summary>
+        /// Returns the entity ID for the entity
+        /// </summary>
+        /// <returns></returns>
         public Snowflake GetEntityId()
         {
             return Id;

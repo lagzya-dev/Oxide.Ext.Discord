@@ -7,14 +7,29 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.REST
 {
+    /// <summary>
+    /// Represents a REST handler for a bot
+    /// </summary>
     public class RestHandler
     {
+        /// <summary>
+        /// Global Rate Limit for the bot
+        /// </summary>
         public readonly BotGlobalRateLimit RateLimit = new BotGlobalRateLimit();
+        
+        /// <summary>
+        /// The request buckets for the bot
+        /// </summary>
         public readonly Hash<string, Bucket> Buckets = new Hash<string, Bucket>();
 
         private readonly Dictionary<string, string> _headers;
         private readonly ILogger _logger;
 
+        /// <summary>
+        /// Creates a new REST handler for a bot client
+        /// </summary>
+        /// <param name="client">Client the request is for</param>
+        /// <param name="logger">Logger from the client</param>
         public RestHandler(BotClient client, ILogger logger)
         {
             _logger = logger;
@@ -27,11 +42,28 @@ namespace Oxide.Ext.Discord.REST
             };
         }
 
+        /// <summary>
+        /// Creates a new request and queues it to be ran
+        /// </summary>
+        /// <param name="url">URL of the request</param>
+        /// <param name="method">HTTP method of the request</param>
+        /// <param name="data">Data to be sent with the request</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Error callback if an error occurs</param>
         public void DoRequest(string url, RequestMethod method, object data, Action callback, Action<RestError> onError)
         {
             CreateRequest(method, url, _headers, data, response => callback?.Invoke(), onError);
         }
 
+        /// <summary>
+        /// Creates a new request and queues it to be ran
+        /// </summary>
+        /// <param name="url">URL of the request</param>
+        /// <param name="method">HTTP method of the request</param>
+        /// <param name="data">Data to be sent with the request</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Error callback if an error occurs</param>
+        /// <typeparam name="T">The type that is expected to be returned</typeparam>
         public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback, Action<RestError> onError)
         {
             CreateRequest(method, url, _headers, data, response =>
@@ -40,6 +72,15 @@ namespace Oxide.Ext.Discord.REST
             }, onError);
         }
 
+        /// <summary>
+        /// Creates a new request and queues it to be ran
+        /// </summary>
+        /// <param name="url">URL of the request</param>
+        /// <param name="method">HTTP method of the request</param>
+        /// <param name="headers">Headers to be sent in the request</param>
+        /// <param name="data">Data to be sent with the request</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Error callback if an error occurs</param>
         private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> onError)
         {
             Request request = new Request(method, url, headers, data, callback, onError, _logger);
@@ -47,11 +88,19 @@ namespace Oxide.Ext.Discord.REST
             QueueRequest(request, _logger);
         }
         
+        /// <summary>
+        /// Removed buckets that are old and not being used
+        /// </summary>
         public void CleanupExpired()
         {
             Buckets.RemoveAll(b => b.ShouldCleanup());
         }
 
+        /// <summary>
+        /// Queues the request
+        /// </summary>
+        /// <param name="request">Request to queue</param>
+        /// <param name="logger">Logger to use</param>
         public void QueueRequest(Request request, ILogger logger)
         {
             string bucketId = GetBucketId(request.Route);
@@ -65,6 +114,9 @@ namespace Oxide.Ext.Discord.REST
             bucket.Queue(request);
         }
         
+        /// <summary>
+        /// Shutdown the REST handler
+        /// </summary>
         public void Shutdown()
         {
             foreach (Bucket bucket in Buckets.Values)

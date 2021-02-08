@@ -82,6 +82,10 @@ namespace Oxide.Ext.Discord.Entities.Voice
         [JsonProperty("suppress")]
         public bool Suppress { get; set; }
 
+        /// <summary>
+        /// Returns the ID for this entity
+        /// </summary>
+        /// <returns>ID for this entity</returns>
         public Snowflake GetEntityId()
         {
             return UserId;

@@ -182,7 +182,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="guild">Guild to leave</param>
         /// <param name="callback">callback when the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void LeaveGuild(DiscordClient client, Guild guild, Action callback = null) => LeaveGuild(client, guild.Id, callback);
+        public void LeaveGuild(DiscordClient client, Guild guild, Action callback = null, Action<RestError> onError = null) => LeaveGuild(client, guild.Id, callback, onError);
 
         /// <summary>
         /// Leave the guild that the currently logged in user is in
@@ -254,9 +254,28 @@ namespace Oxide.Ext.Discord.Entities.Users
         {
             client.Bot.Rest.DoRequest("/users/@me/connections", RequestMethod.GET, null, callback, onError);
         }
-        
-        public void GroupDmAddRecipient(DiscordClient client, Channel channel, string accessToken, Action callback = null) => GroupDmAddRecipient(client, channel.Id, accessToken, Username, callback);
 
+        /// <summary>
+        /// Adds a recipient to a Group DM using their access token
+        /// See <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient">Group DM Add Recipient</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channel">Channel to add recipient to</param>
+        /// <param name="accessToken">Users access token</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
+        public void GroupDmAddRecipient(DiscordClient client, Channel channel, string accessToken, Action callback = null, Action<RestError> onError = null) => GroupDmAddRecipient(client, channel.Id, accessToken, Username, callback, onError);
+
+        /// <summary>
+        /// Adds a recipient to a Group DM using their access token
+        /// See <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient">Group DM Add Recipient</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channelId">Channel ID to add user to</param>
+        /// <param name="accessToken">Users access token</param>
+        /// <param name="nick">User nickname</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void GroupDmAddRecipient(DiscordClient client, Snowflake channelId, string accessToken, string nick, Action callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, string> data = new Dictionary<string, string>()
@@ -268,8 +287,22 @@ namespace Oxide.Ext.Discord.Entities.Users
             client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, data, callback, onError);
         }
 
-        public void GroupDmRemoveRecipient(DiscordClient client, Channel channel) => GroupDmRemoveRecipient(client, channel.Id);
+        /// <summary>
+        /// Removes a recipient from a Group DM
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channel">Channel to remove recipient from</param>
+        /// <param name="callback">callback once the action is completed</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
+        public void GroupDmRemoveRecipient(DiscordClient client, Channel channel, Action callback = null, Action<RestError> onError = null) => GroupDmRemoveRecipient(client, channel.Id, callback, onError);
 
+        /// <summary>
+        /// Removes a recipient from a Group DM
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channelId">Channel ID to remove recipient from</param>
+        /// <param name="callback">callback once the action is completed</param>
+        /// <param name="onError">Callback when an error occurs with error information</param>
         public void GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, onError);
@@ -333,6 +366,10 @@ namespace Oxide.Ext.Discord.Entities.Users
             }
         }
 
+        /// <summary>
+        /// Returns the ID for this entity
+        /// </summary>
+        /// <returns>ID for this entity</returns>
         public Snowflake GetEntityId()
         {
             return Id;

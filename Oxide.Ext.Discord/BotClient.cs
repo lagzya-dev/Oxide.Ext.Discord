@@ -17,30 +17,76 @@ using Timer = System.Timers.Timer;
 
 namespace Oxide.Ext.Discord
 {
+    /// <summary>
+    /// Represents a bot that is connected to discord
+    /// </summary>
     public class BotClient
     {
+        /// <summary>
+        /// List of active bots by bot API key
+        /// </summary>
         public static readonly Hash<string, BotClient> ActiveBots = new Hash<string, BotClient>();
         
-        public string SessionId;
-        public int Sequence;
+        /// <summary>
+        /// The current session ID for the connected bot
+        /// </summary>
+        internal string SessionId;
+        
+        /// <summary>
+        /// The current sequence number for the websocket
+        /// </summary>
+        internal int Sequence;
+        
+        /// <summary>
+        /// If the connection is initialized and not disconnected
+        /// </summary>
         public bool Initialized;
+        
+        /// <summary>
+        /// Discord Acknowledged our heartbeat successfully 
+        /// </summary>
         public bool HeartbeatAcknowledged;
-        
-        public readonly List<DiscordClient> Clients = new List<DiscordClient>();
+
+        /// <summary>
+        /// The settings for this bot of all the combined clients
+        /// </summary>
         public readonly DiscordSettings Settings;
-        private readonly ILogger _logger;
-       
-        public Hash<Snowflake, Guild> Servers { get; internal set; }
-        public Hash<Snowflake, Channel> DirectMessages { get; } = new  Hash<Snowflake, Channel>();
         
+        /// <summary>
+        /// All the servers that this bot is in
+        /// </summary>
+        public readonly Hash<Snowflake, Guild> Servers = new Hash<Snowflake, Guild>();
+        
+        /// <summary>
+        /// All the direct messages that we have seen
+        /// </summary>
+        public readonly Hash<Snowflake, Channel> DirectMessages = new  Hash<Snowflake, Channel>();
+        
+        /// <summary>
+        /// List of all clients that are using this bot client
+        /// </summary>
+        public readonly List<DiscordClient> Clients = new List<DiscordClient>();
+        
+        /// <summary>
+        /// Application reference for this bot
+        /// </summary>
         public Application Application { get; internal set; }
+        
+        /// <summary>
+        /// Rest handler for all discord API calls
+        /// </summary>
         public RestHandler Rest { get; private set; }
         
         private Socket _webSocket;
         private Timer _timer;
+        private readonly ILogger _logger;
         
         internal Ready ReadyData;
         
+        /// <summary>
+        /// Creates a new bot client for the given settings
+        /// </summary>
+        /// <param name="settings"></param>
         public BotClient(DiscordSettings settings)
         {
             Settings = new DiscordSettings
@@ -53,6 +99,11 @@ namespace Oxide.Ext.Discord
             _logger = new Logger(Settings.LogLevel);
         }
         
+        /// <summary>
+        /// Gets or creates a new bot client for the given discord client
+        /// </summary>
+        /// <param name="client">Client to use for creating / loading the bot client</param>
+        /// <returns>Bot client that is created or already exists</returns>
         public static BotClient GetOrCreate(DiscordClient client)
         {
             BotClient bot = ActiveBots[client.Settings.ApiToken];
@@ -82,6 +133,9 @@ namespace Oxide.Ext.Discord
             ConnectWebSocket();
         }
         
+        /// <summary>
+        /// Connects the websocket to discord. Should only be called if the websocket is disconnected
+        /// </summary>
         public void ConnectWebSocket()
         {
             if (Initialized)
@@ -91,6 +145,11 @@ namespace Oxide.Ext.Discord
             }
         }
         
+        /// <summary>
+        /// Close the websocket with discord
+        /// </summary>
+        /// <param name="attemptReconnect">Should we attempt to reconnect to discord after closing</param>
+        /// <param name="attemptResume">Should we attempt to resume the previous session</param>
         public void DisconnectWebsocket(bool attemptReconnect = false, bool attemptResume = false)
         {
             if (Initialized)
@@ -99,6 +158,9 @@ namespace Oxide.Ext.Discord
             }
         }
 
+        /// <summary>
+        /// Called when bot client is no longer used by any client and can be shutdown.
+        /// </summary>
         public void ShutdownBot()
         {
             _logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
@@ -111,8 +173,17 @@ namespace Oxide.Ext.Discord
             ReadyData = null;
         }
         
+        /// <summary>
+        /// Add a client to this bot client
+        /// </summary>
+        /// <param name="client">Client to add to the bot</param>
         public void AddClient(DiscordClient client)
         {
+            if (Settings.ApiToken != client.Settings.ApiToken)
+            {
+                throw new Exception("Failed to add client to bot client as ApiTokens do not match");
+            }
+            
             Clients.RemoveAll(c => c == client);
             Clients.Add(client);
             
@@ -147,6 +218,11 @@ namespace Oxide.Ext.Discord
             }
         }
 
+        /// <summary>
+        /// Remove a client from the bot client
+        /// If not clients are left bot will shutdown
+        /// </summary>
+        /// <param name="client">Client to remove from bot client</param>
         public void RemoveClient(DiscordClient client)
         {
             Clients.Remove(client);
@@ -185,6 +261,11 @@ namespace Oxide.Ext.Discord
             _logger.UpdateLogLevel(level);
         }
 
+        /// <summary>
+        /// Call a hook on all clients using this bot
+        /// </summary>
+        /// <param name="hookName">Hook to call</param>
+        /// <param name="args">Args for the hook</param>
         public void CallHook(string hookName, params object[] args)
         {
             foreach (DiscordClient client in Clients)
@@ -194,7 +275,11 @@ namespace Oxide.Ext.Discord
         }
         
         #region Heartbeat
-        public void SetupHeartbeat(float heartbeatInterval)
+        /// <summary>
+        /// Setup a heartbeat for this bot with the given interval
+        /// </summary>
+        /// <param name="heartbeatInterval"></param>
+        internal void SetupHeartbeat(float heartbeatInterval)
         {
             if (_timer != null)
             {
@@ -209,6 +294,9 @@ namespace Oxide.Ext.Discord
             _logger.Debug($"{nameof(DiscordClient)}.{nameof(SetupHeartbeat)} Creating heartbeat with interval {heartbeatInterval}ms.");
         }
 
+        /// <summary>
+        /// Destroy the heartbeat on this bot
+        /// </summary>
         public void DestroyHeartbeat()
         {
             if(_timer != null)
@@ -240,6 +328,10 @@ namespace Oxide.Ext.Discord
             SendHeartbeat();
         }
         
+        /// <summary>
+        /// Sends a heartbeat to discord.
+        /// If the previous heartbeat wasn't acknowledged then we will attempt to reconnect
+        /// </summary>
         public void SendHeartbeat()
         {
             if(!HeartbeatAcknowledged)
@@ -280,7 +372,10 @@ namespace Oxide.Ext.Discord
             });
         }
         
-        public void Identify()
+        /// <summary>
+        /// Used to Identify the bot with discord
+        /// </summary>
+        internal void Identify()
         {
             // Sent immediately after connecting. Opcode 2: Identify
             // Ref: https://discordapp.com/developers/docs/topics/gateway#identifying
@@ -308,7 +403,10 @@ namespace Oxide.Ext.Discord
             _webSocket.Send(GatewayCommandCode.Identify, identify);
         }
         
-        public void Resume()
+        /// <summary>
+        /// Used to resume the current session with discord
+        /// </summary>
+        internal void Resume()
         {
             if (!Initialized)
             {
@@ -325,6 +423,10 @@ namespace Oxide.Ext.Discord
             _webSocket.Send(GatewayCommandCode.Resume, resume);
         }
         
+        /// <summary>
+        /// Used to request guild members from discord for a specific guild
+        /// </summary>
+        /// <param name="request">Request for guild members</param>
         public void RequestGuildMembers(GuildMembersRequest request)
         {
             if (!Initialized)
@@ -335,7 +437,11 @@ namespace Oxide.Ext.Discord
             _webSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
         }
 
-        public void UpdateVoiceState( VoiceStateUpdate voiceState)
+        /// <summary>
+        /// Used to update the voice state for the bot
+        /// </summary>
+        /// <param name="voiceState"></param>
+        public void UpdateVoiceState(VoiceStateUpdate voiceState)
         {
             if (!Initialized)
             {
@@ -345,6 +451,10 @@ namespace Oxide.Ext.Discord
             _webSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
         }
 
+        /// <summary>
+        /// Used to update the bots status in discord
+        /// </summary>
+        /// <param name="statusUpdate"></param>
         public void UpdateStatus(StatusUpdate statusUpdate)
         {
             if (!Initialized)
@@ -355,16 +465,29 @@ namespace Oxide.Ext.Discord
             _webSocket.Send(GatewayCommandCode.StatusUpdate, statusUpdate);
         }
 
+        /// <summary>
+        /// Returns a guild for the specific ID
+        /// </summary>
+        /// <param name="id">ID of the guild</param>
+        /// <returns>Guild with the specified ID</returns>
         public Guild GetGuild(Snowflake id)
         {
             return Servers[id];
         }
 
+        /// <summary>
+        /// Adds a guild to the list of servers a bot is in
+        /// </summary>
+        /// <param name="guild"></param>
         public void AddGuild(Guild guild)
         {
             Servers[guild.Id] = guild;
         }
         
+        /// <summary>
+        /// Adds a guild if it does not exist or updates the guild with
+        /// </summary>
+        /// <param name="guild"></param>
         public void AddGuildOrUpdate(Guild guild)
         {
             Guild existing = Servers[guild.Id];
@@ -378,6 +501,10 @@ namespace Oxide.Ext.Discord
             }
         }
         
+        /// <summary>
+        /// Removes guild from the list of servers a bot is in
+        /// </summary>
+        /// <param name="guildId">Guild to remove from bot</param>
         internal void RemoveGuild(Snowflake guildId)
         {
             Servers.Remove(guildId);
