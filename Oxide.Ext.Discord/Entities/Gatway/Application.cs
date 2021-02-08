@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// The id of the app
         /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         /// <summary>
         /// The name of the app
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// If this application is a game sold on Discord, this field will be the guild to which it has been linked
         /// </summary>
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
         
         /// <summary>
         /// If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists
@@ -169,7 +169,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="commandId">Command to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void DeleteGlobalApplicationCommand(DiscordClient client, string commandId, Action callback = null, Action<RestError> onError = null)
+        public void DeleteGlobalApplicationCommand(DiscordClient client, Snowflake commandId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands/{commandId}", RequestMethod.PATCH, null, callback, onError);
         }
@@ -182,7 +182,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="guildId">ID of the guild to get commands for</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void GetGuildApplicationCommands(DiscordClient client, string guildId, Action<List<ApplicationCommand>> callback = null, Action<RestError> onError = null)
+        public void GetGuildApplicationCommands(DiscordClient client, Snowflake guildId, Action<List<ApplicationCommand>> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.GET, null, callback, onError);
         }
@@ -210,7 +210,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void CreateGuildApplicationCommands(DiscordClient client, string guildId, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
+        public void CreateGuildApplicationCommands(DiscordClient client, Snowflake guildId, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.POST, create, callback, onError);
         }
@@ -240,7 +240,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="update">Command update</param>
         /// <param name="callback">Callback with updated command</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void EditGuildApplicationCommands(DiscordClient client, string guildId, ApplicationCommand update, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
+        public void EditGuildApplicationCommands(DiscordClient client, Snowflake guildId, ApplicationCommand update, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{update.Id}", RequestMethod.PATCH, update, callback, onError);
         }
@@ -269,7 +269,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="commandId">Command ID to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void DeleteGuildApplicationCommands(DiscordClient client, string guildId, string commandId, Action callback = null, Action<RestError> onError = null)
+        public void DeleteGuildApplicationCommands(DiscordClient client, Snowflake guildId, Snowflake commandId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}", RequestMethod.DELETE, null, callback, onError);
         }
@@ -371,7 +371,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="edit">Updated message</param>
         /// <param name="callback">Callback with the updated message</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void EditFollowUpMessage(DiscordClient client, string interactionToken, string messageId, WebhookEditMessage edit, Action<Message> callback = null, Action<RestError> onError = null)
+        public void EditFollowUpMessage(DiscordClient client, string interactionToken, Snowflake messageId, WebhookEditMessage edit, Action<Message> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.PATCH, edit, callback, onError);
         }
@@ -385,7 +385,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="messageId">Message ID to delete</param>
         /// <param name="callback">Callback with the updated message</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void DeleteFollowUpMessage(DiscordClient client, string interactionToken, string messageId, Action callback = null, Action<RestError> onError = null)
+        public void DeleteFollowUpMessage(DiscordClient client, string interactionToken, Snowflake messageId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.DELETE, null, callback, onError);
         }

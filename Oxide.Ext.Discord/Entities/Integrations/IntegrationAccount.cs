@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// ID of the account
         /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         /// <summary>
         /// Name of the account

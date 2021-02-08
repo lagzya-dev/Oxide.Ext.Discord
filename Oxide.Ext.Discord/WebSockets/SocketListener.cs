@@ -907,7 +907,7 @@ namespace Oxide.Ext.Discord.WebSockets
         }
         
         //TODO: Add Link
-        private void HandleDispatchIntegrationDelete(EventPayload payload)
+        private void HandleDispatchIntegrationCreate(EventPayload payload)
         {
             IntegrationCreate integration = payload.EventData.ToObject<IntegrationCreate>();
             _client.CallHook("Discord_IntegrationCreate", integration);
@@ -921,7 +921,7 @@ namespace Oxide.Ext.Discord.WebSockets
         }
 
         //TODO: Add Link
-        private void HandleDispatchIntegrationCreate(EventPayload payload)
+        private void HandleDispatchIntegrationDelete(EventPayload payload)
         {
             IntegrationDelete integration = payload.EventData.ToObject<IntegrationDelete>();
             _client.CallHook("Discord_IntegrationDelete", integration);

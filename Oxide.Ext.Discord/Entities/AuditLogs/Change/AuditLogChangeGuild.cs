@@ -56,9 +56,9 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
         public bool WidgetEnabled { get; set; }
 
         [JsonProperty("widget_channel_id")]
-        public string WidgetChannelId { get; set; }
+        public Snowflake WidgetChannelId { get; set; }
             
         [JsonProperty("system_channel_id")]
-        public string SystemChannelId { get; set; }
+        public Snowflake SystemChannelId { get; set; }
     }
 }

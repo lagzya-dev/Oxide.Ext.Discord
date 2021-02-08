@@ -19,6 +19,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Party ID from a Rich Presence event
         /// </summary>
         [JsonProperty("party_id")]
-        public string PartyId { get; set; }
+        public Snowflake PartyId { get; set; }
     }
 }

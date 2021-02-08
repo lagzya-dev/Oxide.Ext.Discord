@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Channel ID for the channel
         /// </summary>
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
         
         /// <summary>
         /// The description shown for the channel
@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The emoji id, if the emoji is custom
         /// </summary>
         [JsonProperty("emoji_id")]
-        public string EmojiId { get; set; }
+        public Snowflake EmojiId { get; set; }
         
         /// <summary>
         /// The emoji name if custom, the unicode character if standard, or null if no emoji is set

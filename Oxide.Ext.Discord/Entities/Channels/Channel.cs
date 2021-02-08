@@ -55,7 +55,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Application id of the group DM creator if it is bot-created
         /// </summary>
         [JsonProperty("application_id")]
-        public string ApplicationId { get; set; }
+        public Snowflake ApplicationId { get; set; }
         
         /// <summary>
         /// When the last pinned message was pinned.
@@ -74,16 +74,11 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="channel">Channel to create</param>
         /// <param name="callback">Callback with created channel</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void CreateGuildChannel(DiscordClient client, string guildId, ChannelCreate channel, Action<Channel> callback = null, Action<RestError> onError = null)
+        public static void CreateGuildChannel(DiscordClient client, Snowflake guildId, ChannelCreate channel, Action<Channel> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/channels", RequestMethod.POST, channel, callback, onError);
         }
-        
-        public static void GetChannel(DiscordClient client, Snowflake channelId, Action<Channel> callback = null)
-        {
-            client.Bot.Rest.DoRequest($"/guilds/{guildId}/channels", RequestMethod.POST, channel, callback, onError);
-        }
-        
+
         /// <summary>
         /// Get a channel by ID
         /// See <a href="https://discord.com/developers/docs/resources/channel#get-channel">Get Channel</a>
@@ -92,7 +87,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="channelId">ID of the channel to get</param>
         /// <param name="callback">Callback with the channel object</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void GetChannel(DiscordClient client, string channelId, Action<Channel> callback = null, Action<RestError> onError = null)
+        public static void GetChannel(DiscordClient client, Snowflake channelId, Action<Channel> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{channelId}", RequestMethod.GET, null, callback, onError);
         }
@@ -429,10 +424,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Name = channel.Name;
             }
 
-            if (channel.Type != null)
-            {
-                Type = channel.Type;
-            }
+            Type = channel.Type;
 
             if (channel.Position != null)
             {
@@ -468,11 +460,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
             {
                 PermissionOverwrites = channel.PermissionOverwrites;
             }
-            
-            if (channel.ParentId != null)
-            {
-                ParentId = channel.ParentId;
-            }
+
+            ParentId = channel.ParentId;
         }
     }
 }

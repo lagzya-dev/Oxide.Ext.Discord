@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs
         public string Count { get; set; }
         
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("type")]
         public string Type { get; set; }

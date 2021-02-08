@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         /// ID of the connection account
         /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         /// <summary>
         /// The username of the connection account

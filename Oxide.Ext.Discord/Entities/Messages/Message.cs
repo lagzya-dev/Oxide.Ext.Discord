@@ -176,7 +176,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="message">Message to be created</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void CreateMessage(DiscordClient client, string channelId, MessageCreate message, Action<Message> callback = null, Action<RestError> onError = null)
+        public static void CreateMessage(DiscordClient client, Snowflake channelId, MessageCreate message, Action<Message> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, message, callback, onError);
         }
@@ -192,7 +192,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="message">Content of the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void CreateMessage(DiscordClient client, string channelId, string message, Action<Message> callback = null, Action<RestError> onError = null)
+        public static void CreateMessage(DiscordClient client, Snowflake channelId, string message, Action<Message> callback = null, Action<RestError> onError = null)
         {
             MessageCreate createMessage = new MessageCreate
             {
@@ -213,7 +213,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="embed">Embed to be send in the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void CreateMessage(DiscordClient client, string channelId, Embed embed, Action<Message> callback = null, Action<RestError> onError = null)
+        public static void CreateMessage(DiscordClient client, Snowflake channelId, Embed embed, Action<Message> callback = null, Action<RestError> onError = null)
         {
             MessageCreate createMessage = new MessageCreate
             {
@@ -235,7 +235,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             if (message.MessageReference == null)
             {
-                message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId};
+                message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId ?? default(Snowflake)};
             }
             
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback, onError);
@@ -286,7 +286,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="messageId">Message ID to cross post</param>
         /// <param name="callback">Callback with the cross posted message</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void CrossPostMessage(DiscordClient client, string messageId, Action<Message> callback = null, Action<RestError> onError = null)
+        public void CrossPostMessage(DiscordClient client, Snowflake messageId, Action<Message> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback, onError);
         }

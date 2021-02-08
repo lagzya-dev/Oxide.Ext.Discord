@@ -6,12 +6,12 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
     public class IntegrationDelete
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
         
         [JsonProperty("application_id")]
-        public string ApplicationId { get; set; }
+        public Snowflake ApplicationId { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Requires permission MANAGE_ROLES
         /// </summary>
         [JsonProperty("roles")]
-        public List<string> Roles { get; set; }
+        public List<Snowflake> Roles { get; set; }
         
         /// <summary>
         /// Whether the user is muted in voice channels

@@ -81,7 +81,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="avatar">Image for the default webhook avatar</param>
         /// <param name="callback">Callback with the completed webhook</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void CreateWebhook(DiscordClient client, string channelId, string name, string avatar = null, Action<Webhook> callback = null, Action<RestError> onError = null)
+        public static void CreateWebhook(DiscordClient client, Snowflake channelId, string name, string avatar = null, Action<Webhook> callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, string> data = new Dictionary<string, string>
             {
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="channelId">Channel ID to get webhooks for</param>
         /// <param name="callback">Callback with a list of channel webhooks</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void GetChannelWebhooks(DiscordClient client, string channelId, Action<List<Webhook>> callback = null, Action<RestError> onError = null)
+        public static void GetChannelWebhooks(DiscordClient client, Snowflake channelId, Action<List<Webhook>> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.GET, null, callback, onError);
         }
@@ -113,7 +113,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="guildId">Guild ID to get webhooks for</param>
         /// <param name="callback">Callback with the list of guild webhooks</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void GetGuildWebhooks(DiscordClient client, string guildId, Action<List<Webhook>> callback = null, Action<RestError> onError = null)
+        public static void GetGuildWebhooks(DiscordClient client, Snowflake guildId, Action<List<Webhook>> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/webhooks", RequestMethod.GET, null, callback, onError);
         }
@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="webhookId">Webhook ID to get</param>
         /// <param name="callback">Callback with the webhook</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void GetWebhook(DiscordClient client, string webhookId, Action<Webhook> callback = null, Action<RestError> onError = null)
+        public static void GetWebhook(DiscordClient client, Snowflake webhookId, Action<Webhook> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{webhookId}", RequestMethod.GET, null, callback, onError);
         }
@@ -142,7 +142,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="webhookToken">Webhook Token</param>
         /// <param name="callback">Callback with the webhook</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void GetWebhookWithToken(DiscordClient client, string webhookId, string webhookToken, Action<Webhook> callback = null, Action<RestError> onError = null)
+        public static void GetWebhookWithToken(DiscordClient client, Snowflake webhookId, string webhookToken, Action<Webhook> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{webhookId}/{webhookToken}", RequestMethod.GET, null, callback, onError);
         }
@@ -177,7 +177,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="channelId">Channel to move the webhook to</param>
         /// <param name="callback">Callback with the updated webhook</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void ModifyWebhook(DiscordClient client, string name = null, string avatar = null, string channelId = null, Action<Webhook> callback = null, Action<RestError> onError = null)
+        public void ModifyWebhook(DiscordClient client, string name = null, string avatar = null, Snowflake? channelId = null, Action<Webhook> callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -273,7 +273,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="payload">The updated message</param>
         /// <param name="callback">Callback with the edited message</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void EditWebhookMessage(DiscordClient client, string messageId, WebhookEditMessage payload, Action<Message> callback = null, Action<RestError> onError = null)
+        public void EditWebhookMessage(DiscordClient client, Snowflake messageId, WebhookEditMessage payload, Action<Message> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.PATCH, payload, callback, onError);
         }
@@ -285,7 +285,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="messageId">Message ID to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void DeleteWebhookMessage(DiscordClient client, string messageId, Action callback = null, Action<RestError> onError = null)
+        public void DeleteWebhookMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback, onError);
         }

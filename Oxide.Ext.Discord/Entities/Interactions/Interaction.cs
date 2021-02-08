@@ -36,13 +36,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// The guild it was sent from
         /// </summary>
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }    
+        public Snowflake GuildId { get; set; }    
         
         /// <summary>
         /// The channel it was sent from
         /// </summary>
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
         
         /// <summary>
         /// Guild member data for the invoking user

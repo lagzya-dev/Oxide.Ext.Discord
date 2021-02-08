@@ -127,7 +127,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="userId">User ID to lookup</param>
         /// <param name="callback">Callback with the looked up user</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void GetUser(DiscordClient client, Snowflake userId, Action<DiscordUser> callback = null)
+        public static void GetUser(DiscordClient client, Snowflake userId, Action<DiscordUser> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback, onError);
         }
@@ -191,7 +191,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="guildId">Guild ID to leave</param>
         /// <param name="callback">callback when the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void LeaveGuild(DiscordClient client, Snowflake guildId, Action callback = null)
+        public void LeaveGuild(DiscordClient client, Snowflake guildId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback, onError);
         }
@@ -213,7 +213,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="userId">User ID to send the message to</param>
         /// <param name="callback">Callback with the direct message channel</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void CreateDm(DiscordClient client, Snowflake userId, Action<Channel> callback = null)
+        public static void CreateDirectMessage(DiscordClient client, Snowflake userId, Action<Channel> callback = null, Action<RestError> onError = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -256,22 +256,22 @@ namespace Oxide.Ext.Discord.Entities.Users
         
         public void GroupDmAddRecipient(DiscordClient client, Channel channel, string accessToken, Action callback = null) => GroupDmAddRecipient(client, channel.Id, accessToken, Username, callback);
 
-        public void GroupDmAddRecipient(DiscordClient client, Snowflake channelId, string accessToken, string nick, Action callback = null)
+        public void GroupDmAddRecipient(DiscordClient client, Snowflake channelId, string accessToken, string nick, Action callback = null, Action<RestError> onError = null)
         {
-            var jsonObj = new Dictionary<string, string>()
+            Dictionary<string, string> data = new Dictionary<string, string>()
             {
-                { "access_token", accessToken },
-                { "nick", nick }
+                ["access_token"] = accessToken,
+                ["nick"] = nick
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, jsonObj, callback);
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, data, callback, onError);
         }
 
         public void GroupDmRemoveRecipient(DiscordClient client, Channel channel) => GroupDmRemoveRecipient(client, channel.Id);
 
-        public void GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId, Action callback = null)
+        public void GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId, Action callback = null, Action<RestError> onError = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback);
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, onError);
         }
 
         internal void Update(DiscordUser update)

@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// The ID of the app
         /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         /// <summary>
         /// The name of the app

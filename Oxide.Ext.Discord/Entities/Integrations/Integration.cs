@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// Integration ID
         /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         /// <summary>
         /// Integration Name
@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// ID that this integration uses for "subscribers"
         /// </summary>
         [JsonProperty("role_id")]
-        public string RoleId { get; set; }
+        public Snowflake RoleId { get; set; }
 
         /// <summary>
         /// User for this integration

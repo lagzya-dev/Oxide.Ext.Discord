@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// Unique ID for the region
         /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         /// <summary>
         /// Name of the region

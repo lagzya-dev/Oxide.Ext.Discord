@@ -57,7 +57,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// ID of owner
         /// </summary>
         [JsonProperty("owner_id")]
-        public string OwnerId { get; set; }
+        public Snowflake OwnerId { get; set; }
 
         /// <summary>
         /// Total permissions for the user in the guild (excludes overrides)
@@ -75,7 +75,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The channel id that the widget will generate an invite to, or null if set to no invite
         /// </summary>
         [JsonProperty("widget_channel_id")]
-        public string WidgetChannelId { get; set; }
+        public Snowflake WidgetChannelId { get; set; }
   
         /// <summary>
         /// Custom guild emojis
@@ -114,7 +114,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The id of the channel where Community guilds can display rules and/or guidelines
         /// </summary>
         [JsonProperty("rules_channel_id")]
-        public string RulesChannelId { get; set; }
+        public Snowflake RulesChannelId { get; set; }
         
         /// <summary>
         /// When this guild was joined at
@@ -213,7 +213,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The maximum amount of users in a video channel
         /// </summary>
         [JsonProperty("public_updates_channel_id")]
-        public string PublicUpdatesChannelId { get; set; }
+        public Snowflake PublicUpdatesChannelId { get; set; }
         
         /// <summary>
         /// The maximum amount of users in a video channel
@@ -274,7 +274,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="guildId">Guild ID to lookup</param>
         /// <param name="callback">callback with the guild for the given ID</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void GetGuild(DiscordClient client, string guildId, Action<Guild> callback = null, Action<RestError> onError = null)
+        public static void GetGuild(DiscordClient client, Snowflake guildId, Action<Guild> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{guildId}", RequestMethod.GET, null, callback, onError);
         }
@@ -287,7 +287,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="guildId">Guild ID to get preview for</param>
         /// <param name="callback">Callback with the guild preview for the ID</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void GetGuildPreview(DiscordClient client, string guildId, Action<GuildPreview> callback = null, Action<RestError> onError = null)
+        public static void GetGuildPreview(DiscordClient client, Snowflake guildId, Action<GuildPreview> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/preview", RequestMethod.GET, null, callback, onError);
         }
@@ -367,7 +367,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="userId">UserID to get guild member for</param>
         /// <param name="callback">Callback with guild member matching user Id</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void GetGuildMember(DiscordClient client, string userId, Action<GuildMember> callback = null, Action<RestError> onError = null)
+        public void GetGuildMember(DiscordClient client, Snowflake userId, Action<GuildMember> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.GET, null, callback, onError);
         }
@@ -417,7 +417,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="member">Member to copy from</param>
         /// <param name="callback">Callback with the added guild member</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void AddGuildMember(DiscordClient client, string userId, GuildMemberAdd member, Action<GuildMember> callback = null, Action<RestError> onError = null)
+        public void AddGuildMember(DiscordClient client, Snowflake userId, GuildMemberAdd member, Action<GuildMember> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.PUT, member, callback, onError);
         }
@@ -495,7 +495,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="roleId">Role ID to add</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void AddGuildMemberRole(DiscordClient client, string userId, string roleId, Action callback = null, Action<RestError> onError = null)
+        public void AddGuildMemberRole(DiscordClient client, Snowflake userId, Snowflake roleId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}/roles/{roleId}", RequestMethod.PUT, null, callback, onError);
         }
@@ -522,7 +522,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="roleId">Role ID to remove</param>
         /// <param name="callback">callback once the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void RemoveGuildMemberRole(DiscordClient client, Snowflake userId, string roleId, Action callback = null, Action<RestError> onError = null)
+        public void RemoveGuildMemberRole(DiscordClient client, Snowflake userId, Snowflake roleId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}/roles/{roleId}", RequestMethod.DELETE, null, callback, onError);
         }
@@ -573,7 +573,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="userId">User ID to get guild ban for</param>
         /// <param name="callback">Callback with the guild ban for the user</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void GetGuildBan(DiscordClient client, string userId, Action<GuildBan> callback = null, Action<RestError> onError = null)
+        public void GetGuildBan(DiscordClient client, Snowflake userId, Action<GuildBan> callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/bans/{userId}", RequestMethod.GET, null, callback, onError);
         }
@@ -614,7 +614,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="userId">User ID of the user to unban</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="onError">Callback when an error occurs with error information</param>
-        public void RemoveGuildBan(DiscordClient client, string userId, Action callback = null, Action<RestError> onError = null)
+        public void RemoveGuildBan(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> onError = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/bans/{userId}", RequestMethod.DELETE, null, callback, onError);
         }

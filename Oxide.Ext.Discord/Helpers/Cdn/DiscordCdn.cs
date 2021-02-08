@@ -146,7 +146,7 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <param name="format">Format the icon is in</param>
         /// <returns>Url of the application asset icon</returns>
         /// <exception cref="ArgumentException">Throw if format is Gif</exception>
-        public static string GetApplicationAssetUrl(Snowflake applicationId, Snowflake assetId, ImageFormat format = ImageFormat.Auto)
+        public static string GetApplicationAssetUrl(Snowflake applicationId, string assetId, ImageFormat format = ImageFormat.Auto)
         {
             if (format == ImageFormat.Gif)
             {

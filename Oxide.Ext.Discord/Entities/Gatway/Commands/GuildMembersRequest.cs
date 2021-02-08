@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// ID of the guild to get members for
         /// </summary>
         [JsonProperty("guild_id")]
-        public string GuildId { get; set; }
+        public Snowflake GuildId { get; set; }
 
         /// <summary>
         /// String that username starts with, or an empty string to return all members

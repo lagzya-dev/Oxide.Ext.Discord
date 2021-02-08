@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Attachment ID
         /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         /// <summary>
         /// Name of file attached
