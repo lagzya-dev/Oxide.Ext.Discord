@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Helpers.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -6,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure">Channel Mention Structure</a> in a message 
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ChannelMention
+    public class ChannelMention : IGetEntityId
     {
         /// <summary>
         /// ID of the channel
@@ -32,5 +33,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        public Snowflake GetEntityId()
+        {
+            return Id;
+        }
     }
 }

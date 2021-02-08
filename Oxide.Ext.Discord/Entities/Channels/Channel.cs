@@ -5,8 +5,10 @@ using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.Helpers.Interfaces;
 using Oxide.Ext.Discord.REST;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -37,8 +39,16 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <summary>
         /// The recipients of the DM
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<DiscordUser>))]
         [JsonProperty("recipients")]
-        public List<DiscordUser> Recipients { get; set; }
+        public Hash<Snowflake, DiscordUser> Recipients { get; set; }
+        
+        /// <summary>
+        /// Explicit permission overwrites for members and roles <see cref="Overwrite"/>
+        /// </summary>
+        [JsonConverter(typeof(HashListConverter<Overwrite>))]
+        [JsonProperty("permission_overwrites")]
+        public new Hash<Snowflake, Overwrite> PermissionOverwrites { get; set; }
         
         /// <summary>
         /// icon hash

@@ -687,7 +687,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Guild guild = _client.GetGuild(role.GuildId);
             if (guild != null && guild.IsAvailable)
             {
-                guild.Roles.Add(role.Role);
+                guild.Roles[role.Role.Id] = role.Role;
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleCreate)} GUILD_ROLE_CREATE: Guild ID: {role.GuildId} Role ID: {role.Role.Id} Role Name: {role.Role.Name}");
                 _client.CallHook("Discord_GuildRoleCreate", role.Role);
             }
@@ -701,13 +701,15 @@ namespace Oxide.Ext.Discord.WebSockets
             Guild guild = _client.GetGuild(update.GuildId);
             if (guild != null && guild.IsAvailable)
             {
-                Role oldRole = guild.Roles.FirstOrDefault(x => x.Id == updatedRole.Id);
+                Role oldRole = guild.Roles[updatedRole.Id];
                 if (oldRole != null)
                 {
-                    guild.Roles.Remove(oldRole);
+                    oldRole.UpdateRole(updatedRole);
                 }
-
-                guild.Roles.Add(updatedRole);
+                else
+                {
+                    guild.Roles[updatedRole.Id] = updatedRole;
+                }
 
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleUpdate)} GUILD_ROLE_UPDATE: Guild ID: {update.GuildId} Role ID: {update.Role.Id} Role Name: {update.Role.Name}");
                 _client.CallHook("Discord_GuildRoleUpdate", updatedRole, oldRole);
@@ -721,10 +723,10 @@ namespace Oxide.Ext.Discord.WebSockets
             Guild guild = _client.GetGuild(delete.GuildId);
             if (guild != null && guild.IsAvailable)
             {
-                Role role = guild.Roles.FirstOrDefault(x => x.Id == delete.RoleId);
+                Role role = guild.Roles[delete.RoleId];
                 if (role != null)
                 {
-                    guild.Roles.Remove(role);
+                    guild.Roles.Remove(delete.RoleId);
                     _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleDelete)} GUILD_ROLE_UPDATE: Guild ID: {delete.GuildId} Role ID: {role.Id} Role Name: {role.Name}");
                     _client.CallHook("Discord_GuildRoleDelete", role);
                 }

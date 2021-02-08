@@ -7,7 +7,9 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.REST;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -74,8 +76,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Users specifically mentioned in the message
         /// <see cref="DiscordUser"/>
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<DiscordUser>))]
         [JsonProperty("mentions")]
-        public List<DiscordUser> Mentions { get; set; }
+        public Hash<Snowflake, DiscordUser> Mentions { get; set; }
 
         /// <summary>
         /// Roles specifically mentioned in this message
@@ -87,15 +90,17 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Channels specifically mentioned in this message
         /// <see cref="ChannelMention"/>
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<ChannelMention>))]
         [JsonProperty("mention_channels")]
-        public List<ChannelMention> MentionsChannels { get; set; }
+        public Hash<Snowflake, ChannelMention> MentionsChannels { get; set; }
 
         /// <summary>
         /// Any attached files
         /// <see cref="Attachment"/>
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<Attachment>))]
         [JsonProperty("attachments")]
-        public List<Attachment> Attachments { get; set; }
+        public Hash<Snowflake, Attachment> Attachments { get; set; }
 
         /// <summary>
         /// Any embedded content
@@ -109,7 +114,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <see cref="Reaction"/>
         /// </summary>
         [JsonProperty("reactions")]
-        public List<Reaction> Reactions { get; set; }
+        public Hash<Snowflake, Reaction> Reactions { get; set; }
 
         /// <summary>
         /// Whether this message is pinned
@@ -155,8 +160,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// The stickers sent with the message (bots currently can only receive messages with stickers, not send)
         /// <see cref="MessageSticker"/>
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<MessageSticker>))]
         [JsonProperty("stickers")]
-        public List<MessageSticker> Stickers { get; set; }
+        public Hash<Snowflake, MessageSticker> Stickers { get; set; }
         
         /// <summary>
         /// The message associated with the message_reference

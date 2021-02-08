@@ -289,6 +289,11 @@
             The recipients of the DM
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.PermissionOverwrites">
+            <summary>
+            Explicit permission overwrites for members and roles <see cref="T:Oxide.Ext.Discord.Entities.Channels.Overwrite"/>
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Icon">
             <summary>
             icon hash
@@ -2882,6 +2887,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Members">
             <summary>
             Users in the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Channels">
+            <summary>
+            Channels in the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Roles">
+            <summary>
+            Roles in the guild
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Presences">
@@ -6981,6 +6996,17 @@
             </summary>
             <param name="message">Message to make block quote</param>
             <returns>Multiline block quote formatted message</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.Interfaces.IGetEntityId">
+            <summary>
+            Interface used to get the entity ID from an entity
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Interfaces.IGetEntityId.GetEntityId">
+            <summary>
+            Returns the unique ID for this entity
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Validation">
             <summary>

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers.Cdn;
+using Oxide.Ext.Discord.Helpers.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Emojis
 {
@@ -9,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Emojis
     /// Represents <a href="https://discord.com/developers/docs/resources/emoji#emoji-object">Emoji Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Emoji : EmojiUpdate
+    public class Emoji : EmojiUpdate, IGetEntityId
     {
         /// <summary>
         /// Emoji id
@@ -51,5 +52,10 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         /// Url to the emoji image
         /// </summary>
         public string Url => DiscordCdn.GetCustomEmojiUrl(Id, Animated.HasValue && Animated.Value ? ImageFormat.Gif : ImageFormat.Png);
+
+        public Snowflake GetEntityId()
+        {
+            return Id;
+        }
     }
 }

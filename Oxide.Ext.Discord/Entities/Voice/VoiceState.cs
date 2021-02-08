@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Helpers.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Voice
 {
@@ -7,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
     /// Represents <a href="https://discord.com/developers/docs/resources/voice#voice-state-object">Voice State Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class VoiceState
+    public class VoiceState : IGetEntityId
     {
         /// <summary>
         /// The guild id this voice state is for
@@ -80,5 +81,10 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// </summary>
         [JsonProperty("suppress")]
         public bool Suppress { get; set; }
+
+        public Snowflake GetEntityId()
+        {
+            return UserId;
+        }
     }
 }

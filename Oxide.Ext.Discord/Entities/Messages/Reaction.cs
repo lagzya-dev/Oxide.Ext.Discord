@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Emojis;
+using Oxide.Ext.Discord.Helpers.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -7,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#reaction-object">Reaction Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Reaction
+    public class Reaction : IGetEntityId
     {
         /// <summary>
         /// Times this emoji has been used to react
@@ -27,5 +28,10 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("emoji")]
         public Emoji Emoji { get; set; }
+
+        public Snowflake GetEntityId()
+        {
+            return Emoji.GetEntityId();
+        }
     }
 }

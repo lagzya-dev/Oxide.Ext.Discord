@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Helpers.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Roles
 {
@@ -7,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Roles
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Role
+    public class Role : IGetEntityId
     {
         /// <summary>
         /// Role id
@@ -49,18 +50,43 @@ namespace Oxide.Ext.Discord.Entities.Roles
         /// Whether this role is managed by an integration
         /// </summary>
         [JsonProperty("managed")]
-        public bool? Managed { get; set; }
+        public bool Managed { get; set; }
 
         /// <summary>
         /// Whether this role is mentionable
         /// </summary>
         [JsonProperty("mentionable")]
-        public bool? Mentionable { get; set; }
+        public bool Mentionable { get; set; }
         
         /// <summary>
         /// The tags this role has
         /// </summary>
         [JsonProperty("tags")]
         public RoleTags Tags { get; set; }
+
+        internal void UpdateRole(Role role)
+        {
+            if (role.Name != null)
+            {
+                Name = role.Name;
+            }
+
+            Color = role.Color;
+            Hoist = role.Hoist;
+            Position = role.Position;
+            Permissions = role.Permissions;
+            Managed = role.Managed;
+            Mentionable = role.Mentionable;
+
+            if (role.Tags != null)
+            {
+                Tags = role.Tags;
+            }
+        }
+        
+        public Snowflake GetEntityId()
+        {
+            return Id;
+        }
     }
 }

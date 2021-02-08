@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Helpers.Interfaces;
 using Oxide.Plugins;
 
@@ -11,7 +12,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            Hash<string, TValue> data = (Hash<string, TValue>) value;
+            Hash<Snowflake, TValue> data = (Hash<Snowflake, TValue>) value;
             
             writer.WriteStartArray();
             foreach (TValue tValue in data.Values)
@@ -25,7 +26,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
         {
             JArray array = JArray.Load(reader);
 
-            Hash<string, TValue> data = new Hash<string, TValue>();
+            Hash<Snowflake, TValue> data = new Hash<Snowflake, TValue>();
             foreach (JToken token in array)
             {
                 TValue value = token.ToObject<TValue>();
@@ -37,7 +38,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(List<TValue>) || objectType == typeof(Hash<string, TValue>);
+            return objectType == typeof(List<TValue>) || objectType == typeof(Hash<Snowflake, TValue>);
         }
     }
 }

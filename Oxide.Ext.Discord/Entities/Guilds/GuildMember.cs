@@ -68,7 +68,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonProperty("pending")]
         public bool? Pending { get; set; }
 
-        internal void Update(GuildMember update)
+        internal void Update(GuildMemberUpdateEvent update)
         {
             if (update.User != null)
             {
@@ -96,7 +96,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             }
         }
         
-        public string GetEntityId()
+        public Snowflake GetEntityId()
         {
             return User.Id;
         }

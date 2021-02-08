@@ -82,8 +82,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Custom guild emojis
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<Emoji>))]
         [JsonProperty("emojis")]
-        public List<Emoji> Emojis { get; set; }
+        public Hash<Snowflake, Emoji> Emojis { get; set; }
   
         /// <summary>
         /// Enabled guild features
@@ -145,22 +146,30 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// States of members currently in voice channels; lacks the guild_id key
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<VoiceState>))]
         [JsonProperty("voice_states")]
-        public List<VoiceState> VoiceStates { get; set; }
+        public Hash<Snowflake, VoiceState> VoiceStates { get; set; }
   
         /// <summary>
         /// Users in the guild
         /// </summary>
         [JsonConverter(typeof(HashListConverter<GuildMember>))]
         [JsonProperty("members")]
-        public Hash<string, GuildMember> Members { get; set; }
+        public Hash<Snowflake, GuildMember> Members { get; set; }
         
         /// <summary>
         /// Channels in the guild
         /// </summary>
         [JsonConverter(typeof(HashListConverter<Channel>))]
         [JsonProperty("channels")]
-        public new Hash<string, Channel> Channels { get; set; }
+        public new Hash<Snowflake, Channel> Channels { get; set; }
+        
+        /// <summary>
+        /// Roles in the guild
+        /// </summary>
+        [JsonConverter(typeof(HashListConverter<Role>))]
+        [JsonProperty("roles")]
+        public new Hash<Snowflake, Role> Roles { get; set; }
           
         /// <summary>
         /// Presences of the members in the guild
