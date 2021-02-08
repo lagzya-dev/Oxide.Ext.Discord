@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities
+namespace Oxide.Ext.Discord.REST
 {
     public class RateLimit
     {

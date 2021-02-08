@@ -9,10 +9,10 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
         public string Code { get; set; }
 
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
 
         [JsonProperty("inviter_id")]
-        public string InviterId { get; set; }
+        public Snowflake InviterId { get; set; }
 
         [JsonProperty("max_uses")]
         public int? MaxUses { get; set; }

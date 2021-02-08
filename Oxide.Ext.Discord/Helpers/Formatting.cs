@@ -1,26 +1,144 @@
 namespace Oxide.Ext.Discord.Helpers
 {
+    /// <summary>
+    /// Represents <a href="https://discord.com/developers/docs/reference#message-formatting-formats">Message text formatting options</a>
+    /// </summary>
     public class Formatting
     {
-        public static string PingUser(string userId) => $"<@{userId}>";
-        public static string PingUserNickname(string userId) => $"<@!{userId}>";
-        public static string PingChannel(string channelId) => $"<#{channelId}>";
-        public static string PingRole(string roleId) => $"<@&{roleId}>";
+        /// <summary>
+        /// Mention the user with the given user ID
+        /// </summary>
+        /// <param name="userId">User ID to mention</param>
+        /// <returns>Mention user formatted string</returns>
+        public static string MentionUser(string userId) => $"<@{userId}>";
+        
+        /// <summary>
+        /// Mention the user displaying their user name
+        /// </summary>
+        /// <param name="userId">User ID to mention</param>
+        /// <returns>Ping user formatted string</returns>
+        public static string MentionUserNickname(string userId) => $"<@!{userId}>";
+        
+        /// <summary>
+        /// Mention the the channel with the given ID
+        /// </summary>
+        /// <param name="channelId">Channel ID to mention</param>
+        /// <returns>Mention channel formatted string</returns>
+        public static string MentionChannel(string channelId) => $"<#{channelId}>";
+
+        /// <summary>
+        /// Mention the the role with the given ID
+        /// </summary>
+        /// <param name="roleId">Role ID to mention</param>
+        /// <returns>Mention role formatted string</returns>
+        public static string MentionRole(string roleId) => $"<@&{roleId}>";
+
+        /// <summary>
+        /// Returns formatting string for custom emoji
+        /// </summary>
+        /// <param name="name">Name of the custom emoji</param>
+        /// <param name="id">ID of the custom emoji</param>
+        /// <returns>Custom emoji formatted string</returns>
         public static string CustomEmoji(string name, string id) => $"<:{name}:{id}>";
+        
+        /// <summary>
+        /// Returns formatting string for animated custom emoji
+        /// </summary>
+        /// <param name="name">Name of the custom emoji</param>
+        /// <param name="id">ID of the custom emoji</param>
+        /// <returns>Animated custom emoji formatted string</returns>
         public static string CustomAnimatedEmoji(string name, string id) => $"<a:{name}:{id}>";
         
+        /// <summary>
+        /// Will display the message in italics
+        /// </summary>
+        /// <param name="message">Message to make italics</param>
+        /// <returns>Italics formatted message</returns>
         public static string Italics(string message) => $"*{message}*";
+        
+        /// <summary>
+        /// Will display the message in bold
+        /// </summary>
+        /// <param name="message">Message to make bold</param>
+        /// <returns>Bold formatted message</returns>
         public static string Bold(string message) => $"**{message}**";
+        
+        /// <summary>
+        /// Will display the message in italics and bold
+        /// </summary>
+        /// <param name="message">Message to make italics and bold</param>
+        /// <returns>Bold and Italics formatted message</returns>
         public static string ItalicsBold(string message) => $"***{message}***";
+        
+        /// <summary>
+        /// Will display the message in underline
+        /// </summary>
+        /// <param name="message">Message to make underline</param>
+        /// <returns>Underline formatted message</returns>
         public static string Underline(string message) => $"__{message}__";
+        
+        /// <summary>
+        /// Will display the message in underline and italics
+        /// </summary>
+        /// <param name="message">Message to make underline and italics</param>
+        /// <returns>Underline and Italics formatted message</returns>
         public static string UnderlineItalics(string message) => $"__*{message}*__";
+        
+        /// <summary>
+        /// Will display the message in underline and bold
+        /// </summary>
+        /// <param name="message">Message to make underline and bold</param>
+        /// <returns>Underline and bold formatted message</returns>
         public static string UnderlineBold(string message) => $"__**{message}**__";
+        
+        /// <summary>
+        /// Will display the message in underline and bold and italics
+        /// </summary>
+        /// <param name="message">Message to make underline and bold and italics</param>
+        /// <returns>Underline and Bold and Italics formatted message</returns>
         public static string UnderlineBoldItalics(string message) => $"__***{message}***__";
+        
+        /// <summary>
+        /// Will display the message with a strikethrough
+        /// </summary>
+        /// <param name="message">Message to make strikethrough</param>
+        /// <returns>Strikethrough formatted message</returns>
         public static string Strikethrough(string message) => $"~~{message}~~";
+        
+        /// <summary>
+        /// Will display the message as a one line code block
+        /// </summary>
+        /// <param name="message">Message to make code block</param>
+        /// <returns>Code block formatted message</returns>
         public static string CodeBlockOneLine(string message) => $"`{message}`";
+        
+        /// <summary>
+        /// Will display the message as a multiline code block
+        /// </summary>
+        /// <param name="message">Message to make multiline code block</param>
+        /// <returns>Code block formatted message</returns>
         public static string CodeBlockMultiLine(string message) => $"```{message}```";
+
+        /// <summary>
+        /// Will display a multiline code bloc with the specified language
+        /// </summary>
+        /// <param name="message">Message to make code block with language</param>
+        /// <param name="language">Language to display the code block as</param>
+        /// <returns>Language code block formatted message</returns>
         public static string CodeBlockLanguage(string message, string language) => $"```{language}\n{message}```";
+        
+        /// <summary>
+        /// Will display the message in single line block quote
+        /// </summary>
+        /// <param name="message">Message to make block quote</param>
+        /// <returns>Block Quote formatted message</returns>
         public static string BlockQuoteSingleLine(string message) => $"> {message}";
+        
+        /// <summary>
+        /// Will display the message in multiline block quote
+        /// </summary>
+        /// <param name="message">Message to make block quote</param>
+        /// <returns>Multiline block quote formatted message</returns>
         public static string BlockQuoteMultiLine(string message) => $">>> {message}";
     }
 }

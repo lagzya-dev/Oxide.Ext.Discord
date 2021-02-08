@@ -1,19 +1,31 @@
-﻿using Newtonsoft.Json;
-
+﻿
 namespace Oxide.Ext.Discord.Entities.Gatway
 {
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    /// <summary>
+    /// Represents the websocket connection data
+    /// </summary>
     class Connect
     {
-        [JsonProperty("v")]
+        /// <summary>
+        /// Which websocket version to use
+        /// </summary>
         public static int Version { get; } = 8;
-
-        [JsonProperty("encoding")]
+        
+        /// <summary>
+        /// How the data sent / received will be encoded
+        /// </summary>
         public static string Encoding { get; } = "json";
-
-        [JsonProperty("compress")]
+        
+        //TODO: Test Compression
+        /// <summary>
+        /// Compression the websocket should use
+        /// </summary>
         public static string Compress { get; } = string.Empty;
         
+        /// <summary>
+        /// Generated connection string for the websocket
+        /// </summary>
+        /// <returns></returns>
         public static string Serialize() => $"v={Version}&encoding={Encoding}";
     }
 }

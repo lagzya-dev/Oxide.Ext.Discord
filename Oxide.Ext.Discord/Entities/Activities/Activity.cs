@@ -3,54 +3,120 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Helpers.Cdn;
 
 namespace Oxide.Ext.Discord.Entities.Activities
 {
+    /// <summary>
+    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object">Activity Structure</a>
+    /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Activity
     {
+        /// <summary>
+        /// The activity's name
+        /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
         
+        /// <summary>
+        /// Activity type
+        /// See <see cref="ActivityType"/>
+        /// </summary>
         [JsonProperty("type")]
         public ActivityType Type { get; set; }
         
+        /// <summary>
+        /// Stream url, is validated when type is 1
+        /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; }
 
+        /// <summary>
+        /// Unix timestamp of when the activity was added to the user's session
+        /// </summary>
         [JsonProperty("created_at")]
         public int CreatedAt { get; set; }
         
-        public DateTime CreatedAtDt => CreatedAt.ToDateTime();
+        /// <summary>
+        /// Timestamp of when the activity was added to the user's session
+        /// </summary>
+        public DateTime CreatedAtDateTime => CreatedAt.ToDateTime();
         
+        /// <summary>
+        /// Unix timestamps for start and/or end of the game
+        /// See <see cref="ActivityTimestamps"/>
+        /// </summary>
         [JsonProperty("timestamps")]
         public List<ActivityTimestamps> Timestamps { get; set; }
         
+        /// <summary>
+        /// Application id for the game
+        /// </summary>
         [JsonProperty("application_id")]
-        public string ApplicationId { get; set; }
+        public Snowflake ApplicationId { get; set; }
         
+        /// <summary>
+        /// What the player is currently doing
+        /// </summary>
         [JsonProperty("details")]
         public string Details { get; set; }
         
+        /// <summary>
+        /// The user's current party status
+        /// </summary>
         [JsonProperty("state")]
         public string State { get; set; }
         
+        /// <summary>
+        /// tTe emoji used for a custom status
+        /// See <see cref="Emoji"/>
+        /// </summary>
         [JsonProperty("emoji")]
         public Emoji Emoji { get; set; }
         
+        /// <summary>
+        /// Information for the current party of the player
+        /// See <see cref="ActivityParty"/>
+        /// </summary>
         [JsonProperty("party")]
         public ActivityParty Party { get; set; }
         
+        /// <summary>
+        /// Images for the presence and their hover texts
+        /// See <see cref="ActivityAssets"/>
+        /// </summary>
         [JsonProperty("assets")]
         public ActivityAssets Assets { get; set; }
         
+        /// <summary>
+        /// Secrets for Rich Presence joining and spectating
+        /// See <see cref="ActivitySecrets"/>
+        /// </summary>
         [JsonProperty("secrets")]
         public ActivitySecrets Secrets { get; set; }
         
+        /// <summary>
+        /// Whether or not the activity is an instanced game session
+        /// </summary>
         [JsonProperty("instance")]
         public bool? Instance { get; set; }
         
+        /// <summary>
+        /// Describes what the payload includes
+        /// See <see cref="ActivityFlags"/>
+        /// </summary>
         [JsonProperty("flags")]
         public ActivityFlags? Flags { get; set; }
+
+        /// <summary>
+        /// Returns the large image url for the presence asset
+        /// </summary>
+        public string GetLargeImageUrl => DiscordCdn.GetApplicationAssetUrl(ApplicationId, Assets.LargeImage);
+        
+        /// <summary>
+        /// Returns the small image url for the presence asset
+        /// </summary>
+        public string GetSmallImageUrl => DiscordCdn.GetApplicationAssetUrl(ApplicationId, Assets.SmallImage);
     }
 }

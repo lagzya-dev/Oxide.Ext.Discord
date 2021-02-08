@@ -12,13 +12,16 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs
         public string MembersRemoved { get; set; }
         
         [JsonProperty("channel_id")]
-        public string ChannelId { get; set; }
+        public Snowflake ChannelId { get; set; }
+        
+        [JsonProperty("message_id")]
+        public Snowflake MessageId { get; set; }
         
         [JsonProperty("count")]
         public string Count { get; set; }
         
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
         
         [JsonProperty("type")]
         public string Type { get; set; }

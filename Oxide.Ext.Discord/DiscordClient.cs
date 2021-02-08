@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord
         public BotClient Bot { get; private set; }
         public DiscordSettings Settings { get; private set; } = new DiscordSettings();
         
-        private ILogger _logger;
+        internal ILogger Logger;
 
         public DiscordClient(Plugin plugin)
         {
@@ -42,29 +42,30 @@ namespace Oxide.Ext.Discord
         public void Connect(DiscordSettings settings)
         {
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
-            _logger = new Logger(settings.LogLevel);
+            Logger = new Logger(settings.LogLevel);
             
             if (string.IsNullOrEmpty(Settings.ApiToken))
             {
-                _logger.Error("API Token is null or empty!");
+                Logger.Error("API Token is null or empty!");
                 return;
             }
 
             if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
             {
-                _logger.Warning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
+                Logger.Warning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
             }
             
-            _logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {Owner.Name}");
+            Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {Owner.Name}");
 
             Bot = BotClient.GetOrCreate(this);
 
             RegisterPluginForHooks(Owner);
-            CallHook("DiscordSocket_Initialized");
+            Interface.Call("Discord_ClientConnect", Owner, this);
         }
         
         public void Disconnect()
         {
+            Interface.Call("Discord_ClientDisconnect", Owner, this);
             Bot?.RemoveClient(this);
         }
 
@@ -91,7 +92,15 @@ namespace Oxide.Ext.Discord
             });
         }
 
-       internal static void OnPluginAdded(Plugin plugin)
+        #region Plugin Handling
+        public static DiscordClient GetClient(Plugin plugin) => GetClient(plugin?.Name);
+
+        public static DiscordClient GetClient(string pluginName)
+        {
+            return Clients[pluginName];
+        }
+        
+        internal static void OnPluginAdded(Plugin plugin)
         {
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
@@ -145,5 +154,6 @@ namespace Oxide.Ext.Discord
                 Clients.Remove(client.Owner.Name);
             }
         }
+        #endregion
     }
 }

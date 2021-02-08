@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Oxide.Ext.Discord.REST
 {
@@ -9,5 +10,8 @@ namespace Oxide.Ext.Discord.REST
         
         [JsonProperty("message")]
         public string Message { get; set; }
+        
+        [JsonProperty("errors")]
+        public JObject Errors { get; set; }
     }
 }

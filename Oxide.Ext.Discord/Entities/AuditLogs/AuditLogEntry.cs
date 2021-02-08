@@ -7,16 +7,16 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs
     public class AuditLogEntry
     {
         [JsonProperty("target_id")]
-        public string TargetId { get; set; }
+        public Snowflake TargetId { get; set; }
 
         [JsonProperty("changes")]
         public List<AuditLogChange> Changes { get; set; }
 
         [JsonProperty("user_id")]
-        public string UserId { get; set; }
+        public Snowflake UserId { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Snowflake Id { get; set; }
 
         [JsonProperty("action_type")]
         public int? ActionType { get; set; }

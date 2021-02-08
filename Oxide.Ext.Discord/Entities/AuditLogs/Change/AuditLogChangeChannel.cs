@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
         public bool Nsfw { get; set; }
 
         [JsonProperty("application_id")]
-        public string ApplicationId { get; set; }
+        public Snowflake ApplicationId { get; set; }
             
         [JsonProperty("rate_limit_per_user")]
         public int? RateLimitPerUser { get; set; }
