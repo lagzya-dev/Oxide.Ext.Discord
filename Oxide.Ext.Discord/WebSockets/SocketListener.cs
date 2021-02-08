@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
@@ -545,6 +546,12 @@ namespace Oxide.Ext.Discord.WebSockets
             if (existing == null)
             {
                 _client.AddGuild(guild);
+                //Request all guild members so we can be sure we have them all.
+                _client.RequestGuildMembers(new GuildMembersRequest
+                {
+                    Nonce = "DiscordExtension",
+                    GuildId = guild.Id,
+                });
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} GUILD_CREATE: Guild not found adding to list.");
             }
             else
@@ -676,6 +683,23 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildMembersChunk(EventPayload payload)
         {
             GuildMembersChunk chunk = payload.EventData.ToObject<GuildMembersChunk>();
+            
+            //Used to load all members in the discord server
+            if (chunk.Nonce == "DiscordExtension")
+            {
+                Guild guild = _client.Servers[chunk.GuildId];
+                if (guild != null && guild.IsAvailable)
+                {
+                    foreach (GuildMember member in chunk.Members) 
+                    {
+                        if (!guild.Members.ContainsKey(member.User.Id))
+                        {
+                            guild.Members[member.User.Id] = member;
+                        }
+                    }
+                }
+            }
+
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMembersChunk)} GUILD_MEMBER_UPDATE: Guild ID: {chunk.GuildId} Nonce: {chunk.Nonce}");
             _client.CallHook("Discord_GuildMembersChunk", chunk);
         }
