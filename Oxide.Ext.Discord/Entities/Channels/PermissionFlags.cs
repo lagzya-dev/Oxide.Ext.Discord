@@ -1,40 +1,221 @@
 using System;
+using System.ComponentModel;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
+    /// <summary>
+    /// Represents <a href="https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags">Permission Flags</a> for user or role
+    /// </summary>
     [Flags]
     public enum PermissionFlags
     {
+        /// <summary>
+        /// Allows creation of instant invites
+        /// Channel Type (Text, Voice)
+        /// </summary>
+        [Description("CREATE_INSTANT_INVITE")]
         CreateInstantInvite = 1 << 0,
+        
+        /// <summary>
+        /// Allows kicking members
+        /// </summary>
+        [Description("KICK_MEMBERS")]
         KickMembers = 1 << 1,
+        
+        /// <summary>
+        /// Allows banning members
+        /// </summary>
+        [Description("BAN_MEMBERS")]
         BanMembers = 1 << 2,
+        
+        /// <summary>
+        /// Allows all permissions and bypasses channel permission overwrites
+        /// </summary>
+        [Description("ADMINISTRATOR")]
         Administrator = 1 << 3,
+        
+        /// <summary>
+        /// Allows management and editing of channels
+        /// Channel Type (Text, Voice)
+        /// </summary>
+        [Description("MANAGE_CHANNELS")]
         ManageChannels = 1 << 4,
+        
+        /// <summary>
+        /// Allows management and editing of the guild
+        /// </summary>
+        [Description("MANAGE_GUILD")]
         ManageGuild = 1 << 5,
+        
+        /// <summary>
+        /// Allows for the addition of reactions to messages
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("ADD_REACTIONS")]
         AddReactions = 1 << 6,
+        
+        /// <summary>
+        /// Allows for viewing of audit logs
+        /// </summary>
+        [Description("VIEW_AUDIT_LOG")]
         ViewAuditLog = 1 << 7,
+        
+        /// <summary>
+        /// Allows for using priority speaker in a voice channel
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("PRIORITY_SPEAKER")]
         PrioritySpeaker = 1 << 8,
+        
+        /// <summary>
+        /// Allows the user to go live
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("STREAM")]
         Stream = 1 << 9,
+        
+        /// <summary>
+        /// Allows guild members to view a channel, which includes reading messages in text channels
+        /// Channel Type (Text, Voice)
+        /// </summary>
+        [Description("VIEW_CHANNEL")]
         ViewChannel = 1 << 10,
+        
+        /// <summary>
+        /// Allows for sending messages in a channel
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("SEND_MESSAGES")]
         SendMessages = 1 << 11,
+        
+        /// <summary>
+        /// Allows for sending of /tts messages
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("SEND_TTS_MESSAGES")]
         SendTTSMessages = 1 << 12,
+        
+        /// <summary>
+        /// Allows for deletion of other users messages
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("MANAGE_MESSAGES")]
         ManageMessages = 1 << 13,
+        
+        /// <summary>
+        /// Links sent by users with this permission will be auto-embedded
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("EMBED_LINKS")]
         EmbedLinks = 1 << 14,
+        
+        /// <summary>
+        /// Allows for uploading images and files
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("ATTACH_FILES")]
         AttachFiles = 1 << 15,
+        
+        /// <summary>
+        /// Allows for reading of message history
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("READ_MESSAGE_HISTORY")]
         ReadMessageHistory = 1 << 16,
+        
+        /// <summary>
+        /// Allows for using the @everyone tag to notify all users in a channel,
+        /// and the @here tag to notify all online users in a channel
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("MENTION_EVERYONE")]
         MentionEveryone = 1 << 17,
+        
+        /// <summary>
+        /// Allows the usage of custom emojis from other servers
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("USE_EXTERNAL_EMOJIS")]
         UseExternalEmojis = 1 << 18,
+        
+        /// <summary>
+        /// Allows for viewing guild insights
+        /// </summary>
+        [Description("VIEW_GUILD_INSIGHTS")]
         ViewGuildInsights = 1 << 19,
+        
+        /// <summary>
+        /// Allows for joining of a voice channel
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("CONNECT")]
         Connect = 1 << 20,
+        
+        /// <summary>
+        /// Allows for speaking in a voice channel
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("SPEAK")]
         Speak = 1 << 21,
+        
+        /// <summary>
+        /// Allows for muting members in a voice channel
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("MUTE_MEMBERS")]
         MuteMembers = 1 << 22,
+        
+        /// <summary>
+        /// Allows for deafening of members in a voice channel
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("DEAFEN_MEMBERS")]
         DeafanMembers = 1 << 23,
+        
+        /// <summary>
+        /// Allows for moving of members between voice channels
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("MOVE_MEMBERS")]
         MoveMembers = 1 << 24,
+        
+        /// <summary>
+        /// Allows for using voice-activity-detection in a voice channel
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("USE_VAD")]
         UseVad = 1 << 25,
+        
+        /// <summary>
+        /// Allows for modification of own nickname
+        /// </summary>
+        [Description("CHANGE_NICKNAME")]
         ChangeNickname = 1 << 26,
+        
+        /// <summary>
+        /// Allows for modification of other users nicknames
+        /// </summary>
+        [Description("MANAGE_NICKNAMES")]
         ManageNicknames = 1 << 27,
+        
+        /// <summary>
+        /// Allows management and editing of roles
+        /// Channel Type (Text, Voice)
+        /// </summary>
+        [Description("MANAGE_ROLES")]
         ManageRoles = 1 << 28,
+        
+        /// <summary>
+        /// Allows management and editing of webhooks
+        /// Channel Type (Text, Voice)
+        /// </summary>
+        [Description("MANAGE_WEBHOOKS")]
         ManageWebhooks = 1 << 29,
+        
+        /// <summary>
+        /// Allows management and editing of emojis
+        /// </summary>
+        [Description("MANAGE_EMOJIS")]
         ManageEmojis = 1 << 30,
     }
 }

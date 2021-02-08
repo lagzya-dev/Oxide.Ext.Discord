@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Guilds;
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Integrations;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GuildMemberAdd : GuildMember
+    public class IntegrationCreate : Integration
     {
         [JsonProperty("guild_id")]
         public Snowflake GuildId { get; set; }
