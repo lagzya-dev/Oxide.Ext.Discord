@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#channel-object">Channel Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Channel : ChannelUpdate, IGetEntityId
+    public class Channel : IGetEntityId
     {
         /// <summary>
         /// The ID of this channel
@@ -25,30 +25,79 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public Snowflake Id { get; set; }
         
         /// <summary>
+        /// the type of channel <see cref="ChannelType"/>
+        /// </summary>
+        [JsonProperty("type")]
+        public ChannelType Type { get; set; }
+        
+        /// <summary>
         /// the ID of the guild
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake GuildId { get; set; }
         
         /// <summary>
-        /// The id of the last message sent in this channel (may not point to an existing or valid message)
+        /// Sorting position of the channel
         /// </summary>
-        [JsonProperty("last_message_id")]        
-        public Snowflake LastMessageId { get; set; }
-                
-        /// <summary>
-        /// The recipients of the DM
-        /// </summary>
-        [JsonConverter(typeof(HashListConverter<DiscordUser>))]
-        [JsonProperty("recipients")]
-        public Hash<Snowflake, DiscordUser> Recipients { get; set; }
+        [JsonProperty("position")]
+        public int? Position { get; set; }
         
         /// <summary>
         /// Explicit permission overwrites for members and roles <see cref="Overwrite"/>
         /// </summary>
         [JsonConverter(typeof(HashListConverter<Overwrite>))]
         [JsonProperty("permission_overwrites")]
-        public new Hash<Snowflake, Overwrite> PermissionOverwrites { get; set; }
+        public Hash<Snowflake, Overwrite> PermissionOverwrites { get; set; }
+        
+        /// <summary>
+        /// The name of the channel (2-100 characters)
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The channel topic (0-1024 characters)
+        /// </summary>
+        [JsonProperty("topic")]        
+        public string Topic { get; set; }
+        
+        /// <summary>
+        /// Whether the channel is nsfw
+        /// </summary>
+        [JsonProperty("nsfw")]
+        public bool? Nsfw { get; set; }
+        
+        /// <summary>
+        /// The id of the last message sent in this channel (may not point to an existing or valid message)
+        /// </summary>
+        [JsonProperty("last_message_id")]        
+        public Snowflake LastMessageId { get; set; }
+        
+        /// <summary>
+        /// The bitrate (in bits) of the voice channel
+        /// </summary>
+        [JsonProperty("bitrate")]
+        public int? Bitrate { get; set; }
+        
+        /// <summary>
+        /// The user limit of the voice channel
+        /// </summary>
+        [JsonProperty("user_limit")]
+        public int? UserLimit { get; set; }
+        
+        /// <summary>
+        /// Amount of seconds a user has to wait before sending another message (0-21600);
+        /// bots, as well as users with the permission manage_messages or manage_channel, are unaffected
+        /// </summary>
+        [JsonProperty("rate_limit_per_user")]
+        public int? RateLimitPerUser { get; set; }
+        
+        /// <summary>
+        /// The recipients of the DM
+        /// </summary>
+        [JsonConverter(typeof(HashListConverter<DiscordUser>))]
+        [JsonProperty("recipients")]
+        public Hash<Snowflake, DiscordUser> Recipients { get; set; }
         
         /// <summary>
         /// icon hash
@@ -67,6 +116,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("application_id")]
         public Snowflake ApplicationId { get; set; }
+        
+        /// <summary>
+        /// ID of the parent category for a channel (each parent category can contain up to 50 channels)
+        /// </summary>
+        [JsonProperty("parent_id")]
+        public Snowflake ParentId { get; set; }
         
         /// <summary>
         /// When the last pinned message was pinned.

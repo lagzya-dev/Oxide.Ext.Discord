@@ -22,13 +22,25 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object">Guild Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Guild : GuildCreate
+    public class Guild
     {
         /// <summary>
         /// Guild id
         /// </summary>
         [JsonProperty("id")]
         public Snowflake Id { get; set; }
+        
+        /// <summary>
+        /// Name of the guild (2-100 characters)
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        
+        /// <summary>
+        /// Base64 128x128 image for the guild icon
+        /// </summary>
+        [JsonProperty("icon")]        
+        public string Icon { get; set; }
         
         /// <summary>
         /// Icon hash
@@ -66,6 +78,24 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("permissions")]
         public string Permissions { get; set; }
+        
+        /// <summary>
+        /// Voice region id
+        /// </summary>
+        [JsonProperty("region")]
+        public string Region { get; set; }
+        
+        /// <summary>
+        /// ID of afk channel
+        /// </summary>
+        [JsonProperty("afk_channel_id")]
+        public Snowflake AfkChannelId { get; set; }
+        
+        /// <summary>
+        /// Afk timeout in seconds
+        /// </summary>
+        [JsonProperty("afk_timeout")]
+        public int? AfkTimeout { get; set; }
   
         /// <summary>
         /// True if the server widget is enabled
@@ -78,6 +108,24 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("widget_channel_id")]
         public Snowflake WidgetChannelId { get; set; }
+        
+        /// <summary>
+        /// Verification level
+        /// </summary>
+        [JsonProperty("verification_level")]
+        public GuildVerificationLevel? VerificationLevel { get; set; }
+        
+        /// <summary>
+        /// Default message notification level
+        /// </summary>
+        [JsonProperty("default_message_notifications")]
+        public DefaultMessageNotificationLevel? DefaultMessageNotifications { get; set; }
+        
+        /// <summary>
+        /// Explicit content filter level
+        /// </summary>
+        [JsonProperty("explicit_content_filter")]
+        public ExplicitContentFilterLevel? ExplicitContentFilter { get; set; }
   
         /// <summary>
         /// Custom guild emojis
@@ -105,6 +153,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("application_id")]
         public Snowflake ApplicationId { get; set; }
+        
+        /// <summary>
+        /// The id of the channel where guild notices such as welcome messages and boost events are posted
+        /// </summary>
+        [JsonProperty("system_channel_id")]
+        public Snowflake SystemChannelId { get; set; }
         
         /// <summary>
         /// System channel flags
@@ -162,14 +216,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonConverter(typeof(HashListConverter<Channel>))]
         [JsonProperty("channels")]
-        public new Hash<Snowflake, Channel> Channels { get; set; }
+        public Hash<Snowflake, Channel> Channels { get; set; }
         
         /// <summary>
         /// Roles in the guild
         /// </summary>
         [JsonConverter(typeof(HashListConverter<Role>))]
         [JsonProperty("roles")]
-        public new Hash<Snowflake, Role> Roles { get; set; }
+        public Hash<Snowflake, Role> Roles { get; set; }
           
         /// <summary>
         /// Presences of the members in the guild
