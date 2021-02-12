@@ -32,9 +32,18 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                     }
 
                     throw new JsonException("Snowflake string JSON token failed to parse to snowflake");
+              
+                case JsonToken.Null:
+                    if (Nullable.GetUnderlyingType(objectType) != null)
+                    {
+                        return null;
+                    }
+
+                    DiscordExtension.GlobalLogger.Warning($"Snowflake tried to parse null to non nullable field: {reader.Path}");
+                    return default(Snowflake);
                 
                 default:
-                    throw new JsonException("Token type does not match snowflake valid types of string or integer");
+                    throw new JsonException($"Token type {reader.TokenType} does not match snowflake valid types of string or integer");
             }
         }
         

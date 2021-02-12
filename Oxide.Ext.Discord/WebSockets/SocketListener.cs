@@ -14,6 +14,7 @@ using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using WebSocketSharp;
+using LogLevel = Oxide.Ext.Discord.Logging.LogLevel;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
@@ -502,13 +503,18 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchChannelCreate(EventPayload payload)
         {
             Channel channel = payload.EventData.ToObject<Channel>();
+            if (!channel.GuildId.HasValue)
+            {
+                return;
+            }
+            
             if (channel.Type == ChannelType.Dm || channel.Type == ChannelType.GroupDm)
             {
                 _client.DirectMessages[channel.Id] = channel;
             }
             else
             {
-                Guild guild = _client.GetGuild(channel.GuildId);
+                Guild guild = _client.GetGuild(channel.GuildId.Value);
                 if (guild != null && guild.IsAvailable)
                 {
                     guild.Channels[channel.Id] = channel;
@@ -523,6 +529,11 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchChannelUpdate(EventPayload payload)
         {
             Channel update = payload.EventData.ToObject<Channel>();
+            if (!update.GuildId.HasValue)
+            {
+                return;
+            }
+            
             Channel previous = null;
             if (update.Type == ChannelType.Dm || update.Type == ChannelType.GroupDm)
             {
@@ -538,7 +549,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             else
             {
-                Guild guild = _client.GetGuild(update.GuildId);
+                Guild guild = _client.GetGuild(update.GuildId.Value);
                 if (guild != null && guild.IsAvailable)
                 {
                     previous = guild.Channels[update.Id];
@@ -561,9 +572,12 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchChannelDelete(EventPayload payload)
         {
             Channel channel = payload.EventData.ToObject<Channel>();
-            _client.GetGuild(channel.GuildId)?.Channels.RemoveAll(c => c.Id == channel.Id);
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelDelete)} CHANNEL_DELETE: ID: {channel.Id} Type: {channel.Type}.");
-            _client.CallHook("Discord_ChannelDelete", channel);
+            if (channel.GuildId.HasValue)
+            {
+                _client.GetGuild(channel.GuildId.Value)?.Channels.RemoveAll(c => c.Id == channel.Id);
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelDelete)} CHANNEL_DELETE: ID: {channel.Id} Type: {channel.Type}.");
+                _client.CallHook("Discord_ChannelDelete", channel);
+            }
         }
 
         //https://discord.com/developers/docs/topics/gateway#channel-pins-update
@@ -580,21 +594,17 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             Guild guild = payload.EventData.ToObject<Guild>();
             Guild existing = _client.GetGuild(guild.Id);
-            if (existing == null)
+            bool shouldRequestMembers = existing == null || !existing.IsAvailable;
+            _client.AddGuildOrUpdate(guild);
+            if (shouldRequestMembers)
             {
-                _client.AddGuild(guild);
+                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} GUILD_CREATE: Guild is new requesting all guild members.");
                 //Request all guild members so we can be sure we have them all.
                 _client.RequestGuildMembers(new GuildMembersRequest
                 {
                     Nonce = "DiscordExtension",
                     GuildId = guild.Id,
                 });
-                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} GUILD_CREATE: Guild not found adding to list.");
-            }
-            else
-            {
-                existing.Unavailable = guild.Unavailable;
-                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} GUILD_CREATE: Guild updating to unavailable.");
             }
 
             _client.CallHook("Discord_GuildCreate", guild);
@@ -820,7 +830,22 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} MESSAGE_CREATE: Guild ID: {message.GuildId} Channel ID: {message.ChannelId} Message ID: {message.Id}");
-            _client.CallHook("Discord_MessageCreate", message);
+            
+            if ((!message.Author.Bot ?? false) && DiscordExtension.DiscordCommands.HasCommands() && message.Content.StartsWith("/"))
+            {
+                message.Content.TrimStart('/').ParseCommand(out string command, out string[] args);
+                if (message.GuildId != null && DiscordExtension.DiscordCommands.HandleGuildCommand(_client, message, channel, command, args))
+                {
+                    return;
+                }
+
+                if (DiscordExtension.DiscordCommands.HandleDirectMessageCommand(_client, message, channel, command, args))
+                {
+                    return;
+                }
+            }
+
+            _client.CallHook("Discord_MessageCreate", message, channel);
         }
 
         //https://discord.com/developers/docs/topics/gateway#message-update
@@ -1041,8 +1066,9 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#invalid-session
         private void HandleInvalidSession(EventPayload payload)
         {
-            _logger.Warning("Invalid Session ID opcode received!");
-            _webSocket.Disconnect(true, payload.TokenData?.ToObject<bool>() ?? false);
+            bool shouldResume = payload.TokenData?.ToObject<bool>() ?? false;
+            _logger.Warning($"Invalid Session ID opcode received! Attempting to reconnect. Should Resume? {shouldResume}");
+            _webSocket.Disconnect(true, shouldResume);
         }
 
         //https://discord.com/developers/docs/topics/gateway#hello
@@ -1054,11 +1080,12 @@ namespace Oxide.Ext.Discord.WebSockets
             // Client should now perform identification
             if (_webSocket.ShouldAttemptResume)
             {
-                _logger.Warning("Attempting resume opcode...");
+                _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleHello)} Attempting to resume session with ID: {_client.SessionId}");
                 _client.Resume();
             }
             else
             {
+                _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleHello)} Identifying bot with discord.");
                 _client.Identify();
                 _webSocket.ShouldAttemptResume = true;
             }

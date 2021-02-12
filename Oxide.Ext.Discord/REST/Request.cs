@@ -78,7 +78,7 @@ namespace Oxide.Ext.Discord.REST
 
         private readonly ILogger _logger;
         
-        private static readonly JsonSerializerSettings DefaultSerializerSettings = new JsonSerializerSettings()
+        private static readonly JsonSerializerSettings DefaultSerializerSettings = new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore
         };

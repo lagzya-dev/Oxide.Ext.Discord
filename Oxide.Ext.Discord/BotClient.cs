@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -164,6 +165,7 @@ namespace Oxide.Ext.Discord
         public void ShutdownBot()
         {
             _logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
+            ActiveBots.Remove(Settings.ApiToken);
             Initialized = false;
             _webSocket.Shutdown();
             _webSocket = null;
@@ -385,10 +387,10 @@ namespace Oxide.Ext.Discord
                 return;
             }
             
-            Identify identify = new Identify()
+            Identify identify = new Identify
             {
                 Token = Settings.ApiToken,
-                Properties = new Properties()
+                Properties = new Properties
                 {
                     OS = "Oxide.Ext.Discord",
                     Browser = "Oxide.Ext.Discord",
@@ -397,7 +399,7 @@ namespace Oxide.Ext.Discord
                 Intents = Settings.Intents,
                 Compress = false,
                 LargeThreshold = 50,
-                Shard = new List<int>() { 0, 1 }
+                Shard = new List<int> { 0, 1 }
             };
             
             _webSocket.Send(GatewayCommandCode.Identify, identify);
@@ -493,10 +495,12 @@ namespace Oxide.Ext.Discord
             Guild existing = Servers[guild.Id];
             if (existing != null)
             {
+                _logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Updating Existing Guild {guild.Id}");
                 existing.Update(guild);
             }
             else
             {
+                _logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Adding new Guild {guild.Id}");
                 Servers[guild.Id] = guild;
             }
         }
@@ -508,6 +512,11 @@ namespace Oxide.Ext.Discord
         internal void RemoveGuild(Snowflake guildId)
         {
             Servers.Remove(guildId);
+        }
+
+        internal bool IsPluginRegistered(Plugin plugin)
+        {
+            return Clients.Any(t => t.Owner == plugin);
         }
     }
 }

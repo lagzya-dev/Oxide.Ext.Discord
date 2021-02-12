@@ -87,7 +87,7 @@ namespace Oxide.Ext.Discord.REST
 
             if (_thread == null || !_thread.IsAlive)
             {
-                _thread = new Thread(RunThread);
+                _thread = new Thread(RunThread) {IsBackground = true};
                 _thread.Start();
             }
         }

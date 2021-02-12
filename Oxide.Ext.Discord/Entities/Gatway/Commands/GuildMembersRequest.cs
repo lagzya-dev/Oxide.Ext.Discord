@@ -19,15 +19,15 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// String that username starts with, or an empty string to return all members
         /// </summary>
         [JsonProperty("query")]
-        public string Query { get; set; }
+        public string Query { get; set; } = "";
 
         /// <summary>
         /// Maximum number of members to send matching the query;
         /// a limit of 0 can be used with an empty string query to return all members
         /// </summary>
         [JsonProperty("limit")]
-        public int Limit { get; set; }
-        
+        public int Limit { get; set; } = 0;
+
         /// <summary>
         /// Used to specify if we want the presences of the matched members
         /// </summary>

@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags">Permission Flags</a> for user or role
     /// </summary>
     [Flags]
-    public enum PermissionFlags
+    public enum PermissionFlags : ulong
     {
         /// <summary>
         /// Allows creation of instant invites

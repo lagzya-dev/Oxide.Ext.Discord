@@ -2,6 +2,8 @@
 using System.Linq;
 using Oxide.Core;
 using Oxide.Core.Extensions;
+using Oxide.Ext.Discord.Libraries.Command;
+using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord
@@ -25,6 +27,9 @@ namespace Oxide.Ext.Discord
         /// Global logger for areas that aren't part of a client connection
         /// </summary>
         public static ILogger GlobalLogger;
+        
+        internal static DiscordLink DiscordLink = new DiscordLink();
+        internal static DiscordCommands DiscordCommands = new DiscordCommands();
         
         /// <summary>
         /// Constructor for the extension
@@ -74,7 +79,9 @@ namespace Oxide.Ext.Discord
             {
                 GlobalLogger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);
             };
-            
+
+            Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
+            Manager.RegisterLibrary(nameof(DiscordCommands), DiscordCommands);
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
             Interface.Oxide.RootPluginManager.OnPluginRemoved +=  DiscordClient.OnPluginRemoved;
         }

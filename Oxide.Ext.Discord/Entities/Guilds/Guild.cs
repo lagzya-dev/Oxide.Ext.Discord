@@ -89,7 +89,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// ID of afk channel
         /// </summary>
         [JsonProperty("afk_channel_id")]
-        public Snowflake AfkChannelId { get; set; }
+        public Snowflake? AfkChannelId { get; set; }
         
         /// <summary>
         /// Afk timeout in seconds
@@ -152,7 +152,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Application id of the guild creator if it is bot-created
         /// </summary>
         [JsonProperty("application_id")]
-        public Snowflake ApplicationId { get; set; }
+        public Snowflake? ApplicationId { get; set; }
         
         /// <summary>
         /// The id of the channel where guild notices such as welcome messages and boost events are posted
@@ -171,7 +171,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The id of the channel where Community guilds can display rules and/or guidelines
         /// </summary>
         [JsonProperty("rules_channel_id")]
-        public Snowflake RulesChannelId { get; set; }
+        public Snowflake? RulesChannelId { get; set; }
         
         /// <summary>
         /// When this guild was joined at
@@ -286,7 +286,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The maximum amount of users in a video channel
         /// </summary>
         [JsonProperty("public_updates_channel_id")]
-        public Snowflake PublicUpdatesChannelId { get; set; }
+        public Snowflake? PublicUpdatesChannelId { get; set; }
         
         /// <summary>
         /// The maximum amount of users in a video channel

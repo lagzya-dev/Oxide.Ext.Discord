@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
     public class HashListConverter<TValue> : JsonConverter where TValue : IGetEntityId
     {
         /// <summary>
-        /// Write a hash as a list in JSOn
+        /// Write a hash as a list in JSON
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="value"></param>

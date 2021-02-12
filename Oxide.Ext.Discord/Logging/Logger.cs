@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord.Logging
 
         private void Log(LogLevel level, string message, object data = null)
         {
-            if (level < _logLevel)
+            if (!IsLogging(level))
             {
                 return;
             }
@@ -92,7 +92,7 @@ namespace Oxide.Ext.Discord.Logging
                     Interface.Oxide.LogError(log);
                     break;
                 case LogLevel.Exception:
-                    Interface.Oxide.LogException(log, (Exception)data);
+                    Interface.Oxide.LogException($"{log}\n{data}", (Exception)data);
                     break;
                 default:
                     Interface.Oxide.LogInfo(log);
@@ -107,6 +107,16 @@ namespace Oxide.Ext.Discord.Logging
         public void UpdateLogLevel(LogLevel level)
         {
             _logLevel = level;
+        }
+
+        /// <summary>
+        /// Returns true if the logger is logging for the passed log level
+        /// </summary>
+        /// <param name="level">Log Level to check</param>
+        /// <returns>True if the logger is logging for the given log level</returns>
+        public bool IsLogging(LogLevel level)
+        {
+            return level >= _logLevel;
         }
     }
 }

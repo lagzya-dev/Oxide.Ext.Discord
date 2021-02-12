@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 namespace Oxide.Ext.Discord.Entities.Messages
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-params">Message Create Structure</a> to be created in discord
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-parameters-for-contenttype-applicationjson">Message Create Structure</a> to be created in discord
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class MessageCreate

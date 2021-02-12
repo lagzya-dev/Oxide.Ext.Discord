@@ -49,5 +49,12 @@ namespace Oxide.Ext.Discord.Logging
         /// </summary>
         /// <param name="level">Level to update the logger to</param>
         void UpdateLogLevel(LogLevel level);
+
+        /// <summary>
+        /// Returns true if the logger is logging for the passed log level
+        /// </summary>
+        /// <param name="level">Log Level to check</param>
+        /// <returns>True if the logger is logging for the given log level</returns>
+        bool IsLogging(LogLevel level);
     }
 }

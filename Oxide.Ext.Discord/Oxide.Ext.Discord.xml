@@ -4,10 +4,42 @@
         <name>Oxide.Ext.Discord</name>
     </assembly>
     <members>
+        <member name="T:Oxide.Ext.Discord.Attributes.GuildCommandAttribute">
+            <summary>
+            Used to identify guild bot commands
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Attributes.GuildCommandAttribute.Name">
+            <summary>
+            Name of the command
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Attributes.GuildCommandAttribute.#ctor(System.String)">
+            <summary>
+            Constructor for a guild command
+            </summary>
+            <param name="name">Name of the command</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Attributes.DiscordClientAttribute">
             <summary>
             Used to identify which field in a plugin to create a discord client for and set the client to.
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Attributes.DirectMessageCommandAttribute">
+            <summary>
+            Used to identify direct message bot commands
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Attributes.DirectMessageCommandAttribute.Name">
+            <summary>
+            Name of the command
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Attributes.DirectMessageCommandAttribute.#ctor(System.String)">
+            <summary>
+            Constructor for a direct message command
+            </summary>
+            <param name="name">Name of the command</param>
         </member>
         <member name="T:Oxide.Ext.Discord.BotClient">
             <summary>
@@ -245,6 +277,13 @@
             <param name="plugin"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.DiscordClient.CallHook(System.String,System.Object[])">
+            <summary>
+            Call a hook for all plugins registered to receive hook calls for this client
+            </summary>
+            <param name="hookName"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.GlobalCallHook(System.String,System.Object[])">
             <summary>
             Call a hook for all plugins registered to receive hook calls for this client
             </summary>
@@ -1022,9 +1061,39 @@
             The ID of this channel
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Type">
+            <summary>
+            the type of channel <see cref="T:Oxide.Ext.Discord.Entities.Channels.ChannelType"/>
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.GuildId">
             <summary>
             the ID of the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Position">
+            <summary>
+            Sorting position of the channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.PermissionOverwrites">
+            <summary>
+            Explicit permission overwrites for members and roles <see cref="T:Oxide.Ext.Discord.Entities.Channels.Overwrite"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Name">
+            <summary>
+            The name of the channel (2-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Topic">
+            <summary>
+            The channel topic (0-1024 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Nsfw">
+            <summary>
+            Whether the channel is nsfw
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.LastMessageId">
@@ -1032,14 +1101,25 @@
             The id of the last message sent in this channel (may not point to an existing or valid message)
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Bitrate">
+            <summary>
+            The bitrate (in bits) of the voice channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.UserLimit">
+            <summary>
+            The user limit of the voice channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.RateLimitPerUser">
+            <summary>
+            Amount of seconds a user has to wait before sending another message (0-21600);
+            bots, as well as users with the permission manage_messages or manage_channel, are unaffected
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Recipients">
             <summary>
             The recipients of the DM
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.PermissionOverwrites">
-            <summary>
-            Explicit permission overwrites for members and roles <see cref="T:Oxide.Ext.Discord.Entities.Channels.Overwrite"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Icon">
@@ -1055,6 +1135,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.ApplicationId">
             <summary>
             Application id of the group DM creator if it is bot-created
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.ParentId">
+            <summary>
+            ID of the parent category for a channel (each parent category can contain up to 50 channels)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.LastPinTimestamp">
@@ -3557,6 +3642,16 @@
             Guild id
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Name">
+            <summary>
+            Name of the guild (2-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Icon">
+            <summary>
+            Base64 128x128 image for the guild icon
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.IconHash">
             <summary>
             Icon hash
@@ -3588,6 +3683,21 @@
             Total permissions for the user in the guild (excludes overrides)
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Region">
+            <summary>
+            Voice region id
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.AfkChannelId">
+            <summary>
+            ID of afk channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.AfkTimeout">
+            <summary>
+            Afk timeout in seconds
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.WidgetEnabled">
             <summary>
             True if the server widget is enabled
@@ -3596,6 +3706,21 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.WidgetChannelId">
             <summary>
             The channel id that the widget will generate an invite to, or null if set to no invite
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.VerificationLevel">
+            <summary>
+            Verification level
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.DefaultMessageNotifications">
+            <summary>
+            Default message notification level
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.ExplicitContentFilter">
+            <summary>
+            Explicit content filter level
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Emojis">
@@ -3618,6 +3743,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.ApplicationId">
             <summary>
             Application id of the guild creator if it is bot-created
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.SystemChannelId">
+            <summary>
+            The id of the channel where guild notices such as welcome messages and boost events are posted
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.SystemChannelFlags">
@@ -5955,7 +6085,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageCreate">
             <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-params">Message Create Structure</a> to be created in discord
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-parameters-for-contenttype-applicationjson">Message Create Structure</a> to be created in discord
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.Content">
@@ -7584,6 +7714,20 @@
             <typeparam name="TKey">Key type of the hash</typeparam>
             <typeparam name="TValue">Value type of the hash</typeparam>
         </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.StringExt">
+            <summary>
+            String Extension methods
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.StringExt.ParseCommand(System.String,System.String@,System.String[]@)">
+            <summary>
+            Parses the specified command into uMod command format
+            Sourced from RustCore.cs of OxideMod (https://github.com/theumod/uMod.Rust/blob/oxide/src/RustCore.cs)
+            </summary>
+            <param name="argStr"></param>
+            <param name="command"></param>
+            <param name="args"></param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn">
             <summary>
             Represents Discord <a href="https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints">CDN Endpoints</a>
@@ -7747,7 +7891,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.Converters.HashListConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
-            Write a hash as a list in JSOn
+            Write a hash as a list in JSON
             </summary>
             <param name="writer"></param>
             <param name="value"></param>
@@ -8006,6 +8150,230 @@
             <param name="emoji"></param>
             <returns></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Command.BaseCommand">
+            <summary>
+            Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L76)
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Command.DiscordCommands">
+            <summary>
+            Represents a library for discord commands
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Command.DiscordCommands._pluginRemovedFromManager">
+            <summary>
+            Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L104)
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HasCommands">
+            <summary>
+            Returns if there are any guild discord commands are registered
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HasDirectMessageCommands">
+            <summary>
+            Returns if there are any guild discord commands are registered
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HasGuildCommands">
+            <summary>
+            Returns if there are any guild discord commands are registered
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.AddDiscordDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds a discord direct message command
+            Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
+            </summary>
+            <param name="name"></param>
+            <param name="plugin"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.AddDiscordDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.Action{Oxide.Ext.Discord.Entities.Messages.Message,System.String,System.String[]})">
+            <summary>
+            Adds a discord direct message command
+            Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134)
+            </summary>
+            <param name="command"></param>
+            <param name="plugin"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.AddDiscordGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds a discord guild command
+            Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
+            </summary>
+            <param name="name"></param>
+            <param name="plugin"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.AddDiscordGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.Action{Oxide.Ext.Discord.Entities.Messages.Message,System.String,System.String[]})">
+            <summary>
+            Adds a discord guild command
+            Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134)
+            </summary>
+            <param name="command"></param>
+            <param name="plugin"></param>
+            <param name="allowedChannels"></param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.RemoveDiscordCommand(System.String,Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Removes a previously registered discord command
+            Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L286)
+            </summary>
+            <param name="command"></param>
+            <param name="plugin"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.RemoveDiscordCommand(Oxide.Ext.Discord.Libraries.Command.BaseCommand)">
+            <summary>
+            Removes a discord command
+            Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L314)
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.OnPluginRemovedFromManager(Oxide.Core.Plugins.Plugin,Oxide.Core.Plugins.PluginManager)">
+            <summary>
+            Called when a plugin has been removed from manager
+            Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L377)
+            </summary>
+            <param name="sender"></param>
+            <param name="manager"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HandleDirectMessageCommand(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Entities.Messages.Message,Oxide.Ext.Discord.Entities.Channels.Channel,System.String,System.String[])">
+            <summary>
+            Handles the specified direct message command
+            Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L361)
+            </summary>
+            <param name="client"></param>
+            <param name="channel"></param>
+            <param name="name"></param>
+            <param name="args"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HandleGuildCommand(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Entities.Messages.Message,Oxide.Ext.Discord.Entities.Channels.Channel,System.String,System.String[])">
+            <summary>
+            Handles the specified direct message command
+            Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L361)
+            </summary>
+            <param name="client"></param>
+            <param name="channel"></param>
+            <param name="name"></param>
+            <param name="args"></param>
+            <param name="message"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Linking.DiscordLink">
+            <summary>
+            Represents a library for discord linking
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.Link">
+            <summary>
+            Linking Plugin
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.#ctor">
+            <summary>
+            Constructor for discord link
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsEnabled">
+            <summary>
+            Returns if there is a registered link plugin
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.AddLinkPlugin(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Adds a link plugin to be the plugin used with the Discord Link library
+            </summary>
+            <param name="plugin"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(System.Object)">
+            <summary>
+            Returns if the specified ID is linked
+            </summary>
+            <param name="id">ID of the steam or discord ID. Valid Types are String, Ulong, Snowflake</param>
+            <returns>True if the ID is linked; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetPlayerId(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns the Steam ID of the given Discord ID if there is a link
+            </summary>
+            <param name="discordId"></param>
+            <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetPlayer(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns the IPlayer for the given Discord ID
+            </summary>
+            <param name="discordId">Discord ID to get IPlayer for</param>
+            <returns>IPlayer for the given Discord ID; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetDiscordId(System.String)">
+            <summary>
+            Returns the Discord ID for the given Steam ID
+            </summary>
+            <param name="steamId">Steam ID to get Discord ID for</param>
+            <returns>Discord ID for the given Steam ID; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedCount">
+            <summary>
+            Returns the number of linked players
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedSteamIds">
+            <summary>
+            Returns Steam ID's for all linked players
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedDiscordIds">
+            <summary>
+            Returns Discord ID's for all linked players
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamToDiscordIds">
+            <summary>
+            Returns a Hash with a Steam ID key and Discord ID value
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetDiscordToSteamIds">
+            <summary>
+            Returns a Hash with a Discord ID key and Steam ID value
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin">
+            <summary>
+            Represents a plugin that supports Discord Link library
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.GetSteamToDiscordIds">
+            <summary>
+            Returns a Hash of Steam ID's to Discord ID's
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.GetDiscordToSteamIds">
+            <summary>
+            Returns a Hash of Discord ID's to Steam ID's
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.RegisterEvents(System.Action{Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Users.DiscordUser})">
+            <summary>
+            Called on a plugin to register events to be called when that plugin links or unlinks a Steam ID and Discord ID
+            </summary>
+            <param name="onLinked"></param>
+            <param name="onUnlinked"></param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Logging.ILogger">
             <summary>
             Represents an interface for a logger
@@ -8053,6 +8421,13 @@
             Updates the log level for the current logger
             </summary>
             <param name="level">Level to update the logger to</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.IsLogging(Oxide.Ext.Discord.Logging.LogLevel)">
+            <summary>
+            Returns true if the logger is logging for the passed log level
+            </summary>
+            <param name="level">Log Level to check</param>
+            <returns>True if the logger is logging for the given log level</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Logging.Logger">
             <summary>
@@ -8107,6 +8482,13 @@
             Updates the log level for the current logger
             </summary>
             <param name="level">Level to update the logger to</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.IsLogging(Oxide.Ext.Discord.Logging.LogLevel)">
+            <summary>
+            Returns true if the logger is logging for the passed log level
+            </summary>
+            <param name="level">Log Level to check</param>
+            <returns>True if the logger is logging for the given log level</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Logging.LogLevel">
             <summary>

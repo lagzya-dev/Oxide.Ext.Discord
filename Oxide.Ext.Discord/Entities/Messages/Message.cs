@@ -240,7 +240,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             if (message.MessageReference == null)
             {
-                message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId ?? default(Snowflake)};
+                message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId};
             }
             
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback, onError);

@@ -129,6 +129,26 @@ namespace Oxide.Ext.Discord
                 }
             });
         }
+        
+        /// <summary>
+        /// Call a hook for all plugins registered to receive hook calls for this client
+        /// </summary>
+        /// <param name="hookName"></param>
+        /// <param name="args"></param>
+        public static void GlobalCallHook(string hookName, params object[] args)
+        {
+            //Run from next tick so we can be sure it's ran on the main thread.
+            Interface.Oxide.NextTick(() =>
+            {
+                foreach (DiscordClient client in Clients.Values)
+                {
+                    foreach (Plugin plugin in client.RegisteredForHooks)
+                    {
+                        plugin.CallHook(hookName, args);
+                    }
+                }
+            });
+        }
 
         #region Plugin Handling
         /// <summary>
@@ -164,6 +184,23 @@ namespace Oxide.Ext.Discord
                     
                     field.SetValue(plugin, client);
                     break;
+                }
+            }
+
+            foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+            {
+                object[] customAttributes = method.GetCustomAttributes(typeof(DirectMessageCommandAttribute), true);
+                if (customAttributes.Length != 0)
+                {
+                    DirectMessageCommandAttribute command = (DirectMessageCommandAttribute)customAttributes[0];
+                    DiscordExtension.DiscordCommands.AddDiscordDirectMessageCommand(command.Name, plugin, method.Name);
+                }
+                
+                customAttributes = method.GetCustomAttributes(typeof(GuildCommandAttribute), true);
+                if (customAttributes.Length != 0)
+                {
+                    GuildCommandAttribute command = (GuildCommandAttribute)customAttributes[0];
+                    DiscordExtension.DiscordCommands.AddDiscordGuildCommand(command.Name, plugin, method.Name);
                 }
             }
         }

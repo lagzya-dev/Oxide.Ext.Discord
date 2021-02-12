@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// the ID of the guild
         /// </summary>
         [JsonProperty("guild_id")]
-        public Snowflake GuildId { get; set; }
+        public Snowflake? GuildId { get; set; }
         
         /// <summary>
         /// Sorting position of the channel
