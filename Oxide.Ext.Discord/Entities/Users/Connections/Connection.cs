@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Integrations;
+using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Users.Connections
 {
@@ -39,8 +41,9 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         /// An array of partial server integrations
         /// <see cref="Integration"/>
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<Integration>))]
         [JsonProperty("integrations")]
-        public List<Integration> Integrations { get; set; }
+        public Hash<Snowflake, Integration> Integrations { get; set; }
         
         /// <summary>
         /// Whether the connection is verified

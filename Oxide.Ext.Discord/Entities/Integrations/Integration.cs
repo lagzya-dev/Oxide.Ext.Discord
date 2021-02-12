@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Integrations
 {
@@ -8,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#integration-object">Integration Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Integration : IntegrationUpdate
+    public class Integration : IntegrationUpdate, IGetEntityId
     {
         /// <summary>
         /// Integration ID
@@ -82,5 +83,10 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// </summary>
         [JsonProperty("application")]
         public IntegrationApplication Application { get; set; }
+
+        public Snowflake GetEntityId()
+        {
+            return Id;
+        }
     }
 }
