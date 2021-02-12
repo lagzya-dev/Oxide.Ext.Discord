@@ -3760,6 +3760,11 @@
             Explicit content filter level
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Roles">
+            <summary>
+            Roles in the guild
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Emojis">
             <summary>
             Custom guild emojis
@@ -3831,11 +3836,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Channels">
             <summary>
             Channels in the guild
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Roles">
-            <summary>
-            Roles in the guild
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Presences">
