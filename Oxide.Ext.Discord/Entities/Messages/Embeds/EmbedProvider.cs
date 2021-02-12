@@ -19,5 +19,16 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; }
+
+        /// <summary>
+        /// Embed Provider Constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="url"></param>
+        public EmbedProvider(string name, string url)
+        {
+            Name = name;
+            Url = url;
+        }
     }
 }

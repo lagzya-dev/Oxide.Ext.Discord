@@ -25,5 +25,18 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         [JsonProperty("proxy_icon_url")]
         public string ProxyIconUrl { get; set; }
+
+        /// <summary>
+        /// Embed Footer Constructor
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="iconUrl"></param>
+        /// <param name="proxyIconUrl"></param>
+        public EmbedFooter(string text, string iconUrl, string proxyIconUrl)
+        {
+            Text = text;
+            IconUrl = iconUrl;
+            ProxyIconUrl = proxyIconUrl;
+        }
     }
 }

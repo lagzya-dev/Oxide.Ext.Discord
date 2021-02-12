@@ -126,6 +126,11 @@ namespace Oxide.Ext.Discord.Entities.Roles
         /// <param name="color">uint value of hex color code</param>
         public DiscordColor(uint color)
         {
+            if (color > 0xFFFFFF)
+            {
+                throw new Exception($"Color '{color}' is outside the valid color range");
+            }
+            
             Color = color;
         }
 

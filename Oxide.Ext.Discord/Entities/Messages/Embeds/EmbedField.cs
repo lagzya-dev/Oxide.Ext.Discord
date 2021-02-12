@@ -25,5 +25,18 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         [JsonProperty("inline")]
         public bool Inline { get; set; }
+
+        /// <summary>
+        /// Embed Field constructor
+        /// </summary>
+        /// <param name="name">Field Name</param>
+        /// <param name="value">Field Value</param>
+        /// <param name="inline">Should field be inlined</param>
+        public EmbedField(string name, string value, bool inline)
+        {
+            Name = name;
+            Value = value;
+            Inline = inline;
+        }
     }
 }

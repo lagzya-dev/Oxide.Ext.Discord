@@ -31,5 +31,13 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         [JsonProperty("width")]
         public int? Width { get; set; }
+
+        public EmbedThumbnail(string url, int? height, int? width, string proxyUrl)
+        {
+            Url = url;
+            ProxyUrl = proxyUrl;
+            Height = height;
+            Width = width;
+        }
     }
 }
