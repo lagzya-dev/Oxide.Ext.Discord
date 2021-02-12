@@ -59,9 +59,14 @@ namespace Oxide.Ext.Discord
         public readonly Hash<Snowflake, Guild> Servers = new Hash<Snowflake, Guild>();
         
         /// <summary>
-        /// All the direct messages that we have seen
+        /// All the direct messages that we have seen by channel Id
         /// </summary>
-        public readonly Hash<Snowflake, Channel> DirectMessages = new  Hash<Snowflake, Channel>();
+        public readonly Hash<Snowflake, Channel> DirectMessagesByChannelId = new  Hash<Snowflake, Channel>();
+        
+        /// <summary>
+        /// All the direct messages that we have seen by User ID
+        /// </summary>
+        public readonly Hash<Snowflake, Channel> DirectMessagesByUserId = new  Hash<Snowflake, Channel>();
         
         /// <summary>
         /// List of all clients that are using this bot client

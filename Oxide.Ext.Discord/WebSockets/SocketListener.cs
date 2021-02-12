@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
@@ -510,7 +512,12 @@ namespace Oxide.Ext.Discord.WebSockets
             
             if (channel.Type == ChannelType.Dm || channel.Type == ChannelType.GroupDm)
             {
-                _client.DirectMessages[channel.Id] = channel;
+                _client.DirectMessagesByChannelId[channel.Id] = channel;
+                Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !r.Bot ?? false)?.Id;
+                if (toId.HasValue)
+                {
+                    _client.DirectMessagesByUserId[toId.Value] = channel;
+                }
             }
             else
             {
@@ -537,14 +544,19 @@ namespace Oxide.Ext.Discord.WebSockets
             Channel previous = null;
             if (update.Type == ChannelType.Dm || update.Type == ChannelType.GroupDm)
             {
-                previous = _client.DirectMessages[update.Id];
+                previous = _client.DirectMessagesByChannelId[update.Id];
                 if (previous != null)
                 {
                     previous.Update(update);
                 }
                 else
                 {
-                    _client.DirectMessages[update.Id] = update;
+                    _client.DirectMessagesByChannelId[update.Id] = update;
+                    Snowflake? toId = update.Recipients.Values.FirstOrDefault(r => !r.Bot ?? false)?.Id;
+                    if (toId.HasValue)
+                    {
+                        _client.DirectMessagesByUserId[toId.Value] = update;
+                    }
                 }
             }
             else
@@ -821,7 +833,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             else
             {
-                channel = _client.DirectMessages[message.ChannelId];
+                channel = _client.DirectMessagesByChannelId[message.ChannelId];
             }
             
             if (channel != null)

@@ -106,10 +106,30 @@ namespace Oxide.Ext.Discord.Libraries.Linking
 
             if (Snowflake.TryParse(checkId, out discordId))
             {
-                return GetPlayerId(discordId) != null;
+                return GetSteamId(discordId) != null;
             }
 
             return false;
+        }
+        
+        /// <summary>
+        /// Returns if the specified ID is linked
+        /// </summary>
+        /// <param name="steamId">Steam ID of the player</param>
+        /// <returns>True if the ID is linked; false otherwise</returns>
+        public bool IsLinked(string steamId)
+        {
+            return GetSteamToDiscordIds()?.ContainsKey(steamId) ?? false;
+        }
+        
+        /// <summary>
+        /// Returns if the specified ID is linked
+        /// </summary>
+        /// <param name="discordId">Discord ID of the player</param>
+        /// <returns>True if the ID is linked; false otherwise</returns>
+        public bool IsLinked(Snowflake discordId)
+        {
+            return GetDiscordToSteamIds()?.ContainsKey(discordId) ?? false;
         }
 
         /// <summary>
@@ -117,8 +137,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="discordId"></param>
         /// <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
-        [LibraryFunction(nameof(GetPlayerId))]
-        public string GetPlayerId(Snowflake discordId)
+        [LibraryFunction(nameof(GetSteamId))]
+        public string GetSteamId(Snowflake discordId)
         {
             return GetDiscordToSteamIds()?[discordId];
         }
@@ -131,7 +151,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         [LibraryFunction(nameof(GetPlayer))]
         public IPlayer GetPlayer(Snowflake discordId)
         {
-            string id = GetPlayerId(discordId);
+            string id = GetSteamId(discordId);
             if (string.IsNullOrEmpty(id))
             {
                 return null;
@@ -149,6 +169,16 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         public Snowflake? GetDiscordId(string steamId)
         {
             return GetSteamToDiscordIds()?[steamId];
+        }
+
+        /// <summary>
+        /// Returns the Discord ID for the given IPlayer
+        /// </summary>
+        /// <param name="player">Player to get Discord ID for</param>
+        /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
+        public Snowflake? GetDiscordId(IPlayer player)
+        {
+            return GetSteamToDiscordIds()?[player.Id];
         }
 
         /// <summary>
