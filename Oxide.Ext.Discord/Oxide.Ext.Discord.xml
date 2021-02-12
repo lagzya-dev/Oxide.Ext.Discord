@@ -5738,6 +5738,11 @@
             <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.Message.Content">
+            <summary>
+            Contents of the message
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Message.Timestamp">
             <summary>
             When this message was sent
@@ -5746,6 +5751,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Message.EditedTimestamp">
             <summary>
             When this message was edited (or null if never)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.Message.Tts">
+            <summary>
+            Whether this was a TTS message
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Message.MentionEveryone">
@@ -5786,6 +5796,11 @@
             <summary>
             Reactions to the message
             <see cref="T:Oxide.Ext.Discord.Entities.Messages.Reaction"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.Message.Nonce">
+            <summary>
+            Used for validating a message was sent
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Message.Pinned">

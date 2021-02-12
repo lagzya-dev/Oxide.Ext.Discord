@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object">Message Structure</a> sent in a channel within Discord..
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Message : MessageCreate
+    public class Message
     {
         /// <summary>
         /// ID of the message
@@ -52,6 +52,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("member")]
         public GuildMember Member { get; set; }
+        
+        /// <summary>
+        /// Contents of the message
+        /// </summary>
+        [JsonProperty("content")]
+        public string Content { get; set; }
 
         /// <summary>
         /// When this message was sent
@@ -64,6 +70,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("edited_timestamp")]
         public DateTime? EditedTimestamp { get; set; }
+        
+        /// <summary>
+        /// Whether this was a TTS message
+        /// </summary>
+        [JsonProperty("tts")]
+        public bool Tts { get; set; }
 
         /// <summary>
         /// Whether this message mentions everyone
@@ -114,6 +126,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("reactions")]
         public Hash<Snowflake, Reaction> Reactions { get; set; }
+        
+        /// <summary>
+        /// Used for validating a message was sent
+        /// </summary>
+        [JsonProperty("nonce")]
+        public string Nonce { get; set; }
 
         /// <summary>
         /// Whether this message is pinned
@@ -256,7 +274,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="onError">Callback when an error occurs with error information</param>
         public void Reply(DiscordClient client, string message, Action<Message> callback = null, Action<RestError> onError = null)
         {
-            Message newMessage = new Message
+            MessageCreate newMessage = new MessageCreate
             {
                 Content = message
             };
@@ -274,7 +292,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="onError">Callback when an error occurs with error information</param>
         public void Reply(DiscordClient client, Embed embed, Action<Message> callback = null, Action<RestError> onError = null)
         {
-            Message newMessage = new Message
+            MessageCreate newMessage = new MessageCreate
             {
                 Embed = embed,
             };
