@@ -121,7 +121,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// ID of the parent category for a channel (each parent category can contain up to 50 channels)
         /// </summary>
         [JsonProperty("parent_id")]
-        public Snowflake ParentId { get; set; }
+        public Snowflake? ParentId { get; set; }
         
         /// <summary>
         /// When the last pinned message was pinned.

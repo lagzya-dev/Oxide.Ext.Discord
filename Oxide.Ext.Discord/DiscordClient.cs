@@ -194,6 +194,7 @@ namespace Oxide.Ext.Discord
                 {
                     DirectMessageCommandAttribute command = (DirectMessageCommandAttribute)customAttributes[0];
                     DiscordExtension.DiscordCommands.AddDiscordDirectMessageCommand(command.Name, plugin, method.Name);
+                    DiscordExtension.GlobalLogger.Debug($"Adding Direct Message Command {command.Name} Method: {method.Name}");
                 }
                 
                 customAttributes = method.GetCustomAttributes(typeof(GuildCommandAttribute), true);
@@ -201,6 +202,7 @@ namespace Oxide.Ext.Discord
                 {
                     GuildCommandAttribute command = (GuildCommandAttribute)customAttributes[0];
                     DiscordExtension.DiscordCommands.AddDiscordGuildCommand(command.Name, plugin, method.Name);
+                    DiscordExtension.GlobalLogger.Debug($"Adding Guild Command {command.Name} Method: {method.Name}");
                 }
             }
         }

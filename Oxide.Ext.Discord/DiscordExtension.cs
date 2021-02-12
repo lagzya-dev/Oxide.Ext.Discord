@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Oxide.Core;
+using Oxide.Core.Configuration;
 using Oxide.Core.Extensions;
+using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Logging;
@@ -30,6 +33,7 @@ namespace Oxide.Ext.Discord
         
         internal static DiscordLink DiscordLink = new DiscordLink();
         internal static DiscordCommands DiscordCommands = new DiscordCommands();
+        internal static DiscordConfig DiscordConfig;
         
         /// <summary>
         /// Constructor for the extension
@@ -80,6 +84,17 @@ namespace Oxide.Ext.Discord
                 GlobalLogger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);
             };
 
+            string configPath = Path.Combine(Interface.Oxide.InstanceDirectory, "discord.config.json");
+            if (!File.Exists(configPath))
+            {
+                DiscordConfig = new DiscordConfig(configPath);
+                DiscordConfig.Save();
+            }
+
+            DiscordConfig = ConfigFile.Load<DiscordConfig>(configPath);
+            DiscordConfig.Save();
+            
+            
             Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
             Manager.RegisterLibrary(nameof(DiscordCommands), DiscordCommands);
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;

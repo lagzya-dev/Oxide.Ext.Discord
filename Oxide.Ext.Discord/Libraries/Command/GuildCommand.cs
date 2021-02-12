@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 return false;
             }
 
-            if (_allowedChannels != null && !_allowedChannels.Contains(channel.Id) && !_allowedChannels.Contains(channel.ParentId))
+            if (_allowedChannels != null && !_allowedChannels.Contains(channel.Id) && (!channel.ParentId.HasValue || !_allowedChannels.Contains(channel.ParentId.Value)))
             {
                 return false;
             }

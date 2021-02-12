@@ -81,9 +81,14 @@
             All the servers that this bot is in
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.DirectMessages">
+        <member name="F:Oxide.Ext.Discord.BotClient.DirectMessagesByChannelId">
             <summary>
-            All the direct messages that we have seen
+            All the direct messages that we have seen by channel Id
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.DirectMessagesByUserId">
+            <summary>
+            All the direct messages that we have seen by User ID
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.BotClient.Clients">
@@ -220,6 +225,38 @@
             Removes guild from the list of servers a bot is in
             </summary>
             <param name="guildId">Guild to remove from bot</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig">
+            <summary>
+            Represents discord extension command configuration
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig.CommandPrefixes">
+            <summary>
+            Array of command prefixes for discord commands
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Configuration.DiscordConfig">
+            <summary>
+            Represents Discord Extension Config
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Commands">
+            <summary>
+            Discord Config commands options
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Configuration.DiscordConfig.#ctor(System.String)">
+            <summary>
+            Constructor for discord config
+            </summary>
+            <param name="filename">Filename to use</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Configuration.DiscordConfig.Load(System.String)">
+            <summary>
+            Load the config file and populate it.
+            </summary>
+            <param name="filename"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.DiscordClient">
             <summary>
@@ -7686,6 +7723,34 @@
             Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.DiscordUserExt">
+            <summary>
+            Adds extension methods to Discord User to allow sending server chat commands to the player
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.DiscordUserExt.SendChatMessage(Oxide.Ext.Discord.Entities.Users.DiscordUser,System.String)">
+            <summary>
+            Send chat message to the user if they're connected
+            </summary>
+            <param name="user">User to send the message to on the server</param>
+            <param name="message">Message to send</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.DiscordUserExt.SendChatMessage(Oxide.Ext.Discord.Entities.Users.DiscordUser,System.String,System.String,System.Object[])">
+            <summary>
+            Send chat message to the user if they're connected
+            </summary>
+            <param name="user">User to send the message to on the server</param>
+            <param name="message">Message to send</param>
+            <param name="prefix">Message Prefix</param>
+            <param name="args">Message Args</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.DiscordUserExt.GetPlayer(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+            <summary>
+            Get's the IPlayer for the given discord user
+            </summary>
+            <param name="user">User to get IPlayer for</param>
+            <returns>IPlayer if discord user is linked; null otherwise</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.EnumExt">
             <summary>
             Extensions for enums
@@ -7707,12 +7772,55 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.HashExt.RemoveAll``2(Oxide.Plugins.Hash{``0,``1},System.Func{``1,System.Boolean})">
             <summary>
-            Remove all records from the hash with the given predicate fulter
+            Remove all records from the hash with the given predicate filter
             </summary>
             <param name="hash">Hash to have data removed from</param>
             <param name="predicate">Filter of which values to remove</param>
             <typeparam name="TKey">Key type of the hash</typeparam>
             <typeparam name="TValue">Value type of the hash</typeparam>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.IPlayerExt">
+            <summary>
+            IPlayer Extensions for sending Discord Message to an IPlayer
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,System.String)">
+            <summary>
+            Send a Discord Message to an IPlayer if they're registered
+            </summary>
+            <param name="player">Player to send the discord message to</param>
+            <param name="client">Client to use for sending the message</param>
+            <param name="message">Message to send</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed)">
+            <summary>
+            Send a Discord Message to an IPlayer if they're registered
+            </summary>
+            <param name="player">Player to send the discord message to</param>
+            <param name="client">Client to use for sending the message</param>
+            <param name="embed">Embed to send</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate)">
+            <summary>
+            Send a Discord Message to an IPlayer if they're registered
+            </summary>
+            <param name="player">Player to send the discord message to</param>
+            <param name="client">Client to use for sending the message</param>
+            <param name="message">Message to send</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.GetUser(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns a DiscordUser with the ID populated if linked
+            </summary>
+            <param name="player">Player to get user for</param>
+            <returns>Discord User if linked; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.GetUserId(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns the Discord ID of the IPlayer if linked
+            </summary>
+            <param name="player">Player to get Discord ID for</param>
+            <returns>Discord ID if linked; null otherwise</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.StringExt">
             <summary>
@@ -8299,7 +8407,21 @@
             <param name="id">ID of the steam or discord ID. Valid Types are String, Ulong, Snowflake</param>
             <returns>True if the ID is linked; false otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetPlayerId(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(System.String)">
+            <summary>
+            Returns if the specified ID is linked
+            </summary>
+            <param name="steamId">Steam ID of the player</param>
+            <returns>True if the ID is linked; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns if the specified ID is linked
+            </summary>
+            <param name="discordId">Discord ID of the player</param>
+            <returns>True if the ID is linked; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamId(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns the Steam ID of the given Discord ID if there is a link
             </summary>
@@ -8318,6 +8440,13 @@
             Returns the Discord ID for the given Steam ID
             </summary>
             <param name="steamId">Steam ID to get Discord ID for</param>
+            <returns>Discord ID for the given Steam ID; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetDiscordId(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns the Discord ID for the given IPlayer
+            </summary>
+            <param name="player">Player to get Discord ID for</param>
             <returns>Discord ID for the given Steam ID; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedCount">

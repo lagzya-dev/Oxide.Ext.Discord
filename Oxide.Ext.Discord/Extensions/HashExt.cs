@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Extensions
     public static class HashExt
     {
         /// <summary>
-        /// Remove all records from the hash with the given predicate fulter
+        /// Remove all records from the hash with the given predicate filter
         /// </summary>
         /// <param name="hash">Hash to have data removed from</param>
         /// <param name="predicate">Filter of which values to remove</param>

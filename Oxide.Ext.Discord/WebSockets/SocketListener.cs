@@ -843,16 +843,20 @@ namespace Oxide.Ext.Discord.WebSockets
 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} MESSAGE_CREATE: Guild ID: {message.GuildId} Channel ID: {message.ChannelId} Message ID: {message.Id}");
             
-            if ((!message.Author.Bot ?? false) && DiscordExtension.DiscordCommands.HasCommands() && message.Content.StartsWith("/"))
+            if (!(message.Author.Bot ?? false) && !string.IsNullOrEmpty(message.Content) && DiscordExtension.DiscordCommands.HasCommands() && DiscordExtension.DiscordConfig.Commands.CommandPrefixes.Contains(message.Content[0]))
             {
-                message.Content.TrimStart('/').ParseCommand(out string command, out string[] args);
+                message.Content.TrimStart(DiscordExtension.DiscordConfig.Commands.CommandPrefixes).ParseCommand(out string command, out string[] args);
+                _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} Cmd: {command} Args: {string.Join(" ", args)}");
+                
                 if (message.GuildId != null && DiscordExtension.DiscordCommands.HandleGuildCommand(_client, message, channel, command, args))
                 {
+                    _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} Guild Handled Cmd: {command}");
                     return;
                 }
 
                 if (DiscordExtension.DiscordCommands.HandleDirectMessageCommand(_client, message, channel, command, args))
                 {
+                    _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} Direct Handled Cmd: {command}");
                     return;
                 }
             }
