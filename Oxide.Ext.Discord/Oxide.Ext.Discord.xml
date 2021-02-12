@@ -5158,6 +5158,12 @@
             The bot/OAuth2 application for discord integrations
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Integrations.Integration.GetEntityId">
+            <summary>
+            Returns the entity ID for this entity
+            </summary>
+            <returns>This entities ID</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Integrations.Account">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#integration-account-object">Integration Account Structure</a>
@@ -5548,6 +5554,130 @@
             <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField"/>
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddTitle(System.String)">
+            <summary>
+            Adds a title to the embed message
+            </summary>
+            <param name="title">Title to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddDescription(System.String)">
+            <summary>
+            Adds a description to the embed message
+            </summary>
+            <param name="description">description to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddUrl(System.String)">
+            <summary>
+            Adds a url to the embed message
+            </summary>
+            <param name="url"></param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddAuthor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds an author to the embed message. The author will appear above the title
+            </summary>
+            <param name="name">Name of the author</param>
+            <param name="iconUrl">Icon Url to use for the author</param>
+            <param name="url">Url to go to when the authors name is clicked on</param>
+            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddFooter(System.String,System.String,System.String)">
+            <summary>
+            Adds a footer to the embed message
+            </summary>
+            <param name="text">Text to be added to the footer</param>
+            <param name="iconUrl">Icon url to add in the footer. Appears to the left of the text</param>
+            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddColor(System.UInt32)">
+            <summary>
+            Adds an int based color to the embed. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddColor(System.String)">
+            <summary>
+            Adds a hex based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="color">Color in string hex format</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Exception thrown if color is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddColor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Adds a RGB based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="red">Red value between 0 - 255</param>
+            <param name="green">Green value between 0 - 255</param>
+            <param name="blue">Blue value between 0 - 255</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddBlankField(System.Boolean)">
+            <summary>
+            Adds a blank field.
+            If inline it will add a blank column.
+            If not inline will add a blank row
+            </summary>
+            <param name="inline">If the field is inline</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddField(System.String,System.String,System.Boolean)">
+            <summary>
+            Adds a new field with the name as the title and value as the value.
+            If inline will add a new column. If row will add in a new row.
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="inline"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddImage(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Adds an image to the embed. The url should point to the url of the image.
+            If using attachment image you can make the url: "attachment://{image name}.{image extension}
+            </summary>
+            <param name="url">Url for the image</param>
+            <param name="width">width of the image</param>
+            <param name="height">height of the image</param>
+            <param name="proxyUrl">Backup url for the image</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddThumbnail(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Adds a thumbnail in the top right corner of the embed
+            If using attachment image you can make the url: "attachment://{image name}.{image extension}
+            </summary>
+            <param name="url">Url for the image</param>
+            <param name="width">width of the image</param>
+            <param name="height">height of the image</param>
+            <param name="proxyUrl">Backup url for the image</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddVideo(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Adds a video to the embed
+            </summary>
+            <param name="url">Url for the video</param>
+            <param name="width">Width of the video</param>
+            <param name="height">Height of the video</param>
+            <param name="proxyUrl">Proxy Url for the video</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed.AddProvider(System.String,System.String)">
+            <summary>
+            Adds a provider to the embed
+            </summary>
+            <param name="name">Name for the provider</param>
+            <param name="url">Url for the provider</param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedAuthor">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure">Embed Author Structure</a>
@@ -5573,6 +5703,15 @@
             A proxied url of author icon
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedAuthor.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Embed Author Constructor
+            </summary>
+            <param name="name"></param>
+            <param name="url"></param>
+            <param name="iconUrl"></param>
+            <param name="proxyIconUrl"></param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure">Embed Field Structure</a>
@@ -5593,6 +5732,14 @@
             Whether or not this field should display inline
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Embed Field constructor
+            </summary>
+            <param name="name">Field Name</param>
+            <param name="value">Field Value</param>
+            <param name="inline">Should field be inlined</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedFooter">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure">Embed Footer Structure</a>
@@ -5612,6 +5759,14 @@
             <summary>
             A proxied url of footer icon
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedFooter.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Embed Footer Constructor
+            </summary>
+            <param name="text"></param>
+            <param name="iconUrl"></param>
+            <param name="proxyIconUrl"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedImage">
             <summary>
@@ -5638,6 +5793,15 @@
             Width of image
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedImage.#ctor(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Embed Image Constructor
+            </summary>
+            <param name="url"></param>
+            <param name="height"></param>
+            <param name="width"></param>
+            <param name="proxyUrl"></param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedProvider">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure">Embed Provider Structure</a>
@@ -5652,6 +5816,13 @@
             <summary>
             Url of provider
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedProvider.#ctor(System.String,System.String)">
+            <summary>
+            Embed Provider Constructor
+            </summary>
+            <param name="name"></param>
+            <param name="url"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedThumbnail">
             <summary>
@@ -5678,6 +5849,15 @@
             Width of thumbnail
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedThumbnail.#ctor(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Embed Thumbnail constructor
+            </summary>
+            <param name="url"></param>
+            <param name="height"></param>
+            <param name="width"></param>
+            <param name="proxyUrl"></param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedVideo">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure">Embed Video Structure</a>
@@ -5702,6 +5882,15 @@
             <summary>
             Width of video
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedVideo.#ctor(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Embed Video Constructor
+            </summary>
+            <param name="url"></param>
+            <param name="proxyUrl"></param>
+            <param name="height"></param>
+            <param name="width"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Message">
             <summary>
@@ -7702,6 +7891,14 @@
             <summary>
             Allowed mentions for the message
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage.AddEmbed(Oxide.Ext.Discord.Entities.Messages.Embeds.Embed)">
+            <summary>
+            Adds a new embed to the list of embed to send
+            </summary>
+            <param name="embed">Embed to add</param>
+            <returns>This</returns>
+            <exception cref="T:System.IndexOutOfRangeException">Thrown if more than 10 embeds are added in a send as that is the discord limit</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType">
             <summary>

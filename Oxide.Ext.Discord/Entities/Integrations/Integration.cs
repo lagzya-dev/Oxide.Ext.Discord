@@ -84,6 +84,10 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         [JsonProperty("application")]
         public IntegrationApplication Application { get; set; }
 
+        /// <summary>
+        /// Returns the entity ID for this entity
+        /// </summary>
+        /// <returns>This entities ID</returns>
         public Snowflake GetEntityId()
         {
             return Id;
