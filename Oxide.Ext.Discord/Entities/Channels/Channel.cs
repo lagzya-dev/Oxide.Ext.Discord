@@ -71,7 +71,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// The id of the last message sent in this channel (may not point to an existing or valid message)
         /// </summary>
         [JsonProperty("last_message_id")]        
-        public Snowflake LastMessageId { get; set; }
+        public Snowflake? LastMessageId { get; set; }
         
         /// <summary>
         /// The bitrate (in bits) of the voice channel
@@ -109,13 +109,13 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// ID of the DM creator
         /// </summary>
         [JsonProperty("owner_id")]
-        public Snowflake OwnerId { get; set; }
+        public Snowflake? OwnerId { get; set; }
         
         /// <summary>
         /// Application id of the group DM creator if it is bot-created
         /// </summary>
         [JsonProperty("application_id")]
-        public Snowflake ApplicationId { get; set; }
+        public Snowflake? ApplicationId { get; set; }
         
         /// <summary>
         /// ID of the parent category for a channel (each parent category can contain up to 50 channels)

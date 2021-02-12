@@ -12,13 +12,13 @@ namespace Oxide.Ext.Discord.Entities.Roles
         /// The id of the bot this role belongs to
         /// </summary>
         [JsonProperty("bot_id")]
-        public Snowflake BotId { get; set; }
+        public Snowflake? BotId { get; set; }
         
         /// <summary>
         /// The id of the integration this role belongs to
         /// </summary>
         [JsonProperty("integration_id")]
-        public Snowflake IntegrationId { get; set; }
+        public Snowflake? IntegrationId { get; set; }
         
         /// <summary>
         /// Whether this is the guild's premium subscriber role

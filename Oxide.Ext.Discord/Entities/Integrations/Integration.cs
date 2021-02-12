@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// ID that this integration uses for "subscribers"
         /// </summary>
         [JsonProperty("role_id")]
-        public Snowflake RoleId { get; set; }
+        public Snowflake? RoleId { get; set; }
 
         /// <summary>
         /// User for this integration

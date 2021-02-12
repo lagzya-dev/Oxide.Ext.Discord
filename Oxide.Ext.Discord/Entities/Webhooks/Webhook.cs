@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// The guild id this webhook is for
         /// </summary>
         [JsonProperty("guild_id")]
-        public Snowflake GuildId { get; set; }
+        public Snowflake? GuildId { get; set; }
         
         /// <summary>
         /// The channel id this webhook is for

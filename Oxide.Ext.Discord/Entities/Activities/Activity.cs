@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// Application id for the game
         /// </summary>
         [JsonProperty("application_id")]
-        public Snowflake ApplicationId { get; set; }
+        public Snowflake? ApplicationId { get; set; }
         
         /// <summary>
         /// What the player is currently doing
@@ -112,11 +112,11 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// <summary>
         /// Returns the large image url for the presence asset
         /// </summary>
-        public string GetLargeImageUrl => DiscordCdn.GetApplicationAssetUrl(ApplicationId, Assets.LargeImage);
+        public string GetLargeImageUrl => ApplicationId.HasValue ? DiscordCdn.GetApplicationAssetUrl(ApplicationId.Value, Assets.LargeImage) : null;
         
         /// <summary>
         /// Returns the small image url for the presence asset
         /// </summary>
-        public string GetSmallImageUrl => DiscordCdn.GetApplicationAssetUrl(ApplicationId, Assets.SmallImage);
+        public string GetSmallImageUrl => ApplicationId.HasValue ? DiscordCdn.GetApplicationAssetUrl(ApplicationId.Value, Assets.SmallImage) : null;
     }
 }

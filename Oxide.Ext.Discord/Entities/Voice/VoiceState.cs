@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// The guild id this voice state is for
         /// </summary>
         [JsonProperty("guild_id")]
-        public Snowflake GuildId { get; set; }
+        public Snowflake? GuildId { get; set; }
 
         /// <summary>
         /// The channel id this user is connected to

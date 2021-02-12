@@ -107,7 +107,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The channel id that the widget will generate an invite to, or null if set to no invite
         /// </summary>
         [JsonProperty("widget_channel_id")]
-        public Snowflake WidgetChannelId { get; set; }
+        public Snowflake? WidgetChannelId { get; set; }
         
         /// <summary>
         /// Verification level
@@ -126,6 +126,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("explicit_content_filter")]
         public ExplicitContentFilterLevel? ExplicitContentFilter { get; set; }
+        
+        /// <summary>
+        /// Roles in the guild
+        /// </summary>
+        [JsonConverter(typeof(HashListConverter<Role>))]
+        [JsonProperty("roles")]
+        public Hash<Snowflake, Role> Roles { get; set; }
   
         /// <summary>
         /// Custom guild emojis
@@ -158,7 +165,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The id of the channel where guild notices such as welcome messages and boost events are posted
         /// </summary>
         [JsonProperty("system_channel_id")]
-        public Snowflake SystemChannelId { get; set; }
+        public Snowflake? SystemChannelId { get; set; }
         
         /// <summary>
         /// System channel flags
@@ -177,7 +184,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// When this guild was joined at
         /// </summary>
         [JsonProperty("joined_at")]
-        public DateTime JoinedAt { get; set; }
+        public DateTime? JoinedAt { get; set; }
   
         /// <summary>
         /// True if this is considered a large guild
@@ -217,14 +224,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<Channel>))]
         [JsonProperty("channels")]
         public Hash<Snowflake, Channel> Channels { get; set; }
-        
-        /// <summary>
-        /// Roles in the guild
-        /// </summary>
-        [JsonConverter(typeof(HashListConverter<Role>))]
-        [JsonProperty("roles")]
-        public Hash<Snowflake, Role> Roles { get; set; }
-          
+
         /// <summary>
         /// Presences of the members in the guild
         /// will only include non-offline members if the size is greater than large threshold
