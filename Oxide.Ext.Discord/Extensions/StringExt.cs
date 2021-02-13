@@ -77,7 +77,6 @@ namespace Oxide.Ext.Discord.Extensions
             command = argList[0].ToLower();
             argList.RemoveAt(0);
             args = argList.ToArray();
-
         }
     }
 }
