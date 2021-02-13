@@ -118,7 +118,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <returns>True if discord closed the socket with one of it's close codes</returns>
         private bool HandleDiscordClosedSocket(int code, string reason)
         {
-            if (!code.ToString().TryParse(out SocketCloseCode closeCode))
+            if (!code.TryParse(out SocketCloseCode closeCode))
             {
                 if(code >= 4000 && code < 5000)
                 {
@@ -131,7 +131,6 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             bool reconnect = false;
-
             switch (closeCode)
             {
                 case SocketCloseCode.UnknownError: 

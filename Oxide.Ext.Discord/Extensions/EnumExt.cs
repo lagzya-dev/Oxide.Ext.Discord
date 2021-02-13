@@ -14,11 +14,10 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="result">Resulting enum value</param>
         /// <typeparam name="TEnum">Enum Type</typeparam>
         /// <returns>True if successfully parsed; false otherwise</returns>
-        public static bool TryParse<TEnum>(this string value, out TEnum result)
-            where TEnum : struct, IConvertible
+        public static bool TryParse<TEnum>(this object value, out TEnum result) where TEnum : struct, IConvertible
         {
             bool retValue = value != null && Enum.IsDefined(typeof(TEnum), value);
-            result = retValue ? (TEnum)Enum.Parse(typeof(TEnum), value) : default(TEnum);
+            result = retValue ? (TEnum)Enum.Parse(typeof(TEnum), value.ToString()) : default(TEnum);
             return retValue;
         }
     }
