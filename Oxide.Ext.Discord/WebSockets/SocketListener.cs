@@ -81,13 +81,12 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private bool HandleDiscordClosedSocket(int code, string reason)
         {
-            if (!code.ToString().TryParse(out SocketCloseCode closeCode))
+            if (!code.TryParse(out SocketCloseCode closeCode))
             {
                 return false;
             }
 
             bool reconnect = false;
-
             switch (closeCode)
             {
                 case SocketCloseCode.UnknownError: 
