@@ -61,12 +61,12 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// All the direct messages that we have seen by channel Id
         /// </summary>
-        public readonly Hash<Snowflake, Channel> DirectMessagesByChannelId = new  Hash<Snowflake, Channel>();
+        public readonly Hash<Snowflake, Channel> DirectMessagesByChannelId = new Hash<Snowflake, Channel>();
         
         /// <summary>
         /// All the direct messages that we have seen by User ID
         /// </summary>
-        public readonly Hash<Snowflake, Channel> DirectMessagesByUserId = new  Hash<Snowflake, Channel>();
+        public readonly Hash<Snowflake, Channel> DirectMessagesByUserId = new Hash<Snowflake, Channel>();
         
         /// <summary>
         /// List of all clients that are using this bot client
@@ -517,6 +517,30 @@ namespace Oxide.Ext.Discord
         internal void RemoveGuild(Snowflake guildId)
         {
             Servers.Remove(guildId);
+        }
+
+        /// <summary>
+        /// Adds a guild if it does not exist or updates the guild with
+        /// </summary>
+        /// <param name="channel"></param>
+        public void AddOrUpdateDirectMessageChannel(Channel channel)
+        {
+            Channel existing = DirectMessagesByChannelId[channel.Id];
+            if (existing != null)
+            {
+                _logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Updating Existing Channel {channel.Id}");
+                existing.Update(channel);
+            }
+            else
+            {
+                _logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Adding New Channel {channel.Id}");
+                DirectMessagesByChannelId[channel.Id] = channel;
+                Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !r.Bot ?? false)?.Id;
+                if (toId.HasValue)
+                {
+                    DirectMessagesByUserId[toId.Value] = channel;
+                }
+            }
         }
 
         internal bool IsPluginRegistered(Plugin plugin)

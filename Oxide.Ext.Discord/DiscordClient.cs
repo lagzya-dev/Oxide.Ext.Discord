@@ -170,7 +170,7 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
-            foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+            foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
             {
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Any())
                 {
@@ -187,7 +187,7 @@ namespace Oxide.Ext.Discord
                 }
             }
 
-            foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+            foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
             {
                 object[] customAttributes = method.GetCustomAttributes(typeof(DirectMessageCommandAttribute), true);
                 if (customAttributes.Length != 0)

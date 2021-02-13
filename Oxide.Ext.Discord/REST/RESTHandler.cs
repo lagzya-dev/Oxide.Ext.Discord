@@ -131,9 +131,8 @@ namespace Oxide.Ext.Discord.REST
         {
             string[] routeSegments = route.Split('/');
             StringBuilder bucket = new StringBuilder(routeSegments[0]);
-            bucket.Append("/");
             string previousSegment = routeSegments[0];
-            for (int index = 0; index < routeSegments.Length; index++)
+            for (int index = 1; index < routeSegments.Length; index++)
             {
                 string segment = routeSegments[index];
                 switch (previousSegment)

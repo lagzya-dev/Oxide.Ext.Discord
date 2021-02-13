@@ -102,7 +102,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         DirectMessages = 1 << 12,
         
         /// <summary>
-        ///   - MESSAGE_REACTION_ADD
+        /// - MESSAGE_REACTION_ADD
         /// - MESSAGE_REACTION_REMOVE
         /// - MESSAGE_REACTION_REMOVE_ALL
         /// - MESSAGE_REACTION_REMOVE_EMOJI

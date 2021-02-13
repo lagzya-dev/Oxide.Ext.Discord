@@ -512,12 +512,7 @@ namespace Oxide.Ext.Discord.WebSockets
             
             if (channel.Type == ChannelType.Dm || channel.Type == ChannelType.GroupDm)
             {
-                _client.DirectMessagesByChannelId[channel.Id] = channel;
-                Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !r.Bot ?? false)?.Id;
-                if (toId.HasValue)
-                {
-                    _client.DirectMessagesByUserId[toId.Value] = channel;
-                }
+                _client.AddOrUpdateDirectMessageChannel(channel);
             }
             else
             {
@@ -544,20 +539,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Channel previous = null;
             if (update.Type == ChannelType.Dm || update.Type == ChannelType.GroupDm)
             {
-                previous = _client.DirectMessagesByChannelId[update.Id];
-                if (previous != null)
-                {
-                    previous.Update(update);
-                }
-                else
-                {
-                    _client.DirectMessagesByChannelId[update.Id] = update;
-                    Snowflake? toId = update.Recipients.Values.FirstOrDefault(r => !r.Bot ?? false)?.Id;
-                    if (toId.HasValue)
-                    {
-                        _client.DirectMessagesByUserId[toId.Value] = update;
-                    }
-                }
+                _client.AddOrUpdateDirectMessageChannel(update);
             }
             else
             {

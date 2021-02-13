@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Extensions
     {
         /// <summary>
         /// Parses the specified command into uMod command format
-        /// Sourced from RustCore.cs of OxideMod (https://github.com/theumod/uMod.Rust/blob/oxide/src/RustCore.cs)
+        /// Sourced from CommandHandler.cs of uMod (https://gitlab.com/umod/core/core/-/blob/develop/src/Command/CommandHandler.cs)
         /// </summary>
         /// <param name="argStr"></param>
         /// <param name="command"></param>
@@ -18,40 +18,53 @@ namespace Oxide.Ext.Discord.Extensions
         public static void ParseCommand(this string argStr, out string command, out string[] args)
         {
             List<string> argList = new List<string>();
-            StringBuilder sb = new StringBuilder();
+            StringBuilder stringBuilder  = new StringBuilder();
             bool inLongArg = false;
 
-            foreach (char c in argStr)
+            for (int index = 0; index < argStr.Length; index++)
             {
+                char c = argStr[index];
                 if (c == '"')
                 {
                     if (inLongArg)
                     {
-                        string arg = sb.ToString().Trim();
+                        string arg = stringBuilder.ToString().Trim();
                         if (!string.IsNullOrEmpty(arg))
+                        {
                             argList.Add(arg);
-                        sb = new StringBuilder();
+                        }
+
+                        stringBuilder.Length = 0;
                         inLongArg = false;
                     }
                     else
+                    {
                         inLongArg = true;
+                    }
                 }
                 else if (char.IsWhiteSpace(c) && !inLongArg)
                 {
-                    string arg = sb.ToString().Trim();
+                    string arg = stringBuilder.ToString().Trim();
                     if (!string.IsNullOrEmpty(arg))
+                    {
                         argList.Add(arg);
-                    sb = new StringBuilder();
+                    }
+
+                    stringBuilder.Length = 0;
                 }
                 else
-                    sb.Append(c);
+                {
+                    stringBuilder.Append(c);
+                }
             }
 
-            if (sb.Length > 0)
+            if (stringBuilder.Length > 0)
             {
-                string arg = sb.ToString().Trim();
+                string arg = stringBuilder.ToString().Trim();
                 if (!string.IsNullOrEmpty(arg))
+                {
                     argList.Add(arg);
+                }
             }
 
             if (argList.Count == 0)
@@ -64,6 +77,7 @@ namespace Oxide.Ext.Discord.Extensions
             command = argList[0].ToLower();
             argList.RemoveAt(0);
             args = argList.ToArray();
+
         }
     }
 }

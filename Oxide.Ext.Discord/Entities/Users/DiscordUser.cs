@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users.Connections;
@@ -107,6 +108,11 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Avatar Url for the user
         /// </summary>
         public string GetAvatarUrl => DiscordCdn.GetUserAvatarUrl(Id, Avatar);
+
+        /// <summary>
+        /// Returns the IPlayer for the discord user if linked; null otherwise
+        /// </summary>
+        public IPlayer Player => DiscordExtension.DiscordLink.GetPlayer(Id);
 
         /// <summary>
         /// Returns the currently logged in user account
@@ -221,7 +227,10 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["recipient_id"] = userId
             };
 
-            client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback, onError);
+            client.Bot.Rest.DoRequest<Channel>("/users/@me/channels", RequestMethod.POST, data, channel =>
+            {
+                callback?.Invoke(channel);
+            }, onError);
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Extensions
     /// <summary>
     /// IPlayer Extensions for sending Discord Message to an IPlayer
     /// </summary>
-    public static class IPlayerExt
+    public static class PlayerExt
     {
         /// <summary>
         /// Send a Discord Message to an IPlayer if they're registered
@@ -52,51 +52,32 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="message">Message to send</param>
         public static void SendDiscordMessage(this IPlayer player, DiscordClient client, MessageCreate message)
         {
-            SendMessage(client, GetUser(player), message);
+            SendMessage(client, player.GetDiscordUserId(), message);
         }
         
-        private static void SendMessage(DiscordClient client, DiscordUser user, MessageCreate message)
+        private static void SendMessage(DiscordClient client, Snowflake? id, MessageCreate message)
         {
-            if (user == null)
+            if (!id.HasValue)
             {
                 return;
             }
 
-            Channel channel = client.Bot.DirectMessagesByUserId[user.Id];
+            Channel channel = client.Bot.DirectMessagesByUserId[id.Value];
             if (channel != null)
             {
                 channel.CreateMessage(client, message);
                 return;
             }
             
-            user.CreateDirectMessage(client, newChannel => newChannel.CreateMessage(client, message));
+            DiscordUser.CreateDirectMessage(client, id.Value, newChannel => newChannel.CreateMessage(client, message));
         }
 
-        /// <summary>
-        /// Returns a DiscordUser with the ID populated if linked
-        /// </summary>
-        /// <param name="player">Player to get user for</param>
-        /// <returns>Discord User if linked; null otherwise</returns>
-        public static DiscordUser GetUser(this IPlayer player)
-        {
-            Snowflake? id = DiscordExtension.DiscordLink.GetDiscordId(player);
-            if (id.HasValue)
-            {
-                return new DiscordUser
-                {
-                    Id = id.Value
-                };
-            }
-
-            return null;
-        }
-        
         /// <summary>
         /// Returns the Discord ID of the IPlayer if linked
         /// </summary>
         /// <param name="player">Player to get Discord ID for</param>
         /// <returns>Discord ID if linked; null otherwise</returns>
-        public static Snowflake? GetUserId(this IPlayer player)
+        public static Snowflake? GetDiscordUserId(this IPlayer player)
         {
             return DiscordExtension.DiscordLink.GetDiscordId(player);
         }

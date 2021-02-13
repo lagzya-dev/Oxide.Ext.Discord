@@ -226,6 +226,12 @@
             </summary>
             <param name="guildId">Guild to remove from bot</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.AddOrUpdateDirectMessageChannel(Oxide.Ext.Discord.Entities.Channels.Channel)">
+            <summary>
+            Adds a guild if it does not exist or updates the guild with
+            </summary>
+            <param name="channel"></param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig">
             <summary>
             Represents discord extension command configuration
@@ -410,16 +416,19 @@
         <member name="F:Oxide.Ext.Discord.DiscordSettings.LogLevel">
             <summary>
             Discord Extension Logging Level.
+            See <see cref="F:Oxide.Ext.Discord.DiscordSettings.LogLevel"/>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.DiscordSettings.Intents">
             <summary>
             Intents that your bot needs to work
+            See <see cref="T:Oxide.Ext.Discord.Entities.Gatway.BotIntents"/>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.DiscordSettings.CloseOnUnload">
             <summary>
-            If the client should be shutdown on plugin unload.
+            If the client should be removed from the bot when the plugin unloads
+            This will keep the client for this plugin active even when unloaded and will add the same client back when loaded back
             Recommend not changing this unless you know what you're doing
             </summary>
         </member>
@@ -3618,7 +3627,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.DirectMessageReactions">
             <summary>
-              - MESSAGE_REACTION_ADD
+            - MESSAGE_REACTION_ADD
             - MESSAGE_REACTION_REMOVE
             - MESSAGE_REACTION_REMOVE_ALL
             - MESSAGE_REACTION_REMOVE_EMOJI
@@ -7236,6 +7245,11 @@
             Avatar Url for the user
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Player">
+            <summary>
+            Returns the IPlayer for the discord user if linked; null otherwise
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetCurrentUser(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.REST.RestError})">
             <summary>
             Returns the currently logged in user account
@@ -7956,13 +7970,6 @@
             <param name="prefix">Message Prefix</param>
             <param name="args">Message Args</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.DiscordUserExt.GetPlayer(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
-            <summary>
-            Get's the IPlayer for the given discord user
-            </summary>
-            <param name="user">User to get IPlayer for</param>
-            <returns>IPlayer if discord user is linked; null otherwise</returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.EnumExt">
             <summary>
             Extensions for enums
@@ -7991,12 +7998,12 @@
             <typeparam name="TKey">Key type of the hash</typeparam>
             <typeparam name="TValue">Value type of the hash</typeparam>
         </member>
-        <member name="T:Oxide.Ext.Discord.Extensions.IPlayerExt">
+        <member name="T:Oxide.Ext.Discord.Extensions.PlayerExt">
             <summary>
             IPlayer Extensions for sending Discord Message to an IPlayer
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,System.String)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,System.String)">
             <summary>
             Send a Discord Message to an IPlayer if they're registered
             </summary>
@@ -8004,7 +8011,7 @@
             <param name="client">Client to use for sending the message</param>
             <param name="message">Message to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed)">
             <summary>
             Send a Discord Message to an IPlayer if they're registered
             </summary>
@@ -8012,7 +8019,7 @@
             <param name="client">Client to use for sending the message</param>
             <param name="embed">Embed to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate)">
             <summary>
             Send a Discord Message to an IPlayer if they're registered
             </summary>
@@ -8020,14 +8027,7 @@
             <param name="client">Client to use for sending the message</param>
             <param name="message">Message to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.GetUser(Oxide.Core.Libraries.Covalence.IPlayer)">
-            <summary>
-            Returns a DiscordUser with the ID populated if linked
-            </summary>
-            <param name="player">Player to get user for</param>
-            <returns>Discord User if linked; null otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.IPlayerExt.GetUserId(Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.GetDiscordUserId(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             Returns the Discord ID of the IPlayer if linked
             </summary>

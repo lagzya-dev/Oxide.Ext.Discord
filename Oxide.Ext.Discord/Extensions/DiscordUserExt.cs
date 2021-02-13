@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="message">Message to send</param>
         public static void SendChatMessage(this DiscordUser user, string message)
         {
-            IPlayer player = user.GetPlayer();
+            IPlayer player = user.Player;
             if (player != null && player.IsConnected)
             {
                 player.Message(message);
@@ -31,21 +31,11 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="args">Message Args</param>
         public static void SendChatMessage(this DiscordUser user, string message, string prefix, params object[] args)
         {
-            IPlayer player = user.GetPlayer();
+            IPlayer player = user.Player;
             if (player != null && player.IsConnected)
             {
                 player.Message(message, prefix, args);
             }
-        }
-
-        /// <summary>
-        /// Get's the IPlayer for the given discord user
-        /// </summary>
-        /// <param name="user">User to get IPlayer for</param>
-        /// <returns>IPlayer if discord user is linked; null otherwise</returns>
-        public static IPlayer GetPlayer(this DiscordUser user)
-        {
-            return DiscordExtension.DiscordLink.GetPlayer(user.Id);
         }
     }
 }

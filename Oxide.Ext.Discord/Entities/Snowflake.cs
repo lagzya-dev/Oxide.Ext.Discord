@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Helpers.Converters;
+using Time = Oxide.Ext.Discord.Helpers.Time;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -39,7 +40,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="offset"></param>
         public Snowflake(DateTimeOffset offset)
         {
-            Id = (ulong)(Helpers.Time.DiscordEpoch - offset).TotalMilliseconds << 22;
+            Id = (ulong)(Time.DiscordEpoch - offset).TotalMilliseconds << 22;
         }   
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <returns></returns>
         public DateTimeOffset GetCreationTime()
         {
-            return Helpers.Time.DiscordEpoch + TimeSpan.FromSeconds(Id >> 22);
+            return Time.DiscordEpoch + TimeSpan.FromSeconds(Id >> 22);
         }
 
         /// <summary>
