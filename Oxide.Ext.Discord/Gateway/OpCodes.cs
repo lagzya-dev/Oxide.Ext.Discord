@@ -17,6 +17,6 @@
         StatusUpdate = 3,
         VoiceStateUpdate = 4,
         Resume = 6,
-        RequestGuildMembers = 8,
+        RequestGuildMembers = 8
     }
 }
