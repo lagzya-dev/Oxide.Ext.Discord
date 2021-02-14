@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
 
         public override bool CanHandle(Message message, Channel channel)
         {
-            if (message.GuildId == null)
+            if (!message.GuildId.HasValue)
             {
                 return false;
             }
