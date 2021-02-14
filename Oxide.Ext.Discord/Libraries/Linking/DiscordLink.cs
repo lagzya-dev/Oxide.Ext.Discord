@@ -76,9 +76,18 @@ namespace Oxide.Ext.Discord.Libraries.Linking
 
             LinkPlugin = plugin;
             LinkPlugin.OnRemovedFromManager.Add(RemovePlugin);
-            Link.RegisterEvents(OnLinked, OnUnlinked);
-            _steamIdToDiscordId = Link.GetSteamToDiscordIds();
-            _discordIdToSteamId = Link.GetDiscordToSteamIds();
+
+            Hash<string, Snowflake> data = Link.GetSteamToDiscordIds();
+            if (data != null)
+            {
+                _steamIdToDiscordId = new Hash<string, Snowflake>();
+                _discordIdToSteamId = new Hash<Snowflake, string>();
+                foreach (KeyValuePair<string,Snowflake> pair in data)
+                {
+                    _steamIdToDiscordId[pair.Key] = pair.Value;
+                    _discordIdToSteamId[pair.Value] = pair.Key;
+                }
+            }
         }
 
         private void RemovePlugin(Plugin plugin, PluginManager manager)
@@ -218,7 +227,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         [LibraryFunction(nameof(GetSteamToDiscordIds))]
         public Hash<string, Snowflake> GetSteamToDiscordIds()
         {
-            return _steamIdToDiscordId ?? (_steamIdToDiscordId = Link?.GetSteamToDiscordIds());
+            return _steamIdToDiscordId;
         }
 
         /// <summary>
@@ -228,21 +237,21 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         [LibraryFunction(nameof(GetDiscordToSteamIds))]
         public Hash<Snowflake, string> GetDiscordToSteamIds()
         {
-            return _discordIdToSteamId ?? (_discordIdToSteamId = Link?.GetDiscordToSteamIds());
+            return _discordIdToSteamId;
         }
 
         private void OnLinked(IPlayer player, DiscordUser discord)
         {
             _discordIdToSteamId[discord.Id] = player.Id;
             _steamIdToDiscordId[player.Id] = discord.Id;
-            DiscordClient.GlobalCallHook("Discord_OnLinked", player, discord);
+            DiscordClient.GlobalCallHook("Discord_OnPlayerLinked", player, discord);
         }
 
         private void OnUnlinked(IPlayer player, DiscordUser discord)
         {
             _discordIdToSteamId.Remove(discord.Id);
             _steamIdToDiscordId.Remove(player.Id);
-            DiscordClient.GlobalCallHook("Discord_OnUnlinked", player, discord);
+            DiscordClient.GlobalCallHook("Discord_OnPlayerUnlinked", player, discord);
         }
     }
 }

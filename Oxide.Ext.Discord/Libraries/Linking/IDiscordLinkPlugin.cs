@@ -16,12 +16,6 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <returns></returns>
         Hash<string, Snowflake> GetSteamToDiscordIds();
-        
-        /// <summary>
-        /// Returns a Hash of Discord ID's to Steam ID's
-        /// </summary>
-        /// <returns></returns>
-        Hash<Snowflake, string> GetDiscordToSteamIds();
 
         /// <summary>
         /// Called on a plugin to register events to be called when that plugin links or unlinks a Steam ID and Discord ID
