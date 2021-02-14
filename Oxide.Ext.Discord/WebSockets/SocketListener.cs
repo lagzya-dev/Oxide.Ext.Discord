@@ -1042,7 +1042,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchUnhandledEvent(EventPayload payload)
         {
             _client.CallHook("Discord_UnhandledEvent", payload);
-            _logger.Warning($"Unhandled Dispatch Event: {payload.EventName}. Please contact Discord Extension authors.");
+            _logger.Warning($"Unhandled Dispatch Event: {payload.EventName}. Please contact Discord Extension authors.\n{JsonConvert.SerializeObject(payload)}");
         }
 
         //https://discord.com/developers/docs/topics/gateway#heartbeat
