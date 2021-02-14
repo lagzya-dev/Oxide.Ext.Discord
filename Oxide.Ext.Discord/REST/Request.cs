@@ -77,11 +77,6 @@ namespace Oxide.Ext.Discord.REST
         private const int RequestMaxLength = 15;
 
         private readonly ILogger _logger;
-        
-        private static readonly JsonSerializerSettings DefaultSerializerSettings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore
-        };
 
         /// <summary>
         /// Creates a new request
@@ -235,7 +230,7 @@ namespace Oxide.Ext.Discord.REST
 
         private void WriteRequestData(HttpWebRequest request, object data)
         {
-            string contents = JsonConvert.SerializeObject(data, DefaultSerializerSettings);
+            string contents = JsonConvert.SerializeObject(data, DiscordExtension.ExtensionSerializeSettings);
 
             byte[] bytes = Encoding.UTF8.GetBytes(contents);
             request.ContentLength = bytes.Length;

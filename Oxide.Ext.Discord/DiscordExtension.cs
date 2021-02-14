@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Configuration;
 using Oxide.Core.Extensions;
@@ -20,6 +21,11 @@ namespace Oxide.Ext.Discord
         /// Test version information if using test version
         /// </summary>
         public const string TestVersion = ".PreAlpha.1";
+        
+        public static readonly JsonSerializerSettings ExtensionSerializeSettings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
         
         /// <summary>
         /// Version number of the extension
