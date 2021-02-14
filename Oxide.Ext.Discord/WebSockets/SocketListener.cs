@@ -68,7 +68,14 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <param name="e"></param>
         public void SocketClosed(object sender, CloseEventArgs e)
         {
-            _logger.Debug($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
+            if (e.Code == 1000)
+            {
+                _logger.Debug($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
+            }
+            else
+            {
+                _logger.Warning($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
+            }
             
             _webSocket.DisposeSocket();
             
