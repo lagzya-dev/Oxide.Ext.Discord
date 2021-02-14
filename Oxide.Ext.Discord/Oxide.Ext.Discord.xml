@@ -295,7 +295,7 @@
             </summary>
             <param name="plugin">Plugin that will own this discord client</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.Connect(System.String,Oxide.Ext.Discord.Entities.Gatway.BotIntents)">
+        <member name="M:Oxide.Ext.Discord.DiscordClient.Connect(System.String,Oxide.Ext.Discord.Entities.Gatway.GatewayIntents)">
             <summary>
             Starts a connection to discord with the given apiKey and intents
             </summary>
@@ -355,6 +355,11 @@
         <member name="F:Oxide.Ext.Discord.DiscordExtension.TestVersion">
             <summary>
             Test version information if using test version
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.DiscordExtension.ExtensionSerializeSettings">
+            <summary>
+            Discord Extension JSON Serialization settings
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.DiscordExtension.ExtensionVersion">
@@ -422,7 +427,7 @@
         <member name="F:Oxide.Ext.Discord.DiscordSettings.Intents">
             <summary>
             Intents that your bot needs to work
-            See <see cref="T:Oxide.Ext.Discord.Entities.Gatway.BotIntents"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents"/>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.DiscordSettings.CloseOnUnload">
@@ -2735,7 +2740,7 @@
             <summary>
             The Gateway Intents you wish to receive
             See <a href="https://discord.com/developers/docs/topics/gateway#gateway-intents">Gateway Intents</a>
-            See <see cref="T:Oxide.Ext.Discord.Entities.Gatway.BotIntents"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents"/>
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.Properties">
@@ -3527,18 +3532,18 @@
             <param name="client">Client to use</param>
             <param name="callback">Callback with the Gateway response</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.BotIntents">
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#gateway-intents">Gateway Intents</a>
             These are used to indicate which events your bot / application wants to listen to / have access to
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.None">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.None">
             <summary>
             Represents No Intents
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.Guilds">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.Guilds">
             <summary>
             - GUILD_CREATE
             - GUILD_UPDATE
@@ -3552,51 +3557,51 @@
             - CHANNEL_PINS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildMembers">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMembers">
             <summary>
             - GUILD_MEMBER_ADD
             - GUILD_MEMBER_UPDATE
             - GUILD_MEMBER_REMOVE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildBans">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildBans">
             <summary>
             - GUILD_BAN_ADD
             - GUILD_BAN_REMOVE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildEmojis">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildEmojis">
             <summary>
             - GUILD_EMOJIS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildIntegrations">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildIntegrations">
             <summary>
             - GUILD_INTEGRATIONS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildWebhooks">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildWebhooks">
             <summary>
             - WEBHOOKS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildInvites">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildInvites">
             <summary>
             - INVITE_CREATE
             - INVITE_DELETE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildVoiceStates">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildVoiceStates">
             <summary>
             - VOICE_STATE_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildPresences">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildPresences">
             <summary>
             - PRESENCE_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildMessages">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMessages">
             <summary>
             - MESSAGE_CREATE
             - MESSAGE_UPDATE
@@ -3604,7 +3609,7 @@
             - MESSAGE_DELETE_BULK
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildMessageReactions">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMessageReactions">
             <summary>
             - MESSAGE_REACTION_ADD
             - MESSAGE_REACTION_REMOVE
@@ -3612,12 +3617,12 @@
             - MESSAGE_REACTION_REMOVE_EMOJI
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.GuildMessageTyping">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMessageTyping">
             <summary>
             - TYPING_START
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.DirectMessages">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.DirectMessages">
             <summary>
             - MESSAGE_CREATE
             - MESSAGE_UPDATE
@@ -3625,7 +3630,7 @@
             - CHANNEL_PINS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.DirectMessageReactions">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.DirectMessageReactions">
             <summary>
             - MESSAGE_REACTION_ADD
             - MESSAGE_REACTION_REMOVE
@@ -3633,12 +3638,12 @@
             - MESSAGE_REACTION_REMOVE_EMOJI
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.DirectMessageTyping">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.DirectMessageTyping">
             <summary>
             - TYPING_START
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.BotIntents.All">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.All">
             <summary>
             Represents all Intents
             </summary>

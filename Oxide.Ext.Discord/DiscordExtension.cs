@@ -22,7 +22,10 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public const string TestVersion = ".PreAlpha.1";
         
-        public static readonly JsonSerializerSettings ExtensionSerializeSettings = new JsonSerializerSettings
+        /// <summary>
+        /// Discord Extension JSON Serialization settings
+        /// </summary>
+        internal static readonly JsonSerializerSettings ExtensionSerializeSettings = new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore
         };

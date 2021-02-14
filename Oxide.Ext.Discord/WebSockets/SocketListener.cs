@@ -511,18 +511,13 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchChannelCreate(EventPayload payload)
         {
             Channel channel = payload.EventData.ToObject<Channel>();
-            if (!channel.GuildId.HasValue)
-            {
-                return;
-            }
-            
             if (channel.Type == ChannelType.Dm || channel.Type == ChannelType.GroupDm)
             {
                 _client.AddOrUpdateDirectMessageChannel(channel);
             }
             else
             {
-                Guild guild = _client.GetGuild(channel.GuildId.Value);
+                Guild guild = channel.GuildId.HasValue ? _client.GetGuild(channel.GuildId.Value) : null;
                 if (guild != null && guild.IsAvailable)
                 {
                     guild.Channels[channel.Id] = channel;
@@ -536,36 +531,31 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#channel-update
         private void HandleDispatchChannelUpdate(EventPayload payload)
         {
-            Channel update = payload.EventData.ToObject<Channel>();
-            if (!update.GuildId.HasValue)
-            {
-                return;
-            }
-            
+            Channel channel = payload.EventData.ToObject<Channel>();
             Channel previous = null;
-            if (update.Type == ChannelType.Dm || update.Type == ChannelType.GroupDm)
+            if (channel.Type == ChannelType.Dm || channel.Type == ChannelType.GroupDm)
             {
-                _client.AddOrUpdateDirectMessageChannel(update);
+                _client.AddOrUpdateDirectMessageChannel(channel);
             }
             else
             {
-                Guild guild = _client.GetGuild(update.GuildId.Value);
+                Guild guild = channel.GuildId.HasValue ? _client.GetGuild(channel.GuildId.Value) : null;
                 if (guild != null && guild.IsAvailable)
                 {
-                    previous = guild.Channels[update.Id];
+                    previous = guild.Channels[channel.Id];
                     if (previous != null)
                     {
-                        previous.Update(update);
+                        previous.Update(channel);
                     }
                     else
                     {
-                        guild.Channels[update.Id] = update;
+                        guild.Channels[channel.Id] = channel;
                     }
                 }
             }
 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelUpdate)} CHANNEL_UPDATE: ID: {update.Id} Type: {update.Type}.");
-            _client.CallHook("Discord_ChannelUpdate", update, previous);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelUpdate)} CHANNEL_UPDATE: ID: {channel.Id} Type: {channel.Type}.");
+            _client.CallHook("Discord_ChannelUpdate", channel, previous);
         }
 
         //https://discord.com/developers/docs/topics/gateway#channel-delete
@@ -574,7 +564,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Channel channel = payload.EventData.ToObject<Channel>();
             if (channel.GuildId.HasValue)
             {
-                _client.GetGuild(channel.GuildId.Value)?.Channels.RemoveAll(c => c.Id == channel.Id);
+                _client.GetGuild(channel.GuildId.Value)?.Channels.Remove(channel.Id);
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelDelete)} CHANNEL_DELETE: ID: {channel.Id} Type: {channel.Type}.");
                 _client.CallHook("Discord_ChannelDelete", channel);
             }
