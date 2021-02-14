@@ -7975,7 +7975,7 @@
             Extensions for enums
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.EnumExt.TryParse``1(System.String,``0@)">
+        <member name="M:Oxide.Ext.Discord.Extensions.EnumExt.TryParse``1(System.Object,``0@)">
             <summary>
             Try to parse the enum value from string value
             </summary>
@@ -8042,7 +8042,7 @@
         <member name="M:Oxide.Ext.Discord.Extensions.StringExt.ParseCommand(System.String,System.String@,System.String[]@)">
             <summary>
             Parses the specified command into uMod command format
-            Sourced from RustCore.cs of OxideMod (https://github.com/theumod/uMod.Rust/blob/oxide/src/RustCore.cs)
+            Sourced from CommandHandler.cs of uMod (https://gitlab.com/umod/core/core/-/blob/develop/src/Command/CommandHandler.cs)
             </summary>
             <param name="argStr"></param>
             <param name="command"></param>
@@ -8699,12 +8699,6 @@
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.GetSteamToDiscordIds">
             <summary>
             Returns a Hash of Steam ID's to Discord ID's
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.GetDiscordToSteamIds">
-            <summary>
-            Returns a Hash of Discord ID's to Steam ID's
             </summary>
             <returns></returns>
         </member>
