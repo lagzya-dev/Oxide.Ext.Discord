@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord
             NullValueHandling = NullValueHandling.Ignore
         };
         
-        private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 9);
+        private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 10);
         
         private readonly ILogger _logger;
         
