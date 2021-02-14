@@ -126,8 +126,11 @@ namespace Oxide.Ext.Discord.WebSockets
                 OpCode = opCode,
                 Payload = data
             };
+
+            string payloadData = JsonConvert.SerializeObject(opcode, DiscordExtension.ExtensionSerializeSettings);
+            _logger.Debug($"{nameof(Socket)}.{nameof(Send)} Payload: {payloadData}");
             
-            _socket.SendAsync(JsonConvert.SerializeObject(opcode), completed);
+            _socket.SendAsync(payloadData, completed);
         }
 
         public void Send(string message, Action<bool> completed = null)

@@ -1,4 +1,5 @@
-﻿using Oxide.Ext.Discord.Logging;
+﻿using Newtonsoft.Json;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord
 {
@@ -10,8 +11,14 @@ namespace Oxide.Ext.Discord
 
     public class DiscordExtension : Extension
     {
-        private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 9);
         public const string TestVersion = "";
+        
+        public static readonly JsonSerializerSettings ExtensionSerializeSettings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
+        
+        private static readonly VersionNumber ExtensionVersion = new VersionNumber(1, 0, 9);
         
         private readonly ILogger _logger;
         
