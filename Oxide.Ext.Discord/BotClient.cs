@@ -209,7 +209,7 @@ namespace Oxide.Ext.Discord
                 }
 
                 //Our intents have changed. Disconnect websocket and reconnect with new intents.
-                BotIntents intents = Settings.Intents | client.Settings.Intents;
+                GatewayIntents intents = Settings.Intents | client.Settings.Intents;
                 if (intents != Settings.Intents)
                 {
                     Settings.Intents = intents;
@@ -247,7 +247,7 @@ namespace Oxide.Ext.Discord
                 UpdateLogLevel(level);
             }
 
-            BotIntents intents = BotIntents.None;
+            GatewayIntents intents = GatewayIntents.None;
             foreach (DiscordClient exitingClients in Clients)
             {
                 intents |= exitingClients.Settings.Intents;

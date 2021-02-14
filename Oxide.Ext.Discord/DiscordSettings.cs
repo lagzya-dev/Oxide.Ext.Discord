@@ -21,9 +21,9 @@ namespace Oxide.Ext.Discord
         
         /// <summary>
         /// Intents that your bot needs to work
-        /// See <see cref="BotIntents"/>
+        /// See <see cref="GatewayIntents"/>
         /// </summary>
-        public BotIntents Intents = BotIntents.None;
+        public GatewayIntents Intents = GatewayIntents.None;
         
         /// <summary>
         /// If the client should be removed from the bot when the plugin unloads

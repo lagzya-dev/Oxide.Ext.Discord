@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
     /// These are used to indicate which events your bot / application wants to listen to / have access to
     /// </summary>
     [Flags]
-    public enum BotIntents
+    public enum GatewayIntents
     {
         /// <summary>
         /// Represents No Intents

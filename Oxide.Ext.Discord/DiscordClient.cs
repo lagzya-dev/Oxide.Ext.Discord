@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         /// <param name="apiKey">API key for the connecting bot</param>
         /// <param name="intents">Intents the bot needs in order to function</param>
-        public void Connect(string apiKey, BotIntents intents)
+        public void Connect(string apiKey, GatewayIntents intents)
         {
             DiscordSettings settings = new DiscordSettings
             {

@@ -55,10 +55,10 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// <summary>
         /// The Gateway Intents you wish to receive
         /// See <a href="https://discord.com/developers/docs/topics/gateway#gateway-intents">Gateway Intents</a>
-        /// See <see cref="BotIntents"/>
+        /// See <see cref="GatewayIntents"/>
         /// </summary>
         [JsonProperty("intents")]
-        public BotIntents Intents { get; set; }
+        public GatewayIntents Intents { get; set; }
     }
 
     /// <summary>
