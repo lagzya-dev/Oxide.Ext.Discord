@@ -18,7 +18,7 @@ An API key is used to authenticate requests made to and from Discord.
 **Note: DO NOT SHARE YOUR API KEY!** Sharing your key may result in punishments from Discord (including a platform-wide ban) if the token is used to abuse the API.
 
 Obtaining an API Key:
-1) Visit the official Discord Developers page here: [Discord Developer Documenation](https://discordapp.com/developers/applications/me)
+1) Visit the official Discord Developers page here: [Discord Developer Documentation](https://discordapp.com/developers/applications/me)
 2) Click "New App".
 3) Name your app and click create! *Note: A description isn't required.*
 4) You will now be redirected to your created app, at the point you will need to click "Create a Bot User".
@@ -79,10 +79,10 @@ namespace Oxide.Plugins
 
 ## Socket Hooks
 
-### DiscordSocket_Initalized
+### DiscordSocket_Initialized
 
 ```csharp
-void DiscordSocket_Initalized(DiscordClient client)
+void DiscordSocket_Initialized(DiscordClient client)
 {
     Puts("Client Initalized!");
 }
