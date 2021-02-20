@@ -16,6 +16,11 @@ namespace Oxide.Ext.Discord.Libraries.Command
     /// </summary>
     public class DiscordCommands : Library
     {
+        /// <summary>
+        /// Available command prefixes used by the extension
+        /// </summary>
+        public readonly char[] CommandPrefixes;
+        
         internal readonly Hash<string, DirectMessageCommand> DirectMessageCommands = new Hash<string, DirectMessageCommand>();
         internal readonly Hash<string, GuildCommand> GuildCommands = new Hash<string, GuildCommand>();
 
@@ -24,6 +29,15 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// </summary>
         private readonly Hash<Plugin, Event.Callback<Plugin, PluginManager>> _pluginRemovedFromManager = new Hash<Plugin, Event.Callback<Plugin, PluginManager>>();
 
+        /// <summary>
+        /// Discord Commands Constructor
+        /// </summary>
+        /// <param name="prefixes">Command prefixes used by the extension</param>
+        public DiscordCommands(char[] prefixes)
+        {
+            CommandPrefixes = prefixes;
+        }
+        
         /// <summary>
         /// Returns if there are any guild discord commands are registered
         /// </summary>
@@ -74,7 +88,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="command"></param>
         /// <param name="plugin"></param>
         /// <param name="callback"></param>
-        public void AddDiscordDirectMessageCommand(string command, Plugin plugin, Action<Message, string, string[]> callback)
+        public void AddDiscordDirectMessageCommand(string command, Plugin plugin, Action<DiscordMessage, string, string[]> callback)
         {
             string commandName = command.ToLowerInvariant();
 
@@ -103,11 +117,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// </summary>
         /// <param name="name"></param>
         /// <param name="plugin"></param>
+        /// <param name="allowedChannels"></param>
         /// <param name="callback"></param>
         [LibraryFunction(nameof(AddDiscordGuildCommand))]
-        public void AddDiscordGuildCommand(string name, Plugin plugin, string callback)
+        public void AddDiscordGuildCommand(string name, Plugin plugin, List<Snowflake> allowedChannels, string callback)
         {
-            AddDiscordGuildCommand(name, plugin, null, (message, command, args) => plugin.CallHook(callback, message, command, args));
+            AddDiscordGuildCommand(name, plugin, allowedChannels, (message, command, args) => plugin.CallHook(callback, message, command, args));
         }
 
         /// <summary>
@@ -118,7 +133,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="plugin"></param>
         /// <param name="allowedChannels"></param>
         /// <param name="callback"></param>
-        public void AddDiscordGuildCommand(string command, Plugin plugin, List<Snowflake> allowedChannels, Action<Message, string, string[]> callback)
+        public void AddDiscordGuildCommand(string command, Plugin plugin, List<Snowflake> allowedChannels, Action<DiscordMessage, string, string[]> callback)
         {
             string commandName = command.ToLowerInvariant();
 
@@ -211,7 +226,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="name"></param>
         /// <param name="args"></param>
         /// <param name="message"></param>
-        internal bool HandleDirectMessageCommand(BotClient client, Message message, Channel channel, string name, string[] args)
+        internal bool HandleDirectMessageCommand(BotClient client, DiscordMessage message, Channel channel, string name, string[] args)
         {
             DirectMessageCommand command = DirectMessageCommands[name];
             if (command == null || !command.CanHandle(message, channel))
@@ -237,7 +252,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="name"></param>
         /// <param name="args"></param>
         /// <param name="message"></param>
-        internal bool HandleGuildCommand(BotClient client, Message message, Channel channel, string name, string[] args)
+        internal bool HandleGuildCommand(BotClient client, DiscordMessage message, Channel channel, string name, string[] args)
         {
             GuildCommand command = GuildCommands[name];
             if (command == null || !command.CanHandle(message, channel))

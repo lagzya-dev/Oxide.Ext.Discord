@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// User role ids
         /// </summary>
         [JsonProperty("roles")]
-        public List<string> Roles { get; set; }
+        public List<Snowflake> Roles { get; set; }
         
         /// <summary>
         /// The user

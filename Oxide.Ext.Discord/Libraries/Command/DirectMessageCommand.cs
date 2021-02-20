@@ -7,12 +7,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
 {
     internal class DirectMessageCommand : BaseCommand
     {
-        internal DirectMessageCommand(string name, Plugin plugin, Action<Message, string, string[]> callback) : base(name, plugin, callback)
+        internal DirectMessageCommand(string name, Plugin plugin, Action<DiscordMessage, string, string[]> callback) : base(name, plugin, callback)
         {
             
         }
         
-        public override bool CanHandle(Message message, Channel channel)
+        public override bool CanHandle(DiscordMessage message, Channel channel)
         {
             return !message.GuildId.HasValue;
         }

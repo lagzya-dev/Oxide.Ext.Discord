@@ -70,10 +70,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="response">Response to respond with</param>
         /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="onError">Callback when an error occurs with error information</param>
-        public void CreateResponse(DiscordClient client, InteractionResponse response, Action callback = null, Action<RestError> onError = null)
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void CreateResponse(DiscordClient client, InteractionResponse response, Action callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, response, callback, onError);
+            client.Bot.Rest.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, response, callback, error);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Requires MANAGE_ROLES Permission
         /// </summary>
         [JsonProperty("roles")]
-        public List<string> Roles { get; set; }
+        public List<Snowflake> Roles { get; set; }
         
         /// <summary>
         /// Deafen the guild member

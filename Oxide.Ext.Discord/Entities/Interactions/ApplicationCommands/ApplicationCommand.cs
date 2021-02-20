@@ -29,10 +29,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with updated command</param>
-        /// <param name="onError">Callback when an error occurs with error information</param>
-        public void EditGlobalApplicationCommand(DiscordClient client, Action<ApplicationCommand> callback = null, Action<RestError> onError = null)
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void EditGlobalApplicationCommand(DiscordClient client, Action<ApplicationCommand> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PATCH, this, callback, onError);
+            client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PATCH, this, callback, error);
         }
         
         /// <summary>
@@ -41,10 +41,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="onError">Callback when an error occurs with error information</param>
-        public void DeleteGlobalApplicationCommand(DiscordClient client, Action callback = null, Action<RestError> onError = null)
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void DeleteGlobalApplicationCommand(DiscordClient client, Action callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands/{Id}", RequestMethod.PATCH, null, callback, onError);
+            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands/{Id}", RequestMethod.PATCH, null, callback, error);
         }
     }
 }

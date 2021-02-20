@@ -20,7 +20,20 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         public IDiscordLinkPlugin Link { get; private set; }
 
-        private readonly IPlayerManager _players;
+        private IPlayerManager _players;
+
+        internal IPlayerManager Players
+        {
+            get
+            {
+                if (_players != null)
+                {
+                    return _players;
+                }
+
+                return _players = Interface.Oxide.GetLibrary<Covalence>().Players;
+            }
+        }
 
         private Hash<string, Snowflake> _steamIdToDiscordId;
         private Hash<Snowflake, string> _discordIdToSteamId;
@@ -37,13 +50,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             }
         }
 
-        /// <summary>
-        /// Constructor for discord link
-        /// </summary>
-        public DiscordLink()
-        {
-            _players = Interface.Oxide.GetLibrary<Covalence>().Players;
-        }
+        private Event.Callback<Plugin, PluginManager> _onRemoved;
 
         /// <summary>
         /// Returns if there is a registered link plugin
@@ -71,11 +78,13 @@ namespace Oxide.Ext.Discord.Libraries.Linking
 
             if (LinkPlugin != null)
             {
+                _onRemoved.Remove();
                 Interface.Oxide.LogWarning("[Discord Link] Plugin has been overriden by {0}, Previously {1}", plugin.Title, LinkPlugin.Title);
             }
 
             LinkPlugin = plugin;
-            LinkPlugin.OnRemovedFromManager.Add(RemovePlugin);
+            _onRemoved = LinkPlugin.OnRemovedFromManager.Add(RemovePlugin);
+            Link.RegisterEvents(OnLinked, OnUnlinked);
 
             Hash<string, Snowflake> data = Link.GetSteamToDiscordIds();
             if (data != null)
@@ -166,7 +175,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 return null;
             }
 
-            return _players.FindPlayerById(id);
+            return Players.FindPlayerById(id);
         }
 
         /// <summary>
@@ -188,6 +197,47 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         public Snowflake? GetDiscordId(IPlayer player)
         {
             return GetSteamToDiscordIds()?[player.Id];
+        }
+
+        /// <summary>
+        /// Returns a minimal Discord User
+        /// </summary>
+        /// <param name="playerId">ID of the in game player</param>
+        /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
+        [LibraryFunction(nameof(GetDiscordUser))]
+        public DiscordUser GetDiscordUser(string playerId)
+        {
+            Snowflake? discordId = GetDiscordId(playerId);
+            if (!discordId.HasValue)
+            {
+                return null;
+            }
+
+            return new DiscordUser
+            {
+                Id = discordId.Value,
+                Bot = false,
+            };
+        }
+        
+        /// <summary>
+        /// Returns a minimal Discord User
+        /// </summary>
+        /// <param name="player">Player to get the Discord User for</param>
+        /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
+        public DiscordUser GetDiscordUser(IPlayer player)
+        {
+            Snowflake? discordId = GetDiscordId(player);
+            if (!discordId.HasValue)
+            {
+                return null;
+            }
+
+            return new DiscordUser
+            {
+                Id = discordId.Value,
+                Bot = false,
+            };
         }
 
         /// <summary>

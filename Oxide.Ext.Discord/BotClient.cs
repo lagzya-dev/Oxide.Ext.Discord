@@ -10,6 +10,8 @@ using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.REST;
 using Oxide.Ext.Discord.WebSockets;
@@ -88,6 +90,7 @@ namespace Oxide.Ext.Discord
         private readonly ILogger _logger;
         
         internal Ready ReadyData;
+        internal readonly List<Snowflake> MembersLoaded = new List<Snowflake>();
         
         /// <summary>
         /// Creates a new bot client for the given settings
@@ -218,10 +221,26 @@ namespace Oxide.Ext.Discord
                 }
             }
 
-            if (ReadyData != null)
+            if (_webSocket.IsAlive())
             {
-                ReadyData.Guilds = Servers.Values.ToList();
-                client.CallHook("Discord_Ready", null, ReadyData, true);
+                if (ReadyData != null)
+                {
+                    ReadyData.Guilds = Servers.Values.ToList();
+                    client.CallHook("Discord_Ready", null, ReadyData, true);
+                }
+
+                foreach (Guild guild in Servers.Values)
+                {
+                    if (guild.IsAvailable)
+                    {
+                        client.CallHook("Discord_GuildCreate", guild, true);
+                    }
+
+                    if (MembersLoaded.Contains(guild.Id))
+                    {
+                        client.CallHook("Discord_GuildMembersLoaded", guild, true);
+                    }
+                }
             }
         }
 
@@ -378,7 +397,7 @@ namespace Oxide.Ext.Discord
                 callback.Invoke();
             });
         }
-        
+
         /// <summary>
         /// Used to Identify the bot with discord
         /// </summary>
@@ -520,11 +539,17 @@ namespace Oxide.Ext.Discord
         }
 
         /// <summary>
-        /// Adds a guild if it does not exist or updates the guild with
+        /// Adds a direct message channel if it doesnt exist. If it does it updates it
         /// </summary>
         /// <param name="channel"></param>
         public void AddOrUpdateDirectMessageChannel(Channel channel)
         {
+            if (channel.Type != ChannelType.Dm)
+            {
+                _logger.Warning($"{nameof(BotClient)}.{nameof(AddOrUpdateDirectMessageChannel)} Tried to add non DM channel");
+                return;
+            }
+            
             Channel existing = DirectMessagesByChannelId[channel.Id];
             if (existing != null)
             {
@@ -535,8 +560,8 @@ namespace Oxide.Ext.Discord
             {
                 _logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Adding New Channel {channel.Id}");
                 DirectMessagesByChannelId[channel.Id] = channel;
-                Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !r.Bot ?? false)?.Id;
-                if (toId.HasValue)
+                Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !(r.Bot ?? false))?.Id;
+                if (toId.HasValue && channel.Recipients.Count == 2)
                 {
                     DirectMessagesByUserId[toId.Value] = channel;
                 }
@@ -545,7 +570,7 @@ namespace Oxide.Ext.Discord
 
         internal bool IsPluginRegistered(Plugin plugin)
         {
-            return Clients.Any(t => t.Owner == plugin);
+            return Clients.Any(t => t.RegisteredForHooks.Contains(plugin));
         }
     }
 }

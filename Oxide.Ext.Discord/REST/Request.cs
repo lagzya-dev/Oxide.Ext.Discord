@@ -4,7 +4,9 @@ using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using Oxide.Core;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Time = Oxide.Ext.Discord.Helpers.Time;
 
@@ -86,16 +88,16 @@ namespace Oxide.Ext.Discord.REST
         /// <param name="headers">Headers to be added to the request</param>
         /// <param name="data">Data for the request</param>
         /// <param name="callback">Callback once the request completes successfully</param>
-        /// <param name="onError">Callback when the request errors</param>
+        /// <param name="error">Callback when the request errors</param>
         /// <param name="logger">Logger for the request</param>
-        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> onError, ILogger logger)
+        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> error, ILogger logger)
         {
             Method = method;
             Route = route;
             Headers = headers;
             Data = data;
             Callback = callback;
-            OnError = onError;
+            OnError = error;
             _logger = logger;
         }
 
@@ -136,7 +138,11 @@ namespace Oxide.Ext.Discord.REST
                     }
                 }
 
-                Callback?.Invoke(Response);
+                Interface.Oxide.NextTick(() =>
+                {
+                    Callback?.Invoke(Response);
+                });
+                
                 Close();
             }
             catch (WebException ex)
@@ -169,12 +175,21 @@ namespace Oxide.Ext.Discord.REST
                             _lastError.DiscordError = apiError;
                             if (!string.IsNullOrEmpty(apiError.Code))
                             {
-                                _logger.Error($"Discord has returned error Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})\nErrors: {apiError.Errors}");
+                                _logger.Error($"Discord has returned error Method: {Method.ToString()} Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})\n" +
+                                              (apiError.Errors != null ? $"Errors: {apiError.Errors}" : string.Empty));
                             }
                             else
                             {
                                 _logger.Error($"An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
                             }
+                        }
+
+                        if (!isRateLimit)
+                        {
+                            Interface.Oxide.NextTick(() =>
+                            {
+                                OnError?.Invoke(_lastError);
+                            });
                         }
 
                         Close(!isRateLimit);
@@ -199,7 +214,10 @@ namespace Oxide.Ext.Discord.REST
             {
                 if (_retries >= 3)
                 {
-                    OnError?.Invoke(_lastError);
+                    Interface.Oxide.NextTick(() =>
+                    {
+                        OnError?.Invoke(_lastError);
+                    });
                 }
                 
                 lock (_bucket)

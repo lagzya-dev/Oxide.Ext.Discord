@@ -39,6 +39,8 @@ namespace Oxide.Ext.Discord
         public DiscordSettings Settings { get; private set; }
         
         internal ILogger Logger;
+        
+        private readonly Hash<Plugin, Event.Callback<Plugin, PluginManager>> _pluginRemovedFromManager = new Hash<Plugin, Event.Callback<Plugin, PluginManager>>();
 
         /// <summary>
         /// Constructor for a discord client
@@ -107,10 +109,46 @@ namespace Oxide.Ext.Discord
         /// Registers a plugin to receive hook calls for this client
         /// </summary>
         /// <param name="plugin"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPluginForHooks(Plugin plugin)
         {
+            if (plugin == null)
+            {
+                throw new ArgumentNullException(nameof(plugin));
+            }
+            
             RegisteredForHooks.RemoveAll(p => p.Name == plugin.Name);
             RegisteredForHooks.Add(plugin);
+
+            if (plugin != Owner && !_pluginRemovedFromManager.ContainsKey(plugin))
+            {
+                _pluginRemovedFromManager[plugin] = plugin.OnRemovedFromManager.Add(RemovePluginFromHooks);
+            }
+        }
+
+        /// <summary>
+        /// Remove a plugin from hooks
+        /// </summary>
+        /// <param name="plugin">Plugin to be removed from hooks</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void RemovePluginFromHooks(Plugin plugin)
+        {
+            if (plugin == null)
+            {
+                throw new ArgumentNullException(nameof(plugin));
+            }
+            
+            RemovePluginFromHooks(plugin, null);
+        }
+
+        private void RemovePluginFromHooks(Plugin plugin, PluginManager manager)
+        {
+            RegisteredForHooks.RemoveAll(p => p.Name == plugin.Name);
+            if (_pluginRemovedFromManager.TryGetValue(plugin, out Event.Callback<Plugin, PluginManager> callback))
+            {
+                callback.Remove();
+                _pluginRemovedFromManager.Remove(plugin);
+            }
         }
 
         /// <summary>
@@ -201,7 +239,7 @@ namespace Oxide.Ext.Discord
                 if (customAttributes.Length != 0)
                 {
                     GuildCommandAttribute command = (GuildCommandAttribute)customAttributes[0];
-                    DiscordExtension.DiscordCommands.AddDiscordGuildCommand(command.Name, plugin, method.Name);
+                    DiscordExtension.DiscordCommands.AddDiscordGuildCommand(command.Name, plugin, null, method.Name);
                     DiscordExtension.GlobalLogger.Debug($"Adding Guild Command {command.Name} Method: {method.Name}");
                 }
             }

@@ -49,10 +49,10 @@ namespace Oxide.Ext.Discord.REST
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="onError">Error callback if an error occurs</param>
-        public void DoRequest(string url, RequestMethod method, object data, Action callback, Action<RestError> onError)
+        /// <param name="error">Error callback if an error occurs</param>
+        public void DoRequest(string url, RequestMethod method, object data, Action callback, Action<RestError> error)
         {
-            CreateRequest(method, url, _headers, data, response => callback?.Invoke(), onError);
+            CreateRequest(method, url, _headers, data, response => callback?.Invoke(), error);
         }
 
         /// <summary>
@@ -62,14 +62,14 @@ namespace Oxide.Ext.Discord.REST
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="onError">Error callback if an error occurs</param>
+        /// <param name="error">Error callback if an error occurs</param>
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
-        public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback, Action<RestError> onError)
+        public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback, Action<RestError> error)
         {
             CreateRequest(method, url, _headers, data, response =>
             {
                 callback?.Invoke(response.ParseData<T>());
-            }, onError);
+            }, error);
         }
 
         /// <summary>
@@ -80,10 +80,10 @@ namespace Oxide.Ext.Discord.REST
         /// <param name="headers">Headers to be sent in the request</param>
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="onError">Error callback if an error occurs</param>
-        private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> onError)
+        /// <param name="error">Error callback if an error occurs</param>
+        private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> error)
         {
-            Request request = new Request(method, url, headers, data, callback, onError, _logger);
+            Request request = new Request(method, url, headers, data, callback, error, _logger);
             CleanupExpired();
             QueueRequest(request, _logger);
         }

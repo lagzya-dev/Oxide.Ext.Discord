@@ -37,5 +37,17 @@ namespace Oxide.Ext.Discord.Extensions
                 player.Message(message, prefix, args);
             }
         }
+
+        /// <summary>
+        /// Return if the discord user has the given oxide permission.
+        /// If the user is not linked this will return false
+        /// </summary>
+        /// <param name="user">User to check for permission</param>
+        /// <param name="permission">Permission to check for</param>
+        /// <returns>True if use is linked and has permission; False otherwise</returns>
+        public static bool HasPermission(this DiscordUser user, string permission)
+        {
+            return user.Player?.HasPermission(permission) ?? false;
+        }
     }
 }

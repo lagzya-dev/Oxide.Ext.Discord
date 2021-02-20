@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// Used to specify which users you wish to fetch
         /// </summary>
         [JsonProperty("user_ids")]
-        public List<string> UserIds { get; set; }        
+        public List<Snowflake> UserIds { get; set; }        
         
         /// <summary>
         /// Nonce to identify the Guild Members Chunk response

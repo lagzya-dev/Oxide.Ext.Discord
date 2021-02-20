@@ -12,22 +12,22 @@ namespace Oxide.Ext.Discord.Libraries.Command
     {
         public readonly string Name;
         public readonly Plugin Plugin;
-        private readonly Action<Message, string, string[]> _callback;
+        private readonly Action<DiscordMessage, string, string[]> _callback;
 
-        protected BaseCommand(string name, Plugin plugin, Action<Message, string, string[]> callback)
+        protected BaseCommand(string name, Plugin plugin, Action<DiscordMessage, string, string[]> callback)
         {
             Name = name;
             Plugin = plugin;
             _callback = callback;
         }
         
-        public void HandleCommand(Message message, string name, string[] args)
+        public void HandleCommand(DiscordMessage message, string name, string[] args)
         {
-            Plugin?.TrackStart();
-            _callback?.Invoke(message, name, args);
-            Plugin?.TrackEnd();
+            Plugin.TrackStart();
+            _callback.Invoke(message, name, args);
+            Plugin.TrackEnd();
         }
 
-        public virtual bool CanHandle(Message message, Channel channel) => true;
+        public virtual bool CanHandle(DiscordMessage message, Channel channel) => true;
     }
 }

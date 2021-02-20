@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                         return snowflake;
                     }
 
-                    throw new JsonException("Snowflake string JSON token failed to parse to snowflake");
+                    throw new JsonException($"Snowflake string JSON token failed to parse to snowflake: '{reader.Value}'");
               
                 case JsonToken.Null:
                     if (Nullable.GetUnderlyingType(objectType) != null)

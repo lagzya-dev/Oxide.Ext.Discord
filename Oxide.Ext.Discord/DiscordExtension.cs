@@ -8,6 +8,7 @@ using Oxide.Core.Extensions;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Linking;
+using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord
@@ -39,11 +40,12 @@ namespace Oxide.Ext.Discord
         /// Global logger for areas that aren't part of a client connection
         /// </summary>
         public static ILogger GlobalLogger;
-        
-        internal static DiscordLink DiscordLink = new DiscordLink();
-        internal static DiscordCommands DiscordCommands = new DiscordCommands();
+
+        internal static DiscordLink DiscordLink;
+        internal static DiscordCommands DiscordCommands;
+        internal static DiscordSubscriptions DiscordSubscriptions;
         internal static DiscordConfig DiscordConfig;
-        
+
         /// <summary>
         /// Constructor for the extension
         /// </summary>
@@ -78,14 +80,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnModLoad()
         {
-            if (string.IsNullOrEmpty(TestVersion))
-            {
-                GlobalLogger = new Logger(LogLevel.Warning);
-            }
-            else
-            {
-                GlobalLogger = new Logger(LogLevel.Debug);
-            }
+            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new Logger(LogLevel.Warning) : new Logger(LogLevel.Debug);
             
             GlobalLogger.Warning($"Using Discord Extension Version: {GetExtensionVersion}");
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
@@ -102,9 +97,14 @@ namespace Oxide.Ext.Discord
 
             DiscordConfig = ConfigFile.Load<DiscordConfig>(configPath);
             DiscordConfig.Save();
-            
+
+            DiscordLink = new DiscordLink();
+            DiscordCommands = new DiscordCommands(DiscordConfig.Commands.CommandPrefixes);
+            DiscordSubscriptions = new DiscordSubscriptions();
+
             Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
             Manager.RegisterLibrary(nameof(DiscordCommands), DiscordCommands);
+            Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
             Interface.Oxide.RootPluginManager.OnPluginRemoved +=  DiscordClient.OnPluginRemoved;
         }

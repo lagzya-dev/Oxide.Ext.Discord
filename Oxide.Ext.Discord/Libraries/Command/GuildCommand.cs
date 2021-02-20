@@ -11,19 +11,19 @@ namespace Oxide.Ext.Discord.Libraries.Command
     {
         private readonly List<Snowflake> _allowedChannels;
 
-        public GuildCommand(string name, Plugin plugin, List<Snowflake> allowedChannels, Action<Message, string, string[]> callback) : base(name, plugin, callback)
+        public GuildCommand(string name, Plugin plugin, List<Snowflake> allowedChannels, Action<DiscordMessage, string, string[]> callback) : base(name, plugin, callback)
         {
-            _allowedChannels = allowedChannels;
+            _allowedChannels = allowedChannels ?? new List<Snowflake>();
         }
 
-        public override bool CanHandle(Message message, Channel channel)
+        public override bool CanHandle(DiscordMessage message, Channel channel)
         {
             if (!message.GuildId.HasValue)
             {
                 return false;
             }
 
-            if (_allowedChannels != null && !_allowedChannels.Contains(channel.Id) && (!channel.ParentId.HasValue || !_allowedChannels.Contains(channel.ParentId.Value)))
+            if (_allowedChannels.Count != 0 && !_allowedChannels.Contains(channel.Id) && (!channel.ParentId.HasValue || !_allowedChannels.Contains(channel.ParentId.Value)))
             {
                 return false;
             }

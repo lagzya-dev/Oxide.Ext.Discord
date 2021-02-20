@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Extensions
                 return;
             }
             
-            DiscordUser.CreateDirectMessage(client, id.Value, newChannel => newChannel.CreateMessage(client, message));
+            DiscordUser.CreateDirectMessageChannel(client, id.Value, newChannel => newChannel.CreateMessage(client, message));
         }
 
         /// <summary>
@@ -80,6 +80,16 @@ namespace Oxide.Ext.Discord.Extensions
         public static Snowflake? GetDiscordUserId(this IPlayer player)
         {
             return DiscordExtension.DiscordLink.GetDiscordId(player);
+        }
+        
+        /// <summary>
+        /// Returns a minimal Discord User for the given player
+        /// </summary>
+        /// <param name="player">Player to get Discord User for</param>
+        /// <returns>Discord User if linked; null otherwise</returns>
+        public static DiscordUser GetDiscordUser(this IPlayer player)
+        {
+            return DiscordExtension.DiscordLink.GetDiscordUser(player);
         }
     }
 }

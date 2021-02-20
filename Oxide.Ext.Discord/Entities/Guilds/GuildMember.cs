@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// List of member roles
         /// </summary>
         [JsonProperty("roles")]
-        public List<string> Roles { get; set; }
+        public List<Snowflake> Roles { get; set; }
 
         /// <summary>
         /// When the user joined the guild

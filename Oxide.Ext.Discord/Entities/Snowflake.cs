@@ -51,6 +51,15 @@ namespace Oxide.Ext.Discord.Entities
         {
             return Time.DiscordEpoch + TimeSpan.FromSeconds(Id >> 22);
         }
+        
+        /// <summary>
+        /// Returns if the ID value is not 0
+        /// </summary>
+        /// <returns></returns>
+        public bool IsValid()
+        {
+            return Id != 0;
+        }
 
         /// <summary>
         /// Try to parse the a string into a snowflake value

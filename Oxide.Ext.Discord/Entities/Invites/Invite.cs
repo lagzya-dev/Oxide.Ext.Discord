@@ -73,10 +73,10 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <param name="client">Client to use</param>
         /// <param name="inviteCode">Invite code</param>
         /// <param name="callback">Callback with the invite</param>
-        /// <param name="onError">Callback when an error occurs with error information</param>
-        public static void GetInvite(DiscordClient client, string inviteCode, Action<Invite> callback = null, Action<RestError> onError = null)
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public static void GetInvite(DiscordClient client, string inviteCode, Action<Invite> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/invites/{inviteCode}", RequestMethod.GET, null, callback, onError);
+            client.Bot.Rest.DoRequest($"/invites/{inviteCode}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -87,10 +87,10 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the deleted invite</param>
-        /// <param name="onError">Callback when an error occurs with error information</param>
-        public void DeleteInvite(DiscordClient client, Action<Invite> callback = null, Action<RestError> onError = null)
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void DeleteInvite(DiscordClient client, Action<Invite> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/invites/{Code}", RequestMethod.DELETE, null, callback, onError);
+            client.Bot.Rest.DoRequest($"/invites/{Code}", RequestMethod.DELETE, null, callback, error);
         }
     }
 }
