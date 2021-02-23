@@ -1,17 +1,39 @@
-# Socket Hooks
+# Hooks
 
-## DiscordSocket_Initalized
+Hooks within the Discord Extension can be split into two categories.
+[Global Hooks](#global-hooks) which will be called on every plugin that is loaded in oxide and
+[Socket Hooks](#socket-hooks) which will only be called on plugins that are the owner of the client or have registered to receive hooks for the client.
+This allows plugins to know that any hook received from the Discord Extension is meant only for them.
+
+# Global Hooks
+
+These are hooks that will be called on every loaded plugin on the server
+
+## Discord_OnPlayerLinked
+- Called when a player has linked their discord and player together using the DiscordLink library
 ```csharp
-void DiscordSocket_Initalized(DiscordClient client)
+void Discord_OnPlayerLinked(IPlayer player, DiscordUser discord) 
 {
-    Puts("Client Initalized!");
+     Puts("Player has linked with discord");
 }
 ```
 
- - Called when the client is created, and the plugin can use it.
- - No return behavior.
+## Discord_OnPlayerUnlinked
+- Called when a player has unlinked their discord and player together using the DiscordLink library
+```csharp
+void Discord_OnPlayerUnlinked(IPlayer player, DiscordUser discord) 
+{
+     Puts("Player has unlinked with discord");
+}
+```
+
+# Socket Hooks
+
+These are hooks that are only called for the plugin who created the client or registered to receive hooks for that client
 
 ## DiscordSocket_HeartbeatSent
+- Called when a heartbeat is sent over the websocket to discord to keep the connection open
+
 ```csharp
 void DiscordSocket_HeartbeatSent()
 {
@@ -19,10 +41,8 @@ void DiscordSocket_HeartbeatSent()
 }
 ```
 
- - Called when a packet was sent to discord to keep up the connection.
- - No return behavior.
- 
 ## DiscordSocket_WebSocketOpened
+- Called when the discord socket connects.
 ```csharp
 void DiscordSocket_WebSocketOpened()
 {
@@ -30,9 +50,6 @@ void DiscordSocket_WebSocketOpened()
 }
 ```
 
- - Called when the discord socket connects. 
- - No return behavior.
- 
 ## DiscordSocket_WebSocketClosed
 ```csharp
 void DiscordSocket_WebSocketClosed(string reason, int code, bool clean)
@@ -41,9 +58,9 @@ void DiscordSocket_WebSocketClosed(string reason, int code, bool clean)
 }
 ```
 
- - Called when the web socket is closed for any reason.
- - No return behavior.
- 
+- Called when the web socket is closed for any reason.
+- No return behavior.
+
 ## DiscordSocket_WebSocketErrored
 ```csharp
 void DiscordSocket_WebSocketErrored(Exception exception, string message)
@@ -52,9 +69,9 @@ void DiscordSocket_WebSocketErrored(Exception exception, string message)
 }
 ```
 
- - Called when the web socket errors.
- - No return behavior.
- 
+- Called when the web socket errors.
+- No return behavior.
+
 
 # Discord API Event Hooks
 
@@ -66,8 +83,8 @@ void Discord_Ready(Ready ready)
 }
 ```
 
- - Called when discord is ready, and has started sending data.
- 
+- Called when discord is ready, and has started sending data.
+
 ## Discord_Resumed
 ```csharp
 void Discord_Resumed(Resumed resumed)
@@ -76,8 +93,8 @@ void Discord_Resumed(Resumed resumed)
 }
 ```
 
- - Called when the discord connection has been resumed.
- 
+- Called when the discord connection has been resumed.
+
 ## Discord_ChannelCreate
 ```csharp
 void Discord_ChannelCreated(Channel channel)
@@ -86,8 +103,8 @@ void Discord_ChannelCreated(Channel channel)
 }
 ```
 
- - Called when a channel has been created.
- 
+- Called when a channel has been created.
+
 ## Discord_ChannelUpdate
 ```csharp
 void Discord_ChannelUpdate(Channel updatedChannel, Channel oldChannel)
@@ -96,8 +113,8 @@ void Discord_ChannelUpdate(Channel updatedChannel, Channel oldChannel)
 }
 ```
 
- - Called when a channel has been updated.
- 
+- Called when a channel has been updated.
+
 ## Discord_ChannelDelete
 ```csharp
 void Discord_ChannelDelete(Channel channel)
@@ -106,8 +123,8 @@ void Discord_ChannelDelete(Channel channel)
 }
 ```
 
- - Called when a discord channel has been deleted.
- 
+- Called when a discord channel has been deleted.
+
 ## Discord_ChannelPinsUpdate
 ```csharp
 void Discord_ChannelPinsUpdate(ChannelPinsUpdate update)
@@ -116,8 +133,8 @@ void Discord_ChannelPinsUpdate(ChannelPinsUpdate update)
 }
 ```
 
- - Called when the pins on a channel have been updated.
- 
+- Called when the pins on a channel have been updated.
+
 ## Discord_GuildCreate
 ```csharp
 void Discord_GuildCreate(Guild guild)
@@ -126,8 +143,8 @@ void Discord_GuildCreate(Guild guild)
 }
 ```
 
- - Called when a new guild is created.
- - This is not currently set up correctly.
+- Called when a new guild is created.
+- This is not currently set up correctly.
 
 ## Discord_GuildUpdate
 ```csharp
@@ -137,7 +154,7 @@ void Discord_GuildUpdate(Guild guild)
 }
 ```
 
- - Called when a guild has been updated.
+- Called when a guild has been updated.
 
 ## Discord_GuildDelete
 ```csharp
@@ -147,7 +164,7 @@ void Discord_GuildDelete(Guild guild)
 }
 ```
 
- - Called when a guild is deleted.
+- Called when a guild is deleted.
 
 ## Discord_GuildBanAdd
 ```csharp
@@ -157,8 +174,8 @@ void Discord_GuildBanAdd(User user)
 }
 ```
 
- - Called when a user is banned.
- 
+- Called when a user is banned.
+
 ## Discord_GuildBanRemove
 ```csharp
 void Discord_GuildBanRemove(User user)
@@ -167,8 +184,8 @@ void Discord_GuildBanRemove(User user)
 }
 ```
 
- - Called when a user is unbanned.
- 
+- Called when a user is unbanned.
+
 ## Discord_GuildEmojisUpdate
 ```csharp
 void Discord_GuildEmojisUpdate(GuildEmojisUpdate update)
@@ -177,8 +194,8 @@ void Discord_GuildEmojisUpdate(GuildEmojisUpdate update)
 }
 ```
 
- - Called when the emoji's in a guild have been updated.
- 
+- Called when the emoji's in a guild have been updated.
+
 ## Discord_GuildIntegrationsUpdate
 ```csharp
 void Discord_GuildIntegrationsUpdate(GuildIntergrationsUpdate update)
@@ -187,8 +204,8 @@ void Discord_GuildIntegrationsUpdate(GuildIntergrationsUpdate update)
 }
 ```
 
- - Called when the integration in a guild have been updated?
- 
+- Called when the integration in a guild have been updated?
+
 ## Discord_MemberAdded
 ```csharp
 void Discord_MemberAdded(GuildMember member)
@@ -197,8 +214,8 @@ void Discord_MemberAdded(GuildMember member)
 }
 ```
 
- - Called when a user joins the discord server.
- 
+- Called when a user joins the discord server.
+
 ## Discord_MemberRemoved
 ```csharp
 void Discord_MemberRemoved(GuildMember member)
@@ -207,8 +224,8 @@ void Discord_MemberRemoved(GuildMember member)
 }
 ```
 
- - Called when a user is removed from the server.
- 
+- Called when a user is removed from the server.
+
 ## Discord_GuildMemberUpdate
 ```csharp
 void Discord_GuildMemberUpdate(GuildMemberUpdate update, GuildMember oldMember)
@@ -217,7 +234,7 @@ void Discord_GuildMemberUpdate(GuildMemberUpdate update, GuildMember oldMember)
 }
 ```
 
- - Called when a guild member is updated.
+- Called when a guild member is updated.
 
 ## Discord_GuildMembersChunk
 ```csharp
@@ -227,7 +244,7 @@ void Discord_GuildMembersChunk(GuildMembersChunk chunk)
 }
 ```
 
- - Called in response to a 'Gateway Request Guild Members'.
+- Called in response to a 'Gateway Request Guild Members'.
 
 ## Discord_GuildRoleCreate
 ```csharp
@@ -237,8 +254,8 @@ void Discord_GuildRoleCreate(Role role)
 }
 ```
 
- - Called when a new role is created
- 
+- Called when a new role is created
+
 ## Discord_GuildRoleUpdate
 ```csharp
 void Discord_GuildRoleUpdate(Role newRole, Role oldRole)
@@ -247,7 +264,7 @@ void Discord_GuildRoleUpdate(Role newRole, Role oldRole)
 }
 ```
 
- - Called when a role is updated.
+- Called when a role is updated.
 
 ## Discord_GuildRoleDelete
 ```csharp
@@ -257,7 +274,7 @@ void Discord_GuildRoleDelete(Role role)
 }
 ```
 
- - Called when a role is deleted.
+- Called when a role is deleted.
 
 ## Discord_MessageCreate
 ```csharp
@@ -267,7 +284,7 @@ void Discord_MessageCreate(Message message)
 }
 ```
 
- - Called when a new message is created.
+- Called when a new message is created.
 
 ## Discord_MessageUpdate
 ```csharp
@@ -277,7 +294,7 @@ void Discord_MessageUpdate(Message message)
 }
 ```
 
- - Called when a message is updated.
+- Called when a message is updated.
 
 ## Discord_MessageDelete
 ```csharp
@@ -287,7 +304,7 @@ void Discord_MessageDelete(MessageDelete message)
 }
 ```
 
- - Called when a message is deleted.
+- Called when a message is deleted.
 
 ## Discord_MessageDeleteBulk
 ```csharp
@@ -297,7 +314,7 @@ void Discord_MessageDeleteBulk(MessageDeleteBulk bulk)
 }
 ```
 
- - Called when a bulk set of messages have been deleted.
+- Called when a bulk set of messages have been deleted.
 
 ## Discord_MessageReactionAdd
 ```csharp
@@ -307,7 +324,7 @@ void Discord_MessageReactionAdd(MessageReactionUpdate update)
 }
 ```
 
- - Called when a reaction is added to a message.
+- Called when a reaction is added to a message.
 
 ## Discord_MessageReactionRemove
 ```csharp
@@ -317,7 +334,7 @@ void Discord_MessageReactionRemove(MessageReactionUpdate update)
 }
 ```
 
- - Called when a reaction is removed from a message.
+- Called when a reaction is removed from a message.
 
 ## Discord_ReactionRemoveAll
 ```csharp
@@ -327,7 +344,7 @@ void Discord_MessageReactionRemoveAll(MessageReactionRemoveAll reactions)
 }
 ```
 
- - Called when all reactions are removed from a message.
+- Called when all reactions are removed from a message.
 
 ## Discord_PresenceUpdate
 ```csharp
@@ -337,7 +354,7 @@ void Discord_PresenceUpdate(PResenceUpdate update)
 }
 ```
 
- - Called when a user's presence is updated.
+- Called when a user's presence is updated.
 
 ## Discord_TypingStart
 ```csharp
@@ -347,7 +364,7 @@ void Discord_TypingStart(TypingStart start)
 }
 ```
 
- - Called when someone starts typing.
+- Called when someone starts typing.
 
 ## Discord_UserUpdate
 ```csharp
@@ -357,7 +374,7 @@ void Discord_UserUpdate(User user)
 }
 ```
 
- - Called when a user is updated.
+- Called when a user is updated.
 
 ## Discord_VoiceStateUpdate
 ```csharp
@@ -367,7 +384,7 @@ void Discord_VoiceStateUpdate(VoiceState state)
 }
 ```
 
- - Called when a user's voice state is updated.
+- Called when a user's voice state is updated.
 
 ## Discord_VoiceServerUpdate
 ```csharp
@@ -377,7 +394,7 @@ void Discord_VoiceServerUpdate(VoiceServerUpdate update)
 }
 ```
 
- - Called when the voice server is updated.
+- Called when the voice server is updated.
 
 ## Discord_WebhooksUpdate
 ```csharp
@@ -387,7 +404,7 @@ void Discord_WebhooksUpdate(WebhooksUpdate webhooks)
 }
 ```
 
- - Called when the webhooks are updated.
+- Called when the webhooks are updated.
 
 ## Discord_UnhandledEvent
 ```csharp
@@ -397,5 +414,5 @@ void Discord_UnhandledEvent(JObject messageObject)
 }
 ```
 
- - Called when an event that is not handlded by the extension was raised
- - Please create an issue on the GitHub if this error ever occurs
+- Called when an event that is not handlded by the extension was raised
+- Please create an issue on the GitHub if this error ever occurs
