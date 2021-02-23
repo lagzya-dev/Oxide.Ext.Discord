@@ -2,7 +2,6 @@
 using System.Threading;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
-
 namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
@@ -13,7 +12,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// The ID of this bucket which is based on the route
         /// </summary>
-        public readonly string BucketId;
+        public string BucketId;
         
         /// <summary>
         /// The number of requests that can be made
@@ -36,7 +35,7 @@ namespace Oxide.Ext.Discord.Rest
         public double ErrorResendDelayUntil;
 
         /// <summary>
-        /// Rest Handler for the bucket
+        /// Rest Handler for the bucker
         /// </summary>
         public readonly RestHandler Handler;
 

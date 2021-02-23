@@ -4,11 +4,8 @@ using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
-using Oxide.Core;
 using Oxide.Core.Libraries;
-using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Time = Oxide.Ext.Discord.Helpers.Time;
 
@@ -33,11 +30,6 @@ namespace Oxide.Ext.Discord.Rest
         /// Full Request URl to the API
         /// </summary>
         public string RequestUrl => UrlBase + "/" + ApiVersion + Route;
-        
-        /// <summary>
-        /// Authorization header value
-        /// </summary>
-        public string Authorization { get; }
 
         /// <summary>
         /// Data to be sent with the request
@@ -72,6 +64,8 @@ namespace Oxide.Ext.Discord.Rest
 
         private Bucket _bucket;
         private RestError _lastError;
+        private readonly string _authorization;
+        
 
         private byte _retries;
         
@@ -88,18 +82,18 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="method">HTTP method to call</param>
         /// <param name="route">Route to call on the API</param>
         /// <param name="data">Data for the request</param>
-        /// <param name="authorization">Represents the authorization header value</param>
+        /// <param name="authorization">Authorization Header</param>
         /// <param name="callback">Callback once the request completes successfully</param>
-        /// <param name="error">Callback when the request errors</param>
+        /// <param name="onError">Callback when the request errors</param>
         /// <param name="logger">Logger for the request</param>
-        public Request(RequestMethod method, string route, object data, string authorization, Action<RestResponse> callback, Action<RestError> error, ILogger logger)
+        public Request(RequestMethod method, string route, object data, string authorization, Action<RestResponse> callback, Action<RestError> onError, ILogger logger)
         {
             Method = method;
             Route = route;
             Data = data;
-            Authorization = authorization;
+            _authorization = authorization;
             Callback = callback;
-            OnError = error;
+            OnError = onError;
             _logger = logger;
         }
 
@@ -115,11 +109,11 @@ namespace Oxide.Ext.Discord.Rest
 
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(RequestUrl);
             req.Method = Method.ToString();
-            req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion}";
             req.ContentType = "application/json";
+            req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})";
             req.Timeout = RequestMaxLength * 1000;
             req.ContentLength = 0;
-            req.Headers.Set("Authorization", Authorization);
+            req.Headers.Set("Authorization", _authorization);
 
             try
             {
@@ -137,11 +131,7 @@ namespace Oxide.Ext.Discord.Rest
                     }
                 }
 
-                Interface.Oxide.NextTick(() =>
-                {
-                    Callback?.Invoke(Response);
-                });
-                
+                Callback?.Invoke(Response);
                 Close();
             }
             catch (WebException ex)
@@ -174,21 +164,12 @@ namespace Oxide.Ext.Discord.Rest
                             _lastError.DiscordError = apiError;
                             if (!string.IsNullOrEmpty(apiError.Code))
                             {
-                                _logger.Error($"Discord has returned error Method: {Method.ToString()} Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})\n" +
-                                              (apiError.Errors != null ? $"Errors: {apiError.Errors}" : string.Empty));
+                                _logger.Error($"Discord has returned error Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})\nErrors: {apiError.Errors}");
                             }
                             else
                             {
                                 _logger.Error($"An error occured whilst submitting a request to {req.RequestUri} (code {httpResponse.StatusCode}): {message}");
                             }
-                        }
-
-                        if (!isRateLimit)
-                        {
-                            Interface.Oxide.NextTick(() =>
-                            {
-                                OnError?.Invoke(_lastError);
-                            });
                         }
 
                         Close(!isRateLimit);
@@ -213,10 +194,7 @@ namespace Oxide.Ext.Discord.Rest
             {
                 if (_retries >= 3)
                 {
-                    Interface.Oxide.NextTick(() =>
-                    {
-                        OnError?.Invoke(_lastError);
-                    });
+                    OnError?.Invoke(_lastError);
                 }
                 
                 lock (_bucket)
