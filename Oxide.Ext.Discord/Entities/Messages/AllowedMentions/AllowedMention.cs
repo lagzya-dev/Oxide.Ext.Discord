@@ -22,13 +22,13 @@ namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
         /// Array of Role IDs to mention (Max size of 100)
         /// </summary>
         [JsonProperty("roles")]
-        public List<string> Roles { get; set; }
+        public List<Snowflake> Roles { get; set; }
         
         /// <summary>
         /// Array of User IDs to mention (Max size of 100)
         /// </summary>
         [JsonProperty("users")]
-        public List<string> Users { get; set; }
+        public List<Snowflake> Users { get; set; }
         
         /// <summary>
         /// For replies, whether to mention the author of the message being replied to (default false)

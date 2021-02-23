@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
     /// <summary>
     /// Represents a library for discord commands
     /// </summary>
-    public class DiscordCommands : Library
+    public class DiscordCommand : Library
     {
         /// <summary>
         /// Available command prefixes used by the extension
@@ -33,7 +33,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// Discord Commands Constructor
         /// </summary>
         /// <param name="prefixes">Command prefixes used by the extension</param>
-        public DiscordCommands(char[] prefixes)
+        public DiscordCommand(char[] prefixes)
         {
             CommandPrefixes = prefixes;
         }

@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="height"></param>
         /// <param name="width"></param>
         /// <param name="proxyUrl"></param>
-        public EmbedImage(string url, int? height, int? width, string proxyUrl)
+        public EmbedImage(string url, int? height = null, int? width = null, string proxyUrl = null)
         {
             Url = url;
             ProxyUrl = proxyUrl;

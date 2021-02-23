@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Helpers.Converters;
-using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.Rest;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Messages
@@ -96,7 +96,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Roles specifically mentioned in this message
         /// </summary>
         [JsonProperty("mention_roles")]
-        public List<string> MentionRoles { get; set; }
+        public List<Snowflake> MentionRoles { get; set; }
         
         /// <summary>
         /// Channels specifically mentioned in this message

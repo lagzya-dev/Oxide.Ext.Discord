@@ -19,6 +19,6 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         /// Roles this emoji is whitelisted to
         /// </summary>
         [JsonProperty("roles")]
-        public List<string> Roles { get; set; }
+        public List<Snowflake> Roles { get; set; }
     }
 }

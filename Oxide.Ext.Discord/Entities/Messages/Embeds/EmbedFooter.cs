@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="text"></param>
         /// <param name="iconUrl"></param>
         /// <param name="proxyIconUrl"></param>
-        public EmbedFooter(string text, string iconUrl, string proxyIconUrl)
+        public EmbedFooter(string text, string iconUrl = null, string proxyIconUrl = null)
         {
             Text = text;
             IconUrl = iconUrl;

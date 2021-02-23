@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Entities.Teams;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Webhooks;
 using Oxide.Ext.Discord.Helpers.Cdn;
-using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {

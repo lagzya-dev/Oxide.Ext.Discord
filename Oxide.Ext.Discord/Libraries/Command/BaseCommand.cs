@@ -1,4 +1,5 @@
 using System;
+using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
@@ -23,9 +24,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
         
         public void HandleCommand(DiscordMessage message, string name, string[] args)
         {
-            Plugin.TrackStart();
-            _callback.Invoke(message, name, args);
-            Plugin.TrackEnd();
+            Interface.Oxide.NextTick(() =>
+            {
+                Plugin.TrackStart();
+                _callback.Invoke(message, name, args);
+                Plugin.TrackEnd();
+            });
         }
 
         public virtual bool CanHandle(DiscordMessage message, Channel channel) => true;

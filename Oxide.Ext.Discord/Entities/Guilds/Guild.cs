@@ -13,7 +13,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Helpers.Converters;
-using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.Rest;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Guilds

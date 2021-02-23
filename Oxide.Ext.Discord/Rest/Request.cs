@@ -6,11 +6,13 @@ using System.Text;
 using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Time = Oxide.Ext.Discord.Helpers.Time;
 
-namespace Oxide.Ext.Discord.REST
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Represent a Discord API request
@@ -31,11 +33,11 @@ namespace Oxide.Ext.Discord.REST
         /// Full Request URl to the API
         /// </summary>
         public string RequestUrl => UrlBase + "/" + ApiVersion + Route;
-
+        
         /// <summary>
-        /// Header to be added to the request
+        /// Authorization header value
         /// </summary>
-        public Dictionary<string, string> Headers { get; }
+        public string Authorization { get; }
 
         /// <summary>
         /// Data to be sent with the request
@@ -85,17 +87,17 @@ namespace Oxide.Ext.Discord.REST
         /// </summary>
         /// <param name="method">HTTP method to call</param>
         /// <param name="route">Route to call on the API</param>
-        /// <param name="headers">Headers to be added to the request</param>
         /// <param name="data">Data for the request</param>
+        /// <param name="authorization">Represents the authorization header value</param>
         /// <param name="callback">Callback once the request completes successfully</param>
         /// <param name="error">Callback when the request errors</param>
         /// <param name="logger">Logger for the request</param>
-        public Request(RequestMethod method, string route, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> error, ILogger logger)
+        public Request(RequestMethod method, string route, object data, string authorization, Action<RestResponse> callback, Action<RestError> error, ILogger logger)
         {
             Method = method;
             Route = route;
-            Headers = headers;
             Data = data;
+            Authorization = authorization;
             Callback = callback;
             OnError = error;
             _logger = logger;
@@ -113,15 +115,12 @@ namespace Oxide.Ext.Discord.REST
 
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(RequestUrl);
             req.Method = Method.ToString();
+            req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion}";
             req.ContentType = "application/json";
             req.Timeout = RequestMaxLength * 1000;
             req.ContentLength = 0;
+            req.Headers.Set("Authorization", Authorization);
 
-            if (Headers != null)
-            {
-                req.SetRawHeaders(Headers);
-            }
-            
             try
             {
                 //Can timeout while writing request data

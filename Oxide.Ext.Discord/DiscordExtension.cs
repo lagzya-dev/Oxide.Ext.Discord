@@ -42,7 +42,7 @@ namespace Oxide.Ext.Discord
         public static ILogger GlobalLogger;
 
         internal static DiscordLink DiscordLink;
-        internal static DiscordCommands DiscordCommands;
+        internal static DiscordCommand DiscordCommand;
         internal static DiscordSubscriptions DiscordSubscriptions;
         internal static DiscordConfig DiscordConfig;
 
@@ -99,11 +99,11 @@ namespace Oxide.Ext.Discord
             DiscordConfig.Save();
 
             DiscordLink = new DiscordLink();
-            DiscordCommands = new DiscordCommands(DiscordConfig.Commands.CommandPrefixes);
+            DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes);
             DiscordSubscriptions = new DiscordSubscriptions();
 
             Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
-            Manager.RegisterLibrary(nameof(DiscordCommands), DiscordCommands);
+            Manager.RegisterLibrary(nameof(DiscordCommand), DiscordCommand);
             Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
             Interface.Oxide.RootPluginManager.OnPluginRemoved +=  DiscordClient.OnPluginRemoved;

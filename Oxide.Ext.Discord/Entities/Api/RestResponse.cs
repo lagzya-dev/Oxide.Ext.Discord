@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.REST
+namespace Oxide.Ext.Discord.Entities.Api
 {
     /// <summary>
     /// Represents a REST response from discord

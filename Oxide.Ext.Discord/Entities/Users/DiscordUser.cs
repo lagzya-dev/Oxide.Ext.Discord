@@ -10,7 +10,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users.Connections;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Helpers.Interfaces;
-using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Entities.Users
 {

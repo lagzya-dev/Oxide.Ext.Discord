@@ -700,6 +700,70 @@
         <member name="F:Oxide.Ext.Discord.Entities.Activities.ActivityType.Competing">
             Competing in {name}
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Api.DiscordApiError">
+            <summary>
+            Represents and error from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.DiscordApiError.Code">
+            <summary>
+            Error code from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.DiscordApiError.Message">
+            <summary>
+            Error message from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.DiscordApiError.Errors">
+            <summary>
+            An JObject containing the errors that occured
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Api.RateLimit">
+            <summary>
+            Represents RateLimit entity when the rate limit is hit
+            <a href="https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure">https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RateLimit.Message">
+            <summary>
+            A message saying you are being rate limited.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RateLimit.RetryAfter">
+            <summary>
+            The number of seconds to wait before submitting another request.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RateLimit.Global">
+            <summary>
+            A value indicating if you are being globally rate limited or not
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Api.RestResponse">
+            <summary>
+            Represents a REST response from discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RestResponse.Data">
+            <summary>
+            Data discord sent us
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RestResponse.#ctor(System.String)">
+            <summary>
+            Create new REST response with the given data
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RestResponse.ParseData``1">
+            <summary>
+            Parse the data to it's given object
+            </summary>
+            <typeparam name="T">Type to be parsed as</typeparam>
+            <returns>Data string parsed to JSON</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog">
             <summary>
             
@@ -730,7 +794,7 @@
             
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog.GetGuildAuditLog(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.AuditLogs.AuditLog},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog.GetGuildAuditLog(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.AuditLogs.AuditLog},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             
             </summary>
@@ -1207,7 +1271,7 @@
             This may be null in events such as GUILD_CREATE when a message is not pinned.
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.ChannelCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.ChannelCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new channel object for the guild.
             Requires the MANAGE_CHANNELS permission.
@@ -1219,7 +1283,7 @@
             <param name="callback">Callback with created channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Get a channel by ID
             See <a href="https://discord.com/developers/docs/resources/channel#get-channel">Get Channel</a>
@@ -1229,7 +1293,7 @@
             <param name="callback">Callback with the channel object</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ModifyChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ModifyChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Update a channel's settings.
             Requires the MANAGE_CHANNELS permission for the guild.
@@ -1240,7 +1304,7 @@
             <param name="callback">Callback with the updated channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannel(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannel(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a channel, or close a private message.
             Requires the MANAGE_CHANNELS permission for the guild.
@@ -1250,7 +1314,7 @@
             <param name="callback">Callback with the deleted channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannelMessages(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.DiscordMessage}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannelMessages(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.GetChannelMessagesRequest,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.DiscordMessage}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the messages for a channel.
             If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user.
@@ -1258,10 +1322,11 @@
             See <a href="https://discord.com/developers/docs/resources/channel#get-channel-messages">Get Channel Messages</a>
             </summary>
             <param name="client">Client to use</param>
+            <param name="request">Optional request filters</param>
             <param name="callback">Callback with list of channel messages</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannelMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannelMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a specific message in the channel.
             If operating on a guild channel, this endpoint requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user.
@@ -1272,7 +1337,7 @@
             <param name="callback">Callback with the message for the ID</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -1284,7 +1349,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -1296,7 +1361,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -1308,7 +1373,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.BulkDeleteMessages(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.ICollection{System.String},System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.BulkDeleteMessages(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Snowflake},System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete multiple messages in a single request.
             This endpoint can only be used on guild channels and requires the MANAGE_MESSAGES permission.
@@ -1319,7 +1384,7 @@
             <param name="callback">Callback once the action is complete</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edit the channel permission overwrites for a user or role in a channel.
             Only usable for guild channels.
@@ -1331,7 +1396,7 @@
             <param name="callback">Callback once the action is complete</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionType,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionType,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edit the channel permission overwrites for a user or role in a channel.
             Only usable for guild channels.
@@ -1346,7 +1411,7 @@
             <param name="callback">Callback once the action is complete</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannelInvites(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Invites.Invite}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetChannelInvites(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Invites.Invite}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of invite objects (with invite metadata) for the channel.
             Only usable for guild channels.
@@ -1358,7 +1423,7 @@
             <exception cref="T:System.Exception">Thrown when the channel type is Dm or GroupDm</exception>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateChannelInvite(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelInvite,System.Action{Oxide.Ext.Discord.Entities.Invites.Invite},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateChannelInvite(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelInvite,System.Action{Oxide.Ext.Discord.Entities.Invites.Invite},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new invite object for the channel.
             Only usable for guild channels.
@@ -1370,7 +1435,7 @@
             <param name="callback">Callback with the created invite</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannelPermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannelPermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a channel permission overwrite for a user or role in a channel.
             Only usable for guild channels.
@@ -1382,7 +1447,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannelPermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannelPermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a channel permission overwrite for a user or role in a channel.
             Only usable for guild channels.
@@ -1394,7 +1459,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.FollowNewsChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.FollowedChannel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.FollowNewsChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.FollowedChannel},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Follow a News Channel to send messages to a target channel.
             Requires the MANAGE_WEBHOOKS permission in the target channel.
@@ -1405,7 +1470,7 @@
             <param name="callback">callback with the followed channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.TriggerTypingIndicator(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.TriggerTypingIndicator(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Post a typing indicator for the specified channel.
             Generally bots should not implement this route. However, if a bot is responding to a command and expects the computation to take a few seconds, this endpoint may be called to let the user know that the bot is processing their message.
@@ -1415,7 +1480,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetPinnedMessages(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.DiscordMessage}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetPinnedMessages(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.DiscordMessage}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns all pinned messages in the channel
             See <a href="https://discord.com/developers/docs/resources/channel#get-pinned-messages">Get Pinned Messages</a>
@@ -1424,7 +1489,7 @@
             <param name="callback">Callback of all the pinned messages</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,System.String,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Adds a recipient to a Group DM using their access token
             See <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient">Group DM Add Recipient</a>
@@ -1435,7 +1500,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Adds a recipient to a Group DM using their access token
             See <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient">Group DM Add Recipient</a>
@@ -1447,7 +1512,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GroupDmRemoveRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GroupDmRemoveRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Removes a recipient from a Group DM
             </summary>
@@ -2050,7 +2115,7 @@
             Returns the URL for the applications Icon
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetGlobalApplicationCommands(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetGlobalApplicationCommands(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Fetch all of the global commands for your application.
             Returns a list of ApplicationCommand.
@@ -2060,7 +2125,7 @@
             <param name="callback">Callback with list of application commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new global command.
             New global commands will be available in all guilds after 1 hour.
@@ -2072,7 +2137,7 @@
             <param name="callback">Callback with the created command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edit a global command.
             Updates will be available in all guilds after 1 hour.
@@ -2083,7 +2148,7 @@
             <param name="callback">Callback with updated command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes a global command
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-global-application-command">Delete Global Application Command</a>
@@ -2093,7 +2158,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Fetch all of the guild commands for your application for a specific guild.
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-commands">Get Guild Application Commands</a>
@@ -2103,7 +2168,7 @@
             <param name="callback">Callback with a list of guild application commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Fetch all of the guild commands for your application for a specific guild.
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-commands">Get Guild Application Commands</a>
@@ -2113,7 +2178,7 @@
             <param name="callback">Callback with a list of guild application commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new guild command.
             New guild commands will be available in the guild immediately.
@@ -2125,7 +2190,7 @@
             <param name="callback">Callback with the created command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new guild command.
             New guild commands will be available in the guild immediately.
@@ -2137,7 +2202,7 @@
             <param name="callback">Callback with the created command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edit a guild command.
             Updates for guild commands will be available immediately.
@@ -2149,7 +2214,7 @@
             <param name="callback">Callback with updated command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edit a guild command.
             Updates for guild commands will be available immediately.
@@ -2161,7 +2226,7 @@
             <param name="callback">Callback with updated command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a guild command.
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command">Delete Guild Application Command</a>
@@ -2172,7 +2237,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a guild command.
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command">Delete Guild Application Command</a>
@@ -2183,7 +2248,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edits the initial Interaction response
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response">Edit Original Interaction Response</a>
@@ -2194,7 +2259,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Interaction,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Interaction,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edits the initial Interaction response
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response">Edit Original Interaction Response</a>
@@ -2205,7 +2270,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes the initial Interaction response
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-original-interaction-response">Delete Original Interaction Response</a>
@@ -2215,7 +2280,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Interaction,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Interaction,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes the initial Interaction response
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-original-interaction-response">Delete Original Interaction Response</a>
@@ -2225,7 +2290,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-followup-message">Create Followup Message</a>
@@ -2236,7 +2301,7 @@
             <param name="callback">Callback with the message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Interaction,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Interaction,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-followup-message">Create Followup Message</a>
@@ -2247,7 +2312,7 @@
             <param name="callback">Callback with the message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditFollowUpMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditFollowUpMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edits a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-followup-message">Edit Followup Message</a>
@@ -2259,7 +2324,7 @@
             <param name="callback">Callback with the updated message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteFollowUpMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.DeleteFollowUpMessage(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-followup-message">Delete Followup Message</a>
@@ -2285,7 +2350,7 @@
             Unique id of the parent application
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand.EditGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand.EditGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edit a global command.
             Updates will be available in all guilds after 1 hour.
@@ -2295,7 +2360,7 @@
             <param name="callback">Callback with updated command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes a global command
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-global-application-command">Delete Global Application Command</a>
@@ -2541,7 +2606,7 @@
             Read-only property, always 1
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Interaction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponse,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Interaction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponse,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a response to an Interaction from the gateway.
             </summary>
@@ -3992,7 +4057,7 @@
             <param name="userName">Username of the GuildMember</param>
             <returns>GuildMember with the given username; Null otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCreate,System.Action{Oxide.Ext.Discord.Entities.Guilds.Guild},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCreate,System.Action{Oxide.Ext.Discord.Entities.Guilds.Guild},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new guild.
             See <a href="https://discord.com/developers/docs/resources/guild#create-guild">Create Guild</a>
@@ -4002,7 +4067,7 @@
             <param name="callback">Callback with the created guild</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.Guild},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.Guild},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the guild object for the given id
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild">Get Guild</a>
@@ -4012,7 +4077,7 @@
             <param name="callback">callback with the guild for the given ID</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildPreview(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildPreview},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildPreview(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildPreview},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the guild preview object for the given id.
             If the user is not in the guild, then the guild must be Discoverable.
@@ -4022,7 +4087,7 @@
             <param name="callback">Callback with the guild preview for the ID</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuild(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.Guild},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuild(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.Guild},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify a guild's settings.
             Requires the MANAGE_GUILD permission.
@@ -4032,7 +4097,7 @@
             <param name="callback">Callback with the updated guild</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuild(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuild(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a guild permanently.
             User must be owner
@@ -4042,7 +4107,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildChannels(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Channel}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildChannels(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Channel}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of guild channel objects.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-channels">Get Guild Channels</a>
@@ -4051,7 +4116,7 @@
             <param name="callback">Callback with the list of channels</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new channel object for the guild.
             Requires the MANAGE_CHANNELS permission.
@@ -4062,7 +4127,7 @@
             <param name="callback">Callback with created channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ObjectPosition},System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ObjectPosition},System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify the positions of a set of channel objects for the guild.
             Requires MANAGE_CHANNELS permission.
@@ -4074,7 +4139,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a guild member object for the specified user.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-member">Get Guild Member</a>
@@ -4084,7 +4149,7 @@
             <param name="callback">Callback with guild member matching user Id</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ListGuildMembers(Oxide.Ext.Discord.DiscordClient,System.Int32,System.String,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildMember}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ListGuildMembers(Oxide.Ext.Discord.DiscordClient,System.Int32,System.String,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildMember}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of guild member objects that are members of the guild.
             In the future, this endpoint will be restricted in line with our Privileged Intents
@@ -4095,7 +4160,7 @@
             <param name="callback"></param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,System.String,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,System.String,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. 
             See <a href="https://discord.com/developers/docs/resources/guild#add-guild-member">Add Guild Member</a>
@@ -4107,7 +4172,7 @@
             <param name="callback">Callback with the added guild member</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberAdd,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberAdd,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. 
             See <a href="https://discord.com/developers/docs/resources/guild#add-guild-member">Add Guild Member</a>
@@ -4118,7 +4183,7 @@
             <param name="callback">Callback with the added guild member</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberUpdate,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberUpdate,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify attributes of a guild member
             See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member">Modify Guild Member</a>
@@ -4129,7 +4194,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyUsersNick(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyUsersNick(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify attributes of a guild member
             See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member">Modify Guild Member</a>
@@ -4140,7 +4205,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyCurrentUsersNick(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.String},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyCurrentUsersNick(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.String},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modifies the nickname of the current user in a guild
             See <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-nick">Modify Current User Nick</a>
@@ -4150,7 +4215,7 @@
             <param name="callback">Callback with updated nickname</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Roles.Role,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Roles.Role,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Adds a role to a guild member.
             Requires the MANAGE_ROLES permission.
@@ -4162,7 +4227,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Adds a role to a guild member.
             Requires the MANAGE_ROLES permission.
@@ -4174,7 +4239,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Roles.Role,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Roles.Role,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Removes a role from a guild member.
             Requires the MANAGE_ROLES permission.
@@ -4186,7 +4251,7 @@
             <param name="callback">callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Removes a role from a guild member.
             Requires the MANAGE_ROLES permission.
@@ -4198,7 +4263,7 @@
             <param name="callback">callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Remove a member from a guild.
             Requires KICK_MEMBERS permission.
@@ -4209,7 +4274,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Remove a member from a guild.
             Requires KICK_MEMBERS permission.
@@ -4220,7 +4285,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildBans(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildBan}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildBans(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildBan}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of ban objects for the users banned from this guild.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-bans">Get Guild Bans</a>
@@ -4229,7 +4294,7 @@
             <param name="callback">Callback with the list of guild bans</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildBan},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildBan},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a guild ban for a specific user
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-ban">Get Guild Ban</a>
@@ -4240,7 +4305,7 @@
             <param name="callback">Callback with the guild ban for the user</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a guild ban, and optionally delete previous messages sent by the banned user.
             Requires the BAN_MEMBERS permission.
@@ -4252,7 +4317,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a guild ban, and optionally delete previous messages sent by the banned user.
             Requires the BAN_MEMBERS permission.
@@ -4264,7 +4329,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.RemoveGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Remove the ban for a user.
             Requires the BAN_MEMBERS permissions.
@@ -4275,7 +4340,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildRoles(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildRoles(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of role objects for the guild.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-roles">Get Guild Roles</a>
@@ -4284,7 +4349,7 @@
             <param name="callback">Callback with a list of role objects</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.Role,System.Action{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.Role,System.Action{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new role for the guild.
             Requires the MANAGE_ROLES permission.
@@ -4296,7 +4361,7 @@
             <param name="callback">Callback with the created role</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ObjectPosition},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ObjectPosition},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify the positions of a set of role objects for the guild.
             Requires the MANAGE_ROLES permission.
@@ -4308,7 +4373,7 @@
             <param name="callback">Callback with a list of all guild role objects</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.Role,System.Action{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.Role,System.Action{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify a guild role.
             Requires the MANAGE_ROLES permission.
@@ -4320,7 +4385,7 @@
             <param name="callback">Callback with the updated role</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Roles.Role,System.Action{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Roles.Role,System.Action{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify a guild role.
             Requires the MANAGE_ROLES permission.
@@ -4333,7 +4398,7 @@
             <param name="callback">Callback with the updated role</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.Role,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.Role,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a guild role.
             Requires the MANAGE_ROLES permission
@@ -4344,7 +4409,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a guild role.
             Requires the MANAGE_ROLES permission
@@ -4355,7 +4420,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildPruneCount(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneGet,System.Action{System.Nullable{System.Int32}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildPruneCount(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneGet,System.Action{System.Nullable{System.Int32}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns an object with one 'pruned' key indicating the number of members that would be removed in a prune operation.
             Requires the KICK_MEMBERS permission.
@@ -4366,7 +4431,7 @@
             <param name="callback">Callback with the number of members that would be pruned</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.BeginGuildPrune(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneBegin,System.Action{System.Nullable{System.Int32}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.BeginGuildPrune(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneBegin,System.Action{System.Nullable{System.Int32}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Begin a prune operation.
             Requires the KICK_MEMBERS permission.
@@ -4377,7 +4442,7 @@
             <param name="callback">Callback with number of pruned members</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildVoiceRegions(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Voice.VoiceRegion}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildVoiceRegions(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Voice.VoiceRegion}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of voice region objects for the guild.
             Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled.
@@ -4387,7 +4452,7 @@
             <param name="callback">Callback with list of guild voice regions</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildInvites(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Invites.InviteMetadata}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildInvites(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Invites.InviteMetadata}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of invite objects (with invite metadata) for the guild.
             Requires the MANAGE_GUILD permission.
@@ -4397,7 +4462,7 @@
             <param name="callback">Callback with a list of guild invites</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildIntegrations(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Integrations.Integration}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildIntegrations(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Integrations.Integration}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of integration objects for the guild.
             Requires the MANAGE_GUILD permission.
@@ -4407,7 +4472,7 @@
             <param name="callback">Callback with a list of guild integrations</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Attach an integration object from the current user to the guild.
             Requires the MANAGE_GUILD permission
@@ -4417,7 +4482,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.IntegrationType,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.IntegrationType,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Attach an integration object from the current user to the guild.
             Requires the MANAGE_GUILD permission
@@ -4428,7 +4493,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Integrations.IntegrationUpdate,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Integrations.IntegrationUpdate,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify the behavior and settings of an integration object for the guild.
             Requires the MANAGE_GUILD permission
@@ -4440,7 +4505,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete the attached integration object for the guild.
             Deletes any associated webhooks and kicks the associated bot if there is one.
@@ -4452,7 +4517,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete the attached integration object for the guild.
             Deletes any associated webhooks and kicks the associated bot if there is one.
@@ -4464,7 +4529,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.SyncGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.SyncGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Sync an integration.
             Requires the MANAGE_GUILD permission.
@@ -4475,7 +4540,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.SyncGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.SyncGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Sync an integration.
             Requires the MANAGE_GUILD permission.
@@ -4486,7 +4551,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildWidgetSettings(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWidgetSettings},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildWidgetSettings(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWidgetSettings},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a guild widget object.
             Requires the MANAGE_GUILD permission.
@@ -4496,7 +4561,7 @@
             <param name="callback">Callback with guild widget settings</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildWidget(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildWidget,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWidget},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildWidget(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildWidget,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWidget},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify a guild widget object for the guild.
             Requires the MANAGE_GUILD permission.
@@ -4507,7 +4572,7 @@
             <param name="callback">Callback with update guild widget</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildWidget(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWidget},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildWidget(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWidget},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the widget for the guild.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-widget">Get Guild Widget</a>
@@ -4516,7 +4581,7 @@
             <param name="callback">Callback with guild widget</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildVanityUrl(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Invites.InviteMetadata},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildVanityUrl(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Invites.InviteMetadata},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a partial invite object for guilds with that feature enabled.
             Requires the MANAGE_GUILD permission.
@@ -4526,7 +4591,7 @@
             <param name="callback">Callback with invite </param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ListGuildEmojis(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Emojis.Emoji}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ListGuildEmojis(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Emojis.Emoji}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of emoji objects for the given guild.
             See <a href="https://discord.com/developers/docs/resources/emoji#list-guild-emojis">List Guild Emojis</a>
@@ -4535,7 +4600,7 @@
             <param name="callback">Callback with list of guild emojis</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildEmoji(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Emojis.Emoji},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildEmoji(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Emojis.Emoji},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns an emoji object for the given guild and emoji IDs.
             See <a href="https://discord.com/developers/docs/resources/emoji#get-guild-emoji">Get Guild Emoji</a>
@@ -4545,7 +4610,7 @@
             <param name="callback">Callback with the guild emoji</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.EmojiCreate,System.Action{Oxide.Ext.Discord.Entities.Emojis.Emoji},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.EmojiCreate,System.Action{Oxide.Ext.Discord.Entities.Emojis.Emoji},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new emoji for the guild.
             Requires the MANAGE_EMOJIS permission.
@@ -4557,7 +4622,7 @@
             <param name="callback">Callback with the created emoji</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.UpdateGuildEmoji(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Emojis.EmojiUpdate,System.Action{Oxide.Ext.Discord.Entities.Emojis.Emoji},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.UpdateGuildEmoji(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Emojis.EmojiUpdate,System.Action{Oxide.Ext.Discord.Entities.Emojis.Emoji},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify the given emoji.
             Requires the MANAGE_EMOJIS permission.
@@ -4570,7 +4635,7 @@
             <param name="callback">Callback with the updated emoji</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildEmoji(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildEmoji(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete the given emoji.
             Requires the MANAGE_EMOJIS permission.
@@ -5385,7 +5450,7 @@
             Approximate count of total members
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Invites.Invite.GetInvite(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Invites.Invite},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Invites.Invite.GetInvite(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Invites.Invite},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Get Invite URL Parameters
             See <a href="https://discord.com/developers/docs/resources/invite#get-invite">Get Invite</a>
@@ -5395,7 +5460,7 @@
             <param name="callback">Callback with the invite</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Invites.Invite.DeleteInvite(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Invites.Invite},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Invites.Invite.DeleteInvite(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Invites.Invite},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete an invite.
             Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild.
@@ -5688,7 +5753,7 @@
             The message associated with the message_reference
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -5701,7 +5766,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -5714,7 +5779,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -5727,7 +5792,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.GetChannelMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.GetChannelMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a specific message in the channel.
             If operating on a guild channel, this endpoint requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user.
@@ -5739,7 +5804,7 @@
             <param name="callback">Callback with the message for the ID</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Replies to a previously sent message
             See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
@@ -5749,7 +5814,7 @@
             <param name="callback">Callback with the message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Replies to a previously sent message
             See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
@@ -5759,7 +5824,7 @@
             <param name="callback">Callback with the message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Replies to a previously sent message
             See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
@@ -5769,7 +5834,7 @@
             <param name="callback">Callback with the message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CrossPostMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CrossPostMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Crosspost a message in a News Channel to following channels.
             This endpoint requires the 'SEND_MESSAGES' permission, if the current user sent the message, or additionally the 'MANAGE_MESSAGES' permission, for all other messages, to be present for the current user.
@@ -5780,7 +5845,7 @@
             <param name="callback">Callback with the cross posted message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CrossPostMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CrossPostMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Crosspost a message in a News Channel to following channels.
             This endpoint requires the 'SEND_MESSAGES' permission, if the current user sent the message, or additionally the 'MANAGE_MESSAGES' permission, for all other messages, to be present for the current user.
@@ -5791,7 +5856,7 @@
             <param name="callback">Callback with the cross posted message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateReaction(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateReaction(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a reaction for the message.
             This endpoint requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user.
@@ -5804,7 +5869,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateReaction(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateReaction(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a reaction for the message.
             This endpoint requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user.
@@ -5817,7 +5882,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteOwnReaction(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteOwnReaction(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a reaction the current user has made for the message
             Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
@@ -5828,7 +5893,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteOwnReaction(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteOwnReaction(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a reaction the current user has made for the message
             Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
@@ -5839,7 +5904,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteUserReaction(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteUserReaction(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes another user's reaction.
             This endpoint requires the 'MANAGE_MESSAGES' permission to be present on the current user.
@@ -5852,7 +5917,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteUserReaction(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteUserReaction(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes another user's reaction.
             This endpoint requires the 'MANAGE_MESSAGES' permission to be present on the current user.
@@ -5865,7 +5930,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.GetReactions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.DiscordUser}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.GetReactions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.DiscordUser}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Get a list of users that reacted with this emoji
             Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
@@ -5876,7 +5941,7 @@
             <param name="callback">Callback with a list of users who reacted</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.GetReactions(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.DiscordUser}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.GetReactions(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.DiscordUser}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Get a list of users that reacted with this emoji
             Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt;
@@ -5887,7 +5952,7 @@
             <param name="callback">Callback with a list of users who reacted</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteAllReactions(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteAllReactions(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes all reactions on a message.
             This endpoint requires the 'MANAGE_MESSAGES' permission to be present on the current user.
@@ -5896,7 +5961,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteAllReactionsForEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteAllReactionsForEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.Emoji,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes all the reactions for a given emoji on a message.
             This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
@@ -5908,7 +5973,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteAllReactionsForEmoji(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteAllReactionsForEmoji(Oxide.Ext.Discord.DiscordClient,System.String,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes all the reactions for a given emoji on a message.
             This endpoint requires the MANAGE_MESSAGES permission to be present on the current user.
@@ -5920,7 +5985,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditMessage(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditMessage(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edit a previously sent message.
             The fields content, embed, allowed_mentions and flags can be edited by the original message author.
@@ -5933,7 +5998,7 @@
             <param name="callback">Callback with the updated message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteMessage(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteMessage(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a message.
             If operating on a guild channel and trying to delete a message that was not sent by the current user, this endpoint requires the MANAGE_MESSAGES permission.
@@ -5943,7 +6008,7 @@
             <param name="callback">Callback with the delete message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.AddPinnedChannelMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.AddPinnedChannelMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Pin a message in a channel.
             Requires the MANAGE_MESSAGES permission.
@@ -5953,7 +6018,7 @@
             <param name="callback">Callback when the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeletePinnedChannelMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeletePinnedChannelMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a pinned message in a channel.
             Requires the MANAGE_MESSAGES permission.
@@ -6377,6 +6442,37 @@
             <param name="proxyUrl"></param>
             <param name="height"></param>
             <param name="width"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Messages.GetChannelMessagesRequest">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/channel#get-channel-messages">Get Channel Messages Request</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.GetChannelMessagesRequest.Around">
+            <summary>
+            Get messages around this message ID
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.GetChannelMessagesRequest.Before">
+            <summary>
+            Get messages before this message ID
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.GetChannelMessagesRequest.After">
+            <summary>
+            Get messages after this message ID
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.GetChannelMessagesRequest.Limit">
+            <summary>
+            Max number of messages to return (1-100)
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.GetChannelMessagesRequest.ToQueryString">
+            <summary>
+            Returns the request as a query string
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageActivity">
             <summary>
@@ -7377,7 +7473,7 @@
             Returns the IPlayer for the discord user if linked; null otherwise
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetCurrentUser(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetCurrentUser(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the currently logged in user account
             See <a href="https://discord.com/developers/docs/resources/user#get-current-user">Get Current User</a>
@@ -7386,7 +7482,7 @@
             <param name="callback">Callback with the logged in user</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetUser(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetUser(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the user for the given user Id
             See <a href="https://discord.com/developers/docs/resources/user#get-user">Get User</a>
@@ -7396,7 +7492,7 @@
             <param name="callback">Callback with the looked up user</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendDirectMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendDirectMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Send a message to a user in a direct message channel
             </summary>
@@ -7405,7 +7501,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendDirectMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendDirectMessage(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Send a message to a user in a direct message channel
             </summary>
@@ -7414,7 +7510,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendDirectMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendDirectMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.Embed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Send a message to a user in a direct message channel
             </summary>
@@ -7423,7 +7519,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.ModifyCurrentUser(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.ModifyCurrentUser(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify the currently logged in user with the currently set UserName and Avatar
             See <a href="https://discord.com/developers/docs/resources/user#modify-current-user">Modify Current User</a>
@@ -7432,7 +7528,7 @@
             <param name="callback">Callback with the updated user</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.ModifyCurrentUser(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.ModifyCurrentUser(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify the currently logged in user
             See <a href="https://discord.com/developers/docs/resources/user#modify-current-user">Modify Current User</a>
@@ -7443,7 +7539,7 @@
             <param name="callback">Callback with the updated user</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetCurrentUserGuilds(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.Guild}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetCurrentUserGuilds(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.Guild}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the guilds for the currently logged in user
             See <a href="https://discord.com/developers/docs/resources/user#get-current-user-guilds">Get Current User Guilds</a>
@@ -7452,7 +7548,7 @@
             <param name="callback">Callback with the list of guilds</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.LeaveGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.LeaveGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Guild,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Leave the guild that the currently logged in user is in
             See <a href="https://discord.com/developers/docs/resources/user#leave-guild">Leave Guild</a>
@@ -7462,7 +7558,7 @@
             <param name="callback">callback when the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.LeaveGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.LeaveGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Leave the guild that the currently logged in user is in
             See <a href="https://discord.com/developers/docs/resources/user#leave-guild">Leave Guild</a>
@@ -7472,7 +7568,7 @@
             <param name="callback">callback when the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateDirectMessageChannel(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateDirectMessageChannel(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a Direct Message to the current User
             See <a href="https://discord.com/developers/docs/resources/user#create-dm">Create DM</a>
@@ -7481,7 +7577,7 @@
             <param name="callback">Callback with the direct message channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateDirectMessageChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateDirectMessageChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a Direct Message to the current User
             See <a href="https://discord.com/developers/docs/resources/user#create-dm">Create DM</a>
@@ -7491,7 +7587,7 @@
             <param name="callback">Callback with the direct message channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateGroupDm(Oxide.Ext.Discord.DiscordClient,System.String[],System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.NickId},System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateGroupDm(Oxide.Ext.Discord.DiscordClient,System.String[],System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.NickId},System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a Group Direct Message
             </summary>
@@ -7501,7 +7597,7 @@
             <param name="callback">Callback with the direct message channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetUserConnections(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.Connections.Connection}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetUserConnections(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.Connections.Connection}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of connection objects.
             Requires the connections OAuth2 scope.
@@ -7510,7 +7606,7 @@
             <param name="callback">Callback with the list of connections</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Channel,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Channel,System.String,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Adds a recipient to a Group DM using their access token
             See <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient">Group DM Add Recipient</a>
@@ -7521,7 +7617,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmAddRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Adds a recipient to a Group DM using their access token
             See <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient">Group DM Add Recipient</a>
@@ -7533,7 +7629,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmRemoveRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Channel,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmRemoveRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Channel,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Removes a recipient from a Group DM
             </summary>
@@ -7542,7 +7638,7 @@
             <param name="callback">callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmRemoveRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GroupDmRemoveRecipient(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Removes a recipient from a Group DM
             </summary>
@@ -7732,7 +7828,7 @@
             Whether this is a custom voice region (used for events/etc)
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Voice.VoiceRegion.ListVoiceRegions(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Voice.VoiceRegion}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Voice.VoiceRegion.ListVoiceRegions(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Voice.VoiceRegion}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns an array of voice region objects that can be used when creating servers.
             See <a href="https://discord.com/developers/docs/resources/voice#list-voice-regions">List Voice Regions</a>
@@ -7865,7 +7961,7 @@
             The bot/OAuth2 application that created this webhook
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.CreateWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.CreateWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Create a new webhook.
             Requires the MANAGE_WEBHOOKS permission.
@@ -7878,7 +7974,7 @@
             <param name="callback">Callback with the completed webhook</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetChannelWebhooks(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Webhooks.Webhook}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetChannelWebhooks(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Webhooks.Webhook}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of channel webhook.
             See <a href="https://discord.com/developers/docs/resources/webhook#get-channel-webhooks">Get Channel Webhooks</a>
@@ -7888,7 +7984,7 @@
             <param name="callback">Callback with a list of channel webhooks</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetGuildWebhooks(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Webhooks.Webhook}},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetGuildWebhooks(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Webhooks.Webhook}},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns a list of guild webhooks
             See <a href="https://discord.com/developers/docs/resources/webhook#get-guild-webhooks">Get Guild Webhooks</a>
@@ -7898,7 +7994,7 @@
             <param name="callback">Callback with the list of guild webhooks</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the webhook with the given webhook ID
             See <a href="https://discord.com/developers/docs/resources/webhook#get-webhook">Get Webhook</a>
@@ -7908,7 +8004,7 @@
             <param name="callback">Callback with the webhook</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetWebhookWithToken(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetWebhookWithToken(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the webhook with the given ID &amp; Token
             This call does not required authentication
@@ -7921,7 +8017,7 @@
             <param name="callback">Callback with the webhook</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetWebhookWithUrl(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.GetWebhookWithUrl(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Returns the webhook with the given ID &amp; Token
             This call does not required authentication
@@ -7933,7 +8029,7 @@
             <param name="callback">Callback with the webhook</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ModifyWebhook(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake},System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ModifyWebhook(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake},System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify a webhook.
             Requires the MANAGE_WEBHOOKS permission.
@@ -7946,7 +8042,7 @@
             <param name="callback">Callback with the updated webhook</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ModifyWebhookWithToken(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ModifyWebhookWithToken(Oxide.Ext.Discord.DiscordClient,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Modify a webhook.
             Requires the MANAGE_WEBHOOKS permission.
@@ -7958,7 +8054,7 @@
             <param name="callback">Callback with the updated webhook</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.DeleteWebhook(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.DeleteWebhook(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a webhook permanently.
             Requires the MANAGE_WEBHOOKS permission.
@@ -7968,7 +8064,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.DeleteWebhookWithToken(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.DeleteWebhookWithToken(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Delete a webhook permanently.
             Does not require authentication.
@@ -7978,7 +8074,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError},Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType)">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError},Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType)">
             <summary>
             Executes a webhook
             See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
@@ -7989,7 +8085,7 @@
             <param name="sendType">Which type of webhook to execute</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError},Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType)">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError},Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType)">
             <summary>
             Executes a webhook
             See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
@@ -8000,7 +8096,7 @@
             <param name="sendType">Which type of webhook to execute</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Edits a previously-sent webhook message from the same token.
             See <a href="https://discord.com/developers/docs/resources/webhook#edit-webhook-message">Edit Webhook Message</a>
@@ -8011,7 +8107,7 @@
             <param name="callback">Callback with the edited message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.DeleteWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.DeleteWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
             <summary>
             Deletes a message that was created by the webhook.
             </summary>
@@ -8102,6 +8198,356 @@
             <summary>
             Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.RequestMethod">
+            <summary>
+            HTTP request method
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RequestMethod.GET">
+            <summary>
+            Request Method Get
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RequestMethod.POST">
+            <summary>
+            Request Method POST
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RequestMethod.PUT">
+            <summary>
+            Request Method PUT
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RequestMethod.PATCH">
+            <summary>
+            Request Method PATCH
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RequestMethod.DELETE">
+            <summary>
+            Request Method DELETE
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.RestError">
+            <summary>
+            Error object that is returned to the caller when a request fails
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.RestError.HttpStatusCode">
+            <summary>
+            HTTP Status code
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.RestError.RequestMethod">
+            <summary>
+            The request method that was called
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.RestError.Exception">
+            <summary>
+            The web exception from the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.RestError.Url">
+            <summary>
+            The URI that was called
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.RestError.Data">
+            <summary>
+            What data was passed to the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.RestError.DiscordError">
+            <summary>
+            If discord returned an error this will contain that error message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.RestError.Message">
+            <summary>
+            Full string response if we received one
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestError.#ctor(System.Net.WebException,System.Uri,Oxide.Ext.Discord.Rest.RequestMethod,System.Object)">
+            <summary>
+            Creates a new rest error
+            </summary>
+            <param name="exception">The web exception we received</param>
+            <param name="url">Url that was called</param>
+            <param name="requestMethod">Request method that was used</param>
+            <param name="data">Data passed to the request</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.Bucket">
+            <summary>
+            Represents a discord API buck for a group of requests
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.BucketId">
+            <summary>
+            The ID of this bucket which is based on the route
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimit">
+            <summary>
+            The number of requests that can be made
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitRemaining">
+            <summary>
+            How many requests are remaining before hitting the rate limit for the bucket
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitReset">
+            <summary>
+            How long until the rate limit resets
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.ErrorResendDelayUntil">
+            <summary>
+            How long to wait before retrying request since there was a web exception
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.Handler">
+            <summary>
+            Rest Handler for the bucket
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.#ctor(Oxide.Ext.Discord.Rest.RestHandler,System.String,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a new bucket for the given rest handler and bucket ID
+            </summary>
+            <param name="handler">Rest Handler for the bucket</param>
+            <param name="bucketId">ID of the bucket</param>
+            <param name="logger">Logger for the client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.Close">
+            <summary>
+            Close the bucket and abort the thread
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.ShouldCleanup">
+            <summary>
+            Returns if this bucket is ready to be cleaned up.
+            Should be cleaned up if the thread is not null and the RateLimitReset has expired
+            </summary>
+            <returns>True if we should cleanup the bucket; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.Queue(Oxide.Ext.Discord.Rest.Request)">
+            <summary>
+            Queues a new request for the buck
+            </summary>
+            <param name="request">Request to be queued</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.RateLimitHandler">
+            <summary>
+            Represents a global rate limit handler for a bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RateLimitHandler.Global">
+            <summary>
+            How many requests have been made globally for the bot since the last 60 second period wiped it
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RateLimitHandler.#ctor">
+            <summary>
+            Creates a new global rate limit for a bot
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RateLimitHandler.FiredRequest">
+            <summary>
+            Called when an API request is fired
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RateLimitHandler.ReachedRateLimit(System.Double)">
+            <summary>
+            Called if we receive a header notifying us of hitting the rate limit
+            </summary>
+            <param name="retryAfter">How long until we should retry API request again</param>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.RateLimitHandler.HasReachedRateLimit">
+            <summary>
+            Returns true if we have reached the global rate limit 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.RateLimitHandler.NextBucketReset">
+            <summary>
+            Returns how long until the current rate limit period will expire
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RateLimitHandler.Shutdown">
+            <summary>
+            Called when a bot is shutting down
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.Request">
+            <summary>
+            Represent a Discord API request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Method">
+            <summary>
+            HTTP request method
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Route">
+            <summary>
+            Route on the API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.RequestUrl">
+            <summary>
+            Full Request URl to the API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Authorization">
+            <summary>
+            Authorization header value
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Data">
+            <summary>
+            Data to be sent with the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Response">
+            <summary>
+            Response from the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Callback">
+            <summary>
+            Callback to call if the request completed successfully
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.OnError">
+            <summary>
+            Callback to call if the request errored with the last error message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.StartTime">
+            <summary>
+            The DateTime the request was started
+            Used for request timeout
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.InProgress">
+            <summary>
+            Returns if the request is currently in progress
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Request.#ctor(Oxide.Ext.Discord.Rest.RequestMethod,System.String,System.Object,System.String,System.Action{Oxide.Ext.Discord.Entities.Api.RestResponse},System.Action{Oxide.Ext.Discord.Rest.RestError},Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a new request
+            </summary>
+            <param name="method">HTTP method to call</param>
+            <param name="route">Route to call on the API</param>
+            <param name="data">Data for the request</param>
+            <param name="authorization">Represents the authorization header value</param>
+            <param name="callback">Callback once the request completes successfully</param>
+            <param name="error">Callback when the request errors</param>
+            <param name="logger">Logger for the request</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Fire(Oxide.Ext.Discord.Rest.Bucket)">
+            <summary>
+            Fires the request off
+            </summary>
+            <param name="bucket">Bucket the request is in</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Close(System.Boolean)">
+            <summary>
+            Closes the request and removes it from the bucket
+            </summary>
+            <param name="remove"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Request.HasTimedOut">
+            <summary>
+            Returns true if the request has timed out
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.RestHandler">
+            <summary>
+            Represents a REST handler for a bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.RateLimit">
+            <summary>
+            Global Rate Limit for the bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.Buckets">
+            <summary>
+            The request buckets for the bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.Authorization">
+            <summary>
+            The authorization header value
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a new REST handler for a bot client
+            </summary>
+            <param name="client">Client the request is for</param>
+            <param name="logger">Logger from the client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest(System.String,Oxide.Ext.Discord.Rest.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Rest.RestError})">
+            <summary>
+            Creates a new request and queues it to be ran
+            </summary>
+            <param name="url">URL of the request</param>
+            <param name="method">HTTP method of the request</param>
+            <param name="data">Data to be sent with the request</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Error callback if an error occurs</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest``1(System.String,Oxide.Ext.Discord.Rest.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Rest.RestError})">
+            <summary>
+            Creates a new request and queues it to be ran
+            </summary>
+            <param name="url">URL of the request</param>
+            <param name="method">HTTP method of the request</param>
+            <param name="data">Data to be sent with the request</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Error callback if an error occurs</param>
+            <typeparam name="T">The type that is expected to be returned</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest(Oxide.Ext.Discord.Rest.RequestMethod,System.String,System.Object,System.Action{Oxide.Ext.Discord.Entities.Api.RestResponse},System.Action{Oxide.Ext.Discord.Rest.RestError})">
+            <summary>
+            Creates a new request and queues it to be ran
+            </summary>
+            <param name="url">URL of the request</param>
+            <param name="method">HTTP method of the request</param>
+            <param name="data">Data to be sent with the request</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Error callback if an error occurs</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CleanupExpired">
+            <summary>
+            Removed buckets that are old and not being used
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueRequest(Oxide.Ext.Discord.Rest.Request,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Queues the request
+            </summary>
+            <param name="request">Request to queue</param>
+            <param name="logger">Logger to use</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Shutdown">
+            <summary>
+            Shutdown the REST handler
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.GetBucketId(System.String)">
+            <summary>
+            Returns the Rate Limit Bucket for the given route
+            https://discord.com/developers/docs/topics/rate-limits#rate-limits
+            </summary>
+            <param name="route">API Route</param>
+            <returns>Bucket ID for route</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.DiscordUserExt">
             <summary>
@@ -8647,46 +9093,46 @@
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L76)
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Command.DiscordCommands">
+        <member name="T:Oxide.Ext.Discord.Libraries.Command.DiscordCommand">
             <summary>
             Represents a library for discord commands
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.CommandPrefixes">
+        <member name="F:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.CommandPrefixes">
             <summary>
             Available command prefixes used by the extension
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Libraries.Command.DiscordCommands._pluginRemovedFromManager">
+        <member name="F:Oxide.Ext.Discord.Libraries.Command.DiscordCommand._pluginRemovedFromManager">
             <summary>
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L104)
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.#ctor(System.Char[])">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.#ctor(System.Char[])">
             <summary>
             Discord Commands Constructor
             </summary>
             <param name="prefixes">Command prefixes used by the extension</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HasCommands">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.HasCommands">
             <summary>
             Returns if there are any guild discord commands are registered
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HasDirectMessageCommands">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.HasDirectMessageCommands">
             <summary>
             Returns if there are any guild discord commands are registered
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HasGuildCommands">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.HasGuildCommands">
             <summary>
             Returns if there are any guild discord commands are registered
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.AddDiscordDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds a discord direct message command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
@@ -8695,7 +9141,7 @@
             <param name="plugin"></param>
             <param name="callback"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.AddDiscordDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.String,System.String[]})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.String,System.String[]})">
             <summary>
             Adds a discord direct message command
             Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134)
@@ -8704,7 +9150,7 @@
             <param name="plugin"></param>
             <param name="callback"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.AddDiscordGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.String)">
             <summary>
             Adds a discord guild command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
@@ -8714,7 +9160,7 @@
             <param name="allowedChannels"></param>
             <param name="callback"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.AddDiscordGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.String,System.String[]})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.String,System.String[]})">
             <summary>
             Adds a discord guild command
             Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134)
@@ -8724,7 +9170,7 @@
             <param name="allowedChannels"></param>
             <param name="callback"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.RemoveDiscordCommand(System.String,Oxide.Core.Plugins.Plugin)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.RemoveDiscordCommand(System.String,Oxide.Core.Plugins.Plugin)">
             <summary>
             Removes a previously registered discord command
             Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L286)
@@ -8732,14 +9178,14 @@
             <param name="command"></param>
             <param name="plugin"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.RemoveDiscordCommand(Oxide.Ext.Discord.Libraries.Command.BaseCommand)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.RemoveDiscordCommand(Oxide.Ext.Discord.Libraries.Command.BaseCommand)">
             <summary>
             Removes a discord command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L314)
             </summary>
             <param name="command"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.OnPluginRemovedFromManager(Oxide.Core.Plugins.Plugin,Oxide.Core.Plugins.PluginManager)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginRemovedFromManager(Oxide.Core.Plugins.Plugin,Oxide.Core.Plugins.PluginManager)">
             <summary>
             Called when a plugin has been removed from manager
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L377)
@@ -8747,7 +9193,7 @@
             <param name="sender"></param>
             <param name="manager"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HandleDirectMessageCommand(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Entities.Channels.Channel,System.String,System.String[])">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.HandleDirectMessageCommand(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Entities.Channels.Channel,System.String,System.String[])">
             <summary>
             Handles the specified direct message command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L361)
@@ -8758,7 +9204,7 @@
             <param name="args"></param>
             <param name="message"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommands.HandleGuildCommand(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Entities.Channels.Channel,System.String,System.String[])">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.HandleGuildCommand(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Entities.Channels.Channel,System.String,System.String[])">
             <summary>
             Handles the specified direct message command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L361)
@@ -9062,408 +9508,6 @@
             <summary>
             Disables all logging
             </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.REST.BotGlobalRateLimit">
-            <summary>
-            Represents a global rate limit handler for a bot
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.BotGlobalRateLimit.Global">
-            <summary>
-            How many requests have been made globally for the bot since the last 60 second period wiped it
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.BotGlobalRateLimit.#ctor">
-            <summary>
-            Creates a new global rate limit for a bot
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.BotGlobalRateLimit.FiredRequest">
-            <summary>
-            Called when an API request is fired
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.BotGlobalRateLimit.ReachedRateLimit(System.Double)">
-            <summary>
-            Called if we receive a header notifying us of hitting the rate limit
-            </summary>
-            <param name="retryAfter">How long until we should retry API request again</param>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.BotGlobalRateLimit.HasReachedRateLimit">
-            <summary>
-            Returns true if we have reached the global rate limit 
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.BotGlobalRateLimit.NextBucketReset">
-            <summary>
-            Returns how long until the current rate limit period will expire
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.BotGlobalRateLimit.Shutdown">
-            <summary>
-            Called when a bot is shutting down
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.REST.Bucket">
-            <summary>
-            Represents a discord API buck for a group of requests
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.Bucket.BucketId">
-            <summary>
-            The ID of this bucket which is based on the route
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.Bucket.RateLimit">
-            <summary>
-            The number of requests that can be made
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.Bucket.RateLimitRemaining">
-            <summary>
-            How many requests are remaining before hitting the rate limit for the bucket
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.Bucket.RateLimitReset">
-            <summary>
-            How long until the rate limit resets
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.Bucket.ErrorResendDelayUntil">
-            <summary>
-            How long to wait before retrying request since there was a web exception
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.Bucket.Handler">
-            <summary>
-            Rest Handler for the bucker
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.Bucket.#ctor(Oxide.Ext.Discord.REST.RestHandler,System.String,Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Creates a new bucket for the given rest handler and bucket ID
-            </summary>
-            <param name="handler">Rest Handler for the bucket</param>
-            <param name="bucketId">ID of the bucket</param>
-            <param name="logger">Logger for the client</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.Bucket.Close">
-            <summary>
-            Close the bucket and abort the thread
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.Bucket.ShouldCleanup">
-            <summary>
-            Returns if this bucket is ready to be cleaned up.
-            Should be cleaned up if the thread is not null and the RateLimitReset has expired
-            </summary>
-            <returns>True if we should cleanup the bucket; false otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.Bucket.Queue(Oxide.Ext.Discord.REST.Request)">
-            <summary>
-            Queues a new request for the buck
-            </summary>
-            <param name="request">Request to be queued</param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.REST.DiscordApiError">
-            <summary>
-            Represents and error from the discord API
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.DiscordApiError.Code">
-            <summary>
-            Error code from the discord API
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.DiscordApiError.Message">
-            <summary>
-            Error message from the discord API
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.DiscordApiError.Errors">
-            <summary>
-            An JObject containing the errors that occured
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.REST.RateLimit">
-            <summary>
-            Represents RateLimit entity when the rate limit is hit
-            <a href="https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure">https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RateLimit.Message">
-            <summary>
-            A message saying you are being rate limited.
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RateLimit.RetryAfter">
-            <summary>
-            The number of seconds to wait before submitting another request.
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RateLimit.Global">
-            <summary>
-            A value indicating if you are being globally rate limited or not
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.REST.Request">
-            <summary>
-            Represent a Discord API request
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.Method">
-            <summary>
-            HTTP request method
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.Route">
-            <summary>
-            Route on the API
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.RequestUrl">
-            <summary>
-            Full Request URl to the API
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.Headers">
-            <summary>
-            Header to be added to the request
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.Data">
-            <summary>
-            Data to be sent with the request
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.Response">
-            <summary>
-            Response from the request
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.Callback">
-            <summary>
-            Callback to call if the request completed successfully
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.OnError">
-            <summary>
-            Callback to call if the request errored with the last error message
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.StartTime">
-            <summary>
-            The DateTime the request was started
-            Used for request timeout
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.Request.InProgress">
-            <summary>
-            Returns if the request is currently in progress
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.Request.#ctor(Oxide.Ext.Discord.REST.RequestMethod,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object,System.Action{Oxide.Ext.Discord.REST.RestResponse},System.Action{Oxide.Ext.Discord.REST.RestError},Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Creates a new request
-            </summary>
-            <param name="method">HTTP method to call</param>
-            <param name="route">Route to call on the API</param>
-            <param name="headers">Headers to be added to the request</param>
-            <param name="data">Data for the request</param>
-            <param name="callback">Callback once the request completes successfully</param>
-            <param name="error">Callback when the request errors</param>
-            <param name="logger">Logger for the request</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.Request.Fire(Oxide.Ext.Discord.REST.Bucket)">
-            <summary>
-            Fires the request off
-            </summary>
-            <param name="bucket">Bucket the request is in</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.Request.Close(System.Boolean)">
-            <summary>
-            Closes the request and removes it from the bucket
-            </summary>
-            <param name="remove"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.Request.HasTimedOut">
-            <summary>
-            Returns true if the request has timed out
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.REST.RequestMethod">
-            <summary>
-            HTTP request method
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.GET">
-            <summary>
-            Request Method Get
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.POST">
-            <summary>
-            Request Method POST
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.PUT">
-            <summary>
-            Request Method PUT
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.PATCH">
-            <summary>
-            Request Method PATCH
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.RequestMethod.DELETE">
-            <summary>
-            Request Method DELETE
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.REST.RestError">
-            <summary>
-            Error object that is returned to the caller when a request fails
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RestError.HttpStatusCode">
-            <summary>
-            HTTP Status code
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RestError.RequestMethod">
-            <summary>
-            The request method that was called
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RestError.Exception">
-            <summary>
-            The web exception from the request
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RestError.Url">
-            <summary>
-            The URI that was called
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RestError.Data">
-            <summary>
-            What data was passed to the request
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RestError.DiscordError">
-            <summary>
-            If discord returned an error this will contain that error message
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RestError.Message">
-            <summary>
-            Full string response if we received one
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestError.#ctor(System.Net.WebException,System.Uri,Oxide.Ext.Discord.REST.RequestMethod,System.Object)">
-            <summary>
-            Creates a new rest error
-            </summary>
-            <param name="exception">The web exception we received</param>
-            <param name="url">Url that was called</param>
-            <param name="requestMethod">Request method that was used</param>
-            <param name="data">Data passed to the request</param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.REST.RestHandler">
-            <summary>
-            Represents a REST handler for a bot
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.RestHandler.RateLimit">
-            <summary>
-            Global Rate Limit for the bot
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.REST.RestHandler.Buckets">
-            <summary>
-            The request buckets for the bot
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Creates a new REST handler for a bot client
-            </summary>
-            <param name="client">Client the request is for</param>
-            <param name="logger">Logger from the client</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestHandler.DoRequest(System.String,Oxide.Ext.Discord.REST.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.REST.RestError})">
-            <summary>
-            Creates a new request and queues it to be ran
-            </summary>
-            <param name="url">URL of the request</param>
-            <param name="method">HTTP method of the request</param>
-            <param name="data">Data to be sent with the request</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Error callback if an error occurs</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestHandler.DoRequest``1(System.String,Oxide.Ext.Discord.REST.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.REST.RestError})">
-            <summary>
-            Creates a new request and queues it to be ran
-            </summary>
-            <param name="url">URL of the request</param>
-            <param name="method">HTTP method of the request</param>
-            <param name="data">Data to be sent with the request</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Error callback if an error occurs</param>
-            <typeparam name="T">The type that is expected to be returned</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestHandler.CreateRequest(Oxide.Ext.Discord.REST.RequestMethod,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object,System.Action{Oxide.Ext.Discord.REST.RestResponse},System.Action{Oxide.Ext.Discord.REST.RestError})">
-            <summary>
-            Creates a new request and queues it to be ran
-            </summary>
-            <param name="url">URL of the request</param>
-            <param name="method">HTTP method of the request</param>
-            <param name="headers">Headers to be sent in the request</param>
-            <param name="data">Data to be sent with the request</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Error callback if an error occurs</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestHandler.CleanupExpired">
-            <summary>
-            Removed buckets that are old and not being used
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestHandler.QueueRequest(Oxide.Ext.Discord.REST.Request,Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Queues the request
-            </summary>
-            <param name="request">Request to queue</param>
-            <param name="logger">Logger to use</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestHandler.Shutdown">
-            <summary>
-            Shutdown the REST handler
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.REST.RestResponse">
-            <summary>
-            Represents a REST response from discord
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.REST.RestResponse.Data">
-            <summary>
-            Data discord sent us
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestResponse.#ctor(System.String)">
-            <summary>
-            Create new REST response with the given data
-            </summary>
-            <param name="data"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.REST.RestResponse.ParseData``1">
-            <summary>
-            Parse the data to it's given object
-            </summary>
-            <typeparam name="T">Type to be parsed as</typeparam>
-            <returns>Data string parsed to JSON</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.Socket">
             <summary>

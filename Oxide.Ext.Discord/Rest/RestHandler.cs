@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.REST
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Represents a REST handler for a bot
@@ -15,14 +16,18 @@ namespace Oxide.Ext.Discord.REST
         /// <summary>
         /// Global Rate Limit for the bot
         /// </summary>
-        public readonly BotGlobalRateLimit RateLimit = new BotGlobalRateLimit();
+        public readonly RateLimitHandler RateLimit = new RateLimitHandler();
         
         /// <summary>
         /// The request buckets for the bot
         /// </summary>
         public readonly Hash<string, Bucket> Buckets = new Hash<string, Bucket>();
 
-        private readonly Dictionary<string, string> _headers;
+        /// <summary>
+        /// The authorization header value
+        /// </summary>
+        public readonly string Authorization;
+        
         private readonly ILogger _logger;
 
         /// <summary>
@@ -32,14 +37,8 @@ namespace Oxide.Ext.Discord.REST
         /// <param name="logger">Logger from the client</param>
         public RestHandler(BotClient client, ILogger logger)
         {
+            Authorization = $"Bot {client.Settings.ApiToken}";
             _logger = logger;
-
-            _headers = new Dictionary<string, string>
-            {
-                ["Authorization"] = $"Bot {client.Settings.ApiToken}",
-                ["Content-Type"] = "application/json",
-                ["User-Agent"] = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})"
-            };
         }
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace Oxide.Ext.Discord.REST
         /// <param name="error">Error callback if an error occurs</param>
         public void DoRequest(string url, RequestMethod method, object data, Action callback, Action<RestError> error)
         {
-            CreateRequest(method, url, _headers, data, response => callback?.Invoke(), error);
+            CreateRequest(method, url, data, response => callback?.Invoke(), error);
         }
 
         /// <summary>
@@ -66,7 +65,7 @@ namespace Oxide.Ext.Discord.REST
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
         public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback, Action<RestError> error)
         {
-            CreateRequest(method, url, _headers, data, response =>
+            CreateRequest(method, url, data, response =>
             {
                 callback?.Invoke(response.ParseData<T>());
             }, error);
@@ -77,15 +76,14 @@ namespace Oxide.Ext.Discord.REST
         /// </summary>
         /// <param name="url">URL of the request</param>
         /// <param name="method">HTTP method of the request</param>
-        /// <param name="headers">Headers to be sent in the request</param>
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
-        private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback, Action<RestError> error)
+        private void CreateRequest(RequestMethod method, string url, object data, Action<RestResponse> callback, Action<RestError> error)
         {
-            Request request = new Request(method, url, headers, data, callback, error, _logger);
-            CleanupExpired();
+            Request request = new Request(method, url, data, Authorization, callback, error, _logger);
             QueueRequest(request, _logger);
+            CleanupExpired();
         }
         
         /// <summary>
@@ -127,6 +125,12 @@ namespace Oxide.Ext.Discord.REST
             RateLimit.Shutdown();
         }
         
+        /// <summary>
+        /// Returns the Rate Limit Bucket for the given route
+        /// https://discord.com/developers/docs/topics/rate-limits#rate-limits
+        /// </summary>
+        /// <param name="route">API Route</param>
+        /// <returns>Bucket ID for route</returns>
         private string GetBucketId(string route)
         {
             string[] routeSegments = route.Split('/');

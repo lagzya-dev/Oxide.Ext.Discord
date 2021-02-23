@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Oxide.Ext.Discord.REST
+namespace Oxide.Ext.Discord.Entities.Api
 {
     /// <summary>
     /// Represents and error from the discord API

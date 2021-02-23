@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="url"></param>
         /// <param name="iconUrl"></param>
         /// <param name="proxyIconUrl"></param>
-        public EmbedAuthor(string name, string url, string iconUrl, string proxyIconUrl)
+        public EmbedAuthor(string name, string url = null, string iconUrl = null, string proxyIconUrl = null)
         {
             Name = name;
             Url = url;

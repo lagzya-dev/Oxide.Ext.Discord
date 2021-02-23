@@ -13,7 +13,7 @@ using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.WebSockets;
 using Oxide.Plugins;
 using Timer = System.Timers.Timer;

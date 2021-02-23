@@ -2,12 +2,12 @@ using System;
 using System.Timers;
 using Oxide.Ext.Discord.Helpers;
 
-namespace Oxide.Ext.Discord.REST
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Represents a global rate limit handler for a bot
     /// </summary>
-    public class BotGlobalRateLimit
+    public class RateLimitHandler
     {
         /// <summary>
         /// How many requests have been made globally for the bot since the last 60 second period wiped it
@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.REST
         /// <summary>
         /// Creates a new global rate limit for a bot
         /// </summary>
-        public BotGlobalRateLimit()
+        public RateLimitHandler()
         {
             _timer = new Timer(ResetInterval);
             _timer.Elapsed += ResetGlobal;

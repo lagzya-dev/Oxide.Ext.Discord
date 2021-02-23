@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.REST
+﻿namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// HTTP request method

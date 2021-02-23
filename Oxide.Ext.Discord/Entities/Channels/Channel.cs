@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.Helpers.Interfaces;
-using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.Rest;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Channels
@@ -192,11 +192,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// See <a href="https://discord.com/developers/docs/resources/channel#get-channel-messages">Get Channel Messages</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="request">Optional request filters</param>
         /// <param name="callback">Callback with list of channel messages</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetChannelMessages(DiscordClient client, Action<List<DiscordMessage>> callback = null, Action<RestError> error = null)
+        public void GetChannelMessages(DiscordClient client, GetChannelMessagesRequest request = null, Action<List<DiscordMessage>> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
         
         /// <summary>
@@ -277,7 +278,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="messageIds">Collect of message ids to delete (Between 2 - 100)</param>
         /// <param name="callback">Callback once the action is complete</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void BulkDeleteMessages(DiscordClient client, ICollection<string> messageIds, Action callback = null, Action<RestError> error = null)
+        public void BulkDeleteMessages(DiscordClient client, ICollection<Snowflake> messageIds, Action callback = null, Action<RestError> error = null)
         {
             if (messageIds.Count < 2)
             {
@@ -289,7 +290,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 throw new ArgumentOutOfRangeException(nameof(messageIds), "Cannot delete more than 100 messages");
             }
             
-            Dictionary<string, IEnumerable<string>> data = new Dictionary<string, IEnumerable<string>>
+            Dictionary<string, ICollection<Snowflake>> data = new Dictionary<string, ICollection<Snowflake>>
             {
                 ["messages"] = messageIds 
             };

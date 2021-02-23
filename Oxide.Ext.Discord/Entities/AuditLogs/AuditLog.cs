@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Integrations;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Webhooks;
-using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Entities.AuditLogs
 {

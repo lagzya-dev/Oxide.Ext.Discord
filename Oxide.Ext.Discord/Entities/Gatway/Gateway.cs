@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// <param name="callback">Callback with the Gateway response</param>
         public static void GetGateway(BotClient client, Action<Gateway> callback)
         {
-            client.Rest.DoRequest("/gateway", REST.RequestMethod.GET, null, callback, null);
+            client.Rest.DoRequest("/gateway", Rest.RequestMethod.GET, null, callback, null);
         }
     }
 }

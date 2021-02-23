@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.REST;
+using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {

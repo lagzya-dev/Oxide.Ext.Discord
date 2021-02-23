@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.REST
+namespace Oxide.Ext.Discord.Entities.Api
 {
     /// <summary>
     /// Represents RateLimit entity when the rate limit is hit

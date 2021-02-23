@@ -94,11 +94,6 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
 
-            if (!e.WasClean)
-            {
-                _logger.Warning($"Discord connection closed uncleanly: code {e.Code}, Reason: {e.Reason}");
-            }
-
             if (_client.Initialized)
             {
                 _webSocket.StartReconnectTimer(Retries < 3 ? 1f : 15f, () =>
@@ -604,9 +599,9 @@ namespace Oxide.Ext.Discord.WebSockets
                     Nonce = "DiscordExtension",
                     GuildId = guild.Id,
                 });
+                
+                _client.CallHook("Discord_GuildCreate", guild, false);
             }
-
-            _client.CallHook("Discord_GuildCreate", guild, false);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-update
@@ -861,18 +856,18 @@ namespace Oxide.Ext.Discord.WebSockets
             
             if (!message.Author.Bot.HasValue || !message.Author.Bot.Value)
             {
-                if(!string.IsNullOrEmpty(message.Content) && DiscordExtension.DiscordCommands.HasCommands() && DiscordExtension.DiscordConfig.Commands.CommandPrefixes.Contains(message.Content[0]))
+                if(!string.IsNullOrEmpty(message.Content) && DiscordExtension.DiscordCommand.HasCommands() && DiscordExtension.DiscordConfig.Commands.CommandPrefixes.Contains(message.Content[0]))
                 {
                     message.Content.TrimStart(DiscordExtension.DiscordConfig.Commands.CommandPrefixes).ParseCommand(out string command, out string[] args);
                     _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} Cmd: {command} Args: {string.Join(" ", args)}");
 
-                    if (message.GuildId != null && DiscordExtension.DiscordCommands.HandleGuildCommand(_client, message, channel, command, args))
+                    if (message.GuildId != null && DiscordExtension.DiscordCommand.HandleGuildCommand(_client, message, channel, command, args))
                     {
                         _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} Guild Handled Cmd: {command}");
                         return;
                     }
 
-                    if (message.GuildId == null && DiscordExtension.DiscordCommands.HandleDirectMessageCommand(_client, message, channel, command, args))
+                    if (message.GuildId == null && DiscordExtension.DiscordCommand.HandleDirectMessageCommand(_client, message, channel, command, args))
                     {
                         _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} Direct Handled Cmd: {command}");
                         return;
