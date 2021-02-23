@@ -217,5 +217,11 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [Description("MANAGE_EMOJIS")]
         ManageEmojis = 1 << 30,
+        
+        /// <summary>
+        /// Allows members to use slash commands in text channels
+        /// </summary>
+        [Description("USE_SLASH_COMMANDS")]
+        UseSlashCommands = 1ul << 31,
     }
 }
