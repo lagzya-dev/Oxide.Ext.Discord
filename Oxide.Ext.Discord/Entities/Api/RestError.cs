@@ -1,8 +1,7 @@
-using System.Net;
 using System;
-using Oxide.Ext.Discord.Entities.Api;
+using System.Net;
 
-namespace Oxide.Ext.Discord.Rest
+namespace Oxide.Ext.Discord.Entities.Api
 {
     /// <summary>
     /// Error object that is returned to the caller when a request fails

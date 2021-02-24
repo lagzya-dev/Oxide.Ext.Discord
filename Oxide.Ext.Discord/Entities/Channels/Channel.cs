@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.Helpers.Interfaces;
-using Oxide.Ext.Discord.Rest;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Channels

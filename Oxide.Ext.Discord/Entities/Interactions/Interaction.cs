@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Rest;

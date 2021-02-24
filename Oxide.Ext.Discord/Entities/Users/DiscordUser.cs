@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
@@ -10,7 +11,6 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users.Connections;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Helpers.Interfaces;
-using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Entities.Users
 {

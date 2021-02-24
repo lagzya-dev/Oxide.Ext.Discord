@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
@@ -13,7 +14,6 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Helpers.Converters;
-using Oxide.Ext.Discord.Rest;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
