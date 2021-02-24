@@ -89,7 +89,7 @@ namespace Oxide.Ext.Discord
         private Timer _timer;
         private readonly ILogger _logger;
         
-        internal Ready ReadyData;
+        internal GatewayReadyEvent ReadyData;
         internal readonly List<Snowflake> MembersLoaded = new List<Snowflake>();
         
         /// <summary>
@@ -392,7 +392,7 @@ namespace Oxide.Ext.Discord
             Gateway.GetGateway(this, gateway =>
             {
                 // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                Gateway.WebsocketUrl = $"{gateway.Url}/?{Entities.Gatway.Connect.Serialize()}";
+                Gateway.WebsocketUrl = $"{gateway.Url}/?{Entities.Gatway.GatewayConnect.Serialize()}";
                 _logger.Debug($"Got Gateway url: {gateway.Url}");
                 callback.Invoke();
             });
@@ -411,7 +411,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
             
-            Identify identify = new Identify
+            IdentifyCommand identify = new IdentifyCommand
             {
                 Token = Settings.ApiToken,
                 Properties = new Properties
@@ -439,7 +439,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
             
-            Resume resume = new Resume
+            ResumeSessionCommand resume = new ResumeSessionCommand
             {
                 Sequence = Sequence,
                 SessionId = SessionId,
@@ -453,7 +453,7 @@ namespace Oxide.Ext.Discord
         /// Used to request guild members from discord for a specific guild
         /// </summary>
         /// <param name="request">Request for guild members</param>
-        public void RequestGuildMembers(GuildMembersRequest request)
+        public void RequestGuildMembers(GuildMembersRequestCommand request)
         {
             if (!Initialized)
             {
@@ -467,7 +467,7 @@ namespace Oxide.Ext.Discord
         /// Used to update the voice state for the bot
         /// </summary>
         /// <param name="voiceState"></param>
-        public void UpdateVoiceState(VoiceStateUpdate voiceState)
+        public void UpdateVoiceState(UpdateVoiceStatusCommand voiceState)
         {
             if (!Initialized)
             {
@@ -481,7 +481,7 @@ namespace Oxide.Ext.Discord
         /// Used to update the bots status in discord
         /// </summary>
         /// <param name="statusUpdate"></param>
-        public void UpdateStatus(StatusUpdate statusUpdate)
+        public void UpdateStatus(UpdateStatusCommand statusUpdate)
         {
             if (!Initialized)
             {

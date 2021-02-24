@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             _client.DestroyHeartbeat();
 
-            _socket = new WebSocket($"{url}/?{Entities.Gatway.Connect.Serialize()}");
+            _socket = new WebSocket($"{url}/?{Entities.Gatway.GatewayConnect.Serialize()}");
 
             _socket.OnOpen += _listener.SocketOpened;
             _socket.OnClose += _listener.SocketClosed;

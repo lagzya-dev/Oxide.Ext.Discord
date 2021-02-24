@@ -67,7 +67,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonProperty("pending")]
         public bool? Pending { get; set; }
 
-        internal void Update(GuildMemberUpdateEvent update)
+        internal void Update(GuildMemberUpdatedEvent update)
         {
             if (update.User != null)
             {

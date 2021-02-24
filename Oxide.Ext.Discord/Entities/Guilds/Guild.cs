@@ -230,7 +230,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// will only include non-offline members if the size is greater than large threshold
         /// </summary>
         [JsonProperty("presences")]
-        public List<StatusUpdate> Presences { get; set; }
+        public List<UpdateStatusCommand> Presences { get; set; }
   
         /// <summary>
         /// The maximum number of presences for the guild (the default value, currently 25000, is in effect when null is returned)
