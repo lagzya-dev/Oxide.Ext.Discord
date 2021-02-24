@@ -335,16 +335,32 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 if (customAttributes.Length != 0)
                 {
                     DirectMessageCommandAttribute command = (DirectMessageCommandAttribute)customAttributes[0];
-                    DiscordExtension.DiscordCommand.AddDirectMessageCommand(command.Name, plugin, method.Name);
-                    DiscordExtension.GlobalLogger.Debug($"Adding Direct Message Command {command.Name} Method: {method.Name}");
+                    if (command.IsLocalized)
+                    {
+                        DiscordExtension.DiscordCommand.AddDirectMessageLocalizedCommand(command.Name, plugin, method.Name);
+                        DiscordExtension.GlobalLogger.Debug($"Adding Direct Message Command {command.Name} Method: {method.Name}");
+                    }
+                    else
+                    {
+                        DiscordExtension.DiscordCommand.AddDirectMessageCommand(command.Name, plugin, method.Name);
+                        DiscordExtension.GlobalLogger.Debug($"Adding Direct Message Command {command.Name} Method: {method.Name}");
+                    }
                 }
                 
                 customAttributes = method.GetCustomAttributes(typeof(GuildCommandAttribute), true);
                 if (customAttributes.Length != 0)
                 {
                     GuildCommandAttribute command = (GuildCommandAttribute)customAttributes[0];
-                    DiscordExtension.DiscordCommand.AddGuildCommand(command.Name, plugin, null, method.Name);
-                    DiscordExtension.GlobalLogger.Debug($"Adding Guild Command {command.Name} Method: {method.Name}");
+                    if (command.IsLocalized)
+                    {
+                        DiscordExtension.DiscordCommand.AddGuildLocalizedCommand(command.Name, plugin, null, method.Name);
+                        DiscordExtension.GlobalLogger.Debug($"Adding Guild Command {command.Name} Method: {method.Name}");
+                    }
+                    else
+                    {
+                        DiscordExtension.DiscordCommand.AddGuildCommand(command.Name, plugin, null, method.Name);
+                        DiscordExtension.GlobalLogger.Debug($"Adding Guild Command {command.Name} Method: {method.Name}");
+                    }
                 }
             }
         }

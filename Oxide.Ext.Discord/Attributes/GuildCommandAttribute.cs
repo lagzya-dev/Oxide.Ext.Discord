@@ -3,23 +3,19 @@
 namespace Oxide.Ext.Discord.Attributes
 {
     /// <summary>
-    /// Used to identify direct message bot commands
+    /// Used to identify guild bot commands
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class DirectMessageCommandAttribute : Attribute
+    public class GuildCommandAttribute : BaseCommandAttribute
     {
         /// <summary>
-        /// Name of the command
-        /// </summary>
-        public string Name { get; }
-        
-        /// <summary>
-        /// Constructor for a direct message command
+        /// Constructor for a guild command
         /// </summary>
         /// <param name="name">Name of the command</param>
-        public DirectMessageCommandAttribute(string name)
+        /// <param name="isLocalized">If the command name is the localization key for the command</param>
+        public GuildCommandAttribute(string name, bool isLocalized = false) : base(name, isLocalized)
         {
-            Name = name;
+
         }
     }
 }
