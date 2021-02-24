@@ -1109,7 +1109,7 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#invalid-session
         private void HandleInvalidSession(EventPayload payload)
         {
-            bool shouldResume = payload.TokenData?.ToObject<bool>() ?? false;
+            bool shouldResume = !string.IsNullOrEmpty(_client.SessionId) && (payload.TokenData?.ToObject<bool>() ?? false);
             _logger.Warning($"Invalid Session ID opcode received! Attempting to reconnect. Should Resume? {shouldResume}");
             _webSocket.Disconnect(true, shouldResume);
         }
