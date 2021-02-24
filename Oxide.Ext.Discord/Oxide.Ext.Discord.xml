@@ -1924,6 +1924,11 @@
             Allows management and editing of emojis
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UseSlashCommands">
+            <summary>
+            Allows members to use slash commands in text channels
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.PermissionType">
             <summary>
             Represents the type of a permission
@@ -3246,6 +3251,46 @@
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.Hello.HeartbeatInterval">
             <summary>
             The interval (in milliseconds) the client should heartbeat with
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationCreate">
+            <summary>
+            Represents Integration Create Structure TODO:Add URL Once Published
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationCreate.GuildId">
+            <summary>
+            Guild Id the Integration was created in
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDelete">
+            <summary>
+            Represents Integration Delete Structure TODO:Add URL Once Published
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDelete.Id">
+            <summary>
+            ID of the integration
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDelete.GuildId">
+            <summary>
+            Guild ID the integration was in
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDelete.ApplicationId">
+            <summary>
+            Application ID of the integration
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationUpdate">
+            <summary>
+            Represents Integration Update Structure TODO:Add URL Once Published
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationUpdate.GuildId">
+            <summary>
+            Guild ID the integration was updated In
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreated">
@@ -8310,7 +8355,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.Bucket.Handler">
             <summary>
-            Rest Handler for the bucket
+            Rest Handler for the bucker
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Bucket.#ctor(Oxide.Ext.Discord.Rest.RestHandler,System.String,Oxide.Ext.Discord.Logging.ILogger)">
@@ -8400,11 +8445,6 @@
             Full Request URl to the API
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.Authorization">
-            <summary>
-            Authorization header value
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.Data">
             <summary>
             Data to be sent with the request
@@ -8443,9 +8483,9 @@
             <param name="method">HTTP method to call</param>
             <param name="route">Route to call on the API</param>
             <param name="data">Data for the request</param>
-            <param name="authorization">Represents the authorization header value</param>
+            <param name="authorization">Authorization Header</param>
             <param name="callback">Callback once the request completes successfully</param>
-            <param name="error">Callback when the request errors</param>
+            <param name="onError">Callback when the request errors</param>
             <param name="logger">Logger for the request</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Request.Fire(Oxide.Ext.Discord.Rest.Bucket)">
