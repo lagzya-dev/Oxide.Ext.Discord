@@ -4,7 +4,7 @@ namespace Oxide.Ext.Discord.Entities.Api
 {
     /// <summary>
     /// Represents RateLimit entity when the rate limit is hit
-    /// <a href="https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure">https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure</a>
+    /// <a href="https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure">Rate Limit Structure</a>
     /// </summary>
     public class RateLimit
     {

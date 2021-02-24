@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                         return null;
                     }
 
-                    DiscordExtension.GlobalLogger.Warning($"Snowflake tried to parse null to non nullable field: {reader.Path}");
+                    DiscordExtension.GlobalLogger.Warning($"Snowflake tried to parse null to non nullable field: {reader.Path}. Please give this message to the discord extension authors.");
                     return default(Snowflake);
                 
                 default:

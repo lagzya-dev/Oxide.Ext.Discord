@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// HTTP Status code
         /// </summary>
-        public int HttpStatusCode { get; set; }
+        public int HttpStatusCode { get; internal set; }
         
         /// <summary>
         /// The request method that was called
@@ -36,12 +36,12 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// If discord returned an error this will contain that error message
         /// </summary>
-        public DiscordApiError DiscordError { get; set; }
+        public DiscordApiError DiscordError { get; internal set; }
         
         /// <summary>
         /// Full string response if we received one
         /// </summary>
-        public string Message { get; set; }
+        public string Message { get; internal set; }
         
         /// <summary>
         /// Creates a new rest error

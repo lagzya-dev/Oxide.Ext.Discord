@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord
         {
             GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new Logger(LogLevel.Warning) : new Logger(LogLevel.Debug);
             
-            GlobalLogger.Warning($"Using Discord Extension Version: {GetExtensionVersion}");
+            GlobalLogger.Info($"Using Discord Extension Version: {GetExtensionVersion}");
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
                 GlobalLogger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);

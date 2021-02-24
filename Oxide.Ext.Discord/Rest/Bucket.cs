@@ -102,7 +102,7 @@ namespace Oxide.Ext.Discord.Rest
             }
             catch (ThreadAbortException)
             {
-                _logger.Info("Bucket thread has been aborted.");
+                _logger.Debug("Bucket thread has been aborted.");
             }
         }
 

@@ -57,7 +57,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <param name="e"></param>
         public void SocketOpened(object sender, EventArgs e)
         {
-            _logger.Warning("Discord socket opened!");
+            _logger.Info("Discord socket opened!");
             _client.CallHook("DiscordSocket_WebSocketOpened");
             Retries = 0;
         }
@@ -1094,7 +1094,7 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#heartbeat
         private void HandleHeartbeat(EventPayload payload)
         {
-            _logger.Info("Manually sent heartbeat (received opcode 1)");
+            _logger.Debug("Manually sent heartbeat (received opcode 1)");
             _client.SendHeartbeat();
         }
 
@@ -1123,7 +1123,7 @@ namespace Oxide.Ext.Discord.WebSockets
             // Client should now perform identification
             if (_webSocket.ShouldAttemptResume)
             {
-                _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleHello)} Attempting to resume session with ID: {_client.SessionId}");
+                _logger.Info($"{nameof(SocketListener)}.{nameof(HandleHello)} Attempting to resume session with ID: {_client.SessionId}");
                 _client.Resume();
             }
             else
