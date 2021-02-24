@@ -338,7 +338,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
                     if (command.IsLocalized)
                     {
                         DiscordExtension.DiscordCommand.AddDirectMessageLocalizedCommand(command.Name, plugin, method.Name);
-                        DiscordExtension.GlobalLogger.Debug($"Adding Direct Message Command {command.Name} Method: {method.Name}");
+                        DiscordExtension.GlobalLogger.Debug($"Adding Localized Direct Message Command {command.Name} Method: {method.Name}");
                     }
                     else
                     {
@@ -354,7 +354,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
                     if (command.IsLocalized)
                     {
                         DiscordExtension.DiscordCommand.AddGuildLocalizedCommand(command.Name, plugin, null, method.Name);
-                        DiscordExtension.GlobalLogger.Debug($"Adding Guild Command {command.Name} Method: {method.Name}");
+                        DiscordExtension.GlobalLogger.Debug($"Adding Localized Guild Command {command.Name} Method: {method.Name}");
                     }
                     else
                     {
