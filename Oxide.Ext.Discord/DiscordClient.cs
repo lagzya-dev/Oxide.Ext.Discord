@@ -224,25 +224,8 @@ namespace Oxide.Ext.Discord
                     break;
                 }
             }
-
-            foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
-            {
-                object[] customAttributes = method.GetCustomAttributes(typeof(DirectMessageCommandAttribute), true);
-                if (customAttributes.Length != 0)
-                {
-                    DirectMessageCommandAttribute command = (DirectMessageCommandAttribute)customAttributes[0];
-                    DiscordExtension.DiscordCommand.AddDiscordDirectMessageCommand(command.Name, plugin, method.Name);
-                    DiscordExtension.GlobalLogger.Debug($"Adding Direct Message Command {command.Name} Method: {method.Name}");
-                }
-                
-                customAttributes = method.GetCustomAttributes(typeof(GuildCommandAttribute), true);
-                if (customAttributes.Length != 0)
-                {
-                    GuildCommandAttribute command = (GuildCommandAttribute)customAttributes[0];
-                    DiscordExtension.DiscordCommand.AddDiscordGuildCommand(command.Name, plugin, null, method.Name);
-                    DiscordExtension.GlobalLogger.Debug($"Adding Guild Command {command.Name} Method: {method.Name}");
-                }
-            }
+            
+            DiscordExtension.DiscordCommand.ProcessPluginCommands(plugin);
         }
 
         internal static void OnPluginRemoved(Plugin plugin)
