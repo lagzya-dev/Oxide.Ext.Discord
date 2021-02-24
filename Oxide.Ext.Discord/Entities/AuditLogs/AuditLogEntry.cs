@@ -37,7 +37,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs
         /// 
         /// </summary>
         [JsonProperty("action_type")]
-        public int? ActionType { get; set; }
+        public AuditLogActionType? ActionType { get; set; }
 
         /// <summary>
         /// 
