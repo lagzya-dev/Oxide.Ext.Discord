@@ -175,7 +175,7 @@ namespace Oxide.Ext.Discord
             _logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
             ActiveBots.Remove(Settings.ApiToken);
             Initialized = false;
-            _webSocket.Shutdown();
+            _webSocket?.Shutdown();
             _webSocket = null;
             DestroyHeartbeat();
             Rest?.Shutdown();
