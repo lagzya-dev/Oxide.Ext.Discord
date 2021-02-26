@@ -64,12 +64,11 @@ namespace Oxide.Ext.Discord.WebSockets
             if (_socket != null)
             {
                 throw new Exception("Socket is already running. Please disconnect before attempting to connect.");
-                // Assume force-reconnect
-                //Disconnect(false);
             }
+            
             _client.DestroyHeartbeat();
 
-            _socket = new WebSocket($"{url}/?{Entities.Gatway.GatewayConnect.Serialize()}");
+            _socket = new WebSocket($"{url}/?{GatewayConnect.Serialize()}");
 
             _socket.OnOpen += _listener.SocketOpened;
             _socket.OnClose += _listener.SocketClosed;
@@ -240,6 +239,7 @@ namespace Oxide.Ext.Discord.WebSockets
             ReconnectTimer.Elapsed += (_, __) =>
             {
                 callback.Invoke();
+                ReconnectTimer = null;
             };
             
             ReconnectTimer.Start();

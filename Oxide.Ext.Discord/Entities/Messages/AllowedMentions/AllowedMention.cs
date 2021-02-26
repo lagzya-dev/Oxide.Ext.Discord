@@ -14,7 +14,6 @@ namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
         /// An array of allowed mention types to parse from the content.
         /// <see cref="AllowedMentionTypes"/>
         /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("parse")]
         public List<AllowedMentionTypes> Parse { get; set; }
         

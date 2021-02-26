@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Extensions
             {
                 return;
             }
-
+            
             Channel channel = client.Bot.DirectMessagesByUserId[id.Value];
             if (channel != null)
             {
@@ -70,6 +70,16 @@ namespace Oxide.Ext.Discord.Extensions
             }
             
             DiscordUser.CreateDirectMessageChannel(client, id.Value, newChannel => newChannel.CreateMessage(client, message));
+        }
+
+        /// <summary>
+        /// Returns true if the player is linked
+        /// </summary>
+        /// <param name="player">Player to check if they're linked</param>
+        /// <returns>True if linked; False otherwise</returns>
+        public static bool IsLinked(this IPlayer player)
+        {
+            return DiscordExtension.DiscordLink.IsLinked(player.Id);
         }
 
         /// <summary>

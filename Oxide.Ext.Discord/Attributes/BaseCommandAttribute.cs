@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Attributes
     /// Represents a base attribute for commands 
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class BaseCommandAttribute
+    public class BaseCommandAttribute : Attribute
     {
         /// <summary>
         /// Name of the command

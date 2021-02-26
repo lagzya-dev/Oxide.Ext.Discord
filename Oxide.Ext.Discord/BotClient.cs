@@ -81,6 +81,11 @@ namespace Oxide.Ext.Discord
         public Application Application { get; internal set; }
         
         /// <summary>
+        /// Bot User
+        /// </summary>
+        public DiscordUser Bot { get; internal set; }
+        
+        /// <summary>
         /// Rest handler for all discord API calls
         /// </summary>
         public RestHandler Rest { get; private set; }
@@ -124,6 +129,7 @@ namespace Oxide.Ext.Discord
             }
             
             bot.AddClient(client);
+            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {client.Owner.Name} to bot {bot.Bot?.GetFullUserName}");
             return bot;
         }
         
@@ -210,6 +216,28 @@ namespace Oxide.Ext.Discord
                 {
                     UpdateLogLevel(client.Settings.LogLevel);
                 }
+                
+                if (_webSocket.IsAlive())
+                {
+                    if (ReadyData != null)
+                    {
+                        ReadyData.Guilds = Servers.Values.ToList();
+                        client.CallHook("Discord_Ready", ReadyData, true);
+                    }
+
+                    foreach (Guild guild in Servers.Values)
+                    {
+                        if (guild.IsAvailable)
+                        {
+                            client.CallHook("Discord_GuildCreate", guild, true);
+                        }
+
+                        if (MembersLoaded.Contains(guild.Id))
+                        {
+                            client.CallHook("Discord_GuildMembersLoaded", guild, true);
+                        }
+                    }
+                }
 
                 //Our intents have changed. Disconnect websocket and reconnect with new intents.
                 GatewayIntents intents = Settings.Intents | client.Settings.Intents;
@@ -217,29 +245,6 @@ namespace Oxide.Ext.Discord
                 {
                     Settings.Intents = intents;
                     DisconnectWebsocket(true);
-                    return;
-                }
-            }
-
-            if (_webSocket.IsAlive())
-            {
-                if (ReadyData != null)
-                {
-                    ReadyData.Guilds = Servers.Values.ToList();
-                    client.CallHook("Discord_Ready", null, ReadyData, true);
-                }
-
-                foreach (Guild guild in Servers.Values)
-                {
-                    if (guild.IsAvailable)
-                    {
-                        client.CallHook("Discord_GuildCreate", guild, true);
-                    }
-
-                    if (MembersLoaded.Contains(guild.Id))
-                    {
-                        client.CallHook("Discord_GuildMembersLoaded", guild, true);
-                    }
                 }
             }
         }
@@ -392,7 +397,7 @@ namespace Oxide.Ext.Discord
             Gateway.GetGateway(this, gateway =>
             {
                 // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                Gateway.WebsocketUrl = $"{gateway.Url}/?{Entities.Gatway.GatewayConnect.Serialize()}";
+                Gateway.WebsocketUrl = $"{gateway.Url}/?{GatewayConnect.Serialize()}";
                 _logger.Debug($"Got Gateway url: {gateway.Url}");
                 callback.Invoke();
             });

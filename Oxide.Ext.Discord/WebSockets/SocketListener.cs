@@ -78,7 +78,13 @@ namespace Oxide.Ext.Discord.WebSockets
                 _logger.Warning($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
             }
             
+            _client.CallHook("DiscordSocket_WebSocketClosed", e.Reason, e.Code, e.WasClean);
             _webSocket.DisposeSocket();
+
+            if (!_client.Initialized)
+            {
+                return;
+            }
             
             if (_webSocket.RequestReconnect)
             {
@@ -86,31 +92,26 @@ namespace Oxide.Ext.Discord.WebSockets
                 _client.ConnectWebSocket();
                 return;
             }
-            
-            _client.CallHook("DiscordSocket_WebSocketClosed", e.Reason, e.Code, e.WasClean);
-            
+
             if (HandleDiscordClosedSocket(e.Code, e.Reason))
             {
                 return;
             }
 
-            if (_client.Initialized)
+            _webSocket.StartReconnectTimer(Retries < 3 ? 1f : 15f, () =>
             {
-                _webSocket.StartReconnectTimer(Retries < 3 ? 1f : 15f, () =>
+                Retries++;
+                _logger.Warning($"Attempting to reconnect to Discord... [Retry={Retries}]");
+                if (Retries <= 8)
                 {
-                    Retries++;
-                    _logger.Warning($"Attempting to reconnect to Discord... [Retry={Retries}]");
-                    if (Retries <= 8)
-                    {
-                        _client.ConnectWebSocket();
-                    }
-                    else
-                    {
-                        //If more than 8 tries something could be wrong on discords end. Try and fetch the websocket url
-                        _client.UpdateGatewayUrl(_client.ConnectWebSocket);
-                    }
-                });
-            }
+                    _client.ConnectWebSocket();
+                }
+                else
+                {
+                    //If more than 8 tries something could be wrong on discords end. Try and fetch the websocket url
+                    _client.UpdateGatewayUrl(_client.ConnectWebSocket);
+                }
+            });
         }
 
         /// <summary>
@@ -494,6 +495,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             _client.SessionId = ready.SessionId;
             _client.Application = ready.Application;
+            _client.Bot = ready.User;
             _logger.Info($"Your bot was found in {ready.Guilds.Count} Guilds!");
 
             if (_client.ReadyData == null)

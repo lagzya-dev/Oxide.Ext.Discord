@@ -141,17 +141,23 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         internal void HandleMessage(DiscordMessage message, Channel channel)
         {
             List<DiscordSubscription> subs = _subscriptions[message.ChannelId];
-            foreach (DiscordSubscription sub in subs)
+            if (subs != null)
             {
-                sub.Invoke(message);
+                foreach (DiscordSubscription sub in subs)
+                {
+                    sub.Invoke(message);
+                }
             }
 
             if (channel?.ParentId != null)
             {
                 subs = _subscriptions[channel.ParentId.Value];
-                foreach (DiscordSubscription sub in subs)
+                if (subs != null)
                 {
-                    sub.Invoke(message);
+                    foreach (DiscordSubscription sub in subs)
+                    {
+                        sub.Invoke(message);
+                    }
                 }
             }
         }

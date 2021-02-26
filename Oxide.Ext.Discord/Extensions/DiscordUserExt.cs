@@ -49,5 +49,15 @@ namespace Oxide.Ext.Discord.Extensions
         {
             return user.Player?.HasPermission(permission) ?? false;
         }
+        
+        /// <summary>
+        /// Returns true if the player is linked
+        /// </summary>
+        /// <param name="user">Discord user to check if they're linked</param>
+        /// <returns>True if linked; False otherwise</returns>
+        public static bool IsLinked(this DiscordUser user)
+        {
+            return DiscordExtension.DiscordLink.IsLinked(user.Id);
+        }
     }
 }

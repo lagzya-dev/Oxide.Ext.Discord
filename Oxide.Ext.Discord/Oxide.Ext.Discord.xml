@@ -4,42 +4,56 @@
         <name>Oxide.Ext.Discord</name>
     </assembly>
     <members>
-        <member name="T:Oxide.Ext.Discord.Attributes.GuildCommandAttribute">
+        <member name="T:Oxide.Ext.Discord.Attributes.BaseCommandAttribute">
             <summary>
-            Used to identify guild bot commands
+            Represents a base attribute for commands 
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Attributes.GuildCommandAttribute.Name">
+        <member name="P:Oxide.Ext.Discord.Attributes.BaseCommandAttribute.Name">
             <summary>
             Name of the command
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Attributes.GuildCommandAttribute.#ctor(System.String)">
+        <member name="P:Oxide.Ext.Discord.Attributes.BaseCommandAttribute.IsLocalized">
             <summary>
-            Constructor for a guild command
+            If the command name is the localization key
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Attributes.BaseCommandAttribute.#ctor(System.String,System.Boolean)">
+            <summary>
+            Constructor for a base command
             </summary>
             <param name="name">Name of the command</param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Attributes.DiscordClientAttribute">
-            <summary>
-            Used to identify which field in a plugin to create a discord client for and set the client to.
-            </summary>
+            <param name="isLocalized">If the command name is the localization key for the command</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Attributes.DirectMessageCommandAttribute">
             <summary>
             Used to identify direct message bot commands
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Attributes.DirectMessageCommandAttribute.Name">
+        <member name="M:Oxide.Ext.Discord.Attributes.DirectMessageCommandAttribute.#ctor(System.String,System.Boolean)">
             <summary>
-            Name of the command
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Attributes.DirectMessageCommandAttribute.#ctor(System.String)">
-            <summary>
-            Constructor for a direct message command
+            Constructor for a guild command
             </summary>
             <param name="name">Name of the command</param>
+            <param name="isLocalized">If the command name is the localization key for the command</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Attributes.DiscordClientAttribute">
+            <summary>
+            Used to identify which field in a plugin to create a discord client for and set the client to.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Attributes.GuildCommandAttribute">
+            <summary>
+            Used to identify guild bot commands
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Attributes.GuildCommandAttribute.#ctor(System.String,System.Boolean)">
+            <summary>
+            Constructor for a guild command
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="isLocalized">If the command name is the localization key for the command</param>
         </member>
         <member name="T:Oxide.Ext.Discord.BotClient">
             <summary>
@@ -99,6 +113,11 @@
         <member name="P:Oxide.Ext.Discord.BotClient.Application">
             <summary>
             Application reference for this bot
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.BotClient.Bot">
+            <summary>
+            Bot User
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.BotClient.Rest">
@@ -876,6 +895,187 @@
         <member name="M:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog.GetGuildAuditLog(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.AuditLogs.AuditLog},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType">
+            <summary>
+            Represents type of the action that was taken in given audit log event.
+            Originally Sourced from https://github.com/DSharpPlus/DSharpPlus/blob/master/DSharpPlus/Entities/DiscordAuditLogObjects.cs#L517
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.GuildUpdate">
+            <summary>
+            Indicates that the guild was updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.ChannelCreate">
+            <summary>
+            Indicates that the channel was created.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.ChannelUpdate">
+            <summary>
+            Indicates that the channel was updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.ChannelDelete">
+            <summary>
+            Indicates that the channel was deleted.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.OverwriteCreate">
+            <summary>
+            Indicates that the channel permission overwrite was created.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.OverwriteUpdate">
+            <summary>
+            Indicates that the channel permission overwrite was updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.OverwriteDelete">
+            <summary>
+            Indicates that the channel permission overwrite was deleted.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.Kick">
+            <summary>
+            Indicates that the user was kicked.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.Prune">
+            <summary>
+            Indicates that users were pruned.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.Ban">
+            <summary>
+            Indicates that the user was banned.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.Unban">
+            <summary>
+            Indicates that the user was unbanned.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.MemberUpdate">
+            <summary>
+            Indicates that the member was updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.MemberRoleUpdate">
+            <summary>
+            Indicates that the member's roles were updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.MemberMove">
+            <summary>
+            Indicates that the member has moved to another voice channel.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.MemberDisconnect">
+            <summary>
+            Indicates that the member has disconnected from a voice channel.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.BotAdd">
+            <summary>
+            Indicates that a bot was added to the guild.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.RoleCreate">
+            <summary>
+            Indicates that the role was created.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.RoleUpdate">
+            <summary>
+            Indicates that the role was updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.RoleDelete">
+            <summary>
+            Indicates that the role was deleted.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.InviteCreate">
+            <summary>
+            Indicates that the invite was created.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.InviteUpdate">
+            <summary>
+            Indicates that the invite was updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.InviteDelete">
+            <summary>
+            Indicates that the invite was deleted.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.WebhookCreate">
+            <summary>
+            Indicates that the webhook was created.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.WebhookUpdate">
+            <summary>
+            Indicates that the webook was updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.WebhookDelete">
+            <summary>
+            Indicates that the webhook was deleted.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.EmojiCreate">
+            <summary>
+            Indicates that the emoji was created.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.EmojiUpdate">
+            <summary>
+            Indicates that the emoji was updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.EmojiDelete">
+            <summary>
+            Indicates that the emoji was deleted.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.MessageDelete">
+            <summary>
+            Indicates that the message was deleted.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.MessageBulkDelete">
+            <summary>
+            Indicates that messages were bulk-deleted.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.MessagePin">
+            <summary>
+            Indicates that a message was pinned.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.MessageUnpin">
+            <summary>
+            Indicates that a message was unpinned.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.IntegrationCreate">
+            <summary>
+            Indicates that an integration was created.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.IntegrationUpdate">
+            <summary>
+            Indicates that an integration was updated.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogActionType.IntegrationDelete">
+            <summary>
+            Indicates that an integration was deleted.
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.AuditLogChange">
@@ -8353,6 +8553,13 @@
             <param name="permission">Permission to check for</param>
             <returns>True if use is linked and has permission; False otherwise</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.DiscordUserExt.IsLinked(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+            <summary>
+            Returns true if the player is linked
+            </summary>
+            <param name="user">Discord user to check if they're linked</param>
+            <returns>True if linked; False otherwise</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.EnumExt">
             <summary>
             Extensions for enums
@@ -8409,6 +8616,13 @@
             <param name="player">Player to send the discord message to</param>
             <param name="client">Client to use for sending the message</param>
             <param name="message">Message to send</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.IsLinked(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns true if the player is linked
+            </summary>
+            <param name="player">Player to check if they're linked</param>
+            <returns>True if linked; False otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.GetDiscordUserId(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
@@ -8906,7 +9120,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds a discord direct message command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
@@ -8915,7 +9129,7 @@
             <param name="plugin">Plugin to add the command for</param>
             <param name="callback">Method name of the callback</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordDirectMessageLocalizedCommand(System.String,Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDirectMessageLocalizedCommand(System.String,Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds a localized discord direct message command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
@@ -8924,7 +9138,7 @@
             <param name="plugin">Plugin to add the localized command for</param>
             <param name="callback">Method name of the callback</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.String,System.String[]})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDirectMessageCommand(System.String,Oxide.Core.Plugins.Plugin,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.String,System.String[]})">
             <summary>
             Adds a discord direct message command
             Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134)
@@ -8933,7 +9147,7 @@
             <param name="plugin">Plugin to add the command for</param>
             <param name="callback">Method name of the callback</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.String)">
             <summary>
             Adds a discord guild command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
@@ -8943,7 +9157,7 @@
             <param name="allowedChannels">Channel or Category Id's this command is allowed in</param>
             <param name="callback">Method name of the callback</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordGuildLocalizedCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddGuildLocalizedCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.String)">
             <summary>
             Adds a localized discord guild command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
@@ -8953,7 +9167,7 @@
             <param name="allowedChannels">Channel or Category Id's this command is allowed in</param>
             <param name="callback">Method name of the callback</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddDiscordGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.String,System.String[]})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.AddGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.String,System.String[]})">
             <summary>
             Adds a discord guild command
             Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134)
