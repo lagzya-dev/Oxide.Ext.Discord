@@ -19,6 +19,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         
         /// <summary>
         /// Saved Gateway URL
+        /// Example: wss://gateway.discord.gg/?v=8&encoding=json
         /// </summary>
         public static string WebsocketUrl { get; internal set; }
 
@@ -32,6 +33,16 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         public static void GetGateway(BotClient client, Action<Gateway> callback)
         {
             client.Rest.DoRequest("/gateway", RequestMethod.GET, null, callback, null);
+        }
+
+        public static void UpdateGatewayUrl(BotClient client, Action callback)
+        {
+            GetGateway(client, gateway =>
+            {
+                WebsocketUrl = $"{gateway.Url}/?{GatewayConnect.Serialize()}";
+                client.Logger.Debug($"{nameof(Gateway)}.{nameof(UpdateGatewayUrl)} Updated Gateway Url: {WebsocketUrl}");
+                callback.Invoke();
+            });
         }
     }
 }

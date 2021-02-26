@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -17,7 +16,6 @@ using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using WebSocketSharp;
-using LogLevel = Oxide.Ext.Discord.Logging.LogLevel;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
@@ -26,11 +24,6 @@ namespace Oxide.Ext.Discord.WebSockets
     /// </summary>
     public class SocketListener
     {
-        /// <summary>
-        /// How many times we have tried to reconnect to discord unsuccessfully
-        /// </summary>
-        private int Retries;
-        
         private readonly BotClient _client;
 
         private readonly Socket _webSocket;
@@ -59,7 +52,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _logger.Info("Discord socket opened!");
             _client.CallHook("DiscordSocket_WebSocketOpened");
-            Retries = 0;
+            _webSocket.SocketState = SocketState.Connected;
         }
 
         /// <summary>
@@ -69,27 +62,35 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <param name="e"></param>
         public void SocketClosed(object sender, CloseEventArgs e)
         {
+            //If the socket close came from the extension then this will be true
+            if (sender is WebSocket socket && !_webSocket.IsCurrentSocket(socket))
+            {
+                _logger.Debug($"{nameof(SocketListener)}.{nameof(SocketClosed)} Socket closed event for non matching socket. Code: {e.Code}, reason: {e.Reason}");
+                return;
+            }
+            
             if (e.Code == 1000 || e.Code == 4199)
             {
-                _logger.Debug($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
+                _logger.Debug($"{nameof(SocketListener)}.{nameof(SocketClosed)} Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
             }
             else
             {
-                _logger.Warning($"Discord WebSocket closed. Code: {e.Code}, reason: {e.Reason}");
+                _logger.Warning($"Discord WebSocket closed with abnormal close code. Code: {e.Code}, reason: {e.Reason}");
             }
             
             _client.CallHook("DiscordSocket_WebSocketClosed", e.Reason, e.Code, e.WasClean);
-            _webSocket.DisposeSocket();
+            _webSocket.SocketState = SocketState.Disconnected;
+            _webSocket.SocketClosed();
 
             if (!_client.Initialized)
             {
                 return;
             }
             
-            if (_webSocket.RequestReconnect)
+            if (_webSocket.RequestedReconnect)
             {
-                _webSocket.RequestReconnect = false;
-                _client.ConnectWebSocket();
+                _webSocket.RequestedReconnect = false;
+                _webSocket.Reconnect();
                 return;
             }
 
@@ -98,20 +99,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
 
-            _webSocket.StartReconnectTimer(Retries < 3 ? 1f : 15f, () =>
-            {
-                Retries++;
-                _logger.Warning($"Attempting to reconnect to Discord... [Retry={Retries}]");
-                if (Retries <= 8)
-                {
-                    _client.ConnectWebSocket();
-                }
-                else
-                {
-                    //If more than 8 tries something could be wrong on discords end. Try and fetch the websocket url
-                    _client.UpdateGatewayUrl(_client.ConnectWebSocket);
-                }
-            });
+            _webSocket.Reconnect();
         }
 
         /// <summary>
@@ -212,7 +200,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if (reconnect)
             {
                 _webSocket.ShouldAttemptResume = false;
-                _client.ConnectWebSocket();
+                _webSocket.Reconnect();
             }
             
             return true;
@@ -225,10 +213,13 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <param name="e"></param>
         public void SocketErrored(object sender, ErrorEventArgs e)
         {
-            _logger.Exception("An error has occured in the websocket", e.Exception);
+            if (sender is WebSocket socket && !_webSocket.IsCurrentSocket(socket))
+            {
+                return;
+            }
+            
             _client.CallHook("DiscordSocket_WebSocketErrored", e.Exception, e.Message);
-
-            _logger.Warning("Attempting to reconnect to Discord...");
+            _logger.Exception("An error has occured in the websocket. Attempting to reconnect to discord.", e.Exception);
             _webSocket.Disconnect(true, false);
         }
 
@@ -496,12 +487,17 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.SessionId = ready.SessionId;
             _client.Application = ready.Application;
             _client.Bot = ready.User;
+            _webSocket.ReconnectRetries = 0;
             _logger.Info($"Your bot was found in {ready.Guilds.Count} Guilds!");
 
             if (_client.ReadyData == null)
             {
                 _client.ReadyData = ready;
                 _client.CallHook("Discord_Ready", ready, false);
+            }
+            else
+            {
+                _client.ProcessPendingClients();
             }
         }
 
