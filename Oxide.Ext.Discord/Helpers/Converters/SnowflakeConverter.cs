@@ -26,7 +26,13 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                     return new Snowflake(ulong.Parse(reader.Value.ToString()));
 
                 case JsonToken.String:
-                    if (Snowflake.TryParse(reader.Value.ToString(), out Snowflake snowflake))
+                    string value = reader.Value.ToString();
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        return default(Snowflake);
+                    }
+                    
+                    if (Snowflake.TryParse(value, out Snowflake snowflake))
                     {
                         return snowflake;
                     }
@@ -55,7 +61,13 @@ namespace Oxide.Ext.Discord.Helpers.Converters
         /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((Snowflake) value).ToString());
+            Snowflake snowflake = (Snowflake) value;
+            if (!snowflake.IsValid())
+            {
+                writer.WriteValue(string.Empty);
+            }
+            
+            writer.WriteValue(snowflake.ToString());
         }
 
         /// <summary>
