@@ -274,6 +274,12 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateDirectMessageChannel(DiscordClient client, Snowflake userId, Action<Channel> callback, Action<RestError> error = null)
         {
+            if (userId == client.Bot.Bot.Id)
+            {
+                client.Logger.Error("Tried to create a direct message to the bot which is not allowed.");
+                return;
+            }
+            
             Channel channel = client.Bot.DirectMessagesByUserId[userId];
             if (channel != null)
             {
@@ -287,7 +293,7 @@ namespace Oxide.Ext.Discord.Entities.Users
 
             client.Bot.Rest.DoRequest<Channel>("/users/@me/channels", RequestMethod.POST, data, newChannel =>
             {
-                client.Bot.AddOrUpdateDirectMessageChannel(newChannel);
+                client.Bot.AddDirectChannel(newChannel);
                 callback?.Invoke(newChannel);
             }, error);
         }
@@ -376,8 +382,9 @@ namespace Oxide.Ext.Discord.Entities.Users
             client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, error);
         }
 
-        internal void Update(DiscordUser update)
+        internal DiscordUser Update(DiscordUser update)
         {
+            DiscordUser previous = (DiscordUser)MemberwiseClone();
             if (update.Username != null)
             {
                 Username = update.Username;
@@ -432,6 +439,8 @@ namespace Oxide.Ext.Discord.Entities.Users
             {
                 PublicFlags = update.PublicFlags;
             }
+
+            return previous;
         }
 
         /// <summary>

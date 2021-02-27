@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -10,8 +11,8 @@ using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.WebSockets;
@@ -222,19 +223,19 @@ namespace Oxide.Ext.Discord
                     if (ReadyData != null)
                     {
                         ReadyData.Guilds = Servers.Values.ToList();
-                        client.CallHook("Discord_Ready", ReadyData, true);
+                        client.CallHook(DiscordHooks.OnDiscordGatewayReady, ReadyData, true);
                     }
 
                     foreach (Guild guild in Servers.Values)
                     {
                         if (guild.IsAvailable)
                         {
-                            client.CallHook("Discord_GuildCreate", guild, true);
+                            client.CallHook(DiscordHooks.OnDiscordGuildCreated, guild, true);
                         }
 
                         if (MembersLoaded.Contains(guild.Id))
                         {
-                            client.CallHook("Discord_GuildMembersLoaded", guild, true);
+                            client.CallHook(DiscordHooks.OnDiscordGuildMembersLoaded, guild, true);
                         }
                     }
                 }
@@ -323,6 +324,7 @@ namespace Oxide.Ext.Discord
             _timer.Elapsed += HeartbeatElapsed;
             _timer.Start();
             _logger.Debug($"{nameof(DiscordClient)}.{nameof(SetupHeartbeat)} Creating heartbeat with interval {heartbeatInterval}ms.");
+            CallHook(DiscordHooks.OnDiscordSetupHeartbeat, heartbeatInterval);
         }
 
         /// <summary>
@@ -387,7 +389,7 @@ namespace Oxide.Ext.Discord
             
             HeartbeatAcknowledged = false;
             _webSocket.Send(GatewayCommandCode.Heartbeat, Sequence);
-            CallHook("DiscordSocket_HeartbeatSent");
+            CallHook(DiscordHooks.OnDiscordHeartbeatSent);
             _logger.Debug($"Heartbeat sent - {_timer.Interval}ms interval.");
         }
         #endregion
@@ -499,11 +501,30 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Returns a guild for the specific ID
         /// </summary>
-        /// <param name="id">ID of the guild</param>
+        /// <param name="guildId">ID of the guild</param>
         /// <returns>Guild with the specified ID</returns>
-        public Guild GetGuild(Snowflake id)
+        public Guild GetGuild(Snowflake? guildId)
         {
-            return Servers[id];
+            if (guildId.HasValue && guildId.Value.IsValid())
+            {
+                return Servers[guildId.Value];
+            }
+
+            return null;
+        }
+        
+        /// <summary>
+        /// Returns the channel for the given channel ID.
+        /// If guild ID is null it will search for a direct message channel
+        /// If guild ID is not null it will search for a guild channel
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <param name="guildId"></param>
+        /// <returns></returns>
+        public Channel GetChannel(Snowflake channelId, Snowflake? guildId)
+        {
+            Guild guild = GetGuild(guildId);
+            return guild?.Channels[channelId] ?? DirectMessagesByChannelId[channelId];
         }
 
         /// <summary>
@@ -541,35 +562,57 @@ namespace Oxide.Ext.Discord
         internal void RemoveGuild(Snowflake guildId)
         {
             Servers.Remove(guildId);
+            MembersLoaded.Remove(guildId);
         }
 
         /// <summary>
-        /// Adds a direct message channel if it doesnt exist. If it does it updates it
+        /// Adds a Direct Message Channel to the bot cache
         /// </summary>
-        /// <param name="channel"></param>
-        public void AddOrUpdateDirectMessageChannel(Channel channel)
+        /// <param name="channel">Channel to be added</param>
+        public void AddDirectChannel(Channel channel)
         {
             if (channel.Type != ChannelType.Dm)
             {
-                _logger.Warning($"{nameof(BotClient)}.{nameof(AddOrUpdateDirectMessageChannel)} Tried to add non DM channel");
+                _logger.Warning($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Tried to add non DM channel");
                 return;
             }
             
+            _logger.Verbose($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Adding New Channel {channel.Id}");
+            DirectMessagesByChannelId[channel.Id] = channel;
+            Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !(r.Bot ?? false))?.Id;
+            if (toId.HasValue && channel.Recipients.Count == 2)
+            {
+                DirectMessagesByUserId[toId.Value] = channel;
+            }
+        }
+
+        /// <summary>
+        /// Updates a direct message channel if it exists
+        /// </summary>
+        /// <param name="channel">Updated channel</param>
+        /// <returns>Returns the channel before the update</returns>
+        public Channel UpdateDirectMessageChannel(Channel channel)
+        {
             Channel existing = DirectMessagesByChannelId[channel.Id];
             if (existing != null)
             {
-                _logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Updating Existing Channel {channel.Id}");
-                existing.Update(channel);
+                _logger.Verbose($"{nameof(BotClient)}.{nameof(UpdateDirectMessageChannel)} Updating Existing Channel {channel.Id}");
+                return existing.Update(channel);
             }
-            else
+
+            return null;
+        }
+        
+        /// <summary>
+        /// Removes a direct message channel if it exists
+        /// </summary>
+        /// <param name="id">ID of the channel to remove</param>
+        public void RemoveDirectMessageChannel(Snowflake id)
+        {
+            Channel existing = DirectMessagesByChannelId[id];
+            if (existing != null)
             {
-                _logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Adding New Channel {channel.Id}");
-                DirectMessagesByChannelId[channel.Id] = channel;
-                Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !(r.Bot ?? false))?.Id;
-                if (toId.HasValue && channel.Recipients.Count == 2)
-                {
-                    DirectMessagesByUserId[toId.Value] = channel;
-                }
+                DirectMessagesByUserId.RemoveAll(c => c.Id == id);
             }
         }
 

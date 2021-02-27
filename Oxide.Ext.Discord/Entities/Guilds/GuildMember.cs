@@ -67,11 +67,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonProperty("pending")]
         public bool? Pending { get; set; }
 
-        internal void Update(GuildMemberUpdatedEvent update)
+        internal GuildMember Update(GuildMember update)
         {
+            GuildMember previous = (GuildMember)MemberwiseClone();
             if (update.User != null)
             {
-                User.Update(update.User);
+                previous.User = User.Update(update.User);
             }
                     
             if (update.Nick != null)
@@ -93,6 +94,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             {
                 Pending = update.Pending;
             }
+
+            return previous;
         }
         
         /// <summary>

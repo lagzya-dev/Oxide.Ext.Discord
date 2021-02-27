@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Emojis;
+using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
@@ -19,7 +21,8 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// <summary>
         /// List of emojis
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<Emoji>))]
         [JsonProperty("emojis")]
-        public List<Emoji> Emojis { get; set; }
+        public Hash<Snowflake, Emoji> Emojis { get; set; }
     }
 }

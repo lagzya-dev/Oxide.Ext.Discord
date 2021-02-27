@@ -68,7 +68,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// Whether this user is streaming using "Go Live"
         /// </summary>
         [JsonProperty("self_stream")]
-        public bool SelfStream { get; set; }
+        public bool? SelfStream { get; set; }
         
         /// <summary>
         /// Whether this user's camera is enabled

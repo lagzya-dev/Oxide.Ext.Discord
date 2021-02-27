@@ -64,8 +64,9 @@ namespace Oxide.Ext.Discord.Entities.Roles
         [JsonProperty("tags")]
         public RoleTags Tags { get; set; }
 
-        internal void UpdateRole(Role role)
+        internal Role UpdateRole(Role role)
         {
+            Role previous = (Role)MemberwiseClone();
             if (role.Name != null)
             {
                 Name = role.Name;
@@ -82,6 +83,8 @@ namespace Oxide.Ext.Discord.Entities.Roles
             {
                 Tags = role.Tags;
             }
+
+            return previous;
         }
         
         /// <summary>

@@ -220,12 +220,22 @@
             </summary>
             <param name="statusUpdate"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.GetGuild(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.BotClient.GetGuild(System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
             <summary>
             Returns a guild for the specific ID
             </summary>
-            <param name="id">ID of the guild</param>
+            <param name="guildId">ID of the guild</param>
             <returns>Guild with the specified ID</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.GetChannel(Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
+            <summary>
+            Returns the channel for the given channel ID.
+            If guild ID is null it will search for a direct message channel
+            If guild ID is not null it will search for a guild channel
+            </summary>
+            <param name="channelId"></param>
+            <param name="guildId"></param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.AddGuild(Oxide.Ext.Discord.Entities.Guilds.Guild)">
             <summary>
@@ -245,11 +255,24 @@
             </summary>
             <param name="guildId">Guild to remove from bot</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.AddOrUpdateDirectMessageChannel(Oxide.Ext.Discord.Entities.Channels.Channel)">
+        <member name="M:Oxide.Ext.Discord.BotClient.AddDirectChannel(Oxide.Ext.Discord.Entities.Channels.Channel)">
             <summary>
-            Adds a direct message channel if it doesnt exist. If it does it updates it
+            Adds a Direct Message Channel to the bot cache
             </summary>
-            <param name="channel"></param>
+            <param name="channel">Channel to be added</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.UpdateDirectMessageChannel(Oxide.Ext.Discord.Entities.Channels.Channel)">
+            <summary>
+            Updates a direct message channel if it exists
+            </summary>
+            <param name="channel">Updated channel</param>
+            <returns>Returns the channel before the update</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.RemoveDirectMessageChannel(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Removes a direct message channel if it exists
+            </summary>
+            <param name="id">ID of the channel to remove</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig">
             <summary>
@@ -282,6 +305,577 @@
             Load the config file and populate it.
             </summary>
             <param name="filename"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Constants.DiscordHooks">
+            <summary>
+            Represents all hooks available in the discord extension
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordWebsocketOpened">
+            <code>
+            void OnDiscordWebsocketOpened()
+            {
+                Puts("OnDiscordWebsocketOpened Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordWebsocketClosed">
+            <code>
+            void OnDiscordWebsocketClosed(string reason, ushort code, bool wasClean)
+            {
+                Puts("OnDiscordWebsocketClosed Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordWebsocketErrored">
+            <code>
+            void OnDiscordWebsocketErrored(Exception ex, string message)
+            {
+                Puts("OnDiscordWebsocketErrored Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordSetupHeartbeat">
+            <code>
+            void OnDiscordSetupHeartbeat(float heartbeat)
+            {
+                Puts("OnDiscordHeartbeatSent Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordHeartbeatSent">
+            <code>
+            void OnDiscordHeartbeatSent()
+            {
+                Puts("OnDiscordHeartbeatSent Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordPlayerLinked">
+            <code>
+            void OnDiscordPlayerLinked(IPlayer player, DiscordUser discord)
+            {
+                Puts("OnDiscordPlayerLinked Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordPlayerUnlinked">
+            <code>
+            void OnDiscordPlayerUnlinked(IPlayer player, DiscordUser discord)
+            {
+                Puts("OnDiscordPlayerUnlinked Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGatewayReady">
+            <code>
+            void OnDiscordGatewayReady(GatewayReadyEvent ready, bool previouslyConnected)
+            {
+                Puts("OnDiscordGatewayReady Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGatewayResumed">
+            <code>
+            void OnDiscordGatewayResumed(GatewayResumedEvent resume)
+            {
+                Puts("OnDiscordGatewayResumed Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectChannelCreated">
+            <code>
+            void OnDiscordDirectChannelCreated(Channel channel)
+            {
+                Puts("OnDiscordDirectChannelCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildChannelCreated">
+            <code>
+            void OnDiscordGuildChannelCreated(Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildChannelCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectChannelUpdated">
+            <code>
+            Note: previous will be null if previous channel not found
+            void OnDiscordDirectChannelUpdated(Channel channel, Channel previous)
+            {
+                Puts("OnDiscordDirectChannelUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildChannelUpdated">
+            <code>
+            Note: previous will be null if previous channel not found
+            void OnDiscordGuildChannelUpdated(Channel channel, Channel previous, Guild guild)
+            {
+                Puts("OnDiscordGuildChannelUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectChannelDeleted">
+            <code>
+            Note: Not sure if this will ever happen but we handle it if it does
+            void OnDiscordDirectChannelDeleted(Channel channel)
+            {
+                Puts("OnDiscordDirectChannelDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildChannelDeleted">
+            <code>
+            void OnDiscordGuildChannelDeleted(Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildChannelDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectChannelPinsUpdated">
+            <code>
+            Note: Channel will be null we haven't seen it yet
+            void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel)
+            {
+                Puts("OnDiscordDirectChannelPinsUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildChannelPinsUpdated">
+            <code>
+            void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildChannelPinsUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildCreated">
+            <code>
+            void OnDiscordGuildCreated(Guild guild, bool previouslyConnected)
+            {
+                Puts("OnDiscordGuildCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildUpdated">
+            <code>
+            Note: previous will be null if guild previously not loaded
+            void OnDiscordGuildUpdated(Guild guild, Guild previous)
+            {
+                Puts("OnDiscordGuildUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildUnavailable">
+            <code>
+            void OnDiscordGuildUnavailable(Guild guild)
+            {
+                Puts("OnDiscordGuildUnavailable Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildDeleted">
+            <code>
+            void OnDiscordGuildDeleted(Guild guild)
+            {
+                Puts("OnDiscordGuildDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildBanAdded">
+            <code>
+            void OnDiscordGuildBanAdded(GuildMemberBannedEvent ban, Guild guild)
+            {
+                Puts("OnDiscordGuildBanAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildBanRemoved">
+            <code>
+            void OnDiscordGuildBanRemoved(GuildMemberBannedEvent ban, Guild guild)
+            {
+                Puts("OnDiscordGuildBanRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildEmojisUpdated">
+            <code>
+            void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, Emoji&gt; previous, Guild guild)
+            {
+                Puts("OnDiscordGuildEmojisUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildIntegrationsUpdated">
+            <code>
+            void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, Guild guild)
+            {
+                Puts("OnDiscordGuildIntegrationsUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberAdded">
+            <code>
+            void OnDiscordGuildMemberAdded(GuildMemberAddedEvent member, Guild guild)
+            {
+                Puts("OnDiscordGuildMemberAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberRemoved">
+            <code>
+            void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, Guild guild)
+            {
+                Puts("OnDiscordGuildMemberRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberUpdated">
+            <code>
+            void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, Guild guild)
+            {
+                Puts("OnDiscordGuildMemberUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMembersLoaded">
+            <code>
+            void OnDiscordGuildMembersLoaded(Guild guild)
+            {
+                Puts("OnDiscordGuildMembersLoaded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMembersChunk">
+            <code>
+            void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, Guild guild)
+            {
+                Puts("OnDiscordGuildMembersChunk Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildRoleCreated">
+            <code>
+            void OnDiscordGuildRoleCreated(Role role, Guild guild)
+            {
+                Puts("OnDiscordGuildRoleCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildRoleUpdated">
+            <code>
+            void OnDiscordGuildRoleUpdated(Role role, Role previous, Guild guild)
+            {
+                Puts("OnDiscordGuildRoleUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildRoleDeleted">
+            <code>
+            void OnDiscordGuildRoleDeleted(Role role, Guild guild)
+            {
+                Puts("OnDiscordGuildRoleDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordCommand">
+            <code>
+            void OnDiscordCommand(DiscordMessage message, string cmd, string[] args)
+            {
+                Puts("OnDiscordCommand Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageCreated">
+            <code>
+            Note: Channel may be null if we haven't seen it yet
+            void OnDiscordDirectMessageCreated(DiscordMessage message, Channel channel)
+            {
+                Puts("OnDiscordDirectMessageCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageCreated">
+            <code>
+            void OnDiscordGuildMessageCreated(DiscordMessage message, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildMessageCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageUpdated">
+            <code>
+            void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
+            {
+                Puts("OnDiscordDirectMessageUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageUpdated">
+            <code>
+            void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
+            {
+                Puts("OnDiscordDirectMessageUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageDeleted">
+            <code>
+            void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel)
+            {
+                Puts("OnDiscordDirectMessageDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageDeleted">
+            <code>
+            void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordDirectMessageDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessagesBulkDeleted">
+            <code>
+            void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel)
+            {
+                Puts("OnDiscordDirectMessagesBulkDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessagesBulkDeleted">
+            <code>
+            void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildMessagesBulkDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageReactionAdded">
+            <code>
+            void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel)
+            {
+                Puts("OnDiscordDirectMessageReactionAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageReactionAdded">
+            <code>
+            void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildMessageReactionAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageReactionRemoved">
+            <code>
+            void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel)
+            {
+                Puts("OnDiscordDirectMessageReactionRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageReactionRemoved">
+            <code>
+            void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildMessageReactionRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageReactionRemovedAll">
+            <code>
+            void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+            {
+                Puts("OnDiscordDirectMessageReactionRemovedAll Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageReactionRemovedAll">
+            <code>
+            void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildMessageReactionRemovedAll Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageReactionEmojiRemoved">
+            <code>
+            void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+            {
+                Puts("OnDiscordDirectMessageReactionEmojiRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageReactionEmojiRemoved">
+            <code>
+            void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildMessageReactionEmojiRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberPresenceUpdated">
+            <code>
+            void OnDiscordGuildMemberPresenceUpdated(DiscordUser user, DiscordUser previous, Guild guild)
+            {
+                Puts("OnDiscordGuildMemberPresenceUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectTypingStarted">
+            <code>
+            void OnDiscordDirectTypingStarted(DiscordUser user, DiscordUser previous)
+            {
+                Puts("OnDiscordDirectTypingStarted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildTypingStarted">
+            <code>
+            void OnDiscordGuildTypingStarted(DiscordUser user, DiscordUser previous, Guild guild)
+            {
+                Puts("OnDiscordGuildTypingStarted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordUserUpdated">
+            <code>
+            void OnDiscordUserUpdated(DiscordUser user)
+            {
+                Puts("OnDiscordUserUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectVoiceStateUpdated">
+            <code>
+            void OnDiscordDirectVoiceStateUpdated(VoiceState voice, Channel channel)
+            {
+                Puts("OnDiscordDirectVoiceStateUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildVoiceStateUpdated">
+            <code>
+            void OnDiscordGuildVoiceStateUpdated(VoiceState voice, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildVoiceStateUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildVoiceServerUpdated">
+            <code>
+            void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildVoiceServerUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildWebhookUpdated">
+            <code>
+            void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildWebhookUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectInviteCreated">
+            <code>
+            void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, Channel channel)
+            {
+                Puts("OnDiscordDirectInviteCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildInviteCreated">
+            <code>
+            void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildInviteCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectInviteDeleted">
+            <code>
+            void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, Channel channel)
+            {
+                Puts("OnDiscordDirectInviteDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildInviteDeleted">
+            <code>
+            void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, Channel channel, Guild guild)
+            {
+                Puts("OnDiscordGuildInviteDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordInteractionCreated">
+            <code>
+            void OnDiscordInteractionCreated(Interaction interaction)
+            {
+                Puts("OnDiscordInteractionCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordIntegrationCreated">
+            <code>
+            void OnDiscordIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+            {
+                Puts("OnDiscordIntegrationCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordIntegrationUpdated">
+            <code>
+            void OnDiscordIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
+            {
+                Puts("OnDiscordIntegrationUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordIntegrationDeleted">
+            <code>
+            void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, Guild guild)
+            {
+                Puts("OnDiscordIntegrationDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordApplicationCommandCreated">
+            <code>
+            void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, Guild guild)
+            {
+                Puts("OnDiscordApplicationCommandCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordApplicationCommandUpdated">
+            <code>
+            void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, Guild guild)
+            {
+                Puts("OnDiscordApplicationCommandUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordApplicationCommandDeleted">
+            <code>
+            void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, Guild guild)
+            {
+                Puts("OnDiscordApplicationCommandDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordUnhandledCommand">
+            <code>
+            void OnDiscordUnhandledCommand(EventPayload payload)
+            {
+                Puts("OnDiscordUnhandledCommand Works!");
+            }
+            </code>
         </member>
         <member name="T:Oxide.Ext.Discord.DiscordClient">
             <summary>
@@ -3375,12 +3969,12 @@
             List of emojis
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildIntergrationsUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildIntegrationsUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-integrations-update">Guild Integrations Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildIntergrationsUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildIntegrationsUpdatedEvent.GuildId">
             <summary>
             ID of the guild whose integrations were updated
             </summary>
@@ -3474,36 +4068,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberUpdatedEvent.GuildId">
             <summary>
             The id of the guild
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberUpdatedEvent.Roles">
-            <summary>
-            User role ids
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberUpdatedEvent.User">
-            <summary>
-            The user
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberUpdatedEvent.Nick">
-            <summary>
-            Nickname of the user in the guild
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberUpdatedEvent.JoinedAt">
-            <summary>
-            When the user joined the guild
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberUpdatedEvent.PremiumSince">
-            <summary>
-            When the user starting boosting the guild
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberUpdatedEvent.Pending">
-            <summary>
-            Whether the user has not yet passed the guild's Membership Screening requirements
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleCreatedEvent">
@@ -8587,6 +9151,15 @@
             <param name="predicate">Filter of which values to remove</param>
             <typeparam name="TKey">Key type of the hash</typeparam>
             <typeparam name="TValue">Value type of the hash</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.HashExt.Copy``2(Oxide.Plugins.Hash{``0,``1})">
+            <summary>
+            Creates a copy of a hash with it's current key value pairs
+            </summary>
+            <param name="hash">Hash to be copied</param>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <returns>Copied Hash</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.PlayerExt">
             <summary>
