@@ -4,6 +4,7 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Plugins;
@@ -294,14 +295,14 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         {
             _discordIdToSteamId[discord.Id] = player.Id;
             _steamIdToDiscordId[player.Id] = discord.Id;
-            DiscordClient.GlobalCallHook("Discord_OnPlayerLinked", player, discord);
+            DiscordClient.GlobalCallHook(DiscordHooks.OnDiscordPlayerLinked, player, discord);
         }
 
         private void OnUnlinked(IPlayer player, DiscordUser discord)
         {
             _discordIdToSteamId.Remove(discord.Id);
             _steamIdToDiscordId.Remove(player.Id);
-            DiscordClient.GlobalCallHook("Discord_OnPlayerUnlinked", player, discord);
+            DiscordClient.GlobalCallHook(DiscordHooks.OnDiscordPlayerUnlinked, player, discord);
         }
     }
 }

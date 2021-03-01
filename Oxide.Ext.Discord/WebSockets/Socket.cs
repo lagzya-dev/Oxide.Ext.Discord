@@ -147,6 +147,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             
             Disconnect(false, false);
+            _listener?.Shutdown();
             _listener = null;
             _socket = null;
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Timers;
 using Oxide.Core;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -11,13 +12,12 @@ using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.WebSockets;
 using Oxide.Plugins;
-using Timer = System.Timers.Timer;
 
 namespace Oxide.Ext.Discord
 {
@@ -30,26 +30,11 @@ namespace Oxide.Ext.Discord
         /// List of active bots by bot API key
         /// </summary>
         public static readonly Hash<string, BotClient> ActiveBots = new Hash<string, BotClient>();
-        
-        /// <summary>
-        /// The current session ID for the connected bot
-        /// </summary>
-        internal string SessionId;
-        
-        /// <summary>
-        /// The current sequence number for the websocket
-        /// </summary>
-        internal int Sequence;
-        
+
         /// <summary>
         /// If the connection is initialized and not disconnected
         /// </summary>
         public bool Initialized;
-        
-        /// <summary>
-        /// Discord Acknowledged our heartbeat successfully 
-        /// </summary>
-        public bool HeartbeatAcknowledged;
 
         /// <summary>
         /// The settings for this bot of all the combined clients
@@ -70,12 +55,7 @@ namespace Oxide.Ext.Discord
         /// All the direct messages that we have seen by User ID
         /// </summary>
         public readonly Hash<Snowflake, Channel> DirectMessagesByUserId = new Hash<Snowflake, Channel>();
-        
-        /// <summary>
-        /// List of all clients that are using this bot client
-        /// </summary>
-        public readonly List<DiscordClient> Clients = new List<DiscordClient>();
-        
+
         /// <summary>
         /// Application reference for this bot
         /// </summary>
@@ -92,12 +72,17 @@ namespace Oxide.Ext.Discord
         public RestHandler Rest { get; private set; }
         
         internal readonly ILogger Logger;
+        
         internal GatewayReadyEvent ReadyData;
         internal readonly List<Snowflake> MembersLoaded = new List<Snowflake>();
         internal readonly List<DiscordClient> ClientsPendingConnection = new List<DiscordClient>();
-        
-        private Socket _webSocket;
-        private Timer _timer;
+
+        internal Socket WebSocket;
+
+        /// <summary>
+        /// List of all clients that are using this bot client
+        /// </summary>
+        private readonly List<DiscordClient> _clients = new List<DiscordClient>();
         
         /// <summary>
         /// Creates a new bot client for the given settings
@@ -113,6 +98,11 @@ namespace Oxide.Ext.Discord
             };
 
             Logger = new Logger(Settings.LogLevel);
+            
+            Initialized = true;
+            
+            Rest = new RestHandler(this, Logger);
+            WebSocket = new Socket(this, Logger);
         }
         
         /// <summary>
@@ -134,22 +124,7 @@ namespace Oxide.Ext.Discord
             DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {client.Owner.Name} to bot {bot.Bot?.GetFullUserName}");
             return bot;
         }
-        
-        private void Connect()
-        {
-            if (Initialized)
-            {
-                throw new Exception("Bot Client already initialized");
-            }
 
-            Initialized = true;
-            
-            Rest = new RestHandler(this, Logger);
-            _webSocket = new Socket(this, Logger);
-
-            ConnectWebSocket();
-        }
-        
         /// <summary>
         /// Connects the websocket to discord. Should only be called if the websocket is disconnected
         /// </summary>
@@ -158,7 +133,7 @@ namespace Oxide.Ext.Discord
             if (Initialized)
             {
                 Logger.Debug($"{nameof(BotClient)}.{nameof(ConnectWebSocket)} Connecting to websocket");
-                _webSocket.Connect();
+                WebSocket.Connect();
             }
         }
         
@@ -171,21 +146,20 @@ namespace Oxide.Ext.Discord
         {
             if (Initialized)
             {
-                _webSocket.Disconnect(attemptReconnect, attemptResume);
+                WebSocket.Disconnect(attemptReconnect, attemptResume);
             }
         }
 
         /// <summary>
         /// Called when bot client is no longer used by any client and can be shutdown.
         /// </summary>
-        public void ShutdownBot()
+        internal void ShutdownBot()
         {
             Logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
             ActiveBots.Remove(Settings.ApiToken);
             Initialized = false;
-            _webSocket?.Shutdown();
-            _webSocket = null;
-            DestroyHeartbeat();
+            WebSocket?.Shutdown();
+            WebSocket = null;
             Rest?.Shutdown();
             Rest = null;
             ReadyData = null;
@@ -202,15 +176,15 @@ namespace Oxide.Ext.Discord
                 throw new Exception("Failed to add client to bot client as ApiTokens do not match");
             }
             
-            Clients.RemoveAll(c => c == client);
-            Clients.Add(client);
+            _clients.RemoveAll(c => c == client);
+            _clients.Add(client);
             
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {client.Owner.Title}");
             
-            if (Clients.Count == 1)
+            if (_clients.Count == 1)
             {
                 Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Clients.Count == 1 connecting bot");
-                Connect();
+                ConnectWebSocket();
             }
             else
             {
@@ -234,7 +208,7 @@ namespace Oxide.Ext.Discord
                     return;
                 }
                 
-                if (_webSocket.IsConnected())
+                if (WebSocket.IsConnected())
                 {
                     ProcessPendingClients();
                 }
@@ -248,19 +222,19 @@ namespace Oxide.Ext.Discord
                 if (ReadyData != null)
                 {
                     ReadyData.Guilds = Servers.Values.ToList();
-                    client.CallHook("Discord_Ready", ReadyData, true);
+                    client.CallHook(DiscordHooks.OnDiscordGatewayReady, ReadyData, true);
                 }
 
                 foreach (Guild guild in Servers.Values)
                 {
                     if (guild.IsAvailable)
                     {
-                        client.CallHook("Discord_GuildCreate", guild, true);
+                        client.CallHook(DiscordHooks.OnDiscordGuildCreated, guild, true);
                     }
 
                     if (MembersLoaded.Contains(guild.Id))
                     {
-                        client.CallHook("Discord_GuildMembersLoaded", guild, true);
+                        client.CallHook((DiscordHooks.OnDiscordGuildMembersLoaded, guild, true);
                     }
                 }
             }
@@ -284,14 +258,14 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            LogLevel level = Clients.Min(c => c.Settings.LogLevel);
+            LogLevel level = _clients.Min(c => c.Settings.LogLevel);
             if (level > Settings.LogLevel)
             {
                 UpdateLogLevel(level);
             }
 
             GatewayIntents intents = GatewayIntents.None;
-            foreach (DiscordClient exitingClients in Clients)
+            foreach (DiscordClient exitingClients in _clients)
             {
                 intents |= exitingClients.Settings.Intents;
             }
@@ -306,9 +280,9 @@ namespace Oxide.Ext.Discord
         
         private void UpdateLogLevel(LogLevel level)
         {
+            Logger.UpdateLogLevel(level);
             Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from:{Settings.LogLevel} to: {level}");
             Settings.LogLevel = level;
-            Logger.UpdateLogLevel(level);
         }
 
         /// <summary>
@@ -318,100 +292,24 @@ namespace Oxide.Ext.Discord
         /// <param name="args">Args for the hook</param>
         public void CallHook(string hookName, params object[] args)
         {
-            foreach (DiscordClient client in Clients)
+            foreach (DiscordClient client in _clients)
             {
                 client.CallHook(hookName, args);
             }
         }
-        
-        #region Heartbeat
-        /// <summary>
-        /// Setup a heartbeat for this bot with the given interval
-        /// </summary>
-        /// <param name="heartbeatInterval"></param>
-        internal void SetupHeartbeat(float heartbeatInterval)
-        {
-            if (_timer != null)
-            {
-                Logger.Debug($"{nameof(DiscordClient)}.{nameof(SetupHeartbeat)} Previous heartbeat timer exists.");
-                DestroyHeartbeat();
-            }
 
-            HeartbeatAcknowledged = true;
-            _timer = new Timer(heartbeatInterval);
-            _timer.Elapsed += HeartbeatElapsed;
-            _timer.Start();
-            Logger.Debug($"{nameof(DiscordClient)}.{nameof(SetupHeartbeat)} Creating heartbeat with interval {heartbeatInterval}ms.");
+        internal void UpdateGatewayUrl(Action callback)
+        {
+            Gateway.GetGateway(this, gateway =>
+            {
+                // Example: wss://gateway.discord.gg/?v=6&encoding=json
+                Gateway.WebsocketUrl = $"{gateway.Url}/?{GatewayConnect.Serialize()}";
+                _logger.Debug($"Got Gateway url: {gateway.Url}");
+                callback.Invoke();
+            });
         }
 
-        /// <summary>
-        /// Destroy the heartbeat on this bot
-        /// </summary>
-        public void DestroyHeartbeat()
-        {
-            if(_timer != null)
-            {
-                Logger.Debug($"{nameof(DiscordClient)}.{nameof(DestroyHeartbeat)} Destroy Heartbeat");
-                _timer.Dispose();
-                _timer = null;
-            }
-        }
-
-        private void HeartbeatElapsed(object sender, ElapsedEventArgs e)
-        {
-            Logger.Debug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed");
-            
-            if (_webSocket.IsPendingReconnect())
-            {
-                Logger.Debug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Websocket is offline and is waiting to connect.");
-                return;
-            }
-
-            if (_webSocket.IsDisconnected())
-            {
-                Logger.Debug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Websocket is offline and is NOT connecting. Attempt Reconnect.");
-                _webSocket.Reconnect();
-                return;
-            }
-            
-            if(!HeartbeatAcknowledged)
-            {
-                //Discord did not acknowledge our last sent heartbeat. This is a zombie connection we should reconnect with non 1000 close code.
-                if (_webSocket.IsConnected())
-                {
-                    Logger.Debug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and WebSocket is connected. Forcing reconnect.");
-                    _webSocket.Disconnect(true, true, true);
-                    return;
-                }
-
-                //Websocket isn't connected or waiting to reconnect. We should reconnect.
-                if (!_webSocket.IsConnecting() && !_webSocket.IsPendingReconnect())
-                {
-                    Logger.Debug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and bot is not online or connecting.");
-                    _webSocket.Reconnect();
-                    return;
-                }
-
-                Logger.Debug($"{nameof(DiscordClient)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and bot is not online but is waiting to connecting or waiting to reconnect.");
-                return;
-            }
-
-            SendHeartbeat();
-        }
-        
-        /// <summary>
-        /// Sends a heartbeat to discord.
-        /// If the previous heartbeat wasn't acknowledged then we will attempt to reconnect
-        /// </summary>
-        public void SendHeartbeat()
-        {
-            HeartbeatAcknowledged = false;
-            _webSocket.Send(GatewayCommandCode.Heartbeat, Sequence);
-            CallHook("DiscordSocket_HeartbeatSent");
-            Logger.Debug($"{nameof(BotClient)}.{nameof(SendHeartbeat)} Heartbeat sent to discord. Interval {_timer.Interval}ms.");
-        }
-        #endregion
-        
+        #region Websocket Commands
         /// <summary>
         /// Used to Identify the bot with discord
         /// </summary>
@@ -440,13 +338,13 @@ namespace Oxide.Ext.Discord
                 Shard = new List<int> { 0, 1 }
             };
             
-            _webSocket.Send(GatewayCommandCode.Identify, identify);
+            WebSocket.Send(GatewayCommandCode.Identify, identify);
         }
         
         /// <summary>
         /// Used to resume the current session with discord
         /// </summary>
-        internal void Resume()
+        internal void Resume(string sessionId, int sequence)
         {
             if (!Initialized)
             {
@@ -455,12 +353,20 @@ namespace Oxide.Ext.Discord
             
             ResumeSessionCommand resume = new ResumeSessionCommand
             {
-                Sequence = Sequence,
-                SessionId = SessionId,
+                Sequence = sequence,
+                SessionId = sessionId,
                 Token = Settings.ApiToken
             };
 
-            _webSocket.Send(GatewayCommandCode.Resume, resume);
+            WebSocket.Send(GatewayCommandCode.Resume, resume);
+        }
+
+        /// <summary>
+        /// Sends a heartbeat to Discord
+        /// </summary>
+        public void SendHeartbeat(int sequence)
+        {
+            WebSocket.Send(GatewayCommandCode.Heartbeat, sequence);
         }
         
         /// <summary>
@@ -474,7 +380,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            _webSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
+            WebSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
         }
 
         /// <summary>
@@ -488,7 +394,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            _webSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
+            WebSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
         }
 
         /// <summary>
@@ -502,17 +408,37 @@ namespace Oxide.Ext.Discord
                 return;
             }
             
-            _webSocket.Send(GatewayCommandCode.StatusUpdate, statusUpdate);
+            WebSocket.Send(GatewayCommandCode.StatusUpdate, statusUpdate);
         }
+        #endregion
 
+        #region Entity Helpers
         /// <summary>
         /// Returns a guild for the specific ID
         /// </summary>
-        /// <param name="id">ID of the guild</param>
+        /// <param name="guildId">ID of the guild</param>
         /// <returns>Guild with the specified ID</returns>
-        public Guild GetGuild(Snowflake id)
+        public Guild GetGuild(Snowflake? guildId)
         {
-            return Servers[id];
+            if (guildId.HasValue && guildId.Value.IsValid())
+            {
+                return Servers[guildId.Value];
+            }
+
+            return null;
+        }
+        
+        /// <summary>
+        /// Returns the channel for the given channel ID.
+        /// If guild ID is null it will search for a direct message channel
+        /// If guild ID is not null it will search for a guild channel
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <param name="guildId"></param>
+        /// <returns></returns>
+        public Channel GetChannel(Snowflake channelId, Snowflake? guildId)
+        {
+            return guildId.HasValue ? GetGuild(guildId)?.Channels[channelId] : DirectMessagesByChannelId[channelId];
         }
 
         /// <summary>
@@ -550,41 +476,50 @@ namespace Oxide.Ext.Discord
         internal void RemoveGuild(Snowflake guildId)
         {
             Servers.Remove(guildId);
+            MembersLoaded.Remove(guildId);
         }
 
         /// <summary>
-        /// Adds a direct message channel if it doesnt exist. If it does it updates it
+        /// Adds a Direct Message Channel to the bot cache
         /// </summary>
-        /// <param name="channel"></param>
-        public void AddOrUpdateDirectMessageChannel(Channel channel)
+        /// <param name="channel">Channel to be added</param>
+        public void AddDirectChannel(Channel channel)
         {
             if (channel.Type != ChannelType.Dm)
             {
-                Logger.Warning($"{nameof(BotClient)}.{nameof(AddOrUpdateDirectMessageChannel)} Tried to add non DM channel");
+                Logger.Warning($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Tried to add non DM channel");
                 return;
             }
             
-            Channel existing = DirectMessagesByChannelId[channel.Id];
-            if (existing != null)
+            Logger.Verbose($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Adding New Channel {channel.Id}");
+            DirectMessagesByChannelId[channel.Id] = channel;
+            Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !(r.Bot ?? false))?.Id;
+            if (toId.HasValue && channel.Recipients.Count == 2)
             {
-                Logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Updating Existing Channel {channel.Id}");
-                existing.Update(channel);
-            }
-            else
-            {
-                Logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Adding New Channel {channel.Id}");
-                DirectMessagesByChannelId[channel.Id] = channel;
-                Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !(r.Bot ?? false))?.Id;
-                if (toId.HasValue && channel.Recipients.Count == 2)
-                {
-                    DirectMessagesByUserId[toId.Value] = channel;
-                }
+                DirectMessagesByUserId[toId.Value] = channel;
             }
         }
 
+        /// <summary>
+        /// Removes a direct message channel if it exists
+        /// </summary>
+        /// <param name="id">ID of the channel to remove</param>
+        public void RemoveDirectMessageChannel(Snowflake id)
+        {
+            Channel existing = DirectMessagesByChannelId[id];
+            if (existing != null)
+            {
+                DirectMessagesByChannelId.Remove(id);
+                DirectMessagesByUserId.RemoveAll(c => c.Id == id);
+            }
+        }
+        #endregion
+
+        #region Discord Command Helpers
         internal bool IsPluginRegistered(Plugin plugin)
         {
-            return Clients.Any(t => t.RegisteredForHooks.Contains(plugin));
+            return _clients.Any(t => t.RegisteredForHooks.Contains(plugin));
         }
+        #endregion
     }
 }

@@ -29,5 +29,23 @@ namespace Oxide.Ext.Discord.Extensions
                 hash.Remove(key.Key);
             }
         }
+
+        /// <summary>
+        /// Creates a copy of a hash with it's current key value pairs
+        /// </summary>
+        /// <param name="hash">Hash to be copied</param>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <returns>Copied Hash</returns>
+        public static Hash<TKey, TValue> Copy<TKey, TValue>(this Hash<TKey, TValue> hash)
+        {
+            Hash<TKey, TValue> copy = new Hash<TKey, TValue>();
+            foreach (KeyValuePair<TKey, TValue> value in hash)
+            {
+                copy[value.Key] = value.Value;
+            }
+
+            return copy;
+        }
     }
 }

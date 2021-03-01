@@ -25,6 +25,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// The id of the guild
         /// </summary>
         [JsonProperty("guild_id")]
-        public Snowflake GuildId { get; set; }
+        public Snowflake? GuildId { get; set; }
     }
 }

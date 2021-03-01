@@ -484,8 +484,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
             client.Bot.Rest.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.DELETE, null, callback, error);
         }
 
-        internal void Update(Channel channel)
+        internal Channel Update(Channel channel)
         {
+            Channel previous = (Channel)MemberwiseClone();
             if (channel.Name != null)
             {
                 Name = channel.Name;
@@ -529,6 +530,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
             }
 
             ParentId = channel.ParentId;
+            return previous;
         }
 
         /// <summary>

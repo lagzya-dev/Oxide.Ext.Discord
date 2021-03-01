@@ -22,6 +22,8 @@ namespace Oxide.Ext.Discord.Rest
         private const int ResetInterval = ResetIntervalSeconds * 1000;
         private const int ResetIntervalSeconds = 60;
 
+        private readonly object _syncRoot = new object();
+        
         /// <summary>
         /// Creates a new global rate limit for a bot
         /// </summary>
@@ -35,7 +37,7 @@ namespace Oxide.Ext.Discord.Rest
 
         private void ResetGlobal(object sender, ElapsedEventArgs e)
         {
-            lock (this)
+            lock (_syncRoot)
             {
                 Global = 0;
                 _lastReset = Time.TimeSinceEpoch();
@@ -47,7 +49,7 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         public void FiredRequest()
         {
-            lock (this)
+            lock (_syncRoot)
             {
                 Global += 1;
             }
