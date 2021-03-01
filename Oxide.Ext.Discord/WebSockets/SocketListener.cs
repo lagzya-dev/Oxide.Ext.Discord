@@ -28,15 +28,24 @@ namespace Oxide.Ext.Discord.WebSockets
     public class SocketListener
     {
         /// <summary>
+        /// The current session ID for the connected bot
+        /// </summary>
+        internal string SessionId;
+        
+        /// <summary>
+        /// The current sequence number for the websocket
+        /// </summary>
+        internal int Sequence;
+        
+        /// <summary>
         /// How many times we have tried to reconnect to discord unsuccessfully
         /// </summary>
-        private int Retries;
+        private int _retries;
         
         private readonly BotClient _client;
-
         private readonly Socket _webSocket;
-
         private readonly ILogger _logger;
+        private HeartbeatHandler _heartbeat;
 
         /// <summary>
         /// Creates a new socket listener
@@ -49,6 +58,16 @@ namespace Oxide.Ext.Discord.WebSockets
             _client = client;
             _webSocket = socket;
             _logger = logger;
+            _heartbeat = new HeartbeatHandler(_client, this, _logger);
+        }
+
+        /// <summary>
+        /// Shutdown the SocketListener
+        /// </summary>
+        public void Shutdown()
+        {
+            _heartbeat?.DestroyHeartbeat();
+            _heartbeat = null;
         }
 
         /// <summary>
@@ -60,7 +79,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _logger.Info("Discord socket opened!");
             _client.CallHook(DiscordHooks.OnDiscordWebsocketOpened);
-            Retries = 0;
+            _retries = 0;
         }
 
         /// <summary>
@@ -99,11 +118,11 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
 
-            _webSocket.StartReconnectTimer(Retries < 3 ? 1f : 15f, () =>
+            _webSocket.StartReconnectTimer(_retries < 3 ? 1f : 15f, () =>
             {
-                Retries++;
-                _logger.Warning($"Attempting to reconnect to Discord... [Retry={Retries}]");
-                if (Retries <= 8)
+                _retries++;
+                _logger.Warning($"Attempting to reconnect to Discord... [Retry={_retries}]");
+                if (_retries <= 8)
                 {
                     _client.ConnectWebSocket();
                 }
@@ -243,7 +262,7 @@ namespace Oxide.Ext.Discord.WebSockets
             EventPayload payload = JsonConvert.DeserializeObject<EventPayload>(e.Data);
             if (payload.Sequence.HasValue)
             {
-                _client.Sequence = payload.Sequence.Value;
+                Sequence = payload.Sequence.Value;
             }
 
             _logger.Debug($"Received socket message, OpCode: {payload.OpCode}");
@@ -494,7 +513,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 _client.AddGuildOrUpdate(guild);
             }
-            _client.SessionId = ready.SessionId;
+            SessionId = ready.SessionId;
             _client.Application = ready.Application;
             _client.Bot = ready.User;
             _logger.Info($"Your bot was found in {ready.Guilds.Count} Guilds!");
@@ -1268,7 +1287,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleHeartbeat(EventPayload payload)
         {
             _logger.Debug("Manually sent heartbeat (received opcode 1)");
-            _client.SendHeartbeat();
+            SendHeartbeat();
         }
 
         //https://discord.com/developers/docs/topics/gateway#reconnect
@@ -1282,7 +1301,7 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#invalid-session
         private void HandleInvalidSession(EventPayload payload)
         {
-            bool shouldResume = !string.IsNullOrEmpty(_client.SessionId) && (payload.TokenData?.ToObject<bool>() ?? false);
+            bool shouldResume = !string.IsNullOrEmpty(SessionId) && (payload.TokenData?.ToObject<bool>() ?? false);
             _logger.Warning($"Invalid Session ID opcode received! Attempting to reconnect. Should Resume? {shouldResume}");
             _webSocket.Disconnect(true, shouldResume);
         }
@@ -1291,13 +1310,13 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleHello(EventPayload payload)
         {
             GatewayHelloEvent hello = payload.EventData.ToObject<GatewayHelloEvent>();
-            _client.SetupHeartbeat(hello.HeartbeatInterval);
+            _heartbeat.SetupHeartbeat(hello.HeartbeatInterval);
 
             // Client should now perform identification
-            if (_webSocket.ShouldAttemptResume)
+            if (_webSocket.ShouldAttemptResume && !string.IsNullOrEmpty(SessionId))
             {
-                _logger.Info($"{nameof(SocketListener)}.{nameof(HandleHello)} Attempting to resume session with ID: {_client.SessionId}");
-                _client.Resume();
+                _logger.Info($"{nameof(SocketListener)}.{nameof(HandleHello)} Attempting to resume session with ID: {SessionId}");
+                _client.Resume(SessionId, Sequence);
             }
             else
             {
@@ -1310,12 +1329,17 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#heartbeating
         private void HandleHeartbeatAcknowledge(EventPayload payload)
         {
-            _client.HeartbeatAcknowledged = true;
+            _heartbeat.HeartbeatAcknowledged = true;
         }
 
         private void UnhandledOpCode(EventPayload payload)
         {
             _logger.Warning($"Unhandled OP code: {payload.OpCode}. Please contact Discord Extension authors.");
+        }
+
+        internal void SendHeartbeat()
+        {
+            _client.SendHeartbeat(Sequence);
         }
     }
 }

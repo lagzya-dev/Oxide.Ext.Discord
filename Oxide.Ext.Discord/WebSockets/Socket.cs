@@ -65,8 +65,6 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 throw new Exception("Socket is already running. Please disconnect before attempting to connect.");
             }
-            
-            _client.DestroyHeartbeat();
 
             _socket = new WebSocket($"{url}/?{GatewayConnect.Serialize()}");
 
@@ -125,6 +123,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             
             Disconnect(false, false);
+            _listener?.Shutdown();
             _listener = null;
             _socket = null;
         }
