@@ -70,12 +70,12 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HeartbeatElapsed(object sender, ElapsedEventArgs e)
         {
             _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(HeartbeatElapsed)} heartbeat Elapsed");
-            if (!_client.WebSocket.IsAlive() && !_client.WebSocket.IsConnecting())
+            if (!_client.WebSocket.IsConnected() && !_client.WebSocket.IsConnecting())
             {
-                if (!_client.WebSocket.IsReconnectTimerActive())
+                if (!_client.WebSocket.IsPendingReconnect())
                 {
                     _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(HeartbeatElapsed)} Websocket is offline and is NOT connecting. Start reconnect timer.");
-                    _client.WebSocket.StartReconnectTimer(1f, () => _client.UpdateGatewayUrl(_client.ConnectWebSocket));
+                    _client.WebSocket.Reconnect();
                 }
                 else
                 {
@@ -88,14 +88,14 @@ namespace Oxide.Ext.Discord.WebSockets
             if(!HeartbeatAcknowledged)
             {
                 //Discord did not acknowledge our last sent heartbeat. This is a zombie connection we should reconnect.
-                if (_client.WebSocket.IsAlive())
+                if (_client.WebSocket.IsConnected())
                 {
                     _client.WebSocket.Disconnect(true, true, true);
                 }
-                else if (!_client.WebSocket.IsReconnectTimerActive())
+                else if (!_client.WebSocket.IsPendingReconnect())
                 {
                     _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SendHeartbeat)} Heartbeat Elapsed and bot is not online or connecting.");
-                    _client.WebSocket.StartReconnectTimer(1f, _client.ConnectWebSocket);
+                    _client.WebSocket.Reconnect();
                 }
                 else
                 {

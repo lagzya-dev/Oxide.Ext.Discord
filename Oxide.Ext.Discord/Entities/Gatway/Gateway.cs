@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         
         /// <summary>
         /// Saved Gateway URL
-        /// Example: wss://gateway.discord.gg/?v=8&encoding=json
+        /// Example: wss://gateway.discord.gg/?v=8&amp;encoding=json
         /// </summary>
         public static string WebsocketUrl { get; internal set; }
 

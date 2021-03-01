@@ -3,6 +3,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -72,7 +73,7 @@ namespace Oxide.Ext.Discord.WebSockets
         public void SocketOpened(object sender, EventArgs e)
         {
             _logger.Info("Discord socket opened!");
-            _client.CallHook(DiscordHooks.OnDiscordWebsocketOpened));
+            _client.CallHook(DiscordHooks.OnDiscordWebsocketOpened);
             _webSocket.SocketState = SocketState.Connected;
         }
 

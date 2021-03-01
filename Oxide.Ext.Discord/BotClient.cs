@@ -234,12 +234,12 @@ namespace Oxide.Ext.Discord
 
                     if (MembersLoaded.Contains(guild.Id))
                     {
-                        client.CallHook((DiscordHooks.OnDiscordGuildMembersLoaded, guild, true);
+                        client.CallHook(DiscordHooks.OnDiscordGuildMembersLoaded, guild, true);
                     }
                 }
             }
             
-            Clients.Clear();
+            _clients.Clear();
         }
 
         /// <summary>
@@ -249,9 +249,9 @@ namespace Oxide.Ext.Discord
         /// <param name="client">Client to remove from bot client</param>
         public void RemoveClient(DiscordClient client)
         {
-            Clients.Remove(client);
+            _clients.Remove(client);
             Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Client Removed");
-            if (Clients.Count == 0)
+            if (_clients.Count == 0)
             {
                 ShutdownBot();
                 Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Bot count 0 shutting down bot");
@@ -296,17 +296,6 @@ namespace Oxide.Ext.Discord
             {
                 client.CallHook(hookName, args);
             }
-        }
-
-        internal void UpdateGatewayUrl(Action callback)
-        {
-            Gateway.GetGateway(this, gateway =>
-            {
-                // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                Gateway.WebsocketUrl = $"{gateway.Url}/?{GatewayConnect.Serialize()}";
-                _logger.Debug($"Got Gateway url: {gateway.Url}");
-                callback.Invoke();
-            });
         }
 
         #region Websocket Commands
