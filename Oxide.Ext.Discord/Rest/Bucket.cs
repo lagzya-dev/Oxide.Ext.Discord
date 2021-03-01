@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
-    /// Represents a discord API buck for a group of requests
+    /// Represents a discord API bucket for a group of requests
     /// </summary>
-    public class Bucket : List<Request>
+    public class Bucket
     {
         /// <summary>
         /// The ID of this bucket which is based on the route
         /// </summary>
-        public string BucketId;
+        public readonly string BucketId;
         
         /// <summary>
         /// The number of requests that can be made
@@ -32,16 +33,18 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// How long to wait before retrying request since there was a web exception
         /// </summary>
-        public double ErrorResendDelayUntil;
+        public double ErrorDelayUntil;
 
         /// <summary>
-        /// Rest Handler for the bucker
+        /// Rest Handler for the bucket
         /// </summary>
         public readonly RestHandler Handler;
 
-        private Thread _thread;
-
         private readonly ILogger _logger;
+        private readonly List<Request> _requests = new List<Request>();
+        private readonly object _syncRoot = new object();
+        
+        private Thread _thread;
 
         /// <summary>
         /// Creates a new bucket for the given rest handler and bucket ID
@@ -77,11 +80,12 @@ namespace Oxide.Ext.Discord.Rest
         /// Queues a new request for the buck
         /// </summary>
         /// <param name="request">Request to be queued</param>
-        public void Queue(Request request)
+        public void QueueRequest(Request request)
         {
-            lock (this)
+            request.Bucket = this;
+            lock (_syncRoot)
             {
-                Add(request);
+                _requests.Add(request);
             }
 
             if (_thread == null || !_thread.IsAlive)
@@ -91,11 +95,24 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
 
+        /// <summary>
+        /// Removes the request from the queue.
+        /// Either the request completed successfully or there was an error and failed to succeed after 3 attempts
+        /// </summary>
+        /// <param name="request">Request to remove</param>
+        public void DequeueRequest(Request request)
+        {
+            lock (_syncRoot)
+            {
+                _requests.Remove(request);
+            }
+        }
+
         private void RunThread()
         {
             try
             {
-                while (Count > 0)
+                while (RequestCount() > 0)
                 {
                     FireRequests();
                 }
@@ -125,17 +142,17 @@ namespace Oxide.Ext.Discord.Rest
                 return;
             }
 
-            if (ErrorResendDelayUntil > timeSince)
+            if (ErrorDelayUntil > timeSince)
             {
-                int resetIn = (int) ((ErrorResendDelayUntil - timeSince) * 1000);
+                int resetIn = (int) ((ErrorDelayUntil - timeSince) * 1000);
                 _logger.Debug($"Web request error occured delaying next send until: {resetIn}ms ");
                 Thread.Sleep(resetIn);
                 return;
             }
 
-            for (int index = 0; index < Count; index++)
+            for (int index = 0; index < RequestCount(); index++)
             {
-                Request request = this[index];
+                Request request = GetRequest(index);
                 if (request.HasTimedOut())
                 {
                     request.Close(false);
@@ -143,13 +160,29 @@ namespace Oxide.Ext.Discord.Rest
             }
 
             //It's possible we removed a request that has timed out.
-            if (Count == 0)
+            if (RequestCount() == 0)
             {
                 return;
             }
             
             Handler.RateLimit.FiredRequest();
-            this[0].Fire(this);
+            GetRequest(0).Fire();
+        }
+        
+        internal int RequestCount()
+        {
+            lock (_syncRoot)
+            {
+                return _requests.Count;
+            }
+        }
+
+        internal Request GetRequest(int index)
+        {
+            lock (_syncRoot)
+            {
+                return _requests[index];
+            }
         }
     }
 }

@@ -108,7 +108,7 @@ namespace Oxide.Ext.Discord.Rest
                 Buckets[bucketId] = bucket;
             }
 
-            bucket.Queue(request);
+            bucket.QueueRequest(request);
         }
         
         /// <summary>
