@@ -70,12 +70,7 @@ namespace Oxide.Ext.Discord
         /// All the direct messages that we have seen by User ID
         /// </summary>
         public readonly Hash<Snowflake, Channel> DirectMessagesByUserId = new Hash<Snowflake, Channel>();
-        
-        /// <summary>
-        /// List of all clients that are using this bot client
-        /// </summary>
-        public readonly List<DiscordClient> Clients = new List<DiscordClient>();
-        
+
         /// <summary>
         /// Application reference for this bot
         /// </summary>
@@ -91,12 +86,17 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public RestHandler Rest { get; private set; }
         
-        private Socket _webSocket;
-        private Timer _timer;
-        private readonly ILogger _logger;
-        
         internal GatewayReadyEvent ReadyData;
         internal readonly List<Snowflake> MembersLoaded = new List<Snowflake>();
+        
+        private Socket _webSocket;
+        private Timer _heartbeatTimer;
+        private readonly ILogger _logger;
+        
+        /// <summary>
+        /// List of all clients that are using this bot client
+        /// </summary>
+        private readonly List<DiscordClient> _clients = new List<DiscordClient>();
         
         /// <summary>
         /// Creates a new bot client for the given settings
@@ -177,7 +177,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Called when bot client is no longer used by any client and can be shutdown.
         /// </summary>
-        public void ShutdownBot()
+        internal void ShutdownBot()
         {
             _logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
             ActiveBots.Remove(Settings.ApiToken);
@@ -201,12 +201,12 @@ namespace Oxide.Ext.Discord
                 throw new Exception("Failed to add client to bot client as ApiTokens do not match");
             }
             
-            Clients.RemoveAll(c => c == client);
-            Clients.Add(client);
+            _clients.RemoveAll(c => c == client);
+            _clients.Add(client);
             
             _logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {client.Owner.Title}");
             
-            if (Clients.Count == 1)
+            if (_clients.Count == 1)
             {
                 _logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Clients.Count == 1 connecting bot");
                 Connect();
@@ -257,23 +257,23 @@ namespace Oxide.Ext.Discord
         /// <param name="client">Client to remove from bot client</param>
         public void RemoveClient(DiscordClient client)
         {
-            Clients.Remove(client);
+            _clients.Remove(client);
             _logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Client Removed");
-            if (Clients.Count == 0)
+            if (_clients.Count == 0)
             {
                 ShutdownBot();
                 _logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Bot count 0 shutting down bot");
                 return;
             }
 
-            LogLevel level = Clients.Min(c => c.Settings.LogLevel);
+            LogLevel level = _clients.Min(c => c.Settings.LogLevel);
             if (level > Settings.LogLevel)
             {
                 UpdateLogLevel(level);
             }
 
             GatewayIntents intents = GatewayIntents.None;
-            foreach (DiscordClient exitingClients in Clients)
+            foreach (DiscordClient exitingClients in _clients)
             {
                 intents |= exitingClients.Settings.Intents;
             }
@@ -300,7 +300,7 @@ namespace Oxide.Ext.Discord
         /// <param name="args">Args for the hook</param>
         public void CallHook(string hookName, params object[] args)
         {
-            foreach (DiscordClient client in Clients)
+            foreach (DiscordClient client in _clients)
             {
                 client.CallHook(hookName, args);
             }
@@ -313,16 +313,16 @@ namespace Oxide.Ext.Discord
         /// <param name="heartbeatInterval"></param>
         internal void SetupHeartbeat(float heartbeatInterval)
         {
-            if (_timer != null)
+            if (_heartbeatTimer != null)
             {
                 _logger.Debug($"{nameof(DiscordClient)}.{nameof(SetupHeartbeat)} Previous heartbeat timer exists.");
                 DestroyHeartbeat();
             }
 
             HeartbeatAcknowledged = true;
-            _timer = new Timer(heartbeatInterval);
-            _timer.Elapsed += HeartbeatElapsed;
-            _timer.Start();
+            _heartbeatTimer = new Timer(heartbeatInterval);
+            _heartbeatTimer.Elapsed += HeartbeatElapsed;
+            _heartbeatTimer.Start();
             _logger.Debug($"{nameof(DiscordClient)}.{nameof(SetupHeartbeat)} Creating heartbeat with interval {heartbeatInterval}ms.");
             CallHook(DiscordHooks.OnDiscordSetupHeartbeat, heartbeatInterval);
         }
@@ -332,11 +332,11 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public void DestroyHeartbeat()
         {
-            if(_timer != null)
+            if(_heartbeatTimer != null)
             {
                 _logger.Debug($"{nameof(DiscordClient)}.{nameof(DestroyHeartbeat)} Destroy Heartbeat");
-                _timer.Dispose();
-                _timer = null;
+                _heartbeatTimer.Dispose();
+                _heartbeatTimer = null;
             }
         }
 
@@ -390,7 +390,7 @@ namespace Oxide.Ext.Discord
             HeartbeatAcknowledged = false;
             _webSocket.Send(GatewayCommandCode.Heartbeat, Sequence);
             CallHook(DiscordHooks.OnDiscordHeartbeatSent);
-            _logger.Debug($"Heartbeat sent - {_timer.Interval}ms interval.");
+            _logger.Debug($"Heartbeat sent - {_heartbeatTimer.Interval}ms interval.");
         }
         #endregion
         
@@ -405,6 +405,7 @@ namespace Oxide.Ext.Discord
             });
         }
 
+        #region Websocket Commands
         /// <summary>
         /// Used to Identify the bot with discord
         /// </summary>
@@ -497,7 +498,9 @@ namespace Oxide.Ext.Discord
             
             _webSocket.Send(GatewayCommandCode.StatusUpdate, statusUpdate);
         }
+        #endregion
 
+        #region Entity Helpers
         /// <summary>
         /// Returns a guild for the specific ID
         /// </summary>
@@ -523,8 +526,7 @@ namespace Oxide.Ext.Discord
         /// <returns></returns>
         public Channel GetChannel(Snowflake channelId, Snowflake? guildId)
         {
-            Guild guild = GetGuild(guildId);
-            return guild?.Channels[channelId] ?? DirectMessagesByChannelId[channelId];
+            return guildId.HasValue ? GetGuild(guildId)?.Channels[channelId] : DirectMessagesByChannelId[channelId];
         }
 
         /// <summary>
@@ -587,23 +589,6 @@ namespace Oxide.Ext.Discord
         }
 
         /// <summary>
-        /// Updates a direct message channel if it exists
-        /// </summary>
-        /// <param name="channel">Updated channel</param>
-        /// <returns>Returns the channel before the update</returns>
-        public Channel UpdateDirectMessageChannel(Channel channel)
-        {
-            Channel existing = DirectMessagesByChannelId[channel.Id];
-            if (existing != null)
-            {
-                _logger.Verbose($"{nameof(BotClient)}.{nameof(UpdateDirectMessageChannel)} Updating Existing Channel {channel.Id}");
-                return existing.Update(channel);
-            }
-
-            return null;
-        }
-        
-        /// <summary>
         /// Removes a direct message channel if it exists
         /// </summary>
         /// <param name="id">ID of the channel to remove</param>
@@ -612,13 +597,15 @@ namespace Oxide.Ext.Discord
             Channel existing = DirectMessagesByChannelId[id];
             if (existing != null)
             {
+                DirectMessagesByChannelId.Remove(id);
                 DirectMessagesByUserId.RemoveAll(c => c.Id == id);
             }
         }
-
+        #endregion
+        
         internal bool IsPluginRegistered(Plugin plugin)
         {
-            return Clients.Any(t => t.RegisteredForHooks.Contains(plugin));
+            return _clients.Any(t => t.RegisteredForHooks.Contains(plugin));
         }
     }
 }
