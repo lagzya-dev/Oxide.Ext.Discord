@@ -699,7 +699,7 @@ namespace Oxide.Ext.Discord.WebSockets
             GuildMemberBannedEvent ban = payload.EventData.ToObject<GuildMemberBannedEvent>();
             Guild guild = _client.GetGuild(ban.GuildId);
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanAdd)} User was banned from the guild. Guild ID: {ban.GuildId} Guild Name: {guild?.Name} User ID: {ban.User.Id} User Name: {ban.User.GetFullUserName}");
-            _client.CallHook(DiscordHooks.OnDiscordGuildBanAdded, ban, guild);
+            _client.CallHook(DiscordHooks.OnDiscordGuildMemberBanned, ban, guild);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-ban-remove
@@ -708,7 +708,7 @@ namespace Oxide.Ext.Discord.WebSockets
             GuildMemberBannedEvent ban = payload.EventData.ToObject<GuildMemberBannedEvent>();
             Guild guild = _client.GetGuild(ban.GuildId);
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildBanRemove)} User was unbanned from the guild. Guild ID: {ban.GuildId} Guild Name: {guild?.Name} User ID: {ban.User.Id} User Name: {ban.User.GetFullUserName}");
-            _client.CallHook(DiscordHooks.OnDiscordGuildBanRemoved, ban.User, ban.GuildId);
+            _client.CallHook(DiscordHooks.OnDiscordGuildMemberUnbanned, ban.User, ban.GuildId);
         }
         
         //https://discord.com/developers/docs/topics/gateway#guild-emojis-update
@@ -1097,7 +1097,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     DiscordUser previous = member.User.Update(updateUser);
                     _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchPresenceUpdate)} Guild ID: {update.GuildId} User ID: {update.User} Status: {update.Status}");
-                    _client.CallHook(DiscordHooks.OnDiscordGuildMemberPresenceUpdated, updateUser, previous, guild);
+                    _client.CallHook(DiscordHooks.OnDiscordGuildMemberPresenceUpdated, member, guild);
                 }
             }
         }
@@ -1229,7 +1229,7 @@ namespace Oxide.Ext.Discord.WebSockets
             IntegrationCreatedEvent integration = payload.EventData.ToObject<IntegrationCreatedEvent>();
             Guild guild = _client.GetGuild(integration.GuildId); 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInteractionCreate)} Guild ID: {integration.GuildId} Guild Name: {guild?.Name} Integration ID: {integration.Id}");
-            _client.CallHook(DiscordHooks.OnDiscordIntegrationCreated, integration, guild);
+            _client.CallHook(DiscordHooks.OnDiscordGuildIntegrationCreated, integration, guild);
         }
 
         //TODO: Add Link
@@ -1238,7 +1238,7 @@ namespace Oxide.Ext.Discord.WebSockets
             IntegrationUpdatedEvent integration = payload.EventData.ToObject<IntegrationUpdatedEvent>();
             Guild guild = _client.GetGuild(integration.GuildId); 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchIntegrationUpdate)} Guild ID: {integration.GuildId} Guild Name: {guild?.Name} Integration ID: {integration.Id}");
-            _client.CallHook(DiscordHooks.OnDiscordIntegrationUpdated, integration, guild);
+            _client.CallHook(DiscordHooks.OnDiscordGuildIntegrationUpdated, integration, guild);
         }
 
         //TODO: Add Link

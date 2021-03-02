@@ -37,7 +37,7 @@ If you would like to create plugins for the extension please [Click Here](Docs/G
 The following plugin is a simple example on how to use the extension.
 This plugin simply adds a 'sad' reaction to any message posted on the Discord server, and then broadcasts the message to the server chat.
 
-```csharp
+```c#
 using Oxide.Ext.Discord;
 using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.DiscordObjects;

@@ -65,24 +65,9 @@
             List of active bots by bot API key
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.SessionId">
-            <summary>
-            The current session ID for the connected bot
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.Sequence">
-            <summary>
-            The current sequence number for the websocket
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.BotClient.Initialized">
             <summary>
             If the connection is initialized and not disconnected
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.HeartbeatAcknowledged">
-            <summary>
-            Discord Acknowledged our heartbeat successfully 
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.BotClient.Settings">
@@ -105,11 +90,6 @@
             All the direct messages that we have seen by User ID
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.Clients">
-            <summary>
-            List of all clients that are using this bot client
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.BotClient.Application">
             <summary>
             Application reference for this bot
@@ -123,6 +103,11 @@
         <member name="P:Oxide.Ext.Discord.BotClient.Rest">
             <summary>
             Rest handler for all discord API calls
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.BotClient._clients">
+            <summary>
+            List of all clients that are using this bot client
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.#ctor(Oxide.Ext.Discord.DiscordSettings)">
@@ -175,31 +160,19 @@
             <param name="hookName">Hook to call</param>
             <param name="args">Args for the hook</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.SetupHeartbeat(System.Single)">
-            <summary>
-            Setup a heartbeat for this bot with the given interval
-            </summary>
-            <param name="heartbeatInterval"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.DestroyHeartbeat">
-            <summary>
-            Destroy the heartbeat on this bot
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.SendHeartbeat">
-            <summary>
-            Sends a heartbeat to discord.
-            If the previous heartbeat wasn't acknowledged then we will attempt to reconnect
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.BotClient.Identify">
             <summary>
             Used to Identify the bot with discord
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.Resume">
+        <member name="M:Oxide.Ext.Discord.BotClient.Resume(System.String,System.Int32)">
             <summary>
             Used to resume the current session with discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.BotClient.SendHeartbeat(System.Int32)">
+            <summary>
+            Sends a heartbeat to Discord
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.RequestGuildMembers(Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand)">
@@ -260,13 +233,6 @@
             Adds a Direct Message Channel to the bot cache
             </summary>
             <param name="channel">Channel to be added</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.UpdateDirectMessageChannel(Oxide.Ext.Discord.Entities.Channels.Channel)">
-            <summary>
-            Updates a direct message channel if it exists
-            </summary>
-            <param name="channel">Updated channel</param>
-            <returns>Returns the channel before the update</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.RemoveDirectMessageChannel(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
@@ -484,15 +450,15 @@
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildBanAdded">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberBanned">
             <code>
-            void OnDiscordGuildBanAdded(GuildMemberBannedEvent ban, Guild guild)
+            void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, Guild guild)
             {
-                Puts("OnDiscordGuildBanAdded Works!");
+                Puts("OnDiscordGuildMemberBanned Works!");
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildBanRemoved">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberUnbanned">
             <code>
             void OnDiscordGuildBanRemoved(GuildMemberBannedEvent ban, Guild guild)
             {
@@ -719,7 +685,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberPresenceUpdated">
             <code>
-            void OnDiscordGuildMemberPresenceUpdated(DiscordUser user, DiscordUser previous, Guild guild)
+            void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, Guild guild)
             {
                 Puts("OnDiscordGuildMemberPresenceUpdated Works!");
             }
@@ -727,7 +693,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectTypingStarted">
             <code>
-            void OnDiscordDirectTypingStarted(DiscordUser user, DiscordUser previous)
+            void OnDiscordDirectTypingStarted(TypingStartedEvent typing, Channel channel)
             {
                 Puts("OnDiscordDirectTypingStarted Works!");
             }
@@ -735,7 +701,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildTypingStarted">
             <code>
-            void OnDiscordGuildTypingStarted(DiscordUser user, DiscordUser previous, Guild guild)
+            void OnDiscordGuildTypingStarted(TypingStartedEvent typing, Channel channel, Guild guild)
             {
                 Puts("OnDiscordGuildTypingStarted Works!");
             }
@@ -821,19 +787,19 @@
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordIntegrationCreated">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildIntegrationCreated">
             <code>
-            void OnDiscordIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+            void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
             {
-                Puts("OnDiscordIntegrationCreated Works!");
+                Puts("OnDiscordGuildIntegrationCreated Works!");
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordIntegrationUpdated">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildIntegrationUpdated">
             <code>
-            void OnDiscordIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
+            void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
             {
-                Puts("OnDiscordIntegrationUpdated Works!");
+                Puts("OnDiscordGuildIntegrationUpdated Works!");
             }
             </code>
         </member>
@@ -10147,7 +10113,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Bucket">
             <summary>
-            Represents a discord API buck for a group of requests
+            Represents a discord API bucket for a group of requests
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.Bucket.BucketId">
@@ -10170,14 +10136,14 @@
             How long until the rate limit resets
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.ErrorResendDelayUntil">
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.ErrorDelayUntil">
             <summary>
             How long to wait before retrying request since there was a web exception
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.Bucket.Handler">
             <summary>
-            Rest Handler for the bucker
+            Rest Handler for the bucket
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Bucket.#ctor(Oxide.Ext.Discord.Rest.RestHandler,System.String,Oxide.Ext.Discord.Logging.ILogger)">
@@ -10200,11 +10166,18 @@
             </summary>
             <returns>True if we should cleanup the bucket; false otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.Queue(Oxide.Ext.Discord.Rest.Request)">
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Request)">
             <summary>
             Queues a new request for the buck
             </summary>
             <param name="request">Request to be queued</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.DequeueRequest(Oxide.Ext.Discord.Rest.Request)">
+            <summary>
+            Removes the request from the queue.
+            Either the request completed successfully or there was an error and failed to succeed after 3 attempts
+            </summary>
+            <param name="request">Request to remove</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.RateLimitHandler">
             <summary>
@@ -10305,16 +10278,15 @@
             <param name="method">HTTP method to call</param>
             <param name="route">Route to call on the API</param>
             <param name="data">Data for the request</param>
-            <param name="authorization">Authorization Header</param>
+            <param name="authHeader">Authorization Header</param>
             <param name="callback">Callback once the request completes successfully</param>
             <param name="onError">Callback when the request errors</param>
             <param name="logger">Logger for the request</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Request.Fire(Oxide.Ext.Discord.Rest.Bucket)">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Fire">
             <summary>
             Fires the request off
             </summary>
-            <param name="bucket">Bucket the request is in</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Request.Close(System.Boolean)">
             <summary>
@@ -10410,6 +10382,41 @@
             </summary>
             <param name="route">API Route</param>
             <returns>Bucket ID for route</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.WebSockets.HeartbeatHandler">
+            <summary>
+            Handles the heartbeating for the websocket connection
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.HeartbeatAcknowledged">
+            <summary>
+            Discord Acknowledged our heartbeat successfully 
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.SocketListener,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Constructor for Heartbeat Handler
+            </summary>
+            <param name="client">Client for the handler</param>
+            <param name="listener">Socket Listener for the client</param>
+            <param name="logger">Logger for the bot</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.SetupHeartbeat(System.Single)">
+            <summary>
+            Setup a heartbeat for this bot with the given interval
+            </summary>
+            <param name="heartbeatInterval"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.DestroyHeartbeat">
+            <summary>
+            Destroy the heartbeat on this bot
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.SendHeartbeat">
+            <summary>
+            Sends a heartbeat to discord.
+            If the previous heartbeat wasn't acknowledged then we will attempt to reconnect
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.Socket">
             <summary>
@@ -10586,7 +10593,17 @@
             Represents a listens for socket events
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener.Retries">
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener.SessionId">
+            <summary>
+            The current session ID for the connected bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener.Sequence">
+            <summary>
+            The current sequence number for the websocket
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener._retries">
             <summary>
             How many times we have tried to reconnect to discord unsuccessfully
             </summary>
@@ -10598,6 +10615,11 @@
             <param name="client">Client this listener is for</param>
             <param name="socket">Socket this listener is for</param>
             <param name="logger">Logger for the client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.Shutdown">
+            <summary>
+            Shutdown the SocketListener
+            </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SocketOpened(System.Object,System.EventArgs)">
             <summary>

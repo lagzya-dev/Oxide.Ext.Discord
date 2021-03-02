@@ -17,17 +17,17 @@ namespace Oxide.Ext.Discord.WebSockets
         /// If we should attempt to reconnect to discord on disconnect
         /// </summary>
         public bool RequestReconnect;
-        
+
         /// <summary>
         /// If we should attempt to resume our previous session after connecting
         /// </summary>
         public bool ShouldAttemptResume;
-        
+
         /// <summary>
         /// Timer to use when attempting to reconnect to discord due to an error
         /// </summary>
         internal Timer ReconnectTimer;
-        
+
         private readonly BotClient _client;
 
         private WebSocket _socket;
@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _socket.OnMessage += _listener.SocketMessage;
             _socket.ConnectAsync();
         }
-        
+
         /// <summary>
         /// Disconnects the websocket from discord
         /// </summary>
@@ -85,14 +85,14 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             RequestReconnect = attemptReconnect;
             ShouldAttemptResume = shouldResume;
-            
+
             if (ReconnectTimer != null)
             {
                 ReconnectTimer.Stop();
                 ReconnectTimer.Dispose();
                 ReconnectTimer = null;
             }
-            
+
             if (IsClosingOrClosed())
             {
                 return;
@@ -121,7 +121,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 ReconnectTimer.Dispose();
                 ReconnectTimer = null;
             }
-            
+
             Disconnect(false, false);
             _listener?.Shutdown();
             _listener = null;
@@ -154,7 +154,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 return;
             }
-            
+
             CommandPayload opcode = new CommandPayload
             {
                 OpCode = opCode,
@@ -163,7 +163,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             string payloadData = JsonConvert.SerializeObject(opcode, DiscordExtension.ExtensionSerializeSettings);
             _logger.Debug($"{nameof(Socket)}.{nameof(Send)} Payload: {payloadData}");
-            
+
             _socket.SendAsync(payloadData, completed);
         }
 
@@ -177,10 +177,10 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 return false;
             }
-            
+
             return _socket.ReadyState == WebSocketState.Open;
         }
-        
+
         /// <summary>
         /// Returns if the websocket is in the connecting state
         /// </summary>
@@ -191,7 +191,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 return false;
             }
-            
+
             return _socket.ReadyState == WebSocketState.Connecting;
         }
 
@@ -208,7 +208,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             return _socket.ReadyState == WebSocketState.Closing || _socket.ReadyState == WebSocketState.Closed;
         }
-        
+
         /// <summary>
         /// Returns if there is a reconnect timer active for the websocket
         /// </summary>
@@ -229,7 +229,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 return;
             }
-            
+
             ReconnectTimer = new Timer
             {
                 Interval = seconds * 1000,
@@ -240,7 +240,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 callback.Invoke();
                 ReconnectTimer = null;
             };
-            
+
             ReconnectTimer.Start();
         }
     }
