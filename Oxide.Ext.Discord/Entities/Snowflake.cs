@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <returns></returns>
         public DateTimeOffset GetCreationDate()
         {
-            return Time.DiscordEpoch + TimeSpan.FromSeconds(Id >> 22);
+            return Time.DiscordEpoch + TimeSpan.FromMilliseconds(Id >> 22);
         }
         
         /// <summary>
