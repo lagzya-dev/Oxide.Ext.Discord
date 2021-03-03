@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Integrations;
 using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Roles;
@@ -126,7 +127,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("explicit_content_filter")]
         public ExplicitContentFilterLevel? ExplicitContentFilter { get; set; }
-        
+
         /// <summary>
         /// Roles in the guild
         /// </summary>
@@ -139,8 +140,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonConverter(typeof(HashListConverter<Emoji>))]
         [JsonProperty("emojis")]
+
         public Hash<Snowflake, Emoji> Emojis { get; set; }
-  
+
         /// <summary>
         /// Enabled guild features
         /// See <see cref="GuildFeatures"/>
@@ -203,7 +205,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("member_count")]
         public int? MemberCount { get; set; }
-  
+
         /// <summary>
         /// States of members currently in voice channels; lacks the guild_id key
         /// </summary>
@@ -217,7 +219,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<GuildMember>))]
         [JsonProperty("members")]
         public Hash<Snowflake, GuildMember> Members { get; set; }
-        
+
         /// <summary>
         /// Channels in the guild
         /// </summary>
@@ -230,7 +232,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// will only include non-offline members if the size is greater than large threshold
         /// </summary>
         [JsonProperty("presences")]
-        public List<UpdateStatusCommand> Presences { get; set; }
+        public List<PresenceUpdatedEvent> Presences { get; set; }
   
         /// <summary>
         /// The maximum number of presences for the guild (the default value, currently 25000, is in effect when null is returned)
@@ -305,6 +307,16 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("approximate_presence_count")]
         public int? ApproximatePresenceCount { get; set; }
+        
+        /// <summary>
+        /// Returns true if all guild members have been loaded
+        /// </summary>
+        public bool HasLoadedAllMembers { get; internal set; }
+        
+        /// <summary>
+        /// Returns if the guild is available to use
+        /// </summary>
+        public bool IsAvailable => Unavailable.HasValue && !Unavailable.Value;
 
         /// <summary>
         /// Returns the guild Icon Url
@@ -1177,7 +1189,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 JoinedAt = updatedGuild.JoinedAt;
             if (updatedGuild.Large != null)
                 Large = updatedGuild.Large;
-            if (updatedGuild.Unavailable != null)
+            if (updatedGuild.Unavailable != null && (!Unavailable.HasValue || Unavailable.Value))
                 Unavailable = updatedGuild.Unavailable;
             if (updatedGuild.MemberCount != null)
                 MemberCount = updatedGuild.MemberCount;
@@ -1215,10 +1227,5 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 ApproximatePresenceCount = updatedGuild.ApproximatePresenceCount;
             return previous;
         }
-
-        /// <summary>
-        /// Returns if the guild is available to use
-        /// </summary>
-        public bool IsAvailable => Unavailable.HasValue && !Unavailable.Value;
     }
 }

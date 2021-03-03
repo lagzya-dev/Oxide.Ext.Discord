@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Timers;
-using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
@@ -74,7 +72,6 @@ namespace Oxide.Ext.Discord
         internal readonly ILogger Logger;
         
         internal GatewayReadyEvent ReadyData;
-        internal readonly List<Snowflake> MembersLoaded = new List<Snowflake>();
         internal readonly List<DiscordClient> ClientsPendingConnection = new List<DiscordClient>();
 
         internal Socket WebSocket;
@@ -203,12 +200,13 @@ namespace Oxide.Ext.Discord
                 //Our intents have changed. Disconnect websocket and reconnect with new intents.
                 if (intents != Settings.Intents)
                 {
+                    Logger.Info("New intents have been requested for the bot. Reconnecting with updated intents.");
                     Settings.Intents = intents;
                     DisconnectWebsocket(true);
                     return;
                 }
                 
-                if (WebSocket.IsConnected())
+                if (WebSocket.IsConnected() && ReadyData != null)
                 {
                     ProcessPendingClients();
                 }
@@ -217,29 +215,13 @@ namespace Oxide.Ext.Discord
 
         internal void ProcessPendingClients()
         {
+            ReadyData.Guilds = Servers.Values.ToList();
             foreach (DiscordClient client in ClientsPendingConnection)
             {
-                if (ReadyData != null)
-                {
-                    ReadyData.Guilds = Servers.Values.ToList();
-                    client.CallHook(DiscordHooks.OnDiscordGatewayReady, ReadyData, true);
-                }
-
-                foreach (Guild guild in Servers.Values)
-                {
-                    if (guild.IsAvailable)
-                    {
-                        client.CallHook(DiscordHooks.OnDiscordGuildCreated, guild, true);
-                    }
-
-                    if (MembersLoaded.Contains(guild.Id))
-                    {
-                        client.CallHook(DiscordHooks.OnDiscordGuildMembersLoaded, guild, true);
-                    }
-                }
+                client.CallHook(DiscordHooks.OnDiscordGatewayReady, ReadyData, true);
             }
             
-            _clients.Clear();
+            ClientsPendingConnection.Clear();
         }
 
         /// <summary>
@@ -264,18 +246,19 @@ namespace Oxide.Ext.Discord
                 UpdateLogLevel(level);
             }
 
-            GatewayIntents intents = GatewayIntents.None;
-            foreach (DiscordClient exitingClients in _clients)
-            {
-                intents |= exitingClients.Settings.Intents;
-            }
-
-            //Our intents have changed. Disconnect websocket and reconnect with new intents.
-            if (intents != Settings.Intents)
-            {
-                Settings.Intents = intents;
-                DisconnectWebsocket(true);
-            }
+            // For now let's not do the removing of intents. It shouldn't be an issue to keep them.
+            // GatewayIntents intents = GatewayIntents.None;
+            // foreach (DiscordClient exitingClients in _clients)
+            // {
+            //     intents |= exitingClients.Settings.Intents;
+            // }
+            //
+            // //Our intents have changed. Disconnect websocket and reconnect with new intents.
+            // if (intents != Settings.Intents)
+            // {
+            //     Settings.Intents = intents;
+            //     DisconnectWebsocket(true);
+            // }
         }
 
         private void UpdateLogLevel(LogLevel level)
@@ -299,65 +282,6 @@ namespace Oxide.Ext.Discord
         }
 
         #region Websocket Commands
-        /// <summary>
-        /// Used to Identify the bot with discord
-        /// </summary>
-        internal void Identify()
-        {
-            // Sent immediately after connecting. Opcode 2: Identify
-            // Ref: https://discordapp.com/developers/docs/topics/gateway#identifying
-
-            if (!Initialized)
-            {
-                return;
-            }
-
-            IdentifyCommand identify = new IdentifyCommand
-            {
-                Token = Settings.ApiToken,
-                Properties = new Properties
-                {
-                    OS = "Oxide.Ext.Discord",
-                    Browser = "Oxide.Ext.Discord",
-                    Device = "Oxide.Ext.Discord"
-                },
-                Intents = Settings.Intents,
-                Compress = false,
-                LargeThreshold = 50,
-                Shard = new List<int> {0, 1}
-            };
-
-            WebSocket.Send(GatewayCommandCode.Identify, identify);
-        }
-
-        /// <summary>
-        /// Used to resume the current session with discord
-        /// </summary>
-        internal void Resume(string sessionId, int sequence)
-        {
-            if (!Initialized)
-            {
-                return;
-            }
-
-            ResumeSessionCommand resume = new ResumeSessionCommand
-            {
-                Sequence = sequence,
-                SessionId = sessionId,
-                Token = Settings.ApiToken
-            };
-
-            WebSocket.Send(GatewayCommandCode.Resume, resume);
-        }
-
-        /// <summary>
-        /// Sends a heartbeat to Discord
-        /// </summary>
-        public void SendHeartbeat(int sequence)
-        {
-            WebSocket.Send(GatewayCommandCode.Heartbeat, sequence);
-        }
-
         /// <summary>
         /// Used to request guild members from discord for a specific guild
         /// </summary>
@@ -465,7 +389,6 @@ namespace Oxide.Ext.Discord
         internal void RemoveGuild(Snowflake guildId)
         {
             Servers.Remove(guildId);
-            MembersLoaded.Remove(guildId);
         }
 
         /// <summary>

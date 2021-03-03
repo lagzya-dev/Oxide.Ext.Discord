@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// Users status
         /// </summary>
         [JsonProperty("status")]
-        public StatusType Status { get; set; }
+        public UserStatusType Status { get; set; }
         
         /// <summary>
         /// User's current activities

@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -65,6 +65,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _heartbeat = null;
         }
 
+        #region Socket Events
         /// <summary>
         /// Called when a socket is open
         /// </summary>
@@ -102,7 +103,7 @@ namespace Oxide.Ext.Discord.WebSockets
             
             _client.CallHook(DiscordHooks.OnDiscordWebsocketClosed, e.Reason, e.Code, e.WasClean);
             _webSocket.SocketState = SocketState.Disconnected;
-            _webSocket.SocketClosed();
+            _webSocket.DisposeSocket();
 
             if (!_client.Initialized)
             {
@@ -308,7 +309,9 @@ namespace Oxide.Ext.Discord.WebSockets
                 _logger.Exception($"{nameof(SocketListener)}.{nameof(SocketMessage)} Exception Occured. Please give error message below to Discord Extension Authors:\n", ex);
             }
         }
+        #endregion
 
+        #region Discord Events
         private void HandleDispatch(EventPayload payload)
         {
             _logger.Debug($"Received OpCode: Dispatch, event: {payload.EventName}");
@@ -637,9 +640,10 @@ namespace Oxide.Ext.Discord.WebSockets
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} Guild ID: {guild.Id} Name: {guild.Name}");
             
             Guild existing = _client.GetGuild(guild.Id);
-            bool shouldRequestMembers = existing == null || !existing.IsAvailable;
+            bool newGuild = existing == null || !existing.IsAvailable;
             _client.AddGuildOrUpdate(guild);
-            if (shouldRequestMembers)
+            existing = _client.GetGuild(guild.Id);
+            if (!existing.HasLoadedAllMembers)
             {
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} Guild is now requesting all guild members.");
                 //Request all guild members so we can be sure we have them all.
@@ -648,8 +652,11 @@ namespace Oxide.Ext.Discord.WebSockets
                     Nonce = "DiscordExtension",
                     GuildId = guild.Id,
                 });
-                
-                _client.CallHook(DiscordHooks.OnDiscordGuildCreated, guild, false);
+            }
+
+            if (newGuild)
+            {
+                _client.CallHook(DiscordHooks.OnDiscordGuildCreated, existing);
             }
         }
 
@@ -827,11 +834,8 @@ namespace Oxide.Ext.Discord.WebSockets
                     //Once we've loaded all guild members call hook
                     if (chunk.ChunkIndex + 1 == chunk.ChunkCount)
                     {
-                        if (!_client.MembersLoaded.Contains(guild.Id))
-                        {
-                            _client.MembersLoaded.Add(guild.Id);
-                            _client.CallHook(DiscordHooks.OnDiscordGuildMembersLoaded, guild, false);
-                        }
+                        guild.HasLoadedAllMembers = true;
+                        _client.CallHook(DiscordHooks.OnDiscordGuildMembersLoaded, guild);
                     }
                 }
                 
@@ -1314,12 +1318,12 @@ namespace Oxide.Ext.Discord.WebSockets
             if (_webSocket.ShouldAttemptResume && !string.IsNullOrEmpty(SessionId))
             {
                 _logger.Info($"{nameof(SocketListener)}.{nameof(HandleHello)} Attempting to resume session with ID: {SessionId}");
-                _client.Resume(SessionId, Sequence);
+                Resume(SessionId, Sequence);
             }
             else
             {
                 _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleHello)} Identifying bot with discord.");
-                _client.Identify();
+                Identify();
                 _webSocket.ShouldAttemptResume = true;
             }
         }
@@ -1334,10 +1338,67 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _logger.Warning($"Unhandled OP code: {payload.OpCode}. Please contact Discord Extension authors.");
         }
+        #endregion
 
+        #region Discord Commands
+        /// <summary>
+        /// Sends a heartbeat to Discord
+        /// </summary>
         internal void SendHeartbeat()
         {
-            _client.SendHeartbeat(Sequence);
+            _webSocket.Send(GatewayCommandCode.Heartbeat, Sequence);
         }
+
+        /// <summary>
+        /// Used to Identify the bot with discord
+        /// </summary>
+        internal void Identify()
+        {
+            // Sent immediately after connecting. Opcode 2: Identify
+            // Ref: https://discordapp.com/developers/docs/topics/gateway#identifying
+
+            if (!_client.Initialized)
+            {
+                return;
+            }
+
+            IdentifyCommand identify = new IdentifyCommand
+            {
+                Token = _client.Settings.ApiToken,
+                Properties = new Properties
+                {
+                    OS = "Oxide.Ext.Discord",
+                    Browser = "Oxide.Ext.Discord",
+                    Device = "Oxide.Ext.Discord"
+                },
+                Intents = _client.Settings.Intents,
+                Compress = false,
+                LargeThreshold = 50,
+                Shard = new List<int> {0, 1}
+            };
+
+            _webSocket.Send(GatewayCommandCode.Identify, identify);
+        }
+
+        /// <summary>
+        /// Used to resume the current session with discord
+        /// </summary>
+        internal void Resume(string sessionId, int sequence)
+        {
+            if (!_client.Initialized)
+            {
+                return;
+            }
+
+            ResumeSessionCommand resume = new ResumeSessionCommand
+            {
+                Sequence = sequence,
+                SessionId = sessionId,
+                Token = _client.Settings.ApiToken
+            };
+
+            _webSocket.Send(GatewayCommandCode.Resume, resume);
+        }
+        #endregion
     }
 }

@@ -13,10 +13,10 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
     {
         /// <summary>
         /// The user's new status
-        /// <see cref="StatusType"/>
+        /// <see cref="UserStatusType"/>
         /// </summary>
         [JsonProperty("status")]
-        public StatusType Status { get; set; } = StatusType.Online;
+        public UserStatusType Status { get; set; } = UserStatusType.Online;
 
         /// <summary>
         /// Null, or the user's activities

@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         [JsonProperty("bot")]
         public bool? Bot { get; set; }
-        
+
         /// <summary>
         /// Whether the user is an Official Discord System user (part of the urgent message system)
         /// </summary>
@@ -86,14 +86,14 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         [JsonProperty("flags")]
         public UserFlags? Flags { get; set; }
-        
+
         /// <summary>
         /// The type of Nitro subscription on a user's account
         /// <see cref="UserPremiumType"/>
         /// </summary>
         [JsonProperty("premium_type")]
         public UserPremiumType? PremiumType { get; set; }
-        
+
         /// <summary>
         /// The public flags on a user's account
         /// <see cref="UserFlags"/>
@@ -105,7 +105,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Default Avatar Url for the User
         /// </summary>
         public string GetDefaultAvatarUrl => DiscordCdn.GetUserDefaultAvatarUrl(Id, Discriminator);
-        
+
         /// <summary>
         /// Avatar Url for the user
         /// </summary>
@@ -145,7 +145,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         {
             client.Bot.Rest.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback, error);
         }
-        
+
         /// <summary>
         /// Send a message to a user in a direct message channel
         /// </summary>
@@ -155,10 +155,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void SendDirectMessage(DiscordClient client, MessageCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
-            CreateDirectMessageChannel(client, Id, channel =>
-            {
-                channel.CreateMessage(client, message, callback, error);
-            });
+            CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, message, callback, error); });
         }
 
         /// <summary>
@@ -170,10 +167,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void SendDirectMessage(DiscordClient client, string message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
-            CreateDirectMessageChannel(client, Id, channel =>
-            {
-                channel.CreateMessage(client, message, callback, error);
-            });
+            CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, message, callback, error); });
         }
 
         /// <summary>
@@ -185,10 +179,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void SendDirectMessage(DiscordClient client, Embed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
-            CreateDirectMessageChannel(client, Id, channel =>
-            {
-                channel.CreateMessage(client, embed, callback, error);
-            });
+            CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, embed, callback, error); });
         }
 
         /// <summary>
@@ -279,13 +270,13 @@ namespace Oxide.Ext.Discord.Entities.Users
                 client.Logger.Error("Tried to create a direct message to the bot which is not allowed.");
                 return;
             }
-            
+
             Channel channel = client.Bot.DirectMessagesByUserId[userId];
             if (channel != null)
             {
                 callback.Invoke(channel);
             }
-            
+
             Dictionary<string, object> data = new Dictionary<string, object>
             {
                 ["recipient_id"] = userId
@@ -311,7 +302,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             Dictionary<string, object> data = new Dictionary<string, object>()
             {
                 ["access_tokens"] = accessTokens,
-                ["nicks"] = nicks.ToDictionary(k => k.Id, v => v.Nick) 
+                ["nicks"] = nicks.ToDictionary(k => k.Id, v => v.Nick)
             };
 
             client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback, error);
@@ -384,12 +375,12 @@ namespace Oxide.Ext.Discord.Entities.Users
 
         internal DiscordUser Update(DiscordUser update)
         {
-            DiscordUser previous = (DiscordUser)MemberwiseClone();
+            DiscordUser previous = (DiscordUser) MemberwiseClone();
             if (update.Username != null)
             {
                 Username = update.Username;
             }
-            
+
             if (update.Discriminator != null)
             {
                 Discriminator = update.Discriminator;
@@ -409,12 +400,12 @@ namespace Oxide.Ext.Discord.Entities.Users
             {
                 MfaEnabled = update.MfaEnabled;
             }
-            
+
             if (update.Locale != null)
             {
                 Locale = update.Locale;
             }
-            
+
             if (update.Verified != null)
             {
                 Verified = update.Verified;
@@ -434,7 +425,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             {
                 PremiumType = update.PremiumType;
             }
-            
+
             if (update.PublicFlags != null)
             {
                 PublicFlags = update.PublicFlags;

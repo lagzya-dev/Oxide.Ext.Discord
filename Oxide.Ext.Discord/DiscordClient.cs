@@ -176,16 +176,10 @@ namespace Oxide.Ext.Discord
         public static void GlobalCallHook(string hookName, params object[] args)
         {
             //Run from next tick so we can be sure it's ran on the main thread.
-            Interface.Oxide.NextTick(() =>
+            foreach (DiscordClient client in Clients.Values.ToArray())
             {
-                foreach (DiscordClient client in Clients.Values)
-                {
-                    foreach (Plugin plugin in client.RegisteredForHooks)
-                    {
-                        plugin.CallHook(hookName, args);
-                    }
-                }
-            });
+                client.CallHook(hookName, args);
+            }
         }
 
         #region Plugin Handling

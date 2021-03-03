@@ -103,6 +103,7 @@ namespace Oxide.Ext.Discord.WebSockets
             
             if (IsDisconnected())
             {
+                DisposeSocket();
                 return;
             }
 
@@ -115,7 +116,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 _socket.CloseAsync(CloseStatusCode.Normal);
             }
 
-            SocketClosed();
+            DisposeSocket();
             SocketState = SocketState.Disconnected;
             if (RequestedReconnect)
             {
@@ -139,14 +140,15 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         public void Shutdown()
         {
+            Disconnect(false, false);
+            
             if (ReconnectTimer != null)
             {
                 ReconnectTimer.Stop();
                 ReconnectTimer.Dispose();
                 ReconnectTimer = null;
             }
-
-            Disconnect(false, false);
+            
             _listener?.Shutdown();
             _listener = null;
             _socket = null;
@@ -155,7 +157,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Called when a websocket is closed to remove previous socket
         /// </summary>
-        public void SocketClosed()
+        public void DisposeSocket()
         {
             if (_socket != null)
             {
@@ -244,10 +246,11 @@ namespace Oxide.Ext.Discord.WebSockets
 
             SocketState = SocketState.PendingReconnect;
 
-            //If we haven't hd any errors reconnect to the gateway
+            //If we haven't had any errors reconnect to the gateway
             if (ReconnectRetries == 0)
             {
                 Interface.Oxide.NextTick(Connect);
+                return;
             }
 
             //We had an error trying to reconnect. Perform Delayed Reconnects
@@ -261,6 +264,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 Interval = delay * 1000,
                 AutoReset = false
             };
+
             ReconnectTimer.Elapsed += (_, __) =>
             {
                 if (updateGateway)
