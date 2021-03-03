@@ -450,15 +450,15 @@
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildBanAdded">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberBanned">
             <code>
-            void OnDiscordGuildBanAdded(GuildMemberBannedEvent ban, Guild guild)
+            void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, Guild guild)
             {
-                Puts("OnDiscordGuildBanAdded Works!");
+                Puts("OnDiscordGuildMemberBanned Works!");
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildBanRemoved">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberUnbanned">
             <code>
             void OnDiscordGuildBanRemoved(GuildMemberBannedEvent ban, Guild guild)
             {
@@ -685,7 +685,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberPresenceUpdated">
             <code>
-            void OnDiscordGuildMemberPresenceUpdated(DiscordUser user, DiscordUser previous, Guild guild)
+            void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, Guild guild)
             {
                 Puts("OnDiscordGuildMemberPresenceUpdated Works!");
             }
@@ -693,7 +693,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectTypingStarted">
             <code>
-            void OnDiscordDirectTypingStarted(DiscordUser user, DiscordUser previous)
+            void OnDiscordDirectTypingStarted(TypingStartedEvent typing, Channel channel)
             {
                 Puts("OnDiscordDirectTypingStarted Works!");
             }
@@ -701,7 +701,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildTypingStarted">
             <code>
-            void OnDiscordGuildTypingStarted(DiscordUser user, DiscordUser previous, Guild guild)
+            void OnDiscordGuildTypingStarted(TypingStartedEvent typing, Channel channel, Guild guild)
             {
                 Puts("OnDiscordGuildTypingStarted Works!");
             }
@@ -787,19 +787,19 @@
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordIntegrationCreated">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildIntegrationCreated">
             <code>
-            void OnDiscordIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+            void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
             {
-                Puts("OnDiscordIntegrationCreated Works!");
+                Puts("OnDiscordGuildIntegrationCreated Works!");
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordIntegrationUpdated">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildIntegrationUpdated">
             <code>
-            void OnDiscordIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
+            void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
             {
-                Puts("OnDiscordIntegrationUpdated Works!");
+                Puts("OnDiscordGuildIntegrationUpdated Works!");
             }
             </code>
         </member>
@@ -7951,7 +7951,7 @@
             </summary>
             <param name="offset"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Snowflake.GetCreationTime">
+        <member name="M:Oxide.Ext.Discord.Entities.Snowflake.GetCreationDate">
             <summary>
             Returns when the ID was created
             </summary>
@@ -9178,6 +9178,14 @@
             <param name="player">Player to get Discord User for</param>
             <returns>Discord User if linked; null otherwise</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.GetGuildMember(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Guilds.Guild)">
+            <summary>
+            Returns a minimal Guild Member for the given player
+            </summary>
+            <param name="player">Player to get Discord User for</param>
+            <param name="guild">Guild the member is in</param>
+            <returns>GuildMember if linked and in guild; null otherwise</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.StringExt">
             <summary>
             String Extension methods
@@ -9837,7 +9845,7 @@
             <summary>
             Returns a minimal Discord User
             </summary>
-            <param name="playerId">ID of the in game player</param>
+            <param name="steamId">ID of the in game player</param>
             <returns>Discord ID for the given Steam ID; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetDiscordUser(Oxide.Core.Libraries.Covalence.IPlayer)">
@@ -9845,6 +9853,22 @@
             Returns a minimal Discord User
             </summary>
             <param name="player">Player to get the Discord User for</param>
+            <returns>Discord ID for the given Steam ID; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedMember(System.String,Oxide.Ext.Discord.Entities.Guilds.Guild)">
+            <summary>
+            Returns a minimal Discord User
+            </summary>
+            <param name="steamId">ID of the in game player</param>
+            <param name="guild">Guild the member is in</param>
+            <returns>Discord ID for the given Steam ID; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedMember(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Guilds.Guild)">
+            <summary>
+            Returns a minimal Discord User
+            </summary>
+            <param name="player">Player to get the Discord User for</param>
+            <param name="guild">Guild the member is in</param>
             <returns>Discord ID for the given Steam ID; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedCount">
