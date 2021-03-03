@@ -3,6 +3,7 @@
 Discord Link is a library provided by the Discord Extension.
 This library allows plugin to access a standardized API to get information about a players who have linked their steam and discord accounts.
 In order for Discord Link to work a plugin must be registered with Discord Link as the link plugin.
+When the Discord Link plugin is unloaded then DiscordLink will remove that plugin as the link plugin.
 
 ## Getting Started
 
