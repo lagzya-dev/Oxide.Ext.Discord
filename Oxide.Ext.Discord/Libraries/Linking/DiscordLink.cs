@@ -6,6 +6,7 @@ using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Plugins;
 
@@ -197,18 +198,18 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
         public Snowflake? GetDiscordId(IPlayer player)
         {
-            return GetSteamToDiscordIds()?[player.Id];
+            return GetDiscordId(player.Id);
         }
 
         /// <summary>
         /// Returns a minimal Discord User
         /// </summary>
-        /// <param name="playerId">ID of the in game player</param>
+        /// <param name="steamId">ID of the in game player</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
         [LibraryFunction(nameof(GetDiscordUser))]
-        public DiscordUser GetDiscordUser(string playerId)
+        public DiscordUser GetDiscordUser(string steamId)
         {
-            Snowflake? discordId = GetDiscordId(playerId);
+            Snowflake? discordId = GetDiscordId(steamId);
             if (!discordId.HasValue)
             {
                 return null;
@@ -228,17 +229,36 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
         public DiscordUser GetDiscordUser(IPlayer player)
         {
-            Snowflake? discordId = GetDiscordId(player);
-            if (!discordId.HasValue)
+            return GetDiscordUser(player.Id);
+        }
+
+        /// <summary>
+        /// Returns a minimal Discord User
+        /// </summary>
+        /// <param name="steamId">ID of the in game player</param>
+        /// <param name="guild">Guild the member is in</param>
+        /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
+        [LibraryFunction(nameof(GetLinkedMember))]
+        public GuildMember GetLinkedMember(string steamId, Guild guild)
+        {
+            Snowflake? discordId = GetDiscordId(steamId);
+            if (!discordId.HasValue || !guild.IsAvailable)
             {
                 return null;
             }
 
-            return new DiscordUser
-            {
-                Id = discordId.Value,
-                Bot = false,
-            };
+            return guild.Members[discordId.Value];
+        }
+
+        /// <summary>
+        /// Returns a minimal Discord User
+        /// </summary>
+        /// <param name="player">Player to get the Discord User for</param>
+        /// <param name="guild">Guild the member is in</param>
+        /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
+        public GuildMember GetLinkedMember(IPlayer player, Guild guild)
+        {
+            return GetLinkedMember(player.Id, guild);
         }
 
         /// <summary>

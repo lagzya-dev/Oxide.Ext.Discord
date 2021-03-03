@@ -40,17 +40,17 @@ namespace Oxide.Ext.Discord
         /// The settings for this bot of all the combined clients
         /// </summary>
         public readonly DiscordSettings Settings;
-        
+
         /// <summary>
         /// All the servers that this bot is in
         /// </summary>
         public readonly Hash<Snowflake, Guild> Servers = new Hash<Snowflake, Guild>();
-        
+
         /// <summary>
         /// All the direct messages that we have seen by channel Id
         /// </summary>
         public readonly Hash<Snowflake, Channel> DirectMessagesByChannelId = new Hash<Snowflake, Channel>();
-        
+
         /// <summary>
         /// All the direct messages that we have seen by User ID
         /// </summary>
@@ -60,12 +60,12 @@ namespace Oxide.Ext.Discord
         /// Application reference for this bot
         /// </summary>
         public Application Application { get; internal set; }
-        
+
         /// <summary>
         /// Bot User
         /// </summary>
         public DiscordUser Bot { get; internal set; }
-        
+
         /// <summary>
         /// Rest handler for all discord API calls
         /// </summary>
@@ -83,7 +83,7 @@ namespace Oxide.Ext.Discord
         /// List of all clients that are using this bot client
         /// </summary>
         private readonly List<DiscordClient> _clients = new List<DiscordClient>();
-        
+
         /// <summary>
         /// Creates a new bot client for the given settings
         /// </summary>
@@ -104,7 +104,7 @@ namespace Oxide.Ext.Discord
             Rest = new RestHandler(this, Logger);
             WebSocket = new Socket(this, Logger);
         }
-        
+
         /// <summary>
         /// Gets or creates a new bot client for the given discord client
         /// </summary>
@@ -119,7 +119,7 @@ namespace Oxide.Ext.Discord
                 bot = new BotClient(client.Settings);
                 ActiveBots[client.Settings.ApiToken] = bot;
             }
-            
+
             bot.AddClient(client);
             DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {client.Owner.Name} to bot {bot.Bot?.GetFullUserName}");
             return bot;
@@ -136,7 +136,7 @@ namespace Oxide.Ext.Discord
                 WebSocket.Connect();
             }
         }
-        
+
         /// <summary>
         /// Close the websocket with discord
         /// </summary>
@@ -164,7 +164,7 @@ namespace Oxide.Ext.Discord
             Rest = null;
             ReadyData = null;
         }
-        
+
         /// <summary>
         /// Add a client to this bot client
         /// </summary>
@@ -175,7 +175,7 @@ namespace Oxide.Ext.Discord
             {
                 throw new Exception("Failed to add client to bot client as ApiTokens do not match");
             }
-            
+
             _clients.RemoveAll(c => c == client);
             _clients.Add(client);
             
@@ -277,7 +277,7 @@ namespace Oxide.Ext.Discord
                 DisconnectWebsocket(true);
             }
         }
-        
+
         private void UpdateLogLevel(LogLevel level)
         {
             Logger.UpdateLogLevel(level);
@@ -311,7 +311,7 @@ namespace Oxide.Ext.Discord
             {
                 return;
             }
-            
+
             IdentifyCommand identify = new IdentifyCommand
             {
                 Token = Settings.ApiToken,
@@ -324,12 +324,12 @@ namespace Oxide.Ext.Discord
                 Intents = Settings.Intents,
                 Compress = false,
                 LargeThreshold = 50,
-                Shard = new List<int> { 0, 1 }
+                Shard = new List<int> {0, 1}
             };
-            
+
             WebSocket.Send(GatewayCommandCode.Identify, identify);
         }
-        
+
         /// <summary>
         /// Used to resume the current session with discord
         /// </summary>
@@ -339,7 +339,7 @@ namespace Oxide.Ext.Discord
             {
                 return;
             }
-            
+
             ResumeSessionCommand resume = new ResumeSessionCommand
             {
                 Sequence = sequence,
@@ -357,7 +357,7 @@ namespace Oxide.Ext.Discord
         {
             WebSocket.Send(GatewayCommandCode.Heartbeat, sequence);
         }
-        
+
         /// <summary>
         /// Used to request guild members from discord for a specific guild
         /// </summary>
@@ -396,7 +396,7 @@ namespace Oxide.Ext.Discord
             {
                 return;
             }
-            
+
             WebSocket.Send(GatewayCommandCode.StatusUpdate, statusUpdate);
         }
         #endregion
@@ -416,7 +416,7 @@ namespace Oxide.Ext.Discord
 
             return null;
         }
-        
+
         /// <summary>
         /// Returns the channel for the given channel ID.
         /// If guild ID is null it will search for a direct message channel
@@ -438,7 +438,7 @@ namespace Oxide.Ext.Discord
         {
             Servers[guild.Id] = guild;
         }
-        
+
         /// <summary>
         /// Adds a guild if it does not exist or updates the guild with
         /// </summary>
@@ -457,7 +457,7 @@ namespace Oxide.Ext.Discord
                 Servers[guild.Id] = guild;
             }
         }
-        
+
         /// <summary>
         /// Removes guild from the list of servers a bot is in
         /// </summary>

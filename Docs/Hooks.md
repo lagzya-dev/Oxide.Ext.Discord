@@ -1,418 +1,889 @@
 # Hooks
 
-Hooks within the Discord Extension can be split into two categories.
-[Global Hooks](#global-hooks) which will be called on every plugin that is loaded in oxide and
-[Socket Hooks](#socket-hooks) which will only be called on plugins that are the owner of the client or have registered to receive hooks for the client.
-This allows plugins to know that any hook received from the Discord Extension is meant only for them.
+Hooks within the discord extension are only called on plugins that are registered to receive them and also will only be called on plugins the information is related to. 
+By default all plugins with a connected DiscordClient will be registered to receive hooks for the bot they're connect for.
+A list of all hooks can be found in the DiscordHooks.cs file.
+If a plugin wishes to receive hooks for a specific client they need to get access to that client either by the plugin passing the client in a hook or a plugin can lookup a client for a specific plugin.
+To lookup a client for a plugin you can do the following:
 
-# Global Hooks
+```c#
+DiscordClient client = DiscordClient.GetClient(plugin);
+```
 
-These are hooks that will be called on every loaded plugin on the server
+or
 
-## Discord_OnPlayerLinked
+```c#
+DiscordClient client = DiscordClient.GetClient(pluginName);
+```
+
+## Table of Contents
+
+- [Hooks](#hooks)
+  * [Discord Link](#discord-link)
+    + [OnDiscordPlayerLinked](#ondiscordplayerlinked)
+    + [OnDiscordPlayerUnlinked](#ondiscordplayerunlinked)
+  * [Socket Hooks](#socket-hooks)
+    + [OnDiscordWebsocketOpened](#ondiscordwebsocketopened)
+    + [OnDiscordWebsocketClosed](#ondiscordwebsocketclosed)
+    + [OnDiscordWebsocketErrored](#ondiscordwebsocketerrored)
+    + [OnDiscordSetupHeartbeat](#ondiscordsetupheartbeat)
+    + [OnDiscordHeartbeatSent](#ondiscordheartbeatsent)
+  * [Discord Event Hooks](#discord-event-hooks)
+    + [OnDiscordGatewayReady](#ondiscordgatewayready)
+    + [OnDiscordGatewayResumed](#ondiscordgatewayresumed)
+    + [OnDiscordDirectChannelCreated](#ondiscorddirectchannelcreated)
+    + [OnDiscordGuildChannelCreated](#ondiscordguildchannelcreated)
+    + [OnDiscordDirectChannelUpdated](#ondiscorddirectchannelupdated)
+    + [OnDiscordGuildChannelUpdated](#ondiscordguildchannelupdated)
+    + [OnDiscordDirectChannelDeleted](#ondiscorddirectchanneldeleted)
+    + [OnDiscordGuildChannelDeleted](#ondiscordguildchanneldeleted)
+    + [OnDiscordDirectChannelPinsUpdated](#ondiscorddirectchannelpinsupdated)
+    + [OnDiscordGuildChannelPinsUpdated](#ondiscordguildchannelpinsupdated)
+    + [OnDiscordGuildCreated](#ondiscordguildcreated)
+    + [OnDiscordGuildUpdated](#ondiscordguildupdated)
+    + [OnDiscordGuildUnavailable](#ondiscordguildunavailable)
+    + [OnDiscordGuildDeleted](#ondiscordguilddeleted)
+    + [OnDiscordGuildMemberBanned](#ondiscordguildmemberbanned)
+    + [OnDiscordGuildMemberUnbanned](#ondiscordguildmemberunbanned)
+    + [OnDiscordGuildEmojisUpdated](#ondiscordguildemojisupdated)
+    + [OnDiscordGuildIntegrationsUpdated](#ondiscordguildintegrationsupdated)
+    + [OnDiscordGuildMemberAdded](#ondiscordguildmemberadded)
+    + [OnDiscordGuildMemberRemoved](#ondiscordguildmemberremoved)
+    + [OnDiscordGuildMemberUpdated](#ondiscordguildmemberupdated)
+    + [OnDiscordGuildMembersLoaded](#ondiscordguildmembersloaded)
+    + [OnDiscordGuildMembersChunk](#ondiscordguildmemberschunk)
+    + [OnDiscordGuildRoleCreated](#ondiscordguildrolecreated)
+    + [OnDiscordGuildRoleUpdated](#ondiscordguildroleupdated)
+    + [OnDiscordGuildRoleDeleted](#ondiscordguildroledeleted)
+    + [OnDiscordDirectMessageCreated](#ondiscorddirectmessagecreated)
+    + [OnDiscordGuildMessageCreated](#ondiscordguildmessagecreated)
+    + [OnDiscordDirectMessageUpdated](#ondiscorddirectmessageupdated)
+    + [OnDiscordGuildMessageUpdated](#ondiscordguildmessageupdated)
+    + [OnDiscordDirectMessageDeleted](#ondiscorddirectmessagedeleted)
+    + [OnDiscordGuildMessageDeleted](#ondiscordguildmessagedeleted)
+    + [OnDiscordDirectMessagesBulkDeleted](#ondiscorddirectmessagesbulkdeleted)
+    + [OnDiscordGuildMessagesBulkDeleted](#ondiscordguildmessagesbulkdeleted)
+    + [OnDiscordDirectMessageReactionAdded](#ondiscorddirectmessagereactionadded)
+    + [OnDiscordGuildMessageReactionAdded](#ondiscordguildmessagereactionadded)
+    + [OnDiscordDirectMessageReactionRemoved](#ondiscorddirectmessagereactionremoved)
+    + [OnDiscordGuildMessageReactionRemoved](#ondiscordguildmessagereactionremoved)
+    + [OnDiscordDirectMessageReactionRemovedAll](#ondiscorddirectmessagereactionremovedall)
+    + [OnDiscordGuildMessageReactionRemovedAll](#ondiscordguildmessagereactionremovedall)
+    + [OnDiscordDirectMessageReactionRemovedAll](#ondiscorddirectmessagereactionremovedall-1)
+    + [OnDiscordGuildMessageReactionEmojiRemoved](#ondiscordguildmessagereactionemojiremoved)
+    + [OnDiscordGuildMemberPresenceUpdated](#ondiscordguildmemberpresenceupdated)
+    + [OnDiscordDirectTypingStarted](#ondiscorddirecttypingstarted)
+    + [OnDiscordGuildTypingStarted](#ondiscordguildtypingstarted)
+    + [OnDiscordUserUpdated](#ondiscorduserupdated)
+    + [OnDiscordDirectVoiceStateUpdated](#ondiscorddirectvoicestateupdated)
+    + [OnDiscordGuildVoiceStateUpdated](#ondiscordguildvoicestateupdated)
+    + [OnDiscordGuildVoiceServerUpdated](#ondiscordguildvoiceserverupdated)
+    + [OnDiscordGuildWebhookUpdated](#ondiscordguildwebhookupdated)
+    + [OnDiscordDirectInviteCreated](#ondiscorddirectinvitecreated)
+    + [OnDiscordGuildInviteCreated](#ondiscordguildinvitecreated)
+    + [OnDiscordDirectInviteDeleted](#ondiscorddirectinvitedeleted)
+    + [OnDiscordGuildInviteDeleted](#ondiscordguildinvitedeleted)
+    + [OnDiscordInteractionCreated](#ondiscordinteractioncreated)
+    + [OnDiscordGuildIntegrationCreated](#ondiscordguildintegrationcreated)
+    + [OnDiscordGuildIntegrationCreated](#ondiscordguildintegrationcreated-1)
+    + [OnDiscordGuildIntegrationUpdated](#ondiscordguildintegrationupdated)
+    + [OnDiscordGuildIntegrationDeleted](#ondiscordguildintegrationdeleted)
+    + [OnDiscordApplicationCommandCreated](#ondiscordapplicationcommandcreated)
+    + [OnDiscordApplicationCommandUpdated](#ondiscordapplicationcommandupdated)
+    + [OnDiscordApplicationCommandDeleted](#ondiscordapplicationcommanddeleted)
+    + [OnDiscordUnhandledCommand](#ondiscordunhandledcommand)
+
+## Discord Link
+
+These hooks are called when a player is linked or unlinked using discord link.
+It will be called for every plugins registered to receive hooks.  
+**Note:** If your plugin supports discord link you should not supply any other hooks as the extension provides them for you.
+
+### OnDiscordPlayerLinked
 - Called when a player has linked their discord and player together using the DiscordLink library
-```csharp
-void Discord_OnPlayerLinked(IPlayer player, DiscordUser discord) 
+```c#
+void OnDiscordPlayerLinked(IPlayer player, DiscordUser discord) 
 {
      Puts("Player has linked with discord");
 }
 ```
 
-## Discord_OnPlayerUnlinked
+### OnDiscordPlayerUnlinked
 - Called when a player has unlinked their discord and player together using the DiscordLink library
-```csharp
-void Discord_OnPlayerUnlinked(IPlayer player, DiscordUser discord) 
+```c#
+void OnDiscordPlayerUnlinked(IPlayer player, DiscordUser discord) 
 {
      Puts("Player has unlinked with discord");
 }
 ```
 
-# Socket Hooks
+## Socket Hooks
 
 These are hooks that are only called for the plugin who created the client or registered to receive hooks for that client
 
-## DiscordSocket_HeartbeatSent
-- Called when a heartbeat is sent over the websocket to discord to keep the connection open
-
-```csharp
-void DiscordSocket_HeartbeatSent()
-{
-    Puts("Heartbeat sent to discord!");
-}
-```
-
-## DiscordSocket_WebSocketOpened
+### OnDiscordWebsocketOpened
 - Called when the discord socket connects.
-```csharp
-void DiscordSocket_WebSocketOpened()
+```c#
+void OnDiscordWebsocketOpened()
 {
     Puts("WebSocket Opened!");
 }
 ```
 
-## DiscordSocket_WebSocketClosed
-```csharp
-void DiscordSocket_WebSocketClosed(string reason, int code, bool clean)
+### OnDiscordWebsocketClosed
+- Called when the web socket is closed for any reason.
+```c#
+void OnDiscordWebsocketClosed(string reason, int code, bool clean)
 {
     Puts("WebSocket closed!");
 }
 ```
 
-- Called when the web socket is closed for any reason.
-- No return behavior.
+### OnDiscordWebsocketErrored
+- Called when the web socket has an error.
 
-## DiscordSocket_WebSocketErrored
-```csharp
-void DiscordSocket_WebSocketErrored(Exception exception, string message)
+```c#
+void OnDiscordWebsocketErrored(Exception exception, string message)
 {
-    Puts($"WebSocket errored:.");
+    Puts($"WebSocket errored!");
 }
 ```
 
-- Called when the web socket errors.
-- No return behavior.
+### OnDiscordSetupHeartbeat
+- Called when we receive the heartbeat interval from the websocket
 
-
-# Discord API Event Hooks
-
-## Discord_Ready
-```csharp
-void Discord_Ready(Ready ready)
+```c#
+void OnDiscordSetupHeartbeat(float heartbeatInterval)
 {
-    Puts("Discord is ready!");
+    Puts("Heartbeat setup!");
 }
 ```
 
-- Called when discord is ready, and has started sending data.
+### OnDiscordHeartbeatSent
+- Called when a heartbeat is sent over the websocket to discord to keep the connection open
 
-## Discord_Resumed
-```csharp
-void Discord_Resumed(Resumed resumed)
+```c#
+void OnDiscordHeartbeatSent(float heartbeatInterval)
 {
-    Puts("Discord Connection Resumed!");
+    Puts("Heartbeat sent!");
 }
 ```
 
-- Called when the discord connection has been resumed.
+## Discord Event Hooks
 
-## Discord_ChannelCreate
-```csharp
-void Discord_ChannelCreated(Channel channel)
+These are events that discord sends us over the websocket. 
+If you wish to listen for this type of event add the hook into your plugins.  
+**Note:** If you aren't receiving calls for a specific hooks make sure you have passed the required [Gateway Intents](GatewayIntents.md) for that hook.
+
+### OnDiscordGatewayReady
+- Called when the Discord Bot has successfully connected to the gateway and identified successfully.
+- **Note:** Only partial guild information is available at this point. 
+  - If you need full guild listen for [OnDiscordGuildCreated](#OnDiscordGuildCreated) hook
+  - If you need full guild member list listen for [OnDiscordGuildMembersLoaded](#OnDiscordGuildMembersLoaded)
+
+```c#
+ void OnDiscordGatewayReady(GatewayReadyEvent ready, bool previouslyConnected)
+ {
+     Puts("OnDiscordGatewayReady Works!");
+ }
+```
+
+### OnDiscordGatewayResumed
+- Called when the websocket has reconnected to the websocket and resumed the previous session
+
+```c#
+void OnDiscordGatewayResumed(GatewayResumedEvent resume)
 {
-    Puts("Discord Channel Created");
+    Puts("OnDiscordGatewayResumed Works!");
 }
 ```
 
-- Called when a channel has been created.
+### OnDiscordDirectChannelCreated
 
-## Discord_ChannelUpdate
-```csharp
-void Discord_ChannelUpdate(Channel updatedChannel, Channel oldChannel)
+- Called when a direct message (DM) channel has been created.
+
+```c#
+void OnDiscordDirectChannelCreated(Channel channel)
 {
-    Puts("Discord Channel Updated");
+    Puts("OnDiscordDirectChannelCreated Works!");
 }
 ```
 
-- Called when a channel has been updated.
+### OnDiscordGuildChannelCreated
 
-## Discord_ChannelDelete
-```csharp
-void Discord_ChannelDelete(Channel channel)
+- Called when a channel has been created in a guild.
+
+```c#
+void OnDiscordGuildChannelCreated(Channel channel, Guild guild)
 {
-    Puts("Discord Channel Deleted!");
+    Puts("OnDiscordGuildChannelCreated Works!");
 }
 ```
 
-- Called when a discord channel has been deleted.
+### OnDiscordDirectChannelUpdated
 
-## Discord_ChannelPinsUpdate
-```csharp
-void Discord_ChannelPinsUpdate(ChannelPinsUpdate update)
+- Called when a direct message (DM) channel has been updated.
+
+```c#
+void OnDiscordDirectChannelUpdated(Channel channel, Channel previous)
 {
-    Puts("The pins on a channel have been updated!");
+    Puts("OnDiscordDirectChannelUpdated Works!");
 }
 ```
 
-- Called when the pins on a channel have been updated.
+### OnDiscordGuildChannelUpdated
 
-## Discord_GuildCreate
-```csharp
-void Discord_GuildCreate(Guild guild)
+- Called when a channel has been updated in a guild.
+
+```c#
+void OnDiscordGuildChannelUpdated(Channel channel, Channel previous, Guild guild)
 {
-	Puts("A guild has been created!");
+    Puts("OnDiscordGuildChannelUpdated Works!");
 }
 ```
 
-- Called when a new guild is created.
-- This is not currently set up correctly.
+### OnDiscordDirectChannelDeleted
 
-## Discord_GuildUpdate
-```csharp
-void Discord_GuildUpdate(Guild guild)
+- Called when a direct message (DM) channel has been deleted.
+  - Not sure if this is possible for DM channels
+
+```c#
+void OnDiscordDirectChannelDeleted(Channel channel)
 {
-    Puts("A guild has been updated!");
+    Puts("OnDiscordDirectChannelDeleted Works!");
 }
 ```
 
-- Called when a guild has been updated.
+### OnDiscordGuildChannelDeleted
 
-## Discord_GuildDelete
-```csharp
-void Discord_GuildDelete(Guild guild)
+- Called when a channel has been deleted in a guild.
+
+```c#
+void OnDiscordGuildChannelDeleted(Channel channel, Guild guild)
 {
-	Puts("A guild has been deleted!");
+    Puts("OnDiscordGuildChannelDeleted Works!");
 }
 ```
 
-- Called when a guild is deleted.
+### OnDiscordDirectChannelPinsUpdated
 
-## Discord_GuildBanAdd
-```csharp
-void Discord_GuildBanAdd(User user)
+- Called when a direct message (DM) channel has it's pinned messages updated.
+  - channel may be null if we haven't seen it before.
+
+```c#
+void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel)
 {
-    Puts("A user has been banned!");
+    Puts("OnDiscordDirectChannelPinsUpdated Works!");
 }
 ```
 
-- Called when a user is banned.
+### OnDiscordGuildChannelPinsUpdated
 
-## Discord_GuildBanRemove
-```csharp
-void Discord_GuildBanRemove(User user)
+- Called when a guild channel has it's pinned messages updated
+
+```c#
+void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel, Guild guild)
 {
-    Puts("A user has been unbanned!");
+    Puts("OnDiscordGuildChannelPinsUpdated Works!");
 }
 ```
 
-- Called when a user is unbanned.
+### OnDiscordGuildCreated
 
-## Discord_GuildEmojisUpdate
-```csharp
-void Discord_GuildEmojisUpdate(GuildEmojisUpdate update)
+- Called when a discord server is fully loaded while connecting or the bot has joined a new discord server
+- previouslyConnected will be set if the bot had previously connected to the websocket
+
+```c#
+void OnDiscordGuildCreated(Guild guild, bool previouslyConnected)
 {
-    Puts("The emoji's have been updated!");
+    Puts("OnDiscordGuildCreated Works!");
 }
 ```
 
-- Called when the emoji's in a guild have been updated.
+### OnDiscordGuildUpdated
 
-## Discord_GuildIntegrationsUpdate
-```csharp
-void Discord_GuildIntegrationsUpdate(GuildIntergrationsUpdate update)
+- Called when any updates are made to a guild
+
+```c#
+void OnDiscordGuildUpdated(Guild guild, Guild previous)
 {
-    Puts("Guild Intergrations Updated!");
+    Puts("OnDiscordGuildUpdated Works!");
 }
 ```
 
-- Called when the integration in a guild have been updated?
+### OnDiscordGuildUnavailable
 
-## Discord_MemberAdded
-```csharp
-void Discord_MemberAdded(GuildMember member)
+- Called when a guild become unavailable due to a network outage
+
+```c#
+void OnDiscordGuildUnavailable(Guild guild)
 {
-    Puts("A user has been added to the server!");
+    Puts("OnDiscordGuildUnavailable Works!");
 }
 ```
 
-- Called when a user joins the discord server.
+### OnDiscordGuildDeleted
 
-## Discord_MemberRemoved
-```csharp
-void Discord_MemberRemoved(GuildMember member)
+- Called when a bot is removed from a discord server or that discord server was deleted
+
+```c#
+void OnDiscordGuildUnavailable(Guild guild)
 {
-    Puts("A user has been removed from the server!");
+    Puts("OnDiscordGuildUnavailable Works!");
 }
 ```
 
-- Called when a user is removed from the server.
+### OnDiscordGuildMemberBanned
 
-## Discord_GuildMemberUpdate
-```csharp
-void Discord_GuildMemberUpdate(GuildMemberUpdate update, GuildMember oldMember)
+- Called when a guild member is banned
+
+```c#
+void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, Guild guild)
 {
-    Puts("A guild member has been updated!");
+    Puts("OnDiscordGuildBanAdded Works!");
 }
 ```
 
-- Called when a guild member is updated.
+### OnDiscordGuildMemberUnbanned
 
-## Discord_GuildMembersChunk
-```csharp
-void Discord_GuildMembersChunk(GuildMembersChunk chunk)
+- Called when a guild member is unbanned
+
+```c#
+void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, Guild guild)
 {
-    Puts("A guild members chunk has been recieved!")
+    Puts("OnDiscordGuildBanAdded Works!");
 }
 ```
 
-- Called in response to a 'Gateway Request Guild Members'.
+### OnDiscordGuildEmojisUpdated
 
-## Discord_GuildRoleCreate
-```csharp
-void Discord_GuildRoleCreate(Role role)
+- Called when the custom emojis for a guild are created/updated/deleted
+
+```c#
+void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, Emoji&gt; previous, Guild guild)
 {
-    Puts("A new role has been created!");
+    Puts("OnDiscordGuildEmojisUpdated Works!");
 }
 ```
 
-- Called when a new role is created
+### OnDiscordGuildIntegrationsUpdated
 
-## Discord_GuildRoleUpdate
-```csharp
-void Discord_GuildRoleUpdate(Role newRole, Role oldRole)
+- Called when a guild integration is updated
+
+```c#
+void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, Guild guild)
 {
-    Puts("A role has been updated!");
+    Puts("OnDiscordGuildIntegrationsUpdated Works!");
 }
 ```
 
-- Called when a role is updated.
+### OnDiscordGuildMemberAdded
 
-## Discord_GuildRoleDelete
-```csharp
-void Discord_GuildRoleDelete(Role role)
+- Called when a guild member has been added to the guild
+
+```c#
+void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, Guild guild)
 {
-    Puts("A role has been deleted!");
+    Puts("OnDiscordGuildMemberRemoved Works!");
 }
 ```
 
-- Called when a role is deleted.
+### OnDiscordGuildMemberRemoved
 
-## Discord_MessageCreate
-```csharp
-void Discord_MessageCreate(Message message)
+- Called when a guild member has been removed from the guild
+
+```c#
+void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, Guild guild)
 {
-    Puts("A new message has been created!");
+    Puts("OnDiscordGuildMemberRemoved Works!");
 }
 ```
 
-- Called when a new message is created.
+### OnDiscordGuildMemberUpdated
 
-## Discord_MessageUpdate
-```csharp
-void Discord_MessageUpdate(Message message)
+- Called when a guild member has been updated
+  - This also include when the DiscordUser is updated as well
+
+```c#
+void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, Guild guild)
 {
-    Puts("A message has been updated!");
+    Puts("OnDiscordGuildMemberUpdated Works!");
 }
 ```
 
-- Called when a message is updated.
+### OnDiscordGuildMembersLoaded
 
-## Discord_MessageDelete
-```csharp
-void Discord_MessageDelete(MessageDelete message)
+- Called when a guild has finished loading all guild members
+  - This Discord Extension requests all guild members in the [OnDiscordGuildCreated](#ondiscordguildcreated) Hook
+
+```c#
+void OnDiscordGuildMembersLoaded(Guild guild)
 {
-    Puts("A message has been deleted!");
+    Puts("OnDiscordGuildMembersLoaded Works!");
 }
 ```
 
-- Called when a message is deleted.
+### OnDiscordGuildMembersChunk
 
-## Discord_MessageDeleteBulk
-```csharp
-void Discord_MessageDeleteBulk(MessageDeleteBulk bulk)
+- Called in a response to a request for guild member chunks
+
+```c#
+void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, Guild guild)
 {
-    Puts("A bulk of messages have been deleted!");
+    Puts("OnDiscordGuildMembersChunk Works!");
 }
 ```
 
-- Called when a bulk set of messages have been deleted.
+### OnDiscordGuildRoleCreated
 
-## Discord_MessageReactionAdd
-```csharp
-void Discord_MessageReactionAdd(MessageReactionUpdate update)
+- Called when a discord guild role is created
+
+```c#
+void OnDiscordGuildRoleCreated(Role role, Guild guild)
 {
-    Puts("A reaction has been added to a message!");
+    Puts("OnDiscordGuildRoleCreated Works!");
 }
 ```
 
-- Called when a reaction is added to a message.
+### OnDiscordGuildRoleUpdated
 
-## Discord_MessageReactionRemove
-```csharp
-void Discord_MessageReactionRemove(MessageReactionUpdate update)
+- Called when a discord guild role is updated
+
+```c#
+void OnDiscordGuildRoleUpdated(Role role, Role previous, Guild guild)
 {
-    Puts("A reaction has been removed from a message!");
+    Puts("OnDiscordGuildRoleUpdated Works!");
 }
 ```
 
-- Called when a reaction is removed from a message.
+### OnDiscordGuildRoleDeleted
 
-## Discord_ReactionRemoveAll
-```csharp
-void Discord_MessageReactionRemoveAll(MessageReactionRemoveAll reactions)
+- Called when a discord guild role is deleted
+
+```c#
+void OnDiscordGuildRoleDeleted(Role role, Guild guild)
 {
-    Puts("All reactions have been removed from a message!");
+    Puts("OnDiscordGuildRoleDeleted Works!");
 }
 ```
 
-- Called when all reactions are removed from a message.
+### OnDiscordDirectMessageCreated
 
-## Discord_PresenceUpdate
-```csharp
-void Discord_PresenceUpdate(PResenceUpdate update)
+- Called when a message is created in a direct message channel
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectMessageCreated(DiscordMessage message, Channel channel)
 {
-    Puts("Someone's presence has been updated!");
+    Puts("OnDiscordDirectMessageCreated Works!");
 }
 ```
 
-- Called when a user's presence is updated.
+### OnDiscordGuildMessageCreated
 
-## Discord_TypingStart
-```csharp
-void Discord_TypingStart(TypingStart start)
+- Called when a message is created in a guild channel
+
+```c#
+void OnDiscordGuildMessageCreated(DiscordMessage message, Channel channel, Guild guild)
 {
-    Puts("Someone has started typing!");
+    Puts("OnDiscordGuildMessageCreated Works!");
 }
 ```
 
-- Called when someone starts typing.
+### OnDiscordDirectMessageUpdated
 
-## Discord_UserUpdate
-```csharp
-void Discord_UserUpdate(User user)
+- Called when a message is updated in a direct message channel
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
 {
-    Puts("A user has been updated!");
+    Puts("OnDiscordDirectMessageUpdated Works!");
 }
 ```
 
-- Called when a user is updated.
+### OnDiscordGuildMessageUpdated
 
-## Discord_VoiceStateUpdate
-```csharp
-void Discord_VoiceStateUpdate(VoiceState state)
+- Called when a message is updated in a guild channel
+
+```c#
+void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
 {
-    Puts("A users voice state has been updated!");
+    Puts("OnDiscordDirectMessageUpdated Works!");
 }
 ```
 
-- Called when a user's voice state is updated.
+### OnDiscordDirectMessageDeleted
 
-## Discord_VoiceServerUpdate
-```csharp
-void Discord_VoiceServerUpdate(VoiceServerUpdate update)
+- Called when a message is deleted in a direct message channel
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel)
 {
-    Puts("The voice server has been updated!");
+    Puts("OnDiscordDirectMessageDeleted Works!");
 }
 ```
 
-- Called when the voice server is updated.
+### OnDiscordGuildMessageDeleted
 
-## Discord_WebhooksUpdate
-```csharp
-void Discord_WebhooksUpdate(WebhooksUpdate webhooks)
+- Called when a message is deleted in a guild channel
+
+```c#
+void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel, Guild guild)
 {
-    Puts("The webhooks have been updated!");
+    Puts("OnDiscordDirectMessageDeleted Works!");
 }
 ```
 
-- Called when the webhooks are updated.
+### OnDiscordDirectMessagesBulkDeleted
 
-## Discord_UnhandledEvent
-```csharp
-void Discord_UnhandledEvent(JObject messageObject)
+- Called when a message is deleted in a direct message channel
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel)
 {
-    Puts("An unhandlded event has occured!");
+    Puts("OnDiscordDirectMessagesBulkDeleted Works!");
 }
 ```
 
-- Called when an event that is not handlded by the extension was raised
-- Please create an issue on the GitHub if this error ever occurs
+### OnDiscordGuildMessagesBulkDeleted
+
+- Called when a message is deleted in a guild channel
+
+```c#
+void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildMessagesBulkDeleted Works!");
+}
+```
+
+### OnDiscordDirectMessageReactionAdded
+
+- Called when a reaction is added to a message in a direct message channel
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel)
+{
+    Puts("OnDiscordDirectMessageReactionAdded Works!");
+}
+```
+
+### OnDiscordGuildMessageReactionAdded
+
+- Called when a reaction is added to a message in a guild channel
+
+```c#
+void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildMessageReactionAdded Works!");
+}
+```
+
+### OnDiscordDirectMessageReactionRemoved
+
+- Called when a reaction is removed from a message in a direct message channel
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel)
+{
+    Puts("OnDiscordDirectMessageReactionRemoved Works!");
+}
+```
+
+### OnDiscordGuildMessageReactionRemoved
+
+- Called when a reaction is removed from a message in a guild channel
+
+```c#
+void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildMessageReactionRemoved Works!");
+}
+```
+
+### OnDiscordDirectMessageReactionRemovedAll
+
+- Called when all reactions are removed from a message in a direct message channel
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+{
+    Puts("OnDiscordDirectMessageReactionRemovedAll Works!");
+}
+```
+
+### OnDiscordGuildMessageReactionRemovedAll
+
+- Called when all reactions are removed from a message in a guild channel
+
+```c#
+void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildMessageReactionRemovedAll Works!");
+}
+```
+
+### OnDiscordDirectMessageReactionRemovedAll
+
+- Called when all of a specific reactions is removed from a message in a direct message channel
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+{
+    Puts("OnDiscordDirectMessageReactionEmojiRemoved Works!");
+}
+```
+
+### OnDiscordGuildMessageReactionEmojiRemoved
+
+- Called when all of a specific reaction is removed from a message in a guild channel
+
+```c#
+void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildMessageReactionEmojiRemoved Works!");
+}
+```
+
+### OnDiscordGuildMemberPresenceUpdated
+
+- Called when a guild members presence is updated
+
+```c#
+void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, Guild guild)
+{
+    Puts("OnDiscordGuildMemberPresenceUpdated Works!");
+}
+```
+
+### OnDiscordDirectTypingStarted
+
+- Called typing starts in a direct message channel
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectTypingStarted(TypingStartedEvent typing, Channel channel)
+{
+    Puts("OnDiscordDirectTypingStarted Works!");
+}
+```
+
+### OnDiscordGuildTypingStarted
+
+- Called typing starts in a guild channel
+
+```c#
+void OnDiscordGuildTypingStarted(TypingStartedEvent typing, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildTypingStarted Works!");
+}
+```
+
+### OnDiscordUserUpdated
+
+- Called when a discord user is updated
+
+```c#
+       /// void OnDiscordUserUpdated(DiscordUser user)
+{
+    Puts("OnDiscordUserUpdated Works!");
+}
+```
+
+### OnDiscordDirectVoiceStateUpdated
+
+- Called when the voice state in a direct message channel is updated
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectVoiceStateUpdated(VoiceState voice, Channel channel)
+{
+    Puts("OnDiscordDirectVoiceStateUpdated Works!");
+}
+```
+
+### OnDiscordGuildVoiceStateUpdated
+
+- Called when the voice state in a guild channel is updated
+
+```c#
+void OnDiscordGuildVoiceStateUpdated(VoiceState voice, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildVoiceStateUpdated Works!");
+}
+```
+
+### OnDiscordGuildVoiceServerUpdated
+
+- Called when the voice server in a guild channel is updated
+
+```c#
+void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildVoiceServerUpdated Works!");
+}
+```
+
+### OnDiscordGuildWebhookUpdated
+
+- Called when a webhook ins a guild is updated
+
+```c#
+void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildWebhookUpdated Works!");
+}
+```
+
+### OnDiscordDirectInviteCreated
+
+- Called when an invite to a direct message channel is created
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, Channel channel)
+{
+    Puts("OnDiscordDirectInviteCreated Works!");
+}
+```
+
+### OnDiscordGuildInviteCreated
+
+- Called when an invite to a guild channel is created
+
+```c#
+void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildInviteCreated Works!");
+}
+```
+
+### OnDiscordDirectInviteDeleted
+
+- Called when an invite to a direct message channel is deleted
+  - `channel` may be null if we haven't seen it yet
+
+```c#
+void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, Channel channel)
+{
+    Puts("OnDiscordDirectInviteDeleted Works!");
+}
+```
+
+### OnDiscordGuildInviteDeleted
+
+- Called when an invite to a guild channel is deleted
+
+```c#
+void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, Channel channel, Guild guild)
+{
+    Puts("OnDiscordGuildInviteDeleted Works!");
+}
+```
+
+### OnDiscordInteractionCreated
+
+- Called when an user uses a discord slash command
+
+```c#
+void OnDiscordInteractionCreated(Interaction interaction)
+{
+    Puts("OnDiscordInteractionCreated Works!");
+}
+```
+
+### OnDiscordGuildIntegrationCreated
+
+- Called when an integration is created on a guild
+
+```c#
+void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+{
+    Puts("OnDiscordGuildIntegrationCreated Works!");
+}
+```
+
+### OnDiscordGuildIntegrationCreated
+
+- Called when an integration is created on a guild
+
+```c#
+void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+{
+    Puts("OnDiscordGuildIntegrationCreated Works!");
+}
+```
+
+### OnDiscordGuildIntegrationUpdated
+
+- Called when an integration is updated on a guild
+
+```c#
+void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
+{
+    Puts("OnDiscordGuildIntegrationUpdated Works!");
+}
+```
+
+### OnDiscordGuildIntegrationDeleted
+
+- Called when an integration is deleted on a guild
+
+```c#
+void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, Guild guild)
+{
+    Puts("OnDiscordIntegrationDeleted Works!");
+}
+```
+
+### OnDiscordApplicationCommandCreated
+
+- Called when a application command is created for a guild
+
+```c#
+void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, Guild guild)
+{
+    Puts("OnDiscordApplicationCommandCreated Works!");
+}
+```
+
+### OnDiscordApplicationCommandUpdated
+
+- Called when a application command is updated for a guild
+
+```c#
+void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, Guild guild)
+{
+    Puts("OnDiscordApplicationCommandUpdated Works!");
+}
+```
+
+### OnDiscordApplicationCommandDeleted
+
+- Called when a application command is deleted for a guild
+
+```c#
+void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, Guild guild)
+{
+    Puts("OnDiscordApplicationCommandDeleted Works!");
+}
+```
+
+### OnDiscordUnhandledCommand
+
+- Called when we receive an event we do not handle yet.
+  - If you need this event you can listen to it using this hook until we support it
+  - Please create an issue on uMod if this error ever occurs
+
+```c#
+void OnDiscordUnhandledCommand(EventPayload payload)
+{
+    Puts("OnDiscordUnhandledCommand Works!");
+}
+```

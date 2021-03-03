@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// If we should attempt to resume our previous session after connecting
         /// </summary>
         public bool ShouldAttemptResume;
-        
+
         /// <summary>
         /// Timer to use when attempting to reconnect to discord due to an error
         /// </summary>
@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _socket.OnMessage += _listener.SocketMessage;
             _socket.ConnectAsync();
         }
-        
+
         /// <summary>
         /// Disconnects the websocket from discord
         /// </summary>
@@ -93,7 +93,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             RequestedReconnect = attemptReconnect;
             ShouldAttemptResume = shouldResume;
-            
+
             if (ReconnectTimer != null)
             {
                 ReconnectTimer.Stop();
@@ -145,7 +145,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 ReconnectTimer.Dispose();
                 ReconnectTimer = null;
             }
-            
+
             Disconnect(false, false);
             _listener?.Shutdown();
             _listener = null;
@@ -178,7 +178,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 return;
             }
-            
+
             CommandPayload opcode = new CommandPayload
             {
                 OpCode = opCode,
@@ -187,7 +187,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             string payloadData = JsonConvert.SerializeObject(opcode, DiscordExtension.ExtensionSerializeSettings);
             _logger.Debug($"{nameof(Socket)}.{nameof(Send)} Payload: {payloadData}");
-            
+
             _socket.SendAsync(payloadData, completed);
         }
 
@@ -199,7 +199,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             return SocketState == SocketState.Connected;
         }
-        
+
         /// <summary>
         /// Returns if the websocket is in the connecting state
         /// </summary>

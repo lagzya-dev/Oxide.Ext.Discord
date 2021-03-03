@@ -1,9 +1,11 @@
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Entities.Webhooks;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -100,6 +102,17 @@ namespace Oxide.Ext.Discord.Extensions
         public static DiscordUser GetDiscordUser(this IPlayer player)
         {
             return DiscordExtension.DiscordLink.GetDiscordUser(player);
+        }
+
+        /// <summary>
+        /// Returns a minimal Guild Member for the given player
+        /// </summary>
+        /// <param name="player">Player to get Discord User for</param>
+        /// <param name="guild">Guild the member is in</param>
+        /// <returns>GuildMember if linked and in guild; null otherwise</returns>
+        public static GuildMember GetGuildMember(this IPlayer player, Guild guild)
+        {
+            return DiscordExtension.DiscordLink.GetLinkedMember(player, guild);
         }
     }
 }

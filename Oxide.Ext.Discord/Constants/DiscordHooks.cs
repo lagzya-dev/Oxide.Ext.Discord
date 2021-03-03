@@ -42,7 +42,6 @@ namespace Oxide.Ext.Discord.Constants
         /// </code>
         public const string OnDiscordSetupHeartbeat = nameof(OnDiscordSetupHeartbeat);
         
-        
         /// <code>
         /// void OnDiscordHeartbeatSent()
         /// {
@@ -189,12 +188,12 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildDeleted = nameof(OnDiscordGuildDeleted);
         
         /// <code>
-        /// void OnDiscordGuildBanAdded(GuildMemberBannedEvent ban, Guild guild)
+        /// void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, Guild guild)
         /// {
-        ///     Puts("OnDiscordGuildBanAdded Works!");
+        ///     Puts("OnDiscordGuildMemberBanned Works!");
         /// }
         /// </code>
-        public const string OnDiscordGuildBanAdded = nameof(OnDiscordGuildBanAdded);
+        public const string OnDiscordGuildMemberBanned = nameof(OnDiscordGuildMemberBanned);
         
         /// <code>
         /// void OnDiscordGuildBanRemoved(GuildMemberBannedEvent ban, Guild guild)
@@ -202,7 +201,7 @@ namespace Oxide.Ext.Discord.Constants
         ///     Puts("OnDiscordGuildBanRemoved Works!");
         /// }
         /// </code>
-        public const string OnDiscordGuildBanRemoved = nameof(OnDiscordGuildBanRemoved);
+        public const string OnDiscordGuildMemberUnbanned = nameof(OnDiscordGuildMemberUnbanned);
         
         /// <code>
         /// void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, Emoji&gt; previous, Guild guild)
@@ -422,7 +421,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMessageReactionEmojiRemoved = nameof(OnDiscordGuildMessageReactionEmojiRemoved);
         
         /// <code>
-        /// void OnDiscordGuildMemberPresenceUpdated(DiscordUser user, DiscordUser previous, Guild guild)
+        /// void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, Guild guild)
         /// {
         ///     Puts("OnDiscordGuildMemberPresenceUpdated Works!");
         /// }
@@ -430,7 +429,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMemberPresenceUpdated = nameof(OnDiscordGuildMemberPresenceUpdated);
         
         /// <code>
-        /// void OnDiscordDirectTypingStarted(DiscordUser user, DiscordUser previous)
+        /// void OnDiscordDirectTypingStarted(TypingStartedEvent typing, Channel channel)
         /// {
         ///     Puts("OnDiscordDirectTypingStarted Works!");
         /// }
@@ -438,7 +437,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectTypingStarted = nameof(OnDiscordDirectTypingStarted);
         
         /// <code>
-        /// void OnDiscordGuildTypingStarted(DiscordUser user, DiscordUser previous, Guild guild)
+        /// void OnDiscordGuildTypingStarted(TypingStartedEvent typing, Channel channel, Guild guild)
         /// {
         ///     Puts("OnDiscordGuildTypingStarted Works!");
         /// }
@@ -526,20 +525,20 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordInteractionCreated = nameof(OnDiscordInteractionCreated);
         
         /// <code>
-        /// void OnDiscordIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+        /// void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
         /// {
-        ///     Puts("OnDiscordIntegrationCreated Works!");
+        ///     Puts("OnDiscordGuildIntegrationCreated Works!");
         /// }
         /// </code>
-        public const string OnDiscordIntegrationCreated = nameof(OnDiscordIntegrationCreated);
+        public const string OnDiscordGuildIntegrationCreated = nameof(OnDiscordGuildIntegrationCreated);
         
         /// <code>
-        /// void OnDiscordIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
+        /// void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
         /// {
-        ///     Puts("OnDiscordIntegrationUpdated Works!");
+        ///     Puts("OnDiscordGuildIntegrationUpdated Works!");
         /// }
         /// </code>
-        public const string OnDiscordIntegrationUpdated = nameof(OnDiscordIntegrationUpdated);
+        public const string OnDiscordGuildIntegrationUpdated = nameof(OnDiscordGuildIntegrationUpdated);
         
         /// <code>
         /// void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, Guild guild)
