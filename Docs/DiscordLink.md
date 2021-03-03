@@ -162,7 +162,7 @@ There are extension methods that can be called from an DiscordUser object in the
 ```c#
 void MyMethod(DiscordUser user) 
 {
-    player.SendChatMessage("Hello");
+    user.SendChatMessage("Hello");
 }
 ```
 
