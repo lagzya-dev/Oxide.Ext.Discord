@@ -4,7 +4,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
     /// <summary>
     /// Represents the websocket connection data
     /// </summary>
-    class GatewayConnect
+    public static class GatewayConnect
     {
         /// <summary>
         /// Which websocket version to use
@@ -16,7 +16,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// </summary>
         public static string Encoding { get; } = "json";
         
-        //TODO: Test Compression
         /// <summary>
         /// Compression the websocket should use
         /// </summary>
@@ -26,6 +25,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// Generated connection string for the websocket
         /// </summary>
         /// <returns></returns>
-        public static string Serialize() => $"v={Version}&encoding={Encoding}";
+        public static readonly string ConnectionArgs = $"v={Version}&encoding={Encoding}";
     }
 }

@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         {
             GetGateway(client, gateway =>
             {
-                WebsocketUrl = $"{gateway.Url}/?{GatewayConnect.Serialize()}";
+                WebsocketUrl = $"{gateway.Url}/?{GatewayConnect.ConnectionArgs}";
                 client.Logger.Debug($"{nameof(Gateway)}.{nameof(UpdateGatewayUrl)} Updated Gateway Url: {WebsocketUrl}");
                 callback.Invoke();
             });

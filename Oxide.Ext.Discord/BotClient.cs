@@ -30,11 +30,6 @@ namespace Oxide.Ext.Discord
         public static readonly Hash<string, BotClient> ActiveBots = new Hash<string, BotClient>();
 
         /// <summary>
-        /// If the connection is initialized and not disconnected
-        /// </summary>
-        public bool Initialized;
-
-        /// <summary>
         /// The settings for this bot of all the combined clients
         /// </summary>
         public readonly DiscordSettings Settings;
@@ -55,6 +50,11 @@ namespace Oxide.Ext.Discord
         public readonly Hash<Snowflake, Channel> DirectMessagesByUserId = new Hash<Snowflake, Channel>();
 
         /// <summary>
+        /// If the connection is initialized and not disconnected
+        /// </summary>
+        public bool Initialized { get; internal set; }
+        
+        /// <summary>
         /// Application reference for this bot
         /// </summary>
         public Application Application { get; internal set; }
@@ -72,7 +72,6 @@ namespace Oxide.Ext.Discord
         internal readonly ILogger Logger;
         
         internal GatewayReadyEvent ReadyData;
-        internal readonly List<DiscordClient> ClientsPendingConnection = new List<DiscordClient>();
 
         internal Socket WebSocket;
 
@@ -189,11 +188,6 @@ namespace Oxide.Ext.Discord
                 {
                     UpdateLogLevel(client.Settings.LogLevel);
                 }
-                
-                if (ReadyData != null)
-                {
-                    ClientsPendingConnection.Add(client);
-                }
 
                 GatewayIntents intents = Settings.Intents | client.Settings.Intents;
                 
@@ -203,25 +197,14 @@ namespace Oxide.Ext.Discord
                     Logger.Info("New intents have been requested for the bot. Reconnecting with updated intents.");
                     Settings.Intents = intents;
                     DisconnectWebsocket(true);
-                    return;
                 }
                 
-                if (WebSocket.IsConnected() && ReadyData != null)
+                if (ReadyData != null)
                 {
-                    ProcessPendingClients();
+                    ReadyData.Guilds = Servers.Values.ToList();
+                    client.CallHook(DiscordHooks.OnDiscordGatewayReady, ReadyData, true);
                 }
             }
-        }
-
-        internal void ProcessPendingClients()
-        {
-            ReadyData.Guilds = Servers.Values.ToList();
-            foreach (DiscordClient client in ClientsPendingConnection)
-            {
-                client.CallHook(DiscordHooks.OnDiscordGatewayReady, ReadyData, true);
-            }
-            
-            ClientsPendingConnection.Clear();
         }
 
         /// <summary>

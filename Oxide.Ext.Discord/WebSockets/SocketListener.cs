@@ -17,6 +17,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.WebSockets.Handlers;
 using Oxide.Plugins;
 using WebSocketSharp;
 
@@ -493,6 +494,10 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case "APPLICATION_COMMAND_DELETE":
                     HandleDispatchApplicationCommandDelete(payload);
+                    break;                
+                
+                case "GUILD_JOIN_REQUEST_DELETE":
+                    HandleGuildJoinRequestDelete(payload);
                     break;
                 
                 default:
@@ -519,10 +524,6 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 _client.ReadyData = ready;
                 _client.CallHook(DiscordHooks.OnDiscordGatewayReady, ready, false);
-            }
-            else
-            {
-                _client.ProcessPendingClients();
             }
         }
 
@@ -1277,6 +1278,12 @@ namespace Oxide.Ext.Discord.WebSockets
             Guild guild = _client.GetGuild(commandEvent.GuildId); 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchApplicationCommandDelete)} Guild ID: {commandEvent.GuildId} Guild Name: {guild?.Name} Command ID: {commandEvent.Id}");
             _client.CallHook(DiscordHooks.OnDiscordApplicationCommandDeleted, commandEvent, guild);
+        }
+        
+        //TODO: Implement once docs are available
+        private void HandleGuildJoinRequestDelete(EventPayload payload)
+        {
+            
         }
 
         private void HandleDispatchUnhandledEvent(EventPayload payload)

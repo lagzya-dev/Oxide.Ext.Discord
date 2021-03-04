@@ -5,6 +5,7 @@ using Oxide.Core;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.WebSockets.Handlers;
 using WebSocketSharp;
 
 namespace Oxide.Ext.Discord.WebSockets
@@ -35,6 +36,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private readonly BotClient _client;
         private WebSocket _socket;
         private SocketListener _listener;
+        private readonly SocketCommandHandler _commands;
         private readonly ILogger _logger;
 
         /// <summary>
@@ -47,10 +49,11 @@ namespace Oxide.Ext.Discord.WebSockets
             _client = client;
             _logger = logger;
             _listener = new SocketListener(_client, this, _logger);
+            _commands = new SocketCommandHandler(this);
         }
 
         /// <summary>
-        /// Connect tot the websocket
+        /// Connect to the websocket
         /// </summary>
         /// <exception cref="Exception">Thrown if the socket still exists. Must call disconnect before trying to connect</exception>
         public void Connect()
@@ -173,24 +176,23 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         /// <param name="opCode">Command code to send</param>
         /// <param name="data">Data to send</param>
-        /// <param name="completed">Action once the action is completed and if it was successful</param>
-        public void Send(GatewayCommandCode opCode, object data, Action<bool> completed = null)
+        public void Send(GatewayCommandCode opCode, object data)
         {
-            if (!IsConnected())
-            {
-                return;
-            }
-
-            CommandPayload opcode = new CommandPayload
+            CommandPayload payload = new CommandPayload
             {
                 OpCode = opCode,
                 Payload = data
             };
 
-            string payloadData = JsonConvert.SerializeObject(opcode, DiscordExtension.ExtensionSerializeSettings);
+            _commands.Enqueue(payload);
+        }
+        
+        internal void Send(CommandPayload payload)
+        {
+            string payloadData = JsonConvert.SerializeObject(payload, DiscordExtension.ExtensionSerializeSettings);
             _logger.Debug($"{nameof(Socket)}.{nameof(Send)} Payload: {payloadData}");
 
-            _socket.SendAsync(payloadData, completed);
+            _socket.SendAsync(payloadData, null);
         }
 
         /// <summary>

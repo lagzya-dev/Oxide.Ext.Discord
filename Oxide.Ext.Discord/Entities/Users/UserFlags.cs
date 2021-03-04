@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         HyperSquadEvents = 1 << 2,
         
         /// <summary>
-        /// Flag given to users who have participated in the bug report program and are level 1.
+        /// Flag given to users who have participated in the 𝐁ug report program and are level 1.
         /// </summary>
         BugHunterLevel1 = 1 << 3,
         
@@ -64,7 +64,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         System = 1 << 12,
         
         /// <summary>
-        /// Flag given to users who have participated in the bug report program and are level 2.
+        /// Flag given to users who have participated in the 𝐁ug report program and are level 2.
         /// </summary>
         BugHunterLevel2 = 1 << 14,
         
