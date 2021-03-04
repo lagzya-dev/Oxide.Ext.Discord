@@ -13,6 +13,8 @@ namespace Oxide.Ext.Discord.REST
         public readonly Hash<string, Bucket> Buckets = new Hash<string, Bucket>();
         private readonly List<DiscordClient> _clients = new List<DiscordClient>();
 
+        private readonly object _bucketSyncObject = new object();
+
         public void AddClient(DiscordClient client)
         {
             _clients.Add(client);
@@ -27,17 +29,20 @@ namespace Oxide.Ext.Discord.REST
         
         public void CleanupExpired()
         {
-            Buckets.RemoveAll(b => b.ShouldCleanup());
+            lock (_bucketSyncObject)
+            {
+                Buckets.RemoveAll(b => b.ShouldCleanup());
+            }
         }
 
         public void QueueRequest(Request request, ILogger logger)
         {
             string bucketId = GetBucketId(request.Route);
-            Bucket bucket = Buckets[bucketId];
+            Bucket bucket = GetBucket(bucketId);
             if (bucket == null)
             {
                 bucket = new Bucket(this, bucketId, logger);
-                Buckets[bucketId] = bucket;
+                SetBucket(bucketId, bucket);
             }
 
             bucket.Queue(request);
@@ -45,13 +50,33 @@ namespace Oxide.Ext.Discord.REST
         
         public void Shutdown()
         {
-            foreach (Bucket bucket in Buckets.Values)
+            lock (_bucketSyncObject)
             {
-                bucket.Close();
+                foreach (Bucket bucket in Buckets.Values)
+                {
+                    bucket.Close();
+                }
+                Buckets.Clear();
             }
-            Buckets.Clear();
+           
             _clients.Clear();
             RateLimit.Shutdown();
+        }
+
+        private Bucket GetBucket(string id)
+        {
+            lock (_bucketSyncObject)
+            {
+                return Buckets[id];
+            }
+        }
+
+        private void SetBucket(string id, Bucket value)
+        {
+            lock (_bucketSyncObject)
+            {
+                Buckets[id] = value;
+            }
         }
         
         private string GetBucketId(string route)

@@ -5,9 +5,9 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Extensions
 {
-    public static class HashExt
+    internal static class HashExt
     {
-        public static void RemoveAll<TKey, TValue>(this Hash<TKey, TValue> dict, Func<TValue, bool> predicate)
+        internal static void RemoveAll<TKey, TValue>(this Hash<TKey, TValue> dict, Func<TValue, bool> predicate)
         {
             if (dict == null)
             {

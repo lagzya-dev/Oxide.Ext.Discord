@@ -70,8 +70,15 @@ namespace Oxide.Ext.Discord.REST
         private void CreateRequest(RequestMethod method, string url, Dictionary<string, string> headers, object data, Action<RestResponse> callback)
         {
             Request request = new Request(method, url, headers, data, callback, _logger);
-            _handler.CleanupExpired();
             _handler.QueueRequest(request, _logger);
+            try
+            {
+                _handler.CleanupExpired();
+            }
+            catch
+            {
+                
+            }
         }
     }
 }
