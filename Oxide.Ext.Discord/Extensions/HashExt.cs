@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Extensions
     /// <summary>
     /// Hash extensions
     /// </summary>
-    public static class HashExt
+    internal static class HashExt
     {
         /// <summary>
         /// Remove all records from the hash with the given predicate filter
@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="predicate">Filter of which values to remove</param>
         /// <typeparam name="TKey">Key type of the hash</typeparam>
         /// <typeparam name="TValue">Value type of the hash</typeparam>
-        public static void RemoveAll<TKey, TValue>(this Hash<TKey, TValue> hash, Func<TValue, bool> predicate)
+        internal static void RemoveAll<TKey, TValue>(this Hash<TKey, TValue> hash, Func<TValue, bool> predicate)
         {
             if (hash == null)
             {

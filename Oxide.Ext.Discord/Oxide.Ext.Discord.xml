@@ -65,11 +65,6 @@
             List of active bots by bot API key
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.Initialized">
-            <summary>
-            If the connection is initialized and not disconnected
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.BotClient.Settings">
             <summary>
             The settings for this bot of all the combined clients
@@ -88,6 +83,11 @@
         <member name="F:Oxide.Ext.Discord.BotClient.DirectMessagesByUserId">
             <summary>
             All the direct messages that we have seen by User ID
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.BotClient.Initialized">
+            <summary>
+            If the connection is initialized and not disconnected
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.BotClient.Application">
@@ -159,21 +159,6 @@
             </summary>
             <param name="hookName">Hook to call</param>
             <param name="args">Args for the hook</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.Identify">
-            <summary>
-            Used to Identify the bot with discord
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.Resume(System.String,System.Int32)">
-            <summary>
-            Used to resume the current session with discord
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.SendHeartbeat(System.Int32)">
-            <summary>
-            Sends a heartbeat to Discord
-            </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.RequestGuildMembers(Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand)">
             <summary>
@@ -3721,7 +3706,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateStatusCommand.Status">
             <summary>
             The user's new status
-            <see cref="T:Oxide.Ext.Discord.Entities.Users.StatusType"/>
+            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserStatusType"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateStatusCommand.Activities">
@@ -4477,7 +4462,7 @@
             Compression the websocket should use
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.GatewayConnect.Serialize">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayConnect.ConnectionArgs">
             <summary>
             Generated connection string for the websocket
             </summary>
@@ -4869,6 +4854,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.ApproximatePresenceCount">
             <summary>
             Approximate number of non-offline members in this guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.HasLoadedAllMembers">
+            <summary>
+            Returns true if all guild members have been loaded
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.IsAvailable">
+            <summary>
+            Returns if the guild is available to use
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.IconUrl">
@@ -5500,11 +5495,6 @@
             <param name="emojiId">Emoji ID to delete</param>
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.IsAvailable">
-            <summary>
-            Returns if the guild is available to use
-            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildBan">
             <summary>
@@ -8550,7 +8540,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel1">
             <summary>
-            Flag given to users who have participated in the bug report program and are level 1.
+            Flag given to users who have participated in the 𝐁ug report program and are level 1.
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HouseBravery">
@@ -8585,7 +8575,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel2">
             <summary>
-            Flag given to users who have participated in the bug report program and are level 2.
+            Flag given to users who have participated in the 𝐁ug report program and are level 2.
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.VerifiedBot">
@@ -8618,32 +8608,32 @@
             User has nitro premium
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Users.StatusType">
+        <member name="T:Oxide.Ext.Discord.Entities.Users.UserStatusType">
             <summary>
             Represents Discord User <a href="https://discord.com/developers/docs/topics/gateway#update-status-status-types">Status Types</a> 
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.StatusType.Online">
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserStatusType.Online">
             <summary>
             User is online
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.StatusType.DND">
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserStatusType.DND">
             <summary>
             User has Do Not Disturb
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.StatusType.Idle">
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserStatusType.Idle">
             <summary>
             User is idle
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.StatusType.Invisible">
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserStatusType.Invisible">
             <summary>
             User is invisible
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.StatusType.Offline">
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserStatusType.Offline">
             <summary>
             User is offline
             </summary>
@@ -10408,17 +10398,17 @@
             <param name="route">API Route</param>
             <returns>Bucket ID for route</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.HeartbeatHandler">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler">
             <summary>
             Handles the heartbeating for the websocket connection
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.HeartbeatAcknowledged">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.HeartbeatAcknowledged">
             <summary>
             Discord Acknowledged our heartbeat successfully 
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.SocketListener,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.SocketListener,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor for Heartbeat Handler
             </summary>
@@ -10426,22 +10416,41 @@
             <param name="listener">Socket Listener for the client</param>
             <param name="logger">Logger for the bot</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.SetupHeartbeat(System.Single)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.SetupHeartbeat(System.Single)">
             <summary>
             Setup a heartbeat for this bot with the given interval
             </summary>
             <param name="heartbeatInterval"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.DestroyHeartbeat">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.DestroyHeartbeat">
             <summary>
             Destroy the heartbeat on this bot
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.HeartbeatHandler.SendHeartbeat">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.SendHeartbeat">
             <summary>
             Sends a heartbeat to discord.
             If the previous heartbeat wasn't acknowledged then we will attempt to reconnect
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler">
+            <summary>
+            Handles command queueing when the websocket is down
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.#ctor(Oxide.Ext.Discord.WebSockets.Socket)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="webSocket">Websocket to handle commands for</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.CommandPayload)">
+            <summary>
+            Enqueue a payload to be sent over the websocket
+            If the websocket is connected it will be sent immediately
+            If the websocket is not connected it will be queued until it is back online
+            </summary>
+            <param name="command">Command to send over the websocket</param>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.Socket">
             <summary>
@@ -10472,7 +10481,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Connect">
             <summary>
-            Connect tot the websocket
+            Connect to the websocket
             </summary>
             <exception cref="T:System.Exception">Thrown if the socket still exists. Must call disconnect before trying to connect</exception>
         </member>
@@ -10497,18 +10506,17 @@
             Shutdowns the websocket completely. Used when bot is being shutdown
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.SocketClosed">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.DisposeSocket">
             <summary>
             Called when a websocket is closed to remove previous socket
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Send(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object,System.Action{System.Boolean})">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Send(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
             <summary>
             Send a command to discord over the websocket
             </summary>
             <param name="opCode">Command code to send</param>
             <param name="data">Data to send</param>
-            <param name="completed">Action once the action is completed and if it was successful</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsConnected">
             <summary>
@@ -10692,6 +10700,21 @@
             </summary>
             <param name="payload"></param>
             https://discord.com/developers/docs/topics/gateway#presence-update
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SendHeartbeat">
+            <summary>
+            Sends a heartbeat to Discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.Identify">
+            <summary>
+            Used to Identify the bot with discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.Resume(System.String,System.Int32)">
+            <summary>
+            Used to resume the current session with discord
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.SocketState">
             <summary>
