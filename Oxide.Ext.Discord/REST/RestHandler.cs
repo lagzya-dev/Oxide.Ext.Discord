@@ -131,7 +131,7 @@ namespace Oxide.Ext.Discord.Rest
                 }
                 Buckets.Clear();
             }
-
+            
             RateLimit.Shutdown();
         }
         
