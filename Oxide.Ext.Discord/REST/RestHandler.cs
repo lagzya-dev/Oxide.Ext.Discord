@@ -129,9 +129,10 @@ namespace Oxide.Ext.Discord.Rest
                 {
                     bucket.Close();
                 }
+
                 Buckets.Clear();
             }
-            
+
             RateLimit.Shutdown();
         }
         
