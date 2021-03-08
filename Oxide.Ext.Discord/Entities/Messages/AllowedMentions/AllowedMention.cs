@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
         /// <see cref="AllowedMentionTypes"/>
         /// </summary>
         [JsonProperty("parse")]
-        public List<AllowedMentionTypes> Parse { get; set; }
+        public List<AllowedMentionTypes> AllowedTypes { get; set; }
         
         /// <summary>
         /// Array of Role IDs to mention (Max size of 100)

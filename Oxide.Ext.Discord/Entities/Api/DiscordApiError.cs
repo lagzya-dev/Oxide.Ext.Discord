@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// Error code from the discord API
         /// </summary>
         [JsonProperty("code")]
-        public string Code { get; set; }
+        public int Code { get; set; }
         
         /// <summary>
         /// Error message from the discord API

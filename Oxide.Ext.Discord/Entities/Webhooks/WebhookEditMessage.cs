@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// Allowed mentions for the message
         /// </summary>
         [JsonProperty("allowed_mentions")]
-        public AllowedMention AllowedMention { get; set; }
+        public AllowedMention AllowedMentions { get; set; }
         
         /// <summary>
         /// Adds a new embed to the list of embed to send

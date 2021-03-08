@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// The authorization header value
         /// </summary>
-        public readonly string Authorization;
+        internal readonly string Authorization;
         
         private readonly ILogger _logger;
         private readonly object _bucketSyncObject = new object();
