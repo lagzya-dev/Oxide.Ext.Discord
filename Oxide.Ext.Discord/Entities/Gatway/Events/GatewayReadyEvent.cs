@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
@@ -31,7 +33,8 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// The guilds the user is in
         /// </summary>
         [JsonProperty("guilds")]
-        public List<Guild> Guilds { get; set; }
+        [JsonConverter(typeof(HashListConverter<Guild>))]
+        public Hash<Snowflake, Guild> Guilds { get; set; }
 
         /// <summary>
         /// Used for resuming connections

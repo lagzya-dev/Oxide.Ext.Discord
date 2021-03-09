@@ -510,7 +510,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchReady(EventPayload payload)
         {
             GatewayReadyEvent ready = payload.EventData.ToObject<GatewayReadyEvent>();
-            foreach (Guild guild in ready.Guilds)
+            foreach (Guild guild in ready.Guilds.Values)
             {
                 _client.AddGuildOrUpdate(guild);
             }
@@ -523,11 +523,11 @@ namespace Oxide.Ext.Discord.WebSockets
             if (_client.ReadyData == null)
             {
                 _client.ReadyData = ready;
-                _client.CallHook(DiscordHooks.OnDiscordGatewayReady, ready, false);
+                _client.CallHook(DiscordHooks.OnDiscordGatewayReady, ready);
             }
         }
 
-        //https://discord.com/developers/docs/topics/gateway#resumed
+        //https://discord.com/developers/docs/topics/gateway#resumed`
         private void HandleDispatchResumed(EventPayload payload)
         {
             GatewayResumedEvent resumed = payload.EventData.ToObject<GatewayResumedEvent>();

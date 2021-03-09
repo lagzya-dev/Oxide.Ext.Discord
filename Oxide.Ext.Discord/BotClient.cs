@@ -201,8 +201,21 @@ namespace Oxide.Ext.Discord
                 
                 if (ReadyData != null)
                 {
-                    ReadyData.Guilds = Servers.Values.ToList();
-                    client.CallHook(DiscordHooks.OnDiscordGatewayReady, ReadyData, true);
+                    ReadyData.Guilds = Servers.Copy();
+                    client.CallHook(DiscordHooks.OnDiscordGatewayReady, ReadyData);
+
+                    foreach (Guild guild in Servers.Values)
+                    {
+                        if (guild.IsAvailable)
+                        {
+                            client.CallHook(DiscordHooks.OnDiscordGuildCreated, guild);
+                        }
+
+                        if (guild.HasLoadedAllMembers)
+                        {
+                            client.CallHook(DiscordHooks.OnDiscordGuildMembersLoaded, guild);
+                        }
+                    }
                 }
             }
         }
