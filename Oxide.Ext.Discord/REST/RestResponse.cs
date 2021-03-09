@@ -11,6 +11,6 @@
             Data = data;
         }
 
-        public T ParseData<T>() => JsonConvert.DeserializeObject<T>(Data);
+        public T ParseData<T>() => !string.IsNullOrEmpty(Data) ? JsonConvert.DeserializeObject<T>(Data) : default(T);
     }
 }

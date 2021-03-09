@@ -109,7 +109,7 @@ namespace Oxide.Ext.Discord.REST
                     else
                     {
                         DiscordApiError apiError = Response.ParseData<DiscordApiError>();
-                        if (!string.IsNullOrEmpty(apiError.Code))
+                        if (apiError != null && !string.IsNullOrEmpty(apiError.Code))
                         {
                             _logger.Error($"Discord has returned error Code: {apiError.Code}: {apiError.Message}, {req.RequestUri} (code {httpResponse.StatusCode})");
                         }
