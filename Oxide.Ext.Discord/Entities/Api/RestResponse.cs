@@ -26,6 +26,6 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// </summary>
         /// <typeparam name="T">Type to be parsed as</typeparam>
         /// <returns>Data string parsed to JSON</returns>
-        public T ParseData<T>() => JsonConvert.DeserializeObject<T>(Data);
+        public T ParseData<T>() => !string.IsNullOrEmpty(Data) ? JsonConvert.DeserializeObject<T>(Data) : default(T);
     }
 }
