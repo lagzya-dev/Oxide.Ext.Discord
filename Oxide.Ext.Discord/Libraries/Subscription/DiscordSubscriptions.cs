@@ -146,8 +146,8 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             }
             
             _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemovePluginSubscriptions)} Removed {removed} subscriptions for plugin {plugin.Name}");
-            
-            _subscriptions.RemoveAll(s => s.Count == 0);
+
+            CleanupEmpty();
             
             if(_pluginRemovedFromManager.TryGetValue(plugin, out Event.Callback<Plugin, PluginManager> callback))
             {
@@ -161,10 +161,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             List<DiscordSubscription> subs = _subscriptions[message.ChannelId];
             if (subs != null)
             {
-                foreach (DiscordSubscription sub in subs)
-                {
-                    sub.Invoke(message);
-                }
+                HandleSubs(subs, message);
             }
 
             if (channel?.ParentId != null)
@@ -172,12 +169,34 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 subs = _subscriptions[channel.ParentId.Value];
                 if (subs != null)
                 {
-                    foreach (DiscordSubscription sub in subs)
-                    {
-                        sub.Invoke(message);
-                    }
+                    HandleSubs(subs, message);
                 }
             }
+        }
+
+        private void HandleSubs(List<DiscordSubscription> subs, DiscordMessage message)
+        {
+            bool isLoaded = true;
+            foreach (DiscordSubscription sub in subs)
+            {
+                if (!sub.Plugin.IsLoaded)
+                {
+                    isLoaded = false;
+                }
+                    
+                sub.Invoke(message);
+            }
+
+            if (!isLoaded)
+            {
+                subs.RemoveAll(s => !s.Plugin.IsLoaded);
+                CleanupEmpty();
+            }
+        }
+
+        private void CleanupEmpty()
+        {
+            _subscriptions.RemoveAll(s => s.Count == 0);
         }
     }
 }
