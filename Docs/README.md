@@ -6,9 +6,10 @@ If you would like to see this extra information you can include the [Oxide.Ext.D
 
 ## Plugins
 
-[Snowflake](Snowflake.md)  
+[Snowflake ID](Snowflake.md)  
 [Gateway Intents](GatewayIntents.md)  
-[Hooks](Hooks.md)
+[Hooks](Hooks.md)  
+[Examples](Plugins/Examples.md)
 
 ## Libraries
 
