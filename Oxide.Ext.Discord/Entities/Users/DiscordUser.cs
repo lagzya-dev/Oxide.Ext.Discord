@@ -10,7 +10,7 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users.Connections;
 using Oxide.Ext.Discord.Helpers.Cdn;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Users
 {
@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Entities.Users
     /// Represents <a href="https://discord.com/developers/docs/resources/user#user-object">User Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordUser : IGetEntityId
+    public class DiscordUser : ISnowflakeEntity
     {
         /// <summary>
         /// The user's id
@@ -432,15 +432,6 @@ namespace Oxide.Ext.Discord.Entities.Users
             }
 
             return previous;
-        }
-
-        /// <summary>
-        /// Returns the ID for this entity
-        /// </summary>
-        /// <returns>ID for this entity</returns>
-        public Snowflake GetEntityId()
-        {
-            return Id;
         }
     }
 }

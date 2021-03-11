@@ -15,7 +15,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Helpers.Converters;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object">Guild Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Guild : IGetEntityId
+    public class Guild : ISnowflakeEntity
     {
         /// <summary>
         /// Guild id
@@ -1227,15 +1227,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             if (updatedGuild.ApproximatePresenceCount != null)
                 ApproximatePresenceCount = updatedGuild.ApproximatePresenceCount;
             return previous;
-        }
-
-        /// <summary>
-        /// Returns the ID of the guild
-        /// </summary>
-        /// <returns></returns>
-        public Snowflake GetEntityId()
-        {
-            return Id;
         }
     }
 }

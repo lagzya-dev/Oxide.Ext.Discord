@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers.Converters;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Channels
@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#channel-object">Channel Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Channel : IGetEntityId
+    public class Channel : ISnowflakeEntity
     {
         /// <summary>
         /// The ID of this channel
@@ -531,15 +531,6 @@ namespace Oxide.Ext.Discord.Entities.Channels
 
             ParentId = channel.ParentId;
             return previous;
-        }
-
-        /// <summary>
-        /// Returns the ID for this entity
-        /// </summary>
-        /// <returns>ID for this entity</returns>
-        public Snowflake GetEntityId()
-        {
-            return Id;
         }
     }
 }

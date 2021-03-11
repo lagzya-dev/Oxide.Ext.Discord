@@ -2345,12 +2345,6 @@
             <param name="callback">callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params">Guild Channel Create Structure</a>
@@ -2468,12 +2462,6 @@
             The name of the channel
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.ChannelMention.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelType">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-channel-types">Types of Channels</a>
@@ -2558,12 +2546,6 @@
             <summary>
             Permission Type <see cref="T:Oxide.Ext.Discord.Entities.Channels.PermissionType"/>
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Overwrite.GetEntityId">
-            <summary>
-            Returns the entity ID for the entity
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.PermissionFlags">
             <summary>
@@ -2775,6 +2757,11 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Emojis.Emoji.Id">
             <summary>
+            The ID for the emoji if it is custom; Otherwise invalid snowflake
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Emojis.Emoji.EmojiId">
+            <summary>
             Emoji id
             </summary>
         </member>
@@ -2807,12 +2794,6 @@
             <summary>
             Url to the emoji image
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Emojis.Emoji.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Emojis.Emoji.FromCharacter(System.String)">
             <summary>
@@ -5496,12 +5477,6 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetEntityId">
-            <summary>
-            Returns the ID of the guild
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildBan">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#ban-object-ban-structure">Guild Ban Structure</a>
@@ -5667,6 +5642,11 @@
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure">Guild Member Structure</a>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Id">
+            <summary>
+            Id for guild member
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.User">
             <summary>
             The user this guild member represents
@@ -5711,12 +5691,6 @@
             <summary>
             Whether the user has not yet passed the guild's Membership Screening requirements
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildMember.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMemberAdd">
             <summary>
@@ -6140,12 +6114,6 @@
             The bot/OAuth2 application for discord integrations
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Integrations.Integration.GetEntityId">
-            <summary>
-            Returns the entity ID for this entity
-            </summary>
-            <returns>This entities ID</returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Integrations.Account">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#integration-account-object">Integration Account Structure</a>
@@ -6452,12 +6420,6 @@
             <summary>
             Width of file (if image)
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Attachment.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.DiscordMessage">
             <summary>
@@ -7534,12 +7496,6 @@
             <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType"/>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageSticker.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types">Message Sticker Format Types</a>
@@ -7670,12 +7626,6 @@
             Emoji information
             <see cref="P:Oxide.Ext.Discord.Entities.Messages.Reaction.Emoji"/>
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Reaction.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Roles.DiscordColor">
             <summary>
@@ -7892,12 +7842,6 @@
             <summary>
             The tags this role has
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.Role.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Roles.RoleTags">
             <summary>
@@ -8498,12 +8442,6 @@
             <param name="callback">callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.NickId">
             <summary>
             Represents a User ID and Nick Name
@@ -8693,6 +8631,11 @@
             Represents <a href="https://discord.com/developers/docs/resources/voice#voice-state-object">Voice State Structure</a>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Voice.VoiceState.Id">
+            <summary>
+            User ID for the voice state
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Voice.VoiceState.GuildId">
             <summary>
             The guild id this voice state is for
@@ -8752,12 +8695,6 @@
             <summary>
             Whether this user is muted by the current user
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Voice.VoiceState.GetEntityId">
-            <summary>
-            Returns the ID for this entity
-            </summary>
-            <returns>ID for this entity</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.Webhook">
             <summary>
@@ -9556,17 +9493,6 @@
             <param name="message">Message to make block quote</param>
             <returns>Multiline block quote formatted message</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Helpers.Interfaces.IGetEntityId">
-            <summary>
-            Interface used to get the entity ID from an entity
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Interfaces.IGetEntityId.GetEntityId">
-            <summary>
-            Returns the unique ID for this entity
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Time">
             <summary>
             Helper methods relating to time
@@ -9618,6 +9544,17 @@
             Validates that the emoji string entered is valid.
             </summary>
             <param name="emoji"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.ISnowflakeEntity">
+            <summary>
+            Interface used to get the entity ID from an entity
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.ISnowflakeEntity.Id">
+            <summary>
+            Returns the unique ID for this entity
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Command.BaseCommand">

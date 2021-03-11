@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -11,8 +11,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure">Guild Member Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GuildMember : IGetEntityId
+    public class GuildMember : ISnowflakeEntity
     {
+        /// <summary>
+        /// Id for guild member
+        /// </summary>
+        public Snowflake Id => User?.Id ?? default(Snowflake);
+
         /// <summary>
         /// The user this guild member represents
         /// </summary>
@@ -96,15 +101,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             }
 
             return previous;
-        }
-        
-        /// <summary>
-        /// Returns the ID for this entity
-        /// </summary>
-        /// <returns>ID for this entity</returns>
-        public Snowflake GetEntityId()
-        {
-            return User.Id;
         }
     }
 }

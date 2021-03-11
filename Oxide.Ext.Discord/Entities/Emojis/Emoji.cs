@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers.Cdn;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 using Formatting = Oxide.Ext.Discord.Helpers.Formatting;
 
 namespace Oxide.Ext.Discord.Entities.Emojis
@@ -10,13 +10,18 @@ namespace Oxide.Ext.Discord.Entities.Emojis
     /// Represents <a href="https://discord.com/developers/docs/resources/emoji#emoji-object">Emoji Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Emoji : EmojiUpdate, IGetEntityId
+    public class Emoji : EmojiUpdate, ISnowflakeEntity
     {
+        /// <summary>
+        /// The ID for the emoji if it is custom; Otherwise invalid snowflake
+        /// </summary>
+        public Snowflake Id => EmojiId ?? default(Snowflake);
+
         /// <summary>
         /// Emoji id
         /// </summary>
         [JsonProperty("id")]
-        public Snowflake? Id { get; set; }
+        public Snowflake? EmojiId { get; set; }
 
         /// <summary>
         /// User that created this emoji
@@ -51,17 +56,8 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         /// <summary>
         /// Url to the emoji image
         /// </summary>
-        public string Url => Id.HasValue ? DiscordCdn.GetCustomEmojiUrl(Id.Value, Animated.HasValue && Animated.Value ? ImageFormat.Gif : ImageFormat.Png) : null;
+        public string Url => EmojiId.HasValue ? DiscordCdn.GetCustomEmojiUrl(EmojiId.Value, Animated.HasValue && Animated.Value ? ImageFormat.Gif : ImageFormat.Png) : null;
 
-        /// <summary>
-        /// Returns the ID for this entity
-        /// </summary>
-        /// <returns>ID for this entity</returns>
-        public Snowflake GetEntityId()
-        {
-            return Id ?? default(Snowflake);
-        }
-        
         /// <summary>
         /// Returns an emoji object for the given emoji character
         /// </summary>
@@ -81,12 +77,12 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         /// <returns></returns>
         public string ToDataString()
         {
-            if (!Id.HasValue)
+            if (!EmojiId.HasValue)
             {
                 return Name;
             }
 
-            return Formatting.CustomEmojiDataString(Id.Value, Name, Animated ?? false);
+            return Formatting.CustomEmojiDataString(EmojiId.Value, Name, Animated ?? false);
         }
 
         internal void Update(Emoji emoji)

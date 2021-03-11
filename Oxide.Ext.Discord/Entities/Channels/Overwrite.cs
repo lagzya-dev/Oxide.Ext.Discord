@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure">Overwrite Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Overwrite : IGetEntityId
+    public class Overwrite : ISnowflakeEntity
     {
         /// <summary>
         /// Role or user ID
@@ -32,14 +32,5 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("type")]
         public PermissionType Type { get; set; }
-
-        /// <summary>
-        /// Returns the entity ID for the entity
-        /// </summary>
-        /// <returns></returns>
-        public Snowflake GetEntityId()
-        {
-            return Id;
-        }
     }
 }

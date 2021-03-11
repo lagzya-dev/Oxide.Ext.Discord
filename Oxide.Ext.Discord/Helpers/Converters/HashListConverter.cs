@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Helpers.Converters
@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
     /// Converts to and from a list in JSON to a hash
     /// </summary>
     /// <typeparam name="TValue"></typeparam>
-    public class HashListConverter<TValue> : JsonConverter where TValue : IGetEntityId
+    public class HashListConverter<TValue> : JsonConverter where TValue : ISnowflakeEntity
     {
         /// <summary>
         /// Write a hash as a list in JSON
@@ -48,7 +48,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
             foreach (JToken token in array)
             {
                 TValue value = token.ToObject<TValue>();
-                data[value.GetEntityId()] = value;
+                data[value.Id] = value;
             }
 
             return data;

@@ -1,5 +1,5 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object-message-sticker-structure">Message Sticker Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class MessageSticker : IGetEntityId
+    public class MessageSticker : ISnowflakeEntity
     {
         /// <summary>
         /// ID of the sticker
@@ -57,14 +57,5 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("format_type")]
         public MessageStickerFormatType FormatType { get; set; }
-
-        /// <summary>
-        /// Returns the ID for this entity
-        /// </summary>
-        /// <returns>ID for this entity</returns>
-        public Snowflake GetEntityId()
-        {
-            return Id;
-        }
     }
 }

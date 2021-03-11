@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a message <a href="https://discord.com/developers/docs/resources/channel#message-object">Attachment Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Attachment : IGetEntityId
+    public class Attachment : ISnowflakeEntity
     {
         /// <summary>
         /// Attachment ID
@@ -50,14 +50,5 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("width")]
         public int? Width { get; set; }
-
-        /// <summary>
-        /// Returns the ID for this entity
-        /// </summary>
-        /// <returns>ID for this entity</returns>
-        public Snowflake GetEntityId()
-        {
-            return Id;
-        }
     }
 }

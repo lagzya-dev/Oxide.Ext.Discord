@@ -730,7 +730,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     Hash<Snowflake, Emoji> previous = guild.Emojis.Copy();
 
-                    guild.Emojis.RemoveAll(e => e.Id.HasValue && !emojis.Emojis.ContainsKey(e.Id.Value));
+                    guild.Emojis.RemoveAll(e => e.EmojiId.HasValue && !emojis.Emojis.ContainsKey(e.EmojiId.Value));
                     
                     foreach (Emoji emoji in emojis.Emojis.Values)
                     {

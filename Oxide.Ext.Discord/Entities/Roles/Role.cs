@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Helpers.Interfaces;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Roles
 {
@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Roles
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Role : IGetEntityId
+    public class Role : ISnowflakeEntity
     {
         /// <summary>
         /// Role id
@@ -85,15 +85,6 @@ namespace Oxide.Ext.Discord.Entities.Roles
             }
 
             return previous;
-        }
-        
-        /// <summary>
-        /// Returns the ID for this entity
-        /// </summary>
-        /// <returns>ID for this entity</returns>
-        public Snowflake GetEntityId()
-        {
-            return Id;
         }
     }
 }
