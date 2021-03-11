@@ -256,7 +256,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         private void OnPluginRemovedFromManager(Plugin sender, PluginManager manager)
         {
             // Remove all discord commands which were registered by the plugin
-            foreach (DirectMessageCommand cmd in DirectMessageCommands.Values.Where(c => Equals(c.Plugin, sender)).ToArray())
+            foreach (DirectMessageCommand cmd in DirectMessageCommands.Values.Where(c => c.Plugin == sender).ToArray())
             {
                 RemoveDiscordCommand(cmd);
             }
@@ -291,6 +291,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
             {
                 return false;
             }
+            
+            if (!command.Plugin.IsLoaded)
+            {
+                DirectMessageCommands.Remove(name);
+                return false;
+            }
 
             if (!client.IsPluginRegistered(command.Plugin))
             {
@@ -315,6 +321,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
             GuildCommand command = GuildCommands[name];
             if (command == null || !command.CanHandle(message, channel))
             {
+                return false;
+            }
+            
+            if (!command.Plugin.IsLoaded)
+            {
+                GuildCommands.Remove(name);
                 return false;
             }
 

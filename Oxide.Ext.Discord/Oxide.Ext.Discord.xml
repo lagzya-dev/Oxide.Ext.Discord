@@ -9881,6 +9881,12 @@
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L104)
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            DiscordSubscriptions Constructor
+            </summary>
+            <param name="logger">Logger</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.HasSubscriptions">
             <summary>
             Returns if any subscriptions have been registered

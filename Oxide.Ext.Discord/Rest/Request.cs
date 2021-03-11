@@ -127,7 +127,7 @@ namespace Oxide.Ext.Discord.Rest
                         ParseResponse(response);
                     }
                 }
-
+                
                 Callback?.Invoke(Response);
                 Close();
             }
@@ -174,7 +174,7 @@ namespace Oxide.Ext.Discord.Rest
             }
             catch (Exception ex)
             {
-                _logger.Exception("Request callback raised an exception", ex);
+                _logger.Exception($"A request exception occured.\nRequest URL: [{Method.ToString()}] {req.RequestUri}", ex);
                 Close();
             }
         }
@@ -190,7 +190,14 @@ namespace Oxide.Ext.Discord.Rest
             {
                 if (_retries >= 3)
                 {
-                    OnError?.Invoke(_lastError);
+                    try
+                    {
+                        OnError?.Invoke(_lastError);
+                    }
+                    catch(Exception ex)
+                    {
+                        _logger.Exception($"An  exception occured during OnError.\nRequest URL: [{Method.ToString()}] {RequestUrl}", ex);
+                    }
                 }
                 
                 Bucket.DequeueRequest(this);

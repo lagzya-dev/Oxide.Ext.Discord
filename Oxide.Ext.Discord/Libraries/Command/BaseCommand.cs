@@ -26,9 +26,16 @@ namespace Oxide.Ext.Discord.Libraries.Command
         {
             Interface.Oxide.NextTick(() =>
             {
-                Plugin.TrackStart();
-                _callback.Invoke(message, name, args);
-                Plugin.TrackEnd();
+                try
+                {
+                    Plugin.TrackStart();
+                    _callback.Invoke(message, name, args);
+                    Plugin.TrackEnd();
+                }
+                catch(Exception ex)
+                {
+                    DiscordExtension.GlobalLogger.Exception($"An exception occured in discord command {name} for plugin {Plugin?.Name}", ex);   
+                }
             });
         }
 

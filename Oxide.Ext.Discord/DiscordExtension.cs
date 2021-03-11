@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord
 
             DiscordLink = new DiscordLink();
             DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes);
-            DiscordSubscriptions = new DiscordSubscriptions();
+            DiscordSubscriptions = new DiscordSubscriptions(GlobalLogger);
 
             Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
             Manager.RegisterLibrary(nameof(DiscordCommand), DiscordCommand);

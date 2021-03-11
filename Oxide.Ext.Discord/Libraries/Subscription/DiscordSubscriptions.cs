@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription
@@ -24,6 +25,17 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L104)
         /// </summary>
         private readonly Hash<Plugin, Event.Callback<Plugin, PluginManager>> _pluginRemovedFromManager = new Hash<Plugin, Event.Callback<Plugin, PluginManager>>();
+
+        private readonly ILogger _logger;
+        
+        /// <summary>
+        /// DiscordSubscriptions Constructor
+        /// </summary>
+        /// <param name="logger">Logger</param>
+        public DiscordSubscriptions(ILogger logger)
+        {
+            _logger = logger;
+        }
 
         /// <summary>
         /// Returns if any subscriptions have been registered
@@ -61,6 +73,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 throw new ArgumentNullException(nameof(message));
             }
 
+            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(AddChannelSubscription)} {plugin.Name} added subscription to channel {channelId}");
             List<DiscordSubscription> subscriptions = _subscriptions[channelId];
             if (subscriptions == null)
             {
@@ -68,7 +81,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 _subscriptions[channelId] = subscriptions;
             }
             
-            subscriptions.Add(new DiscordSubscription(plugin, message));
+            subscriptions.Add(new DiscordSubscription(channelId, plugin, message));
             if (!_pluginRemovedFromManager.ContainsKey(plugin))
             {
                 _pluginRemovedFromManager[plugin] = plugin.OnRemovedFromManager.Add(RemovePluginSubscriptions);
@@ -106,6 +119,8 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             {
                 _subscriptions.Remove(channelId);
             }
+            
+            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemoveChannelSubscription)} {plugin.Name} removed subscription to channel {channelId}");
 
             if (_subscriptions.Values.All(s => s.All(p => p.Plugin != plugin)) && _pluginRemovedFromManager.TryGetValue(plugin, out Event.Callback<Plugin, PluginManager> callback))
             {
@@ -124,10 +139,13 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         public void RemovePluginSubscriptions(Plugin plugin)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            int removed = 0;
             foreach (List<DiscordSubscription> value in _subscriptions.Values)
             {
-                value.RemoveAll(s => s.Plugin == plugin);
+                removed += value.RemoveAll(s => s.Plugin == plugin);
             }
+            
+            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemovePluginSubscriptions)} Removed {removed} subscriptions for plugin {plugin.Name}");
             
             _subscriptions.RemoveAll(s => s.Count == 0);
             

@@ -2,6 +2,7 @@ using System;
 using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Messages;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription
@@ -13,15 +14,17 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     {
         internal readonly Plugin Plugin;
         internal readonly Action<DiscordMessage> Callback;
+        internal readonly Snowflake ChannelId;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="plugin">Plugin the subscription is for</param>
         /// <param name="callback">Callback when the channel message is sent</param>
-        public DiscordSubscription(Plugin plugin, Action<DiscordMessage> callback)
+        public DiscordSubscription(Snowflake Id, Plugin plugin, Action<DiscordMessage> callback)
         {
-            Plugin = plugin; ;
+            ChannelId = Id;
+            Plugin = plugin;
             Callback = callback;
         }
 
@@ -33,9 +36,16 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         {
             Interface.Oxide.NextTick(() =>
             {
-                Plugin.TrackStart();
-                Callback.Invoke(message);
-                Plugin.TrackEnd();
+                try
+                {
+                    Plugin.TrackStart();
+                    Callback.Invoke(message);
+                    Plugin.TrackEnd();
+                }
+                catch(Exception ex)
+                {
+                    DiscordExtension.GlobalLogger.Exception($"An exception occured for discord subscription in channel {ChannelId} for plugin {Plugin?.Name}", ex);   
+                }
             });
         }
     }
