@@ -179,12 +179,14 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             bool isLoaded = true;
             foreach (DiscordSubscription sub in subs)
             {
-                if (!sub.Plugin.IsLoaded)
+                if (sub.Plugin.IsLoaded)
+                {
+                    sub.Invoke(message);
+                }
+                else
                 {
                     isLoaded = false;
                 }
-                    
-                sub.Invoke(message);
             }
 
             if (!isLoaded)
