@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _client = client;
             _webSocket = socket;
             _logger = logger;
-            _heartbeat = new HeartbeatHandler(_client, this, _logger);
+            _heartbeat = new HeartbeatHandler(_client, _webSocket, this, _logger);
         }
 
         /// <summary>

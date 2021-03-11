@@ -10351,11 +10351,12 @@
             Discord Acknowledged our heartbeat successfully 
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.SocketListener,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.WebSockets.SocketListener,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor for Heartbeat Handler
             </summary>
             <param name="client">Client for the handler</param>
+            <param name="socket">Socket for the heartbeat</param>
             <param name="listener">Socket Listener for the client</param>
             <param name="logger">Logger for the bot</param>
         </member>
