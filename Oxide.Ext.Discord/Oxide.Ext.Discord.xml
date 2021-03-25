@@ -9857,10 +9857,11 @@
             Represents a channel subscription for a plugin
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription.#ctor(Oxide.Core.Plugins.Plugin,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription.#ctor(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage})">
             <summary>
             Constructor
             </summary>
+            <param name="channelId">ID of the channel</param>
             <param name="plugin">Plugin the subscription is for</param>
             <param name="callback">Callback when the channel message is sent</param>
         </member>
