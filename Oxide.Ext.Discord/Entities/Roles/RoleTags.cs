@@ -24,6 +24,6 @@ namespace Oxide.Ext.Discord.Entities.Roles
         /// Whether this is the guild's premium subscriber role
         /// </summary>
         [JsonProperty("premium_subscriber")]
-        public bool PremiumSubscriber { get; set; }
+        public bool? PremiumSubscriber { get; set; }
     }
 }
