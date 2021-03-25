@@ -19,11 +19,12 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="channelId">ID of the channel</param>
         /// <param name="plugin">Plugin the subscription is for</param>
         /// <param name="callback">Callback when the channel message is sent</param>
-        public DiscordSubscription(Snowflake Id, Plugin plugin, Action<DiscordMessage> callback)
+        public DiscordSubscription(Snowflake channelId, Plugin plugin, Action<DiscordMessage> callback)
         {
-            ChannelId = Id;
+            ChannelId = channelId;
             Plugin = plugin;
             Callback = callback;
         }
