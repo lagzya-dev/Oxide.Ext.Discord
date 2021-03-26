@@ -59,7 +59,7 @@ namespace Oxide.Ext.Discord.Extensions
         
         private static void SendMessage(DiscordClient client, Snowflake? id, MessageCreate message)
         {
-            if (!id.HasValue)
+            if (!id.HasValue || !id.Value.IsValid())
             {
                 return;
             }
