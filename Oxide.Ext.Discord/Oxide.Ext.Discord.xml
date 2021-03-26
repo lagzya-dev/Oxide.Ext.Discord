@@ -10210,6 +10210,11 @@
             Data to be sent with the request
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Contents">
+            <summary>
+            JSON Serialization of Data 
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.Response">
             <summary>
             Response from the request
