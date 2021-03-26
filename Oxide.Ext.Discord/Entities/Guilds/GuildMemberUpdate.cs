@@ -29,14 +29,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Requires DEAFEN_MEMBERS Permission
         /// </summary>
         [JsonProperty("deaf")]
-        public bool Deaf { get; set; }
+        public bool? Deaf { get; set; }
 
         /// <summary>
         /// Mute the guild member
         /// Requires MUTE_MEMBERS Permission
         /// </summary>
         [JsonProperty("mute")]
-        public bool Mute { get; set; }
+        public bool? Mute { get; set; }
         
         /// <summary>
         /// The channel to move the user to
