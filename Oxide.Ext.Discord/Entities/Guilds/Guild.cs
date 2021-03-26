@@ -1196,8 +1196,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 MemberCount = updatedGuild.MemberCount;
             if (updatedGuild.VoiceStates != null)
                 VoiceStates = updatedGuild.VoiceStates;
-            if (updatedGuild.Members != null)
-                Members = updatedGuild.Members;
             if (updatedGuild.Channels != null)
                 Channels = updatedGuild.Channels;
             if (updatedGuild.Presences != null)
