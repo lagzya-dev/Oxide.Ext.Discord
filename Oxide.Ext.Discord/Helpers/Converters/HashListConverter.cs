@@ -15,24 +15,6 @@ namespace Oxide.Ext.Discord.Helpers.Converters
     public class HashListConverter<TValue> : JsonConverter where TValue : ISnowflakeEntity
     {
         /// <summary>
-        /// Write a hash as a list in JSON
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="value"></param>
-        /// <param name="serializer"></param>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            Hash<Snowflake, TValue> data = (Hash<Snowflake, TValue>) value;
-            
-            writer.WriteStartArray();
-            foreach (TValue tValue in data.Values)
-            {
-                serializer.Serialize(writer, tValue);
-            }
-            writer.WriteEndArray();
-        }
-
-        /// <summary>
         /// Read an array in JSON as a hash
         /// </summary>
         /// <param name="reader"></param>
@@ -52,6 +34,24 @@ namespace Oxide.Ext.Discord.Helpers.Converters
             }
 
             return data;
+        }
+        
+        /// <summary>
+        /// Write a hash as a list in JSON
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="serializer"></param>
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            Hash<Snowflake, TValue> data = (Hash<Snowflake, TValue>) value;
+            
+            writer.WriteStartArray();
+            foreach (TValue tValue in data.Values)
+            {
+                serializer.Serialize(writer, tValue);
+            }
+            writer.WriteEndArray();
         }
 
         /// <summary>
