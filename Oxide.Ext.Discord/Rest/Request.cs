@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Text;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
@@ -229,18 +230,17 @@ namespace Oxide.Ext.Discord.Rest
 
         private void WriteRequestData(WebRequest request)
         {
-            if (Data != null)
+            if (Data == null)
             {
                 return;
             }
             
+            byte[] bytes = Encoding.UTF8.GetBytes(Contents);
+            request.ContentLength = bytes.Length;
+
             using (Stream stream = request.GetRequestStream())
             {
-                using (StreamWriter sw = new StreamWriter(stream))
-                {
-                    sw.Write(Contents);
-                    sw.Flush();
-                }
+                stream.Write(bytes, 0, bytes.Length);
             }
         }
 
