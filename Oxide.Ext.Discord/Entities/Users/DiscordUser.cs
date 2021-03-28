@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Entities.Api;
@@ -11,6 +10,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users.Connections;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Users
 {
@@ -297,12 +297,12 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="nicks">a list of user ids to their respective nicknames</param>
         /// <param name="callback">Callback with the direct message channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGroupDm(DiscordClient client, string[] accessTokens, List<NickId> nicks, Action<Channel> callback = null, Action<RestError> error = null)
+        public void CreateGroupDm(DiscordClient client, string[] accessTokens, Hash<Snowflake, string> nicks, Action<Channel> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>()
             {
                 ["access_tokens"] = accessTokens,
-                ["nicks"] = nicks.ToDictionary(k => k.Id, v => v.Nick)
+                ["nicks"] = nicks
             };
 
             client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback, error);

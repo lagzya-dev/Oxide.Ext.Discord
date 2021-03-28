@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Integrations;
 using Oxide.Ext.Discord.Entities.Invites;
@@ -350,8 +348,16 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            
-            return Channels.Values.FirstOrDefault(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+            foreach (Channel channel in Channels.Values)
+            {
+                if (channel.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return channel;
+                }
+            }
+
+            return null;
         }
         
         /// <summary>
@@ -366,7 +372,15 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 throw new ArgumentNullException(nameof(name));
             }
             
-            return Roles.Values.FirstOrDefault(r => r.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            foreach (Role role in Roles.Values)
+            {
+                if (role.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return role;
+                }
+            }
+
+            return null;
         }
         
         /// <summary>
@@ -383,10 +397,30 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             
             if (userName.Contains("#"))
             {
-                return Members.Values.FirstOrDefault(m => $"{m.User.Username}#{m.User.Discriminator}".Equals(userName, StringComparison.OrdinalIgnoreCase));
+                string[] splitName = userName.Split('#');
+                userName = splitName[0];
+                string discriminator = splitName[1];
+
+                foreach (GuildMember member in Members.Values)
+                {
+                    if (member.User.Username.Equals(userName, StringComparison.OrdinalIgnoreCase) && member.User.Discriminator == discriminator)
+                    {
+                        return member;
+                    }
+                }
+                
+                return null;
             }
 
-            return Members.Values.FirstOrDefault(m => m.User.Username.Equals(userName, StringComparison.OrdinalIgnoreCase));
+            foreach (GuildMember member in Members.Values)
+            {
+                if (member.User.Username.Equals(userName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return member;
+                }
+            }
+                
+            return null;
         }
         
         /// <summary>
@@ -534,14 +568,21 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="error">Callback when an error occurs with error information</param>
         public void AddGuildMember(DiscordClient client, GuildMember member, string accessToken, List<Role> roles, Action<GuildMember> callback = null, Action<RestError> error = null)
         {
-            AddGuildMember(client, member.User.Id, new GuildMemberAdd
+            GuildMemberAdd add = new GuildMemberAdd
             {
                 Deaf = member.Deaf,
                 Mute = member.Mute,
                 Nick = member.Nick,
                 AccessToken = accessToken,
-                Roles = roles.Select(r => r.Id).ToList()
-            }, callback, error);
+                Roles = new List<Snowflake>()
+            };
+
+            foreach (Role role in roles)
+            {
+                add.Roles.Add(role.Id);
+            }
+            
+            AddGuildMember(client, member.User.Id, add, callback, error);
         }
 
         /// <summary>

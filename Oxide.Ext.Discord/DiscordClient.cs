@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Oxide.Core;
 using Oxide.Core.Plugins;
@@ -16,7 +15,7 @@ namespace Oxide.Ext.Discord
     /// </summary>
     public class DiscordClient
     {
-        internal static Hash<string, DiscordClient> Clients { get; } = new Hash<string, DiscordClient>();
+        internal static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
         
         /// <summary>
         /// Which plugin is the owner of this client
@@ -175,8 +174,7 @@ namespace Oxide.Ext.Discord
         /// <param name="args"></param>
         public static void GlobalCallHook(string hookName, params object[] args)
         {
-            //Run from next tick so we can be sure it's ran on the main thread.
-            foreach (DiscordClient client in Clients.Values.ToArray())
+            foreach (DiscordClient client in Clients.Values)
             {
                 client.CallHook(hookName, args);
             }
@@ -204,7 +202,7 @@ namespace Oxide.Ext.Discord
         {
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
             {
-                if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Any())
+                if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
                 {
                     DiscordClient client = Clients[plugin.Name];
                     if (client == null)
@@ -246,7 +244,7 @@ namespace Oxide.Ext.Discord
                 DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {client.Owner.Name}");
                 foreach (FieldInfo field in client.Owner.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
                 {
-                    if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Any())
+                    if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
                     {
                         field.SetValue(client.Owner, null);
                         break;

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
@@ -236,7 +235,15 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            LogLevel level = _clients.Min(c => c.Settings.LogLevel);
+            LogLevel level = LogLevel.Off;
+            foreach (DiscordClient remainingClient in _clients)
+            {
+                if (remainingClient.Settings.LogLevel < level)
+                {
+                    level = remainingClient.Settings.LogLevel;
+                }
+            }
+            
             if (level > Settings.LogLevel)
             {
                 UpdateLogLevel(level);
@@ -401,10 +408,13 @@ namespace Oxide.Ext.Discord
             
             Logger.Verbose($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Adding New Channel {channel.Id}");
             DirectMessagesByChannelId[channel.Id] = channel;
-            Snowflake? toId = channel.Recipients.Values.FirstOrDefault(r => !(r.Bot ?? false))?.Id;
-            if (toId.HasValue && channel.Recipients.Count == 2)
+
+            foreach (KeyValuePair<Snowflake,DiscordUser> recipient in channel.Recipients)
             {
-                DirectMessagesByUserId[toId.Value] = channel;
+                if (!recipient.Value.Bot.HasValue || !recipient.Value.Bot.Value)
+                {
+                    DirectMessagesByUserId[recipient.Value.Id] = channel;
+                }
             }
         }
 
@@ -426,7 +436,15 @@ namespace Oxide.Ext.Discord
         #region Discord Command Helpers
         internal bool IsPluginRegistered(Plugin plugin)
         {
-            return _clients.Any(t => t.RegisteredForHooks.Contains(plugin));
+            foreach (DiscordClient client in _clients)
+            {
+                if (client.RegisteredForHooks.Contains(plugin))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
         #endregion
     }

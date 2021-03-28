@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -30,11 +29,21 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public virtual string ToQueryString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append($"days={Days}");
+            sb.Append("days=");
+            sb.Append(Days.ToString());
 
             if (IncludeRoles != null)
             {
-                sb.Append($"&include_roles={string.Join(",", IncludeRoles.Select(r => r.ToString()).ToArray())}");
+                sb.Append("&include_roles=");
+                for (int index = 0; index < IncludeRoles.Count; index++)
+                {
+                    Snowflake role = IncludeRoles[index];
+                    sb.Append(role.ToString());
+                    if (index != IncludeRoles.Count - 1)
+                    {
+                        sb.Append(",");
+                    }
+                }
             }
             
             return sb.ToString();

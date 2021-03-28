@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Oxide.Core;
 using Oxide.Core.Libraries;
@@ -255,17 +254,29 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="manager"></param>
         private void OnPluginRemovedFromManager(Plugin sender, PluginManager manager)
         {
+            List<BaseCommand> removeCommands = new List<BaseCommand>();
             // Remove all discord commands which were registered by the plugin
-            foreach (DirectMessageCommand cmd in DirectMessageCommands.Values.Where(c => c.Plugin == sender).ToArray())
+            foreach (DirectMessageCommand cmd in DirectMessageCommands.Values)
             {
-                RemoveDiscordCommand(cmd);
+                if (cmd.Plugin.Name == sender.Name)
+                {
+                    removeCommands.Add(cmd);
+                }
             }
             
-            foreach (GuildCommand cmd in GuildCommands.Values.Where(c => Equals(c.Plugin, sender)).ToArray())
+            foreach (GuildCommand cmd in GuildCommands.Values)
             {
-                RemoveDiscordCommand(cmd);
+                if (cmd.Plugin.Name == sender.Name)
+                {
+                    removeCommands.Add(cmd);
+                }
             }
 
+            for (int index = 0; index < removeCommands.Count; index++)
+            {
+                BaseCommand cmd = removeCommands[index];
+                RemoveDiscordCommand(cmd);
+            }
 
             // Unhook the event
             if (_pluginRemovedFromManager.TryGetValue(sender, out Event.Callback<Plugin, PluginManager> callback))

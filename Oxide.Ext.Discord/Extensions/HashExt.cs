@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Extensions
@@ -23,10 +22,20 @@ namespace Oxide.Ext.Discord.Extensions
             {
                 return;
             }
+
+            List<TKey> removeKeys = new List<TKey>();
             
-            foreach (KeyValuePair<TKey, TValue> key in hash.Where(k => predicate(k.Value)).ToList())
+            foreach (KeyValuePair<TKey, TValue> key in hash)
             {
-                hash.Remove(key.Key);
+                if (predicate(key.Value))
+                {
+                    removeKeys.Add(key.Key);
+                }
+            }
+
+            foreach (TKey key in removeKeys)
+            {
+                hash.Remove(key);
             }
         }
 

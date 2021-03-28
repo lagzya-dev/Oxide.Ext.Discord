@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
@@ -737,14 +736,30 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     Hash<Snowflake, Emoji> previous = guild.Emojis.Copy();
 
+                    List<Snowflake> removedEmojis = new List<Snowflake>();
+
+                    foreach (Snowflake id in guild.Emojis.Keys)
+                    {
+                        if (!emojis.Emojis.ContainsKey(id))
+                        {
+                            removedEmojis.Add(id);
+                        }
+                    }
+
+                    for (int index = 0; index < removedEmojis.Count; index++)
+                    {
+                        Snowflake id = removedEmojis[index];
+                        guild.Emojis.Remove(id);
+                    }
+
                     guild.Emojis.RemoveAll(e => e.EmojiId.HasValue && !emojis.Emojis.ContainsKey(e.EmojiId.Value));
                     
                     foreach (Emoji emoji in emojis.Emojis.Values)
                     {
                         Emoji existing = guild.Emojis[emojis.GuildId];
-                        if (existing == null)
+                        if (existing != null)
                         {
-                            emoji.Update(emoji);
+                            existing.Update(emoji);
                         }
                         else
                         {
@@ -923,7 +938,7 @@ namespace Oxide.Ext.Discord.WebSockets
             
             if (!message.Author.Bot.HasValue || !message.Author.Bot.Value)
             {
-                if(!string.IsNullOrEmpty(message.Content) && DiscordExtension.DiscordCommand.HasCommands() && Enumerable.Contains(DiscordExtension.DiscordConfig.Commands.CommandPrefixes, message.Content[0]))
+                if(!string.IsNullOrEmpty(message.Content) && DiscordExtension.DiscordCommand.HasCommands() && DiscordExtension.DiscordConfig.Commands.CommandPrefixes.Contains(message.Content[0]))
                 {
                     message.Content.TrimStart(DiscordExtension.DiscordConfig.Commands.CommandPrefixes).ParseCommand(out string command, out string[] args);
                     _logger.Debug($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageCreate)} Cmd: {command} Args: {string.Join(" ", args)}");
