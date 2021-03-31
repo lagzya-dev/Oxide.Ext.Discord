@@ -160,8 +160,9 @@ namespace Oxide.Ext.Discord
             //Run from next tick so we can be sure it's ran on the main thread.
             Interface.Oxide.NextTick(() =>
             {
-                foreach (Plugin plugin in RegisteredForHooks)
+                for (int index = 0; index < RegisteredForHooks.Count; index++)
                 {
+                    Plugin plugin = RegisteredForHooks[index];
                     plugin.CallHook(hookName, args);
                 }
             });

@@ -4565,17 +4565,17 @@
             Represents all Intents
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Guilds.DefaultMessageNotificationLevel">
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.DefaultNotificationLevel">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level">Default Message Notification Level</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.DefaultMessageNotificationLevel.AllMessages">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.DefaultNotificationLevel.AllMessages">
             <summary>
             Notify for all guild messages
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.DefaultMessageNotificationLevel.OnlyMentions">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.DefaultNotificationLevel.OnlyMentions">
             <summary>
             Notify for only mentions
             </summary>
@@ -4867,12 +4867,24 @@
             Return the guilds Banner Url
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetChannelByName(System.String)">
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.EveryoneRole">
+            <summary>
+            Returns the everyone role for the guild.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetChannel(System.String)">
             <summary>
             Returns a channel with the given name (Case Insensitive)
             </summary>
             <param name="name">Name of the channel</param>
             <returns>Channel with the given name; Null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetParentChannel(Oxide.Ext.Discord.Entities.Channels.Channel)">
+            <summary>
+            Returns the parent channel for a channel if it exists
+            </summary>
+            <param name="channel">Channel to find the parent for</param>
+            <returns>Parent channel for the given channel; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetRole(System.String)">
             <summary>
@@ -4881,12 +4893,26 @@
             <param name="name">Name of the role</param>
             <returns>Role with the given name; Null otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetMemberByUsername(System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetBoosterRole">
+            <summary>
+            Returns the booster role for the guild if it exists
+            </summary>
+            <returns>Booster role; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetMember(System.String)">
             <summary>
             Returns a GuildMember with the given username (Case Insensitive)
             </summary>
             <param name="userName">Username of the GuildMember</param>
             <returns>GuildMember with the given username; Null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetEmoji(System.String)">
+            <summary>
+            Finds guild emoji by name
+            </summary>
+            <param name="name">Name of the emoji</param>
+            <returns>Emoji if found; null otherwise</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCreate,System.Action{Oxide.Ext.Discord.Entities.Guilds.Guild},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
@@ -5691,6 +5717,22 @@
             <summary>
             Whether the user has not yet passed the guild's Membership Screening requirements
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildMember.HasRole(Oxide.Ext.Discord.Entities.Roles.Role)">
+            <summary>
+            Returns if member has the given role
+            </summary>
+            <param name="role">Role to check</param>
+            <returns>Return true if has role; False otherwise;</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if role is null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildMember.HasRole(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns if member has the given role
+            </summary>
+            <param name="roleId">Role ID to check</param>
+            <returns>Return true if has role; False otherwise;</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if role is null</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMemberAdd">
             <summary>
@@ -7843,6 +7885,19 @@
             The tags this role has
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Roles.Role.HasPermission(Oxide.Ext.Discord.Entities.Channels.PermissionFlags)">
+            <summary>
+            Returns if the role has the specified permission
+            </summary>
+            <param name="perm">Permission to check for</param>
+            <returns>Return true if role has permission; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Roles.Role.IsBoosterRole">
+            <summary>
+            Returns if this role is the booster
+            </summary>
+            <returns>True if booster role. False otherwise;</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Roles.RoleTags">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure">Role Tags Structure</a>
@@ -8382,7 +8437,7 @@
             <param name="callback">Callback with the direct message channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateGroupDm(Oxide.Ext.Discord.DiscordClient,System.String[],System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Users.NickId},System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.CreateGroupDm(Oxide.Ext.Discord.DiscordClient,System.String[],Oxide.Plugins.Hash{Oxide.Ext.Discord.Entities.Snowflake,System.String},System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a Group Direct Message
             </summary>
@@ -8441,21 +8496,6 @@
             <param name="channelId">Channel ID to remove recipient from</param>
             <param name="callback">callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Users.NickId">
-            <summary>
-            Represents a User ID and Nick Name
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.NickId.Id">
-            <summary>
-            User ID
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.NickId.Nick">
-            <summary>
-            User Nickname
-            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserFlags">
             <summary>
@@ -9708,11 +9748,6 @@
             Represents a library for discord linking
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.Link">
-            <summary>
-            Linking Plugin
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsEnabled">
             <summary>
             Returns if there is a registered link plugin
@@ -9729,7 +9764,7 @@
             <summary>
             Returns if the specified ID is linked
             </summary>
-            <param name="id">ID of the steam or discord ID. Valid Types are String, Ulong, Snowflake</param>
+            <param name="id">ID of the steam or discord ID. Valid Types are string, ulong, and Snowflake</param>
             <returns>True if the ID is linked; false otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(System.String)">
@@ -9810,13 +9845,13 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedSteamIds">
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamIds">
             <summary>
             Returns Steam ID's for all linked players
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedDiscordIds">
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetDiscordIds">
             <summary>
             Returns Discord ID's for all linked players
             </summary>

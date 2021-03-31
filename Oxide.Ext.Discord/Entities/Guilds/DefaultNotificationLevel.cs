@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level">Default Message Notification Level</a>
     /// </summary>
-    public enum DefaultMessageNotificationLevel
+    public enum DefaultNotificationLevel
     {
         /// <summary>
         /// Notify for all guild messages

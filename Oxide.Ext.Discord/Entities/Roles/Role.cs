@@ -10,6 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Roles
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Role : ISnowflakeEntity
     {
+        #region Discord Fields
         /// <summary>
         /// Role id
         /// </summary>
@@ -63,7 +64,30 @@ namespace Oxide.Ext.Discord.Entities.Roles
         /// </summary>
         [JsonProperty("tags")]
         public RoleTags Tags { get; set; }
+        #endregion
 
+        #region Helper Methods
+        /// <summary>
+        /// Returns if the role has the specified permission
+        /// </summary>
+        /// <param name="perm">Permission to check for</param>
+        /// <returns>Return true if role has permission; false otherwise</returns>
+        public bool HasPermission(PermissionFlags perm)
+        {
+            return (Permissions & perm) == perm;
+        }
+
+        /// <summary>
+        /// Returns if this role is the booster
+        /// </summary>
+        /// <returns>True if booster role. False otherwise;</returns>
+        public bool IsBoosterRole()
+        {
+            return Managed && Tags != null && !Tags.BotId.HasValue;
+        }
+        #endregion
+
+        #region Entity Update
         internal Role UpdateRole(Role role)
         {
             Role previous = (Role)MemberwiseClone();
@@ -86,5 +110,6 @@ namespace Oxide.Ext.Discord.Entities.Roles
 
             return previous;
         }
+        #endregion
     }
 }

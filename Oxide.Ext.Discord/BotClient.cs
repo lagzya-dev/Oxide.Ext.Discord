@@ -236,14 +236,15 @@ namespace Oxide.Ext.Discord
             }
 
             LogLevel level = LogLevel.Off;
-            foreach (DiscordClient remainingClient in _clients)
+            for (int index = 0; index < _clients.Count; index++)
             {
+                DiscordClient remainingClient = _clients[index];
                 if (remainingClient.Settings.LogLevel < level)
                 {
                     level = remainingClient.Settings.LogLevel;
                 }
             }
-            
+
             if (level > Settings.LogLevel)
             {
                 UpdateLogLevel(level);
@@ -278,8 +279,9 @@ namespace Oxide.Ext.Discord
         /// <param name="args">Args for the hook</param>
         public void CallHook(string hookName, params object[] args)
         {
-            foreach (DiscordClient client in _clients)
+            for (int index = 0; index < _clients.Count; index++)
             {
+                DiscordClient client = _clients[index];
                 client.CallHook(hookName, args);
             }
         }
@@ -436,8 +438,9 @@ namespace Oxide.Ext.Discord
         #region Discord Command Helpers
         internal bool IsPluginRegistered(Plugin plugin)
         {
-            foreach (DiscordClient client in _clients)
+            for (int index = 0; index < _clients.Count; index++)
             {
+                DiscordClient client = _clients[index];
                 if (client.RegisteredForHooks.Contains(plugin))
                 {
                     return true;

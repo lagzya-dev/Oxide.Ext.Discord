@@ -846,14 +846,15 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 if (guild != null && guild.IsAvailable)
                 {
-                    foreach (GuildMember member in chunk.Members) 
+                    for (int index = 0; index < chunk.Members.Count; index++)
                     {
+                        GuildMember member = chunk.Members[index];
                         if (!guild.Members.ContainsKey(member.User.Id))
                         {
                             guild.Members[member.User.Id] = member;
                         }
                     }
-                    
+
                     //Once we've loaded all guild members call hook
                     if (chunk.ChunkIndex + 1 == chunk.ChunkCount)
                     {

@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Default message notification level
         /// </summary>
         [JsonProperty("default_message_notifications")]
-        public DefaultMessageNotificationLevel? DefaultMessageNotifications { get; set; }
+        public DefaultNotificationLevel? DefaultMessageNotifications { get; set; }
              
         /// <summary>
         /// Explicit content filter level

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
 
@@ -13,6 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class GuildMember : ISnowflakeEntity
     {
+        #region Discord Fields
         /// <summary>
         /// Id for guild member
         /// </summary>
@@ -28,7 +30,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// This users guild nickname
         /// </summary>
         [JsonProperty("nick")]
-        public string Nick { get; set; }
+        public string Nickname { get; set; }
 
         /// <summary>
         /// List of member roles
@@ -71,7 +73,44 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("pending")]
         public bool? Pending { get; set; }
+        #endregion
 
+        #region Helper Properties
+        /// <summary>
+        /// Returns the display name show for the user in a guild
+        /// </summary>
+        public string DisplayName => Nickname ?? User?.Username;
+        #endregion
+        
+        #region Helper Methods
+        /// <summary>
+        /// Returns if member has the given role
+        /// </summary>
+        /// <param name="role">Role to check</param>
+        /// <returns>Return true if has role; False otherwise;</returns>
+        /// <exception cref="ArgumentNullException">Thrown if role is null</exception>
+        public bool HasRole(Role role)
+        {
+            if (role == null)
+            {
+                throw new ArgumentNullException(nameof(role));
+            }
+            
+            return HasRole(role.Id);
+        }
+
+        /// <summary>
+        /// Returns if member has the given role
+        /// </summary>
+        /// <param name="roleId">Role ID to check</param>
+        /// <returns>Return true if has role; False otherwise;</returns>
+        public bool HasRole(Snowflake roleId)
+        {
+            return Roles.Contains(roleId);
+        }
+        #endregion
+        
+        #region Entity Update
         internal GuildMember Update(GuildMember update)
         {
             GuildMember previous = (GuildMember)MemberwiseClone();
@@ -80,9 +119,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 previous.User = User.Update(update.User);
             }
                     
-            if (update.Nick != null)
+            if (update.Nickname != null)
             {
-                Nick = update.Nick;
+                Nickname = update.Nickname;
             }
                     
             if (update.Roles != null)
@@ -102,5 +141,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
             return previous;
         }
+        #endregion
     }
 }

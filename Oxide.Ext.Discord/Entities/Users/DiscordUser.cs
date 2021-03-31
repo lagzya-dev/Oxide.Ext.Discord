@@ -20,6 +20,7 @@ namespace Oxide.Ext.Discord.Entities.Users
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordUser : ISnowflakeEntity
     {
+        #region Discord Fields
         /// <summary>
         /// The user's id
         /// </summary>
@@ -100,7 +101,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         [JsonProperty("public_flags")]
         public UserFlags? PublicFlags { get; set; }
+        #endregion
 
+        #region Helper Properties
         /// <summary>
         /// Default Avatar Url for the User
         /// </summary>
@@ -120,7 +123,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Returns the IPlayer for the discord user if linked; null otherwise
         /// </summary>
         public IPlayer Player => DiscordExtension.DiscordLink.GetPlayer(Id);
+        #endregion
 
+        #region API Methods
         /// <summary>
         /// Returns the currently logged in user account
         /// See <a href="https://discord.com/developers/docs/resources/user#get-current-user">Get Current User</a>
@@ -372,7 +377,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         {
             client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, error);
         }
+        #endregion
 
+        #region Entity Update
         internal DiscordUser Update(DiscordUser update)
         {
             DiscordUser previous = (DiscordUser) MemberwiseClone();
@@ -433,5 +440,6 @@ namespace Oxide.Ext.Discord.Entities.Users
 
             return previous;
         }
+        #endregion
     }
 }

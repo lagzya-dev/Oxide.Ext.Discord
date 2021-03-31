@@ -24,6 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class Guild : ISnowflakeEntity
     {
+        #region Discord Fields
         /// <summary>
         /// Guild id
         /// </summary>
@@ -119,7 +120,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Default message notification level
         /// </summary>
         [JsonProperty("default_message_notifications")]
-        public DefaultMessageNotificationLevel? DefaultMessageNotifications { get; set; }
+        public DefaultNotificationLevel? DefaultMessageNotifications { get; set; }
         
         /// <summary>
         /// Explicit content filter level
@@ -306,12 +307,16 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("approximate_presence_count")]
         public int? ApproximatePresenceCount { get; set; }
-        
+        #endregion
+
+        #region Extension Fields
         /// <summary>
         /// Returns true if all guild members have been loaded
         /// </summary>
         public bool HasLoadedAllMembers { get; internal set; }
-        
+        #endregion
+
+        #region Helper Properties
         /// <summary>
         /// Returns if the guild is available to use
         /// </summary>
@@ -338,11 +343,18 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public string BannerUrl => DiscordCdn.GetGuildBannerUrl(Id, Banner);
 
         /// <summary>
+        /// Returns the everyone role for the guild.
+        /// </summary>
+        public Role EveryoneRole => Roles[Id];
+        #endregion
+
+        #region Helper Methods
+        /// <summary>
         /// Returns a channel with the given name (Case Insensitive)
         /// </summary>
         /// <param name="name">Name of the channel</param>
         /// <returns>Channel with the given name; Null otherwise</returns>
-        public Channel GetChannelByName(string name)
+        public Channel GetChannel(string name)
         {
             if (name == null)
             {
@@ -359,7 +371,22 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
             return null;
         }
-        
+
+        /// <summary>
+        /// Returns the parent channel for a channel if it exists
+        /// </summary>
+        /// <param name="channel">Channel to find the parent for</param>
+        /// <returns>Parent channel for the given channel; null otherwise</returns>
+        public Channel GetParentChannel(Channel channel)
+        {
+            if (!channel.ParentId.HasValue || !channel.ParentId.Value.IsValid())
+            {
+                return null;
+            }
+
+            return Channels[channel.ParentId.Value];
+        }
+
         /// <summary>
         /// Returns a Role with the given name (Case Insensitive)
         /// </summary>
@@ -382,13 +409,30 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
             return null;
         }
+
+        /// <summary>
+        /// Returns the booster role for the guild if it exists
+        /// </summary>
+        /// <returns>Booster role; null otherwise</returns>
+        public Role GetBoosterRole()
+        {
+            foreach (Role role in Roles.Values)
+            {
+                if (role.IsBoosterRole())
+                {
+                    return role;
+                }
+            }
+
+            return null;
+        }
         
         /// <summary>
         /// Returns a GuildMember with the given username (Case Insensitive)
         /// </summary>
         /// <param name="userName">Username of the GuildMember</param>
         /// <returns>GuildMember with the given username; Null otherwise</returns>
-        public GuildMember GetMemberByUsername(string userName)
+        public GuildMember GetMember(string userName)
         {
             if (userName == null)
             {
@@ -422,7 +466,33 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 
             return null;
         }
-        
+
+        /// <summary>
+        /// Finds guild emoji by name
+        /// </summary>
+        /// <param name="name">Name of the emoji</param>
+        /// <returns>Emoji if found; null otherwise</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public Emoji GetEmoji(string name)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            foreach (Emoji emoji in Emojis.Values)
+            {
+                if (emoji.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return emoji;
+                }
+            }
+
+            return null;
+        }
+        #endregion
+
+        #region API Methods
         /// <summary>
         /// Create a new guild.
         /// See <a href="https://discord.com/developers/docs/resources/guild#create-guild">Create Guild</a>
@@ -572,7 +642,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             {
                 Deaf = member.Deaf,
                 Mute = member.Mute,
-                Nick = member.Nick,
+                Nick = member.Nickname,
                 AccessToken = accessToken,
                 Roles = new List<Snowflake>()
             };
@@ -1184,7 +1254,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/emojis/{emojiId}", RequestMethod.DELETE, null, callback, error);
         }
-        
+        #endregion
+
+        #region Entity Update Methods
         internal Guild Update(Guild updatedGuild)
         {
             Guild previous = (Guild)MemberwiseClone();
@@ -1267,5 +1339,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 ApproximatePresenceCount = updatedGuild.ApproximatePresenceCount;
             return previous;
         }
+        #endregion
     }
 }
