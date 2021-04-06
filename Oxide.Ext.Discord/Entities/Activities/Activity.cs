@@ -108,6 +108,13 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// </summary>
         [JsonProperty("flags")]
         public ActivityFlags? Flags { get; set; }
+        
+        /// <summary>
+        /// The custom buttons shown in the Rich Presence (max 2)
+        /// See <see cref="ActivityButton"/>
+        /// </summary>
+        [JsonProperty("buttons")]
+        public List<ActivityButton> Buttons { get; set; }
 
         /// <summary>
         /// Returns the large image url for the presence asset

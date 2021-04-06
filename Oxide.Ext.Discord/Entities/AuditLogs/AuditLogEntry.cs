@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs
         /// 
         /// </summary>
         [JsonProperty("user_id")]
-        public Snowflake UserId { get; set; }
+        public Snowflake? UserId { get; set; }
 
         /// <summary>
         /// 

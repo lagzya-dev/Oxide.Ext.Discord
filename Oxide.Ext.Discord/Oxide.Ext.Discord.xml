@@ -1096,6 +1096,12 @@
             See <see cref="T:Oxide.Ext.Discord.Entities.Activities.ActivityFlags"/>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Activities.Activity.Buttons">
+            <summary>
+            The custom buttons shown in the Rich Presence (max 2)
+            See <see cref="T:Oxide.Ext.Discord.Entities.Activities.ActivityButton"/>
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Activities.Activity.GetLargeImageUrl">
             <summary>
             Returns the large image url for the presence asset
@@ -1129,6 +1135,21 @@
         <member name="P:Oxide.Ext.Discord.Entities.Activities.ActivityAssets.SmallText">
             <summary>
             Text displayed when hovering over the small image of the activity
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Activities.ActivityButton">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-buttons">Activity Buttons</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Activities.ActivityButton.Label">
+            <summary>
+            The text shown on the button (1-32 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Activities.ActivityButton.Url">
+            <summary>
+            The url opened when clicking the button (1-512 characters)
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.ActivityFlags">
@@ -2722,7 +2743,7 @@
         <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageWebhooks">
             <summary>
             Allows management and editing of webhooks
-            Channel Type (Text, Voice)
+            Channel Type (Text)
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageEmojis">
@@ -2887,7 +2908,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.Application.Verify">
             <summary>
-            The base64 encoded key for the GameSDK's GetTicket
+            The hex encoded key for verification in interactions and the GameSDK's GetTicket
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.Application.Team">
@@ -3256,6 +3277,11 @@
             The name of the parameter
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandInteractionDataOption.Type">
+            <summary>
+            Value of ApplicationCommandOptionType
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandInteractionDataOption.Value">
             <summary>
             The value of the pair
@@ -3375,6 +3401,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.Interaction.Id">
             <summary>
             Id of the interaction
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.Interaction.ApplicationId">
+            <summary>
+            ID of the application this interaction is for
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.Interaction.Type">
@@ -3588,7 +3619,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand.Nonce">
             <summary>
-            Nonce to identify the Guild Members Chunk response
+            Nonce to identify the Guild Members Chunk response (Up to 25 characters)
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand">
@@ -3625,11 +3656,6 @@
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.StatusUpdate">
             <summary>
             Presence structure for initial presence information
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.GuildSubscriptions">
-            <summary>
-            Enables dispatching of guild subscription events (presence and typing events)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.Intents">
@@ -4495,6 +4521,9 @@
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildIntegrations">
             <summary>
             - GUILD_INTEGRATIONS_UPDATE
+            - INTEGRATION_CREATE
+            - INTEGRATION_UPDATE
+            - INTEGRATION_DELETE
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildWebhooks">
@@ -4563,6 +4592,21 @@
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.All">
             <summary>
             Represents all Intents
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ChannelPosition">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-role-positions">Modify Guild Role Position</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ChannelPosition.Id">
+            <summary>
+            ID of the channel or role
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ChannelPosition.Position">
+            <summary>
+            New position for the role / channel
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.DefaultNotificationLevel">
@@ -4984,7 +5028,7 @@
             <param name="callback">Callback with created channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ObjectPosition},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ChannelPosition},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Modify the positions of a set of channel objects for the guild.
             Requires MANAGE_CHANNELS permission.
@@ -5012,9 +5056,19 @@
             In the future, this endpoint will be restricted in line with our Privileged Intents
             </summary>
             <param name="client">Client to use</param>
-            <param name="limit">max number of members to return (1-1000)</param>
+            <param name="limit">Max number of members to return (1-1000)</param>
             <param name="afterSnowflake">The highest user id in the previous page</param>
-            <param name="callback"></param>
+            <param name="callback">Callback with list of guild members</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.SearchGuildMembers(Oxide.Ext.Discord.DiscordClient,System.String,System.Int32,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildMember}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Searches for guild members by username or nickname
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="search">Username or nickname to match</param>
+            <param name="limit">Max number of members to return (1-1000)</param>
+            <param name="callback">Callback with matching guild members</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,System.String,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role},System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -5218,7 +5272,7 @@
             <param name="callback">Callback with the created role</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ObjectPosition},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.RolePosition},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.Role}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Modify the positions of a set of role objects for the guild.
             Requires the MANAGE_ROLES permission.
@@ -5329,39 +5383,6 @@
             <param name="callback">Callback with a list of guild integrations</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Attach an integration object from the current user to the guild.
-            Requires the MANAGE_GUILD permission
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="integration">Integration to create in the guild</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.CreateGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.IntegrationType,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Attach an integration object from the current user to the guild.
-            Requires the MANAGE_GUILD permission
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="type">Type of integration to create</param>
-            <param name="id">Id of the integration</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Integrations.IntegrationUpdate,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Modify the behavior and settings of an integration object for the guild.
-            Requires the MANAGE_GUILD permission
-            See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-integration">Modify Guild Integration</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="integrationId">ID of the integration</param>
-            <param name="update">Update to make to the integration</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.DeleteGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Delete the attached integration object for the guild.
@@ -5383,28 +5404,6 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="integrationId">Integration ID to delete</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.SyncGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Sync an integration.
-            Requires the MANAGE_GUILD permission.
-            See <a href="https://discord.com/developers/docs/resources/guild#sync-guild-integration">Sync Guild Integration</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="integration">Integration to sync</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.SyncGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Sync an integration.
-            Requires the MANAGE_GUILD permission.
-            See <a href="https://discord.com/developers/docs/resources/guild#sync-guild-integration">Sync Guild Integration</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="integrationId">Integration ID to sync</param>
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -5436,6 +5435,25 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with guild widget</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildWelcomeScreen(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWelcomeScreen},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns the Welcome Screen object for the guild.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with welcome screen for the guild</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.ModifyWelcomeScreen(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWelcomeScreen},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Modify the guild's Welcome Screen.
+            Requires the MANAGE_GUILD permission.
+            Returns the updated Welcome Screen object.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="update">Update to be made to the welcome screen</param>
+            <param name="callback">Callback with updated welcome screen for the guild</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildVanityUrl(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Invites.InviteMetadata},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -5593,6 +5611,11 @@
             The id of the channel where guild notices such as welcome messages and boost events are posted
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildCreate.SystemChannelFlags">
+            <summary>
+            System channel flags
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-guild-features">Guild Features</a>
@@ -5678,7 +5701,7 @@
             The user this guild member represents
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Nick">
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Nickname">
             <summary>
             This users guild nickname
             </summary>
@@ -5718,6 +5741,11 @@
             Whether the user has not yet passed the guild's Membership Screening requirements
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.DisplayName">
+            <summary>
+            Returns the display name show for the user in a guild
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildMember.HasRole(Oxide.Ext.Discord.Entities.Roles.Role)">
             <summary>
             Returns if member has the given role
@@ -5732,7 +5760,6 @@
             </summary>
             <param name="roleId">Role ID to check</param>
             <returns>Return true if has role; False otherwise;</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if role is null</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMemberAdd">
             <summary>
@@ -5970,7 +5997,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildWelcomeScreen">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/resources/guild#welcome-screen-object-welcome-screen-structure">Welcome Screen Structure</a>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#welcome-screen-object">Welcome Screen Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildWelcomeScreen.Description">
@@ -6059,18 +6086,17 @@
             The widget channel id
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ObjectPosition">
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.RolePosition">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions">Modify Guild Channel Position</a>
             Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-role-positions">Modify Guild Role Position</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ObjectPosition.Id">
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.RolePosition.Id">
             <summary>
             ID of the channel or role
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ObjectPosition.Position">
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.RolePosition.Position">
             <summary>
             New position for the role / channel
             </summary>
@@ -6088,6 +6114,27 @@
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags.SuppressPremiumSubscriptions">
             <summary>
             Suppress server boost notifications
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen"></a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate.Enabled">
+            <summary>
+            Whether the welcome screen is enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate.WelcomeChannels">
+            <summary>
+            Channels linked in the welcome screen and their display options
+            Up to 5
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate.Description">
+            <summary>
+            The server description shown in the welcome screen
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Integrations.Integration">
@@ -6588,7 +6635,13 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Application">
             <summary>
             Sent with Rich Presence-related chat embeds
-            <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageApplication"/>
+            <see cref="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Application"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.MessageReference">
+            <summary>
+            Data showing the source of a crosspost, channel follow add, pin, or reply message
+            <see cref="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.MessageReference"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Flags">
@@ -7370,36 +7423,6 @@
             Message Activity JoinRequest
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageApplication">
-            <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object-message-application-structure">Message Application Structure</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageApplication.Id">
-            <summary>
-            ID of the application
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageApplication.CoverImage">
-            <summary>
-            ID of the embed's image asset
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageApplication.Description">
-            <summary>
-            Application's description
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageApplication.Icon">
-            <summary>
-            ID of the application's icon
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageApplication.Name">
-            <summary>
-            Name of the application
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageCreate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-parameters-for-contenttype-applicationjson">Message Create Structure</a> to be created in discord
@@ -7412,7 +7435,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.Nonce">
             <summary>
-            Used for validating a message was sent
+            Used for validating a message was sent (Up to 25 characters)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.Tts">
@@ -7464,6 +7487,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.Urgent">
             <summary>
             This message came from the urgent message system
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.Ephemeral">
+            <summary>
+            This message is only visible to the user who invoked the Interaction
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.Loading">
+            <summary>
+            This message is an Interaction Response and the bot is "thinking"
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageReference">
@@ -7636,6 +7669,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildDiscoveryRequalified">
             <summary>
             The message for when a guild discovery is requalified
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildDiscoveryGracePeriodInitialWarning">
+            <summary>
+            The message for grace period initial warning
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildDiscoveryGracePeriodFinalWarning">
+            <summary>
+            The message for grace period final warning
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.Reply">
@@ -8787,6 +8830,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ApplicationId">
             <summary>
             The bot/OAuth2 application that created this webhook
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.Webhook.SourceGuild">
+            <summary>
+            The guild of the channel that this webhook is following (returned for Channel Follower Webhooks)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.Webhook.SourceChannel">
+            <summary>
+            The channel that this webhook is following (returned for Channel Follower Webhooks)
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.CreateWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.Action{Oxide.Ext.Discord.Entities.Webhooks.Webhook},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">

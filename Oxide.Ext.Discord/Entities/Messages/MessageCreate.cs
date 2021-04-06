@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public string Content { get; set; }
         
         /// <summary>
-        /// Used for validating a message was sent
+        /// Used for validating a message was sent (Up to 25 characters)
         /// </summary>
         [JsonProperty("nonce")]
         public string Nonce { get; set; }

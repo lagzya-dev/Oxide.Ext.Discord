@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
 namespace Oxide.Ext.Discord.Entities.Webhooks
@@ -68,6 +69,18 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         [JsonProperty("application_id")]
         public Snowflake ApplicationId { get; set; }
+        
+        /// <summary>
+        /// The guild of the channel that this webhook is following (returned for Channel Follower Webhooks)
+        /// </summary>
+        [JsonProperty("source_guild")]
+        public Guild SourceGuild { get; set; }
+        
+        /// <summary>
+        /// The channel that this webhook is following (returned for Channel Follower Webhooks)
+        /// </summary>
+        [JsonProperty("source_channel")]
+        public Snowflake SourceChannel { get; set; }
 
         /// <summary>
         /// Create a new webhook.

@@ -20,6 +20,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public Snowflake Id { get; set; }
         
         /// <summary>
+        /// ID of the application this interaction is for
+        /// </summary>
+        [JsonProperty("application_id")]
+        public Snowflake ApplicationId { get; set; }
+        
+        /// <summary>
         /// The type of interaction
         /// See <see cref="InteractionType"/>
         /// </summary>

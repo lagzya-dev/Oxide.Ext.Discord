@@ -76,5 +76,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("system_channel_id")]
         public Snowflake SystemChannelId { get; set; }
+        
+        /// <summary>
+        /// System channel flags
+        /// </summary>
+        [JsonProperty("system_channel_flags")]
+        public SystemChannelFlags? SystemChannelFlags { get; set; }
     }
 }

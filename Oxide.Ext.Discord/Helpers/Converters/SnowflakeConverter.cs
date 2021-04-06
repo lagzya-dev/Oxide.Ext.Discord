@@ -61,8 +61,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
         /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            Snowflake snowflake = (Snowflake) value;
-            writer.WriteValue(snowflake.ToString());
+            writer.WriteValue(value.ToString());
         }
 
         /// <summary>

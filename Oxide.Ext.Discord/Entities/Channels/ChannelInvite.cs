@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Invites;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -35,13 +36,13 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <summary>
         /// The target user id for this invite
         /// </summary>
-        [JsonProperty("target_user")]
+        [JsonProperty("target_user_id")]
         public string TargetUser { get; set; }
         
         /// <summary>
         /// The type of target user for this invite
         /// </summary>
         [JsonProperty("target_user_type")]
-        public int? TargetUserType { get; set; }
+        public TargetUserType? TargetUserType { get; set; }
     }
 }

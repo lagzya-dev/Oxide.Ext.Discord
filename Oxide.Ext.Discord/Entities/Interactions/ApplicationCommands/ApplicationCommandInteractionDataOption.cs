@@ -16,6 +16,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public string Name { get; set; }
         
         /// <summary>
+        /// Value of ApplicationCommandOptionType
+        /// </summary>
+        [JsonProperty("type")]
+        public int Type { get; set; }
+        
+        /// <summary>
         /// The value of the pair
         /// See <see cref="ApplicationCommandOptionType"/>
         /// </summary>

@@ -594,7 +594,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="positions">List new channel positions for each channel</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildChannelPositions(DiscordClient client, List<ObjectPosition> positions, Action callback = null, Action<RestError> error = null)
+        public void ModifyGuildChannelPositions(DiscordClient client, List<ChannelPosition> positions, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/channels", RequestMethod.PATCH, positions, callback, error);
         }
@@ -617,13 +617,26 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// In the future, this endpoint will be restricted in line with our Privileged Intents
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="limit">max number of members to return (1-1000)</param>
+        /// <param name="limit">Max number of members to return (1-1000)</param>
         /// <param name="afterSnowflake">The highest user id in the previous page</param>
-        /// <param name="callback"></param>
+        /// <param name="callback">Callback with list of guild members</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ListGuildMembers(DiscordClient client, int limit = 1000, string afterSnowflake = "0", Action<List<GuildMember>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/members?limit={limit}&after={afterSnowflake}", RequestMethod.GET, null, callback, error);
+        }
+
+        /// <summary>
+        /// Searches for guild members by username or nickname
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="search">Username or nickname to match</param>
+        /// <param name="limit">Max number of members to return (1-1000)</param>
+        /// <param name="callback">Callback with matching guild members</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void SearchGuildMembers(DiscordClient client, string search, int limit = 1, Action<List<GuildMember>> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/search?query={search}&limit={limit}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -903,7 +916,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="positions">List of role with updated positions</param>
         /// <param name="callback">Callback with a list of all guild role objects</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildRolePositions(DiscordClient client, List<ObjectPosition> positions, Action<List<Role>> callback = null, Action<RestError> error = null)
+        public void ModifyGuildRolePositions(DiscordClient client, List<RolePosition> positions, Action<List<Role>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/roles", RequestMethod.PATCH, positions, callback, error);
         }
@@ -1037,51 +1050,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         }
 
         /// <summary>
-        /// Attach an integration object from the current user to the guild.
-        /// Requires the MANAGE_GUILD permission
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="integration">Integration to create in the guild</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildIntegration(DiscordClient client, Integration integration, Action callback = null, Action<RestError> error = null) => CreateGuildIntegration(client, integration.Type, integration.Id, callback, error);
-
-        /// <summary>
-        /// Attach an integration object from the current user to the guild.
-        /// Requires the MANAGE_GUILD permission
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="type">Type of integration to create</param>
-        /// <param name="id">Id of the integration</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildIntegration(DiscordClient client, IntegrationType type, Snowflake id, Action callback = null, Action<RestError> error = null)
-        {
-            Dictionary<string, object> data = new Dictionary<string, object>()
-            {
-                ["type"] = type ,
-                ["id"] = id
-            };
-
-            client.Bot.Rest.DoRequest($"/guilds/{id}/integrations", RequestMethod.POST, data, callback, error);
-        }
-
-        /// <summary>
-        /// Modify the behavior and settings of an integration object for the guild.
-        /// Requires the MANAGE_GUILD permission
-        /// See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-integration">Modify Guild Integration</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="integrationId">ID of the integration</param>
-        /// <param name="update">Update to make to the integration</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildIntegration(DiscordClient client, Snowflake integrationId, IntegrationUpdate update, Action callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/integrations/{integrationId}", RequestMethod.PATCH, update, callback, error);
-        }
-        
-        /// <summary>
         /// Delete the attached integration object for the guild.
         /// Deletes any associated webhooks and kicks the associated bot if there is one.
         /// Requires the MANAGE_GUILD permission.
@@ -1108,31 +1076,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             client.Bot.Rest.DoRequest($"/guilds/{Id}/integrations/{integrationId}", RequestMethod.DELETE, null, callback, error);
         }
 
-        /// <summary>
-        /// Sync an integration.
-        /// Requires the MANAGE_GUILD permission.
-        /// See <a href="https://discord.com/developers/docs/resources/guild#sync-guild-integration">Sync Guild Integration</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="integration">Integration to sync</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void SyncGuildIntegration(DiscordClient client, Integration integration, Action callback = null, Action<RestError> error = null) => SyncGuildIntegration(client, integration.Id, callback, error);
-
-        /// <summary>
-        /// Sync an integration.
-        /// Requires the MANAGE_GUILD permission.
-        /// See <a href="https://discord.com/developers/docs/resources/guild#sync-guild-integration">Sync Guild Integration</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="integrationId">Integration ID to sync</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void SyncGuildIntegration(DiscordClient client, Snowflake integrationId, Action callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/integrations/{integrationId}/sync", RequestMethod.POST, null, callback, error);
-        }
-        
         /// <summary>
         /// Returns a guild widget object.
         /// Requires the MANAGE_GUILD permission.
@@ -1170,6 +1113,31 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public void GetGuildWidget(DiscordClient client, Action<GuildWidget> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/widget.json", RequestMethod.GET, null, callback, error);
+        }
+
+        /// <summary>
+        /// Returns the Welcome Screen object for the guild.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with welcome screen for the guild</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetGuildWelcomeScreen(DiscordClient client, Action<GuildWelcomeScreen> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/welcome-screen", RequestMethod.GET, null, callback, error);
+        }
+
+        /// <summary>
+        /// Modify the guild's Welcome Screen.
+        /// Requires the MANAGE_GUILD permission.
+        /// Returns the updated Welcome Screen object.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="update">Update to be made to the welcome screen</param>
+        /// <param name="callback">Callback with updated welcome screen for the guild</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ModifyWelcomeScreen(DiscordClient client, WelcomeScreenUpdate update, Action<GuildWelcomeScreen> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/welcome-screen", RequestMethod.PATCH, update, callback, error);
         }
 
         /// <summary>

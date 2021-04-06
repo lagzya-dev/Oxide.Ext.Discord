@@ -48,6 +48,9 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         
         /// <summary>
         /// - GUILD_INTEGRATIONS_UPDATE
+        /// - INTEGRATION_CREATE
+        /// - INTEGRATION_UPDATE
+        /// - INTEGRATION_DELETE
         /// </summary>
         GuildIntegrations = 1 << 4,
         

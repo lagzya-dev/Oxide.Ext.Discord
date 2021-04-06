@@ -406,6 +406,18 @@ namespace Oxide.Ext.Discord.WebSockets
                 case "GUILD_ROLE_DELETE":
                     HandleDispatchGuildRoleDelete(payload);
                     break;
+                
+                case "INTEGRATION_CREATE":
+                    HandleDispatchIntegrationCreate(payload);
+                    break;
+                
+                case "INTEGRATION_UPDATE":
+                    HandleDispatchIntegrationUpdate(payload);
+                    break;
+                
+                case "INTEGRATION_DELETE":
+                    HandleDispatchIntegrationDelete(payload);
+                    break;    
 
                 case "MESSAGE_CREATE":
                     HandleDispatchMessageCreate(payload);
@@ -478,19 +490,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 case "INTERACTION_CREATE":
                     HandleDispatchInteractionCreate(payload);
                     break;
-                
-                case "INTEGRATION_CREATE":
-                    HandleDispatchIntegrationCreate(payload);
-                    break;
-                
-                case "INTEGRATION_UPDATE":
-                    HandleDispatchIntegrationUpdate(payload);
-                    break;
-                
-                case "INTEGRATION_DELETE":
-                    HandleDispatchIntegrationDelete(payload);
-                    break;         
-                
+
                 case "APPLICATION_COMMAND_CREATE":
                     HandleDispatchApplicationCommandCreate(payload);
                     break;                
@@ -922,6 +922,33 @@ namespace Oxide.Ext.Discord.WebSockets
                 }
             }
         }
+        
+        //TODO: Add Link
+        private void HandleDispatchIntegrationCreate(EventPayload payload)
+        {
+            IntegrationCreatedEvent integration = payload.EventData.ToObject<IntegrationCreatedEvent>();
+            Guild guild = _client.GetGuild(integration.GuildId); 
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInteractionCreate)} Guild ID: {integration.GuildId} Guild Name: {guild?.Name} Integration ID: {integration.Id}");
+            _client.CallHook(DiscordHooks.OnDiscordGuildIntegrationCreated, integration, guild);
+        }
+
+        //TODO: Add Link
+        private void HandleDispatchIntegrationUpdate(EventPayload payload)
+        {
+            IntegrationUpdatedEvent integration = payload.EventData.ToObject<IntegrationUpdatedEvent>();
+            Guild guild = _client.GetGuild(integration.GuildId); 
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchIntegrationUpdate)} Guild ID: {integration.GuildId} Guild Name: {guild?.Name} Integration ID: {integration.Id}");
+            _client.CallHook(DiscordHooks.OnDiscordGuildIntegrationUpdated, integration, guild);
+        }
+
+        //TODO: Add Link
+        private void HandleDispatchIntegrationDelete(EventPayload payload)
+        {
+            IntegrationDeletedEvent integration = payload.EventData.ToObject<IntegrationDeletedEvent>();
+            Guild guild = _client.GetGuild(integration.GuildId); 
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchIntegrationDelete)} Guild ID: {integration.GuildId} Guild Name: {guild?.Name} Integration ID: {integration.Id}");
+            _client.CallHook(DiscordHooks.OnDiscordIntegrationDeleted, integration, guild);
+        }
 
         //https://discord.com/developers/docs/topics/gateway#message-create
         private void HandleDispatchMessageCreate(EventPayload payload)
@@ -1248,34 +1275,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInteractionCreate)} Guild ID: {interaction.GuildId} Channel ID: {interaction.ChannelId} Interaction ID: {interaction.Id} Interaction Token: {interaction.Token}");
             _client.CallHook(DiscordHooks.OnDiscordInteractionCreated, interaction);
         }
-        
-        //TODO: Add Link
-        private void HandleDispatchIntegrationCreate(EventPayload payload)
-        {
-            IntegrationCreatedEvent integration = payload.EventData.ToObject<IntegrationCreatedEvent>();
-            Guild guild = _client.GetGuild(integration.GuildId); 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInteractionCreate)} Guild ID: {integration.GuildId} Guild Name: {guild?.Name} Integration ID: {integration.Id}");
-            _client.CallHook(DiscordHooks.OnDiscordGuildIntegrationCreated, integration, guild);
-        }
 
-        //TODO: Add Link
-        private void HandleDispatchIntegrationUpdate(EventPayload payload)
-        {
-            IntegrationUpdatedEvent integration = payload.EventData.ToObject<IntegrationUpdatedEvent>();
-            Guild guild = _client.GetGuild(integration.GuildId); 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchIntegrationUpdate)} Guild ID: {integration.GuildId} Guild Name: {guild?.Name} Integration ID: {integration.Id}");
-            _client.CallHook(DiscordHooks.OnDiscordGuildIntegrationUpdated, integration, guild);
-        }
-
-        //TODO: Add Link
-        private void HandleDispatchIntegrationDelete(EventPayload payload)
-        {
-            IntegrationDeletedEvent integration = payload.EventData.ToObject<IntegrationDeletedEvent>();
-            Guild guild = _client.GetGuild(integration.GuildId); 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchIntegrationDelete)} Guild ID: {integration.GuildId} Guild Name: {guild?.Name} Integration ID: {integration.Id}");
-            _client.CallHook(DiscordHooks.OnDiscordIntegrationDeleted, integration, guild);
-        }
-        
         //TODO: Add Link
         private void HandleDispatchApplicationCommandCreate(EventPayload payload)
         {

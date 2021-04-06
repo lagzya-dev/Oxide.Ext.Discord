@@ -41,7 +41,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         public List<Snowflake> UserIds { get; set; }        
         
         /// <summary>
-        /// Nonce to identify the Guild Members Chunk response
+        /// Nonce to identify the Guild Members Chunk response (Up to 25 characters)
         /// </summary>
         [JsonProperty("nonce")]
         public string Nonce { get; set; }

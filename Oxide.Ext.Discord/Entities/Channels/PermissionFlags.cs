@@ -207,7 +207,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// Allows management and editing of webhooks
-        /// Channel Type (Text, Voice)
+        /// Channel Type (Text)
         /// </summary>
         [Description("MANAGE_WEBHOOKS")]
         ManageWebhooks = 1 << 29,

@@ -98,6 +98,18 @@ namespace Oxide.Ext.Discord.Entities.Messages
         GuildDiscoveryRequalified = 15,
         
         /// <summary>
+        /// The message for grace period initial warning
+        /// </summary>
+        [Description("GUILD_DISCOVERY_GRACE_PERIOD_INITIAL_WARNING")]
+        GuildDiscoveryGracePeriodInitialWarning = 16,
+        
+        /// <summary>
+        /// The message for grace period final warning
+        /// </summary>
+        [Description("GUILD_DISCOVERY_GRACE_PERIOD_FINAL_WARNING")]
+        GuildDiscoveryGracePeriodFinalWarning = 17,
+        
+        /// <summary>
         /// The message for when the message is a reply
         /// </summary>
         [Description("REPLY")]

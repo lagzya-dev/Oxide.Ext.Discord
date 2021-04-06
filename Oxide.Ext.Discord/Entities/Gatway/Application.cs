@@ -73,7 +73,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public string Summary { get; set; }
         
         /// <summary>
-        /// The base64 encoded key for the GameSDK's GetTicket
+        /// The hex encoded key for verification in interactions and the GameSDK's GetTicket
         /// </summary>
         [JsonProperty("verify_key")]
         public string Verify { get; set; }

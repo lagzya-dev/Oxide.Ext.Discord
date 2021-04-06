@@ -45,13 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// </summary>
         [JsonProperty("presence")]
         public UpdateStatusCommand StatusUpdate;
-        
-        /// <summary>
-        /// Enables dispatching of guild subscription events (presence and typing events)
-        /// </summary>
-        [JsonProperty("guild_subscriptions")]
-        public bool? GuildSubscriptions { get; set; }
-        
+
         /// <summary>
         /// The Gateway Intents you wish to receive
         /// See <a href="https://discord.com/developers/docs/topics/gateway#gateway-intents">Gateway Intents</a>

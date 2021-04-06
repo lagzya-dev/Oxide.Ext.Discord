@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
@@ -162,11 +163,18 @@ namespace Oxide.Ext.Discord.Entities.Messages
         
         /// <summary>
         /// Sent with Rich Presence-related chat embeds
-        /// <see cref="MessageApplication"/>
+        /// <see cref="Application"/>
         /// </summary>
         [JsonProperty("application")]
-        public MessageApplication Application { get; set; }
+        public Application Application { get; set; }
 
+        /// <summary>
+        /// Data showing the source of a crosspost, channel follow add, pin, or reply message
+        /// <see cref="MessageReference"/>
+        /// </summary>
+        [JsonProperty("message_reference")]
+        public MessageReference MessageReference { get; set; }
+        
         /// <summary>
         /// Message flags combined as a bitfield
         /// <see cref="MessageFlags"/>

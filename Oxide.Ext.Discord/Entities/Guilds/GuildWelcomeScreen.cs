@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/resources/guild#welcome-screen-object-welcome-screen-structure">Welcome Screen Structure</a>
+    /// Represents <a href="https://discord.com/developers/docs/resources/guild#welcome-screen-object">Welcome Screen Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class GuildWelcomeScreen
