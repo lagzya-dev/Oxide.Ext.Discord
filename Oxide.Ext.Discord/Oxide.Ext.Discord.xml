@@ -8118,6 +8118,20 @@
             <param name="id">Id to be converted to snowflake</param>
             <returns>ID converted to a snowflake</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Snowflake.op_Implicit(Oxide.Ext.Discord.Entities.Snowflake)~System.String">
+            <summary>
+            Converts snowflake to a string
+            </summary>
+            <param name="snowflake">Snowflake to be converted to ulong</param>
+            <returns>Snowflake ID as ulong</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Snowflake.op_Explicit(System.String)~Oxide.Ext.Discord.Entities.Snowflake">
+            <summary>
+            Converts a string to a snowflake
+            </summary>
+            <param name="id">Id to be converted to snowflake</param>
+            <returns>ID converted to a snowflake</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Teams.Team">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/topics/teams#data-models-team-object">Team Object</a>

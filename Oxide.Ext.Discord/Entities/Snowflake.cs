@@ -236,5 +236,19 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="id">Id to be converted to snowflake</param>
         /// <returns>ID converted to a snowflake</returns>
         public static explicit operator Snowflake(ulong id) => new Snowflake(id);
+        
+        /// <summary>
+        /// Converts snowflake to a string
+        /// </summary>
+        /// <param name="snowflake">Snowflake to be converted to ulong</param>
+        /// <returns>Snowflake ID as ulong</returns>
+        public static implicit operator string(Snowflake snowflake) => snowflake.Id.ToString();
+        
+        /// <summary>
+        /// Converts a string to a snowflake
+        /// </summary>
+        /// <param name="id">Id to be converted to snowflake</param>
+        /// <returns>ID converted to a snowflake</returns>
+        public static explicit operator Snowflake(string id) => new Snowflake(id);
     }
 }

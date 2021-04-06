@@ -838,8 +838,9 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildMembersChunk(EventPayload payload)
         {
             GuildMembersChunkEvent chunk = payload.EventData.ToObject<GuildMembersChunkEvent>();
+
             Guild guild = _client.GetGuild(chunk.GuildId);
-            
+
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMembersChunk)}: Guild ID: {chunk.GuildId} Guild Name: {guild?.Name} Nonce: {chunk.Nonce}");
             //Used to load all members in the discord server
             if (chunk.Nonce == "DiscordExtension")
@@ -854,7 +855,7 @@ namespace Oxide.Ext.Discord.WebSockets
                             guild.Members[member.User.Id] = member;
                         }
                     }
-
+                    
                     //Once we've loaded all guild members call hook
                     if (chunk.ChunkIndex + 1 == chunk.ChunkCount)
                     {
