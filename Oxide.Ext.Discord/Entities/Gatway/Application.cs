@@ -389,5 +389,65 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.DELETE, null, callback, error);
         }
+
+        /// <summary>
+        /// Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="guildId">Guild ID to get the permissions from</param>
+        /// <param name="callback">Callback with the list of permissions</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetGuildApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Action<List<GuildApplicationCommandPermissions>> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="guildId">Guild ID to get the permissions from</param>
+        /// <param name="commandId">ID of the command to get permissions for</param>
+        /// <param name="callback">Callback with the permissions for the command</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<GuildApplicationCommandPermissions> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}/permissions", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Edits command permissions for a specific command for your application in a guild.
+        /// Warning: This endpoint will overwrite existing permissions for the command in that guild
+        /// Warning: Deleting or renaming a command will permanently delete all permissions for that command
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="guildId">Guild ID to update the permissions for</param>
+        /// <param name="commandId">ID of the command to get permissions for</param>
+        /// <param name="permissions">List of permissions for the command</param>
+        /// <param name="callback">Callback with the list of permissions</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void EditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, List<GuildApplicationCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["permissions"] = permissions
+            };
+            
+            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}/permissions", RequestMethod.PUT, data, callback, error);
+        }
+        
+        /// <summary>
+        /// Batch edits permissions for all commands in a guild.
+        /// Warning: This endpoint will overwrite all existing permissions for all commands in a guild
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="guildId">Guild ID to update the permissions for</param>
+        /// <param name="permissions">List of permissions for the commands</param>
+        /// <param name="callback">Callback with the list of permissions</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void BatchEditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildApplicationCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.PUT, permissions, callback, error);
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public string Name { get; set; }
         
         /// <summary>
-        /// The default avatar of the webhook
+        /// the default user avatar hash of the webhook
         /// </summary>
         [JsonProperty("avatar")]
         public string Avatar { get; set; }

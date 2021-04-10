@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// II passing true to REQUEST_GUILD_MEMBERS, presences of the returned members will be here
         /// </summary>
         [JsonProperty("presences")]
-        public List<UpdateStatusCommand> Presences { get; set; }      
+        public List<UpdatePresenceCommand> Presences { get; set; }      
         
         /// <summary>
         /// The nonce used in the Guild Members Request

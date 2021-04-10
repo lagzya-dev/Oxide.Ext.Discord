@@ -57,12 +57,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Flag given to users who are part of a team.
         /// </summary>
         TeamUser = 1 << 10,
-        
-        /// <summary>
-        ///  Flag given to users who represent Discord (System).
-        /// </summary>
-        System = 1 << 12,
-        
+
         /// <summary>
         /// Flag given to users who have participated in the 𝐁ug report program and are level 2.
         /// </summary>

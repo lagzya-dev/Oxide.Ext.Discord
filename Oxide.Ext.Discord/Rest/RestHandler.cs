@@ -141,6 +141,7 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         /// <param name="route">API Route</param>
         /// <returns>Bucket ID for route</returns>
+        //TODO: Support Webhook Token as a Major Parameter per https://github.com/discord/discord-api-docs/commit/14c505fefe343701c01563186e02f78a719b4829
         private string GetBucketId(string route)
         {
             string[] routeSegments = route.Split('/');

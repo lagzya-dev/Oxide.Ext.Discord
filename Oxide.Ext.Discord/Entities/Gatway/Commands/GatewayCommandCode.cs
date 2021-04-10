@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// <summary>
         /// Update the client's status.
         /// </summary>
-        StatusUpdate = 3,
+        PresenceUpdate = 3,
         
         /// <summary>
         /// Used to join/leave or move between voice channels.

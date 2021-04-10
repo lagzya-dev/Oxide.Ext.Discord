@@ -172,11 +172,11 @@
             </summary>
             <param name="voiceState"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.UpdateStatus(Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateStatusCommand)">
+        <member name="M:Oxide.Ext.Discord.BotClient.UpdateStatus(Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand)">
             <summary>
             Used to update the bots status in discord
             </summary>
-            <param name="statusUpdate"></param>
+            <param name="presenceUpdate"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.GetGuild(System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
             <summary>
@@ -2036,7 +2036,8 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.GuildId">
             <summary>
-            the ID of the guild
+            the ID of the guild (
+            Warning: May be missing for some channel objects received over gateway guild dispatches
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Position">
@@ -3166,6 +3167,49 @@
             <param name="callback">Callback with the updated message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetGuildApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildApplicationCommandPermissions}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild ID to get the permissions from</param>
+            <param name="callback">Callback with the list of permissions</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.GetApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildApplicationCommandPermissions},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild ID to get the permissions from</param>
+            <param name="commandId">ID of the command to get permissions for</param>
+            <param name="callback">Callback with the permissions for the command</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.EditApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildApplicationCommandPermissions},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Edits command permissions for a specific command for your application in a guild.
+            Warning: This endpoint will overwrite existing permissions for the command in that guild
+            Warning: Deleting or renaming a command will permanently delete all permissions for that command
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild ID to update the permissions for</param>
+            <param name="commandId">ID of the command to get permissions for</param>
+            <param name="permissions">List of permissions for the command</param>
+            <param name="callback">Callback with the list of permissions</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Application.BatchEditApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildApplicationCommandPermissions},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Batch edits permissions for all commands in a guild.
+            Warning: This endpoint will overwrite all existing permissions for all commands in a guild
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild ID to update the permissions for</param>
+            <param name="permissions">List of permissions for the commands</param>
+            <param name="callback">Callback with the list of permissions</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommand">ApplicationCommand</a>
@@ -3245,6 +3289,11 @@
             <summary>
             The parameters for the command
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandOption"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandCreate.DefaultPermissions">
+            <summary>
+            Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandInteractionData">
@@ -3391,6 +3440,67 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandOptionType.Role">
             <summary>
             The sub command option is a Role
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandPermissions">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#guildapplicationcommandpermissions">ApplicationCommandPermissions</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandPermissions.Id">
+            <summary>
+            The ID of the role or user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandPermissions.Type">
+            <summary>
+            The type of permissions
+            <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandPermissionType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandPermissions.Permission">
+            <summary>
+            True to allow, False to disallow
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandPermissionType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandpermissiontype">ApplicationCommandPermissionType</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandPermissionType.Role">
+            <summary>
+            This permissions uses Role ID
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandPermissionType.User">
+            <summary>
+            This permission uses User ID
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildApplicationCommandPermissions">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandpermissions">ApplicationCommandPermissions</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildApplicationCommandPermissions.Id">
+            <summary>
+            The ID of the command
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildApplicationCommandPermissions.ApplicationId">
+            <summary>
+            the ID of the application the command belongs to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildApplicationCommandPermissions.GuildId">
+            <summary>
+            The ID of the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildApplicationCommandPermissions.Permissions">
+            <summary>
+            The permissions for the command in the guild
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.Interaction">
@@ -3566,7 +3676,7 @@
             Starts a new session during the initial handshake.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode.StatusUpdate">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode.PresenceUpdate">
             <summary>
             Update the client's status.
             </summary>
@@ -3653,7 +3763,7 @@
             See <a href="https://discord.com/developers/docs/topics/gateway#sharding">Guild Sharding</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.StatusUpdate">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.PresenceUpdate">
             <summary>
             Presence structure for initial presence information
             </summary>
@@ -3705,28 +3815,28 @@
             Last sequence number received
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateStatusCommand">
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#update-status">Update Status</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateStatusCommand.Status">
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand.Status">
             <summary>
             The user's new status
             <see cref="T:Oxide.Ext.Discord.Entities.Users.UserStatusType"/>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateStatusCommand.Activities">
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand.Activities">
             <summary>
-            Null, or the user's activities
+            The user's activities (Required)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateStatusCommand.Since">
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand.Since">
             <summary>
             Unix time (in milliseconds) of when the client went idle, or null if the client is not idle
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateStatusCommand.Afk">
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand.Afk">
             <summary>
             Whether or not the client is afk
             </summary>
@@ -8609,11 +8719,6 @@
             Flag given to users who are part of a team.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.System">
-            <summary>
-             Flag given to users who represent Discord (System).
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel2">
             <summary>
             Flag given to users who have participated in the 𝐁ug report program and are level 2.
@@ -8832,7 +8937,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Webhooks.Webhook.Avatar">
             <summary>
-            The default avatar of the webhook
+            the default user avatar hash of the webhook
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Webhooks.Webhook.Token">

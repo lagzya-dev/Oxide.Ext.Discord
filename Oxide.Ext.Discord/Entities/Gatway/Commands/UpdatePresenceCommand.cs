@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#update-status">Update Status</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class UpdateStatusCommand
+    public class UpdatePresenceCommand
     {
         /// <summary>
         /// The user's new status
@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         public UserStatusType Status { get; set; } = UserStatusType.Online;
 
         /// <summary>
-        /// Null, or the user's activities
+        /// The user's activities (Required)
         /// </summary>
         [JsonProperty("activities")]
         public List<Activity> Activities { get; set; }

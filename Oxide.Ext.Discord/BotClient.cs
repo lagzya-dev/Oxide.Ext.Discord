@@ -318,15 +318,15 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Used to update the bots status in discord
         /// </summary>
-        /// <param name="statusUpdate"></param>
-        public void UpdateStatus(UpdateStatusCommand statusUpdate)
+        /// <param name="presenceUpdate"></param>
+        public void UpdateStatus(UpdatePresenceCommand presenceUpdate)
         {
             if (!Initialized)
             {
                 return;
             }
 
-            WebSocket.Send(GatewayCommandCode.StatusUpdate, statusUpdate);
+            WebSocket.Send(GatewayCommandCode.PresenceUpdate, presenceUpdate);
         }
         #endregion
 

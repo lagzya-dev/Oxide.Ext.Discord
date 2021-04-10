@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// Presence structure for initial presence information
         /// </summary>
         [JsonProperty("presence")]
-        public UpdateStatusCommand StatusUpdate;
+        public UpdatePresenceCommand PresenceUpdate;
 
         /// <summary>
         /// The Gateway Intents you wish to receive

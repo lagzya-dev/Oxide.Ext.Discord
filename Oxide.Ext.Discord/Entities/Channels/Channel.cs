@@ -31,7 +31,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public ChannelType Type { get; set; }
         
         /// <summary>
-        /// the ID of the guild
+        /// the ID of the guild (
+        /// Warning: May be missing for some channel objects received over gateway guild dispatches
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake? GuildId { get; set; }

@@ -37,9 +37,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
 
-            if (command.OpCode == GatewayCommandCode.StatusUpdate || command.OpCode == GatewayCommandCode.VoiceStateUpdate)
+            if (command.OpCode == GatewayCommandCode.PresenceUpdate || command.OpCode == GatewayCommandCode.VoiceStateUpdate)
             {
-                _pendingCommands.RemoveAll(p => p.OpCode == GatewayCommandCode.StatusUpdate || p.OpCode == GatewayCommandCode.VoiceStateUpdate);
+                _pendingCommands.RemoveAll(p => p.OpCode == GatewayCommandCode.PresenceUpdate || p.OpCode == GatewayCommandCode.VoiceStateUpdate);
             }
             
             _pendingCommands.Add(command);
