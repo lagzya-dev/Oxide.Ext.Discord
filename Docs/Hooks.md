@@ -182,7 +182,7 @@ If you wish to listen for this type of event add the hook into your plugins.
   - If you need full guild member list listen for [OnDiscordGuildMembersLoaded](#OnDiscordGuildMembersLoaded)
 
 ```c#
- void OnDiscordGatewayReady(GatewayReadyEvent ready, bool previouslyConnected)
+ void OnDiscordGatewayReady(GatewayReadyEvent ready)
  {
      Puts("OnDiscordGatewayReady Works!");
  }
@@ -291,10 +291,9 @@ void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel ch
 ### OnDiscordGuildCreated
 
 - Called when a discord server is fully loaded while connecting or the bot has joined a new discord server
-- previouslyConnected will be set if the bot had previously connected to the websocket
 
 ```c#
-void OnDiscordGuildCreated(Guild guild, bool previouslyConnected)
+void OnDiscordGuildCreated(Guild guild)
 {
     Puts("OnDiscordGuildCreated Works!");
 }

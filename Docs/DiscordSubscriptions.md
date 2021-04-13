@@ -27,3 +27,11 @@ To register a subscription you can use the following example below
 ```c#
 _subscriptions.AddChannelSubscription(this, snowflakeChannelId, callbackMethod);
 ```
+
+## Unregistering Subscription
+
+To unregister a subscription you can use the following example below
+
+```c#
+_subscriptions.RemoveChannelSubscription(this, snowflakeChannelId, callbackMethod);
+```
