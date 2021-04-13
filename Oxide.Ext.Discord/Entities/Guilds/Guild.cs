@@ -307,6 +307,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("approximate_presence_count")]
         public int? ApproximatePresenceCount { get; set; }
+        
+        /// <summary>
+        /// True if this guild is designated as NSFW
+        /// <a href="https://support.discord.com/hc/en-us/articles/1500005389362-NSFW-Server-Designation">NSFW Information</a>
+        /// </summary>
+        [JsonProperty("nsfw")]
+        public bool NSFW { get; set; }
         #endregion
 
         #region Extension Fields
