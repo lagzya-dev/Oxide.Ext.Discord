@@ -48,7 +48,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
             if (link == null)
             {
-                Interface.Oxide.LogWarning("[Discord Link] Tried to register a Discord Link Plugin that does not inherit from ILinkPlugin: {0}", plugin.Title);
+                Interface.Oxide.LogWarning("[Discord Link] Tried to register a Discord Link Plugin that does not inherit from IDiscordLinkPlugin: {0}", plugin.Title);
                 return;
             }
 
