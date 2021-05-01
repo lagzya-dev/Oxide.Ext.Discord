@@ -576,7 +576,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 if (channel == null)
                 {
                     _client.AddDirectChannel(update);
-                    _client.CallHook(DiscordHooks.OnDiscordDirectChannelCreated, update);
+                    _client.CallHook(DiscordHooks.OnDiscordDirectChannelUpdated, update, null);
                 }
                 else
                 {
@@ -593,7 +593,7 @@ namespace Oxide.Ext.Discord.WebSockets
                     if (channel == null)
                     {
                         guild.Channels[update.Id] = update;
-                        _client.CallHook(DiscordHooks.OnDiscordGuildChannelCreated, update);
+                        _client.CallHook(DiscordHooks.OnDiscordGuildChannelUpdated, update, null, guild);
                     }
                     else
                     {
@@ -829,7 +829,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 else
                 {
                     guild.Members[update.User.Id] = update;
-                    _client.CallHook(DiscordHooks.OnDiscordGuildMemberAdded, update, guild);
+                    _client.CallHook(DiscordHooks.OnDiscordGuildMemberUpdated, update, null, guild);
                 }
             }
         }
@@ -902,7 +902,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 else
                 {
                     guild.Roles[updatedRole.Id] = updatedRole;
-                    _client.CallHook(DiscordHooks.OnDiscordGuildRoleCreated, updatedRole, guild);
+                    _client.CallHook(DiscordHooks.OnDiscordGuildRoleUpdated, updatedRole, null, guild);
                 }
             }
         }
