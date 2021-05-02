@@ -324,186 +324,188 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _logger.Debug($"Received OpCode: Dispatch, event: {payload.EventName}");
 
+            DispatchCode code = payload.EventCode;
+
             // Listed here: https://discordapp.com/developers/docs/topics/gateway#commands-and-events-gateway-events
-            switch (payload.EventName)
+            switch (code)
             {
-                case "READY":
+                case DispatchCode.Ready:
                     HandleDispatchReady(payload);
                     break;
 
-                case "RESUMED":
+                case DispatchCode.Resumed:
                     HandleDispatchResumed(payload);
                     break;
 
-                case "CHANNEL_CREATE":
+                case DispatchCode.ChannelCreated:
                     HandleDispatchChannelCreate(payload);
                     break;
 
-                case "CHANNEL_UPDATE":
+                case DispatchCode.ChannelUpdated:
                     HandleDispatchChannelUpdate(payload);
                     break;
 
-                case "CHANNEL_DELETE":
+                case DispatchCode.ChannelDeleted:
                     HandleDispatchChannelDelete(payload);
                     break;
 
-                case "CHANNEL_PINS_UPDATE":
+                case DispatchCode.ChannelPinsUpdate:
                     HandleDispatchChannelPinUpdate(payload);
                     break;
 
-                case "GUILD_CREATE":
+                case DispatchCode.GuildCreated:
                     HandleDispatchGuildCreate(payload);
                     break;
 
-                case "GUILD_UPDATE":
+                case DispatchCode.GuildUpdated:
                     HandleDispatchGuildUpdate(payload);
                     break;
 
-                case "GUILD_DELETE":
+                case DispatchCode.GuildDeleted:
                     HandleDispatchGuildDelete(payload);
                     break;
 
-                case "GUILD_BAN_ADD":
+                case DispatchCode.GuildBanAdded:
                     HandleDispatchGuildBanAdd(payload);
                     break;
 
-                case "GUILD_BAN_REMOVE":
+                case DispatchCode.GuildBanRemoved:
                     HandleDispatchGuildBanRemove(payload);
                     break;
 
-                case "GUILD_EMOJIS_UPDATE":
+                case DispatchCode.GuildEmojisUpdated:
                     HandleDispatchGuildEmojisUpdate(payload);
                     break;
 
-                case "GUILD_INTEGRATIONS_UPDATE":
+                case DispatchCode.GuildIntegrationsUpdated:
                     HandleDispatchGuildIntegrationsUpdate(payload);
                     break;
 
-                case "GUILD_MEMBER_ADD":
+                case DispatchCode.GuildMemberAdded:
                     HandleDispatchGuildMemberAdd(payload);
                     break;
 
-                case "GUILD_MEMBER_REMOVE":
+                case DispatchCode.GuildMemberRemoved:
                     HandleDispatchGuildMemberRemove(payload);
                     break;
 
-                case "GUILD_MEMBER_UPDATE":
+                case DispatchCode.GuildMemberUpdated:
                     HandleDispatchGuildMemberUpdate(payload);
                     break;
 
-                case "GUILD_MEMBERS_CHUNK":
+                case DispatchCode.GuildMembersChunk:
                     HandleDispatchGuildMembersChunk(payload);
                     break;
 
-                case "GUILD_ROLE_CREATE":
+                case DispatchCode.GuildRoleCreated:
                     HandleDispatchGuildRoleCreate(payload);
                     break;
 
-                case "GUILD_ROLE_UPDATE":
+                case DispatchCode.GuildRoleUpdated:
                     HandleDispatchGuildRoleUpdate(payload);
                     break;
 
-                case "GUILD_ROLE_DELETE":
+                case DispatchCode.GuildRoleDeleted:
                     HandleDispatchGuildRoleDelete(payload);
                     break;
                 
-                case "INTEGRATION_CREATE":
+                case DispatchCode.IntegrationCreated:
                     HandleDispatchIntegrationCreate(payload);
                     break;
                 
-                case "INTEGRATION_UPDATE":
+                case DispatchCode.IntegrationUpdated:
                     HandleDispatchIntegrationUpdate(payload);
                     break;
                 
-                case "INTEGRATION_DELETE":
+                case DispatchCode.IntegrationDeleted:
                     HandleDispatchIntegrationDelete(payload);
                     break;    
 
-                case "MESSAGE_CREATE":
+                case DispatchCode.MessageCreated:
                     HandleDispatchMessageCreate(payload);
                     break;
 
-                case "MESSAGE_UPDATE":
+                case DispatchCode.MessageUpdated:
                     HandleDispatchMessageUpdate(payload);
                     break;
 
-                case "MESSAGE_DELETE":
+                case DispatchCode.MessageDeleted:
                     HandleDispatchMessageDelete(payload);
                     break;
 
-                case "MESSAGE_DELETE_BULK":
+                case DispatchCode.MessageBulkDeleted:
                     HandleDispatchMessageDeleteBulk(payload);
                     break;
 
-                case "MESSAGE_REACTION_ADD":
+                case DispatchCode.MessageReactionAdded:
                     HandleDispatchMessageReactionAdd(payload);
                     break;
 
-                case "MESSAGE_REACTION_REMOVE":
+                case DispatchCode.MessageReactionRemoved:
                     HandleDispatchMessageReactionRemove(payload);
                     break;
 
-                case "MESSAGE_REACTION_REMOVE_ALL":
+                case DispatchCode.MessageReactionAllRemoved:
                     HandleDispatchMessageReactionRemoveAll(payload);
                     break;
                 
-                case "MESSAGE_REACTION_REMOVE_EMOJI":
+                case DispatchCode.MessageReactionEmojiRemoved:
                     HandleDispatchMessageReactionRemoveEmoji(payload);
                     break;
 
-                case "PRESENCE_UPDATE":
+                case DispatchCode.PresenceUpdated:
                     HandleDispatchPresenceUpdate(payload);
                     break;
 
                 // Bots should ignore this
-                case "PRESENCES_REPLACE":
+                case DispatchCode.PresenceReplace:
                     break;
 
-                case "TYPING_START":
+                case DispatchCode.TypingStarted:
                     HandleDispatchTypingStart(payload);
                     break;
 
-                case "USER_UPDATE":
+                case DispatchCode.UserUpdated:
                     HandleDispatchUserUpdate(payload);
                     break;
 
-                case "VOICE_STATE_UPDATE":
+                case DispatchCode.VoiceStateUpdated:
                     HandleDispatchVoiceStateUpdate(payload);
                     break;
 
-                case "VOICE_SERVER_UPDATE":
+                case DispatchCode.VoiceServerUpdated:
                     HandleDispatchVoiceServerUpdate(payload);
                     break;
 
-                case "WEBHOOKS_UPDATE":
+                case DispatchCode.WebhooksUpdated:
                     HandleDispatchWebhooksUpdate(payload);
                     break;
 
-                case "INVITE_CREATE":
+                case DispatchCode.InviteCreated:
                     HandleDispatchInviteCreate(payload);
                     break;
 
-                case "INVITE_DELETE":
+                case DispatchCode.InviteDeleted:
                     HandleDispatchInviteDelete(payload);
                     break;
                 
-                case "INTERACTION_CREATE":
+                case DispatchCode.InteractionCreated:
                     HandleDispatchInteractionCreate(payload);
                     break;
 
-                case "APPLICATION_COMMAND_CREATE":
+                case DispatchCode.ApplicationCommandCreated:
                     HandleDispatchApplicationCommandCreate(payload);
                     break;                
                 
-                case "APPLICATION_COMMAND_UPDATE":
+                case DispatchCode.ApplicationCommandUpdated:
                     HandleDispatchApplicationCommandUpdate(payload);
                     break;                
                 
-                case "APPLICATION_COMMAND_DELETE":
+                case DispatchCode.ApplicationCommandDeleted:
                     HandleDispatchApplicationCommandDelete(payload);
                     break;                
                 
-                case "GUILD_JOIN_REQUEST_DELETE":
+                case DispatchCode.GuildJoinRequestDeleted:
                     HandleGuildJoinRequestDelete(payload);
                     break;
                 
