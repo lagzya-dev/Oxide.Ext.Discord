@@ -683,7 +683,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 existing.HasLoadedAllMembers = false;
             }
 
-            if (!existing.HasLoadedAllMembers)
+            if (!existing.HasLoadedAllMembers && (_client.Settings.Intents & GatewayIntents.GuildMembers) != 0)
             {
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildCreate)} Guild is now requesting all guild members.");
                 //Request all guild members so we can be sure we have them all.
