@@ -110,6 +110,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         GuildDiscoveryGracePeriodFinalWarning = 17,
         
         /// <summary>
+        /// The message created a thread
+        /// </summary>
+        [Description("THREAD_CREATED")]
+        ThreadCreated = 18,
+        
+        /// <summary>
         /// The message for when the message is a reply
         /// </summary>
         [Description("REPLY")]
@@ -119,6 +125,18 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// The message for when the message is an application command
         /// </summary>
         [Description("APPLICATION_COMMAND")]
-        ApplicationCommand = 20
+        ApplicationCommand = 20,
+        
+        /// <summary>
+        /// Starter message for a thread
+        /// </summary>
+        [Description("THREAD_STARTER_MESSAGE")]
+        ThreadStarterMessage = 20,
+        
+        /// <summary>
+        /// Reminder for a guild invite
+        /// </summary>
+        [Description("GUILD_INVITE_REMINDER")]
+        GuildInviteReminder = 20
     }
 }

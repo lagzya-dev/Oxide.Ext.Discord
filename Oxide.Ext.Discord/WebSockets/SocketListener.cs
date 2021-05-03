@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
@@ -507,6 +508,30 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case DispatchCode.GuildJoinRequestDeleted:
                     HandleGuildJoinRequestDelete(payload);
+                    break;
+                
+                case DispatchCode.ThreadCreated:
+                    HandleDispatchThreadCreated(payload);
+                    break;
+                
+                case DispatchCode.ThreadUpdated:
+                    HandleDispatchThreadUpdated(payload);
+                    break;
+                
+                case DispatchCode.ThreadDeleted:
+                    HandleDispatchThreadDeleted(payload);
+                    break;
+                
+                case DispatchCode.ThreadListSync:
+                    HandleDispatchThreadListSync(payload);
+                    break;
+                
+                case DispatchCode.ThreadMemberUpdated:
+                    HandleDispatchThreadMemberUpdated(payload);
+                    break;
+                
+                case DispatchCode.ThreadMembersUpdated:
+                    HandleDispatchThreadMembersUpdated(payload);
                     break;
                 
                 default:
@@ -1304,6 +1329,156 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleGuildJoinRequestDelete(EventPayload payload)
         {
             
+        }
+        
+        private void HandleDispatchThreadCreated(EventPayload payload)
+        {
+            Channel thread = payload.EventData.ToObject<Channel>();
+            if (thread.GuildId.HasValue)
+            {
+                Guild guild = _client.GetGuild(thread.GuildId);
+                
+                if (guild != null && guild.IsAvailable)
+                {
+                    _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchThreadCreated)} Guild: {guild.Name}({guild.Id}) Thread: {thread.Name}({thread.Id})");
+                    guild.Threads[thread.Id] = thread;
+                    _client.CallHook(DiscordHooks.OnDiscordGuildThreadCreated, thread, guild);
+                }
+            }
+        }
+        
+        private void HandleDispatchThreadUpdated(EventPayload payload)
+        {
+            Channel thread = payload.EventData.ToObject<Channel>();
+            if (thread.GuildId.HasValue)
+            {
+                Guild guild = _client.GetGuild(thread.GuildId);
+                if (guild != null && guild.IsAvailable)
+                {
+                    _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchThreadUpdated)} Guild: {guild.Name}({guild.Id}) Thread: {thread.Name}({thread.Id})");
+                    Channel existing = guild.Threads[thread.Id];
+                    if (existing != null)
+                    {
+                        Channel previous = existing.Update(thread);
+                        _client.CallHook(DiscordHooks.OnDiscordGuildThreadUpdated, thread, previous, guild);
+                    }
+                    else
+                    {
+                        _logger.Warning($"{nameof(SocketListener)}.{nameof(HandleDispatchThreadUpdated)} Tried to update a thread that doesn't exist. Guild: {guild.Name}({guild.Id}) Thread: {thread.Name}({thread.Id})");
+                    }
+                }
+            }
+        }
+
+        private void HandleDispatchThreadDeleted(EventPayload payload)
+        {
+            Channel thread = payload.EventData.ToObject<Channel>();
+            if (thread.GuildId.HasValue)
+            {
+                Guild guild = _client.GetGuild(thread.GuildId);
+                if (guild != null && guild.IsAvailable)
+                {
+                    _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchThreadDeleted)} Guild: {guild.Name}({guild.Id}) Thread: {thread.Name}({thread.Id})");
+                    thread = guild.Threads[thread.Id] ?? thread;
+                    _client.CallHook(DiscordHooks.OnDiscordGuildThreadDeleted, thread, guild);
+                }
+            }
+        }
+
+        private void HandleDispatchThreadListSync(EventPayload payload)
+        {
+            ThreadListSyncEvent sync = payload.EventData.ToObject<ThreadListSyncEvent>();
+            Guild guild = _client.GetGuild(sync.GuildId);
+
+            //We clear all threads from the guild if ChannelIds is null or the ChannelId exists in ChannelIds
+            List<Snowflake> threadsToClear = new List<Snowflake>();
+            foreach (Channel thread in guild.Threads.Values)
+            {
+                if (thread.ParentId.HasValue && (sync.ChannelIds == null || sync.ChannelIds.Contains(thread.ParentId.Value)))
+                {
+                    threadsToClear.Add(thread.Id);
+                }
+            }
+
+            //Remove all threads who were in synced channels
+            foreach (Snowflake threadId in threadsToClear)
+            {
+                guild.Threads.Remove(threadId);
+            }
+            
+            //Add threads to the guild
+            foreach (Channel thread in sync.Threads)
+            {
+                Channel existing = guild.Threads[thread.Id];
+                if (existing != null)
+                {
+                    existing.Update(thread);
+                    existing.ThreadMembers.Clear();
+                }
+                else
+                {
+                    guild.Threads[thread.Id] = thread;
+                }
+            }
+
+            foreach (ThreadMember member in sync.Members)
+            {
+                Channel thread = guild.Threads[member.Id];
+                if (thread != null)
+                {
+                    thread.ThreadMembers[member.UserId] = member;
+                }
+            }
+            
+            _client.CallHook(DiscordHooks.OnDiscordGuildThreadListSynced, sync, guild);
+        }
+        
+        private void HandleDispatchThreadMemberUpdated(EventPayload payload)
+        {
+            ThreadMember member = payload.EventData.ToObject<ThreadMember>();
+
+            foreach (Guild guild in _client.Servers.Values)
+            {
+                Channel thread = guild.Threads[member.Id];
+                if (thread != null)
+                {
+                    ThreadMember existing = thread?.ThreadMembers[member.UserId];
+                    if (existing != null)
+                    {
+                        existing.Update(member);
+                    }
+                    else
+                    {
+                        thread.ThreadMembers[member.UserId] = member;
+                    }
+                    
+                    _client.CallHook(DiscordHooks.OnDiscordGuildThreadMemberUpdated, member, thread, guild);
+                }
+            }
+        }
+        
+        private void HandleDispatchThreadMembersUpdated(EventPayload payload)
+        {
+            ThreadMembersUpdatedEvent members = payload.EventData.ToObject<ThreadMembersUpdatedEvent>();
+            Guild guild = _client.GetGuild(members.GuildId);
+            if (guild != null && guild.IsAvailable)
+            {
+                Channel thread = guild.Threads[members.Id];
+                if (thread != null)
+                {
+                    foreach (ThreadMember member in members.AddedMembers)
+                    {
+                        thread.ThreadMembers[member.UserId] = member;
+                    }
+
+                    foreach (Snowflake memberId in members.RemovedMemberIds)
+                    {
+                        thread.ThreadMembers.Remove(memberId);
+                    }
+                    
+                    _client.CallHook(DiscordHooks.OnDiscordGuildThreadMembersUpdated, members, guild);
+                }
+            }
         }
 
         private void HandleDispatchUnhandledEvent(EventPayload payload)

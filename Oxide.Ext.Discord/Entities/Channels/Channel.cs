@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
@@ -130,6 +131,36 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("last_pin_timestamp")]
         public DateTime? LastPinTimestamp { get; set; }
+        
+        /// <summary>
+        /// An approximate count of messages in a thread, stops counting at 50
+        /// </summary>
+        [JsonProperty("message_count")]
+        public int? MessageCount { get; set; }
+        
+        /// <summary>
+        /// An approximate count of users in a thread, stops counting at 50
+        /// </summary>
+        [JsonProperty("member_count")]
+        public int? MemberCount { get; set; }
+        
+        /// <summary>
+        /// Thread-specific fields not needed by other channels
+        /// </summary>
+        [JsonProperty("thread_metadata")]
+        public ThreadMetadata ThreadMetadata { get; set; }
+        
+        /// <summary>
+        /// Thread member object for the current user, if they have joined the thread, only included on certain API endpoints
+        /// </summary>
+        [JsonProperty("member")]
+        public ThreadMember Member { get; set; }
+        
+        /// <summary>
+        /// Thread Members for the current thread.
+        /// Note: This is not sent by discord but maintained by socket events
+        /// </summary>
+        public Hash<Snowflake, ThreadMember> ThreadMembers { get; set; }
 
         /// <summary>
         /// Create a new channel object for the guild.
@@ -149,6 +180,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <summary>
         /// Get a channel by ID
         /// See <a href="https://discord.com/developers/docs/resources/channel#get-channel">Get Channel</a>
+        /// If the channel is a thread, a thread member object is included in the returned result.
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channelId">ID of the channel to get</param>
@@ -158,9 +190,22 @@ namespace Oxide.Ext.Discord.Entities.Channels
         {
             client.Bot.Rest.DoRequest($"/channels/{channelId}", RequestMethod.GET, null, callback, error);
         }
+        
+        /// <summary>
+        /// Update a group dm channel's settings.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#modify-channel">Modify Channel</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="update">Update to be made to the channel. All fields are optional</param>
+        /// <param name="callback">Callback with the updated channel</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ModifyGroupDmChannel(DiscordClient client, GroupDmChannelUpdate update, Action<Channel> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}", RequestMethod.PATCH, update, callback, error);
+        }
 
         /// <summary>
-        /// Update a channel's settings.
+        /// Update a guild channel's settings.
         /// Requires the MANAGE_CHANNELS permission for the guild.
         /// See <a href="https://discord.com/developers/docs/resources/channel#modify-channel">Modify Channel</a>
         /// </summary>
@@ -168,14 +213,28 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="update">Update to be made to the channel. All fields are optional</param>
         /// <param name="callback">Callback with the updated channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyChannel(DiscordClient client, ChannelUpdate update, Action<Channel> callback = null, Action<RestError> error = null)
+        public void ModifyGuildChannel(DiscordClient client, GuildChannelUpdate update, Action<Channel> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}", RequestMethod.PATCH, update, callback, error);
+        }
+        
+        /// <summary>
+        /// Update a thread channel's settings.
+        /// Requires the MANAGE_THREADS permission for the guild.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#modify-channel">Modify Channel</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="update">Update to be made to the channel. All fields are optional</param>
+        /// <param name="callback">Callback with the updated channel</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ModifyThreadChannel(DiscordClient client, ThreadChannelUpdate update, Action<Channel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}", RequestMethod.PATCH, update, callback, error);
         }
 
         /// <summary>
         /// Delete a channel, or close a private message.
-        /// Requires the MANAGE_CHANNELS permission for the guild.
+        /// Requires the MANAGE_CHANNELS or MANAGE_THREADS permission for the guild depending on the channel type.
         /// See <a href="https://discord.com/developers/docs/resources/channel#deleteclose-channel">Delete/Close Channel</a>
         /// </summary>
         /// <param name="client">Client to use</param>
@@ -478,11 +537,149 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to remove</param>
-        /// <param name="callback">callback once the action is completed</param>
+        /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GroupDmRemoveRecipient(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/recipients/{userId}", RequestMethod.DELETE, null, callback, error);
+        }
+
+        /// <summary>
+        /// Creates a new public thread from a message
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="messageId">ID of the message to start the thread from</param>
+        /// <param name="create">Data to use when creating the thread</param>
+        /// <param name="callback">Callback with the thread once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void StartPublicThread(DiscordClient client, Snowflake messageId, ThreadCreate create, Action<Channel> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages/{messageId}/threads", RequestMethod.POST, create, callback, error);
+        }
+        
+        /// <summary>
+        /// Creates a new private thread for a channel
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="create">Data to use when creating the thread</param>
+        /// <param name="callback">Callback with the thread once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void StartPrivateThread(DiscordClient client, ThreadCreate create, Action<Channel> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/threads", RequestMethod.POST, create, callback, error);
+        }
+        
+        /// <summary>
+        /// Adds the bot to the thread
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the thread once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void JoinThread(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members/@me", RequestMethod.PUT, null, callback, error);
+        }
+
+        /// <summary>
+        /// Adds another user to a thread.
+        /// Requires the ability to send messages in the thread. Also requires the thread is not archived.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="userId">ID of the user to thread</param>
+        /// <param name="callback">Callback with the thread once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void AddUserToThread(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members/{userId}", RequestMethod.PUT, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Removes the bot from the thread
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the thread once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void LeaveThread(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members/@me", RequestMethod.DELETE, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Removes another user from a thread.
+        /// Requires the MANAGE_THREADS permission or that you are the creator of the thread. Also requires the thread is not archived.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="userId">ID of the user to thread</param>
+        /// <param name="callback">Callback with the thread once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void RemoveUserFromThread(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members/{userId}", RequestMethod.DELETE, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Returns array of thread members objects that are members of the thread.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the list of thread members</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ListThreadMembers(DiscordClient client, Action<List<ThreadMember>> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Returns all active threads in the channel, including public and private threads. Threads are ordered by their id, in descending order.
+        /// Requires the READ_MESSAGE_HISTORY permission.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the thread list information</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ListActiveThreads(DiscordClient client, Action<ThreadList> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/threads/active", RequestMethod.GET, null, callback, error);
+        }
+
+        /// <summary>
+        /// Returns archived threads in the channel that are public.
+        /// When called on a GUILD_TEXT channel, returns threads of type GUILD_PUBLIC_THREAD. When called on a GUILD_NEWS channel returns threads of type GUILD_NEWS_THREAD. Threads are ordered by archive_timestamp, in descending order.
+        /// Requires the READ_MESSAGE_HISTORY permission.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="lookup">The options to use when looking up the archived threads</param>
+        /// <param name="callback">Callback with the thread list information</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ListPublicArchivedThreads(DiscordClient client, ThreadArchivedLookup lookup, Action<ThreadList> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/threads/archived/public{lookup.ToQueryString()}", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD.
+        /// Threads are ordered by archive_timestamp, in descending order.
+        /// Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="lookup">The options to use when looking up the archived threads</param>
+        /// <param name="callback">Callback with the thread list information</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ListPrivateArchivedThreads(DiscordClient client, ThreadArchivedLookup lookup, Action<ThreadList> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/threads/archived/public{lookup.ToQueryString()}", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD, and the user has joined.
+        /// Threads are ordered by their id, in descending order.
+        /// Requires the READ_MESSAGE_HISTORY permission.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="lookup">The options to use when looking up the archived threads</param>
+        /// <param name="callback">Callback with the thread list information</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ListJoinedPrivateArchivedThreads(DiscordClient client, ThreadArchivedLookup lookup, Action<ThreadList> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/users/@me/threads/archived/private{lookup.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
         internal Channel Update(Channel channel)

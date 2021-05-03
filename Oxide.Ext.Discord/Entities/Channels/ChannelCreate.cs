@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Channels
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params">Guild Channel Create Structure</a>
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel">Guild Channel Create Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ChannelCreate

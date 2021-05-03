@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// <summary>
         /// Which websocket version to use
         /// </summary>
-        public static int Version { get; } = 8;
+        public static int Version { get; } = 9;
         
         /// <summary>
         /// How the data sent / received will be encoded

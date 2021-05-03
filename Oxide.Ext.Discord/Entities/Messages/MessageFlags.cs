@@ -40,6 +40,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         Urgent = 1 << 4,
 
         /// <summary>
+        /// This message has an associated thread, with the same id as the message
+        /// </summary>
+        [Description("HAS_THREAD")]
+        HasThread = 1 << 5,
+        
+        /// <summary>
         /// This message is only visible to the user who invoked the Interaction
         /// </summary>
         [Description("EPHEMERAL")]

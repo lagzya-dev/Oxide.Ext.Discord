@@ -320,7 +320,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGatewayReady">
             <code>
-            void OnDiscordGatewayReady(GatewayReadyEvent ready, bool previouslyConnected)
+            void OnDiscordGatewayReady(GatewayReadyEvent ready)
             {
                 Puts("OnDiscordGatewayReady Works!");
             }
@@ -361,7 +361,6 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildChannelUpdated">
             <code>
-            Note: previous will be null if previous channel not found
             void OnDiscordGuildChannelUpdated(Channel channel, Channel previous, Guild guild)
             {
                 Puts("OnDiscordGuildChannelUpdated Works!");
@@ -387,7 +386,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectChannelPinsUpdated">
             <code>
-            Note: Channel will be null we haven't seen it yet
+            Note: Channel will be null if we haven't seen it yet
             void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel)
             {
                 Puts("OnDiscordDirectChannelPinsUpdated Works!");
@@ -404,7 +403,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildCreated">
             <code>
-            void OnDiscordGuildCreated(Guild guild, bool previouslyConnected)
+            void OnDiscordGuildCreated(Guild guild)
             {
                 Puts("OnDiscordGuildCreated Works!");
             }
@@ -445,7 +444,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberUnbanned">
             <code>
-            void OnDiscordGuildBanRemoved(GuildMemberBannedEvent ban, Guild guild)
+            void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, Guild guild)
             {
                 Puts("OnDiscordGuildBanRemoved Works!");
             }
@@ -817,6 +816,54 @@
             void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, Guild guild)
             {
                 Puts("OnDiscordApplicationCommandDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadCreated">
+            <code>
+            void OnDiscordGuildThreadCreated(Channel thread, Guild guild)
+            {
+                Puts("OnDiscordGuildThreadCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadUpdated">
+            <code>
+            void OnDiscordGuildThreadUpdated(Channel thread, Channel previous, Guild guild)
+            {
+                Puts("OnDiscordGuildThreadUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadDeleted">
+            <code>
+            void OnDiscordGuildThreadDeleted(Channel thread, Guild guild)
+            {
+                Puts("OnDiscordGuildThreadDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadListSynced">
+            <code>
+            void OnDiscordGuildThreadListSynced(ThreadListSyncEvent sync, Guild guild)
+            {
+                Puts("OnDiscordGuildThreadListSynced Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadMemberUpdated">
+            <code>
+            void OnDiscordGuildThreadMemberUpdated(ThreadMember member, Channel thread, Guild guild)
+            {
+                Puts("OnDiscordGuildThreadMemberUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadMembersUpdated">
+            <code>
+            void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, Guild guild)
+            {
+                Puts("OnDiscordGuildThreadMembersUpdated Works!");
             }
             </code>
         </member>
@@ -2117,6 +2164,32 @@
             This may be null in events such as GUILD_CREATE when a message is not pinned.
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.MessageCount">
+            <summary>
+            An approximate count of messages in a thread, stops counting at 50
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.MemberCount">
+            <summary>
+            An approximate count of users in a thread, stops counting at 50
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.ThreadMetadata">
+            <summary>
+            Thread-specific fields not needed by other channels
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.Member">
+            <summary>
+            Thread member object for the current user, if they have joined the thread, only included on certain API endpoints
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Channel.ThreadMembers">
+            <summary>
+            Thread Members for the current thread.
+            Note: This is not sent by discord but maintained by socket events
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.ChannelCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a new channel object for the guild.
@@ -2133,16 +2206,38 @@
             <summary>
             Get a channel by ID
             See <a href="https://discord.com/developers/docs/resources/channel#get-channel">Get Channel</a>
+            If the channel is a thread, a thread member object is included in the returned result.
             </summary>
             <param name="client">Client to use</param>
             <param name="channelId">ID of the channel to get</param>
             <param name="callback">Callback with the channel object</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ModifyChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ModifyGroupDmChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GroupDmChannelUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
-            Update a channel's settings.
+            Update a group dm channel's settings.
+            See <a href="https://discord.com/developers/docs/resources/channel#modify-channel">Modify Channel</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="update">Update to be made to the channel. All fields are optional</param>
+            <param name="callback">Callback with the updated channel</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ModifyGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Update a guild channel's settings.
             Requires the MANAGE_CHANNELS permission for the guild.
+            See <a href="https://discord.com/developers/docs/resources/channel#modify-channel">Modify Channel</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="update">Update to be made to the channel. All fields are optional</param>
+            <param name="callback">Callback with the updated channel</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ModifyThreadChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Update a thread channel's settings.
+            Requires the MANAGE_THREADS permission for the guild.
             See <a href="https://discord.com/developers/docs/resources/channel#modify-channel">Modify Channel</a>
             </summary>
             <param name="client">Client to use</param>
@@ -2153,7 +2248,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.DeleteChannel(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Delete a channel, or close a private message.
-            Requires the MANAGE_CHANNELS permission for the guild.
+            Requires the MANAGE_CHANNELS or MANAGE_THREADS permission for the guild depending on the channel type.
             See <a href="https://discord.com/developers/docs/resources/channel#deleteclose-channel">Delete/Close Channel</a>
             </summary>
             <param name="client">Client to use</param>
@@ -2364,12 +2459,117 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="userId">User ID to remove</param>
-            <param name="callback">callback once the action is completed</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.StartPublicThread(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Creates a new public thread from a message
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="messageId">ID of the message to start the thread from</param>
+            <param name="create">Data to use when creating the thread</param>
+            <param name="callback">Callback with the thread once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.StartPrivateThread(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Creates a new private thread for a channel
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="create">Data to use when creating the thread</param>
+            <param name="callback">Callback with the thread once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.JoinThread(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Adds the bot to the thread
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with the thread once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.AddUserToThread(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Adds another user to a thread.
+            Requires the ability to send messages in the thread. Also requires the thread is not archived.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="userId">ID of the user to thread</param>
+            <param name="callback">Callback with the thread once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.LeaveThread(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Removes the bot from the thread
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with the thread once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.RemoveUserFromThread(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Removes another user from a thread.
+            Requires the MANAGE_THREADS permission or that you are the creator of the thread. Also requires the thread is not archived.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="userId">ID of the user to thread</param>
+            <param name="callback">Callback with the thread once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ListThreadMembers(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns array of thread members objects that are members of the thread.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with the list of thread members</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ListActiveThreads(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns all active threads in the channel, including public and private threads. Threads are ordered by their id, in descending order.
+            Requires the READ_MESSAGE_HISTORY permission.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with the thread list information</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ListPublicArchivedThreads(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns archived threads in the channel that are public.
+            When called on a GUILD_TEXT channel, returns threads of type GUILD_PUBLIC_THREAD. When called on a GUILD_NEWS channel returns threads of type GUILD_NEWS_THREAD. Threads are ordered by archive_timestamp, in descending order.
+            Requires the READ_MESSAGE_HISTORY permission.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="lookup">The options to use when looking up the archived threads</param>
+            <param name="callback">Callback with the thread list information</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ListPrivateArchivedThreads(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD.
+            Threads are ordered by archive_timestamp, in descending order.
+            Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="lookup">The options to use when looking up the archived threads</param>
+            <param name="callback">Callback with the thread list information</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.ListJoinedPrivateArchivedThreads(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD, and the user has joined.
+            Threads are ordered by their id, in descending order.
+            Requires the READ_MESSAGE_HISTORY permission.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="lookup">The options to use when looking up the archived threads</param>
+            <param name="callback">Callback with the thread list information</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
             <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params">Guild Channel Create Structure</a>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel">Guild Channel Create Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Name">
@@ -2524,9 +2724,24 @@
             A channel in which game developers can sell their game on Discord
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelUpdate">
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildNewsThread">
             <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params">Channel Update Structure</a>
+            A temporary sub-channel within a GUILD_NEWS channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildPublicThread">
+            <summary>
+            A temporary sub-channel within a GUILD_TEXT channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildPrivateThread">
+            <summary>
+            A temporary sub-channel within a GUILD_TEXT channel that is only viewable by those invited and those with the MANAGE_THREADS permission
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildStageVoice">
+            <summary>
+            A voice channel for <a href="https://support.discord.com/hc/en-us/articles/1500005513722">hosting events with an audience</a>
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.FollowedChannel">
@@ -2542,6 +2757,26 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.FollowedChannel.WebhookId">
             <summary>
             Created target webhook ID
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.GroupDmChannelUpdate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm">Group DM Channel Update Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GroupDmChannelUpdate.Name">
+            <summary>
+            The name of the channel (2-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GroupDmChannelUpdate.Icon">
+            <summary>
+            Base64 encoded icon
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params">Guild Channel Update Structure</a>
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Overwrite">
@@ -2770,6 +3005,144 @@
         <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionType.Member">
             <summary>
             This permission belongs to a member
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-thread">Thread Channel Update Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Name">
+            <summary>
+            The name of the channel (2-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Archived">
+            <summary>
+            Whether the channel is archived
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.AutoArchiveDuration">
+            <summary>
+            Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Locked">
+            <summary>
+            When a thread is locked, only users with MANAGE_THREADS can unarchive it
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.RateLimitPerUser">
+            <summary>
+            Amount of seconds a user has to wait before sending another message (0-21600);
+            Bots and users with the permission manage_messages, manage_thread, or manage_channel, are unaffected
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient-json-params">Thread Create Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup.Before">
+            <summary>
+            Returns threads before this timestamp
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup.Limit">
+            <summary>
+            Optional maximum number of threads to return
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient-json-params">Thread Create Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate.Name">
+            <summary>
+            2-100 character thread name
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate.AutoArchiveDuration">
+            <summary>
+            Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#list-active-threads">Thread List Structure</a> within Discord.
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#list-public-archived-threads-response-body">Thread List Public Archived Structure</a> within Discord.
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#list-private-archived-threads-response-body">Thread List Private Archived Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList.Threads">
+            <summary>
+            The active threads
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList.Members">
+            <summary>
+            A thread member object for each returned thread the current user has joined
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList.HasMore">
+            <summary>
+            Whether there are potentially additional threads that could be returned on a subsequent call
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember">
+            <summary>
+            Represents a guild or DM <a href="	timestamp when the thread's archive status was last changed, used for calculating recent activity">Thread Member Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember.Id">
+            <summary>
+            The id of the thread
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember.UserId">
+            <summary>
+            The id of the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember.JoinTimestamp">
+            <summary>
+            The time the current user last joined the thread
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember.Flags">
+            <summary>
+            Any user-thread settings, currently only used for notifications
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata">
+            <summary>
+            Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#thread-metadata-object-thread-metadata-structure">Thread Metadata Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata.Archived">
+            <summary>
+            Whether the thread is archived
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata.ArchiverId">
+            <summary>
+            Id of the user that last archived or unarchived the thread
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata.AutoArchiveDuration">
+            <summary>
+            Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata.ArchiveTimestamp">
+            <summary>
+            Timestamp when the thread's archive status was last changed, used for calculating recent activity
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata.Locked">
+            <summary>
+            When a thread is locked, only users with MANAGE_THREADS can unarchive it
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Emojis.Emoji">
@@ -3440,6 +3813,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandOptionType.Role">
             <summary>
             The sub command option is a Role
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandOptionType.Mentionable">
+            <summary>
+            The sub command option is a Mentionable
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandPermissions">
@@ -4473,6 +4851,61 @@
             User's platform-dependent status
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway#thread-list-sync-thread-list-sync-event-fields">Thread List Sync</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.GuildId">
+            <summary>
+            The ID of the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.ChannelIds">
+            <summary>
+            The parent channel ids whose threads are being synced. If omitted, then threads were synced for the entire guild. This array may contain channel_ids that have no active threads as well, so you know to clear that data.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.Threads">
+            <summary>
+            All active threads in the given channels that the current user can access
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.Members">
+            <summary>
+            A ll thread member objects from the synced threads for the current user, indicating which threads the current user has been added to
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway#thread-members-update-thread-members-update-event-fields">Thread Members Update Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.Id">
+            <summary>
+            The id of the thread
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.GuildId">
+            <summary>
+            The ID of the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.MemberCount">
+            <summary>
+            The approximate number of members in the thread, capped at 50
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.AddedMembers">
+            <summary>
+            The users who were added to the thread
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.RemovedMemberIds">
+            <summary>
+            The id of the users who were removed from the thread
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.TypingStartedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#typing-start">Typing Start</a>
@@ -4613,6 +5046,12 @@
             - CHANNEL_UPDATE
             - CHANNEL_DELETE
             - CHANNEL_PINS_UPDATE
+            - THREAD_CREATE
+            - THREAD_UPDATE
+            - THREAD_DELETE
+            - THREAD_LIST_SYNC
+            - THREAD_MEMBER_UPDATE
+            - THREAD_MEMBERS_UPDATE
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMembers">
@@ -4620,6 +5059,7 @@
             - GUILD_MEMBER_ADD
             - GUILD_MEMBER_UPDATE
             - GUILD_MEMBER_REMOVE
+            - THREAD_MEMBERS_UPDATE
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildBans">
@@ -4926,6 +5366,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Channels">
             <summary>
             Channels in the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Threads">
+            <summary>
+            All active threads in the guild that current user has permission to view
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.Presences">
@@ -6059,6 +6504,11 @@
             Whether 'pruned' is returned, discouraged for large guilds
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildPruneBegin.Reason">
+            <summary>
+            Reason for the prune
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildPruneBegin.ToQueryString">
             <summary>
             Returns Guild Prune Begin query string for the API Endpoint
@@ -6782,6 +7232,16 @@
             The message associated with the message_reference
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Interaction">
+            <summary>
+            Sent if the message is a response to an Interaction
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Thread">
+            <summary>
+            The thread that was started from this message, includes thread member object
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Post a message to a guild text or DM channel.
@@ -7055,6 +7515,15 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.StartPublicThread(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Creates a new public thread this message
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="create">Data to use when creating the thread</param>
+            <param name="callback">Callback with the thread once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.Embed">
@@ -7610,6 +8079,11 @@
             This message came from the urgent message system
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.HasThread">
+            <summary>
+            This message has an associated thread, with the same id as the message
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.Ephemeral">
             <summary>
             This message is only visible to the user who invoked the Interaction
@@ -7618,6 +8092,31 @@
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.Loading">
             <summary>
             This message is an Interaction Response and the bot is "thinking"
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageInteraction">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/slash-commands#messageinteraction">Message Interaction Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageInteraction.Id">
+            <summary>
+            ID of the interaction
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageInteraction.Type">
+            <summary>
+            The type of interaction
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageInteraction.Name">
+            <summary>
+            The name of the <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommand"/> 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageInteraction.User">
+            <summary>
+            The user who invoked the interaction
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageReference">
@@ -7802,6 +8301,11 @@
             The message for grace period final warning
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.ThreadCreated">
+            <summary>
+            The message created a thread
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.Reply">
             <summary>
             The message for when the message is a reply
@@ -7810,6 +8314,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.ApplicationCommand">
             <summary>
             The message for when the message is an application command
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.ThreadStarterMessage">
+            <summary>
+            Starter message for a thread
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildInviteReminder">
+            <summary>
+            Reminder for a guild invite
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Reaction">
@@ -10804,6 +11318,36 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildJoinRequestDeleted">
             <summary>
             Represents the <a href="">GUILD_JOIN_REQUEST_DELETE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadCreated">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-create">THREAD_CREATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadUpdated">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-update">THREAD_UPDATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadDeleted">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-delete">THREAD_DELETE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadListSync">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-list-sync">THREAD_LIST_SYNC</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadMemberUpdated">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-member-update">THREAD_MEMBER_UPDATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadMembersUpdated">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-members-update">THREAD_MEMBERS_UPDATE</a> gateway event
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler">

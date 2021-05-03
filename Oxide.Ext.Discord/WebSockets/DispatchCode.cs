@@ -236,5 +236,35 @@ namespace Oxide.Ext.Discord.WebSockets
         /// Represents the <a href="">GUILD_JOIN_REQUEST_DELETE</a> gateway event
         /// </summary>
         [Description("GUILD_JOIN_REQUEST_DELETE")] GuildJoinRequestDeleted,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-create">THREAD_CREATE</a> gateway event
+        /// </summary>
+        [Description("THREAD_CREATE")] ThreadCreated,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-update">THREAD_UPDATE</a> gateway event
+        /// </summary>
+        [Description("THREAD_UPDATE")] ThreadUpdated,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-delete">THREAD_DELETE</a> gateway event
+        /// </summary>
+        [Description("THREAD_DELETE")] ThreadDeleted,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-list-sync">THREAD_LIST_SYNC</a> gateway event
+        /// </summary>
+        [Description("THREAD_LIST_SYNC")] ThreadListSync,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-member-update">THREAD_MEMBER_UPDATE</a> gateway event
+        /// </summary>
+        [Description("THREAD_MEMBER_UPDATE")] ThreadMemberUpdated,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-members-update">THREAD_MEMBERS_UPDATE</a> gateway event
+        /// </summary>
+        [Description("THREAD_MEMBERS_UPDATE")] ThreadMembersUpdated,
     }
 }

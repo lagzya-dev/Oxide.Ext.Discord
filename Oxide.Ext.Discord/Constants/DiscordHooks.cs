@@ -572,6 +572,54 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordApplicationCommandDeleted = nameof(OnDiscordApplicationCommandDeleted);
         
         /// <code>
+        /// void OnDiscordGuildThreadCreated(Channel thread, Guild guild)
+        /// {
+        ///     Puts("OnDiscordGuildThreadCreated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildThreadCreated = nameof(OnDiscordGuildThreadCreated);
+        
+        /// <code>
+        /// void OnDiscordGuildThreadUpdated(Channel thread, Channel previous, Guild guild)
+        /// {
+        ///     Puts("OnDiscordGuildThreadUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildThreadUpdated = nameof(OnDiscordGuildThreadUpdated);
+
+        /// <code>
+        /// void OnDiscordGuildThreadDeleted(Channel thread, Guild guild)
+        /// {
+        ///     Puts("OnDiscordGuildThreadDeleted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildThreadDeleted = nameof(OnDiscordGuildThreadDeleted);
+        
+        /// <code>
+        /// void OnDiscordGuildThreadListSynced(ThreadListSyncEvent sync, Guild guild)
+        /// {
+        ///     Puts("OnDiscordGuildThreadListSynced Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildThreadListSynced = nameof(OnDiscordGuildThreadListSynced);
+        
+        /// <code>
+        /// void OnDiscordGuildThreadMemberUpdated(ThreadMember member, Channel thread, Guild guild)
+        /// {
+        ///     Puts("OnDiscordGuildThreadMemberUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildThreadMemberUpdated = nameof(OnDiscordGuildThreadMemberUpdated);
+        
+        /// <code>
+        /// void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, Guild guild)
+        /// {
+        ///     Puts("OnDiscordGuildThreadMembersUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildThreadMembersUpdated = nameof(OnDiscordGuildThreadMembersUpdated);
+        
+        /// <code>
         /// void OnDiscordUnhandledCommand(EventPayload payload)
         /// {
         ///     Puts("OnDiscordUnhandledCommand Works!");

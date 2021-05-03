@@ -226,6 +226,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<Channel>))]
         [JsonProperty("channels")]
         public Hash<Snowflake, Channel> Channels { get; set; }
+        
+        /// <summary>
+        /// All active threads in the guild that current user has permission to view
+        /// </summary>
+        [JsonConverter(typeof(HashListConverter<Channel>))]
+        [JsonProperty("threads")]
+        public Hash<Snowflake, Channel> Threads { get; set; }
 
         /// <summary>
         /// Presences of the members in the guild

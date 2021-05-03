@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Rest
         internal Bucket Bucket;
         
         private const string UrlBase = "https://discord.com/api";
-        private const string ApiVersion = "v8";
+        private const string ApiVersion = "v9";
         private const int RequestMaxLength = 15;
 
         private readonly string _authHeader;

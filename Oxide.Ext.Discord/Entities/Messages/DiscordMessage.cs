@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
@@ -195,7 +196,18 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("referenced_message")]
         public DiscordMessage ReferencedMessage { get; internal set; }
-
+        
+        /// <summary>
+        /// Sent if the message is a response to an Interaction
+        /// </summary>
+        [JsonProperty("interaction")]
+        public MessageInteraction Interaction { get; set; }
+        
+        /// <summary>
+        /// The thread that was started from this message, includes thread member object
+        /// </summary>
+        [JsonProperty("thread")]
+        public Channel Thread { get; set; }
         
         /// <summary>
         /// Post a message to a guild text or DM channel.
@@ -602,6 +614,18 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public void DeletePinnedChannelMessage(DiscordClient client, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.DELETE, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Creates a new public thread this message
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="create">Data to use when creating the thread</param>
+        /// <param name="callback">Callback with the thread once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void StartPublicThread(DiscordClient client, ThreadCreate create, Action<Channel> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/threads", RequestMethod.POST, create, callback, error);
         }
     }
 }
