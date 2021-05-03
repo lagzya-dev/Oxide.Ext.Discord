@@ -16,13 +16,25 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public bool ComputePruneCount { get; set; }
         
         /// <summary>
+        /// Reason for the prune
+        /// </summary>
+        [JsonProperty("reason")]
+        public string Reason { get; set; }
+        
+        /// <summary>
         /// Returns Guild Prune Begin query string for the API Endpoint
         /// </summary>
         /// <returns>Guild Prune Begin Query String</returns>
         public override string ToQueryString()
         {
             StringBuilder sb = new StringBuilder(base.ToQueryString());
-            sb.Append($"&compute_prune_count={ComputePruneCount}");
+            sb.Append("&compute_prune_count=");
+            sb.Append(ComputePruneCount);
+            if (!string.IsNullOrEmpty(Reason))
+            {
+                sb.Append("&reason=");
+                sb.Append(Reason);
+            }
 
             return sb.ToString();
         }
