@@ -526,14 +526,15 @@ namespace Oxide.Ext.Discord.WebSockets
             SessionId = ready.SessionId;
             _client.Application = ready.Application;
             _client.Bot = ready.User;
-            _webSocket.ReconnectRetries = 0;
+            _webSocket.ResetRetries();
             _logger.Info($"Your bot was found in {ready.Guilds.Count} Guilds!");
 
             if (_client.ReadyData == null)
             {
-                _client.ReadyData = ready;
                 _client.CallHook(DiscordHooks.OnDiscordGatewayReady, ready);
             }
+            
+            _client.ReadyData = ready;
         }
 
         //https://discord.com/developers/docs/topics/gateway#resumed`
@@ -592,15 +593,14 @@ namespace Oxide.Ext.Discord.WebSockets
                 if (guild != null && guild.IsAvailable)
                 {
                     Channel channel = guild.Channels[update.Id];
-                    if (channel == null)
-                    {
-                        guild.Channels[update.Id] = update;
-                        _client.CallHook(DiscordHooks.OnDiscordGuildChannelUpdated, update, null, guild);
-                    }
-                    else
+                    if (channel != null)
                     {
                         Channel previous = channel.Update(update);
                         _client.CallHook(DiscordHooks.OnDiscordGuildChannelUpdated, channel, previous, guild);
+                    }
+                    else
+                    {
+                        _logger.Warning($"{nameof(SocketListener)}.{nameof(HandleDispatchChannelUpdate)} Tried to update channel that doesn't exist: Guild: {guild.Name}({guild.Id}) Channel: {update.Name}({update.Id})");
                     }
                 }
             }
@@ -655,6 +655,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 _client.AddGuildOrUpdate(guild);
                 existing = _client.GetGuild(guild.Id);
                 _client.CallHook(DiscordHooks.OnDiscordGuildCreated, existing);
+                existing.HasLoadedAllMembers = false;
             }
 
             if (!existing.HasLoadedAllMembers)
@@ -683,24 +684,20 @@ namespace Oxide.Ext.Discord.WebSockets
         private void HandleDispatchGuildDelete(EventPayload payload)
         {
             Guild guild = payload.EventData.ToObject<Guild>();
-            if (guild.Unavailable ?? false) // There is an outage with Discord
+            Guild existing = _client.GetGuild(guild.Id);
+            if (!guild.IsAvailable) // There is an outage with Discord
             {
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildDelete)} There is an outage with the guild. Guild ID: {guild.Id}");
-                Guild existing = _client.GetGuild(guild.Id);
+                
                 if (existing != null)
                 {
                     existing.Unavailable = guild.Unavailable;
                 }
-                else
-                {
-                    _client.AddGuild(guild);
-                }
-                
+
                 _client.CallHook(DiscordHooks.OnDiscordGuildUnavailable, existing ?? guild);
             }
             else
             {
-                Guild existing = _client.GetGuild(guild.Id);
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildDelete)} Guild deleted or user removed from guild. Guild ID: {guild.Id} Name: {existing?.Name ?? guild.Name}");
                 _client.RemoveGuild(guild.Id);
                 _client.CallHook(DiscordHooks.OnDiscordGuildDeleted, existing ?? guild);
@@ -730,47 +727,44 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildEmojisUpdatedEvent emojis = payload.EventData.ToObject<GuildEmojisUpdatedEvent>();
             Guild guild = _client.GetGuild(emojis.GuildId);
-            if (guild != null)
+            
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildEmojisUpdate)} Guild ID: {emojis.GuildId} Guild Name: {guild?.Name}");
+            if (guild != null && guild.IsAvailable)
             {
-                _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildEmojisUpdate)} Guild ID: {emojis.GuildId} Guild Name: {guild.Name}");
+                Hash<Snowflake, Emoji> previous = guild.Emojis.Copy();
 
-                if (guild.IsAvailable)
+                List<Snowflake> removedEmojis = new List<Snowflake>();
+
+                foreach (Snowflake id in guild.Emojis.Keys)
                 {
-                    Hash<Snowflake, Emoji> previous = guild.Emojis.Copy();
-
-                    List<Snowflake> removedEmojis = new List<Snowflake>();
-
-                    foreach (Snowflake id in guild.Emojis.Keys)
+                    if (!emojis.Emojis.ContainsKey(id))
                     {
-                        if (!emojis.Emojis.ContainsKey(id))
-                        {
-                            removedEmojis.Add(id);
-                        }
+                        removedEmojis.Add(id);
                     }
-
-                    for (int index = 0; index < removedEmojis.Count; index++)
-                    {
-                        Snowflake id = removedEmojis[index];
-                        guild.Emojis.Remove(id);
-                    }
-
-                    guild.Emojis.RemoveAll(e => e.EmojiId.HasValue && !emojis.Emojis.ContainsKey(e.EmojiId.Value));
-                    
-                    foreach (Emoji emoji in emojis.Emojis.Values)
-                    {
-                        Emoji existing = guild.Emojis[emojis.GuildId];
-                        if (existing != null)
-                        {
-                            existing.Update(emoji);
-                        }
-                        else
-                        {
-                            guild.Emojis[emojis.GuildId] = emoji;
-                        }
-                    }
-
-                    _client.CallHook(DiscordHooks.OnDiscordGuildEmojisUpdated, emojis, previous, guild);
                 }
+
+                for (int index = 0; index < removedEmojis.Count; index++)
+                {
+                    Snowflake id = removedEmojis[index];
+                    guild.Emojis.Remove(id);
+                }
+
+                guild.Emojis.RemoveAll(e => e.EmojiId.HasValue && !emojis.Emojis.ContainsKey(e.EmojiId.Value));
+                    
+                foreach (Emoji emoji in emojis.Emojis.Values)
+                {
+                    Emoji existing = guild.Emojis[emojis.GuildId];
+                    if (existing != null)
+                    {
+                        existing.Update(emoji);
+                    }
+                    else
+                    {
+                        guild.Emojis[emojis.GuildId] = emoji;
+                    }
+                }
+
+                _client.CallHook(DiscordHooks.OnDiscordGuildEmojisUpdated, emojis, previous, guild);
             }
         }
 
@@ -831,7 +825,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 else
                 {
                     guild.Members[update.User.Id] = update;
-                    _client.CallHook(DiscordHooks.OnDiscordGuildMemberUpdated, update, null, guild);
+                    _logger.Warning($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberUpdate)} Tried to update member which does not exist in guild. Guild: {guild.Name}({guild.Id}) User: {update.User.Username}({update.User.Id})");
                 }
             }
         }
@@ -904,7 +898,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 else
                 {
                     guild.Roles[updatedRole.Id] = updatedRole;
-                    _client.CallHook(DiscordHooks.OnDiscordGuildRoleUpdated, updatedRole, null, guild);
+                    _logger.Warning($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildRoleUpdate)} Tried to update role that does not exists: {update.Role.Name}({update.Role.Id})");
                 }
             }
         }
@@ -993,7 +987,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 }
             }
 
-            if (message.GuildId.HasValue && message.GuildId.Value.IsValid())
+            if (message.GuildId.HasValue)
             {
                 _client.CallHook(DiscordHooks.OnDiscordGuildMessageCreated, message, channel, guild);
             }
@@ -1011,7 +1005,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Channel channel = _client.GetChannel(message.ChannelId, message.GuildId);
 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchMessageUpdate)} Guild ID: {message.GuildId} Guild Name: {guild?.Name}  Channel ID: {message.ChannelId} Channel Name: {channel?.Name} Message ID: {message.Id}");
-            if (guild != null)
+            if (message.GuildId.HasValue)
             {
                 _client.CallHook(DiscordHooks.OnDiscordGuildMessageUpdated, message, channel, guild);
             }
@@ -1153,7 +1147,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     DiscordUser previous = member.User.Update(updateUser);
                     _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchPresenceUpdate)} Guild ID: {update.GuildId} User ID: {update.User} Status: {update.Status}");
-                    _client.CallHook(DiscordHooks.OnDiscordGuildMemberPresenceUpdated, member, guild);
+                    _client.CallHook(DiscordHooks.OnDiscordGuildMemberPresenceUpdated, update, member, previous, guild);
                 }
             }
         }
@@ -1385,7 +1379,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Used to Identify the bot with discord
         /// </summary>
-        internal void Identify()
+        private void Identify()
         {
             // Sent immediately after connecting. Opcode 2: Identify
             // Ref: https://discordapp.com/developers/docs/topics/gateway#identifying
@@ -1416,7 +1410,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Used to resume the current session with discord
         /// </summary>
-        internal void Resume(string sessionId, int sequence)
+        private void Resume(string sessionId, int sequence)
         {
             if (!_client.Initialized)
             {

@@ -71,7 +71,7 @@ namespace Oxide.Ext.Discord.Constants
 
         #region Discord Event Hooks
         /// <code>
-        /// void OnDiscordGatewayReady(GatewayReadyEvent ready, bool previouslyConnected)
+        /// void OnDiscordGatewayReady(GatewayReadyEvent ready)
         /// {
         ///     Puts("OnDiscordGatewayReady Works!");
         /// }
@@ -112,7 +112,6 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectChannelUpdated = nameof(OnDiscordDirectChannelUpdated);
         
         /// <code>
-        /// Note: previous will be null if previous channel not found
         /// void OnDiscordGuildChannelUpdated(Channel channel, Channel previous, Guild guild)
         /// {
         ///     Puts("OnDiscordGuildChannelUpdated Works!");
@@ -138,7 +137,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildChannelDeleted = nameof(OnDiscordGuildChannelDeleted);
         
         /// <code>
-        /// Note: Channel will be null we haven't seen it yet
+        /// Note: Channel will be null if we haven't seen it yet
         /// void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel)
         /// {
         ///     Puts("OnDiscordDirectChannelPinsUpdated Works!");
@@ -155,7 +154,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildChannelPinsUpdated = nameof(OnDiscordGuildChannelPinsUpdated);
         
         /// <code>
-        /// void OnDiscordGuildCreated(Guild guild, bool previouslyConnected)
+        /// void OnDiscordGuildCreated(Guild guild)
         /// {
         ///     Puts("OnDiscordGuildCreated Works!");
         /// }
@@ -196,7 +195,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMemberBanned = nameof(OnDiscordGuildMemberBanned);
         
         /// <code>
-        /// void OnDiscordGuildBanRemoved(GuildMemberBannedEvent ban, Guild guild)
+        /// void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, Guild guild)
         /// {
         ///     Puts("OnDiscordGuildBanRemoved Works!");
         /// }

@@ -54,6 +54,9 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         [JsonProperty("s")]
         public int? Sequence { get; }
 
+        /// <summary>
+        /// Returns a DispatchCode enum value for the EventName if we have it; Else the code will be Unknown
+        /// </summary>
         public DispatchCode EventCode => Codes.TryGetValue(EventName, out DispatchCode code) ? code : DispatchCode.Unknown;
 
         /// <summary>

@@ -284,5 +284,10 @@ namespace Oxide.Ext.Discord.WebSockets
             ReconnectTimer.Start();
             ReconnectRetries++;
         }
+
+        internal void ResetRetries()
+        {
+            ReconnectRetries = 0;
+        }
     }
 }
