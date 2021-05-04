@@ -1006,7 +1006,7 @@ namespace Oxide.Ext.Discord.WebSockets
                     }
                 }
 
-                if (DiscordExtension.DiscordSubscriptions.HasSubscriptions())
+                if (DiscordExtension.DiscordSubscriptions.HasSubscriptions() && channel != null && message.GuildId.HasValue)
                 {
                     DiscordExtension.DiscordSubscriptions.HandleMessage(message, channel);
                 }
