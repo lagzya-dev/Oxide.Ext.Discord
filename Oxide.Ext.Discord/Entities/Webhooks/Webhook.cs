@@ -280,11 +280,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             if (executeParams == null)
             {
-                executeParams = new WebhookExecuteParams
-                {
-                    Wait = true
-                };
+                executeParams = new WebhookExecuteParams();
             }
+
+            executeParams.Wait = true;
             
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, payload, callback, error);
         }

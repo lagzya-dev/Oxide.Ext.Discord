@@ -20,6 +20,12 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         {
             foreach (object enumValue in Enum.GetValues(typeof(DispatchCode)))
             {
+                DispatchCode code = (DispatchCode) enumValue;
+                if (code == DispatchCode.Unknown)
+                {
+                    continue;
+                }
+                
                 object[] descriptions = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
                 if (descriptions.Length == 0)
                 {
@@ -28,7 +34,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
                 }
 
                 DescriptionAttribute description = (DescriptionAttribute) descriptions[0];
-                Codes[description.Description] = (DispatchCode) enumValue;
+                Codes[description.Description] = code;
             }
         }
 
