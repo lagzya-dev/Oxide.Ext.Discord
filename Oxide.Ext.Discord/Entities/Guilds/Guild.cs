@@ -574,6 +574,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         /// <summary>
         /// Returns a list of guild channel objects.
+        /// Does not include threads
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-channels">Get Guild Channels</a>
         /// </summary>
         /// <param name="client">Client to use</param>

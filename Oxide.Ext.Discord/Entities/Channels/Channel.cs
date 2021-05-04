@@ -552,19 +552,19 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="create">Data to use when creating the thread</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void StartPublicThread(DiscordClient client, Snowflake messageId, ThreadCreate create, Action<Channel> callback = null, Action<RestError> error = null)
+        public void StartThreadWithMessage(DiscordClient client, Snowflake messageId, ThreadCreate create, Action<Channel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/messages/{messageId}/threads", RequestMethod.POST, create, callback, error);
         }
         
         /// <summary>
-        /// Creates a new private thread for a channel
+        /// Creates a new thread that is not connected to an existing message. The created thread is always a GUILD_PRIVATE_THREAD
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="create">Data to use when creating the thread</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void StartPrivateThread(DiscordClient client, ThreadCreate create, Action<Channel> callback = null, Action<RestError> error = null)
+        public void StartThreadWithoutMessage(DiscordClient client, ThreadCreate create, Action<Channel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/threads", RequestMethod.POST, create, callback, error);
         }

@@ -254,26 +254,39 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="payload">Message data</param>
+        /// <param name="executeParams">Webhook execution parameters</param>
         /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="sendType">Which type of webhook to execute</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action callback = null, Action<RestError> error = null, WebhookSendType sendType = WebhookSendType.Discord)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, WebhookExecuteParams executeParams = null, Action callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}", RequestMethod.POST, payload, callback, error);
+            if (executeParams == null)
+            {
+                executeParams = new WebhookExecuteParams();
+            }
+            
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, payload, callback, error);
         }
-        
+
         /// <summary>
         /// Executes a webhook
         /// See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="payload">Message data</param>
+        /// <param name="executeParams">Webhook execution parameters</param>
         /// <param name="callback">Callback with the created message</param>
-        /// <param name="sendType">Which type of webhook to execute</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, Action<DiscordMessage> callback, Action<RestError> error = null, WebhookSendType sendType = WebhookSendType.Discord)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{GetWebhookFormat(sendType)}?wait=true", RequestMethod.POST, payload, callback, error);
+            if (executeParams == null)
+            {
+                executeParams = new WebhookExecuteParams
+                {
+                    Wait = true
+                };
+            }
+            
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, payload, callback, error);
         }
 
         /// <summary>
@@ -300,21 +313,6 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public void DeleteWebhookMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback, error);
-        }
-
-        private string GetWebhookFormat(WebhookSendType type)
-        {
-            switch (type)
-            {
-                case WebhookSendType.Discord:
-                    return string.Empty;
-                case WebhookSendType.Slack:
-                    return "/slack";
-                case WebhookSendType.Github:
-                    return "/github";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
-            }
         }
     }
 }

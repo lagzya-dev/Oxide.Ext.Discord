@@ -2462,7 +2462,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.StartPublicThread(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.StartThreadWithMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Creates a new public thread from a message
             </summary>
@@ -2472,9 +2472,9 @@
             <param name="callback">Callback with the thread once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.StartPrivateThread(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Channel.StartThreadWithoutMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Channel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
-            Creates a new private thread for a channel
+            Creates a new thread that is not connected to an existing message. The created thread is always a GUILD_PRIVATE_THREAD
             </summary>
             <param name="client">Client to use</param>
             <param name="create">Data to use when creating the thread</param>
@@ -5577,6 +5577,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.Guild.GetGuildChannels(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Channel}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Returns a list of guild channel objects.
+            Does not include threads
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-channels">Get Guild Channels</a>
             </summary>
             <param name="client">Client to use</param>
@@ -9599,26 +9600,26 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType)">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Executes a webhook
             See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="payload">Message data</param>
+            <param name="executeParams">Webhook execution parameters</param>
             <param name="callback">Callback once the action is completed</param>
-            <param name="sendType">Which type of webhook to execute</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType)">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.ExecuteWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Executes a webhook
             See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="payload">Message data</param>
+            <param name="executeParams">Webhook execution parameters</param>
             <param name="callback">Callback with the created message</param>
-            <param name="sendType">Which type of webhook to execute</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.Webhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -9688,6 +9689,42 @@
             <param name="embed">Embed to add</param>
             <returns>This</returns>
             <exception cref="T:System.IndexOutOfRangeException">Thrown if more than 10 embeds are added in a send as that is the discord limit</exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams">
+            <summary>
+            Represents parameters to execute a webhook
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams.SendType">
+            <summary>
+            Which type of webhook are we trying to send (Discord, Slack, Github)
+            Defaults to Discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams.Wait">
+            <summary>
+            Should we wait for a webhook to return a message or is this a fire and forget.
+            Not settable by devs as it's controlled by which method is called
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams.ThreadId">
+            <summary>
+            If you're sending a message to a thread instead of a channel put the ID of the thread here.
+            This field is optional and defaults to null
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams.ToQueryString">
+            <summary>
+            Returns the query string to be used in the webhook URL
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams.GetWebhookFormat">
+            <summary>
+            Returns the URL formatting for the webhook type
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType">
             <summary>
