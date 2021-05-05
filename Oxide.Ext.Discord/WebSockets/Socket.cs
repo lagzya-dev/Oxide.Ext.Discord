@@ -24,14 +24,14 @@ namespace Oxide.Ext.Discord.WebSockets
         /// If we should attempt to resume our previous session after connecting
         /// </summary>
         public bool ShouldAttemptResume;
-
+        
+        internal SocketState SocketState = SocketState.Disconnected;
+        
         /// <summary>
         /// Timer to use when attempting to reconnect to discord due to an error
         /// </summary>
-        internal Timer ReconnectTimer;
-
-        internal SocketState SocketState = SocketState.Disconnected;
-        internal int ReconnectRetries;
+        private Timer _reconnectTimer;
+        private int _reconnectRetries;
 
         private readonly BotClient _client;
         private WebSocket _socket;
@@ -97,11 +97,11 @@ namespace Oxide.Ext.Discord.WebSockets
             RequestedReconnect = attemptReconnect;
             ShouldAttemptResume = shouldResume;
 
-            if (ReconnectTimer != null)
+            if (_reconnectTimer != null)
             {
-                ReconnectTimer.Stop();
-                ReconnectTimer.Dispose();
-                ReconnectTimer = null;
+                _reconnectTimer.Stop();
+                _reconnectTimer.Dispose();
+                _reconnectTimer = null;
             }
             
             if (IsDisconnected())
@@ -145,11 +145,11 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             Disconnect(false, false);
             
-            if (ReconnectTimer != null)
+            if (_reconnectTimer != null)
             {
-                ReconnectTimer.Stop();
-                ReconnectTimer.Dispose();
-                ReconnectTimer = null;
+                _reconnectTimer.Stop();
+                _reconnectTimer.Dispose();
+                _reconnectTimer = null;
             }
             
             _listener?.Shutdown();
@@ -249,25 +249,25 @@ namespace Oxide.Ext.Discord.WebSockets
             SocketState = SocketState.PendingReconnect;
 
             //If we haven't had any errors reconnect to the gateway
-            if (ReconnectRetries == 0)
+            if (_reconnectRetries == 0)
             {
                 Interface.Oxide.NextTick(Connect);
                 return;
             }
 
             //We had an error trying to reconnect. Perform Delayed Reconnects
-            float delay = ReconnectRetries <= 3 ? 1f : 15f;
+            float delay = _reconnectRetries <= 3 ? 1f : 15f;
             
             //There has been more than 3 tries to reconnect. Discord suggests trying to update gateway url.
-            bool updateGateway = ReconnectRetries > 3;
+            bool updateGateway = _reconnectRetries > 3;
             
-            ReconnectTimer = new Timer
+            _reconnectTimer = new Timer
             {
                 Interval = delay * 1000,
                 AutoReset = false
             };
 
-            ReconnectTimer.Elapsed += (_, __) =>
+            _reconnectTimer.Elapsed += (_, __) =>
             {
                 if (updateGateway)
                 {
@@ -277,17 +277,17 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     Connect();
                 }
-                ReconnectTimer = null;
+                _reconnectTimer = null;
             };
             
-            _logger.Warning($"Attempting to reconnect to Discord... [Retry={ReconnectRetries}]");
-            ReconnectTimer.Start();
-            ReconnectRetries++;
+            _logger.Warning($"Attempting to reconnect to Discord... [Retry={_reconnectRetries}]");
+            _reconnectTimer.Start();
+            _reconnectRetries++;
         }
 
         internal void ResetRetries()
         {
-            ReconnectRetries = 0;
+            _reconnectRetries = 0;
         }
     }
 }

@@ -32,12 +32,12 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// The current session ID for the connected bot
         /// </summary>
-        internal string SessionId;
+        private string _sessionId;
         
         /// <summary>
         /// The current sequence number for the websocket
         /// </summary>
-        internal int Sequence;
+        private int _sequence;
 
         private readonly BotClient _client;
         private readonly Socket _webSocket;
@@ -258,7 +258,7 @@ namespace Oxide.Ext.Discord.WebSockets
             EventPayload payload = JsonConvert.DeserializeObject<EventPayload>(e.Data);
             if (payload.Sequence.HasValue)
             {
-                Sequence = payload.Sequence.Value;
+                _sequence = payload.Sequence.Value;
             }
 
             if (_logger.IsLogging(LogLevel.Verbose))
@@ -548,7 +548,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 _client.AddGuildOrUpdate(guild);
             }
-            SessionId = ready.SessionId;
+            _sessionId = ready.SessionId;
             _client.Application = ready.Application;
             _client.Bot = ready.User;
             _webSocket.ResetRetries();
@@ -1505,7 +1505,7 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#invalid-session
         private void HandleInvalidSession(EventPayload payload)
         {
-            bool shouldResume = !string.IsNullOrEmpty(SessionId) && (payload.TokenData?.ToObject<bool>() ?? false);
+            bool shouldResume = !string.IsNullOrEmpty(_sessionId) && (payload.TokenData?.ToObject<bool>() ?? false);
             _logger.Warning($"Invalid Session ID opcode received! Attempting to reconnect. Should Resume? {shouldResume}");
             _webSocket.Disconnect(true, shouldResume);
         }
@@ -1517,10 +1517,10 @@ namespace Oxide.Ext.Discord.WebSockets
             _heartbeat.SetupHeartbeat(hello.HeartbeatInterval);
 
             // Client should now perform identification
-            if (_webSocket.ShouldAttemptResume && !string.IsNullOrEmpty(SessionId))
+            if (_webSocket.ShouldAttemptResume && !string.IsNullOrEmpty(_sessionId))
             {
-                _logger.Info($"{nameof(SocketListener)}.{nameof(HandleHello)} Attempting to resume session with ID: {SessionId}");
-                Resume(SessionId, Sequence);
+                _logger.Info($"{nameof(SocketListener)}.{nameof(HandleHello)} Attempting to resume session with ID: {_sessionId}");
+                Resume(_sessionId, _sequence);
             }
             else
             {
@@ -1548,7 +1548,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         internal void SendHeartbeat()
         {
-            _webSocket.Send(GatewayCommandCode.Heartbeat, Sequence);
+            _webSocket.Send(GatewayCommandCode.Heartbeat, _sequence);
         }
 
         /// <summary>

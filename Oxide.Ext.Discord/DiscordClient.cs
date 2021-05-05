@@ -4,6 +4,7 @@ using System.Reflection;
 using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
@@ -92,7 +93,7 @@ namespace Oxide.Ext.Discord
             Bot = BotClient.GetOrCreate(this);
 
             RegisterPluginForHooks(Owner);
-            Interface.Call("Discord_ClientConnect", Owner, this);
+            Interface.Call(DiscordHooks.DiscordOnClientConnected, Owner, this);
         }
         
         /// <summary>
@@ -100,7 +101,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public void Disconnect()
         {
-            Interface.Call("Discord_ClientDisconnect", Owner, this);
+            Interface.Call(DiscordHooks.DiscordOnClientDisconnected, Owner, this);
             Bot?.RemoveClient(this);
         }
 
@@ -182,12 +183,21 @@ namespace Oxide.Ext.Discord
         }
 
         #region Plugin Handling
+
         /// <summary>
         /// Gets the client for the given plugin
         /// </summary>
         /// <param name="plugin">Plugin to get client for</param>
         /// <returns>Discord client for the plugin</returns>
-        public static DiscordClient GetClient(Plugin plugin) => GetClient(plugin?.Name);
+        public static DiscordClient GetClient(Plugin plugin)
+        {
+            if (plugin == null)
+            {
+                throw new ArgumentNullException(nameof(plugin));
+            }
+
+            return GetClient(plugin.Name);
+        } 
 
         /// <summary>
         /// Gets the client for the given plugin name

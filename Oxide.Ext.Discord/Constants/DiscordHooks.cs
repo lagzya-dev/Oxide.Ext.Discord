@@ -6,7 +6,21 @@ namespace Oxide.Ext.Discord.Constants
     public static class DiscordHooks
     {
         #region Bot Client Hooks
+        /// <code>
+        /// void DiscordOnClientConnected(Plugin owner, DiscordClient client)
+        /// {
+        ///     Puts("DiscordOnClientConnected Works!");
+        /// }
+        /// </code>
+        public const string DiscordOnClientConnected = nameof(DiscordOnClientConnected);
         
+        /// <code>
+        /// void DiscordOnClientDisconnected(Plugin owner, DiscordClient client)
+        /// {
+        ///     Puts("DiscordOnClientDisconnected Works!");
+        /// }
+        /// </code>
+        public const string DiscordOnClientDisconnected = nameof(DiscordOnClientDisconnected);
         #endregion
 
         #region Socket Hooks
