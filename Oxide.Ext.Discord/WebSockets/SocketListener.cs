@@ -1497,7 +1497,7 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#reconnect
         private void HandleReconnect(EventPayload payload)
         {
-            _logger.Info("Reconnect has been called (opcode 7)! Reconnecting...");
+            _logger.Info("Discord has requested a reconnect. Reconnecting...");
             //If we disconnect normally our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
             _webSocket.Disconnect(true, true, true);
         }

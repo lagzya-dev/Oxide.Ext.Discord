@@ -262,6 +262,22 @@
             Represents all hooks available in the discord extension
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.DiscordOnClientConnected">
+            <code>
+            void DiscordOnClientConnected(Plugin owner, DiscordClient client)
+            {
+                Puts("DiscordOnClientConnected Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.DiscordOnClientDisconnected">
+            <code>
+            void DiscordOnClientDisconnected(Plugin owner, DiscordClient client)
+            {
+                Puts("DiscordOnClientDisconnected Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordWebsocketOpened">
             <code>
             void OnDiscordWebsocketOpened()
@@ -11457,7 +11473,7 @@
             If we should attempt to resume our previous session after connecting
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.Socket.ReconnectTimer">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Socket._reconnectTimer">
             <summary>
             Timer to use when attempting to reconnect to discord due to an error
             </summary>
@@ -11622,12 +11638,12 @@
             Represents a listens for socket events
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener.SessionId">
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener._sessionId">
             <summary>
             The current session ID for the connected bot
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener.Sequence">
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener._sequence">
             <summary>
             The current sequence number for the websocket
             </summary>
