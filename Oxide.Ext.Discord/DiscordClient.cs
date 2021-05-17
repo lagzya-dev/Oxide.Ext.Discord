@@ -183,7 +183,24 @@ namespace Oxide.Ext.Discord
         }
 
         #region Plugin Handling
+        /// <summary>
+        /// Sets the client field on the plugin.
+        /// This should only be used if you need the client in the Init or Loaded hooks
+        /// The client field will automatically be set on the plugin before the OnDiscordClientCreated or OnServerInitialized hooks
+        /// </summary>
+        /// <param name="plugin">Plugin to get client for</param>
+        /// <returns>Discord client for the plugin</returns>
+        public static void CreateClient(Plugin plugin)
+        {
+            if (plugin == null)
+            {
+                throw new ArgumentNullException(nameof(plugin));
+            }
 
+            OnPluginAdded(plugin);
+        } 
+        
+        
         /// <summary>
         /// Gets the client for the given plugin
         /// </summary>
@@ -211,10 +228,17 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
+            if (Clients.ContainsKey(plugin.Name))
+            {
+                return;
+            }
+            
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
             {
+                DiscordExtension.GlobalLogger.Debug($"{field.Name}");
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
                 {
+                    DiscordExtension.GlobalLogger.Debug($"{field.Name} has DiscordClientAttribute");
                     DiscordClient client = Clients[plugin.Name];
                     if (client == null)
                     {
@@ -224,6 +248,7 @@ namespace Oxide.Ext.Discord
                     }
                     
                     field.SetValue(plugin, client);
+                    plugin.Call(DiscordHooks.OnDiscordClientCreated);
                     break;
                 }
             }

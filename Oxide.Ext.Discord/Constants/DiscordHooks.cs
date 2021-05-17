@@ -21,6 +21,14 @@ namespace Oxide.Ext.Discord.Constants
         /// }
         /// </code>
         public const string DiscordOnClientDisconnected = nameof(DiscordOnClientDisconnected);
+        
+        /// <code>
+        /// void OnDiscordClientCreated()
+        /// {
+        ///     Puts("OnDiscordClientCreated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordClientCreated = nameof(OnDiscordClientCreated);
         #endregion
 
         #region Socket Hooks
