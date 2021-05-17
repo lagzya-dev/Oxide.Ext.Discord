@@ -278,6 +278,14 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordClientCreated">
+            <code>
+            void OnDiscordClientCreated()
+            {
+                Puts("OnDiscordClientCreated Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordWebsocketOpened">
             <code>
             void OnDiscordWebsocketOpened()
@@ -968,6 +976,15 @@
             <param name="hookName"></param>
             <param name="args"></param>
         </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.CreateClient(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Sets the client field on the plugin.
+            This should only be used if you need the client in the Init or Loaded hooks
+            The client field will automatically be set on the plugin before the OnDiscordClientCreated or OnServerInitialized hooks
+            </summary>
+            <param name="plugin">Plugin to get client for</param>
+            <returns>Discord client for the plugin</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.DiscordClient.GetClient(Oxide.Core.Plugins.Plugin)">
             <summary>
             Gets the client for the given plugin
@@ -1063,13 +1080,6 @@
             <summary>
             Intents that your bot needs to work
             See <see cref="T:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents"/>
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.DiscordSettings.CloseOnUnload">
-            <summary>
-            If the client should be removed from the bot when the plugin unloads
-            This will keep the client for this plugin active even when unloaded and will add the same client back when loaded back
-            Recommend not changing this unless you know what you're doing
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.Activity">

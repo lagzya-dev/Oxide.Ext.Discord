@@ -24,12 +24,5 @@ namespace Oxide.Ext.Discord
         /// See <see cref="GatewayIntents"/>
         /// </summary>
         public GatewayIntents Intents = GatewayIntents.None;
-        
-        /// <summary>
-        /// If the client should be removed from the bot when the plugin unloads
-        /// This will keep the client for this plugin active even when unloaded and will add the same client back when loaded back
-        /// Recommend not changing this unless you know what you're doing
-        /// </summary>
-        public bool CloseOnUnload = true;
     }
 }

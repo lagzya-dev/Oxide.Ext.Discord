@@ -235,10 +235,8 @@ namespace Oxide.Ext.Discord
             
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
             {
-                DiscordExtension.GlobalLogger.Debug($"{field.Name}");
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
                 {
-                    DiscordExtension.GlobalLogger.Debug($"{field.Name} has DiscordClientAttribute");
                     DiscordClient client = Clients[plugin.Name];
                     if (client == null)
                     {
@@ -264,11 +262,6 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            if (!client.Settings.CloseOnUnload)
-            {
-                return;
-            }
-            
             CloseClient(client);
         }
 
