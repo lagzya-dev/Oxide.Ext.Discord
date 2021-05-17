@@ -5,6 +5,8 @@ Here you will find some examples of plugins using the discord extension. Some of
 ## TOC
 - [Discord Extension Plugin Examples](#discord-extension-plugin-examples)
     * [Basic Connecting Example](#basic-connecting-example)
+    * [Early Connecting Example](#early-connecting-example)
+    * [Early Connecting Example Option 2](#early-connecting-example-option-2)
     * [Advanced Connecting Example](#advanced-connecting-example)
     * [Registering Plugin for Discord Link](#registering-plugin-for-discord-link)
     * [Discord Command Example](#discord-command-example)
@@ -35,6 +37,77 @@ namespace Oxide.Plugins
         private void OnServerInitialized()
         {
            _client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
+        }
+
+        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
+        private void OnDiscordGatewayReady(GatewayReadyEvent ready)
+        {
+            Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
+        }
+    }
+}
+```
+
+## Early Connecting Example
+This example is if you're wanting to connect to the discord before the OnServerInitialized hook is called
+```c#
+using System.Linq;
+using Oxide.Core.Plugins;
+using Oxide.Ext.Discord;
+using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Gatway.Events;
+
+namespace Oxide.Plugins
+{
+    [Info("Connect Example", "MJSU", "1.0.0")]
+    [Description("Example on how to connect to the discord extension")]
+    internal class ConnectExample : CovalencePlugin
+    {
+        #region Class Fields
+        [DiscordClient] private DiscordClient _client;
+        #endregion
+
+        private void OnDiscordClientCreated()
+        {
+           _client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
+        }
+
+        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
+        private void OnDiscordGatewayReady(GatewayReadyEvent ready)
+        {
+            Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
+        }
+    }
+}
+```
+
+## Early Connecting Example Option 2
+This example is if you're wanting to connect to the discord during Init or Loaded Hooks
+```c#
+using System.Linq;
+using Oxide.Core.Plugins;
+using Oxide.Ext.Discord;
+using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Gatway.Events;
+
+namespace Oxide.Plugins
+{
+    [Info("Connect Example", "MJSU", "1.0.0")]
+    [Description("Example on how to connect to the discord extension")]
+    internal class ConnectExample : CovalencePlugin
+    {
+        #region Class Fields
+        [DiscordClient] private DiscordClient _client;
+        #endregion
+
+        private void Init() 
+        {
+            DiscordClient.CreateClient(this);
+            _client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
         }
 
         [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
