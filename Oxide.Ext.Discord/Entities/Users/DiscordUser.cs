@@ -221,11 +221,12 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// See <a href="https://discord.com/developers/docs/resources/user#get-current-user-guilds">Get Current User Guilds</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="request">Request parameters for filtering guilds</param>
         /// <param name="callback">Callback with the list of guilds</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetCurrentUserGuilds(DiscordClient client, Action<List<Guild>> callback = null, Action<RestError> error = null)
+        public void GetCurrentUserGuilds(DiscordClient client, UserGuildsRequest request = null, Action<List<Guild>> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/users/@me/guilds", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest($"/users/@me/guilds{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>

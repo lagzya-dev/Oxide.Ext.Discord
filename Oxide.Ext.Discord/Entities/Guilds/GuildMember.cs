@@ -42,7 +42,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// When the user joined the guild
         /// </summary>
         [JsonProperty("joined_at")]
-        public DateTime JoinedAt { get; set; }
+        public DateTime? JoinedAt { get; set; }
 
         /// <summary>
         /// When the user started boosting the guild

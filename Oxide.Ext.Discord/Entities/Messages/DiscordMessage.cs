@@ -168,6 +168,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("application")]
         public Application Application { get; set; }
+        
+        /// <summary>
+        /// If the message is a response to an Interaction, this is the id of the interaction's application
+        /// </summary>
+        [JsonProperty("application_id")]
+        public Snowflake ApplicationId { get; set; }
 
         /// <summary>
         /// Data showing the source of a crosspost, channel follow add, pin, or reply message

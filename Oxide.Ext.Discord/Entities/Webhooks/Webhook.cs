@@ -27,16 +27,16 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public WebhookType Type { get; set; }
         
         /// <summary>
-        /// The guild id this webhook is for
+        /// The guild id this webhook is for, if any
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake? GuildId { get; set; }
         
         /// <summary>
-        /// The channel id this webhook is for
+        /// The channel id this webhook is for, if any
         /// </summary>
         [JsonProperty("channel_id")]
-        public Snowflake ChannelId { get; set; }
+        public Snowflake? ChannelId { get; set; }
         
         /// <summary>
         /// The user this webhook was created by

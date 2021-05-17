@@ -30,6 +30,12 @@ namespace Oxide.Ext.Discord.Entities.Teams
         public List<TeamMember> Members { get; set; }
         
         /// <summary>
+        ///  The name of the team
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        
+        /// <summary>
         /// The user id of the current team owner
         /// </summary>
         [JsonProperty("owner_user_id")]

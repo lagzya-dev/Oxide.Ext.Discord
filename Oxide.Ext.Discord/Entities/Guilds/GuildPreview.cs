@@ -67,7 +67,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public int? ApproximatePresenceCount { get; set; }
         
         /// <summary>
-        /// The description for the guild, if the guild is discoverable
+        /// The description of a Community guild
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }

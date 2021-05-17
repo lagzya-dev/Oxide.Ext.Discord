@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     public class ApplicationCommandCreate
     {
         /// <summary>
-        /// Command name (3-32 characters)
+        /// 1-32 lowercase character name matching ^[\w-]{1,32}$
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }

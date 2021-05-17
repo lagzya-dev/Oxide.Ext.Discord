@@ -198,9 +198,8 @@ namespace Oxide.Ext.Discord
             }
 
             OnPluginAdded(plugin);
-        } 
-        
-        
+        }
+
         /// <summary>
         /// Gets the client for the given plugin
         /// </summary>

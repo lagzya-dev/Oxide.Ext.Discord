@@ -22,11 +22,6 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <exception cref="ArgumentException">Thrown if format is Jpg or WebP</exception>
         public static string GetCustomEmojiUrl(Snowflake emojiId, ImageFormat format = ImageFormat.Auto)
         {
-            if (format == ImageFormat.Jpg || format == ImageFormat.WebP)
-            {
-                throw new ArgumentException("ImageFormat is not valid for Custom Emoji. Valid types are (Auto, Png, Gif)", nameof(format));
-            }
-
             return $"{CdnUrl}/emojis/{emojiId}.{GetExtension(format, emojiId.ToString())}";
         }
         

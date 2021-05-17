@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Messages;
@@ -570,7 +571,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         }
         
         /// <summary>
-        /// Adds the bot to the thread
+        /// Adds the bot to the thread. Also requires the thread is not archived. 
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
@@ -594,7 +595,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         }
         
         /// <summary>
-        /// Removes the bot from the thread
+        /// Removes the bot from the thread. Also requires the thread is not archived.
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
@@ -680,6 +681,18 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public void ListJoinedPrivateArchivedThreads(DiscordClient client, ThreadArchivedLookup lookup, Action<ThreadList> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/users/@me/threads/archived/private{lookup.ToQueryString()}", RequestMethod.GET, null, callback, error);
+        }
+
+        /// <summary>
+        /// Gets the stage instance associated with the Stage channel, if it exists.
+        /// See <a href="https://discord.com/developers/docs/resources/stage-instance#get-stage-instance">Get Stage Instance</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the new stage instance</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetStageInstance(DiscordClient client, Action<StageInstance> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/stage-instances/{Id}", RequestMethod.GET, null, callback, error);
         }
 
         internal Channel Update(Channel channel)
