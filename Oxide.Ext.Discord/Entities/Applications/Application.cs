@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Teams;
@@ -10,7 +11,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Webhooks;
 using Oxide.Ext.Discord.Helpers.Cdn;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities.Applications
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/oauth2#application-object">Application Structure</a>
@@ -61,6 +62,18 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public bool BotRequireCodeGrant { get; set; }
         
         /// <summary>
+        /// The url of the app's terms of service
+        /// </summary>
+        [JsonProperty("terms_of_service_url")]
+        public string TermsOfServiceUrl { get; set; }
+        
+        /// <summary>
+        /// The url of the app's privacy policy
+        /// </summary>
+        [JsonProperty("privacy_policy_url")]
+        public string PrivacyPolicyUrl { get; set; }
+        
+        /// <summary>
         /// Partial user object containing info on the owner of the application
         /// </summary>
         [JsonProperty("owner")]
@@ -88,7 +101,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// If this application is a game sold on Discord, this field will be the guild to which it has been linked
         /// </summary>
         [JsonProperty("guild_id")]
-        public Snowflake GuildId { get; set; }
+        public Snowflake? GuildId { get; set; }
         
         /// <summary>
         /// If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists
@@ -112,7 +125,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// The application's public flags
         /// </summary>
         [JsonProperty("flags")]
-        public int Flags { get; set; }
+        public ApplicationFlags Flags { get; set; }
 
         /// <summary>
         /// Returns the URL for the applications Icon

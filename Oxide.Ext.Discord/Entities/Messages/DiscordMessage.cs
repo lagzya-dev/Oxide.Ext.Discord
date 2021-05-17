@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
+using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;

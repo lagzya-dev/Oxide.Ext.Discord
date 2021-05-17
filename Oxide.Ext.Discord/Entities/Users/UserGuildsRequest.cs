@@ -22,6 +22,10 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         public int Limit { get; set; } = 200;
 
+        /// <summary>
+        /// Returns the query string for the request
+        /// </summary>
+        /// <returns></returns>
         public virtual string ToQueryString()
         {
             StringBuilder sb = new StringBuilder();
