@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -532,6 +533,18 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case DispatchCode.ThreadMembersUpdated:
                     HandleDispatchThreadMembersUpdated(payload);
+                    break;
+                
+                case DispatchCode.StageInstanceCreated:
+                    HandleDispatchStageInstanceCreated(payload);
+                    break;
+                
+                case DispatchCode.StageInstanceUpdated:
+                    HandleDispatchStageInstanceUpdated(payload);
+                    break;
+                
+                case DispatchCode.StageInstanceDeleted:
+                    HandleDispatchStageInstanceDeleted(payload);
                     break;
                 
                 default:
@@ -1478,6 +1491,50 @@ namespace Oxide.Ext.Discord.WebSockets
                     
                     _client.CallHook(DiscordHooks.OnDiscordGuildThreadMembersUpdated, members, guild);
                 }
+            }
+        }
+        
+        private void HandleDispatchStageInstanceCreated(EventPayload payload)
+        {
+            StageInstance stage = payload.EventData.ToObject<StageInstance>();
+            Guild guild = _client.GetGuild(stage.GuildId);
+            if (guild != null)
+            {
+                guild.StageInstances[stage.Id] = stage;
+                _client.CallHook(DiscordHooks.OnDiscordStageInstanceCreated, stage, guild);
+            }
+        }
+
+        private void HandleDispatchStageInstanceUpdated(EventPayload payload)
+        {
+            StageInstance stage = payload.EventData.ToObject<StageInstance>();
+            Guild guild = _client.GetGuild(stage.GuildId);
+            if (guild != null)
+            {
+                StageInstance existing = guild.StageInstances[stage.Id];
+                if (existing == null)
+                {
+                    guild.StageInstances[stage.Id] = stage;
+                    _client.CallHook(DiscordHooks.OnDiscordStageInstanceUpdated, stage, stage, guild);
+                }
+                else
+                {
+                    StageInstance previous = existing.Update(stage);
+                    _client.CallHook(DiscordHooks.OnDiscordStageInstanceUpdated, stage, previous, guild);
+                }
+            }
+        }
+
+        private void HandleDispatchStageInstanceDeleted(EventPayload payload)
+        {
+            StageInstance stage = payload.EventData.ToObject<StageInstance>();
+            Guild guild = _client.GetGuild(stage.GuildId);
+            if (guild != null)
+            {
+                StageInstance existing = guild.StageInstances[stage.Id];
+                guild.StageInstances.Remove(stage.Id);
+                guild.StageInstances[stage.Id] = stage;
+                _client.CallHook(DiscordHooks.OnDiscordStageInstanceDeleted, existing ?? stage, guild);
             }
         }
 

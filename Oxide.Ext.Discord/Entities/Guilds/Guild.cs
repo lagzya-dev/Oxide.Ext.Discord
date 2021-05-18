@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Integrations;
@@ -321,6 +322,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("nsfw")]
         public bool NSFW { get; set; }
+        
+        /// <summary>
+        /// Stage instances in the guild
+        /// <see cref="StageInstance"/>
+        /// </summary>
+        [JsonConverter(typeof(HashListConverter<StageInstance>))]
+        [JsonProperty("stage_instances")]
+        public Hash<Snowflake, StageInstance> StageInstances { get; set; }
         #endregion
 
         #region Extension Fields

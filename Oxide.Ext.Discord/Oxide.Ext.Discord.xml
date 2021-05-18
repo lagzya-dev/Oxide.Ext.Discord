@@ -899,6 +899,30 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordStageInstanceCreated">
+            <code>
+            void OnDiscordStageInstanceCreated(StageInstance stage, Guild guild)
+            {
+                Puts("OnDiscordStageInstanceCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordStageInstanceUpdated">
+            <code>
+            void OnDiscordStageInstanceUpdated(StageInstance stage, StageInstance previous, Guild guild)
+            {
+                Puts("OnDiscordStageInstanceUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordStageInstanceDeleted">
+            <code>
+            void OnDiscordStageInstanceDeleted(StageInstance stage, Guild guild)
+            {
+                Puts("OnDiscordStageInstanceDeleted Works!");
+            }
+            </code>
+        </member>
         <member name="T:Oxide.Ext.Discord.DiscordClient">
             <summary>
             Represents the object a plugin uses to connects to discord
@@ -4779,6 +4803,9 @@
             - THREAD_LIST_SYNC
             - THREAD_MEMBER_UPDATE
             - THREAD_MEMBERS_UPDATE
+            - STAGE_INSTANCE_CREATE
+            - STAGE_INSTANCE_UPDATE
+            - STAGE_INSTANCE_DELETE
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMembers">
@@ -5172,6 +5199,12 @@
             <summary>
             True if this guild is designated as NSFW
             <a href="https://support.discord.com/hc/en-us/articles/1500005389362-NSFW-Server-Designation">NSFW Information</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.StageInstances">
+            <summary>
+            Stage instances in the guild
+            <see cref="T:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Guild.HasLoadedAllMembers">
@@ -7651,7 +7684,7 @@
             <param name="callback">Callback with the delete message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.AddPinnedChannelMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.PinMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Pin a message in a channel.
             Requires the MANAGE_MESSAGES permission.
@@ -7661,7 +7694,7 @@
             <param name="callback">Callback when the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeletePinnedChannelMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.UnpinMessage(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Delete a pinned message in a channel.
             Requires the MANAGE_MESSAGES permission.
@@ -11570,6 +11603,21 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadMembersUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-members-update">THREAD_MEMBERS_UPDATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.StageInstanceCreated">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-create">STAGE_INSTANCE_CREATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.StageInstanceUpdated">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-update">STAGE_INSTANCE_CREATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.StageInstanceDeleted">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-delete">STAGE_INSTANCE_CREATE</a> gateway event
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler">

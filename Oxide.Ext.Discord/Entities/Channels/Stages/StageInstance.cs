@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Stages
 {
@@ -9,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
     /// Represents a channel <a href="https://discord.com/developers/docs/resources/stage-instance#auto-closing-stage-instance-structure">Stage Instance</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class StageInstance
+    public class StageInstance : ISnowflakeEntity
     {
         /// <summary>
         /// The ID of this Stage instance
@@ -99,6 +100,17 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         public void DeleteStageInstance(DiscordClient client, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/stage-instances/{ChannelId}", RequestMethod.DELETE, null, callback, error);
+        }
+
+        internal StageInstance Update(StageInstance stage)
+        {
+            StageInstance previous = (StageInstance)MemberwiseClone();
+            if (stage.Topic != null)
+            {
+                Topic = stage.Topic;
+            }
+
+            return previous;
         }
     }
 }

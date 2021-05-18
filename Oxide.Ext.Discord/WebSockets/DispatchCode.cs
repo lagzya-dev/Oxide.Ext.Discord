@@ -266,5 +266,20 @@ namespace Oxide.Ext.Discord.WebSockets
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-members-update">THREAD_MEMBERS_UPDATE</a> gateway event
         /// </summary>
         [Description("THREAD_MEMBERS_UPDATE")] ThreadMembersUpdated,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-create">STAGE_INSTANCE_CREATE</a> gateway event
+        /// </summary>
+        [Description("STAGE_INSTANCE_CREATE")] StageInstanceCreated,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-update">STAGE_INSTANCE_CREATE</a> gateway event
+        /// </summary>
+        [Description("STAGE_INSTANCE_UPDATE")] StageInstanceUpdated,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-delete">STAGE_INSTANCE_CREATE</a> gateway event
+        /// </summary>
+        [Description("STAGE_INSTANCE_DELETE")] StageInstanceDeleted,
     }
 }

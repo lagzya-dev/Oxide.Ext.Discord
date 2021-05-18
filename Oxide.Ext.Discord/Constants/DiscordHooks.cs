@@ -647,7 +647,31 @@ namespace Oxide.Ext.Discord.Constants
         ///     Puts("OnDiscordUnhandledCommand Works!");
         /// }
         /// </code>
-        public const string OnDiscordUnhandledCommand = nameof(OnDiscordUnhandledCommand);
+        public const string OnDiscordUnhandledCommand = nameof(OnDiscordUnhandledCommand);        
+        
+        /// <code>
+        /// void OnDiscordStageInstanceCreated(StageInstance stage, Guild guild)
+        /// {
+        ///     Puts("OnDiscordStageInstanceCreated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordStageInstanceCreated = nameof(OnDiscordStageInstanceCreated);
+        
+        /// <code>
+        /// void OnDiscordStageInstanceUpdated(StageInstance stage, StageInstance previous, Guild guild)
+        /// {
+        ///     Puts("OnDiscordStageInstanceUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordStageInstanceUpdated = nameof(OnDiscordStageInstanceUpdated);
+        
+        /// <code>
+        /// void OnDiscordStageInstanceDeleted(StageInstance stage, Guild guild)
+        /// {
+        ///     Puts("OnDiscordStageInstanceDeleted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordStageInstanceDeleted = nameof(OnDiscordStageInstanceDeleted);
         #endregion
     }
 }

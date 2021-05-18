@@ -606,7 +606,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback when the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void AddPinnedChannelMessage(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public void PinMessage(DiscordClient client, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.PUT, null, callback, error);
         }
@@ -619,7 +619,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeletePinnedChannelMessage(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public void UnpinMessage(DiscordClient client, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/pins/{Id}", RequestMethod.DELETE, null, callback, error);
         }
