@@ -71,6 +71,11 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         ///  Flag given to users that developed bots and early verified their accounts.
         /// </summary>
-        EarlyVerifiedBotDeveloper = 1 << 17
+        EarlyVerifiedBotDeveloper = 1 << 17,
+        
+        /// <summary>
+        ///  Flag given to users that are discord certified moderators
+        /// </summary>
+        DiscordCertifiedModerator = 1 << 18
     }
 }
