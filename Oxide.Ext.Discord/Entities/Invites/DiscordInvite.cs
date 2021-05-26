@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
     /// Represents an <a href="https://discord.com/developers/docs/resources/invite#invite-object">Invite Structure</a> that when used, adds a user to a guild or group DM channel.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Invite
+    public class DiscordInvite
     {
         /// <summary>
         /// The invite code (unique ID)
@@ -24,14 +24,14 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// See <see cref="Guild"/>
         /// </summary>
         [JsonProperty("guild")]
-        public Guild Guild { get; set; }
+        public DiscordGuild Guild { get; set; }
         
         /// <summary>
         /// The channel this invite is for
         /// See <see cref="Channel"/>
         /// </summary>
         [JsonProperty("channel")]
-        public Channel Channel { get; set; }
+        public DiscordChannel Channel { get; set; }
         
         /// <summary>
         /// The user who created the invite
@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <param name="inviteCode">Invite code</param>
         /// <param name="callback">Callback with the invite</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetInvite(DiscordClient client, string inviteCode, Action<Invite> callback = null, Action<RestError> error = null)
+        public static void GetInvite(DiscordClient client, string inviteCode, Action<DiscordInvite> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/invites/{inviteCode}", RequestMethod.GET, null, callback, error);
         }
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the deleted invite</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteInvite(DiscordClient client, Action<Invite> callback = null, Action<RestError> error = null)
+        public void DeleteInvite(DiscordClient client, Action<DiscordInvite> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/invites/{Code}", RequestMethod.DELETE, null, callback, error);
         }

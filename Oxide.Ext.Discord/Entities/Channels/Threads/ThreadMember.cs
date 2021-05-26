@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Channels.Threads
 {
     /// <summary>
-    /// Represents a guild or DM <a href="	timestamp when the thread's archive status was last changed, used for calculating recent activity">Thread Member Structure</a> within Discord.
+    /// Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#thread-member-object">Thread Member Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ThreadMember

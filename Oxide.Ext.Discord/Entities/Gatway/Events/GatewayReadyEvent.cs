@@ -34,8 +34,8 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// The guilds the user is in
         /// </summary>
         [JsonProperty("guilds")]
-        [JsonConverter(typeof(HashListConverter<Guild>))]
-        public Hash<Snowflake, Guild> Guilds { get; set; }
+        [JsonConverter(typeof(HashListConverter<DiscordGuild>))]
+        public Hash<Snowflake, DiscordGuild> Guilds { get; set; }
 
         /// <summary>
         /// Used for resuming connections
@@ -54,6 +54,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// See <see cref="Application"/>
         /// </summary>
         [JsonProperty("application")]
-        public Application Application { get; set; }
+        public DiscordApplication Application { get; set; }
     }
 }

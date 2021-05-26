@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Activities
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object">Activity Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Activity
+    public class DiscordActivity
     {
         /// <summary>
         /// The activity's name
@@ -73,7 +73,7 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// See <see cref="Emoji"/>
         /// </summary>
         [JsonProperty("emoji")]
-        public Emoji Emoji { get; set; }
+        public DiscordEmoji Emoji { get; set; }
         
         /// <summary>
         /// Information for the current party of the player

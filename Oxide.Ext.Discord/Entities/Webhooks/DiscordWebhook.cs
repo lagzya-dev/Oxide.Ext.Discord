@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
     /// Represents <a href="https://discord.com/developers/docs/resources/webhook#webhook-object">Webhook Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Webhook
+    public class DiscordWebhook
     {
         /// <summary>
         /// The id of the webhook
@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// The guild of the channel that this webhook is following (returned for Channel Follower Webhooks)
         /// </summary>
         [JsonProperty("source_guild")]
-        public Guild SourceGuild { get; set; }
+        public DiscordGuild SourceGuild { get; set; }
         
         /// <summary>
         /// The channel that this webhook is following (returned for Channel Follower Webhooks)
@@ -93,7 +93,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="avatar">Image for the default webhook avatar</param>
         /// <param name="callback">Callback with the completed webhook</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateWebhook(DiscordClient client, Snowflake channelId, string name, string avatar = null, Action<Webhook> callback = null, Action<RestError> error = null)
+        public static void CreateWebhook(DiscordClient client, Snowflake channelId, string name, string avatar = null, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, string> data = new Dictionary<string, string>
             {
@@ -112,7 +112,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="channelId">Channel ID to get webhooks for</param>
         /// <param name="callback">Callback with a list of channel webhooks</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetChannelWebhooks(DiscordClient client, Snowflake channelId, Action<List<Webhook>> callback = null, Action<RestError> error = null)
+        public static void GetChannelWebhooks(DiscordClient client, Snowflake channelId, Action<List<DiscordWebhook>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.GET, null, callback, error);
         }
@@ -125,7 +125,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="guildId">Guild ID to get webhooks for</param>
         /// <param name="callback">Callback with the list of guild webhooks</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetGuildWebhooks(DiscordClient client, Snowflake guildId, Action<List<Webhook>> callback = null, Action<RestError> error = null)
+        public static void GetGuildWebhooks(DiscordClient client, Snowflake guildId, Action<List<DiscordWebhook>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/webhooks", RequestMethod.GET, null, callback, error);
         }
@@ -138,7 +138,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="webhookId">Webhook ID to get</param>
         /// <param name="callback">Callback with the webhook</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetWebhook(DiscordClient client, Snowflake webhookId, Action<Webhook> callback = null, Action<RestError> error = null)
+        public static void GetWebhook(DiscordClient client, Snowflake webhookId, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{webhookId}", RequestMethod.GET, null, callback, error);
         }
@@ -154,7 +154,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="webhookToken">Webhook Token</param>
         /// <param name="callback">Callback with the webhook</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetWebhookWithToken(DiscordClient client, Snowflake webhookId, string webhookToken, Action<Webhook> callback = null, Action<RestError> error = null)
+        public static void GetWebhookWithToken(DiscordClient client, Snowflake webhookId, string webhookToken, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{webhookId}/{webhookToken}", RequestMethod.GET, null, callback, error);
         }
@@ -169,7 +169,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="webhookUrl">Returns the webhook for the specified URL</param>
         /// <param name="callback">Callback with the webhook</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetWebhookWithUrl(DiscordClient client, string webhookUrl, Action<Webhook> callback = null, Action<RestError> error = null)
+        public static void GetWebhookWithUrl(DiscordClient client, string webhookUrl, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
             string[] webhookInfo = webhookUrl.Split('/');
             string id = webhookInfo[webhookInfo.Length - 2];
@@ -189,7 +189,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="channelId">Channel to move the webhook to</param>
         /// <param name="callback">Callback with the updated webhook</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyWebhook(DiscordClient client, string name = null, string avatar = null, Snowflake? channelId = null, Action<Webhook> callback = null, Action<RestError> error = null)
+        public void ModifyWebhook(DiscordClient client, string name = null, string avatar = null, Snowflake? channelId = null, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -211,7 +211,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="avatar">New avatar image</param>
         /// <param name="callback">Callback with the updated webhook</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyWebhookWithToken(DiscordClient client, string name = null, string avatar = null, Action<Webhook> callback = null, Action<RestError> error = null)
+        public void ModifyWebhookWithToken(DiscordClient client, string name = null, string avatar = null, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {

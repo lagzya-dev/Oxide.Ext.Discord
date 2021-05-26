@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
     /// Represents <a href="https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure">Invite Metadata Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class InviteMetadata : Invite
+    public class InviteMetadata : DiscordInvite
     {
         /// <summary>
         /// Number of times this invite has been used

@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// The user's activities (Required)
         /// </summary>
         [JsonProperty("activities")]
-        public List<Activity> Activities { get; set; }
+        public List<DiscordActivity> Activities { get; set; }
 
         /// <summary>
         /// Unix time (in milliseconds) of when the client went idle, or null if the client is not idle

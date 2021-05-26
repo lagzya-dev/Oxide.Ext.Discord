@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Teams
     /// Represents a <a href="https://discord.com/developers/docs/topics/teams#data-models-team-object">Team Object</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Team
+    public class DiscordTeam
     {
         /// <summary>
         /// The unique id of the team

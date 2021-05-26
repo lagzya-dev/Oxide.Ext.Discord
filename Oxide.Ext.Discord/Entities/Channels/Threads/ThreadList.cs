@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// The active threads
         /// </summary>
         [JsonProperty("threads")]
-        public List<Channel> Threads { get; set; } 
+        public List<DiscordChannel> Threads { get; set; } 
         
         /// <summary>
         /// A thread member object for each returned thread the current user has joined

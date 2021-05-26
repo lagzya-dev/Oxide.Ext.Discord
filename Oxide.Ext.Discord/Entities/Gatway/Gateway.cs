@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// Saved Gateway URL
         /// Example: wss://gateway.discord.gg/?v=8&amp;encoding=json
         /// </summary>
-        public static string WebsocketUrl { get; internal set; }
+        public static string WebsocketUrl { get; private set; }
 
         /// <summary>
         /// Returns an object with a single valid WSS URL, which the client can use for Connecting.

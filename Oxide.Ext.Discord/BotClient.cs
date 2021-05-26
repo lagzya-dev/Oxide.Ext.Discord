@@ -37,17 +37,17 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// All the servers that this bot is in
         /// </summary>
-        public readonly Hash<Snowflake, Guild> Servers = new Hash<Snowflake, Guild>();
+        public readonly Hash<Snowflake, DiscordGuild> Servers = new Hash<Snowflake, DiscordGuild>();
 
         /// <summary>
         /// All the direct messages that we have seen by channel Id
         /// </summary>
-        public readonly Hash<Snowflake, Channel> DirectMessagesByChannelId = new Hash<Snowflake, Channel>();
+        public readonly Hash<Snowflake, DiscordChannel> DirectMessagesByChannelId = new Hash<Snowflake, DiscordChannel>();
 
         /// <summary>
         /// All the direct messages that we have seen by User ID
         /// </summary>
-        public readonly Hash<Snowflake, Channel> DirectMessagesByUserId = new Hash<Snowflake, Channel>();
+        public readonly Hash<Snowflake, DiscordChannel> DirectMessagesByUserId = new Hash<Snowflake, DiscordChannel>();
 
         /// <summary>
         /// If the connection is initialized and not disconnected
@@ -57,7 +57,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Application reference for this bot
         /// </summary>
-        public Application Application { get; internal set; }
+        public DiscordApplication Application { get; internal set; }
 
         /// <summary>
         /// Bot User
@@ -204,7 +204,7 @@ namespace Oxide.Ext.Discord
                     ReadyData.Guilds = Servers.Copy();
                     client.CallHook(DiscordHooks.OnDiscordGatewayReady, ReadyData);
 
-                    foreach (Guild guild in Servers.Values)
+                    foreach (DiscordGuild guild in Servers.Values)
                     {
                         if (guild.IsAvailable)
                         {
@@ -337,7 +337,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
         /// <returns>Guild with the specified ID</returns>
-        public Guild GetGuild(Snowflake? guildId)
+        public DiscordGuild GetGuild(Snowflake? guildId)
         {
             if (guildId.HasValue && guildId.Value.IsValid())
             {
@@ -355,7 +355,7 @@ namespace Oxide.Ext.Discord
         /// <param name="channelId"></param>
         /// <param name="guildId"></param>
         /// <returns></returns>
-        public Channel GetChannel(Snowflake channelId, Snowflake? guildId)
+        public DiscordChannel GetChannel(Snowflake channelId, Snowflake? guildId)
         {
             return guildId.HasValue ? GetGuild(guildId)?.Channels[channelId] : DirectMessagesByChannelId[channelId];
         }
@@ -364,7 +364,7 @@ namespace Oxide.Ext.Discord
         /// Adds a guild to the list of servers a bot is in
         /// </summary>
         /// <param name="guild"></param>
-        public void AddGuild(Guild guild)
+        public void AddGuild(DiscordGuild guild)
         {
             Servers[guild.Id] = guild;
         }
@@ -373,9 +373,9 @@ namespace Oxide.Ext.Discord
         /// Adds a guild if it does not exist or updates the guild with
         /// </summary>
         /// <param name="guild"></param>
-        public void AddGuildOrUpdate(Guild guild)
+        public void AddGuildOrUpdate(DiscordGuild guild)
         {
-            Guild existing = Servers[guild.Id];
+            DiscordGuild existing = Servers[guild.Id];
             if (existing != null)
             {
                 Logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Updating Existing Guild {guild.Id}");
@@ -401,7 +401,7 @@ namespace Oxide.Ext.Discord
         /// Adds a Direct Message Channel to the bot cache
         /// </summary>
         /// <param name="channel">Channel to be added</param>
-        public void AddDirectChannel(Channel channel)
+        public void AddDirectChannel(DiscordChannel channel)
         {
             if (channel.Type != ChannelType.Dm)
             {
@@ -427,7 +427,7 @@ namespace Oxide.Ext.Discord
         /// <param name="id">ID of the channel to remove</param>
         public void RemoveDirectMessageChannel(Snowflake id)
         {
-            Channel existing = DirectMessagesByChannelId[id];
+            DiscordChannel existing = DirectMessagesByChannelId[id];
             if (existing != null)
             {
                 DirectMessagesByChannelId.Remove(id);

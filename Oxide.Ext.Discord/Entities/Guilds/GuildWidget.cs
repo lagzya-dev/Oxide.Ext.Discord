@@ -33,7 +33,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// List of guild channels
         /// </summary>
         [JsonProperty("channels")]
-        public List<Channel> Channels { get; set; }
+        public List<DiscordChannel> Channels { get; set; }
         
         /// <summary>
         /// List of guild members

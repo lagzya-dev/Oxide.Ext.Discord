@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a message <a href="https://discord.com/developers/docs/resources/channel#message-object">Attachment Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Attachment : ISnowflakeEntity
+    public class MessageAttachment : ISnowflakeEntity
     {
         /// <summary>
         /// Attachment ID

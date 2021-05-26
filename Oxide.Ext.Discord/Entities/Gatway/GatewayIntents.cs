@@ -126,11 +126,5 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// - TYPING_START
         /// </summary>
         DirectMessageTyping = 1 << 14,
-        
-        /// <summary>
-        /// Represents all Intents
-        /// </summary>
-        All = Guilds | GuildMembers | GuildBans | GuildEmojis | GuildIntegrations | GuildWebhooks | GuildInvites | GuildVoiceStates | GuildPresences
-            | GuildMessages | GuildMessageReactions | GuildMessageTyping | DirectMessages | DirectMessageReactions | DirectMessageTyping
     }
 }

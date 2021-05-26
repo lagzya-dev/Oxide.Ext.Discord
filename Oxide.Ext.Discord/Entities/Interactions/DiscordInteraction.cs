@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction">Interaction Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Interaction
+    public class DiscordInteraction
     {
         /// <summary>
         /// Id of the interaction

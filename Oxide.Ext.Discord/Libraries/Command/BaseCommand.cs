@@ -39,6 +39,6 @@ namespace Oxide.Ext.Discord.Libraries.Command
             });
         }
 
-        public virtual bool CanHandle(DiscordMessage message, Channel channel) => true;
+        public virtual bool CanHandle(DiscordMessage message, DiscordChannel channel) => true;
     }
 }

@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             
         }
         
-        public override bool CanHandle(DiscordMessage message, Channel channel)
+        public override bool CanHandle(DiscordMessage message, DiscordChannel channel)
         {
             return !message.GuildId.HasValue;
         }

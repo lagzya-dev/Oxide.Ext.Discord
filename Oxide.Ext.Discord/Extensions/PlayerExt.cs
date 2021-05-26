@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="embed">Embed to send</param>
-        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, Embed embed)
+        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, DiscordEmbed embed)
         {
             MessageCreate create = new MessageCreate
             {
@@ -64,7 +64,7 @@ namespace Oxide.Ext.Discord.Extensions
                 return;
             }
             
-            Channel channel = client.Bot.DirectMessagesByUserId[id.Value];
+            DiscordChannel channel = client.Bot.DirectMessagesByUserId[id.Value];
             if (channel != null)
             {
                 channel.CreateMessage(client, message);
@@ -110,7 +110,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to get Discord User for</param>
         /// <param name="guild">Guild the member is in</param>
         /// <returns>GuildMember if linked and in guild; null otherwise</returns>
-        public static GuildMember GetGuildMember(this IPlayer player, Guild guild)
+        public static GuildMember GetGuildMember(this IPlayer player, DiscordGuild guild)
         {
             return DiscordExtension.DiscordLink.GetLinkedMember(player, guild);
         }

@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#embed-object">Embed Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Embed
+    public class DiscordEmbed
     {
         /// <summary>
         /// Title of embed
@@ -103,7 +103,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         /// <param name="title">Title to add</param>
         /// <returns>This</returns>
-        public Embed AddTitle(string title)
+        public DiscordEmbed AddTitle(string title)
         {
             Title = title;
             return this;
@@ -114,7 +114,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         /// <param name="description">description to add</param>
         /// <returns>This</returns>
-        public Embed AddDescription(string description)
+        public DiscordEmbed AddDescription(string description)
         {
             Description = description;
             return this;
@@ -125,7 +125,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         /// <param name="url"></param>
         /// <returns>This</returns>
-        public Embed AddUrl(string url)
+        public DiscordEmbed AddUrl(string url)
         {
             Url = url;
             return this;
@@ -139,7 +139,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="url">Url to go to when the authors name is clicked on</param>
         /// <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
         /// <returns>This</returns>
-        public Embed AddAuthor(string name, string iconUrl = null, string url = null, string proxyIconUrl = null)
+        public DiscordEmbed AddAuthor(string name, string iconUrl = null, string url = null, string proxyIconUrl = null)
         {
             Author = new EmbedAuthor(name, iconUrl, url, proxyIconUrl);
             return this;
@@ -152,7 +152,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="iconUrl">Icon url to add in the footer. Appears to the left of the text</param>
         /// <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
         /// <returns>This</returns>
-        public Embed AddFooter(string text, string iconUrl = null, string proxyIconUrl = null)
+        public DiscordEmbed AddFooter(string text, string iconUrl = null, string proxyIconUrl = null)
         {
             Footer = new EmbedFooter(text, iconUrl, proxyIconUrl);
 
@@ -164,7 +164,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        public Embed AddColor(uint color)
+        public DiscordEmbed AddColor(uint color)
         {
             Color = new DiscordColor(color);
             return this;
@@ -176,7 +176,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="color">Color in string hex format</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Exception thrown if color is outside of range</exception>
-        public Embed AddColor(string color)
+        public DiscordEmbed AddColor(string color)
         {
             Color = new DiscordColor(uint.Parse(color.TrimStart('#'), NumberStyles.AllowHexSpecifier));
             return this;
@@ -190,7 +190,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="blue">Blue value between 0 - 255</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if red, green, or blue is outside of range</exception>
-        public Embed AddColor(int red, int green, int blue)
+        public DiscordEmbed AddColor(int red, int green, int blue)
         {
             Color = new DiscordColor(red, green, blue);
             return this;
@@ -203,7 +203,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// </summary>
         /// <param name="inline">If the field is inline</param>
         /// <returns>This</returns>
-        public Embed AddBlankField(bool inline)
+        public DiscordEmbed AddBlankField(bool inline)
         {
             Fields.Add(new EmbedField("\u200b", "\u200b", inline));
             return this;
@@ -217,7 +217,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="value"></param>
         /// <param name="inline"></param>
         /// <returns></returns>
-        public Embed AddField(string name, string value, bool inline)
+        public DiscordEmbed AddField(string name, string value, bool inline)
         {
             Fields.Add(new EmbedField(name, value, inline));
             return this;
@@ -232,7 +232,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="height">height of the image</param>
         /// <param name="proxyUrl">Backup url for the image</param>
         /// <returns></returns>
-        public Embed AddImage(string url, int? width = null, int? height = null, string proxyUrl = null)
+        public DiscordEmbed AddImage(string url, int? width = null, int? height = null, string proxyUrl = null)
         {
             Image = new EmbedImage(url, width, height, proxyUrl);
             return this;
@@ -247,7 +247,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="height">height of the image</param>
         /// <param name="proxyUrl">Backup url for the image</param>
         /// <returns></returns>
-        public Embed AddThumbnail(string url, int? width = null, int? height = null, string proxyUrl = null)
+        public DiscordEmbed AddThumbnail(string url, int? width = null, int? height = null, string proxyUrl = null)
         {
             Thumbnail = new EmbedThumbnail(url, width, height, proxyUrl);
             return this;
@@ -261,7 +261,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="height">Height of the video</param>
         /// <param name="proxyUrl">Proxy Url for the video</param>
         /// <returns></returns>
-        public Embed AddVideo(string url, int? width = null, int? height = null, string proxyUrl = null)
+        public DiscordEmbed AddVideo(string url, int? width = null, int? height = null, string proxyUrl = null)
         {
             Video = new EmbedVideo(url, width, height, proxyUrl);
             return this;
@@ -273,7 +273,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="name">Name for the provider</param>
         /// <param name="url">Url for the provider</param>
         /// <returns></returns>
-        public Embed AddProvider(string name, string url)
+        public DiscordEmbed AddProvider(string name, string url)
         {
             Provider = new EmbedProvider(name, url);
             return this;

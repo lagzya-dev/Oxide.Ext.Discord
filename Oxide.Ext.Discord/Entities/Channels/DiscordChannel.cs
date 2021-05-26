@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#channel-object">Channel Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Channel : ISnowflakeEntity
+    public class DiscordChannel : ISnowflakeEntity
     {
         /// <summary>
         /// The ID of this channel
@@ -173,7 +173,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="channel">Channel to create</param>
         /// <param name="callback">Callback with created channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateGuildChannel(DiscordClient client, Snowflake guildId, ChannelCreate channel, Action<Channel> callback = null, Action<RestError> error = null)
+        public static void CreateGuildChannel(DiscordClient client, Snowflake guildId, ChannelCreate channel, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/channels", RequestMethod.POST, channel, callback, error);
         }
@@ -187,7 +187,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="channelId">ID of the channel to get</param>
         /// <param name="callback">Callback with the channel object</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetChannel(DiscordClient client, Snowflake channelId, Action<Channel> callback = null, Action<RestError> error = null)
+        public static void GetChannel(DiscordClient client, Snowflake channelId, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{channelId}", RequestMethod.GET, null, callback, error);
         }
@@ -200,7 +200,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="update">Update to be made to the channel. All fields are optional</param>
         /// <param name="callback">Callback with the updated channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGroupDmChannel(DiscordClient client, GroupDmChannelUpdate update, Action<Channel> callback = null, Action<RestError> error = null)
+        public void ModifyGroupDmChannel(DiscordClient client, GroupDmChannelUpdate update, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}", RequestMethod.PATCH, update, callback, error);
         }
@@ -214,7 +214,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="update">Update to be made to the channel. All fields are optional</param>
         /// <param name="callback">Callback with the updated channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildChannel(DiscordClient client, GuildChannelUpdate update, Action<Channel> callback = null, Action<RestError> error = null)
+        public void ModifyGuildChannel(DiscordClient client, GuildChannelUpdate update, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}", RequestMethod.PATCH, update, callback, error);
         }
@@ -228,7 +228,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="update">Update to be made to the channel. All fields are optional</param>
         /// <param name="callback">Callback with the updated channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyThreadChannel(DiscordClient client, ThreadChannelUpdate update, Action<Channel> callback = null, Action<RestError> error = null)
+        public void ModifyThreadChannel(DiscordClient client, ThreadChannelUpdate update, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}", RequestMethod.PATCH, update, callback, error);
         }
@@ -241,7 +241,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the deleted channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteChannel(DiscordClient client, Action<Channel> callback = null, Action<RestError> error = null)
+        public void DeleteChannel(DiscordClient client, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}", RequestMethod.DELETE, null, callback, error);
         }
@@ -256,7 +256,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="request">Optional request filters</param>
         /// <param name="callback">Callback with list of channel messages</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetChannelMessages(DiscordClient client, GetChannelMessagesRequest request = null, Action<List<DiscordMessage>> callback = null, Action<RestError> error = null)
+        public void GetChannelMessages(DiscordClient client, ChannelMessagesRequest request = null, Action<List<DiscordMessage>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/messages{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
@@ -320,7 +320,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="embed">Embed to be send in the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateMessage(DiscordClient client, Embed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void CreateMessage(DiscordClient client, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             MessageCreate createMessage = new MessageCreate
             {
@@ -410,7 +410,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="callback">Callback with list of invites for the channel</param>
         /// <exception cref="Exception">Thrown when the channel type is Dm or GroupDm</exception>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetChannelInvites(DiscordClient client, Action<List<Invite>> callback = null, Action<RestError> error = null)
+        public void GetChannelInvites(DiscordClient client, Action<List<DiscordInvite>> callback = null, Action<RestError> error = null)
         {
             if (Type == ChannelType.Dm || Type == ChannelType.GroupDm)
             {
@@ -430,7 +430,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="invite">Invite to create</param>
         /// <param name="callback">Callback with the created invite</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateChannelInvite(DiscordClient client, ChannelInvite invite, Action<Invite> callback = null, Action<RestError> error = null)
+        public void CreateChannelInvite(DiscordClient client, ChannelInvite invite, Action<DiscordInvite> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/invites", RequestMethod.POST, invite, callback, error);
         }
@@ -553,7 +553,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="create">Data to use when creating the thread</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void StartThreadWithMessage(DiscordClient client, Snowflake messageId, ThreadCreate create, Action<Channel> callback = null, Action<RestError> error = null)
+        public void StartThreadWithMessage(DiscordClient client, Snowflake messageId, ThreadCreate create, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/messages/{messageId}/threads", RequestMethod.POST, create, callback, error);
         }
@@ -565,7 +565,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="create">Data to use when creating the thread</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void StartThreadWithoutMessage(DiscordClient client, ThreadCreate create, Action<Channel> callback = null, Action<RestError> error = null)
+        public void StartThreadWithoutMessage(DiscordClient client, ThreadCreate create, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/threads", RequestMethod.POST, create, callback, error);
         }
@@ -695,9 +695,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
             client.Bot.Rest.DoRequest($"/stage-instances/{Id}", RequestMethod.GET, null, callback, error);
         }
 
-        internal Channel Update(Channel channel)
+        internal DiscordChannel Update(DiscordChannel channel)
         {
-            Channel previous = (Channel)MemberwiseClone();
+            DiscordChannel previous = (DiscordChannel)MemberwiseClone();
             if (channel.Name != null)
             {
                 Name = channel.Name;

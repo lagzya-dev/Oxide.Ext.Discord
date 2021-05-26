@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Emojis
     /// Represents <a href="https://discord.com/developers/docs/resources/emoji#emoji-object">Emoji Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Emoji : EmojiUpdate, ISnowflakeEntity
+    public class DiscordEmoji : EmojiUpdate, ISnowflakeEntity
     {
         /// <summary>
         /// The ID for the emoji if it is custom; Otherwise invalid snowflake
@@ -63,9 +63,9 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         /// </summary>
         /// <param name="emoji"></param>
         /// <returns></returns>
-        public static Emoji FromCharacter(string emoji)
+        public static DiscordEmoji FromCharacter(string emoji)
         {
-            return new Emoji
+            return new DiscordEmoji
             {
                 Name = emoji
             };
@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.Entities.Emojis
             return Formatting.CustomEmojiDataString(EmojiId.Value, Name, Animated ?? false);
         }
 
-        internal void Update(Emoji emoji)
+        internal void Update(DiscordEmoji emoji)
         {
             if (emoji.Name != null)
             {

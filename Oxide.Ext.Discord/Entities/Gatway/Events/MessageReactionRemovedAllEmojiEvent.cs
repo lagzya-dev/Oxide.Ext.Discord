@@ -12,6 +12,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// <summary>
         /// Emoji that was removed from the message
         /// </summary>
-       public Emoji Emoji { get; set; }
+       public DiscordEmoji Emoji { get; set; }
     }
 }

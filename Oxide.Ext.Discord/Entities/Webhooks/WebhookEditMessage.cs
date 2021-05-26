@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// Embedded rich content (Up to 10 embeds)
         /// </summary>
         [JsonProperty("embeds")]
-        public List<Embed> Embeds { get; set; }
+        public List<DiscordEmbed> Embeds { get; set; }
         
         /// <summary>
         /// Allowed mentions for the message
@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="embed">Embed to add</param>
         /// <returns>This</returns>
         /// <exception cref="IndexOutOfRangeException">Thrown if more than 10 embeds are added in a send as that is the discord limit</exception>
-        public WebhookEditMessage AddEmbed(Embed embed)
+        public WebhookEditMessage AddEmbed(DiscordEmbed embed)
         {
             if (Embeds.Count >= 10)
             {

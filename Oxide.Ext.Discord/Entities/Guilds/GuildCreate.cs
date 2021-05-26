@@ -51,13 +51,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Roles in the guild
         /// </summary>
         [JsonProperty("roles")]
-        public List<Role> Roles { get; set; }
+        public List<DiscordRole> Roles { get; set; }
              
         /// <summary>
         /// Channels in the guild
         /// </summary>
         [JsonProperty("channels")]
-        public List<Channel> Channels { get; set; }
+        public List<DiscordChannel> Channels { get; set; }
              
         /// <summary>
         /// ID of afk channel

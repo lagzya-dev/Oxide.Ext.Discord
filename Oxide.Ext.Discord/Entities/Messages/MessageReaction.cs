@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#reaction-object">Reaction Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Reaction
+    public class MessageReaction
     {
         /// <summary>
         /// Times this emoji has been used to react
@@ -27,6 +27,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <see cref="Emoji"/>
         /// </summary>
         [JsonProperty("emoji")]
-        public Emoji Emoji { get; set; }
+        public DiscordEmoji Emoji { get; set; }
     }
 }

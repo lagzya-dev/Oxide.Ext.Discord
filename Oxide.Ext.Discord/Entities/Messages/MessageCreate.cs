@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Embed for the message
         /// </summary>
         [JsonProperty("embed")]
-        public Embed Embed { get; set; }
+        public DiscordEmbed Embed { get; set; }
         
         /// <summary>
         /// Allowed mentions for a message

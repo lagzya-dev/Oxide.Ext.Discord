@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
@@ -89,7 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="role">Role to check</param>
         /// <returns>Return true if has role; False otherwise;</returns>
         /// <exception cref="ArgumentNullException">Thrown if role is null</exception>
-        public bool HasRole(Role role)
+        public bool HasRole(DiscordRole role)
         {
             if (role == null)
             {

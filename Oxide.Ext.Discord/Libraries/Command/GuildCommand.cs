@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             _allowedChannels = allowedChannels ?? new List<Snowflake>();
         }
 
-        public override bool CanHandle(DiscordMessage message, Channel channel)
+        public override bool CanHandle(DiscordMessage message, DiscordChannel channel)
         {
             if (!message.GuildId.HasValue)
             {

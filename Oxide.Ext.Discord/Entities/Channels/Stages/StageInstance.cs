@@ -31,6 +31,18 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         public Snowflake ChannelId { get; set; }
         
         /// <summary>
+        /// The privacy level of the Stage instance
+        /// </summary>
+        [JsonProperty("privacy_level")]
+        public PrivacyLevel PrivacyLevel { get; set; }
+        
+        /// <summary>
+        /// Whether or not Stage discovery is disabled
+        /// </summary>
+        [JsonProperty("discoverable_disabled")]
+        public bool DiscoverableDisabled { get; set; }
+        
+        /// <summary>
         /// The topic of the Stage instance (1-120 characters)
         /// </summary>
         [JsonProperty("topic")]
@@ -44,14 +56,16 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to create a stage in</param>
         /// <param name="topic">The topic for the stage instance</param>
+        /// <param name="privacyLevel">Privacy level for the stage instance</param>
         /// <param name="callback">Callback with the new stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateStageInstance(DiscordClient client, Snowflake channelId, string topic, Action<StageInstance> callback = null, Action<RestError> error = null)
+        public static void CreateStageInstance(DiscordClient client, Snowflake channelId, string topic, PrivacyLevel privacyLevel = PrivacyLevel.GuildOnly, Action<StageInstance> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, string> data = new Dictionary<string, string>
             {
                 ["channel_id"] = channelId,
-                ["topic"] = topic
+                ["topic"] = topic,
+                ["privacy_level"] = ((int)privacyLevel).ToString()
             };
             
             client.Bot.Rest.DoRequest($"/stage-instances", RequestMethod.POST, data, callback, error);
@@ -69,7 +83,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         {
             client.Bot.Rest.DoRequest($"/stage-instances/{channelId}", RequestMethod.GET, null, callback, error);
         }
-        
+
         /// <summary>
         /// Updates fields of an existing Stage instance.
         /// Requires the user to be a moderator of the Stage channel.
@@ -77,15 +91,22 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="topic">The new topic for the stage instance</param>
+        /// <param name="privacyLevel">Privacy level for the stage instance</param>
         /// <param name="callback">Callback when the updated stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void UpdateStageInstance(DiscordClient client, string topic, Action<StageInstance> callback = null, Action<RestError> error = null)
+        public void UpdateStageInstance(DiscordClient client, string topic = null, PrivacyLevel? privacyLevel = null, Action<StageInstance> callback = null, Action<RestError> error = null)
         {
-            Dictionary<string, string> data = new Dictionary<string, string>
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(topic))
             {
-                ["topic"] = topic
-            };
-            
+                data["topic"] = topic;
+            }
+
+            if (privacyLevel.HasValue)
+            {
+                data["privacy_level"] = ((int)privacyLevel).ToString();
+            }
+
             client.Bot.Rest.DoRequest($"/stage-instances/{ChannelId}", RequestMethod.PATCH, data, callback, error);
         }
         

@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using System;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
@@ -9,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommand">ApplicationCommand</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ApplicationCommand : ApplicationCommandCreate
+    public class DiscordApplicationCommand : ApplicationCommandCreate
     {
         /// <summary>
         /// Unique id of the command
@@ -31,7 +30,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with updated command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditGlobalApplicationCommand(DiscordClient client, Action<ApplicationCommand> callback = null, Action<RestError> error = null)
+        public void EditGlobalApplicationCommand(DiscordClient client, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PATCH, this, callback, error);
         }

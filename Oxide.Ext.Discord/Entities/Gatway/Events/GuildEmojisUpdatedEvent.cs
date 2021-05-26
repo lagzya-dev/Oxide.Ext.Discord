@@ -21,8 +21,8 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// <summary>
         /// List of emojis
         /// </summary>
-        [JsonConverter(typeof(HashListConverter<Emoji>))]
+        [JsonConverter(typeof(HashListConverter<DiscordEmoji>))]
         [JsonProperty("emojis")]
-        public Hash<Snowflake, Emoji> Emojis { get; set; }
+        public Hash<Snowflake, DiscordEmoji> Emojis { get; set; }
     }
 }

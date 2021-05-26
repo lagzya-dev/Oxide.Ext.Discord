@@ -86,13 +86,13 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs.Change
         /// 
         /// </summary>
         [JsonProperty("$add")]
-        public List<Role> Add { get; set; }
+        public List<DiscordRole> Add { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("$remove")]
-        public List<Role> Remove { get; set; }
+        public List<DiscordRole> Remove { get; set; }
 
         /// <summary>
         /// 

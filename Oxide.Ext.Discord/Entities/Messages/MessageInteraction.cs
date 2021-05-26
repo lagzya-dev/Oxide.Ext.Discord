@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public InteractionType Type { get; set; }
         
         /// <summary>
-        /// The name of the <see cref="ApplicationCommand"/> 
+        /// The name of the <see cref="DiscordApplicationCommand"/> 
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }

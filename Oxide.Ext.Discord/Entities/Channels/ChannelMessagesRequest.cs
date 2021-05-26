@@ -1,13 +1,13 @@
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities.Channels
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#get-channel-messages">Get Channel Messages Request</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GetChannelMessagesRequest
+    public class ChannelMessagesRequest
     {
         /// <summary>
         /// Get messages around this message ID

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Interfaces;
 
@@ -86,5 +87,11 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// </summary>
         [JsonProperty("suppress")]
         public bool Suppress { get; set; }
+        
+        /// <summary>
+        /// Whether this user is muted by the current user
+        /// </summary>
+        [JsonProperty("request_to_speak_timestamp")]
+        public DateTime? RequestToSpeakTimestamp { get; set; } 
     }
 }

@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// User's current activities
         /// </summary>
         [JsonProperty("activities")]
-        public List<Activity> Activities { get; set; }
+        public List<DiscordActivity> Activities { get; set; }
         
         /// <summary>
         /// User's platform-dependent status

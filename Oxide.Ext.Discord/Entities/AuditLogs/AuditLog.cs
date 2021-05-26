@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs
         /// 
         /// </summary>
         [JsonProperty("webhooks")]
-        public List<Webhook> Webhooks { get; set; }
+        public List<DiscordWebhook> Webhooks { get; set; }
 
         /// <summary>
         /// 
@@ -42,7 +42,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs
         /// <summary>
         /// 
         /// </summary>
-        public static void GetGuildAuditLog(DiscordClient client, Guild guild, Action<AuditLog> callback = null) => GetGuildAuditLog(client, guild.Id, callback);
+        public static void GetGuildAuditLog(DiscordClient client, DiscordGuild guild, Action<AuditLog> callback = null) => GetGuildAuditLog(client, guild.Id, callback);
 
         /// <summary>
         /// 

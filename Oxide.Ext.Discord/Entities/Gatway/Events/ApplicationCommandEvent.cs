@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#application-command-extra-fields">Application Command Gateway Event</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ApplicationCommandEvent : ApplicationCommand
+    public class ApplicationCommandEvent : DiscordApplicationCommand
     {
         /// <summary>
         /// ID of the guild the command is in

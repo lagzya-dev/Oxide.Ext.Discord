@@ -19,6 +19,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// The role updated
         /// </summary>
         [JsonProperty("role")]
-        public Role Role { get; set; }
+        public DiscordRole Role { get; set; }
     }
 }

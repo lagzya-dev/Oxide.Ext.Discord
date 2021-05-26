@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     {
         /// <summary>
         /// Allows creation of instant invites
-        /// Channel Type (Text, Voice)
+        /// Channel Type (Text, Voice, Stage)
         /// </summary>
         [Description("CREATE_INSTANT_INVITE")]
         CreateInstantInvite = 1 << 0,
@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// Allows management and editing of channels
-        /// Channel Type (Text, Voice)
+        /// Channel Type (Text, Voice, Stage)
         /// </summary>
         [Description("MANAGE_CHANNELS")]
         ManageChannels = 1 << 4,
@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// Allows guild members to view a channel, which includes reading messages in text channels
-        /// Channel Type (Text, Voice)
+        /// Channel Type (Text, Voice, Stage)
         /// </summary>
         [Description("VIEW_CHANNEL")]
         ViewChannel = 1 << 10,
@@ -93,7 +93,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Channel Type (Text)
         /// </summary>
         [Description("SEND_TTS_MESSAGES")]
-        SendTTSMessages = 1 << 12,
+        SendTtsMessages = 1 << 12,
         
         /// <summary>
         /// Allows for deletion of other users messages
@@ -146,7 +146,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// Allows for joining of a voice channel
-        /// Channel Type (Voice)
+        /// Channel Type (Voice, Stage)
         /// </summary>
         [Description("CONNECT")]
         Connect = 1 << 20,
@@ -160,21 +160,21 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// Allows for muting members in a voice channel
-        /// Channel Type (Voice)
+        /// Channel Type (Voice, Stage)
         /// </summary>
         [Description("MUTE_MEMBERS")]
         MuteMembers = 1 << 22,
         
         /// <summary>
         /// Allows for deafening of members in a voice channel
-        /// Channel Type (Voice)
+        /// Channel Type (Voice, Stage)
         /// </summary>
         [Description("DEAFEN_MEMBERS")]
         DeafanMembers = 1 << 23,
         
         /// <summary>
         /// Allows for moving of members between voice channels
-        /// Channel Type (Voice)
+        /// Channel Type (Voice, Stage)
         /// </summary>
         [Description("MOVE_MEMBERS")]
         MoveMembers = 1 << 24,
@@ -200,7 +200,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// Allows management and editing of roles
-        /// Channel Type (Text, Voice)
+        /// Channel Type (Text, Voice, Stage)
         /// </summary>
         [Description("MANAGE_ROLES")]
         ManageRoles = 1 << 28,
@@ -223,5 +223,34 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [Description("USE_SLASH_COMMANDS")]
         UseSlashCommands = 1ul << 31,
+        
+        /// <summary>
+        /// Allows for requesting to speak in stage channels.
+        /// Channel Type (Stage)
+        /// (This permission is under active development and may be changed or removed.)
+        /// </summary>
+        [Description("REQUEST_TO_SPEAK")]
+        RequestToSpeak = 1ul << 32,
+        
+        /// <summary>
+        /// Allows for deleting and archiving threads, and viewing all private threads
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("MANAGE_THREADS")]
+        ManageThreads  = 1ul << 34,
+        
+        /// <summary>
+        /// Allows for creating and participating in threads
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("USE_PUBLIC_THREADS")]
+        UsePublicThreads  = 1ul << 35,
+        
+        /// <summary>
+        /// Allows for creating and participating in private threads
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("USE_PRIVATE_THREADS")]
+        UsePrivateThreads  = 1ul << 36,
     }
 }

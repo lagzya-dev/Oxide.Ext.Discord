@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Roles
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Role : ISnowflakeEntity
+    public class DiscordRole : ISnowflakeEntity
     {
         #region Discord Fields
         /// <summary>
@@ -88,9 +88,9 @@ namespace Oxide.Ext.Discord.Entities.Roles
         #endregion
 
         #region Entity Update
-        internal Role UpdateRole(Role role)
+        internal DiscordRole UpdateRole(DiscordRole role)
         {
-            Role previous = (Role)MemberwiseClone();
+            DiscordRole previous = (DiscordRole)MemberwiseClone();
             if (role.Name != null)
             {
                 Name = role.Name;

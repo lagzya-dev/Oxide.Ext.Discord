@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// Supports up to 10 embeds
         /// </summary>
         [JsonProperty("embeds")]
-        public List<Embed> Embeds { get; set; } 
+        public List<DiscordEmbed> Embeds { get; set; } 
         
         /// <summary>
         /// Allowed mentions 

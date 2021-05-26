@@ -215,7 +215,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <param name="guild">Guild the member is in</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
         [LibraryFunction(nameof(GetLinkedMember))]
-        public GuildMember GetLinkedMember(string steamId, Guild guild)
+        public GuildMember GetLinkedMember(string steamId, DiscordGuild guild)
         {
             Snowflake? discordId = GetDiscordId(steamId);
             if (!discordId.HasValue || !guild.IsAvailable)
@@ -232,7 +232,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <param name="player">Player to get the Discord User for</param>
         /// <param name="guild">Guild the member is in</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        public GuildMember GetLinkedMember(IPlayer player, Guild guild)
+        public GuildMember GetLinkedMember(IPlayer player, DiscordGuild guild)
         {
             return GetLinkedMember(player.Id, guild);
         }

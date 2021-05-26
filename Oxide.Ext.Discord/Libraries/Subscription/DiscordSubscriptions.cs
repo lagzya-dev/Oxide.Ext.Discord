@@ -158,7 +158,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             }
         }
         
-        internal void HandleMessage(DiscordMessage message, Channel channel)
+        internal void HandleMessage(DiscordMessage message, DiscordChannel channel)
         {
             foreach (Hash<Snowflake, DiscordSubscription> pluginSubs in _subscriptions.Values)
             {

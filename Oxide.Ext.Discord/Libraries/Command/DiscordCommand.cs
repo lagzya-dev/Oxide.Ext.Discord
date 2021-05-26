@@ -295,7 +295,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="name"></param>
         /// <param name="args"></param>
         /// <param name="message"></param>
-        internal bool HandleDirectMessageCommand(BotClient client, DiscordMessage message, Channel channel, string name, string[] args)
+        internal bool HandleDirectMessageCommand(BotClient client, DiscordMessage message, DiscordChannel channel, string name, string[] args)
         {
             DirectMessageCommand command = DirectMessageCommands[name];
             if (command == null || !command.CanHandle(message, channel))
@@ -327,7 +327,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="name"></param>
         /// <param name="args"></param>
         /// <param name="message"></param>
-        internal bool HandleGuildCommand(BotClient client, DiscordMessage message, Channel channel, string name, string[] args)
+        internal bool HandleGuildCommand(BotClient client, DiscordMessage message, DiscordChannel channel, string name, string[] args)
         {
             GuildCommand command = GuildCommands[name];
             if (command == null || !command.CanHandle(message, channel))

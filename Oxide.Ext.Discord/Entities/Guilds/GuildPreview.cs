@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Custom guild emojis
         /// </summary>
         [JsonProperty("emojis")]
-        public List<Emoji> Emojis { get; set; }
+        public List<DiscordEmoji> Emojis { get; set; }
         
         /// <summary>
         /// Enabled guild features

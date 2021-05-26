@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
     /// Represents <a href="https://discord.com/developers/docs/topics/oauth2#application-object">Application Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Application
+    public class DiscordApplication
     {
         /// <summary>
         /// The id of the app
@@ -95,7 +95,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// If the application belongs to a team, this will be a list of the members of that team
         /// </summary>
         [JsonProperty("team")]
-        public Team Team { get; set; }
+        public DiscordTeam Team { get; set; }
         
         /// <summary>
         /// If this application is a game sold on Discord, this field will be the guild to which it has been linked
@@ -140,7 +140,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with list of application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGlobalApplicationCommands(DiscordClient client, Action<List<ApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGlobalApplicationCommands(DiscordClient client, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.GET, null, callback, error);
         }
@@ -155,7 +155,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGlobalApplicationCommand(DiscordClient client, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGlobalApplicationCommand(DiscordClient client, ApplicationCommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.POST, create, callback, error);
         }
@@ -169,7 +169,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="update">Command Update</param>
         /// <param name="callback">Callback with updated command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditGlobalApplicationCommand(DiscordClient client, ApplicationCommandCreate update, Action<ApplicationCommand> callback = null, Action<RestError> error = null)
+        public void EditGlobalApplicationCommand(DiscordClient client, ApplicationCommandCreate update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PATCH, update, callback, error);
         }
@@ -195,7 +195,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="guildId">ID of the guild to get commands for</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildApplicationCommands(DiscordClient client, Snowflake guildId, Action<List<ApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGuildApplicationCommands(DiscordClient client, Snowflake guildId, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.GET, null, callback, error);
         }
@@ -208,7 +208,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="guild">Guild to get commands for</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildApplicationCommands(DiscordClient client, Guild guild, Action<List<ApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGuildApplicationCommands(DiscordClient client, DiscordGuild guild, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
             GetGuildApplicationCommands(client, guild.Id, callback, error);
         }
@@ -223,7 +223,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildApplicationCommands(DiscordClient client, Snowflake guildId, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGuildApplicationCommands(DiscordClient client, Snowflake guildId, ApplicationCommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.POST, create, callback, error);
         }
@@ -238,7 +238,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildApplicationCommands(DiscordClient client, Guild guild, ApplicationCommandCreate create, Action<ApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGuildApplicationCommands(DiscordClient client, DiscordGuild guild, ApplicationCommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             CreateGuildApplicationCommands(client, guild.Id, create, callback, error);
         }
@@ -253,7 +253,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="update">Command update</param>
         /// <param name="callback">Callback with updated command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditGuildApplicationCommands(DiscordClient client, Snowflake guildId, ApplicationCommand update, Action<ApplicationCommand> callback = null, Action<RestError> error = null)
+        public void EditGuildApplicationCommands(DiscordClient client, Snowflake guildId, DiscordApplicationCommand update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{update.Id}", RequestMethod.PATCH, update, callback, error);
         }
@@ -268,7 +268,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="update">Command update</param>
         /// <param name="callback">Callback with updated command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditGuildApplicationCommands(DiscordClient client, Guild guild, ApplicationCommand update, Action<ApplicationCommand> callback = null, Action<RestError> error = null)
+        public void EditGuildApplicationCommands(DiscordClient client, DiscordGuild guild, DiscordApplicationCommand update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             EditGuildApplicationCommands(client, guild.Id, update, callback, error);
         }
@@ -296,7 +296,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="delete">Command to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildApplicationCommands(DiscordClient client, Guild guild, ApplicationCommand delete, Action callback = null, Action<RestError> error = null)
+        public void DeleteGuildApplicationCommands(DiscordClient client, DiscordGuild guild, DiscordApplicationCommand delete, Action callback = null, Action<RestError> error = null)
         {
             DeleteGuildApplicationCommands(client, guild.Id, delete.Id, callback, error);
         }
@@ -324,7 +324,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="message">Updated message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditOriginalInteractionResponse(DiscordClient client, Interaction interaction, WebhookEditMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null) => EditOriginalInteractionResponse(client, interaction.Token, message, callback, error);
+        public void EditOriginalInteractionResponse(DiscordClient client, DiscordInteraction interaction, WebhookEditMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null) => EditOriginalInteractionResponse(client, interaction.Token, message, callback, error);
         
         /// <summary>
         /// Deletes the initial Interaction response
@@ -347,7 +347,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="interaction">Interaction to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteOriginalInteractionResponse(DiscordClient client, Interaction interaction, Action callback = null, Action<RestError> error = null) => DeleteOriginalInteractionResponse(client, interaction.Token, callback, error);
+        public void DeleteOriginalInteractionResponse(DiscordClient client, DiscordInteraction interaction, Action callback = null, Action<RestError> error = null) => DeleteOriginalInteractionResponse(client, interaction.Token, callback, error);
         
         /// <summary>
         /// Create a followup message for an Interaction
@@ -372,7 +372,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="message">Message to follow up with</param>
         /// <param name="callback">Callback with the message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateFollowUpMessage(DiscordClient client, Interaction interaction, WebhookCreateMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null) => CreateFollowUpMessage(client, interaction.Token, message, callback, error);
+        public void CreateFollowUpMessage(DiscordClient client, DiscordInteraction interaction, WebhookCreateMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null) => CreateFollowUpMessage(client, interaction.Token, message, callback, error);
         
         /// <summary>
         /// Edits a followup message for an Interaction

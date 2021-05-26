@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         ///	All active threads in the given channels that the current user can access
         /// </summary>
         [JsonProperty("threads")]
-        public List<Channel> Threads { get; set; }
+        public List<DiscordChannel> Threads { get; set; }
         
         /// <summary>
         ///	A ll thread member objects from the synced threads for the current user, indicating which threads the current user has been added to

@@ -182,7 +182,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="embed">Embed to be send in the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void SendDirectMessage(DiscordClient client, Embed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void SendDirectMessage(DiscordClient client, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, embed, callback, error); });
         }
@@ -224,7 +224,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="request">Request parameters for filtering guilds</param>
         /// <param name="callback">Callback with the list of guilds</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetCurrentUserGuilds(DiscordClient client, UserGuildsRequest request = null, Action<List<Guild>> callback = null, Action<RestError> error = null)
+        public void GetCurrentUserGuilds(DiscordClient client, UserGuildsRequest request = null, Action<List<DiscordGuild>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/users/@me/guilds{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
@@ -237,7 +237,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="guild">Guild to leave</param>
         /// <param name="callback">callback when the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void LeaveGuild(DiscordClient client, Guild guild, Action callback = null, Action<RestError> error = null) => LeaveGuild(client, guild.Id, callback, error);
+        public void LeaveGuild(DiscordClient client, DiscordGuild guild, Action callback = null, Action<RestError> error = null) => LeaveGuild(client, guild.Id, callback, error);
 
         /// <summary>
         /// Leave the guild that the currently logged in user is in
@@ -259,7 +259,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the direct message channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateDirectMessageChannel(DiscordClient client, Action<Channel> callback, Action<RestError> error = null) => CreateDirectMessageChannel(client, Id, callback, error);
+        public void CreateDirectMessageChannel(DiscordClient client, Action<DiscordChannel> callback, Action<RestError> error = null) => CreateDirectMessageChannel(client, Id, callback, error);
 
         /// <summary>
         /// Create a Direct Message to the current User
@@ -269,7 +269,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="userId">User ID to send the message to</param>
         /// <param name="callback">Callback with the direct message channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateDirectMessageChannel(DiscordClient client, Snowflake userId, Action<Channel> callback, Action<RestError> error = null)
+        public static void CreateDirectMessageChannel(DiscordClient client, Snowflake userId, Action<DiscordChannel> callback, Action<RestError> error = null)
         {
             if (userId == client.Bot.Bot.Id)
             {
@@ -277,7 +277,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 return;
             }
 
-            Channel channel = client.Bot.DirectMessagesByUserId[userId];
+            DiscordChannel channel = client.Bot.DirectMessagesByUserId[userId];
             if (channel != null)
             {
                 callback.Invoke(channel);
@@ -288,7 +288,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["recipient_id"] = userId
             };
 
-            client.Bot.Rest.DoRequest<Channel>("/users/@me/channels", RequestMethod.POST, data, newChannel =>
+            client.Bot.Rest.DoRequest<DiscordChannel>("/users/@me/channels", RequestMethod.POST, data, newChannel =>
             {
                 client.Bot.AddDirectChannel(newChannel);
                 callback?.Invoke(newChannel);
@@ -303,7 +303,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="nicks">a list of user ids to their respective nicknames</param>
         /// <param name="callback">Callback with the direct message channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGroupDm(DiscordClient client, string[] accessTokens, Hash<Snowflake, string> nicks, Action<Channel> callback = null, Action<RestError> error = null)
+        public void CreateGroupDm(DiscordClient client, string[] accessTokens, Hash<Snowflake, string> nicks, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>()
             {
@@ -335,7 +335,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="accessToken">Users access token</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GroupDmAddRecipient(DiscordClient client, Channel channel, string accessToken, Action callback = null, Action<RestError> error = null) => GroupDmAddRecipient(client, channel.Id, accessToken, Username, callback, error);
+        public void GroupDmAddRecipient(DiscordClient client, DiscordChannel channel, string accessToken, Action callback = null, Action<RestError> error = null) => GroupDmAddRecipient(client, channel.Id, accessToken, Username, callback, error);
 
         /// <summary>
         /// Adds a recipient to a Group DM using their access token
@@ -365,7 +365,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="channel">Channel to remove recipient from</param>
         /// <param name="callback">callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GroupDmRemoveRecipient(DiscordClient client, Channel channel, Action callback = null, Action<RestError> error = null) => GroupDmRemoveRecipient(client, channel.Id, callback, error);
+        public void GroupDmRemoveRecipient(DiscordClient client, DiscordChannel channel, Action callback = null, Action<RestError> error = null) => GroupDmRemoveRecipient(client, channel.Id, callback, error);
 
         /// <summary>
         /// Removes a recipient from a Group DM

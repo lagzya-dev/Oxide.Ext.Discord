@@ -44,6 +44,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// The emoji used to react
         /// </summary>
         [JsonProperty("emoji")]
-        public Emoji Emoji { get; set; }
+        public DiscordEmoji Emoji { get; set; }
     }
 }
