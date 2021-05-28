@@ -155,7 +155,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGlobalApplicationCommand(DiscordClient client, ApplicationCommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGlobalApplicationCommand(DiscordClient client, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.POST, create, callback, error);
         }
@@ -169,7 +169,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="update">Command Update</param>
         /// <param name="callback">Callback with updated command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditGlobalApplicationCommand(DiscordClient client, ApplicationCommandCreate update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void EditGlobalApplicationCommand(DiscordClient client, CommandCreate update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PATCH, update, callback, error);
         }
@@ -223,7 +223,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildApplicationCommands(DiscordClient client, Snowflake guildId, ApplicationCommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGuildApplicationCommands(DiscordClient client, Snowflake guildId, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.POST, create, callback, error);
         }
@@ -238,7 +238,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildApplicationCommands(DiscordClient client, DiscordGuild guild, ApplicationCommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGuildApplicationCommands(DiscordClient client, DiscordGuild guild, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             CreateGuildApplicationCommands(client, guild.Id, create, callback, error);
         }
@@ -300,108 +300,6 @@ namespace Oxide.Ext.Discord.Entities.Applications
         {
             DeleteGuildApplicationCommands(client, guild.Id, delete.Id, callback, error);
         }
-        
-        /// <summary>
-        /// Edits the initial Interaction response
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response">Edit Original Interaction Response</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="interactionToken">Interaction token to edit</param>
-        /// <param name="message">Updated message</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditOriginalInteractionResponse(DiscordClient client, string interactionToken, WebhookEditMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/@original", RequestMethod.PATCH, message, callback, error);
-        }
-
-        /// <summary>
-        /// Edits the initial Interaction response
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response">Edit Original Interaction Response</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="interaction">Interaction to edit</param>
-        /// <param name="message">Updated message</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditOriginalInteractionResponse(DiscordClient client, DiscordInteraction interaction, WebhookEditMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null) => EditOriginalInteractionResponse(client, interaction.Token, message, callback, error);
-        
-        /// <summary>
-        /// Deletes the initial Interaction response
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-original-interaction-response">Delete Original Interaction Response</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="interactionToken">Interaction token to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteOriginalInteractionResponse(DiscordClient client, string interactionToken, Action callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/@original", RequestMethod.DELETE, null, callback, error);
-        }
-
-        /// <summary>
-        /// Deletes the initial Interaction response
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-original-interaction-response">Delete Original Interaction Response</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="interaction">Interaction to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteOriginalInteractionResponse(DiscordClient client, DiscordInteraction interaction, Action callback = null, Action<RestError> error = null) => DeleteOriginalInteractionResponse(client, interaction.Token, callback, error);
-        
-        /// <summary>
-        /// Create a followup message for an Interaction
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-followup-message">Create Followup Message</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="interactionToken">Interaction token to follow up</param>
-        /// <param name="message">Message to follow up with</param>
-        /// <param name="callback">Callback with the message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateFollowUpMessage(DiscordClient client, string interactionToken, WebhookCreateMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}", RequestMethod.POST, message, callback, error);
-        }
-
-        /// <summary>
-        /// Create a followup message for an Interaction
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-followup-message">Create Followup Message</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="interaction">Interaction to follow up</param>
-        /// <param name="message">Message to follow up with</param>
-        /// <param name="callback">Callback with the message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateFollowUpMessage(DiscordClient client, DiscordInteraction interaction, WebhookCreateMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null) => CreateFollowUpMessage(client, interaction.Token, message, callback, error);
-        
-        /// <summary>
-        /// Edits a followup message for an Interaction
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-followup-message">Edit Followup Message</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="interactionToken">Interaction token of the follow up message</param>
-        /// <param name="messageId">Message ID of the follow up message</param>
-        /// <param name="edit">Updated message</param>
-        /// <param name="callback">Callback with the updated message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditFollowUpMessage(DiscordClient client, string interactionToken, Snowflake messageId, WebhookEditMessage edit, Action<DiscordMessage> callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.PATCH, edit, callback, error);
-        }
-
-        /// <summary>
-        /// Deletes a followup message for an Interaction
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-followup-message">Delete Followup Message</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="interactionToken">Interaction token of the message to delete</param>
-        /// <param name="messageId">Message ID to delete</param>
-        /// <param name="callback">Callback with the updated message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteFollowUpMessage(DiscordClient client, string interactionToken, Snowflake messageId, Action callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{interactionToken}/messages/{messageId}", RequestMethod.DELETE, null, callback, error);
-        }
 
         /// <summary>
         /// Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects.
@@ -410,7 +308,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="guildId">Guild ID to get the permissions from</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Action<List<GuildApplicationCommandPermissions>> callback = null, Action<RestError> error = null)
+        public void GetGuildApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Action<List<GuildCommandPermissions>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.GET, null, callback, error);
         }
@@ -423,7 +321,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="commandId">ID of the command to get permissions for</param>
         /// <param name="callback">Callback with the permissions for the command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<GuildApplicationCommandPermissions> callback = null, Action<RestError> error = null)
+        public void GetApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<GuildCommandPermissions> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}/permissions", RequestMethod.GET, null, callback, error);
         }
@@ -439,7 +337,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="permissions">List of permissions for the command</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, List<GuildApplicationCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        public void EditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -458,7 +356,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="permissions">List of permissions for the commands</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void BatchEditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildApplicationCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        public void BatchEditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.PUT, permissions, callback, error);
         }

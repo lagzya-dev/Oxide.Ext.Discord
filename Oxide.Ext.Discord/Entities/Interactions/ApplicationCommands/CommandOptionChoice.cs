@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// If you specify choices for an option, they are the only valid values for a user to pick
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ApplicationCommandOptionChoice
+    public class CommandOptionChoice
     {
         /// <summary>
         /// Choice name (1-100 characters)

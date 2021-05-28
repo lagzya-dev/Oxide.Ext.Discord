@@ -7,14 +7,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption">ApplicationCommandOption</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ApplicationCommandOption
+    public class CommandOption
     {
         /// <summary>
         /// They type of command option
-        /// See <see cref="ApplicationCommandOptionType"/>
+        /// See <see cref="CommandOptionType"/>
         /// </summary>
         [JsonProperty("type")]
-        public ApplicationCommandOptionType Type { get; set; }
+        public CommandOptionType Type { get; set; }
         
         /// <summary>
         /// Name of the command option (1-32 characters)
@@ -36,16 +36,16 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         
         /// <summary>
         /// Choices for string and int types for the user to pick from
-        /// See <see cref="ApplicationCommandOption"/>
+        /// See <see cref="CommandOption"/>
         /// </summary>
         [JsonProperty("choices")]
-        public List<ApplicationCommandOptionChoice> Choices { get; set; }
+        public List<CommandOptionChoice> Choices { get; set; }
         
         /// <summary>
         /// If the option is a subcommand or subcommand group type, this nested options will be the parameters
-        /// See <see cref="ApplicationCommandOption"/>
+        /// See <see cref="CommandOption"/>
         /// </summary>
         [JsonProperty("options")]
-        public List<ApplicationCommandOption> Options { get; set; }
+        public List<CommandOption> Options { get; set; }
     }
 }

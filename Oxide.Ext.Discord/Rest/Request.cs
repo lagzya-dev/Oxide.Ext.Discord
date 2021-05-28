@@ -77,6 +77,7 @@ namespace Oxide.Ext.Discord.Rest
         
         private readonly ILogger _logger;
         private RestError _lastError;
+        private bool _success;
 
         /// <summary>
         /// Creates a new request
@@ -132,7 +133,8 @@ namespace Oxide.Ext.Discord.Rest
                         ParseResponse(response);
                     }
                 }
-                
+
+                _success = true;
                 Callback?.Invoke(Response);
                 Close();
             }
@@ -193,7 +195,7 @@ namespace Oxide.Ext.Discord.Rest
             _retries += 1;
             if (remove || _retries >= 3)
             {
-                if (_retries >= 3)
+                if (!_success)
                 {
                     try
                     {
@@ -204,7 +206,7 @@ namespace Oxide.Ext.Discord.Rest
                         _logger.Exception($"An exception occured during OnError callback for request: [{Method.ToString()}] {RequestUrl}", ex);
                     }
                 }
-                
+
                 Bucket.DequeueRequest(this);
             }
             else

@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command-json-params">Application Command Create</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ApplicationCommandCreate
+    public class CommandCreate
     {
         /// <summary>
         /// 1-32 lowercase character name matching ^[\w-]{1,32}$
@@ -23,10 +23,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         
         /// <summary>
         /// The parameters for the command
-        /// See <see cref="ApplicationCommandOption"/>
+        /// See <see cref="CommandOption"/>
         /// </summary>
         [JsonProperty("options")]
-        public List<ApplicationCommandOption> Options { get; set; }
+        public List<CommandOption> Options { get; set; }
         
         /// <summary>
         /// Whether the command is enabled by default when the app is added to a guild

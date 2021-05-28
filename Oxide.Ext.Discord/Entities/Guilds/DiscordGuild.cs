@@ -1249,10 +1249,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         /// <summary>
         /// Updates the current user's voice state.
+        /// See <a href="https://discord.com/developers/docs/resources/guild#update-current-user-voice-state">Update Current User Voice State</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID of the stage channel</param>
         /// <param name="suppress">Changes the users suppressed state</param>
+        /// <param name="requestToSpeak">Sets the user's request to speak</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         public void UpdateCurrentUserVoiceState(DiscordClient client, Snowflake channelId, bool? suppress = null, DateTime? requestToSpeak = null, Action callback = null, Action<RestError> error = null)
@@ -1277,6 +1279,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         
         /// <summary>
         /// Updates another user's voice state.
+        /// See <a href="https://discord.com/developers/docs/resources/guild#update-user-voice-statee">Update Users Voice State</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID of the users state to update</param>

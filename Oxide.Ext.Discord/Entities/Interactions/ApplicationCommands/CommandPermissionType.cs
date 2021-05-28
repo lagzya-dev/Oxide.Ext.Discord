@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandpermissiontype">ApplicationCommandPermissionType</a>
     /// </summary>
-    public enum ApplicationCommandPermissionType
+    public enum CommandPermissionType
     {
         /// <summary>
         /// This permissions uses Role ID

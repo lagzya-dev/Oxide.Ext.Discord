@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommand">ApplicationCommand</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordApplicationCommand : ApplicationCommandCreate
+    public class DiscordApplicationCommand : CommandCreate
     {
         /// <summary>
         /// Unique id of the command

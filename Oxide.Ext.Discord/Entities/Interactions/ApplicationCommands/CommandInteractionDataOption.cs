@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption">Application Command Interaction Data Option</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ApplicationCommandInteractionDataOption
+    public class CommandInteractionDataOption
     {
         /// <summary>
         /// The name of the parameter
@@ -23,16 +23,16 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         
         /// <summary>
         /// The value of the pair
-        /// See <see cref="ApplicationCommandOptionType"/>
+        /// See <see cref="CommandOptionType"/>
         /// </summary>
         [JsonProperty("value")]
-        public ApplicationCommandOptionType Value { get; set; }
+        public CommandOptionType Value { get; set; }
         
         /// <summary>
         /// Present if this option is a group or subcommand
-        /// See <see cref="ApplicationCommandInteractionDataOption"/>
+        /// See <see cref="CommandInteractionDataOption"/>
         /// </summary>
         [JsonProperty("options")]
-        public List<ApplicationCommandInteractionDataOption> Options { get; set; }
+        public List<CommandInteractionDataOption> Options { get; set; }
     }
 }

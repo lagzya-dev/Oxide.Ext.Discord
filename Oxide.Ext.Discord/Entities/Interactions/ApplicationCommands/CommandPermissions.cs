@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#guildapplicationcommandpermissions">ApplicationCommandPermissions</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ApplicationCommandPermissions
+    public class CommandPermissions
     {
         /// <summary>
         /// The ID of the role or user
@@ -16,10 +16,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         
         /// <summary>
         /// The type of permissions
-        /// <see cref="ApplicationCommandPermissionType"/>
+        /// <see cref="CommandPermissionType"/>
         /// </summary>
         [JsonProperty("type")]
-        public ApplicationCommandPermissionType Type { get; set; }
+        public CommandPermissionType Type { get; set; }
         
         /// <summary>
         /// True to allow, False to disallow

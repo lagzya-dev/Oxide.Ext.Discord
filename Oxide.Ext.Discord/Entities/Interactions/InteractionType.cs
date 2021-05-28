@@ -13,6 +13,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// The interaction is a user using a command
         /// </summary>
-        ApplicationCommand = 2
+        ApplicationCommand = 2,
+        
+        /// <summary>
+        /// The interaction is a message component
+        /// </summary>
+        MessageComponent = 3
     }
 }

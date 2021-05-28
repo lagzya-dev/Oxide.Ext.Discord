@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype">ApplicationCommandOptionType</a>
     /// </summary>
-    public enum ApplicationCommandOptionType
+    public enum CommandOptionType
     {
         /// <summary>
         /// The command option is a sub command

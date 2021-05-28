@@ -19,6 +19,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// An optional response message
         /// </summary>
         [JsonProperty("data")]
-        public ApplicationCommandCallbackData Data { get; set; }
+        public CommandCallbackData Data { get; set; }
     }
 }

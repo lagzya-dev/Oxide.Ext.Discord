@@ -6,9 +6,8 @@ using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
@@ -216,6 +215,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("thread")]
         public DiscordChannel Thread { get; set; }
+        
+        /// <summary>
+        /// Sent if the message contains components like buttons, action rows, or other interactive components
+        /// </summary>
+        [JsonProperty("components")]
+        public List<ActionRowComponent> Components { get; set; }
         
         /// <summary>
         /// Post a message to a guild text or DM channel.

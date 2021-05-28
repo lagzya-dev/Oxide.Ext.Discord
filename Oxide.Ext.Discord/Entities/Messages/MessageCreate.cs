@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 
@@ -46,5 +48,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("message_reference")]
         public MessageReference MessageReference { get; set; }
+        
+        /// <summary>
+        /// Used to create message components on a message
+        /// </summary>
+        [JsonProperty("components")]
+        public List<ActionRowComponent> Components { get; set; }
     }
 }
