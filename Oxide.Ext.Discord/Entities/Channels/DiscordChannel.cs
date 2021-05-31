@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
@@ -162,6 +163,11 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Note: This is not sent by discord but maintained by socket events
         /// </summary>
         public Hash<Snowflake, ThreadMember> ThreadMembers { get; set; }
+
+        /// <summary>
+        /// Returns a string to mention this channel in a message
+        /// </summary>
+        public string Mention => DiscordFormatting.MentionChannel(Id);
 
         /// <summary>
         /// Create a new channel object for the guild.

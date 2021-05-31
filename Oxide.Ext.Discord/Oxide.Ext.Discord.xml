@@ -2759,6 +2759,11 @@
             Note: This is not sent by discord but maintained by socket events
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Mention">
+            <summary>
+            Returns a string to mention this channel in a message
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.ChannelCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.DiscordChannel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a new channel object for the guild.
@@ -6714,7 +6719,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCallbackData.Flags">
             <summary>
             Callback data flags
-            Set to 64 to make your response ephemeral
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate">
@@ -9032,6 +9036,11 @@
             The tags this role has
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Mention">
+            <summary>
+            Returns a string to mention this role in a message
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordRole.HasPermission(Oxide.Ext.Discord.Entities.Channels.PermissionFlags)">
             <summary>
             Returns if the role has the specified permission
@@ -9467,6 +9476,16 @@
             <summary>
             The public flags on a user's account
             <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Mention">
+            <summary>
+            Returns a string to mention this users nickname in a message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.MentionUser">
+            <summary>
+            Returns a string to mention this users username in a message
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetDefaultAvatarUrl">
@@ -10634,40 +10653,40 @@
             <param name="objectType"></param>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Helpers.Formatting">
+        <member name="T:Oxide.Ext.Discord.Helpers.DiscordFormatting">
             <summary>
             Represents <a href="https://discord.com/developers/docs/reference#message-formatting-formats">Message text formatting options</a>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.MentionUser(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionUser(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Mention the user with the given user ID
             </summary>
             <param name="userId">User ID to mention</param>
             <returns>Mention user formatted string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.MentionUserNickname(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionUserNickname(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Mention the user displaying their user name
             </summary>
             <param name="userId">User ID to mention</param>
             <returns>Ping user formatted string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.MentionChannel(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionChannel(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Mention the the channel with the given ID
             </summary>
             <param name="channelId">Channel ID to mention</param>
             <returns>Mention channel formatted string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.MentionRole(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionRole(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Mention the the role with the given ID
             </summary>
             <param name="roleId">Role ID to mention</param>
             <returns>Mention role formatted string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.CustomEmojiMessageString(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CustomEmojiMessageString(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Boolean)">
             <summary>
             Returns formatting string for custom emoji to be used in a message
             </summary>
@@ -10676,7 +10695,7 @@
             <param name="animated">If the emoji is animated</param>
             <returns>Custom emoji formatted string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.CustomEmojiDataString(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CustomEmojiDataString(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Boolean)">
             <summary>
             Returns formatting string for custom emoji to be used in a url
             </summary>
@@ -10685,77 +10704,77 @@
             <param name="animated">If the emoji is animated</param>
             <returns>Custom emoji formatted string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.Italics(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Italics(System.String)">
             <summary>
             Will display the message in italics
             </summary>
             <param name="message">Message to make italics</param>
             <returns>Italics formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.Bold(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Bold(System.String)">
             <summary>
             Will display the message in bold
             </summary>
             <param name="message">Message to make bold</param>
             <returns>Bold formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.ItalicsBold(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.ItalicsBold(System.String)">
             <summary>
             Will display the message in italics and bold
             </summary>
             <param name="message">Message to make italics and bold</param>
             <returns>Bold and Italics formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.Underline(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Underline(System.String)">
             <summary>
             Will display the message in underline
             </summary>
             <param name="message">Message to make underline</param>
             <returns>Underline formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.UnderlineItalics(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnderlineItalics(System.String)">
             <summary>
             Will display the message in underline and italics
             </summary>
             <param name="message">Message to make underline and italics</param>
             <returns>Underline and Italics formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.UnderlineBold(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnderlineBold(System.String)">
             <summary>
             Will display the message in underline and bold
             </summary>
             <param name="message">Message to make underline and bold</param>
             <returns>Underline and bold formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.UnderlineBoldItalics(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnderlineBoldItalics(System.String)">
             <summary>
             Will display the message in underline and bold and italics
             </summary>
             <param name="message">Message to make underline and bold and italics</param>
             <returns>Underline and Bold and Italics formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.Strikethrough(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Strikethrough(System.String)">
             <summary>
             Will display the message with a strikethrough
             </summary>
             <param name="message">Message to make strikethrough</param>
             <returns>Strikethrough formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.CodeBlockOneLine(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CodeBlockOneLine(System.String)">
             <summary>
             Will display the message as a one line code block
             </summary>
             <param name="message">Message to make code block</param>
             <returns>Code block formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.CodeBlockMultiLine(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CodeBlockMultiLine(System.String)">
             <summary>
             Will display the message as a multiline code block
             </summary>
             <param name="message">Message to make multiline code block</param>
             <returns>Code block formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.CodeBlockLanguage(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CodeBlockLanguage(System.String,System.String)">
             <summary>
             Will display a multiline code bloc with the specified language
             </summary>
@@ -10763,14 +10782,14 @@
             <param name="language">Language to display the code block as</param>
             <returns>Language code block formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.BlockQuoteSingleLine(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.BlockQuoteSingleLine(System.String)">
             <summary>
             Will display the message in single line block quote
             </summary>
             <param name="message">Message to make block quote</param>
             <returns>Block Quote formatted message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Formatting.BlockQuoteMultiLine(System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.BlockQuoteMultiLine(System.String)">
             <summary>
             Will display the message in multiline block quote
             </summary>

@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
-using Formatting = Oxide.Ext.Discord.Helpers.Formatting;
 
 namespace Oxide.Ext.Discord.Entities.Emojis
 {
@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.Entities.Emojis
                 return Name;
             }
 
-            return Formatting.CustomEmojiDataString(EmojiId.Value, Name, Animated ?? false);
+            return DiscordFormatting.CustomEmojiDataString(EmojiId.Value, Name, Animated ?? false);
         }
 
         internal void Update(DiscordEmoji emoji)

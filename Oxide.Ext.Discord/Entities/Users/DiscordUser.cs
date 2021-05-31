@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users.Connections;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
@@ -104,6 +105,16 @@ namespace Oxide.Ext.Discord.Entities.Users
         #endregion
 
         #region Helper Properties
+        /// <summary>
+        /// Returns a string to mention this users nickname in a message
+        /// </summary>
+        public string Mention => DiscordFormatting.MentionUserNickname(Id);
+        
+        /// <summary>
+        /// Returns a string to mention this users username in a message
+        /// </summary>
+        public string MentionUser => DiscordFormatting.MentionUser(Id);
+        
         /// <summary>
         /// Default Avatar Url for the User
         /// </summary>

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Roles
@@ -64,6 +65,11 @@ namespace Oxide.Ext.Discord.Entities.Roles
         /// </summary>
         [JsonProperty("tags")]
         public RoleTags Tags { get; set; }
+        
+        /// <summary>
+        /// Returns a string to mention this role in a message
+        /// </summary>
+        public string Mention => DiscordFormatting.MentionRole(Id);
         #endregion
 
         #region Helper Methods
