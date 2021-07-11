@@ -13,6 +13,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// <summary>
         /// A clickable button
         /// </summary>
-        Button = 2
+        Button = 2,
+        
+        /// <summary>
+        /// A select menu for picking from choices
+        /// </summary>
+        SelectMenu = 3
     }
 }

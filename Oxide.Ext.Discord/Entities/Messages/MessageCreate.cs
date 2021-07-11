@@ -31,10 +31,10 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public bool Tts { get; set; }
         
         /// <summary>
-        /// Embed for the message
+        /// Embeds for the message
         /// </summary>
-        [JsonProperty("embed")]
-        public DiscordEmbed Embed { get; set; }
+        [JsonProperty("embeds")]
+        public List<DiscordEmbed> Embeds { get; set; }
         
         /// <summary>
         /// Allowed mentions for a message

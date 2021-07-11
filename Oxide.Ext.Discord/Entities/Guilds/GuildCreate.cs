@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -20,6 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Voice region id
         /// </summary>
+        [Obsolete("Deprecated in Discord API")]
         [JsonProperty("region")]
         public string Region { get; set; }
         

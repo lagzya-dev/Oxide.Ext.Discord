@@ -1,3 +1,4 @@
+using System;
 using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Helpers
@@ -53,6 +54,40 @@ namespace Oxide.Ext.Discord.Helpers
         /// <returns>Custom emoji formatted string</returns>
         public static string CustomEmojiDataString(Snowflake id, string name, bool animated) => $"{(animated ? "a" : "")}:{name}:{id}";
 
+        /// <summary>
+        /// Displays a timestamp 
+        /// </summary>
+        /// <param name="timestamp">UNIX Timestamp</param>
+        /// <param name="style">Display style for the timestamp</param>
+        /// <returns></returns>
+        public static string UnixTimestamp(int timestamp, TimestampStyles style = TimestampStyles.ShortDateTime)
+        {
+            return $"<t:{timestamp.ToString()}:{GetTimestampFlag(style)}>";
+        }
+
+        private static string GetTimestampFlag(TimestampStyles style)
+        {
+            switch (style)
+            {
+                case TimestampStyles.ShortTime:
+                    return "t";
+                case TimestampStyles.LongTime:
+                    return "T";
+                case TimestampStyles.ShortDate:
+                    return "d";
+                case TimestampStyles.LongDate:
+                    return "D";
+                case TimestampStyles.ShortDateTime:
+                    return "f";
+                case TimestampStyles.LongDateTime:
+                    return "F";
+                case TimestampStyles.RelativeTime:
+                    return "R";
+            }
+
+            return "f";
+        }
+        
         /// <summary>
         /// Will display the message in italics
         /// </summary>

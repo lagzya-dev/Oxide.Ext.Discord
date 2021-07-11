@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         public string Description { get; set; }
         
         /// <summary>
-        /// The description of the app
+        /// The summary of the app
         /// </summary>
         [JsonProperty("summary")]
         public string Summary { get; set; }

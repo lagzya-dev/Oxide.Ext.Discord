@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Api;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
@@ -8,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommand">ApplicationCommand</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordApplicationCommand : CommandCreate
+    public class DiscordApplicationCommand
     {
         /// <summary>
         /// Unique id of the command
@@ -21,6 +22,37 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("application_id")]
         public Snowflake ApplicationId { get; set; }
+        
+        /// <summary>
+        /// Guild ID of the command, if not global
+        /// </summary>
+        [JsonProperty("guild_id")]
+        public Snowflake? GuildId { get; set; }
+        
+        /// <summary>
+        /// 1-32 lowercase character name matching ^[\w-]{1,32}$
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        
+        /// <summary>
+        /// Description of the command (1-100 characters)
+        /// </summary>
+        [JsonProperty("description")]
+        public string Description { get; set; }
+        
+        /// <summary>
+        /// The parameters for the command
+        /// See <see cref="CommandOption"/>
+        /// </summary>
+        [JsonProperty("options")]
+        public List<CommandOption> Options { get; set; }
+        
+        /// <summary>
+        /// Whether the command is enabled by default when the app is added to a guild
+        /// </summary>
+        [JsonProperty("default_permission")]
+        public bool? DefaultPermissions { get; set; }
 
         /// <summary>
         /// Edit a global command.

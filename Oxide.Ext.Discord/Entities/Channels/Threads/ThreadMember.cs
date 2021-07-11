@@ -13,13 +13,13 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// The id of the thread
         /// </summary>
         [JsonProperty("id")]
-        public Snowflake Id { get; set; } 
+        public Snowflake? Id { get; set; } 
         
         /// <summary>
         /// The id of the user
         /// </summary>
         [JsonProperty("user_id")]
-        public Snowflake UserId { get; set; } 
+        public Snowflake? UserId { get; set; } 
         
         /// <summary>
         /// The time the current user last joined the thread

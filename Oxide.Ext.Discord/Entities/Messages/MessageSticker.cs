@@ -1,10 +1,11 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object-message-sticker-structure">Message Sticker Structure</a>
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-sticker-structure">Message Sticker Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class MessageSticker : ISnowflakeEntity
@@ -19,7 +20,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// ID of the pack the sticker is from
         /// </summary>
         [JsonProperty("pack_id")]
-        public Snowflake PackId { get; set; }
+        public Snowflake? PackId { get; set; }
         
         /// <summary>
         /// Name of the sticker
@@ -34,28 +35,41 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public string Description { get; set; }
         
         /// <summary>
-        /// A comma-separated list of tags for the sticker
+        /// For guild stickers, a unicode emoji representing the sticker's expression.
+        /// For nitro stickers, a comma-separated list of related expressions.
         /// </summary>
         [JsonProperty("tags")]
         public string Tags { get; set; }
-        
-        /// <summary>
-        /// Sticker asset hash
-        /// </summary>
-        [JsonProperty("asset")]
-        public string Asset { get; set; }
-        
-        /// <summary>
-        /// Sticker preview asset hash
-        /// </summary>
-        [JsonProperty("preview_asset")]
-        public string PreviewAsset { get; set; }
-        
+
         /// <summary>
         /// Type of sticker format
         /// <see cref="MessageStickerFormatType"/>
         /// </summary>
         [JsonProperty("format_type")]
         public MessageStickerFormatType FormatType { get; set; }
+        
+        /// <summary>
+        /// Whether or not the sticker is available
+        /// </summary>
+        [JsonProperty("available")]
+        public bool? Available { get; set; }
+        
+        /// <summary>
+        /// Id of the guild that owns this sticker
+        /// </summary>
+        [JsonProperty("guild_id")]
+        public Snowflake? GuildId { get; set; }
+        
+        /// <summary>
+        /// The user that uploaded the sticker
+        /// </summary>
+        [JsonProperty("user")]
+        public DiscordUser User { get; set; }
+        
+        /// <summary>
+        /// A sticker's sort order within a pack
+        /// </summary>
+        [JsonProperty("sort_value")]
+        public int? SortValue { get; set; }
     }
 }

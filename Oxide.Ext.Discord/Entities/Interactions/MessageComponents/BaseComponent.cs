@@ -12,6 +12,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// Message component type
         /// </summary>
         [JsonProperty("type")]
-        public MessageComponentType Type { get; set; }
+        public MessageComponentType Type { get; protected set; }
     }
 }

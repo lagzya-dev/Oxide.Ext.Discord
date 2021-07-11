@@ -190,12 +190,12 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Send a message to a user in a direct message channel
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="embed">Embed to be send in the message</param>
+        /// <param name="embeds">Embeds to be send in the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void SendDirectMessage(DiscordClient client, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void SendDirectMessage(DiscordClient client, List<DiscordEmbed> embeds, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
-            CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, embed, callback, error); });
+            CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, embeds, callback, error); });
         }
 
         /// <summary>

@@ -125,7 +125,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// The application's public flags
         /// </summary>
         [JsonProperty("flags")]
-        public ApplicationFlags Flags { get; set; }
+        public ApplicationFlags? Flags { get; set; }
 
         /// <summary>
         /// Returns the URL for the applications Icon
@@ -337,7 +337,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="permissions">List of permissions for the command</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        public void EditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, GuildCommandPermissions permissions, Action callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {

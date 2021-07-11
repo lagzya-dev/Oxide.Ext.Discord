@@ -13,14 +13,8 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// Whether the thread is archived
         /// </summary>
         [JsonProperty("archived")]
-        public bool Archived { get; set; } 
-        
-        /// <summary>
-        /// Id of the user that last archived or unarchived the thread
-        /// </summary>
-        [JsonProperty("archiver_id")]
-        public Snowflake? ArchiverId { get; set; } 
-        
+        public bool Archived { get; set; }
+
         /// <summary>
         /// Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
         /// </summary>

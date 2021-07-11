@@ -84,6 +84,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Voice region id
         /// </summary>
+        [Obsolete("Deprecated in Discord API")]
         [JsonProperty("region")]
         public string Region { get; set; }
         
@@ -1248,7 +1249,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         }
 
         /// <summary>
-        /// Updates the current user's voice state.
+        /// Modifies the current user's voice state.
         /// See <a href="https://discord.com/developers/docs/resources/guild#update-current-user-voice-state">Update Current User Voice State</a>
         /// </summary>
         /// <param name="client">Client to use</param>
@@ -1257,7 +1258,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="requestToSpeak">Sets the user's request to speak</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void UpdateCurrentUserVoiceState(DiscordClient client, Snowflake channelId, bool? suppress = null, DateTime? requestToSpeak = null, Action callback = null, Action<RestError> error = null)
+        public void ModifyCurrentUserVoiceState(DiscordClient client, Snowflake channelId, bool? suppress = null, DateTime? requestToSpeak = null, Action callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -1278,7 +1279,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         }
         
         /// <summary>
-        /// Updates another user's voice state.
+        /// Modifies another user's voice state.
         /// See <a href="https://discord.com/developers/docs/resources/guild#update-user-voice-statee">Update Users Voice State</a>
         /// </summary>
         /// <param name="client">Client to use</param>
@@ -1287,7 +1288,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="suppress">Changes the users suppressed state</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void UpdateUserVoiceState(DiscordClient client, Snowflake userId, Snowflake channelId, bool? suppress = null, Action callback = null, Action<RestError> error = null)
+        public void ModifyserVoiceState(DiscordClient client, Snowflake userId, Snowflake channelId, bool? suppress = null, Action callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -1318,8 +1319,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             if (updatedGuild.DiscoverySplash != null)
                 DiscoverySplash = updatedGuild.DiscoverySplash;
             OwnerId = updatedGuild.OwnerId;
+            #pragma warning disable 0618
             if (updatedGuild.Region != null)
                 Region = updatedGuild.Region;
+            #pragma warning restore 0618
             if (updatedGuild.AfkChannelId != null)
                 AfkChannelId = updatedGuild.AfkChannelId;
             if (updatedGuild.AfkTimeout != null)

@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         }
 
         /// <summary>
-        /// Updates fields of an existing Stage instance.
+        /// Modifies fields of an existing Stage instance.
         /// Requires the user to be a moderator of the Stage channel.
         /// See <a href="https://discord.com/developers/docs/resources/stage-instance#update-stage-instance">Update Stage Instance</a>
         /// </summary>
@@ -94,7 +94,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="privacyLevel">Privacy level for the stage instance</param>
         /// <param name="callback">Callback when the updated stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void UpdateStageInstance(DiscordClient client, string topic = null, PrivacyLevel? privacyLevel = null, Action<StageInstance> callback = null, Action<RestError> error = null)
+        public void ModifyStageInstance(DiscordClient client, string topic = null, PrivacyLevel? privacyLevel = null, Action<StageInstance> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(topic))

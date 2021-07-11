@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public Hash<Snowflake, Overwrite> PermissionOverwrites { get; set; }
         
         /// <summary>
-        /// The name of the channel (2-100 characters)
+        /// The name of the channel (1-100 characters)
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -157,6 +157,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("member")]
         public ThreadMember Member { get; set; }
+        
+        /// <summary>
+        /// Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+        /// </summary>
+        [JsonProperty("default_auto_archive_duration")]
+        public int? DefaultAutoArchiveDuration { get; set; }
         
         /// <summary>
         /// Thread Members for the current thread.
@@ -323,14 +329,14 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="embed">Embed to be send in the message</param>
+        /// <param name="embeds">Embeds to be send in the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateMessage(DiscordClient client, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void CreateMessage(DiscordClient client, List<DiscordEmbed> embeds, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             MessageCreate createMessage = new MessageCreate
             {
-                Embed = embed
+                Embeds = embeds
             };
 
             client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback, error);

@@ -189,15 +189,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("flags")]
         public MessageFlags Flags { get; set; }
-        
-        /// <summary>
-        /// The stickers sent with the message (bots currently can only receive messages with stickers, not send)
-        /// <see cref="MessageSticker"/>
-        /// </summary>
-        [JsonConverter(typeof(HashListConverter<MessageSticker>))]
-        [JsonProperty("stickers")]
-        public Hash<Snowflake, MessageSticker> Stickers { get; set; }
-        
+
         /// <summary>
         /// The message associated with the message_reference
         /// </summary>
@@ -221,6 +213,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("components")]
         public List<ActionRowComponent> Components { get; set; }
+        
+        /// <summary>
+        /// Sent if the message contains stickers
+        /// </summary>
+        [JsonProperty("sticker_items")]
+        public Hash<Snowflake, MessageStickerItem> StickerItems { get; set; }
         
         /// <summary>
         /// Post a message to a guild text or DM channel.
@@ -267,14 +265,14 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
-        /// <param name="embed">Embed to be send in the message</param>
+        /// <param name="embeds">Embeds to be send in the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateMessage(DiscordClient client, Snowflake channelId, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public static void CreateMessage(DiscordClient client, Snowflake channelId, List<DiscordEmbed> embeds, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             MessageCreate createMessage = new MessageCreate
             {
-                Embed = embed
+                Embeds = embeds
             };
 
             client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, createMessage, callback, error);
@@ -336,14 +334,14 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="embed">Embed to send</param>
+        /// <param name="embeds">Embeds to send</param>
         /// <param name="callback">Callback with the message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void Reply(DiscordClient client, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void Reply(DiscordClient client, List<DiscordEmbed> embeds, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             MessageCreate newMessage = new MessageCreate
             {
-                Embed = embed,
+                Embeds = embeds,
             };
 
             Reply(client, newMessage, callback, error);

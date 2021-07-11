@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -35,12 +36,12 @@ namespace Oxide.Ext.Discord.Extensions
         /// </summary>
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
-        /// <param name="embed">Embed to send</param>
-        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, DiscordEmbed embed)
+        /// <param name="embeds">Embeds to send</param>
+        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, List<DiscordEmbed> embeds)
         {
             MessageCreate create = new MessageCreate
             {
-                Embed = embed
+                Embeds = embeds
             };
             
             player.SendDiscordMessage(client, create);

@@ -1812,7 +1812,7 @@
             <param name="callback">Callback with the permissions for the command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.EditApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.EditApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edits command permissions for a specific command for your application in a guild.
             Warning: This endpoint will overwrite existing permissions for the command in that guild
@@ -2434,7 +2434,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Name">
             <summary>
-            The name of the channel (2-100 characters)
+            The name of the channel (1-100 characters)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Type">
@@ -2668,7 +2668,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Name">
             <summary>
-            The name of the channel (2-100 characters)
+            The name of the channel (1-100 characters)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Topic">
@@ -2751,6 +2751,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Member">
             <summary>
             Thread member object for the current user, if they have joined the thread, only included on certain API endpoints
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultAutoArchiveDuration">
+            <summary>
+            Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ThreadMembers">
@@ -2876,7 +2881,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateMessage(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -2884,7 +2889,7 @@
             See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
             </summary>
             <param name="client">Client to use</param>
-            <param name="embed">Embed to be send in the message</param>
+            <param name="embeds">Embeds to be send in the message</param>
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -3183,6 +3188,72 @@
         <member name="T:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params">Guild Channel Update Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.Name">
+            <summary>
+            The name of the channel (2-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.Type">
+            <summary>
+            the type of channel <see cref="T:Oxide.Ext.Discord.Entities.Channels.ChannelType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.Position">
+            <summary>
+            The position of the channel in the left-hand listing
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.Topic">
+            <summary>
+            The channel topic (0-1024 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.Nsfw">
+            <summary>
+            Whether the channel is nsfw
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.RateLimitPerUser">
+            <summary>
+            Amount of seconds a user has to wait before sending another message (0-21600);
+            bots, as well as users with the permission manage_messages or manage_channel, are unaffected
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.Bitrate">
+            <summary>
+            The bitrate (in bits) of the voice channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.UserLimit">
+            <summary>
+            The user limit of the voice channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.PermissionOverwrites">
+            <summary>
+            Explicit permission overwrites for members and roles <see cref="T:Oxide.Ext.Discord.Entities.Channels.Overwrite"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.ParentId">
+            <summary>
+            ID of the parent category for a channel (each parent category can contain up to 50 channels)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.RtcRegion">
+            <summary>
+            Channel voice region id, automatic when set to null
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.VideoQualityMode">
+            <summary>
+            The camera video quality mode of the voice channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.DefaultAutoArchiveDuration">
+            <summary>
+            The default duration for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Overwrite">
@@ -3511,9 +3582,9 @@
             <param name="callback">Callback with the new stage instance</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.UpdateStageInstance(Oxide.Ext.Discord.DiscordClient,System.String,System.Nullable{Oxide.Ext.Discord.Entities.Channels.Stages.PrivacyLevel},System.Action{Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.ModifyStageInstance(Oxide.Ext.Discord.DiscordClient,System.String,System.Nullable{Oxide.Ext.Discord.Entities.Channels.Stages.PrivacyLevel},System.Action{Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
-            Updates fields of an existing Stage instance.
+            Modifies fields of an existing Stage instance.
             Requires the user to be a moderator of the Stage channel.
             See <a href="https://discord.com/developers/docs/resources/stage-instance#update-stage-instance">Update Stage Instance</a>
             </summary>
@@ -3594,6 +3665,12 @@
             Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate.Type">
+            <summary>
+            The type of thread to create
+            Can only be GuildNewsThread, GuildPublicThread, or GuildPrivateThread
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#list-active-threads">Thread List Structure</a> within Discord.
@@ -3651,11 +3728,6 @@
             Whether the thread is archived
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata.ArchiverId">
-            <summary>
-            Id of the user that last archived or unarchived the thread
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata.AutoArchiveDuration">
             <summary>
             Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
@@ -3669,6 +3741,21 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata.Locked">
             <summary>
             When a thread is locked, only users with MANAGE_THREADS can unarchive it
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.VoiceQualityMode">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-video-quality-modes">Video Quality Mode</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.VoiceQualityMode.Auto">
+            <summary>
+            Discord chooses the quality for optimal performance
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.VoiceQualityMode.Full">
+            <summary>
+            720p
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji">
@@ -4034,16 +4121,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.TokenData">
             <summary>
             Data as JToken
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ApplicationCommandEvent">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/topics/gateway#application-command-extra-fields">Application Command Gateway Event</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ApplicationCommandEvent.GuildId">
-            <summary>
-            ID of the guild the command is in
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ChannelPinsUpdatedEvent">
@@ -5824,9 +5901,9 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateCurrentUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyCurrentUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
-            Updates the current user's voice state.
+            Modifies the current user's voice state.
             See <a href="https://discord.com/developers/docs/resources/guild#update-current-user-voice-state">Update Current User Voice State</a>
             </summary>
             <param name="client">Client to use</param>
@@ -5836,9 +5913,9 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{System.Boolean},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{System.Boolean},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
-            Updates another user's voice state.
+            Modifies another user's voice state.
             See <a href="https://discord.com/developers/docs/resources/guild#update-user-voice-statee">Update Users Voice State</a>
             </summary>
             <param name="client">Client to use</param>
@@ -6031,6 +6108,21 @@
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.WelcomeScreenEnabled">
             <summary>
             Guild has enabled the welcome screen
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.TicketedEventsEnabled">
+            <summary>
+            Guild has enabled ticketed events
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.MonetizationEnabled">
+            <summary>
+            Guild has enabled monetization
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.MoreStickers">
+            <summary>
+            Guild has increased custom sticker slots
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember">
@@ -6622,7 +6714,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Integrations.IntegrationApplication.Summary">
             <summary>
-            The description of the app
+            The summary of the app
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Integrations.IntegrationApplication.Bot">
@@ -7011,6 +7103,32 @@
             Unique id of the parent application
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.GuildId">
+            <summary>
+            Guild ID of the command, if not global
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Name">
+            <summary>
+            1-32 lowercase character name matching ^[\w-]{1,32}$
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Description">
+            <summary>
+            Description of the command (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Options">
+            <summary>
+            The parameters for the command
+            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.DefaultPermissions">
+            <summary>
+            Whether the command is enabled by default when the app is added to a guild
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.EditGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edit a global command.
@@ -7368,6 +7486,97 @@
             A clickable button
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.SelectMenu">
+            <summary>
+            A select menu for picking from choices
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.CustomId">
+            <summary>
+            A developer-defined identifier for the button
+            Max 100 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.Options">
+            <summary>
+            The choices in the select
+            Max 25 options
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.Placeholder">
+            <summary>
+            Custom placeholder text if nothing is selected
+            Max 100 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.MinValues">
+            <summary>
+            the minimum number of items that must be chosen;
+            Default 1, Min 0, Max 25
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.MaxValues">
+            <summary>
+            the maximum  number of items that must be chosen;
+            Default 1, Min 0, Max 25
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.Disabled">
+            <summary>
+            Disable the select
+            Default false
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.#ctor">
+            <summary>
+            Select Menu Component Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.AddOption(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption)">
+            <summary>
+            Adds an option to a select menu;
+            </summary>
+            <param name="option"></param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-option-structure">Select Menu Option Structure</a> within discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Label">
+            <summary>
+            The user-facing name of the option,
+            Max 25 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Value">
+            <summary>
+            The dev-define value of the option,
+            Max 100 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Description">
+            <summary>
+            An additional description of the option,
+            Max 50 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Emoji">
+            <summary>
+            Emoji in the option
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Default">
+            <summary>
+            Will render this option as selected by default
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Invites.DiscordInvite">
             <summary>
             Represents an <a href="https://discord.com/developers/docs/resources/invite#invite-object">Invite Structure</a> that when used, adds a user to a guild or group DM channel.
@@ -7416,6 +7625,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.ApproximateMemberCount">
             <summary>
             Approximate count of total members
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.ExpiresAt">
+            <summary>
+            When the invite code expires
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.StageInstance">
+            <summary>
+            Stage instance data if there is a public Stage instance in the Stage channel this invite is for
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.GetInvite(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Invites.DiscordInvite},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -7467,6 +7686,31 @@
         <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteMetadata.CreatedAt">
             <summary>
             When this invite was created
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Invites.InviteStageInstance">
+            <summary>
+            Represents an <a href="https://discord.com/developers/docs/resources/invite#invite-stage-instance-object">Invite Stage Instance</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteStageInstance.Members">
+            <summary>
+            The members speaking in the Stage
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteStageInstance.ParticipantCount">
+            <summary>
+            The number of users in the Stage
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteStageInstance.SpeakerCount">
+            <summary>
+            The number of users speaking in the Stage
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteStageInstance.Topic">
+            <summary>
+            The topic of the Stage instance (1-120 characters)
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Invites.TargetUserType">
@@ -7675,12 +7919,6 @@
             <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageFlags"/>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Stickers">
-            <summary>
-            The stickers sent with the message (bots currently can only receive messages with stickers, not send)
-            <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageSticker"/>
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.ReferencedMessage">
             <summary>
             The message associated with the message_reference
@@ -7699,6 +7937,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Components">
             <summary>
             Sent if the message contains components like buttons, action rows, or other interactive components
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.StickerItems">
+            <summary>
+            Sent if the message contains stickers
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -7727,7 +7970,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -7736,7 +7979,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="channelId">Channel ID to send the message to</param>
-            <param name="embed">Embed to be send in the message</param>
+            <param name="embeds">Embeds to be send in the message</param>
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -7772,13 +8015,13 @@
             <param name="callback">Callback with the message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Replies to a previously sent message
             See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
             </summary>
             <param name="client">Client to use</param>
-            <param name="embed">Embed to send</param>
+            <param name="embeds">Embeds to send</param>
             <param name="callback">Callback with the message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -8501,9 +8744,9 @@
             Whether this was a TTS message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.Embed">
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.Embeds">
             <summary>
-            Embed for the message
+            Embeds for the message
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.AllowedMention">
@@ -8641,7 +8884,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageSticker">
             <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object-message-sticker-structure">Message Sticker Structure</a>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-sticker-structure">Message Sticker Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.Id">
@@ -8666,23 +8909,34 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.Tags">
             <summary>
-            A comma-separated list of tags for the sticker
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.Asset">
-            <summary>
-            Sticker asset hash
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.PreviewAsset">
-            <summary>
-            Sticker preview asset hash
+            For guild stickers, a unicode emoji representing the sticker's expression.
+            For nitro stickers, a comma-separated list of related expressions.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.FormatType">
             <summary>
             Type of sticker format
             <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.Available">
+            <summary>
+            Whether or not the sticker is available
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.GuildId">
+            <summary>
+            Id of the guild that owns this sticker
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.User">
+            <summary>
+            The user that uploaded the sticker
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.SortValue">
+            <summary>
+            A sticker's sort order within a pack
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType">
@@ -8703,6 +8957,21 @@
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType.Lottie">
             <summary>
             Sticker format type LOTTIE
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerItem">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-sticker-item-structure">Message Sticker Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageStickerItem.Id">
+            <summary>
+            ID of the sticker
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageStickerItem.Name">
+            <summary>
+            Name of the sticker
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageType">
@@ -9545,12 +9814,12 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendDirectMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendDirectMessage(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Send a message to a user in a direct message channel
             </summary>
             <param name="client">Client to use</param>
-            <param name="embed">Embed to be send in the message</param>
+            <param name="embeds">Embeds to be send in the message</param>
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -10377,13 +10646,13 @@
             <param name="client">Client to use for sending the message</param>
             <param name="message">Message to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed})">
             <summary>
             Send a Discord Message to an IPlayer if they're registered
             </summary>
             <param name="player">Player to send the discord message to</param>
             <param name="client">Client to use for sending the message</param>
-            <param name="embed">Embed to send</param>
+            <param name="embeds">Embeds to send</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate)">
             <summary>
@@ -10622,6 +10891,42 @@
             <param name="objectType"></param>
             <returns></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.Converters.MessageComponentsConverter">
+            <summary>
+            Converter for list of message components
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.MessageComponentsConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Write default JSON values
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.MessageComponentsConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Populate the correct types in components instead of just the BaseComponent
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.MessageComponentsConverter.CanConvert(System.Type)">
+            <summary>
+            Returns if this can convert the value
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Helpers.Converters.MessageComponentsConverter.CanWrite">
+            <summary>
+            Don't allow writing
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Converters.SnowflakeConverter">
             <summary>
             Converts a snowflake to and from it's JSON string value
@@ -10703,6 +11008,14 @@
             <param name="id">ID of the custom emoji</param>
             <param name="animated">If the emoji is animated</param>
             <returns>Custom emoji formatted string</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int32,Oxide.Ext.Discord.Helpers.TimestampStyles)">
+            <summary>
+            Displays a timestamp 
+            </summary>
+            <param name="timestamp">UNIX Timestamp</param>
+            <param name="style">Display style for the timestamp</param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Italics(System.String)">
             <summary>
@@ -10836,6 +11149,53 @@
             </summary>
             <param name="date">DateTime to get total second for</param>
             <returns>Total seconds since linux epoch for date time</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.TimestampStyles">
+            <summary>
+            Available flags for timestamp formatting
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.TimestampStyles.ShortTime">
+            <summary>
+            Displays the short time for the timestamp
+            Ex: 16:20
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.TimestampStyles.LongTime">
+            <summary>
+            Displays the long time for the timestamp
+            Ex: 16:20:30
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.TimestampStyles.ShortDate">
+            <summary>
+            Displays the short date for the timestamp
+            Ex: 20/04/2021
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.TimestampStyles.LongDate">
+            <summary>
+            Displays the long date for the timestamp
+            Ex: 20 April 2021
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.TimestampStyles.ShortDateTime">
+            <summary>
+            Displays the short date/time for the timestamp
+            Ex: 20 April 2021 16:20
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.TimestampStyles.LongDateTime">
+            <summary>
+            Displays the long date/time for the timestamp
+            Ex: Tuesday, 20 April 2021 16:20
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.TimestampStyles.RelativeTime">
+            <summary>
+            Displays the relative time since the timestamp
+            Ex: 2 months ago
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Validation">
             <summary>

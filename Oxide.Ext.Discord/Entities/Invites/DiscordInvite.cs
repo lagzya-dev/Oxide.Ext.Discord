@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
 
@@ -65,6 +66,18 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// </summary>
         [JsonProperty("approximate_member_count")]
         public int? ApproximateMemberCount { get; set; }
+        
+        /// <summary>
+        /// When the invite code expires
+        /// </summary>
+        [JsonProperty("expires_at")]
+        public DateTime? ExpiresAt { get; set; }
+        
+        /// <summary>
+        /// Stage instance data if there is a public Stage instance in the Stage channel this invite is for
+        /// </summary>
+        [JsonProperty("stage_instance")]
+        public InviteStageInstance StageInstance { get; set; }
 
         /// <summary>
         /// Get Invite URL Parameters

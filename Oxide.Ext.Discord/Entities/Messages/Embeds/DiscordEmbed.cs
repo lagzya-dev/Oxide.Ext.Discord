@@ -16,87 +16,87 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// Title of embed
         /// </summary>
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// Type of embed (always "rich" for webhook embeds)
         /// </summary>
         [Obsolete("Embed types should be considered deprecated and might be removed in a future API version")]
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; private set; }
 
         /// <summary>
         /// Description of embed
         /// </summary>
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
         /// <summary>
         /// Url of embed
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; private set; }
 
         /// <summary>
         /// Timestamp of embed content
         /// </summary>
         [JsonProperty("timestamp")]
-        public DateTime? Timestamp { get; set; }
+        public DateTime? Timestamp { get; private set; }
 
         /// <summary>
         /// Color code of the embed
         /// </summary>
         [JsonProperty("color")]
-        public DiscordColor Color { get; set; }
+        public DiscordColor Color { get; private set; }
 
         /// <summary>
         /// Footer information
         /// <see cref="EmbedFooter"/>
         /// </summary>
         [JsonProperty("footer")]
-        public EmbedFooter Footer { get; set; }
+        public EmbedFooter Footer { get; private set; }
 
         /// <summary>
         /// Image information
         /// <see cref="EmbedImage"/>
         /// </summary>
         [JsonProperty("image")]
-        public EmbedImage Image { get; set; }
+        public EmbedImage Image { get; private set; }
 
         /// <summary>
         /// Thumbnail information
         /// <see cref="EmbedThumbnail"/>
         /// </summary>
         [JsonProperty("thumbnail")]
-        public EmbedThumbnail Thumbnail { get; set; }
+        public EmbedThumbnail Thumbnail { get; private set; }
 
         /// <summary>
         /// Video information
         /// <see cref="EmbedVideo"/>
         /// </summary>
         [JsonProperty("video")]
-        public EmbedVideo Video { get; set; }
+        public EmbedVideo Video { get; private set; }
 
         /// <summary>
         /// Provider information
         /// <see cref="EmbedProvider"/>
         /// </summary>
         [JsonProperty("provider")]
-        public EmbedProvider Provider { get; set; }
+        public EmbedProvider Provider { get; private set; }
 
         /// <summary>
         /// Author information
         /// <see cref="EmbedAuthor"/>
         /// </summary>
         [JsonProperty("author")]
-        public EmbedAuthor Author { get; set; }
+        public EmbedAuthor Author { get; private set; }
 
         /// <summary>
         /// Fields information
         /// <see cref="EmbedField"/>
         /// </summary>
         [JsonProperty("fields")]
-        public List<EmbedField> Fields { get; set; }
+        public List<EmbedField> Fields { get; private set; }
 
         /// <summary>
         /// Adds a title to the embed message
@@ -105,6 +105,11 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns>This</returns>
         public DiscordEmbed AddTitle(string title)
         {
+            if (title != null && title.Length > 256)
+            {
+                throw new Exception("Title cannot be more than 256 characters");
+            }
+            
             Title = title;
             return this;
         }
@@ -116,6 +121,11 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns>This</returns>
         public DiscordEmbed AddDescription(string description)
         {
+            if (description != null && description.Length > 4096)
+            {
+                throw new Exception("Description cannot be more than 4096 characters");
+            }
+            
             Description = description;
             return this;
         }
@@ -141,6 +151,11 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns>This</returns>
         public DiscordEmbed AddAuthor(string name, string iconUrl = null, string url = null, string proxyIconUrl = null)
         {
+            if (name != null && name.Length > 256)
+            {
+                throw new Exception("Author name cannot be more than 256 characters");
+            }
+            
             Author = new EmbedAuthor(name, iconUrl, url, proxyIconUrl);
             return this;
         }
@@ -154,8 +169,12 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns>This</returns>
         public DiscordEmbed AddFooter(string text, string iconUrl = null, string proxyIconUrl = null)
         {
+            if (text != null && text.Length > 2048)
+            {
+                throw new Exception("Author name cannot be more than 2048 characters");
+            }
+            
             Footer = new EmbedFooter(text, iconUrl, proxyIconUrl);
-
             return this;
         }
 
@@ -205,6 +224,16 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns>This</returns>
         public DiscordEmbed AddBlankField(bool inline)
         {
+            if (Fields == null)
+            {
+                Fields = new List<EmbedField>();
+            }
+
+            if (Fields.Count >= 25)
+            {
+                throw new Exception("Embeds cannot have more than 25 fields");
+            }
+            
             Fields.Add(new EmbedField("\u200b", "\u200b", inline));
             return this;
         }
@@ -219,6 +248,36 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns></returns>
         public DiscordEmbed AddField(string name, string value, bool inline)
         {
+            if (Fields == null)
+            {
+                Fields = new List<EmbedField>();
+            }
+
+            if (Fields.Count >= 25)
+            {
+                throw new Exception("Embeds cannot have more than 25 fields");
+            }
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new Exception("Embed Fields cannot have a null or empty name");
+            }
+            
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new Exception("Embed Fields cannot have a null or empty value");
+            }
+
+            if (name.Length > 256)
+            {
+                throw new Exception("Field name cannot be more than 256 characters");
+            }
+            
+            if (value.Length > 1024 )
+            {
+                throw new Exception("Field name cannot be more than 1024  characters");
+            }
+            
             Fields.Add(new EmbedField(name, value, inline));
             return this;
         }

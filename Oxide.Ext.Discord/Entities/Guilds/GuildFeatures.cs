@@ -87,5 +87,23 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [Description("WELCOME_SCREEN_ENABLED")] 
         WelcomeScreenEnabled,
+        
+        /// <summary>
+        /// Guild has enabled ticketed events
+        /// </summary>
+        [Description("TICKETED_EVENTS_ENABLED")] 
+        TicketedEventsEnabled,
+        
+        /// <summary>
+        /// Guild has enabled monetization
+        /// </summary>
+        [Description("MONETIZATION_ENABLED")] 
+        MonetizationEnabled,
+        
+        /// <summary>
+        /// Guild has increased custom sticker slots
+        /// </summary>
+        [Description("MORE_STICKERS")] 
+        MoreStickers,
     }
 }

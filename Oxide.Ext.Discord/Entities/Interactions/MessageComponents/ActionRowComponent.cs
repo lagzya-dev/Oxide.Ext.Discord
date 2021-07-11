@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Helpers.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
 {
@@ -13,8 +14,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// <summary>
         /// The components on the action row
         /// </summary>
+        [JsonConverter(typeof(MessageComponentsConverter))]
         [JsonProperty("components")]
-        public List<ButtonComponent> Components { get; set; } = new List<ButtonComponent>();
+        public List<BaseComponent> Components { get; } = new List<BaseComponent>();
 
         /// <summary>
         /// Constructor for ActionRowComponent

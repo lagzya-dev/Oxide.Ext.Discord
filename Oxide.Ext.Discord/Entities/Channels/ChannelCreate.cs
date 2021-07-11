@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     public class ChannelCreate
     {
         /// <summary>
-        /// The name of the channel (2-100 characters)
+        /// The name of the channel (1-100 characters)
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
