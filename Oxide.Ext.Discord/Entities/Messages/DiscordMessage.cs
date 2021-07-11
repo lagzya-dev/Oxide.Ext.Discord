@@ -217,6 +217,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// Sent if the message contains stickers
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<MessageStickerItem>))]
         [JsonProperty("sticker_items")]
         public Hash<Snowflake, MessageStickerItem> StickerItems { get; set; }
         

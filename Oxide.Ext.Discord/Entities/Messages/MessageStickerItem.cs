@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -6,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-sticker-item-structure">Message Sticker Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class MessageStickerItem
+    public class MessageStickerItem : ISnowflakeEntity
     {
         /// <summary>
         /// ID of the sticker
