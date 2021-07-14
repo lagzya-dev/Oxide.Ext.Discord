@@ -329,6 +329,26 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="embed">Embed to be send in the message</param>
+        /// <param name="callback">Callback with the created message</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void CreateMessage(DiscordClient client, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        {
+            MessageCreate createMessage = new MessageCreate
+            {
+                Embeds = new List<DiscordEmbed> {embed}
+            };
+
+            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback, error);
+        }
+        
+        /// <summary>
+        /// Post a message to a guild text or DM channel.
+        /// If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
+        /// If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
         /// <param name="embeds">Embeds to be send in the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>

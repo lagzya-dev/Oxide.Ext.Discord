@@ -36,6 +36,22 @@ namespace Oxide.Ext.Discord.Extensions
         /// </summary>
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
+        /// <param name="embed">Embed to send</param>
+        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, DiscordEmbed embed)
+        {
+            MessageCreate create = new MessageCreate
+            {
+                Embeds = new List<DiscordEmbed> {embed}
+            };
+            
+            player.SendDiscordMessage(client, create);
+        }
+        
+        /// <summary>
+        /// Send a Discord Message to an IPlayer if they're registered
+        /// </summary>
+        /// <param name="player">Player to send the discord message to</param>
+        /// <param name="client">Client to use for sending the message</param>
         /// <param name="embeds">Embeds to send</param>
         public static void SendDiscordMessage(this IPlayer player, DiscordClient client, List<DiscordEmbed> embeds)
         {

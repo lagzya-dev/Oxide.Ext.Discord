@@ -227,11 +227,6 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
-            if (Clients.ContainsKey(plugin.Name))
-            {
-                return;
-            }
-            
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
             {
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)

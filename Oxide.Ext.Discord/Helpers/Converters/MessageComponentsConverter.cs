@@ -19,7 +19,6 @@ namespace Oxide.Ext.Discord.Helpers.Converters
         /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            //serializer.Serialize(writer, value);
             throw new NotImplementedException();
         }
 
@@ -43,10 +42,6 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                     MessageComponentType type = (MessageComponentType)Enum.Parse(typeof(MessageComponentType), token["type"].ToString());
                     switch (type)
                     {
-                        //Ignore action row as it can't be nested
-                        case MessageComponentType.ActionRow:
-                            break;
-                        
                         case MessageComponentType.Button:
                             components.Add(token.ToObject<ButtonComponent>());
                             break;
@@ -54,8 +49,6 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                         case MessageComponentType.SelectMenu:
                             components.Add(token.ToObject<SelectMenuComponent>());
                             break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
                     }
                 }
             }
