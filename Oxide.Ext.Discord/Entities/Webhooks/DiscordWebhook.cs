@@ -297,7 +297,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="payload">The updated message</param>
         /// <param name="callback">Callback with the edited message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditWebhookMessage(DiscordClient client, Snowflake messageId, WebhookEditMessage payload, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void EditWebhookMessage(DiscordClient client, Snowflake messageId, DiscordMessage payload, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.PATCH, payload, callback, error);
         }

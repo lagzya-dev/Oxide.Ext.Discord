@@ -95,10 +95,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response">Edit Original Interaction Response</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-                /// <param name="message">Updated message</param>
+        /// /// <param name="message">Updated message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditOriginalInteractionResponse(DiscordClient client, WebhookEditMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void EditOriginalInteractionResponse(DiscordClient client, DiscordMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.PATCH, message, callback, error);
         }

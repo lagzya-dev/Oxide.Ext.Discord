@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Messages
@@ -20,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object">Message Structure</a> sent in a channel within Discord..
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordMessage
+    public class DiscordMessage : IFileAttachments
     {
         /// <summary>
         /// ID of the message
@@ -220,6 +221,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         [JsonConverter(typeof(HashListConverter<MessageStickerItem>))]
         [JsonProperty("sticker_items")]
         public Hash<Snowflake, MessageStickerItem> StickerItems { get; set; }
+        
+        /// <summary>
+        /// File Attachments to add to the message on edit
+        /// </summary>
+        public List<MessageFileAttachment> FileAttachments { get; set; }
         
         /// <summary>
         /// Post a message to a guild text or DM channel.

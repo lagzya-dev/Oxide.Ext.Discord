@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -10,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-parameters-for-contenttype-applicationjson">Message Create Structure</a> to be created in discord
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class MessageCreate
+    public class MessageCreate : IFileAttachments
     {
         /// <summary>
         /// Contents of the message
@@ -54,5 +55,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("components")]
         public List<ActionRowComponent> Components { get; set; }
+        
+        /// <summary>
+        /// Attachments for a discord message
+        /// </summary>
+        [JsonIgnore]
+        public List<MessageFileAttachment> FileAttachments { get; set; }
     }
 }

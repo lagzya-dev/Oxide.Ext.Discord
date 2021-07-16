@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// </summary>
         [JsonConverter(typeof(MessageComponentsConverter))]
         [JsonProperty("components")]
-        public List<BaseComponent> Components { get; } = new List<BaseComponent>();
+        public List<BaseComponent> Components { get; private set; }
 
         /// <summary>
         /// Constructor for ActionRowComponent
@@ -35,10 +35,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// <exception cref="Exception">Throw if invalid message type is passed or components exceeds max of 5</exception>
         public void AddComponent(ButtonComponent component)
         {
-            if (component == null)
-            {
-                throw new ArgumentNullException(nameof(component));
-            }
+            ValidateComponent(component);
 
             if (Components.Count >= 5)
             {
@@ -65,10 +62,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// <exception cref="Exception">Thrown if 1 or more components already exist</exception>
         public void AddComponent(SelectMenuComponent component)
         {
-            if (component == null)
-            {
-                throw new ArgumentNullException(nameof(component));
-            }
+            ValidateComponent(component);
             
             if (Components.Count >= 1)
             {
@@ -76,6 +70,19 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
             }
 
             Components.Add(component);
+        }
+
+        private void ValidateComponent(BaseComponent component)
+        {
+            if (component == null)
+            {
+                throw new ArgumentNullException(nameof(component));
+            }
+            
+            if (Components == null)
+            {
+                Components = new List<BaseComponent>();
+            }
         }
     }
 }

@@ -7253,13 +7253,13 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edits the initial Interaction response
             See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response">Edit Original Interaction Response</a>
             </summary>
             <param name="client">Client to use</param>
-            <param name="message">Updated message</param>
+            /// <param name="message">Updated message</param>
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -7320,7 +7320,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactioncallbacktype">InteractionResponseType</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response-object-interaction-callback-type">InteractionResponseType</a>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType.Pong">
@@ -7962,6 +7962,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.StickerItems">
             <summary>
             Sent if the message contains stickers
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.FileAttachments">
+            <summary>
+            File Attachments to add to the message on edit
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -8797,6 +8802,44 @@
             <summary>
             Used to create message components on a message
             </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.FileAttachments">
+            <summary>
+            Attachments for a discord message
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment">
+            <summary>
+            Represents a file attachment for a discord message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment.FileName">
+            <summary>
+            Name of the file attachment
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment.Data">
+            <summary>
+            Data for the file attachment
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment.ContentType">
+            <summary>
+            Web Content Type for the file attachment
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment.#ctor(System.String,System.Byte[],System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="fileName">File Attachment Name</param>
+            <param name="data">Data for the file</param>
+            <param name="contentType">Web Content Type for the file attachment</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageFlags">
             <summary>
@@ -10453,7 +10496,7 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edits a previously-sent webhook message from the same token.
             See <a href="https://discord.com/developers/docs/resources/webhook#edit-webhook-message">Edit Webhook Message</a>
@@ -10486,11 +10529,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage.AvatarUrl">
             <summary>
             Override the default avatar of the webhook
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage.Tts">
-            <summary>
-            If this is a TTS message
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage">
@@ -10939,11 +10977,12 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.Converters.MessageComponentsConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
-            Write default JSON values
+            
             </summary>
             <param name="writer"></param>
             <param name="value"></param>
             <param name="serializer"></param>
+            <exception cref="T:System.NotSupportedException"></exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.Converters.MessageComponentsConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
@@ -10965,7 +11004,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Helpers.Converters.MessageComponentsConverter.CanWrite">
             <summary>
-            Don't allow writing
+            
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Converters.SnowflakeConverter">
@@ -11249,6 +11288,16 @@
             </summary>
             <param name="emoji"></param>
             <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.IFileAttachments">
+            <summary>
+            Represents and interface for entities that can upload files
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IFileAttachments.FileAttachments">
+            <summary>
+            File attachments for an entity
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.ISnowflakeEntity">
             <summary>
@@ -11843,6 +11892,114 @@
             </summary>
             <param name="request">Request to remove</param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection">
+            <summary>
+            Represents a Multipart section for MultiPart requests
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection.FileName">
+            <summary>
+            Name of the file for the section
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection.ContentType">
+            <summary>
+            Content type for the section
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection.Data">
+            <summary>
+            Data for the section
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection.SectionName">
+            <summary>
+            Name of the section
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection">
+            <summary>
+            Represents a MultiPartFileSection
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.FileName">
+            <summary>
+            Name of the file being sent
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.ContentType">
+            <summary>
+            Content Type for the file being sent
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.Data">
+            <summary>
+            Data for the file being sent
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.SectionName">
+            <summary>
+            Section name for the multipart section
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.#ctor(System.String,System.String,System.Byte[],System.String)">
+            <summary>
+            Constructor for a multipart file
+            </summary>
+            <param name="sectionName"></param>
+            <param name="fileName"></param>
+            <param name="data"></param>
+            <param name="contentType"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection">
+            <summary>
+            Represents a MultiPartFormSection
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.FileName">
+            <summary>
+            Name of the file being sent
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.ContentType">
+            <summary>
+            Content Type for the file being sent
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.Data">
+            <summary>
+            Data for the file being sent
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.SectionName">
+            <summary>
+            Section name for the multipart section
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.#ctor(System.String,System.Byte[],System.String)">
+            <summary>
+            Constructor for byte form data
+            </summary>
+            <param name="sectionName"></param>
+            <param name="data"></param>
+            <param name="contentType"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor for string form data
+            </summary>
+            <param name="sectionName"></param>
+            <param name="data"></param>
+            <param name="contentType"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.#ctor(System.String,System.Object,System.String)">
+            <summary>
+            Constructor for object form data
+            </summary>
+            <param name="sectionName"></param>
+            <param name="data"></param>
+            <param name="contentType"></param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Rest.RateLimitHandler">
             <summary>
             Represents a global rate limit handler for a bot
@@ -11912,6 +12069,16 @@
         <member name="P:Oxide.Ext.Discord.Rest.Request.Contents">
             <summary>
             JSON Serialization of Data 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.MultipartSections">
+            <summary>
+            Attachments for a request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Boundary">
+            <summary>
+            Multipart Boundary
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.Response">

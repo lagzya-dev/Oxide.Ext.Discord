@@ -12,14 +12,15 @@ namespace Oxide.Ext.Discord.Helpers.Converters
     public class MessageComponentsConverter : JsonConverter
     {
         /// <summary>
-        /// Write default JSON values
+        /// 
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="serializer"></param>
+        /// <exception cref="NotSupportedException"></exception>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>
@@ -33,23 +34,21 @@ namespace Oxide.Ext.Discord.Helpers.Converters
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            JArray array = JArray.Load(reader);
             List<BaseComponent> components = new List<BaseComponent>();
-            if(reader.TokenType == JsonToken.StartArray)
+
+            foreach (JToken token in array)
             {
-                JArray array = JArray.Load(reader);
-                foreach (JToken token in array)
+                MessageComponentType type = (MessageComponentType)Enum.Parse(typeof(MessageComponentType), token["type"].ToString());
+                switch (type)
                 {
-                    MessageComponentType type = (MessageComponentType)Enum.Parse(typeof(MessageComponentType), token["type"].ToString());
-                    switch (type)
-                    {
-                        case MessageComponentType.Button:
-                            components.Add(token.ToObject<ButtonComponent>());
-                            break;
+                    case MessageComponentType.Button:
+                        components.Add(token.ToObject<ButtonComponent>());
+                        break;
                         
-                        case MessageComponentType.SelectMenu:
-                            components.Add(token.ToObject<SelectMenuComponent>());
-                            break;
-                    }
+                    case MessageComponentType.SelectMenu:
+                        components.Add(token.ToObject<SelectMenuComponent>());
+                        break;
                 }
             }
 
@@ -67,7 +66,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
         }
 
         /// <summary>
-        /// Don't allow writing
+        /// 
         /// </summary>
         public override bool CanWrite => false;
     }

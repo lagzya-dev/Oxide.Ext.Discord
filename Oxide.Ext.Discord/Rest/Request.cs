@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Rest.Multipart;
 using RequestMethod = Oxide.Ext.Discord.Entities.Api.RequestMethod;
 using Time = Oxide.Ext.Discord.Helpers.Time;
 
@@ -38,7 +42,17 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// JSON Serialization of Data 
         /// </summary>
-        public string Contents { get; }
+        public byte[] Contents { get; }
+        
+        /// <summary>
+        /// Attachments for a request
+        /// </summary>
+        internal List<IMultipartSection> MultipartSections { get; }
+        
+        /// <summary>
+        /// Multipart Boundary
+        /// </summary>
+        public string Boundary { get; }
 
         /// <summary>
         /// Response from the request
@@ -78,6 +92,9 @@ namespace Oxide.Ext.Discord.Rest
         private readonly ILogger _logger;
         private RestError _lastError;
         private bool _success;
+        
+        private static readonly byte[] NewLine = Encoding.UTF8.GetBytes("\r\n");
+        private static readonly byte[] Separator = Encoding.UTF8.GetBytes("--");
 
         /// <summary>
         /// Creates a new request
@@ -99,9 +116,24 @@ namespace Oxide.Ext.Discord.Rest
             OnError = onError;
             _logger = logger;
 
-            if (data != null)
+            if (Data != null)
             {
-                Contents = JsonConvert.SerializeObject(Data, DiscordExtension.ExtensionSerializeSettings);
+                if (Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
+                {
+                    MultipartSections = new List<IMultipartSection> {new MultipartFormSection("payload_json", Data, "application/json")};
+                    for (int index = 0; index < attachments.FileAttachments.Count; index++)
+                    {
+                        MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
+                        MultipartSections.Add(new MultipartFileSection($"file{index+1}", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
+                    }
+
+                    Boundary = Guid.NewGuid().ToString().Replace("-", "");
+                    Contents = GetMultipartFormData();
+                }
+                else
+                {
+                    Contents = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Data, DiscordExtension.ExtensionSerializeSettings));
+                }
             }
         }
 
@@ -113,14 +145,8 @@ namespace Oxide.Ext.Discord.Rest
             InProgress = true;
             StartTime = DateTime.UtcNow;
 
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(RequestUrl);
-            req.Method = Method.ToString();
-            req.ContentType = "application/json";
-            req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})";
-            req.Timeout = RequestMaxLength * 1000;
-            req.ContentLength = 0;
-            req.Headers.Set("Authorization", _authHeader);
-
+            HttpWebRequest req = CreateRequest();
+            
             try
             {
                 //Can timeout while writing request data
@@ -169,7 +195,9 @@ namespace Oxide.Ext.Discord.Rest
                     _lastError.DiscordError = apiError;
                     if (apiError != null && apiError.Code != 0)
                     {
-                        _logger.Error($"Discord API has returned error Discord Code: {apiError.Code} Discord Error: {apiError.Message} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode})\nDiscord Errors: {apiError.Errors}\nRequest Body:\n{Contents}");
+                        _logger.Error($"Discord API has returned error Discord Code: {apiError.Code} Discord Error: {apiError.Message} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode})" +
+                                      $"\nDiscord Errors: {apiError.Errors}" +
+                                      $"\nRequest Body:\n{(Contents != null ? Encoding.UTF8.GetString(Contents) : "Contents is null")}");
                     }
                     else
                     {
@@ -184,6 +212,79 @@ namespace Oxide.Ext.Discord.Rest
                 _logger.Exception($"An exception occured for request: [{req.Method}] {req.RequestUri}", ex);
                 Close();
             }
+        }
+
+        private HttpWebRequest CreateRequest()
+        {
+            HttpWebRequest req = (HttpWebRequest) WebRequest.Create(RequestUrl);
+            req.Method = Method.ToString();
+            req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})";
+            req.Timeout = RequestMaxLength * 1000;
+            req.ContentLength = 0;
+            req.Headers.Set("Authorization", _authHeader);
+            
+            if (MultipartSections == null)
+            {
+                req.ContentType = "application/json";
+            }
+            else
+            {
+                req.ContentType = $"multipart/form-data;boundary=\"{Boundary}\"";
+            }
+            
+            return req;
+        }
+
+        private byte[] GetMultipartFormData()
+        {
+            StringBuilder sb = new StringBuilder();
+            byte[] boundary = Encoding.UTF8.GetBytes(Boundary);
+
+            List<byte> data = new List<byte>();
+
+            foreach (IMultipartSection section in MultipartSections)
+            {
+                AddMultipartSection(sb, section, data, boundary);
+            }
+
+            data.AddRange(NewLine);
+            data.AddRange(Separator);
+            data.AddRange(boundary);
+            data.AddRange(Separator);
+            data.AddRange(NewLine);
+            
+            return data.ToArray();
+        }
+
+        private void AddMultipartSection(StringBuilder sb, IMultipartSection section, List<byte> data, byte[] boundary)
+        {
+            sb.Length = 0;
+            sb.Append("Content-Disposition: form-data; name=\"");
+            sb.Append(section.SectionName);
+            sb.Append("\"");
+            if (section.FileName != null)
+            {
+                sb.Append("; filename=\"");
+                sb.Append(section.FileName);
+                sb.Append("\"");
+            }
+
+            if (!string.IsNullOrEmpty(section.ContentType))
+            {
+                sb.AppendLine();
+                sb.Append("Content-Type: ");
+                sb.Append(section.ContentType);
+            }
+
+            sb.AppendLine();
+            
+            data.AddRange(NewLine);
+            data.AddRange(Separator);
+            data.AddRange(boundary);
+            data.AddRange(NewLine);
+            data.AddRange(Encoding.UTF8.GetBytes(sb.ToString()));
+            data.AddRange(NewLine);
+            data.AddRange(section.Data);
         }
 
         /// <summary>
@@ -232,17 +333,16 @@ namespace Oxide.Ext.Discord.Rest
 
         private void WriteRequestData(WebRequest request)
         {
-            if (Data == null)
+            if (Contents == null || Contents.Length == 0)
             {
                 return;
             }
-            
-            byte[] bytes = Encoding.UTF8.GetBytes(Contents);
-            request.ContentLength = bytes.Length;
+
+            request.ContentLength = Contents.Length;
 
             using (Stream stream = request.GetRequestStream())
             {
-                stream.Write(bytes, 0, bytes.Length);
+                stream.Write(Contents, 0, Contents.Length);
             }
         }
 

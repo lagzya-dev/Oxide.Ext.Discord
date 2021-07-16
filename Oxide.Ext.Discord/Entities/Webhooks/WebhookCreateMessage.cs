@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Messages;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
@@ -6,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
     /// Represents <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook-jsonform-params">Webhook Create Message</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class WebhookCreateMessage : WebhookEditMessage
+    public class WebhookCreateMessage : MessageCreate
     {
         /// <summary>
         /// Override the default username of the webhook
@@ -18,12 +19,6 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// Override the default avatar of the webhook
         /// </summary>
         [JsonProperty("avatar_url")]
-        public string AvatarUrl { get; set; }
-
-        /// <summary>
-        /// If this is a TTS message
-        /// </summary>
-        [JsonProperty("tts")]
-        public bool Tts { get; set; }
+        public string AvatarUrl { get; set; } 
     }
 }
