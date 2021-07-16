@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Whether this was a TTS message
         /// </summary>
         [JsonProperty("tts")]
-        public bool Tts { get; set; }
+        public bool? Tts { get; set; }
         
         /// <summary>
         /// Embeds for the message
