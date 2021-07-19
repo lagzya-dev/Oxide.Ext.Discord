@@ -10,6 +10,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
     public enum MessageFlags
     {
         /// <summary>
+        /// This message has no flags
+        /// </summary>
+        None = 0,
+        
+        /// <summary>
         /// This message has been published to subscribed channels (via Channel Following)
         /// </summary>
         [Description("CROSSPOSTED")]
