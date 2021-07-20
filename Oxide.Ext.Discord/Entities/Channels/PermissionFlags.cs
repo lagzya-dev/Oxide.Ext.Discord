@@ -215,8 +215,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <summary>
         /// Allows management and editing of emojis
         /// </summary>
-        [Description("MANAGE_EMOJIS")]
-        ManageEmojis = 1 << 30,
+        [Description("MANAGE_EMOJIS_AND_STICKERS")]
+        ManageEmojisAndStickers = 1 << 30,
         
         /// <summary>
         /// Allows members to use slash commands in text channels
@@ -252,5 +252,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [Description("USE_PRIVATE_THREADS")]
         UsePrivateThreads  = 1ul << 36,
+        
+        /// <summary>
+        /// Allows the usage of custom stickers from other servers
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("USE_EXTERNAL_STICKERS")]
+        UseExternalStickers  = 1ul << 37,
     }
 }

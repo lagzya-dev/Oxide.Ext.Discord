@@ -165,8 +165,13 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public int? DefaultAutoArchiveDuration { get; set; }
         
         /// <summary>
-        /// Thread Members for the current thread.
-        /// Note: This is not sent by discord but maintained by socket events
+        /// Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+        /// </summary>
+        [JsonProperty("permissions")]
+        public string permissions { get; set; }
+        
+        /// <summary>
+        /// Computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
         /// </summary>
         public Hash<Snowflake, ThreadMember> ThreadMembers { get; set; }
 

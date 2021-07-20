@@ -22,7 +22,18 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <exception cref="ArgumentException">Thrown if format is Jpg or WebP</exception>
         public static string GetCustomEmojiUrl(Snowflake emojiId, ImageFormat format = ImageFormat.Auto)
         {
-            return $"{CdnUrl}/emojis/{emojiId}.{GetExtension(format, emojiId.ToString())}";
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                case ImageFormat.Gif:
+                    return $"{CdnUrl}/emojis/{emojiId}.{GetExtension(format, emojiId.ToString())}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Custom Emoji. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
+            }
         }
         
         /// <summary>
@@ -34,7 +45,18 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <returns>Url of the guild icon</returns>
         public static string GetGuildIconUrl(Snowflake guildId, string guildIcon, ImageFormat format = ImageFormat.Auto)
         {
-            return $"{CdnUrl}/icons/{guildId}/{guildIcon}.{GetExtension(format, guildIcon)}";
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                case ImageFormat.Gif:
+                    return $"{CdnUrl}/icons/{guildId}/{guildIcon}.{GetExtension(format, guildIcon)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Guild Icon. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
+            }
         }
         
         /// <summary>
@@ -47,12 +69,17 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <exception cref="ArgumentException">Thrown if format is Gif</exception>
         public static string GetGuildSplashUrl(Snowflake guildId, string guildSplash, ImageFormat format = ImageFormat.Auto)
         {
-            if (format == ImageFormat.Gif)
+            switch (format)
             {
-                throw new ArgumentException("ImageFormat is not valid for Guild Splash. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/splashes/{guildId}/{guildSplash}.{GetExtension(format, guildSplash)}";
+                
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Guild Splash. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
-            
-            return $"{CdnUrl}/splashes/{guildId}/{guildSplash}.{GetExtension(format, guildSplash)}";
         }
         
         /// <summary>
@@ -65,12 +92,17 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <exception cref="ArgumentException">Thrown if format is Gif</exception>
         public static string GetGuildDiscoverySplashUrl(Snowflake guildId, string guildDiscoverySplash, ImageFormat format = ImageFormat.Auto)
         {
-            if (format == ImageFormat.Gif)
+            switch (format)
             {
-                throw new ArgumentException("ImageFormat is not valid for Guild Discovery Splash. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/discovery-splashes/{guildId}/{guildDiscoverySplash}.{GetExtension(format, guildDiscoverySplash)}";
+                
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Guild Discovery Splash. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
-            
-            return $"{CdnUrl}/discovery-splashes/{guildId}/{guildDiscoverySplash}.{GetExtension(format, guildDiscoverySplash)}";
         }
         
         /// <summary>
@@ -83,12 +115,17 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <exception cref="ArgumentException">Thrown if format is Gif</exception>
         public static string GetGuildBannerUrl(Snowflake guildId, string guildBanner, ImageFormat format = ImageFormat.Auto)
         {
-            if (format == ImageFormat.Gif)
+            switch (format)
             {
-                throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/banners/{guildId}/{guildBanner}.{GetExtension(format, guildBanner)}";
+                
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
-            
-            return $"{CdnUrl}/banners/{guildId}/{guildBanner}.{GetExtension(format, guildBanner)}";
         }
         
         /// <summary>
@@ -112,7 +149,18 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <returns>Url of the users avatar</returns>
         public static string GetUserAvatarUrl(Snowflake userId, string userAvatar, ImageFormat format = ImageFormat.Auto)
         {
-            return $"{CdnUrl}/avatars/{userId}/{userAvatar}.{GetExtension(format, userAvatar)}";
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                case ImageFormat.Gif:
+                    return $"{CdnUrl}/avatars/{userId}/{userAvatar}.{GetExtension(format, userAvatar)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for User Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
+            }
         }
         
         /// <summary>
@@ -125,12 +173,17 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <exception cref="ArgumentException">Throw if format is Gif</exception>
         public static string GetApplicationIconUrl(Snowflake applicationId, string icon, ImageFormat format = ImageFormat.Auto)
         {
-            if (format == ImageFormat.Gif)
+            switch (format)
             {
-                throw new ArgumentException("ImageFormat is not valid for Application Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/app-icons/{applicationId}/{icon}.{GetExtension(format, icon)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Application Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
-            
-            return $"{CdnUrl}/app-icons/{applicationId}/{icon}.{GetExtension(format, icon)}";
         }
         
         /// <summary>
@@ -143,12 +196,17 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <exception cref="ArgumentException">Throw if format is Gif</exception>
         public static string GetApplicationAssetUrl(Snowflake applicationId, string assetId, ImageFormat format = ImageFormat.Auto)
         {
-            if (format == ImageFormat.Gif)
+            switch (format)
             {
-                throw new ArgumentException("ImageFormat is not valid for Application Asset. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/app-assets/{applicationId}/{assetId}.{GetExtension(format, assetId.ToString())}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Application Asset. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
-            
-            return $"{CdnUrl}/app-assets/{applicationId}/{assetId}.{GetExtension(format, assetId.ToString())}";
         }
         
         /// <summary>
@@ -162,12 +220,17 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <exception cref="ArgumentException">Throw if format is Gif</exception>
         public static string GetAchievementIconUrl(Snowflake applicationId, Snowflake achievementId, string iconHash, ImageFormat format = ImageFormat.Auto)
         {
-            if (format == ImageFormat.Gif)
+            switch (format)
             {
-                throw new ArgumentException("ImageFormat is not valid for Achievement Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/app-assets/{applicationId}/achievements/{achievementId}/icons/{iconHash}.{GetExtension(format, iconHash)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Achievement Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
-            
-            return $"{CdnUrl}/app-assets/{applicationId}/achievements/{achievementId}/icons/{iconHash}.{GetExtension(format, iconHash)}";
         }
         
         /// <summary>
@@ -180,12 +243,62 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <exception cref="ArgumentException">Throw if format is Gif</exception>
         public static string GetTeamIconUrl(Snowflake teamId, string teamIcon, ImageFormat format = ImageFormat.Auto)
         {
-            if (format == ImageFormat.Gif)
+            switch (format)
             {
-                throw new ArgumentException("ImageFormat is not valid for Team Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/team-icons/{teamId}/{teamIcon}.{GetExtension(format, teamIcon)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Team Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
-            
-            return $"{CdnUrl}/team-icons/{teamId}/{teamIcon}.{GetExtension(format, teamIcon)}";
+        }
+        
+
+        /// <summary>
+        /// Returns the banner for a given sticker pack
+        /// </summary>
+        /// <param name="applicationId">Application ID for the stickers</param>
+        /// <param name="bannerAssetId">Banner Asset ID for the stickers</param>
+        /// <param name="format">Image Formatting for the banner</param>
+        /// <returns>Url to the sticker pack banner</returns>
+        /// <exception cref="ArgumentException">Thrown if image type is not PNG,JPEG, or WebP</exception>
+        public static string GetStickerPackBanner(Snowflake applicationId, Snowflake bannerAssetId, ImageFormat format = ImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/app-assets/{applicationId}/store/{bannerAssetId}.{GetExtension(format, bannerAssetId)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+            }
+        }
+        
+        /// <summary>
+        /// Returns the sticker url with the given ID
+        /// </summary>
+        /// <param name="stickerId">ID of the sticker</param>
+        /// <param name="format">Format for the sticker to be returned in</param>
+        /// <returns>Return url for the sticker</returns>
+        /// <exception cref="ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        public static string GetSticker(Snowflake stickerId, ImageFormat format = ImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Png:
+                case ImageFormat.Lottie:
+                    return $"{CdnUrl}/stickers/{stickerId}.{GetExtension(format, stickerId)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+            }
         }
 
         /// <summary>
@@ -212,6 +325,8 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
                     return "webp";
                 case ImageFormat.Gif:
                     return "gif";
+                case ImageFormat.Lottie:
+                    return "json";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(format), format, "Format is not a valid ImageFormat");
             }

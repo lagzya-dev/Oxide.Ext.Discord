@@ -482,6 +482,14 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildStickersUpdated">
+            <code>
+            void OnDiscordGuildStickersUpdated(GuildStickersUpdatedEvent stickers, Hash&lt;Snowflake, DiscordSticker&gt; previous, Guild guild)
+            {
+                Puts("OnDiscordGuildStickersUpdated Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildIntegrationsUpdated">
             <code>
             void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, Guild guild)
@@ -2758,10 +2766,14 @@
             Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.permissions">
+            <summary>
+            Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ThreadMembers">
             <summary>
-            Thread Members for the current thread.
-            Note: This is not sent by discord but maintained by socket events
+            Computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Mention">
@@ -3471,7 +3483,7 @@
             Channel Type (Text)
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageEmojis">
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageEmojisAndStickers">
             <summary>
             Allows management and editing of emojis
             </summary>
@@ -3503,6 +3515,12 @@
         <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UsePrivateThreads">
             <summary>
             Allows for creating and participating in private threads
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UseExternalStickers">
+            <summary>
+            Allows the usage of custom stickers from other servers
             Channel Type (Text)
             </summary>
         </member>
@@ -4407,6 +4425,21 @@
             The role updated
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildStickersUpdatedEvent">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-stickers-update">Guild Stickers Update</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildStickersUpdatedEvent.GuildId">
+            <summary>
+            ID of the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildStickersUpdatedEvent.Stickers">
+            <summary>
+            List of emojis
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationCreatedEvent">
             <summary>
             Represents Integration Create Structure TODO:Add URL Once Published
@@ -4912,9 +4945,10 @@
             - GUILD_BAN_REMOVE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildEmojis">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildEmojisAndStickers">
             <summary>
             - GUILD_EMOJIS_UPDATE
+            - GUILD_STICKERS_UPDATE
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildIntegrations">
@@ -5270,6 +5304,12 @@
             <summary>
             Stage instances in the guild
             <see cref="T:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Stickers">
+            <summary>
+            Custom guild stickers
+            <see cref="T:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.HasLoadedAllMembers">
@@ -5925,7 +5965,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{System.Boolean},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{System.Boolean},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Modifies another user's voice state.
             See <a href="https://discord.com/developers/docs/resources/guild#update-user-voice-statee">Update Users Voice State</a>
@@ -5934,6 +5974,57 @@
             <param name="userId">User ID of the users state to update</param>
             <param name="channelId">Channel ID of the stage channel</param>
             <param name="suppress">Changes the users suppressed state</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListGuildStickers(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Stickers.DiscordSticker}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns an array of sticker objects for the given guild.
+            Includes user fields if the bot has the MANAGE_EMOJIS_AND_STICKERS permission.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with the list of stickers</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Stickers.DiscordSticker},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns a sticker object for the given guild and sticker IDs.
+            Includes the user field if the bot has the MANAGE_EMOJIS_AND_STICKERS permission.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="stickerId">ID of the sticker to get</param>
+            <param name="callback">Callback with the discord sticker</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuildSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate,System.Action{Oxide.Ext.Discord.Entities.Stickers.DiscordSticker},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Create a new sticker for the guild.
+            Requires the MANAGE_EMOJIS_AND_STICKERS permission.
+            Returns the new sticker object on success.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="sticker">Sticker to create</param>
+            <param name="callback">Callback with the discord sticker</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Stickers.DiscordSticker,System.Action{Oxide.Ext.Discord.Entities.Stickers.DiscordSticker},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Modify the given sticker.
+            Requires the MANAGE_EMOJIS_AND_STICKERS permission.
+            Returns the updated sticker object on success.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="sticker">Sticker to modify</param>
+            <param name="callback">Callback with the updated discord sticker</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Delete the given sticker.
+            Requires the MANAGE_EMOJIS_AND_STICKERS permission.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="stickerId">ID of the sticker to delete</param>
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -7816,8 +7907,8 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Author">
             <summary>
-            the author of this message (not guaranteed to be a valid user)
-             The author object follows the structure of the user object, but is only a valid user in the case where the message is generated by a user or bot user.
+            The author of this message (not guaranteed to be a valid user)
+            The author object follows the structure of the user object, but is only a valid user in the case where the message is generated by a user or bot user.
             If the message is generated by a webhook, the author object corresponds to the webhook's id, username, and avatar.
             You can tell if a message is generated by a webhook by checking for the webhook_id on the message object.
             <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>
@@ -8803,6 +8894,11 @@
             Used to create message components on a message
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.StickerIds">
+            <summary>
+            IDs of up to 3 stickers in the server to send in the message
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.FileAttachments">
             <summary>
             Attachments for a discord message
@@ -8844,6 +8940,11 @@
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageFlags">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/channel#message-object-message-flags">Message Flags</a> for a message
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.None">
+            <summary>
+            This message has no flags
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.CrossPosted">
@@ -8956,98 +9057,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageReference.FailIfNotExists">
             <summary>
             When sending, whether to error if the referenced message doesn't exist instead of sending as a normal (non-reply) message, default true
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageSticker">
-            <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-sticker-structure">Message Sticker Structure</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.Id">
-            <summary>
-            ID of the sticker
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.PackId">
-            <summary>
-            ID of the pack the sticker is from
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.Name">
-            <summary>
-            Name of the sticker
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.Description">
-            <summary>
-            Description of the sticker
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.Tags">
-            <summary>
-            For guild stickers, a unicode emoji representing the sticker's expression.
-            For nitro stickers, a comma-separated list of related expressions.
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.FormatType">
-            <summary>
-            Type of sticker format
-            <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.Available">
-            <summary>
-            Whether or not the sticker is available
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.GuildId">
-            <summary>
-            Id of the guild that owns this sticker
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.User">
-            <summary>
-            The user that uploaded the sticker
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageSticker.SortValue">
-            <summary>
-            A sticker's sort order within a pack
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types">Message Sticker Format Types</a>
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType.Png">
-            <summary>
-            Sticker format type PNG
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType.Apng">
-            <summary>
-            Sticker format type APNG
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageStickerFormatType.Lottie">
-            <summary>
-            Sticker format type LOTTIE
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageStickerItem">
-            <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-sticker-item-structure">Message Sticker Structure</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageStickerItem.Id">
-            <summary>
-            ID of the sticker
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageStickerItem.Name">
-            <summary>
-            Name of the sticker
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageType">
@@ -9589,6 +9598,217 @@
             </summary>
             <param name="id">Id to be converted to snowflake</param>
             <returns>ID converted to a snowflake</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-sticker-structure">Discord Sticker Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.Id">
+            <summary>
+            ID of the sticker
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.PackId">
+            <summary>
+            ID of the pack the sticker is from
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.Name">
+            <summary>
+            Name of the sticker
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.Description">
+            <summary>
+            Description of the sticker
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.Tags">
+            <summary>
+            For guild stickers, a unicode emoji representing the sticker's expression.
+            For nitro stickers, a comma-separated list of related expressions.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.Type">
+            <summary>
+            Type of sticker.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.FormatType">
+            <summary>
+            Type of sticker format
+            <see cref="T:Oxide.Ext.Discord.Entities.Stickers.StickerFormatType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.Available">
+            <summary>
+            Whether or not the sticker is available
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.GuildId">
+            <summary>
+            Id of the guild that owns this sticker
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.User">
+            <summary>
+            The user that uploaded the sticker
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.SortValue">
+            <summary>
+            A sticker's sort order within a pack
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.GetSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Stickers.DiscordSticker},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns a sticker object for the given sticker ID.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="stickerId">ID of the sticker</param>
+            <param name="callback">Callback with the DiscordSticker</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.ModifyGuildSticker(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Stickers.DiscordSticker},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Modify the given sticker.
+            Requires the MANAGE_EMOJIS_AND_STICKERS permission.
+            Returns the updated sticker object on success.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with the updated discord sticker</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.DeleteGuildSticker(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Delete the given sticker.
+            Requires the MANAGE_EMOJIS_AND_STICKERS permission.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-pack-object">Sticker Pack Object</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.Id">
+            <summary>
+            ID of the sticker pack
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.Stickers">
+            <summary>
+            The stickers in the pack
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.Name">
+            <summary>
+            Name of the sticker pack
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.SkuId">
+            <summary>
+            ID of the pack's SKU
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.CoverStickerId">
+            <summary>
+            ID of a sticker in the pack which is shown as the pack's icon
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.Description">
+            <summary>
+            Description of the sticker pack
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.BannerAssetId">
+            <summary>
+            ID of the sticker pack's banner image
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.GetNitroStickerPacks(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns the list of sticker packs available to Nitro subscribers.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with a list of Nitro sticker packs</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-pack-object">Sticker Pack Object</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.Name">
+            <summary>
+            Name of the sticker (2-30 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.description">
+            <summary>
+            Description of the sticker (empty or 2-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.tags">
+            <summary>
+            The Discord name of a unicode emoji representing the sticker's expression (2-200 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.FileAttachments">
+            <summary>
+            Sticker image attachment
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.AddSticker(System.String,System.String,System.Byte[])">
+            <summary>
+            Adds the sticker for guild sticker create
+            </summary>
+            <param name="fileName">Name of the file</param>
+            <param name="contentType">Content type of the file</param>
+            <param name="data">data for the file</param>
+            <exception cref="T:System.Exception">
+            Throw if more than 1 sticker is added.
+            Thrown if the data is more than 500KB
+            Thrown if the file extension is not .png, .apng, or .json
+            </exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Stickers.StickerFormatType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/sticker#sticker-format-types">Sticker Format Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerFormatType.Png">
+            <summary>
+            Sticker format type PNG
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerFormatType.Apng">
+            <summary>
+            Sticker format type APNG
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerFormatType.Lottie">
+            <summary>
+            Sticker format type LOTTIE
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Stickers.StickerType">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-types">Sticker Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerType.Standard">
+            <summary>
+            An official sticker in a pack, part of Nitro or in a removed purchasable pack
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerType.Guild">
+            <summary>
+            A sticker uploaded to a Boosted guild for the guild's members
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Teams.DiscordTeam">
             <summary>
@@ -10900,6 +11120,25 @@
             <returns>Url of the achievement icon</returns>
             <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetStickerPackBanner(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Helpers.Cdn.ImageFormat)">
+            <summary>
+            Returns the banner for a given sticker pack
+            </summary>
+            <param name="applicationId">Application ID for the stickers</param>
+            <param name="bannerAssetId">Banner Asset ID for the stickers</param>
+            <param name="format">Image Formatting for the banner</param>
+            <returns>Url to the sticker pack banner</returns>
+            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG,JPEG, or WebP</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetSticker(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Helpers.Cdn.ImageFormat)">
+            <summary>
+            Returns the sticker url with the given ID
+            </summary>
+            <param name="stickerId">ID of the sticker</param>
+            <param name="format">Format for the sticker to be returned in</param>
+            <returns>Return url for the sticker</returns>
+            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        </member>
         <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetExtension(Oxide.Ext.Discord.Helpers.Cdn.ImageFormat,System.String)">
             <summary>
             Returns the extension to use for the image
@@ -10937,6 +11176,11 @@
         <member name="F:Oxide.Ext.Discord.Helpers.Cdn.ImageFormat.Gif">
             <summary>
             Return image as GIF
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.Cdn.ImageFormat.Lottie">
+            <summary>
+            Lottie Image
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Converters.HashListConverter`1">
@@ -12287,6 +12531,11 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildEmojisUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-emojis-update">GUILD_EMOJIS_UPDATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildStickersUpdate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-stickers-update">GUILD_STICKERS_UPDATE</a> gateway event
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildIntegrationsUpdated">

@@ -1,11 +1,11 @@
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities.Stickers
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/resources/channel#message-object-message-sticker-format-types">Message Sticker Format Types</a>
+    /// Represents <a href="https://discord.com/developers/docs/resources/sticker#sticker-format-types">Sticker Format Types</a>
     /// </summary>
-    public enum MessageStickerFormatType
+    public enum StickerFormatType
     {
         /// <summary>
         /// Sticker format type PNG

@@ -53,8 +53,9 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         
         /// <summary>
         /// - GUILD_EMOJIS_UPDATE
+        /// - GUILD_STICKERS_UPDATE
         /// </summary>
-        GuildEmojis = 1 << 3,
+        GuildEmojisAndStickers  = 1 << 3,
         
         /// <summary>
         /// - GUILD_INTEGRATIONS_UPDATE

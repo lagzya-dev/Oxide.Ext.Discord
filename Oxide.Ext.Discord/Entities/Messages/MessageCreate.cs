@@ -57,9 +57,14 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public List<ActionRowComponent> Components { get; set; }
         
         /// <summary>
+        /// IDs of up to 3 stickers in the server to send in the message
+        /// </summary>
+        [JsonProperty("sticker_ids")]
+        public List<Snowflake> StickerIds { get; set; }
+        
+        /// <summary>
         /// Attachments for a discord message
         /// </summary>
-        [JsonIgnore]
         public List<MessageFileAttachment> FileAttachments { get; set; }
     }
 }

@@ -70,7 +70,12 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-emojis-update">GUILD_EMOJIS_UPDATE</a> gateway event
         /// </summary>
-        [Description("GUILD_EMOJIS_UPDATE")] GuildEmojisUpdated,
+        [Description("GUILD_EMOJIS_UPDATE")] GuildEmojisUpdated,        
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-stickers-update">GUILD_STICKERS_UPDATE</a> gateway event
+        /// </summary>
+        [Description("GUILD_STICKERS_UPDATE")] GuildStickersUpdate,
         
         /// <summary>
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-integrations-update">GUILD_INTEGRATIONS_UPDATE</a> gateway event

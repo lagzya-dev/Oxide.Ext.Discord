@@ -28,6 +28,11 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <summary>
         /// Return image as GIF
         /// </summary>
-        Gif
+        Gif,
+        
+        /// <summary>
+        /// Lottie Image
+        /// </summary>
+        Lottie
     }
 }

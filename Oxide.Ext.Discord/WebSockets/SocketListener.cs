@@ -15,6 +15,7 @@ using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Roles;
+using Oxide.Ext.Discord.Entities.Stickers;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
@@ -792,18 +793,64 @@ namespace Oxide.Ext.Discord.WebSockets
                     
                 foreach (DiscordEmoji emoji in emojis.Emojis.Values)
                 {
-                    DiscordEmoji existing = guild.Emojis[emojis.GuildId];
+                    DiscordEmoji existing = guild.Emojis[emoji.Id];
                     if (existing != null)
                     {
                         existing.Update(emoji);
                     }
                     else
                     {
-                        guild.Emojis[emojis.GuildId] = emoji;
+                        guild.Emojis[emoji.Id] = emoji;
                     }
                 }
 
                 _client.CallHook(DiscordHooks.OnDiscordGuildEmojisUpdated, emojis, previous, guild);
+            }
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#guild-stickers-update
+        private void HandleDispatchGuildStickersUpdate(EventPayload payload)
+        {
+            GuildStickersUpdatedEvent stickers = payload.EventData.ToObject<GuildStickersUpdatedEvent>();
+            DiscordGuild guild = _client.GetGuild(stickers.GuildId);
+            
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildEmojisUpdate)} Guild ID: {stickers.GuildId} Guild Name: {guild?.Name}");
+            if (guild != null && guild.IsAvailable)
+            {
+                Hash<Snowflake, DiscordSticker> previous = guild.Stickers.Copy();
+
+                List<Snowflake> removedEmojis = new List<Snowflake>();
+
+                foreach (Snowflake id in guild.Stickers.Keys)
+                {
+                    if (!stickers.Stickers.ContainsKey(id))
+                    {
+                        removedEmojis.Add(id);
+                    }
+                }
+
+                for (int index = 0; index < removedEmojis.Count; index++)
+                {
+                    Snowflake id = removedEmojis[index];
+                    guild.Emojis.Remove(id);
+                }
+
+                guild.Emojis.RemoveAll(e => e.EmojiId.HasValue && !stickers.Stickers.ContainsKey(e.EmojiId.Value));
+                    
+                foreach (DiscordSticker sticker in stickers.Stickers.Values)
+                {
+                    DiscordSticker existing = guild.Stickers[sticker.Id];
+                    if (existing != null)
+                    {
+                        existing.Update(sticker);
+                    }
+                    else
+                    {
+                        guild.Stickers[sticker.Id] = sticker;
+                    }
+                }
+
+                _client.CallHook(DiscordHooks.OnDiscordGuildStickersUpdated, stickers, previous, guild);
             }
         }
 

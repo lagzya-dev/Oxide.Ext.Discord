@@ -9,7 +9,9 @@ using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Integrations;
 using Oxide.Ext.Discord.Entities.Invites;
+using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Roles;
+using Oxide.Ext.Discord.Entities.Stickers;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Helpers.Cdn;
@@ -331,6 +333,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<StageInstance>))]
         [JsonProperty("stage_instances")]
         public Hash<Snowflake, StageInstance> StageInstances { get; set; }
+        
+        /// <summary>
+        /// Custom guild stickers
+        /// <see cref="DiscordSticker"/>
+        /// </summary>
+        [JsonConverter(typeof(HashListConverter<DiscordSticker>))]
+        [JsonProperty("stickers")]
+        public Hash<Snowflake, DiscordSticker> Stickers { get; set; }
         #endregion
 
         #region Extension Fields
@@ -1288,7 +1298,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="suppress">Changes the users suppressed state</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyserVoiceState(DiscordClient client, Snowflake userId, Snowflake channelId, bool? suppress = null, Action callback = null, Action<RestError> error = null)
+        public void ModifyUserVoiceState(DiscordClient client, Snowflake userId, Snowflake channelId, bool? suppress = null, Action callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -1301,6 +1311,72 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             }
             
             client.Bot.Rest.DoRequest($"/guilds/{Id}/voice-states/{userId}", RequestMethod.PATCH, data, callback, error);
+        }
+        
+        /// <summary>
+        /// Returns an array of sticker objects for the given guild.
+        /// Includes user fields if the bot has the MANAGE_EMOJIS_AND_STICKERS permission.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the list of stickers</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ListGuildStickers(DiscordClient client, Action<List<DiscordSticker>> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Returns a sticker object for the given guild and sticker IDs.
+        /// Includes the user field if the bot has the MANAGE_EMOJIS_AND_STICKERS permission.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="stickerId">ID of the sticker to get</param>
+        /// <param name="callback">Callback with the discord sticker</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetGuildSticker(DiscordClient client, Snowflake stickerId, Action<DiscordSticker> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers/{stickerId}", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Create a new sticker for the guild.
+        /// Requires the MANAGE_EMOJIS_AND_STICKERS permission.
+        /// Returns the new sticker object on success.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="sticker">Sticker to create</param>
+        /// <param name="callback">Callback with the discord sticker</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void CreateGuildSticker(DiscordClient client, GuildStickerCreate sticker, Action<DiscordSticker> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers", RequestMethod.POST, sticker, callback, error);
+        }
+        
+        /// <summary>
+        /// Modify the given sticker.
+        /// Requires the MANAGE_EMOJIS_AND_STICKERS permission.
+        /// Returns the updated sticker object on success.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="sticker">Sticker to modify</param>
+        /// <param name="callback">Callback with the updated discord sticker</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ModifyGuildSticker(DiscordClient client, DiscordSticker sticker, Action<DiscordSticker> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers/{sticker.Id}", RequestMethod.PATCH, sticker, callback, error);
+        }
+        
+        /// <summary>
+        /// Delete the given sticker.
+        /// Requires the MANAGE_EMOJIS_AND_STICKERS permission.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="stickerId">ID of the sticker to delete</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void DeleteGuildSticker(DiscordClient client, Snowflake stickerId, Action callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers/{stickerId}", RequestMethod.DELETE, null, callback, error);
         }
         #endregion
 

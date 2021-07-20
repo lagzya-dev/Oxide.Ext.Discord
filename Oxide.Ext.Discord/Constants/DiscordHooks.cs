@@ -230,7 +230,15 @@ namespace Oxide.Ext.Discord.Constants
         ///     Puts("OnDiscordGuildEmojisUpdated Works!");
         /// }
         /// </code>
-        public const string OnDiscordGuildEmojisUpdated = nameof(OnDiscordGuildEmojisUpdated);
+        public const string OnDiscordGuildEmojisUpdated = nameof(OnDiscordGuildEmojisUpdated);        
+        
+        /// <code>
+        /// void OnDiscordGuildStickersUpdated(GuildStickersUpdatedEvent stickers, Hash&lt;Snowflake, DiscordSticker&gt; previous, Guild guild)
+        /// {
+        ///     Puts("OnDiscordGuildStickersUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildStickersUpdated = nameof(OnDiscordGuildStickersUpdated);
         
         /// <code>
         /// void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, Guild guild)
