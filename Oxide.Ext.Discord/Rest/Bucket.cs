@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
@@ -168,8 +167,8 @@ namespace Oxide.Ext.Discord.Rest
             Handler.RateLimit.FiredRequest();
             GetRequest(0).Fire();
         }
-        
-        internal int RequestCount()
+
+        private int RequestCount()
         {
             lock (_syncRoot)
             {
@@ -177,7 +176,7 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
 
-        internal Request GetRequest(int index)
+        private Request GetRequest(int index)
         {
             lock (_syncRoot)
             {

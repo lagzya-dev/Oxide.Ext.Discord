@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// If the connection is initialized and not disconnected
         /// </summary>
-        public bool Initialized { get; internal set; }
+        public bool Initialized { get; private set; }
         
         /// <summary>
         /// Application reference for this bot
@@ -73,7 +73,7 @@ namespace Oxide.Ext.Discord
         
         internal GatewayReadyEvent ReadyData;
 
-        internal Socket WebSocket;
+        private Socket _webSocket;
 
         /// <summary>
         /// List of all clients that are using this bot client
@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord
             Initialized = true;
             
             Rest = new RestHandler(this, Logger);
-            WebSocket = new Socket(this, Logger);
+            _webSocket = new Socket(this, Logger);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Oxide.Ext.Discord
             if (Initialized)
             {
                 Logger.Debug($"{nameof(BotClient)}.{nameof(ConnectWebSocket)} Connecting to websocket");
-                WebSocket.Connect();
+                _webSocket.Connect();
             }
         }
 
@@ -142,7 +142,7 @@ namespace Oxide.Ext.Discord
         {
             if (Initialized)
             {
-                WebSocket.Disconnect(attemptReconnect, attemptResume);
+                _webSocket.Disconnect(attemptReconnect, attemptResume);
             }
         }
 
@@ -154,8 +154,8 @@ namespace Oxide.Ext.Discord
             Logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
             ActiveBots.Remove(Settings.ApiToken);
             Initialized = false;
-            WebSocket?.Shutdown();
-            WebSocket = null;
+            _webSocket?.Shutdown();
+            _webSocket = null;
             Rest?.Shutdown();
             Rest = null;
             ReadyData = null;
@@ -299,7 +299,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            WebSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
+            _webSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
         }
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            WebSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
+            _webSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
         }
 
         /// <summary>
@@ -327,7 +327,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            WebSocket.Send(GatewayCommandCode.PresenceUpdate, presenceUpdate);
+            _webSocket.Send(GatewayCommandCode.PresenceUpdate, presenceUpdate);
         }
         #endregion
 

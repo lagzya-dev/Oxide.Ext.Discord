@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// How many requests have been made globally for the bot since the last 60 second period wiped it
         /// </summary>
-        public int Global;
+        private int _global;
 
         private Timer _timer;
         private double _lastReset;
@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Rest
         {
             lock (_syncRoot)
             {
-                Global = 0;
+                _global = 0;
                 _lastReset = Time.TimeSinceEpoch();
             }
         }
@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.Rest
         {
             lock (_syncRoot)
             {
-                Global += 1;
+                _global += 1;
             }
         }
 
@@ -61,14 +61,14 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="retryAfter">How long until we should retry API request again</param>
         public void ReachedRateLimit(double retryAfter)
         {
-            Global = MaxRequestsPerMinute;
+            _global = MaxRequestsPerMinute;
             _retryAfter = retryAfter;
         }
 
         /// <summary>
         /// Returns true if we have reached the global rate limit 
         /// </summary>
-        public bool HasReachedRateLimit => Global >= MaxRequestsPerMinute;
+        public bool HasReachedRateLimit => _global >= MaxRequestsPerMinute;
 
         /// <summary>
         /// Returns how long until the current rate limit period will expire

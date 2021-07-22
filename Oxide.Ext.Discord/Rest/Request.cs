@@ -222,15 +222,7 @@ namespace Oxide.Ext.Discord.Rest
             req.Timeout = RequestMaxLength * 1000;
             req.ContentLength = 0;
             req.Headers.Set("Authorization", _authHeader);
-            
-            if (MultipartSections == null)
-            {
-                req.ContentType = "application/json";
-            }
-            else
-            {
-                req.ContentType = $"multipart/form-data;boundary=\"{Boundary}\"";
-            }
+            req.ContentType = MultipartSections == null ? "application/json" : $"multipart/form-data;boundary=\"{Boundary}\"";
             
             return req;
         }

@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// The authorization header value
         /// </summary>
-        internal readonly string Authorization;
+        private readonly string _authorization;
         
         private readonly ILogger _logger;
         private readonly object _bucketSyncObject = new object();
@@ -37,7 +37,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="logger">Logger from the client</param>
         public RestHandler(BotClient client, ILogger logger)
         {
-            Authorization = $"Bot {client.Settings.ApiToken}";
+            _authorization = $"Bot {client.Settings.ApiToken}";
             _logger = logger;
         }
 
@@ -81,7 +81,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="error">Error callback if an error occurs</param>
         private void CreateRequest(RequestMethod method, string url, object data, Action<RestResponse> callback, Action<RestError> error)
         {
-            Request request = new Request(method, url, data, Authorization, callback, error, _logger);
+            Request request = new Request(method, url, data, _authorization, callback, error, _logger);
             QueueRequest(request, _logger);
             CleanupExpired();
         }
@@ -141,11 +141,11 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         /// <param name="route">API Route</param>
         /// <returns>Bucket ID for route</returns>
-        //TODO: Support Webhook Token as a Major Parameter per https://github.com/discord/discord-api-docs/commit/14c505fefe343701c01563186e02f78a719b4829
-        private string GetBucketId(string route)
+        private static string GetBucketId(string route)
         {
             string[] routeSegments = route.Split('/');
             StringBuilder bucket = new StringBuilder(routeSegments[0]);
+            bucket.Append('/');
             string previousSegment = routeSegments[0];
             for (int index = 1; index < routeSegments.Length; index++)
             {
@@ -161,7 +161,7 @@ namespace Oxide.Ext.Discord.Rest
                     case "channels": 
                     case "webhooks":
                         break;
-                            
+
                     default:
                         if (ulong.TryParse(segment, out ulong _))
                         {
