@@ -2,6 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Stickers
@@ -79,6 +80,11 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// </summary>
         [JsonProperty("sort_value")]
         public int? SortValue { get; set; }
+
+        /// <summary>
+        /// Returns the Url for the sticker
+        /// </summary>
+        public string StickerUrl => DiscordCdn.GetSticker(Id);
         
         /// <summary>
         /// Returns a sticker object for the given sticker ID.
