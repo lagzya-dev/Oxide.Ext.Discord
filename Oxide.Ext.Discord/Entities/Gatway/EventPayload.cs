@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.WebSockets;
 
 namespace Oxide.Ext.Discord.Entities.Gatway
@@ -14,30 +12,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class EventPayload
     {
-        private static readonly Dictionary<string, DispatchCode> Codes = new Dictionary<string, DispatchCode>();
-
-        static EventPayload()
-        {
-            foreach (object enumValue in Enum.GetValues(typeof(DispatchCode)))
-            {
-                DispatchCode code = (DispatchCode) enumValue;
-                if (code == DispatchCode.Unknown)
-                {
-                    continue;
-                }
-                
-                object[] descriptions = enumValue.GetType().GetField(enumValue.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-                if (descriptions.Length == 0)
-                {
-                    DiscordExtension.GlobalLogger.Error($"Failed to get enum description for: {enumValue}");
-                    continue;
-                }
-
-                DescriptionAttribute description = (DescriptionAttribute) descriptions[0];
-                Codes[description.Description] = code;
-            }
-        }
-
         /// <summary>
         /// Op Code for the payload
         /// </summary>
@@ -63,9 +37,20 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         public int? Sequence { get; internal set; }
 
         /// <summary>
-        /// Returns a DispatchCode enum value for the EventName if we have it; Else the code will be Unknown
+        /// Returns a DispatchCode enum value for the EventName if the extension supports it; Else the code will be Unknown
         /// </summary>
-        public DispatchCode EventCode => EventName != null && Codes.TryGetValue(EventName, out DispatchCode code) ? code : DispatchCode.Unknown;
+        public DispatchCode EventCode
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(EventName) && EventName.TryParse(out DispatchCode code))
+                {
+                    return code;
+                }
+                
+                return DispatchCode.Unknown;
+            }
+        }
 
         /// <summary>
         /// Data as JObject

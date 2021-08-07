@@ -1,5 +1,5 @@
 using System;
-using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -17,49 +17,49 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// This message has been published to subscribed channels (via Channel Following)
         /// </summary>
-        [Description("CROSSPOSTED")]
+        [EnumMember(Value = "CROSSPOSTED")]
         CrossPosted = 1 << 0,
 
         /// <summary>
         /// This message originated from a message in another channel (via Channel Following)
         /// </summary>
-        [Description("IS_CROSSPOST")]
+        [EnumMember(Value = "IS_CROSSPOST")]
         IsCrossPost = 1 << 1,
 
         /// <summary>
         /// Do not include any embeds when serializing this message
         /// </summary>
-        [Description("SUPPRESS_EMBEDS")]
+        [EnumMember(Value = "SUPPRESS_EMBEDS")]
         SuppressEmbeds = 1 << 2,
 
         /// <summary>
         /// The source message for this crosspost has been deleted (via Channel Following)
         /// </summary>
-        [Description("SOURCE_MESSAGE_DELETED")]
+        [EnumMember(Value = "SOURCE_MESSAGE_DELETED")]
         SourceMessageDeleted = 1 << 3,
 
         /// <summary>
         /// This message came from the urgent message system
         /// </summary>
-        [Description("URGENT")]
+        [EnumMember(Value = "URGENT")]
         Urgent = 1 << 4,
 
         /// <summary>
         /// This message has an associated thread, with the same id as the message
         /// </summary>
-        [Description("HAS_THREAD")]
+        [EnumMember(Value = "HAS_THREAD")]
         HasThread = 1 << 5,
         
         /// <summary>
         /// This message is only visible to the user who invoked the Interaction
         /// </summary>
-        [Description("EPHEMERAL")]
+        [EnumMember(Value = "EPHEMERAL")]
         Ephemeral = 1 << 6,
 
         /// <summary>
         /// This message is an Interaction Response and the bot is "thinking"
         /// </summary>
-        [Description("LOADING")]
+        [EnumMember(Value = "LOADING")]
         Loading = 1 << 7
     }
 }

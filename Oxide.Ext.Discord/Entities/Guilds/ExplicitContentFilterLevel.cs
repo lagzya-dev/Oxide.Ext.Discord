@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -10,19 +10,19 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Disable explicit content filter
         /// </summary>
-        [Description("DISABLED")]
+        [EnumMember(Value = "DISABLED")]
         Disabled = 0,
         
         /// <summary>
         /// Filter for only members without roles
         /// </summary>
-        [Description("MEMBERS_WITHOUT_ROLES")]
+        [EnumMember(Value = "MEMBERS_WITHOUT_ROLES")]
         MembersWithoutRoles = 1,
         
         /// <summary>
         /// Filter for all members
         /// </summary>
-        [Description("ALL_MEMBERS")]
+        [EnumMember(Value = "ALL_MEMBERS")]
         AllMembers = 2
     }
 }

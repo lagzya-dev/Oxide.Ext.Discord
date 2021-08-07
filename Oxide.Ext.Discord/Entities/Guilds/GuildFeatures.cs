@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -13,97 +13,97 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Guild has access to set an invite splash background
         /// </summary>
-        [Description("INVITE_SPLASH")] 
+        [EnumMember(Value = "INVITE_SPLASH")] 
         InviteSplash,
         
         /// <summary>
         /// Guild has access to set 384kbps bitrate in voice (previously VIP voice servers)
         /// </summary>
-        [Description("VIP_REGIONS")] 
+        [EnumMember(Value = "VIP_REGIONS")] 
         VipRegions,
         
         /// <summary>
         /// Guild has access to set a vanity URL
         /// </summary>
-        [Description("VANITY_URL")] 
+        [EnumMember(Value = "VANITY_URL")] 
         VanityUrl,
         
         /// <summary>
         /// Guild is verified
         /// </summary>
-        [Description("VERIFIED")] 
+        [EnumMember(Value = "VERIFIED")] 
         Verified,
         
         /// <summary>
         /// Guild is partnered
         /// </summary>
-        [Description("PARTNERED")] 
+        [EnumMember(Value = "PARTNERED")] 
         Partnered,
         
         /// <summary>
         /// Guild can enable welcome screen and discovery, and receives community updates
         /// </summary>
-        [Description("COMMUNITY")] 
+        [EnumMember(Value = "COMMUNITY")] 
         Community,
         
         /// <summary>
         /// Guild has access to use commerce features (i.e. create store channels)
         /// </summary>
-        [Description("COMMERCE")] 
+        [EnumMember(Value = "COMMERCE")] 
         Commerce,
         
         /// <summary>
         /// Guild has access to create news channels
         /// </summary>
-        [Description("NEWS")] 
+        [EnumMember(Value = "NEWS")] 
         News,
         
         /// <summary>
         /// Guild is lurkable and able to be discovered in the directory
         /// </summary>
-        [Description("DISCOVERABLE")] 
+        [EnumMember(Value = "DISCOVERABLE")] 
         Discoverable,
         
         /// <summary>
         /// Guild is able to be featured in the directory
         /// </summary>
-        [Description("FEATURABLE")] 
+        [EnumMember(Value = "FEATURABLE")] 
         Featurable,
         
         /// <summary>
         /// Guild has access to set an animated guild icon
         /// </summary>
-        [Description("ANIMATED_ICON")] 
+        [EnumMember(Value = "ANIMATED_ICON")] 
         AnimatedIcon,
         
         /// <summary>
         /// Guild has access to set a guild banner image
         /// </summary>
-        [Description("BANNER")] 
+        [EnumMember(Value = "BANNER")] 
         Banner,
         
         /// <summary>
         /// Guild has enabled the welcome screen
         /// </summary>
-        [Description("WELCOME_SCREEN_ENABLED")] 
+        [EnumMember(Value = "WELCOME_SCREEN_ENABLED")] 
         WelcomeScreenEnabled,
         
         /// <summary>
         /// Guild has enabled ticketed events
         /// </summary>
-        [Description("TICKETED_EVENTS_ENABLED")] 
+        [EnumMember(Value = "TICKETED_EVENTS_ENABLED")] 
         TicketedEventsEnabled,
         
         /// <summary>
         /// Guild has enabled monetization
         /// </summary>
-        [Description("MONETIZATION_ENABLED")] 
+        [EnumMember(Value = "MONETIZATION_ENABLED")] 
         MonetizationEnabled,
         
         /// <summary>
         /// Guild has increased custom sticker slots
         /// </summary>
-        [Description("MORE_STICKERS")] 
+        [EnumMember(Value = "MORE_STICKERS")] 
         MoreStickers,
     }
 }

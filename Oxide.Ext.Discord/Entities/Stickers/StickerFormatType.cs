@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Stickers
 {
@@ -10,19 +10,19 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <summary>
         /// Sticker format type PNG
         /// </summary>
-        [Description("PNG")]
+        [EnumMember(Value = "PNG")]
         Png = 1,
         
         /// <summary>
         /// Sticker format type APNG
         /// </summary>
-        [Description("APNG")]
+        [EnumMember(Value = "APNG")]
         Apng = 2,
         
         /// <summary>
         /// Sticker format type LOTTIE
         /// </summary>
-        [Description("LOTTIE")]
+        [EnumMember(Value = "LOTTIE")]
         Lottie = 3
     }
 }

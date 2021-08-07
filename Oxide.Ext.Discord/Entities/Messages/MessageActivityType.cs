@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -10,25 +11,25 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// Message Activity Join
         /// </summary>
-        [Description("JOIN")]
+        [EnumMember(Value = "JOIN")]
         Join = 1,
         
         /// <summary>
         /// Message Activity Spectate
         /// </summary>
-        [Description("SPECTATE")]
+        [EnumMember(Value = "SPECTATE")]
         Spectate = 2,
         
         /// <summary>
         /// Message Activity Listen
         /// </summary>
-        [Description("LISTEN")]
+        [EnumMember(Value = "LISTEN")]
         Listen = 3,
         
         /// <summary>
         /// Message Activity JoinRequest
         /// </summary>
-        [Description("JOIN_REQUEST")]
+        [EnumMember(Value = "JOIN_REQUEST")]
         JoinRequest = 5,
     }
 }

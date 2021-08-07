@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Teams
 {
@@ -10,13 +10,13 @@ namespace Oxide.Ext.Discord.Entities.Teams
         /// <summary>
         /// If the user has been invited
         /// </summary>
-        [Description("INVITED")]
+        [EnumMember(Value = "INVITED")]
         Invited = 1,
         
         /// <summary>
         /// If the is part of the team
         /// </summary>
-        [Description("ACCEPTED")]
+        [EnumMember(Value = "ACCEPTED")]
         Accepted = 2
     }
 }

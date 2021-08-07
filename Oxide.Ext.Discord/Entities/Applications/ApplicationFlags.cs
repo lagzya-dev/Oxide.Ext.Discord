@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         GatewayGuildMembers = 1 << 14,
         
         /// <summary>
-        /// The application has the GUILD_MEMBERS  intent enabled on the bot
+        /// The application has the GUILD_MEMBERS intent enabled on the bot
         /// </summary>
         GatewayGuildMembersLimited = 1 << 15,
         
@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         VerificationPendingGuildLimit = 1 << 16,
         
         /// <summary>
-        /// The application has functionality the specific to the discord client app.
+        /// The application has functionality that is specific to the discord client app.
         /// </summary>
         Embedded = 1 << 17,
     }

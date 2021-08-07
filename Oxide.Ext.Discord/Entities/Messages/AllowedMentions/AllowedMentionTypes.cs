@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -13,19 +14,19 @@ namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
         /// <summary>
         /// Controls role mentions
         /// </summary>
-        [Description("roles")] 
+        [EnumMember(Value = "roles")] 
         Roles,
         
         /// <summary>
         /// 	Controls user mentions
         /// </summary>
-        [Description("users")] 
+        [EnumMember(Value = "users")] 
         Users,
         
         /// <summary>
         /// Controls @everyone and @here mentions
         /// </summary>
-        [Description("everyone")] 
+        [EnumMember(Value = "everyone")] 
         Everyone,
     }
 }

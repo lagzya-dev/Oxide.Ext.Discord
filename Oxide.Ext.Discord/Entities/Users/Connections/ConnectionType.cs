@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -13,11 +13,11 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         /// <summary>
         /// Connection type is Twitch
         /// </summary>
-        [Description("twitch")] Twitch,
+        [EnumMember(Value = "twitch")] Twitch,
         
         /// <summary>
         /// Connection type is Youtube
         /// </summary>
-        [Description("youtube")] Youtube,
+        [EnumMember(Value = "youtube")] Youtube,
     }
 }

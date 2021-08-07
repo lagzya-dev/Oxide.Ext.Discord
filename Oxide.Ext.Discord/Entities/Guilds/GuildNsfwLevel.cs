@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -10,25 +11,25 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Default NSFW Level
         /// </summary>
-        [Description("DEFAULT")]
+        [EnumMember(Value = "DEFAULT")]
         Default = 0,
         
         /// <summary>
         /// Guild is explicitly NSFW
         /// </summary>
-        [Description("EXPLICIT")]
+        [EnumMember(Value = "EXPLICIT")]
         Explicit = 1,
         
         /// <summary>
         /// Guild is safe from NSFW
         /// </summary>
-        [Description("SAFE")]
+        [EnumMember(Value = "SAFE")]
         Safe = 2,
         
         /// <summary>
         /// Guild is age restricted
         /// </summary>
-        [Description("AGE_RESTRICTED")]
+        [EnumMember(Value = "AGE_RESTRICTED")]
         AgeRestricted = 3
     }
 }

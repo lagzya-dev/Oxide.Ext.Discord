@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Users
 {
@@ -10,26 +11,26 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         /// User is online
         /// </summary>
-        [Description("online")] Online,
+        [EnumMember(Value = "online")] Online,
         
         /// <summary>
         /// User has Do Not Disturb
         /// </summary>
-        [Description("dnd")] DND,
+        [EnumMember(Value = "dnd")] DND,
         
         /// <summary>
         /// User is idle
         /// </summary>
-        [Description("idle")] Idle,
+        [EnumMember(Value = "idle")] Idle,
         
         /// <summary>
         /// User is invisible
         /// </summary>
-        [Description("invisible")] Invisible,
+        [EnumMember(Value = "invisible")] Invisible,
         
         /// <summary>
         /// User is offline
         /// </summary>
-        [Description("offline")] Offline
+        [EnumMember(Value = "offline")] Offline
     }
 }

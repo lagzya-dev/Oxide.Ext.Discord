@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -12,13 +13,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Suppress member join notifications
         /// </summary>
-        [Description("SUPPRESS_JOIN_NOTIFICATIONS")]
+        [EnumMember(Value = "SUPPRESS_JOIN_NOTIFICATIONS")]
         SuppressJoinNotifications = 1 << 0,
         
         /// <summary>
         /// Suppress server boost notifications
         /// </summary>
-        [Description("SUPPRESS_PREMIUM_SUBSCRIPTIONS")]
+        [EnumMember(Value = "SUPPRESS_PREMIUM_SUBSCRIPTIONS")]
         SuppressPremiumSubscriptions = 1 << 1
     }
 }

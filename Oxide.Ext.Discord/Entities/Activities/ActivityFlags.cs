@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Activities
 {
@@ -12,43 +13,43 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// <summary>
         /// No Actions can be done to this activity
         /// </summary>
-        [Description("NONE")]
+        [EnumMember(Value = "NONE")]
         None = 0,
         
         /// <summary>
         /// No Actions can be done to this activity
         /// </summary>
-        [Description("INSTANCE")]
+        [EnumMember(Value = "INSTANCE")]
         Instance =	1 << 0,
         
         /// <summary>
         /// Activity can be joined
         /// </summary>
-        [Description("JOIN")]
+        [EnumMember(Value = "JOIN")]
         Join =	1 << 1,
         
         /// <summary>
         /// Activity can be spectated
         /// </summary>
-        [Description("SPECTATE")]
+        [EnumMember(Value = "SPECTATE")]
         Spectate =	1 << 2,
         
         /// <summary>
         /// User may request to join activity
         /// </summary>
-        [Description("JOIN_REQUEST")]
+        [EnumMember(Value = "JOIN_REQUEST")]
         JoinRequest =	1 << 3,
         
         /// <summary>
         /// User can listen along in spotify
         /// </summary>
-        [Description("SYNC")]
+        [EnumMember(Value = "SYNC")]
         Sync =	1 << 4,
         
         /// <summary>
         /// User can play this song
         /// </summary>
-        [Description("PLAY")]
+        [EnumMember(Value = "PLAY")]
         Play =	1 << 5
     }
 }

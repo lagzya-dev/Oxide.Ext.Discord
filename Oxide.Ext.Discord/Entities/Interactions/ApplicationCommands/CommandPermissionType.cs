@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
@@ -10,13 +11,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <summary>
         /// This permissions uses Role ID
         /// </summary>
-        [Description("ROLE")]
+        [EnumMember(Value = "ROLE")]
         Role = 1,
         
         /// <summary>
         /// This permission uses User ID
         /// </summary>
-        [Description("USER")]
+        [EnumMember(Value = "USER")]
         User = 2
     }
 }

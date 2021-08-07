@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -10,133 +11,133 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// The default message type
         /// </summary>
-        [Description("DEFAULT")]
+        [EnumMember(Value = "DEFAULT")]
         Default = 0,
         
         /// <summary>
         /// The message when a recipient is added
         /// </summary>
-        [Description("RECIPIENT_ADD")]
+        [EnumMember(Value = "RECIPIENT_ADD")]
         RecipientAdd = 1,
         
         /// <summary>
         /// The message when a recipient is removed
         /// </summary>
-        [Description("RECIPIENT_REMOVE")]
+        [EnumMember(Value = "RECIPIENT_REMOVE")]
         RecipientRemove = 2,
         
         /// <summary>
         /// The message when a user is called
         /// </summary>
-        [Description("CALL")]
+        [EnumMember(Value = "CALL")]
         Call = 3,
         
         /// <summary>
         /// The message when a channel name is changed
         /// </summary>
-        [Description("CHANNEL_NAME_CHANGE")]
+        [EnumMember(Value = "CHANNEL_NAME_CHANGE")]
         ChannelNameChange = 4,
         
         /// <summary>
         /// The message when a channel icon is changed
         /// </summary>
-        [Description("CHANNEL_ICON_CHANGE")]
+        [EnumMember(Value = "CHANNEL_ICON_CHANGE")]
         ChannelIconChange = 5,
         
         /// <summary>
         /// The message when another message is pinned
         /// </summary>
-        [Description("CHANNEL_PINNED_MESSAGE")]
+        [EnumMember(Value = "CHANNEL_PINNED_MESSAGE")]
         ChannelPinnedMessage = 6,
         
         /// <summary>
         /// The message when a new member joined
         /// </summary>
-        [Description("GUILD_MEMBER_JOIN")]
+        [EnumMember(Value = "GUILD_MEMBER_JOIN")]
         GuildMemberJoin = 7,
         
         /// <summary>
         ///  The message for when a user boosts a guild
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION")]
+        [EnumMember(Value = "USER_PREMIUM_GUILD_SUBSCRIPTION")]
         UserPremiumGuildSubscription = 8,
         
         /// <summary>
         /// The message for when a guild reaches Tier 1 of Nitro boosts
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1")]
+        [EnumMember(Value = "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1")]
         UserPremiumGuildSubscriptionTier1 = 9,
         
         /// <summary>
         /// The message for when a guild reaches Tier 2 of Nitro boosts
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2")]
+        [EnumMember(Value = "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2")]
         UserPremiumGuildSubscriptionTier2 = 10,
         
         /// <summary>
         /// The message for when a guild reaches Tier 3 of Nitro boosts
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3")]
+        [EnumMember(Value = "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3")]
         UserPremiumGuildSubscriptionTier3 = 11,
         
         /// <summary>
         /// The message for when a news channel subscription is added to a text channel
         /// </summary>
-        [Description("ChannelFollowAdd")]
+        [EnumMember(Value = "ChannelFollowAdd")]
         ChannelFollowAdd = 12,
         
         /// <summary>
         /// The message for when a guild discovery is disqualified
         /// </summary>
-        [Description("GuildDiscoveryDisqualified")]
+        [EnumMember(Value = "GuildDiscoveryDisqualified")]
         GuildDiscoveryDisqualified = 14,
         
         /// <summary>
         /// The message for when a guild discovery is requalified
         /// </summary>
-        [Description("GuildDiscoveryRequalified")]
+        [EnumMember(Value = "GuildDiscoveryRequalified")]
         GuildDiscoveryRequalified = 15,
         
         /// <summary>
         /// The message for grace period initial warning
         /// </summary>
-        [Description("GUILD_DISCOVERY_GRACE_PERIOD_INITIAL_WARNING")]
+        [EnumMember(Value = "GUILD_DISCOVERY_GRACE_PERIOD_INITIAL_WARNING")]
         GuildDiscoveryGracePeriodInitialWarning = 16,
         
         /// <summary>
         /// The message for grace period final warning
         /// </summary>
-        [Description("GUILD_DISCOVERY_GRACE_PERIOD_FINAL_WARNING")]
+        [EnumMember(Value = "GUILD_DISCOVERY_GRACE_PERIOD_FINAL_WARNING")]
         GuildDiscoveryGracePeriodFinalWarning = 17,
         
         /// <summary>
         /// The message created a thread
         /// </summary>
-        [Description("THREAD_CREATED")]
+        [EnumMember(Value = "THREAD_CREATED")]
         ThreadCreated = 18,
         
         /// <summary>
         /// The message for when the message is a reply
         /// </summary>
-        [Description("REPLY")]
+        [EnumMember(Value = "REPLY")]
         Reply = 19,
         
         /// <summary>
         /// The message for when the message is an application command
         /// </summary>
-        [Description("APPLICATION_COMMAND")]
+        [EnumMember(Value = "APPLICATION_COMMAND")]
         ApplicationCommand = 20,
         
         /// <summary>
         /// Starter message for a thread
         /// </summary>
-        [Description("THREAD_STARTER_MESSAGE")]
+        [EnumMember(Value = "THREAD_STARTER_MESSAGE")]
         ThreadStarterMessage = 20,
         
         /// <summary>
         /// Reminder for a guild invite
         /// </summary>
-        [Description("GUILD_INVITE_REMINDER")]
+        [EnumMember(Value = "GUILD_INVITE_REMINDER")]
         GuildInviteReminder = 20
     }
 }
