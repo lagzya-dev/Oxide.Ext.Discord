@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
     {
         /// <summary>
         /// The user-facing name of the option,
-        /// Max 25 characters
+        /// Max 100 characters
         /// </summary>
         [JsonProperty("label")]
         public string Label { get; set; }
@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         
         /// <summary>
         /// An additional description of the option,
-        /// Max 50 characters
+        /// Max 100 characters
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
