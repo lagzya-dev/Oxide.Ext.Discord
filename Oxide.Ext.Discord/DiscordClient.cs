@@ -257,6 +257,9 @@ namespace Oxide.Ext.Discord
             }
 
             CloseClient(client);
+            DiscordExtension.DiscordLink.OnPluginUnloaded(plugin);
+            DiscordExtension.DiscordCommand.OnPluginUnloaded(plugin);
+            DiscordExtension.DiscordSubscriptions.OnPluginUnloaded(plugin);
         }
 
         internal static void CloseClient(DiscordClient client)

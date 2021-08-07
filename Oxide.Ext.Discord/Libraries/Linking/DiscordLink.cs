@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Linking
@@ -16,7 +17,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     /// </summary>
     public class DiscordLink : Library
     {
-        internal IPlayerManager Players => _players ?? (_players = Interface.Oxide.GetLibrary<Covalence>().Players);
+        private IPlayerManager Players => _players ?? (_players = Interface.Oxide.GetLibrary<Covalence>().Players);
         private IPlayerManager _players;
 
         private readonly Hash<string, Snowflake> _steamIdToDiscordId = new Hash<string, Snowflake>();
@@ -26,7 +27,16 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         
         private Plugin LinkPlugin { get; set; }
 
-        private Event.Callback<Plugin, PluginManager> _onRemoved;
+        private readonly ILogger _logger;
+
+        /// <summary>
+        /// DiscordLink Constructor
+        /// </summary>
+        /// <param name="logger">Logger for Discord Link</param>
+        public DiscordLink(ILogger logger)
+        {
+            _logger = logger;
+        }
 
         /// <summary>
         /// Returns if there is a registered link plugin
@@ -48,18 +58,16 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
             if (link == null)
             {
-                Interface.Oxide.LogWarning("[Discord Link] Tried to register a Discord Link Plugin that does not inherit from IDiscordLinkPlugin: {0}", plugin.Title);
+                _logger.Warning($"[{nameof(DiscordLink)}] Tried to register a Discord Link Plugin that does not inherit from IDiscordLinkPlugin: {plugin.Title}");
                 return;
             }
 
             if (LinkPlugin != null)
             {
-                _onRemoved.Remove();
-                Interface.Oxide.LogWarning("[Discord Link] Plugin has been overriden by {0}, Previously {1}", plugin.Title, LinkPlugin.Title);
+                _logger.Warning($"[{nameof(DiscordLink)}] Plugin has been overriden by {plugin.Title}, Previously {LinkPlugin.Title}");
             }
 
             LinkPlugin = plugin;
-            _onRemoved = LinkPlugin.OnRemovedFromManager.Add(RemovePlugin);
             link.RegisterEvents(OnLinked, OnUnlinked);
 
             Hash<string, Snowflake> data = link.GetSteamToDiscordIds();
@@ -77,7 +85,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             }
         }
 
-        private void RemovePlugin(Plugin plugin, PluginManager manager)
+        internal void OnPluginUnloaded(Plugin plugin)
         {
             if (plugin == LinkPlugin)
             {

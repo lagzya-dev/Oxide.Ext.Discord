@@ -17,11 +17,6 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     public class DiscordSubscriptions : Library
     {
         private readonly Hash<string, Hash<Snowflake, DiscordSubscription>> _subscriptions = new Hash<string, Hash<Snowflake, DiscordSubscription>>();
-        
-        /// <summary>
-        /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L104)
-        /// </summary>
-        private readonly Hash<Plugin, Event.Callback<Plugin, PluginManager>> _pluginRemovedFromManager = new Hash<Plugin, Event.Callback<Plugin, PluginManager>>();
 
         private readonly ILogger _logger;
         
@@ -80,11 +75,6 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             }
 
             pluginSubs[channelId] = new DiscordSubscription(channelId, plugin, message);
-                
-            if (!_pluginRemovedFromManager.ContainsKey(plugin))
-            {
-                _pluginRemovedFromManager[plugin] = plugin.OnRemovedFromManager.Add(RemovePluginSubscriptions);
-            }
         }
         
         /// <summary>
@@ -118,17 +108,15 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             if (pluginSubs.Count == 0)
             {
                 _subscriptions.Remove(plugin.Name);
-                if (_pluginRemovedFromManager.TryGetValue(plugin, out Event.Callback<Plugin, PluginManager> callback))
-                {
-                    callback.Remove();
-                    _pluginRemovedFromManager.Remove(plugin);
-                }
             }
             
             _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemoveChannelSubscription)} {plugin.Name} removed subscription to channel {channelId}");
         }
 
-        private void RemovePluginSubscriptions(Plugin plugin, PluginManager manager) => RemovePluginSubscriptions(plugin);
+        internal void OnPluginUnloaded(Plugin plugin)
+        {
+            RemovePluginSubscriptions(plugin);
+        }
         
         /// <summary>
         /// Remove all subscriptions for a plugin
@@ -150,12 +138,6 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             
             _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemovePluginSubscriptions)} Removed {pluginSubs.Count} subscriptions for plugin {plugin.Name}");
             pluginSubs.Clear();
-
-            if(_pluginRemovedFromManager.TryGetValue(plugin, out Event.Callback<Plugin, PluginManager> callback))
-            {
-                callback.Remove();
-                _pluginRemovedFromManager.Remove(plugin);
-            }
         }
         
         internal void HandleMessage(DiscordMessage message, DiscordChannel channel)

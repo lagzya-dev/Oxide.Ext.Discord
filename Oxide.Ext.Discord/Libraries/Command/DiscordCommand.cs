@@ -21,14 +21,9 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// Available command prefixes used by the extension
         /// </summary>
         public readonly char[] CommandPrefixes;
-        
-        internal readonly Hash<string, DirectMessageCommand> DirectMessageCommands = new Hash<string, DirectMessageCommand>();
-        internal readonly Hash<string, GuildCommand> GuildCommands = new Hash<string, GuildCommand>();
 
-        /// <summary>
-        /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L104)
-        /// </summary>
-        private readonly Hash<Plugin, Event.Callback<Plugin, PluginManager>> _pluginRemovedFromManager = new Hash<Plugin, Event.Callback<Plugin, PluginManager>>();
+        private readonly Hash<string, DirectMessageCommand> DirectMessageCommands = new Hash<string, DirectMessageCommand>();
+        private readonly Hash<string, GuildCommand> GuildCommands = new Hash<string, GuildCommand>();
 
         private Lang _lang;
         
@@ -139,12 +134,6 @@ namespace Oxide.Ext.Discord.Libraries.Command
 
             // Add the new command to collections
             DirectMessageCommands[commandName] = cmd;
-
-            // Hook the unload event
-            if (plugin != null && !_pluginRemovedFromManager.ContainsKey(plugin))
-            {
-                _pluginRemovedFromManager[plugin] = plugin.OnRemovedFromManager.Add(OnPluginRemovedFromManager);
-            }
         }
 
         /// <summary>
@@ -205,12 +194,6 @@ namespace Oxide.Ext.Discord.Libraries.Command
 
             // Add the new command to collections
             GuildCommands[commandName] = cmd;
-
-            // Hook the unload event
-            if (plugin != null && !_pluginRemovedFromManager.ContainsKey(plugin))
-            {
-                _pluginRemovedFromManager[plugin] = plugin.OnRemovedFromManager.Add(OnPluginRemovedFromManager);
-            }
         }
 
         /// <summary>
@@ -247,12 +230,10 @@ namespace Oxide.Ext.Discord.Libraries.Command
         }
 
         /// <summary>
-        /// Called when a plugin has been removed from manager
-        /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L377)
+        /// Called when a plugin has been unloaded
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="manager"></param>
-        private void OnPluginRemovedFromManager(Plugin sender, PluginManager manager)
+        internal void OnPluginUnloaded(Plugin sender)
         {
             List<BaseCommand> removeCommands = new List<BaseCommand>();
             // Remove all discord commands which were registered by the plugin
@@ -276,13 +257,6 @@ namespace Oxide.Ext.Discord.Libraries.Command
             {
                 BaseCommand cmd = removeCommands[index];
                 RemoveDiscordCommand(cmd);
-            }
-
-            // Unhook the event
-            if (_pluginRemovedFromManager.TryGetValue(sender, out Event.Callback<Plugin, PluginManager> callback))
-            {
-                callback.Remove();
-                _pluginRemovedFromManager.Remove(sender);
             }
         }
 

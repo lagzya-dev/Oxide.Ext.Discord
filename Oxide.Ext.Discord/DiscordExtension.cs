@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord
             DiscordConfig = ConfigFile.Load<DiscordConfig>(configPath);
             DiscordConfig.Save();
 
-            DiscordLink = new DiscordLink();
+            DiscordLink = new DiscordLink(GlobalLogger);
             DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes);
             DiscordSubscriptions = new DiscordSubscriptions(GlobalLogger);
 
