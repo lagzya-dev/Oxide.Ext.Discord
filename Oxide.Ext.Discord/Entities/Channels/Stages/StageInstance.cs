@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Interfaces;
 namespace Oxide.Ext.Discord.Entities.Channels.Stages
 {
     /// <summary>
-    /// Represents a channel <a href="https://discord.com/developers/docs/resources/stage-instance#auto-closing-stage-instance-structure">Stage Instance</a> within Discord.
+    /// Represents a channel <a href="https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-stage-instance-structure">Stage Instance</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class StageInstance : ISnowflakeEntity
@@ -87,7 +87,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <summary>
         /// Modifies fields of an existing Stage instance.
         /// Requires the user to be a moderator of the Stage channel.
-        /// See <a href="https://discord.com/developers/docs/resources/stage-instance#update-stage-instance">Update Stage Instance</a>
+        /// See <a href="https://discord.com/developers/docs/resources/stage-instance#modify-stage-instance">Update Stage Instance</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="topic">The new topic for the stage instance</param>
@@ -127,10 +127,10 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         {
             StageInstance previous = (StageInstance)MemberwiseClone();
             if (stage.Topic != null)
-            {
                 Topic = stage.Topic;
-            }
 
+            PrivacyLevel = stage.PrivacyLevel;
+            
             return previous;
         }
     }

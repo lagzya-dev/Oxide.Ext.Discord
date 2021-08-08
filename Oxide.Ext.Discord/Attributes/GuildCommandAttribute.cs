@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Attributes
     public class GuildCommandAttribute : BaseCommandAttribute
     {
         /// <summary>
-        /// Constructor for a guild command
+        /// Creates a discord command to be used in guild
         /// </summary>
         /// <param name="name">Name of the command</param>
         /// <param name="isLocalized">If the command name is the localization key for the command</param>

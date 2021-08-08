@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Helpers
     /// </summary>
     public static class Validation
     {
-        internal static readonly Regex EmojiValidation = new Regex("^.+:[0-9]+$", RegexOptions.Compiled);
+        private static readonly Regex EmojiValidation = new Regex("^.+:[0-9]+$", RegexOptions.Compiled);
         
         /// <summary>
         /// Validates that the emoji string entered is valid.
@@ -19,11 +19,6 @@ namespace Oxide.Ext.Discord.Helpers
             if (string.IsNullOrEmpty(emoji))
             {
                 return "Emoji string cannot be null or empty.";
-            }
-
-            if (string.IsNullOrEmpty(emoji))
-            {
-                return "Emoji string cannot be null or empty";
             }
 
             if (emoji.Length == 2 && !char.IsSurrogatePair(emoji[0], emoji[1]))

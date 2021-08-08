@@ -11,16 +11,19 @@ namespace Oxide.Ext.Discord.Entities.Channels
     {
         /// <summary>
         /// Get messages around this message ID
+        /// Before, after, and around keys are mutually exclusive, only one may be passed at a time
         /// </summary>
         public Snowflake? Around { get; set; }
         
         /// <summary>
         /// Get messages before this message ID
+        /// Before, after, and around keys are mutually exclusive, only one may be passed at a time
         /// </summary>
         public Snowflake? Before { get; set; }
         
         /// <summary>
         /// Get messages after this message ID
+        /// Before, after, and around keys are mutually exclusive, only one may be passed at a time
         /// </summary>
         public Snowflake? After { get; set; }
         

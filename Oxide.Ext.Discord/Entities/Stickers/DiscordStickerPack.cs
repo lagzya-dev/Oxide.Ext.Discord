@@ -55,6 +55,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         
         /// <summary>
         /// Returns the list of sticker packs available to Nitro subscribers.
+        /// See <a href="https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs">List Nitro Sticker Packs</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with a list of Nitro sticker packs</param>

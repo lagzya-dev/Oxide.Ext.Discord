@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Entities.Users;
 namespace Oxide.Ext.Discord.Entities.Gatway.Commands
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#update-status">Update Status</a>
+    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#update-presence">Update Status</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class UpdatePresenceCommand

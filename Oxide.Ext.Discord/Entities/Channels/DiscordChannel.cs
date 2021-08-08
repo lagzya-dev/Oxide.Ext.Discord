@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
@@ -34,7 +35,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public ChannelType Type { get; set; }
         
         /// <summary>
-        /// the ID of the guild (
+        /// the ID of the guild
         /// Warning: May be missing for some channel objects received over gateway guild dispatches
         /// </summary>
         [JsonProperty("guild_id")]
@@ -135,6 +136,19 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public DateTime? LastPinTimestamp { get; set; }
         
         /// <summary>
+        /// Voice region id for the voice channel, automatic when set to null
+        /// </summary>
+        [JsonProperty("rtc_region")]
+        public string RtcRegion { get; set; }
+        
+        /// <summary>
+        /// The camera video quality mode of the voice channel
+        /// 1 when not present
+        /// </summary>
+        [JsonProperty("video_quality_mode")]
+        public VideoQualityMode? VideoQualityMode { get; set; }
+        
+        /// <summary>
         /// An approximate count of messages in a thread, stops counting at 50
         /// </summary>
         [JsonProperty("message_count")]
@@ -168,7 +182,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
         /// </summary>
         [JsonProperty("permissions")]
-        public string permissions { get; set; }
+        public string Permissions { get; set; }
         
         /// <summary>
         /// Computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
@@ -179,6 +193,11 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Returns a string to mention this channel in a message
         /// </summary>
         public string Mention => DiscordFormatting.MentionChannel(Id);
+        
+        /// <summary>
+        /// Returns the Icon URL for the given channel
+        /// </summary>
+        public string IconUrl => !string.IsNullOrEmpty(Icon) ? DiscordCdn.GetChannelIcon(Id, Icon) : null;
 
         /// <summary>
         /// Create a new channel object for the guild.
@@ -572,6 +591,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// Removes a recipient from a Group DM
+        /// See <a href="https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient">Group DM Remove Recipient</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to remove</param>
@@ -584,6 +604,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
 
         /// <summary>
         /// Creates a new public thread from a message
+        /// See <a href="https://discord.com/developers/docs/resources/channel#start-thread-with-message">Start Thread with Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="messageId">ID of the message to start the thread from</param>
@@ -597,6 +618,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// Creates a new thread that is not connected to an existing message. The created thread is always a GUILD_PRIVATE_THREAD
+        /// See <a href="https://discord.com/developers/docs/resources/channel#start-thread-without-message">Start Thread without Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="create">Data to use when creating the thread</param>
@@ -608,7 +630,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
         }
         
         /// <summary>
-        /// Adds the bot to the thread. Also requires the thread is not archived. 
+        /// Adds the bot to the thread. Also requires the thread is not archived.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#join-thread">Join Thread</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
@@ -621,18 +644,20 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <summary>
         /// Adds another user to a thread.
         /// Requires the ability to send messages in the thread. Also requires the thread is not archived.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#add-thread-member">Add Thread Member</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">ID of the user to thread</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void AddUserToThread(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
+        public void AddThreadMember(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members/{userId}", RequestMethod.PUT, null, callback, error);
         }
         
         /// <summary>
         /// Removes the bot from the thread. Also requires the thread is not archived.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#leave-thread">Leave Thread</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
@@ -645,18 +670,21 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <summary>
         /// Removes another user from a thread.
         /// Requires the MANAGE_THREADS permission or that you are the creator of the thread. Also requires the thread is not archived.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#remove-thread-member">Remove Thread Member</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">ID of the user to thread</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void RemoveUserFromThread(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
+        public void RemoveThreadMember(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members/{userId}", RequestMethod.DELETE, null, callback, error);
         }
         
         /// <summary>
         /// Returns array of thread members objects that are members of the thread.
+        /// This endpoint is restricted according to whether the GUILD_MEMBERS Privileged Intent is enabled for your application.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#list-thread-members">List Thread Members</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the list of thread members</param>
@@ -669,10 +697,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <summary>
         /// Returns all active threads in the channel, including public and private threads. Threads are ordered by their id, in descending order.
         /// Requires the READ_MESSAGE_HISTORY permission.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#list-active-threads">List Active Threads</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the thread list information</param>
         /// <param name="error">Callback when an error occurs with error information</param>
+        [Obsolete("This route is deprecated and will be removed in v10. It is replaced by List Active Guild Threads.")]
         public void ListActiveThreads(DiscordClient client, Action<ThreadList> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/threads/active", RequestMethod.GET, null, callback, error);
@@ -682,6 +712,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Returns archived threads in the channel that are public.
         /// When called on a GUILD_TEXT channel, returns threads of type GUILD_PUBLIC_THREAD. When called on a GUILD_NEWS channel returns threads of type GUILD_NEWS_THREAD. Threads are ordered by archive_timestamp, in descending order.
         /// Requires the READ_MESSAGE_HISTORY permission.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#list-public-archived-threads">List Public Archived Threads</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="lookup">The options to use when looking up the archived threads</param>
@@ -696,6 +727,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD.
         /// Threads are ordered by archive_timestamp, in descending order.
         /// Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#list-private-archived-threads">List Private Archived Threads</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="lookup">The options to use when looking up the archived threads</param>
@@ -710,6 +742,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD, and the user has joined.
         /// Threads are ordered by their id, in descending order.
         /// Requires the READ_MESSAGE_HISTORY permission.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads">List Joined Private Archived Threads</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="lookup">The options to use when looking up the archived threads</param>
@@ -735,47 +768,65 @@ namespace Oxide.Ext.Discord.Entities.Channels
         internal DiscordChannel Update(DiscordChannel channel)
         {
             DiscordChannel previous = (DiscordChannel)MemberwiseClone();
-            if (channel.Name != null)
-            {
-                Name = channel.Name;
-            }
 
             Type = channel.Type;
 
             if (channel.Position != null)
-            {
                 Position = channel.Position;
-            }
-            
+
+            if (channel.PermissionOverwrites != null)
+                PermissionOverwrites = channel.PermissionOverwrites;
+
+            if (channel.Name != null)
+                Name = channel.Name;
+
             if (channel.Topic != null)
-            {
                 Topic = channel.Topic;
-            }
-            
+
             if (channel.Nsfw != null)
-            {
                 Nsfw = channel.Nsfw;
-            }
-            
-            if (channel.RateLimitPerUser != null)
-            {
-                RateLimitPerUser = channel.RateLimitPerUser;
-            }
             
             if (channel.Bitrate != null)
-            {
                 Bitrate = channel.Bitrate;
-            }
-            
+
             if (channel.UserLimit != null)
-            {
                 UserLimit = channel.UserLimit;
-            }
+
+            if (channel.RateLimitPerUser != null)
+                RateLimitPerUser = channel.RateLimitPerUser;
+
+            if (channel.Icon != null)
+                Icon = channel.Icon;
+
+            if (channel.OwnerId != null)
+                OwnerId = channel.OwnerId;
+
+            if (channel.ApplicationId != null)
+                ApplicationId = channel.ApplicationId;
             
-            if (channel.PermissionOverwrites != null)
-            {
-                PermissionOverwrites = channel.PermissionOverwrites;
-            }
+            if (channel.LastPinTimestamp != null)
+                LastPinTimestamp = channel.LastPinTimestamp;
+            
+            if (channel.VideoQualityMode != null)
+                VideoQualityMode = channel.VideoQualityMode;
+            
+            if (channel.MessageCount != null)
+                MessageCount = channel.MessageCount;
+            
+            if (channel.MemberCount != null)
+                MemberCount = channel.MemberCount;
+            
+            if (channel.ThreadMetadata != null)
+                ThreadMetadata = channel.ThreadMetadata;
+            
+            if (channel.Member != null)
+                Member = channel.Member;
+            
+            if (channel.DefaultAutoArchiveDuration != null)
+                DefaultAutoArchiveDuration = channel.DefaultAutoArchiveDuration;
+            
+            if (channel.Permissions != null)
+                Permissions = channel.Permissions;
 
             ParentId = channel.ParentId;
             return previous;

@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// ID of the voice channel client wants to join (null if disconnecting)
         /// </summary>
         [JsonProperty("channel_id")]
-        public Snowflake ChannelId { get; set; }
+        public Snowflake? ChannelId { get; set; }
 
         /// <summary>
         /// Is the client muted

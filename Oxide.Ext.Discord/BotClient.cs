@@ -9,7 +9,6 @@ using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
@@ -357,7 +356,7 @@ namespace Oxide.Ext.Discord
         /// <returns></returns>
         public DiscordChannel GetChannel(Snowflake channelId, Snowflake? guildId)
         {
-            return guildId.HasValue ? GetGuild(guildId)?.Channels[channelId] : DirectMessagesByChannelId[channelId];
+            return guildId.HasValue ? GetGuild(guildId)?.Channels?[channelId] : DirectMessagesByChannelId[channelId];
         }
 
         /// <summary>

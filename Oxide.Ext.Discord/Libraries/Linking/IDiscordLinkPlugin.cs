@@ -20,8 +20,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <summary>
         /// Called on a plugin to register events to be called when that plugin links or unlinks a Steam ID and Discord ID
         /// </summary>
-        /// <param name="onLinked"></param>
-        /// <param name="onUnlinked"></param>
+        /// <param name="onLinked">Action called by link plugin when a player and discord user are linked</param>
+        /// <param name="onUnlinked">Action called by link plugin when a player and discord user are unlinked</param>
         void RegisterEvents(Action<IPlayer, DiscordUser> onLinked, Action<IPlayer, DiscordUser> onUnlinked);
     }
 }

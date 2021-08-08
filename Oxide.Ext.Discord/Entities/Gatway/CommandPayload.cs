@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         public GatewayCommandCode OpCode;
 
         /// <summary>
-        /// Payload datal
+        /// Payload data
         /// </summary>
         [JsonProperty("d")]
         public object Payload;

@@ -29,12 +29,14 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 
         /// <summary>
         /// The bitrate (in bits) of the voice channel
+        /// 8000 to 96000 (128000 for VIP servers)
         /// </summary>
         [JsonProperty("bitrate")]
         public int? Bitrate { get; set; }
                 
         /// <summary>
         /// The user limit of the voice channel
+        /// 0 refers to no limit, 1 to 99 refers to a user limit
         /// </summary>
         [JsonProperty("user_limit")]
         public int? UserLimit { get; set; }

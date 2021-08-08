@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.WebSockets;
 
 namespace Oxide.Ext.Discord.Entities.Gatway
@@ -22,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// The event name for this payload
         /// </summary>
         [JsonProperty("t")]
-        public string EventName { get; internal set; }
+        public JToken EventName { get; internal set; }
 
         /// <summary>
         /// Event data
@@ -39,18 +38,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// <summary>
         /// Returns a DispatchCode enum value for the EventName if the extension supports it; Else the code will be Unknown
         /// </summary>
-        public DispatchCode EventCode
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(EventName) && EventName.TryParse(out DispatchCode code))
-                {
-                    return code;
-                }
-                
-                return DispatchCode.Unknown;
-            }
-        }
+        public DispatchCode EventCode => EventName?.ToObject<DispatchCode>() ?? DispatchCode.Unknown;
 
         /// <summary>
         /// Data as JObject

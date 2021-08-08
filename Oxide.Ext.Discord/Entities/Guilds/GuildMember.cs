@@ -114,29 +114,25 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         {
             GuildMember previous = (GuildMember)MemberwiseClone();
             if (update.User != null)
-            {
                 previous.User = User.Update(update.User);
-            }
-                    
-            if (update.Nickname != null)
-            {
-                Nickname = update.Nickname;
-            }
-                    
-            if (update.Roles != null)
-            {
-                Roles = update.Roles;
-            }
-                    
-            if (update.PremiumSince != null)
-            {
-                PremiumSince = update.PremiumSince;
-            }
 
+            if (update.Nickname != null)
+                Nickname = update.Nickname;
+
+            if (update.Roles != null)
+                Roles = update.Roles;
+
+            if (update.PremiumSince != null)
+                PremiumSince = update.PremiumSince;
+
+            Deaf = update.Deaf;
+            Mute = update.Mute;
+            
             if (update.Pending != null)
-            {
                 Pending = update.Pending;
-            }
+            
+            if (update.Permissions != null)
+                Permissions = update.Permissions;
 
             return previous;
         }

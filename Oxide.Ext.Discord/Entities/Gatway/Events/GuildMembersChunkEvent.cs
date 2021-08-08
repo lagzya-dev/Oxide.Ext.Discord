@@ -42,7 +42,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         public List<string> NotFound { get; set; }
         
         /// <summary>
-        /// II passing true to REQUEST_GUILD_MEMBERS, presences of the returned members will be here
+        /// If passing true to REQUEST_GUILD_MEMBERS, presences of the returned members will be here
         /// </summary>
         [JsonProperty("presences")]
         public List<UpdatePresenceCommand> Presences { get; set; }      

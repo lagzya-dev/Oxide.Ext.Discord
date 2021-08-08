@@ -5,7 +5,9 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Channels.Threads
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient-json-params">Thread Create Structure</a> within Discord.
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#list-public-archived-threads-query-string-params">Thread Archive Lookup Structure</a> within Discord.
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#list-private-archived-threads-query-string-params">Thread Archive Lookup Structure</a> within Discord.
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads-query-string-params">Thread Archive Lookup Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ThreadArchivedLookup

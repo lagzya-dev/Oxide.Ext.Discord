@@ -1,11 +1,13 @@
-using System.ComponentModel;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Helpers.Converters;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
     /// <summary>
     /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#commands-and-events-gateway-events">Gateway Event Codes</a>
     /// </summary>
+    [JsonConverter(typeof(DiscordEnumConverter<DispatchCode>), Unknown)]
     public enum DispatchCode : byte
     {
         /// <summary>

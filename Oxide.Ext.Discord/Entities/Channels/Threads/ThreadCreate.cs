@@ -3,7 +3,9 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Channels.Threads
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient-json-params">Thread Create Structure</a> within Discord.
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-with-message-json-params">Thread Create Structure</a> within Discord.
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-without-message-json-params">Thread Create Structure</a> within Discord.
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-with-message-json-params">Thread Create Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ThreadCreate

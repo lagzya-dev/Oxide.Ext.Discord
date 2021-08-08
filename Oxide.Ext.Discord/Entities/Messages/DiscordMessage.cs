@@ -646,7 +646,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// Delete a pinned message in a channel.
         /// Requires the MANAGE_MESSAGES permission.
-        /// See <a href="https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message">Delete Pinned Channel Message</a>
+        /// See <a href="https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message">Unpin Pinned Channel Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
@@ -663,6 +663,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="create">Data to use when creating the thread</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
+        /// See <a href="https://discord.com/developers/docs/resources/channel#start-thread-with-message"></a>
         public void StartPublicThread(DiscordClient client, ThreadCreate create, Action<DiscordChannel> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/threads", RequestMethod.POST, create, callback, error);

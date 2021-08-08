@@ -5,11 +5,11 @@ using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
+using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Integrations;
 using Oxide.Ext.Discord.Entities.Invites;
-using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Stickers;
 using Oxide.Ext.Discord.Entities.Users;
@@ -318,6 +318,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("approximate_presence_count")]
         public int? ApproximatePresenceCount { get; set; }
+        
+        /// <summary>
+        /// The welcome screen of a Community guild
+        /// Shown to new members, returned in an Invite's guild object
+        /// </summary>
+        [JsonProperty("welcome_screen")]
+        public GuildWelcomeScreen WelcomeScreen { get; set; }
         
         /// <summary>
         /// Guild NSFW level
@@ -634,6 +641,18 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             client.Bot.Rest.DoRequest($"/guilds/{Id}/channels", RequestMethod.PATCH, positions, callback, error);
         }
 
+        /// <summary>
+        /// Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
+        /// See <a href="https://discord.com/developers/docs/resources/guild#list-active-threads">List Active Threads</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with a list of threads and thread members for a guild</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ListActiveThreads(DiscordClient client, Action<List<ThreadList>> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/threads/active", RequestMethod.GET, null, callback, error);
+        }
+        
         /// <summary>
         /// Returns a guild member object for the specified user.
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-member">Get Guild Member</a>
@@ -1290,7 +1309,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         
         /// <summary>
         /// Modifies another user's voice state.
-        /// See <a href="https://discord.com/developers/docs/resources/guild#update-user-voice-statee">Update Users Voice State</a>
+        /// See <a href="https://discord.com/developers/docs/resources/guild#modify-user-voice-state">Update Users Voice State</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID of the users state to update</param>
@@ -1316,6 +1335,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Returns an array of sticker objects for the given guild.
         /// Includes user fields if the bot has the MANAGE_EMOJIS_AND_STICKERS permission.
+        /// See <a href="https://discord.com/developers/docs/resources/sticker#list-guild-stickers">List Guild Stickers</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the list of stickers</param>
@@ -1328,6 +1348,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Returns a sticker object for the given guild and sticker IDs.
         /// Includes the user field if the bot has the MANAGE_EMOJIS_AND_STICKERS permission.
+        /// See <a href="https://discord.com/developers/docs/resources/sticker#get-guild-sticker">Get Guild Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="stickerId">ID of the sticker to get</param>
@@ -1342,6 +1363,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Create a new sticker for the guild.
         /// Requires the MANAGE_EMOJIS_AND_STICKERS permission.
         /// Returns the new sticker object on success.
+        /// See <a href="https://discord.com/developers/docs/resources/sticker#create-guild-sticker">Create Guild Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="sticker">Sticker to create</param>
@@ -1356,6 +1378,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Modify the given sticker.
         /// Requires the MANAGE_EMOJIS_AND_STICKERS permission.
         /// Returns the updated sticker object on success.
+        /// See <a href="https://discord.com/developers/docs/resources/sticker#modify-guild-sticker">Modify Guild Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="sticker">Sticker to modify</param>
@@ -1374,6 +1397,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="stickerId">ID of the sticker to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
+        /// See <a href="https://discord.com/developers/docs/resources/sticker#delete-guild-sticker">Delete Guild Sticker</a>
         public void DeleteGuildSticker(DiscordClient client, Snowflake stickerId, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers/{stickerId}", RequestMethod.DELETE, null, callback, error);
@@ -1439,6 +1463,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 Members = updatedGuild.Members;
             if (updatedGuild.Channels != null)
                 Channels = updatedGuild.Channels;
+            if (updatedGuild.Threads != null)
+                Threads = updatedGuild.Threads;
             if (updatedGuild.Presences != null)
                 Presences = updatedGuild.Presences;
             if (updatedGuild.MaxPresences != null)
@@ -1465,6 +1491,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 ApproximateMemberCount = updatedGuild.ApproximateMemberCount;
             if (updatedGuild.ApproximatePresenceCount != null)
                 ApproximatePresenceCount = updatedGuild.ApproximatePresenceCount;
+            if (updatedGuild.WelcomeScreen != null)
+                WelcomeScreen = updatedGuild.WelcomeScreen;
+            NSFW = updatedGuild.NSFW;
+            if (updatedGuild.StageInstances != null)
+                StageInstances = updatedGuild.StageInstances;
+            if (updatedGuild.Stickers != null)
+                Stickers = updatedGuild.Stickers;
             return previous;
         }
         #endregion

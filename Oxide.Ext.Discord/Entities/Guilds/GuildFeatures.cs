@@ -1,15 +1,20 @@
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Oxide.Ext.Discord.Helpers.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-guild-features">Guild Features</a>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(DiscordEnumConverter<GuildFeatures>), Unknown)]
     public enum GuildFeatures
     {
+        /// <summary>
+        /// Discord Extension doesn't currently support a guild features
+        /// </summary>
+        Unknown,
+        
         /// <summary>
         /// Guild has access to set an invite splash background
         /// </summary>
@@ -105,5 +110,23 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [EnumMember(Value = "MORE_STICKERS")] 
         MoreStickers,
+        
+        /// <summary>
+        /// Guild has access to the three day archive time for threads
+        /// </summary>
+        [EnumMember(Value = "THREE_DAY_THREAD_ARCHIVE")] 
+        ThreeDayThreadArchive,
+        
+        /// <summary>
+        /// guild has access to the seven day archive time for threads
+        /// </summary>
+        [EnumMember(Value = "SEVEN_DAY_THREAD_ARCHIVE")] 
+        SevenDayThreadArchive,
+        
+        /// <summary>
+        /// 	guild has access to create private threads
+        /// </summary>
+        [EnumMember(Value = "SEVEN_DAY_THREAD_ARCHIVE")] 
+        PrivateThreads,
     }
 }

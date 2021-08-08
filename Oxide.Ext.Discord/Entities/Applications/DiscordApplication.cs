@@ -278,8 +278,8 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command">Delete Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="guildId">Guild ID to delete command from</param>
-        /// <param name="commandId">Command ID to delete</param>
+        /// <param name="guildId">Guild ID of the guild to delete command from</param>
+        /// <param name="commandId">Command ID of the command to delete</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteGuildApplicationCommands(DiscordClient client, Snowflake guildId, Snowflake commandId, Action callback = null, Action<RestError> error = null)

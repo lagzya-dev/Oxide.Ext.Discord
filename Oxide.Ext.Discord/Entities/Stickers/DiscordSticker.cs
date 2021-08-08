@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Interfaces;
 namespace Oxide.Ext.Discord.Entities.Stickers
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-sticker-structure">Discord Sticker Structure</a>
+    /// Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-object">Discord Sticker Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordSticker : ISnowflakeEntity
@@ -88,6 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         
         /// <summary>
         /// Returns a sticker object for the given sticker ID.
+        /// See <a href="https://discord.com/developers/docs/resources/sticker#get-sticker">Get Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="stickerId">ID of the sticker</param>
@@ -102,6 +103,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// Modify the given sticker.
         /// Requires the MANAGE_EMOJIS_AND_STICKERS permission.
         /// Returns the updated sticker object on success.
+        /// See <a href="https://discord.com/developers/docs/resources/sticker#modify-guild-sticker">Modify Guild Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the updated discord sticker</param>
@@ -119,6 +121,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <summary>
         /// Delete the given sticker.
         /// Requires the MANAGE_EMOJIS_AND_STICKERS permission.
+        /// See <a href="https://discord.com/developers/docs/resources/sticker#delete-guild-sticker">Delete Guild Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
@@ -136,19 +139,13 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         internal void Update(DiscordSticker sticker)
         {
             if (sticker.Name != null)
-            {
                 Name = sticker.Name;
-            }
 
             if (sticker.Description != null)
-            {
                 Description = sticker.Description;
-            }
 
             if (sticker.Tags != null)
-            {
                 Tags = sticker.Tags;
-            }
         }
     }
 }

@@ -88,29 +88,25 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         internal void Update(DiscordEmoji emoji)
         {
             if (emoji.Name != null)
-            {
                 Name = emoji.Name;
-            }
+
+            if (emoji.Roles != null)
+                Roles = emoji.Roles;
             
+            if (emoji.User != null)
+                User = emoji.User;
+
             if (emoji.RequireColons != null)
-            {
                 RequireColons = emoji.RequireColons;
-            }    
-            
+
             if (emoji.Managed != null)
-            {
                 Managed = emoji.Managed;
-            }    
-            
+
             if (emoji.Animated != null)
-            {
                 Animated = emoji.Animated;
-            }       
-            
+
             if (emoji.Available != null)
-            {
                 Available = emoji.Available;
-            }
         }
     }
 }

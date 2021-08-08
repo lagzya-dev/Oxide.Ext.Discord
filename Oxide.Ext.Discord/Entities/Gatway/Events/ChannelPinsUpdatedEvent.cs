@@ -25,6 +25,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// The time at which the most recent pinned message was pinned
         /// </summary>
         [JsonProperty("last_pin_timestamp")]
-        public DateTime LastPinTimestamp { get; set; }
+        public DateTime? LastPinTimestamp { get; set; }
     }
 }

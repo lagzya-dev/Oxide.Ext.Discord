@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Activities
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-buttons">Activity Buttons</a>
+    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-buttons">Activity Buttons</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ActivityButton

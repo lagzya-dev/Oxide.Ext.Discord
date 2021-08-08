@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     public class ThreadChannelUpdate
     {
         /// <summary>
-        /// The name of the channel (2-100 characters)
+        /// The name of the channel (1-100 characters)
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -21,7 +21,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public bool Archived { get; set; }
         
         /// <summary>
-        /// Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+        /// Duration in minutes to automatically archive the thread after recent activity
+        /// Can be set to: 60, 1440, 4320, 10080
         /// </summary>
         [JsonProperty("auto_archive_duration")]
         public int AutoArchiveDuration { get; set; }
@@ -33,7 +34,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public bool Locked { get; set; }
         
         /// <summary>
-        /// Amount of seconds a user has to wait before sending another message (0-21600);
+        /// Amount of seconds a user has to wait before sending another message (0-21600)
         /// Bots and users with the permission manage_messages, manage_thread, or manage_channel, are unaffected
         /// </summary>
         [JsonProperty("rate_limit_per_user")]

@@ -16,6 +16,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public Snowflake Id { get; set; }
         
         /// <summary>
+        /// Permission Type <see cref="PermissionType"/>
+        /// </summary>
+        [JsonProperty("type")]
+        public PermissionType Type { get; set; }
+        
+        /// <summary>
         /// Permissions allowed <see cref="PermissionFlags"/>
         /// </summary>
         [JsonProperty("allow")]
@@ -26,11 +32,5 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("deny")]
         public PermissionFlags? Deny { get; set; }
-        
-        /// <summary>
-        /// Permission Type <see cref="PermissionType"/>
-        /// </summary>
-        [JsonProperty("type")]
-        public PermissionType Type { get; set; }
     }
 }

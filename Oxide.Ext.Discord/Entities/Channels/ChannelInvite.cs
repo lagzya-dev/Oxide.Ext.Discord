@@ -34,15 +34,22 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public bool Unique { get; set; }
         
         /// <summary>
-        /// The target user id for this invite
-        /// </summary>
-        [JsonProperty("target_user_id")]
-        public string TargetUser { get; set; }
-        
-        /// <summary>
         /// The type of target user for this invite
         /// </summary>
         [JsonProperty("target_user_type")]
         public TargetUserType? TargetUserType { get; set; }
+        
+        /// <summary>
+        /// The target user id for this invite
+        /// </summary>
+        [JsonProperty("target_user_id")]
+        public Snowflake TargetUser { get; set; }
+        
+        /// <summary>
+        /// The id of the embedded application to open for this invite,
+        /// Required if TargetUserType is EMBEDDED_APPLICATION, the application must have the EMBEDDED flag	
+        /// </summary>
+        [JsonProperty("target_application_id")]
+        public Snowflake TargetApplicationId { get; set; }
     }
 }

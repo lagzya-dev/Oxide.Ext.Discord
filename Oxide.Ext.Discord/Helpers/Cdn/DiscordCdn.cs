@@ -127,6 +127,17 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
                     throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
         }
+
+        /// <summary>
+        /// Returns the icon for a given channel
+        /// </summary>
+        /// <param name="channelId">Channel ID for the Icon</param>
+        /// <param name="icon">Icon hash for the channel</param>
+        /// <returns></returns>
+        public static string GetChannelIcon(Snowflake channelId, string icon)
+        {
+            return $"https://cdn.discordapp.com/channel-icons/{channelId}/{icon}.png";
+        }
         
         /// <summary>
         /// Returns the Url of the users default avatar

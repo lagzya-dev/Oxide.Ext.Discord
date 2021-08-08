@@ -7,6 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#list-active-threads">Thread List Structure</a> within Discord.
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#list-public-archived-threads-response-body">Thread List Public Archived Structure</a> within Discord.
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#list-private-archived-threads-response-body">Thread List Private Archived Structure</a> within Discord.
+    /// Represents a <a href="https://discord.com/developers/docs/resources/guild#list-active-threads">Thread List Private Archived Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ThreadList

@@ -1,16 +1,20 @@
-using System.ComponentModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Oxide.Ext.Discord.Helpers.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
 {
     /// <summary>
     ///  Represents a <a href="https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types">Allowed Mention Types</a> for a message
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(DiscordEnumConverter<AllowedMentionTypes>), Unknown)]
     public enum AllowedMentionTypes
     {
+        /// <summary>
+        /// Discord Extension doesn't currently support this allowed mention type.
+        /// </summary>
+        Unknown,
+        
         /// <summary>
         /// Controls role mentions
         /// </summary>
