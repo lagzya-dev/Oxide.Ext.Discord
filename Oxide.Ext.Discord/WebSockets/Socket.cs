@@ -214,9 +214,9 @@ namespace Oxide.Ext.Discord.WebSockets
         }
         
         /// <summary>
-        /// Returns if the websocket is in the connecting state
+        /// Returns if the socket is waiting to reconnect
         /// </summary>
-        /// <returns>Returns if the websocket is in connecting state</returns>
+        /// <returns>Returns if the socket is waiting to reconnect</returns>
         public bool IsPendingReconnect()
         {
             return SocketState == SocketState.PendingReconnect;

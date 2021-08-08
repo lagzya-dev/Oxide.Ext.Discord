@@ -292,6 +292,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             if (channel != null)
             {
                 callback.Invoke(channel);
+                return;
             }
 
             Dictionary<string, object> data = new Dictionary<string, object>
