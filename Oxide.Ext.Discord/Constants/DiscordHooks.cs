@@ -117,7 +117,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectChannelCreated = nameof(OnDiscordDirectChannelCreated);
         
         /// <code>
-        /// void OnDiscordGuildChannelCreated(Channel channel, Guild guild)
+        /// void OnDiscordGuildChannelCreated(Channel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildChannelCreated Works!");
         /// }
@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.Constants
         
         /// <code>
         /// Note: previous will be null if previous channel not found
-        /// void OnDiscordDirectChannelUpdated(Channel channel, Channel previous)
+        /// void OnDiscordDirectChannelUpdated(Channel channel, DiscordChannel previous)
         /// {
         ///     Puts("OnDiscordDirectChannelUpdated Works!");
         /// }
@@ -134,7 +134,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectChannelUpdated = nameof(OnDiscordDirectChannelUpdated);
         
         /// <code>
-        /// void OnDiscordGuildChannelUpdated(Channel channel, Channel previous, Guild guild)
+        /// void OnDiscordGuildChannelUpdated(DiscordChannel channel, DiscordChannel previous, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildChannelUpdated Works!");
         /// }
@@ -143,7 +143,7 @@ namespace Oxide.Ext.Discord.Constants
         
         /// <code>
         /// Note: Not sure if this will ever happen but we handle it if it does
-        /// void OnDiscordDirectChannelDeleted(Channel channel)
+        /// void OnDiscordDirectChannelDeleted(DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectChannelDeleted Works!");
         /// }
@@ -151,7 +151,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectChannelDeleted = nameof(OnDiscordDirectChannelDeleted);
         
         /// <code>
-        /// void OnDiscordGuildChannelDeleted(Channel channel, Guild guild)
+        /// void OnDiscordGuildChannelDeleted(DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildChannelDeleted Works!");
         /// }
@@ -160,7 +160,7 @@ namespace Oxide.Ext.Discord.Constants
         
         /// <code>
         /// Note: Channel will be null if we haven't seen it yet
-        /// void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel)
+        /// void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectChannelPinsUpdated Works!");
         /// }
@@ -168,7 +168,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectChannelPinsUpdated = nameof(OnDiscordDirectChannelPinsUpdated);
         
         /// <code>
-        /// void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel, Guild guild)
+        /// void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildChannelPinsUpdated Works!");
         /// }
@@ -176,7 +176,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildChannelPinsUpdated = nameof(OnDiscordGuildChannelPinsUpdated);
         
         /// <code>
-        /// void OnDiscordGuildCreated(Guild guild)
+        /// void OnDiscordGuildCreated(GuildDiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildCreated Works!");
         /// }
@@ -185,7 +185,7 @@ namespace Oxide.Ext.Discord.Constants
         
         /// <code>
         /// Note: previous will be null if guild previously not loaded
-        /// void OnDiscordGuildUpdated(Guild guild, Guild previous)
+        /// void OnDiscordGuildUpdated(DiscordGuild guild, DiscordGuild previous)
         /// {
         ///     Puts("OnDiscordGuildUpdated Works!");
         /// }
@@ -193,7 +193,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildUpdated = nameof(OnDiscordGuildUpdated);
         
         /// <code>
-        /// void OnDiscordGuildUnavailable(Guild guild)
+        /// void OnDiscordGuildUnavailable(DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildUnavailable Works!");
         /// }
@@ -201,7 +201,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildUnavailable = nameof(OnDiscordGuildUnavailable);
         
         /// <code>
-        /// void OnDiscordGuildDeleted(Guild guild)
+        /// void OnDiscordGuildDeleted(DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildDeleted Works!");
         /// }
@@ -209,7 +209,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildDeleted = nameof(OnDiscordGuildDeleted);
         
         /// <code>
-        /// void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, Guild guild)
+        /// void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMemberBanned Works!");
         /// }
@@ -217,7 +217,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMemberBanned = nameof(OnDiscordGuildMemberBanned);
         
         /// <code>
-        /// void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, Guild guild)
+        /// void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildBanRemoved Works!");
         /// }
@@ -225,7 +225,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMemberUnbanned = nameof(OnDiscordGuildMemberUnbanned);
         
         /// <code>
-        /// void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, Emoji&gt; previous, Guild guild)
+        /// void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, DiscordEmoji&gt; previous, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildEmojisUpdated Works!");
         /// }
@@ -233,7 +233,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildEmojisUpdated = nameof(OnDiscordGuildEmojisUpdated);        
         
         /// <code>
-        /// void OnDiscordGuildStickersUpdated(GuildStickersUpdatedEvent stickers, Hash&lt;Snowflake, DiscordSticker&gt; previous, Guild guild)
+        /// void OnDiscordGuildStickersUpdated(GuildStickersUpdatedEvent stickers, Hash&lt;Snowflake, DiscordSticker&gt; previous, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildStickersUpdated Works!");
         /// }
@@ -241,7 +241,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildStickersUpdated = nameof(OnDiscordGuildStickersUpdated);
         
         /// <code>
-        /// void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, Guild guild)
+        /// void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildIntegrationsUpdated Works!");
         /// }
@@ -249,7 +249,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildIntegrationsUpdated = nameof(OnDiscordGuildIntegrationsUpdated);
         
         /// <code>
-        /// void OnDiscordGuildMemberAdded(GuildMemberAddedEvent member, Guild guild)
+        /// void OnDiscordGuildMemberAdded(GuildMemberAddedEvent member, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMemberAdded Works!");
         /// }
@@ -257,7 +257,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMemberAdded = nameof(OnDiscordGuildMemberAdded);
         
         /// <code>
-        /// void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, Guild guild)
+        /// void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMemberRemoved Works!");
         /// }
@@ -265,7 +265,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMemberRemoved = nameof(OnDiscordGuildMemberRemoved);
         
         /// <code>
-        /// void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, Guild guild)
+        /// void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMemberUpdated Works!");
         /// }
@@ -273,7 +273,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMemberUpdated = nameof(OnDiscordGuildMemberUpdated);
         
         /// <code>
-        /// void OnDiscordGuildMembersLoaded(Guild guild)
+        /// void OnDiscordGuildMembersLoaded(DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMembersLoaded Works!");
         /// }
@@ -281,7 +281,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMembersLoaded = nameof(OnDiscordGuildMembersLoaded);
         
         /// <code>
-        /// void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, Guild guild)
+        /// void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMembersChunk Works!");
         /// }
@@ -289,7 +289,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMembersChunk = nameof(OnDiscordGuildMembersChunk);
         
         /// <code>
-        /// void OnDiscordGuildRoleCreated(Role role, Guild guild)
+        /// void OnDiscordGuildRoleCreated(DiscordRole role, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildRoleCreated Works!");
         /// }
@@ -297,7 +297,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildRoleCreated = nameof(OnDiscordGuildRoleCreated);
         
         /// <code>
-        /// void OnDiscordGuildRoleUpdated(Role role, Role previous, Guild guild)
+        /// void OnDiscordGuildRoleUpdated(DiscordRole role, DiscordRole previous, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildRoleUpdated Works!");
         /// }
@@ -305,7 +305,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildRoleUpdated = nameof(OnDiscordGuildRoleUpdated);
         
         /// <code>
-        /// void OnDiscordGuildRoleDeleted(Role role, Guild guild)
+        /// void OnDiscordGuildRoleDeleted(DiscordRole role, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildRoleDeleted Works!");
         /// }
@@ -322,7 +322,7 @@ namespace Oxide.Ext.Discord.Constants
         
         /// <code>
         /// Note: Channel may be null if we haven't seen it yet
-        /// void OnDiscordDirectMessageCreated(DiscordMessage message, Channel channel)
+        /// void OnDiscordDirectMessageCreated(DiscordMessage message, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectMessageCreated Works!");
         /// }
@@ -330,7 +330,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectMessageCreated = nameof(OnDiscordDirectMessageCreated);
         
         /// <code>
-        /// void OnDiscordGuildMessageCreated(DiscordMessage message, Channel channel, Guild guild)
+        /// void OnDiscordGuildMessageCreated(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMessageCreated Works!");
         /// }
@@ -338,7 +338,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMessageCreated = nameof(OnDiscordGuildMessageCreated);
         
         /// <code>
-        /// void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
+        /// void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectMessageUpdated Works!");
         /// }
@@ -346,7 +346,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectMessageUpdated = nameof(OnDiscordDirectMessageUpdated);
         
         /// <code>
-        /// void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
+        /// void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectMessageUpdated Works!");
         /// }
@@ -354,7 +354,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMessageUpdated = nameof(OnDiscordGuildMessageUpdated);
         
         /// <code>
-        /// void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel)
+        /// void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectMessageDeleted Works!");
         /// }
@@ -362,7 +362,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectMessageDeleted = nameof(OnDiscordDirectMessageDeleted);
         
         /// <code>
-        /// void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel, Guild guild)
+        /// void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordDirectMessageDeleted Works!");
         /// }
@@ -370,7 +370,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMessageDeleted = nameof(OnDiscordGuildMessageDeleted);
         
         /// <code>
-        /// void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel)
+        /// void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectMessagesBulkDeleted Works!");
         /// }
@@ -378,7 +378,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectMessagesBulkDeleted = nameof(OnDiscordDirectMessagesBulkDeleted);
         
         /// <code>
-        /// void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel, Guild guild)
+        /// void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMessagesBulkDeleted Works!");
         /// }
@@ -386,7 +386,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMessagesBulkDeleted = nameof(OnDiscordDirectMessagesBulkDeleted);
         
         /// <code>
-        /// void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel)
+        /// void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectMessageReactionAdded Works!");
         /// }
@@ -394,7 +394,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectMessageReactionAdded = nameof(OnDiscordDirectMessageReactionAdded);
         
         /// <code>
-        /// void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel, Guild guild)
+        /// void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMessageReactionAdded Works!");
         /// }
@@ -402,7 +402,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMessageReactionAdded = nameof(OnDiscordGuildMessageReactionAdded);
         
         /// <code>
-        /// void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel)
+        /// void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectMessageReactionRemoved Works!");
         /// }
@@ -410,7 +410,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectMessageReactionRemoved = nameof(OnDiscordDirectMessageReactionRemoved);
         
         /// <code>
-        /// void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel, Guild guild)
+        /// void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMessageReactionRemoved Works!");
         /// }
@@ -418,7 +418,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMessageReactionRemoved = nameof(OnDiscordGuildMessageReactionRemoved);
         
         /// <code>
-        /// void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+        /// void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectMessageReactionRemovedAll Works!");
         /// }
@@ -426,7 +426,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectMessageReactionRemovedAll = nameof(OnDiscordDirectMessageReactionRemoved);
         
         /// <code>
-        /// void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+        /// void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMessageReactionRemovedAll Works!");
         /// }
@@ -434,7 +434,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMessageReactionRemovedAll = nameof(OnDiscordGuildMessageReactionRemoved);
         
         /// <code>
-        /// void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+        /// void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectMessageReactionEmojiRemoved Works!");
         /// }
@@ -442,7 +442,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectMessageReactionEmojiRemoved = nameof(OnDiscordDirectMessageReactionEmojiRemoved);
         
         /// <code>
-        /// void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+        /// void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMessageReactionEmojiRemoved Works!");
         /// }
@@ -450,7 +450,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMessageReactionEmojiRemoved = nameof(OnDiscordGuildMessageReactionEmojiRemoved);
         
         /// <code>
-        /// void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, Guild guild)
+        /// void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMemberPresenceUpdated Works!");
         /// }
@@ -458,7 +458,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMemberPresenceUpdated = nameof(OnDiscordGuildMemberPresenceUpdated);
         
         /// <code>
-        /// void OnDiscordDirectTypingStarted(TypingStartedEvent typing, Channel channel)
+        /// void OnDiscordDirectTypingStarted(TypingStartedEvent typing, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectTypingStarted Works!");
         /// }
@@ -466,7 +466,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectTypingStarted = nameof(OnDiscordDirectTypingStarted);
         
         /// <code>
-        /// void OnDiscordGuildTypingStarted(TypingStartedEvent typing, Channel channel, Guild guild)
+        /// void OnDiscordGuildTypingStarted(TypingStartedEvent typing, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildTypingStarted Works!");
         /// }
@@ -482,7 +482,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordUserUpdated = nameof(OnDiscordUserUpdated);
         
         /// <code>
-        /// void OnDiscordDirectVoiceStateUpdated(VoiceState voice, Channel channel)
+        /// void OnDiscordDirectVoiceStateUpdated(VoiceState voice, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectVoiceStateUpdated Works!");
         /// }
@@ -490,7 +490,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectVoiceStateUpdated = nameof(OnDiscordDirectVoiceStateUpdated);
         
         /// <code>
-        /// void OnDiscordGuildVoiceStateUpdated(VoiceState voice, Channel channel, Guild guild)
+        /// void OnDiscordGuildVoiceStateUpdated(VoiceState voice, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildVoiceStateUpdated Works!");
         /// }
@@ -498,7 +498,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildVoiceStateUpdated = nameof(OnDiscordGuildVoiceStateUpdated);
         
         /// <code>
-        /// void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, Channel channel, Guild guild)
+        /// void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildVoiceServerUpdated Works!");
         /// }
@@ -506,7 +506,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildVoiceServerUpdated = nameof(OnDiscordGuildVoiceServerUpdated);
         
         /// <code>
-        /// void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, Channel channel, Guild guild)
+        /// void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildWebhookUpdated Works!");
         /// }
@@ -514,7 +514,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildWebhookUpdated = nameof(OnDiscordGuildWebhookUpdated);
         
         /// <code>
-        /// void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, Channel channel)
+        /// void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectInviteCreated Works!");
         /// }
@@ -522,7 +522,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectInviteCreated = nameof(OnDiscordDirectInviteCreated);
         
         /// <code>
-        /// void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, Channel channel, Guild guild)
+        /// void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildInviteCreated Works!");
         /// }
@@ -530,7 +530,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildInviteCreated = nameof(OnDiscordGuildInviteCreated);
         
         /// <code>
-        /// void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, Channel channel)
+        /// void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel)
         /// {
         ///     Puts("OnDiscordDirectInviteDeleted Works!");
         /// }
@@ -538,7 +538,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectInviteDeleted = nameof(OnDiscordDirectInviteDeleted);
         
         /// <code>
-        /// void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, Channel channel, Guild guild)
+        /// void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildInviteDeleted Works!");
         /// }
@@ -554,7 +554,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordInteractionCreated = nameof(OnDiscordInteractionCreated);
         
         /// <code>
-        /// void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+        /// void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildIntegrationCreated Works!");
         /// }
@@ -562,7 +562,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildIntegrationCreated = nameof(OnDiscordGuildIntegrationCreated);
         
         /// <code>
-        /// void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
+        /// void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildIntegrationUpdated Works!");
         /// }
@@ -570,7 +570,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildIntegrationUpdated = nameof(OnDiscordGuildIntegrationUpdated);
         
         /// <code>
-        /// void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, Guild guild)
+        /// void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordIntegrationDeleted Works!");
         /// }
@@ -578,7 +578,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordIntegrationDeleted = nameof(OnDiscordIntegrationDeleted);
         
         /// <code>
-        /// void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, Guild guild)
+        /// void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordApplicationCommandCreated Works!");
         /// }
@@ -586,7 +586,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordApplicationCommandCreated = nameof(OnDiscordApplicationCommandCreated);
         
         /// <code>
-        /// void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, Guild guild)
+        /// void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordApplicationCommandUpdated Works!");
         /// }
@@ -594,7 +594,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordApplicationCommandUpdated = nameof(OnDiscordApplicationCommandUpdated);
         
         /// <code>
-        /// void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, Guild guild)
+        /// void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordApplicationCommandDeleted Works!");
         /// }
@@ -602,7 +602,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordApplicationCommandDeleted = nameof(OnDiscordApplicationCommandDeleted);
         
         /// <code>
-        /// void OnDiscordGuildThreadCreated(Channel thread, Guild guild)
+        /// void OnDiscordGuildThreadCreated(DiscordChannel thread, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildThreadCreated Works!");
         /// }
@@ -610,7 +610,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildThreadCreated = nameof(OnDiscordGuildThreadCreated);
         
         /// <code>
-        /// void OnDiscordGuildThreadUpdated(Channel thread, Channel previous, Guild guild)
+        /// void OnDiscordGuildThreadUpdated(DiscordChannel thread, DiscordChannel previous, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildThreadUpdated Works!");
         /// }
@@ -618,7 +618,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildThreadUpdated = nameof(OnDiscordGuildThreadUpdated);
 
         /// <code>
-        /// void OnDiscordGuildThreadDeleted(Channel thread, Guild guild)
+        /// void OnDiscordGuildThreadDeleted(DiscordChannel thread, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildThreadDeleted Works!");
         /// }
@@ -626,7 +626,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildThreadDeleted = nameof(OnDiscordGuildThreadDeleted);
         
         /// <code>
-        /// void OnDiscordGuildThreadListSynced(ThreadListSyncEvent sync, Guild guild)
+        /// void OnDiscordGuildThreadListSynced(ThreadListSyncEvent sync, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildThreadListSynced Works!");
         /// }
@@ -634,7 +634,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildThreadListSynced = nameof(OnDiscordGuildThreadListSynced);
         
         /// <code>
-        /// void OnDiscordGuildThreadMemberUpdated(ThreadMember member, Channel thread, Guild guild)
+        /// void OnDiscordGuildThreadMemberUpdated(ThreadMember member, DiscordChannel thread, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildThreadMemberUpdated Works!");
         /// }
@@ -642,7 +642,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildThreadMemberUpdated = nameof(OnDiscordGuildThreadMemberUpdated);
         
         /// <code>
-        /// void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, Guild guild)
+        /// void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildThreadMembersUpdated Works!");
         /// }
@@ -658,7 +658,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordUnhandledCommand = nameof(OnDiscordUnhandledCommand);        
         
         /// <code>
-        /// void OnDiscordStageInstanceCreated(StageInstance stage, Guild guild)
+        /// void OnDiscordStageInstanceCreated(StageInstance stage, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordStageInstanceCreated Works!");
         /// }
@@ -666,7 +666,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordStageInstanceCreated = nameof(OnDiscordStageInstanceCreated);
         
         /// <code>
-        /// void OnDiscordStageInstanceUpdated(StageInstance stage, StageInstance previous, Guild guild)
+        /// void OnDiscordStageInstanceUpdated(StageInstance stage, StageInstance previous, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordStageInstanceUpdated Works!");
         /// }
@@ -674,7 +674,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordStageInstanceUpdated = nameof(OnDiscordStageInstanceUpdated);
         
         /// <code>
-        /// void OnDiscordStageInstanceDeleted(StageInstance stage, Guild guild)
+        /// void OnDiscordStageInstanceDeleted(StageInstance stage, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordStageInstanceDeleted Works!");
         /// }

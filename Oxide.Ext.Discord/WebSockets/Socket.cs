@@ -280,7 +280,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 _reconnectTimer = null;
             };
             
-            _logger.Warning($"Attempting to reconnect to Discord... [Retry={_reconnectRetries}]");
+            _logger.Warning($"Attempting to reconnect to Discord... [Retry={_reconnectRetries.ToString()}]");
             _reconnectTimer.Start();
             _reconnectRetries++;
         }

@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                     return default(Snowflake);
                 
                 default:
-                    throw new JsonException($"Token type {reader.TokenType} does not match snowflake valid types of string or integer");
+                    throw new JsonException($"Token type {reader.TokenType.ToString()} does not match snowflake valid types of string or integer");
             }
         }
         

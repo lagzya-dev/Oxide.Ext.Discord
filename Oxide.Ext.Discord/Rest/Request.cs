@@ -124,7 +124,7 @@ namespace Oxide.Ext.Discord.Rest
                     for (int index = 0; index < attachments.FileAttachments.Count; index++)
                     {
                         MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
-                        MultipartSections.Add(new MultipartFileSection($"file{index+1}", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
+                        MultipartSections.Add(new MultipartFileSection($"file{(index+1).ToString()}", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
                     }
 
                     Boundary = Guid.NewGuid().ToString().Replace("-", "");
@@ -173,7 +173,7 @@ namespace Oxide.Ext.Discord.Rest
                     {
                         Bucket.ErrorDelayUntil = Time.TimeSinceEpoch() + 1;
                         Close(false);
-                        _logger.Exception($"A web request exception occured (internal error) [RETRY={_retries}/3].\nRequest URL: [{req.Method}] {req.RequestUri}", ex);
+                        _logger.Exception($"A web request exception occured (internal error) [RETRY={_retries.ToString()}/3].\nRequest URL: [{req.Method}] {req.RequestUri}", ex);
                         return;
                     }
 
@@ -186,7 +186,7 @@ namespace Oxide.Ext.Discord.Rest
                     bool isRateLimit = statusCode == 429;
                     if (isRateLimit)
                     {
-                        _logger.Warning($"Discord rate limit reached. (Rate limit info: remaining: [{req.Method}] Route:{req.RequestUri} Remaining: {Bucket.RateLimitRemaining} Limit: {Bucket.RateLimit}, Reset In: {Bucket.RateLimitReset}, Current Time: {Time.TimeSinceEpoch()}");
+                        _logger.Warning($"Discord rate limit reached. (Rate limit info: remaining: [{req.Method}] Route:{req.RequestUri} Remaining: {Bucket.RateLimitRemaining.ToString()} Limit: {Bucket.RateLimit.ToString()}, Reset In: {Bucket.RateLimitReset.ToString()}, Current Time: {Time.TimeSinceEpoch().ToString()}");
                         Close(false);
                         return;
                     }
@@ -195,13 +195,13 @@ namespace Oxide.Ext.Discord.Rest
                     _lastError.DiscordError = apiError;
                     if (apiError != null && apiError.Code != 0)
                     {
-                        _logger.Error($"Discord API has returned error Discord Code: {apiError.Code} Discord Error: {apiError.Message} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode})" +
+                        _logger.Error($"Discord API has returned error Discord Code: {apiError.Code.ToString()} Discord Error: {apiError.Message} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()})" +
                                       $"\nDiscord Errors: {apiError.Errors}" +
                                       $"\nRequest Body:\n{(Contents != null ? Encoding.UTF8.GetString(Contents) : "Contents is null")}");
                     }
                     else
                     {
-                        _logger.Error($"An error occured whilst submitting a request: Exception Status: {ex.Status} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode}): {message}");
+                        _logger.Error($"An error occured whilst submitting a request: Exception Status: {ex.Status.ToString()} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()}): {message}");
                     }
 
                     Close();
@@ -405,7 +405,7 @@ namespace Oxide.Ext.Discord.Rest
                 }
             }
             
-            _logger.Debug($"Method: {Method} Route: {Route} Internal Bucket Id: {Bucket.BucketId} Limit: {Bucket.RateLimit} Remaining: {Bucket.RateLimitRemaining} Reset: {Bucket.RateLimitReset} Time: {Time.TimeSinceEpoch()} Bucket: {bucketNameHeader}");
+            _logger.Debug($"Method: {Method.ToString()} Route: {Route} Internal Bucket Id: {Bucket.BucketId} Limit: {Bucket.RateLimit.ToString()} Remaining: {Bucket.RateLimitRemaining.ToString()} Reset: {Bucket.RateLimitReset.ToString()} Time: {Time.TimeSinceEpoch().ToString()} Bucket: {bucketNameHeader}");
         }
     }
 }

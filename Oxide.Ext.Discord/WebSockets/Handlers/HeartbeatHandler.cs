@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _heartbeatTimer = new Timer(heartbeatInterval);
             _heartbeatTimer.Elapsed += HeartbeatElapsed;
             _heartbeatTimer.Start();
-            _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SetupHeartbeat)} Creating heartbeat with interval {heartbeatInterval}ms.");
+            _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SetupHeartbeat)} Creating heartbeat with interval {heartbeatInterval.ToString()}ms.");
             _client.CallHook(DiscordHooks.OnDiscordSetupHeartbeat, heartbeatInterval);
         }
 
@@ -120,7 +120,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             HeartbeatAcknowledged = false;
             _listener.SendHeartbeat();
             _client.CallHook(DiscordHooks.OnDiscordHeartbeatSent);
-            _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SendHeartbeat)} Heartbeat sent - {_heartbeatTimer.Interval}ms interval.");
+            _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SendHeartbeat)} Heartbeat sent - {_heartbeatTimer.Interval.ToString()}ms interval.");
         }
         #endregion
     }

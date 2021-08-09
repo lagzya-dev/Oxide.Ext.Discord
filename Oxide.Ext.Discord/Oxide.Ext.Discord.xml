@@ -368,7 +368,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildChannelCreated">
             <code>
-            void OnDiscordGuildChannelCreated(Channel channel, Guild guild)
+            void OnDiscordGuildChannelCreated(Channel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildChannelCreated Works!");
             }
@@ -377,7 +377,7 @@
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectChannelUpdated">
             <code>
             Note: previous will be null if previous channel not found
-            void OnDiscordDirectChannelUpdated(Channel channel, Channel previous)
+            void OnDiscordDirectChannelUpdated(Channel channel, DiscordChannel previous)
             {
                 Puts("OnDiscordDirectChannelUpdated Works!");
             }
@@ -385,7 +385,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildChannelUpdated">
             <code>
-            void OnDiscordGuildChannelUpdated(Channel channel, Channel previous, Guild guild)
+            void OnDiscordGuildChannelUpdated(DiscordChannel channel, DiscordChannel previous, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildChannelUpdated Works!");
             }
@@ -394,7 +394,7 @@
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectChannelDeleted">
             <code>
             Note: Not sure if this will ever happen but we handle it if it does
-            void OnDiscordDirectChannelDeleted(Channel channel)
+            void OnDiscordDirectChannelDeleted(DiscordChannel channel)
             {
                 Puts("OnDiscordDirectChannelDeleted Works!");
             }
@@ -402,7 +402,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildChannelDeleted">
             <code>
-            void OnDiscordGuildChannelDeleted(Channel channel, Guild guild)
+            void OnDiscordGuildChannelDeleted(DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildChannelDeleted Works!");
             }
@@ -411,7 +411,7 @@
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectChannelPinsUpdated">
             <code>
             Note: Channel will be null if we haven't seen it yet
-            void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel)
+            void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectChannelPinsUpdated Works!");
             }
@@ -419,7 +419,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildChannelPinsUpdated">
             <code>
-            void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel, Guild guild)
+            void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildChannelPinsUpdated Works!");
             }
@@ -427,7 +427,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildCreated">
             <code>
-            void OnDiscordGuildCreated(Guild guild)
+            void OnDiscordGuildCreated(GuildDiscordGuild guild)
             {
                 Puts("OnDiscordGuildCreated Works!");
             }
@@ -436,7 +436,7 @@
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildUpdated">
             <code>
             Note: previous will be null if guild previously not loaded
-            void OnDiscordGuildUpdated(Guild guild, Guild previous)
+            void OnDiscordGuildUpdated(DiscordGuild guild, DiscordGuild previous)
             {
                 Puts("OnDiscordGuildUpdated Works!");
             }
@@ -444,7 +444,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildUnavailable">
             <code>
-            void OnDiscordGuildUnavailable(Guild guild)
+            void OnDiscordGuildUnavailable(DiscordGuild guild)
             {
                 Puts("OnDiscordGuildUnavailable Works!");
             }
@@ -452,7 +452,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildDeleted">
             <code>
-            void OnDiscordGuildDeleted(Guild guild)
+            void OnDiscordGuildDeleted(DiscordGuild guild)
             {
                 Puts("OnDiscordGuildDeleted Works!");
             }
@@ -460,7 +460,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberBanned">
             <code>
-            void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, Guild guild)
+            void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMemberBanned Works!");
             }
@@ -468,7 +468,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberUnbanned">
             <code>
-            void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, Guild guild)
+            void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildBanRemoved Works!");
             }
@@ -476,7 +476,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildEmojisUpdated">
             <code>
-            void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, Emoji&gt; previous, Guild guild)
+            void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, DiscordEmoji&gt; previous, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildEmojisUpdated Works!");
             }
@@ -484,7 +484,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildStickersUpdated">
             <code>
-            void OnDiscordGuildStickersUpdated(GuildStickersUpdatedEvent stickers, Hash&lt;Snowflake, DiscordSticker&gt; previous, Guild guild)
+            void OnDiscordGuildStickersUpdated(GuildStickersUpdatedEvent stickers, Hash&lt;Snowflake, DiscordSticker&gt; previous, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildStickersUpdated Works!");
             }
@@ -492,7 +492,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildIntegrationsUpdated">
             <code>
-            void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, Guild guild)
+            void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildIntegrationsUpdated Works!");
             }
@@ -500,7 +500,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberAdded">
             <code>
-            void OnDiscordGuildMemberAdded(GuildMemberAddedEvent member, Guild guild)
+            void OnDiscordGuildMemberAdded(GuildMemberAddedEvent member, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMemberAdded Works!");
             }
@@ -508,7 +508,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberRemoved">
             <code>
-            void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, Guild guild)
+            void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMemberRemoved Works!");
             }
@@ -516,7 +516,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberUpdated">
             <code>
-            void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, Guild guild)
+            void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMemberUpdated Works!");
             }
@@ -524,7 +524,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMembersLoaded">
             <code>
-            void OnDiscordGuildMembersLoaded(Guild guild)
+            void OnDiscordGuildMembersLoaded(DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMembersLoaded Works!");
             }
@@ -532,7 +532,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMembersChunk">
             <code>
-            void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, Guild guild)
+            void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMembersChunk Works!");
             }
@@ -540,7 +540,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildRoleCreated">
             <code>
-            void OnDiscordGuildRoleCreated(Role role, Guild guild)
+            void OnDiscordGuildRoleCreated(DiscordRole role, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildRoleCreated Works!");
             }
@@ -548,7 +548,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildRoleUpdated">
             <code>
-            void OnDiscordGuildRoleUpdated(Role role, Role previous, Guild guild)
+            void OnDiscordGuildRoleUpdated(DiscordRole role, DiscordRole previous, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildRoleUpdated Works!");
             }
@@ -556,7 +556,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildRoleDeleted">
             <code>
-            void OnDiscordGuildRoleDeleted(Role role, Guild guild)
+            void OnDiscordGuildRoleDeleted(DiscordRole role, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildRoleDeleted Works!");
             }
@@ -573,7 +573,7 @@
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageCreated">
             <code>
             Note: Channel may be null if we haven't seen it yet
-            void OnDiscordDirectMessageCreated(DiscordMessage message, Channel channel)
+            void OnDiscordDirectMessageCreated(DiscordMessage message, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectMessageCreated Works!");
             }
@@ -581,7 +581,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageCreated">
             <code>
-            void OnDiscordGuildMessageCreated(DiscordMessage message, Channel channel, Guild guild)
+            void OnDiscordGuildMessageCreated(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMessageCreated Works!");
             }
@@ -589,7 +589,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageUpdated">
             <code>
-            void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
+            void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectMessageUpdated Works!");
             }
@@ -597,7 +597,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageUpdated">
             <code>
-            void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
+            void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectMessageUpdated Works!");
             }
@@ -605,7 +605,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageDeleted">
             <code>
-            void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel)
+            void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectMessageDeleted Works!");
             }
@@ -613,7 +613,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageDeleted">
             <code>
-            void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel, Guild guild)
+            void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordDirectMessageDeleted Works!");
             }
@@ -621,7 +621,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessagesBulkDeleted">
             <code>
-            void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel)
+            void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectMessagesBulkDeleted Works!");
             }
@@ -629,7 +629,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessagesBulkDeleted">
             <code>
-            void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel, Guild guild)
+            void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMessagesBulkDeleted Works!");
             }
@@ -637,7 +637,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageReactionAdded">
             <code>
-            void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel)
+            void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectMessageReactionAdded Works!");
             }
@@ -645,7 +645,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageReactionAdded">
             <code>
-            void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel, Guild guild)
+            void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMessageReactionAdded Works!");
             }
@@ -653,7 +653,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageReactionRemoved">
             <code>
-            void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel)
+            void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectMessageReactionRemoved Works!");
             }
@@ -661,7 +661,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageReactionRemoved">
             <code>
-            void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel, Guild guild)
+            void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMessageReactionRemoved Works!");
             }
@@ -669,7 +669,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageReactionRemovedAll">
             <code>
-            void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+            void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectMessageReactionRemovedAll Works!");
             }
@@ -677,7 +677,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageReactionRemovedAll">
             <code>
-            void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+            void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMessageReactionRemovedAll Works!");
             }
@@ -685,7 +685,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectMessageReactionEmojiRemoved">
             <code>
-            void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+            void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectMessageReactionEmojiRemoved Works!");
             }
@@ -693,7 +693,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMessageReactionEmojiRemoved">
             <code>
-            void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+            void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMessageReactionEmojiRemoved Works!");
             }
@@ -701,7 +701,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildMemberPresenceUpdated">
             <code>
-            void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, Guild guild)
+            void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMemberPresenceUpdated Works!");
             }
@@ -709,7 +709,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectTypingStarted">
             <code>
-            void OnDiscordDirectTypingStarted(TypingStartedEvent typing, Channel channel)
+            void OnDiscordDirectTypingStarted(TypingStartedEvent typing, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectTypingStarted Works!");
             }
@@ -717,7 +717,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildTypingStarted">
             <code>
-            void OnDiscordGuildTypingStarted(TypingStartedEvent typing, Channel channel, Guild guild)
+            void OnDiscordGuildTypingStarted(TypingStartedEvent typing, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildTypingStarted Works!");
             }
@@ -733,7 +733,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectVoiceStateUpdated">
             <code>
-            void OnDiscordDirectVoiceStateUpdated(VoiceState voice, Channel channel)
+            void OnDiscordDirectVoiceStateUpdated(VoiceState voice, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectVoiceStateUpdated Works!");
             }
@@ -741,7 +741,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildVoiceStateUpdated">
             <code>
-            void OnDiscordGuildVoiceStateUpdated(VoiceState voice, Channel channel, Guild guild)
+            void OnDiscordGuildVoiceStateUpdated(VoiceState voice, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildVoiceStateUpdated Works!");
             }
@@ -749,7 +749,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildVoiceServerUpdated">
             <code>
-            void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, Channel channel, Guild guild)
+            void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildVoiceServerUpdated Works!");
             }
@@ -757,7 +757,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildWebhookUpdated">
             <code>
-            void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, Channel channel, Guild guild)
+            void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildWebhookUpdated Works!");
             }
@@ -765,7 +765,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectInviteCreated">
             <code>
-            void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, Channel channel)
+            void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectInviteCreated Works!");
             }
@@ -773,7 +773,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildInviteCreated">
             <code>
-            void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, Channel channel, Guild guild)
+            void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildInviteCreated Works!");
             }
@@ -781,7 +781,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordDirectInviteDeleted">
             <code>
-            void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, Channel channel)
+            void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel)
             {
                 Puts("OnDiscordDirectInviteDeleted Works!");
             }
@@ -789,7 +789,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildInviteDeleted">
             <code>
-            void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, Channel channel, Guild guild)
+            void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildInviteDeleted Works!");
             }
@@ -805,7 +805,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildIntegrationCreated">
             <code>
-            void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+            void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildIntegrationCreated Works!");
             }
@@ -813,7 +813,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildIntegrationUpdated">
             <code>
-            void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
+            void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildIntegrationUpdated Works!");
             }
@@ -821,7 +821,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordIntegrationDeleted">
             <code>
-            void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, Guild guild)
+            void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
             {
                 Puts("OnDiscordIntegrationDeleted Works!");
             }
@@ -829,7 +829,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordApplicationCommandCreated">
             <code>
-            void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, Guild guild)
+            void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
             {
                 Puts("OnDiscordApplicationCommandCreated Works!");
             }
@@ -837,7 +837,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordApplicationCommandUpdated">
             <code>
-            void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, Guild guild)
+            void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
             {
                 Puts("OnDiscordApplicationCommandUpdated Works!");
             }
@@ -845,7 +845,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordApplicationCommandDeleted">
             <code>
-            void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, Guild guild)
+            void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, DiscordGuild guild)
             {
                 Puts("OnDiscordApplicationCommandDeleted Works!");
             }
@@ -853,7 +853,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadCreated">
             <code>
-            void OnDiscordGuildThreadCreated(Channel thread, Guild guild)
+            void OnDiscordGuildThreadCreated(DiscordChannel thread, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildThreadCreated Works!");
             }
@@ -861,7 +861,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadUpdated">
             <code>
-            void OnDiscordGuildThreadUpdated(Channel thread, Channel previous, Guild guild)
+            void OnDiscordGuildThreadUpdated(DiscordChannel thread, DiscordChannel previous, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildThreadUpdated Works!");
             }
@@ -869,7 +869,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadDeleted">
             <code>
-            void OnDiscordGuildThreadDeleted(Channel thread, Guild guild)
+            void OnDiscordGuildThreadDeleted(DiscordChannel thread, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildThreadDeleted Works!");
             }
@@ -877,7 +877,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadListSynced">
             <code>
-            void OnDiscordGuildThreadListSynced(ThreadListSyncEvent sync, Guild guild)
+            void OnDiscordGuildThreadListSynced(ThreadListSyncEvent sync, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildThreadListSynced Works!");
             }
@@ -885,7 +885,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadMemberUpdated">
             <code>
-            void OnDiscordGuildThreadMemberUpdated(ThreadMember member, Channel thread, Guild guild)
+            void OnDiscordGuildThreadMemberUpdated(ThreadMember member, DiscordChannel thread, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildThreadMemberUpdated Works!");
             }
@@ -893,7 +893,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadMembersUpdated">
             <code>
-            void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, Guild guild)
+            void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildThreadMembersUpdated Works!");
             }
@@ -909,7 +909,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordStageInstanceCreated">
             <code>
-            void OnDiscordStageInstanceCreated(StageInstance stage, Guild guild)
+            void OnDiscordStageInstanceCreated(StageInstance stage, DiscordGuild guild)
             {
                 Puts("OnDiscordStageInstanceCreated Works!");
             }
@@ -917,7 +917,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordStageInstanceUpdated">
             <code>
-            void OnDiscordStageInstanceUpdated(StageInstance stage, StageInstance previous, Guild guild)
+            void OnDiscordStageInstanceUpdated(StageInstance stage, StageInstance previous, DiscordGuild guild)
             {
                 Puts("OnDiscordStageInstanceUpdated Works!");
             }
@@ -925,7 +925,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordStageInstanceDeleted">
             <code>
-            void OnDiscordStageInstanceDeleted(StageInstance stage, Guild guild)
+            void OnDiscordStageInstanceDeleted(StageInstance stage, DiscordGuild guild)
             {
                 Puts("OnDiscordStageInstanceDeleted Works!");
             }

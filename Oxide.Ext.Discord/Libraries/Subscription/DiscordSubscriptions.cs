@@ -65,7 +65,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 throw new ArgumentNullException(nameof(message));
             }
 
-            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(AddChannelSubscription)} {plugin.Name} added subscription to channel {channelId}");
+            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(AddChannelSubscription)} {plugin.Name} added subscription to channel {channelId.ToString()}");
 
             Hash<Snowflake, DiscordSubscription> pluginSubs = _subscriptions[plugin.Name];
             if (pluginSubs == null)
@@ -110,7 +110,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 _subscriptions.Remove(plugin.Name);
             }
             
-            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemoveChannelSubscription)} {plugin.Name} removed subscription to channel {channelId}");
+            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemoveChannelSubscription)} {plugin.Name} removed subscription to channel {channelId.ToString()}");
         }
 
         internal void OnPluginUnloaded(Plugin plugin)
@@ -136,7 +136,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 return;
             }
             
-            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemovePluginSubscriptions)} Removed {pluginSubs.Count} subscriptions for plugin {plugin.Name}");
+            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemovePluginSubscriptions)} Removed {pluginSubs.Count.ToString()} subscriptions for plugin {plugin.Name}");
             pluginSubs.Clear();
         }
         

@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 }
                 catch(Exception ex)
                 {
-                    DiscordExtension.GlobalLogger.Exception($"An exception occured for discord subscription in channel {ChannelId} for plugin {Plugin?.Name}", ex);   
+                    DiscordExtension.GlobalLogger.Exception($"An exception occured for discord subscription in channel {ChannelId.ToString()} for plugin {Plugin?.Name}", ex);   
                 }
             });
         }
