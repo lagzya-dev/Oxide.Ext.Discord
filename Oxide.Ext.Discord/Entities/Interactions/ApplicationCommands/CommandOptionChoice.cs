@@ -16,7 +16,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public string Name { get; set; }
         
         /// <summary>
-        /// Value of the choice
+        /// Type can be string, integer, double or boolean
+        /// Value of the choice, up to 100 characters if string
         /// </summary>
         [JsonProperty("value")]
         public object Value { get; set; }
