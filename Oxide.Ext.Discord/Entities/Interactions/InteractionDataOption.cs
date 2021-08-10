@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities.Interactions
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption">Application Command Interaction Data Option</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class CommandInteractionDataOption
+    public class InteractionDataOption
     {
         /// <summary>
         /// The name of the parameter
@@ -30,9 +31,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         
         /// <summary>
         /// Present if this option is a group or subcommand
-        /// See <see cref="CommandInteractionDataOption"/>
+        /// See <see cref="InteractionDataOption"/>
         /// </summary>
         [JsonProperty("options")]
-        public List<CommandInteractionDataOption> Options { get; set; }
+        public List<InteractionDataOption> Options { get; set; }
     }
 }

@@ -33,5 +33,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("default_permission")]
         public bool? DefaultPermissions { get; set; }
+        
+        /// <summary>
+        /// The type of command, defaults Slash Command if not set
+        /// </summary>
+        [JsonProperty("type")]
+        public CommandType? Type { get; set; }
     }
 }

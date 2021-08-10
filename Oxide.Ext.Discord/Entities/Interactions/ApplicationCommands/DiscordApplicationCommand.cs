@@ -18,6 +18,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public Snowflake Id { get; set; }
         
         /// <summary>
+        /// The type of command, defaults 1 if not set
+        /// </summary>
+        [JsonProperty("type")]
+        public CommandType? Type { get; set; }
+        
+        /// <summary>
         /// Unique id of the parent application
         /// </summary>
         [JsonProperty("application_id")]

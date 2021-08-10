@@ -220,9 +220,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
         ManageEmojisAndStickers = 1 << 30,
         
         /// <summary>
-        /// Allows members to use slash commands in text channels
+        /// Allows members to use application commands, including slash commands and context menu commands.
         /// </summary>
-        [EnumMember(Value = "USE_SLASH_COMMANDS")]
+        [EnumMember(Value = "USE_APPLICATION_COMMANDS")]
         UseSlashCommands = 1ul << 31,
         
         /// <summary>

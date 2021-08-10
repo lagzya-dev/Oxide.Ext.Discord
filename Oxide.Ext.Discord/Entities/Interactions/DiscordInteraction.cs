@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Webhooks;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -28,17 +29,17 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         /// <summary>
         /// The type of interaction
-        /// See <see cref="InteractionType"/>
+        /// See <see cref="InteractionRequestType"/>
         /// </summary>
         [JsonProperty("type")]
-        public InteractionType Type { get; set; }
+        public InteractionRequestType Type { get; set; }
         
         /// <summary>
         /// The command data payload
-        /// See <see cref="CommandInteractionData"/>
+        /// See <see cref="InteractionData"/>
         /// </summary>
         [JsonProperty("data")]
-        public CommandInteractionData Data { get; set; }
+        public InteractionData Data { get; set; }
         
         /// <summary>
         /// The guild it was sent from
@@ -57,6 +58,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("member")]
         public GuildMember Member { get; set; }
+        
+        /// <summary>
+        /// User object for the invoking user, if invoked in a DM
+        /// </summary>
+        [JsonProperty("user")]
+        public DiscordUser User { get; set; }
         
         /// <summary>
         /// A continuation token for responding to the interaction

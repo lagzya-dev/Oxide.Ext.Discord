@@ -48,6 +48,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <summary>
         /// The sub command option is a Mentionable
         /// </summary>
-        Mentionable = 9
+        Mentionable = 9,
+        
+        /// <summary>
+        /// Any double between -2^53 and 2^53
+        /// </summary>
+        Number = 10
     }
 }

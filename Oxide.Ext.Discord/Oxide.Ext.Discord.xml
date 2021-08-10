@@ -1672,7 +1672,7 @@
             <summary>
             Fetch all of the global commands for your application.
             Returns a list of ApplicationCommand.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#get-global-application-commands">Get Global Application Commands</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands">Get Global Application Commands</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with list of application commands</param>
@@ -1683,7 +1683,7 @@
             Create a new global command.
             New global commands will be available in all guilds after 1 hour.
             Note: Creating a command with the same name as an existing command for your application will overwrite the old command.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command">Create Global Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#create-global-application-command">Create Global Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="create">Command to create</param>
@@ -1694,7 +1694,7 @@
             <summary>
             Edit a global command.
             Updates will be available in all guilds after 1 hour.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-global-application-command">Edit Global Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command">Edit Global Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="update">Command Update</param>
@@ -1704,7 +1704,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Deletes a global command
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-global-application-command">Delete Global Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command">Delete Global Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="commandId">Command to delete</param>
@@ -1714,7 +1714,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Fetch all of the guild commands for your application for a specific guild.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-commands">Get Guild Application Commands</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands">Get Guild Application Commands</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guildId">ID of the guild to get commands for</param>
@@ -1724,7 +1724,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Fetch all of the guild commands for your application for a specific guild.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-commands">Get Guild Application Commands</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands">Get Guild Application Commands</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guild">Guild to get commands for</param>
@@ -1735,7 +1735,7 @@
             <summary>
             Create a new guild command.
             New guild commands will be available in the guild immediately.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-guild-application-command">Create Guild Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command">Create Guild Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to create the command in</param>
@@ -1747,7 +1747,7 @@
             <summary>
             Create a new guild command.
             New guild commands will be available in the guild immediately.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-guild-application-command">Create Guild Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command">Create Guild Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guild">Guild to create the command in</param>
@@ -1759,7 +1759,7 @@
             <summary>
             Edit a guild command.
             Updates for guild commands will be available immediately.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-guild-application-command">Edit Guild Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to update the command in</param>
@@ -1771,7 +1771,7 @@
             <summary>
             Edit a guild command.
             Updates for guild commands will be available immediately.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-guild-application-command">Edit Guild Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guild">Guild to update the command in</param>
@@ -1782,7 +1782,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Delete a guild command.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command">Delete Guild Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID of the guild to delete command from</param>
@@ -1793,7 +1793,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Delete a guild command.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command">Delete Guild Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guild">Guild to delete command from</param>
@@ -3532,7 +3532,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UseSlashCommands">
             <summary>
-            Allows members to use slash commands in text channels
+            Allows members to use application commands, including slash commands and context menu commands.
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.RequestToSpeak">
@@ -6968,42 +6968,6 @@
             Period (in days) where the integration will ignore lapsed subscriptions
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCallbackData">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionapplicationcommandcallbackdata">Interaction Application Command Callback Data Structure</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCallbackData.Tts">
-            <summary>
-            Is the response TTS
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCallbackData.Content">
-            <summary>
-            Message content
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCallbackData.Embeds">
-            <summary>
-            List of embeds
-            Supports up to 10 embeds
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCallbackData.AllowedMentions">
-            <summary>
-            Allowed mentions 
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCallbackData.Components">
-            <summary>
-            Message components 
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCallbackData.Flags">
-            <summary>
-            Callback data flags
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command-json-params">Application Command Create</a>
@@ -7030,6 +6994,11 @@
             Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.Type">
+            <summary>
+            The type of command, defaults Slash Command if not set
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate">
             <summary>
             Represents a <a href="">Command Followup</a> within discord.
@@ -7050,93 +7019,6 @@
             <summary>
             Callback data flags
             Set to 64 to make your response ephemeral
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionData">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondata">ApplicationCommandInteractionData</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionData.Id">
-            <summary>
-            ID of the invoked command
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionData.Name">
-            <summary>
-            The name of the invoked command
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionData.Resolved">
-            <summary>
-            converted users + roles + channels
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionData.Options">
-            <summary>
-            The params + values from the user
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionData.CustomId">
-            <summary>
-            For components, the custom_id of the component
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionData.ComponentType">
-            <summary>
-            For components, the type of the component
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataOption">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption">Application Command Interaction Data Option</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataOption.Name">
-            <summary>
-            The name of the parameter
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataOption.Type">
-            <summary>
-            Value of ApplicationCommandOptionType
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataOption.Value">
-            <summary>
-            The value of the pair
-            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataOption.Options">
-            <summary>
-            Present if this option is a group or subcommand
-            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataOption"/>
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataResolved">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption">Application Command Interaction Data Option</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataResolved.Users">
-            <summary>
-            The IDs and User objects
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataResolved.Members">
-            <summary>
-            The IDs and partial Member objects
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataResolved.Roles">
-            <summary>
-            The IDs and Role objects
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionDataResolved.Channels">
-            <summary>
-            The IDs and partial Channel objects
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption">
@@ -7244,6 +7126,11 @@
             The sub command option is a Mentionable
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType.Number">
+            <summary>
+            Any double between -2^53 and 2^53
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#guildapplicationcommandpermissions">ApplicationCommandPermissions</a>
@@ -7280,6 +7167,26 @@
             This permission uses User ID
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandType">
+            <summary>
+            Represents <a href="">Application Command Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandType.ChatInput">
+            <summary>
+            Slash commands; a text-based command that shows up when a user types /
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandType.User">
+            <summary>
+            A UI-based command that shows up when you right click or tap on a user
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandType.Message">
+            <summary>
+            A UI-based command that shows up when you right click or tap on a messages
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommand">ApplicationCommand</a>
@@ -7288,6 +7195,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Id">
             <summary>
             Unique id of the command
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Type">
+            <summary>
+            The type of command, defaults 1 if not set
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.ApplicationId">
@@ -7383,13 +7295,13 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Type">
             <summary>
             The type of interaction
-            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Data">
             <summary>
             The command data payload
-            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandInteractionData"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionData"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GuildId">
@@ -7405,6 +7317,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Member">
             <summary>
             Guild member data for the invoking user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.User">
+            <summary>
+            User object for the invoking user, if invoked in a DM
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Token">
@@ -7483,6 +7400,164 @@
             <param name="callback">Callback with the updated message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionapplicationcommandcallbackdata">Interaction Application Command Callback Data Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Tts">
+            <summary>
+            Is the response TTS
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Content">
+            <summary>
+            Message content
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Embeds">
+            <summary>
+            List of embeds
+            Supports up to 10 embedsF
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.AllowedMentions">
+            <summary>
+            Allowed mentions 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Flags">
+            <summary>
+            Callback data flags
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Components">
+            <summary>
+            Message components 
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionData">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondata">ApplicationCommandInteractionData</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Id">
+            <summary>
+            ID of the invoked command
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Name">
+            <summary>
+            The name of the invoked command
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Type">
+            <summary>
+            The type of the invoked command
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Resolved">
+            <summary>
+            converted users + roles + channels
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Options">
+            <summary>
+            The params + values from the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.CustomId">
+            <summary>
+            For components, the custom_id of the component
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.ComponentType">
+            <summary>
+            For components, the type of the component
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.TargetId">
+            <summary>
+            Id the of user or message targeted by a user or message command
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption">Application Command Interaction Data Option</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Name">
+            <summary>
+            The name of the parameter
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Type">
+            <summary>
+            Value of ApplicationCommandOptionType
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Value">
+            <summary>
+            The value of the pair
+            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Options">
+            <summary>
+            Present if this option is a group or subcommand
+            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption"/>
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption">Application Command Interaction Data Option</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved.Users">
+            <summary>
+            The IDs and User objects
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved.Members">
+            <summary>
+            The IDs and partial Member objects
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved.Roles">
+            <summary>
+            The IDs and Role objects
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved.Channels">
+            <summary>
+            The IDs and partial Channel objects
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved.Messages">
+            <summary>
+            The ids and partial Message objects
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype">InteractionType</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType.Ping">
+            <summary>
+            The interaction is a ping
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType.ApplicationCommand">
+            <summary>
+            The interaction is a user using a command
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType.MessageComponent">
+            <summary>
+            The interaction is a message component
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionResponse">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response">Interaction Response</a>
@@ -7527,26 +7602,6 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType.UpdateMessage">
             <summary>
             For components, edit the message the component was attached to
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype">InteractionType</a>
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.Ping">
-            <summary>
-            The interaction is a ping
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommand">
-            <summary>
-            The interaction is a user using a command
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent">
-            <summary>
-            The interaction is a message component
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent">

@@ -135,7 +135,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <summary>
         /// Fetch all of the global commands for your application.
         /// Returns a list of ApplicationCommand.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#get-global-application-commands">Get Global Application Commands</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands">Get Global Application Commands</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with list of application commands</param>
@@ -149,7 +149,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// Create a new global command.
         /// New global commands will be available in all guilds after 1 hour.
         /// Note: Creating a command with the same name as an existing command for your application will overwrite the old command.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command">Create Global Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#create-global-application-command">Create Global Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="create">Command to create</param>
@@ -163,7 +163,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <summary>
         /// Edit a global command.
         /// Updates will be available in all guilds after 1 hour.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-global-application-command">Edit Global Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command">Edit Global Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="update">Command Update</param>
@@ -176,7 +176,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         
         /// <summary>
         /// Deletes a global command
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-global-application-command">Delete Global Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command">Delete Global Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="commandId">Command to delete</param>
@@ -189,7 +189,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
 
         /// <summary>
         /// Fetch all of the guild commands for your application for a specific guild.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-commands">Get Guild Application Commands</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands">Get Guild Application Commands</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">ID of the guild to get commands for</param>
@@ -202,7 +202,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         
         /// <summary>
         /// Fetch all of the guild commands for your application for a specific guild.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#get-guild-application-commands">Get Guild Application Commands</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands">Get Guild Application Commands</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guild">Guild to get commands for</param>
@@ -216,7 +216,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <summary>
         /// Create a new guild command.
         /// New guild commands will be available in the guild immediately.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-guild-application-command">Create Guild Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command">Create Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to create the command in</param>
@@ -231,7 +231,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <summary>
         /// Create a new guild command.
         /// New guild commands will be available in the guild immediately.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-guild-application-command">Create Guild Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command">Create Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guild">Guild to create the command in</param>
@@ -246,7 +246,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <summary>
         /// Edit a guild command.
         /// Updates for guild commands will be available immediately.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-guild-application-command">Edit Guild Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to update the command in</param>
@@ -261,7 +261,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <summary>
         /// Edit a guild command.
         /// Updates for guild commands will be available immediately.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-guild-application-command">Edit Guild Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guild">Guild to update the command in</param>
@@ -275,7 +275,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         
         /// <summary>
         /// Delete a guild command.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command">Delete Guild Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID of the guild to delete command from</param>
@@ -289,7 +289,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         
         /// <summary>
         /// Delete a guild command.
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-guild-application-command">Delete Guild Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guild">Guild to delete command from</param>

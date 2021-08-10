@@ -1,17 +1,18 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities.Interactions
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption">Application Command Interaction Data Option</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class CommandInteractionDataResolved
+    public class InteractionDataResolved
     {
         /// <summary>
         /// The IDs and User objects
@@ -36,5 +37,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("channels")]
         public Hash<Snowflake, DiscordChannel> Channels { get; set; }
+        
+        /// <summary>
+        /// The ids and partial Message objects
+        /// </summary>
+        [JsonProperty("messages")]
+        public Hash<Snowflake, DiscordMessage> Messages { get; set; }
     }
 }
