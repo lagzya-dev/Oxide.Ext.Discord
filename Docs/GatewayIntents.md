@@ -4,7 +4,6 @@ Gateway intents control which events your bot will receive from the websocket.
 It is recommended that you only request intents that your plugin needs.
 If there are multiple plugins used by the same bot with different intents the Discord Extension will handle updating the bot with the new intents it needs to function.
 
-
 ## Available Intents
 
 This is a list of all intents and which hooks become available when using a specific one.
@@ -14,18 +13,31 @@ This is a list of all intents and which hooks become available when using a spec
     * [OnDiscordGuildUpdated](Hooks.md#ondiscordguildupdated)
     * [OnDiscordGuildUnavailable](Hooks.md#ondiscordguildunavailable)
     * [OnDiscordGuildDeleted](Hooks.md#ondiscordguildchanneldeleted)
+    * [OnDiscordGuildRoleCreated](Hooks.md#ondiscordguildrolecreated)
+    * [OnDiscordGuildRoleUpdated](Hooks.md#ondiscordguildroleupdated)
+    * [OnDiscordGuildRoleDeleted](Hooks.md#ondiscordguildroledeleted)
     * [OnDiscordGuildChannelCreated](Hooks.md#ondiscordguildchannelcreated)
     * [OnDiscordGuildChannelUpdated](Hooks.md#ondiscordguildchannelupdated)
     * [OnDiscordDirectChannelDeleted](Hooks.md#ondiscordguildchanneldeleted)
     * [OnDiscordGuildChannelPinsUpdated](Hooks.md#ondiscordguildchannelpinsupdated)
-    * [OnDiscordGuildRoleCreated](Hooks.md#ondiscordguildrolecreated)
-    * [OnDiscordGuildRoleUpdated](Hooks.md#ondiscordguildroleupdated)
-    * [OnDiscordGuildRoleDeleted](Hooks.md#ondiscordguildroledeleted)
+    * [OnDiscordGuildThreadCreated](Hooks.md#ondiscordguildthreadcreated)
+    * [OnDiscordGuildThreadUpdated](Hooks.md#ondiscordguildthreadupdated)
+    * [OnDiscordGuildThreadDeleted](Hooks.md#ondiscordguildthreaddeleted)
+    * [OnDiscordGuildThreadListSynced](Hooks.md#ondiscordguildthreadlistsynced)
+    * [OnDiscordGuildThreadMemberUpdated](Hooks.md#ondiscordguildthreadmemberupdated)
+    * [OnDiscordGuildThreadMembersUpdated](Hooks.md#ondiscordguildthreadmembersupdated)
+    * [OnDiscordGuildThreadMembersUpdated](Hooks.md#ondiscordguildthreadmembersupdated)
+    * [OnDiscordStageInstanceCreated](Hooks.md#ondiscordstageinstancecreated)
+    * [OnDiscordStageInstanceUpdated](Hooks.md#ondiscordstageinstanceupdated)
+    * [OnDiscordStageInstanceDeleted](Hooks.md#ondiscordstageinstancedeleted)
+    * [OnDiscordStageInstanceDeleted](Hooks.md#ondiscordstageinstancedeleted)
+    
 
 * Guild Members (`GatewayIntents.GuildMembers`)
     * [OnDiscordGuildMemberAdded](Hooks.md#ondiscordguildmemberadded)
     * [OnDiscordGuildMemberUpdated](Hooks.md#ondiscordguildmemberupdated)
     * [OnDiscordGuildMemberRemoved](Hooks.md#ondiscordguildmemberremoved)
+    * [OnDiscordGuildThreadMembersUpdated](Hooks.md#ondiscordguildthreadmembersupdated)
     
 * Guild Bans (`GatewayIntents.GuildBans`)
     * [OnDiscordGuildMemberBanned](Hooks.md#ondiscordguildmemberbanned)
@@ -33,9 +45,13 @@ This is a list of all intents and which hooks become available when using a spec
     
 * Guild Emojis (`GatewayIntents.GuildEmojis`)
     * [OnDiscordGuildEmojisUpdated](Hooks.md#ondiscordguildemojisupdated)
+    * [OnDiscordGuildStickersUpdated](Hooks.md#ondiscordguildstickersupdated)
     
 * Guild Integrations (`GatewayIntents.GuildIntegrations`)
     * [OnDiscordGuildIntegrationsUpdated](Hooks.md#ondiscordguildintegrationsupdated)
+    * [OnDiscordGuildIntegrationCreated](Hooks.md#ondiscordguildintegrationcreated)
+    * [OnDiscordGuildIntegrationUpdated](Hooks.md#ondiscordguildintegrationupdated)
+    * [OnDiscordGuildIntegrationDeleted](Hooks.md#ondiscordguildintegrationdeleted)
 
 * Guild Webhooks (`GatewayIntents.GuildWebhooks`)
     * [OnDiscordGuildWebhookUpdated](Hooks.md#ondiscordguildwebhooksupdated)

@@ -203,7 +203,7 @@ void OnDiscordGatewayResumed(GatewayResumedEvent resume)
 - Called when a direct message (DM) channel has been created.
 
 ```c#
-void OnDiscordDirectChannelCreated(Channel channel)
+void OnDiscordDirectChannelCreated(DiscordChannel channel)
 {
     Puts("OnDiscordDirectChannelCreated Works!");
 }
@@ -214,7 +214,7 @@ void OnDiscordDirectChannelCreated(Channel channel)
 - Called when a channel has been created in a guild.
 
 ```c#
-void OnDiscordGuildChannelCreated(Channel channel, Guild guild)
+void OnDiscordGuildChannelCreated(DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildChannelCreated Works!");
 }
@@ -225,7 +225,7 @@ void OnDiscordGuildChannelCreated(Channel channel, Guild guild)
 - Called when a direct message (DM) channel has been updated.
 
 ```c#
-void OnDiscordDirectChannelUpdated(Channel channel, Channel previous)
+void OnDiscordDirectChannelUpdated(DiscordChannel channel, DiscordChannel previous)
 {
     Puts("OnDiscordDirectChannelUpdated Works!");
 }
@@ -236,7 +236,7 @@ void OnDiscordDirectChannelUpdated(Channel channel, Channel previous)
 - Called when a channel has been updated in a guild.
 
 ```c#
-void OnDiscordGuildChannelUpdated(Channel channel, Channel previous, Guild guild)
+void OnDiscordGuildChannelUpdated(DiscordChannel channel, DiscordChannel previous, DiscordGuild guild)
 {
     Puts("OnDiscordGuildChannelUpdated Works!");
 }
@@ -248,7 +248,7 @@ void OnDiscordGuildChannelUpdated(Channel channel, Channel previous, Guild guild
   - Not sure if this is possible for DM channels
 
 ```c#
-void OnDiscordDirectChannelDeleted(Channel channel)
+void OnDiscordDirectChannelDeleted(DiscordChannel channel)
 {
     Puts("OnDiscordDirectChannelDeleted Works!");
 }
@@ -259,7 +259,7 @@ void OnDiscordDirectChannelDeleted(Channel channel)
 - Called when a channel has been deleted in a guild.
 
 ```c#
-void OnDiscordGuildChannelDeleted(Channel channel, Guild guild)
+void OnDiscordGuildChannelDeleted(DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildChannelDeleted Works!");
 }
@@ -271,7 +271,7 @@ void OnDiscordGuildChannelDeleted(Channel channel, Guild guild)
   - channel may be null if we haven't seen it before.
 
 ```c#
-void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel)
+void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel)
 {
     Puts("OnDiscordDirectChannelPinsUpdated Works!");
 }
@@ -282,7 +282,7 @@ void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel c
 - Called when a guild channel has it's pinned messages updated
 
 ```c#
-void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel channel, Guild guild)
+void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildChannelPinsUpdated Works!");
 }
@@ -293,7 +293,7 @@ void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, Channel ch
 - Called when a discord server is fully loaded while connecting or the bot has joined a new discord server
 
 ```c#
-void OnDiscordGuildCreated(Guild guild)
+void OnDiscordGuildCreated(DiscordGuild guild)
 {
     Puts("OnDiscordGuildCreated Works!");
 }
@@ -304,7 +304,7 @@ void OnDiscordGuildCreated(Guild guild)
 - Called when any updates are made to a guild
 
 ```c#
-void OnDiscordGuildUpdated(Guild guild, Guild previous)
+void OnDiscordGuildUpdated(DiscordGuild guild, DiscordGuild previous)
 {
     Puts("OnDiscordGuildUpdated Works!");
 }
@@ -315,7 +315,7 @@ void OnDiscordGuildUpdated(Guild guild, Guild previous)
 - Called when a guild become unavailable due to a network outage
 
 ```c#
-void OnDiscordGuildUnavailable(Guild guild)
+void OnDiscordGuildUnavailable(DiscordGuild guild)
 {
     Puts("OnDiscordGuildUnavailable Works!");
 }
@@ -326,7 +326,7 @@ void OnDiscordGuildUnavailable(Guild guild)
 - Called when a bot is removed from a discord server or that discord server was deleted
 
 ```c#
-void OnDiscordGuildUnavailable(Guild guild)
+void OnDiscordGuildUnavailable(DiscordGuild guild)
 {
     Puts("OnDiscordGuildUnavailable Works!");
 }
@@ -337,7 +337,7 @@ void OnDiscordGuildUnavailable(Guild guild)
 - Called when a guild member is banned
 
 ```c#
-void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, Guild guild)
+void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, DiscordGuild guild)
 {
     Puts("OnDiscordGuildBanAdded Works!");
 }
@@ -348,7 +348,7 @@ void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, Guild guild)
 - Called when a guild member is unbanned
 
 ```c#
-void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, Guild guild)
+void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, DiscordGuild guild)
 {
     Puts("OnDiscordGuildBanAdded Works!");
 }
@@ -359,9 +359,20 @@ void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, Guild guild)
 - Called when the custom emojis for a guild are created/updated/deleted
 
 ```c#
-void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, Emoji&gt; previous, Guild guild)
+void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, DiscordEmoji&gt; previous, DiscordGuild guild)
 {
     Puts("OnDiscordGuildEmojisUpdated Works!");
+}
+```
+
+### OnDiscordGuildStickersUpdated
+
+- Called when the guild stickers are updated
+
+```c#
+void OnDiscordGuildStickersUpdated(GuildStickersUpdatedEvent stickers, Hash&lt;Snowflake, DiscordSticker&gt; previous, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildStickersUpdated Works!");
 }
 ```
 
@@ -370,7 +381,7 @@ void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowfla
 - Called when a guild integration is updated
 
 ```c#
-void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, Guild guild)
+void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, DiscordGuild guild)
 {
     Puts("OnDiscordGuildIntegrationsUpdated Works!");
 }
@@ -381,7 +392,7 @@ void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration
 - Called when a guild member has been added to the guild
 
 ```c#
-void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, Guild guild)
+void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberRemoved Works!");
 }
@@ -392,7 +403,7 @@ void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, Guild guild)
 - Called when a guild member has been removed from the guild
 
 ```c#
-void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, Guild guild)
+void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberRemoved Works!");
 }
@@ -404,7 +415,7 @@ void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, Guild guild)
   - This also include when the DiscordUser is updated as well
 
 ```c#
-void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, Guild guild)
+void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberUpdated Works!");
 }
@@ -416,7 +427,7 @@ void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, Guild guild)
   - This Discord Extension requests all guild members in the [OnDiscordGuildCreated](#ondiscordguildcreated) Hook
 
 ```c#
-void OnDiscordGuildMembersLoaded(Guild guild)
+void OnDiscordGuildMembersLoaded(DiscordGuild guild)
 {
     Puts("OnDiscordGuildMembersLoaded Works!");
 }
@@ -427,7 +438,7 @@ void OnDiscordGuildMembersLoaded(Guild guild)
 - Called in a response to a request for guild member chunks
 
 ```c#
-void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, Guild guild)
+void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMembersChunk Works!");
 }
@@ -438,7 +449,7 @@ void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, Guild guild)
 - Called when a discord guild role is created
 
 ```c#
-void OnDiscordGuildRoleCreated(Role role, Guild guild)
+void OnDiscordGuildRoleCreated(Role role, DiscordGuild guild)
 {
     Puts("OnDiscordGuildRoleCreated Works!");
 }
@@ -449,7 +460,7 @@ void OnDiscordGuildRoleCreated(Role role, Guild guild)
 - Called when a discord guild role is updated
 
 ```c#
-void OnDiscordGuildRoleUpdated(Role role, Role previous, Guild guild)
+void OnDiscordGuildRoleUpdated(Role role, Role previous, DiscordGuild guild)
 {
     Puts("OnDiscordGuildRoleUpdated Works!");
 }
@@ -460,7 +471,7 @@ void OnDiscordGuildRoleUpdated(Role role, Role previous, Guild guild)
 - Called when a discord guild role is deleted
 
 ```c#
-void OnDiscordGuildRoleDeleted(Role role, Guild guild)
+void OnDiscordGuildRoleDeleted(Role role, DiscordGuild guild)
 {
     Puts("OnDiscordGuildRoleDeleted Works!");
 }
@@ -472,7 +483,7 @@ void OnDiscordGuildRoleDeleted(Role role, Guild guild)
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessageCreated(DiscordMessage message, Channel channel)
+void OnDiscordDirectMessageCreated(DiscordMessage message, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessageCreated Works!");
 }
@@ -483,7 +494,7 @@ void OnDiscordDirectMessageCreated(DiscordMessage message, Channel channel)
 - Called when a message is created in a guild channel
 
 ```c#
-void OnDiscordGuildMessageCreated(DiscordMessage message, Channel channel, Guild guild)
+void OnDiscordGuildMessageCreated(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMessageCreated Works!");
 }
@@ -495,7 +506,7 @@ void OnDiscordGuildMessageCreated(DiscordMessage message, Channel channel, Guild
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
+void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessageUpdated Works!");
 }
@@ -506,7 +517,7 @@ void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
 - Called when a message is updated in a guild channel
 
 ```c#
-void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
+void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessageUpdated Works!");
 }
@@ -518,7 +529,7 @@ void OnDiscordDirectMessageUpdated(DiscordMessage message, Channel channel)
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel)
+void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessageDeleted Works!");
 }
@@ -529,7 +540,7 @@ void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel)
 - Called when a message is deleted in a guild channel
 
 ```c#
-void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel, Guild guild)
+void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordDirectMessageDeleted Works!");
 }
@@ -541,7 +552,7 @@ void OnDiscordDirectMessageDeleted(DiscordMessage message, Channel channel, Guil
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel)
+void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessagesBulkDeleted Works!");
 }
@@ -552,7 +563,7 @@ void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channe
 - Called when a message is deleted in a guild channel
 
 ```c#
-void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel channel, Guild guild)
+void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMessagesBulkDeleted Works!");
 }
@@ -564,7 +575,7 @@ void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Channel
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel)
+void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessageReactionAdded Works!");
 }
@@ -575,7 +586,7 @@ void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, Cha
 - Called when a reaction is added to a message in a guild channel
 
 ```c#
-void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, Channel channel, Guild guild)
+void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMessageReactionAdded Works!");
 }
@@ -587,7 +598,7 @@ void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, Chan
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel)
+void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessageReactionRemoved Works!");
 }
@@ -598,7 +609,7 @@ void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction,
 - Called when a reaction is removed from a message in a guild channel
 
 ```c#
-void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, Channel channel, Guild guild)
+void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMessageReactionRemoved Works!");
 }
@@ -610,7 +621,7 @@ void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, 
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessageReactionRemovedAll Works!");
 }
@@ -621,7 +632,7 @@ void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEven
 - Called when all reactions are removed from a message in a guild channel
 
 ```c#
-void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMessageReactionRemovedAll Works!");
 }
@@ -633,7 +644,7 @@ void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel)
+void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessageReactionEmojiRemoved Works!");
 }
@@ -644,7 +655,7 @@ void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEv
 - Called when all of a specific reaction is removed from a message in a guild channel
 
 ```c#
-void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, Channel channel, Guild guild)
+void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMessageReactionEmojiRemoved Works!");
 }
@@ -655,7 +666,7 @@ void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEve
 - Called when a guild members presence is updated
 
 ```c#
-void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, Guild guild)
+void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberPresenceUpdated Works!");
 }
@@ -667,7 +678,7 @@ void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMembe
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectTypingStarted(TypingStartedEvent typing, Channel channel)
+void OnDiscordDirectTypingStarted(TypingStartedEvent typing, DiscordChannel channel)
 {
     Puts("OnDiscordDirectTypingStarted Works!");
 }
@@ -678,7 +689,7 @@ void OnDiscordDirectTypingStarted(TypingStartedEvent typing, Channel channel)
 - Called typing starts in a guild channel
 
 ```c#
-void OnDiscordGuildTypingStarted(TypingStartedEvent typing, Channel channel, Guild guild)
+void OnDiscordGuildTypingStarted(TypingStartedEvent typing, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildTypingStarted Works!");
 }
@@ -689,7 +700,7 @@ void OnDiscordGuildTypingStarted(TypingStartedEvent typing, Channel channel, Gui
 - Called when a discord user is updated
 
 ```c#
-       /// void OnDiscordUserUpdated(DiscordUser user)
+void OnDiscordUserUpdated(DiscordUser user)
 {
     Puts("OnDiscordUserUpdated Works!");
 }
@@ -701,7 +712,7 @@ void OnDiscordGuildTypingStarted(TypingStartedEvent typing, Channel channel, Gui
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectVoiceStateUpdated(VoiceState voice, Channel channel)
+void OnDiscordDirectVoiceStateUpdated(VoiceState voice, DiscordChannel channel)
 {
     Puts("OnDiscordDirectVoiceStateUpdated Works!");
 }
@@ -712,7 +723,7 @@ void OnDiscordDirectVoiceStateUpdated(VoiceState voice, Channel channel)
 - Called when the voice state in a guild channel is updated
 
 ```c#
-void OnDiscordGuildVoiceStateUpdated(VoiceState voice, Channel channel, Guild guild)
+void OnDiscordGuildVoiceStateUpdated(VoiceState voice, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildVoiceStateUpdated Works!");
 }
@@ -723,7 +734,7 @@ void OnDiscordGuildVoiceStateUpdated(VoiceState voice, Channel channel, Guild gu
 - Called when the voice server in a guild channel is updated
 
 ```c#
-void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, Channel channel, Guild guild)
+void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildVoiceServerUpdated Works!");
 }
@@ -734,7 +745,7 @@ void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, Channel cha
 - Called when a webhook ins a guild is updated
 
 ```c#
-void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, Channel channel, Guild guild)
+void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildWebhookUpdated Works!");
 }
@@ -746,7 +757,7 @@ void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, Channel channel,
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, Channel channel)
+void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, DiscordChannel channel)
 {
     Puts("OnDiscordDirectInviteCreated Works!");
 }
@@ -757,7 +768,7 @@ void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, Channel channel)
 - Called when an invite to a guild channel is created
 
 ```c#
-void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, Channel channel, Guild guild)
+void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildInviteCreated Works!");
 }
@@ -769,7 +780,7 @@ void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, Channel channel, Gui
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, Channel channel)
+void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel)
 {
     Puts("OnDiscordDirectInviteDeleted Works!");
 }
@@ -780,7 +791,7 @@ void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, Channel channel)
 - Called when an invite to a guild channel is deleted
 
 ```c#
-void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, Channel channel, Guild guild)
+void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildInviteDeleted Works!");
 }
@@ -797,14 +808,146 @@ void OnDiscordInteractionCreated(Interaction interaction)
 }
 ```
 
-### OnDiscordGuildIntegrationCreated
+### OnDiscordApplicationCommandCreated
 
-- Called when an integration is created on a guild
+- Called when an application command is created
 
 ```c#
-void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+void OnDiscordApplicationCommandCreated(DiscordApplicationCommand command, DiscordGuild guild) 
 {
-    Puts("OnDiscordGuildIntegrationCreated Works!");
+     Puts("OnDiscordApplicationCommandCreated Works!");
+}
+```
+
+### OnDiscordApplicationCommandUpdated
+
+- Called when an application command is updated
+
+```c#
+void OnDiscordApplicationCommandUpdated(DiscordApplicationCommand command, DiscordGuild guild) 
+{
+     Puts("OnDiscordApplicationCommandUpdated Works!");
+}
+```
+
+### OnDiscordApplicationCommandDeleted
+
+- Called when an application command is deleted
+
+```c#
+void OnDiscordApplicationCommandDeleted(DiscordApplicationCommand command, DiscordGuild guild) 
+{
+     Puts("OnDiscordApplicationCommandDeleted Works!");
+}
+```
+
+### OnDiscordGuildThreadCreated
+
+- Called when a guild thread is created
+
+```c#
+void OnDiscordGuildThreadCreated(DiscordChannel thread, DiscordGuild guild) 
+{
+     Puts("OnDiscordGuildThreadCreated Works!");
+}
+```
+
+### OnDiscordGuildThreadUpdated
+
+- Called when a guild thread is updated
+
+```c#
+void OnDiscordGuildThreadUpdated(DiscordChannel thread, DiscordChannel previous, DiscordGuild guild) 
+{
+     Puts("OnDiscordGuildThreadUpdated Works!");
+}
+```
+
+### OnDiscordGuildThreadDeleted
+
+- Called when a guild thread is deleted
+
+```c#
+void OnDiscordGuildThreadDeleted(DiscordChannel thread, DiscordGuild guild) 
+{
+     Puts("OnDiscordGuildThreadDeleted Works!");
+}
+```
+
+### OnDiscordGuildThreadListSynced
+
+- Called when a guild thread list is synced
+
+```c#
+void OnDiscordGuildThreadListSynced(ThreadListSyncEvent sync, DiscordGuild guild) 
+{
+     Puts("OnDiscordGuildThreadListSynced Works!");
+}
+```
+
+### OnDiscordGuildThreadMemberUpdated
+
+- Called when a thread member is updated
+
+```c#
+void OnDiscordGuildThreadMemberUpdated(ThreadMember member, DiscordChannel thread, DiscordGuild guild) 
+{
+     Puts("OnDiscordGuildThreadMemberUpdated Works!");
+}
+```
+
+### OnDiscordGuildThreadMembersUpdated
+
+- Called when thread members are updated
+
+```c#
+void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, DiscordGuild guild) 
+{
+     Puts("OnDiscordGuildThreadMembersUpdated Works!");
+}
+```
+
+### OnDiscordStageInstanceCreated
+
+- Called when a stage intance is created
+
+```c#
+void OnDiscordStageInstanceCreated(StageInstance stage, DiscordGuild guild) 
+{
+     Puts("OnDiscordStageInstanceCreated Works!");
+}
+```
+
+### OnDiscordStageInstanceUpdated
+
+- Called when a stage instance is updated
+
+```c#
+void OnDiscordStageInstanceUpdated(StageInstance stage, StageInstance previous, DiscordGuild guild) 
+{
+     Puts("OnDiscordStageInstanceUpdated Works!");
+}
+```
+
+### OnDiscordStageInstanceDeleted
+
+- Called when a stage instance is deleted
+
+```c#
+void OnDiscordStageInstanceDeleted(StageInstance stage, DiscordGuild guild) 
+{
+     Puts("OnDiscordStageInstanceDeleted Works!");
+}
+```
+
+### OnDiscordInteractionCreated
+
+- Called when a users uses a slash command, user command, message command, or a message component
+
+```c#
+void OnDiscordInteractionCreated(DiscordInteraction interaction) 
+{
+     Puts("OnDiscordInteractionCreated Works!");
 }
 ```
 
@@ -813,7 +956,7 @@ void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild
 - Called when an integration is created on a guild
 
 ```c#
-void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild guild)
+void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, DiscordGuild guild)
 {
     Puts("OnDiscordGuildIntegrationCreated Works!");
 }
@@ -824,7 +967,7 @@ void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, Guild
 - Called when an integration is updated on a guild
 
 ```c#
-void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild guild)
+void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, DiscordGuild guild)
 {
     Puts("OnDiscordGuildIntegrationUpdated Works!");
 }
@@ -835,7 +978,7 @@ void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, Guild
 - Called when an integration is deleted on a guild
 
 ```c#
-void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, Guild guild)
+void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
 {
     Puts("OnDiscordIntegrationDeleted Works!");
 }
@@ -846,7 +989,7 @@ void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, Guild guil
 - Called when a application command is created for a guild
 
 ```c#
-void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, Guild guild)
+void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
 {
     Puts("OnDiscordApplicationCommandCreated Works!");
 }
@@ -857,7 +1000,7 @@ void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, Gu
 - Called when a application command is updated for a guild
 
 ```c#
-void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, Guild guild)
+void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
 {
     Puts("OnDiscordApplicationCommandUpdated Works!");
 }
@@ -868,7 +1011,7 @@ void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, Gu
 - Called when a application command is deleted for a guild
 
 ```c#
-void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, Guild guild)
+void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, DiscordGuild guild)
 {
     Puts("OnDiscordApplicationCommandDeleted Works!");
 }

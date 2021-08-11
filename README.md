@@ -1,85 +1,58 @@
+## About
+
 **Oxide.Ext.Discord** is an Oxide extension which acts as a bridge between Oxide and the Discord API.
 
 Should you encounter a problem or bug with the extension, please feel free to create an issue here. Try to include as much detail as possible, including steps to reproduce the issue. A code example is highly appreciated.
 
+## Upgrading to version 2.0.0
+Before upgrading to version 2.0.0 make sure all the discord extension plugins you plan to use support the new version. 
+Plugins that were made for version 1.0.0 are **not** compatible with version 2.0.0.
+
 ## Installation
 
 To install the extension to your Oxide server, you must follow a few simple steps:
-1) Shutdown the server.
-2) Open the server files, and navigate to the "Managed" folder (eg. "RustDedicated_Data/Managed")
-3) Download the latest release.
-4) Copy the "Oxide.Ext.Discord.dll" file into your "Managed" folder.
-5) Start your server!
+1) Open the server files, and navigate to the "Managed" folder (eg. "RustDedicated_Data/Managed")
+2) Download the latest release.
+3) Copy the "Oxide.Ext.Discord.dll" file into your "Managed" folder.
+4) Restart your server!
+
+## Developer
+
+If you would like to create plugins for the extension please [Click Here](Docs/README.md) to learn more  
+**If the link doesn't work please try the readme on the github page**
 
 ## Getting your API Key
 
 An API key is used to authenticate requests made to and from Discord.
 
-**Note: DO NOT SHARE YOUR API KEY!** Sharing your key may result in punishments from Discord (including a platform-wide ban) if the token is used to abuse the API.
+**Note: DO NOT SHARE YOUR API KEY!**   
+Sharing your key may result in punishments from Discord (including a platform-wide ban) if the token is used to abuse the API.
 
 Obtaining an API Key:
 1) Visit the official Discord Developers page here: [Discord Developer Documentation](https://discordapp.com/developers/applications/me)
-2) Click "New App".
-3) Name your app and click create! *Note: A description isn't required.*
-4) You will now be redirected to your created app, at the point you will need to click "Create a Bot User".
-5) Under the newly created bot section, under "Username" you will see "Token". Reveal the token and copy it into your plugin.
-6) Now it's time to add your new bot to your guild! To add your bot to your guild you must visit the following link, and replace "botUserID" with the client ID found at the top of your Discord app settings page:
-https://discordapp.com/oauth2/authorize?client_id=botUserID&scope=bot&permissions=8
-
-**Note:** "permissions=8" in the link will provide the bot with administrative permissions so you won't have to give it some.
-
-## Developer 
-
-If you would like to create plugins for the extension please [Click Here](Docs/GettingStarted.md)  
-**If the link doesn't work please try the readme on the github page** 
-## Plugin Example
-
-The following plugin is a simple example on how to use the extension.
-This plugin simply adds a 'sad' reaction to any message posted on the Discord server, and then broadcasts the message to the server chat.
-
-```c#
-using Oxide.Ext.Discord;
-using Oxide.Ext.Discord.Attributes;
-using Oxide.Ext.Discord.DiscordObjects;
-
-namespace Oxide.Plugins
-{
-    [Info("Discord Ext Example", "Your Name", "1.0.0")]
-    class DiscordExtExample : CovalencePlugin
-    {
-        // Define the DiscordClient field that will be set
-        // to when our DiscordClient is created & connected
-        [DiscordClient] DiscordClient Client;
-
-        void OnServerInitialized()
-        {
-            Discord.CreateClient(this, "<api key here>"); // Create a new DiscordClient
-        }
-
-        // Called when the connection is completed
-        void Discord_Ready(Ready ready)
-        {
-            Puts("Discord connected!");
-
-            // When this hook is called, our Client variable
-            // will be set to the main DiscordClient that
-            // has been created for us
-
-            Puts($"Connected to server: {Client.DiscordServer.name}");
-        }
-
-        // Called when a message is created on the Discord server
-        void Discord_MessageCreate(Message message)
-        {
-            // Add a sad reaction to the message
-            message.CreateReaction(Client, "<emoji_name:id>");
-
-            // Post the message to chat
-            server.Broadcast($"Discord Message: {message.author.username} - {message.content}");
-        }
-    }
-}
-```
+2) Click "New App".  
+   ![](https://i.postimg.cc/ZKwQdZZP/1-New-Application.png)
+3) Name your app and click create!  
+   ![](https://i.postimg.cc/Vk5V9TLx/2-Create-App-Name.png)
+4) You will now be redirected to your created app. Click on "Bot" on the left hand side and then "Add Bot".  
+   ![](https://i.postimg.cc/htw32rXf/3-Add-Bot.png)
+5) Under the newly created bot section, Enter the username for your bot and upload an icon.
+   Then enable the Presence and Server Members Intent.
+   To get your Discord API Token click on the "Copy" button.
+   This is the token that is used by discord extension plugins.   
+   ![](https://i.postimg.cc/7YHchbvY/4-Copy-Token.png)
+6) Next we're going to setup the permissions that bot has in your Discord Server.
+   Click on OAuth2 on the left hand side.
+   Scroll down till your see scopes and permissions.
+   Under Scope select Bot.
+   Under permissions select which permissions that bot should have.
+   Once you have all of this selected click on the copy button.  
+   ![](https://i.postimg.cc/ZnXStyHc/image.png)
+7) Now it's time to add your new bot to your guild!
+   Paste the link from the previous step into the url section of your browser.
+   Select which Discord Server you want to invite the bot into and continue and then authorize.  
+   ![](https://i.postimg.cc/JnPXqRxm/image.png)
+8) Your bot will now be in your discord server.
 
 ## Contributing
 
