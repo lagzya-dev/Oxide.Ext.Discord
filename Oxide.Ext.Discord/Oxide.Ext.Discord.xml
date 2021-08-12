@@ -7295,7 +7295,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Type">
             <summary>
             The type of interaction
-            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Data">
@@ -7538,26 +7538,6 @@
             The ids and partial Message objects
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype">InteractionType</a>
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType.Ping">
-            <summary>
-            The interaction is a ping
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType.ApplicationCommand">
-            <summary>
-            The interaction is a user using a command
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionRequestType.MessageComponent">
-            <summary>
-            The interaction is a message component
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionResponse">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response">Interaction Response</a>
@@ -7602,6 +7582,26 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType.UpdateMessage">
             <summary>
             For components, edit the message the component was attached to
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype">InteractionType</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.Ping">
+            <summary>
+            The interaction is a ping
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommand">
+            <summary>
+            The interaction is a user using a command
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent">
+            <summary>
+            The interaction is a message component
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent">

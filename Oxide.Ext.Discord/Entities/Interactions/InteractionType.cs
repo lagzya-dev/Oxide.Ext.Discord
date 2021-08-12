@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype">InteractionType</a>
     /// </summary>
-    public enum InteractionRequestType
+    public enum InteractionType
     {
         /// <summary>
         /// The interaction is a ping

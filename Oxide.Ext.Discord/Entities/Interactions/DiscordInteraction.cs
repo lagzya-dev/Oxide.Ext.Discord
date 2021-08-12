@@ -29,10 +29,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         /// <summary>
         /// The type of interaction
-        /// See <see cref="InteractionRequestType"/>
+        /// See <see cref="InteractionType"/>
         /// </summary>
         [JsonProperty("type")]
-        public InteractionRequestType Type { get; set; }
+        public InteractionType Type { get; set; }
         
         /// <summary>
         /// The command data payload
