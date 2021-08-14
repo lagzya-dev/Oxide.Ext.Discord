@@ -121,7 +121,8 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns>This</returns>
         public DiscordEmbed AddDescription(string description)
         {
-            if (description != null && description.Length > 4096)
+            if (description == null) throw new ArgumentNullException(nameof(description));
+            if (description.Length > 4096)
             {
                 throw new Exception("Description cannot be more than 4096 characters");
             }
@@ -151,7 +152,8 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns>This</returns>
         public DiscordEmbed AddAuthor(string name, string iconUrl = null, string url = null, string proxyIconUrl = null)
         {
-            if (name != null && name.Length > 256)
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (name.Length > 256)
             {
                 throw new Exception("Author name cannot be more than 256 characters");
             }
@@ -169,7 +171,8 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns>This</returns>
         public DiscordEmbed AddFooter(string text, string iconUrl = null, string proxyIconUrl = null)
         {
-            if (text != null && text.Length > 2048)
+            if (text == null) throw new ArgumentNullException(nameof(text));
+            if (text.Length > 2048)
             {
                 throw new Exception("Author name cannot be more than 2048 characters");
             }
@@ -273,7 +276,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
                 throw new Exception("Field name cannot be more than 256 characters");
             }
             
-            if (value.Length > 1024 )
+            if (value.Length > 1024)
             {
                 throw new Exception("Field name cannot be more than 1024  characters");
             }
@@ -293,6 +296,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns></returns>
         public DiscordEmbed AddImage(string url, int? width = null, int? height = null, string proxyUrl = null)
         {
+            if (url == null) throw new ArgumentNullException(nameof(url));
             Image = new EmbedImage(url, width, height, proxyUrl);
             return this;
         }
@@ -308,6 +312,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns></returns>
         public DiscordEmbed AddThumbnail(string url, int? width = null, int? height = null, string proxyUrl = null)
         {
+            if (url == null) throw new ArgumentNullException(nameof(url));
             Thumbnail = new EmbedThumbnail(url, width, height, proxyUrl);
             return this;
         }
@@ -322,6 +327,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <returns></returns>
         public DiscordEmbed AddVideo(string url, int? width = null, int? height = null, string proxyUrl = null)
         {
+            if (url == null) throw new ArgumentNullException(nameof(url));
             Video = new EmbedVideo(url, width, height, proxyUrl);
             return this;
         }

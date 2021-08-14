@@ -2,7 +2,7 @@
 
 Here you will find some examples of plugins using the discord extension. Some of the examples will leave out parts that do not related to the discord extension in order to keep the examples short.
 
-## TOC
+## Table Of Contents
 - [Discord Extension Plugin Examples](#discord-extension-plugin-examples)
     * [Basic Connecting Example](#basic-connecting-example)
     * [Early Connecting Example](#early-connecting-example)
