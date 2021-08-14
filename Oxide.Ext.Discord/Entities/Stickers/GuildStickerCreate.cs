@@ -22,13 +22,13 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// Description of the sticker (empty or 2-100 characters)
         /// </summary>
         [JsonProperty("description")]
-        public string description { get; set; }
+        public string Description { get; set; }
         
         /// <summary>
         /// The Discord name of a unicode emoji representing the sticker's expression (2-200 characters)
         /// </summary>
         [JsonProperty("tags")]
-        public string tags { get; set; }
+        public string Tags { get; set; }
         
         /// <summary>
         /// Sticker image attachment
@@ -67,7 +67,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
                     break;
                 
                 default:
-                    throw new Exception("Stick can only be of type png, apng, or lottie json");
+                    throw new Exception("Sticker can only be of type png, apng, or lottie json");
             }
             
             FileAttachments.Add(new MessageFileAttachment
