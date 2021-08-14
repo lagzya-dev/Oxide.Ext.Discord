@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Entities.Users;
 namespace Oxide.Ext.Discord.Entities.Messages
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/interactions/slash-commands#messageinteraction">Message Interaction Structure</a> within Discord.
+    /// Represents a <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object">Message Interaction Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class MessageInteraction

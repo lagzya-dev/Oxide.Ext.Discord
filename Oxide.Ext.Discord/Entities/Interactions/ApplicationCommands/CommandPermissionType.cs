@@ -1,10 +1,9 @@
-using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandpermissiontype">ApplicationCommandPermissionType</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permission-type">ApplicationCommandPermissionType</a>
     /// </summary>
     public enum CommandPermissionType
     {

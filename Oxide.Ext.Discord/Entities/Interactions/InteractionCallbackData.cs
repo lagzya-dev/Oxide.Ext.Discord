@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionapplicationcommandcallbackdata">Interaction Application Command Callback Data Structure</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure">Interaction Application Command Callback Data Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InteractionCallbackData

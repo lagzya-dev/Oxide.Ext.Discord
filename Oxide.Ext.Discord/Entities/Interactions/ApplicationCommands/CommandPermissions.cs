@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#guildapplicationcommandpermissions">ApplicationCommandPermissions</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure">ApplicationCommandPermissions</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class CommandPermissions

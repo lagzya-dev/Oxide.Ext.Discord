@@ -10,7 +10,7 @@ using Oxide.Ext.Discord.Entities.Webhooks;
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction">Interaction Structure</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure">Interaction Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordInteraction
@@ -87,19 +87,20 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         /// <summary>
         /// Create a response to an Interaction from the gateway.
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="response">Response to respond with</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateResponse(DiscordClient client, InteractionResponse response, Action callback = null, Action<RestError> error = null)
+        public void CreateInteractionResponse(DiscordClient client, InteractionResponse response, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, response, callback, error);
         }
         
-                /// <summary>
+        /// <summary>
         /// Edits the initial Interaction response
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response">Edit Original Interaction Response</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response">Edit Original Interaction Response</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// /// <param name="message">Updated message</param>
@@ -112,7 +113,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
 
         /// <summary>
         /// Deletes the initial Interaction response
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-original-interaction-response">Delete Original Interaction Response</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response">Delete Original Interaction Response</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
@@ -124,7 +125,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
 
         /// <summary>
         /// Create a followup message for an Interaction
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-followup-message">Create Followup Message</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message">Create Followup Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="message">Message to follow up with</param>
@@ -137,7 +138,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
 
         /// <summary>
         /// Edits a followup message for an Interaction
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-followup-message">Edit Followup Message</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message">Edit Followup Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID of the follow up message</param>
@@ -151,7 +152,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
 
         /// <summary>
         /// Deletes a followup message for an Interaction
-        /// See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-followup-message">Delete Followup Message</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message">Delete Followup Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID to delete</param>

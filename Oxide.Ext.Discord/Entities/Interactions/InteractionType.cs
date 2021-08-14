@@ -1,7 +1,7 @@
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype">InteractionType</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type">InteractionType</a>
     /// </summary>
     public enum InteractionType
     {

@@ -148,7 +148,6 @@ namespace Oxide.Plugins
             _discordSettings.ApiToken = "YourBotToken";
             _discordSettings.Intents = GatewayIntents.Guilds | GatewayIntents.GuildMembers;
             _discordSettings.LogLevel = LogLevel.Info;
-            _discordSettings.CloseOnUnload = true;
             
            _client.Connect(_discordSettings);
         }

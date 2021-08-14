@@ -114,7 +114,7 @@ void OnDiscordClientCreated()
 **Note:** If you need the client earlier than after the loaded hook you can use the following
 
 ```c#
-DiscordClient.CreateClient(this)l
+DiscordClient.CreateClient(this)
 ```
 
 ### OnDiscordClientConnected

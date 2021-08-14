@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response">Interaction Response</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object">Interaction Response</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InteractionResponse

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptionchoice">ApplicationCommandOptionChoice</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-choice-structure">ApplicationCommandOptionChoice</a>
     /// If you specify choices for an option, they are the only valid values for a user to pick
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
