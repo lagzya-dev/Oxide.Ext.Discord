@@ -262,19 +262,19 @@
             Represents all hooks available in the discord extension
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.DiscordOnClientConnected">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordClientConnected">
             <code>
-            void DiscordOnClientConnected(Plugin owner, DiscordClient client)
+            void OnDiscordClientConnected(Plugin owner, DiscordClient client)
             {
-                Puts("DiscordOnClientConnected Works!");
+                Puts("OnDiscordClientConnected Works!");
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.DiscordOnClientDisconnected">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordClientDisconnected">
             <code>
-            void DiscordOnClientDisconnected(Plugin owner, DiscordClient client)
+            void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
             {
-                Puts("DiscordOnClientDisconnected Works!");
+                Puts("OnDiscordClientDisconnected Works!");
             }
             </code>
         </member>
@@ -1550,7 +1550,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayGuildMembers">
             <summary>
-            The application is verified and can use the GUILD_MEMBERS  intent
+            The application is verified and can use the GUILD_MEMBERS intent
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayGuildMembersLimited">
@@ -6970,7 +6970,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#create-global-application-command-json-params">Application Command Create</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command-json-params">Application Command Create</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.Name">
@@ -7023,7 +7023,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption">ApplicationCommandOption</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure">ApplicationCommandOption</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Type">
@@ -7061,7 +7061,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptionchoice">ApplicationCommandOptionChoice</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-choice-structure">ApplicationCommandOptionChoice</a>
             If you specify choices for an option, they are the only valid values for a user to pick
             </summary>
         </member>
@@ -7078,7 +7078,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype">ApplicationCommandOptionType</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type">ApplicationCommandOptionType</a>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType.SubCommand">
@@ -7133,7 +7133,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#guildapplicationcommandpermissions">ApplicationCommandPermissions</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure">ApplicationCommandPermissions</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions.Id">
@@ -7154,7 +7154,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissionType">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandpermissiontype">ApplicationCommandPermissionType</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permission-type">ApplicationCommandPermissionType</a>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissionType.Role">
@@ -7189,7 +7189,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommand">ApplicationCommand</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure">ApplicationCommand</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Id">
@@ -7237,7 +7237,7 @@
             <summary>
             Edit a global command.
             Updates will be available in all guilds after 1 hour.
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-global-application-command">Edit Global Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command">Edit Global Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with updated command</param>
@@ -7246,7 +7246,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Deletes a global command
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-global-application-command">Delete Global Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command">Delete Global Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
@@ -7254,7 +7254,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#applicationcommandpermissions">ApplicationCommandPermissions</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-guild-application-command-permissions-structure">ApplicationCommandPermissions</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions.Id">
@@ -7279,7 +7279,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction">Interaction Structure</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure">Interaction Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Id">
@@ -7341,9 +7341,10 @@
              For components, the message they were attached to
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponse,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponse,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a response to an Interaction from the gateway.
+            See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="response">Response to respond with</param>
@@ -7353,7 +7354,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edits the initial Interaction response
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-original-interaction-response">Edit Original Interaction Response</a>
+            See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response">Edit Original Interaction Response</a>
             </summary>
             <param name="client">Client to use</param>
             /// <param name="message">Updated message</param>
@@ -7363,7 +7364,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.DeleteOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Deletes the initial Interaction response
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-original-interaction-response">Delete Original Interaction Response</a>
+            See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response">Delete Original Interaction Response</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
@@ -7372,7 +7373,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a followup message for an Interaction
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#create-followup-message">Create Followup Message</a>
+            See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message">Create Followup Message</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="message">Message to follow up with</param>
@@ -7382,7 +7383,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupUpdate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edits a followup message for an Interaction
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#edit-followup-message">Edit Followup Message</a>
+            See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message">Edit Followup Message</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="messageId">Message ID of the follow up message</param>
@@ -7393,7 +7394,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.DeleteFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Deletes a followup message for an Interaction
-            See <a href="https://discord.com/developers/docs/interactions/slash-commands#delete-followup-message">Delete Followup Message</a>
+            See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message">Delete Followup Message</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="messageId">Message ID to delete</param>
@@ -7402,7 +7403,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionapplicationcommandcallbackdata">Interaction Application Command Callback Data Structure</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure">Interaction Application Command Callback Data Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Tts">
@@ -7438,7 +7439,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionData">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondata">ApplicationCommandInteractionData</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data-structure">ApplicationCommandInteractionData</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Id">
@@ -7483,7 +7484,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption">Application Command Interaction Data Option</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure">Application Command Interaction Data Option</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Name">
@@ -7510,7 +7511,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataoption">Application Command Interaction Data Option</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure">Application Command Interaction Data Option</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved.Users">
@@ -7540,7 +7541,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionResponse">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response">Interaction Response</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object">Interaction Response</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionResponse.Type">
@@ -7555,7 +7556,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response-object-interaction-callback-type">InteractionResponseType</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type">InteractionResponseType</a>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType.Pong">
@@ -7586,7 +7587,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/interactions/slash-commands#interaction-interactiontype">InteractionType</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type">InteractionType</a>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.Ping">
@@ -9139,7 +9140,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageInteraction">
             <summary>
-            Represents a <a href="https://discord.com/developers/docs/interactions/slash-commands#messageinteraction">Message Interaction Structure</a> within Discord.
+            Represents a <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object">Message Interaction Structure</a> within Discord.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageInteraction.Id">
