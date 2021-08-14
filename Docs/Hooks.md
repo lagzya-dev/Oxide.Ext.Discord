@@ -19,6 +19,10 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
 ## Table of Contents
 
 - [Hooks](#hooks)
+  * [Discord Client](#discord-client)
+    + [OnDiscordClientCreated](#ondiscordclientcreated)
+    + [OnDiscordClientConnected](#ondiscordclientconnected)
+    + [OnDiscordClientDisconnected](#ondiscordclientdisconnected)
   * [Discord Link](#discord-link)
     + [OnDiscordPlayerLinked](#ondiscordplayerlinked)
     + [OnDiscordPlayerUnlinked](#ondiscordplayerunlinked)
@@ -67,9 +71,9 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
     + [OnDiscordGuildMessageReactionAdded](#ondiscordguildmessagereactionadded)
     + [OnDiscordDirectMessageReactionRemoved](#ondiscorddirectmessagereactionremoved)
     + [OnDiscordGuildMessageReactionRemoved](#ondiscordguildmessagereactionremoved)
-    + [OnDiscordDirectMessageReactionRemovedAll](#ondiscorddirectmessagereactionremovedall)
+    + [OnDiscordDirectMessageReactionEmojiRemoved](#ondiscorddirectmessagereactionemojiremoved)
     + [OnDiscordGuildMessageReactionRemovedAll](#ondiscordguildmessagereactionremovedall)
-    + [OnDiscordDirectMessageReactionRemovedAll](#ondiscorddirectmessagereactionremovedall-1)
+    + [OnDiscordDirectMessageReactionRemovedAll](#ondiscorddirectmessagereactionremovedall)
     + [OnDiscordGuildMessageReactionEmojiRemoved](#ondiscordguildmessagereactionemojiremoved)
     + [OnDiscordGuildMemberPresenceUpdated](#ondiscordguildmemberpresenceupdated)
     + [OnDiscordDirectTypingStarted](#ondiscorddirecttypingstarted)
@@ -85,13 +89,54 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
     + [OnDiscordGuildInviteDeleted](#ondiscordguildinvitedeleted)
     + [OnDiscordInteractionCreated](#ondiscordinteractioncreated)
     + [OnDiscordGuildIntegrationCreated](#ondiscordguildintegrationcreated)
-    + [OnDiscordGuildIntegrationCreated](#ondiscordguildintegrationcreated-1)
     + [OnDiscordGuildIntegrationUpdated](#ondiscordguildintegrationupdated)
     + [OnDiscordGuildIntegrationDeleted](#ondiscordguildintegrationdeleted)
     + [OnDiscordApplicationCommandCreated](#ondiscordapplicationcommandcreated)
     + [OnDiscordApplicationCommandUpdated](#ondiscordapplicationcommandupdated)
     + [OnDiscordApplicationCommandDeleted](#ondiscordapplicationcommanddeleted)
     + [OnDiscordUnhandledCommand](#ondiscordunhandledcommand)
+
+## Discord Client
+
+These hooks will be called when an action occurs on the DiscordClient assigned to a plugin
+
+### OnDiscordClientCreated
+- Called when the DiscordClient is created on the bot and is ready to use. 
+This is called after the Loaded() hook on the plugin.
+
+```c#
+void OnDiscordClientCreated()
+{
+    Puts("OnDiscordClientCreated Works!");
+}
+```
+
+**Note:** If you need the client earlier than after the loaded hook you can use the following
+
+```c#
+DiscordClient.CreateClient(this)l
+```
+
+### OnDiscordClientConnected
+- Called when the Connect() is called on the DiscordClient
+
+```c#
+void OnDiscordClientConnected(Plugin owner, DiscordClient client)
+{
+    Puts("OnDiscordClientConnected Works!");
+}
+```
+
+### OnDiscordClientDisconnected
+- Called when the Disconnect() is called on the DiscordClient
+
+```c#
+void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
+{
+    Puts("OnDiscordClientDisconnected Works!");
+}
+```
+
 
 ## Discord Link
 
@@ -638,7 +683,7 @@ void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent
 }
 ```
 
-### OnDiscordDirectMessageReactionRemovedAll
+### OnDiscordDirectMessageReactionEmojiRemoved
 
 - Called when all of a specific reactions is removed from a message in a direct message channel
   - `channel` may be null if we haven't seen it yet
@@ -794,50 +839,6 @@ void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, DiscordChannel chan
 void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildInviteDeleted Works!");
-}
-```
-
-### OnDiscordInteractionCreated
-
-- Called when an user uses a discord slash command
-
-```c#
-void OnDiscordInteractionCreated(Interaction interaction)
-{
-    Puts("OnDiscordInteractionCreated Works!");
-}
-```
-
-### OnDiscordApplicationCommandCreated
-
-- Called when an application command is created
-
-```c#
-void OnDiscordApplicationCommandCreated(DiscordApplicationCommand command, DiscordGuild guild) 
-{
-     Puts("OnDiscordApplicationCommandCreated Works!");
-}
-```
-
-### OnDiscordApplicationCommandUpdated
-
-- Called when an application command is updated
-
-```c#
-void OnDiscordApplicationCommandUpdated(DiscordApplicationCommand command, DiscordGuild guild) 
-{
-     Puts("OnDiscordApplicationCommandUpdated Works!");
-}
-```
-
-### OnDiscordApplicationCommandDeleted
-
-- Called when an application command is deleted
-
-```c#
-void OnDiscordApplicationCommandDeleted(DiscordApplicationCommand command, DiscordGuild guild) 
-{
-     Puts("OnDiscordApplicationCommandDeleted Works!");
 }
 ```
 

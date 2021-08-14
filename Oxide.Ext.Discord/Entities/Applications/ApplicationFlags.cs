@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         GatewayPresenceLimited = 1 << 13,
         
         /// <summary>
-        /// The application is verified and can use the GUILD_MEMBERS  intent
+        /// The application is verified and can use the GUILD_MEMBERS intent
         /// </summary>
         GatewayGuildMembers = 1 << 14,
         

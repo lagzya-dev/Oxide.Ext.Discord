@@ -7,20 +7,20 @@ namespace Oxide.Ext.Discord.Constants
     {
         #region Bot Client Hooks
         /// <code>
-        /// void DiscordOnClientConnected(Plugin owner, DiscordClient client)
+        /// void OnDiscordClientConnected(Plugin owner, DiscordClient client)
         /// {
-        ///     Puts("DiscordOnClientConnected Works!");
+        ///     Puts("OnDiscordClientConnected Works!");
         /// }
         /// </code>
-        public const string DiscordOnClientConnected = nameof(DiscordOnClientConnected);
+        public const string OnDiscordClientConnected = nameof(OnDiscordClientConnected);
         
         /// <code>
-        /// void DiscordOnClientDisconnected(Plugin owner, DiscordClient client)
+        /// void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
         /// {
-        ///     Puts("DiscordOnClientDisconnected Works!");
+        ///     Puts("OnDiscordClientDisconnected Works!");
         /// }
         /// </code>
-        public const string DiscordOnClientDisconnected = nameof(DiscordOnClientDisconnected);
+        public const string OnDiscordClientDisconnected = nameof(OnDiscordClientDisconnected);
         
         /// <code>
         /// void OnDiscordClientCreated()
