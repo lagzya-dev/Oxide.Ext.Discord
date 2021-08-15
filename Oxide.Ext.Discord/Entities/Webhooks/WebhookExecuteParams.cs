@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Oxide.Ext.Discord.Builders;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
@@ -32,25 +33,18 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <returns></returns>
         public string ToQueryString()
         {
-            StringBuilder sb = new StringBuilder("?");
+            QueryStringBuilder builder = new QueryStringBuilder();
             if (Wait)
             {
-                sb.Append("wait=");
-                sb.Append("true");
+                builder.Add("wait", "true");
             }
 
             if (ThreadId.HasValue)
             {
-                if (sb.Length != 1)
-                {
-                    sb.Append("&");
-                }
-
-                sb.Append("thread_id=");
-                sb.Append(ThreadId.Value.Id);
+                builder.Add("thread_id", ThreadId.Value.ToString());
             }
             
-            return sb.ToString();
+            return builder.ToString();
         }
         
         /// <summary>

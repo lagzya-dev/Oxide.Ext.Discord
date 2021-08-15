@@ -636,7 +636,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="positions">List new channel positions for each channel</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildChannelPositions(DiscordClient client, List<ChannelPosition> positions, Action callback = null, Action<RestError> error = null)
+        public void ModifyGuildChannelPositions(DiscordClient client, List<GuildChannelPosition> positions, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/channels", RequestMethod.PATCH, positions, callback, error);
         }
@@ -970,7 +970,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="positions">List of role with updated positions</param>
         /// <param name="callback">Callback with a list of all guild role objects</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildRolePositions(DiscordClient client, List<RolePosition> positions, Action<List<DiscordRole>> callback = null, Action<RestError> error = null)
+        public void ModifyGuildRolePositions(DiscordClient client, List<GuildRolePosition> positions, Action<List<DiscordRole>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/roles", RequestMethod.PATCH, positions, callback, error);
         }

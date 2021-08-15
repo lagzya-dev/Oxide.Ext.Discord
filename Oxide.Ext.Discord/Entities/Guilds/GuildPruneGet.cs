@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Builders;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -28,25 +29,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <returns>Guild Prune Get Query String</returns>
         public virtual string ToQueryString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("days=");
-            sb.Append(Days.ToString());
-
+            QueryStringBuilder builder = new QueryStringBuilder();
+            builder.Add("days", Days.ToString());
             if (IncludeRoles != null)
             {
-                sb.Append("&include_roles=");
-                for (int index = 0; index < IncludeRoles.Count; index++)
-                {
-                    Snowflake role = IncludeRoles[index];
-                    sb.Append(role.ToString());
-                    if (index != IncludeRoles.Count - 1)
-                    {
-                        sb.Append(",");
-                    }
-                }
+                builder.AddList("include_roles", IncludeRoles, ",");
             }
-            
-            return sb.ToString();
+
+            return builder.ToString();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Text;
+using Oxide.Ext.Discord.Builders;
 
 namespace Oxide.Ext.Discord.Entities.Users
 {
@@ -28,23 +29,20 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <returns></returns>
         public virtual string ToQueryString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("?limit=");
-            sb.Append(Limit.ToString());
+            QueryStringBuilder builder = new QueryStringBuilder();
+            builder.Add("limit", Limit.ToString());
 
             if (Before.HasValue)
             {
-                sb.Append("&before=");
-                sb.Append(Before.ToString());
+                builder.Add("before", Before.ToString());
             }
             
             if (After.HasValue)
             {
-                sb.Append("&after=");
-                sb.Append(After.ToString());
+                builder.Add("after", After.ToString());
             }
 
-            return sb.ToString();
+            return builder.ToString();
         }
     }
 }

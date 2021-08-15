@@ -12,20 +12,12 @@ To be able to register channels for subscriptions you need to add the following 
 private readonly DiscordSubscriptions _subscriptions = Interface.Oxide.GetLibrary<DiscordSubscriptions>();
 ```
 
-## Callback
-
-The callback for a subscription will be the DiscordMessage object.
-
-```c#
-void HandleMessage(DiscordMessage message)
-```
-
 ## Registering Subscription
 
 To register a subscription you can use the following example below
 
 ```c#
-_subscriptions.AddChannelSubscription(this, snowflakeChannelId, callbackMethod);
+_subscriptions.AddChannelSubscription(this, snowflakeChannelId, CallbackMethod);
 ```
 
 ## Unregistering Subscription
@@ -33,5 +25,13 @@ _subscriptions.AddChannelSubscription(this, snowflakeChannelId, callbackMethod);
 To unregister a subscription you can use the following example below
 
 ```c#
-_subscriptions.RemoveChannelSubscription(this, snowflakeChannelId, callbackMethod);
+_subscriptions.RemoveChannelSubscription(this, snowflakeChannelId, CallbackMethod);
+```
+
+## Callback
+
+The callback for a subscription will be the DiscordMessage object.
+
+```c#
+void CallbackMethod(DiscordMessage message)
 ```

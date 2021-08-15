@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Builders;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Threads
 {
@@ -26,21 +27,18 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         
         internal string ToQueryString()
         {
-            StringBuilder sb = new StringBuilder("?");
-
+            QueryStringBuilder builder = new QueryStringBuilder();
             if (Before.HasValue)
             {
-                sb.Append("before=");
-                sb.Append(Before.Value.ToString("o"));
+                builder.Add("before", Before.Value.ToString("o"));
             }
             
             if (Limit.HasValue)
             {
-                sb.Append("limit=");
-                sb.Append(Limit.Value.ToString());
+                builder.Add("limit", Limit.Value.ToString());
             }
 
-            return sb.ToString();
+            return builder.ToString();
         }
     }
 }

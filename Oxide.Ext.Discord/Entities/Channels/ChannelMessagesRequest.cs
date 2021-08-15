@@ -1,5 +1,6 @@
 using System.Text;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Builders;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -38,33 +39,28 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <returns></returns>
         public string ToQueryString()
         {
-            StringBuilder sb = new StringBuilder("?");
-            
+            QueryStringBuilder builder = new QueryStringBuilder();
+
             //Per Documentation "The before, after, and around keys are mutually exclusive, only one may be passed at a time."
             if (Around.HasValue)
             {
-                sb.Append($"around={Around}");
+                builder.Add("around", Around.Value.ToString());
             }
             else if (Before.HasValue)
             {
-                sb.Append($"before={Before}");
+                builder.Add("before", Before.Value.ToString());
             }
             else if (After.HasValue)
             {
-                sb.Append($"after={After}");
+                builder.Add("after", After.Value.ToString());
             }
             
             if (Limit.HasValue)
             {
-                if (sb.Length != 1)
-                {
-                    sb.Append("&");
-                }
-                
-                sb.Append($"limit={Limit}");
+                builder.Add("limit", Limit.Value.ToString());
             }
 
-            return sb.ToString();
+            return builder.ToString();
         }
     }
 }

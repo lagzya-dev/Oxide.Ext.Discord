@@ -18,7 +18,7 @@ To install the extension to your Oxide server, you must follow a few simple step
 
 ## Developer
 
-If you would like to create plugins for the extension please [Click Here](Docs/README.md) to learn more  
+If you would like to create plugins for the extension please [Click Here](https://github.com/Kirollos/Oxide.Ext.Discord/blob/master/Docs/README.md) to learn more  
 **If the link doesn't work please try the readme on the github page**
 
 ## Getting your API Key
@@ -53,6 +53,22 @@ Obtaining an API Key:
    Select which Discord Server you want to invite the bot into and continue and then authorize.  
    ![](https://i.postimg.cc/JnPXqRxm/image.png)
 8) Your bot will now be in your discord server.
+
+## Configuration
+
+The discord extension configuration can be found at oxide/discord.config.json. 
+The config allows you to modify the command prefixes for commands that use the discord extension command library.
+
+```json
+{
+  "Commands": {
+    "Command Prefixes": [
+      "/",
+      "!"
+    ]
+  }
+}
+```
 
 ## Contributing
 

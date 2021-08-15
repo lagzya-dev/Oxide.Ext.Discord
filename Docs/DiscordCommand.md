@@ -18,6 +18,20 @@ If you take the method approach to registering Discord Commands you need to incl
 private readonly DiscordCommand _dcCommands = Interface.Oxide.GetLibrary<DiscordCommand>();
 ```
 
+When using commands make sure your plugin is requesting the appropriate intents to allows commands to work
+
+```c#
+if (_pluginConfig.CommandSettings.AllowInDm)
+{
+    _discordSettings.Intents |= GatewayIntents.DirectMessages;
+}
+
+if (_pluginConfig.CommandSettings.AllowInGuild)
+{
+    _discordSettings.Intents |= GatewayIntents.GuildMessages;
+}
+```
+
 ## Callback
 
 All commands have the following callback arguments.

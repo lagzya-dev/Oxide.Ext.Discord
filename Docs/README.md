@@ -7,7 +7,6 @@ If you would like to see this extra information you can include the [Oxide.Ext.D
 ## Update Schedule
 The discord API is constantly changing and requires constant updates to stay update to date with the changes.
 For the discord extension we will be releasing monthly updates containing all changes for the given period.
-For changes that would cause breaking changes it will be deprecated for a period of 3 months before being removed or will follow discords deprecation.
 If you would like to see a feature released before the monthly release please open a request on uMod and it will be updated time permitting.
 
 ## Plugins

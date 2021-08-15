@@ -1,5 +1,6 @@
 using System.Text;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Builders;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -27,16 +28,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <returns>Guild Prune Begin Query String</returns>
         public override string ToQueryString()
         {
-            StringBuilder sb = new StringBuilder(base.ToQueryString());
-            sb.Append("&compute_prune_count=");
-            sb.Append(ComputePruneCount);
+            QueryStringBuilder builder = new QueryStringBuilder();
+            builder.Add("compute_prune_count", ComputePruneCount.ToString());
             if (!string.IsNullOrEmpty(Reason))
             {
-                sb.Append("&reason=");
-                sb.Append(Reason);
+                builder.Add("reason", Reason);
             }
 
-            return sb.ToString();
+            return builder.ToString();
         }
     }
 }

@@ -9907,12 +9907,12 @@
             Name of the sticker (2-30 characters)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.description">
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.Description">
             <summary>
             Description of the sticker (empty or 2-100 characters)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.tags">
+        <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.Tags">
             <summary>
             The Discord name of a unicode emoji representing the sticker's expression (2-200 characters)
             </summary>
