@@ -225,6 +225,33 @@
             </summary>
             <param name="id">ID of the channel to remove</param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Builders.QueryStringBuilder">
+            <summary>
+            Builder used to build query strings for urls
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.Add(System.String,System.String)">
+            <summary>
+            Add a key value pair to the query string
+            </summary>
+            <param name="key">Key name</param>
+            <param name="value">Key value</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.AddList``1(System.String,System.Collections.Generic.List{``0},System.String)">
+            <summary>
+            Add a list of values with the specified separator
+            </summary>
+            <param name="key">Key name</param>
+            <param name="list">List to be added</param>
+            <param name="separator">Separator for the list</param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.ToString">
+            <summary>
+            Returns the query string as a string.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig">
             <summary>
             Represents discord extension command configuration
@@ -5070,21 +5097,6 @@
             - TYPING_START
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ChannelPosition">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions">Modify Guild Channel Position</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ChannelPosition.Id">
-            <summary>
-            ID of the channel or role
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ChannelPosition.Position">
-            <summary>
-            New position for the role / channel
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.DefaultNotificationLevel">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level">Default Message Notification Level</a>
@@ -5514,7 +5526,7 @@
             <param name="callback">Callback with created channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ChannelPosition},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildChannelPosition},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Modify the positions of a set of channel objects for the guild.
             Requires MANAGE_CHANNELS permission.
@@ -5767,7 +5779,7 @@
             <param name="callback">Callback with the created role</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.RolePosition},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.DiscordRole}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.DiscordRole}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Modify the positions of a set of role objects for the guild.
             Requires the MANAGE_ROLES permission.
@@ -6144,6 +6156,21 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate.Reason">
             <summary>
             Reason for the ban
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildChannelPosition">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions">Modify Guild Channel Position</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildChannelPosition.Id">
+            <summary>
+            ID of the channel or role
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildChannelPosition.Position">
+            <summary>
+            New position for the role / channel
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildCreate">
@@ -6625,6 +6652,21 @@
             </summary>
             <returns>Guild Prune Get Query String</returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-role-positions">Guild Role Position</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition.Id">
+            <summary>
+            ID of the channel or role
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition.Position">
+            <summary>
+            New position for the role / channel
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildVerificationLevel">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-verification-level">Verification Level</a>
@@ -6744,21 +6786,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildWidgetSettings.ChannelId">
             <summary>
             The widget channel id
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Guilds.RolePosition">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-role-positions">Modify Guild Role Position</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.RolePosition.Id">
-            <summary>
-            ID of the channel or role
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.RolePosition.Position">
-            <summary>
-            New position for the role / channel
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags">
