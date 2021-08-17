@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
+using Oxide.Ext.Discord.Entities.Roles;
 using Oxide.Ext.Discord.Entities.Users.Connections;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Helpers.Cdn;
@@ -63,7 +64,19 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         [JsonProperty("mfa_enabled")]
         public bool? MfaEnabled { get; set; }
-
+        
+        /// <summary>
+        /// The user's banner, or null if unset
+        /// </summary>
+        [JsonProperty("banner")]
+        public string Banner { get; set; }
+        
+        /// <summary>
+        /// The user's banner color encoded as an integer representation of hexadecimal color code
+        /// </summary>
+        [JsonProperty("accent_color")]
+        public DiscordColor? AccentColor { get; set; }
+        
         /// <summary>
         /// The user's chosen language option
         /// </summary>

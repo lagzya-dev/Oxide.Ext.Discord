@@ -186,6 +186,19 @@ namespace Oxide.Ext.Discord.Entities.Applications
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands/{commandId}", RequestMethod.PATCH, null, callback, error);
         }
+        
+        /// <summary>
+        /// Takes a list of application commands, overwriting existing commands that are registered globally for this application. Updates will be available in all guilds after 1 hour.
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands">Bulk Overwrite Global Application Commands</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="commands">List of commands to overwrite</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void BulkOverwriteGlobalApplicationCommands(DiscordClient client, List<DiscordApplicationCommand> commands, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PUT, commands, callback, error);
+        }
 
         /// <summary>
         /// Fetch all of the guild commands for your application for a specific guild.

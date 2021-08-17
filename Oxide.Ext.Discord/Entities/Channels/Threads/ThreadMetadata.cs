@@ -28,9 +28,17 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         public DateTime ArchiveTimestamp { get; set; } 
         
         /// <summary>
+        /// Whether the thread is locked
         /// When a thread is locked, only users with MANAGE_THREADS can unarchive it
         /// </summary>
         [JsonProperty("locked")]
         public bool? Locked { get; set; } 
+        
+        /// <summary>
+        /// Whether non-moderators can add other non-moderators to a thread
+        /// Only available on private threads
+        /// </summary>
+        [JsonProperty("invitable")]
+        public bool? Invitable { get; set; } 
     }
 }

@@ -127,6 +127,29 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
                     throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
         }
+        
+        /// <summary>
+        /// Returns the Url of the User Banner
+        /// </summary>
+        /// <param name="userId">User ID for the Banner</param>
+        /// <param name="userBanner">User Banner from user</param>
+        /// <param name="format">Format the icon is in</param>
+        /// <returns>Url of the User banner</returns>
+        /// <exception cref="ArgumentException">Thrown if format is Gif</exception>
+        public static string GetUserBanner(Snowflake userId, string userBanner, ImageFormat format = ImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/banners/{userId.ToString()}/{userBanner}.{GetExtension(format, userBanner)}";
+                
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+            }
+        }
 
         /// <summary>
         /// Returns the icon for a given channel

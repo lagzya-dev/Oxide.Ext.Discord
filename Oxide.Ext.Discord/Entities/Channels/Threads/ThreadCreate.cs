@@ -28,5 +28,11 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// </summary>
         [JsonProperty("type")]
         public ChannelType Type { get; set; } = ChannelType.GuildPrivateThread;
+        
+        /// <summary>
+        /// Whether non-moderators can add other non-moderators to a thread; only available when creating a private thread
+        /// </summary>
+        [JsonProperty("invitable")]
+        public bool? Invitable { get; set; }
     }
 }
