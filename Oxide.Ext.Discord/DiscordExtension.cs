@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Test version information if using test version
         /// </summary>
-        public const string TestVersion = ".Beta.2";
+        public const string TestVersion = "";
 
         /// <summary>
         /// Discord Extension JSON Serialization settings
