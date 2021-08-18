@@ -3004,7 +3004,7 @@
             <param name="callback">Callback once the action is complete</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionType,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Permissions.PermissionFlags,Oxide.Ext.Discord.Entities.Permissions.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionType,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edit the channel permission overwrites for a user or role in a channel.
             Only usable for guild channels.
@@ -3376,231 +3376,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Overwrite.Allow">
             <summary>
-            Permissions allowed <see cref="T:Oxide.Ext.Discord.Entities.Channels.PermissionFlags"/>
+            Permissions allowed <see cref="T:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Overwrite.Deny">
             <summary>
-            Permissions denied <see cref="T:Oxide.Ext.Discord.Entities.Channels.PermissionFlags"/>
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Channels.PermissionFlags">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags">Permission Flags</a> for user or role
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.CreateInstantInvite">
-            <summary>
-            Allows creation of instant invites
-            Channel Type (Text, Voice, Stage)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.KickMembers">
-            <summary>
-            Allows kicking members
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.BanMembers">
-            <summary>
-            Allows banning members
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.Administrator">
-            <summary>
-            Allows all permissions and bypasses channel permission overwrites
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageChannels">
-            <summary>
-            Allows management and editing of channels
-            Channel Type (Text, Voice, Stage)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageGuild">
-            <summary>
-            Allows management and editing of the guild
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.AddReactions">
-            <summary>
-            Allows for the addition of reactions to messages
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ViewAuditLog">
-            <summary>
-            Allows for viewing of audit logs
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.PrioritySpeaker">
-            <summary>
-            Allows for using priority speaker in a voice channel
-            Channel Type (Voice)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.Stream">
-            <summary>
-            Allows the user to go live
-            Channel Type (Voice)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ViewChannel">
-            <summary>
-            Allows guild members to view a channel, which includes reading messages in text channels
-            Channel Type (Text, Voice, Stage)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.SendMessages">
-            <summary>
-            Allows for sending messages in a channel
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.SendTtsMessages">
-            <summary>
-            Allows for sending of /tts messages
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageMessages">
-            <summary>
-            Allows for deletion of other users messages
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.EmbedLinks">
-            <summary>
-            Links sent by users with this permission will be auto-embedded
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.AttachFiles">
-            <summary>
-            Allows for uploading images and files
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ReadMessageHistory">
-            <summary>
-            Allows for reading of message history
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.MentionEveryone">
-            <summary>
-            Allows for using the @everyone tag to notify all users in a channel,
-            and the @here tag to notify all online users in a channel
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UseExternalEmojis">
-            <summary>
-            Allows the usage of custom emojis from other servers
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ViewGuildInsights">
-            <summary>
-            Allows for viewing guild insights
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.Connect">
-            <summary>
-            Allows for joining of a voice channel
-            Channel Type (Voice, Stage)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.Speak">
-            <summary>
-            Allows for speaking in a voice channel
-            Channel Type (Voice)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.MuteMembers">
-            <summary>
-            Allows for muting members in a voice channel
-            Channel Type (Voice, Stage)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.DeafanMembers">
-            <summary>
-            Allows for deafening of members in a voice channel
-            Channel Type (Voice, Stage)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.MoveMembers">
-            <summary>
-            Allows for moving of members between voice channels
-            Channel Type (Voice, Stage)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UseVad">
-            <summary>
-            Allows for using voice-activity-detection in a voice channel
-            Channel Type (Voice)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ChangeNickname">
-            <summary>
-            Allows for modification of own nickname
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageNicknames">
-            <summary>
-            Allows for modification of other users nicknames
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageRoles">
-            <summary>
-            Allows management and editing of roles
-            Channel Type (Text, Voice, Stage)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageWebhooks">
-            <summary>
-            Allows management and editing of webhooks
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageEmojisAndStickers">
-            <summary>
-            Allows management and editing of emojis
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UseSlashCommands">
-            <summary>
-            Allows members to use application commands, including slash commands and context menu commands.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.RequestToSpeak">
-            <summary>
-            Allows for requesting to speak in stage channels.
-            Channel Type (Stage)
-            (This permission is under active development and may be changed or removed.)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.ManageThreads">
-            <summary>
-            Allows for deleting and archiving threads, and viewing all private threads
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UsePublicThreads">
-            <summary>
-            Allows for creating and participating in threads
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UsePrivateThreads">
-            <summary>
-            Allows for creating and participating in private threads
-            Channel Type (Text)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionFlags.UseExternalStickers">
-            <summary>
-            Allows the usage of custom stickers from other servers
-            Channel Type (Text)
+            Permissions denied <see cref="T:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags"/>
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.PermissionType">
@@ -5607,7 +5388,7 @@
             <param name="callback">Callback with matching guild members</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,System.String,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.DiscordRole},System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,System.String,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Permissions.DiscordRole},System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. 
             See <a href="https://discord.com/developers/docs/resources/guild#add-guild-member">Add Guild Member</a>
@@ -5662,7 +5443,7 @@
             <param name="callback">Callback with updated nickname</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Roles.DiscordRole,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Permissions.DiscordRole,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Adds a role to a guild member.
             Requires the MANAGE_ROLES permission.
@@ -5686,7 +5467,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Roles.DiscordRole,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Permissions.DiscordRole,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Removes a role from a guild member.
             Requires the MANAGE_ROLES permission.
@@ -5787,7 +5568,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildRoles(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.DiscordRole}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildRoles(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Permissions.DiscordRole}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Returns a list of role objects for the guild.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-roles">Get Guild Roles</a>
@@ -5796,7 +5577,7 @@
             <param name="callback">Callback with a list of role objects</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.DiscordRole,System.Action{Oxide.Ext.Discord.Entities.Roles.DiscordRole},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole,System.Action{Oxide.Ext.Discord.Entities.Permissions.DiscordRole},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a new role for the guild.
             Requires the MANAGE_ROLES permission.
@@ -5808,7 +5589,7 @@
             <param name="callback">Callback with the created role</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Roles.DiscordRole}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Permissions.DiscordRole}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Modify the positions of a set of role objects for the guild.
             Requires the MANAGE_ROLES permission.
@@ -5820,7 +5601,7 @@
             <param name="callback">Callback with a list of all guild role objects</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.DiscordRole,System.Action{Oxide.Ext.Discord.Entities.Roles.DiscordRole},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole,System.Action{Oxide.Ext.Discord.Entities.Permissions.DiscordRole},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Modify a guild role.
             Requires the MANAGE_ROLES permission.
@@ -5832,7 +5613,7 @@
             <param name="callback">Callback with the updated role</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Roles.DiscordRole,System.Action{Oxide.Ext.Discord.Entities.Roles.DiscordRole},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Permissions.DiscordRole,System.Action{Oxide.Ext.Discord.Entities.Permissions.DiscordRole},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Modify a guild role.
             Requires the MANAGE_ROLES permission.
@@ -5845,7 +5626,7 @@
             <param name="callback">Callback with the updated role</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Roles.DiscordRole,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Delete a guild role.
             Requires the MANAGE_ROLES permission
@@ -6432,7 +6213,7 @@
             Returns the display name show for the user in a guild
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildMember.HasRole(Oxide.Ext.Discord.Entities.Roles.DiscordRole)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildMember.HasRole(Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
             <summary>
             Returns if member has the given role
             </summary>
@@ -9381,135 +9162,135 @@
             Reminder for a guild invite
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Roles.DiscordColor">
+        <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordColor">
             <summary>
             Represents a Discord Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Default">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Default">
             <summary>
             Default Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Teal">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Teal">
             <summary>
             Teal Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.DarkTeal">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkTeal">
             <summary>
             Dark Teal Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Green">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Green">
             <summary>
             Green Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.DarkGreen">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkGreen">
             <summary>
             Dark Green Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Blue">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Blue">
             <summary>
             Blue Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.DarkBlue">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkBlue">
             <summary>
             Dark Blue Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Purple">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Purple">
             <summary>
             Purple Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.DarkPurple">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkPurple">
             <summary>
             Dark Purple Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Magenta">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Magenta">
             <summary>
             Magenta Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.DarkMagenta">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkMagenta">
             <summary>
             Dark Magenta Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Gold">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Gold">
             <summary>
             Gold Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.LightOrange">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.LightOrange">
             <summary>
             Light Orange Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Orange">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Orange">
             <summary>
             Orange Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.DarkOrange">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkOrange">
             <summary>
             Dark Orange Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Red">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Red">
             <summary>
             Red Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.DarkRed">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkRed">
             <summary>
             Dark Red Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.LightGrey">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.LightGrey">
             <summary>
             Light Gray Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.LighterGrey">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.LighterGrey">
             <summary>
             Lighter Gray Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.DarkGrey">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkGrey">
             <summary>
             Dark Gray Role Color
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Roles.DiscordColor.DarkerGrey">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkerGrey">
             <summary>
             Darker Gray Role Color
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordColor.Color">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Color">
             <summary>
             uint value of the hex color code
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordColor.#ctor(System.UInt32)">
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.UInt32)">
             <summary>
             DiscordColor Constructor
             </summary>
             <param name="color">uint value of hex color code</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordColor.#ctor(System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.String)">
             <summary>
             DiscordColor Constructor
             </summary>
             <param name="color">string hex color code</param>
             <exception cref="T:System.Exception">Throw if color is greater than #FFFFFF</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordColor.#ctor(System.Int32,System.Int32,System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Int32,System.Int32,System.Int32)">
             <summary>
             DiscordColor Constructor
             </summary>
@@ -9518,7 +9299,7 @@
             <param name="blue">Blue color (0-255)</param>
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0 or &gt; 255</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordColor.#ctor(System.Single,System.Single,System.Single)">
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Single,System.Single,System.Single)">
             <summary>
             DiscordColor Constructor
             </summary>
@@ -9527,110 +9308,329 @@
             <param name="blue">Blue color (0.0 - 1.0)</param>
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Roles.DiscordColorConverter">
+        <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordColorConverter">
             <summary>
             Handles the JSON Serialization / Deserialization for DiscordColor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordColorConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColorConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Writes to JSON
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordColorConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColorConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
             Reads from JSON
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordColorConverter.CanConvert(System.Type)">
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColorConverter.CanConvert(System.Type)">
             <summary>
             Check if can convert
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Roles.DiscordRole">
+        <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Id">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Id">
             <summary>
             Role id
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Name">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Name">
             <summary>
             Role name
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Color">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Color">
             <summary>
             Role Color
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Hoist">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Hoist">
             <summary>
             If this role is pinned in the user listing
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Position">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Position">
             <summary>
             Position of this role
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Permissions">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Permissions">
             <summary>
             Role Permissions
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Managed">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Managed">
             <summary>
             Whether this role is managed by an integration
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Mentionable">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Mentionable">
             <summary>
             Whether this role is mentionable
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Tags">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Tags">
             <summary>
             The tags this role has
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.DiscordRole.Mention">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Mention">
             <summary>
             Returns a string to mention this role in a message
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordRole.HasPermission(Oxide.Ext.Discord.Entities.Channels.PermissionFlags)">
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.HasPermission(Oxide.Ext.Discord.Entities.Permissions.PermissionFlags)">
             <summary>
             Returns if the role has the specified permission
             </summary>
             <param name="perm">Permission to check for</param>
             <returns>Return true if role has permission; false otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Roles.DiscordRole.IsBoosterRole">
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.IsBoosterRole">
             <summary>
             Returns if this role is the booster
             </summary>
             <returns>True if booster role. False otherwise;</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Roles.RoleTags">
+        <member name="T:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags">Permission Flags</a> for user or role
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.CreateInstantInvite">
+            <summary>
+            Allows creation of instant invites
+            Channel Type (Text, Voice, Stage)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.KickMembers">
+            <summary>
+            Allows kicking members
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.BanMembers">
+            <summary>
+            Allows banning members
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.Administrator">
+            <summary>
+            Allows all permissions and bypasses channel permission overwrites
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageChannels">
+            <summary>
+            Allows management and editing of channels
+            Channel Type (Text, Voice, Stage)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild">
+            <summary>
+            Allows management and editing of the guild
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.AddReactions">
+            <summary>
+            Allows for the addition of reactions to messages
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ViewAuditLog">
+            <summary>
+            Allows for viewing of audit logs
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.PrioritySpeaker">
+            <summary>
+            Allows for using priority speaker in a voice channel
+            Channel Type (Voice)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.Stream">
+            <summary>
+            Allows the user to go live
+            Channel Type (Voice)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ViewChannel">
+            <summary>
+            Allows guild members to view a channel, which includes reading messages in text channels
+            Channel Type (Text, Voice, Stage)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.SendMessages">
+            <summary>
+            Allows for sending messages in a channel
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.SendTtsMessages">
+            <summary>
+            Allows for sending of /tts messages
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageMessages">
+            <summary>
+            Allows for deletion of other users messages
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.EmbedLinks">
+            <summary>
+            Links sent by users with this permission will be auto-embedded
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.AttachFiles">
+            <summary>
+            Allows for uploading images and files
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ReadMessageHistory">
+            <summary>
+            Allows for reading of message history
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.MentionEveryone">
+            <summary>
+            Allows for using the @everyone tag to notify all users in a channel,
+            and the @here tag to notify all online users in a channel
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseExternalEmojis">
+            <summary>
+            Allows the usage of custom emojis from other servers
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ViewGuildInsights">
+            <summary>
+            Allows for viewing guild insights
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.Connect">
+            <summary>
+            Allows for joining of a voice channel
+            Channel Type (Voice, Stage)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.Speak">
+            <summary>
+            Allows for speaking in a voice channel
+            Channel Type (Voice)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.MuteMembers">
+            <summary>
+            Allows for muting members in a voice channel
+            Channel Type (Voice, Stage)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.DeafanMembers">
+            <summary>
+            Allows for deafening of members in a voice channel
+            Channel Type (Voice, Stage)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.MoveMembers">
+            <summary>
+            Allows for moving of members between voice channels
+            Channel Type (Voice, Stage)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseVad">
+            <summary>
+            Allows for using voice-activity-detection in a voice channel
+            Channel Type (Voice)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ChangeNickname">
+            <summary>
+            Allows for modification of own nickname
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageNicknames">
+            <summary>
+            Allows for modification of other users nicknames
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageRoles">
+            <summary>
+            Allows management and editing of roles
+            Channel Type (Text, Voice, Stage)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageWebhooks">
+            <summary>
+            Allows management and editing of webhooks
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageEmojisAndStickers">
+            <summary>
+            Allows management and editing of emojis
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseSlashCommands">
+            <summary>
+            Allows members to use application commands, including slash commands and context menu commands.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.RequestToSpeak">
+            <summary>
+            Allows for requesting to speak in stage channels.
+            Channel Type (Stage)
+            (This permission is under active development and may be changed or removed.)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageThreads">
+            <summary>
+            Allows for deleting and archiving threads, and viewing all private threads
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UsePublicThreads">
+            <summary>
+            Allows for creating and participating in threads
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UsePrivateThreads">
+            <summary>
+            Allows for creating and participating in private threads
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseExternalStickers">
+            <summary>
+            Allows the usage of custom stickers from other servers
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Permissions.RoleTags">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure">Role Tags Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.RoleTags.BotId">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleTags.BotId">
             <summary>
             The id of the bot this role belongs to
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.RoleTags.IntegrationId">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleTags.IntegrationId">
             <summary>
             The id of the integration this role belongs to
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Roles.RoleTags.PremiumSubscriber">
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleTags.PremiumSubscriber">
             <summary>
             Whether this is the guild's premium subscriber role
             </summary>

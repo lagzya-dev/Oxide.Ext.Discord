@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels

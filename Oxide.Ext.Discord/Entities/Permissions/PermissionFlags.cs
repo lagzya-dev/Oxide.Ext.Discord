@@ -1,8 +1,7 @@
 using System;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities.Permissions
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags">Permission Flags</a> for user or role
