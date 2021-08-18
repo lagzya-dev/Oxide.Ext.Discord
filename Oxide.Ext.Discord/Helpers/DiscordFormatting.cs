@@ -156,7 +156,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// </summary>
         /// <param name="message">Message to make multiline code block</param>
         /// <returns>Code block formatted message</returns>
-        public static string CodeBlockMultiLine(string message) => $"```{message}```";
+        public static string CodeBlockMultiLine(string message) => $"```\n{message}\n```";
 
         /// <summary>
         /// Will display a multiline code bloc with the specified language
@@ -164,7 +164,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="message">Message to make code block with language</param>
         /// <param name="language">Language to display the code block as</param>
         /// <returns>Language code block formatted message</returns>
-        public static string CodeBlockLanguage(string message, string language) => $"```{language}\n{message}```";
+        public static string CodeBlockLanguage(string message, string language) => $"```{language}\n{message}\n```";
         
         /// <summary>
         /// Will display the message in single line block quote
