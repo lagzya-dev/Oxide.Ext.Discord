@@ -1607,7 +1607,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private void HandleDispatchUnhandledEvent(EventPayload payload)
         {
-            //_logger.Warning($"Unhandled Dispatch Event: {payload.EventName}. Please contact Discord Extension authors.\n{JsonConvert.SerializeObject(payload)}");
+            _logger.Verbose($"Unhandled Dispatch Event: {payload.EventName}.\n{JsonConvert.SerializeObject(payload)}");
             _client.CallHook(DiscordHooks.OnDiscordUnhandledCommand, payload);
         }
 

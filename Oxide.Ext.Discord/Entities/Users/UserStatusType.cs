@@ -11,26 +11,26 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         /// User is online
         /// </summary>
-        [EnumMember(Value = "online")] Online,
+        [Description("online")] Online,
         
         /// <summary>
         /// User has Do Not Disturb
         /// </summary>
-        [EnumMember(Value = "dnd")] DND,
+        [Description("dnd")] DND,
         
         /// <summary>
         /// User is idle
         /// </summary>
-        [EnumMember(Value = "idle")] Idle,
+        [Description("idle")] Idle,
         
         /// <summary>
         /// User is invisible
         /// </summary>
-        [EnumMember(Value = "invisible")] Invisible,
+        [Description("invisible")] Invisible,
         
         /// <summary>
         /// User is offline
         /// </summary>
-        [EnumMember(Value = "offline")] Offline
+        [Description("offline")] Offline
     }
 }

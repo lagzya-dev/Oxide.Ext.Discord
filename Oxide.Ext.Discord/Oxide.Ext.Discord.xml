@@ -6145,12 +6145,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.SevenDayThreadArchive">
             <summary>
-            guild has access to the seven day archive time for threads
+            Guild has access to the seven day archive time for threads
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.PrivateThreads">
             <summary>
-            	guild has access to create private threads
+            Guild has access to create private threads
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember">
@@ -11432,26 +11432,34 @@
             Lottie Image
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Helpers.Converters.DiscordEnumConverter`1">
+        <member name="T:Oxide.Ext.Discord.Helpers.Converters.DiscordEnumConverter">
             <summary>
             Handles deserializing JSON values as strings. If they value doesn't exist return the default value.
             </summary>
-            <typeparam name="TEnum"></typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Converters.DiscordEnumConverter`1.#ctor(`0)">
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.DiscordEnumConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
-            Constructor that takes teh defaultValue to return if enum value is not found.
+            Write Enum value to Discord Enum String
             </summary>
-            <param name="defaultValue"></param>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Converters.DiscordEnumConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.DiscordEnumConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
-            Use StringEnumConverter to parse enum value if that fails return default value.
+            Read enum value from Discord Enum String
             </summary>
             <param name="reader"></param>
             <param name="objectType"></param>
             <param name="existingValue"></param>
             <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Converters.DiscordEnumConverter.CanConvert(System.Type)">
+            <summary>
+            Checks if this type is enum or nullable enum
+            </summary>
+            <param name="objectType"></param>
             <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Converters.HashListConverter`1">
