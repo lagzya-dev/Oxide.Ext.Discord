@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -10,13 +10,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Guild does not require MFA
         /// </summary>
-        [EnumMember(Value = "NONE")]
+        [Description("NONE")]
         None = 0,
         
         /// <summary>
         /// Guild requires elevated MFA
         /// </summary>
-        [EnumMember(Value = "ELEVATED")]
+        [Description("ELEVATED")]
         Elevated = 1
     }
 }

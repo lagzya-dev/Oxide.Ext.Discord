@@ -1,4 +1,4 @@
-using System.Runtime.Serialization;
+using System.ComponentModel;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
@@ -10,19 +10,19 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <summary>
         /// Slash commands; a text-based command that shows up when a user types /
         /// </summary>
-        [EnumMember(Value = "CHAT_INPUT")]
+        [Description("CHAT_INPUT")]
         ChatInput,
         
         /// <summary>
         /// A UI-based command that shows up when you right click or tap on a user
         /// </summary>
-        [EnumMember(Value = "USER")]
+        [Description("USER")]
         User,
         
         /// <summary>
         /// A UI-based command that shows up when you right click or tap on a messages
         /// </summary>
-        [EnumMember(Value = "MESSAGE")]
+        [Description("MESSAGE")]
         Message
     }
 }

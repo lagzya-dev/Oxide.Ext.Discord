@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -95,7 +97,7 @@ namespace Oxide.Ext.Discord
             RegisterPluginForHooks(Owner);
             Interface.Call(DiscordHooks.OnDiscordClientConnected, Owner, this);
         }
-        
+
         /// <summary>
         /// Disconnects this client from discord
         /// </summary>

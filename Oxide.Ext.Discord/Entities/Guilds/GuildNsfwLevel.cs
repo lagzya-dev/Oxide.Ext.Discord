@@ -11,25 +11,25 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Default NSFW Level
         /// </summary>
-        [EnumMember(Value = "DEFAULT")]
+        [Description("DEFAULT")]
         Default = 0,
         
         /// <summary>
         /// Guild is explicitly NSFW
         /// </summary>
-        [EnumMember(Value = "EXPLICIT")]
+        [Description("EXPLICIT")]
         Explicit = 1,
         
         /// <summary>
         /// Guild is safe from NSFW
         /// </summary>
-        [EnumMember(Value = "SAFE")]
+        [Description("SAFE")]
         Safe = 2,
         
         /// <summary>
         /// Guild is age restricted
         /// </summary>
-        [EnumMember(Value = "AGE_RESTRICTED")]
+        [Description("AGE_RESTRICTED")]
         AgeRestricted = 3
     }
 }

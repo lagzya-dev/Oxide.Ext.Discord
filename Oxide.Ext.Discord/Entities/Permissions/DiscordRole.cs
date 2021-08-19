@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Roles
+namespace Oxide.Ext.Discord.Entities.Permissions
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>

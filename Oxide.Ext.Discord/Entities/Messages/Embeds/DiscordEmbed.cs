@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Roles;
+using Oxide.Ext.Discord.Entities.Permissions;
 
 namespace Oxide.Ext.Discord.Entities.Messages.Embeds
 {
