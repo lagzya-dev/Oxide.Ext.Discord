@@ -268,7 +268,7 @@ namespace Oxide.Ext.Discord
         private void UpdateLogLevel(LogLevel level)
         {
             Logger.UpdateLogLevel(level);
-            Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from:{Settings.LogLevel.ToString()} to: {level.ToString()}");
+            Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {Settings.LogLevel.ToString()} to: {level.ToString()}");
             Settings.LogLevel = level;
         }
 

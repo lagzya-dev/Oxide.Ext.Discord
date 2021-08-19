@@ -1,4 +1,4 @@
-using System.Runtime.Serialization;
+using System.ComponentModel;
 
 namespace Oxide.Ext.Discord.Entities.Integrations
 {
@@ -10,19 +10,19 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// <summary>
         /// Integration is for twitch
         /// </summary>
-        [EnumMember(Value = "twitch")] 
+        [Description("twitch")] 
         Twitch,
         
         /// <summary>
         /// Integration is for youtube
         /// </summary>
-        [EnumMember(Value = "youtube")] 
+        [Description("youtube")] 
         Youtube,
         
         /// <summary>
         /// integration is for discord
         /// </summary>
-        [EnumMember(Value = "discord")] 
+        [Description("discord")] 
         Discord
     }
 }

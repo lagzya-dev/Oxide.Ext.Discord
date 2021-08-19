@@ -13,43 +13,43 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// <summary>
         /// No Actions can be done to this activity
         /// </summary>
-        [EnumMember(Value = "NONE")]
+        [Description("NONE")]
         None = 0,
         
         /// <summary>
         /// No Actions can be done to this activity
         /// </summary>
-        [EnumMember(Value = "INSTANCE")]
+        [Description("INSTANCE")]
         Instance =	1 << 0,
         
         /// <summary>
         /// Activity can be joined
         /// </summary>
-        [EnumMember(Value = "JOIN")]
+        [Description("JOIN")]
         Join =	1 << 1,
         
         /// <summary>
         /// Activity can be spectated
         /// </summary>
-        [EnumMember(Value = "SPECTATE")]
+        [Description("SPECTATE")]
         Spectate =	1 << 2,
         
         /// <summary>
         /// User may request to join activity
         /// </summary>
-        [EnumMember(Value = "JOIN_REQUEST")]
+        [Description("JOIN_REQUEST")]
         JoinRequest =	1 << 3,
         
         /// <summary>
         /// User can listen along in spotify
         /// </summary>
-        [EnumMember(Value = "SYNC")]
+        [Description("SYNC")]
         Sync =	1 << 4,
         
         /// <summary>
         /// User can play this song
         /// </summary>
-        [EnumMember(Value = "PLAY")]
+        [Description("PLAY")]
         Play =	1 << 5
     }
 }

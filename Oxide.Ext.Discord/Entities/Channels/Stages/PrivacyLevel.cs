@@ -1,4 +1,4 @@
-using System.Runtime.Serialization;
+using System.ComponentModel;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Stages
 {
@@ -10,13 +10,13 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <summary>
         /// The Stage instance is visible publicly, such as on Stage discovery.
         /// </summary>
-        [EnumMember(Value = "PUBLIC")]
+        [Description("PUBLIC")]
         Public = 1,
         
         /// <summary>
         /// The Stage instance is visible to only guild members.
         /// </summary>
-        [EnumMember(Value = "GUILD_ONLY")]
+        [Description("GUILD_ONLY")]
         GuildOnly = 2
     }
 }

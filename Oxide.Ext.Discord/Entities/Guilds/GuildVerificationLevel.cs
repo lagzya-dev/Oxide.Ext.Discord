@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -10,31 +10,31 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Unrestricted
         /// </summary>
-        [EnumMember(Value = "NONE")]
+        [Description("NONE")]
         None = 0,
         
         /// <summary>
         /// Must have verified email on account
         /// </summary>
-        [EnumMember(Value = "LOW")]
+        [Description("LOW")]
         Low = 1,
         
         /// <summary>
         /// Must be registered on Discord for longer than 5 minutes
         /// </summary>
-        [EnumMember(Value = "MEDIUM")]
+        [Description("MEDIUM")]
         Medium = 2,
         
         /// <summary>
         /// Must be a member of the server for longer than 10 minutes
         /// </summary>
-        [EnumMember(Value = "HIGH")]
+        [Description("HIGH")]
         High = 3,
         
         /// <summary>
         /// Must have a verified phone number
         /// </summary>
-        [EnumMember(Value = "VERY_HIGH")]
+        [Description("VERY_HIGH")]
         VeryHigh = 4
     }
 }

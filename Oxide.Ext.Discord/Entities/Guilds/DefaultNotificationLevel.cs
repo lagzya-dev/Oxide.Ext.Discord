@@ -1,4 +1,4 @@
-using System.Runtime.Serialization;
+using System.ComponentModel;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -10,13 +10,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Notify for all guild messages
         /// </summary>
-        [EnumMember(Value = "ALL_MESSAGES")]
+        [Description("ALL_MESSAGES")]
         AllMessages = 0,
         
         /// <summary>
         /// Notify for only mentions
         /// </summary>
-        [EnumMember(Value = "ONLY_MENTIONS")]
+        [Description("ONLY_MENTIONS")]
         OnlyMentions = 1
     }
 }

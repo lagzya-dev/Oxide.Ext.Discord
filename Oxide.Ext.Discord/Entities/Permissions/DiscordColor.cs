@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Roles
+namespace Oxide.Ext.Discord.Entities.Permissions
 {
     /// <summary>
     /// Represents a Discord Color

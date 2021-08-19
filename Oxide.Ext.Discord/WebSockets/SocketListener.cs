@@ -14,7 +14,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Roles;
+using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Stickers;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
@@ -1607,7 +1607,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private void HandleDispatchUnhandledEvent(EventPayload payload)
         {
-            //_logger.Warning($"Unhandled Dispatch Event: {payload.EventName}. Please contact Discord Extension authors.\n{JsonConvert.SerializeObject(payload)}");
+            _logger.Verbose($"Unhandled Dispatch Event: {payload.EventName}.\n{JsonConvert.SerializeObject(payload)}");
             _client.CallHook(DiscordHooks.OnDiscordUnhandledCommand, payload);
         }
 

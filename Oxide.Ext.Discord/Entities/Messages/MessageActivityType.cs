@@ -11,25 +11,25 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// Message Activity Join
         /// </summary>
-        [EnumMember(Value = "JOIN")]
+        [Description("JOIN")]
         Join = 1,
         
         /// <summary>
         /// Message Activity Spectate
         /// </summary>
-        [EnumMember(Value = "SPECTATE")]
+        [Description("SPECTATE")]
         Spectate = 2,
         
         /// <summary>
         /// Message Activity Listen
         /// </summary>
-        [EnumMember(Value = "LISTEN")]
+        [Description("LISTEN")]
         Listen = 3,
         
         /// <summary>
         /// Message Activity JoinRequest
         /// </summary>
-        [EnumMember(Value = "JOIN_REQUEST")]
+        [Description("JOIN_REQUEST")]
         JoinRequest = 5,
     }
 }
