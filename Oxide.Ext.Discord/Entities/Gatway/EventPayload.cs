@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
-using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.WebSockets;
 
 namespace Oxide.Ext.Discord.Entities.Gatway
@@ -12,11 +11,6 @@ namespace Oxide.Ext.Discord.Entities.Gatway
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class EventPayload
     {
-        private static readonly JsonSerializer Serializer = new JsonSerializer
-        {
-            Converters = { new DiscordEnumConverter() }
-        };
-        
         /// <summary>
         /// Op Code for the payload
         /// </summary>
@@ -44,7 +38,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// <summary>
         /// Returns a DispatchCode enum value for the EventName if the extension supports it; Else the code will be Unknown
         /// </summary>
-        public DispatchCode EventCode => EventName?.ToObject<DispatchCode>(Serializer) ?? DispatchCode.Unknown;
+        public DispatchCode EventCode => EventName?.ToObject<DispatchCode>() ?? DispatchCode.Unknown;
 
         /// <summary>
         /// Data as JObject
