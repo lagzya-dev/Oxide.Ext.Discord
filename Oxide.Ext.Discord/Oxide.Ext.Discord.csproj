@@ -22,9 +22,7 @@
     <PackageReference Include="Oxide.Core" Version="2.0.*">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Oxide.CSharp" Version="2.0.*">
-      <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
-    </PackageReference>
+    <PackageReference Include="Oxide.CSharp" Version="2.0.4041" />
     <PackageReference Include="Oxide.References" Version="2.0.*">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
