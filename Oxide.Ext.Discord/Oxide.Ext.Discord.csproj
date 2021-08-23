@@ -19,17 +19,19 @@
     <NoWarn>1701;1702</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Oxide.Core" Version="2.0.*">
-      <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
-    </PackageReference>
-    <PackageReference Include="Oxide.CSharp" Version="2.0.*">
-      <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
-    </PackageReference>
-    <PackageReference Include="Oxide.References" Version="2.0.*">
-      <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
-    </PackageReference>
     <PackageReference Include="WebSocketSharpFork" Version="1.0.*">
       <ExcludeAssets>all</ExcludeAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Oxide.Core, Version=2.0.3996.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\References\Oxide.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.CSharp, Version=2.0.4044.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\References\Oxide.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.References, Version=2.0.3779.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\References\Oxide.References.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
