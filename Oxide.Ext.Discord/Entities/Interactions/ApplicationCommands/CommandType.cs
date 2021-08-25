@@ -11,18 +11,18 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// Slash commands; a text-based command that shows up when a user types /
         /// </summary>
         [Description("CHAT_INPUT")]
-        ChatInput,
+        ChatInput = 1,
         
         /// <summary>
         /// A UI-based command that shows up when you right click or tap on a user
         /// </summary>
         [Description("USER")]
-        User,
+        User = 2,
         
         /// <summary>
         /// A UI-based command that shows up when you right click or tap on a messages
         /// </summary>
         [Description("MESSAGE")]
-        Message
+        Message = 3
     }
 }
