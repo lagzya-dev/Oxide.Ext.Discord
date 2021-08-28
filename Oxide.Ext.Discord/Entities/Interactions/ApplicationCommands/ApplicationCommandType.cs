@@ -3,9 +3,9 @@ using System.ComponentModel;
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
     /// <summary>
-    /// Represents <a href="">Application Command Type</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types">Application Command Type</a>
     /// </summary>
-    public enum CommandType
+    public enum ApplicationCommandType
     {
         /// <summary>
         /// Slash commands; a text-based command that shows up when a user types /

@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// The type of command, defaults 1 if not set
         /// </summary>
         [JsonProperty("type")]
-        public CommandType? Type { get; set; }
+        public ApplicationCommandType? Type { get; set; }
         
         /// <summary>
         /// Unique id of the parent application
@@ -59,30 +59,77 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("default_permission")]
         public bool? DefaultPermissions { get; set; }
-
+        
         /// <summary>
-        /// Edit a global command.
+        /// Edit a command.
         /// Updates will be available in all guilds after 1 hour.
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command">Edit Global Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="update">Command Update</param>
         /// <param name="callback">Callback with updated command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditGlobalApplicationCommand(DiscordClient client, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void Edit(DiscordClient client, CommandUpdate update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PATCH, this, callback, error);
+            if (GuildId.HasValue)
+            {
+                client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.PATCH, update, callback, error);
+                return;
+            }
+            
+            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands", RequestMethod.PATCH, update, callback, error);
         }
         
         /// <summary>
-        /// Deletes a global command
+        /// Deletes a command
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command">Delete Global Application Command</a>
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGlobalApplicationCommand(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public void Delete(DiscordClient client, Action callback = null, Action<RestError> error = null)
         {
+            if (GuildId.HasValue)
+            {
+                client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
+                return;
+            }
+            
             client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands/{Id}", RequestMethod.PATCH, null, callback, error);
+        }
+
+        /// <summary>
+        /// Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="guildId">Guild ID of the guild to get permissions for</param>
+        /// <param name="callback">Callback with the permissions for the command</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetPermissions(DiscordClient client, Snowflake guildId, Action<GuildCommandPermissions> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET, null, callback, error);
+        }
+
+        /// <summary>
+        /// Edits command permissions for a specific command for your application in a guild.
+        /// Warning: This endpoint will overwrite existing permissions for the command in that guild
+        /// Warning: Deleting or renaming a command will permanently delete all permissions for that command
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="guildId">Guild ID of the guild to edit permissions for</param>
+        /// <param name="permissions">List of permissions for the command</param>
+        /// <param name="callback">Callback with the list of permissions</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void EditPermissions(DiscordClient client, Snowflake guildId, List<CommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["permissions"] = permissions
+            };
+            
+            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.PUT, data, callback, error);
         }
     }
 }

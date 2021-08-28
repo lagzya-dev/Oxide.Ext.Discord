@@ -23,7 +23,6 @@ using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.WebSockets.Handlers;
 using Oxide.Plugins;
 using WebSocketSharp;
-using LogLevel = Oxide.Ext.Discord.Logging.LogLevel;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
@@ -264,7 +263,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 _sequence = payload.Sequence.Value;
             }
 
-            if (_logger.IsLogging(LogLevel.Verbose))
+            if (_logger.IsLogging(DiscordLogLevel.Verbose))
             {
                 _logger.Verbose($"Received socket message, OpCode: {payload.OpCode.ToString()}\nContent:\n{e.Data}");
             }

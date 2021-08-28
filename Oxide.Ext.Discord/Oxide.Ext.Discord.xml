@@ -1695,7 +1695,7 @@
             Returns the URL for the applications Icon
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalApplicationCommands(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalCommands(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Fetch all of the global commands for your application.
             Returns a list of ApplicationCommand.
@@ -1705,7 +1705,7 @@
             <param name="callback">Callback with list of application commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.CreateGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.CreateGlobalCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a new global command.
             New global commands will be available in all guilds after 1 hour.
@@ -1717,28 +1717,7 @@
             <param name="callback">Callback with the created command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.EditGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Edit a global command.
-            Updates will be available in all guilds after 1 hour.
-            See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command">Edit Global Application Command</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="update">Command Update</param>
-            <param name="callback">Callback with updated command</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Deletes a global command
-            See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command">Delete Global Application Command</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="commandId">Command to delete</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.BulkOverwriteGlobalApplicationCommands(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.BulkOverwriteGlobalCommands(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Takes a list of application commands, overwriting existing commands that are registered globally for this application. Updates will be available in all guilds after 1 hour.
             See <a href="https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands">Bulk Overwrite Global Application Commands</a>
@@ -1748,7 +1727,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Fetch all of the guild commands for your application for a specific guild.
             See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands">Get Guild Application Commands</a>
@@ -1758,17 +1737,7 @@
             <param name="callback">Callback with a list of guild application commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Fetch all of the guild commands for your application for a specific guild.
-            See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands">Get Guild Application Commands</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="guild">Guild to get commands for</param>
-            <param name="callback">Callback with a list of guild application commands</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.CreateGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.CreateGuildCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a new guild command.
             New guild commands will be available in the guild immediately.
@@ -1780,65 +1749,7 @@
             <param name="callback">Callback with the created command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.CreateGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Create a new guild command.
-            New guild commands will be available in the guild immediately.
-            See <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command">Create Guild Application Command</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="guild">Guild to create the command in</param>
-            <param name="create">Command to create</param>
-            <param name="callback">Callback with the created command</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.EditGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Edit a guild command.
-            Updates for guild commands will be available immediately.
-            See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="guildId">Guild ID to update the command in</param>
-            <param name="update">Command update</param>
-            <param name="callback">Callback with updated command</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.EditGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Edit a guild command.
-            Updates for guild commands will be available immediately.
-            See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="guild">Guild to update the command in</param>
-            <param name="update">Command update</param>
-            <param name="callback">Callback with updated command</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Delete a guild command.
-            See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="guildId">Guild ID of the guild to delete command from</param>
-            <param name="commandId">Command ID of the command to delete</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.DeleteGuildApplicationCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Delete a guild command.
-            See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="guild">Guild to delete command from</param>
-            <param name="delete">Command to delete</param>
-            <param name="callback">Callback once the action is completed</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects.
             </summary>
@@ -1847,30 +1758,7 @@
             <param name="callback">Callback with the list of permissions</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="guildId">Guild ID to get the permissions from</param>
-            <param name="commandId">ID of the command to get permissions for</param>
-            <param name="callback">Callback with the permissions for the command</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.EditApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Edits command permissions for a specific command for your application in a guild.
-            Warning: This endpoint will overwrite existing permissions for the command in that guild
-            Warning: Deleting or renaming a command will permanently delete all permissions for that command
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="guildId">Guild ID to update the permissions for</param>
-            <param name="commandId">ID of the command to get permissions for</param>
-            <param name="permissions">List of permissions for the command</param>
-            <param name="callback">Callback with the list of permissions</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.BatchEditApplicationCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.BatchEditCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Batch edits permissions for all commands in a guild.
             Warning: This endpoint will overwrite all existing permissions for all commands in a guild
@@ -2471,6 +2359,335 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder">
+            <summary>
+            Builder to use when building application commands
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType)">
+            <summary>
+            Creates a new Application Command Builder
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="description">Description of the command</param>
+            <param name="type">Command type</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.SetDefaultEnabled(System.Boolean)">
+            <summary>
+            Set whether the command is enabled by default when the app is added to a guild
+            </summary>
+            <param name="enabled">If the command is enabled</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String)">
+            <summary>
+            Creates a new SubCommandGroup
+            SubCommandGroups contain subcommands
+            Your root command can only contain 
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="description">Description of the command</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandSubCommandGroupBuilder"/></returns>
+            <exception cref="T:System.Exception">Thrown if trying to add a subcommand group to</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.AddSubCommand(System.String,System.String)">
+            <summary>
+            Adds a sub command to the root command
+            </summary>
+            <param name="name">Name of the sub command</param>
+            <param name="description">Description for the sub command</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.SubCommandOptionsBuilder"/></returns>
+            <exception cref="T:System.Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.AddOptions">
+            <summary>
+            Creates an option builder
+            </summary>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1"/></returns>
+            <exception cref="T:System.Exception">Thrown if SubCommand or SubCommandGroup were previously specified</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.Build">
+            <summary>
+            Returns the created command
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandSubCommandGroupBuilder">
+            <summary>
+            Build for Sub Command Groups
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandSubCommandGroupBuilder.AddSubCommand(System.String,System.String)">
+            <summary>
+            Adds a sub command to this sub command group
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="description">Description of the command</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.SubCommandGroupOptionsBuilder"/></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1">
+            <summary>
+            Base Sub Command builder
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1.Options">
+            <summary>
+            Options list to have options added to
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1.Builder">
+            <summary>
+            Builder that is adding options
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,System.Boolean,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice})">
+            <summary>
+            Adds a new option
+            </summary>
+            <param name="type">Option data type (Cannot be SubCommand or SubCommandGroup)</param>
+            <param name="name">Name of the option</param>
+            <param name="description">Description of the option</param>
+            <param name="required">Is the option required</param>
+            <param name="choices">Predefined choices for the option (Only for Integer and String types)</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1.Build">
+            <summary>
+            Returns the builder
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Builders.SubCommandOptionsBuilder">
+            <summary>
+            Options Builder for SubCommand
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Builders.SubCommandGroupOptionsBuilder">
+            <summary>
+            Options Builder for SubCommandGroup
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Builders.CommandOptionBuilder">
+            <summary>
+            Options builder for ApplicationCommand builder
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder">
+            <summary>
+            Builds a new DiscordEmbed
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddTitle(System.String)">
+            <summary>
+            Adds a title to the embed message
+            </summary>
+            <param name="title">Title to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddDescription(System.String)">
+            <summary>
+            Adds a description to the embed message
+            </summary>
+            <param name="description">description to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddUrl(System.String)">
+            <summary>
+            Adds a url to the embed message
+            </summary>
+            <param name="url"></param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddAuthor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds an author to the embed message. The author will appear above the title
+            </summary>
+            <param name="name">Name of the author</param>
+            <param name="iconUrl">Icon Url to use for the author</param>
+            <param name="url">Url to go to when the authors name is clicked on</param>
+            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddFooter(System.String,System.String,System.String)">
+            <summary>
+            Adds a footer to the embed message
+            </summary>
+            <param name="text">Text to be added to the footer</param>
+            <param name="iconUrl">Icon url to add in the footer. Appears to the left of the text</param>
+            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddColor(System.UInt32)">
+            <summary>
+            Adds an int based color to the embed. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddColor(System.String)">
+            <summary>
+            Adds a hex based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="color">Color in string hex format</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Exception thrown if color is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddColor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Adds a RGB based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="red">Red value between 0 - 255</param>
+            <param name="green">Green value between 0 - 255</param>
+            <param name="blue">Blue value between 0 - 255</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddBlankField(System.Boolean)">
+            <summary>
+            Adds a blank field.
+            If inline it will add a blank column.
+            If not inline will add a blank row
+            </summary>
+            <param name="inline">If the field is inline</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddField(System.String,System.String,System.Boolean)">
+            <summary>
+            Adds a new field with the name as the title and value as the value.
+            If inline will add a new column. If row will add in a new row.
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="inline"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddImage(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Adds an image to the embed. The url should point to the url of the image.
+            If using attachment image you can make the url: "attachment://{image name}.{image extension}
+            </summary>
+            <param name="url">Url for the image</param>
+            <param name="width">width of the image</param>
+            <param name="height">height of the image</param>
+            <param name="proxyUrl">Backup url for the image</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddThumbnail(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Adds a thumbnail in the top right corner of the embed
+            If using attachment image you can make the url: "attachment://{image name}.{image extension}
+            </summary>
+            <param name="url">Url for the image</param>
+            <param name="width">width of the image</param>
+            <param name="height">height of the image</param>
+            <param name="proxyUrl">Backup url for the image</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddVideo(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Adds a video to the embed
+            </summary>
+            <param name="url">Url for the video</param>
+            <param name="width">Width of the video</param>
+            <param name="height">Height of the video</param>
+            <param name="proxyUrl">Proxy Url for the video</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddProvider(System.String,System.String)">
+            <summary>
+            Adds a provider to the embed
+            </summary>
+            <param name="name">Name for the provider</param>
+            <param name="url">Url for the provider</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.Build">
+            <summary>
+            Returns the built embed
+            </summary>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder">
+            <summary>
+            Builder for Message Components
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.#ctor">
+            <summary>
+            Creates a new MessageComponentBuilder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.AddActionButton(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle,System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
+            <summary>
+            Adds an action button to the current action row
+            </summary>
+            <param name="style">Button Style <a href="https://discord.com/developers/docs/interactions/message-components#button-object-button-styles">Button Styles</a></param>
+            <param name="label">The text of the button</param>
+            <param name="customId">The unique id of the button. Used to identify which button was clicked</param>
+            <param name="disabled">If this button is disabled</param>
+            <param name="emoji">Emoji to display with the button</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder"/></returns>
+            <exception cref="T:System.Exception">
+                Throw if the button style is link or if the button goes outside the max number of action rows
+            </exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.AddDummyButton(System.String,System.Boolean)">
+            <summary>
+            Adds a dummy button that doesn't do anything
+            </summary>
+            <param name="label">The text of the button</param>
+            <param name="disabled">If this button is disabled</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder"/></returns>
+            <exception cref="T:System.Exception"> Throw if the button goes outside the max number of action rows</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.AddLinkButton(System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
+            <summary>
+            Adds a link button to the current action row
+            </summary>
+            <param name="label">Text on the button</param>
+            <param name="url">URL for the button</param>
+            <param name="disabled">if the button should be disabled</param>
+            <param name="emoji">Emoji to display on the button</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder"/></returns>
+            <exception cref="T:System.Exception">Thrown if the button goes outside the max number of action rows</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.AddSelectMenu(System.String,System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Adds a select menu to a new action row
+            </summary>
+            <param name="customId">Unique ID for the select menu</param>
+            <param name="placeholder">Text to display if no value is selected yet</param>
+            <param name="minValues">The min number of options you must select</param>
+            <param name="maxValues">The max number of options you can select</param>
+            <param name="disabled">If the select menu should be disabled</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.SelectMenuComponentBuilder"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.Build">
+            <summary>
+            Returns the built action rows
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Builders.SelectMenuComponentBuilder">
+            <summary>
+            Builder for Select Menus
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.SelectMenuComponentBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption)">
+            <summary>
+            Adds an option to a select menu;
+            </summary>
+            <param name="option"></param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Builders.SelectMenuComponentBuilder.Build">
+            <summary>
+            Returns the root builder
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
             <summary>
@@ -6805,6 +7022,26 @@
             Period (in days) where the integration will ignore lapsed subscriptions
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types">Application Command Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput">
+            <summary>
+            Slash commands; a text-based command that shows up when a user types /
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.User">
+            <summary>
+            A UI-based command that shows up when you right click or tap on a user
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.Message">
+            <summary>
+            A UI-based command that shows up when you right click or tap on a messages
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command-json-params">Application Command Create</a>
@@ -6961,6 +7198,7 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType.Mentionable">
             <summary>
             The sub command option is a Mentionable
+            Includes Users and Roles
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType.Number">
@@ -7004,24 +7242,30 @@
             This permission uses User ID
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandType">
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate">
             <summary>
-            Represents <a href="">Application Command Type</a>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command-json-params">Application Command Update</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandType.ChatInput">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.Name">
             <summary>
-            Slash commands; a text-based command that shows up when a user types /
+            1-32 lowercase character name matching ^[\w-]{1,32}$
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandType.User">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.Description">
             <summary>
-            A UI-based command that shows up when you right click or tap on a user
+            Description of the command (1-100 characters)
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandType.Message">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.Options">
             <summary>
-            A UI-based command that shows up when you right click or tap on a messages
+            The parameters for the command
+            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.DefaultPermissions">
+            <summary>
+            Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand">
@@ -7070,23 +7314,47 @@
             Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.EditGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
-            Edit a global command.
+            Edit a command.
             Updates will be available in all guilds after 1 hour.
             See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command">Edit Global Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
             </summary>
             <param name="client">Client to use</param>
+            <param name="update">Command Update</param>
             <param name="callback">Callback with updated command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.DeleteGlobalApplicationCommand(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Delete(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
-            Deletes a global command
+            Deletes a command
             See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command">Delete Global Application Command</a>
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.GetPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild ID of the guild to get permissions for</param>
+            <param name="callback">Callback with the permissions for the command</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.EditPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Edits command permissions for a specific command for your application in a guild.
+            Warning: This endpoint will overwrite existing permissions for the command in that guild
+            Warning: Deleting or renaming a command will permanently delete all permissions for that command
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild ID of the guild to edit permissions for</param>
+            <param name="permissions">List of permissions for the command</param>
+            <param name="callback">Callback with the list of permissions</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions">
@@ -7176,6 +7444,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Message">
             <summary>
              For components, the message they were attached to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Parsed">
+            <summary>
+            Returns the interaction parsed args to make it easier to process that interaction.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponse,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -7296,7 +7569,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Resolved">
             <summary>
-            converted users + roles + channels
+            Converted <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Messages.DiscordMessage"/>s
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Options">
@@ -7312,6 +7585,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.ComponentType">
             <summary>
             For components, the type of the component
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Values">
+            <summary>
+            For components, the values for the select menu component
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.TargetId">
@@ -7345,6 +7623,138 @@
             Present if this option is a group or subcommand
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption"/>
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed">
+            <summary>
+            Parses Interaction Data to make it easier to process for application commands
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.Interaction">
+            <summary>
+            Interaction this data is for
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.Data">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionData"/> for the Interaction
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.Type">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType"/> The type of interaction that was triggered
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.Command">
+            <summary>
+            Parsed command for the interaction if an application command
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.CommandGroup">
+            <summary>
+            Command group for the interaction if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Type if an application command
+            Null if command group is not used for the command.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.SubCommand">
+            <summary>
+            Sub Command for the interaction if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Typ  if an application command
+            Null if sub command group is not used for the command.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.Args">
+            <summary>
+            Interaction Data Supplied Args if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Type if an application command
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.InGuild">
+            <summary>
+            Returns true if this command was used in a guild; false otherwise.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.TriggeredComponentId">
+            <summary>
+            The CustomId of the <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseInteractableComponent"/> that triggered the interaction if a component triggered this interaction
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.SelectMenuValues">
+            <summary>
+            If a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+            <summary>
+            Constructor for the data parser.
+            </summary>
+            <param name="interaction">Interaction to be parsed</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs">
+            <summary>
+            Args supplied for the interaction
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetString(System.String,System.String)">
+            <summary>
+            Returns the string value supplied to command option matching the name.
+            If the arg was optional and wasn't supplied default supplied value will be used.
+            </summary>
+            <param name="name">Name of the command option</param>
+            <param name="default">Default value to return if not supplied</param>
+            <returns>String for the matching command option name</returns>
+            <exception cref="T:System.Exception">Thrown if the option type is not a string</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetInt(System.String,System.Int32)">
+            <summary>
+            Returns the int value supplied to command option matching the name.
+            If the arg was optional and wasn't supplied default supplied value will be used.
+            </summary>
+            <param name="name">Name of the command option</param>
+            <param name="default">Default value to return if not supplied</param>
+            <returns>Int for the matching command option name</returns>
+            <exception cref="T:System.Exception">Thrown if the option type is not an int</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetBool(System.String,System.Boolean)">
+            <summary>
+            Returns the bool value supplied to command option matching the name.
+            If the arg was optional and wasn't supplied default supplied value will be used.
+            </summary>
+            <param name="name">Name of the command option</param>
+            <param name="default">Default value to return if not supplied</param>
+            <returns>Bool for the matching command option name</returns>
+            <exception cref="T:System.Exception">Thrown if the option type is not a bool</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetUser(System.String)">
+            <summary>
+            Returns the <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> that was resolved from the command.
+            </summary>
+            <param name="name">Name of the command option</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> resolved for the matching command option name</returns>
+            <exception cref="T:System.Exception">Thrown if the option type is not a <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> or mentionable</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetChannel(System.String)">
+            <summary>
+            Returns the <see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/> that was resolved from the command.
+            </summary>
+            <param name="name">Name of the command option</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/> resolved for the matching command option name</returns>
+            <exception cref="T:System.Exception">Thrown if the option type is not a <see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetRole(System.String)">
+            <summary>
+            Returns the <see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole"/> that was resolved from the command.
+            </summary>
+            <param name="name">Name of the command option</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole"/> resolved for the matching command option name</returns>
+            <exception cref="T:System.Exception">Thrown if the option type is not a <see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole"/> or mentionable</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetNumber(System.String,System.Double)">
+            <summary>
+            Returns the double value supplied to command option matching the name.
+            If the arg was optional and wasn't supplied default supplied value will be used.
+            </summary>
+            <param name="name">Name of the command option</param>
+            <param name="default">Default value to return if not supplied</param>
+            <returns>double for the matching command option name</returns>
+            <exception cref="T:System.Exception">Thrown if the option type is not a double</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved">
             <summary>
@@ -7458,22 +7868,6 @@
             Sets the Type to ActionRow
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent.AddComponent(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent)">
-            <summary>
-            Add a button component to an action row
-            </summary>
-            <param name="component">Component to add</param>
-            <exception cref="T:System.ArgumentNullException">Throw if component is null</exception>
-            <exception cref="T:System.Exception">Throw if invalid message type is passed or components exceeds max of 5</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent.AddComponent(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent)">
-            <summary>
-            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent"/> to an action row
-            </summary>
-            <param name="component">Select Menu Component to add</param>
-            <exception cref="T:System.ArgumentNullException">Thrown if component is null</exception>
-            <exception cref="T:System.Exception">Thrown if 1 or more components already exist</exception>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseComponent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/message-components#component-object">Message Component</a> within discord
@@ -7482,6 +7876,17 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseComponent.Type">
             <summary>
             Message component type
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseInteractableComponent">
+            <summary>
+            Represent a MessageComponent that can be interacted with
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseInteractableComponent.CustomId">
+            <summary>
+            A developer-defined identifier for the interactable component
+            Max 100 characters
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent">
@@ -7503,12 +7908,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent.Emoji">
             <summary>
             Emoji on the component
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent.CustomId">
-            <summary>
-            A developer-defined identifier for the button
-            Max 100 characters
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent.Url">
@@ -7589,12 +7988,6 @@
             Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.CustomId">
-            <summary>
-            A developer-defined identifier for the button
-            Max 100 characters
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.Options">
             <summary>
             The choices in the select
@@ -7629,13 +8022,6 @@
             <summary>
             Select Menu Component Constructor
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.AddOption(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption)">
-            <summary>
-            Adds an option to a select menu;
-            </summary>
-            <param name="option"></param>
-            <exception cref="T:System.Exception"></exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption">
             <summary>
@@ -8131,6 +8517,16 @@
             <param name="callback">Callback with the message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Replies to a previously sent message
+            See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="embed">Embed to send</param>
+            <param name="callback">Callback with the message</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reply(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Replies to a previously sent message
@@ -8421,130 +8817,6 @@
             Fields information
             <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField"/>
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddTitle(System.String)">
-            <summary>
-            Adds a title to the embed message
-            </summary>
-            <param name="title">Title to add</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddDescription(System.String)">
-            <summary>
-            Adds a description to the embed message
-            </summary>
-            <param name="description">description to add</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddUrl(System.String)">
-            <summary>
-            Adds a url to the embed message
-            </summary>
-            <param name="url"></param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddAuthor(System.String,System.String,System.String,System.String)">
-            <summary>
-            Adds an author to the embed message. The author will appear above the title
-            </summary>
-            <param name="name">Name of the author</param>
-            <param name="iconUrl">Icon Url to use for the author</param>
-            <param name="url">Url to go to when the authors name is clicked on</param>
-            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddFooter(System.String,System.String,System.String)">
-            <summary>
-            Adds a footer to the embed message
-            </summary>
-            <param name="text">Text to be added to the footer</param>
-            <param name="iconUrl">Icon url to add in the footer. Appears to the left of the text</param>
-            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddColor(System.UInt32)">
-            <summary>
-            Adds an int based color to the embed. Color appears as a bar on the left side of the message
-            </summary>
-            <param name="color"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddColor(System.String)">
-            <summary>
-            Adds a hex based color. Color appears as a bar on the left side of the message
-            </summary>
-            <param name="color">Color in string hex format</param>
-            <returns>This</returns>
-            <exception cref="T:System.Exception">Exception thrown if color is outside of range</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddColor(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Adds a RGB based color. Color appears as a bar on the left side of the message
-            </summary>
-            <param name="red">Red value between 0 - 255</param>
-            <param name="green">Green value between 0 - 255</param>
-            <param name="blue">Blue value between 0 - 255</param>
-            <returns>This</returns>
-            <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddBlankField(System.Boolean)">
-            <summary>
-            Adds a blank field.
-            If inline it will add a blank column.
-            If not inline will add a blank row
-            </summary>
-            <param name="inline">If the field is inline</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddField(System.String,System.String,System.Boolean)">
-            <summary>
-            Adds a new field with the name as the title and value as the value.
-            If inline will add a new column. If row will add in a new row.
-            </summary>
-            <param name="name"></param>
-            <param name="value"></param>
-            <param name="inline"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddImage(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
-            <summary>
-            Adds an image to the embed. The url should point to the url of the image.
-            If using attachment image you can make the url: "attachment://{image name}.{image extension}
-            </summary>
-            <param name="url">Url for the image</param>
-            <param name="width">width of the image</param>
-            <param name="height">height of the image</param>
-            <param name="proxyUrl">Backup url for the image</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddThumbnail(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
-            <summary>
-            Adds a thumbnail in the top right corner of the embed
-            If using attachment image you can make the url: "attachment://{image name}.{image extension}
-            </summary>
-            <param name="url">Url for the image</param>
-            <param name="width">width of the image</param>
-            <param name="height">height of the image</param>
-            <param name="proxyUrl">Backup url for the image</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddVideo(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
-            <summary>
-            Adds a video to the embed
-            </summary>
-            <param name="url">Url for the video</param>
-            <param name="width">Width of the video</param>
-            <param name="height">Height of the video</param>
-            <param name="proxyUrl">Proxy Url for the video</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed.AddProvider(System.String,System.String)">
-            <summary>
-            Adds a provider to the embed
-            </summary>
-            <param name="name">Name for the provider</param>
-            <param name="url">Url for the provider</param>
-            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedAuthor">
             <summary>
@@ -11989,9 +12261,15 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.AddLinkPlugin(Oxide.Core.Plugins.Plugin)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.AddLinkPlugin(Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin)">
             <summary>
             Adds a link plugin to be the plugin used with the Discord Link library
+            </summary>
+            <param name="plugin"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.RemoveLinkPlugin(Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin)">
+            <summary>
+            Removes a link plugin from the Discord Link library
             </summary>
             <param name="plugin"></param>
         </member>
@@ -12109,6 +12387,11 @@
             Represents a plugin that supports Discord Link library
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.Title">
+            <summary>
+            Title of the plugin
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.GetSteamToDiscordIds">
             <summary>
             Returns a Hash of Steam ID's to Discord ID's
@@ -12185,6 +12468,46 @@
             <param name="plugin">Plugin to remove subscriptions for</param>
             <exception cref="T:System.ArgumentNullException">Exception if plugin is null</exception>
         </member>
+        <member name="T:Oxide.Ext.Discord.Logging.DiscordLogLevel">
+            <summary>
+            Represents the log level for a logger
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Verbose">
+            <summary>
+            Verbose log level displays all message
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Debug">
+            <summary>
+            Debug log level display all messages up to and include Debug
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Info">
+            <summary>
+            Info log level display all messages up to and include Info
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Warning">
+            <summary>
+            Warning log level display all messages up to and include Warning
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Error">
+            <summary>
+            Error log level display all messages up to and include Error
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Exception">
+            <summary>
+            Exception log level display all messages up to and include Exception
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Off">
+            <summary>
+            Disables all logging
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Logging.ILogger">
             <summary>
             Represents an interface for a logger
@@ -12227,13 +12550,13 @@
             <param name="message">Message to log</param>
             <param name="ex">Exception to log</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.ILogger.UpdateLogLevel(Oxide.Ext.Discord.Logging.LogLevel)">
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.UpdateLogLevel(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
             <summary>
             Updates the log level for the current logger
             </summary>
             <param name="level">Level to update the logger to</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.ILogger.IsLogging(Oxide.Ext.Discord.Logging.LogLevel)">
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.IsLogging(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
             <summary>
             Returns true if the logger is logging for the passed log level
             </summary>
@@ -12245,7 +12568,7 @@
             Represents a discord extension logger
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.#ctor(Oxide.Ext.Discord.Logging.LogLevel)">
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.#ctor(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
             <summary>
             Creates a new logger with the given log level
             </summary>
@@ -12288,58 +12611,18 @@
             <param name="message">Message to log</param>
             <param name="ex">Exception to log</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.UpdateLogLevel(Oxide.Ext.Discord.Logging.LogLevel)">
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.UpdateLogLevel(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
             <summary>
             Updates the log level for the current logger
             </summary>
             <param name="level">Level to update the logger to</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.IsLogging(Oxide.Ext.Discord.Logging.LogLevel)">
+        <member name="M:Oxide.Ext.Discord.Logging.Logger.IsLogging(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
             <summary>
             Returns true if the logger is logging for the passed log level
             </summary>
             <param name="level">Log Level to check</param>
             <returns>True if the logger is logging for the given log level</returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Logging.LogLevel">
-            <summary>
-            Represents the log level for a logger
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Verbose">
-            <summary>
-            Verbose log level displays all message
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Debug">
-            <summary>
-            Debug log level display all messages up to and include Debug
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Info">
-            <summary>
-            Info log level display all messages up to and include Info
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Warning">
-            <summary>
-            Warning log level display all messages up to and include Warning
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Error">
-            <summary>
-            Error log level display all messages up to and include Error
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Exception">
-            <summary>
-            Exception log level display all messages up to and include Exception
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Logging.LogLevel.Off">
-            <summary>
-            Disables all logging
-            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Bucket">
             <summary>

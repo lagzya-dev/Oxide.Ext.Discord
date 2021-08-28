@@ -63,7 +63,7 @@ namespace Oxide.Ext.Discord
             DiscordSettings settings = new DiscordSettings
             {
                 ApiToken = apiKey,
-                LogLevel = LogLevel.Warning,
+                LogLevel = DiscordLogLevel.Warning,
                 Intents = intents
             };
             

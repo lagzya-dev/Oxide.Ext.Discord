@@ -83,9 +83,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
 
             throw new JsonException($"Unexpected token {reader.TokenType} when parsing enum.");
         }
-
-
-
+        
         /// <summary>
         /// Checks if this type is enum or nullable enum
         /// </summary>
@@ -106,5 +104,4 @@ namespace Oxide.Ext.Discord.Helpers.Converters
             return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
     }
-    
 }

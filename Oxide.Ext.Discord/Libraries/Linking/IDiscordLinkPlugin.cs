@@ -12,6 +12,11 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     public interface IDiscordLinkPlugin
     {
         /// <summary>
+        /// Title of the plugin
+        /// </summary>
+        string Title { get; }
+        
+        /// <summary>
         /// Returns a Hash of Steam ID's to Discord ID's
         /// </summary>
         /// <returns></returns>

@@ -235,7 +235,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            LogLevel level = LogLevel.Off;
+            DiscordLogLevel level = DiscordLogLevel.Off;
             for (int index = 0; index < _clients.Count; index++)
             {
                 DiscordClient remainingClient = _clients[index];
@@ -265,7 +265,7 @@ namespace Oxide.Ext.Discord
             // }
         }
 
-        private void UpdateLogLevel(LogLevel level)
+        private void UpdateLogLevel(DiscordLogLevel level)
         {
             Logger.UpdateLogLevel(level);
             Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {Settings.LogLevel.ToString()} to: {level.ToString()}");

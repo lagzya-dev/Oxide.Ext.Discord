@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Oxide.Core;
 using Oxide.Core.Libraries;
@@ -24,8 +25,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         private readonly Hash<Snowflake, string> _discordIdToSteamId = new Hash<Snowflake, string>();
         private readonly HashSet<string> _steamIds = new HashSet<string>();
         private readonly HashSet<Snowflake> _discordIds = new HashSet<Snowflake>();
-        
-        private Plugin LinkPlugin { get; set; }
+
+        private readonly List<IDiscordLinkPlugin> _linkPlugins = new List<IDiscordLinkPlugin>();
 
         private readonly ILogger _logger;
 
@@ -45,7 +46,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         [LibraryFunction(nameof(IsEnabled))]
         public bool IsEnabled()
         {
-            return LinkPlugin != null;
+            return _linkPlugins.Count != 0;
         }
 
         /// <summary>
@@ -53,28 +54,20 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="plugin"></param>
         [LibraryFunction(nameof(AddLinkPlugin))]
-        public void AddLinkPlugin(Plugin plugin)
+        public void AddLinkPlugin(IDiscordLinkPlugin plugin)
         {
-            IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
-            if (link == null)
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+
+            if (!_linkPlugins.Contains(plugin))
             {
-                _logger.Warning($"[{nameof(DiscordLink)}] Tried to register a Discord Link Plugin that does not inherit from IDiscordLinkPlugin: {plugin.Title}");
-                return;
+                _linkPlugins.Add(plugin);
             }
+            
+            plugin.RegisterEvents(OnLinked, OnUnlinked);
 
-            if (LinkPlugin != null)
-            {
-                _logger.Warning($"[{nameof(DiscordLink)}] Plugin has been overriden by {plugin.Title}, Previously {LinkPlugin.Title}");
-            }
-
-            LinkPlugin = plugin;
-            link.RegisterEvents(OnLinked, OnUnlinked);
-
-            Hash<string, Snowflake> data = link.GetSteamToDiscordIds();
+            Hash<string, Snowflake> data = plugin.GetSteamToDiscordIds();
             if (data != null)
             {
-                _steamIdToDiscordId.Clear();
-                _discordIdToSteamId.Clear();
                 foreach (KeyValuePair<string,Snowflake> pair in data)
                 {
                     _steamIdToDiscordId[pair.Key] = pair.Value;
@@ -85,11 +78,23 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             }
         }
 
+        /// <summary>
+        /// Removes a link plugin from the Discord Link library
+        /// </summary>
+        /// <param name="plugin"></param>
+        [LibraryFunction(nameof(RemoveLinkPlugin))]
+        public void RemoveLinkPlugin(IDiscordLinkPlugin plugin)
+        {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            
+            _linkPlugins.Remove(plugin);
+        }
+
         internal void OnPluginUnloaded(Plugin plugin)
         {
-            if (plugin == LinkPlugin)
+            if (plugin is IDiscordLinkPlugin link)
             {
-                LinkPlugin = null;
+                _linkPlugins.Remove(link);
             }
         }
 
@@ -299,8 +304,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         {
             _discordIdToSteamId[discord.Id] = player.Id;
             _steamIdToDiscordId[player.Id] = discord.Id;
-            _steamIds.Remove(player.Id);
-            _discordIds.Remove(discord.Id);
+            _steamIds.Add(player.Id);
+            _discordIds.Add(discord.Id);
             DiscordClient.GlobalCallHook(DiscordHooks.OnDiscordPlayerLinked, player, discord);
         }
 
@@ -308,6 +313,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         {
             _discordIdToSteamId.Remove(discord.Id);
             _steamIdToDiscordId.Remove(player.Id);
+            _steamIds.Remove(player.Id);
+            _discordIds.Remove(discord.Id);
             DiscordClient.GlobalCallHook(DiscordHooks.OnDiscordPlayerUnlinked, player, discord);
         }
     }
