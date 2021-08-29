@@ -97,7 +97,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
                 return;
             }
             
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands/{Id}", RequestMethod.PATCH, null, callback, error);
+            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>

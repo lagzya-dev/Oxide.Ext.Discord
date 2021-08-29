@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-
-namespace Oxide.Ext.Discord.Entities.Builders
+namespace Oxide.Ext.Discord.Builders.MessageComponents
 {
     /// <summary>
     /// Builder for Message Components
@@ -36,11 +35,14 @@ namespace Oxide.Ext.Discord.Entities.Builders
         /// </exception>
         public MessageComponentBuilder AddActionButton(ButtonStyle style, string label, string customId, bool disabled = false, DiscordEmoji emoji = null)
         {
+            if (string.IsNullOrEmpty(customId))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
+            
             if (style == ButtonStyle.Link)
             {
                 throw new Exception($"Cannot add link button as action button. Please use {nameof(AddLinkButton)} instead");
             }
-            
+
             UpdateActionRow();
             _current.Components.Add(new ButtonComponent
             {
@@ -76,6 +78,9 @@ namespace Oxide.Ext.Discord.Entities.Builders
         /// <exception cref="Exception">Thrown if the button goes outside the max number of action rows</exception>
         public MessageComponentBuilder AddLinkButton(string label, string url, bool disabled = false, DiscordEmoji emoji = null)
         {
+            if (url == null)
+                throw new ArgumentNullException(nameof(url));
+            
             UpdateActionRow();
             _current.Components.Add(new ButtonComponent
             {
@@ -99,6 +104,11 @@ namespace Oxide.Ext.Discord.Entities.Builders
         /// <returns><see cref="SelectMenuComponentBuilder"/></returns>
         public SelectMenuComponentBuilder AddSelectMenu(string customId, string placeholder, int minValues = 1, int maxValues = 1, bool disabled = false)
         {
+            if (string.IsNullOrEmpty(customId))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
+            if (string.IsNullOrEmpty(placeholder))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(placeholder));
+            
             UpdateActionRow();
             SelectMenuComponent menu = new SelectMenuComponent
             {
@@ -140,46 +150,6 @@ namespace Oxide.Ext.Discord.Entities.Builders
         public List<ActionRowComponent> Build()
         {
             return _components;
-        }
-    }
-
-    /// <summary>
-    /// Builder for Select Menus
-    /// </summary>
-    public class SelectMenuComponentBuilder
-    {
-        private readonly SelectMenuComponent _menu;
-        private readonly MessageComponentBuilder _builder;
-        
-        internal SelectMenuComponentBuilder(SelectMenuComponent menu, MessageComponentBuilder builder)
-        {
-            _menu = menu;
-            _builder = builder;
-        }
-        
-        /// <summary>
-        /// Adds an option to a select menu;
-        /// </summary>
-        /// <param name="option"></param>
-        /// <exception cref="Exception"></exception>
-        public SelectMenuComponentBuilder AddOption(SelectMenuOption option)
-        {
-            if (_menu.Options.Count >= 25)
-            {
-                throw new Exception("Select Menu Options cannot have more than 25 options");
-            }
-            
-            _menu.Options.Add(option);
-            return this;
-        }
-
-        /// <summary>
-        /// Returns the root builder
-        /// </summary>
-        /// <returns></returns>
-        public MessageComponentBuilder Build()
-        {
-            return _builder;
         }
     }
 }

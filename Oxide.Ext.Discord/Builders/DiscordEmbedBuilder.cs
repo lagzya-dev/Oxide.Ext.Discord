@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Permissions;
-
-namespace Oxide.Ext.Discord.Entities.Builders
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Builds a new DiscordEmbed

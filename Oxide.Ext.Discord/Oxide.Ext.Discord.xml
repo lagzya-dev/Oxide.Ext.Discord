@@ -225,6 +225,364 @@
             </summary>
             <param name="id">ID of the channel to remove</param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder">
+            <summary>
+            Builder to use when building application commands
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType)">
+            <summary>
+            Creates a new Application Command Builder
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="description">Description of the command</param>
+            <param name="type">Command type</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.SetEnabled(System.Boolean)">
+            <summary>
+            Set whether the command is enabled by default when the app is added to a guild
+            </summary>
+            <param name="enabled">If the command is enabled</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String)">
+            <summary>
+            Creates a new SubCommandGroup
+            SubCommandGroups contain subcommands
+            Your root command can only contain 
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="description">Description of the command</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder"/></returns>
+            <exception cref="T:System.Exception">Thrown if trying to add a subcommand group to</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommand(System.String,System.String)">
+            <summary>
+            Adds a sub command to the root command
+            </summary>
+            <param name="name">Name of the sub command</param>
+            <param name="description">Description for the sub command</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1"/></returns>
+            <exception cref="T:System.Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
+            <summary>
+            Adds a command option.
+            </summary>
+            <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
+            <param name="name">Name of the option</param>
+            <param name="description">Description for the option</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.Build">
+            <summary>
+            Returns the created command
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1">
+            <summary>
+            Builder for command options
+            </summary>
+            <typeparam name="T">Type we're building options for.</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.Required(System.Boolean)">
+            <summary>
+            Set the required state for the option
+            </summary>
+            <param name="required">If the option is required (Default: true)</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.String)">
+            <summary>
+            Adds a choice to this option of type string
+            </summary>
+            <param name="name">Name of the choice</param>
+            <param name="value">Value of the choice</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if option type is not string</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.Int32)">
+            <summary>
+            Adds a choice to this option of type int
+            </summary>
+            <param name="name">Name of the choice</param>
+            <param name="value">Value of the choice</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if option type is not int</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.Double)">
+            <summary>
+            Adds a choice to this option of type double
+            </summary>
+            <param name="name">Name of the choice</param>
+            <param name="value">Value of the choice</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if option type is not double</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.Build">
+            <summary>
+            Builds the option and returns the T previous builder
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1">
+            <summary>
+            Base Sub Command builder
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1._options">
+            <summary>
+            Options list to have options added to
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
+            <summary>
+            Adds a new option
+            </summary>
+            <param name="type">Option data type (Cannot be SubCommand or SubCommandGroup)</param>
+            <param name="name">Name of the option</param>
+            <param name="description">Description of the option</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1.Build">
+            <summary>
+            Returns the built sub command
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder">
+            <summary>
+            Builder for Sub Command Groups
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddSubCommand(System.String,System.String)">
+            <summary>
+            Adds a sub command to this sub command group
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="description">Description of the command</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1"/></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder">
+            <summary>
+            Builds a new DiscordEmbed
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddTitle(System.String)">
+            <summary>
+            Adds a title to the embed message
+            </summary>
+            <param name="title">Title to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddDescription(System.String)">
+            <summary>
+            Adds a description to the embed message
+            </summary>
+            <param name="description">description to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddUrl(System.String)">
+            <summary>
+            Adds a url to the embed message
+            </summary>
+            <param name="url"></param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddAuthor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds an author to the embed message. The author will appear above the title
+            </summary>
+            <param name="name">Name of the author</param>
+            <param name="iconUrl">Icon Url to use for the author</param>
+            <param name="url">Url to go to when the authors name is clicked on</param>
+            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddFooter(System.String,System.String,System.String)">
+            <summary>
+            Adds a footer to the embed message
+            </summary>
+            <param name="text">Text to be added to the footer</param>
+            <param name="iconUrl">Icon url to add in the footer. Appears to the left of the text</param>
+            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.UInt32)">
+            <summary>
+            Adds an int based color to the embed. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.String)">
+            <summary>
+            Adds a hex based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="color">Color in string hex format</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Exception thrown if color is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Adds a RGB based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="red">Red value between 0 - 255</param>
+            <param name="green">Green value between 0 - 255</param>
+            <param name="blue">Blue value between 0 - 255</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddBlankField(System.Boolean)">
+            <summary>
+            Adds a blank field.
+            If inline it will add a blank column.
+            If not inline will add a blank row
+            </summary>
+            <param name="inline">If the field is inline</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddField(System.String,System.String,System.Boolean)">
+            <summary>
+            Adds a new field with the name as the title and value as the value.
+            If inline will add a new column. If row will add in a new row.
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="inline"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddImage(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Adds an image to the embed. The url should point to the url of the image.
+            If using attachment image you can make the url: "attachment://{image name}.{image extension}
+            </summary>
+            <param name="url">Url for the image</param>
+            <param name="width">width of the image</param>
+            <param name="height">height of the image</param>
+            <param name="proxyUrl">Backup url for the image</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddThumbnail(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Adds a thumbnail in the top right corner of the embed
+            If using attachment image you can make the url: "attachment://{image name}.{image extension}
+            </summary>
+            <param name="url">Url for the image</param>
+            <param name="width">width of the image</param>
+            <param name="height">height of the image</param>
+            <param name="proxyUrl">Backup url for the image</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddVideo(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Adds a video to the embed
+            </summary>
+            <param name="url">Url for the video</param>
+            <param name="width">Width of the video</param>
+            <param name="height">Height of the video</param>
+            <param name="proxyUrl">Proxy Url for the video</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddProvider(System.String,System.String)">
+            <summary>
+            Adds a provider to the embed
+            </summary>
+            <param name="name">Name for the provider</param>
+            <param name="url">Url for the provider</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.Build">
+            <summary>
+            Returns the built embed
+            </summary>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder">
+            <summary>
+            Builder for Message Components
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.#ctor">
+            <summary>
+            Creates a new MessageComponentBuilder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddActionButton(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle,System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
+            <summary>
+            Adds an action button to the current action row
+            </summary>
+            <param name="style">Button Style <a href="https://discord.com/developers/docs/interactions/message-components#button-object-button-styles">Button Styles</a></param>
+            <param name="label">The text of the button</param>
+            <param name="customId">The unique id of the button. Used to identify which button was clicked</param>
+            <param name="disabled">If this button is disabled</param>
+            <param name="emoji">Emoji to display with the button</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+            <exception cref="T:System.Exception">
+                Throw if the button style is link or if the button goes outside the max number of action rows
+            </exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddDummyButton(System.String,System.Boolean)">
+            <summary>
+            Adds a dummy button that doesn't do anything
+            </summary>
+            <param name="label">The text of the button</param>
+            <param name="disabled">If this button is disabled</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+            <exception cref="T:System.Exception"> Throw if the button goes outside the max number of action rows</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddLinkButton(System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
+            <summary>
+            Adds a link button to the current action row
+            </summary>
+            <param name="label">Text on the button</param>
+            <param name="url">URL for the button</param>
+            <param name="disabled">if the button should be disabled</param>
+            <param name="emoji">Emoji to display on the button</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+            <exception cref="T:System.Exception">Thrown if the button goes outside the max number of action rows</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddSelectMenu(System.String,System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Adds a select menu to a new action row
+            </summary>
+            <param name="customId">Unique ID for the select menu</param>
+            <param name="placeholder">Text to display if no value is selected yet</param>
+            <param name="minValues">The min number of options you must select</param>
+            <param name="maxValues">The max number of options you can select</param>
+            <param name="disabled">If the select menu should be disabled</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.Build">
+            <summary>
+            Returns the built action rows
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder">
+            <summary>
+            Builder for Select Menus
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.AddOption(System.String,System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
+            <summary>
+            Adds an option to a select menu;
+            </summary>
+            <param name="label">Display text for the select option</param>
+            <param name="value">Selected value for the select option</param>
+            <param name="description">Description of the select option</param>
+            <param name="default">Default selected option</param>
+            <param name="emoji">Emoji to display with the option</param>
+            <exception cref="T:System.Exception">Throw is more than 25 options are added</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.Build">
+            <summary>
+            Returns the root builder
+            </summary>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Builders.QueryStringBuilder">
             <summary>
             Builder used to build query strings for urls
@@ -1030,7 +1388,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.DiscordClient.GlobalCallHook(System.String,System.Object[])">
             <summary>
-            Call a hook for all plugins registered to receive hook calls for this client
+            Call a hook for all plugins registered to receive hook calls for all clients
             </summary>
             <param name="hookName"></param>
             <param name="args"></param>
@@ -1597,7 +1955,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/topics/oauth2#application-object">Application Structure</a>
+            Represents <a href="https://discord.com/developers/docs/resources/application#application-object">Application Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Id">
@@ -1705,6 +2063,16 @@
             <param name="callback">Callback with list of application commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Fetch global command by ID
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-command">Get Global Application Command</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="commandId">ID of command to get</param>
+            <param name="callback">Callback with list of application commands</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.CreateGlobalCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a new global command.
@@ -1734,6 +2102,17 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="guildId">ID of the guild to get commands for</param>
+            <param name="callback">Callback with a list of guild application commands</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Get guild command by Id
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command">Get Guild Application Command</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">ID of the guild to get commands for</param>
+            <param name="commandId">ID of the command to get</param>
             <param name="callback">Callback with a list of guild application commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -2359,335 +2738,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder">
-            <summary>
-            Builder to use when building application commands
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType)">
-            <summary>
-            Creates a new Application Command Builder
-            </summary>
-            <param name="name">Name of the command</param>
-            <param name="description">Description of the command</param>
-            <param name="type">Command type</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.SetDefaultEnabled(System.Boolean)">
-            <summary>
-            Set whether the command is enabled by default when the app is added to a guild
-            </summary>
-            <param name="enabled">If the command is enabled</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String)">
-            <summary>
-            Creates a new SubCommandGroup
-            SubCommandGroups contain subcommands
-            Your root command can only contain 
-            </summary>
-            <param name="name">Name of the command</param>
-            <param name="description">Description of the command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandSubCommandGroupBuilder"/></returns>
-            <exception cref="T:System.Exception">Thrown if trying to add a subcommand group to</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.AddSubCommand(System.String,System.String)">
-            <summary>
-            Adds a sub command to the root command
-            </summary>
-            <param name="name">Name of the sub command</param>
-            <param name="description">Description for the sub command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.SubCommandOptionsBuilder"/></returns>
-            <exception cref="T:System.Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.AddOptions">
-            <summary>
-            Creates an option builder
-            </summary>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1"/></returns>
-            <exception cref="T:System.Exception">Thrown if SubCommand or SubCommandGroup were previously specified</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandBuilder.Build">
-            <summary>
-            Returns the created command
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandSubCommandGroupBuilder">
-            <summary>
-            Build for Sub Command Groups
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.ApplicationCommandSubCommandGroupBuilder.AddSubCommand(System.String,System.String)">
-            <summary>
-            Adds a sub command to this sub command group
-            </summary>
-            <param name="name">Name of the command</param>
-            <param name="description">Description of the command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.SubCommandGroupOptionsBuilder"/></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1">
-            <summary>
-            Base Sub Command builder
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1.Options">
-            <summary>
-            Options list to have options added to
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1.Builder">
-            <summary>
-            Builder that is adding options
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,System.Boolean,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice})">
-            <summary>
-            Adds a new option
-            </summary>
-            <param name="type">Option data type (Cannot be SubCommand or SubCommandGroup)</param>
-            <param name="name">Name of the option</param>
-            <param name="description">Description of the option</param>
-            <param name="required">Is the option required</param>
-            <param name="choices">Predefined choices for the option (Only for Integer and String types)</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.BaseSubCommandOptionsBuilder`1.Build">
-            <summary>
-            Returns the builder
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Builders.SubCommandOptionsBuilder">
-            <summary>
-            Options Builder for SubCommand
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Builders.SubCommandGroupOptionsBuilder">
-            <summary>
-            Options Builder for SubCommandGroup
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Builders.CommandOptionBuilder">
-            <summary>
-            Options builder for ApplicationCommand builder
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder">
-            <summary>
-            Builds a new DiscordEmbed
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddTitle(System.String)">
-            <summary>
-            Adds a title to the embed message
-            </summary>
-            <param name="title">Title to add</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddDescription(System.String)">
-            <summary>
-            Adds a description to the embed message
-            </summary>
-            <param name="description">description to add</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddUrl(System.String)">
-            <summary>
-            Adds a url to the embed message
-            </summary>
-            <param name="url"></param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddAuthor(System.String,System.String,System.String,System.String)">
-            <summary>
-            Adds an author to the embed message. The author will appear above the title
-            </summary>
-            <param name="name">Name of the author</param>
-            <param name="iconUrl">Icon Url to use for the author</param>
-            <param name="url">Url to go to when the authors name is clicked on</param>
-            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddFooter(System.String,System.String,System.String)">
-            <summary>
-            Adds a footer to the embed message
-            </summary>
-            <param name="text">Text to be added to the footer</param>
-            <param name="iconUrl">Icon url to add in the footer. Appears to the left of the text</param>
-            <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddColor(System.UInt32)">
-            <summary>
-            Adds an int based color to the embed. Color appears as a bar on the left side of the message
-            </summary>
-            <param name="color"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddColor(System.String)">
-            <summary>
-            Adds a hex based color. Color appears as a bar on the left side of the message
-            </summary>
-            <param name="color">Color in string hex format</param>
-            <returns>This</returns>
-            <exception cref="T:System.Exception">Exception thrown if color is outside of range</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddColor(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Adds a RGB based color. Color appears as a bar on the left side of the message
-            </summary>
-            <param name="red">Red value between 0 - 255</param>
-            <param name="green">Green value between 0 - 255</param>
-            <param name="blue">Blue value between 0 - 255</param>
-            <returns>This</returns>
-            <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddBlankField(System.Boolean)">
-            <summary>
-            Adds a blank field.
-            If inline it will add a blank column.
-            If not inline will add a blank row
-            </summary>
-            <param name="inline">If the field is inline</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddField(System.String,System.String,System.Boolean)">
-            <summary>
-            Adds a new field with the name as the title and value as the value.
-            If inline will add a new column. If row will add in a new row.
-            </summary>
-            <param name="name"></param>
-            <param name="value"></param>
-            <param name="inline"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddImage(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
-            <summary>
-            Adds an image to the embed. The url should point to the url of the image.
-            If using attachment image you can make the url: "attachment://{image name}.{image extension}
-            </summary>
-            <param name="url">Url for the image</param>
-            <param name="width">width of the image</param>
-            <param name="height">height of the image</param>
-            <param name="proxyUrl">Backup url for the image</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddThumbnail(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
-            <summary>
-            Adds a thumbnail in the top right corner of the embed
-            If using attachment image you can make the url: "attachment://{image name}.{image extension}
-            </summary>
-            <param name="url">Url for the image</param>
-            <param name="width">width of the image</param>
-            <param name="height">height of the image</param>
-            <param name="proxyUrl">Backup url for the image</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddVideo(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
-            <summary>
-            Adds a video to the embed
-            </summary>
-            <param name="url">Url for the video</param>
-            <param name="width">Width of the video</param>
-            <param name="height">Height of the video</param>
-            <param name="proxyUrl">Proxy Url for the video</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.AddProvider(System.String,System.String)">
-            <summary>
-            Adds a provider to the embed
-            </summary>
-            <param name="name">Name for the provider</param>
-            <param name="url">Url for the provider</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.DiscordEmbedBuilder.Build">
-            <summary>
-            Returns the built embed
-            </summary>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder">
-            <summary>
-            Builder for Message Components
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.#ctor">
-            <summary>
-            Creates a new MessageComponentBuilder
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.AddActionButton(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle,System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
-            <summary>
-            Adds an action button to the current action row
-            </summary>
-            <param name="style">Button Style <a href="https://discord.com/developers/docs/interactions/message-components#button-object-button-styles">Button Styles</a></param>
-            <param name="label">The text of the button</param>
-            <param name="customId">The unique id of the button. Used to identify which button was clicked</param>
-            <param name="disabled">If this button is disabled</param>
-            <param name="emoji">Emoji to display with the button</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder"/></returns>
-            <exception cref="T:System.Exception">
-                Throw if the button style is link or if the button goes outside the max number of action rows
-            </exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.AddDummyButton(System.String,System.Boolean)">
-            <summary>
-            Adds a dummy button that doesn't do anything
-            </summary>
-            <param name="label">The text of the button</param>
-            <param name="disabled">If this button is disabled</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder"/></returns>
-            <exception cref="T:System.Exception"> Throw if the button goes outside the max number of action rows</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.AddLinkButton(System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
-            <summary>
-            Adds a link button to the current action row
-            </summary>
-            <param name="label">Text on the button</param>
-            <param name="url">URL for the button</param>
-            <param name="disabled">if the button should be disabled</param>
-            <param name="emoji">Emoji to display on the button</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder"/></returns>
-            <exception cref="T:System.Exception">Thrown if the button goes outside the max number of action rows</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.AddSelectMenu(System.String,System.String,System.Int32,System.Int32,System.Boolean)">
-            <summary>
-            Adds a select menu to a new action row
-            </summary>
-            <param name="customId">Unique ID for the select menu</param>
-            <param name="placeholder">Text to display if no value is selected yet</param>
-            <param name="minValues">The min number of options you must select</param>
-            <param name="maxValues">The max number of options you can select</param>
-            <param name="disabled">If the select menu should be disabled</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Builders.SelectMenuComponentBuilder"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.MessageComponentBuilder.Build">
-            <summary>
-            Returns the built action rows
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Builders.SelectMenuComponentBuilder">
-            <summary>
-            Builder for Select Menus
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.SelectMenuComponentBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption)">
-            <summary>
-            Adds an option to a select menu;
-            </summary>
-            <param name="option"></param>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Builders.SelectMenuComponentBuilder.Build">
-            <summary>
-            Returns the root builder
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
             <summary>

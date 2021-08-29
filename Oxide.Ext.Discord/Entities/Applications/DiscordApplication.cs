@@ -14,7 +14,7 @@ using Oxide.Ext.Discord.Helpers.Cdn;
 namespace Oxide.Ext.Discord.Entities.Applications
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/topics/oauth2#application-object">Application Structure</a>
+    /// Represents <a href="https://discord.com/developers/docs/resources/application#application-object">Application Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordApplication
@@ -144,6 +144,19 @@ namespace Oxide.Ext.Discord.Entities.Applications
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.GET, null, callback, error);
         }
+
+        /// <summary>
+        /// Fetch global command by ID
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-command">Get Global Application Command</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="commandId">ID of command to get</param>
+        /// <param name="callback">Callback with list of application commands</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetGlobalCommand(DiscordClient client, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/applications/{Id}/commands/{commandId}", RequestMethod.GET, null, callback, error);
+        }
         
         /// <summary>
         /// Create a new global command.
@@ -184,6 +197,20 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public void GetGuildCommands(DiscordClient client, Snowflake guildId, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.GET, null, callback, error);
+        }
+
+        /// <summary>
+        /// Get guild command by Id
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command">Get Guild Application Command</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="guildId">ID of the guild to get commands for</param>
+        /// <param name="commandId">ID of the command to get</param>
+        /// <param name="callback">Callback with a list of guild application commands</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetGuildCommand(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
