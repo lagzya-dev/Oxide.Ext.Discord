@@ -70,7 +70,7 @@ This is a list of all intents and which hooks become available when using a spec
   * [OnDiscordGuildMessageCreated](Hooks.md#ondiscordguildmessagecreated)
   * [OnDiscordGuildMessageUpdated](Hooks.md#ondiscordguildmessageupdated)
   * [OnDiscordGuildMessageDeleted](Hooks.md#ondiscordguildmessagedeleted)
-  * [OnDiscordGuildMessagesBulkDeleted](Hooks.md#ondiscordguildmessagebulkdeleted)
+  * [OnDiscordGuildMessagesBulkDeleted](Hooks.md#ondiscordguildmessagesbulkdeleted)
 
 * Guild Message Reactions (`GatewayIntents.GuildMessageReactions`)
   * [OnDiscordGuildMessageReactionAdded](Hooks.md#ondiscordguildmessagereactionadded)

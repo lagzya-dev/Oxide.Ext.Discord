@@ -496,18 +496,6 @@ namespace Oxide.Ext.Discord.WebSockets
                     HandleDispatchInteractionCreate(payload);
                     break;
 
-                case DispatchCode.ApplicationCommandCreated:
-                    HandleDispatchApplicationCommandCreate(payload);
-                    break;                
-                
-                case DispatchCode.ApplicationCommandUpdated:
-                    HandleDispatchApplicationCommandUpdate(payload);
-                    break;                
-                
-                case DispatchCode.ApplicationCommandDeleted:
-                    HandleDispatchApplicationCommandDelete(payload);
-                    break;                
-                
                 case DispatchCode.GuildJoinRequestDeleted:
                     HandleGuildJoinRequestDelete(payload);
                     break;
@@ -1369,33 +1357,6 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.CallHook(DiscordHooks.OnDiscordInteractionCreated, interaction);
         }
 
-        //https://discord.com/developers/docs/topics/gateway#application-command-create
-        private void HandleDispatchApplicationCommandCreate(EventPayload payload)
-        {
-            DiscordApplicationCommand commandEvent = payload.EventData.ToObject<DiscordApplicationCommand>();
-            DiscordGuild guild = _client.GetGuild(commandEvent.GuildId); 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchApplicationCommandCreate)} Guild ID: {commandEvent.GuildId.ToString()} Guild Name: {guild?.Name} Command ID: {commandEvent.Id.ToString()}");
-            _client.CallHook(DiscordHooks.OnDiscordApplicationCommandCreated, commandEvent, guild);
-        }
-        
-        //https://discord.com/developers/docs/topics/gateway#application-command-update
-        private void HandleDispatchApplicationCommandUpdate(EventPayload payload)
-        {
-            DiscordApplicationCommand commandEvent = payload.EventData.ToObject<DiscordApplicationCommand>();
-            DiscordGuild guild = _client.GetGuild(commandEvent.GuildId); 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchApplicationCommandUpdate)} Guild ID: {commandEvent.GuildId.ToString()} Guild Name: {guild?.Name} Command ID: {commandEvent.Id.ToString()}");
-            _client.CallHook(DiscordHooks.OnDiscordApplicationCommandUpdated, commandEvent, guild);
-        }
-        
-        //https://discord.com/developers/docs/topics/gateway#application-command-delete
-        private void HandleDispatchApplicationCommandDelete(EventPayload payload)
-        {
-            DiscordApplicationCommand commandEvent = payload.EventData.ToObject<DiscordApplicationCommand>();
-            DiscordGuild guild = _client.GetGuild(commandEvent.GuildId); 
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchApplicationCommandDelete)} Guild ID: {commandEvent.GuildId.ToString()} Guild Name: {guild?.Name} Command ID: {commandEvent.Id.ToString()}");
-            _client.CallHook(DiscordHooks.OnDiscordApplicationCommandDeleted, commandEvent, guild);
-        }
-        
         //TODO: Implement once docs are available
         private void HandleGuildJoinRequestDelete(EventPayload payload)
         {

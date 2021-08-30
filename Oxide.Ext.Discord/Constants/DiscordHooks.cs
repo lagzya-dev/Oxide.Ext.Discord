@@ -576,31 +576,7 @@ namespace Oxide.Ext.Discord.Constants
         /// }
         /// </code>
         public const string OnDiscordIntegrationDeleted = nameof(OnDiscordIntegrationDeleted);
-        
-        /// <code>
-        /// void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
-        /// {
-        ///     Puts("OnDiscordApplicationCommandCreated Works!");
-        /// }
-        /// </code>
-        public const string OnDiscordApplicationCommandCreated = nameof(OnDiscordApplicationCommandCreated);
-        
-        /// <code>
-        /// void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
-        /// {
-        ///     Puts("OnDiscordApplicationCommandUpdated Works!");
-        /// }
-        /// </code>
-        public const string OnDiscordApplicationCommandUpdated = nameof(OnDiscordApplicationCommandUpdated);
-        
-        /// <code>
-        /// void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, DiscordGuild guild)
-        /// {
-        ///     Puts("OnDiscordApplicationCommandDeleted Works!");
-        /// }
-        /// </code>
-        public const string OnDiscordApplicationCommandDeleted = nameof(OnDiscordApplicationCommandDeleted);
-        
+
         /// <code>
         /// void OnDiscordGuildThreadCreated(DiscordChannel thread, DiscordGuild guild)
         /// {
