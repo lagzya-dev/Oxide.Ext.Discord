@@ -3271,7 +3271,7 @@
             <param name="callback">Callback once the action is complete</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Permissions.PermissionFlags,Oxide.Ext.Discord.Entities.Permissions.PermissionFlags,Oxide.Ext.Discord.Entities.Channels.PermissionType,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{Oxide.Ext.Discord.Entities.Permissions.PermissionFlags},System.Nullable{Oxide.Ext.Discord.Entities.Permissions.PermissionFlags},Oxide.Ext.Discord.Entities.Channels.PermissionType,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edit the channel permission overwrites for a user or role in a channel.
             Only usable for guild channels.
@@ -4594,7 +4594,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationCreatedEvent">
             <summary>
-            Represents Integration Create Structure TODO:Add URL Once Published
+            Represents a <a href="https://discord.com/developers/docs/topics/gateway#integration-create-integration-create-event-additional-fields">Integration Create Structure</a> 
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationCreatedEvent.GuildId">
@@ -4604,7 +4604,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDeletedEvent">
             <summary>
-            Represents Integration Delete Structure TODO:Add URL Once Published
+            Represents a <a href="https://discord.com/developers/docs/topics/gateway#integration-delete-integration-delete-event-fields">Integration Delete Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDeletedEvent.Id">
@@ -4624,7 +4624,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationUpdatedEvent">
             <summary>
-            Represents Integration Update Structure TODO:Add URL Once Published
+            Represents a <a href="https://discord.com/developers/docs/topics/gateway#integration-update-integration-update-event-additional-fields">Integration Update Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationUpdatedEvent.GuildId">
@@ -6563,6 +6563,7 @@
             <summary>
             The channel to move the user to
             Requires MOVE_MEMBERS Permission
+            Setting to null will remove that member from a voice channel
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMFALevel">
@@ -12323,13 +12324,6 @@
             </summary>
             <param name="plugin"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(System.Object)">
-            <summary>
-            Returns if the specified ID is linked
-            </summary>
-            <param name="id">ID of the steam or discord ID. Valid Types are string, ulong, and Snowflake</param>
-            <returns>True if the ID is linked; false otherwise</returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(System.String)">
             <summary>
             Returns if the specified ID is linked
@@ -12344,11 +12338,32 @@
             <param name="discordId">Discord ID of the player</param>
             <returns>True if the ID is linked; false otherwise</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns if the specified ID is linked
+            </summary>
+            <param name="player">Player to check if linked</param>
+            <returns>True if the player is linked; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+            <summary>
+            Returns if the specified ID is linked
+            </summary>
+            <param name="user">Discord user to check</param>
+            <returns>True if the user is linked; false otherwise</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamId(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns the Steam ID of the given Discord ID if there is a link
             </summary>
-            <param name="discordId"></param>
+            <param name="discordId">Discord ID to get steam ID for</param>
+            <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamId(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+            <summary>
+            Returns the Steam ID of the given Discord ID if there is a link
+            </summary>
+            <param name="user"><see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> to get steam Id for</param>
             <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetPlayer(Oxide.Ext.Discord.Entities.Snowflake)">
@@ -12388,7 +12403,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedMember(System.String,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild)">
             <summary>
-            Returns a minimal Discord User
+            Returns a linked guild member for the matching steam id in the given guild
             </summary>
             <param name="steamId">ID of the in game player</param>
             <param name="guild">Guild the member is in</param>
@@ -12396,7 +12411,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedMember(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild)">
             <summary>
-            Returns a minimal Discord User
+            Returns a linked guild member for the matching <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> in the given guild
             </summary>
             <param name="player">Player to get the Discord User for</param>
             <param name="guild">Guild the member is in</param>
@@ -12432,6 +12447,22 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.OnLinked(Oxide.Core.Plugins.Plugin,Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+            <summary>
+            Called by a link plugin when a link occured
+            </summary>
+            <param name="plugin">Plugin that initiated the link</param>
+            <param name="player">Player being linked</param>
+            <param name="discord">DiscordUser being linked</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.OnUnlinked(Oxide.Core.Plugins.Plugin,Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+            <summary>
+            Called by a link plugin when an unlink occured
+            </summary>
+            <param name="plugin">Plugin that is unlinking</param>
+            <param name="player">Player being unlinked</param>
+            <param name="discord">DiscordUser being unlinked</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin">
             <summary>
             Represents a plugin that supports Discord Link library
@@ -12444,16 +12475,9 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.GetSteamToDiscordIds">
             <summary>
-            Returns a Hash of Steam ID's to Discord ID's
+            Returns a <see cref="T:System.Collections.Generic.IDictionary`2"/> of Steam ID's to Discord ID's
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.RegisterEvents(System.Action{Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Users.DiscordUser})">
-            <summary>
-            Called on a plugin to register events to be called when that plugin links or unlinks a Steam ID and Discord ID
-            </summary>
-            <param name="onLinked">Action called by link plugin when a player and discord user are linked</param>
-            <param name="onUnlinked">Action called by link plugin when a player and discord user are unlinked</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription">
             <summary>

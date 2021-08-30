@@ -1005,7 +1005,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
         
-        //TODO: Add Link
+        //https://discord.com/developers/docs/topics/gateway#integration-create
         private void HandleDispatchIntegrationCreate(EventPayload payload)
         {
             IntegrationCreatedEvent integration = payload.EventData.ToObject<IntegrationCreatedEvent>();
@@ -1014,7 +1014,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.CallHook(DiscordHooks.OnDiscordGuildIntegrationCreated, integration, guild);
         }
 
-        //TODO: Add Link
+        //https://discord.com/developers/docs/topics/gateway#integration-update
         private void HandleDispatchIntegrationUpdate(EventPayload payload)
         {
             IntegrationUpdatedEvent integration = payload.EventData.ToObject<IntegrationUpdatedEvent>();
@@ -1023,7 +1023,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.CallHook(DiscordHooks.OnDiscordGuildIntegrationUpdated, integration, guild);
         }
 
-        //TODO: Add Link
+        //https://discord.com/developers/docs/topics/gateway#integration-delete
         private void HandleDispatchIntegrationDelete(EventPayload payload)
         {
             IntegrationDeletedEvent integration = payload.EventData.ToObject<IntegrationDeletedEvent>();
@@ -1279,9 +1279,20 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             VoiceState voice = payload.EventData.ToObject<VoiceState>();
             DiscordGuild guild = _client.GetGuild(voice.GuildId);
-            DiscordChannel channel = _client.GetChannel(voice.ChannelId, voice.GuildId);
+            VoiceState existing = guild.VoiceStates[voice.UserId];
+            DiscordChannel channel = voice.ChannelId.HasValue ? _client.GetChannel(voice.ChannelId.Value, voice.GuildId) : null;
 
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchVoiceStateUpdate)} Guild ID: {voice.GuildId.ToString()} Guild Name: {guild?.Name} Channel ID: {voice.ChannelId.ToString()} Channel Name: {channel?.Name} User ID: {voice.UserId.ToString()}");
+            
+            if (existing != null)
+            {
+                existing.Update(voice);
+                voice = existing;
+            }
+            else
+            {
+                guild.VoiceStates[voice.UserId] = voice;
+            }
             
             if (voice.GuildId.HasValue)
             {

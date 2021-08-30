@@ -32,9 +32,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
                 throw new ArgumentException("Value cannot be null or empty.", nameof(label));
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(value));
-            if (string.IsNullOrEmpty(description))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(description));
-            
+
             if (_menu.Options.Count >= 25)
             {
                 throw new Exception("Select Menu Options cannot have more than 25 options");

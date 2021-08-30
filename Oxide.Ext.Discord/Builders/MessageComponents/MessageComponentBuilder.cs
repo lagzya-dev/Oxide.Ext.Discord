@@ -35,9 +35,6 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// </exception>
         public MessageComponentBuilder AddActionButton(ButtonStyle style, string label, string customId, bool disabled = false, DiscordEmoji emoji = null)
         {
-            if (string.IsNullOrEmpty(customId))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
-            
             if (style == ButtonStyle.Link)
             {
                 throw new Exception($"Cannot add link button as action button. Please use {nameof(AddLinkButton)} instead");
@@ -106,9 +103,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         {
             if (string.IsNullOrEmpty(customId))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
-            if (string.IsNullOrEmpty(placeholder))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(placeholder));
-            
+
             UpdateActionRow();
             SelectMenuComponent menu = new SelectMenuComponent
             {
