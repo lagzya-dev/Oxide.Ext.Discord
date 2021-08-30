@@ -95,7 +95,7 @@
             Application reference for this bot
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.BotClient.Bot">
+        <member name="P:Oxide.Ext.Discord.BotClient.BotUser">
             <summary>
             Bot User
             </summary>
@@ -10004,7 +10004,7 @@
             </summary>
             <param name="value">String to parse</param>
             <param name="snowflake">Snowflake to return</param>
-            <returns>True is parse succeeded; false otherwise</returns>
+            <returns>True if parse succeeded; false otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Snowflake.Equals(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>

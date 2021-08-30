@@ -564,7 +564,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             _sessionId = ready.SessionId;
             _client.Application = ready.Application;
-            _client.Bot = ready.User;
+            _client.BotUser = ready.User;
             _webSocket.ResetRetries();
             _logger.Info($"Your bot was found in {ready.Guilds.Count.ToString()} Guilds!");
 

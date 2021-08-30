@@ -66,7 +66,7 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         /// <param name="value">String to parse</param>
         /// <param name="snowflake">Snowflake to return</param>
-        /// <returns>True is parse succeeded; false otherwise</returns>
+        /// <returns>True if parse succeeded; false otherwise</returns>
         public static bool TryParse(string value, out Snowflake snowflake)
         {
             if(ulong.TryParse(value, out ulong id))

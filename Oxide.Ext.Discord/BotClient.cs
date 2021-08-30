@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Bot User
         /// </summary>
-        public DiscordUser Bot { get; internal set; }
+        public DiscordUser BotUser { get; internal set; }
 
         /// <summary>
         /// Rest handler for all discord API calls
@@ -116,7 +116,7 @@ namespace Oxide.Ext.Discord
             }
 
             bot.AddClient(client);
-            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {client.Owner.Name} to bot {bot.Bot?.GetFullUserName}");
+            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {client.Owner.Name} to bot {bot.BotUser?.GetFullUserName}");
             return bot;
         }
 
