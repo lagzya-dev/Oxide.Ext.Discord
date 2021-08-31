@@ -1212,30 +1212,6 @@
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordApplicationCommandCreated">
-            <code>
-            void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
-            {
-                Puts("OnDiscordApplicationCommandCreated Works!");
-            }
-            </code>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordApplicationCommandUpdated">
-            <code>
-            void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
-            {
-                Puts("OnDiscordApplicationCommandUpdated Works!");
-            }
-            </code>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordApplicationCommandDeleted">
-            <code>
-            void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, DiscordGuild guild)
-            {
-                Puts("OnDiscordApplicationCommandDeleted Works!");
-            }
-            </code>
-        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildThreadCreated">
             <code>
             void OnDiscordGuildThreadCreated(DiscordChannel thread, DiscordGuild guild)
@@ -13311,21 +13287,6 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.InteractionCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#interaction-create">INTERACTION_CREATE</a> gateway event
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ApplicationCommandCreated">
-            <summary>
-            Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-create">APPLICATION_COMMAND_CREATE</a> gateway event
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ApplicationCommandUpdated">
-            <summary>
-            Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-update">APPLICATION_COMMAND_UPDATE</a> gateway event
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ApplicationCommandDeleted">
-            <summary>
-            Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-delete">APPLICATION_COMMAND_DELETE</a> gateway event
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildJoinRequestDeleted">
