@@ -1,7 +1,12 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Entities.Users;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
@@ -27,10 +32,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// The type of the invoked command
         /// </summary>
         [JsonProperty("type")]
-        public CommandType Type { get; set; }
+        public ApplicationCommandType? Type { get; set; }
         
         /// <summary>
-        /// converted users + roles + channels
+        /// Converted <see cref="DiscordUser"/>s, <see cref="DiscordRole"/>s, <see cref="DiscordChannel"/>s, <see cref="GuildMember"/>s, <see cref="DiscordMessage"/>s
         /// </summary>
         [JsonProperty("resolved")]
         public InteractionDataResolved Resolved { get; set; }
@@ -52,6 +57,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("component_type")]
         public MessageComponentType? ComponentType { get; set; }
+        
+        /// <summary>
+        /// For components, the values for the select menu component
+        /// </summary>
+        [JsonProperty("values")]
+        public List<SelectMenuOption> Values { get; set; }
         
         /// <summary>
         /// Id the of user or message targeted by a user or message command

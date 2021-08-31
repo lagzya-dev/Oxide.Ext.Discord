@@ -224,22 +224,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#interaction-create">INTERACTION_CREATE</a> gateway event
         /// </summary>
         [Description("INTERACTION_CREATE")] InteractionCreated,
-        
-        /// <summary>
-        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-create">APPLICATION_COMMAND_CREATE</a> gateway event
-        /// </summary>
-        [Description("APPLICATION_COMMAND_CREATE")] ApplicationCommandCreated,
-        
-        /// <summary>
-        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-update">APPLICATION_COMMAND_UPDATE</a> gateway event
-        /// </summary>
-        [Description("APPLICATION_COMMAND_UPDATE")] ApplicationCommandUpdated,
-        
-        /// <summary>
-        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-delete">APPLICATION_COMMAND_DELETE</a> gateway event
-        /// </summary>
-        [Description("APPLICATION_COMMAND_DELETE")] ApplicationCommandDeleted,
-        
+
         /// <summary>
         /// Represents the <a href="">GUILD_JOIN_REQUEST_DELETE</a> gateway event
         /// </summary>

@@ -47,6 +47,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         
         /// <summary>
         /// The sub command option is a Mentionable
+        /// Includes Users and Roles
         /// </summary>
         Mentionable = 9,
         

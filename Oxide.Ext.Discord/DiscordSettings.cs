@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord
         /// Discord Extension Logging Level.
         /// See <see cref="LogLevel"/>
         /// </summary>
-        public LogLevel LogLevel = LogLevel.Info;
+        public DiscordLogLevel LogLevel = DiscordLogLevel.Info;
         
         /// <summary>
         /// Intents that your bot needs to work

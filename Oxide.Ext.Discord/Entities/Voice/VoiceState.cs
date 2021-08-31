@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// The channel id this user is connected to
         /// </summary>
         [JsonProperty("channel_id")]
-        public Snowflake ChannelId { get; set; }
+        public Snowflake? ChannelId { get; set; }
 
         /// <summary>
         /// The user id this voice state is for
@@ -92,6 +92,30 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// Whether this user is muted by the current user
         /// </summary>
         [JsonProperty("request_to_speak_timestamp")]
-        public DateTime? RequestToSpeakTimestamp { get; set; } 
+        public DateTime? RequestToSpeakTimestamp { get; set; }
+
+        internal void Update(VoiceState state)
+        {
+            if (state.ChannelId != ChannelId)
+                ChannelId = state.ChannelId;
+
+            if (state.SessionId != SessionId)
+                SessionId = state.Id;
+
+            Deaf = state.Deaf;
+            Mute = state.Mute;
+            SelfDeaf = state.SelfDeaf;
+            SelfMute = state.SelfMute;
+
+            if (state.SelfStream != SelfStream)
+                SelfStream = state.SelfStream;
+
+            SelfVideo = state.SelfVideo;
+            Suppress = state.Suppress;
+
+            if (state.RequestToSpeakTimestamp != RequestToSpeakTimestamp)
+                RequestToSpeakTimestamp = state.RequestToSpeakTimestamp;
+
+        }
     }
 }

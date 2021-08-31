@@ -42,17 +42,17 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// JSON Serialization of Data 
         /// </summary>
-        public byte[] Contents { get; }
-        
+        public byte[] Contents { get; set; }
+
         /// <summary>
         /// Attachments for a request
         /// </summary>
-        internal List<IMultipartSection> MultipartSections { get; }
-        
+        internal List<IMultipartSection> MultipartSections { get; set; }
+
         /// <summary>
         /// Multipart Boundary
         /// </summary>
-        public string Boundary { get; }
+        public string Boundary { get; set; }
 
         /// <summary>
         /// Response from the request
@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.Rest
         
         private const string UrlBase = "https://discord.com/api";
         private const string ApiVersion = "v9";
-        private const int RequestMaxLength = 15;
+        private const int TimeoutDuration = 15;
 
         private readonly string _authHeader;
         private byte _retries;
@@ -115,26 +115,6 @@ namespace Oxide.Ext.Discord.Rest
             Callback = callback;
             OnError = onError;
             _logger = logger;
-
-            if (Data != null)
-            {
-                if (Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
-                {
-                    MultipartSections = new List<IMultipartSection> {new MultipartFormSection("payload_json", Data, "application/json")};
-                    for (int index = 0; index < attachments.FileAttachments.Count; index++)
-                    {
-                        MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
-                        MultipartSections.Add(new MultipartFileSection($"file{(index+1).ToString()}", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
-                    }
-
-                    Boundary = Guid.NewGuid().ToString().Replace("-", "");
-                    Contents = GetMultipartFormData();
-                }
-                else
-                {
-                    Contents = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Data, DiscordExtension.ExtensionSerializeSettings));
-                }
-            }
         }
 
         /// <summary>
@@ -219,10 +199,12 @@ namespace Oxide.Ext.Discord.Rest
             HttpWebRequest req = (HttpWebRequest) WebRequest.Create(RequestUrl);
             req.Method = Method.ToString();
             req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})";
-            req.Timeout = RequestMaxLength * 1000;
+            req.Timeout = TimeoutDuration * 1000;
             req.ContentLength = 0;
             req.Headers.Set("Authorization", _authHeader);
             req.ContentType = MultipartSections == null ? "application/json" : $"multipart/form-data;boundary=\"{Boundary}\"";
+
+            SetRequestBody();
             
             return req;
         }
@@ -278,6 +260,31 @@ namespace Oxide.Ext.Discord.Rest
             data.AddRange(NewLine);
             data.AddRange(section.Data);
         }
+        
+        private void SetRequestBody()
+        {
+            if (Data == null || Contents != null)
+            {
+                return;
+            }
+            
+            if (Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
+            {
+                MultipartSections = new List<IMultipartSection> {new MultipartFormSection("payload_json", Data, "application/json")};
+                for (int index = 0; index < attachments.FileAttachments.Count; index++)
+                {
+                    MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
+                    MultipartSections.Add(new MultipartFileSection($"file{(index + 1).ToString()}", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
+                }
+
+                Boundary = Guid.NewGuid().ToString().Replace("-", "");
+                Contents = GetMultipartFormData();
+            }
+            else
+            {
+                Contents = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Data, DiscordExtension.ExtensionSerializeSettings));
+            }
+        }
 
         /// <summary>
         /// Closes the request and removes it from the bucket
@@ -320,7 +327,7 @@ namespace Oxide.Ext.Discord.Rest
                 return false;
             }
 
-            return (DateTime.UtcNow - StartTime.Value).TotalSeconds > RequestMaxLength;
+            return (DateTime.UtcNow - StartTime.Value).TotalSeconds > TimeoutDuration;
         }
 
         private void WriteRequestData(WebRequest request)

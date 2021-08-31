@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Version number of the extension
         /// </summary>
-        private static readonly VersionNumber ExtensionVersion = new VersionNumber(2, 0, 0);
+        private static readonly VersionNumber ExtensionVersion = new VersionNumber(2, 0, 1);
         
         /// <summary>
         /// Global logger for areas that aren't part of a client connection
@@ -80,7 +80,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnModLoad()
         {
-            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new Logger(LogLevel.Warning) : new Logger(LogLevel.Debug);
+            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new Logger(DiscordLogLevel.Warning) : new Logger(DiscordLogLevel.Debug);
             
             GlobalLogger.Info($"Using Discord Extension Version: {GetExtensionVersion}");
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>

@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#buttons">Button Component</a> within discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ButtonComponent : BaseComponent
+    public class ButtonComponent : BaseInteractableComponent
     {
         /// <summary>
         /// Style for the component
@@ -27,13 +27,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// </summary>
         [JsonProperty("emoji")]
         public DiscordEmoji Emoji { get; set; }
-
-        /// <summary>
-        /// A developer-defined identifier for the button
-        /// Max 100 characters
-        /// </summary>
-        [JsonProperty("custom_id")]
-        public string CustomId { get; set; }
 
         /// <summary>
         /// A url for link-style buttons

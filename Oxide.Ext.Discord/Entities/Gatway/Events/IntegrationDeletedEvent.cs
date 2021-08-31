@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
     /// <summary>
-    /// Represents Integration Delete Structure TODO:Add URL Once Published
+    /// Represents a <a href="https://discord.com/developers/docs/topics/gateway#integration-delete-integration-delete-event-fields">Integration Delete Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class IntegrationDeletedEvent
