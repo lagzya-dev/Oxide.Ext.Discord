@@ -2717,7 +2717,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
             <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel">Guild Channel Create Structure</a>
+            Represents a <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params">Guild Channel Create Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Name">

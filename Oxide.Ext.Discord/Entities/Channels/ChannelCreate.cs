@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Channels
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel">Guild Channel Create Structure</a>
+    /// Represents a <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params">Guild Channel Create Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ChannelCreate
@@ -64,7 +64,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// ID of the parent category for a channel (each parent category can contain up to 50 channels)
         /// </summary>
         [JsonProperty("parent_id")]
-        public Snowflake ParentId { get; set; }
+        public Snowflake? ParentId { get; set; }
         
         /// <summary>
         /// Whether the channel is nsfw
