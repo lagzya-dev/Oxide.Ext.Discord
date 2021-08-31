@@ -78,6 +78,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 _steamIds.Add(pair.Key);
                 _discordIds.Add(pair.Value);
             }
+            
+            _logger.Debug($"{plugin.Title} registered as a DiscordLink plugin");
         }
 
         /// <summary>
@@ -329,8 +331,9 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 _logger.Error($"{plugin.Name} has not been added as a link plugin and cannot set a link");
                 return;
             }
-
-            _pluginLinks[player.Name][player.Id] = discord.Id;
+            
+            _pluginLinks[plugin.Title][player.Id] = discord.Id;
+            
             
             _discordIdToSteamId[discord.Id] = player.Id;
             _steamIdToDiscordId[player.Id] = discord.Id;
@@ -359,7 +362,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 return;
             }
 
-            _pluginLinks[player.Name].Remove(player.Id);
+            _pluginLinks[plugin.Title].Remove(player.Id);
             
             _discordIdToSteamId.Remove(discord.Id);
             _steamIdToDiscordId.Remove(player.Id);
