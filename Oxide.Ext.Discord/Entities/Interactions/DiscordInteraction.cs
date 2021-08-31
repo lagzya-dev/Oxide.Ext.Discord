@@ -83,7 +83,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         ///  For components, the message they were attached to
         /// </summary>
         [JsonProperty("message")]
-        public DiscordMessage Message { get; set; } 
+        public DiscordMessage Message { get; set; }
+
+        private InteractionDataParsed _parsed;
+
+        /// <summary>
+        /// Returns the interaction parsed args to make it easier to process that interaction.
+        /// </summary>
+        public InteractionDataParsed Parsed => _parsed ?? (_parsed = new InteractionDataParsed(this));
         
         /// <summary>
         /// Create a response to an Interaction from the gateway.

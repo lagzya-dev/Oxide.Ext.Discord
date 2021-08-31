@@ -22,25 +22,5 @@ namespace Oxide.Ext.Discord.Extensions
             result = retValue ? (TEnum)Enum.Parse(typeof(TEnum), value.ToString()) : default(TEnum);
             return retValue;
         }
-
-        public static string GetEnumPropertyName<T>(this object value)
-        {
-            Type type = typeof(T);
-            if (!type.IsEnum)
-            {
-                throw new InvalidOperationException();
-            }
-
-            string enumValue = value.ToString();
-            
-            MemberInfo[] member = type.GetMember(value.ToString());
-            object[] attributes = member[0].GetCustomAttributes(typeof(JsonProperty), false);
-            if (attributes.Length != 0 && attributes[0] is JsonProperty attribute)
-            {
-                return attribute.PropertyName;
-            }
-
-            return null;
-        }
     }
 }

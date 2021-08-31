@@ -363,6 +363,19 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="embed">Embed to send</param>
+        /// <param name="callback">Callback with the message</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void Reply(DiscordClient client, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        {
+            Reply(client, new List<DiscordEmbed> {embed}, callback, error);
+        }
+        
+        /// <summary>
+        /// Replies to a previously sent message
+        /// See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
         /// <param name="embeds">Embeds to send</param>
         /// <param name="callback">Callback with the message</param>
         /// <param name="error">Callback when an error occurs with error information</param>

@@ -8,13 +8,13 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     public class Logger : ILogger
     {
-        private LogLevel _logLevel;
+        private DiscordLogLevel _logLevel;
         
         /// <summary>
         /// Creates a new logger with the given log level
         /// </summary>
         /// <param name="logLevel">Log level of the logger</param>
-        public Logger(LogLevel logLevel)
+        public Logger(DiscordLogLevel logLevel)
         {
             _logLevel = logLevel;
         }
@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="message">Message to log</param>
         public void Verbose(string message)
         {
-            Log(LogLevel.Verbose, message);
+            Log(DiscordLogLevel.Verbose, message);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="message">Message to log</param>
         public void Debug(string message)
         {
-            Log(LogLevel.Debug, message);
+            Log(DiscordLogLevel.Debug, message);
         }
         
         /// <summary>
@@ -43,7 +43,7 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="message">Message to log</param>
         public void Info(string message)
         {
-            Log(LogLevel.Info, message);
+            Log(DiscordLogLevel.Info, message);
         }
         
         /// <summary>
@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="message">Message to log</param>
         public void Warning(string message)
         {
-            Log(LogLevel.Warning, message);
+            Log(DiscordLogLevel.Warning, message);
         }
         
         /// <summary>
@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="message">Message to log</param>
         public void Error(string message)
         {
-            Log(LogLevel.Error, message);
+            Log(DiscordLogLevel.Error, message);
         }
 
         /// <summary>
@@ -71,10 +71,10 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="ex">Exception to log</param>
         public void Exception(string message, Exception ex)
         {
-            Log(LogLevel.Exception, message, ex);
+            Log(DiscordLogLevel.Exception, message, ex);
         }
 
-        private void Log(LogLevel level, string message, object data = null)
+        private void Log(DiscordLogLevel level, string message, object data = null)
         {
             if (!IsLogging(level))
             {
@@ -84,14 +84,14 @@ namespace Oxide.Ext.Discord.Logging
             string log= $"[Discord Extension] [{level.ToString()}]: {message}";
             switch (level)
             {
-                case LogLevel.Debug:
-                case LogLevel.Warning:
+                case DiscordLogLevel.Debug:
+                case DiscordLogLevel.Warning:
                     Interface.Oxide.LogWarning(log);
                     break;
-                case LogLevel.Error:
+                case DiscordLogLevel.Error:
                     Interface.Oxide.LogError(log);
                     break;
-                case LogLevel.Exception:
+                case DiscordLogLevel.Exception:
                     Interface.Oxide.LogException($"{log}\n{data}", (Exception)data);
                     break;
                 default:
@@ -104,7 +104,7 @@ namespace Oxide.Ext.Discord.Logging
         /// Updates the log level for the current logger
         /// </summary>
         /// <param name="level">Level to update the logger to</param>
-        public void UpdateLogLevel(LogLevel level)
+        public void UpdateLogLevel(DiscordLogLevel level)
         {
             _logLevel = level;
         }
@@ -114,7 +114,7 @@ namespace Oxide.Ext.Discord.Logging
         /// </summary>
         /// <param name="level">Log Level to check</param>
         /// <returns>True if the logger is logging for the given log level</returns>
-        public bool IsLogging(LogLevel level)
+        public bool IsLogging(DiscordLogLevel level)
         {
             return level >= _logLevel;
         }

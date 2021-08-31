@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Bot User
         /// </summary>
-        public DiscordUser Bot { get; internal set; }
+        public DiscordUser BotUser { get; internal set; }
 
         /// <summary>
         /// Rest handler for all discord API calls
@@ -116,7 +116,7 @@ namespace Oxide.Ext.Discord
             }
 
             bot.AddClient(client);
-            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {client.Owner.Name} to bot {bot.Bot?.GetFullUserName}");
+            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {client.Owner.Name} to bot {bot.BotUser?.GetFullUserName}");
             return bot;
         }
 
@@ -235,7 +235,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            LogLevel level = LogLevel.Off;
+            DiscordLogLevel level = DiscordLogLevel.Off;
             for (int index = 0; index < _clients.Count; index++)
             {
                 DiscordClient remainingClient = _clients[index];
@@ -265,7 +265,7 @@ namespace Oxide.Ext.Discord
             // }
         }
 
-        private void UpdateLogLevel(LogLevel level)
+        private void UpdateLogLevel(DiscordLogLevel level)
         {
             Logger.UpdateLogLevel(level);
             Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {Settings.LogLevel.ToString()} to: {level.ToString()}");

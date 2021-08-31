@@ -47,7 +47,12 @@ namespace Oxide.Ext.Discord.Helpers.Utilities
 
         private static EnumData GetEnumData(Type type)
         {
-            EnumData data = EnumData[type];
+            EnumData data;
+            lock (Lock)
+            {
+                data = EnumData[type];  
+            }
+                
             if (data == null)
             {
                 data = new EnumData(type);

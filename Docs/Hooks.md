@@ -91,9 +91,6 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
     + [OnDiscordGuildIntegrationCreated](#ondiscordguildintegrationcreated)
     + [OnDiscordGuildIntegrationUpdated](#ondiscordguildintegrationupdated)
     + [OnDiscordGuildIntegrationDeleted](#ondiscordguildintegrationdeleted)
-    + [OnDiscordApplicationCommandCreated](#ondiscordapplicationcommandcreated)
-    + [OnDiscordApplicationCommandUpdated](#ondiscordapplicationcommandupdated)
-    + [OnDiscordApplicationCommandDeleted](#ondiscordapplicationcommanddeleted)
     + [OnDiscordUnhandledCommand](#ondiscordunhandledcommand)
 
 ## Discord Client
@@ -982,39 +979,6 @@ void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, Disco
 void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
 {
     Puts("OnDiscordIntegrationDeleted Works!");
-}
-```
-
-### OnDiscordApplicationCommandCreated
-
-- Called when a application command is created for a guild
-
-```c#
-void OnDiscordApplicationCommandCreated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
-{
-    Puts("OnDiscordApplicationCommandCreated Works!");
-}
-```
-
-### OnDiscordApplicationCommandUpdated
-
-- Called when a application command is updated for a guild
-
-```c#
-void OnDiscordApplicationCommandUpdated(ApplicationCommandEvent commandEvent, DiscordGuild guild)
-{
-    Puts("OnDiscordApplicationCommandUpdated Works!");
-}
-```
-
-### OnDiscordApplicationCommandDeleted
-
-- Called when a application command is deleted for a guild
-
-```c#
-void OnDiscordApplicationCommandDeleted(ApplicationCommandEvent commandEvent, DiscordGuild guild)
-{
-    Puts("OnDiscordApplicationCommandDeleted Works!");
 }
 ```
 

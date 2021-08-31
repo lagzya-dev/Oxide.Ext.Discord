@@ -41,6 +41,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// The channel to move the user to
         /// Requires MOVE_MEMBERS Permission
+        /// Setting to null will remove that member from a voice channel
         /// </summary>
         [JsonProperty("channel_id")]
         public Snowflake? ChannelId { get; set; }

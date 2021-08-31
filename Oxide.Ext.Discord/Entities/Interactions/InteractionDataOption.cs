@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -20,14 +21,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// Value of ApplicationCommandOptionType
         /// </summary>
         [JsonProperty("type")]
-        public int Type { get; set; }
+        public CommandOptionType Type { get; set; }
         
         /// <summary>
         /// The value of the pair
         /// See <see cref="CommandOptionType"/>
         /// </summary>
         [JsonProperty("value")]
-        public CommandOptionType Value { get; set; }
+        public JToken Value { get; set; }
         
         /// <summary>
         /// Present if this option is a group or subcommand

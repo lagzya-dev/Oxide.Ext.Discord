@@ -444,7 +444,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="type">Permission Type Flag</param>
         /// <param name="callback">Callback once the action is complete</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditChannelPermissions(DiscordClient client, Snowflake overwriteId, PermissionFlags allow, PermissionFlags deny, PermissionType type, Action callback = null, Action<RestError> error = null)
+        public void EditChannelPermissions(DiscordClient client, Snowflake overwriteId, PermissionFlags? allow, PermissionFlags? deny, PermissionType type, Action callback = null, Action<RestError> error = null)
         {
             Overwrite overwrite = new Overwrite
             {

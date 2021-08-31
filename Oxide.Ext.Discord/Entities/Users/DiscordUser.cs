@@ -295,7 +295,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateDirectMessageChannel(DiscordClient client, Snowflake userId, Action<DiscordChannel> callback, Action<RestError> error = null)
         {
-            if (userId == client.Bot.Bot.Id)
+            if (userId == client.Bot.BotUser.Id)
             {
                 client.Logger.Error("Tried to create a direct message to the bot which is not allowed.");
                 return;

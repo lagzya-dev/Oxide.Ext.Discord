@@ -14,7 +14,7 @@ using Oxide.Ext.Discord.Helpers.Cdn;
 namespace Oxide.Ext.Discord.Entities.Applications
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/topics/oauth2#application-object">Application Structure</a>
+    /// Represents <a href="https://discord.com/developers/docs/resources/application#application-object">Application Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordApplication
@@ -140,9 +140,22 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with list of application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGlobalApplicationCommands(DiscordClient client, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGlobalCommands(DiscordClient client, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.GET, null, callback, error);
+        }
+
+        /// <summary>
+        /// Fetch global command by ID
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-command">Get Global Application Command</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="commandId">ID of command to get</param>
+        /// <param name="callback">Callback with list of application commands</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetGlobalCommand(DiscordClient client, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/applications/{Id}/commands/{commandId}", RequestMethod.GET, null, callback, error);
         }
         
         /// <summary>
@@ -155,38 +168,11 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGlobalApplicationCommand(DiscordClient client, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGlobalCommand(DiscordClient client, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.POST, create, callback, error);
         }
-        
-        /// <summary>
-        /// Edit a global command.
-        /// Updates will be available in all guilds after 1 hour.
-        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command">Edit Global Application Command</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="update">Command Update</param>
-        /// <param name="callback">Callback with updated command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditGlobalApplicationCommand(DiscordClient client, CommandCreate update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PATCH, update, callback, error);
-        }
-        
-        /// <summary>
-        /// Deletes a global command
-        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command">Delete Global Application Command</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="commandId">Command to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGlobalApplicationCommand(DiscordClient client, Snowflake commandId, Action callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/commands/{commandId}", RequestMethod.PATCH, null, callback, error);
-        }
-        
+
         /// <summary>
         /// Takes a list of application commands, overwriting existing commands that are registered globally for this application. Updates will be available in all guilds after 1 hour.
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands">Bulk Overwrite Global Application Commands</a>
@@ -195,7 +181,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="commands">List of commands to overwrite</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void BulkOverwriteGlobalApplicationCommands(DiscordClient client, List<DiscordApplicationCommand> commands, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void BulkOverwriteGlobalCommands(DiscordClient client, List<DiscordApplicationCommand> commands, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PUT, commands, callback, error);
         }
@@ -208,24 +194,25 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="guildId">ID of the guild to get commands for</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildApplicationCommands(DiscordClient client, Snowflake guildId, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGuildCommands(DiscordClient client, Snowflake guildId, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.GET, null, callback, error);
         }
-        
+
         /// <summary>
-        /// Fetch all of the guild commands for your application for a specific guild.
-        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands">Get Guild Application Commands</a>
+        /// Get guild command by Id
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command">Get Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="guild">Guild to get commands for</param>
+        /// <param name="guildId">ID of the guild to get commands for</param>
+        /// <param name="commandId">ID of the command to get</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildApplicationCommands(DiscordClient client, DiscordGuild guild, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGuildCommand(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
-            GetGuildApplicationCommands(client, guild.Id, callback, error);
+            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}", RequestMethod.GET, null, callback, error);
         }
-        
+
         /// <summary>
         /// Create a new guild command.
         /// New guild commands will be available in the guild immediately.
@@ -236,82 +223,9 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildApplicationCommands(DiscordClient client, Snowflake guildId, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGuildCommand(DiscordClient client, Snowflake guildId, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.POST, create, callback, error);
-        }
-        
-        /// <summary>
-        /// Create a new guild command.
-        /// New guild commands will be available in the guild immediately.
-        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command">Create Guild Application Command</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="guild">Guild to create the command in</param>
-        /// <param name="create">Command to create</param>
-        /// <param name="callback">Callback with the created command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildApplicationCommands(DiscordClient client, DiscordGuild guild, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
-        {
-            CreateGuildApplicationCommands(client, guild.Id, create, callback, error);
-        }
-        
-        /// <summary>
-        /// Edit a guild command.
-        /// Updates for guild commands will be available immediately.
-        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="guildId">Guild ID to update the command in</param>
-        /// <param name="update">Command update</param>
-        /// <param name="callback">Callback with updated command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditGuildApplicationCommands(DiscordClient client, Snowflake guildId, DiscordApplicationCommand update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{update.Id}", RequestMethod.PATCH, update, callback, error);
-        }
-        
-        /// <summary>
-        /// Edit a guild command.
-        /// Updates for guild commands will be available immediately.
-        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command">Edit Guild Application Command</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="guild">Guild to update the command in</param>
-        /// <param name="update">Command update</param>
-        /// <param name="callback">Callback with updated command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditGuildApplicationCommands(DiscordClient client, DiscordGuild guild, DiscordApplicationCommand update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
-        {
-            EditGuildApplicationCommands(client, guild.Id, update, callback, error);
-        }
-        
-        /// <summary>
-        /// Delete a guild command.
-        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="guildId">Guild ID of the guild to delete command from</param>
-        /// <param name="commandId">Command ID of the command to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildApplicationCommands(DiscordClient client, Snowflake guildId, Snowflake commandId, Action callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}", RequestMethod.DELETE, null, callback, error);
-        }
-        
-        /// <summary>
-        /// Delete a guild command.
-        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="guild">Guild to delete command from</param>
-        /// <param name="delete">Command to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildApplicationCommands(DiscordClient client, DiscordGuild guild, DiscordApplicationCommand delete, Action callback = null, Action<RestError> error = null)
-        {
-            DeleteGuildApplicationCommands(client, guild.Id, delete.Id, callback, error);
         }
 
         /// <summary>
@@ -321,45 +235,11 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="guildId">Guild ID to get the permissions from</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Action<List<GuildCommandPermissions>> callback = null, Action<RestError> error = null)
+        public void GetGuildCommandPermissions(DiscordClient client, Snowflake guildId, Action<List<GuildCommandPermissions>> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.GET, null, callback, error);
         }
-        
-        /// <summary>
-        /// Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="guildId">Guild ID to get the permissions from</param>
-        /// <param name="commandId">ID of the command to get permissions for</param>
-        /// <param name="callback">Callback with the permissions for the command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<GuildCommandPermissions> callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}/permissions", RequestMethod.GET, null, callback, error);
-        }
-        
-        /// <summary>
-        /// Edits command permissions for a specific command for your application in a guild.
-        /// Warning: This endpoint will overwrite existing permissions for the command in that guild
-        /// Warning: Deleting or renaming a command will permanently delete all permissions for that command
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="guildId">Guild ID to update the permissions for</param>
-        /// <param name="commandId">ID of the command to get permissions for</param>
-        /// <param name="permissions">List of permissions for the command</param>
-        /// <param name="callback">Callback with the list of permissions</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, Snowflake commandId, GuildCommandPermissions permissions, Action callback = null, Action<RestError> error = null)
-        {
-            Dictionary<string, object> data = new Dictionary<string, object>
-            {
-                ["permissions"] = permissions
-            };
-            
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}/permissions", RequestMethod.PUT, data, callback, error);
-        }
-        
+
         /// <summary>
         /// Batch edits permissions for all commands in a guild.
         /// Warning: This endpoint will overwrite all existing permissions for all commands in a guild
@@ -369,7 +249,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="permissions">List of permissions for the commands</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void BatchEditApplicationCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        public void BatchEditCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.PUT, permissions, callback, error);
         }

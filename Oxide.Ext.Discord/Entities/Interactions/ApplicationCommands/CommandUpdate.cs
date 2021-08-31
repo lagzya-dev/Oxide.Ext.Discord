@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command-json-params">Application Command Create</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command-json-params">Application Command Update</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class CommandCreate
+    public class CommandUpdate
     {
         /// <summary>
         /// 1-32 lowercase character name matching ^[\w-]{1,32}$
@@ -33,11 +33,5 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("default_permission")]
         public bool? DefaultPermissions { get; set; }
-        
-        /// <summary>
-        /// The type of command, defaults Slash Command if not set
-        /// </summary>
-        [JsonProperty("type")]
-        public ApplicationCommandType? Type { get; set; }
     }
 }
