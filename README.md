@@ -36,18 +36,21 @@ Obtaining an API Key:
    ![](https://i.postimg.cc/Vk5V9TLx/2-Create-App-Name.png)
 4) You will now be redirected to your created app. Click on "Bot" on the left hand side and then "Add Bot".  
    ![](https://i.postimg.cc/htw32rXf/3-Add-Bot.png)
-5) Under the newly created bot section, Enter the username for your bot and upload an icon.
-   Then enable the Presence and Server Members Intent.
-   To get your Discord API Token click on the "Copy" button.
-   This is the token that is used by discord extension plugins.   
+5) A) Under the newly created bot section, Enter the username for your bot and upload an icon.  
+   B) Then enable the Presence and Server Members Intent.  
+   C) To get your Discord API Token click on the "Copy" button.  
+   D) This is the token that is used by discord extension plugins.     
    ![](https://i.postimg.cc/7YHchbvY/4-Copy-Token.png)
-6) Next we're going to setup the permissions that bot has in your Discord Server.
-   Click on OAuth2 on the left hand side.
-   Scroll down till your see scopes and permissions.
-   Under Scope select Bot.
-   Under permissions select which permissions that bot should have.
-   Once you have all of this selected click on the copy button.  
+6) A.Next we're going to setup the permissions that bot has in your Discord Server.  
+   B.Click on OAuth2 on the left hand side.  
+   C. Scroll down till your see scopes and permissions.  
+   D. Under Scope select "Bot".  
+   E. __(Optional)__ Select "applications.commands"   
+   F. Under permissions select which permissions that bot should have.  
+   G. Once you have all of this selected click on the copy button.    
    ![](https://i.postimg.cc/ZnXStyHc/image.png)
+   __(Optional)__ application.commands selection
+   ![](https://i.postimg.cc/RF20DgPZ/optional-application-commands.png)
 7) Now it's time to add your new bot to your guild!
    Paste the link from the previous step into the url section of your browser.
    Select which Discord Server you want to invite the bot into and continue and then authorize.  
