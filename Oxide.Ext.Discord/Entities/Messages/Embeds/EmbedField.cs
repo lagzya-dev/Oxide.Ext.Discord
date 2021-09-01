@@ -29,6 +29,14 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <summary>
         /// Embed Field constructor
         /// </summary>
+        public EmbedField()
+        {
+            
+        }
+        
+        /// <summary>
+        /// Embed Field constructor
+        /// </summary>
         /// <param name="name">Field Name</param>
         /// <param name="value">Field Value</param>
         /// <param name="inline">Should field be inlined</param>

@@ -35,6 +35,14 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <summary>
         /// Embed Video Constructor
         /// </summary>
+        public EmbedVideo()
+        {
+            
+        }
+        
+        /// <summary>
+        /// Embed Video Constructor
+        /// </summary>
         /// <param name="url"></param>
         /// <param name="proxyUrl"></param>
         /// <param name="height"></param>

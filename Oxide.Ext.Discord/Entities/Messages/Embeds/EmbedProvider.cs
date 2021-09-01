@@ -23,6 +23,14 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <summary>
         /// Embed Provider Constructor
         /// </summary>
+        public EmbedProvider()
+        {
+            
+        }
+        
+        /// <summary>
+        /// Embed Provider Constructor
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="url"></param>
         public EmbedProvider(string name, string url)

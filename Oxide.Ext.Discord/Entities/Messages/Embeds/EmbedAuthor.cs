@@ -35,6 +35,14 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <summary>
         /// Embed Author Constructor
         /// </summary>
+        public EmbedAuthor()
+        {
+            
+        }
+        
+        /// <summary>
+        /// Embed Author Constructor
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="url"></param>
         /// <param name="iconUrl"></param>
