@@ -62,7 +62,7 @@ namespace Oxide.Ext.Discord
             DiscordSettings settings = new DiscordSettings
             {
                 ApiToken = apiKey,
-                LogLevel = DiscordLogLevel.Warning,
+                LogLevel = DiscordLogLevel.Info,
                 Intents = intents
             };
             
@@ -206,7 +206,7 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
-            foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+            foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
                 {

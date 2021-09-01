@@ -190,7 +190,10 @@ namespace Oxide.Ext.Discord.WebSockets
         internal void Send(CommandPayload payload)
         {
             string payloadData = JsonConvert.SerializeObject(payload, DiscordExtension.ExtensionSerializeSettings);
-            _logger.Verbose($"{nameof(Socket)}.{nameof(Send)} Payload: {payloadData}");
+            if (_logger.IsLogging(DiscordLogLevel.Verbose))
+            {
+                _logger.Verbose($"{nameof(Socket)}.{nameof(Send)} Payload: {payloadData}");
+            }
 
             _socket.SendAsync(payloadData, null);
         }
