@@ -125,19 +125,25 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// The message for when the message is an application command
         /// </summary>
-        [Description("APPLICATION_COMMAND")]
-        ApplicationCommand = 20,
+        [Description("CHAT_INPUT_COMMAND")]
+        ChatInputCommand = 20,
         
         /// <summary>
         /// Starter message for a thread
         /// </summary>
         [Description("THREAD_STARTER_MESSAGE")]
-        ThreadStarterMessage = 20,
-        
+        ThreadStarterMessage = 21,
+
         /// <summary>
         /// Reminder for a guild invite
         /// </summary>
         [Description("GUILD_INVITE_REMINDER")]
-        GuildInviteReminder = 20
+        GuildInviteReminder = 22,
+
+        /// <summary>
+        /// Reminder for a guild invite
+        /// </summary>
+        [Description("CONTEXT_MENU_COMMAND")]
+        ContextMenuCommand = 23
     }
 }
