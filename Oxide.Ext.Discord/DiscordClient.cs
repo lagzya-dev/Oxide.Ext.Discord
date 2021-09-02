@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
@@ -17,6 +18,8 @@ namespace Oxide.Ext.Discord
     public class DiscordClient
     {
         internal static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
+
+        private static readonly Regex TokenValidator = new Regex(@"^[\w-]{24}\.[\w-]{6}\.[\w-]{27}$", RegexOptions.Compiled);
         
         /// <summary>
         /// Which plugin is the owner of this client
@@ -59,7 +62,7 @@ namespace Oxide.Ext.Discord
             DiscordSettings settings = new DiscordSettings
             {
                 ApiToken = apiKey,
-                LogLevel = DiscordLogLevel.Warning,
+                LogLevel = DiscordLogLevel.Info,
                 Intents = intents
             };
             
@@ -78,6 +81,12 @@ namespace Oxide.Ext.Discord
             if (string.IsNullOrEmpty(Settings.ApiToken))
             {
                 Logger.Error("API Token is null or empty!");
+                return;
+            }
+
+            if (!TokenValidator.IsMatch(Settings.ApiToken))
+            {
+                Logger.Error($"API Token does not appear to be a valid discord bot token: {Settings.ApiToken}");
                 return;
             }
 
@@ -151,19 +160,6 @@ namespace Oxide.Ext.Discord
                 }
             });
         }
-        
-        /// <summary>
-        /// Call a hook for all plugins registered to receive hook calls for all clients
-        /// </summary>
-        /// <param name="hookName"></param>
-        /// <param name="args"></param>
-        public static void GlobalCallHook(string hookName, params object[] args)
-        {
-            foreach (DiscordClient client in Clients.Values)
-            {
-                client.CallHook(hookName, args);
-            }
-        }
 
         #region Plugin Handling
         /// <summary>
@@ -210,7 +206,7 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
-            foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+            foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
                 {

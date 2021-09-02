@@ -35,6 +35,14 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <summary>
         /// Embed Image Constructor
         /// </summary>
+        public EmbedImage()
+        {
+            
+        }
+        
+        /// <summary>
+        /// Embed Image Constructor
+        /// </summary>
         /// <param name="url"></param>
         /// <param name="height"></param>
         /// <param name="width"></param>

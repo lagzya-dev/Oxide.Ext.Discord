@@ -78,6 +78,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 _steamIds.Add(pair.Key);
                 _discordIds.Add(pair.Value);
             }
+            
+            _logger.Debug($"{plugin.Title} registered as a DiscordLink plugin");
         }
 
         /// <summary>
@@ -318,6 +320,11 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <param name="discord">DiscordUser being linked</param>
         public void OnLinked(Plugin plugin, IPlayer player, DiscordUser discord)
         {
+            if (player == null)
+                throw new ArgumentNullException(nameof(player));
+            if (discord == null)
+                throw new ArgumentNullException(nameof(discord));
+            
             IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
             if (link == null)
             {
@@ -329,14 +336,15 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 _logger.Error($"{plugin.Name} has not been added as a link plugin and cannot set a link");
                 return;
             }
-
-            _pluginLinks[player.Name][player.Id] = discord.Id;
+            
+            _pluginLinks[plugin.Title][player.Id] = discord.Id;
+            
             
             _discordIdToSteamId[discord.Id] = player.Id;
             _steamIdToDiscordId[player.Id] = discord.Id;
             _steamIds.Add(player.Id);
             _discordIds.Add(discord.Id);
-            DiscordClient.GlobalCallHook(DiscordHooks.OnDiscordPlayerLinked, player, discord);
+            Interface.Oxide.CallHook(DiscordHooks.OnDiscordPlayerLinked, player, discord);
         }
 
         /// <summary>
@@ -345,8 +353,13 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <param name="plugin">Plugin that is unlinking</param>
         /// <param name="player">Player being unlinked</param>
         /// <param name="discord">DiscordUser being unlinked</param>
-        public void OnUnlinked(Plugin plugin,  IPlayer player, DiscordUser discord)
+        public void OnUnlinked(Plugin plugin, IPlayer player, DiscordUser discord)
         {
+            if (player == null)
+                throw new ArgumentNullException(nameof(player));
+            if (discord == null)
+                throw new ArgumentNullException(nameof(discord));
+            
             IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
             if (link == null)
             {
@@ -359,13 +372,13 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 return;
             }
 
-            _pluginLinks[player.Name].Remove(player.Id);
+            _pluginLinks[plugin.Title].Remove(player.Id);
             
             _discordIdToSteamId.Remove(discord.Id);
             _steamIdToDiscordId.Remove(player.Id);
             _steamIds.Remove(player.Id);
             _discordIds.Remove(discord.Id);
-            DiscordClient.GlobalCallHook(DiscordHooks.OnDiscordPlayerUnlinked, player, discord);
+            Interface.Oxide.CallHook(DiscordHooks.OnDiscordPlayerUnlinked, player, discord);
         }
     }
 }
