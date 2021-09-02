@@ -28,12 +28,12 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// Unix time (in milliseconds) of when the client went idle, or null if the client is not idle
         /// </summary>
         [JsonProperty("since")]
-        public int? Since { get; set; }
+        public int? Since { get; set; } = 0;
 
         /// <summary>
         /// Whether or not the client is afk
         /// </summary>
         [JsonProperty("afk")]
-        public bool Afk { get; set; }
+        public bool Afk { get; set; } = false;
     }
 }

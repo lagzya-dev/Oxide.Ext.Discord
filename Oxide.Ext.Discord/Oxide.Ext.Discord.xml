@@ -1362,13 +1362,6 @@
             <param name="hookName"></param>
             <param name="args"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.GlobalCallHook(System.String,System.Object[])">
-            <summary>
-            Call a hook for all plugins registered to receive hook calls for all clients
-            </summary>
-            <param name="hookName"></param>
-            <param name="args"></param>
-        </member>
         <member name="M:Oxide.Ext.Discord.DiscordClient.CreateClient(Oxide.Core.Plugins.Plugin)">
             <summary>
             Sets the client field on the plugin.
@@ -2717,7 +2710,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
             <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel">Guild Channel Create Structure</a>
+            Represents a <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params">Guild Channel Create Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Name">
@@ -8870,6 +8863,11 @@
             A proxied url of author icon
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedAuthor.#ctor">
+            <summary>
+            Embed Author Constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedAuthor.#ctor(System.String,System.String,System.String,System.String)">
             <summary>
             Embed Author Constructor
@@ -8899,6 +8897,11 @@
             Whether or not this field should display inline
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField.#ctor">
+            <summary>
+            Embed Field constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField.#ctor(System.String,System.String,System.Boolean)">
             <summary>
             Embed Field constructor
@@ -8925,6 +8928,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedFooter.ProxyIconUrl">
             <summary>
             A proxied url of footer icon
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedFooter.#ctor">
+            <summary>
+            Embed Footer Constructor
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedFooter.#ctor(System.String,System.String,System.String)">
@@ -8960,6 +8968,11 @@
             Width of image
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedImage.#ctor">
+            <summary>
+            Embed Image Constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedImage.#ctor(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
             <summary>
             Embed Image Constructor
@@ -8982,6 +8995,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedProvider.Url">
             <summary>
             Url of provider
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedProvider.#ctor">
+            <summary>
+            Embed Provider Constructor
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedProvider.#ctor(System.String,System.String)">
@@ -9016,6 +9034,11 @@
             Width of thumbnail
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedThumbnail.#ctor">
+            <summary>
+            Embed Thumbnail constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedThumbnail.#ctor(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
             <summary>
             Embed Thumbnail constructor
@@ -9048,6 +9071,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedVideo.Width">
             <summary>
             Width of video
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedVideo.#ctor">
+            <summary>
+            Embed Video Constructor
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedVideo.#ctor(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
@@ -9598,7 +9626,25 @@
             <param name="blue">Blue color (0-255)</param>
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0 or &gt; 255</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="red">Red color (0-255)</param>
+            <param name="green">Green color (0-255)</param>
+            <param name="blue">Blue color (0-255)</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &gt; 255</exception>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="red">Red color (0.0 - 1.0)</param>
+            <param name="green">Green color (0.0 - 1.0)</param>
+            <param name="blue">Blue color (0.0 - 1.0)</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Double,System.Double,System.Double)">
             <summary>
             DiscordColor Constructor
             </summary>

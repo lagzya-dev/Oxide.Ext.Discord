@@ -139,15 +139,9 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         /// <param name="color">string hex color code</param>
         /// <exception cref="Exception">Throw if color is greater than #FFFFFF</exception>
-        public DiscordColor(string color)
+        public DiscordColor(string color) : this(uint.Parse(color.TrimStart('#'), NumberStyles.AllowHexSpecifier))
         {
-            uint parsedColor = uint.Parse(color.TrimStart('#'), NumberStyles.AllowHexSpecifier);
-            if (parsedColor > 0xFFFFFF)
-            {
-                throw new Exception($"Color '{color}' is outside the valid color range");
-            }
 
-            Color = parsedColor;
         }
 
         /// <summary>
@@ -159,22 +153,49 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// <exception cref="ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0 or &gt; 255</exception>
         public DiscordColor(int red, int green, int blue)
         {
-            if (red < 0 || red > 255)
+            if (red < 0 || red > byte.MaxValue)
             {
                 throw new ArgumentOutOfRangeException(nameof(red), "Value must be between 0 - 255");
             }
             
-            if (green < 0 || green > 255)
+            if (green < 0 || green > byte.MaxValue)
             {
                 throw new ArgumentOutOfRangeException(nameof(green), "Value must be between 0 - 255");
             }
             
-            if (blue < 0 || blue > 255)
+            if (blue < 0 || blue > byte.MaxValue)
             {
                 throw new ArgumentOutOfRangeException(nameof(blue), "Value must be between 0 - 255");
             }
 
-            Color = (uint)(red * 65536 + green * 256 + blue);
+            Color = (uint)((red << 8) + (green << 4) + blue);
+        }
+        
+        /// <summary>
+        /// DiscordColor Constructor
+        /// </summary>
+        /// <param name="red">Red color (0-255)</param>
+        /// <param name="green">Green color (0-255)</param>
+        /// <param name="blue">Blue color (0-255)</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if any of the colors are &gt; 255</exception>
+        public DiscordColor(uint red, uint green, uint blue)
+        {
+            if (red > byte.MaxValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(red), "Value must be < 255");
+            }
+            
+            if (green > byte.MaxValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(green), "Value must be < 255");
+            }
+            
+            if (blue > byte.MaxValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(blue), "Value must be < 255");
+            }
+
+            Color = (red << 8) + (green << 4) + blue;
         }
 
         /// <summary>
@@ -201,7 +222,19 @@ namespace Oxide.Ext.Discord.Entities.Permissions
                 throw new ArgumentOutOfRangeException(nameof(blue), "Value must be between 0 - 1");
             }
             
-            Color = (uint)(red * 255 * 65536 + green * 255 * 256 + blue * 255);
+            Color = ((uint)(red * 255) << 8) + ((uint)(green * 255)  << 4) + (uint)(blue * 255);
+        }
+        
+        /// <summary>
+        /// DiscordColor Constructor
+        /// </summary>
+        /// <param name="red">Red color (0.0 - 1.0)</param>
+        /// <param name="green">Green color (0.0 - 1.0)</param>
+        /// <param name="blue">Blue color (0.0 - 1.0)</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
+        public DiscordColor(double red, double green, double blue) : this((float)red, (float)green, (float)blue)
+        {
+
         }
     }
 
