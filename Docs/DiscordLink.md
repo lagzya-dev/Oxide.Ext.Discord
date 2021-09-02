@@ -9,20 +9,18 @@ When the Discord Link plugin is unloaded then DiscordLink will remove that plugi
 
 To gain access to the Discord Link API you add the following line of code in your plugin.
 ```c#
-private readonly DiscordLink _link = Interface.Oxide.GetLibrary<DiscordLink>();
+private readonly DiscordLink _link = GetLibrary<DiscordLink>();
 ```
 
 ## Registering Link Plugin
 
 To register your plugin you first need to inherit the `IDiscordLinkPlugin` interface on your plugin.
 The interface can be seen below and you must implement those methods on your plugin.
-Whenever a player links or unlinks their account you're to call the action callbacks given to your plugin in the `RegisterEvents` method
 
 ```c#
 public interface IDiscordLinkPlugin
 {
-    Hash<string, Snowflake> GetSteamToDiscordIds();
-    void RegisterEvents(Action<IPlayer, DiscordUser> onLinked, Action<IPlayer, DiscordUser> onUnlinked);
+    IDictionary<string, Snowflake> GetSteamToDiscordIds();
 }
 ```
 
@@ -37,6 +35,18 @@ private void OnInit()
     {
         _link.AddLinkPlugin(this);
     }
+}
+
+//Call _link.OnLinked when your plugin completes a link
+private void HandleLink(IPlayer player, DiscordUser user)
+{
+    _link.OnLinked(this, player, user);
+}
+
+//Call _link.OnUnlinked when your plugin completes an unlink
+private void HandleUnlink(IPlayer player, DiscordUser user)
+{
+    _link.OnUnlinked(this, player, user);
 }
 ```
 
@@ -54,11 +64,10 @@ bool IsEnabled()
 // Registeres the passed in plugin as the link plugin for the server
 // Only 1 link plugin can be registered at a time
 // If your plugin provides more than just Link functionality it is recommended to have a configuartion option to enable linking for your pluguin
-void AddLinkPlugin(Plugin plugin)
+void AddLinkPlugin(IDiscordLinkPlugin plugin)
 
-// Returns if the given ID is linked.
-// Valid types are String SteamId or Snowflake DisordId
-bool IsLinked(object id)
+//Removes a link plugin from DiscordLink
+void RemoveLinkPlugin(IDiscordLinkPlugin plugin)
 
 // Returns true if the steam Id is linked with a discord account
 bool IsLinked(string steamId)
@@ -69,6 +78,18 @@ bool IsLinked(Snowflake discordId)
 // Returns a Steam ID for a given Discord ID
 // If the Discord ID is not linked then the result will be null
 string GetSteamId(Snowflake discordId)
+
+//Returns if the given IPlayer is linked
+bool IsLinked(IPlayer player)
+
+//Returns if the given DiscordUser is linked
+bool IsLinked(DiscordUser user)
+
+//Returns the steam ID for the given Discord ID. Null if not found
+string GetSteamId(Snowflake discordId)
+
+//Returns the steam ID for the given DiscordUser. Null if not found
+string GetSteamId(DiscordUser user)
 
 // Returns an IPlayer for the given Discord ID
 // If the Discord ID is not linked then the result will be null
@@ -102,10 +123,10 @@ GuildMember GetLinkedMember(IPlayer player, Guild guild)
 int GetLinkedCount()
 
 // Returns a list of all Steam Ids that are linked
-List<string> GetLinkedSteamIds()
+HashSet<string> GetLinkedSteamIds()
 
 // Returns a list of all snowflakes that are linked
-List<Snowflake> GetLinkedDiscordIds()
+HashSet<Snowflake> GetLinkedDiscordIds()
 
 // Returns a Hash of key SteamId and value Discord ID
 Hash<string, Snowflake> GetSteamToDiscordIds()
