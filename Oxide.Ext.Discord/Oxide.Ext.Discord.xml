@@ -9474,7 +9474,7 @@
             The message for when the message is a reply
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.ApplicationCommand">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.ChatInputCommand">
             <summary>
             The message for when the message is an application command
             </summary>
@@ -9485,6 +9485,11 @@
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildInviteReminder">
+            <summary>
+            Reminder for a guild invite
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.ContextMenuCommand">
             <summary>
             Reminder for a guild invite
             </summary>
