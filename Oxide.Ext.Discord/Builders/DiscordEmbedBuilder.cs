@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Permissions;
+
 namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
@@ -96,6 +97,17 @@ namespace Oxide.Ext.Discord.Builders
         }
 
         /// <summary>
+        /// Adds a Discord Color to the embed
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        public DiscordEmbedBuilder AddColor(DiscordColor color)
+        {
+            _embed.Color = color;
+            return this;
+        }
+        
+        /// <summary>
         /// Adds an int based color to the embed. Color appears as a bar on the left side of the message
         /// </summary>
         /// <param name="color"></param>
@@ -129,6 +141,55 @@ namespace Oxide.Ext.Discord.Builders
         public DiscordEmbedBuilder AddColor(int red, int green, int blue)
         {
             _embed.Color = new DiscordColor(red, green, blue);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds a RGB based color. Color appears as a bar on the left side of the message
+        /// </summary>
+        /// <param name="red">Red value between 0 - 1</param>
+        /// <param name="green">Green value between 0 - 1</param>
+        /// <param name="blue">Blue value between 0 - 1</param>
+        /// <returns>This</returns>
+        /// <exception cref="Exception">Thrown if red, green, or blue is outside of range</exception>
+        public DiscordEmbedBuilder AddColor(float red, float green, float blue)
+        {
+            _embed.Color = new DiscordColor(red, green, blue);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds a RGB based color. Color appears as a bar on the left side of the message
+        /// </summary>
+        /// <param name="red">Red value between 0 - 1</param>
+        /// <param name="green">Green value between 0 - 1</param>
+        /// <param name="blue">Blue value between 0 - 1</param>
+        /// <returns>This</returns>
+        /// <exception cref="Exception">Thrown if red, green, or blue is outside of range</exception>
+        public DiscordEmbedBuilder AddColor(double red, double green, double blue)
+        {
+            _embed.Color = new DiscordColor(red, green, blue);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a timestamp to an embed with the current time
+        /// </summary>
+        /// <returns>This</returns>
+        public DiscordEmbedBuilder AddNowTimestamp()
+        {
+            _embed.Timestamp = DateTime.UtcNow;
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds a timestamp to an embed with the given time
+        /// </summary>
+        /// <param name="timestamp">Timestamp to set for the embed</param>
+        /// <returns>This</returns>
+        public DiscordEmbedBuilder AddTimestamp(DateTime timestamp)
+        {
+            _embed.Timestamp = timestamp;
             return this;
         }
 
