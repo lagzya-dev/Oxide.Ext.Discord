@@ -410,6 +410,13 @@
             <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(Oxide.Ext.Discord.Entities.Permissions.DiscordColor)">
+            <summary>
+            Adds a Discord Color to the embed
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.UInt32)">
             <summary>
             Adds an int based color to the embed. Color appears as a bar on the left side of the message
@@ -434,6 +441,39 @@
             <param name="blue">Blue value between 0 - 255</param>
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.Single,System.Single,System.Single)">
+            <summary>
+            Adds a RGB based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="red">Red value between 0 - 1</param>
+            <param name="green">Green value between 0 - 1</param>
+            <param name="blue">Blue value between 0 - 1</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.Double,System.Double,System.Double)">
+            <summary>
+            Adds a RGB based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="red">Red value between 0 - 1</param>
+            <param name="green">Green value between 0 - 1</param>
+            <param name="blue">Blue value between 0 - 1</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddNowTimestamp">
+            <summary>
+            Adds a timestamp to an embed with the current time
+            </summary>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddTimestamp(System.DateTime)">
+            <summary>
+            Adds a timestamp to an embed with the given time
+            </summary>
+            <param name="timestamp">Timestamp to set for the embed</param>
+            <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddBlankField(System.Boolean)">
             <summary>
