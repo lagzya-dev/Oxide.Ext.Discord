@@ -82,14 +82,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("permissions")]
         public string Permissions { get; set; }
-        
-        /// <summary>
-        /// Voice region id
-        /// </summary>
-        [Obsolete("Deprecated in Discord API")]
-        [JsonProperty("region")]
-        public string Region { get; set; }
-        
+
         /// <summary>
         /// ID of afk channel
         /// </summary>
@@ -1420,10 +1413,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 DiscoverySplash = updatedGuild.DiscoverySplash;
             if(updatedGuild.OwnerId.IsValid()) 
                 OwnerId = updatedGuild.OwnerId;
-            #pragma warning disable 0618
-            if (updatedGuild.Region != null)
-                Region = updatedGuild.Region;
-            #pragma warning restore 0618
             if (updatedGuild.AfkChannelId != null)
                 AfkChannelId = updatedGuild.AfkChannelId;
             if (updatedGuild.AfkTimeout != null)
