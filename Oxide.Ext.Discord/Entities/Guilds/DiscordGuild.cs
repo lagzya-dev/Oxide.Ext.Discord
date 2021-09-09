@@ -1418,7 +1418,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 Splash = updatedGuild.Splash;
             if (updatedGuild.DiscoverySplash != null)
                 DiscoverySplash = updatedGuild.DiscoverySplash;
-            OwnerId = updatedGuild.OwnerId;
+            if(updatedGuild.OwnerId.IsValid()) 
+                OwnerId = updatedGuild.OwnerId;
             #pragma warning disable 0618
             if (updatedGuild.Region != null)
                 Region = updatedGuild.Region;
