@@ -26,8 +26,8 @@ namespace Oxide.Ext.Discord.Libraries.Command
         private readonly Hash<string, GuildCommand> GuildCommands = new Hash<string, GuildCommand>();
 
         private Lang _lang;
-        
-        internal Lang Lang
+
+        private Lang Lang
         {
             get
             {
@@ -272,7 +272,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         internal bool HandleDirectMessageCommand(BotClient client, DiscordMessage message, DiscordChannel channel, string name, string[] args)
         {
             DirectMessageCommand command = DirectMessageCommands[name];
-            if (command == null || !command.CanHandle(message, channel))
+            if (command == null || !command.CanRun(client) || !command.CanHandle(message, channel))
             {
                 return false;
             }
@@ -304,7 +304,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         internal bool HandleGuildCommand(BotClient client, DiscordMessage message, DiscordChannel channel, string name, string[] args)
         {
             GuildCommand command = GuildCommands[name];
-            if (command == null || !command.CanHandle(message, channel))
+            if (command == null || !command.CanRun(client) || !command.CanHandle(message, channel))
             {
                 return false;
             }

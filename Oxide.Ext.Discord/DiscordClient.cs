@@ -206,6 +206,8 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
+            OnPluginRemoved(plugin);
+            
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
@@ -230,7 +232,7 @@ namespace Oxide.Ext.Discord
         internal static void OnPluginRemoved(Plugin plugin)
         {
             DiscordClient client = Clients[plugin.Name];
-            if (client?.Settings == null)
+            if (client == null)
             {
                 return;
             }

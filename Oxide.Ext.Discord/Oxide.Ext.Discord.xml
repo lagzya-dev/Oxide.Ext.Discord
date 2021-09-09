@@ -7374,6 +7374,11 @@
             Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Version">
+            <summary>
+            Auto incrementing version identifier updated during substantial record changes
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edit a command.
@@ -12228,6 +12233,14 @@
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L76)
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.BaseCommand.CanRun(Oxide.Ext.Discord.BotClient)">
+            <summary>
+            Returns if a command can run.
+            They can only run for the client that they were created for.
+            </summary>
+            <param name="client">Client to compare against</param>
+            <returns>True if same bot client; false otherwise</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Command.DiscordCommand">
             <summary>
             Represents a library for discord commands
@@ -12558,6 +12571,14 @@
             <param name="channelId">ID of the channel</param>
             <param name="plugin">Plugin the subscription is for</param>
             <param name="callback">Callback when the channel message is sent</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription.CanRun(Oxide.Ext.Discord.BotClient)">
+            <summary>
+            Returns if a subscription can run.
+            They can only run for the client that they were created for.
+            </summary>
+            <param name="client">Client to compare against</param>
+            <returns>True if same bot client; false otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription.Invoke(Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
             <summary>

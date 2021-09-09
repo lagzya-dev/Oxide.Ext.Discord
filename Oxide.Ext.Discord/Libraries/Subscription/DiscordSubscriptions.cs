@@ -140,12 +140,15 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             pluginSubs.Clear();
         }
         
-        internal void HandleMessage(DiscordMessage message, DiscordChannel channel)
+        internal void HandleMessage(DiscordMessage message, DiscordChannel channel, BotClient client)
         {
             foreach (Hash<Snowflake, DiscordSubscription> pluginSubs in _subscriptions.Values)
             {
                 DiscordSubscription sub = pluginSubs[channel.Id];
-                sub?.Invoke(message);
+                if (sub != null && sub.CanRun(client))
+                {
+                    sub.Invoke(message);
+                }
             }
 
             if (channel.ParentId != null)
@@ -153,7 +156,10 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 foreach (Hash<Snowflake, DiscordSubscription> pluginSubs in _subscriptions.Values)
                 {
                     DiscordSubscription sub = pluginSubs[channel.ParentId.Value];
-                    sub?.Invoke(message);
+                    if (sub != null && sub.CanRun(client))
+                    {
+                        sub.Invoke(message);
+                    }
                 }
             }
         }

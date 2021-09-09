@@ -11,8 +11,8 @@ namespace Oxide.Ext.Discord.Libraries.Command
     /// </summary>
     internal class BaseCommand
     {
-        public readonly string Name;
-        public readonly Plugin Plugin;
+        internal readonly string Name;
+        internal readonly Plugin Plugin;
         private readonly Action<DiscordMessage, string, string[]> _callback;
 
         protected BaseCommand(string name, Plugin plugin, Action<DiscordMessage, string, string[]> callback)
@@ -37,6 +37,17 @@ namespace Oxide.Ext.Discord.Libraries.Command
                     DiscordExtension.GlobalLogger.Exception($"An exception occured in discord command {name} for plugin {Plugin?.Name}", ex);   
                 }
             });
+        }
+
+        /// <summary>
+        /// Returns if a command can run.
+        /// They can only run for the client that they were created for.
+        /// </summary>
+        /// <param name="client">Client to compare against</param>
+        /// <returns>True if same bot client; false otherwise</returns>
+        public bool CanRun(BotClient client)
+        {
+            return client != null && DiscordClient.Clients[Plugin.Name]?.Bot == client;
         }
 
         public virtual bool CanHandle(DiscordMessage message, DiscordChannel channel) => true;
