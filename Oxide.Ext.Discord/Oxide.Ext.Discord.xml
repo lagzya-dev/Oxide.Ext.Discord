@@ -5249,11 +5249,6 @@
             Total permissions for the user in the guild (excludes overrides)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Region">
-            <summary>
-            Voice region id
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AfkChannelId">
             <summary>
             ID of afk channel
