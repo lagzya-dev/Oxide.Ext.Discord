@@ -100,10 +100,6 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 _logger.Debug($"{nameof(SocketListener)}.{nameof(SocketClosed)} Discord WebSocket closed. Code: {e.Code.ToString()}, reason: {e.Reason}");
             }
-            else
-            {
-                _logger.Warning($"Discord WebSocket closed with abnormal close code. Code: {e.Code.ToString()}, reason: {e.Reason}");
-            }
             
             _client.CallHook(DiscordHooks.OnDiscordWebsocketClosed, e.Reason, e.Code, e.WasClean);
             _webSocket.SocketState = SocketState.Disconnected;
@@ -121,12 +117,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
 
-            if (HandleDiscordClosedSocket(e.Code, e.Reason))
-            {
-                return;
-            }
-
-            _webSocket.Reconnect();
+            HandleDiscordClosedSocket(e.Code, e.Reason);
         }
 
         /// <summary>
@@ -135,41 +126,41 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <param name="code">Socket close code</param>
         /// <param name="reason">Socket close reason</param>
         /// <returns>True if discord closed the socket with one of it's close codes</returns>
-        private bool HandleDiscordClosedSocket(int code, string reason)
+        private void HandleDiscordClosedSocket(int code, string reason)
         {
-            if (!code.TryParse(out SocketCloseCode closeCode))
+            SocketCloseCode closeCode;
+            if (Enum.IsDefined(typeof(SocketCloseCode), code))
             {
-                if(code >= 4000 && code < 5000)
-                {
-                    closeCode = SocketCloseCode.UnknownCloseCode;
-                }
-                else
-                {
-                    return false;
-                }
+                closeCode = (SocketCloseCode)code;
+            }
+            else if(code >= 4000 && code < 5000)
+            {
+                closeCode = SocketCloseCode.UnknownCloseCode;
+            }
+            else
+            {
+                _logger.Warning($"Discord WebSocket closed with abnormal close code. Code: {code.ToString()}, reason: {reason}");
+                _webSocket.Reconnect();
+                return;
             }
 
-            bool reconnect = false;
+            bool shouldResume = false;
             switch (closeCode)
             {
                 case SocketCloseCode.UnknownError: 
                     _logger.Error("Discord had an unknown error. Reconnecting.");
-                    reconnect = true;
                     break;
                 
                 case SocketCloseCode.UnknownOpcode: 
                     _logger.Error($"Unknown gateway opcode sent: {reason}");
-                    reconnect = true;
                     break;
                 
                 case SocketCloseCode.DecodeError: 
                     _logger.Error($"Invalid gateway payload sent: {reason}");
-                    reconnect = true;
                     break;
                 
                 case SocketCloseCode.NotAuthenticated: 
                     _logger.Error($"Tried to send a payload before identifying: {reason}");
-                    reconnect = true;
                     break;
                 
                 case SocketCloseCode.AuthenticationFailed: 
@@ -178,26 +169,23 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case SocketCloseCode.AlreadyAuthenticated: 
                     _logger.Error($"The bot has already authenticated. Please don't identify more than once.: {reason}");
-                    reconnect = true;
                     break;
                 
                 case SocketCloseCode.InvalidSequence: 
                     _logger.Error($"Invalid resume sequence. Doing full reconnect.: {reason}");
-                    reconnect = true;
                     break;
                 
                 case SocketCloseCode.RateLimited: 
                     _logger.Error($"You're being rate limited. Please slow down how quickly you're sending requests: {reason}");
+                    shouldResume = true;
                     break;
                 
                 case SocketCloseCode.SessionTimedOut: 
                     _logger.Error($"Session has timed out. Starting a new one: {reason}");
-                    reconnect = true;
                     break;
                 
                 case SocketCloseCode.InvalidShard: 
                     _logger.Error($"Invalid shared has been specified: {reason}");
-                    reconnect = true;
                     break;
                 
                 case SocketCloseCode.ShardingRequired: 
@@ -213,24 +201,16 @@ namespace Oxide.Ext.Discord.WebSockets
                     break;
                 
                 case SocketCloseCode.DisallowedIntent:
-                    _logger.Error("The plugin is asking for an intent you have not granted your bot. Please go to your bot and enable the privileged gateway intents: https://support.discord.com/hc/en-us/articles/360040720412-Bot-Verification-and-Data-Whitelisting#privileged-intent-whitelisting");
+                    _logger.Error("The plugin is asking for an intent you have not granted your bot. Please complete step 5 @ https://umod.org/extensions/discord#getting-your-api-key");
                     break;
                 
                 case SocketCloseCode.UnknownCloseCode:
-                    _logger.Error($"Discord has closed the gateway with a code we do not recognize. Code: {code.ToString()}. Please Contact Discord Extension Authors.");
+                    _logger.Error($"Discord has closed the gateway with a code we do not recognize. Code: {code.ToString()}. Reason: {reason} Please Contact Discord Extension Authors.");
                     break;
-                
-                default:
-                    return false;
             }
 
-            if (reconnect)
-            {
-                _webSocket.ShouldAttemptResume = false;
-                _webSocket.Reconnect();
-            }
-            
-            return true;
+            _webSocket.ShouldAttemptResume = shouldResume;
+            _webSocket.Reconnect();
         }
 
         /// <summary>
