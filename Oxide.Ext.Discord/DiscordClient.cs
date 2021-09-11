@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord
             Bot = BotClient.GetOrCreate(this);
 
             RegisterPluginForHooks(Owner);
-            Interface.Call(DiscordHooks.OnDiscordClientConnected, Owner, this);
+            Interface.Call(DiscordExtHooks.OnDiscordClientConnected, Owner, this);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public void Disconnect()
         {
-            Interface.Call(DiscordHooks.OnDiscordClientDisconnected, Owner, this);
+            Interface.Call(DiscordExtHooks.OnDiscordClientDisconnected, Owner, this);
             Bot?.RemoveClient(this);
         }
 
@@ -221,7 +221,7 @@ namespace Oxide.Ext.Discord
                     }
                     
                     field.SetValue(plugin, client);
-                    plugin.Call(DiscordHooks.OnDiscordClientCreated);
+                    plugin.Call(DiscordExtHooks.OnDiscordClientCreated);
                     break;
                 }
             }
