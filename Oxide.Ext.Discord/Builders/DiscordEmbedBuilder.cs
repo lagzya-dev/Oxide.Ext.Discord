@@ -253,7 +253,7 @@ namespace Oxide.Ext.Discord.Builders
             
             if (value.Length > 1024)
             {
-                throw new Exception("Field name cannot be more than 1024  characters");
+                throw new Exception("Field value cannot be more than 1024 characters");
             }
             
             _embed.Fields.Add(new EmbedField(name, value, inline));
