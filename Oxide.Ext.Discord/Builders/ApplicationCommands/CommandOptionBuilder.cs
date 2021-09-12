@@ -7,13 +7,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// <summary>
     /// Builder for command options
     /// </summary>
-    /// <typeparam name="T">Type we're building options for.</typeparam>
-    public class CommandOptionBuilder<T>
+    public class CommandOptionBuilder : IApplicationCommandBuilder
     {
         private readonly CommandOption _option;
-        private readonly T _builder;
+        private readonly IApplicationCommandBuilder _builder;
         
-        internal CommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, T builder)
+        internal CommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, IApplicationCommandBuilder builder)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
@@ -40,7 +39,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="required">If the option is required (Default: true)</param>
         /// <returns>This</returns>
-        public CommandOptionBuilder<T> Required(bool required = true)
+        public CommandOptionBuilder Required(bool required = true)
         {
             _option.Required = required;
             return this;
@@ -53,7 +52,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="value">Value of the choice</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if option type is not string</exception>
-        public CommandOptionBuilder<T> AddChoice(string name, string value)
+        public CommandOptionBuilder AddChoice(string name, string value)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
@@ -76,7 +75,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="value">Value of the choice</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if option type is not int</exception>
-        public CommandOptionBuilder<T> AddChoice(string name, int value)
+        public CommandOptionBuilder AddChoice(string name, int value)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
@@ -96,7 +95,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="value">Value of the choice</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if option type is not double</exception>
-        public CommandOptionBuilder<T> AddChoice(string name, double value)
+        public CommandOptionBuilder AddChoice(string name, double value)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
@@ -109,7 +108,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             return AddChoice(name, (object)value);
         }
 
-        private CommandOptionBuilder<T> AddChoice(string name, object value)
+        private CommandOptionBuilder AddChoice(string name, object value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
@@ -131,12 +130,21 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         }
 
         /// <summary>
-        /// Builds the option and returns the T previous builder
+        /// Builds the option for ApplicationCommandBuilder builder
         /// </summary>
         /// <returns></returns>
-        public T Build()
+        public ApplicationCommandBuilder BuildForApplicationCommand()
         {
-            return _builder;
+            return (ApplicationCommandBuilder)_builder;
+        }
+        
+        /// <summary>
+        /// Builds the option for ApplicationCommandBuilder builder
+        /// </summary>
+        /// <returns></returns>
+        public SubCommandBuilder BuildForSubCommand()
+        {
+            return (SubCommandBuilder)_builder;
         }
     }
 }

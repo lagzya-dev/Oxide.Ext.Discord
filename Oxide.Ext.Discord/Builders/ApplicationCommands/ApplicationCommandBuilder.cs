@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// <summary>
     /// Builder to use when building application commands
     /// </summary>
-    public class ApplicationCommandBuilder
+    public class ApplicationCommandBuilder : IApplicationCommandBuilder
     {
         internal readonly CommandCreate Command;
         private readonly List<CommandOption> _options;
@@ -83,9 +83,9 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="name">Name of the sub command</param>
         /// <param name="description">Description for the sub command</param>
-        /// <returns><see cref="SubCommandBuilder{T}"/></returns>
+        /// <returns><see cref="SubCommandBuilder"/></returns>
         /// <exception cref="Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
-        public SubCommandBuilder<ApplicationCommandBuilder> AddSubCommand(string name, string description)
+        public SubCommandBuilder AddSubCommand(string name, string description)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
@@ -104,7 +104,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 
             _chosenType = CommandOptionType.SubCommand;
 
-            return new SubCommandBuilder<ApplicationCommandBuilder>(_options, name, description, this);
+            return new SubCommandBuilder(_options, name, description, this);
         }
 
         /// <summary>
@@ -113,15 +113,15 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
         /// <param name="name">Name of the option</param>
         /// <param name="description">Description for the option</param>
-        /// <returns><see cref="CommandOptionBuilder{T}"/></returns>
-        public CommandOptionBuilder<ApplicationCommandBuilder> AddOption(CommandOptionType type, string name, string description)
+        /// <returns><see cref="CommandOptionBuilder"/></returns>
+        public CommandOptionBuilder AddOption(CommandOptionType type, string name, string description)
         {
             if (_chosenType.HasValue && (_chosenType.Value == CommandOptionType.SubCommandGroup || _chosenType.Value == CommandOptionType.SubCommand))
             {
                 throw new Exception("Cannot mix sub command / sub command groups with command options");
             }
 
-            return new CommandOptionBuilder<ApplicationCommandBuilder>(_options, type, name, description, this);
+            return new CommandOptionBuilder(_options, type, name, description, this);
         }
 
         /// <summary>

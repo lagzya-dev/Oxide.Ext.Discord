@@ -262,7 +262,7 @@
             </summary>
             <param name="name">Name of the sub command</param>
             <param name="description">Description for the sub command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder"/></returns>
             <exception cref="T:System.Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
@@ -272,7 +272,7 @@
             <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
             <param name="name">Name of the option</param>
             <param name="description">Description for the option</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.Build">
             <summary>
@@ -280,20 +280,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1">
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder">
             <summary>
             Builder for command options
             </summary>
-            <typeparam name="T">Type we're building options for.</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.Required(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.Required(System.Boolean)">
             <summary>
             Set the required state for the option
             </summary>
             <param name="required">If the option is required (Default: true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.String)">
             <summary>
             Adds a choice to this option of type string
             </summary>
@@ -302,7 +301,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not string</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.Int32)">
             <summary>
             Adds a choice to this option of type int
             </summary>
@@ -311,7 +310,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not int</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.Double)">
             <summary>
             Adds a choice to this option of type double
             </summary>
@@ -320,23 +319,34 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not double</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.BuildForApplicationCommand">
             <summary>
-            Builds the option and returns the T previous builder
+            Builds the option for ApplicationCommandBuilder builder
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.BuildForSubCommand">
+            <summary>
+            Builds the option for ApplicationCommandBuilder builder
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.IApplicationCommandBuilder">
+            <summary>
+            Represents a type that is an Application Command Builder
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder">
             <summary>
             Base Sub Command builder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1._options">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder._options">
             <summary>
             Options list to have options added to
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
             <summary>
             Adds a new option
             </summary>
@@ -346,7 +356,13 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.BuildForApplicationCommand">
+            <summary>
+            Returns the built sub command
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.BuildForSubCommandGroup">
             <summary>
             Returns the built sub command
             </summary>
@@ -363,7 +379,7 @@
             </summary>
             <param name="name">Name of the command</param>
             <param name="description">Description of the command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder"/></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder">
             <summary>
@@ -10311,6 +10327,14 @@
             </summary>
             <param name="color">string hex color code</param>
             <exception cref="T:System.Exception">Throw if color is greater than #FFFFFF</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="red">Red color (0-255)</param>
+            <param name="green">Green color (0-255)</param>
+            <param name="blue">Blue color (0-255)</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Int32,System.Int32,System.Int32)">
             <summary>
