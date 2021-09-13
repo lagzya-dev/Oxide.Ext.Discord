@@ -145,6 +145,16 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         }
 
         /// <summary>
+        /// Returns if a given arg exists
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool HasArg(string name)
+        {
+            return _args.ContainsKey(name);
+        }
+
+        /// <summary>
         /// Returns the string value supplied to command option matching the name.
         /// If the arg was optional and wasn't supplied default supplied value will be used.
         /// </summary>
