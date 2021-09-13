@@ -448,6 +448,15 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Exception thrown if color is outside of range</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Adds a RGB based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="red">Red value</param>
+            <param name="green">Green value</param>
+            <param name="blue">Blue value</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.Int32,System.Int32,System.Int32)">
             <summary>
             Adds a RGB based color. Color appears as a bar on the left side of the message
