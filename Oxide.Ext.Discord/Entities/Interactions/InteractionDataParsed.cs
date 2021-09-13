@@ -38,14 +38,16 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// Command group for the interaction if <see cref="ApplicationCommandType.ChatInput"/> Command Type if an application command
         /// Null if command group is not used for the command.
+        /// Defaults to empty string if command does not have a command group
         /// </summary>
-        public string CommandGroup;
+        public string CommandGroup = string.Empty;
         
         /// <summary>
         /// Sub Command for the interaction if <see cref="ApplicationCommandType.ChatInput"/> Command Typ  if an application command
         /// Null if sub command group is not used for the command.
+        /// Defaults to empty string if command does not have sub command
         /// </summary>
-        public string SubCommand;
+        public string SubCommand = string.Empty;
         
         /// <summary>
         /// Interaction Data Supplied Args if <see cref="ApplicationCommandType.ChatInput"/> Command Type if an application command

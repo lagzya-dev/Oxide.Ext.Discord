@@ -73,7 +73,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Gets full extension version including test information
         /// </summary>
-        public static string GetExtensionVersion => ExtensionVersion + TestVersion; 
+        public static string GetExtensionVersion => ExtensionVersion.ToString() + TestVersion; 
 
         /// <summary>
         /// Called when mod is loaded

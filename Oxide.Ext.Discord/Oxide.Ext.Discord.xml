@@ -8388,12 +8388,14 @@
             <summary>
             Command group for the interaction if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Type if an application command
             Null if command group is not used for the command.
+            Defaults to empty string if command does not have a command group
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.SubCommand">
             <summary>
             Sub Command for the interaction if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Typ  if an application command
             Null if sub command group is not used for the command.
+            Defaults to empty string if command does not have sub command
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.Args">
