@@ -133,6 +133,19 @@ namespace Oxide.Ext.Discord.Builders
         /// <summary>
         /// Adds a RGB based color. Color appears as a bar on the left side of the message
         /// </summary>
+        /// <param name="red">Red value</param>
+        /// <param name="green">Green value</param>
+        /// <param name="blue">Blue value</param>
+        /// <returns>This</returns>
+        public DiscordEmbedBuilder AddColor(byte red, byte green, byte blue)
+        {
+            _embed.Color = new DiscordColor(red, green, blue);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds a RGB based color. Color appears as a bar on the left side of the message
+        /// </summary>
         /// <param name="red">Red value between 0 - 255</param>
         /// <param name="green">Green value between 0 - 255</param>
         /// <param name="blue">Blue value between 0 - 255</param>
