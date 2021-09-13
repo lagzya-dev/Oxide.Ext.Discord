@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
     internal class BaseCommand
     {
         internal readonly string Name;
-        internal readonly Plugin Plugin;
+        internal Plugin Plugin;
         private readonly Action<DiscordMessage, string, string[]> _callback;
 
         protected BaseCommand(string name, Plugin plugin, Action<DiscordMessage, string, string[]> callback)
@@ -51,5 +51,10 @@ namespace Oxide.Ext.Discord.Libraries.Command
         }
 
         public virtual bool CanHandle(DiscordMessage message, DiscordChannel channel) => true;
+
+        internal void OnRemoved()
+        {
+            Plugin = null;
+        }
     }
 }

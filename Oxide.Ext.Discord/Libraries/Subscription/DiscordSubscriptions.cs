@@ -136,8 +136,11 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             int removed = 0;
             foreach (KeyValuePair<Snowflake, Hash<string, DiscordSubscription>> hash in _subscriptions)
             {
-                if (hash.Value.Remove(plugin.Name))
+                DiscordSubscription sub = hash.Value[plugin.Name];
+                if (sub != null)
                 {
+                    hash.Value.Remove(plugin.Name);
+                    sub.OnRemoved();
                     removed++;
                     if (hash.Value.Count == 0)
                     {

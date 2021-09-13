@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     /// </summary>
     public class DiscordSubscription
     {
-        private readonly Plugin _plugin;
+        private Plugin _plugin;
         private readonly Action<DiscordMessage> _callback;
         private readonly Snowflake _channelId;
 
@@ -59,6 +59,11 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                     DiscordExtension.GlobalLogger.Exception($"An exception occured for discord subscription in channel {_channelId.ToString()} for plugin {_plugin?.Name}", ex);   
                 }
             });
+        }
+
+        internal void OnRemoved()
+        {
+            _plugin = null;
         }
     }
 }

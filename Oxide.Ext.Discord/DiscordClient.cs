@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Which plugin is the owner of this client
         /// </summary>
-        public Plugin Owner { get; }
+        public Plugin Owner { get; private set; }
         
         /// <summary>
         /// List of plugins that are registered to receive hook calls for this client
@@ -257,6 +257,7 @@ namespace Oxide.Ext.Discord
             }
             
             client.Disconnect();
+            
             DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {client.Owner.Name}");
             foreach (FieldInfo field in client.Owner.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
@@ -268,6 +269,9 @@ namespace Oxide.Ext.Discord
             }
 
             Clients.Remove(client.Owner.Name);
+            
+            client.Owner = null;
+            client.RegisteredForHooks.Clear();
         }
         #endregion
     }

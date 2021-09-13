@@ -13009,7 +13009,7 @@
             <param name="command">Command to remove</param>
             <param name="plugin">Plugin the command is for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.RemoveDiscordCommand(Oxide.Ext.Discord.Libraries.Command.BaseCommand)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.RemoveDmCommand(Oxide.Ext.Discord.Libraries.Command.DirectMessageCommand)">
             <summary>
             Removes a discord command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L314)
