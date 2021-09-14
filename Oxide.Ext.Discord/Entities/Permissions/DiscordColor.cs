@@ -268,7 +268,22 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return new DiscordColor(uint.Parse(reader.Value.ToString()));
+            if (reader.TokenType == JsonToken.Null)
+            {
+                if (IsNullable(objectType))
+                {
+                    throw new JsonException($"Cannot convert null value to {objectType}.");
+                }
+
+                return null;
+            }
+
+            if (reader.TokenType == JsonToken.Integer)
+            {
+                return new DiscordColor(uint.Parse(reader.Value.ToString()));
+            }
+            
+            throw new JsonException($"Unexpected token {reader.TokenType} when parsing discord color.");
         }
 
         /// <summary>
@@ -277,6 +292,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(DiscordColor);
+        }
+        
+        private bool IsNullable(Type objectType)
+        {
+            return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
     }
 }
