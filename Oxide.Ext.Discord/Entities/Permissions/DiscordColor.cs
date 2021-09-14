@@ -291,7 +291,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(DiscordColor);
+            return objectType != null && (IsNullable(objectType) ? Nullable.GetUnderlyingType(objectType) : objectType) == typeof(DiscordColor);
         }
         
         private bool IsNullable(Type objectType)
