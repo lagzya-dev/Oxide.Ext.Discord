@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Channels;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
@@ -47,5 +48,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("options")]
         public List<CommandOption> Options { get; set; }
+        
+        /// <summary>
+        /// If the option is a channel type, the channels shown will be restricted to these types
+        /// See <see cref="ChannelType"/>
+        /// </summary>
+        [JsonProperty("channel_types")]
+        public List<ChannelType> ChannelTypes { get; set; }
     }
 }

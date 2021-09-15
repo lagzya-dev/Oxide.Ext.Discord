@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
@@ -42,6 +43,23 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         public CommandOptionBuilder Required(bool required = true)
         {
             _option.Required = required;
+            return this;
+        }
+        
+        /// <summary>
+        /// Set's the channel types for the option
+        /// </summary>
+        /// <param name="types">Types of channels the option allows</param>
+        /// <returns>This</returns>
+        /// <exception cref="Exception">Thrown if <see cref="CommandOptionType"/> is not Channel</exception>
+        public CommandOptionBuilder SetChannelTypes(List<ChannelType> types)
+        {
+            if (_option.Type != CommandOptionType.Channel)
+            {
+                throw new Exception("Can only set ChannelTypes for CommandOptionType.Channel");
+            }
+            
+            _option.ChannelTypes = types;
             return this;
         }
 
