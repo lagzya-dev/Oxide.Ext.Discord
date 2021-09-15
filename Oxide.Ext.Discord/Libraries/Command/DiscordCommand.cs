@@ -22,12 +22,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// </summary>
         public readonly char[] CommandPrefixes;
 
-        private readonly Hash<string, DirectMessageCommand> DirectMessageCommands = new Hash<string, DirectMessageCommand>();
-        private readonly Hash<string, GuildCommand> GuildCommands = new Hash<string, GuildCommand>();
+        private readonly Hash<string, DirectMessageCommand> _directMessageCommands = new Hash<string, DirectMessageCommand>();
+        private readonly Hash<string, GuildCommand> _guildCommands = new Hash<string, GuildCommand>();
 
         private Lang _lang;
-        
-        internal Lang Lang
+
+        private Lang Lang
         {
             get
             {
@@ -66,7 +66,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         [LibraryFunction(nameof(HasDirectMessageCommands))]
         public bool HasDirectMessageCommands()
         {
-            return DirectMessageCommands.Count != 0;
+            return _directMessageCommands.Count != 0;
         }
         
         /// <summary>
@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         [LibraryFunction(nameof(HasGuildCommands))]
         public bool HasGuildCommands()
         {
-            return GuildCommands.Count != 0;
+            return _guildCommands.Count != 0;
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         {
             string commandName = command.ToLowerInvariant();
 
-            if (DirectMessageCommands.TryGetValue(commandName, out DirectMessageCommand cmd))
+            if (_directMessageCommands.TryGetValue(commandName, out DirectMessageCommand cmd))
             {
                 string previousPluginName = cmd.Plugin?.Name ?? "an unknown plugin";
                 string newPluginName = plugin?.Name ?? "An unknown plugin";
@@ -133,7 +133,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             cmd = new DirectMessageCommand(commandName, plugin, callback);
 
             // Add the new command to collections
-            DirectMessageCommands[commandName] = cmd;
+            _directMessageCommands[commandName] = cmd;
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         {
             string commandName = command.ToLowerInvariant();
 
-            if (GuildCommands.TryGetValue(commandName, out GuildCommand cmd))
+            if (_guildCommands.TryGetValue(commandName, out GuildCommand cmd))
             {
                 string previousPluginName = cmd.Plugin?.Name ?? "an unknown plugin";
                 string newPluginName = plugin?.Name ?? "An unknown plugin";
@@ -193,7 +193,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             cmd = new GuildCommand(commandName, plugin, allowedChannels, callback);
 
             // Add the new command to collections
-            GuildCommands[commandName] = cmd;
+            _guildCommands[commandName] = cmd;
         }
 
         /// <summary>
@@ -205,16 +205,16 @@ namespace Oxide.Ext.Discord.Libraries.Command
         [LibraryFunction(nameof(RemoveDiscordCommand))]
         public void RemoveDiscordCommand(string command, Plugin plugin)
         {
-            BaseCommand cmd = DirectMessageCommands[command];
-            if (cmd != null && cmd.Plugin == plugin)
+            DirectMessageCommand dmCommand = _directMessageCommands[command];
+            if (dmCommand != null && dmCommand.Plugin == plugin)
             {
-                RemoveDiscordCommand(cmd);
+                RemoveDmCommand(dmCommand);
             }
             
-            cmd = GuildCommands[command];
-            if (cmd != null && cmd.Plugin == plugin)
+            GuildCommand guildCommand = _guildCommands[command];
+            if (guildCommand != null && guildCommand.Plugin == plugin)
             {
-                RemoveDiscordCommand(cmd);
+                RemoveGuildCommand(guildCommand);
             }
         }
 
@@ -223,10 +223,18 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L314)
         /// </summary>
         /// <param name="command"></param>
-        private void RemoveDiscordCommand(BaseCommand command)
+        private void RemoveDmCommand(DirectMessageCommand command)
         {
-            DirectMessageCommands.Remove(command.Name);
-            GuildCommands.Remove(command.Name);
+            DirectMessageCommand dmCommand = _directMessageCommands[command.Name];
+            dmCommand.OnRemoved();
+            _directMessageCommands.Remove(command.Name);
+        }
+
+        private void RemoveGuildCommand(GuildCommand command)
+        {
+            GuildCommand guildCommand = _guildCommands[command.Name];
+            guildCommand.OnRemoved();
+            _guildCommands.Remove(command.Name);
         }
 
         /// <summary>
@@ -235,28 +243,35 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="sender"></param>
         internal void OnPluginUnloaded(Plugin sender)
         {
-            List<BaseCommand> removeCommands = new List<BaseCommand>();
+            List<DirectMessageCommand> dmCommands = new List<DirectMessageCommand>();
+            List<GuildCommand> guildCommands = new List<GuildCommand>();
             // Remove all discord commands which were registered by the plugin
-            foreach (DirectMessageCommand cmd in DirectMessageCommands.Values)
+            foreach (DirectMessageCommand cmd in _directMessageCommands.Values)
             {
                 if (cmd.Plugin.Name == sender.Name)
                 {
-                    removeCommands.Add(cmd);
+                    dmCommands.Add(cmd);
                 }
             }
             
-            foreach (GuildCommand cmd in GuildCommands.Values)
+            foreach (GuildCommand cmd in _guildCommands.Values)
             {
                 if (cmd.Plugin.Name == sender.Name)
                 {
-                    removeCommands.Add(cmd);
+                    guildCommands.Add(cmd);
                 }
             }
 
-            for (int index = 0; index < removeCommands.Count; index++)
+            for (int index = 0; index < dmCommands.Count; index++)
             {
-                BaseCommand cmd = removeCommands[index];
-                RemoveDiscordCommand(cmd);
+                DirectMessageCommand cmd = dmCommands[index];
+                RemoveDmCommand(cmd);
+            }
+            
+            for (int index = 0; index < guildCommands.Count; index++)
+            {
+                GuildCommand cmd = guildCommands[index];
+                RemoveGuildCommand(cmd);
             }
         }
 
@@ -271,15 +286,15 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="message"></param>
         internal bool HandleDirectMessageCommand(BotClient client, DiscordMessage message, DiscordChannel channel, string name, string[] args)
         {
-            DirectMessageCommand command = DirectMessageCommands[name];
-            if (command == null || !command.CanHandle(message, channel))
+            DirectMessageCommand command = _directMessageCommands[name];
+            if (command == null || !command.CanRun(client) || !command.CanHandle(message, channel))
             {
                 return false;
             }
             
             if (!command.Plugin.IsLoaded)
             {
-                DirectMessageCommands.Remove(name);
+                _directMessageCommands.Remove(name);
                 return false;
             }
 
@@ -303,15 +318,15 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="message"></param>
         internal bool HandleGuildCommand(BotClient client, DiscordMessage message, DiscordChannel channel, string name, string[] args)
         {
-            GuildCommand command = GuildCommands[name];
-            if (command == null || !command.CanHandle(message, channel))
+            GuildCommand command = _guildCommands[name];
+            if (command == null || !command.CanRun(client) || !command.CanHandle(message, channel))
             {
                 return false;
             }
             
             if (!command.Plugin.IsLoaded)
             {
-                GuildCommands.Remove(name);
+                _guildCommands.Remove(name);
                 return false;
             }
 

@@ -12,9 +12,9 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     /// </summary>
     public class DiscordSubscription
     {
-        internal readonly Plugin Plugin;
-        internal readonly Action<DiscordMessage> Callback;
-        internal readonly Snowflake ChannelId;
+        private Plugin _plugin;
+        private readonly Action<DiscordMessage> _callback;
+        private readonly Snowflake _channelId;
 
         /// <summary>
         /// Constructor
@@ -24,9 +24,20 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <param name="callback">Callback when the channel message is sent</param>
         public DiscordSubscription(Snowflake channelId, Plugin plugin, Action<DiscordMessage> callback)
         {
-            ChannelId = channelId;
-            Plugin = plugin;
-            Callback = callback;
+            _channelId = channelId;
+            _plugin = plugin;
+            _callback = callback;
+        }
+
+        /// <summary>
+        /// Returns if a subscription can run.
+        /// They can only run for the client that they were created for.
+        /// </summary>
+        /// <param name="client">Client to compare against</param>
+        /// <returns>True if same bot client; false otherwise</returns>
+        public bool CanRun(BotClient client)
+        {
+            return client != null && DiscordClient.Clients[_plugin.Name]?.Bot == client;
         }
 
         /// <summary>
@@ -39,15 +50,20 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             {
                 try
                 {
-                    Plugin.TrackStart();
-                    Callback.Invoke(message);
-                    Plugin.TrackEnd();
+                    _plugin.TrackStart();
+                    _callback.Invoke(message);
+                    _plugin.TrackEnd();
                 }
                 catch(Exception ex)
                 {
-                    DiscordExtension.GlobalLogger.Exception($"An exception occured for discord subscription in channel {ChannelId.ToString()} for plugin {Plugin?.Name}", ex);   
+                    DiscordExtension.GlobalLogger.Exception($"An exception occured for discord subscription in channel {_channelId.ToString()} for plugin {_plugin?.Name}", ex);   
                 }
             });
+        }
+
+        internal void OnRemoved()
+        {
+            _plugin = null;
         }
     }
 }

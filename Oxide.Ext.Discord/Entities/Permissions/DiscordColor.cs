@@ -150,6 +150,17 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// <param name="red">Red color (0-255)</param>
         /// <param name="green">Green color (0-255)</param>
         /// <param name="blue">Blue color (0-255)</param>
+        public DiscordColor(byte red, byte green, byte blue)
+        {
+            Color = (uint)((red << 16) + (green << 8) + blue);
+        }
+        
+        /// <summary>
+        /// DiscordColor Constructor
+        /// </summary>
+        /// <param name="red">Red color (0-255)</param>
+        /// <param name="green">Green color (0-255)</param>
+        /// <param name="blue">Blue color (0-255)</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0 or &gt; 255</exception>
         public DiscordColor(int red, int green, int blue)
         {
@@ -168,7 +179,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
                 throw new ArgumentOutOfRangeException(nameof(blue), "Value must be between 0 - 255");
             }
 
-            Color = (uint)((red << 8) + (green << 4) + blue);
+            Color = (uint)((red << 16) + (green << 8) + blue);
         }
         
         /// <summary>
@@ -195,7 +206,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
                 throw new ArgumentOutOfRangeException(nameof(blue), "Value must be < 255");
             }
 
-            Color = (red << 8) + (green << 4) + blue;
+            Color = (red << 16) + (green << 8) + blue;
         }
 
         /// <summary>
@@ -222,7 +233,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
                 throw new ArgumentOutOfRangeException(nameof(blue), "Value must be between 0 - 1");
             }
             
-            Color = ((uint)(red * 255) << 8) + ((uint)(green * 255)  << 4) + (uint)(blue * 255);
+            Color = ((uint)(red * 255) << 16) + ((uint)(green * 255)  << 8) + (uint)(blue * 255);
         }
         
         /// <summary>
@@ -257,7 +268,22 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return new DiscordColor(uint.Parse(reader.Value.ToString()));
+            if (reader.TokenType == JsonToken.Null)
+            {
+                if (IsNullable(objectType))
+                {
+                    throw new JsonException($"Cannot convert null value to {objectType}.");
+                }
+
+                return null;
+            }
+
+            if (reader.TokenType == JsonToken.Integer)
+            {
+                return new DiscordColor(uint.Parse(reader.Value.ToString()));
+            }
+            
+            throw new JsonException($"Unexpected token {reader.TokenType} when parsing discord color.");
         }
 
         /// <summary>
@@ -265,7 +291,12 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(DiscordColor);
+            return objectType != null && (IsNullable(objectType) ? Nullable.GetUnderlyingType(objectType) : objectType) == typeof(DiscordColor);
+        }
+        
+        private bool IsNullable(Type objectType)
+        {
+            return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
     }
 }

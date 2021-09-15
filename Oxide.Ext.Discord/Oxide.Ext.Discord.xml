@@ -262,7 +262,7 @@
             </summary>
             <param name="name">Name of the sub command</param>
             <param name="description">Description for the sub command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder"/></returns>
             <exception cref="T:System.Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
@@ -272,7 +272,7 @@
             <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
             <param name="name">Name of the option</param>
             <param name="description">Description for the option</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.Build">
             <summary>
@@ -280,20 +280,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1">
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder">
             <summary>
             Builder for command options
             </summary>
-            <typeparam name="T">Type we're building options for.</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.Required(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.Required(System.Boolean)">
             <summary>
             Set the required state for the option
             </summary>
             <param name="required">If the option is required (Default: true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.String)">
             <summary>
             Adds a choice to this option of type string
             </summary>
@@ -302,7 +301,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not string</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.Int32)">
             <summary>
             Adds a choice to this option of type int
             </summary>
@@ -311,7 +310,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not int</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.Double)">
             <summary>
             Adds a choice to this option of type double
             </summary>
@@ -320,23 +319,34 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not double</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.BuildForApplicationCommand">
             <summary>
-            Builds the option and returns the T previous builder
+            Builds the option for ApplicationCommandBuilder builder
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.BuildForSubCommand">
+            <summary>
+            Builds the option for ApplicationCommandBuilder builder
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.IApplicationCommandBuilder">
+            <summary>
+            Represents a type that is an Application Command Builder
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder">
             <summary>
             Base Sub Command builder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1._options">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder._options">
             <summary>
             Options list to have options added to
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
             <summary>
             Adds a new option
             </summary>
@@ -346,7 +356,13 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.BuildForApplicationCommand">
+            <summary>
+            Returns the built sub command
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.BuildForSubCommandGroup">
             <summary>
             Returns the built sub command
             </summary>
@@ -363,7 +379,7 @@
             </summary>
             <param name="name">Name of the command</param>
             <param name="description">Description of the command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder`1"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder"/></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder">
             <summary>
@@ -410,6 +426,13 @@
             <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(Oxide.Ext.Discord.Entities.Permissions.DiscordColor)">
+            <summary>
+            Adds a Discord Color to the embed
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.UInt32)">
             <summary>
             Adds an int based color to the embed. Color appears as a bar on the left side of the message
@@ -425,6 +448,15 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Exception thrown if color is outside of range</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Adds a RGB based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="red">Red value</param>
+            <param name="green">Green value</param>
+            <param name="blue">Blue value</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.Int32,System.Int32,System.Int32)">
             <summary>
             Adds a RGB based color. Color appears as a bar on the left side of the message
@@ -434,6 +466,39 @@
             <param name="blue">Blue value between 0 - 255</param>
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.Single,System.Single,System.Single)">
+            <summary>
+            Adds a RGB based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="red">Red value between 0 - 1</param>
+            <param name="green">Green value between 0 - 1</param>
+            <param name="blue">Blue value between 0 - 1</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(System.Double,System.Double,System.Double)">
+            <summary>
+            Adds a RGB based color. Color appears as a bar on the left side of the message
+            </summary>
+            <param name="red">Red value between 0 - 1</param>
+            <param name="green">Green value between 0 - 1</param>
+            <param name="blue">Blue value between 0 - 1</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddNowTimestamp">
+            <summary>
+            Adds a timestamp to an embed with the current time
+            </summary>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddTimestamp(System.DateTime)">
+            <summary>
+            Adds a timestamp to an embed with the given time
+            </summary>
+            <param name="timestamp">Timestamp to set for the embed</param>
+            <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddBlankField(System.Boolean)">
             <summary>
@@ -1285,6 +1350,656 @@
             </code>
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordStageInstanceDeleted">
+            <code>
+            void OnDiscordStageInstanceDeleted(StageInstance stage, DiscordGuild guild)
+            {
+                Puts("OnDiscordStageInstanceDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Constants.DiscordExtHooks">
+            <summary>
+            Represents all hooks available in the discord extension
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientConnected">
+            <code>
+            void OnDiscordClientConnected(Plugin owner, DiscordClient client)
+            {
+                Puts("OnDiscordClientConnected Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientDisconnected">
+            <code>
+            void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
+            {
+                Puts("OnDiscordClientDisconnected Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientCreated">
+            <code>
+            void OnDiscordClientCreated()
+            {
+                Puts("OnDiscordClientCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordWebsocketOpened">
+            <code>
+            void OnDiscordWebsocketOpened()
+            {
+                Puts("OnDiscordWebsocketOpened Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordWebsocketClosed">
+            <code>
+            void OnDiscordWebsocketClosed(string reason, ushort code, bool wasClean)
+            {
+                Puts("OnDiscordWebsocketClosed Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordWebsocketErrored">
+            <code>
+            void OnDiscordWebsocketErrored(Exception ex, string message)
+            {
+                Puts("OnDiscordWebsocketErrored Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordSetupHeartbeat">
+            <code>
+            void OnDiscordSetupHeartbeat(float heartbeat)
+            {
+                Puts("OnDiscordHeartbeatSent Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordHeartbeatSent">
+            <code>
+            void OnDiscordHeartbeatSent()
+            {
+                Puts("OnDiscordHeartbeatSent Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordPlayerLinked">
+            <code>
+            void OnDiscordPlayerLinked(IPlayer player, DiscordUser discord)
+            {
+                Puts("OnDiscordPlayerLinked Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordPlayerUnlinked">
+            <code>
+            void OnDiscordPlayerUnlinked(IPlayer player, DiscordUser discord)
+            {
+                Puts("OnDiscordPlayerUnlinked Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGatewayReady">
+            <code>
+            void OnDiscordGatewayReady(GatewayReadyEvent ready)
+            {
+                Puts("OnDiscordGatewayReady Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGatewayResumed">
+            <code>
+            void OnDiscordGatewayResumed(GatewayResumedEvent resume)
+            {
+                Puts("OnDiscordGatewayResumed Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectChannelCreated">
+            <code>
+            void OnDiscordDirectChannelCreated(Channel channel)
+            {
+                Puts("OnDiscordDirectChannelCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildChannelCreated">
+            <code>
+            void OnDiscordGuildChannelCreated(Channel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildChannelCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectChannelUpdated">
+            <code>
+            Note: previous will be null if previous channel not found
+            void OnDiscordDirectChannelUpdated(Channel channel, DiscordChannel previous)
+            {
+                Puts("OnDiscordDirectChannelUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildChannelUpdated">
+            <code>
+            void OnDiscordGuildChannelUpdated(DiscordChannel channel, DiscordChannel previous, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildChannelUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectChannelDeleted">
+            <code>
+            Note: Not sure if this will ever happen but we handle it if it does
+            void OnDiscordDirectChannelDeleted(DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectChannelDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildChannelDeleted">
+            <code>
+            void OnDiscordGuildChannelDeleted(DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildChannelDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectChannelPinsUpdated">
+            <code>
+            Note: Channel will be null if we haven't seen it yet
+            void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectChannelPinsUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildChannelPinsUpdated">
+            <code>
+            void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildChannelPinsUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildCreated">
+            <code>
+            void OnDiscordGuildCreated(GuildDiscordGuild guild)
+            {
+                Puts("OnDiscordGuildCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildUpdated">
+            <code>
+            Note: previous will be null if guild previously not loaded
+            void OnDiscordGuildUpdated(DiscordGuild guild, DiscordGuild previous)
+            {
+                Puts("OnDiscordGuildUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildUnavailable">
+            <code>
+            void OnDiscordGuildUnavailable(DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildUnavailable Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildDeleted">
+            <code>
+            void OnDiscordGuildDeleted(DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberBanned">
+            <code>
+            void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberBanned Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberUnbanned">
+            <code>
+            void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildBanRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildEmojisUpdated">
+            <code>
+            void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash&lt;Snowflake, DiscordEmoji&gt; previous, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildEmojisUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildStickersUpdated">
+            <code>
+            void OnDiscordGuildStickersUpdated(GuildStickersUpdatedEvent stickers, Hash&lt;Snowflake, DiscordSticker&gt; previous, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildStickersUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildIntegrationsUpdated">
+            <code>
+            void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildIntegrationsUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberAdded">
+            <code>
+            void OnDiscordGuildMemberAdded(GuildMemberAddedEvent member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberRemoved">
+            <code>
+            void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberUpdated">
+            <code>
+            void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMembersLoaded">
+            <code>
+            void OnDiscordGuildMembersLoaded(DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMembersLoaded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMembersChunk">
+            <code>
+            void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMembersChunk Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildRoleCreated">
+            <code>
+            void OnDiscordGuildRoleCreated(DiscordRole role, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildRoleCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildRoleUpdated">
+            <code>
+            void OnDiscordGuildRoleUpdated(DiscordRole role, DiscordRole previous, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildRoleUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildRoleDeleted">
+            <code>
+            void OnDiscordGuildRoleDeleted(DiscordRole role, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildRoleDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordCommand">
+            <code>
+            void OnDiscordCommand(DiscordMessage message, string cmd, string[] args)
+            {
+                Puts("OnDiscordCommand Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectMessageCreated">
+            <code>
+            Note: Channel may be null if we haven't seen it yet
+            void OnDiscordDirectMessageCreated(DiscordMessage message, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectMessageCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMessageCreated">
+            <code>
+            void OnDiscordGuildMessageCreated(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMessageCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectMessageUpdated">
+            <code>
+            void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectMessageUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMessageUpdated">
+            <code>
+            void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectMessageUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectMessageDeleted">
+            <code>
+            void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectMessageDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMessageDeleted">
+            <code>
+            void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordDirectMessageDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectMessagesBulkDeleted">
+            <code>
+            void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectMessagesBulkDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMessagesBulkDeleted">
+            <code>
+            void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMessagesBulkDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectMessageReactionAdded">
+            <code>
+            void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectMessageReactionAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMessageReactionAdded">
+            <code>
+            void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMessageReactionAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectMessageReactionRemoved">
+            <code>
+            void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectMessageReactionRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMessageReactionRemoved">
+            <code>
+            void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMessageReactionRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectMessageReactionRemovedAll">
+            <code>
+            void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectMessageReactionRemovedAll Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMessageReactionRemovedAll">
+            <code>
+            void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMessageReactionRemovedAll Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectMessageReactionEmojiRemoved">
+            <code>
+            void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectMessageReactionEmojiRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMessageReactionEmojiRemoved">
+            <code>
+            void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMessageReactionEmojiRemoved Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberPresenceUpdated">
+            <code>
+            void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberPresenceUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectTypingStarted">
+            <code>
+            void OnDiscordDirectTypingStarted(TypingStartedEvent typing, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectTypingStarted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildTypingStarted">
+            <code>
+            void OnDiscordGuildTypingStarted(TypingStartedEvent typing, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildTypingStarted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordUserUpdated">
+            <code>
+            void OnDiscordUserUpdated(DiscordUser user)
+            {
+                Puts("OnDiscordUserUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectVoiceStateUpdated">
+            <code>
+            void OnDiscordDirectVoiceStateUpdated(VoiceState voice, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectVoiceStateUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildVoiceStateUpdated">
+            <code>
+            void OnDiscordGuildVoiceStateUpdated(VoiceState voice, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildVoiceStateUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildVoiceServerUpdated">
+            <code>
+            void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildVoiceServerUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildWebhookUpdated">
+            <code>
+            void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildWebhookUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectInviteCreated">
+            <code>
+            void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectInviteCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildInviteCreated">
+            <code>
+            void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildInviteCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectInviteDeleted">
+            <code>
+            void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel)
+            {
+                Puts("OnDiscordDirectInviteDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildInviteDeleted">
+            <code>
+            void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildInviteDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordInteractionCreated">
+            <code>
+            void OnDiscordInteractionCreated(DiscordInteraction interaction)
+            {
+                Puts("OnDiscordInteractionCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildIntegrationCreated">
+            <code>
+            void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildIntegrationCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildIntegrationUpdated">
+            <code>
+            void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildIntegrationUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordIntegrationDeleted">
+            <code>
+            void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
+            {
+                Puts("OnDiscordIntegrationDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildThreadCreated">
+            <code>
+            void OnDiscordGuildThreadCreated(DiscordChannel thread, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildThreadCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildThreadUpdated">
+            <code>
+            void OnDiscordGuildThreadUpdated(DiscordChannel thread, DiscordChannel previous, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildThreadUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildThreadDeleted">
+            <code>
+            void OnDiscordGuildThreadDeleted(DiscordChannel thread, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildThreadDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildThreadListSynced">
+            <code>
+            void OnDiscordGuildThreadListSynced(ThreadListSyncEvent sync, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildThreadListSynced Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildThreadMemberUpdated">
+            <code>
+            void OnDiscordGuildThreadMemberUpdated(ThreadMember member, DiscordChannel thread, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildThreadMemberUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildThreadMembersUpdated">
+            <code>
+            void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildThreadMembersUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordUnhandledCommand">
+            <code>
+            void OnDiscordUnhandledCommand(EventPayload payload)
+            {
+                Puts("OnDiscordUnhandledCommand Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordStageInstanceCreated">
+            <code>
+            void OnDiscordStageInstanceCreated(StageInstance stage, DiscordGuild guild)
+            {
+                Puts("OnDiscordStageInstanceCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordStageInstanceUpdated">
+            <code>
+            void OnDiscordStageInstanceUpdated(StageInstance stage, StageInstance previous, DiscordGuild guild)
+            {
+                Puts("OnDiscordStageInstanceUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordStageInstanceDeleted">
             <code>
             void OnDiscordStageInstanceDeleted(StageInstance stage, DiscordGuild guild)
             {
@@ -5209,11 +5924,6 @@
             Total permissions for the user in the guild (excludes overrides)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Region">
-            <summary>
-            Voice region id
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AfkChannelId">
             <summary>
             ID of afk channel
@@ -7334,6 +8044,11 @@
             Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Version">
+            <summary>
+            Auto incrementing version identifier updated during substantial record changes
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edit a command.
@@ -7673,12 +8388,14 @@
             <summary>
             Command group for the interaction if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Type if an application command
             Null if command group is not used for the command.
+            Defaults to empty string if command does not have a command group
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.SubCommand">
             <summary>
             Sub Command for the interaction if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Typ  if an application command
             Null if sub command group is not used for the command.
+            Defaults to empty string if command does not have sub command
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.Args">
@@ -7711,6 +8428,13 @@
             <summary>
             Args supplied for the interaction
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.HasArg(System.String)">
+            <summary>
+            Returns if a given arg exists
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetString(System.String,System.String)">
             <summary>
@@ -9622,6 +10346,14 @@
             <param name="color">string hex color code</param>
             <exception cref="T:System.Exception">Throw if color is greater than #FFFFFF</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="red">Red color (0-255)</param>
+            <param name="green">Green color (0-255)</param>
+            <param name="blue">Blue color (0-255)</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Int32,System.Int32,System.Int32)">
             <summary>
             DiscordColor Constructor
@@ -9965,6 +10697,12 @@
             Channel Type (Text)
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.StartEmbeddedActivities">
+            <summary>
+            Allows for launching activities (applications with the `EMBEDDED` flag) in a voice channel
+            Channel Type (Voice)
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.RoleTags">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure">Role Tags Structure</a>
@@ -10185,6 +10923,7 @@
             <summary>
             For guild stickers, a unicode emoji representing the sticker's expression.
             For nitro stickers, a comma-separated list of related expressions.
+            autocomplete/suggestion tags for the sticker (max 200 characters)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.Type">
@@ -10320,7 +11059,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.Tags">
             <summary>
-            The Discord name of a unicode emoji representing the sticker's expression (2-200 characters)
+            Autocomplete/suggestion tags for the sticker (max 200 characters)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.FileAttachments">
@@ -11473,15 +12212,6 @@
             Extensions for enums
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.EnumExt.TryParse``1(System.Object,``0@)">
-            <summary>
-            Try to parse the enum value from string value
-            </summary>
-            <param name="value">string to parse</param>
-            <param name="result">Resulting enum value</param>
-            <typeparam name="TEnum">Enum Type</typeparam>
-            <returns>True if successfully parsed; false otherwise</returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.HashExt">
             <summary>
             Hash extensions
@@ -12188,6 +12918,14 @@
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L76)
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.BaseCommand.CanRun(Oxide.Ext.Discord.BotClient)">
+            <summary>
+            Returns if a command can run.
+            They can only run for the client that they were created for.
+            </summary>
+            <param name="client">Client to compare against</param>
+            <returns>True if same bot client; false otherwise</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Command.DiscordCommand">
             <summary>
             Represents a library for discord commands
@@ -12287,7 +13025,7 @@
             <param name="command">Command to remove</param>
             <param name="plugin">Plugin the command is for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.RemoveDiscordCommand(Oxide.Ext.Discord.Libraries.Command.BaseCommand)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.RemoveDmCommand(Oxide.Ext.Discord.Libraries.Command.DirectMessageCommand)">
             <summary>
             Removes a discord command
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L314)
@@ -12518,6 +13256,14 @@
             <param name="channelId">ID of the channel</param>
             <param name="plugin">Plugin the subscription is for</param>
             <param name="callback">Callback when the channel message is sent</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription.CanRun(Oxide.Ext.Discord.BotClient)">
+            <summary>
+            Returns if a subscription can run.
+            They can only run for the client that they were created for.
+            </summary>
+            <param name="client">Client to compare against</param>
+            <returns>True if same bot client; false otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription.Invoke(Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
             <summary>
@@ -13006,6 +13752,16 @@
         <member name="P:Oxide.Ext.Discord.Rest.Request.InProgress">
             <summary>
             Returns if the request is currently in progress
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Request.UrlBase">
+            <summary>
+            Base URL for Discord
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Request.ApiVersion">
+            <summary>
+            API Version for Rest requests
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Request.#ctor(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action{Oxide.Ext.Discord.Entities.Api.RestResponse},System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Logging.ILogger)">

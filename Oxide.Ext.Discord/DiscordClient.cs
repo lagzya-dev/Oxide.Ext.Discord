@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Which plugin is the owner of this client
         /// </summary>
-        public Plugin Owner { get; }
+        public Plugin Owner { get; private set; }
         
         /// <summary>
         /// List of plugins that are registered to receive hook calls for this client
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord
             Bot = BotClient.GetOrCreate(this);
 
             RegisterPluginForHooks(Owner);
-            Interface.Call(DiscordHooks.OnDiscordClientConnected, Owner, this);
+            Interface.Call(DiscordExtHooks.OnDiscordClientConnected, Owner, this);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public void Disconnect()
         {
-            Interface.Call(DiscordHooks.OnDiscordClientDisconnected, Owner, this);
+            Interface.Call(DiscordExtHooks.OnDiscordClientDisconnected, Owner, this);
             Bot?.RemoveClient(this);
         }
 
@@ -206,6 +206,8 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
+            OnPluginRemoved(plugin);
+            
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
@@ -219,7 +221,7 @@ namespace Oxide.Ext.Discord
                     }
                     
                     field.SetValue(plugin, client);
-                    plugin.Call(DiscordHooks.OnDiscordClientCreated);
+                    plugin.Call(DiscordExtHooks.OnDiscordClientCreated);
                     break;
                 }
             }
@@ -230,7 +232,7 @@ namespace Oxide.Ext.Discord
         internal static void OnPluginRemoved(Plugin plugin)
         {
             DiscordClient client = Clients[plugin.Name];
-            if (client?.Settings == null)
+            if (client == null)
             {
                 return;
             }
@@ -255,6 +257,7 @@ namespace Oxide.Ext.Discord
             }
             
             client.Disconnect();
+            
             DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {client.Owner.Name}");
             foreach (FieldInfo field in client.Owner.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
@@ -266,6 +269,9 @@ namespace Oxide.Ext.Discord
             }
 
             Clients.Remove(client.Owner.Name);
+            
+            client.Owner = null;
+            client.RegisteredForHooks.Clear();
         }
         #endregion
     }

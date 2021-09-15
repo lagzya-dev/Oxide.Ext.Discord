@@ -259,5 +259,12 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         [Description("USE_EXTERNAL_STICKERS")]
         UseExternalStickers  = 1ul << 37,
+        
+        /// <summary>
+        /// Allows for launching activities (applications with the `EMBEDDED` flag) in a voice channel
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("START_EMBEDDED_ACTIVITIES")]
+        StartEmbeddedActivities  = 1ul << 39,
     }
 }
