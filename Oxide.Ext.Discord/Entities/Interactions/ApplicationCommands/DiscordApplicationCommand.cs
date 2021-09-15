@@ -61,6 +61,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public bool? DefaultPermissions { get; set; }
         
         /// <summary>
+        /// Auto incrementing version identifier updated during substantial record changes
+        /// </summary>
+        [JsonProperty("version")]
+        public Snowflake Version { get; set; }
+        
+        /// <summary>
         /// Edit a command.
         /// Updates will be available in all guilds after 1 hour.
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command">Edit Global Application Command</a>

@@ -215,13 +215,17 @@ namespace Oxide.Plugins
                 ["SavedSteamId"] = new Snowflake(12321321)
             };
         }
-
-        public void RegisterEvents(Action<IPlayer, DiscordUser> onLinked, Action<IPlayer, DiscordUser> onUnlinked)
+        
+        //Method in your plugin should call _link.OnLinked whenever a player and discord are linked
+        public void OnLinked(IPlayer player, DiscordUser user) 
         {
-            //Saves these actions which are to be called when a user links or unlinks.
-            //Failure to call these will cause the DiscordLink data to become outdated.
-            _onLinked = onLinked;
-            _onUnlinked = onUnlinked;
+            _link.OnLinked(player, user);
+        }
+        
+        //Method in your plugin should call _link.OnUnlinked whenever a player and discord are unlinked
+        public void OnUnlinked(IPlayer player, DiscordUser user) 
+        {
+            _link.OnUnlinked(player, user);
         }
     }
 }

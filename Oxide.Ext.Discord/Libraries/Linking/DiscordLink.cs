@@ -344,7 +344,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             _steamIdToDiscordId[player.Id] = discord.Id;
             _steamIds.Add(player.Id);
             _discordIds.Add(discord.Id);
-            Interface.Oxide.CallHook(DiscordHooks.OnDiscordPlayerLinked, player, discord);
+            Interface.Oxide.CallHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
         }
 
         /// <summary>
@@ -378,7 +378,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             _steamIdToDiscordId.Remove(player.Id);
             _steamIds.Remove(player.Id);
             _discordIds.Remove(discord.Id);
-            Interface.Oxide.CallHook(DiscordHooks.OnDiscordPlayerUnlinked, player, discord);
+            Interface.Oxide.CallHook(DiscordExtHooks.OnDiscordPlayerUnlinked, player, discord);
         }
     }
 }

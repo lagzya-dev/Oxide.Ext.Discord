@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         public string Description { get; set; }
         
         /// <summary>
-        /// The Discord name of a unicode emoji representing the sticker's expression (2-200 characters)
+        /// Autocomplete/suggestion tags for the sticker (max 200 characters)
         /// </summary>
         [JsonProperty("tags")]
         public string Tags { get; set; }

@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// <summary>
     /// Builder for Sub Command Groups
     /// </summary>
-    public class SubCommandGroupBuilder
+    public class SubCommandGroupBuilder : IApplicationCommandBuilder
     {
         private readonly CommandOption _option;
 
@@ -26,10 +26,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="name">Name of the command</param>
         /// <param name="description">Description of the command</param>
-        /// <returns><see cref="SubCommandBuilder{T}"/></returns>
-        public SubCommandBuilder<SubCommandGroupBuilder> AddSubCommand(string name, string description)
+        /// <returns><see cref="SubCommandBuilder"/></returns>
+        public SubCommandBuilder AddSubCommand(string name, string description)
         {
-            return new SubCommandBuilder<SubCommandGroupBuilder>(_option.Options, name, description, this);
+            return new SubCommandBuilder(_option.Options, name, description, this);
         }
     }
 }

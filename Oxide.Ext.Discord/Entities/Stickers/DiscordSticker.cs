@@ -40,6 +40,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <summary>
         /// For guild stickers, a unicode emoji representing the sticker's expression.
         /// For nitro stickers, a comma-separated list of related expressions.
+        /// autocomplete/suggestion tags for the sticker (max 200 characters)
         /// </summary>
         [JsonProperty("tags")]
         public string Tags { get; set; }
