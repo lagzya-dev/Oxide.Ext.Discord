@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Timers;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.RateLimits;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
 {
@@ -11,16 +13,24 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
     public class SocketCommandHandler
     {
         private readonly Socket _webSocket;
+        private readonly ILogger _logger;
         private readonly List<CommandPayload> _pendingCommands = new List<CommandPayload>();
-        private Timer _sendTimer;
+        private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
+        private Timer _rateLimitTimer;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="webSocket">Websocket to handle commands for</param>
-        public SocketCommandHandler(Socket webSocket)
+        /// <param name="logger">Logger for this handler</param>
+        public SocketCommandHandler(Socket webSocket, ILogger logger)
         {
             _webSocket = webSocket;
+            _logger = logger;
+            
+            _rateLimitTimer = new Timer(1000);
+            _rateLimitTimer.AutoReset = false;
+            _rateLimitTimer.Elapsed += RateLimitElapsed;
         }
 
         /// <summary>
@@ -33,7 +43,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             if (_webSocket.IsConnected())
             {
-                _webSocket.Send(command);
+                _pendingCommands.Add(command);
+                SendCommands();
                 return;
             }
 
@@ -43,41 +54,38 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
             
             _pendingCommands.Add(command);
-            StartSendTimer();
         }
 
-        private void StartSendTimer()
+        internal void OnSocketConnected()
         {
-            if (_sendTimer != null && _sendTimer.Enabled)
-            {
-                return;
-            }
-
-            _sendTimer = new Timer
-            {
-                Interval = 1000
-            };
-            _sendTimer.Elapsed += SendMessage;
+            SendCommands();
         }
 
-        private void SendMessage(object sender, ElapsedEventArgs e)
+        private void RateLimitElapsed(object sender, ElapsedEventArgs e)
         {
-            if (_pendingCommands.Count == 0)
+            _rateLimitTimer.Stop();
+            SendCommands();
+        }
+        
+        private void SendCommands()
+        {
+            while (_pendingCommands.Count != 0)
             {
-                _sendTimer.Stop();
-                _sendTimer.Dispose();
-                _sendTimer = null;
-                return;
-            }
-            
-            if (!_webSocket.IsConnected())
-            {
-                return;
-            }
+                if (_rateLimit.HasReachedRateLimit)
+                {
+                    _rateLimitTimer.Interval = _rateLimit.NextReset;
+                    _rateLimitTimer.Stop();
+                    _rateLimitTimer.Start();
+                    
+                    return;
+                }
+                
+                CommandPayload payload = _pendingCommands[0];
+                _pendingCommands.RemoveAt(0);
 
-            CommandPayload payload = _pendingCommands[0];
-            _webSocket.Send(payload);
-            _pendingCommands.RemoveAt(0);
+                _webSocket.Send(payload);
+                _rateLimit.FiredRequest();
+            }
         }
     }
 }
