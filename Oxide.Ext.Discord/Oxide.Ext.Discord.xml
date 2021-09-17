@@ -292,6 +292,14 @@
             <param name="required">If the option is required (Default: true)</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
+            <summary>
+            Set's the channel types for the option
+            </summary>
+            <param name="types">Types of channels the option allows</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType"/> is not Channel</exception>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.String)">
             <summary>
             Adds a choice to this option of type string
@@ -7863,6 +7871,12 @@
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.ChannelTypes">
+            <summary>
+            If the option is a channel type, the channels shown will be restricted to these types
+            See <see cref="T:Oxide.Ext.Discord.Entities.Channels.ChannelType"/>
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-choice-structure">ApplicationCommandOptionChoice</a>
@@ -13471,6 +13485,89 @@
             <param name="level">Log Level to check</param>
             <returns>True if the logger is logging for the given log level</returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.RateLimits.BaseRateLimit">
+            <summary>
+            Represents a base rate limit for websocket and rest api requests
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NumRequests">
+            <summary>
+            The number of requests that have executed since the last reset
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.LastReset">
+            <summary>
+            The UNIX timestamp of the last reset
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.MaxRequests">
+            <summary>
+            The max number of requests this rate limit can handle per interval
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.ResetInterval">
+            <summary>
+            The interval in which this resets at
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.#ctor(System.Int32,System.Double)">
+            <summary>
+            Base Rate Limit Constructor
+            </summary>
+            <param name="maxRequests">Max requests per interval</param>
+            <param name="resetInterval">Reset Interval</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.FiredRequest">
+            <summary>
+            Called when an API request is fired
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.RateLimits.BaseRateLimit.HasReachedRateLimit">
+            <summary>
+            Returns true if we have reached the global rate limit 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NextReset">
+            <summary>
+            Returns how long until the current rate limit period will expire
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.Shutdown">
+            <summary>
+            Called when a bot is shutting down
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.RateLimits.RestRateLimit">
+            <summary>
+            Represents a rate limit for rest requests
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.#ctor">
+            <summary>
+            Constructor for RestRateLimit
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.ReachedRateLimit(System.Double)">
+            <summary>
+            Called if we receive a header notifying us of hitting the rate limit
+            </summary>
+            <param name="retryAfter">How long until we should retry API request again</param>
+        </member>
+        <member name="P:Oxide.Ext.Discord.RateLimits.RestRateLimit.NextReset">
+            <summary>
+            Returns how long until the current rate limit period will expire
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit">
+            <summary>
+            Represents a WebSocket Rate Limit
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.#ctor">
+            <summary>
+            Constructor for WebsocketRateLimit
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Rest.Bucket">
             <summary>
             Represents a discord API bucket for a group of requests
@@ -14187,11 +14284,12 @@
             Handles command queueing when the websocket is down
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.#ctor(Oxide.Ext.Discord.WebSockets.Socket)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.#ctor(Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
             <param name="webSocket">Websocket to handle commands for</param>
+            <param name="logger">Logger for this handler</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.CommandPayload)">
             <summary>
@@ -14391,13 +14489,14 @@
             The current sequence number for the websocket
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger,Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler)">
             <summary>
             Creates a new socket listener
             </summary>
             <param name="client">Client this listener is for</param>
             <param name="socket">Socket this listener is for</param>
             <param name="logger">Logger for the client</param>
+            <param name="commands">Socket Command Handler</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.Shutdown">
             <summary>
