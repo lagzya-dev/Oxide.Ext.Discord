@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Stickers;
@@ -43,7 +44,6 @@ namespace Oxide.Ext.Discord.WebSockets
         private readonly BotClient _client;
         private readonly Socket _webSocket;
         private readonly ILogger _logger;
-        private readonly SocketCommandHandler _commands;
         private HeartbeatHandler _heartbeat;
 
         /// <summary>
@@ -52,13 +52,11 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <param name="client">Client this listener is for</param>
         /// <param name="socket">Socket this listener is for</param>
         /// <param name="logger">Logger for the client</param>
-        /// <param name="commands">Socket Command Handler</param>
-        public SocketListener(BotClient client, Socket socket, ILogger logger, SocketCommandHandler commands)
+        public SocketListener(BotClient client, Socket socket, ILogger logger)
         {
             _client = client;
             _webSocket = socket;
             _logger = logger;
-            _commands = commands;
             _heartbeat = new HeartbeatHandler(_client, _webSocket, this, _logger);
         }
 
@@ -1657,7 +1655,6 @@ namespace Oxide.Ext.Discord.WebSockets
             };
 
             _webSocket.Send(GatewayCommandCode.Identify, identify);
-            _commands.OnSocketConnected();
         }
 
         /// <summary>

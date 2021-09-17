@@ -127,7 +127,7 @@ namespace Oxide.Ext.Discord.Rest
             double timeSince = Time.TimeSinceEpoch();
             if (Handler.RateLimit.HasReachedRateLimit)
             {
-                int resetIn = (int)(Handler.RateLimit.NextReset * 1000) + 1;
+                int resetIn = (int) ((Handler.RateLimit.NextBucketReset - timeSince) * 1000);
                 _logger.Debug($"Global Rate limit hit. Sleeping until Reset: {resetIn.ToString()}ms");
                 Thread.Sleep(resetIn);
                 return;

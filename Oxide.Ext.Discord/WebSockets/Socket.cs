@@ -48,8 +48,8 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _client = client;
             _logger = logger;
-            _commands = new SocketCommandHandler(this, logger);
-            _listener = new SocketListener(_client, this, _logger, _commands);
+            _listener = new SocketListener(_client, this, _logger);
+            _commands = new SocketCommandHandler(this);
         }
 
         /// <summary>
