@@ -50,5 +50,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("width")]
         public int? Width { get; set; }
+        
+        /// <summary>
+        /// Whether this attachment is ephemeral
+        /// </summary>
+        [JsonProperty("ephemeral")]
+        public bool? Ephemeral { get; set; }
     }
 }
