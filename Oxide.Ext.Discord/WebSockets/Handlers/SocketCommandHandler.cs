@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly ILogger _logger;
         private readonly List<CommandPayload> _pendingCommands = new List<CommandPayload>();
         private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
-        private Timer _rateLimitTimer;
+        private readonly Timer _rateLimitTimer;
 
         /// <summary>
         /// Constructor
@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     _rateLimitTimer.Interval = _rateLimit.NextReset;
                     _rateLimitTimer.Stop();
                     _rateLimitTimer.Start();
-                    
+                    _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit!");
                     return;
                 }
                 
