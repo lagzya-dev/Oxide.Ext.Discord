@@ -9906,6 +9906,11 @@
             Width of file (if image)
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Ephemeral">
+            <summary>
+            Whether this attachment is ephemeral
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageCreate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-parameters-for-contenttype-applicationjson">Message Create Structure</a> to be created in discord
@@ -10699,15 +10704,33 @@
             Channel Type (Text)
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.CreatePublicThreads">
+            <summary>
+            Allows for creating threads
+            Channel Type (Text)
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UsePrivateThreads">
             <summary>
             Allows for creating and participating in private threads
             Channel Type (Text)
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.CreatePrivateThreads">
+            <summary>
+            Allows for creating private threads
+            Channel Type (Text)
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseExternalStickers">
             <summary>
             Allows the usage of custom stickers from other servers
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.SendMessagesInThreads">
+            <summary>
+            Allows for sending messages in threads
             Channel Type (Text)
             </summary>
         </member>
