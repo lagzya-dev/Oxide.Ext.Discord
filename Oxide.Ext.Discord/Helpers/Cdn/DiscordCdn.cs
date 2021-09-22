@@ -334,6 +334,28 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
                     throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
         }
+        
+        /// <summary>
+        /// Returns the sticker url with the given ID
+        /// </summary>
+        /// <param name="roleId">ID of the role</param>
+        /// <param name="format">Format for the icon to be returned in</param>
+        /// <returns>Return url for the role icon</returns>
+        /// <exception cref="ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        public static string GetRoleIcon(Snowflake roleId, ImageFormat format = ImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/role-icons/{roleId.ToString()}.{GetExtension(format, roleId)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+            }
+        }
 
         /// <summary>
         /// Returns the extension to use for the image

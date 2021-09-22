@@ -34,6 +34,18 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         [JsonProperty("hoist")]
         public bool? Hoist { get; set; }
+        
+        /// <summary>
+        /// The role's icon image (if the guild has the ROLE_ICONS feature)
+        /// </summary>
+        [JsonProperty("icon")]
+        public bool Icon { get; set; }
+        
+        /// <summary>
+        /// The role's unicode emoji (if the guild has the ROLE_ICONS feature)
+        /// </summary>
+        [JsonProperty("unicode_emoji")]
+        public bool UnicodeEmoji { get; set; }
 
         /// <summary>
         /// Position of this role

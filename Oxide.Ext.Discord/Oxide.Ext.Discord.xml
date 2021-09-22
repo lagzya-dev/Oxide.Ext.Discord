@@ -132,8 +132,8 @@
             <summary>
             Close the websocket with discord
             </summary>
-            <param name="attemptReconnect">Should we attempt to reconnect to discord after closing</param>
-            <param name="attemptResume">Should we attempt to resume the previous session</param>
+            <param name="reconnect">Should we attempt to reconnect to discord after closing</param>
+            <param name="resume">Should we attempt to resume the previous session</param>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.ShutdownBot">
             <summary>
@@ -13538,7 +13538,7 @@
             Base Rate Limit Constructor
             </summary>
             <param name="maxRequests">Max requests per interval</param>
-            <param name="resetInterval">Reset Interval</param>
+            <param name="interval">Reset Interval</param>
         </member>
         <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.FiredRequest">
             <summary>
