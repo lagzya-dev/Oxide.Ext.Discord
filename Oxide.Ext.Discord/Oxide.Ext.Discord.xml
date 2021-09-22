@@ -7012,34 +7012,14 @@
             Discord Extension doesn't currently support a guild features
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.InviteSplash">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.AnimatedIcon">
             <summary>
-            Guild has access to set an invite splash background
+            Guild has access to set an animated guild icon
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.VipRegions">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Banner">
             <summary>
-            Guild has access to set 384kbps bitrate in voice (previously VIP voice servers)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.VanityUrl">
-            <summary>
-            Guild has access to set a vanity URL
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Verified">
-            <summary>
-            Guild is verified
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Partnered">
-            <summary>
-            Guild is partnered
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Community">
-            <summary>
-            Guild can enable welcome screen and discovery, and receives community updates
+            Guild has access to set a guild banner image
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Commerce">
@@ -7047,9 +7027,9 @@
             Guild has access to use commerce features (i.e. create store channels)
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.News">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Community">
             <summary>
-            Guild has access to create news channels
+            Guild can enable welcome screen and discovery, and receives community updates
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Discoverable">
@@ -7062,24 +7042,14 @@
             Guild is able to be featured in the directory
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.AnimatedIcon">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.InviteSplash">
             <summary>
-            Guild has access to set an animated guild icon
+            Guild has access to set an invite splash background
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Banner">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.MemberVerificationGateEnabled">
             <summary>
-            Guild has access to set a guild banner image
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.WelcomeScreenEnabled">
-            <summary>
-            Guild has enabled the welcome screen
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.TicketedEventsEnabled">
-            <summary>
-            Guild has enabled ticketed events
+            Guild has enabled Membership Screening
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.MonetizationEnabled">
@@ -7092,9 +7062,29 @@
             Guild has increased custom sticker slots
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.ThreeDayThreadArchive">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.News">
             <summary>
-            Guild has access to the three day archive time for threads
+            Guild has access to create news channels
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Partnered">
+            <summary>
+            Guild is partnered
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.PreviewEnabled">
+            <summary>
+            Guild can be previewed before joining via Membership Screening or the directory
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.PrivateThreads">
+            <summary>
+            Guild has access to create private threads
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.RoleIcons">
+            <summary>
+            Guild can be previewed before joining via Membership Screening or the directory
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.SevenDayThreadArchive">
@@ -7102,9 +7092,34 @@
             Guild has access to the seven day archive time for threads
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.PrivateThreads">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.ThreeDayThreadArchive">
             <summary>
-            Guild has access to create private threads
+            Guild has access to the three day archive time for threads
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.TicketedEventsEnabled">
+            <summary>
+            Guild has enabled ticketed events
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.VanityUrl">
+            <summary>
+            Guild has access to set a vanity URL
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Verified">
+            <summary>
+            Guild is verified
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.VipRegions">
+            <summary>
+            Guild has access to set 384kbps bitrate in voice (previously VIP voice servers)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.WelcomeScreenEnabled">
+            <summary>
+            Guild has enabled the welcome screen
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember">
@@ -10454,6 +10469,16 @@
             If this role is pinned in the user listing
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Icon">
+            <summary>
+            The role's icon image (if the guild has the ROLE_ICONS feature)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.UnicodeEmoji">
+            <summary>
+            The role's unicode emoji (if the guild has the ROLE_ICONS feature)
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Position">
             <summary>
             Position of this role
@@ -12503,6 +12528,15 @@
             <param name="stickerId">ID of the sticker</param>
             <param name="format">Format for the sticker to be returned in</param>
             <returns>Return url for the sticker</returns>
+            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetRoleIcon(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Helpers.Cdn.ImageFormat)">
+            <summary>
+            Returns the sticker url with the given ID
+            </summary>
+            <param name="roleId">ID of the role</param>
+            <param name="format">Format for the icon to be returned in</param>
+            <returns>Return url for the role icon</returns>
             <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetExtension(Oxide.Ext.Discord.Helpers.Cdn.ImageFormat,System.String)">
