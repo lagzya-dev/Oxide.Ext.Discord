@@ -36,13 +36,13 @@ namespace Oxide.Ext.Discord.RateLimits
         /// Base Rate Limit Constructor
         /// </summary>
         /// <param name="maxRequests">Max requests per interval</param>
-        /// <param name="resetInterval">Reset Interval</param>
-        protected BaseRateLimit(int maxRequests, double resetInterval)
+        /// <param name="interval">Reset Interval</param>
+        protected BaseRateLimit(int maxRequests, double interval)
         {
             MaxRequests = maxRequests;
-            ResetInterval = resetInterval;
+            ResetInterval = interval;
             
-            _timer = new Timer(resetInterval);
+            _timer = new Timer(interval);
             _timer.Elapsed += ResetRateLimit;
             _timer.Start();
             LastReset = Time.TimeSinceEpoch();

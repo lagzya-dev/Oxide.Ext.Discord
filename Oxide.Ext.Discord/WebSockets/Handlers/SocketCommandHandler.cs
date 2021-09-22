@@ -41,6 +41,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="command">Command to send over the websocket</param>
         public void Enqueue(CommandPayload command)
         {
+            if (_logger.IsLogging(DiscordLogLevel.Debug))
+            {
+                _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(Enqueue)} Queuing command {command.OpCode.ToString()}");
+            }
+            
             if (_webSocket.IsConnected())
             {
                 _pendingCommands.Add(command);
@@ -58,11 +63,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         internal void OnSocketConnected()
         {
+            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(OnSocketConnected)} Socket Connected. Sending queued commands.");
             SendCommands();
         }
 
         private void RateLimitElapsed(object sender, ElapsedEventArgs e)
         {
+            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(RateLimitElapsed)} Rate Limit has elapsed. Send Queued Commands");
             _rateLimitTimer.Stop();
             SendCommands();
         }
@@ -73,15 +80,24 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 if (_rateLimit.HasReachedRateLimit)
                 {
-                    _rateLimitTimer.Interval = _rateLimit.NextReset;
-                    _rateLimitTimer.Stop();
-                    _rateLimitTimer.Start();
-                    _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit!");
+                    if (!_rateLimitTimer.Enabled)
+                    {
+                        _rateLimitTimer.Interval = _rateLimit.NextReset;
+                        _rateLimitTimer.Stop();
+                        _rateLimitTimer.Start();
+                        _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {_rateLimit.NextReset.ToString()} seconds");
+                    }
+
                     return;
                 }
                 
                 CommandPayload payload = _pendingCommands[0];
                 _pendingCommands.RemoveAt(0);
+
+                if (_logger.IsLogging(DiscordLogLevel.Debug))
+                {
+                    _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {payload.OpCode.ToString()}");
+                }
 
                 _webSocket.Send(payload);
                 _rateLimit.FiredRequest();
