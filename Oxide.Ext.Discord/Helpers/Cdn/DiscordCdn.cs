@@ -196,6 +196,30 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
                     throw new ArgumentException("ImageFormat is not valid for User Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
             }
         }
+
+        /// <summary>
+        /// Returns the Url of the Guild Member avatar
+        /// </summary>
+        /// <param name="guildId">Guild ID of the Guild Member</param>
+        /// <param name="userId">Discord User ID</param>
+        /// <param name="memberAvatar">Guild Member avatar</param>
+        /// <param name="format">Format the avatar is in</param>
+        /// <returns>Url of the Guild Member avatar</returns>
+        public static string GetGuildMemberAvatar(Snowflake guildId, Snowflake userId, string memberAvatar, ImageFormat format = ImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                case ImageFormat.Gif:
+                    return $"{CdnUrl}/guilds/{guildId.ToString()}/users/{userId.ToString()}/avatars/{memberAvatar}.{GetExtension(format, memberAvatar)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Guild Member Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
+            }
+        }
         
         /// <summary>
         /// Returns the url to the application icon

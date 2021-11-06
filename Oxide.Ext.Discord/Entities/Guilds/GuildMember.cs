@@ -30,6 +30,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("nick")]
         public string Nickname { get; set; }
+        
+        /// <summary>
+        /// The member's guild avatar hash
+        /// </summary>
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; }
 
         /// <summary>
         /// List of member roles

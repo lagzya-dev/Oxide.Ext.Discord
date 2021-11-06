@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Permissions
@@ -81,6 +82,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// Returns a string to mention this role in a message
         /// </summary>
         public string Mention => DiscordFormatting.MentionRole(Id);
+
+        /// <summary>
+        /// Return the Role Icon URL for a Discord Role. Empty string is not set.
+        /// </summary>
+        public string RoleIcon => !string.IsNullOrEmpty(Icon) ? DiscordCdn.GetRoleIcon(Id) : string.Empty;
         #endregion
 
         #region Helper Methods
