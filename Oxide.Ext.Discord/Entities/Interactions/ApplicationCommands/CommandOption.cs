@@ -61,5 +61,17 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("channel_types")]
         public List<ChannelType> ChannelTypes { get; set; }
+        
+        /// <summary>
+        /// If the option is an INTEGER or NUMBER type, the minimum value permitted
+        /// </summary>
+        [JsonProperty("min_value")]
+        public double? MinValue { get; set; }
+        
+        /// <summary>
+        /// If the option is an INTEGER or NUMBER type, the maximum value permitted
+        /// </summary>
+        [JsonProperty("max_value")]
+        public double? MaxValue { get; set; }
     }
 }
