@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
@@ -66,5 +67,15 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Attachments for a discord message
         /// </summary>
         public List<MessageFileAttachment> FileAttachments { get; set; }
+
+        internal void Validate()
+        {
+            if (!string.IsNullOrEmpty(Content) || Embeds != null && Embeds.Count != 0 || (FileAttachments != null && FileAttachments.Count != 0))
+            {
+                return;
+            }
+
+            throw new Exception("Invalid Message Create. Discord Messages require Either Content, An Embed, Or a File");
+        }
     }
 }

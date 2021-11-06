@@ -253,18 +253,20 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="payload">Message data</param>
+        /// <param name="message">Message data</param>
         /// <param name="executeParams">Webhook execution parameters</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, WebhookExecuteParams executeParams = null, Action callback = null, Action<RestError> error = null)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage message, WebhookExecuteParams executeParams = null, Action callback = null, Action<RestError> error = null)
         {
             if (executeParams == null)
             {
                 executeParams = new WebhookExecuteParams();
             }
             
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, payload, callback, error);
+            message.Validate();
+            
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
 
         /// <summary>
@@ -272,11 +274,11 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="payload">Message data</param>
+        /// <param name="message">Message data</param>
         /// <param name="executeParams">Webhook execution parameters</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage message, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             if (executeParams == null)
             {
@@ -284,8 +286,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             }
 
             executeParams.Wait = true;
+            message.Validate();
             
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, payload, callback, error);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
 
         /// <summary>

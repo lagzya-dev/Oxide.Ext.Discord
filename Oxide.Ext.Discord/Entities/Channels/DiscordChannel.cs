@@ -324,6 +324,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateMessage(DiscordClient client, MessageCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            message.Validate();
             client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, message, callback, error);
         }
 
@@ -344,7 +345,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Content = message
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback, error);
+            CreateMessage(client, createMessage, callback, error);
         }
 
         /// <summary>
@@ -364,7 +365,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Embeds = new List<DiscordEmbed> {embed}
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback, error);
+            CreateMessage(client, createMessage, callback, error);
         }
         
         /// <summary>
@@ -384,7 +385,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Embeds = embeds
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback, error);
+            CreateMessage(client, createMessage, callback, error);
         }
 
         /// <summary>
