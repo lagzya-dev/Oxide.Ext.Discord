@@ -50,6 +50,24 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// User can play this song
         /// </summary>
         [Description("PLAY")]
-        Play =	1 << 5
+        Play =	1 << 5,
+
+        /// <summary>
+        /// User is playing an activity in a voice channel with friends
+        /// </summary>
+        [Description("PARTY_PRIVACY_FRIENDS")]
+        PartyPrivacyFriends = 1 << 6,
+        
+        /// <summary>
+        /// User is playing an activity in a voice channel
+        /// </summary>
+        [Description("PARTY_PRIVACY_VOICE_CHANNEL")]
+        PartyPrivacyVoiceChannel = 1 << 7,
+        
+        /// <summary>
+        /// User is playing embedded activity
+        /// </summary>
+        [Description("EMBEDDED")]
+        Embedded = 1 << 8,
     }
 }
