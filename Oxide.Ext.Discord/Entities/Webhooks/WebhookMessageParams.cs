@@ -1,6 +1,9 @@
 using Oxide.Ext.Discord.Builders;
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
+    /// <summary>
+    /// Represents webhook message query string parameters 
+    /// </summary>
     public class WebhookMessageParams
     {
         /// <summary>

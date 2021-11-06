@@ -292,6 +292,41 @@
             <param name="required">If the option is required (Default: true)</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AutoComplete(System.Boolean)">
+            <summary>
+            Enable auto complete for the option
+            </summary>
+            <param name="autoComplete">If the option support auto complete (Default: true)</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMinValue(System.Int32)">
+            <summary>
+            Min Value for Integer Option
+            </summary>
+            <param name="minValue">Min Value</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMinValue(System.Double)">
+            <summary>
+            Min Value for Number Option
+            </summary>
+            <param name="minValue">Min Value</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMaxValue(System.Int32)">
+            <summary>
+            Max Value for Integer Option
+            </summary>
+            <param name="maxValue">Min Value</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMaxValue(System.Double)">
+            <summary>
+            Max Value for Number Option
+            </summary>
+            <param name="maxValue">Min Value</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
             <summary>
             Set's the channel types for the option
@@ -2271,6 +2306,21 @@
             User can play this song
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Activities.ActivityFlags.PartyPrivacyFriends">
+            <summary>
+            User is playing an activity in a voice channel with friends
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Activities.ActivityFlags.PartyPrivacyVoiceChannel">
+            <summary>
+            User is playing an activity in a voice channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Activities.ActivityFlags.Embedded">
+            <summary>
+            User is playing embedded activity
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.ActivityParty">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-party">Activity Party</a>
@@ -2643,6 +2693,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.Embedded">
             <summary>
             The application has functionality that is specific to the discord client app.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayMessageContent">
+            <summary>
+            The application is verified and can use the Gateway Message intent
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayMessageContentLimited">
+            <summary>
+            The application has the Gateway Message intent enabled on the bot
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication">
@@ -4148,6 +4208,17 @@
             <param name="client">Client to use</param>
             <param name="userId">ID of the user to thread</param>
             <param name="callback">Callback with the thread once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetThreadMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns a thread member object for the specified user if they are a member of the thread
+            returns a 404 response otherwise.
+            See <a href="https://discord.com/developers/docs/resources/channel#get-thread-member">Remove Thread Member</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="userId">ID of the user to thread</param>
+            <param name="callback">Callback with the thread member</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ListThreadMembers(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -6387,6 +6458,16 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyCurrentMember(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Modifies the current members nickname in the guild
+            See <a href="https://discord.com/developers/docs/resources/guild#modify-current-member">Modify Current Member</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="nick">New members nickname</param>
+            <param name="callback">Callback with the updated guild member</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyCurrentUsersNick(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.String},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Modifies the nickname of the current user in a guild
@@ -7142,6 +7223,11 @@
             This users guild nickname
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Avatar">
+            <summary>
+            The member's guild avatar hash
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Roles">
             <summary>
             List of member roles
@@ -7583,6 +7669,16 @@
             Suppress server boost notifications
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags.SuppressGuildReminderNotifications">
+            <summary>
+            Suppress server setup tips
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags.SuppressJoinNotificationReplies">
+            <summary>
+            Hide member join sticker reply buttons
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen"></a>
@@ -7874,6 +7970,11 @@
             If the parameter is required or optional
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Autocomplete">
+            <summary>
+            Enable autocomplete interactions for this option
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Choices">
             <summary>
             Choices for string and int types for the user to pick from
@@ -7890,6 +7991,16 @@
             <summary>
             If the option is a channel type, the channels shown will be restricted to these types
             See <see cref="T:Oxide.Ext.Discord.Entities.Channels.ChannelType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.MinValue">
+            <summary>
+            If the option is an INTEGER or NUMBER type, the minimum value permitted
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.MaxValue">
+            <summary>
+            If the option is an INTEGER or NUMBER type, the maximum value permitted
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice">
@@ -8311,6 +8422,11 @@
             Message components 
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Attachments">
+            <summary>
+            Attachment objects with filename and description
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionData">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data-structure">ApplicationCommandInteractionData</a>
@@ -8386,6 +8502,11 @@
             <summary>
             Present if this option is a group or subcommand
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Focused">
+            <summary>
+            True if this option is the currently focused option for autocomplete
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed">
@@ -8605,6 +8726,11 @@
             For components, edit the message the component was attached to
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType.ApplicationCommandAutocompleteResult">
+            <summary>
+            Respond to an autocomplete interaction with suggested choices
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type">InteractionType</a>
@@ -8623,6 +8749,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent">
             <summary>
             The interaction is a message component
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommandAutocomplete">
+            <summary>
+            The interaction is a application command autocomplete
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent">
@@ -9896,6 +10027,11 @@
             Name of file attached
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.ContentType">
+            <summary>
+            The attachment's <a href="https://en.wikipedia.org/wiki/Media_type">media type</a>
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Size">
             <summary>
             Size of file in bytes
@@ -10476,7 +10612,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.UnicodeEmoji">
             <summary>
-            The role's unicode emoji (if the guild has the ROLE_ICONS feature)
+            The role's unicode emoji as a standard emoji (if the guild has the ROLE_ICONS feature)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Position">
@@ -10507,6 +10643,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Mention">
             <summary>
             Returns a string to mention this role in a message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.RoleIcon">
+            <summary>
+            Return the Role Icon URL for a Discord Role. Empty string is not set.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.HasPermission(Oxide.Ext.Discord.Entities.Permissions.PermissionFlags)">
@@ -11702,7 +11843,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.DiscordCertifiedModerator">
             <summary>
-             Flag given to users that are discord certified moderators
+            Flag given to users that are discord certified moderators
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BotHttpInteractions">
+            <summary>
+            User is a bot that supports HTTP Interactions
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserGuildsRequest">
@@ -12098,14 +12244,26 @@
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.GetWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Gets a previously-sent webhook message from the same token.
+            See <a href="https://discord.com/developers/docs/resources/webhook#get-webhook-message">Edit Webhook Message</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="messageId">Message ID to get</param>
+            <param name="messageParams">Message Params</param>
+            <param name="callback">Callback with the message</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edits a previously-sent webhook message from the same token.
             See <a href="https://discord.com/developers/docs/resources/webhook#edit-webhook-message">Edit Webhook Message</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="messageId">Message ID to edit</param>
-            <param name="payload">The updated message</param>
+            <param name="messageParams">Message Params</param>
+            <param name="message">The updated message</param>
             <param name="callback">Callback with the edited message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -12196,6 +12354,23 @@
             </summary>
             <returns></returns>
             <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams">
+            <summary>
+            Represents webhook message query string parameters 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams.ThreadId">
+            <summary>
+            If the message exists in a thread
+            This field is optional and defaults to null
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams.ToQueryString">
+            <summary>
+            Returns the query string to be used in the webhook URL
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType">
             <summary>
@@ -12469,6 +12644,16 @@
             <param name="userAvatar">User avatar from user</param>
             <param name="format">Format the avatar is in</param>
             <returns>Url of the users avatar</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetGuildMemberAvatar(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Helpers.Cdn.ImageFormat)">
+            <summary>
+            Returns the Url of the Guild Member avatar
+            </summary>
+            <param name="guildId">Guild ID of the Guild Member</param>
+            <param name="userId">Discord User ID</param>
+            <param name="memberAvatar">Guild Member avatar</param>
+            <param name="format">Format the avatar is in</param>
+            <returns>Url of the Guild Member avatar</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetApplicationIconUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Helpers.Cdn.ImageFormat)">
             <summary>
