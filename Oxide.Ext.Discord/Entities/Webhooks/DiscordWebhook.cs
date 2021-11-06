@@ -292,17 +292,42 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         }
 
         /// <summary>
+        /// Gets a previously-sent webhook message from the same token.
+        /// See <a href="https://discord.com/developers/docs/resources/webhook#get-webhook-message">Edit Webhook Message</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="messageId">Message ID to get</param>
+        /// <param name="messageParams">Message Params</param>
+        /// <param name="callback">Callback with the message</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetWebhookMessage(DiscordClient client, Snowflake messageId, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        {
+            if (messageParams == null)
+            {
+                messageParams = new WebhookMessageParams();
+            }
+            
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}{messageParams.ToQueryString()}", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
         /// Edits a previously-sent webhook message from the same token.
         /// See <a href="https://discord.com/developers/docs/resources/webhook#edit-webhook-message">Edit Webhook Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID to edit</param>
-        /// <param name="payload">The updated message</param>
+        /// <param name="messageParams">Message Params</param>
+        /// <param name="message">The updated message</param>
         /// <param name="callback">Callback with the edited message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditWebhookMessage(DiscordClient client, Snowflake messageId, DiscordMessage payload, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void EditWebhookMessage(DiscordClient client, Snowflake messageId, DiscordMessage message, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.PATCH, payload, callback, error);
+            if (messageParams == null)
+            {
+                messageParams = new WebhookMessageParams();
+            }
+            
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}{messageParams.ToQueryString()}", RequestMethod.PATCH, message, callback, error);
         }
         
         /// <summary>
