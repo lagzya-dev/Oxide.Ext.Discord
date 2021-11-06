@@ -742,7 +742,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.PATCH, update, callback, error);
         }
-
+        
         /// <summary>
         /// Modify attributes of a guild member
         /// See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member">Modify Guild Member</a>
@@ -761,6 +761,23 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             
             ModifyGuildMember(client, userId, update, callback, error);
         }
+        
+        /// <summary>
+        /// Modifies the current members nickname in the guild
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="nick">New members nickname</param>
+        /// <param name="callback">Callback with the updated guild member</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ModifyCurrentMember(DiscordClient client, string nick, Action<GuildMember> callback, Action<RestError> error)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["nick"] = nick
+            };
+            
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/@me", RequestMethod.PATCH, data, callback, error);
+        }
 
         /// <summary>
         /// Modifies the nickname of the current user in a guild
@@ -770,6 +787,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="nick">New user nickname</param>
         /// <param name="callback">Callback with updated nickname</param>
         /// <param name="error">Callback when an error occurs with error information</param>
+        [Obsolete("Please use ModifyCurrentMember Instead. This will be removed in February 2022 Update")]
         public void ModifyCurrentUsersNick(DiscordClient client, string nick, Action<string> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>()
