@@ -684,6 +684,20 @@ namespace Oxide.Ext.Discord.Entities.Channels
         }
         
         /// <summary>
+        /// Returns a thread member object for the specified user if they are a member of the thread
+        /// returns a 404 response otherwise.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#get-thread-member">Remove Thread Member</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="userId">ID of the user to thread</param>
+        /// <param name="callback">Callback with the thread member</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetThreadMember(DiscordClient client, Snowflake userId, Action<ThreadMember> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members/{userId}", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
         /// Returns array of thread members objects that are members of the thread.
         /// This endpoint is restricted according to whether the GUILD_MEMBERS Privileged Intent is enabled for your application.
         /// See <a href="https://discord.com/developers/docs/resources/channel#list-thread-members">List Thread Members</a>
