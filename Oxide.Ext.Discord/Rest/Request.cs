@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using Oxide.Core;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
@@ -149,7 +150,10 @@ namespace Oxide.Ext.Discord.Rest
                 }
 
                 _success = true;
-                Callback?.Invoke(Response);
+                Interface.Oxide.NextTick(() =>
+                {
+                    Callback?.Invoke(Response);
+                });
                 Close();
             }
             catch (WebException ex)
@@ -307,7 +311,10 @@ namespace Oxide.Ext.Discord.Rest
                 {
                     try
                     {
-                        OnError?.Invoke(_lastError);
+                        Interface.Oxide.NextTick(() =>
+                        {
+                            OnError?.Invoke(_lastError);
+                        });
                     }
                     catch(Exception ex)
                     {
