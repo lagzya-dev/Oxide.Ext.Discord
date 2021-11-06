@@ -11781,56 +11781,6 @@
             Default value for flags, when none are given to an account.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.DiscordEmployee">
-            <summary>
-            Flag given to users who are a Discord employee.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.PartneredServerOwner">
-            <summary>
-            Flag given to users who are owners of a partnered Discord server.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HyperSquadEvents">
-            <summary>
-            Flag given to users in HypeSquad events.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HouseBravery">
-            <summary>
-            Flag given to users who are in the HypeSquad House of Bravery.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HouseBrilliance">
-            <summary>
-            Flag given to users who are in the HypeSquad House of Brilliance.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HouseBalance">
-            <summary>
-            Flag given to users who are in the HypeSquad House of Balance.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.EarlySupporter">
-            <summary>
-            Flag given to users who subscribed to Nitro before games were added.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.TeamUser">
-            <summary>
-            Flag given to users who are part of a team.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.EarlyVerifiedBotDeveloper">
-            <summary>
-             Flag given to users that developed bots and early verified their accounts.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.DiscordCertifiedModerator">
-            <summary>
-            Flag given to users that are discord certified moderators
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.Staff">
             <summary>
             Flag given to users who are a Discord employee
@@ -11899,6 +11849,56 @@
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BotHttpInteractions">
             <summary>
             User is a Bot uses only HTTP interactions and is shown in the online member list
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.DiscordEmployee">
+            <summary>
+            Flag given to users who are a Discord employee.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.PartneredServerOwner">
+            <summary>
+            Flag given to users who are owners of a partnered Discord server.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HyperSquadEvents">
+            <summary>
+            Flag given to users in HypeSquad events.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HouseBravery">
+            <summary>
+            Flag given to users who are in the HypeSquad House of Bravery.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HouseBrilliance">
+            <summary>
+            Flag given to users who are in the HypeSquad House of Brilliance.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HouseBalance">
+            <summary>
+            Flag given to users who are in the HypeSquad House of Balance.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.EarlySupporter">
+            <summary>
+            Flag given to users who subscribed to Nitro before games were added.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.TeamUser">
+            <summary>
+            Flag given to users who are part of a team.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.EarlyVerifiedBotDeveloper">
+            <summary>
+             Flag given to users that developed bots and early verified their accounts.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.DiscordCertifiedModerator">
+            <summary>
+            Flag given to users that are discord certified moderators
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserGuildsRequest">
