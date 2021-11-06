@@ -37,5 +37,15 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// The application has functionality that is specific to the discord client app.
         /// </summary>
         Embedded = 1 << 17,
+        
+        /// <summary>
+        /// The application is verified and can use the Gateway Message intent
+        /// </summary>
+        GatewayMessageContent = 1 << 18,
+        
+        /// <summary>
+        /// The application has the Gateway Message intent enabled on the bot
+        /// </summary>
+        GatewayMessageContentLimited = 1 << 19,
     }
 }
