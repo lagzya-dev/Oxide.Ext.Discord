@@ -9,6 +9,11 @@ namespace Oxide.Ext.Discord.Entities.Applications
     public enum ApplicationFlags
     {
         /// <summary>
+        /// This application has no flags
+        /// </summary>
+        None = 0,
+        
+        /// <summary>
         /// The application is verified and can use the GUILD_PRESENCES intent
         /// </summary>
         GatewayPresence = 1 << 12,

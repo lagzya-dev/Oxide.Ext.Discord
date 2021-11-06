@@ -2665,6 +2665,11 @@
             Represents <a href="https://discord.com/developers/docs/resources/application#application-object-application-flags">Application Flags</a>
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.None">
+            <summary>
+            This application has no flags
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayPresence">
             <summary>
             The application is verified and can use the GUILD_PRESENCES intent
