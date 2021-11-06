@@ -48,5 +48,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("components")]
         public List<ActionRowComponent> Components { get; set; }
+        
+        /// <summary>
+        /// Attachment objects with filename and description
+        /// </summary>
+        [JsonProperty("attachments")]
+        public List<MessageAttachment> Attachments { get; set; }
     }
 }
