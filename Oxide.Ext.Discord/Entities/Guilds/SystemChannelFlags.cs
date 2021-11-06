@@ -20,6 +20,18 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Suppress server boost notifications
         /// </summary>
         [Description("SUPPRESS_PREMIUM_SUBSCRIPTIONS")]
-        SuppressPremiumSubscriptions = 1 << 1
+        SuppressPremiumSubscriptions = 1 << 1,
+        
+        /// <summary>
+        /// Suppress server setup tips
+        /// </summary>
+        [Description("SUPPRESS_GUILD_REMINDER_NOTIFICATIONS")]
+        SuppressGuildReminderNotifications = 1 << 1,
+        
+        /// <summary>
+        /// Hide member join sticker reply buttons
+        /// </summary>
+        [Description("SUPPRESS_JOIN_NOTIFICATION_REPLIES")]
+        SuppressJoinNotificationReplies = 1 << 1
     }
 }
