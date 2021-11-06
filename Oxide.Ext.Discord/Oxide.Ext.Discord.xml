@@ -11796,11 +11796,6 @@
             Flag given to users in HypeSquad events.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel1">
-            <summary>
-            Flag given to users who have participated in the 𝐁ug report program and are level 1.
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HouseBravery">
             <summary>
             Flag given to users who are in the HypeSquad House of Bravery.
@@ -11826,16 +11821,6 @@
             Flag given to users who are part of a team.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel2">
-            <summary>
-            Flag given to users who have participated in the 𝐁ug report program and are level 2.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.VerifiedBot">
-            <summary>
-            Flag given to users who are verified bots.
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.EarlyVerifiedBotDeveloper">
             <summary>
              Flag given to users that developed bots and early verified their accounts.
@@ -11846,9 +11831,74 @@
             Flag given to users that are discord certified moderators
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.Staff">
+            <summary>
+            Flag given to users who are a Discord employee
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.Partner">
+            <summary>
+            Flag given to users who are owners of a partnered Discord server
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HypeSquad">
+            <summary>
+            Flag given to users who are HypeSquad Events Coordinator
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel1">
+            <summary>
+            Flag given to users who have participated in the 𝐁ug report program and are level 1.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HypeSquadOnlineHouse1">
+            <summary>
+            Flag given to users who are in the HypeSquad House of Bravery.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HypeSquadOnlineHouse2">
+            <summary>
+            Flag given to users who are in the HypeSquad House of Brilliance.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HypeSquadOnlineHouse3">
+            <summary>
+            Flag given to users who are in the HypeSquad House of Balance.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.PremiumEarlySupporter">
+            <summary>
+            Flag given to users who subscribed to Nitro before games were added.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.TeamPseudoUser">
+            <summary>
+            Flag given to users who are part of a team.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel2">
+            <summary>
+            Flag given to users who have participated in the 𝐁ug report program and are level 2.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.VerifiedBot">
+            <summary>
+            Flag given to users who are verified bots.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.VerifiedDeveloper">
+            <summary>
+            Flag given to users that developed bots and early verified their accounts.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.CertifiedModerator">
+            <summary>
+            Flag given to users that are discord certified moderators
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BotHttpInteractions">
             <summary>
-            User is a bot that supports HTTP Interactions
+            User is a Bot uses only HTTP interactions and is shown in the online member list
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserGuildsRequest">
