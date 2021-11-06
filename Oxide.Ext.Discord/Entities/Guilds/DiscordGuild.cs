@@ -764,6 +764,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         
         /// <summary>
         /// Modifies the current members nickname in the guild
+        /// See <a href="https://discord.com/developers/docs/resources/guild#modify-current-member">Modify Current Member</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="nick">New members nickname</param>
