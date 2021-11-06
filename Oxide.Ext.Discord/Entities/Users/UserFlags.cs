@@ -74,8 +74,13 @@ namespace Oxide.Ext.Discord.Entities.Users
         EarlyVerifiedBotDeveloper = 1 << 17,
         
         /// <summary>
-        ///  Flag given to users that are discord certified moderators
+        /// Flag given to users that are discord certified moderators
         /// </summary>
-        DiscordCertifiedModerator = 1 << 18
+        DiscordCertifiedModerator = 1 << 18,
+        
+        /// <summary>
+        /// User is a bot that supports HTTP Interactions
+        /// </summary>
+        BotHttpInteractions = 1 << 19
     }
 }
