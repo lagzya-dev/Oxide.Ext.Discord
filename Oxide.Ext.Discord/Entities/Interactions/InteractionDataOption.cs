@@ -36,5 +36,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("options")]
         public List<InteractionDataOption> Options { get; set; }
+        
+        /// <summary>
+        /// True if this option is the currently focused option for autocomplete
+        /// </summary>
+        [JsonProperty("focused")]
+        public bool? Focused { get; set; }
     }
 }

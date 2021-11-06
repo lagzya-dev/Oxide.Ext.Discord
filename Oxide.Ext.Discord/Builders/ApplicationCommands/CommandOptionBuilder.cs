@@ -47,6 +47,17 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         }
         
         /// <summary>
+        /// Enable auto complete for the option
+        /// </summary>
+        /// <param name="autoComplete">If the option support auto complete (Default: true)</param>
+        /// <returns>This</returns>
+        public CommandOptionBuilder AutoComplete(bool autoComplete = true)
+        {
+            _option.Autocomplete = autoComplete;
+            return this;
+        }
+        
+        /// <summary>
         /// Set's the channel types for the option
         /// </summary>
         /// <param name="types">Types of channels the option allows</param>

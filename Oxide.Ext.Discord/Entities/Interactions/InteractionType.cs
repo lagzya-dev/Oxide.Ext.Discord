@@ -18,6 +18,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// The interaction is a message component
         /// </summary>
-        MessageComponent = 3
+        MessageComponent = 3,
+        
+        /// <summary>
+        /// The interaction is a application command autocomplete
+        /// </summary>
+        ApplicationCommandAutocomplete = 4
     }
 }

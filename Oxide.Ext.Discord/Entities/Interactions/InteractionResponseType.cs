@@ -29,6 +29,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// For components, edit the message the component was attached to
         /// </summary>
-        UpdateMessage = 7
+        UpdateMessage = 7,
+        
+        /// <summary>
+        /// Respond to an autocomplete interaction with suggested choices
+        /// </summary>
+        ApplicationCommandAutocompleteResult = 9
     }
 }
