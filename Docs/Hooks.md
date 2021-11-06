@@ -434,7 +434,7 @@ void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration
 - Called when a guild member has been added to the guild
 
 ```c#
-void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild guild)
+void OnDiscordGuildMemberAdded(GuildMemberRemovedEvent member, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberRemoved Works!");
 }
@@ -457,7 +457,7 @@ void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild gu
   - This also include when the DiscordUser is updated as well
 
 ```c#
-void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, DiscordGuild guild)
+void OnDiscordGuildMemberUpdated(GuildMember update, GuildMember previous, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberUpdated Works!");
 }
