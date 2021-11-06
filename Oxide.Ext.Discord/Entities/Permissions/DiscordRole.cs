@@ -39,13 +39,13 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// The role's icon image (if the guild has the ROLE_ICONS feature)
         /// </summary>
         [JsonProperty("icon")]
-        public bool Icon { get; set; }
+        public string Icon { get; set; }
         
         /// <summary>
         /// The role's unicode emoji (if the guild has the ROLE_ICONS feature)
         /// </summary>
         [JsonProperty("unicode_emoji")]
-        public bool UnicodeEmoji { get; set; }
+        public string UnicodeEmoji { get; set; }
 
         /// <summary>
         /// Position of this role
