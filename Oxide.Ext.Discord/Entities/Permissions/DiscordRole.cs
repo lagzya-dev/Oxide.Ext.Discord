@@ -43,7 +43,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         public string Icon { get; set; }
         
         /// <summary>
-        /// The role's unicode emoji (if the guild has the ROLE_ICONS feature)
+        /// The role's unicode emoji as a standard emoji (if the guild has the ROLE_ICONS feature)
         /// </summary>
         [JsonProperty("unicode_emoji")]
         public string UnicodeEmoji { get; set; }
