@@ -14117,6 +14117,11 @@
             Attachments for a request
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.MultipartRequest">
+            <summary>
+            Required Is Multipart Form Request
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.Boundary">
             <summary>
             Multipart Boundary
