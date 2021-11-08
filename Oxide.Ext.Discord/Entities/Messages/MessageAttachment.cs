@@ -22,6 +22,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public string Filename { get; set; }
         
         /// <summary>
+        /// Description for the file
+        /// </summary>
+        [JsonProperty("description")]
+        public string Description { get; set; }
+        
+        /// <summary>
         /// The attachment's <a href="https://en.wikipedia.org/wiki/Media_type">media type</a>
         /// </summary>
         [JsonProperty("content_type")]
