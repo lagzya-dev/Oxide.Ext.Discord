@@ -70,12 +70,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
                     throw new Exception("Sticker can only be of type png, apng, or lottie json");
             }
             
-            FileAttachments.Add(new MessageFileAttachment
-            {
-                FileName = fileName,
-                ContentType = contentType,
-                Data = data
-            });
+            FileAttachments.Add(new MessageFileAttachment(fileName, data, contentType));
         }
     }
 }

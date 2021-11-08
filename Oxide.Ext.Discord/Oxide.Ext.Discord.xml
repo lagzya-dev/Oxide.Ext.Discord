@@ -10032,6 +10032,11 @@
             Name of file attached
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Description">
+            <summary>
+            Description for the file
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.ContentType">
             <summary>
             The attachment's <a href="https://en.wikipedia.org/wiki/Media_type">media type</a>
@@ -10113,10 +10118,24 @@
             IDs of up to 3 stickers in the server to send in the message
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.Attachments">
+            <summary>
+            Attachments for the message
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.FileAttachments">
             <summary>
             Attachments for a discord message
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageCreate.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            Adds an attachment to the message
+            </summary>
+            <param name="filename">Name of the file</param>
+            <param name="data">byte[] of the attachment</param>
+            <param name="contentType">Attachment content type</param>
+            <param name="description">Description for the attachment</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment">
             <summary>
