@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Core;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
@@ -92,14 +93,14 @@ namespace Oxide.Ext.Discord.Entities.Messages
             {
                 Attachments = new List<MessageAttachment>();
             }
-            
+
             FileAttachments.Add(new MessageFileAttachment(filename, data, contentType));
-            Attachments.Add(new MessageAttachment{Id=new Snowflake((ulong)(FileAttachments.Count - 1)), Filename = filename, Description = description});
+            Attachments.Add(new MessageAttachment {Id = new Snowflake((ulong)FileAttachments.Count), Filename = filename, Description = description});
         }
 
         internal void Validate()
         {
-            if (!string.IsNullOrEmpty(Content) || Embeds != null && Embeds.Count != 0 || (FileAttachments != null && FileAttachments.Count != 0))
+            if (!string.IsNullOrEmpty(Content) || Embeds != null && Embeds.Count != 0 || FileAttachments != null && FileAttachments.Count != 0)
             {
                 return;
             }

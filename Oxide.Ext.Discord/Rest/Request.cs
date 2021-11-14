@@ -293,7 +293,7 @@ namespace Oxide.Ext.Discord.Rest
                 for (int index = 0; index < attachments.FileAttachments.Count; index++)
                 {
                     MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
-                    MultipartSections.Add(new MultipartFileSection($"files[{index.ToString()}]", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
+                    MultipartSections.Add(new MultipartFileSection($"files[{(index + 1).ToString()}]", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
                 }
 
                 Boundary = Guid.NewGuid().ToString().Replace("-", "");
