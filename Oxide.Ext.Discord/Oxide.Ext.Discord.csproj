@@ -8,8 +8,6 @@
     <Description>An Oxide extension for Discord.</Description>
     <RepositoryUrl>https://github.com/Kirollos/Oxide.Ext.Discord</RepositoryUrl>
     <TargetFrameworks>net46;net45;net40;net35</TargetFrameworks>
-    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net35' And '$(OS)' == 'Windows_NT'">C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
-    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net35' And '$(OS)' == 'OSX'">/Library/Frameworks/Mono.framework/Versions/Current/lib/mono/2.0-api</FrameworkPathOverride>
     <LangVersion>7.0</LangVersion>
     <PackageVersion>2.0.3.0</PackageVersion>
     <AssemblyVersion>2.032</AssemblyVersion>
@@ -25,6 +23,18 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net35" Version="1.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net40" Version="1.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net45" Version="1.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Oxide.Core" Version="2.0.*">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
