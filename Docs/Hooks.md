@@ -59,6 +59,11 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
     + [OnDiscordGuildRoleCreated](#ondiscordguildrolecreated)
     + [OnDiscordGuildRoleUpdated](#ondiscordguildroleupdated)
     + [OnDiscordGuildRoleDeleted](#ondiscordguildroledeleted)
+    + [OnDiscordGuildScheduledEventCreated](#OnDiscordGuildScheduledEventCreated)
+    + [OnDiscordGuildScheduledEventUpdated](#OnDiscordGuildScheduledEventUpdated)
+    + [OnDiscordGuildScheduledEventDeleted](#OnDiscordGuildScheduledEventDeleted)
+    + [OnDiscordGuildScheduledEventUserAdded](#OnDiscordGuildScheduledEventUserAdded)
+    + [OnDiscordGuildScheduledEventUserRemoved](#OnDiscordGuildScheduledEventUserRemoved)
     + [OnDiscordDirectMessageCreated](#ondiscorddirectmessagecreated)
     + [OnDiscordGuildMessageCreated](#ondiscordguildmessagecreated)
     + [OnDiscordDirectMessageUpdated](#ondiscorddirectmessageupdated)
@@ -516,6 +521,61 @@ void OnDiscordGuildRoleUpdated(Role role, Role previous, DiscordGuild guild)
 void OnDiscordGuildRoleDeleted(Role role, DiscordGuild guild)
 {
     Puts("OnDiscordGuildRoleDeleted Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventCreated
+
+- Called when a discord guild scheduled event is created
+
+```c#
+void OnDiscordGuildScheduledEventCreated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventCreated Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventUpdated
+
+- Called when a discord guild scheduled event is update
+
+```c#
+void OnDiscordGuildScheduledEventUpdated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventUpdated Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventDeleted
+
+- Called when a discord guild scheduled event is deleted
+
+```c#
+void OnDiscordGuildScheduledEventDeleted(GuildScheduledEvent guildEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventDeleted Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventUserAdded
+
+- Called when a discord user is added to a guild scheduled event
+
+```c#
+void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventUserAdded Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventUserRemoved
+
+- Called when a discord user is removed from a guild scheduled event
+
+```c#
+void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
 }
 ```
 

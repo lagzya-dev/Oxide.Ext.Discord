@@ -1705,6 +1705,46 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventCreated">
+            <code>
+            void OnDiscordGuildScheduledEventCreated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventUpdated">
+            <code>
+            void OnDiscordGuildScheduledEventUpdated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventDeleted">
+            <code>
+            void OnDiscordGuildScheduledEventDeleted(GuildScheduledEvent guildEvent, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventUserAdded">
+            <code>
+            void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventUserAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventUserRemoved">
+            <code>
+            void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordCommand">
             <code>
             void OnDiscordCommand(DiscordMessage message, string cmd, string[] args)
@@ -5345,6 +5385,46 @@
             The role updated
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add-guild-scheduled-event-user-add-event-fields">Guild Scheduled Event User Add Event Fields</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent.GuildScheduledEventId">
+            <summary>
+            ID of the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent.UserId">
+            <summary>
+            ID of the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent.GuildId">
+            <summary>
+            ID of the guild
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove">Guild Scheduled Event User Remove Event Fields</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent.GuildScheduledEventId">
+            <summary>
+            ID of the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent.UserId">
+            <summary>
+            ID of the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent.GuildId">
+            <summary>
+            ID of the guild
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildStickersUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-stickers-update">Guild Stickers Update</a>
@@ -5940,6 +6020,15 @@
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.DirectMessageTyping">
             <summary>
             - TYPING_START
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildScheduledEvents">
+            <summary>
+            - GUILD_SCHEDULED_EVENT_CREATE
+            - GUILD_SCHEDULED_EVENT_UPDATE
+            - GUILD_SCHEDULED_EVENT_DELETE
+            - GUILD_SCHEDULED_EVENT_USER_ADD
+            - GUILD_SCHEDULED_EVENT_USER_REMOVE
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.DefaultNotificationLevel">
@@ -7659,6 +7748,384 @@
             The widget channel id
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event">Guild Scheduled Event Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Id">
+            <summary>
+            The ID of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.GuildId">
+            <summary>
+            The guild ID which the scheduled event belongs to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ChannelId">
+            <summary>
+            The channel ID in which the scheduled event will be hosted, or null if <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType">scheduled entity type</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">EXTERNAL</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.CreatorId">
+            <summary>
+            The ID of the user that created the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Name">
+            <summary>
+            The name of the scheduled event (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Description">
+            <summary>
+            The description of the scheduled event (1-1000 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ScheduledStartTime">
+            <summary>
+            The time the scheduled event will start
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ScheduledEndTime">
+            <summary>
+            The time the scheduled event will end, required if <see cref="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityType">EntityType</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">EXTERNAL</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.PrivacyLevel">
+            <summary>
+            The privacy level of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Status">
+            <summary>
+            The status of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityType">
+            <summary>
+            The type of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityId">
+            <summary>
+            The id of an entity associated with a guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityMetadata">
+            <summary>
+            Additional metadata for the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Creator">
+            <summary>
+            The user that created the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.UserCount">
+            <summary>
+            The number of users subscribed to the scheduled event
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ListForGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns a list of guild scheduled event objects for the given guild.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild">List Scheduled Events for Guild</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to get events for</param>
+            <param name="lookup">Query string parameters</param>
+            <param name="callback">Callback with the list of scheduled events</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate,System.Action{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Create a guild scheduled event in the guild.
+            Returns a <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">guild scheduled event</see> object on success.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event">Create Guild Scheduled Event</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to create event in</param>
+            <param name="create">Guild Scheduled Event to create</param>
+            <param name="callback">Callback with the created scheduled events</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Get(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup,System.Action{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Get a guild scheduled event.
+            Returns a guild scheduled event object on success.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event">Get Guild Scheduled Event</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to get events for</param>
+            <param name="eventId">Id of the scheduled event</param>
+            <param name="lookup">Query string parameters</param>
+            <param name="callback">Callback with the scheduled event</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Modify(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate,System.Action{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Modify a guild scheduled event.
+            Returns the modified <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">guild scheduled event</see> object on success.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#modify-guild-scheduled-event">Modify Guild Scheduled Event</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to modify event in</param>
+            <param name="eventId">Id of the event to update</param>
+            <param name="update">Guild Scheduled Event to update</param>
+            <param name="callback">Callback with the updated scheduled events</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Delete(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Delete a guild scheduled event
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#delete-guild-scheduled-event">Delete Guild Scheduled Event</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to modify event in</param>
+            <param name="eventId">Id of the event to delete</param>
+            <param name="callback">Callback with the updated scheduled events</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.GetUsers(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Get a list of guild scheduled event users subscribed to a guild scheduled event.
+            Returns a list of guild scheduled event user objects on success.
+            Guild member data, if it exists, is included if the WithMember query parameter is set.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event-users">Get Guild Scheduled Event Users</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to get event users for</param>
+            <param name="eventId">Id of the event to get users for</param>
+            <param name="lookup">Query string parameters</param>
+            <param name="callback">Callback with the list of scheduled event users</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event">Guild Scheduled Event Create</a> within discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.ChannelId">
+            <summary>
+            The channel ID in which the scheduled event will be hosted, or null if <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType">scheduled entity type</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">External</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.EntityMetadata">
+            <summary>
+            Additional metadata for the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.Name">
+            <summary>
+            The name of the scheduled event (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.PrivacyLevel">
+            <summary>
+            The privacy level of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.ScheduledStartTime">
+            <summary>
+            The time the scheduled event will start
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.ScheduledEndTime">
+            <summary>
+            The time the scheduled event will end, required if <see cref="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityType">EntityType</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">EXTERNAL</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.Description">
+            <summary>
+            The description of the scheduled event (1-1000 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.EntityType">
+            <summary>
+            The type of the scheduled event
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityMetadata">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata">Guild Scheduled Event Entity Metadata</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityMetadata.Location">
+            <summary>
+            Location of the event (1-100 characters)
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-types">Scheduled Entity Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.StageInstance">
+            <summary>
+            Event will be held in a stage instance
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.Voice">
+            <summary>
+            Event will be held in a voice channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">
+            <summary>
+            Event will be held externally outside of discord.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params">Scheduled Event Lookup Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup.WithUserCount">
+            <summary>
+            Include number of users subscribed to each event
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventPrivacyLevel">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level">Guild Scheduled Event Privacy Level</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventPrivacyLevel.GuildOnly">
+            <summary>
+            The scheduled event is only accessible to guild members
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status">Guild Scheduled Event Status</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus.Scheduled">
+            <summary>
+            Scheduled Event is scheduled and has not happened yet.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus.Active">
+            <summary>
+            Scheduled event is currently occuring
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus.Completed">
+            <summary>
+            Scheduled event has completed
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus.Canceled">
+            <summary>
+            Scheduled event was canceled.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#modify-guild-scheduled-event">Guild Scheduled Event Update</a> within discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.ChannelId">
+            <summary>
+            The channel ID in which the scheduled event will be hosted, or null if <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType">scheduled entity type</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">External</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.EntityMetadata">
+            <summary>
+            Additional metadata for the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.Name">
+            <summary>
+            The name of the scheduled event (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.PrivacyLevel">
+            <summary>
+            The privacy level of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.ScheduledStartTime">
+            <summary>
+            The time the scheduled event will start
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.ScheduledEndTime">
+            <summary>
+            The time the scheduled event will end, required if <see cref="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityType">EntityType</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">EXTERNAL</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.Description">
+            <summary>
+            The description of the scheduled event (1-1000 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.EntityType">
+            <summary>
+            The type of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.Status">
+            <summary>
+            The status of the scheduled event
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-user-object-guild-scheduled-event-user-structure">Guild Scheduled Event User Object</a> within discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser.GuildScheduledEventId">
+            <summary>
+            The scheduled event id which the user subscribed to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser.User">
+            <summary>
+            User which subscribed to an event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser.Member">
+            <summary>
+            Guild member data for this user for the guild which this event belongs to, if any
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup">
+             <summary>
+             Represents a <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params">Scheduled Event Lookup Structure</a> within Discord.
+            
+             Provide a user id to before and after for pagination.
+             Users will always be returned in ascending order by user_id.
+             If both before and after are provided, only before is respected.
+             Fetching users in-between before and after is not supported.
+             </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup.Limit">
+            <summary>
+            How many users to receive from the event
+            Default 100
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup.WithMember">
+            <summary>
+            Include guild member data if it exists
+            Default false
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup.Before">
+            <summary>
+            Consider only users before given user id
+            Default null
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup.After">
+            <summary>
+            Consider only users after given user id
+            Default null
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags">System Channel Flags</a>
@@ -9025,13 +9492,19 @@
             Stage instance data if there is a public Stage instance in the Stage channel this invite is for
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.GetInvite(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Invites.DiscordInvite},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.GuildScheduledEvent">
             <summary>
-            Get Invite URL Parameters
+            Guild scheduled event data, only included if guild_scheduled_event_id contains a valid guild scheduled event id
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.GetInvite(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Invites.InviteLookup,System.Action{Oxide.Ext.Discord.Entities.Invites.DiscordInvite},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns an invite object for the given code.
             See <a href="https://discord.com/developers/docs/resources/invite#get-invite">Get Invite</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="inviteCode">Invite code</param>
+            <param name="lookup">Lookup query string parameters for the request</param>
             <param name="callback">Callback with the invite</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -9045,6 +9518,26 @@
             <param name="client">Client to use</param>
             <param name="callback">Callback with the deleted invite</param>
             <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Invites.InviteLookup">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params">Scheduled Event Lookup Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteLookup.WithCounts">
+            <summary>
+            Whether the invite should contain approximate member counts
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteLookup.WithExpiration">
+            <summary>
+            Whether the invite should contain the expiration date
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteLookup.GuildScheduledEventId">
+            <summary>
+            The guild scheduled event to include with the invite
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Invites.InviteMetadata">
             <summary>
@@ -10880,6 +11373,12 @@
             Allows for requesting to speak in stage channels.
             Channel Type (Stage)
             (This permission is under active development and may be changed or removed.)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageEvents">
+            <summary>
+            Allows for creating, editing, and deleting scheduled events
+            Channel Type (Voice, Stage)
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageThreads">
@@ -14407,6 +14906,31 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildRoleDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-role-delete">GUILD_ROLE_DELETE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventCreate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create">GUILD_SCHEDULED_EVENT_CREATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventUpdate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update">GUILD_SCHEDULED_EVENT_UPDATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventDelete">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-delete">GUILD_SCHEDULED_EVENT_DELETE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventUserAdd">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add">GUILD_SCHEDULED_EVENT_USER_ADD</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventUserRemove">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove">GUILD_SCHEDULED_EVENT_USER_REMOVE</a> gateway event
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.IntegrationCreated">

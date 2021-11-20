@@ -96,6 +96,12 @@ This is a list of all intents and which hooks become available when using a spec
 * Direct Message Typing (`GatewayIntents.DirectMessageTyping`)
   * [OnDiscordDirectTypingStarted](Hooks.md#ondiscorddirecttypingstarted)
 
+* Guild Scheduled Events (`GatewayIntents.GuildScheduledEvents`)
+  * [OnDiscordGuildScheduledEventCreated](Hooks.md#OnDiscordGuildScheduledEventCreated)
+  * [OnDiscordGuildScheduledEventUpdated](Hooks.md#OnDiscordGuildScheduledEventUpdated)
+  * [OnDiscordGuildScheduledEventDeleted](Hooks.md#OnDiscordGuildScheduledEventDeleted)
+  * [OnDiscordGuildScheduledEventUserAdded](Hooks.md#OnDiscordGuildScheduledEventUserAdded)
+  * [OnDiscordGuildScheduledEventUserRemoved](Hooks.md#OnDiscordGuildScheduledEventUserRemoved)
 
 ## Building Intents
 You can build your intents in the following manner

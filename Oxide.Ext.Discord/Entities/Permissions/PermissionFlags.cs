@@ -233,6 +233,13 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         RequestToSpeak = 1ul << 32,
         
         /// <summary>
+        /// Allows for creating, editing, and deleting scheduled events
+        /// Channel Type (Voice, Stage)
+        /// </summary>
+        [Description("MANAGE_EVENTS")]
+        ManageEvents  = 1ul << 33,
+        
+        /// <summary>
         /// Allows for deleting and archiving threads, and viewing all private threads
         /// Channel Type (Text)
         /// </summary>

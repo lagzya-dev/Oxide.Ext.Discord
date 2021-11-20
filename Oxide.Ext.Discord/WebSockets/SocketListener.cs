@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
@@ -392,6 +393,26 @@ namespace Oxide.Ext.Discord.WebSockets
 
                 case DispatchCode.GuildRoleDeleted:
                     HandleDispatchGuildRoleDelete(payload);
+                    break;
+                
+                case DispatchCode.GuildScheduledEventCreate:
+                    HandleDispatchGuildScheduledEventCreate(payload);
+                    break;
+                
+                case DispatchCode.GuildScheduledEventUpdate:
+                    HandleDispatchGuildScheduledEventUpdate(payload);
+                    break;
+                
+                case DispatchCode.GuildScheduledEventDelete:
+                    HandleDispatchGuildScheduledEventDelete(payload);
+                    break;
+                
+                case DispatchCode.GuildScheduledEventUserAdd:
+                    HandleDispatchGuildScheduledEventUserAdd(payload);
+                    break;
+                
+                case DispatchCode.GuildScheduledEventUserRemove:
+                    HandleDispatchGuildScheduledEventUserRemove(payload);
                     break;
                 
                 case DispatchCode.IntegrationCreated:
@@ -975,6 +996,51 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
         
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create
+        private void HandleDispatchGuildScheduledEventCreate(EventPayload payload)
+        {
+            GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
+            DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventCreate)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventCreated, guildEvent, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update
+        private void HandleDispatchGuildScheduledEventUpdate(EventPayload payload)
+        {
+            GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
+            DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUpdate)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUpdated, guildEvent, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-delete
+        private void HandleDispatchGuildScheduledEventDelete(EventPayload payload)
+        {
+            GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
+            DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventDelete)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventDeleted, guildEvent, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add
+        private void HandleDispatchGuildScheduledEventUserAdd(EventPayload payload)
+        {
+            GuildScheduleEventUserAddedEvent added = payload.EventData.ToObject<GuildScheduleEventUserAddedEvent>();
+            DiscordGuild guild = _client.GetGuild(added.GuildId);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUserAdd)} Guild ID: {added.GuildId.ToString()} Guild Name: {guild?.Name} User ID: {added.UserId.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserAdded, added, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove
+        private void HandleDispatchGuildScheduledEventUserRemove(EventPayload payload)
+        {
+            GuildScheduleEventUserRemovedEvent removed = payload.EventData.ToObject<GuildScheduleEventUserRemovedEvent>();
+            DiscordGuild guild = _client.GetGuild(removed.GuildId);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUserRemove)} Guild ID: {removed.GuildId.ToString()} Guild Name: {guild?.Name} User ID: {removed.UserId.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserRemoved, removed, guild);
+        }
+
         //https://discord.com/developers/docs/topics/gateway#integration-create
         private void HandleDispatchIntegrationCreate(EventPayload payload)
         {

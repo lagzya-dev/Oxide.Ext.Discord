@@ -121,6 +121,31 @@ namespace Oxide.Ext.Discord.WebSockets
         [Description("GUILD_ROLE_DELETE")] GuildRoleDeleted,
         
         /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create">GUILD_SCHEDULED_EVENT_CREATE</a> gateway event
+        /// </summary>
+        [Description("GUILD_SCHEDULED_EVENT_CREATE")] GuildScheduledEventCreate,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update">GUILD_SCHEDULED_EVENT_UPDATE</a> gateway event
+        /// </summary>
+        [Description("GUILD_SCHEDULED_EVENT_UPDATE")] GuildScheduledEventUpdate,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-delete">GUILD_SCHEDULED_EVENT_DELETE</a> gateway event
+        /// </summary>
+        [Description("GUILD_SCHEDULED_EVENT_DELETE")] GuildScheduledEventDelete,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add">GUILD_SCHEDULED_EVENT_USER_ADD</a> gateway event
+        /// </summary>
+        [Description("GUILD_SCHEDULED_EVENT_USER_ADD")] GuildScheduledEventUserAdd,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove">GUILD_SCHEDULED_EVENT_USER_REMOVE</a> gateway event
+        /// </summary>
+        [Description("GUILD_SCHEDULED_EVENT_USER_REMOVE")] GuildScheduledEventUserRemove,
+        
+        /// <summary>
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#integration-create">INTEGRATION_CREATE</a> gateway event
         /// </summary>
         [Description("INTEGRATION_CREATE")] IntegrationCreated,

@@ -974,6 +974,46 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildRoleDeleted = nameof(OnDiscordGuildRoleDeleted);
         
         /// <code>
+        /// void OnDiscordGuildScheduledEventCreated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventCreated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventCreated = nameof(OnDiscordGuildScheduledEventCreated);
+        
+        /// <code>
+        /// void OnDiscordGuildScheduledEventUpdated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventUpdated = nameof(OnDiscordGuildScheduledEventUpdated);
+        
+        /// <code>
+        /// void OnDiscordGuildScheduledEventDeleted(GuildScheduledEvent guildEvent, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventDeleted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventDeleted = nameof(OnDiscordGuildScheduledEventDeleted);
+        
+        /// <code>
+        /// void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventUserAdded Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventUserAdded = nameof(OnDiscordGuildScheduledEventUserAdded);
+        
+        /// <code>
+        /// void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventUserRemoved = nameof(OnDiscordGuildScheduledEventUserRemoved);
+        
+        /// <code>
         /// void OnDiscordCommand(DiscordMessage message, string cmd, string[] args)
         /// {
         ///     Puts("OnDiscordCommand Works!");
