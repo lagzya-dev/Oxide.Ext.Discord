@@ -6,6 +6,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
     public enum ScheduledEventPrivacyLevel
     {
         /// <summary>
+        /// No Privacy Level
+        /// </summary>
+        None = 0,
+        
+        /// <summary>
         /// The scheduled event is only accessible to guild members
         /// </summary>
         GuildOnly = 2

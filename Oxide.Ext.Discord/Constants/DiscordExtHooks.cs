@@ -998,7 +998,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildScheduledEventDeleted = nameof(OnDiscordGuildScheduledEventDeleted);
         
         /// <code>
-        /// void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, DiscordGuild guild)
+        /// void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildScheduledEventUserAdded Works!");
         /// }
@@ -1006,7 +1006,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildScheduledEventUserAdded = nameof(OnDiscordGuildScheduledEventUserAdded);
         
         /// <code>
-        /// void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, DiscordGuild guild)
+        /// void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
         /// }

@@ -12,5 +12,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// </summary>
         [JsonProperty("location")]
         public string Location { get; set; }
+
+        internal void Update(ScheduledEventEntityMetadata metadata)
+        {
+            if (metadata.Location != null)
+            {
+                Location = metadata.Location;
+            }
+        }
     }
 }

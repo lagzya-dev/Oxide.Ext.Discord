@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
 using Oxide.Ext.Discord.Entities.Integrations;
 using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Permissions;
@@ -341,6 +342,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<DiscordSticker>))]
         [JsonProperty("stickers")]
         public Hash<Snowflake, DiscordSticker> Stickers { get; set; }
+        
+        /// <summary>
+        /// The scheduled events in the guild
+        /// <see cref="DiscordSticker"/>
+        /// </summary>
+        [JsonConverter(typeof(HashListConverter<GuildScheduledEvent>))]
+        [JsonProperty("guild_scheduled_events")]
+        public Hash<Snowflake, GuildScheduledEvent> ScheduleEvents { get; set; }
         #endregion
 
         #region Extension Fields

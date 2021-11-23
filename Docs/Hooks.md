@@ -562,7 +562,7 @@ void OnDiscordGuildScheduledEventDeleted(GuildScheduledEvent guildEvent, Discord
 - Called when a discord user is added to a guild scheduled event
 
 ```c#
-void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, DiscordGuild guild)
+void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
 {
     Puts("OnDiscordGuildScheduledEventUserAdded Works!");
 }
@@ -573,7 +573,7 @@ void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent adde
 - Called when a discord user is removed from a guild scheduled event
 
 ```c#
-void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, DiscordGuild guild)
+void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
 {
     Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
 }

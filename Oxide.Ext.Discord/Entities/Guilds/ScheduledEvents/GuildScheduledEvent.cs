@@ -193,5 +193,42 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         {
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/scheduled-events/{eventId}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
+        
+        internal void Update(GuildScheduledEvent scheduledEvent)
+        {
+            if (scheduledEvent.ChannelId.HasValue)
+            {
+                ChannelId = scheduledEvent.ChannelId;
+            }
+            
+            if (scheduledEvent.EntityMetadata != null)
+            {
+                if (EntityMetadata == null)
+                {
+                    EntityMetadata = scheduledEvent.EntityMetadata;
+                }
+                else
+                {
+                    EntityMetadata.Update(scheduledEvent.EntityMetadata);
+                }
+            }
+
+            if (scheduledEvent.Name != null)
+            {
+                Name = scheduledEvent.Name;
+            }
+            
+                        
+            if (scheduledEvent.Description != null)
+            {
+                Description = scheduledEvent.Description;
+            }
+            
+            PrivacyLevel = scheduledEvent.PrivacyLevel;
+            EntityType = scheduledEvent.EntityType;
+            Status = scheduledEvent.Status;
+            ScheduledStartTime = scheduledEvent.ScheduledStartTime;
+            ScheduledEndTime = scheduledEvent.ScheduledEndTime;
+        }
     }
 }

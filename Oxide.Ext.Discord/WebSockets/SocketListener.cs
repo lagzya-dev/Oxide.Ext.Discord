@@ -1001,6 +1001,11 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
             DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            if (guild != null)
+            { 
+                guild.ScheduleEvents[guild.Id] = guildEvent;
+            }
+           
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventCreate)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
             _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventCreated, guildEvent, guild);
         }
@@ -1010,6 +1015,18 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
             DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            if (guild != null)
+            {
+                if (guild.ScheduleEvents.ContainsKey(guildEvent.Id))
+                {
+                    guild.ScheduleEvents[guildEvent.Id].Update(guildEvent);
+                }
+                else
+                {
+                    guild.ScheduleEvents[guild.Id] = guildEvent;
+                }
+            }
+
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUpdate)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
             _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUpdated, guildEvent, guild);
         }
@@ -1019,6 +1036,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
             DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            guild.ScheduleEvents.Remove(guildEvent.Id);
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventDelete)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
             _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventDeleted, guildEvent, guild);
         }
@@ -1028,8 +1046,9 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildScheduleEventUserAddedEvent added = payload.EventData.ToObject<GuildScheduleEventUserAddedEvent>();
             DiscordGuild guild = _client.GetGuild(added.GuildId);
+            GuildScheduledEvent scheduledEvent = guild.ScheduleEvents[added.GuildScheduledEventId];
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUserAdd)} Guild ID: {added.GuildId.ToString()} Guild Name: {guild?.Name} User ID: {added.UserId.ToString()}");
-            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserAdded, added, guild);
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserAdded, added, scheduledEvent, guild);
         }
         
         //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove
@@ -1037,8 +1056,9 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildScheduleEventUserRemovedEvent removed = payload.EventData.ToObject<GuildScheduleEventUserRemovedEvent>();
             DiscordGuild guild = _client.GetGuild(removed.GuildId);
+            GuildScheduledEvent scheduledEvent = guild.ScheduleEvents[removed.GuildScheduledEventId];
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUserRemove)} Guild ID: {removed.GuildId.ToString()} Guild Name: {guild?.Name} User ID: {removed.UserId.ToString()}");
-            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserRemoved, removed, guild);
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserRemoved, removed, scheduledEvent, guild);
         }
 
         //https://discord.com/developers/docs/topics/gateway#integration-create
