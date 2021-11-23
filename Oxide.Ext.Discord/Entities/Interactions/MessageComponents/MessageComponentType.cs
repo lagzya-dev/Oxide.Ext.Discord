@@ -18,6 +18,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// <summary>
         /// A select menu for picking from choices
         /// </summary>
-        SelectMenu = 3
+        SelectMenu = 3,
+        
+        /// <summary>
+        /// A text box for inserting written responses
+        /// </summary>
+        InputText = 3
     }
 }

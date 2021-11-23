@@ -23,6 +23,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// The interaction is a application command autocomplete
         /// </summary>
-        ApplicationCommandAutocomplete = 4
+        ApplicationCommandAutocomplete = 4,
+        
+        /// <summary>
+        /// The interaction is a modal
+        /// </summary>
+        ModalSubmit = 5
     }
 }

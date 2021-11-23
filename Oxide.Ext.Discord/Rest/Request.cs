@@ -41,7 +41,7 @@ namespace Oxide.Ext.Discord.Rest
         public object Data { get; }
         
         /// <summary>
-        /// JSON Serialization of Data 
+        /// Data serialized to bytes 
         /// </summary>
         public byte[] Contents { get; set; }
 
@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.Rest
         internal List<IMultipartSection> MultipartSections { get; set; }
         
         /// <summary>
-        /// Required Is Multipart Form Request
+        /// Required If Multipart Form Request
         /// </summary>
         public bool MultipartRequest { get; }
 

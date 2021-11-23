@@ -34,6 +34,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// Respond to an autocomplete interaction with suggested choices
         /// </summary>
-        ApplicationCommandAutocompleteResult = 9
+        ApplicationCommandAutocompleteResult = 8,
+        
+        /// <summary>
+        /// Respond to an interaction with an modal for a user to fill-out
+        /// Note: You can't respond to a <see cref="InteractionType.ModalSubmit">ModalSubmit</see> with a new MODAL.
+        /// </summary>
+        Modal = 9
     }
 }
