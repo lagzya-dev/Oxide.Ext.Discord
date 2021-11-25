@@ -349,7 +349,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonConverter(typeof(HashListConverter<GuildScheduledEvent>))]
         [JsonProperty("guild_scheduled_events")]
-        public Hash<Snowflake, GuildScheduledEvent> ScheduleEvents { get; set; }
+        public Hash<Snowflake, GuildScheduledEvent> ScheduledEvents { get; set; }
         #endregion
 
         #region Extension Fields
@@ -1516,6 +1516,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 StageInstances = updatedGuild.StageInstances;
             if (updatedGuild.Stickers != null)
                 Stickers = updatedGuild.Stickers;
+            if (updatedGuild.ScheduledEvents != null)
+                ScheduledEvents = updatedGuild.ScheduledEvents;
             return previous;
         }
         #endregion

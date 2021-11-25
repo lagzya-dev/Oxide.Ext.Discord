@@ -999,15 +999,22 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create
         private void HandleDispatchGuildScheduledEventCreate(EventPayload payload)
         {
+            _logger.Info("A");
             GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
+            _logger.Info("B");
             DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            _logger.Info("C");
             if (guild != null)
             { 
-                guild.ScheduleEvents[guild.Id] = guildEvent;
+                _logger.Info("D");
+                guild.ScheduledEvents[guild.Id] = guildEvent;
             }
            
+            _logger.Info("E");
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventCreate)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
+            _logger.Info("F");
             _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventCreated, guildEvent, guild);
+            _logger.Info("G");
         }
         
         //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update
@@ -1017,13 +1024,13 @@ namespace Oxide.Ext.Discord.WebSockets
             DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
             if (guild != null)
             {
-                if (guild.ScheduleEvents.ContainsKey(guildEvent.Id))
+                if (guild.ScheduledEvents.ContainsKey(guildEvent.Id))
                 {
-                    guild.ScheduleEvents[guildEvent.Id].Update(guildEvent);
+                    guild.ScheduledEvents[guildEvent.Id].Update(guildEvent);
                 }
                 else
                 {
-                    guild.ScheduleEvents[guild.Id] = guildEvent;
+                    guild.ScheduledEvents[guild.Id] = guildEvent;
                 }
             }
 
@@ -1036,7 +1043,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
             DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
-            guild.ScheduleEvents.Remove(guildEvent.Id);
+            guild.ScheduledEvents.Remove(guildEvent.Id);
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventDelete)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
             _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventDeleted, guildEvent, guild);
         }
@@ -1046,7 +1053,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildScheduleEventUserAddedEvent added = payload.EventData.ToObject<GuildScheduleEventUserAddedEvent>();
             DiscordGuild guild = _client.GetGuild(added.GuildId);
-            GuildScheduledEvent scheduledEvent = guild.ScheduleEvents[added.GuildScheduledEventId];
+            GuildScheduledEvent scheduledEvent = guild.ScheduledEvents[added.GuildScheduledEventId];
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUserAdd)} Guild ID: {added.GuildId.ToString()} Guild Name: {guild?.Name} User ID: {added.UserId.ToString()}");
             _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserAdded, added, scheduledEvent, guild);
         }
@@ -1056,7 +1063,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             GuildScheduleEventUserRemovedEvent removed = payload.EventData.ToObject<GuildScheduleEventUserRemovedEvent>();
             DiscordGuild guild = _client.GetGuild(removed.GuildId);
-            GuildScheduledEvent scheduledEvent = guild.ScheduleEvents[removed.GuildScheduledEventId];
+            GuildScheduledEvent scheduledEvent = guild.ScheduledEvents[removed.GuildScheduledEventId];
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUserRemove)} Guild ID: {removed.GuildId.ToString()} Guild Name: {guild?.Name} User ID: {removed.UserId.ToString()}");
             _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserRemoved, removed, scheduledEvent, guild);
         }

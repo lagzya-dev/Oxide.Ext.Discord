@@ -663,6 +663,18 @@
             <param name="disabled">If the select menu should be disabled</param>
             <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder"/></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles,System.String,System.Int32,System.Int32)">
+            <summary>
+            Adds a select menu to a new action row
+            </summary>
+            <param name="customId">Unique ID for the select menu</param>
+            <param name="label">Label for the input text</param>
+            <param name="style">Style of the Input Text</param>
+            <param name="placeholder">Text to display if no value is selected yet</param>
+            <param name="minValues">The min number of options you must select</param>
+            <param name="maxValues">The max number of options you can select</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.Build">
             <summary>
             Returns the built action rows
@@ -1731,7 +1743,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventUserAdded">
             <code>
-            void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, DiscordGuild guild)
+            void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildScheduledEventUserAdded Works!");
             }
@@ -1739,7 +1751,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventUserRemoved">
             <code>
-            void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, DiscordGuild guild)
+            void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
             }
@@ -6307,6 +6319,12 @@
             <see cref="T:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker"/>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ScheduledEvents">
+            <summary>
+            The scheduled events in the guild
+            <see cref="T:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker"/>
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.HasLoadedAllMembers">
             <summary>
             Returns true if all guild members have been loaded
@@ -7992,6 +8010,11 @@
             Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level">Guild Scheduled Event Privacy Level</a>
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventPrivacyLevel.None">
+            <summary>
+            No Privacy Level
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventPrivacyLevel.GuildOnly">
             <summary>
             The scheduled event is only accessible to guild members
@@ -8884,6 +8907,17 @@
             Allowed mentions 
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.CustomId">
+            <summary>
+            A developer-defined identifier for the interactable form
+            Max 100 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Title">
+            <summary>
+            Title of the modal if Modal Response
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Flags">
             <summary>
             Callback data flags
@@ -9203,6 +9237,12 @@
             Respond to an autocomplete interaction with suggested choices
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType.Modal">
+            <summary>
+            Respond to an interaction with an modal for a user to fill-out
+            Note: You can't respond to a <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ModalSubmit">ModalSubmit</see> with a new MODAL.
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type">InteractionType</a>
@@ -9226,6 +9266,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommandAutocomplete">
             <summary>
             The interaction is a application command autocomplete
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ModalSubmit">
+            <summary>
+            The interaction is a modal
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent">
@@ -9339,6 +9384,56 @@
             Requires Url field
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#input-text">Input Text Component</a> within discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Style">
+            <summary>
+            The style of the input text
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Label">
+            <summary>
+            Text that appears on top of the input text field, max 80 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.MinLength">
+            <summary>
+            The minimum length of the text input
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.MaxLength">
+            <summary>
+            The maximum length of the text input
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Placeholder">
+            <summary>
+            The placeholder for the text input field
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.#ctor">
+            <summary>
+            Input Text Constructor
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#input-text-styles">Input Text Styles</a> within discord.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles.Short">
+            <summary>
+            Intended for short single-line text
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles.Paragraph">
+            <summary>
+            Intended for much longer inputs
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/interactions/message-components#component-types">Message Component Type</a> within Discord..
@@ -9357,6 +9452,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.SelectMenu">
             <summary>
             A select menu for picking from choices
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.InputText">
+            <summary>
+            A text box for inserting written responses
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent">
@@ -14627,7 +14727,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.Contents">
             <summary>
-            JSON Serialization of Data 
+            Data serialized to bytes 
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.MultipartSections">
@@ -14637,7 +14737,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.MultipartRequest">
             <summary>
-            Required Is Multipart Form Request
+            Required If Multipart Form Request
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.Boundary">
