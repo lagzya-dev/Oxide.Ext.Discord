@@ -100,12 +100,15 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
         internal void Validate()
         {
-            if (!string.IsNullOrEmpty(Content) || Embeds != null && Embeds.Count != 0 || FileAttachments != null && FileAttachments.Count != 0)
+            if (string.IsNullOrEmpty(Content) && (Embeds == null || Embeds.Count == 0) && (FileAttachments == null || FileAttachments.Count == 0))
             {
-                return;
+                throw new Exception("Invalid Message Create. Discord Messages require Either Content, An Embed, Or a File");
             }
 
-            throw new Exception("Invalid Message Create. Discord Messages require Either Content, An Embed, Or a File");
+            if (!string.IsNullOrEmpty(Content) && Content.Length > 2000)
+            {
+                throw new Exception("Invalid Message Create. Content cannot be more than 2000 characters");
+            }
         }
     }
 }
