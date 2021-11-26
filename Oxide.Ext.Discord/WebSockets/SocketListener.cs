@@ -1586,19 +1586,25 @@ namespace Oxide.Ext.Discord.WebSockets
                 DiscordChannel thread = guild.Threads[members.Id];
                 if (thread != null)
                 {
-                    foreach (ThreadMember member in members.AddedMembers)
+                    if (members.AddedMembers != null)
                     {
-                        if (member.UserId.HasValue)
+                        foreach (ThreadMember member in members.AddedMembers)
                         {
-                            thread.ThreadMembers[member.UserId.Value] = member;
+                            if (member.UserId.HasValue)
+                            {
+                                thread.ThreadMembers[member.UserId.Value] = member;
+                            }
                         }
                     }
 
-                    foreach (Snowflake memberId in members.RemovedMemberIds)
+                    if (members.RemovedMemberIds != null)
                     {
-                        thread.ThreadMembers.Remove(memberId);
+                        foreach (Snowflake memberId in members.RemovedMemberIds)
+                        {
+                            thread.ThreadMembers.Remove(memberId);
+                        }
                     }
-                    
+
                     _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadMembersUpdated, members, guild);
                 }
             }
