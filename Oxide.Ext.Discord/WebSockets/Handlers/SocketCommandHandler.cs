@@ -92,14 +92,18 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 }
                 
                 CommandPayload payload = _pendingCommands[0];
-                _pendingCommands.RemoveAt(0);
 
                 if (_logger.IsLogging(DiscordLogLevel.Debug))
                 {
                     _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {payload.OpCode.ToString()}");
                 }
 
-                _webSocket.Send(payload);
+                if (!_webSocket.Send(payload))
+                {
+                    return;
+                }
+                
+                _pendingCommands.RemoveAt(0);
                 _rateLimit.FiredRequest();
             }
         }

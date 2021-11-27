@@ -39,6 +39,8 @@ namespace Oxide.Ext.Discord.WebSockets
         private readonly SocketCommandHandler _commands;
         private readonly ILogger _logger;
 
+        private readonly object _lock = new object();
+
         /// <summary>
         /// Socket used by the BotClient
         /// </summary>
@@ -67,12 +69,15 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
 
-            if (IsConnected() || IsConnecting())
+            lock (_lock)
             {
-                throw new Exception("Socket is already running. Please disconnect before attempting to connect.");
-            }
+                if (IsConnected() || IsConnecting())
+                {
+                    throw new Exception("Socket is already running. Please disconnect before attempting to connect.");
+                }
 
-            SocketState = SocketState.Connecting;
+                SocketState = SocketState.Connecting;
+            }
 
             RequestedReconnect = false;
             ShouldAttemptResume = false;
@@ -104,23 +109,27 @@ namespace Oxide.Ext.Discord.WebSockets
                 _reconnectTimer = null;
             }
             
-            if (IsDisconnected())
+            lock (_lock)
             {
+                if (IsDisconnected())
+                {
+                    DisposeSocket();
+                    return;
+                }
+
+                if (requested)
+                {
+                    _socket.CloseAsync(4199, "Discord Requested Reconnect");
+                }
+                else
+                {
+                    _socket.CloseAsync(CloseStatusCode.Normal);
+                }
+
                 DisposeSocket();
-                return;
+                SocketState = SocketState.Disconnected;
             }
 
-            if (requested)
-            {
-                _socket.CloseAsync(4199, "Discord Requested Reconnect");
-            }
-            else
-            {
-                _socket.CloseAsync(CloseStatusCode.Normal);
-            }
-
-            DisposeSocket();
-            SocketState = SocketState.Disconnected;
             if (RequestedReconnect)
             {
                 Reconnect();
@@ -144,14 +153,7 @@ namespace Oxide.Ext.Discord.WebSockets
         public void Shutdown()
         {
             Disconnect(false, false);
-            
-            if (_reconnectTimer != null)
-            {
-                _reconnectTimer.Stop();
-                _reconnectTimer.Dispose();
-                _reconnectTimer = null;
-            }
-            
+
             _listener?.Shutdown();
             _listener = null;
             _socket = null;
@@ -187,7 +189,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _commands.Enqueue(payload);
         }
         
-        internal void Send(CommandPayload payload)
+        internal bool Send(CommandPayload payload)
         {
             string payloadData = JsonConvert.SerializeObject(payload, DiscordExtension.ExtensionSerializeSettings);
             if (_logger.IsLogging(DiscordLogLevel.Verbose))
@@ -195,7 +197,13 @@ namespace Oxide.Ext.Discord.WebSockets
                 _logger.Verbose($"{nameof(Socket)}.{nameof(Send)} Payload: {payloadData}");
             }
 
+            if (_socket == null)
+            {
+                return false;
+            }
+            
             _socket.SendAsync(payloadData, null);
+            return true;
         }
 
         /// <summary>
@@ -243,14 +251,17 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 return;
             }
-            
-            if (SocketState != SocketState.Disconnected)
+
+            lock (_lock)
             {
-                return;
+                if (SocketState != SocketState.Disconnected)
+                {
+                    return;
+                }
+
+                SocketState = SocketState.PendingReconnect;
             }
-
-            SocketState = SocketState.PendingReconnect;
-
+            
             //If we haven't had any errors reconnect to the gateway
             if (_reconnectRetries == 0)
             {
