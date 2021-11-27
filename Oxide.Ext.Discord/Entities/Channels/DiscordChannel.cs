@@ -184,11 +184,29 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("permissions")]
         public string Permissions { get; set; }
-        
+
+        private Hash<Snowflake, ThreadMember> _threadMembers;
+
         /// <summary>
-        /// Computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
+        /// List of thread members if channel is thread; Null Otherwise.
         /// </summary>
-        public Hash<Snowflake, ThreadMember> ThreadMembers { get; set; }
+        public Hash<Snowflake, ThreadMember> ThreadMembers
+        {
+            get
+            {
+                if (_threadMembers != null)
+                {
+                    return _threadMembers;
+                }
+
+                if (Type != ChannelType.GuildPublicThread && Type != ChannelType.GuildPrivateThread)
+                {
+                    throw new Exception("Trying to access ThreadMembers on channel that is not a thread");
+                }
+
+                return _threadMembers = new Hash<Snowflake, ThreadMember>();
+            }
+        }
 
         /// <summary>
         /// Returns a string to mention this channel in a message

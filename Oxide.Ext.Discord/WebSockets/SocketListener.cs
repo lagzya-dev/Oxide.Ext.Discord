@@ -1490,6 +1490,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchThreadDeleted)} Guild: {guild.Name}({guild.Id.ToString()}) Thread: {thread.Name}({thread.Id.ToString()})");
                     thread = guild.Threads[thread.Id] ?? thread;
+                    guild.Threads.Remove(thread.Id);
                     _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadDeleted, thread, guild);
                 }
             }
@@ -1505,7 +1506,9 @@ namespace Oxide.Ext.Discord.WebSockets
             List<Snowflake> threadsToClear = new List<Snowflake>();
             foreach (DiscordChannel thread in guild.Threads.Values)
             {
-                if (thread.ParentId.HasValue && (sync.ChannelIds == null || sync.ChannelIds.Contains(thread.ParentId.Value)))
+                if (thread.ParentId.HasValue 
+                    && (sync.ChannelIds == null || sync.ChannelIds.Contains(thread.ParentId.Value))
+                    && !sync.Threads.ContainsKey(thread.Id))
                 {
                     threadsToClear.Add(thread.Id);
                 }
@@ -1518,7 +1521,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             
             //Add threads to the guild
-            foreach (DiscordChannel thread in sync.Threads)
+            foreach (DiscordChannel thread in sync.Threads.Values)
             {
                 DiscordChannel existing = guild.Threads[thread.Id];
                 if (existing != null)
@@ -1542,7 +1545,6 @@ namespace Oxide.Ext.Discord.WebSockets
                         thread.ThreadMembers[member.UserId.Value] = member;
                     }
                 }
-                
             }
             
             _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadListSynced, sync, guild);
@@ -1560,7 +1562,7 @@ namespace Oxide.Ext.Discord.WebSockets
                     DiscordChannel thread = guild.Threads[member.Id.Value];
                     if (thread != null)
                     {
-                        ThreadMember existing = thread?.ThreadMembers[member.UserId.Value];
+                        ThreadMember existing = thread.ThreadMembers[member.UserId.Value];
                         if (existing != null)
                         {
                             existing.Update(member);

@@ -2862,6 +2862,14 @@
             Returns the URL for the applications Icon
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.HasFlag(Oxide.Ext.Discord.Entities.Applications.ApplicationFlags)">
+            <summary>
+            Returns if the given application has the passed in application flag
+            If Flags is null false is returned
+            </summary>
+            <param name="flag">Flag to compare against</param>
+            <returns>True of application has flag; False Otherwise</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalCommands(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Fetch all of the global commands for your application.
@@ -3908,7 +3916,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ThreadMembers">
             <summary>
-            Computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
+            List of thread members if channel is thread; Null Otherwise.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Mention">
@@ -5759,7 +5767,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.Members">
             <summary>
-            A ll thread member objects from the synced threads for the current user, indicating which threads the current user has been added to
+            All thread member objects from the synced threads for the current user, indicating which threads the current user has been added to
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent">
