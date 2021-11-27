@@ -133,6 +133,17 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public string GetApplicationIconUrl => DiscordCdn.GetApplicationIconUrl(Id, Icon);
         
         /// <summary>
+        /// Returns if the given application has the passed in application flag
+        /// If Flags is null false is returned
+        /// </summary>
+        /// <param name="flag">Flag to compare against</param>
+        /// <returns>True of application has flag; False Otherwise</returns>
+        public bool HasApplicationFlag(ApplicationFlags flag)
+        {
+            return Flags.HasValue && (Flags.Value & flag) == flag;
+        }
+
+        /// <summary>
         /// Fetch all of the global commands for your application.
         /// Returns a list of ApplicationCommand.
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands">Get Global Application Commands</a>
