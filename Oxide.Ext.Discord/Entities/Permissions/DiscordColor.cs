@@ -270,7 +270,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         {
             if (reader.TokenType == JsonToken.Null)
             {
-                if (IsNullable(objectType))
+                if (!IsNullable(objectType))
                 {
                     throw new JsonException($"Cannot convert null value to {objectType}.");
                 }
