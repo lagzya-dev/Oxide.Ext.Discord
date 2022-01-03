@@ -349,7 +349,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonConverter(typeof(HashListConverter<GuildScheduledEvent>))]
         [JsonProperty("guild_scheduled_events")]
-        public Hash<Snowflake, GuildScheduledEvent> ScheduledEvents { get; set; }
+        public Hash<Snowflake, GuildScheduledEvent> ScheduledEvents { get; set; }        
+        
+        /// <summary>
+        /// The scheduled events in the guild
+        /// </summary>
+        [JsonProperty("premium_progress_bar_enabled")]
+        public bool PremiumProgressBarEnabled { get; set; }
         #endregion
 
         #region Extension Fields
