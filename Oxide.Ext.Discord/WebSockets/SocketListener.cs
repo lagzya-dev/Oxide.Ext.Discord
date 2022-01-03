@@ -148,6 +148,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             bool shouldResume = false;
+            bool shouldReconnect = true;
             switch (closeCode)
             {
                 case SocketCloseCode.UnknownError: 
@@ -168,6 +169,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case SocketCloseCode.AuthenticationFailed: 
                     _logger.Error($"The given bot token is invalid. Please enter a valid token: {reason}");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.AlreadyAuthenticated: 
@@ -189,22 +191,27 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case SocketCloseCode.InvalidShard: 
                     _logger.Error($"Invalid shared has been specified: {reason}");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.ShardingRequired: 
                     _logger.Error($"Bot is in too many guilds. You must shard your bot: {reason}");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.InvalidApiVersion: 
                     _logger.Error("Gateway is using invalid API version. Please contact Discord Extension Devs immediately!");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.InvalidIntents: 
                     _logger.Error("Invalid intent(s) specified for the gateway. Please check that you're using valid intents in the connect.");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.DisallowedIntent:
                     _logger.Error("The plugin is asking for an intent you have not granted your bot. Please complete step 5 @ https://umod.org/extensions/discord#getting-your-api-key");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.UnknownCloseCode:
@@ -212,8 +219,11 @@ namespace Oxide.Ext.Discord.WebSockets
                     break;
             }
 
-            _webSocket.ShouldAttemptResume = shouldResume;
-            _webSocket.Reconnect();
+            if (shouldReconnect)
+            {
+                _webSocket.ShouldAttemptResume = shouldResume;
+                _webSocket.Reconnect();
+            }
         }
 
         /// <summary>
