@@ -78,6 +78,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("pending")]
         public bool? Pending { get; set; }
+        
+        /// <summary>
+        /// When the user's timeout will expire and the user will be able to communicate in the guild again, null or a time in the past if the user is not timed out
+        /// </summary>
+        [JsonProperty("communication_disabled_until")]
+        public DateTime? CommunicationDisabledUntil { get; set; }
         #endregion
 
         #region Helper Properties
@@ -140,6 +146,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             if (update.Permissions != null)
                 Permissions = update.Permissions;
 
+            CommunicationDisabledUntil = update.CommunicationDisabledUntil;
+            
             return previous;
         }
         #endregion

@@ -296,5 +296,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         [Description("START_EMBEDDED_ACTIVITIES")]
         StartEmbeddedActivities  = 1ul << 39,
+        
+        /// <summary>
+        /// Allows for timing out users to prevent them from sending or reacting to messages in chat and threads, and from speaking in voice and stage channels
+        /// </summary>
+        [Description("MODERATE_MEMBERS")]
+        ModerateMembers  = 1ul << 40,
     }
 }
