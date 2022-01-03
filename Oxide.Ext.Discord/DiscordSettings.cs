@@ -1,4 +1,5 @@
-﻿using Oxide.Ext.Discord.Entities.Gatway;
+﻿using System.Text.RegularExpressions;
+using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord
@@ -24,5 +25,16 @@ namespace Oxide.Ext.Discord
         /// See <see cref="GatewayIntents"/>
         /// </summary>
         public GatewayIntents Intents = GatewayIntents.None;
+
+        private static readonly Regex HideTokenRegex = new Regex("\\w", RegexOptions.Compiled);
+        
+        /// <summary>
+        /// Hides the token but keeps the format to allow for debugging token issues without showing the token.
+        /// </summary>
+        /// <returns></returns>
+        public string GetHiddenToken()
+        {
+            return HideTokenRegex.Replace(ApiToken, "#");
+        }
     }
 }
