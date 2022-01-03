@@ -12,8 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
     public class ScheduledEventUsersLookup
     {
         /// <summary>
-        /// How many users to receive from the event
-        /// Default 100
+        /// Number of users to return (up to maximum 100)
         /// </summary>
         public int? Limit { get; set; }
         

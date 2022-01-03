@@ -191,6 +191,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetUsers(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventUsersLookup lookup = null, Action<List<ScheduledEventUser>> callback = null, Action<RestError> error = null)
         {
+            if (lookup?.Limit != null && lookup.Limit.Value > 100)
+            {
+                throw new Exception($"{nameof(GuildScheduledEvent)}.{nameof(GetUsers)} Validation Error: {nameof(ScheduledEventUsersLookup)}.{nameof(ScheduledEventUsersLookup.Limit)} cannot be greater than 100");
+            }
+            
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/scheduled-events/{eventId}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
         
