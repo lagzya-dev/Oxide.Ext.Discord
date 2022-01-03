@@ -24,8 +24,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public CommandOptionType Type { get; set; }
         
         /// <summary>
-        /// The value of the pair
-        /// See <see cref="CommandOptionType"/>
+        /// The value of the option resulting from user input
+        /// Value can be string, integer, or double type
         /// </summary>
         [JsonProperty("value")]
         public JToken Value { get; set; }
