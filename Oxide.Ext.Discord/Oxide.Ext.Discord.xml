@@ -932,7 +932,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildCreated">
             <code>
-            void OnDiscordGuildCreated(GuildDiscordGuild guild)
+            void OnDiscordGuildCreated(DiscordGuild guild)
             {
                 Puts("OnDiscordGuildCreated Works!");
             }
@@ -2862,7 +2862,7 @@
             Returns the URL for the applications Icon
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.HasFlag(Oxide.Ext.Discord.Entities.Applications.ApplicationFlags)">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.HasApplicationFlag(Oxide.Ext.Discord.Entities.Applications.ApplicationFlags)">
             <summary>
             Returns if the given application has the passed in application flag
             If Flags is null false is returned
