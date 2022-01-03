@@ -1524,6 +1524,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 Stickers = updatedGuild.Stickers;
             if (updatedGuild.ScheduledEvents != null)
                 ScheduledEvents = updatedGuild.ScheduledEvents;
+            PremiumProgressBarEnabled = updatedGuild.PremiumProgressBarEnabled;
             return previous;
         }
         #endregion
