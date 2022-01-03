@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// ID of the sticker pack's banner image
         /// </summary>
         [JsonProperty("banner_asset_id")]
-        public Snowflake BannerAssetId { get; set; }
+        public Snowflake? BannerAssetId { get; set; }
         
         /// <summary>
         /// Returns the list of sticker packs available to Nitro subscribers.
