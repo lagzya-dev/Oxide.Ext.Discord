@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord
         /// <returns></returns>
         public string GetHiddenToken()
         {
-            return HideTokenRegex.Replace(ApiToken, "#");
+            return $"\"{HideTokenRegex.Replace(ApiToken, "#")}\"";
         }
     }
 }
