@@ -324,8 +324,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Guild NSFW level
         /// <a href="https://support.discord.com/hc/en-us/articles/1500005389362-NSFW-Server-Designation">NSFW Information</a>
         /// </summary>
-        [JsonProperty("nsfw")]
-        public GuildNsfwLevel NSFW { get; set; }
+        [JsonProperty("nsfw_level")]
+        public GuildNsfwLevel NsfwLevel { get; set; }
         
         /// <summary>
         /// Stage instances in the guild
@@ -1517,7 +1517,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 ApproximatePresenceCount = updatedGuild.ApproximatePresenceCount;
             if (updatedGuild.WelcomeScreen != null)
                 WelcomeScreen = updatedGuild.WelcomeScreen;
-            NSFW = updatedGuild.NSFW;
+            NsfwLevel = updatedGuild.NsfwLevel;
             if (updatedGuild.StageInstances != null)
                 StageInstances = updatedGuild.StageInstances;
             if (updatedGuild.Stickers != null)

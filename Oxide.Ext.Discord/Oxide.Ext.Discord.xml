@@ -6330,7 +6330,7 @@
             Shown to new members, returned in an Invite's guild object
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.NSFW">
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.NsfwLevel">
             <summary>
             Guild NSFW level
             <a href="https://support.discord.com/hc/en-us/articles/1500005389362-NSFW-Server-Designation">NSFW Information</a>
