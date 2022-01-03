@@ -54,6 +54,11 @@ namespace Oxide.Ext.Discord
         public bool Initialized { get; private set; }
         
         /// <summary>
+        /// If the bot has successfully connected to the websocket at least once
+        /// </summary>
+        public bool ConnectedSuccessfully { get; internal set; }
+        
+        /// <summary>
         /// Application reference for this bot
         /// </summary>
         public DiscordApplication Application { get; internal set; }

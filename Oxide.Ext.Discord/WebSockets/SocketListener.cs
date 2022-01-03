@@ -575,6 +575,8 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             
             _client.ReadyData = ready;
+            _client.ConnectedSuccessfully = true;
+            _commands.OnSocketConnected();
         }
 
         //https://discord.com/developers/docs/topics/gateway#resumed`
@@ -1775,7 +1777,6 @@ namespace Oxide.Ext.Discord.WebSockets
             };
 
             _webSocket.Send(GatewayCommandCode.Identify, identify);
-            _commands.OnSocketConnected();
         }
 
         /// <summary>

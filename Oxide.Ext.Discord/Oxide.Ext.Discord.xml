@@ -90,6 +90,11 @@
             If the connection is initialized and not disconnected
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.BotClient.ConnectedSuccessfully">
+            <summary>
+            If the bot has successfully connected to the websocket at least once
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.BotClient.Application">
             <summary>
             Application reference for this bot

@@ -83,6 +83,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _timer.Interval = _interval;
                 _initial = false;
             }
+
+            if (!_client.ConnectedSuccessfully)
+            {
+                _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(HeartbeatElapsed)} Websocket has not yet connected successfully. Skipping Heartbeat.");
+                return;
+            }
             
             if (_socket.IsPendingReconnect())
             {

@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public GatewayIntents Intents = GatewayIntents.None;
 
-        private static readonly Regex HideTokenRegex = new Regex("\\w", RegexOptions.Compiled);
+        private static readonly Regex HideTokenRegex = new Regex("\\w|-", RegexOptions.Compiled);
         
         /// <summary>
         /// Hides the token but keeps the format to allow for debugging token issues without showing the token.
