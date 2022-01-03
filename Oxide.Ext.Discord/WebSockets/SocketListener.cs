@@ -1553,29 +1553,36 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#thread-member-update
         private void HandleDispatchThreadMemberUpdated(EventPayload payload)
         {
-            ThreadMember member = payload.EventData.ToObject<ThreadMember>();
+            ThreadMemberUpdateEvent member = payload.EventData.ToObject<ThreadMemberUpdateEvent>();
 
-            foreach (DiscordGuild guild in _client.Servers.Values)
+            DiscordGuild guild = _client.GetGuild(member.GuildId);
+            if (guild == null)
             {
-                if (member.Id.HasValue && member.UserId.HasValue)
-                {
-                    DiscordChannel thread = guild.Threads[member.Id.Value];
-                    if (thread != null)
-                    {
-                        ThreadMember existing = thread.ThreadMembers[member.UserId.Value];
-                        if (existing != null)
-                        {
-                            existing.Update(member);
-                        }
-                        else
-                        {
-                            thread.ThreadMembers[member.UserId.Value] = member;
-                        }
-                    
-                        _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadMemberUpdated, member, thread, guild);
-                    }
-                }
+                return;
             }
+
+            if (!member.Id.HasValue || !member.UserId.HasValue)
+            {
+                return;
+            }
+            
+            DiscordChannel thread = guild.Threads[member.Id.Value];
+            if (thread == null)
+            {
+                return;
+            }
+            
+            ThreadMember existing = thread.ThreadMembers[member.UserId.Value];
+            if (existing != null)
+            {
+                existing.Update(member);
+            }
+            else
+            {
+                thread.ThreadMembers[member.UserId.Value] = member;
+            }
+                    
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadMemberUpdated, member, thread, guild);
         }
         
         //https://discord.com/developers/docs/topics/gateway#thread-members-update
