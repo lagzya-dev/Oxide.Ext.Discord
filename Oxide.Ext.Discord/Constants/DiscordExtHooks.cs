@@ -178,7 +178,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildChannelPinsUpdated = nameof(OnDiscordGuildChannelPinsUpdated);
         
         /// <code>
-        /// void OnDiscordGuildCreated(GuildDiscordGuild guild)
+        /// void OnDiscordGuildCreated(DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildCreated Works!");
         /// }
