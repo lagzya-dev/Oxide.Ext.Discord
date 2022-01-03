@@ -173,7 +173,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public DiscordApplication Application { get; set; }
         
         /// <summary>
-        /// if the message is an Interaction or application-owned webhook, this is the id of the application
+        /// If the message is an Interaction or application-owned webhook, this is the id of the application
         /// </summary>
         [JsonProperty("application_id")]
         public Snowflake? ApplicationId { get; set; }
