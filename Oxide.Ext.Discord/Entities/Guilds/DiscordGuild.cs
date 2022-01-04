@@ -803,7 +803,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="nick">New user nickname</param>
         /// <param name="callback">Callback with updated nickname</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        [Obsolete("Please use ModifyCurrentMember Instead. This will be removed in February 2022 Update")]
+        [Obsolete("Please use ModifyCurrentMember Instead. This will be removed in April 2022 Update")]
         public void ModifyCurrentUsersNick(DiscordClient client, string nick, Action<string> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>()
