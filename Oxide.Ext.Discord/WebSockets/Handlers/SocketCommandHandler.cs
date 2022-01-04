@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Timers;
+using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
@@ -53,11 +54,15 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
 
-            if (command.OpCode == GatewayCommandCode.PresenceUpdate || command.OpCode == GatewayCommandCode.VoiceStateUpdate)
+            if (command.OpCode == GatewayCommandCode.PresenceUpdate)
             {
-                _pendingCommands.RemoveAll(p => p.OpCode == GatewayCommandCode.PresenceUpdate || p.OpCode == GatewayCommandCode.VoiceStateUpdate);
+                _pendingCommands.RemoveAll(p => p.OpCode == GatewayCommandCode.PresenceUpdate);
+            } 
+            else if (command.OpCode == GatewayCommandCode.VoiceStateUpdate)
+            {
+                _pendingCommands.RemoveAll(p => p.OpCode == GatewayCommandCode.VoiceStateUpdate);
             }
-            
+
             _pendingCommands.Add(command);
         }
 
@@ -78,6 +83,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             while (_pendingCommands.Count != 0)
             {
+                CommandPayload payload = _pendingCommands[0];
                 if (_rateLimit.HasReachedRateLimit)
                 {
                     if (!_rateLimitTimer.Enabled)
@@ -85,14 +91,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                         _rateLimitTimer.Interval = _rateLimit.NextReset;
                         _rateLimitTimer.Stop();
                         _rateLimitTimer.Start();
-                        _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {_rateLimit.NextReset.ToString()} seconds");
+                        _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {_rateLimit.NextReset.ToString()} seconds\nOpcode: {payload.OpCode}\nPayload: {JsonConvert.SerializeObject(payload.Payload, DiscordExtension.ExtensionSerializeSettings)}");
                     }
 
                     return;
                 }
                 
-                CommandPayload payload = _pendingCommands[0];
-
                 if (_logger.IsLogging(DiscordLogLevel.Debug))
                 {
                     _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {payload.OpCode.ToString()}");
