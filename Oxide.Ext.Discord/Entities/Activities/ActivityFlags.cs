@@ -20,37 +20,37 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// No Actions can be done to this activity
         /// </summary>
         [Description("INSTANCE")]
-        Instance =	1 << 0,
+        Instance = 1 << 0,
         
         /// <summary>
         /// Activity can be joined
         /// </summary>
         [Description("JOIN")]
-        Join =	1 << 1,
+        Join = 1 << 1,
         
         /// <summary>
         /// Activity can be spectated
         /// </summary>
         [Description("SPECTATE")]
-        Spectate =	1 << 2,
+        Spectate = 1 << 2,
         
         /// <summary>
         /// User may request to join activity
         /// </summary>
         [Description("JOIN_REQUEST")]
-        JoinRequest =	1 << 3,
+        JoinRequest = 1 << 3,
         
         /// <summary>
         /// User can listen along in spotify
         /// </summary>
         [Description("SYNC")]
-        Sync =	1 << 4,
+        Sync = 1 << 4,
         
         /// <summary>
         /// User can play this song
         /// </summary>
         [Description("PLAY")]
-        Play =	1 << 5,
+        Play = 1 << 5,
 
         /// <summary>
         /// User is playing an activity in a voice channel with friends
