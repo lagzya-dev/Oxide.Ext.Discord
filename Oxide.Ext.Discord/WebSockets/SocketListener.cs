@@ -1011,22 +1011,15 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create
         private void HandleDispatchGuildScheduledEventCreate(EventPayload payload)
         {
-            _logger.Info("A");
             GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
-            _logger.Info("B");
             DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
-            _logger.Info("C");
             if (guild != null)
-            { 
-                _logger.Info("D");
+            {
                 guild.ScheduledEvents[guild.Id] = guildEvent;
             }
-           
-            _logger.Info("E");
+            
             _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventCreate)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
-            _logger.Info("F");
             _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventCreated, guildEvent, guild);
-            _logger.Info("G");
         }
         
         //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update
