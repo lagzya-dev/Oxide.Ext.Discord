@@ -340,5 +340,14 @@ namespace Oxide.Ext.Discord.Builders
         {
             return _embed;
         }
+        
+        /// <summary>
+        /// Returns the built embed in a list
+        /// </summary>
+        /// <returns>List of <see cref="DiscordEmbed"/></returns>
+        public List<DiscordEmbed> BuildList()
+        {
+            return new List<DiscordEmbed> {_embed};
+        }
     }
 }

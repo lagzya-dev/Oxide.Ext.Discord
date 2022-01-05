@@ -178,7 +178,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildChannelPinsUpdated = nameof(OnDiscordGuildChannelPinsUpdated);
         
         /// <code>
-        /// void OnDiscordGuildCreated(GuildDiscordGuild guild)
+        /// void OnDiscordGuildCreated(DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildCreated Works!");
         /// }
@@ -972,6 +972,46 @@ namespace Oxide.Ext.Discord.Constants
         /// }
         /// </code>
         public const string OnDiscordGuildRoleDeleted = nameof(OnDiscordGuildRoleDeleted);
+        
+        /// <code>
+        /// void OnDiscordGuildScheduledEventCreated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventCreated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventCreated = nameof(OnDiscordGuildScheduledEventCreated);
+        
+        /// <code>
+        /// void OnDiscordGuildScheduledEventUpdated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventUpdated = nameof(OnDiscordGuildScheduledEventUpdated);
+        
+        /// <code>
+        /// void OnDiscordGuildScheduledEventDeleted(GuildScheduledEvent guildEvent, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventDeleted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventDeleted = nameof(OnDiscordGuildScheduledEventDeleted);
+        
+        /// <code>
+        /// void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventUserAdded Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventUserAdded = nameof(OnDiscordGuildScheduledEventUserAdded);
+        
+        /// <code>
+        /// void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildScheduledEventUserRemoved = nameof(OnDiscordGuildScheduledEventUserRemoved);
         
         /// <code>
         /// void OnDiscordCommand(DiscordMessage message, string cmd, string[] args)

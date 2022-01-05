@@ -35,7 +35,10 @@ namespace Oxide.Ext.Discord.Helpers.Converters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JArray array = JArray.Load(reader);
-            List<BaseComponent> components = new List<BaseComponent>();
+            if (!(existingValue is List<BaseComponent> components))
+            {
+                components = new List<BaseComponent>();
+            }
 
             foreach (JToken token in array)
             {

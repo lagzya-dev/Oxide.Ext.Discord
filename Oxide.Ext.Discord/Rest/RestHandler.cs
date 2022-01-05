@@ -3,6 +3,7 @@ using System.Text;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.RateLimits;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Rest
@@ -15,7 +16,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Global Rate Limit for the bot
         /// </summary>
-        public readonly RateLimitHandler RateLimit = new RateLimitHandler();
+        public readonly RestRateLimit RateLimit = new RestRateLimit();
         
         /// <summary>
         /// The request buckets for the bot

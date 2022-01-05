@@ -59,6 +59,11 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
     + [OnDiscordGuildRoleCreated](#ondiscordguildrolecreated)
     + [OnDiscordGuildRoleUpdated](#ondiscordguildroleupdated)
     + [OnDiscordGuildRoleDeleted](#ondiscordguildroledeleted)
+    + [OnDiscordGuildScheduledEventCreated](#OnDiscordGuildScheduledEventCreated)
+    + [OnDiscordGuildScheduledEventUpdated](#OnDiscordGuildScheduledEventUpdated)
+    + [OnDiscordGuildScheduledEventDeleted](#OnDiscordGuildScheduledEventDeleted)
+    + [OnDiscordGuildScheduledEventUserAdded](#OnDiscordGuildScheduledEventUserAdded)
+    + [OnDiscordGuildScheduledEventUserRemoved](#OnDiscordGuildScheduledEventUserRemoved)
     + [OnDiscordDirectMessageCreated](#ondiscorddirectmessagecreated)
     + [OnDiscordGuildMessageCreated](#ondiscordguildmessagecreated)
     + [OnDiscordDirectMessageUpdated](#ondiscorddirectmessageupdated)
@@ -434,7 +439,7 @@ void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration
 - Called when a guild member has been added to the guild
 
 ```c#
-void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild guild)
+void OnDiscordGuildMemberAdded(GuildMemberRemovedEvent member, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberRemoved Works!");
 }
@@ -457,7 +462,7 @@ void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild gu
   - This also include when the DiscordUser is updated as well
 
 ```c#
-void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, DiscordGuild guild)
+void OnDiscordGuildMemberUpdated(GuildMember update, GuildMember previous, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberUpdated Works!");
 }
@@ -516,6 +521,61 @@ void OnDiscordGuildRoleUpdated(Role role, Role previous, DiscordGuild guild)
 void OnDiscordGuildRoleDeleted(Role role, DiscordGuild guild)
 {
     Puts("OnDiscordGuildRoleDeleted Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventCreated
+
+- Called when a discord guild scheduled event is created
+
+```c#
+void OnDiscordGuildScheduledEventCreated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventCreated Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventUpdated
+
+- Called when a discord guild scheduled event is update
+
+```c#
+void OnDiscordGuildScheduledEventUpdated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventUpdated Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventDeleted
+
+- Called when a discord guild scheduled event is deleted
+
+```c#
+void OnDiscordGuildScheduledEventDeleted(GuildScheduledEvent guildEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventDeleted Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventUserAdded
+
+- Called when a discord user is added to a guild scheduled event
+
+```c#
+void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventUserAdded Works!");
+}
+```
+
+### OnDiscordGuildScheduledEventUserRemoved
+
+- Called when a discord user is removed from a guild scheduled event
+
+```c#
+void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
 }
 ```
 

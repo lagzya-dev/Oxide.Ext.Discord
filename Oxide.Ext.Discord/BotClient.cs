@@ -54,6 +54,11 @@ namespace Oxide.Ext.Discord
         public bool Initialized { get; private set; }
         
         /// <summary>
+        /// If the bot has successfully connected to the websocket at least once
+        /// </summary>
+        public bool ConnectedSuccessfully { get; internal set; }
+        
+        /// <summary>
         /// Application reference for this bot
         /// </summary>
         public DiscordApplication Application { get; internal set; }
@@ -135,13 +140,13 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Close the websocket with discord
         /// </summary>
-        /// <param name="attemptReconnect">Should we attempt to reconnect to discord after closing</param>
-        /// <param name="attemptResume">Should we attempt to resume the previous session</param>
-        public void DisconnectWebsocket(bool attemptReconnect = false, bool attemptResume = false)
+        /// <param name="reconnect">Should we attempt to reconnect to discord after closing</param>
+        /// <param name="resume">Should we attempt to resume the previous session</param>
+        public void DisconnectWebsocket(bool reconnect = false, bool resume = false)
         {
             if (Initialized)
             {
-                _webSocket.Disconnect(attemptReconnect, attemptResume);
+                _webSocket.Disconnect(reconnect, resume);
             }
         }
 
@@ -180,40 +185,39 @@ namespace Oxide.Ext.Discord
             {
                 Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Clients.Count == 1 connecting bot");
                 ConnectWebSocket();
+                return;
             }
-            else
+            
+            if (client.Settings.LogLevel < Settings.LogLevel)
             {
-                if (client.Settings.LogLevel < Settings.LogLevel)
-                {
-                    UpdateLogLevel(client.Settings.LogLevel);
-                }
+                UpdateLogLevel(client.Settings.LogLevel);
+            }
 
-                GatewayIntents intents = Settings.Intents | client.Settings.Intents;
+            GatewayIntents intents = Settings.Intents | client.Settings.Intents;
                 
-                //Our intents have changed. Disconnect websocket and reconnect with new intents.
-                if (intents != Settings.Intents)
-                {
-                    Logger.Info("New intents have been requested for the bot. Reconnecting with updated intents.");
-                    Settings.Intents = intents;
-                    DisconnectWebsocket(true);
-                }
+            //Our intents have changed. Disconnect websocket and reconnect with new intents.
+            if (intents != Settings.Intents)
+            {
+                Logger.Info("New intents have been requested for the bot. Reconnecting with updated intents.");
+                Settings.Intents = intents;
+                DisconnectWebsocket(true);
+            }
                 
-                if (ReadyData != null)
-                {
-                    ReadyData.Guilds = Servers.Copy();
-                    client.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ReadyData);
+            if (ReadyData != null)
+            {
+                ReadyData.Guilds = Servers.Copy();
+                client.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ReadyData);
 
-                    foreach (DiscordGuild guild in Servers.Values)
+                foreach (DiscordGuild guild in Servers.Values)
+                {
+                    if (guild.IsAvailable)
                     {
-                        if (guild.IsAvailable)
-                        {
-                            client.CallHook(DiscordExtHooks.OnDiscordGuildCreated, guild);
-                        }
+                        client.CallHook(DiscordExtHooks.OnDiscordGuildCreated, guild);
+                    }
 
-                        if (guild.HasLoadedAllMembers)
-                        {
-                            client.CallHook(DiscordExtHooks.OnDiscordGuildMembersLoaded, guild);
-                        }
+                    if (guild.HasLoadedAllMembers)
+                    {
+                        client.CallHook(DiscordExtHooks.OnDiscordGuildMembersLoaded, guild);
                     }
                 }
             }

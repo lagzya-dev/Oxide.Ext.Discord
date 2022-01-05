@@ -233,38 +233,74 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         RequestToSpeak = 1ul << 32,
         
         /// <summary>
+        /// Allows for creating, editing, and deleting scheduled events
+        /// Channel Type (Voice, Stage)
+        /// </summary>
+        [Description("MANAGE_EVENTS")]
+        ManageEvents = 1ul << 33,
+        
+        /// <summary>
         /// Allows for deleting and archiving threads, and viewing all private threads
         /// Channel Type (Text)
         /// </summary>
         [Description("MANAGE_THREADS")]
-        ManageThreads  = 1ul << 34,
+        ManageThreads = 1ul << 34,
         
         /// <summary>
         /// Allows for creating and participating in threads
         /// Channel Type (Text)
         /// </summary>
+        [Obsolete("This flag has been deprecated and will be removed in a future update. This flag is replaced by CreatePublicThreads")]
         [Description("USE_PUBLIC_THREADS")]
-        UsePublicThreads  = 1ul << 35,
+        UsePublicThreads = 1ul << 35,
+        
+        /// <summary>
+        /// Allows for creating threads
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("CREATE_PUBLIC_THREADS")]
+        CreatePublicThreads = 1ul << 35,
         
         /// <summary>
         /// Allows for creating and participating in private threads
         /// Channel Type (Text)
         /// </summary>
+        [Obsolete("This flag has been deprecated and will be removed in a future update. This flag is replaced by CreatePrivateThreads")] 
         [Description("USE_PRIVATE_THREADS")]
-        UsePrivateThreads  = 1ul << 36,
+        UsePrivateThreads = 1ul << 36,
+        
+        /// <summary>
+        /// Allows for creating private threads
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("CREATE_PRIVATE_THREADS")]
+        CreatePrivateThreads = 1ul << 36,
         
         /// <summary>
         /// Allows the usage of custom stickers from other servers
         /// Channel Type (Text)
         /// </summary>
         [Description("USE_EXTERNAL_STICKERS")]
-        UseExternalStickers  = 1ul << 37,
+        UseExternalStickers = 1ul << 37,    
+        
+        /// <summary>
+        /// Allows for sending messages in threads
+        /// Channel Type (Text)
+        /// </summary>
+        [Description("SEND_MESSAGES_IN_THREADS")]
+        SendMessagesInThreads = 1ul << 38,
         
         /// <summary>
         /// Allows for launching activities (applications with the `EMBEDDED` flag) in a voice channel
         /// Channel Type (Voice)
         /// </summary>
         [Description("START_EMBEDDED_ACTIVITIES")]
-        StartEmbeddedActivities  = 1ul << 39,
+        StartEmbeddedActivities = 1ul << 39,
+        
+        /// <summary>
+        /// Allows for timing out users to prevent them from sending or reacting to messages in chat and threads, and from speaking in voice and stage channels
+        /// </summary>
+        [Description("MODERATE_MEMBERS")]
+        ModerateMembers = 1ul << 40,
     }
 }

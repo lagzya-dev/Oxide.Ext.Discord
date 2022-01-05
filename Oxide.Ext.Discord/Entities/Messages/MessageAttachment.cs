@@ -20,6 +20,18 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("filename")]
         public string Filename { get; set; }
+        
+        /// <summary>
+        /// Description for the file
+        /// </summary>
+        [JsonProperty("description")]
+        public string Description { get; set; }
+        
+        /// <summary>
+        /// The attachment's <a href="https://en.wikipedia.org/wiki/Media_type">media type</a>
+        /// </summary>
+        [JsonProperty("content_type")]
+        public string ContentType { get; set; }
 
         /// <summary>
         /// Size of file in bytes
@@ -50,5 +62,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("width")]
         public int? Width { get; set; }
+        
+        /// <summary>
+        /// Whether this attachment is ephemeral
+        /// </summary>
+        [JsonProperty("ephemeral")]
+        public bool? Ephemeral { get; set; }
     }
 }

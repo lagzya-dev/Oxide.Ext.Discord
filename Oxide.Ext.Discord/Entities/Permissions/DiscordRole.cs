@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Permissions
@@ -34,6 +35,18 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         [JsonProperty("hoist")]
         public bool? Hoist { get; set; }
+        
+        /// <summary>
+        /// The role's icon image (if the guild has the ROLE_ICONS feature)
+        /// </summary>
+        [JsonProperty("icon")]
+        public string Icon { get; set; }
+        
+        /// <summary>
+        /// The role's unicode emoji as a standard emoji (if the guild has the ROLE_ICONS feature)
+        /// </summary>
+        [JsonProperty("unicode_emoji")]
+        public string UnicodeEmoji { get; set; }
 
         /// <summary>
         /// Position of this role
@@ -69,6 +82,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// Returns a string to mention this role in a message
         /// </summary>
         public string Mention => DiscordFormatting.MentionRole(Id);
+
+        /// <summary>
+        /// Return the Role Icon URL for a Discord Role. Empty string is not set.
+        /// </summary>
+        public string RoleIcon => !string.IsNullOrEmpty(Icon) ? DiscordCdn.GetRoleIcon(Id) : string.Empty;
         #endregion
 
         #region Helper Methods

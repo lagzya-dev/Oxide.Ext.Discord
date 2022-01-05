@@ -1,4 +1,5 @@
 using System.Timers;
+using Oxide.Core;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Logging;
 
@@ -18,7 +19,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly Socket _socket;
         private readonly SocketListener _listener;
         private readonly ILogger _logger;
-        private Timer _heartbeatTimer;
+        private Timer _timer;
+        private float _interval;
+        private bool _initial;
 
         /// <summary>
         /// Constructor for Heartbeat Handler
@@ -39,21 +42,23 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <summary>
         /// Setup a heartbeat for this bot with the given interval
         /// </summary>
-        /// <param name="heartbeatInterval"></param>
-        internal void SetupHeartbeat(float heartbeatInterval)
+        /// <param name="interval"></param>
+        internal void SetupHeartbeat(float interval)
         {
-            if (_heartbeatTimer != null)
+            if (_timer != null)
             {
                 _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SetupHeartbeat)} Previous heartbeat timer exists.");
                 DestroyHeartbeat();
             }
-
+            
             HeartbeatAcknowledged = true;
-            _heartbeatTimer = new Timer(heartbeatInterval);
-            _heartbeatTimer.Elapsed += HeartbeatElapsed;
-            _heartbeatTimer.Start();
-            _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SetupHeartbeat)} Creating heartbeat with interval {heartbeatInterval.ToString()}ms.");
-            _client.CallHook(DiscordExtHooks.OnDiscordSetupHeartbeat, heartbeatInterval);
+            _interval = interval;
+            _initial = true;
+            _timer = new Timer(_interval * Random.Range(0f, 1f));
+            _timer.Elapsed += HeartbeatElapsed;
+            _timer.Start();
+            _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SetupHeartbeat)} Creating heartbeat with interval {interval.ToString()}ms.");
+            _client.CallHook(DiscordExtHooks.OnDiscordSetupHeartbeat, interval);
         }
 
         /// <summary>
@@ -61,17 +66,29 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         public void DestroyHeartbeat()
         {
-            if(_heartbeatTimer != null)
+            if(_timer != null)
             {
                 _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(DestroyHeartbeat)} Destroy Heartbeat");
-                _heartbeatTimer.Dispose();
-                _heartbeatTimer = null;
+                _timer.Dispose();
+                _timer = null;
             }
         }
 
         private void HeartbeatElapsed(object sender, ElapsedEventArgs e)
         {
             _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed");
+
+            if (_initial)
+            {
+                _timer.Interval = _interval;
+                _initial = false;
+            }
+
+            if (!_client.ConnectedSuccessfully)
+            {
+                _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(HeartbeatElapsed)} Websocket has not yet connected successfully. Skipping Heartbeat.");
+                return;
+            }
             
             if (_socket.IsPendingReconnect())
             {
@@ -120,7 +137,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             HeartbeatAcknowledged = false;
             _listener.SendHeartbeat();
             _client.CallHook(DiscordExtHooks.OnDiscordHeartbeatSent);
-            _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SendHeartbeat)} Heartbeat sent - {_heartbeatTimer.Interval.ToString()}ms interval.");
+            _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SendHeartbeat)} Heartbeat sent - {_timer.Interval.ToString()}ms interval.");
         }
         #endregion
     }

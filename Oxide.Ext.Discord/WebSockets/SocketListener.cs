@@ -11,8 +11,8 @@ using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Stickers;
@@ -44,6 +44,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private readonly BotClient _client;
         private readonly Socket _webSocket;
         private readonly ILogger _logger;
+        private readonly SocketCommandHandler _commands;
         private HeartbeatHandler _heartbeat;
 
         /// <summary>
@@ -52,11 +53,13 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <param name="client">Client this listener is for</param>
         /// <param name="socket">Socket this listener is for</param>
         /// <param name="logger">Logger for the client</param>
-        public SocketListener(BotClient client, Socket socket, ILogger logger)
+        /// <param name="commands">Socket Command Handler</param>
+        public SocketListener(BotClient client, Socket socket, ILogger logger, SocketCommandHandler commands)
         {
             _client = client;
             _webSocket = socket;
             _logger = logger;
+            _commands = commands;
             _heartbeat = new HeartbeatHandler(_client, _webSocket, this, _logger);
         }
 
@@ -145,6 +148,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             bool shouldResume = false;
+            bool shouldReconnect = true;
             switch (closeCode)
             {
                 case SocketCloseCode.UnknownError: 
@@ -164,7 +168,8 @@ namespace Oxide.Ext.Discord.WebSockets
                     break;
                 
                 case SocketCloseCode.AuthenticationFailed: 
-                    _logger.Error($"The given bot token is invalid. Please enter a valid token: {reason}");
+                    _logger.Error($"The given bot token is invalid. Please enter a valid token. Token: {_client.Settings.GetHiddenToken()}");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.AlreadyAuthenticated: 
@@ -186,22 +191,27 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case SocketCloseCode.InvalidShard: 
                     _logger.Error($"Invalid shared has been specified: {reason}");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.ShardingRequired: 
                     _logger.Error($"Bot is in too many guilds. You must shard your bot: {reason}");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.InvalidApiVersion: 
                     _logger.Error("Gateway is using invalid API version. Please contact Discord Extension Devs immediately!");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.InvalidIntents: 
                     _logger.Error("Invalid intent(s) specified for the gateway. Please check that you're using valid intents in the connect.");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.DisallowedIntent:
                     _logger.Error("The plugin is asking for an intent you have not granted your bot. Please complete step 5 @ https://umod.org/extensions/discord#getting-your-api-key");
+                    shouldReconnect = false;
                     break;
                 
                 case SocketCloseCode.UnknownCloseCode:
@@ -209,8 +219,11 @@ namespace Oxide.Ext.Discord.WebSockets
                     break;
             }
 
-            _webSocket.ShouldAttemptResume = shouldResume;
-            _webSocket.Reconnect();
+            if (shouldReconnect)
+            {
+                _webSocket.ShouldAttemptResume = shouldResume;
+                _webSocket.Reconnect();
+            }
         }
 
         /// <summary>
@@ -392,6 +405,26 @@ namespace Oxide.Ext.Discord.WebSockets
                     HandleDispatchGuildRoleDelete(payload);
                     break;
                 
+                case DispatchCode.GuildScheduledEventCreate:
+                    HandleDispatchGuildScheduledEventCreate(payload);
+                    break;
+                
+                case DispatchCode.GuildScheduledEventUpdate:
+                    HandleDispatchGuildScheduledEventUpdate(payload);
+                    break;
+                
+                case DispatchCode.GuildScheduledEventDelete:
+                    HandleDispatchGuildScheduledEventDelete(payload);
+                    break;
+                
+                case DispatchCode.GuildScheduledEventUserAdd:
+                    HandleDispatchGuildScheduledEventUserAdd(payload);
+                    break;
+                
+                case DispatchCode.GuildScheduledEventUserRemove:
+                    HandleDispatchGuildScheduledEventUserRemove(payload);
+                    break;
+                
                 case DispatchCode.IntegrationCreated:
                     HandleDispatchIntegrationCreate(payload);
                     break;
@@ -542,6 +575,8 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             
             _client.ReadyData = ready;
+            _client.ConnectedSuccessfully = true;
+            _commands.OnSocketConnected();
         }
 
         //https://discord.com/developers/docs/topics/gateway#resumed`
@@ -973,6 +1008,71 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
         
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create
+        private void HandleDispatchGuildScheduledEventCreate(EventPayload payload)
+        {
+            GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
+            DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            if (guild != null)
+            {
+                guild.ScheduledEvents[guild.Id] = guildEvent;
+            }
+            
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventCreate)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventCreated, guildEvent, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update
+        private void HandleDispatchGuildScheduledEventUpdate(EventPayload payload)
+        {
+            GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
+            DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            if (guild != null)
+            {
+                if (guild.ScheduledEvents.ContainsKey(guildEvent.Id))
+                {
+                    guild.ScheduledEvents[guildEvent.Id].Update(guildEvent);
+                }
+                else
+                {
+                    guild.ScheduledEvents[guild.Id] = guildEvent;
+                }
+            }
+
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUpdate)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUpdated, guildEvent, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-delete
+        private void HandleDispatchGuildScheduledEventDelete(EventPayload payload)
+        {
+            GuildScheduledEvent guildEvent = payload.EventData.ToObject<GuildScheduledEvent>();
+            DiscordGuild guild = _client.GetGuild(guildEvent.GuildId);
+            guild.ScheduledEvents.Remove(guildEvent.Id);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventDelete)} Guild ID: {guildEvent.GuildId.ToString()} Guild Name: {guild?.Name} Scheduled Event ID: {guildEvent.Id.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventDeleted, guildEvent, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add
+        private void HandleDispatchGuildScheduledEventUserAdd(EventPayload payload)
+        {
+            GuildScheduleEventUserAddedEvent added = payload.EventData.ToObject<GuildScheduleEventUserAddedEvent>();
+            DiscordGuild guild = _client.GetGuild(added.GuildId);
+            GuildScheduledEvent scheduledEvent = guild.ScheduledEvents[added.GuildScheduledEventId];
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUserAdd)} Guild ID: {added.GuildId.ToString()} Guild Name: {guild?.Name} User ID: {added.UserId.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserAdded, added, scheduledEvent, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove
+        private void HandleDispatchGuildScheduledEventUserRemove(EventPayload payload)
+        {
+            GuildScheduleEventUserRemovedEvent removed = payload.EventData.ToObject<GuildScheduleEventUserRemovedEvent>();
+            DiscordGuild guild = _client.GetGuild(removed.GuildId);
+            GuildScheduledEvent scheduledEvent = guild.ScheduledEvents[removed.GuildScheduledEventId];
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildScheduledEventUserRemove)} Guild ID: {removed.GuildId.ToString()} Guild Name: {guild?.Name} User ID: {removed.UserId.ToString()}");
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildScheduledEventUserRemoved, removed, scheduledEvent, guild);
+        }
+
         //https://discord.com/developers/docs/topics/gateway#integration-create
         private void HandleDispatchIntegrationCreate(EventPayload payload)
         {
@@ -1395,6 +1495,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchThreadDeleted)} Guild: {guild.Name}({guild.Id.ToString()}) Thread: {thread.Name}({thread.Id.ToString()})");
                     thread = guild.Threads[thread.Id] ?? thread;
+                    guild.Threads.Remove(thread.Id);
                     _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadDeleted, thread, guild);
                 }
             }
@@ -1410,7 +1511,9 @@ namespace Oxide.Ext.Discord.WebSockets
             List<Snowflake> threadsToClear = new List<Snowflake>();
             foreach (DiscordChannel thread in guild.Threads.Values)
             {
-                if (thread.ParentId.HasValue && (sync.ChannelIds == null || sync.ChannelIds.Contains(thread.ParentId.Value)))
+                if (thread.ParentId.HasValue 
+                    && (sync.ChannelIds == null || sync.ChannelIds.Contains(thread.ParentId.Value))
+                    && !sync.Threads.ContainsKey(thread.Id))
                 {
                     threadsToClear.Add(thread.Id);
                 }
@@ -1423,7 +1526,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             
             //Add threads to the guild
-            foreach (DiscordChannel thread in sync.Threads)
+            foreach (DiscordChannel thread in sync.Threads.Values)
             {
                 DiscordChannel existing = guild.Threads[thread.Id];
                 if (existing != null)
@@ -1447,7 +1550,6 @@ namespace Oxide.Ext.Discord.WebSockets
                         thread.ThreadMembers[member.UserId.Value] = member;
                     }
                 }
-                
             }
             
             _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadListSynced, sync, guild);
@@ -1456,29 +1558,36 @@ namespace Oxide.Ext.Discord.WebSockets
         //https://discord.com/developers/docs/topics/gateway#thread-member-update
         private void HandleDispatchThreadMemberUpdated(EventPayload payload)
         {
-            ThreadMember member = payload.EventData.ToObject<ThreadMember>();
+            ThreadMemberUpdateEvent member = payload.EventData.ToObject<ThreadMemberUpdateEvent>();
 
-            foreach (DiscordGuild guild in _client.Servers.Values)
+            DiscordGuild guild = _client.GetGuild(member.GuildId);
+            if (guild == null)
             {
-                if (member.Id.HasValue && member.UserId.HasValue)
-                {
-                    DiscordChannel thread = guild.Threads[member.Id.Value];
-                    if (thread != null)
-                    {
-                        ThreadMember existing = thread?.ThreadMembers[member.UserId.Value];
-                        if (existing != null)
-                        {
-                            existing.Update(member);
-                        }
-                        else
-                        {
-                            thread.ThreadMembers[member.UserId.Value] = member;
-                        }
-                    
-                        _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadMemberUpdated, member, thread, guild);
-                    }
-                }
+                return;
             }
+
+            if (!member.Id.HasValue || !member.UserId.HasValue)
+            {
+                return;
+            }
+            
+            DiscordChannel thread = guild.Threads[member.Id.Value];
+            if (thread == null)
+            {
+                return;
+            }
+            
+            ThreadMember existing = thread.ThreadMembers[member.UserId.Value];
+            if (existing != null)
+            {
+                existing.Update(member);
+            }
+            else
+            {
+                thread.ThreadMembers[member.UserId.Value] = member;
+            }
+                    
+            _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadMemberUpdated, member, thread, guild);
         }
         
         //https://discord.com/developers/docs/topics/gateway#thread-members-update
@@ -1491,19 +1600,25 @@ namespace Oxide.Ext.Discord.WebSockets
                 DiscordChannel thread = guild.Threads[members.Id];
                 if (thread != null)
                 {
-                    foreach (ThreadMember member in members.AddedMembers)
+                    if (members.AddedMembers != null)
                     {
-                        if (member.UserId.HasValue)
+                        foreach (ThreadMember member in members.AddedMembers)
                         {
-                            thread.ThreadMembers[member.UserId.Value] = member;
+                            if (member.UserId.HasValue)
+                            {
+                                thread.ThreadMembers[member.UserId.Value] = member;
+                            }
                         }
                     }
 
-                    foreach (Snowflake memberId in members.RemovedMemberIds)
+                    if (members.RemovedMemberIds != null)
                     {
-                        thread.ThreadMembers.Remove(memberId);
+                        foreach (Snowflake memberId in members.RemovedMemberIds)
+                        {
+                            thread.ThreadMembers.Remove(memberId);
+                        }
                     }
-                    
+
                     _client.CallHook(DiscordExtHooks.OnDiscordGuildThreadMembersUpdated, members, guild);
                 }
             }

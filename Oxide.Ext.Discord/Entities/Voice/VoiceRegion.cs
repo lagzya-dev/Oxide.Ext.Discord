@@ -26,6 +26,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// <summary>
         /// True if this is a vip-only server
         /// </summary>
+        [Obsolete("This field is no longer sent by discord")]
         [JsonProperty("vip")]
         public bool Vip { get; set; }
 

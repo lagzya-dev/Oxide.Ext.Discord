@@ -173,7 +173,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public DiscordApplication Application { get; set; }
         
         /// <summary>
-        /// If the message is a response to an Interaction, this is the id of the interaction's application
+        /// If the message is an Interaction or application-owned webhook, this is the id of the application
         /// </summary>
         [JsonProperty("application_id")]
         public Snowflake? ApplicationId { get; set; }
@@ -241,6 +241,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateMessage(DiscordClient client, Snowflake channelId, MessageCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            message.Validate();
             client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, message, callback, error);
         }
 
@@ -262,7 +263,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 Content = message
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, createMessage, callback, error);
+            CreateMessage(client, channelId, createMessage, callback, error);
         }
 
         /// <summary>
@@ -283,7 +284,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 Embeds = new List<DiscordEmbed> {embed}
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, createMessage, callback, error);
+            CreateMessage(client, channelId, createMessage, callback, error);
         }
         
         /// <summary>
@@ -304,7 +305,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 Embeds = embeds
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, createMessage, callback, error);
+            CreateMessage(client, channelId, createMessage, callback, error);
         }
 
         /// <summary>
@@ -337,6 +338,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId};
             }
             
+            message.Validate();
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback, error);
         }
         

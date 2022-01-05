@@ -270,9 +270,9 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         {
             if (reader.TokenType == JsonToken.Null)
             {
-                if (IsNullable(objectType))
+                if (!IsNullable(objectType))
                 {
-                    throw new JsonException($"Cannot convert null value to {objectType}.");
+                    throw new JsonException($"Cannot convert null value to {objectType}. Path: {reader.Path}");
                 }
 
                 return null;
@@ -283,7 +283,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
                 return new DiscordColor(uint.Parse(reader.Value.ToString()));
             }
             
-            throw new JsonException($"Unexpected token {reader.TokenType} when parsing discord color.");
+            throw new JsonException($"Unexpected token {reader.TokenType} when parsing discord color. Path: {reader.Path}");
         }
 
         /// <summary>

@@ -24,8 +24,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public CommandOptionType Type { get; set; }
         
         /// <summary>
-        /// The value of the pair
-        /// See <see cref="CommandOptionType"/>
+        /// The value of the option resulting from user input
+        /// Value can be string, integer, or double type
         /// </summary>
         [JsonProperty("value")]
         public JToken Value { get; set; }
@@ -36,5 +36,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("options")]
         public List<InteractionDataOption> Options { get; set; }
+        
+        /// <summary>
+        /// True if this option is the currently focused option for autocomplete
+        /// </summary>
+        [JsonProperty("focused")]
+        public bool? Focused { get; set; }
     }
 }

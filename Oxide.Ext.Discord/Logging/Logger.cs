@@ -81,7 +81,7 @@ namespace Oxide.Ext.Discord.Logging
                 return;
             }
 
-            string log= $"[Discord Extension] [{level.ToString()}]: {message}";
+            string log = $"[Discord Extension] [{level.ToString()}]: {message}";
             switch (level)
             {
                 case DiscordLogLevel.Debug:

@@ -37,7 +37,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                         return snowflake;
                     }
 
-                    throw new JsonException($"Snowflake string JSON token failed to parse to snowflake: '{reader.Value}'");
+                    throw new JsonException($"Snowflake string JSON token failed to parse to snowflake: '{reader.Value}' Path: {reader.Path}");
               
                 case JsonToken.Null:
                     if (Nullable.GetUnderlyingType(objectType) != null)
@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                     return default(Snowflake);
                 
                 default:
-                    throw new JsonException($"Token type {reader.TokenType.ToString()} does not match snowflake valid types of string or integer");
+                    throw new JsonException($"Token type {reader.TokenType.ToString()} does not match snowflake valid types of string or integer. Path: {reader.Path}");
             }
         }
         
