@@ -196,6 +196,30 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
                     throw new ArgumentException("ImageFormat is not valid for User Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
             }
         }
+
+        /// <summary>
+        /// Returns the Url of the Guild Member avatar
+        /// </summary>
+        /// <param name="guildId">Guild ID of the Guild Member</param>
+        /// <param name="userId">Discord User ID</param>
+        /// <param name="memberAvatar">Guild Member avatar</param>
+        /// <param name="format">Format the avatar is in</param>
+        /// <returns>Url of the Guild Member avatar</returns>
+        public static string GetGuildMemberAvatar(Snowflake guildId, Snowflake userId, string memberAvatar, ImageFormat format = ImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                case ImageFormat.Gif:
+                    return $"{CdnUrl}/guilds/{guildId.ToString()}/users/{userId.ToString()}/avatars/{memberAvatar}.{GetExtension(format, memberAvatar)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Guild Member Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
+            }
+        }
         
         /// <summary>
         /// Returns the url to the application icon
@@ -329,6 +353,28 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
                 case ImageFormat.Png:
                 case ImageFormat.Lottie:
                     return $"{CdnUrl}/stickers/{stickerId.ToString()}.{GetExtension(format, stickerId)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+            }
+        }
+        
+        /// <summary>
+        /// Returns the sticker url with the given ID
+        /// </summary>
+        /// <param name="roleId">ID of the role</param>
+        /// <param name="format">Format for the icon to be returned in</param>
+        /// <returns>Return url for the role icon</returns>
+        /// <exception cref="ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        public static string GetRoleIcon(Snowflake roleId, ImageFormat format = ImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case ImageFormat.Auto:
+                case ImageFormat.Jpg:
+                case ImageFormat.Png:
+                case ImageFormat.WebP:
+                    return $"{CdnUrl}/role-icons/{roleId.ToString()}.{GetExtension(format, roleId)}";
 
                 default:
                     throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));

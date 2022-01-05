@@ -253,18 +253,20 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="payload">Message data</param>
+        /// <param name="message">Message data</param>
         /// <param name="executeParams">Webhook execution parameters</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, WebhookExecuteParams executeParams = null, Action callback = null, Action<RestError> error = null)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage message, WebhookExecuteParams executeParams = null, Action callback = null, Action<RestError> error = null)
         {
             if (executeParams == null)
             {
                 executeParams = new WebhookExecuteParams();
             }
             
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, payload, callback, error);
+            message.Validate();
+            
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
 
         /// <summary>
@@ -272,11 +274,11 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="payload">Message data</param>
+        /// <param name="message">Message data</param>
         /// <param name="executeParams">Webhook execution parameters</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage payload, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage message, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             if (executeParams == null)
             {
@@ -284,22 +286,48 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             }
 
             executeParams.Wait = true;
+            message.Validate();
             
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, payload, callback, error);
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
 
+        /// <summary>
+        /// Gets a previously-sent webhook message from the same token.
+        /// See <a href="https://discord.com/developers/docs/resources/webhook#get-webhook-message">Edit Webhook Message</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="messageId">Message ID to get</param>
+        /// <param name="messageParams">Message Params</param>
+        /// <param name="callback">Callback with the message</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetWebhookMessage(DiscordClient client, Snowflake messageId, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        {
+            if (messageParams == null)
+            {
+                messageParams = new WebhookMessageParams();
+            }
+            
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}{messageParams.ToQueryString()}", RequestMethod.GET, null, callback, error);
+        }
+        
         /// <summary>
         /// Edits a previously-sent webhook message from the same token.
         /// See <a href="https://discord.com/developers/docs/resources/webhook#edit-webhook-message">Edit Webhook Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID to edit</param>
-        /// <param name="payload">The updated message</param>
+        /// <param name="messageParams">Message Params</param>
+        /// <param name="message">The updated message</param>
         /// <param name="callback">Callback with the edited message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditWebhookMessage(DiscordClient client, Snowflake messageId, DiscordMessage payload, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void EditWebhookMessage(DiscordClient client, Snowflake messageId, DiscordMessage message, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.PATCH, payload, callback, error);
+            if (messageParams == null)
+            {
+                messageParams = new WebhookMessageParams();
+            }
+            
+            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}{messageParams.ToQueryString()}", RequestMethod.PATCH, message, callback, error);
         }
         
         /// <summary>

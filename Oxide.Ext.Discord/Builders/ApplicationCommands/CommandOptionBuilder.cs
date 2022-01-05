@@ -47,6 +47,81 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         }
         
         /// <summary>
+        /// Enable auto complete for the option
+        /// </summary>
+        /// <param name="autoComplete">If the option support auto complete (Default: true)</param>
+        /// <returns>This</returns>
+        public CommandOptionBuilder AutoComplete(bool autoComplete = true)
+        {
+            _option.Autocomplete = autoComplete;
+            return this;
+        }
+        
+        /// <summary>
+        /// Min Value for Integer Option
+        /// </summary>
+        /// <param name="minValue">Min Value</param>
+        /// <returns>This</returns>
+        public CommandOptionBuilder SetMinValue(int minValue)
+        {
+            if (_option.Type != CommandOptionType.Integer && _option.Type != CommandOptionType.Number)
+            {
+                throw new Exception("Can only set min value for Integer or Number Type");
+            }
+            
+            _option.MinValue = minValue;
+            return this;
+        }
+        
+        /// <summary>
+        /// Min Value for Number Option
+        /// </summary>
+        /// <param name="minValue">Min Value</param>
+        /// <returns>This</returns>
+        public CommandOptionBuilder SetMinValue(double minValue)
+        {
+            if (_option.Type != CommandOptionType.Number)
+            {
+                throw new Exception("Can only set min value for Number Type");
+            }
+            
+            _option.MinValue = minValue;
+            return this;
+        }
+        
+        /// <summary>
+        /// Max Value for Integer Option
+        /// </summary>
+        /// <param name="maxValue">Min Value</param>
+        /// <returns>This</returns>
+        public CommandOptionBuilder SetMaxValue(int maxValue)
+        {
+            if (_option.Type != CommandOptionType.Integer && _option.Type != CommandOptionType.Number)
+            {
+                throw new Exception("Can only set max value for Integer or Number Type");
+            }
+            
+            _option.MaxValue = maxValue;
+            return this;
+        }
+        
+        /// <summary>
+        /// Max Value for Number Option
+        /// </summary>
+        /// <param name="maxValue">Min Value</param>
+        /// <returns>This</returns>
+        public CommandOptionBuilder SetMaxValue(double maxValue)
+        {
+            if (_option.Type != CommandOptionType.Integer && _option.Type != CommandOptionType.Number)
+            {
+                throw new Exception("Can only set max value for Number Type");
+            }
+            
+            _option.MaxValue = maxValue;
+            return this;
+        }
+        
+        /// <summary>
         /// Set's the channel types for the option
         /// </summary>
         /// <param name="types">Types of channels the option allows</param>

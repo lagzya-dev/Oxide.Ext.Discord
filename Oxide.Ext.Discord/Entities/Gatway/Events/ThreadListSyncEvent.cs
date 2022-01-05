@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
+using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
@@ -26,11 +28,12 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// <summary>
         ///	All active threads in the given channels that the current user can access
         /// </summary>
+        [JsonConverter(typeof(HashListConverter<DiscordChannel>))]
         [JsonProperty("threads")]
-        public List<DiscordChannel> Threads { get; set; }
+        public Hash<Snowflake, DiscordChannel> Threads { get; set; }
         
         /// <summary>
-        ///	A ll thread member objects from the synced threads for the current user, indicating which threads the current user has been added to
+        ///	All thread member objects from the synced threads for the current user, indicating which threads the current user has been added to
         /// </summary>
         [JsonProperty("members")]
         public List<ThreadMember> Members { get; set; }

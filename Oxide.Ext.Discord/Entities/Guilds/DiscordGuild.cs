@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
 using Oxide.Ext.Discord.Entities.Integrations;
 using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Permissions;
@@ -323,8 +324,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Guild NSFW level
         /// <a href="https://support.discord.com/hc/en-us/articles/1500005389362-NSFW-Server-Designation">NSFW Information</a>
         /// </summary>
-        [JsonProperty("nsfw")]
-        public GuildNsfwLevel NSFW { get; set; }
+        [JsonProperty("nsfw_level")]
+        public GuildNsfwLevel NsfwLevel { get; set; }
         
         /// <summary>
         /// Stage instances in the guild
@@ -341,6 +342,20 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<DiscordSticker>))]
         [JsonProperty("stickers")]
         public Hash<Snowflake, DiscordSticker> Stickers { get; set; }
+        
+        /// <summary>
+        /// The scheduled events in the guild
+        /// <see cref="DiscordSticker"/>
+        /// </summary>
+        [JsonConverter(typeof(HashListConverter<GuildScheduledEvent>))]
+        [JsonProperty("guild_scheduled_events")]
+        public Hash<Snowflake, GuildScheduledEvent> ScheduledEvents { get; set; }        
+        
+        /// <summary>
+        /// The scheduled events in the guild
+        /// </summary>
+        [JsonProperty("premium_progress_bar_enabled")]
+        public bool PremiumProgressBarEnabled { get; set; }
         #endregion
 
         #region Extension Fields
@@ -742,7 +757,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         {
             client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.PATCH, update, callback, error);
         }
-
+        
         /// <summary>
         /// Modify attributes of a guild member
         /// See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member">Modify Guild Member</a>
@@ -761,6 +776,24 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             
             ModifyGuildMember(client, userId, update, callback, error);
         }
+        
+        /// <summary>
+        /// Modifies the current members nickname in the guild
+        /// See <a href="https://discord.com/developers/docs/resources/guild#modify-current-member">Modify Current Member</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="nick">New members nickname</param>
+        /// <param name="callback">Callback with the updated guild member</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ModifyCurrentMember(DiscordClient client, string nick, Action<GuildMember> callback, Action<RestError> error)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["nick"] = nick
+            };
+            
+            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/@me", RequestMethod.PATCH, data, callback, error);
+        }
 
         /// <summary>
         /// Modifies the nickname of the current user in a guild
@@ -770,6 +803,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="nick">New user nickname</param>
         /// <param name="callback">Callback with updated nickname</param>
         /// <param name="error">Callback when an error occurs with error information</param>
+        [Obsolete("Please use ModifyCurrentMember Instead. This will be removed in April 2022 Update")]
         public void ModifyCurrentUsersNick(DiscordClient client, string nick, Action<string> callback = null, Action<RestError> error = null)
         {
             Dictionary<string, object> data = new Dictionary<string, object>()
@@ -1483,11 +1517,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 ApproximatePresenceCount = updatedGuild.ApproximatePresenceCount;
             if (updatedGuild.WelcomeScreen != null)
                 WelcomeScreen = updatedGuild.WelcomeScreen;
-            NSFW = updatedGuild.NSFW;
+            NsfwLevel = updatedGuild.NsfwLevel;
             if (updatedGuild.StageInstances != null)
                 StageInstances = updatedGuild.StageInstances;
             if (updatedGuild.Stickers != null)
                 Stickers = updatedGuild.Stickers;
+            if (updatedGuild.ScheduledEvents != null)
+                ScheduledEvents = updatedGuild.ScheduledEvents;
+            PremiumProgressBarEnabled = updatedGuild.PremiumProgressBarEnabled;
             return previous;
         }
         #endregion

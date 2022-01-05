@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
         /// </summary>
         [JsonProperty("auto_archive_duration")]
-        public int AutoArchiveDuration { get; set; }
+        public int? AutoArchiveDuration { get; set; }
 
         /// <summary>
         /// The type of thread to create

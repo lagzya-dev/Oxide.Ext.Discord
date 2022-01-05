@@ -78,18 +78,25 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// </summary>
         [JsonProperty("stage_instance")]
         public InviteStageInstance StageInstance { get; set; }
+        
+        /// <summary>
+        /// Guild scheduled event data, only included if guild_scheduled_event_id contains a valid guild scheduled event id
+        /// </summary>
+        [JsonProperty("guild_scheduled_event")]
+        public InviteStageInstance GuildScheduledEvent { get; set; }
 
         /// <summary>
-        /// Get Invite URL Parameters
+        /// Returns an invite object for the given code.
         /// See <a href="https://discord.com/developers/docs/resources/invite#get-invite">Get Invite</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="inviteCode">Invite code</param>
+        /// <param name="lookup">Lookup query string parameters for the request</param>
         /// <param name="callback">Callback with the invite</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetInvite(DiscordClient client, string inviteCode, Action<DiscordInvite> callback = null, Action<RestError> error = null)
+        public static void GetInvite(DiscordClient client, string inviteCode, InviteLookup lookup = null, Action<DiscordInvite> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/invites/{inviteCode}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest($"/invites/{inviteCode}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>

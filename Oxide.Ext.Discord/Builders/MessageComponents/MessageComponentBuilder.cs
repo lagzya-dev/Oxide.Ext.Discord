@@ -40,7 +40,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
                 throw new Exception($"Cannot add link button as action button. Please use {nameof(AddLinkButton)} instead");
             }
 
-            UpdateActionRow();
+            UpdateActionRow<ButtonComponent>();
             _current.Components.Add(new ButtonComponent
             {
                 Style = style,
@@ -78,7 +78,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             if (url == null)
                 throw new ArgumentNullException(nameof(url));
             
-            UpdateActionRow();
+            UpdateActionRow<ButtonComponent>();
             _current.Components.Add(new ButtonComponent
             {
                 Style = ButtonStyle.Link,
@@ -104,7 +104,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             if (string.IsNullOrEmpty(customId))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
 
-            UpdateActionRow();
+            UpdateActionRow<SelectMenuComponent>();
             SelectMenuComponent menu = new SelectMenuComponent
             {
                 CustomId = customId,
@@ -117,23 +117,55 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             return new SelectMenuComponentBuilder(menu, this);
         }
 
-        private void UpdateActionRow()
+        /// <summary>
+        /// Adds a select menu to a new action row
+        /// </summary>
+        /// <param name="customId">Unique ID for the select menu</param>
+        /// <param name="label">Label for the input text</param>
+        /// <param name="style">Style of the Input Text</param>
+        /// <param name="placeholder">Text to display if no value is selected yet</param>
+        /// <param name="minValues">The min number of options you must select</param>
+        /// <param name="maxValues">The max number of options you can select</param>
+        /// <returns><see cref="MessageComponentBuilder"/></returns>
+        public MessageComponentBuilder AddInputText(string customId, string label, InputTextStyles style, string placeholder = null, int minValues = 1, int maxValues = 1)
+        {
+            if (string.IsNullOrEmpty(customId))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
+
+            UpdateActionRow<InputTextComponent>();
+            InputTextComponent menu = new InputTextComponent
+            {
+                CustomId = customId,
+                Label = label,
+                Style = style,
+                Placeholder = placeholder,
+                MinLength = minValues,
+                MaxLength = maxValues,
+            };
+            _current.Components.Add(menu);
+            return this;
+        }
+
+        private void UpdateActionRow<T>() where T : BaseComponent
         {
             if (_current.Components.Count == 0)
             {
                 return;
             }
 
-            if (!(_current.Components[0] is SelectMenuComponent) && _current.Components.Count != 5)
+            //5 buttons allowed per row
+            if (typeof(T) == typeof(ButtonComponent) && _current.Components.Count < 5)
             {
                 return;
             }
 
+            //Max of 5 action rows allowed
             if (_components.Count >= 5)
             {
                 throw new Exception("Cannot have more than 5 action rows");
             }
             
+            //All other components are only 1 per action row so add a new row.
             _current = new ActionRowComponent();
             _components.Add(_current);
         }

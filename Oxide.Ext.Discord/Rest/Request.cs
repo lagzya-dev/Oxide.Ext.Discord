@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using Oxide.Core;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
@@ -40,7 +41,7 @@ namespace Oxide.Ext.Discord.Rest
         public object Data { get; }
         
         /// <summary>
-        /// JSON Serialization of Data 
+        /// Data serialized to bytes 
         /// </summary>
         public byte[] Contents { get; set; }
 
@@ -48,6 +49,11 @@ namespace Oxide.Ext.Discord.Rest
         /// Attachments for a request
         /// </summary>
         internal List<IMultipartSection> MultipartSections { get; set; }
+        
+        /// <summary>
+        /// Required If Multipart Form Request
+        /// </summary>
+        public bool MultipartRequest { get; }
 
         /// <summary>
         /// Multipart Boundary
@@ -123,6 +129,7 @@ namespace Oxide.Ext.Discord.Rest
             Callback = callback;
             OnError = onError;
             _logger = logger;
+            MultipartRequest = Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0;
         }
 
         /// <summary>
@@ -149,7 +156,10 @@ namespace Oxide.Ext.Discord.Rest
                 }
 
                 _success = true;
-                Callback?.Invoke(Response);
+                Interface.Oxide.NextTick(() =>
+                {
+                    Callback?.Invoke(Response);
+                });
                 Close();
             }
             catch (WebException ex)
@@ -204,16 +214,16 @@ namespace Oxide.Ext.Discord.Rest
 
         private HttpWebRequest CreateRequest()
         {
+            SetRequestBody();
+            
             HttpWebRequest req = (HttpWebRequest) WebRequest.Create(RequestUrl);
             req.Method = Method.ToString();
             req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})";
             req.Timeout = TimeoutDuration * 1000;
             req.ContentLength = 0;
             req.Headers.Set("Authorization", _authHeader);
-            req.ContentType = MultipartSections == null ? "application/json" : $"multipart/form-data;boundary=\"{Boundary}\"";
+            req.ContentType = MultipartRequest ? $"multipart/form-data;boundary=\"{Boundary}\"" : "application/json" ;
 
-            SetRequestBody();
-            
             return req;
         }
 
@@ -276,13 +286,14 @@ namespace Oxide.Ext.Discord.Rest
                 return;
             }
             
-            if (Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
+            if (MultipartRequest)
             {
+                IFileAttachments attachments = (IFileAttachments)Data;
                 MultipartSections = new List<IMultipartSection> {new MultipartFormSection("payload_json", Data, "application/json")};
                 for (int index = 0; index < attachments.FileAttachments.Count; index++)
                 {
                     MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
-                    MultipartSections.Add(new MultipartFileSection($"file{(index + 1).ToString()}", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
+                    MultipartSections.Add(new MultipartFileSection($"files[{(index + 1).ToString()}]", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
                 }
 
                 Boundary = Guid.NewGuid().ToString().Replace("-", "");
@@ -307,7 +318,10 @@ namespace Oxide.Ext.Discord.Rest
                 {
                     try
                     {
-                        OnError?.Invoke(_lastError);
+                        Interface.Oxide.NextTick(() =>
+                        {
+                            OnError?.Invoke(_lastError);
+                        });
                     }
                     catch(Exception ex)
                     {

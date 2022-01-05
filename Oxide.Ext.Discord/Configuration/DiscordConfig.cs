@@ -1,4 +1,4 @@
-using System.IO;
+using System;
 using Newtonsoft.Json;
 using Oxide.Core.Configuration;
 
@@ -30,12 +30,24 @@ namespace Oxide.Ext.Discord.Configuration
         /// <param name="filename"></param>
         public override void Load(string filename = null)
         {
-            DiscordConfig data = JsonConvert.DeserializeObject<DiscordConfig>(File.ReadAllText(filename ?? Filename));
-
-            Commands = data.Commands ?? new DiscordCommandsConfig
+            try
             {
-                CommandPrefixes = data.Commands?.CommandPrefixes ?? new []{'/', '!'}
-            };
+                base.Load(filename);
+
+                Commands = new DiscordCommandsConfig
+                {
+                    CommandPrefixes = Commands?.CommandPrefixes ?? new[] {'/', '!'}
+                };
+            }
+            catch (Exception ex)
+            {
+                DiscordExtension.GlobalLogger.Error($"Failed to load config file. Generating new Config.\n{ex}");
+                Commands = new DiscordCommandsConfig
+                {
+                    CommandPrefixes = new[] {'/', '!'}
+                };
+                Save(filename);
+            }
         }
     }
 }

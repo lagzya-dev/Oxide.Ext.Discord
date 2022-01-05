@@ -37,10 +37,10 @@ Obtaining an API Key:
 4) You will now be redirected to your created app. Click on "Bot" on the left hand side and then "Add Bot".  
    ![](https://i.postimg.cc/htw32rXf/3-Add-Bot.png)
 5) A) Under the newly created bot section, Enter the username for your bot and upload an icon.  
-   B) Then enable the Presence and Server Members Intent.  
+   B) Then enable the Presence and Server Members Intent and Message Content Intent.  
    C) To get your Discord API Token click on the "Copy" button.  
    D) This is the token that is used by discord extension plugins.     
-   ![](https://i.postimg.cc/7YHchbvY/4-Copy-Token.png)
+   ![](https://i.postimg.cc/WzPFSttB/5-discord-intents.png)
 6) A.Next we're going to setup the permissions that bot has in your Discord Server.  
    B.Click on OAuth2 on the left hand side.  
    C. Scroll down till your see scopes and permissions.  

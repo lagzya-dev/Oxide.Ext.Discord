@@ -9,6 +9,11 @@ namespace Oxide.Ext.Discord.Entities.Applications
     public enum ApplicationFlags
     {
         /// <summary>
+        /// This application has no flags
+        /// </summary>
+        None = 0,
+        
+        /// <summary>
         /// The application is verified and can use the GUILD_PRESENCES intent
         /// </summary>
         GatewayPresence = 1 << 12,
@@ -37,5 +42,15 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// The application has functionality that is specific to the discord client app.
         /// </summary>
         Embedded = 1 << 17,
+        
+        /// <summary>
+        /// The application is verified and can use the Gateway Message intent
+        /// </summary>
+        GatewayMessageContent = 1 << 18,
+        
+        /// <summary>
+        /// The application has the Gateway Message intent enabled on the bot
+        /// </summary>
+        GatewayMessageContentLimited = 1 << 19,
     }
 }

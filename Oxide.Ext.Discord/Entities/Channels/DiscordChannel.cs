@@ -184,11 +184,29 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("permissions")]
         public string Permissions { get; set; }
-        
+
+        private Hash<Snowflake, ThreadMember> _threadMembers;
+
         /// <summary>
-        /// Computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
+        /// List of thread members if channel is thread; Null Otherwise.
         /// </summary>
-        public Hash<Snowflake, ThreadMember> ThreadMembers { get; set; }
+        public Hash<Snowflake, ThreadMember> ThreadMembers
+        {
+            get
+            {
+                if (_threadMembers != null)
+                {
+                    return _threadMembers;
+                }
+
+                if (Type != ChannelType.GuildPublicThread && Type != ChannelType.GuildPrivateThread)
+                {
+                    throw new Exception("Trying to access ThreadMembers on channel that is not a thread");
+                }
+
+                return _threadMembers = new Hash<Snowflake, ThreadMember>();
+            }
+        }
 
         /// <summary>
         /// Returns a string to mention this channel in a message
@@ -324,6 +342,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateMessage(DiscordClient client, MessageCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            message.Validate();
             client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, message, callback, error);
         }
 
@@ -344,7 +363,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Content = message
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback, error);
+            CreateMessage(client, createMessage, callback, error);
         }
 
         /// <summary>
@@ -364,7 +383,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Embeds = new List<DiscordEmbed> {embed}
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback, error);
+            CreateMessage(client, createMessage, callback, error);
         }
         
         /// <summary>
@@ -384,7 +403,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Embeds = embeds
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, createMessage, callback, error);
+            CreateMessage(client, createMessage, callback, error);
         }
 
         /// <summary>
@@ -680,6 +699,20 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public void RemoveThreadMember(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members/{userId}", RequestMethod.DELETE, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Returns a thread member object for the specified user if they are a member of the thread
+        /// returns a 404 response otherwise.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#get-thread-member">Remove Thread Member</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="userId">ID of the user to thread</param>
+        /// <param name="callback">Callback with the thread member</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetThreadMember(DiscordClient client, Snowflake userId, Action<ThreadMember> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members/{userId}", RequestMethod.GET, null, callback, error);
         }
         
         /// <summary>

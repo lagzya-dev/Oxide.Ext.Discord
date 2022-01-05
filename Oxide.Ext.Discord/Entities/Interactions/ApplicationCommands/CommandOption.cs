@@ -36,6 +36,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public bool? Required { get; set; }
         
         /// <summary>
+        /// Enable autocomplete interactions for this option
+        /// </summary>
+        [JsonProperty("autocomplete")]
+        public bool? Autocomplete { get; set; }
+        
+        /// <summary>
         /// Choices for string and int types for the user to pick from
         /// See <see cref="CommandOption"/>
         /// </summary>
@@ -55,5 +61,17 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("channel_types")]
         public List<ChannelType> ChannelTypes { get; set; }
+        
+        /// <summary>
+        /// If the option is an INTEGER or NUMBER type, the minimum value permitted
+        /// </summary>
+        [JsonProperty("min_value")]
+        public double? MinValue { get; set; }
+        
+        /// <summary>
+        /// If the option is an INTEGER or NUMBER type, the maximum value permitted
+        /// </summary>
+        [JsonProperty("max_value")]
+        public double? MaxValue { get; set; }
     }
 }

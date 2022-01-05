@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -45,5 +46,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("channel_id")]
         public Snowflake? ChannelId { get; set; }
+        
+        /// <summary>
+        /// When the user's timeout will expire and the user will be able to communicate in the guild again (up to 28 days in the future), set to null to remove timeout
+        /// </summary>
+        [JsonProperty("communication_disabled_until")]
+        public DateTime? CommunicationDisabledUntil { get; set; }
     }
 }

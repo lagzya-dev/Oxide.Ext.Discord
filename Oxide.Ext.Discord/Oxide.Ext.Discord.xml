@@ -90,6 +90,11 @@
             If the connection is initialized and not disconnected
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.BotClient.ConnectedSuccessfully">
+            <summary>
+            If the bot has successfully connected to the websocket at least once
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.BotClient.Application">
             <summary>
             Application reference for this bot
@@ -132,8 +137,8 @@
             <summary>
             Close the websocket with discord
             </summary>
-            <param name="attemptReconnect">Should we attempt to reconnect to discord after closing</param>
-            <param name="attemptResume">Should we attempt to resume the previous session</param>
+            <param name="reconnect">Should we attempt to reconnect to discord after closing</param>
+            <param name="resume">Should we attempt to resume the previous session</param>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.ShutdownBot">
             <summary>
@@ -291,6 +296,49 @@
             </summary>
             <param name="required">If the option is required (Default: true)</param>
             <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AutoComplete(System.Boolean)">
+            <summary>
+            Enable auto complete for the option
+            </summary>
+            <param name="autoComplete">If the option support auto complete (Default: true)</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMinValue(System.Int32)">
+            <summary>
+            Min Value for Integer Option
+            </summary>
+            <param name="minValue">Min Value</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMinValue(System.Double)">
+            <summary>
+            Min Value for Number Option
+            </summary>
+            <param name="minValue">Min Value</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMaxValue(System.Int32)">
+            <summary>
+            Max Value for Integer Option
+            </summary>
+            <param name="maxValue">Min Value</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMaxValue(System.Double)">
+            <summary>
+            Max Value for Number Option
+            </summary>
+            <param name="maxValue">Min Value</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
+            <summary>
+            Set's the channel types for the option
+            </summary>
+            <param name="types">Types of channels the option allows</param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType"/> is not Channel</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.String)">
             <summary>
@@ -565,6 +613,12 @@
             </summary>
             <returns><see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.BuildList">
+            <summary>
+            Returns the built embed in a list
+            </summary>
+            <returns>List of <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder">
             <summary>
             Builder for Message Components
@@ -619,6 +673,18 @@
             <param name="maxValues">The max number of options you can select</param>
             <param name="disabled">If the select menu should be disabled</param>
             <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles,System.String,System.Int32,System.Int32)">
+            <summary>
+            Adds a select menu to a new action row
+            </summary>
+            <param name="customId">Unique ID for the select menu</param>
+            <param name="label">Label for the input text</param>
+            <param name="style">Style of the Input Text</param>
+            <param name="placeholder">Text to display if no value is selected yet</param>
+            <param name="minValues">The min number of options you must select</param>
+            <param name="maxValues">The max number of options you can select</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.Build">
             <summary>
@@ -877,7 +943,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordHooks.OnDiscordGuildCreated">
             <code>
-            void OnDiscordGuildCreated(GuildDiscordGuild guild)
+            void OnDiscordGuildCreated(DiscordGuild guild)
             {
                 Puts("OnDiscordGuildCreated Works!");
             }
@@ -1662,6 +1728,46 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventCreated">
+            <code>
+            void OnDiscordGuildScheduledEventCreated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventUpdated">
+            <code>
+            void OnDiscordGuildScheduledEventUpdated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventDeleted">
+            <code>
+            void OnDiscordGuildScheduledEventDeleted(GuildScheduledEvent guildEvent, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventUserAdded">
+            <code>
+            void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventUserAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildScheduledEventUserRemoved">
+            <code>
+            void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordCommand">
             <code>
             void OnDiscordCommand(DiscordMessage message, string cmd, string[] args)
@@ -2183,6 +2289,12 @@
             See <see cref="T:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents"/>
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.DiscordSettings.GetHiddenToken">
+            <summary>
+            Hides the token but keeps the format to allow for debugging token issues without showing the token.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.ActivityAssets">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-assets">Activity Assets</a>
@@ -2261,6 +2373,21 @@
         <member name="F:Oxide.Ext.Discord.Entities.Activities.ActivityFlags.Play">
             <summary>
             User can play this song
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Activities.ActivityFlags.PartyPrivacyFriends">
+            <summary>
+            User is playing an activity in a voice channel with friends
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Activities.ActivityFlags.PartyPrivacyVoiceChannel">
+            <summary>
+            User is playing an activity in a voice channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Activities.ActivityFlags.Embedded">
+            <summary>
+            User is playing embedded activity
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.ActivityParty">
@@ -2607,6 +2734,11 @@
             Represents <a href="https://discord.com/developers/docs/resources/application#application-object-application-flags">Application Flags</a>
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.None">
+            <summary>
+            This application has no flags
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayPresence">
             <summary>
             The application is verified and can use the GUILD_PRESENCES intent
@@ -2635,6 +2767,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.Embedded">
             <summary>
             The application has functionality that is specific to the discord client app.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayMessageContent">
+            <summary>
+            The application is verified and can use the Gateway Message intent
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayMessageContentLimited">
+            <summary>
+            The application has the Gateway Message intent enabled on the bot
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication">
@@ -2736,6 +2878,14 @@
             <summary>
             Returns the URL for the applications Icon
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.HasApplicationFlag(Oxide.Ext.Discord.Entities.Applications.ApplicationFlags)">
+            <summary>
+            Returns if the given application has the passed in application flag
+            If Flags is null false is returned
+            </summary>
+            <param name="flag">Flag to compare against</param>
+            <returns>True of application has flag; False Otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalCommands(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
@@ -3783,7 +3933,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ThreadMembers">
             <summary>
-            Computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
+            List of thread members if channel is thread; Null Otherwise.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Mention">
@@ -4140,6 +4290,17 @@
             <param name="client">Client to use</param>
             <param name="userId">ID of the user to thread</param>
             <param name="callback">Callback with the thread once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetThreadMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns a thread member object for the specified user if they are a member of the thread
+            returns a 404 response otherwise.
+            See <a href="https://discord.com/developers/docs/resources/channel#get-thread-member">Remove Thread Member</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="userId">ID of the user to thread</param>
+            <param name="callback">Callback with the thread member</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ListThreadMembers(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -5261,6 +5422,46 @@
             The role updated
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add-guild-scheduled-event-user-add-event-fields">Guild Scheduled Event User Add Event Fields</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent.GuildScheduledEventId">
+            <summary>
+            ID of the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent.UserId">
+            <summary>
+            ID of the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent.GuildId">
+            <summary>
+            ID of the guild
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove">Guild Scheduled Event User Remove Event Fields</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent.GuildScheduledEventId">
+            <summary>
+            ID of the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent.UserId">
+            <summary>
+            ID of the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent.GuildId">
+            <summary>
+            ID of the guild
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildStickersUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-stickers-update">Guild Stickers Update</a>
@@ -5583,7 +5784,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.Members">
             <summary>
-            A ll thread member objects from the synced threads for the current user, indicating which threads the current user has been added to
+            All thread member objects from the synced threads for the current user, indicating which threads the current user has been added to
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent">
@@ -5614,6 +5815,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.RemovedMemberIds">
             <summary>
             The id of the users who were removed from the thread
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMemberUpdateEvent">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway#thread-member-update">Thread Member Update Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMemberUpdateEvent.GuildId">
+            <summary>
+            The ID of the guild
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.TypingStartedEvent">
@@ -5856,6 +6067,15 @@
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.DirectMessageTyping">
             <summary>
             - TYPING_START
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildScheduledEvents">
+            <summary>
+            - GUILD_SCHEDULED_EVENT_CREATE
+            - GUILD_SCHEDULED_EVENT_UPDATE
+            - GUILD_SCHEDULED_EVENT_DELETE
+            - GUILD_SCHEDULED_EVENT_USER_ADD
+            - GUILD_SCHEDULED_EVENT_USER_REMOVE
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.DefaultNotificationLevel">
@@ -6116,7 +6336,7 @@
             Shown to new members, returned in an Invite's guild object
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.NSFW">
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.NsfwLevel">
             <summary>
             Guild NSFW level
             <a href="https://support.discord.com/hc/en-us/articles/1500005389362-NSFW-Server-Designation">NSFW Information</a>
@@ -6132,6 +6352,17 @@
             <summary>
             Custom guild stickers
             <see cref="T:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ScheduledEvents">
+            <summary>
+            The scheduled events in the guild
+            <see cref="T:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.PremiumProgressBarEnabled">
+            <summary>
+            The scheduled events in the guild
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.HasLoadedAllMembers">
@@ -6377,6 +6608,16 @@
             <param name="userId">User ID of the user to update</param>
             <param name="nick">Nickname for the user</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyCurrentMember(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildMember},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Modifies the current members nickname in the guild
+            See <a href="https://discord.com/developers/docs/resources/guild#modify-current-member">Modify Current Member</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="nick">New members nickname</param>
+            <param name="callback">Callback with the updated guild member</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyCurrentUsersNick(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{System.String},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -7004,34 +7245,14 @@
             Discord Extension doesn't currently support a guild features
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.InviteSplash">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.AnimatedIcon">
             <summary>
-            Guild has access to set an invite splash background
+            Guild has access to set an animated guild icon
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.VipRegions">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Banner">
             <summary>
-            Guild has access to set 384kbps bitrate in voice (previously VIP voice servers)
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.VanityUrl">
-            <summary>
-            Guild has access to set a vanity URL
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Verified">
-            <summary>
-            Guild is verified
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Partnered">
-            <summary>
-            Guild is partnered
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Community">
-            <summary>
-            Guild can enable welcome screen and discovery, and receives community updates
+            Guild has access to set a guild banner image
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Commerce">
@@ -7039,9 +7260,9 @@
             Guild has access to use commerce features (i.e. create store channels)
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.News">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Community">
             <summary>
-            Guild has access to create news channels
+            Guild can enable welcome screen and discovery, and receives community updates
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Discoverable">
@@ -7054,24 +7275,14 @@
             Guild is able to be featured in the directory
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.AnimatedIcon">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.InviteSplash">
             <summary>
-            Guild has access to set an animated guild icon
+            Guild has access to set an invite splash background
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Banner">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.MemberVerificationGateEnabled">
             <summary>
-            Guild has access to set a guild banner image
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.WelcomeScreenEnabled">
-            <summary>
-            Guild has enabled the welcome screen
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.TicketedEventsEnabled">
-            <summary>
-            Guild has enabled ticketed events
+            Guild has enabled Membership Screening
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.MonetizationEnabled">
@@ -7084,9 +7295,29 @@
             Guild has increased custom sticker slots
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.ThreeDayThreadArchive">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.News">
             <summary>
-            Guild has access to the three day archive time for threads
+            Guild has access to create news channels
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Partnered">
+            <summary>
+            Guild is partnered
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.PreviewEnabled">
+            <summary>
+            Guild can be previewed before joining via Membership Screening or the directory
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.PrivateThreads">
+            <summary>
+            Guild has access to create private threads
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.RoleIcons">
+            <summary>
+            Guild can be previewed before joining via Membership Screening or the directory
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.SevenDayThreadArchive">
@@ -7094,9 +7325,34 @@
             Guild has access to the seven day archive time for threads
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.PrivateThreads">
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.ThreeDayThreadArchive">
             <summary>
-            Guild has access to create private threads
+            Guild has access to the three day archive time for threads
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.TicketedEventsEnabled">
+            <summary>
+            Guild has enabled ticketed events
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.VanityUrl">
+            <summary>
+            Guild has access to set a vanity URL
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Verified">
+            <summary>
+            Guild is verified
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.VipRegions">
+            <summary>
+            Guild has access to set 384kbps bitrate in voice (previously VIP voice servers)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.WelcomeScreenEnabled">
+            <summary>
+            Guild has enabled the welcome screen
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember">
@@ -7117,6 +7373,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Nickname">
             <summary>
             This users guild nickname
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Avatar">
+            <summary>
+            The member's guild avatar hash
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Roles">
@@ -7152,6 +7413,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Pending">
             <summary>
             Whether the user has not yet passed the guild's Membership Screening requirements
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.CommunicationDisabledUntil">
+            <summary>
+            When the user's timeout will expire and the user will be able to communicate in the guild again, null or a time in the past if the user is not timed out
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.DisplayName">
@@ -7243,6 +7509,11 @@
             The channel to move the user to
             Requires MOVE_MEMBERS Permission
             Setting to null will remove that member from a voice channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMemberUpdate.CommunicationDisabledUntil">
+            <summary>
+            When the user's timeout will expire and the user will be able to communicate in the guild again (up to 28 days in the future), set to null to remove timeout
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMFALevel">
@@ -7545,6 +7816,388 @@
             The widget channel id
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event">Guild Scheduled Event Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Id">
+            <summary>
+            The ID of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.GuildId">
+            <summary>
+            The guild ID which the scheduled event belongs to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ChannelId">
+            <summary>
+            The channel ID in which the scheduled event will be hosted, or null if <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType">scheduled entity type</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">EXTERNAL</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.CreatorId">
+            <summary>
+            The ID of the user that created the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Name">
+            <summary>
+            The name of the scheduled event (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Description">
+            <summary>
+            The description of the scheduled event (1-1000 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ScheduledStartTime">
+            <summary>
+            The time the scheduled event will start
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ScheduledEndTime">
+            <summary>
+            The time the scheduled event will end, required if <see cref="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityType">EntityType</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">EXTERNAL</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.PrivacyLevel">
+            <summary>
+            The privacy level of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Status">
+            <summary>
+            The status of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityType">
+            <summary>
+            The type of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityId">
+            <summary>
+            The id of an entity associated with a guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityMetadata">
+            <summary>
+            Additional metadata for the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Creator">
+            <summary>
+            The user that created the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.UserCount">
+            <summary>
+            The number of users subscribed to the scheduled event
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ListForGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns a list of guild scheduled event objects for the given guild.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild">List Scheduled Events for Guild</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to get events for</param>
+            <param name="lookup">Query string parameters</param>
+            <param name="callback">Callback with the list of scheduled events</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate,System.Action{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Create a guild scheduled event in the guild.
+            Returns a <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">guild scheduled event</see> object on success.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event">Create Guild Scheduled Event</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to create event in</param>
+            <param name="create">Guild Scheduled Event to create</param>
+            <param name="callback">Callback with the created scheduled events</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Get(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup,System.Action{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Get a guild scheduled event.
+            Returns a guild scheduled event object on success.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event">Get Guild Scheduled Event</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to get events for</param>
+            <param name="eventId">Id of the scheduled event</param>
+            <param name="lookup">Query string parameters</param>
+            <param name="callback">Callback with the scheduled event</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Modify(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate,System.Action{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Modify a guild scheduled event.
+            Returns the modified <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">guild scheduled event</see> object on success.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#modify-guild-scheduled-event">Modify Guild Scheduled Event</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to modify event in</param>
+            <param name="eventId">Id of the event to update</param>
+            <param name="update">Guild Scheduled Event to update</param>
+            <param name="callback">Callback with the updated scheduled events</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Delete(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Delete a guild scheduled event
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#delete-guild-scheduled-event">Delete Guild Scheduled Event</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to modify event in</param>
+            <param name="eventId">Id of the event to delete</param>
+            <param name="callback">Callback with the updated scheduled events</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.GetUsers(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Get a list of guild scheduled event users subscribed to a guild scheduled event.
+            Returns a list of guild scheduled event user objects on success.
+            Guild member data, if it exists, is included if the WithMember query parameter is set.
+            See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event-users">Get Guild Scheduled Event Users</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild to get event users for</param>
+            <param name="eventId">Id of the event to get users for</param>
+            <param name="lookup">Query string parameters</param>
+            <param name="callback">Callback with the list of scheduled event users</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event">Guild Scheduled Event Create</a> within discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.ChannelId">
+            <summary>
+            The channel ID in which the scheduled event will be hosted, or null if <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType">scheduled entity type</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">External</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.EntityMetadata">
+            <summary>
+            Additional metadata for the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.Name">
+            <summary>
+            The name of the scheduled event (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.PrivacyLevel">
+            <summary>
+            The privacy level of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.ScheduledStartTime">
+            <summary>
+            The time the scheduled event will start
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.ScheduledEndTime">
+            <summary>
+            The time the scheduled event will end, required if <see cref="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityType">EntityType</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">EXTERNAL</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.Description">
+            <summary>
+            The description of the scheduled event (1-1000 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventCreate.EntityType">
+            <summary>
+            The type of the scheduled event
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityMetadata">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata">Guild Scheduled Event Entity Metadata</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityMetadata.Location">
+            <summary>
+            Location of the event (1-100 characters)
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-types">Scheduled Entity Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.StageInstance">
+            <summary>
+            Event will be held in a stage instance
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.Voice">
+            <summary>
+            Event will be held in a voice channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">
+            <summary>
+            Event will be held externally outside of discord.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params">Scheduled Event Lookup Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup.WithUserCount">
+            <summary>
+            Include number of users subscribed to each event
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventPrivacyLevel">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level">Guild Scheduled Event Privacy Level</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventPrivacyLevel.None">
+            <summary>
+            No Privacy Level
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventPrivacyLevel.GuildOnly">
+            <summary>
+            The scheduled event is only accessible to guild members
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status">Guild Scheduled Event Status</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus.Scheduled">
+            <summary>
+            Scheduled Event is scheduled and has not happened yet.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus.Active">
+            <summary>
+            Scheduled event is currently occuring
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus.Completed">
+            <summary>
+            Scheduled event has completed
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventStatus.Canceled">
+            <summary>
+            Scheduled event was canceled.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#modify-guild-scheduled-event">Guild Scheduled Event Update</a> within discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.ChannelId">
+            <summary>
+            The channel ID in which the scheduled event will be hosted, or null if <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType">scheduled entity type</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">External</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.EntityMetadata">
+            <summary>
+            Additional metadata for the guild scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.Name">
+            <summary>
+            The name of the scheduled event (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.PrivacyLevel">
+            <summary>
+            The privacy level of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.ScheduledStartTime">
+            <summary>
+            The time the scheduled event will start
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.ScheduledEndTime">
+            <summary>
+            The time the scheduled event will end, required if <see cref="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.EntityType">EntityType</see> is <see cref="F:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventEntityType.External">EXTERNAL</see>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.Description">
+            <summary>
+            The description of the scheduled event (1-1000 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.EntityType">
+            <summary>
+            The type of the scheduled event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate.Status">
+            <summary>
+            The status of the scheduled event
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-user-object-guild-scheduled-event-user-structure">Guild Scheduled Event User Object</a> within discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser.GuildScheduledEventId">
+            <summary>
+            The scheduled event id which the user subscribed to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser.User">
+            <summary>
+            User which subscribed to an event
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUser.Member">
+            <summary>
+            Guild member data for this user for the guild which this event belongs to, if any
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup">
+             <summary>
+             Represents a <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params">Scheduled Event Lookup Structure</a> within Discord.
+            
+             Provide a user id to before and after for pagination.
+             Users will always be returned in ascending order by user_id.
+             If both before and after are provided, only before is respected.
+             Fetching users in-between before and after is not supported.
+             </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup.Limit">
+            <summary>
+            Number of users to return (up to maximum 100)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup.WithMember">
+            <summary>
+            Include guild member data if it exists
+            Default false
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup.Before">
+            <summary>
+            Consider only users before given user id
+            Default null
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup.After">
+            <summary>
+            Consider only users after given user id
+            Default null
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags">System Channel Flags</a>
@@ -7558,6 +8211,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags.SuppressPremiumSubscriptions">
             <summary>
             Suppress server boost notifications
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags.SuppressGuildReminderNotifications">
+            <summary>
+            Suppress server setup tips
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags.SuppressJoinNotificationReplies">
+            <summary>
+            Hide member join sticker reply buttons
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate">
@@ -7851,6 +8514,11 @@
             If the parameter is required or optional
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Autocomplete">
+            <summary>
+            Enable autocomplete interactions for this option
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Choices">
             <summary>
             Choices for string and int types for the user to pick from
@@ -7861,6 +8529,22 @@
             <summary>
             If the option is a subcommand or subcommand group type, this nested options will be the parameters
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.ChannelTypes">
+            <summary>
+            If the option is a channel type, the channels shown will be restricted to these types
+            See <see cref="T:Oxide.Ext.Discord.Entities.Channels.ChannelType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.MinValue">
+            <summary>
+            If the option is an INTEGER or NUMBER type, the minimum value permitted
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.MaxValue">
+            <summary>
+            If the option is an INTEGER or NUMBER type, the maximum value permitted
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice">
@@ -8272,6 +8956,17 @@
             Allowed mentions 
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.CustomId">
+            <summary>
+            A developer-defined identifier for the interactable form
+            Max 100 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Title">
+            <summary>
+            Title of the modal if Modal Response
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Flags">
             <summary>
             Callback data flags
@@ -8280,6 +8975,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Components">
             <summary>
             Message components 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Attachments">
+            <summary>
+            Attachment objects with filename and description
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionData">
@@ -8349,14 +9049,19 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Value">
             <summary>
-            The value of the pair
-            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType"/>
+            The value of the option resulting from user input
+            Value can be string, integer, or double type
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Options">
             <summary>
             Present if this option is a group or subcommand
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Focused">
+            <summary>
+            True if this option is the currently focused option for autocomplete
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed">
@@ -8576,6 +9281,17 @@
             For components, edit the message the component was attached to
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType.ApplicationCommandAutocompleteResult">
+            <summary>
+            Respond to an autocomplete interaction with suggested choices
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType.Modal">
+            <summary>
+            Respond to an interaction with an modal for a user to fill-out
+            Note: You can't respond to a <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ModalSubmit">ModalSubmit</see> with a new MODAL.
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type">InteractionType</a>
@@ -8594,6 +9310,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent">
             <summary>
             The interaction is a message component
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommandAutocomplete">
+            <summary>
+            The interaction is a application command autocomplete
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ModalSubmit">
+            <summary>
+            The interaction is a modal
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent">
@@ -8707,6 +9433,56 @@
             Requires Url field
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#input-text">Input Text Component</a> within discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Style">
+            <summary>
+            The style of the input text
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Label">
+            <summary>
+            Text that appears on top of the input text field, max 80 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.MinLength">
+            <summary>
+            The minimum length of the text input
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.MaxLength">
+            <summary>
+            The maximum length of the text input
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Placeholder">
+            <summary>
+            The placeholder for the text input field
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.#ctor">
+            <summary>
+            Input Text Constructor
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#input-text-styles">Input Text Styles</a> within discord.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles.Short">
+            <summary>
+            Intended for short single-line text
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles.Paragraph">
+            <summary>
+            Intended for much longer inputs
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/interactions/message-components#component-types">Message Component Type</a> within Discord..
@@ -8725,6 +9501,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.SelectMenu">
             <summary>
             A select menu for picking from choices
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.InputText">
+            <summary>
+            A text box for inserting written responses
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent">
@@ -8860,13 +9641,19 @@
             Stage instance data if there is a public Stage instance in the Stage channel this invite is for
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.GetInvite(Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Invites.DiscordInvite},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.GuildScheduledEvent">
             <summary>
-            Get Invite URL Parameters
+            Guild scheduled event data, only included if guild_scheduled_event_id contains a valid guild scheduled event id
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.GetInvite(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Invites.InviteLookup,System.Action{Oxide.Ext.Discord.Entities.Invites.DiscordInvite},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns an invite object for the given code.
             See <a href="https://discord.com/developers/docs/resources/invite#get-invite">Get Invite</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="inviteCode">Invite code</param>
+            <param name="lookup">Lookup query string parameters for the request</param>
             <param name="callback">Callback with the invite</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -8880,6 +9667,26 @@
             <param name="client">Client to use</param>
             <param name="callback">Callback with the deleted invite</param>
             <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Invites.InviteLookup">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params">Scheduled Event Lookup Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteLookup.WithCounts">
+            <summary>
+            Whether the invite should contain approximate member counts
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteLookup.WithExpiration">
+            <summary>
+            Whether the invite should contain the expiration date
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Invites.InviteLookup.GuildScheduledEventId">
+            <summary>
+            The guild scheduled event to include with the invite
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Invites.InviteMetadata">
             <summary>
@@ -9132,7 +9939,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.ApplicationId">
             <summary>
-            If the message is a response to an Interaction, this is the id of the interaction's application
+            If the message is an Interaction or application-owned webhook, this is the id of the application
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.MessageReference">
@@ -9867,6 +10674,16 @@
             Name of file attached
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Description">
+            <summary>
+            Description for the file
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.ContentType">
+            <summary>
+            The attachment's <a href="https://en.wikipedia.org/wiki/Media_type">media type</a>
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Size">
             <summary>
             Size of file in bytes
@@ -9890,6 +10707,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Width">
             <summary>
             Width of file (if image)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Ephemeral">
+            <summary>
+            Whether this attachment is ephemeral
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageCreate">
@@ -9938,10 +10760,24 @@
             IDs of up to 3 stickers in the server to send in the message
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.Attachments">
+            <summary>
+            Attachments for the message
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.FileAttachments">
             <summary>
             Attachments for a discord message
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageCreate.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            Adds an attachment to the message
+            </summary>
+            <param name="filename">Name of the file</param>
+            <param name="data">byte[] of the attachment</param>
+            <param name="contentType">Attachment content type</param>
+            <param name="description">Description for the attachment</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment">
             <summary>
@@ -10435,6 +11271,16 @@
             If this role is pinned in the user listing
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Icon">
+            <summary>
+            The role's icon image (if the guild has the ROLE_ICONS feature)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.UnicodeEmoji">
+            <summary>
+            The role's unicode emoji as a standard emoji (if the guild has the ROLE_ICONS feature)
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Position">
             <summary>
             Position of this role
@@ -10463,6 +11309,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Mention">
             <summary>
             Returns a string to mention this role in a message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.RoleIcon">
+            <summary>
+            Return the Role Icon URL for a Discord Role. Empty string is not set.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.HasPermission(Oxide.Ext.Discord.Entities.Permissions.PermissionFlags)">
@@ -10673,6 +11524,12 @@
             (This permission is under active development and may be changed or removed.)
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageEvents">
+            <summary>
+            Allows for creating, editing, and deleting scheduled events
+            Channel Type (Voice, Stage)
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageThreads">
             <summary>
             Allows for deleting and archiving threads, and viewing all private threads
@@ -10685,9 +11542,21 @@
             Channel Type (Text)
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.CreatePublicThreads">
+            <summary>
+            Allows for creating threads
+            Channel Type (Text)
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UsePrivateThreads">
             <summary>
             Allows for creating and participating in private threads
+            Channel Type (Text)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.CreatePrivateThreads">
+            <summary>
+            Allows for creating private threads
             Channel Type (Text)
             </summary>
         </member>
@@ -10697,10 +11566,21 @@
             Channel Type (Text)
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.SendMessagesInThreads">
+            <summary>
+            Allows for sending messages in threads
+            Channel Type (Text)
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.StartEmbeddedActivities">
             <summary>
             Allows for launching activities (applications with the `EMBEDDED` flag) in a voice channel
             Channel Type (Voice)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ModerateMembers">
+            <summary>
+            Allows for timing out users to prevent them from sending or reacting to messages in chat and threads, and from speaking in voice and stage channels
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.RoleTags">
@@ -11578,6 +12458,76 @@
             Default value for flags, when none are given to an account.
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.Staff">
+            <summary>
+            Flag given to users who are a Discord employee
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.Partner">
+            <summary>
+            Flag given to users who are owners of a partnered Discord server
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HypeSquad">
+            <summary>
+            Flag given to users who are HypeSquad Events Coordinator
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel1">
+            <summary>
+            Flag given to users who have participated in the 𝐁ug report program and are level 1.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HypeSquadOnlineHouse1">
+            <summary>
+            Flag given to users who are in the HypeSquad House of Bravery.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HypeSquadOnlineHouse2">
+            <summary>
+            Flag given to users who are in the HypeSquad House of Brilliance.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HypeSquadOnlineHouse3">
+            <summary>
+            Flag given to users who are in the HypeSquad House of Balance.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.PremiumEarlySupporter">
+            <summary>
+            Flag given to users who subscribed to Nitro before games were added.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.TeamPseudoUser">
+            <summary>
+            Flag given to users who are part of a team.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel2">
+            <summary>
+            Flag given to users who have participated in the 𝐁ug report program and are level 2.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.VerifiedBot">
+            <summary>
+            Flag given to users who are verified bots.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.VerifiedDeveloper">
+            <summary>
+            Flag given to users that developed bots and early verified their accounts.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.CertifiedModerator">
+            <summary>
+            Flag given to users that are discord certified moderators
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BotHttpInteractions">
+            <summary>
+            User is a Bot uses only HTTP interactions and is shown in the online member list
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.DiscordEmployee">
             <summary>
             Flag given to users who are a Discord employee.
@@ -11591,11 +12541,6 @@
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HyperSquadEvents">
             <summary>
             Flag given to users in HypeSquad events.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel1">
-            <summary>
-            Flag given to users who have participated in the 𝐁ug report program and are level 1.
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HouseBravery">
@@ -11623,16 +12568,6 @@
             Flag given to users who are part of a team.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel2">
-            <summary>
-            Flag given to users who have participated in the 𝐁ug report program and are level 2.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.VerifiedBot">
-            <summary>
-            Flag given to users who are verified bots.
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.EarlyVerifiedBotDeveloper">
             <summary>
              Flag given to users that developed bots and early verified their accounts.
@@ -11640,7 +12575,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.DiscordCertifiedModerator">
             <summary>
-             Flag given to users that are discord certified moderators
+            Flag given to users that are discord certified moderators
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserGuildsRequest">
@@ -12020,7 +12955,7 @@
             See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
             </summary>
             <param name="client">Client to use</param>
-            <param name="payload">Message data</param>
+            <param name="message">Message data</param>
             <param name="executeParams">Webhook execution parameters</param>
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
@@ -12031,19 +12966,31 @@
             See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
             </summary>
             <param name="client">Client to use</param>
-            <param name="payload">Message data</param>
+            <param name="message">Message data</param>
             <param name="executeParams">Webhook execution parameters</param>
             <param name="callback">Callback with the created message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.GetWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Gets a previously-sent webhook message from the same token.
+            See <a href="https://discord.com/developers/docs/resources/webhook#get-webhook-message">Edit Webhook Message</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="messageId">Message ID to get</param>
+            <param name="messageParams">Message Params</param>
+            <param name="callback">Callback with the message</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Edits a previously-sent webhook message from the same token.
             See <a href="https://discord.com/developers/docs/resources/webhook#edit-webhook-message">Edit Webhook Message</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="messageId">Message ID to edit</param>
-            <param name="payload">The updated message</param>
+            <param name="messageParams">Message Params</param>
+            <param name="message">The updated message</param>
             <param name="callback">Callback with the edited message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -12134,6 +13081,23 @@
             </summary>
             <returns></returns>
             <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams">
+            <summary>
+            Represents webhook message query string parameters 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams.ThreadId">
+            <summary>
+            If the message exists in a thread
+            This field is optional and defaults to null
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams.ToQueryString">
+            <summary>
+            Returns the query string to be used in the webhook URL
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType">
             <summary>
@@ -12408,6 +13372,16 @@
             <param name="format">Format the avatar is in</param>
             <returns>Url of the users avatar</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetGuildMemberAvatar(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Helpers.Cdn.ImageFormat)">
+            <summary>
+            Returns the Url of the Guild Member avatar
+            </summary>
+            <param name="guildId">Guild ID of the Guild Member</param>
+            <param name="userId">Discord User ID</param>
+            <param name="memberAvatar">Guild Member avatar</param>
+            <param name="format">Format the avatar is in</param>
+            <returns>Url of the Guild Member avatar</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetApplicationIconUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Helpers.Cdn.ImageFormat)">
             <summary>
             Returns the url to the application icon
@@ -12466,6 +13440,15 @@
             <param name="stickerId">ID of the sticker</param>
             <param name="format">Format for the sticker to be returned in</param>
             <returns>Return url for the sticker</returns>
+            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetRoleIcon(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Helpers.Cdn.ImageFormat)">
+            <summary>
+            Returns the sticker url with the given ID
+            </summary>
+            <param name="roleId">ID of the role</param>
+            <param name="format">Format for the icon to be returned in</param>
+            <returns>Return url for the role icon</returns>
             <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.Cdn.DiscordCdn.GetExtension(Oxide.Ext.Discord.Helpers.Cdn.ImageFormat,System.String)">
@@ -13471,6 +14454,89 @@
             <param name="level">Log Level to check</param>
             <returns>True if the logger is logging for the given log level</returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.RateLimits.BaseRateLimit">
+            <summary>
+            Represents a base rate limit for websocket and rest api requests
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NumRequests">
+            <summary>
+            The number of requests that have executed since the last reset
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.LastReset">
+            <summary>
+            The UNIX timestamp of the last reset
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.MaxRequests">
+            <summary>
+            The max number of requests this rate limit can handle per interval
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.ResetInterval">
+            <summary>
+            The interval in which this resets at
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.#ctor(System.Int32,System.Double)">
+            <summary>
+            Base Rate Limit Constructor
+            </summary>
+            <param name="maxRequests">Max requests per interval</param>
+            <param name="interval">Reset Interval</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.FiredRequest">
+            <summary>
+            Called when an API request is fired
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.RateLimits.BaseRateLimit.HasReachedRateLimit">
+            <summary>
+            Returns true if we have reached the global rate limit 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NextReset">
+            <summary>
+            Returns how long until the current rate limit period will expire
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.Shutdown">
+            <summary>
+            Called when a bot is shutting down
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.RateLimits.RestRateLimit">
+            <summary>
+            Represents a rate limit for rest requests
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.#ctor">
+            <summary>
+            Constructor for RestRateLimit
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.ReachedRateLimit(System.Double)">
+            <summary>
+            Called if we receive a header notifying us of hitting the rate limit
+            </summary>
+            <param name="retryAfter">How long until we should retry API request again</param>
+        </member>
+        <member name="P:Oxide.Ext.Discord.RateLimits.RestRateLimit.NextReset">
+            <summary>
+            Returns how long until the current rate limit period will expire
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit">
+            <summary>
+            Represents a WebSocket Rate Limit
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.#ctor">
+            <summary>
+            Constructor for WebsocketRateLimit
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Rest.Bucket">
             <summary>
             Represents a discord API bucket for a group of requests
@@ -13715,12 +14781,17 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.Contents">
             <summary>
-            JSON Serialization of Data 
+            Data serialized to bytes 
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.MultipartSections">
             <summary>
             Attachments for a request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Request.MultipartRequest">
+            <summary>
+            Required If Multipart Form Request
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Rest.Request.Boundary">
@@ -13991,6 +15062,31 @@
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-role-delete">GUILD_ROLE_DELETE</a> gateway event
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventCreate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create">GUILD_SCHEDULED_EVENT_CREATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventUpdate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update">GUILD_SCHEDULED_EVENT_UPDATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventDelete">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-delete">GUILD_SCHEDULED_EVENT_DELETE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventUserAdd">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add">GUILD_SCHEDULED_EVENT_USER_ADD</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventUserRemove">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove">GUILD_SCHEDULED_EVENT_USER_REMOVE</a> gateway event
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.IntegrationCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#integration-create">INTEGRATION_CREATE</a> gateway event
@@ -14169,7 +15265,7 @@
             <summary>
             Setup a heartbeat for this bot with the given interval
             </summary>
-            <param name="heartbeatInterval"></param>
+            <param name="interval"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.DestroyHeartbeat">
             <summary>
@@ -14187,11 +15283,12 @@
             Handles command queueing when the websocket is down
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.#ctor(Oxide.Ext.Discord.WebSockets.Socket)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.#ctor(Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
             <param name="webSocket">Websocket to handle commands for</param>
+            <param name="logger">Logger for this handler</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.CommandPayload)">
             <summary>
@@ -14391,13 +15488,14 @@
             The current sequence number for the websocket
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger,Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler)">
             <summary>
             Creates a new socket listener
             </summary>
             <param name="client">Client this listener is for</param>
             <param name="socket">Socket this listener is for</param>
             <param name="logger">Logger for the client</param>
+            <param name="commands">Socket Command Handler</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.Shutdown">
             <summary>

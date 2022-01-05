@@ -12,21 +12,21 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Default value for flags, when none are given to an account.
         /// </summary>
         None = 0,
+
+        /// <summary>
+        /// Flag given to users who are a Discord employee
+        /// </summary>
+        Staff = 1 << 0,
         
         /// <summary>
-        /// Flag given to users who are a Discord employee.
+        /// Flag given to users who are owners of a partnered Discord server
         /// </summary>
-        DiscordEmployee = 1 << 0,
+        Partner = 1 << 1,
         
         /// <summary>
-        /// Flag given to users who are owners of a partnered Discord server.
+        /// Flag given to users who are HypeSquad Events Coordinator
         /// </summary>
-        PartneredServerOwner = 1 << 1,
-        
-        /// <summary>
-        /// Flag given to users in HypeSquad events.
-        /// </summary>
-        HyperSquadEvents = 1 << 2,
+        HypeSquad = 1 << 2,
         
         /// <summary>
         /// Flag given to users who have participated in the 𝐁ug report program and are level 1.
@@ -36,27 +36,27 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         /// Flag given to users who are in the HypeSquad House of Bravery.
         /// </summary>
-        HouseBravery = 1 << 6,
+        HypeSquadOnlineHouse1 = 1 << 6,
         
         /// <summary>
         /// Flag given to users who are in the HypeSquad House of Brilliance.
         /// </summary>
-        HouseBrilliance = 1 << 7,
+        HypeSquadOnlineHouse2 = 1 << 7,
         
         /// <summary>
         /// Flag given to users who are in the HypeSquad House of Balance.
         /// </summary>
-        HouseBalance = 1 << 8,
+        HypeSquadOnlineHouse3 = 1 << 8,
         
         /// <summary>
         /// Flag given to users who subscribed to Nitro before games were added.
         /// </summary>
-        EarlySupporter = 1 << 9,
+        PremiumEarlySupporter = 1 << 9,
         
         /// <summary>
         /// Flag given to users who are part of a team.
         /// </summary>
-        TeamUser = 1 << 10,
+        TeamPseudoUser = 1 << 10,
 
         /// <summary>
         /// Flag given to users who have participated in the 𝐁ug report program and are level 2.
@@ -69,13 +69,80 @@ namespace Oxide.Ext.Discord.Entities.Users
         VerifiedBot = 1 << 16,
         
         /// <summary>
+        /// Flag given to users that developed bots and early verified their accounts.
+        /// </summary>
+        VerifiedDeveloper = 1 << 17,
+        
+        /// <summary>
+        /// Flag given to users that are discord certified moderators
+        /// </summary>
+        CertifiedModerator = 1 << 18,
+        
+        /// <summary>
+        /// User is a Bot uses only HTTP interactions and is shown in the online member list
+        /// </summary>
+        BotHttpInteractions = 1 << 19,
+        
+        #region Obsolete
+        /// <summary>
+        /// Flag given to users who are a Discord employee.
+        /// </summary>
+        [Obsolete("Replaced with Staff. Will be removed April 2022")]
+        DiscordEmployee = 1 << 0,
+        
+        /// <summary>
+        /// Flag given to users who are owners of a partnered Discord server.
+        /// </summary>
+        [Obsolete("Replaced with Partner. Will be removed April 2022")]
+        PartneredServerOwner = 1 << 1,
+        
+        /// <summary>
+        /// Flag given to users in HypeSquad events.
+        /// </summary>
+        [Obsolete("Replaced with HypeSquad. Will be removed April 2022")]
+        HyperSquadEvents = 1 << 2,
+
+        /// <summary>
+        /// Flag given to users who are in the HypeSquad House of Bravery.
+        /// </summary>
+        [Obsolete("Replaced with HypeSquadOnlineHouse1. Will be removed April 2022")]
+        HouseBravery = 1 << 6,
+        
+        /// <summary>
+        /// Flag given to users who are in the HypeSquad House of Brilliance.
+        /// </summary>
+        [Obsolete("Replaced with HypeSquadOnlineHouse2. Will be removed April 2022")]
+        HouseBrilliance = 1 << 7,
+        
+        /// <summary>
+        /// Flag given to users who are in the HypeSquad House of Balance.
+        /// </summary>
+        [Obsolete("Replaced with HypeSquadOnlineHouse3. Will be removed April 2022")]
+        HouseBalance = 1 << 8,
+        
+        /// <summary>
+        /// Flag given to users who subscribed to Nitro before games were added.
+        /// </summary>
+        [Obsolete("Replaced with PremiumEarlySupporter. Will be removed April 2022")]
+        EarlySupporter = 1 << 9,
+        
+        /// <summary>
+        /// Flag given to users who are part of a team.
+        /// </summary>
+        [Obsolete("Replaced with TeamPseudoUser. Will be removed April 2022")]
+        TeamUser = 1 << 10,
+
+        /// <summary>
         ///  Flag given to users that developed bots and early verified their accounts.
         /// </summary>
+        [Obsolete("Replaced with VerifiedDeveloper. Will be removed April 2022")]
         EarlyVerifiedBotDeveloper = 1 << 17,
         
         /// <summary>
-        ///  Flag given to users that are discord certified moderators
+        /// Flag given to users that are discord certified moderators
         /// </summary>
-        DiscordCertifiedModerator = 1 << 18
+        [Obsolete("Replaced with CertifiedModerator. Will be removed April 2022")]
+        DiscordCertifiedModerator = 1 << 18,
+        #endregion
     }
 }

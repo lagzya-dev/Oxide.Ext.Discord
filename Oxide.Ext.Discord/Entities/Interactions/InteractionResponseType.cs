@@ -29,6 +29,17 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// For components, edit the message the component was attached to
         /// </summary>
-        UpdateMessage = 7
+        UpdateMessage = 7,
+        
+        /// <summary>
+        /// Respond to an autocomplete interaction with suggested choices
+        /// </summary>
+        ApplicationCommandAutocompleteResult = 8,
+        
+        /// <summary>
+        /// Respond to an interaction with an modal for a user to fill-out
+        /// Note: You can't respond to a <see cref="InteractionType.ModalSubmit">ModalSubmit</see> with a new MODAL.
+        /// </summary>
+        Modal = 9
     }
 }

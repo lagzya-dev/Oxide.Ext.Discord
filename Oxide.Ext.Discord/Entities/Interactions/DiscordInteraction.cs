@@ -140,6 +140,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateFollowUpMessage(DiscordClient client, CommandFollowupCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            message.Validate();
             client.Bot.Rest.DoRequest($"/webhooks/{ApplicationId}/{Token}", RequestMethod.POST, message, callback, error);
         }
 

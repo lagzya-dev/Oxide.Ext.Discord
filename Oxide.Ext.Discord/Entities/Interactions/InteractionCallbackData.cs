@@ -38,6 +38,19 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public bool AllowedMentions { get; set; }
         
         /// <summary>
+        /// A developer-defined identifier for the interactable form
+        /// Max 100 characters
+        /// </summary>
+        [JsonProperty("custom_id")]
+        public string CustomId { get; set; }
+        
+        /// <summary>
+        /// Title of the modal if Modal Response
+        /// </summary>
+        [JsonProperty("title")]
+        public string Title { get; set; }
+        
+        /// <summary>
         /// Callback data flags
         /// </summary>
         [JsonProperty("flags")]
@@ -48,5 +61,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("components")]
         public List<ActionRowComponent> Components { get; set; }
+        
+        /// <summary>
+        /// Attachment objects with filename and description
+        /// </summary>
+        [JsonProperty("attachments")]
+        public List<MessageAttachment> Attachments { get; set; }
     }
 }

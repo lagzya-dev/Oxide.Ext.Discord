@@ -127,5 +127,14 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// - TYPING_START
         /// </summary>
         DirectMessageTyping = 1 << 14,
+        
+        /// <summary>
+        /// - GUILD_SCHEDULED_EVENT_CREATE
+        /// - GUILD_SCHEDULED_EVENT_UPDATE
+        /// - GUILD_SCHEDULED_EVENT_DELETE
+        /// - GUILD_SCHEDULED_EVENT_USER_ADD
+        /// - GUILD_SCHEDULED_EVENT_USER_REMOVE
+        /// </summary>
+        GuildScheduledEvents = 1 << 16
     }
 }
