@@ -613,6 +613,12 @@
             </summary>
             <returns><see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.BuildList">
+            <summary>
+            Returns the built embed in a list
+            </summary>
+            <returns>List of <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder">
             <summary>
             Builder for Message Components
