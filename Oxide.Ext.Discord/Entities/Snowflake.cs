@@ -240,8 +240,8 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Converts snowflake to a string
         /// </summary>
-        /// <param name="snowflake">Snowflake to be converted to ulong</param>
-        /// <returns>Snowflake ID as ulong</returns>
+        /// <param name="snowflake">Snowflake to be converted to string</param>
+        /// <returns>Snowflake ID as string</returns>
         public static implicit operator string(Snowflake snowflake) => snowflake.Id.ToString();
         
         /// <summary>
