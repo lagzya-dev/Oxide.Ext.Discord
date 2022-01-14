@@ -18,6 +18,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly List<CommandPayload> _pendingCommands = new List<CommandPayload>();
         private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
         private readonly Timer _rateLimitTimer;
+        private readonly object _syncRoot = new object();
 
         /// <summary>
         /// Constructor
@@ -49,21 +50,21 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             
             if (_webSocket.IsConnected())
             {
-                _pendingCommands.Add(command);
+                AddCommand(command);
                 SendCommands();
                 return;
             }
-
+            
             if (command.OpCode == GatewayCommandCode.PresenceUpdate)
             {
-                _pendingCommands.RemoveAll(p => p.OpCode == GatewayCommandCode.PresenceUpdate);
-            } 
+                RemoveByType(GatewayCommandCode.PresenceUpdate);
+            }
             else if (command.OpCode == GatewayCommandCode.VoiceStateUpdate)
             {
-                _pendingCommands.RemoveAll(p => p.OpCode == GatewayCommandCode.VoiceStateUpdate);
+                RemoveByType(GatewayCommandCode.VoiceStateUpdate);
             }
-
-            _pendingCommands.Add(command);
+                
+            AddCommand(command);
         }
 
         internal void OnSocketConnected()
@@ -81,34 +82,53 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         
         private void SendCommands()
         {
-            while (_pendingCommands.Count != 0)
+            lock (_syncRoot)
             {
-                CommandPayload payload = _pendingCommands[0];
-                if (_rateLimit.HasReachedRateLimit)
+                while (_pendingCommands.Count != 0)
                 {
-                    if (!_rateLimitTimer.Enabled)
+                    CommandPayload payload = _pendingCommands[0];
+                    if (_rateLimit.HasReachedRateLimit)
                     {
-                        _rateLimitTimer.Interval = _rateLimit.NextReset;
-                        _rateLimitTimer.Stop();
-                        _rateLimitTimer.Start();
-                        _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {_rateLimit.NextReset.ToString()} seconds\nOpcode: {payload.OpCode}\nPayload: {JsonConvert.SerializeObject(payload.Payload, DiscordExtension.ExtensionSerializeSettings)}");
+                        if (!_rateLimitTimer.Enabled)
+                        {
+                            _rateLimitTimer.Interval = _rateLimit.NextReset;
+                            _rateLimitTimer.Stop();
+                            _rateLimitTimer.Start();
+                            _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {_rateLimit.NextReset.ToString()} seconds\nOpcode: {payload.OpCode}\nPayload: {JsonConvert.SerializeObject(payload.Payload, DiscordExtension.ExtensionSerializeSettings)}");
+                        }
+
+                        return;
+                    }
+                
+                    if (_logger.IsLogging(DiscordLogLevel.Debug))
+                    {
+                        _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {payload.OpCode.ToString()}");
                     }
 
-                    return;
-                }
+                    if (!_webSocket.Send(payload))
+                    {
+                        return;
+                    }
                 
-                if (_logger.IsLogging(DiscordLogLevel.Debug))
-                {
-                    _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {payload.OpCode.ToString()}");
+                    _pendingCommands.RemoveAt(0);
+                    _rateLimit.FiredRequest();
                 }
+            }
+        }
 
-                if (!_webSocket.Send(payload))
-                {
-                    return;
-                }
-                
-                _pendingCommands.RemoveAt(0);
-                _rateLimit.FiredRequest();
+        private void AddCommand(CommandPayload command)
+        {
+            lock (_syncRoot)
+            {
+                _pendingCommands.Add(command);
+            }
+        }
+        
+        private void RemoveByType(GatewayCommandCode code)
+        {
+            lock (_syncRoot)
+            {
+                _pendingCommands.RemoveAll(c => c.OpCode == code);
             }
         }
     }
