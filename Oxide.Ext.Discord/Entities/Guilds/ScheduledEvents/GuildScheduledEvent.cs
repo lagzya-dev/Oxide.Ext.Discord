@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
 {
@@ -113,6 +114,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void ListForGuild(DiscordClient client, Snowflake guildId, ScheduledEventLookup lookup = null, Action<List<GuildScheduledEvent>> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/scheduled-events{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
@@ -128,6 +130,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void Create(DiscordClient client, Snowflake guildId, ScheduledEventCreate create, Action<GuildScheduledEvent> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/scheduled-events", RequestMethod.POST, create, callback, error);
         }
 
@@ -144,6 +147,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void Get(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventLookup lookup = null, Action<GuildScheduledEvent> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
+            if (!eventId.IsValid()) throw new InvalidSnowflakeException(nameof(eventId));
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/scheduled-events/{eventId}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
@@ -160,6 +165,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="error">Callback when an error occurs with error information</param>
         public void Modify(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventUpdate update, Action<GuildScheduledEvent> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
+            if (!eventId.IsValid()) throw new InvalidSnowflakeException(nameof(eventId));
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/scheduled-events/{eventId}", RequestMethod.PATCH, update, callback, error);
         }
 
@@ -174,6 +181,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="error">Callback when an error occurs with error information</param>
         public void Delete(DiscordClient client, Snowflake guildId, Snowflake eventId, Action<GuildScheduledEvent> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
+            if (!eventId.IsValid()) throw new InvalidSnowflakeException(nameof(eventId));
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/scheduled-events/{eventId}", RequestMethod.DELETE, null, callback, error);
         }
 
@@ -191,6 +200,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetUsers(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventUsersLookup lookup = null, Action<List<ScheduledEventUser>> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
+            if (!eventId.IsValid()) throw new InvalidSnowflakeException(nameof(eventId));
+            
             if (lookup?.Limit != null && lookup.Limit.Value > 100)
             {
                 throw new Exception($"{nameof(GuildScheduledEvent)}.{nameof(GetUsers)} Validation Error: {nameof(ScheduledEventUsersLookup)}.{nameof(ScheduledEventUsersLookup.Limit)} cannot be greater than 100");

@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Stickers;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.Interfaces;
@@ -241,6 +242,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateMessage(DiscordClient client, Snowflake channelId, MessageCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
             message.Validate();
             client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, message, callback, error);
         }
@@ -258,6 +260,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateMessage(DiscordClient client, Snowflake channelId, string message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
             MessageCreate createMessage = new MessageCreate
             {
                 Content = message
@@ -279,6 +282,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateMessage(DiscordClient client, Snowflake channelId, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
             MessageCreate createMessage = new MessageCreate
             {
                 Embeds = new List<DiscordEmbed> {embed}
@@ -300,6 +304,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateMessage(DiscordClient client, Snowflake channelId, List<DiscordEmbed> embeds, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
             MessageCreate createMessage = new MessageCreate
             {
                 Embeds = embeds
@@ -320,6 +325,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetChannelMessage(DiscordClient client, Snowflake channelId, Snowflake messageId, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
+            if (!messageId.IsValid()) throw new InvalidSnowflakeException(nameof(messageId));
             client.Bot.Rest.DoRequest($"/channels/{channelId}/messages/{messageId}", RequestMethod.GET, null, callback, error);
         }
         
@@ -402,6 +409,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CrossPostMessage(DiscordClient client, Snowflake messageId, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (!messageId.IsValid()) throw new InvalidSnowflakeException(nameof(messageId));
             client.Bot.Rest.DoRequest($"/channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback, error);
         }
         
@@ -448,12 +456,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateReaction(DiscordClient client, string emoji, Action callback = null, Action<RestError> error = null)
         {
-            string emojiError = Validation.ValidateEmoji(emoji);
-            if (!string.IsNullOrEmpty(emojiError))
-            {
-                client.Logger.Error($"{nameof(DiscordMessage)}.{nameof(CreateReaction)} Failed emoji validation for emoji '{emoji}' with error:\n{emojiError}");
-                return;
-            }
+            Validation.ValidateEmoji(emoji);
             
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", RequestMethod.PUT, null, callback, error);
         }
@@ -483,12 +486,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteOwnReaction(DiscordClient client, string emoji, Action callback = null, Action<RestError> error = null)
         {
-            string emojiError = Validation.ValidateEmoji(emoji);
-            if (!string.IsNullOrEmpty(emojiError))
-            {
-                client.Logger.Error($"{nameof(DiscordMessage)}.{nameof(DeleteOwnReaction)} Failed emoji validation for emoji '{emoji}' with error:\n{emojiError}");
-                return;
-            }
+            Validation.ValidateEmoji(emoji);
             
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", RequestMethod.DELETE, null, callback, error);
         }
@@ -506,6 +504,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteUserReaction(DiscordClient client, DiscordEmoji emoji, Snowflake userId, Action callback = null, Action<RestError> error = null)
         {
+            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
             DeleteUserReaction(client, emoji.ToDataString(), userId, callback, error);
         }
 
@@ -522,12 +521,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteUserReaction(DiscordClient client, string emoji, Snowflake userId, Action callback = null, Action<RestError> error = null)
         {
-            string emojiError = Validation.ValidateEmoji(emoji);
-            if (!string.IsNullOrEmpty(emojiError))
-            {
-                client.Logger.Error($"{nameof(DiscordMessage)}.{nameof(DeleteUserReaction)} Failed emoji validation for emoji '{emoji}' with error:\n{emojiError}");
-                return;
-            }
+            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
+            
+            Validation.ValidateEmoji(emoji);
             
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback, error);
         }
@@ -557,12 +553,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetReactions(DiscordClient client, string emoji, Action<List<DiscordUser>> callback = null, Action<RestError> error = null)
         {
-            string emojiError = Validation.ValidateEmoji(emoji);
-            if (!string.IsNullOrEmpty(emojiError))
-            {
-                client.Logger.Error($"{nameof(DiscordMessage)}.{nameof(GetReactions)} Failed emoji validation for emoji '{emoji}' with error:\n{emojiError}");
-                return;
-            }
+            Validation.ValidateEmoji(emoji);
 
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}", RequestMethod.GET, null, callback, error);
         }
@@ -606,12 +597,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteAllReactionsForEmoji(DiscordClient client, string emoji, Action callback = null, Action<RestError> error = null)
         {
-            string emojiError = Validation.ValidateEmoji(emoji);
-            if (!string.IsNullOrEmpty(emojiError))
-            {
-                client.Logger.Error($"{nameof(DiscordMessage)}.{nameof(DeleteAllReactionsForEmoji)} Failed emoji validation for emoji '{emoji}' with error:\n{emojiError}");
-                return;
-            }
+            Validation.ValidateEmoji(emoji);
             
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}", RequestMethod.DELETE, null, callback, error);
         }

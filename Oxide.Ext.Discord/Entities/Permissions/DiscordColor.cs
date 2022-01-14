@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Entities.Permissions
 {
@@ -128,7 +129,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         {
             if (color > 0xFFFFFF)
             {
-                throw new Exception($"Color '{color}' is outside the valid color range");
+                throw new InvalidDiscordColorException($"Color '{color}' is greater than the max color of 0xFFFFFF");
             }
             
             Color = color;

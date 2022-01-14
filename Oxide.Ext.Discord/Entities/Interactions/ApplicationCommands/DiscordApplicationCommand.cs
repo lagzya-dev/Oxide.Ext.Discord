@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
@@ -115,6 +116,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetPermissions(DiscordClient client, Snowflake guildId, Action<GuildCommandPermissions> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
             client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET, null, callback, error);
         }
 
@@ -130,6 +132,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditPermissions(DiscordClient client, Snowflake guildId, List<CommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
             Dictionary<string, object> data = new Dictionary<string, object>
             {
                 ["permissions"] = permissions

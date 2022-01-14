@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Entities.Webhooks;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
@@ -84,6 +84,20 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("message")]
         public DiscordMessage Message { get; set; }
+        
+        /// <summary>
+        /// The selected language of the invoking user
+        /// <a href="https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales">Discord Locale Values</a>
+        /// </summary>
+        [JsonProperty("locale")]
+        public string Locale { get; set; }
+        
+        /// <summary>
+        /// The guild's preferred locale, if invoked in a guild
+        /// <a href="https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales">Discord Locale Values</a>
+        /// </summary>
+        [JsonProperty("guild_locale")]
+        public string GuildLocale { get; set; }
 
         private InteractionDataParsed _parsed;
 
@@ -155,6 +169,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditFollowUpMessage(DiscordClient client, Snowflake messageId, CommandFollowupUpdate edit, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (!messageId.IsValid()) throw new InvalidSnowflakeException(nameof(messageId));
             client.Bot.Rest.DoRequest($"/webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.PATCH, edit, callback, error);
         }
 
@@ -168,6 +183,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteFollowUpMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RestError> error = null)
         {
+            if (!messageId.IsValid()) throw new InvalidSnowflakeException(nameof(messageId));
             client.Bot.Rest.DoRequest($"/webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback, error);
         }
     }

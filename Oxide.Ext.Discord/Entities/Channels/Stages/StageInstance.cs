@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Stages
@@ -61,6 +62,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateStageInstance(DiscordClient client, Snowflake channelId, string topic, PrivacyLevel privacyLevel = PrivacyLevel.GuildOnly, Action<StageInstance> callback = null, Action<RestError> error = null)
         {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
             Dictionary<string, string> data = new Dictionary<string, string>
             {
                 ["channel_id"] = channelId,
@@ -81,6 +83,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetStageInstance(DiscordClient client, Snowflake channelId, Action<StageInstance> callback = null, Action<RestError> error = null)
         {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
             client.Bot.Rest.DoRequest($"/stage-instances/{channelId}", RequestMethod.GET, null, callback, error);
         }
 
