@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Test version information if using test version
         /// </summary>
-        public const string TestVersion = "";
+        public const string TestVersion = ".Beta.1";
 
         /// <summary>
         /// Discord Extension JSON Serialization settings
@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Version number of the extension
         /// </summary>
-        private static readonly VersionNumber ExtensionVersion = new VersionNumber(2, 1, 0);
+        private static readonly VersionNumber ExtensionVersion = new VersionNumber(2, 1, 1);
         
         /// <summary>
         /// Global logger for areas that aren't part of a client connection
