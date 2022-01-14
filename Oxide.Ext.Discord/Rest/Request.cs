@@ -184,7 +184,7 @@ namespace Oxide.Ext.Discord.Rest
                     bool isRateLimit = statusCode == 429;
                     if (isRateLimit)
                     {
-                        _logger.Warning($"Discord rate limit reached. (Rate limit info: remaining: [{req.Method}] Route:{req.RequestUri} Remaining: {Bucket.RateLimitRemaining.ToString()} Limit: {Bucket.RateLimit.ToString()}, Reset In: {Bucket.RateLimitReset.ToString()}, Current Time: {Time.TimeSinceEpoch().ToString()}");
+                        _logger.Warning($"Discord rate limit reached. (Rate limit info: remaining: [{req.Method}] Route: {req.RequestUri} Content-Type: {req.ContentType} Remaining: {Bucket.RateLimitRemaining.ToString()} Limit: {Bucket.RateLimit.ToString()}, Reset In: {Bucket.RateLimitReset.ToString()}, Current Time: {Time.TimeSinceEpoch().ToString()}");
                         Close(false);
                         return;
                     }
@@ -193,7 +193,7 @@ namespace Oxide.Ext.Discord.Rest
                     _lastError.DiscordError = apiError;
                     if (apiError != null && apiError.Code != 0)
                     {
-                        _logger.Error($"Discord API has returned error Discord Code: {apiError.Code.ToString()} Discord Error: {apiError.Message} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()})" +
+                        _logger.Error($"Discord API has returned error Discord Code: {apiError.Code.ToString()} Discord Error: {apiError.Message} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()}) Content-Type: {req.ContentType}" +
                                       $"\nDiscord Errors: {apiError.Errors}" +
                                       $"\nRequest Body:\n{(Contents != null ? Encoding.UTF8.GetString(Contents) : "Contents is null")}");
                     }
