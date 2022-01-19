@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Messages
@@ -83,6 +84,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="description">Description for the attachment</param>
         public void AddAttachment(string filename, byte[] data, string contentType, string description = null)
         {
+            Validation.ValidateFilename(filename);
+            
             if (FileAttachments == null)
             {
                 FileAttachments = new List<MessageFileAttachment>();
