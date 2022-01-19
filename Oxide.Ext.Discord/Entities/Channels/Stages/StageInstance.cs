@@ -38,8 +38,9 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         public PrivacyLevel PrivacyLevel { get; set; }
         
         /// <summary>
-        /// Whether or not Stage discovery is disabled
+        /// Whether or not Stage discovery is disabled (deprecated)   
         /// </summary>
+        [Obsolete("Deprecated by discord")]
         [JsonProperty("discoverable_disabled")]
         public bool DiscoverableDisabled { get; set; }
         
