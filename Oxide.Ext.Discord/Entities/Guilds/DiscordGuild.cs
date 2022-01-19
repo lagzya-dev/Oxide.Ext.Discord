@@ -1216,6 +1216,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         /// <summary>
         /// Returns the Welcome Screen object for the guild.
+        /// Requires the `MANAGE_GUILD` permission.
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with welcome screen for the guild</param>
