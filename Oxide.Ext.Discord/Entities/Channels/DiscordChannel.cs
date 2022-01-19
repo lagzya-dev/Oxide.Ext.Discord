@@ -107,7 +107,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public Hash<Snowflake, DiscordUser> Recipients { get; set; }
         
         /// <summary>
-        /// icon hash
+        /// icon hash of the group DM  
         /// </summary>
         [JsonProperty("icon")]
         public string Icon { get; set; }
