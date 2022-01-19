@@ -90,11 +90,6 @@
             If the connection is initialized and not disconnected
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.BotClient.ConnectedSuccessfully">
-            <summary>
-            If the bot has successfully connected to the websocket at least once
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.BotClient.Application">
             <summary>
             Application reference for this bot
@@ -15639,6 +15634,11 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener._sequence">
             <summary>
             The current sequence number for the websocket
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.WebSockets.SocketListener.SocketHasConnected">
+            <summary>
+            If the bot has successfully connected to the websocket at least once
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger,Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler)">

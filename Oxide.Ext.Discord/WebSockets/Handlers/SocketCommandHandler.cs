@@ -19,6 +19,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
         private readonly Timer _rateLimitTimer;
         private readonly object _syncRoot = new object();
+        private bool _socketCanSendCommands;
 
         /// <summary>
         /// Constructor
@@ -47,36 +48,59 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(Enqueue)} Queuing command {command.OpCode.ToString()}");
             }
-            
-            if (_webSocket.IsConnected())
+
+            //If websocket has connect and we need to identify or resume send those payloads right away
+            if (_webSocket.IsConnected() && (command.OpCode == GatewayCommandCode.Identify || command.OpCode == GatewayCommandCode.Resume))
             {
-                AddCommand(command);
-                SendCommands();
+                _webSocket.Send(command);
                 return;
             }
             
-            if (command.OpCode == GatewayCommandCode.PresenceUpdate)
+            //If the websocket isn't fully connect enqueue the command until it is ready
+            if (!_socketCanSendCommands)
             {
-                RemoveByType(GatewayCommandCode.PresenceUpdate);
+                if (command.OpCode == GatewayCommandCode.PresenceUpdate)
+                {
+                    RemoveByType(GatewayCommandCode.PresenceUpdate);
+                }
+                else if (command.OpCode == GatewayCommandCode.VoiceStateUpdate)
+                {
+                    RemoveByType(GatewayCommandCode.VoiceStateUpdate);
+                }
+
+                AddCommand(command);
+                return;
             }
-            else if (command.OpCode == GatewayCommandCode.VoiceStateUpdate)
-            {
-                RemoveByType(GatewayCommandCode.VoiceStateUpdate);
-            }
-                
+            
             AddCommand(command);
+            SendCommands();
         }
 
         internal void OnSocketConnected()
         {
             _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(OnSocketConnected)} Socket Connected. Sending queued commands.");
+            _socketCanSendCommands = true;
             SendCommands();
+        }
+
+        internal void OnSocketDisconnected()
+        {
+            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(OnSocketConnected)} Socket Disconnected. Queuing Commands.");
+            _socketCanSendCommands = false;
         }
 
         private void RateLimitElapsed(object sender, ElapsedEventArgs e)
         {
             _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(RateLimitElapsed)} Rate Limit has elapsed. Send Queued Commands");
             _rateLimitTimer.Stop();
+            if (!_socketCanSendCommands)
+            {
+                _rateLimitTimer.Interval = 1000;
+                _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(RateLimitElapsed)} Can't send commands right now. Trying again in 1 second");
+                _rateLimitTimer.Start();
+                return;
+            }
+
             SendCommands();
         }
         
@@ -120,6 +144,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             lock (_syncRoot)
             {
+                if (command.OpCode == GatewayCommandCode.Identify || command.OpCode == GatewayCommandCode.Resume)
+                {
+                    _pendingCommands.Insert(0, command);
+                    return;
+                }
                 _pendingCommands.Add(command);
             }
         }
