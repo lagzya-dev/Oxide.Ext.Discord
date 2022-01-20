@@ -244,6 +244,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
             message.Validate();
+            message.ValidateChannelMessage();
             client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, message, callback, error);
         }
 
@@ -346,6 +347,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
             }
             
             message.Validate();
+            message.ValidateChannelMessage();
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback, error);
         }
         

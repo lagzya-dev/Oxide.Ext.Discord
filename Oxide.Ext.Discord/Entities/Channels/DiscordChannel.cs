@@ -347,6 +347,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public void CreateMessage(DiscordClient client, MessageCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             message.Validate();
+            message.ValidateChannelMessage();
             client.Bot.Rest.DoRequest($"/channels/{Id}/messages", RequestMethod.POST, message, callback, error);
         }
 

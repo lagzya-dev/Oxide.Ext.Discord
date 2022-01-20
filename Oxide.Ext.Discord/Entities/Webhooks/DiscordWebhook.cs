@@ -273,6 +273,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             }
             
             message.Validate();
+            message.ValidateWebhookMessage();
             
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
@@ -295,6 +296,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
 
             executeParams.Wait = true;
             message.Validate();
+            message.ValidateWebhookMessage();
             
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }

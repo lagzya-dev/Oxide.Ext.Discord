@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Entities.Webhooks;
 using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -116,6 +117,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateInteractionResponse(DiscordClient client, InteractionResponse response, Action callback = null, Action<RestError> error = null)
         {
+            response.Data?.Validate();
+            
             client.Bot.Rest.DoRequest($"/interactions/{Id}/{Token}/callback", RequestMethod.POST, response, callback, error);
         }
         
@@ -152,9 +155,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message to follow up with</param>
         /// <param name="callback">Callback with the message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateFollowUpMessage(DiscordClient client, CommandFollowupCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void CreateFollowUpMessage(DiscordClient client, WebhookCreateMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             message.Validate();
+            message.ValidateInteractionMessage();
             client.Bot.Rest.DoRequest($"/webhooks/{ApplicationId}/{Token}", RequestMethod.POST, message, callback, error);
         }
 

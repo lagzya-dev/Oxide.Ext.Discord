@@ -71,6 +71,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public List<MessageAttachment> Attachments { get; set; }
         
         /// <summary>
+        /// Attachments for the message
+        /// </summary>
+        [JsonProperty("flags ")]
+        public MessageFlags? Flags { get; set; }
+        
+        /// <summary>
         /// Attachments for a discord message
         /// </summary>
         public List<MessageFileAttachment> FileAttachments { get; set; }
@@ -110,6 +116,45 @@ namespace Oxide.Ext.Discord.Entities.Messages
             if (!string.IsNullOrEmpty(Content) && Content.Length > 2000)
             {
                 throw new InvalidMessageException("Content cannot be more than 2000 characters");
+            }
+        }
+
+        internal void ValidateChannelMessage()
+        {
+            if (!Flags.HasValue)
+            {
+                return;
+            }
+
+            if ((Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
+            {
+                throw new InvalidMessageException("Invalid Message Flags Used for Channel Message. Only supported flags are MessageFlags.SuppressEmbeds");
+            }
+        }
+        
+        internal void ValidateWebhookMessage()
+        {
+            if (!Flags.HasValue)
+            {
+                return;
+            }
+
+            if ((Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
+            {
+                throw new InvalidMessageException("Invalid Message Flags Used for Webhook Message. Only supported flags are MessageFlags.SuppressEmbeds");
+            }
+        }
+        
+        internal void ValidateInteractionMessage()
+        {
+            if (!Flags.HasValue)
+            {
+                return;
+            }
+
+            if ((Flags.Value & ~(MessageFlags.SuppressEmbeds | MessageFlags.Ephemeral)) != 0)
+            {
+                throw new InvalidMessageException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds, and MessageFlags.Ephemeral");
             }
         }
     }

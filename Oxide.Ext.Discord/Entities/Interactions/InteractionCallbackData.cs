@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
@@ -67,5 +68,18 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("attachments")]
         public List<MessageAttachment> Attachments { get; set; }
+
+        internal void Validate()
+        {
+            if (!Flags.HasValue)
+            {
+                return;
+            }
+
+            if ((Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
+            {
+                throw new InvalidInteractionException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds");
+            }
+        }
     }
 }
