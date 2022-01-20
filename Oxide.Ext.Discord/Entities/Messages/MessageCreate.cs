@@ -131,20 +131,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 throw new InvalidMessageException("Invalid Message Flags Used for Channel Message. Only supported flags are MessageFlags.SuppressEmbeds");
             }
         }
-        
-        internal void ValidateWebhookMessage()
-        {
-            if (!Flags.HasValue)
-            {
-                return;
-            }
 
-            if ((Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
-            {
-                throw new InvalidMessageException("Invalid Message Flags Used for Webhook Message. Only supported flags are MessageFlags.SuppressEmbeds");
-            }
-        }
-        
         internal void ValidateInteractionMessage()
         {
             if (!Flags.HasValue)

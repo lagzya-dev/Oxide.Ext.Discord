@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions;
 
@@ -36,7 +37,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// Allowed mentions 
         /// </summary>
         [JsonProperty("allowed_mentions")]
-        public bool AllowedMentions { get; set; }
+        public AllowedMention AllowedMentions { get; set; }
         
         /// <summary>
         /// A developer-defined identifier for the interactable form
@@ -78,7 +79,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
 
             if ((Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
             {
-                throw new InvalidInteractionException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds");
+                throw new InvalidInteractionResponseException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds");
             }
         }
     }

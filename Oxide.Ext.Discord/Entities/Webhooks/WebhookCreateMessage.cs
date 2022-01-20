@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
@@ -20,5 +21,18 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         [JsonProperty("avatar_url")]
         public string AvatarUrl { get; set; } 
+        
+        internal void ValidateWebhookMessage()
+        {
+            if (!Flags.HasValue)
+            {
+                return;
+            }
+
+            if ((Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
+            {
+                throw new InvalidMessageException("Invalid Message Flags Used for Webhook Message. Only supported flags are MessageFlags.SuppressEmbeds");
+            }
+        }
     }
 }
