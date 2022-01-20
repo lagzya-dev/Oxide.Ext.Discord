@@ -40,5 +40,11 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// </summary>
         [JsonProperty("invitable")]
         public bool? Invitable { get; set; } 
+        
+        /// <summary>
+        /// Timestamp when the thread was created; only populated for threads created after 2022-01-09
+        /// </summary>
+        [JsonProperty("create_timestamp")]
+        public DateTime? CreateTimestamp { get; set; } 
     }
 }
