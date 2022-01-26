@@ -2,6 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
 
@@ -97,6 +98,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetSticker(DiscordClient client, Snowflake stickerId, Action<DiscordSticker> callback, Action<RestError> error = null)
         {
+            if (!stickerId.IsValid()) throw new InvalidSnowflakeException(nameof(stickerId));
             client.Bot.Rest.DoRequest($"/stickers/{stickerId}", RequestMethod.GET, null, callback, error);
         }
         

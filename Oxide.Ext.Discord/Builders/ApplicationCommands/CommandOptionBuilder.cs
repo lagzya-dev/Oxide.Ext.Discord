@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
@@ -22,7 +23,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             
             if (type == CommandOptionType.SubCommand || type == CommandOptionType.SubCommandGroup)
             {
-                throw new Exception($"{type} is not allowed to be used here. Valid types are any non command type.");
+                throw new InvalidApplicationCommandException($"{type} is not allowed to be used here. Valid types are any non command type.");
             }
 
             _option = new CommandOption
@@ -66,7 +67,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         {
             if (_option.Type != CommandOptionType.Integer && _option.Type != CommandOptionType.Number)
             {
-                throw new Exception("Can only set min value for Integer or Number Type");
+                throw new InvalidApplicationCommandException("Can only set min value for Integer or Number Type");
             }
             
             _option.MinValue = minValue;
@@ -82,7 +83,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         {
             if (_option.Type != CommandOptionType.Number)
             {
-                throw new Exception("Can only set min value for Number Type");
+                throw new InvalidApplicationCommandException("Can only set min value for Number Type");
             }
             
             _option.MinValue = minValue;
@@ -98,7 +99,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         {
             if (_option.Type != CommandOptionType.Integer && _option.Type != CommandOptionType.Number)
             {
-                throw new Exception("Can only set max value for Integer or Number Type");
+                throw new InvalidApplicationCommandException("Can only set max value for Integer or Number Type");
             }
             
             _option.MaxValue = maxValue;
@@ -114,7 +115,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         {
             if (_option.Type != CommandOptionType.Integer && _option.Type != CommandOptionType.Number)
             {
-                throw new Exception("Can only set max value for Number Type");
+                throw new InvalidApplicationCommandException("Can only set max value for Number Type");
             }
             
             _option.MaxValue = maxValue;
@@ -131,7 +132,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         {
             if (_option.Type != CommandOptionType.Channel)
             {
-                throw new Exception("Can only set ChannelTypes for CommandOptionType.Channel");
+                throw new InvalidApplicationCommandException("Can only set ChannelTypes for CommandOptionType.Channel");
             }
             
             _option.ChannelTypes = types;
@@ -154,7 +155,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             
             if (_option.Type != CommandOptionType.String)
             {
-                throw new Exception($"Cannot add a string choice to non string type: {_option.Type}");
+                throw new InvalidApplicationCommandException($"Cannot add a string choice to non string type: {_option.Type}");
             }
             
             return AddChoice(name, (object)value);
@@ -175,7 +176,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             
             if (_option.Type != CommandOptionType.Integer)
             {
-                throw new Exception($"Cannot add a integer choice to non integer type: {_option.Type}");
+                throw new InvalidApplicationCommandException($"Cannot add a integer choice to non integer type: {_option.Type}");
             }
 
             return AddChoice(name, (object)value);
@@ -195,7 +196,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             
             if (_option.Type != CommandOptionType.Number)
             {
-                throw new Exception($"Cannot add a number choice to non number type: {_option.Type}");
+                throw new InvalidApplicationCommandException($"Cannot add a number choice to non number type: {_option.Type}");
             }
 
             return AddChoice(name, (object)value);

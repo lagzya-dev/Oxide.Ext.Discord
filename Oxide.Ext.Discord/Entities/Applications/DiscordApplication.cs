@@ -2,13 +2,10 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Teams;
 using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Entities.Webhooks;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers.Cdn;
 
 namespace Oxide.Ext.Discord.Entities.Applications
@@ -166,6 +163,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetGlobalCommand(DiscordClient client, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
+            if (!commandId.IsValid()) throw new InvalidSnowflakeException(nameof(commandId));
             client.Bot.Rest.DoRequest($"/applications/{Id}/commands/{commandId}", RequestMethod.GET, null, callback, error);
         }
         
@@ -207,6 +205,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetGuildCommands(DiscordClient client, Snowflake guildId, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.GET, null, callback, error);
         }
 
@@ -221,6 +220,8 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetGuildCommand(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
+            if (!commandId.IsValid()) throw new InvalidSnowflakeException(nameof(commandId));
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}", RequestMethod.GET, null, callback, error);
         }
 
@@ -236,6 +237,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateGuildCommand(DiscordClient client, Snowflake guildId, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.POST, create, callback, error);
         }
 
@@ -248,6 +250,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetGuildCommandPermissions(DiscordClient client, Snowflake guildId, Action<List<GuildCommandPermissions>> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.GET, null, callback, error);
         }
 
@@ -262,6 +265,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="error">Callback when an error occurs with error information</param>
         public void BatchEditCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
             client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.PUT, permissions, callback, error);
         }
     }

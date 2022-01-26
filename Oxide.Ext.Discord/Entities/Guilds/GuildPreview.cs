@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Emojis;
+using Oxide.Ext.Discord.Entities.Stickers;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -71,5 +72,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
+        
+        /// <summary>
+        /// Custom guild stickers
+        /// </summary>
+        [JsonProperty("stickers")]
+        public List<DiscordSticker> Stickers { get; set; }
     }
 }

@@ -41,6 +41,11 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         private int _sequence;
 
+        /// <summary>
+        /// If the bot has successfully connected to the websocket at least once
+        /// </summary>
+        public bool SocketHasConnected { get; internal set; }
+
         private readonly BotClient _client;
         private readonly Socket _webSocket;
         private readonly ILogger _logger;
@@ -81,8 +86,8 @@ namespace Oxide.Ext.Discord.WebSockets
         public void SocketOpened(object sender, EventArgs e)
         {
             _logger.Info("Discord socket opened!");
-            _client.CallHook(DiscordExtHooks.OnDiscordWebsocketOpened);
             _webSocket.SocketState = SocketState.Connected;
+            _client.CallHook(DiscordExtHooks.OnDiscordWebsocketOpened);
         }
 
         /// <summary>
@@ -107,6 +112,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.CallHook(DiscordExtHooks.OnDiscordWebsocketClosed, e.Reason, e.Code, e.WasClean);
             _webSocket.SocketState = SocketState.Disconnected;
             _webSocket.DisposeSocket();
+            _commands.OnSocketDisconnected();
 
             if (!_client.Initialized)
             {
@@ -575,7 +581,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             
             _client.ReadyData = ready;
-            _client.ConnectedSuccessfully = true;
+            SocketHasConnected = true;
             _commands.OnSocketConnected();
         }
 

@@ -101,6 +101,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             RequestedReconnect = attemptReconnect;
             ShouldAttemptResume = shouldResume;
+            _commands.OnSocketDisconnected();
 
             if (_reconnectTimer != null)
             {

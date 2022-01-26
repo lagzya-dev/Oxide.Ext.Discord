@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Stages
@@ -8,8 +9,9 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
     public enum PrivacyLevel
     {
         /// <summary>
-        /// The Stage instance is visible publicly, such as on Stage discovery.
+        /// The Stage instance is visible publicly. (deprecated)
         /// </summary>
+        [Obsolete("Deprecated by Discord")]
         [Description("PUBLIC")]
         Public = 1,
         

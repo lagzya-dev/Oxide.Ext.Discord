@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -33,26 +34,26 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// Parsed command for the interaction if an application command
         /// </summary>
-        public string Command;
-        
+        public readonly string Command;
+
         /// <summary>
         /// Command group for the interaction if <see cref="ApplicationCommandType.ChatInput"/> Command Type if an application command
         /// Null if command group is not used for the command.
         /// Defaults to empty string if command does not have a command group
         /// </summary>
-        public string CommandGroup = string.Empty;
+        public string CommandGroup { get; private set; } = string.Empty;
         
         /// <summary>
         /// Sub Command for the interaction if <see cref="ApplicationCommandType.ChatInput"/> Command Typ  if an application command
         /// Null if sub command group is not used for the command.
         /// Defaults to empty string if command does not have sub command
         /// </summary>
-        public string SubCommand = string.Empty;
+        public string SubCommand { get; private set; } = string.Empty;
         
         /// <summary>
         /// Interaction Data Supplied Args if <see cref="ApplicationCommandType.ChatInput"/> Command Type if an application command
         /// </summary>
-        public InteractionDataArgs Args;
+        public InteractionDataArgs Args { get; private set; }
         
         /// <summary>
         /// Returns true if this command was used in a guild; false otherwise.
@@ -68,6 +69,16 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// If a <see cref="SelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
         /// </summary>
         public readonly List<SelectMenuOption> SelectMenuValues;
+
+        /// <summary>
+        /// Discord User's locale converted to oxide lang locale
+        /// </summary>
+        public readonly string UserOxideLocale;
+
+        /// <summary>
+        /// Discord Guild's locale converted to oxide lang locale
+        /// </summary>
+        public readonly string GuildOxideLocale;
 
         /// <summary>
         /// Constructor for the data parser.
@@ -94,6 +105,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             {
                 return;
             }
+
+            UserOxideLocale = LocaleConverter.GetOxideLocale(interaction.Locale);
+            GuildOxideLocale = LocaleConverter.GetOxideLocale(interaction.GuildLocale);
             
             //Parse the arguments for the application command
             ParseCommand(Data.Options);

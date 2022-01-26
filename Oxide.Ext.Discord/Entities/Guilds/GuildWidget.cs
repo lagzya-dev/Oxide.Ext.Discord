@@ -12,37 +12,37 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     public class GuildWidget
     {
         /// <summary>
-        /// ID of the guild
+        /// Guild id
         /// </summary>
         [JsonProperty("id")]
         public Snowflake Id { get; set; }
         
         /// <summary>
-        /// Name of the guild
+        /// Guild name (2-100 characters)
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
         
         /// <summary>
-        /// Instant invite line for the guild
+        /// Instant invite for the guilds specified widget invite channel
         /// </summary>
         [JsonProperty("instant_invite")]
         public string InstantInvite { get; set; }
         
         /// <summary>
-        /// List of guild channels
+        /// Voice and stage channels which are accessible by @everyone
         /// </summary>
         [JsonProperty("channels")]
         public List<DiscordChannel> Channels { get; set; }
         
         /// <summary>
-        /// List of guild members
+        /// Special widget user objects that includes users presence (Limit 100)
         /// </summary>
         [JsonProperty("members")]
         public List<DiscordUser> Members { get; set; }
         
         /// <summary>
-        /// The count of the presences
+        /// Number of online members in this guild
         /// </summary>
         [JsonProperty("presence_count")]
         public int PresenceCount { get; set; }
