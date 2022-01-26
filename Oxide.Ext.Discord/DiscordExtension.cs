@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Version number of the extension
         /// </summary>
-        private static readonly VersionNumber ExtensionVersion = new VersionNumber(2, 1, 1);
+        private static readonly VersionNumber ExtensionVersion = new VersionNumber(2, 1, 2);
         
         /// <summary>
         /// Global logger for areas that aren't part of a client connection
