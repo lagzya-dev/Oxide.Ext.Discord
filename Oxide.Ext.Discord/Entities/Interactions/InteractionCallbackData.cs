@@ -77,9 +77,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 return;
             }
 
-            if ((Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
+            if ((Flags.Value & ~(MessageFlags.SuppressEmbeds | MessageFlags.Ephemeral)) != 0)
             {
-                throw new InvalidInteractionResponseException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds");
+                throw new InvalidInteractionResponseException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds or MessageFlags.Ephemeral");
             }
         }
     }
