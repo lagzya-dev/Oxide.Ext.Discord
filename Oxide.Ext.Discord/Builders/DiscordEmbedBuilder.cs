@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Builders
 {
@@ -22,7 +23,7 @@ namespace Oxide.Ext.Discord.Builders
         {
             if (title != null && title.Length > 256)
             {
-                throw new Exception("Title cannot be more than 256 characters");
+                throw new InvalidEmbedException("Title cannot be more than 256 characters");
             }
             
             _embed.Title = title;
@@ -39,7 +40,7 @@ namespace Oxide.Ext.Discord.Builders
             if (description == null) throw new ArgumentNullException(nameof(description));
             if (description.Length > 4096)
             {
-                throw new Exception("Description cannot be more than 4096 characters");
+                throw new InvalidEmbedException("Description cannot be more than 4096 characters");
             }
             
             _embed.Description = description;
@@ -70,7 +71,7 @@ namespace Oxide.Ext.Discord.Builders
             if (name == null) throw new ArgumentNullException(nameof(name));
             if (name.Length > 256)
             {
-                throw new Exception("Author name cannot be more than 256 characters");
+                throw new InvalidEmbedException("Author name cannot be more than 256 characters");
             }
             
             _embed.Author = new EmbedAuthor(name, iconUrl, url, proxyIconUrl);
@@ -89,7 +90,7 @@ namespace Oxide.Ext.Discord.Builders
             if (text == null) throw new ArgumentNullException(nameof(text));
             if (text.Length > 2048)
             {
-                throw new Exception("Author name cannot be more than 2048 characters");
+                throw new InvalidEmbedException("Footer text cannot be more than 2048 characters");
             }
             
             _embed.Footer = new EmbedFooter(text, iconUrl, proxyIconUrl);
@@ -222,7 +223,7 @@ namespace Oxide.Ext.Discord.Builders
 
             if ( _embed.Fields.Count >= 25)
             {
-                throw new Exception("Embeds cannot have more than 25 fields");
+                throw new InvalidEmbedException("Embeds cannot have more than 25 fields");
             }
             
             _embed.Fields.Add(new EmbedField("\u200b", "\u200b", inline));
@@ -246,27 +247,27 @@ namespace Oxide.Ext.Discord.Builders
 
             if (_embed.Fields.Count >= 25)
             {
-                throw new Exception("Embeds cannot have more than 25 fields");
+                throw new InvalidEmbedException("Embeds cannot have more than 25 fields");
             }
 
             if (string.IsNullOrEmpty(name))
             {
-                throw new Exception("Embed Fields cannot have a null or empty name");
+                throw new InvalidEmbedException("Embed Fields cannot have a null or empty name");
             }
             
             if (string.IsNullOrEmpty(value))
             {
-                throw new Exception("Embed Fields cannot have a null or empty value");
+                throw new InvalidEmbedException("Embed Fields cannot have a null or empty value");
             }
 
             if (name.Length > 256)
             {
-                throw new Exception("Field name cannot be more than 256 characters");
+                throw new InvalidEmbedException("Field name cannot be more than 256 characters");
             }
             
             if (value.Length > 1024)
             {
-                throw new Exception("Field value cannot be more than 1024 characters");
+                throw new InvalidEmbedException("Field value cannot be more than 1024 characters");
             }
             
             _embed.Fields.Add(new EmbedField(name, value, inline));

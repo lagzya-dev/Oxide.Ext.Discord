@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
@@ -65,12 +66,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 
             if (_chosenType.HasValue && _chosenType.Value != CommandOptionType.SubCommandGroup && _chosenType.Value != CommandOptionType.SubCommand)
             {
-                throw new Exception("Cannot mix sub command / sub command groups with command options");
+                throw new InvalidApplicationCommandException("Cannot mix sub command / sub command groups with command options");
             }
 
             if (Command.Type == ApplicationCommandType.Message || Command.Type == ApplicationCommandType.User)
             {
-                throw new Exception("Message and User commands cannot have sub command groups");
+                throw new InvalidApplicationCommandException("Message and User commands cannot have sub command groups");
             }
 
             _chosenType = CommandOptionType.SubCommandGroup;
@@ -94,12 +95,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 
             if (_chosenType.HasValue && _chosenType.Value != CommandOptionType.SubCommandGroup && _chosenType.Value != CommandOptionType.SubCommand)
             {
-                throw new Exception("Cannot mix sub command / sub command groups with command options");
+                throw new InvalidApplicationCommandException("Cannot mix sub command / sub command groups with command options");
             }
 
             if (Command.Type == ApplicationCommandType.Message || Command.Type == ApplicationCommandType.User)
             {
-                throw new Exception("Message and User commands cannot have sub commands");
+                throw new InvalidApplicationCommandException("Message and User commands cannot have sub commands");
             }
 
             _chosenType = CommandOptionType.SubCommand;
@@ -118,7 +119,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         {
             if (_chosenType.HasValue && (_chosenType.Value == CommandOptionType.SubCommandGroup || _chosenType.Value == CommandOptionType.SubCommand))
             {
-                throw new Exception("Cannot mix sub command / sub command groups with command options");
+                throw new InvalidApplicationCommandException("Cannot mix sub command / sub command groups with command options");
             }
 
             return new CommandOptionBuilder(_options, type, name, description, this);

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Exceptions;
 namespace Oxide.Ext.Discord.Builders.MessageComponents
 {
     /// <summary>
@@ -37,7 +38,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         {
             if (style == ButtonStyle.Link)
             {
-                throw new Exception($"Cannot add link button as action button. Please use {nameof(AddLinkButton)} instead");
+                throw new InvalidMessageComponentException($"Cannot add link button as action button. Please use {nameof(AddLinkButton)} instead");
             }
 
             UpdateActionRow<ButtonComponent>();
@@ -123,11 +124,13 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <param name="customId">Unique ID for the select menu</param>
         /// <param name="label">Label for the input text</param>
         /// <param name="style">Style of the Input Text</param>
+        /// <param name="value">Default value for the Input Text</param>
+        /// <param name="required">Is the Input Text Required to be filled out</param>
         /// <param name="placeholder">Text to display if no value is selected yet</param>
-        /// <param name="minValues">The min number of options you must select</param>
-        /// <param name="maxValues">The max number of options you can select</param>
+        /// <param name="minLength">The min number of options you must select</param>
+        /// <param name="maxLength">The max number of options you can select</param>
         /// <returns><see cref="MessageComponentBuilder"/></returns>
-        public MessageComponentBuilder AddInputText(string customId, string label, InputTextStyles style, string placeholder = null, int minValues = 1, int maxValues = 1)
+        public MessageComponentBuilder AddInputText(string customId, string label, InputTextStyles style, string value = null, bool? required = null, string placeholder = null, int? minLength = null, int? maxLength = null)
         {
             if (string.IsNullOrEmpty(customId))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
@@ -138,9 +141,11 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
                 CustomId = customId,
                 Label = label,
                 Style = style,
+                Value = value,
+                Required = required,
                 Placeholder = placeholder,
-                MinLength = minValues,
-                MaxLength = maxValues,
+                MinLength = minLength,
+                MaxLength = maxLength,
             };
             _current.Components.Add(menu);
             return this;
@@ -162,7 +167,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             //Max of 5 action rows allowed
             if (_components.Count >= 5)
             {
-                throw new Exception("Cannot have more than 5 action rows");
+                throw new InvalidMessageComponentException("Cannot have more than 5 action rows");
             }
             
             //All other components are only 1 per action row so add a new row.

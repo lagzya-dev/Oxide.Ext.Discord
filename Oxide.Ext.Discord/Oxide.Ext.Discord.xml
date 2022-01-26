@@ -90,11 +90,6 @@
             If the connection is initialized and not disconnected
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.BotClient.ConnectedSuccessfully">
-            <summary>
-            If the bot has successfully connected to the websocket at least once
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.BotClient.Application">
             <summary>
             Application reference for this bot
@@ -674,16 +669,18 @@
             <param name="disabled">If the select menu should be disabled</param>
             <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles,System.String,System.Int32,System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Adds a select menu to a new action row
             </summary>
             <param name="customId">Unique ID for the select menu</param>
             <param name="label">Label for the input text</param>
             <param name="style">Style of the Input Text</param>
+            <param name="value">Default value for the Input Text</param>
+            <param name="required">Is the Input Text Required to be filled out</param>
             <param name="placeholder">Text to display if no value is selected yet</param>
-            <param name="minValues">The min number of options you must select</param>
-            <param name="maxValues">The max number of options you can select</param>
+            <param name="minLength">The min number of options you must select</param>
+            <param name="maxLength">The max number of options you can select</param>
             <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.Build">
@@ -3866,7 +3863,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Icon">
             <summary>
-            icon hash
+            icon hash of the group DM  
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.OwnerId">
@@ -4518,7 +4515,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.Stages.PrivacyLevel.Public">
             <summary>
-            The Stage instance is visible publicly, such as on Stage discovery.
+            The Stage instance is visible publicly. (deprecated)
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.Stages.PrivacyLevel.GuildOnly">
@@ -4553,7 +4550,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.DiscoverableDisabled">
             <summary>
-            Whether or not Stage discovery is disabled
+            Whether or not Stage discovery is disabled (deprecated)   
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.Topic">
@@ -4768,6 +4765,11 @@
             <summary>
             Whether non-moderators can add other non-moderators to a thread
             Only available on private threads
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata.CreateTimestamp">
+            <summary>
+            Timestamp when the thread was created; only populated for threads created after 2022-01-09
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.VideoQualityMode">
@@ -6944,6 +6946,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildWelcomeScreen(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.GuildWelcomeScreen},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Returns the Welcome Screen object for the guild.
+            Requires the `MANAGE_GUILD` permission.
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with welcome screen for the guild</param>
@@ -7638,6 +7641,11 @@
             The description of a Community guild
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildPreview.Stickers">
+            <summary>
+            Custom guild stickers
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildPruneBegin">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#begin-guild-prune">Guild Prune Begin</a>
@@ -7773,32 +7781,32 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildWidget.Id">
             <summary>
-            ID of the guild
+            Guild id
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildWidget.Name">
             <summary>
-            Name of the guild
+            Guild name (2-100 characters)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildWidget.InstantInvite">
             <summary>
-            Instant invite line for the guild
+            Instant invite for the guilds specified widget invite channel
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildWidget.Channels">
             <summary>
-            List of guild channels
+            Voice and stage channels which are accessible by @everyone
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildWidget.Members">
             <summary>
-            List of guild members
+            Special widget user objects that includes users presence (Limit 100)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildWidget.PresenceCount">
             <summary>
-            The count of the presences
+            Number of online members in this guild
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildWidgetSettings">
@@ -8468,13 +8476,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate">
             <summary>
-            Represents a <a href="">Command Followup</a> within discord.
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate.Flags">
-            <summary>
-            Callback data flags
-            Set to 64 to make your response ephemeral
+            Represents a <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message">Command Followup</a> within discord.
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupUpdate">
@@ -8516,7 +8518,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Autocomplete">
             <summary>
-            Enable autocomplete interactions for this option
+            If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Choices">
@@ -8865,6 +8867,18 @@
              For components, the message they were attached to
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Locale">
+            <summary>
+            The selected language of the invoking user
+            <a href="https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales">Discord Locale Values</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GuildLocale">
+            <summary>
+            The guild's preferred locale, if invoked in a guild
+            <a href="https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales">Discord Locale Values</a>
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Parsed">
             <summary>
             Returns the interaction parsed args to make it easier to process that interaction.
@@ -8899,7 +8913,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Create a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message">Create Followup Message</a>
@@ -9089,21 +9103,21 @@
             Parsed command for the interaction if an application command
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.CommandGroup">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.CommandGroup">
             <summary>
             Command group for the interaction if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Type if an application command
             Null if command group is not used for the command.
             Defaults to empty string if command does not have a command group
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.SubCommand">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.SubCommand">
             <summary>
             Sub Command for the interaction if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Typ  if an application command
             Null if sub command group is not used for the command.
             Defaults to empty string if command does not have sub command
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.Args">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.Args">
             <summary>
             Interaction Data Supplied Args if <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.ChatInput"/> Command Type if an application command
             </summary>
@@ -9121,6 +9135,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.SelectMenuValues">
             <summary>
             If a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.UserOxideLocale">
+            <summary>
+            Discord User's locale converted to oxide lang locale
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.GuildOxideLocale">
+            <summary>
+            Discord Guild's locale converted to oxide lang locale
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
@@ -9461,6 +9485,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Placeholder">
             <summary>
             The placeholder for the text input field
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Value">
+            <summary>
+            The pre-filled value for text input
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Required">
+            <summary>
+            Is the Input Text Required to be filled out
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.#ctor">
@@ -10765,6 +10799,11 @@
             Attachments for the message
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.Flags">
+            <summary>
+            Attachments for the message
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.FileAttachments">
             <summary>
             Attachments for a discord message
@@ -11764,8 +11803,8 @@
             <summary>
             Converts snowflake to a string
             </summary>
-            <param name="snowflake">Snowflake to be converted to ulong</param>
-            <returns>Snowflake ID as ulong</returns>
+            <param name="snowflake">Snowflake to be converted to string</param>
+            <returns>Snowflake ID as string</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Snowflake.op_Explicit(System.String)~Oxide.Ext.Discord.Entities.Snowflake">
             <summary>
@@ -13134,6 +13173,128 @@
             Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.BaseDiscordException">
+            <summary>
+            Represents a base discord extension
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.BaseDiscordException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidApplicationCommandException">
+            <summary>
+            Represents an invalid application command
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidApplicationCommandException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidChannelException">
+            <summary>
+            Represents using an invalid channel
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidChannelException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidDiscordColorException">
+            <summary>
+            Represents an invalid discord color
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidDiscordColorException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidEmbedException">
+            <summary>
+            Represents an invalid embed
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidEmbedException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidEmojiException">
+            <summary>
+            Error thrown when an emoji string fails validation
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidEmojiException.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="emojiValue">Value for the emoji</param>
+            <param name="validationError">Validation error message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidFileNameException">
+            <summary>
+            Exception throw when an attachment filename contains invalid characters
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidFileNameException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="fileName">invalid file name</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidInteractionResponseException">
+            <summary>
+            Error thrown when an interaction response is invalid
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidInteractionResponseException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidMessageComponentException">
+            <summary>
+            Represents an invalid message component
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidMessageComponentException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidMessageException">
+            <summary>
+            Represents an invalid message
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidMessageException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidSnowflakeException">
+            <summary>
+            Exception thrown when an invalid Snowflake ID is used in an API call
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidSnowflakeException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="paramName">Name of the parameter that is invalid</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.DiscordUserExt">
             <summary>
             Adds extension methods to Discord User to allow sending server chat commands to the player
@@ -13775,6 +13936,25 @@
             <param name="message">Message to make block quote</param>
             <returns>Multiline block quote formatted message</returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.LocaleConverter">
+            <summary>
+            Converts discord locale codes into oxide locale codes
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.LocaleConverter.GetOxideLocale(System.String)">
+            <summary>
+            Returns the oxide locale for a given discord locale
+            </summary>
+            <param name="discordLocale">Discord locale to get oxide locale for</param>
+            <returns>Oxide locale if it exists; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.LocaleConverter.GetDiscordLocale(System.String)">
+            <summary>
+            Returns the discord locale for a given oxide locale
+            </summary>
+            <param name="oxideLocale">oxide locale to get discord locale for</param>
+            <returns>Discord locale if it exists; null otherwise</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Time">
             <summary>
             Helper methods relating to time
@@ -13874,6 +14054,12 @@
             </summary>
             <param name="emoji"></param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.Validation.ValidateFilename(System.String)">
+            <summary>
+            Checks if the filename is a valid discord filename.
+            </summary>
+            <param name="filename">Filename to validate</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IFileAttachments">
             <summary>
@@ -15486,6 +15672,11 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener._sequence">
             <summary>
             The current sequence number for the websocket
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.WebSockets.SocketListener.SocketHasConnected">
+            <summary>
+            If the bot has successfully connected to the websocket at least once
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger,Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler)">

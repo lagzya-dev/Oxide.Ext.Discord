@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Exceptions;
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
     /// <summary>
@@ -95,6 +96,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateWebhook(DiscordClient client, Snowflake channelId, string name, string avatar = null, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
             Dictionary<string, string> data = new Dictionary<string, string>
             {
                 ["name"] = name,
@@ -114,6 +116,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetChannelWebhooks(DiscordClient client, Snowflake channelId, Action<List<DiscordWebhook>> callback = null, Action<RestError> error = null)
         {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
             client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.GET, null, callback, error);
         }
 
@@ -127,6 +130,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetGuildWebhooks(DiscordClient client, Snowflake guildId, Action<List<DiscordWebhook>> callback = null, Action<RestError> error = null)
         {
+            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
             client.Bot.Rest.DoRequest($"/guilds/{guildId}/webhooks", RequestMethod.GET, null, callback, error);
         }
 
@@ -140,6 +144,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetWebhook(DiscordClient client, Snowflake webhookId, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
+            if (!webhookId.IsValid()) throw new InvalidSnowflakeException(nameof(webhookId));
             client.Bot.Rest.DoRequest($"/webhooks/{webhookId}", RequestMethod.GET, null, callback, error);
         }
 
@@ -156,6 +161,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetWebhookWithToken(DiscordClient client, Snowflake webhookId, string webhookToken, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
+            if (!webhookId.IsValid()) throw new InvalidSnowflakeException(nameof(webhookId));
             client.Bot.Rest.DoRequest($"/webhooks/{webhookId}/{webhookToken}", RequestMethod.GET, null, callback, error);
         }
 
@@ -191,6 +197,8 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ModifyWebhook(DiscordClient client, string name = null, string avatar = null, Snowflake? channelId = null, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
+            if (channelId.HasValue && !channelId.Value.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
+            
             Dictionary<string, object> data = new Dictionary<string, object>
             {
                 ["name"] = name ,
@@ -265,6 +273,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             }
             
             message.Validate();
+            message.ValidateWebhookMessage();
             
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
@@ -287,6 +296,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
 
             executeParams.Wait = true;
             message.Validate();
+            message.ValidateWebhookMessage();
             
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
@@ -302,6 +312,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetWebhookMessage(DiscordClient client, Snowflake messageId, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (!messageId.IsValid()) throw new InvalidSnowflakeException(nameof(messageId));
             if (messageParams == null)
             {
                 messageParams = new WebhookMessageParams();
@@ -339,6 +350,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteWebhookMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RestError> error = null)
         {
+            if (!messageId.IsValid()) throw new InvalidSnowflakeException(nameof(messageId));
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback, error);
         }
     }

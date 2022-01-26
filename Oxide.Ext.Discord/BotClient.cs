@@ -52,12 +52,7 @@ namespace Oxide.Ext.Discord
         /// If the connection is initialized and not disconnected
         /// </summary>
         public bool Initialized { get; private set; }
-        
-        /// <summary>
-        /// If the bot has successfully connected to the websocket at least once
-        /// </summary>
-        public bool ConnectedSuccessfully { get; internal set; }
-        
+
         /// <summary>
         /// Application reference for this bot
         /// </summary>

@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _initial = false;
             }
 
-            if (!_client.ConnectedSuccessfully)
+            if (!_listener.SocketHasConnected)
             {
                 _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(HeartbeatElapsed)} Websocket has not yet connected successfully. Skipping Heartbeat.");
                 return;

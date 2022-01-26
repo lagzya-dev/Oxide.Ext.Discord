@@ -1,6 +1,8 @@
 using System;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Exceptions;
+
 namespace Oxide.Ext.Discord.Builders.MessageComponents
 {
     /// <summary>
@@ -35,7 +37,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
 
             if (_menu.Options.Count >= 25)
             {
-                throw new Exception("Select Menu Options cannot have more than 25 options");
+                throw new InvalidMessageComponentException("Select Menu Options cannot have more than 25 options");
             }
             
             _menu.Options.Add(new SelectMenuOption

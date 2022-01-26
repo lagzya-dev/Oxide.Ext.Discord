@@ -23,6 +23,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// <summary>
         /// A text box for inserting written responses
         /// </summary>
-        InputText = 3
+        InputText = 4
     }
 }

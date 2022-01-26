@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public bool? Required { get; set; }
         
         /// <summary>
-        /// Enable autocomplete interactions for this option
+        /// If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
         /// </summary>
         [JsonProperty("autocomplete")]
         public bool? Autocomplete { get; set; }
