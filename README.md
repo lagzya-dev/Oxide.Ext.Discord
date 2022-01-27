@@ -75,4 +75,4 @@ The config allows you to modify the command prefixes for commands that use the d
 
 ## Contributing
 
-Want to contribute? Create a fork of the repo and create a pull request for any changes you wish to make!
+Want to contribute? Create a fork of the repo and create a pull request for any changes you wish to make! 
