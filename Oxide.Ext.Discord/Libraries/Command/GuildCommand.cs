@@ -23,12 +23,18 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 return false;
             }
 
-            if (_allowedChannels.Count != 0 && !_allowedChannels.Contains(channel.Id) && (!channel.ParentId.HasValue || !_allowedChannels.Contains(channel.ParentId.Value)))
+            if (_allowedChannels.Count == 0 || _allowedChannels.Contains(channel.Id))
             {
-                return false;
+                return true;
             }
 
-            return true;
+            if (channel.ParentId.HasValue && _allowedChannels.Contains(channel.ParentId.Value))
+            {
+                return true;
+            }
+            
+            return false;
+
         }
     }
 }
