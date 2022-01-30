@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Configuration;
@@ -10,6 +11,7 @@ using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord
 {
@@ -21,7 +23,9 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Test version information if using test version
         /// </summary>
-        public const string TestVersion = "";
+        internal const string TestVersion = "";
+        
+        internal const string Authors = "PsychoTea & DylanSMR & Tricky & Kirollos & MJSU";
 
         /// <summary>
         /// Discord Extension JSON Serialization settings
@@ -34,12 +38,17 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Version number of the extension
         /// </summary>
-        private static readonly VersionNumber ExtensionVersion = new VersionNumber(2, 1, 2);
+        internal static VersionNumber ExtensionVersion;
+        
+        /// <summary>
+        /// Gets full extension version including test version
+        /// </summary>
+        internal static string FullExtensionVersion { get; private set; }
         
         /// <summary>
         /// Global logger for areas that aren't part of a client connection
         /// </summary>
-        public static ILogger GlobalLogger;
+        internal static ILogger GlobalLogger;
 
         internal static DiscordLink DiscordLink;
         internal static DiscordCommand DiscordCommand;
@@ -52,7 +61,9 @@ namespace Oxide.Ext.Discord
         /// <param name="manager">Oxide extension manager</param>
         public DiscordExtension(ExtensionManager manager) : base(manager)
         {
-            
+            AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
+            ExtensionVersion = new VersionNumber(assembly.Version.Major, assembly.Version.Minor, assembly.Version.Build);
+            FullExtensionVersion = $"{ExtensionVersion}{TestVersion}";
         }
 
         /// <summary>
@@ -63,17 +74,12 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Authors for the extension
         /// </summary>
-        public override string Author => "PsychoTea & DylanSMR & Tricky & Kirollos & MJSU";
+        public override string Author => Authors;
 
         /// <summary>
         /// Version number used by oxide
         /// </summary>
         public override VersionNumber Version => ExtensionVersion;
-
-        /// <summary>
-        /// Gets full extension version including test information
-        /// </summary>
-        public static string GetExtensionVersion => ExtensionVersion.ToString() + TestVersion; 
 
         /// <summary>
         /// Called when mod is loaded
@@ -82,7 +88,7 @@ namespace Oxide.Ext.Discord
         {
             GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new Logger(DiscordLogLevel.Warning) : new Logger(DiscordLogLevel.Debug);
             
-            GlobalLogger.Info($"Using Discord Extension Version: {GetExtensionVersion}");
+            GlobalLogger.Info($"Using Discord Extension Version: {FullExtensionVersion}");
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
                 GlobalLogger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);
@@ -107,6 +113,8 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
             Interface.Oxide.RootPluginManager.OnPluginRemoved +=  DiscordClient.OnPluginRemoved;
+            
+            Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
         }
 
         /// <summary>

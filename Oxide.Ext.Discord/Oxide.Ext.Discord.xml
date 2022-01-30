@@ -2223,6 +2223,11 @@
             Version number of the extension
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.DiscordExtension.FullExtensionVersion">
+            <summary>
+            Gets full extension version including test version
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.DiscordExtension.GlobalLogger">
             <summary>
             Global logger for areas that aren't part of a client connection
@@ -2247,11 +2252,6 @@
         <member name="P:Oxide.Ext.Discord.DiscordExtension.Version">
             <summary>
             Version number used by oxide
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.DiscordExtension.GetExtensionVersion">
-            <summary>
-            Gets full extension version including test information
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.DiscordExtension.OnModLoad">

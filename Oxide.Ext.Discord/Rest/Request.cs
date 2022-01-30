@@ -218,7 +218,7 @@ namespace Oxide.Ext.Discord.Rest
             
             HttpWebRequest req = (HttpWebRequest) WebRequest.Create(RequestUrl);
             req.Method = Method.ToString();
-            req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.GetExtensionVersion})";
+            req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.FullExtensionVersion})";
             req.Timeout = TimeoutDuration * 1000;
             req.ContentLength = 0;
             req.Headers.Set("Authorization", _authHeader);

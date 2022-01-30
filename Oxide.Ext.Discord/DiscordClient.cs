@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord
     /// </summary>
     public class DiscordClient
     {
-        internal static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
+        public static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
 
         private static readonly Regex TokenValidator = new Regex(@"^[\w-]{24}\.[\w-]{6}\.[\w-]{27}$", RegexOptions.Compiled);
         
@@ -93,7 +93,7 @@ namespace Oxide.Ext.Discord
 
             if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
             {
-                Logger.Warning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
+                Logger.Warning($"Using Discord Test Version: {DiscordExtension.FullExtensionVersion}");
             }
             
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {Owner.Name}");
