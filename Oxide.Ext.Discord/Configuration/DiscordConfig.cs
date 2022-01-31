@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Configuration
         /// <summary>
         /// Discord Config Logging Options
         /// </summary>
-        [JsonProperty("Commands")]
+        [JsonProperty("Logging")]
         public DiscordLoggingConfig Logging { get; set; }
         
         /// <summary>
