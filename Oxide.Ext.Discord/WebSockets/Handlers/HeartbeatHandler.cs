@@ -137,7 +137,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             HeartbeatAcknowledged = false;
             _listener.SendHeartbeat();
             _client.CallHook(DiscordExtHooks.OnDiscordHeartbeatSent);
-            _logger.Debug("Heartbeat sent - {{0}}ms interval.", _timer.Interval);
+            _logger.Debug("Heartbeat sent - {0}ms interval.", _timer.Interval);
         }
         #endregion
     }
