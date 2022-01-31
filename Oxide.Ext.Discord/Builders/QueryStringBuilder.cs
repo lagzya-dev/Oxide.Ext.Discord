@@ -53,6 +53,10 @@ namespace Oxide.Ext.Discord.Builders
         /// <returns></returns>
         public override string ToString()
         {
+            if (_builder[_builder.Length - 1] == '&')
+            {
+                _builder.Remove(_builder.Length - 1, 1);
+            }
             return _builder.ToString();
         }
     }
