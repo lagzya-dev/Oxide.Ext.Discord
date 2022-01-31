@@ -40,7 +40,7 @@ namespace Oxide.Ext.Discord.Rest
         public readonly RestHandler Handler;
 
         private readonly ILogger _logger;
-        private readonly List<Request> _requests = new List<Request>();
+        private readonly List<Request.Request> _requests = new List<Request.Request>();
         private readonly object _syncRoot = new object();
         
         private Thread _thread;
@@ -79,7 +79,7 @@ namespace Oxide.Ext.Discord.Rest
         /// Queues a new request for the buck
         /// </summary>
         /// <param name="request">Request to be queued</param>
-        public void QueueRequest(Request request)
+        public void QueueRequest(Request.Request request)
         {
             request.Bucket = this;
             lock (_syncRoot)
@@ -99,7 +99,7 @@ namespace Oxide.Ext.Discord.Rest
         /// Either the request completed successfully or there was an error and failed to succeed after 3 attempts
         /// </summary>
         /// <param name="request">Request to remove</param>
-        public void DequeueRequest(Request request)
+        public void DequeueRequest(Request.Request request)
         {
             lock (_syncRoot)
             {
@@ -151,7 +151,7 @@ namespace Oxide.Ext.Discord.Rest
 
             for (int index = 0; index < RequestCount(); index++)
             {
-                Request request = GetRequest(index);
+                Request.Request request = GetRequest(index);
                 if (request.HasTimedOut())
                 {
                     request.Close(false);
@@ -176,7 +176,7 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
 
-        private Request GetRequest(int index)
+        private Request.Request GetRequest(int index)
         {
             lock (_syncRoot)
             {

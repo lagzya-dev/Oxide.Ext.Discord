@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using Oxide.Ext.Discord.Logging;
-namespace Oxide.Ext.Discord.Rest
+namespace Oxide.Ext.Discord.Rest.Request
 {
     /// <summary>
     /// Handles Assigning new requests to buckets

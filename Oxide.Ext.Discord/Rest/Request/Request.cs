@@ -13,7 +13,7 @@ using Oxide.Ext.Discord.Rest.Multipart;
 using RequestMethod = Oxide.Ext.Discord.Entities.Api.RequestMethod;
 using Time = Oxide.Ext.Discord.Helpers.Time;
 
-namespace Oxide.Ext.Discord.Rest
+namespace Oxide.Ext.Discord.Rest.Request
 {
     /// <summary>
     /// Represent a Discord API request

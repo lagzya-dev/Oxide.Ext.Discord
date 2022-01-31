@@ -2,7 +2,7 @@ using System;
 using Oxide.Core;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
-namespace Oxide.Ext.Discord.Rest
+namespace Oxide.Ext.Discord.Rest.Request
 {
     /// <summary>
     /// Handles request that return data
