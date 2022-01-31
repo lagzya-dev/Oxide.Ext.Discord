@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Configuration
     /// <summary>
     /// Represents discord extension command configuration
     /// </summary>
-    public class DiscordCommandsConfig
+    internal class DiscordCommandsConfig
     {
         /// <summary>
         /// Array of command prefixes for discord commands

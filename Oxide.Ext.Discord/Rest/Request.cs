@@ -324,10 +324,10 @@ namespace Oxide.Ext.Discord.Rest
                         }
                         catch (Exception ex)
                         {
-                            _logger.Exception("An exception occured during OnError callback for request: [{0}] {1}", Method.ToString(), RequestUrl,  ex);
+                            _logger.Exception("An exception occured during OnError callback for request: [{0}] {1}", Method, RequestUrl,  ex);
                         }
 
-                        if (_lastError.ShowErrorMessage)
+                        if (_lastError.ShowErrorMessage && (_lastError.DiscordError == null || !DiscordExtension.DiscordConfig.Logging.HiddenDiscordErrorCodes.Contains(_lastError.DiscordError.Code)))
                         {
                             _logger.Log(_lastError.LogLevel, _lastError.LogMessage, _lastError.Exception);
                         }

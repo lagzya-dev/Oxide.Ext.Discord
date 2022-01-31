@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Configuration;
 using Oxide.Ext.Discord.Logging;
@@ -8,13 +9,19 @@ namespace Oxide.Ext.Discord.Configuration
     /// <summary>
     /// Represents Discord Extension Config
     /// </summary>
-    public class DiscordConfig : ConfigFile
+    internal class DiscordConfig : ConfigFile
     {
         /// <summary>
-        /// Discord Config commands options
+        /// Discord Config Command Options
         /// </summary>
         [JsonProperty("Commands")]
         public DiscordCommandsConfig Commands { get; set; }
+        
+        /// <summary>
+        /// Discord Config Logging Options
+        /// </summary>
+        [JsonProperty("Commands")]
+        public DiscordLoggingConfig Logging { get; set; }
         
         /// <summary>
         /// Constructor for discord config
@@ -39,6 +46,10 @@ namespace Oxide.Ext.Discord.Configuration
                 {
                     CommandPrefixes = Commands?.CommandPrefixes ?? new[] {'/', '!'}
                 };
+                Logging = new DiscordLoggingConfig
+                {
+                    HiddenDiscordErrorCodes = Logging?.HiddenDiscordErrorCodes ?? new HashSet<int>()
+                };
             }
             catch (Exception ex)
             {
@@ -46,6 +57,10 @@ namespace Oxide.Ext.Discord.Configuration
                 Commands = new DiscordCommandsConfig
                 {
                     CommandPrefixes = new[] {'/', '!'}
+                };
+                Logging = new DiscordLoggingConfig()
+                {
+                    HiddenDiscordErrorCodes = new HashSet<int>()
                 };
                 Save(filename);
             }
