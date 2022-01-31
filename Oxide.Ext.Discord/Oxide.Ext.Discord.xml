@@ -14862,6 +14862,11 @@
             <param name="data"></param>
             <param name="contentType"></param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Rest.Multipart.MultipartHandler">
+            <summary>
+            Handles converting Multipart requests to their respective byte[]
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Rest.RateLimitHandler">
             <summary>
             Represents a global rate limit handler for a bot

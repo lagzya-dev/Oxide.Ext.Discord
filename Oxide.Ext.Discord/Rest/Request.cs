@@ -111,9 +111,6 @@ namespace Oxide.Ext.Discord.Rest
         private readonly ILogger _logger;
         private RestError _lastError;
         private bool _success;
-        
-        private static readonly byte[] NewLine = Encoding.UTF8.GetBytes("\r\n");
-        private static readonly byte[] Separator = Encoding.UTF8.GetBytes("--");
 
         /// <summary>
         /// Creates a new request
@@ -232,58 +229,6 @@ namespace Oxide.Ext.Discord.Rest
             return req;
         }
 
-        private byte[] GetMultipartFormData()
-        {
-            StringBuilder sb = new StringBuilder();
-            byte[] boundary = Encoding.UTF8.GetBytes(Boundary);
-
-            List<byte> data = new List<byte>();
-
-            foreach (IMultipartSection section in MultipartSections)
-            {
-                AddMultipartSection(sb, section, data, boundary);
-            }
-
-            data.AddRange(NewLine);
-            data.AddRange(Separator);
-            data.AddRange(boundary);
-            data.AddRange(Separator);
-            data.AddRange(NewLine);
-            
-            return data.ToArray();
-        }
-
-        private void AddMultipartSection(StringBuilder sb, IMultipartSection section, List<byte> data, byte[] boundary)
-        {
-            sb.Length = 0;
-            sb.Append("Content-Disposition: form-data; name=\"");
-            sb.Append(section.SectionName);
-            sb.Append("\"");
-            if (section.FileName != null)
-            {
-                sb.Append("; filename=\"");
-                sb.Append(section.FileName);
-                sb.Append("\"");
-            }
-
-            if (!string.IsNullOrEmpty(section.ContentType))
-            {
-                sb.AppendLine();
-                sb.Append("Content-Type: ");
-                sb.Append(section.ContentType);
-            }
-
-            sb.AppendLine();
-            
-            data.AddRange(NewLine);
-            data.AddRange(Separator);
-            data.AddRange(boundary);
-            data.AddRange(NewLine);
-            data.AddRange(Encoding.UTF8.GetBytes(sb.ToString()));
-            data.AddRange(NewLine);
-            data.AddRange(section.Data);
-        }
-        
         private void SetRequestBody()
         {
             if (Data == null || Contents != null)
@@ -302,7 +247,7 @@ namespace Oxide.Ext.Discord.Rest
                 }
 
                 Boundary = Guid.NewGuid().ToString().Replace("-", "");
-                Contents = GetMultipartFormData();
+                Contents = MultipartHandler.GetMultipartFormData(Boundary, MultipartSections);
             }
             else
             {
