@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Entities.Api
 {
@@ -44,6 +45,19 @@ namespace Oxide.Ext.Discord.Entities.Api
         public string Message { get; internal set; }
         
         /// <summary>
+        /// Error message for the request
+        /// </summary>
+        public string LogMessage { get; internal set; }
+        
+        internal DiscordLogLevel LogLevel { get; set; }
+        internal Exception LogException { get; set; }
+
+        /// <summary>
+        /// Should we display the error message
+        /// </summary>
+        public bool ShowErrorMessage = true;
+        
+        /// <summary>
         /// Creates a new rest error
         /// </summary>
         /// <param name="exception">The web exception we received</param>
@@ -56,6 +70,19 @@ namespace Oxide.Ext.Discord.Entities.Api
             Url = url;
             RequestMethod = requestMethod;
             Data = data;
+        }
+
+        /// <summary>
+        /// Sets the log information for the error
+        /// </summary>
+        /// <param name="logLevel">Error log level</param>
+        /// <param name="message">Error message</param>
+        /// <param name="exception">Error exception if present</param>
+        internal void SetLog(DiscordLogLevel logLevel, string message, Exception exception = null)
+        {
+            LogLevel = logLevel;
+            LogMessage = message;
+            LogException = exception;
         }
     }
 }

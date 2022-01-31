@@ -92,7 +92,7 @@ namespace Oxide.Ext.Discord
                 Intents = settings.Intents
             };
 
-            Logger = new Logger(Settings.LogLevel);
+            Logger = new DiscordLogger(Settings.LogLevel);
             
             Initialized = true;
             
@@ -116,7 +116,7 @@ namespace Oxide.Ext.Discord
             }
 
             bot.AddClient(client);
-            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {client.Owner.Name} to bot {bot.BotUser?.GetFullUserName}");
+            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {{0}} to bot {{1}}", client.Owner.Name, bot.BotUser?.GetFullUserName);
             return bot;
         }
 
@@ -174,7 +174,7 @@ namespace Oxide.Ext.Discord
             _clients.RemoveAll(c => c == client);
             _clients.Add(client);
             
-            Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {client.Owner.Title}");
+            Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Owner.Title);
             
             if (_clients.Count == 1)
             {
@@ -267,7 +267,7 @@ namespace Oxide.Ext.Discord
         private void UpdateLogLevel(DiscordLogLevel level)
         {
             Logger.UpdateLogLevel(level);
-            Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {Settings.LogLevel.ToString()} to: {level.ToString()}");
+            Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {{0}} to: {{1}}", Settings.LogLevel, level);
             Settings.LogLevel = level;
         }
 
@@ -376,12 +376,12 @@ namespace Oxide.Ext.Discord
             DiscordGuild existing = Servers[guild.Id];
             if (existing != null)
             {
-                Logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Updating Existing Guild {guild.Id.ToString()}");
+                Logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Updating Existing Guild {{0}}", guild.Id);
                 existing.Update(guild);
             }
             else
             {
-                Logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Adding new Guild {guild.Id.ToString()}");
+                Logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Adding new Guild {{0}}", guild.Id);
                 Servers[guild.Id] = guild;
             }
         }
@@ -407,7 +407,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
             
-            Logger.Verbose($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Adding New Channel {channel.Id.ToString()}");
+            Logger.Verbose($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Adding New Channel {{0}}", channel.Id);
             DirectMessagesByChannelId[channel.Id] = channel;
 
             foreach (KeyValuePair<Snowflake,DiscordUser> recipient in channel.Recipients)

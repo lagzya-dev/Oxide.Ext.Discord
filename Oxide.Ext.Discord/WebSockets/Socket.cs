@@ -193,10 +193,7 @@ namespace Oxide.Ext.Discord.WebSockets
         internal bool Send(CommandPayload payload)
         {
             string payloadData = JsonConvert.SerializeObject(payload, DiscordExtension.ExtensionSerializeSettings);
-            if (_logger.IsLogging(DiscordLogLevel.Verbose))
-            {
-                _logger.Verbose($"{nameof(Socket)}.{nameof(Send)} Payload: {payloadData}");
-            }
+            _logger.Verbose($"{nameof(Socket)}.{nameof(Send)} Payload: {{0}}", payloadData);
 
             if (_socket == null)
             {
@@ -281,7 +278,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             _reconnectTimer.Elapsed += ReconnectWebsocket;
 
-            _logger.Warning($"Attempting to reconnect to Discord... [Retry={_reconnectRetries.ToString()}]");
+            _logger.Warning("Attempting to reconnect to Discord... [Retry={0}]", _reconnectRetries);
             _reconnectTimer.Start();
             _reconnectRetries++;
         }

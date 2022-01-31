@@ -4,6 +4,7 @@ using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription
 {
@@ -56,7 +57,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 }
                 catch(Exception ex)
                 {
-                    DiscordExtension.GlobalLogger.Exception($"An exception occured for discord subscription in channel {_channelId.ToString()} for plugin {_plugin?.Name}", ex);   
+                    DiscordExtension.GlobalLogger.Exception("An exception occured for discord subscription in channel {0} for plugin {1}", _channelId, _plugin?.Name, ex);   
                 }
             });
         }

@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord
     /// </summary>
     public class DiscordClient
     {
-        public static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
+        internal static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
 
         private static readonly Regex TokenValidator = new Regex(@"^[\w-]{24}\.[\w-]{6}\.[\w-]{27}$", RegexOptions.Compiled);
         
@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord
         public void Connect(DiscordSettings settings)
         {
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
-            Logger = new Logger(settings.LogLevel);
+            Logger = new DiscordLogger(settings.LogLevel);
             
             if (string.IsNullOrEmpty(Settings.ApiToken))
             {
@@ -86,17 +86,15 @@ namespace Oxide.Ext.Discord
 
             if (!TokenValidator.IsMatch(Settings.ApiToken))
             {
-                Logger.Warning($"API Token does not appear to be a valid discord bot token: {Settings.GetHiddenToken()}. " +
-                               "Please confirm you are using the correct bot token. " +
-                               "If the token is correct and this message is showing please let the Discord Extension Developers know.");
+                Logger.Warning("API Token does not appear to be a valid discord bot token: {0}. Please confirm you are using the correct bot token. If the token is correct and this message is showing please let the Discord Extension Developers know.", Settings.GetHiddenToken());
             }
 
             if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
             {
-                Logger.Warning($"Using Discord Test Version: {DiscordExtension.FullExtensionVersion}");
+                Logger.Warning("Using Discord Test Version: {0}", DiscordExtension.FullExtensionVersion);
             }
             
-            Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {Owner.Name}");
+            Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {{0}}", Owner.Name);
 
             Bot = BotClient.GetOrCreate(this);
 
@@ -216,7 +214,7 @@ namespace Oxide.Ext.Discord
                     DiscordClient client = Clients[plugin.Name];
                     if (client == null)
                     {
-                        DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(OnPluginAdded)} Creating DiscordClient for plugin {plugin.Name}");
+                        DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(OnPluginAdded)} Creating DiscordClient for plugin {{0}}", plugin.Name);
                         client = new DiscordClient(plugin);
                         Clients[plugin.Name] = client;
                     }
@@ -259,7 +257,7 @@ namespace Oxide.Ext.Discord
             
             client.Disconnect();
             
-            DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {client.Owner.Name}");
+            DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {{0}}", client.Owner.Name);
             foreach (FieldInfo field in client.Owner.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)

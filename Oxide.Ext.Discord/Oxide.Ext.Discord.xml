@@ -2694,6 +2694,16 @@
             Full string response if we received one
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RestError.LogMessage">
+            <summary>
+            Error message for the request
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RestError.ShowErrorMessage">
+            <summary>
+            Should we display the error message
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RestError.#ctor(System.Net.WebException,System.Uri,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.Object)">
             <summary>
             Creates a new rest error
@@ -2702,6 +2712,14 @@
             <param name="url">Url that was called</param>
             <param name="requestMethod">Request method that was used</param>
             <param name="data">Data passed to the request</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RestError.SetLog(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Exception)">
+            <summary>
+            Sets the log information for the error
+            </summary>
+            <param name="logLevel">Error log level</param>
+            <param name="message">Error message</param>
+            <param name="exception">Error exception if present</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Api.RestResponse">
             <summary>
@@ -14484,6 +14502,26 @@
             <param name="plugin">Plugin to remove subscriptions for</param>
             <exception cref="T:System.ArgumentNullException">Exception if plugin is null</exception>
         </member>
+        <member name="T:Oxide.Ext.Discord.Logging.DiscordLogger">
+            <summary>
+            Represents a discord extension logger
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.#ctor(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+            <summary>
+            Creates a new logger with the given log level
+            </summary>
+            <param name="logLevel">Log level of the logger</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.Log(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.UpdateLogLevel(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.IsLogging(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Logging.DiscordLogLevel">
             <summary>
             Represents the log level for a logger
@@ -14529,43 +14567,6 @@
             Represents an interface for a logger
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Verbose(System.String)">
-            <summary>
-            Log a verbose message
-            </summary>
-            <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Debug(System.String)">
-            <summary>
-            Log a Debug message
-            </summary>
-            <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Info(System.String)">
-            <summary>
-            Log a Info message
-            </summary>
-            <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Warning(System.String)">
-            <summary>
-            Log a Warning message
-            </summary>
-            <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Error(System.String)">
-            <summary>
-            Log a Error message
-            </summary>
-            <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Exception(System.String,System.Exception)">
-            <summary>
-            Log a Exception message
-            </summary>
-            <param name="message">Message to log</param>
-            <param name="ex">Exception to log</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Logging.ILogger.UpdateLogLevel(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
             <summary>
             Updates the log level for the current logger
@@ -14579,66 +14580,13 @@
             <param name="level">Log Level to check</param>
             <returns>True if the logger is logging for the given log level</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Logging.Logger">
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Log(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Exception)">
             <summary>
-            Represents a discord extension logger
+            Log the message with the specified level
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.#ctor(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
-            <summary>
-            Creates a new logger with the given log level
-            </summary>
-            <param name="logLevel">Log level of the logger</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.Verbose(System.String)">
-            <summary>
-            Log a verbose message
-            </summary>
+            <param name="level">Log Level for the message</param>
             <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.Debug(System.String)">
-            <summary>
-            Log a Debug message
-            </summary>
-            <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.Info(System.String)">
-            <summary>
-            Log a Info message
-            </summary>
-            <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.Warning(System.String)">
-            <summary>
-            Log a Warning message
-            </summary>
-            <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.Error(System.String)">
-            <summary>
-            Log a Error message
-            </summary>
-            <param name="message">Message to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.Exception(System.String,System.Exception)">
-            <summary>
-            Log a Exception message
-            </summary>
-            <param name="message">Message to log</param>
-            <param name="ex">Exception to log</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.UpdateLogLevel(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
-            <summary>
-            Updates the log level for the current logger
-            </summary>
-            <param name="level">Level to update the logger to</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Logging.Logger.IsLogging(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
-            <summary>
-            Returns true if the logger is logging for the passed log level
-            </summary>
-            <param name="level">Log Level to check</param>
-            <returns>True if the logger is logging for the given log level</returns>
+            <param name="exception">Exception for the log</param>
         </member>
         <member name="T:Oxide.Ext.Discord.RateLimits.BaseRateLimit">
             <summary>

@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Helpers.Converters
 {
@@ -45,7 +46,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                         return null;
                     }
 
-                    DiscordExtension.GlobalLogger.Warning($"Snowflake tried to parse null to non nullable field: {reader.Path}. Please give this message to the discord extension authors.");
+                    DiscordExtension.GlobalLogger.Warning("Snowflake tried to parse null to non nullable field: {{0}}. Please give this message to the discord extension authors.", reader.Path);
                     return default(Snowflake);
                 
                 default:

@@ -86,9 +86,9 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnModLoad()
         {
-            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new Logger(DiscordLogLevel.Warning) : new Logger(DiscordLogLevel.Debug);
+            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new DiscordLogger(DiscordLogLevel.Warning) : new DiscordLogger(DiscordLogLevel.Debug);
             
-            GlobalLogger.Info($"Using Discord Extension Version: {FullExtensionVersion}");
+            GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
                 GlobalLogger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);

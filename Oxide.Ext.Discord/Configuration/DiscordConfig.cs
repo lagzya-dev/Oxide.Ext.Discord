@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Core.Configuration;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Configuration
 {
@@ -41,7 +42,7 @@ namespace Oxide.Ext.Discord.Configuration
             }
             catch (Exception ex)
             {
-                DiscordExtension.GlobalLogger.Error($"Failed to load config file. Generating new Config.\n{ex}");
+                DiscordExtension.GlobalLogger.Exception("Failed to load config file. Generating new Config", ex);
                 Commands = new DiscordCommandsConfig
                 {
                     CommandPrefixes = new[] {'/', '!'}

@@ -170,8 +170,8 @@ namespace Oxide.Ext.Discord.Rest
                     if (httpResponse == null)
                     {
                         Bucket.ErrorDelayUntil = Time.TimeSinceEpoch() + 1;
+                        _lastError.SetLog(DiscordLogLevel.Exception, $"A web request exception occured (internal error) Request URL: [{req.Method}] {req.RequestUri}", ex);
                         Close(false);
-                        _logger.Exception($"A web request exception occured (internal error) [RETRY={_retries.ToString()}/3].\nRequest URL: [{req.Method}] {req.RequestUri}", ex);
                         return;
                     }
 
@@ -184,7 +184,7 @@ namespace Oxide.Ext.Discord.Rest
                     bool isRateLimit = statusCode == 429;
                     if (isRateLimit)
                     {
-                        _logger.Warning($"Discord rate limit reached. (Rate limit info: remaining: [{req.Method}] Route: {req.RequestUri} Content-Type: {req.ContentType} Remaining: {Bucket.RateLimitRemaining.ToString()} Limit: {Bucket.RateLimit.ToString()}, Reset In: {Bucket.RateLimitReset.ToString()}, Current Time: {Time.TimeSinceEpoch().ToString()}");
+                        _lastError.SetLog(DiscordLogLevel.Warning, $"Discord rate limit reached. (Rate limit info: remaining: [{req.Method}] Route: {req.RequestUri} Content-Type: {req.ContentType} Remaining: {Bucket.RateLimitRemaining.ToString()} Limit: {Bucket.RateLimit.ToString()}, Reset In: {Bucket.RateLimitReset.ToString()}, Current Time: {Time.TimeSinceEpoch().ToString()}");
                         Close(false);
                         return;
                     }
@@ -193,13 +193,13 @@ namespace Oxide.Ext.Discord.Rest
                     _lastError.DiscordError = apiError;
                     if (apiError != null && apiError.Code != 0)
                     {
-                        _logger.Error($"Discord API has returned error Discord Code: {apiError.Code.ToString()} Discord Error: {apiError.Message} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()}) Content-Type: {req.ContentType}" +
-                                      $"\nDiscord Errors: {apiError.Errors}" +
-                                      $"\nRequest Body:\n{(Contents != null ? Encoding.UTF8.GetString(Contents) : "Contents is null")}");
+                        _lastError.SetLog(DiscordLogLevel.Error, $"Discord API has returned error Discord Code: {apiError.Code.ToString()} Discord Error: {apiError.Message} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()}) Content-Type: {req.ContentType}" +
+                                                                 $"\nDiscord Errors: {apiError.Errors}" +
+                                                                 $"\nRequest Body:\n{(Contents != null ? Encoding.UTF8.GetString(Contents) : "Contents is null")}");
                     }
                     else
                     {
-                        _logger.Error($"An error occured whilst submitting a request: Exception Status: {ex.Status.ToString()} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()}): {message}");
+                        _lastError.SetLog(DiscordLogLevel.Error, $"An error occured whilst submitting a request: Exception Status: {ex.Status.ToString()} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()}): {message}");
                     }
 
                     Close();
@@ -316,17 +316,22 @@ namespace Oxide.Ext.Discord.Rest
             {
                 if (!_success)
                 {
-                    try
+                    Interface.Oxide.NextTick(() =>
                     {
-                        Interface.Oxide.NextTick(() =>
+                        try
                         {
                             OnError?.Invoke(_lastError);
-                        });
-                    }
-                    catch(Exception ex)
-                    {
-                        _logger.Exception($"An exception occured during OnError callback for request: [{Method.ToString()}] {RequestUrl}", ex);
-                    }
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.Exception("An exception occured during OnError callback for request: [{0}] {1}", Method.ToString(), RequestUrl,  ex);
+                        }
+
+                        if (_lastError.ShowErrorMessage)
+                        {
+                            _logger.Log(_lastError.LogLevel, _lastError.LogMessage, _lastError.Exception);
+                        }
+                    });
                 }
 
                 Bucket.DequeueRequest(this);
@@ -434,7 +439,7 @@ namespace Oxide.Ext.Discord.Rest
                 }
             }
             
-            _logger.Debug($"Method: {Method.ToString()} Route: {Route} Internal Bucket Id: {Bucket.BucketId} Limit: {Bucket.RateLimit.ToString()} Remaining: {Bucket.RateLimitRemaining.ToString()} Reset: {Bucket.RateLimitReset.ToString()} Time: {Time.TimeSinceEpoch().ToString()} Bucket: {bucketNameHeader}");
+            _logger.Debug("Method: {0} Route: {1} Internal Bucket Id: {2} Limit: {3} Remaining: {4} Reset: {5} Time: {6} Bucket: {7}", Method, Route, Bucket.BucketId, Bucket.RateLimit, Bucket.RateLimitRemaining, Bucket.RateLimitReset, Time.TimeSinceEpoch(), bucketNameHeader);
         }
     }
 }

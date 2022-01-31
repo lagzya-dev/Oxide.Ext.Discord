@@ -13,6 +13,7 @@ using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Users
@@ -301,8 +302,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
             if (userId == client.Bot.BotUser.Id)
             {
-                client.Logger.Error("Tried to create a direct message to the bot which is not allowed.");
-                return;
+                throw new InvalidChannelException("Tried to create a direct message channel to yourself which is not allowed.");
             }
 
             DiscordChannel channel = client.Bot.DirectMessagesByUserId[userId];

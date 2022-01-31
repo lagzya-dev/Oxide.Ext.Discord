@@ -56,7 +56,7 @@ namespace Oxide.Ext.Discord.Rest
             Handler = handler;
             BucketId = bucketId;
             _logger = logger;
-            _logger.Debug($"New Bucket Created with id: {bucketId}");
+            _logger.Debug("New Bucket Created with id: {0}", bucketId);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Oxide.Ext.Discord.Rest
             if (Handler.RateLimit.HasReachedRateLimit)
             {
                 int resetIn = (int)(Handler.RateLimit.NextReset * 1000) + 1;
-                _logger.Debug($"Global Rate limit hit. Sleeping until Reset: {resetIn.ToString()}ms");
+                _logger.Debug("Global Rate limit hit. Sleeping until Reset: {0}ms", resetIn);
                 Thread.Sleep(resetIn);
                 return;
             }
@@ -136,7 +136,7 @@ namespace Oxide.Ext.Discord.Rest
             if (RateLimitRemaining == 0 && RateLimitReset > timeSince)
             {
                 int resetIn = (int) ((RateLimitReset - timeSince) * 1000);
-                _logger.Debug($"Bucket Rate limit hit. Sleeping until Reset: {resetIn.ToString()}ms");
+                _logger.Debug("Bucket Rate limit hit. Sleeping until Reset: {0}ms", resetIn);
                 Thread.Sleep(resetIn);
                 return;
             }
@@ -144,7 +144,7 @@ namespace Oxide.Ext.Discord.Rest
             if (ErrorDelayUntil > timeSince)
             {
                 int resetIn = (int) ((ErrorDelayUntil - timeSince) * 1000);
-                _logger.Debug($"Web request error occured delaying next send until: {resetIn.ToString()}ms ");
+                _logger.Debug("Web request error occured delaying next send until: {0}ms", resetIn);
                 Thread.Sleep(resetIn);
                 return;
             }

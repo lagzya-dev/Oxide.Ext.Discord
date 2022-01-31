@@ -3,6 +3,7 @@ using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.Command
 {
@@ -34,7 +35,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 }
                 catch(Exception ex)
                 {
-                    DiscordExtension.GlobalLogger.Exception($"An exception occured in discord command {name} for plugin {Plugin?.Name}", ex);   
+                    DiscordExtension.GlobalLogger.Exception("An exception occured in discord command {0} for plugin {1}", name, Plugin?.Name, ex);   
                 }
             });
         }

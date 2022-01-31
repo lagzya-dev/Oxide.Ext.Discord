@@ -65,7 +65,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             IDictionary<string, Snowflake> data = plugin.GetSteamToDiscordIds();
             if (data == null)
             {
-                _logger.Error($"{plugin.Title} returned null when {nameof(plugin.GetSteamToDiscordIds)} was called");
+                _logger.Error($"{{0}} returned null when {nameof(plugin.GetSteamToDiscordIds)} was called", plugin.Title);
                 return;
             }
 
@@ -79,7 +79,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 _discordIds.Add(pair.Value);
             }
             
-            _logger.Debug($"{plugin.Title} registered as a DiscordLink plugin");
+            _logger.Debug("{0} has been registered as a DiscordLink plugin", plugin.Title);
         }
 
         /// <summary>
@@ -328,12 +328,12 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
             if (link == null)
             {
-                _logger.Error($"{plugin.Name} tried to link but is not registered as a link plugin");
+                _logger.Error($"{{0}} tried to unlink but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.Name);
             }
             
             if (!_linkPlugins.Contains(link))
             {
-                _logger.Error($"{plugin.Name} has not been added as a link plugin and cannot set a link");
+                _logger.Error("{0} has not been added as a link plugin and cannot set a link", plugin.Name);
                 return;
             }
             
@@ -363,12 +363,12 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
             if (link == null)
             {
-                _logger.Error($"{plugin.Name} tried to unlink but is not registered as a link plugin");
+                _logger.Error($"{{0}} tried to unlink but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.Name);
             }
             
             if (!_linkPlugins.Contains(link))
             {
-                _logger.Error($"{plugin.Name} has not been added as a link plugin and cannot unlink");
+                _logger.Error("{0} has not been added as a link plugin and cannot unlink", plugin.Name);
                 return;
             }
 

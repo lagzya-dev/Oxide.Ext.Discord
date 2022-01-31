@@ -46,7 +46,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             if (_logger.IsLogging(DiscordLogLevel.Debug))
             {
-                _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(Enqueue)} Queuing command {command.OpCode.ToString()}");
+                _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(Enqueue)} Queuing command {{0}}", command.OpCode);
             }
 
             //If websocket has connect and we need to identify or resume send those payloads right away
@@ -118,7 +118,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                             _rateLimitTimer.Interval = _rateLimit.NextReset;
                             _rateLimitTimer.Stop();
                             _rateLimitTimer.Start();
-                            _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {_rateLimit.NextReset.ToString()} seconds\nOpcode: {payload.OpCode}\nPayload: {JsonConvert.SerializeObject(payload.Payload, DiscordExtension.ExtensionSerializeSettings)}");
+                            _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {{0}} seconds\nOpcode: {{1}}\nPayload: {{2}}", _rateLimit.NextReset, payload.OpCode, JsonConvert.SerializeObject(payload.Payload, DiscordExtension.ExtensionSerializeSettings));
                         }
 
                         return;
@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 
                     if (_logger.IsLogging(DiscordLogLevel.Debug))
                     {
-                        _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {payload.OpCode.ToString()}");
+                        _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {{0}}", payload.OpCode);
                     }
 
                     if (!_webSocket.Send(payload))

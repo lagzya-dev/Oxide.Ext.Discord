@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Command
@@ -127,7 +128,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             {
                 string previousPluginName = cmd.Plugin?.Name ?? "an unknown plugin";
                 string newPluginName = plugin?.Name ?? "An unknown plugin";
-                DiscordExtension.GlobalLogger.Warning($"{newPluginName} has replaced the '{commandName}' discord direct message command previously registered by {previousPluginName}");
+                DiscordExtension.GlobalLogger.Warning("{0} has replaced the '{1}' discord direct message command previously registered by {2}", newPluginName, commandName, previousPluginName);
             }
 
             cmd = new DirectMessageCommand(commandName, plugin, callback);
@@ -187,7 +188,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             {
                 string previousPluginName = cmd.Plugin?.Name ?? "an unknown plugin";
                 string newPluginName = plugin?.Name ?? "An unknown plugin";
-                DiscordExtension.GlobalLogger.Warning($"{newPluginName} has replaced the '{commandName}' discord guild command previously registered by {previousPluginName}");
+                DiscordExtension.GlobalLogger.Warning("{0} has replaced the '{1}' discord guild command previously registered by {2}", newPluginName, commandName, previousPluginName);
             }
 
             cmd = new GuildCommand(commandName, plugin, allowedChannels, callback);
@@ -350,12 +351,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
                     if (command.IsLocalized)
                     {
                         DiscordExtension.DiscordCommand.AddDirectMessageLocalizedCommand(command.Name, plugin, method.Name);
-                        DiscordExtension.GlobalLogger.Debug($"Adding Localized Direct Message Command {command.Name} Method: {method.Name}");
+                        DiscordExtension.GlobalLogger.Debug("Adding Localized Direct Message Command {0} Method: {1}", command.Name, method.Name);
                     }
                     else
                     {
                         DiscordExtension.DiscordCommand.AddDirectMessageCommand(command.Name, plugin, method.Name);
-                        DiscordExtension.GlobalLogger.Debug($"Adding Direct Message Command {command.Name} Method: {method.Name}");
+                        DiscordExtension.GlobalLogger.Debug("Adding Direct Message Command {0} Method: {1}", command.Name, method.Name);
                     }
                 }
                 
@@ -366,12 +367,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
                     if (command.IsLocalized)
                     {
                         DiscordExtension.DiscordCommand.AddGuildLocalizedCommand(command.Name, plugin, null, method.Name);
-                        DiscordExtension.GlobalLogger.Debug($"Adding Localized Guild Command {command.Name} Method: {method.Name}");
+                        DiscordExtension.GlobalLogger.Debug("Adding Localized Guild Command {0} Method: {1}", command.Name, method.Name);
                     }
                     else
                     {
                         DiscordExtension.DiscordCommand.AddGuildCommand(command.Name, plugin, null, method.Name);
-                        DiscordExtension.GlobalLogger.Debug($"Adding Guild Command {command.Name} Method: {method.Name}");
+                        DiscordExtension.GlobalLogger.Debug("Adding Guild Command {0} Method: {1}", command.Name, method.Name);
                     }
                 }
             }
