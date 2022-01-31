@@ -755,7 +755,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Commands">
             <summary>
-            Discord Config commands options
+            Discord Config Command Options
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Logging">
+            <summary>
+            Discord Config Logging Options
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Configuration.DiscordConfig.#ctor(System.String)">
@@ -769,6 +774,16 @@
             Load the config file and populate it.
             </summary>
             <param name="filename"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Configuration.DiscordLoggingConfig">
+            <summary>
+            Represents Discord Extension Logging Config
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordLoggingConfig.HiddenDiscordErrorCodes">
+            <summary>
+            Discord Response Error codes that will not be logged
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Constants.DiscordHooks">
             <summary>
@@ -14893,12 +14908,12 @@
             Represent a Discord API request
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.Method">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Method">
             <summary>
             HTTP request method
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.Route">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Route">
             <summary>
             Route on the API
             </summary>
@@ -14908,7 +14923,7 @@
             Full Request URl to the API
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.Data">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Data">
             <summary>
             Data to be sent with the request
             </summary>
@@ -14923,7 +14938,7 @@
             Attachments for a request
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.MultipartRequest">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.MultipartRequest">
             <summary>
             Required If Multipart Form Request
             </summary>
@@ -14938,12 +14953,12 @@
             Response from the request
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.Callback">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Callback">
             <summary>
             Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.OnError">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.OnError">
             <summary>
             Callback to call if the request errored with the last error message
             </summary>
@@ -14967,6 +14982,11 @@
         <member name="F:Oxide.Ext.Discord.Rest.Request.ApiVersion">
             <summary>
             API Version for Rest requests
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Request.BaseUrl">
+            <summary>
+            Base API Url
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Request.#ctor(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action{Oxide.Ext.Discord.Entities.Api.RestResponse},System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Logging.ILogger)">
@@ -14998,6 +15018,37 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Rest.RequestHandler">
+            <summary>
+            Handles Assigning new requests to buckets
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.#ctor(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="rest"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.QueueRequest(Oxide.Ext.Discord.Rest.Request)">
+            <summary>
+            Queues the following request to be added to a bucket
+            </summary>
+            <param name="request">Request to be added</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.QueueBucket">
+            <summary>
+            Queues the request for the bucket
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.GetBucketId(System.String)">
+            <summary>
+            Returns the Rate Limit Bucket for the given route
+            https://discord.com/developers/docs/topics/rate-limits#rate-limits
+            </summary>
+            <param name="route">API Route</param>
+            <returns>Bucket ID for route</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Rest.RestHandler">
             <summary>
             Represents a REST handler for a bot
@@ -15011,6 +15062,11 @@
         <member name="F:Oxide.Ext.Discord.Rest.RestHandler.Buckets">
             <summary>
             The request buckets for the bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.RequestHandler">
+            <summary>
+            Request Handler for the request
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.RestHandler._authorization">
@@ -15056,30 +15112,22 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Error callback if an error occurs</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.GetBucket(System.String)">
+            <summary>
+            Returns the bucket with the given ID
+            </summary>
+            <param name="bucketId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CleanupExpired">
             <summary>
             Removed buckets that are old and not being used
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueRequest(Oxide.Ext.Discord.Rest.Request,Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Queues the request
-            </summary>
-            <param name="request">Request to queue</param>
-            <param name="logger">Logger to use</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Shutdown">
             <summary>
             Shutdown the REST handler
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.GetBucketId(System.String)">
-            <summary>
-            Returns the Rate Limit Bucket for the given route
-            https://discord.com/developers/docs/topics/rate-limits#rate-limits
-            </summary>
-            <param name="route">API Route</param>
-            <returns>Bucket ID for route</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.DispatchCode">
             <summary>

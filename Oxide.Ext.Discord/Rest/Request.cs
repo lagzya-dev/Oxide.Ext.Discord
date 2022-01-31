@@ -23,37 +23,37 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// HTTP request method
         /// </summary>
-        public RequestMethod Method { get; }
+        public readonly RequestMethod Method;
 
         /// <summary>
         /// Route on the API
         /// </summary>
-        public string Route { get; }
+        public readonly string Route;
 
         /// <summary>
         /// Full Request URl to the API
         /// </summary>
-        public string RequestUrl => UrlBase + "/" + ApiVersion + Route;
+        public string RequestUrl => BaseUrl + Route;
 
         /// <summary>
         /// Data to be sent with the request
         /// </summary>
-        public object Data { get; }
+        public readonly object Data;
         
         /// <summary>
         /// Data serialized to bytes 
         /// </summary>
-        public byte[] Contents { get; set; }
+        public byte[] Contents { get; private set; }
 
         /// <summary>
         /// Attachments for a request
         /// </summary>
-        internal List<IMultipartSection> MultipartSections { get; set; }
-        
+        internal List<IMultipartSection> MultipartSections { get; private set; }
+
         /// <summary>
         /// Required If Multipart Form Request
         /// </summary>
-        public bool MultipartRequest { get; }
+        public readonly bool MultipartRequest;
 
         /// <summary>
         /// Multipart Boundary
@@ -68,12 +68,12 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Callback to call if the request completed successfully
         /// </summary>
-        public Action<RestResponse> Callback { get; }
-        
+        public readonly Action<RestResponse> Callback;
+
         /// <summary>
         /// Callback to call if the request errored with the last error message
         /// </summary>
-        public Action<RestError> OnError { get; }
+        public readonly Action<RestError> OnError;
 
         /// <summary>
         /// The DateTime the request was started
@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Returns if the request is currently in progress
         /// </summary>
-        public bool InProgress { get; set; }
+        public bool InProgress { get; private set; }
 
         internal Bucket Bucket;
         
@@ -97,6 +97,11 @@ namespace Oxide.Ext.Discord.Rest
         /// API Version for Rest requests
         /// </summary>
         public const string ApiVersion = "v9";
+        
+        /// <summary>
+        /// Base API Url
+        /// </summary>
+        public const string BaseUrl = UrlBase + "/" +ApiVersion;
         
         private const int TimeoutDuration = 15;
 
