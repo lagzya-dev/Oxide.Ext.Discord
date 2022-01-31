@@ -68,7 +68,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Callback to call if the request completed successfully
         /// </summary>
-        public readonly Action<RestResponse> Callback;
+        private readonly Action _onSuccess;
 
         /// <summary>
         /// Callback to call if the request errored with the last error message
@@ -119,16 +119,29 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="route">Route to call on the API</param>
         /// <param name="data">Data for the request</param>
         /// <param name="authHeader">Authorization Header</param>
-        /// <param name="callback">Callback once the request completes successfully</param>
+        /// <param name="onSuccess">Callback once the request completes successfully</param>
         /// <param name="onError">Callback when the request errors</param>
         /// <param name="logger">Logger for the request</param>
-        public Request(RequestMethod method, string route, object data, string authHeader, Action<RestResponse> callback, Action<RestError> onError, ILogger logger)
+        public Request(RequestMethod method, string route, object data, string authHeader, Action onSuccess, Action<RestError> onError, ILogger logger) : this(method, route, data,authHeader, onError, logger)
+        {
+            _onSuccess = onSuccess;
+        }
+
+        /// <summary>
+        /// Creates a new request
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="route"></param>
+        /// <param name="data"></param>
+        /// <param name="authHeader"></param>
+        /// <param name="onError"></param>
+        /// <param name="logger"></param>
+        protected Request(RequestMethod method, string route, object data, string authHeader, Action<RestError> onError, ILogger logger)
         {
             Method = method;
             Route = route;
             Data = data;
             _authHeader = authHeader;
-            Callback = callback;
             OnError = onError;
             _logger = logger;
             MultipartRequest = Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0;
@@ -158,10 +171,7 @@ namespace Oxide.Ext.Discord.Rest
                 }
 
                 _success = true;
-                Interface.Oxide.NextTick(() =>
-                {
-                    Callback?.Invoke(Response);
-                });
+                InvokeSuccess();
                 Close();
             }
             catch (WebException ex)
@@ -266,22 +276,7 @@ namespace Oxide.Ext.Discord.Rest
             {
                 if (!_success)
                 {
-                    Interface.Oxide.NextTick(() =>
-                    {
-                        try
-                        {
-                            OnError?.Invoke(_lastError);
-                        }
-                        catch (Exception ex)
-                        {
-                            _logger.Exception("An exception occured during OnError callback for request: [{0}] {1}", Method, RequestUrl,  ex);
-                        }
-
-                        if (_lastError.ShowErrorMessage && (_lastError.DiscordError == null || !DiscordExtension.DiscordConfig.Logging.HiddenDiscordErrorCodes.Contains(_lastError.DiscordError.Code)))
-                        {
-                            _logger.Log(_lastError.LogLevel, _lastError.LogMessage, _lastError.Exception);
-                        }
-                    });
+                    InvokeError();
                 }
 
                 Bucket.DequeueRequest(this);
@@ -293,6 +288,37 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
 
+        /// <summary>
+        /// Invokes the success callback
+        /// </summary>
+        protected virtual void InvokeSuccess()
+        {
+            Interface.Oxide.NextTick(() =>
+            {
+                _onSuccess?.Invoke();
+            });
+        }
+
+        private void InvokeError()
+        {
+            Interface.Oxide.NextTick(() =>
+            {
+                try
+                {
+                    OnError?.Invoke(_lastError);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Exception("An exception occured during OnError callback for request: [{0}] {1}", Method, RequestUrl,  ex);
+                }
+
+                if (_lastError.ShowErrorMessage && (_lastError.DiscordError == null || !DiscordExtension.DiscordConfig.Logging.HiddenDiscordErrorCodes.Contains(_lastError.DiscordError.Code)))
+                {
+                    _logger.Log(_lastError.LogLevel, _lastError.LogMessage, _lastError.Exception);
+                }
+            });
+        }
+        
         /// <summary>
         /// Returns true if the request has timed out
         /// </summary>

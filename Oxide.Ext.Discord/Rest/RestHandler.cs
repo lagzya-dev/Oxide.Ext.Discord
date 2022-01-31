@@ -58,7 +58,8 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="error">Error callback if an error occurs</param>
         public void DoRequest(string url, RequestMethod method, object data, Action callback, Action<RestError> error)
         {
-            CreateRequest(method, url, data, response => callback?.Invoke(), error);
+            Request request = new Request(method, url, data, _authorization, callback, error, _logger);
+            RequestHandler.QueueRequest(request);
         }
 
         /// <summary>
@@ -72,23 +73,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
         public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback, Action<RestError> error)
         {
-            CreateRequest(method, url, data, response =>
-            {
-                callback?.Invoke(response.ParseData<T>());
-            }, error);
-        }
-
-        /// <summary>
-        /// Creates a new request and queues it to be ran
-        /// </summary>
-        /// <param name="url">URL of the request</param>
-        /// <param name="method">HTTP method of the request</param>
-        /// <param name="data">Data to be sent with the request</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Error callback if an error occurs</param>
-        private void CreateRequest(RequestMethod method, string url, object data, Action<RestResponse> callback, Action<RestError> error)
-        {
-            Request request = new Request(method, url, data, _authorization, callback, error, _logger);
+            Request<T> request = new Request<T>(method, url, data, _authorization, callback, error, _logger);
             RequestHandler.QueueRequest(request);
         }
 
