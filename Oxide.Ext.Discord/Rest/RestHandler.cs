@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;

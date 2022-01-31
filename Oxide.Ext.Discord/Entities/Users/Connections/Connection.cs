@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Integrations;
 using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Plugins;
