@@ -103,12 +103,16 @@ namespace Oxide.Ext.Discord.Rest.Request
         /// </summary>
         public const string BaseUrl = UrlBase + "/" +ApiVersion;
         
+        /// <summary>
+        /// Logger
+        /// </summary>
+        protected readonly ILogger Logger;
+        
         private const int TimeoutDuration = 15;
 
         private readonly string _authHeader;
         private byte _retries;
         
-        private readonly ILogger _logger;
         private RestError _lastError;
         private bool _success;
 
@@ -143,7 +147,7 @@ namespace Oxide.Ext.Discord.Rest.Request
             Data = data;
             _authHeader = authHeader;
             OnError = onError;
-            _logger = logger;
+            Logger = logger;
             MultipartRequest = Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0;
         }
 
@@ -219,7 +223,7 @@ namespace Oxide.Ext.Discord.Rest.Request
             }
             catch (Exception ex)
             {
-                _logger.Exception($"An exception occured for request: [{req.Method}] {req.RequestUri}", ex);
+                Logger.Exception($"An exception occured for request: [{req.Method}] {req.RequestUri}", ex);
                 Close();
             }
         }
@@ -293,9 +297,21 @@ namespace Oxide.Ext.Discord.Rest.Request
         /// </summary>
         protected virtual void InvokeSuccess()
         {
+            if (_onSuccess == null)
+            {
+                return;
+            }
+            
             Interface.Oxide.NextTick(() =>
             {
-                _onSuccess?.Invoke();
+                try
+                {
+                    _onSuccess.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Exception("An exception occured during Success callback for request: [{0}] {1}", Method, RequestUrl,  ex);
+                }
             });
         }
 
@@ -303,18 +319,21 @@ namespace Oxide.Ext.Discord.Rest.Request
         {
             Interface.Oxide.NextTick(() =>
             {
-                try
+                if (OnError != null)
                 {
-                    OnError?.Invoke(_lastError);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Exception("An exception occured during OnError callback for request: [{0}] {1}", Method, RequestUrl,  ex);
+                    try
+                    {
+                        OnError.Invoke(_lastError);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Exception("An exception occured during Error callback for request: [{0}] {1}", Method, RequestUrl,  ex);
+                    }
                 }
 
                 if (_lastError.ShowErrorMessage && (_lastError.DiscordError == null || !DiscordExtension.DiscordConfig.Logging.HiddenDiscordErrorCodes.Contains(_lastError.DiscordError.Code)))
                 {
-                    _logger.Log(_lastError.LogLevel, _lastError.LogMessage, _lastError.Exception);
+                    Logger.Log(_lastError.LogLevel, _lastError.LogMessage, _lastError.Exception);
                 }
             });
         }
@@ -415,7 +434,7 @@ namespace Oxide.Ext.Discord.Rest.Request
                 }
             }
             
-            _logger.Debug("Method: {0} Route: {1} Internal Bucket Id: {2} Limit: {3} Remaining: {4} Reset: {5} Time: {6} Bucket: {7}", Method, Route, Bucket.BucketId, Bucket.RateLimit, Bucket.RateLimitRemaining, Bucket.RateLimitReset, Time.TimeSinceEpoch(), bucketNameHeader);
+            Logger.Debug("Method: {0} Route: {1} Internal Bucket Id: {2} Limit: {3} Remaining: {4} Reset: {5} Time: {6} Bucket: {7}", Method, Route, Bucket.BucketId, Bucket.RateLimit, Bucket.RateLimitRemaining, Bucket.RateLimitReset, Time.TimeSinceEpoch(), bucketNameHeader);
         }
     }
 }

@@ -14741,13 +14741,13 @@
             </summary>
             <returns>True if we should cleanup the bucket; false otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Request)">
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Request.Request)">
             <summary>
             Queues a new request for the buck
             </summary>
             <param name="request">Request to be queued</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.DequeueRequest(Oxide.Ext.Discord.Rest.Request)">
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.DequeueRequest(Oxide.Ext.Discord.Rest.Request.Request)">
             <summary>
             Removes the request from the queue.
             Either the request completed successfully or there was an error and failed to succeed after 3 attempts
@@ -14908,93 +14908,98 @@
             Called when a bot is shutting down
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Request">
+        <member name="T:Oxide.Ext.Discord.Rest.Request.Request">
             <summary>
             Represent a Discord API request
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Request.Method">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request.Method">
             <summary>
             HTTP request method
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Request.Route">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request.Route">
             <summary>
             Route on the API
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.RequestUrl">
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Request.RequestUrl">
             <summary>
             Full Request URl to the API
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Request.Data">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request.Data">
             <summary>
             Data to be sent with the request
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.Contents">
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Request.Contents">
             <summary>
             Data serialized to bytes 
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.MultipartSections">
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Request.MultipartSections">
             <summary>
             Attachments for a request
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Request.MultipartRequest">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request.MultipartRequest">
             <summary>
             Required If Multipart Form Request
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.Boundary">
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Request.Boundary">
             <summary>
             Multipart Boundary
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.Response">
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Request.Response">
             <summary>
             Response from the request
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Request._onSuccess">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request._onSuccess">
             <summary>
             Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Request.OnError">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request.OnError">
             <summary>
             Callback to call if the request errored with the last error message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.StartTime">
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Request.StartTime">
             <summary>
             The DateTime the request was started
             Used for request timeout
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Request.InProgress">
+        <member name="P:Oxide.Ext.Discord.Rest.Request.Request.InProgress">
             <summary>
             Returns if the request is currently in progress
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Request.UrlBase">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request.UrlBase">
             <summary>
             Base URL for Discord
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Request.ApiVersion">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request.ApiVersion">
             <summary>
             API Version for Rest requests
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Request.BaseUrl">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request.BaseUrl">
             <summary>
             Base API Url
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Request.#ctor(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="F:Oxide.Ext.Discord.Rest.Request.Request.Logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Request.#ctor(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Creates a new request
             </summary>
@@ -15006,7 +15011,7 @@
             <param name="onError">Callback when the request errors</param>
             <param name="logger">Logger for the request</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Request.#ctor(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Request.#ctor(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Creates a new request
             </summary>
@@ -15017,52 +15022,52 @@
             <param name="onError"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Request.Fire">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Request.Fire">
             <summary>
             Fires the request off
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Request.Close(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Request.Close(System.Boolean)">
             <summary>
             Closes the request and removes it from the bucket
             </summary>
             <param name="remove"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Request.InvokeSuccess">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Request.InvokeSuccess">
             <summary>
             Invokes the success callback
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Request.HasTimedOut">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Request.HasTimedOut">
             <summary>
             Returns true if the request has timed out
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.RequestHandler">
+        <member name="T:Oxide.Ext.Discord.Rest.Request.RequestHandler">
             <summary>
             Handles Assigning new requests to buckets
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.#ctor(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.RequestHandler.#ctor(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
             <param name="rest"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.QueueRequest(Oxide.Ext.Discord.Rest.Request)">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.RequestHandler.QueueRequest(Oxide.Ext.Discord.Rest.Request.Request)">
             <summary>
             Queues the following request to be added to a bucket
             </summary>
             <param name="request">Request to be added</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.QueueBucket">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.RequestHandler.QueueBucket">
             <summary>
             Queues the request for the bucket
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.GetBucketId(System.String)">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.RequestHandler.GetBucketId(System.String)">
             <summary>
             Returns the Rate Limit Bucket for the given route
             https://discord.com/developers/docs/topics/rate-limits#rate-limits
@@ -15070,13 +15075,13 @@
             <param name="route">API Route</param>
             <returns>Bucket ID for route</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Request`1">
+        <member name="T:Oxide.Ext.Discord.Rest.Request.Request`1">
             <summary>
             Handles request that return data
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Request`1.#ctor(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Request`1.#ctor(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RestError},Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
@@ -15088,7 +15093,7 @@
             <param name="onError"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Request`1.InvokeSuccess">
+        <member name="M:Oxide.Ext.Discord.Rest.Request.Request`1.InvokeSuccess">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.RestHandler">

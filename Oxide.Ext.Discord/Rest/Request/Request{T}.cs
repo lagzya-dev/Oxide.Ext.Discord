@@ -30,10 +30,22 @@ namespace Oxide.Ext.Discord.Rest.Request
         /// <inheritdoc/>
         protected override void InvokeSuccess()
         {
+            if (_onSuccess == null)
+            {
+                return;
+            }
+            
             T data = Response.ParseData<T>();
             Interface.Oxide.NextTick(() =>
             {
-                _onSuccess.Invoke(data);
+                try
+                {
+                    _onSuccess.Invoke(data);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Exception("An exception occured during _onSuccess callback for request: [{0}] {1}", Method, RequestUrl, ex);
+                }
             });
         }
     }
