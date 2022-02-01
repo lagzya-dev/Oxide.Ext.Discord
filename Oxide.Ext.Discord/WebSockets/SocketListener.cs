@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
@@ -568,6 +569,10 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.BotUser = ready.User;
             _webSocket.ResetRetries();
             _logger.Info("Your bot was found in {0} Guilds!", ready.Guilds.Count);
+            if ((_client.Settings.Intents & GatewayIntents.GuildMessages) != 0 && !_client.Application.HasApplicationFlag(ApplicationFlags.GatewayMessageContentLimited))
+            {
+                _logger.Warning("You will need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications by April 30th 2022 or plugins using this intent will stop working", _client.BotUser.Username);
+            }
 
             if (_client.ReadyData == null)
             {
