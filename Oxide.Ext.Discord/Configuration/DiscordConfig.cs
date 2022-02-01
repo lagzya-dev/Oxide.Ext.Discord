@@ -48,7 +48,7 @@ namespace Oxide.Ext.Discord.Configuration
                 };
                 Logging = new DiscordLoggingConfig
                 {
-                    HiddenDiscordErrorCodes = Logging?.HiddenDiscordErrorCodes ?? new HashSet<int>()
+                    HideDiscordErrorCodes = Logging?.HideDiscordErrorCodes ?? new HashSet<int>()
                 };
             }
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace Oxide.Ext.Discord.Configuration
                 };
                 Logging = new DiscordLoggingConfig()
                 {
-                    HiddenDiscordErrorCodes = new HashSet<int>()
+                    HideDiscordErrorCodes = new HashSet<int>()
                 };
                 Save(filename);
             }

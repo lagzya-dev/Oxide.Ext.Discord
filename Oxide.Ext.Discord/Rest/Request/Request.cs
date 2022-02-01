@@ -331,7 +331,7 @@ namespace Oxide.Ext.Discord.Rest.Request
                     }
                 }
 
-                if (_lastError.ShowErrorMessage && (_lastError.DiscordError == null || !DiscordExtension.DiscordConfig.Logging.HiddenDiscordErrorCodes.Contains(_lastError.DiscordError.Code)))
+                if (_lastError.ShowErrorMessage && (_lastError.DiscordError == null || !DiscordExtension.DiscordConfig.Logging.HideDiscordErrorCodes.Contains(_lastError.DiscordError.Code)))
                 {
                     Logger.Log(_lastError.LogLevel, _lastError.LogMessage, _lastError.Exception);
                 }

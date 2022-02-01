@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Configuration
 {
     /// <summary>
@@ -9,6 +10,7 @@ namespace Oxide.Ext.Discord.Configuration
         /// <summary>
         /// Discord Response Error codes that will not be logged
         /// </summary>
-        public HashSet<int> HiddenDiscordErrorCodes { get; set; }
+        [JsonProperty("Hide Discord Error Codes")]
+        public HashSet<int> HideDiscordErrorCodes { get; set; }
     }
 }
