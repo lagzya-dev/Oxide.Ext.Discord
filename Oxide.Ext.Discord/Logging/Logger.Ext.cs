@@ -552,29 +552,17 @@ namespace Oxide.Ext.Discord.Logging
         
         private static void HandleLog<T1>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(1);
-            array[0] = arg0;
-            logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            logger.Log(level, string.Format(message, arg0), exception);
         }
         
         private static void HandleLog<T1, T2>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(2);
-            array[0] = arg0;
-            array[1] = arg1;
-            logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            logger.Log(level, string.Format(message, arg0, arg1), exception);
         }
         
         private static void HandleLog<T1, T2, T3>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, T3 arg2, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(3);
-            array[0] = arg0;
-            array[1] = arg1;
-            array[2] = arg2;
-            logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            logger.Log(level, string.Format(message, arg0, arg1, arg2), exception);
         }
         
         private static void HandleLog<T1, T2, T3, T4>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, T3 arg2, T4 arg3, Exception exception = null)
