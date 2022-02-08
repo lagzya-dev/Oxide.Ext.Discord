@@ -89,10 +89,6 @@ namespace Oxide.Ext.Discord
             GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new DiscordLogger(DiscordLogLevel.Warning) : new DiscordLogger(DiscordLogLevel.Debug);
             
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
-            AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
-            {
-                GlobalLogger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);
-            };
 
             string configPath = Path.Combine(Interface.Oxide.InstanceDirectory, "discord.config.json");
             if (!File.Exists(configPath))
