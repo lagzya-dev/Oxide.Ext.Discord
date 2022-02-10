@@ -69,5 +69,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("target_id")]
         public Snowflake? TargetId { get; set; }
+        
+        /// <summary>
+        /// The values submitted by the user (Modal Submit)
+        /// </summary>
+        [JsonProperty("components")]
+        public List<ActionRowComponent> Components { get; set; }
     }
 }

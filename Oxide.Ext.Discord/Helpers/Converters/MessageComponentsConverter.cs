@@ -52,6 +52,10 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                     case MessageComponentType.SelectMenu:
                         components.Add(token.ToObject<SelectMenuComponent>());
                         break;
+                    
+                    case MessageComponentType.InputText:
+                        components.Add(token.ToObject<InputTextComponent>());
+                        break;
                 }
             }
 
