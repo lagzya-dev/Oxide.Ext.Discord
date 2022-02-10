@@ -702,6 +702,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="error">Callback when an error occurs with error information</param>
         public void SearchGuildMembers(DiscordClient client, string search, int limit = 1, Action<List<GuildMember>> callback = null, Action<RestError> error = null)
         {
+            if (string.IsNullOrEmpty(search))
+            {
+                throw new InvalidGuildMemberSearch("search cannot be null or empty.");
+            }
             client.Bot.Rest.DoRequest($"/guilds/{Id}/members/search?query={search}&limit={limit}", RequestMethod.GET, null, callback, error);
         }
 
