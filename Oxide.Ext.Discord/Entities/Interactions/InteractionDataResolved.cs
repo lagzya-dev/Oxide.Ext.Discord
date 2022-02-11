@@ -43,5 +43,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("messages")]
         public Hash<Snowflake, DiscordMessage> Messages { get; set; }
+        
+        /// <summary>
+        /// The ids and attachment objects
+        /// </summary>
+        [JsonProperty("attachments")]
+        public Hash<Snowflake, MessageAttachment> Attachments { get; set; }
     }
 }

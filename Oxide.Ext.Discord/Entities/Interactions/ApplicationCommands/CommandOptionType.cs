@@ -54,6 +54,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <summary>
         /// Any double between -2^53 and 2^53
         /// </summary>
-        Number = 10
+        Number = 10,
+        
+        /// <summary>
+        /// Attachment object
+        /// </summary>
+        Attachment = 11
     }
 }
