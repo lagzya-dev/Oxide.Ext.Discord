@@ -483,6 +483,34 @@ namespace Oxide.Ext.Discord.Entities.Channels
         }
 
         /// <summary>
+        /// Delete a channel permission overwrite for a user or role in a channel.
+        /// Only usable for guild channels.
+        /// Requires the MANAGE_ROLES permission.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#delete-channel-permission">Delete Channel Permission</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="overwrite">Overwrite to delete</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void DeleteChannelPermission(DiscordClient client, Overwrite overwrite, Action callback = null, Action<RestError> error = null) => DeleteChannelPermission(client, overwrite.Id, callback, error);
+
+        /// <summary>
+        /// Delete a channel permission overwrite for a user or role in a channel.
+        /// Only usable for guild channels.
+        /// Requires the MANAGE_ROLES permission.
+        /// See <a href="https://discord.com/developers/docs/resources/channel#delete-channel-permission">Delete Channel Permission</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="overwriteId">Overwrite ID to delete</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void DeleteChannelPermission(DiscordClient client, Snowflake overwriteId, Action callback = null, Action<RestError> error = null)
+        {
+            if (!overwriteId.IsValid()) throw new InvalidSnowflakeException(nameof(overwriteId));
+            client.Bot.Rest.DoRequest($"/channels/{Id}/permissions/{overwriteId}", RequestMethod.DELETE, null, callback, error);
+        }
+        
+        /// <summary>
         /// Returns a list of invite objects (with invite metadata) for the channel.
         /// Only usable for guild channels.
         /// Requires the MANAGE_CHANNELS permission.
@@ -515,34 +543,6 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public void CreateChannelInvite(DiscordClient client, ChannelInvite invite, Action<DiscordInvite> callback = null, Action<RestError> error = null)
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/invites", RequestMethod.POST, invite, callback, error);
-        }
-
-        /// <summary>
-        /// Delete a channel permission overwrite for a user or role in a channel.
-        /// Only usable for guild channels.
-        /// Requires the MANAGE_ROLES permission.
-        /// See <a href="https://discord.com/developers/docs/resources/channel#delete-channel-permission">Delete Channel Permission</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="overwrite">Overwrite to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteChannelPermission(DiscordClient client, Overwrite overwrite, Action callback = null, Action<RestError> error = null) => DeleteChannelPermission(client, overwrite.Id, callback, error);
-
-        /// <summary>
-        /// Delete a channel permission overwrite for a user or role in a channel.
-        /// Only usable for guild channels.
-        /// Requires the MANAGE_ROLES permission.
-        /// See <a href="https://discord.com/developers/docs/resources/channel#delete-channel-permission">Delete Channel Permission</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="overwriteId">Overwrite ID to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteChannelPermission(DiscordClient client, Snowflake overwriteId, Action callback = null, Action<RestError> error = null)
-        {
-            if (!overwriteId.IsValid()) throw new InvalidSnowflakeException(nameof(overwriteId));
-            client.Bot.Rest.DoRequest($"/channels/{Id}/permissions/{overwriteId}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
