@@ -1,5 +1,6 @@
 using System;
 using Oxide.Core;
+
 namespace Oxide.Ext.Discord.Logging
 {
     internal static class LoggerExt
