@@ -32,6 +32,12 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         public Snowflake ChannelId { get; set; }
         
         /// <summary>
+        /// The topic of the Stage instance (1-120 characters)
+        /// </summary>
+        [JsonProperty("topic")]
+        public string Topic { get; set; }
+        
+        /// <summary>
         /// The privacy level of the Stage instance
         /// </summary>
         [JsonProperty("privacy_level")]
@@ -45,10 +51,10 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         public bool DiscoverableDisabled { get; set; }
         
         /// <summary>
-        /// The topic of the Stage instance (1-120 characters)
+        /// The id of the scheduled event for this Stage instance
         /// </summary>
-        [JsonProperty("topic")]
-        public string Topic { get; set; }
+        [JsonProperty("guild_scheduled_event_id")]
+        public Snowflake? GuildScheduledEventId { get; set; }
 
         /// <summary>
         /// Creates a new Stage instance associated to a Stage channel.
