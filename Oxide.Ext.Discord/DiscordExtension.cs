@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Test version information if using test version
         /// </summary>
-        internal const string TestVersion = "";
+        internal const string TestVersion = "Beta.1";
         
         internal const string Authors = "PsychoTea & DylanSMR & Tricky & Kirollos & MJSU";
 
@@ -86,7 +86,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnModLoad()
         {
-            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new DiscordLogger(DiscordLogLevel.Warning) : new DiscordLogger(DiscordLogLevel.Debug);
+            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new DiscordLogger(DiscordLogLevel.Warning) : new DiscordLogger(DiscordLogLevel.Verbose);
             
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
 
