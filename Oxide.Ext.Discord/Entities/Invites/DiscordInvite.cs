@@ -75,6 +75,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <summary>
         /// Stage instance data if there is a public Stage instance in the Stage channel this invite is for
         /// </summary>
+        [Obsolete("This field is considered deprecated by discord and may be removed in a future update.")]
         [JsonProperty("stage_instance")]
         public InviteStageInstance StageInstance { get; set; }
         
