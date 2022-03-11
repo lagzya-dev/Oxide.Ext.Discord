@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Rest.Request
         {
             _logger = logger;
             _rest = rest;
-            _thread = new Thread(ProcessQueue) {IsBackground = true};
+            _thread = new Thread(ProcessQueue) {IsBackground = true, Name = "Request Handler"};
             _thread.Start();
         }
 
