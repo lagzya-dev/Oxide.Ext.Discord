@@ -105,6 +105,9 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             if (string.IsNullOrEmpty(customId))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
 
+            if (!string.IsNullOrEmpty(placeholder) && placeholder.Length > 150)
+                throw new InvalidMessageComponentException($"{nameof(placeholder)} cannot be more than 150 character");
+
             UpdateActionRow<SelectMenuComponent>();
             SelectMenuComponent menu = new SelectMenuComponent
             {

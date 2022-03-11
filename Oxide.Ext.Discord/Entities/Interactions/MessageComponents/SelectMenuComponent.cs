@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         
         /// <summary>
         /// Custom placeholder text if nothing is selected
-        /// Max 100 characters
+        /// Max 150 characters
         /// </summary>
         [JsonProperty("placeholder")]
         public string Placeholder { get; set; }
