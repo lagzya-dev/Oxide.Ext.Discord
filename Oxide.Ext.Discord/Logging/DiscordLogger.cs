@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Logging
     /// <summary>
     /// Represents a discord extension logger
     /// </summary>
-    internal partial class DiscordLogger : ILogger
+    internal class DiscordLogger : ILogger
     {
         private DiscordLogLevel _logLevel;
         
