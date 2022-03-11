@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -7,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#get-channel-messages">Get Channel Messages Request</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ChannelMessagesRequest
+    public class ChannelMessagesRequest : IDiscordQueryString
     {
         /// <summary>
         /// Get messages around this message ID
@@ -32,10 +33,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         public int? Limit { get; set; }
 
-        /// <summary>
-        /// Returns the request as a query string
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public string ToQueryString()
         {
             QueryStringBuilder builder = new QueryStringBuilder();

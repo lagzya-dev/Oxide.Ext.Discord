@@ -1,12 +1,13 @@
 using System;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
     /// <summary>
     /// Represents parameters to execute a webhook
     /// </summary>
-    public class WebhookExecuteParams
+    public class WebhookExecuteParams : IDiscordQueryString
     {
         /// <summary>
         /// Which type of webhook are we trying to send (Discord, Slack, Github)
@@ -26,10 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         public Snowflake? ThreadId { get; set; }
 
-        /// <summary>
-        /// Returns the query string to be used in the webhook URL
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public string ToQueryString()
         {
             QueryStringBuilder builder = new QueryStringBuilder();

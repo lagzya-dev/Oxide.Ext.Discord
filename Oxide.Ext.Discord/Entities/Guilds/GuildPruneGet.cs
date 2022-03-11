@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -8,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#get-guild-prune-count">Guild Prune Get</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GuildPruneGet
+    public class GuildPruneGet : IDiscordQueryString
     {
         /// <summary>
         /// Number of days to count prune for (1 - 30)
@@ -22,10 +23,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonProperty("include_roles")]
         public List<Snowflake> IncludeRoles { get; set; }
         
-        /// <summary>
-        /// Returns the query string for the Guild Prune Get endpoint
-        /// </summary>
-        /// <returns>Guild Prune Get Query String</returns>
+        /// <inheritdoc/>
         public virtual string ToQueryString()
         {
             QueryStringBuilder builder = new QueryStringBuilder();

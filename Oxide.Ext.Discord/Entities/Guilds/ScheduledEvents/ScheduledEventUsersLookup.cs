@@ -1,4 +1,5 @@
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Interfaces;
 namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
 {
     /// <summary>
@@ -9,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
     /// If both before and after are provided, only before is respected.
     /// Fetching users in-between before and after is not supported.
     /// </summary>
-    public class ScheduledEventUsersLookup
+    public class ScheduledEventUsersLookup : IDiscordQueryString
     {
         /// <summary>
         /// Number of users to return (up to maximum 100)
@@ -34,7 +35,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// </summary>
         public Snowflake? After { get; set; }
         
-        internal string ToQueryString()
+        /// <inheritdoc/>
+        public string ToQueryString()
         {
             QueryStringBuilder builder = new QueryStringBuilder();
             if (Limit.HasValue)

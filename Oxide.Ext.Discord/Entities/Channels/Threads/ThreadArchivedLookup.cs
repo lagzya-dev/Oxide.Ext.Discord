@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Threads
 {
@@ -10,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads-query-string-params">Thread Archive Lookup Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ThreadArchivedLookup
+    public class ThreadArchivedLookup : IDiscordQueryString
     {
         /// <summary>
         /// Returns threads before this timestamp
@@ -24,7 +25,8 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         [JsonProperty("limit")]
         public int? Limit { get; set; } 
         
-        internal string ToQueryString()
+        /// <inheritdoc/>
+        public string ToQueryString()
         {
             QueryStringBuilder builder = new QueryStringBuilder();
             if (Before.HasValue)
