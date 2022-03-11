@@ -75,7 +75,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         Stream = 1 << 9,
         
         /// <summary>
-        /// Allows guild members to view a channel, which includes reading messages in text channels
+        /// Allows guild members to view a channel, which includes reading messages in text channels and joining voice channels
         /// Channel Type (Text, Voice, Stage)
         /// </summary>
         [Description("VIEW_CHANNEL")]
