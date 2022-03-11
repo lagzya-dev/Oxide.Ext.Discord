@@ -294,8 +294,16 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// Allows for launching activities (applications with the `EMBEDDED` flag) in a voice channel
         /// Channel Type (Voice)
         /// </summary>
+        [Obsolete("Replaced with UseEmbeddedActivities")]
         [Description("START_EMBEDDED_ACTIVITIES")]
         StartEmbeddedActivities = 1ul << 39,
+        
+        /// <summary>
+        /// Allows for using Activities (applications with the `EMBEDDED` flag) in a voice channel
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("USE_EMBEDDED_ACTIVITIES")]
+        UseEmbeddedActivities = 1ul << 39,
         
         /// <summary>
         /// Allows for timing out users to prevent them from sending or reacting to messages in chat and threads, and from speaking in voice and stage channels
