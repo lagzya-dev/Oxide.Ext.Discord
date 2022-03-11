@@ -159,10 +159,13 @@ namespace Oxide.Ext.Discord.Rest.Request
             InProgress = true;
             StartTime = DateTime.UtcNow;
 
-            HttpWebRequest req = CreateRequest();
-            
+            HttpWebRequest req = null;
+
             try
             {
+                //Can error during JSON serialization
+                req = CreateRequest();
+
                 //Can timeout while writing request data
                 WriteRequestData(req);
 
@@ -191,12 +194,12 @@ namespace Oxide.Ext.Discord.Rest.Request
                         return;
                     }
 
-                    int statusCode = (int) httpResponse.StatusCode;
+                    int statusCode = (int)httpResponse.StatusCode;
                     _lastError.HttpStatusCode = statusCode;
-                        
+
                     string message = ParseResponse(ex.Response);
                     _lastError.Message = message;
-                        
+
                     bool isRateLimit = statusCode == 429;
                     if (isRateLimit)
                     {
@@ -221,9 +224,14 @@ namespace Oxide.Ext.Discord.Rest.Request
                     Close();
                 }
             }
+            catch (JsonSerializationException ex)
+            {
+                Logger.Exception("A JsonSerializationException occured for request. Method: {0} URL: {1} Data Type: {2}", Method, RequestUrl, Data?.GetType().Name ?? "None", ex);
+                Close();
+            }
             catch (Exception ex)
             {
-                Logger.Exception($"An exception occured for request: [{req.Method}] {req.RequestUri}", ex);
+                Logger.Exception("An exception occured for request. Method: {0} URL: {1} Data Type: {2}", Method, RequestUrl, Data?.GetType().Name ?? "None", ex);
                 Close();
             }
         }
