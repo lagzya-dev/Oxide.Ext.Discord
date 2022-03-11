@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public ApplicationCommandType? Type { get; set; }
         
         /// <summary>
-        /// Converted <see cref="DiscordUser"/>s, <see cref="DiscordRole"/>s, <see cref="DiscordChannel"/>s, <see cref="GuildMember"/>s, <see cref="DiscordMessage"/>s
+        /// Converted <see cref="DiscordUser"/>s, <see cref="DiscordRole"/>s, <see cref="DiscordChannel"/>s, <see cref="GuildMember"/>s, <see cref="DiscordMessage"/>s <see cref="MessageAttachment"/>s
         /// </summary>
         [JsonProperty("resolved")]
         public InteractionDataResolved Resolved { get; set; }
