@@ -91,6 +91,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         public void AddDirectMessageCommand(string name, Plugin plugin, string callback)
         {
             AddDirectMessageCommand(name, plugin, (message, command, args) => plugin.CallHook(callback, message, command, args));
+            DiscordExtension.GlobalLogger.Debug("Plugin {0} Registered Direct Command {1} With Callback {2}", plugin.Name, name, callback);
         }
         
         /// <summary>
@@ -149,6 +150,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         public void AddGuildCommand(string name, Plugin plugin, List<Snowflake> allowedChannels, string callback)
         {
             AddGuildCommand(name, plugin, allowedChannels, (message, command, args) => plugin.CallHook(callback, message, command, args));
+            DiscordExtension.GlobalLogger.Debug("Plugin {0} Registered Guild Command {1} With Callback {2}", plugin.Name, name, callback);
         }
 
         /// <summary>
@@ -320,23 +322,28 @@ namespace Oxide.Ext.Discord.Libraries.Command
         internal bool HandleGuildCommand(BotClient client, DiscordMessage message, DiscordChannel channel, string name, string[] args)
         {
             GuildCommand command = _guildCommands[name];
+            DiscordExtension.GlobalLogger.Debug("Processing Command: {0}", name);
             if (command == null || !command.CanRun(client) || !command.CanHandle(message, channel))
             {
+                DiscordExtension.GlobalLogger.Debug("Can't handle command {0} {1} {2}", command == null, !command?.CanRun(client), !command?.CanHandle(message, channel));
                 return false;
             }
             
             if (!command.Plugin.IsLoaded)
             {
+                DiscordExtension.GlobalLogger.Debug("Can't handle command plugin not loaded");
                 _guildCommands.Remove(name);
                 return false;
             }
 
             if (!client.IsPluginRegistered(command.Plugin))
             {
+                DiscordExtension.GlobalLogger.Debug("Can't handle command plugin not registered");
                 return false;
             }
 
             command.HandleCommand(message, name, args);
+            DiscordExtension.GlobalLogger.Debug("Handling command");
             return true;
         }
         
@@ -344,7 +351,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         {
             foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
             {
-                object[] customAttributes = method.GetCustomAttributes(typeof(DirectMessageCommandAttribute), true);
+                object[] customAttributes = method.GetCustomAttributes(typeof(DirectMessageCommandAttribute), false);
                 if (customAttributes.Length != 0)
                 {
                     DirectMessageCommandAttribute command = (DirectMessageCommandAttribute)customAttributes[0];
@@ -360,7 +367,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
                     }
                 }
                 
-                customAttributes = method.GetCustomAttributes(typeof(GuildCommandAttribute), true);
+                customAttributes = method.GetCustomAttributes(typeof(GuildCommandAttribute), false);
                 if (customAttributes.Length != 0)
                 {
                     GuildCommandAttribute command = (GuildCommandAttribute)customAttributes[0];
