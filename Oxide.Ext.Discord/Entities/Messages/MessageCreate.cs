@@ -110,7 +110,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             if (string.IsNullOrEmpty(Content) && (Embeds == null || Embeds.Count == 0) && (FileAttachments == null || FileAttachments.Count == 0))
             {
-                throw new InvalidMessageException("Discord Messages require Either Content, An Embed, Or a File");
+                throw new InvalidMessageException("Discord Messages require Either Content, An Embed, Or a File", this);
             }
 
             if (!string.IsNullOrEmpty(Content) && Content.Length > 2000)
@@ -141,7 +141,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
             if ((Flags.Value & ~(MessageFlags.SuppressEmbeds | MessageFlags.Ephemeral)) != 0)
             {
-                throw new InvalidMessageException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds, and MessageFlags.Ephemeral");
+                throw new InvalidMessageException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds and MessageFlags.Ephemeral");
             }
         }
     }
