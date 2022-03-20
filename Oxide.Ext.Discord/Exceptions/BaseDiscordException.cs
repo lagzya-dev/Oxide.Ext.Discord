@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Exceptions
         /// Constructor
         /// </summary>
         /// <param name="message">Exception message</param>
-        public BaseDiscordException(string message) : base(message)
+        public BaseDiscordException(string message) : base($"{message} Ext Version: {DiscordExtension.FullExtensionVersion}")
         {
             
         }
