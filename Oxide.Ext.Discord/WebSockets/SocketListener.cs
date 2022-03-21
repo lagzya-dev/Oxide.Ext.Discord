@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// If the bot has successfully connected to the websocket at least once
         /// </summary>
-        public bool SocketHasConnected { get; internal set; }
+        public bool SocketHasConnected { get; private set; }
 
         private readonly BotClient _client;
         private readonly Socket _webSocket;
@@ -149,7 +149,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             else
             {
-                _logger.Warning($"Discord WebSocket closed with abnormal close code. Code: {{0}}, reason: {{1}}", code, reason);
+                _logger.Warning("Discord WebSocket closed with abnormal close code. Code: {{0}}, reason: {{1}}", code, reason);
                 _webSocket.Reconnect();
                 return;
             }
