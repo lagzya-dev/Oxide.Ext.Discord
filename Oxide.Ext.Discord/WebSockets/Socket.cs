@@ -2,6 +2,7 @@
 using System.Timers;
 using Newtonsoft.Json;
 using Oxide.Core;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
@@ -63,9 +64,10 @@ namespace Oxide.Ext.Discord.WebSockets
             string url = Gateway.WebsocketUrl;
             
             //We haven't gotten the websocket url. Get url then attempt to connect.
-            if (string.IsNullOrEmpty(url))
+            //There has been more than 3 tries to reconnect. Discord suggests trying to update gateway url.
+            if (string.IsNullOrEmpty(url) || _reconnectRetries >= 3)
             {
-                Gateway.UpdateGatewayUrl(_client, Connect);
+                Gateway.UpdateGatewayUrl(_client, Connect, OnGatewayUrlUpdateFailed);
                 return;
             }
 
@@ -89,6 +91,19 @@ namespace Oxide.Ext.Discord.WebSockets
             _socket.OnError += _listener.SocketErrored;
             _socket.OnMessage += _listener.SocketMessage;
             _socket.ConnectAsync();
+        }
+
+        private void OnGatewayUrlUpdateFailed(RestError error)
+        {
+            _logger.Warning("Failed to update gateway url. Will retry in 15 seconds.");
+            _reconnectRetries = Math.Max(3, _reconnectRetries);
+            
+            //Set as disconnected if we're in pending reconnect state we reconnect goes through.
+            if (SocketState == SocketState.PendingReconnect)
+            {
+                SocketState = SocketState.Disconnected;
+            }
+            Reconnect();
         }
 
         /// <summary>
@@ -252,7 +267,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             lock (_lock)
             {
-                if (SocketState != SocketState.Disconnected)
+                if (!IsDisconnected())
                 {
                     return;
                 }
@@ -285,15 +300,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private void ReconnectWebsocket(object sender, ElapsedEventArgs e)
         {
-            //There has been more than 3 tries to reconnect. Discord suggests trying to update gateway url.
-            if (_reconnectRetries > 3)
-            {
-                Gateway.UpdateGatewayUrl(_client, Connect);
-            }
-            else
-            {
-                Connect();
-            }
+            Connect();
             _reconnectTimer = null;
         }
 

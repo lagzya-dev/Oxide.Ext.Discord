@@ -31,19 +31,20 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the Gateway response</param>
-        public static void GetGateway(BotClient client, Action<Gateway> callback)
+        /// <param name="error">API error callback</param>
+        public static void GetGateway(BotClient client, Action<Gateway> callback, Action<RestError> error = null)
         {
-            client.Rest.DoRequest("/gateway", RequestMethod.GET, null, callback, null);
+            client.Rest.DoRequest("/gateway", RequestMethod.GET, null, callback, error);
         }
 
-        public static void UpdateGatewayUrl(BotClient client, Action callback)
+        public static void UpdateGatewayUrl(BotClient client, Action callback, Action<RestError> error = null)
         {
             GetGateway(client, gateway =>
             {
                 WebsocketUrl = $"{gateway.Url}/?{GatewayConnect.ConnectionArgs}";
                 client.Logger.Debug($"{nameof(Gateway)}.{nameof(UpdateGatewayUrl)} Updated Gateway Url: {{0}}", WebsocketUrl);
                 callback.Invoke();
-            });
+            }, error);
         }
     }
 }
