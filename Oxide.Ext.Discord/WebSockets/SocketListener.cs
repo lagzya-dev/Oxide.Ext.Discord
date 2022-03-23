@@ -275,7 +275,7 @@ namespace Oxide.Ext.Discord.WebSockets
                         break;
 
                     // Heartbeat
-                    // https://discordapp.com/developers/docs/topics/gateway#gateway-heartbeat
+                    // https://discord.com/developers/docs/topics/gateway#gateway-heartbeat
                     case GatewayEventCode.Heartbeat:
                         HandleHeartbeat(payload);
                         break;
@@ -322,7 +322,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             DispatchCode code = payload.EventCode;
 
-            // Listed here: https://discordapp.com/developers/docs/topics/gateway#commands-and-events-gateway-events
+            // Listed here: https://discord.com/developers/docs/topics/gateway#commands-and-events-gateway-events
             switch (code)
             {
                 case DispatchCode.Ready:
@@ -1809,7 +1809,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void Identify()
         {
             // Sent immediately after connecting. Opcode 2: Identify
-            // Ref: https://discordapp.com/developers/docs/topics/gateway#identifying
+            // Ref: https://discord.com/developers/docs/topics/gateway#identifying
 
             if (!_client.Initialized)
             {

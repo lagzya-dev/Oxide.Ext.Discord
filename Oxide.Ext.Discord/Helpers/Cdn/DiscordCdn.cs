@@ -159,7 +159,7 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
         /// <returns></returns>
         public static string GetChannelIcon(Snowflake channelId, string icon)
         {
-            return $"https://cdn.discordapp.com/channel-icons/{channelId.ToString()}/{icon}.png";
+            return $"{CdnUrl}/channel-icons/{channelId.ToString()}/{icon}.png";
         }
         
         /// <summary>

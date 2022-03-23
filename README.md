@@ -29,7 +29,7 @@ An API key is used to authenticate requests made to and from Discord.
 Sharing your key may result in punishments from Discord (including a platform-wide ban) if the token is used to abuse the API.
 
 Obtaining an API Key:
-1) Visit the official Discord Developers page here: [Discord Developer Documentation](https://discordapp.com/developers/applications/me)
+1) Visit the official Discord Developers page here: [Discord Developer Portal](https://discord.com/developers/applications)
 2) Click "New App".  
    ![](https://i.postimg.cc/ZKwQdZZP/1-New-Application.png)
 3) Name your app and click create!  
