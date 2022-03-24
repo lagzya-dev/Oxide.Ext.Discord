@@ -96,7 +96,7 @@ namespace Oxide.Ext.Discord.Rest.Request
         /// <summary>
         /// API Version for Rest requests
         /// </summary>
-        public const string ApiVersion = "v9";
+        public const string ApiVersion = "v10";
         
         /// <summary>
         /// Base API Url

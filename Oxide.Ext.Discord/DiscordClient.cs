@@ -93,6 +93,12 @@ namespace Oxide.Ext.Discord
             {
                 Logger.Warning("Using Discord Test Version: {0}", DiscordExtension.FullExtensionVersion);
             }
+
+            if ((settings.Intents & GatewayIntents.GuildMessages) != 0 && (settings.Intents & GatewayIntents.MessageContentIntent) == 0)
+            {
+                settings.Intents |= GatewayIntents.MessageContentIntent;
+                Logger.Warning("{O} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContentIntent. Message Content will not be included in guild messages", Owner.Name);
+            }
             
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {{0}}", Owner.Name);
 

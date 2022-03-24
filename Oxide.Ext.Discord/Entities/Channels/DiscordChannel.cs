@@ -741,20 +741,6 @@ namespace Oxide.Ext.Discord.Entities.Channels
         {
             client.Bot.Rest.DoRequest($"/channels/{Id}/thread-members", RequestMethod.GET, null, callback, error);
         }
-        
-        /// <summary>
-        /// Returns all active threads in the channel, including public and private threads. Threads are ordered by their id, in descending order.
-        /// Requires the READ_MESSAGE_HISTORY permission.
-        /// See <a href="https://discord.com/developers/docs/resources/channel#list-active-threads">List Active Threads</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the thread list information</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        [Obsolete("This route is deprecated and will be removed in v10. It is replaced by List Active Guild Threads.")]
-        public void ListActiveThreads(DiscordClient client, Action<ThreadList> callback = null, Action<RestError> error = null)
-        {
-            client.Bot.Rest.DoRequest($"/channels/{Id}/threads/active", RequestMethod.GET, null, callback, error);
-        }
 
         /// <summary>
         /// Returns archived threads in the channel that are public.

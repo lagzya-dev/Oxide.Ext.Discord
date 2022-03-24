@@ -79,6 +79,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <summary>
         /// If this application is a game sold on Discord, this field will be the summary field for the store page of its primary sku
         /// </summary>
+        [Obsolete("This field is no longer sent by discord and will be removed in API v11")]
         [JsonProperty("summary")]
         public string Summary { get; set; }
         

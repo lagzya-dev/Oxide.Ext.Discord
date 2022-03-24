@@ -129,6 +129,11 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         DirectMessageTyping = 1 << 14,
         
         /// <summary>
+        /// - Guild Message.Content
+        /// </summary>
+        MessageContentIntent = 1 << 15,
+        
+        /// <summary>
         /// - GUILD_SCHEDULED_EVENT_CREATE
         /// - GUILD_SCHEDULED_EVENT_UPDATE
         /// - GUILD_SCHEDULED_EVENT_DELETE
