@@ -147,11 +147,12 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands">Get Global Application Commands</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="withLocalizations">Include Command Localizations</param>
         /// <param name="callback">Callback with list of application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGlobalCommands(DiscordClient client, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGlobalCommands(DiscordClient client, bool withLocalizations = false, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest($"/applications/{Id}/commands?with_localizations={withLocalizations}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -202,12 +203,13 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">ID of the guild to get commands for</param>
+        /// <param name="withLocalizations">Include Command Localizations</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildCommands(DiscordClient client, Snowflake guildId, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGuildCommands(DiscordClient client, Snowflake guildId, bool withLocalizations = false, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
         {
             if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands?with_localizations={withLocalizations}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>

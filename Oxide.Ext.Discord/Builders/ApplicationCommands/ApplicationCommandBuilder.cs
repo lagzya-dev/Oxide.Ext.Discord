@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
     /// <summary>
     /// Builder to use when building application commands
     /// </summary>
-    public class ApplicationCommandBuilder : IApplicationCommandBuilder
+    public class ApplicationCommandBuilder
     {
         internal readonly CommandCreate Command;
         private readonly List<CommandOption> _options;
@@ -45,6 +47,30 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         public ApplicationCommandBuilder SetEnabled(bool enabled)
         {
             Command.DefaultPermissions = enabled;
+            return this;
+        }
+
+        /// <summary>
+        /// Adds command name localizations for a given plugin and lang key
+        /// </summary>
+        /// <param name="plugin">Plugin containing the localizations</param>
+        /// <param name="langKey">Lang Key containing the localized text</param>
+        /// <returns></returns>
+        public ApplicationCommandBuilder AddNameLocalizations(Plugin plugin, string langKey)
+        {
+            Command.NameLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds command description localizations for a given plugin and lang key
+        /// </summary>
+        /// <param name="plugin">Plugin containing the localizations</param>
+        /// <param name="langKey">Lang Key containing the localized text</param>
+        /// <returns></returns>
+        public ApplicationCommandBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
+        {
+            Command.DescriptionLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
             return this;
         }
 
@@ -105,7 +131,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 
             _chosenType = CommandOptionType.SubCommand;
 
-            return new SubCommandBuilder(_options, name, description, this);
+            return new SubCommandBuilder(_options, name, description);
         }
 
         /// <summary>
@@ -114,15 +140,15 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
         /// <param name="name">Name of the option</param>
         /// <param name="description">Description for the option</param>
-        /// <returns><see cref="CommandOptionBuilder"/></returns>
-        public CommandOptionBuilder AddOption(CommandOptionType type, string name, string description)
+        /// <returns><see cref="CommandOptionBuilder{T}"/></returns>
+        public CommandOptionBuilder<ApplicationCommandBuilder> AddOption(CommandOptionType type, string name, string description)
         {
             if (_chosenType.HasValue && (_chosenType.Value == CommandOptionType.SubCommandGroup || _chosenType.Value == CommandOptionType.SubCommand))
             {
                 throw new InvalidApplicationCommandException("Cannot mix sub command / sub command groups with command options");
             }
 
-            return new CommandOptionBuilder(_options, type, name, description, this);
+            return new CommandOptionBuilder<ApplicationCommandBuilder>(_options, type, name, description, this);
         }
 
         /// <summary>

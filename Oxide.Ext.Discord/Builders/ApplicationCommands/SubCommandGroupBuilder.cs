@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Helpers;
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
     /// <summary>
     /// Builder for Sub Command Groups
     /// </summary>
-    public class SubCommandGroupBuilder : IApplicationCommandBuilder
+    public class SubCommandGroupBuilder
     {
         private readonly CommandOption _option;
 
@@ -20,6 +22,30 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             };
             builder.Command.Options.Add(_option);
         }
+        
+        /// <summary>
+        /// Adds command name localizations for a given plugin and lang key
+        /// </summary>
+        /// <param name="plugin">Plugin containing the localizations</param>
+        /// <param name="langKey">Lang Key containing the localized text</param>
+        /// <returns></returns>
+        public SubCommandGroupBuilder AddNameLocalizations(Plugin plugin, string langKey)
+        {
+            _option.NameLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds command description localizations for a given plugin and lang key
+        /// </summary>
+        /// <param name="plugin">Plugin containing the localizations</param>
+        /// <param name="langKey">Lang Key containing the localized text</param>
+        /// <returns></returns>
+        public SubCommandGroupBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
+        {
+            _option.DescriptionLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            return this;
+        }
 
         /// <summary>
         /// Adds a sub command to this sub command group
@@ -29,7 +55,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <returns><see cref="SubCommandBuilder"/></returns>
         public SubCommandBuilder AddSubCommand(string name, string description)
         {
-            return new SubCommandBuilder(_option.Options, name, description, this);
+            return new SubCommandBuilder(_option.Options, name, description);
         }
     }
 }

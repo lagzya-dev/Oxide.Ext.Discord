@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
@@ -14,6 +15,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
+        
+        /// <summary>
+        /// Localization dictionary for the name field. Values follow the same restrictions as name
+        /// </summary>
+        [JsonProperty("name_localizations")]
+        public Hash<string, string> NameLocalizations { get; set; }
         
         /// <summary>
         /// Type can be string, integer, double or boolean

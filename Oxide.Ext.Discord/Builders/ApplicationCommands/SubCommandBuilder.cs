@@ -6,17 +6,15 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// <summary>
     /// Base Sub Command builder
     /// </summary>
-    public class SubCommandBuilder : IApplicationCommandBuilder
+    public class SubCommandBuilder
     {
-        private readonly IApplicationCommandBuilder _builder;
         /// <summary>
         /// Options list to have options added to
         /// </summary>
         private readonly List<CommandOption> _options;
 
-        internal SubCommandBuilder(List<CommandOption> parent, string name, string description, IApplicationCommandBuilder builder)
+        internal SubCommandBuilder(List<CommandOption> parent, string name, string description)
         {
-            _builder = builder;
             _options = new List<CommandOption>();
             parent.Add(new CommandOption
             {
@@ -35,27 +33,9 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="description">Description of the option</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public CommandOptionBuilder AddOption(CommandOptionType type, string name, string description)
+        public CommandOptionBuilder<SubCommandBuilder> AddOption(CommandOptionType type, string name, string description)
         {
-            return new CommandOptionBuilder(_options, type, name, description, this);
-        }
-
-        /// <summary>
-        /// Returns the built sub command
-        /// </summary>
-        /// <returns></returns>
-        public ApplicationCommandBuilder BuildForApplicationCommand()
-        {
-            return (ApplicationCommandBuilder)_builder;
-        }
-        
-        /// <summary>
-        /// Returns the built sub command
-        /// </summary>
-        /// <returns></returns>
-        public SubCommandGroupBuilder BuildForSubCommandGroup()
-        {
-            return (SubCommandGroupBuilder)_builder;
+            return new CommandOptionBuilder<SubCommandBuilder>(_options, type, name, description, this);
         }
     }
 }

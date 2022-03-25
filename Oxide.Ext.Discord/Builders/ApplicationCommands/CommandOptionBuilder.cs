@@ -1,20 +1,22 @@
 using System;
 using System.Collections.Generic;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
     /// <summary>
     /// Builder for command options
     /// </summary>
-    public class CommandOptionBuilder : IApplicationCommandBuilder
+    public class CommandOptionBuilder<T>
     {
         private readonly CommandOption _option;
-        private readonly IApplicationCommandBuilder _builder;
+        private readonly T _builder;
         
-        internal CommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, IApplicationCommandBuilder builder)
+        internal CommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, T builder)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
@@ -35,13 +37,37 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             parent.Add(_option);
             _builder = builder;
         }
+        
+        /// <summary>
+        /// Adds command name localizations for a given plugin and lang key
+        /// </summary>
+        /// <param name="plugin">Plugin containing the localizations</param>
+        /// <param name="langKey">Lang Key containing the localized text</param>
+        /// <returns></returns>
+        public CommandOptionBuilder<T> AddNameLocalizations(Plugin plugin, string langKey)
+        {
+            _option.NameLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds command description localizations for a given plugin and lang key
+        /// </summary>
+        /// <param name="plugin">Plugin containing the localizations</param>
+        /// <param name="langKey">Lang Key containing the localized text</param>
+        /// <returns></returns>
+        public CommandOptionBuilder<T> AddDescriptionLocalizations(Plugin plugin, string langKey)
+        {
+            _option.DescriptionLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            return this;
+        }
 
         /// <summary>
         /// Set the required state for the option
         /// </summary>
         /// <param name="required">If the option is required (Default: true)</param>
         /// <returns>This</returns>
-        public CommandOptionBuilder Required(bool required = true)
+        public CommandOptionBuilder<T> Required(bool required = true)
         {
             _option.Required = required;
             return this;
@@ -52,7 +78,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="autoComplete">If the option support auto complete (Default: true)</param>
         /// <returns>This</returns>
-        public CommandOptionBuilder AutoComplete(bool autoComplete = true)
+        public CommandOptionBuilder<T> AutoComplete(bool autoComplete = true)
         {
             _option.Autocomplete = autoComplete;
             return this;
@@ -63,7 +89,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="minValue">Min Value</param>
         /// <returns>This</returns>
-        public CommandOptionBuilder SetMinValue(int minValue)
+        public CommandOptionBuilder<T> SetMinValue(int minValue)
         {
             if (_option.Type != CommandOptionType.Integer && _option.Type != CommandOptionType.Number)
             {
@@ -79,7 +105,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="minValue">Min Value</param>
         /// <returns>This</returns>
-        public CommandOptionBuilder SetMinValue(double minValue)
+        public CommandOptionBuilder<T> SetMinValue(double minValue)
         {
             if (_option.Type != CommandOptionType.Number)
             {
@@ -95,7 +121,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="maxValue">Min Value</param>
         /// <returns>This</returns>
-        public CommandOptionBuilder SetMaxValue(int maxValue)
+        public CommandOptionBuilder<T> SetMaxValue(int maxValue)
         {
             if (_option.Type != CommandOptionType.Integer && _option.Type != CommandOptionType.Number)
             {
@@ -111,7 +137,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="maxValue">Min Value</param>
         /// <returns>This</returns>
-        public CommandOptionBuilder SetMaxValue(double maxValue)
+        public CommandOptionBuilder<T> SetMaxValue(double maxValue)
         {
             if (_option.Type != CommandOptionType.Integer && _option.Type != CommandOptionType.Number)
             {
@@ -128,7 +154,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="types">Types of channels the option allows</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if <see cref="CommandOptionType"/> is not Channel</exception>
-        public CommandOptionBuilder SetChannelTypes(List<ChannelType> types)
+        public CommandOptionBuilder<T> SetChannelTypes(List<ChannelType> types)
         {
             if (_option.Type != CommandOptionType.Channel)
             {
@@ -146,7 +172,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="value">Value of the choice</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if option type is not string</exception>
-        public CommandOptionBuilder AddChoice(string name, string value)
+        public CommandOptionBuilder<T> AddChoice(string name, string value)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
@@ -158,7 +184,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
                 throw new InvalidApplicationCommandException($"Cannot add a string choice to non string type: {_option.Type}");
             }
             
-            return AddChoice(name, (object)value);
+            return AddChoiceInternal(name, value);
         }
         
         
@@ -169,7 +195,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="value">Value of the choice</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if option type is not int</exception>
-        public CommandOptionBuilder AddChoice(string name, int value)
+        public CommandOptionBuilder<T> AddChoice(string name, int value)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
@@ -179,7 +205,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
                 throw new InvalidApplicationCommandException($"Cannot add a integer choice to non integer type: {_option.Type}");
             }
 
-            return AddChoice(name, (object)value);
+            return AddChoiceInternal(name, value);
         }
         
         /// <summary>
@@ -189,7 +215,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="value">Value of the choice</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if option type is not double</exception>
-        public CommandOptionBuilder AddChoice(string name, double value)
+        public CommandOptionBuilder<T> AddChoice(string name, double value)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(name));
@@ -199,10 +225,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
                 throw new InvalidApplicationCommandException($"Cannot add a number choice to non number type: {_option.Type}");
             }
 
-            return AddChoice(name, (object)value);
+            return AddChoiceInternal(name, value);
         }
 
-        private CommandOptionBuilder AddChoice(string name, object value)
+        private CommandOptionBuilder<T> AddChoiceInternal(string name, object value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
@@ -224,21 +250,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         }
 
         /// <summary>
-        /// Builds the option for ApplicationCommandBuilder builder
+        /// Builds the CommandOptionBuilder
         /// </summary>
         /// <returns></returns>
-        public ApplicationCommandBuilder BuildForApplicationCommand()
+        public T Build()
         {
-            return (ApplicationCommandBuilder)_builder;
-        }
-        
-        /// <summary>
-        /// Builds the option for ApplicationCommandBuilder builder
-        /// </summary>
-        /// <returns></returns>
-        public SubCommandBuilder BuildForSubCommand()
-        {
-            return (SubCommandBuilder)_builder;
+            return _builder;
         }
     }
 }

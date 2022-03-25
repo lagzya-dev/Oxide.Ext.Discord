@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using Oxide.Core;
+using Oxide.Core.Libraries;
+using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Helpers
@@ -10,6 +15,9 @@ namespace Oxide.Ext.Discord.Helpers
         private static readonly Hash<string, string> DiscordToOxide = new Hash<string, string>();
         private static readonly Hash<string, string> OxideToDiscord = new Hash<string, string>();
         
+        private static Lang _lang;
+        private static Lang Lang => _lang ?? (_lang = Interface.Oxide.GetLibrary<Lang>());
+
         static LocaleConverter()
         {
             AddLocale("en","en-US");
@@ -69,6 +77,41 @@ namespace Oxide.Ext.Discord.Helpers
         public static string GetDiscordLocale(string oxideLocale)
         {
             return !string.IsNullOrEmpty(oxideLocale) ? OxideToDiscord[oxideLocale] : string.Empty;
+        }
+
+        /// <summary>
+        /// Returns the discord localization for a plugins oxide lang.
+        /// This is used for application command localization
+        /// </summary>
+        /// <param name="plugin"></param>
+        /// <param name="langKey"></param>
+        /// <returns></returns>
+        public static Hash<string, string> GetCommandLocalization(Plugin plugin, string langKey)
+        {
+            Hash<string, string> localization = new Hash<string, string>();
+            string[] languages = Lang.GetLanguages(plugin);
+            for (int index = 0; index < languages.Length; index++)
+            {
+                string language = languages[index];
+                string discordLocale = GetDiscordLocale(language);
+                if (string.IsNullOrEmpty(discordLocale))
+                {
+                    DiscordExtension.GlobalLogger.Warning("Discord Extension failed to find discord locale for oxide language '{0}' for '{1}'. Please give this message to the Discord Extension Authors", language, plugin.Name);
+                    continue;
+                }
+
+                Dictionary<string, string> messages = Lang.GetMessages(language, plugin);
+                if (!messages.ContainsKey(langKey))
+                {
+                    DiscordExtension.GlobalLogger.Warning("Failed to add localized message for lang key '{0}' for plugin '{1} because lang key doesn't exist for language {2}", langKey, plugin.Name, language);
+                    continue;
+                }
+
+                string message = messages[langKey];
+                localization[discordLocale] = message;
+            }
+
+            return localization;
         }
     }
 }

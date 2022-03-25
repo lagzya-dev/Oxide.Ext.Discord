@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
@@ -43,10 +44,22 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public string Name { get; set; }
         
         /// <summary>
+        /// Localization dictionary for the name field. Values follow the same restrictions as name
+        /// </summary>
+        [JsonProperty("name_localizations")]
+        public Hash<string, string> NameLocalizations { get; set; }
+        
+        /// <summary>
         /// Description of the command (1-100 characters)
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
+        
+        /// <summary>
+        /// Localization dictionary for the description field. Values follow the same restrictions as description
+        /// </summary>
+        [JsonProperty("description_localizations")]
+        public Hash<string, string> DescriptionLocalizations { get; set; }
         
         /// <summary>
         /// The parameters for the command
