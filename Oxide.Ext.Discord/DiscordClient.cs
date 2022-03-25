@@ -97,7 +97,7 @@ namespace Oxide.Ext.Discord
             if ((settings.Intents & GatewayIntents.GuildMessages) != 0 && (settings.Intents & GatewayIntents.MessageContentIntent) == 0)
             {
                 settings.Intents |= GatewayIntents.MessageContentIntent;
-                Logger.Warning("{O} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContentIntent. Message Content will not be included in guild messages", Owner.Name);
+                Logger.Warning("{0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContentIntent. Message Content will not be included in guild messages", Owner.Name);
             }
             
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {{0}}", Owner.Name);
