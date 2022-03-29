@@ -8,7 +8,6 @@ namespace Oxide.Ext.Discord.Entities.Invites
     /// <summary>
     /// Represents an <a href="https://discord.com/developers/docs/resources/invite#invite-stage-instance-object">Invite Stage Instance</a>
     /// </summary>
-    [Obsolete("This object is considered deprecated by discord and may be removed in a future update.")]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InviteStageInstance
     {
