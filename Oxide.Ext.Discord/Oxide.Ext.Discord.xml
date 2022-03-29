@@ -245,6 +245,22 @@
             <param name="enabled">If the command is enabled</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command name localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command description localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String)">
             <summary>
             Creates a new SubCommandGroup
@@ -272,7 +288,7 @@
             <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
             <param name="name">Name of the option</param>
             <param name="description">Description for the option</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.Build">
             <summary>
@@ -280,54 +296,70 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1">
             <summary>
             Builder for command options
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.Required(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command name localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command description localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.Required(System.Boolean)">
             <summary>
             Set the required state for the option
             </summary>
             <param name="required">If the option is required (Default: true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AutoComplete(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AutoComplete(System.Boolean)">
             <summary>
             Enable auto complete for the option
             </summary>
             <param name="autoComplete">If the option support auto complete (Default: true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMinValue(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.SetMinValue(System.Int32)">
             <summary>
             Min Value for Integer Option
             </summary>
             <param name="minValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMinValue(System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.SetMinValue(System.Double)">
             <summary>
             Min Value for Number Option
             </summary>
             <param name="minValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMaxValue(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.SetMaxValue(System.Int32)">
             <summary>
             Max Value for Integer Option
             </summary>
             <param name="maxValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetMaxValue(System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.SetMaxValue(System.Double)">
             <summary>
             Max Value for Number Option
             </summary>
             <param name="maxValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.SetChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.SetChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
             <summary>
             Set's the channel types for the option
             </summary>
@@ -335,7 +367,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType"/> is not Channel</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.String)">
             <summary>
             Adds a choice to this option of type string
             </summary>
@@ -344,7 +376,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not string</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.Int32)">
             <summary>
             Adds a choice to this option of type int
             </summary>
@@ -353,7 +385,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not int</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.AddChoice(System.String,System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.AddChoice(System.String,System.Double)">
             <summary>
             Adds a choice to this option of type double
             </summary>
@@ -362,22 +394,11 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not double</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.BuildForApplicationCommand">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder`1.Build">
             <summary>
-            Builds the option for ApplicationCommandBuilder builder
+            Builds the CommandOptionBuilder
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.CommandOptionBuilder.BuildForSubCommand">
-            <summary>
-            Builds the option for ApplicationCommandBuilder builder
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.IApplicationCommandBuilder">
-            <summary>
-            Represents a type that is an Application Command Builder
-            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder">
             <summary>
@@ -399,22 +420,26 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.BuildForApplicationCommand">
-            <summary>
-            Returns the built sub command
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.BuildForSubCommandGroup">
-            <summary>
-            Returns the built sub command
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder">
             <summary>
             Builder for Sub Command Groups
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command name localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command description localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddSubCommand(System.String,System.String)">
             <summary>
@@ -780,7 +805,7 @@
             Represents Discord Extension Logging Config
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Configuration.DiscordLoggingConfig.HiddenDiscordErrorCodes">
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordLoggingConfig.HideDiscordErrorCodes">
             <summary>
             Discord Response Error codes that will not be logged
             </summary>
@@ -2771,42 +2796,44 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayPresence">
             <summary>
-            The application is verified and can use the GUILD_PRESENCES intent
+            Intent required for bots in 100 or more servers to receive presence_update events
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayPresenceLimited">
             <summary>
-            The application has the GUILD_PRESENCES intent enabled on the bot
+            Intent required for bots in under 100 servers to receive presence_update events, found in Bot Settings
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayGuildMembers">
             <summary>
-            The application is verified and can use the GUILD_MEMBERS intent
+            Intent required for bots in 100 or more servers to receive member-related events like guild_member_add.
+            See list of member-related events under GUILD_MEMBERS
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayGuildMembersLimited">
             <summary>
-            The application has the GUILD_MEMBERS intent enabled on the bot
+            Intent required for bots in under 100 servers to receive member-related events like guild_member_add, found in Bot Settings.
+            See list of member-related events under GUILD_MEMBERS
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.VerificationPendingGuildLimit">
             <summary>
-            The application is currently pending verification
+            Indicates unusual growth of an app that prevents verification
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.Embedded">
             <summary>
-            The application has functionality that is specific to the discord client app.
+            Indicates if an app is embedded within the Discord client (currently unavailable publicly)
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayMessageContent">
             <summary>
-            The application is verified and can use the Gateway Message intent
+            Intent required for bots in 100 or more servers to receive message content
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayMessageContentLimited">
             <summary>
-            The application has the Gateway Message intent enabled on the bot
+            Intent required for bots in under 100 servers to receive message content, found in Bot Settings
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication">
@@ -2917,13 +2944,14 @@
             <param name="flag">Flag to compare against</param>
             <returns>True of application has flag; False Otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalCommands(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalCommands(Oxide.Ext.Discord.DiscordClient,System.Boolean,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Fetch all of the global commands for your application.
             Returns a list of ApplicationCommand.
             See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands">Get Global Application Commands</a>
             </summary>
             <param name="client">Client to use</param>
+            <param name="withLocalizations">Include Command Localizations</param>
             <param name="callback">Callback with list of application commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -2959,13 +2987,14 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildCommands(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Boolean,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Fetch all of the guild commands for your application for a specific guild.
             See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands">Get Guild Application Commands</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guildId">ID of the guild to get commands for</param>
+            <param name="withLocalizations">Include Command Localizations</param>
             <param name="callback">Callback with a list of guild application commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -3757,10 +3786,7 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.ChannelMessagesRequest.ToQueryString">
-            <summary>
-            Returns the request as a query string
-            </summary>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelType">
             <summary>
@@ -4150,30 +4176,6 @@
             <param name="callback">Callback once the action is complete</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetChannelInvites(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Invites.DiscordInvite}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Returns a list of invite objects (with invite metadata) for the channel.
-            Only usable for guild channels.
-            Requires the MANAGE_CHANNELS permission.
-            See <a href="https://discord.com/developers/docs/resources/channel#get-channel-invites">Get Channel Invites</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="callback">Callback with list of invites for the channel</param>
-            <exception cref="T:System.Exception">Thrown when the channel type is Dm or GroupDm</exception>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateChannelInvite(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelInvite,System.Action{Oxide.Ext.Discord.Entities.Invites.DiscordInvite},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Create a new invite object for the channel.
-            Only usable for guild channels.
-            Requires the CREATE_INSTANT_INVITE permission.
-            See <a href="https://discord.com/developers/docs/resources/channel#create-channel-invite">Create Channel Invite</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="invite">Invite to create</param>
-            <param name="callback">Callback with the created invite</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DeleteChannelPermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Delete a channel permission overwrite for a user or role in a channel.
@@ -4196,6 +4198,30 @@
             <param name="client">Client to use</param>
             <param name="overwriteId">Overwrite ID to delete</param>
             <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetChannelInvites(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Invites.DiscordInvite}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Returns a list of invite objects (with invite metadata) for the channel.
+            Only usable for guild channels.
+            Requires the MANAGE_CHANNELS permission.
+            See <a href="https://discord.com/developers/docs/resources/channel#get-channel-invites">Get Channel Invites</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with list of invites for the channel</param>
+            <exception cref="T:System.Exception">Thrown when the channel type is Dm or GroupDm</exception>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateChannelInvite(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelInvite,System.Action{Oxide.Ext.Discord.Entities.Invites.DiscordInvite},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Create a new invite object for the channel.
+            Only usable for guild channels.
+            Requires the CREATE_INSTANT_INVITE permission.
+            See <a href="https://discord.com/developers/docs/resources/channel#create-channel-invite">Create Channel Invite</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="invite">Invite to create</param>
+            <param name="callback">Callback with the created invite</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.FollowNewsChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.FollowedChannel},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -4341,16 +4367,6 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the list of thread members</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ListActiveThreads(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Returns all active threads in the channel, including public and private threads. Threads are ordered by their id, in descending order.
-            Requires the READ_MESSAGE_HISTORY permission.
-            See <a href="https://discord.com/developers/docs/resources/channel#list-active-threads">List Active Threads</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="callback">Callback with the thread list information</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ListPublicArchivedThreads(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -4576,6 +4592,11 @@
             The ID of the associated Stage channel
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.Topic">
+            <summary>
+            The topic of the Stage instance (1-120 characters)
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.PrivacyLevel">
             <summary>
             The privacy level of the Stage instance
@@ -4586,9 +4607,9 @@
             Whether or not Stage discovery is disabled (deprecated)   
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.Topic">
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.GuildScheduledEventId">
             <summary>
-            The topic of the Stage instance (1-120 characters)
+            The id of the scheduled event for this Stage instance
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.CreateStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.Channels.Stages.PrivacyLevel,System.Action{Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -4691,6 +4712,9 @@
             <summary>
             Optional maximum number of threads to return
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup.ToQueryString">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate">
             <summary>
@@ -5944,7 +5968,7 @@
             Example: wss://gateway.discord.gg/?v=8&amp;encoding=json
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.Gateway.GetGateway(Oxide.Ext.Discord.BotClient,System.Action{Oxide.Ext.Discord.Entities.Gatway.Gateway})">
+        <member name="M:Oxide.Ext.Discord.Entities.Gatway.Gateway.GetGateway(Oxide.Ext.Discord.BotClient,System.Action{Oxide.Ext.Discord.Entities.Gatway.Gateway},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Returns an object with a single valid WSS URL, which the client can use for Connecting.
             Clients should cache this value and only call this endpoint to retrieve a new URL if they are unable to properly establish a connection using the cached version of the URL.
@@ -5952,6 +5976,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="callback">Callback with the Gateway response</param>
+            <param name="error">API error callback</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.GatewayConnect">
             <summary>
@@ -6102,6 +6127,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.DirectMessageTyping">
             <summary>
             - TYPING_START
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.MessageContentIntent">
+            <summary>
+            - Guild Message.Content
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildScheduledEvents">
@@ -7716,10 +7746,7 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildPruneGet.ToQueryString">
-            <summary>
-            Returns the query string for the Guild Prune Get endpoint
-            </summary>
-            <returns>Guild Prune Get Query String</returns>
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition">
             <summary>
@@ -8096,6 +8123,9 @@
             Include number of users subscribed to each event
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup.ToQueryString">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventPrivacyLevel">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level">Guild Scheduled Event Privacy Level</a>
@@ -8238,6 +8268,9 @@
             Consider only users after given user id
             Default null
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUsersLookup.ToQueryString">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags">
             <summary>
@@ -8486,9 +8519,19 @@
             1-32 lowercase character name matching ^[\w-]{1,32}$
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.NameLocalizations">
+            <summary>
+            Localization dictionary for the name field. Values follow the same restrictions as name
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.Description">
             <summary>
             Description of the command (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.DescriptionLocalizations">
+            <summary>
+            Localization dictionary for the description field. Values follow the same restrictions as description
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.Options">
@@ -8539,9 +8582,19 @@
             Name of the command option (1-32 characters)
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.NameLocalizations">
+            <summary>
+            Localization dictionary for the name field. Values follow the same restrictions as name
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Description">
             <summary>
             Description the command option (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.DescriptionLocalizations">
+            <summary>
+            Localization dictionary for the description field. Values follow the same restrictions as description
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Required">
@@ -8591,6 +8644,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice.Name">
             <summary>
             Choice name (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice.NameLocalizations">
+            <summary>
+            Localization dictionary for the name field. Values follow the same restrictions as name
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice.Value">
@@ -8655,6 +8713,11 @@
             Any double between -2^53 and 2^53
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType.Attachment">
+            <summary>
+            Attachment object
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure">ApplicationCommandPermissions</a>
@@ -8701,9 +8764,19 @@
             1-32 lowercase character name matching ^[\w-]{1,32}$
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.NameLocalizations">
+            <summary>
+            Localization dictionary for the name field. Values follow the same restrictions as name
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.Description">
             <summary>
             Description of the command (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.DescriptionLocalizations">
+            <summary>
+            Localization dictionary for the description field. Values follow the same restrictions as description
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.Options">
@@ -8747,9 +8820,19 @@
             1-32 lowercase character name matching ^[\w-]{1,32}$
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.NameLocalizations">
+            <summary>
+            Localization dictionary for the name field. Values follow the same restrictions as name
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Description">
             <summary>
             Description of the command (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.DescriptionLocalizations">
+            <summary>
+            Localization dictionary for the description field. Values follow the same restrictions as description
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Options">
@@ -9051,7 +9134,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Resolved">
             <summary>
-            Converted <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Messages.DiscordMessage"/>s
+            Converted <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/>s, <see cref="T:Oxide.Ext.Discord.Entities.Messages.DiscordMessage"/>s <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageAttachment"/>s
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Options">
@@ -9077,6 +9160,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.TargetId">
             <summary>
             Id the of user or message targeted by a user or message command
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Components">
+            <summary>
+            The values submitted by the user (Modal Submit)
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption">
@@ -9290,6 +9378,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved.Messages">
             <summary>
             The ids and partial Message objects
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataResolved.Attachments">
+            <summary>
+            The ids and attachment objects
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionResponse">
@@ -9589,7 +9682,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.Placeholder">
             <summary>
             Custom placeholder text if nothing is selected
-            Max 100 characters
+            Max 150 characters
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.MinValues">
@@ -9754,6 +9847,9 @@
             <summary>
             The guild scheduled event to include with the invite
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Invites.InviteLookup.ToQueryString">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Invites.InviteMetadata">
             <summary>
@@ -11463,7 +11559,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ViewChannel">
             <summary>
-            Allows guild members to view a channel, which includes reading messages in text channels
+            Allows guild members to view a channel, which includes reading messages in text channels and joining voice channels
             Channel Type (Text, Voice, Stage)
             </summary>
         </member>
@@ -11647,6 +11743,12 @@
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.StartEmbeddedActivities">
             <summary>
             Allows for launching activities (applications with the `EMBEDDED` flag) in a voice channel
+            Channel Type (Voice)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseEmbeddedActivities">
+            <summary>
+            Allows for using Activities (applications with the `EMBEDDED` flag) in a voice channel
             Channel Type (Voice)
             </summary>
         </member>
@@ -12671,10 +12773,7 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.UserGuildsRequest.ToQueryString">
-            <summary>
-            Returns the query string for the request
-            </summary>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserPremiumType">
             <summary>
@@ -13142,10 +13241,7 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams.ToQueryString">
-            <summary>
-            Returns the query string to be used in the webhook URL
-            </summary>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams.GetWebhookFormat">
             <summary>
@@ -13166,10 +13262,7 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams.ToQueryString">
-            <summary>
-            Returns the query string to be used in the webhook URL
-            </summary>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookSendType">
             <summary>
@@ -13284,6 +13377,17 @@
             </summary>
             <param name="fileName">invalid file name</param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidGuildMemberSearch">
+            <summary>
+            Represents using an invalid guild member search
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidGuildMemberSearch.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.InvalidInteractionResponseException">
             <summary>
             Error thrown when an interaction response is invalid
@@ -13316,6 +13420,13 @@
             Constructor
             </summary>
             <param name="message">Exception message</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.InvalidMessageException.#ctor(System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
+            <param name="create">Message Create that caused the error</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.InvalidSnowflakeException">
             <summary>
@@ -13364,11 +13475,6 @@
             </summary>
             <param name="user">Discord user to check if they're linked</param>
             <returns>True if linked; False otherwise</returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Extensions.EnumExt">
-            <summary>
-            Extensions for enums
-            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.HashExt">
             <summary>
@@ -13988,6 +14094,15 @@
             <param name="oxideLocale">oxide locale to get discord locale for</param>
             <returns>Discord locale if it exists; null otherwise</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.LocaleConverter.GetCommandLocalization(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Returns the discord localization for a plugins oxide lang.
+            This is used for application command localization
+            </summary>
+            <param name="plugin"></param>
+            <param name="langKey"></param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.Time">
             <summary>
             Helper methods relating to time
@@ -14093,6 +14208,17 @@
             Checks if the filename is a valid discord filename.
             </summary>
             <param name="filename">Filename to validate</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordQueryString">
+            <summary>
+            Interface for Discord Query Strings
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.IDiscordQueryString.ToQueryString">
+            <summary>
+            Returns the request as a query string
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IFileAttachments">
             <summary>
