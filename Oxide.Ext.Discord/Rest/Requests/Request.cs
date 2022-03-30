@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using Oxide.Core;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
@@ -33,7 +34,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Full Request URl to the API
         /// </summary>
-        public string RequestUrl => BaseUrl + Route;
+        public string RequestUrl => DiscordEndpoints.Rest.DiscordApiUrl + Route;
 
         /// <summary>
         /// Data to be sent with the request
@@ -87,22 +88,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         public bool InProgress { get; private set; }
 
         internal Bucket Bucket;
-        
-        /// <summary>
-        /// Base URL for Discord
-        /// </summary>
-        public const string UrlBase = "https://discord.com/api";
-        
-        /// <summary>
-        /// API Version for Rest requests
-        /// </summary>
-        public const string ApiVersion = "v10";
-        
-        /// <summary>
-        /// Base API Url
-        /// </summary>
-        public const string BaseUrl = UrlBase + "/" +ApiVersion;
-        
+
         /// <summary>
         /// Logger
         /// </summary>

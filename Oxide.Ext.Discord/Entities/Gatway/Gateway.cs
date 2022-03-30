@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
 
@@ -41,7 +42,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         {
             GetGateway(client, gateway =>
             {
-                WebsocketUrl = $"{gateway.Url}/?{GatewayConnect.ConnectionArgs}";
+                WebsocketUrl = $"{gateway.Url}/?{DiscordEndpoints.Websocket.WebsocketArgs}";
                 client.Logger.Debug($"{nameof(Gateway)}.{nameof(UpdateGatewayUrl)} Updated Gateway Url: {{0}}", WebsocketUrl);
                 callback.Invoke();
             }, error);
