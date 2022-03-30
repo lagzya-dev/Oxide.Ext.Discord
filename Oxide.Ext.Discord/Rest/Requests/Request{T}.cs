@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// Handles request that return data
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Request<T> : Requests.Request
+    public class Request<T> : Request
     {
         private readonly Action<T> _onSuccess;
 

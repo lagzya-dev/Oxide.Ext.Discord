@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Callback to call if the request errored with the last error message
         /// </summary>
-        public readonly Action<RestError> OnError;
+        private readonly Action<RestError> _onError;
 
         /// <summary>
         /// The DateTime the request was started
@@ -132,7 +132,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Route = route;
             Data = data;
             _authHeader = authHeader;
-            OnError = onError;
+            _onError = onError;
             Logger = logger;
             MultipartRequest = Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0;
         }
@@ -313,11 +313,11 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             Interface.Oxide.NextTick(() =>
             {
-                if (OnError != null)
+                if (_onError != null)
                 {
                     try
                     {
-                        OnError.Invoke(_lastError);
+                        _onError.Invoke(_lastError);
                     }
                     catch (Exception ex)
                     {
