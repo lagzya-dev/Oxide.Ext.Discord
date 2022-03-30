@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Validations;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
@@ -12,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
     /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure">Interaction Application Command Callback Data Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class InteractionCallbackData
+    public class InteractionCallbackData : IDiscordValidation
     {
         /// <summary>
         /// Is the response TTS
@@ -70,14 +71,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         [JsonProperty("attachments")]
         public List<MessageAttachment> Attachments { get; set; }
 
-        internal void Validate()
+        /// <inheritdoc/>
+        public void Validate()
         {
-            if (!Flags.HasValue)
-            {
-                return;
-            }
-
-            if ((Flags.Value & ~(MessageFlags.SuppressEmbeds | MessageFlags.Ephemeral)) != 0)
+            if (Flags.HasValue && (Flags.Value & ~(MessageFlags.SuppressEmbeds | MessageFlags.Ephemeral)) != 0)
             {
                 throw new InvalidInteractionResponseException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds or MessageFlags.Ephemeral");
             }

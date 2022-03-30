@@ -94,16 +94,33 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="avatar">Image for the default webhook avatar</param>
         /// <param name="callback">Callback with the completed webhook</param>
         /// <param name="error">Callback when an error occurs with error information</param>
+        [Obsolete("Replaced with CreateWebhook(DiscordClient client, Snowflake channelId, WebhookCreate create, Action<DiscordWebhook> callback = null, Action<RestError> error = null)")]
         public static void CreateWebhook(DiscordClient client, Snowflake channelId, string name, string avatar = null, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            Dictionary<string, string> data = new Dictionary<string, string>
+            WebhookCreate create = new WebhookCreate
             {
-                ["name"] = name,
-                ["avatar"] = avatar
+                Name = name,
+                Avatar = avatar
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.POST, data, callback, error);
+            CreateWebhook(client, channelId, create, callback, error);
+        }
+
+        /// <summary>
+        /// Create a new webhook.
+        /// Requires the MANAGE_WEBHOOKS permission.
+        /// See <a href="https://discord.com/developers/docs/resources/webhook#create-webhook">Create Webhook</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channelId">Channel ID for the webhook</param>
+        /// <param name="create">Webhook create request</param>
+        /// <param name="callback">Callback with the completed webhook</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public static void CreateWebhook(DiscordClient client, Snowflake channelId, WebhookCreate create, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
+        {
+            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
+            
+            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.POST, create, callback, error);
         }
 
         /// <summary>
@@ -271,10 +288,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             {
                 executeParams = new WebhookExecuteParams();
             }
-            
-            message.Validate();
-            message.ValidateWebhookMessage();
-            
+
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
 
@@ -295,9 +309,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             }
 
             executeParams.Wait = true;
-            message.Validate();
-            message.ValidateWebhookMessage();
-            
+
             client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
 

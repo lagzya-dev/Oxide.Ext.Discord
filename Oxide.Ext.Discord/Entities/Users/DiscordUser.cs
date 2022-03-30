@@ -231,15 +231,30 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="avatarData">Avatar data to set</param>
         /// <param name="callback">Callback with the updated user</param>
         /// <param name="error">Callback when an error occurs with error information</param>
+        [Obsolete("Replaced with ModifyCurrentUser(DiscordClient client, UserModifyCurrent current, Action<DiscordUser> callback = null, Action<RestError> error = null)")]
         public void ModifyCurrentUser(DiscordClient client, string username = "", string avatarData = "", Action<DiscordUser> callback = null, Action<RestError> error = null)
         {
-            Dictionary<string, string> data = new Dictionary<string, string>
+            UserModifyCurrent data = new UserModifyCurrent
             {
-                ["username"] = username,
-                ["avatar"] = avatarData
+                Username = username,
+                Avatar = avatarData
             };
 
-            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.PATCH, data, callback, error);
+            ModifyCurrentUser(client, data, callback, error);
+        }
+        
+        /// <summary>
+        /// Modify the currently logged in user
+        /// See <a href="https://discord.com/developers/docs/resources/user#modify-current-user">Modify Current User</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="username">Username to set</param>
+        /// <param name="avatarData">Avatar data to set</param>
+        /// <param name="callback">Callback with the updated user</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ModifyCurrentUser(DiscordClient client, UserModifyCurrent current, Action<DiscordUser> callback = null, Action<RestError> error = null)
+        {
+            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.PATCH, current, callback, error);
         }
 
         /// <summary>

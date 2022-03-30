@@ -2,13 +2,14 @@ using System;
 using Oxide.Core;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
-namespace Oxide.Ext.Discord.Rest.Request
+
+namespace Oxide.Ext.Discord.Rest.Requests
 {
     /// <summary>
     /// Handles request that return data
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Request<T> : Request
+    public class Request<T> : Requests.Request
     {
         private readonly Action<T> _onSuccess;
 

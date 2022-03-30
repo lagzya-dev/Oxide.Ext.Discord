@@ -20,16 +20,12 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// Override the default avatar of the webhook
         /// </summary>
         [JsonProperty("avatar_url")]
-        public string AvatarUrl { get; set; } 
-        
-        internal void ValidateWebhookMessage()
-        {
-            if (!Flags.HasValue)
-            {
-                return;
-            }
+        public string AvatarUrl { get; set; }
 
-            if ((Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
+        /// <inheritdoc/>
+        protected override void ValidateFlags()
+        {
+            if (Flags.HasValue && (Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
             {
                 throw new InvalidMessageException("Invalid Message Flags Used for Webhook Message. Only supported flags are MessageFlags.SuppressEmbeds");
             }

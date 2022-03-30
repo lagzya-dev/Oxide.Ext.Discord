@@ -1,7 +1,6 @@
 using System.Text.RegularExpressions;
 using Oxide.Ext.Discord.Exceptions;
-
-namespace Oxide.Ext.Discord.Helpers
+namespace Oxide.Ext.Discord.Validations
 {
     /// <summary>
     /// Provides helper methods for validation

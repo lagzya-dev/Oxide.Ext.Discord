@@ -3,7 +3,8 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.RateLimits;
-using Oxide.Ext.Discord.Rest.Request;
+using Oxide.Ext.Discord.Rest.Requests;
+using Oxide.Ext.Discord.Validations;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Rest
@@ -58,7 +59,12 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="error">Error callback if an error occurs</param>
         public void DoRequest(string url, RequestMethod method, object data, Action callback, Action<RestError> error)
         {
-            Request.Request request = new Request.Request(method, url, data, _authorization, callback, error, _logger);
+            if (data is IDiscordValidation validate)
+            {
+                validate.Validate();
+            }
+            
+            Request request = new Request(method, url, data, _authorization, callback, error, _logger);
             RequestHandler.QueueRequest(request);
         }
 
@@ -73,6 +79,11 @@ namespace Oxide.Ext.Discord.Rest
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
         public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback, Action<RestError> error)
         {
+            if (data is IDiscordValidation validate)
+            {
+                validate.Validate();
+            }
+            
             Request<T> request = new Request<T>(method, url, data, _authorization, callback, error, _logger);
             RequestHandler.QueueRequest(request);
         }

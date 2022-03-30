@@ -4,8 +4,8 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Validations;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-parameters-for-contenttype-applicationjson">Message Create Structure</a> to be created in discord
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class MessageCreate : IFileAttachments
+    public class MessageCreate : IFileAttachments, IDiscordValidation
     {
         /// <summary>
         /// Contents of the message
@@ -106,7 +106,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
             Attachments.Add(new MessageAttachment {Id = new Snowflake((ulong)FileAttachments.Count), Filename = filename, Description = description});
         }
 
-        internal void Validate()
+        /// <inheritdoc/>
+        public void Validate()
         {
             if (string.IsNullOrEmpty(Content) && (Embeds == null || Embeds.Count == 0) && (FileAttachments == null || FileAttachments.Count == 0))
             {
@@ -117,31 +118,19 @@ namespace Oxide.Ext.Discord.Entities.Messages
             {
                 throw new InvalidMessageException("Content cannot be more than 2000 characters");
             }
+
+            ValidateFlags();
         }
 
-        internal void ValidateChannelMessage()
+        /// <summary>
+        /// Validates that the message flags are correct for the message type
+        /// </summary>
+        /// <exception cref="InvalidMessageException"></exception>
+        protected virtual void ValidateFlags()
         {
-            if (!Flags.HasValue)
-            {
-                return;
-            }
-
-            if ((Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
+            if (Flags.HasValue && (Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
             {
                 throw new InvalidMessageException("Invalid Message Flags Used for Channel Message. Only supported flags are MessageFlags.SuppressEmbeds");
-            }
-        }
-
-        internal void ValidateInteractionMessage()
-        {
-            if (!Flags.HasValue)
-            {
-                return;
-            }
-
-            if ((Flags.Value & ~(MessageFlags.SuppressEmbeds | MessageFlags.Ephemeral)) != 0)
-            {
-                throw new InvalidMessageException("Invalid Message Flags Used for Interaction Message. Only supported flags are MessageFlags.SuppressEmbeds and MessageFlags.Ephemeral");
             }
         }
     }

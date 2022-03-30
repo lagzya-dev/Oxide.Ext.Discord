@@ -15,6 +15,7 @@ using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Helpers.Converters;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Validations;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Messages
@@ -243,8 +244,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public static void CreateMessage(DiscordClient client, Snowflake channelId, MessageCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
             if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            message.Validate();
-            message.ValidateChannelMessage();
             client.Bot.Rest.DoRequest($"/channels/{channelId}/messages", RequestMethod.POST, message, callback, error);
         }
 
@@ -346,8 +345,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId};
             }
             
-            message.Validate();
-            message.ValidateChannelMessage();
             client.Bot.Rest.DoRequest($"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback, error);
         }
         

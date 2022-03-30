@@ -779,7 +779,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ModifyUsersNick(DiscordClient client, Snowflake userId, string nick, Action<GuildMember> callback = null, Action<RestError> error = null)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
             GuildMemberUpdate update = new GuildMemberUpdate
             {
                 Nick = nick
@@ -793,11 +792,16 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#modify-current-member">Modify Current Member</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="nick">New members nickname</param>
+        /// <param name="nick">New members nickname (1-32 characters)</param>
         /// <param name="callback">Callback with the updated guild member</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ModifyCurrentMember(DiscordClient client, string nick, Action<GuildMember> callback, Action<RestError> error)
         {
+            if (!string.IsNullOrEmpty(nick) && nick.Length > 32)
+            {
+                throw new InvalidNicknameException($"Nickname '{nick}' cannot be more than 32 characters");
+            }
+            
             Dictionary<string, object> data = new Dictionary<string, object>
             {
                 ["nick"] = nick

@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using Oxide.Ext.Discord.Logging;
-namespace Oxide.Ext.Discord.Rest.Request
+
+namespace Oxide.Ext.Discord.Rest.Requests
 {
     /// <summary>
     /// Handles Assigning new requests to buckets
@@ -13,7 +14,7 @@ namespace Oxide.Ext.Discord.Rest.Request
         private readonly ILogger _logger;
         private readonly RestHandler _rest;
 
-        private readonly Queue<Request> _requests = new Queue<Request>();
+        private readonly Queue<Requests.Request> _requests = new Queue<Requests.Request>();
         
         private readonly object _syncRoot = new object();
 
@@ -34,7 +35,7 @@ namespace Oxide.Ext.Discord.Rest.Request
         /// Queues the following request to be added to a bucket
         /// </summary>
         /// <param name="request">Request to be added</param>
-        public void QueueRequest(Request request)
+        public void QueueRequest(Requests.Request request)
         {
             AddRequest(request);
             if ((_thread.ThreadState & ThreadState.WaitSleepJoin) != 0)
@@ -63,7 +64,7 @@ namespace Oxide.Ext.Discord.Rest.Request
             }
         }
 
-        private void AddRequest(Request request)
+        private void AddRequest(Requests.Request request)
         {
             lock (_syncRoot)
             {
@@ -71,7 +72,7 @@ namespace Oxide.Ext.Discord.Rest.Request
             }
         }
 
-        private Request GetNextRequest()
+        private Requests.Request GetNextRequest()
         {
             lock (_syncRoot)
             {
@@ -92,7 +93,7 @@ namespace Oxide.Ext.Discord.Rest.Request
         /// </summary>
         public void QueueBucket()
         {
-            Request request = GetNextRequest();
+            Requests.Request request = GetNextRequest();
             string bucketId = GetBucketId(request.Route);
             Bucket bucket = _rest.GetBucket(bucketId);
             bucket.QueueRequest(request);
