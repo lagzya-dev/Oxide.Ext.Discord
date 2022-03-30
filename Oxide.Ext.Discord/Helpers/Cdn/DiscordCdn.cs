@@ -121,6 +121,7 @@ namespace Oxide.Ext.Discord.Helpers.Cdn
                 case ImageFormat.Jpg:
                 case ImageFormat.Png:
                 case ImageFormat.WebP:
+                case ImageFormat.Gif:
                     return $"{CdnUrl}/banners/{guildId.ToString()}/{guildBanner}.{GetExtension(format, guildBanner)}";
                 
                 default:

@@ -49,6 +49,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         /// <summary>
         /// Title of the modal if Modal Response
+        /// Max 45 characters
         /// </summary>
         [JsonProperty("title")]
         public string Title { get; set; }

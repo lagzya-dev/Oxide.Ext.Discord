@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         Partner = 1 << 1,
         
         /// <summary>
-        /// Flag given to users who are HypeSquad Events Coordinator
+        /// Flag given to users who are HypeSquad Events Member
         /// </summary>
         HypeSquad = 1 << 2,
         

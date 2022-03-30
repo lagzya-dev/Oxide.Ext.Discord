@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
 
@@ -36,6 +37,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// <summary>
         /// The summary of the app
         /// </summary>
+        [Obsolete("This field is no longer sent by discord and will be removed in API v11")]
         [JsonProperty("summary")]
         public string Summary { get; set; }
         

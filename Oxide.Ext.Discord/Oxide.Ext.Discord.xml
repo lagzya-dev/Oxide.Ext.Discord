@@ -2931,6 +2931,21 @@
             The application's public flags
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Tags">
+            <summary>
+            Up to 5 tags describing the content and functionality of the application
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.InstallParams">
+            <summary>
+            Settings for the application's default in-app authorization link, if enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.CustomInstallUrl">
+            <summary>
+            The application's default custom authorization link, if enabled
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetApplicationIconUrl">
             <summary>
             Returns the URL for the applications Icon
@@ -3040,6 +3055,21 @@
             <param name="permissions">List of permissions for the commands</param>
             <param name="callback">Callback with the list of permissions</param>
             <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Applications.InstallParams">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/application#install-params-object">Install Params Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.InstallParams.Scopes">
+            <summary>
+            The scopes to add the application to the server with
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.InstallParams.Permissions">
+            <summary>
+            The permissions to request for the bot role
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog">
             <summary>
@@ -4625,6 +4655,17 @@
             <param name="callback">Callback with the new stage instance</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.CreateStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Creates a new Stage instance associated to a Stage channel.
+            Requires the user to be a moderator of the Stage channel.
+            See <a href="https://discord.com/developers/docs/resources/stage-instance#create-stage-instance">Create Stage Instance</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="create">Create Stage Instance Object</param>
+            <param name="callback">Callback with the new stage instance</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.GetStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Gets the stage instance associated with the Stage channel, if it exists.
@@ -4656,6 +4697,32 @@
             <param name="client">Client to use</param>
             <param name="callback">Callback when the stage instance is deleted</param>
             <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceCreate">
+            <summary>
+            Represents a <a> href="https://discord.com/developers/docs/resources/stage-instance#create-stage-instance-json-params">Stage Instance Create Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceCreate.ChannelId">
+            <summary>
+            The id of the Stage channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceCreate.Topic">
+            <summary>
+            The topic of the Stage instance (1-120 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceCreate.PrivacyLevel">
+            <summary>
+            The privacy level of the Stage instance (default GUILD_ONLY)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceCreate.SendStartNotification">
+            <summary>
+            Notify @everyone that a Stage instance has started
+            The stage moderator must have the MENTION_EVERYONE permission for this notification to be sent.
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate">
             <summary>
@@ -7704,7 +7771,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildPreview.Description">
             <summary>
-            The description of a Community guild
+            The description of a guild
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildPreview.Stickers">
@@ -9101,6 +9168,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Title">
             <summary>
             Title of the modal if Modal Response
+            Max 45 characters
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionCallbackData.Flags">
@@ -12534,6 +12602,16 @@
             <param name="callback">Callback with the updated user</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.ModifyCurrentUser(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.UserModifyCurrent,System.Action{Oxide.Ext.Discord.Entities.Users.DiscordUser},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Modify the currently logged in user
+            See <a href="https://discord.com/developers/docs/resources/user#modify-current-user">Modify Current User</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="current">The updated current user information</param>
+            <param name="callback">Callback with the updated user</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetCurrentUserGuilds(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.UserGuildsRequest,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.DiscordGuild}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Returns the guilds for the currently logged in user
@@ -12665,7 +12743,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.HypeSquad">
             <summary>
-            Flag given to users who are HypeSquad Events Coordinator
+            Flag given to users who are HypeSquad Events Member
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BugHunterLevel1">
@@ -12794,6 +12872,24 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Users.UserGuildsRequest.ToQueryString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Users.UserModifyCurrent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/user#modify-current-user-json-params">Modify Current User Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.UserModifyCurrent.Username">
+            <summary>
+            User's username, if changed may cause the user's discriminator to be randomized.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.UserModifyCurrent.Avatar">
+            <summary>
+            If passed, modifies the user's avatar
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Users.UserModifyCurrent.Validate">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserPremiumType">
@@ -13041,6 +13137,18 @@
             <param name="callback">Callback with the completed webhook</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.CreateWebhook(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreate,System.Action{Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+            <summary>
+            Create a new webhook.
+            Requires the MANAGE_WEBHOOKS permission.
+            See <a href="https://discord.com/developers/docs/resources/webhook#create-webhook">Create Webhook</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="channelId">Channel ID for the webhook</param>
+            <param name="create">Webhook create request</param>
+            <param name="callback">Callback with the completed webhook</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.GetChannelWebhooks(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook}},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
             <summary>
             Returns a list of channel webhook.
@@ -13194,6 +13302,24 @@
             <param name="messageId">Message ID to delete</param>
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/webhook#create-webhook-json-params">Webhook Create Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreate.Name">
+            <summary>
+            Name of the webhook (1-80 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreate.Avatar">
+            <summary>
+            Image for the default webhook avatar
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreate.Validate">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage">
             <summary>
@@ -13473,6 +13599,28 @@
             Constructor
             </summary>
             <param name="paramName">Name of the parameter that is invalid</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.ModifyUserException">
+            <summary>
+            Represents an exception when modifying a user with invalid data
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.ModifyUserException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Error Message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.WebhookCreateException">
+            <summary>
+            Represents a Webhook Create Exception
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.WebhookCreateException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Error Message</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.DiscordUserExt">
             <summary>

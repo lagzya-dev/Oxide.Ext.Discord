@@ -138,6 +138,12 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             if (string.IsNullOrEmpty(customId))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
 
+            if (string.IsNullOrEmpty(label))
+                throw new InvalidMessageComponentException("Text Input Label cannot be null or empty");
+            
+            if (label.Length > 45)
+                throw new InvalidMessageComponentException("Text Input Label cannot be more than 45 characters");
+            
             UpdateActionRow<InputTextComponent>();
             InputTextComponent menu = new InputTextComponent
             {

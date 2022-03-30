@@ -1,4 +1,5 @@
-﻿namespace Oxide.Ext.Discord.Entities.Channels
+﻿using System;
+namespace Oxide.Ext.Discord.Entities.Channels
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-channel-types">Types of Channels</a>
@@ -38,6 +39,7 @@
         /// <summary>
         /// A channel in which game developers can sell their game on Discord
         /// </summary>
+        [Obsolete("This channel type has been removed by discord and will be removed in a future update")]
         GuildStore = 6,
         
         /// <summary>

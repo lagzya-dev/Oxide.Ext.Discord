@@ -124,6 +124,24 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         [JsonProperty("flags")]
         public ApplicationFlags? Flags { get; set; }
+        
+        /// <summary>
+        /// Up to 5 tags describing the content and functionality of the application
+        /// </summary>
+        [JsonProperty("tags")]
+        public List<string> Tags { get; set; } 
+        
+        /// <summary>
+        /// Settings for the application's default in-app authorization link, if enabled
+        /// </summary>
+        [JsonProperty("install_params")]
+        public InstallParams InstallParams { get; set; } 
+        
+        /// <summary>
+        /// The application's default custom authorization link, if enabled
+        /// </summary>
+        [JsonProperty("custom_install_url")]
+        public string CustomInstallUrl { get; set; } 
 
         /// <summary>
         /// Returns the URL for the applications Icon

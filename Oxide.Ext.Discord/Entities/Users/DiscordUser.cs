@@ -220,6 +220,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the updated user</param>
         /// <param name="error">Callback when an error occurs with error information</param>
+        [Obsolete("Replaced with ModifyCurrentUser(DiscordClient client, UserModifyCurrent current, Action<DiscordUser> callback = null, Action<RestError> error = null)")]
         public void ModifyCurrentUser(DiscordClient client, Action<DiscordUser> callback = null, Action<RestError> error = null) => ModifyCurrentUser(client, Username, Avatar, callback, error);
 
         /// <summary>
@@ -242,14 +243,13 @@ namespace Oxide.Ext.Discord.Entities.Users
 
             ModifyCurrentUser(client, data, callback, error);
         }
-        
+
         /// <summary>
         /// Modify the currently logged in user
         /// See <a href="https://discord.com/developers/docs/resources/user#modify-current-user">Modify Current User</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="username">Username to set</param>
-        /// <param name="avatarData">Avatar data to set</param>
+        /// <param name="current">The updated current user information</param>
         /// <param name="callback">Callback with the updated user</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ModifyCurrentUser(DiscordClient client, UserModifyCurrent current, Action<DiscordUser> callback = null, Action<RestError> error = null)

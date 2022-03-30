@@ -67,17 +67,34 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="privacyLevel">Privacy level for the stage instance</param>
         /// <param name="callback">Callback with the new stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
+        [Obsolete("Replaced with CreateStageInstance(DiscordClient client, StageInstanceCreate create, Action<StageInstance> callback = null, Action<RestError> error = null)")]
         public static void CreateStageInstance(DiscordClient client, Snowflake channelId, string topic, PrivacyLevel privacyLevel = PrivacyLevel.GuildOnly, Action<StageInstance> callback = null, Action<RestError> error = null)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            Dictionary<string, string> data = new Dictionary<string, string>
+            StageInstanceCreate create = new StageInstanceCreate
             {
-                ["channel_id"] = channelId,
-                ["topic"] = topic,
-                ["privacy_level"] = ((int)privacyLevel).ToString()
+                ChannelId = channelId,
+                Topic = topic,
+                PrivacyLevel = privacyLevel
             };
-            
-            client.Bot.Rest.DoRequest($"/stage-instances", RequestMethod.POST, data, callback, error);
+
+            CreateStageInstance(client, create, callback, error);
+        }
+
+        /// <summary>
+        /// Creates a new Stage instance associated to a Stage channel.
+        /// Requires the user to be a moderator of the Stage channel.
+        /// See <a href="https://discord.com/developers/docs/resources/stage-instance#create-stage-instance">Create Stage Instance</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="create">Create Stage Instance Object</param>
+        /// <param name="callback">Callback with the new stage instance</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public static void CreateStageInstance(DiscordClient client, StageInstanceCreate create, Action<StageInstance> callback = null, Action<RestError> error = null)
+        {
+            if (create == null) throw new ArgumentNullException(nameof(create));
+            if (!create.ChannelId.IsValid()) throw new InvalidSnowflakeException(nameof(create.ChannelId));
+
+            client.Bot.Rest.DoRequest($"/stage-instances", RequestMethod.POST, create, callback, error);
         }
         
         /// <summary>
