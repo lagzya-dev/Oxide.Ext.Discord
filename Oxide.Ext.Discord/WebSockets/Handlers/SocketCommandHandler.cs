@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
@@ -17,7 +18,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly ILogger _logger;
         private readonly List<CommandPayload> _pendingCommands = new List<CommandPayload>();
         private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
-        private readonly Timer _rateLimitTimer;
+        private Timer _rateLimitTimer;
         private readonly object _syncRoot = new object();
         private bool _socketCanSendCommands;
 
@@ -44,10 +45,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="command">Command to send over the websocket</param>
         public void Enqueue(CommandPayload command)
         {
-            if (_logger.IsLogging(DiscordLogLevel.Debug))
-            {
-                _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(Enqueue)} Queuing command {{0}}", command.OpCode);
-            }
+            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(Enqueue)} Queuing command {{0}}", command.OpCode);
 
             //If websocket has connect and we need to identify or resume send those payloads right away
             if (_webSocket.IsConnected() && (command.OpCode == GatewayCommandCode.Identify || command.OpCode == GatewayCommandCode.Resume))
@@ -106,38 +104,41 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         
         private void SendCommands()
         {
-            lock (_syncRoot)
+            while (GetCommandCount() != 0)
             {
-                while (_pendingCommands.Count != 0)
+                CommandPayload payload = GetNextCommand();
+                if (!SendCommand(payload))
                 {
-                    CommandPayload payload = _pendingCommands[0];
-                    if (_rateLimit.HasReachedRateLimit)
-                    {
-                        if (!_rateLimitTimer.Enabled)
-                        {
-                            _rateLimitTimer.Interval = _rateLimit.NextReset;
-                            _rateLimitTimer.Stop();
-                            _rateLimitTimer.Start();
-                            _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {{0}} seconds\nOpcode: {{1}}\nPayload: {{2}}", _rateLimit.NextReset, payload.OpCode, JsonConvert.SerializeObject(payload.Payload, DiscordExtension.ExtensionSerializeSettings));
-                        }
-
-                        return;
-                    }
-                
-                    if (_logger.IsLogging(DiscordLogLevel.Debug))
-                    {
-                        _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {{0}}", payload.OpCode);
-                    }
-
-                    if (!_webSocket.Send(payload))
-                    {
-                        return;
-                    }
-                
-                    _pendingCommands.RemoveAt(0);
-                    _rateLimit.FiredRequest();
+                    return;
                 }
             }
+        }
+        
+        private bool SendCommand(CommandPayload payload)
+        {
+            if (_rateLimit.HasReachedRateLimit)
+            {
+                if (!_rateLimitTimer.Enabled)
+                {
+                    _rateLimitTimer.Interval = _rateLimit.NextReset;
+                    _rateLimitTimer.Stop();
+                    _rateLimitTimer.Start();
+                    _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {{0}} seconds\nOpcode: {{1}}\nPayload: {{2}}", _rateLimit.NextReset, payload.OpCode, JsonConvert.SerializeObject(payload.Payload, DiscordExtension.ExtensionSerializeSettings));
+                }
+
+                return false;
+            }
+
+            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {{0}}", payload.OpCode);
+
+            if (!_webSocket.Send(payload))
+            {
+                return false;
+            }
+
+            RemoveCommand();
+            _rateLimit.FiredRequest();
+            return true;
         }
 
         private void AddCommand(CommandPayload command)
@@ -157,8 +158,48 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             lock (_syncRoot)
             {
-                _pendingCommands.RemoveAll(c => c.OpCode == code);
+                for (int index = _pendingCommands.Count - 1; index >= 0; index--)
+                {
+                    CommandPayload command = _pendingCommands[index];
+                    if (command.OpCode == code)
+                    {
+                        _pendingCommands.RemoveAt(index);
+                        DiscordPool.Free(command);
+                    }
+                }
             }
+        }
+
+        private int GetCommandCount()
+        {
+            lock (_syncRoot)
+            {
+                return _pendingCommands.Count;
+            }
+        }
+
+        private CommandPayload GetNextCommand()
+        {
+            lock (_syncRoot)
+            {
+                return _pendingCommands[0];
+            }
+        }
+
+        private void RemoveCommand()
+        {
+            lock (_syncRoot)
+            {
+                CommandPayload command = GetNextCommand();
+                _pendingCommands.RemoveAt(0);
+                DiscordPool.Free(ref command);
+            }
+        }
+
+        internal void OnSocketShutdown()
+        {
+            _rateLimitTimer?.Dispose();
+            _rateLimitTimer = null;
         }
     }
 }

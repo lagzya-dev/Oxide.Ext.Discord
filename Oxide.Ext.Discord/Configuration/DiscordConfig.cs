@@ -12,13 +12,13 @@ namespace Oxide.Ext.Discord.Configuration
     internal class DiscordConfig : ConfigFile
     {
         /// <summary>
-        /// Discord Config Command Options
+        /// Discord Command Options
         /// </summary>
         [JsonProperty("Commands")]
         public DiscordCommandsConfig Commands { get; set; }
         
         /// <summary>
-        /// Discord Config Logging Options
+        /// Discord Logging Options
         /// </summary>
         [JsonProperty("Logging")]
         public DiscordLoggingConfig Logging { get; set; }
@@ -41,29 +41,28 @@ namespace Oxide.Ext.Discord.Configuration
             try
             {
                 base.Load(filename);
-
-                Commands = new DiscordCommandsConfig
-                {
-                    CommandPrefixes = Commands?.CommandPrefixes ?? new[] {'/', '!'}
-                };
-                Logging = new DiscordLoggingConfig
-                {
-                    HideDiscordErrorCodes = Logging?.HideDiscordErrorCodes ?? new HashSet<int>()
-                };
+                ApplyDefaults();
             }
             catch (Exception ex)
             {
                 DiscordExtension.GlobalLogger.Exception("Failed to load config file. Generating new Config", ex);
-                Commands = new DiscordCommandsConfig
-                {
-                    CommandPrefixes = new[] {'/', '!'}
-                };
-                Logging = new DiscordLoggingConfig()
-                {
-                    HideDiscordErrorCodes = new HashSet<int>()
-                };
+                ApplyDefaults();
                 Save(filename);
             }
+        }
+
+        private void ApplyDefaults()
+        {
+            Commands = new DiscordCommandsConfig
+            {
+                CommandPrefixes = Commands?.CommandPrefixes ?? new[] {'/', '!'}
+            };
+            Logging = new DiscordLoggingConfig
+            {
+                HideDiscordErrorCodes = Logging?.HideDiscordErrorCodes ?? new HashSet<int>(),
+                ConsoleLogLevel = Logging?.ConsoleLogLevel ?? DiscordLogLevel.Info,
+                FileLogLevel = Logging?.FileLogLevel ?? DiscordLogLevel.Off
+            };
         }
     }
 }

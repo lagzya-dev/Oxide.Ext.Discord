@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
@@ -25,10 +25,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <inheritdoc/>
         protected override void ValidateFlags()
         {
-            if (Flags.HasValue && (Flags.Value & ~MessageFlags.SuppressEmbeds) != 0)
-            {
-                throw new InvalidMessageException("Invalid Message Flags Used for Webhook Message. Only supported flags are MessageFlags.SuppressEmbeds");
-            }
+            InvalidMessageException.ThrowIfInvalidFlags(Flags, ~MessageFlags.SuppressEmbeds, "Invalid Message Flags Used for Webhook Message. Only supported flags are MessageFlags.SuppressEmbeds");
         }
     }
 }

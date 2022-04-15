@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Helpers.Cdn;
+using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Entities.Teams
 {

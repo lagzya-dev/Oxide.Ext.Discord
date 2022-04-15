@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Images;
 using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Exceptions.Entities.Guild;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -10,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#create-guild">Create Guild Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GuildCreate
+    public class GuildCreate : IDiscordValidation
     {
         /// <summary>
         /// Name of the guild (2-100 characters)
@@ -29,7 +32,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Base64 128x128 image for the guild icon
         /// </summary>
         [JsonProperty("icon")]        
-        public string Icon { get; set; }
+        public DiscordImageData? Icon { get; set; }
              
         /// <summary>
         /// Verification level
@@ -65,7 +68,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// ID of afk channel
         /// </summary>
         [JsonProperty("afk_channel_id")]
-        public Snowflake AfkChannelId { get; set; }
+        public Snowflake? AfkChannelId { get; set; }
                 
         /// <summary>
         /// Afk timeout in seconds
@@ -77,12 +80,19 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The id of the channel where guild notices such as welcome messages and boost events are posted
         /// </summary>
         [JsonProperty("system_channel_id")]
-        public Snowflake SystemChannelId { get; set; }
+        public Snowflake? SystemChannelId { get; set; }
         
         /// <summary>
         /// System channel flags
         /// </summary>
         [JsonProperty("system_channel_flags")]
         public SystemChannelFlags? SystemChannelFlags { get; set; }
+
+        ///<inheritdoc/>
+        public void Validate()
+        {
+            InvalidGuildException.ThrowIfInvalidName(Name, false);
+            InvalidGuildException.ThrowIfInvalidImageData(Icon);
+        }
     }
 }

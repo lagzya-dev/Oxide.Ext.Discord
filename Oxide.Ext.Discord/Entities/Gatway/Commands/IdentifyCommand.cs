@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
-
 namespace Oxide.Ext.Discord.Entities.Gatway.Commands
 {
     /// <summary>
@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// Connection properties
         /// </summary>
         [JsonProperty("properties")]
-        public Properties Properties;
+        public ConnectionProperties Properties;
 
         /// <summary>
         /// Whether this connection supports compression of packets
@@ -58,24 +58,38 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties">Identify Connection Properties</a>
     /// </summary>
-    public class Properties
+    public class ConnectionProperties
     {
         /// <summary>
         /// Your operating system
         /// </summary>
         [JsonProperty("$os")]
-        public string OS;
+        public string OperatingSystem
+        {
+            get
+            {
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Unix:
+                        return "unix";
+                    case PlatformID.MacOSX:
+                        return "mac";
+                    default:
+                        return "windows";
+                }
+            }
+        }
 
         /// <summary>
         /// Your library name
         /// </summary>
         [JsonProperty("$browser")]
-        public string Browser;
+        public string Browser => "Oxide.Ext.Discord";
 
         /// <summary>
         /// Your library name
         /// </summary>
         [JsonProperty("$device")]
-        public string Device;
+        public string Device => Browser;
     }
 }

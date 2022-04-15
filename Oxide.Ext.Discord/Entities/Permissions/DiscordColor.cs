@@ -1,7 +1,8 @@
 using System;
 using System.Globalization;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Exceptions.Entities.Permissions;
+using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Permissions
 {
@@ -127,11 +128,8 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// <param name="color">uint value of hex color code</param>
         public DiscordColor(uint color)
         {
-            if (color > 0xFFFFFF)
-            {
-                throw new InvalidDiscordColorException($"Color '{color}' is greater than the max color of 0xFFFFFF");
-            }
-            
+            InvalidDiscordColorException.ThrowIfInvalidColor(color);
+
             Color = color;
         }
 
@@ -165,20 +163,9 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// <exception cref="ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0 or &gt; 255</exception>
         public DiscordColor(int red, int green, int blue)
         {
-            if (red < 0 || red > byte.MaxValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(red), "Value must be between 0 - 255");
-            }
-            
-            if (green < 0 || green > byte.MaxValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(green), "Value must be between 0 - 255");
-            }
-            
-            if (blue < 0 || blue > byte.MaxValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(blue), "Value must be between 0 - 255");
-            }
+            InvalidDiscordColorException.ThrowIfOutOfColorRange(nameof(red), red);
+            InvalidDiscordColorException.ThrowIfOutOfColorRange(nameof(green), green);
+            InvalidDiscordColorException.ThrowIfOutOfColorRange(nameof(blue), blue);
 
             Color = (uint)((red << 16) + (green << 8) + blue);
         }
@@ -192,20 +179,9 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// <exception cref="ArgumentOutOfRangeException">Thrown if any of the colors are &gt; 255</exception>
         public DiscordColor(uint red, uint green, uint blue)
         {
-            if (red > byte.MaxValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(red), "Value must be < 255");
-            }
-            
-            if (green > byte.MaxValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(green), "Value must be < 255");
-            }
-            
-            if (blue > byte.MaxValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(blue), "Value must be < 255");
-            }
+            InvalidDiscordColorException.ThrowIfOutOfColorRange(nameof(red), red);
+            InvalidDiscordColorException.ThrowIfOutOfColorRange(nameof(green), green);
+            InvalidDiscordColorException.ThrowIfOutOfColorRange(nameof(blue), blue);
 
             Color = (red << 16) + (green << 8) + blue;
         }
@@ -219,20 +195,9 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// <exception cref="ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
         public DiscordColor(float red, float green, float blue)
         {
-            if (red < 0f || red > 1f)
-            {
-                throw new ArgumentOutOfRangeException(nameof(red), "Value must be between 0 - 1");
-            }
-            
-            if (green < 0f || green > 1f)
-            {
-                throw new ArgumentOutOfRangeException(nameof(green), "Value must be between 0 - 1");
-            }
-            
-            if (blue < 0f || blue > 1f)
-            {
-                throw new ArgumentOutOfRangeException(nameof(blue), "Value must be between 0 - 1");
-            }
+            InvalidDiscordColorException.ThrowIfOutOfColorRange(nameof(red), red);
+            InvalidDiscordColorException.ThrowIfOutOfColorRange(nameof(green), green);
+            InvalidDiscordColorException.ThrowIfOutOfColorRange(nameof(blue), blue);
             
             Color = ((uint)(red * 255) << 16) + ((uint)(green * 255)  << 8) + (uint)(blue * 255);
         }
@@ -247,57 +212,6 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         public DiscordColor(double red, double green, double blue) : this((float)red, (float)green, (float)blue)
         {
 
-        }
-    }
-
-    /// <summary>
-    /// Handles the JSON Serialization / Deserialization for DiscordColor
-    /// </summary>
-    public class DiscordColorConverter : JsonConverter
-    {
-        /// <summary>
-        /// Writes to JSON
-        /// </summary>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            DiscordColor color = (DiscordColor) value;
-            writer.WriteValue(color.Color);
-        }
-
-        /// <summary>
-        /// Reads from JSON
-        /// </summary>
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null)
-            {
-                if (!IsNullable(objectType))
-                {
-                    throw new JsonException($"Cannot convert null value to {objectType}. Path: {reader.Path}");
-                }
-
-                return null;
-            }
-
-            if (reader.TokenType == JsonToken.Integer)
-            {
-                return new DiscordColor(uint.Parse(reader.Value.ToString()));
-            }
-            
-            throw new JsonException($"Unexpected token {reader.TokenType} when parsing discord color. Path: {reader.Path}");
-        }
-
-        /// <summary>
-        /// Check if can convert
-        /// </summary>
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType != null && (IsNullable(objectType) ? Nullable.GetUnderlyingType(objectType) : objectType) == typeof(DiscordColor);
-        }
-        
-        private bool IsNullable(Type objectType)
-        {
-            return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
     }
 }

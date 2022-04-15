@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Messages
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object-message-reference-structure">Message Reference Structure</a> for a message
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure">Message Reference Structure</a> for a message
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class MessageReference

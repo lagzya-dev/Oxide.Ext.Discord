@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Images;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Emojis
@@ -56,7 +56,7 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         /// <summary>
         /// Url to the emoji image
         /// </summary>
-        public string Url => EmojiId.HasValue ? DiscordCdn.GetCustomEmojiUrl(EmojiId.Value, Animated.HasValue && Animated.Value ? ImageFormat.Gif : ImageFormat.Png) : null;
+        public string Url => EmojiId.HasValue ? DiscordCdn.GetCustomEmojiUrl(EmojiId.Value, Animated.HasValue && Animated.Value ? DiscordImageFormat.Gif : DiscordImageFormat.Png) : null;
 
         /// <summary>
         /// Returns an emoji object for the given emoji character

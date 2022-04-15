@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
@@ -10,8 +10,11 @@ using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.WebSockets;
 using Oxide.Plugins;
@@ -68,6 +71,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public RestHandler Rest { get; private set; }
         
+        internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
         
         internal GatewayReadyEvent ReadyData;
@@ -95,7 +99,8 @@ namespace Oxide.Ext.Discord
             Logger = new DiscordLogger(Settings.LogLevel);
             
             Initialized = true;
-            
+
+            Hooks = new DiscordHook(Logger);
             Rest = new RestHandler(this, Logger);
             _webSocket = new Socket(this, Logger);
         }
@@ -116,7 +121,7 @@ namespace Oxide.Ext.Discord
             }
 
             bot.AddClient(client);
-            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {{0}} to bot {{1}}", client.Owner.Name, bot.BotUser?.GetFullUserName);
+            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {{0}} to bot {{1}}", client.Plugin.Name, bot.BotUser?.GetFullUserName);
             return bot;
         }
 
@@ -166,15 +171,13 @@ namespace Oxide.Ext.Discord
         /// <param name="client">Client to add to the bot</param>
         public void AddClient(DiscordClient client)
         {
-            if (Settings.ApiToken != client.Settings.ApiToken)
-            {
-                throw new Exception("Failed to add client to bot client as ApiTokens do not match");
-            }
+            TokenMismatchException.ThrowIfMismatchedToken(client, Settings);
 
             _clients.RemoveAll(c => c == client);
             _clients.Add(client);
+            Hooks.AddPlugin(client.Plugin);
             
-            Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Owner.Title);
+            Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
             
             if (_clients.Count == 1)
             {
@@ -193,26 +196,26 @@ namespace Oxide.Ext.Discord
             //Our intents have changed. Disconnect websocket and reconnect with new intents.
             if (intents != Settings.Intents)
             {
-                Logger.Info("New intents have been requested for the bot. Reconnecting with updated intents.");
+                Logger.Debug("New intents have been requested for the bot. Reconnecting with updated intents.");
                 Settings.Intents = intents;
                 DisconnectWebsocket(true);
             }
                 
             if (ReadyData != null)
             {
-                ReadyData.Guilds = Servers.Copy();
-                client.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ReadyData);
+                ReadyData.Guilds = Servers;
+                DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordGatewayReady, ReadyData);
 
                 foreach (DiscordGuild guild in Servers.Values)
                 {
                     if (guild.IsAvailable)
                     {
-                        client.CallHook(DiscordExtHooks.OnDiscordGuildCreated, guild);
+                        DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordGuildCreated, guild);
                     }
 
                     if (guild.HasLoadedAllMembers)
                     {
-                        client.CallHook(DiscordExtHooks.OnDiscordGuildMembersLoaded, guild);
+                        DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordGuildMembersLoaded, guild);
                     }
                 }
             }
@@ -226,6 +229,7 @@ namespace Oxide.Ext.Discord
         public void RemoveClient(DiscordClient client)
         {
             _clients.Remove(client);
+            Hooks.RemovePlugin(client.Plugin);
             Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Client Removed");
             if (_clients.Count == 0)
             {
@@ -248,20 +252,38 @@ namespace Oxide.Ext.Discord
             {
                 UpdateLogLevel(level);
             }
+            
+            GatewayIntents intents = GatewayIntents.None;
+            for (int index = 0; index < _clients.Count; index++)
+            {
+                DiscordClient exitingClients = _clients[index];
+                intents |= exitingClients.Settings.Intents;
+            }
 
-            // For now let's not do the removing of intents. It shouldn't be an issue to keep them.
-            // GatewayIntents intents = GatewayIntents.None;
-            // foreach (DiscordClient exitingClients in _clients)
-            // {
-            //     intents |= exitingClients.Settings.Intents;
-            // }
-            //
-            // //Our intents have changed. Disconnect websocket and reconnect with new intents.
-            // if (intents != Settings.Intents)
-            // {
-            //     Settings.Intents = intents;
-            //     DisconnectWebsocket(true);
-            // }
+            //Update Intents so the next reconnect we supply the correct GatewayIntents for connected plugins
+            Settings.Intents = intents;
+        }
+
+        /// <summary>
+        /// Returns the list of plugins for this bot
+        /// </summary>
+        /// <returns></returns>
+        public string GetClientPluginList()
+        {
+            StringBuilder sb = DiscordPool.GetStringBuilder();
+            for (int index = 0; index < _clients.Count; index++)
+            {
+                DiscordClient client = _clients[index];
+                sb.Append(client.PluginName);
+                if (index + 1 != _clients.Count)
+                {
+                    sb.Append(",");
+                }
+            }
+
+            string list = sb.ToString();
+            DiscordPool.FreeStringBuilder(ref sb);
+            return list;
         }
 
         private void UpdateLogLevel(DiscordLogLevel level)
@@ -270,19 +292,15 @@ namespace Oxide.Ext.Discord
             Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {{0}} to: {{1}}", Settings.LogLevel, level);
             Settings.LogLevel = level;
         }
-
+        
         /// <summary>
-        /// Call a hook on all clients using this bot
+        /// Returns the first client connected to this bot.
+        /// Only use for Gateway API call
         /// </summary>
-        /// <param name="hookName">Hook to call</param>
-        /// <param name="args">Args for the hook</param>
-        public void CallHook(string hookName, params object[] args)
+        /// <returns></returns>
+        internal DiscordClient GetFirstClient()
         {
-            for (int index = 0; index < _clients.Count; index++)
-            {
-                DiscordClient client = _clients[index];
-                client.CallHook(hookName, args);
-            }
+            return _clients.Count != 0 ? _clients[0] : null;
         }
 
         #region Websocket Commands
@@ -440,7 +458,7 @@ namespace Oxide.Ext.Discord
             for (int index = 0; index < _clients.Count; index++)
             {
                 DiscordClient client = _clients[index];
-                if (client.RegisteredForHooks.Contains(plugin))
+                if (client.Plugin == plugin)
                 {
                     return true;
                 }

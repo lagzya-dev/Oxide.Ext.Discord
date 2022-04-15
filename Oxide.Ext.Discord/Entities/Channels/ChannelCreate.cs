@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions.Entities.Channels;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -7,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents a <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params">Guild Channel Create Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ChannelCreate
+    public class ChannelCreate : IDiscordValidation
     {
         /// <summary>
         /// The name of the channel (1-100 characters)
@@ -19,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// the type of channel <see cref="ChannelType"/>
         /// </summary>
         [JsonProperty("type")]
-        public ChannelType Type { get; set; }
+        public ChannelType? Type { get; set; }
         
         /// <summary>
         /// The channel topic (0-1024 characters)
@@ -71,5 +73,16 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("nsfw")]
         public bool? Nsfw { get; set; }
+
+        /// <inheritdoc/>
+        public void Validate()
+        {
+            InvalidChannelException.ThrowIfInvalidName(Name, false);
+            InvalidChannelException.ThrowIfInvalidTopic(Topic, true);
+            InvalidChannelException.ThrowIfInvalidUserLimit(UserLimit);
+            InvalidChannelException.ThrowIfInvalidRateLimitPerUser(RateLimitPerUser);
+            InvalidChannelException.ThrowIfInvalidBitRate(Bitrate);
+            InvalidChannelException.ThrowIfInvalidParentId(ParentId);
+        }
     }
 }

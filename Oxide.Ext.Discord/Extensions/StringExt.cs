@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -17,8 +18,8 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="args"></param>
         public static void ParseCommand(this string argStr, out string command, out string[] args)
         {
-            List<string> argList = new List<string>();
-            StringBuilder stringBuilder  = new StringBuilder();
+            List<string> argList = DiscordPool.GetList<string>();
+            StringBuilder stringBuilder = DiscordPool.GetStringBuilder();
             bool inLongArg = false;
 
             for (int index = 0; index < argStr.Length; index++)
@@ -28,7 +29,7 @@ namespace Oxide.Ext.Discord.Extensions
                 {
                     if (inLongArg)
                     {
-                        string arg = stringBuilder.ToString().Trim();
+                        string arg = stringBuilder.Trim().ToString();
                         if (!string.IsNullOrEmpty(arg))
                         {
                             argList.Add(arg);
@@ -44,7 +45,7 @@ namespace Oxide.Ext.Discord.Extensions
                 }
                 else if (char.IsWhiteSpace(c) && !inLongArg)
                 {
-                    string arg = stringBuilder.ToString().Trim();
+                    string arg = stringBuilder.Trim().ToString();
                     if (!string.IsNullOrEmpty(arg))
                     {
                         argList.Add(arg);
@@ -60,7 +61,7 @@ namespace Oxide.Ext.Discord.Extensions
 
             if (stringBuilder.Length > 0)
             {
-                string arg = stringBuilder.ToString().Trim();
+                string arg = stringBuilder.Trim().ToString();
                 if (!string.IsNullOrEmpty(arg))
                 {
                     argList.Add(arg);
@@ -77,6 +78,8 @@ namespace Oxide.Ext.Discord.Extensions
             command = argList[0].ToLower();
             argList.RemoveAt(0);
             args = argList.ToArray();
+            DiscordPool.FreeStringBuilder(ref stringBuilder);
+            DiscordPool.FreeList(ref argList);
         }
     }
 }

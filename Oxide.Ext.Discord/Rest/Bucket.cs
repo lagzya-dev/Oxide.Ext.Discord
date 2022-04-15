@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
 
 namespace Oxide.Ext.Discord.Rest
@@ -9,17 +11,17 @@ namespace Oxide.Ext.Discord.Rest
     /// <summary>
     /// Represents a discord API bucket for a group of requests
     /// </summary>
-    public class Bucket
+    public class Bucket : BasePoolable
     {
         /// <summary>
         /// The ID of this bucket which is based on the route
         /// </summary>
-        public readonly string BucketId;
+        public string BucketId;
         
         /// <summary>
         /// The number of requests that can be made
         /// </summary>
-        public int RateLimit;
+        public int RateLimitTotalRequests;
 
         /// <summary>
         /// How many requests are remaining before hitting the rate limit for the bucket
@@ -39,25 +41,35 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Rest Handler for the bucket
         /// </summary>
-        public readonly RestHandler Handler;
+        public RestHandler Handler;
 
-        private readonly ILogger _logger;
-        private readonly List<Request> _requests = new List<Request>();
+        private ILogger _logger;
+        private List<Request> _requests;
         private readonly object _syncRoot = new object();
-        
+
+        private readonly ThreadStart _threadStart;
         private Thread _thread;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public Bucket()
+        {
+            _threadStart = RunThread;
+        }
+        
         /// <summary>
         /// Creates a new bucket for the given rest handler and bucket ID
         /// </summary>
         /// <param name="handler">Rest Handler for the bucket</param>
         /// <param name="bucketId">ID of the bucket</param>
         /// <param name="logger">Logger for the client</param>
-        public Bucket(RestHandler handler, string bucketId, ILogger logger)
+        public void Init(RestHandler handler, string bucketId, ILogger logger)
         {
             Handler = handler;
             BucketId = bucketId;
             _logger = logger;
+            _requests = DiscordPool.GetList<Request>();
             _logger.Debug("New Bucket Created with id: {0}", bucketId);
         }
 
@@ -83,6 +95,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="request">Request to be queued</param>
         public void QueueRequest(Request request)
         {
+            _logger.Debug("Bucket {0} Queuing request {1}", BucketId, request.Route);
             request.Bucket = this;
             lock (_syncRoot)
             {
@@ -91,8 +104,12 @@ namespace Oxide.Ext.Discord.Rest
 
             if (_thread == null || !_thread.IsAlive)
             {
-                _thread = new Thread(RunThread) {IsBackground = true};
+                _thread = new Thread(_threadStart) {IsBackground = true};
                 _thread.Start();
+            }
+            else
+            {
+                _thread.Interrupt();
             }
         }
 
@@ -117,10 +134,19 @@ namespace Oxide.Ext.Discord.Rest
                 {
                     FireRequests();
                 }
+                SleepBucketFor((int)(RateLimitReset - Time.TimeSinceEpoch()) + 1);
+            }
+            catch (ThreadInterruptedException)
+            {
+                RunThread();
             }
             catch (ThreadAbortException)
             {
                 _logger.Debug("Bucket thread has been aborted.");
+            }
+            catch (Exception ex)
+            {
+                _logger.Exception("An exception occured for bucket: {0}", BucketId, ex);
             }
         }
 
@@ -131,33 +157,35 @@ namespace Oxide.Ext.Discord.Rest
             {
                 int resetIn = (int)(Handler.RateLimit.NextReset * 1000) + 1;
                 _logger.Debug("Global Rate limit hit. Sleeping until Reset: {0}ms", resetIn);
-                Thread.Sleep(resetIn);
+                SleepBucketFor(resetIn);
                 return;
             }
             
-            if (RateLimitRemaining == 0 && RateLimitReset > timeSince)
+            if (RateLimitTotalRequests != 0 && RateLimitRemaining == 0 && RateLimitReset > timeSince)
             {
-                int resetIn = (int) ((RateLimitReset - timeSince) * 1000);
+                int resetIn = (int)((RateLimitReset - timeSince) * 1000) + 1;
                 _logger.Debug("Bucket Rate limit hit. Sleeping until Reset: {0}ms", resetIn);
-                Thread.Sleep(resetIn);
+                SleepBucketFor(resetIn);
                 return;
             }
 
             if (ErrorDelayUntil > timeSince)
             {
-                int resetIn = (int) ((ErrorDelayUntil - timeSince) * 1000);
+                int resetIn = (int)((ErrorDelayUntil - timeSince) * 1000) + 1;
                 _logger.Debug("Web request error occured delaying next send until: {0}ms", resetIn);
-                Thread.Sleep(resetIn);
+                SleepBucketFor(resetIn);
                 return;
             }
 
-            for (int index = 0; index < RequestCount(); index++)
+            while (RequestCount() != 0)
             {
-                Request request = GetRequest(index);
-                if (request.HasTimedOut())
+                Request request = GetRequest(0);
+                if (!request.HasTimedOut())
                 {
-                    request.Close(false);
+                    break;
                 }
+                
+                request.Close(false);
             }
 
             //It's possible we removed a request that has timed out.
@@ -184,6 +212,50 @@ namespace Oxide.Ext.Discord.Rest
             {
                 return _requests[index];
             }
+        }
+
+        private static void SleepBucketFor(int delay)
+        {
+            if (delay > 0)
+            {
+                Thread.Sleep(delay);
+            }
+        }
+        
+        internal void AbortClientRequests(DiscordClient client)
+        {
+            lock (_syncRoot)
+            {
+                for (int index = _requests.Count - 1; index >= 0; index--)
+                {
+                    Request request = _requests[index];
+                    if (request.Client != client)
+                    {
+                        continue;
+                    }
+                    
+                    if (request.InProgress)
+                    {
+                        request.Abort();
+                    }
+                        
+                    _requests.RemoveAt(index);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void EnterPool()
+        {
+            BucketId = null;
+            RateLimitTotalRequests = 0;
+            RateLimitRemaining = 0;
+            RateLimitRemaining = 0;
+            ErrorDelayUntil = 0;
+            Handler = null;
+            _logger = null;
+            _thread = null;
+            FreeList(ref _requests);
         }
     }
 }

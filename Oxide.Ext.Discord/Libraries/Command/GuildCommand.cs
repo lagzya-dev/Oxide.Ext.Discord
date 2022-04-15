@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
@@ -11,9 +10,9 @@ namespace Oxide.Ext.Discord.Libraries.Command
     {
         private readonly List<Snowflake> _allowedChannels;
 
-        public GuildCommand(string name, Plugin plugin, List<Snowflake> allowedChannels, Action<DiscordMessage, string, string[]> callback) : base(name, plugin, callback)
+        public GuildCommand(Plugin plugin, string name, string hook, List<Snowflake> allowedChannels) : base(plugin, name, hook)
         {
-            _allowedChannels = allowedChannels ?? new List<Snowflake>();
+            _allowedChannels = allowedChannels;
         }
 
         public override bool CanHandle(DiscordMessage message, DiscordChannel channel)
@@ -23,7 +22,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 return false;
             }
 
-            if (_allowedChannels.Count == 0 || _allowedChannels.Contains(channel.Id))
+            if (_allowedChannels == null || _allowedChannels.Count == 0 || _allowedChannels.Contains(channel.Id))
             {
                 return true;
             }
@@ -34,7 +33,6 @@ namespace Oxide.Ext.Discord.Libraries.Command
             }
             
             return false;
-
         }
     }
 }

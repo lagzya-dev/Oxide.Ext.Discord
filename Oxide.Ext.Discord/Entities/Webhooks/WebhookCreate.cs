@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions;
-using Oxide.Ext.Discord.Validations;
+using Oxide.Ext.Discord.Exceptions.Entities.Webhooks;
+using Oxide.Ext.Discord.Interfaces;
+
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
     /// <summary>
@@ -23,25 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <inheritdoc/>
         public void Validate()
         {
-            if (string.IsNullOrEmpty(Name) || Name.Length > 80)
-            {
-                throw new WebhookCreateException($"Name '{Name}' cannot be less than 1 character or more than 80 characters");
-            }
-
-            if (Name.IndexOfAny("@#:".ToCharArray()) != -1)
-            {
-                throw new WebhookCreateException($"Name '{Name}' Cannot contain any of the following characters [@,#,:]");
-            }
-
-            if (Name.Contains("```"))
-            {
-                throw new WebhookCreateException($"Name '{Name}' Cannot contain \"```\"");
-            }
-
-            if (Name.Contains("discord"))
-            {
-                throw new WebhookCreateException($"Name '{Name}' Cannot contain \"discord\"");
-            }
+            InvalidWebhookException.ThrowIfInvalidName(Name);
         }
     }
 }

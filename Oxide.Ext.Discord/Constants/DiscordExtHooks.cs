@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Oxide.Ext.Discord.Constants
 {
@@ -6,6 +8,22 @@ namespace Oxide.Ext.Discord.Constants
     /// </summary>
     public static class DiscordExtHooks
     {
+        /// <summary>
+        /// Hashset containing all hooks names in the Discord Extension
+        /// </summary>
+        public static readonly HashSet<string> AllHooks = new HashSet<string>();
+
+        static DiscordExtHooks()
+        {
+            foreach (FieldInfo field in typeof(DiscordExtHooks).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
+            {
+                if (field.IsLiteral && !field.IsInitOnly && field.FieldType == typeof(string))
+                {
+                    AllHooks.Add((string)field.GetRawConstantValue());
+                }
+            }
+        }
+
         #region Bot Client Hooks
         /// <code>
         /// void OnDiscordClientConnected(Plugin owner, DiscordClient client)
@@ -352,15 +370,7 @@ namespace Oxide.Ext.Discord.Constants
         /// }
         /// </code>
         public const string OnDiscordGuildScheduledEventUserRemoved = nameof(OnDiscordGuildScheduledEventUserRemoved);
-        
-        /// <code>
-        /// void OnDiscordCommand(DiscordMessage message, string cmd, string[] args)
-        /// {
-        ///     Puts("OnDiscordCommand Works!");
-        /// }
-        /// </code>
-        public const string OnDiscordCommand = nameof(OnDiscordCommand);
-        
+
         /// <code>
         /// Note: Channel may be null if we haven't seen it yet
         /// void OnDiscordDirectMessageCreated(DiscordMessage message, DiscordChannel channel)

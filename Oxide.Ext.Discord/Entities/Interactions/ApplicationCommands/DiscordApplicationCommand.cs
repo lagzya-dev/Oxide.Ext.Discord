@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
@@ -92,13 +92,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="error">Callback when an error occurs with error information</param>
         public void Edit(DiscordClient client, CommandUpdate update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
         {
+            if (update == null) throw new ArgumentNullException(nameof(update));
             if (GuildId.HasValue)
             {
-                client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.PATCH, update, callback, error);
+                client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.PATCH, update, callback, error);
                 return;
             }
             
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands", RequestMethod.PATCH, update, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/commands", RequestMethod.PATCH, update, callback, error);
         }
         
         /// <summary>
@@ -113,11 +114,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         {
             if (GuildId.HasValue)
             {
-                client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
+                client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
                 return;
             }
             
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -129,8 +130,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetPermissions(DiscordClient client, Snowflake guildId, Action<GuildCommandPermissions> callback = null, Action<RestError> error = null)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -145,13 +146,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditPermissions(DiscordClient client, Snowflake guildId, List<CommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             Dictionary<string, object> data = new Dictionary<string, object>
             {
                 ["permissions"] = permissions
             };
             
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.PUT, data, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.PUT, data, callback, error);
         }
     }
 }

@@ -1,7 +1,8 @@
 using System;
 using Oxide.Core;
+using Oxide.Ext.Discord.Callbacks.Rest;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Rest.Requests
 {
@@ -11,20 +12,21 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// <typeparam name="T"></typeparam>
     public class Request<T> : Request
     {
-        private readonly Action<T> _onSuccess;
+        private Action<T> _onSuccess;
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new request
         /// </summary>
-        /// <param name="method"></param>
-        /// <param name="route"></param>
-        /// <param name="data"></param>
-        /// <param name="authHeader"></param>
-        /// <param name="onSuccess"></param>
-        /// <param name="onError"></param>
-        /// <param name="logger"></param>
-        public Request(RequestMethod method, string route, object data, string authHeader, Action<T> onSuccess, Action<RestError> onError, ILogger logger) : base(method, route, data, authHeader, onError, logger) 
+        /// <param name="client">Client making the request</param>
+        /// <param name="method">HTTP method to call</param>
+        /// <param name="route">Route to call on the API</param>
+        /// <param name="data">Data for the request</param>
+        /// <param name="authHeader">Authorization Header</param>
+        /// <param name="onSuccess">Callback once the request completes successfully</param>
+        /// <param name="onError">Callback when the request errors</param>
+        public void Init(DiscordClient client, RequestMethod method, string route, object data, string authHeader, Action<T> onSuccess, Action<RestError> onError)
         {
+            Init(client, method, route, data, authHeader, onError);
             _onSuccess = onSuccess;
         }
 
@@ -37,17 +39,16 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
             
             T data = Response.ParseData<T>();
-            Interface.Oxide.NextTick(() =>
-            {
-                try
-                {
-                    _onSuccess.Invoke(data);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Exception("An exception occured during _onSuccess callback for request: [{0}] {1}", Method, RequestUrl, ex);
-                }
-            });
+            ApiCallback<T> callback = DiscordPool.Get<ApiCallback<T>>();
+            callback.Init(this, _onSuccess, data, Client);
+            Interface.Oxide.NextTick(callback.Callback);
+        }
+
+        /// <inheritdoc/>
+        protected override void EnterPool()
+        {
+            base.EnterPool();
+            _onSuccess = null;
         }
     }
 }

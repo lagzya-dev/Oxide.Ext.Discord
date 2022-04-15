@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions.Entities.Channels;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -6,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-thread">Thread Channel Update Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ThreadChannelUpdate
+    public class ThreadChannelUpdate : IDiscordValidation
     {
         /// <summary>
         /// The name of the channel (1-100 characters)
@@ -47,5 +49,13 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("rate_limit_per_user")]
         public int? RateLimitPerUser { get; set; }
+
+        ///<inheritdoc/>
+        public void Validate()
+        {
+            InvalidChannelException.ThrowIfInvalidName(Name, true);
+            InvalidChannelException.ThrowIfInvalidRateLimitPerUser(RateLimitPerUser);
+            InvalidThreadException.ThrowIfInvalidAutoArchiveDuration(AutoArchiveDuration);
+        }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using Oxide.Core;
+using Oxide.Ext.Discord.Configuration;
 
 namespace Oxide.Ext.Discord.Logging
 {
@@ -9,6 +9,9 @@ namespace Oxide.Ext.Discord.Logging
     internal class DiscordLogger : ILogger
     {
         private DiscordLogLevel _logLevel;
+        private readonly DiscordLoggingConfig _config;
+        internal static readonly DiscordConsoleLogger ConsoleLogger = new DiscordConsoleLogger();
+        internal static readonly DiscordFileLogger FileLogger = new DiscordFileLogger();
         
         /// <summary>
         /// Creates a new logger with the given log level
@@ -17,32 +20,20 @@ namespace Oxide.Ext.Discord.Logging
         public DiscordLogger(DiscordLogLevel logLevel)
         {
             _logLevel = logLevel;
+            _config = DiscordExtension.DiscordConfig.Logging;
         }
 
         /// <inheritdoc/>
         public void Log(DiscordLogLevel level, string message, Exception exception = null)
         {
-            if (!IsLogging(level))
+            if (IsConsoleLogging(level))
             {
-                return;
+                ConsoleLogger.AddMessage(level, message, exception);
             }
 
-            string log = $"[Discord Extension] [{level.ToString()}]: {message}";
-            switch (level)
+            if (IsFileLogging(level))
             {
-                case DiscordLogLevel.Debug:
-                case DiscordLogLevel.Warning:
-                    Interface.Oxide.LogWarning(log);
-                    break;
-                case DiscordLogLevel.Error:
-                    Interface.Oxide.LogError(log);
-                    break;
-                case DiscordLogLevel.Exception:
-                    Interface.Oxide.LogException(log, exception);
-                    break;
-                default:
-                    Interface.Oxide.LogInfo(log);
-                    break;
+                FileLogger.AddMessage(level, message, exception);
             }
         }
 
@@ -55,7 +46,17 @@ namespace Oxide.Ext.Discord.Logging
         /// <inheritdoc/>
         public bool IsLogging(DiscordLogLevel level)
         {
-            return level >= _logLevel;
+            return level >= _logLevel && (level >= _config.ConsoleLogLevel || level >= _config.FileLogLevel);
+        }
+        
+        public bool IsConsoleLogging(DiscordLogLevel level)
+        {
+            return level >= _logLevel && level >= _config.ConsoleLogLevel;
+        }
+        
+        public bool IsFileLogging(DiscordLogLevel level)
+        {
+            return level >= _logLevel && level >= _config.FileLogLevel;
         }
     }
 }

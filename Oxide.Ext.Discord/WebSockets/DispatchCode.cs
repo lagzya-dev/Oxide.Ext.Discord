@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
@@ -250,11 +250,6 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         [Description("INTERACTION_CREATE")] InteractionCreated,
 
-        /// <summary>
-        /// Represents the <a href="">GUILD_JOIN_REQUEST_DELETE</a> gateway event
-        /// </summary>
-        [Description("GUILD_JOIN_REQUEST_DELETE")] GuildJoinRequestDeleted,
-        
         /// <summary>
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-create">THREAD_CREATE</a> gateway event
         /// </summary>

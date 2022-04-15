@@ -1,5 +1,7 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Pooling;
+
 namespace Oxide.Ext.Discord.Entities.Invites
 {
     /// <summary>
@@ -25,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
             if (WithCounts.HasValue)
             {
                 builder.Add("with_counts", WithCounts.Value.ToString());
@@ -41,7 +43,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
                 builder.Add("guild_scheduled_event_id", GuildScheduledEventId.Value.ToString());
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
         }
     }
 }

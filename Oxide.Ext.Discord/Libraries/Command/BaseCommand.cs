@@ -1,43 +1,29 @@
-using System;
-using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Hooks;
 
 namespace Oxide.Ext.Discord.Libraries.Command
 {
     /// <summary>
     /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L76)
     /// </summary>
-    internal class BaseCommand
+    internal abstract class BaseCommand
     {
         internal readonly string Name;
+        private readonly string _hook;
         internal Plugin Plugin;
-        private readonly Action<DiscordMessage, string, string[]> _callback;
 
-        protected BaseCommand(string name, Plugin plugin, Action<DiscordMessage, string, string[]> callback)
+        protected BaseCommand(Plugin plugin, string name, string hook)
         {
             Name = name;
+            _hook = hook;
             Plugin = plugin;
-            _callback = callback;
         }
         
         public void HandleCommand(DiscordMessage message, string name, string[] args)
         {
-            Interface.Oxide.NextTick(() =>
-            {
-                try
-                {
-                    Plugin.TrackStart();
-                    _callback.Invoke(message, name, args);
-                    Plugin.TrackEnd();
-                }
-                catch(Exception ex)
-                {
-                    DiscordExtension.GlobalLogger.Exception("An exception occured in discord command {0} for plugin {1}", name, Plugin?.Name, ex);   
-                }
-            });
+            DiscordHook.CallPluginHook(Plugin, _hook, message, name, args);
         }
 
         /// <summary>
@@ -51,7 +37,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             return client != null && DiscordClient.Clients[Plugin.Name]?.Bot == client;
         }
 
-        public virtual bool CanHandle(DiscordMessage message, DiscordChannel channel) => true;
+        public abstract bool CanHandle(DiscordMessage message, DiscordChannel channel);
 
         internal void OnRemoved()
         {

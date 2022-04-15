@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -10,7 +10,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     [JsonConverter(typeof(DiscordEnumConverter))]
     public enum GuildFeatures
     {
-     
         /// <summary>
         /// Discord Extension doesn't currently support a guild features
         /// </summary>

@@ -11,6 +11,6 @@ namespace Oxide.Ext.Discord.Interfaces
         /// <summary>
         /// File attachments for an entity
         /// </summary>
-        List<MessageFileAttachment> FileAttachments { get; set; }
+        List<MessageFileAttachment> FileAttachments { get; }
     }
 }

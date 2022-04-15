@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord
 {
@@ -29,7 +30,7 @@ namespace Oxide.Ext.Discord
         private string _hiddenToken;
         
         /// <summary>
-        /// Hides the token but keeps the format to allow for debugging token issues without showing the token.
+        /// Hides the token but keeps the format to allow for debugging token issues without showing the full token.
         /// </summary>
         /// <returns></returns>
         public string GetHiddenToken()
@@ -39,7 +40,7 @@ namespace Oxide.Ext.Discord
                 return _hiddenToken;
             }
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = DiscordPool.GetStringBuilder();
             int first = ApiToken.IndexOf('.');
             int second = ApiToken.IndexOf('.', first + 1);
 
@@ -50,6 +51,7 @@ namespace Oxide.Ext.Discord
             sb.Append(ApiToken.Substring(second + 1));
 
             _hiddenToken = sb.ToString();
+            DiscordPool.FreeStringBuilder(ref sb);
             return _hiddenToken;
         }
     }

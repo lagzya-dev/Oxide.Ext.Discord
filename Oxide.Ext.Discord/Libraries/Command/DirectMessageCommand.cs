@@ -1,4 +1,3 @@
-using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
@@ -7,7 +6,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
 {
     internal class DirectMessageCommand : BaseCommand
     {
-        internal DirectMessageCommand(string name, Plugin plugin, Action<DiscordMessage, string, string[]> callback) : base(name, plugin, callback)
+        internal DirectMessageCommand(Plugin plugin, string name, string hook) : base(plugin, name, hook)
         {
             
         }

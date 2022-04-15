@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -320,15 +321,14 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <param name="discord">DiscordUser being linked</param>
         public void OnLinked(Plugin plugin, IPlayer player, DiscordUser discord)
         {
-            if (player == null)
-                throw new ArgumentNullException(nameof(player));
-            if (discord == null)
-                throw new ArgumentNullException(nameof(discord));
+            if (player == null) throw new ArgumentNullException(nameof(player));
+            if (discord == null) throw new ArgumentNullException(nameof(discord));
             
             IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
             if (link == null)
             {
-                _logger.Error($"{{0}} tried to unlink but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.Name);
+                _logger.Error($"{{0}} tried to link but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.Name);
+                return;
             }
             
             if (!_linkPlugins.Contains(link))
@@ -338,13 +338,12 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             }
             
             _pluginLinks[plugin.Title][player.Id] = discord.Id;
-            
-            
+
             _discordIdToSteamId[discord.Id] = player.Id;
             _steamIdToDiscordId[player.Id] = discord.Id;
             _steamIds.Add(player.Id);
             _discordIds.Add(discord.Id);
-            Interface.Oxide.CallHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
+            DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
         }
 
         /// <summary>
@@ -364,6 +363,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             if (link == null)
             {
                 _logger.Error($"{{0}} tried to unlink but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.Name);
+                return;
             }
             
             if (!_linkPlugins.Contains(link))
@@ -378,7 +378,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             _steamIdToDiscordId.Remove(player.Id);
             _steamIds.Remove(player.Id);
             _discordIds.Remove(discord.Id);
-            Interface.Oxide.CallHook(DiscordExtHooks.OnDiscordPlayerUnlinked, player, discord);
+            DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlinked, player, discord);
         }
     }
 }

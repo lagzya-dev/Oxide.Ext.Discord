@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
+using Oxide.Ext.Discord.Pooling;
+
 namespace Oxide.Ext.Discord.Rest.Multipart
 {
     /// <summary>
@@ -12,10 +14,10 @@ namespace Oxide.Ext.Discord.Rest.Multipart
         
         internal static byte[] GetMultipartFormData(string boundary, List<IMultipartSection> multipartSections)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = DiscordPool.GetStringBuilder();
             byte[] boundaryBytes = Encoding.UTF8.GetBytes(boundary);
 
-            List<byte> data = new List<byte>();
+            List<byte> data = DiscordPool.GetList<byte>();
 
             foreach (IMultipartSection section in multipartSections)
             {
@@ -28,7 +30,10 @@ namespace Oxide.Ext.Discord.Rest.Multipart
             data.AddRange(Separator);
             data.AddRange(NewLine);
             
-            return data.ToArray();
+            DiscordPool.FreeStringBuilder(ref sb);
+            byte[] bytes = data.ToArray();
+            DiscordPool.FreeList(ref data);
+            return bytes;
         }
 
         private static void AddMultipartSection(StringBuilder sb, IMultipartSection section, List<byte> data, byte[] boundary)

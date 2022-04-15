@@ -7,7 +7,7 @@ csharp_preserve_single_line_blocks = true
 
 # ReSharper properties
 resharper_blank_lines_after_block_statements = 0
-resharper_blank_lines_after_using_list = 0
+resharper_blank_lines_after_using_list = 1
 resharper_blank_lines_around_block_case_section = 1
 resharper_csharp_blank_lines_around_field = 0
 resharper_csharp_blank_lines_around_invocable = 0

@@ -1,9 +1,10 @@
 using System;
 using Oxide.Core;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Callbacks.Libraries;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription
 {
@@ -46,19 +47,9 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <param name="message">Message that was sent in the given channel</param>
         public void Invoke(DiscordMessage message)
         {
-            Interface.Oxide.NextTick(() =>
-            {
-                try
-                {
-                    _plugin.TrackStart();
-                    _callback.Invoke(message);
-                    _plugin.TrackEnd();
-                }
-                catch(Exception ex)
-                {
-                    DiscordExtension.GlobalLogger.Exception("An exception occured for discord subscription in channel {0} for plugin {1}", _channelId, _plugin?.Name, ex);   
-                }
-            });
+            SubscriptionCallback callback = DiscordPool.Get<SubscriptionCallback>();
+            callback.Init(_plugin, message, _callback);
+            Interface.Oxide.NextTick(callback.Callback);
         }
 
         internal void OnRemoved()

@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Helpers
         static LocaleConverter()
         {
             AddLocale("en","en-US");
-            AddLocale("bg-","bg");
+            AddLocale("bg","bg");
             AddLocale("zh","zh-CN");
             AddLocale("hr","hr");
             AddLocale("cs","cs");

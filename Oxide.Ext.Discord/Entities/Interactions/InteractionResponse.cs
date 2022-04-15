@@ -1,5 +1,5 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Validations;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {

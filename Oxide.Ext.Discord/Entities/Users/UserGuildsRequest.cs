@@ -1,5 +1,6 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Users
 {
@@ -26,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <inheritdoc/>
         public virtual string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
             builder.Add("limit", Limit.ToString());
 
             if (Before.HasValue)
@@ -39,7 +40,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 builder.Add("after", After.ToString());
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
         }
     }
 }

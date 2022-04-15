@@ -1,12 +1,16 @@
 using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Images;
+using Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents;
+using Oxide.Ext.Discord.Interfaces;
+
 namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event">Guild Scheduled Event Create</a> within discord
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ScheduledEventCreate
+    public class ScheduledEventCreate : IDiscordValidation
     {
         /// <summary>
         /// The channel ID in which the scheduled event will be hosted, or null if <see cref="ScheduledEventEntityType">scheduled entity type</see> is <see cref="ScheduledEventEntityType.External">External</see>
@@ -55,5 +59,19 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// </summary>
         [JsonProperty("entity_type")]
         public ScheduledEventEntityType EntityType { get; set; }
+        
+        /// <summary>
+        /// The cover image of the scheduled event
+        /// </summary>
+        [JsonProperty("image")]
+        public DiscordImageData Image { get; set; }
+
+        ///<inheritdoc/>
+        public void Validate()
+        {
+            InvalidGuildScheduledEventException.ThrowIfInvalidName(Name, false);
+            InvalidGuildScheduledEventException.ThrowIfInvalidDescription(Description);
+            EntityMetadata?.Validate();
+        }
     }
 }

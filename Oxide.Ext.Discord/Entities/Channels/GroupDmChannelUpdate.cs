@@ -1,4 +1,7 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Images;
+using Oxide.Ext.Discord.Exceptions.Entities.Channels;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -6,10 +9,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm">Group DM Channel Update Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GroupDmChannelUpdate
+    public class GroupDmChannelUpdate : IDiscordValidation
     {
         /// <summary>
-        /// The name of the channel (2-100 characters)
+        /// The name of the channel (1-100 characters)
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -18,6 +21,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Base64 encoded icon
         /// </summary>
         [JsonProperty("icon")]
-        public string Icon { get; set; }
+        public DiscordImageData? Icon { get; set; }
+
+        /// <inheritdoc/>
+        public void Validate()
+        {
+            InvalidChannelException.ThrowIfInvalidName(Name, true);
+        }
     }
 }

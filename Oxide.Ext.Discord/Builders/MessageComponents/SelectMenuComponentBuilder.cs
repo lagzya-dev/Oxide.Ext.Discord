@@ -1,7 +1,7 @@
 using System;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 
 namespace Oxide.Ext.Discord.Builders.MessageComponents
 {
@@ -30,16 +30,11 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <exception cref="Exception">Throw is more than 25 options are added</exception>
         public SelectMenuComponentBuilder AddOption(string label, string value, string description, bool @default = false, DiscordEmoji emoji = null)
         {
-            if (string.IsNullOrEmpty(label))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(label));
-            if (string.IsNullOrEmpty(value))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(value));
+            InvalidMessageComponentException.ThrowIfInvalidSelectMenuOptionLabel(label);
+            InvalidMessageComponentException.ThrowIfInvalidSelectMenuOptionValue(value);
+            InvalidMessageComponentException.ThrowIfInvalidSelectMenuOptionDescription(description);
+            InvalidMessageComponentException.ThrowIfInvalidSelectMenuOptionCount(_menu.Options.Count);
 
-            if (_menu.Options.Count >= 25)
-            {
-                throw new InvalidMessageComponentException("Select Menu Options cannot have more than 25 options");
-            }
-            
             _menu.Options.Add(new SelectMenuOption
             {
                 Label = label,

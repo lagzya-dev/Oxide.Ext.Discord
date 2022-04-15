@@ -1,6 +1,6 @@
 using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Ext.Discord.Json.Converters;
 using Time = Oxide.Ext.Discord.Helpers.Time;
 
 namespace Oxide.Ext.Discord.Entities
@@ -41,7 +41,7 @@ namespace Oxide.Ext.Discord.Entities
         public Snowflake(DateTimeOffset offset)
         {
             Id = (ulong)(Time.DiscordEpoch - offset).TotalMilliseconds << 22;
-        }   
+        }
 
         /// <summary>
         /// Returns when the ID was created

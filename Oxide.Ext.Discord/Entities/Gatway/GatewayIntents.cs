@@ -1,5 +1,4 @@
 using System;
-
 namespace Oxide.Ext.Discord.Entities.Gatway
 {
     /// <summary>

@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions;
-using Oxide.Ext.Discord.Validations;
+using Oxide.Ext.Discord.Exceptions.Entities.Users;
+using Oxide.Ext.Discord.Interfaces;
+
 namespace Oxide.Ext.Discord.Entities.Users
 {
     /// <summary>
@@ -23,23 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <inheritdoc/>
         public void Validate()
         {
-            if (!string.IsNullOrEmpty(Username))
-            {
-                if (Username.IndexOfAny("@#:".ToCharArray()) != -1)
-                {
-                    throw new ModifyUserException($"Name '{Username}' Cannot contain any of the following characters [@,#,:]");
-                }
-
-                if (Username.Contains("```"))
-                {
-                    throw new ModifyUserException($"Name '{Username}' Cannot contain \"```\"");
-                }
-
-                if (Username.Contains("discord"))
-                {
-                    throw new ModifyUserException($"Name '{Username}' Cannot contain \"discord\"");
-                }
-            }
+            InvalidUserException.ThrowIfInvalidUserName(Username);
         }
     }
 }

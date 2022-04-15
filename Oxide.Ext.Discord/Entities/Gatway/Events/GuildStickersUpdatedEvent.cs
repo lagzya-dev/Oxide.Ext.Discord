@@ -1,8 +1,7 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Stickers;
-using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Plugins;
-
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
     /// <summary>

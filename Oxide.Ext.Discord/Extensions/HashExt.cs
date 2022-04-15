@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Extensions
@@ -14,22 +15,20 @@ namespace Oxide.Ext.Discord.Extensions
         /// </summary>
         /// <param name="hash">Hash to have data removed from</param>
         /// <param name="predicate">Filter of which values to remove</param>
+        /// <param name="onRemove">Action to call when an element is removed</param>
         /// <typeparam name="TKey">Key type of the hash</typeparam>
         /// <typeparam name="TValue">Value type of the hash</typeparam>
-        internal static void RemoveAll<TKey, TValue>(this Hash<TKey, TValue> hash, Func<TValue, bool> predicate)
+        internal static void RemoveAll<TKey, TValue>(this Hash<TKey, TValue> hash, Func<TValue, bool> predicate, Action<TValue> onRemove = null)
         {
-            if (hash == null)
-            {
-                return;
-            }
+            if (hash == null) throw new ArgumentNullException(nameof(hash));
 
-            List<TKey> removeKeys = new List<TKey>();
-            
+            List<TKey> removeKeys = DiscordPool.GetList<TKey>();
             foreach (KeyValuePair<TKey, TValue> key in hash)
             {
                 if (predicate(key.Value))
                 {
                     removeKeys.Add(key.Key);
+                    onRemove?.Invoke(key.Value);
                 }
             }
 
@@ -37,6 +36,8 @@ namespace Oxide.Ext.Discord.Extensions
             {
                 hash.Remove(key);
             }
+            
+            DiscordPool.FreeList(ref removeKeys);
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <typeparam name="TKey"></typeparam>
         /// <typeparam name="TValue"></typeparam>
         /// <returns>Copied Hash</returns>
-        public static Hash<TKey, TValue> Copy<TKey, TValue>(this Hash<TKey, TValue> hash)
+        internal static Hash<TKey, TValue> Copy<TKey, TValue>(this Hash<TKey, TValue> hash)
         {
             Hash<TKey, TValue> copy = new Hash<TKey, TValue>();
             foreach (KeyValuePair<TKey, TValue> value in hash)

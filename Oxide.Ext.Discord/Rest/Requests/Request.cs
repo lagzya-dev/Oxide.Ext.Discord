@@ -5,11 +5,13 @@ using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using Oxide.Core;
+using Oxide.Ext.Discord.Callbacks.Rest;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Multipart;
 using RequestMethod = Oxide.Ext.Discord.Entities.Api.RequestMethod;
 using Time = Oxide.Ext.Discord.Helpers.Time;
@@ -19,27 +21,27 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// <summary>
     /// Represent a Discord API request
     /// </summary>
-    public class Request
+    public class Request : BasePoolable
     {
         /// <summary>
         /// HTTP request method
         /// </summary>
-        public readonly RequestMethod Method;
+        public RequestMethod Method;
 
         /// <summary>
         /// Route on the API
         /// </summary>
-        public readonly string Route;
+        public string Route;
 
         /// <summary>
         /// Full Request URl to the API
         /// </summary>
-        public string RequestUrl => DiscordEndpoints.Rest.DiscordApiUrl + Route;
+        public string RequestUrl;
 
         /// <summary>
         /// Data to be sent with the request
         /// </summary>
-        public readonly object Data;
+        public object Data;
         
         /// <summary>
         /// Data serialized to bytes 
@@ -47,34 +49,24 @@ namespace Oxide.Ext.Discord.Rest.Requests
         public byte[] Contents { get; private set; }
 
         /// <summary>
-        /// Attachments for a request
-        /// </summary>
-        internal List<IMultipartSection> MultipartSections { get; private set; }
-
-        /// <summary>
         /// Required If Multipart Form Request
         /// </summary>
-        public readonly bool MultipartRequest;
+        public bool MultipartRequest;
 
         /// <summary>
         /// Multipart Boundary
         /// </summary>
         public string Boundary { get; set; }
-
-        /// <summary>
-        /// Response from the request
-        /// </summary>
-        public RestResponse Response { get; private set; }
-
+        
         /// <summary>
         /// Callback to call if the request completed successfully
         /// </summary>
-        private readonly Action _onSuccess;
+        private Action _onSuccess;
 
         /// <summary>
         /// Callback to call if the request errored with the last error message
         /// </summary>
-        private readonly Action<RestError> _onError;
+        private Action<RestError> _onError;
 
         /// <summary>
         /// The DateTime the request was started
@@ -86,54 +78,67 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Returns if the request is currently in progress
         /// </summary>
         public bool InProgress { get; private set; }
+        
+        /// <summary>
+        /// Discord Client making the request
+        /// </summary>
+        internal DiscordClient Client;
 
         internal Bucket Bucket;
-
-        /// <summary>
-        /// Logger
-        /// </summary>
-        protected readonly ILogger Logger;
         
         private const int TimeoutDuration = 15;
+        
+        /// <summary>
+        /// Attachments for a request
+        /// </summary>
+        private List<IMultipartSection> _multipartSections;
+        
+        /// <summary>
+        /// Response from the request
+        /// </summary>
+        internal RestResponse Response;
 
-        private readonly string _authHeader;
+        private string _authHeader;
         private byte _retries;
+        private HttpWebRequest _request;
         
         private RestError _lastError;
         private bool _success;
 
         /// <summary>
-        /// Creates a new request
+        /// Initializes a new request
         /// </summary>
+        /// <param name="client">Client making the request</param>
         /// <param name="method">HTTP method to call</param>
         /// <param name="route">Route to call on the API</param>
         /// <param name="data">Data for the request</param>
         /// <param name="authHeader">Authorization Header</param>
         /// <param name="onSuccess">Callback once the request completes successfully</param>
         /// <param name="onError">Callback when the request errors</param>
-        /// <param name="logger">Logger for the request</param>
-        public Request(RequestMethod method, string route, object data, string authHeader, Action onSuccess, Action<RestError> onError, ILogger logger) : this(method, route, data,authHeader, onError, logger)
+        public void Init(DiscordClient client, RequestMethod method, string route, object data, string authHeader, Action onSuccess, Action<RestError> onError)
         {
+            Init(client, method, route, data,authHeader, onError);
             _onSuccess = onSuccess;
         }
 
         /// <summary>
         /// Creates a new request
         /// </summary>
-        /// <param name="method"></param>
-        /// <param name="route"></param>
-        /// <param name="data"></param>
-        /// <param name="authHeader"></param>
-        /// <param name="onError"></param>
-        /// <param name="logger"></param>
-        protected Request(RequestMethod method, string route, object data, string authHeader, Action<RestError> onError, ILogger logger)
+        /// <param name="client">Client making the request</param>
+        /// <param name="method">HTTP method to call</param>
+        /// <param name="route">Route to call on the API</param>
+        /// <param name="data">Data for the request</param>
+        /// <param name="authHeader">Authorization Header</param>
+        /// <param name="onError">Callback when the request errors</param>
+        protected void Init(DiscordClient client, RequestMethod method, string route, object data, string authHeader, Action<RestError> onError)
         {
+            Client = client;
             Method = method;
             Route = route;
+            RequestUrl = DiscordEndpoints.Rest.ApiUrl + route;
             Data = data;
             _authHeader = authHeader;
             _onError = onError;
-            Logger = logger;
             MultipartRequest = Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0;
         }
 
@@ -144,18 +149,16 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             InProgress = true;
             StartTime = DateTime.UtcNow;
-
-            HttpWebRequest req = null;
-
+            
             try
             {
                 //Can error during JSON serialization
-                req = CreateRequest();
+                _request = CreateRequest();
 
                 //Can timeout while writing request data
-                WriteRequestData(req);
+                WriteRequestData();
 
-                using (HttpWebResponse response = req.GetResponse() as HttpWebResponse)
+                using (HttpWebResponse response = _request.GetResponse() as HttpWebResponse)
                 {
                     if (response != null)
                     {
@@ -164,47 +167,48 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 }
 
                 _success = true;
-                InvokeSuccess();
                 Close();
             }
             catch (WebException ex)
             {
+                if (ex.Status == WebExceptionStatus.RequestCanceled)
+                {
+                    Client.Logger.Debug("Client request cancelled. Plugin: {0}", Client.Plugin?.Name);
+                    return;
+                }
+                
                 using (HttpWebResponse httpResponse = ex.Response as HttpWebResponse)
                 {
-                    _lastError = new RestError(ex, req.RequestUri, Method, Data);
+                    _lastError = new RestError(Client, Bucket, ex, RequestUrl, Method, _request.ContentType, Data, Contents);
                     if (httpResponse == null)
                     {
                         Bucket.ErrorDelayUntil = Time.TimeSinceEpoch() + 1;
-                        _lastError.SetLog(DiscordLogLevel.Exception, $"A web request exception occured (internal error) Request URL: [{req.Method}] {req.RequestUri}", ex);
+                        _lastError.SetErrorMessage(RestRequestErrorType.Internal, DiscordLogLevel.Exception);
                         Close(false);
                         return;
                     }
 
                     int statusCode = (int)httpResponse.StatusCode;
-                    _lastError.HttpStatusCode = statusCode;
 
                     string message = ParseResponse(ex.Response);
-                    _lastError.Message = message;
-
-                    bool isRateLimit = statusCode == 429;
-                    if (isRateLimit)
+                    _lastError.SetResponseData(statusCode, message);
+                    
+                    if (statusCode == 429)
                     {
-                        _lastError.SetLog(DiscordLogLevel.Warning, $"Discord rate limit reached. (Rate limit info: remaining: [{req.Method}] Route: {req.RequestUri} Content-Type: {req.ContentType} Remaining: {Bucket.RateLimitRemaining.ToString()} Limit: {Bucket.RateLimit.ToString()}, Reset In: {Bucket.RateLimitReset.ToString()}, Current Time: {Time.TimeSinceEpoch().ToString()}");
+                        _lastError.SetErrorMessage(RestRequestErrorType.RateLimit, DiscordLogLevel.Warning);
                         Close(false);
                         return;
                     }
-
+                    
                     DiscordApiError apiError = Response.ParseData<DiscordApiError>();
-                    _lastError.DiscordError = apiError;
+                    _lastError.SetApiError(apiError);
                     if (apiError != null && apiError.Code != 0)
                     {
-                        _lastError.SetLog(DiscordLogLevel.Error, $"Discord API has returned error Discord Code: {apiError.Code.ToString()} Discord Error: {apiError.Message} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()}) Content-Type: {req.ContentType}" +
-                                                                 $"\nDiscord Errors: {apiError.Errors}" +
-                                                                 $"\nRequest Body:\n{(Contents != null ? Encoding.UTF8.GetString(Contents) : "Contents is null")}");
+                        _lastError.SetErrorMessage(RestRequestErrorType.ApiError, DiscordLogLevel.Error);
                     }
                     else
                     {
-                        _lastError.SetLog(DiscordLogLevel.Error, $"An error occured whilst submitting a request: Exception Status: {ex.Status.ToString()} Request: [{req.Method}] {req.RequestUri} (Response Code: {httpResponse.StatusCode.ToString()}): {message}");
+                        _lastError.SetErrorMessage(RestRequestErrorType.GenericWeb, DiscordLogLevel.Error);
                     }
 
                     Close();
@@ -212,12 +216,12 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
             catch (JsonSerializationException ex)
             {
-                Logger.Exception("A JsonSerializationException occured for request. Method: {0} URL: {1} Data Type: {2}", Method, RequestUrl, Data?.GetType().Name ?? "None", ex);
+                Client.Logger.Exception("A JsonSerializationException occured for request. Plugin: {0} Method: {1} URL: {2} Data Type: {3}", Client.PluginName, Method, RequestUrl, Data?.GetType().Name ?? "None", ex);
                 Close();
             }
             catch (Exception ex)
             {
-                Logger.Exception("An exception occured for request. Method: {0} URL: {1} Data Type: {2}", Method, RequestUrl, Data?.GetType().Name ?? "None", ex);
+                Client.Logger.Exception("An exception occured for request. Plugin: {0} Method: {1} URL: {2} Data Type: {3}", Client.PluginName, Method, RequestUrl, Data?.GetType().Name ?? "None", ex);
                 Close();
             }
         }
@@ -247,15 +251,16 @@ namespace Oxide.Ext.Discord.Rest.Requests
             if (MultipartRequest)
             {
                 IFileAttachments attachments = (IFileAttachments)Data;
-                MultipartSections = new List<IMultipartSection> {new MultipartFormSection("payload_json", Data, "application/json")};
+                _multipartSections = DiscordPool.GetList<IMultipartSection>();
+                _multipartSections.Add(new MultipartFormSection("payload_json", Data, "application/json"));
                 for (int index = 0; index < attachments.FileAttachments.Count; index++)
                 {
                     MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
-                    MultipartSections.Add(new MultipartFileSection($"files[{(index + 1).ToString()}]", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
+                    _multipartSections.Add(new MultipartFileSection($"files[{(index + 1).ToString()}]", fileAttachment.FileName, fileAttachment.Data, fileAttachment.ContentType));
                 }
 
                 Boundary = Guid.NewGuid().ToString().Replace("-", "");
-                Contents = MultipartHandler.GetMultipartFormData(Boundary, MultipartSections);
+                Contents = MultipartHandler.GetMultipartFormData(Boundary, _multipartSections);
             }
             else
             {
@@ -272,12 +277,16 @@ namespace Oxide.Ext.Discord.Rest.Requests
             _retries += 1;
             if (remove || _retries >= 3)
             {
-                if (!_success)
+                Bucket.DequeueRequest(this);
+                
+                if (_success)
+                {
+                    InvokeSuccess();
+                }
+                else
                 {
                     InvokeError();
                 }
-
-                Bucket.DequeueRequest(this);
             }
             else
             {
@@ -293,43 +302,20 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             if (_onSuccess == null)
             {
+                DiscordPool.Free(this);
                 return;
             }
-            
-            Interface.Oxide.NextTick(() =>
-            {
-                try
-                {
-                    _onSuccess.Invoke();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Exception("An exception occured during Success callback for request: [{0}] {1}", Method, RequestUrl,  ex);
-                }
-            });
+
+            ApiCallback callback = DiscordPool.Get<ApiCallback>();
+            callback.Init(this, _onSuccess, Client);
+            Interface.Oxide.NextTick(callback.Callback);
         }
 
         private void InvokeError()
         {
-            Interface.Oxide.NextTick(() =>
-            {
-                if (_onError != null)
-                {
-                    try
-                    {
-                        _onError.Invoke(_lastError);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Exception("An exception occured during Error callback for request: [{0}] {1}", Method, RequestUrl,  ex);
-                    }
-                }
-
-                if (_lastError.ShowErrorMessage && (_lastError.DiscordError == null || !DiscordExtension.DiscordConfig.Logging.HideDiscordErrorCodes.Contains(_lastError.DiscordError.Code)))
-                {
-                    Logger.Log(_lastError.LogLevel, _lastError.LogMessage, _lastError.Exception);
-                }
-            });
+            ApiErrorCallback callback = DiscordPool.Get<ApiErrorCallback>();
+            callback.Init(this, _onError, _lastError, Client);
+            Interface.Oxide.NextTick(callback.Callback);
         }
         
         /// <summary>
@@ -346,16 +332,16 @@ namespace Oxide.Ext.Discord.Rest.Requests
             return (DateTime.UtcNow - StartTime.Value).TotalSeconds > TimeoutDuration;
         }
 
-        private void WriteRequestData(WebRequest request)
+        private void WriteRequestData()
         {
             if (Contents == null || Contents.Length == 0)
             {
                 return;
             }
 
-            request.ContentLength = Contents.Length;
+            _request.ContentLength = Contents.Length;
 
-            using (Stream stream = request.GetRequestStream())
+            using (Stream stream = _request.GetRequestStream())
             {
                 stream.Write(Contents, 0, Contents.Length);
             }
@@ -373,7 +359,8 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string message = reader.ReadToEnd().Trim();
-                    Response = new RestResponse(message);
+                    Response = DiscordPool.Get<RestResponse>();
+                    Response.Init(message);
 
                     ParseHeaders(response.Headers, Response);
 
@@ -408,7 +395,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             if (!string.IsNullOrEmpty(bucketLimitHeader) &&
                 int.TryParse(bucketLimitHeader, out int bucketLimit))
             {
-                Bucket.RateLimit = bucketLimit;
+                Bucket.RateLimitTotalRequests = bucketLimit;
             }
 
             if (!string.IsNullOrEmpty(bucketRemainingHeader) &&
@@ -428,7 +415,50 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 }
             }
             
-            Logger.Debug("Method: {0} Route: {1} Internal Bucket Id: {2} Limit: {3} Remaining: {4} Reset: {5} Time: {6} Bucket: {7}", Method, Route, Bucket.BucketId, Bucket.RateLimit, Bucket.RateLimitRemaining, Bucket.RateLimitReset, Time.TimeSinceEpoch(), bucketNameHeader);
+            Client.Logger.Debug("Plugin: {0} Method: {1} Route: {2} Internal Bucket Id: {3} Limit: {4} Remaining: {5} Reset: {7} Time: {7} Bucket: {8}", Client.Plugin?.Name, Method, Route, Bucket.BucketId, Bucket.RateLimitTotalRequests, Bucket.RateLimitRemaining, Bucket.RateLimitReset, Time.TimeSinceEpoch(), bucketNameHeader);
+        }
+
+        /// <summary>
+        /// Aborts a currently running request
+        /// </summary>
+        public void Abort()
+        {
+            _request.Abort();
+        }
+
+        /// <inheritdoc/>
+        protected override void EnterPool()
+        {
+            Response?.Dispose();
+            
+            if (Data is BasePoolable poolable)
+            {
+                poolable.Dispose();
+            }
+            
+            if (_multipartSections != null)
+            {
+                FreeList(ref _multipartSections);
+            }
+            
+            Client = null;
+            Method = default(RequestMethod);
+            Route = null;
+            RequestUrl = null;
+            Data = null;
+            Contents = null;
+            MultipartRequest = false;
+            Boundary = null;
+            Response = null;
+            _onSuccess = null;
+            _onError = null;
+            StartTime = null;
+            InProgress = false;
+            Bucket = null;
+            _authHeader = null;
+            _retries = 0;
+            _lastError = null;
+            _success = false;
         }
     }
 }

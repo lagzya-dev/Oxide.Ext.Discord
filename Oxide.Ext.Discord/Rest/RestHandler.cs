@@ -1,10 +1,16 @@
 using System;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using Oxide.Ext.Discord.Callbacks.Rest;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Requests;
-using Oxide.Ext.Discord.Validations;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Rest
@@ -25,11 +31,6 @@ namespace Oxide.Ext.Discord.Rest
         public readonly Hash<string, Bucket> Buckets = new Hash<string, Bucket>();
 
         /// <summary>
-        /// Request Handler for the request
-        /// </summary>
-        public readonly RequestHandler RequestHandler;
-
-        /// <summary>
         /// The authorization header value
         /// </summary>
         private readonly string _authorization;
@@ -46,46 +47,72 @@ namespace Oxide.Ext.Discord.Rest
         {
             _authorization = $"Bot {client.Settings.ApiToken}";
             _logger = logger;
-            RequestHandler = new RequestHandler(this, _logger);
         }
 
         /// <summary>
         /// Creates a new request and queues it to be ran
         /// </summary>
+        /// <param name="client">Client making the request</param>
         /// <param name="url">URL of the request</param>
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
-        public void DoRequest(string url, RequestMethod method, object data, Action callback, Action<RestError> error)
+        public void DoRequest(DiscordClient client, string url, RequestMethod method, object data, Action callback, Action<RestError> error)
         {
             if (data is IDiscordValidation validate)
             {
                 validate.Validate();
             }
             
-            Request request = new Request(method, url, data, _authorization, callback, error, _logger);
-            RequestHandler.QueueRequest(request);
+            Request request = DiscordPool.Get<Request>();
+            request.Init(client, method, url, data, _authorization, callback, error);
+            QueueRequest(request);
         }
 
         /// <summary>
         /// Creates a new request and queues it to be ran
         /// </summary>
+        /// <param name="client">Client making the request</param>
         /// <param name="url">URL of the request</param>
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
-        public void DoRequest<T>(string url, RequestMethod method, object data, Action<T> callback, Action<RestError> error)
+        public void DoRequest<T>(DiscordClient client, string url, RequestMethod method, object data, Action<T> callback, Action<RestError> error)
         {
             if (data is IDiscordValidation validate)
             {
                 validate.Validate();
             }
             
-            Request<T> request = new Request<T>(method, url, data, _authorization, callback, error, _logger);
-            RequestHandler.QueueRequest(request);
+            Request<T> request = DiscordPool.Get<Request<T>>();
+            request.Init(client, method, url, data, _authorization, callback, error);
+            QueueRequest(request);
+        }
+
+        /// <summary>
+        /// Queues the request using the thread pool so we don't block the main thread with any locks
+        /// </summary>
+        /// <param name="request"></param>
+        public void QueueRequest(Request request)
+        {
+            _logger.Debug("RestHandler Queuing Request for {0}", request.Route);
+            QueueRequestCallback queue = QueueRequestCallback.Create(request, this);
+            ThreadPool.QueueUserWorkItem(queue.Callback);
+        }
+        
+        /// <summary>
+        /// Queues the request for the bucket
+        /// </summary>
+        public void QueueBucket(Request request)
+        {
+            string bucketId = BucketIdGenerator.GetBucketId(request.Method, request.Route);
+            _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}", request.Route, bucketId);
+            Bucket bucket = GetBucket(bucketId);
+            bucket.QueueRequest(request);
+            CleanupExpired();
         }
 
         /// <summary>
@@ -100,7 +127,8 @@ namespace Oxide.Ext.Discord.Rest
                 Bucket bucket = Buckets[bucketId];
                 if (bucket == null)
                 {
-                    bucket = new Bucket(this, bucketId, _logger);
+                    bucket = DiscordPool.Get<Bucket>();
+                    bucket.Init(this, bucketId, _logger);
                     Buckets[bucketId] = bucket;
                 }
 
@@ -115,7 +143,18 @@ namespace Oxide.Ext.Discord.Rest
         {
             lock (_bucketSyncObject)
             {
-                Buckets.RemoveAll(b => b.ShouldCleanup());
+                Buckets.RemoveAll(b => b.ShouldCleanup(), DiscordPool.Free);
+            }
+        }
+
+        internal void OnClientClosed(DiscordClient client)
+        {
+            lock (_bucketSyncObject)
+            {
+                foreach (Bucket bucket in Buckets.Values)
+                {
+                    bucket.AbortClientRequests(client);
+                }
             }
         }
 
@@ -129,6 +168,7 @@ namespace Oxide.Ext.Discord.Rest
                 foreach (Bucket bucket in Buckets.Values)
                 {
                     bucket.Close();
+                    DiscordPool.Free(bucket);
                 }
                 Buckets.Clear();
             }

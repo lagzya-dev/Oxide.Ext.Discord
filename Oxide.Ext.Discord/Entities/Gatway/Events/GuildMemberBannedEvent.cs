@@ -1,6 +1,5 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
-
 namespace Oxide.Ext.Discord.Entities.Gatway.Events
 {
     /// <summary>

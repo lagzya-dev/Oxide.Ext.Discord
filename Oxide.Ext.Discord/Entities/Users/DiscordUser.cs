@@ -9,9 +9,9 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users.Connections;
-using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
 
@@ -160,7 +160,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetCurrentUser(DiscordClient client, Action<DiscordUser> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,"/users/@me", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -173,8 +173,8 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetUser(DiscordClient client, Snowflake userId, Action<DiscordUser> callback = null, Action<RestError> error = null)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            client.Bot.Rest.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            client.Bot.Rest.DoRequest(client,$"/users/{userId}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -186,6 +186,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void SendDirectMessage(DiscordClient client, MessageCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
             CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, message, callback, error); });
         }
 
@@ -210,6 +211,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void SendDirectMessage(DiscordClient client, List<DiscordEmbed> embeds, Action<DiscordMessage> callback = null, Action<RestError> error = null)
         {
+            if (embeds == null) throw new ArgumentNullException(nameof(embeds));
             CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, embeds, callback, error); });
         }
 
@@ -254,7 +256,8 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ModifyCurrentUser(DiscordClient client, UserModifyCurrent current, Action<DiscordUser> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.PATCH, current, callback, error);
+            if (current == null) throw new ArgumentNullException(nameof(current));
+            client.Bot.Rest.DoRequest(client,"/users/@me", RequestMethod.PATCH, current, callback, error);
         }
 
         /// <summary>
@@ -267,7 +270,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetCurrentUserGuilds(DiscordClient client, UserGuildsRequest request = null, Action<List<DiscordGuild>> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/users/@me/guilds{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/users/@me/guilds{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -290,8 +293,8 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void LeaveGuild(DiscordClient client, Snowflake guildId, Action callback = null, Action<RestError> error = null)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            client.Bot.Rest.DoRequest(client,$"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -313,11 +316,8 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateDirectMessageChannel(DiscordClient client, Snowflake userId, Action<DiscordChannel> callback, Action<RestError> error = null)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            if (userId == client.Bot.BotUser.Id)
-            {
-                throw new InvalidChannelException("Tried to create a direct message channel to yourself which is not allowed.");
-            }
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            InvalidChannelException.ThrowIfChannelToSelf(userId, client);
 
             DiscordChannel channel = client.Bot.DirectMessagesByUserId[userId];
             if (channel != null)
@@ -331,7 +331,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["recipient_id"] = userId
             };
 
-            client.Bot.Rest.DoRequest<DiscordChannel>("/users/@me/channels", RequestMethod.POST, data, newChannel =>
+            client.Bot.Rest.DoRequest<DiscordChannel>(client, "/users/@me/channels", RequestMethod.POST, data, newChannel =>
             {
                 client.Bot.AddDirectChannel(newChannel);
                 callback?.Invoke(newChannel);
@@ -354,7 +354,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["nicks"] = nicks
             };
 
-            client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback, error);
+            client.Bot.Rest.DoRequest(client,"/users/@me/channels", RequestMethod.POST, data, callback, error);
         }
 
         /// <summary>
@@ -366,7 +366,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetUserConnections(DiscordClient client, Action<List<Connection>> callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest("/users/@me/connections", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,"/users/@me/connections", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -392,14 +392,14 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GroupDmAddRecipient(DiscordClient client, Snowflake channelId, string accessToken, string nick, Action callback = null, Action<RestError> error = null)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
+            InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             Dictionary<string, string> data = new Dictionary<string, string>
             {
                 ["access_token"] = accessToken,
                 ["nick"] = nick
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, data, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, data, callback, error);
         }
 
         /// <summary>
@@ -420,8 +420,8 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId, Action callback = null, Action<RestError> error = null)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
+            client.Bot.Rest.DoRequest(client,$"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, error);
         }
         #endregion
 

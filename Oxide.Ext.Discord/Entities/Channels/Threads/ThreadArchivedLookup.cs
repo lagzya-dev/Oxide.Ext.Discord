@@ -2,6 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Threads
 {
@@ -28,7 +29,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
             if (Before.HasValue)
             {
                 builder.Add("before", Before.Value.ToString("o"));
@@ -39,7 +40,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
                 builder.Add("limit", Limit.Value.ToString());
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
         }
     }
 }

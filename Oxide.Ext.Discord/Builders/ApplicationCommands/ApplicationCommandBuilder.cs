@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Exceptions.Builders;
+using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
@@ -24,10 +25,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="type">Command type</param>
         public ApplicationCommandBuilder(string name, string description, ApplicationCommandType type)
         {
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(name));
-            if (string.IsNullOrEmpty(description))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(description));
+            InvalidApplicationCommandException.ThrowIfInvalidName(name, false);
+            InvalidApplicationCommandException.ThrowIfInvalidDescription(description, false);
 
             _options = new List<CommandOption>();
             Command = new CommandCreate
@@ -85,20 +84,11 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <exception cref="Exception">Thrown if trying to add a subcommand group to</exception>
         public SubCommandGroupBuilder AddSubCommandGroup(string name, string description)
         {
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(name));
-            if (string.IsNullOrEmpty(description))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(description));
+            InvalidCommandOptionException.ThrowIfInvalidName(name, false);
+            InvalidCommandOptionException.ThrowIfInvalidDescription(description, false);
 
-            if (_chosenType.HasValue && _chosenType.Value != CommandOptionType.SubCommandGroup && _chosenType.Value != CommandOptionType.SubCommand)
-            {
-                throw new InvalidApplicationCommandException("Cannot mix sub command / sub command groups with command options");
-            }
-
-            if (Command.Type == ApplicationCommandType.Message || Command.Type == ApplicationCommandType.User)
-            {
-                throw new InvalidApplicationCommandException("Message and User commands cannot have sub command groups");
-            }
+            ApplicationCommandBuilderException.ThrowIfMixingSubCommandGroups(_chosenType);
+            ApplicationCommandBuilderException.ThrowIfAddingSubCommandToMessageOrUser(this);
 
             _chosenType = CommandOptionType.SubCommandGroup;
 
@@ -114,20 +104,11 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <exception cref="Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
         public SubCommandBuilder AddSubCommand(string name, string description)
         {
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(name));
-            if (string.IsNullOrEmpty(description))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(description));
+            InvalidCommandOptionException.ThrowIfInvalidName(name, false);
+            InvalidCommandOptionException.ThrowIfInvalidDescription(description, false);
 
-            if (_chosenType.HasValue && _chosenType.Value != CommandOptionType.SubCommandGroup && _chosenType.Value != CommandOptionType.SubCommand)
-            {
-                throw new InvalidApplicationCommandException("Cannot mix sub command / sub command groups with command options");
-            }
-
-            if (Command.Type == ApplicationCommandType.Message || Command.Type == ApplicationCommandType.User)
-            {
-                throw new InvalidApplicationCommandException("Message and User commands cannot have sub commands");
-            }
+            ApplicationCommandBuilderException.ThrowIfMixingSubCommandGroups(_chosenType);
+            ApplicationCommandBuilderException.ThrowIfAddingSubCommandToMessageOrUser(this);
 
             _chosenType = CommandOptionType.SubCommand;
 
@@ -140,15 +121,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
         /// <param name="name">Name of the option</param>
         /// <param name="description">Description for the option</param>
-        /// <returns><see cref="CommandOptionBuilder{T}"/></returns>
-        public CommandOptionBuilder<ApplicationCommandBuilder> AddOption(CommandOptionType type, string name, string description)
+        /// <returns><see cref="ApplicationCommandOptionBuilder"/></returns>
+        public ApplicationCommandOptionBuilder AddOption(CommandOptionType type, string name, string description)
         {
-            if (_chosenType.HasValue && (_chosenType.Value == CommandOptionType.SubCommandGroup || _chosenType.Value == CommandOptionType.SubCommand))
-            {
-                throw new InvalidApplicationCommandException("Cannot mix sub command / sub command groups with command options");
-            }
+            ApplicationCommandBuilderException.ThrowIfMixingCommandOptions(_chosenType);
 
-            return new CommandOptionBuilder<ApplicationCommandBuilder>(_options, type, name, description, this);
+            return new ApplicationCommandOptionBuilder(_options, type, name, description, this);
         }
 
         /// <summary>

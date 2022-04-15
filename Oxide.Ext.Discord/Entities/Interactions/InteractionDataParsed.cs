@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Plugins;
 
@@ -261,34 +262,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 return null;
             }
 
-            if (arg.Type != CommandOptionType.Mentionable)
-            {
-                ValidateArgs(name, arg.Type, requested);
-            }
-            else if (requested != CommandOptionType.Role && requested != CommandOptionType.User)
-            {
-                throw new Exception($"Attempted to parse {name} role/user type to: {requested} which is not valid.");
-            }
+            InteractionArgException.ThrowIfInvalidArgType(name, arg.Type, requested);
             
             return arg;
         }
 
-        private void ValidateArgs(string name, CommandOptionType arg, CommandOptionType requested)
-        {
-            if (arg != requested)
-            {
-                throw new Exception($"Attempted to parse {name} {arg} type to: {requested} which is not valid.");
-            }
-        }
-
         private Snowflake GetEntityId(JToken value)
         {
-            if (value == null)
-            {
-                return default(Snowflake);
-            }
-
-            return value.ToObject<Snowflake>();
+            return value?.ToObject<Snowflake>() ?? default(Snowflake);
         }
     }
 }

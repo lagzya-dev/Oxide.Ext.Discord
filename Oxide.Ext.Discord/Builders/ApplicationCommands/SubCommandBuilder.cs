@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Exceptions.Builders;
+
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
     /// <summary>
@@ -33,9 +35,11 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="description">Description of the option</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public CommandOptionBuilder<SubCommandBuilder> AddOption(CommandOptionType type, string name, string description)
+        public SubCommandOptionBuilder AddOption(CommandOptionType type, string name, string description)
         {
-            return new CommandOptionBuilder<SubCommandBuilder>(_options, type, name, description, this);
+            ApplicationCommandBuilderException.ThrowIfInvalidCommandOptionType(type);
+            
+            return new SubCommandOptionBuilder(_options, type, name, description, this);
         }
     }
 }

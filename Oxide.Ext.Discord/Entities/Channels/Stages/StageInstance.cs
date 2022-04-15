@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Stages
@@ -92,9 +91,8 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         public static void CreateStageInstance(DiscordClient client, StageInstanceCreate create, Action<StageInstance> callback = null, Action<RestError> error = null)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
-            if (!create.ChannelId.IsValid()) throw new InvalidSnowflakeException(nameof(create.ChannelId));
-
-            client.Bot.Rest.DoRequest($"/stage-instances", RequestMethod.POST, create, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(create.ChannelId, nameof(create.ChannelId));
+            client.Bot.Rest.DoRequest(client,"/stage-instances", RequestMethod.POST, create, callback, error);
         }
         
         /// <summary>
@@ -107,8 +105,8 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetStageInstance(DiscordClient client, Snowflake channelId, Action<StageInstance> callback = null, Action<RestError> error = null)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            client.Bot.Rest.DoRequest($"/stage-instances/{channelId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
+            client.Bot.Rest.DoRequest(client,$"/stage-instances/{channelId}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -117,24 +115,13 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// See <a href="https://discord.com/developers/docs/resources/stage-instance#modify-stage-instance">Update Stage Instance</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="topic">The new topic for the stage instance</param>
-        /// <param name="privacyLevel">Privacy level for the stage instance</param>
+        /// <param name="update">Update for the stage instance</param>
         /// <param name="callback">Callback when the updated stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyStageInstance(DiscordClient client, string topic = null, PrivacyLevel? privacyLevel = null, Action<StageInstance> callback = null, Action<RestError> error = null)
+        public void ModifyStageInstance(DiscordClient client, StageInstanceUpdate update, Action<StageInstance> callback = null, Action<RestError> error = null)
         {
-            Dictionary<string, string> data = new Dictionary<string, string>();
-            if (!string.IsNullOrEmpty(topic))
-            {
-                data["topic"] = topic;
-            }
-
-            if (privacyLevel.HasValue)
-            {
-                data["privacy_level"] = ((int)privacyLevel).ToString();
-            }
-
-            client.Bot.Rest.DoRequest($"/stage-instances/{ChannelId}", RequestMethod.PATCH, data, callback, error);
+            if (update == null) throw new ArgumentNullException(nameof(update));
+            client.Bot.Rest.DoRequest(client,$"/stage-instances/{ChannelId}", RequestMethod.PATCH, update, callback, error);
         }
         
         /// <summary>
@@ -147,7 +134,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteStageInstance(DiscordClient client, Action callback = null, Action<RestError> error = null)
         {
-            client.Bot.Rest.DoRequest($"/stage-instances/{ChannelId}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/stage-instances/{ChannelId}", RequestMethod.DELETE, null, callback, error);
         }
 
         internal StageInstance Update(StageInstance stage)

@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-
 namespace Oxide.Ext.Discord.Entities.Gatway.Commands
 {
     /// <summary>

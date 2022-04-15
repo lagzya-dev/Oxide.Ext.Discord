@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Plugins
 {
@@ -16,7 +18,9 @@ namespace Oxide.Ext.Discord.Plugins
         private void Init()
         {
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
-            AddCovalenceCommand(new[] { "de.reconnectws" }, nameof(ReconnectWebsockets), "de.reconnectws");
+            AddCovalenceCommand(new[] { "de.rws" }, nameof(ReconnectWebsockets), "de.rws");
+            AddCovalenceCommand(new[] { "de.consolelog" }, nameof(ConsoleLog), "de.consolelog");
+            AddCovalenceCommand(new[] { "de.filelog" }, nameof(FileLog), "de.filelog");
             
             foreach (KeyValuePair<string, Dictionary<string, string>> language in Localization.Languages)
             {
@@ -41,6 +45,50 @@ namespace Oxide.Ext.Discord.Plugins
             }
             
             Chat(player, LangKeys.ReconnectWebSocket);
+        }
+        
+        [HookMethod(nameof(ConsoleLog))]
+        private void ConsoleLog(IPlayer player, string cmd, string[] args)
+        {
+            if (args.Length == 0)
+            {
+                Chat(player, LangKeys.ShowLog, "Console", DiscordExtension.DiscordConfig.Logging.ConsoleLogLevel);
+                return;
+            }
+            
+            if (!Enum.IsDefined(typeof(DiscordLogLevel), args[0]))
+            {
+                Chat(player, LangKeys.InvalidLogEnum, args[0]);
+                return;
+            }
+
+            DiscordLogLevel log = (DiscordLogLevel)Enum.Parse(typeof(DiscordLogLevel), args[0], true);
+            DiscordExtension.DiscordConfig.Logging.ConsoleLogLevel = log;
+            DiscordExtension.DiscordConfig.Save();
+            
+            Chat(player, LangKeys.SetLog, "Console", log);
+        }
+        
+        [HookMethod(nameof(FileLog))]
+        private void FileLog(IPlayer player, string cmd, string[] args)
+        {
+            if (args.Length == 0)
+            {
+                Chat(player, LangKeys.ShowLog, "File", DiscordExtension.DiscordConfig.Logging.FileLogLevel);
+                return;
+            }
+            
+            if (!Enum.IsDefined(typeof(DiscordLogLevel), args[0]))
+            {
+                Chat(player, LangKeys.InvalidLogEnum, args[0]);
+                return;
+            }
+
+            DiscordLogLevel log = (DiscordLogLevel)Enum.Parse(typeof(DiscordLogLevel), args[0], true);
+            DiscordExtension.DiscordConfig.Logging.FileLogLevel = log;
+            DiscordExtension.DiscordConfig.Save();
+            
+            Chat(player, LangKeys.SetLog, "File", log);
         }
         #endregion
     }

@@ -1,5 +1,7 @@
+using System.Threading;
 using System.Timers;
 using Oxide.Ext.Discord.Helpers;
+using Timer = System.Timers.Timer;
 
 namespace Oxide.Ext.Discord.RateLimits
 {
@@ -29,8 +31,6 @@ namespace Oxide.Ext.Discord.RateLimits
         protected readonly double ResetInterval;
         
         private Timer _timer;
-        
-        private readonly object _syncRoot = new object();
 
         /// <summary>
         /// Base Rate Limit Constructor
@@ -50,11 +50,8 @@ namespace Oxide.Ext.Discord.RateLimits
         
         private void ResetRateLimit(object sender, ElapsedEventArgs e)
         {
-            lock (_syncRoot)
-            {
-                NumRequests = 0;
-                LastReset = Time.TimeSinceEpoch();
-            }
+            Interlocked.Exchange(ref NumRequests, 0);
+            Interlocked.Exchange(ref LastReset, Time.TimeSinceEpoch());
         }
         
         /// <summary>
@@ -62,10 +59,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// </summary>
         public void FiredRequest()
         {
-            lock (_syncRoot)
-            {
-                NumRequests += 1;
-            }
+            Interlocked.Add(ref NumRequests, 1);
         }
         
         /// <summary>

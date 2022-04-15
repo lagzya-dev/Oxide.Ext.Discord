@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core;
@@ -81,20 +80,6 @@ namespace Oxide.Ext.Discord.Libraries.Command
         }
 
         /// <summary>
-        /// Adds a discord direct message command
-        /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
-        /// </summary>
-        /// <param name="name">Name of the command</param>
-        /// <param name="plugin">Plugin to add the command for</param>
-        /// <param name="callback">Method name of the callback</param>
-        [LibraryFunction(nameof(AddDirectMessageCommand))]
-        public void AddDirectMessageCommand(string name, Plugin plugin, string callback)
-        {
-            AddDirectMessageCommand(name, plugin, (message, command, args) => plugin.CallHook(callback, message, command, args));
-            DiscordExtension.GlobalLogger.Debug("Plugin {0} Registered Direct Command {1} With Callback {2}", plugin.Name, name, callback);
-        }
-        
-        /// <summary>
         /// Adds a localized discord direct message command
         /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
         /// </summary>
@@ -121,7 +106,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="command">Command to add</param>
         /// <param name="plugin">Plugin to add the command for</param>
         /// <param name="callback">Method name of the callback</param>
-        public void AddDirectMessageCommand(string command, Plugin plugin, Action<DiscordMessage, string, string[]> callback)
+        public void AddDirectMessageCommand(string command, Plugin plugin, string callback)
         {
             string commandName = command.ToLowerInvariant();
 
@@ -132,25 +117,10 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 DiscordExtension.GlobalLogger.Warning("{0} has replaced the '{1}' discord direct message command previously registered by {2}", newPluginName, commandName, previousPluginName);
             }
 
-            cmd = new DirectMessageCommand(commandName, plugin, callback);
+            cmd = new DirectMessageCommand(plugin, commandName, callback);
 
             // Add the new command to collections
             _directMessageCommands[commandName] = cmd;
-        }
-
-        /// <summary>
-        /// Adds a discord guild command
-        /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123)
-        /// </summary>
-        /// <param name="name">The name of the command</param>
-        /// <param name="plugin">Plugin to add the command for</param>
-        /// <param name="allowedChannels">Channel or Category Id's this command is allowed in</param>
-        /// <param name="callback">Method name of the callback</param>
-        [LibraryFunction(nameof(AddGuildCommand))]
-        public void AddGuildCommand(string name, Plugin plugin, List<Snowflake> allowedChannels, string callback)
-        {
-            AddGuildCommand(name, plugin, allowedChannels, (message, command, args) => plugin.CallHook(callback, message, command, args));
-            DiscordExtension.GlobalLogger.Debug("Plugin {0} Registered Guild Command {1} With Callback {2}", plugin.Name, name, callback);
         }
 
         /// <summary>
@@ -182,7 +152,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="plugin">Plugin to add the localized command for</param>
         /// <param name="allowedChannels">Channel or Category Id's this command is allowed in</param>
         /// <param name="callback">Method name of the callback</param>
-        public void AddGuildCommand(string command, Plugin plugin, List<Snowflake> allowedChannels, Action<DiscordMessage, string, string[]> callback)
+        public void AddGuildCommand(string command, Plugin plugin, List<Snowflake> allowedChannels, string callback)
         {
             string commandName = command.ToLowerInvariant();
 
@@ -193,7 +163,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 DiscordExtension.GlobalLogger.Warning("{0} has replaced the '{1}' discord guild command previously registered by {2}", newPluginName, commandName, previousPluginName);
             }
 
-            cmd = new GuildCommand(commandName, plugin, allowedChannels, callback);
+            cmd = new GuildCommand(plugin, commandName, callback, allowedChannels);
 
             // Add the new command to collections
             _guildCommands[commandName] = cmd;
@@ -323,9 +293,9 @@ namespace Oxide.Ext.Discord.Libraries.Command
         {
             GuildCommand command = _guildCommands[name];
             DiscordExtension.GlobalLogger.Debug("Processing Command: {0}", name);
-            if (command == null || !command.CanRun(client) || !command.CanHandle(message, channel))
+            if (command == null)
             {
-                DiscordExtension.GlobalLogger.Debug("Can't handle command {0} {1} {2}", command == null, !command?.CanRun(client), !command?.CanHandle(message, channel));
+                DiscordExtension.GlobalLogger.Debug("Can't handle: command is null");
                 return false;
             }
             
@@ -335,7 +305,19 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 _guildCommands.Remove(name);
                 return false;
             }
+            
+            if (!command.CanRun(client))
+            {
+                DiscordExtension.GlobalLogger.Debug("Can't handle: command can't run for client");
+                return false;
+            }
 
+            if (!command.CanHandle(message, channel))
+            {
+                DiscordExtension.GlobalLogger.Debug("Can't handle: command can't handle message / channel");
+                return false;
+            }
+            
             if (!client.IsPluginRegistered(command.Plugin))
             {
                 DiscordExtension.GlobalLogger.Debug("Can't handle command plugin not registered");

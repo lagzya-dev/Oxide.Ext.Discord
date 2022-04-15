@@ -21,6 +21,20 @@ namespace Oxide.Ext.Discord.Logging
         bool IsLogging(DiscordLogLevel level);
 
         /// <summary>
+        /// Returns if the logger is logging for server console
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        bool IsConsoleLogging(DiscordLogLevel level);
+
+        /// <summary>
+        /// Returns if the logger is logging for file logger
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        bool IsFileLogging(DiscordLogLevel level);
+
+        /// <summary>
         /// Log the message with the specified level
         /// </summary>
         /// <param name="level">Log Level for the message</param>

@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using System.Text;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Builder used to build query strings for urls
     /// </summary>
-    public class QueryStringBuilder
+    public class QueryStringBuilder : BasePoolable
     {
-        private readonly StringBuilder _builder = new StringBuilder("?");
+        private StringBuilder _builder;
 
         /// <summary>
         /// Add a key value pair to the query string
@@ -17,10 +18,8 @@ namespace Oxide.Ext.Discord.Builders
         /// <param name="value">Key value</param>
         public void Add(string key, string value)
         {
-            _builder.Append(key);
-            _builder.Append('=');
+            AddKey(key);
             _builder.Append(value);
-            _builder.Append('&');
         }
 
         /// <summary>
@@ -32,8 +31,7 @@ namespace Oxide.Ext.Discord.Builders
         /// <typeparam name="T"></typeparam>
         public void AddList<T>(string key, List<T> list, string separator)
         {
-            _builder.Append(key);
-            _builder.Append('=');
+            AddKey(key);
             for (int index = 0; index < list.Count; index++)
             {
                 T entry = list[index];
@@ -43,8 +41,17 @@ namespace Oxide.Ext.Discord.Builders
                     _builder.Append(separator);
                 }
             }
+        }
 
-            _builder.Append('&');
+        private void AddKey(string key)
+        {
+            if (_builder.Length > 1)
+            {
+                _builder.Append('&');
+            }
+            
+            _builder.Append(key);
+            _builder.Append('=');
         }
 
         /// <summary>
@@ -53,11 +60,31 @@ namespace Oxide.Ext.Discord.Builders
         /// <returns></returns>
         public override string ToString()
         {
-            if (_builder[_builder.Length - 1] == '&')
-            {
-                _builder.Remove(_builder.Length - 1, 1);
-            }
-            return _builder.ToString();
+            return _builder.Length <= 1 ? string.Empty : _builder.ToString();
+        }
+        
+        /// <inheritdoc/>
+        protected override void EnterPool()
+        {
+            DiscordPool.FreeStringBuilder(ref _builder);
+        }
+
+        /// <inheritdoc/>
+        protected override void LeavePool()
+        {
+            _builder = DiscordPool.GetStringBuilder();
+            _builder.Append("?");
+        }
+
+        /// <summary>
+        /// Returns the query string and returns the builder back to the pool
+        /// </summary>
+        /// <returns></returns>
+        public string ToStringAndFree()
+        {
+            string query = ToString();
+            DiscordPool.Free(this);
+            return query;
         }
     }
 }

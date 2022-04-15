@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions;
-using Oxide.Ext.Discord.Validations;
+using Oxide.Ext.Discord.Exceptions.Entities.Guild;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -58,10 +58,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <inheritdoc/>
         public void Validate()
         {
-            if (!string.IsNullOrEmpty(Nick) && Nick.Length > 32)
-            {
-                throw new InvalidNicknameException($"Nickname '{Nick}' cannot be more than 32 characters");
-            }
+            InvalidGuildMemberException.ThrowIfInvalidNickname(Nick);
         }
     }
 }

@@ -1,5 +1,8 @@
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Pooling;
+
 namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
 {
     /// <summary>
@@ -10,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
     /// If both before and after are provided, only before is respected.
     /// Fetching users in-between before and after is not supported.
     /// </summary>
-    public class ScheduledEventUsersLookup : IDiscordQueryString
+    public class ScheduledEventUsersLookup : IDiscordQueryString, IDiscordValidation
     {
         /// <summary>
         /// Number of users to return (up to maximum 100)
@@ -38,7 +41,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            Validate();
+            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
             if (Limit.HasValue)
             {
                 builder.Add("limit", Limit.Value.ToString());
@@ -59,7 +63,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
                 builder.Add("after", After.Value.ToString());
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
+        }
+
+        /// <inheritdoc/>
+        public void Validate()
+        {
+            InvalidGuildScheduledEventLookupException.ThrowIfInvalidLimit(Limit);
         }
     }
 }

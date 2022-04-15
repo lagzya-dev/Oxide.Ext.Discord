@@ -1,12 +1,15 @@
 using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents;
+using Oxide.Ext.Discord.Interfaces;
+
 namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#modify-guild-scheduled-event">Guild Scheduled Event Update</a> within discord
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ScheduledEventUpdate
+    public class ScheduledEventUpdate : IDiscordValidation
     {
         /// <summary>
         /// The channel ID in which the scheduled event will be hosted, or null if <see cref="ScheduledEventEntityType">scheduled entity type</see> is <see cref="ScheduledEventEntityType.External">External</see>
@@ -61,5 +64,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// </summary>
         [JsonProperty("status")]
         public ScheduledEventStatus? Status { get; set; }
+
+        ///<inheritdoc/>
+        public void Validate()
+        {
+            InvalidGuildScheduledEventException.ThrowIfInvalidName(Name, true);
+            InvalidGuildScheduledEventException.ThrowIfInvalidDescription(Description);
+            EntityMetadata?.Validate();
+        }
     }
 }

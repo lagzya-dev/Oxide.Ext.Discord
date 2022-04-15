@@ -5,7 +5,9 @@ using Oxide.Core;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Exceptions.Entities.Websocket;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.WebSockets.Handlers;
 using WebSocketSharp;
 
@@ -75,7 +77,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 if (IsConnected() || IsConnecting())
                 {
-                    throw new Exception("Socket is already running. Please disconnect before attempting to connect.");
+                    throw new WebsocketException("Socket is already running. Please disconnect before attempting to connect.");
                 }
 
                 SocketState = SocketState.Connecting;
@@ -170,7 +172,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             Disconnect(false, false);
 
-            _listener?.Shutdown();
+            _listener?.OnSocketShutdown();
             _listener = null;
             _socket = null;
         }
@@ -196,25 +198,22 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <param name="data">Data to send</param>
         public void Send(GatewayCommandCode opCode, object data)
         {
-            CommandPayload payload = new CommandPayload
-            {
-                OpCode = opCode,
-                Payload = data
-            };
+            CommandPayload payload = DiscordPool.Get<CommandPayload>();
+            payload.Init(opCode, data);
 
             _commands.Enqueue(payload);
         }
         
         internal bool Send(CommandPayload payload)
         {
-            string payloadData = JsonConvert.SerializeObject(payload, DiscordExtension.ExtensionSerializeSettings);
-            _logger.Verbose($"{nameof(Socket)}.{nameof(Send)} Payload: {{0}}", payloadData);
-
             if (_socket == null)
             {
                 return false;
             }
             
+            string payloadData = JsonConvert.SerializeObject(payload, DiscordExtension.ExtensionSerializeSettings);
+            _logger.Verbose($"{nameof(Socket)}.{nameof(Send)} Payload: {{0}}", payloadData);
+
             _socket.SendAsync(payloadData, null);
             return true;
         }

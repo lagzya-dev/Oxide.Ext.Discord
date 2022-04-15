@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions.Entities.Channels;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel">Guild Channel Update Structure</a>
     /// </summary>
-    public class GuildChannelUpdate
+    public class GuildChannelUpdate : IDiscordValidation
     {
         /// <summary>
         /// The name of the channel (1-100 characters)
@@ -88,5 +90,16 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("default_auto_archive_duration")]
         public int? DefaultAutoArchiveDuration { get; set; }
+
+        ///<inheritdoc/>
+        public void Validate()
+        {
+            InvalidChannelException.ThrowIfInvalidName(Name, true);
+            InvalidChannelException.ThrowIfInvalidTopic(Topic, true);
+            InvalidChannelException.ThrowIfInvalidRateLimitPerUser(RateLimitPerUser);
+            InvalidChannelException.ThrowIfInvalidBitRate(Bitrate);
+            InvalidChannelException.ThrowIfInvalidUserLimit(UserLimit);
+            InvalidChannelException.ThrowIfInvalidParentId(ParentId);
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
@@ -30,7 +31,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
             if (Wait)
             {
                 builder.Add("wait", "true");
@@ -41,7 +42,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 builder.Add("thread_id", ThreadId.Value.ToString());
             }
             
-            return builder.ToString();
+            return builder.ToStringAndFree();
         }
         
         /// <summary>

@@ -36,6 +36,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _socket = socket;
             _listener = listener;
             _logger = logger;
+            _timer = new Timer();
+            _timer.Elapsed += HeartbeatElapsed;
         }
         
         #region Heartbeat
@@ -45,30 +47,24 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="interval"></param>
         internal void SetupHeartbeat(float interval)
         {
-            if (_timer != null)
-            {
-                _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SetupHeartbeat)} Previous heartbeat timer exists.");
-                DestroyHeartbeat();
-            }
-            
+            _timer.Stop();
             HeartbeatAcknowledged = true;
             _interval = interval;
             _initial = true;
-            _timer = new Timer(_interval * Random.Range(0f, 1f));
-            _timer.Elapsed += HeartbeatElapsed;
+            _timer.Interval = _interval * Random.Range(0f, 1f);
             _timer.Start();
             _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(SetupHeartbeat)} Creating heartbeat with interval {{0}}ms.", interval);
-            _client.CallHook(DiscordExtHooks.OnDiscordSetupHeartbeat, interval);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordSetupHeartbeat, interval);
         }
 
         /// <summary>
-        /// Destroy the heartbeat on this bot
+        /// Destroy the heartbeat timer on this bot
         /// </summary>
-        public void DestroyHeartbeat()
+        public void OnSocketShutdown()
         {
             if(_timer != null)
             {
-                _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(DestroyHeartbeat)} Destroy Heartbeat");
+                _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(OnSocketShutdown)} Destroy Heartbeat");
                 _timer.Dispose();
                 _timer = null;
             }
@@ -105,7 +101,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             
             if(!HeartbeatAcknowledged)
             {
-                //Discord did not acknowledge our last sent heartbeat. This is a zombie connection we should reconnect with non 1000 close code.
+                //Discord did not acknowledge our last sent heartbeat. This is a zombie connection we should reconnect.
                 if (_socket.IsConnected())
                 {
                     _logger.Debug($"{nameof(HeartbeatHandler)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and WebSocket is connected. Forcing reconnect.");
@@ -136,7 +132,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             HeartbeatAcknowledged = false;
             _listener.SendHeartbeat();
-            _client.CallHook(DiscordExtHooks.OnDiscordHeartbeatSent);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordHeartbeatSent);
             _logger.Debug("Heartbeat sent - {0}ms interval.", _timer.Interval);
         }
         #endregion

@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Exceptions.Builders;
+using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
+
 namespace Oxide.Ext.Discord.Builders.MessageComponents
 {
     /// <summary>
@@ -36,10 +38,9 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// </exception>
         public MessageComponentBuilder AddActionButton(ButtonStyle style, string label, string customId, bool disabled = false, DiscordEmoji emoji = null)
         {
-            if (style == ButtonStyle.Link)
-            {
-                throw new InvalidMessageComponentException($"Cannot add link button as action button. Please use {nameof(AddLinkButton)} instead");
-            }
+            InvalidMessageComponentException.ThrowIfInvalidButtonLabel(label);
+            MessageComponentBuilderException.ThrowIfInvalidActionButtonStyle(style);
+            InvalidMessageComponentException.ThrowIfInvalidCustomId(customId);
 
             UpdateActionRow<ButtonComponent>();
             _current.Components.Add(new ButtonComponent
@@ -76,8 +77,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <exception cref="Exception">Thrown if the button goes outside the max number of action rows</exception>
         public MessageComponentBuilder AddLinkButton(string label, string url, bool disabled = false, DiscordEmoji emoji = null)
         {
-            if (url == null)
-                throw new ArgumentNullException(nameof(url));
+            InvalidMessageComponentException.ThrowIfInvalidButtonUrl(url);
             
             UpdateActionRow<ButtonComponent>();
             _current.Components.Add(new ButtonComponent
@@ -102,12 +102,11 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <returns><see cref="SelectMenuComponentBuilder"/></returns>
         public SelectMenuComponentBuilder AddSelectMenu(string customId, string placeholder, int minValues = 1, int maxValues = 1, bool disabled = false)
         {
-            if (string.IsNullOrEmpty(customId))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
-
-            if (!string.IsNullOrEmpty(placeholder) && placeholder.Length > 150)
-                throw new InvalidMessageComponentException($"{nameof(placeholder)} cannot be more than 150 character");
-
+            InvalidMessageComponentException.ThrowIfInvalidCustomId(customId);
+            InvalidMessageComponentException.ThrowIfInvalidSelectMenuPlaceholder(placeholder);
+            InvalidMessageComponentException.ThrowIfInvalidSelectMenuMinValues(minValues);
+            InvalidMessageComponentException.ThrowIfInvalidSelectMenuMaxValues(minValues, maxValues);
+            
             UpdateActionRow<SelectMenuComponent>();
             SelectMenuComponent menu = new SelectMenuComponent
             {
@@ -135,15 +134,11 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <returns><see cref="MessageComponentBuilder"/></returns>
         public MessageComponentBuilder AddInputText(string customId, string label, InputTextStyles style, string value = null, bool? required = null, string placeholder = null, int? minLength = null, int? maxLength = null)
         {
-            if (string.IsNullOrEmpty(customId))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(customId));
+            InvalidMessageComponentException.ThrowIfInvalidCustomId(customId);
+            InvalidMessageComponentException.ThrowIfInvalidTextInputLabel(label);
+            InvalidMessageComponentException.ThrowIfInvalidTextInputValue(value);
+            InvalidMessageComponentException.ThrowIfInvalidTextInputLength(minLength, maxLength);
 
-            if (string.IsNullOrEmpty(label))
-                throw new InvalidMessageComponentException("Text Input Label cannot be null or empty");
-            
-            if (label.Length > 45)
-                throw new InvalidMessageComponentException("Text Input Label cannot be more than 45 characters");
-            
             UpdateActionRow<InputTextComponent>();
             InputTextComponent menu = new InputTextComponent
             {
@@ -173,12 +168,8 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
                 return;
             }
 
-            //Max of 5 action rows allowed
-            if (_components.Count >= 5)
-            {
-                throw new InvalidMessageComponentException("Cannot have more than 5 action rows");
-            }
-            
+            InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(_components.Count);
+
             //All other components are only 1 per action row so add a new row.
             _current = new ActionRowComponent();
             _components.Add(_current);

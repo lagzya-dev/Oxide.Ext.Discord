@@ -33,5 +33,15 @@ namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
         /// </summary>
         [JsonProperty("replied_user")]
         public bool RepliedUser { get; set; }
+        
+        /// <summary>
+        /// Prevents all mentions
+        /// </summary>
+        public static readonly AllowedMention None = new AllowedMention
+        {
+            AllowedTypes = new List<AllowedMentionTypes>(),
+            Roles = new List<Snowflake>(),
+            Users = new List<Snowflake>()
+        };
     }
 }

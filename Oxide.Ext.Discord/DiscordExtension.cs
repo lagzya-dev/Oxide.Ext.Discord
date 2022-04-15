@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -12,6 +11,7 @@ using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
+using AppDomain = System.AppDomain;
 
 namespace Oxide.Ext.Discord
 {
@@ -86,10 +86,6 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnModLoad()
         {
-            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new DiscordLogger(DiscordLogLevel.Warning) : new DiscordLogger(DiscordLogLevel.Verbose);
-            
-            GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
-
             string configPath = Path.Combine(Interface.Oxide.InstanceDirectory, "discord.config.json");
             if (!File.Exists(configPath))
             {
@@ -99,6 +95,14 @@ namespace Oxide.Ext.Discord
 
             DiscordConfig = ConfigFile.Load<DiscordConfig>(configPath);
             DiscordConfig.Save();
+            
+            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new DiscordLogger(DiscordLogLevel.Warning) : new DiscordLogger(DiscordLogLevel.Verbose);
+            GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
+            
+            AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
+            {
+                GlobalLogger.Exception("An unhandled exception was thrown!", exception?.ExceptionObject as System.Exception);
+            };
 
             DiscordLink = new DiscordLink(GlobalLogger);
             DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes);
@@ -126,7 +130,9 @@ namespace Oxide.Ext.Discord
             Interface.Oxide.RootPluginManager.OnPluginAdded -= DiscordClient.OnPluginAdded;
             Interface.Oxide.RootPluginManager.OnPluginRemoved -=  DiscordClient.OnPluginRemoved;
 
-            GlobalLogger.Info("Disconnected all clients - server shutdown.");
+            GlobalLogger.Debug("Disconnected all clients - server shutdown.");
+            
+            DiscordLogger.FileLogger.OnServerShutdown();
         }
     }
 }
