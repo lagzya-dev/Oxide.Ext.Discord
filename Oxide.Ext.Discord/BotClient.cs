@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
@@ -73,6 +74,14 @@ namespace Oxide.Ext.Discord
         
         internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
+        
+        /// <summary>
+        /// Discord Extension JSON Serialization settings
+        /// </summary>
+        internal readonly JsonSerializerSettings ClientSerializerSettings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
         
         internal GatewayReadyEvent ReadyData;
 
@@ -281,9 +290,7 @@ namespace Oxide.Ext.Discord
                 }
             }
 
-            string list = sb.ToString();
-            DiscordPool.FreeStringBuilder(ref sb);
-            return list;
+            return DiscordPool.ToStringAndFreeStringBuilder(ref sb);
         }
 
         private void UpdateLogLevel(DiscordLogLevel level)

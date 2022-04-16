@@ -53,7 +53,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _client = client;
             _logger = logger;
-            _commands = new SocketCommandHandler(this, logger);
+            _commands = new SocketCommandHandler(client, this, logger);
             _listener = new SocketListener(_client, this, _logger, _commands);
         }
 
@@ -211,7 +211,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 return false;
             }
             
-            string payloadData = JsonConvert.SerializeObject(payload, DiscordExtension.ExtensionSerializeSettings);
+            string payloadData = JsonConvert.SerializeObject(payload, _client.ClientSerializerSettings);
             _logger.Verbose($"{nameof(Socket)}.{nameof(Send)} Payload: {{0}}", payloadData);
 
             _socket.SendAsync(payloadData, null);

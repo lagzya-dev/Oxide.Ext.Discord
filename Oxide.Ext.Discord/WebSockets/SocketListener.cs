@@ -262,7 +262,7 @@ namespace Oxide.Ext.Discord.WebSockets
         public void SocketMessage(object sender, MessageEventArgs e)
         {
             EventPayload payload = DiscordPool.Get<EventPayload>();
-            JsonConvert.PopulateObject(e.Data, payload, DiscordExtension.ExtensionSerializeSettings);
+            JsonConvert.PopulateObject(e.Data, payload, _client.ClientSerializerSettings);
             if (payload.Sequence.HasValue)
             {
                 _sequence = payload.Sequence.Value;

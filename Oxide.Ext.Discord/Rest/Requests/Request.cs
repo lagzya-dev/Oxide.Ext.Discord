@@ -56,7 +56,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Multipart Boundary
         /// </summary>
-        public string Boundary { get; set; }
+        public string Boundary;
         
         /// <summary>
         /// Callback to call if the request completed successfully
@@ -264,7 +264,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
             else
             {
-                Contents = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Data, DiscordExtension.ExtensionSerializeSettings));
+                Contents = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Data, Client.Bot.ClientSerializerSettings));
             }
         }
 
@@ -360,7 +360,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 {
                     string message = reader.ReadToEnd().Trim();
                     Response = DiscordPool.Get<RestResponse>();
-                    Response.Init(message);
+                    Response.Init(Client.Bot, message);
 
                     ParseHeaders(response.Headers, Response);
 
@@ -392,29 +392,27 @@ namespace Oxide.Ext.Discord.Rest.Requests
             string bucketResetAfterHeader = headers.Get("X-RateLimit-Reset-After");
             string bucketNameHeader = headers.Get("X-RateLimit-Bucket");
 
-            if (!string.IsNullOrEmpty(bucketLimitHeader) &&
-                int.TryParse(bucketLimitHeader, out int bucketLimit))
+            int bucketLimit = 0;
+            int bucketRemaining = 0;
+            double bucketResetAfter = 0;
+
+            if (!string.IsNullOrEmpty(bucketLimitHeader))
             {
-                Bucket.RateLimitTotalRequests = bucketLimit;
+                int.TryParse(bucketLimitHeader, out bucketLimit);
             }
 
-            if (!string.IsNullOrEmpty(bucketRemainingHeader) &&
-                int.TryParse(bucketRemainingHeader, out int bucketRemaining))
+            if (!string.IsNullOrEmpty(bucketRemainingHeader))
             {
-                Bucket.RateLimitRemaining = bucketRemaining;
-            }
-
-            double timeSince = Time.TimeSinceEpoch();
-            if (!string.IsNullOrEmpty(bucketResetAfterHeader) &&
-                double.TryParse(bucketResetAfterHeader, out double bucketResetAfter))
-            {
-                double resetTime = timeSince + bucketResetAfter;
-                if (resetTime > Bucket.RateLimitReset)
-                {
-                    Bucket.RateLimitReset = resetTime;
-                }
+                int.TryParse(bucketRemainingHeader, out bucketRemaining);
             }
             
+            if (!string.IsNullOrEmpty(bucketResetAfterHeader))
+            {
+                double.TryParse(bucketResetAfterHeader, out bucketResetAfter);
+            }
+            
+            Bucket.UpdateFromRequest(bucketLimit, bucketRemaining, bucketResetAfter, bucketNameHeader);
+
             Client.Logger.Debug("Plugin: {0} Method: {1} Route: {2} Internal Bucket Id: {3} Limit: {4} Remaining: {5} Reset: {7} Time: {7} Bucket: {8}", Client.Plugin?.Name, Method, Route, Bucket.BucketId, Bucket.RateLimitTotalRequests, Bucket.RateLimitRemaining, Bucket.RateLimitReset, Time.TimeSinceEpoch(), bucketNameHeader);
         }
 

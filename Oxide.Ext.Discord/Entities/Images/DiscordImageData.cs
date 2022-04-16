@@ -49,8 +49,7 @@ namespace Oxide.Ext.Discord.Entities.Images
             sb.Append(Type.ToString().ToLower());
             sb.Append(";base64,");
             sb.Append(Convert.ToBase64String(Image));
-            Base64Image = sb.ToString();
-            DiscordPool.FreeStringBuilder(ref sb);
+            Base64Image = DiscordPool.ToStringAndFreeStringBuilder(ref sb);
         }
 
         /// <summary>

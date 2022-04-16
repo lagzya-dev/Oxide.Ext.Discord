@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
 
 namespace Oxide.Ext.Discord.Rest
@@ -11,15 +10,15 @@ namespace Oxide.Ext.Discord.Rest
     /// <summary>
     /// Represents a discord API bucket for a group of requests
     /// </summary>
-    public class Bucket : BasePoolable
+    public class Bucket
     {
         /// <summary>
         /// The ID of this bucket which is based on the route
         /// </summary>
-        public string BucketId;
+        public string BucketId { get; internal set; }
         
         /// <summary>
-        /// The number of requests that can be made
+        /// The number of requests that can be made per rate limit reset
         /// </summary>
         public int RateLimitTotalRequests;
 
@@ -41,35 +40,29 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Rest Handler for the bucket
         /// </summary>
-        public RestHandler Handler;
+        public readonly RestHandler Handler;
 
-        private ILogger _logger;
-        private List<Request> _requests;
+        private readonly ILogger _logger;
+        private readonly List<Request> _requests;
         private readonly object _syncRoot = new object();
 
         private readonly ThreadStart _threadStart;
         private Thread _thread;
+        private bool _isKnowBucket;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public Bucket()
-        {
-            _threadStart = RunThread;
-        }
-        
         /// <summary>
         /// Creates a new bucket for the given rest handler and bucket ID
         /// </summary>
         /// <param name="handler">Rest Handler for the bucket</param>
         /// <param name="bucketId">ID of the bucket</param>
         /// <param name="logger">Logger for the client</param>
-        public void Init(RestHandler handler, string bucketId, ILogger logger)
+        public Bucket(RestHandler handler, string bucketId, ILogger logger)
         {
             Handler = handler;
             BucketId = bucketId;
             _logger = logger;
-            _requests = DiscordPool.GetList<Request>();
+            _requests = new List<Request>();
+            _threadStart = RunThread;
             _logger.Debug("New Bucket Created with id: {0}", bucketId);
         }
 
@@ -83,13 +76,6 @@ namespace Oxide.Ext.Discord.Rest
         }
 
         /// <summary>
-        /// Returns if this bucket is ready to be cleaned up.
-        /// Should be cleaned up if the thread is not null and the RateLimitReset has expired
-        /// </summary>
-        /// <returns>True if we should cleanup the bucket; false otherwise</returns>
-        public bool ShouldCleanup() => (_thread == null || !_thread.IsAlive) && Time.TimeSinceEpoch() > RateLimitReset;
-
-        /// <summary>
         /// Queues a new request for the buck
         /// </summary>
         /// <param name="request">Request to be queued</param>
@@ -100,16 +86,15 @@ namespace Oxide.Ext.Discord.Rest
             lock (_syncRoot)
             {
                 _requests.Add(request);
-            }
-
-            if (_thread == null || !_thread.IsAlive)
-            {
-                _thread = new Thread(_threadStart) {IsBackground = true};
-                _thread.Start();
-            }
-            else
-            {
-                _thread.Interrupt();
+                if (_thread == null || !_thread.IsAlive)
+                {
+                    _thread = new Thread(_threadStart) {IsBackground = true};
+                    _thread.Start();
+                }
+                else
+                {
+                    _thread.Interrupt();
+                }
             }
         }
 
@@ -146,7 +131,12 @@ namespace Oxide.Ext.Discord.Rest
             }
             catch (Exception ex)
             {
-                _logger.Exception("An exception occured for bucket: {0}", BucketId, ex);
+                _logger.Exception("An exception occured for bucket {0}", BucketId, ex);
+            }
+
+            if (!_isKnowBucket)
+            {
+                Handler.RemoveBucket(this);
             }
         }
 
@@ -177,23 +167,6 @@ namespace Oxide.Ext.Discord.Rest
                 return;
             }
 
-            while (RequestCount() != 0)
-            {
-                Request request = GetRequest(0);
-                if (!request.HasTimedOut())
-                {
-                    break;
-                }
-                
-                request.Close(false);
-            }
-
-            //It's possible we removed a request that has timed out.
-            if (RequestCount() == 0)
-            {
-                return;
-            }
-            
             Handler.RateLimit.FiredRequest();
             GetRequest(0).Fire();
         }
@@ -244,18 +217,30 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
 
-        /// <inheritdoc/>
-        protected override void EnterPool()
+        internal void UpdateFromRequest(int bucketLimit, int bucketRemaining, double resetTime, string bucketId)
         {
-            BucketId = null;
-            RateLimitTotalRequests = 0;
-            RateLimitRemaining = 0;
-            RateLimitRemaining = 0;
-            ErrorDelayUntil = 0;
-            Handler = null;
-            _logger = null;
-            _thread = null;
-            FreeList(ref _requests);
+            RateLimitTotalRequests = bucketLimit;
+            RateLimitRemaining = bucketRemaining;
+            resetTime = Time.TimeSinceEpoch() + resetTime;
+            if (resetTime > RateLimitReset)
+            {
+                RateLimitReset = resetTime;
+            }
+            
+            if (!_isKnowBucket && !string.IsNullOrEmpty(bucketId) && Handler.UpgradeToKnownBucket(this, bucketId))
+            {
+                _isKnowBucket = true;
+            }
+        }
+
+        internal void Merge(Bucket bucket)
+        {
+            for (int index = 0; index < bucket.RequestCount(); index++)
+            {
+                Request request = bucket.GetRequest(0);
+                QueueRequest(request);
+                bucket.DequeueRequest(request);
+            }
         }
     }
 }

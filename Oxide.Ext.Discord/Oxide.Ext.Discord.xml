@@ -105,6 +105,11 @@
             Rest handler for all discord API calls
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.ClientSerializerSettings">
+            <summary>
+            Discord Extension JSON Serialization settings
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.BotClient._clients">
             <summary>
             List of all clients that are using this bot client
@@ -2108,11 +2113,6 @@
             Test version information if using test version
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.DiscordExtension.ExtensionSerializeSettings">
-            <summary>
-            Discord Extension JSON Serialization settings
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.DiscordExtension.ExtensionVersion">
             <summary>
             Version number of the extension
@@ -2692,15 +2692,16 @@
             Represents a REST response from discord
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RestResponse.Data">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RestResponse._data">
             <summary>
             Data discord sent us
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RestResponse.Init(System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RestResponse.Init(Oxide.Ext.Discord.BotClient,System.String)">
             <summary>
             Create new REST response with the given data
             </summary>
+            <param name="client">BotClient for the response</param>
             <param name="data"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RestResponse.ParseData``1">
@@ -2709,6 +2710,9 @@
             </summary>
             <typeparam name="T">Type to be parsed as</typeparam>
             <returns>Data string JSON parsed to object</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RestResponse.EnterPool">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags">
             <summary>
@@ -13964,6 +13968,11 @@
             Represents an exception that occured with the websocket
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Pool.DiscordPoolException">
+            <summary>
+            Represents an exception on the Discord Pool
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.TokenMismatchException">
             <summary>
             Represents a bot token mismatch
@@ -15377,35 +15386,35 @@
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.Get``1">
             <summary>
             Returns a pooled object of type T
-            Must inherit from BasePoolable and have an empty default constructor
+            Must inherit from <see cref="T:Oxide.Ext.Discord.Pooling.BasePoolable"/> and have an empty default constructor
             </summary>
             <typeparam name="T">Type to be returned</typeparam>
             <returns>Pooled object of type T</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.Free``1(``0@)">
             <summary>
-            Returns a BasePoolable back into the pool
+            Returns a <see cref="T:Oxide.Ext.Discord.Pooling.BasePoolable"/> back into the pool
             </summary>
             <param name="value">Object to free</param>
             <typeparam name="T">Type of object being freed</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.Free``1(``0)">
             <summary>
-            Returns a BasePoolable back into the pool
+            Returns a <see cref="T:Oxide.Ext.Discord.Pooling.BasePoolable"/> back into the pool
             </summary>
             <param name="value">Object to free</param>
             <typeparam name="T">Type of object being freed</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetList``1">
             <summary>
-            Returns a pooled list of type T
+            Returns a pooled <see cref="T:System.Collections.Generic.List`1"/>
             </summary>
             <typeparam name="T">Type for the list</typeparam>
             <returns>Pooled List</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetHash``2">
             <summary>
-            Returns a pooled hash of type TKey, TValue
+            Returns a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
             </summary>
             <typeparam name="TKey">Type for the key</typeparam>
             <typeparam name="TValue">Type for the value</typeparam>
@@ -15413,20 +15422,26 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetStringBuilder">
             <summary>
-            Returns a pooled StringBuilder
+            Returns a pooled <see cref="T:System.Text.StringBuilder"/>
             </summary>
-            <returns>Pooled StringBuilder</returns>
+            <returns>Pooled <see cref="T:System.Text.StringBuilder"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetMemoryStream">
+            <summary>
+            Returns a pooled <see cref="T:System.IO.MemoryStream"/>
+            </summary>
+            <returns>Pooled <see cref="T:System.IO.MemoryStream"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeList``1(System.Collections.Generic.List{``0}@)">
             <summary>
-            Free's a pooled list
+            Free's a pooled <see cref="T:System.Collections.Generic.List`1"/>
             </summary>
             <param name="list">List to be freed</param>
             <typeparam name="T">Type of the list</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeHash``2(Oxide.Plugins.Hash{``0,``1}@)">
             <summary>
-            Frees a pooled hash
+            Frees a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
             </summary>
             <param name="hash">Hash to be freed</param>
             <typeparam name="TKey">Type for key</typeparam>
@@ -15434,15 +15449,21 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeStringBuilder(System.Text.StringBuilder@)">
             <summary>
-            Frees a StringBuilder back to the pool
+            Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool
             </summary>
             <param name="sb">StringBuilder being freed</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetAndFreeStringBuilder(System.Text.StringBuilder@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.ToStringAndFreeStringBuilder(System.Text.StringBuilder@)">
             <summary>
-            Frees a StringBuilder back to the pool
+            Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool returning the <see cref="T:System.String"/>
             </summary>
-            <param name="sb">StringBuilder being freed</param>
+            <param name="sb"><see cref="T:System.Text.StringBuilder"/> being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeMemoryStream(System.IO.MemoryStream@)">
+            <summary>
+            Frees a <see cref="T:System.IO.MemoryStream"/> back to the pool
+            </summary>
+            <param name="stream"><see cref="T:System.IO.MemoryStream"/> being freed</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.HashPool`2">
             <summary>
@@ -15484,6 +15505,14 @@
             <typeparam name="T">Type that will be in the list</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.ListPool`1.OnFreeItem(System.Collections.Generic.List{`0}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Pooling.MemoryStreamPool">
+            <summary>
+            Represents a pool for MemoryStream
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.MemoryStreamPool.OnFreeItem(System.IO.MemoryStream@)">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.StringBuilderPool">
@@ -15577,82 +15606,6 @@
             Constructor for WebsocketRateLimit
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Bucket">
-            <summary>
-            Represents a discord API bucket for a group of requests
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.BucketId">
-            <summary>
-            The ID of this bucket which is based on the route
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitTotalRequests">
-            <summary>
-            The number of requests that can be made
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitRemaining">
-            <summary>
-            How many requests are remaining before hitting the rate limit for the bucket
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitReset">
-            <summary>
-            How long until the rate limit resets
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.ErrorDelayUntil">
-            <summary>
-            How long to wait before retrying request since there was a web exception
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.Handler">
-            <summary>
-            Rest Handler for the bucket
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.Init(Oxide.Ext.Discord.Rest.RestHandler,System.String,Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Creates a new bucket for the given rest handler and bucket ID
-            </summary>
-            <param name="handler">Rest Handler for the bucket</param>
-            <param name="bucketId">ID of the bucket</param>
-            <param name="logger">Logger for the client</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.Close">
-            <summary>
-            Close the bucket and abort the thread
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.ShouldCleanup">
-            <summary>
-            Returns if this bucket is ready to be cleaned up.
-            Should be cleaned up if the thread is not null and the RateLimitReset has expired
-            </summary>
-            <returns>True if we should cleanup the bucket; false otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Requests.Request)">
-            <summary>
-            Queues a new request for the buck
-            </summary>
-            <param name="request">Request to be queued</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.DequeueRequest(Oxide.Ext.Discord.Rest.Requests.Request)">
-            <summary>
-            Removes the request from the queue.
-            Either the request completed successfully or there was an error and failed to succeed after 3 attempts
-            </summary>
-            <param name="request">Request to remove</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.EnterPool">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Rest.BucketIdGenerator">
             <summary>
             Represents a type that splits string by a specific char
@@ -15685,6 +15638,75 @@
             Returns the next string in the split
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.NextIndex(System.Int32)">
+            <summary>
+            Updates the _lastIndex processed.
+            If the _lastIndex >= _length then we are done processing the Bucket ID
+            If the current route is now reactions we stop processing the bucket ID
+            </summary>
+            <param name="lastIndex"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.Bucket">
+            <summary>
+            Represents a discord API bucket for a group of requests
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Bucket.BucketId">
+            <summary>
+            The ID of this bucket which is based on the route
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitTotalRequests">
+            <summary>
+            The number of requests that can be made per rate limit reset
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitRemaining">
+            <summary>
+            How many requests are remaining before hitting the rate limit for the bucket
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitReset">
+            <summary>
+            How long until the rate limit resets
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.ErrorDelayUntil">
+            <summary>
+            How long to wait before retrying request since there was a web exception
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Bucket.Handler">
+            <summary>
+            Rest Handler for the bucket
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.#ctor(Oxide.Ext.Discord.Rest.RestHandler,System.String,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a new bucket for the given rest handler and bucket ID
+            </summary>
+            <param name="handler">Rest Handler for the bucket</param>
+            <param name="bucketId">ID of the bucket</param>
+            <param name="logger">Logger for the client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.Close">
+            <summary>
+            Close the bucket and abort the thread
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Requests.Request)">
+            <summary>
+            Queues a new request for the buck
+            </summary>
+            <param name="request">Request to be queued</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Bucket.DequeueRequest(Oxide.Ext.Discord.Rest.Requests.Request)">
+            <summary>
+            Removes the request from the queue.
+            Either the request completed successfully or there was an error and failed to succeed after 3 attempts
+            </summary>
+            <param name="request">Request to remove</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection">
             <summary>
@@ -15770,6 +15792,11 @@
             Section name for the multipart section
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.SerializerSettings">
+            <summary>
+            Discord Extension JSON Serialization settings
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.#ctor(System.String,System.Byte[],System.String)">
             <summary>
             Constructor for byte form data
@@ -15834,7 +15861,7 @@
             Required If Multipart Form Request
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Requests.Request.Boundary">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.Boundary">
             <summary>
             Multipart Boundary
             </summary>
@@ -15964,7 +15991,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.RestHandler.Buckets">
             <summary>
-            The request buckets for the bot
+            Buckets with Routes we don't know the Hash of yet
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.RouteToHash">
+            <summary>
+            Route to Bucket Hash
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.RestHandler._authorization">
@@ -16019,11 +16051,6 @@
             </summary>
             <param name="bucketId"></param>
             <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CleanupExpired">
-            <summary>
-            Removed buckets that are old and not being used
-            </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Shutdown">
             <summary>
@@ -16361,10 +16388,11 @@
             Handles command queueing when the websocket is down
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.#ctor(Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
+            <param name="client">Bot Client for socket commands</param>
             <param name="webSocket">Websocket to handle commands for</param>
             <param name="logger">Logger for this handler</param>
         </member>

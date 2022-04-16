@@ -1,7 +1,6 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Configuration;
 using Oxide.Core.Extensions;
@@ -27,14 +26,6 @@ namespace Oxide.Ext.Discord
         
         internal const string Authors = "PsychoTea & DylanSMR & Tricky & Kirollos & MJSU";
 
-        /// <summary>
-        /// Discord Extension JSON Serialization settings
-        /// </summary>
-        internal static readonly JsonSerializerSettings ExtensionSerializeSettings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore
-        };
-        
         /// <summary>
         /// Version number of the extension
         /// </summary>

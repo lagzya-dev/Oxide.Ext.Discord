@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Rest
         {
             _method = method;
             _string = route;
-            _length = _string.IndexOf(QueryStringChar);
+            _length = _string.LastIndexOf(QueryStringChar);
             if (_length == -1)
             {
                 _length = _string.Length;
@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Rest
                 bucket.Append(_current);
             }
 
-            return DiscordPool.GetAndFreeStringBuilder(ref bucket);
+            return DiscordPool.ToStringAndFreeStringBuilder(ref bucket);
         }
 
         /// <summary>
@@ -104,33 +104,42 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
 
-        private void NextIndex(int nextIndex)
+        /// <summary>
+        /// Updates the _lastIndex processed.
+        /// If the _lastIndex >= _length then we are done processing the Bucket ID
+        /// If the current route is now reactions we stop processing the bucket ID
+        /// </summary>
+        /// <param name="lastIndex"></param>
+        private void NextIndex(int lastIndex)
         {
-            _lastIndex = nextIndex + 1;
+            _lastIndex = lastIndex + 1;
             if (_lastIndex >= _length)
             {
                 _isCompleted = true;
             }
-        }
-
-        private void UpdateCurrent(int length)
-        {
-            _previous = _current;
-            _current = _string.Substring(_lastIndex, length);
             
-            //If previous is not a major ID we don't want to include the ID in the bucket ID so use id instead
-            if (!IsMajorId() && char.IsNumber(_current[0]) && ulong.TryParse(_current, out ulong _))
-            {
-                _current = IdReplacement;
-            }
-            
-            //All buckets are the same for reaction routes
+            //All Reactions belong to the same bucket
             if (_current == ReactionsRoute)
             {
                 _isCompleted = true;
             }
         }
+
+        //Updates the current route segment
+        private void UpdateCurrent(int length)
+        {
+            _previous = _current;
+            _current = _string.Substring(_lastIndex, length);
+            
+            //If previous is not a major ID we don't want to include the ID in the bucket ID so use "id" string instead
+            if (!IsMajorId() && char.IsNumber(_current[0]) && ulong.TryParse(_current, out ulong _))
+            {
+                _current = IdReplacement;
+            }
+        }
         
+        //Returns if the previous route segment was guild, channel, or webhook.
+        //The Snowflake ID's for these routes should be included in the bucket ID
         private bool IsMajorId()
         {
             switch (_previous)

@@ -109,8 +109,7 @@ namespace Oxide.Ext.Discord.Logging
                 ArrayPool.Free(args);
             }
 
-            WriteToFile(sb.ToString());
-            DiscordPool.FreeStringBuilder(ref sb);
+            WriteToFile(DiscordPool.ToStringAndFreeStringBuilder(ref sb));
         }
         
         private void WriteToFile(string text)

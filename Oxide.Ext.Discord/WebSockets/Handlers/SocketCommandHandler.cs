@@ -14,6 +14,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
     /// </summary>
     public class SocketCommandHandler
     {
+        private readonly BotClient _client;
         private readonly Socket _webSocket;
         private readonly ILogger _logger;
         private readonly List<CommandPayload> _pendingCommands = new List<CommandPayload>();
@@ -25,10 +26,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="client">Bot Client for socket commands</param>
         /// <param name="webSocket">Websocket to handle commands for</param>
         /// <param name="logger">Logger for this handler</param>
-        public SocketCommandHandler(Socket webSocket, ILogger logger)
+        public SocketCommandHandler(BotClient client, Socket webSocket, ILogger logger)
         {
+            _client = client;
             _webSocket = webSocket;
             _logger = logger;
             
@@ -123,7 +126,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     _rateLimitTimer.Interval = _rateLimit.NextReset;
                     _rateLimitTimer.Stop();
                     _rateLimitTimer.Start();
-                    _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {{0}} seconds\nOpcode: {{1}}\nPayload: {{2}}", _rateLimit.NextReset, payload.OpCode, JsonConvert.SerializeObject(payload.Payload, DiscordExtension.ExtensionSerializeSettings));
+                    _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {{0}} seconds\nOpcode: {{1}}\nPayload: {{2}}", _rateLimit.NextReset, payload.OpCode, JsonConvert.SerializeObject(payload.Payload, _client.ClientSerializerSettings));
                 }
 
                 return false;

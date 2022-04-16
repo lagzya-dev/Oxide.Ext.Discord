@@ -27,6 +27,14 @@ namespace Oxide.Ext.Discord.Rest.Multipart
         /// Section name for the multipart section
         /// </summary>
         public string SectionName { get; }
+        
+        /// <summary>
+        /// Discord Extension JSON Serialization settings
+        /// </summary>
+        private static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
 
         /// <summary>
         /// Constructor for byte form data
@@ -58,7 +66,7 @@ namespace Oxide.Ext.Discord.Rest.Multipart
         /// <param name="sectionName"></param>
         /// <param name="data"></param>
         /// <param name="contentType"></param>
-        internal MultipartFormSection(string sectionName, object data, string contentType) : this(contentType, JsonConvert.SerializeObject(data, DiscordExtension.ExtensionSerializeSettings), sectionName)
+        internal MultipartFormSection(string sectionName, object data, string contentType) : this(contentType, JsonConvert.SerializeObject(data, SerializerSettings), sectionName)
         {
 
         }

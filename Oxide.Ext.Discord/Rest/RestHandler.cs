@@ -1,11 +1,8 @@
 using System;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using Oxide.Ext.Discord.Callbacks.Rest;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
@@ -26,9 +23,14 @@ namespace Oxide.Ext.Discord.Rest
         public readonly RestRateLimit RateLimit = new RestRateLimit();
         
         /// <summary>
-        /// The request buckets for the bot
+        /// Buckets with Routes we don't know the Hash of yet
         /// </summary>
         public readonly Hash<string, Bucket> Buckets = new Hash<string, Bucket>();
+
+        /// <summary>
+        /// Route to Bucket Hash
+        /// </summary>
+        public readonly Hash<string, string> RouteToHash = new Hash<string, string>();
 
         /// <summary>
         /// The authorization header value
@@ -112,7 +114,33 @@ namespace Oxide.Ext.Discord.Rest
             _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}", request.Route, bucketId);
             Bucket bucket = GetBucket(bucketId);
             bucket.QueueRequest(request);
-            CleanupExpired();
+        }
+
+        internal bool UpgradeToKnownBucket(Bucket bucket, string newBucketId)
+        {
+            lock (_bucketSyncObject)
+            {
+                RouteToHash[bucket.BucketId] = newBucketId;
+                
+                Bucket existing = Buckets[newBucketId];
+                if (existing != null)
+                {
+                    existing.Merge(bucket);
+                    bucket.Close();
+                    return false;
+                }
+
+                bucket.BucketId = newBucketId;
+                return true;
+            }
+        }
+
+        internal void RemoveBucket(Bucket bucket)
+        {
+            lock (_bucketSyncObject)
+            {
+                Buckets.Remove(bucket.BucketId);
+            }
         }
 
         /// <summary>
@@ -124,26 +152,18 @@ namespace Oxide.Ext.Discord.Rest
         {
             lock (_bucketSyncObject)
             {
+                if (RouteToHash.ContainsKey(bucketId))
+                {
+                    bucketId = RouteToHash[bucketId];
+                }
+                
                 Bucket bucket = Buckets[bucketId];
                 if (bucket == null)
                 {
-                    bucket = DiscordPool.Get<Bucket>();
-                    bucket.Init(this, bucketId, _logger);
-                    Buckets[bucketId] = bucket;
+                    Buckets[bucketId] = new Bucket(this, bucketId, _logger);
                 }
 
                 return bucket;
-            }
-        }
-        
-        /// <summary>
-        /// Removed buckets that are old and not being used
-        /// </summary>
-        public void CleanupExpired()
-        {
-            lock (_bucketSyncObject)
-            {
-                Buckets.RemoveAll(b => b.ShouldCleanup(), DiscordPool.Free);
             }
         }
 
@@ -168,8 +188,8 @@ namespace Oxide.Ext.Discord.Rest
                 foreach (Bucket bucket in Buckets.Values)
                 {
                     bucket.Close();
-                    DiscordPool.Free(bucket);
                 }
+                RouteToHash.Clear();
                 Buckets.Clear();
             }
             

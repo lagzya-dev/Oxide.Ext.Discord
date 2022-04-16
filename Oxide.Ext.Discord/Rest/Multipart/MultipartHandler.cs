@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Oxide.Ext.Discord.Pooling;
 
@@ -17,26 +18,26 @@ namespace Oxide.Ext.Discord.Rest.Multipart
             StringBuilder sb = DiscordPool.GetStringBuilder();
             byte[] boundaryBytes = Encoding.UTF8.GetBytes(boundary);
 
-            List<byte> data = DiscordPool.GetList<byte>();
+            MemoryStream stream = DiscordPool.GetMemoryStream();
 
             foreach (IMultipartSection section in multipartSections)
             {
-                AddMultipartSection(sb, section, data, boundaryBytes);
+                AddMultipartSection(sb, section, stream, boundaryBytes);
             }
 
-            data.AddRange(NewLine);
-            data.AddRange(Separator);
-            data.AddRange(boundaryBytes);
-            data.AddRange(Separator);
-            data.AddRange(NewLine);
-            
+            stream.Write(NewLine, 0, NewLine.Length);
+            stream.Write(Separator, 0, Separator.Length);
+            stream.Write(boundaryBytes, 0, boundaryBytes.Length);
+            stream.Write(Separator, 0, Separator.Length);
+            stream.Write(NewLine, 0, NewLine.Length);
+
             DiscordPool.FreeStringBuilder(ref sb);
-            byte[] bytes = data.ToArray();
-            DiscordPool.FreeList(ref data);
+            byte[] bytes = stream.ToArray();
+            DiscordPool.FreeMemoryStream(ref stream);
             return bytes;
         }
 
-        private static void AddMultipartSection(StringBuilder sb, IMultipartSection section, List<byte> data, byte[] boundary)
+        private static void AddMultipartSection(StringBuilder sb, IMultipartSection section, MemoryStream stream, byte[] boundary)
         {
             sb.Length = 0;
             sb.Append("Content-Disposition: form-data; name=\"");
@@ -58,13 +59,13 @@ namespace Oxide.Ext.Discord.Rest.Multipart
 
             sb.AppendLine();
             
-            data.AddRange(NewLine);
-            data.AddRange(Separator);
-            data.AddRange(boundary);
-            data.AddRange(NewLine);
-            data.AddRange(Encoding.UTF8.GetBytes(sb.ToString()));
-            data.AddRange(NewLine);
-            data.AddRange(section.Data);
+            byte[] encoded = Encoding.UTF8.GetBytes(sb.ToString());
+            stream.Write(NewLine, 0, NewLine.Length);
+            stream.Write(Separator, 0, Separator.Length);
+            stream.Write(NewLine, 0, NewLine.Length);
+            stream.Write(encoded, 0, encoded.Length);
+            stream.Write(NewLine, 0, NewLine.Length);
+            stream.Write(section.Data, 0, section.Data.Length);
         }
     }
 }

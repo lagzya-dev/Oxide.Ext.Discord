@@ -11,15 +11,19 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// Data discord sent us
         /// </summary>
-        public string Data { get; private set; }
+        private string _data;
+
+        private BotClient _client;
 
         /// <summary>
         /// Create new REST response with the given data
         /// </summary>
+        /// <param name="client">BotClient for the response</param>
         /// <param name="data"></param>
-        public void Init(string data)
+        public void Init(BotClient client, string data)
         {
-            Data = data;
+            _client = client;
+            _data = data;
         }
 
         /// <summary>
@@ -27,6 +31,13 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// </summary>
         /// <typeparam name="T">Type to be parsed as</typeparam>
         /// <returns>Data string JSON parsed to object</returns>
-        public T ParseData<T>() => !string.IsNullOrEmpty(Data) ? JsonConvert.DeserializeObject<T>(Data, DiscordExtension.ExtensionSerializeSettings) : default(T);
+        public T ParseData<T>() => !string.IsNullOrEmpty(_data) ? JsonConvert.DeserializeObject<T>(_data, _client.ClientSerializerSettings) : default(T);
+
+        ///<inheritdoc/>
+        protected override void EnterPool()
+        {
+            _data = null;
+            _client = null;
+        }
     }
 }
