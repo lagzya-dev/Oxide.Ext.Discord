@@ -137,11 +137,11 @@ namespace Oxide.Ext.Discord.WebSockets
 
                 if (requested)
                 {
-                    _socket.CloseAsync(4199, "Discord Requested Reconnect");
+                    _socket?.CloseAsync(4199, "Discord Requested Reconnect");
                 }
                 else
                 {
-                    _socket.CloseAsync(CloseStatusCode.Normal);
+                    _socket?.CloseAsync(CloseStatusCode.Normal);
                 }
 
                 DisposeSocket();
@@ -277,6 +277,7 @@ namespace Oxide.Ext.Discord.WebSockets
             //If we haven't had any errors reconnect to the gateway
             if (_reconnectRetries == 0)
             {
+                _reconnectRetries++;
                 Interface.Oxide.NextTick(Connect);
                 return;
             }
