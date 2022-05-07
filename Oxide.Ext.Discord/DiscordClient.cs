@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord
     {
         internal static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
 
-        private static readonly Regex TokenValidator = new Regex(@"^[\w-]{24}\.[\w-]{6}\.[\w-]{27}$", RegexOptions.Compiled);
+        private static readonly Regex TokenValidator = new Regex(@"^[\w-]{24}\.[\w-]{6}\.[\w-]+$", RegexOptions.Compiled);
 
         /// <summary>
         /// Which plugin is the owner of this client
