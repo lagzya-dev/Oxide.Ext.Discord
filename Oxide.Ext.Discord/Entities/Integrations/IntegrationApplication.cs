@@ -33,14 +33,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
-        
-        /// <summary>
-        /// The summary of the app
-        /// </summary>
-        [Obsolete("This field is no longer sent by discord and will be removed in API v11")]
-        [JsonProperty("summary")]
-        public string Summary { get; set; }
-        
+
         /// <summary>
         /// The bot associated with this application
         /// </summary>
