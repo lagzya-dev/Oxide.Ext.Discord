@@ -11,10 +11,6 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public static class DiscordPool
     {
-        private static readonly Hash<Type, IPool> Pools = new Hash<Type, IPool>();
-        private static readonly StringBuilderPool StringBuilderPool = new StringBuilderPool();
-        private static readonly MemoryStreamPool MemoryStreamPool = new MemoryStreamPool();
-        
         /// <summary>
         /// Returns a pooled object of type T
         /// Must inherit from <see cref="BasePoolable"/> and have an empty default constructor
@@ -23,8 +19,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled object of type T</returns>
         public static T Get<T>() where T : BasePoolable, new()
         {
-            IPool<T> pool = GetObjectPool<T>();
-            return pool.Get();
+            return ObjectPool<T>.Instance.Get();
         }
 
         /// <summary>
@@ -34,8 +29,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="T">Type of object being freed</typeparam>
         public static void Free<T>(ref T value) where T : BasePoolable, new()
         {
-            IPool<T> pool = GetObjectPool<T>();
-            pool.Free(ref value);
+            ObjectPool<T>.Instance.Free(ref value);
         }
         
         /// <summary>
@@ -45,8 +39,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="T">Type of object being freed</typeparam>
         internal static void Free<T>(T value) where T : BasePoolable, new()
         {
-            IPool<T> pool = GetObjectPool<T>();
-            pool.Free(ref value);
+            ObjectPool<T>.Instance.Free(ref value);
         }
         
         /// <summary>
@@ -56,8 +49,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled List</returns>
         public static List<T> GetList<T>()
         {
-            ListPool<T> pool = GetListPool<T>();
-            return pool.Get();
+            return ListPool<T>.Instance.Get();
         }
         
         /// <summary>
@@ -68,8 +60,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled Hash</returns>
         public static Hash<TKey, TValue> GetHash<TKey, TValue>()
         {
-            HashPool<TKey, TValue> pool = GetHashPool<TKey, TValue>();
-            return pool.Get();
+            return HashPool<TKey, TValue>.Instance.Get();
         }
 
         /// <summary>
@@ -78,7 +69,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled <see cref="StringBuilder"/></returns>
         public static StringBuilder GetStringBuilder()
         {
-            return StringBuilderPool.Get();
+            return StringBuilderPool.Instance.Get();
         }
         
         /// <summary>
@@ -87,7 +78,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled <see cref="MemoryStream"/></returns>
         public static MemoryStream GetMemoryStream()
         {
-            return MemoryStreamPool.Get();
+            return MemoryStreamPool.Instance.Get();
         }
 
         /// <summary>
@@ -97,8 +88,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="T">Type of the list</typeparam>
         public static void FreeList<T>(ref List<T> list)
         {
-            ListPool<T> pool = GetListPool<T>();
-            pool.Free(ref list);
+            ListPool<T>.Instance.Free(ref list);
         }
 
         /// <summary>
@@ -109,8 +99,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="TValue">Type for value</typeparam>
         public static void FreeHash<TKey, TValue>(ref Hash<TKey, TValue> hash)
         {
-            HashPool<TKey, TValue> pool = GetHashPool<TKey, TValue>();
-            pool.Free(ref hash);
+            HashPool<TKey, TValue>.Instance.Free(ref hash);
         }
 
         /// <summary>
@@ -119,7 +108,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="sb">StringBuilder being freed</param>
         public static void FreeStringBuilder(ref StringBuilder sb)
         {
-            StringBuilderPool.Free(ref sb);
+            StringBuilderPool.Instance.Free(ref sb);
         }
         
         /// <summary>
@@ -129,7 +118,7 @@ namespace Oxide.Ext.Discord.Pooling
         public static string ToStringAndFreeStringBuilder(ref StringBuilder sb)
         {
             string result = sb?.ToString();
-            StringBuilderPool.Free(ref sb);
+            FreeStringBuilder(ref sb);
             return result;
         }
         
@@ -139,46 +128,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="stream"><see cref="MemoryStream"/> being freed</param>
         public static void FreeMemoryStream(ref MemoryStream stream)
         {
-            MemoryStreamPool.Free(ref stream);
-        }
-
-        private static IPool<T> GetObjectPool<T>() where T : BasePoolable, new()
-        {
-            Type type = typeof(T);
-            IPool<T> pool = (IPool<T>)Pools[type];
-            if (pool == null)
-            {
-                pool = new ObjectPool<T>();
-                Pools[type] = pool;
-            }
-
-            return pool;
-        }
-        
-        private static ListPool<T> GetListPool<T>()
-        {
-            Type type = typeof(List<T>);
-            ListPool<T> pool = (ListPool<T>)Pools[type];
-            if (pool == null)
-            {
-                pool = new ListPool<T>();
-                Pools[type] = pool;
-            }
-
-            return pool;
-        }
-
-        private static HashPool<TKey, TValue> GetHashPool<TKey, TValue>()
-        {
-            Type type = typeof(Hash<TKey, TValue>);
-            HashPool<TKey, TValue> pool = (HashPool<TKey, TValue>)Pools[type];
-            if (pool == null)
-            {
-                pool = new HashPool<TKey, TValue>();
-                Pools[type] = pool;
-            }
-
-            return pool;
+            MemoryStreamPool.Instance.Free(ref stream);
         }
     }
 }

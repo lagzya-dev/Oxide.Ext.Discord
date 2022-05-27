@@ -8,7 +8,14 @@ namespace Oxide.Ext.Discord.Pooling
     /// <typeparam name="T">Type that will be in the list</typeparam>
     public class ListPool<T> : BasePool<List<T>>
     {
-        internal ListPool() : base(32) { }
+        public static readonly IPool<List<T>> Instance;
+        
+        static ListPool()
+        {
+            Instance = new ListPool<T>();
+        }
+        
+        internal ListPool() : base(128) { }
         
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref List<T> item)

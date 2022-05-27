@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Oxide.Ext.Discord.Pooling
 {
     /// <summary>
@@ -8,9 +6,9 @@ namespace Oxide.Ext.Discord.Pooling
     /// <typeparam name="T">Type being pooled</typeparam>
     public abstract class BasePool<T> : IPool<T> where T : class, new()
     {
-        private readonly Queue<T> _pool;
+        private readonly T[] _pool;
+        private int _index;
         private readonly object _lock = new object();
-        private readonly int _maxSize;
 
         /// <summary>
         /// Base Pool Constructor
@@ -18,8 +16,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="maxSize">Max Size of the pool</param>
         protected BasePool(int maxSize)
         {
-            _maxSize = maxSize;
-            _pool = new Queue<T>(maxSize);
+            _pool = new T[maxSize];
         }
         
         /// <summary>
@@ -28,11 +25,22 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns></returns>
         public T Get()
         {
-            T item;
+            T item = null;
             lock (_lock)
             {
-                 item = _pool.Count != 0 ? _pool.Dequeue() : new T();
+                if (_index < _pool.Length)
+                {
+                    item = _pool[_index];
+                    _pool[_index] = null;
+                    _index++;
+                }
             }
+            
+            if (item == null)
+            {
+                item = new T();
+            }
+
             OnGetItem(item);
             return item;
         }
@@ -40,30 +48,29 @@ namespace Oxide.Ext.Discord.Pooling
         /// <summary>
         /// Frees an item back to the pool
         /// </summary>
-        /// <param name="poolable">Item being freed</param>
-        public void Free(ref T poolable)
+        /// <param name="item">Item being freed</param>
+        public void Free(ref T item)
         {
-            if (poolable == null)
+            if (item == null)
             {
                 return;
             }
 
-            if (!OnFreeItem(ref poolable))
+            if (!OnFreeItem(ref item))
             {
                 return;
             }
-            
+
             lock (_lock)
             {
-                if (_pool.Count >= _maxSize)
+                if (_index != 0)
                 {
-                    return;
+                    _index--;
+                    _pool[_index] = item;
                 }
-                
-                _pool.Enqueue(poolable);
             }
-
-            poolable = null;
+            
+            item = null;
         }
 
         /// <summary>
