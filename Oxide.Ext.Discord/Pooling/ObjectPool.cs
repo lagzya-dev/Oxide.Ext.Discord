@@ -2,14 +2,14 @@ namespace Oxide.Ext.Discord.Pooling
 {
     internal class ObjectPool<T> : BasePool<T> where T : BasePoolable, new()
     {
-        public static readonly IPool<T> Instance;
+        internal static readonly IPool<T> Instance;
         
         static ObjectPool()
         {
             Instance = new ObjectPool<T>();
         }
-        
-        public ObjectPool() : base(256) { }
+
+        private ObjectPool() : base(256) { }
 
         protected override void OnGetItem(T item)
         {

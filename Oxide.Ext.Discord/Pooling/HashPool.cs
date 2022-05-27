@@ -9,14 +9,14 @@ namespace Oxide.Ext.Discord.Pooling
     /// <typeparam name="TValue"></typeparam>
     public class HashPool<TKey, TValue> : BasePool<Hash<TKey, TValue>>
     {
-        public static readonly IPool<Hash<TKey, TValue>> Instance;
+        internal static readonly IPool<Hash<TKey, TValue>> Instance;
         
         static HashPool()
         {
             Instance = new HashPool<TKey, TValue>();
         }
-        
-        internal HashPool() : base(128) { }
+
+        private HashPool() : base(128) { }
         
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref Hash<TKey, TValue> item)

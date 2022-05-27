@@ -7,14 +7,14 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public class MemoryStreamPool : BasePool<MemoryStream>
     {
-        public static readonly IPool<MemoryStream> Instance;
+        internal static readonly IPool<MemoryStream> Instance;
         
         static MemoryStreamPool()
         {
             Instance = new MemoryStreamPool();
         }
-        
-        internal MemoryStreamPool() : base(128) { }
+
+        private MemoryStreamPool() : base(128) { }
         
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref MemoryStream item)

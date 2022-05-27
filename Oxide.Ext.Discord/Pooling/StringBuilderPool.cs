@@ -6,14 +6,14 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public class StringBuilderPool : BasePool<StringBuilder>
     {
-        public static readonly IPool<StringBuilder> Instance;
+        internal static readonly IPool<StringBuilder> Instance;
         
         static StringBuilderPool()
         {
             Instance = new StringBuilderPool();
         }
-        
-        internal StringBuilderPool() : base(128) { }
+
+        private StringBuilderPool() : base(128) { }
         
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref StringBuilder item)
