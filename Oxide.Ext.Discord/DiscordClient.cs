@@ -226,22 +226,31 @@ namespace Oxide.Ext.Discord
             {
                 return;
             }
-            
-            client.Disconnect();
-            
-            DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {{0}}", client.Plugin.Name);
-            foreach (FieldInfo field in client.Plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+
+            try
             {
-                if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
+                client.Disconnect();
+
+                DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {{0}}", client.Plugin.Name);
+                foreach (FieldInfo field in client.Plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
                 {
-                    field.SetValue(client.Plugin, null);
-                    break;
+                    if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
+                    {
+                        field.SetValue(client.Plugin, null);
+                        break;
+                    }
                 }
             }
-
-            Clients.Remove(client.Plugin.Name);
+            catch (Exception ex)
+            {
+                client.Logger.Exception($"Failed to close the {nameof(DiscordClient)} for {{0}}", client.PluginName, ex);
+            }
+            finally
+            {
+                Clients.Remove(client.PluginName);
+                client.Plugin = null;
+            }
             
-            client.Plugin = null;
         }
         #endregion
     }
