@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// <summary>
         /// Allows for using the @everyone tag to notify all users in a channel,
         /// and the @here tag to notify all online users in a channel
-        /// Channel Type (Text)
+        /// Channel Type (Text, Stage)
         /// </summary>
         [Description("MENTION_EVERYONE")]
         MentionEveryone = 1 << 17,
