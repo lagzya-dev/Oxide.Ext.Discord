@@ -55,5 +55,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// A voice channel for <a href="https://support.discord.com/hc/en-us/articles/1500005513722">hosting events with an audience</a>
         /// </summary>
         GuildStageVoice = 13,
+        
+        /// <summary>
+        /// The channel in a <a href="https://support.discord.com/hc/en-us/articles/4406046651927-Discord-Student-Hubs-FAQ">hub</a>
+        /// </summary>
+        GuildDirectory = 14,
     }
 }
