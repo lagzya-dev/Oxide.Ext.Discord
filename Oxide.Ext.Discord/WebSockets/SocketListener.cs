@@ -1538,7 +1538,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
         
-        //https://discord.com/developers/docs/topics/gateway#interaction-create
+        //https://discord.com/developers/docs/topics/gateway#application-command-permissions-update
         private void HandleApplicationCommandsPermissionsUpdate(EventPayload payload)
         {
             CommandPermissions permissions = payload.EventData.ToObject<CommandPermissions>();
