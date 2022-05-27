@@ -915,11 +915,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-bans">Get Guild Bans</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="request">Request params for retrieving guild bans</param>
         /// <param name="callback">Callback with the list of guild bans</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildBans(DiscordClient client, Action<List<GuildBan>> callback = null, Action<RequestError> error = null)
+        public void GetGuildBans(DiscordClient client, GuildBansRequest request = null, Action<List<GuildBan>> callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/bans", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/bans{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
