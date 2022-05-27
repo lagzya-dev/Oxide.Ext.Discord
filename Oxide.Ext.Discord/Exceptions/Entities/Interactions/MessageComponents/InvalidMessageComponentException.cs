@@ -188,9 +188,9 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
                 throw new InvalidMessageComponentException("Modal title cannot be less than 1 character");
             }
 
-            if (title.Length > 256)
+            if (title.Length > 45)
             {
-                throw new InvalidMessageComponentException("Modal title cannot be more than 256 characters");
+                throw new InvalidMessageComponentException("Modal title cannot be more than 45 characters");
             }
         }
     }
