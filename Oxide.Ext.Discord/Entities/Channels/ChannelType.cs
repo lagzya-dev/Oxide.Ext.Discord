@@ -35,13 +35,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// A channel that users can follow and crosspost into their own server
         /// </summary>
         GuildNews = 5,
-        
-        /// <summary>
-        /// A channel in which game developers can sell their game on Discord
-        /// </summary>
-        [Obsolete("This channel type has been removed by discord and will be removed in a future update")]
-        GuildStore = 6,
-        
+
         /// <summary>
         /// A temporary sub-channel within a GUILD_NEWS channel
         /// </summary>
