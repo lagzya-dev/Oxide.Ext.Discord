@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// Is this integration enabled
         /// </summary>
         [JsonProperty("enabled")]
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
 
         /// <summary>
         /// Is this integration syncing
