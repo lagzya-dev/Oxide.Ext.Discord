@@ -122,7 +122,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         /// Returns a string to mention this users nickname in a message
         /// </summary>
-        public string Mention => DiscordFormatting.MentionUserNickname(Id);
+        public string Mention => DiscordFormatting.MentionUser(Id);
         
         /// <summary>
         /// Returns a string to mention this users username in a message

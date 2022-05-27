@@ -13,14 +13,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="userId">User ID to mention</param>
         /// <returns>Mention user formatted string</returns>
         public static string MentionUser(Snowflake userId) => $"<@{userId.ToString()}>";
-        
-        /// <summary>
-        /// Mention the user displaying their user name
-        /// </summary>
-        /// <param name="userId">User ID to mention</param>
-        /// <returns>Ping user formatted string</returns>
-        public static string MentionUserNickname(Snowflake userId) => $"<@!{userId.ToString()}>";
-        
+
         /// <summary>
         /// Mention the the channel with the given ID
         /// </summary>
