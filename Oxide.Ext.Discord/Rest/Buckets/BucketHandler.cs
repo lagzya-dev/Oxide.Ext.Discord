@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
 
         internal void Shutdown()
         {
-            _thread.Abort();
+            _thread?.Abort();
         }
     }
 }
