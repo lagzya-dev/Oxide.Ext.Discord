@@ -60,5 +60,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// The channel in a <a href="https://support.discord.com/hc/en-us/articles/4406046651927-Discord-Student-Hubs-FAQ">hub</a>
         /// </summary>
         GuildDirectory = 14,
+        
+        /// <summary>
+        /// (still in development) a channel that can only contain threads
+        /// </summary>
+        GuildForum = 15,
     }
 }

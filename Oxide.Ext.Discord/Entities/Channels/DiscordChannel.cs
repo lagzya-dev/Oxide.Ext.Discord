@@ -75,7 +75,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public bool? Nsfw { get; set; }
         
         /// <summary>
-        /// The id of the last message sent in this channel (may not point to an existing or valid message)
+        /// The id of the last message sent in this channel (or thread for GUILD_FORUM channels)
+        /// May not point to an existing or valid message or thread
         /// </summary>
         [JsonProperty("last_message_id")]        
         public Snowflake? LastMessageId { get; set; }
@@ -185,6 +186,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("permissions")]
         public string Permissions { get; set; }
+        
+        /// <summary>
+        /// Flags for this channel
+        /// </summary>
+        [JsonProperty("flags")]
+        public ChannelFlags? Flags { get; set; }
 
         private Hash<Snowflake, ThreadMember> _threadMembers;
 
@@ -862,6 +869,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 Permissions = channel.Permissions;
 
             ParentId = channel.ParentId;
+
+            if (channel.Flags.HasValue)
+                Flags = Flags;
+
             return previous;
         }
     }
