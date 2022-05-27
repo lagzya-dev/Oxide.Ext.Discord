@@ -14101,11 +14101,6 @@
             Represents an exception that occured with the websocket
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Exceptions.Pool.DiscordPoolException">
-            <summary>
-            Represents an exception on the Discord Pool
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.TokenMismatchException">
             <summary>
             Represents a bot token mismatch
@@ -15468,7 +15463,7 @@
             <summary>
             Frees an item back to the pool
             </summary>
-            <param name="poolable">Item being freed</param>
+            <param name="item">Item being freed</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnGetItem(`0)">
             <summary>

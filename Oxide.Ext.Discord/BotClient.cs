@@ -130,7 +130,7 @@ namespace Oxide.Ext.Discord
             }
 
             bot.AddClient(client);
-            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding plugin client {{0}} to bot {{1}}", client.Plugin.Name, bot.BotUser?.GetFullUserName);
+            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding {{0}} client to bot {{1}}", client.Plugin.Name, bot.BotUser?.GetFullUserName);
         }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace Oxide.Ext.Discord
         {
             _clients.Remove(client);
             Hooks.RemovePlugin(client.Plugin);
-            Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Client Removed");
+            Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} {{0}} Client Removed", client.PluginName);
             if (_clients.Count == 0)
             {
                 ShutdownBot();
@@ -317,12 +317,10 @@ namespace Oxide.Ext.Discord
         /// <param name="request">Request for guild members</param>
         public void RequestGuildMembers(GuildMembersRequestCommand request)
         {
-            if (!Initialized)
+            if (Initialized)
             {
-                return;
+                _webSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
             }
-
-            _webSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
         }
 
         /// <summary>
@@ -331,12 +329,10 @@ namespace Oxide.Ext.Discord
         /// <param name="voiceState"></param>
         public void UpdateVoiceState(UpdateVoiceStatusCommand voiceState)
         {
-            if (!Initialized)
+            if (Initialized)
             {
-                return;
+                _webSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
             }
-
-            _webSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
         }
 
         /// <summary>
@@ -345,12 +341,10 @@ namespace Oxide.Ext.Discord
         /// <param name="presenceUpdate"></param>
         public void UpdateStatus(UpdatePresenceCommand presenceUpdate)
         {
-            if (!Initialized)
+            if (Initialized)
             {
-                return;
+                _webSocket.Send(GatewayCommandCode.PresenceUpdate, presenceUpdate);
             }
-
-            _webSocket.Send(GatewayCommandCode.PresenceUpdate, presenceUpdate);
         }
         #endregion
 
