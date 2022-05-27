@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Api
     /// <summary>
     /// Represents a REST response from discord
     /// </summary>
-    public class RestResponse : BasePoolable
+    public class RequestResponse : BasePoolable
     {
         /// <summary>
         /// Data discord sent us
@@ -19,18 +19,19 @@ namespace Oxide.Ext.Discord.Entities.Api
 
         private DiscordClient _client;
 
-        internal RestError Error;
+        internal RequestError Error;
 
         internal RateLimitResponse RateLimit;
         
-        internal RequestStatus Status;
+        internal RequestCompletedStatus Status;
 
         /// <summary>
         /// Create new REST response with the given data
         /// </summary>
         /// <param name="client">BotClient for the response</param>
-        /// <param name="data"></param>
-        public void Init(DiscordClient client, HttpWebResponse response, RequestStatus status)
+        /// <param name="response">The Web Response for the request</param>
+        /// <param name="status">The status of the request indicating if it was successful</param>
+        private void Init(DiscordClient client, HttpWebResponse response, RequestCompletedStatus status)
         {
             _client = client;
             RateLimit = DiscordPool.Get<RateLimitResponse>();
@@ -54,16 +55,29 @@ namespace Oxide.Ext.Discord.Entities.Api
             }
         }
 
-        public static RestResponse CreateSuccessResponse(DiscordClient client, HttpWebResponse httpResponse)
+        /// <summary>
+        /// Creates a success REST API response
+        /// </summary>
+        /// <param name="client">Client making the request</param>
+        /// <param name="httpResponse">The Web Response for the request</param>
+        /// <returns>A success <see cref="RequestResponse"/></returns>
+        public static RequestResponse CreateSuccessResponse(DiscordClient client, HttpWebResponse httpResponse)
         {
-            RestResponse response = DiscordPool.Get<RestResponse>();
-            response.Init(client, httpResponse, RequestStatus.Success);
+            RequestResponse response = DiscordPool.Get<RequestResponse>();
+            response.Init(client, httpResponse, RequestCompletedStatus.Success);
             return response;
         }
         
-        public static RestResponse CreateExceptionResponse(DiscordClient client, RestError error, RequestStatus status)
+        /// <summary>
+        /// Creates an exception REST API response
+        /// </summary>
+        /// <param name="client">Client making the request</param>
+        /// <param name="error">The Rest Error the occured</param>
+        /// <param name="status">The request status containing the fail reason</param>
+        /// <returns>An exception <see cref="RequestResponse"/></returns>
+        public static RequestResponse CreateExceptionResponse(DiscordClient client, RequestError error, RequestCompletedStatus status)
         {
-            RestResponse response = DiscordPool.Get<RestResponse>();
+            RequestResponse response = DiscordPool.Get<RequestResponse>();
             response.Init(client, null, status);
             response.Error = error;
             
@@ -81,9 +95,17 @@ namespace Oxide.Ext.Discord.Entities.Api
             return response;
         }
         
-        public static RestResponse CreateWebExceptionResponse(DiscordClient client, RestError error, HttpWebResponse httpResponse, RequestStatus status)
+        /// <summary>
+        /// Creates a Web Exception REST API response
+        /// </summary>
+        /// <param name="client">Client making the request</param>
+        /// <param name="error">Rest Error that occured</param>
+        /// <param name="httpResponse">Web Response for the request</param>
+        /// <param name="status">The request status containing the fail reason</param>
+        /// <returns>A web exception <see cref="RequestResponse"/></returns>
+        public static RequestResponse CreateWebExceptionResponse(DiscordClient client, RequestError error, HttpWebResponse httpResponse, RequestCompletedStatus status)
         {
-            RestResponse response = DiscordPool.Get<RestResponse>();
+            RequestResponse response = DiscordPool.Get<RequestResponse>();
             response.Init(client, httpResponse, status);
             error.SetResponseData((int)httpResponse.StatusCode, response.Message);
             response.Error = error;
@@ -102,10 +124,15 @@ namespace Oxide.Ext.Discord.Entities.Api
             return response;
         }
         
-        public static RestResponse CreateCancelledResponse(DiscordClient client)
+        /// <summary>
+        /// Creates a REST API response for a cancelled request
+        /// </summary>
+        /// <param name="client">Client the request was for</param>
+        /// <returns>A cancelled <see cref="RequestResponse"/></returns>
+        public static RequestResponse CreateCancelledResponse(DiscordClient client)
         {
-            RestResponse response = DiscordPool.Get<RestResponse>();
-            response.Init(client, null, RequestStatus.Cancelled);
+            RequestResponse response = DiscordPool.Get<RequestResponse>();
+            response.Init(client, null, RequestCompletedStatus.Cancelled);
             return response;
         }
 
@@ -116,6 +143,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <returns>Data string JSON parsed to object</returns>
         public T ParseData<T>() => !string.IsNullOrEmpty(Message) ? JsonConvert.DeserializeObject<T>(Message, _client.Bot.ClientSerializerSettings) : default(T);
 
+        ///<inheritdoc/>
         protected override void DisposeInternal()
         {
             DiscordPool.Free(this);

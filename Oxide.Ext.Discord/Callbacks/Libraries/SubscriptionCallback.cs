@@ -12,7 +12,14 @@ namespace Oxide.Ext.Discord.Callbacks.Libraries
         private Action<DiscordMessage> _messageCallback;
         private Plugin _plugin;
 
-        public void Init(Plugin plugin, DiscordMessage message, Action<DiscordMessage> messageCallback)
+        public static SubscriptionCallback CreateCallback(Plugin plugin, DiscordMessage message, Action<DiscordMessage> messageCallback)
+        {
+            SubscriptionCallback callback = DiscordPool.Get<SubscriptionCallback>();
+            callback.Init(plugin, message, messageCallback);
+            return callback;
+        }
+        
+        private void Init(Plugin plugin, DiscordMessage message, Action<DiscordMessage> messageCallback)
         {
             _message = message;
             _messageCallback = messageCallback;

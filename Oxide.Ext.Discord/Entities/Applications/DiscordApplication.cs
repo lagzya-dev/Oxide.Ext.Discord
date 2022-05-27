@@ -161,7 +161,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="withLocalizations">Include Command Localizations</param>
         /// <param name="callback">Callback with list of application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGlobalCommands(DiscordClient client, bool withLocalizations = false, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGlobalCommands(DiscordClient client, bool withLocalizations = false, Action<List<DiscordApplicationCommand>> callback = null, Action<RequestError> error = null)
         {
             client.Bot.Rest.DoRequest(client,$"/applications/{Id}/commands?with_localizations={withLocalizations}", RequestMethod.GET, null, callback, error);
         }
@@ -174,7 +174,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="commandId">ID of command to get</param>
         /// <param name="callback">Callback with list of application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGlobalCommand(DiscordClient client, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void GetGlobalCommand(DiscordClient client, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(commandId, nameof(commandId));
             client.Bot.Rest.DoRequest(client,$"/applications/{Id}/commands/{commandId}", RequestMethod.GET, null, callback, error);
@@ -190,7 +190,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGlobalCommand(DiscordClient client, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGlobalCommand(DiscordClient client, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RequestError> error = null)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
             client.Bot.Rest.DoRequest(client,$"/applications/{Id}/commands", RequestMethod.POST, create, callback, error);
@@ -204,7 +204,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="commands">List of commands to overwrite</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void BulkOverwriteGlobalCommands(DiscordClient client, List<DiscordApplicationCommand> commands, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void BulkOverwriteGlobalCommands(DiscordClient client, List<DiscordApplicationCommand> commands, Action<List<DiscordApplicationCommand>> callback = null, Action<RequestError> error = null)
         {
             if (commands == null) throw new ArgumentNullException(nameof(commands));
             client.Bot.Rest.DoRequest(client,$"/applications/{Id}/commands", RequestMethod.PUT, commands, callback, error);
@@ -219,7 +219,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="withLocalizations">Include Command Localizations</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildCommands(DiscordClient client, Snowflake guildId, bool withLocalizations = false, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public void GetGuildCommands(DiscordClient client, Snowflake guildId, bool withLocalizations = false, Action<List<DiscordApplicationCommand>> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             client.Bot.Rest.DoRequest(client,$"/applications/{Id}/guilds/{guildId}/commands?with_localizations={withLocalizations}", RequestMethod.GET, null, callback, error);
@@ -234,7 +234,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="commandId">ID of the command to get</param>
         /// <param name="callback">Callback with a list of guild application commands</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildCommand(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void GetGuildCommand(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(commandId, nameof(commandId));
@@ -251,7 +251,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="create">Command to create</param>
         /// <param name="callback">Callback with the created command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildCommand(DiscordClient client, Snowflake guildId, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public void CreateGuildCommand(DiscordClient client, Snowflake guildId, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RequestError> error = null)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
@@ -265,7 +265,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="guildId">Guild ID to get the permissions from</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildCommandPermissions(DiscordClient client, Snowflake guildId, Action<List<GuildCommandPermissions>> callback = null, Action<RestError> error = null)
+        public void GetGuildCommandPermissions(DiscordClient client, Snowflake guildId, Action<List<GuildCommandPermissions>> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             client.Bot.Rest.DoRequest(client,$"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.GET, null, callback, error);
@@ -280,7 +280,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="permissions">List of permissions for the commands</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void BatchEditCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        public void BatchEditCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             client.Bot.Rest.DoRequest(client,$"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.PUT, permissions, callback, error);

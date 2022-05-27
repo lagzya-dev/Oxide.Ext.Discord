@@ -9,9 +9,9 @@ namespace Oxide.Ext.Discord.Callbacks.Api
     {
         protected DiscordClient Client;
         protected T Request;
-        private RestResponse _response;
+        private RequestResponse _response;
 
-        public virtual void Init(T request, RestResponse response)
+        public virtual void Init(T request, RequestResponse response)
         {
             Client = request.Client;
             Request = request;
@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api
                 return;
             }
 
-            if (_response.Status == RequestStatus.Success)
+            if (_response.Status == RequestCompletedStatus.Success)
             {
                 OnSuccess();
                 return;

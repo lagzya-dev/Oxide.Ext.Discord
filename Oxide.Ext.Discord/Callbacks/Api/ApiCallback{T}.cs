@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api
     {
         private T _data;
 
-        public override void Init(Request<T> request, RestResponse response)
+        public override void Init(Request<T> request, RequestResponse response)
         {
             base.Init(request, response);
             _data = response.ParseData<T>();

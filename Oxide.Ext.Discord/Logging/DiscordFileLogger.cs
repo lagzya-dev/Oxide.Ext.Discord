@@ -48,8 +48,7 @@ namespace Oxide.Ext.Discord.Logging
 
         internal void AddMessage(DiscordLogLevel level, string message, Exception ex)
         {
-            FileMessage file = DiscordPool.Get<FileMessage>();
-            file.Init(level, message, ex);
+            FileMessage file = FileMessage.CreateFileMessage(level, message, ex);
             lock (_syncRoot)
             {
                 _messageQueue.Add(file);
@@ -134,7 +133,14 @@ namespace Oxide.Ext.Discord.Logging
             public DateTime Date;
             public Exception Exception;
 
-            public void Init(DiscordLogLevel level, string message, Exception ex)
+            public static FileMessage CreateFileMessage(DiscordLogLevel level, string message, Exception ex)
+            {
+                FileMessage file = DiscordPool.Get<FileMessage>();
+                file.Init(level, message, ex);
+                return file;
+            }
+            
+            private void Init(DiscordLogLevel level, string message, Exception ex)
             {
                 LogLevel = level;
                 Message = message;

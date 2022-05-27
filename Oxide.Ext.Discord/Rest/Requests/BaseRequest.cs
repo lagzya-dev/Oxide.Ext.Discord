@@ -1,16 +1,20 @@
 using System;
-using System.IO;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
 
 namespace Oxide.Ext.Discord.Rest.Requests
 {
+    /// <summary>
+    /// Represents a base request class for REST API calls
+    /// </summary>
     public abstract class BaseRequest : BasePoolable
     {
+        /// <summary>
+        /// ID of the request. Generated from the DateTimeOffset when the request was created
+        /// </summary>
         public Snowflake RequestId;
         
         /// <summary>
@@ -28,12 +32,15 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         public object Data;
         
+        /// <summary>
+        /// Returns the full web url for the request
+        /// </summary>
         public string RequestUrl => DiscordEndpoints.Rest.ApiUrl + Route;
         
         /// <summary>
         /// Callback to call if the request errored with the last error message
         /// </summary>
-        internal Action<RestError> OnError;
+        internal Action<RequestError> OnError;
         
         /// <summary>
         /// Discord Client making the request
@@ -49,7 +56,10 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         private DateTimeOffset _errorResetAt;
 
-        protected void Init(DiscordClient client, RequestMethod method, string route, object data, Action<RestError> onError)
+        /// <summary>
+        /// Initializes the request
+        /// </summary>
+        protected void Init(DiscordClient client, RequestMethod method, string route, object data, Action<RequestError> onError)
         {
             RequestId = new Snowflake(DateTimeOffset.UtcNow);
             Client = client;
@@ -60,7 +70,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             OnError = onError;
         }
 
-        internal DateTimeOffset GetRequestResetAt()
+        internal DateTimeOffset GetResetAt()
         {
             if (Bucket.RateLimit.HasReachedRateLimit)
             {
@@ -70,27 +80,22 @@ namespace Oxide.Ext.Discord.Rest.Requests
             return _errorResetAt > Bucket.ResetAt ? _errorResetAt : Bucket.ResetAt;
         }
         
-        // internal bool CanStartRequest()
-        // {
-        //     if (Bucket.RateLimit.HasReachedRateLimit)
-        //     {
-        //         return false;
-        //     }
-        //
-        //     if (_errorResetAt > DateTimeOffset.UtcNow)
-        //     {
-        //         return false;
-        //     }
-        //
-        //     return Bucket.Remaining > 0 || Bucket.ResetAt >= DateTimeOffset.UtcNow;
-        //
-        //     // if(Bucket.ResetAt )
-        //     //
-        //     // Client.Logger.Debug($"BaseRequest.CanStartRequest? Bucket.Remaining > 0: {Bucket.Remaining > 0} && _errorResetAt <= DateTimeOffset.UtcNow: {_errorResetAt <= DateTimeOffset.UtcNow} && !Bucket.RateLimit.HasReachedRateLimit: {!Bucket.RateLimit.HasReachedRateLimit}");
-        //     // return Bucket.Remaining > 0 && _errorResetAt <= DateTimeOffset.UtcNow && !Bucket.RateLimit.HasReachedRateLimit;
-        // }
+        internal bool CanStartRequest()
+        {
+            if (Bucket.RateLimit.HasReachedRateLimit)
+            {
+                return false;
+            }
+        
+            if (_errorResetAt > DateTimeOffset.UtcNow)
+            {
+                return false;
+            }
+        
+            return Bucket.Remaining > 0 || Bucket.ResetAt <= DateTimeOffset.UtcNow;
+        }
 
-        internal virtual void OnRequestCompleted(RequestHandler handler, RestResponse response)
+        internal virtual void OnRequestCompleted(RequestHandler handler, RequestResponse response)
         {
             Bucket.OnRequestCompleted(handler, response);
         }
@@ -105,6 +110,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Bucket = bucket;
         }
 
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             Method = default(RequestMethod);

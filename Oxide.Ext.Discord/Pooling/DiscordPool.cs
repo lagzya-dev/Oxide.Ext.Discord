@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Oxide.Ext.Discord.Exceptions.Pool;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Pooling

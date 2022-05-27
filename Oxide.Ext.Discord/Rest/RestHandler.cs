@@ -60,15 +60,14 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="success">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
-        public void DoRequest(DiscordClient client, string url, RequestMethod method, object data, Action success, Action<RestError> error)
+        public void DoRequest(DiscordClient client, string url, RequestMethod method, object data, Action success, Action<RequestError> error)
         {
             if (data is IDiscordValidation validate)
             {
                 validate.Validate();
             }
             
-            Request request = DiscordPool.Get<Request>();
-            request.Init(client, method, url, data, success, error);
+            Request request = Request.CreateRequest(client, method, url, data, success, error);
             QueueRequest(request);
         }
 
@@ -82,15 +81,14 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="success">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
-        public void DoRequest<T>(DiscordClient client, string url, RequestMethod method, object data, Action<T> success, Action<RestError> error)
+        public void DoRequest<T>(DiscordClient client, string url, RequestMethod method, object data, Action<T> success, Action<RequestError> error)
         {
             if (data is IDiscordValidation validate)
             {
                 validate.Validate();
             }
-            
-            Request<T> request = DiscordPool.Get<Request<T>>();
-            request.Init(client, method, url, data, success, error);
+
+            Request<T> request = Request<T>.CreateRequest(client, method, url, data, success, error);
             QueueRequest(request);
         }
 

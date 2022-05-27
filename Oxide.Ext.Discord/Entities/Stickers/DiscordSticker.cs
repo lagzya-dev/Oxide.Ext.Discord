@@ -97,7 +97,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <param name="stickerId">ID of the sticker</param>
         /// <param name="callback">Callback with the DiscordSticker</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetSticker(DiscordClient client, Snowflake stickerId, Action<DiscordSticker> callback, Action<RestError> error = null)
+        public static void GetSticker(DiscordClient client, Snowflake stickerId, Action<DiscordSticker> callback, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(stickerId, nameof(stickerId));
             client.Bot.Rest.DoRequest(client,$"/stickers/{stickerId}", RequestMethod.GET, null, callback, error);
@@ -112,7 +112,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the updated discord sticker</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildSticker(DiscordClient client, Action<DiscordSticker> callback = null, Action<RestError> error = null)
+        public void ModifyGuildSticker(DiscordClient client, Action<DiscordSticker> callback = null, Action<RequestError> error = null)
         {
             InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");
             client.Bot.Rest.DoRequest(client,$"/guilds/{GuildId}/stickers/{Id}", RequestMethod.PATCH, this, callback, error);
@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildSticker(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public void DeleteGuildSticker(DiscordClient client, Action callback = null, Action<RequestError> error = null)
         {
             InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");
 

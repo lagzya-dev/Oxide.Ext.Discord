@@ -95,7 +95,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _socket.ConnectAsync();
         }
 
-        private void OnGatewayUrlUpdateFailed(RestError error)
+        private void OnGatewayUrlUpdateFailed(RequestError error)
         {
             _logger.Warning("Failed to update gateway url. Will retry in 15 seconds.");
             _reconnectRetries = Math.Max(3, _reconnectRetries);
@@ -198,9 +198,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <param name="data">Data to send</param>
         public void Send(GatewayCommandCode opCode, object data)
         {
-            CommandPayload payload = DiscordPool.Get<CommandPayload>();
-            payload.Init(opCode, data);
-
+            CommandPayload payload = CommandPayload.CreatePayload(opCode, data);
             _commands.Enqueue(payload);
         }
         

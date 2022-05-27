@@ -23,13 +23,26 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         public object Payload;
 
         /// <summary>
+        /// Creates a <see cref="CommandPayload"/> for the web socket
+        /// </summary>
+        /// <param name="code">OP Code for the command</param>
+        /// <param name="payload">Payload for the command</param>
+        /// <returns></returns>
+        public static CommandPayload CreatePayload(GatewayCommandCode code, object payload)
+        {
+            CommandPayload command = DiscordPool.Get<CommandPayload>();
+            command.Init(code, payload);
+            return command;
+        }
+        
+        /// <summary>
         /// Initializes the pooled command payload
         /// </summary>
-        /// <param name="opCode">OP Code for the command</param>
+        /// <param name="code">OP Code for the command</param>
         /// <param name="payload">Payload for the command</param>
-        public void Init(GatewayCommandCode opCode, object payload)
+        private void Init(GatewayCommandCode code, object payload)
         {
-            OpCode = opCode;
+            OpCode = code;
             Payload = payload;
         }
 

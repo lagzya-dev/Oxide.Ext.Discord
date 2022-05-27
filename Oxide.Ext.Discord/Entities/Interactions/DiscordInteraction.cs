@@ -152,7 +152,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="response">Response to respond with</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionResponse response, Action callback = null, Action<RestError> error = null)
+        public void CreateInteractionResponse(DiscordClient client, InteractionResponse response, Action callback = null, Action<RequestError> error = null)
         {
             if (response == null) throw new ArgumentNullException(nameof(response));
             InvalidInteractionResponseException.ThrowIfAlreadyResponded(_hasResponded);
@@ -171,7 +171,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="builder">Builder for this response</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionResponseBuilder builder, Action callback = null, Action<RestError> error = null)
+        public void CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionResponseBuilder builder, Action callback = null, Action<RequestError> error = null)
         {
             InteractionResponse data = new InteractionResponse
             {
@@ -189,7 +189,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// /// <param name="message">Updated message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditOriginalInteractionResponse(DiscordClient client, DiscordMessage message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void EditOriginalInteractionResponse(DiscordClient client, DiscordMessage message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
@@ -203,7 +203,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteOriginalInteractionResponse(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public void DeleteOriginalInteractionResponse(DiscordClient client, Action callback = null, Action<RequestError> error = null)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
@@ -218,7 +218,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message to follow up with</param>
         /// <param name="callback">Callback with the message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateFollowUpMessage(DiscordClient client, CommandFollowupCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void CreateFollowUpMessage(DiscordClient client, CommandFollowupCreate message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
@@ -233,7 +233,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="builder">Builder for the follow up</param>
         /// <param name="callback">Callback with the message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateFollowUpMessage(DiscordClient client, InteractionFollowupBuilder builder, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void CreateFollowUpMessage(DiscordClient client, InteractionFollowupBuilder builder, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             CreateFollowUpMessage(client, builder.Build(), callback, error);
         }
@@ -247,7 +247,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="edit">Updated message</param>
         /// <param name="callback">Callback with the updated message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditFollowUpMessage(DiscordClient client, Snowflake messageId, CommandFollowupUpdate edit, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public void EditFollowUpMessage(DiscordClient client, Snowflake messageId, CommandFollowupUpdate edit, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
@@ -263,7 +263,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="messageId">Message ID to delete</param>
         /// <param name="callback">Callback with the updated message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteFollowUpMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RestError> error = null)
+        public void DeleteFollowUpMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RequestError> error = null)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);

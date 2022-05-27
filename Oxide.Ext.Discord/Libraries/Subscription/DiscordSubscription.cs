@@ -47,8 +47,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <param name="message">Message that was sent in the given channel</param>
         public void Invoke(DiscordMessage message)
         {
-            SubscriptionCallback callback = DiscordPool.Get<SubscriptionCallback>();
-            callback.Init(_plugin, message, _callback);
+            SubscriptionCallback callback = SubscriptionCallback.CreateCallback(_plugin, message, _callback);
             Interface.Oxide.NextTick(callback.Callback);
         }
 

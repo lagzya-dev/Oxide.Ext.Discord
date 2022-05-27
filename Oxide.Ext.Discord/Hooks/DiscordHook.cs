@@ -186,15 +186,13 @@ namespace Oxide.Ext.Discord.Hooks
         #region Internal Handling
         private static void CallHookInternal(Plugin plugin, string hookName, object[] args)
         {
-            SinglePluginHookCallback call = DiscordPool.Get<SinglePluginHookCallback>();
-            call.Init(plugin, hookName, args);
+            SinglePluginHookCallback call = SinglePluginHookCallback.CreateCallback(plugin, hookName, args);
             Interface.Oxide.NextTick(call.Callback);
         }
         
         private static void CallHookInternal(List<Plugin> plugins, string hookName, object[] args)
         {
-            MultiPluginHookCallback call = DiscordPool.Get<MultiPluginHookCallback>();
-            call.Init(plugins, hookName, args);
+            MultiPluginHookCallback call = MultiPluginHookCallback.CreateCallback(plugins, hookName, args);
             Interface.Oxide.NextTick(call.Callback);
         }
         #endregion

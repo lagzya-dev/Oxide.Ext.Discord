@@ -8,11 +8,17 @@ using Oxide.Ext.Discord.Rest.Multipart;
 
 namespace Oxide.Ext.Discord.Rest.Requests.Data
 {
+    /// <summary>
+    /// Represents a multipart request data type
+    /// </summary>
     public class MultipartRequestData : RequestData
     {
         private const string DefaultContentType = "multipart/form-data;boundary=\"{0}\"";
 
-        public void Init(DiscordClient client, IFileAttachments attachments)
+        /// <summary>
+        /// Initializes the Request Data
+        /// </summary>
+        private void Init(DiscordClient client, IFileAttachments attachments)
         {
             Client = client;
             Data = attachments;

@@ -6,14 +6,38 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Rest.Requests
 {
+    /// <summary>
+    /// Represents a REST API request that returns {T} data
+    /// </summary>
+    /// <typeparam name="T">Data to be returned</typeparam>
     public class Request<T> : BaseRequest
     {
         /// <summary>
         /// Callback to call if the request completed successfully
         /// </summary>
         internal Action<T> OnSuccess;
+
+        /// <summary>
+        /// Creates a REST API request that returns type of T from the response
+        /// </summary>
+        /// <param name="client">Client making the request</param>
+        /// <param name="method">HTTP web method</param>
+        /// <param name="route">Route for the request</param>
+        /// <param name="data">Data being passed into the request. Null if no data is passed</param>
+        /// <param name="onSuccess">Callback when the web request finishes successfully</param>
+        /// <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
+        /// <returns>A <see cref="Request{T}"/></returns>
+        public static Request<T> CreateRequest(DiscordClient client, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RequestError> onError)
+        {
+            Request<T> request = DiscordPool.Get<Request<T>>();
+            request.Init(client, method, route, data, onSuccess, onError);
+            return request;
+        }
         
-        public void Init(DiscordClient client, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RestError> onError)
+        /// <summary>
+        /// Initializes the Request
+        /// </summary>
+        protected void Init(DiscordClient client, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RequestError> onError)
         {
             base.Init(client, method, route, data, onError);
             OnSuccess = onSuccess;
@@ -22,10 +46,10 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Handles a completed request
         /// </summary>
-        internal override void OnRequestCompleted(RequestHandler handler, RestResponse response)
+        internal override void OnRequestCompleted(RequestHandler handler, RequestResponse response)
         {
             base.OnRequestCompleted(handler, response);
-            if (response.Status == RequestStatus.Success && OnSuccess == null)
+            if (response.Status == RequestCompletedStatus.Success && OnSuccess == null)
             {
                 Dispose();
                 return;
@@ -42,6 +66,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             DiscordPool.Free(this);
         }
         
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             base.EnterPool();

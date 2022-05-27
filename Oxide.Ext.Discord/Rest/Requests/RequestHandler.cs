@@ -33,15 +33,26 @@ namespace Oxide.Ext.Discord.Rest.Requests
         private ILogger _logger;
 
         /// <summary>
+        /// Creates a new <see cref="RequestHandler"/>
+        /// </summary>
+        /// <param name="request">Request to be handled by this handler</param>
+        public static RequestHandler CreateRequestHandler(BaseRequest request)
+        {
+            RequestHandler handler = DiscordPool.Get<RequestHandler>();
+            handler.Init(request, request.Client.Logger);
+            return handler;
+        }
+        
+        /// <summary>
         /// Initializes a new request
         /// </summary>
         /// <param name="request">Request to be handled by this handler</param>
-        public void Init(BaseRequest request, ILogger logger)
+        /// <param name="logger">Logger for the request</param>
+        private void Init(BaseRequest request, ILogger logger)
         {
             Request = request;
             _requestUrl = request.RequestUrl;
             _logger = logger;
-            _logger.Debug($"RequestHandler.Init Request URL: {_requestUrl}");
         }
 
         /// <summary>
@@ -51,23 +62,23 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             while (true)
             {
-                DateTimeOffset reset = Request.GetRequestResetAt();
-                while (reset > DateTimeOffset.UtcNow)
+                while (!Request.CanStartRequest())
                 { 
                     //_logger.Debug($"Can't Start Request: Waiting For: {(Request.GetRequestResetAt() - DateTimeOffset.UtcNow).TotalSeconds} Seconds");
-                   ThreadExt.SleepUntil(reset);
-                   reset = Request.GetRequestResetAt();
+                   ThreadExt.SleepUntil(Request.GetResetAt());
                 }
+                
+                Request.Bucket.FireRequest();
 
-                RestResponse response = RunRequest();
+                RequestResponse response = RunRequest();
 
-                if (response.Status == RequestStatus.Success)
+                if (response.Status == RequestCompletedStatus.Success)
                 {
                     Request.OnRequestCompleted(this, response);
                     break;
                 }
 
-                if(response.Status == RequestStatus.ErrorFatal || ++_retries > 3)
+                if(response.Status == RequestCompletedStatus.ErrorFatal || ++_retries > 3)
                 {
                     Request.OnRequestCompleted(this, response);
                     break;
@@ -75,14 +86,14 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 
                 response.Dispose();
                 
-                if (response.Status == RequestStatus.Cancelled)
+                if (response.Status == RequestCompletedStatus.Cancelled)
                 {
                     break;
                 }
             }
         }
 
-        private RestResponse RunRequest()
+        private RequestResponse RunRequest()
         {
             try
             {
@@ -98,7 +109,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 _data.WriteRequestData(_webRequest);
                 using (HttpWebResponse webResponse = _webRequest.GetResponse() as HttpWebResponse)
                 {
-                    return RestResponse.CreateSuccessResponse(Request.Client, webResponse);
+                    return RequestResponse.CreateSuccessResponse(Request.Client, webResponse);
                 }
             }
             catch (WebException ex)
@@ -108,21 +119,21 @@ namespace Oxide.Ext.Discord.Rest.Requests
             catch (JsonSerializationException ex)
             {
                 Request.Client.Logger.Exception("A JsonSerializationException occured for request. Plugin: {0} Method: {1} URL: {2} Data Type: {3}", Request.Client.PluginName, Request.Method, _requestUrl, Request.Data?.GetType().Name ?? "None", ex);
-                return RestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex), RequestStatus.ErrorFatal);
+                return RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex), RequestCompletedStatus.ErrorFatal);
             }
             catch (Exception ex)
             {
                 Request.Client.Logger.Exception("An exception occured for request. Plugin: {0} Method: {1} URL: {2} Data Type: {3}", Request.Client.PluginName, Request.Method, _requestUrl, Request.Data?.GetType().Name ?? "None", ex);
-                return RestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex), RequestStatus.ErrorFatal);
+                return RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex), RequestCompletedStatus.ErrorFatal);
             }
         }
         
-        private RestResponse HandleWebException(WebException ex)
+        private RequestResponse HandleWebException(WebException ex)
         {
             if (ex.Status == WebExceptionStatus.RequestCanceled)
             {
                 Request.Client.Logger.Debug("Client request cancelled. Plugin: {0}", Request.Client.PluginName);
-                return RestResponse.CreateCancelledResponse(Request.Client);
+                return RequestResponse.CreateCancelledResponse(Request.Client);
             }
             
             Request.OnRequestErrored();
@@ -131,16 +142,16 @@ namespace Oxide.Ext.Discord.Rest.Requests
             {
                 if (httpResponse == null)
                 {
-                    return RestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.Internal, DiscordLogLevel.Exception), RequestStatus.ErrorRetry);
+                    return RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.Internal, DiscordLogLevel.Exception), RequestCompletedStatus.ErrorRetry);
                 }
 
                 int statusCode = (int)httpResponse.StatusCode;
                 if (statusCode == 429)
                 {
-                    return RestResponse.CreateWebExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.RateLimit, DiscordLogLevel.Warning), httpResponse, RequestStatus.ErrorRetry);
+                    return RequestResponse.CreateWebExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.RateLimit, DiscordLogLevel.Warning), httpResponse, RequestCompletedStatus.ErrorRetry);
                 }
 
-                return RestResponse.CreateWebExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.GenericWeb, DiscordLogLevel.Error), httpResponse, RequestStatus.ErrorFatal);
+                return RequestResponse.CreateWebExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.GenericWeb, DiscordLogLevel.Error), httpResponse, RequestCompletedStatus.ErrorFatal);
             }
         }
 
@@ -164,14 +175,14 @@ namespace Oxide.Ext.Discord.Rest.Requests
             _webRequest.Abort();
         }
 
-        private RestError GetRequestError(Exception ex)
+        private RequestError GetRequestError(Exception ex)
         {
-            return new RestError(Request.Client, Request.Bucket, ex, _requestUrl, Request.Method, _webRequest.ContentType, Request.Data, _data?.Contents);
+            return new RequestError(Request.Client, Request.Bucket, ex, _requestUrl, Request.Method, _webRequest.ContentType, Request.Data, _data?.Contents);
         }
         
-        private RestError GetRequestError(Exception ex, RequestErrorType type, DiscordLogLevel logLevel)
+        private RequestError GetRequestError(Exception ex, RequestErrorType type, DiscordLogLevel logLevel)
         {
-            RestError error = GetRequestError(ex);
+            RequestError error = GetRequestError(ex);
             error.SetErrorMessage(type, logLevel);
             return error;
         }

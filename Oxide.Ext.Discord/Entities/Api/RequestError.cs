@@ -2,7 +2,6 @@ using System;
 using System.Text;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Rest.Buckets;
 
 namespace Oxide.Ext.Discord.Entities.Api
@@ -10,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Api
     /// <summary>
     /// Error object that is returned to the caller when a request fails
     /// </summary>
-    public class RestError
+    public class RequestError
     {
         /// <summary>
         /// The request method that was called
@@ -83,7 +82,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="contentType">The HTTP Content Type of the request</param>
         /// <param name="data">Data passed to the request</param>
         /// <param name="contents">The byte[] contents of the request</param>
-        internal RestError(DiscordClient client, Bucket bucket, Exception exception, string url, RequestMethod requestMethod,
+        internal RequestError(DiscordClient client, Bucket bucket, Exception exception, string url, RequestMethod requestMethod,
             string contentType, object data, byte[] contents)
         {
             _client = client;

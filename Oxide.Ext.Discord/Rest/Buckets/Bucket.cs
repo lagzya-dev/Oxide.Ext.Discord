@@ -10,6 +10,9 @@ using Oxide.Ext.Discord.Rest.Requests;
 
 namespace Oxide.Ext.Discord.Rest.Buckets
 {
+    /// <summary>
+    /// Contains bucket information for a REST API Bucket
+    /// </summary>
     public class Bucket
     {
         /// <summary>
@@ -42,6 +45,12 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         private readonly List<RequestHandler> _requests = new List<RequestHandler>();
         private readonly BucketHandler _handler;
 
+        /// <summary>
+        /// Creates a new bucket for the given <see cref="RestHandler"/>
+        /// </summary>
+        /// <param name="bucketId">ID of the bucket. If not a known bucket then will be part of the route. If know bucket will be the Discord bucket ID</param>
+        /// <param name="rest">The handler that owns this Bucket</param>
+        /// <param name="logger">Logger for this bucket</param>
         public Bucket(string bucketId, RestHandler rest, ILogger logger)
         {
             BucketId = bucketId;
@@ -58,8 +67,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         public void QueueRequest(BaseRequest request)
         {
             request.OnRequestQueued(this);
-            RequestHandler handler = DiscordPool.Get<RequestHandler>();
-            handler.Init(request, _logger);
+            RequestHandler handler = RequestHandler.CreateRequestHandler(request);
             lock (_syncRoot)
             {
                 _requests.Add(handler);
@@ -131,7 +139,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             }
         }
 
-        internal void OnRequestCompleted(RequestHandler handler, RestResponse response)
+        internal void OnRequestCompleted(RequestHandler handler, RequestResponse response)
         {
             BaseRequest request = handler.Request;
             RateLimitResponse rateLimit = response.RateLimit;
