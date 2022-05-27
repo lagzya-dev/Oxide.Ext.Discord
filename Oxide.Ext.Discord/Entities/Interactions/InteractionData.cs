@@ -47,6 +47,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public List<InteractionDataOption> Options { get; set; }
         
         /// <summary>
+        /// The id of the guild the command is registered to
+        /// </summary>
+        [JsonProperty("guild_id")]
+        public Snowflake? GuildId { get; set; }
+        
+        /// <summary>
         /// For components, the custom_id of the component
         /// </summary>
         [JsonProperty("custom_id")]
