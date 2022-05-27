@@ -73,6 +73,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("nsfw")]
         public bool? Nsfw { get; set; }
+        
+        /// <summary>
+        /// The default duration that the clients use (not the API) for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity
+        /// </summary>
+        [JsonProperty("default_auto_archive_duration")]
+        public int DefaultAutoArchiveDuration { get; set; }
 
         /// <inheritdoc/>
         public void Validate()
