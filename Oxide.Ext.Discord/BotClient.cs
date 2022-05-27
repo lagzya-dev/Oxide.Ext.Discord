@@ -33,11 +33,6 @@ namespace Oxide.Ext.Discord
         public static readonly Hash<string, BotClient> ActiveBots = new Hash<string, BotClient>();
 
         /// <summary>
-        /// The settings for this bot of all the combined clients
-        /// </summary>
-        public readonly DiscordSettings Settings;
-
-        /// <summary>
         /// All the servers that this bot is in
         /// </summary>
         public readonly Hash<Snowflake, DiscordGuild> Servers = new Hash<Snowflake, DiscordGuild>();
@@ -74,6 +69,11 @@ namespace Oxide.Ext.Discord
         
         internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
+        
+        /// <summary>
+        /// The settings for this bot of all the combined clients
+        /// </summary>
+        internal readonly DiscordSettings Settings;
         
         /// <summary>
         /// Discord Extension JSON Serialization settings
@@ -119,19 +119,18 @@ namespace Oxide.Ext.Discord
         /// </summary>
         /// <param name="client">Client to use for creating / loading the bot client</param>
         /// <returns>Bot client that is created or already exists</returns>
-        public static BotClient GetOrCreate(DiscordClient client)
+        public static void AddDiscordClient(DiscordClient client)
         {
             BotClient bot = ActiveBots[client.Settings.ApiToken];
             if (bot == null)
             {
-                DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Creating new BotClient");
+                DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Creating new BotClient");
                 bot = new BotClient(client.Settings);
                 ActiveBots[client.Settings.ApiToken] = bot;
             }
 
             bot.AddClient(client);
-            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(GetOrCreate)} Adding plugin client {{0}} to bot {{1}}", client.Plugin.Name, bot.BotUser?.GetFullUserName);
-            return bot;
+            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding plugin client {{0}} to bot {{1}}", client.Plugin.Name, bot.BotUser?.GetFullUserName);
         }
 
         /// <summary>
@@ -184,6 +183,7 @@ namespace Oxide.Ext.Discord
 
             _clients.RemoveAll(c => c == client);
             _clients.Add(client);
+            client.Bot = this;
             Hooks.AddPlugin(client.Plugin);
             
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);

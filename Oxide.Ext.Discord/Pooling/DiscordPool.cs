@@ -146,11 +146,6 @@ namespace Oxide.Ext.Discord.Pooling
         private static IPool<T> GetObjectPool<T>() where T : BasePoolable, new()
         {
             Type type = typeof(T);
-            DiscordPoolException.ThrowIfList(type);
-            DiscordPoolException.ThrowIfHash(type);
-            DiscordPoolException.ThrowIfStringBuilder(type);
-            DiscordPoolException.ThrowIfMemoryStream(type);
-
             IPool<T> pool = (IPool<T>)Pools[type];
             if (pool == null)
             {

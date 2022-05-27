@@ -1,100 +1,93 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Requests;
 
-namespace Oxide.Ext.Discord.Rest
+namespace Oxide.Ext.Discord.Rest.Buckets
 {
-    /// <summary>
-    /// Represents a discord API bucket for a group of requests
-    /// </summary>
     public class Bucket
     {
         /// <summary>
         /// The ID of this bucket which is based on the route
         /// </summary>
-        public string BucketId { get; internal set; }
+        internal string BucketId;
         
         /// <summary>
         /// The number of requests that can be made per rate limit reset
         /// </summary>
-        public int RateLimitTotalRequests;
+        internal int Limit = 1;
 
         /// <summary>
         /// How many requests are remaining before hitting the rate limit for the bucket
         /// </summary>
-        public int RateLimitRemaining;
+        internal int Remaining = 1;
 
         /// <summary>
         /// How long until the rate limit resets
         /// </summary>
-        public double RateLimitReset;
+        internal DateTimeOffset ResetAt = DateTimeOffset.UtcNow;
 
-        /// <summary>
-        /// How long to wait before retrying request since there was a web exception
-        /// </summary>
-        public double ErrorDelayUntil;
+        internal bool IsKnowBucket;
 
-        /// <summary>
-        /// Rest Handler for the bucket
-        /// </summary>
-        public readonly RestHandler Handler;
+        internal readonly RestRateLimit RateLimit;
 
         private readonly ILogger _logger;
-        private readonly List<Request> _requests;
+        private readonly RestHandler _rest;
         private readonly object _syncRoot = new object();
+        private readonly List<RequestHandler> _requests = new List<RequestHandler>();
+        private readonly BucketHandler _handler;
 
-        private readonly ThreadStart _threadStart;
-        private Thread _thread;
-        private bool _isKnowBucket;
-
-        /// <summary>
-        /// Creates a new bucket for the given rest handler and bucket ID
-        /// </summary>
-        /// <param name="handler">Rest Handler for the bucket</param>
-        /// <param name="bucketId">ID of the bucket</param>
-        /// <param name="logger">Logger for the client</param>
-        public Bucket(RestHandler handler, string bucketId, ILogger logger)
+        public Bucket(string bucketId, RestHandler rest, ILogger logger)
         {
-            Handler = handler;
             BucketId = bucketId;
+            _rest = rest;
+            RateLimit = rest.RateLimit;
             _logger = logger;
-            _requests = new List<Request>();
-            _threadStart = RunThread;
-            _logger.Debug("New Bucket Created with id: {0}", bucketId);
+            _handler = new BucketHandler(this, logger);
         }
-
-        /// <summary>
-        /// Close the bucket and abort the thread
-        /// </summary>
-        public void Close()
-        {
-            _thread?.Abort();
-            _thread = null;
-        }
-
+        
         /// <summary>
         /// Queues a new request for the buck
         /// </summary>
         /// <param name="request">Request to be queued</param>
-        public void QueueRequest(Request request)
+        public void QueueRequest(BaseRequest request)
         {
-            _logger.Debug("Bucket {0} Queuing request {1}", BucketId, request.Route);
-            request.Bucket = this;
+            request.OnRequestQueued(this);
+            RequestHandler handler = DiscordPool.Get<RequestHandler>();
+            handler.Init(request, _logger);
             lock (_syncRoot)
             {
-                _requests.Add(request);
-                if (_thread == null || !_thread.IsAlive)
+                _requests.Add(handler);
+            }
+            _handler.OnRequestQueued();
+        }
+        
+        /// <summary>
+        /// Merges the request to it's place in line by it's ID
+        /// </summary>
+        /// <param name="mergeHandler">Request to be merged</param>
+        private void MergeRequest(RequestHandler mergeHandler)
+        {
+            lock (_syncRoot)
+            {
+                for (int i = 0; i < _requests.Count; i++)
                 {
-                    _thread = new Thread(_threadStart) {IsBackground = true};
-                    _thread.Start();
+                    RequestHandler handler = _requests[0];
+                    if (handler.Request.RequestId > mergeHandler.Request.RequestId)
+                    {
+                        _requests.Insert(i, mergeHandler);
+                        handler.Request.OnRequestQueued(this);
+                        return;
+                    }
                 }
-                else
-                {
-                    _thread.Interrupt();
-                }
+                
+                //Request is older than the current requests. Add it to the end.
+                _requests.Add(mergeHandler);
             }
         }
 
@@ -102,84 +95,24 @@ namespace Oxide.Ext.Discord.Rest
         /// Removes the request from the queue.
         /// Either the request completed successfully or there was an error and failed to succeed after 3 attempts
         /// </summary>
-        /// <param name="request">Request to remove</param>
-        public void DequeueRequest(Request request)
+        /// <param name="handler">Request to remove</param>
+        private void DequeueRequest(RequestHandler handler)
         {
             lock (_syncRoot)
             {
-                _requests.Remove(request);
+                _requests.Remove(handler);
             }
         }
-
-        private void RunThread()
-        {
-            try
-            {
-                while (RequestCount() > 0)
-                {
-                    FireRequests();
-                }
-                SleepBucketFor((int)(RateLimitReset - Time.TimeSinceEpoch()) + 1);
-            }
-            catch (ThreadInterruptedException)
-            {
-                RunThread();
-            }
-            catch (ThreadAbortException)
-            {
-                _logger.Debug("Bucket thread has been aborted.");
-            }
-            catch (Exception ex)
-            {
-                _logger.Exception("An exception occured for bucket {0}", BucketId, ex);
-            }
-
-            if (!_isKnowBucket)
-            {
-                Handler.RemoveBucket(this);
-            }
-        }
-
-        private void FireRequests()
-        {
-            double timeSince = Time.TimeSinceEpoch();
-            if (Handler.RateLimit.HasReachedRateLimit)
-            {
-                int resetIn = (int)(Handler.RateLimit.NextReset * 1000) + 1;
-                _logger.Debug("Global Rate limit hit. Sleeping until Reset: {0}ms", resetIn);
-                SleepBucketFor(resetIn);
-                return;
-            }
-            
-            if (RateLimitTotalRequests != 0 && RateLimitRemaining == 0 && RateLimitReset > timeSince)
-            {
-                int resetIn = (int)((RateLimitReset - timeSince) * 1000) + 1;
-                _logger.Debug("Bucket Rate limit hit. Sleeping until Reset: {0}ms", resetIn);
-                SleepBucketFor(resetIn);
-                return;
-            }
-
-            if (ErrorDelayUntil > timeSince)
-            {
-                int resetIn = (int)((ErrorDelayUntil - timeSince) * 1000) + 1;
-                _logger.Debug("Web request error occured delaying next send until: {0}ms", resetIn);
-                SleepBucketFor(resetIn);
-                return;
-            }
-
-            Handler.RateLimit.FiredRequest();
-            GetRequest(0).Fire();
-        }
-
-        private int RequestCount()
+        
+        internal int RequestCount()
         {
             lock (_syncRoot)
             {
                 return _requests.Count;
             }
         }
-
-        private Request GetRequest(int index)
+        
+        internal RequestHandler GetRequest(int index)
         {
             lock (_syncRoot)
             {
@@ -187,11 +120,54 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
 
-        private static void SleepBucketFor(int delay)
+        internal void Merge(Bucket data)
         {
-            if (delay > 0)
+            int count = data.RequestCount();
+            for (int index = 0; index < count; index++)
             {
-                Thread.Sleep(delay);
+                RequestHandler handler = data.GetRequest(0);
+                MergeRequest(handler);
+                data.DequeueRequest(handler);
+            }
+        }
+
+        internal void OnRequestCompleted(RequestHandler handler, RestResponse response)
+        {
+            BaseRequest request = handler.Request;
+            RateLimitResponse rateLimit = response.RateLimit;
+            request.Client.Logger.Debug("Bucket.OnRequestCompleted Plugin: {0} Method: {1} Route: {2} Internal Bucket Id: {3} Limit: {4} Remaining: {5} Reset: {7} Time: {7} Bucket: {8}", 
+                request.Client.PluginName, request.Method, request.Route, BucketId, Limit, Remaining, ResetAt, TimeHelpers.TimeSinceEpoch(), rateLimit?.BucketId);
+
+            //_logger.Debug($"Bucket.OnRequestCompleted rateLimit != null: {rateLimit != null}");
+            if (rateLimit != null)
+            {
+                //_logger.Debug($"Bucket.OnRequestCompleted rateLimit.HitGlobalRateLimit: {rateLimit.HitGlobalRateLimit}");
+                if (rateLimit.HitGlobalRateLimit)
+                {
+                    RateLimit.ReachedRateLimit(rateLimit.ResetAt);
+                    return;
+                }
+
+                //_logger.Debug($"Bucket.OnRequestCompleted rateLimit.ResetAt ({rateLimit.ResetAt}) > ResetAt ({ResetAt}): {rateLimit.ResetAt > ResetAt}");
+                if (rateLimit.ResetAt > ResetAt)
+                {
+                    //_logger.Debug($"Bucket.OnRequestCompleted Limit: {rateLimit.BucketLimit} Remaining:{ rateLimit.BucketRemaining} ResetAt:{rateLimit.ResetAt}");
+                    Limit = rateLimit.BucketLimit;
+                    Remaining = rateLimit.BucketRemaining;
+                    ResetAt = rateLimit.ResetAt;
+                }
+                else
+                {
+                    Interlocked.Exchange(ref Remaining, Math.Min(Remaining, rateLimit.BucketRemaining));
+                }
+            }
+
+            DequeueRequest(handler);
+            handler.Dispose();
+            
+            if (!IsKnowBucket && rateLimit != null && !string.IsNullOrEmpty(rateLimit.BucketId))
+            {
+                _rest.UpgradeToKnownBucket(this, rateLimit.BucketId);
             }
         }
         
@@ -201,15 +177,15 @@ namespace Oxide.Ext.Discord.Rest
             {
                 for (int index = _requests.Count - 1; index >= 0; index--)
                 {
-                    Request request = _requests[index];
-                    if (request.Client != client)
+                    RequestHandler handler = _requests[index];
+                    if (handler.Request.Client != client)
                     {
                         continue;
                     }
                     
-                    if (request.InProgress)
+                    if (handler.InProgress)
                     {
-                        request.Abort();
+                        handler.Abort();
                     }
                         
                     _requests.RemoveAt(index);
@@ -217,30 +193,22 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
 
-        internal void UpdateFromRequest(int bucketLimit, int bucketRemaining, double resetTime, string bucketId)
+        internal void OnBucketCompleted()
         {
-            RateLimitTotalRequests = bucketLimit;
-            RateLimitRemaining = bucketRemaining;
-            resetTime = Time.TimeSinceEpoch() + resetTime;
-            if (resetTime > RateLimitReset)
+            if (!IsKnowBucket)
             {
-                RateLimitReset = resetTime;
-            }
-            
-            if (!_isKnowBucket && !string.IsNullOrEmpty(bucketId) && Handler.UpgradeToKnownBucket(this, bucketId))
-            {
-                _isKnowBucket = true;
+                _rest.RemoveBucket(this);
             }
         }
 
-        internal void Merge(Bucket bucket)
+        internal void FireRequest()
         {
-            for (int index = 0; index < bucket.RequestCount(); index++)
-            {
-                Request request = bucket.GetRequest(0);
-                QueueRequest(request);
-                bucket.DequeueRequest(request);
-            }
+            RateLimit.FiredRequest();
+        }
+
+        internal void Shutdown()
+        {
+            _handler.Shutdown();
         }
     }
 }

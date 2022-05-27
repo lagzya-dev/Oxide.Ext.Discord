@@ -35,12 +35,12 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// Unix timestamp of when the activity was added to the user's session
         /// </summary>
         [JsonProperty("created_at")]
-        public int CreatedAt { get; set; }
+        public long CreatedAt { get; set; }
         
         /// <summary>
         /// Timestamp of when the activity was added to the user's session
         /// </summary>
-        public DateTime CreatedAtDateTime => CreatedAt.ToDateTime();
+        public DateTimeOffset CreatedAtDateTime => CreatedAt.ToDateTimeOffsetFromMilliseconds();
         
         /// <summary>
         /// Unix timestamps for start and/or end of the game

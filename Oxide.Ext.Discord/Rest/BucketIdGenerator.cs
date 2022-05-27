@@ -152,5 +152,23 @@ namespace Oxide.Ext.Discord.Rest
 
             return false;
         }
+
+        ///<inheritdoc/>
+        protected override void DisposeInternal()
+        {
+            DiscordPool.Free(this);
+        }
+        
+        ///<inheritdoc/>
+        protected override void EnterPool()
+        {
+            _method = default(RequestMethod);
+            _string = null;
+            _length = 0;
+            _lastIndex = 0;
+            _isCompleted = false;
+            _previous = null;
+            _current = null;
+        }
     }
 }

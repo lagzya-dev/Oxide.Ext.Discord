@@ -34,6 +34,12 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         }
 
         ///<inheritdoc/>
+        protected override void DisposeInternal()
+        {
+            DiscordPool.Free(this);
+        }
+        
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             OpCode = default(GatewayCommandCode);

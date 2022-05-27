@@ -50,6 +50,12 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// </summary>
         public JToken TokenData => Data as JToken;
 
+        ///<inheritdoc/>
+        protected override void DisposeInternal()
+        {
+            DiscordPool.Free(this);
+        }
+        
         /// <inheritdoc/>
         protected override void EnterPool()
         {

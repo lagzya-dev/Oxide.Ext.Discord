@@ -1,12 +1,12 @@
 using System.Text;
-using Newtonsoft.Json;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Rest.Multipart
 {
     /// <summary>
     /// Represents a MultiPartFormSection
     /// </summary>
-    internal class MultipartFormSection : IMultipartSection
+    internal class MultipartFormSection : BasePoolable, IMultipartSection
     {
         /// <summary>
         /// Name of the file being sent
@@ -16,25 +16,17 @@ namespace Oxide.Ext.Discord.Rest.Multipart
         /// <summary>
         /// Content Type for the file being sent
         /// </summary>
-        public string ContentType { get; }
+        public string ContentType { get; private set; }
         
         /// <summary>
         /// Data for the file being sent
         /// </summary>
-        public byte[] Data { get; }
+        public byte[] Data { get; private set;  }
         
         /// <summary>
         /// Section name for the multipart section
         /// </summary>
-        public string SectionName { get; }
-        
-        /// <summary>
-        /// Discord Extension JSON Serialization settings
-        /// </summary>
-        private static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore
-        };
+        public string SectionName { get; private set;  }
 
         /// <summary>
         /// Constructor for byte form data
@@ -42,33 +34,37 @@ namespace Oxide.Ext.Discord.Rest.Multipart
         /// <param name="sectionName"></param>
         /// <param name="data"></param>
         /// <param name="contentType"></param>
-        internal MultipartFormSection(string sectionName, byte[] data, string contentType)
+        private void Init(string sectionName, byte[] data, string contentType)
         {
             ContentType = contentType;
             Data = data;
             SectionName = sectionName;
         }
-        
-        /// <summary>
-        /// Constructor for string form data
-        /// </summary>
-        /// <param name="sectionName"></param>
-        /// <param name="data"></param>
-        /// <param name="contentType"></param>
-        internal MultipartFormSection(string sectionName, string data, string contentType) : this(contentType, Encoding.UTF8.GetBytes(data), sectionName)
-        {
 
+        public static MultipartFormSection CreateFormSection(string sectionName, byte[] data, string contentType)
+        {
+            MultipartFormSection section = DiscordPool.Get<MultipartFormSection>();
+            section.Init(sectionName, data, contentType);
+            return section;
         }
         
-        /// <summary>
-        /// Constructor for object form data
-        /// </summary>
-        /// <param name="sectionName"></param>
-        /// <param name="data"></param>
-        /// <param name="contentType"></param>
-        internal MultipartFormSection(string sectionName, object data, string contentType) : this(contentType, JsonConvert.SerializeObject(data, SerializerSettings), sectionName)
+        public static MultipartFormSection CreateFormSection(string sectionName, string data, string contentType)
         {
+            return CreateFormSection(sectionName, Encoding.UTF8.GetBytes(data), contentType);
+        }
 
+        ///<inheritdoc/>
+        protected override void DisposeInternal()
+        {
+            DiscordPool.Free(this);
+        }
+        
+        protected override void EnterPool()
+        {
+            base.EnterPool();
+            ContentType = null;
+            Data = null;
+            SectionName = null;
         }
     }
 }

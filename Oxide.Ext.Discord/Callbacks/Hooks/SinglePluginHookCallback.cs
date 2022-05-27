@@ -1,5 +1,6 @@
 using Oxide.Core;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Hooks
 {
@@ -18,15 +19,17 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
             _plugin.CallHook(Hook, Args);
         }
 
-        protected override void HandleCleanup()
+        ///<inheritdoc/>
+        protected override void DisposeInternal()
         {
-            ArrayPool.Free(Args);
+            DiscordPool.Free(this);
         }
-
+        
         protected override void EnterPool()
         {
             base.EnterPool();
             _plugin = null;
+            ArrayPool.Free(Args);
         }
     }
 }

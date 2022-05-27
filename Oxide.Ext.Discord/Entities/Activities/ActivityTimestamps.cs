@@ -14,22 +14,22 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// Unix time (in milliseconds) of when the activity started
         /// </summary>
         [JsonProperty("start")]
-        public int Start { get; set; }
+        public long Start { get; set; }
         
         /// <summary>
         /// Unix time (in milliseconds) of when the activity ends
         /// </summary>
         [JsonProperty("end")]
-        public int End { get; set; }
+        public long End { get; set; }
         
         /// <summary>
-        /// DateTime when the activity starts
+        /// DateTimeOffset when the activity starts
         /// </summary>
-        public DateTime StartDateTime => Start.ToDateTime();
-        
+        public DateTimeOffset StartDateTime => Start.ToDateTimeOffsetFromMilliseconds();
+
         /// <summary>
         /// DateTime when the activity ends
         /// </summary>
-        public DateTime EndDateTime => Start.ToDateTime();
+        public DateTimeOffset EndDateTime => End.ToDateTimeOffsetFromMilliseconds();
     }
 }

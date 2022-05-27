@@ -2,17 +2,24 @@ using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Rest.Requests;
 
-namespace Oxide.Ext.Discord.Callbacks.Rest
+namespace Oxide.Ext.Discord.Callbacks.Api
 {
     /// <summary>
     /// Callback for queuing a request using a thread pool
     /// </summary>
     public class QueueRequestCallback : BaseThreadPoolCallback
     {
-        private Request _request;
+        private BaseRequest _request;
         private RestHandler _rest;
-
-        private void Init(Request request, RestHandler rest)
+        
+        internal static QueueRequestCallback Create(BaseRequest request, RestHandler rest)
+        {
+            QueueRequestCallback callback = DiscordPool.Get<QueueRequestCallback>();
+            callback.Init(request, rest);
+            return callback;
+        }
+        
+        private void Init(BaseRequest request, RestHandler rest)
         {
             _request = request;
             _rest = rest;
@@ -28,17 +35,16 @@ namespace Oxide.Ext.Discord.Callbacks.Rest
         }
 
         ///<inheritdoc/>
+        protected override void DisposeInternal()
+        {
+            DiscordPool.Free(this);
+        }
+        
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             _request = null;
             _rest = null;
-        }
-        
-        internal static QueueRequestCallback Create(Request request, RestHandler rest)
-        {
-            QueueRequestCallback callback = DiscordPool.Get<QueueRequestCallback>();
-            callback.Init(request, rest);
-            return callback;
         }
     }
 }

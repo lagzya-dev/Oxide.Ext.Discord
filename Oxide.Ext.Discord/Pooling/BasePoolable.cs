@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// <summary>
     /// Represents a poolable object
     /// </summary>
-    public class BasePoolable : IDisposable
+    public abstract class BasePoolable : IDisposable
     {
         internal bool Disposed;
 
@@ -79,8 +79,13 @@ namespace Oxide.Ext.Discord.Pooling
         {
             if (_shouldPool)
             {
-                DiscordPool.Free(this);
+                DisposeInternal();
             }
         }
+
+        /// <summary>
+        /// Handles returning the poolable back to the pool
+        /// </summary>
+        protected abstract void DisposeInternal();
     }
 }

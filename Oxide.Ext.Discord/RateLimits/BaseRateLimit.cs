@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Timers;
 using Oxide.Ext.Discord.Helpers;
@@ -16,7 +17,7 @@ namespace Oxide.Ext.Discord.RateLimits
         protected int NumRequests;
         
         /// <summary>
-        /// The UNIX timestamp of the last reset
+        /// The Last Reset Time
         /// </summary>
         protected double LastReset;
         
@@ -45,13 +46,13 @@ namespace Oxide.Ext.Discord.RateLimits
             _timer = new Timer(interval);
             _timer.Elapsed += ResetRateLimit;
             _timer.Start();
-            LastReset = Time.TimeSinceEpoch();
+            LastReset = TimeHelpers.TimeSinceEpoch();
         }
         
         private void ResetRateLimit(object sender, ElapsedEventArgs e)
         {
             Interlocked.Exchange(ref NumRequests, 0);
-            Interlocked.Exchange(ref LastReset, Time.TimeSinceEpoch());
+            Interlocked.Exchange(ref LastReset, TimeHelpers.TimeSinceEpoch());
         }
         
         /// <summary>
@@ -70,7 +71,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// Returns how long until the current rate limit period will expire
         /// </summary>
-        public virtual double NextReset => Time.TimeSinceEpoch() + ResetInterval * 1000 - LastReset;
+        public virtual DateTimeOffset NextReset() => (LastReset + ResetInterval).ToDateTimeOffsetFromSeconds();
 
         /// <summary>
         /// Called when a bot is shutting down

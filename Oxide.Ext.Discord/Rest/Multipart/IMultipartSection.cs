@@ -1,9 +1,11 @@
+using System;
+
 namespace Oxide.Ext.Discord.Rest.Multipart
 {
     /// <summary>
     /// Represents a Multipart section for MultiPart requests
     /// </summary>
-    internal interface IMultipartSection
+    internal interface IMultipartSection : IDisposable
     {
         /// <summary>
         /// Name of the file for the section

@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Timers;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
@@ -123,10 +125,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 if (!_rateLimitTimer.Enabled)
                 {
-                    _rateLimitTimer.Interval = _rateLimit.NextReset;
+                    DateTimeOffset nextReset = _rateLimit.NextReset();
+                    _rateLimitTimer.Interval = nextReset.SecondsUntilTime();
                     _rateLimitTimer.Stop();
                     _rateLimitTimer.Start();
-                    _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {{0}} seconds\nOpcode: {{1}}\nPayload: {{2}}", _rateLimit.NextReset, payload.OpCode, JsonConvert.SerializeObject(payload.Payload, _client.ClientSerializerSettings));
+                    _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {{0}} seconds\nOpcode: {{1}}\nPayload: {{2}}", nextReset, payload.OpCode, JsonConvert.SerializeObject(payload.Payload, _client.ClientSerializerSettings));
                 }
 
                 return false;
@@ -167,7 +170,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     if (command.OpCode == code)
                     {
                         _pendingCommands.RemoveAt(index);
-                        DiscordPool.Free(command);
+                        command.Dispose();
                     }
                 }
             }
@@ -195,7 +198,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 CommandPayload command = GetNextCommand();
                 _pendingCommands.RemoveAt(0);
-                DiscordPool.Free(ref command);
+                command.Dispose();
             }
         }
 

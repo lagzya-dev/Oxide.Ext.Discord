@@ -2,6 +2,7 @@ using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Libraries
 {
@@ -32,6 +33,12 @@ namespace Oxide.Ext.Discord.Callbacks.Libraries
             }
         }
 
+        ///<inheritdoc/>
+        protected override void DisposeInternal()
+        {
+            DiscordPool.Free(this);
+        }
+        
         protected override void EnterPool()
         {
             _plugin = null;

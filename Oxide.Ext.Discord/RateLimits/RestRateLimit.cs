@@ -1,5 +1,5 @@
 using System;
-using Oxide.Ext.Discord.Helpers;
+
 namespace Oxide.Ext.Discord.RateLimits
 {
     /// <summary>
@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.RateLimits
     /// </summary>
     public class RestRateLimit : BaseRateLimit
     {
-        private double _retryAfter;
+        private DateTimeOffset _retryAfter;
 
         /// <summary>
         /// Constructor for RestRateLimit
@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// Called if we receive a header notifying us of hitting the rate limit
         /// </summary>
         /// <param name="retryAfter">How long until we should retry API request again</param>
-        public void ReachedRateLimit(double retryAfter)
+        public void ReachedRateLimit(DateTimeOffset retryAfter)
         {
             NumRequests = MaxRequests;
             _retryAfter = retryAfter;
@@ -30,6 +30,10 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// Returns how long until the current rate limit period will expire
         /// </summary>
-        public override double NextReset => Time.TimeSinceEpoch() - Math.Max(LastReset + ResetInterval, Time.TimeSinceEpoch() + _retryAfter) ;
+        public override DateTimeOffset NextReset()
+        {
+            DateTimeOffset nextReset = base.NextReset();
+            return nextReset > _retryAfter ? nextReset : _retryAfter;
+        }
     }
 }

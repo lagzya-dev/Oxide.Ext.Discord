@@ -65,11 +65,6 @@
             List of active bots by bot API key
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.Settings">
-            <summary>
-            The settings for this bot of all the combined clients
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.BotClient.Servers">
             <summary>
             All the servers that this bot is in
@@ -105,6 +100,11 @@
             Rest handler for all discord API calls
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.BotClient.Settings">
+            <summary>
+            The settings for this bot of all the combined clients
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.BotClient.ClientSerializerSettings">
             <summary>
             Discord Extension JSON Serialization settings
@@ -121,7 +121,7 @@
             </summary>
             <param name="settings"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.GetOrCreate(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.BotClient.AddDiscordClient(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Gets or creates a new bot client for the given discord client
             </summary>
@@ -1145,17 +1145,46 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.ToStringAndFree">
+            <summary>
+            Returns the query string and returns the builder back to the pool
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.DisposeInternal">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.EnterPool">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.LeavePool">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.ToStringAndFree">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiCallback.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiCallback`1.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiCallback`1.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Callbacks.Api.QueueRequestCallback">
             <summary>
-            Returns the query string and returns the builder back to the pool
+            Callback for queuing a request using a thread pool
             </summary>
-            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.QueueRequestCallback.HandleCallback(System.Object)">
+            <summary>
+            Calls the rest QueueBucket method with the request to be queued
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.QueueRequestCallback.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.QueueRequestCallback.EnterPool">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseCallback">
             <summary>
@@ -1176,11 +1205,6 @@
         <member name="M:Oxide.Ext.Discord.Callbacks.BaseCallback.HandleCallback">
             <summary>
             Overridden in the child class to handle the callback
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.BaseCallback.HandleCleanup">
-            <summary>
-            Overridden in the child class to handle the callback cleanup
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseThreadPoolCallback">
@@ -1204,23 +1228,13 @@
             Overridden in the child class to handle the callback
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.BaseThreadPoolCallback.HandleCleanup">
-            <summary>
-            Overridden in the child class to handle the callback cleanup
-            </summary>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Hooks.MultiPluginHookCallback.DisposeInternal">
+            <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.Rest.QueueRequestCallback">
-            <summary>
-            Callback for queuing a request using a thread pool
-            </summary>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Hooks.SinglePluginHookCallback.DisposeInternal">
+            <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Rest.QueueRequestCallback.HandleCallback(System.Object)">
-            <summary>
-            Calls the rest QueueBucket method with the request to be queued
-            </summary>
-            <param name="data"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Rest.QueueRequestCallback.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Libraries.SubscriptionCallback.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig">
@@ -2344,7 +2358,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Activities.ActivityTimestamps.StartDateTime">
             <summary>
-            DateTime when the activity starts
+            DateTimeOffset when the activity starts
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Activities.ActivityTimestamps.EndDateTime">
@@ -2498,25 +2512,39 @@
             An JObject containing the errors that occured
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Api.RateLimit">
+        <member name="T:Oxide.Ext.Discord.Entities.Api.RequestErrorType">
             <summary>
-            Represents RateLimit entity when the rate limit is hit
-            <a href="https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure">Rate Limit Structure</a>
+            Represents a Discord Request Error Type
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RateLimit.Message">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.Internal">
             <summary>
-            A message saying you are being rate limited.
+            An Internal HTTP Error Occured
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RateLimit.RetryAfter">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.RateLimit">
             <summary>
-            The number of seconds to wait before submitting another request.
+            A Ratelimit Error Occured
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RateLimit.Global">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.ApiError">
             <summary>
-            A value indicating if you are being globally rate limited or not
+            An Invalid request was passed to discord
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.GenericWeb">
+            <summary>
+            A generic web error occured
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.Serialization">
+            <summary>
+            An error occured during JSON serialization
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.Generic">
+            <summary>
+            A non web error occured
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Api.RequestMethod">
@@ -2581,7 +2609,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Api.RestError.TimeSinceEpoch">
             <summary>
-            How long it has been since the discord epoch in milliseconds
+            How long it has been since the discord epoch in seconds
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Api.RestError.Contents">
@@ -2609,7 +2637,7 @@
             Should we display the error message
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RestError.#ctor(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Rest.Bucket,System.Exception,System.String,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.Byte[])">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RestError.#ctor(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Rest.Buckets.Bucket,System.Exception,System.String,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.Byte[])">
             <summary>
             Creates a new rest error
             </summary>
@@ -2627,7 +2655,7 @@
             Suppresses the error message from being logged
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RestError.SetErrorMessage(Oxide.Ext.Discord.Entities.Api.RestRequestErrorType,Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RestError.SetErrorMessage(Oxide.Ext.Discord.Entities.Api.RequestErrorType,Oxide.Ext.Discord.Logging.DiscordLogLevel)">
             <summary>
             Sets the log information for the error
             </summary>
@@ -2652,52 +2680,17 @@
             Performs the error logging for the request
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Api.RestRequestErrorType">
-            <summary>
-            Represents a Discord Request Error Type
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RestRequestErrorType.Internal">
-            <summary>
-            An Internal HTTP Error Occured
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RestRequestErrorType.RateLimit">
-            <summary>
-            A Ratelimit Error Occured
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RestRequestErrorType.ApiError">
-            <summary>
-            An Invalid request was passed to discord
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RestRequestErrorType.GenericWeb">
-            <summary>
-            A generic web error occured
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RestRequestErrorType.Serialization">
-            <summary>
-            An error occured during JSON serialization
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RestRequestErrorType.Generic">
-            <summary>
-            A non web error occured
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Api.RestResponse">
             <summary>
             Represents a REST response from discord
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RestResponse._data">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RestResponse.Message">
             <summary>
             Data discord sent us
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RestResponse.Init(Oxide.Ext.Discord.BotClient,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RestResponse.Init(Oxide.Ext.Discord.DiscordClient,System.Net.HttpWebResponse,Oxide.Ext.Discord.Rest.Requests.RequestStatus)">
             <summary>
             Create new REST response with the given data
             </summary>
@@ -5017,6 +5010,9 @@
             <param name="opCode">OP Code for the command</param>
             <param name="payload">Payload for the command</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.DisposeInternal">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.EnterPool">
             <inheritdoc/>
         </member>
@@ -5284,6 +5280,9 @@
             <summary>
             Data as JToken
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.DisposeInternal">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EnterPool">
             <inheritdoc/>
@@ -12082,6 +12081,11 @@
             Represents an ID in discord.
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Snowflake.DiscordEpoch">
+            <summary>
+            DateTimeOffset since discord Epoch
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Snowflake.Id">
             <summary>
             Snowflake Value
@@ -14491,41 +14495,41 @@
             <param name="langKey"></param>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Helpers.Time">
+        <member name="T:Oxide.Ext.Discord.Helpers.TimeHelpers">
             <summary>
             Helper methods relating to time
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Helpers.Time.DiscordEpoch">
-            <summary>
-            DateTimeOffset since discord Epoch
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Helpers.Time.Epoch">
+        <member name="F:Oxide.Ext.Discord.Helpers.TimeHelpers.LinuxEpoch">
             <summary>
             DateTime since linux epoch
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Time.TimeSinceEpoch">
+        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.TimeSinceEpoch">
             <summary>
             Gets how many seconds since the linux epoch
             </summary>
             <returns>Seconds since linux epoch</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Time.TimeSinceEpoch(System.DateTime)">
-            <summary>
-            Gets the time since the linux epoch and the given date time
-            </summary>
-            <param name="time">DateTime to get total second for</param>
-            <returns>Total seconds since linux epoch for date time</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Time.ToDateTime(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.ToDateTimeOffsetFromMilliseconds(System.Int64)">
             <summary>
             Converts the seconds since linux epoch to a DateTime
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.Time.ToUnixTimeStamp(System.DateTime)">
+        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.ToDateTimeOffsetFromSeconds(System.Double)">
+            <summary>
+            Converts the seconds since linux epoch to a DateTime
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.SecondsUntilTime(System.DateTimeOffset)">
+            <summary>
+            Converts the seconds since linux epoch to a DateTime
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.ToUnixTimeStamp(System.DateTimeOffset)">
             <summary>
             Gets the time since the linux epoch and the given date time
             </summary>
@@ -15198,6 +15202,9 @@
             Represents a File Logger for Discord
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordFileLogger.FileMessage.DisposeInternal">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Logging.DiscordLogger">
             <summary>
             Represents a discord extension logger
@@ -15378,6 +15385,11 @@
             Disposes the object when used in a using statement
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePoolable.DisposeInternal">
+            <summary>
+            Handles returning the poolable back to the pool
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Pooling.DiscordPool">
             <summary>
             Built in pooling for discord entities
@@ -15535,7 +15547,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.LastReset">
             <summary>
-            The UNIX timestamp of the last reset
+            The Last Reset Time
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.MaxRequests">
@@ -15565,7 +15577,7 @@
             Returns true if we have reached the global rate limit 
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NextReset">
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NextReset">
             <summary>
             Returns how long until the current rate limit period will expire
             </summary>
@@ -15585,13 +15597,13 @@
             Constructor for RestRateLimit
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.ReachedRateLimit(System.Double)">
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.ReachedRateLimit(System.DateTimeOffset)">
             <summary>
             Called if we receive a header notifying us of hitting the rate limit
             </summary>
             <param name="retryAfter">How long until we should retry API request again</param>
         </member>
-        <member name="P:Oxide.Ext.Discord.RateLimits.RestRateLimit.NextReset">
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.NextReset">
             <summary>
             Returns how long until the current rate limit period will expire
             </summary>
@@ -15647,66 +15659,50 @@
             </summary>
             <param name="lastIndex"></param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Bucket">
-            <summary>
-            Represents a discord API bucket for a group of requests
-            </summary>
+        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.DisposeInternal">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Bucket.BucketId">
+        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Buckets.Bucket.BucketId">
             <summary>
             The ID of this bucket which is based on the route
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitTotalRequests">
+        <member name="F:Oxide.Ext.Discord.Rest.Buckets.Bucket.Limit">
             <summary>
             The number of requests that can be made per rate limit reset
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitRemaining">
+        <member name="F:Oxide.Ext.Discord.Rest.Buckets.Bucket.Remaining">
             <summary>
             How many requests are remaining before hitting the rate limit for the bucket
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.RateLimitReset">
+        <member name="F:Oxide.Ext.Discord.Rest.Buckets.Bucket.ResetAt">
             <summary>
             How long until the rate limit resets
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.ErrorDelayUntil">
-            <summary>
-            How long to wait before retrying request since there was a web exception
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Bucket.Handler">
-            <summary>
-            Rest Handler for the bucket
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.#ctor(Oxide.Ext.Discord.Rest.RestHandler,System.String,Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Creates a new bucket for the given rest handler and bucket ID
-            </summary>
-            <param name="handler">Rest Handler for the bucket</param>
-            <param name="bucketId">ID of the bucket</param>
-            <param name="logger">Logger for the client</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.Close">
-            <summary>
-            Close the bucket and abort the thread
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Requests.Request)">
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Queues a new request for the buck
             </summary>
             <param name="request">Request to be queued</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Bucket.DequeueRequest(Oxide.Ext.Discord.Rest.Requests.Request)">
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.MergeRequest(Oxide.Ext.Discord.Rest.Requests.RequestHandler)">
+            <summary>
+            Merges the request to it's place in line by it's ID
+            </summary>
+            <param name="mergeHandler">Request to be merged</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.DequeueRequest(Oxide.Ext.Discord.Rest.Requests.RequestHandler)">
             <summary>
             Removes the request from the queue.
             Either the request completed successfully or there was an error and failed to succeed after 3 attempts
             </summary>
-            <param name="request">Request to remove</param>
+            <param name="handler">Request to remove</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection">
             <summary>
@@ -15758,7 +15754,7 @@
             Section name for the multipart section
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.#ctor(System.String,System.String,System.Byte[],System.String)">
+        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.Init(System.String,System.String,System.Byte[],System.String)">
             <summary>
             Constructor for a multipart file
             </summary>
@@ -15766,6 +15762,9 @@
             <param name="fileName"></param>
             <param name="data"></param>
             <param name="contentType"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.DisposeInternal">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection">
             <summary>
@@ -15792,12 +15791,7 @@
             Section name for the multipart section
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.SerializerSettings">
-            <summary>
-            Discord Extension JSON Serialization settings
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.#ctor(System.String,System.Byte[],System.String)">
+        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.Init(System.String,System.Byte[],System.String)">
             <summary>
             Constructor for byte form data
             </summary>
@@ -15805,178 +15799,119 @@
             <param name="data"></param>
             <param name="contentType"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Constructor for string form data
-            </summary>
-            <param name="sectionName"></param>
-            <param name="data"></param>
-            <param name="contentType"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.#ctor(System.String,System.Object,System.String)">
-            <summary>
-            Constructor for object form data
-            </summary>
-            <param name="sectionName"></param>
-            <param name="data"></param>
-            <param name="contentType"></param>
+        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.DisposeInternal">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Multipart.MultipartHandler">
             <summary>
             Handles converting Multipart requests to their respective byte[]
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Requests.Request">
-            <summary>
-            Represent a Discord API request
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.Method">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Method">
             <summary>
             HTTP request method
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.Route">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Route">
             <summary>
             Route on the API
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.RequestUrl">
-            <summary>
-            Full Request URl to the API
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.Data">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Data">
             <summary>
             Data to be sent with the request
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Requests.Request.Contents">
-            <summary>
-            Data serialized to bytes 
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.MultipartRequest">
-            <summary>
-            Required If Multipart Form Request
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.Boundary">
-            <summary>
-            Multipart Boundary
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request._onSuccess">
-            <summary>
-            Callback to call if the request completed successfully
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request._onError">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.OnError">
             <summary>
             Callback to call if the request errored with the last error message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Requests.Request.StartTime">
-            <summary>
-            The DateTime the request was started
-            Used for request timeout
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Requests.Request.InProgress">
-            <summary>
-            Returns if the request is currently in progress
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.Client">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Client">
             <summary>
             Discord Client making the request
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request._multipartSections">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest._errorResetAt">
             <summary>
-            Attachments for a request
+            How long to wait before retrying request since there was a web exception
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.Response">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.Contents">
             <summary>
-            Response from the request
+            Data serialized to bytes 
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
-            <summary>
-            Initializes a new request
-            </summary>
-            <param name="client">Client making the request</param>
-            <param name="method">HTTP method to call</param>
-            <param name="route">Route to call on the API</param>
-            <param name="data">Data for the request</param>
-            <param name="authHeader">Authorization Header</param>
-            <param name="onSuccess">Callback once the request completes successfully</param>
-            <param name="onError">Callback when the request errors</param>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.DisposeInternal">
+            <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request.OnSuccess">
             <summary>
-            Creates a new request
-            </summary>
-            <param name="client">Client making the request</param>
-            <param name="method">HTTP method to call</param>
-            <param name="route">Route to call on the API</param>
-            <param name="data">Data for the request</param>
-            <param name="authHeader">Authorization Header</param>
-            <param name="onError">Callback when the request errors</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Fire">
-            <summary>
-            Fires the request off
+            Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Close(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.OnRequestCompleted(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Entities.Api.RestResponse)">
             <summary>
-            Closes the request and removes it from the bucket
-            </summary>
-            <param name="remove"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.InvokeSuccess">
-            <summary>
-            Invokes the success callback
+            Handles a completed request
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.HasTimedOut">
-            <summary>
-            Returns true if the request has timed out
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Abort">
-            <summary>
-            Aborts a currently running request
-            </summary>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.DisposeInternal">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Requests.Request`1">
+        <member name="T:Oxide.Ext.Discord.Rest.Requests.RequestHandler">
             <summary>
-            Handles request that return data
+            Represent a Discord API request
             </summary>
-            <typeparam name="T"></typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.String,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
+        <member name="P:Oxide.Ext.Discord.Rest.Requests.RequestHandler.InProgress">
+            <summary>
+            Returns if the request is currently in progress
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestHandler._requestUrl">
+            <summary>
+            Full Request URl to the API
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.Init(Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Initializes a new request
             </summary>
-            <param name="client">Client making the request</param>
-            <param name="method">HTTP method to call</param>
-            <param name="route">Route to call on the API</param>
-            <param name="data">Data for the request</param>
-            <param name="authHeader">Authorization Header</param>
-            <param name="onSuccess">Callback once the request completes successfully</param>
-            <param name="onError">Callback when the request errors</param>
+            <param name="request">Request to be handled by this handler</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.InvokeSuccess">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.Run">
+            <summary>
+            Fires the request off
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.Abort">
+            <summary>
+            Aborts a currently running request
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.DisposeInternal">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.Request`1.OnSuccess">
+            <summary>
+            Callback to call if the request completed successfully
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.OnRequestCompleted(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Entities.Api.RestResponse)">
+            <summary>
+            Handles a completed request
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.RestHandler">
@@ -15999,7 +15934,7 @@
             Route to Bucket Hash
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.RestHandler._authorization">
+        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.AuthHeader">
             <summary>
             The authorization header value
             </summary>
@@ -16019,7 +15954,7 @@
             <param name="url">URL of the request</param>
             <param name="method">HTTP method of the request</param>
             <param name="data">Data to be sent with the request</param>
-            <param name="callback">Callback once the action is completed</param>
+            <param name="success">Callback once the action is completed</param>
             <param name="error">Error callback if an error occurs</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest``1(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Entities.Api.RestError})">
@@ -16030,17 +15965,17 @@
             <param name="url">URL of the request</param>
             <param name="method">HTTP method of the request</param>
             <param name="data">Data to be sent with the request</param>
-            <param name="callback">Callback once the action is completed</param>
+            <param name="success">Callback once the action is completed</param>
             <param name="error">Error callback if an error occurs</param>
             <typeparam name="T">The type that is expected to be returned</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueRequest(Oxide.Ext.Discord.Rest.Requests.Request)">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueRequest(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Queues the request using the thread pool so we don't block the main thread with any locks
             </summary>
             <param name="request"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueBucket(Oxide.Ext.Discord.Rest.Requests.Request)">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueBucket(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Queues the request for the bucket
             </summary>

@@ -62,6 +62,7 @@ namespace Oxide.Ext.Discord.Rest.Multipart
             byte[] encoded = Encoding.UTF8.GetBytes(sb.ToString());
             stream.Write(NewLine, 0, NewLine.Length);
             stream.Write(Separator, 0, Separator.Length);
+            stream.Write(boundary, 0, boundary.Length);
             stream.Write(NewLine, 0, NewLine.Length);
             stream.Write(encoded, 0, encoded.Length);
             stream.Write(NewLine, 0, NewLine.Length);

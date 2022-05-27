@@ -142,17 +142,23 @@ namespace Oxide.Ext.Discord.Logging
                 Date = DateTime.Now;
             }
             
+            public string GetMessage()
+            {
+                return Exception == null ? Message : $"{Message}\n{Exception}";
+            }
+            
+            ///<inheritdoc/>
+            protected override void DisposeInternal()
+            {
+                DiscordPool.Free(this);
+            }
+            
             protected override void EnterPool()
             {
                 LogLevel = default(DiscordLogLevel);
                 Message = null;
                 Date = default(DateTime);
                 Exception = null;
-            }
-
-            public string GetMessage()
-            {
-                return Exception == null ? Message : $"{Message}\n{Exception}";
             }
         }
     }

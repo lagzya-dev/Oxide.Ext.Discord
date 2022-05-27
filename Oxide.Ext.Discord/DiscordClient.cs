@@ -33,12 +33,12 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// The bot client that is unique to the Token used
         /// </summary>
-        public BotClient Bot { get; private set; }
+        public BotClient Bot { get; internal set; }
         
         /// <summary>
         /// Settings used to connect to discord and configure the extension
         /// </summary>
-        public DiscordSettings Settings { get; private set; }
+        internal DiscordSettings Settings { get; private set; }
 
         internal ILogger Logger;
 
@@ -100,9 +100,9 @@ namespace Oxide.Ext.Discord
                 Logger.Warning("Plugin {0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContentIntent", Plugin.Name);
             }
             
-            Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {{0}}", Plugin.Name);
+            Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.Name);
 
-            Bot = BotClient.GetOrCreate(this);
+            BotClient.AddDiscordClient(this);
             
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordClientConnected, Plugin, this);
         }

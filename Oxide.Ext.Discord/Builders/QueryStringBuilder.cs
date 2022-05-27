@@ -63,6 +63,23 @@ namespace Oxide.Ext.Discord.Builders
             return _builder.Length <= 1 ? string.Empty : _builder.ToString();
         }
         
+        /// <summary>
+        /// Returns the query string and returns the builder back to the pool
+        /// </summary>
+        /// <returns></returns>
+        public string ToStringAndFree()
+        {
+            string query = ToString();
+            Dispose();
+            return query;
+        }
+        
+        ///<inheritdoc/>
+        protected override void DisposeInternal()
+        {
+            DiscordPool.Free(this);
+        }
+        
         /// <inheritdoc/>
         protected override void EnterPool()
         {
@@ -74,17 +91,6 @@ namespace Oxide.Ext.Discord.Builders
         {
             _builder = DiscordPool.GetStringBuilder();
             _builder.Append("?");
-        }
-
-        /// <summary>
-        /// Returns the query string and returns the builder back to the pool
-        /// </summary>
-        /// <returns></returns>
-        public string ToStringAndFree()
-        {
-            string query = ToString();
-            DiscordPool.Free(this);
-            return query;
         }
     }
 }

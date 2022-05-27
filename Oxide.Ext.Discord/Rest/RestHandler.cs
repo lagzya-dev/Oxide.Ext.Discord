@@ -1,12 +1,12 @@
 using System;
 using System.Threading;
-using Oxide.Ext.Discord.Callbacks.Rest;
+using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
+using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
 using Oxide.Plugins;
 
@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// The authorization header value
         /// </summary>
-        private readonly string _authorization;
+        internal readonly string AuthHeader;
         
         private readonly ILogger _logger;
         private readonly object _bucketSyncObject = new object();
@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="logger">Logger from the client</param>
         public RestHandler(BotClient client, ILogger logger)
         {
-            _authorization = $"Bot {client.Settings.ApiToken}";
+            AuthHeader = $"Bot {client.Settings.ApiToken}";
             _logger = logger;
         }
 
@@ -58,9 +58,9 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="url">URL of the request</param>
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
-        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="success">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
-        public void DoRequest(DiscordClient client, string url, RequestMethod method, object data, Action callback, Action<RestError> error)
+        public void DoRequest(DiscordClient client, string url, RequestMethod method, object data, Action success, Action<RestError> error)
         {
             if (data is IDiscordValidation validate)
             {
@@ -68,7 +68,7 @@ namespace Oxide.Ext.Discord.Rest
             }
             
             Request request = DiscordPool.Get<Request>();
-            request.Init(client, method, url, data, _authorization, callback, error);
+            request.Init(client, method, url, data, success, error);
             QueueRequest(request);
         }
 
@@ -79,10 +79,10 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="url">URL of the request</param>
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
-        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="success">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
-        public void DoRequest<T>(DiscordClient client, string url, RequestMethod method, object data, Action<T> callback, Action<RestError> error)
+        public void DoRequest<T>(DiscordClient client, string url, RequestMethod method, object data, Action<T> success, Action<RestError> error)
         {
             if (data is IDiscordValidation validate)
             {
@@ -90,7 +90,7 @@ namespace Oxide.Ext.Discord.Rest
             }
             
             Request<T> request = DiscordPool.Get<Request<T>>();
-            request.Init(client, method, url, data, _authorization, callback, error);
+            request.Init(client, method, url, data, success, error);
             QueueRequest(request);
         }
 
@@ -98,9 +98,9 @@ namespace Oxide.Ext.Discord.Rest
         /// Queues the request using the thread pool so we don't block the main thread with any locks
         /// </summary>
         /// <param name="request"></param>
-        public void QueueRequest(Request request)
+        public void QueueRequest(BaseRequest request)
         {
-            _logger.Debug("RestHandler Queuing Request for {0}", request.Route);
+            _logger.Debug("RestHandler Queuing Request for Method: {0} Route: {0}", request.Method, request.Route);
             QueueRequestCallback queue = QueueRequestCallback.Create(request, this);
             ThreadPool.QueueUserWorkItem(queue.Callback);
         }
@@ -108,7 +108,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Queues the request for the bucket
         /// </summary>
-        public void QueueBucket(Request request)
+        public void QueueBucket(BaseRequest request)
         {
             string bucketId = BucketIdGenerator.GetBucketId(request.Method, request.Route);
             _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}", request.Route, bucketId);
@@ -116,8 +116,9 @@ namespace Oxide.Ext.Discord.Rest
             bucket.QueueRequest(request);
         }
 
-        internal bool UpgradeToKnownBucket(Bucket bucket, string newBucketId)
+        internal void UpgradeToKnownBucket(Bucket bucket, string newBucketId)
         {
+            _logger.Debug("RestHandler Upgrading To Known Bucket for Old ID: {0} New ID: {1}", bucket.BucketId, newBucketId);
             lock (_bucketSyncObject)
             {
                 RouteToHash[bucket.BucketId] = newBucketId;
@@ -126,12 +127,14 @@ namespace Oxide.Ext.Discord.Rest
                 if (existing != null)
                 {
                     existing.Merge(bucket);
-                    bucket.Close();
-                    return false;
+                    bucket.Shutdown();
+                    return;
                 }
 
+                Buckets.Remove(bucket.BucketId);
                 bucket.BucketId = newBucketId;
-                return true;
+                bucket.IsKnowBucket = true;
+                Buckets[newBucketId] = bucket;
             }
         }
 
@@ -160,7 +163,8 @@ namespace Oxide.Ext.Discord.Rest
                 Bucket bucket = Buckets[bucketId];
                 if (bucket == null)
                 {
-                    Buckets[bucketId] = new Bucket(this, bucketId, _logger);
+                    bucket = new Bucket(bucketId, this, _logger);
+                    Buckets[bucketId] = bucket;
                 }
 
                 return bucket;
@@ -187,7 +191,7 @@ namespace Oxide.Ext.Discord.Rest
             {
                 foreach (Bucket bucket in Buckets.Values)
                 {
-                    bucket.Close();
+                    bucket.Shutdown();
                 }
                 RouteToHash.Clear();
                 Buckets.Clear();

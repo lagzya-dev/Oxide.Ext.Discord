@@ -1,54 +1,51 @@
 using System;
 using Oxide.Core;
-using Oxide.Ext.Discord.Callbacks.Rest;
+using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Rest.Requests
 {
-    /// <summary>
-    /// Handles request that return data
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class Request<T> : Request
+    public class Request<T> : BaseRequest
     {
-        private Action<T> _onSuccess;
-
         /// <summary>
-        /// Initializes a new request
+        /// Callback to call if the request completed successfully
         /// </summary>
-        /// <param name="client">Client making the request</param>
-        /// <param name="method">HTTP method to call</param>
-        /// <param name="route">Route to call on the API</param>
-        /// <param name="data">Data for the request</param>
-        /// <param name="authHeader">Authorization Header</param>
-        /// <param name="onSuccess">Callback once the request completes successfully</param>
-        /// <param name="onError">Callback when the request errors</param>
-        public void Init(DiscordClient client, RequestMethod method, string route, object data, string authHeader, Action<T> onSuccess, Action<RestError> onError)
+        internal Action<T> OnSuccess;
+        
+        public void Init(DiscordClient client, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RestError> onError)
         {
-            Init(client, method, route, data, authHeader, onError);
-            _onSuccess = onSuccess;
+            base.Init(client, method, route, data, onError);
+            OnSuccess = onSuccess;
         }
-
-        /// <inheritdoc/>
-        protected override void InvokeSuccess()
+        
+        /// <summary>
+        /// Handles a completed request
+        /// </summary>
+        internal override void OnRequestCompleted(RequestHandler handler, RestResponse response)
         {
-            if (_onSuccess == null)
+            base.OnRequestCompleted(handler, response);
+            if (response.Status == RequestStatus.Success && OnSuccess == null)
             {
+                Dispose();
                 return;
             }
             
-            T data = Response.ParseData<T>();
             ApiCallback<T> callback = DiscordPool.Get<ApiCallback<T>>();
-            callback.Init(this, _onSuccess, data, Client);
+            callback.Init(this, response);
             Interface.Oxide.NextTick(callback.Callback);
         }
-
-        /// <inheritdoc/>
+        
+        ///<inheritdoc/>
+        protected override void DisposeInternal()
+        {
+            DiscordPool.Free(this);
+        }
+        
         protected override void EnterPool()
         {
             base.EnterPool();
-            _onSuccess = null;
+            OnSuccess = null;
         }
     }
 }

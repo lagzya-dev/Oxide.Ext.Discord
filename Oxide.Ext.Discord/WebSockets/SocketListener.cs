@@ -319,7 +319,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             finally
             {
-                DiscordPool.Free(ref payload);
+                payload.Dispose();
             }
         }
         #endregion

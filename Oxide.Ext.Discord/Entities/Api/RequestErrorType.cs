@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Api
     /// <summary>
     /// Represents a Discord Request Error Type
     /// </summary>
-    public enum RestRequestErrorType
+    public enum RequestErrorType
     {
         /// <summary>
         /// An Internal HTTP Error Occured

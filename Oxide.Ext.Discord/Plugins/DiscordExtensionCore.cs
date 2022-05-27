@@ -55,18 +55,19 @@ namespace Oxide.Ext.Discord.Plugins
                 Chat(player, LangKeys.ShowLog, "Console", DiscordExtension.DiscordConfig.Logging.ConsoleLogLevel);
                 return;
             }
-            
-            if (!Enum.IsDefined(typeof(DiscordLogLevel), args[0]))
+
+            try
+            {
+                DiscordLogLevel log = (DiscordLogLevel)Enum.Parse(typeof(DiscordLogLevel), args[0], true);
+                DiscordExtension.DiscordConfig.Logging.ConsoleLogLevel = log;
+                DiscordExtension.DiscordConfig.Save();
+
+                Chat(player, LangKeys.SetLog, "Console", log);
+            }
+            catch
             {
                 Chat(player, LangKeys.InvalidLogEnum, args[0]);
-                return;
             }
-
-            DiscordLogLevel log = (DiscordLogLevel)Enum.Parse(typeof(DiscordLogLevel), args[0], true);
-            DiscordExtension.DiscordConfig.Logging.ConsoleLogLevel = log;
-            DiscordExtension.DiscordConfig.Save();
-            
-            Chat(player, LangKeys.SetLog, "Console", log);
         }
         
         [HookMethod(nameof(FileLog))]
@@ -78,17 +79,18 @@ namespace Oxide.Ext.Discord.Plugins
                 return;
             }
             
-            if (!Enum.IsDefined(typeof(DiscordLogLevel), args[0]))
+            try
+            {
+                DiscordLogLevel log = (DiscordLogLevel)Enum.Parse(typeof(DiscordLogLevel), args[0], true);
+                DiscordExtension.DiscordConfig.Logging.FileLogLevel = log;
+                DiscordExtension.DiscordConfig.Save();
+
+                Chat(player, LangKeys.SetLog, "Console", log);
+            }
+            catch
             {
                 Chat(player, LangKeys.InvalidLogEnum, args[0]);
-                return;
             }
-
-            DiscordLogLevel log = (DiscordLogLevel)Enum.Parse(typeof(DiscordLogLevel), args[0], true);
-            DiscordExtension.DiscordConfig.Logging.FileLogLevel = log;
-            DiscordExtension.DiscordConfig.Save();
-            
-            Chat(player, LangKeys.SetLog, "File", log);
         }
         #endregion
     }
