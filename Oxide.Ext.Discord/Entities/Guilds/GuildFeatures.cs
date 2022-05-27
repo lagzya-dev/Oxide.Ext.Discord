@@ -16,6 +16,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         Unknown,
         
         /// <summary>
+        /// Guild has access to set an animated guild banner image    
+        /// </summary>
+        [Description("ANIMATED_BANNER")] 
+        AnimatedBanner,
+        
+        /// <summary>
         /// Guild has access to set an animated guild icon
         /// </summary>
         [Description("ANIMATED_ICON")] 

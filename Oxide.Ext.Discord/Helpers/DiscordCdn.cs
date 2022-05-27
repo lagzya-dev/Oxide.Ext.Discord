@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.Helpers
                     return $"{CdnUrl}/banners/{guildId.ToString()}/{guildBanner}.{GetExtension(format, guildBanner)}";
                 
                 default:
-                    throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                    throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP, GIF)", nameof(format));
             }
         }
         
