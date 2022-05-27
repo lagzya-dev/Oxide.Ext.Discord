@@ -17,6 +17,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// This permission uses User ID
         /// </summary>
         [Description("USER")]
-        User = 2
+        User = 2,
+        
+        /// <summary>
+        /// This permission uses Channel ID
+        /// </summary>
+        [Description("USER")]
+        Channel = 2
     }
 }

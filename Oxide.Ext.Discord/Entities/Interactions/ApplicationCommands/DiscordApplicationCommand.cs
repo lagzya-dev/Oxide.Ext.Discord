@@ -20,13 +20,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public Snowflake Id { get; set; }
         
         /// <summary>
-        /// The type of command, defaults 1 if not set
+        /// The type of command, defaults to 1
         /// </summary>
         [JsonProperty("type")]
         public ApplicationCommandType? Type { get; set; }
         
         /// <summary>
-        /// Unique id of the parent application
+        /// ID of the parent application
         /// </summary>
         [JsonProperty("application_id")]
         public Snowflake ApplicationId { get; set; }
@@ -69,11 +69,17 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public List<CommandOption> Options { get; set; }
         
         /// <summary>
-        /// Whether the command is enabled by default when the app is added to a guild
+        /// Set of permissions represented as a bit set
         /// </summary>
-        [JsonProperty("default_permission")]
-        public bool? DefaultPermissions { get; set; }
+        [JsonProperty("default_member_permissions")]
+        public string DefaultMemberPermissions { get; set; }
         
+        /// <summary>
+        /// Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
+        /// </summary>
+        [JsonProperty("dm_permission")]
+        public bool? DmPermission { get; set; }
+
         /// <summary>
         /// Auto incrementing version identifier updated during substantial record changes
         /// </summary>

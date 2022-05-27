@@ -597,6 +597,14 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildInviteDeleted = nameof(OnDiscordGuildInviteDeleted);
         
         /// <code>
+        /// void OnDiscordApplicationCommandPermissionsUpdated(CommandPermissions permissions)
+        /// {
+        ///     Puts("OnDiscordInteractionCreated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordApplicationCommandPermissionsUpdated = nameof(OnDiscordApplicationCommandPermissionsUpdated);   
+        
+        /// <code>
         /// void OnDiscordInteractionCreated(DiscordInteraction interaction)
         /// {
         ///     Puts("OnDiscordInteractionCreated Works!");

@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     public class CommandOption
     {
         /// <summary>
-        /// They type of command option
+        /// Type of option
         /// See <see cref="CommandOptionType"/>
         /// </summary>
         [JsonProperty("type")]
@@ -44,25 +44,20 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 
         /// <summary>
         /// If the parameter is required or optional
+        /// Defaults to false
         /// </summary>
         [JsonProperty("required")]
         public bool? Required { get; set; }
-        
+
         /// <summary>
-        /// If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
-        /// </summary>
-        [JsonProperty("autocomplete")]
-        public bool? Autocomplete { get; set; }
-        
-        /// <summary>
-        /// Choices for string and int types for the user to pick from
-        /// See <see cref="CommandOption"/>
+        /// Choices for STRING, INTEGER, and NUMBER types for the user to pick from, max 25
+        /// See <see cref="CommandOptionChoice"/>
         /// </summary>
         [JsonProperty("choices")]
         public List<CommandOptionChoice> Choices { get; set; }
         
         /// <summary>
-        /// If the option is a subcommand or subcommand group type, this nested options will be the parameters
+        /// If the option is a subcommand or subcommand group type, these nested options will be the parameters
         /// See <see cref="CommandOption"/>
         /// </summary>
         [JsonProperty("options")]
@@ -86,5 +81,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("max_value")]
         public double? MaxValue { get; set; }
+        
+        /// <summary>
+        /// If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
+        /// </summary>
+        [JsonProperty("autocomplete")]
+        public bool? Autocomplete { get; set; }
     }
 }

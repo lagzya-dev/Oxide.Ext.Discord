@@ -246,6 +246,11 @@ namespace Oxide.Ext.Discord.WebSockets
         [Description("INVITE_DELETE")] InviteDeleted,
         
         /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-permissions-update">APPLICATION_COMMANDS_PERMISSIONS_UPDATE</a> gateway event
+        /// </summary>
+        [Description("APPLICATION_COMMANDS_PERMISSIONS_UPDATE")] ApplicationCommandsPermissionsUpdate,       
+        
+        /// <summary>
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#interaction-create">INTERACTION_CREATE</a> gateway event
         /// </summary>
         [Description("INTERACTION_CREATE")] InteractionCreated,

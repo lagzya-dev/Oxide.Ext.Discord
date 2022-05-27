@@ -14,6 +14,7 @@ using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Stickers;
@@ -512,6 +513,10 @@ namespace Oxide.Ext.Discord.WebSockets
 
                 case DispatchCode.InviteDeleted:
                     HandleDispatchInviteDelete(payload);
+                    break;
+                
+                case DispatchCode.ApplicationCommandsPermissionsUpdate:
+                    HandleApplicationCommandsPermissionsUpdate(payload);
                     break;
                 
                 case DispatchCode.InteractionCreated:
@@ -1531,6 +1536,14 @@ namespace Oxide.Ext.Discord.WebSockets
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordDirectInviteDeleted, invite, channel);
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchInviteDelete)} Channel ID: {{0}} Code: {{1}}", invite.ChannelId, invite.Code);
             }
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#interaction-create
+        private void HandleApplicationCommandsPermissionsUpdate(EventPayload payload)
+        {
+            CommandPermissions permissions = payload.EventData.ToObject<CommandPermissions>();
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordApplicationCommandPermissionsUpdated, permissions);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleApplicationCommandsPermissionsUpdate)} Permission ID: {{0}}", permissions.Id);
         }
         
         //https://discord.com/developers/docs/topics/gateway#interaction-create

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Guilds;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
@@ -25,6 +26,26 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// True to allow, False to disallow
         /// </summary>
         [JsonProperty("permission")]
-        public bool Permission { get; set; } 
+        public bool Permission { get; set; }
+
+        public static CommandPermissions AllowAllGuildMembers(DiscordGuild guild)
+        {
+            return new CommandPermissions
+            {
+                Id = guild.Id,
+                Type = CommandPermissionType.Role,
+                Permission = true
+            };
+        }
+        
+        public static CommandPermissions AllowAllGuildChannels(DiscordGuild guild)
+        {
+            return new CommandPermissions
+            {
+                Id = new Snowflake(guild.Id.Id - 1),
+                Type = CommandPermissionType.Role,
+                Permission = true
+            };
+        }
     }
 }
