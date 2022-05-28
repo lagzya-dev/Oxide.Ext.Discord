@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public List<CommandOption> Options { get; set; }
         
         [JsonProperty("default_member_permissions")]
-        private string _defaultMemberPermissions;
+        private string _defaultMemberPermissions = "0";
 
         /// <summary>
         /// Set of permissions represented as a bit set
