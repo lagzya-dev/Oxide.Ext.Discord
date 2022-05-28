@@ -357,7 +357,7 @@ namespace Oxide.Ext.Discord.Helpers
                     return $"{CdnUrl}/stickers/{stickerId.ToString()}.{GetExtension(format, stickerId)}";
 
                 default:
-                    throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                    throw new ArgumentException("ImageFormat is not valid for Sticker. Valid types are (Auto, Png, Lottie)", nameof(format));
             }
         }
         
@@ -380,6 +380,52 @@ namespace Oxide.Ext.Discord.Helpers
 
                 default:
                     throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+            }
+        }
+        
+        /// <summary>
+        /// Returns the guild schedule event cover icon with the given ID
+        /// </summary>
+        /// <param name="scheduledEventId">Scheduled Event ID</param>
+        /// <param name="format">Format for the icon to be returned in</param>
+        /// <returns>Return url for the guild schedule event cover icon</returns>
+        /// <exception cref="ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        public static string GetGuildScheduledEventCover(Snowflake scheduledEventId, DiscordImageFormat format = DiscordImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case DiscordImageFormat.Auto:
+                case DiscordImageFormat.Jpg:
+                case DiscordImageFormat.Png:
+                case DiscordImageFormat.WebP:
+                    return $"{CdnUrl}/guild-events/{scheduledEventId.ToString()}/scheduled_event_cover_image.{GetExtension(format, scheduledEventId)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Guild Scheduled Event Cover. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+            }
+        }
+        
+        /// <summary>
+        /// Returns the guild member banner for the given guild / user ID
+        /// </summary>
+        /// <param name="guildId">Guild ID of the user</param>
+        /// <param name="userId">User ID of the user</param>
+        /// <param name="format">Format for the icon to be returned in</param>
+        /// <returns>Return url for the guild member banner</returns>
+        /// <exception cref="ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        public static string GetGuildMemberBanner(Snowflake guildId, Snowflake userId, DiscordImageFormat format = DiscordImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case DiscordImageFormat.Auto:
+                case DiscordImageFormat.Jpg:
+                case DiscordImageFormat.Png:
+                case DiscordImageFormat.WebP:
+                case DiscordImageFormat.Gif:
+                    return $"{CdnUrl}/guilds/{guildId}/users/{userId}/banners/member_banner.{GetExtension(format, userId)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Guild Member Banner. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
             }
         }
 
