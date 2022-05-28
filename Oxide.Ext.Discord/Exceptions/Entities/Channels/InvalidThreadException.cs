@@ -1,4 +1,6 @@
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities.Channels.Threads;
+using Oxide.Ext.Discord.Entities.Messages;
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
 {
@@ -37,6 +39,14 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
                 
                 default:
                     throw new InvalidThreadException("Thread ChannelType must be one of GuildNewsThread, GuildPublicThread, or GuildPrivateThread");
+            }
+        }
+
+        internal static void ThrowIfInvalidForumCreateMessage(MessageCreate create)
+        {
+            if (create == null)
+            {
+                throw new InvalidThreadException("Message cannot be null for ThreadForumCreate");
             }
         }
     }

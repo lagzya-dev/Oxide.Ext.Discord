@@ -667,6 +667,20 @@ namespace Oxide.Ext.Discord.Entities.Channels
         }
         
         /// <summary>
+        /// Creates a new thread in a forum channel, and sends a message within the created thread. Returns a channel, with a nested message object
+        /// See <a href="https://discord.com/developers/docs/resources/channel#start-thread-in-forum-channel">Start Thread in Forum Channel</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="create">Data to use when creating the thread</param>
+        /// <param name="callback">Callback with the thread once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void StartThreadInForumChannel(DiscordClient client, ThreadForumCreate create, Action<DiscordChannel> callback = null, Action<RequestError> error = null)
+        {
+            if (create == null) throw new ArgumentNullException(nameof(create));
+            client.Bot.Rest.DoRequest(client,$"/channels/{Id}/threads", RequestMethod.POST, create, callback, error);
+        }
+        
+        /// <summary>
         /// Adds the bot to the thread. Also requires the thread is not archived.
         /// See <a href="https://discord.com/developers/docs/resources/channel#join-thread">Join Thread</a>
         /// </summary>
