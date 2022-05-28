@@ -1,5 +1,3 @@
-using System.Text.RegularExpressions;
-
 namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
 {
     /// <summary>
@@ -7,12 +5,6 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
     /// </summary>
     public class InvalidApplicationCommandException : BaseDiscordException
     {
-        
-        /// <summary>
-        /// Regex Application Command Chat Input Name Validation Regex
-        /// </summary>
-        public static readonly Regex ChatInputNameValidation = new Regex("^[-_\\p{L}\\p{N}\\p{Deva}\\p{Thai}]{1,32}$", RegexOptions.Compiled);
-        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -32,11 +24,6 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
             if (name.Length > 32)
             {
                 throw new InvalidApplicationCommandException("Name cannot be more than 32 characters");
-            }
-
-            if (!ChatInputNameValidation.IsMatch(name))
-            {
-                throw new InvalidApplicationCommandException($"Name failed regex validation: {ChatInputNameValidation}");
             }
         }
         

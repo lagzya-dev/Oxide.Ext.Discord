@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Helpers;
@@ -70,6 +71,28 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         public ApplicationCommandBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
             Command.DescriptionLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds default command permissions
+        /// </summary>
+        /// <param name="permissions">Default Permissions for the command</param>
+        /// <returns></returns>
+        public ApplicationCommandBuilder AddDefaultPermissions(PermissionFlags permissions)
+        {
+            Command.DefaultMemberPermissions = permissions;
+            return this;
+        }
+        
+        /// <summary>
+        /// Allows the command to be used in a direct message
+        /// </summary>
+        /// <param name="allowInDm">Allows a command to be used in a direct message</param>
+        /// <returns></returns>
+        public ApplicationCommandBuilder AddDirectMessagePermission(bool allowInDm)
+        {
+            Command.DmPermission = allowInDm;
             return this;
         }
 

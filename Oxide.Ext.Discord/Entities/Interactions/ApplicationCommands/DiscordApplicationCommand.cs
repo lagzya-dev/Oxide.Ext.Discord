@@ -112,7 +112,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
                 return;
             }
             
-            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/commands", RequestMethod.PATCH, update, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/commands/{Id}", RequestMethod.PATCH, update, callback, error);
         }
         
         /// <summary>
