@@ -63,9 +63,10 @@ namespace Oxide.Ext.Discord.Rest.Requests
             while (true)
             {
                 while (!Request.CanStartRequest())
-                { 
-                    //_logger.Debug($"Can't Start Request: Waiting For: {(Request.GetRequestResetAt() - DateTimeOffset.UtcNow).TotalSeconds} Seconds");
-                   ThreadExt.SleepUntil(Request.GetResetAt());
+                {
+                    DateTimeOffset resetAt = Request.GetResetAt();
+                    _logger.Debug("{{0}} Can't Start Request Method: {1} Url: {2} Waiting For: {3} Seconds", Request.Client.PluginName, Request.Method, Request.RequestUrl, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                   ThreadExt.SleepUntil(resetAt);
                 }
                 
                 Request.Bucket.FireRequest();
@@ -177,7 +178,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         private RequestError GetRequestError(Exception ex)
         {
-            return new RequestError(Request.Client, Request.Bucket, ex, _requestUrl, Request.Method, _webRequest.ContentType, Request.Data, _data?.Contents);
+            return new RequestError(Request, _data, ex);
         }
         
         private RequestError GetRequestError(Exception ex, RequestErrorType type, DiscordLogLevel logLevel)

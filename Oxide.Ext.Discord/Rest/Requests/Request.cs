@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Initializes the Request
         /// </summary>
-        protected void Init(DiscordClient client, RequestMethod method, string route, object data, Action onSuccess, Action<RequestError> onError)
+        private void Init(DiscordClient client, RequestMethod method, string route, object data, Action onSuccess, Action<RequestError> onError)
         {
             base.Init(client, method, route, data, onError);
             OnSuccess = onSuccess;

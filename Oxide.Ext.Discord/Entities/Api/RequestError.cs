@@ -3,6 +3,8 @@ using System.Text;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest.Buckets;
+using Oxide.Ext.Discord.Rest.Requests;
+using Oxide.Ext.Discord.Rest.Requests.Data;
 
 namespace Oxide.Ext.Discord.Entities.Api
 {
@@ -74,26 +76,20 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// Creates a new rest error
         /// </summary>
-        /// <param name="client">Discord Client making the request</param>
-        /// <param name="bucket">Bucket the request was assigned to</param>
+        /// <param name="request">Request the error is for</param>
         /// <param name="exception">The web exception we received</param>
-        /// <param name="url">Url that was called</param>
-        /// <param name="requestMethod">Request method that was used</param>
-        /// <param name="contentType">The HTTP Content Type of the request</param>
         /// <param name="data">Data passed to the request</param>
-        /// <param name="contents">The byte[] contents of the request</param>
-        internal RequestError(DiscordClient client, Bucket bucket, Exception exception, string url, RequestMethod requestMethod,
-            string contentType, object data, byte[] contents)
+        internal RequestError(BaseRequest request, RequestData data, Exception exception)
         {
-            _client = client;
-            _bucket = bucket;
-            Exception = exception;
-            Url = url;
-            RequestMethod = requestMethod;
-            ContentType = contentType;
+            _client = request.Client;
+            _bucket = request.Bucket;
+            Url = request.Route;
+            RequestMethod = request.Method;
+            ContentType = data.ContentType;
             Data = data;
-            Contents = contents;
+            Contents = data.Contents;
             TimeSinceEpoch = TimeHelpers.TimeSinceEpoch();
+            Exception = exception;
         }
 
         /// <summary>
@@ -158,7 +154,7 @@ namespace Oxide.Ext.Discord.Entities.Api
                 
                 case RequestErrorType.RateLimit:
                     _client.Logger.Warning("Rest Request Exception (Rate Limit) Plugin: {0} Request URL:  [{1}] {2} Content-Type: {3} Remaining: {4} Limit: {5} Reset At: {6} Current Time: {7}",
-                        _client.PluginName, RequestMethod, Url, ContentType, _bucket.Remaining, _bucket.Limit, _bucket.ResetAt, TimeSinceEpoch);
+                        _client.PluginName, RequestMethod, Url, ContentType, _bucket.Remaining, _bucket.Limit, _bucket.ResetAt, TimeSinceEpoch.ToDateTimeOffsetFromSeconds());
                     break;
 
                 case RequestErrorType.ApiError:

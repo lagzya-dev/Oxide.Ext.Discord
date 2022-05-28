@@ -45,12 +45,6 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="logger">Logger</param>
         public void Init(WebHeaderCollection headers, ILogger logger)
         {
-            // logger.Debug($"Headers: {RateLimitHeaders.IsGlobal}: {headers.GetBool(RateLimitHeaders.IsGlobal)} " +
-            //              $"{RateLimitHeaders.RetryAfter}: {headers.GetInt(RateLimitHeaders.RetryAfter)} " +
-            //              $"{RateLimitHeaders.BucketId}: {headers.Get(RateLimitHeaders.BucketId)} " +
-            //              $"{RateLimitHeaders.BucketLimit}: {headers.GetInt(RateLimitHeaders.BucketLimit)} " +
-            //              $"{RateLimitHeaders.BucketRemaining}: {headers.GetInt(RateLimitHeaders.BucketRemaining)} " +
-            //              $"{RateLimitHeaders.BucketReset}: {headers.GetDouble(RateLimitHeaders.BucketReset)} {headers.GetDouble(RateLimitHeaders.BucketReset).ToDateTimeOffsetFromSeconds()}");
             HitGlobalRateLimit = headers.GetBool(RateLimitHeaders.IsGlobal);
             if (HitGlobalRateLimit)
             {
