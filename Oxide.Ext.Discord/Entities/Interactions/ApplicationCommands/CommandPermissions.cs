@@ -28,6 +28,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         [JsonProperty("permission")]
         public bool Permission { get; set; }
 
+        /// <summary>
+        /// Creates a new CommandPermissions that allows all guild members to use the application command
+        /// </summary>
+        /// <param name="guild">Guild to allow the application command in</param>
+        /// <returns><see cref="CommandPermissions"/></returns>
         public static CommandPermissions AllowAllGuildMembers(DiscordGuild guild)
         {
             return new CommandPermissions
@@ -38,6 +43,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
             };
         }
         
+        /// <summary>
+        /// Creates a new CommandPermissions that allows the application command to be used in all guild channels
+        /// </summary>
+        /// <param name="guild">Guild to allow the application command in</param>
+        /// <returns><see cref="CommandPermissions"/></returns>
         public static CommandPermissions AllowAllGuildChannels(DiscordGuild guild)
         {
             return new CommandPermissions

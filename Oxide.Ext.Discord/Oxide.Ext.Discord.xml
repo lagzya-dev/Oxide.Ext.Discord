@@ -506,8 +506,8 @@
             Adds an author to the embed message. The author will appear above the title
             </summary>
             <param name="name">Name of the author</param>
-            <param name="iconUrl">Icon Url to use for the author</param>
             <param name="url">Url to go to when the authors name is clicked on</param>
+            <param name="iconUrl">Icon Url to use for the author</param>
             <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
             <returns>This</returns>
         </member>
@@ -1912,6 +1912,14 @@
             void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildInviteDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordApplicationCommandPermissionsUpdated">
+            <code>
+            void OnDiscordApplicationCommandPermissionsUpdated(CommandPermissions permissions)
+            {
+                Puts("OnDiscordInteractionCreated Works!");
             }
             </code>
         </member>
@@ -3759,8 +3767,23 @@
             Whether the channel is nsfw
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultAutoArchiveDuration">
+            <summary>
+            The default duration that the clients use (not the API) for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Validate">
             <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelFlags">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/channel#channel-object-channel-flags">Channel Flags</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelFlags.Pinned">
+            <summary>
+            This thread is pinned to the top of its parent forum channel
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelInvite">
             <summary>
@@ -3898,11 +3921,6 @@
             A channel that users can follow and crosspost into their own server
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildStore">
-            <summary>
-            A channel in which game developers can sell their game on Discord
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildNewsThread">
             <summary>
             A temporary sub-channel within a GUILD_NEWS channel
@@ -3921,6 +3939,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildStageVoice">
             <summary>
             A voice channel for <a href="https://support.discord.com/hc/en-us/articles/1500005513722">hosting events with an audience</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildDirectory">
+            <summary>
+            The channel in a <a href="https://support.discord.com/hc/en-us/articles/4406046651927-Discord-Student-Hubs-FAQ">hub</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildForum">
+            <summary>
+            (still in development) a channel that can only contain threads
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel">
@@ -3971,7 +3999,8 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.LastMessageId">
             <summary>
-            The id of the last message sent in this channel (may not point to an existing or valid message)
+            The id of the last message sent in this channel (or thread for GUILD_FORUM channels)
+            May not point to an existing or valid message or thread
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Bitrate">
@@ -4060,6 +4089,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Permissions">
             <summary>
             Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Flags">
+            <summary>
+            Flags for this channel
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ThreadMembers">
@@ -4377,6 +4411,16 @@
             <summary>
             Creates a new thread that is not connected to an existing message. The created thread is always a GUILD_PRIVATE_THREAD
             See <a href="https://discord.com/developers/docs/resources/channel#start-thread-without-message">Start Thread without Message</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="create">Data to use when creating the thread</param>
+            <param name="callback">Callback with the thread once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.StartThreadInForumChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.DiscordChannel},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Creates a new thread in a forum channel, and sends a message within the created thread. Returns a channel, with a nested message object
+            See <a href="https://discord.com/developers/docs/resources/channel#start-thread-in-forum-channel">Start Thread in Forum Channel</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="create">Data to use when creating the thread</param>
@@ -4789,48 +4833,6 @@
             The privacy level of the Stage instance
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate">
-            <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-thread">Thread Channel Update Structure</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Name">
-            <summary>
-            The name of the channel (1-100 characters)
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Archived">
-            <summary>
-            Whether the channel is archived
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.AutoArchiveDuration">
-            <summary>
-            Duration in minutes to automatically archive the thread after recent activity
-            Can be set to: 60, 1440, 4320, 10080
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Locked">
-            <summary>
-            Whether the thread is locked
-            When a thread is locked, only users with MANAGE_THREADS can unarchive it
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Invitable">
-            <summary>
-            Whether non-moderators can add other non-moderators to a thread
-            Only available on private threads
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.RateLimitPerUser">
-            <summary>
-            Amount of seconds a user has to wait before sending another message (0-21600)
-            Bots and users with the permission manage_messages, manage_thread, or manage_channel, are unaffected
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Validate">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#list-public-archived-threads-query-string-params">Thread Archive Lookup Structure</a> within Discord.
@@ -4883,7 +4885,9 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate.Validate">
-            <inheritdoc/>
+            <summary>
+            Validates the Thread Forum Create
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreateFromMessage">
             <summary>
@@ -4907,6 +4911,36 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreateFromMessage.Validate">
             <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-in-forum-channel-jsonform-params">Start Thread in Forum Channel</a> Structure
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.Name">
+            <summary>
+            1-100 character thread name
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.AutoArchiveDuration">
+            <summary>
+            Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.RateLimitPerUser">
+            <summary>
+            Amount of seconds a user has to wait before sending another message (0-21600)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.Message">
+            <summary>
+            Contents of the first message in the forum thread
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.Validate">
+            <summary>
+            Validates the Thread Forum Create
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList">
             <summary>
@@ -4992,6 +5026,53 @@
             <summary>
             Timestamp when the thread was created; only populated for threads created after 2022-01-09
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-thread">Thread Channel Update Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Name">
+            <summary>
+            The name of the channel (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Archived">
+            <summary>
+            Whether the channel is archived
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.AutoArchiveDuration">
+            <summary>
+            Duration in minutes to automatically archive the thread after recent activity
+            Can be set to: 60, 1440, 4320, 10080
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Locked">
+            <summary>
+            Whether the thread is locked
+            When a thread is locked, only users with MANAGE_THREADS can unarchive it
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Invitable">
+            <summary>
+            Whether non-moderators can add other non-moderators to a thread
+            Only available on private threads
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.RateLimitPerUser">
+            <summary>
+            Amount of seconds a user has to wait before sending another message (0-21600)
+            Bots and users with the permission manage_messages, manage_thread, or manage_channel, are unaffected
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Flags">
+            <summary>
+            Channel flags combined as a bitfield; PINNED can only be set for threads in forum channels
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Validate">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.VideoQualityMode">
             <summary>
@@ -6531,7 +6612,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Description">
             <summary>
-            The description of a Community guild
+            The description of a guild
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Banner">
@@ -6771,7 +6852,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListActiveThreads(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListActiveGuildThreads(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
             See <a href="https://discord.com/developers/docs/resources/guild#list-active-threads">List Active Threads</a>
@@ -6944,12 +7025,13 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildBans(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildBan}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildBans(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildBansRequest,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildBan}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Returns a list of ban objects for the users banned from this guild.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-bans">Get Guild Bans</a>
             </summary>
             <param name="client">Client to use</param>
+            <param name="request">Request params for retrieving guild bans</param>
             <param name="callback">Callback with the list of guild bans</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -7403,6 +7485,29 @@
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate.Validate">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildBansRequest">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/guild#get-guild-bans-query-string-params">Get Guild Bans Query String Params</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildBansRequest.Limit">
+            <summary>
+            Number of users to return (up to maximum 1000)  
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildBansRequest.Before">
+            <summary>
+            Get bans before this user ID
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildBansRequest.After">
+            <summary>
+            Get bans after this user ID
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildBansRequest.ToQueryString">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildChannelPosition">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions">Modify Guild Channel Position</a>
@@ -7496,6 +7601,11 @@
             Discord Extension doesn't currently support a guild features
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.AnimatedBanner">
+            <summary>
+            Guild has access to set an animated guild banner image    
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.AnimatedIcon">
             <summary>
             Guild has access to set an animated guild icon
@@ -7569,16 +7679,6 @@
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.RoleIcons">
             <summary>
             Guild can be previewed before joining via Membership Screening or the directory
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.SevenDayThreadArchive">
-            <summary>
-            Guild has access to the seven day archive time for threads
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.ThreeDayThreadArchive">
-            <summary>
-            Guild has access to the three day archive time for threads
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.TicketedEventsEnabled">
@@ -8802,11 +8902,6 @@
             The description of the app
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Integrations.IntegrationApplication.Summary">
-            <summary>
-            The summary of the app
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Integrations.IntegrationApplication.Bot">
             <summary>
             The bot associated with this application
@@ -8954,7 +9049,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Type">
             <summary>
-            They type of command option
+            Type of option
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType"/>
             </summary>
         </member>
@@ -8981,22 +9076,18 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Required">
             <summary>
             If the parameter is required or optional
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Autocomplete">
-            <summary>
-            If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
+            Defaults to false
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Choices">
             <summary>
-            Choices for string and int types for the user to pick from
-            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
+            Choices for STRING, INTEGER, and NUMBER types for the user to pick from, max 25
+            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Options">
             <summary>
-            If the option is a subcommand or subcommand group type, this nested options will be the parameters
+            If the option is a subcommand or subcommand group type, these nested options will be the parameters
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
             </summary>
         </member>
@@ -9014,6 +9105,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.MaxValue">
             <summary>
             If the option is an INTEGER or NUMBER type, the maximum value permitted
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Autocomplete">
+            <summary>
+            If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice">
@@ -9120,6 +9216,20 @@
             True to allow, False to disallow
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions.AllowAllGuildMembers(Oxide.Ext.Discord.Entities.Guilds.DiscordGuild)">
+            <summary>
+            Creates a new CommandPermissions that allows all guild members to use the application command
+            </summary>
+            <param name="guild">Guild to allow the application command in</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions.AllowAllGuildChannels(Oxide.Ext.Discord.Entities.Guilds.DiscordGuild)">
+            <summary>
+            Creates a new CommandPermissions that allows the application command to be used in all guild channels
+            </summary>
+            <param name="guild">Guild to allow the application command in</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions"/></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissionType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permission-type">ApplicationCommandPermissionType</a>
@@ -9133,6 +9243,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissionType.User">
             <summary>
             This permission uses User ID
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissionType.Channel">
+            <summary>
+            This permission uses Channel ID
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate">
@@ -9183,12 +9298,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Type">
             <summary>
-            The type of command, defaults 1 if not set
+            The type of command, defaults to 1
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.ApplicationId">
             <summary>
-            Unique id of the parent application
+            ID of the parent application
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.GuildId">
@@ -9222,9 +9337,14 @@
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.DefaultPermissions">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.DefaultMemberPermissions">
             <summary>
-            Whether the command is enabled by default when the app is added to a guild
+            Set of permissions represented as a bit set
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.DmPermission">
+            <summary>
+            Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Version">
@@ -9282,22 +9402,22 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions.Id">
             <summary>
-            The ID of the command
+            ID of the command
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions.ApplicationId">
             <summary>
-            the ID of the application the command belongs to
+            ID of the application the command belongs to
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions.GuildId">
             <summary>
-            The ID of the guild
+            ID of the guild
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions.Permissions">
             <summary>
-            The permissions for the command in the guild
+            Permissions for the command in the guild
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.BaseInteractionMessage">
@@ -9548,6 +9668,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.Options">
             <summary>
             The params + values from the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.GuildId">
+            <summary>
+            The id of the guild the command is registered to
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionData.CustomId">
@@ -10417,6 +10542,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.BaseMessageCreate.Components">
             <summary>
             Used to create message components on a message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.BaseMessageCreate.StickerIds">
+            <summary>
+            IDs of up to 3 stickers in the server to send in the message
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.BaseMessageCreate.Flags">
@@ -11390,11 +11520,6 @@
             Include to make your message a reply
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.StickerIds">
-            <summary>
-            IDs of up to 3 stickers in the server to send in the message
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment">
             <summary>
             Represents a file attachment for a discord message
@@ -12031,7 +12156,7 @@
             <summary>
             Allows for using the @everyone tag to notify all users in a channel,
             and the @here tag to notify all online users in a channel
-            Channel Type (Text)
+            Channel Type (Text, Stage)
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseExternalEmojis">
@@ -14443,6 +14568,25 @@
             <returns>Return url for the role icon</returns>
             <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetGuildScheduledEventCover(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Images.DiscordImageFormat)">
+            <summary>
+            Returns the guild schedule event cover icon with the given ID
+            </summary>
+            <param name="scheduledEventId">Scheduled Event ID</param>
+            <param name="format">Format for the icon to be returned in</param>
+            <returns>Return url for the guild schedule event cover icon</returns>
+            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetGuildMemberBanner(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Images.DiscordImageFormat)">
+            <summary>
+            Returns the guild member banner for the given guild / user ID
+            </summary>
+            <param name="guildId">Guild ID of the user</param>
+            <param name="userId">User ID of the user</param>
+            <param name="format">Format for the icon to be returned in</param>
+            <returns>Return url for the guild member banner</returns>
+            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetExtension(Oxide.Ext.Discord.Entities.Images.DiscordImageFormat,System.String)">
             <summary>
             Returns the extension to use for the image
@@ -14463,13 +14607,6 @@
             </summary>
             <param name="userId">User ID to mention</param>
             <returns>Mention user formatted string</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionUserNickname(Oxide.Ext.Discord.Entities.Snowflake)">
-            <summary>
-            Mention the user displaying their user name
-            </summary>
-            <param name="userId">User ID to mention</param>
-            <returns>Ping user formatted string</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionChannel(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
@@ -16540,6 +16677,11 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.InviteDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#invite-delete">INVITE_DELETE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ApplicationCommandsPermissionsUpdate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-permissions-update">APPLICATION_COMMANDS_PERMISSIONS_UPDATE</a> gateway event
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.InteractionCreated">
