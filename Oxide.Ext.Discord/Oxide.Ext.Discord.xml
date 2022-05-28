@@ -2652,6 +2652,11 @@
             How long it has been since the discord epoch in seconds
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.StringContents">
+            <summary>
+            The string contents of the request
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.Contents">
             <summary>
             The byte[] contents of the request
@@ -16203,6 +16208,11 @@
         <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.RequestData">
             <summary>
             Represents Request Data to be passed into the REST API request
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.StringContents">
+            <summary>
+            Data contents serialized to JSON
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.Contents">

@@ -27,7 +27,9 @@ namespace Oxide.Ext.Discord.Rest.Requests.Data
             ContentType = string.Format(DefaultContentType, boundary);
                 
             List<IMultipartSection> multipartSections = DiscordPool.GetList<IMultipartSection>();
-            multipartSections.Add(MultipartFormSection.CreateFormSection("payload_json", JsonConvert.SerializeObject(Data, Client.Bot.ClientSerializerSettings), "application/json"));
+
+            StringContents = JsonConvert.SerializeObject(Data, Client.Bot.ClientSerializerSettings);
+            multipartSections.Add(MultipartFormSection.CreateFormSection("payload_json", StringContents, "application/json"));
             for (int index = 0; index < attachments.FileAttachments.Count; index++)
             {
                 MessageFileAttachment fileAttachment = attachments.FileAttachments[index];

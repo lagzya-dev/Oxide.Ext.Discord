@@ -70,7 +70,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 }
                 
                 Request.Bucket.FireRequest();
-
+                
                 RequestResponse response = RunRequest();
 
                 if (response.Status == RequestCompletedStatus.Success)
@@ -101,6 +101,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 if (_data == null)
                 {
                     _data = RequestData.CreateRequestData(Request);
+                    _logger.Debug($"{nameof(RequestHandler)}.{nameof(Run)} Starting Request. Method: {{0}} Url: {{1}} Contents:\n{{2}}", Request.Method, Request.Route, _data.StringContents ?? "No Contents");
                 }
                 
                 //Can error during JSON serialization

@@ -44,6 +44,11 @@ namespace Oxide.Ext.Discord.Entities.Api
         public readonly double TimeSinceEpoch;
 
         /// <summary>
+        /// The string contents of the request
+        /// </summary>
+        public readonly string StringContents;
+        
+        /// <summary>
         /// The byte[] contents of the request
         /// </summary>
         public readonly byte[] Contents;
@@ -87,6 +92,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             RequestMethod = request.Method;
             ContentType = data.ContentType;
             Data = data;
+            StringContents = data.StringContents;
             Contents = data.Contents;
             TimeSinceEpoch = TimeHelpers.TimeSinceEpoch();
             Exception = exception;
@@ -159,7 +165,7 @@ namespace Oxide.Ext.Discord.Entities.Api
 
                 case RequestErrorType.ApiError:
                     _client.Logger.Error("Rest Request Exception (Discord API Error). Plugin: {0} Request URL: [{1}] {2} Content-Type: {3} Http Response Code: {4} Discord Error Code: {5} Discord Error: {6}\nDiscord Errors: {7}Request Body:\n{8}",
-                        _client.PluginName, RequestMethod, Url, ContentType, HttpStatusCode, DiscordError.Code, DiscordError.Message, DiscordError.Errors, Contents != null ? Encoding.UTF8.GetString(Contents) : "No Contents");
+                        _client.PluginName, RequestMethod, Url, ContentType, HttpStatusCode, DiscordError.Code, DiscordError.Message, DiscordError.Errors, StringContents ?? "No Contents");
                     break;
 
                 case RequestErrorType.GenericWeb:

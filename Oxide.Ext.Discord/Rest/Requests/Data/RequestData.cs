@@ -13,6 +13,11 @@ namespace Oxide.Ext.Discord.Rest.Requests.Data
     public class RequestData : BasePoolable
     {
         /// <summary>
+        /// Data contents serialized to JSON
+        /// </summary>
+        public string StringContents;
+        
+        /// <summary>
         /// Data serialized to bytes 
         /// </summary>
         public byte[] Contents;
@@ -60,7 +65,8 @@ namespace Oxide.Ext.Discord.Rest.Requests.Data
             ContentType = DefaultContentType;
             if (Data != null)
             {
-                Contents = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Data, Client.Bot.ClientSerializerSettings));
+                StringContents = JsonConvert.SerializeObject(Data, Client.Bot.ClientSerializerSettings);
+                Contents = Encoding.UTF8.GetBytes(StringContents);
             }
         }
 
@@ -92,6 +98,7 @@ namespace Oxide.Ext.Discord.Rest.Requests.Data
         ///<inheritdoc/>
         protected override void EnterPool()
         {
+            StringContents = null;
             Contents = null;
             ContentType = null;
             Data = null;
