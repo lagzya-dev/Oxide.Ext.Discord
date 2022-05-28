@@ -272,6 +272,20 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDefaultPermissions(Oxide.Ext.Discord.Entities.Permissions.PermissionFlags)">
+            <summary>
+            Adds default command permissions
+            </summary>
+            <param name="permissions">Default Permissions for the command</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDirectMessagePermission(System.Boolean)">
+            <summary>
+            Allows the command to be used in a direct message
+            </summary>
+            <param name="allowInDm">Allows a command to be used in a direct message</param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String)">
             <summary>
             Creates a new SubCommandGroup
@@ -2663,18 +2677,13 @@
             Should we display the error message
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.#ctor(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Rest.Buckets.Bucket,System.Exception,System.String,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.Byte[])">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.#ctor(Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Rest.Requests.Data.RequestData,System.Exception)">
             <summary>
             Creates a new rest error
             </summary>
-            <param name="client">Discord Client making the request</param>
-            <param name="bucket">Bucket the request was assigned to</param>
+            <param name="request">Request the error is for</param>
             <param name="exception">The web exception we received</param>
-            <param name="url">Url that was called</param>
-            <param name="requestMethod">Request method that was used</param>
-            <param name="contentType">The HTTP Content Type of the request</param>
             <param name="data">Data passed to the request</param>
-            <param name="contents">The byte[] contents of the request</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SuppressErrorMessage">
             <summary>
@@ -9013,6 +9022,16 @@
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.DefaultMemberPermissions">
+            <summary>
+            Set of permissions represented as a bit set
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.DmPermission">
+            <summary>
+            Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.DefaultPermissions">
             <summary>
             Whether the command is enabled by default when the app is added to a guild
@@ -9279,6 +9298,16 @@
             <summary>
             The parameters for the command
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.DefaultMemberPermissions">
+            <summary>
+            Set of permissions represented as a bit set
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.DmPermission">
+            <summary>
+            Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.DefaultPermissions">
@@ -14067,11 +14096,6 @@
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands.InvalidApplicationCommandException">
             <summary>
             Represents an invalid application command
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands.InvalidApplicationCommandException.ChatInputNameValidation">
-            <summary>
-            Regex Application Command Chat Input Name Validation Regex
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands.InvalidApplicationCommandException.#ctor(System.String)">
