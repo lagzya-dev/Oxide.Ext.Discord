@@ -10,6 +10,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
     public enum PermissionFlags : ulong
     {
         /// <summary>
+        /// Represents No Permissions
+        /// </summary>
+        None = 0,
+        
+        /// <summary>
         /// Allows creation of instant invites
         /// Channel Type (Text, Voice, Stage)
         /// </summary>

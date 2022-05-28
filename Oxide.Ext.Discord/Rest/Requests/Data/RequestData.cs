@@ -44,16 +44,16 @@ namespace Oxide.Ext.Discord.Rest.Requests.Data
             if (request.Data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
             {
                 MultipartRequestData multipart = DiscordPool.Get<MultipartRequestData>();
-                multipart.Init(request.Client, attachments);
+                multipart.InitMultipart(request.Client, attachments);
                 return multipart;
             }
             
             RequestData data = DiscordPool.Get<RequestData>();
-            data.Init(request.Client, request.Data);
+            data.InitRequest(request.Client, request.Data);
             return data;
         }
         
-        private void Init(DiscordClient client, object data)
+        private void InitRequest(DiscordClient client, object data)
         {
             Client = client;
             Data = data;

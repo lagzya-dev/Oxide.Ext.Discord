@@ -12084,6 +12084,11 @@
             Represents <a href="https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags">Permission Flags</a> for user or role
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.None">
+            <summary>
+            Represents No Permissions
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.CreateInstantInvite">
             <summary>
             Allows creation of instant invites
@@ -16187,7 +16192,7 @@
             Represents a multipart request data type
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Interfaces.IFileAttachments)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData.InitMultipart(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Interfaces.IFileAttachments)">
             <summary>
             Initializes the Request Data
             </summary>

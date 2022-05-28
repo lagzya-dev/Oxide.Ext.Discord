@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Rest.Requests.Data
         /// <summary>
         /// Initializes the Request Data
         /// </summary>
-        private void Init(DiscordClient client, IFileAttachments attachments)
+        public void InitMultipart(DiscordClient client, IFileAttachments attachments)
         {
             Client = client;
             Data = attachments;
