@@ -58,14 +58,14 @@ namespace Oxide.Ext.Discord.Builders
         /// Adds an author to the embed message. The author will appear above the title
         /// </summary>
         /// <param name="name">Name of the author</param>
-        /// <param name="iconUrl">Icon Url to use for the author</param>
         /// <param name="url">Url to go to when the authors name is clicked on</param>
+        /// <param name="iconUrl">Icon Url to use for the author</param>
         /// <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
         /// <returns>This</returns>
-        public DiscordEmbedBuilder AddAuthor(string name, string iconUrl = null, string url = null, string proxyIconUrl = null)
+        public DiscordEmbedBuilder AddAuthor(string name, string url = null, string iconUrl = null, string proxyIconUrl = null)
         {
             InvalidEmbedException.ThrowIfInvalidAuthorName(name);
-            _embed.Author = new EmbedAuthor(name, iconUrl, url, proxyIconUrl);
+            _embed.Author = new EmbedAuthor(name, url, iconUrl, proxyIconUrl);
             return this;
         }
 
