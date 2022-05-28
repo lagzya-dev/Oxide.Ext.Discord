@@ -49,6 +49,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("rate_limit_per_user")]
         public int? RateLimitPerUser { get; set; }
+        
+        /// <summary>
+        /// Channel flags combined as a bitfield; PINNED can only be set for threads in forum channels
+        /// </summary>
+        [JsonProperty("flags")]
+        public ChannelFlags? Flags { get; set; }
 
         ///<inheritdoc/>
         public void Validate()
