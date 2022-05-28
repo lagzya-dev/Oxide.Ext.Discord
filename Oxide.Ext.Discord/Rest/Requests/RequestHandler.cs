@@ -172,7 +172,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         public void Abort()
         {
-            _webRequest.Abort();
+            _webRequest?.Abort();
         }
 
         private RequestError GetRequestError(Exception ex)
