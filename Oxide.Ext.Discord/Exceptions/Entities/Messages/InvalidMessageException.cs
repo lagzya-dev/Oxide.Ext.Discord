@@ -31,9 +31,10 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Messages
         {
             if (string.IsNullOrEmpty(create.Content) 
                 && (create.Embeds == null || create.Embeds.Count == 0) 
-                && (create.FileAttachments == null || create.FileAttachments.Count == 0))
+                && (create.FileAttachments == null || create.FileAttachments.Count == 0)
+                && (create.StickerIds == null || create.StickerIds.Count == 0))
             {
-                throw new InvalidMessageException("Discord Messages require Either Content, An Embed, Or a File", create);
+                throw new InvalidMessageException("Discord Messages require Either Content, An Embed, A Sticker, Or a File", create);
             }
         }
         

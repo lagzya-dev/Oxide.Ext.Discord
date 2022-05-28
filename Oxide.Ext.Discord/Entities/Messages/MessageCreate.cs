@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities.Messages
@@ -14,11 +13,5 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("message_reference")]
         public MessageReference MessageReference { get; set; }
-
-        /// <summary>
-        /// IDs of up to 3 stickers in the server to send in the message
-        /// </summary>
-        [JsonProperty("sticker_ids")]
-        public List<Snowflake> StickerIds { get; set; }
     }
 }
