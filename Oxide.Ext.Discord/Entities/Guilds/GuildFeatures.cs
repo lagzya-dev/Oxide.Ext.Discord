@@ -112,18 +112,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         RoleIcons,
 
         /// <summary>
-        /// Guild has access to the seven day archive time for threads
-        /// </summary>
-        [Description("SEVEN_DAY_THREAD_ARCHIVE")] 
-        SevenDayThreadArchive,
-        
-        /// <summary>
-        /// Guild has access to the three day archive time for threads
-        /// </summary>
-        [Description("THREE_DAY_THREAD_ARCHIVE")] 
-        ThreeDayThreadArchive,
-        
-        /// <summary>
         /// Guild has enabled ticketed events
         /// </summary>
         [Description("TICKETED_EVENTS_ENABLED")] 
