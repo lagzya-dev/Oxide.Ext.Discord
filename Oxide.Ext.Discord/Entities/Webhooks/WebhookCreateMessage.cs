@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <inheritdoc/>
         protected override void ValidateFlags()
         {
-            InvalidMessageException.ThrowIfInvalidFlags(Flags, ~MessageFlags.SuppressEmbeds, "Invalid Message Flags Used for Webhook Message. Only supported flags are MessageFlags.SuppressEmbeds");
+            InvalidMessageException.ThrowIfInvalidFlags(Flags, MessageFlags.SuppressEmbeds, "Invalid Message Flags Used for Webhook Message. Only supported flags are MessageFlags.SuppressEmbeds");
         }
     }
 }
