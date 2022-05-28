@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Plugins;
 
@@ -67,12 +68,18 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("options")]
         public List<CommandOption> Options { get; set; }
-        
+
+        [JsonProperty("default_member_permissions")]
+        private string _defaultMemberPermissions;
+
         /// <summary>
         /// Set of permissions represented as a bit set
         /// </summary>
-        [JsonProperty("default_member_permissions")]
-        public string DefaultMemberPermissions { get; set; }
+        public PermissionFlags DefaultMemberPermissions
+        {
+            get => !string.IsNullOrEmpty(_defaultMemberPermissions) ? (PermissionFlags)ulong.Parse(_defaultMemberPermissions) : default(PermissionFlags);
+            set => _defaultMemberPermissions = ((ulong)value).ToString();
+        }
         
         /// <summary>
         /// Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
