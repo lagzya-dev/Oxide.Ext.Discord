@@ -660,7 +660,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with a list of threads and thread members for a guild</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ListActiveThreads(DiscordClient client, Action<List<ThreadList>> callback = null, Action<RequestError> error = null)
+        public void ListActiveGuildThreads(DiscordClient client, Action<List<ThreadList>> callback = null, Action<RequestError> error = null)
         {
             client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/threads/active", RequestMethod.GET, null, callback, error);
         }
