@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// <summary>
     /// Represents a pool for MemoryStream
     /// </summary>
-    public class MemoryStreamPool : BasePool<MemoryStream>
+    internal class MemoryStreamPool : BasePool<MemoryStream>
     {
         internal static readonly IPool<MemoryStream> Instance;
         

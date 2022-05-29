@@ -4,7 +4,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// <summary>
     /// Pool for StringBuilders
     /// </summary>
-    public class StringBuilderPool : BasePool<StringBuilder>
+    internal class StringBuilderPool : BasePool<StringBuilder>
     {
         internal static readonly IPool<StringBuilder> Instance;
         

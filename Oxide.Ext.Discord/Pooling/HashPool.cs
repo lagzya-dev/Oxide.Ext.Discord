@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
-    public class HashPool<TKey, TValue> : BasePool<Hash<TKey, TValue>>
+    internal class HashPool<TKey, TValue> : BasePool<Hash<TKey, TValue>>
     {
         internal static readonly IPool<Hash<TKey, TValue>> Instance;
         
