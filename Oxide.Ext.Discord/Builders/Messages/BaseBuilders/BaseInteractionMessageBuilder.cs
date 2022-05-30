@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
 {
@@ -46,6 +47,31 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
             Message.Flags |= MessageFlags.Ephemeral;
             return Builder;
         }
+
+        /// <summary>
+        /// Adds an empty array of Auto Complete Choices
+        /// </summary>
+        /// <returns>This</returns>
+        public TBuilder AddEmptyAutoCompleteChoices()
+        {
+            if (Message.Choices == null)
+            {
+                Message.Choices = new List<CommandOptionChoice>();
+            }
+            return Builder;
+        }
+        
+        /// <summary>
+        /// Adds a <see cref="CommandOptionChoice"/> to the response
+        /// </summary>
+        /// <param name="name">Name of the choice</param>
+        /// <param name="value">Value of the choice</param>
+        /// <param name="nameLocalizations">Name localizations for the choice</param>
+        /// <returns>This</returns>
+        public TBuilder AddAutoCompleteChoice(string name, object value, Hash<string, string> nameLocalizations = null)
+        {
+            return AddAutoCompleteChoice(new CommandOptionChoice(name, value, nameLocalizations));
+        }
         
         /// <summary>
         /// Adds a <see cref="CommandOptionChoice"/> to the response
@@ -56,10 +82,7 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
         {
             if (choice == null) throw new ArgumentNullException(nameof(choice));
             InteractionResponseBuilderException.ThrowIfInteractionIsNotAutoComplete(Interaction.Type);
-            if (Message.Choices == null)
-            {
-                Message.Choices = new List<CommandOptionChoice>();
-            }
+            AddEmptyAutoCompleteChoices();
             
             InvalidCommandOptionChoiceException.ThrowIfMaxChoices(Message.Choices.Count + 1);
             Message.Choices.Add(choice);
@@ -75,10 +98,7 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
         {
             if (choices == null) throw new ArgumentNullException(nameof(choices));
             InteractionResponseBuilderException.ThrowIfInteractionIsNotAutoComplete(Interaction.Type);
-            if (Message.Choices == null)
-            {
-                Message.Choices = new List<CommandOptionChoice>();
-            }
+            AddEmptyAutoCompleteChoices();
             
             InvalidCommandOptionChoiceException.ThrowIfMaxChoices(Message.Choices.Count + choices.Count);
             Message.Choices.AddRange(choices);

@@ -28,5 +28,23 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("value")]
         public object Value { get; set; }
+
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public CommandOptionChoice() { }
+
+        /// <summary>
+        /// Creates a Command Option Choice
+        /// </summary>
+        /// <param name="name">Name of the choice</param>
+        /// <param name="value">Value of the choice</param>
+        /// <param name="nameLocalizations">Name localizations for the choice</param>
+        public CommandOptionChoice(string name, object value, Hash<string, string> nameLocalizations = null)
+        {
+            Name = name;
+            Value = value;
+            NameLocalizations = nameLocalizations;
+        }
     }
 }

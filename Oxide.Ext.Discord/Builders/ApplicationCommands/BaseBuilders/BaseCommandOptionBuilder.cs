@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
 {
@@ -43,7 +44,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <returns></returns>
         public TBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            _option.NameLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            _option.NameLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
             return _builder;
         }
         
@@ -55,7 +56,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <returns></returns>
         public TBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            _option.DescriptionLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            _option.DescriptionLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
             return _builder;
         }
 
@@ -147,14 +148,15 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         /// <param name="name">Name of the choice</param>
         /// <param name="value">Value of the choice</param>
+        /// <param name="nameLocalizations">Localizations for the name</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if option type is not string</exception>
-        public TBuilder AddChoice(string name, string value)
+        public TBuilder AddChoice(string name, string value, Hash<string, string> nameLocalizations = null)
         {
             InvalidCommandOptionChoiceException.ThrowIfInvalidType(_option.Type, CommandOptionType.String);
             InvalidCommandOptionChoiceException.ThrowIfInvalidName(name, false);
             InvalidCommandOptionChoiceException.ThrowIfInvalidStringValue(name);
-            return AddChoiceInternal(name, value);
+            return AddChoiceInternal(name, value, nameLocalizations);
         }
 
         /// <summary>
@@ -162,13 +164,14 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         /// <param name="name">Name of the choice</param>
         /// <param name="value">Value of the choice</param>
+        /// <param name="nameLocalizations">Localizations for the name</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if option type is not int</exception>
-        public TBuilder AddChoice(string name, int value)
+        public TBuilder AddChoice(string name, int value, Hash<string, string> nameLocalizations = null)
         {
             InvalidCommandOptionChoiceException.ThrowIfInvalidType(_option.Type, CommandOptionType.Integer);
             InvalidCommandOptionChoiceException.ThrowIfInvalidName(name, false);
-            return AddChoiceInternal(name, value);
+            return AddChoiceInternal(name, value, nameLocalizations);
         }
         
         /// <summary>
@@ -176,27 +179,24 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         /// <param name="name">Name of the choice</param>
         /// <param name="value">Value of the choice</param>
+        /// <param name="nameLocalizations">Localizations for the name</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if option type is not double</exception>
-        public TBuilder AddChoice(string name, double value)
+        public TBuilder AddChoice(string name, double value, Hash<string, string> nameLocalizations = null)
         {
             InvalidCommandOptionChoiceException.ThrowIfInvalidType(_option.Type, CommandOptionType.Number);
             InvalidCommandOptionChoiceException.ThrowIfInvalidName(name, false);
-            return AddChoiceInternal(name, value);
+            return AddChoiceInternal(name, value, nameLocalizations);
         }
 
-        private TBuilder AddChoiceInternal(string name, object value)
+        private TBuilder AddChoiceInternal(string name, object value, Hash<string, string> nameLocalizations)
         {
             if (_option.Choices == null)
             {
                 _option.Choices = new List<CommandOptionChoice>();
             }
             
-            _option.Choices.Add(new CommandOptionChoice
-            {
-                Name = name,
-                Value = value
-            });
+            _option.Choices.Add(new CommandOptionChoice(name, value, nameLocalizations));
             
             return _builder;
         }

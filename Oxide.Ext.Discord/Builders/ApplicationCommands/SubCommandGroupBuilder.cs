@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <returns></returns>
         public SubCommandGroupBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            _option.NameLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            _option.NameLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
             return this;
         }
         
@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <returns></returns>
         public SubCommandGroupBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            _option.DescriptionLocalizations = LocaleConverter.GetCommandLocalization(plugin, langKey);
+            _option.DescriptionLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
             return this;
         }
 

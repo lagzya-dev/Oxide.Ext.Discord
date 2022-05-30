@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders.Messages;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Guilds;
@@ -8,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
+using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
@@ -125,6 +127,23 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         private bool _hasResponded;
 
         /// <summary>
+        /// Returns a localized string for this interaction
+        /// </summary>
+        /// <param name="plugin">Plugin the localization is for</param>
+        /// <param name="langKey">Lang Key to return</param>
+        /// <returns>Localized string if it is found; Empty string otherwise</returns>
+        public string GetLangMessage(Plugin plugin, string langKey) => DiscordLocale.GetDiscordInteractionLangMessage(plugin, this, langKey);
+        
+        /// <summary>
+        /// Returns a localized string for this interaction
+        /// </summary>
+        /// <param name="plugin">Plugin the localization is for</param>
+        /// <param name="langKey">Lang Key to return</param>
+        /// <param name="args">Localization args</param>
+        /// <returns>Localized string if it is found; Empty string otherwise</returns>
+        public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordLocale.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
+        
+        /// <summary>
         /// Returns a <see cref="InteractionResponseBuilder"/> for this interaction
         /// </summary>
         /// <returns></returns>
@@ -173,11 +192,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionResponseBuilder builder, Action callback = null, Action<RequestError> error = null)
         {
-            InteractionResponse data = new InteractionResponse
-            {
-                Type = type,
-                Data = builder.Build()
-            };
+            InteractionResponse data = new InteractionResponse(type, builder.Build());
             CreateInteractionResponse(client, data, callback, error);
         }
 

@@ -107,8 +107,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 return;
             }
 
-            UserOxideLocale = LocaleConverter.GetOxideLocale(interaction.Locale);
-            GuildOxideLocale = LocaleConverter.GetOxideLocale(interaction.GuildLocale);
+            UserOxideLocale = DiscordLocale.GetOxideLocale(interaction.Locale);
+            GuildOxideLocale = DiscordLocale.GetOxideLocale(interaction.GuildLocale);
             
             //Parse the arguments for the application command
             ParseCommand(Data.Options);
