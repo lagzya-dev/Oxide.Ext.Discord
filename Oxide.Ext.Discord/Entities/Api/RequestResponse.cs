@@ -12,19 +12,16 @@ namespace Oxide.Ext.Discord.Entities.Api
     /// </summary>
     public class RequestResponse : BasePoolable
     {
+        internal RequestCompletedStatus Status;
+        internal RateLimitResponse RateLimit;
+        internal RequestError Error;
+        
         /// <summary>
         /// Data discord sent us
         /// </summary>
-        internal string Message;
-
+        private string _message;
         private DiscordClient _client;
-
-        internal RequestError Error;
-
-        internal RateLimitResponse RateLimit;
         
-        internal RequestCompletedStatus Status;
-
         /// <summary>
         /// Create new REST response with the given data
         /// </summary>
@@ -49,7 +46,7 @@ namespace Oxide.Ext.Discord.Entities.Api
                 {
                     using (StreamReader reader = new StreamReader(stream))
                     {
-                        Message = reader.ReadToEnd().Trim();
+                        _message = reader.ReadToEnd().Trim();
                     }
                 }
             }
@@ -107,7 +104,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         {
             RequestResponse response = DiscordPool.Get<RequestResponse>();
             response.Init(client, httpResponse, status);
-            error.SetResponseData((int)httpResponse.StatusCode, response.Message);
+            error.SetResponseData((int)httpResponse.StatusCode, response._message);
             response.Error = error;
             
             DiscordApiError apiError = response.ParseData<DiscordApiError>();
@@ -141,7 +138,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// </summary>
         /// <typeparam name="T">Type to be parsed as</typeparam>
         /// <returns>Data string JSON parsed to object</returns>
-        public T ParseData<T>() => !string.IsNullOrEmpty(Message) ? JsonConvert.DeserializeObject<T>(Message, _client.Bot.ClientSerializerSettings) : default(T);
+        public T ParseData<T>() => !string.IsNullOrEmpty(_message) ? JsonConvert.DeserializeObject<T>(_message, _client.Bot.ClientSerializerSettings) : default(T);
 
         ///<inheritdoc/>
         protected override void DisposeInternal()
@@ -152,7 +149,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         ///<inheritdoc/>
         protected override void EnterPool()
         {
-            Message = null;
+            _message = null;
             _client = null;
             Error = null;
         }
