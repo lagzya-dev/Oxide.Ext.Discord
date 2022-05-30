@@ -95,9 +95,17 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <inheritdoc/>
         public void Validate()
         {
-            InvalidMessageException.ThrowIfMissingRequiredField(this);
+            ValidateRequiredFields();
             InvalidMessageException.ThrowIfInvalidContent(Content);
             ValidateFlags();
+        }
+
+        /// <summary>
+        /// Validates required fields for the message
+        /// </summary>
+        protected virtual void ValidateRequiredFields()
+        {
+            InvalidMessageException.ThrowIfMissingRequiredField(this);
         }
 
         /// <summary>
