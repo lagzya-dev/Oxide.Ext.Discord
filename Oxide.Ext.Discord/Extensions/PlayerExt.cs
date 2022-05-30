@@ -75,6 +75,11 @@ namespace Oxide.Ext.Discord.Extensions
         
         private static void SendMessage(DiscordClient client, Snowflake? id, MessageCreate message)
         {
+            if (!client.IsConnected())
+            {
+                return;
+            }
+            
             if (!id.HasValue)
             {
                 return;
