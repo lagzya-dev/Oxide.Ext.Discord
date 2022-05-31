@@ -1356,10 +1356,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="userId">User to modify</param>
         /// <param name="update">Update to the guild voice state</param>
-        /// <param name="suppress">Changes the users suppressed state</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyUserVoiceState(DiscordClient client, Snowflake userId, GuildUserVoiceStateUpdate update, bool? suppress = null, Action callback = null, Action<RequestError> error = null)
+        public void ModifyUserVoiceState(DiscordClient client, Snowflake userId, GuildUserVoiceStateUpdate update, Action callback = null, Action<RequestError> error = null)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
