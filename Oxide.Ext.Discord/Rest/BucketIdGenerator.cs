@@ -1,4 +1,5 @@
 using System.Text;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Pooling;
 
@@ -63,7 +64,7 @@ namespace Oxide.Ext.Discord.Rest
             MoveNext();
             
             StringBuilder bucket = DiscordPool.GetStringBuilder();
-            bucket.Append(_method.ToString());
+            bucket.Append(EnumCache<RequestMethod>.ToString(_method));
             bucket.Append(':');
             bucket.Append(_current);
 

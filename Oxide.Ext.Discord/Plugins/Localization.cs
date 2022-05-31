@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 namespace Oxide.Ext.Discord.Plugins
 {
     internal static class LangKeys

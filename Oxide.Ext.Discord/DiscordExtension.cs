@@ -103,7 +103,7 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordCommand), DiscordCommand);
             Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
-            Interface.Oxide.RootPluginManager.OnPluginRemoved +=  DiscordClient.OnPluginRemoved;
+            Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClient.OnPluginRemoved;
             
             Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
         }

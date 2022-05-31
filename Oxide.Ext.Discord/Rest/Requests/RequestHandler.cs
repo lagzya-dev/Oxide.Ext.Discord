@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
@@ -156,7 +157,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         private HttpWebRequest CreateRequest()
         {
             HttpWebRequest req = (HttpWebRequest) WebRequest.Create(_requestUrl);
-            req.Method = Request.Method.ToString();
+            req.Method = EnumCache<RequestMethod>.ToString(Request.Method);
             req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.FullExtensionVersion})";
             req.Timeout = TimeoutDuration * 1000;
             req.ContentLength = 0;

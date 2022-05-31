@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Exceptions.Entities.Images;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Pooling;
@@ -46,7 +47,7 @@ namespace Oxide.Ext.Discord.Entities.Images
             Image = image;
             StringBuilder sb = DiscordPool.GetStringBuilder();
             sb.Append("data:image/");
-            sb.Append(Type.ToString().ToLower());
+            sb.Append(EnumCache<DiscordImageFormat>.ToLower(Type));
             sb.Append(";base64,");
             sb.Append(Convert.ToBase64String(Image));
             Base64Image = DiscordPool.ToStringAndFreeStringBuilder(ref sb);

@@ -1,5 +1,9 @@
 using System;
+using System.Text;
 using Oxide.Core;
+using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Pooling;
+
 namespace Oxide.Ext.Discord.Logging
 {
     /// <summary>
@@ -7,8 +11,6 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     internal class DiscordConsoleLogger
     {
-        private const string ConsoleLogFormat = "[Discord Extension] [{0}]: {1}";
-        
         /// <summary>
         /// Adds a message to the server console
         /// </summary>
@@ -17,28 +19,29 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="ex"></param>
         internal void AddMessage(DiscordLogLevel level, string message, Exception ex)
         {
-            object[] args = ArrayPool.Get(2);
-            args[0] = level.ToString();
-            args[1] = message;
-            string log = string.Format(ConsoleLogFormat, args);
-            ArrayPool.Free(args);
-            args = ArrayPool.Get(0);
+            StringBuilder sb = DiscordPool.GetStringBuilder();
+            sb.Append("[Discord Extension] [");
+            sb.Append(EnumCache<DiscordLogLevel>.ToString(level));
+            sb.Append("]: ");
+            sb.Append(message);
+            object[] args = ArrayPool.Get(0);
             switch (level)
             {
                 case DiscordLogLevel.Debug:
                 case DiscordLogLevel.Warning:
-                    Interface.Oxide.LogWarning(log, args);
+                    Interface.Oxide.LogWarning(sb.ToString(), args);
                     break;
                 case DiscordLogLevel.Error:
-                    Interface.Oxide.LogError(log, args);
+                    Interface.Oxide.LogError(sb.ToString(), args);
                     break;
                 case DiscordLogLevel.Exception:
-                    Interface.Oxide.LogException(log, ex);
+                    Interface.Oxide.LogException(sb.ToString(), ex);
                     break;
                 default:
-                    Interface.Oxide.LogInfo(log, args);
+                    Interface.Oxide.LogInfo(sb.ToString(), args);
                     break;
             }
+            DiscordPool.FreeStringBuilder(ref sb);
             ArrayPool.Free(args);
         }
     }

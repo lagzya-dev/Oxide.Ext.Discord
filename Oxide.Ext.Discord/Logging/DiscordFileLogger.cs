@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using Oxide.Core;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Pooling;
 namespace Oxide.Ext.Discord.Logging
 {
@@ -91,21 +92,19 @@ namespace Oxide.Ext.Discord.Logging
 
             lock (_syncRoot)
             {
-                object[] args = ArrayPool.Get(3);
                 for (int index = 0; index < _messageQueue.Count; index++)
                 {
                     FileMessage message = _messageQueue[index];
-                    args[0] = message.Date.ToString(CultureInfo.CurrentCulture);
-                    args[1] = message.LogLevel.ToString();
-                    args[2] = message.GetMessage();
-                    sb.AppendFormat("{0} [{1}] {2}", args);
+                    sb.Append(message.Date.ToString(CultureInfo.CurrentCulture));
+                    sb.Append(" [");
+                    sb.Append(EnumCache<DiscordLogLevel>.ToString(message.LogLevel));
+                    sb.Append("] ");
+                    sb.Append(message.GetMessage());
                     sb.AppendLine();
                     DiscordPool.Free(ref message);
                 }
                 
                 _messageQueue.Clear();
-                
-                ArrayPool.Free(args);
             }
 
             WriteToFile(DiscordPool.ToStringAndFreeStringBuilder(ref sb));

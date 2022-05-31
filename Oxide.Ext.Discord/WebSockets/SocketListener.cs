@@ -1866,7 +1866,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private void UnhandledOpCode(EventPayload payload)
         {
-            _logger.Warning($"Unhandled OP code: {payload.OpCode.ToString()}. Please contact Discord Extension authors.");
+            _logger.Warning("Unhandled OP code: {0}. Please contact Discord Extension authors.", payload.OpCode);
         }
         #endregion
 
