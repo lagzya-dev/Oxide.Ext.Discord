@@ -814,11 +814,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="nick">New user nickname</param>
         /// <param name="callback">Callback with updated nickname</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        [Obsolete("Please use ModifyCurrentMember Instead. This will be removed in October 2022 Update")]
+        [Obsolete("Please use ModifyCurrentMember Instead. This will be removed in a Future Update")]
         public void ModifyCurrentUsersNick(DiscordClient client, string nick, Action<string> callback = null, Action<RequestError> error = null)
         {
             InvalidGuildMemberException.ThrowIfInvalidNickname(nick);
-            Dictionary<string, object> data = new Dictionary<string, object>()
+            Dictionary<string, object> data = new Dictionary<string, object>
             {
                 ["nick"] = nick
             };
@@ -1336,62 +1336,35 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         /// <summary>
         /// Modifies the current user's voice state.
-        /// See <a href="https://discord.com/developers/docs/resources/guild#update-current-user-voice-state">Update Current User Voice State</a>
+        /// See <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state">Update Current User Voice State</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="channelId">Channel ID of the stage channel</param>
-        /// <param name="suppress">Changes the users suppressed state</param>
-        /// <param name="requestToSpeak">Sets the user's request to speak</param>
+        /// <param name="update">Update to the guild voice state</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyCurrentUserVoiceState(DiscordClient client, Snowflake channelId, bool? suppress = null, DateTime? requestToSpeak = null, Action callback = null, Action<RequestError> error = null)
+        public void ModifyCurrentUserVoiceState(DiscordClient client, GuildCurrentUserVoiceStateUpdate update, Action callback = null, Action<RequestError> error = null)
         {
-            InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            
-            Dictionary<string, object> data = new Dictionary<string, object>
-            {
-                ["channel_id"] = channelId.ToString()
-            };
+            if (update == null) throw new ArgumentNullException(nameof(update));
 
-            if (suppress.HasValue)
-            {
-                data["suppress"] = suppress.Value;
-            }
-
-            if (requestToSpeak.HasValue)
-            {
-                data["request_to_speak_timestamp"] = requestToSpeak;
-            }
-            
-            client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/voice-states/@me", RequestMethod.PATCH, data, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/voice-states/@me", RequestMethod.PATCH, update, callback, error);
         }
-        
+
         /// <summary>
         /// Modifies another user's voice state.
         /// See <a href="https://discord.com/developers/docs/resources/guild#modify-user-voice-state">Update Users Voice State</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="userId">User ID of the users state to update</param>
-        /// <param name="channelId">Channel ID of the stage channel</param>
+        /// <param name="userId">User to modify</param>
+        /// <param name="update">Update to the guild voice state</param>
         /// <param name="suppress">Changes the users suppressed state</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyUserVoiceState(DiscordClient client, Snowflake userId, Snowflake channelId, bool? suppress = null, Action callback = null, Action<RequestError> error = null)
+        public void ModifyUserVoiceState(DiscordClient client, Snowflake userId, GuildUserVoiceStateUpdate update, bool? suppress = null, Action callback = null, Action<RequestError> error = null)
         {
+            if (update == null) throw new ArgumentNullException(nameof(update));
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
-            InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
 
-            Dictionary<string, object> data = new Dictionary<string, object>
-            {
-                ["channel_id"] = channelId.ToString()
-            };
-
-            if (suppress.HasValue)
-            {
-                data["suppress"] = suppress.Value;
-            }
-            
-            client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/voice-states/{userId}", RequestMethod.PATCH, data, callback, error);
+            client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/voice-states/{userId}", RequestMethod.PATCH, update, callback, error);
         }
         
         /// <summary>
