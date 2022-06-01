@@ -32,7 +32,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         {
             lock (_lock)
             {
-                //_logger.Debug($"BucketHandler.OnRequestQueued Thread: {(_thread == null ? "NULL" : "NOT NULL")} Is Alive: {_thread?.IsAlive ?? false} Name: {_bucket.BucketId}");
                 if (_thread == null || !_thread.IsAlive)
                 {
                     _thread = new Thread(_threadStart);
@@ -44,24 +43,13 @@ namespace Oxide.Ext.Discord.Rest.Buckets
 
         private void RunThread()
         {
-            //_logger.Debug($"Running Thread For Bucket: {_bucket.BucketId}");
             try
             {
-                //_logger.Debug($"{_bucket.BucketId} Count: {_bucket.RequestCount()}");
                 while (_bucket.RequestCount() > 0)
                 {
-                    //_logger.Debug($"{_bucket.BucketId} Fire Request. Total: {_bucket.RequestCount()}");
                     FireRequest();
-                    //_logger.Debug($"{_bucket.BucketId} Completed Request");
                 }
-                //_logger.Debug($"Sleeping For: {(_bucket.ResetAt - DateTimeOffset.UtcNow).TotalSeconds} Seconds: {_bucket.BucketId}");
-                //ThreadExt.SleepUntil(_bucket.ResetAt);
             }
-            // catch (ThreadInterruptedException)
-            // {
-            //     _logger.Debug($"BucketHandler.OnRequestQueued RunThread Thread Interrupted: {_bucket.BucketId}");
-            //     RunThread();
-            // }
             catch (ThreadAbortException)
             {
                 _logger.Debug("Bucket thread has been aborted for: {0}", _bucket.BucketId);
@@ -70,8 +58,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             {
                 _logger.Exception("An exception occured for bucket {0}", _bucket.BucketId, ex);
             }
-            
-            //_logger.Debug($"BucketHandler.OnRequestQueued RunThread Completed Name: {_bucket.BucketId} {_thread?.ManagedThreadId}");
             
             lock (_lock)
             {

@@ -145,21 +145,17 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             RateLimitResponse rateLimit = response.RateLimit;
             request.Client.Logger.Debug("Bucket.OnRequestCompleted Plugin: {0} Method: {1} Route: {2} Internal Bucket Id: {3} Limit: {4} Remaining: {5} Reset: {7} Time: {7} Bucket: {8}", 
                 request.Client.PluginName, request.Method, request.Route, BucketId, Limit, Remaining, ResetAt, TimeHelpers.TimeSinceEpoch(), rateLimit?.BucketId);
-
-            //_logger.Debug($"Bucket.OnRequestCompleted rateLimit != null: {rateLimit != null}");
+            
             if (rateLimit != null)
             {
-                //_logger.Debug($"Bucket.OnRequestCompleted rateLimit.HitGlobalRateLimit: {rateLimit.HitGlobalRateLimit}");
                 if (rateLimit.HitGlobalRateLimit)
                 {
                     RateLimit.ReachedRateLimit(rateLimit.ResetAt);
                     return;
                 }
-
-                //_logger.Debug($"Bucket.OnRequestCompleted rateLimit.ResetAt ({rateLimit.ResetAt}) > ResetAt ({ResetAt}): {rateLimit.ResetAt > ResetAt}");
+                
                 if (rateLimit.ResetAt > ResetAt)
                 {
-                    //_logger.Debug($"Bucket.OnRequestCompleted Limit: {rateLimit.BucketLimit} Remaining:{ rateLimit.BucketRemaining} ResetAt:{rateLimit.ResetAt}");
                     Limit = rateLimit.BucketLimit;
                     Remaining = rateLimit.BucketRemaining;
                     ResetAt = rateLimit.ResetAt;
