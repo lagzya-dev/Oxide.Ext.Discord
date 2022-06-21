@@ -1055,6 +1055,20 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             InvalidSnowflakeException.ThrowIfInvalid(roleId, nameof(roleId));
             client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/roles/{roleId}", RequestMethod.PATCH, role, callback, error);
         }
+        
+        /// <summary>
+        /// Modify a guild's MFA level.
+        /// Requires guild ownership.
+        /// See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level">Modify Guild MFA Level</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="level"><see cref="GuildUpdateMfaLevel"/> to set</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ModifyGuildMFALevel(DiscordClient client, GuildUpdateMfaLevel level, Action callback = null, Action<RequestError> error = null)
+        {
+            client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/mfa/", RequestMethod.POST, level, callback, error);
+        }
 
         /// <summary>
         /// Delete a guild role.
