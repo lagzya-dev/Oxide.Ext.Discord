@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Helpers
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/reference#message-formatting-formats">Message text formatting options</a>
     /// </summary>
-    public class DiscordFormatting
+    public static class DiscordFormatting
     {
         /// <summary>
         /// Mention the user with the given user ID
