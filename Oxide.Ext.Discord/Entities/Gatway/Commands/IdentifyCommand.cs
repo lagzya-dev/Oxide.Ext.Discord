@@ -63,7 +63,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// <summary>
         /// Your operating system
         /// </summary>
-        [JsonProperty("$os")]
+        [JsonProperty("os")]
         public string OperatingSystem
         {
             get
@@ -83,13 +83,13 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// <summary>
         /// Your library name
         /// </summary>
-        [JsonProperty("$browser")]
+        [JsonProperty("browser")]
         public string Browser => "Oxide.Ext.Discord";
 
         /// <summary>
         /// Your library name
         /// </summary>
-        [JsonProperty("$device")]
+        [JsonProperty("device")]
         public string Device => Browser;
     }
 }
