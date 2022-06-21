@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         Standard = 1,
         
         /// <summary>
-        /// A sticker uploaded to a Boosted guild for the guild's members
+        /// A sticker uploaded to a guild for the guild's members
         /// </summary>
         Guild = 2
     }
