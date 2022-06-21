@@ -43,14 +43,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public List<CommandOption> Options { get; set; }
         
         [JsonProperty("default_member_permissions")]
-        private string _defaultMemberPermissions;
+        private string _defaultMemberPermissions = "0";
 
         /// <summary>
         /// Set of permissions represented as a bit set
         /// </summary>
         public PermissionFlags DefaultMemberPermissions
         {
-            get => !string.IsNullOrEmpty(_defaultMemberPermissions) ? (PermissionFlags)ulong.Parse(_defaultMemberPermissions) : default(PermissionFlags);
+            get => !string.IsNullOrEmpty(_defaultMemberPermissions) ? (PermissionFlags)ulong.Parse(_defaultMemberPermissions) : PermissionFlags.None;
             set => _defaultMemberPermissions = ((ulong)value).ToString();
         }
         

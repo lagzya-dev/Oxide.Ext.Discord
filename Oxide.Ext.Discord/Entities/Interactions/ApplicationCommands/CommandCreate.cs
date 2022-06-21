@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         public PermissionFlags DefaultMemberPermissions
         {
-            get => !string.IsNullOrEmpty(_defaultMemberPermissions) ? (PermissionFlags)ulong.Parse(_defaultMemberPermissions) : default(PermissionFlags);
+            get => !string.IsNullOrEmpty(_defaultMemberPermissions) ? (PermissionFlags)ulong.Parse(_defaultMemberPermissions) : PermissionFlags.None;
             set => _defaultMemberPermissions = ((ulong)value).ToString();
         }
         
@@ -78,7 +78,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public void Validate()
         {
             InvalidApplicationCommandException.ThrowIfInvalidName(Name, false);
-            InvalidApplicationCommandException.ThrowIfInvalidDescription(Name, false);
+            InvalidApplicationCommandException.ThrowIfInvalidDescription(Description, false);
         }
     }
 }
