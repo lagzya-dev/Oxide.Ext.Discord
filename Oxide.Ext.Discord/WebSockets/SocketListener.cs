@@ -582,7 +582,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _logger.Info("Your bot was found in {0} Guilds!", ready.Guilds.Count);
             if ((_client.Settings.Intents & GatewayIntents.GuildMessages) != 0 && !_client.Application.HasApplicationFlag(ApplicationFlags.GatewayMessageContentLimited))
             {
-                _logger.Warning("You will need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications by April 30th 2022 or plugins using this intent will stop working", _client.BotUser.Username);
+                _logger.Warning("You will need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications by August 31, 2022 or plugins using this intent will stop working", _client.BotUser.Username);
             }
 
             if (_client.ReadyData == null)
@@ -919,7 +919,7 @@ namespace Oxide.Ext.Discord.WebSockets
             
             guild.Members[member.User.Id] = member;
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberAdded, member, guild);
-            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberAdd)} Guild ID: {{1}} Guild Name: {{2}} User ID: {{3}} User Name: {{4}}", member.GuildId, guild.Name, member.User.Id, member.User.GetFullUserName);
+            _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberAdd)} Guild ID: {{0}} Guild Name: {{1}} User ID: {{2}} User Name: {{3}}", member.GuildId, guild.Name, member.User.Id, member.User.GetFullUserName);
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-member-remove
