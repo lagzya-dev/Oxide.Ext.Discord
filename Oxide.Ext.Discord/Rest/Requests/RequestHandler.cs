@@ -21,6 +21,11 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Returns if the request is currently in progress
         /// </summary>
         public bool InProgress { get; private set; }
+        
+        /// <summary>
+        /// Returns if the request was cancelled
+        /// </summary>
+        public bool Cancelled { get; private set; }
 
         internal BaseRequest Request;
         
@@ -65,17 +70,19 @@ namespace Oxide.Ext.Discord.Rest.Requests
             {
                 return;
             }
+            
+            _logger.Verbose("Starting REST Request. Method: {0} Url: {1} Contents:\n{2}", Request.Method, Request.Route, _data.StringContents ?? "No Contents");
 
             while(_retries < 3) 
             {
                 while (!Request.CanStartRequest())
                 {
                     DateTimeOffset resetAt = Request.GetResetAt();
-                    _logger.Debug("{{0}} Can't Start Request Method: {1} Url: {2} Waiting For: {3} Seconds", Request.Client.PluginName, Request.Method, Request.RequestUrl, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                    _logger.Debug("{0} Can't Start Request Method: {1} Url: {2} Waiting For: {3} Seconds", Request.Client.PluginName, Request.Method, Request.RequestUrl, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
                     ThreadExt.SleepUntil(resetAt);
                 }
                 
-                Request.Bucket.FireRequest();
+                Request.Bucket.RateLimit.FiredRequest();
 
                 RequestResponse response = RunRequest();
                 if (response.Status == RequestCompletedStatus.Success)
@@ -171,13 +178,12 @@ namespace Oxide.Ext.Discord.Rest.Requests
             try
             {
                 _data = RequestData.CreateRequestData(Request);
-                _logger.Verbose("Starting REST Request. Method: {0} Url: {1} Contents:\n{2}", Request.Method, Request.Route, _data.StringContents ?? "No Contents");
                 return true;
             }
             catch (JsonSerializationException ex)
             {
                 Request.Client.Logger.Exception("A JsonSerializationException occured for request. Plugin: {0} Method: {1} URL: {2} Data Type: {3}", Request.Client.PluginName, Request.Method, _requestUrl, Request.Data?.GetType().Name ?? "None", ex);
-                Request.OnRequestCompleted(this, RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex), RequestCompletedStatus.ErrorFatal));
+                Request.OnRequestCompleted(this, RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.Serialization, DiscordLogLevel.Error), RequestCompletedStatus.ErrorFatal));
                 return false;
             }
         }
@@ -187,6 +193,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         public void Abort()
         {
+            Cancelled = true;
             _webRequest?.Abort();
         }
 

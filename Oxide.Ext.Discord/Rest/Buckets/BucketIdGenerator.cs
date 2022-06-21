@@ -3,7 +3,7 @@ using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Rest
+namespace Oxide.Ext.Discord.Rest.Buckets
 {
     /// <summary>
     /// Represents a type that splits string by a specific char

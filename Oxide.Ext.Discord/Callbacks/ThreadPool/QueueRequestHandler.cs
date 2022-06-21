@@ -2,19 +2,19 @@ using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Rest.Requests;
 
-namespace Oxide.Ext.Discord.Callbacks.Api
+namespace Oxide.Ext.Discord.Callbacks.ThreadPool
 {
     /// <summary>
     /// Callback for queuing a request using a thread pool
     /// </summary>
-    public class QueueRequestCallback : BaseThreadPoolCallback
+    public class QueueRequestHandler : BaseThreadPoolHandler
     {
         private BaseRequest _request;
         private RestHandler _rest;
         
-        internal static QueueRequestCallback Create(BaseRequest request, RestHandler rest)
+        internal static QueueRequestHandler Create(BaseRequest request, RestHandler rest)
         {
-            QueueRequestCallback callback = DiscordPool.Get<QueueRequestCallback>();
+            QueueRequestHandler callback = DiscordPool.Get<QueueRequestHandler>();
             callback.Init(request, rest);
             return callback;
         }

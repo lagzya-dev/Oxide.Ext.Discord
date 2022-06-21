@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Oxide.Ext.Discord.Callbacks.Api;
+using Oxide.Ext.Discord.Callbacks.ThreadPool;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Requests;
+using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord.Rest.Buckets
 {
@@ -36,14 +39,15 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         internal DateTimeOffset ResetAt = DateTimeOffset.UtcNow;
 
         internal bool IsKnowBucket;
+        internal bool IsShutdown;
 
         internal readonly RestRateLimit RateLimit;
 
         private readonly ILogger _logger;
         private readonly RestHandler _rest;
         private readonly object _syncRoot = new object();
+        internal readonly AdjustableSemaphore Semaphore = new AdjustableSemaphore(1);
         private readonly List<RequestHandler> _requests = new List<RequestHandler>();
-        private readonly BucketHandler _handler;
 
         /// <summary>
         /// Creates a new bucket for the given <see cref="RestHandler"/>
@@ -57,7 +61,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             _rest = rest;
             RateLimit = rest.RateLimit;
             _logger = logger;
-            _handler = new BucketHandler(this, logger);
         }
         
         /// <summary>
@@ -72,7 +75,17 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             {
                 _requests.Add(handler);
             }
-            _handler.OnRequestQueued();
+
+            if (ResetAt < DateTimeOffset.UtcNow)
+            {
+                Remaining = Limit;
+                UpdateSemaphoreCount();
+            }
+            
+            _logger.Debug("Queued Request Method: {0} Route: {1}", request.Method, request.Route);
+            
+            RestRequestHandler callback = RestRequestHandler.CreateRequestCallback(handler, _logger);
+            ThreadPool.QueueUserWorkItem(callback.Callback);
         }
         
         /// <summary>
@@ -157,7 +170,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 if (rateLimit.ResetAt > ResetAt)
                 {
                     Limit = rateLimit.BucketLimit;
-                    Remaining = rateLimit.BucketRemaining;
+                    Remaining = Interlocked.Exchange(ref Remaining, rateLimit.BucketRemaining);
                     ResetAt = rateLimit.ResetAt;
                 }
                 else
@@ -168,13 +181,24 @@ namespace Oxide.Ext.Discord.Rest.Buckets
 
             DequeueRequest(handler);
             handler.Dispose();
-            
+
+            UpdateSemaphoreCount();
+
             if (!IsKnowBucket && rateLimit != null && !string.IsNullOrEmpty(rateLimit.BucketId))
             {
                 _rest.UpgradeToKnownBucket(this, rateLimit.BucketId);
+                if (!IsKnowBucket)
+                {
+                    Semaphore.AllowAllThrough();
+                }
+            }
+
+            if (RequestCount() == 0)
+            {
+                OnBucketCompleted();
             }
         }
-        
+
         internal void AbortClientRequests(DiscordClient client)
         {
             lock (_syncRoot)
@@ -197,7 +221,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             }
         }
 
-        internal void OnBucketCompleted()
+        private void OnBucketCompleted()
         {
             if (!IsKnowBucket)
             {
@@ -205,14 +229,25 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             }
         }
 
-        internal void FireRequest()
+        private void UpdateSemaphoreCount()
         {
-            RateLimit.FiredRequest();
+            Semaphore.MaximumCount = Remaining.Clamp(1, Limit);
         }
 
         internal void Shutdown()
         {
-            _handler.Shutdown();
+            IsShutdown = true;
+            lock (_syncRoot)
+            {
+                for (int index = _requests.Count - 1; index >= 0; index--)
+                {
+                    RequestHandler handler = _requests[index];
+                    handler.Abort();
+                    _requests.RemoveAt(index);
+                }
+            }
+            
+            Semaphore.AllowAllThrough();
         }
     }
 }

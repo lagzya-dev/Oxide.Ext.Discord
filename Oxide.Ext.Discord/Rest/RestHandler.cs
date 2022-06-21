@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Oxide.Ext.Discord.Callbacks.Api;
+using Oxide.Ext.Discord.Callbacks.ThreadPool;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
@@ -99,7 +100,7 @@ namespace Oxide.Ext.Discord.Rest
         public void QueueRequest(BaseRequest request)
         {
             _logger.Debug("RestHandler Queuing Request for Method: {0} Route: {0}", request.Method, request.Route);
-            QueueRequestCallback queue = QueueRequestCallback.Create(request, this);
+            QueueRequestHandler queue = QueueRequestHandler.Create(request, this);
             ThreadPool.QueueUserWorkItem(queue.Callback);
         }
         

@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
 
-namespace Oxide.Ext.Discord.Helpers
+namespace Oxide.Ext.Discord.Threading
 {
-    public class AdjustableSemaphore
+    internal class AdjustableSemaphore
     {
         private readonly object _syncRoot = new object();
         private int _available;
@@ -55,15 +55,25 @@ namespace Oxide.Ext.Discord.Helpers
         {
             lock (_syncRoot)
             {
-                if (_available + 1 < _maximum)
+                if (_available + 1 <= _maximum)
                 {
                     _available += 1;
                     Monitor.Pulse(_syncRoot);
                 }
                 else
                 {
-                    throw new SemaphoreFullException($"Adding 1 the given count to the semaphore would cause it to exceed its maximum count.");
+                    throw new Exception($"Adding 1 the given count to the semaphore would cause it to exceed its maximum count of {_maximum}.");
                 }
+            }
+        }
+
+        public void AllowAllThrough()
+        {
+            _maximum = int.MaxValue;
+            _available = int.MaxValue;
+            lock (_syncRoot)
+            {
+                Monitor.PulseAll(_syncRoot);
             }
         }
     }
