@@ -1192,6 +1192,26 @@
         <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.LeavePool">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Cache.EnumCache`1">
+            <summary>
+            Represents a cache of enum strings
+            </summary>
+            <typeparam name="T">Enum type</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.ToString(`0)">
+            <summary>
+            Returns the string representation of the enum
+            </summary>
+            <param name="value">Enum value</param>
+            <returns>Enum value as string</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.ToLower(`0)">
+            <summary>
+            Returns the lowered string representation of the enum
+            </summary>
+            <param name="value">Enum value</param>
+            <returns>Enum value as lowered string</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiCallback.DisposeInternal">
             <inheritdoc/>
         </member>
@@ -1199,23 +1219,6 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiCallback`1.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.Api.QueueRequestCallback">
-            <summary>
-            Callback for queuing a request using a thread pool
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.QueueRequestCallback.HandleCallback(System.Object)">
-            <summary>
-            Calls the rest QueueBucket method with the request to be queued
-            </summary>
-            <param name="data"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.QueueRequestCallback.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.QueueRequestCallback.EnterPool">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseCallback">
@@ -1239,27 +1242,6 @@
             Overridden in the child class to handle the callback
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.BaseThreadPoolCallback">
-            <summary>
-            Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
-            This class is pooled to prevent allocations
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Callbacks.BaseThreadPoolCallback.Callback">
-            <summary>
-            The callback to be called by the delegate
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.BaseThreadPoolCallback.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.BaseThreadPoolCallback.HandleCallback(System.Object)">
-            <summary>
-            Overridden in the child class to handle the callback
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Hooks.MultiPluginHookCallback.DisposeInternal">
             <inheritdoc/>
         </member>
@@ -1267,6 +1249,66 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Libraries.SubscriptionCallback.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Callbacks.ThreadPool.BaseThreadPoolHandler">
+            <summary>
+            Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
+            This class is pooled to prevent allocations
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Callbacks.ThreadPool.BaseThreadPoolHandler.Callback">
+            <summary>
+            The callback to be called by the delegate
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.BaseThreadPoolHandler.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.BaseThreadPoolHandler.HandleCallback(System.Object)">
+            <summary>
+            Overridden in the child class to handle the callback
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Callbacks.ThreadPool.QueueRequestHandler">
+            <summary>
+            Callback for queuing a request using a thread pool
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.QueueRequestHandler.HandleCallback(System.Object)">
+            <summary>
+            Calls the rest QueueBucket method with the request to be queued
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.QueueRequestHandler.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.QueueRequestHandler.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler">
+            <summary>
+            Thread Pool Handler for Rest Requests
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler.CreateRequestCallback(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a thread pooled rest request
+            </summary>
+            <param name="handler">Request Handler for the request</param>
+            <param name="logger">Logger</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler.HandleCallback(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler.EnterPool">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig">
@@ -7384,27 +7426,24 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyCurrentUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyCurrentUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Modifies the current user's voice state.
-            See <a href="https://discord.com/developers/docs/resources/guild#update-current-user-voice-state">Update Current User Voice State</a>
+            See <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state">Update Current User Voice State</a>
             </summary>
             <param name="client">Client to use</param>
-            <param name="channelId">Channel ID of the stage channel</param>
-            <param name="suppress">Changes the users suppressed state</param>
-            <param name="requestToSpeak">Sets the user's request to speak</param>
+            <param name="update">Update to the guild voice state</param>
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{System.Boolean},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Modifies another user's voice state.
             See <a href="https://discord.com/developers/docs/resources/guild#modify-user-voice-state">Update Users Voice State</a>
             </summary>
             <param name="client">Client to use</param>
-            <param name="userId">User ID of the users state to update</param>
-            <param name="channelId">Channel ID of the stage channel</param>
-            <param name="suppress">Changes the users suppressed state</param>
+            <param name="userId">User to modify</param>
+            <param name="update">Update to the guild voice state</param>
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -7621,6 +7660,29 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildCreate.Validate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state-json-params">Modify Current User Voice State</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate.ChannelId">
+            <summary>
+            The id of the channel the user is currently in
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate.Suppress">
+            <summary>
+            Toggles the user's suppress state
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate.RequestToSpeakTimestamp">
+            <summary>
+            Sets the user's request to speak
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate.Validate">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures">
@@ -8139,6 +8201,24 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildSearchMembers.Validate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/guild#modify-user-voice-state-json-params">Modify User Voice State</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate.ChannelId">
+            <summary>
+            The id of the channel the user is currently in
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate.Suppress">
+            <summary>
+            Toggles the user's suppress state
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate.Validate">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildVerificationLevel">
@@ -14394,6 +14474,21 @@
             <typeparam name="TValue"></typeparam>
             <returns>Copied Hash</returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.MathExt">
+            <summary>
+            Extensions for math operations
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.MathExt.Clamp``1(``0,``0,``0)">
+            <summary>
+            Returns the value of {T} clamped between min and max value
+            </summary>
+            <param name="val">Value to be clamped</param>
+            <param name="min">Min value</param>
+            <param name="max">Max Value</param>
+            <typeparam name="T">Type to be clamped</typeparam>
+            <returns>Value of {T} clamped between min and max</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.PlayerExt">
             <summary>
             IPlayer Extensions for sending Discord Message to an IPlayer
@@ -16014,53 +16109,6 @@
             Constructor for WebsocketRateLimit
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.BucketIdGenerator">
-            <summary>
-            Represents a type that splits string by a specific char
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.Init(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String)">
-            <summary>
-            Constructor for string splitter
-            </summary>
-            <param name="method">HTTP request method</param>
-            <param name="route">String to be split</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.GetBucketId(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String)">
-            <summary>
-            Returns the Rate Limit Bucket for the given route
-            https://discord.com/developers/docs/topics/rate-limits#rate-limits
-            </summary>
-            <param name="method">Request method for the request</param>
-            <param name="route">API Route</param>
-            <returns>Bucket ID for route</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.GetBucketId">
-            <summary>
-            Creates the bucket ID
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.MoveNext">
-            <summary>
-            Returns the next string in the split
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.NextIndex(System.Int32)">
-            <summary>
-            Updates the _lastIndex processed.
-            If the _lastIndex >= _length then we are done processing the Bucket ID
-            If the current route is now reactions we stop processing the bucket ID
-            </summary>
-            <param name="lastIndex"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketIdGenerator.EnterPool">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Rest.Buckets.Bucket">
             <summary>
             Contains bucket information for a REST API Bucket
@@ -16113,17 +16161,52 @@
             </summary>
             <param name="handler">Request to remove</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Buckets.BucketHandler">
+        <member name="T:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator">
             <summary>
-            Handles the thread for the bucket
+            Represents a type that splits string by a specific char
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketHandler.#ctor(Oxide.Ext.Discord.Rest.Buckets.Bucket,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.Init(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String)">
             <summary>
-            Creates a new bucket handler for a given bucket
+            Constructor for string splitter
             </summary>
-            <param name="bucket">Bucket the handler is for</param>
-            <param name="logger">Logger</param>
+            <param name="method">HTTP request method</param>
+            <param name="route">String to be split</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.GetBucketId(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String)">
+            <summary>
+            Returns the Rate Limit Bucket for the given route
+            https://discord.com/developers/docs/topics/rate-limits#rate-limits
+            </summary>
+            <param name="method">Request method for the request</param>
+            <param name="route">API Route</param>
+            <returns>Bucket ID for route</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.GetBucketId">
+            <summary>
+            Creates the bucket ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.MoveNext">
+            <summary>
+            Returns the next string in the split
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.NextIndex(System.Int32)">
+            <summary>
+            Updates the _lastIndex processed.
+            If the _lastIndex >= _length then we are done processing the Bucket ID
+            If the current route is now reactions we stop processing the bucket ID
+            </summary>
+            <param name="lastIndex"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.EnterPool">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection">
             <summary>
@@ -16414,6 +16497,11 @@
         <member name="P:Oxide.Ext.Discord.Rest.Requests.RequestHandler.InProgress">
             <summary>
             Returns if the request is currently in progress
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Rest.Requests.RequestHandler.Cancelled">
+            <summary>
+            Returns if the request was cancelled
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestHandler._requestUrl">
