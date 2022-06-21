@@ -21,6 +21,13 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         [JsonProperty("avatar_url")]
         public string AvatarUrl { get; set; }
+        
+        /// <summary>
+        /// Name of thread to create
+        /// Requires the webhook channel to be a forum channel
+        /// </summary>
+        [JsonProperty("thread_name")]
+        public string ThreadName { get; set; }
 
         /// <inheritdoc/>
         protected override void ValidateFlags()
