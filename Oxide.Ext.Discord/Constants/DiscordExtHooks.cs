@@ -715,6 +715,38 @@ namespace Oxide.Ext.Discord.Constants
         /// }
         /// </code>
         public const string OnDiscordStageInstanceDeleted = nameof(OnDiscordStageInstanceDeleted);
+        
+        /// <code>
+        /// void OnDiscordAutoModRuleCreated(AutoModRule rule, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordAutoModRuleCreated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordAutoModRuleCreated = nameof(OnDiscordAutoModRuleCreated);
+        
+        /// <code>
+        /// void OnDiscordAutoModRuleUpdated(AutoModRule rule, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordAutoModRuleUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordAutoModRuleUpdated = nameof(OnDiscordAutoModRuleUpdated);
+        
+        /// <code>
+        /// void OnDiscordAutoModRuleDeleted(AutoModRule rule, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordAutoModRuleDeleted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordAutoModRuleDeleted = nameof(OnDiscordAutoModRuleDeleted);
+        
+        /// <code>
+        /// void OnDiscordAutoModActionExecuted(AutoModActionExecutionEvent rule, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordAutoModActionExecuted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordAutoModActionExecuted = nameof(OnDiscordAutoModActionExecuted);
         #endregion
     }
 }

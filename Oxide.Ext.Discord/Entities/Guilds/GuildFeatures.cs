@@ -28,6 +28,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         AnimatedIcon,
         
         /// <summary>
+        /// Guild has set up auto moderation rules
+        /// </summary>
+        [Description("AUTO_MODERATION")] 
+        AutoModeration,
+        
+        /// <summary>
         /// Guild has access to set a guild banner image
         /// </summary>
         [Description("BANNER")] 

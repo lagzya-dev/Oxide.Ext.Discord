@@ -139,6 +139,18 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// - GUILD_SCHEDULED_EVENT_USER_ADD
         /// - GUILD_SCHEDULED_EVENT_USER_REMOVE
         /// </summary>
-        GuildScheduledEvents = 1 << 16
+        GuildScheduledEvents = 1 << 16,
+        
+        /// <summary>
+        /// - AUTO_MODERATION_RULE_CREATE
+        /// - AUTO_MODERATION_RULE_UPDATE
+        /// - AUTO_MODERATION_RULE_DELETE
+        /// </summary>
+        AutoModerationConfiguration = 1 << 20,
+        
+        /// <summary>
+        /// - AUTO_MODERATION_ACTION_EXECUTION
+        /// </summary>
+        AutoModerationExecution = 1 << 21,
     }
 }

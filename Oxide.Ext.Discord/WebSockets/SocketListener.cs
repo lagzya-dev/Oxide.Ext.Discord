@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
+using Oxide.Ext.Discord.Entities.AutoMod;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
@@ -557,6 +558,22 @@ namespace Oxide.Ext.Discord.WebSockets
                 
                 case DispatchCode.StageInstanceDeleted:
                     HandleDispatchStageInstanceDeleted(payload);
+                    break;
+                
+                case DispatchCode.AutoModerationRuleCreate:
+                    HandleDispatchAutoModRuleCreated(payload);
+                    break;
+                
+                case DispatchCode.AutoModerationRuleUpdate:
+                    HandleDispatchAutoModRuleUpdated(payload);
+                    break;
+                
+                case DispatchCode.AutoModerationRuleDelete:
+                    HandleDispatchAutoModRuleDeleted(payload);
+                    break;
+                
+                case DispatchCode.AutoModerationActionExecution:
+                    HandleDispatchAutoModActionExecuted(payload);
                     break;
                 
                 default:
@@ -1807,6 +1824,38 @@ namespace Oxide.Ext.Discord.WebSockets
             guild.StageInstances.Remove(stage.Id);
             guild.StageInstances[stage.Id] = stage;
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordStageInstanceDeleted, existing ?? stage, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-create
+        private void HandleDispatchAutoModRuleCreated(EventPayload payload)
+        {
+            AutoModRule rule = payload.EventData.ToObject<AutoModRule>();
+            DiscordGuild guild = _client.GetGuild(rule.GuildId);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordAutoModRuleCreated, rule, guild);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-update
+        private void HandleDispatchAutoModRuleUpdated(EventPayload payload)
+        {
+            AutoModRule rule = payload.EventData.ToObject<AutoModRule>();
+            DiscordGuild guild = _client.GetGuild(rule.GuildId);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordAutoModRuleUpdated, rule, guild);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-delete
+        private void HandleDispatchAutoModRuleDeleted(EventPayload payload)
+        {
+            AutoModRule rule = payload.EventData.ToObject<AutoModRule>();
+            DiscordGuild guild = _client.GetGuild(rule.GuildId);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordAutoModRuleDeleted, rule, guild);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution
+        private void HandleDispatchAutoModActionExecuted(EventPayload payload)
+        {
+            AutoModActionExecutionEvent action = payload.EventData.ToObject<AutoModActionExecutionEvent>();
+            DiscordGuild guild = _client.GetGuild(action.GuildId);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordAutoModActionExecuted, action, guild);
         }
 
         private void HandleDispatchUnhandledEvent(EventPayload payload)

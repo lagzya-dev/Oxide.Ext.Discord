@@ -143,6 +143,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Reminder for a guild invite
         /// </summary>
         [Description("CONTEXT_MENU_COMMAND")]
-        ContextMenuCommand = 23
+        ContextMenuCommand = 23,
+
+        /// <summary>
+        /// Message is an auto mod action
+        /// </summary>
+        [Description("AUTO_MODERATION_ACTION")]
+        AutoModerationAction = 24
     }
 }

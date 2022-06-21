@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.AutoMod;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
@@ -1454,6 +1455,18 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             InvalidSnowflakeException.ThrowIfInvalid(stickerId, nameof(stickerId));
             client.Bot.Rest.DoRequest(client,$"/guilds/{Id}/stickers/{stickerId}", RequestMethod.DELETE, null, callback, error);
         }
+        
+        /// <inheritdoc cref="AutoModRule.ListRules"/>
+        public void ListAutoModRules(DiscordClient client, Action<List<AutoModRule>> callback = null, Action<RequestError> error = null) 
+            => AutoModRule.ListRules(client, Id, callback, error);
+
+        /// <inheritdoc cref="AutoModRule.GetRule"/>
+        public void GetAutoModRule(DiscordClient client, Snowflake ruleId, Action<AutoModRule> callback = null, Action<RequestError> error = null) 
+            => AutoModRule.GetRule(client, Id, ruleId, callback, error);
+
+        /// <inheritdoc cref="AutoModRule.CreateRule"/>
+        public void CreateAutoModRule(DiscordClient client, AutoModRuleCreate create, Action<AutoModRule> callback = null, Action<RequestError> error = null)
+            => AutoModRule.CreateRule(client, Id, create, callback, error);
         #endregion
 
         #region Entity Update Methods

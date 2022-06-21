@@ -299,5 +299,25 @@ namespace Oxide.Ext.Discord.WebSockets
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-delete">STAGE_INSTANCE_CREATE</a> gateway event
         /// </summary>
         [Description("STAGE_INSTANCE_DELETE")] StageInstanceDeleted,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-create">AUTO_MODERATION_RULE_CREATE</a> gateway event
+        /// </summary>
+        [Description("AUTO_MODERATION_RULE_CREATE")] AutoModerationRuleCreate,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-update">AUTO_MODERATION_RULE_UPDATE</a> gateway event
+        /// </summary>
+        [Description("AUTO_MODERATION_RULE_UPDATE")] AutoModerationRuleUpdate,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-delete">AUTO_MODERATION_RULE_DELETE</a> gateway event
+        /// </summary>
+        [Description("AUTO_MODERATION_RULE_DELETE")] AutoModerationRuleDelete,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution">AUTO_MODERATION_ACTION_EXECUTION</a> gateway event
+        /// </summary>
+        [Description("AUTO_MODERATION_ACTION_EXECUTION")] AutoModerationActionExecution,
     }
 }
