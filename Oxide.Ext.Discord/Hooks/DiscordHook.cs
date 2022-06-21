@@ -3,7 +3,6 @@ using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Hooks;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Hooks
 {

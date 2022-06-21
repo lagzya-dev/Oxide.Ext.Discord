@@ -4,7 +4,6 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Libraries;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription
 {

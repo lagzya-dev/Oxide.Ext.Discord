@@ -1,5 +1,4 @@
 using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Messages;
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.Channels

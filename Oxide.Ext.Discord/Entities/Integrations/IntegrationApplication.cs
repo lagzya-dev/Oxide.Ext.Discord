@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
 

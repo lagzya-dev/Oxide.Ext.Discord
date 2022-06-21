@@ -1,11 +1,9 @@
 using System;
 using System.Threading;
-using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Callbacks.ThreadPool;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;

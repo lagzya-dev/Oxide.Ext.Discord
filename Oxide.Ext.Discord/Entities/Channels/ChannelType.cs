@@ -1,5 +1,4 @@
-﻿using System;
-namespace Oxide.Ext.Discord.Entities.Channels
+﻿namespace Oxide.Ext.Discord.Entities.Channels
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-channel-types">Types of Channels</a>
