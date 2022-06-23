@@ -123,16 +123,16 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 _requests.Remove(handler);
             }
         }
-        
-        internal int RequestCount()
+
+        private int RequestCount()
         {
             lock (_syncRoot)
             {
                 return _requests.Count;
             }
         }
-        
-        internal RequestHandler GetRequest(int index)
+
+        private RequestHandler GetRequest(int index)
         {
             lock (_syncRoot)
             {
