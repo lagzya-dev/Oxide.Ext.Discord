@@ -15,7 +15,6 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     public class ApplicationCommandBuilder
     {
         internal readonly CommandCreate Command;
-        private readonly List<CommandOption> _options;
         private CommandOptionType? _chosenType;
 
         /// <summary>
@@ -28,15 +27,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         {
             InvalidApplicationCommandException.ThrowIfInvalidName(name, false);
             InvalidApplicationCommandException.ThrowIfInvalidDescription(description, false);
-
-            _options = new List<CommandOption>();
-            Command = new CommandCreate
-            {
-                Name = name,
-                Description = description,
-                Type = type,
-                Options = _options
-            };
+            
+            Command = new CommandCreate(name, description, type, new List<CommandOption>());
         }
 
         /// <summary>
@@ -135,7 +127,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 
             _chosenType = CommandOptionType.SubCommand;
 
-            return new SubCommandBuilder(_options, name, description);
+            return new SubCommandBuilder(Command.Options, name, description);
         }
 
         /// <summary>
@@ -149,7 +141,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         {
             ApplicationCommandBuilderException.ThrowIfMixingCommandOptions(_chosenType);
 
-            return new ApplicationCommandOptionBuilder(_options, type, name, description, this);
+            return new ApplicationCommandOptionBuilder(Command.Options, type, name, description, this);
         }
 
         /// <summary>

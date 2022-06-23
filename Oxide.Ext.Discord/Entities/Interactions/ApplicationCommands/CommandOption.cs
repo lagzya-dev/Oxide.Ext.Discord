@@ -87,5 +87,21 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("autocomplete")]
         public bool? Autocomplete { get; set; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CommandOption() { }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CommandOption(string name, string description, CommandOptionType type, List<CommandOption> options = null)
+        {
+            Name = name;
+            Description = description;
+            Type = type;
+            Options = options;
+        }
     }
 }

@@ -18,13 +18,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         internal SubCommandBuilder(List<CommandOption> parent, string name, string description)
         {
             _options = new List<CommandOption>();
-            parent.Add(new CommandOption
-            {
-                Name = name,
-                Description = description,
-                Type = CommandOptionType.SubCommand,
-                Options = _options
-            });
+            parent.Add(new CommandOption(name, description, CommandOptionType.SubCommand, _options));
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
@@ -43,19 +44,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("options")]
         public List<CommandOption> Options { get; set; }
-        
-        [JsonProperty("default_member_permissions")]
-        private string _defaultMemberPermissions = "0";
 
         /// <summary>
         /// Set of permissions represented as a bit set
         /// </summary>
-        public PermissionFlags DefaultMemberPermissions
-        {
-            get => !string.IsNullOrEmpty(_defaultMemberPermissions) ? (PermissionFlags)ulong.Parse(_defaultMemberPermissions) : PermissionFlags.None;
-            set => _defaultMemberPermissions = ((ulong)value).ToString();
-        }
-        
+        [JsonProperty("default_member_permissions")]
+        [JsonConverter(typeof(PermissionFlagsStringConverter))]
+        public PermissionFlags DefaultMemberPermissions { get; set; }
+
         /// <summary>
         /// Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
         /// </summary>
@@ -74,6 +70,25 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         [JsonProperty("type")]
         public ApplicationCommandType? Type { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CommandCreate()
+        {
+            
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CommandCreate(string name, string description, ApplicationCommandType type = ApplicationCommandType.ChatInput, List<CommandOption> options = null)
+        {
+            Name = name;
+            Description = description;
+            Type = type;
+            Options = options;
+        }
+        
         /// <inheritdoc/>
         public void Validate()
         {

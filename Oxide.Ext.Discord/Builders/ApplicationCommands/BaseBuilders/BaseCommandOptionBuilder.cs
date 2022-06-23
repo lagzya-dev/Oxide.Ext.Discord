@@ -25,12 +25,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
             InvalidCommandOptionException.ThrowIfInvalidDescription(description, false);
             InvalidCommandOptionException.ThrowIfInvalidType(type);
 
-            _option = new CommandOption
-            {
-                Name = name,
-                Description = description,
-                Type = type
-            };
+            _option = new CommandOption(name, description, type);
             parent.Add(_option);
             _builder = (TBuilder)this;
             _parent = parentBuilder;
