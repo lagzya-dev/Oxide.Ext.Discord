@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private readonly BotClient _client;
         private WebSocket _socket;
         private SocketListener _listener;
-        private readonly SocketCommandHandler _commands;
+        internal readonly SocketCommandHandler Commands;
         private readonly ILogger _logger;
 
         private readonly object _lock = new object();
@@ -52,8 +52,8 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _client = client;
             _logger = logger;
-            _commands = new SocketCommandHandler(client, this, logger);
-            _listener = new SocketListener(_client, this, _logger, _commands);
+            Commands = new SocketCommandHandler(client, this, logger);
+            _listener = new SocketListener(_client, this, _logger, Commands);
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             RequestedReconnect = attemptReconnect;
             ShouldAttemptResume = shouldResume;
-            _commands.OnSocketDisconnected();
+            Commands.OnSocketDisconnected();
 
             if (_reconnectTimer != null)
             {
@@ -198,7 +198,7 @@ namespace Oxide.Ext.Discord.WebSockets
         public void Send(GatewayCommandCode opCode, object data)
         {
             CommandPayload payload = CommandPayload.CreatePayload(opCode, data);
-            _commands.Enqueue(payload);
+            Commands.Enqueue(payload);
         }
         
         internal bool Send(CommandPayload payload)

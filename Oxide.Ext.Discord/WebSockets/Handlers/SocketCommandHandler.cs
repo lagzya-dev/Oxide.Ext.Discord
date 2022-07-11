@@ -206,5 +206,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _rateLimitTimer?.Dispose();
             _rateLimitTimer = null;
         }
+
+        internal List<CommandPayload> GetPendingCommands()
+        {
+            lock (_syncRoot)
+            {
+                return _pendingCommands;
+            }
+        }
     }
 }

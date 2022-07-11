@@ -130,7 +130,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// <summary>
         /// - Guild Message.Content
         /// </summary>
-        MessageContentIntent = 1 << 15,
+        MessageContent = 1 << 15,
         
         /// <summary>
         /// - GUILD_SCHEDULED_EVENT_CREATE

@@ -85,12 +85,12 @@ namespace Oxide.Ext.Discord
         
         internal GatewayReadyEvent ReadyData;
 
-        private Socket _webSocket;
+        internal Socket WebSocket;
 
         /// <summary>
         /// List of all clients that are using this bot client
         /// </summary>
-        private readonly List<DiscordClient> _clients = new List<DiscordClient>();
+        internal readonly List<DiscordClient> Clients = new List<DiscordClient>();
 
         /// <summary>
         /// Creates a new bot client for the given settings
@@ -111,7 +111,7 @@ namespace Oxide.Ext.Discord
 
             Hooks = new DiscordHook(Logger);
             Rest = new RestHandler(this, Logger);
-            _webSocket = new Socket(this, Logger);
+            WebSocket = new Socket(this, Logger);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Oxide.Ext.Discord
             if (Initialized)
             {
                 Logger.Debug($"{nameof(BotClient)}.{nameof(ConnectWebSocket)} Connecting to websocket");
-                _webSocket.Connect();
+                WebSocket.Connect();
             }
         }
 
@@ -154,7 +154,7 @@ namespace Oxide.Ext.Discord
         {
             if (Initialized)
             {
-                _webSocket.Disconnect(reconnect, resume);
+                WebSocket.Disconnect(reconnect, resume);
             }
         }
 
@@ -166,8 +166,8 @@ namespace Oxide.Ext.Discord
             Logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
             ActiveBots.Remove(Settings.ApiToken);
             Initialized = false;
-            _webSocket?.Shutdown();
-            _webSocket = null;
+            WebSocket?.Shutdown();
+            WebSocket = null;
             Rest?.Shutdown();
             Rest = null;
             ReadyData = null;
@@ -181,14 +181,14 @@ namespace Oxide.Ext.Discord
         {
             TokenMismatchException.ThrowIfMismatchedToken(client, Settings);
 
-            _clients.RemoveAll(c => c == client);
-            _clients.Add(client);
+            Clients.RemoveAll(c => c == client);
+            Clients.Add(client);
             client.Bot = this;
             Hooks.AddPlugin(client.Plugin);
             
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
             
-            if (_clients.Count == 1)
+            if (Clients.Count == 1)
             {
                 Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Clients.Count == 1 connecting bot");
                 ConnectWebSocket();
@@ -237,10 +237,10 @@ namespace Oxide.Ext.Discord
         /// <param name="client">Client to remove from bot client</param>
         public void RemoveClient(DiscordClient client)
         {
-            _clients.Remove(client);
+            Clients.Remove(client);
             Hooks.RemovePlugin(client.Plugin);
             Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} {{0}} Client Removed", client.PluginName);
-            if (_clients.Count == 0)
+            if (Clients.Count == 0)
             {
                 ShutdownBot();
                 Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Bot count 0 shutting down bot");
@@ -248,9 +248,9 @@ namespace Oxide.Ext.Discord
             }
 
             DiscordLogLevel level = DiscordLogLevel.Off;
-            for (int index = 0; index < _clients.Count; index++)
+            for (int index = 0; index < Clients.Count; index++)
             {
-                DiscordClient remainingClient = _clients[index];
+                DiscordClient remainingClient = Clients[index];
                 if (remainingClient.Settings.LogLevel < level)
                 {
                     level = remainingClient.Settings.LogLevel;
@@ -263,9 +263,9 @@ namespace Oxide.Ext.Discord
             }
             
             GatewayIntents intents = GatewayIntents.None;
-            for (int index = 0; index < _clients.Count; index++)
+            for (int index = 0; index < Clients.Count; index++)
             {
-                DiscordClient exitingClients = _clients[index];
+                DiscordClient exitingClients = Clients[index];
                 intents |= exitingClients.Settings.Intents;
             }
 
@@ -280,11 +280,11 @@ namespace Oxide.Ext.Discord
         public string GetClientPluginList()
         {
             StringBuilder sb = DiscordPool.GetStringBuilder();
-            for (int index = 0; index < _clients.Count; index++)
+            for (int index = 0; index < Clients.Count; index++)
             {
-                DiscordClient client = _clients[index];
+                DiscordClient client = Clients[index];
                 sb.Append(client.PluginName);
-                if (index + 1 != _clients.Count)
+                if (index + 1 != Clients.Count)
                 {
                     sb.Append(",");
                 }
@@ -307,7 +307,7 @@ namespace Oxide.Ext.Discord
         /// <returns></returns>
         internal DiscordClient GetFirstClient()
         {
-            return _clients.Count != 0 ? _clients[0] : null;
+            return Clients.Count != 0 ? Clients[0] : null;
         }
 
         #region Websocket Commands
@@ -319,7 +319,7 @@ namespace Oxide.Ext.Discord
         {
             if (Initialized)
             {
-                _webSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
+                WebSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
             }
         }
 
@@ -331,7 +331,7 @@ namespace Oxide.Ext.Discord
         {
             if (Initialized)
             {
-                _webSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
+                WebSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
             }
         }
 
@@ -343,7 +343,7 @@ namespace Oxide.Ext.Discord
         {
             if (Initialized)
             {
-                _webSocket.Send(GatewayCommandCode.PresenceUpdate, presenceUpdate);
+                WebSocket.Send(GatewayCommandCode.PresenceUpdate, presenceUpdate);
             }
         }
         #endregion
@@ -456,9 +456,9 @@ namespace Oxide.Ext.Discord
         #region Discord Command Helpers
         internal bool IsPluginRegistered(Plugin plugin)
         {
-            for (int index = 0; index < _clients.Count; index++)
+            for (int index = 0; index < Clients.Count; index++)
             {
-                DiscordClient client = _clients[index];
+                DiscordClient client = Clients[index];
                 if (client.Plugin == plugin)
                 {
                     return true;

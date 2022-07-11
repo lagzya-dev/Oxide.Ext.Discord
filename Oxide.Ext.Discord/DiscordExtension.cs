@@ -46,6 +46,8 @@ namespace Oxide.Ext.Discord
         internal static DiscordSubscriptions DiscordSubscriptions;
         internal static DiscordConfig DiscordConfig;
 
+        internal static bool IsShuttingDown;
+
         /// <summary>
         /// Constructor for the extension
         /// </summary>

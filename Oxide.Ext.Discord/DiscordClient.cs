@@ -94,10 +94,10 @@ namespace Oxide.Ext.Discord
                 Logger.Warning("Using Discord Test Version: {0}", DiscordExtension.FullExtensionVersion);
             }
 
-            if ((settings.Intents & GatewayIntents.GuildMessages) != 0 && (settings.Intents & GatewayIntents.MessageContentIntent) == 0)
+            if ((settings.Intents & GatewayIntents.GuildMessages) != 0 && (settings.Intents & GatewayIntents.MessageContent) == 0)
             {
-                settings.Intents |= GatewayIntents.MessageContentIntent;
-                Logger.Warning("Plugin {0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContentIntent", Plugin.Name);
+                settings.Intents |= GatewayIntents.MessageContent;
+                Logger.Warning("Plugin {0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContent", Plugin.Name);
             }
             
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.Name);
@@ -209,6 +209,11 @@ namespace Oxide.Ext.Discord
         {
             DiscordClient client = Clients[plugin.Name];
             if (client == null)
+            {
+                return;
+            }
+
+            if (DiscordExtension.IsShuttingDown)
             {
                 return;
             }

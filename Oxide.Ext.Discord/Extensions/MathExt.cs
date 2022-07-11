@@ -21,5 +21,29 @@ namespace Oxide.Ext.Discord.Extensions
             if (val.CompareTo(max) > 0) return max;
             return val;
         }
+
+        /// <summary>
+        /// Returns the min value between left and right
+        /// </summary>
+        /// <param name="left">Left argument</param>
+        /// <param name="right">Right argument</param>
+        /// <typeparam name="T">Type of IComparable{T}</typeparam>
+        /// <returns>Left if less than or equal to right else right</returns>
+        public static T Min<T>(T left, T right) where T : IComparable<T>
+        {
+            return left.CompareTo(right) > 0 ? right : left;
+        }
+        
+        /// <summary>
+        /// Returns the Max value between left and right
+        /// </summary>
+        /// <param name="left">Left argument</param>
+        /// <param name="right">Right argument</param>
+        /// <typeparam name="T">Type of IComparable{T}</typeparam>
+        /// <returns>Left if greater than or equal to right else right</returns>
+        public static T Max<T>(T left, T right) where T : IComparable<T>
+        {
+            return left.CompareTo(right) < 0 ? right : left;
+        }
     }
 }
