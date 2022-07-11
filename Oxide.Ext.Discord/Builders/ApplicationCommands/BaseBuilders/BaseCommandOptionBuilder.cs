@@ -104,7 +104,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <summary>
         /// Max Value for Integer Option
         /// </summary>
-        /// <param name="maxValue">Min Value</param>
+        /// <param name="maxValue">Max Value</param>
         /// <returns>This</returns>
         public TBuilder SetMaxValue(int maxValue)
         {
@@ -116,12 +116,36 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <summary>
         /// Max Value for Number Option
         /// </summary>
-        /// <param name="maxValue">Min Value</param>
+        /// <param name="maxValue">Max Value</param>
         /// <returns>This</returns>
         public TBuilder SetMaxValue(double maxValue)
         {
             InvalidCommandOptionException.ThrowIfInvalidMaxNumberType(_option.Type);
             _option.MaxValue = maxValue;
+            return _builder;
+        }
+        
+        /// <summary>
+        /// Min Length for String Option
+        /// </summary>
+        /// <param name="minLength">Min Length for the string</param>
+        /// <returns>This</returns>
+        public TBuilder SetMinLength(int minLength)
+        {
+            InvalidCommandOptionException.ThrowIfInvalidMinLengthType(_option.Type);
+            _option.MinLength = minLength;
+            return _builder;
+        }
+        
+        /// <summary>
+        /// Max Length for String Option
+        /// </summary>
+        /// <param name="maxLength">Max Length</param>
+        /// <returns>This</returns>
+        public TBuilder SetMaxLength(int maxLength)
+        {
+            InvalidCommandOptionException.ThrowIfInvalidMaxLengthType(_option.Type);
+            _option.MaxLength = maxLength;
             return _builder;
         }
         

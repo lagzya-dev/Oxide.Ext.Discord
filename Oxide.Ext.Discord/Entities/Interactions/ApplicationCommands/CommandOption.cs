@@ -83,6 +83,18 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public double? MaxValue { get; set; }
         
         /// <summary>
+        /// For option type STRING, the minimum allowed length (minimum of 0)
+        /// </summary>
+        [JsonProperty("min_length")]
+        public int? MinLength { get; set; }
+        
+        /// <summary>
+        /// For option type STRING, the maximum allowed length (minimum of 1)
+        /// </summary>
+        [JsonProperty("max_length")]
+        public int? MaxLength { get; set; }
+        
+        /// <summary>
         /// If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
         /// </summary>
         [JsonProperty("autocomplete")]

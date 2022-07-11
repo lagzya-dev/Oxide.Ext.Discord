@@ -75,6 +75,22 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
             }
         }
         
+        internal static void ThrowIfInvalidMinLengthType(CommandOptionType type)
+        {
+            if (type != CommandOptionType.String)
+            {
+                throw new InvalidCommandOptionException("Can only set min length for string Type");
+            }
+        }
+        
+        internal static void ThrowIfInvalidMaxLengthType(CommandOptionType type)
+        {
+            if (type != CommandOptionType.String)
+            {
+                throw new InvalidCommandOptionException("Can only set max length for string Type");
+            }
+        }
+        
         internal static void ThrowIfInvalidChannelType(CommandOptionType type)
         {
             if (type != CommandOptionType.Channel)
