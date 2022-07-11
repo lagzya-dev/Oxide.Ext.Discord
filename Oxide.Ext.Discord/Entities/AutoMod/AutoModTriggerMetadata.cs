@@ -22,5 +22,12 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// </summary>
         [JsonProperty("presets")]
         public List<AutoModKeywordPresetType> Presets { get; set; }
+        
+        /// <summary>
+        /// Associated Trigger Types: <see cref="AutoModTriggerType.KeywordPreset"/>
+        /// Substrings which will be exempt from triggering the preset trigger type
+        /// </summary>
+        [JsonProperty("allow_list")]
+        public List<string> AllowList { get; set; }
     }
 }
