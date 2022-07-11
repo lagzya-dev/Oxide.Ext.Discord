@@ -34,13 +34,13 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
+            ArrayPool.Free(Args);
             DiscordPool.Free(this);
         }
 
         protected override void EnterPool()
         {
             base.EnterPool();
-            ArrayPool.Free(Args);
             _plugins = null;
         }
     }

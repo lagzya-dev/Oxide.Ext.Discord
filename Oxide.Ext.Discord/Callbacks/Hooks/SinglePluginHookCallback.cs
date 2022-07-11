@@ -29,6 +29,7 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
+            ArrayPool.Free(Args);
             DiscordPool.Free(this);
         }
         
@@ -36,7 +37,6 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
         {
             base.EnterPool();
             _plugin = null;
-            ArrayPool.Free(Args);
         }
     }
 }
