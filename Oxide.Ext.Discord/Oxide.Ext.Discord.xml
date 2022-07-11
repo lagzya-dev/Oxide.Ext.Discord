@@ -110,7 +110,7 @@
             Discord Extension JSON Serialization settings
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.BotClient._clients">
+        <member name="F:Oxide.Ext.Discord.BotClient.Clients">
             <summary>
             List of all clients that are using this bot client
             </summary>
@@ -1212,13 +1212,13 @@
             <param name="value">Enum value</param>
             <returns>Enum value as lowered string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiCallback.DisposeInternal">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback.DisposeInternal">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiCallback`1.DisposeInternal">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback`1.DisposeInternal">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiCallback`1.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback`1.EnterPool">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseCallback">
@@ -2109,6 +2109,38 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordAutoModRuleCreated">
+            <code>
+            void OnDiscordAutoModRuleCreated(AutoModRule rule, DiscordGuild guild)
+            {
+                Puts("OnDiscordAutoModRuleCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordAutoModRuleUpdated">
+            <code>
+            void OnDiscordAutoModRuleUpdated(AutoModRule rule, DiscordGuild guild)
+            {
+                Puts("OnDiscordAutoModRuleUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordAutoModRuleDeleted">
+            <code>
+            void OnDiscordAutoModRuleDeleted(AutoModRule rule, DiscordGuild guild)
+            {
+                Puts("OnDiscordAutoModRuleDeleted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordAutoModActionExecuted">
+            <code>
+            void OnDiscordAutoModActionExecuted(AutoModActionExecutionEvent rule, DiscordGuild guild)
+            {
+                Puts("OnDiscordAutoModActionExecuted Works!");
+            }
+            </code>
+        </member>
         <member name="T:Oxide.Ext.Discord.Constants.RateLimitHeaders">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/rate-limits#header-format">Header Format</a>
@@ -2147,6 +2179,11 @@
         <member name="F:Oxide.Ext.Discord.Constants.RateLimitHeaders.BucketReset">
             <summary>
             Epoch time (seconds since 00:00:00 UTC on January 1, 1970) at which the rate limit resets
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.RateLimitHeaders.Scope">
+            <summary>
+            Scope of the rate limit
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.DiscordClient">
@@ -2614,26 +2651,6 @@
             Returns the small image url for the presence asset
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Api.DiscordApiError">
-            <summary>
-            Represents an <a href="https://discord.com/developers/docs/reference#error-messages">error from the discord API</a> 
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.DiscordApiError.Code">
-            <summary>
-            Error code from the discord API
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.DiscordApiError.Message">
-            <summary>
-            Error message from the discord API
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.DiscordApiError.Errors">
-            <summary>
-            An JObject containing the errors that occured
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Api.RateLimitResponse">
             <summary>
             Represents a rate limit response from an API request
@@ -2644,7 +2661,7 @@
             The Bucket ID of the rate limit
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.HitGlobalRateLimit">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.IsGlobalRateLimit">
             <summary>
             If we hit the global rate limit with this request
             </summary>
@@ -2654,14 +2671,19 @@
             The date time when this bucket will reset
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.BucketLimit">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Limit">
             <summary>
             The number of request for this bucket
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.BucketRemaining">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Remaining">
             <summary>
             The number of remaining requests for this bucket
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Scope">
+            <summary>
+            The scope the rate limit is for
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Init(System.Net.WebHeaderCollection,Oxide.Ext.Discord.Logging.ILogger)">
@@ -2680,6 +2702,11 @@
         <member name="T:Oxide.Ext.Discord.Entities.Api.RequestError">
             <summary>
             Error object that is returned to the caller when a request fails
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.RequestId">
+            <summary>
+            ID of the request
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.RequestMethod">
@@ -2715,11 +2742,6 @@
         <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.StringContents">
             <summary>
             The string contents of the request
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.Contents">
-            <summary>
-            The byte[] contents of the request
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.HttpStatusCode">
@@ -2769,9 +2791,9 @@
             <param name="code">HTTP Response Code</param>
             <param name="message">HTTP Response Body Text</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetApiError(Oxide.Ext.Discord.Entities.Api.DiscordApiError)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetApiError(Oxide.Ext.Discord.Entities.Api.RequestErrorMessage)">
             <summary>
-            Sets the <see cref="T:Oxide.Ext.Discord.Entities.Api.DiscordApiError"/> if one occured
+            Sets the <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage"/> if one occured
             </summary>
             <param name="error">Discord API Error to be set</param>
         </member>
@@ -2780,9 +2802,34 @@
             Performs the error logging for the request
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage">
+            <summary>
+            Represents an <a href="https://discord.com/developers/docs/reference#error-messages">error from the discord API</a> 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage.Code">
+            <summary>
+            Error code from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage.Message">
+            <summary>
+            Error message from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage.Errors">
+            <summary>
+            An JObject containing the errors that occured
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Api.RequestErrorType">
             <summary>
             Represents a Discord Request Error Type
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.GenericWeb">
+            <summary>
+            A generic web error occured
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.Internal">
@@ -2798,11 +2845,6 @@
         <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.ApiError">
             <summary>
             An Invalid request was passed to discord
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.GenericWeb">
-            <summary>
-            A generic web error occured
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Api.RequestErrorType.Serialization">
@@ -2896,6 +2938,13 @@
             </summary>
             <param name="client">Client the request was for</param>
             <returns>A cancelled <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestResponse"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.CreateUnhandledExceptionResponse(Oxide.Ext.Discord.Rest.Requests.RequestHandler)">
+            <summary>
+            Creates a REST API response for an unhandled exception
+            </summary>
+            <param name="handler">Handler for the request</param>
+            <returns>A unhandled exception <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestResponse"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.ParseData``1">
             <summary>
@@ -3781,6 +3830,333 @@
         <member name="P:Oxide.Ext.Discord.Entities.AuditLogs.OptionalAuditEntryInfo.RoleName">
             <summary>
             
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModAction">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object">Auto Mod Action</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModAction.Type">
+            <summary>
+            Type of <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModAction.Metadata">
+            <summary>
+            Additional metadata needed during execution for this specific action type
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionMetadata">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-metadata">Auto Mod Action Metadata</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionMetadata.ChannelId">
+            <summary>
+            Associated Action Type: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionType.SendAlertMessage"/>
+            Channel to which user content should be logged
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionMetadata.DurationSeconds">
+            <summary>
+            Associated Action Type: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionType.Timeout"/>
+            Timeout duration in seconds
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-types">Auto Mod Action Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionType.BlockMessage">
+            <summary>
+            Blocks the content of a message according to the rule
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionType.SendAlertMessage">
+            <summary>
+            Logs user content to a specified channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionType.Timeout">
+            <summary>
+            Timeout user for a specified duration
+            A TIMEOUT action can only be setup for KEYWORD rules.
+            MODERATE_MEMBERS permission is required to use the TIMEOUT action type.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModEventType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-event-types">Auto Mod Event Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModEventType.MessageSend">
+            <summary>
+            When a member sends or edits a message in the guild
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModKeywordPresetType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-keyword-preset-types">Auto Mod Keyword Preset Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModKeywordPresetType.Profanity">
+            <summary>
+            Words that may be considered forms of swearing or cursing
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModKeywordPresetType.SexualContent">
+            <summary>
+            Words that refer to sexually explicit behavior or activity
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModKeywordPresetType.Slurs">
+            <summary>
+            Personal insults or words that may be considered hate speech
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object">Auto Mod Rule</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Id">
+            <summary>
+            Id of this rule
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.GuildId">
+            <summary>
+            Guild which this rule belongs to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Name">
+            <summary>
+            Rule name
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.CreatorId">
+            <summary>
+            User which first created this rule
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.EventType">
+            <summary>
+            Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModEventType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.TriggerType">
+            <summary>
+            Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.TriggerMetadata">
+            <summary>
+            Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Actions">
+            <summary>
+            Actions which will execute when the rule is triggered
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Enabled">
+            <summary>
+            Whether the rule is enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.ExemptRoles">
+            <summary>
+            Role ids that should not be affected by the rule (Maximum of 20)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.ExemptChannels">
+            <summary>
+            Channel ids that should not be affected by the rule (Maximum of 50)
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.ListRules(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Modify an existing rule
+            Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
+            See <a href="https://discord.com/developers/docs/resources/auto-moderation#list-auto-moderation-rules-for-guild">List Auto Moderation Rules for Guild</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild ID to list the rules for</param>
+            <param name="callback">Callback once the action is completed with the list of <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule"/></param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.GetRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Get a single rule
+            Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
+            See <a href="https://discord.com/developers/docs/resources/auto-moderation#get-auto-moderation-rule">Get Auto Moderation Rule</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild ID of the rule</param>
+            <param name="ruleId">Rule ID to get the rule for</param>
+            <param name="callback">Callback once the action is completed with <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule"/> with the matching ID</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.CreateRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate,System.Action{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Create a new rule
+            Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
+            See <a href="https://discord.com/developers/docs/resources/auto-moderation#create-auto-moderation-rule">Create Auto Moderation Rule</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="guildId">Guild ID of the rule</param>
+            <param name="create">Rule to be created</param>
+            <param name="callback">Callback once the action is completed with <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule"/> with the matching ID</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Modify(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify,System.Action{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Modify an existing rule
+            Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
+            See <a href="https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule">Modify Auto Moderation Rule</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="modify"><see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify"/></param>
+            <param name="callback">Callback once the action is completed with the created <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule"/></param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Delete(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Delete a rule
+            Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
+            See <a href="https://discord.com/developers/docs/resources/auto-moderation#delete-auto-moderation-rule">Delete Auto Moderation Rule</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#create-auto-moderation-rule-json-params">Auto Mod Rule Create</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate.Name">
+            <summary>
+            Rule name
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate.EventType">
+            <summary>
+            Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModEventType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate.TriggerType">
+            <summary>
+            Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate.TriggerMetadata">
+            <summary>
+            Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate.Actions">
+            <summary>
+            Actions which will execute when the rule is triggered
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate.Enabled">
+            <summary>
+            Whether the rule is enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate.ExemptRoles">
+            <summary>
+            Role ids that should not be affected by the rule (Maximum of 20)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate.ExemptChannels">
+            <summary>
+            Channel ids that should not be affected by the rule (Maximum of 50)
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule-json-params">Auto Mod Rule Modify</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.Name">
+            <summary>
+            Rule name
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.EventType">
+            <summary>
+            Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModEventType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.TriggerMetadata">
+            <summary>
+            Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.Actions">
+            <summary>
+            Actions which will execute when the rule is triggered
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.Enabled">
+            <summary>
+            Whether the rule is enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.ExemptRoles">
+            <summary>
+            Role ids that should not be affected by the rule (Maximum of 20)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.ExemptChannels">
+            <summary>
+            Channel ids that should not be affected by the rule (Maximum of 50)
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-metadata">Auto Mod Trigger Metadata</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata.KeywordFilter">
+            <summary>
+            Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.Keyword"/>
+            Substrings which will be searched for in content
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata.Presets">
+            <summary>
+            Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.KeywordPreset"/>
+            The internally pre-defined wordsets which will be searched for in content
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types">Auto Mod Trigger Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.Keyword">
+            <summary>
+            Check if content contains words from a user defined list of keywords
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.HarmfulLink">
+            <summary>
+            Check if content contains any harmful links
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.Spam">
+            <summary>
+            Check if content represents generic spam
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.KeywordPreset">
+            <summary>
+            Check if content contains words from internal pre-defined wordsets
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
@@ -5571,6 +5947,61 @@
         <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EnterPool">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution-auto-moderation-action-execution-event-fields">Auto Moderation Action Execution Event</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.GuildId">
+            <summary>
+            Id of the guild in which action was executed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.Action">
+            <summary>
+            The action which was executed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.RuleId">
+            <summary>
+            Id of the rule which action belongs to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.RuleTriggerType">
+            <summary>
+            The <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType"/> of rule which was triggered
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.UserId">
+            <summary>
+            Id of the user which generated the content which triggered the rule
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.MessageId">
+            <summary>
+            Id of any user message which content belongs to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.AlertSystemMessageId">
+            <summary>
+            The id of any system auto moderation messages posted as a result of this action
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.Content">
+            <summary>
+            The user generated text content
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.MatchedKeyword">
+            <summary>
+            The word or phrase configured in the rule that triggered the rule
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.MatchedContent">
+            <summary>
+            The substring in content that triggered the rule
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ChannelPinsUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#channel-pins-update">Channel Pins Update</a>
@@ -6465,7 +6896,7 @@
             - TYPING_START
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.MessageContentIntent">
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.MessageContent">
             <summary>
             - Guild Message.Content
             </summary>
@@ -6477,6 +6908,18 @@
             - GUILD_SCHEDULED_EVENT_DELETE
             - GUILD_SCHEDULED_EVENT_USER_ADD
             - GUILD_SCHEDULED_EVENT_USER_REMOVE
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.AutoModerationConfiguration">
+            <summary>
+            - AUTO_MODERATION_RULE_CREATE
+            - AUTO_MODERATION_RULE_UPDATE
+            - AUTO_MODERATION_RULE_DELETE
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.AutoModerationExecution">
+            <summary>
+            - AUTO_MODERATION_ACTION_EXECUTION
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.DefaultNotificationLevel">
@@ -7213,6 +7656,17 @@
             <param name="callback">Callback with the updated role</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildMFALevel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Modify a guild's MFA level.
+            Requires guild ownership.
+            See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level">Modify Guild MFA Level</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="level"><see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel"/> to set</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Delete a guild role.
@@ -7503,6 +7957,15 @@
             <param name="error">Callback when an error occurs with error information</param>
             See <a href="https://discord.com/developers/docs/resources/sticker#delete-guild-sticker">Delete Guild Sticker</a>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListAutoModRules(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.ListRules(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetAutoModRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.GetRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateAutoModRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate,System.Action{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.CreateRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate,System.Action{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})"/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.ExplicitContentFilterLevel">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level">Explicit Content Filter Level</a>
@@ -7703,6 +8166,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.AnimatedIcon">
             <summary>
             Guild has access to set an animated guild icon
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.AutoModeration">
+            <summary>
+            Guild has set up auto moderation rules
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Banner">
@@ -8202,6 +8670,16 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildSearchMembers.Validate">
             <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level-json-params">Guild MFA Level Update</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel.Level">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMfaLevel"/>
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate">
             <summary>
@@ -9145,6 +9623,16 @@
             The type of command, defaults Slash Command if not set
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption})">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.Validate">
             <inheritdoc/>
         </member>
@@ -9232,6 +9720,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Autocomplete">
             <summary>
             If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption})">
+            <summary>
+            Constructor
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice">
@@ -11977,6 +12475,11 @@
             Reminder for a guild invite
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.AutoModerationAction">
+            <summary>
+            Message is an auto mod action
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordColor">
             <summary>
             Represents a Discord Color
@@ -12915,7 +13418,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerType.Guild">
             <summary>
-            A sticker uploaded to a Boosted guild for the guild's members
+            A sticker uploaded to a guild for the guild's members
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Teams.DiscordTeam">
@@ -14018,6 +14521,12 @@
             Override the default avatar of the webhook
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage.ThreadName">
+            <summary>
+            Name of thread to create
+            Requires the webhook channel to be a forum channel
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage.ValidateFlags">
             <inheritdoc/>
         </member>
@@ -14488,6 +14997,24 @@
             <param name="max">Max Value</param>
             <typeparam name="T">Type to be clamped</typeparam>
             <returns>Value of {T} clamped between min and max</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.MathExt.Min``1(``0,``0)">
+            <summary>
+            Returns the min value between left and right
+            </summary>
+            <param name="left">Left argument</param>
+            <param name="right">Right argument</param>
+            <typeparam name="T">Type of IComparable{T}</typeparam>
+            <returns>Left if less than or equal to right else right</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.MathExt.Max``1(``0,``0)">
+            <summary>
+            Returns the Max value between left and right
+            </summary>
+            <param name="left">Left argument</param>
+            <param name="right">Right argument</param>
+            <typeparam name="T">Type of IComparable{T}</typeparam>
+            <returns>Left if greater than or equal to right else right</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.PlayerExt">
             <summary>
@@ -15261,6 +15788,36 @@
             Message Component Convert does not write JSON
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Json.Converters.PermissionFlagsStringConverter">
+            <summary>
+            Converts Permission Flags to and from a JSON string
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.PermissionFlagsStringConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes Permission Flags as a JSON string
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.PermissionFlagsStringConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Converts the ulong JSON string to Permission Flags
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.PermissionFlagsStringConverter.CanConvert(System.Type)">
+            <summary>
+            Returns if the type equals PermissionFlags
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Json.Converters.SnowflakeConverter">
             <summary>
             Converts a snowflake to and from it's JSON string value
@@ -15693,9 +16250,6 @@
             Represents a File Logger for Discord
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.DiscordFileLogger.FileMessage.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Logging.DiscordLogger">
             <summary>
             Represents a discord extension logger
@@ -16114,7 +16668,7 @@
             Contains bucket information for a REST API Bucket
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Buckets.Bucket.BucketId">
+        <member name="F:Oxide.Ext.Discord.Rest.Buckets.Bucket.Id">
             <summary>
             The ID of this bucket which is based on the route
             </summary>
@@ -16316,7 +16870,7 @@
             Represents a base request class for REST API calls
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.RequestId">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Id">
             <summary>
             ID of the request. Generated from the DateTimeOffset when the request was created
             </summary>
@@ -16324,6 +16878,11 @@
         <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Method">
             <summary>
             HTTP request method
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Status">
+            <summary>
+            Current status of the request
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Route">
@@ -16336,7 +16895,7 @@
             Data to be sent with the request
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Requests.BaseRequest.RequestUrl">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.RequestUrl">
             <summary>
             Returns the full web url for the request
             </summary>
@@ -16361,7 +16920,22 @@
             Initializes the request
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.OnRequestSuccess(Oxide.Ext.Discord.Entities.Api.RequestResponse)">
+            <summary>
+            Callback for successful API Calls
+            </summary>
+            <param name="response">Response for the API Call</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.OnRequestError(Oxide.Ext.Discord.Entities.Api.RequestResponse)">
+            <summary>
+            Callback for API calls that error
+            </summary>
+            <param name="response">Response for the error</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.LeavePool">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData">
@@ -16446,17 +17020,15 @@
             <param name="data">Data being passed into the request. Null if no data is passed</param>
             <param name="onSuccess">Callback when the web request finishes successfully</param>
             <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
-            <returns>A <see cref="T:Oxide.Ext.Discord.Rest.Requests.Request`1"/></returns>
+            <returns>A <see cref="T:Oxide.Ext.Discord.Rest.Requests.Request"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Initializes the Request
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.OnRequestCompleted(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Entities.Api.RequestResponse)">
-            <summary>
-            Handles a completed request
-            </summary>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.OnRequestSuccess(Oxide.Ext.Discord.Entities.Api.RequestResponse)">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.DisposeInternal">
             <inheritdoc/>
@@ -16494,16 +17066,6 @@
             Represent a Discord API request
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Requests.RequestHandler.InProgress">
-            <summary>
-            Returns if the request is currently in progress
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Requests.RequestHandler.Cancelled">
-            <summary>
-            Returns if the request was cancelled
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestHandler._requestUrl">
             <summary>
             Full Request URl to the API
@@ -16538,6 +17100,41 @@
         <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.EnterPool">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Rest.Requests.RequestStatus">
+            <summary>
+            Discord API Request Status
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.InQueue">
+            <summary>
+            Request is in the queue waiting to be processed
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.PendingBucket">
+            <summary>
+            Requesting is waiting for bucket to be ready
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.PendingStart">
+            <summary>
+            Request is waiting to start
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.InProgress">
+            <summary>
+            Request is in progress
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.Completed">
+            <summary>
+            Request completed and was not cancelled
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.Cancelled">
+            <summary>
+            Request was cancelled
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Rest.Requests.Request`1">
             <summary>
             Represents a REST API request that returns {T} data
@@ -16566,10 +17163,8 @@
             Initializes the Request
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.OnRequestCompleted(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Entities.Api.RequestResponse)">
-            <summary>
-            Handles a completed request
-            </summary>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.OnRequestSuccess(Oxide.Ext.Discord.Entities.Api.RequestResponse)">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.DisposeInternal">
             <inheritdoc/>
@@ -16948,6 +17543,26 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.StageInstanceDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-delete">STAGE_INSTANCE_CREATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.AutoModerationRuleCreate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-create">AUTO_MODERATION_RULE_CREATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.AutoModerationRuleUpdate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-update">AUTO_MODERATION_RULE_UPDATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.AutoModerationRuleDelete">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-delete">AUTO_MODERATION_RULE_DELETE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.AutoModerationActionExecution">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution">AUTO_MODERATION_ACTION_EXECUTION</a> gateway event
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler">
