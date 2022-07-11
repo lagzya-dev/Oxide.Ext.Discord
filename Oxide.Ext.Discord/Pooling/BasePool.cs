@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Logging;
+
 namespace Oxide.Ext.Discord.Pooling
 {
     /// <summary>
@@ -34,6 +36,10 @@ namespace Oxide.Ext.Discord.Pooling
                     _pool[_index] = null;
                     _index++;
                 }
+                else
+                {
+                    DiscordExtension.GlobalLogger.Warning("Pool {0} is leaking entities!!! {1}/{2}", GetType(), _index, _pool.Length);
+                }
             }
             
             if (item == null)
@@ -58,6 +64,7 @@ namespace Oxide.Ext.Discord.Pooling
 
             if (!OnFreeItem(ref item))
             {
+                //DiscordExtension.GlobalLogger.Debug("Skip Free Item: {0}", typeof(T).Name);
                 return;
             }
 
