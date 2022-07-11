@@ -25,10 +25,7 @@ namespace Oxide.Ext.Discord.Callbacks
         /// <summary>
         /// Overridden in the child class to handle the callback
         /// </summary>
-        protected virtual void HandleCallback()
-        {
-            
-        }
+        protected abstract void HandleCallback();
 
         private void CallbackInternal()
         {

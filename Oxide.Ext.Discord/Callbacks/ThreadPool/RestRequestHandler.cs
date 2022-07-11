@@ -1,4 +1,5 @@
 using System;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
@@ -13,6 +14,8 @@ namespace Oxide.Ext.Discord.Callbacks.ThreadPool
     public class RestRequestHandler : BaseThreadPoolHandler
     {
         private RequestHandler _handler;
+        private Bucket _bucket;
+        private BaseRequest _request; 
         private ILogger _logger;
 
         /// <summary>
@@ -31,66 +34,47 @@ namespace Oxide.Ext.Discord.Callbacks.ThreadPool
         private void Init(RequestHandler handler, ILogger logger)
         {
             _handler = handler;
+            _request = handler.Request;
+            _bucket = _request.Bucket;
             _logger = logger;
         }
         
         ///<inheritdoc/>
         protected override void HandleCallback(object data)
         {
-            string bucketId = GetBucketId();
-            AdjustableSemaphore semaphore = GetSemaphore();
+            string bucketId = _bucket.Id;
+            AdjustableSemaphore semaphore = _bucket.Semaphore;
+            _request.Status = RequestStatus.PendingBucket;
             
-            _logger.Debug("Waiting for bucket availability for Method: {0} Route: {1}", _handler.Request.Method, _handler.Request.Route);
+            _logger.Debug("Waiting for bucket availability for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
 
             try
             {
                 semaphore.WaitOne();
-                if (bucketId != GetBucketId())
+                if (bucketId != _bucket.Id)
                 {
-                    _logger.Debug("Bucket ID Changed. Waiting for bucket availability again for Method: {0} Route: {1}", _handler.Request.Method, _handler.Request.Route);
+                    _logger.Debug("Bucket ID Changed. Waiting for bucket availability again for ID: {0} Old Bucket ID: {1} New Bucket ID: {2}", _request.Id, bucketId, _bucket.Id);
                     semaphore.Release();
-                    semaphore = GetSemaphore();
+                    semaphore = _bucket.Semaphore;
                     semaphore.WaitOne();
                 }
 
-                if (IsBucketShutdown() || _handler.Cancelled)
-                {
-                    semaphore.Release();
-                    return;
-                }
-
-                _logger.Debug("Starting request callback for Method: {0} Route: {1}", _handler.Request.Method, _handler.Request.Route);
-                _handler.Run();
+                _logger.Debug("Request callback started for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
+                RequestResponse response = _handler.Run();
+                _request.OnRequestCompleted(_handler, response);
+                _logger.Debug("Request callback completed for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
+                _request.Dispose();
             }
             catch (Exception ex)
             {
-                _logger.Exception("Request Callback threw exception Method: {0} Route: {1}", _handler.Request.Method, _handler.Request.Route, ex);
+                _request.OnRequestCompleted(_handler, RequestResponse.CreateUnhandledExceptionResponse(_handler));
+                _logger.Exception("Request Callback threw exception for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id, ex);
+                _request.Dispose();
             }
             finally
             {
                 semaphore.Release();
-                _logger.Debug("Request callback completed for Method: {0} Route: {1}", _handler.Request.Method, _handler.Request.Route);
             }
-        }
-
-        private Bucket GetBucket()
-        {
-            return _handler.Request.Bucket;
-        }
-        
-        private string GetBucketId()
-        {
-            return GetBucket().BucketId;
-        }
-
-        private AdjustableSemaphore GetSemaphore()
-        {
-            return GetBucket().Semaphore;
-        }
-        
-        private bool IsBucketShutdown()
-        {
-            return GetBucket().IsShutdown;
         }
 
         ///<inheritdoc/>
@@ -103,6 +87,8 @@ namespace Oxide.Ext.Discord.Callbacks.ThreadPool
         protected override void EnterPool()
         {
             _handler = null;
+            _bucket = null;
+            _request = null;
             _logger = null;
         }
     }

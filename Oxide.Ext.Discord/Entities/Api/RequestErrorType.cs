@@ -6,6 +6,11 @@ namespace Oxide.Ext.Discord.Entities.Api
     public enum RequestErrorType
     {
         /// <summary>
+        /// A generic web error occured
+        /// </summary>
+        GenericWeb,
+        
+        /// <summary>
         /// An Internal HTTP Error Occured
         /// </summary>
         Internal,
@@ -19,12 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// An Invalid request was passed to discord
         /// </summary>
         ApiError,
-        
-        /// <summary>
-        /// A generic web error occured
-        /// </summary>
-        GenericWeb,
-        
+
         /// <summary>
         /// An error occured during JSON serialization
         /// </summary>

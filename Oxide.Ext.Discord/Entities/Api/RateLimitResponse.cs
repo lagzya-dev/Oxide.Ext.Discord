@@ -2,7 +2,6 @@ using System;
 using System.Net;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 
@@ -21,7 +20,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// If we hit the global rate limit with this request
         /// </summary>
-        public bool HitGlobalRateLimit;
+        public bool IsGlobalRateLimit;
         
         /// <summary>
         /// The date time when this bucket will reset
@@ -31,12 +30,17 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// The number of request for this bucket
         /// </summary>
-        public int BucketLimit;
+        public int Limit;
         
         /// <summary>
         /// The number of remaining requests for this bucket
         /// </summary>
-        public int BucketRemaining;
+        public int Remaining;
+
+        /// <summary>
+        /// The scope the rate limit is for
+        /// </summary>
+        public string Scope;
         
         /// <summary>
         /// Initialize the RateLimitResponse
@@ -45,31 +49,37 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="logger">Logger</param>
         public void Init(WebHeaderCollection headers, ILogger logger)
         {
-            HitGlobalRateLimit = headers.GetBool(RateLimitHeaders.IsGlobal);
-            if (HitGlobalRateLimit)
+            IsGlobalRateLimit = headers.GetBool(RateLimitHeaders.IsGlobal);
+            Scope = headers.Get(RateLimitHeaders.Scope);
+            if (IsGlobalRateLimit)
             {
-                HitGlobalRateLimit = true;
-                ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(headers.GetInt(RateLimitHeaders.RetryAfter));
+                IsGlobalRateLimit = true;
+                ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(GetBucketReset(headers));
                 return;
             }
 
             BucketId = headers.Get(RateLimitHeaders.BucketId);
             if (!string.IsNullOrEmpty(BucketId))
             {
-                BucketLimit = headers.GetInt(RateLimitHeaders.BucketLimit);
-                BucketRemaining =  headers.GetInt(RateLimitHeaders.BucketRemaining);
-                ResetAt = headers.GetDouble(RateLimitHeaders.BucketReset).ToDateTimeOffsetFromSeconds();
+                Limit = headers.GetInt(RateLimitHeaders.BucketLimit);
+                Remaining =  headers.GetInt(RateLimitHeaders.BucketRemaining);
+                ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(GetBucketReset(headers));
             }
+        }
+
+        private double GetBucketReset(WebHeaderCollection headers)
+        {
+            return Math.Max(headers.GetDouble(RateLimitHeaders.BucketResetAfter), headers.GetDouble(RateLimitHeaders.RetryAfter));
         }
 
         ///<inheritdoc/>
         protected override void EnterPool()
         {
             BucketId = null;
-            HitGlobalRateLimit = false;
+            IsGlobalRateLimit = false;
             ResetAt = default(DateTimeOffset);
-            BucketLimit = 0;
-            BucketRemaining = 0;
+            Limit = 0;
+            Remaining = 0;
         }
 
         ///<inheritdoc/>

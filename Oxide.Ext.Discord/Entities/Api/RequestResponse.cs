@@ -15,6 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         internal RequestCompletedStatus Status;
         internal RateLimitResponse RateLimit;
         internal RequestError Error;
+        internal int Code;
         
         /// <summary>
         /// Data discord sent us
@@ -33,11 +34,13 @@ namespace Oxide.Ext.Discord.Entities.Api
             _client = client;
             RateLimit = DiscordPool.Get<RateLimitResponse>();
             Status = status;
+
             if (response == null)
             {
                 return;
             }
-
+            
+            Code = (int)response.StatusCode;
             RateLimit.Init(response.Headers, _client.Logger);
 
             using (Stream stream = response.GetResponseStream())
@@ -78,17 +81,13 @@ namespace Oxide.Ext.Discord.Entities.Api
             response.Init(client, null, status);
             response.Error = error;
             
-            DiscordApiError apiError = response.ParseData<DiscordApiError>();
+            RequestErrorMessage apiError = response.ParseData<RequestErrorMessage>();
             error.SetApiError(apiError);
             if (apiError != null && apiError.Code != 0)
             {
                 error.SetErrorMessage(RequestErrorType.ApiError, DiscordLogLevel.Error);
             }
-            else
-            {
-                error.SetErrorMessage(RequestErrorType.GenericWeb, DiscordLogLevel.Error);
-            }
-            
+
             return response;
         }
         
@@ -107,17 +106,13 @@ namespace Oxide.Ext.Discord.Entities.Api
             error.SetResponseData((int)httpResponse.StatusCode, response._message);
             response.Error = error;
             
-            DiscordApiError apiError = response.ParseData<DiscordApiError>();
+            RequestErrorMessage apiError = response.ParseData<RequestErrorMessage>();
             error.SetApiError(apiError);
             if (apiError != null && apiError.Code != 0)
             {
                 error.SetErrorMessage(RequestErrorType.ApiError, DiscordLogLevel.Error);
             }
-            else
-            {
-                error.SetErrorMessage(RequestErrorType.GenericWeb, DiscordLogLevel.Error);
-            }
-            
+
             return response;
         }
         
@@ -132,6 +127,18 @@ namespace Oxide.Ext.Discord.Entities.Api
             response.Init(client, null, RequestCompletedStatus.Cancelled);
             return response;
         }
+        
+        /// <summary>
+        /// Creates a REST API response for an unhandled exception
+        /// </summary>
+        /// <param name="handler">Handler for the request</param>
+        /// <returns>A unhandled exception <see cref="RequestResponse"/></returns>
+        public static RequestResponse CreateUnhandledExceptionResponse(RequestHandler handler)
+        {
+            RequestResponse response = DiscordPool.Get<RequestResponse>();
+            response.Init(handler.Request.Client, null, RequestCompletedStatus.ErrorFatal);
+            return response;
+        }
 
         /// <summary>
         /// Parse the data to it's given object
@@ -143,15 +150,19 @@ namespace Oxide.Ext.Discord.Entities.Api
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
+            RateLimit?.Dispose();
             DiscordPool.Free(this);
         }
         
         ///<inheritdoc/>
         protected override void EnterPool()
         {
+            Status = default(RequestCompletedStatus);
+            RateLimit = null;
+            Error = null;
+            Code = 0;
             _message = null;
             _client = null;
-            Error = null;
         }
     }
 }

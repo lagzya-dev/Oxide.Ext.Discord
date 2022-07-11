@@ -97,7 +97,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="request"></param>
         public void QueueRequest(BaseRequest request)
         {
-            _logger.Debug("RestHandler Queuing Request for Method: {0} Route: {0}", request.Method, request.Route);
+            _logger.Debug("RestHandler Queuing Request for Method: {0} Route: {1}", request.Method, request.Route);
             QueueRequestHandler queue = QueueRequestHandler.Create(request, this);
             ThreadPool.QueueUserWorkItem(queue.Callback);
         }
@@ -115,10 +115,10 @@ namespace Oxide.Ext.Discord.Rest
 
         internal void UpgradeToKnownBucket(Bucket bucket, string newBucketId)
         {
-            _logger.Debug("RestHandler Upgrading To Known Bucket for Old ID: {0} New ID: {1}", bucket.BucketId, newBucketId);
+            _logger.Debug("RestHandler Upgrading To Known Bucket for Old ID: {0} New ID: {1}", bucket.Id, newBucketId);
             lock (_bucketSyncObject)
             {
-                RouteToHash[bucket.BucketId] = newBucketId;
+                RouteToHash[bucket.Id] = newBucketId;
                 
                 Bucket existing = Buckets[newBucketId];
                 if (existing != null)
@@ -128,8 +128,8 @@ namespace Oxide.Ext.Discord.Rest
                     return;
                 }
 
-                Buckets.Remove(bucket.BucketId);
-                bucket.BucketId = newBucketId;
+                Buckets.Remove(bucket.Id);
+                bucket.Id = newBucketId;
                 bucket.IsKnowBucket = true;
                 Buckets[newBucketId] = bucket;
             }
@@ -139,7 +139,7 @@ namespace Oxide.Ext.Discord.Rest
         {
             lock (_bucketSyncObject)
             {
-                Buckets.Remove(bucket.BucketId);
+                Buckets.Remove(bucket.Id);
             }
         }
 

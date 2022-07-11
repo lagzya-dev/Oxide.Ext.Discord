@@ -69,12 +69,7 @@ namespace Oxide.Ext.Discord.Threading
 
         public void AllowAllThrough()
         {
-            _maximum = int.MaxValue;
-            _available = int.MaxValue;
-            lock (_syncRoot)
-            {
-                Monitor.PulseAll(_syncRoot);
-            }
+            MaximumCount = int.MaxValue;
         }
     }
 }

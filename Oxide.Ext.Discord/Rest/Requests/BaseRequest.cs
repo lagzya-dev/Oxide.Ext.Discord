@@ -1,7 +1,11 @@
 using System;
+using Oxide.Core;
+using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
 
@@ -15,12 +19,17 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// ID of the request. Generated from the DateTimeOffset when the request was created
         /// </summary>
-        public Snowflake RequestId;
+        public Snowflake Id;
         
         /// <summary>
         /// HTTP request method
         /// </summary>
         public RequestMethod Method;
+
+        /// <summary>
+        /// Current status of the request
+        /// </summary>
+        public RequestStatus Status;
 
         /// <summary>
         /// Route on the API
@@ -31,11 +40,11 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Data to be sent with the request
         /// </summary>
         public object Data;
-        
+
         /// <summary>
         /// Returns the full web url for the request
         /// </summary>
-        public string RequestUrl => DiscordEndpoints.Rest.ApiUrl + Route;
+        public string RequestUrl;
         
         /// <summary>
         /// Callback to call if the request errored with the last error message
@@ -46,79 +55,116 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Discord Client making the request
         /// </summary>
         internal DiscordClient Client;
-
         internal string AuthHeader;
-        
         internal Bucket Bucket;
 
         /// <summary>
         /// How long to wait before retrying request since there was a web exception
         /// </summary>
         private DateTimeOffset _errorResetAt;
+        private ILogger _logger;
 
         /// <summary>
         /// Initializes the request
         /// </summary>
         protected void Init(DiscordClient client, RequestMethod method, string route, object data, Action<RequestError> onError)
         {
-            RequestId = new Snowflake(DateTimeOffset.UtcNow);
+            Id = new Snowflake(DateTimeOffset.UtcNow);
             Client = client;
             Method = method;
             Route = route;
+            RequestUrl = DiscordEndpoints.Rest.ApiUrl + Route;
             Data = data;
             AuthHeader = client.Bot.Rest.AuthHeader;
             OnError = onError;
+            _logger = client.Logger;
+            _logger.Debug($"{nameof(BaseRequest)}.{nameof(Init)} Request Created Plugin: {{0}} Request ID: {{1}} Method: {{2}} Route: {{3}}", client.PluginName, Id, Method, route);
         }
 
-        internal DateTimeOffset GetResetAt()
+        internal void WaitUntilRequestCanStart()
         {
-            if (Bucket.RateLimit.HasReachedRateLimit)
-            {
-                return Bucket.RateLimit.NextReset();
-            }
-            
-            return _errorResetAt > Bucket.ResetAt ? _errorResetAt : Bucket.ResetAt;
-        }
-        
-        internal bool CanStartRequest()
-        {
-            if (Bucket.RateLimit.HasReachedRateLimit)
-            {
-                return false;
-            }
-        
             if (_errorResetAt > DateTimeOffset.UtcNow)
             {
-                return false;
+                _logger.Debug($"{nameof(BaseRequest)}.{nameof(WaitUntilRequestCanStart)} Request ID: {{0}} Can't Start Request Due to Previous Error Reset Waiting For: {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                ThreadExt.SleepUntil(_errorResetAt);
             }
-        
-            return Bucket.Remaining > 0 || Bucket.ResetAt <= DateTimeOffset.UtcNow;
         }
 
-        internal virtual void OnRequestCompleted(RequestHandler handler, RequestResponse response)
+        internal void OnRequestCompleted(RequestHandler handler, RequestResponse response)
         {
+            if (Status != RequestStatus.Cancelled)
+            {
+                Status = RequestStatus.Completed;
+            }
+
+            if (response.Status == RequestCompletedStatus.Success)
+            {
+                OnRequestSuccess(response);
+            }
+            else if (response.Status != RequestCompletedStatus.Cancelled)
+            {
+                OnRequestError(response);
+            }
+            
             Bucket.OnRequestCompleted(handler, response);
+            
+            BaseRequest request = handler.Request;
+            Client.Logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestCompleted)} Bucket ID: {{0}} Request ID: {{1}} Plugin: {{2}} Method: {{3}} Route: {{4}}", Bucket.Id, request.Id, request.Client.PluginName, request.Method, request.Route);
+            
+            handler.Dispose();
+            response.Dispose();
+        }
+
+        /// <summary>
+        /// Callback for successful API Calls
+        /// </summary>
+        /// <param name="response">Response for the API Call</param>
+        protected abstract void OnRequestSuccess(RequestResponse response);
+
+        /// <summary>
+        /// Callback for API calls that error
+        /// </summary>
+        /// <param name="response">Response for the error</param>
+        private void OnRequestError(RequestResponse response)
+        {
+            ApiErrorCallback callback = DiscordPool.Get<ApiErrorCallback>();
+            callback.Init(this, response);
+            Interface.Oxide.NextTick(callback.Callback);
         }
 
         internal void OnRequestErrored()
         {
-            _errorResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(1); 
+            _errorResetAt = MathExt.Max(_errorResetAt, DateTimeOffset.UtcNow + TimeSpan.FromSeconds(1)); 
+            _logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestErrored)} Request ID: {{0}} Waiting For {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
         }
 
         internal void OnRequestQueued(Bucket bucket)
         {
+            _logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestQueued)} Bucket ID: {{0}} Request ID: {{1}}", bucket.Id, Id);
             Bucket = bucket;
         }
 
         ///<inheritdoc/>
         protected override void EnterPool()
         {
+            Id = default(Snowflake);
             Method = default(RequestMethod);
+            Status = default(RequestStatus);
             Route = null;
+            RequestUrl = null;
             Data = null;
             OnError = null;
             Client = null;
+            AuthHeader = null;
             Bucket = null;
+            _errorResetAt = DateTimeOffset.MinValue;
+            _logger = null;
+        }
+
+        ///<inheritdoc/>
+        protected override void LeavePool()
+        {
+            Status = RequestStatus.InQueue;
         }
     }
 }

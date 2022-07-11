@@ -42,24 +42,18 @@ namespace Oxide.Ext.Discord.Rest.Requests
             base.Init(client, method, route, data, onError);
             OnSuccess = onSuccess;
         }
-        
-        /// <summary>
-        /// Handles a completed request
-        /// </summary>
-        internal override void OnRequestCompleted(RequestHandler handler, RequestResponse response)
+
+        ///<inheritdoc/>
+        protected override void OnRequestSuccess(RequestResponse response)
         {
-            base.OnRequestCompleted(handler, response);
-            if (response.Status == RequestCompletedStatus.Success && OnSuccess == null)
+            if (OnSuccess != null)
             {
-                Dispose();
-                return;
+                ApiSuccessCallback<T> callback = DiscordPool.Get<ApiSuccessCallback<T>>();
+                callback.Init(this, response);
+                Interface.Oxide.NextTick(callback.Callback);
             }
-            
-            ApiCallback<T> callback = DiscordPool.Get<ApiCallback<T>>();
-            callback.Init(this, response);
-            Interface.Oxide.NextTick(callback.Callback);
         }
-        
+
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {

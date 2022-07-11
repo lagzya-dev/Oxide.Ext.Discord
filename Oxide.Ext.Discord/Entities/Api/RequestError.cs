@@ -13,6 +13,11 @@ namespace Oxide.Ext.Discord.Entities.Api
     public class RequestError
     {
         /// <summary>
+        /// ID of the request
+        /// </summary>
+        public readonly Snowflake RequestId;
+        
+        /// <summary>
         /// The request method that was called
         /// </summary>
         public readonly RequestMethod RequestMethod;
@@ -46,11 +51,6 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// The string contents of the request
         /// </summary>
         public readonly string StringContents;
-        
-        /// <summary>
-        /// The byte[] contents of the request
-        /// </summary>
-        public readonly byte[] Contents;
 
         /// <summary>
         /// HTTP Status code
@@ -60,15 +60,16 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// If discord returned an error this will contain that error message
         /// </summary>
-        public DiscordApiError DiscordError { get; private set; }
+        public RequestErrorMessage DiscordError { get; private set; }
 
         /// <summary>
         /// Full string response if we received one
         /// </summary>
         public string Message { get; private set; }
-
+        
+        internal RequestErrorType ErrorType { get; private set; }
+        
         private DiscordLogLevel _logLevel;
-        private RequestErrorType _errorType;
         private readonly DiscordClient _client;
         private readonly Bucket _bucket;
 
@@ -85,6 +86,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="data">Data passed to the request</param>
         internal RequestError(BaseRequest request, RequestData data, Exception exception)
         {
+            RequestId = request.Id;
             _client = request.Client;
             _bucket = request.Bucket;
             Url = request.Route;
@@ -92,7 +94,6 @@ namespace Oxide.Ext.Discord.Entities.Api
             ContentType = data.ContentType;
             Data = data;
             StringContents = data.StringContents;
-            Contents = data.Contents;
             TimeSinceEpoch = TimeHelpers.TimeSinceEpoch();
             Exception = exception;
         }
@@ -112,7 +113,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="logLevel">Error log level</param>
         internal void SetErrorMessage(RequestErrorType type, DiscordLogLevel logLevel)
         {
-            _errorType = type;
+            ErrorType = type;
             _logLevel = logLevel;
         }
 
@@ -128,10 +129,10 @@ namespace Oxide.Ext.Discord.Entities.Api
         }
 
         /// <summary>
-        /// Sets the <see cref="DiscordApiError"/> if one occured
+        /// Sets the <see cref="RequestErrorMessage"/> if one occured
         /// </summary>
         /// <param name="error">Discord API Error to be set</param>
-        internal void SetApiError(DiscordApiError error)
+        internal void SetApiError(RequestErrorMessage error)
         {
             DiscordError = error;
         }
@@ -151,33 +152,32 @@ namespace Oxide.Ext.Discord.Entities.Api
                 return;
             }
 
-            switch (_errorType)
+            switch (ErrorType)
             {
                 case RequestErrorType.Internal:
-                    _client.Logger.Error("Rest Request Exception (Internal Error) Plugin: {0} Request URL: [{1}] {2}", _client.PluginName, RequestMethod, Url);
+                    _client.Logger.Error("Rest Request Exception (Internal Error) Plugin: {0} ID: {1} Request URL: [{2}] {3}", _client.PluginName, RequestId, RequestMethod, Url);
                     break;
                 
                 case RequestErrorType.RateLimit:
-                    _client.Logger.Warning("Rest Request Exception (Rate Limit) Plugin: {0} Request URL:  [{1}] {2} Content-Type: {3} Remaining: {4} Limit: {5} Reset At: {6} Current Time: {7}",
-                        _client.PluginName, RequestMethod, Url, ContentType, _bucket.Remaining, _bucket.Limit, _bucket.ResetAt, TimeSinceEpoch.ToDateTimeOffsetFromSeconds());
+                    _client.Logger.Warning("Rest Request Exception (Rate Limit) Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Remaining: {5} Limit: {6} Reset At: {7} Current Time: {8}",
+                        _client.PluginName, RequestId, RequestMethod, Url, ContentType, _bucket.Remaining, _bucket.Limit, _bucket.ResetAt, TimeSinceEpoch.ToDateTimeOffsetFromSeconds());
                     break;
 
                 case RequestErrorType.ApiError:
-                    _client.Logger.Error("Rest Request Exception (Discord API Error). Plugin: {0} Request URL: [{1}] {2} Content-Type: {3} Http Response Code: {4} Discord Error Code: {5} Discord Error: {6}\nDiscord Errors: {7}Request Body:\n{8}",
-                        _client.PluginName, RequestMethod, Url, ContentType, HttpStatusCode, DiscordError.Code, DiscordError.Message, DiscordError.Errors, StringContents ?? "No Contents");
+                    _client.Logger.Error("Rest Request Exception (Discord API Error). Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Http Response Code: {5} Discord Error Code: {6} Discord Error: {7}\nDiscord Errors: {8}Request Body:\n{9}",
+                        _client.PluginName, RequestId, RequestMethod, Url, ContentType, HttpStatusCode, DiscordError.Code, DiscordError.Message, DiscordError.Errors, StringContents ?? "No Contents");
                     break;
 
                 case RequestErrorType.GenericWeb:
-                    _client.Logger.Error("Rest Request Exception (Web Error). Plugin: {0} Request URL: [{1}] {2} Content-Type: {3} Http Response Code: {4} Message: {5}", _client.PluginName, RequestMethod, Url, ContentType, HttpStatusCode, Message);
+                    _client.Logger.Error("Rest Request Exception (Web Error). Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Http Response Code: {5} Message: {6}", _client.PluginName, RequestId, RequestMethod, Url, ContentType, HttpStatusCode, Message);
                     break;
 
-
                 case RequestErrorType.Serialization:
-                    _client.Logger.Exception("Rest Request Exception (JSON Serialization). Plugin: {0} Method: {1} URL: {2} Data Type: {3}", _client.PluginName, RequestMethod, Url, Data?.GetType().Name ?? "None", Exception);
+                    _client.Logger.Exception("Rest Request Exception (JSON Serialization). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, Data?.GetType().Name ?? "None", Exception);
                     break;
 
                 case RequestErrorType.Generic:
-                    _client.Logger.Exception("Rest Request Exception (Generic Error). Plugin: {0} Method: {1} URL: {2} Data Type: {3}", _client.PluginName, RequestMethod, Url, Data?.GetType().Name ?? "None", Exception);
+                    _client.Logger.Exception("Rest Request Exception (Generic Error). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, Data?.GetType().Name ?? "None", Exception);
                     break;
             }
         }

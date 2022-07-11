@@ -1,70 +1,58 @@
 using System;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest.Requests;
 
 namespace Oxide.Ext.Discord.Callbacks.Api
 {
-    internal abstract class BaseApiCallback<T> : BaseCallback where T : BaseRequest
+    internal abstract class BaseApiCallback : BaseCallback
     {
-        protected DiscordClient Client;
-        protected T Request;
-        private RequestResponse _response;
+        private DiscordClient _client;
+        private Snowflake _requestId;
+        private RequestMethod _method;
+        private string _route;
 
-        public virtual void Init(T request, RequestResponse response)
+        protected void Init(BaseRequest request)
         {
-            Client = request.Client;
-            Request = request;
-            _response = response;
+            _client = request.Client;
+            _requestId = request.Id;
+            _method = request.Method;
+            _route = request.Route;
         }
 
         protected sealed override void HandleCallback()
         {
-            if (!Client.IsConnected())
+            if (_client.IsConnected())
             {
-                return;
+                try
+                {
+                    HandleApiCallback();
+                }
+                catch (Exception ex)
+                {
+                    _client.Bot.Logger.Exception("An exception occured during callback for request Type: {0} ID: {1} [{2}] {3}", GetType(), _requestId, _method, _route, ex);
+                }
+                finally
+                {
+                    OnCallbackCompleted();
+                }
             }
-
-            if (_response.Status == RequestCompletedStatus.Success)
-            {
-                OnSuccess();
-                return;
-            }
-            
-            OnError();
         }
 
-        protected abstract void OnSuccess();
+        protected abstract void HandleApiCallback();
 
-        private void OnError()
+        protected virtual void OnCallbackCompleted()
         {
-            if (Request.OnError == null)
-            {
-                _response.Error.LogError();
-                return;
-            }
-
-            try
-            {
-                Request.OnError.Invoke(_response.Error);
-            }
-            catch (Exception ex)
-            {
-                Client.Bot.Logger.Exception("An exception occured during Error callback for request: [{0}] {1}", Request.Method, Request.Route, ex);
-            }
-            finally
-            {
-                _response.Error.LogError();
-            }
+            
         }
 
         protected override void EnterPool()
         {
-            Client = null;
-            Request.Dispose();
-            Request = null;
-            _response.Dispose();
-            _response = null;
+            _client = null;
+            _requestId = default(Snowflake);
+            _method = default(RequestMethod);
+            _route = null;
         }
     }
 }
