@@ -127,24 +127,28 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         
         /// <summary>
         /// Min Length for String Option
+        /// Max Of 6000
         /// </summary>
         /// <param name="minLength">Min Length for the string</param>
         /// <returns>This</returns>
         public TBuilder SetMinLength(int minLength)
         {
             InvalidCommandOptionException.ThrowIfInvalidMinLengthType(_option.Type);
+            InvalidCommandOptionException.ThrowIfInvalidMinLength(minLength);
             _option.MinLength = minLength;
             return _builder;
         }
         
         /// <summary>
         /// Max Length for String Option
+        /// Max Of 6000
         /// </summary>
         /// <param name="maxLength">Max Length</param>
         /// <returns>This</returns>
         public TBuilder SetMaxLength(int maxLength)
         {
             InvalidCommandOptionException.ThrowIfInvalidMaxLengthType(_option.Type);
+            InvalidCommandOptionException.ThrowIfInvalidMaxLength(maxLength);
             _option.MaxLength = maxLength;
             return _builder;
         }

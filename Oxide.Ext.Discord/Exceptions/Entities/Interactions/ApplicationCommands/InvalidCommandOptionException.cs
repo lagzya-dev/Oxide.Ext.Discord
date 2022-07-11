@@ -91,6 +91,32 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
             }
         }
         
+        internal static void ThrowIfInvalidMinLength(int minLength)
+        {
+            if (minLength < 0)
+            {
+                throw new InvalidCommandOptionException("Min length cannot be less than 0");
+            }
+
+            if (minLength > 6000)
+            {
+                throw new InvalidCommandOptionException("Min length cannot be more than 6000");
+            }
+        }
+        
+        internal static void ThrowIfInvalidMaxLength(int maxLength)
+        {
+            if (maxLength < 1)
+            {
+                throw new InvalidCommandOptionException("Max length cannot be less than 1");
+            }
+
+            if (maxLength > 6000)
+            {
+                throw new InvalidCommandOptionException("Max length cannot be more than 6000");
+            }
+        }
+        
         internal static void ThrowIfInvalidChannelType(CommandOptionType type)
         {
             if (type != CommandOptionType.Channel)
