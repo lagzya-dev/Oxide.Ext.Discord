@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Pooling;
+
 namespace Oxide.Ext.Discord.Logging
 {
     /// <summary>
@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     internal class DiscordFileLogger
     {
-        private readonly List<FileMessage> _messageQueue = new List<FileMessage>();
+        private readonly StringBuilder _sb = new StringBuilder();
         private readonly Thread _writerThread;
         private readonly object _syncRoot = new object();
         private readonly string _logPath;
@@ -49,10 +49,19 @@ namespace Oxide.Ext.Discord.Logging
 
         internal void AddMessage(DiscordLogLevel level, string message, Exception ex)
         {
-            FileMessage file = FileMessage.CreateFileMessage(level, message, ex);
             lock (_syncRoot)
             {
-                _messageQueue.Add(file);
+                _sb.Append(DateTime.Now.ToString(CultureInfo.CurrentCulture));
+                _sb.Append(" [");
+                _sb.Append(EnumCache<DiscordLogLevel>.ToString(level));
+                _sb.Append("] ");
+                _sb.Append(message);
+                if (ex != null)
+                {
+                    _sb.AppendLine();
+                    _sb.Append(ex.ToString());
+                }
+                _sb.AppendLine();
             }
         }
 
@@ -80,34 +89,19 @@ namespace Oxide.Ext.Discord.Logging
 
         private void WriteLog()
         {
+            string log;
             lock (_syncRoot)
             {
-                if (_messageQueue.Count == 0)
+                if (_sb.Length == 0)
                 {
                     return;
                 }
+
+                log = _sb.ToString();
+                _sb.Length = 0;
             }
 
-            StringBuilder sb = DiscordPool.GetStringBuilder();
-
-            lock (_syncRoot)
-            {
-                for (int index = 0; index < _messageQueue.Count; index++)
-                {
-                    FileMessage message = _messageQueue[index];
-                    sb.Append(message.Date.ToString(CultureInfo.CurrentCulture));
-                    sb.Append(" [");
-                    sb.Append(EnumCache<DiscordLogLevel>.ToString(message.LogLevel));
-                    sb.Append("] ");
-                    sb.Append(message.GetMessage());
-                    sb.AppendLine();
-                    DiscordPool.Free(ref message);
-                }
-                
-                _messageQueue.Clear();
-            }
-
-            WriteToFile(DiscordPool.ToStringAndFreeStringBuilder(ref sb));
+            WriteToFile(log);
         }
         
         private void WriteToFile(string text)
@@ -123,48 +117,6 @@ namespace Oxide.Ext.Discord.Logging
         {
             _writerThread.Abort();
             WriteLog();
-        }
-
-        private class FileMessage : BasePoolable
-        {
-            public DiscordLogLevel LogLevel;
-            public string Message;
-            public DateTime Date;
-            public Exception Exception;
-
-            public static FileMessage CreateFileMessage(DiscordLogLevel level, string message, Exception ex)
-            {
-                FileMessage file = DiscordPool.Get<FileMessage>();
-                file.Init(level, message, ex);
-                return file;
-            }
-            
-            private void Init(DiscordLogLevel level, string message, Exception ex)
-            {
-                LogLevel = level;
-                Message = message;
-                Exception = ex;
-                Date = DateTime.Now;
-            }
-            
-            public string GetMessage()
-            {
-                return Exception == null ? Message : $"{Message}\n{Exception}";
-            }
-            
-            ///<inheritdoc/>
-            protected override void DisposeInternal()
-            {
-                DiscordPool.Free(this);
-            }
-            
-            protected override void EnterPool()
-            {
-                LogLevel = default(DiscordLogLevel);
-                Message = null;
-                Date = default(DateTime);
-                Exception = null;
-            }
         }
     }
 }
