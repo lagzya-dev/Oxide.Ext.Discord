@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Users;
@@ -18,13 +19,13 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public Snowflake Id { get; set; }
         
         /// <summary>
-        /// The type of interaction
+        /// Type of interaction
         /// </summary>
         [JsonProperty("type")]
         public InteractionType Type { get; set; }
         
         /// <summary>
-        /// The name of the <see cref="DiscordApplicationCommand"/> 
+        /// Name of the <see cref="DiscordApplicationCommand"/>, including subcommands and subcommand groups 
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -34,5 +35,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("user")]
         public DiscordUser User { get; set; }
+        
+        /// <summary>
+        /// Member who invoked the interaction in the guild
+        /// </summary>
+        [JsonProperty("member")]
+        public GuildMember Member { get; set; }
     }
 }
