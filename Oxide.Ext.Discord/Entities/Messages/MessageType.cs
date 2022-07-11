@@ -52,32 +52,32 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// The message when a new member joined
         /// </summary>
-        [Description("GUILD_MEMBER_JOIN")]
-        GuildMemberJoin = 7,
+        [Description("USER_JOIN")]
+        UserJoin = 7,
         
         /// <summary>
         ///  The message for when a user boosts a guild
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION")]
-        UserPremiumGuildSubscription = 8,
+        [Description("GUILD_BOOST")]
+        GuildBoost = 8,
         
         /// <summary>
         /// The message for when a guild reaches Tier 1 of Nitro boosts
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1")]
-        UserPremiumGuildSubscriptionTier1 = 9,
+        [Description("GUILD_BOOST_TIER_1")]
+        GuildBoostTier1 = 9,
         
         /// <summary>
         /// The message for when a guild reaches Tier 2 of Nitro boosts
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2")]
-        UserPremiumGuildSubscriptionTier2 = 10,
+        [Description("GUILD_BOOST_TIER_2")]
+        GuildBoostTier2 = 10,
         
         /// <summary>
         /// The message for when a guild reaches Tier 3 of Nitro boosts
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3")]
-        UserPremiumGuildSubscriptionTier3 = 11,
+        [Description("GUILD_BOOST_TIER_3")]
+        GuildBoostTier3 = 11,
         
         /// <summary>
         /// The message for when a news channel subscription is added to a text channel
@@ -94,7 +94,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// The message for when a guild discovery is requalified
         /// </summary>
-        [Description("GuildDiscoveryRequalified")]
+        [Description("GUILD_DISCOVERY_REQUALIFIED")]
         GuildDiscoveryRequalified = 15,
         
         /// <summary>
