@@ -6,10 +6,12 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
@@ -39,26 +41,26 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public InteractionType Type { get; set; }
 
         /// <summary>
-        /// The command data payload
+        /// Interaction data payload
         /// See <see cref="InteractionData"/>
         /// </summary>
         [JsonProperty("data")]
         public InteractionData Data { get; set; }
 
         /// <summary>
-        /// The guild it was sent from
+        /// Guild that the interaction was sent from
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake? GuildId { get; set; }
 
         /// <summary>
-        /// The channel it was sent from
+        /// Channel that the interaction was sent from
         /// </summary>
         [JsonProperty("channel_id")]
         public Snowflake? ChannelId { get; set; }
 
         /// <summary>
-        /// Guild member data for the invoking user
+        /// Guild member data for the invoking user, including permissions
         /// </summary>
         [JsonProperty("member")]
         public GuildMember Member { get; set; }
@@ -70,7 +72,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public DiscordUser User { get; set; }
 
         /// <summary>
-        /// A continuation token for responding to the interaction
+        /// Continuation token for responding to the interaction
         /// Interaction tokens are valid for 15 minutes and can be used to send followup messages but you must send an initial response within 3 seconds of receiving the event.
         /// If the 3 second deadline is exceeded, the token will be invalidated.
         /// </summary>
@@ -89,6 +91,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         [JsonProperty("message")]
         public DiscordMessage Message { get; set; }
 
+        /// <summary>
+        /// Bitwise set of permissions the app or bot has within the channel the interaction was sent from
+        /// </summary>
+        [JsonConverter(typeof(PermissionFlagsStringConverter))]
+        [JsonProperty("app_permissions")]
+        public PermissionFlags? AppPermissions { get; set; }
+        
         /// <summary>
         /// The selected language of the invoking user
         /// <a href="https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales">Discord Locale Values</a>

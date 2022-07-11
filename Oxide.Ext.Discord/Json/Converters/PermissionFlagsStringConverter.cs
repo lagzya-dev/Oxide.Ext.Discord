@@ -17,6 +17,12 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
+            if (value == null)
+            {
+                writer.WriteValue("0");
+                return;
+            }
+            
             writer.WriteValue(((ulong)value).ToString());
         }
 
@@ -30,6 +36,11 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return PermissionFlags.None;
+            }
+            
             ulong value = ulong.Parse(reader.Value.ToString());
             return (PermissionFlags)value;
         }
