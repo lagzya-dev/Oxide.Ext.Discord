@@ -2,7 +2,6 @@ using System;
 using System.Text;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Logging
 {
@@ -11,6 +10,9 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     internal class DiscordConsoleLogger
     {
+        private readonly StringBuilder _sb = new StringBuilder();
+        private readonly object _sync = new object();
+        
         /// <summary>
         /// Adds a message to the server console
         /// </summary>
@@ -19,30 +21,32 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="ex"></param>
         internal void AddMessage(DiscordLogLevel level, string message, Exception ex)
         {
-            StringBuilder sb = DiscordPool.GetStringBuilder();
-            sb.Append("[Discord Extension] [");
-            sb.Append(EnumCache<DiscordLogLevel>.ToString(level));
-            sb.Append("]: ");
-            sb.Append(message);
-            object[] args = ArrayPool.Get(0);
-            switch (level)
+            lock (_sync)
             {
-                case DiscordLogLevel.Debug:
-                case DiscordLogLevel.Warning:
-                    Interface.Oxide.LogWarning(sb.ToString(), args);
-                    break;
-                case DiscordLogLevel.Error:
-                    Interface.Oxide.LogError(sb.ToString(), args);
-                    break;
-                case DiscordLogLevel.Exception:
-                    Interface.Oxide.LogException(sb.ToString(), ex);
-                    break;
-                default:
-                    Interface.Oxide.LogInfo(sb.ToString(), args);
-                    break;
+                _sb.Length = 0;
+                _sb.Append("[Discord Extension] [");
+                _sb.Append(EnumCache<DiscordLogLevel>.ToString(level));
+                _sb.Append("]: ");
+                _sb.Append(message);
+                object[] args = ArrayPool.Get(0);
+                switch (level)
+                {
+                    case DiscordLogLevel.Debug:
+                    case DiscordLogLevel.Warning:
+                        Interface.Oxide.LogWarning(_sb.ToString(), args);
+                        break;
+                    case DiscordLogLevel.Error:
+                        Interface.Oxide.LogError(_sb.ToString(), args);
+                        break;
+                    case DiscordLogLevel.Exception:
+                        Interface.Oxide.LogException(_sb.ToString(), ex);
+                        break;
+                    default:
+                        Interface.Oxide.LogInfo(_sb.ToString(), args);
+                        break;
+                }
+                ArrayPool.Free(args);
             }
-            DiscordPool.FreeStringBuilder(ref sb);
-            ArrayPool.Free(args);
         }
     }
 }
