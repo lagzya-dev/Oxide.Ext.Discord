@@ -35,13 +35,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Oxide.Core" Version="2.0.*">
+    <PackageReference Include="Oxide.Core" Version="2.0.4029">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Oxide.CSharp" Version="2.0.*">
+    <PackageReference Include="Oxide.CSharp" Version="2.0.4054">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Oxide.References" Version="2.0.*">
+    <PackageReference Include="Oxide.References" Version="2.0.3780">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="WebSocketSharpFork" Version="1.0.*">
