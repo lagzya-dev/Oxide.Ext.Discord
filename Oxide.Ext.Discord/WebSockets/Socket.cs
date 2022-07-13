@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Authentication;
 using System.Timers;
 using Newtonsoft.Json;
 using Oxide.Core;
@@ -66,7 +67,7 @@ namespace Oxide.Ext.Discord.WebSockets
             
             //We haven't gotten the websocket url. Get url then attempt to connect.
             //There has been more than 3 tries to reconnect. Discord suggests trying to update gateway url.
-            if (string.IsNullOrEmpty(url) || _reconnectRetries >= 3)
+            if (string.IsNullOrEmpty(url) || (_reconnectRetries >= 3 && Gateway.LastUpdate + TimeSpan.FromMinutes(5) <= DateTime.UtcNow))
             {
                 Gateway.UpdateGatewayUrl(_client, Connect, OnGatewayUrlUpdateFailed);
                 return;
@@ -87,6 +88,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             _socket = new WebSocket(url);
 
+            _socket.SslConfiguration.EnabledSslProtocols |= (SslProtocols)3072; //TLS 1.2
             _socket.OnOpen += _listener.SocketOpened;
             _socket.OnClose += _listener.SocketClosed;
             _socket.OnError += _listener.SocketErrored;
