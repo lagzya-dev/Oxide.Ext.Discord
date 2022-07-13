@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -59,7 +58,7 @@ namespace Oxide.Ext.Discord.Logging
                 if (ex != null)
                 {
                     _sb.AppendLine();
-                    _sb.Append(ex.ToString());
+                    _sb.Append(ex);
                 }
                 _sb.AppendLine();
             }

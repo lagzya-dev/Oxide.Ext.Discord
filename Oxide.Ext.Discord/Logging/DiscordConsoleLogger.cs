@@ -11,6 +11,7 @@ namespace Oxide.Ext.Discord.Logging
     internal class DiscordConsoleLogger
     {
         private readonly StringBuilder _sb = new StringBuilder();
+        private readonly object[] _args = new object[0];
         private readonly object _sync = new object();
         
         /// <summary>
@@ -28,24 +29,22 @@ namespace Oxide.Ext.Discord.Logging
                 _sb.Append(EnumCache<DiscordLogLevel>.ToString(level));
                 _sb.Append("]: ");
                 _sb.Append(message);
-                object[] args = ArrayPool.Get(0);
                 switch (level)
                 {
                     case DiscordLogLevel.Debug:
                     case DiscordLogLevel.Warning:
-                        Interface.Oxide.LogWarning(_sb.ToString(), args);
+                        Interface.Oxide.LogWarning(_sb.ToString(), _args);
                         break;
                     case DiscordLogLevel.Error:
-                        Interface.Oxide.LogError(_sb.ToString(), args);
+                        Interface.Oxide.LogError(_sb.ToString(), _args);
                         break;
                     case DiscordLogLevel.Exception:
                         Interface.Oxide.LogException(_sb.ToString(), ex);
                         break;
                     default:
-                        Interface.Oxide.LogInfo(_sb.ToString(), args);
+                        Interface.Oxide.LogInfo(_sb.ToString(), _args);
                         break;
                 }
-                ArrayPool.Free(args);
             }
         }
     }
