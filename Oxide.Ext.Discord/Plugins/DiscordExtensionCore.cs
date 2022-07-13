@@ -37,6 +37,7 @@ namespace Oxide.Ext.Discord.Plugins
             }
         }
 
+        [HookMethod("OnServerShutdown")]
         private void OnServerShutdown()
         {
             DiscordExtension.IsShuttingDown = true;
@@ -152,7 +153,7 @@ namespace Oxide.Ext.Discord.Plugins
                 {
                     sb.AppendLine(websocket.SocketState.ToString());
                     sb.Append("\tPending Commands: ");
-                    List<CommandPayload> pendingCommands = websocket.Commands.GetPendingCommands();
+                    IList<CommandPayload> pendingCommands = websocket.Commands.GetPendingCommands();
                     if (pendingCommands.Count == 0)
                     {
                         sb.AppendLine("None");
