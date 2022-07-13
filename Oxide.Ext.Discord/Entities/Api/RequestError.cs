@@ -84,16 +84,16 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="request">Request the error is for</param>
         /// <param name="exception">The web exception we received</param>
         /// <param name="data">Data passed to the request</param>
-        internal RequestError(BaseRequest request, RequestData data, Exception exception)
+        internal RequestError(BaseRequest request, BaseRequestData data, Exception exception)
         {
             RequestId = request.Id;
             _client = request.Client;
             _bucket = request.Bucket;
             Url = request.Route;
             RequestMethod = request.Method;
-            ContentType = data.ContentType;
-            Data = data;
-            StringContents = data.StringContents;
+            Data = request.Data;
+            ContentType = data?.ContentType;
+            StringContents = data?.StringContents;
             TimeSinceEpoch = TimeHelpers.TimeSinceEpoch();
             Exception = exception;
         }

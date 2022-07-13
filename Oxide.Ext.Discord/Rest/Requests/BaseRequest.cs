@@ -57,6 +57,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         internal DiscordClient Client;
         internal string AuthHeader;
         internal Bucket Bucket;
+        internal bool IsCancelled;
 
         /// <summary>
         /// How long to wait before retrying request since there was a web exception
@@ -92,10 +93,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         internal void OnRequestCompleted(RequestHandler handler, RequestResponse response)
         {
-            if (Status != RequestStatus.Cancelled)
-            {
-                Status = RequestStatus.Completed;
-            }
+            Status = RequestStatus.Completed;
 
             if (response.Status == RequestCompletedStatus.Success)
             {
@@ -110,9 +108,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
             
             BaseRequest request = handler.Request;
             Client.Logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestCompleted)} Bucket ID: {{0}} Request ID: {{1}} Plugin: {{2}} Method: {{3}} Route: {{4}}", Bucket.Id, request.Id, request.Client.PluginName, request.Method, request.Route);
-            
-            handler.Dispose();
-            response.Dispose();
         }
 
         /// <summary>
@@ -159,6 +154,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Bucket = null;
             _errorResetAt = DateTimeOffset.MinValue;
             _logger = null;
+            IsCancelled = false;
         }
 
         ///<inheritdoc/>

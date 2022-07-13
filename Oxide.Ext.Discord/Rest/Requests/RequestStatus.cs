@@ -16,6 +16,11 @@ namespace Oxide.Ext.Discord.Rest.Requests
         PendingBucket,
         
         /// <summary>
+        /// Waiting to create request data
+        /// </summary>
+        PendingCreateData,
+        
+        /// <summary>
         /// Request is waiting to start
         /// </summary>
         PendingStart,
@@ -28,11 +33,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Request completed and was not cancelled
         /// </summary>
-        Completed,
-        
-        /// <summary>
-        /// Request was cancelled
-        /// </summary>
-        Cancelled
+        Completed
     }
 }

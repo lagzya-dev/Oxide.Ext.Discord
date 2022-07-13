@@ -127,18 +127,6 @@ namespace Oxide.Ext.Discord.Entities.Api
             response.Init(client, null, RequestCompletedStatus.Cancelled);
             return response;
         }
-        
-        /// <summary>
-        /// Creates a REST API response for an unhandled exception
-        /// </summary>
-        /// <param name="handler">Handler for the request</param>
-        /// <returns>A unhandled exception <see cref="RequestResponse"/></returns>
-        public static RequestResponse CreateUnhandledExceptionResponse(RequestHandler handler)
-        {
-            RequestResponse response = DiscordPool.Get<RequestResponse>();
-            response.Init(handler.Request.Client, null, RequestCompletedStatus.ErrorFatal);
-            return response;
-        }
 
         /// <summary>
         /// Parse the data to it's given object

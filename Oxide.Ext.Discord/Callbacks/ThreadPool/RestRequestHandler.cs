@@ -1,5 +1,4 @@
 using System;
-using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
@@ -34,7 +33,7 @@ namespace Oxide.Ext.Discord.Callbacks.ThreadPool
         private void Init(RequestHandler handler, ILogger logger)
         {
             _handler = handler;
-            _request = handler.Request;
+            _request = _handler.Request;
             _bucket = _request.Bucket;
             _logger = logger;
         }
@@ -46,7 +45,7 @@ namespace Oxide.Ext.Discord.Callbacks.ThreadPool
             AdjustableSemaphore semaphore = _bucket.Semaphore;
             _request.Status = RequestStatus.PendingBucket;
             
-            _logger.Debug("Waiting for bucket availability for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
+            _logger.Debug("Waiting for bucket availability Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
 
             try
             {
@@ -60,16 +59,12 @@ namespace Oxide.Ext.Discord.Callbacks.ThreadPool
                 }
 
                 _logger.Debug("Request callback started for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
-                RequestResponse response = _handler.Run();
-                _request.OnRequestCompleted(_handler, response);
-                _logger.Debug("Request callback completed for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
-                _request.Dispose();
+                _handler.Run();
+                _logger.Debug("Request callback completed successfully for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
             }
             catch (Exception ex)
             {
-                _request.OnRequestCompleted(_handler, RequestResponse.CreateUnhandledExceptionResponse(_handler));
-                _logger.Exception("Request Callback threw exception for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id, ex);
-                _request.Dispose();
+                _logger.Exception("Request callback threw exception for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id, ex);
             }
             finally
             {
@@ -80,6 +75,7 @@ namespace Oxide.Ext.Discord.Callbacks.ThreadPool
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
+            _handler.Dispose();
             DiscordPool.Free(this);
         }
 

@@ -18,12 +18,8 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         internal BaseRequest Request;
         
-        /// <summary>
-        /// Full Request URl to the API
-        /// </summary>
-        private string _requestUrl;
-        private byte _retries;
-        private RequestData _data;
+        private BaseRequestData _data;
+        private RequestResponse _response;
         private HttpWebRequest _webRequest;
         private ILogger _logger;
 
@@ -46,32 +42,46 @@ namespace Oxide.Ext.Discord.Rest.Requests
         private void Init(BaseRequest request, ILogger logger)
         {
             Request = request;
-            _requestUrl = request.RequestUrl;
             _logger = logger;
         }
 
         /// <summary>
         /// Fires the request off
         /// </summary>
-        public RequestResponse Run()
+        public void Run()
         {
-            Request.Status = RequestStatus.InProgress;
-            if (!CreateRequestData(out RequestResponse error))
+            try
             {
-                return error;
+                _response = RunInternal();
+                Request.OnRequestCompleted(this, _response); 
+            }
+            catch (Exception ex)
+            {
+                _response = RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.Generic, DiscordLogLevel.Exception), RequestCompletedStatus.ErrorFatal);
+                Request.OnRequestCompleted(this, _response); 
+            }
+        }
+        
+        private RequestResponse RunInternal()
+        {
+            Request.Status = RequestStatus.PendingCreateData;
+            if (!CreateRequestData())
+            {
+                return _response;
             }
             
             _logger.Verbose($"{nameof(RequestHandler)}.{nameof(Run)} Starting REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}} Contents:\n{{3}}", Request.Id, Request.Method, Request.Route, _data.StringContents ?? "No Contents");
 
             RequestResponse response = null;
-            while(_retries < 3) 
+            byte retries = 0;
+            while(retries < 3) 
             {
                 Request.Status = RequestStatus.PendingStart;
                 Request.Bucket.WaitUntilBucketAvailable(this);
                 Request.WaitUntilRequestCanStart();
                 Request.Status = RequestStatus.InProgress;
-
-                if (Request.Status == RequestStatus.Cancelled)
+                
+                if (Request.IsCancelled)
                 {
                     return RequestResponse.CreateCancelledResponse(Request.Client);
                 }
@@ -90,7 +100,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
                 if (response.Code != 429)
                 {
-                    _retries++;
+                    retries++;
                 }
             }
             
@@ -119,12 +129,12 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
             catch (JsonSerializationException ex)
             {
-                Request.Client.Logger.Exception("A JsonSerializationException occured for request. ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, _requestUrl, Request.Data?.GetType().Name ?? "None", ex);
+                Request.Client.Logger.Exception("A JsonSerializationException occured for request. ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, Request.Route, Request.Data?.GetType().Name ?? "None", ex);
                 return RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex), RequestCompletedStatus.ErrorFatal);
             }
             catch (Exception ex)
             {
-                Request.Client.Logger.Exception("An exception occured for request. ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, _requestUrl, Request.Data?.GetType().Name ?? "None", ex);
+                Request.Client.Logger.Exception("An exception occured for request. ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, Request.Route, Request.Data?.GetType().Name ?? "None", ex);
                 return RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex), RequestCompletedStatus.ErrorFatal);
             }
         }
@@ -158,7 +168,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         private HttpWebRequest CreateRequest()
         {
-            HttpWebRequest req = (HttpWebRequest) WebRequest.Create(_requestUrl);
+            HttpWebRequest req = (HttpWebRequest) WebRequest.Create(Request.RequestUrl);
             req.Method = EnumCache<RequestMethod>.ToString(Request.Method);
             req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.FullExtensionVersion})";
             req.Timeout = TimeoutDuration * 1000;
@@ -168,18 +178,17 @@ namespace Oxide.Ext.Discord.Rest.Requests
             return req;
         }
         
-        private bool CreateRequestData(out RequestResponse response)
+        private bool CreateRequestData()
         {
             try
             {
-                _data = RequestData.CreateRequestData(Request);
-                response = null;
+                _data = BaseRequestData.CreateRequestData(Request);
                 return true;
             }
             catch (JsonSerializationException ex)
             {
-                Request.Client.Logger.Exception("A JsonSerializationException occured for request. Request ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, _requestUrl, Request.Data?.GetType().Name ?? "None", ex);
-                response = RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.Serialization, DiscordLogLevel.Error), RequestCompletedStatus.ErrorFatal);
+                Request.Client.Logger.Exception("A JsonSerializationException occured for request. Request ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, Request.Route, Request.Data?.GetType().Name ?? "None", ex);
+                _response = RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.Serialization, DiscordLogLevel.Error), RequestCompletedStatus.ErrorFatal);
                 return false;
             }
         }
@@ -189,7 +198,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         public void Abort()
         {
-            Request.Status = RequestStatus.Cancelled;
+            Request.IsCancelled = true;
             _webRequest?.Abort();
         }
 
@@ -208,7 +217,9 @@ namespace Oxide.Ext.Discord.Rest.Requests
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
-            _data?.Dispose();
+            Request.Dispose();
+            _data.Dispose();
+            _response.Dispose();
             DiscordPool.Free(this);
         }
         
@@ -216,8 +227,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
         protected override void EnterPool()
         {
             _data = null;
-            _requestUrl = null;
-            _retries = 0;
             _logger = null;
         }
     }
