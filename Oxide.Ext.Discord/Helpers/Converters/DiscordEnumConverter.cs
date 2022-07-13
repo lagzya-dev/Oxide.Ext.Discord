@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
                 return;
             }
 
-            string enumName = EnumUtils.ToEnumName(enumValue.GetType(), enumText);
+            string enumName = JsonEnumUtils.ToEnumName(enumValue.GetType(), enumText);
             if (!string.IsNullOrEmpty(enumName))
             {
                 writer.WriteValue(enumName);
@@ -72,7 +72,7 @@ namespace Oxide.Ext.Discord.Helpers.Converters
             if (reader.TokenType == JsonToken.String)
             {
                 string enumValue = reader.Value.ToString();
-                string enumName = EnumUtils.FromEnumName(objectType, enumValue) ?? enumValue;
+                string enumName = JsonEnumUtils.FromEnumName(objectType, enumValue) ?? enumValue;
                 if (Enum.IsDefined(objectType, enumName))
                 {
                     return Enum.Parse(objectType, enumName);

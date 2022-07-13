@@ -6,7 +6,7 @@ using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
 namespace Oxide.Ext.Discord.Helpers.Utilities
 {
-    internal static class EnumUtils
+    internal static class JsonEnumUtils
     {
         private static readonly Hash<Type, EnumData> EnumData = new Hash<Type, EnumData>();
 
