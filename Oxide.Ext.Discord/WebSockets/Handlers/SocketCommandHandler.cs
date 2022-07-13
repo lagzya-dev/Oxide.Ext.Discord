@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.RateLimits;
+using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
 {
@@ -18,10 +19,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly BotClient _client;
         private readonly Socket _webSocket;
         private readonly ILogger _logger;
-        private readonly List<CommandPayload> _pendingCommands = new List<CommandPayload>();
+        private readonly ThreadSafeList<CommandPayload> _pendingCommands = new ThreadSafeList<CommandPayload>();
         private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
         private Timer _rateLimitTimer;
-        private readonly object _syncRoot = new object();
         private bool _socketCanSendCommands;
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         internal void OnSocketDisconnected()
         {
-            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(OnSocketConnected)} Socket Disconnected. Queuing Commands.");
+            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(OnSocketDisconnected)} Socket Disconnected. Queuing Commands.");
             _socketCanSendCommands = false;
         }
 
@@ -108,9 +108,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         
         private void SendCommands()
         {
-            while (GetCommandCount() != 0)
+            while (_pendingCommands.Count != 0)
             {
-                CommandPayload payload = GetNextCommand();
+                CommandPayload payload = _pendingCommands[0];
                 if (!SendCommand(payload))
                 {
                     return;
@@ -148,57 +148,32 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private void AddCommand(CommandPayload command)
         {
-            lock (_syncRoot)
+            if (command.OpCode == GatewayCommandCode.Identify || command.OpCode == GatewayCommandCode.Resume)
             {
-                if (command.OpCode == GatewayCommandCode.Identify || command.OpCode == GatewayCommandCode.Resume)
-                {
-                    _pendingCommands.Insert(0, command);
-                    return;
-                }
-                _pendingCommands.Add(command);
+                _pendingCommands.Insert(0, command);
+                return;
             }
+            _pendingCommands.Add(command);
         }
         
         private void RemoveByType(GatewayCommandCode code)
         {
-            lock (_syncRoot)
+            for (int index = _pendingCommands.Count - 1; index >= 0; index--)
             {
-                for (int index = _pendingCommands.Count - 1; index >= 0; index--)
+                CommandPayload command = _pendingCommands[index];
+                if (command.OpCode == code)
                 {
-                    CommandPayload command = _pendingCommands[index];
-                    if (command.OpCode == code)
-                    {
-                        _pendingCommands.RemoveAt(index);
-                        command.Dispose();
-                    }
+                    _pendingCommands.RemoveAt(index);
+                    command.Dispose();
                 }
-            }
-        }
-
-        private int GetCommandCount()
-        {
-            lock (_syncRoot)
-            {
-                return _pendingCommands.Count;
-            }
-        }
-
-        private CommandPayload GetNextCommand()
-        {
-            lock (_syncRoot)
-            {
-                return _pendingCommands[0];
             }
         }
 
         private void RemoveCommand()
         {
-            lock (_syncRoot)
-            {
-                CommandPayload command = GetNextCommand();
-                _pendingCommands.RemoveAt(0);
-                command.Dispose();
-            }
+            CommandPayload command = _pendingCommands[0];
+            _pendingCommands.RemoveAt(0);
+            command.Dispose();
         }
 
         internal void OnSocketShutdown()
@@ -207,12 +182,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _rateLimitTimer = null;
         }
 
-        internal List<CommandPayload> GetPendingCommands()
+        internal IList<CommandPayload> GetPendingCommands()
         {
-            lock (_syncRoot)
-            {
-                return _pendingCommands;
-            }
+            return _pendingCommands;
         }
     }
 }

@@ -42,10 +42,9 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         private readonly RestRateLimit _rateLimit;
         private readonly ILogger _logger;
         private readonly RestHandler _rest;
-        private readonly object _syncRoot = new object();
         private readonly object _requestSync = new object();
         internal readonly AdjustableSemaphore Semaphore = new AdjustableSemaphore(1);
-        internal readonly List<RequestHandler> Requests = new List<RequestHandler>();
+        internal readonly ThreadSafeList<RequestHandler> Requests = new ThreadSafeList<RequestHandler>();
 
         /// <summary>
         /// Creates a new bucket for the given <see cref="RestHandler"/>
@@ -61,6 +60,11 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             _logger = logger;
             _logger.Debug($"{nameof(Bucket)}.Ctor Bucket Created: {{0}}", Id);
         }
+
+        ~Bucket()
+        {
+            Requests.Dispose();
+        }
         
         /// <summary>
         /// Queues a new request for the buck
@@ -70,17 +74,15 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         {
             request.OnRequestQueued(this);
             RequestHandler handler = RequestHandler.CreateRequestHandler(request);
-            lock (_syncRoot)
-            {
-                Requests.Add(handler);
-            }
+            
+            Requests.Add(handler);
 
             if (ResetAt < DateTimeOffset.UtcNow)
             {
                 Remaining = Limit;
             }
             
-            _logger.Debug("Queued Request Bucket ID: {0} Request ID: {1} Requests: {2}", Id, request.Id, request.Method, request.Route, RequestCount());
+            _logger.Debug("Queued Request Bucket ID: {0} Request ID: {1} Requests: {2}", Id, request.Id, request.Method, request.Route, Requests.Count);
             
             RestRequestHandler callback = RestRequestHandler.CreateRequestCallback(handler, _logger);
             ThreadPool.QueueUserWorkItem(callback.Callback);
@@ -92,22 +94,19 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         /// <param name="mergeHandler">Request to be merged</param>
         private void MergeRequest(RequestHandler mergeHandler)
         {
-            lock (_syncRoot)
+            for (int i = 0; i < Requests.Count; i++)
             {
-                for (int i = 0; i < Requests.Count; i++)
+                RequestHandler handler = Requests[0];
+                if (handler.Request.Id > mergeHandler.Request.Id)
                 {
-                    RequestHandler handler = Requests[0];
-                    if (handler.Request.Id > mergeHandler.Request.Id)
-                    {
-                        Requests.Insert(i, mergeHandler);
-                        handler.Request.OnRequestQueued(this);
-                        return;
-                    }
+                    Requests.Insert(i, mergeHandler);
+                    handler.Request.OnRequestQueued(this);
+                    return;
                 }
-                
-                //Request is older than the current requests. Add it to the end.
-                Requests.Add(mergeHandler);
             }
+                
+            //Request is older than the current requests. Add it to the end.
+            Requests.Add(mergeHandler);
         }
 
         /// <summary>
@@ -117,35 +116,15 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         /// <param name="handler">Request to remove</param>
         private void DequeueRequest(RequestHandler handler)
         {
-            lock (_syncRoot)
-            {
-                _logger.Debug($"{nameof(Bucket)}.{nameof(DequeueRequest)} Bucket ID: {{0}} Request ID: {{1}}", Id, handler.Request.Id);
-                Requests.Remove(handler);
-            }
-        }
-
-        private int RequestCount()
-        {
-            lock (_syncRoot)
-            {
-                return Requests.Count;
-            }
-        }
-
-        private RequestHandler GetRequest(int index)
-        {
-            lock (_syncRoot)
-            {
-                return Requests[index];
-            }
+            _logger.Debug($"{nameof(Bucket)}.{nameof(DequeueRequest)} Bucket ID: {{0}} Request ID: {{1}} Removed: {{2}}", Id, handler.Request.Id, Requests.Remove(handler));
         }
 
         internal void Merge(Bucket data)
         {
-            int count = data.RequestCount();
-            for (int index = 0; index < count; index++)
+            ThreadSafeList<RequestHandler> requests = data.Requests;
+            for (int index = 0; index < requests.Count; index++)
             {
-                RequestHandler handler = data.GetRequest(0);
+                RequestHandler handler = requests[0];
                 MergeRequest(handler);
                 data.DequeueRequest(handler);
             }
@@ -207,7 +186,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 }
             }
 
-            if (RequestCount() == 0)
+            if (Requests.Count == 0)
             {
                 OnBucketCompleted();
             }
@@ -249,24 +228,23 @@ namespace Oxide.Ext.Discord.Rest.Buckets
 
         internal void AbortClientRequests(DiscordClient client)
         {
-            lock (_syncRoot)
+            for (int index = Requests.Count - 1; index >= 0; index--)
             {
-                for (int index = Requests.Count - 1; index >= 0; index--)
+                RequestHandler handler = Requests[index];
+                if (handler.Request.Client != client)
                 {
-                    RequestHandler handler = Requests[index];
-                    if (handler.Request.Client != client)
-                    {
-                        continue;
-                    }
-                    
-                    if (handler.Request.Status == RequestStatus.InProgress)
-                    {
-                        handler.Abort();
-                    }
-                        
-                    Requests.RemoveAt(index);
+                    continue;
                 }
+                    
+                if (handler.Request.Status == RequestStatus.InProgress)
+                {
+                    handler.Abort();
+                }
+                        
+                Requests.RemoveAt(index);
             }
+            
+            OnBucketCompleted();
         }
 
         private void OnBucketCompleted()
@@ -281,14 +259,11 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         internal void Shutdown()
         {
             _logger.Debug($"{nameof(Bucket)}.{nameof(Shutdown)} Shutting down bucket ID: {{0}}", Id);
-            lock (_syncRoot)
+            for (int index = Requests.Count - 1; index >= 0; index--)
             {
-                for (int index = Requests.Count - 1; index >= 0; index--)
-                {
-                    RequestHandler handler = Requests[index];
-                    handler.Abort();
-                    Requests.RemoveAt(index);
-                }
+                RequestHandler handler = Requests[index];
+                handler.Abort();
+                Requests.RemoveAt(index);
             }
             
             Semaphore.AllowAllThrough();
