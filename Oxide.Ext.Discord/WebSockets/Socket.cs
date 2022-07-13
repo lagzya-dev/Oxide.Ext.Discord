@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Authentication;
 using System.Timers;
 using Newtonsoft.Json;
 using Oxide.Core;
@@ -84,6 +85,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             _socket = new WebSocket(url);
 
+            _socket.SslConfiguration.EnabledSslProtocols |= (SslProtocols)3072; //TLS 1.2
             _socket.OnOpen += _listener.SocketOpened;
             _socket.OnClose += _listener.SocketClosed;
             _socket.OnError += _listener.SocketErrored;
