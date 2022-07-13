@@ -111,10 +111,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
             
-            if (e.Code == 1000 || e.Code == 4199)
-            {
-                _logger.Debug($"{nameof(SocketListener)}.{nameof(SocketClosed)} Discord WebSocket closed. Code: {{0}}, reason: {{1}}", e.Code, e.Reason);
-            }
+            _logger.Debug($"{nameof(SocketListener)}.{nameof(SocketClosed)} Discord WebSocket closed. Code: {{0}}, reason: {{1}}", e.Code, e.Reason);
             
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordWebsocketClosed, e.Reason, e.Code, e.WasClean);
             _webSocket.SocketState = SocketState.Disconnected;
@@ -155,7 +152,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             else
             {
-                _logger.Warning("Discord WebSocket closed with abnormal close code. Code: {{0}}, reason: {{1}}", code, reason);
+                _logger.Warning("Discord WebSocket closed with abnormal close code. Code: {0}, reason: {1}", code, reason);
                 _webSocket.Reconnect();
                 return;
             }
