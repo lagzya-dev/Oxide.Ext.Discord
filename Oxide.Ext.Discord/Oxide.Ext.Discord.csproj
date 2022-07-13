@@ -9,9 +9,9 @@
     <RepositoryUrl>https://github.com/Kirollos/Oxide.Ext.Discord</RepositoryUrl>
     <TargetFrameworks>net46;net45;net40;net35</TargetFrameworks>
     <LangVersion>7.0</LangVersion>
-    <PackageVersion>2.1.2.0</PackageVersion>
-    <AssemblyVersion>2.1.2</AssemblyVersion>
-    <FileVersion>2.1.2</FileVersion>
+    <PackageVersion>2.1.5.0</PackageVersion>
+    <AssemblyVersion>2.1.5</AssemblyVersion>
+    <FileVersion>2.1.5</FileVersion>
   </PropertyGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup />
