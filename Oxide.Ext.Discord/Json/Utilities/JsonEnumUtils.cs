@@ -1,17 +1,16 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Oxide.Ext.Discord.Threading;
 using Oxide.Plugins;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
 namespace Oxide.Ext.Discord.Json.Utilities
 {
-    internal static class EnumUtils
+    internal static class JsonEnumUtils
     {
-        private static readonly Hash<Type, EnumData> EnumData = new Hash<Type, EnumData>();
+        private static readonly ThreadSafeHash<Type, EnumData> EnumData = new ThreadSafeHash<Type, EnumData>();
 
-        private static readonly object Lock = new object();
-        
         internal static string ToEnumName(Type enumType, string enumText)
         {
             EnumData data = GetEnumData(enumType);
@@ -47,17 +46,14 @@ namespace Oxide.Ext.Discord.Json.Utilities
 
         private static EnumData GetEnumData(Type type)
         {
-            lock (Lock)
+            EnumData data = EnumData[type];  
+            if (data == null)
             {
-                EnumData data = EnumData[type];  
-                if (data == null)
-                {
-                    data = new EnumData(type);
-                    EnumData[type] = data;
-                }
-
-                return data;
+                data = new EnumData(type);
+                EnumData[type] = data;
             }
+
+            return data;
         }
     }
 
