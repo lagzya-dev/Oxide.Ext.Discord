@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.RateLimits
     /// <summary>
     /// Represents a base rate limit for websocket and rest api requests
     /// </summary>
-    public class BaseRateLimit
+    public abstract class BaseRateLimit
     {
         /// <summary>
         /// The number of requests that have executed since the last reset
