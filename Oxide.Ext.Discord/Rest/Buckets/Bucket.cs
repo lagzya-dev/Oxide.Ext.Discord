@@ -61,6 +61,9 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             _logger.Debug($"{nameof(Bucket)}.Ctor Bucket Created: {{0}}", Id);
         }
 
+        /// <summary>
+        /// Discord of the Thread Safe List
+        /// </summary>
         ~Bucket()
         {
             Requests.Dispose();

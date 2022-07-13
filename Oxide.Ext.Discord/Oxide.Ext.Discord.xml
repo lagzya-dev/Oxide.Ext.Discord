@@ -379,14 +379,30 @@
             <summary>
             Max Value for Integer Option
             </summary>
-            <param name="maxValue">Min Value</param>
+            <param name="maxValue">Max Value</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetMaxValue(System.Double)">
             <summary>
             Max Value for Number Option
             </summary>
-            <param name="maxValue">Min Value</param>
+            <param name="maxValue">Max Value</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetMinLength(System.Int32)">
+            <summary>
+            Min Length for String Option
+            Max Of 6000
+            </summary>
+            <param name="minLength">Min Length for the string</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetMaxLength(System.Int32)">
+            <summary>
+            Max Length for String Option
+            Max Of 6000
+            </summary>
+            <param name="maxLength">Max Length</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
@@ -2764,7 +2780,7 @@
             Should we display the error message
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.#ctor(Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Rest.Requests.Data.RequestData,System.Exception)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.#ctor(Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData,System.Exception)">
             <summary>
             Creates a new rest error
             </summary>
@@ -2938,13 +2954,6 @@
             </summary>
             <param name="client">Client the request was for</param>
             <returns>A cancelled <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestResponse"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.CreateUnhandledExceptionResponse(Oxide.Ext.Discord.Rest.Requests.RequestHandler)">
-            <summary>
-            Creates a REST API response for an unhandled exception
-            </summary>
-            <param name="handler">Handler for the request</param>
-            <returns>A unhandled exception <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestResponse"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.ParseData``1">
             <summary>
@@ -4132,6 +4141,12 @@
             <summary>
             Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.KeywordPreset"/>
             The internally pre-defined wordsets which will be searched for in content
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata.AllowList">
+            <summary>
+            Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.KeywordPreset"/>
+            Substrings which will be exempt from triggering the preset trigger type
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType">
@@ -9717,6 +9732,16 @@
             If the option is an INTEGER or NUMBER type, the maximum value permitted
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.MinLength">
+            <summary>
+            For option type STRING, the minimum allowed length (minimum of 0)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.MaxLength">
+            <summary>
+            For option type STRING, the maximum allowed length (minimum of 1)
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption.Autocomplete">
             <summary>
             If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
@@ -10114,23 +10139,23 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Data">
             <summary>
-            The command data payload
+            Interaction data payload
             See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionData"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GuildId">
             <summary>
-            The guild it was sent from
+            Guild that the interaction was sent from
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.ChannelId">
             <summary>
-            The channel it was sent from
+            Channel that the interaction was sent from
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Member">
             <summary>
-            Guild member data for the invoking user
+            Guild member data for the invoking user, including permissions
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.User">
@@ -10140,7 +10165,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Token">
             <summary>
-            A continuation token for responding to the interaction
+            Continuation token for responding to the interaction
             Interaction tokens are valid for 15 minutes and can be used to send followup messages but you must send an initial response within 3 seconds of receiving the event.
             If the 3 second deadline is exceeded, the token will be invalidated.
             </summary>
@@ -10153,6 +10178,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Message">
             <summary>
             For components, the message they were attached to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.AppPermissions">
+            <summary>
+            Bitwise set of permissions the app or bot has within the channel the interaction was sent from
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Locale">
@@ -12295,17 +12325,22 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageInteraction.Type">
             <summary>
-            The type of interaction
+            Type of interaction
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageInteraction.Name">
             <summary>
-            The name of the <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand"/> 
+            Name of the <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand"/>, including subcommands and subcommand groups 
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageInteraction.User">
             <summary>
             The user who invoked the interaction
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageInteraction.Member">
+            <summary>
+            Member who invoked the interaction in the guild
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageReaction">
@@ -12395,27 +12430,27 @@
             The message when another message is pinned
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildMemberJoin">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.UserJoin">
             <summary>
             The message when a new member joined
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.UserPremiumGuildSubscription">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildBoost">
             <summary>
              The message for when a user boosts a guild
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.UserPremiumGuildSubscriptionTier1">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildBoostTier1">
             <summary>
             The message for when a guild reaches Tier 1 of Nitro boosts
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.UserPremiumGuildSubscriptionTier2">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildBoostTier2">
             <summary>
             The message for when a guild reaches Tier 2 of Nitro boosts
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.UserPremiumGuildSubscriptionTier3">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildBoostTier3">
             <summary>
             The message for when a guild reaches Tier 3 of Nitro boosts
             </summary>
@@ -16368,6 +16403,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.CreateNew">
+            <summary>
+            Creates new type of T
+            </summary>
+            <returns>Newly created type of T</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Free(`0@)">
             <summary>
             Frees an item back to the pool
@@ -16696,6 +16737,11 @@
             <param name="rest">The handler that owns this Bucket</param>
             <param name="logger">Logger for this bucket</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.Finalize">
+            <summary>
+            Discord of the Thread Safe List
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Queues a new request for the buck
@@ -16777,11 +16823,6 @@
             Content type for the section
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection.Data">
-            <summary>
-            Data for the section
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection.SectionName">
             <summary>
             Name of the section
@@ -16849,7 +16890,7 @@
             Section name for the multipart section
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.Init(System.String,System.Byte[],System.String)">
+        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.Init(System.String,System.String,System.String)">
             <summary>
             Constructor for byte form data
             </summary>
@@ -16859,11 +16900,6 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.DisposeInternal">
             <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Multipart.MultipartHandler">
-            <summary>
-            Handles converting Multipart requests to their respective byte[]
-            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Requests.BaseRequest">
             <summary>
@@ -16938,66 +16974,71 @@
         <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.LeavePool">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData">
+        <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData">
             <summary>
-            Represents a multipart request data type
+            Represents request data passed into an API request
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData.InitMultipart(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Interfaces.IFileAttachments)">
-            <summary>
-            Initializes the Request Data
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.RequestData">
-            <summary>
-            Represents Request Data to be passed into the REST API request
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.StringContents">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.StringContents">
             <summary>
             Data contents serialized to JSON
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.Contents">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.Contents">
             <summary>
             Data serialized to bytes 
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.ContentType">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.ContentType">
             <summary>
             The content type of the data
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.Data">
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.Data">
             <summary>
             Data to be serialized into the request
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.Client">
-            <summary>
-            Client making the request
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.CreateRequestData(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.CreateRequestData(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Creates request data for the given request
             </summary>
             <param name="request">Request to create data for</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Rest.Requests.Data.RequestData"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Rest.Requests.Data.JsonRequestData"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.WriteRequestData(System.Net.WebRequest)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.WriteRequestData(System.Net.WebRequest)">
             <summary>
             Writes the request data to the web request
             </summary>
             <param name="request">Request to be written to</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.DisposeInternal">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.RequestData.EnterPool">
+        <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.JsonRequestData">
+            <summary>
+            Represents Request Data to be passed into the REST API request
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.JsonRequestData.Init(Oxide.Ext.Discord.DiscordClient,System.Object)">
+            <summary>
+            Initializes the Request Data
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.JsonRequestData.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData">
+            <summary>
+            Represents a multipart request data type
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Interfaces.IFileAttachments)">
+            <summary>
+            Initializes the Request Data
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Requests.Request">
@@ -17066,11 +17107,6 @@
             Represent a Discord API request
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestHandler._requestUrl">
-            <summary>
-            Full Request URl to the API
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.CreateRequestHandler(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Creates a new <see cref="T:Oxide.Ext.Discord.Rest.Requests.RequestHandler"/>
@@ -17115,6 +17151,11 @@
             Requesting is waiting for bucket to be ready
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.PendingCreateData">
+            <summary>
+            Waiting to create request data
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.PendingStart">
             <summary>
             Request is waiting to start
@@ -17128,11 +17169,6 @@
         <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.Completed">
             <summary>
             Request completed and was not cancelled
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.Cancelled">
-            <summary>
-            Request was cancelled
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Requests.Request`1">
@@ -17204,6 +17240,11 @@
             <param name="client">Client the request is for</param>
             <param name="logger">Logger from the client</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Finalize">
+            <summary>
+            Discord of the Thread Safe Hashs
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Creates a new request and queues it to be ran
@@ -17249,6 +17290,130 @@
             <summary>
             Shutdown the REST handler
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Threading.ThreadSafeHash`2">
+            <summary>
+            Represents a ThreadSafe Hash
+            </summary>
+            <typeparam name="TKey">Type of the key</typeparam>
+            <typeparam name="TValue">Type of the value</typeparam>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.IsReadOnly">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Keys">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Values">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Item(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.TryGetValue(`0,`1@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.ContainsKey(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Add(`0,`1)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Remove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Threading.ThreadSafeList`1">
+            <summary>
+            Thread Safe List
+            </summary>
+            <typeparam name="T">Type of T</typeparam>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeList`1.IsReadOnly">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeList`1.Count">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.#ctor(System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="capacity">Starting capacity of the list</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="collection">Initial items in the list</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.Contains(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.IndexOf(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeList`1.Item(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.Add(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds items into the list
+            </summary>
+            <param name="items">Items to be added</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if items is null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.Insert(System.Int32,`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.Remove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.RemoveAt(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.CopyTo(`0[],System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.Dispose">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.DispatchCode">
             <summary>

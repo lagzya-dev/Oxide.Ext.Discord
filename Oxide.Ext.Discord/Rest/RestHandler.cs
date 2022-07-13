@@ -50,6 +50,9 @@ namespace Oxide.Ext.Discord.Rest
             _logger = logger;
         }
 
+        /// <summary>
+        /// Discord of the Thread Safe Hashs
+        /// </summary>
         ~RestHandler()
         {
             Buckets.Dispose();
