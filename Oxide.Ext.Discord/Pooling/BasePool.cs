@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// Represents a BasePool in Discord
     /// </summary>
     /// <typeparam name="T">Type being pooled</typeparam>
-    public abstract class BasePool<T> : IPool<T> where T : class, new()
+    public abstract class BasePool<T> : IPool<T> where T : class
     {
         private readonly T[] _pool;
         private int _index;
@@ -44,12 +44,18 @@ namespace Oxide.Ext.Discord.Pooling
             
             if (item == null)
             {
-                item = new T();
+                item = CreateNew();
             }
 
             OnGetItem(item);
             return item;
         }
+
+        /// <summary>
+        /// Creates new type of T
+        /// </summary>
+        /// <returns>Newly created type of T</returns>
+        protected abstract T CreateNew();
 
         /// <summary>
         /// Frees an item back to the pool

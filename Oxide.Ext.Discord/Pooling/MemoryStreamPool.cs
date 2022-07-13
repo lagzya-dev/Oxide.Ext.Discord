@@ -15,7 +15,9 @@ namespace Oxide.Ext.Discord.Pooling
         }
 
         private MemoryStreamPool() : base(128) { }
-        
+
+        protected override MemoryStream CreateNew() => new MemoryStream();
+
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref MemoryStream item)
         {

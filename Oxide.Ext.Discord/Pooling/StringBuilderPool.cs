@@ -14,7 +14,9 @@ namespace Oxide.Ext.Discord.Pooling
         }
 
         private StringBuilderPool() : base(128) { }
-        
+
+        protected override StringBuilder CreateNew() => new StringBuilder();
+
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref StringBuilder item)
         {

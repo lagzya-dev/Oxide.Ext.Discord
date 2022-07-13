@@ -11,6 +11,8 @@ namespace Oxide.Ext.Discord.Pooling
 
         private ObjectPool() : base(256) { }
 
+        protected override T CreateNew() => new T();
+
         protected override void OnGetItem(T item)
         {
             item.LeavePoolInternal();

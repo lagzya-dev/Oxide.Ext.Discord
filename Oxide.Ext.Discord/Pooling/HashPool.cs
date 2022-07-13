@@ -18,6 +18,8 @@ namespace Oxide.Ext.Discord.Pooling
 
         private HashPool() : base(128) { }
         
+        protected override Hash<TKey, TValue> CreateNew() => new Hash<TKey, TValue>();
+        
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref Hash<TKey, TValue> item)
         {

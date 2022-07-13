@@ -17,6 +17,8 @@ namespace Oxide.Ext.Discord.Pooling
 
         private ListPool() : base(128) { }
         
+        protected override List<T> CreateNew() => new List<T>();
+        
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref List<T> item)
         {
