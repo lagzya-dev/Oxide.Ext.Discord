@@ -24,6 +24,8 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// Example: wss://gateway.discord.gg/?v=8&amp;encoding=json
         /// </summary>
         public static string WebsocketUrl { get; private set; }
+        
+        public static DateTime LastUpdate { get; private set; }
 
         /// <summary>
         /// Returns an object with a single valid WSS URL, which the client can use for Connecting.
@@ -43,6 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
             GetGateway(client, gateway =>
             {
                 WebsocketUrl = $"{gateway.Url}/?{DiscordEndpoints.Websocket.WebsocketArgs}";
+                LastUpdate = DateTime.UtcNow;
                 client.Logger.Debug($"{nameof(Gateway)}.{nameof(UpdateGatewayUrl)} Updated Gateway Url: {{0}}", WebsocketUrl);
                 callback.Invoke();
             }, error);
