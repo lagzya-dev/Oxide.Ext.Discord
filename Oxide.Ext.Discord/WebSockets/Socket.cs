@@ -263,8 +263,10 @@ namespace Oxide.Ext.Discord.WebSockets
                 SocketState = SocketState.PendingReconnect;
             }
             
+            _reconnectRetries++;
+            
             //If we haven't had any errors reconnect to the gateway
-            if (_reconnectRetries == 0)
+            if (_reconnectRetries == 1)
             {
                 Interface.Oxide.NextTick(Connect);
                 return;
@@ -283,7 +285,6 @@ namespace Oxide.Ext.Discord.WebSockets
 
             _logger.Warning($"Attempting to reconnect to Discord... [Retry={_reconnectRetries.ToString()}]");
             _reconnectTimer.Start();
-            _reconnectRetries++;
         }
 
         private void ReconnectWebsocket(object sender, ElapsedEventArgs e)
