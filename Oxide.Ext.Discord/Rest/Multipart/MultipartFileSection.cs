@@ -49,6 +49,11 @@ namespace Oxide.Ext.Discord.Rest.Multipart
             return section;
         }
         
+        public void WriteData(MultipartWriter writer)
+        {
+            writer.Write(Data);
+        }
+        
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
@@ -58,6 +63,7 @@ namespace Oxide.Ext.Discord.Rest.Multipart
         protected override void EnterPool()
         {
             base.EnterPool();
+            FileName = null;
             ContentType = null;
             Data = null;
             SectionName = null;

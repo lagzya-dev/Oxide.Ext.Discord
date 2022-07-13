@@ -24,19 +24,13 @@ namespace Oxide.Ext.Discord.Rest.Multipart
         }
 
         /// <summary>
-        /// Data for the section
-        /// </summary>
-        byte[] Data
-        {
-            get;
-        }
-
-        /// <summary>
         /// Name of the section
         /// </summary>
         string SectionName
         {
             get;
         }
+
+        void WriteData(MultipartWriter writer);
     }
 }
