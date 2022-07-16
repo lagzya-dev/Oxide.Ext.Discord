@@ -1,5 +1,6 @@
 using System;
-using Oxide.Core;
+using System.Net.Http;
+using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Pooling;
@@ -26,19 +27,19 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <param name="onSuccess">Callback when the web request finishes successfully</param>
         /// <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
         /// <returns>A <see cref="Request"/></returns>
-        public static Request CreateRequest(DiscordClient client, RequestMethod method, string route, object data, Action onSuccess, Action<RequestError> onError)
+        public static Request CreateRequest(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action onSuccess, Action<RequestError> onError)
         {
             Request request = DiscordPool.Get<Request>();
-            request.Init(client, method, route, data, onSuccess, onError);
+            request.Init(client, httpClient, method, route, data, onSuccess, onError);
             return request;
         }
         
         /// <summary>
         /// Initializes the Request
         /// </summary>
-        private void Init(DiscordClient client, RequestMethod method, string route, object data, Action onSuccess, Action<RequestError> onError)
+        private void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action onSuccess, Action<RequestError> onError)
         {
-            base.Init(client, method, route, data, onError);
+            base.Init(client, httpClient, method, route, data, onError);
             OnSuccess = onSuccess;
         }
 
@@ -49,7 +50,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             {
                 ApiSuccessCallback callback = DiscordPool.Get<ApiSuccessCallback>();
                 callback.Init(this);
-                Interface.Oxide.NextTick(callback.Callback);
+                callback.Run();
             }
         }
 

@@ -1,13 +1,15 @@
 using System;
-using Oxide.Core;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using Oxide.Ext.Discord.Callbacks.Api;
-using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
+using RequestMethod = Oxide.Core.Libraries.RequestMethod;
 
 namespace Oxide.Ext.Discord.Rest.Requests
 {
@@ -42,11 +44,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
         public object Data;
 
         /// <summary>
-        /// Returns the full web url for the request
-        /// </summary>
-        public string RequestUrl;
-        
-        /// <summary>
         /// Callback to call if the request errored with the last error message
         /// </summary>
         internal Action<RequestError> OnError;
@@ -55,9 +52,10 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Discord Client making the request
         /// </summary>
         internal DiscordClient Client;
-        internal string AuthHeader;
+        internal HttpClient HttpClient;
+        internal CancellationTokenSource Source;
         internal Bucket Bucket;
-        internal bool IsCancelled;
+        internal bool IsCancelled => Source.IsCancellationRequested;
 
         /// <summary>
         /// How long to wait before retrying request since there was a web exception
@@ -68,26 +66,26 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Initializes the request
         /// </summary>
-        protected void Init(DiscordClient client, RequestMethod method, string route, object data, Action<RequestError> onError)
+        protected void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<RequestError> onError)
         {
             Id = new Snowflake(DateTimeOffset.UtcNow);
             Client = client;
+            HttpClient = httpClient;
             Method = method;
             Route = route;
-            RequestUrl = DiscordEndpoints.Rest.ApiUrl + Route;
             Data = data;
-            AuthHeader = client.Bot.Rest.AuthHeader;
             OnError = onError;
+            Source = new CancellationTokenSource();
             _logger = client.Logger;
             _logger.Debug($"{nameof(BaseRequest)}.{nameof(Init)} Request Created Plugin: {{0}} Request ID: {{1}} Method: {{2}} Route: {{3}}", client.PluginName, Id, Method, route);
         }
 
-        internal void WaitUntilRequestCanStart()
+        internal async Task WaitUntilRequestCanStart(CancellationToken token)
         {
             if (_errorResetAt > DateTimeOffset.UtcNow)
             {
                 _logger.Debug($"{nameof(BaseRequest)}.{nameof(WaitUntilRequestCanStart)} Request ID: {{0}} Can't Start Request Due to Previous Error Reset Waiting For: {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                ThreadExt.SleepUntil(_errorResetAt);
+                await Task.Delay(_errorResetAt - DateTimeOffset.UtcNow, token);
             }
         }
 
@@ -124,7 +122,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             ApiErrorCallback callback = DiscordPool.Get<ApiErrorCallback>();
             callback.Init(this, response);
-            Interface.Oxide.NextTick(callback.Callback);
+            callback.Run();
         }
 
         internal void OnRequestErrored()
@@ -146,15 +144,14 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Method = default(RequestMethod);
             Status = default(RequestStatus);
             Route = null;
-            RequestUrl = null;
+            HttpClient = null;
             Data = null;
             OnError = null;
             Client = null;
-            AuthHeader = null;
+            Source = null;
             Bucket = null;
             _errorResetAt = DateTimeOffset.MinValue;
             _logger = null;
-            IsCancelled = false;
         }
 
         ///<inheritdoc/>

@@ -138,7 +138,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <returns>ID as a string</returns>
         public override string ToString()
         {
-            return IsValid() ? Id.ToString() : string.Empty;
+            return Id.ToString();
         }
 
         /// <summary>

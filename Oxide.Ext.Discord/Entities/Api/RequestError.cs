@@ -1,9 +1,11 @@
 using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
-using Oxide.Ext.Discord.Rest.Requests.Data;
 
 namespace Oxide.Ext.Discord.Entities.Api
 {
@@ -23,9 +25,9 @@ namespace Oxide.Ext.Discord.Entities.Api
         public readonly RequestMethod RequestMethod;
 
         /// <summary>
-        /// The web exception from the request
+        /// The exception from the request
         /// </summary>
-        public readonly Exception Exception;
+        public Exception Exception { get; private set; }
 
         /// <summary>
         /// The URI that was called
@@ -40,7 +42,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// HTTP Content Type for the request
         /// </summary>
-        public readonly string ContentType;
+        public string ContentType { get; private set; }
 
         /// <summary>
         /// How long it has been since the discord epoch in seconds
@@ -50,7 +52,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// The string contents of the request
         /// </summary>
-        public readonly string StringContents;
+        public string StringContents { get; private set; }
 
         /// <summary>
         /// HTTP Status code
@@ -82,9 +84,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// Creates a new rest error
         /// </summary>
         /// <param name="request">Request the error is for</param>
-        /// <param name="exception">The web exception we received</param>
-        /// <param name="data">Data passed to the request</param>
-        internal RequestError(BaseRequest request, BaseRequestData data, Exception exception)
+        internal RequestError(BaseRequest request, RequestErrorType type, DiscordLogLevel log)
         {
             RequestId = request.Id;
             _client = request.Client;
@@ -92,10 +92,26 @@ namespace Oxide.Ext.Discord.Entities.Api
             Url = request.Route;
             RequestMethod = request.Method;
             Data = request.Data;
-            ContentType = data?.ContentType;
-            StringContents = data?.StringContents;
             TimeSinceEpoch = TimeHelpers.TimeSinceEpoch();
-            Exception = exception;
+            ErrorType = type;
+            _logLevel = log;
+        }
+
+        internal async Task<RequestError> WithRequest(HttpRequestMessage request)
+        {
+            if (request.Content != null)
+            {
+                ContentType = request.Content.Headers.ContentType.ToString();
+                StringContents = await request.Content.ReadAsStringAsync();
+            }
+
+            return this;
+        }
+
+        internal RequestError WithException(Exception ex)
+        {
+            Exception = ex;
+            return this;
         }
 
         /// <summary>

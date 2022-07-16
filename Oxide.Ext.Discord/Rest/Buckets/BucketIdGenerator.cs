@@ -1,6 +1,6 @@
 using System.Text;
+using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Rest.Buckets

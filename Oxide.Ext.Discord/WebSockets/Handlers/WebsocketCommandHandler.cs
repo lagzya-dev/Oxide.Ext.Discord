@@ -14,10 +14,10 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
     /// <summary>
     /// Handles command queueing when the websocket is down
     /// </summary>
-    public class SocketCommandHandler
+    public class WebsocketCommandHandler
     {
         private readonly BotClient _client;
-        private readonly Socket _webSocket;
+        private readonly DiscordWebSocket _webSocket;
         private readonly ILogger _logger;
         private readonly ThreadSafeList<CommandPayload> _pendingCommands = new ThreadSafeList<CommandPayload>();
         private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="client">Bot Client for socket commands</param>
         /// <param name="webSocket">Websocket to handle commands for</param>
         /// <param name="logger">Logger for this handler</param>
-        public SocketCommandHandler(BotClient client, Socket webSocket, ILogger logger)
+        public WebsocketCommandHandler(BotClient client, DiscordWebSocket webSocket, ILogger logger)
         {
             _client = client;
             _webSocket = webSocket;
@@ -49,10 +49,10 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="command">Command to send over the websocket</param>
         public void Enqueue(CommandPayload command)
         {
-            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(Enqueue)} Queuing command {{0}}", command.OpCode);
+            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(Enqueue)} Queuing command {{0}}", command.OpCode);
 
             //If websocket has connect and we need to identify or resume send those payloads right away
-            if (_webSocket.IsConnected() && (command.OpCode == GatewayCommandCode.Identify || command.OpCode == GatewayCommandCode.Resume))
+            if (_webSocket.Handler.IsConnected() && (command.OpCode == GatewayCommandCode.Identify || command.OpCode == GatewayCommandCode.Resume))
             {
                 _webSocket.Send(command);
                 return;
@@ -78,27 +78,27 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             SendCommands();
         }
 
-        internal void OnSocketConnected()
+        internal void OnWebSocketReady()
         {
-            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(OnSocketConnected)} Socket Connected. Sending queued commands.");
+            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(OnWebSocketReady)} Socket Connected. Sending queued commands.");
             _socketCanSendCommands = true;
             SendCommands();
         }
 
         internal void OnSocketDisconnected()
         {
-            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(OnSocketDisconnected)} Socket Disconnected. Queuing Commands.");
+            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(OnSocketDisconnected)} Socket Disconnected. Queuing Commands.");
             _socketCanSendCommands = false;
         }
 
         private void RateLimitElapsed(object sender, ElapsedEventArgs e)
         {
-            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(RateLimitElapsed)} Rate Limit has elapsed. Send Queued Commands");
+            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(RateLimitElapsed)} Rate Limit has elapsed. Send Queued Commands");
             _rateLimitTimer.Stop();
             if (!_socketCanSendCommands)
             {
                 _rateLimitTimer.Interval = 1000;
-                _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(RateLimitElapsed)} Can't send commands right now. Trying again in 1 second");
+                _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(RateLimitElapsed)} Can't send commands right now. Trying again in 1 second");
                 _rateLimitTimer.Start();
                 return;
             }
@@ -128,13 +128,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     _rateLimitTimer.Interval = nextReset.SecondsUntilTime();
                     _rateLimitTimer.Stop();
                     _rateLimitTimer.Start();
-                    _logger.Warning($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {{0}} seconds\nOpcode: {{1}}\nPayload: {{2}}", nextReset, payload.OpCode, JsonConvert.SerializeObject(payload.Payload, _client.ClientSerializerSettings));
+                    _logger.Warning($"{nameof(WebsocketCommandHandler)}.{nameof(SendCommands)} Rate Limit Hit! Retrying in {{0}} seconds\nOpcode: {{1}}\nPayload: {{2}}", nextReset, payload.OpCode, JsonConvert.SerializeObject(payload.Payload, _client.ClientSerializerSettings));
                 }
 
                 return false;
             }
 
-            _logger.Debug($"{nameof(SocketCommandHandler)}.{nameof(SendCommands)} Sending Command {{0}}", payload.OpCode);
+            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(SendCommands)} Sending Command {{0}}", payload.OpCode);
 
             if (!_webSocket.Send(payload))
             {

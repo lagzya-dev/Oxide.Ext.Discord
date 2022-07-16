@@ -21,14 +21,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public string ContentType { get; set; }
 
         /// <summary>
-        /// Default Constructor
-        /// </summary>
-        public MessageFileAttachment()
-        {
-
-        }
-
-        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="fileName">File Attachment Name</param>

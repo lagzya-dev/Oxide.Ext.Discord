@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Callbacks
         /// <summary>
         /// The callback to be called by the delegate
         /// </summary>
-        public readonly Action Callback;
+        protected readonly Action Callback;
         
         /// <summary>
         /// Constructor
@@ -26,6 +26,11 @@ namespace Oxide.Ext.Discord.Callbacks
         /// Overridden in the child class to handle the callback
         /// </summary>
         protected abstract void HandleCallback();
+
+        /// <summary>
+        /// Run the callback
+        /// </summary>
+        public abstract void Run();
 
         private void CallbackInternal()
         {

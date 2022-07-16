@@ -1,5 +1,4 @@
 using System;
-using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Libraries;
 using Oxide.Ext.Discord.Entities;
@@ -47,7 +46,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         public void Invoke(DiscordMessage message)
         {
             SubscriptionCallback callback = SubscriptionCallback.CreateCallback(_plugin, message, _callback);
-            Interface.Oxide.NextTick(callback.Callback);
+            callback.Run();
         }
 
         internal void OnRemoved()

@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Libraries
 {
-    internal class SubscriptionCallback : BaseCallback
+    internal class SubscriptionCallback : BaseNextTickCallback
     {
         private DiscordMessage _message;
         private Action<DiscordMessage> _messageCallback;

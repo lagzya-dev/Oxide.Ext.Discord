@@ -1,12 +1,12 @@
 using System;
+using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest.Requests;
 
 namespace Oxide.Ext.Discord.Callbacks.Api
 {
-    internal abstract class BaseApiCallback : BaseCallback
+    internal abstract class BaseApiCallback : BaseNextTickCallback
     {
         private DiscordClient _client;
         private Snowflake _requestId;

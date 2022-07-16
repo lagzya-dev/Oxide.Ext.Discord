@@ -1,5 +1,5 @@
 using System;
-using System.Net;
+using System.Net.Http.Headers;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// </summary>
         /// <param name="headers">Headers for the rate limit</param>
         /// <param name="logger">Logger</param>
-        public void Init(WebHeaderCollection headers, ILogger logger)
+        public void Init(HttpResponseHeaders headers, ILogger logger)
         {
             IsGlobalRateLimit = headers.GetBool(RateLimitHeaders.IsGlobal);
             Scope = headers.Get(RateLimitHeaders.Scope);
@@ -67,7 +67,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             }
         }
 
-        private double GetBucketReset(WebHeaderCollection headers)
+        private double GetBucketReset(HttpResponseHeaders headers)
         {
             return Math.Max(headers.GetDouble(RateLimitHeaders.BucketResetAfter), headers.GetDouble(RateLimitHeaders.RetryAfter));
         }

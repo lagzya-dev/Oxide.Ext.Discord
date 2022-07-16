@@ -1,14 +1,17 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Threading;
-using Oxide.Ext.Discord.Callbacks.ThreadPool;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
-using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord.Rest
 {
@@ -17,6 +20,8 @@ namespace Oxide.Ext.Discord.Rest
     /// </summary>
     public class RestHandler
     {
+        public readonly HttpClient Client;
+        
         /// <summary>
         /// Global Rate Limit for the bot
         /// </summary>
@@ -25,20 +30,20 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Buckets with Routes we don't know the Hash of yet
         /// </summary>
-        public readonly ThreadSafeHash<string, Bucket> Buckets = new ThreadSafeHash<string, Bucket>();
+        public readonly ConcurrentDictionary<string, Bucket> Buckets = new ConcurrentDictionary<string, Bucket>();
 
         /// <summary>
         /// Route to Bucket Hash
         /// </summary>
-        public readonly ThreadSafeHash<string, string> RouteToHash = new ThreadSafeHash<string, string>();
+        public readonly ConcurrentDictionary<string, string> RouteToHash = new ConcurrentDictionary<string, string>();
 
         /// <summary>
         /// The authorization header value
         /// </summary>
-        internal readonly string AuthHeader;
+        //internal readonly string AuthHeader;
         
         private readonly ILogger _logger;
-
+        
         /// <summary>
         /// Creates a new REST handler for a bot client
         /// </summary>
@@ -46,17 +51,22 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="logger">Logger from the client</param>
         public RestHandler(BotClient client, ILogger logger)
         {
-            AuthHeader = $"Bot {client.Settings.ApiToken}";
+            HttpClientHandler handler = new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                UseCookies = false,
+            };
+            Client = new HttpClient(handler)
+            {
+                Timeout = TimeSpan.FromSeconds(15),
+                //BaseAddress = new Uri(DiscordEndpoints.Rest.ApiUrl)
+            };
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", client.Settings.ApiToken);
+            Client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
+            Client.DefaultRequestHeaders.AcceptEncoding.Add( StringWithQualityHeaderValue.Parse("gzip"));
+            Client.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("deflate"));
+            Client.DefaultRequestHeaders.Add("user-agent", $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, v{DiscordExtension.FullExtensionVersion})");
             _logger = logger;
-        }
-
-        /// <summary>
-        /// Discord of the Thread Safe Hashs
-        /// </summary>
-        ~RestHandler()
-        {
-            Buckets.Dispose();
-            RouteToHash.Dispose();
         }
 
         /// <summary>
@@ -75,8 +85,8 @@ namespace Oxide.Ext.Discord.Rest
                 validate.Validate();
             }
             
-            Request request = Request.CreateRequest(client, method, url, data, success, error);
-            QueueRequest(request);
+            Request request = Request.CreateRequest(client, Client, method, url, data, success, error);
+            StartRequest(request);
         }
 
         /// <summary>
@@ -96,46 +106,46 @@ namespace Oxide.Ext.Discord.Rest
                 validate.Validate();
             }
 
-            Request<T> request = Request<T>.CreateRequest(client, method, url, data, success, error);
-            QueueRequest(request);
+            Request<T> request = Request<T>.CreateRequest(client, Client, method, url, data, success, error);
+            StartRequest(request);
         }
 
         /// <summary>
         /// Queues the request using the thread pool so we don't block the main thread with any locks
         /// </summary>
         /// <param name="request"></param>
-        public void QueueRequest(BaseRequest request)
+        public void StartRequest(BaseRequest request)
         {
-            _logger.Debug("RestHandler Queuing Request for Method: {0} Route: {1}", request.Method, request.Route);
-            QueueRequestHandler queue = QueueRequestHandler.Create(request, this);
-            ThreadPool.QueueUserWorkItem(queue.Callback);
+            _logger.Debug($"{nameof(RestHandler)}.{nameof(StartRequest)} Method: {{0}} Route: {{1}}", request.Method, request.Route);
+            RestRequestHandler handler = RestRequestHandler.CreateRequestCallback(this, request, _logger);
+            handler.Run();
         }
         
         /// <summary>
         /// Queues the request for the bucket
         /// </summary>
-        public void QueueBucket(BaseRequest request)
+        public Bucket QueueBucket(RequestHandler handler, BaseRequest request)
         {
             string bucketId = BucketIdGenerator.GetBucketId(request.Method, request.Route);
-            _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}", request.Route, bucketId);
+            _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}",  request.Route, bucketId);
             Bucket bucket = GetBucket(bucketId);
-            bucket.QueueRequest(request);
+            bucket.QueueRequest(handler, request);
+            return bucket;
         }
 
         internal void UpgradeToKnownBucket(Bucket bucket, string newBucketId)
         {
             _logger.Debug("RestHandler Upgrading To Known Bucket for Old ID: {0} New ID: {1}", bucket.Id, newBucketId);
             RouteToHash[bucket.Id] = newBucketId;
-                
-            Bucket existing = Buckets[newBucketId];
-            if (existing != null)
+
+            if (Buckets.TryGetValue(newBucketId, out Bucket existing))
             {
                 existing.Merge(bucket);
                 bucket.Shutdown();
                 return;
             }
 
-            Buckets.Remove(bucket.Id);
+            Buckets.TryRemove(bucket.Id, out Bucket _);
             bucket.Id = newBucketId;
             bucket.IsKnowBucket = true;
             Buckets[newBucketId] = bucket;
@@ -143,7 +153,7 @@ namespace Oxide.Ext.Discord.Rest
 
         internal void RemoveBucket(Bucket bucket)
         {
-            Buckets.Remove(bucket.Id);
+            Buckets.TryRemove(bucket.Id, out Bucket _);
         }
 
         /// <summary>
@@ -157,9 +167,8 @@ namespace Oxide.Ext.Discord.Rest
             {
                 bucketId = RouteToHash[bucketId];
             }
-                
-            Bucket bucket = Buckets[bucketId];
-            if (bucket == null)
+
+            if (!Buckets.TryGetValue(bucketId, out Bucket bucket))
             {
                 bucket = new Bucket(bucketId, this, _logger);
                 Buckets[bucketId] = bucket;

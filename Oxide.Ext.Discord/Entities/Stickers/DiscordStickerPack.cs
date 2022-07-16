@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Entities.Api;
 
 namespace Oxide.Ext.Discord.Entities.Stickers

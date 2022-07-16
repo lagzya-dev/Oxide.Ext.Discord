@@ -2,14 +2,14 @@
 <Project>
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup>
-    <Version>2.0.3.0</Version>
+    <Version>2.2.0.0</Version>
     <AssemblyName>Oxide.Ext.Discord</AssemblyName>
     <Authors>Kirollos</Authors>
     <Description>An Oxide extension for Discord.</Description>
     <RepositoryUrl>https://github.com/Kirollos/Oxide.Ext.Discord</RepositoryUrl>
-    <TargetFrameworks>net46;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>net461;net48</TargetFrameworks>
     <LangVersion>7.0</LangVersion>
-    <PackageVersion>2.1.2.0</PackageVersion>
+    <PackageVersion>2.2.0.0</PackageVersion>
     <AssemblyVersion>2.2.0</AssemblyVersion>
     <FileVersion>2.2.0</FileVersion>
   </PropertyGroup>
@@ -23,32 +23,17 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net35" Version="1.0.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net40" Version="1.0.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net45" Version="1.0.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Oxide.Core" Version="2.0.4029">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="Oxide.CSharp" Version="2.0.4054">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Oxide.References" Version="2.0.3780">
-      <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
-    </PackageReference>
-    <PackageReference Include="WebSocketSharpFork" Version="1.0.*">
-      <ExcludeAssets>all</ExcludeAssets>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 </Project>

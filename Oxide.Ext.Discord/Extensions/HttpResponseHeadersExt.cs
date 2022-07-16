@@ -1,10 +1,17 @@
-using System.Net;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
 
 namespace Oxide.Ext.Discord.Extensions
 {
-    internal static class WebHeaderCollectionExt
+    internal static class HttpResponseHeadersExt
     {
-        internal static bool GetBool(this WebHeaderCollection headers, string key)
+        internal static string Get(this HttpResponseHeaders headers, string key)
+        {
+            return headers.TryGetValues(key, out IEnumerable<string> values) ? values.FirstOrDefault() : null;
+        }
+        
+        internal static bool GetBool(this HttpResponseHeaders headers, string key)
         {
             string value = headers.Get(key);
             if (string.IsNullOrEmpty(value) || !bool.TryParse(value, out bool result))
@@ -15,7 +22,7 @@ namespace Oxide.Ext.Discord.Extensions
             return result;
         }
         
-        internal static int GetInt(this WebHeaderCollection headers, string key)
+        internal static int GetInt(this HttpResponseHeaders headers, string key)
         {
             string value = headers.Get(key);
             if (string.IsNullOrEmpty(value) || !int.TryParse(value, out int result))
@@ -26,7 +33,7 @@ namespace Oxide.Ext.Discord.Extensions
             return result;
         }
         
-        internal static double GetDouble(this WebHeaderCollection headers, string key)
+        internal static double GetDouble(this HttpResponseHeaders headers, string key)
         {
             string value = headers.Get(key);
             if (string.IsNullOrEmpty(value) || !double.TryParse(value, out double result))

@@ -1,11 +1,19 @@
 using System;
-using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Cache;
+using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
-using Oxide.Ext.Discord.Rest.Requests.Data;
+using Oxide.Plugins;
+using HttpMethod = System.Net.Http.HttpMethod;
 
 namespace Oxide.Ext.Discord.Rest.Requests
 {
@@ -14,14 +22,20 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// </summary>
     public class RequestHandler : BasePoolable
     {
-        private const int TimeoutDuration = 15;
-
         internal BaseRequest Request;
         
-        private BaseRequestData _data;
         private RequestResponse _response;
-        private HttpWebRequest _webRequest;
+        private CancellationToken _token;
         private ILogger _logger;
+
+        private static readonly Hash<RequestMethod, HttpMethod> HttpMethods = new Hash<RequestMethod, HttpMethod>
+        {
+            [RequestMethod.GET] = HttpMethod.Get,
+            [RequestMethod.PUT] = HttpMethod.Put,
+            [RequestMethod.POST] = HttpMethod.Post,
+            [RequestMethod.PATCH] = new HttpMethod("PATCH"),
+            [RequestMethod.DELETE] = HttpMethod.Delete,
+        };
 
         /// <summary>
         /// Creates a new <see cref="RequestHandler"/>
@@ -42,51 +56,48 @@ namespace Oxide.Ext.Discord.Rest.Requests
         private void Init(BaseRequest request, ILogger logger)
         {
             Request = request;
+            _token = Request.Source.Token;
             _logger = logger;
         }
 
         /// <summary>
         /// Fires the request off
         /// </summary>
-        public void Run()
+        public async Task Run()
         {
             try
             {
-                _response = RunInternal();
-                Request.OnRequestCompleted(this, _response); 
+                _response = await RunInternal();
             }
             catch (Exception ex)
             {
-                _response = RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.Generic, DiscordLogLevel.Exception), RequestCompletedStatus.ErrorFatal);
-                Request.OnRequestCompleted(this, _response); 
+                _response = await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Exception).WithException(ex), RequestCompletedStatus.ErrorFatal);
+            }
+            finally
+            {
+                Request.OnRequestCompleted(this, _response);
             }
         }
         
-        private RequestResponse RunInternal()
+        private async Task<RequestResponse> RunInternal()
         {
-            Request.Status = RequestStatus.PendingCreateData;
-            if (!CreateRequestData())
-            {
-                return _response;
-            }
-            
-            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(Run)} Starting REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}} Contents:\n{{3}}", Request.Id, Request.Method, Request.Route, _data.StringContents ?? "No Contents");
+            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(Run)} Starting REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}} Contents:\n{{3}}", Request.Id, Request.Method, Request.Route, /*_data.StringContents ??*/ "No Contents");
 
             RequestResponse response = null;
             byte retries = 0;
             while(retries < 3) 
             {
                 Request.Status = RequestStatus.PendingStart;
-                Request.Bucket.WaitUntilBucketAvailable(this);
-                Request.WaitUntilRequestCanStart();
+                await Request.Bucket.WaitUntilBucketAvailable(this, _token);
+                await Request.WaitUntilRequestCanStart(_token);
                 Request.Status = RequestStatus.InProgress;
                 
                 if (Request.IsCancelled)
                 {
-                    return RequestResponse.CreateCancelledResponse(Request.Client);
+                    return await RequestResponse.CreateCancelledResponse(Request.Client);
                 }
 
-                response = RunRequest();
+                response = await RunRequest();
                 
                 Request.Bucket.UpdateRateLimits(this, response);
                 
@@ -107,90 +118,98 @@ namespace Oxide.Ext.Discord.Rest.Requests
             return response;
         }
 
-        private RequestResponse RunRequest()
+        private async Task<RequestResponse> RunRequest()
         {
+            HttpRequestMessage request = null;
             try
             {
-                //Can error during JSON serialization
-                _webRequest = CreateRequest();
-
-                //Can timeout while writing request data
-                _data.WriteRequestData(_webRequest);
-                using (HttpWebResponse webResponse = _webRequest.GetResponse() as HttpWebResponse)
+                request = CreateRequest(); //Needs to be here if JSON serialization fails
+                HttpResponseMessage webResponse = await Request.HttpClient.SendAsync(request, _token);
+                if (webResponse.IsSuccessStatusCode)
                 {
-                    return RequestResponse.CreateSuccessResponse(Request.Client, webResponse);
+                    return await RequestResponse.CreateSuccessResponse(Request.Client, webResponse);
                 }
-            }
-            catch (WebException ex)
-            {
-                RequestResponse response = HandleWebException(ex);
-                Request.Client.Logger.Debug("Web Exception Occured. Type: {0} Request ID: {1} Plugin: {2} Method: {3} Route: {4} HTTP Code: {5} Message: {6} Exception: {7}", response.Error?.ErrorType, Request.Id, Request.Client.PluginName, Request.Method, Request.Route, response.Code, response.Error?.Message, ex);
+
+                RequestResponse response = await HandleWebException(request, webResponse);
+                
                 return response;
+            }
+            catch (TaskCanceledException)
+            {
+                return await RequestResponse.CreateCancelledResponse(Request.Client);
             }
             catch (JsonSerializationException ex)
             {
                 Request.Client.Logger.Exception("A JsonSerializationException occured for request. ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, Request.Route, Request.Data?.GetType().Name ?? "None", ex);
-                return RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex), RequestCompletedStatus.ErrorFatal);
+                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Serialization, DiscordLogLevel.Error).WithException(ex), RequestCompletedStatus.ErrorFatal);
             }
             catch (Exception ex)
             {
                 Request.Client.Logger.Exception("An exception occured for request. ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, Request.Route, Request.Data?.GetType().Name ?? "None", ex);
-                return RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex), RequestCompletedStatus.ErrorFatal);
+                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Error).WithException(ex), RequestCompletedStatus.ErrorFatal);
+            }
+            finally
+            {
+                request?.Dispose();
             }
         }
 
-        private RequestResponse HandleWebException(WebException ex)
+        private async Task<RequestResponse> HandleWebException(HttpRequestMessage request, HttpResponseMessage webResponse)
         {
-            if (ex.Status == WebExceptionStatus.RequestCanceled)
+            RequestResponse response;
+            
+            int statusCode = (int)webResponse.StatusCode;
+            if (statusCode == 429)
             {
-                Request.Client.Logger.Debug("Client request cancelled. ID: {0} Plugin: {1}", Request.Id, Request.Client.PluginName);
-                return RequestResponse.CreateCancelledResponse(Request.Client);
+                response = await RequestResponse.CreateWebExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.RateLimit, DiscordLogLevel.Warning).WithRequest(request), webResponse, RequestCompletedStatus.ErrorRetry);
+            }
+            else
+            {
+                response = await RequestResponse.CreateWebExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.GenericWeb, DiscordLogLevel.Error).WithRequest(request), webResponse, RequestCompletedStatus.ErrorFatal);
             }
             
-            using (HttpWebResponse httpResponse = ex.Response as HttpWebResponse)
+            Request.OnRequestErrored();
+
+            if (Request.Client.Logger.IsLogging(DiscordLogLevel.Debug))
             {
-                if (httpResponse == null)
-                {
-                    Request.OnRequestErrored();
-                    return RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.Internal, DiscordLogLevel.Exception), RequestCompletedStatus.ErrorRetry);
-                }
-
-                int statusCode = (int)httpResponse.StatusCode;
-                if (statusCode == 429)
-                {
-                    return RequestResponse.CreateWebExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.RateLimit, DiscordLogLevel.Warning), httpResponse, RequestCompletedStatus.ErrorRetry);
-                }
-
-                Request.OnRequestErrored();
-                return RequestResponse.CreateWebExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.GenericWeb, DiscordLogLevel.Error), httpResponse, RequestCompletedStatus.ErrorFatal);
+                Request.Client.Logger.Debug("Web Exception Occured. Type: {0} Request ID: {1} Plugin: {2} Method: {3} Route: {4} HTTP Code: {5} Message: {6}", response.Error?.ErrorType, Request.Id, Request.Client.PluginName, Request.Method, Request.Route, response.Code, response.Error?.Message);
+                Request.Client.Logger.Debug("Body:\n{0}", await request.Content.ReadAsStringAsync());
             }
+
+            return response;
         }
 
-        private HttpWebRequest CreateRequest()
+        private HttpRequestMessage CreateRequest()
         {
-            HttpWebRequest req = (HttpWebRequest) WebRequest.Create(Request.RequestUrl);
-            req.Method = EnumCache<RequestMethod>.ToString(Request.Method);
-            req.UserAgent = $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, {DiscordExtension.FullExtensionVersion})";
-            req.Timeout = TimeoutDuration * 1000;
-            req.ContentLength = 0;
-            req.Headers.Set("Authorization", Request.AuthHeader);
-            req.ContentType = _data.ContentType;
-            return req;
-        }
-        
-        private bool CreateRequestData()
-        {
-            try
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethods[Request.Method], DiscordEndpoints.Rest.ApiUrl + Request.Route);
+            object data = Request.Data;
+            if (data != null)
             {
-                _data = BaseRequestData.CreateRequestData(Request);
-                return true;
+                if (data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
+                {
+                    MultipartFormDataContent content = new MultipartFormDataContent();
+            
+                    StringContent json = new StringContent(JsonConvert.SerializeObject(data, Request.Client.Bot.ClientSerializerSettings), Encoding.UTF8, "application/json");
+                    content.Add(json, "payload_json");
+
+                    for (int index = 0; index < attachments.FileAttachments.Count; index++)
+                    {
+                        MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
+                
+                        ByteArrayContent file = new ByteArrayContent(fileAttachment.Data);
+                        content.Add(file, $"files[{(index + 1).ToString()}]", fileAttachment.FileName);
+                        file.Headers.ContentType = new MediaTypeHeaderValue(fileAttachment.ContentType);
+                    }
+
+                    request.Content = content;
+                }
+                else
+                {
+                    request.Content = new StringContent(JsonConvert.SerializeObject(data, Request.Client.Bot.ClientSerializerSettings), Encoding.UTF8, "application/json");
+                }
             }
-            catch (JsonSerializationException ex)
-            {
-                Request.Client.Logger.Exception("A JsonSerializationException occured for request. Request ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, Request.Route, Request.Data?.GetType().Name ?? "None", ex);
-                _response = RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(ex, RequestErrorType.Serialization, DiscordLogLevel.Error), RequestCompletedStatus.ErrorFatal);
-                return false;
-            }
+
+            return request;
         }
 
         /// <summary>
@@ -198,27 +217,18 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         public void Abort()
         {
-            Request.IsCancelled = true;
-            _webRequest?.Abort();
+            Request.Source.Cancel();
         }
 
-        private RequestError GetRequestError(Exception ex)
+        private RequestError GetRequestError(RequestErrorType type, DiscordLogLevel log)
         {
-            return new RequestError(Request, _data, ex);
-        }
-        
-        private RequestError GetRequestError(Exception ex, RequestErrorType type, DiscordLogLevel logLevel)
-        {
-            RequestError error = GetRequestError(ex);
-            error.SetErrorMessage(type, logLevel);
-            return error;
+            return new RequestError(Request, type, log);
         }
 
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
             Request.Dispose();
-            _data.Dispose();
             _response.Dispose();
             DiscordPool.Free(this);
         }
@@ -226,7 +236,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <inheritdoc/>
         protected override void EnterPool()
         {
-            _data = null;
             _logger = null;
         }
     }

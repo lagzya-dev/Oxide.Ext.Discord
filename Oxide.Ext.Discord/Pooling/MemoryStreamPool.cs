@@ -21,7 +21,6 @@ namespace Oxide.Ext.Discord.Pooling
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref MemoryStream item)
         {
-            item.Position = 0;
             item.SetLength(0);
             return true;
         }

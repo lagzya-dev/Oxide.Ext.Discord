@@ -1237,6 +1237,49 @@
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback`1.EnterPool">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback">
+            <summary>
+            Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
+            This class is pooled to prevent allocations
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback._callback">
+            <summary>
+            The callback to be called by the delegate
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback.HandleCallback">
+            <summary>
+            Overridden in the child class to handle the callback
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler">
+            <summary>
+            Thread Pool Handler for Rest Requests
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler.CreateRequestCallback(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Creates a thread pooled rest request
+            </summary>
+            <param name="handler">Request Handler for the request</param>
+            <param name="logger">Logger</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler.HandleCallback">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler.EnterPool">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseCallback">
             <summary>
             Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
@@ -1258,6 +1301,19 @@
             Overridden in the child class to handle the callback
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseCallback.Run">
+            <summary>
+            Run the callback
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Callbacks.BaseNextTickCallback">
+            <summary>
+            Represents a callback that calls next tick
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseNextTickCallback.Run">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Hooks.MultiPluginHookCallback.DisposeInternal">
             <inheritdoc/>
         </member>
@@ -1265,66 +1321,6 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Libraries.SubscriptionCallback.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.ThreadPool.BaseThreadPoolHandler">
-            <summary>
-            Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
-            This class is pooled to prevent allocations
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Callbacks.ThreadPool.BaseThreadPoolHandler.Callback">
-            <summary>
-            The callback to be called by the delegate
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.BaseThreadPoolHandler.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.BaseThreadPoolHandler.HandleCallback(System.Object)">
-            <summary>
-            Overridden in the child class to handle the callback
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.ThreadPool.QueueRequestHandler">
-            <summary>
-            Callback for queuing a request using a thread pool
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.QueueRequestHandler.HandleCallback(System.Object)">
-            <summary>
-            Calls the rest QueueBucket method with the request to be queued
-            </summary>
-            <param name="data"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.QueueRequestHandler.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.QueueRequestHandler.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler">
-            <summary>
-            Thread Pool Handler for Rest Requests
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler.CreateRequestCallback(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Creates a thread pooled rest request
-            </summary>
-            <param name="handler">Request Handler for the request</param>
-            <param name="logger">Logger</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler.HandleCallback(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.ThreadPool.RestRequestHandler.EnterPool">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig">
@@ -2702,7 +2698,7 @@
             The scope the rate limit is for
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Init(System.Net.WebHeaderCollection,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Init(System.Net.Http.Headers.HttpResponseHeaders,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Initialize the RateLimitResponse
             </summary>
@@ -2730,9 +2726,9 @@
             The request method that was called
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.Exception">
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.Exception">
             <summary>
-            The web exception from the request
+            The exception from the request
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.Url">
@@ -2745,7 +2741,7 @@
             What data was passed to the request
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.ContentType">
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.ContentType">
             <summary>
             HTTP Content Type for the request
             </summary>
@@ -2755,7 +2751,7 @@
             How long it has been since the discord epoch in seconds
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.StringContents">
+        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.StringContents">
             <summary>
             The string contents of the request
             </summary>
@@ -2780,13 +2776,11 @@
             Should we display the error message
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.#ctor(Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData,System.Exception)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.#ctor(Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Entities.Api.RequestErrorType,Oxide.Ext.Discord.Logging.DiscordLogLevel)">
             <summary>
             Creates a new rest error
             </summary>
             <param name="request">Request the error is for</param>
-            <param name="exception">The web exception we received</param>
-            <param name="data">Data passed to the request</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SuppressErrorMessage">
             <summary>
@@ -2873,36 +2867,6 @@
             A non web error occured
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Api.RequestMethod">
-            <summary>
-            HTTP request method
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestMethod.GET">
-            <summary>
-            Request Method Get
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestMethod.POST">
-            <summary>
-            Request Method POST
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestMethod.PUT">
-            <summary>
-            Request Method PUT
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestMethod.PATCH">
-            <summary>
-            Request Method PATCH
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestMethod.DELETE">
-            <summary>
-            Request Method DELETE
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Api.RequestResponse">
             <summary>
             Represents a REST response from discord
@@ -2913,7 +2877,7 @@
             Data discord sent us
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.Init(Oxide.Ext.Discord.DiscordClient,System.Net.HttpWebResponse,Oxide.Ext.Discord.Rest.Requests.RequestCompletedStatus)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.Requests.RequestCompletedStatus)">
             <summary>
             Create new REST response with the given data
             </summary>
@@ -2921,7 +2885,7 @@
             <param name="response">The Web Response for the request</param>
             <param name="status">The status of the request indicating if it was successful</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.CreateSuccessResponse(Oxide.Ext.Discord.DiscordClient,System.Net.HttpWebResponse)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.CreateSuccessResponse(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpResponseMessage)">
             <summary>
             Creates a success REST API response
             </summary>
@@ -2938,7 +2902,7 @@
             <param name="status">The request status containing the fail reason</param>
             <returns>An exception <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestResponse"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.CreateWebExceptionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestError,System.Net.HttpWebResponse,Oxide.Ext.Discord.Rest.Requests.RequestCompletedStatus)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.CreateWebExceptionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestError,System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.Requests.RequestCompletedStatus)">
             <summary>
             Creates a Web Exception REST API response
             </summary>
@@ -4620,7 +4584,7 @@
             <param name="callback">Callback with the updated channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ModifyThreadChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.DiscordChannel},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ModifyThreadChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.DiscordChannel},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Update a thread channel's settings.
             Requires the MANAGE_THREADS permission for the guild.
@@ -5318,6 +5282,53 @@
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup.ToQueryString">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-thread">Thread Channel Update Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.Name">
+            <summary>
+            The name of the channel (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.Archived">
+            <summary>
+            Whether the channel is archived
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.AutoArchiveDuration">
+            <summary>
+            Duration in minutes to automatically archive the thread after recent activity
+            Can be set to: 60, 1440, 4320, 10080
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.Locked">
+            <summary>
+            Whether the thread is locked
+            When a thread is locked, only users with MANAGE_THREADS can unarchive it
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.Invitable">
+            <summary>
+            Whether non-moderators can add other non-moderators to a thread
+            Only available on private threads
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.RateLimitPerUser">
+            <summary>
+            Amount of seconds a user has to wait before sending another message (0-21600)
+            Bots and users with the permission manage_messages, manage_thread, or manage_channel, are unaffected
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.Flags">
+            <summary>
+            Channel flags combined as a bitfield; PINNED can only be set for threads in forum channels
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.Validate">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-without-message-json-params">Thread Create Structure</a> within Discord.
@@ -5491,53 +5502,6 @@
             <summary>
             Timestamp when the thread was created; only populated for threads created after 2022-01-09
             </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate">
-            <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-thread">Thread Channel Update Structure</a>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Name">
-            <summary>
-            The name of the channel (1-100 characters)
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Archived">
-            <summary>
-            Whether the channel is archived
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.AutoArchiveDuration">
-            <summary>
-            Duration in minutes to automatically archive the thread after recent activity
-            Can be set to: 60, 1440, 4320, 10080
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Locked">
-            <summary>
-            Whether the thread is locked
-            When a thread is locked, only users with MANAGE_THREADS can unarchive it
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Invitable">
-            <summary>
-            Whether non-moderators can add other non-moderators to a thread
-            Only available on private threads
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.RateLimitPerUser">
-            <summary>
-            Amount of seconds a user has to wait before sending another message (0-21600)
-            Bots and users with the permission manage_messages, manage_thread, or manage_channel, are unaffected
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Flags">
-            <summary>
-            Channel flags combined as a bitfield; PINNED can only be set for threads in forum channels
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.ThreadChannelUpdate.Validate">
-            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.VideoQualityMode">
             <summary>
@@ -12250,11 +12214,6 @@
             Web Content Type for the file attachment
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment.#ctor">
-            <summary>
-            Default Constructor
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageFileAttachment.#ctor(System.String,System.Byte[],System.String)">
             <summary>
             Constructor
@@ -15143,12 +15102,12 @@
             <param name="command"></param>
             <param name="args"></param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Extensions.ThreadExt">
+        <member name="T:Oxide.Ext.Discord.Extensions.TaskExt">
             <summary>
             Thread Extensions
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.ThreadExt.SleepUntil(System.DateTimeOffset)">
+        <member name="M:Oxide.Ext.Discord.Extensions.TaskExt.SleepUntil(System.DateTimeOffset)">
             <summary>
             Sleep the thread until the given <see cref="T:System.DateTimeOffset"/>
             If sleepTime is in the past no thread sleeping occurs
@@ -16737,43 +16696,25 @@
             <param name="rest">The handler that owns this Bucket</param>
             <param name="logger">Logger for this bucket</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.Finalize">
-            <summary>
-            Discord of the Thread Safe List
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Queues a new request for the buck
             </summary>
             <param name="request">Request to be queued</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.MergeRequest(Oxide.Ext.Discord.Rest.Requests.RequestHandler)">
-            <summary>
-            Merges the request to it's place in line by it's ID
-            </summary>
-            <param name="mergeHandler">Request to be merged</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.DequeueRequest(Oxide.Ext.Discord.Rest.Requests.RequestHandler)">
-            <summary>
-            Removes the request from the queue.
-            Either the request completed successfully or there was an error and failed to succeed after 3 attempts
-            </summary>
-            <param name="handler">Request to remove</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator">
             <summary>
             Represents a type that splits string by a specific char
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.Init(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String)">
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.Init(Oxide.Core.Libraries.RequestMethod,System.String)">
             <summary>
             Constructor for string splitter
             </summary>
             <param name="method">HTTP request method</param>
             <param name="route">String to be split</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.GetBucketId(Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String)">
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.GetBucketId(Oxide.Core.Libraries.RequestMethod,System.String)">
             <summary>
             Returns the Rate Limit Bucket for the given route
             https://discord.com/developers/docs/topics/rate-limits#rate-limits
@@ -16808,99 +16749,6 @@
         <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection">
-            <summary>
-            Represents a Multipart section for MultiPart requests
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection.FileName">
-            <summary>
-            Name of the file for the section
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection.ContentType">
-            <summary>
-            Content type for the section
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.IMultipartSection.SectionName">
-            <summary>
-            Name of the section
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection">
-            <summary>
-            Represents a MultiPartFileSection
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.FileName">
-            <summary>
-            Name of the file being sent
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.ContentType">
-            <summary>
-            Content Type for the file being sent
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.Data">
-            <summary>
-            Data for the file being sent
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.SectionName">
-            <summary>
-            Section name for the multipart section
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.Init(System.String,System.String,System.Byte[],System.String)">
-            <summary>
-            Constructor for a multipart file
-            </summary>
-            <param name="sectionName"></param>
-            <param name="fileName"></param>
-            <param name="data"></param>
-            <param name="contentType"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFileSection.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection">
-            <summary>
-            Represents a MultiPartFormSection
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.FileName">
-            <summary>
-            Name of the file being sent
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.ContentType">
-            <summary>
-            Content Type for the file being sent
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.Data">
-            <summary>
-            Data for the file being sent
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.SectionName">
-            <summary>
-            Section name for the multipart section
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.Init(System.String,System.String,System.String)">
-            <summary>
-            Constructor for byte form data
-            </summary>
-            <param name="sectionName"></param>
-            <param name="data"></param>
-            <param name="contentType"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Multipart.MultipartFormSection.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Rest.Requests.BaseRequest">
             <summary>
             Represents a base request class for REST API calls
@@ -16931,11 +16779,6 @@
             Data to be sent with the request
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.RequestUrl">
-            <summary>
-            Returns the full web url for the request
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Rest.Requests.BaseRequest.OnError">
             <summary>
             Callback to call if the request errored with the last error message
@@ -16951,7 +16794,7 @@
             How long to wait before retrying request since there was a web exception
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Initializes the request
             </summary>
@@ -16974,73 +16817,6 @@
         <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.LeavePool">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData">
-            <summary>
-            Represents request data passed into an API request
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.StringContents">
-            <summary>
-            Data contents serialized to JSON
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.Contents">
-            <summary>
-            Data serialized to bytes 
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.ContentType">
-            <summary>
-            The content type of the data
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.Data">
-            <summary>
-            Data to be serialized into the request
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.CreateRequestData(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
-            <summary>
-            Creates request data for the given request
-            </summary>
-            <param name="request">Request to create data for</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Rest.Requests.Data.JsonRequestData"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.WriteRequestData(System.Net.WebRequest)">
-            <summary>
-            Writes the request data to the web request
-            </summary>
-            <param name="request">Request to be written to</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.BaseRequestData.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.JsonRequestData">
-            <summary>
-            Represents Request Data to be passed into the REST API request
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.JsonRequestData.Init(Oxide.Ext.Discord.DiscordClient,System.Object)">
-            <summary>
-            Initializes the Request Data
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.JsonRequestData.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData">
-            <summary>
-            Represents a multipart request data type
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Interfaces.IFileAttachments)">
-            <summary>
-            Initializes the Request Data
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Data.MultipartRequestData.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Rest.Requests.Request">
             <summary>
             Represents a REST API request that returns no data
@@ -17051,7 +16827,7 @@
             Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.CreateRequest(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
@@ -17063,7 +16839,7 @@
             <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
             <returns>A <see cref="T:Oxide.Ext.Discord.Rest.Requests.Request"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Initializes the Request
             </summary>
@@ -17151,11 +16927,6 @@
             Requesting is waiting for bucket to be ready
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.PendingCreateData">
-            <summary>
-            Waiting to create request data
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Rest.Requests.RequestStatus.PendingStart">
             <summary>
             Request is waiting to start
@@ -17182,7 +16953,7 @@
             Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.CreateRequest(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
@@ -17194,7 +16965,7 @@
             <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
             <returns>A <see cref="T:Oxide.Ext.Discord.Rest.Requests.Request`1"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.Init(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Initializes the Request
             </summary>
@@ -17228,7 +16999,7 @@
             Route to Bucket Hash
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.AuthHeader">
+        <member name="F:Oxide.Ext.Discord.Rest.RestHandler._logger">
             <summary>
             The authorization header value
             </summary>
@@ -17240,12 +17011,7 @@
             <param name="client">Client the request is for</param>
             <param name="logger">Logger from the client</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Finalize">
-            <summary>
-            Discord of the Thread Safe Hashs
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Creates a new request and queues it to be ran
             </summary>
@@ -17256,7 +17022,7 @@
             <param name="success">Callback once the action is completed</param>
             <param name="error">Error callback if an error occurs</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest``1(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Api.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest``1(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Creates a new request and queues it to be ran
             </summary>
@@ -17268,13 +17034,13 @@
             <param name="error">Error callback if an error occurs</param>
             <typeparam name="T">The type that is expected to be returned</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueRequest(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.StartRequest(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Queues the request using the thread pool so we don't block the main thread with any locks
             </summary>
             <param name="request"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueBucket(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueBucket(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Queues the request for the bucket
             </summary>
@@ -17290,61 +17056,6 @@
             <summary>
             Shutdown the REST handler
             </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Threading.ThreadSafeHash`2">
-            <summary>
-            Represents a ThreadSafe Hash
-            </summary>
-            <typeparam name="TKey">Type of the key</typeparam>
-            <typeparam name="TValue">Type of the value</typeparam>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.IsReadOnly">
-            <inheritdoc/>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Keys">
-            <inheritdoc/>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Values">
-            <inheritdoc/>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Count">
-            <inheritdoc/>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Item(`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.TryGetValue(`0,`1@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.ContainsKey(`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Add(`0,`1)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Remove(`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Clear">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.GetEnumerator">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeHash`2.Dispose">
-            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Threading.ThreadSafeList`1">
             <summary>
@@ -17415,332 +17126,495 @@
         <member name="M:Oxide.Ext.Discord.Threading.ThreadSafeList`1.Dispose">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.DispatchCode">
+        <member name="T:Oxide.Ext.Discord.WebSockets.DiscordWebSocket">
+            <summary>
+            Represents a websocket that connects to discord
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket._sessionId">
+            <summary>
+            The current session ID for the connected bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.ShouldAttemptReconnect">
+            <summary>
+            If we should attempt to reconnect to discord on disconnect
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.ShouldAttemptResume">
+            <summary>
+            If we should attempt to resume our previous session after connecting
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket._sequence">
+            <summary>
+            The current sequence number for the websocket
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.SocketHasConnected">
+            <summary>
+            If the bot has successfully connected to the websocket at least once
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Socket used by the BotClient
+            </summary>
+            <param name="client">Client using the socket</param>
+            <param name="logger">Logger for the bot client</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Connect">
+            <summary>
+            Connect to the websocket
+            </summary>
+            <exception cref="T:System.Exception">Thrown if the socket still exists. Must call disconnect before trying to connect</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Disconnect(System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Disconnects the websocket from discord
+            </summary>
+            <param name="attemptReconnect">Should we attempt to reconnect to discord after disconnecting</param>
+            <param name="shouldResume">Should we attempt to resume our previous session</param>
+            <param name="requested">If discord requested that we reconnect to discord</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Shutdown">
+            <summary>
+            Shutdowns the websocket completely. Used when bot is being shutdown
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Send(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+            <summary>
+            Send a command to discord over the websocket
+            </summary>
+            <param name="opCode">Command code to send</param>
+            <param name="data">Data to send</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Identify">
+            <summary>
+            Used to Identify the bot with discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Resume">
+            <summary>
+            Used to resume the current session with discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.SendHeartbeat">
+            <summary>
+            Sends a heartbeat to Discord
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes">Socket Close Event Codes</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.UnknownError">
+            <summary>
+            We're not sure what went wrong. Try reconnecting?
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.UnknownOpcode">
+            <summary>
+            You sent an invalid Gateway opcode or an invalid payload for an opcode. Don't do that!
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.DecodeError">
+            <summary>
+            You sent an invalid payload to us. Don't do that!
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.NotAuthenticated">
+            <summary>
+            You sent us a payload prior to identifying.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.AuthenticationFailed">
+            <summary>
+            The account token sent with your identify payload is incorrect.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.AlreadyAuthenticated">
+            <summary>
+            You sent more than one identify payload. Don't do that!
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.InvalidSequence">
+            <summary>
+            The sequence sent when resuming the session was invalid. Reconnect and start a new session.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.RateLimited">
+            <summary>
+            Woah nelly! You're sending payloads to us too quickly. Slow it down! You will be disconnected on receiving this.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.SessionTimedOut">
+            <summary>
+            Your session timed out. Reconnect and start a new one.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.InvalidShard">
+            <summary>
+            You sent us an invalid shard when identifying.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.ShardingRequired">
+            <summary>
+            The session would have handled too many guilds - you are required to shard your connection in order to connect.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.InvalidApiVersion">
+            <summary>
+            You sent an invalid version for the gateway.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.InvalidIntents">
+            <summary>
+            You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated the bitwise value.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.DisallowedIntent">
+            <summary>
+            You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not enabled or are not whitelisted for.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.DiscordExtensionReconnect">
+            <summary>
+            Used to identify a reconnect should occur to discord
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.UnknownCloseCode">
+            <summary>
+            Used when a code is sent that we don't have yet.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#commands-and-events-gateway-events">Gateway Event Codes</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.Unknown">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.Unknown">
             <summary>
             Used when we don't have a matching Dispatch Code
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.Ready">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.Ready">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#ready">READY</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.Resumed">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.Resumed">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#resumed">RESUMED</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ChannelCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ChannelCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#channel-create">CHANNEL_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ChannelUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ChannelUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#channel-update">CHANNEL_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ChannelDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ChannelDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#channel-delete">CHANNEL_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ChannelPinsUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ChannelPinsUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#channel-pins-update">CHANNEL_PINS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-create">GUILD_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-update">GUILD_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-delete">GUILD_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildBanAdded">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildBanAdded">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-ban-add">GUILD_BAN_ADD</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildBanRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildBanRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-ban-remove">GUILD_BAN_REMOVE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildEmojisUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildEmojisUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-emojis-update">GUILD_EMOJIS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildStickersUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildStickersUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-stickers-update">GUILD_STICKERS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildIntegrationsUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildIntegrationsUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-integrations-update">GUILD_INTEGRATIONS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildMemberAdded">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildMemberAdded">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-member-add">GUILD_MEMBER_ADD</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildMemberRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildMemberRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-member-remove">GUILD_MEMBER_REMOVE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildMemberUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildMemberUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-member-update">GUILD_MEMBER_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildMembersChunk">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildMembersChunk">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-members-chunk">GUILD_MEMBERS_CHUNK</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildRoleCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildRoleCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-role-create">GUILD_ROLE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildRoleUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildRoleUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-role-update">GUILD_ROLE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildRoleDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildRoleDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-role-delete">GUILD_ROLE_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventCreate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventCreate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create">GUILD_SCHEDULED_EVENT_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update">GUILD_SCHEDULED_EVENT_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventDelete">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventDelete">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-delete">GUILD_SCHEDULED_EVENT_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventUserAdd">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventUserAdd">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add">GUILD_SCHEDULED_EVENT_USER_ADD</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.GuildScheduledEventUserRemove">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventUserRemove">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove">GUILD_SCHEDULED_EVENT_USER_REMOVE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.IntegrationCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.IntegrationCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#integration-create">INTEGRATION_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.IntegrationUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.IntegrationUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#integration-update">INTEGRATION_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.IntegrationDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.IntegrationDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#integration-delete">INTEGRATION_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.MessageCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-create">MESSAGE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.MessageUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-update">MESSAGE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.MessageDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-delete">MESSAGE_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.MessageBulkDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageBulkDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-delete-bulk">MESSAGE_DELETE_BULK</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.MessageReactionAdded">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageReactionAdded">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-add">MESSAGE_REACTION_ADD</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.MessageReactionRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageReactionRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove">MESSAGE_REACTION_REMOVE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.MessageReactionAllRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageReactionAllRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all">MESSAGE_REACTION_REMOVE_ALL</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.MessageReactionEmojiRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageReactionEmojiRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji">MESSAGE_REACTION_REMOVE_EMOJI</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.PresenceUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.PresenceUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#presence-update">PRESENCE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.PresenceReplace">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.PresenceReplace">
             <summary>
             Represents the <a href="">PRESENCES_REPLACE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.TypingStarted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.TypingStarted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#typing-start">TYPING_START</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.UserUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.UserUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#user-update">USER_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.VoiceStateUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.VoiceStateUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#voice-state-update">VOICE_STATE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.VoiceServerUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.VoiceServerUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#voice-server-update">VOICE_SERVER_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.WebhooksUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.WebhooksUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#webhooks-update">WEBHOOKS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.InviteCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.InviteCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#invite-create">INVITE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.InviteDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.InviteDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#invite-delete">INVITE_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ApplicationCommandsPermissionsUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ApplicationCommandsPermissionsUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-permissions-update">APPLICATION_COMMANDS_PERMISSIONS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.InteractionCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.InteractionCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#interaction-create">INTERACTION_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-create">THREAD_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-update">THREAD_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-delete">THREAD_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadListSync">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadListSync">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-list-sync">THREAD_LIST_SYNC</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadMemberUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadMemberUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-member-update">THREAD_MEMBER_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.ThreadMembersUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadMembersUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-members-update">THREAD_MEMBERS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.StageInstanceCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.StageInstanceCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-create">STAGE_INSTANCE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.StageInstanceUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.StageInstanceUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-update">STAGE_INSTANCE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.StageInstanceDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.StageInstanceDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-delete">STAGE_INSTANCE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.AutoModerationRuleCreate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.AutoModerationRuleCreate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-create">AUTO_MODERATION_RULE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.AutoModerationRuleUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.AutoModerationRuleUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-update">AUTO_MODERATION_RULE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.AutoModerationRuleDelete">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.AutoModerationRuleDelete">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-delete">AUTO_MODERATION_RULE_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DispatchCode.AutoModerationActionExecution">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.AutoModerationActionExecution">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution">AUTO_MODERATION_ACTION_EXECUTION</a> gateway event
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.DiscordHeartbeatHandler">
             <summary>
             Handles the heartbeating for the websocket connection
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.HeartbeatAcknowledged">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordHeartbeatHandler._heartbeatAcknowledged">
             <summary>
             Discord Acknowledged our heartbeat successfully 
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.WebSockets.SocketListener,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.DiscordHeartbeatHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor for Heartbeat Handler
             </summary>
@@ -17749,29 +17623,29 @@
             <param name="listener">Socket Listener for the client</param>
             <param name="logger">Logger for the bot</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.SetupHeartbeat(System.Single)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.DiscordHeartbeatHandler.SetupHeartbeat(System.Single)">
             <summary>
             Setup a heartbeat for this bot with the given interval
             </summary>
             <param name="interval"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.OnSocketShutdown">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.DiscordHeartbeatHandler.OnSocketShutdown">
             <summary>
             Destroy the heartbeat timer on this bot
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.HeartbeatHandler.SendHeartbeat">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.DiscordHeartbeatHandler.SendHeartbeat">
             <summary>
             Sends a heartbeat to discord.
             If the previous heartbeat wasn't acknowledged then we will attempt to reconnect
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketCommandHandler">
             <summary>
             Handles command queueing when the websocket is down
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketCommandHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
@@ -17779,7 +17653,7 @@
             <param name="webSocket">Websocket to handle commands for</param>
             <param name="logger">Logger for this handler</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.CommandPayload)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.CommandPayload)">
             <summary>
             Enqueue a payload to be sent over the websocket
             If the websocket is connected it will be sent immediately
@@ -17787,230 +17661,32 @@
             </summary>
             <param name="command">Command to send over the websocket</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.Socket">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler">
             <summary>
-            Represents a websocket that connects to discord
+            Handles websocket events
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.Socket.RequestedReconnect">
-            <summary>
-            If we should attempt to reconnect to discord on disconnect
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.Socket.ShouldAttemptResume">
-            <summary>
-            If we should attempt to resume our previous session after connecting
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.Socket._reconnectTimer">
-            <summary>
-            Timer to use when attempting to reconnect to discord due to an error
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Socket used by the BotClient
-            </summary>
-            <param name="client">Client using the socket</param>
-            <param name="logger">Logger for the bot client</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Connect">
-            <summary>
-            Connect to the websocket
-            </summary>
-            <exception cref="T:System.Exception">Thrown if the socket still exists. Must call disconnect before trying to connect</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Disconnect(System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            Disconnects the websocket from discord
-            </summary>
-            <param name="attemptReconnect">Should we attempt to reconnect to discord after disconnecting</param>
-            <param name="shouldResume">Should we attempt to resume our previous session</param>
-            <param name="requested">If discord requested that we reconnect to discord</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsCurrentSocket(WebSocketSharp.WebSocket)">
-            <summary>
-            Returns if the given websocket matches our current websocket.
-            If socket is null we return false
-            </summary>
-            <param name="socket">Socket to compare</param>
-            <returns>True if current socket is not null and socket matches current socket; False otherwise.</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Shutdown">
-            <summary>
-            Shutdowns the websocket completely. Used when bot is being shutdown
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.DisposeSocket">
-            <summary>
-            Called when a websocket is closed to remove previous socket
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Send(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
-            <summary>
-            Send a command to discord over the websocket
-            </summary>
-            <param name="opCode">Command code to send</param>
-            <param name="data">Data to send</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsConnected">
-            <summary>
-            Returns if the websocket is in the open state
-            </summary>
-            <returns>Returns if the websocket is in open state</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsConnecting">
-            <summary>
-            Returns if the websocket is in the connecting state
-            </summary>
-            <returns>Returns if the websocket is in connecting state</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsPendingReconnect">
-            <summary>
-            Returns if the socket is waiting to reconnect
-            </summary>
-            <returns>Returns if the socket is waiting to reconnect</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.IsDisconnected">
-            <summary>
-            Returns if the websocket is null or is currently closing / closed
-            </summary>
-            <returns>Returns if the websocket is null or is currently closing / closed</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Socket.Reconnect">
-            <summary>
-            Reconnects the socket to the gateway.
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.SocketCloseCode">
-            <summary>
-            Represents <a href="https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes">Socket Close Event Codes</a>
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.UnknownError">
-            <summary>
-            We're not sure what went wrong. Try reconnecting?
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.UnknownOpcode">
-            <summary>
-            You sent an invalid Gateway opcode or an invalid payload for an opcode. Don't do that!
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.DecodeError">
-            <summary>
-            You sent an invalid payload to us. Don't do that!
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.NotAuthenticated">
-            <summary>
-            You sent us a payload prior to identifying.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.AuthenticationFailed">
-            <summary>
-            The account token sent with your identify payload is incorrect.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.AlreadyAuthenticated">
-            <summary>
-            You sent more than one identify payload. Don't do that!
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.InvalidSequence">
-            <summary>
-            The sequence sent when resuming the session was invalid. Reconnect and start a new session.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.RateLimited">
-            <summary>
-            Woah nelly! You're sending payloads to us too quickly. Slow it down! You will be disconnected on receiving this.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.SessionTimedOut">
-            <summary>
-            Your session timed out. Reconnect and start a new one.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.InvalidShard">
-            <summary>
-            You sent us an invalid shard when identifying.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.ShardingRequired">
-            <summary>
-            The session would have handled too many guilds - you are required to shard your connection in order to connect.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.InvalidApiVersion">
-            <summary>
-            You sent an invalid version for the gateway.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.InvalidIntents">
-            <summary>
-            You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated the bitwise value.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.DisallowedIntent">
-            <summary>
-            You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not enabled or are not whitelisted for.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketCloseCode.UnknownCloseCode">
-            <summary>
-            Used when a code is sent that we don't have yet.
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.SocketListener">
-            <summary>
-            Represents a listens for socket events
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener._sessionId">
-            <summary>
-            The current session ID for the connected bot
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketListener._sequence">
-            <summary>
-            The current sequence number for the websocket
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.WebSockets.SocketListener.SocketHasConnected">
-            <summary>
-            If the bot has successfully connected to the websocket at least once
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.Socket,Oxide.Ext.Discord.Logging.ILogger,Oxide.Ext.Discord.WebSockets.Handlers.SocketCommandHandler)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Creates a new socket listener
             </summary>
             <param name="client">Client this listener is for</param>
             <param name="socket">Socket this listener is for</param>
             <param name="logger">Logger for the client</param>
-            <param name="commands">Socket Command Handler</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.OnSocketShutdown">
-            <summary>
-            Shutdown the SocketListener
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SocketOpened(System.Object,System.EventArgs)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketOpened">
             <summary>
             Called when a socket is open
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SocketClosed(System.Object,WebSocketSharp.CloseEventArgs)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketClosed(System.Int32,System.String)">
             <summary>
             Called when a socket is closed
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.HandleDiscordClosedSocket(System.Int32,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.HandleDiscordClosedSocket(System.Int32,System.String)">
             <summary>
             Parse out the closing reason if discord closed the socket
             </summary>
@@ -18018,21 +17694,21 @@
             <param name="reason">Socket close reason</param>
             <returns>True if discord closed the socket with one of it's close codes</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SocketErrored(System.Object,WebSocketSharp.ErrorEventArgs)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketErrored(System.Exception)">
             <summary>
             Called when an error occurs on a socket
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SocketMessage(System.Object,WebSocketSharp.MessageEventArgs)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketMessage(System.String)">
             <summary>
             Called when a socket receives a message
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.EventPayload)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.EventPayload)">
             <summary>
              * From Discord API docs:
              * The user object within this event can be partial, the only field which must be sent is the id field, everything else is optional.
@@ -18042,20 +17718,35 @@
             <param name="payload"></param>
             https://discord.com/developers/docs/topics/gateway#presence-update
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.SendHeartbeat">
+        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsConnected">
             <summary>
-            Sends a heartbeat to Discord
+            Returns if the websocket is in the open state
             </summary>
+            <returns>Returns if the websocket is in open state</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.Identify">
+        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsConnecting">
             <summary>
-            Used to Identify the bot with discord
+            Returns if the websocket is in the connecting state
             </summary>
+            <returns>Returns if the websocket is in connecting state</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.SocketListener.Resume(System.String,System.Int32)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsPendingReconnect">
             <summary>
-            Used to resume the current session with discord
+            Returns if the socket is waiting to reconnect
             </summary>
+            <returns>Returns if the socket is waiting to reconnect</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsDisconnecting">
+            <summary>
+            Returns if the websocket is null or is currently closing / closed
+            </summary>
+            <returns>Returns if the websocket is null or is currently closing / closed</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsDisconnected">
+            <summary>
+            Returns if the websocket is null or is currently closing / closed
+            </summary>
+            <returns>Returns if the websocket is null or is currently closing / closed</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.SocketState">
             <summary>
@@ -18075,6 +17766,11 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Connecting">
             <summary>
             Socket is in the process of connecting
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Disconnecting">
+            <summary>
+            Websocket is currently disconnecting from a connected web socket
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.PendingReconnect">

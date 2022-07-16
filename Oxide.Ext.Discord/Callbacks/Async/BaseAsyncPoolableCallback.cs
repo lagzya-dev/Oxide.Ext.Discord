@@ -1,42 +1,47 @@
 using System;
-using System.Threading;
+using System.Threading.Tasks;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Callbacks.ThreadPool
+namespace Oxide.Ext.Discord.Callbacks.Async
 {
     /// <summary>
     /// Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
     /// This class is pooled to prevent allocations
     /// </summary>
-    public abstract class BaseThreadPoolHandler : BasePoolable
+    public abstract class BaseAsyncPoolableCallback : BasePoolable
     {
         /// <summary>
         /// The callback to be called by the delegate
         /// </summary>
-        public readonly WaitCallback Callback;
+        private readonly Action _callback;
         
         /// <summary>
         /// Constructor
         /// </summary>
-        protected BaseThreadPoolHandler()
+        protected BaseAsyncPoolableCallback()
         {
-            Callback = CallbackInternal;
+            _callback = CallbackInternal;
         }
 
         /// <summary>
         /// Overridden in the child class to handle the callback
         /// </summary>
-        protected virtual void HandleCallback(object data)
+        protected virtual Task HandleCallback()
         {
-            
+            return Task.CompletedTask;
         }
 
-        private void CallbackInternal(object data)
+        public void Run()
+        {
+            Task.Run(_callback);
+        }
+
+        private async void CallbackInternal()
         {
             try
             {
-                HandleCallback(data);
+                await HandleCallback();
             }
             catch (Exception ex)
             {

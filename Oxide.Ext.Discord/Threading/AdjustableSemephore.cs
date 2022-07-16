@@ -6,8 +6,8 @@ namespace Oxide.Ext.Discord.Threading
     internal class AdjustableSemaphore
     {
         private readonly object _syncRoot = new object();
-        private int _available;
         private int _maximum;
+        public int Available { get; private set; }
 
         public AdjustableSemaphore(int maximumCount)
         {
@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Threading
                         throw new ArgumentException("Must be greater than or equal to 0.", nameof(MaximumCount));
                     }
                     
-                    _available += value - _maximum;
+                    Available += value - _maximum;
                     _maximum = value;
                     Monitor.PulseAll(_syncRoot);
                 }
@@ -43,11 +43,11 @@ namespace Oxide.Ext.Discord.Threading
         {
             lock (_syncRoot)
             {
-                while (_available <= 0)
+                while (Available <= 0)
                 {
                     Monitor.Wait(_syncRoot);
                 }
-                _available--;
+                Available--;
             }
         }
 
@@ -55,9 +55,9 @@ namespace Oxide.Ext.Discord.Threading
         {
             lock (_syncRoot)
             {
-                if (_available + 1 <= _maximum)
+                if (Available + 1 <= _maximum)
                 {
-                    _available += 1;
+                    Available += 1;
                     Monitor.Pulse(_syncRoot);
                 }
                 else

@@ -1,20 +1,25 @@
 using System;
+using System.Threading.Tasks;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
 using Oxide.Ext.Discord.Threading;
 
-namespace Oxide.Ext.Discord.Callbacks.ThreadPool
+namespace Oxide.Ext.Discord.Callbacks.Async
 {
     /// <summary>
     /// Thread Pool Handler for Rest Requests
     /// </summary>
-    public class RestRequestHandler : BaseThreadPoolHandler
+    public class RestRequestHandler : BaseAsyncPoolableCallback
     {
+        private RestHandler _rest;
+        private BaseRequest _request; 
+        
         private RequestHandler _handler;
         private Bucket _bucket;
-        private BaseRequest _request; 
+
         private ILogger _logger;
 
         /// <summary>
@@ -23,24 +28,26 @@ namespace Oxide.Ext.Discord.Callbacks.ThreadPool
         /// <param name="handler">Request Handler for the request</param>
         /// <param name="logger">Logger</param>
         /// <returns><see cref="RestRequestHandler"/></returns>
-        public static RestRequestHandler CreateRequestCallback(RequestHandler handler, ILogger logger)
+        public static RestRequestHandler CreateRequestCallback(RestHandler rest, BaseRequest request, ILogger logger)
         {
-            RestRequestHandler request = DiscordPool.Get<RestRequestHandler>();
-            request.Init(handler, logger);
-            return request;
+            RestRequestHandler handler = DiscordPool.Get<RestRequestHandler>();
+            handler.Init(rest, request, logger);
+            return handler;
         }
         
-        private void Init(RequestHandler handler, ILogger logger)
+        private void Init(RestHandler rest, BaseRequest handler, ILogger logger)
         {
-            _handler = handler;
-            _request = _handler.Request;
-            _bucket = _request.Bucket;
+            _rest = rest;
+            _request = handler;
             _logger = logger;
         }
         
         ///<inheritdoc/>
-        protected override void HandleCallback(object data)
+        protected override async Task HandleCallback()
         {
+            _handler = RequestHandler.CreateRequestHandler(_request);
+            _bucket = _rest.QueueBucket(_handler, _request);
+            
             string bucketId = _bucket.Id;
             AdjustableSemaphore semaphore = _bucket.Semaphore;
             _request.Status = RequestStatus.PendingBucket;
@@ -59,7 +66,7 @@ namespace Oxide.Ext.Discord.Callbacks.ThreadPool
                 }
 
                 _logger.Debug("Request callback started for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
-                _handler.Run();
+                await _handler.Run();
                 _logger.Debug("Request callback completed successfully for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
             }
             catch (Exception ex)

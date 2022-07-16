@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;

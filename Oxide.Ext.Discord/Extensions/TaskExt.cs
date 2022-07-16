@@ -1,25 +1,21 @@
 using System;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace Oxide.Ext.Discord.Extensions
 {
     /// <summary>
     /// Thread Extensions
     /// </summary>
-    public static class ThreadExt
+    public static class TaskExt
     {
         /// <summary>
         /// Sleep the thread until the given <see cref="DateTimeOffset"/>
         /// If sleepTime is in the past no thread sleeping occurs
         /// </summary>
         /// <param name="sleepTime">Time to sleep until</param>
-        public static void SleepUntil(DateTimeOffset sleepTime)
+        public static Task SleepUntil(DateTimeOffset sleepTime)
         {
-            int sleep = (int)(sleepTime - DateTimeOffset.UtcNow).TotalMilliseconds + 1;
-            if (sleep > 0)
-            {
-                Thread.Sleep(sleep);
-            }
+            return sleepTime > DateTimeOffset.UtcNow ? Task.Delay(sleepTime - DateTimeOffset.UtcNow) : Task.CompletedTask;
         }
     }
 }

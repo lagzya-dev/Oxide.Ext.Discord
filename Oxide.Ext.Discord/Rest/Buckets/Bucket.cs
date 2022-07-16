@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Threading;
-using Oxide.Ext.Discord.Callbacks.ThreadPool;
+using System.Threading.Tasks;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -37,14 +37,13 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         internal DateTimeOffset ResetAt = DateTimeOffset.MinValue;
 
         internal bool IsKnowBucket;
-        //internal bool IsShutdown;
 
         private readonly RestRateLimit _rateLimit;
         private readonly ILogger _logger;
         private readonly RestHandler _rest;
-        private readonly object _requestSync = new object();
+        private readonly AutoResetEvent _requestSync = new AutoResetEvent(true);
         internal readonly AdjustableSemaphore Semaphore = new AdjustableSemaphore(1);
-        internal readonly ThreadSafeList<RequestHandler> Requests = new ThreadSafeList<RequestHandler>();
+        internal readonly ConcurrentDictionary<Snowflake, RequestHandler> Requests = new ConcurrentDictionary<Snowflake, RequestHandler>();
 
         /// <summary>
         /// Creates a new bucket for the given <see cref="RestHandler"/>
@@ -62,23 +61,14 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         }
 
         /// <summary>
-        /// Discord of the Thread Safe List
-        /// </summary>
-        ~Bucket()
-        {
-            Requests.Dispose();
-        }
-        
-        /// <summary>
         /// Queues a new request for the buck
         /// </summary>
         /// <param name="request">Request to be queued</param>
-        public void QueueRequest(BaseRequest request)
+        public void QueueRequest(RequestHandler handler, BaseRequest request)
         {
             request.OnRequestQueued(this);
-            RequestHandler handler = RequestHandler.CreateRequestHandler(request);
-            
-            Requests.Add(handler);
+
+            Requests[request.Id] = handler;
 
             if (ResetAt < DateTimeOffset.UtcNow)
             {
@@ -86,85 +76,54 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             }
             
             _logger.Debug("Queued Request Bucket ID: {0} Request ID: {1} Requests: {2}", Id, request.Id, request.Method, request.Route, Requests.Count);
-            
-            RestRequestHandler callback = RestRequestHandler.CreateRequestCallback(handler, _logger);
-            ThreadPool.QueueUserWorkItem(callback.Callback);
-        }
-        
-        /// <summary>
-        /// Merges the request to it's place in line by it's ID
-        /// </summary>
-        /// <param name="mergeHandler">Request to be merged</param>
-        private void MergeRequest(RequestHandler mergeHandler)
-        {
-            for (int i = 0; i < Requests.Count; i++)
-            {
-                RequestHandler handler = Requests[0];
-                if (handler.Request.Id > mergeHandler.Request.Id)
-                {
-                    Requests.Insert(i, mergeHandler);
-                    handler.Request.OnRequestQueued(this);
-                    return;
-                }
-            }
-                
-            //Request is older than the current requests. Add it to the end.
-            Requests.Add(mergeHandler);
-        }
-
-        /// <summary>
-        /// Removes the request from the queue.
-        /// Either the request completed successfully or there was an error and failed to succeed after 3 attempts
-        /// </summary>
-        /// <param name="handler">Request to remove</param>
-        private void DequeueRequest(RequestHandler handler)
-        {
-            _logger.Debug($"{nameof(Bucket)}.{nameof(DequeueRequest)} Bucket ID: {{0}} Request ID: {{1}} Removed: {{2}}", Id, handler.Request.Id, Requests.Remove(handler));
         }
 
         internal void Merge(Bucket data)
         {
-            ThreadSafeList<RequestHandler> requests = data.Requests;
-            for (int index = 0; index < requests.Count; index++)
+            foreach (RequestHandler request in data.Requests.Values)
             {
-                RequestHandler handler = requests[0];
-                MergeRequest(handler);
-                data.DequeueRequest(handler);
+                Requests[request.Request.Id] = request;
             }
+            
+            data.Requests.Clear();
         }
 
-        internal void WaitUntilBucketAvailable(RequestHandler handler)
+        internal async Task WaitUntilBucketAvailable(RequestHandler handler, CancellationToken token)
         {
             BaseRequest request = handler.Request;
             DiscordClient client = request.Client;
 
-            lock (_requestSync)
+            _requestSync.WaitOne();
+            while (true)
             {
-                while (true)
+                if (_rateLimit.HasReachedRateLimit)
                 {
-                    DateTimeOffset resetAt;
-                    if (_rateLimit.HasReachedRateLimit)
+                    DateTimeOffset resetAt = _rateLimit.NextReset();
+                    _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Global Rate Limit Method: {{3}} Url: {{4}} Waiting For: {{5}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                    if (resetAt > DateTimeOffset.UtcNow)
                     {
-                        resetAt = _rateLimit.NextReset();
-                        _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} {{0}} ID: {{1}} Can't Start Request Due to Global Rate Limit Method: {{2}} Url: {{3}} Waiting For: {{4}} Seconds", client.PluginName, request.Id, request.Method, request.RequestUrl, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                        ThreadExt.SleepUntil(resetAt);
-                        continue;
+                        await Task.Delay(resetAt - DateTimeOffset.UtcNow, token);
                     }
-
-                    resetAt = ResetAt;
-                    if ((Limit == 0 || Remaining <= 0) && resetAt > DateTimeOffset.UtcNow)
+                        
+                    continue;
+                }
+                
+                if ((Limit == 0 || Remaining <= 0) && ResetAt > DateTimeOffset.UtcNow)
+                {
+                    _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Bucket Rate Limit Method: {{3}} Url: {{4}} Limit: {{5}} Remaining: {{6}} Waiting For: {{7}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, Limit, Remaining, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                    if (ResetAt > DateTimeOffset.UtcNow)
                     {
-                        _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} {{0}} ID: {{1}} Can't Start Request Due to Bucket Rate Limit Method: {{2}} Url: {{3}} Limit: {{4}} Remaining: {{5}} Waiting For: {{6}} Seconds", client.PluginName, request.Id, request.Method, request.RequestUrl, Limit, Remaining, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                        ThreadExt.SleepUntil(resetAt);
-                        continue;
+                        await Task.Delay(ResetAt - DateTimeOffset.UtcNow, token);
                     }
-
-                    _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} {{0}} ID: {{1}} Can Start Request: Bucket: {{2}}/{{3}} Reset In: {{4}}", client.PluginName, request.Id, Remaining, Limit, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                    break;
+                    continue;
                 }
 
-                OnRequestStarted(handler);
+                _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can Start Request: Bucket: {{3}}/{{4}} Reset In: {{5}}", client.PluginName, Id, request.Id, Remaining, Limit, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                break;
             }
+            _requestSync.Set();
+            
+            OnRequestStarted(handler);
         }
         
         internal void OnRequestStarted(RequestHandler handler)
@@ -178,7 +137,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         {
             RateLimitResponse rateLimit = response.RateLimit;
 
-            DequeueRequest(handler);
+            Requests.TryRemove(handler.Request.Id, out RequestHandler _);
             
             if (!IsKnowBucket && rateLimit != null && !string.IsNullOrEmpty(rateLimit.BucketId))
             {
@@ -231,9 +190,8 @@ namespace Oxide.Ext.Discord.Rest.Buckets
 
         internal void AbortClientRequests(DiscordClient client)
         {
-            for (int index = Requests.Count - 1; index >= 0; index--)
+            foreach (RequestHandler handler in Requests.Values)
             {
-                RequestHandler handler = Requests[index];
                 if (handler.Request.Client != client)
                 {
                     continue;
@@ -243,8 +201,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 {
                     handler.Abort();
                 }
-                        
-                Requests.RemoveAt(index);
             }
             
             OnBucketCompleted();
@@ -262,13 +218,12 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         internal void Shutdown()
         {
             _logger.Debug($"{nameof(Bucket)}.{nameof(Shutdown)} Shutting down bucket ID: {{0}}", Id);
-            for (int index = Requests.Count - 1; index >= 0; index--)
+            foreach (RequestHandler request in Requests.Values)
             {
-                RequestHandler handler = Requests[index];
-                handler.Abort();
-                Requests.RemoveAt(index);
+                request.Abort();
             }
             
+            Requests.Clear();
             Semaphore.AllowAllThrough();
         }
     }

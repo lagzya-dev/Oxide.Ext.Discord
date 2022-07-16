@@ -14,12 +14,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Requesting is waiting for bucket to be ready
         /// </summary>
         PendingBucket,
-        
-        /// <summary>
-        /// Waiting to create request data
-        /// </summary>
-        PendingCreateData,
-        
+
         /// <summary>
         /// Request is waiting to start
         /// </summary>

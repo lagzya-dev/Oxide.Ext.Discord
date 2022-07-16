@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord
         
         internal GatewayReadyEvent ReadyData;
 
-        internal Socket WebSocket;
+        internal DiscordWebSocket WebSocket;
 
         /// <summary>
         /// List of all clients that are using this bot client
@@ -111,7 +111,7 @@ namespace Oxide.Ext.Discord
 
             Hooks = new DiscordHook(Logger);
             Rest = new RestHandler(this, Logger);
-            WebSocket = new Socket(this, Logger);
+            WebSocket = new DiscordWebSocket(this, Logger);
         }
 
         /// <summary>

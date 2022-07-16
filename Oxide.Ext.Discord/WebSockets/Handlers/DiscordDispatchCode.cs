@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.WebSockets
     /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#commands-and-events-gateway-events">Gateway Event Codes</a>
     /// </summary>
     [JsonConverter(typeof(DiscordEnumConverter))]
-    public enum DispatchCode : byte
+    public enum DiscordDispatchCode : byte
     {
         /// <summary>
         /// Used when we don't have a matching Dispatch Code

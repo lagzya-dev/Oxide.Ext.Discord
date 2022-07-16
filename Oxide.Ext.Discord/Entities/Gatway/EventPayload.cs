@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// <summary>
         /// Returns a DispatchCode enum value for the EventName if the extension supports it; Else the code will be Unknown
         /// </summary>
-        public DispatchCode EventCode => EventName?.ToObject<DispatchCode>() ?? DispatchCode.Unknown;
+        public DiscordDispatchCode EventCode => EventName?.ToObject<DiscordDispatchCode>() ?? DiscordDispatchCode.Unknown;
 
         /// <summary>
         /// Data as JObject

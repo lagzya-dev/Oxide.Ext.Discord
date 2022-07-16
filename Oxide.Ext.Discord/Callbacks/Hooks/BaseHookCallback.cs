@@ -1,6 +1,6 @@
 namespace Oxide.Ext.Discord.Callbacks.Hooks
 {
-    internal abstract class BaseHookCallback : BaseCallback
+    internal abstract class BaseHookCallback : BaseNextTickCallback
     {
         protected string Hook;
         protected object[] Args;
@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
             Hook = hook;
             Args = args;
         }
-        
+
         protected override void EnterPool()
         {
             Hook = null;

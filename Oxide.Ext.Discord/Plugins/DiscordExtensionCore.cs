@@ -54,12 +54,12 @@ namespace Oxide.Ext.Discord.Plugins
         [HookMethod(nameof(ReconnectWebsocketsCommand))]
         private void ReconnectWebsocketsCommand(IPlayer player, string cmd, string[] args)
         {
+            Chat(player, LangKeys.ReconnectWebSocket);
+            
             foreach (BotClient client in BotClient.ActiveBots.Values)   
             {
                 client.DisconnectWebsocket(true);   
             }
-            
-            Chat(player, LangKeys.ReconnectWebSocket);
         }
         
         [HookMethod(nameof(ConsoleLogCommand))]
@@ -114,7 +114,7 @@ namespace Oxide.Ext.Discord.Plugins
             StringBuilder sb = new StringBuilder();
             foreach (BotClient bot in BotClient.ActiveBots.Values)
             {
-                Socket websocket = bot.WebSocket;
+                DiscordWebSocket websocket = bot.WebSocket;
                 RestHandler rest = bot.Rest;
                 sb.Append('=', 50);
                 sb.AppendLine();
@@ -151,7 +151,7 @@ namespace Oxide.Ext.Discord.Plugins
                 sb.Append("Websocket: ");
                 if (websocket != null)
                 {
-                    sb.AppendLine(websocket.SocketState.ToString());
+                    sb.AppendLine(websocket.Handler.SocketState.ToString());
                     sb.Append("\tPending Commands: ");
                     IList<CommandPayload> pendingCommands = websocket.Commands.GetPendingCommands();
                     if (pendingCommands.Count == 0)
@@ -195,13 +195,16 @@ namespace Oxide.Ext.Discord.Plugins
                             sb.Append("\t\tRemaining: ");
                             sb.Append(bucket.Remaining.ToString());
                             sb.Append(" Limit: ");
-                            sb.AppendLine(bucket.Limit.ToString());
+                            sb.Append(bucket.Limit.ToString());
+                            sb.Append(" Reset In: ");
+                            double resetIn = bucket.ResetAt < DateTimeOffset.UtcNow ? 0 : (bucket.ResetAt - DateTimeOffset.UtcNow).TotalSeconds;
+                            sb.AppendLine(resetIn.ToString());
                             sb.Append("\t\tRequest Queue Count: ");
                             sb.AppendLine(bucket.Requests.Count.ToString());
-                            //sb.Append("\t\tSemaphore: ");
-                            //sb.Append(bucket.Semaphore.Available.ToString());
-                            //sb.Append('/');
-                            //sb.AppendLine(bucket.Semaphore.MaximumCount.ToString());
+                            sb.Append("\t\tSemaphore: ");
+                            sb.Append(bucket.Semaphore.Available.ToString());
+                            sb.Append('/');
+                            sb.AppendLine(bucket.Semaphore.MaximumCount.ToString());
                             sb.AppendLine("\t\tRoutes:");
                             foreach (KeyValuePair<string, string> route in rest.RouteToHash)
                             {
@@ -212,9 +215,8 @@ namespace Oxide.Ext.Discord.Plugins
                                 }
                             }
                             sb.AppendLine("\t\tRequests:");
-                            for (int i = 0; i < bucket.Requests.Count; i++)
+                            foreach (RequestHandler handler in bucket.Requests.Values)
                             {
-                                RequestHandler handler = bucket.Requests[i];
                                 BaseRequest request = handler.Request;
                                 sb.Append("\t\t\tID: ");
                                 sb.AppendLine(request.Id.ToString());
