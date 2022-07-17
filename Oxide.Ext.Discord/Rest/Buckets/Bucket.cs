@@ -217,8 +217,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                     handler.Abort();
                 }
             }
-            
-            OnBucketCompleted();
         }
 
         private void OnBucketCompleted()

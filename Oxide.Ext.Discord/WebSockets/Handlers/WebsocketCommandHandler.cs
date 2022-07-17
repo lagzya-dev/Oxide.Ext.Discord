@@ -18,14 +18,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly BotClient _client;
         private readonly DiscordWebSocket _webSocket;
         private readonly ILogger _logger;
-        private readonly ThreadSafeList<CommandPayload> _priorityCommands = new ThreadSafeList<CommandPayload>();
         private readonly ThreadSafeList<CommandPayload> _pendingCommands = new ThreadSafeList<CommandPayload>();
         private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
         private readonly AutoResetEvent _online = new AutoResetEvent(false);
         private readonly AutoResetEvent _commands = new AutoResetEvent(false);
         private readonly CancellationTokenSource _source;
         private readonly CancellationToken _token;
-        private WebSocketCommandState _state = WebSocketCommandState.Disconnected;
+        private bool _isSocketReady;
 
         /// <summary>
         /// Constructor
@@ -89,8 +88,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 }
                 finally
                 {
-                    _online.Set();
-                    if (_pendingCommands.Count != 0 || _priorityCommands.Count != 0)
+                    if (_isSocketReady)
+                    {
+                        _online.Set();
+                    }
+                    
+                    if (_pendingCommands.Count != 0)
                     {
                         _commands.Set();
                     }
@@ -100,12 +103,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private CommandPayload GetNextCommand()
         {
-            if (_priorityCommands.Count != 0)
-            {
-                return _priorityCommands[0];
-            }
-
-            if (_state == WebSocketCommandState.Connected)
+            if (_isSocketReady)
             {
                 return _pendingCommands.Count != 0 ? _pendingCommands[0] : null;
             }
@@ -115,14 +113,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private void RemoveCommand(CommandPayload command)
         {
-            if (command.IsPriority)
-            {
-                _priorityCommands.Remove(command);
-            }
-            else
-            {
-                _pendingCommands.Remove(command);
-            }
+            _pendingCommands.Remove(command);
             command.Dispose();
         }
 
@@ -136,13 +127,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(Enqueue)} Queuing command {{0}}", command.OpCode);
 
-            //If websocket has connect and we need to identify or resume send those payloads right away
-            // if (_webSocket.Handler.IsConnected() && (command.OpCode == GatewayCommandCode.Identify || command.OpCode == GatewayCommandCode.Resume))
-            // {
-            //     _webSocket.Send(command);
-            //     return;
-            // }
-            
             if (command.OpCode == GatewayCommandCode.PresenceUpdate)
             {
                 RemoveByType(GatewayCommandCode.PresenceUpdate);
@@ -152,20 +136,14 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 RemoveByType(GatewayCommandCode.VoiceStateUpdate);
             }
 
-            AddCommand(command);
+            _pendingCommands.Add(command);
             _commands.Set();
         }
-
-        internal void OnSocketConnected()
-        {
-            _state = WebSocketCommandState.Indentifying;
-            _online.Set();
-        }
-
         internal void OnWebSocketReady()
         {
             _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(OnWebSocketReady)} Socket Connected. Sending queued commands.");
-            _state = WebSocketCommandState.Connected;
+            _isSocketReady = true;
+            _online.Set();
         }
 
         internal void OnSocketDisconnected()
@@ -173,17 +151,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(OnSocketDisconnected)} Socket Disconnected. Queuing Commands.");
             _online.Reset();
             _pendingCommands.Clear();
-        }
-
-        private void AddCommand(CommandPayload command)
-        {
-            if (command.IsPriority)
-            {
-                _priorityCommands.Clear();
-                _priorityCommands.Add(command);
-                return;
-            }
-            _pendingCommands.Add(command);
+            _isSocketReady = false;
         }
         
         private void RemoveByType(GatewayCommandCode code)

@@ -188,7 +188,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             InvalidInteractionResponseException.ThrowIfInitialResponseTimeElapsed(CreatedDate);
 
             _hasResponded = true;
-            client.Bot.Rest.DoRequest(client, $"interactions/{Id}/{Token}/callback", RequestMethod.POST, response, callback, error);
+            client.Bot.Rest.CreateRequest(client, $"interactions/{Id}/{Token}/callback", RequestMethod.POST, response, callback, error);
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            client.Bot.Rest.DoRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.PATCH, message, callback, error);
+            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.PATCH, message, callback, error);
         }
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            client.Bot.Rest.DoRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            client.Bot.Rest.DoRequest(client, $"webhooks/{ApplicationId}/{Token}", RequestMethod.POST, message, callback, error);
+            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}", RequestMethod.POST, message, callback, error);
         }
         
         /// <summary>
@@ -277,7 +277,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            client.Bot.Rest.DoRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.PATCH, edit, callback, error);
+            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.PATCH, edit, callback, error);
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            client.Bot.Rest.DoRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback, error);
         }
     }
 }

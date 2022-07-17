@@ -172,6 +172,18 @@ namespace Oxide.Ext.Discord.WebSockets
             Commands.Enqueue(payload);
         }
         
+        /// <summary>
+        /// Send a command to discord over the websocket
+        /// </summary>
+        /// <param name="opCode">Command code to send</param>
+        /// <param name="data">Data to send</param>
+        internal async Task SendImmediately(GatewayCommandCode opCode, object data)
+        {
+            CommandPayload payload = CommandPayload.CreatePayload(opCode, data);
+            await Send(payload);
+            payload.Dispose();
+        }
+        
         internal async Task<bool> Send(CommandPayload payload)
         {
             if (Handler == null)
@@ -199,7 +211,6 @@ namespace Oxide.Ext.Discord.WebSockets
         internal void OnSocketConnected()
         {
             _reconnect.CancelReconnect();
-            Commands.OnSocketConnected();
         }
         
         internal void OnSocketReady(string sessionId)
@@ -224,7 +235,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
 
-        internal void OnDiscordHello(GatewayHelloEvent hello)
+        internal async Task OnDiscordHello(GatewayHelloEvent hello)
         {
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(OnDiscordHello)}");
             _heartbeat.SetupHeartbeat(hello.HeartbeatInterval);
@@ -232,17 +243,17 @@ namespace Oxide.Ext.Discord.WebSockets
             // Client should now perform identification
             if (ShouldResume && !string.IsNullOrEmpty(_sessionId))
             {
-                Resume();
+                await Resume();
                 return;
             }
             
-            Identify();
+            await Identify();
         }
 
         /// <summary>
         /// Used to Identify the bot with discord
         /// </summary>
-        private void Identify()
+        private async Task Identify()
         {
             // Sent immediately after connecting. Opcode 2: Identify
             // Ref: https://discord.com/developers/docs/topics/gateway#identifying
@@ -263,13 +274,13 @@ namespace Oxide.Ext.Discord.WebSockets
                 Shard = new List<int> {0, 1}
             };
 
-            Send(GatewayCommandCode.Identify, identify);
+            await SendImmediately(GatewayCommandCode.Identify, identify);
         }
         
         /// <summary>
         /// Used to resume the current session with discord
         /// </summary>
-        private void Resume()
+        private async Task Resume()
         {
             if (!_client.Initialized)
             {
@@ -285,7 +296,7 @@ namespace Oxide.Ext.Discord.WebSockets
             
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Resume)} Attempting to resume session with ID: {{0}} Sequence: {{1}}", _sessionId, _sequence);
 
-            Send(GatewayCommandCode.Resume, resume);
+            await SendImmediately(GatewayCommandCode.Resume, resume);
         }
         
         internal void OnHeartbeatAcknowledge()

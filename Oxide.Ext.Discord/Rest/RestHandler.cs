@@ -55,7 +55,7 @@ namespace Oxide.Ext.Discord.Rest
             HttpClientHandler handler = new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-                UseCookies = false,
+                UseCookies = false
             };
             Client = new HttpClient(handler)
             {
@@ -79,7 +79,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="success">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
-        public void DoRequest(DiscordClient client, string url, RequestMethod method, object data, Action success, Action<RequestError> error)
+        public void CreateRequest(DiscordClient client, string url, RequestMethod method, object data, Action success, Action<RequestError> error)
         {
             if (data is IDiscordValidation validate)
             {
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="success">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
-        public void DoRequest<T>(DiscordClient client, string url, RequestMethod method, object data, Action<T> success, Action<RequestError> error)
+        public void CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data, Action<T> success, Action<RequestError> error)
         {
             if (data is IDiscordValidation validate)
             {
@@ -112,9 +112,9 @@ namespace Oxide.Ext.Discord.Rest
         }
 
         /// <summary>
-        /// Queues the request using the thread pool so we don't block the main thread with any locks
+        /// Starts the request
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="request">Request to be started</param>
         public void StartRequest(BaseRequest request)
         {
             _logger.Debug($"{nameof(RestHandler)}.{nameof(StartRequest)} Method: {{0}} Route: {{1}}", request.Method, request.Route);
