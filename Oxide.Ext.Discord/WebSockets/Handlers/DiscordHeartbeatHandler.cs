@@ -98,8 +98,14 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             if (_socket.Handler.IsDisconnected())
             {
                 _logger.Debug($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Websocket is offline and is NOT connecting. Attempt Reconnect.");
-                _socket.ShouldAttemptReconnect = true;
+                _socket.ShouldReconnect = true;
                 _socket.ReconnectIfRequested();
+                return;
+            }
+
+            if (_socket.Handler.IsDisconnecting())
+            {
+                _logger.Debug($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Websocket is currently in the process of disconnecting");
                 return;
             }
             
@@ -117,7 +123,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 if (!_socket.Handler.IsConnecting() && !_socket.Handler.IsPendingReconnect())
                 {
                     _logger.Debug($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and bot is not online or connecting.");
-                    _socket.ShouldAttemptReconnect = true;
+                    _socket.ShouldReconnect = true;
                     _socket.ReconnectIfRequested();
                     return;
                 }

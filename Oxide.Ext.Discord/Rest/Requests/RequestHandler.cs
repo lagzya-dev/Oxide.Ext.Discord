@@ -81,7 +81,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         
         private async Task<RequestResponse> RunInternal()
         {
-            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(Run)} Starting REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}} Contents:\n{{3}}", Request.Id, Request.Method, Request.Route, /*_data.StringContents ??*/ "No Contents");
+            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(RunInternal)} Starting REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}} Contents:\n{{3}}", Request.Id, Request.Method, Request.Route, /*_data.StringContents ??*/ "No Contents");
 
             RequestResponse response = null;
             byte retries = 0;
@@ -120,19 +120,22 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         private async Task<RequestResponse> RunRequest()
         {
-            HttpRequestMessage request = null;
             try
             {
-                request = CreateRequest(); //Needs to be here if JSON serialization fails
-                HttpResponseMessage webResponse = await Request.HttpClient.SendAsync(request, _token);
-                if (webResponse.IsSuccessStatusCode)
+                using (HttpRequestMessage request = CreateRequest())
                 {
-                    return await RequestResponse.CreateSuccessResponse(Request.Client, webResponse);
-                }
+                    using (HttpResponseMessage webResponse = await Request.HttpClient.SendAsync(request, _token))
+                    {
+                        if (webResponse.IsSuccessStatusCode)
+                        {
+                            return await RequestResponse.CreateSuccessResponse(Request.Client, webResponse);
+                        }
 
-                RequestResponse response = await HandleWebException(request, webResponse);
+                        RequestResponse response = await HandleWebException(request, webResponse);
                 
-                return response;
+                        return response;
+                    }
+                }
             }
             catch (TaskCanceledException)
             {
@@ -147,10 +150,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
             {
                 Request.Client.Logger.Exception("An exception occured for request. ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, Request.Route, Request.Data?.GetType().Name ?? "None", ex);
                 return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Error).WithException(ex), RequestCompletedStatus.ErrorFatal);
-            }
-            finally
-            {
-                request?.Dispose();
             }
         }
 
@@ -173,7 +172,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             if (Request.Client.Logger.IsLogging(DiscordLogLevel.Debug))
             {
                 Request.Client.Logger.Debug("Web Exception Occured. Type: {0} Request ID: {1} Plugin: {2} Method: {3} Route: {4} HTTP Code: {5} Message: {6}", response.Error?.ErrorType, Request.Id, Request.Client.PluginName, Request.Method, Request.Route, response.Code, response.Error?.Message);
-                Request.Client.Logger.Debug("Body:\n{0}", await request.Content.ReadAsStringAsync());
+                Request.Client.Logger.Debug("Body:\n{0}", request.Content != null ? await request.Content.ReadAsStringAsync() : "No Content");
             }
 
             return response;

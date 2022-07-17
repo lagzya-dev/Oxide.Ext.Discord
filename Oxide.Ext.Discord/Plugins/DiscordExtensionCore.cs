@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Plugins
         private void Init()
         {
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
-            AddCovalenceCommand(new[] { "de.rws" }, nameof(ReconnectWebsocketsCommand), "de.rws");
+            AddCovalenceCommand(new[] { "de.rws" }, nameof(ResetWebSocketCommand), "de.rws");
             AddCovalenceCommand(new[] { "de.consolelog" }, nameof(ConsoleLogCommand), "de.consolelog");
             AddCovalenceCommand(new[] { "de.filelog" }, nameof(FileLogCommand), "de.filelog");
             AddCovalenceCommand(new[] { "de.debug" }, nameof(DiscordDebugCommand), "de.debug");
@@ -51,14 +51,14 @@ namespace Oxide.Ext.Discord.Plugins
             Chat(player, LangKeys.Version, DiscordExtension.FullExtensionVersion);
         }
 
-        [HookMethod(nameof(ReconnectWebsocketsCommand))]
-        private void ReconnectWebsocketsCommand(IPlayer player, string cmd, string[] args)
+        [HookMethod(nameof(ResetWebSocketCommand))]
+        private void ResetWebSocketCommand(IPlayer player, string cmd, string[] args)
         {
-            Chat(player, LangKeys.ReconnectWebSocket);
+            Chat(player, LangKeys.ResetWebSocket);
             
-            foreach (BotClient client in BotClient.ActiveBots.Values)   
+            foreach (BotClient client in BotClient.ActiveBots.Values)
             {
-                client.DisconnectWebsocket(true);   
+                client.ResetWebSocket();
             }
         }
         

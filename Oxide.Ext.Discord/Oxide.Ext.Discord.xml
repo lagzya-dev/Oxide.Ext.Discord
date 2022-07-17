@@ -2208,7 +2208,7 @@
             Which plugin is the owner of this client
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.DiscordClient.PluginName">
+        <member name="F:Oxide.Ext.Discord.DiscordClient.PluginId">
             <summary>
             The name of the plugin that this client was created for
             </summary>
@@ -17136,12 +17136,12 @@
             The current session ID for the connected bot
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.ShouldAttemptReconnect">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.ShouldReconnect">
             <summary>
             If we should attempt to reconnect to discord on disconnect
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.ShouldAttemptResume">
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.ShouldResume">
             <summary>
             If we should attempt to resume our previous session after connecting
             </summary>
@@ -17173,8 +17173,8 @@
             <summary>
             Disconnects the websocket from discord
             </summary>
-            <param name="attemptReconnect">Should we attempt to reconnect to discord after disconnecting</param>
-            <param name="shouldResume">Should we attempt to resume our previous session</param>
+            <param name="reconnect">Should we attempt to reconnect to discord after disconnecting</param>
+            <param name="resume">Should we attempt to resume our previous session</param>
             <param name="requested">If discord requested that we reconnect to discord</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Shutdown">

@@ -45,24 +45,25 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         ///<inheritdoc/>
         protected override async Task HandleCallback()
         {
-            _handler = RequestHandler.CreateRequestHandler(_request);
-            _bucket = _rest.QueueBucket(_handler, _request);
-            
-            string bucketId = _bucket.Id;
-            AdjustableSemaphore semaphore = _bucket.Semaphore;
-            _request.Status = RequestStatus.PendingBucket;
-            
-            _logger.Debug("Waiting for bucket availability Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
-
+            AdjustableSemaphore semaphore = null;
             try
             {
-                semaphore.WaitOne();
+                _handler = RequestHandler.CreateRequestHandler(_request);
+                _bucket = _rest.QueueBucket(_handler, _request);
+            
+                string bucketId = _bucket.Id;
+                semaphore = _bucket.Semaphore;
+                _request.Status = RequestStatus.PendingBucket;
+            
+                _logger.Debug("Waiting for bucket availability Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
+                
+                await semaphore.WaitOneAsync();
                 if (bucketId != _bucket.Id)
                 {
                     _logger.Debug("Bucket ID Changed. Waiting for bucket availability again for ID: {0} Old Bucket ID: {1} New Bucket ID: {2}", _request.Id, bucketId, _bucket.Id);
                     semaphore.Release();
                     semaphore = _bucket.Semaphore;
-                    semaphore.WaitOne();
+                    await semaphore.WaitOneAsync();
                 }
 
                 _logger.Debug("Request callback started for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
@@ -75,7 +76,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
             }
             finally
             {
-                semaphore.Release();
+                semaphore?.Release();
             }
         }
 

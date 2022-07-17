@@ -5,11 +5,11 @@ namespace Oxide.Ext.Discord.Interfaces.WebSockets
 {
     public interface IWebSocketEventHandler
     {
-        void SocketOpened();
+        Task SocketOpened();
 
-        void SocketClosed(int code, string message);
+        Task SocketClosed(int code, string message);
 
-        void SocketErrored(Exception ex);
+        Task SocketErrored(Exception ex);
 
         Task SocketMessage(string message);
     }

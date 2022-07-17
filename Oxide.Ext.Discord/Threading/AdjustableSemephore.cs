@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Oxide.Ext.Discord.Threading
 {
@@ -39,7 +40,7 @@ namespace Oxide.Ext.Discord.Threading
             }
         }
 
-        public void WaitOne()
+        public Task WaitOneAsync()
         {
             lock (_syncRoot)
             {
@@ -49,6 +50,8 @@ namespace Oxide.Ext.Discord.Threading
                 }
                 Available--;
             }
+
+            return Task.CompletedTask;
         }
 
         public void Release()

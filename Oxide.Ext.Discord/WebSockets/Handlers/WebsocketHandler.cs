@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Concurrent;
 using System.IO;
-using System.IO.Compression;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -20,14 +18,15 @@ namespace Oxide.Ext.Discord.WebSockets
         private CancellationTokenSource _source;
         private CancellationToken _token;
         
-        private readonly ConcurrentQueue<string> _sendMessages = new ConcurrentQueue<string>();
         private readonly ILogger _logger;
 
         private readonly ArraySegment<byte> _receiveBuffer;
         private readonly byte[] _sendBuffer;
         private readonly Encoding _encoding;
         private readonly int _maxSendChars;
-        private byte[] _receivedBuffer;
+        //private byte[] _receivedBuffer;
+
+        //private readonly ZlibDecompressorHandler _decompressor;
         
         private const int SendChunkSize = 1024;
         private const int ReceiveChunkSize = 1024;
@@ -39,9 +38,10 @@ namespace Oxide.Ext.Discord.WebSockets
             _handler = handler;
             _logger = logger;
             _encoding = Encoding.UTF8;
+            //_decompressor = new ZlibDecompressorHandler(_encoding, logger);
             _receiveBuffer = WebSocket.CreateClientBuffer(ReceiveChunkSize, SendChunkSize);
             _sendBuffer = new byte[SendChunkSize];
-            _receivedBuffer = new byte[ReceiveChunkSize * 4];
+            //_receivedBuffer = new byte[ReceiveChunkSize * 4];
             _maxSendChars = _encoding.GetMaxCharCount(SendChunkSize);
         }
 
@@ -53,6 +53,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             SocketState = SocketState.Connecting;
+            _source?.Dispose();
             _source = new CancellationTokenSource();
             _token = _source.Token;
             _socket = new ClientWebSocket();
@@ -70,9 +71,9 @@ namespace Oxide.Ext.Discord.WebSockets
                 _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(Connect)} Connecting Websocket To: {{0}}", url);
                 await _socket.ConnectAsync(new Uri(url), _token);
                 SocketState = SocketState.Connected;
-                InvokeOnConnected();
+                await _handler.SocketOpened();
                 _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(Connect)} Websocket Connected To: {{0}}", url);
-                await Task.WhenAll(ReceiveHandler(), SendHandler());
+                await ReceiveHandler();
                 if (IsConnected())
                 {
                     SocketState = SocketState.Disconnecting;
@@ -85,7 +86,7 @@ namespace Oxide.Ext.Discord.WebSockets
             catch (OperationCanceledException) { }
             catch (Exception ex)
             {
-                InvokeOnError(ex);
+                await _handler.SocketErrored(ex);
                 _logger.Exception("A Websocket Error Occured", ex);
             }
             finally
@@ -96,7 +97,9 @@ namespace Oxide.Ext.Discord.WebSockets
 
         private async Task ReceiveHandler()
         {
-            int receivedCount = 0;
+            MemoryStream input = new MemoryStream();
+            StreamReader reader = new StreamReader(input, _encoding);
+            byte[] array = _receiveBuffer.Array ?? throw new ArgumentNullException();
             
             _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(ReceiveHandler)} Start Receive");
             while (!_token.IsCancellationRequested && (_socket.State == WebSocketState.Open || _socket.State == WebSocketState.CloseSent))
@@ -107,22 +110,25 @@ namespace Oxide.Ext.Discord.WebSockets
                     continue;
                 }
 
-                if (receivedCount + result.Count > _receivedBuffer.Length)
-                {
-                    Array.Resize(ref _receivedBuffer, _receivedBuffer.Length * 2);
-                }
-                
-                Buffer.BlockCopy(_receiveBuffer.Array, 0, _receivedBuffer, receivedCount, result.Count);
+                await input.WriteAsync(array, 0, result.Count, _token);
 
-                receivedCount += result.Count;
-
-                //_logger.Debug($"{nameof(WebsocketHandler)}.{nameof(ReceiveHandler)} Received Type: {{0}} Size: {{1}} End Of Message: {{2}}", result.MessageType, result.Count, result.EndOfMessage);
-                
                 if (result.EndOfMessage)
                 {
-                    string message = Encoding.UTF8.GetString(_receivedBuffer, 0, receivedCount);
-                    await ProcessReceivedMessage(result, message);
-                    receivedCount = 0;
+                    try
+                    {
+                        input.Position = 0;
+                        string message = await reader.ReadToEndAsync();
+                        _logger.Debug("Got Type: {0} Message: {1}", result.MessageType, message);
+                        await ProcessReceivedMessage(result, message);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.Exception("An error occured processing websocket message.", ex);
+                    }
+                    finally
+                    {
+                        input.SetLength(0);
+                    }
                 }
             }
         }
@@ -138,7 +144,7 @@ namespace Oxide.Ext.Discord.WebSockets
                     int closeCode = result.CloseStatus.HasValue ? (int)result.CloseStatus : 1000;
                     SocketState = SocketState.Disconnecting;
                     _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Close Code: {{0}} Message: {{1}}", closeCode, message);
-                    InvokeOnClose(closeCode, message);
+                    await _handler.SocketClosed(closeCode, message);
                     await _socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", _token);
                     SocketState = SocketState.Disconnected;
                 }
@@ -147,28 +153,9 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Message: {{0}}", message);
-            InvokeOnMessage(message);
+            await _handler.SocketMessage(message);
         }
 
-        private async Task SendHandler()
-        {
-            _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(SendHandler)} Start Send");
-            while (!_token.IsCancellationRequested && _socket.State == WebSocketState.Open)
-            {
-                if (_sendMessages.Count == 0)
-                {
-                    await Task.Delay(25, _token);
-                    continue;
-                }
-
-                if (_sendMessages.TryDequeue(out string message))
-                {
-                    _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(SendHandler)} Sending Message: {{0}}", message);
-                    await SendMessage(message);
-                }
-            }
-        }
-        
         private async Task SendMessage(string message)
         {
             int charIndex = 0;
@@ -187,17 +174,18 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
         
-        public void Send(string message)
+        public async Task Send(string message)
         {
-            _sendMessages.Enqueue(message);
+            _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(Send)} Sending Message: {{0}}", message);
+            await SendMessage(message);
         }
 
-        public Task Close(int code, string reason)
+        public Task Disconnect(int code, string reason)
         {
-            return Close((WebSocketCloseStatus)code, reason);
+            return Disconnect((WebSocketCloseStatus)code, reason);
         }
         
-        public async Task Close(WebSocketCloseStatus status, string reason)
+        public async Task Disconnect(WebSocketCloseStatus status, string reason)
         {
             try
             {
@@ -205,7 +193,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 {
                     SocketState = SocketState.Disconnecting;
                     await _socket.CloseAsync(status, reason, _token);
-                    InvokeOnClose((int)status, reason);
+                    await _handler.SocketClosed((int)status, reason);
                     SocketState = SocketState.Disconnected;
                     _socket = null;
                 }
@@ -220,38 +208,6 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
 
-        private void InvokeOnConnected()
-        {
-            if (_handler != null)
-            {
-                Task.Run(() => _handler.SocketOpened(), _token);
-            }
-        }
-        
-        private void InvokeOnMessage(string message)
-        {
-            if (_handler != null)
-            {
-                Task.Run(async () => await _handler.SocketMessage(message), _token);
-            }
-        }
-        
-        private void InvokeOnError(Exception ex)
-        {
-            if (_handler != null)
-            {
-                Task.Run(() => _handler.SocketErrored(ex), _token);
-            }
-        }
-        
-        private void InvokeOnClose(int code, string message)
-        {
-            if (_handler != null)
-            {
-                Task.Run(() => _handler.SocketClosed(code, message), _token);
-            }
-        }
-        
         /// <summary>
         /// Returns if the websocket is in the open state
         /// </summary>

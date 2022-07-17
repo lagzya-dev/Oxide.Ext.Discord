@@ -22,6 +22,8 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         [JsonProperty("d")]
         public object Payload;
 
+        public bool IsPriority => OpCode == GatewayCommandCode.Identify || OpCode == GatewayCommandCode.Identify;
+
         /// <summary>
         /// Creates a <see cref="CommandPayload"/> for the web socket
         /// </summary>

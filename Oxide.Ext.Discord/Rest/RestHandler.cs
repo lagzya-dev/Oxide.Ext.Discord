@@ -154,6 +154,7 @@ namespace Oxide.Ext.Discord.Rest
         internal void RemoveBucket(Bucket bucket)
         {
             Buckets.TryRemove(bucket.Id, out Bucket _);
+            bucket.Shutdown();
         }
 
         /// <summary>

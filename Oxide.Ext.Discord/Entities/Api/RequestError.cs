@@ -104,6 +104,11 @@ namespace Oxide.Ext.Discord.Entities.Api
                 ContentType = request.Content.Headers.ContentType.ToString();
                 StringContents = await request.Content.ReadAsStringAsync();
             }
+            else
+            {
+                ContentType = "No Content";
+                StringContents = "No Content";
+            }
 
             return this;
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
@@ -82,8 +83,6 @@ namespace Oxide.Ext.Discord
         {
             NullValueHandling = NullValueHandling.Ignore
         };
-        
-        internal GatewayReadyEvent ReadyData;
 
         internal DiscordWebSocket WebSocket;
 
@@ -91,6 +90,8 @@ namespace Oxide.Ext.Discord
         /// List of all clients that are using this bot client
         /// </summary>
         internal readonly List<DiscordClient> Clients = new List<DiscordClient>();
+        
+        private GatewayReadyEvent _readyData;
 
         /// <summary>
         /// Creates a new bot client for the given settings
@@ -121,16 +122,23 @@ namespace Oxide.Ext.Discord
         /// <returns>Bot client that is created or already exists</returns>
         public static void AddDiscordClient(DiscordClient client)
         {
-            BotClient bot = ActiveBots[client.Settings.ApiToken];
-            if (bot == null)
+            try
             {
-                DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Creating new BotClient");
-                bot = new BotClient(client.Settings);
-                ActiveBots[client.Settings.ApiToken] = bot;
-            }
+                BotClient bot = ActiveBots[client.Settings.ApiToken];
+                if (bot == null)
+                {
+                    DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Creating new BotClient");
+                    bot = new BotClient(client.Settings);
+                    ActiveBots[client.Settings.ApiToken] = bot;
+                }
 
-            bot.AddClient(client);
-            DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding {{0}} client to bot {{1}}", client.Plugin.Name, bot.BotUser?.GetFullUserName);
+                bot.AddClient(client);
+                DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding {{0}} client to bot {{1}}", client.Plugin.Name, bot.BotUser?.GetFullUserName);
+            }
+            catch (Exception ex)
+            {
+                DiscordExtension.GlobalLogger.Exception($"{nameof(BotClient)}.{nameof(AddDiscordClient)} An error occured adding {{0}} client", client.PluginName, ex);
+            }
         }
 
         /// <summary>
@@ -158,6 +166,13 @@ namespace Oxide.Ext.Discord
             }
         }
 
+        internal void ResetWebSocket()
+        {
+            WebSocket?.Shutdown();
+            WebSocket = new DiscordWebSocket(this, Logger);
+            WebSocket.Connect();
+        }
+
         /// <summary>
         /// Called when bot client is no longer used by any client and can be shutdown.
         /// </summary>
@@ -170,7 +185,7 @@ namespace Oxide.Ext.Discord
             WebSocket = null;
             Rest?.Shutdown();
             Rest = null;
-            ReadyData = null;
+            _readyData = null;
         }
 
         /// <summary>
@@ -183,7 +198,7 @@ namespace Oxide.Ext.Discord
 
             Clients.RemoveAll(c => c == client);
             Clients.Add(client);
-            client.Bot = this;
+            client.OnBotAdded(this);
             Hooks.AddPlugin(client.Plugin);
             
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
@@ -205,15 +220,18 @@ namespace Oxide.Ext.Discord
             //Our intents have changed. Disconnect websocket and reconnect with new intents.
             if (intents != Settings.Intents)
             {
-                Logger.Debug("New intents have been requested for the bot. Reconnecting with updated intents.");
                 Settings.Intents = intents;
-                DisconnectWebsocket(true);
+                if (WebSocket.Handler.IsConnected())
+                {
+                    Logger.Debug("New intents have been requested for the a connected bot. Reconnecting with updated intents.");
+                    DisconnectWebsocket(true);
+                }
             }
                 
-            if (ReadyData != null)
+            if (_readyData != null)
             {
-                ReadyData.Guilds = Servers;
-                DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordGatewayReady, ReadyData);
+                _readyData.Guilds = Servers;
+                DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordGatewayReady, _readyData);
 
                 foreach (DiscordGuild guild in Servers.Values)
                 {
@@ -237,6 +255,7 @@ namespace Oxide.Ext.Discord
         /// <param name="client">Client to remove from bot client</param>
         public void RemoveClient(DiscordClient client)
         {
+            client.OnBotRemoved();
             Clients.Remove(client);
             Hooks.RemovePlugin(client.Plugin);
             Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} {{0}} Client Removed", client.PluginName);
@@ -283,7 +302,9 @@ namespace Oxide.Ext.Discord
             for (int index = 0; index < Clients.Count; index++)
             {
                 DiscordClient client = Clients[index];
+                sb.Append('[');
                 sb.Append(client.PluginName);
+                sb.Append(']');
                 if (index + 1 != Clients.Count)
                 {
                     sb.Append(",");
@@ -298,6 +319,19 @@ namespace Oxide.Ext.Discord
             Logger.UpdateLogLevel(level);
             Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {{0}} to: {{1}}", Settings.LogLevel, level);
             Settings.LogLevel = level;
+        }
+
+        internal void OnClientReady(GatewayReadyEvent ready)
+        {
+            if (_readyData == null)
+            {
+                Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ready);
+            }
+
+            if (Settings.Intents != WebSocket.Intents)
+            {
+                DisconnectWebsocket(true);
+            }
         }
         
         /// <summary>

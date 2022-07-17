@@ -42,8 +42,11 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         private readonly ILogger _logger;
         private readonly RestHandler _rest;
         private readonly AutoResetEvent _requestSync = new AutoResetEvent(true);
+        private readonly AutoResetEvent _completedSync = new AutoResetEvent(true);
         internal readonly AdjustableSemaphore Semaphore = new AdjustableSemaphore(1);
         internal readonly ConcurrentDictionary<Snowflake, RequestHandler> Requests = new ConcurrentDictionary<Snowflake, RequestHandler>();
+
+        private bool _isShutdown;
 
         /// <summary>
         /// Creates a new bucket for the given <see cref="RestHandler"/>
@@ -137,20 +140,32 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         {
             RateLimitResponse rateLimit = response.RateLimit;
 
-            Requests.TryRemove(handler.Request.Id, out RequestHandler _);
-            
-            if (!IsKnowBucket && rateLimit != null && !string.IsNullOrEmpty(rateLimit.BucketId))
+            if (!Requests.TryRemove(handler.Request.Id, out RequestHandler _))
             {
-                _rest.UpgradeToKnownBucket(this, rateLimit.BucketId);
-                if (!IsKnowBucket)
-                {
-                    Semaphore.AllowAllThrough();
-                }
+                _logger.Warning("Failed to remove request from bucket!!! Bucket ID: {0} Request ID: {1} Method: {2} Route: {3} Status: {4}", Id, handler.Request.Id, handler.Request.Method, handler.Request.Route, handler.Request.Status);
             }
 
-            if (Requests.Count == 0)
+            try
             {
-                OnBucketCompleted();
+                _completedSync.WaitOne();
+
+                if (!IsKnowBucket && rateLimit != null && !string.IsNullOrEmpty(rateLimit.BucketId))
+                {
+                    _rest.UpgradeToKnownBucket(this, rateLimit.BucketId);
+                    if (!IsKnowBucket)
+                    {
+                        Semaphore.AllowAllThrough();
+                    }
+                }
+                
+                if (Requests.Count == 0)
+                {
+                    OnBucketCompleted();
+                }
+            }
+            finally
+            {
+                _completedSync.Set();
             }
         }
         
@@ -225,6 +240,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             
             Requests.Clear();
             Semaphore.AllowAllThrough();
+            _isShutdown = true;
         }
     }
 }

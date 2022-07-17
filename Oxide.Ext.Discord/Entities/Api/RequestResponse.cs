@@ -35,15 +35,13 @@ namespace Oxide.Ext.Discord.Entities.Api
             RateLimit = DiscordPool.Get<RateLimitResponse>();
             Status = status;
 
-            if (response == null)
+            if (response != null)
             {
-                return;
-            }
-            
-            Code = (int)response.StatusCode;
-            RateLimit.Init(response.Headers, _client.Logger);
+                Code = (int)response.StatusCode;
+                RateLimit.Init(response.Headers, _client.Logger);
 
-            _message = await response.Content.ReadAsStringAsync();
+                _message = await response.Content.ReadAsStringAsync();
+            }
         }
 
         /// <summary>

@@ -28,12 +28,13 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// The name of the plugin that this client was created for
         /// </summary>
+        public readonly string PluginId;
         public readonly string PluginName;
 
         /// <summary>
         /// The bot client that is unique to the Token used
         /// </summary>
-        public BotClient Bot { get; internal set; }
+        public BotClient Bot { get; private set; }
         
         /// <summary>
         /// Settings used to connect to discord and configure the extension
@@ -49,7 +50,9 @@ namespace Oxide.Ext.Discord
         public DiscordClient(Plugin plugin)
         {
             Plugin = plugin;
-            PluginName = plugin.Name;
+            PluginId = plugin.Name;
+            PluginName = $"{plugin.Name} by {plugin.Author} v{plugin.Version}";
+            Clients[PluginId] = this;
         }
         
         /// <summary>
@@ -126,6 +129,16 @@ namespace Oxide.Ext.Discord
             return Bot?.Initialized ?? false;
         }
 
+        internal void OnBotAdded(BotClient bot)
+        {
+            Bot = bot;
+        }
+
+        internal void OnBotRemoved()
+        {
+            Bot = null;
+        }
+
         /// <summary>
         /// Subscribe the owner plugin to the given hook
         /// </summary>
@@ -193,7 +206,6 @@ namespace Oxide.Ext.Discord
                     {
                         DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(OnPluginAdded)} Creating DiscordClient for plugin {{0}}", plugin.Name);
                         client = new DiscordClient(plugin);
-                        Clients[plugin.Name] = client;
                     }
                     
                     field.SetValue(plugin, client);
@@ -236,13 +248,16 @@ namespace Oxide.Ext.Discord
             {
                 client.Disconnect();
 
-                DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {{0}}", client.Plugin.Name);
-                foreach (FieldInfo field in client.Plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+                DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {{0}}", client.PluginName);
+                if (client.Plugin && client.Plugin.IsLoaded)
                 {
-                    if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
+                    foreach (FieldInfo field in client.Plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
                     {
-                        field.SetValue(client.Plugin, null);
-                        break;
+                        if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
+                        {
+                            field.SetValue(client.Plugin, null);
+                            break;
+                        }
                     }
                 }
             }
@@ -252,7 +267,7 @@ namespace Oxide.Ext.Discord
             }
             finally
             {
-                Clients.Remove(client.PluginName);
+                Clients.Remove(client.PluginId);
                 client.Plugin = null;
             }
             

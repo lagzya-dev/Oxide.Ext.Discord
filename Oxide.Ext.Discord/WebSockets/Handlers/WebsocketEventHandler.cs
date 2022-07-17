@@ -57,10 +57,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <summary>
         /// Called when a socket is open
         /// </summary>
-        public void SocketOpened()
+        public Task SocketOpened()
         {
             _logger.Info("Discord socket connected!");
+            _webSocket.OnSocketConnected();
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordWebsocketOpened);
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -68,7 +70,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void SocketClosed(int code, string message)
+        public Task SocketClosed(int code, string message)
         {
             //If the socket close came from the extension then this will be true
             // if (sender is WebSocket socket && !_webSocket.IsCurrentSocket(socket))
@@ -85,7 +87,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 }
                 else
                 {
-                    _webSocket.ShouldAttemptReconnect = true;
+                    _webSocket.ShouldReconnect = true;
                 }
             }
             else if (code >= 4000 && code < 5000)
@@ -95,19 +97,19 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             else
             {
                 _logger.Warning("Discord WebSocket closed with abnormal close code. Code: {0}, reason: {1}", code, message);
-                _webSocket.ShouldAttemptReconnect = true;
+                _webSocket.ShouldReconnect = true;
                 _logger.Debug($"{nameof(WebsocketEventHandler)}.{nameof(SocketClosed)} Discord WebSocket closed. Code: {{0}}, reason: {{1}}", code, message);
             }
 
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordWebsocketClosed, message, code, true);
-            _webSocket.OnWebsocketDisconnected();
+            _webSocket.OnSocketDisconnected();
 
-            if (!_client.Initialized)
+            if (_client.Initialized)
             {
-                return;
+                _webSocket.ReconnectIfRequested();
             }
             
-            _webSocket.ReconnectIfRequested();
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -200,8 +202,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     break;
             }
 
-            _webSocket.ShouldAttemptResume = shouldResume;
-            _webSocket.ShouldAttemptReconnect = shouldReconnect;
+            _webSocket.ShouldResume = shouldResume;
+            _webSocket.ShouldReconnect = shouldReconnect;
         }
 
         /// <summary>
@@ -209,7 +211,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void SocketErrored(Exception ex)
+        public Task SocketErrored(Exception ex)
         {
             // if (sender is WebSocket socket && !_webSocket.IsCurrentSocket(socket))
             // {
@@ -219,6 +221,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordWebsocketErrored, ex, ex.Message);
             _logger.Exception("An error has occured in the websocket. Attempting to reconnect to discord.", ex);
             _webSocket.Disconnect(true, false);
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -556,7 +559,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _client.AddGuildOrUpdate(guild);
             }
             
-            _webSocket.OnWebsocketReady(ready.SessionId);
+            _webSocket.OnSocketReady(ready.SessionId);
             _client.Application = ready.Application;
             _client.BotUser = ready.User;
             
@@ -565,13 +568,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 _logger.Warning("You will need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications by August 31, 2022 or plugins using this intent will stop working", _client.BotUser.Username);
             }
-
-            if (_client.ReadyData == null)
-            {
-                _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ready);
-            }
             
-            _client.ReadyData = ready;
+            _client.OnClientReady(ready);
         }
 
         //https://discord.com/developers/docs/topics/gateway#resumed`
@@ -1226,7 +1224,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 DiscordGuild guild = _client.GetGuild(message.GuildId);
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMessageUpdated, message, channel, guild);
-                _logger.Verbose($"{nameof(WebsocketEventHandler)}.{nameof(HandleDispatchMessageUpdate)} GuildMessage Guild ID: {{0}} Guild Name: {{1}} Channel ID: {{2}} Channel Name: {{3}} Message ID: {{4}}", message.GuildId, guild.Name, message.ChannelId, channel.Name, message.Id);
+                _logger.Verbose($"{nameof(WebsocketEventHandler)}.{nameof(HandleDispatchMessageUpdate)} GuildMessage Guild ID: {{0}} Guild Name: {{1}} Channel ID: {{2}} Channel Name: {{3}} Message ID: {{4}}", message.GuildId, guild.Name, message.ChannelId, channel?.Name, message.Id);
             }
             else
             {

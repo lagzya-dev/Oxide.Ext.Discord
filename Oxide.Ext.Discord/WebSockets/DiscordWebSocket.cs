@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -24,12 +25,12 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// If we should attempt to reconnect to discord on disconnect
         /// </summary>
-        public bool ShouldAttemptReconnect;
+        public bool ShouldReconnect;
         
         /// <summary>
         /// If we should attempt to resume our previous session after connecting
         /// </summary>
-        public bool ShouldAttemptResume;
+        public bool ShouldResume;
 
         /// <summary>
         /// The current sequence number for the websocket
@@ -41,6 +42,8 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         public bool SocketHasConnected { get; private set; }
 
+        internal GatewayIntents Intents { get; private set; }
+
         private readonly BotClient _client;
         internal readonly WebsocketHandler Handler;
         private readonly WebsocketEventHandler _listener;
@@ -48,6 +51,8 @@ namespace Oxide.Ext.Discord.WebSockets
         private readonly DiscordHeartbeatHandler _heartbeat;
         private readonly WebsocketReconnectHandler _reconnect;
         private readonly ILogger _logger;
+
+        private bool _isShutdown;
 
         /// <summary>
         /// Socket used by the BotClient
@@ -83,8 +88,10 @@ namespace Oxide.Ext.Discord.WebSockets
                 return;
             }
 
-            ShouldAttemptReconnect = false;
-            ShouldAttemptResume = false;
+            ShouldReconnect = false;
+            ShouldResume = false;
+
+            Intents = _client.Settings.Intents;
 
             Handler.Connect(url);
         }
@@ -104,27 +111,27 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Disconnects the websocket from discord
         /// </summary>
-        /// <param name="attemptReconnect">Should we attempt to reconnect to discord after disconnecting</param>
-        /// <param name="shouldResume">Should we attempt to resume our previous session</param>
+        /// <param name="reconnect">Should we attempt to reconnect to discord after disconnecting</param>
+        /// <param name="resume">Should we attempt to resume our previous session</param>
         /// <param name="requested">If discord requested that we reconnect to discord</param>
-        public async void Disconnect(bool attemptReconnect, bool shouldResume, bool requested = false)
+        public async void Disconnect(bool reconnect, bool resume, bool requested = false)
         {
-            _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Disconnect)} Disconnecting Web Socket. Socket State: {{0}} Reconnect: {{1}} Resume: {{2}} Requested {{3}}", Handler.SocketState, attemptReconnect, shouldResume, requested);
-            ShouldAttemptReconnect = attemptReconnect;
-            ShouldAttemptResume = shouldResume;
+            _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Disconnect)} Disconnecting Web Socket. Socket State: {{0}} Reconnect: {{1}} Resume: {{2}} Requested {{3}}", Handler.SocketState, reconnect, resume, requested);
+            ShouldReconnect = reconnect;
+            ShouldResume = resume;
             _reconnect.CancelReconnect();
 
             if (!Handler.IsDisconnected() && !Handler.IsDisconnecting())
             {
-                OnWebsocketDisconnected();
+                OnSocketDisconnected();
 
                 if (requested)
                 {
-                    await Handler.Close(4199, "Discord Requested Reconnect");
+                    await Handler.Disconnect(4199, "Discord Requested Reconnect");
                 }
                 else
                 {
-                    await Handler.Close(WebSocketCloseStatus.NormalClosure, string.Empty);
+                    await Handler.Disconnect(WebSocketCloseStatus.NormalClosure, string.Empty);
                 }
             }
 
@@ -147,6 +154,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         public void Shutdown()
         {
+            _isShutdown = true;
             Disconnect(false, false);
             _reconnect.OnSocketShutdown();
             _heartbeat?.OnSocketShutdown();
@@ -164,7 +172,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Commands.Enqueue(payload);
         }
         
-        internal bool Send(CommandPayload payload)
+        internal async Task<bool> Send(CommandPayload payload)
         {
             if (Handler == null)
             {
@@ -174,30 +182,36 @@ namespace Oxide.Ext.Discord.WebSockets
             string payloadData = JsonConvert.SerializeObject(payload, _client.ClientSerializerSettings);
             _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(Send)} Payload: {{0}}", payloadData);
 
-            Handler.Send(payloadData);
+            await Handler.Send(payloadData);
             return true;
         }
 
         public void ReconnectIfRequested()
         {
-            if (ShouldAttemptReconnect)
+            if (ShouldReconnect && !_isShutdown)
             {
                 _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Disconnect)} Attempting Reconnect");
-                ShouldAttemptReconnect = false;
+                ShouldReconnect = false;
                 _reconnect.StartReconnect();
             }
         }
 
-        internal void OnWebsocketReady(string sessionId)
+        internal void OnSocketConnected()
+        {
+            _reconnect.CancelReconnect();
+            Commands.OnSocketConnected();
+        }
+        
+        internal void OnSocketReady(string sessionId)
         {
             _sessionId = sessionId;
             SocketHasConnected = true;
-            ShouldAttemptResume = true;
+            ShouldResume = true;
             _reconnect.OnWebsocketReady();
             Commands.OnWebSocketReady();
         }
 
-        internal void OnWebsocketDisconnected()
+        internal void OnSocketDisconnected()
         {
             Commands.OnSocketDisconnected();
         }
@@ -216,7 +230,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _heartbeat.SetupHeartbeat(hello.HeartbeatInterval);
 
             // Client should now perform identification
-            if (ShouldAttemptResume && !string.IsNullOrEmpty(_sessionId))
+            if (ShouldResume && !string.IsNullOrEmpty(_sessionId))
             {
                 Resume();
                 return;
