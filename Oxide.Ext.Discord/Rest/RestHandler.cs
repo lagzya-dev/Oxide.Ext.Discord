@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Async;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
@@ -59,7 +60,7 @@ namespace Oxide.Ext.Discord.Rest
             Client = new HttpClient(handler)
             {
                 Timeout = TimeSpan.FromSeconds(15),
-                //BaseAddress = new Uri(DiscordEndpoints.Rest.ApiUrl)
+                BaseAddress = new Uri(DiscordEndpoints.Rest.ApiUrl)
             };
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", client.Settings.ApiToken);
             Client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));

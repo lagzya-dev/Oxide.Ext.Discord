@@ -50,7 +50,7 @@ namespace Oxide.Ext.Discord.Entities.AuditLogs
         /// </summary>
         public static void GetGuildAuditLog(DiscordClient client, Snowflake guildId, Action<AuditLog> callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,$"/guilds/{guildId}/audit-logs", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"guilds/{guildId}/audit-logs", RequestMethod.GET, null, callback, error);
         }
     }
 }

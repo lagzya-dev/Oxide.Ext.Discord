@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Constants
             /// <summary>
             /// Discord API Url
             /// </summary>
-            public const string ApiUrl = DiscordBaseUrl + ApiVersion;
+            public const string ApiUrl = DiscordBaseUrl + ApiVersion + "/";
         }
 
         /// <summary>

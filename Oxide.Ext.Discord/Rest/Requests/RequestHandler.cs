@@ -180,7 +180,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         private HttpRequestMessage CreateRequest()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethods[Request.Method], DiscordEndpoints.Rest.ApiUrl + Request.Route);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethods[Request.Method], Request.Route);
             object data = Request.Data;
             if (data != null)
             {

@@ -245,7 +245,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public static void CreateMessage(DiscordClient client, Snowflake channelId, MessageCreate message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            client.Bot.Rest.DoRequest(client,$"/channels/{channelId}/messages", RequestMethod.POST, message, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{channelId}/messages", RequestMethod.POST, message, callback, error);
         }
         
         /// <summary>
@@ -344,7 +344,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            client.Bot.Rest.DoRequest(client,$"/channels/{channelId}/messages/{messageId}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{channelId}/messages/{messageId}", RequestMethod.GET, null, callback, error);
         }
         
         /// <summary>
@@ -363,7 +363,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId};
             }
             
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages", RequestMethod.POST, message, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages", RequestMethod.POST, message, callback, error);
         }
         
         /// <summary>
@@ -440,7 +440,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public void CrossPostMessage(DiscordClient client, Snowflake messageId, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            client.Bot.Rest.DoRequest(client,$"/channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST, null, callback, error);
         }
         
         /// <summary>
@@ -489,7 +489,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public void CreateReaction(DiscordClient client, string emoji, Action callback = null, Action<RequestError> error = null)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", RequestMethod.PUT, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", RequestMethod.PUT, null, callback, error);
         }
 
         /// <summary>
@@ -519,7 +519,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public void DeleteOwnReaction(DiscordClient client, string emoji, Action callback = null, Action<RequestError> error = null)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -554,7 +554,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -584,7 +584,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public void GetReactions(DiscordClient client, string emoji, Action<List<DiscordUser>> callback = null, Action<RequestError> error = null)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -596,7 +596,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteAllReactions(DiscordClient client, Action callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages/{Id}/reactions", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions", RequestMethod.DELETE, null, callback, error);
         }
         
         /// <summary>
@@ -629,7 +629,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
 
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages/{Id}/reactions/{emoji}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -645,7 +645,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditMessage(DiscordClient client, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages/{Id}", RequestMethod.PATCH, this, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages/{Id}", RequestMethod.PATCH, this, callback, error);
         }
 
         /// <summary>
@@ -658,7 +658,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteMessage(DiscordClient client, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages/{Id}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages/{Id}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -671,7 +671,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void PinMessage(DiscordClient client, Action callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/pins/{Id}", RequestMethod.PUT, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/pins/{Id}", RequestMethod.PUT, null, callback, error);
         }
 
         /// <summary>
@@ -684,7 +684,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void UnpinMessage(DiscordClient client, Action callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/pins/{Id}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/pins/{Id}", RequestMethod.DELETE, null, callback, error);
         }
         
         /// <summary>
@@ -698,7 +698,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public void StartThread(DiscordClient client, ThreadCreateFromMessage create, Action<DiscordChannel> callback = null, Action<RequestError> error = null)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
-            client.Bot.Rest.DoRequest(client,$"/channels/{ChannelId}/messages/{Id}/threads", RequestMethod.POST, create, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{ChannelId}/messages/{Id}/threads", RequestMethod.POST, create, callback, error);
         }
     }
 }

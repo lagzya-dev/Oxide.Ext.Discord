@@ -161,7 +161,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void GetCurrentUser(DiscordClient client, Action<DiscordUser> callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,"/users/@me", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,"users/@me", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         public static void GetUser(DiscordClient client, Snowflake userId, Action<DiscordUser> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
-            client.Bot.Rest.DoRequest(client,$"/users/{userId}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"users/{userId}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         public void ModifyCurrentUser(DiscordClient client, UserModifyCurrent current, Action<DiscordUser> callback = null, Action<RequestError> error = null)
         {
             if (current == null) throw new ArgumentNullException(nameof(current));
-            client.Bot.Rest.DoRequest(client,"/users/@me", RequestMethod.PATCH, current, callback, error);
+            client.Bot.Rest.DoRequest(client,"users/@me", RequestMethod.PATCH, current, callback, error);
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetCurrentUserGuilds(DiscordClient client, UserGuildsRequest request = null, Action<List<DiscordGuild>> callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,$"/users/@me/guilds{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"users/@me/guilds{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         public void LeaveGuild(DiscordClient client, Snowflake guildId, Action callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            client.Bot.Rest.DoRequest(client,$"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["nicks"] = nicks
             };
 
-            client.Bot.Rest.DoRequest(client,"/users/@me/channels", RequestMethod.POST, data, callback, error);
+            client.Bot.Rest.DoRequest(client,"users/@me/channels", RequestMethod.POST, data, callback, error);
         }
 
         /// <summary>
@@ -367,7 +367,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetUserConnections(DiscordClient client, Action<List<Connection>> callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.DoRequest(client,"/users/@me/connections", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,"users/@me/connections", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -400,7 +400,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["nick"] = nick
             };
 
-            client.Bot.Rest.DoRequest(client,$"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, data, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{channelId}/recipients/{Id}", RequestMethod.PUT, data, callback, error);
         }
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         public void GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId, Action callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            client.Bot.Rest.DoRequest(client,$"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, error);
         }
         #endregion
 

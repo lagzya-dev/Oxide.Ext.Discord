@@ -116,7 +116,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         public static void ListForGuild(DiscordClient client, Snowflake guildId, ScheduledEventLookup lookup = null, Action<List<GuildScheduledEvent>> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            client.Bot.Rest.DoRequest(client,$"/guilds/{guildId}/scheduled-events{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"guilds/{guildId}/scheduled-events{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         public static void Create(DiscordClient client, Snowflake guildId, ScheduledEventCreate create, Action<GuildScheduledEvent> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            client.Bot.Rest.DoRequest(client,$"/guilds/{guildId}/scheduled-events", RequestMethod.POST, create, callback, error);
+            client.Bot.Rest.DoRequest(client,$"guilds/{guildId}/scheduled-events", RequestMethod.POST, create, callback, error);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(eventId, nameof(eventId));
-            client.Bot.Rest.DoRequest(client,$"/guilds/{guildId}/scheduled-events/{eventId}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"guilds/{guildId}/scheduled-events/{eventId}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(eventId, nameof(eventId));
-            client.Bot.Rest.DoRequest(client,$"/guilds/{guildId}/scheduled-events/{eventId}", RequestMethod.PATCH, update, callback, error);
+            client.Bot.Rest.DoRequest(client,$"guilds/{guildId}/scheduled-events/{eventId}", RequestMethod.PATCH, update, callback, error);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(eventId, nameof(eventId));
-            client.Bot.Rest.DoRequest(client,$"/guilds/{guildId}/scheduled-events/{eventId}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"guilds/{guildId}/scheduled-events/{eventId}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(eventId, nameof(eventId));
 
-            client.Bot.Rest.DoRequest(client,$"/guilds/{guildId}/scheduled-events/{eventId}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"guilds/{guildId}/scheduled-events/{eventId}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
         
         internal void Update(GuildScheduledEvent scheduledEvent)

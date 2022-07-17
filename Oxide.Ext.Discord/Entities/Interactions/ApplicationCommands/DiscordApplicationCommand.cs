@@ -109,11 +109,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
             if (update == null) throw new ArgumentNullException(nameof(update));
             if (GuildId.HasValue)
             {
-                client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.PATCH, update, callback, error);
+                client.Bot.Rest.DoRequest(client,$"applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.PATCH, update, callback, error);
                 return;
             }
             
-            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/commands/{Id}", RequestMethod.PATCH, update, callback, error);
+            client.Bot.Rest.DoRequest(client,$"applications/{ApplicationId}/commands/{Id}", RequestMethod.PATCH, update, callback, error);
         }
         
         /// <summary>
@@ -128,11 +128,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         {
             if (GuildId.HasValue)
             {
-                client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
+                client.Bot.Rest.DoRequest(client,$"applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
                 return;
             }
             
-            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"applications/{ApplicationId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public void GetPermissions(DiscordClient client, Snowflake guildId, Action<GuildCommandPermissions> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.DoRequest(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET, null, callback, error);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
                 ["permissions"] = permissions
             };
             
-            client.Bot.Rest.DoRequest(client,$"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.PUT, data, callback, error);
+            client.Bot.Rest.DoRequest(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.PUT, data, callback, error);
         }
     }
 }
