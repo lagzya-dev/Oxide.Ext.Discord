@@ -50,10 +50,24 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
     + [OnDiscordGuildMemberBanned](#ondiscordguildmemberbanned)
     + [OnDiscordGuildMemberUnbanned](#ondiscordguildmemberunbanned)
     + [OnDiscordGuildEmojisUpdated](#ondiscordguildemojisupdated)
+    + [OnDiscordGuildStickersUpdated](#OnDiscordGuildStickersUpdated)
     + [OnDiscordGuildIntegrationsUpdated](#ondiscordguildintegrationsupdated)
     + [OnDiscordGuildMemberAdded](#ondiscordguildmemberadded)
     + [OnDiscordGuildMemberRemoved](#ondiscordguildmemberremoved)
     + [OnDiscordGuildMemberUpdated](#ondiscordguildmemberupdated)
+    + [OnDiscordGuildMemberNicknameUpdated](#OnDiscordGuildMemberNicknameUpdated)
+    + [OnDiscordGuildMemberAvatarUpdated](#OnDiscordGuildMemberAvatarUpdated)
+    + [OnDiscordGuildMemberDeafened](#OnDiscordGuildMemberDeafened)
+    + [OnDiscordGuildMemberUndeafened](#OnDiscordGuildMemberUndeafened)
+    + [OnDiscordGuildMemberMuted](#OnDiscordGuildMemberMuted)
+    + [OnDiscordGuildMemberUnmuted](#OnDiscordGuildMemberUnmuted)
+    + [OnDiscordGuildMemberTimeout](#OnDiscordGuildMemberTimeout)
+    + [OnDiscordGuildMemberTimeoutEnded](#OnDiscordGuildMemberTimeoutEnded)
+    + [OnDiscordGuildMemberBoosted](#OnDiscordGuildMemberBoosted)
+    + [OnDiscordGuildMemberBoostExtended](#OnDiscordGuildMemberBoostExtended)
+    + [OnDiscordGuildMemberBoostEnded](#OnDiscordGuildMemberBoostEnded)
+    + [OnDiscordGuildMemberRoleAdded](#OnDiscordGuildMemberRoleAdded)
+    + [OnDiscordGuildMemberRoleRemoved](#OnDiscordGuildMemberRoleRemoved)
     + [OnDiscordGuildMembersLoaded](#ondiscordguildmembersloaded)
     + [OnDiscordGuildMembersChunk](#ondiscordguildmemberschunk)
     + [OnDiscordGuildRoleCreated](#ondiscordguildrolecreated)
@@ -92,10 +106,24 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
     + [OnDiscordGuildInviteCreated](#ondiscordguildinvitecreated)
     + [OnDiscordDirectInviteDeleted](#ondiscorddirectinvitedeleted)
     + [OnDiscordGuildInviteDeleted](#ondiscordguildinvitedeleted)
-    + [OnDiscordInteractionCreated](#ondiscordinteractioncreated)
+    + [OnDiscordApplicationCommandPermissionsUpdated](#OnDiscordApplicationCommandPermissionsUpdated)
+    + [OnDiscordInteractionCreated](#OnDiscordInteractionCreated)
     + [OnDiscordGuildIntegrationCreated](#ondiscordguildintegrationcreated)
     + [OnDiscordGuildIntegrationUpdated](#ondiscordguildintegrationupdated)
     + [OnDiscordGuildIntegrationDeleted](#ondiscordguildintegrationdeleted)
+    + [OnDiscordGuildThreadCreated](#OnDiscordGuildThreadCreated)
+    + [OnDiscordGuildThreadUpdated](#OnDiscordGuildThreadUpdated)
+    + [OnDiscordGuildThreadDeleted](#OnDiscordGuildThreadDeleted)
+    + [OnDiscordGuildThreadListSynced](#OnDiscordGuildThreadListSynced)
+    + [OnDiscordGuildThreadMemberUpdated](#OnDiscordGuildThreadMemberUpdated)
+    + [OnDiscordGuildThreadMembersUpdated](#OnDiscordGuildThreadMembersUpdated)
+    + [OnDiscordStageInstanceCreated](#OnDiscordStageInstanceCreated)
+    + [OnDiscordStageInstanceUpdated](#OnDiscordStageInstanceUpdated)
+    + [OnDiscordStageInstanceDeleted](#OnDiscordStageInstanceDeleted)
+    + [OnDiscordAutoModRuleCreated](#OnDiscordAutoModRuleCreated)
+    + [OnDiscordAutoModRuleUpdated](#OnDiscordAutoModRuleUpdated)
+    + [OnDiscordAutoModRuleDeleted](#OnDiscordAutoModRuleDeleted)
+    + [OnDiscordAutoModActionExecuted](#OnDiscordAutoModActionExecuted)
     + [OnDiscordUnhandledCommand](#ondiscordunhandledcommand)
 
 ## Discord Client
@@ -373,9 +401,9 @@ void OnDiscordGuildUnavailable(DiscordGuild guild)
 - Called when a bot is removed from a discord server or that discord server was deleted
 
 ```c#
-void OnDiscordGuildUnavailable(DiscordGuild guild)
+void OnDiscordGuildDeleted(DiscordGuild guild)
 {
-    Puts("OnDiscordGuildUnavailable Works!");
+    Puts("OnDiscordGuildDeleted Works!");
 }
 ```
 
@@ -386,7 +414,7 @@ void OnDiscordGuildUnavailable(DiscordGuild guild)
 ```c#
 void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, DiscordGuild guild)
 {
-    Puts("OnDiscordGuildBanAdded Works!");
+    Puts("OnDiscordGuildMemberBanned Works!");
 }
 ```
 
@@ -397,7 +425,7 @@ void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, DiscordGuild guild)
 ```c#
 void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, DiscordGuild guild)
 {
-    Puts("OnDiscordGuildBanAdded Works!");
+    Puts("OnDiscordGuildMemberUnbanned Works!");
 }
 ```
 
@@ -441,7 +469,7 @@ void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration
 ```c#
 void OnDiscordGuildMemberAdded(GuildMemberRemovedEvent member, DiscordGuild guild)
 {
-    Puts("OnDiscordGuildMemberRemoved Works!");
+    Puts("OnDiscordGuildMemberAdded Works!");
 }
 ```
 
@@ -465,6 +493,149 @@ void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild gu
 void OnDiscordGuildMemberUpdated(GuildMember update, GuildMember previous, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberUpdated Works!");
+}
+```
+
+### OnDiscordGuildMemberNicknameUpdated
+
+- Called when a guild member nickname has been updated
+
+```c#
+void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberNicknameUpdated Works!");
+}
+```
+
+### OnDiscordGuildMemberAvatarUpdated
+
+- Called when a guild member avatar has been updated
+
+```c#
+void OnDiscordGuildMemberAvatarUpdated(GuildMember member, string oldAvatar, string newAvatar, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberAvatarUpdated Works!");
+}
+```
+
+### OnDiscordGuildMemberDeafened
+
+- Called when a guild member is deafened
+
+```c#
+void OnDiscordGuildMemberDeafened(GuildMember member, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberDeafened Works!");
+}
+```
+
+### OnDiscordGuildMemberUndeafened
+
+- Called when a guild member is undeafened
+
+```c#
+void OnDiscordGuildMemberUndeafened(GuildMember member, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberUndeafened Works!");
+}
+```
+
+### OnDiscordGuildMemberMuted
+
+- Called when a guild member is muted
+
+```c#
+void OnDiscordGuildMemberMuted(GuildMember member, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberMuted Works!");
+}
+```
+
+### OnDiscordGuildMemberUnmuted
+
+- Called when a guild member is unmuted
+
+```c#
+void OnDiscordGuildMemberUnmuted(GuildMember member, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberUnmuted Works!");
+}
+```
+
+### OnDiscordGuildMemberTimeout
+
+- Called when a guild member is placed in [Timeout](https://support.discord.com/hc/en-us/articles/4413305239191-Time-Out-FAQ)
+
+```c#
+void OnDiscordGuildMemberTimeout(GuildMember member, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberTimeout Works!");
+}
+```
+
+### OnDiscordGuildMemberTimeoutEnded
+
+- Called when a guild members [Timeout](https://support.discord.com/hc/en-us/articles/4413305239191-Time-Out-FAQ) ends
+
+```c#
+void OnDiscordGuildMemberTimeoutEnded(GuildMember member, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberTimeoutEnded Works!");
+}
+```
+
+### OnDiscordGuildMemberBoosted
+
+- Called when a guild member boosts the server
+
+```c#
+void OnDiscordGuildMemberBoosted(GuildMember member, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberBoosted Works!");
+}
+```
+
+### OnDiscordGuildMemberBoostExtended
+
+- Called when a guild member extends their boost
+
+```c#
+void OnDiscordGuildMemberBoostExtended(GuildMember member, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberBoostExtended Works!");
+}
+```
+
+### OnDiscordGuildMemberBoostEnded
+
+- Called when a guild member boost ends
+
+```c#
+void OnDiscordGuildMemberBoostEnded(GuildMember member, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberBoostEnded Works!");
+}
+```
+
+### OnDiscordGuildMemberRoleAdded
+
+- Called when a role is added to a guild member
+
+```c#
+void OnDiscordGuildMemberRoleAdded(GuildMember member, Snowflake roleId, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberRoleAdded Works!");
+}
+```
+
+### OnDiscordGuildMemberRoleRemoved
+
+- Called when a role is removed from a guild member
+
+```c#
+void OnDiscordGuildMemberRoleRemoved(GuildMember member, Snowflake roleId, DiscordGuild guildd)
+{
+    Puts("OnDiscordGuildMemberRoleRemoved Works!");
 }
 ```
 
@@ -619,9 +790,9 @@ void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channe
 - Called when a message is updated in a guild channel
 
 ```c#
-void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
+void OnDiscordGuildMessageUpdated(DiscordMessage message, DiscordChannel channel)
 {
-    Puts("OnDiscordDirectMessageUpdated Works!");
+    Puts("OnDiscordGuildMessageUpdated Works!");
 }
 ```
 
@@ -642,9 +813,9 @@ void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channe
 - Called when a message is deleted in a guild channel
 
 ```c#
-void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
+void OnDiscordGuildMessageDeleted(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
 {
-    Puts("OnDiscordDirectMessageDeleted Works!");
+    Puts("OnDiscordGuildMessageDeleted Works!");
 }
 ```
 
@@ -654,7 +825,7 @@ void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channe
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel)
+void OnDiscordDirectMessagesBulkDeleted(List<Snowflake> messageIds, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessagesBulkDeleted Works!");
 }
@@ -665,7 +836,7 @@ void OnDiscordDirectMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, Discor
 - Called when a message is deleted in a guild channel
 
 ```c#
-void OnDiscordGuildMessagesBulkDeleted(List&lt;Snowflake&gt; messageIds, DiscordChannel channel, DiscordGuild guild)
+void OnDiscordGuildMessagesBulkDeleted(List<Snowflake> messageIds, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMessagesBulkDeleted Works!");
 }
@@ -899,6 +1070,61 @@ void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, DiscordChannel chann
 }
 ```
 
+### OnDiscordApplicationCommandPermissionsUpdated
+
+- Called when the bots application command permission have been updated
+
+```c#
+void OnDiscordApplicationCommandPermissionsUpdated(CommandPermissions permissions)
+{
+    Puts("OnDiscordApplicationCommandPermissionsUpdated Works!");
+}
+```
+
+### OnDiscordInteractionCreated
+
+- Called when a discord interaction occurs by a user
+
+```c#
+void OnDiscordInteractionCreated(DiscordInteraction interaction)
+{
+    Puts("OnDiscordInteractionCreated Works!");
+}
+```
+
+### OnDiscordGuildIntegrationCreated
+
+- Called when a new integration is created a guild
+
+```c#
+void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildIntegrationCreated Works!");
+}
+```
+
+### OnDiscordGuildIntegrationUpdated
+
+- Called when an integration is updated on a guild
+
+```c#
+void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildIntegrationUpdated Works!");
+}
+```
+
+### OnDiscordGuildIntegrationDeleted
+
+- Called when an integration is deleted on a guild
+
+```c#
+void OnDiscordGuildIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildIntegrationDeleted Works!");
+}
+```
+
 ### OnDiscordGuildThreadCreated
 
 - Called when a guild thread is created
@@ -967,7 +1193,7 @@ void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, Disco
 
 ### OnDiscordStageInstanceCreated
 
-- Called when a stage intance is created
+- Called when a stage instance is created
 
 ```c#
 void OnDiscordStageInstanceCreated(StageInstance stage, DiscordGuild guild) 
@@ -998,47 +1224,47 @@ void OnDiscordStageInstanceDeleted(StageInstance stage, DiscordGuild guild)
 }
 ```
 
-### OnDiscordInteractionCreated
+### OnDiscordAutoModRuleCreated
 
-- Called when a users uses a slash command, user command, message command, or a message component
+- Called when an AutoMod rule is created in a guild
 
 ```c#
-void OnDiscordInteractionCreated(DiscordInteraction interaction) 
+void OnDiscordAutoModRuleCreated(AutoModRule rule, DiscordGuild guild) 
 {
-     Puts("OnDiscordInteractionCreated Works!");
+     Puts("OnDiscordAutoModRuleCreated Works!");
 }
 ```
 
-### OnDiscordGuildIntegrationCreated
+### OnDiscordAutoModRuleUpdated
 
-- Called when an integration is created on a guild
+- Called when an AutoMod rule is updated on a guild
 
 ```c#
-void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, DiscordGuild guild)
+void OnDiscordAutoModRuleUpdated(AutoModRule rule, DiscordGuild guild) 
 {
-    Puts("OnDiscordGuildIntegrationCreated Works!");
+     Puts("OnDiscordAutoModRuleUpdated Works!");
 }
 ```
 
-### OnDiscordGuildIntegrationUpdated
+### OnDiscordAutoModRuleDeleted
 
-- Called when an integration is updated on a guild
+- Called when an AutoMod rule is deleted from a guild
 
 ```c#
-void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, DiscordGuild guild)
+void OnDiscordAutoModRuleDeleted(AutoModRule rule, DiscordGuild guild) 
 {
-    Puts("OnDiscordGuildIntegrationUpdated Works!");
+     Puts("OnDiscordAutoModRuleDeleted Works!");
 }
 ```
 
-### OnDiscordGuildIntegrationDeleted
+### OnDiscordAutoModActionExecuted
 
-- Called when an integration is deleted on a guild
+- Called when an AutoMod rule is executed on a guild
 
 ```c#
-void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
+void OnDiscordAutoModActionExecuted(AutoModActionExecutionEvent rule, DiscordGuild guild) 
 {
-    Puts("OnDiscordIntegrationDeleted Works!");
+     Puts("OnDiscordAutoModActionExecuted Works!");
 }
 ```
 

@@ -27,10 +27,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         /// <summary>
         /// Overridden in the child class to handle the callback
         /// </summary>
-        protected virtual Task HandleCallback()
-        {
-            return Task.CompletedTask;
-        }
+        protected abstract Task HandleCallback();
 
         public void Run()
         {

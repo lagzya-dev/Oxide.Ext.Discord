@@ -26,6 +26,14 @@ namespace Oxide.Ext.Discord.Constants
 
         #region Bot Client Hooks
         /// <code>
+        /// void OnDiscordClientCreated()
+        /// {
+        ///     Puts("OnDiscordClientCreated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordClientCreated = nameof(OnDiscordClientCreated);
+        
+        /// <code>
         /// void OnDiscordClientConnected(Plugin owner, DiscordClient client)
         /// {
         ///     Puts("OnDiscordClientConnected Works!");
@@ -40,14 +48,6 @@ namespace Oxide.Ext.Discord.Constants
         /// }
         /// </code>
         public const string OnDiscordClientDisconnected = nameof(OnDiscordClientDisconnected);
-        
-        /// <code>
-        /// void OnDiscordClientCreated()
-        /// {
-        ///     Puts("OnDiscordClientCreated Works!");
-        /// }
-        /// </code>
-        public const string OnDiscordClientCreated = nameof(OnDiscordClientCreated);
         #endregion
 
         #region Socket Hooks
@@ -290,6 +290,110 @@ namespace Oxide.Ext.Discord.Constants
         /// }
         /// </code>
         public const string OnDiscordGuildMemberUpdated = nameof(OnDiscordGuildMemberUpdated);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberNicknameUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberNicknameUpdated = nameof(OnDiscordGuildMemberNicknameUpdated);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberAvatarUpdated(GuildMember member, string oldAvatar, string newAvatar, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberAvatarUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberAvatarUpdated = nameof(OnDiscordGuildMemberAvatarUpdated);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberDeafened(GuildMember member, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberDeafened Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberDeafened = nameof(OnDiscordGuildMemberDeafened);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberUndeafened(GuildMember member, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberUndeafened Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberUndeafened = nameof(OnDiscordGuildMemberUndeafened);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberMuted(GuildMember member, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberMuted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberMuted = nameof(OnDiscordGuildMemberMuted);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberUnmuted(GuildMember member, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberUnmuted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberUnmuted = nameof(OnDiscordGuildMemberUnmuted);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberTimeout(GuildMember member, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberTimeout Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberTimeout = nameof(OnDiscordGuildMemberTimeout);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberTimeoutEnded(GuildMember member, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberTimeoutEnded Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberTimeoutEnded = nameof(OnDiscordGuildMemberTimeoutEnded);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberBoosted(GuildMember member, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberBoosted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberBoosted = nameof(OnDiscordGuildMemberBoosted);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberBoostExtended(GuildMember member, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberBoostExtended Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberBoostExtended = nameof(OnDiscordGuildMemberBoostExtended);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberBoostEnded(GuildMember member, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberBoostEnded Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberBoostEnded = nameof(OnDiscordGuildMemberBoostEnded);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberRoleAdded(GuildMember member, Snowflake roleId, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberRoleAdded Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberRoleAdded = nameof(OnDiscordGuildMemberRoleAdded);
+        
+        /// <code>
+        /// void OnDiscordGuildMemberRoleRemoved(GuildMember member, Snowflake roleId, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordGuildMemberRoleRemoved Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGuildMemberRoleRemoved = nameof(OnDiscordGuildMemberRoleRemoved);
         
         /// <code>
         /// void OnDiscordGuildMembersLoaded(DiscordGuild guild)
@@ -629,12 +733,12 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildIntegrationUpdated = nameof(OnDiscordGuildIntegrationUpdated);
         
         /// <code>
-        /// void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
+        /// void OnDiscordGuildIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
         /// {
-        ///     Puts("OnDiscordIntegrationDeleted Works!");
+        ///     Puts("OnDiscordGuildIntegrationDeleted Works!");
         /// }
         /// </code>
-        public const string OnDiscordIntegrationDeleted = nameof(OnDiscordIntegrationDeleted);
+        public const string OnDiscordGuildIntegrationDeleted = nameof(OnDiscordGuildIntegrationDeleted);
 
         /// <code>
         /// void OnDiscordGuildThreadCreated(DiscordChannel thread, DiscordGuild guild)
@@ -683,15 +787,7 @@ namespace Oxide.Ext.Discord.Constants
         /// }
         /// </code>
         public const string OnDiscordGuildThreadMembersUpdated = nameof(OnDiscordGuildThreadMembersUpdated);
-        
-        /// <code>
-        /// void OnDiscordUnhandledCommand(EventPayload payload)
-        /// {
-        ///     Puts("OnDiscordUnhandledCommand Works!");
-        /// }
-        /// </code>
-        public const string OnDiscordUnhandledCommand = nameof(OnDiscordUnhandledCommand);        
-        
+
         /// <code>
         /// void OnDiscordStageInstanceCreated(StageInstance stage, DiscordGuild guild)
         /// {
@@ -747,6 +843,14 @@ namespace Oxide.Ext.Discord.Constants
         /// }
         /// </code>
         public const string OnDiscordAutoModActionExecuted = nameof(OnDiscordAutoModActionExecuted);
+        
+        /// <code>
+        /// void OnDiscordUnhandledCommand(EventPayload payload)
+        /// {
+        ///     Puts("OnDiscordUnhandledCommand Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordUnhandledCommand = nameof(OnDiscordUnhandledCommand);   
         #endregion
     }
 }

@@ -84,10 +84,14 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             catch (TaskCanceledException) { }
             catch (OperationCanceledException) { }
+            catch (WebsocketException ex)
+            {
+                await _handler.SocketErrored(ex);
+            }
             catch (Exception ex)
             {
                 await _handler.SocketErrored(ex);
-                _logger.Exception("A Websocket Error Occured", ex);
+                _logger.Exception("A Unhandled Websocket Error Occured", ex);
             }
             finally
             {

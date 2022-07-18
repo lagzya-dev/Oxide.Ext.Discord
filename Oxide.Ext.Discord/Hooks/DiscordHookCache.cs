@@ -30,14 +30,9 @@ namespace Oxide.Ext.Discord.Hooks
                 }
 
                 string name = method.Name;
-                if (method.IsPublic)
+                object[] attributes = method.GetCustomAttributes(typeof(HookMethodAttribute), false);
+                if (attributes.Length != 0)
                 {
-                    object[] attributes = method.GetCustomAttributes(typeof(HookMethodAttribute), false);
-                    if (attributes.Length == 0)
-                    {
-                        continue;
-                    }
-                    
                     name = ((HookMethodAttribute)attributes[0]).Name;
                 }
 

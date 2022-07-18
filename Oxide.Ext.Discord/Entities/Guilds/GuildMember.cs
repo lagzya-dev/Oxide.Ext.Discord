@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -58,8 +59,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Total permissions of the member in the channel, including overrides, returned when in the interaction object
         /// </summary>
+        [JsonConverter(typeof(PermissionFlagsStringConverter))]
         [JsonProperty("permissions")]
-        public string Permissions { get; set; }
+        public PermissionFlags? Permissions { get; set; }
         
         /// <summary>
         /// Whether the user is deafened in voice channels
@@ -84,6 +86,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("communication_disabled_until")]
         public DateTime? CommunicationDisabledUntil { get; set; }
+        
+        public DateTime? NickNameLastUpdated { get; internal set; }
         #endregion
 
         #region Helper Properties
@@ -122,33 +126,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         #endregion
         
         #region Entity Update
-        internal GuildMember Update(GuildMember update)
+        internal void Update(GuildMember update)
         {
-            GuildMember previous = (GuildMember)MemberwiseClone();
             if (update.User != null)
-                previous.User = User.Update(update.User);
+                User.Update(update.User);
 
-            if (update.Nickname != null)
-                Nickname = update.Nickname;
-
-            if (update.Roles != null)
-                Roles = update.Roles;
-
-            if (update.PremiumSince != null)
-                PremiumSince = update.PremiumSince;
-
-            Deaf = update.Deaf;
-            Mute = update.Mute;
-            
             if (update.Pending != null)
                 Pending = update.Pending;
-            
-            if (update.Permissions != null)
-                Permissions = update.Permissions;
-
-            CommunicationDisabledUntil = update.CommunicationDisabledUntil;
-            
-            return previous;
         }
         #endregion
     }

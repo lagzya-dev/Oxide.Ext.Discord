@@ -282,7 +282,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
             catch (Exception ex)
             {
-                _logger.Exception($"{nameof(WebsocketEventHandler)}.{nameof(SocketMessage)} Exception Occured. Please give error message below to Discord Extension Authors:", ex);
+                _logger.Exception($"{nameof(WebsocketEventHandler)}.{nameof(SocketMessage)} Please give error message below to Discord Extension Authors:", ex);
             }
             finally
             {
@@ -930,18 +930,106 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
             
-            GuildMember member = guild.Members[update.User.Id];
-            if (member != null)
+            GuildMember current = guild.Members[update.Id];
+            if (current == null)
             {
-                GuildMember previous = member.Update(update);
-                _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberUpdated, update, previous, guild);
-                _logger.Verbose($"{nameof(WebsocketEventHandler)}.{nameof(HandleDispatchGuildMemberUpdate)} Existing GUILD_MEMBER_UPDATE: Guild ID: {{0}} User ID: {{1}}", update.GuildId, update.User.Id);
+                current = update;
+                guild.Members[update.Id] = current;
             }
-            else
+            
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberUpdated, update, current, guild);
+            _logger.Verbose($"{nameof(WebsocketEventHandler)}.{nameof(HandleDispatchGuildMemberUpdate)} Existing GUILD_MEMBER_UPDATE: Guild ID: {{0}} User ID: {{1}}", update.GuildId, update.User.Id);
+
+            if (current.Nickname != update.Nickname)
             {
-                guild.Members[update.User.Id] = update;
-                _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberUpdated, update, update, guild);
-                _logger.Verbose($"{nameof(WebsocketEventHandler)}.{nameof(HandleDispatchGuildMemberUpdate)} New GUILD_MEMBER_UPDATE: Guild ID: {{0}} User ID: {{1}}", update.GuildId, update.User.Id);
+                string oldNickname = current.Nickname;
+                current.Nickname = update.Nickname;
+                _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberNicknameUpdated, current, oldNickname, update.Nickname, guild);
+                current.NickNameLastUpdated = DateTime.UtcNow;
+            }
+
+            if (current.Avatar != update.Avatar)
+            {
+                current.Avatar = update.Avatar;
+                _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberAvatarUpdated, current, current.Avatar, update.Avatar, guild);
+            }
+
+            if (current.Deaf != update.Deaf)
+            {
+                current.Deaf = update.Deaf;
+                if (update.Deaf)
+                {
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberDeafened, current, guild);
+                }
+                else
+                {
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberUndeafened, current, guild);
+                }
+            }
+
+            if (current.Mute != update.Mute)
+            {
+                current.Mute = update.Mute;
+                if (update.Mute)
+                {
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberMuted, current, guild);
+                }
+                else
+                {
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberUnmuted, current, guild);
+                }
+            }
+
+            if (current.CommunicationDisabledUntil != update.CommunicationDisabledUntil)
+            {
+                DateTime? previous = current.CommunicationDisabledUntil;
+                current.CommunicationDisabledUntil = update.CommunicationDisabledUntil;
+                if (previous.HasValue && !update.CommunicationDisabledUntil.HasValue)
+                {
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberTimeoutEnded, current, guild);
+                }
+                else if(!previous.HasValue && update.CommunicationDisabledUntil.HasValue)
+                {
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberTimeout, current, guild);
+                }
+            }
+
+            if (current.PremiumSince != update.PremiumSince)
+            {
+                DateTime? previous = current.PremiumSince;
+                current.PremiumSince = update.PremiumSince;
+                if (!previous.HasValue && update.PremiumSince.HasValue)
+                {
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberBoosted, current, guild);
+                }
+                else if (previous.HasValue && update.PremiumSince.HasValue && update.PremiumSince.Value > DateTime.UtcNow)
+                {
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberBoostExtended, current, guild);
+                }
+                else if (previous.HasValue && !update.PremiumSince.HasValue)
+                {
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberBoostEnded, current, guild);
+                }
+            }
+
+            for (int index = current.Roles.Count - 1; index >= 0; index--)
+            {
+                Snowflake role = current.Roles[index];
+                if (!update.Roles.Contains(role))
+                {
+                    current.Roles.Remove(role);
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberRoleRemoved, current, role, guild);
+                }
+            }
+            
+            for (int index = update.Roles.Count - 1; index >= 0; index--)
+            {
+                Snowflake role = update.Roles[index];
+                if (!current.Roles.Contains(role))
+                {
+                    current.Roles.Add(role);
+                    _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberRoleAdded, current, role, guild);
+                }
             }
         }
 
@@ -1160,7 +1248,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
             
-            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordIntegrationDeleted, integration, guild);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildIntegrationDeleted, integration, guild);
             _logger.Verbose($"{nameof(WebsocketEventHandler)}.{nameof(HandleDispatchIntegrationDelete)} Guild ID: {{0}} Guild Name: {{1}} Integration ID: {{2}}", integration.GuildId, guild.Name, integration.Id);
         }
 
