@@ -42,7 +42,7 @@ namespace Oxide.Ext.Discord.Hooks
         #region Hooks
         internal void CallHook(string hookName)
         {
-            if (!_cache.TryGetHook(hookName, out List<Plugin> plugins) || plugins.Count == 0)
+            if (!CanCallHook(hookName, out List<Plugin> plugins))
             {
                 return;
             }
@@ -50,10 +50,10 @@ namespace Oxide.Ext.Discord.Hooks
             object[] args = ArrayPool.Get(0);
             CallHookInternal(plugins, hookName, args);
         }
-        
-        internal void CallHook(string hookName, object arg0)
+
+        internal void CallHook<T0>(string hookName, T0 arg0)
         {
-            if (!_cache.TryGetHook(hookName, out List<Plugin> plugins) || plugins.Count == 0)
+            if (!CanCallHook(hookName, out List<Plugin> plugins))
             {
                 return;
             }
@@ -63,9 +63,9 @@ namespace Oxide.Ext.Discord.Hooks
             CallHookInternal(plugins, hookName, args);
         }
         
-        internal void CallHook(string hookName, object arg0, object arg1)
+        internal void CallHook<T0, T1>(string hookName, T0 arg0, T1 arg1)
         {
-            if (!_cache.TryGetHook(hookName, out List<Plugin> plugins) || plugins.Count == 0)
+            if (!CanCallHook(hookName, out List<Plugin> plugins))
             {
                 return;
             }
@@ -76,9 +76,9 @@ namespace Oxide.Ext.Discord.Hooks
             CallHookInternal(plugins, hookName, args);
         }
         
-        internal void CallHook(string hookName, object arg0, object arg1, object arg2)
+        internal void CallHook<T0, T1, T2>(string hookName, T0 arg0, T1 arg1, T2 arg2)
         {
-            if (!_cache.TryGetHook(hookName, out List<Plugin> plugins) || plugins.Count == 0)
+            if (!CanCallHook(hookName, out List<Plugin> plugins))
             {
                 return;
             }
@@ -90,9 +90,9 @@ namespace Oxide.Ext.Discord.Hooks
             CallHookInternal(plugins, hookName, args);
         }
         
-        internal void CallHook(string hookName, object arg0, object arg1, object arg2, object arg3)
+        internal void CallHook<T0, T1, T2, T3>(string hookName, T0 arg0, T1 arg1, T2 arg2, T3 arg3)
         {
-            if (!_cache.TryGetHook(hookName, out List<Plugin> plugins) || plugins.Count == 0)
+            if (!CanCallHook(hookName, out List<Plugin> plugins))
             {
                 return;
             }
@@ -114,7 +114,7 @@ namespace Oxide.Ext.Discord.Hooks
             ArrayPool.Free(args);
         }
         
-        internal static void CallGlobalHook(string name, object arg0)
+        internal static void CallGlobalHook<T0>(string name, T0 arg0)
         {
             object[] args = ArrayPool.Get(1);
             args[0] = arg0;
@@ -122,7 +122,7 @@ namespace Oxide.Ext.Discord.Hooks
             ArrayPool.Free(args);
         }
         
-        internal static void CallGlobalHook(string name, object arg0, object arg1)
+        internal static void CallGlobalHook<T0, T1>(string name, T0 arg0, T1 arg1)
         {
             object[] args = ArrayPool.Get(2);
             args[0] = arg0;
@@ -131,7 +131,7 @@ namespace Oxide.Ext.Discord.Hooks
             ArrayPool.Free(args);
         }
         
-        internal static void CallGlobalHook(string name, object arg0, object arg1, object arg2)
+        internal static void CallGlobalHook<T0, T1, T2>(string name, T0 arg0, T1 arg1, T2 arg2)
         {
             object[] args = ArrayPool.Get(3);
             args[0] = arg0;
@@ -147,14 +147,14 @@ namespace Oxide.Ext.Discord.Hooks
             CallHookInternal(plugin, name, args);
         }
         
-        internal static void CallPluginHook(Plugin plugin, string name, object arg0)
+        internal static void CallPluginHook<T0>(Plugin plugin, string name, T0 arg0)
         {
             object[] args = ArrayPool.Get(1);
             args[0] = arg0;
             CallHookInternal(plugin, name, args);
         }
         
-        internal static void CallPluginHook(Plugin plugin, string name, object arg0, object arg1)
+        internal static void CallPluginHook<T0, T1>(Plugin plugin, string name, T0 arg0, T1 arg1)
         {
             object[] args = ArrayPool.Get(2);
             args[0] = arg0;
@@ -162,7 +162,7 @@ namespace Oxide.Ext.Discord.Hooks
             CallHookInternal(plugin, name, args);
         }
         
-        internal static void CallPluginHook(Plugin plugin, string name, object arg0, object arg1, object arg2)
+        internal static void CallPluginHook<T0, T1, T2>(Plugin plugin, string name, T0 arg0, T1 arg1, T2 arg2)
         {
             object[] args = ArrayPool.Get(3);
             args[0] = arg0;
@@ -171,7 +171,7 @@ namespace Oxide.Ext.Discord.Hooks
             CallHookInternal(plugin, name, args);
         }
         
-        internal static void CallPluginHook(Plugin plugin, string name, object arg0, object arg1, object arg2, object arg3)
+        internal static void CallPluginHook<T0, T1, T2, T3>(Plugin plugin, string name, T0 arg0, T1 arg1, T2 arg2, T3 arg3)
         {
             object[] args = ArrayPool.Get(4);
             args[0] = arg0;
@@ -183,6 +183,11 @@ namespace Oxide.Ext.Discord.Hooks
         #endregion
 
         #region Internal Handling
+        private bool CanCallHook(string hookName, out List<Plugin> plugins)
+        {
+            return _cache.TryGetHook(hookName, out plugins) && plugins.Count != 0;
+        }
+        
         private static void CallHookInternal(Plugin plugin, string hookName, object[] args)
         {
             SinglePluginHookCallback call = SinglePluginHookCallback.CreateCallback(plugin, hookName, args);
