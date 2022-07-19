@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Requests;
 using Oxide.Ext.Discord.Threading;
@@ -46,8 +48,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         internal readonly AdjustableSemaphore Semaphore = new AdjustableSemaphore(1);
         internal readonly ConcurrentDictionary<Snowflake, RequestHandler> Requests = new ConcurrentDictionary<Snowflake, RequestHandler>();
 
-        private bool _isShutdown;
-
         /// <summary>
         /// Creates a new bucket for the given <see cref="RestHandler"/>
         /// </summary>
@@ -66,12 +66,13 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         /// <summary>
         /// Queues a new request for the buck
         /// </summary>
-        /// <param name="request">Request to be queued</param>
-        public void QueueRequest(RequestHandler handler, BaseRequest request)
+        /// <param name="handler"><see cref="RequestHandler"/> to be queued</param>
+        public void QueueRequest(RequestHandler handler)
         {
-            request.OnRequestQueued(this);
-
+            BaseRequest request = handler.Request;
+            request.Bucket?.DequeueRequest(handler);
             Requests[request.Id] = handler;
+            request.Bucket = this;
 
             if (ResetAt < DateTimeOffset.UtcNow)
             {
@@ -81,12 +82,22 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             _logger.Debug("Queued Request Bucket ID: {0} Request ID: {1} Requests: {2}", Id, request.Id, request.Method, request.Route, Requests.Count);
         }
 
+        private void DequeueRequest(RequestHandler handler)
+        {
+            Requests.TryRemove(handler.Request.Id, out RequestHandler _);
+        }
+        
         internal void Merge(Bucket data)
         {
-            foreach (RequestHandler request in data.Requests.Values)
+            List<RequestHandler> handlers = DiscordPool.GetList<RequestHandler>();
+            handlers.AddRange(data.Requests.Values);
+
+            foreach (RequestHandler handler in handlers)
             {
-                Requests[request.Request.Id] = request;
+                QueueRequest(handler);
             }
+            
+            DiscordPool.FreeList(ref handlers);
             
             data.Requests.Clear();
         }
@@ -125,8 +136,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 break;
             }
             _requestSync.Set();
-            
-            OnRequestStarted(handler);
         }
         
         internal void OnRequestStarted(RequestHandler handler)
@@ -238,7 +247,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             
             Requests.Clear();
             Semaphore.AllowAllThrough();
-            _isShutdown = true;
         }
     }
 }

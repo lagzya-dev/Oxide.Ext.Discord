@@ -22,6 +22,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Creates a REST API request that returns type of T from the response
         /// </summary>
         /// <param name="client">Client making the request</param>
+        /// <param name="httpClient"><see cref="HttpClient"/> for the request</param>
         /// <param name="method">HTTP web method</param>
         /// <param name="route">Route for the request</param>
         /// <param name="data">Data being passed into the request. Null if no data is passed</param>

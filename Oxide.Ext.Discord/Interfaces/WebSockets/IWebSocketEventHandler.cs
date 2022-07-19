@@ -1,16 +1,44 @@
 using System;
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Interfaces.WebSockets
 {
+    /// <summary>
+    /// Represents a Handler for Websocket Events
+    /// </summary>
     public interface IWebSocketEventHandler
     {
-        Task SocketOpened();
+        /// <summary>
+        /// Called when the web socket is opened
+        /// </summary>
+        /// <param name="id">ID of the web socket</param>
+        /// <returns></returns>
+        Task SocketOpened(Snowflake id);
 
-        Task SocketClosed(int code, string message);
+        /// <summary>
+        /// Called when the web socket is closed
+        /// </summary>
+        /// <param name="id">ID of the websocket</param>
+        /// <param name="code">Web socket close code</param>
+        /// <param name="message">Web socket close message</param>
+        /// <returns></returns>
+        Task SocketClosed(Snowflake id, int code, string message);
 
-        Task SocketErrored(Exception ex);
+        /// <summary>
+        /// Called when an error occurs on the web socket
+        /// </summary>
+        /// <param name="id">ID of the websocket</param>
+        /// <param name="ex">Exception that was thrown</param>
+        /// <returns></returns>
+        Task SocketErrored(Snowflake id, Exception ex);
 
-        Task SocketMessage(string message);
+        /// <summary>
+        /// Called when a message is received from the websocket
+        /// </summary>
+        /// <param name="id">ID of the message</param>
+        /// <param name="message">Message that was received</param>
+        /// <returns></returns>
+        Task SocketMessage(Snowflake id, string message);
     }
 }

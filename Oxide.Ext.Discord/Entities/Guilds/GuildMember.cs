@@ -87,6 +87,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonProperty("communication_disabled_until")]
         public DateTime? CommunicationDisabledUntil { get; set; }
         
+        /// <summary>
+        /// When the Nickname was last updated
+        /// </summary>
         public DateTime? NickNameLastUpdated { get; internal set; }
         #endregion
 

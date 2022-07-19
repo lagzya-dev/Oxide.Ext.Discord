@@ -4,6 +4,9 @@ using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
 {
+    /// <summary>
+    /// Handles reconnecting to the web socket
+    /// </summary>
     public class WebsocketReconnectHandler
     {
         private readonly BotClient _client;
@@ -14,6 +17,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         
         internal bool AttemptGatewayUpdate => _reconnectRetries >= 3;
         
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="webSocket"></param>
+        /// <param name="logger"></param>
         public WebsocketReconnectHandler(BotClient client, DiscordWebSocket webSocket, ILogger logger)
         {
             _client = client;
@@ -25,6 +34,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _reconnectTimer.AutoReset = false;
         }
 
+        /// <summary>
+        /// Starts the reconnect process
+        /// </summary>
         public void StartReconnect()
         {
             if (!_client.Initialized)
@@ -32,7 +44,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
 
-            if (!_webSocket.Handler.IsDisconnected())
+            if (!_webSocket.Handler.IsDisconnected() && !_webSocket.Handler.IsDisconnecting())
             {
                 return;
             }
@@ -64,16 +76,25 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _webSocket.Connect();
         }
         
+        /// <summary>
+        /// Cancels the reconnect timer
+        /// </summary>
         public void CancelReconnect()
         {
             _reconnectTimer.Stop();
         }
 
+        /// <summary>
+        /// Called when the websocket received a ready event from discord
+        /// </summary>
         public void OnWebsocketReady()
         {
             _reconnectRetries = 0;
         }
 
+        /// <summary>
+        /// Called when the bot is shutting down
+        /// </summary>
         public void OnSocketShutdown()
         {
             _reconnectTimer.Stop();

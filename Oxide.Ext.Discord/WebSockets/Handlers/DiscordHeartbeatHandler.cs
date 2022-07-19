@@ -27,7 +27,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         /// <param name="client">Client for the handler</param>
         /// <param name="socket">Socket for the heartbeat</param>
-        /// <param name="listener">Socket Listener for the client</param>
         /// <param name="logger">Logger for the bot</param>
         public DiscordHeartbeatHandler(BotClient client, DiscordWebSocket socket, ILogger logger)
         {

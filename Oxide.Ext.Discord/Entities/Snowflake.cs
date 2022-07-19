@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities
         /// DateTimeOffset since discord Epoch
         /// </summary>
         public static readonly DateTimeOffset DiscordEpoch = new DateTimeOffset(2015, 1, 1, 0, 0, 0, TimeSpan.Zero);
-        
+
         /// <summary>
         /// Snowflake Value
         /// </summary>
@@ -39,12 +39,13 @@ namespace Oxide.Ext.Discord.Entities
         }
 
         /// <summary>
-        /// Create a snowflake from a DateTimeOffset
+        /// Create a snowflake from a DateTimeOffset and increment
         /// </summary>
         /// <param name="offset"></param>
-        public Snowflake(DateTimeOffset offset)
+        /// <param name="increment">Increment value of the snowflake</param>
+        public Snowflake(DateTimeOffset offset, ulong increment = 0)
         {
-            Id = (ulong)(DiscordEpoch - offset).TotalMilliseconds << 22;
+            Id = ((ulong)(DiscordEpoch - offset).TotalMilliseconds << 22) + increment;
         }
 
         /// <summary>

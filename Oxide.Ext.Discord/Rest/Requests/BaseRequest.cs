@@ -2,14 +2,15 @@ using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
-using RequestMethod = Oxide.Core.Libraries.RequestMethod;
 
 namespace Oxide.Ext.Discord.Rest.Requests
 {
@@ -68,7 +69,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         protected void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<RequestError> onError)
         {
-            Id = new Snowflake(DateTimeOffset.UtcNow);
+            Id = SnowflakeIdGenerator.Generate();
             Client = client;
             HttpClient = httpClient;
             Method = method;
@@ -129,12 +130,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             _errorResetAt = MathExt.Max(_errorResetAt, DateTimeOffset.UtcNow + TimeSpan.FromSeconds(1)); 
             _logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestErrored)} Request ID: {{0}} Waiting For {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
-        }
-
-        internal void OnRequestQueued(Bucket bucket)
-        {
-            _logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestQueued)} Bucket ID: {{0}} Request ID: {{1}}", bucket.Id, Id);
-            Bucket = bucket;
         }
 
         ///<inheritdoc/>

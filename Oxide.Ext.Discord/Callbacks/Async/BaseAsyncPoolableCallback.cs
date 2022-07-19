@@ -29,6 +29,9 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         /// </summary>
         protected abstract Task HandleCallback();
 
+        /// <summary>
+        /// Runs the callback using async
+        /// </summary>
         public void Run()
         {
             Task.Run(_callback);

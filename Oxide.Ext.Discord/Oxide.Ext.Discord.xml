@@ -1258,6 +1258,11 @@
             Overridden in the child class to handle the callback
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback.Run">
+            <summary>
+            Runs the callback using async
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler">
             <summary>
             Thread Pool Handler for Rest Requests
@@ -1267,9 +1272,10 @@
             <summary>
             Creates a thread pooled rest request
             </summary>
-            <param name="handler">Request Handler for the request</param>
+            <param name="rest"><see cref="T:Oxide.Ext.Discord.Rest.RestHandler"/> for the request</param>
+            <param name="request">Request to be ran</param>
             <param name="logger">Logger</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler"/>Created Handler</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler.HandleCallback">
             <inheritdoc/>
@@ -1436,6 +1442,14 @@
             Hashset containing all hooks names in the Discord Extension
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientCreated">
+            <code>
+            void OnDiscordClientCreated()
+            {
+                Puts("OnDiscordClientCreated Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientConnected">
             <code>
             void OnDiscordClientConnected(Plugin owner, DiscordClient client)
@@ -1449,14 +1463,6 @@
             void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
             {
                 Puts("OnDiscordClientDisconnected Works!");
-            }
-            </code>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientCreated">
-            <code>
-            void OnDiscordClientCreated()
-            {
-                Puts("OnDiscordClientCreated Works!");
             }
             </code>
         </member>
@@ -1693,6 +1699,110 @@
             void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMemberUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberNicknameUpdated">
+            <code>
+            void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberNicknameUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberAvatarUpdated">
+            <code>
+            void OnDiscordGuildMemberAvatarUpdated(GuildMember member, string oldAvatar, string newAvatar, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberAvatarUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberDeafened">
+            <code>
+            void OnDiscordGuildMemberDeafened(GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberDeafened Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberUndeafened">
+            <code>
+            void OnDiscordGuildMemberUndeafened(GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberUndeafened Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberMuted">
+            <code>
+            void OnDiscordGuildMemberMuted(GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberMuted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberUnmuted">
+            <code>
+            void OnDiscordGuildMemberUnmuted(GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberUnmuted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberTimeout">
+            <code>
+            void OnDiscordGuildMemberTimeout(GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberTimeout Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberTimeoutEnded">
+            <code>
+            void OnDiscordGuildMemberTimeoutEnded(GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberTimeoutEnded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberBoosted">
+            <code>
+            void OnDiscordGuildMemberBoosted(GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberBoosted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberBoostExtended">
+            <code>
+            void OnDiscordGuildMemberBoostExtended(GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberBoostExtended Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberBoostEnded">
+            <code>
+            void OnDiscordGuildMemberBoostEnded(GuildMember member, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberBoostEnded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberRoleAdded">
+            <code>
+            void OnDiscordGuildMemberRoleAdded(GuildMember member, Snowflake roleId, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberRoleAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberRoleRemoved">
+            <code>
+            void OnDiscordGuildMemberRoleRemoved(GuildMember member, Snowflake roleId, DiscordGuild guild)
+            {
+                Puts("OnDiscordGuildMemberRoleRemoved Works!");
             }
             </code>
         </member>
@@ -2033,11 +2143,11 @@
             }
             </code>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordIntegrationDeleted">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildIntegrationDeleted">
             <code>
-            void OnDiscordIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
+            void OnDiscordGuildIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
             {
-                Puts("OnDiscordIntegrationDeleted Works!");
+                Puts("OnDiscordGuildIntegrationDeleted Works!");
             }
             </code>
         </member>
@@ -2086,14 +2196,6 @@
             void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildThreadMembersUpdated Works!");
-            }
-            </code>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordUnhandledCommand">
-            <code>
-            void OnDiscordUnhandledCommand(EventPayload payload)
-            {
-                Puts("OnDiscordUnhandledCommand Works!");
             }
             </code>
         </member>
@@ -2150,6 +2252,14 @@
             void OnDiscordAutoModActionExecuted(AutoModActionExecutionEvent rule, DiscordGuild guild)
             {
                 Puts("OnDiscordAutoModActionExecuted Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordUnhandledCommand">
+            <code>
+            void OnDiscordUnhandledCommand(EventPayload payload)
+            {
+                Puts("OnDiscordUnhandledCommand Works!");
             }
             </code>
         </member>
@@ -2210,7 +2320,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.DiscordClient.PluginId">
             <summary>
-            The name of the plugin that this client was created for
+            The name of the plugin used as an ID
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.DiscordClient.PluginName">
+            <summary>
+            The full plugin name including author and version
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.DiscordClient.Bot">
@@ -2781,6 +2896,8 @@
             Creates a new rest error
             </summary>
             <param name="request">Request the error is for</param>
+            <param name="type"><see cref="T:Oxide.Ext.Discord.Entities.Api.RequestErrorType"/> of the error</param>
+            <param name="log"><see cref="T:Oxide.Ext.Discord.Logging.DiscordLogLevel"/> log level of the error</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SuppressErrorMessage">
             <summary>
@@ -8334,6 +8451,11 @@
             When the user's timeout will expire and the user will be able to communicate in the guild again, null or a time in the past if the user is not timed out
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.NickNameLastUpdated">
+            <summary>
+            When the Nickname was last updated
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.DisplayName">
             <summary>
             Returns the display name show for the user in a guild
@@ -13041,11 +13163,12 @@
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Snowflake.#ctor(System.DateTimeOffset)">
+        <member name="M:Oxide.Ext.Discord.Entities.Snowflake.#ctor(System.DateTimeOffset,System.UInt64)">
             <summary>
-            Create a snowflake from a DateTimeOffset
+            Create a snowflake from a DateTimeOffset and increment
             </summary>
             <param name="offset"></param>
+            <param name="increment">Increment value of the snowflake</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Snowflake.GetCreationDate">
             <summary>
@@ -15507,6 +15630,17 @@
             <returns>Localized message if found; Empty string otherwise</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
         </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.SnowflakeIdGenerator">
+            <summary>
+            Generates a unique snowflake ID
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.SnowflakeIdGenerator.Generate">
+            <summary>
+            Returns the generated snowflake ID
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.TimeHelpers">
             <summary>
             Helper methods relating to time
@@ -15631,6 +15765,43 @@
             <summary>
             Returns the unique ID for this entity
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler">
+            <summary>
+            Represents a Handler for Websocket Events
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketOpened(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Called when the web socket is opened
+            </summary>
+            <param name="id">ID of the web socket</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Int32,System.String)">
+            <summary>
+            Called when the web socket is closed
+            </summary>
+            <param name="id">ID of the websocket</param>
+            <param name="code">Web socket close code</param>
+            <param name="message">Web socket close message</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketErrored(Oxide.Ext.Discord.Entities.Snowflake,System.Exception)">
+            <summary>
+            Called when an error occurs on the web socket
+            </summary>
+            <param name="id">ID of the websocket</param>
+            <param name="ex">Exception that was thrown</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+            <summary>
+            Called when a message is received from the websocket
+            </summary>
+            <param name="id">ID of the message</param>
+            <param name="message">Message that was received</param>
             <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Json.Converters.DiscordColorConverter">
@@ -16696,11 +16867,11 @@
             <param name="rest">The handler that owns this Bucket</param>
             <param name="logger">Logger for this bucket</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.QueueRequest(Oxide.Ext.Discord.Rest.Requests.RequestHandler)">
             <summary>
             Queues a new request for the buck
             </summary>
-            <param name="request">Request to be queued</param>
+            <param name="handler"><see cref="T:Oxide.Ext.Discord.Rest.Requests.RequestHandler"/> to be queued</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator">
             <summary>
@@ -16832,6 +17003,7 @@
             Creates a REST API request that returns type of T from the response
             </summary>
             <param name="client">Client making the request</param>
+            <param name="httpClient"><see cref="T:System.Net.Http.HttpClient"/> for the request</param>
             <param name="method">HTTP web method</param>
             <param name="route">Route for the request</param>
             <param name="data">Data being passed into the request. Null if no data is passed</param>
@@ -16958,6 +17130,7 @@
             Creates a REST API request that returns type of T from the response
             </summary>
             <param name="client">Client making the request</param>
+            <param name="httpClient"><see cref="T:System.Net.Http.HttpClient"/> for the request</param>
             <param name="method">HTTP web method</param>
             <param name="route">Route for the request</param>
             <param name="data">Data being passed into the request. Null if no data is passed</param>
@@ -16982,6 +17155,11 @@
         <member name="T:Oxide.Ext.Discord.Rest.RestHandler">
             <summary>
             Represents a REST handler for a bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.Client">
+            <summary>
+            <see cref="T:System.Net.Http.HttpClient"/> for API Requests
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.RestHandler.RateLimit">
@@ -17011,7 +17189,7 @@
             <param name="client">Client the request is for</param>
             <param name="logger">Logger from the client</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Creates a new request and queues it to be ran
             </summary>
@@ -17022,7 +17200,7 @@
             <param name="success">Callback once the action is completed</param>
             <param name="error">Error callback if an error occurs</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.DoRequest``1(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest``1(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Creates a new request and queues it to be ran
             </summary>
@@ -17036,9 +17214,9 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.StartRequest(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
-            Queues the request using the thread pool so we don't block the main thread with any locks
+            Starts the request
             </summary>
-            <param name="request"></param>
+            <param name="request">Request to be started</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.QueueBucket(Oxide.Ext.Discord.Rest.Requests.RequestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
@@ -17177,6 +17355,14 @@
             <param name="resume">Should we attempt to resume our previous session</param>
             <param name="requested">If discord requested that we reconnect to discord</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.IsCurrentSocket(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns if the given websocket matches our current websocket.
+            If socket is null we return false
+            </summary>
+            <param name="webSocketId">ID of the socket</param>
+            <returns>True if current socket is not null and socket matches current socket; False otherwise.</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Shutdown">
             <summary>
             Shutdowns the websocket completely. Used when bot is being shutdown
@@ -17188,6 +17374,18 @@
             </summary>
             <param name="opCode">Command code to send</param>
             <param name="data">Data to send</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.SendImmediately(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+            <summary>
+            Send a command to discord over the websocket
+            </summary>
+            <param name="opCode">Command code to send</param>
+            <param name="data">Data to send</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.ReconnectIfRequested">
+            <summary>
+            Reconnected to the websocket is a reconnect is requested and we are not shutting down
+            </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Identify">
             <summary>
@@ -17620,7 +17818,6 @@
             </summary>
             <param name="client">Client for the handler</param>
             <param name="socket">Socket for the heartbeat</param>
-            <param name="listener">Socket Listener for the client</param>
             <param name="logger">Logger for the bot</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.DiscordHeartbeatHandler.SetupHeartbeat(System.Single)">
@@ -17674,17 +17871,18 @@
             <param name="socket">Socket this listener is for</param>
             <param name="logger">Logger for the client</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketOpened">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketOpened(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Called when a socket is open
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketClosed(System.Int32,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Int32,System.String)">
             <summary>
             Called when a socket is closed
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="websocketId">ID of the web socket</param>
+            <param name="code">Close code for the web socket</param>
+            <param name="message">Close message from the web socket</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.HandleDiscordClosedSocket(System.Int32,System.String)">
             <summary>
@@ -17694,19 +17892,19 @@
             <param name="reason">Socket close reason</param>
             <returns>True if discord closed the socket with one of it's close codes</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketErrored(System.Exception)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketErrored(Oxide.Ext.Discord.Entities.Snowflake,System.Exception)">
             <summary>
             Called when an error occurs on a socket
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="webSocketId">ID of the web socket</param>
+            <param name="ex">Exception throw</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketMessage(System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
             <summary>
             Called when a socket receives a message
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="webSocketId">ID of the web socket</param>
+            <param name="message">Message received from the web socket</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.EventPayload)">
             <summary>
@@ -17718,35 +17916,109 @@
             <param name="payload"></param>
             https://discord.com/developers/docs/topics/gateway#presence-update
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsConnected">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler">
+            <summary>
+            Handles the web socket connection and events
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.#ctor(Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="handler">Handles for web socket events</param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.Connect(System.String)">
+            <summary>
+            Connects to the websocket at the given URL
+            </summary>
+            <param name="url"></param>
+            <exception cref="T:Oxide.Ext.Discord.Exceptions.Entities.Websocket.WebsocketException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.Send(System.String)">
+            <summary>
+            Sends the string message over the web socket
+            </summary>
+            <param name="message">Message to be sent</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.Disconnect(System.Int32,System.String)">
+            <summary>
+            Disconnects from the websocket with the given code and reason
+            </summary>
+            <param name="code">Code to close with</param>
+            <param name="reason">Reason for the close</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.Disconnect(System.Net.WebSockets.WebSocketCloseStatus,System.String)">
+            <summary>
+            Disconnects from the websocket with the given code and reason
+            </summary>
+            <param name="status">Status to close with</param>
+            <param name="reason">Reason for the close</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsConnected">
             <summary>
             Returns if the websocket is in the open state
             </summary>
             <returns>Returns if the websocket is in open state</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsConnecting">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsConnecting">
             <summary>
             Returns if the websocket is in the connecting state
             </summary>
             <returns>Returns if the websocket is in connecting state</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsPendingReconnect">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsPendingReconnect">
             <summary>
             Returns if the socket is waiting to reconnect
             </summary>
             <returns>Returns if the socket is waiting to reconnect</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsDisconnecting">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsDisconnecting">
             <summary>
             Returns if the websocket is null or is currently closing / closed
             </summary>
             <returns>Returns if the websocket is null or is currently closing / closed</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.WebsocketHandler.IsDisconnected">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsDisconnected">
             <summary>
             Returns if the websocket is null or is currently closing / closed
             </summary>
             <returns>Returns if the websocket is null or is currently closing / closed</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler">
+            <summary>
+            Handles reconnecting to the web socket
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="client"></param>
+            <param name="webSocket"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.StartReconnect">
+            <summary>
+            Starts the reconnect process
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.CancelReconnect">
+            <summary>
+            Cancels the reconnect timer
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.OnWebsocketReady">
+            <summary>
+            Called when the websocket received a ready event from discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.OnSocketShutdown">
+            <summary>
+            Called when the bot is shutting down
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.SocketState">
             <summary>

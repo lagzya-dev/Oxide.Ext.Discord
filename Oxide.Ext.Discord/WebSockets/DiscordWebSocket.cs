@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
@@ -142,12 +143,12 @@ namespace Oxide.Ext.Discord.WebSockets
         /// Returns if the given websocket matches our current websocket.
         /// If socket is null we return false
         /// </summary>
-        /// <param name="socket">Socket to compare</param>
+        /// <param name="webSocketId">ID of the socket</param>
         /// <returns>True if current socket is not null and socket matches current socket; False otherwise.</returns>
-        // internal bool IsCurrentSocket(WebSocket socket)
-        // {
-        //     return _socket != null && _socket == socket;
-        // }
+        internal bool IsCurrentSocket(Snowflake webSocketId)
+        {
+            return Handler.WebsocketId == webSocketId;
+        }
 
         /// <summary>
         /// Shutdowns the websocket completely. Used when bot is being shutdown
@@ -177,7 +178,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         /// <param name="opCode">Command code to send</param>
         /// <param name="data">Data to send</param>
-        internal async Task SendImmediately(GatewayCommandCode opCode, object data)
+        private async Task SendImmediately(GatewayCommandCode opCode, object data)
         {
             CommandPayload payload = CommandPayload.CreatePayload(opCode, data);
             await Send(payload);
@@ -198,6 +199,9 @@ namespace Oxide.Ext.Discord.WebSockets
             return true;
         }
 
+        /// <summary>
+        /// Reconnected to the websocket is a reconnect is requested and we are not shutting down
+        /// </summary>
         public void ReconnectIfRequested()
         {
             if (ShouldReconnect && !_isShutdown)
@@ -307,9 +311,9 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Sends a heartbeat to Discord
         /// </summary>
-        internal void SendHeartbeat()
+        internal Task SendHeartbeat()
         {
-            Send(GatewayCommandCode.Heartbeat, _sequence);
+            return SendImmediately(GatewayCommandCode.Heartbeat, _sequence);
         }
 
         internal void OnInvalidSession(bool resume)

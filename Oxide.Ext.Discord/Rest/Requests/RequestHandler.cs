@@ -85,12 +85,14 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
             RequestResponse response = null;
             byte retries = 0;
-            while(retries < 3) 
+            byte retries429 = 0;
+            while(retries < 3 && retries429 < 6) 
             {
                 Request.Status = RequestStatus.PendingStart;
                 await Request.Bucket.WaitUntilBucketAvailable(this, _token);
                 await Request.WaitUntilRequestCanStart(_token);
                 Request.Status = RequestStatus.InProgress;
+                Request.Bucket.OnRequestStarted(this);
                 
                 if (Request.IsCancelled)
                 {
@@ -112,6 +114,10 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 if (response.Code != 429)
                 {
                     retries++;
+                }
+                else
+                {
+                    retries429++;
                 }
             }
             
@@ -216,7 +222,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         public void Abort()
         {
-            Request.Source.Cancel();
+            Request.Source?.Cancel();
         }
 
         private RequestError GetRequestError(RequestErrorType type, DiscordLogLevel log)

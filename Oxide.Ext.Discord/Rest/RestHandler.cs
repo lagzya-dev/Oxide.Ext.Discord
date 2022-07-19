@@ -21,6 +21,9 @@ namespace Oxide.Ext.Discord.Rest
     /// </summary>
     public class RestHandler
     {
+        /// <summary>
+        /// <see cref="HttpClient"/> for API Requests
+        /// </summary>
         public readonly HttpClient Client;
         
         /// <summary>
@@ -130,7 +133,7 @@ namespace Oxide.Ext.Discord.Rest
             string bucketId = BucketIdGenerator.GetBucketId(request.Method, request.Route);
             _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}",  request.Route, bucketId);
             Bucket bucket = GetBucket(bucketId);
-            bucket.QueueRequest(handler, request);
+            bucket.QueueRequest(handler);
             return bucket;
         }
 

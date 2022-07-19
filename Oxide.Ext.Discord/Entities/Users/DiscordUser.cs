@@ -332,7 +332,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["recipient_id"] = userId
             };
 
-            client.Bot.Rest.CreateRequest<DiscordChannel>(client, "/users/@me/channels", RequestMethod.POST, data, newChannel =>
+            client.Bot.Rest.CreateRequest<DiscordChannel>(client, "users/@me/channels", RequestMethod.POST, data, newChannel =>
             {
                 client.Bot.AddDirectChannel(newChannel);
                 callback?.Invoke(newChannel);
