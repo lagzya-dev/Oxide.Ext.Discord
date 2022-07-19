@@ -246,7 +246,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     await _handler.SocketClosed(id, (int)status, reason);
                     SocketState = SocketState.Disconnected;
                     _socket = null;
-                    _thread?.Abort();
                 }
             }
             catch (Exception ex)

@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly CancellationTokenSource _source;
         private readonly CancellationToken _token;
         private bool _isSocketReady;
-        private Thread _thread;
+        private readonly Thread _thread;
 
         /// <summary>
         /// Constructor
