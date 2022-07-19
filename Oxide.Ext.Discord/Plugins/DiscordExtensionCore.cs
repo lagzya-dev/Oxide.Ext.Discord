@@ -129,7 +129,7 @@ namespace Oxide.Ext.Discord.Plugins
                 sb.Append("Intents: ");
                 sb.AppendLine(bot.Settings.Intents.ToString());
                 sb.Append("Plugins: ");
-                sb.AppendLine(string.Join(", ", bot.Clients.Select(c => c.PluginName).ToArray()));
+                sb.AppendLine(bot.GetClientPluginList());
                 sb.AppendLine("Application Flags: ");
                 if (bot.Application?.Flags == null || (int)bot.Application.Flags == 0)
                 {
@@ -197,7 +197,8 @@ namespace Oxide.Ext.Discord.Plugins
                             sb.Append(bucket.Limit.ToString());
                             sb.Append(" Reset In: ");
                             double resetIn = bucket.ResetAt < DateTimeOffset.UtcNow ? 0 : (bucket.ResetAt - DateTimeOffset.UtcNow).TotalSeconds;
-                            sb.AppendLine(resetIn.ToString());
+                            sb.Append(resetIn.ToString());
+                            sb.AppendLine(" Seconds");
                             sb.Append("\t\tRequest Queue Count: ");
                             sb.AppendLine(bucket.Requests.Count.ToString());
                             sb.Append("\t\tSemaphore: ");

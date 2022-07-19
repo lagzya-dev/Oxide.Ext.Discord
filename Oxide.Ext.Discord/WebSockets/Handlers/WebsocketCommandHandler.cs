@@ -26,6 +26,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly CancellationTokenSource _source;
         private readonly CancellationToken _token;
         private bool _isSocketReady;
+        private Thread _thread;
 
         /// <summary>
         /// Constructor
@@ -41,8 +42,27 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             
             _source = new CancellationTokenSource();
             _token = _source.Token;
-            
-            Task.Run(async () => await SendCommandsInternal());
+
+            _thread = new Thread(RunInternal)
+            {
+                IsBackground = true
+            };
+            _thread.Start();
+        }
+
+        private async void RunInternal()
+        {
+            try
+            {
+                await SendCommandsInternal();
+            }
+            catch (ThreadAbortException) { }
+            catch (TaskCanceledException) { }
+            catch (OperationCanceledException) { }
+            catch (Exception ex)
+            {
+                _logger.Exception($"Unhandled exception in {nameof(WebsocketCommandHandler)}.{nameof(RunInternal)}", ex);
+            }
         }
 
         private async Task SendCommandsInternal()
@@ -149,6 +169,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         internal void OnSocketShutdown()
         {
             _source.Cancel();
+            _thread?.Abort();
         }
 
         internal IReadOnlyCollection<CommandPayload> GetPendingCommands()

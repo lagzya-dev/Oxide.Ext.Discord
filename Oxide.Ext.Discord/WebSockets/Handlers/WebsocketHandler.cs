@@ -38,6 +38,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         internal SocketState SocketState = SocketState.Disconnected;
 
+        private Thread _thread;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -67,6 +69,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 throw new WebsocketException("Socket is already running. Please disconnect before attempting to connect.");
             }
 
+            _thread?.Abort();
+            
             WebsocketId = SnowflakeIdGenerator.Generate();
             SocketState = SocketState.Connecting;
             _source?.Dispose();
@@ -74,11 +78,17 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _token = _source.Token;
             _socket = new ClientWebSocket();
             _socket.Options.KeepAliveInterval = TimeSpan.Zero;
-            
-            Task.Run(async () =>
+
+            _thread = new Thread(RunInternal)
             {
-                await RunWebsocket(url);
-            }, _token);
+                IsBackground = true
+            };
+            _thread.Start(url);
+        }
+
+        private async void RunInternal(object url)
+        {
+            await RunWebsocket((string)url);
         }
         
         private async Task RunWebsocket(string url)
@@ -86,7 +96,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             Snowflake id = WebsocketId;
             try
             {
-               
                 _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(Connect)} Connecting Websocket To: {{0}}", url);
                 await _socket.ConnectAsync(new Uri(url), _token);
                 SocketState = SocketState.Connected;
@@ -237,6 +246,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     await _handler.SocketClosed(id, (int)status, reason);
                     SocketState = SocketState.Disconnected;
                     _socket = null;
+                    _thread?.Abort();
                 }
             }
             catch (Exception ex)
