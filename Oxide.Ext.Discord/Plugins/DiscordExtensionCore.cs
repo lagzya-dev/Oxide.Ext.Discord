@@ -153,7 +153,7 @@ namespace Oxide.Ext.Discord.Plugins
                 {
                     sb.AppendLine(websocket.Handler.SocketState.ToString());
                     sb.Append("\tPending Commands: ");
-                    IList<CommandPayload> pendingCommands = websocket.Commands.GetPendingCommands();
+                    IReadOnlyCollection<CommandPayload> pendingCommands = websocket.Commands.GetPendingCommands();
                     if (pendingCommands.Count == 0)
                     {
                         sb.AppendLine("None");
@@ -161,9 +161,8 @@ namespace Oxide.Ext.Discord.Plugins
                     else
                     {
                         sb.AppendLine();
-                        for (int index = 0; index < pendingCommands.Count; index++)
+                        foreach (CommandPayload command in pendingCommands)
                         {
-                            CommandPayload command = pendingCommands[index];
                             sb.Append("\tCommand: ");
                             sb.AppendLine(command.OpCode.ToString());
                         }

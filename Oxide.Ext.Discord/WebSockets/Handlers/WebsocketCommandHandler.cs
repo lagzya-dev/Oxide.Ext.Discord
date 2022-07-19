@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly BotClient _client;
         private readonly DiscordWebSocket _webSocket;
         private readonly ILogger _logger;
-        private readonly ThreadSafeList<CommandPayload> _pendingCommands = new ThreadSafeList<CommandPayload>();
+        private readonly ConcurrentQueue<CommandPayload> _pendingCommands = new ConcurrentQueue<CommandPayload>();
         private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
         private readonly AutoResetEvent _online = new AutoResetEvent(false);
         private readonly AutoResetEvent _commands = new AutoResetEvent(false);
@@ -40,21 +41,18 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             
             _source = new CancellationTokenSource();
             _token = _source.Token;
-
+            
             Task.Run(async () => await SendCommandsInternal());
         }
 
         private async Task SendCommandsInternal()
         {
-            while (!_source.IsCancellationRequested)
+            while (_source != null && !_source.IsCancellationRequested)
             {
                 try
                 {
-                    _logger.Debug("Waiting for online");
                     _online.WaitOne();
-                    _logger.Debug("Waiting for commands");
                     _commands.WaitOne();
-                    _logger.Debug("Sending command");
 
                     if (_rateLimit.HasReachedRateLimit)
                     {
@@ -93,7 +91,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                         _online.Set();
                     }
                     
-                    if (_pendingCommands.Count != 0)
+                    if (!_pendingCommands.IsEmpty)
                     {
                         _commands.Set();
                     }
@@ -103,9 +101,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private CommandPayload GetNextCommand()
         {
-            if (_isSocketReady)
+            if (_isSocketReady && _pendingCommands.TryPeek(out CommandPayload command))
             {
-                return _pendingCommands.Count != 0 ? _pendingCommands[0] : null;
+                return command;
             }
 
             return null;
@@ -113,7 +111,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private void RemoveCommand(CommandPayload command)
         {
-            _pendingCommands.Remove(command);
+            _pendingCommands.TryDequeue(out CommandPayload _);
             command.Dispose();
         }
 
@@ -126,19 +124,10 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         public void Enqueue(CommandPayload command)
         {
             _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(Enqueue)} Queuing command {{0}}", command.OpCode);
-
-            if (command.OpCode == GatewayCommandCode.PresenceUpdate)
-            {
-                RemoveByType(GatewayCommandCode.PresenceUpdate);
-            }
-            else if (command.OpCode == GatewayCommandCode.VoiceStateUpdate)
-            {
-                RemoveByType(GatewayCommandCode.VoiceStateUpdate);
-            }
-
-            _pendingCommands.Add(command);
+            _pendingCommands.Enqueue(command);
             _commands.Set();
         }
+        
         internal void OnWebSocketReady()
         {
             _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(OnWebSocketReady)} Socket Connected. Sending queued commands.");
@@ -150,21 +139,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(OnSocketDisconnected)} Socket Disconnected. Queuing Commands.");
             _online.Reset();
-            _pendingCommands.Clear();
-            _isSocketReady = false;
-        }
-        
-        private void RemoveByType(GatewayCommandCode code)
-        {
-            for (int index = _pendingCommands.Count - 1; index >= 0; index--)
+            while (!_pendingCommands.IsEmpty)
             {
-                CommandPayload command = _pendingCommands[index];
-                if (command.OpCode == code)
-                {
-                    _pendingCommands.RemoveAt(index);
-                    command.Dispose();
-                }
+                _pendingCommands.TryDequeue(out CommandPayload _);
             }
+            _isSocketReady = false;
         }
 
         internal void OnSocketShutdown()
@@ -172,7 +151,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _source.Cancel();
         }
 
-        internal IList<CommandPayload> GetPendingCommands()
+        internal IReadOnlyCollection<CommandPayload> GetPendingCommands()
         {
             return _pendingCommands;
         }
