@@ -38,13 +38,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [Description("BANNER")] 
         Banner,
-        
-        /// <summary>
-        /// Guild has access to use commerce features (i.e. create store channels)
-        /// </summary>
-        [Description("COMMERCE")] 
-        Commerce,
-        
+
         /// <summary>
         /// Guild can enable welcome screen and discovery, and receives community updates
         /// </summary>
