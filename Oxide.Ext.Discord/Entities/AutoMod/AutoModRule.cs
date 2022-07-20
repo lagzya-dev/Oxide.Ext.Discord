@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         public Snowflake Id { get; set; }
         
         /// <summary>
-        /// Guild which this rule belongs to
+        /// ID of the Guild which this rule belongs to
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake GuildId { get; set; }
