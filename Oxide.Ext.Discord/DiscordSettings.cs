@@ -53,5 +53,15 @@ namespace Oxide.Ext.Discord
             _hiddenToken = DiscordPool.ToStringAndFreeStringBuilder(ref sb);
             return _hiddenToken;
         }
+
+        /// <summary>
+        /// Returns if the settings has the given intents
+        /// </summary>
+        /// <param name="intents">Intents to be compared against</param>
+        /// <returns>True if settings has the given intents; False otherwise</returns>
+        public bool HasIntents(GatewayIntents intents)
+        {
+            return (Intents & intents) == Intents;
+        }
     }
 }

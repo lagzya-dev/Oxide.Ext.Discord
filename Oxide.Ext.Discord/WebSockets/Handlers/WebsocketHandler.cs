@@ -189,10 +189,10 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             await _handler.SocketMessage(id, message);
         }
 
-        private async Task SendMessage(string message)
+        private async Task<bool> SendInternalAsync(string message)
         {
             int charIndex = 0;
-            while (true)
+            while (!_source.IsCancellationRequested)
             {
                 int charAmount = Math.Min(charIndex + _maxSendChars, message.Length);
                 int byteSize = _encoding.GetBytes(message, charIndex, charAmount, _sendBuffer, 0);
@@ -202,19 +202,26 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 await _socket.SendAsync(new ArraySegment<byte>(_sendBuffer, 0, byteSize), WebSocketMessageType.Text, endOfMessage, _token);
                 if (endOfMessage)
                 {
-                    break;
+                    return true;
                 }
             }
+
+            return false;
         }
         
         /// <summary>
         /// Sends the string message over the web socket
         /// </summary>
         /// <param name="message">Message to be sent</param>
-        public async Task Send(string message)
+        public async Task<bool> SendAsync(string message)
         {
-            _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(Send)} Sending Message: {{0}}", message);
-            await SendMessage(message);
+            if (_socket == null || _socket.State != WebSocketState.Open)
+            {
+                return false;
+            }
+            
+            _logger.Debug($"{nameof(WebsocketHandler)}.{nameof(SendAsync)} Sending Message: {{0}}", message);
+            return await SendInternalAsync(message);
         }
 
         /// <summary>

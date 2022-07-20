@@ -25,11 +25,11 @@ namespace Oxide.Ext.Discord.Rest
         /// <see cref="HttpClient"/> for API Requests
         /// </summary>
         public readonly HttpClient Client;
-        
+
         /// <summary>
         /// Global Rate Limit for the bot
         /// </summary>
-        public readonly RestRateLimit RateLimit = new RestRateLimit();
+        public readonly RestRateLimit RateLimit;
         
         /// <summary>
         /// Buckets with Routes we don't know the Hash of yet
@@ -71,6 +71,7 @@ namespace Oxide.Ext.Discord.Rest
             Client.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("deflate"));
             Client.DefaultRequestHeaders.Add("user-agent", $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, v{DiscordExtension.FullExtensionVersion})");
             _logger = logger;
+            RateLimit = new RestRateLimit(logger);
         }
 
         /// <summary>

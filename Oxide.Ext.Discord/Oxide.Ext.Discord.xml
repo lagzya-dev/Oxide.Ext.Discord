@@ -171,23 +171,13 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.RequestGuildMembers(Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand)">
+        <member name="M:Oxide.Ext.Discord.BotClient.SendWebSocketCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
             <summary>
-            Used to request guild members from discord for a specific guild
+            Sends a websocket command
             </summary>
-            <param name="request">Request for guild members</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.UpdateVoiceState(Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateVoiceStatusCommand)">
-            <summary>
-            Used to update the voice state for the bot
-            </summary>
-            <param name="voiceState"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.UpdateStatus(Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand)">
-            <summary>
-            Used to update the bots status in discord
-            </summary>
-            <param name="presenceUpdate"></param>
+            <param name="client">Client sending the command</param>
+            <param name="opCode"><see cref="T:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode"/> OP Code for the command</param>
+            <param name="data">Command Payload</param>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.GetGuild(System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
             <summary>
@@ -2380,6 +2370,24 @@
             </summary>
             <param name="hook">Hook to unsubscribe to</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.RequestGuildMembers(Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand)">
+            <summary>
+            Used to request guild members from discord for a specific guild
+            </summary>
+            <param name="request">Request for guild members</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.UpdateVoiceState(Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateVoiceStatusCommand)">
+            <summary>
+            Used to update the voice state for the bot
+            </summary>
+            <param name="voiceState"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordClient.UpdateStatus(Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand)">
+            <summary>
+            Used to update the bots status in discord
+            </summary>
+            <param name="presenceUpdate"></param>
+        </member>
         <member name="M:Oxide.Ext.Discord.DiscordClient.CreateClient(Oxide.Core.Plugins.Plugin)">
             <summary>
             Sets the client field on the plugin.
@@ -2486,6 +2494,13 @@
             Hides the token but keeps the format to allow for debugging token issues without showing the full token.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordSettings.HasIntents(Oxide.Ext.Discord.Entities.Gatway.GatewayIntents)">
+            <summary>
+            Returns if the settings has the given intents
+            </summary>
+            <param name="intents">Intents to be compared against</param>
+            <returns>True if settings has the given intents; False otherwise</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.ActivityAssets">
             <summary>
@@ -5996,6 +6011,36 @@
             <summary>
             Is the client deafened
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand">
+            <summary>
+            Represents a command to be sent over the web socket
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.Client">
+            <summary>
+            Client requesting the command
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.Payload">
+            <summary>
+            Payload for the command
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.CreateCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+            <summary>
+            Creates a new <see cref="T:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand"/>
+            </summary>
+            <param name="client">Client for the command</param>
+            <param name="code"><see cref="T:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode"/> For the command</param>
+            <param name="payload">Payload for the command</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.DisposeInternal">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.EventPayload">
             <summary>
@@ -16776,16 +16821,27 @@
             The interval in which this resets at
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.#ctor(System.Int32,System.Double)">
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.Logger">
+            <summary>
+            Logger for the rate limit
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.#ctor(System.Int32,System.Double,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Base Rate Limit Constructor
             </summary>
             <param name="maxRequests">Max requests per interval</param>
             <param name="interval">Reset Interval</param>
+            <param name="logger">Logger</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.FiredRequest">
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.FiredRequestInternal">
             <summary>
             Called when an API request is fired
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.OnRateLimitReset">
+            <summary>
+            Called when the rate limit is reset
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.RateLimits.BaseRateLimit.HasReachedRateLimit">
@@ -16808,7 +16864,7 @@
             Represents a rate limit for rest requests
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.#ctor">
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor for RestRateLimit
             </summary>
@@ -16819,9 +16875,17 @@
             </summary>
             <param name="retryAfter">How long until we should retry API request again</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.OnRateLimitReset">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.NextReset">
             <summary>
             Returns how long until the current rate limit period will expire
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.FiredRequest">
+            <summary>
+            Called when an API request is fired
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit">
@@ -16829,10 +16893,26 @@
             Represents a WebSocket Rate Limit
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.#ctor">
+        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor for WebsocketRateLimit
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.FiredRequest(Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand)">
+            <summary>
+            Called when an API request is fired
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.CanFireRequest(Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand)">
+            <summary>
+            Returns if the client can return the given command.
+            This is used to limit plugins to a certain number of websocket commands per rate limit tick
+            </summary>
+            <param name="command">Command that is to be ran</param>
+            <returns>True if the command can run; False otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.OnRateLimitReset">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Buckets.Bucket">
             <summary>
@@ -17299,14 +17379,15 @@
             Shutdowns the websocket completely. Used when bot is being shutdown
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Send(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Send(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
             <summary>
             Send a command to discord over the websocket
             </summary>
+            <param name="client">Client sending the command</param>
             <param name="opCode">Command code to send</param>
             <param name="data">Data to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.SendImmediately(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.SendImmediatelyAsync(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
             <summary>
             Send a command to discord over the websocket
             </summary>
@@ -17329,6 +17410,11 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.SendHeartbeat">
+            <summary>
+            Sends a heartbeat to Discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.RequestAllGuildMembers(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Sends a heartbeat to Discord
             </summary>
@@ -17781,7 +17867,7 @@
             <param name="webSocket">Websocket to handle commands for</param>
             <param name="logger">Logger for this handler</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.CommandPayload)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand)">
             <summary>
             Enqueue a payload to be sent over the websocket
             If the websocket is connected it will be sent immediately
@@ -17866,7 +17952,7 @@
             <param name="url"></param>
             <exception cref="T:Oxide.Ext.Discord.Exceptions.Entities.Websocket.WebsocketException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.Send(System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.SendAsync(System.String)">
             <summary>
             Sends the string message over the web socket
             </summary>

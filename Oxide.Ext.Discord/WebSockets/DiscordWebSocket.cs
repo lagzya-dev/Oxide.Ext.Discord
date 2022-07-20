@@ -158,19 +158,20 @@ namespace Oxide.Ext.Discord.WebSockets
             _isShutdown = true;
             Disconnect(false, false);
             _reconnect.OnSocketShutdown();
-            _heartbeat?.OnSocketShutdown();
-            Commands?.OnSocketShutdown();
+            _heartbeat.OnSocketShutdown();
+            Commands.OnSocketShutdown();
         }
 
         /// <summary>
         /// Send a command to discord over the websocket
         /// </summary>
+        /// <param name="client">Client sending the command</param>
         /// <param name="opCode">Command code to send</param>
         /// <param name="data">Data to send</param>
-        public void Send(GatewayCommandCode opCode, object data)
+        public void Send(DiscordClient client, GatewayCommandCode opCode, object data)
         {
-            CommandPayload payload = CommandPayload.CreatePayload(opCode, data);
-            Commands.Enqueue(payload);
+            WebSocketCommand command = WebSocketCommand.CreateCommand(client, opCode, data);
+            Commands.Enqueue(command);
         }
         
         /// <summary>
@@ -178,14 +179,17 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         /// <param name="opCode">Command code to send</param>
         /// <param name="data">Data to send</param>
-        private async Task SendImmediately(GatewayCommandCode opCode, object data)
+        private async Task SendImmediatelyAsync(GatewayCommandCode opCode, object data)
         {
             CommandPayload payload = CommandPayload.CreatePayload(opCode, data);
-            await Send(payload);
+            if (!await SendAsync(payload))
+            {
+                _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(SendImmediatelyAsync)} Failed to send command! {{0}}", opCode);
+            }
             payload.Dispose();
         }
         
-        internal async Task<bool> Send(CommandPayload payload)
+        internal async Task<bool> SendAsync(CommandPayload payload)
         {
             if (Handler == null)
             {
@@ -193,9 +197,9 @@ namespace Oxide.Ext.Discord.WebSockets
             }
             
             string payloadData = JsonConvert.SerializeObject(payload, _client.ClientSerializerSettings);
-            _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(Send)} Payload: {{0}}", payloadData);
+            _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Payload: {{0}}", payloadData);
 
-            await Handler.Send(payloadData);
+            await Handler.SendAsync(payloadData);
             return true;
         }
 
@@ -242,16 +246,18 @@ namespace Oxide.Ext.Discord.WebSockets
         internal async Task OnDiscordHello(GatewayHelloEvent hello)
         {
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(OnDiscordHello)}");
-            _heartbeat.SetupHeartbeat(hello.HeartbeatInterval);
 
             // Client should now perform identification
             if (ShouldResume && !string.IsNullOrEmpty(_sessionId))
             {
                 await Resume();
-                return;
+            }
+            else
+            {
+                await Identify();
             }
             
-            await Identify();
+            _heartbeat.SetupHeartbeat(hello.HeartbeatInterval);
         }
 
         /// <summary>
@@ -278,7 +284,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 Shard = new List<int> {0, 1}
             };
 
-            await SendImmediately(GatewayCommandCode.Identify, identify);
+            await SendImmediatelyAsync(GatewayCommandCode.Identify, identify);
         }
         
         /// <summary>
@@ -300,7 +306,7 @@ namespace Oxide.Ext.Discord.WebSockets
             
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Resume)} Attempting to resume session with ID: {{0}} Sequence: {{1}}", _sessionId, _sequence);
 
-            await SendImmediately(GatewayCommandCode.Resume, resume);
+            await SendImmediatelyAsync(GatewayCommandCode.Resume, resume);
         }
         
         internal void OnHeartbeatAcknowledge()
@@ -313,7 +319,24 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         internal Task SendHeartbeat()
         {
-            return SendImmediately(GatewayCommandCode.Heartbeat, _sequence);
+            if (Handler.IsConnected())
+            {
+                return SendImmediatelyAsync(GatewayCommandCode.Heartbeat, _sequence);
+            }
+            
+            return Task.CompletedTask;
+        }
+        
+        /// <summary>
+        /// Sends a heartbeat to Discord
+        /// </summary>
+        internal Task RequestAllGuildMembers(Snowflake guildId)
+        {
+            return SendImmediatelyAsync(GatewayCommandCode.Heartbeat, new GuildMembersRequestCommand
+            {
+                Nonce = "DiscordExtension",
+                GuildId = guildId,
+            });
         }
 
         internal void OnInvalidSession(bool resume)

@@ -6,6 +6,7 @@ using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Rest.Buckets;
@@ -153,7 +154,7 @@ namespace Oxide.Ext.Discord.Plugins
                 {
                     sb.AppendLine(websocket.Handler.SocketState.ToString());
                     sb.Append("\tPending Commands: ");
-                    IReadOnlyCollection<CommandPayload> pendingCommands = websocket.Commands.GetPendingCommands();
+                    IReadOnlyCollection<WebSocketCommand> pendingCommands = websocket.Commands.GetPendingCommands();
                     if (pendingCommands.Count == 0)
                     {
                         sb.AppendLine("None");
@@ -161,10 +162,12 @@ namespace Oxide.Ext.Discord.Plugins
                     else
                     {
                         sb.AppendLine();
-                        foreach (CommandPayload command in pendingCommands)
+                        foreach (WebSocketCommand command in pendingCommands)
                         {
                             sb.Append("\tCommand: ");
-                            sb.AppendLine(command.OpCode.ToString());
+                            sb.Append(command.Client.PluginName);
+                            sb.Append(' ');
+                            sb.AppendLine(command.Payload.OpCode.ToString());
                         }
                     }
                 }

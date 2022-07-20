@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Timers;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Logging;
 using Timer = System.Timers.Timer;
 
 namespace Oxide.Ext.Discord.RateLimits
@@ -30,6 +31,11 @@ namespace Oxide.Ext.Discord.RateLimits
         /// The interval in which this resets at
         /// </summary>
         protected readonly double ResetInterval;
+
+        /// <summary>
+        /// Logger for the rate limit
+        /// </summary>
+        protected readonly ILogger Logger;
         
         private Timer _timer;
 
@@ -38,12 +44,14 @@ namespace Oxide.Ext.Discord.RateLimits
         /// </summary>
         /// <param name="maxRequests">Max requests per interval</param>
         /// <param name="interval">Reset Interval</param>
-        protected BaseRateLimit(int maxRequests, double interval)
+        /// <param name="logger">Logger</param>
+        protected BaseRateLimit(int maxRequests, double interval, ILogger logger)
         {
             MaxRequests = maxRequests;
             ResetInterval = interval;
+            Logger = logger;
             
-            _timer = new Timer(interval);
+            _timer = new Timer(interval * 1000);
             _timer.Elapsed += ResetRateLimit;
             _timer.Start();
             LastReset = TimeHelpers.TimeSinceEpoch();
@@ -51,6 +59,7 @@ namespace Oxide.Ext.Discord.RateLimits
         
         private void ResetRateLimit(object sender, ElapsedEventArgs e)
         {
+            OnRateLimitReset();
             Interlocked.Exchange(ref NumRequests, 0);
             Interlocked.Exchange(ref LastReset, TimeHelpers.TimeSinceEpoch());
         }
@@ -58,11 +67,16 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// Called when an API request is fired
         /// </summary>
-        public void FiredRequest()
+        protected void FiredRequestInternal()
         {
             Interlocked.Add(ref NumRequests, 1);
         }
-        
+
+        /// <summary>
+        /// Called when the rate limit is reset
+        /// </summary>
+        protected abstract void OnRateLimitReset();
+
         /// <summary>
         /// Returns true if we have reached the global rate limit 
         /// </summary>

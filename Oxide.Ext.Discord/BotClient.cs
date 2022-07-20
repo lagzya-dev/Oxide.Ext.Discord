@@ -327,6 +327,9 @@ namespace Oxide.Ext.Discord
             {
                 Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ready);
             }
+            
+            _readyData = ready;
+            _readyData.Guilds = Servers;
 
             if (Settings.Intents != WebSocket.Intents)
             {
@@ -344,43 +347,19 @@ namespace Oxide.Ext.Discord
             return Clients.Count != 0 ? Clients[0] : null;
         }
 
-        #region Websocket Commands
         /// <summary>
-        /// Used to request guild members from discord for a specific guild
+        /// Sends a websocket command
         /// </summary>
-        /// <param name="request">Request for guild members</param>
-        public void RequestGuildMembers(GuildMembersRequestCommand request)
+        /// <param name="client">Client sending the command</param>
+        /// <param name="opCode"><see cref="GatewayCommandCode"/> OP Code for the command</param>
+        /// <param name="data">Command Payload</param>
+        public void SendWebSocketCommand(DiscordClient client, GatewayCommandCode opCode, object data)
         {
             if (Initialized)
             {
-                WebSocket.Send(GatewayCommandCode.RequestGuildMembers, request);
+                WebSocket.Send(client, opCode, data);
             }
         }
-
-        /// <summary>
-        /// Used to update the voice state for the bot
-        /// </summary>
-        /// <param name="voiceState"></param>
-        public void UpdateVoiceState(UpdateVoiceStatusCommand voiceState)
-        {
-            if (Initialized)
-            {
-                WebSocket.Send(GatewayCommandCode.VoiceStateUpdate, voiceState);
-            }
-        }
-
-        /// <summary>
-        /// Used to update the bots status in discord
-        /// </summary>
-        /// <param name="presenceUpdate"></param>
-        public void UpdateStatus(UpdatePresenceCommand presenceUpdate)
-        {
-            if (Initialized)
-            {
-                WebSocket.Send(GatewayCommandCode.PresenceUpdate, presenceUpdate);
-            }
-        }
-        #endregion
 
         #region Entity Helpers
         /// <summary>

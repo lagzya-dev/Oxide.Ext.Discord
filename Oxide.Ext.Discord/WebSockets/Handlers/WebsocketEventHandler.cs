@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         public Task SocketClosed(Snowflake websocketId, int code, string message)
         {
             //If the socket close came from the extension then this will be true
-            if (_webSocket.IsCurrentSocket(websocketId))
+            if (!_webSocket.IsCurrentSocket(websocketId))
             {
                 _logger.Verbose($"{nameof(WebsocketEventHandler)}.{nameof(SocketClosed)} Socket closed event for non matching socket. Code: {{0}}, reason: {{1}}", code, message);
                 return Task.CompletedTask;
@@ -244,7 +244,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 {
                     // Dispatch (dispatches an event)
                     case GatewayEventCode.Dispatch:
-                        HandleDispatch(payload);
+                        await HandleDispatch(payload);
                         break;
 
                     // Heartbeat
@@ -293,7 +293,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         #endregion
 
         #region Discord Events
-        private void HandleDispatch(EventPayload payload)
+        private async Task HandleDispatch(EventPayload payload)
         {
             _logger.Debug("Received OpCode: Dispatch, event: {0}", payload.EventName);
 
@@ -327,7 +327,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     break;
 
                 case DiscordDispatchCode.GuildCreated:
-                    HandleDispatchGuildCreate(payload);
+                    await HandleDispatchGuildCreate(payload);
                     break;
 
                 case DiscordDispatchCode.GuildUpdated:
@@ -563,9 +563,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _client.BotUser = ready.User;
             
             _logger.Info("Your bot was found in {0} Guilds!", ready.Guilds.Count);
-            if ((_client.Settings.Intents & GatewayIntents.GuildMessages) != 0 && !_client.Application.HasApplicationFlag(ApplicationFlags.GatewayMessageContentLimited))
+            if (_client.Settings.HasIntents(GatewayIntents.GuildMessages) && !_client.Application.HasApplicationFlag(ApplicationFlags.GatewayMessageContentLimited))
             {
-                _logger.Warning("You will need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications by August 31, 2022 or plugins using this intent will stop working", _client.BotUser.Username);
+                _logger.Error("You need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications or plugins using this intent will not function correctly", _client.BotUser.Username);
             }
             
             _client.OnClientReady(ready);
@@ -679,7 +679,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         // NOTE: Some elements of Guild object is only sent with GUILD_CREATE
         //https://discord.com/developers/docs/topics/gateway#guild-create
-        private void HandleDispatchGuildCreate(EventPayload payload)
+        private async Task HandleDispatchGuildCreate(EventPayload payload)
         {
             DiscordGuild guild = payload.EventData.ToObject<DiscordGuild>();
             _logger.Verbose($"{nameof(WebsocketEventHandler)}.{nameof(HandleDispatchGuildCreate)} Guild ID: {{0}} Name: {{1}}", guild.Id, guild.Name);
@@ -693,14 +693,10 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildCreated, existing);
             }
 
-            if (!existing.HasLoadedAllMembers && (_client.Settings.Intents & GatewayIntents.GuildMembers) != 0)
+            if (!existing.HasLoadedAllMembers && _client.Settings.HasIntents(GatewayIntents.GuildMembers))
             {
                 //Request all guild members so we can be sure we have them all.
-                _client.RequestGuildMembers(new GuildMembersRequestCommand
-                {
-                    Nonce = "DiscordExtension",
-                    GuildId = guild.Id,
-                });
+                await _webSocket.RequestAllGuildMembers(guild.Id);
                 _logger.Verbose($"{nameof(WebsocketEventHandler)}.{nameof(HandleDispatchGuildCreate)} Guild is now requesting all guild members.");
             }
         }

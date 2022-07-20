@@ -1,4 +1,5 @@
 using System;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.RateLimits
 {
@@ -12,7 +13,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// Constructor for RestRateLimit
         /// </summary>
-        public RestRateLimit() : base(110, 60)
+        public RestRateLimit(ILogger logger) : base(110, 60, logger)
         {
             
         }
@@ -27,6 +28,12 @@ namespace Oxide.Ext.Discord.RateLimits
             _retryAfter = retryAfter;
         }
 
+        ///<inheritdoc/>
+        protected override void OnRateLimitReset()
+        {
+            Logger.Debug($"{nameof(RestRateLimit)}.{nameof(OnRateLimitReset)} Num Requests: {{0}} Reached Rate Limit: {{1}}", NumRequests, HasReachedRateLimit);
+        }
+
         /// <summary>
         /// Returns how long until the current rate limit period will expire
         /// </summary>
@@ -34,6 +41,14 @@ namespace Oxide.Ext.Discord.RateLimits
         {
             DateTimeOffset nextReset = base.NextReset();
             return nextReset > _retryAfter ? nextReset : _retryAfter;
+        }
+        
+        /// <summary>
+        /// Called when an API request is fired
+        /// </summary>
+        public void FiredRequest()
+        {
+            FiredRequestInternal();
         }
     }
 }

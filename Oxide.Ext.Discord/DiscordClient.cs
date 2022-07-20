@@ -5,6 +5,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
@@ -101,16 +102,15 @@ namespace Oxide.Ext.Discord
                 Logger.Warning("Using Discord Test Version: {0}", DiscordExtension.FullExtensionVersion);
             }
 
-            if ((settings.Intents & GatewayIntents.GuildMessages) != 0 && (settings.Intents & GatewayIntents.MessageContent) == 0)
+            if (settings.HasIntents(GatewayIntents.GuildMessages) && !settings.HasIntents(GatewayIntents.MessageContent))
             {
                 settings.Intents |= GatewayIntents.MessageContent;
                 Logger.Warning("Plugin {0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContent", Plugin.Name);
             }
             
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.Name);
-
-            BotClient.AddDiscordClient(this);
             
+            BotClient.AddDiscordClient(this);
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordClientConnected, Plugin, this);
         }
 
@@ -161,6 +161,35 @@ namespace Oxide.Ext.Discord
             Bot?.Hooks.UnsubscribeHook(Plugin, hook);
         }
 
+        #region Websocket Commands
+        /// <summary>
+        /// Used to request guild members from discord for a specific guild
+        /// </summary>
+        /// <param name="request">Request for guild members</param>
+        public void RequestGuildMembers(GuildMembersRequestCommand request)
+        {
+            Bot?.SendWebSocketCommand(this, GatewayCommandCode.RequestGuildMembers, request);
+        }
+
+        /// <summary>
+        /// Used to update the voice state for the bot
+        /// </summary>
+        /// <param name="voiceState"></param>
+        public void UpdateVoiceState(UpdateVoiceStatusCommand voiceState)
+        {
+            Bot?.SendWebSocketCommand(this, GatewayCommandCode.VoiceStateUpdate, voiceState);
+        }
+
+        /// <summary>
+        /// Used to update the bots status in discord
+        /// </summary>
+        /// <param name="presenceUpdate"></param>
+        public void UpdateStatus(UpdatePresenceCommand presenceUpdate)
+        {
+            Bot?.SendWebSocketCommand(this, GatewayCommandCode.PresenceUpdate, presenceUpdate);
+        }
+        #endregion
+        
         #region Plugin Handling
         /// <summary>
         /// Sets the client field on the plugin.

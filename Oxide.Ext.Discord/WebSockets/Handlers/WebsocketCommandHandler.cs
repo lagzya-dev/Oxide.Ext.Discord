@@ -3,11 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.RateLimits;
-using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
 {
@@ -19,8 +17,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly BotClient _client;
         private readonly DiscordWebSocket _webSocket;
         private readonly ILogger _logger;
-        private readonly ConcurrentQueue<CommandPayload> _pendingCommands = new ConcurrentQueue<CommandPayload>();
-        private readonly WebsocketRateLimit _rateLimit = new WebsocketRateLimit();
+        private readonly ConcurrentQueue<WebSocketCommand> _pendingCommands = new ConcurrentQueue<WebSocketCommand>();
+        private readonly WebsocketRateLimit _rateLimit;
         private readonly AutoResetEvent _online = new AutoResetEvent(false);
         private readonly AutoResetEvent _commands = new AutoResetEvent(false);
         private readonly CancellationTokenSource _source;
@@ -39,6 +37,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _client = client;
             _webSocket = webSocket;
             _logger = logger;
+            _rateLimit = new WebsocketRateLimit(_logger);
             
             _source = new CancellationTokenSource();
             _token = _source.Token;
@@ -69,6 +68,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             while (_source != null && !_source.IsCancellationRequested)
             {
+                WebSocketCommand command = null;
                 try
                 {
                     _online.WaitOne();
@@ -85,17 +85,31 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                         continue;
                     }
 
-                    CommandPayload command = GetNextCommand();
+                    command = GetNextCommand();
                     if (command == null)
                     {
                         continue;
                     }
-                    
-                    _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(SendCommandsInternal)} Sending Command {{0}}", command.OpCode);
 
-                    _rateLimit.FiredRequest();
+                    //If the client has been disconnect don't run it's command
+                    if (command.Client.Bot == null)
+                    {
+                        RemoveCommand(command);
+                        continue;
+                    }
+
+                    if (!_rateLimit.CanFireRequest(command))
+                    {
+                        _logger.Warning($"{nameof(WebsocketCommandHandler)}.{nameof(SendCommandsInternal)} Skipping websocket command for plugin {{0}} Exceeded Rate Limit of {{1}} Requests in {{2}} Seconds! Report this error to the plugin author.", command.Client.PluginName, WebsocketRateLimit.MaxRequestPerPlugin, WebsocketRateLimit.RateLimitInterval);
+                        RemoveCommand(command);
+                        continue;
+                    }
                     
-                    if (await _webSocket.Send(command))
+                    _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(SendCommandsInternal)} {{0}} Sending Command {{1}}", command.Client.PluginName, command.Payload.OpCode);
+
+                    _rateLimit.FiredRequest(command);
+                    
+                    if (await _webSocket.SendAsync(command.Payload))
                     {
                         RemoveCommand(command);
                     }
@@ -103,6 +117,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 catch (Exception ex)
                 {
                     _logger.Exception("An error occured sending commands", ex);
+                    await Task.Delay(1000, _token);
+                    if (command != null)
+                    {
+                        RemoveCommand(command);
+                    }
                 }
                 finally
                 {
@@ -119,9 +138,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
 
-        private CommandPayload GetNextCommand()
+        private WebSocketCommand GetNextCommand()
         {
-            if (_isSocketReady && _pendingCommands.TryPeek(out CommandPayload command))
+            if (_isSocketReady && _pendingCommands.TryPeek(out WebSocketCommand command))
             {
                 return command;
             }
@@ -129,9 +148,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             return null;
         }
 
-        private void RemoveCommand(CommandPayload command)
+        private void RemoveCommand(WebSocketCommand command)
         {
-            _pendingCommands.TryDequeue(out CommandPayload _);
+            _pendingCommands.TryDequeue(out WebSocketCommand _);
             command.Dispose();
         }
 
@@ -141,9 +160,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// If the websocket is not connected it will be queued until it is back online
         /// </summary>
         /// <param name="command">Command to send over the websocket</param>
-        public void Enqueue(CommandPayload command)
+        public void Enqueue(WebSocketCommand command)
         {
-            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(Enqueue)} Queuing command {{0}}", command.OpCode);
+            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(Enqueue)} {{0}} Queuing command {{1}}", command.Client.PluginName, command.Payload.OpCode);
             _pendingCommands.Enqueue(command);
             _commands.Set();
         }
@@ -161,18 +180,22 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _online.Reset();
             while (!_pendingCommands.IsEmpty)
             {
-                _pendingCommands.TryDequeue(out CommandPayload _);
+                _pendingCommands.TryDequeue(out WebSocketCommand _);
             }
             _isSocketReady = false;
         }
 
         internal void OnSocketShutdown()
         {
-            _source.Cancel();
+            _source?.Cancel();
+            _online.Reset();
+            _commands.Reset();
             _thread?.Abort();
+            _online?.Dispose();
+            _commands?.Dispose();
         }
 
-        internal IReadOnlyCollection<CommandPayload> GetPendingCommands()
+        internal IReadOnlyCollection<WebSocketCommand> GetPendingCommands()
         {
             return _pendingCommands;
         }
