@@ -46,11 +46,11 @@ namespace Oxide.Ext.Discord.WebSockets
         internal GatewayIntents Intents { get; private set; }
 
         private readonly BotClient _client;
-        internal readonly WebsocketHandler Handler;
-        private readonly WebsocketEventHandler _listener;
-        internal readonly WebsocketCommandHandler Commands;
+        internal readonly WebSocketHandler Handler;
+        private readonly WebSocketEventHandler _listener;
+        internal readonly WebSocketCommandHandler Commands;
         private readonly DiscordHeartbeatHandler _heartbeat;
-        private readonly WebsocketReconnectHandler _reconnect;
+        private readonly WebSocketReconnectHandler _reconnect;
         private readonly ILogger _logger;
 
         private bool _isShutdown;
@@ -65,11 +65,11 @@ namespace Oxide.Ext.Discord.WebSockets
             _client = client;
             _logger = logger;
 
-            _reconnect = new WebsocketReconnectHandler(client, this, logger);
-            Commands = new WebsocketCommandHandler(client, this, logger);
+            _reconnect = new WebSocketReconnectHandler(client, this, logger);
+            Commands = new WebSocketCommandHandler(client, this, logger);
             _heartbeat = new DiscordHeartbeatHandler(client, this, logger);
-            _listener = new WebsocketEventHandler(client, this, logger);
-            Handler = new WebsocketHandler(_listener, logger);
+            _listener = new WebSocketEventHandler(client, this, logger);
+            Handler = new WebSocketHandler(_listener, logger);
         }
 
         /// <summary>

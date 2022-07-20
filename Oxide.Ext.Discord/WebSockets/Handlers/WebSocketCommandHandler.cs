@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
     /// <summary>
     /// Handles command queueing when the websocket is down
     /// </summary>
-    public class WebsocketCommandHandler
+    public class WebSocketCommandHandler
     {
         private readonly BotClient _client;
         private readonly DiscordWebSocket _webSocket;
@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="client">Bot Client for socket commands</param>
         /// <param name="webSocket">Websocket to handle commands for</param>
         /// <param name="logger">Logger for this handler</param>
-        public WebsocketCommandHandler(BotClient client, DiscordWebSocket webSocket, ILogger logger)
+        public WebSocketCommandHandler(BotClient client, DiscordWebSocket webSocket, ILogger logger)
         {
             _client = client;
             _webSocket = webSocket;
@@ -60,7 +60,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             catch (OperationCanceledException) { }
             catch (Exception ex)
             {
-                _logger.Exception($"Unhandled exception in {nameof(WebsocketCommandHandler)}.{nameof(RunInternal)}", ex);
+                _logger.Exception($"Unhandled exception in {nameof(WebSocketCommandHandler)}.{nameof(RunInternal)}", ex);
             }
         }
 
@@ -100,12 +100,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
                     if (!_rateLimit.CanFireRequest(command))
                     {
-                        _logger.Warning($"{nameof(WebsocketCommandHandler)}.{nameof(SendCommandsInternal)} Skipping websocket command for plugin {{0}} Exceeded Rate Limit of {{1}} Requests in {{2}} Seconds! Report this error to the plugin author.", command.Client.PluginName, WebsocketRateLimit.MaxRequestPerPlugin, WebsocketRateLimit.RateLimitInterval);
+                        _logger.Warning($"{nameof(WebSocketCommandHandler)}.{nameof(SendCommandsInternal)} Skipping websocket command for plugin {{0}} Exceeded Rate Limit of {{1}} Requests in {{2}} Seconds! Report this error to the plugin author.", command.Client.PluginName, WebsocketRateLimit.MaxRequestPerPlugin, WebsocketRateLimit.RateLimitInterval);
                         RemoveCommand(command);
                         continue;
                     }
                     
-                    _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(SendCommandsInternal)} {{0}} Sending Command {{1}}", command.Client.PluginName, command.Payload.OpCode);
+                    _logger.Debug($"{nameof(WebSocketCommandHandler)}.{nameof(SendCommandsInternal)} {{0}} Sending Command {{1}}", command.Client.PluginName, command.Payload.OpCode);
 
                     _rateLimit.FiredRequest(command);
                     
@@ -162,21 +162,21 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="command">Command to send over the websocket</param>
         public void Enqueue(WebSocketCommand command)
         {
-            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(Enqueue)} {{0}} Queuing command {{1}}", command.Client.PluginName, command.Payload.OpCode);
+            _logger.Debug($"{nameof(WebSocketCommandHandler)}.{nameof(Enqueue)} {{0}} Queuing command {{1}}", command.Client.PluginName, command.Payload.OpCode);
             _pendingCommands.Enqueue(command);
             _commands.Set();
         }
         
         internal void OnWebSocketReady()
         {
-            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(OnWebSocketReady)} Socket Connected. Sending queued commands.");
+            _logger.Debug($"{nameof(WebSocketCommandHandler)}.{nameof(OnWebSocketReady)} Socket Connected. Sending queued commands.");
             _isSocketReady = true;
             _online.Set();
         }
 
         internal void OnSocketDisconnected()
         {
-            _logger.Debug($"{nameof(WebsocketCommandHandler)}.{nameof(OnSocketDisconnected)} Socket Disconnected. Queuing Commands.");
+            _logger.Debug($"{nameof(WebSocketCommandHandler)}.{nameof(OnSocketDisconnected)} Socket Disconnected. Queuing Commands.");
             _online.Reset();
             while (!_pendingCommands.IsEmpty)
             {
