@@ -585,7 +585,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             DiscordChannel channel = payload.EventData.ToObject<DiscordChannel>();
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchChannelCreate)}: ID: {{0}} Type: {{1}}. Guild ID: {{2}}", channel.Id, channel.Type, channel.GuildId);
             
-            if (channel.Type == ChannelType.Dm || channel.Type == ChannelType.GroupDm)
+            if (channel.IsDmChannel())
             {
                 _client.AddDirectChannel(channel);
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordDirectChannelCreated, channel);
@@ -607,7 +607,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             DiscordChannel update = payload.EventData.ToObject<DiscordChannel>();
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchChannelUpdate)} ID: {{0}} Type: {{1}} Guild ID: {{2}}", update.Id, update.Type, update.GuildId);
 
-            if (update.Type == ChannelType.Dm || update.Type == ChannelType.GroupDm)
+            if (update.IsDmChannel())
             {
                 DiscordChannel channel = _client.GetChannel(update.Id, null);
                 if (channel == null)
@@ -647,7 +647,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             DiscordChannel channel = payload.EventData.ToObject<DiscordChannel>();
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchChannelDelete)} ID: {{0}} Type: {{1}} Guild ID: {{2}}", channel.Id, channel.Type, channel.GuildId);
             DiscordGuild guild = _client.GetGuild(channel.GuildId);
-            if (channel.Type == ChannelType.Dm || channel.Type == ChannelType.GroupDm)
+            if (channel.IsDmChannel())
             {
                 _client.RemoveDirectMessageChannel(channel.Id);
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordDirectChannelDeleted, channel);

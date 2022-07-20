@@ -3267,7 +3267,7 @@
             <param name="callback">Callback with the created command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.BulkOverwriteGlobalCommands(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.BulkOverwriteGlobalCommands(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Takes a list of application commands, overwriting existing commands that are registered globally for this application. Updates will be available in all guilds after 1 hour.
             See <a href="https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands">Bulk Overwrite Global Application Commands</a>
@@ -4033,7 +4033,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.GuildId">
             <summary>
-            Guild which this rule belongs to
+            ID of the Guild which this rule belongs to
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Name">
@@ -4624,7 +4624,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.MessageCount">
             <summary>
-            An approximate count of messages in a thread, stops counting at 50
+            umber of messages (not including the initial messages or deleted messages) in a thread (if the thread was created before July 1, 2022, it stops counting at 50)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.MemberCount">
@@ -4657,6 +4657,11 @@
             Flags for this channel
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.TotalMessageSent">
+            <summary>
+            Number of messages ever sent in a thread, it's similar to message_count on message creation, but will not decrement the number when a message is deleted
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ThreadMembers">
             <summary>
             List of thread members if channel is thread; Null Otherwise.
@@ -4671,6 +4676,24 @@
             <summary>
             Returns the Icon URL for the given channel
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.IsGuildChannel">
+            <summary>
+            Returns if the channel is a guild channel
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.IsDmChannel">
+            <summary>
+            Returns if a channel is a DM channel
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.IsThreadChannel">
+            <summary>
+            Returns if a channel is a thread channel
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.ChannelCreate,System.Action{Oxide.Ext.Discord.Entities.Channels.DiscordChannel},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
@@ -8319,11 +8342,6 @@
             Guild has access to set a guild banner image
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Commerce">
-            <summary>
-            Guild has access to use commerce features (i.e. create store channels)
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Community">
             <summary>
             Guild can enable welcome screen and discovery, and receives community updates
@@ -9716,6 +9734,57 @@
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType.Message">
             <summary>
             A UI-based command that shows up when you right click or tap on a messages
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-guild-application-commands-bulk-application-command-json-params">Bulk Overwrite Guild Application Commands</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.Id">
+            <summary>
+            ID of command, if known
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.Name">
+            <summary>
+            1-32 lowercase character name matching ^[\w-]{1,32}$
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.NameLocalizations">
+            <summary>
+            Localization dictionary for the name field. Values follow the same restrictions as name
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.Description">
+            <summary>
+            Description of the command (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.DescriptionLocalizations">
+            <summary>
+            Localization dictionary for the description field. Values follow the same restrictions as description
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.Options">
+            <summary>
+            The parameters for the command
+            See <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.DefaultMemberPermissions">
+            <summary>
+            Set of permissions represented as a bit set
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.DmPermission">
+            <summary>
+            Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.DefaultPermissions">
+            <summary>
+            Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate">
@@ -11591,6 +11660,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.StickerItems">
             <summary>
             Sent if the message contains stickers
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Position">
+            <summary>
+            A generally increasing integer (there may be gaps or duplicates) that represents the approximate position of the message in a thread, it can be used to estimate the relative position of the messsage in a thread in company with total_message_sent on parent thread
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.FileAttachments">
@@ -13723,9 +13797,74 @@
             Discord Extension doesn't currently support this connection type
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.BattleNet">
+            <summary>
+            Connection type is Battle.net
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.EpicGames">
+            <summary>
+            Connection type is Epic Games
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Facebook">
+            <summary>
+            Connection type is Facebook
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.GitHub">
+            <summary>
+            Connection type is Youtube
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.LeagueOfLegends">
+            <summary>
+            Connection type is League of Legends
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.PlayStationNetwork">
+            <summary>
+            Connection type is PlayStation Network
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Reddit">
+            <summary>
+            Connection type is Reddit
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.SamsungGalaxy">
+            <summary>
+            Connection type is Samsung Galaxy
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Spotify">
+            <summary>
+            Connection type is Spotify
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Skype">
+            <summary>
+            Connection type is Skype
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Steam">
+            <summary>
+            Connection type is Steam
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Twitch">
             <summary>
             Connection type is Twitch
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Twitter">
+            <summary>
+            Connection type is Twitter
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Xbox">
+            <summary>
+            Connection type is Xbox
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Youtube">
@@ -17854,12 +17993,12 @@
             If the previous heartbeat wasn't acknowledged then we will attempt to reconnect
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketCommandHandler">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketCommandHandler">
             <summary>
             Handles command queueing when the websocket is down
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketCommandHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketCommandHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
@@ -17867,7 +18006,7 @@
             <param name="webSocket">Websocket to handle commands for</param>
             <param name="logger">Logger for this handler</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand)">
             <summary>
             Enqueue a payload to be sent over the websocket
             If the websocket is connected it will be sent immediately
@@ -17875,12 +18014,12 @@
             </summary>
             <param name="command">Command to send over the websocket</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler">
             <summary>
             Handles websocket events
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Creates a new socket listener
             </summary>
@@ -17888,12 +18027,12 @@
             <param name="socket">Socket this listener is for</param>
             <param name="logger">Logger for the client</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketOpened(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketOpened(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Called when a socket is open
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Int32,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Int32,System.String)">
             <summary>
             Called when a socket is closed
             </summary>
@@ -17901,7 +18040,7 @@
             <param name="code">Close code for the web socket</param>
             <param name="message">Close message from the web socket</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.HandleDiscordClosedSocket(System.Int32,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.HandleDiscordClosedSocket(System.Int32,System.String)">
             <summary>
             Parse out the closing reason if discord closed the socket
             </summary>
@@ -17909,21 +18048,21 @@
             <param name="reason">Socket close reason</param>
             <returns>True if discord closed the socket with one of it's close codes</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketErrored(Oxide.Ext.Discord.Entities.Snowflake,System.Exception)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketErrored(Oxide.Ext.Discord.Entities.Snowflake,System.Exception)">
             <summary>
             Called when an error occurs on a socket
             </summary>
             <param name="webSocketId">ID of the web socket</param>
             <param name="ex">Exception throw</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
             <summary>
             Called when a socket receives a message
             </summary>
             <param name="webSocketId">ID of the web socket</param>
             <param name="message">Message received from the web socket</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.EventPayload)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.EventPayload)">
             <summary>
              * From Discord API docs:
              * The user object within this event can be partial, the only field which must be sent is the id field, everything else is optional.
@@ -17933,32 +18072,32 @@
             <param name="payload"></param>
             https://discord.com/developers/docs/topics/gateway#presence-update
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler">
             <summary>
             Handles the web socket connection and events
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.#ctor(Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.#ctor(Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
             <param name="handler">Handles for web socket events</param>
             <param name="logger"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.Connect(System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.Connect(System.String)">
             <summary>
             Connects to the websocket at the given URL
             </summary>
             <param name="url"></param>
             <exception cref="T:Oxide.Ext.Discord.Exceptions.Entities.Websocket.WebsocketException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.SendAsync(System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.SendAsync(System.String)">
             <summary>
             Sends the string message over the web socket
             </summary>
             <param name="message">Message to be sent</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.Disconnect(System.Int32,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.Disconnect(System.Int32,System.String)">
             <summary>
             Disconnects from the websocket with the given code and reason
             </summary>
@@ -17966,7 +18105,7 @@
             <param name="reason">Reason for the close</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.Disconnect(System.Net.WebSockets.WebSocketCloseStatus,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.Disconnect(System.Net.WebSockets.WebSocketCloseStatus,System.String)">
             <summary>
             Disconnects from the websocket with the given code and reason
             </summary>
@@ -17974,42 +18113,42 @@
             <param name="reason">Reason for the close</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsConnected">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsConnected">
             <summary>
             Returns if the websocket is in the open state
             </summary>
             <returns>Returns if the websocket is in open state</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsConnecting">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsConnecting">
             <summary>
             Returns if the websocket is in the connecting state
             </summary>
             <returns>Returns if the websocket is in connecting state</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsPendingReconnect">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsPendingReconnect">
             <summary>
             Returns if the socket is waiting to reconnect
             </summary>
             <returns>Returns if the socket is waiting to reconnect</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsDisconnecting">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsDisconnecting">
             <summary>
             Returns if the websocket is null or is currently closing / closed
             </summary>
             <returns>Returns if the websocket is null or is currently closing / closed</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketHandler.IsDisconnected">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsDisconnected">
             <summary>
             Returns if the websocket is null or is currently closing / closed
             </summary>
             <returns>Returns if the websocket is null or is currently closing / closed</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketReconnectHandler">
             <summary>
             Handles reconnecting to the web socket
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketReconnectHandler.#ctor(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.WebSockets.DiscordWebSocket,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
@@ -18017,22 +18156,22 @@
             <param name="webSocket"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.StartReconnect">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketReconnectHandler.StartReconnect">
             <summary>
             Starts the reconnect process
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.CancelReconnect">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketReconnectHandler.CancelReconnect">
             <summary>
             Cancels the reconnect timer
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.OnWebsocketReady">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketReconnectHandler.OnWebsocketReady">
             <summary>
             Called when the websocket received a ready event from discord
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebsocketReconnectHandler.OnSocketShutdown">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketReconnectHandler.OnSocketShutdown">
             <summary>
             Called when the bot is shutting down
             </summary>

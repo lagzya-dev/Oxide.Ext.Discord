@@ -74,19 +74,17 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
             }
         }
         
-        internal static void ThrowIfNotThread(ChannelType type, string message)
+        internal static void ThrowIfNotThread(DiscordChannel channel, string message)
         {
-            if (type != ChannelType.GuildPublicThread 
-                && type != ChannelType.GuildPrivateThread
-                && type != ChannelType.GuildNewsThread)
+            if (channel == null || !channel.IsThreadChannel())
             {
                 throw new InvalidChannelException(message);
             }
         }
         
-        internal static void ThrowIfNotGuildChannel(ChannelType type, string message)
+        internal static void ThrowIfNotGuildChannel(DiscordChannel channel, string message)
         {
-            if (type == ChannelType.Dm || type == ChannelType.GroupDm)
+            if (channel == null || !channel.IsDmChannel())
             {
                 throw new InvalidChannelException(message);
             }

@@ -214,7 +214,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                     return _threadMembers;
                 }
 
-                InvalidChannelException.ThrowIfNotThread(Type, "Cannot get ThreadMembers for a non thread channel");
+                InvalidChannelException.ThrowIfNotThread(this, "Cannot get ThreadMembers for a non thread channel");
 
                 return _threadMembers = new Hash<Snowflake, ThreadMember>();
             }
@@ -229,6 +229,42 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Returns the Icon URL for the given channel
         /// </summary>
         public string IconUrl => !string.IsNullOrEmpty(Icon) ? DiscordCdn.GetChannelIcon(Id, Icon) : null;
+
+        /// <summary>
+        /// Returns if the channel is a guild channel
+        /// </summary>
+        /// <returns></returns>
+        public bool IsGuildChannel()
+        {
+            return Type == ChannelType.GuildCategory
+                   || Type == ChannelType.GuildDirectory
+                   || Type == ChannelType.GuildForum
+                   || Type == ChannelType.GuildNews
+                   || Type == ChannelType.GuildText
+                   || Type == ChannelType.GuildVoice
+                   || Type == ChannelType.GuildNewsThread
+                   || Type == ChannelType.GuildPrivateThread
+                   || Type == ChannelType.GuildPublicThread
+                   || Type == ChannelType.GuildStageVoice;
+        }
+
+        /// <summary>
+        /// Returns if a channel is a DM channel
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDmChannel()
+        {
+            return Type == ChannelType.Dm || Type == ChannelType.GroupDm;
+        }
+
+        /// <summary>
+        /// Returns if a channel is a thread channel
+        /// </summary>
+        /// <returns></returns>
+        public bool IsThreadChannel()
+        {
+            return Type == ChannelType.GuildNewsThread || Type == ChannelType.GuildPrivateThread || Type == ChannelType.GuildPublicThread;
+        }
 
         /// <summary>
         /// Create a new channel object for the guild.
@@ -537,7 +573,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public void GetChannelInvites(DiscordClient client, Action<List<DiscordInvite>> callback = null, Action<RequestError> error = null)
         {
-            InvalidChannelException.ThrowIfNotGuildChannel(Type, "You can only get channel invites for guild channels");
+            InvalidChannelException.ThrowIfNotGuildChannel(this, "You can only get channel invites for guild channels");
             client.Bot.Rest.CreateRequest(client,$"channels/{Id}/invites", RequestMethod.GET, null, callback, error);
         }
 
