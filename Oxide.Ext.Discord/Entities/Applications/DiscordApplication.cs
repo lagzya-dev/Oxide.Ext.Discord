@@ -205,7 +205,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="commands">List of commands to overwrite</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void BulkOverwriteGlobalCommands(DiscordClient client, List<DiscordApplicationCommand> commands, Action<List<DiscordApplicationCommand>> callback = null, Action<RequestError> error = null)
+        public void BulkOverwriteGlobalCommands(DiscordClient client, List<CommandBulkOverwrite> commands, Action<List<DiscordApplicationCommand>> callback = null, Action<RequestError> error = null)
         {
             if (commands == null) throw new ArgumentNullException(nameof(commands));
             client.Bot.Rest.CreateRequest(client,$"applications/{Id}/commands", RequestMethod.PUT, commands, callback, error);

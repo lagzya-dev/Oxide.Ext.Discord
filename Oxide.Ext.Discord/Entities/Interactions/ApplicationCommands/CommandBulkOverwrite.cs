@@ -1,21 +1,24 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command-json-params">Application Command Create</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-guild-application-commands-bulk-application-command-json-params">Bulk Overwrite Guild Application Commands</a>
     /// </summary>
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class CommandCreate : IDiscordValidation
+    public class CommandBulkOverwrite
     {
         /// <summary>
-        /// 1-32 lowercase character name matching ^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$
+        /// ID of command, if known
+        /// </summary>
+        [JsonProperty("id")]
+        public Snowflake? Id { get; set; }
+        
+        /// <summary>
+        /// 1-32 lowercase character name matching ^[\w-]{1,32}$
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -44,14 +47,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("options")]
         public List<CommandOption> Options { get; set; }
-
+        
         /// <summary>
         /// Set of permissions represented as a bit set
         /// </summary>
         [JsonProperty("default_member_permissions")]
         [JsonConverter(typeof(PermissionFlagsStringConverter))]
         public PermissionFlags DefaultMemberPermissions { get; set; }
-
+        
         /// <summary>
         /// Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
         /// </summary>
@@ -63,34 +66,5 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("default_permission")]
         public bool? DefaultPermissions { get; set; }
-        
-        /// <summary>
-        /// The type of command, defaults Slash Command if not set
-        /// </summary>
-        [JsonProperty("type")]
-        public ApplicationCommandType? Type { get; set; }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public CommandCreate() { }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public CommandCreate(string name, string description, ApplicationCommandType type = ApplicationCommandType.ChatInput, List<CommandOption> options = null)
-        {
-            Name = name;
-            Description = description;
-            Type = type;
-            Options = options;
-        }
-        
-        /// <inheritdoc/>
-        public void Validate()
-        {
-            InvalidApplicationCommandException.ThrowIfInvalidName(Name, false);
-            InvalidApplicationCommandException.ThrowIfInvalidDescription(Description, false);
-        }
     }
 }
