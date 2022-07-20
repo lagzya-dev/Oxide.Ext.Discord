@@ -172,6 +172,12 @@ namespace Oxide.Ext.Discord
             WebSocket = new DiscordWebSocket(this, Logger);
             WebSocket.Connect();
         }
+        
+        internal void ResetRestApi()
+        {
+            Rest?.Shutdown();
+            Rest = new RestHandler(this, Logger);
+        }
 
         /// <summary>
         /// Called when bot client is no longer used by any client and can be shutdown.

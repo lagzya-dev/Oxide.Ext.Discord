@@ -5,7 +5,6 @@ using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Applications;
-using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest;
@@ -28,6 +27,7 @@ namespace Oxide.Ext.Discord.Plugins
         {
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
             AddCovalenceCommand(new[] { "de.rws" }, nameof(ResetWebSocketCommand), "de.rws");
+            AddCovalenceCommand(new[] { "de.rra" }, nameof(ResetWebSocketCommand), "de.rra");
             AddCovalenceCommand(new[] { "de.consolelog" }, nameof(ConsoleLogCommand), "de.consolelog");
             AddCovalenceCommand(new[] { "de.filelog" }, nameof(FileLogCommand), "de.filelog");
             AddCovalenceCommand(new[] { "de.debug" }, nameof(DiscordDebugCommand), "de.debug");
@@ -60,6 +60,17 @@ namespace Oxide.Ext.Discord.Plugins
             foreach (BotClient client in BotClient.ActiveBots.Values)
             {
                 client.ResetWebSocket();
+            }
+        }
+        
+        [HookMethod(nameof(ResetRestApiCommand))]
+        private void ResetRestApiCommand(IPlayer player, string cmd, string[] args)
+        {
+            Chat(player, LangKeys.ResetRestApi);
+            
+            foreach (BotClient client in BotClient.ActiveBots.Values)
+            {
+                client.ResetRestApi();
             }
         }
         
