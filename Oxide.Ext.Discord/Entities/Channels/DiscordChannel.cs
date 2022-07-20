@@ -153,7 +153,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public VideoQualityMode? VideoQualityMode { get; set; }
         
         /// <summary>
-        /// An approximate count of messages in a thread, stops counting at 50
+        /// umber of messages (not including the initial messages or deleted messages) in a thread (if the thread was created before July 1, 2022, it stops counting at 50)
         /// </summary>
         [JsonProperty("message_count")]
         public int? MessageCount { get; set; }
@@ -193,6 +193,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("flags")]
         public ChannelFlags? Flags { get; set; }
+        
+        /// <summary>
+        /// Number of messages ever sent in a thread, it's similar to message_count on message creation, but will not decrement the number when a message is deleted
+        /// </summary>
+        [JsonProperty("total_message_sent")]
+        public int? TotalMessageSent { get; set; }
 
         private Hash<Snowflake, ThreadMember> _threadMembers;
 

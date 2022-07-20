@@ -224,7 +224,13 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonConverter(typeof(HashListConverter<DiscordSticker>))]
         [JsonProperty("sticker_items")]
-        public Hash<Snowflake, DiscordSticker> StickerItems { get; set; }
+        public Hash<Snowflake, DiscordSticker> StickerItems { get; set; }       
+        
+        /// <summary>
+        /// A generally increasing integer (there may be gaps or duplicates) that represents the approximate position of the message in a thread, it can be used to estimate the relative position of the messsage in a thread in company with total_message_sent on parent thread
+        /// </summary>
+        [JsonProperty("position")]
+        public int? Position { get; set; }
         
         /// <summary>
         /// File Attachments to add to the message on edit

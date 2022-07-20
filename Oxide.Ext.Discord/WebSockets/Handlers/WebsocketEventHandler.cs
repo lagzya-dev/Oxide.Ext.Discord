@@ -1257,6 +1257,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             if (channel != null)
             {
                 channel.LastMessageId = message.Id;
+                if (channel.Type == ChannelType.GuildPublicThread || channel.Type == ChannelType.GuildPrivateThread)
+                {
+                    channel.MessageCount = channel.MessageCount++ ?? 1;
+                    channel.TotalMessageSent = channel.TotalMessageSent++ ?? 1;
+                }
             }
 
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchMessageCreate)}: Guild ID: {{0}} Channel ID: {{1}} Message ID: {{2}}", message.GuildId, message.ChannelId, message.Id);
@@ -1321,7 +1326,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             MessageDeletedEvent message = payload.EventData.ToObject<MessageDeletedEvent>();
             DiscordChannel channel = _client.GetChannel(message.ChannelId, message.GuildId);
-            
+
+            if (channel != null && (channel.Type == ChannelType.GuildPublicThread || channel.Type == ChannelType.GuildPrivateThread))
+            {
+                channel.MessageCount = channel.MessageCount-- ?? 0;
+            }
+
             if (message.GuildId.HasValue)
             {
                 DiscordGuild guild = _client.GetGuild(message.GuildId);
@@ -1340,6 +1350,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             MessageBulkDeletedEvent bulkDelete = payload.EventData.ToObject<MessageBulkDeletedEvent>();
             DiscordChannel channel = _client.GetChannel(bulkDelete.ChannelId, bulkDelete.GuildId);
+            
+            if (channel != null && (channel.Type == ChannelType.GuildPublicThread || channel.Type == ChannelType.GuildPrivateThread))
+            {
+                channel.MessageCount = channel.MessageCount - bulkDelete.Ids.Count ?? 0;
+            }
             
             if (bulkDelete.GuildId.HasValue)
             {
