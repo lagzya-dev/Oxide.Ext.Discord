@@ -118,11 +118,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 catch (Exception ex)
                 {
                     _logger.Exception("An error occured sending commands", ex);
-                    await Task.Delay(1000, _token);
                     if (command != null)
                     {
                         RemoveCommand(command);
                     }
+                    
+                    await Task.Delay(1000, _token);
                 }
                 finally
                 {
