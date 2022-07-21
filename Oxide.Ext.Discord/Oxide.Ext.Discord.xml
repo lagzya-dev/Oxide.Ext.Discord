@@ -15213,7 +15213,7 @@
             </summary>
             <param name="message">Error Message</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Websocket.WebsocketException">
+        <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Websocket.DiscordWebSocketException">
             <summary>
             Represents an exception that occured with the websocket
             </summary>
@@ -18089,7 +18089,7 @@
             Connects to the websocket at the given URL
             </summary>
             <param name="url"></param>
-            <exception cref="T:Oxide.Ext.Discord.Exceptions.Entities.Websocket.WebsocketException"></exception>
+            <exception cref="T:Oxide.Ext.Discord.Exceptions.Entities.Websocket.DiscordWebSocketException"></exception>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.SendAsync(System.String)">
             <summary>

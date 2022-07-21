@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Plugins
         {
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
             AddCovalenceCommand(new[] { "de.rws" }, nameof(ResetWebSocketCommand), "de.rws");
-            AddCovalenceCommand(new[] { "de.rra" }, nameof(ResetWebSocketCommand), "de.rra");
+            AddCovalenceCommand(new[] { "de.rra" }, nameof(ResetRestApiCommand), "de.rra");
             AddCovalenceCommand(new[] { "de.consolelog" }, nameof(ConsoleLogCommand), "de.consolelog");
             AddCovalenceCommand(new[] { "de.filelog" }, nameof(FileLogCommand), "de.filelog");
             AddCovalenceCommand(new[] { "de.debug" }, nameof(DiscordDebugCommand), "de.debug");

@@ -61,12 +61,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// Connects to the websocket at the given URL
         /// </summary>
         /// <param name="url"></param>
-        /// <exception cref="WebsocketException"></exception>
+        /// <exception cref="DiscordWebSocketException"></exception>
         public void Connect(string url)
         {
             if (IsConnected() || IsConnecting())
             {
-                throw new WebsocketException("Socket is already running. Please disconnect before attempting to connect.");
+                throw new DiscordWebSocketException("Socket is already running. Please disconnect before attempting to connect.");
             }
 
             _thread?.Abort();
@@ -107,23 +107,27 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     SocketState = SocketState.Disconnecting;
                 }
                 _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Connect)} Websocket Completed");
-                _socket.Dispose();
-                _socket = null;
+                DisposeSocket();
             }
             catch (TaskCanceledException) { }
             catch (OperationCanceledException) { }
-            catch (WebsocketException ex)
+            catch (WebSocketException ex)
             {
-                await _handler.SocketErrored(id, ex);
+                DisposeSocket();
+                if (ex.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
+                {
+                    await _handler.SocketClosed(id, 1000, string.Empty);
+                }
+                else
+                {
+                    await _handler.SocketErrored(id, ex);
+                }
             }
             catch (Exception ex)
             {
+                DisposeSocket();
                 await _handler.SocketErrored(id, ex);
                 _logger.Exception("A Unhandled Websocket Error Occured", ex);
-            }
-            finally
-            {
-                SocketState = SocketState.Disconnected;
             }
         }
 
@@ -177,8 +181,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     int closeCode = result.CloseStatus.HasValue ? (int)result.CloseStatus : 1000;
                     SocketState = SocketState.Disconnecting;
                     _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Close Code: {{0}} Message: {{1}}", closeCode, message);
+                    await _socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, string.Empty, _token);
                     await _handler.SocketClosed(id, closeCode, message);
-                    await _socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", _token);
                     SocketState = SocketState.Disconnected;
                 }
 
@@ -189,6 +193,21 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             await _handler.SocketMessage(id, message);
         }
 
+        /// <summary>
+        /// Sends the string message over the web socket
+        /// </summary>
+        /// <param name="message">Message to be sent</param>
+        public async Task<bool> SendAsync(string message)
+        {
+            if (_socket == null || _socket.State != WebSocketState.Open)
+            {
+                return false;
+            }
+            
+            _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(SendAsync)} Sending Message: {{0}}", message);
+            return await SendInternalAsync(message);
+        }
+        
         private async Task<bool> SendInternalAsync(string message)
         {
             int charIndex = 0;
@@ -207,21 +226,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
 
             return false;
-        }
-        
-        /// <summary>
-        /// Sends the string message over the web socket
-        /// </summary>
-        /// <param name="message">Message to be sent</param>
-        public async Task<bool> SendAsync(string message)
-        {
-            if (_socket == null || _socket.State != WebSocketState.Open)
-            {
-                return false;
-            }
-            
-            _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(SendAsync)} Sending Message: {{0}}", message);
-            return await SendInternalAsync(message);
         }
 
         /// <summary>
@@ -251,18 +255,27 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     SocketState = SocketState.Disconnecting;
                     await _socket.CloseAsync(status, reason, _token);
                     await _handler.SocketClosed(id, (int)status, reason);
-                    SocketState = SocketState.Disconnected;
-                    _socket = null;
+                    DisposeSocket();
                 }
             }
             catch (Exception ex)
             {
                 _logger.Exception("An error occured closing the socket", ex);
             }
-            finally
+        }
+
+        private void DisposeSocket()
+        {
+            SocketState = SocketState.Disconnected;
+            if (_source != null && _source.Token.CanBeCanceled)
             {
                 _source.Cancel();
+                _source?.Dispose();
+                _source = null;
             }
+            
+            _socket?.Dispose();
+            _socket = null;
         }
 
         /// <summary>

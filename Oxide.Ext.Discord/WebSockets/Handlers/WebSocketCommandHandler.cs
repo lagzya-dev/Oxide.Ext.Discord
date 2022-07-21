@@ -25,6 +25,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly CancellationToken _token;
         private bool _isSocketReady;
         private readonly Thread _thread;
+        private bool _isDisposed;
 
         /// <summary>
         /// Constructor
@@ -176,6 +177,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         internal void OnSocketDisconnected()
         {
+            if (_isDisposed)
+            {
+                return;
+            }
+            
             _logger.Debug($"{nameof(WebSocketCommandHandler)}.{nameof(OnSocketDisconnected)} Socket Disconnected. Queuing Commands.");
             _online.Reset();
             while (!_pendingCommands.IsEmpty)
@@ -187,6 +193,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         internal void OnSocketShutdown()
         {
+            if (_isDisposed)
+            {
+                return;
+            }
+
+            _isDisposed = true;
             _source?.Cancel();
             _online.Reset();
             _commands.Reset();
