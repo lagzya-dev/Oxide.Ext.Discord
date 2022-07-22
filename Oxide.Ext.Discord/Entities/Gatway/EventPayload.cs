@@ -3,6 +3,8 @@ using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.WebSockets;
+using Oxide.Ext.Discord.WebSockets.Handlers;
+
 namespace Oxide.Ext.Discord.Entities.Gatway
 {
     /// <summary>

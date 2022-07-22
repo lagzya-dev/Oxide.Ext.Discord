@@ -21,6 +21,7 @@ using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
+using UserData = Oxide.Ext.Discord.Data.Users.UserData;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
@@ -256,7 +257,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             BaseApiCompletedCallback completedCallback = null;
             DiscordChannel channel = client.Bot.DirectMessagesByChannelId[channelId];
-            UserExtData userData = channel?.UserData;
+            UserData userData = channel?.UserData;
             if (userData != null)
             {
                 if (channel.UserData.IsDmBlocked())

@@ -19,6 +19,7 @@ using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
+using UserData = Oxide.Ext.Discord.Data.Users.UserData;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -223,7 +224,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
             }
         }
         
-        internal UserExtData UserData { get; set; }
+        internal UserData UserData { get; set; }
 
         /// <summary>
         /// Returns a string to mention this channel in a message

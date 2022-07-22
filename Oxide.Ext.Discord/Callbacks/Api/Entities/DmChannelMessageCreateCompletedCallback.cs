@@ -1,4 +1,5 @@
 using Oxide.Ext.Discord.Data;
+using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Users;
@@ -32,7 +33,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api.Entities
                 return;
             }
 
-            UserExtData userData = _channel.UserData;
+            UserData userData = _channel.UserData;
             if (userData == null)
             {
                 return;

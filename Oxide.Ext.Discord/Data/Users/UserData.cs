@@ -6,10 +6,10 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Plugins;
 using ProtoBuf;
 
-namespace Oxide.Ext.Discord.Data
+namespace Oxide.Ext.Discord.Data.Users
 {
     [ProtoContract]
-    internal class UserExtData
+    internal class UserData
     {
         [ProtoMember(1)]
         public Snowflake UserId { get; set; }
@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Data
         [ProtoMember(3)]
         public DateTime? DmBlockedDate { get; set; }
 
-        public UserExtData(Snowflake userId)
+        public UserData(Snowflake userId)
         {
             UserId = userId;
         }
@@ -41,7 +41,7 @@ namespace Oxide.Ext.Discord.Data
         public void SetDmBlock()
         {
             DmBlockedDate = DateTime.UtcNow;
-            DataHandler.OnDataChanged();
+            DiscordUsersData.Instance.OnDataChanged();
         }
 
         public void ClearBlockIfExpired()
@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Data
             if (DmBlockedDate.HasValue && DmBlockedDate.Value < DateTime.UtcNow)
             {
                 DmBlockedDate = null;
-                DataHandler.OnDataChanged();
+                DiscordUsersData.Instance.OnDataChanged();
             }
         }
 
