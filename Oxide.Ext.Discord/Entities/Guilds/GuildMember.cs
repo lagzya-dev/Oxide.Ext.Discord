@@ -131,9 +131,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         #region Entity Update
         internal void Update(GuildMember update)
         {
-            if (update.User != null)
-                User.Update(update.User);
-
             if (update.Pending != null)
                 Pending = update.Pending;
         }

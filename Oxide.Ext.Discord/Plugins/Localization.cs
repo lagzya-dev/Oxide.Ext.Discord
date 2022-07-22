@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Plugins
                 [LangKeys.Chat] = "[Discord Extension] {0}",
                 [LangKeys.Version] = "Server is running Discord Extension v{0}",
                 [LangKeys.ResetWebSocket] = "All websockets have been reset",
-                [LangKeys.ResetRestApi] = "All rests apis have been reset",
+                [LangKeys.ResetRestApi] = "All REST API's have been reset",
                 [LangKeys.ShowLog] = "{0} log is currently set to {1}",
                 [LangKeys.SetLog] = "{0} log has been set to {1}",
                 [LangKeys.InvalidLogEnum] = "'{0}' is not a valid DiscordLogLevel enum. Valid values are Off, Error, Warning, Info, Debug, Verbose"

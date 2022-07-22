@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
+using Oxide.Ext.Discord.Callbacks.Api.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Pooling;
 
@@ -28,20 +29,21 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <param name="data">Data being passed into the request. Null if no data is passed</param>
         /// <param name="onSuccess">Callback when the web request finishes successfully</param>
         /// <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
+        /// <param name="callback">Completed callback for the request</param>
         /// <returns>A <see cref="Request{T}"/></returns>
-        public static Request<T> CreateRequest(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RequestError> onError)
+        public static Request<T> CreateRequest(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RequestError> onError, BaseApiCompletedCallback callback)
         {
             Request<T> request = DiscordPool.Get<Request<T>>();
-            request.Init(client, httpClient, method, route, data, onSuccess, onError);
+            request.Init(client, httpClient, method, route, data, onSuccess, onError, callback);
             return request;
         }
         
         /// <summary>
         /// Initializes the Request
         /// </summary>
-        private void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RequestError> onError)
+        private void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RequestError> onError, BaseApiCompletedCallback callback)
         {
-            base.Init(client, httpClient, method, route, data, onError);
+            base.Init(client, httpClient, method, route, data, onError, callback);
             OnSuccess = onSuccess;
         }
 

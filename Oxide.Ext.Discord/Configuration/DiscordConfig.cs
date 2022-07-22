@@ -24,6 +24,12 @@ namespace Oxide.Ext.Discord.Configuration
         public DiscordLoggingConfig Logging { get; set; }
         
         /// <summary>
+        /// Discord Logging Options
+        /// </summary>
+        [JsonProperty("Users")]
+        public DiscordUsersConfig Users { get; set; }
+        
+        /// <summary>
         /// Constructor for discord config
         /// </summary>
         /// <param name="filename">Filename to use</param>
@@ -62,6 +68,10 @@ namespace Oxide.Ext.Discord.Configuration
                 HideDiscordErrorCodes = Logging?.HideDiscordErrorCodes ?? new HashSet<int>(),
                 ConsoleLogLevel = Logging?.ConsoleLogLevel ?? DiscordLogLevel.Info,
                 FileLogLevel = Logging?.FileLogLevel ?? DiscordLogLevel.Off
+            };
+            Users = new DiscordUsersConfig
+            {
+                DmBlockedDuration = Users?.DmBlockedDuration ?? 24f
             };
         }
     }

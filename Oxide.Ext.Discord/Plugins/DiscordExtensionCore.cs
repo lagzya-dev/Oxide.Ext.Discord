@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Data;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
@@ -38,6 +39,12 @@ namespace Oxide.Ext.Discord.Plugins
             }
         }
 
+        [HookMethod("OnServerSave")]
+        private void OnServerSave()
+        {
+            DataHandler.Save(false);
+        }
+        
         [HookMethod("OnServerShutdown")]
         private void OnServerShutdown()
         {

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
+using Oxide.Ext.Discord.Callbacks.Api.Entities;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
@@ -48,6 +49,8 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Callback to call if the request errored with the last error message
         /// </summary>
         internal Action<RequestError> OnError;
+
+        internal BaseApiCompletedCallback CompletedCallback;
         
         /// <summary>
         /// Discord Client making the request
@@ -67,7 +70,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Initializes the request
         /// </summary>
-        protected void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<RequestError> onError)
+        protected void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<RequestError> onError, BaseApiCompletedCallback completedCallback)
         {
             Id = SnowflakeIdGenerator.Generate();
             Client = client;
@@ -76,6 +79,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Route = route;
             Data = data;
             OnError = onError;
+            CompletedCallback = completedCallback;
             Source = new CancellationTokenSource();
             _logger = client.Logger;
             _logger.Debug($"{nameof(BaseRequest)}.{nameof(Init)} Request Created Plugin: {{0}} Request ID: {{1}} Method: {{2}} Route: {{3}}", client.PluginName, Id, Method, route);
@@ -93,6 +97,8 @@ namespace Oxide.Ext.Discord.Rest.Requests
         internal void OnRequestCompleted(RequestHandler handler, RequestResponse response)
         {
             Status = RequestStatus.Completed;
+            
+            CompletedCallback?.Run(response);
 
             if (response.Status == RequestCompletedStatus.Success)
             {

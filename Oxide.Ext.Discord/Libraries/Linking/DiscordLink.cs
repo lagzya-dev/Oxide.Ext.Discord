@@ -4,6 +4,7 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Guilds;
@@ -223,11 +224,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 return null;
             }
 
-            return new DiscordUser
-            {
-                Id = discordId.Value,
-                Bot = false,
-            };
+            return DiscordUserCache.GetOrCreate(discordId.Value);
         }
         
         /// <summary>

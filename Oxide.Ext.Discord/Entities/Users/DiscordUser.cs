@@ -14,6 +14,7 @@ using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Users
@@ -21,6 +22,7 @@ namespace Oxide.Ext.Discord.Entities.Users
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/user#user-object">User Structure</a>
     /// </summary>
+    [JsonConverter(typeof(DiscordUserConverter))]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordUser : ISnowflakeEntity
     {

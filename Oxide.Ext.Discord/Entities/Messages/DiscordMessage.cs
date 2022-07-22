@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Builders.Messages;
+using Oxide.Ext.Discord.Callbacks.Api.Entities;
+using Oxide.Ext.Discord.Data;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -17,6 +19,7 @@ using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Emojis;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Messages
@@ -251,7 +254,22 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public static void CreateMessage(DiscordClient client, Snowflake channelId, MessageCreate message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            client.Bot.Rest.CreateRequest(client,$"channels/{channelId}/messages", RequestMethod.POST, message, callback, error);
+            BaseApiCompletedCallback completedCallback = null;
+            DiscordChannel channel = client.Bot.DirectMessagesByChannelId[channelId];
+            UserExtData userData = channel?.UserData;
+            if (userData != null)
+            {
+                if (channel.UserData.IsDmBlocked())
+                {
+                    DiscordUser user = userData.GetUser();
+                    client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.GetFullUserName, user.Id, userData.GetBlockedUntil());
+                    return;
+                }
+
+                completedCallback = DmChannelMessageCreateCompletedCallback.Create(client, channel);
+            }
+
+            client.Bot.Rest.CreateRequest(client,$"channels/{channelId}/messages", RequestMethod.POST, message, callback, error, completedCallback);
         }
         
         /// <summary>
@@ -369,7 +387,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId};
             }
             
-            client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages", RequestMethod.POST, message, callback, error);
+            CreateMessage(client, ChannelId, message, callback, error);
         }
         
         /// <summary>

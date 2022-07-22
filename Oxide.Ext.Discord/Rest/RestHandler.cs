@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Callbacks.Api.Entities;
 using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
@@ -83,14 +84,15 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="success">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
-        public void CreateRequest(DiscordClient client, string url, RequestMethod method, object data, Action success, Action<RequestError> error)
+        /// <param name="callback">Completed callback for the request</param>
+        public void CreateRequest(DiscordClient client, string url, RequestMethod method, object data, Action success, Action<RequestError> error, BaseApiCompletedCallback callback = null)
         {
             if (data is IDiscordValidation validate)
             {
                 validate.Validate();
             }
             
-            Request request = Request.CreateRequest(client, Client, method, url, data, success, error);
+            Request request = Request.CreateRequest(client, Client, method, url, data, success, error, callback);
             StartRequest(request);
         }
 
@@ -103,15 +105,16 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="data">Data to be sent with the request</param>
         /// <param name="success">Callback once the action is completed</param>
         /// <param name="error">Error callback if an error occurs</param>
+        /// <param name="callback">Completed callback for the request</param>
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
-        public void CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data, Action<T> success, Action<RequestError> error)
+        public void CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data, Action<T> success, Action<RequestError> error, BaseApiCompletedCallback callback = null)
         {
             if (data is IDiscordValidation validate)
             {
                 validate.Validate();
             }
 
-            Request<T> request = Request<T>.CreateRequest(client, Client, method, url, data, success, error);
+            Request<T> request = Request<T>.CreateRequest(client, Client, method, url, data, success, error, callback);
             StartRequest(request);
         }
 

@@ -1471,10 +1471,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 return;
             }
-            
-            DiscordUser previous = member.User.Update(updateUser);
-                    
-            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberPresenceUpdated, update, member, previous, guild);
+
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberPresenceUpdated, update, member, guild);
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchPresenceUpdate)} Guild ID: {{0}} User ID: {{1}} Status: {{2}}", update.GuildId, update.User.Id, update.Status);
         }
 
@@ -1501,16 +1499,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private void HandleDispatchUserUpdate(EventPayload payload)
         {
             DiscordUser user = payload.EventData.ToObject<DiscordUser>();
-
-            foreach (DiscordGuild guild in _client.Servers.Values)
-            {
-                if (guild.IsAvailable)
-                {
-                    GuildMember memberUpdate = guild.Members[user.Id];
-                    memberUpdate?.User.Update(user);
-                }
-            }
-            
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordUserUpdated, user);
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchUserUpdate)} User ID: {{0}}", user.Id);
         }

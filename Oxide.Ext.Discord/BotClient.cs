@@ -333,6 +333,17 @@ namespace Oxide.Ext.Discord
             if (_readyData == null)
             {
                 Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ready);
+                if (DataHandler.Data.Bots.TryGetValue(ready.User.Id, out BotExtData botData))
+                {
+                    foreach (UserExtData userData in botData.Users.Values)
+                    {
+                        DiscordChannel channel = userData.CreateDmChannel();
+                        DirectMessagesByChannelId[channel.Id] = channel;
+                        DirectMessagesByUserId[userData.UserId] = channel;
+                        channel.UserData = userData;
+                        userData.ClearBlockIfExpired();
+                    }
+                }
             }
             
             _readyData = ready;
@@ -442,18 +453,28 @@ namespace Oxide.Ext.Discord
         {
             if (channel.Type != ChannelType.Dm)
             {
-                Logger.Warning($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Tried to add non DM channel");
+                Logger.Warning($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Tried to add a non DM channel");
                 return;
             }
             
             Logger.Verbose($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Adding New Channel {{0}}", channel.Id);
             DirectMessagesByChannelId[channel.Id] = channel;
 
-            foreach (KeyValuePair<Snowflake,DiscordUser> recipient in channel.Recipients)
+            BotExtData data = DataHandler.Data.GetBotData(BotUser.Id);
+
+            foreach (DiscordUser recipient in channel.Recipients.Values)
             {
-                if (!recipient.Value.Bot.HasValue || !recipient.Value.Bot.Value)
+                if (!recipient.Bot.HasValue || !recipient.Bot.Value)
                 {
-                    DirectMessagesByUserId[recipient.Value.Id] = channel;
+                    DirectMessagesByUserId[recipient.Id] = channel;
+
+                    UserExtData userData = data.GetUserData(recipient.Id);
+                    channel.UserData = userData;
+                    if (userData.DmChannelId != channel.Id)
+                    {
+                        userData.DmChannelId = channel.Id;
+                        DataHandler.OnDataChanged();
+                    }
                 }
             }
         }

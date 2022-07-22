@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Callbacks.Api.Entities;
+using Oxide.Ext.Discord.Data;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
@@ -15,6 +17,7 @@ using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Channels
@@ -219,6 +222,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 return _threadMembers = new Hash<Snowflake, ThreadMember>();
             }
         }
+        
+        internal UserExtData UserData { get; set; }
 
         /// <summary>
         /// Returns a string to mention this channel in a message
@@ -397,7 +402,19 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public void CreateMessage(DiscordClient client, MessageCreate message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
-            client.Bot.Rest.CreateRequest(client,$"channels/{Id}/messages", RequestMethod.POST, message, callback, error);
+            BaseApiCompletedCallback completedCallback = null;
+            if (UserData != null)
+            {
+                if (UserData.IsDmBlocked())
+                {
+                    DiscordUser user = UserData.GetUser();
+                    client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.GetFullUserName, user.Id, UserData.GetBlockedUntil());
+                    return;
+                }
+                
+                completedCallback = DmChannelMessageCreateCompletedCallback.Create(client, this);
+            }
+            client.Bot.Rest.CreateRequest(client,$"channels/{Id}/messages", RequestMethod.POST, message, callback, error, completedCallback);
         }
 
         /// <summary>

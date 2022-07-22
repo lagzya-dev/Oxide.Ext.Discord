@@ -5,6 +5,7 @@ using Oxide.Core;
 using Oxide.Core.Configuration;
 using Oxide.Core.Extensions;
 using Oxide.Ext.Discord.Configuration;
+using Oxide.Ext.Discord.Data;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Subscription;
@@ -89,6 +90,8 @@ namespace Oxide.Ext.Discord
             DiscordConfig = ConfigFile.Load<DiscordConfig>(configPath);
             DiscordConfig.Save();
             
+            DataHandler.Load();
+            
             GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new DiscordLogger(DiscordLogLevel.Warning) : new DiscordLogger(DiscordLogLevel.Verbose);
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
             
@@ -125,6 +128,7 @@ namespace Oxide.Ext.Discord
 
             GlobalLogger.Debug("Disconnected all clients - server shutdown.");
             
+            DataHandler.Save(true);
             DiscordLogger.FileLogger.OnServerShutdown();
         }
     }
