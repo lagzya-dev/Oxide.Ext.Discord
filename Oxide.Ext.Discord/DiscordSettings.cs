@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord
         /// <returns>True if settings has the given intents; False otherwise</returns>
         public bool HasIntents(GatewayIntents intents)
         {
-            return (Intents & intents) == Intents;
+            return (Intents & intents) == intents;
         }
     }
 }

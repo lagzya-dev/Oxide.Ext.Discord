@@ -1264,7 +1264,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 }
             }
 
-            _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchMessageCreate)}: Guild ID: {{0}} Channel ID: {{1}} Message ID: {{2}}", message.GuildId, message.ChannelId, message.Id);
+            _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchMessageCreate)} Guild ID: {{0}} Channel ID: {{1}} Message ID: {{2}}", message.GuildId, message.ChannelId, message.Id);
 
             if (!message.Author.Bot.HasValue || !message.Author.Bot.Value)
             {

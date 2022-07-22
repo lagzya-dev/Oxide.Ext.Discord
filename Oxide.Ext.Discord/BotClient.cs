@@ -4,6 +4,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Data;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -227,7 +228,7 @@ namespace Oxide.Ext.Discord
             if (intents != Settings.Intents)
             {
                 Settings.Intents = intents;
-                if (WebSocket.Handler.IsConnected())
+                if (WebSocket.Intents != Settings.Intents && WebSocket.Handler.IsConnected())
                 {
                     Logger.Debug("New intents have been requested for the a connected bot. Reconnecting with updated intents.");
                     DisconnectWebsocket(true);

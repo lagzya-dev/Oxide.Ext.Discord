@@ -332,7 +332,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         internal Task RequestAllGuildMembers(Snowflake guildId)
         {
-            return SendImmediatelyAsync(GatewayCommandCode.Heartbeat, new GuildMembersRequestCommand
+            return SendImmediatelyAsync(GatewayCommandCode.RequestGuildMembers, new GuildMembersRequestCommand
             {
                 Nonce = "DiscordExtension",
                 GuildId = guildId,
