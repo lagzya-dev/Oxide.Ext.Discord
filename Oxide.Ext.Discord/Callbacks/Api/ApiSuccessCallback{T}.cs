@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -14,7 +16,14 @@ namespace Oxide.Ext.Discord.Callbacks.Api
         {
             base.Init(request);
             _onSuccess = request.OnSuccess;
-            _data = response.ParseData<T>();
+            
+            using (StreamReader sr = new StreamReader(response.Content))
+            {
+                using (JsonReader reader = new JsonTextReader(sr))
+                {
+                    _data = Client.Bot.ClientSerializer.Deserialize<T>(reader);
+                }
+            }
         }
 
         protected override void HandleApiCallback()

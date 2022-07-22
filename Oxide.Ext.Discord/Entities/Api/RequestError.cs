@@ -1,6 +1,9 @@
 using System;
+using System.IO;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
@@ -144,11 +147,23 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// Sets the HTTP Response data
         /// </summary>
         /// <param name="code">HTTP Response Code</param>
-        /// <param name="message">HTTP Response Body Text</param>
-        internal void SetResponseData(int code, string message)
+        /// <param name="content">HTTP Response Body Stream</param>
+        internal async Task SetResponseData(int code, Stream content)
         {
             HttpStatusCode = code;
-            Message = message;
+            using (StreamReader reader = new StreamReader(content, Encoding.UTF8))
+            {
+                Message = await reader.ReadToEndAsync();
+                if (!string.IsNullOrEmpty(Message) && Message.StartsWith("{"))
+                {
+                    DiscordError = JsonConvert.DeserializeObject<RequestErrorMessage>(Message, _client.Bot.ClientSerializerSettings);
+                    if (DiscordError != null)
+                    {
+                        SetErrorMessage(RequestErrorType.ApiError, DiscordLogLevel.Error);
+                    }
+                }
+            }
+            content.Position = 0;
         }
 
         /// <summary>

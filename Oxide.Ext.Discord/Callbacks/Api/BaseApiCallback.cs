@@ -8,14 +8,14 @@ namespace Oxide.Ext.Discord.Callbacks.Api
 {
     internal abstract class BaseApiCallback : BaseNextTickCallback
     {
-        private DiscordClient _client;
+        protected DiscordClient Client;
         private Snowflake _requestId;
         private RequestMethod _method;
         private string _route;
 
         protected void Init(BaseRequest request)
         {
-            _client = request.Client;
+            Client = request.Client;
             _requestId = request.Id;
             _method = request.Method;
             _route = request.Route;
@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api
 
         protected sealed override void HandleCallback()
         {
-            if (_client.IsConnected())
+            if (Client.IsConnected())
             {
                 try
                 {
@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api
                 }
                 catch (Exception ex)
                 {
-                    _client.Bot.Logger.Exception("An exception occured during callback for request Type: {0} ID: {1} [{2}] {3}", GetType(), _requestId, _method, _route, ex);
+                    Client.Bot.Logger.Exception("An exception occured during callback for request Type: {0} ID: {1} [{2}] {3}", GetType(), _requestId, _method, _route, ex);
                 }
                 finally
                 {
@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api
 
         protected override void EnterPool()
         {
-            _client = null;
+            Client = null;
             _requestId = default(Snowflake);
             _method = default(RequestMethod);
             _route = null;

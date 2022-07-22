@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -22,7 +23,8 @@ namespace Oxide.Ext.Discord.Rest.Requests
     public class RequestHandler : BasePoolable
     {
         internal BaseRequest Request;
-        
+
+        private MemoryStream _requestBody;
         private RequestResponse _response;
         private CancellationToken _token;
         private ILogger _logger;
@@ -70,7 +72,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
             catch (Exception ex)
             {
-                _response = await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Exception).WithException(ex), RequestCompletedStatus.ErrorFatal);
+                _response = await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Exception).WithException(ex), null, RequestCompletedStatus.ErrorFatal);
             }
             finally
             {
@@ -149,12 +151,12 @@ namespace Oxide.Ext.Discord.Rest.Requests
             catch (JsonSerializationException ex)
             {
                 Request.Client.Logger.Exception("A JsonSerializationException occured for request. ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, Request.Route, Request.Data?.GetType().Name ?? "None", ex);
-                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Serialization, DiscordLogLevel.Error).WithException(ex), RequestCompletedStatus.ErrorFatal);
+                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Serialization, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal);
             }
             catch (Exception ex)
             {
                 Request.Client.Logger.Exception("An exception occured for request. ID: {0} Plugin: {1} Method: {2} URL: {3} Data Type: {4}", Request.Id, Request.Client.PluginName, Request.Method, Request.Route, Request.Data?.GetType().Name ?? "None", ex);
-                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Error).WithException(ex), RequestCompletedStatus.ErrorFatal);
+                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal);
             }
         }
 
@@ -165,11 +167,11 @@ namespace Oxide.Ext.Discord.Rest.Requests
             int statusCode = (int)webResponse.StatusCode;
             if (statusCode == 429)
             {
-                response = await RequestResponse.CreateWebExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.RateLimit, DiscordLogLevel.Warning).WithRequest(request), webResponse, RequestCompletedStatus.ErrorRetry);
+                response = await RequestResponse.CreateExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.RateLimit, DiscordLogLevel.Warning).WithRequest(request), webResponse, RequestCompletedStatus.ErrorRetry);
             }
             else
             {
-                response = await RequestResponse.CreateWebExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.GenericWeb, DiscordLogLevel.Error).WithRequest(request), webResponse, RequestCompletedStatus.ErrorFatal);
+                response = await RequestResponse.CreateExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.GenericWeb, DiscordLogLevel.Error).WithRequest(request), webResponse, RequestCompletedStatus.ErrorFatal);
             }
             
             Request.OnRequestErrored();
@@ -192,7 +194,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 if (data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
                 {
                     MultipartFormDataContent content = new MultipartFormDataContent();
-            
+                    
                     StringContent json = new StringContent(JsonConvert.SerializeObject(data, Request.Client.Bot.ClientSerializerSettings), Encoding.UTF8, "application/json");
                     content.Add(json, "payload_json");
 

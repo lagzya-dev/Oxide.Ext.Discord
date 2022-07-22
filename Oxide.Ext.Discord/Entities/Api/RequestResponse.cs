@@ -1,6 +1,6 @@
-﻿using System.Net.Http;
+﻿using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -16,11 +16,8 @@ namespace Oxide.Ext.Discord.Entities.Api
         internal RateLimitResponse RateLimit;
         internal RequestError Error;
         internal int Code;
+        internal Stream Content;
         
-        /// <summary>
-        /// Data discord sent us
-        /// </summary>
-        private string _message;
         private DiscordClient _client;
         
         /// <summary>
@@ -29,18 +26,22 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="client">BotClient for the response</param>
         /// <param name="response">The Web Response for the request</param>
         /// <param name="status">The status of the request indicating if it was successful</param>
-        private async Task Init(DiscordClient client, HttpResponseMessage response, RequestCompletedStatus status)
+        private async Task Init(DiscordClient client, HttpResponseMessage response, RequestCompletedStatus status, RequestError error = null)
         {
             _client = client;
-            RateLimit = DiscordPool.Get<RateLimitResponse>();
             Status = status;
+            Error = error;
 
             if (response != null)
             {
                 Code = (int)response.StatusCode;
+                Content = await response.Content.ReadAsStreamAsync();
+                RateLimit = DiscordPool.Get<RateLimitResponse>();
                 RateLimit.Init(response.Headers, _client.Logger);
-
-                _message = await response.Content.ReadAsStringAsync();
+                if (error != null)
+                {
+                    await error.SetResponseData((int)response.StatusCode, Content);
+                }
             }
         }
 
@@ -56,30 +57,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             await response.Init(client, httpResponse, RequestCompletedStatus.Success);
             return response;
         }
-        
-        /// <summary>
-        /// Creates an exception REST API response
-        /// </summary>
-        /// <param name="client">Client making the request</param>
-        /// <param name="error">The Rest Error the occured</param>
-        /// <param name="status">The request status containing the fail reason</param>
-        /// <returns>An exception <see cref="RequestResponse"/></returns>
-        public static async Task<RequestResponse> CreateExceptionResponse(DiscordClient client, RequestError error, RequestCompletedStatus status)
-        {
-            RequestResponse response = DiscordPool.Get<RequestResponse>();
-            await response.Init(client, null, status);
-            response.Error = error;
-            
-            RequestErrorMessage apiError = response.ParseData<RequestErrorMessage>();
-            error.SetApiError(apiError);
-            if (apiError != null && apiError.Code != 0)
-            {
-                error.SetErrorMessage(RequestErrorType.ApiError, DiscordLogLevel.Error);
-            }
 
-            return response;
-        }
-        
         /// <summary>
         /// Creates a Web Exception REST API response
         /// </summary>
@@ -88,20 +66,10 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="httpResponse">Web Response for the request</param>
         /// <param name="status">The request status containing the fail reason</param>
         /// <returns>A web exception <see cref="RequestResponse"/></returns>
-        public static async Task<RequestResponse> CreateWebExceptionResponse(DiscordClient client, RequestError error, HttpResponseMessage httpResponse, RequestCompletedStatus status)
+        public static async Task<RequestResponse> CreateExceptionResponse(DiscordClient client, RequestError error, HttpResponseMessage httpResponse, RequestCompletedStatus status)
         {
             RequestResponse response = DiscordPool.Get<RequestResponse>();
-            await response.Init(client, httpResponse, status);
-            error.SetResponseData((int)httpResponse.StatusCode, response._message);
-            response.Error = error;
-            
-            RequestErrorMessage apiError = response.ParseData<RequestErrorMessage>();
-            error.SetApiError(apiError);
-            if (apiError != null && apiError.Code != 0)
-            {
-                error.SetErrorMessage(RequestErrorType.ApiError, DiscordLogLevel.Error);
-            }
-
+            await response.Init(client, httpResponse, status, error);
             return response;
         }
         
@@ -117,13 +85,6 @@ namespace Oxide.Ext.Discord.Entities.Api
             return response;
         }
 
-        /// <summary>
-        /// Parse the data to it's given object
-        /// </summary>
-        /// <typeparam name="T">Type to be parsed as</typeparam>
-        /// <returns>Data string JSON parsed to object</returns>
-        public T ParseData<T>() => !string.IsNullOrEmpty(_message) ? JsonConvert.DeserializeObject<T>(_message, _client.Bot.ClientSerializerSettings) : default(T);
-
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
@@ -138,8 +99,8 @@ namespace Oxide.Ext.Discord.Entities.Api
             RateLimit = null;
             Error = null;
             Code = 0;
-            _message = null;
             _client = null;
+            Content = null;
         }
     }
 }

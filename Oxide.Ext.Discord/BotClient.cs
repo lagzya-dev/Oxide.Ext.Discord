@@ -85,6 +85,8 @@ namespace Oxide.Ext.Discord
             NullValueHandling = NullValueHandling.Ignore
         };
 
+        internal readonly JsonSerializer ClientSerializer;
+
         internal DiscordWebSocket WebSocket;
 
         /// <summary>
@@ -110,6 +112,8 @@ namespace Oxide.Ext.Discord
             Logger = new DiscordLogger(Settings.LogLevel);
             
             Initialized = true;
+
+            ClientSerializer = JsonSerializer.Create(ClientSerializerSettings);
 
             Hooks = new DiscordHook(Logger);
             Rest = new RestHandler(this, Logger);
