@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core;
@@ -89,6 +90,10 @@ namespace Oxide.Ext.Discord.Libraries.Command
         [LibraryFunction(nameof(AddDirectMessageLocalizedCommand))]
         public void AddDirectMessageLocalizedCommand(string langKey, Plugin plugin, string callback)
         {
+            if (string.IsNullOrEmpty(langKey)) throw new ArgumentNullException(nameof(langKey));
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
+            
             foreach (string langType in Lang.GetLanguages(plugin))
             {
                 Dictionary<string, string> langKeys = Lang.GetMessages(langType, plugin);
@@ -108,6 +113,10 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="callback">Method name of the callback</param>
         public void AddDirectMessageCommand(string command, Plugin plugin, string callback)
         {
+            if (string.IsNullOrEmpty(command)) throw new ArgumentNullException(nameof(command));
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
+            
             string commandName = command.ToLowerInvariant();
 
             if (_directMessageCommands.TryGetValue(commandName, out DirectMessageCommand cmd))
@@ -116,6 +125,8 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 string newPluginName = plugin?.Name ?? "An unknown plugin";
                 DiscordExtension.GlobalLogger.Warning("{0} has replaced the '{1}' discord direct message command previously registered by {2}", newPluginName, commandName, previousPluginName);
             }
+            
+            DiscordExtension.GlobalLogger.Debug("Adding Direct Command For: {0} Command: {1} Callback: {2}", plugin.Name, command, callback);
 
             cmd = new DirectMessageCommand(plugin, commandName, callback);
 
@@ -134,6 +145,10 @@ namespace Oxide.Ext.Discord.Libraries.Command
         [LibraryFunction(nameof(AddGuildLocalizedCommand))]
         public void AddGuildLocalizedCommand(string langKey, Plugin plugin, List<Snowflake> allowedChannels, string callback)
         {
+            if (string.IsNullOrEmpty(langKey)) throw new ArgumentNullException(nameof(langKey));
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
+            
             foreach (string langType in Lang.GetLanguages(plugin))
             {
                 Dictionary<string, string> langKeys = Lang.GetMessages(langType, plugin);
@@ -154,14 +169,20 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="callback">Method name of the callback</param>
         public void AddGuildCommand(string command, Plugin plugin, List<Snowflake> allowedChannels, string callback)
         {
+            if (string.IsNullOrEmpty(command)) throw new ArgumentNullException(nameof(command));
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
+            
             string commandName = command.ToLowerInvariant();
 
             if (_guildCommands.TryGetValue(commandName, out GuildCommand cmd))
             {
                 string previousPluginName = cmd.Plugin?.Name ?? "an unknown plugin";
-                string newPluginName = plugin?.Name ?? "An unknown plugin";
+                string newPluginName = plugin.Name ?? "An unknown plugin";
                 DiscordExtension.GlobalLogger.Warning("{0} has replaced the '{1}' discord guild command previously registered by {2}", newPluginName, commandName, previousPluginName);
             }
+
+            DiscordExtension.GlobalLogger.Debug("Adding Guild Command For: {0} Command: {1} Callback: {2}", plugin.Name, command, callback);
 
             cmd = new GuildCommand(plugin, commandName, callback, allowedChannels);
 

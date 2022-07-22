@@ -1227,6 +1227,17 @@
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback`1.EnterPool">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback">
+            <summary>
+            Represents a base callback when a request is completed
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.Run(Oxide.Ext.Discord.Entities.Api.RequestResponse)">
+            <summary>
+            Runs the callback with the RequestResponse
+            </summary>
+            <param name="response">Response for the request</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback">
             <summary>
             Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
@@ -1302,6 +1313,32 @@
             Run the callback
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Callbacks.BaseCallback`1">
+            <summary>
+            Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
+            This class is pooled to prevent allocations
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Callbacks.BaseCallback`1.Callback">
+            <summary>
+            The callback to be called by the delegate
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseCallback`1.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseCallback`1.HandleCallback(`0)">
+            <summary>
+            Overridden in the child class to handle the callback
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseCallback`1.Run(`0)">
+            <summary>
+            Run the callback
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseNextTickCallback">
             <summary>
             Represents a callback that calls next tick
@@ -1344,6 +1381,11 @@
             Discord Logging Options
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Users">
+            <summary>
+            Discord Logging Options
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Configuration.DiscordConfig.#ctor(System.String)">
             <summary>
             Constructor for discord config
@@ -1374,6 +1416,16 @@
         <member name="P:Oxide.Ext.Discord.Configuration.DiscordLoggingConfig.HideDiscordErrorCodes">
             <summary>
             Discord Response Error codes that will not be logged
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Configuration.DiscordUsersConfig">
+            <summary>
+            Discord User Config
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordUsersConfig.DmBlockedDuration">
+            <summary>
+            How long to block DM's after we receive a 50007 Discord API Error code
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Constants.DiscordEndpoints">
@@ -17184,7 +17236,7 @@
             How long to wait before retrying request since there was a web exception
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
             <summary>
             Initializes the request
             </summary>
@@ -17217,7 +17269,7 @@
             Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
@@ -17228,9 +17280,10 @@
             <param name="data">Data being passed into the request. Null if no data is passed</param>
             <param name="onSuccess">Callback when the web request finishes successfully</param>
             <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
+            <param name="callback">Completed callback for the request</param>
             <returns>A <see cref="T:Oxide.Ext.Discord.Rest.Requests.Request"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
             <summary>
             Initializes the Request
             </summary>
@@ -17344,7 +17397,7 @@
             Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
@@ -17355,9 +17408,10 @@
             <param name="data">Data being passed into the request. Null if no data is passed</param>
             <param name="onSuccess">Callback when the web request finishes successfully</param>
             <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
+            <param name="callback">Completed callback for the request</param>
             <returns>A <see cref="T:Oxide.Ext.Discord.Rest.Requests.Request`1"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
             <summary>
             Initializes the Request
             </summary>
@@ -17408,7 +17462,7 @@
             <param name="client">Client the request is for</param>
             <param name="logger">Logger from the client</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
             <summary>
             Creates a new request and queues it to be ran
             </summary>
@@ -17418,8 +17472,9 @@
             <param name="data">Data to be sent with the request</param>
             <param name="success">Callback once the action is completed</param>
             <param name="error">Error callback if an error occurs</param>
+            <param name="callback">Completed callback for the request</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest``1(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest``1(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
             <summary>
             Creates a new request and queues it to be ran
             </summary>
@@ -17429,6 +17484,7 @@
             <param name="data">Data to be sent with the request</param>
             <param name="success">Callback once the action is completed</param>
             <param name="error">Error callback if an error occurs</param>
+            <param name="callback">Completed callback for the request</param>
             <typeparam name="T">The type that is expected to be returned</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.StartRequest(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
