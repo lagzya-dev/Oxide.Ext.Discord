@@ -2971,25 +2971,12 @@
             Suppresses the error message from being logged
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetErrorMessage(Oxide.Ext.Discord.Entities.Api.RequestErrorType,Oxide.Ext.Discord.Logging.DiscordLogLevel)">
-            <summary>
-            Sets the log information for the error
-            </summary>
-            <param name="type">The type of rest error that has occured</param>
-            <param name="logLevel">Error log level</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetResponseData(System.Int32,System.IO.Stream)">
             <summary>
             Sets the HTTP Response data
             </summary>
             <param name="code">HTTP Response Code</param>
             <param name="content">HTTP Response Body Stream</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetApiError(Oxide.Ext.Discord.Entities.Api.RequestErrorMessage)">
-            <summary>
-            Sets the <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage"/> if one occured
-            </summary>
-            <param name="error">Discord API Error to be set</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.LogError">
             <summary>
@@ -18126,7 +18113,7 @@
             <param name="url"></param>
             <exception cref="T:Oxide.Ext.Discord.Exceptions.Entities.Websocket.DiscordWebSocketException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.SendAsync(System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.SendAsync(System.IO.MemoryStream)">
             <summary>
             Sends the string message over the web socket
             </summary>

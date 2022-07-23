@@ -4,6 +4,8 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Websocket;
 using Oxide.Ext.Discord.Helpers;
@@ -30,6 +32,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly byte[] _sendBuffer;
         private readonly Encoding _encoding;
         private readonly int _maxSendChars;
+        private readonly AutoResetEvent _sendLock = new AutoResetEvent(true);
 
         //private readonly ZlibDecompressorHandler _decompressor;
         
@@ -49,7 +52,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             _handler = handler;
             _logger = logger;
-            _encoding = Encoding.UTF8;
+            _encoding = DiscordEncoding.Encoding;
             //_decompressor = new ZlibDecompressorHandler(_encoding, logger);
             _receiveBuffer = WebSocket.CreateClientBuffer(ReceiveChunkSize, SendChunkSize);
             _sendBuffer = new byte[SendChunkSize];
@@ -197,28 +200,35 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// Sends the string message over the web socket
         /// </summary>
         /// <param name="message">Message to be sent</param>
-        public async Task<bool> SendAsync(string message)
+        public async Task<bool> SendAsync(MemoryStream stream)
         {
-            if (_socket == null || _socket.State != WebSocketState.Open)
+            if (_socket == null || _socket.State != WebSocketState.Open || stream.Length == 0)
             {
                 return false;
             }
-            
-            _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(SendAsync)} Sending Message: {{0}}", message);
-            return await SendInternalAsync(message);
+
+            _sendLock.WaitOne();
+            try
+            {
+                return await SendInternalAsync(stream);
+            }
+            finally
+            {
+                _sendLock.Set();
+            }
         }
         
-        private async Task<bool> SendInternalAsync(string message)
+        private async Task<bool> SendInternalAsync(MemoryStream stream)
         {
-            int charIndex = 0;
+            stream.Position = 0;
+            int readIndex = 0;
             while (!_source.IsCancellationRequested)
             {
-                int charAmount = Math.Min(charIndex + _maxSendChars, message.Length);
-                int byteSize = _encoding.GetBytes(message, charIndex, charAmount, _sendBuffer, 0);
-                charIndex += charAmount;
-                bool endOfMessage = charIndex == message.Length;
-                //_logger.Debug($"{nameof(WebsocketHandler)}.{nameof(SendMessage)} Sending Message Char Amount: {{0}} ({{1}}/{{2}}) Bytes: {{3}} End Of Message: {{4}}", charAmount, charIndex, message.Length, byteSize, endOfMessage);
-                await _socket.SendAsync(new ArraySegment<byte>(_sendBuffer, 0, byteSize), WebSocketMessageType.Text, endOfMessage, _token);
+                int read = await stream.ReadAsync(_sendBuffer, 0, _sendBuffer.Length, _token);
+                readIndex += read;
+                bool endOfMessage = readIndex == stream.Length;
+                //_logger.Debug($"{nameof(WebSocketHandler)}.{nameof(SendInternalAsync)} Sending Message Amount: {{0}} ({{1}}/{{2}}) Message: {{3}} - {{4}} End Of Message: {{5}}", read, readIndex, stream.Length, g, g.Length, endOfMessage);
+                await _socket.SendAsync(new ArraySegment<byte>(_sendBuffer, 0, read), WebSocketMessageType.Text, endOfMessage, _token);
                 if (endOfMessage)
                 {
                     return true;
@@ -273,7 +283,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _source?.Dispose();
                 _source = null;
             }
-            
+
             _socket?.Dispose();
             _socket = null;
         }

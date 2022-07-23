@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest.Buckets;
@@ -133,17 +134,6 @@ namespace Oxide.Ext.Discord.Entities.Api
         }
 
         /// <summary>
-        /// Sets the log information for the error
-        /// </summary>
-        /// <param name="type">The type of rest error that has occured</param>
-        /// <param name="logLevel">Error log level</param>
-        internal void SetErrorMessage(RequestErrorType type, DiscordLogLevel logLevel)
-        {
-            ErrorType = type;
-            _logLevel = logLevel;
-        }
-
-        /// <summary>
         /// Sets the HTTP Response data
         /// </summary>
         /// <param name="code">HTTP Response Code</param>
@@ -151,7 +141,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         internal async Task SetResponseData(int code, Stream content)
         {
             HttpStatusCode = code;
-            using (StreamReader reader = new StreamReader(content, Encoding.UTF8))
+            using (StreamReader reader = new StreamReader(content, DiscordEncoding.Encoding, false, 1024, true))
             {
                 Message = await reader.ReadToEndAsync();
                 if (!string.IsNullOrEmpty(Message) && Message.StartsWith("{"))
@@ -159,20 +149,11 @@ namespace Oxide.Ext.Discord.Entities.Api
                     DiscordError = JsonConvert.DeserializeObject<RequestErrorMessage>(Message, _client.Bot.ClientSerializerSettings);
                     if (DiscordError != null)
                     {
-                        SetErrorMessage(RequestErrorType.ApiError, DiscordLogLevel.Error);
+                        ErrorType = RequestErrorType.ApiError;
+                        _logLevel = DiscordLogLevel.Error;
                     }
                 }
             }
-            content.Position = 0;
-        }
-
-        /// <summary>
-        /// Sets the <see cref="RequestErrorMessage"/> if one occured
-        /// </summary>
-        /// <param name="error">Discord API Error to be set</param>
-        internal void SetApiError(RequestErrorMessage error)
-        {
-            DiscordError = error;
         }
 
         /// <summary>

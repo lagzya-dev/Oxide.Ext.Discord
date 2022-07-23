@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.WebSockets;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities;
@@ -8,7 +10,9 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Json.Pooling;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.WebSockets.Handlers;
 
 namespace Oxide.Ext.Discord.WebSockets
@@ -195,12 +199,19 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 return false;
             }
-            
-            string payloadData = JsonConvert.SerializeObject(payload, _client.ClientSerializerSettings);
-            _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Payload: {{0}}", payloadData);
 
-            await Handler.SendAsync(payloadData);
-            return true;
+            JsonWriterPoolable writer = DiscordPool.Get<JsonWriterPoolable>();
+            await writer.WriteAsync(_client, payload);
+            writer.Stream.Position = 0;
+
+            if (_client.Logger.IsLogging(DiscordLogLevel.Verbose))
+            {
+                _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, await writer.ReadAsStringAsync());
+            }
+            
+            bool sent = await Handler.SendAsync(writer.Stream);
+            writer.Dispose();
+            return sent;
         }
 
         /// <summary>

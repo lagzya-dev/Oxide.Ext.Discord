@@ -1,7 +1,8 @@
 using System;
-using System.IO;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Json.Pooling;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
 
@@ -12,18 +13,16 @@ namespace Oxide.Ext.Discord.Callbacks.Api
         private Action<T> _onSuccess;
         private T _data;
 
-        public void Init(Request<T> request, RequestResponse response)
+        public async Task Init(Request<T> request, RequestResponse response)
         {
             base.Init(request);
             _onSuccess = request.OnSuccess;
-            
-            using (StreamReader sr = new StreamReader(response.Content))
-            {
-                using (JsonReader reader = new JsonTextReader(sr))
-                {
-                    _data = Client.Bot.ClientSerializer.Deserialize<T>(reader);
-                }
-            }
+
+            JsonReaderPoolable reader = DiscordPool.Get<JsonReaderPoolable>();
+            await reader.CopyAsync(response.Content).ConfigureAwait(false);
+            DiscordExtension.GlobalLogger.Debug($"{nameof(ApiSuccessCallback<T>)}.{nameof(Init)} Body: {await reader.ReadAsStringAsync()}");
+            _data = await reader.Deserialize<T>(Client.Bot);
+            reader.Dispose();
         }
 
         protected override void HandleApiCallback()

@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Callbacks.Api.Entities;
@@ -48,12 +49,12 @@ namespace Oxide.Ext.Discord.Rest.Requests
         }
 
         ///<inheritdoc/>
-        protected override void OnRequestSuccess(RequestResponse response)
+        protected override async Task OnRequestSuccess(RequestResponse response)
         {
             if (OnSuccess != null)
             {
                 ApiSuccessCallback<T> callback = DiscordPool.Get<ApiSuccessCallback<T>>();
-                callback.Init(this, response);
+                await callback.Init(this, response);
                 callback.Run();
             }
         }

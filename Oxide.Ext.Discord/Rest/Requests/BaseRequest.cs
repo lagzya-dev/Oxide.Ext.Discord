@@ -94,7 +94,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
         }
 
-        internal void OnRequestCompleted(RequestHandler handler, RequestResponse response)
+        internal async Task OnRequestCompleted(RequestHandler handler, RequestResponse response)
         {
             Status = RequestStatus.Completed;
             
@@ -102,7 +102,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
             if (response.Status == RequestCompletedStatus.Success)
             {
-                OnRequestSuccess(response);
+                await OnRequestSuccess(response);
             }
             else if (response.Status != RequestCompletedStatus.Cancelled)
             {
@@ -119,7 +119,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Callback for successful API Calls
         /// </summary>
         /// <param name="response">Response for the API Call</param>
-        protected abstract void OnRequestSuccess(RequestResponse response);
+        protected abstract Task OnRequestSuccess(RequestResponse response);
 
         /// <summary>
         /// Callback for API calls that error

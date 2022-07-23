@@ -7,10 +7,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json.Pooling;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Net;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 using HttpMethod = System.Net.Http.HttpMethod;
@@ -24,7 +27,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
     {
         internal BaseRequest Request;
 
-        private MemoryStream _requestBody;
+        private JsonWriterPoolable _json;
         private RequestResponse _response;
         private CancellationToken _token;
         private ILogger _logger;
@@ -76,7 +79,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
             finally
             {
-                Request.OnRequestCompleted(this, _response);
+                await Request.OnRequestCompleted(this, _response);
             }
         }
         
@@ -129,7 +132,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             try
             {
-                using (HttpRequestMessage request = CreateRequest())
+                using (HttpRequestMessage request = await CreateRequest())
                 {
                     using (HttpResponseMessage webResponse = await Request.HttpClient.SendAsync(request, _token))
                     {
@@ -138,9 +141,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                             return await RequestResponse.CreateSuccessResponse(Request.Client, webResponse);
                         }
 
-                        RequestResponse response = await HandleWebException(request, webResponse);
-                
-                        return response;
+                        return await HandleWebException(request, webResponse);
                     }
                 }
             }
@@ -185,7 +186,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             return response;
         }
 
-        private HttpRequestMessage CreateRequest()
+        private async Task<HttpRequestMessage> CreateRequest()
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethods[Request.Method], Request.Route);
             object data = Request.Data;
@@ -195,7 +196,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 {
                     MultipartFormDataContent content = new MultipartFormDataContent();
                     
-                    StringContent json = new StringContent(JsonConvert.SerializeObject(data, Request.Client.Bot.ClientSerializerSettings), Encoding.UTF8, "application/json");
+                    DiscordStreamContent json = await GetJsonContent(data);
                     content.Add(json, "payload_json");
 
                     for (int index = 0; index < attachments.FileAttachments.Count; index++)
@@ -211,11 +212,28 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 }
                 else
                 {
-                    request.Content = new StringContent(JsonConvert.SerializeObject(data, Request.Client.Bot.ClientSerializerSettings), Encoding.UTF8, "application/json");
+                    request.Content = await GetJsonContent(data);
                 }
             }
 
             return request;
+        }
+
+        private async Task<DiscordStreamContent> GetJsonContent(object data)
+        {
+            _json = DiscordPool.Get<JsonWriterPoolable>();
+            await _json.WriteAsync(Request.Client.Bot, data);
+            
+            if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))
+            {
+                _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Creating JSON Body: {{0}}", await _json.ReadAsStringAsync());
+            }
+            
+            DiscordStreamContent content = new DiscordStreamContent(_json.Stream);
+            MediaTypeHeaderValue header = MediaTypeHeaderValue.Parse("application/json");
+            header.CharSet = DiscordEncoding.Encoding.WebName;
+            content.Headers.ContentType = header;
+            return content;
         }
 
         /// <summary>
@@ -234,6 +252,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
+            _json.Dispose();
             Request.Dispose();
             _response.Dispose();
             DiscordPool.Free(this);

@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Callbacks.Api.Entities;
@@ -47,7 +48,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         }
 
         ///<inheritdoc/>
-        protected override void OnRequestSuccess(RequestResponse response)
+        protected override Task OnRequestSuccess(RequestResponse response)
         {
             if (OnSuccess != null)
             {
@@ -55,6 +56,8 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 callback.Init(this);
                 callback.Run();
             }
+
+            return Task.CompletedTask;
         }
 
         ///<inheritdoc/>

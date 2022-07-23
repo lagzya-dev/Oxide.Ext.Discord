@@ -90,12 +90,12 @@ namespace Oxide.Ext.Discord
 
             DiscordConfig = ConfigFile.Load<DiscordConfig>(configPath);
             DiscordConfig.Save();
-
-            DiscordUsersData.Load();
             
             GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new DiscordLogger(DiscordLogLevel.Warning) : new DiscordLogger(DiscordLogLevel.Verbose);
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
-            
+
+            DiscordUsersData.Load();
+
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
                 GlobalLogger.Exception("An unhandled exception was thrown!", exception?.ExceptionObject as System.Exception);
