@@ -456,6 +456,16 @@ namespace Oxide.Ext.Discord.Entities.Users
             {
                 MfaEnabled = update.MfaEnabled;
             }
+            
+            if (update.Banner != null)
+            {
+                Banner = update.Banner;
+            }
+            
+            if (update.AccentColor != null)
+            {
+                AccentColor = update.AccentColor;
+            }
 
             if (update.Locale != null)
             {

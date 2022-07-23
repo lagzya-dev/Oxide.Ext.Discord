@@ -17678,317 +17678,317 @@
             Used when a code is sent that we don't have yet.
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode">
+        <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#commands-and-events-gateway-events">Gateway Event Codes</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.Unknown">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.Unknown">
             <summary>
             Used when we don't have a matching Dispatch Code
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.Ready">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.Ready">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#ready">READY</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.Resumed">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.Resumed">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#resumed">RESUMED</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ChannelCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ChannelCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#channel-create">CHANNEL_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ChannelUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ChannelUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#channel-update">CHANNEL_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ChannelDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ChannelDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#channel-delete">CHANNEL_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ChannelPinsUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ChannelPinsUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#channel-pins-update">CHANNEL_PINS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-create">GUILD_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-update">GUILD_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-delete">GUILD_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildBanAdded">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildBanAdded">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-ban-add">GUILD_BAN_ADD</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildBanRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildBanRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-ban-remove">GUILD_BAN_REMOVE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildEmojisUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildEmojisUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-emojis-update">GUILD_EMOJIS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildStickersUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildStickersUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-stickers-update">GUILD_STICKERS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildIntegrationsUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildIntegrationsUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-integrations-update">GUILD_INTEGRATIONS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildMemberAdded">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildMemberAdded">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-member-add">GUILD_MEMBER_ADD</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildMemberRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildMemberRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-member-remove">GUILD_MEMBER_REMOVE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildMemberUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildMemberUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-member-update">GUILD_MEMBER_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildMembersChunk">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildMembersChunk">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-members-chunk">GUILD_MEMBERS_CHUNK</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildRoleCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildRoleCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-role-create">GUILD_ROLE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildRoleUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildRoleUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-role-update">GUILD_ROLE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildRoleDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildRoleDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-role-delete">GUILD_ROLE_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventCreate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildScheduledEventCreate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-create">GUILD_SCHEDULED_EVENT_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildScheduledEventUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-update">GUILD_SCHEDULED_EVENT_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventDelete">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildScheduledEventDelete">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-delete">GUILD_SCHEDULED_EVENT_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventUserAdd">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildScheduledEventUserAdd">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add">GUILD_SCHEDULED_EVENT_USER_ADD</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.GuildScheduledEventUserRemove">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildScheduledEventUserRemove">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove">GUILD_SCHEDULED_EVENT_USER_REMOVE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.IntegrationCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.IntegrationCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#integration-create">INTEGRATION_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.IntegrationUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.IntegrationUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#integration-update">INTEGRATION_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.IntegrationDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.IntegrationDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#integration-delete">INTEGRATION_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.MessageCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-create">MESSAGE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.MessageUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-update">MESSAGE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.MessageDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-delete">MESSAGE_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageBulkDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.MessageBulkDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-delete-bulk">MESSAGE_DELETE_BULK</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageReactionAdded">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.MessageReactionAdded">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-add">MESSAGE_REACTION_ADD</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageReactionRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.MessageReactionRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove">MESSAGE_REACTION_REMOVE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageReactionAllRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.MessageReactionAllRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all">MESSAGE_REACTION_REMOVE_ALL</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessageReactionEmojiRemoved">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.MessageReactionEmojiRemoved">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji">MESSAGE_REACTION_REMOVE_EMOJI</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.PresenceUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.PresenceUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#presence-update">PRESENCE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.PresenceReplace">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.PresenceReplace">
             <summary>
             Represents the <a href="">PRESENCES_REPLACE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.TypingStarted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.TypingStarted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#typing-start">TYPING_START</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.UserUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.UserUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#user-update">USER_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.VoiceStateUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.VoiceStateUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#voice-state-update">VOICE_STATE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.VoiceServerUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.VoiceServerUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#voice-server-update">VOICE_SERVER_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.WebhooksUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.WebhooksUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#webhooks-update">WEBHOOKS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.InviteCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.InviteCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#invite-create">INVITE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.InviteDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.InviteDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#invite-delete">INVITE_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ApplicationCommandsPermissionsUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ApplicationCommandsPermissionsUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#application-command-permissions-update">APPLICATION_COMMANDS_PERMISSIONS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.InteractionCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.InteractionCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#interaction-create">INTERACTION_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ThreadCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-create">THREAD_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ThreadUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-update">THREAD_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ThreadDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-delete">THREAD_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadListSync">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ThreadListSync">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-list-sync">THREAD_LIST_SYNC</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadMemberUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ThreadMemberUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-member-update">THREAD_MEMBER_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.ThreadMembersUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ThreadMembersUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#thread-members-update">THREAD_MEMBERS_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.StageInstanceCreated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.StageInstanceCreated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-create">STAGE_INSTANCE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.StageInstanceUpdated">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.StageInstanceUpdated">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-update">STAGE_INSTANCE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.StageInstanceDeleted">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.StageInstanceDeleted">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#stage-instance-delete">STAGE_INSTANCE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.AutoModerationRuleCreate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.AutoModerationRuleCreate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-create">AUTO_MODERATION_RULE_CREATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.AutoModerationRuleUpdate">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.AutoModerationRuleUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-update">AUTO_MODERATION_RULE_UPDATE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.AutoModerationRuleDelete">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.AutoModerationRuleDelete">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-delete">AUTO_MODERATION_RULE_DELETE</a> gateway event
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.AutoModerationActionExecution">
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.AutoModerationActionExecution">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution">AUTO_MODERATION_ACTION_EXECUTION</a> gateway event
             </summary>
