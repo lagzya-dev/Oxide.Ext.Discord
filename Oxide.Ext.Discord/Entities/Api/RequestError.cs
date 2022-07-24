@@ -165,7 +165,7 @@ namespace Oxide.Ext.Discord.Entities.Api
                 return;
             }
 
-            if (!_showErrorMessage || DiscordError != null && DiscordExtension.DiscordConfig.Logging.HideDiscordErrorCodes.Contains(DiscordError.Code))
+            if (DiscordError != null && DiscordExtension.DiscordConfig.Logging.HideDiscordErrorCodes.Contains(DiscordError.Code))
             {
                 return;
             }
@@ -182,8 +182,11 @@ namespace Oxide.Ext.Discord.Entities.Api
                     break;
 
                 case RequestErrorType.ApiError:
-                    _client.Logger.Error("Rest Request Exception (Discord API Error). Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Http Response Code: {5} Discord Error Code: {6} Discord Error: {7}\nDiscord Errors: {8}Request Body:\n{9}",
-                        _client.PluginName, RequestId, RequestMethod, Url, ContentType, HttpStatusCode, DiscordError.Code, DiscordError.Message, DiscordError.Errors, StringContents ?? "No Contents");
+                    if (_showErrorMessage)
+                    {
+                        _client.Logger.Error("Rest Request Exception (Discord API Error). Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Http Response Code: {5} Discord Error Code: {6} Discord Error: {7}\nDiscord Errors: {8}Request Body:\n{9}",
+                            _client.PluginName, RequestId, RequestMethod, Url, ContentType, HttpStatusCode, DiscordError.Code, DiscordError.Message, DiscordError.Errors, StringContents ?? "No Contents");
+                    }
                     break;
 
                 case RequestErrorType.GenericWeb:

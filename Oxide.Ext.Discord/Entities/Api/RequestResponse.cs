@@ -96,6 +96,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         protected override void EnterPool()
         {
             Status = default(RequestCompletedStatus);
+            Content = null;
             RateLimit = null;
             Error = null;
             Code = 0;
