@@ -20,6 +20,9 @@ namespace Oxide.Ext.Discord.Data.Users
         [ProtoMember(3)]
         public DateTime? DmBlockedDate { get; set; }
 
+        //Needed by ProtoBuff
+        internal UserData() { }
+        
         public UserData(Snowflake userId)
         {
             UserId = userId;

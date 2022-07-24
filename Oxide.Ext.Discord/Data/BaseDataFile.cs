@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Data
                 }
                 catch (Exception ex)
                 {
-                    DiscordExtension.GlobalLogger.Exception("An error occured loading the {{0}} Data File of type {{1}}", data._dataPath, typeof(T), ex);
+                    DiscordExtension.GlobalLogger.Exception("An error occured loading the {0} Data File of type {1}", data._dataPath, typeof(T), ex);
                 }
                 finally
                 {
