@@ -7,8 +7,15 @@ namespace Oxide.Ext.Discord.Callbacks.Api.Entities
     /// </summary>
     public abstract class BaseApiCompletedCallback : BaseCallback<RequestResponse>
     {
+        /// <summary>
+        /// <see cref="DiscordClient"/> for the Api Completed Callback
+        /// </summary>
         protected DiscordClient Client;
 
+        /// <summary>
+        /// Initializes the <see cref="BaseApiCompletedCallback"/>
+        /// </summary>
+        /// <param name="client"></param>
         protected void Init(DiscordClient client)
         {
             Client = client;
@@ -23,6 +30,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api.Entities
             HandleCallback(response);
         }
 
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             Client = null;

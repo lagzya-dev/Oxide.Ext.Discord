@@ -228,7 +228,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// Called when a socket receives a message
         /// </summary>
         /// <param name="webSocketId">ID of the web socket</param>
-        /// <param name="stream">Stream containing the message</param>
+        /// <param name="reader">Json Reader containing the message</param>
         public async Task SocketMessage(Snowflake webSocketId, DiscordJsonReader reader)
         {
             EventPayload payload = await reader.DeserializeAsync<EventPayload>(_client);
@@ -1413,7 +1413,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         ///  * Along with this limitation, no fields are required, and the types of the fields are not validated.
         ///  * Your client should expect any combination of fields and types within this event
         /// </summary>
-        /// <param name="payload"></param>
+        /// <param name="update"></param>
         /// https://discord.com/developers/docs/topics/gateway#presence-update
         private void HandleDispatchPresenceUpdate(PresenceUpdatedEvent update)
         {

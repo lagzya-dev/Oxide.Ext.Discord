@@ -4,8 +4,16 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Extensions
 {
-    public static class StreamExt
+    /// <summary>
+    /// Stream Extension Methods
+    /// </summary>
+    internal static class StreamExt
     {
+        /// <summary>
+        /// Copies one stream to another using a pooled byte[] buffer
+        /// </summary>
+        /// <param name="stream">Stream to copy from</param>
+        /// <param name="to">Stream to copy to</param>
         public static async Task CopyToPooledAsync(this Stream stream, Stream to)
         {
             byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(8196);
@@ -20,6 +28,8 @@ namespace Oxide.Ext.Discord.Extensions
                 
                 await to.WriteAsync(buffer, 0, bytesRead).ConfigureAwait(false);
             }
+            
+            DiscordArrayPool<byte>.Shared.Return(buffer);
         }
     }
 }

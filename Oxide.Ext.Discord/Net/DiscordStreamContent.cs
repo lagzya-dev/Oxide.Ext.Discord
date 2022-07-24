@@ -7,21 +7,32 @@ using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Net
 {
+    /// <summary>
+    /// Stream content that is sent over HTTP
+    /// This is used because <see cref="StreamContent"/> disposes the underlying stream when disposed and we don't want that since we cache our stream
+    /// </summary>
     public class DiscordStreamContent : HttpContent
     {
         private readonly Stream _content;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="content">Stream content to send over HTTP</param>
+        /// <exception cref="ArgumentNullException">Throws if content is null</exception>
         public DiscordStreamContent(Stream content)
         {
             _content = content ?? throw new ArgumentNullException(nameof(content));
         }
 
+        ///<inheritdoc/>
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
             _content.Position = 0;
             return _content.CopyToPooledAsync(stream);
         }
 
+        ///<inheritdoc/>
         protected override bool TryComputeLength(out long length)
         {
             if (_content.CanSeek)
@@ -33,6 +44,7 @@ namespace Oxide.Ext.Discord.Net
             return false;
         }
 
+        ///<inheritdoc/>
         protected override Task<Stream> CreateContentReadStreamAsync()
         {
             return Task.FromResult(_content);

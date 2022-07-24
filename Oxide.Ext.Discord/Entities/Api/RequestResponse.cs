@@ -18,13 +18,14 @@ namespace Oxide.Ext.Discord.Entities.Api
         internal Stream Content;
         
         private DiscordClient _client;
-        
+
         /// <summary>
         /// Create new REST response with the given data
         /// </summary>
         /// <param name="client">BotClient for the response</param>
         /// <param name="response">The Web Response for the request</param>
         /// <param name="status">The status of the request indicating if it was successful</param>
+        /// <param name="error">If the request had an error the error created from the request</param>
         private async Task Init(DiscordClient client, HttpResponseMessage response, RequestCompletedStatus status, RequestError error = null)
         {
             _client = client;

@@ -3,8 +3,15 @@ using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Pooling
 {
+    /// <summary>
+    /// Represents a <see cref="DiscordArrayPool{T}"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the array pool</typeparam>
     public class DiscordArrayPool<T>
     {
+        /// <summary>
+        /// <see cref="DiscordArrayPool{T}"/> Instance
+        /// </summary>
         public static readonly DiscordArrayPool<T> Shared;
         
         private const int DefaultMaxArrayLength = 1024 * 16;
@@ -33,6 +40,12 @@ namespace Oxide.Ext.Discord.Pooling
             }
         }
 
+        /// <summary>
+        /// Rents an array from the pool
+        /// </summary>
+        /// <param name="minimumLength"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public T[] Rent(int minimumLength)
         {
             if (minimumLength < 0)  throw new ArgumentOutOfRangeException(nameof(minimumLength));
@@ -60,6 +73,11 @@ namespace Oxide.Ext.Discord.Pooling
             return array;
         }
 
+        /// <summary>
+        /// Returns an array to the pool
+        /// </summary>
+        /// <param name="array"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void Return(T[] array)
         {
             if (array == null) throw new ArgumentNullException(nameof(array));
@@ -112,19 +130,6 @@ namespace Oxide.Ext.Discord.Pooling
             return (int)(num1 + num);
         }
 
-        private void ClearInternal()
-        {
-            for (int index = 0; index < _buckets.Length; index++)
-            {
-                _buckets[index].Clear();
-            }
-        }
-        
-        public static void Clear()
-        {
-            Shared.ClearInternal();
-        }
-
         private sealed class Bucket
         {
             internal readonly int BufferLength;
@@ -162,16 +167,6 @@ namespace Oxide.Ext.Discord.Pooling
                     _index--;
                     _buffers[_index] = array;
                 }
-            }
-
-            public void Clear()
-            {
-                for (int index = 0; index < _buffers.Length; index++)
-                {
-                    _buffers[index] = null;
-                }
-
-                _index = 0;
             }
         }
     }

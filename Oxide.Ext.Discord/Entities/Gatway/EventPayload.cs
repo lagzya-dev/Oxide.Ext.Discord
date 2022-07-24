@@ -32,6 +32,11 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// </summary>
         public int? Sequence { get; internal set; }
 
+        /// <summary>
+        /// Returns the Data as {T}
+        /// </summary>
+        /// <typeparam name="T">Type to convert Data to</typeparam>
+        /// <returns>Data converted to {T}</returns>
         public T GetData<T>()
         {
             return (T)Data;

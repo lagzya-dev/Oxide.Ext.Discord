@@ -13,14 +13,19 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
-using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.WebSockets.Handlers;
 
 namespace Oxide.Ext.Discord.Json.Converters
 {
+    /// <summary>
+    /// JSON converter for <see cref="EventPayload"/>
+    /// </summary>
     public class EventPayloadConverter : JsonConverter
     {
+        /// <summary>
+        /// We do not write with this converter
+        /// </summary>
         public override bool CanWrite => false;
 
         private const string EventCode = "op";
@@ -28,11 +33,27 @@ namespace Oxide.Ext.Discord.Json.Converters
         private const string DiscordCode = "t";
         private const string Data = "d";
 
+        /// <summary>
+        /// We do nto write with this converter
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="serializer"></param>
+        /// <exception cref="NotImplementedException"></exception>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Reads the JSON into a pooled <see cref="EventPayload"/>
+        /// Populates the Data field with the correct type during deserialization
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="objectType"></param>
+        /// <param name="existingValue"></param>
+        /// <param name="serializer"></param>
+        /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject obj = JObject.Load(reader);
@@ -223,6 +244,11 @@ namespace Oxide.Ext.Discord.Json.Converters
             return obj[Data].ToObject<T>();
         }
 
+        /// <summary>
+        /// Returns if this converter can convert the given type
+        /// </summary>
+        /// <param name="objectType"></param>
+        /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
             return typeof(EventPayload) == objectType;

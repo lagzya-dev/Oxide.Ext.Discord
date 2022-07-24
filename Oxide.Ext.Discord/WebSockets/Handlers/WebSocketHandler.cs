@@ -199,7 +199,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <summary>
         /// Sends the string message over the web socket
         /// </summary>
-        /// <param name="message">Message to be sent</param>
+        /// <param name="stream">Stream to send</param>
         public async Task<bool> SendAsync(MemoryStream stream)
         {
             if (_socket == null || _socket.State != WebSocketState.Open || stream.Length == 0)

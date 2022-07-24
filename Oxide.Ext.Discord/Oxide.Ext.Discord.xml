@@ -1198,6 +1198,30 @@
         <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.LeavePool">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Cache.DiscordUserCache">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> Cache 
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Cache.DiscordUserCache.Cache">
+            <summary>
+            Readonly Cache of <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.DiscordUserCache.GetOrCreate(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns a cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> for the given user ID or creates a new <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> with that ID
+            </summary>
+            <param name="userId">User ID to lookup in the cache</param>
+            <returns>Cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.DiscordUserCache.GetOrCreate(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+            <summary>
+            Returns a cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> for the given user or returns the passed in DiscordUser that is now cached
+            </summary>
+            <param name="user">User to lookup in the cache</param>
+            <returns>Cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Cache.EnumCache`1">
             <summary>
             Represents a cache of enum strings
@@ -1232,11 +1256,25 @@
             Represents a base callback when a request is completed
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.Client">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.DiscordClient"/> for the Api Completed Callback
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.Init(Oxide.Ext.Discord.DiscordClient)">
+            <summary>
+            Initializes the <see cref="T:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback"/>
+            </summary>
+            <param name="client"></param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.Run(Oxide.Ext.Discord.Entities.Api.RequestResponse)">
             <summary>
             Runs the callback with the RequestResponse
             </summary>
             <param name="response">Response for the request</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.EnterPool">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback">
             <summary>
@@ -1426,6 +1464,16 @@
         <member name="P:Oxide.Ext.Discord.Configuration.DiscordUsersConfig.DmBlockedDuration">
             <summary>
             How long to block DM's after we receive a 50007 Discord API Error code
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Constants.DiscordEncoding">
+            <summary>
+            Encoding format the Discord Uses
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordEncoding.Encoding">
+            <summary>
+            Encoding format used by Discord
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Constants.DiscordEndpoints">
@@ -3050,6 +3098,7 @@
             <param name="client">BotClient for the response</param>
             <param name="response">The Web Response for the request</param>
             <param name="status">The status of the request indicating if it was successful</param>
+            <param name="error">If the request had an error the error created from the request</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.CreateSuccessResponse(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpResponseMessage)">
             <summary>
@@ -6107,6 +6156,13 @@
             <summary>
             Sequence number, used for resuming sessions and heartbeats
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.GetData``1">
+            <summary>
+            Returns the Data as {T}
+            </summary>
+            <typeparam name="T">Type to convert Data to</typeparam>
+            <returns>Data converted to {T}</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EnterPool">
             <inheritdoc/>
@@ -15386,6 +15442,18 @@
             <param name="guild">Guild the member is in</param>
             <returns>GuildMember if linked and in guild; null otherwise</returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.StreamExt">
+            <summary>
+            Stream Extension Methods
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.StreamExt.CopyToPooledAsync(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Copies one stream to another using a pooled byte[] buffer
+            </summary>
+            <param name="stream">Stream to copy from</param>
+            <param name="to">Stream to copy to</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.StringBuilderExt">
             <summary>
             StringBuilder extension methods
@@ -16072,6 +16140,79 @@
             <param name="objectType"></param>
             <returns></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter">
+            <summary>
+            Json Converter for <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> Returns the user from the <see cref="T:Oxide.Ext.Discord.Cache.DiscordUserCache"/> or Caches a new user.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter.CanWrite">
+            <summary>
+            We do not write with this converter
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            We do not write with this converter
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON and populates it on a cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> or Caches a new DiscordUser
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter.CanConvert(System.Type)">
+            <summary>
+            Returns if this converts is for this type
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Json.Converters.EventPayloadConverter">
+            <summary>
+            JSON converter for <see cref="T:Oxide.Ext.Discord.Entities.Gatway.EventPayload"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Json.Converters.EventPayloadConverter.CanWrite">
+            <summary>
+            We do not write with this converter
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.EventPayloadConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            We do nto write with this converter
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.EventPayloadConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON into a pooled <see cref="T:Oxide.Ext.Discord.Entities.Gatway.EventPayload"/>
+            Populates the Data field with the correct type during deserialization
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.EventPayloadConverter.CanConvert(System.Type)">
+            <summary>
+            Returns if this converter can convert the given type
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Json.Converters.HashListConverter`1">
             <summary>
             Converts to and from a list in JSON to a hash
@@ -16200,6 +16341,74 @@
             </summary>
             <param name="objectType"></param>
             <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader">
+            <summary>
+            This is a pooled JSON reader that can read as string, deserialize object, or populate a given object async
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.CopyAsync(System.IO.Stream)">
+            <summary>
+            Copy from the given stream to our internal stream
+            </summary>
+            <param name="stream">Stream to copy</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.ReadAsStringAsync">
+            <summary>
+            Returns the Stream data as a string
+            </summary>
+            <returns>String of the stream data</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.DeserializeAsync``1(Oxide.Ext.Discord.BotClient)">
+            <summary>
+            Deserializes the stream data to {T}
+            </summary>
+            <param name="client">Client to use with the Deserialization</param>
+            <typeparam name="T">Type to deserialize to</typeparam>
+            <returns>{T}</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.PopulateAsync(Oxide.Ext.Discord.BotClient,System.Object)">
+            <summary>
+            Populates the given object from the Stream
+            </summary>
+            <param name="client">Client to use with the Population</param>
+            <param name="obj">Object to populate</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter">
+            <summary>
+            This is a pooled JSON writer that can write JSON to a stream
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter.Stream">
+            <summary>
+            Stream that is written to
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter.WriteAsync(Oxide.Ext.Discord.BotClient,System.Object)">
+            <summary>
+            Serializes the payload to the Stream
+            </summary>
+            <param name="client">Client to serialize with</param>
+            <param name="payload">Payload to be serialized</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter.DisposeInternal">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Command.BaseCommand">
             <summary>
@@ -16702,6 +16911,28 @@
             <param name="message">Message to log</param>
             <param name="exception">Exception for the log</param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Net.DiscordStreamContent">
+            <summary>
+            Stream content that is sent over HTTP
+            This is used because <see cref="T:System.Net.Http.StreamContent"/> disposes the underlying stream when disposed and we don't want that since we cache our stream
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Net.DiscordStreamContent.#ctor(System.IO.Stream)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="content">Stream content to send over HTTP</param>
+            <exception cref="T:System.ArgumentNullException">Throws if content is null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Net.DiscordStreamContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Net.DiscordStreamContent.TryComputeLength(System.Int64@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Net.DiscordStreamContent.CreateContentReadStreamAsync">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Pooling.BasePool`1">
             <summary>
             Represents a BasePool in Discord
@@ -16792,6 +17023,32 @@
             <summary>
             Handles returning the poolable back to the pool
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1">
+            <summary>
+            Represents a <see cref="T:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1"/>
+            </summary>
+            <typeparam name="T">Type of the array pool</typeparam>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1.Shared">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1"/> Instance
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1.Rent(System.Int32)">
+            <summary>
+            Rents an array from the pool
+            </summary>
+            <param name="minimumLength"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1.Return(`0[])">
+            <summary>
+            Returns an array to the pool
+            </summary>
+            <param name="array"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.DiscordPool">
             <summary>
@@ -18067,7 +18324,7 @@
             Called when a socket receives a message
             </summary>
             <param name="webSocketId">ID of the web socket</param>
-            <param name="stream">Stream containing the message</param>
+            <param name="reader">Json Reader containing the message</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.Events.PresenceUpdatedEvent)">
             <summary>
@@ -18076,7 +18333,7 @@
              * Along with this limitation, no fields are required, and the types of the fields are not validated.
              * Your client should expect any combination of fields and types within this event
             </summary>
-            <param name="payload"></param>
+            <param name="update"></param>
             https://discord.com/developers/docs/topics/gateway#presence-update
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler">
@@ -18102,7 +18359,7 @@
             <summary>
             Sends the string message over the web socket
             </summary>
-            <param name="message">Message to be sent</param>
+            <param name="stream">Stream to send</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.Disconnect(System.Int32,System.String)">
             <summary>
