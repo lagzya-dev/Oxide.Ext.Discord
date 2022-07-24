@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Builders.Messages;
 using Oxide.Ext.Discord.Callbacks.Api.Entities;
-using Oxide.Ext.Discord.Data;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;

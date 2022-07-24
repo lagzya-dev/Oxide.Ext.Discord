@@ -6093,7 +6093,7 @@
             Op Code for the payload
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EventName">
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.DispatchCode">
             <summary>
             The event name for this payload
             </summary>
@@ -6108,25 +6108,10 @@
             Sequence number, used for resuming sessions and heartbeats
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EventCode">
-            <summary>
-            Returns a DispatchCode enum value for the EventName if the extension supports it; Else the code will be Unknown
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EventData">
-            <summary>
-            Data as JObject
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.TokenData">
-            <summary>
-            Data as JToken
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.DisposeInternal">
+        <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent">
@@ -15998,12 +15983,12 @@
             <param name="ex">Exception that was thrown</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader)">
             <summary>
             Called when a message is received from the websocket
             </summary>
             <param name="id">ID of the message</param>
-            <param name="message">Message that was received</param>
+            <param name="stream">Stream containing the message</param>
             <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Json.Converters.DiscordColorConverter">
@@ -18077,14 +18062,14 @@
             <param name="webSocketId">ID of the web socket</param>
             <param name="ex">Exception throw</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader)">
             <summary>
             Called when a socket receives a message
             </summary>
             <param name="webSocketId">ID of the web socket</param>
-            <param name="message">Message received from the web socket</param>
+            <param name="stream">Stream containing the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.EventPayload)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.Events.PresenceUpdatedEvent)">
             <summary>
              * From Discord API docs:
              * The user object within this event can be partial, the only field which must be sent is the id field, everything else is optional.

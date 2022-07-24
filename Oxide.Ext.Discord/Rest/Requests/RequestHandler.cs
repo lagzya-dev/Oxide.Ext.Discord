@@ -1,8 +1,6 @@
 using System;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -27,7 +25,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
     {
         internal BaseRequest Request;
 
-        private JsonWriterPoolable _json;
+        private DiscordJsonWriter _json;
         private RequestResponse _response;
         private CancellationToken _token;
         private ILogger _logger;
@@ -221,7 +219,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         private async Task<DiscordStreamContent> GetJsonContent(object data)
         {
-            _json = DiscordPool.Get<JsonWriterPoolable>();
+            _json = DiscordPool.Get<DiscordJsonWriter>();
             await _json.WriteAsync(Request.Client.Bot, data);
             
             if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))

@@ -6,14 +6,14 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Json.Pooling
 {
-    public class JsonWriterPoolable : BasePoolable
+    public class DiscordJsonWriter : BasePoolable
     {
         public readonly MemoryStream Stream;
         
         private readonly JsonTextWriter Writer;
         private readonly StreamReader Reader;
 
-        public JsonWriterPoolable()
+        public DiscordJsonWriter()
         {
             Stream = new MemoryStream();
             StreamWriter sWriter = new StreamWriter(Stream, DiscordEncoding.Encoding, 1024, true);

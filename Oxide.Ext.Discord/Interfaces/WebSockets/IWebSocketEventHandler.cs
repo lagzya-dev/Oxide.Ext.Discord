@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Json.Pooling;
 
 namespace Oxide.Ext.Discord.Interfaces.WebSockets
 {
@@ -37,8 +38,8 @@ namespace Oxide.Ext.Discord.Interfaces.WebSockets
         /// Called when a message is received from the websocket
         /// </summary>
         /// <param name="id">ID of the message</param>
-        /// <param name="message">Message that was received</param>
+        /// <param name="stream">Stream containing the message</param>
         /// <returns></returns>
-        Task SocketMessage(Snowflake id, string message);
+        Task SocketMessage(Snowflake id, DiscordJsonReader stream);
     }
 }

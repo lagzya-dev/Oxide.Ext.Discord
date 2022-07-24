@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.WebSockets;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -200,7 +197,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 return false;
             }
 
-            JsonWriterPoolable writer = DiscordPool.Get<JsonWriterPoolable>();
+            DiscordJsonWriter writer = DiscordPool.Get<DiscordJsonWriter>();
             await writer.WriteAsync(_client, payload);
             writer.Stream.Position = 0;
 

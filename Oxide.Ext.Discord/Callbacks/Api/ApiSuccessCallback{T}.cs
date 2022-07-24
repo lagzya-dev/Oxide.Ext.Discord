@@ -18,10 +18,10 @@ namespace Oxide.Ext.Discord.Callbacks.Api
             base.Init(request);
             _onSuccess = request.OnSuccess;
 
-            JsonReaderPoolable reader = DiscordPool.Get<JsonReaderPoolable>();
+            DiscordJsonReader reader = DiscordPool.Get<DiscordJsonReader>();
             await reader.CopyAsync(response.Content).ConfigureAwait(false);
-            DiscordExtension.GlobalLogger.Debug($"{nameof(ApiSuccessCallback<T>)}.{nameof(Init)} Body: {await reader.ReadAsStringAsync()}");
-            _data = await reader.Deserialize<T>(Client.Bot);
+            //DiscordExtension.GlobalLogger.Verbose($"{nameof(ApiSuccessCallback<T>)}.{nameof(Init)} Body: {await reader.ReadAsStringAsync()}");
+            _data = await reader.DeserializeAsync<T>(Client.Bot);
             reader.Dispose();
         }
 

@@ -4,12 +4,12 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Websocket;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.WebSockets;
+using Oxide.Ext.Discord.Json.Pooling;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
@@ -137,8 +137,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private async Task ReceiveHandler()
         {
             Snowflake id = WebsocketId;
-            MemoryStream input = new MemoryStream();
-            StreamReader reader = new StreamReader(input, _encoding);
+
+            DiscordJsonReader reader = new DiscordJsonReader();
+            MemoryStream input = reader.Stream;
             byte[] array = _receiveBuffer.Array ?? throw new ArgumentNullException();
             
             _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ReceiveHandler)} Start Receive");
@@ -157,9 +158,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     try
                     {
                         input.Position = 0;
-                        string message = await reader.ReadToEndAsync();
-                        _logger.Debug("Got Type: {0} Message: {1}", result.MessageType, message);
-                        await ProcessReceivedMessage(id, result, message);
+                        await ProcessReceivedMessage(id, result, reader);
                     }
                     catch (Exception ex)
                     {
@@ -173,7 +172,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
 
-        private async Task ProcessReceivedMessage(Snowflake id, WebSocketReceiveResult result, string message)
+        private async Task ProcessReceivedMessage(Snowflake id, WebSocketReceiveResult result, DiscordJsonReader reader)
         {
             _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Processing Receive Message For: {{0}}", result.MessageType);
 
@@ -183,6 +182,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 {
                     int closeCode = result.CloseStatus.HasValue ? (int)result.CloseStatus : 1000;
                     SocketState = SocketState.Disconnecting;
+                    string message = await reader.ReadAsStringAsync().ConfigureAwait(false);
                     _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Close Code: {{0}} Message: {{1}}", closeCode, message);
                     await _socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, string.Empty, _token);
                     await _handler.SocketClosed(id, closeCode, message);
@@ -192,8 +192,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
 
-            _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Message: {{0}}", message);
-            await _handler.SocketMessage(id, message);
+            //_logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Message: {{0}}", message);
+            await _handler.SocketMessage(id, reader);
         }
 
         /// <summary>

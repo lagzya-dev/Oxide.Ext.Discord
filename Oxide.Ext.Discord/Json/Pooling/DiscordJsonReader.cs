@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
@@ -8,12 +7,12 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Json.Pooling
 {
-    public class JsonReaderPoolable : BasePoolable
+    public class DiscordJsonReader : BasePoolable
     {
-        private readonly MemoryStream Stream;
+        internal readonly MemoryStream Stream;
         private readonly StreamReader Reader;
 
-        public JsonReaderPoolable()
+        public DiscordJsonReader()
         {
             Stream = new MemoryStream();
             Reader = new StreamReader(Stream, DiscordEncoding.Encoding);
@@ -31,13 +30,24 @@ namespace Oxide.Ext.Discord.Json.Pooling
             return Reader.ReadToEndAsync();
         }
         
-        public Task<T> Deserialize<T>(BotClient client)
+        public Task<T> DeserializeAsync<T>(BotClient client)
         {
             Stream.Position = 0;
             using (JsonTextReader reader = new JsonTextReader(Reader))
             {
                 reader.CloseInput = false;
                 return Task.FromResult(client.ClientSerializer.Deserialize<T>(reader));
+            }
+        }
+
+        public Task PopulateAsync(BotClient client, object obj)
+        {
+            Stream.Position = 0;
+            using (JsonTextReader reader = new JsonTextReader(Reader))
+            {
+                reader.CloseInput = false;
+                client.ClientSerializer.Populate(reader, obj);
+                return Task.CompletedTask;
             }
         }
         

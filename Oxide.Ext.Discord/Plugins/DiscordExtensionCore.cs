@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Data;
 using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
