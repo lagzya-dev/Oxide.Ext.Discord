@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Entities.Gatway
@@ -27,6 +29,9 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         public static string WebsocketUrl { get; private set; }
         
         public static DateTime LastUpdate { get; private set; }
+
+        internal static readonly List<int> Shard = new List<int> {0, 1};
+        internal static readonly ConnectionProperties Properties = new ConnectionProperties();
 
         /// <summary>
         /// Returns an object with a single valid WSS URL, which the client can use for Connecting.

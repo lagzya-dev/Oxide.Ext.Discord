@@ -13,8 +13,13 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
         {
             if (count > 25)
             {
-                throw new InvalidCommandOptionChoiceException($"Cannot have more than 25 Command Option Choices");
+                ThrowMaxChoices();
             }
+        }
+
+        internal static void ThrowMaxChoices()
+        {
+            throw new InvalidCommandOptionChoiceException("Cannot have more than 25 Command Option Choices");
         }
         
         internal static void ThrowIfInvalidName(string name, bool allowNullOrEmpty)

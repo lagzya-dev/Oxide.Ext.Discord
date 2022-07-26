@@ -6,6 +6,7 @@ using Oxide.Core.Configuration;
 using Oxide.Core.Extensions;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Users;
+using Oxide.Ext.Discord.Libraries.AppCommand;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Subscription;
@@ -42,6 +43,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         internal static ILogger GlobalLogger;
 
+        internal static DiscordAppCommand DiscordAppCommand;
         internal static DiscordLink DiscordLink;
         internal static DiscordCommand DiscordCommand;
         internal static DiscordSubscriptions DiscordSubscriptions;
@@ -93,17 +95,19 @@ namespace Oxide.Ext.Discord
             GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new DiscordLogger(DiscordLogLevel.Warning) : new DiscordLogger(DiscordLogLevel.Verbose);
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
 
-            DiscordUsersData.Load();
-
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
                 GlobalLogger.Exception("An unhandled exception was thrown!", exception?.ExceptionObject as System.Exception);
             };
+            
+            DiscordUsersData.Load();
 
+            DiscordAppCommand = new DiscordAppCommand(GlobalLogger);
             DiscordLink = new DiscordLink(GlobalLogger);
-            DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes);
+            DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes, GlobalLogger);
             DiscordSubscriptions = new DiscordSubscriptions(GlobalLogger);
 
+            Manager.RegisterLibrary(nameof(DiscordAppCommand), DiscordAppCommand);
             Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
             Manager.RegisterLibrary(nameof(DiscordCommand), DiscordCommand);
             Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);

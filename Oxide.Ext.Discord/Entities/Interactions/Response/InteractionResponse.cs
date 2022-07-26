@@ -1,26 +1,14 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities.Interactions.Response
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object">Interaction Response</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class InteractionResponse : IDiscordValidation
+    public class InteractionResponse : BaseInteractionResponse<InteractionCallbackData>, IDiscordValidation
     {
-        /// <summary>
-        /// The type of response
-        /// </summary>
-        [JsonProperty("type")]
-        public InteractionResponseType Type { get; set; }
-        
-        /// <summary>
-        /// An optional response message
-        /// </summary>
-        [JsonProperty("data")]
-        public InteractionCallbackData Data { get; set; }
-        
         /// <summary>
         /// Default Constructor
         /// </summary>

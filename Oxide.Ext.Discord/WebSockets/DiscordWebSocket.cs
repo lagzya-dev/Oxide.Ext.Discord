@@ -285,11 +285,11 @@ namespace Oxide.Ext.Discord.WebSockets
             IdentifyCommand identify = new IdentifyCommand
             {
                 Token = _client.Settings.ApiToken,
-                Properties = new ConnectionProperties(),
+                Properties = Gateway.Properties,
                 Intents = _client.Settings.Intents,
                 Compress = false,
                 LargeThreshold = 50,
-                Shard = new List<int> {0, 1}
+                Shard = Gateway.Shard
             };
 
             await SendImmediatelyAsync(GatewayCommandCode.Identify, identify);

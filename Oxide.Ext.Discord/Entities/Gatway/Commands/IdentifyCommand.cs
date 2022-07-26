@@ -58,6 +58,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties">Identify Connection Properties</a>
     /// </summary>
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ConnectionProperties
     {
         /// <summary>

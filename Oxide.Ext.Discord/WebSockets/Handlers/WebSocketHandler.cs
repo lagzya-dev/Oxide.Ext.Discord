@@ -1,10 +1,8 @@
 using System;
 using System.IO;
 using System.Net.WebSockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Websocket;
 using Oxide.Ext.Discord.Helpers;
@@ -30,8 +28,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private readonly ArraySegment<byte> _receiveBuffer;
         private readonly byte[] _sendBuffer;
-        private readonly Encoding _encoding;
-        private readonly int _maxSendChars;
         private readonly AutoResetEvent _sendLock = new AutoResetEvent(true);
 
         //private readonly ZlibDecompressorHandler _decompressor;
@@ -52,12 +48,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             _handler = handler;
             _logger = logger;
-            _encoding = DiscordEncoding.Encoding;
-            //_decompressor = new ZlibDecompressorHandler(_encoding, logger);
             _receiveBuffer = WebSocket.CreateClientBuffer(ReceiveChunkSize, SendChunkSize);
             _sendBuffer = new byte[SendChunkSize];
-            //_receivedBuffer = new byte[ReceiveChunkSize * 4];
-            _maxSendChars = _encoding.GetMaxCharCount(SendChunkSize);
         }
 
         /// <summary>
@@ -137,16 +129,18 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private async Task ReceiveHandler()
         {
             Snowflake id = WebsocketId;
+            CancellationToken token = _token;
+            ClientWebSocket socket = _socket;
 
             DiscordJsonReader reader = new DiscordJsonReader();
             MemoryStream input = reader.Stream;
             byte[] array = _receiveBuffer.Array ?? throw new ArgumentNullException();
             
             _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ReceiveHandler)} Start Receive");
-            while (!_token.IsCancellationRequested && (_socket.State == WebSocketState.Open || _socket.State == WebSocketState.CloseSent))
+            while (!token.IsCancellationRequested && (socket.State == WebSocketState.Open || socket.State == WebSocketState.CloseSent))
             {
-                WebSocketReceiveResult result = await _socket.ReceiveAsync(_receiveBuffer, _token);
-                if (_token.IsCancellationRequested)
+                WebSocketReceiveResult result = await socket.ReceiveAsync(_receiveBuffer, _token);
+                if (token.IsCancellationRequested)
                 {
                     return;
                 }
@@ -174,7 +168,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private async Task ProcessReceivedMessage(Snowflake id, WebSocketReceiveResult result, DiscordJsonReader reader)
         {
-            _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Processing Receive Message For: {{0}}", result.MessageType);
+            _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Processing Receive Message For: {{0}} Type: {{1}} Size: {{2}}", id, result.MessageType, reader.Stream.Length);
 
             if (_socket.State == WebSocketState.CloseReceived && result.MessageType == WebSocketMessageType.Close)
             {

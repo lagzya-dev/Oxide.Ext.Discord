@@ -92,7 +92,7 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
         }
         
         /// <summary>
-        /// Adds a <see cref="AddMessageReference"/> to the message
+        /// Adds a <see cref="MessageReference"/> to the message
         /// </summary>
         /// <param name="reference">Message Reference to be added</param>
         /// <returns>This</returns>

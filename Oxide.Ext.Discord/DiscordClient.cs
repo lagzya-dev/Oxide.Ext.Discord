@@ -265,6 +265,7 @@ namespace Oxide.Ext.Discord
 
             CloseClient(client);
 
+            DiscordExtension.DiscordAppCommand.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordLink.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordCommand.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordSubscriptions.OnPluginUnloaded(plugin);
@@ -282,7 +283,7 @@ namespace Oxide.Ext.Discord
                 client.Disconnect();
 
                 DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {{0}}", client.PluginName);
-                if (client.Plugin && client.Plugin.IsLoaded)
+                if (client.Plugin != null && client.Plugin.IsLoaded)
                 {
                     foreach (FieldInfo field in client.Plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
                     {
@@ -303,7 +304,6 @@ namespace Oxide.Ext.Discord
                 Clients.Remove(client.PluginId);
                 client.Plugin = null;
             }
-            
         }
         #endregion
     }

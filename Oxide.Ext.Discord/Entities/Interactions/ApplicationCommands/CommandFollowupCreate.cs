@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Interactions.Response;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 {

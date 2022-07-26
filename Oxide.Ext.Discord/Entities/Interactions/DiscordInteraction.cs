@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Builders.Messages;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
@@ -172,6 +173,26 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             return new InteractionFollowupBuilder(this);
         }
+        
+        /// <summary>
+        /// Returns a <see cref="InteractionAutoCompleteBuilder"/> for this interaction
+        /// </summary>
+        /// <returns></returns>
+        public InteractionAutoCompleteBuilder GetAutoCompleteBuilder()
+        {
+            InvalidInteractionResponseException.ThrowIfAlreadyResponded(_hasResponded);
+            return new InteractionAutoCompleteBuilder(this);
+        }
+        
+        /// <summary>
+        /// Returns a <see cref="InteractionAutoCompleteBuilder"/> for this interaction
+        /// </summary>
+        /// <returns></returns>
+        public InteractionModalBuilder GetModalBuilder()
+        {
+            InvalidInteractionResponseException.ThrowIfAlreadyResponded(_hasResponded);
+            return new InteractionModalBuilder(this);
+        }
 
         /// <summary>
         /// Create a response to an Interaction from the gateway.
@@ -181,7 +202,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="response">Response to respond with</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionResponse response, Action callback = null, Action<RequestError> error = null)
+        public void CreateInteractionResponse(DiscordClient client, BaseInteractionResponse response, Action callback = null, Action<RequestError> error = null)
         {
             if (response == null) throw new ArgumentNullException(nameof(response));
             InvalidInteractionResponseException.ThrowIfAlreadyResponded(_hasResponded);
@@ -204,6 +225,60 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             InteractionResponse data = new InteractionResponse(type, builder.Build());
             CreateInteractionResponse(client, data, callback, error);
+        }
+        
+        /// <summary>
+        /// Create a Auto Complete response to an Interaction
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="message">Message for this response</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void CreateInteractionResponse(DiscordClient client, InteractionAutoCompleteMessage message, Action callback = null, Action<RequestError> error = null)
+        {
+            InteractionAutoCompleteResponse data = new InteractionAutoCompleteResponse(message);
+            CreateInteractionResponse(client, data, callback, error);
+        }
+        
+        /// <summary>
+        /// Create a Auto Complete response to an Interaction
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="builder">Auto Complete Builder for this response</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void CreateInteractionResponse(DiscordClient client, InteractionAutoCompleteBuilder builder, Action callback = null, Action<RequestError> error = null)
+        {
+            CreateInteractionResponse(client, builder.Build(), callback, error);
+        }
+        
+        /// <summary>
+        /// Create a Modal response to an Interaction
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="message">Message for this response</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void CreateInteractionResponse(DiscordClient client, InteractionModalMessage message, Action callback = null, Action<RequestError> error = null)
+        {
+            InteractionModalResponse data = new InteractionModalResponse(message);
+            CreateInteractionResponse(client, data, callback, error);
+        }
+        
+        /// <summary>
+        /// Create a Modal response to an Interaction
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="builder">Modal Builder for this response</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void CreateInteractionResponse(DiscordClient client, InteractionModalBuilder builder, Action callback = null, Action<RequestError> error = null)
+        {
+            CreateInteractionResponse(client, builder.Build(), callback, error);
         }
 
         /// <summary>

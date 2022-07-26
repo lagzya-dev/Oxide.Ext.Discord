@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Json.Pooling
         public readonly MemoryStream Stream;
         
         private readonly JsonTextWriter _writer;
-        private readonly StreamReader _reader;
+        private StreamReader _reader;
 
         /// <summary>
         /// Constructor
@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Json.Pooling
             Stream = new MemoryStream();
             StreamWriter sWriter = new StreamWriter(Stream, DiscordEncoding.Encoding, 1024, true);
             _writer = new JsonTextWriter(sWriter);
-            _reader = new StreamReader(Stream, DiscordEncoding.Encoding, false, 1024, true);
+            _writer.Formatting = Formatting.None;
         }
 
         /// <summary>
@@ -48,6 +48,11 @@ namespace Oxide.Ext.Discord.Json.Pooling
         internal Task<string> ReadAsStringAsync()
         {
             //DiscordExtension.GlobalLogger.Debug($"{nameof(JsonWriterPoolable)}.{nameof(ReadAsStringAsync)} Read: {{0}} Position: {{1}}", Stream.Length, Stream.Position);
+            if (_reader == null)
+            {
+                _reader = new StreamReader(Stream, DiscordEncoding.Encoding, false, 1024, true);
+            }
+            
             Stream.Position = 0;
             return _reader.ReadToEndAsync();
         }

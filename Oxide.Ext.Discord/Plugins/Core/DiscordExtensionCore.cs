@@ -13,19 +13,24 @@ using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
 using Oxide.Ext.Discord.WebSockets;
 
-namespace Oxide.Ext.Discord.Plugins
+namespace Oxide.Ext.Discord.Plugins.Core
 {
-    internal class DiscordExtensionCore : BaseDiscordPlugin
+    internal partial class DiscordExtensionCore : BaseDiscordPlugin
     {
+        #region Fields
+        public static DiscordExtensionCore Instance;
+        #endregion
+        
         #region Setup & Loading
         public DiscordExtensionCore()
         {
             Title = "Discord Extension Core";
         }
         
-        [HookMethod("Init")]
+        [HookMethod(nameof(Init))]
         private void Init()
         {
+            Instance = this;
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
             AddCovalenceCommand(new[] { "de.rws" }, nameof(ResetWebSocketCommand), "de.rws");
             AddCovalenceCommand(new[] { "de.rra" }, nameof(ResetRestApiCommand), "de.rra");
@@ -39,16 +44,22 @@ namespace Oxide.Ext.Discord.Plugins
             }
         }
 
-        [HookMethod("OnServerSave")]
+        [HookMethod(nameof(OnServerSave))]
         private void OnServerSave()
         {
             DiscordUsersData.Instance.Save(false);
         }
         
-        [HookMethod("OnServerShutdown")]
+        [HookMethod(nameof(OnServerShutdown))]
         private void OnServerShutdown()
         {
             DiscordExtension.IsShuttingDown = true;
+        }
+
+        [HookMethod(nameof(Unload))]
+        private void Unload()
+        {
+            Instance = null;
         }
         #endregion
 

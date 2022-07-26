@@ -1,15 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Builders;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
 {
@@ -47,88 +44,12 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
             Message.Flags |= MessageFlags.Ephemeral;
             return Builder;
         }
-
-        /// <summary>
-        /// Adds an empty array of Auto Complete Choices
-        /// </summary>
-        /// <returns>This</returns>
-        public TBuilder AddEmptyAutoCompleteChoices()
-        {
-            if (Message.Choices == null)
-            {
-                Message.Choices = new List<CommandOptionChoice>();
-            }
-            return Builder;
-        }
         
-        /// <summary>
-        /// Adds a <see cref="CommandOptionChoice"/> to the response
-        /// </summary>
-        /// <param name="name">Name of the choice</param>
-        /// <param name="value">Value of the choice</param>
-        /// <param name="nameLocalizations">Name localizations for the choice</param>
-        /// <returns>This</returns>
-        public TBuilder AddAutoCompleteChoice(string name, object value, Hash<string, string> nameLocalizations = null)
-        {
-            return AddAutoCompleteChoice(new CommandOptionChoice(name, value, nameLocalizations));
-        }
-        
-        /// <summary>
-        /// Adds a <see cref="CommandOptionChoice"/> to the response
-        /// </summary>
-        /// <param name="choice">Choice to be added</param>
-        /// <returns>This</returns>
-        public TBuilder AddAutoCompleteChoice(CommandOptionChoice choice)
-        {
-            if (choice == null) throw new ArgumentNullException(nameof(choice));
-            InteractionResponseBuilderException.ThrowIfInteractionIsNotAutoComplete(Interaction.Type);
-            AddEmptyAutoCompleteChoices();
-            
-            InvalidCommandOptionChoiceException.ThrowIfMaxChoices(Message.Choices.Count + 1);
-            Message.Choices.Add(choice);
-            return Builder;
-        }
-        
-        /// <summary>
-        /// Adds a collection of <see cref="CommandOptionChoice"/> to the response
-        /// </summary>
-        /// <param name="choices">Choices to be added</param>
-        /// <returns>This</returns>
-        public TBuilder AddAutoCompleteChoices(ICollection<CommandOptionChoice> choices)
-        {
-            if (choices == null) throw new ArgumentNullException(nameof(choices));
-            InteractionResponseBuilderException.ThrowIfInteractionIsNotAutoComplete(Interaction.Type);
-            AddEmptyAutoCompleteChoices();
-            
-            InvalidCommandOptionChoiceException.ThrowIfMaxChoices(Message.Choices.Count + choices.Count);
-            Message.Choices.AddRange(choices);
-            return Builder;
-        }
-
-        /// <summary>
-        /// Adds a custom ID for the modal
-        /// </summary>
-        /// <param name="customId">Custom ID for the modal</param>
-        public TBuilder AddModalCustomId(string customId)
+        ///<inheritdoc/>
+        public override TBuilder SuppressEmbeds()
         {
             InteractionResponseBuilderException.ThrowIfInteractionIsAutoComplete(Interaction.Type);
-            InteractionResponseBuilderException.ThrowIfInteractionIsModalSubmit(Interaction.Type);
-            InvalidMessageComponentException.ThrowIfInvalidCustomId(customId);
-            Message.CustomId = customId;
-            return Builder;
-        }
-        
-        /// <summary>
-        /// Adds a custom ID for the modal
-        /// </summary>
-        /// <param name="title">Title for the Modal</param>
-        public TBuilder AddModalTitle(string title)
-        {
-            InteractionResponseBuilderException.ThrowIfInteractionIsAutoComplete(Interaction.Type);
-            InteractionResponseBuilderException.ThrowIfInteractionIsModalSubmit(Interaction.Type);
-            InvalidMessageComponentException.ThrowIfInvalidModalTitle(title);
-            Message.Title = title;
-            return Builder;
+            return base.SuppressEmbeds();
         }
 
         #region Overrides
@@ -165,13 +86,6 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
         {
             InteractionResponseBuilderException.ThrowIfInteractionIsAutoComplete(Interaction.Type);
             return base.AddAllowedMentions(mention);
-        }
-
-        ///<inheritdoc/>
-        public override TBuilder SuppressEmbeds()
-        {
-            InteractionResponseBuilderException.ThrowIfInteractionIsAutoComplete(Interaction.Type);
-            return base.SuppressEmbeds();
         }
 
         ///<inheritdoc/>
