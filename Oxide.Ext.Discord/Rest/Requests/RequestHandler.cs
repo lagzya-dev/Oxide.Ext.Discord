@@ -9,7 +9,7 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Json.Pooling;
+using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Net;
 using Oxide.Ext.Discord.Pooling;

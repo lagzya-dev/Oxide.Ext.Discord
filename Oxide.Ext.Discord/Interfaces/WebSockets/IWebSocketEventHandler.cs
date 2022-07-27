@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Json.Pooling;
+using Oxide.Ext.Discord.Json.Serialization;
 
 namespace Oxide.Ext.Discord.Interfaces.WebSockets
 {

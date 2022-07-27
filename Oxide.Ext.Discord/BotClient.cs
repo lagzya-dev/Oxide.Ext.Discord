@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Newtonsoft.Json;
 using Oxide.Core.Plugins;
@@ -57,12 +58,12 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Application reference for this bot
         /// </summary>
-        public DiscordApplication Application { get; internal set; }
+        public DiscordApplication Application { get; private set; }
 
         /// <summary>
         /// Bot User
         /// </summary>
-        public DiscordUser BotUser { get; internal set; }
+        public DiscordUser BotUser { get; private set; }
 
         /// <summary>
         /// Rest handler for all discord API calls
@@ -80,20 +81,22 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Discord Extension JSON Serialization settings
         /// </summary>
-        internal readonly JsonSerializerSettings ClientSerializerSettings = new JsonSerializerSettings
+        internal readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
         {
             NullValueHandling = NullValueHandling.Ignore
         };
 
-        internal readonly JsonSerializer ClientSerializer;
+        internal readonly JsonSerializer JsonSerializer;
 
         internal DiscordWebSocket WebSocket;
+
+        private readonly List<DiscordClient> _clients = new List<DiscordClient>();
 
         /// <summary>
         /// List of all clients that are using this bot client
         /// </summary>
-        internal readonly List<DiscordClient> Clients = new List<DiscordClient>();
-        
+        public readonly IReadOnlyList<DiscordClient> Clients;
+
         private GatewayReadyEvent _readyData;
 
         /// <summary>
@@ -113,11 +116,14 @@ namespace Oxide.Ext.Discord
             
             Initialized = true;
 
-            ClientSerializer = JsonSerializer.Create(ClientSerializerSettings);
+            JsonSerializer = JsonSerializer.Create(JsonSettings);
+            JsonSerializer.Formatting = Formatting.None;
 
             Hooks = new DiscordHook(Logger);
             Rest = new RestHandler(this, Logger);
             WebSocket = new DiscordWebSocket(this, Logger);
+            
+            Clients = new ReadOnlyCollection<DiscordClient>(_clients);
         }
 
         /// <summary>
@@ -207,14 +213,14 @@ namespace Oxide.Ext.Discord
         {
             TokenMismatchException.ThrowIfMismatchedToken(client, Settings);
 
-            Clients.RemoveAll(c => c == client);
-            Clients.Add(client);
+            _clients.RemoveAll(c => c == client);
+            _clients.Add(client);
             client.OnBotAdded(this);
             Hooks.AddPlugin(client.Plugin);
             
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
             
-            if (Clients.Count == 1)
+            if (_clients.Count == 1)
             {
                 Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Clients.Count == 1 connecting bot");
                 ConnectWebSocket();
@@ -267,10 +273,10 @@ namespace Oxide.Ext.Discord
         public void RemoveClient(DiscordClient client)
         {
             client.OnBotRemoved();
-            Clients.Remove(client);
+            _clients.Remove(client);
             Hooks.RemovePlugin(client.Plugin);
             Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} {{0}} Client Removed", client.PluginName);
-            if (Clients.Count == 0)
+            if (_clients.Count == 0)
             {
                 ShutdownBot();
                 Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Bot count 0 shutting down bot");
@@ -278,9 +284,9 @@ namespace Oxide.Ext.Discord
             }
 
             DiscordLogLevel level = DiscordLogLevel.Off;
-            for (int index = 0; index < Clients.Count; index++)
+            for (int index = 0; index < _clients.Count; index++)
             {
-                DiscordClient remainingClient = Clients[index];
+                DiscordClient remainingClient = _clients[index];
                 if (remainingClient.Settings.LogLevel < level)
                 {
                     level = remainingClient.Settings.LogLevel;
@@ -293,9 +299,9 @@ namespace Oxide.Ext.Discord
             }
             
             GatewayIntents intents = GatewayIntents.None;
-            for (int index = 0; index < Clients.Count; index++)
+            for (int index = 0; index < _clients.Count; index++)
             {
-                DiscordClient exitingClients = Clients[index];
+                DiscordClient exitingClients = _clients[index];
                 intents |= exitingClients.Settings.Intents;
             }
 
@@ -310,13 +316,13 @@ namespace Oxide.Ext.Discord
         public string GetClientPluginList()
         {
             StringBuilder sb = DiscordPool.GetStringBuilder();
-            for (int index = 0; index < Clients.Count; index++)
+            for (int index = 0; index < _clients.Count; index++)
             {
-                DiscordClient client = Clients[index];
+                DiscordClient client = _clients[index];
                 sb.Append('[');
                 sb.Append(client.PluginName);
                 sb.Append(']');
-                if (index + 1 != Clients.Count)
+                if (index + 1 != _clients.Count)
                 {
                     sb.Append(",");
                 }
@@ -334,6 +340,9 @@ namespace Oxide.Ext.Discord
 
         internal void OnClientReady(GatewayReadyEvent ready)
         {
+            Application = ready.Application;
+            BotUser = ready.User;
+            
             if (_readyData == null)
             {
                 Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ready);
@@ -366,7 +375,7 @@ namespace Oxide.Ext.Discord
         /// <returns></returns>
         internal DiscordClient GetFirstClient()
         {
-            return Clients.Count != 0 ? Clients[0] : null;
+            return _clients.Count != 0 ? _clients[0] : null;
         }
 
         /// <summary>
@@ -501,9 +510,9 @@ namespace Oxide.Ext.Discord
         #region Discord Command Helpers
         internal bool IsPluginRegistered(Plugin plugin)
         {
-            for (int index = 0; index < Clients.Count; index++)
+            for (int index = 0; index < _clients.Count; index++)
             {
-                DiscordClient client = Clients[index];
+                DiscordClient client = _clients[index];
                 if (client.Plugin == plugin)
                 {
                     return true;

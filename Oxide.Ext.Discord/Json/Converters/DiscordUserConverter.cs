@@ -37,9 +37,9 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            DiscordUser jsonUser = new DiscordUser();
-            serializer.Populate(reader, jsonUser);
-            return DiscordUserCache.GetOrCreate(jsonUser);
+            DiscordUser user = new DiscordUser();
+            serializer.Populate(reader, user);
+            return DiscordUserCache.GetOrCreate(user);
         }
 
         /// <summary>

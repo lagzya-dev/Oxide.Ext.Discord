@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
-            ArrayPool.Free(Args);
+            base.DisposeInternal();
             DiscordPool.Free(this);
         }
 

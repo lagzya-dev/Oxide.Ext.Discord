@@ -145,7 +145,7 @@ namespace Oxide.Ext.Discord.Entities.Api
                 Message = await reader.ReadToEndAsync();
                 if (!string.IsNullOrEmpty(Message) && Message.StartsWith("{"))
                 {
-                    DiscordError = JsonConvert.DeserializeObject<RequestErrorMessage>(Message, _client.Bot.ClientSerializerSettings);
+                    DiscordError = JsonConvert.DeserializeObject<RequestErrorMessage>(Message, _client.Bot.JsonSettings);
                     if (DiscordError != null)
                     {
                         ErrorType = RequestErrorType.ApiError;

@@ -1,3 +1,5 @@
+using Oxide.Core;
+
 namespace Oxide.Ext.Discord.Callbacks.Hooks
 {
     internal abstract class BaseHookCallback : BaseNextTickCallback
@@ -15,6 +17,11 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
         {
             Hook = null;
             Args = null;
+        }
+
+        protected override void DisposeInternal()
+        {
+            ArrayPool.Free(Args);
         }
     }
 }

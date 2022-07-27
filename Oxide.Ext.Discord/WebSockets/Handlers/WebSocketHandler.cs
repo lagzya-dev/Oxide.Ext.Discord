@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Websocket;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.WebSockets;
-using Oxide.Ext.Discord.Json.Pooling;
+using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers

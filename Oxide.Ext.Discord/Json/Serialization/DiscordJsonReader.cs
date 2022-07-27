@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Json.Pooling
+namespace Oxide.Ext.Discord.Json.Serialization
 {
     /// <summary>
     /// This is a pooled JSON reader that can read as string, deserialize object, or populate a given object async
@@ -57,7 +57,7 @@ namespace Oxide.Ext.Discord.Json.Pooling
             using (JsonTextReader reader = new JsonTextReader(_reader))
             {
                 reader.CloseInput = false;
-                return Task.FromResult(client.ClientSerializer.Deserialize<T>(reader));
+                return Task.FromResult(client.JsonSerializer.Deserialize<T>(reader));
             }
         }
 
@@ -73,7 +73,7 @@ namespace Oxide.Ext.Discord.Json.Pooling
             using (JsonTextReader reader = new JsonTextReader(_reader))
             {
                 reader.CloseInput = false;
-                client.ClientSerializer.Populate(reader, obj);
+                client.JsonSerializer.Populate(reader, obj);
                 return Task.CompletedTask;
             }
         }

@@ -105,7 +105,7 @@
             The settings for this bot of all the combined clients
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.ClientSerializerSettings">
+        <member name="F:Oxide.Ext.Discord.BotClient.JsonSettings">
             <summary>
             Discord Extension JSON Serialization settings
             </summary>
@@ -16442,7 +16442,7 @@
             <param name="ex">Exception that was thrown</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader)">
+        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader)">
             <summary>
             Called when a message is received from the websocket
             </summary>
@@ -16733,30 +16733,30 @@
             <param name="objectType"></param>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader">
+        <member name="T:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader">
             <summary>
             This is a pooled JSON reader that can read as string, deserialize object, or populate a given object async
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.#ctor">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.#ctor">
             <summary>
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.CopyAsync(System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CopyAsync(System.IO.Stream)">
             <summary>
             Copy from the given stream to our internal stream
             </summary>
             <param name="stream">Stream to copy</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.ReadAsStringAsync">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.ReadAsStringAsync">
             <summary>
             Returns the Stream data as a string
             </summary>
             <returns>String of the stream data</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.DeserializeAsync``1(Oxide.Ext.Discord.BotClient)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.DeserializeAsync``1(Oxide.Ext.Discord.BotClient)">
             <summary>
             Deserializes the stream data to {T}
             </summary>
@@ -16764,7 +16764,7 @@
             <typeparam name="T">Type to deserialize to</typeparam>
             <returns>{T}</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.PopulateAsync(Oxide.Ext.Discord.BotClient,System.Object)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.PopulateAsync(Oxide.Ext.Discord.BotClient,System.Object)">
             <summary>
             Populates the given object from the Stream
             </summary>
@@ -16772,25 +16772,25 @@
             <param name="obj">Object to populate</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader.DisposeInternal">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.DisposeInternal">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter">
+        <member name="T:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter">
             <summary>
             This is a pooled JSON writer that can write JSON to a stream
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter.Stream">
+        <member name="F:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.Stream">
             <summary>
             Stream that is written to
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter.#ctor">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.#ctor">
             <summary>
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter.WriteAsync(Oxide.Ext.Discord.BotClient,System.Object)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.WriteAsync(Oxide.Ext.Discord.BotClient,System.Object)">
             <summary>
             Serializes the payload to the Stream
             </summary>
@@ -16798,7 +16798,7 @@
             <param name="payload">Payload to be serialized</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Pooling.DiscordJsonWriter.DisposeInternal">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.AppCommand.DiscordAppCommand">
@@ -18751,7 +18751,7 @@
             <param name="webSocketId">ID of the web socket</param>
             <param name="ex">Exception throw</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Json.Pooling.DiscordJsonReader)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketMessage(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader)">
             <summary>
             Called when a socket receives a message
             </summary>

@@ -23,7 +23,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.WebSockets;
-using Oxide.Ext.Discord.Json.Pooling;
+using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
@@ -236,8 +236,15 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             //JsonConvert.PopulateObject(message, payload, _client.ClientSerializerSettings);
             _webSocket.OnSequenceUpdate(payload.Sequence);
 
-            _logger.Verbose("Received socket message, OpCode: {0}", payload.OpCode);
-
+            if (_logger.IsLogging(DiscordLogLevel.Verbose))
+            {
+                _logger.Verbose("Received socket message, OpCode: {0} Payload: {1}", payload.OpCode, await reader.ReadAsStringAsync());
+            }
+            else
+            {
+                _logger.Debug("Received socket message, OpCode: {0}", payload.OpCode);
+            }
+            
             try
             {
                 switch (payload.OpCode)
@@ -555,16 +562,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
             
             _webSocket.OnSocketReady(ready.SessionId);
-            _client.Application = ready.Application;
-            _client.BotUser = ready.User;
-            
+            _client.OnClientReady(ready);
+
             _logger.Info("Your bot was found in {0} Guilds!", ready.Guilds.Count);
             if (_client.Settings.HasIntents(GatewayIntents.GuildMessages) && !_client.Application.HasApplicationFlag(ApplicationFlags.GatewayMessageContentLimited))
             {
                 _logger.Error("You need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications or plugins using this intent will not function correctly", _client.BotUser.Username);
             }
-            
-            _client.OnClientReady(ready);
         }
 
         //https://discord.com/developers/docs/topics/gateway#resumed`

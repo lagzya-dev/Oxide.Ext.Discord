@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Json.Pooling
+namespace Oxide.Ext.Discord.Json.Serialization
 {
     /// <summary>
     /// This is a pooled JSON writer that can write JSON to a stream
@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Json.Pooling
         public Task WriteAsync(BotClient client, object payload)
         {
             //DiscordExtension.GlobalLogger.Debug($"{nameof(JsonWriterPoolable)}.{nameof(WriteAsync)} Before: {{0}} Position: {{1}} Type: {{2}}", Stream.Length, Stream.Position, payload.GetType());
-            client.ClientSerializer.Serialize(_writer, payload);
+            client.JsonSerializer.Serialize(_writer, payload);
             _writer.Flush();
             //DiscordExtension.GlobalLogger.Debug($"{nameof(JsonWriterPoolable)}.{nameof(WriteAsync)} After: {{0}} Position: {{1}} Type: {{2}}", Stream.Length, Stream.Position, payload.GetType());
             return Task.CompletedTask;
