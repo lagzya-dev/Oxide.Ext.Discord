@@ -1,6 +1,6 @@
 using System;
 
-namespace Oxide.Ext.Discord.Builders.Messages
+namespace Oxide.Ext.Discord.Builders.Interactions
 {
     /// <summary>
     /// AutoComplete Player Search Options for <see cref="InteractionAutoCompleteBuilder"/>

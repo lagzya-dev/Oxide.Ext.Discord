@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Builders.Interactions;
 using Oxide.Ext.Discord.Builders.Messages;
 using Oxide.Plugins;
 

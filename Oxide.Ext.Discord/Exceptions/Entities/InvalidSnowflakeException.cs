@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities
             }
         }
         
-        internal static void ThrowIfInvalid(Discord.Entities.Snowflake? snowflake, bool requireValue, string paramName)
+        internal static void ThrowIfInvalid(Snowflake? snowflake, bool requireValue, string paramName)
         {
             if (requireValue && !snowflake.HasValue)
             {

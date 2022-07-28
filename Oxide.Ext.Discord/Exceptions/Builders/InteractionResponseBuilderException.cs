@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Exceptions.Builders
 
         internal static void ThrowIfInteractionIsAutoComplete(InteractionType type)
         {
-            if (type == InteractionType.ApplicationCommandAutocomplete)
+            if (type == InteractionType.ApplicationCommandAutoComplete)
             {
                 throw new InteractionResponseBuilderException("Cannot call this method because you can only add Auto Complete Choices to this interaction response");
             }
@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Exceptions.Builders
         
         internal static void ThrowIfInteractionIsNotAutoComplete(InteractionType type)
         {
-            if (type != InteractionType.ApplicationCommandAutocomplete)
+            if (type != InteractionType.ApplicationCommandAutoComplete)
             {
                 throw new InteractionResponseBuilderException("Cannot call this method because this is not an Auto Complete interaction");
             }

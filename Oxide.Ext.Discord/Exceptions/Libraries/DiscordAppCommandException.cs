@@ -1,5 +1,5 @@
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Libraries.AppCommand;
+using Oxide.Ext.Discord.Libraries.AppCommands;
 
 namespace Oxide.Ext.Discord.Exceptions.Libraries
 {
@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Exceptions.Libraries
         {
             if (type == InteractionType.MessageComponent)
             {
-                throw new DiscordAppCommandException($"Cannot use InteractionType.MessageComponent type in {nameof(DiscordAppCommand)}.{nameof(DiscordAppCommand.AddCommand)}. Please use {nameof(DiscordAppCommand)}.{nameof(DiscordAppCommand.AddMessageComponentCommand)} instead.");
+                throw new DiscordAppCommandException($"Cannot use InteractionType.MessageComponent type in {nameof(DiscordAppCommand)}.{nameof(DiscordAppCommand.AddApplicationCommand)}. Please use {nameof(DiscordAppCommand)}.{nameof(DiscordAppCommand.AddMessageComponentCommand)} instead.");
             }
         }
     }

@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 
-namespace Oxide.Ext.Discord.Builders.Messages
+namespace Oxide.Ext.Discord.Builders.Interactions
 {
     /// <summary>
     /// Builds a Modal Interaction Response Message

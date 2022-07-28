@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Builders.Interactions;
 using Oxide.Ext.Discord.Builders.Messages;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Guilds;
@@ -14,6 +16,7 @@ using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
@@ -153,6 +156,56 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="args">Localization args</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
         public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordLocale.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
+        
+        public InteractionDataOption GetFocusedOption()
+        {
+            List<InteractionDataOption> options = Data.Options;
+            for (int index = 0; index < options.Count; index++)
+            {
+                InteractionDataOption option = options[index];
+                if (option.Type == CommandOptionType.SubCommand || option.Type == CommandOptionType.SubCommandGroup)
+                {
+                    options = option.Options;
+                    index = 0;
+                    continue;
+                }
+
+                if (option.Focused.HasValue && option.Focused.Value)
+                {
+                    return option;
+                }
+            }
+
+            return null;
+        }
+
+        internal AppCommandId GetCommandId()
+        {
+            string command = Data.Name;
+            string group = null;
+            string subCommand = null;
+            
+            List<InteractionDataOption> options = Data.Options;
+            for (int index = 0; index < options.Count; index++)
+            {
+                InteractionDataOption option = options[index];
+                if (option.Type == CommandOptionType.SubCommandGroup)
+                {
+                    group = option.Name;
+                    options = option.Options;
+                    index = 0;
+                    continue;
+                }
+                
+                if (option.Type == CommandOptionType.SubCommand)
+                {
+                    subCommand = option.Name;
+                    break;
+                }
+            }
+
+            return new AppCommandId(command, group, subCommand);
+        }
         
         /// <summary>
         /// Returns a <see cref="InteractionResponseBuilder"/> for this interaction

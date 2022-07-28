@@ -699,6 +699,371 @@
             </summary>
             <returns>List of <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions">
+            <summary>
+            AutoComplete Player Search Options for <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder"/>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions.Default">
+            <summary>
+            Defaults search options
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions.IncludeClanName">
+            <summary>
+            Include Clan Name in search
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions.IncludeSteamId">
+            <summary>
+            Include Steam ID
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode">
+            <summary>
+            AutoComplete Search Mode for <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder"/>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode.StartsWith">
+            <summary>
+            Filter using StartsWith
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode.Contains">
+            <summary>
+            Filter using Contains
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode.EndsWith">
+            <summary>
+            Filter using EndsWith
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2">
+            <summary>
+            Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.BaseInteractionMessage"/>
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+            <typeparam name="TBuilder"></typeparam>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.Interaction">
+            <summary>
+            Interaction this interaction builder is for
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,`0)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="interaction">Interaction this builder is for</param>
+            <param name="message">Message to be created</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AsEphemeral">
+            <summary>
+            Marks the response as Ephemeral so only the person who executed the command can see
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.SuppressEmbeds">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AsTts(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddContent(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddEmbed(Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddEmbeds(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddAllowedMentions(Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddActionRow(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddComponents(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder">
+            <summary>
+            Builder for Auto Complete Interaction
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="interaction">Interaction this build is for</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="interaction">Interaction this build is for</param>
+            <param name="message">Starting <see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage"/></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddAutoCompleteChoice(System.String,System.Object)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> to the response
+            </summary>
+            <param name="name">Name of the choice</param>
+            <param name="value">Value of the choice</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddAutoCompleteChoice(System.String,System.Object,Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> to the response
+            </summary>
+            <param name="name">Name of the choice</param>
+            <param name="value">Value of the choice</param>
+            <param name="plugin">Plugin to lookup the langkey for</param>
+            <param name="langKey">Lang key for the name</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddAutoCompleteChoice(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> to the response
+            </summary>
+            <param name="choice">Choice to be added</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddAutoCompleteChoices(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice})">
+            <summary>
+            Adds a collection of <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> to the response
+            </summary>
+            <param name="choices">Choices to be added</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.CanAddChoice">
+            <summary>
+            Returns if the Auto Complete can add any more choices
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.Build">
+            <summary>
+            Returns the built message
+            </summary>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroups(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds Oxide Groups to the AutoComplete
+            </summary>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissions(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds Oxide Permissions to the AutoComplete
+            </summary>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds Oxide Group Permissions to the AutoComplete
+            </summary>
+            <param name="group">Group to get the permissions for</param>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsNotInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds Oxide Permissions Not In Group to the AutoComplete
+            </summary>
+            <param name="group">Group to get the permissions for</param>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsWithPermission(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds The List of Groups that have this permission
+            </summary>
+            <param name="permission">Permission to get groups for</param>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsWithoutPermission(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds The List of Groups that have this permission
+            </summary>
+            <param name="permission">Permission to get groups for</param>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsUserIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds The List of Groups that playerId has
+            </summary>
+            <param name="playerId">Player ID to get groups for</param>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsUserNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds The List of Groups that playerId has
+            </summary>
+            <param name="playerId">Player ID to get groups for</param>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsUserIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds The List of Permissions that playerId has
+            </summary>
+            <param name="playerId">Player ID to get permissions for</param>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsUserNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds The List of Permissions that playerId has
+            </summary>
+            <param name="playerId">Player ID to get permissions for</param>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddOnlinePlayers(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode,Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions)">
+            <summary>
+            Adds Online Players to the list
+            </summary>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="options"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions"/> Search Options</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddOfflinePlayers(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode,Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions)">
+            <summary>
+            Adds Online Players to the list
+            </summary>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="options"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions"/> Search Options</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddAllOnlineFirstPlayers(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode,Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions)">
+            <summary>
+            Adds Online Players to the list first
+            If there is still space add Offline Players
+            </summary>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="options"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions"/> Search Options</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddAllPlayers(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode,Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions)">
+            <summary>
+            Adds Any Player to the list
+            </summary>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="options"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions"/> Search Options</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder">
+            <summary>
+            Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate"/>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+            <summary>
+            Constructor for creating a new CommandFollowupCreate
+            </summary>
+            <param name="interaction">Interaction this followup is for</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate)">
+            <summary>
+            Constructor for using an existing CommandFollowupCreate
+            </summary>
+            <param name="interaction">Interaction this followup is for</param>
+            <param name="message">Message to use</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder">
+            <summary>
+            Builds a Modal Interaction Response Message
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="interaction">Interaction this build is for</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="interaction">Interaction this build is for</param>
+            <param name="message">Starting <see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage"/></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.AddModalCustomId(System.String)">
+            <summary>
+            Adds a custom ID for the modal
+            </summary>
+            <param name="customId">Custom ID for the modal</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.AddModalTitle(System.String)">
+            <summary>
+            Adds a custom ID for the modal
+            </summary>
+            <param name="title">Title for the Modal</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Adds a select menu to a new action row
+            </summary>
+            <param name="customId">Unique ID for the select menu</param>
+            <param name="label">Label for the input text</param>
+            <param name="style">Style of the Input Text</param>
+            <param name="value">Default value for the Input Text</param>
+            <param name="required">Is the Input Text Required to be filled out</param>
+            <param name="placeholder">Text to display if no value is selected yet</param>
+            <param name="minLength">The min number of options you must select</param>
+            <param name="maxLength">The max number of options you can select</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.Build">
+            <summary>
+            Returns a built Modal Response Message
+            </summary>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage"/></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder">
+            <summary>
+            Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData"/>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+            <summary>
+            Constructor for creating a new InteractionCallbackData
+            </summary>
+            <param name="interaction">Interaction this followup is for</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData)">
+            <summary>
+            Constructor for using an existing InteractionCallbackData
+            </summary>
+            <param name="interaction">Interaction this followup is for</param>
+            <param name="message">Message to use</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder">
             <summary>
             Builder for Message Components
@@ -796,46 +1161,6 @@
             </summary>
             <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions">
-            <summary>
-            AutoComplete Player Search Options for <see cref="T:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder"/>
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions.Default">
-            <summary>
-            Defaults search options
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions.IncludeClanName">
-            <summary>
-            Include Clan Name in search
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions.IncludeSteamId">
-            <summary>
-            Include Steam ID
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode">
-            <summary>
-            AutoComplete Search Mode for <see cref="T:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder"/>
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode.StartsWith">
-            <summary>
-            Filter using StartsWith
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode.Contains">
-            <summary>
-            Filter using Contains
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode.EndsWith">
-            <summary>
-            Filter using EndsWith
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseChannelMessageBuilder`2">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageCreate"/>
@@ -900,58 +1225,6 @@
             <param name="guildId">Guild ID of the message if one exists</param>
             <param name="failIfNotExists">Should the API call error if the message does not exist (Default true)</param>
             <returns>This</returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2">
-            <summary>
-            Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.BaseInteractionMessage"/>
-            </summary>
-            <typeparam name="TMessage"></typeparam>
-            <typeparam name="TBuilder"></typeparam>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.Interaction">
-            <summary>
-            Interaction this interaction builder is for
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,`0)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="interaction">Interaction this builder is for</param>
-            <param name="message">Message to be created</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.AsEphemeral">
-            <summary>
-            Marks the response as Ephemeral so only the person who executed the command can see
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.SuppressEmbeds">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.AsTts(System.Boolean)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.AddContent(System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.AddEmbed(Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.AddEmbeds(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.AddAllowedMentions(Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.AddActionRow(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.AddComponents(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseInteractionMessageBuilder`2.AddAttachment(System.String,System.Byte[],System.String,System.String)">
-            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseMessageBuilder`2">
             <summary>
@@ -1101,279 +1374,6 @@
             <summary>
             Constructor to use existing message
             </summary>
-            <param name="message">Message to use</param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder">
-            <summary>
-            Builder for Auto Complete Interaction
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="interaction">Interaction this build is for</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="interaction">Interaction this build is for</param>
-            <param name="message">Starting <see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage"/></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddAutoCompleteChoice(System.String,System.Object)">
-            <summary>
-            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> to the response
-            </summary>
-            <param name="name">Name of the choice</param>
-            <param name="value">Value of the choice</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddAutoCompleteChoice(System.String,System.Object,Oxide.Core.Plugins.Plugin,System.String)">
-            <summary>
-            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> to the response
-            </summary>
-            <param name="name">Name of the choice</param>
-            <param name="value">Value of the choice</param>
-            <param name="plugin">Plugin to lookup the langkey for</param>
-            <param name="langKey">Lang key for the name</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddAutoCompleteChoice(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice)">
-            <summary>
-            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> to the response
-            </summary>
-            <param name="choice">Choice to be added</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddAutoCompleteChoices(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice})">
-            <summary>
-            Adds a collection of <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> to the response
-            </summary>
-            <param name="choices">Choices to be added</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.CanAddChoice">
-            <summary>
-            Returns if the Auto Complete can add any more choices
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.Build">
-            <summary>
-            Returns the built message
-            </summary>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddGroups(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds Oxide Groups to the AutoComplete
-            </summary>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddPermissions(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds Oxide Permissions to the AutoComplete
-            </summary>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddPermissionsInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds Oxide Group Permissions to the AutoComplete
-            </summary>
-            <param name="group">Group to get the permissions for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddPermissionsNotInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds Oxide Permissions Not In Group to the AutoComplete
-            </summary>
-            <param name="group">Group to get the permissions for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddGroupsWithPermission(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds The List of Groups that have this permission
-            </summary>
-            <param name="permission">Permission to get groups for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddGroupsWithoutPermission(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds The List of Groups that have this permission
-            </summary>
-            <param name="permission">Permission to get groups for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddGroupsUserIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds The List of Groups that playerId has
-            </summary>
-            <param name="playerId">Player ID to get groups for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddGroupsUserNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds The List of Groups that playerId has
-            </summary>
-            <param name="playerId">Player ID to get groups for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddPermissionsUserIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds The List of Permissions that playerId has
-            </summary>
-            <param name="playerId">Player ID to get permissions for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddPermissionsUserNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode)">
-            <summary>
-            Adds The List of Permissions that playerId has
-            </summary>
-            <param name="playerId">Player ID to get permissions for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddOnlinePlayers(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode,Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions)">
-            <summary>
-            Adds Online Players to the list
-            </summary>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-            <param name="options"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions"/> Search Options</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddOfflinePlayers(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode,Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions)">
-            <summary>
-            Adds Online Players to the list
-            </summary>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-            <param name="options"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions"/> Search Options</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddAllOnlineFirstPlayers(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode,Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions)">
-            <summary>
-            Adds Online Players to the list first
-            If there is still space add Offline Players
-            </summary>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-            <param name="options"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions"/> Search Options</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder.AddAllPlayers(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode,Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions)">
-            <summary>
-            Adds Any Player to the list
-            </summary>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompleteSearchMode"/> Filter search mode</param>
-            <param name="options"><see cref="T:Oxide.Ext.Discord.Builders.Messages.AutoCompletePlayerSearchOptions"/> Search Options</param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.InteractionFollowupBuilder">
-            <summary>
-            Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate"/>
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionFollowupBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
-            <summary>
-            Constructor for creating a new CommandFollowupCreate
-            </summary>
-            <param name="interaction">Interaction this followup is for</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionFollowupBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate)">
-            <summary>
-            Constructor for using an existing CommandFollowupCreate
-            </summary>
-            <param name="interaction">Interaction this followup is for</param>
-            <param name="message">Message to use</param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.InteractionModalBuilder">
-            <summary>
-            Builds a Modal Interaction Response Message
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionModalBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="interaction">Interaction this build is for</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionModalBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="interaction">Interaction this build is for</param>
-            <param name="message">Starting <see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage"/></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionModalBuilder.AddModalCustomId(System.String)">
-            <summary>
-            Adds a custom ID for the modal
-            </summary>
-            <param name="customId">Custom ID for the modal</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionModalBuilder.AddModalTitle(System.String)">
-            <summary>
-            Adds a custom ID for the modal
-            </summary>
-            <param name="title">Title for the Modal</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionModalBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
-            <summary>
-            Adds a select menu to a new action row
-            </summary>
-            <param name="customId">Unique ID for the select menu</param>
-            <param name="label">Label for the input text</param>
-            <param name="style">Style of the Input Text</param>
-            <param name="value">Default value for the Input Text</param>
-            <param name="required">Is the Input Text Required to be filled out</param>
-            <param name="placeholder">Text to display if no value is selected yet</param>
-            <param name="minLength">The min number of options you must select</param>
-            <param name="maxLength">The max number of options you can select</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionModalBuilder.Build">
-            <summary>
-            Returns a built Modal Response Message
-            </summary>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage"/></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.InteractionResponseBuilder">
-            <summary>
-            Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData"/>
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionResponseBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
-            <summary>
-            Constructor for creating a new InteractionCallbackData
-            </summary>
-            <param name="interaction">Interaction this followup is for</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.InteractionResponseBuilder.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData)">
-            <summary>
-            Constructor for using an existing InteractionCallbackData
-            </summary>
-            <param name="interaction">Interaction this followup is for</param>
             <param name="message">Message to use</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.Messages.WebhookMessageBuilder">
@@ -10704,25 +10704,25 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GetResponseBuilder">
             <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Messages.InteractionResponseBuilder"/> for this interaction
+            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder"/> for this interaction
             </summary>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GetFollowupBuilder">
             <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Messages.InteractionFollowupBuilder"/> for this interaction
+            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder"/> for this interaction
             </summary>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GetAutoCompleteBuilder">
             <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder"/> for this interaction
+            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder"/> for this interaction
             </summary>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GetModalBuilder">
             <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder"/> for this interaction
+            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder"/> for this interaction
             </summary>
             <returns></returns>
         </member>
@@ -10736,7 +10736,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,Oxide.Ext.Discord.Builders.Messages.InteractionResponseBuilder,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Create a response to an Interaction from the gateway.
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -10757,7 +10757,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Messages.InteractionAutoCompleteBuilder,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Create a Auto Complete response to an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -10777,7 +10777,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Messages.InteractionModalBuilder,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Create a Modal response to an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -10816,7 +10816,7 @@
             <param name="callback">Callback with the message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Messages.InteractionFollowupBuilder,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Create a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message">Create Followup Message</a>
@@ -11187,7 +11187,7 @@
             The interaction is a message component
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommandAutocomplete">
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommandAutoComplete">
             <summary>
             The interaction is a application command autocomplete
             </summary>
@@ -15659,7 +15659,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Libraries.DiscordAppCommandException">
             <summary>
-            Represents an Exception in <see cref="T:Oxide.Ext.Discord.Libraries.AppCommand.DiscordAppCommand"/> Oxide Library
+            Represents an Exception in <see cref="T:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand"/> Oxide Library
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Exceptions.Libraries.DiscordAppCommandException.#ctor(System.String)">
@@ -16801,19 +16801,19 @@
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.DisposeInternal">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.AppCommand.DiscordAppCommand">
+        <member name="T:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand">
             <summary>
             Application Command Oxide Library handler
             Routes Application Commands to their respective hook method handlers instead of having to manually handle it.
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommand.DiscordAppCommand.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
             <param name="logger">Logger for the library</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommand.DiscordAppCommand.AddCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.InteractionType,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddApplicationCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,Oxide.Ext.Discord.Entities.Interactions.InteractionType,System.String,System.String,System.String,System.String)">
             <summary>
             Registers a new Application Command for the given plugin
             </summary>
@@ -16823,16 +16823,16 @@
             <param name="callback">Callback for the command</param>
             <exception cref="T:System.ArgumentNullException">Thrown if inputs are null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommand.DiscordAppCommand.AddMessageComponentCommand(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddMessageComponentCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,System.String,System.String)">
             <summary>
             Adds a <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent"/> Command type.
             This matches CustomId with starts with
             </summary>
             <param name="plugin">Plugin the command is for</param>
-            <param name="command">Command to match with Starts with</param>
+            <param name="customId">Command to match with Starts with</param>
             <param name="callback">Callback for the command</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommand.DiscordAppCommand.RemoveCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.InteractionType,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.RemoveApplicationCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,Oxide.Ext.Discord.Entities.Interactions.InteractionType,System.String,System.String,System.String)">
             <summary>
             Removes an application command
             </summary>

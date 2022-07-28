@@ -6,7 +6,7 @@ using Oxide.Core.Configuration;
 using Oxide.Core.Extensions;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Users;
-using Oxide.Ext.Discord.Libraries.AppCommand;
+using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Subscription;

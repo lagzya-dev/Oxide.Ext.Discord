@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Oxide.Ext.Discord.Builders.Messages.BaseBuilders;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
@@ -8,7 +9,7 @@ using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Builders;
 
-namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
+namespace Oxide.Ext.Discord.Builders.Interactions
 {
     /// <summary>
     /// Represents a builder for <see cref="BaseInteractionMessage"/>

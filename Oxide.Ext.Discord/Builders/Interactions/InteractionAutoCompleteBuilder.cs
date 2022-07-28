@@ -14,7 +14,7 @@ using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Plugins.Core;
 
-namespace Oxide.Ext.Discord.Builders.Messages
+namespace Oxide.Ext.Discord.Builders.Interactions
 {
     /// <summary>
     /// Builder for Auto Complete Interaction

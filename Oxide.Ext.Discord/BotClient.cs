@@ -203,6 +203,7 @@ namespace Oxide.Ext.Discord
             Rest?.Shutdown();
             Rest = null;
             _readyData = null;
+            DiscordExtension.DiscordAppCommand.OnBotShutdown(this);
         }
 
         /// <summary>
