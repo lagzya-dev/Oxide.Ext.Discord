@@ -5,24 +5,29 @@ using Oxide.Ext.Discord.Entities.Interactions;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
 {
-    public abstract class BaseAppCommand
+    /// <summary>
+    /// Represents a Base Registered Application Command
+    /// </summary>
+    internal abstract class BaseAppCommand
     {
         internal Plugin Plugin;
         internal Snowflake AppId;
         internal readonly InteractionType Type;
         internal readonly string Callback;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="plugin">Plugin for the command</param>
+        /// <param name="app"><see cref="DiscordApplication"/> for the command</param>
+        /// <param name="type">Interaction type for the command</param>
+        /// <param name="callback">Hook callback method name</param>
         protected BaseAppCommand(Plugin plugin, DiscordApplication app, InteractionType type, string callback)
         {
             Plugin = plugin;
             AppId = app.Id;
             Type = type;
             Callback = callback;
-        }
-
-        public virtual bool CanHandle(DiscordInteraction interaction)
-        {
-            return true;
         }
         
         public abstract void HandleCommand(DiscordInteraction interaction);

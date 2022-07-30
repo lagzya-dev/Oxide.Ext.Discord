@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Builders;
+using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
@@ -10,6 +12,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// </summary>
     public class SubCommandBuilder
     {
+        private readonly CommandOption _subCommand;
+        
         /// <summary>
         /// Options list to have options added to
         /// </summary>
@@ -18,7 +22,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         internal SubCommandBuilder(List<CommandOption> parent, string name, string description)
         {
             _options = new List<CommandOption>();
-            parent.Add(new CommandOption(name, description, CommandOptionType.SubCommand, _options));
+            _subCommand = new CommandOption(name, description, CommandOptionType.SubCommand, _options);
+            parent.Add(_subCommand);
         }
 
         /// <summary>
@@ -34,6 +39,30 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             ApplicationCommandBuilderException.ThrowIfInvalidCommandOptionType(type);
             
             return new SubCommandOptionBuilder(_options, type, name, description, this);
+        }
+        
+        /// <summary>
+        /// Adds command name localizations for a given plugin and lang key
+        /// </summary>
+        /// <param name="plugin">Plugin containing the localizations</param>
+        /// <param name="langKey">Lang Key containing the localized text</param>
+        /// <returns></returns>
+        public SubCommandBuilder AddNameLocalizations(Plugin plugin, string langKey)
+        {
+            _subCommand.NameLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds command description localizations for a given plugin and lang key
+        /// </summary>
+        /// <param name="plugin">Plugin containing the localizations</param>
+        /// <param name="langKey">Lang Key containing the localized text</param>
+        /// <returns></returns>
+        public SubCommandBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
+        {
+            _subCommand.DescriptionLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
+            return this;
         }
     }
 }

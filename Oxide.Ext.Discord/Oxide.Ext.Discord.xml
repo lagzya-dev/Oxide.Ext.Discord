@@ -4,6 +4,83 @@
         <name>Oxide.Ext.Discord</name>
     </assembly>
     <members>
+        <member name="T:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordApplicationCommandAttribute">
+            <summary>
+            Discord Application Command Attribute for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommand"/>
+            Callback Hook Format:
+            <code>
+            private void Callback(DiscordInteraction interaction, InteractionDataParsed parsed)
+            {
+                Puts("Callback Works!");
+            }
+            </code>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordApplicationCommandAttribute.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="command">Command for the Application Command</param>
+            <param name="group">Sub Command Group for the Application Command</param>
+            <param name="subCommand">Sub Command for the Application Command</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordAutoCompleteCommandAttribute">
+            <summary>
+            Discord Auto Complete Command Attribute for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommandAutoComplete"/>
+            Callback Hook Format:
+            <code>
+            private void Callback(DiscordInteraction interaction, InteractionDataOption focused)
+            {
+                Puts("Callback Works!");
+            }
+            </code>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordAutoCompleteCommandAttribute.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="command">Command for the Auto Complete</param>
+            <param name="argumentName">Argument Name for the Auto Complete</param>
+            <param name="group">Sub Command Group for the Auto Complete</param>
+            <param name="subCommand">Sub Command for the Auto Complete</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordMessageComponentCommandAttribute">
+            <summary>
+            Discord Message Component Command Attribute for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent"/>
+            Callback Hook Format:
+            <code>
+            private void Callback(DiscordInteraction interaction)
+            {
+                Puts("Callback Works!");
+            }
+            </code>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordMessageComponentCommandAttribute.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="customId">CustomID to match on. Matching uses string.StartsWith</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordModalSubmitAttribute">
+            <summary>
+            Discord Message Component Command Attribute for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ModalSubmit"/>
+            Callback Hook Format:
+            <code>
+            private void Callback(DiscordInteraction interaction)
+            {
+                Puts("Callback Works!");
+            }
+            </code>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordModalSubmitAttribute.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="customId">CustomID to match on. Matching uses string.StartsWith</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Attributes.BaseCommandAttribute">
             <summary>
             Represents a base attribute for commands 
@@ -458,6 +535,22 @@
             <param name="description">Description of the option</param>
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command name localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command description localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder">
             <summary>
@@ -10669,6 +10762,11 @@
             Returns the interaction parsed args to make it easier to process that interaction.
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Focused">
+            <summary>
+            Returns the Focused option for Auto Complete
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GetUser">
             <summary>
             Returns the <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> for this request
@@ -15657,17 +15755,6 @@
             Represents an exception that occured with the websocket
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Exceptions.Libraries.DiscordAppCommandException">
-            <summary>
-            Represents an Exception in <see cref="T:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand"/> Oxide Library
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Exceptions.Libraries.DiscordAppCommandException.#ctor(System.String)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="message"></param>
-        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.TokenMismatchException">
             <summary>
             Represents a bot token mismatch
@@ -16801,6 +16888,20 @@
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.DisposeInternal">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.AppCommands.Commands.BaseAppCommand">
+            <summary>
+            Represents a Base Registered Application Command
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.Commands.BaseAppCommand.#ctor(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,Oxide.Ext.Discord.Entities.Interactions.InteractionType,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="plugin">Plugin for the command</param>
+            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="type">Interaction type for the command</param>
+            <param name="callback">Hook callback method name</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand">
             <summary>
             Application Command Oxide Library handler
@@ -16813,14 +16914,29 @@
             </summary>
             <param name="logger">Logger for the library</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddApplicationCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,Oxide.Ext.Discord.Entities.Interactions.InteractionType,System.String,System.String,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddApplicationCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,System.String,System.String,System.String,System.String)">
             <summary>
             Registers a new Application Command for the given plugin
             </summary>
-            <param name="plugin">Plugin the Application Command is for</param>
-            <param name="type">Type of the command</param>
-            <param name="command">Command name</param>
+            <param name="plugin"><see cref="T:Oxide.Core.Plugins.Plugin"/> the Application Command is for</param>
+            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="callback">Callback for the command</param>
+            <param name="command">Command name</param>
+            <param name="group">Sub Command Group for the command</param>
+            <param name="subCommand">Sub Command for the command</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if inputs are null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddAutoCompleteCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Registers a new Application Command for the given plugin
+            </summary>
+            <param name="plugin"><see cref="T:Oxide.Core.Plugins.Plugin"/> the Application Command is for</param>
+            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> For the command</param>
+            <param name="callback">Callback for the command</param>
+            <param name="command">Command name</param>
+            <param name="argument">Command Argument name for the Auto Complete</param>
+            <param name="group">Sub Command Group for the command</param>
+            <param name="subCommand">Sub Command for the command</param>
             <exception cref="T:System.ArgumentNullException">Thrown if inputs are null</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddMessageComponentCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,System.String,System.String)">
@@ -16829,6 +16945,17 @@
             This matches CustomId with starts with
             </summary>
             <param name="plugin">Plugin the command is for</param>
+            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="customId">Command to match with Starts with</param>
+            <param name="callback">Callback for the command</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddModalSubmitCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,System.String,System.String)">
+            <summary>
+            Adds a <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent"/> Command type.
+            This matches CustomId with starts with
+            </summary>
+            <param name="plugin">Plugin the command is for</param>
+            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="customId">Command to match with Starts with</param>
             <param name="callback">Callback for the command</param>
         </member>
@@ -16837,9 +16964,21 @@
             Removes an application command
             </summary>
             <param name="plugin">Plugin to remove the command for</param>
+            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="type">Type of the command</param>
             <param name="command">Command name</param>
+            <param name="group">Sub Command Group for the command</param>
+            <param name="subCommand">Sub Command for the command</param>
             <exception cref="T:System.ArgumentNullException">Thrown if command is null or empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.RemoveMessageComponentCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,Oxide.Ext.Discord.Entities.Interactions.InteractionType,System.String)">
+            <summary>
+            Remove a message component command or a modal submit command
+            </summary>
+            <param name="plugin"><see cref="T:Oxide.Core.Plugins.Plugin"/> the command is for</param>
+            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="type"><see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType"/> of the command</param>
+            <param name="customId">CustomId to match StartsWith for</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Command.BaseCommand">
             <summary>

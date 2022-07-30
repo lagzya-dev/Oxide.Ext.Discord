@@ -358,6 +358,12 @@ namespace Oxide.Ext.Discord
                         userData.ClearBlockIfExpired();
                     }
                 }
+
+                for (int index = 0; index < _clients.Count; index++)
+                {
+                    DiscordClient client = _clients[index];
+                    DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(client, client.Plugin);
+                }
             }
             
             _readyData = ready;

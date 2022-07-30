@@ -136,6 +136,10 @@ namespace Oxide.Ext.Discord
         internal void OnBotAdded(BotClient bot)
         {
             Bot = bot;
+            if (Bot.Application != null)
+            {
+                DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(this, Plugin);
+            }
         }
 
         internal void OnBotRemoved()
@@ -160,7 +164,6 @@ namespace Oxide.Ext.Discord
         {
             Bot?.Hooks.UnsubscribeHook(Plugin, hook);
         }
-
         #region Websocket Commands
         /// <summary>
         /// Used to request guild members from discord for a specific guild

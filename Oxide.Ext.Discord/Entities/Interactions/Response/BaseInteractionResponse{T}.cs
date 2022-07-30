@@ -1,14 +1,18 @@
+using Newtonsoft.Json;
+
 namespace Oxide.Ext.Discord.Entities.Interactions.Response
 {
     /// <summary>
     /// Represents a Base Interaction Response with generic data {T}
     /// </summary>
     /// <typeparam name="T">{T} data type</typeparam>
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public abstract class BaseInteractionResponse<T> : BaseInteractionResponse
     {
         /// <summary>
         /// Response to the Interaction
         /// </summary>
+        [JsonProperty("data")]
         public T Data { get; set; }
 
         /// <summary>

@@ -185,7 +185,7 @@ namespace Oxide.Ext.Discord.Hooks
         #region Internal Handling
         private bool CanCallHook(string hookName, out List<Plugin> plugins)
         {
-            _logger.Debug("Hook Called: {0}", hookName);
+            _logger.Verbose("Hook Called: {0}", hookName);
             return _cache.TryGetHook(hookName, out plugins) && plugins.Count != 0;
         }
         

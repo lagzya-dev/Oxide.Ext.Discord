@@ -1553,12 +1553,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         //https://discord.com/developers/docs/topics/gateway#interaction-create
         private void HandleDispatchInteractionCreate(DiscordInteraction interaction)
         {
-            _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchInteractionCreate)} Guild ID: {{0}} Channel ID: {{1}} Interaction ID: {{2}}", interaction.GuildId, interaction.ChannelId, interaction.Id);
             if (DiscordExtension.DiscordAppCommand.HandleInteraction(interaction))
             {
+                _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchInteractionCreate)} Handled. Guild ID: {{0}} Channel ID: {{1}} Interaction ID: {{2}}", interaction.GuildId, interaction.ChannelId, interaction.Id);
                 return;
             }
             
+            _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchInteractionCreate)} Unhandled.  Guild ID: {{0}} Channel ID: {{1}} Interaction ID: {{2}}", interaction.GuildId, interaction.ChannelId, interaction.Id);
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordInteractionCreated, interaction);
         }
 

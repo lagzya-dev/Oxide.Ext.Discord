@@ -124,6 +124,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         public InteractionDataParsed Parsed => _parsed ?? (_parsed = new InteractionDataParsed(this));
 
+        private InteractionDataOption _focused;
+
+        /// <summary>
+        /// Returns the Focused option for Auto Complete
+        /// </summary>
+        public InteractionDataOption Focused => _focused ?? (_focused = GetFocusedOption());
+
         /// <summary>
         /// Returns the <see cref="DiscordUser"/> for this request
         /// </summary>
@@ -157,9 +164,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
         public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordLocale.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
         
-        public InteractionDataOption GetFocusedOption()
+        private InteractionDataOption GetFocusedOption()
         {
             List<InteractionDataOption> options = Data.Options;
+            if (options == null)
+            {
+                return null;
+            }
+            
             for (int index = 0; index < options.Count; index++)
             {
                 InteractionDataOption option = options[index];
@@ -184,27 +196,31 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             string command = Data.Name;
             string group = null;
             string subCommand = null;
+            string argument = Focused?.Name;
             
             List<InteractionDataOption> options = Data.Options;
-            for (int index = 0; index < options.Count; index++)
+            if (options != null)
             {
-                InteractionDataOption option = options[index];
-                if (option.Type == CommandOptionType.SubCommandGroup)
+                for (int index = 0; index < options.Count; index++)
                 {
-                    group = option.Name;
-                    options = option.Options;
-                    index = 0;
-                    continue;
-                }
+                    InteractionDataOption option = options[index];
+                    if (option.Type == CommandOptionType.SubCommandGroup)
+                    {
+                        group = option.Name;
+                        options = option.Options;
+                        index = 0;
+                        continue;
+                    }
                 
-                if (option.Type == CommandOptionType.SubCommand)
-                {
-                    subCommand = option.Name;
-                    break;
+                    if (option.Type == CommandOptionType.SubCommand)
+                    {
+                        subCommand = option.Name;
+                        break;
+                    }
                 }
             }
 
-            return new AppCommandId(command, group, subCommand);
+            return new AppCommandId(command, group, subCommand, argument);
         }
         
         /// <summary>
