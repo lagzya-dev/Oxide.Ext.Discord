@@ -154,7 +154,7 @@ namespace Oxide.Ext.Discord
         /// <param name="hook">Hook to subscribe to</param>
         public void SubscribeHook(string hook)
         {
-            Bot?.Hooks.SubscribeHook(Plugin, hook);
+            Bot?.Hooks.SubscribeHook(this, hook);
         }
         
         /// <summary>

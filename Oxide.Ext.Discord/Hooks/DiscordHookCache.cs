@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
@@ -19,8 +21,9 @@ namespace Oxide.Ext.Discord.Hooks
             _logger = logger;
         }
 
-        internal void AddPlugin(Plugin plugin)
+        internal void AddPlugin(DiscordClient client)
         {
+            Plugin plugin = client.Plugin;
             Type pluginType = plugin.GetType();
             foreach (MethodInfo method in pluginType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
             {
@@ -36,17 +39,26 @@ namespace Oxide.Ext.Discord.Hooks
                     name = ((HookMethodAttribute)attributes[0]).Name;
                 }
 
-                SubscribeHook(plugin, name);
+                SubscribeHook(client, name);
             }
         }
         
-        internal void SubscribeHook(Plugin plugin, string hook)
+        internal void SubscribeHook(DiscordClient client, string hook)
         {
             if (!DiscordExtHooks.AllHooks.Contains(hook))
             {
                 return;
             }
-                
+
+            DiscordSettings settings = client.Bot.Settings;
+            GatewayIntents intent = DiscordExtHooks.HookGatewayIntent[hook];
+            if (intent != GatewayIntents.None && !settings.HasIntents(intent))
+            {
+                _logger.Warning("{0} is trying to add hook {1} which requires GatewayIntent.{2} but was not specified. " +
+                                "This hook will not work correctly until it is corrected. " +
+                                "Please contact the plugin author with this message.", client.PluginName, hook, EnumCache<GatewayIntents>.ToString(intent));
+            }
+
             List<Plugin> hooks = _hookCache[hook];
             if (hooks == null)
             {
@@ -54,9 +66,9 @@ namespace Oxide.Ext.Discord.Hooks
                 _hookCache[hook] = hooks;
             }
 
-            if (!hooks.Contains(plugin))
+            if (!hooks.Contains(client.Plugin))
             {
-                hooks.Add(plugin);
+                hooks.Add(client.Plugin);
             }
         }
 

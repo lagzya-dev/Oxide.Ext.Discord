@@ -12,11 +12,14 @@ namespace Oxide.Ext.Discord.Cache
     {
         private static readonly Dictionary<T, string> CachedStrings = new Dictionary<T, string>();
         private static readonly Dictionary<T, string> LoweredStrings = new Dictionary<T, string>();
+        private static readonly T[] Values; 
 
         static EnumCache()
         {
-            foreach (T value in Enum.GetValues(typeof(T)).Cast<T>())
+            Values = Enum.GetValues(typeof(T)).Cast<T>().ToArray();
+            for (int index = 0; index < Values.Length; index++)
             {
+                T value = Values[index];
                 string enumString = value.ToString();
                 CachedStrings[value] = enumString;
                 LoweredStrings[value] = enumString.ToLower();
@@ -41,6 +44,11 @@ namespace Oxide.Ext.Discord.Cache
         public static string ToLower(T value)
         {
             return LoweredStrings[value];
+        }
+
+        public static IReadOnlyList<T> GetList()
+        {
+            return Values;
         }
     }
 }

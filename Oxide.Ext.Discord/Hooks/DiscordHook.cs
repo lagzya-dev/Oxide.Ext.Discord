@@ -18,9 +18,9 @@ namespace Oxide.Ext.Discord.Hooks
         }
 
         #region Plugin Handling
-        internal void AddPlugin(Plugin plugin)
+        internal void AddPlugin(DiscordClient client)
         {
-            _cache.AddPlugin(plugin);
+            _cache.AddPlugin(client);
         }
 
         internal void RemovePlugin(Plugin plugin)
@@ -28,9 +28,9 @@ namespace Oxide.Ext.Discord.Hooks
             _cache.RemovePlugin(plugin);
         }
 
-        internal void SubscribeHook(Plugin plugin, string hook)
+        internal void SubscribeHook(DiscordClient client, string hook)
         {
-            _cache.SubscribeHook(plugin, hook);
+            _cache.SubscribeHook(client, hook);
         }
         
         internal void UnsubscribeHook(Plugin plugin, string hook)

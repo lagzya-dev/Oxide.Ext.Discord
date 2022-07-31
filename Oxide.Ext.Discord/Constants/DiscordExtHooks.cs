@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
+using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Constants
 {
@@ -13,6 +15,139 @@ namespace Oxide.Ext.Discord.Constants
         /// </summary>
         public static readonly HashSet<string> AllHooks = new HashSet<string>();
 
+        public static readonly Hash<GatewayIntents, List<string>> GatewayIntentHooks = new Hash<GatewayIntents, List<string>>
+        {
+            [GatewayIntents.Guilds] = new List<string>
+            {
+                OnDiscordGuildCreated,
+                OnDiscordGuildUpdated,
+                OnDiscordGuildDeleted,
+                OnDiscordGuildUnavailable,
+                OnDiscordGuildRoleCreated,
+                OnDiscordGuildRoleUpdated,
+                OnDiscordGuildRoleDeleted,
+                OnDiscordGuildChannelCreated,
+                OnDiscordGuildChannelUpdated,
+                OnDiscordGuildChannelDeleted,
+                OnDiscordGuildChannelPinsUpdated,
+                OnDiscordGuildThreadCreated,
+                OnDiscordGuildThreadUpdated,
+                OnDiscordGuildThreadListSynced,
+                OnDiscordGuildThreadMemberUpdated,
+                OnDiscordGuildThreadMembersUpdated,
+                OnDiscordStageInstanceCreated,
+                OnDiscordStageInstanceUpdated,
+                OnDiscordStageInstanceDeleted
+            },
+            [GatewayIntents.GuildMembers] = new List<string>
+            {
+                OnDiscordGuildMemberAdded,
+                OnDiscordGuildMemberUpdated,
+                OnDiscordGuildMemberRemoved,
+                OnDiscordGuildMemberRoleAdded,
+                OnDiscordGuildMemberRoleRemoved,
+                OnDiscordGuildMemberBoosted,
+                OnDiscordGuildMemberBoostEnded,
+                OnDiscordGuildMemberNicknameUpdated,
+                OnDiscordGuildMemberAvatarUpdated,
+                OnDiscordGuildMemberDeafened,
+                OnDiscordGuildMemberUndeafened,
+                OnDiscordGuildMemberMuted,
+                OnDiscordGuildMemberUnmuted,
+                OnDiscordGuildMemberTimeout,
+                OnDiscordGuildMemberTimeoutEnded,
+            },
+            [GatewayIntents.GuildBans] = new List<string>
+            {
+                OnDiscordGuildMemberBanned,
+                OnDiscordGuildMemberUnbanned
+            },
+            [GatewayIntents.GuildEmojisAndStickers] = new List<string>
+            {
+                OnDiscordGuildEmojisUpdated,
+                OnDiscordGuildStickersUpdated
+            },
+            [GatewayIntents.GuildIntegrations] = new List<string>
+            {
+                OnDiscordGuildIntegrationsUpdated,
+                OnDiscordGuildIntegrationCreated,
+                OnDiscordGuildIntegrationUpdated,
+                OnDiscordGuildIntegrationDeleted
+            },
+            [GatewayIntents.GuildWebhooks] = new List<string>
+            {
+                OnDiscordGuildWebhookUpdated,
+            },
+            [GatewayIntents.GuildInvites] = new List<string>
+            {
+                OnDiscordGuildInviteCreated,
+                OnDiscordGuildIntegrationDeleted,
+            },
+            [GatewayIntents.GuildVoiceStates] = new List<string>
+            {
+                OnDiscordGuildVoiceStateUpdated
+            },
+            [GatewayIntents.GuildPresences] = new List<string>
+            {
+                OnDiscordGuildMemberPresenceUpdated
+            },
+            [GatewayIntents.GuildMessages] = new List<string>
+            {
+                OnDiscordGuildMessageCreated,
+                OnDiscordGuildMessageUpdated,
+                OnDiscordGuildMessageDeleted,
+                OnDiscordGuildMessagesBulkDeleted,
+            },
+            [GatewayIntents.GuildMessageReactions] = new List<string>
+            {
+                OnDiscordGuildMessageReactionAdded,
+                OnDiscordGuildMessageReactionRemoved,
+                OnDiscordGuildMessageReactionRemovedAll,
+                OnDiscordGuildMessageReactionEmojiRemoved,
+            },
+            [GatewayIntents.GuildMessageTyping] = new List<string>
+            {
+                OnDiscordGuildTypingStarted
+            },
+            [GatewayIntents.DirectMessages] = new List<string>
+            {
+                OnDiscordDirectMessageCreated,
+                OnDiscordDirectMessageUpdated,
+                OnDiscordDirectMessageDeleted,
+                OnDiscordDirectMessagesBulkDeleted,
+            },
+            [GatewayIntents.DirectMessageReactions] = new List<string>
+            {
+                OnDiscordDirectMessageReactionAdded,
+                OnDiscordDirectMessageReactionRemoved,
+                OnDiscordDirectMessageReactionRemovedAll,
+                OnDiscordDirectMessageReactionEmojiRemoved,
+            },
+            [GatewayIntents.DirectMessageTyping] = new List<string>
+            {
+                OnDiscordDirectTypingStarted
+            },
+            [GatewayIntents.GuildScheduledEvents] = new List<string>
+            {
+                OnDiscordGuildScheduledEventCreated,
+                OnDiscordGuildScheduledEventUpdated,
+                OnDiscordGuildScheduledEventDeleted,
+                OnDiscordGuildScheduledEventUserAdded,
+                OnDiscordGuildScheduledEventUserRemoved,
+            },
+            [GatewayIntents.AutoModerationConfiguration] = new List<string>
+            {
+                OnDiscordAutoModRuleCreated,
+                OnDiscordAutoModRuleUpdated,
+                OnDiscordAutoModRuleDeleted,
+            },
+            [GatewayIntents.AutoModerationExecution] = new List<string>
+            {
+                OnDiscordAutoModActionExecuted
+            },
+        };
+        public static readonly Hash<string, GatewayIntents> HookGatewayIntent = new Hash<string, GatewayIntents>();
+
         static DiscordExtHooks()
         {
             foreach (FieldInfo field in typeof(DiscordExtHooks).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
@@ -20,6 +155,14 @@ namespace Oxide.Ext.Discord.Constants
                 if (field.IsLiteral && !field.IsInitOnly && field.FieldType == typeof(string))
                 {
                     AllHooks.Add((string)field.GetRawConstantValue());
+                }
+            }
+
+            foreach (KeyValuePair<GatewayIntents, List<string>> intentHooks in GatewayIntentHooks)
+            {
+                foreach (string hook in intentHooks.Value)
+                {
+                    HookGatewayIntent[hook] = intentHooks.Key;
                 }
             }
         }

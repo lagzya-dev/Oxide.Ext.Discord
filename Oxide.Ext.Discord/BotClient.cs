@@ -217,7 +217,7 @@ namespace Oxide.Ext.Discord
             _clients.RemoveAll(c => c == client);
             _clients.Add(client);
             client.OnBotAdded(this);
-            Hooks.AddPlugin(client.Plugin);
+            Hooks.AddPlugin(client);
             
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
             
