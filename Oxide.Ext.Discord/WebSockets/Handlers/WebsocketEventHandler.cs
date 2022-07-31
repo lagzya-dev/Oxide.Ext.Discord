@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Constants;
@@ -687,11 +688,21 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildCreated, existing);
             }
 
-            if (!existing.HasLoadedAllMembers && _client.Settings.HasIntents(GatewayIntents.GuildMembers))
+            if (_client.Settings.HasIntents(GatewayIntents.GuildMembers))
             {
-                //Request all guild members so we can be sure we have them all.
-                await _webSocket.RequestAllGuildMembers(guild.Id);
-                _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildCreate)} Guild is now requesting all guild members.");
+                if (!existing.HasLoadedAllMembers)
+                {
+                    //Request all guild members so we can be sure we have them all.
+                    await _webSocket.RequestAllGuildMembers(guild.Id);
+                    _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildCreate)} Guild is now requesting all guild members.");
+                }
+            }
+            else
+            {
+                if (_client.Servers.Values.All(value => value.IsAvailable))
+                {
+                    _client.OnBotFullyLoaded();
+                }
             }
         }
 
@@ -1029,7 +1040,10 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 
                 guild.HasLoadedAllMembers = true;
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMembersLoaded, guild);
-
+                if (_client.Servers.Values.All(s => s.HasLoadedAllMembers))
+                {
+                    _client.OnBotFullyLoaded();
+                }
                 return;
             }
 

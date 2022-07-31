@@ -70,6 +70,8 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public RestHandler Rest { get; private set; }
         
+        public bool IsFullyLoaded { get; private set; }
+        
         internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
         
@@ -263,6 +265,11 @@ namespace Oxide.Ext.Discord
                         DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordGuildMembersLoaded, guild);
                     }
                 }
+
+                if (IsFullyLoaded)
+                {
+                    DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordBotFullyLoaded);
+                }
             }
         }
 
@@ -372,6 +379,15 @@ namespace Oxide.Ext.Discord
             if (Settings.Intents != WebSocket.Intents)
             {
                 DisconnectWebsocket(true);
+            }
+        }
+
+        internal void OnBotFullyLoaded()
+        {
+            if (!IsFullyLoaded)
+            {
+                IsFullyLoaded = true;
+                Hooks.CallHook(DiscordExtHooks.OnDiscordBotFullyLoaded);
             }
         }
         

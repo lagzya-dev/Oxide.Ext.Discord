@@ -23,6 +23,8 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
     + [OnDiscordClientCreated](#ondiscordclientcreated)
     + [OnDiscordClientConnected](#ondiscordclientconnected)
     + [OnDiscordClientDisconnected](#ondiscordclientdisconnected)
+  * [Discord Bot](#discord-bot)
+    + [OnDiscordBotFullyLoaded](#ondiscordbotfullyloaded)
   * [Discord Link](#discord-link)
     + [OnDiscordPlayerLinked](#ondiscordplayerlinked)
     + [OnDiscordPlayerUnlinked](#ondiscordplayerunlinked)
@@ -167,6 +169,18 @@ void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
 }
 ```
 
+## Discord Bot
+
+### OnDiscordBotFullyLoaded
+- Called when the bot has fully loaded all discord guilds
+- If GatewayIntent.GuildMembers is specified then this hook is delayed until all guild members have been loaded
+
+```c#
+void OnDiscordBotFullyLoaded()
+{
+    Puts("OnDiscordBotFullyLoaded Works!");
+}
+```
 
 ## Discord Link
 
