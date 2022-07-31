@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
@@ -272,6 +273,7 @@ namespace Oxide.Ext.Discord
             DiscordExtension.DiscordLink.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordCommand.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordSubscriptions.OnPluginUnloaded(plugin);
+            DiscordLocale.OnPluginUnloaded(plugin);
         }
 
         internal static void CloseClient(DiscordClient client)

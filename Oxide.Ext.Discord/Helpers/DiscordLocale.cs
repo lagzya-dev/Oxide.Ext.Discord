@@ -19,6 +19,7 @@ namespace Oxide.Ext.Discord.Helpers
         private const string DefaultOxideLang = "en";
         private static readonly Hash<string, string> DiscordToOxide = new Hash<string, string>();
         private static readonly Hash<string, string> OxideToDiscord = new Hash<string, string>();
+        private static readonly Hash<string, Hash<string, Hash<string, string>>> _pluginLangCache = new Hash<string, Hash<string, Hash<string, string>>>();
         
         private static Lang _lang;
         private static Lang Lang => _lang ?? (_lang = Interface.Oxide.GetLibrary<Lang>());
@@ -108,7 +109,7 @@ namespace Oxide.Ext.Discord.Helpers
                     continue;
                 }
 
-                Dictionary<string, string> messages = Lang.GetMessages(language, plugin);
+                Hash<string, string> messages = GetLanguageMessages(plugin, language);
                 if (!messages.ContainsKey(langKey))
                 {
                     DiscordExtension.GlobalLogger.Warning("Failed to add localized message for lang key '{0}' for plugin '{1} because lang key doesn't exist for language {2}", langKey, plugin.Name, language);
@@ -144,13 +145,13 @@ namespace Oxide.Ext.Discord.Helpers
             // 3. Interaction.GuildLocale - Application Command Guild Locale
             // 4. Oxide Lang Language
             // 5. English
-            Dictionary<string, string> messages = GetLanguageMessages(plugin, GetOxideLocale(interaction.Locale))
-                                                  ?? (player != null ? GetLanguageMessages(plugin, _lang.GetLanguage(player.Id)) : null)
-                                                  ?? GetLanguageMessages(plugin, GetOxideLocale(interaction.GuildLocale))
-                                                  ?? GetLanguageMessages(plugin, _lang.GetServerLanguage())
-                                                  ?? GetLanguageMessages(plugin, DefaultOxideLang);
+            string message = GetLanguageMessages(plugin, GetOxideLocale(interaction.Locale))[langKey]
+                             ?? (player != null ? GetLanguageMessages(plugin, _lang.GetLanguage(player.Id))[langKey] : null)
+                             ?? GetLanguageMessages(plugin, GetOxideLocale(interaction.GuildLocale))[langKey]
+                             ?? GetLanguageMessages(plugin, _lang.GetServerLanguage())[langKey]
+                             ?? GetLanguageMessages(plugin, DefaultOxideLang)[langKey];
 
-            return messages == null ? langKey : messages[langKey];
+            return !string.IsNullOrEmpty(message) ? message : langKey;
         }
 
         /// <summary>
@@ -181,14 +182,32 @@ namespace Oxide.Ext.Discord.Helpers
             }
         }
 
-        private static Dictionary<string, string> GetLanguageMessages(Plugin plugin, string language)
+        private static Hash<string, string> GetLanguageMessages(Plugin plugin, string language)
         {
-            if (!string.IsNullOrEmpty(language))
+            Hash<string, Hash<string, string>> pluginCache = _pluginLangCache[plugin.Name];
+            if (pluginCache == null)
             {
-                return _lang.GetMessages(language, plugin);
+                pluginCache = new Hash<string, Hash<string, string>>();
+                _pluginLangCache[plugin.Name] = pluginCache;
             }
 
-            return null;
+            Hash<string, string> langCache = pluginCache[language];
+            if (langCache == null)
+            {
+                langCache = new Hash<string, string>();
+                pluginCache[language] = langCache;
+                foreach (KeyValuePair<string, string> lang in _lang.GetMessages(language, plugin))
+                {
+                    langCache[lang.Key] = lang.Value;
+                }
+            }
+
+            return langCache;
+        }
+
+        internal static void OnPluginUnloaded(Plugin plugin)
+        {
+            _pluginLangCache.Remove(plugin.Name);
         }
     }
 }
