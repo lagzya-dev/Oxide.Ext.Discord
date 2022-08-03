@@ -11,7 +11,7 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Net;
+using Oxide.Ext.Discord.Network;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 using HttpMethod = System.Net.Http.HttpMethod;
