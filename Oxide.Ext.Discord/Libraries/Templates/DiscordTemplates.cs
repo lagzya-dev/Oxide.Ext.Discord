@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Libraries;
@@ -12,11 +11,12 @@ using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Json.Serialization;
+using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages
+namespace Oxide.Ext.Discord.Libraries.Templates
 {
     /// <summary>
     /// Oxide Library for Discord Templates
