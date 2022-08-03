@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
     /// <summary>
     /// Thread Pool Handler for Rest Requests
     /// </summary>
-    public class RestRequestHandler : BaseAsyncPoolableCallback
+    public class RestRequestCallback : BaseAsyncPoolableCallback
     {
         private RestHandler _rest;
         private BaseRequest _request; 
@@ -28,10 +28,10 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         /// <param name="rest"><see cref="RestHandler"/> for the request</param>
         /// <param name="request">Request to be ran</param>
         /// <param name="logger">Logger</param>
-        /// <returns><see cref="RestRequestHandler"/>Created Handler</returns>
-        public static RestRequestHandler CreateRequestCallback(RestHandler rest, BaseRequest request, ILogger logger)
+        /// <returns><see cref="RestRequestCallback"/>Created Handler</returns>
+        public static RestRequestCallback CreateRequestCallback(RestHandler rest, BaseRequest request, ILogger logger)
         {
-            RestRequestHandler handler = DiscordPool.Get<RestRequestHandler>();
+            RestRequestCallback handler = DiscordPool.Get<RestRequestCallback>();
             handler.Init(rest, request, logger);
             return handler;
         }

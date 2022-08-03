@@ -29,10 +29,20 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// </summary>
         /// <param name="stream">Stream to copy</param>
         /// <returns></returns>
-        public Task CopyAsync(Stream stream)
+        public Task CopyFromAsync(Stream stream)
         {
             Stream.SetLength(0);
             return stream.CopyToPooledAsync(Stream);
+        }
+        
+        /// <summary>
+        /// Copy from the given stream to our internal stream
+        /// </summary>
+        /// <param name="stream">Stream to copy</param>
+        public void CopyFrom(Stream stream)
+        {
+            Stream.SetLength(0);
+            stream.CopyToPooled(Stream);
         }
         
         /// <summary>
@@ -44,20 +54,36 @@ namespace Oxide.Ext.Discord.Json.Serialization
             Stream.Position = 0;
             return _reader.ReadToEndAsync();
         }
-        
+
         /// <summary>
         /// Deserializes the stream data to {T}
         /// </summary>
-        /// <param name="client">Client to use with the Deserialization</param>
+        /// <param name="serializer"><see cref="JsonSerializer"/> to use with the Deserialization</param>
         /// <typeparam name="T">Type to deserialize to</typeparam>
         /// <returns>{T}</returns>
-        public Task<T> DeserializeAsync<T>(BotClient client)
+        public Task<T> DeserializeAsync<T>(JsonSerializer serializer)
         {
             Stream.Position = 0;
             using (JsonTextReader reader = new JsonTextReader(_reader))
             {
                 reader.CloseInput = false;
-                return Task.FromResult(client.JsonSerializer.Deserialize<T>(reader));
+                return Task.FromResult(serializer.Deserialize<T>(reader));
+            }
+        }
+        
+        /// <summary>
+        /// Deserializes the stream data to {T}
+        /// </summary>
+        /// <param name="serializer"><see cref="JsonSerializer"/> to use with the Deserialization</param>
+        /// <typeparam name="T">Type to deserialize to</typeparam>
+        /// <returns>{T}</returns>
+        public T Deserialize<T>(JsonSerializer serializer)
+        {
+            Stream.Position = 0;
+            using (JsonTextReader reader = new JsonTextReader(_reader))
+            {
+                reader.CloseInput = false;
+                return serializer.Deserialize<T>(reader);
             }
         }
 

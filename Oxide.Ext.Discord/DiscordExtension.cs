@@ -10,6 +10,7 @@ using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Subscription;
+using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using AppDomain = System.AppDomain;
@@ -47,6 +48,7 @@ namespace Oxide.Ext.Discord
         internal static DiscordLink DiscordLink;
         internal static DiscordCommand DiscordCommand;
         internal static DiscordSubscriptions DiscordSubscriptions;
+        internal static DiscordTemplates DiscordTemplates;
         internal static DiscordConfig DiscordConfig;
 
         internal static bool IsShuttingDown;
@@ -106,11 +108,13 @@ namespace Oxide.Ext.Discord
             DiscordLink = new DiscordLink(GlobalLogger);
             DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes, GlobalLogger);
             DiscordSubscriptions = new DiscordSubscriptions(GlobalLogger);
+            DiscordTemplates = new DiscordTemplates(GlobalLogger);
 
             Manager.RegisterLibrary(nameof(DiscordAppCommand), DiscordAppCommand);
             Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
             Manager.RegisterLibrary(nameof(DiscordCommand), DiscordCommand);
             Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);
+            Manager.RegisterLibrary(nameof(DiscordTemplates), DiscordTemplates);
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
             Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClient.OnPluginRemoved;
             

@@ -70,6 +70,10 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public RestHandler Rest { get; private set; }
         
+        /// <summary>
+        /// Returns if the bot has fully loaded.
+        /// All guilds are loaded and if <see cref="GatewayIntents.GuildMembers"/> is specified all guild members have been loaded
+        /// </summary>
         public bool IsFullyLoaded { get; private set; }
         
         internal readonly DiscordHook Hooks;

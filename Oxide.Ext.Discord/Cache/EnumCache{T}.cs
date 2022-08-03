@@ -46,6 +46,10 @@ namespace Oxide.Ext.Discord.Cache
             return LoweredStrings[value];
         }
 
+        /// <summary>
+        /// Returns a cached list of Enum Values
+        /// </summary>
+        /// <returns></returns>
         public static IReadOnlyList<T> GetList()
         {
             return Values;

@@ -31,5 +31,29 @@ namespace Oxide.Ext.Discord.Extensions
             
             DiscordArrayPool<byte>.Shared.Return(buffer);
         }
+        
+        
+        /// <summary>
+        /// Copies one stream to another using a pooled byte[] buffer
+        /// </summary>
+        /// <param name="stream">Stream to copy from</param>
+        /// <param name="to">Stream to copy to</param>
+        public static void CopyToPooled(this Stream stream, Stream to)
+        {
+            byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(8196);
+            
+            while (true)
+            {
+                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                if (bytesRead == 0)
+                {
+                    break;
+                }
+
+                to.Write(buffer, 0, bytesRead);
+            }
+            
+            DiscordArrayPool<byte>.Shared.Return(buffer);
+        }
     }
 }

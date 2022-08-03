@@ -18,9 +18,9 @@ namespace Oxide.Ext.Discord.Callbacks.Api
             _onSuccess = request.OnSuccess;
 
             DiscordJsonReader reader = DiscordPool.Get<DiscordJsonReader>();
-            await reader.CopyAsync(response.Content).ConfigureAwait(false);
+            await reader.CopyFromAsync(response.Content).ConfigureAwait(false);
             //DiscordExtension.GlobalLogger.Verbose($"{nameof(ApiSuccessCallback<T>)}.{nameof(Init)} Body: {await reader.ReadAsStringAsync()}");
-            _data = await reader.DeserializeAsync<T>(Client.Bot);
+            _data = await reader.DeserializeAsync<T>(Client.Bot.JsonSerializer);
             reader.Dispose();
         }
 

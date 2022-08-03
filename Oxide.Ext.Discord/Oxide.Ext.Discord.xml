@@ -177,6 +177,12 @@
             Rest handler for all discord API calls
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.BotClient.IsFullyLoaded">
+            <summary>
+            Returns if the bot has fully loaded.
+            All guilds are loaded and if <see cref="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMembers"/> is specified all guild members have been loaded
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.BotClient.Settings">
             <summary>
             The settings for this bot of all the combined clients
@@ -1571,6 +1577,12 @@
             <param name="value">Enum value</param>
             <returns>Enum value as lowered string</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.GetList">
+            <summary>
+            Returns a cached list of Enum Values
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback.DisposeInternal">
             <inheritdoc/>
         </member>
@@ -1631,27 +1643,27 @@
             Runs the callback using async
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler">
+        <member name="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback">
             <summary>
             Thread Pool Handler for Rest Requests
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler.CreateRequestCallback(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback.CreateRequestCallback(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Creates a thread pooled rest request
             </summary>
             <param name="rest"><see cref="T:Oxide.Ext.Discord.Rest.RestHandler"/> for the request</param>
             <param name="request">Request to be ran</param>
             <param name="logger">Logger</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler"/>Created Handler</returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback"/>Created Handler</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler.HandleCallback">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback.HandleCallback">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler.DisposeInternal">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback.DisposeInternal">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestHandler.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback.EnterPool">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseCallback">
@@ -1861,6 +1873,16 @@
             Hashset containing all hooks names in the Discord Extension
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.GatewayIntentHooks">
+            <summary>
+            A mapping of Gateway Intent to Hooks
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.HookGatewayIntent">
+            <summary>
+            A mapping of Hooks required Gateway Intent
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientCreated">
             <code>
             void OnDiscordClientCreated()
@@ -1882,6 +1904,14 @@
             void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
             {
                 Puts("OnDiscordClientDisconnected Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordBotFullyLoaded">
+            <code>
+            void OnDiscordBotFullyLoaded()
+            {
+                Puts("OnDiscordBotFullyLoaded Works!");
             }
             </code>
         </member>
@@ -13351,7 +13381,7 @@
             Darker Gray Role Color
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Color">
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Color">
             <summary>
             uint value of the hex color code
             </summary>
@@ -15755,10 +15785,27 @@
             Represents an exception that occured with the websocket
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Libraries.DiscordTemplateException">
+            <summary>
+            Exception for Discord Templates
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.TokenMismatchException">
             <summary>
             Represents a bot token mismatch
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.DiscordColorExt">
+            <summary>
+            Discord Color Extension Methods
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.DiscordColorExt.ToHex(Oxide.Ext.Discord.Entities.Permissions.DiscordColor)">
+            <summary>
+            Converter the Discord Color to a string hex color
+            </summary>
+            <param name="color">Color to convert</param>
+            <returns>Hex string color of the <see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordColor"/></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.DiscordUserExt">
             <summary>
@@ -15926,6 +15973,13 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.StreamExt.CopyToPooledAsync(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Copies one stream to another using a pooled byte[] buffer
+            </summary>
+            <param name="stream">Stream to copy from</param>
+            <param name="to">Stream to copy to</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.StreamExt.CopyToPooled(System.IO.Stream,System.IO.Stream)">
             <summary>
             Copies one stream to another using a pooled byte[] buffer
             </summary>
@@ -16319,7 +16373,17 @@
             Converts discord locale codes into oxide locale codes
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetOxideLocale(System.String)">
+        <member name="F:Oxide.Ext.Discord.Helpers.DiscordLocale.DefaultOxideLanguage">
+            <summary>
+            Default Oxide Lang (English)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Helpers.DiscordLocale.GameServerLanguage">
+            <summary>
+            Returns the Oxide Server language
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetOxideLanguage(System.String)">
             <summary>
             Returns the oxide locale for a given discord locale
             </summary>
@@ -16332,6 +16396,20 @@
             </summary>
             <param name="oxideLocale">oxide locale to get discord locale for</param>
             <returns>Discord locale if it exists; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetPlayerLanguage(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns the oxide locale for the given IPlayer
+            </summary>
+            <param name="player"><see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> to get the locale for</param>
+            <returns>Locale for the given IPlayer</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetPlayerLanguage(System.String)">
+            <summary>
+            Returns the oxide locale for the given playerId
+            </summary>
+            <param name="playerId">PlayerId to get the locale for</param>
+            <returns>Locale for the given playerId</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetCommandLocalization(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
@@ -16460,6 +16538,26 @@
             <summary>
             Displays the relative time since the timestamp
             Ex: 2 months ago
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordTemplateMessage">
+            <summary>
+            Interfaces for <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordTemplates"/> Messages
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordTemplateMessage.Content">
+            <summary>
+            Content of the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordTemplateMessage.Embeds">
+            <summary>
+            Embeds for the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordTemplateMessage.Components">
+            <summary>
+            Components for the message
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordQueryString">
@@ -16830,12 +16928,18 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CopyAsync(System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CopyFromAsync(System.IO.Stream)">
             <summary>
             Copy from the given stream to our internal stream
             </summary>
             <param name="stream">Stream to copy</param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CopyFrom(System.IO.Stream)">
+            <summary>
+            Copy from the given stream to our internal stream
+            </summary>
+            <param name="stream">Stream to copy</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.ReadAsStringAsync">
             <summary>
@@ -16843,11 +16947,19 @@
             </summary>
             <returns>String of the stream data</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.DeserializeAsync``1(Oxide.Ext.Discord.BotClient)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.DeserializeAsync``1(Newtonsoft.Json.JsonSerializer)">
             <summary>
             Deserializes the stream data to {T}
             </summary>
-            <param name="client">Client to use with the Deserialization</param>
+            <param name="serializer"><see cref="T:Newtonsoft.Json.JsonSerializer"/> to use with the Deserialization</param>
+            <typeparam name="T">Type to deserialize to</typeparam>
+            <returns>{T}</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.Deserialize``1(Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Deserializes the stream data to {T}
+            </summary>
+            <param name="serializer"><see cref="T:Newtonsoft.Json.JsonSerializer"/> to use with the Deserialization</param>
             <typeparam name="T">Type to deserialize to</typeparam>
             <returns>{T}</returns>
         </member>
@@ -16877,13 +16989,20 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.WriteAsync(Oxide.Ext.Discord.BotClient,System.Object)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.WriteAsync(Newtonsoft.Json.JsonSerializer,System.Object)">
             <summary>
             Serializes the payload to the Stream
             </summary>
-            <param name="client">Client to serialize with</param>
+            <param name="serializer"><see cref="T:Newtonsoft.Json.JsonSerializer"/> to serialize with</param>
             <param name="payload">Payload to be serialized</param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.Write(Newtonsoft.Json.JsonSerializer,System.Object)">
+            <summary>
+            Writes the payload to the Stream
+            </summary>
+            <param name="serializer"><see cref="T:Newtonsoft.Json.JsonSerializer"/> to serialize with</param>
+            <param name="payload">Payload to be serialized</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.DisposeInternal">
             <inheritdoc/>
@@ -17363,6 +17482,370 @@
             </summary>
             <param name="plugin">Plugin to remove subscriptions for</param>
             <exception cref="T:System.ArgumentNullException">Exception if plugin is null</exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate">
+            <summary>
+            Base Template used in Discord Templates
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate.Version">
+            <summary>
+            The version of the Template
+            Used when Registering templates to determine if we need to backup a template and create a new template for the given version
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate">
+            <summary>
+            Template for Button Components
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Enabled">
+            <summary>
+            If the button should be added to the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Label">
+            <summary>
+            Display label for the button
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Emoji">
+            <summary>
+            Emoji for the button
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Style">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle"/> for the button
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Command">
+            <summary>
+            Command for the button. If <see cref="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle.Link"/> then this will set the Url field; Else the CustomId field
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Inline">
+            <summary>
+            Should the button be on the same or new row
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.ToButton">
+            <summary>
+            Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate">
+            <summary>
+            Discord Message Template for sending localized Discord Messages
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.Content">
+            <summary>
+            String contents of the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.Embeds">
+            <summary>
+            Embeds for the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.Buttons">
+            <summary>
+            Buttons for the message
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.ToMessage``1(``0)">
+            <summary>
+            Converts the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> to a {T} message
+            {T} supports all message types
+            </summary>
+            <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> converted to type {T} message</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordTemplates">
+            <summary>
+            Oxide Library for Discord Templates
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordTemplates.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordTemplates.RegisterMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,System.String)">
+            <summary>
+            Registers a message template with the given name and language
+            </summary>
+            <param name="plugin">Plugin the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> is for</param>
+            <param name="name">Name of the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/></param>
+            <param name="template">Template to be registered</param>
+            <param name="minSupportedVersion">
+            The minimum supported template version.<br/>
+            If an existing template exists and it's version is >=  the minimum supported version then we will use that template.<br/>
+            If an existing template exists and it's version is &lt; the min supported version. The existing version is backed up and a new template is created 
+            </param>
+            <param name="language">Language for the template</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordTemplates.GetMessageTemplateForPlayer(Oxide.Core.Plugins.Plugin,System.String,Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <param name="player">IPlayer for the template</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordTemplates.GetMessageTemplateForPlayer(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+            <summary>
+            Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <param name="playerId">PlayerId for the template</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordTemplates.GetMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+            <summary>
+            Returns a message template for a given language
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <param name="language">Oxide language of the template</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordTemplates.GetMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+            <summary>
+            Returns a message template for a given language
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <param name="interaction">Interaction to get the template for</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate">
+            <summary>
+            Discord Template for embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Enabled">
+            <summary>
+            If this embed is enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Title">
+            <summary>
+            The Tile for the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Url">
+            <summary>
+            This Title Url for the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Description">
+            <summary>
+            The description of the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Color">
+            <summary>
+            The Hex Color for the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.ImageUrl">
+            <summary>
+            Image URL to show in the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.ThumbnailUrl">
+            <summary>
+            Thumbnail url to show in the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.VideoUrl">
+            <summary>
+            Video url to show in the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.TimeStamp">
+            <summary>
+            Show timestamp in the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Fields">
+            <summary>
+            Fields for the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Footer">
+            <summary>
+            Footer for the embed
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.EmbedFieldTemplate">
+            <summary>
+            Discord Template for Embed Field
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.EmbedFieldTemplate.Name">
+            <summary>
+            Title of the field
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.EmbedFieldTemplate.Value">
+            <summary>
+            Value of the field
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.EmbedFieldTemplate.Inline">
+            <summary>
+            Should the field be on the same row
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.EmbedFooterTemplate">
+            <summary>
+            Discord Template for Embed Footer
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.EmbedFooterTemplate.Enabled">
+            <summary>
+            Show Embed Footer
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.EmbedFooterTemplate.Text">
+            <summary>
+            Embed Footer Text
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.EmbedFooterTemplate.IconUrl">
+            <summary>
+            Embed Footer Icon
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate">
+            <summary>
+            Discord Template for Emoji
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate.Emoji">
+            <summary>
+            Emoji Name or ID
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate.Animated">
+            <summary>
+            If the emoji is Animated
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate.ToEmoji">
+            <summary>
+            Converts the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate"/> to a <see cref="T:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion">
+            <summary>
+            Version of a specific template
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.Major">
+            <summary>
+            Major Version
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.Minor">
+            <summary>
+            Minor Version
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.Revision">
+            <summary>
+            Revision Version
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.#ctor(System.UInt16,System.UInt16,System.UInt16)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="major">Major Version</param>
+            <param name="minor">Minor Version</param>
+            <param name="revision">Revision Version</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.#ctor(System.String)">
+            <summary>
+            Parses a template version from a string
+            </summary>
+            <param name="version">String of a template version</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.Equals(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.CompareTo(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.op_Equality(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Returns if the template versions are equal
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.op_Inequality(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Returns if the template versions are not equal
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.op_LessThan(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Returns if the left template version is less than the right
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.op_LessThanOrEqual(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Returns if the left template version is less than or equal the right
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.op_GreaterThan(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Returns if the right template version is greater than the left
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.op_GreaterThanOrEqual(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Returns if the right template version is greater or equal than the left
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.ToString">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Logging.DiscordConsoleLogger">
             <summary>

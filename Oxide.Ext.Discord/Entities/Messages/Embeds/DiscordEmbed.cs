@@ -46,7 +46,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// Color code of the embed
         /// </summary>
         [JsonProperty("color")]
-        public DiscordColor Color { get; set; }
+        public DiscordColor? Color { get; set; }
 
         /// <summary>
         /// Footer information

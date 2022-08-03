@@ -218,7 +218,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         private async Task<DiscordStreamContent> GetJsonContent(object data)
         {
             _json = DiscordPool.Get<DiscordJsonWriter>();
-            await _json.WriteAsync(Request.Client.Bot, data);
+            await _json.WriteAsync(Request.Client.Bot.JsonSerializer, data);
             
             if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))
             {

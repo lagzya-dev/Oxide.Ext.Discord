@@ -202,7 +202,7 @@ namespace Oxide.Ext.Discord.Builders
         /// <returns>This</returns>
         public DiscordEmbedBuilder AddBlankField(bool inline)
         {
-            return AddField("\u200b", "\u200b", inline);
+            return AddField(Blank, Blank, inline);
         }
 
         /// <summary>

@@ -5,13 +5,14 @@ using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 
 namespace Oxide.Ext.Discord.Entities.Messages
 {
     /// <summary>
     /// Represents a base message in discord
     /// </summary>
-    public abstract class BaseMessageCreate : IFileAttachments, IDiscordValidation
+    public abstract class BaseMessageCreate : IFileAttachments, IDiscordValidation, IDiscordTemplateMessage
     {
         /// <summary>
         /// Contents of the message

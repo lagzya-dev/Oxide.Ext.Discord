@@ -116,11 +116,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// Darker Gray Role Color
         /// </summary>
         public static readonly DiscordColor DarkerGrey = new DiscordColor(0x546E7A);
-        
+
         /// <summary>
         /// uint value of the hex color code
         /// </summary>
-        public uint Color { get; }
+        public readonly uint Color;
 
         /// <summary>
         /// DiscordColor Constructor

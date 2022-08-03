@@ -198,7 +198,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             DiscordJsonWriter writer = DiscordPool.Get<DiscordJsonWriter>();
-            await writer.WriteAsync(_client, payload);
+            await writer.WriteAsync(_client.JsonSerializer, payload);
             writer.Stream.Position = 0;
 
             if (_client.Logger.IsLogging(DiscordLogLevel.Verbose))

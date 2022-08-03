@@ -33,16 +33,25 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <summary>
         /// Serializes the payload to the Stream
         /// </summary>
-        /// <param name="client">Client to serialize with</param>
+        /// <param name="serializer"><see cref="JsonSerializer"/> to serialize with</param>
         /// <param name="payload">Payload to be serialized</param>
         /// <returns></returns>
-        public Task WriteAsync(BotClient client, object payload)
+        public Task WriteAsync(JsonSerializer serializer, object payload)
         {
-            //DiscordExtension.GlobalLogger.Debug($"{nameof(JsonWriterPoolable)}.{nameof(WriteAsync)} Before: {{0}} Position: {{1}} Type: {{2}}", Stream.Length, Stream.Position, payload.GetType());
-            client.JsonSerializer.Serialize(_writer, payload);
+            serializer.Serialize(_writer, payload);
             _writer.Flush();
-            //DiscordExtension.GlobalLogger.Debug($"{nameof(JsonWriterPoolable)}.{nameof(WriteAsync)} After: {{0}} Position: {{1}} Type: {{2}}", Stream.Length, Stream.Position, payload.GetType());
             return Task.CompletedTask;
+        }
+        
+        /// <summary>
+        /// Writes the payload to the Stream
+        /// </summary>
+        /// <param name="serializer"><see cref="JsonSerializer"/> to serialize with</param>
+        /// <param name="payload">Payload to be serialized</param>
+        public void Write(JsonSerializer serializer, object payload)
+        {
+            serializer.Serialize(_writer, payload);
+            _writer.Flush();
         }
 
         internal Task<string> ReadAsStringAsync()

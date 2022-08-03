@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.AppCommands
+namespace Oxide.Ext.Discord.Libraries.AppCommands.Handlers
 {
     internal class MessageComponentHandler
     {

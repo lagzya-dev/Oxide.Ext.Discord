@@ -232,7 +232,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="reader">Json Reader containing the message</param>
         public async Task SocketMessage(Snowflake webSocketId, DiscordJsonReader reader)
         {
-            EventPayload payload = await reader.DeserializeAsync<EventPayload>(_client);
+            EventPayload payload = await reader.DeserializeAsync<EventPayload>(_client.JsonSerializer);
             //await reader.PopulateAsync(_client, payload);
             //JsonConvert.PopulateObject(message, payload, _client.ClientSerializerSettings);
             _webSocket.OnSequenceUpdate(payload.Sequence);

@@ -15,6 +15,9 @@ namespace Oxide.Ext.Discord.Constants
         /// </summary>
         public static readonly HashSet<string> AllHooks = new HashSet<string>();
 
+        /// <summary>
+        /// A mapping of Gateway Intent to Hooks
+        /// </summary>
         public static readonly Hash<GatewayIntents, List<string>> GatewayIntentHooks = new Hash<GatewayIntents, List<string>>
         {
             [GatewayIntents.Guilds] = new List<string>
@@ -146,6 +149,10 @@ namespace Oxide.Ext.Discord.Constants
                 OnDiscordAutoModActionExecuted
             },
         };
+        
+        /// <summary>
+        /// A mapping of Hooks required Gateway Intent
+        /// </summary>
         public static readonly Hash<string, GatewayIntents> HookGatewayIntent = new Hash<string, GatewayIntents>();
 
         static DiscordExtHooks()
