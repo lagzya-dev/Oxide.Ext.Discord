@@ -166,7 +166,7 @@ namespace Oxide.Ext.Discord.Helpers
             if (interaction == null) throw new ArgumentNullException(nameof(interaction));
             if (langKey == null) throw new ArgumentNullException(nameof(langKey));
 
-            IPlayer player = interaction.GetUser()?.Player;
+            IPlayer player = interaction.User.Player;
             
             //Retrieves the plugin lang messages. If the messages are not found for a language then it will check in the following order
             // 1. Interaction.Locale - Discord User's Locale

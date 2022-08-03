@@ -10797,12 +10797,6 @@
             Returns the Focused option for Auto Complete
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GetUser">
-            <summary>
-            Returns the <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> for this request
-            </summary>
-            <returns></returns>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreatedDate">
             <summary>
             The UTC DateTime this interaction was created

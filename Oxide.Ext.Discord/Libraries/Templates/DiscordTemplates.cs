@@ -26,8 +26,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         private readonly string _rootDir = Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates");
         private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
         private readonly Hash<string, Dictionary<TemplateId, DiscordMessageTemplate>> _pluginTemplates = new Hash<string, Dictionary<TemplateId, DiscordMessageTemplate>>();
-
-
         private readonly ILogger _logger;
 
         /// <summary>
@@ -170,7 +168,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 return template;
             }
             
-            IPlayer player = interaction.GetUser().Player;
+            IPlayer player = interaction.User.Player;
             
             template = DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, interactionLang)
                                               ?? (player != null ? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.GetPlayerLanguage(player)) : null)

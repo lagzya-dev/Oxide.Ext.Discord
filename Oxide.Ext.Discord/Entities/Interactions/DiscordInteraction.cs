@@ -69,12 +69,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("member")]
         public GuildMember Member { get; set; }
+        
+        [JsonProperty("user")]
+        private DiscordUser _user { get; set; }
 
         /// <summary>
         /// User object for the invoking user, if invoked in a DM
         /// </summary>
-        [JsonProperty("user")]
-        public DiscordUser User { get; set; }
+        public DiscordUser User => _user ?? Member?.User;
 
         /// <summary>
         /// Continuation token for responding to the interaction
@@ -130,12 +132,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// Returns the Focused option for Auto Complete
         /// </summary>
         public InteractionDataOption Focused => _focused ?? (_focused = GetFocusedOption());
-
-        /// <summary>
-        /// Returns the <see cref="DiscordUser"/> for this request
-        /// </summary>
-        /// <returns></returns>
-        public DiscordUser GetUser() => User ?? Member?.User;
 
         /// <summary>
         /// The UTC DateTime this interaction was created
