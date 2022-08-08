@@ -350,7 +350,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
                     match = value.StartsWith(filter, comparison);
                     break;
                 case AutoCompleteSearchMode.Contains:
-                    match = value.IndexOf(value, comparison) >= 0;
+                    match = value.IndexOf(filter, comparison) >= 0;
                     break;
                 case AutoCompleteSearchMode.EndsWith:
                     match = value.EndsWith(filter, comparison);
