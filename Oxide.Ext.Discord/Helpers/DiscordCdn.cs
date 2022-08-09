@@ -149,7 +149,7 @@ namespace Oxide.Ext.Discord.Helpers
                     return $"{CdnUrl}/banners/{userId.ToString()}/{userBanner}.{GetExtension(format, userBanner)}";
                 
                 default:
-                    throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                    throw new ArgumentException("ImageFormat is not valid for User Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
         }
 
@@ -170,10 +170,10 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="userId">Discord User ID</param>
         /// <param name="userDiscriminator">Discord User Discriminator</param>
         /// <returns>Url of the default avatar url</returns>
-        public static string GetUserDefaultAvatarUrl(Snowflake userId, string userDiscriminator)
+        public static string GetUserDefaultAvatarUrl(string userDiscriminator)
         {
             uint discriminator = uint.Parse(userDiscriminator) % 5;
-            return $"{CdnUrl}/embed/avatars/{userId.ToString()}/{discriminator.ToString()}.png";
+            return $"{CdnUrl}/embed/avatars/{discriminator.ToString()}.png";
         }
         
         /// <summary>
