@@ -16,34 +16,24 @@ namespace Oxide.Ext.Discord.Logging
         private readonly StringBuilder _sb = new StringBuilder();
         private readonly Thread _writerThread;
         private readonly object _syncRoot = new object();
-        private readonly string _logPath;
-        private string _logFileName;
-        private DateTime _logNameDate;
+        private readonly string _logFileName;
 
         internal DiscordFileLogger()
         {
             _writerThread = new Thread(WriteLogThread)
             {
-                IsBackground = true
+                IsBackground = true,
+                Name = nameof(DiscordFileLogger)
             };
             _writerThread.Start();
             
-            _logPath = Path.Combine(Interface.Oxide.LogDirectory, "DiscordExtension");
-            if (!Directory.Exists(_logPath))
+            string logPath = Path.Combine(Interface.Oxide.LogDirectory, "DiscordExtension");
+            if (!Directory.Exists(logPath))
             {
-                Directory.CreateDirectory(_logPath);
+                Directory.CreateDirectory(logPath);
             }
             
-            SetLogFileName();
-        }
-        
-        private void SetLogFileName()
-        {
-            if (_logNameDate != DateTime.Now.Date)
-            {
-                _logFileName = Path.Combine(_logPath, $"DiscordExtension-{DateTime.Now:yyyy-MM-dd}.txt");
-                _logNameDate = DateTime.Now.Date;
-            }
+            _logFileName = Path.Combine(logPath, $"DiscordExtension-{DateTime.Now:yyyy-MM-dd h-mm-ss-tt}.txt");
         }
 
         internal void AddMessage(DiscordLogLevel level, string message, Exception ex)
@@ -97,18 +87,12 @@ namespace Oxide.Ext.Discord.Logging
                 }
 
                 log = _sb.ToString();
-                _sb.Length = 0;
+                _sb.Clear();
             }
 
-            WriteToFile(log);
-        }
-        
-        private void WriteToFile(string text)
-        {
-            SetLogFileName();
             using (StreamWriter streamWriter = new StreamWriter(_logFileName, true))
             {
-                streamWriter.WriteLine(text);
+                streamWriter.WriteLine(log);
             }
         }
 
