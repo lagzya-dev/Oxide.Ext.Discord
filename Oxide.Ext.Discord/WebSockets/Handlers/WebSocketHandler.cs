@@ -37,8 +37,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         internal SocketState SocketState = SocketState.Disconnected;
 
-        private Thread _thread;
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -64,8 +62,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 throw new DiscordWebSocketException("Socket is already running. Please disconnect before attempting to connect.");
             }
 
-            _thread?.Abort();
-            
             WebsocketId = SnowflakeIdGenerator.Generate();
             SocketState = SocketState.Connecting;
             _source?.Dispose();
@@ -74,11 +70,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _socket = new ClientWebSocket();
             _socket.Options.KeepAliveInterval = TimeSpan.Zero;
 
-            _thread = new Thread(RunInternal)
-            {
-                IsBackground = true
-            };
-            _thread.Start(url);
+            Task.Factory.StartNew(RunInternal, url, _token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
 
         private async void RunInternal(object url)

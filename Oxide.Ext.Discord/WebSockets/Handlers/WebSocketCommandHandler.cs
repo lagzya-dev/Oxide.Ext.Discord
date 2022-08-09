@@ -24,7 +24,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly CancellationTokenSource _source;
         private readonly CancellationToken _token;
         private bool _isSocketReady;
-        private readonly Thread _thread;
         private bool _isDisposed;
 
         /// <summary>
@@ -43,11 +42,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _source = new CancellationTokenSource();
             _token = _source.Token;
 
-            _thread = new Thread(RunInternal)
-            {
-                IsBackground = true
-            };
-            _thread.Start();
+            Task.Factory.StartNew(RunInternal, _token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
 
         private async void RunInternal()
@@ -56,7 +51,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 await SendCommandsInternal();
             }
-            catch (ThreadAbortException) { }
             catch (TaskCanceledException) { }
             catch (OperationCanceledException) { }
             catch (Exception ex)
@@ -203,7 +197,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _source?.Cancel();
             _online.Reset();
             _commands.Reset();
-            _thread?.Abort();
             _online?.Dispose();
             _commands?.Dispose();
         }
