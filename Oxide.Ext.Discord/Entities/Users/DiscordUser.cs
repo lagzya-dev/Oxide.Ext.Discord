@@ -126,21 +126,21 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Returns a string to mention this users nickname in a message
         /// </summary>
         public string Mention => DiscordFormatting.MentionUser(Id);
-        
-        /// <summary>
-        /// Returns a string to mention this users username in a message
-        /// </summary>
-        public string MentionUser => DiscordFormatting.MentionUser(Id);
-        
+
         /// <summary>
         /// Default Avatar Url for the User
         /// </summary>
-        public string GetDefaultAvatarUrl => DiscordCdn.GetUserDefaultAvatarUrl(Id, Discriminator);
+        public string GetDefaultAvatarUrl => DiscordCdn.GetUserDefaultAvatarUrl(Discriminator);
 
         /// <summary>
         /// Avatar Url for the user
         /// </summary>
         public string GetAvatarUrl => DiscordCdn.GetUserAvatarUrl(Id, Avatar);
+        
+        /// <summary>
+        /// Banner Url for the user
+        /// </summary>
+        public string GetBannerUrl => DiscordCdn.GetUserBanner(Id, Banner);
 
         /// <summary>
         /// Returns the username#discriminator for the user
