@@ -10858,6 +10858,17 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Create a response to an Interaction from the gateway.
+            See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="type">Type of the interaction response</param>
+            <param name="builder">Builder for this response</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Create a response to an Interaction from the gateway.
@@ -14525,11 +14536,6 @@
             Returns a string to mention this users nickname in a message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.MentionUser">
-            <summary>
-            Returns a string to mention this users username in a message
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetDefaultAvatarUrl">
             <summary>
             Default Avatar Url for the User
@@ -16094,7 +16100,7 @@
             <param name="icon">Icon hash for the channel</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetUserDefaultAvatarUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetUserDefaultAvatarUrl(System.String)">
             <summary>
             Returns the Url of the users default avatar
             </summary>
@@ -16244,6 +16250,13 @@
             <param name="roleId">Role ID to mention</param>
             <returns>Mention role formatted string</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionApplicationCommand(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.String)">
+            <summary>
+            Mention the the role with the given ID
+            </summary>
+            <param name="roleId">Role ID to mention</param>
+            <returns>Mention role formatted string</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CustomEmojiMessageString(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Boolean)">
             <summary>
             Returns formatting string for custom emoji to be used in a message
@@ -16262,7 +16275,7 @@
             <param name="animated">If the emoji is animated</param>
             <returns>Custom emoji formatted string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int32,Oxide.Ext.Discord.Helpers.TimestampStyles)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)">
             <summary>
             Displays a timestamp 
             </summary>
@@ -17589,7 +17602,7 @@
             Should the button be on the same or new row
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.ToButton">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.ToButton(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent"/>
             </summary>
@@ -17616,6 +17629,14 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.ToMessage``1(``0)">
+            <summary>
+            Converts the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> to a {T} message
+            {T} supports all message types
+            </summary>
+            <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> converted to type {T} message</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.ToPlaceholderMessage``1(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,``0)">
             <summary>
             Converts the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> to a {T} message
             {T} supports all message types
@@ -18152,6 +18173,12 @@
             </summary>
             <returns>Pooled <see cref="T:System.IO.MemoryStream"/></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetPlaceholderData">
+            <summary>
+            Returns a pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/>
+            </summary>
+            <returns>Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeList``1(System.Collections.Generic.List{``0}@)">
             <summary>
             Free's a pooled <see cref="T:System.Collections.Generic.List`1"/>
@@ -18184,6 +18211,12 @@
             Frees a <see cref="T:System.IO.MemoryStream"/> back to the pool
             </summary>
             <param name="stream"><see cref="T:System.IO.MemoryStream"/> being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreePlaceholderData(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData@)">
+            <summary>
+            Frees a <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> back to the pool
+            </summary>
+            <param name="data"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> being freed</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.HashPool`2">
             <summary>

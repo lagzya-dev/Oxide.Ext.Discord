@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     /// </summary>
     public class DiscordTemplates : Library
     {
-        private readonly string _rootDir = Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates");
+        private readonly string _rootDir = Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "messages");
         private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
         private readonly Hash<string, Dictionary<TemplateId, DiscordMessageTemplate>> _pluginTemplates = new Hash<string, Dictionary<TemplateId, DiscordMessageTemplate>>();
         private readonly ILogger _logger;

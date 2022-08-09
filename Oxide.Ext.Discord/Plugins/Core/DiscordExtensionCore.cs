@@ -275,5 +275,16 @@ namespace Oxide.Ext.Discord.Plugins.Core
             DiscordLogger.FileLogger.AddMessage(DiscordLogLevel.Info, message, null);
         }
         #endregion
+
+        #region Hooks
+        [HookMethod(nameof(OnPluginUnloaded))]
+        private void OnPluginUnloaded(Plugin plugin)
+        {
+            if (plugin?.Name == "PlaceholderAPI")
+            {
+                HandlePlaceholderApiUnloaded();
+            }
+        }
+        #endregion
     }
 }

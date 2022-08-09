@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Pooling
@@ -79,6 +80,15 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return MemoryStreamPool.Instance.Get();
         }
+        
+        /// <summary>
+        /// Returns a pooled <see cref="PlaceholderData"/>
+        /// </summary>
+        /// <returns>Pooled <see cref="PlaceholderData"/></returns>
+        public static PlaceholderData GetPlaceholderData()
+        {
+            return PlaceholderDataPool.Instance.Get();
+        }
 
         /// <summary>
         /// Free's a pooled <see cref="List{T}"/>
@@ -128,6 +138,15 @@ namespace Oxide.Ext.Discord.Pooling
         public static void FreeMemoryStream(ref MemoryStream stream)
         {
             MemoryStreamPool.Instance.Free(ref stream);
+        }        
+        
+        /// <summary>
+        /// Frees a <see cref="PlaceholderData"/> back to the pool
+        /// </summary>
+        /// <param name="data"><see cref="PlaceholderData"/> being freed</param>
+        public static void FreePlaceholderData(ref PlaceholderData data)
+        {
+            PlaceholderDataPool.Instance.Free(ref data);
         }
     }
 }

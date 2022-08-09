@@ -9,9 +9,9 @@ using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Linking;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Libraries.Templates;
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using AppDomain = System.AppDomain;
@@ -50,6 +50,7 @@ namespace Oxide.Ext.Discord
         internal static DiscordCommand DiscordCommand;
         internal static DiscordSubscriptions DiscordSubscriptions;
         internal static DiscordTemplates DiscordTemplates;
+        internal static DiscordPlaceholders DiscordPlaceholders;
         internal static DiscordConfig DiscordConfig;
 
         internal static bool IsShuttingDown;
@@ -110,6 +111,7 @@ namespace Oxide.Ext.Discord
             DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes, GlobalLogger);
             DiscordSubscriptions = new DiscordSubscriptions(GlobalLogger);
             DiscordTemplates = new DiscordTemplates(GlobalLogger);
+            DiscordPlaceholders = new DiscordPlaceholders(GlobalLogger);
 
             Manager.RegisterLibrary(nameof(DiscordAppCommand), DiscordAppCommand);
             Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);

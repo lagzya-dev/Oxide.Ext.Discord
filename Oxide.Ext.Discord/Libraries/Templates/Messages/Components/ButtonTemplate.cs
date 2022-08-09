@@ -1,5 +1,7 @@
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
@@ -50,11 +52,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         /// Converts the template to a <see cref="ButtonComponent"/>
         /// </summary>
         /// <returns></returns>
-        public ButtonComponent ToButton()
+        public ButtonComponent ToButton(PlaceholderData data)
         {
             ButtonComponent button = new ButtonComponent
             {
-                Label = Label,
+                Label = ApplyPlaceholder(Label, data),
                 Style = Style,
                 Disabled = !Enabled,
                 Emoji = Emoji?.ToEmoji()
@@ -62,14 +64,20 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
 
             if (Style == ButtonStyle.Link)
             {
-                button.Url = Command;
+                button.Url = ApplyPlaceholder(Command, data);
             }
             else
             {
-                button.CustomId = Command;
+                button.CustomId = ApplyPlaceholder(Command, data);
             }
 
             return button;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string ApplyPlaceholder(string text, PlaceholderData value)
+        {
+            return value == null ? text : DiscordExtension.DiscordPlaceholders.ProcessPlaceholders(text, value);
         }
     }
 }
