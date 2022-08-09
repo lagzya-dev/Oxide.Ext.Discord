@@ -1,4 +1,6 @@
+using System;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions.Entities;
 
 namespace Oxide.Ext.Discord.Helpers
 {
@@ -29,6 +31,30 @@ namespace Oxide.Ext.Discord.Helpers
         public static string MentionRole(Snowflake roleId) => $"<@&{roleId.ToString()}>";
 
         /// <summary>
+        /// Mention the the Application command
+        /// </summary>
+        /// <param name="commandId">Application Command ID</param>
+        /// <param name="name">Name of the command</param>
+        /// <param name="subCommand">Sub Command Name (Optional)</param>
+        /// <param name="group">Sub Command Group (Optional)</param>
+        /// <returns>Mentions the application command</returns>
+        public static string MentionApplicationCommand(Snowflake commandId, string name, string subCommand = null, string group = null)
+        {
+            InvalidSnowflakeException.ThrowIfInvalid(commandId, nameof(commandId));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (!string.IsNullOrEmpty(subCommand))
+            {
+                if (!string.IsNullOrEmpty(group))
+                {
+                    return $"</{name} {group} {subCommand}:{commandId}>";
+                }
+                
+                return $"</{name} {subCommand}:{commandId}>";
+            }
+            return $"</{name}:{commandId}>";
+        }
+
+        /// <summary>
         /// Returns formatting string for custom emoji to be used in a message
         /// </summary>
         /// <param name="name">Name of the custom emoji</param>
@@ -52,7 +78,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="timestamp">UNIX Timestamp</param>
         /// <param name="style">Display style for the timestamp</param>
         /// <returns></returns>
-        public static string UnixTimestamp(int timestamp, TimestampStyles style = TimestampStyles.ShortDateTime)
+        public static string UnixTimestamp(ulong timestamp, TimestampStyles style = TimestampStyles.ShortDateTime)
         {
             return $"<t:{timestamp.ToString()}:{GetTimestampFlag(style)}>";
         }
