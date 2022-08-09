@@ -23,10 +23,10 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Oxide.Core" Version="2.0.4029">
+    <PackageReference Include="Oxide.Core" Version="2.0.4048">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Oxide.CSharp" Version="2.0.4054">
+    <PackageReference Include="Oxide.CSharp" Version="2.0.4056">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
