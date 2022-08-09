@@ -283,6 +283,21 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="type">Type of the interaction response</param>
+        /// <param name="response">Interaction Callback Message Data</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionCallbackData response, Action callback = null, Action<RequestError> error = null)
+        {
+            InteractionResponse data = new InteractionResponse(type, response);
+            CreateInteractionResponse(client, data, callback, error);
+        }
+
+        /// <summary>
+        /// Create a response to an Interaction from the gateway.
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="type">Type of the interaction response</param>
         /// <param name="builder">Builder for this response</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
