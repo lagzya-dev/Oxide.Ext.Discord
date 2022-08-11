@@ -41,11 +41,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             if (!_client.Initialized)
             {
+                _logger.Debug("Skipping reconnect. BotClient is not Initialized");
                 return;
             }
 
             if (!_webSocket.Handler.IsDisconnected() && !_webSocket.Handler.IsDisconnecting())
             {
+                _logger.Debug("Skipping reconnect. Websocket is not Disconnected or Disconnecting");
                 return;
             }
 
