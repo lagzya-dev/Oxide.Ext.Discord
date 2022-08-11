@@ -41,6 +41,29 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
 
+        public void RegisterGlobalMessageTemplate(Plugin plugin, string name, DiscordMessageTemplate template, TemplateVersion minSupportedVersion)
+        {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (template == null) throw new ArgumentNullException(nameof(template));
+
+            string path = GetTemplatePath(plugin, name, null);
+            if (!File.Exists(path))
+            {
+                CreateFile(path, template);
+                return;
+            }
+
+            DiscordMessageTemplate existingTemplate = GetGlobalMessageTemplate(plugin, name);
+            if (existingTemplate.Version >= minSupportedVersion)
+            {
+                return;
+            }
+            
+            MoveFile(plugin, name, null, existingTemplate.Version);
+            CreateFile(path, template);
+        }
+        
         /// <summary>
         /// Registers a message template with the given name and language
         /// </summary>
@@ -54,7 +77,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </param>
         /// <param name="language">Language for the template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public void RegisterMessageTemplate(Plugin plugin, string name, DiscordMessageTemplate template, TemplateVersion minSupportedVersion, string language = DiscordLocale.DefaultOxideLanguage)
+        public void RegisterLocalizedMessageTemplate(Plugin plugin, string name, DiscordMessageTemplate template, TemplateVersion minSupportedVersion, string language = DiscordLocale.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
@@ -67,7 +90,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 return;
             }
 
-            DiscordMessageTemplate existingTemplate = GetMessageTemplate(plugin, name, language);
+            DiscordMessageTemplate existingTemplate = GetLocalizedMessageTemplate(plugin, name, language);
             if (existingTemplate.Version >= minSupportedVersion)
             {
                 return;
@@ -88,11 +111,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         public DiscordMessageTemplate GetMessageTemplateForPlayer(Plugin plugin, string name, IPlayer player)
         {
             string locale = player != null ? DiscordLocale.GetPlayerLanguage(player) : DiscordLocale.GameServerLanguage;
-            return GetMessageTemplate(plugin, name, locale);
+            return GetLocalizedMessageTemplate(plugin, name, locale);
         }
         
         /// <summary>
-        /// Returns a message template for a given <see cref="IPlayer"/> player
+        /// Returns a message template for a given <see cref="IPlayer"/> player ID
         /// </summary>
         /// <param name="plugin">Plugin the template is for</param>
         /// <param name="name">Name of the template</param>
@@ -102,7 +125,31 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         public DiscordMessageTemplate GetMessageTemplateForPlayer(Plugin plugin, string name, string playerId)
         {
             string locale = !string.IsNullOrEmpty(playerId) ? DiscordLocale.GetPlayerLanguage(playerId) : DiscordLocale.GameServerLanguage;
-            return GetMessageTemplate(plugin, name, locale);
+            return GetLocalizedMessageTemplate(plugin, name, locale);
+        }
+
+        public DiscordMessageTemplate GetGlobalMessageTemplate(Plugin plugin, string name)
+        {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+
+            Dictionary<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
+            if (templates == null)
+            {
+                templates = new Dictionary<TemplateId, DiscordMessageTemplate>(TemplateId.TemplateIdComparer);
+                _pluginTemplates[plugin.Name] = templates;
+            }
+
+            TemplateId templateId = new TemplateId(name, null);
+            if (templates.TryGetValue(templateId, out DiscordMessageTemplate template))
+            {
+                return template;
+            }
+
+            template = DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, null);
+            templates[templateId] = template;
+
+            return template;
         }
         
         /// <summary>
@@ -113,7 +160,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="language">Oxide language of the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public DiscordMessageTemplate GetMessageTemplate(Plugin plugin, string name, string language = DiscordLocale.DefaultOxideLanguage)
+        public DiscordMessageTemplate GetLocalizedMessageTemplate(Plugin plugin, string name, string language = DiscordLocale.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
@@ -237,6 +284,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         private string GetTemplatePath(Plugin plugin, string name, string language)
         {
             DiscordTemplateException.ThrowIfInvalidTemplateName(name);
+            if (string.IsNullOrEmpty(language))
+            {
+                return Path.Combine(_rootDir, plugin.Name, $"{name}.json");
+            }
             return Path.Combine(_rootDir, plugin.Name, language, $"{name}.json");
         }
         

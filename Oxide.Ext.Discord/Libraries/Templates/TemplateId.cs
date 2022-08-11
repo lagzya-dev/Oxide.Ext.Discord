@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 unchecked
                 {
                     int hashCode = obj.TemplateName.GetHashCode();
-                    hashCode = (hashCode * 397) ^ obj.Lang.GetHashCode();
+                    hashCode = obj.Lang != null ? (hashCode * 397) ^ obj.Lang.GetHashCode() : 0;
                     return hashCode;
                 }
             }
