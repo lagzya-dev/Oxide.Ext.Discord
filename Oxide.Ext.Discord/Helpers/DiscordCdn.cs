@@ -167,7 +167,6 @@ namespace Oxide.Ext.Discord.Helpers
         /// <summary>
         /// Returns the Url of the users default avatar
         /// </summary>
-        /// <param name="userId">Discord User ID</param>
         /// <param name="userDiscriminator">Discord User Discriminator</param>
         /// <returns>Url of the default avatar url</returns>
         public static string GetUserDefaultAvatarUrl(string userDiscriminator)

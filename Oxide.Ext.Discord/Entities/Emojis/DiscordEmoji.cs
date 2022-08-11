@@ -59,6 +59,11 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         public string Url => EmojiId.HasValue ? DiscordCdn.GetCustomEmojiUrl(EmojiId.Value, Animated.HasValue && Animated.Value ? DiscordImageFormat.Gif : DiscordImageFormat.Png) : null;
 
         /// <summary>
+        /// Show the emoji in a message
+        /// </summary>
+        public string Mention => DiscordFormatting.EmojiMessageString(this);
+
+        /// <summary>
         /// Returns an emoji object for the given emoji character
         /// </summary>
         /// <param name="emoji"></param>

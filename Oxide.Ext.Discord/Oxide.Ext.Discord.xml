@@ -6138,6 +6138,11 @@
             Url to the emoji image
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji.Mention">
+            <summary>
+            Show the emoji in a message
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji.FromCharacter(System.String)">
             <summary>
             Returns an emoji object for the given emoji character
@@ -10636,6 +10641,18 @@
             <summary>
             Auto incrementing version identifier updated during substantial record changes
             </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Mention">
+            <summary>
+            Mention the <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand"/>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.MentionCustom(System.String)">
+            <summary>
+            Mention the <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand"/> using a custom command string
+            </summary>
+            <param name="command">Custom commands string</param>
+            <returns>Mentioned Custom Command string</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
@@ -16108,7 +16125,6 @@
             <summary>
             Returns the Url of the users default avatar
             </summary>
-            <param name="userId">Discord User ID</param>
             <param name="userDiscriminator">Discord User Discriminator</param>
             <returns>Url of the default avatar url</returns>
         </member>
@@ -16263,6 +16279,14 @@
             <param name="subCommand">Sub Command Name (Optional)</param>
             <param name="group">Sub Command Group (Optional)</param>
             <returns>Mentions the application command</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionApplicationCommandCustom(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+            <summary>
+            Mention the application command using a custom command string
+            </summary>
+            <param name="commandId">Application Command ID</param>
+            <param name="command">Custom Command String</param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CustomEmojiMessageString(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Boolean)">
             <summary>

@@ -27,14 +27,14 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         public DiscordPlaceholders(ILogger logger)
         {
             _logger = logger;
-            RegisterPlaceholders(new ChannelPlaceholders());
-            RegisterPlaceholders(new GuildPlaceholders());
-            RegisterPlaceholders(new ServerPlaceholders());
-            RegisterPlaceholders(new MemberPlaceholders());
-            RegisterPlaceholders(new RolePlaceholders());
-            RegisterPlaceholders(new TimestampPlaceholders());
-            RegisterPlaceholders(new UserPlaceholders());
-            RegisterPlaceholders(new ApplicationCommandPlaceholders());
+            ChannelPlaceholders.RegisterPlaceholders(this);
+            GuildPlaceholders.RegisterPlaceholders(this);
+            ServerPlaceholders.RegisterPlaceholders(this);
+            MemberPlaceholders.RegisterPlaceholders(this);
+            RolePlaceholders.RegisterPlaceholders(this);
+            TimestampPlaceholders.RegisterPlaceholders(this);
+            UserPlaceholders.RegisterPlaceholders(this);
+            ApplicationCommandPlaceholders.RegisterPlaceholders(this);
         }
         
         public string ProcessPlaceholders(string text, PlaceholderData data)
@@ -88,11 +88,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return data;
         }
 
-        public void RegisterPlaceholders<T>(PlaceholderCollection<T> placeholders)
-        {
-            placeholders.RegisterPlaceholders(this);
-        }
-
         public void RegisterPlaceholder<T>(string placeholder, string dataKey, Plugin plugin, Action<StringBuilder, T, PlaceholderMatch> callback)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
@@ -108,7 +103,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             _placeholders[placeholder] = holder;
         }
 
-        public void RegisterPlaceholderInternal<T>(string placeholder, string dataKey, Action<StringBuilder, T, PlaceholderMatch> callback)
+        internal void RegisterInternalPlaceholder<T>(string placeholder, string dataKey, Action<StringBuilder, T, PlaceholderMatch> callback)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
             if (string.IsNullOrEmpty(dataKey)) throw new ArgumentNullException(nameof(dataKey));

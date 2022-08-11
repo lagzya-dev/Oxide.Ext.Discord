@@ -17,7 +17,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Types
 
         public override void Invoke(StringBuilder builder, PlaceholderMatch match, PlaceholderData data)
         {
-            Invoke(builder, match, data.Get<T>(DataKey));
+            T tData = data.Get<T>(DataKey);
+            if (tData != null)
+            {
+                Invoke(builder, match, tData);
+            }
         }
         
         private void Invoke(StringBuilder builder, PlaceholderMatch match, T data)

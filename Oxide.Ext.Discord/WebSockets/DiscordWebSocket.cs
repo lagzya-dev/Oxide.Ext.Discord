@@ -280,7 +280,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Used to Identify the bot with discord
         /// </summary>
-        private async Task Identify()
+        internal async Task Identify()
         {
             // Sent immediately after connecting. Opcode 2: Identify
             // Ref: https://discord.com/developers/docs/topics/gateway#identifying

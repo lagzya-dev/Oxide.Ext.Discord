@@ -1,22 +1,27 @@
 using System.Text;
 using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Libraries.Placeholders.Types;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    internal class GuildPlaceholders : PlaceholderCollection<DiscordGuild>
+    internal static class GuildPlaceholders
     {
-        private void Id(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.Id);
-        private void Name(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.Name);
-        private void Description(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.Description);
-        private void MemberCount(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.Members.Count);
+        private static void Id(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.Id);
+        private static void Name(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.Name);
+        private static void Description(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.Description);
+        private static void Icon(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.IconUrl);
+        private static void Banner(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.BannerUrl);
+        private static void MemberCount(StringBuilder builder, DiscordGuild guild, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, guild.Members.Count);
 
-        public override void RegisterPlaceholders(DiscordPlaceholders placeholders)
+        public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
-            placeholders.RegisterPlaceholderInternal<DiscordGuild>("guild.id", GetDataKey(), Id);
-            placeholders.RegisterPlaceholderInternal<DiscordGuild>("guild.name", GetDataKey(), Name);
-            placeholders.RegisterPlaceholderInternal<DiscordGuild>("guild.description", GetDataKey(), Description);
-            placeholders.RegisterPlaceholderInternal<DiscordGuild>("guild.members.count", GetDataKey(), MemberCount);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.id", GetDataKey(), Id);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.name", GetDataKey(), Name);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.description", GetDataKey(), Description);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.icon", GetDataKey(), Icon);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.banner", GetDataKey(), Banner);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.members.count", GetDataKey(), MemberCount);
         }
+        
+        private static string GetDataKey() => nameof(DiscordGuild);
     }
 }

@@ -1,20 +1,23 @@
 using System.Text;
 using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Libraries.Placeholders.Types;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    internal class RolePlaceholders : PlaceholderCollection<DiscordRole>
+    internal static class RolePlaceholders
     {
-        private void Id(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Id);
-        private void Name(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Name);
-        private void Mention(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Mention);
+        private static void Id(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Id);
+        private static void Name(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Name);
+        private static void Mention(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Mention);
+        private static void Icon(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Icon);
 
-        public override void RegisterPlaceholders(DiscordPlaceholders placeholders)
+        public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
-            placeholders.RegisterPlaceholderInternal<DiscordRole>("role.id", GetDataKey(), Id);
-            placeholders.RegisterPlaceholderInternal<DiscordRole>("role.name", GetDataKey(), Name);
-            placeholders.RegisterPlaceholderInternal<DiscordRole>("role.mention", GetDataKey(), Mention);
+            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.id", GetDataKey(), Id);
+            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.name", GetDataKey(), Name);
+            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.mention", GetDataKey(), Mention);
+            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.icon", GetDataKey(), Icon);
         }
+        
+        private static string GetDataKey() => nameof(DiscordRole);
     }
 }

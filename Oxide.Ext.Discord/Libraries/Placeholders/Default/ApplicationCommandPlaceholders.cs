@@ -1,20 +1,23 @@
 using System.Text;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Libraries.Placeholders.Types;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    internal class ApplicationCommandPlaceholders : PlaceholderCollection<DiscordApplicationCommand>
+    internal static class ApplicationCommandPlaceholders
     {
-        private void Id(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.Id);
-        private void Name(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.Name);
-        private void Mention(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.Name);
+        private static void Id(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.Id);
+        private static void Name(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.Name);
+        private static void Mention(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.Mention);
+        private static void MentionCustom(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.MentionCustom(match.Format));
         
-        public override void RegisterPlaceholders(DiscordPlaceholders placeholders)
+        public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
-            placeholders.RegisterPlaceholderInternal<DiscordApplicationCommand>("command.id", GetDataKey(), Id);
-            placeholders.RegisterPlaceholderInternal<DiscordApplicationCommand>("command.name", GetDataKey(), Name);
-            placeholders.RegisterPlaceholderInternal<DiscordApplicationCommand>("command.mention", GetDataKey(), Mention);
+            placeholders.RegisterInternalPlaceholder<DiscordApplicationCommand>("command.id", GetDataKey(), Id);
+            placeholders.RegisterInternalPlaceholder<DiscordApplicationCommand>("command.name", GetDataKey(), Name);
+            placeholders.RegisterInternalPlaceholder<DiscordApplicationCommand>("command.mention", GetDataKey(), Mention);
+            placeholders.RegisterInternalPlaceholder<DiscordApplicationCommand>("command.mention.custom", GetDataKey(), MentionCustom);
         }
+
+        private static string GetDataKey() => nameof(DiscordApplicationCommand);
     }
 }

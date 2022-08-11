@@ -1,5 +1,6 @@
 using System;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Exceptions.Entities;
 
 namespace Oxide.Ext.Discord.Helpers
@@ -52,6 +53,27 @@ namespace Oxide.Ext.Discord.Helpers
                 return $"</{name} {subCommand}:{commandId}>";
             }
             return $"</{name}:{commandId}>";
+        }
+
+        /// <summary>
+        /// Mention the application command using a custom command string
+        /// </summary>
+        /// <param name="commandId">Application Command ID</param>
+        /// <param name="command">Custom Command String</param>
+        /// <returns></returns>
+        public static string MentionApplicationCommandCustom(Snowflake commandId, string command)
+        {
+            return $"</{command}:{commandId}>";
+        }
+
+        public static string EmojiMessageString(DiscordEmoji emoji)
+        {
+            if (!emoji.EmojiId.HasValue)
+            {
+                return emoji.Name;
+            }
+
+            return CustomEmojiMessageString(emoji.Id, emoji.Name, emoji.Animated ?? false);
         }
 
         /// <summary>

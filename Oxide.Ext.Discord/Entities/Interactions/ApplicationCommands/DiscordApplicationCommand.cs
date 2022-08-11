@@ -5,6 +5,7 @@ using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
@@ -93,6 +94,18 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("version")]
         public Snowflake Version { get; set; }
+
+        /// <summary>
+        /// Mention the <see cref="DiscordApplicationCommand"/>
+        /// </summary>
+        public string Mention => DiscordFormatting.MentionApplicationCommand(Id, Name);
+
+        /// <summary>
+        /// Mention the <see cref="DiscordApplicationCommand"/> using a custom command string
+        /// </summary>
+        /// <param name="command">Custom commands string</param>
+        /// <returns>Mentioned Custom Command string</returns>
+        public string MentionCustom(string command) => DiscordFormatting.MentionApplicationCommandCustom(Id, command);
         
         /// <summary>
         /// Edit a command.
