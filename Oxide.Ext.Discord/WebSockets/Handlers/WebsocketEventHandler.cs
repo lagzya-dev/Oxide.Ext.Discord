@@ -562,7 +562,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _client.AddGuildOrUpdate(guild);
             }
             
-            _webSocket.OnSocketReady(ready.SessionId);
+            _webSocket.OnSocketReady(ready);
             _client.OnClientReady(ready);
 
             _logger.Info("Your bot was found in {0} Guilds!", ready.Guilds.Count);
