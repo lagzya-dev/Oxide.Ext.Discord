@@ -159,7 +159,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
             
             MessageComponentHandler handler = GetOrAddComponentHandler(app);
-            handler.AddComponentCommand(new ComponentCommand(plugin, app, InteractionType.ApplicationCommandAutoComplete, customId, callback));
+            handler.AddComponentCommand(new ComponentCommand(plugin, app, InteractionType.MessageComponent, customId, callback));
             _logger.Debug("Adding Message Component Command For: {0} CustomId: {1} Callback: {2}", plugin.Name, customId, callback);
         }
 
