@@ -73,7 +73,10 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private void Connect()
         {
-            _webSocket.Connect();
+            if (!_webSocket.Handler.IsConnected() && !_webSocket.Handler.IsConnecting())
+            {
+                _webSocket.Connect();
+            }
         }
         
         /// <summary>
