@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Oxide.Core;
@@ -19,6 +20,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     {
         private readonly Regex _placeholderRegex = new Regex(@"{([^!:{}""]+)(?::([^!{}""]+))*?}", RegexOptions.Compiled);
         private readonly Hash<string, BasePlaceholder> _placeholders = new Hash<string, BasePlaceholder>();
+        private readonly Hash<string, BasePlaceholder> _internalPlaceholders = new Hash<string, BasePlaceholder>();
         private readonly Covalence _covalence = Interface.Oxide.GetLibrary<Covalence>();
         private readonly ILogger _logger;
         
@@ -113,11 +115,19 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             if (callback == null) throw new ArgumentNullException(nameof(callback));
             Placeholder<T> holder = new Placeholder<T>(dataKey, callback);
             _placeholders[placeholder] = holder;
+            _internalPlaceholders[placeholder] = holder;
         }
 
         internal void OnPluginUnloaded(Plugin plugin)
         {
             _placeholders.RemoveAll(p => p.IsForPlugin(plugin));
+            foreach (KeyValuePair<string, BasePlaceholder> placeholder in _internalPlaceholders)
+            {
+                if (!_placeholders.ContainsKey(placeholder.Key))
+                {
+                    _placeholders[placeholder.Key] = placeholder.Value;
+                }
+            }
         }
     }
 }
