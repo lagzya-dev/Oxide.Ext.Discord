@@ -51,18 +51,10 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         [LibraryFunction(nameof(AddChannelSubscription))]
         public void AddChannelSubscription(Plugin plugin, Snowflake channelId, Action<DiscordMessage> message)
         {
-            if (plugin == null)
-            {
-                throw new ArgumentNullException(nameof(plugin));
-            }
-
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
-
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (message == null) throw new ArgumentNullException(nameof(message));
+            
             _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(AddChannelSubscription)} {{0}} added subscription to channel {{1}}", plugin.Name, channelId);
 
             Hash<string, DiscordSubscription> channelSubs = _subscriptions[channelId];
@@ -85,11 +77,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         [LibraryFunction(nameof(RemoveChannelSubscription))]
         public void RemoveChannelSubscription(Plugin plugin, Snowflake channelId)
         {
-            if (plugin == null)
-            {
-                throw new ArgumentNullException(nameof(plugin));
-            }
-
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             
             Hash<string, DiscordSubscription> pluginSubs = _subscriptions[channelId];
@@ -120,10 +108,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <exception cref="ArgumentNullException">Exception if plugin is null</exception>
         public void RemovePluginSubscriptions(Plugin plugin)
         {
-            if (plugin == null)
-            {
-                throw new ArgumentNullException(nameof(plugin));
-            }
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
             List<Snowflake> emptySubs = new List<Snowflake>();
 
@@ -177,6 +162,17 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 if (sub.CanRun(client))
                 {
                     sub.Invoke(message);
+                }
+            }
+        }
+
+        internal IEnumerable<DiscordSubscription> GetSubscriptions()
+        {
+            foreach (Hash<string,DiscordSubscription> pluginSubscriptions in _subscriptions.Values)
+            {
+                foreach (DiscordSubscription subscription in pluginSubscriptions.Values)
+                {
+                    yield return subscription;
                 }
             }
         }
