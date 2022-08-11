@@ -30,7 +30,10 @@ namespace Oxide.Ext.Discord.Callbacks
         /// <summary>
         /// Run the callback
         /// </summary>
-        public abstract void Run();
+        public virtual void Run()
+        {
+            Callback.Invoke();
+        }
 
         private void CallbackInternal()
         {

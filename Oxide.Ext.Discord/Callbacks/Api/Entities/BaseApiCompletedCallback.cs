@@ -20,15 +20,6 @@ namespace Oxide.Ext.Discord.Callbacks.Api.Entities
         {
             Client = client;
         }
-        
-        /// <summary>
-        /// Runs the callback with the RequestResponse
-        /// </summary>
-        /// <param name="response">Response for the request</param>
-        public sealed override void Run(RequestResponse response)
-        {
-            HandleCallback(response);
-        }
 
         ///<inheritdoc/>
         protected override void EnterPool()
