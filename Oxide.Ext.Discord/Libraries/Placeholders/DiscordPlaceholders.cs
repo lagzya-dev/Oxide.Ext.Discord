@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using Oxide.Core;
@@ -5,6 +6,7 @@ using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Libraries.Placeholders.Types;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Core;
@@ -16,7 +18,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     public class DiscordPlaceholders : Library
     {
         private readonly Regex _placeholderRegex = new Regex(@"{([^!:{}""]+)(?::([^!{}""]+))*?}", RegexOptions.Compiled);
-        private readonly Hash<string, BasePlaceholders> _placeholders = new Hash<string, BasePlaceholders>();
+        private readonly Hash<string, BasePlaceholder> _placeholders = new Hash<string, BasePlaceholder>();
         private readonly Covalence _covalence = Interface.Oxide.GetLibrary<Covalence>();
         private readonly ILogger _logger;
         
@@ -50,7 +52,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 {
                     Match match = matches[index];
                     PlaceholderMatch placeholderMatch = new PlaceholderMatch(match);
-                    BasePlaceholders placeholder = _placeholders[placeholderMatch.Name];
+                    BasePlaceholder placeholder = _placeholders[placeholderMatch.Name];
                     if (placeholder == null)
                     {
                         nonMatchedPlaceholder = true;
@@ -84,12 +86,33 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return data;
         }
 
-        public void RegisterPlaceholders(BasePlaceholders placeholders)
+        public void RegisterPlaceholders<T>(PlaceholderCollection<T> placeholders)
         {
-            foreach (string key in placeholders.GetPlaceholders())
+            placeholders.RegisterPlaceholders(this);
+        }
+
+        public void RegisterPlaceholder<T>(string placeholder, string dataKey, Plugin plugin, Action<StringBuilder, T, PlaceholderMatch> callback)
+        {
+            if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
+            if (string.IsNullOrEmpty(dataKey)) throw new ArgumentNullException(nameof(dataKey));
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (callback == null) throw new ArgumentNullException(nameof(callback));
+            Placeholder<T> holder = new Placeholder<T>(dataKey, plugin, callback);
+            BasePlaceholder existing = _placeholders[placeholder];
+            if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
             {
-                _placeholders[key] = placeholders;
+                _logger.Warning("{0} Plugin has replaced placeholder '{1}' previously registered by plugin {2}", plugin.Name, placeholder, existing.Plugin.Name);
             }
+            _placeholders[placeholder] = holder;
+        }
+
+        public void RegisterPlaceholderInternal<T>(string placeholder, string dataKey, Action<StringBuilder, T, PlaceholderMatch> callback)
+        {
+            if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
+            if (string.IsNullOrEmpty(dataKey)) throw new ArgumentNullException(nameof(dataKey));
+            if (callback == null) throw new ArgumentNullException(nameof(callback));
+            Placeholder<T> holder = new Placeholder<T>(dataKey, callback);
+            _placeholders[placeholder] = holder;
         }
 
         internal void OnPluginUnloaded(Plugin plugin)

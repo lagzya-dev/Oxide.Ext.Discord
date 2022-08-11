@@ -1608,12 +1608,6 @@
             </summary>
             <param name="client"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.Run(Oxide.Ext.Discord.Entities.Api.RequestResponse)">
-            <summary>
-            Runs the callback with the RequestResponse
-            </summary>
-            <param name="response">Response for the request</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.EnterPool">
             <inheritdoc/>
         </member>
@@ -6678,6 +6672,11 @@
             Used for resuming connections
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.ResumeSessionUrl">
+            <summary>
+            Websocket URL to use when resuming the session
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.Shard">
             <summary>
             The shard information associated with this session, if sent when identifying
@@ -10865,7 +10864,7 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="type">Type of the interaction response</param>
-            <param name="builder">Builder for this response</param>
+            <param name="response">Interaction Callback Message Data</param>
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -14546,6 +14545,11 @@
             Avatar Url for the user
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetBannerUrl">
+            <summary>
+            Banner Url for the user
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetFullUserName">
             <summary>
             Returns the username#discriminator for the user
@@ -16252,10 +16256,13 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionApplicationCommand(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.String)">
             <summary>
-            Mention the the role with the given ID
+            Mention the the Application command
             </summary>
-            <param name="roleId">Role ID to mention</param>
-            <returns>Mention role formatted string</returns>
+            <param name="commandId">Application Command ID</param>
+            <param name="name">Name of the command</param>
+            <param name="subCommand">Sub Command Name (Optional)</param>
+            <param name="group">Sub Command Group (Optional)</param>
+            <returns>Mentions the application command</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CustomEmojiMessageString(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Boolean)">
             <summary>
@@ -17512,7 +17519,7 @@
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.RegisterMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.RegisterLocalizedMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,System.String)">
             <summary>
             Registers a message template with the given name and language
             </summary>
@@ -17539,7 +17546,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetMessageTemplateForPlayer(Oxide.Core.Plugins.Plugin,System.String,System.String)">
             <summary>
-            Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player
+            Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player ID
             </summary>
             <param name="plugin">Plugin the template is for</param>
             <param name="name">Name of the template</param>
@@ -17547,7 +17554,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetLocalizedMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,System.String)">
             <summary>
             Returns a message template for a given language
             </summary>
@@ -18807,6 +18814,11 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket._sessionId">
             <summary>
             The current session ID for the connected bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket._resumeSessionUrl">
+            <summary>
+            The URL to use when resuming a session
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.ShouldReconnect">
