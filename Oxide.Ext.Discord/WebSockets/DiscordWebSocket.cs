@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
@@ -23,6 +22,11 @@ namespace Oxide.Ext.Discord.WebSockets
         /// The current session ID for the connected bot
         /// </summary>
         private string _sessionId;
+
+        /// <summary>
+        /// The URL to use when resuming a session
+        /// </summary>
+        private string _resumeSessionUrl;
         
         /// <summary>
         /// If we should attempt to reconnect to discord on disconnect
@@ -81,6 +85,10 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Connect)} Start websocket connection");
             string url = Gateway.WebsocketUrl;
+            if (ShouldResume && !string.IsNullOrEmpty(_resumeSessionUrl))
+            {
+                url = _resumeSessionUrl;
+            }
             
             //We haven't gotten the websocket url. Get url then attempt to connect.
             //There has been more than 3 tries to reconnect. Discord suggests trying to update gateway url.
@@ -229,9 +237,10 @@ namespace Oxide.Ext.Discord.WebSockets
             _reconnect.CancelReconnect();
         }
         
-        internal void OnSocketReady(string sessionId)
+        internal void OnSocketReady(GatewayReadyEvent ready)
         {
-            _sessionId = sessionId;
+            _sessionId = ready.SessionId;
+            _resumeSessionUrl = ready.ResumeSessionUrl;
             SocketHasConnected = true;
             ShouldResume = true;
             _reconnect.OnWebsocketReady();

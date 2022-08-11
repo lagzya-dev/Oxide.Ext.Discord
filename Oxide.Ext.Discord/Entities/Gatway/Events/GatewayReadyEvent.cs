@@ -40,6 +40,12 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// </summary>
         [JsonProperty("session_id")]
         public string SessionId { get; set; }
+        
+        /// <summary>
+        /// Websocket URL to use when resuming the session
+        /// </summary>
+        [JsonProperty("resume_gateway_url")]
+        public string ResumeSessionUrl { get; set; }
 
         /// <summary>
         /// The shard information associated with this session, if sent when identifying
