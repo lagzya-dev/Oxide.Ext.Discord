@@ -394,5 +394,18 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 }
             }
         }
+
+        internal IEnumerable<BaseCommand> GetCommands()
+        {
+            foreach (GuildCommand command in _guildCommands.Values)
+            {
+                yield return command;
+            }
+            
+            foreach (DirectMessageCommand command in _directMessageCommands.Values)
+            {
+                yield return command;
+            }
+        }
     }
 }

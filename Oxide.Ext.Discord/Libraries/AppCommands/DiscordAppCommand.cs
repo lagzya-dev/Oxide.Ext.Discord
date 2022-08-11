@@ -380,5 +380,26 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                 }
             }
         }
+
+        internal IEnumerable<BaseAppCommand> GetCommands(Snowflake applicationId)
+        {
+            ApplicationCommandHandler appHandler = _slashCommands[applicationId];
+            if (appHandler != null)
+            {
+                foreach (AppCommand command in appHandler.GetCommands())
+                {
+                    yield return command;
+                }
+            }
+            
+            MessageComponentHandler componentHandler = _componentCommands[applicationId];
+            if (componentHandler != null)
+            {
+                foreach (ComponentCommand command in componentHandler.GetCommands())
+                {
+                    yield return command;
+                }
+            }
+        }
     }
 }

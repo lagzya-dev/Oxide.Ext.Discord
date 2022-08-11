@@ -6,7 +6,12 @@ using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Entities.Applications;
+using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
+using Oxide.Ext.Discord.Libraries.Command;
+using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Rest.Buckets;
@@ -270,9 +275,136 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 }
             }
 
+            sb.AppendLine("Libraries:");
+            DebugApplicationCommands(sb);
+            DebugDiscordCommands(sb);
+            DebugSubscriptions(sb);
+
             string message = sb.ToString();
             player.Message(message);
             DiscordLogger.FileLogger.AddMessage(DiscordLogLevel.Info, message, null);
+        }
+        private void DebugApplicationCommands(StringBuilder sb)
+        {
+            sb.AppendLine("\tApplication Commands:");
+
+            foreach (BotClient client in BotClient.ActiveBots.Values)
+            {
+                sb.Append("\t\tApplication ID: ");
+                sb.AppendLine(client.Application.Id);
+                foreach (BaseAppCommand command in DiscordExtension.DiscordAppCommand.GetCommands(client.Application.Id))
+                {
+                    if (command is ComponentCommand componentCommand)
+                    {
+                        sb.Append("\t\t\tCommand Name: ");
+                        sb.AppendLine(componentCommand.CustomId);
+                        sb.Append("\t\t\tInteraction Type: ");
+                        sb.AppendLine(componentCommand.Type.ToString());
+                        sb.Append("\t\t\tPlugin: ");
+                        FormatPlugin(componentCommand.Plugin, sb);
+                        sb.AppendLine();
+                    }
+                    else if (command is AutoCompleteCommand autoCompleteCommand)
+                    {
+                        sb.Append("\t\t\tCommand Name: ");
+                        sb.AppendLine(autoCompleteCommand.Command.ToString());
+                        sb.Append("\t\t\tInteraction Type: ");
+                        sb.AppendLine(autoCompleteCommand.Type.ToString());
+                        sb.Append("\t\t\tPlugin: ");
+                        FormatPlugin(autoCompleteCommand.Plugin, sb);
+                        sb.AppendLine();
+                    }
+                    else if (command is AppCommand appCommand)
+                    {
+                        sb.Append("\t\t\tCommand Name: ");
+                        sb.AppendLine(appCommand.Command.ToString());
+                        sb.Append("\t\t\tInteraction Type: ");
+                        sb.AppendLine(appCommand.Type.ToString());
+                        sb.Append("\t\t\tPlugin: ");
+                        FormatPlugin(appCommand.Plugin, sb);
+                        sb.AppendLine();
+                    }
+                }
+            }
+        }
+        public void DebugDiscordCommands(StringBuilder sb)
+        {
+            sb.AppendLine("\tDiscord Commands:");
+            foreach (BaseCommand command in DiscordExtension.DiscordCommand.GetCommands())
+            {
+                if (command is GuildCommand guildCommand)
+                {
+                    sb.Append("\t\tCommand Name: ");
+                    sb.AppendLine(guildCommand.Name);
+                    sb.Append("\t\tPlugin: ");
+                    FormatPlugin(guildCommand.Plugin, sb);
+                    sb.AppendLine("\t\tType: Guild Command");
+                    sb.AppendLine();
+                }
+                else if (command is DirectMessageCommand directMessageCommand)
+                {
+                    sb.Append("\t\tCommand Name: ");
+                    sb.AppendLine(directMessageCommand.Name);
+                    sb.Append("\t\tPlugin: ");
+                    FormatPlugin(directMessageCommand.Plugin, sb);
+                    sb.AppendLine("\t\tType: Direct Message Command");
+                    sb.AppendLine();
+                }
+            }
+        }
+        public void DebugSubscriptions(StringBuilder sb)
+        {
+            sb.AppendLine("\tDiscord Channel Subscriptions:");
+            foreach (DiscordSubscription sub in DiscordExtension.DiscordSubscriptions.GetSubscriptions())
+            {
+                DiscordChannel channel = null;
+                DiscordChannel parent = null;
+                foreach (BotClient client in BotClient.ActiveBots.Values)
+                {
+                    foreach (DiscordGuild guild in client.Servers.Values)
+                    {
+                        channel = guild.Channels[sub.ChannelId];
+                        if (channel != null)
+                        {
+                            if (channel.ParentId.HasValue)
+                            {
+                                parent = guild.Channels[channel.ParentId.Value];
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                sb.Append("\t\tChannel Name: ");
+
+                if (parent != null)
+                {
+                    sb.Append(parent.Name);
+                    sb.Append('/');
+                    sb.AppendLine(channel.Name);
+                }
+                else
+                {
+                    sb.AppendLine(channel?.Name ?? "Unknown Channel");
+                }
+
+                sb.Append("\t\tPlugin: ");
+                FormatPlugin(sub.Plugin, sb);
+                sb.Append("\t\tMethod: ");
+                sb.Append(sub.Callback.Method.DeclaringType.Name);
+                sb.Append('.');
+                sb.AppendLine(sub.Callback.Method.Name);
+                sb.AppendLine();
+            }
+        }
+
+        public void FormatPlugin(Plugin plugin, StringBuilder sb)
+        {
+            sb.Append(plugin.Name);
+            sb.Append("(");
+            sb.Append(plugin.Version);
+            sb.Append(") by ");
+            sb.AppendLine(plugin.Author);
         }
         #endregion
 

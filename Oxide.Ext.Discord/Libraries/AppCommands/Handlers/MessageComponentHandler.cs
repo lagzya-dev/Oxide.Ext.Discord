@@ -116,6 +116,17 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Handlers
                 }
             }
         }
+        
+        public IEnumerable<ComponentCommand> GetCommands()
+        {
+            foreach (List<ComponentCommand> commands in _commands.Values)
+            {
+                foreach (ComponentCommand command in commands)
+                {
+                    yield return command;
+                }
+            }
+        }
 
         public BaseAppCommand GetInteractionCommand(DiscordInteraction interaction)
         {

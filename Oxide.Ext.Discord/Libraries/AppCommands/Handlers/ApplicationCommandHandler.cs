@@ -96,6 +96,17 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Handlers
                 }
             }
         }
+
+        public IEnumerable<AppCommand> GetCommands()
+        {
+            foreach (Dictionary<AppCommandId, AppCommand> types in _commands.Values)
+            {
+                foreach (AppCommand command in types.Values)
+                {
+                    yield return command;
+                }
+            }
+        }
         
         public BaseAppCommand GetInteractionCommand(DiscordInteraction interaction)
         {

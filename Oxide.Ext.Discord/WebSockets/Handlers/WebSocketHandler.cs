@@ -61,6 +61,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 throw new DiscordWebSocketException("Socket is already running. Please disconnect before attempting to connect.");
             }
+            _logger.Debug("Connecting to Gateway URL: {0}", url);
 
             WebsocketId = SnowflakeIdGenerator.Generate();
             SocketState = SocketState.Connecting;
@@ -100,7 +101,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             catch (OperationCanceledException) { }
             catch (WebSocketException ex)
             {
-                DisposeSocket();
+                _logger.Debug("Disconnected Socket Because: {0}", ex.WebSocketErrorCode);
                 if (ex.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
                 {
                     await _handler.SocketClosed(id, 1000, string.Empty);
@@ -109,6 +110,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 {
                     await _handler.SocketErrored(id, ex);
                 }
+                DisposeSocket();
             }
             catch (Exception ex)
             {
