@@ -2,16 +2,16 @@
 <Project>
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup>
-    <Version>2.2.0.0</Version>
+    <Version>2.5.0.0</Version>
     <AssemblyName>Oxide.Ext.Discord</AssemblyName>
     <Authors>Kirollos</Authors>
     <Description>An Oxide extension for Discord.</Description>
     <RepositoryUrl>https://github.com/Kirollos/Oxide.Ext.Discord</RepositoryUrl>
     <TargetFrameworks>net461;net48</TargetFrameworks>
     <LangVersion>7.0</LangVersion>
-    <PackageVersion>2.2.0.0</PackageVersion>
-    <AssemblyVersion>2.2.0</AssemblyVersion>
-    <FileVersion>2.2.0</FileVersion>
+    <PackageVersion>2.5.0.0</PackageVersion>
+    <AssemblyVersion>2.5.0</AssemblyVersion>
+    <FileVersion>2.5.0</FileVersion>
   </PropertyGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup />
