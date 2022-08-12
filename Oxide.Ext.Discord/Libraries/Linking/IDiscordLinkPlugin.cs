@@ -9,9 +9,9 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     public interface IDiscordLinkPlugin
     {
         /// <summary>
-        /// Title of the plugin
+        /// Name of the plugin
         /// </summary>
-        string Title { get; }
+        string Name { get; }
         
         /// <summary>
         /// Returns a <see cref="IDictionary{TKey,TValue}"/> of Steam ID's to Discord ID's

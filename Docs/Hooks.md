@@ -27,6 +27,7 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
     + [OnDiscordBotFullyLoaded](#ondiscordbotfullyloaded)
   * [Discord Link](#discord-link)
     + [OnDiscordPlayerLinked](#ondiscordplayerlinked)
+    + [OnDiscordPlayerUnlink](#ondiscordplayerunlink)
     + [OnDiscordPlayerUnlinked](#ondiscordplayerunlinked)
   * [Socket Hooks](#socket-hooks)
     + [OnDiscordWebsocketOpened](#ondiscordwebsocketopened)
@@ -194,6 +195,16 @@ It will be called for every plugins registered to receive hooks.
 void OnDiscordPlayerLinked(IPlayer player, DiscordUser discord) 
 {
      Puts("Player has linked with discord");
+}
+```
+
+### OnDiscordPlayerUnlink
+- Called when a player is being unlinked from DiscordLink Library
+- This is called before the unlink occurs
+```c#
+void OnDiscordPlayerUnlink(IPlayer player, DiscordUser discord) 
+{
+     Puts("Player is unlinking from discord");
 }
 ```
 
@@ -515,7 +526,7 @@ void OnDiscordGuildMemberUpdated(GuildMember update, GuildMember previous, Disco
 - Called when a guild member nickname has been updated
 
 ```c#
-void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DiscordGuild guild)
+void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DateTime? lastNicknameUpdate, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMemberNicknameUpdated Works!");
 }

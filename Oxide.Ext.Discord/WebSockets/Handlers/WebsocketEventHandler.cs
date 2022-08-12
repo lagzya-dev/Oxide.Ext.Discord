@@ -885,7 +885,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 return;
             }
-            
+
+            guild.LeftMembers.Remove(member.User.Id);
             guild.Members[member.User.Id] = member;
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberAdded, member, guild);
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildMemberAdd)} Guild ID: {{0}} Guild Name: {{1}} User ID: {{2}} User Name: {{3}}", member.GuildId, guild.Name, member.User.Id, member.User.GetFullUserName);
@@ -905,7 +906,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 return;
             }
-            
+
+            member.HasLeftGuild = true;
+            guild.LeftMembers[remove.User.Id] = member;
             guild.Members.Remove(remove.User.Id);
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberRemoved, member, guild);
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildMemberRemove)} Guild ID: {{0}} Guild Name: {{1}} User ID: {{2}} User Name: {{3}}", remove.GuildId, guild.Name, member.User.Id, member.User.GetFullUserName);
@@ -928,13 +931,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
             
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberUpdated, update, current, guild);
-            _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildMemberUpdate)} Existing GUILD_MEMBER_UPDATE: Guild ID: {{0}} User ID: {{1}}", update.GuildId, update.User.Id);
+            _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildMemberUpdate)} GUILD_MEMBER_UPDATE: Guild ID: {{0}} User ID: {{1}}", update.GuildId, update.User.Id);
 
             if (current.Nickname != update.Nickname)
             {
                 string oldNickname = current.Nickname;
                 current.Nickname = update.Nickname;
-                _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberNicknameUpdated, current, oldNickname, update.Nickname, guild);
+                _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberNicknameUpdated, current, oldNickname, update.Nickname, current.NickNameLastUpdated, guild);
                 current.NickNameLastUpdated = DateTime.UtcNow;
             }
 
@@ -978,11 +981,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 {
                     _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberBoosted, current, guild);
                 }
-                else if (previous.HasValue && update.PremiumSince.HasValue && update.PremiumSince.Value > DateTime.UtcNow)
+                else if (previous.HasValue && current.PremiumSince.HasValue && current.PremiumSince.Value > DateTime.UtcNow)
                 {
                     _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberBoostExtended, current, guild);
                 }
-                else if (previous.HasValue && !update.PremiumSince.HasValue)
+                else if (previous.HasValue && !current.PremiumSince.HasValue)
                 {
                     _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberBoostEnded, current, guild);
                 }
@@ -993,7 +996,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 Snowflake role = current.Roles[index];
                 if (!update.Roles.Contains(role))
                 {
-                    current.Roles.Remove(role);
+                    current.Roles.RemoveAt(index);
                     _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberRoleRemoved, current, role, guild);
                 }
             }

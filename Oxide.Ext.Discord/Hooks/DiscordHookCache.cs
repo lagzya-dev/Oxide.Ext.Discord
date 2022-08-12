@@ -85,8 +85,7 @@ namespace Oxide.Ext.Discord.Hooks
 
             for (int index = 0; index < hooksToRemove.Count; index++)
             {
-                string hook = hooksToRemove[index];
-                _hookCache.Remove(hook);
+                _hookCache.Remove(hooksToRemove[index]);
             }
             
             DiscordPool.FreeList(ref hooksToRemove);

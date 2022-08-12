@@ -104,6 +104,22 @@ namespace Oxide.Ext.Discord.Hooks
             args[3] = arg3;
             CallHookInternal(plugins, hookName, args);
         }
+        
+        internal void CallHook<T0, T1, T2, T3, T4>(string hookName, T0 arg0, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+        {
+            if (!CanCallHook(hookName, out List<Plugin> plugins))
+            {
+                return;
+            }
+            
+            object[] args = ArrayPool.Get(5);
+            args[0] = arg0;
+            args[1] = arg1;
+            args[2] = arg2;
+            args[3] = arg3;
+            args[4] = arg4;
+            CallHookInternal(plugins, hookName, args);
+        }
         #endregion
 
         #region Static Hooks

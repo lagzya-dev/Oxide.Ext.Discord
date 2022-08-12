@@ -366,6 +366,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Returns true if all guild members have been loaded
         /// </summary>
         public bool HasLoadedAllMembers { get; internal set; }
+
+        /// <summary>
+        /// Members who have left the guild
+        /// This list will contain members who have left the guild since the initial bot connection
+        /// </summary>
+        public Hash<Snowflake, GuildMember> LeftMembers { get; } = new Hash<Snowflake, GuildMember>();
         #endregion
 
         #region Helper Properties
@@ -519,6 +525,17 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             return null;
         }
 
+        /// <summary>
+        /// Returns the  <see cref="GuildMember"/> for the given <see cref="Snowflake"/> User ID including members who are no longer in the guild
+        /// Left members only include <see cref="GuildMember"/>s who have left the guild since the bot was connected
+        /// </summary>
+        /// <param name="userId">User ID of the guild member to get</param>
+        /// <returns><see cref="GuildMember"/> For the UserId </returns>
+        public GuildMember GetMemberIncludingLeft(Snowflake userId)
+        {
+            return Members[userId] ?? LeftMembers[userId];
+        }
+        
         /// <summary>
         /// Finds guild emoji by name
         /// </summary>

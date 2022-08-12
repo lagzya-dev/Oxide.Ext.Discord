@@ -261,6 +261,14 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordPlayerLinked = nameof(OnDiscordPlayerLinked);
         
         /// <code>
+        /// void OnDiscordPlayerUnlink(IPlayer player, DiscordUser discord)
+        /// {
+        ///     Puts("OnDiscordPlayerUnlink Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordPlayerUnlink = nameof(OnDiscordPlayerUnlink);
+        
+        /// <code>
         /// void OnDiscordPlayerUnlinked(IPlayer player, DiscordUser discord)
         /// {
         ///     Puts("OnDiscordPlayerUnlinked Works!");
@@ -451,7 +459,7 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGuildMemberUpdated = nameof(OnDiscordGuildMemberUpdated);
         
         /// <code>
-        /// void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DiscordGuild guild)
+        /// void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DateTime? lastNicknameUpdate, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildMemberNicknameUpdated Works!");
         /// }

@@ -86,13 +86,20 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("communication_disabled_until")]
         public DateTime? CommunicationDisabledUntil { get; set; }
-        
-        /// <summary>
-        /// When the Nickname was last updated
-        /// </summary>
-        public DateTime? NickNameLastUpdated { get; internal set; }
         #endregion
 
+        #region Extension Fields
+        /// <summary>
+        /// When the Nickname was last updated. Null if we haven't seen a nickname update yet
+        /// </summary>
+        public DateTime? NickNameLastUpdated { get; internal set; }
+        
+        /// <summary>
+        /// Returns if the <see cref="GuildMember"/> has left the <see cref="DiscordGuild"/> it belongs to
+        /// </summary>
+        public bool HasLeftGuild { get; internal set; }
+        #endregion
+        
         #region Helper Properties
         /// <summary>
         /// Returns the display name show for the user in a guild
