@@ -1957,6 +1957,14 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordPlayerUnlink">
+            <code>
+            void OnDiscordPlayerUnlink(IPlayer player, DiscordUser discord)
+            {
+                Puts("OnDiscordPlayerUnlink Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordPlayerUnlinked">
             <code>
             void OnDiscordPlayerUnlinked(IPlayer player, DiscordUser discord)
@@ -2147,7 +2155,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildMemberNicknameUpdated">
             <code>
-            void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DiscordGuild guild)
+            void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DateTime? lastNicknameUpdate, DiscordGuild guild)
             {
                 Puts("OnDiscordGuildMemberNicknameUpdated Works!");
             }
@@ -7800,6 +7808,12 @@
             Returns true if all guild members have been loaded
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.LeftMembers">
+            <summary>
+            Members who have left the guild
+            This list will contain members who have left the guild since the initial bot connection
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.IsAvailable">
             <summary>
             Returns if the guild is available to use
@@ -7863,6 +7877,14 @@
             </summary>
             <param name="userName">Username of the GuildMember</param>
             <returns>GuildMember with the given username; Null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetMemberIncludingLeft(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns the  <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/> for the given <see cref="T:Oxide.Ext.Discord.Entities.Snowflake"/> User ID including members who are no longer in the guild
+            Left members only include <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/>s who have left the guild since the bot was connected
+            </summary>
+            <param name="userId">User ID of the guild member to get</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/> For the UserId </returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetEmoji(System.String)">
             <summary>
@@ -8938,7 +8960,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.NickNameLastUpdated">
             <summary>
-            When the Nickname was last updated
+            When the Nickname was last updated. Null if we haven't seen a nickname update yet
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.HasLeftGuild">
+            <summary>
+            Returns if the <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/> has left the <see cref="T:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild"/> it belongs to
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.DisplayName">
@@ -16288,6 +16315,13 @@
             <param name="command">Custom Command String</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.EmojiMessageString(Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
+            <summary>
+            Return the emoji string for a message
+            </summary>
+            <param name="emoji">Emoji to create as a string</param>
+            <returns>Emoji message string</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CustomEmojiMessageString(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Boolean)">
             <summary>
             Returns formatting string for custom emoji to be used in a message
@@ -17439,9 +17473,9 @@
             Represents a plugin that supports Discord Link library
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.Title">
+        <member name="P:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.Name">
             <summary>
-            Title of the plugin
+            Name of the plugin
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.GetSteamToDiscordIds">
@@ -17449,6 +17483,226 @@
             Returns a <see cref="T:System.Collections.Generic.IDictionary`2"/> of Steam ID's to Discord ID's
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders">
+            <summary>
+            Discord Placeholders Library
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.ProcessPlaceholders(System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+            <summary>
+            Process placeholders for the given Text
+            </summary>
+            <param name="text">Text to process placeholders for</param>
+            <param name="data">Placeholder Data for the placeholders</param>
+            <returns>string with placeholders replaced. If no placeholders are found the original string is returned</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.CreateData">
+            <summary>
+            Creates Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/>
+            </summary>
+            <returns><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``1(System.String,System.String,Oxide.Core.Plugins.Plugin,System.Action{System.Text.StringBuilder,``0,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch})">
+            <summary>
+            Registers a placeholder of type {T}
+            </summary>
+            <param name="placeholder">Placeholder string</param>
+            <param name="dataKey">The name of the data key in PlaceholderData</param>
+            <param name="plugin">Plugin this placeholder is for</param>
+            <param name="callback">Callback Method for the placeholder</param>
+            <typeparam name="T">Type of the data key</typeparam>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData">
+            <summary>
+            Placeholder Data for placeholders
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddGuild(Oxide.Ext.Discord.DiscordClient,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
+            <summary>
+            Add a <see cref="T:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild"/> by <see cref="T:Oxide.Ext.Discord.DiscordClient"/> and GuildId
+            </summary>
+            <param name="client">Discord Client for the guild</param>
+            <param name="guildId">Guild ID of the guild</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddGuild(Oxide.Ext.Discord.Entities.Guilds.DiscordGuild)">
+            <summary>
+            Add a <see cref="T:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild"/>
+            </summary>
+            <param name="guild">Guild to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Add a <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/> by <see cref="T:Oxide.Ext.Discord.DiscordClient"/>, GuildId, and UserId
+            </summary>
+            <param name="client">DiscordClient for the guild</param>
+            <param name="guildId">Guild ID for the guild</param>
+            <param name="memberId">Member UserId in the guild</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddGuildMember(Oxide.Ext.Discord.Entities.Guilds.GuildMember)">
+            <summary>
+            Add a <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/>
+            </summary>
+            <param name="member">Member to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddDiscordUser(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>
+            </summary>
+            <param name="user">User to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddDiscordRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole"/> by <see cref="T:Oxide.Ext.Discord.DiscordClient"/>, GuildId, and RoleId
+            </summary>
+            <param name="client">Client for the guild</param>
+            <param name="guildId">Guild ID of the guild</param>
+            <param name="roleId">Role ID of the role</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddDiscordRole(Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole"/>
+            </summary>
+            <param name="role">Role to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddDiscordChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/> by <see cref="T:Oxide.Ext.Discord.DiscordClient"/>, ChannelId, and Optional GuildId
+            </summary>
+            <param name="client">Client for the channel</param>
+            <param name="channelId">Channel ID of the channel</param>
+            <param name="guildId">Guild ID of the channel if channel is in a guild</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddDiscordChannel(Oxide.Ext.Discord.Entities.Channels.DiscordChannel)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/>
+            </summary>
+            <param name="channel">Channel to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddPlayer(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Adds a <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/>
+            </summary>
+            <param name="player">player to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTimestamp(System.UInt64)">
+            <summary>
+            Adds a Unix Timestamp
+            </summary>
+            <param name="timestamp">Unix timestamp</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Add``1(``0)">
+            <summary>
+            Adds type {T} to the placeholder. Type name is used as the data key
+            </summary>
+            <param name="obj">Object to add</param>
+            <typeparam name="T">Type of the data</typeparam>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Add``1(System.String,``0)">
+            <summary>
+            Adds the data with the given name
+            </summary>
+            <param name="name">Name of the data key</param>
+            <param name="obj">Object to add</param>
+            <typeparam name="T">Type of the data</typeparam>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Get``1(System.String)">
+            <summary>
+            Returns the object with the given type of T
+            If the object is not found the default(T) is returned
+            </summary>
+            <param name="name">Name of the data key</param>
+            <typeparam name="T">Type to return</typeparam>
+            <returns>{T}</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.DisablePooling">
+            <summary>
+            If you wish to keep the data for more than one placeholder use this to disable pooling
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting">
+            <summary>
+            Formatting Helpers for Placeholders
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,System.String)">
+            <summary>
+            Replace the <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch"/> with the the string value
+            </summary>
+            <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
+            <param name="match"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch"/> for the placeholder</param>
+            <param name="value">Placeholder value to replace</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,System.Text.RegularExpressions.Match,System.String)">
+            <summary>
+            Replace the <see cref="T:System.Text.RegularExpressions.Match"/> with the the string value
+            </summary>
+            <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
+            <param name="match"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
+            <param name="value">Placeholder value to replace</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Replace the <see cref="T:System.Text.RegularExpressions.Match"/> with the the string value
+            </summary>
+            <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
+            <param name="match"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
+            <param name="value">Snowflake value to replace</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,System.IFormattable)">
+            <summary>
+            Replace the <see cref="T:System.Text.RegularExpressions.Match"/> with the the string value
+            </summary>
+            <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
+            <param name="match"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
+            <param name="value"><see cref="T:System.IFormattable"/> value to use with formatting</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,Oxide.Core.Libraries.Covalence.GenericPosition)">
+            <summary>
+            Replace the <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch"/> with the formatted position
+            </summary>
+            <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
+            <param name="placeholderMatch"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch"/> for the placeholder</param>
+            <param name="position"><see cref="T:Oxide.Core.Libraries.Covalence.GenericPosition"/> position to format and replace</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch">
+            <summary>
+            Represents a match for a placeholder
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch.Name">
+            <summary>
+            Name of the placeholder
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch.Format">
+            <summary>
+            Format specified in the placeholder
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch.Index">
+            <summary>
+            Index in the string of the placeholder
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch.Length">
+            <summary>
+            Length of the placeholder
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription">
             <summary>
@@ -17543,6 +17797,17 @@
             </summary>
             <param name="logger"></param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.RegisterGlobalMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Registers a global message template
+            Global Message templates cannot be localized
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Unique name of the template</param>
+            <param name="template">Template to register</param>
+            <param name="minSupportedVersion">Min supported version for this template</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.RegisterLocalizedMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,System.String)">
             <summary>
             Registers a message template with the given name and language
@@ -17577,6 +17842,15 @@
             <param name="playerId">PlayerId for the template</param>
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetGlobalMessageTemplate(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Returns a global message template for the plugin with the given name
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetLocalizedMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,System.String)">
             <summary>
@@ -17672,6 +17946,7 @@
             Converts the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> to a {T} message
             {T} supports all message types
             </summary>
+            <param name="data">Placeholder Data for the template</param>
             <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
             <returns><see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> converted to type {T} message</returns>
         </member>

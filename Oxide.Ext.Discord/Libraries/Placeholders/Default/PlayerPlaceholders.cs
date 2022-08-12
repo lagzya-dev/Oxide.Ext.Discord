@@ -3,7 +3,7 @@ using Oxide.Core.Libraries.Covalence;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    public class PlayerPlaceholders
+    internal class PlayerPlaceholders
     {
         private static void Id(StringBuilder builder, IPlayer player, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, player.Id);
         private static void Name(StringBuilder builder, IPlayer player, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, player.Name);

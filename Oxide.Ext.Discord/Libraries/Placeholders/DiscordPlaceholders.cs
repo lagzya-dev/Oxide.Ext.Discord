@@ -16,6 +16,9 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
 {
+    /// <summary>
+    /// Discord Placeholders Library
+    /// </summary>
     public class DiscordPlaceholders : Library
     {
         private readonly Regex _placeholderRegex = new Regex(@"{([^!:{}""]+)(?::([^!{}""]+))*?}", RegexOptions.Compiled);
@@ -24,7 +27,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         private readonly Covalence _covalence = Interface.Oxide.GetLibrary<Covalence>();
         private readonly ILogger _logger;
         
-        public DiscordPlaceholders(ILogger logger)
+        internal DiscordPlaceholders(ILogger logger)
         {
             _logger = logger;
             ChannelPlaceholders.RegisterPlaceholders(this);
@@ -38,6 +41,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             ApplicationCommandPlaceholders.RegisterPlaceholders(this);
         }
         
+        /// <summary>
+        /// Process placeholders for the given Text
+        /// </summary>
+        /// <param name="text">Text to process placeholders for</param>
+        /// <param name="data">Placeholder Data for the placeholders</param>
+        /// <returns>string with placeholders replaced. If no placeholders are found the original string is returned</returns>
         public string ProcessPlaceholders(string text, PlaceholderData data)
         {
             if (string.IsNullOrEmpty(text))
@@ -82,6 +91,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return text;
         }
 
+        /// <summary>
+        /// Creates Pooled <see cref="PlaceholderData"/>
+        /// </summary>
+        /// <returns><see cref="PlaceholderData"/></returns>
         public PlaceholderData CreateData()
         {
             PlaceholderData data = DiscordPool.GetPlaceholderData();
@@ -89,6 +102,15 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return data;
         }
 
+        /// <summary>
+        /// Registers a placeholder of type {T}
+        /// </summary>
+        /// <param name="placeholder">Placeholder string</param>
+        /// <param name="dataKey">The name of the data key in PlaceholderData</param>
+        /// <param name="plugin">Plugin this placeholder is for</param>
+        /// <param name="callback">Callback Method for the placeholder</param>
+        /// <typeparam name="T">Type of the data key</typeparam>
+        /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPlaceholder<T>(string placeholder, string dataKey, Plugin plugin, Action<StringBuilder, T, PlaceholderMatch> callback)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));

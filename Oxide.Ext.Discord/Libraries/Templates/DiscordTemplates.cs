@@ -41,6 +41,15 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
 
+        /// <summary>
+        /// Registers a global message template
+        /// Global Message templates cannot be localized
+        /// </summary>
+        /// <param name="plugin">Plugin the template is for</param>
+        /// <param name="name">Unique name of the template</param>
+        /// <param name="template">Template to register</param>
+        /// <param name="minSupportedVersion">Min supported version for this template</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void RegisterGlobalMessageTemplate(Plugin plugin, string name, DiscordMessageTemplate template, TemplateVersion minSupportedVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
@@ -128,6 +137,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             return GetLocalizedMessageTemplate(plugin, name, locale);
         }
 
+        /// <summary>
+        /// Returns a global message template for the plugin with the given name
+        /// </summary>
+        /// <param name="plugin">Plugin the template is for</param>
+        /// <param name="name">Name of the template</param>
+        /// <returns><see cref="DiscordMessageTemplate"/></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public DiscordMessageTemplate GetGlobalMessageTemplate(Plugin plugin, string name)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));

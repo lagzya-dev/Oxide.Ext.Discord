@@ -47,11 +47,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         {
             return ToPlaceholderMessage(null, message);
         }
-        
+
         /// <summary>
         /// Converts the <see cref="DiscordMessageTemplate"/> to a {T} message
         /// {T} supports all message types
         /// </summary>
+        /// <param name="data">Placeholder Data for the template</param>
         /// <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
         /// <returns><see cref="DiscordMessageTemplate"/> converted to type {T} message</returns>
         public T ToPlaceholderMessage<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()

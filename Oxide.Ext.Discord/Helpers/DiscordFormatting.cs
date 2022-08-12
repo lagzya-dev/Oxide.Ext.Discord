@@ -66,6 +66,11 @@ namespace Oxide.Ext.Discord.Helpers
             return $"</{command}:{commandId}>";
         }
 
+        /// <summary>
+        /// Return the emoji string for a message
+        /// </summary>
+        /// <param name="emoji">Emoji to create as a string</param>
+        /// <returns>Emoji message string</returns>
         public static string EmojiMessageString(DiscordEmoji emoji)
         {
             if (!emoji.EmojiId.HasValue)

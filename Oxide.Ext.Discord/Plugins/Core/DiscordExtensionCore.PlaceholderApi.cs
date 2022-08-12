@@ -9,7 +9,10 @@ namespace Oxide.Ext.Discord.Plugins.Core
     internal partial class DiscordExtensionCore
     {
         [PluginReference]
+#pragma warning disable CS0649
+        // ReSharper disable once InconsistentNaming
         private Plugin PlaceholderAPI;
+#pragma warning restore CS0649
         
         private Action<IPlayer, StringBuilder, bool> _replacer;
         
