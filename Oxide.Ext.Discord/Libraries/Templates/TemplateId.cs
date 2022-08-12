@@ -15,6 +15,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             TemplateName = templateName ?? throw new ArgumentNullException(nameof(templateName));
             Lang = lang ?? throw new ArgumentNullException(nameof(lang));
         }
+        
         private sealed class PluginNameTemplateNameLangEqualityComparer : IEqualityComparer<TemplateId>
         {
             public bool Equals(TemplateId x, TemplateId y)

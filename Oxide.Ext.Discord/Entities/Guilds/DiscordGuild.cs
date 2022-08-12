@@ -414,10 +414,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <returns>Channel with the given name; Null otherwise</returns>
         public DiscordChannel GetChannel(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
             foreach (DiscordChannel channel in Channels.Values)
             {
@@ -452,11 +449,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <returns>Role with the given name; Null otherwise</returns>
         public DiscordRole GetRole(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+
             foreach (DiscordRole role in Roles.Values)
             {
                 if (role.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
@@ -492,11 +486,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <returns>GuildMember with the given username; Null otherwise</returns>
         public GuildMember GetMember(string userName)
         {
-            if (userName == null)
-            {
-                throw new ArgumentNullException(nameof(userName));
-            }
-            
+            if (string.IsNullOrEmpty(userName)) throw new ArgumentNullException(nameof(userName));
+
             if (userName.Contains("#"))
             {
                 string[] splitName = userName.Split('#');
@@ -544,10 +535,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <exception cref="ArgumentNullException"></exception>
         public DiscordEmoji GetEmoji(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
             foreach (DiscordEmoji emoji in Emojis.Values)
             {

@@ -488,16 +488,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public void BulkDeleteMessages(DiscordClient client, ICollection<Snowflake> messageIds, Action callback = null, Action<RequestError> error = null)
         {
-            if (messageIds.Count < 2)
-            {
-                throw new ArgumentOutOfRangeException(nameof(messageIds), "Cannot delete less than 2 messages");
-            }
+            if (messageIds.Count < 2) throw new ArgumentOutOfRangeException(nameof(messageIds), "Cannot delete less than 2 messages");
+            if (messageIds.Count > 100) throw new ArgumentOutOfRangeException(nameof(messageIds), "Cannot delete more than 100 messages");
 
-            if (messageIds.Count > 100)
-            {
-                throw new ArgumentOutOfRangeException(nameof(messageIds), "Cannot delete more than 100 messages");
-            }
-            
             Dictionary<string, ICollection<Snowflake>> data = new Dictionary<string, ICollection<Snowflake>>
             {
                 ["messages"] = messageIds 
