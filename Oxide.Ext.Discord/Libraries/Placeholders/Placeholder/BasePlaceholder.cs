@@ -1,7 +1,8 @@
 using System.Text;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Extensions;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Types
+namespace Oxide.Ext.Discord.Libraries.Placeholders.Placeholder
 {
     internal abstract class BasePlaceholder
     {
@@ -23,7 +24,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Types
         
         public bool IsForPlugin(Plugin plugin)
         {
-            return !IsExtensionPlaceholder() && plugin.Name == Plugin.Name;
+            return !IsExtensionPlaceholder() && plugin.Id() == Plugin.Id();
         }
     }
 }

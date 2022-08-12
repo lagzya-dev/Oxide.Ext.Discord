@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Subscription;
@@ -301,7 +302,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                         sb.Append("\t\t\tInteraction Type: ");
                         sb.AppendLine(componentCommand.Type.ToString());
                         sb.Append("\t\t\tPlugin: ");
-                        FormatPlugin(componentCommand.Plugin, sb);
+                        sb.Append(componentCommand.Plugin.FullName());
                         sb.AppendLine();
                     }
                     else if (command is AutoCompleteCommand autoCompleteCommand)
@@ -311,7 +312,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                         sb.Append("\t\t\tInteraction Type: ");
                         sb.AppendLine(autoCompleteCommand.Type.ToString());
                         sb.Append("\t\t\tPlugin: ");
-                        FormatPlugin(autoCompleteCommand.Plugin, sb);
+                        sb.Append(autoCompleteCommand.Plugin.FullName());
                         sb.AppendLine();
                     }
                     else if (command is AppCommand appCommand)
@@ -321,7 +322,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                         sb.Append("\t\t\tInteraction Type: ");
                         sb.AppendLine(appCommand.Type.ToString());
                         sb.Append("\t\t\tPlugin: ");
-                        FormatPlugin(appCommand.Plugin, sb);
+                        sb.Append(appCommand.Plugin.FullName());
                         sb.AppendLine();
                     }
                 }
@@ -337,7 +338,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                     sb.Append("\t\tCommand Name: ");
                     sb.AppendLine(guildCommand.Name);
                     sb.Append("\t\tPlugin: ");
-                    FormatPlugin(guildCommand.Plugin, sb);
+                    sb.Append(guildCommand.Plugin.FullName());
                     sb.AppendLine("\t\tType: Guild Command");
                     sb.AppendLine();
                 }
@@ -346,7 +347,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                     sb.Append("\t\tCommand Name: ");
                     sb.AppendLine(directMessageCommand.Name);
                     sb.Append("\t\tPlugin: ");
-                    FormatPlugin(directMessageCommand.Plugin, sb);
+                    sb.Append(directMessageCommand.Plugin.FullName());
                     sb.AppendLine("\t\tType: Direct Message Command");
                     sb.AppendLine();
                 }
@@ -389,22 +390,13 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 }
 
                 sb.Append("\t\tPlugin: ");
-                FormatPlugin(sub.Plugin, sb);
+                sb.Append(sub.Plugin.FullName());
                 sb.Append("\t\tMethod: ");
                 sb.Append(sub.Callback.Method.DeclaringType.Name);
                 sb.Append('.');
                 sb.AppendLine(sub.Callback.Method.Name);
                 sb.AppendLine();
             }
-        }
-
-        public void FormatPlugin(Plugin plugin, StringBuilder sb)
-        {
-            sb.Append(plugin.Name);
-            sb.Append("(");
-            sb.Append(plugin.Version);
-            sb.Append(") by ");
-            sb.AppendLine(plugin.Author);
         }
         #endregion
 

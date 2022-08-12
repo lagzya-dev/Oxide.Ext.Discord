@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
@@ -67,11 +68,11 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             IDictionary<string, Snowflake> data = plugin.GetSteamToDiscordIds();
             if (data == null)
             {
-                _logger.Error($"{{0}} returned null when {nameof(plugin.GetSteamToDiscordIds)} was called", plugin.Title);
+                _logger.Error($"{{0}} returned null when {nameof(plugin.GetSteamToDiscordIds)} was called", plugin.Name);
                 return;
             }
 
-            _pluginLinks[plugin.Title] = data;
+            _pluginLinks[plugin.Name] = data;
 
             foreach (KeyValuePair<string,Snowflake> pair in data)
             {
@@ -81,7 +82,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 _discordIds.Add(pair.Value);
             }
             
-            _logger.Debug("{0} has been registered as a DiscordLink plugin", plugin.Title);
+            _logger.Debug("{0} has been registered as a DiscordLink plugin", plugin.Name);
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
-            IDictionary<string, Snowflake> pluginData = _pluginLinks[plugin.Title];
+            IDictionary<string, Snowflake> pluginData = _pluginLinks[plugin.Name];
             if (pluginData != null)
             {
                 foreach (KeyValuePair<string,Snowflake> linkData in pluginData)
@@ -324,17 +325,17 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
             if (link == null)
             {
-                _logger.Error($"{{0}} tried to link but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.Name);
+                _logger.Error($"{{0}} tried to link but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.FullName());
                 return;
             }
             
             if (!_linkPlugins.Contains(link))
             {
-                _logger.Error("{0} has not been added as a link plugin and cannot set a link", plugin.Name);
+                _logger.Error("{0} has not been added as a link plugin and cannot set a link", plugin.FullName());
                 return;
             }
             
-            _pluginLinks[plugin.Title][player.Id] = discord.Id;
+            _pluginLinks[plugin.Id()][player.Id] = discord.Id;
 
             _discordIdToSteamId[discord.Id] = player.Id;
             _steamIdToDiscordId[player.Id] = discord.Id;
@@ -351,25 +352,25 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <param name="discord">DiscordUser being unlinked</param>
         public void OnUnlinked(Plugin plugin, IPlayer player, DiscordUser discord)
         {
-            if (player == null)
-                throw new ArgumentNullException(nameof(player));
-            if (discord == null)
-                throw new ArgumentNullException(nameof(discord));
+            if (player == null) throw new ArgumentNullException(nameof(player));
+            if (discord == null) throw new ArgumentNullException(nameof(discord));
             
             IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
             if (link == null)
             {
-                _logger.Error($"{{0}} tried to unlink but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.Name);
+                _logger.Error($"{{0}} tried to unlink but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.FullName());
                 return;
             }
             
             if (!_linkPlugins.Contains(link))
             {
-                _logger.Error("{0} has not been added as a link plugin and cannot unlink", plugin.Name);
+                _logger.Error("{0} has not been added as a link plugin and cannot unlink", plugin.FullName());
                 return;
             }
+            
+            DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlink, player, discord);
 
-            _pluginLinks[plugin.Title].Remove(player.Id);
+            _pluginLinks[plugin.Id()].Remove(player.Id);
             
             _discordIdToSteamId.Remove(discord.Id);
             _steamIdToDiscordId.Remove(player.Id);

@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -55,7 +56,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (message == null) throw new ArgumentNullException(nameof(message));
             
-            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(AddChannelSubscription)} {{0}} added subscription to channel {{1}}", plugin.Name, channelId);
+            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(AddChannelSubscription)} {{0}} added subscription to channel {{1}}", plugin.FullName(), channelId);
 
             Hash<string, DiscordSubscription> channelSubs = _subscriptions[channelId];
             if (channelSubs == null)
@@ -64,7 +65,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 _subscriptions[channelId] = channelSubs;
             }
 
-            channelSubs[plugin.Name] = new DiscordSubscription(channelId, plugin, message);
+            channelSubs[plugin.Id()] = new DiscordSubscription(channelId, plugin, message);
         }
         
         /// <summary>
@@ -86,14 +87,14 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 return;
             }
 
-            pluginSubs.Remove(plugin.Name);
+            pluginSubs.Remove(plugin.Id());
             
             if (pluginSubs.Count == 0)
             {
                 _subscriptions.Remove(channelId);
             }
             
-            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemoveChannelSubscription)} {{0}} removed subscription to channel {{1}}", plugin.Name, channelId);
+            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemoveChannelSubscription)} {{0}} removed subscription to channel {{1}}", plugin.Id(), channelId);
         }
 
         internal void OnPluginUnloaded(Plugin plugin)
@@ -115,10 +116,10 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             int removed = 0;
             foreach (KeyValuePair<Snowflake, Hash<string, DiscordSubscription>> hash in _subscriptions)
             {
-                DiscordSubscription sub = hash.Value[plugin.Name];
+                DiscordSubscription sub = hash.Value[plugin.Id()];
                 if (sub != null)
                 {
-                    hash.Value.Remove(plugin.Name);
+                    hash.Value.Remove(plugin.Id());
                     sub.OnRemoved();
                     removed++;
                     if (hash.Value.Count == 0)
@@ -137,7 +138,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 }
             }
 
-            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemovePluginSubscriptions)} Removed {{0}} subscriptions for plugin {{1}}", removed, plugin.Name);
+            _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemovePluginSubscriptions)} Removed {{0}} subscriptions for plugin {{1}}", removed, plugin.FullName());
         }
         
         internal void HandleMessage(DiscordMessage message, DiscordChannel channel, BotClient client)

@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Attributes.ApplicationCommands;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.AppCommands.Handlers;
 using Oxide.Ext.Discord.Logging;
@@ -103,11 +104,11 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             AppCommand existing = handler.GetCommandById(type, commandId);
             if (existing != null && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.Name, command, type, existing.Plugin?.Name);
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.FullName(), command, type, existing.Plugin?.FullName());
             }
             
             handler.AddAppCommand(new AppCommand(plugin, app, type, commandId, callback));
-            _logger.Debug("Adding App Command For: {0} Command: {1} Callback: {2}", plugin.Name, commandId, callback);
+            _logger.Debug("Adding App Command For: {0} Command: {1} Callback: {2}", plugin.FullName(), commandId, callback);
         }
 
         /// <summary>
@@ -136,11 +137,11 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             AppCommand existing = handler.GetCommandById(type, commandId);
             if (existing != null && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.Name, command, type, existing.Plugin?.Name);
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.FullName(), command, type, existing.Plugin?.FullName());
             }
             
             handler.AddAppCommand(new AutoCompleteCommand(plugin, app, commandId, callback));
-            _logger.Debug("Adding Auto Complete Command For: {0} Command: {1} Callback: {2}", plugin.Name, commandId, callback);
+            _logger.Debug("Adding Auto Complete Command For: {0} Command: {1} Callback: {2}", plugin.FullName(), commandId, callback);
         }
 
         /// <summary>
@@ -160,7 +161,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             
             MessageComponentHandler handler = GetOrAddComponentHandler(app);
             handler.AddComponentCommand(new ComponentCommand(plugin, app, InteractionType.MessageComponent, customId, callback));
-            _logger.Debug("Adding Message Component Command For: {0} CustomId: {1} Callback: {2}", plugin.Name, customId, callback);
+            _logger.Debug("Adding Message Component Command For: {0} CustomId: {1} Callback: {2}", plugin.FullName(), customId, callback);
         }
 
         /// <summary>
@@ -181,7 +182,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             const InteractionType type = InteractionType.ModalSubmit;
             MessageComponentHandler handler = GetOrAddComponentHandler(app);
             handler.AddComponentCommand(new ComponentCommand(plugin, app, type, customId, callback));
-            _logger.Debug("Adding Modal Submit Command For: {0} CustomId: {1} Callback: {2}", plugin.Name, customId, callback);
+            _logger.Debug("Adding Modal Submit Command For: {0} CustomId: {1} Callback: {2}", plugin.FullName(), customId, callback);
         }
 
         /// <summary>
@@ -347,7 +348,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         internal void RegisterApplicationCommands(DiscordClient client, Plugin plugin)
         {
             DiscordApplication app = client.Bot?.Application;
-            _logger.Debug("Registering application commands for {0}", plugin.Name);
+            _logger.Debug("Registering application commands for {0}", plugin.FullName());
             
             foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
             {
@@ -357,7 +358,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                     continue;
                 }
 
-                _logger.Debug("Processing Method {0} For {1} With {2} Attributes", method.Name, plugin.Name, attributes.Length);
+                _logger.Debug("Processing Method {0} For {1} With {2} Attributes", method.Name, plugin.FullName(), attributes.Length);
                 
                 for (int index = 0; index < attributes.Length; index++)
                 {

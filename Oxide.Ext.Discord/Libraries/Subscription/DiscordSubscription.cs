@@ -3,6 +3,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Libraries;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription
 {
@@ -36,7 +37,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <returns>True if same bot client; false otherwise</returns>
         public bool CanRun(BotClient client)
         {
-            return client != null && DiscordClient.Clients[Plugin.Name]?.Bot == client;
+            return client != null && DiscordClient.Clients[Plugin.Id()]?.Bot == client;
         }
 
         /// <summary>

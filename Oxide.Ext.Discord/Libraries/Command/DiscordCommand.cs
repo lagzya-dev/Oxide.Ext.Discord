@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
@@ -125,12 +126,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
 
             if (_directMessageCommands.TryGetValue(commandName, out DirectMessageCommand cmd))
             {
-                string previousPluginName = cmd.Plugin?.Name ?? "an unknown plugin";
-                string newPluginName = plugin?.Name ?? "An unknown plugin";
+                string previousPluginName = cmd.Plugin?.FullName() ?? "an unknown plugin";
+                string newPluginName = plugin.FullName() ?? "An unknown plugin";
                 _logger.Warning("{0} has replaced the '{1}' discord direct message command previously registered by {2}", newPluginName, commandName, previousPluginName);
             }
             
-            _logger.Debug("Adding Direct Command For: {0} Command: {1} Callback: {2}", plugin.Name, command, callback);
+            _logger.Debug("Adding Direct Command For: {0} Command: {1} Callback: {2}", plugin.FullName(), command, callback);
 
             cmd = new DirectMessageCommand(plugin, commandName, callback);
 
@@ -181,12 +182,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
 
             if (_guildCommands.TryGetValue(commandName, out GuildCommand cmd))
             {
-                string previousPluginName = cmd.Plugin?.Name ?? "an unknown plugin";
-                string newPluginName = plugin.Name ?? "An unknown plugin";
+                string previousPluginName = cmd.Plugin?.FullName() ?? "an unknown plugin";
+                string newPluginName = plugin.FullName();
                 _logger.Warning("{0} has replaced the '{1}' discord guild command previously registered by {2}", newPluginName, commandName, previousPluginName);
             }
 
-            _logger.Debug("Adding Guild Command For: {0} Command: {1} Callback: {2}", plugin.Name, command, callback);
+            _logger.Debug("Adding Guild Command For: {0} Command: {1} Callback: {2}", plugin.FullName(), command, callback);
 
             cmd = new GuildCommand(plugin, commandName, callback, allowedChannels);
 
@@ -246,7 +247,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             // Remove all discord commands which were registered by the plugin
             foreach (DirectMessageCommand cmd in _directMessageCommands.Values)
             {
-                if (cmd.Plugin.Name == sender.Name)
+                if (cmd.Plugin.Id() == sender.Id())
                 {
                     dmCommands.Add(cmd);
                 }
@@ -254,7 +255,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             
             foreach (GuildCommand cmd in _guildCommands.Values)
             {
-                if (cmd.Plugin.Name == sender.Name)
+                if (cmd.Plugin.Id() == sender.Id())
                 {
                     guildCommands.Add(cmd);
                 }

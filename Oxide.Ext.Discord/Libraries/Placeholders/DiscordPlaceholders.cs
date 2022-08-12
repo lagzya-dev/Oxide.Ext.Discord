@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             BasePlaceholder existing = _placeholders[placeholder];
             if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("{0} Plugin has replaced placeholder '{1}' previously registered by plugin {2}", plugin.Name, placeholder, existing.Plugin.Name);
+                _logger.Warning("{0} Plugin has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
             }
             _placeholders[placeholder] = holder;
         }

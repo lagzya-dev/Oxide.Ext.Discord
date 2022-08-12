@@ -150,7 +150,7 @@ namespace Oxide.Ext.Discord
                 }
 
                 bot.AddClient(client);
-                DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding {{0}} client to bot {{1}}", client.Plugin.Name, bot.BotUser?.GetFullUserName);
+                DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding {{0}} client to bot {{1}}", client.PluginName, bot.BotUser?.GetFullUserName);
             }
             catch (Exception ex)
             {

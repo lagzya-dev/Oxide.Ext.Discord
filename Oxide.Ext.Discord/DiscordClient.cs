@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
@@ -56,8 +57,8 @@ namespace Oxide.Ext.Discord
         public DiscordClient(Plugin plugin)
         {
             Plugin = plugin;
-            PluginId = plugin.Name;
-            PluginName = $"{plugin.Name} by {plugin.Author} v{plugin.Version}";
+            PluginId = plugin.Id();
+            PluginName = Plugin.FullName();
             Clients[PluginId] = this;
         }
         
@@ -106,10 +107,10 @@ namespace Oxide.Ext.Discord
             if (settings.HasIntents(GatewayIntents.GuildMessages) && !settings.HasIntents(GatewayIntents.MessageContent))
             {
                 settings.Intents |= GatewayIntents.MessageContent;
-                Logger.Warning("Plugin {0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContent", Plugin.Name);
+                Logger.Warning("Plugin {0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContent", Plugin.FullName());
             }
             
-            Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.Name);
+            Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
             
             BotClient.AddDiscordClient(this);
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordClientConnected, Plugin, this);
@@ -216,7 +217,7 @@ namespace Oxide.Ext.Discord
         public static DiscordClient GetClient(Plugin plugin)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            return GetClient(plugin.Name);
+            return GetClient(plugin.Id());
         }
 
         /// <summary>
@@ -238,10 +239,10 @@ namespace Oxide.Ext.Discord
             {
                 if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
                 {
-                    DiscordClient client = Clients[plugin.Name];
+                    DiscordClient client = Clients[plugin.Id()];
                     if (client == null)
                     {
-                        DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(OnPluginAdded)} Creating DiscordClient for plugin {{0}}", plugin.Name);
+                        DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(OnPluginAdded)} Creating DiscordClient for plugin {{0}}", plugin.FullName());
                         client = new DiscordClient(plugin);
                     }
                     
@@ -256,7 +257,7 @@ namespace Oxide.Ext.Discord
 
         internal static void OnPluginRemoved(Plugin plugin)
         {
-            DiscordClient client = Clients[plugin.Name];
+            DiscordClient client = Clients[plugin.Id()];
             if (client == null)
             {
                 return;
@@ -276,6 +277,7 @@ namespace Oxide.Ext.Discord
             DiscordExtension.DiscordTemplates.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordPlaceholders.OnPluginUnloaded(plugin);
             DiscordLocale.OnPluginUnloaded(plugin);
+            PluginExt.OnPluginUnloaded(plugin);
         }
 
         internal static void CloseClient(DiscordClient client)

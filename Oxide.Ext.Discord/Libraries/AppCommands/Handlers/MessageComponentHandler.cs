@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
@@ -66,14 +67,14 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Handlers
                 {
                     if (componentCommand.IsForPlugin(command.Plugin))
                     {
-                        _logger.Warning("{0} has replaced the '{1}' ({2}) discord message component command previously registered by {3}", command.Plugin.Name, command.CustomId, InteractionType.MessageComponent, componentCommand.Plugin?.Name);
+                        _logger.Warning("{0} has replaced the '{1}' ({2}) discord message component command previously registered by {3}", command.Plugin.FullName(), command.CustomId, InteractionType.MessageComponent, componentCommand.Plugin?.FullName());
                     }
                     commands.RemoveAt(index);
                     componentCommand.OnRemoved();
                 }
             }
             
-            _logger.Debug("Adding App Message Component Command For: {0} Command: {1} Callback: {2}", command.Plugin.Name, command.CustomId, command.Callback);
+            _logger.Debug("Adding App Message Component Command For: {0} Command: {1} Callback: {2}", command.Plugin.FullName(), command.CustomId, command.Callback);
             commands.Add(command);
         }
 

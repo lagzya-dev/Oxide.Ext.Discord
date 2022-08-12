@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
@@ -35,7 +36,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Handlers
             {
                 foreach (KeyValuePair<AppCommandId,AppCommand> appCommand in pair.Value)
                 {
-                    _logger.Verbose("Registered Commands. Type: {0} CommandId: {1} Plugin: {2} Callback {3}", pair.Key, appCommand.Key, appCommand.Value.Plugin.Name, appCommand.Value.Callback);
+                    _logger.Verbose("Registered Commands. Type: {0} CommandId: {1} Plugin: {2} Callback {3}", pair.Key, appCommand.Key, appCommand.Value.Plugin.FullName(), appCommand.Value.Callback);
                 }
             }
             

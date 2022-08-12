@@ -6,6 +6,7 @@ using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -134,14 +135,14 @@ namespace Oxide.Ext.Discord.Helpers
                 string discordLocale = GetDiscordLocale(language);
                 if (string.IsNullOrEmpty(discordLocale))
                 {
-                    DiscordExtension.GlobalLogger.Warning("Discord Extension failed to find discord locale for oxide language '{0}' for '{1}'. Please give this message to the Discord Extension Authors", language, plugin.Name);
+                    DiscordExtension.GlobalLogger.Warning("Discord Extension failed to find discord locale for oxide language '{0}' for '{1}'. Please give this message to the Discord Extension Authors", language, plugin.FullName());
                     continue;
                 }
 
                 Hash<string, string> messages = GetLanguageMessages(plugin, language);
                 if (!messages.ContainsKey(langKey))
                 {
-                    DiscordExtension.GlobalLogger.Warning("Failed to add localized message for lang key '{0}' for plugin '{1} because lang key doesn't exist for language {2}", langKey, plugin.Name, language);
+                    DiscordExtension.GlobalLogger.Warning("Failed to add localized message for lang key '{0}' for plugin '{1} because lang key doesn't exist for language {2}", langKey, plugin.FullName(), language);
                     continue;
                 }
 
@@ -213,11 +214,11 @@ namespace Oxide.Ext.Discord.Helpers
 
         private static Hash<string, string> GetLanguageMessages(Plugin plugin, string language)
         {
-            Hash<string, Hash<string, string>> pluginCache = PluginLangCache[plugin.Name];
+            Hash<string, Hash<string, string>> pluginCache = PluginLangCache[plugin.Id()];
             if (pluginCache == null)
             {
                 pluginCache = new Hash<string, Hash<string, string>>();
-                PluginLangCache[plugin.Name] = pluginCache;
+                PluginLangCache[plugin.Id()] = pluginCache;
             }
 
             Hash<string, string> langCache = pluginCache[language];
@@ -236,7 +237,7 @@ namespace Oxide.Ext.Discord.Helpers
 
         internal static void OnPluginUnloaded(Plugin plugin)
         {
-            PluginLangCache.Remove(plugin.Name);
+            PluginLangCache.Remove(plugin.Id());
         }
     }
 }
