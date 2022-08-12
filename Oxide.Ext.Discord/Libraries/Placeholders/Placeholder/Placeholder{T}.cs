@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using Oxide.Core.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Types
+namespace Oxide.Ext.Discord.Libraries.Placeholders.Placeholder
 {
     internal class Placeholder<T> : BasePlaceholder
     {

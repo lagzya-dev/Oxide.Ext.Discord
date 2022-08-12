@@ -1,6 +1,5 @@
 using System.Text;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Libraries.Placeholders.Types;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
@@ -27,6 +26,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
             placeholders.RegisterInternalPlaceholder<ulong>("timestamp.relativetime", GetDataKey(), RelativeTime);
         }
 
-        private static string GetDataKey() =>PlaceholderData.TimestampName;
+        private static string GetDataKey() => PlaceholderData.TimestampName;
     }
 }

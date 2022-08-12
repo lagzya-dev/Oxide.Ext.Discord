@@ -8,7 +8,7 @@ using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
-using Oxide.Ext.Discord.Libraries.Placeholders.Types;
+using Oxide.Ext.Discord.Libraries.Placeholders.Placeholder;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Core;
 using Oxide.Ext.Discord.Pooling;
@@ -31,6 +31,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             GuildPlaceholders.RegisterPlaceholders(this);
             ServerPlaceholders.RegisterPlaceholders(this);
             MemberPlaceholders.RegisterPlaceholders(this);
+            PlayerPlaceholders.RegisterPlaceholders(this);
             RolePlaceholders.RegisterPlaceholders(this);
             TimestampPlaceholders.RegisterPlaceholders(this);
             UserPlaceholders.RegisterPlaceholders(this);
