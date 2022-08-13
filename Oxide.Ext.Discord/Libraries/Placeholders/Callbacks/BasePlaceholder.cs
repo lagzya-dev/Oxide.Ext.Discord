@@ -2,16 +2,14 @@ using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Placeholder
+namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
 {
-    internal abstract class BasePlaceholder
+    public abstract class BasePlaceholder
     {
-        protected readonly string DataKey;
         internal readonly Plugin Plugin;
 
-        protected BasePlaceholder(string dataKey, Plugin plugin)
+        protected BasePlaceholder(Plugin plugin)
         {
-            DataKey = dataKey;
             Plugin = plugin;
         }
 
