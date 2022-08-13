@@ -171,15 +171,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="permissions">List of permissions for the command</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditPermissions(DiscordClient client, Snowflake guildId, List<CommandPermissions> permissions, Action callback = null, Action<RequestError> error = null)
+        public void EditPermissions(DiscordClient client, Snowflake guildId, CommandUpdatePermissions permissions, Action callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            Dictionary<string, object> data = new Dictionary<string, object>
-            {
-                ["permissions"] = permissions
-            };
-            
-            client.Bot.Rest.CreateRequest(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.PUT, data, callback, error);
+            client.Bot.Rest.CreateRequest(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.PUT, permissions, callback, error);
         }
     }
 }

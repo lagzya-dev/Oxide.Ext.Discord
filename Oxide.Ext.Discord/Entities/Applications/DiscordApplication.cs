@@ -261,6 +261,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
 
         /// <summary>
         /// Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects.
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command-permissions">Get Guild Application Command Permissions</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to get the permissions from</param>
@@ -270,21 +271,6 @@ namespace Oxide.Ext.Discord.Entities.Applications
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             client.Bot.Rest.CreateRequest(client,$"applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.GET, null, callback, error);
-        }
-
-        /// <summary>
-        /// Batch edits permissions for all commands in a guild.
-        /// Warning: This endpoint will overwrite all existing permissions for all commands in a guild
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="guildId">Guild ID to update the permissions for</param>
-        /// <param name="permissions">List of permissions for the commands</param>
-        /// <param name="callback">Callback with the list of permissions</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void BatchEditCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RequestError> error = null)
-        {
-            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            client.Bot.Rest.CreateRequest(client,$"applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.PUT, permissions, callback, error);
         }
     }
 }
