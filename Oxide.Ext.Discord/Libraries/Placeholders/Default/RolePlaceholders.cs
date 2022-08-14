@@ -12,12 +12,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
-            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.id", GetDataKey(), Id);
-            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.name", GetDataKey(), Name);
-            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.mention", GetDataKey(), Mention);
-            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.icon", GetDataKey(), Icon);
+            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.id", Id);
+            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.name", Name);
+            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.mention", Mention);
+            placeholders.RegisterInternalPlaceholder<DiscordRole>("role.icon", Icon);
         }
-        
-        private static string GetDataKey() => nameof(DiscordRole);
     }
 }

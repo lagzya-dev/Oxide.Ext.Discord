@@ -11,11 +11,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
-            placeholders.RegisterInternalPlaceholder<GuildMember>("member.id", GetDataKey(), Id);
-            placeholders.RegisterInternalPlaceholder<GuildMember>("member.name", GetDataKey(), Name);
-            placeholders.RegisterInternalPlaceholder<GuildMember>("member.mention", GetDataKey(), Mention);
+            placeholders.RegisterInternalPlaceholder<GuildMember>("member.id", Id);
+            placeholders.RegisterInternalPlaceholder<GuildMember>("member.name", Name);
+            placeholders.RegisterInternalPlaceholder<GuildMember>("member.mention", Mention);
         }
-        
-        private static string GetDataKey() => nameof(GuildMember);
     }
 }

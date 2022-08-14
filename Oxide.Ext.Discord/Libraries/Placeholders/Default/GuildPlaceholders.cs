@@ -14,14 +14,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
-            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.id", GetDataKey(), Id);
-            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.name", GetDataKey(), Name);
-            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.description", GetDataKey(), Description);
-            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.icon", GetDataKey(), Icon);
-            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.banner", GetDataKey(), Banner);
-            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.members.count", GetDataKey(), MemberCount);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.id", Id);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.name", Name);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.description", Description);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.icon", Icon);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.banner", Banner);
+            placeholders.RegisterInternalPlaceholder<DiscordGuild>("guild.members.count", MemberCount);
         }
-        
-        private static string GetDataKey() => nameof(DiscordGuild);
     }
 }

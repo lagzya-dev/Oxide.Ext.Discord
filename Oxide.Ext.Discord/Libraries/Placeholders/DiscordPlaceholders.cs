@@ -149,6 +149,28 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="placeholder">Placeholder string</param>
+        /// <param name="callback">Callback Method for the placeholder</param>
+        /// <typeparam name="T">Type of the data key</typeparam>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void RegisterPlaceholder<T>(Plugin plugin, string placeholder, Action<StringBuilder, T, PlaceholderMatch> callback)
+        {
+            if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (callback == null) throw new ArgumentNullException(nameof(callback));
+            Placeholder<T> holder = new Placeholder<T>(typeof(T).Name, plugin, callback);
+            BasePlaceholder existing = _placeholders[placeholder];
+            if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
+            {
+                _logger.Warning("{0} Plugin has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
+            }
+            _placeholders[placeholder] = holder;
+        }
+        
+        /// <summary>
+        /// Registers a placeholder of type {T}
+        /// </summary>
+        /// <param name="plugin">Plugin this placeholder is for</param>
+        /// <param name="placeholder">Placeholder string</param>
         /// <param name="dataKey">The name of the data key in PlaceholderData</param>
         /// <param name="callback">Callback Method for the placeholder</param>
         /// <typeparam name="T">Type of the data key</typeparam>
@@ -168,12 +190,21 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             _placeholders[placeholder] = holder;
         }
 
-        internal void RegisterInternalPlaceholder<T>(string placeholder, string dataKey, Action<StringBuilder, T, PlaceholderMatch> callback)
+        internal void RegisterInternalPlaceholder<T>(string placeholder, Action<StringBuilder, T, PlaceholderMatch> callback)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
-            if (string.IsNullOrEmpty(dataKey)) throw new ArgumentNullException(nameof(dataKey));
             if (callback == null) throw new ArgumentNullException(nameof(callback));
-            Placeholder<T> holder = new Placeholder<T>(dataKey, callback);
+            Placeholder<T> holder = new Placeholder<T>(typeof(T).Name, callback);
+            _placeholders[placeholder] = holder;
+            _internalPlaceholders[placeholder] = holder;
+        }
+        
+        internal void RegisterInternalPlaceholder<T>(string placeholder, string customDataKey, Action<StringBuilder, T, PlaceholderMatch> callback)
+        {
+            if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
+            if (string.IsNullOrEmpty(customDataKey)) throw new ArgumentNullException(nameof(customDataKey));
+            if (callback == null) throw new ArgumentNullException(nameof(callback));
+            Placeholder<T> holder = new Placeholder<T>(customDataKey, callback);
             _placeholders[placeholder] = holder;
             _internalPlaceholders[placeholder] = holder;
         }

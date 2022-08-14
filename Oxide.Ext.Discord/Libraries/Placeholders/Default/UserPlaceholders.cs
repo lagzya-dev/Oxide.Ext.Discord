@@ -15,15 +15,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
-            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.id", GetDataKey(), Id);
-            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.username", GetDataKey(), UserName);
-            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.discriminator", GetDataKey(), Discriminator);
-            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.fullname", GetDataKey(), FullName);
-            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.avatar.url", GetDataKey(), AvatarUrl);
-            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.banner.url", GetDataKey(), BannerUrl);
-            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.mention", GetDataKey(), Mention);
+            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.id", Id);
+            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.username", UserName);
+            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.discriminator", Discriminator);
+            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.fullname", FullName);
+            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.avatar.url", AvatarUrl);
+            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.banner.url", BannerUrl);
+            placeholders.RegisterInternalPlaceholder<DiscordUser>("user.mention", Mention);
         }
-        
-        private static string GetDataKey() => nameof(DiscordUser);
     }
 }

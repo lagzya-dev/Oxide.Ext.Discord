@@ -13,13 +13,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
-            placeholders.RegisterInternalPlaceholder<IServer>("server.name", GetDataKey(), Name);
-            placeholders.RegisterInternalPlaceholder<IServer>("server.players", GetDataKey(), Players);
-            placeholders.RegisterInternalPlaceholder<IServer>("server.players.max", GetDataKey(), MaxPlayers);
-            placeholders.RegisterInternalPlaceholder<IServer>("server.version", GetDataKey(), Version);
-            placeholders.RegisterInternalPlaceholder<IServer>("server.protocol", GetDataKey(), Protocol);
+            placeholders.RegisterInternalPlaceholder<IServer>("server.name", Name);
+            placeholders.RegisterInternalPlaceholder<IServer>("server.players", Players);
+            placeholders.RegisterInternalPlaceholder<IServer>("server.players.max", MaxPlayers);
+            placeholders.RegisterInternalPlaceholder<IServer>("server.version", Version);
+            placeholders.RegisterInternalPlaceholder<IServer>("server.protocol", Protocol);
         }
-        
-        private static string GetDataKey() => nameof(IServer);
     }
 }

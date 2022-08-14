@@ -13,13 +13,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.id", GetDataKey(), Id);
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.name", GetDataKey(), Name);
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.health", GetDataKey(), Health);
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.position", GetDataKey(), Position);
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.ping", GetDataKey(), Ping);
+            placeholders.RegisterInternalPlaceholder<IPlayer>("player.id", Id);
+            placeholders.RegisterInternalPlaceholder<IPlayer>("player.name", Name);
+            placeholders.RegisterInternalPlaceholder<IPlayer>("player.health", Health);
+            placeholders.RegisterInternalPlaceholder<IPlayer>("player.position", Position);
+            placeholders.RegisterInternalPlaceholder<IPlayer>("player.ping", Ping);
         }
-        
-        private static string GetDataKey() => nameof(IPlayer);
     }
 }
