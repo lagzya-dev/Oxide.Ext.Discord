@@ -23,9 +23,9 @@ namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
         /// </summary>
         /// <param name="command">Command for the Auto Complete</param>
         /// <param name="argumentName">Argument Name for the Auto Complete</param>
-        /// <param name="group">Sub Command Group for the Auto Complete</param>
         /// <param name="subCommand">Sub Command for the Auto Complete</param>
-        public DiscordAutoCompleteCommandAttribute(string command, string argumentName, string group = null, string subCommand = null) : base(command, group, subCommand) 
+        /// <param name="group">Sub Command Group for the Auto Complete</param>
+        public DiscordAutoCompleteCommandAttribute(string command, string argumentName, string subCommand = null, string group = null) : base(command, group, subCommand) 
         {
             ArgumentName = argumentName;
         }

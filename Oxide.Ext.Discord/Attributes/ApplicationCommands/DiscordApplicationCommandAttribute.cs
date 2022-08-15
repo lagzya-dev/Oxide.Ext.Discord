@@ -24,9 +24,9 @@ namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
         /// Constructor
         /// </summary>
         /// <param name="command">Command for the Application Command</param>
-        /// <param name="group">Sub Command Group for the Application Command</param>
         /// <param name="subCommand">Sub Command for the Application Command</param>
-        public DiscordApplicationCommandAttribute(string command, string group = null, string subCommand = null)
+        /// <param name="group">Sub Command Group for the Application Command</param>
+        public DiscordApplicationCommandAttribute(string command, string subCommand = null, string group = null)
         {
             Command = command;
             Group = group;
