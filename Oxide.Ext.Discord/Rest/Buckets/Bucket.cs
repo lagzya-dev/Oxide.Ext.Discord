@@ -16,33 +16,34 @@ namespace Oxide.Ext.Discord.Rest.Buckets
     /// <summary>
     /// Contains bucket information for a REST API Bucket
     /// </summary>
-    public class Bucket
+    public class Bucket : BasePoolable
     {
         /// <summary>
         /// The ID of this bucket which is based on the route
         /// </summary>
         internal string Id;
-        
+
         /// <summary>
         /// The number of requests that can be made per rate limit reset
         /// </summary>
-        internal int Limit = 1;
+        internal int Limit;
 
         /// <summary>
         /// How many requests are remaining before hitting the rate limit for the bucket
         /// </summary>
-        internal int Remaining = 1;
+        internal int Remaining;
 
         /// <summary>
         /// How long until the rate limit resets
         /// </summary>
-        internal DateTimeOffset ResetAt = DateTimeOffset.MinValue;
+        internal DateTimeOffset ResetAt;
 
         internal bool IsKnowBucket;
 
-        private readonly RestRateLimit _rateLimit;
-        private readonly ILogger _logger;
-        private readonly RestHandler _rest;
+        private RestRateLimit _rateLimit;
+        private ILogger _logger;
+        private RestHandler _rest;
+        
         private readonly AutoResetEvent _requestSync = new AutoResetEvent(true);
         private readonly AutoResetEvent _completedSync = new AutoResetEvent(true);
         internal readonly AdjustableSemaphore Semaphore = new AdjustableSemaphore(1);
@@ -56,13 +57,17 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         /// <param name="bucketId">ID of the bucket. If not a known bucket then will be part of the route. If know bucket will be the Discord bucket ID</param>
         /// <param name="rest">The handler that owns this Bucket</param>
         /// <param name="logger">Logger for this bucket</param>
-        public Bucket(string bucketId, RestHandler rest, ILogger logger)
+        public void Init(string bucketId, RestHandler rest, ILogger logger)
         {
             Id = bucketId;
             _rest = rest;
             _rateLimit = rest.RateLimit;
             _logger = logger;
-            _logger.Debug($"{nameof(Bucket)}.Ctor Bucket Created: {{0}}", Id);
+            _logger.Debug($"{nameof(Bucket)}.{nameof(Init)} Bucket Created: {{0}}", Id);
+            Semaphore.Reset();
+            Limit = 1;
+            Remaining = 1;
+            ResetAt = DateTimeOffset.MinValue;
         }
 
         /// <summary>
@@ -109,40 +114,44 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             BaseRequest request = handler.Request;
             DiscordClient client = request.Client;
 
-            if (!_isShutdown)
+            if (_isShutdown)
+            {
+                return;
+            }
+
+            try
             {
                 _requestSync.WaitOne();
-            }
 
-            while (true)
-            {
-                if (_rateLimit.HasReachedRateLimit)
+                while (true)
                 {
-                    DateTimeOffset resetAt = _rateLimit.NextReset();
-                    _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Global Rate Limit Method: {{3}} Url: {{4}} Waiting For: {{5}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                    if (resetAt > DateTimeOffset.UtcNow)
+                    if (_rateLimit.HasReachedRateLimit)
                     {
-                        await Task.Delay(resetAt - DateTimeOffset.UtcNow, token);
-                    }
-                        
-                    continue;
-                }
-                
-                if ((Limit == 0 || Remaining <= 0) && ResetAt > DateTimeOffset.UtcNow)
-                {
-                    _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Bucket Rate Limit Method: {{3}} Url: {{4}} Limit: {{5}} Remaining: {{6}} Waiting For: {{7}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, Limit, Remaining, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                    if (ResetAt > DateTimeOffset.UtcNow)
-                    {
-                        await Task.Delay(ResetAt - DateTimeOffset.UtcNow, token);
-                    }
-                    continue;
-                }
+                        DateTimeOffset resetAt = _rateLimit.NextReset();
+                        _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Global Rate Limit Method: {{3}} Url: {{4}} Waiting For: {{5}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                        if (resetAt > DateTimeOffset.UtcNow)
+                        {
+                            await Task.Delay(resetAt - DateTimeOffset.UtcNow, token);
+                        }
 
-                _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can Start Request: Bucket: {{3}}/{{4}} Reset In: {{5}}", client.PluginName, Id, request.Id, Remaining, Limit, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                break;
+                        continue;
+                    }
+
+                    if ((Limit == 0 || Remaining <= 0) && ResetAt > DateTimeOffset.UtcNow)
+                    {
+                        _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Bucket Rate Limit Method: {{3}} Url: {{4}} Limit: {{5}} Remaining: {{6}} Waiting For: {{7}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, Limit, Remaining, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                        if (ResetAt > DateTimeOffset.UtcNow)
+                        {
+                            await Task.Delay(ResetAt - DateTimeOffset.UtcNow, token);
+                        }
+                        continue;
+                    }
+
+                    _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can Start Request: Bucket: {{3}}/{{4}} Reset In: {{5}}", client.PluginName, Id, request.Id, Remaining, Limit, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                    break;
+                }
             }
-
-            if (!_isShutdown)
+            finally
             {
                 _requestSync.Set();
             }
@@ -159,6 +168,11 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         {
             RateLimitResponse rateLimit = response.RateLimit;
 
+            if (_isShutdown)
+            {
+                return;
+            }
+            
             if (!Requests.TryRemove(handler.Request.Id, out RequestHandler _))
             {
                 _logger.Warning("Failed to remove request from bucket!!! Bucket ID: {0} Request ID: {1} Method: {2} Route: {3} Status: {4}", Id, handler.Request.Id, handler.Request.Method, handler.Request.Route, handler.Request.Status);
@@ -166,10 +180,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             
             try
             {
-                if (!_isShutdown)
-                {
-                    _completedSync.WaitOne();
-                }
+                _completedSync.WaitOne();
                 
                 if (!IsKnowBucket && rateLimit != null && !string.IsNullOrEmpty(rateLimit.BucketId))
                 {
@@ -187,10 +198,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             }
             finally
             {
-                if (!_isShutdown)
-                {
-                    _completedSync.Set();
-                }
+                _completedSync.Set();
             }
         }
         
@@ -253,19 +261,32 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             }
         }
 
-        internal void Shutdown()
+        ///<inheritdoc/>
+        protected override void LeavePool()
         {
-            _logger.Debug($"{nameof(Bucket)}.{nameof(Shutdown)} Shutting down bucket ID: {{0}}", Id);
+            _isShutdown = false;
+        }
+
+        ///<inheritdoc/>
+        protected override void EnterPool()
+        {
+            _logger.Debug("Shutting down bucket ID: {0}", Id);
             foreach (RequestHandler request in Requests.Values)
             {
                 request.Abort();
             }
             
-            _completedSync.Dispose();
-            _requestSync.Dispose();
             Requests.Clear();
             Semaphore.AllowAllThrough();
             _isShutdown = true;
+            _requestSync.Set();
+            _completedSync.Set();
+        }
+
+        ///<inheritdoc/>
+        protected override void DisposeInternal()
+        {
+            DiscordPool.Free(this);
         }
     }
 }

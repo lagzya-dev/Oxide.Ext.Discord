@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -149,7 +150,7 @@ namespace Oxide.Ext.Discord.Rest
             if (Buckets.TryGetValue(newBucketId, out Bucket existing))
             {
                 existing.Merge(bucket);
-                bucket.Shutdown();
+                bucket.Dispose();
                 return;
             }
 
@@ -162,7 +163,7 @@ namespace Oxide.Ext.Discord.Rest
         internal void RemoveBucket(Bucket bucket)
         {
             Buckets.TryRemove(bucket.Id, out Bucket _);
-            bucket.Shutdown();
+            bucket.Dispose();
         }
 
         /// <summary>
@@ -179,7 +180,8 @@ namespace Oxide.Ext.Discord.Rest
 
             if (!Buckets.TryGetValue(bucketId, out Bucket bucket))
             {
-                bucket = new Bucket(bucketId, this, _logger);
+                bucket = DiscordPool.Get<Bucket>();
+                bucket.Init(bucketId, this, _logger);
                 Buckets[bucketId] = bucket;
             }
 
@@ -201,7 +203,7 @@ namespace Oxide.Ext.Discord.Rest
         {
             foreach (KeyValuePair<string, Bucket> bucket in Buckets)
             {
-                bucket.Value.Shutdown();
+                bucket.Value.Dispose();
             }
             
             RouteToHash.Clear();

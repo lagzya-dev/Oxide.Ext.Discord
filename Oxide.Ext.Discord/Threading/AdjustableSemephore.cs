@@ -74,5 +74,10 @@ namespace Oxide.Ext.Discord.Threading
         {
             MaximumCount = int.MaxValue;
         }
+
+        public void Reset()
+        {
+            MaximumCount = 1;
+        }
     }
 }
