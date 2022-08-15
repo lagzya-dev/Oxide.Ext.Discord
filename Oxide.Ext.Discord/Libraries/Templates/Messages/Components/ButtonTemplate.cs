@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
     /// Template for Button Components
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public abstract class ButtonTemplate
+    public class ButtonTemplate
     {
         /// <summary>
         /// If the button should be added to the message
@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         /// Emoji for the button
         /// </summary>
         [JsonProperty("Button Emoji")]
-        public DiscordEmojiTemplate Emoji { get; set; } = new DiscordEmojiTemplate();
+        public EmojiTemplate Emoji { get; set; } = new EmojiTemplate();
 
         /// <summary>
         /// <see cref="ButtonStyle"/> for the button
@@ -47,6 +47,24 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         /// </summary>
         [JsonProperty("Keep Button On Same Row")]
         public bool Inline { get; set; } = true;
+
+        [JsonConstructor]
+        public ButtonTemplate() { }
+
+        public ButtonTemplate(string label, ButtonStyle style, string command, bool enabled = true, bool inline = true) : this(label, style, command, null, enabled, inline) { }
+        
+        public ButtonTemplate(string label, ButtonStyle style, string command, string emoji, bool enabled = true, bool inline = true)
+        {
+            Label = label;
+            Style = style;
+            Command = command;
+            Emoji = new EmojiTemplate
+            {
+                Emoji = emoji
+            };
+            Enabled = enabled;
+            Inline = inline;
+        }
 
         /// <summary>
         /// Converts the template to a <see cref="ButtonComponent"/>

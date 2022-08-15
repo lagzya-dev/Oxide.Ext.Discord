@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis
     /// <summary>
     /// Discord Template for Emoji
     /// </summary>
-    public class DiscordEmojiTemplate
+    public class EmojiTemplate
     {
         /// <summary>
         /// Emoji Name or ID
@@ -22,8 +22,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis
         [JsonProperty("For Custom Emojis Is The Emoji Animated")]
         public bool Animated { get; set; } = false;
 
+        [JsonConstructor]
+        public EmojiTemplate() { }
+
+        public EmojiTemplate(string emoji, bool animated = false)
+        {
+            Emoji = emoji;
+            Animated = animated;
+        }
+        
         /// <summary>
-        /// Converts the <see cref="DiscordEmojiTemplate"/> to a <see cref="DiscordEmoji"/>
+        /// Converts the <see cref="EmojiTemplate"/> to a <see cref="DiscordEmoji"/>
         /// </summary>
         /// <returns></returns>
         public DiscordEmoji ToEmoji()
