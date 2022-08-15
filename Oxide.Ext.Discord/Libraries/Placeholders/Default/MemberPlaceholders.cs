@@ -5,9 +5,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
     internal class MemberPlaceholders
     {
-        private static void Id(StringBuilder builder, GuildMember member, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, member.Id);
-        private static void Name(StringBuilder builder, GuildMember member, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, member.DisplayName);
-        private static void Mention(StringBuilder builder, GuildMember member, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, member.User.Mention);
+        private static void Id(StringBuilder builder, PlaceholderMatch match, GuildMember member) => PlaceholderFormatting.Replace(builder, match, member.Id);
+        private static void Name(StringBuilder builder, PlaceholderMatch match, GuildMember member) => PlaceholderFormatting.Replace(builder, match, member.DisplayName);
+        private static void Mention(StringBuilder builder, PlaceholderMatch match, GuildMember member) => PlaceholderFormatting.Replace(builder, match, member.User.Mention);
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {

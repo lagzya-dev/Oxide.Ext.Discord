@@ -5,10 +5,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
     internal static class ApplicationCommandPlaceholders
     {
-        private static void Id(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.Id);
-        private static void Name(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.Name);
-        private static void Mention(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.Mention);
-        private static void MentionCustom(StringBuilder builder, DiscordApplicationCommand command, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, command.MentionCustom(match.Format));
+        private static void Id(StringBuilder builder, PlaceholderMatch match, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, match, command.Id);
+        private static void Name(StringBuilder builder, PlaceholderMatch match, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, match, command.Name);
+        private static void Mention(StringBuilder builder, PlaceholderMatch match, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, match, command.Mention);
+        private static void MentionCustom(StringBuilder builder, PlaceholderMatch match, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, match, command.MentionCustom(match.Format));
         
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {

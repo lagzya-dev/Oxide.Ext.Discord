@@ -7,15 +7,15 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
     internal class Placeholder<T> : BasePlaceholder
     {
         private readonly string _dataKey;
-        private readonly Action<StringBuilder, T, PlaceholderMatch> _callback;
+        private readonly Action<StringBuilder, PlaceholderMatch, T> _callback;
         
-        public Placeholder(string dataKey, Plugin plugin, Action<StringBuilder, T, PlaceholderMatch> callback) : base(plugin)
+        public Placeholder(string dataKey, Plugin plugin, Action<StringBuilder, PlaceholderMatch, T> callback) : base(plugin)
         {
             _dataKey = dataKey;
             _callback = callback;
         }
 
-        internal Placeholder(string dataKey, Action<StringBuilder, T, PlaceholderMatch> callback) : this(dataKey, null, callback) {}
+        internal Placeholder(string dataKey, Action<StringBuilder, PlaceholderMatch, T> callback) : this(dataKey, null, callback) {}
 
         public override void Invoke(StringBuilder builder, PlaceholderMatch match, PlaceholderData data)
         {
@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
         
         private void Invoke(StringBuilder builder, PlaceholderMatch match, T data)
         {
-            _callback.Invoke(builder, data, match);
+            _callback.Invoke(builder, match, data);
         }
     }
 }

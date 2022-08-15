@@ -5,10 +5,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
     internal static class RolePlaceholders
     {
-        private static void Id(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Id);
-        private static void Name(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Name);
-        private static void Mention(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Mention);
-        private static void Icon(StringBuilder builder, DiscordRole role, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, role.Icon);
+        private static void Id(StringBuilder builder, PlaceholderMatch match, DiscordRole role) => PlaceholderFormatting.Replace(builder, match, role.Id);
+        private static void Name(StringBuilder builder, PlaceholderMatch match, DiscordRole role) => PlaceholderFormatting.Replace(builder, match, role.Name);
+        private static void Mention(StringBuilder builder, PlaceholderMatch match, DiscordRole role) => PlaceholderFormatting.Replace(builder, match, role.Mention);
+        private static void Icon(StringBuilder builder, PlaceholderMatch match, DiscordRole role) => PlaceholderFormatting.Replace(builder, match, role.Icon);
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {

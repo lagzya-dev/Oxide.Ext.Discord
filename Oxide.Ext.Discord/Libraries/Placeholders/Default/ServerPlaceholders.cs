@@ -5,11 +5,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
     internal static class ServerPlaceholders
     {
-        private static void Name(StringBuilder builder, IServer server, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, server.Name);
-        private static void Players(StringBuilder builder, IServer server, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, server.Players);
-        private static void MaxPlayers(StringBuilder builder, IServer server, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, server.MaxPlayers);
-        private static void Version(StringBuilder builder, IServer server, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, server.Version);
-        private static void Protocol(StringBuilder builder, IServer server, PlaceholderMatch match) => PlaceholderFormatting.Replace(builder, match, server.Protocol);
+        private static void Name(StringBuilder builder, PlaceholderMatch match, IServer server) => PlaceholderFormatting.Replace(builder, match, server.Name);
+        private static void Players(StringBuilder builder, PlaceholderMatch match, IServer server) => PlaceholderFormatting.Replace(builder, match, server.Players);
+        private static void MaxPlayers(StringBuilder builder, PlaceholderMatch match, IServer server) => PlaceholderFormatting.Replace(builder, match, server.MaxPlayers);
+        private static void Version(StringBuilder builder, PlaceholderMatch match, IServer server) => PlaceholderFormatting.Replace(builder, match, server.Version);
+        private static void Protocol(StringBuilder builder, PlaceholderMatch match, IServer server) => PlaceholderFormatting.Replace(builder, match, server.Protocol);
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {
