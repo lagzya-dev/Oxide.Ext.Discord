@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Extensions
         public static async Task CopyToPooledAsync(this Stream stream, Stream to)
         {
             byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(8196);
-            
+
             while (true)
             {
                 int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
@@ -31,8 +31,7 @@ namespace Oxide.Ext.Discord.Extensions
             
             DiscordArrayPool<byte>.Shared.Return(buffer);
         }
-        
-        
+
         /// <summary>
         /// Copies one stream to another using a pooled byte[] buffer
         /// </summary>
