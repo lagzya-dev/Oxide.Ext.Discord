@@ -102,7 +102,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             catch (WebSocketException ex)
             {
                 DisposeSocket();
-                _logger.Debug("Disconnected Socket Because: {0}", ex.WebSocketErrorCode);
+                _logger.Debug("Disconnected Socket Because: {0} Error Code: {1} HResult:{2}\n{3}", ex.WebSocketErrorCode, ex.ErrorCode, ex.HResult, ex);
                 if (ex.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
                 {
                     await _handler.SocketClosed(id, 1000, string.Empty);
