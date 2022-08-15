@@ -257,6 +257,9 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <inheritdoc/>
         protected override void EnterPool()
         {
+            _json = null;
+            Request = null;
+            _response = null;
             _logger = null;
         }
     }

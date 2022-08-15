@@ -35,19 +35,11 @@ namespace Oxide.Ext.Discord.Network
         ///<inheritdoc/>
         protected override bool TryComputeLength(out long length)
         {
-            if (_content.CanSeek)
-            {
-                length = _content.Length;
-                return true;
-            }
-            length = 0;
-            return false;
+            length = _content.Length;
+            return true;
         }
 
         ///<inheritdoc/>
-        protected override Task<Stream> CreateContentReadStreamAsync()
-        {
-            return Task.FromResult(_content);
-        }
+        protected override Task<Stream> CreateContentReadStreamAsync() => Task.FromResult(_content);
     }
 }
