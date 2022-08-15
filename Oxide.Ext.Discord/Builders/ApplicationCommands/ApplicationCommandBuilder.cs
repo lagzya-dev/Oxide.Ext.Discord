@@ -115,9 +115,9 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="name">Name of the sub command</param>
         /// <param name="description">Description for the sub command</param>
-        /// <returns><see cref="SubCommandBuilder"/></returns>
+        /// <returns><see cref="ApplicationSubCommandBuilder"/></returns>
         /// <exception cref="Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
-        public SubCommandBuilder AddSubCommand(string name, string description)
+        public ApplicationSubCommandBuilder AddSubCommand(string name, string description)
         {
             InvalidCommandOptionException.ThrowIfInvalidName(name, false);
             InvalidCommandOptionException.ThrowIfInvalidDescription(description, false);
@@ -127,7 +127,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 
             _chosenType = CommandOptionType.SubCommand;
 
-            return new SubCommandBuilder(Command.Options, name, description);
+            return new ApplicationSubCommandBuilder(Command.Options, name, description, this);
         }
 
         /// <summary>
