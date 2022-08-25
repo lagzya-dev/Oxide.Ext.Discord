@@ -69,15 +69,15 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             try
             {
-                _response = await RunInternal();
+                _response = await RunInternal().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                _response = await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Exception).WithException(ex), null, RequestCompletedStatus.ErrorFatal);
+                _response = await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Exception).WithException(ex), null, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
             }
             finally
             {
-                await Request.OnRequestCompleted(this, _response);
+                await Request.OnRequestCompleted(this, _response).ConfigureAwait(false);
             }
         }
         
@@ -91,17 +91,17 @@ namespace Oxide.Ext.Discord.Rest.Requests
             while(retries < 3 && retries429 < 6) 
             {
                 Request.Status = RequestStatus.PendingStart;
-                await Request.Bucket.WaitUntilBucketAvailable(this, _token);
-                await Request.WaitUntilRequestCanStart(_token);
+                await Request.Bucket.WaitUntilBucketAvailable(this, _token).ConfigureAwait(false);
+                await Request.WaitUntilRequestCanStart(_token).ConfigureAwait(false);
                 Request.Status = RequestStatus.InProgress;
                 Request.Bucket.OnRequestStarted(this);
                 
                 if (Request.IsCancelled)
                 {
-                    return await RequestResponse.CreateCancelledResponse(Request.Client);
+                    return await RequestResponse.CreateCancelledResponse(Request.Client).ConfigureAwait(false);
                 }
 
-                response = await RunRequest();
+                response = await RunRequest().ConfigureAwait(false);
                 
                 Request.Bucket.UpdateRateLimits(this, response);
                 
@@ -130,30 +130,30 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             try
             {
-                using (HttpRequestMessage request = await CreateRequest())
+                using (HttpRequestMessage request = await CreateRequest().ConfigureAwait(false))
                 {
-                    using (HttpResponseMessage webResponse = await Request.HttpClient.SendAsync(request, _token))
+                    using (HttpResponseMessage webResponse = await Request.HttpClient.SendAsync(request, _token).ConfigureAwait(false))
                     {
                         if (webResponse.IsSuccessStatusCode)
                         {
-                            return await RequestResponse.CreateSuccessResponse(Request.Client, webResponse);
+                            return await RequestResponse.CreateSuccessResponse(Request.Client, webResponse).ConfigureAwait(false);
                         }
 
-                        return await HandleWebException(request, webResponse);
+                        return await HandleWebException(request, webResponse).ConfigureAwait(false);
                     }
                 }
             }
             catch (TaskCanceledException)
             {
-                return await RequestResponse.CreateCancelledResponse(Request.Client);
+                return await RequestResponse.CreateCancelledResponse(Request.Client).ConfigureAwait(false);
             }
             catch (JsonSerializationException ex)
             {
-                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Serialization, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal);
+                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Serialization, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal);
+                return await RequestResponse.CreateExceptionResponse(Request.Client, GetRequestError(RequestErrorType.Generic, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
             }
         }
 
@@ -164,11 +164,11 @@ namespace Oxide.Ext.Discord.Rest.Requests
             int statusCode = (int)webResponse.StatusCode;
             if (statusCode == 429)
             {
-                response = await RequestResponse.CreateExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.RateLimit, DiscordLogLevel.Warning).WithRequest(request), webResponse, RequestCompletedStatus.ErrorRetry);
+                response = await RequestResponse.CreateExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.RateLimit, DiscordLogLevel.Warning).WithRequest(request).ConfigureAwait(false), webResponse, RequestCompletedStatus.ErrorRetry).ConfigureAwait(false);
             }
             else
             {
-                response = await RequestResponse.CreateExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.GenericWeb, DiscordLogLevel.Error).WithRequest(request), webResponse, RequestCompletedStatus.ErrorFatal);
+                response = await RequestResponse.CreateExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.GenericWeb, DiscordLogLevel.Error).WithRequest(request).ConfigureAwait(false), webResponse, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
             }
             
             Request.OnRequestErrored();
@@ -176,7 +176,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             if (Request.Client.Logger.IsLogging(DiscordLogLevel.Debug))
             {
                 Request.Client.Logger.Debug("Web Exception Occured. Type: {0} Request ID: {1} Plugin: {2} Method: {3} Route: {4} HTTP Code: {5} Message: {6}", response.Error?.ErrorType, Request.Id, Request.Client.PluginName, Request.Method, Request.Route, response.Code, response.Error?.Message);
-                Request.Client.Logger.Debug("Body:\n{0}", request.Content != null ? await request.Content.ReadAsStringAsync() : "No Content");
+                Request.Client.Logger.Debug("Body:\n{0}", request.Content != null ? await request.Content.ReadAsStringAsync().ConfigureAwait(false) : "No Content");
             }
 
             return response;
@@ -192,7 +192,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 {
                     MultipartFormDataContent content = new MultipartFormDataContent();
                     
-                    DiscordStreamContent json = await GetJsonContent(data);
+                    DiscordStreamContent json = await GetJsonContent(data).ConfigureAwait(false);
                     content.Add(json, "payload_json");
 
                     for (int index = 0; index < attachments.FileAttachments.Count; index++)
@@ -208,7 +208,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 }
                 else
                 {
-                    request.Content = await GetJsonContent(data);
+                    request.Content = await GetJsonContent(data).ConfigureAwait(false);
                 }
             }
 
@@ -218,11 +218,11 @@ namespace Oxide.Ext.Discord.Rest.Requests
         private async Task<DiscordStreamContent> GetJsonContent(object data)
         {
             _json = DiscordPool.Get<DiscordJsonWriter>();
-            await _json.WriteAsync(Request.Client.Bot.JsonSerializer, data);
+            await _json.WriteAsync(Request.Client.Bot.JsonSerializer, data).ConfigureAwait(false);
             
             if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))
             {
-                _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Creating JSON Body: {{0}}", await _json.ReadAsStringAsync());
+                _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Creating JSON Body: {{0}}", await _json.ReadAsStringAsync().ConfigureAwait(false));
             }
             
             DiscordStreamContent content = new DiscordStreamContent(_json.Stream);

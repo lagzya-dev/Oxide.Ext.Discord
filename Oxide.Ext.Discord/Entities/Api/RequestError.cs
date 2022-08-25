@@ -107,7 +107,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             if (request.Content != null)
             {
                 ContentType = request.Content.Headers.ContentType.ToString();
-                StringContents = await request.Content.ReadAsStringAsync();
+                StringContents = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
             }
             else
             {
@@ -142,7 +142,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             HttpStatusCode = code;
             using (StreamReader reader = new StreamReader(content, DiscordEncoding.Encoding, false, 1024, true))
             {
-                Message = await reader.ReadToEndAsync();
+                Message = await reader.ReadToEndAsync().ConfigureAwait(false);
                 if (!string.IsNullOrEmpty(Message) && Message.StartsWith("{"))
                 {
                     DiscordError = JsonConvert.DeserializeObject<RequestErrorMessage>(Message, _client.Bot.JsonSettings);

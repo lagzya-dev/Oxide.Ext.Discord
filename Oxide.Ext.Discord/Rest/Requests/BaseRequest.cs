@@ -90,7 +90,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             if (_errorResetAt > DateTimeOffset.UtcNow)
             {
                 _logger.Debug($"{nameof(BaseRequest)}.{nameof(WaitUntilRequestCanStart)} Request ID: {{0}} Can't Start Request Due to Previous Error Reset Waiting For: {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                await Task.Delay(_errorResetAt - DateTimeOffset.UtcNow, token);
+                await Task.Delay(_errorResetAt - DateTimeOffset.UtcNow, token).ConfigureAwait(false);
             }
         }
 
@@ -102,7 +102,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
             if (response.Status == RequestCompletedStatus.Success)
             {
-                await OnRequestSuccess(response);
+                await OnRequestSuccess(response).ConfigureAwait(false);
             }
             else if (response.Status != RequestCompletedStatus.Cancelled)
             {

@@ -115,7 +115,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 Handler.SocketState = SocketState.Disconnected;
             }
-            _reconnect.StartReconnect();
+            Task.Run(async () => await _reconnect.StartReconnect().ConfigureAwait(false));
         }
 
         /// <summary>
@@ -137,11 +137,11 @@ namespace Oxide.Ext.Discord.WebSockets
 
                 if (requested)
                 {
-                    await Handler.Disconnect(4199, "Discord Requested Reconnect");
+                    await Handler.Disconnect(4199, "Discord Requested Reconnect").ConfigureAwait(false);
                 }
                 else
                 {
-                    await Handler.Disconnect(WebSocketCloseStatus.NormalClosure, string.Empty);
+                    await Handler.Disconnect(WebSocketCloseStatus.NormalClosure, string.Empty).ConfigureAwait(false);
                 }
             }
 
@@ -191,7 +191,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private async Task SendImmediatelyAsync(GatewayCommandCode opCode, object data)
         {
             CommandPayload payload = CommandPayload.CreatePayload(opCode, data);
-            if (!await SendAsync(payload))
+            if (!await SendAsync(payload).ConfigureAwait(false))
             {
                 _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(SendImmediatelyAsync)} Failed to send command! {{0}}", opCode);
             }
@@ -206,15 +206,15 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             DiscordJsonWriter writer = DiscordPool.Get<DiscordJsonWriter>();
-            await writer.WriteAsync(_client.JsonSerializer, payload);
+            await writer.WriteAsync(_client.JsonSerializer, payload).ConfigureAwait(false);
             writer.Stream.Position = 0;
 
             if (_client.Logger.IsLogging(DiscordLogLevel.Verbose))
             {
-                _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, await writer.ReadAsStringAsync());
+                _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, await writer.ReadAsStringAsync().ConfigureAwait(false));
             }
             
-            bool sent = await Handler.SendAsync(writer.Stream);
+            bool sent = await Handler.SendAsync(writer.Stream).ConfigureAwait(false);
             writer.Dispose();
             return sent;
         }
@@ -228,7 +228,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Disconnect)} Attempting Reconnect");
                 ShouldReconnect = false;
-                _reconnect.StartReconnect();
+                Task.Run(() => _reconnect.StartReconnect());
             }
         }
 
@@ -267,11 +267,11 @@ namespace Oxide.Ext.Discord.WebSockets
             // Client should now perform identification
             if (ShouldResume && !string.IsNullOrEmpty(_sessionId))
             {
-                await Resume();
+                await Resume().ConfigureAwait(false);
             }
             else
             {
-                await Identify();
+                await Identify().ConfigureAwait(false);
             }
             
             _heartbeat.SetupHeartbeat(hello.HeartbeatInterval);
@@ -301,7 +301,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 Shard = Gateway.Shard
             };
 
-            await SendImmediatelyAsync(GatewayCommandCode.Identify, identify);
+            await SendImmediatelyAsync(GatewayCommandCode.Identify, identify).ConfigureAwait(false);
         }
         
         /// <summary>
@@ -323,7 +323,7 @@ namespace Oxide.Ext.Discord.WebSockets
             
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Resume)} Attempting to resume session with ID: {{0}} Sequence: {{1}}", _sessionId, _sequence);
 
-            await SendImmediatelyAsync(GatewayCommandCode.Resume, resume);
+            await SendImmediatelyAsync(GatewayCommandCode.Resume, resume).ConfigureAwait(false);
         }
         
         internal void OnHeartbeatAcknowledge()

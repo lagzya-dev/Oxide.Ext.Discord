@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             if (OnSuccess != null)
             {
                 ApiSuccessCallback<T> callback = DiscordPool.Get<ApiSuccessCallback<T>>();
-                await callback.Init(this, response);
+                await callback.Init(this, response).ConfigureAwait(false);
                 callback.Run();
             }
         }

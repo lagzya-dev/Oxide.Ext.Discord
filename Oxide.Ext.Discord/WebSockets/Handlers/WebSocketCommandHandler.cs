@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             try
             {
-                await SendCommandsInternal();
+                await SendCommandsInternal().ConfigureAwait(false);
             }
             catch (TaskCanceledException) { }
             catch (OperationCanceledException) { }
@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                         DateTimeOffset reset = _rateLimit.NextReset();
                         if (reset > DateTimeOffset.UtcNow)
                         {
-                            await Task.Delay(reset - DateTimeOffset.UtcNow, _token);
+                            await Task.Delay(reset - DateTimeOffset.UtcNow, _token).ConfigureAwait(false);
                         }
                     
                         continue;
@@ -104,7 +104,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
                     _rateLimit.FiredRequest(command);
                     
-                    if (await _webSocket.SendAsync(command.Payload))
+                    if (await _webSocket.SendAsync(command.Payload).ConfigureAwait(false))
                     {
                         RemoveCommand(command);
                     }
@@ -117,7 +117,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                         RemoveCommand(command);
                     }
                     
-                    await Task.Delay(1000, _token);
+                    await Task.Delay(1000, _token).ConfigureAwait(false);
                 }
                 finally
                 {

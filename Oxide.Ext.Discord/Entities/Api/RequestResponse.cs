@@ -35,12 +35,12 @@ namespace Oxide.Ext.Discord.Entities.Api
             if (response != null)
             {
                 Code = (int)response.StatusCode;
-                Content = await response.Content.ReadAsStreamAsync();
+                Content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
                 RateLimit = DiscordPool.Get<RateLimitResponse>();
                 RateLimit.Init(response.Headers, _client.Logger);
                 if (error != null)
                 {
-                    await error.SetResponseData((int)response.StatusCode, Content);
+                    await error.SetResponseData((int)response.StatusCode, Content).ConfigureAwait(false);
                 }
             }
         }
@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         public static async Task<RequestResponse> CreateSuccessResponse(DiscordClient client, HttpResponseMessage httpResponse)
         {
             RequestResponse response = DiscordPool.Get<RequestResponse>();
-            await response.Init(client, httpResponse, RequestCompletedStatus.Success);
+            await response.Init(client, httpResponse, RequestCompletedStatus.Success).ConfigureAwait(false);
             return response;
         }
 
@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         public static async Task<RequestResponse> CreateExceptionResponse(DiscordClient client, RequestError error, HttpResponseMessage httpResponse, RequestCompletedStatus status)
         {
             RequestResponse response = DiscordPool.Get<RequestResponse>();
-            await response.Init(client, httpResponse, status, error);
+            await response.Init(client, httpResponse, status, error).ConfigureAwait(false);
             return response;
         }
         
@@ -81,7 +81,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         public static async Task<RequestResponse> CreateCancelledResponse(DiscordClient client)
         {
             RequestResponse response = DiscordPool.Get<RequestResponse>();
-            await response.Init(client, null, RequestCompletedStatus.Cancelled);
+            await response.Init(client, null, RequestCompletedStatus.Cancelled).ConfigureAwait(false);
             return response;
         }
 

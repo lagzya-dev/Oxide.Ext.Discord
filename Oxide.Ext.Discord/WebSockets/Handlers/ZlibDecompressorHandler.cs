@@ -45,26 +45,26 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 {
                     if (array[0] == ZlibPrefix)
                     {
-                        await input.WriteAsync(array, bytes.Offset + 2, bytes.Count - 2, token);
+                        await input.WriteAsync(array, bytes.Offset + 2, bytes.Count - 2, token).ConfigureAwait(false);
                     }
                     else
                     {
-                        await input.WriteAsync(array, bytes.Offset, bytes.Count, token);
+                        await input.WriteAsync(array, bytes.Offset, bytes.Count, token).ConfigureAwait(false);
                     }
 
-                    await input.FlushAsync(token);
+                    await input.FlushAsync(token).ConfigureAwait(false);
                     input.Position = 0;
 
                     using (DeflateStream zlib = new DeflateStream(input, CompressionMode.Decompress, true))
                     {
                         using (MemoryStream output = new MemoryStream())
                         {
-                            await zlib.CopyToAsync(output);
+                            await zlib.CopyToAsync(output).ConfigureAwait(false);
                             output.Position = 0;
 
                             using (StreamReader reader = new StreamReader(output, _encoding))
                             {
-                                string message = await reader.ReadToEndAsync();
+                                string message = await reader.ReadToEndAsync().ConfigureAwait(false);
 
                                 _logger.Debug($"Processed Message: String Length: {message.Length} Output Length: {output.Length}");
 

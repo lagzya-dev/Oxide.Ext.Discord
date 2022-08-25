@@ -58,17 +58,17 @@ namespace Oxide.Ext.Discord.Callbacks.Async
             
                 _logger.Debug("Waiting for bucket availability Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
                 
-                await semaphore.WaitOneAsync();
+                await semaphore.WaitOneAsync().ConfigureAwait(false);
                 if (bucketId != _bucket.Id)
                 {
                     _logger.Debug("Bucket ID Changed. Waiting for bucket availability again for ID: {0} Old Bucket ID: {1} New Bucket ID: {2}", _request.Id, bucketId, _bucket.Id);
                     semaphore.Release();
                     semaphore = _bucket.Semaphore;
-                    await semaphore.WaitOneAsync();
+                    await semaphore.WaitOneAsync().ConfigureAwait(false);
                 }
 
                 _logger.Debug("Request callback started for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
-                await _handler.Run();
+                await _handler.Run().ConfigureAwait(false);
                 _logger.Debug("Request callback completed successfully for Bucket ID: {0} Request ID: {1}", _bucket.Id, _request.Id);
             }
             catch (Exception ex)

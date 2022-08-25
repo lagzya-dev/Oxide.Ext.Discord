@@ -41,7 +41,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         {
             try
             {
-                await HandleCallback();
+                await HandleCallback().ConfigureAwait(false);
             }
             catch (Exception ex)
             {

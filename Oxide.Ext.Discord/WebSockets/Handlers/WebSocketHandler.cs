@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private async void RunInternal(object url)
         {
-            await RunWebsocket((string)url);
+            await RunWebsocket((string)url).ConfigureAwait(false);
         }
         
         private async Task RunWebsocket(string url)
@@ -85,11 +85,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             try
             {
                 _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Connect)} Connecting Websocket To: {{0}}", url);
-                await _socket.ConnectAsync(new Uri(url), _token);
+                await _socket.ConnectAsync(new Uri(url), _token).ConfigureAwait(false);
                 SocketState = SocketState.Connected;
-                await _handler.SocketOpened(id);
+                await _handler.SocketOpened(id).ConfigureAwait(false);
                 _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Connect)} Websocket Connected To: {{0}}", url);
-                await ReceiveHandler();
+                await ReceiveHandler().ConfigureAwait(false);
                 if (IsConnected())
                 {
                     SocketState = SocketState.Disconnecting;
@@ -105,17 +105,17 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _logger.Debug("Disconnected Socket Because: {0} Error Code: {1} HResult:{2}\n{3}", ex.WebSocketErrorCode, ex.ErrorCode, ex.HResult, ex);
                 if (ex.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
                 {
-                    await _handler.SocketClosed(id, 1000, string.Empty);
+                    await _handler.SocketClosed(id, 1000, string.Empty).ConfigureAwait(false);
                 }
                 else
                 {
-                    await _handler.SocketErrored(id, ex);
+                    await _handler.SocketErrored(id, ex).ConfigureAwait(false);
                 }
             }
             catch (Exception ex)
             {
                 DisposeSocket();
-                await _handler.SocketErrored(id, ex);
+                await _handler.SocketErrored(id, ex).ConfigureAwait(false);
                 _logger.Exception("A Unhandled Websocket Error Occured", ex);
             }
         }
@@ -133,20 +133,20 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ReceiveHandler)} Start Receive");
             while (!token.IsCancellationRequested && (socket.State == WebSocketState.Open || socket.State == WebSocketState.CloseSent))
             {
-                WebSocketReceiveResult result = await socket.ReceiveAsync(_receiveBuffer, _token);
+                WebSocketReceiveResult result = await socket.ReceiveAsync(_receiveBuffer, _token).ConfigureAwait(false);
                 if (token.IsCancellationRequested)
                 {
                     return;
                 }
 
-                await input.WriteAsync(array, 0, result.Count, _token);
+                await input.WriteAsync(array, 0, result.Count, _token).ConfigureAwait(false);
 
                 if (result.EndOfMessage)
                 {
                     try
                     {
                         input.Position = 0;
-                        await ProcessReceivedMessage(id, result, reader);
+                        await ProcessReceivedMessage(id, result, reader).ConfigureAwait(false);
                     }
                     catch (Exception ex)
                     {
@@ -172,8 +172,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     SocketState = SocketState.Disconnecting;
                     string message = await reader.ReadAsStringAsync().ConfigureAwait(false);
                     _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Close Code: {{0}} Message: {{1}}", closeCode, message);
-                    await _socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, string.Empty, _token);
-                    await _handler.SocketClosed(id, closeCode, message);
+                    await _socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, string.Empty, _token).ConfigureAwait(false);
+                    await _handler.SocketClosed(id, closeCode, message).ConfigureAwait(false);
                     SocketState = SocketState.Disconnected;
                 }
 
@@ -181,7 +181,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
 
             //_logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Message: {{0}}", message);
-            await _handler.SocketMessage(id, reader);
+            await _handler.SocketMessage(id, reader).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _sendLock.WaitOne();
             try
             {
-                return await SendInternalAsync(stream);
+                return await SendInternalAsync(stream).ConfigureAwait(false);
             }
             finally
             {
@@ -212,11 +212,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             int readIndex = 0;
             while (!_source.IsCancellationRequested)
             {
-                int read = await stream.ReadAsync(_sendBuffer, 0, _sendBuffer.Length, _token);
+                int read = await stream.ReadAsync(_sendBuffer, 0, _sendBuffer.Length, _token).ConfigureAwait(false);
                 readIndex += read;
                 bool endOfMessage = readIndex == stream.Length;
                 //_logger.Debug($"{nameof(WebSocketHandler)}.{nameof(SendInternalAsync)} Sending Message Amount: {{0}} ({{1}}/{{2}}) Message: {{3}} - {{4}} End Of Message: {{5}}", read, readIndex, stream.Length, g, g.Length, endOfMessage);
-                await _socket.SendAsync(new ArraySegment<byte>(_sendBuffer, 0, read), WebSocketMessageType.Text, endOfMessage, _token);
+                await _socket.SendAsync(new ArraySegment<byte>(_sendBuffer, 0, read), WebSocketMessageType.Text, endOfMessage, _token).ConfigureAwait(false);
                 if (endOfMessage)
                 {
                     return true;
@@ -251,8 +251,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 {
                     Snowflake id = WebsocketId;
                     SocketState = SocketState.Disconnecting;
-                    await _socket.CloseAsync(status, reason, _token);
-                    await _handler.SocketClosed(id, (int)status, reason);
+                    await _socket.CloseAsync(status, reason, _token).ConfigureAwait(false);
+                    await _handler.SocketClosed(id, (int)status, reason).ConfigureAwait(false);
                     DisposeSocket();
                 }
             }

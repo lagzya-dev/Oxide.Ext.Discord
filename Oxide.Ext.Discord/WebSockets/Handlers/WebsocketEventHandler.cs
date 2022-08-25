@@ -232,14 +232,14 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="reader">Json Reader containing the message</param>
         public async Task SocketMessage(Snowflake webSocketId, DiscordJsonReader reader)
         {
-            EventPayload payload = await reader.DeserializeAsync<EventPayload>(_client.JsonSerializer);
+            EventPayload payload = await reader.DeserializeAsync<EventPayload>(_client.JsonSerializer).ConfigureAwait(false);
             //await reader.PopulateAsync(_client, payload);
             //JsonConvert.PopulateObject(message, payload, _client.ClientSerializerSettings);
             _webSocket.OnSequenceUpdate(payload.Sequence);
 
             if (_logger.IsLogging(DiscordLogLevel.Verbose))
             {
-                _logger.Verbose("Received socket message, OpCode: {0} Payload: {1}", payload.OpCode, await reader.ReadAsStringAsync());
+                _logger.Verbose("Received socket message, OpCode: {0} Payload: {1}", payload.OpCode, await reader.ReadAsStringAsync().ConfigureAwait(false));
             }
             else
             {
@@ -252,13 +252,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 {
                     // Dispatch (dispatches an event)
                     case GatewayEventCode.Dispatch:
-                        await HandleDispatch(payload);
+                        await HandleDispatch(payload).ConfigureAwait(false);
                         break;
 
                     // Heartbeat
                     // https://discord.com/developers/docs/topics/gateway#gateway-heartbeat
                     case GatewayEventCode.Heartbeat:
-                        await HandleHeartbeat();
+                        await HandleHeartbeat().ConfigureAwait(false);
                         break;
 
                     // Reconnect (used to tell clients to reconnect to the gateway)
@@ -274,7 +274,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
                     // Hello (sent immediately after connecting, contains heartbeat and server debug information)
                     case GatewayEventCode.Hello:
-                        await HandleHello(payload.GetData<GatewayHelloEvent>());
+                        await HandleHello(payload.GetData<GatewayHelloEvent>()).ConfigureAwait(false);
                         break;
 
                     // Heartbeat ACK (sent immediately following a client heartbeat
@@ -329,7 +329,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     break;
 
                 case DiscordDispatchCode.GuildCreated:
-                    await HandleDispatchGuildCreate(payload.GetData<DiscordGuild>());
+                    await HandleDispatchGuildCreate(payload.GetData<DiscordGuild>()).ConfigureAwait(false);
                     break;
 
                 case DiscordDispatchCode.GuildUpdated:
@@ -693,7 +693,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 if (!existing.HasLoadedAllMembers)
                 {
                     //Request all guild members so we can be sure we have them all.
-                    await _webSocket.RequestAllGuildMembers(guild.Id);
+                    await _webSocket.RequestAllGuildMembers(guild.Id).ConfigureAwait(false);
                     _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildCreate)} Guild is now requesting all guild members.");
                 }
             }
