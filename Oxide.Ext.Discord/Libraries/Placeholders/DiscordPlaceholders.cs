@@ -39,6 +39,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             TimestampPlaceholders.RegisterPlaceholders(this);
             UserPlaceholders.RegisterPlaceholders(this);
             ApplicationCommandPlaceholders.RegisterPlaceholders(this);
+            RequestErrorPlaceholders.RegisterPlaceholders(this);
         }
         
         /// <summary>

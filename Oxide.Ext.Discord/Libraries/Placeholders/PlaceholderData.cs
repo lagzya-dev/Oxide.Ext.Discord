@@ -1,7 +1,9 @@
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Plugins;
@@ -13,7 +15,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     /// </summary>
     public class PlaceholderData
     {
-        private readonly Hash<string, object> _objects = new Hash<string, object>();
+        private readonly Hash<string, object> _data = new Hash<string, object>();
         internal const string TimestampName = "Timestamp";
         internal bool ShouldPool = true;
 
@@ -21,37 +23,30 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
 
         internal void AddServer(IServer server)
         {
-            if (server != null)
-            {
-                _objects[nameof(IServer)] = server;
-            }
+            Add(server);
         }
         
+        /// <summary>
+        /// Add a <see cref="DiscordApplicationCommand"/>
+        /// </summary>
+        /// <param name="command">Application Command to add</param>
+        /// <returns>This</returns>
+        public PlaceholderData AddCommand(DiscordApplicationCommand command) => Add(command);
+
         /// <summary>
         /// Add a <see cref="DiscordGuild"/> by <see cref="DiscordClient"/> and GuildId
         /// </summary>
         /// <param name="client">Discord Client for the guild</param>
         /// <param name="guildId">Guild ID of the guild</param>
         /// <returns>This</returns>
-        public PlaceholderData AddGuild(DiscordClient client, Snowflake? guildId)
-        {
-            return AddGuild(client.Bot?.GetGuild(guildId));
-        }
-        
+        public PlaceholderData AddGuild(DiscordClient client, Snowflake? guildId) => AddGuild(client.Bot?.GetGuild(guildId));
+
         /// <summary>
         /// Add a <see cref="DiscordGuild"/>
         /// </summary>
         /// <param name="guild">Guild to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddGuild(DiscordGuild guild)
-        {
-            if (guild != null)
-            {
-                _objects[nameof(DiscordGuild)] = guild;
-            }
-            
-            return this;
-        }
+        public PlaceholderData AddGuild(DiscordGuild guild) => Add(guild);
 
         /// <summary>
         /// Add a <see cref="GuildMember"/> by <see cref="DiscordClient"/>, GuildId, and UserId
@@ -60,11 +55,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="guildId">Guild ID for the guild</param>
         /// <param name="memberId">Member UserId in the guild</param>
         /// <returns>This</returns>
-        public PlaceholderData AddGuildMember(DiscordClient client, Snowflake guildId, Snowflake memberId)
-        {
-            return AddGuildMember(client.Bot?.GetGuild(guildId).Members[memberId]);
-        } 
-        
+        public PlaceholderData AddGuildMember(DiscordClient client, Snowflake guildId, Snowflake memberId) => AddGuildMember(client.Bot?.GetGuild(guildId).Members[memberId]);
+
         /// <summary>
         /// Add a <see cref="GuildMember"/>
         /// </summary>
@@ -72,13 +64,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns></returns>
         public PlaceholderData AddGuildMember(GuildMember member)
         {
-            if (member != null)
-            {
-                _objects[nameof(GuildMember)] = member;
-                AddDiscordUser(member.User);
-            }
-            
-            return this;
+            AddUser(member?.User);
+            return Add(member);
         }
 
         /// <summary>
@@ -86,15 +73,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="user">User to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddDiscordUser(DiscordUser user)
+        public PlaceholderData AddUser(DiscordUser user)
         {
-            if (user != null)
-            {
-                _objects[nameof(DiscordUser)] = user;
-                AddPlayer(user.Player);
-            }
-            
-            return this;
+            AddPlayer(user?.Player);
+            return Add(user);
         }
 
         /// <summary>
@@ -104,26 +86,15 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="guildId">Guild ID of the guild</param>
         /// <param name="roleId">Role ID of the role</param>
         /// <returns>This</returns>
-        public PlaceholderData AddDiscordRole(DiscordClient client, Snowflake guildId, Snowflake roleId)
-        {
-            return AddDiscordRole(client.Bot?.GetGuild(guildId)?.Roles[roleId]);
-        }
-        
+        public PlaceholderData AddRole(DiscordClient client, Snowflake guildId, Snowflake roleId) => AddRole(client.Bot?.GetGuild(guildId)?.Roles[roleId]);
+
         /// <summary>
         /// Adds a <see cref="DiscordRole"/>
         /// </summary>
         /// <param name="role">Role to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddDiscordRole(DiscordRole role)
-        {
-            if (role != null)
-            {
-                _objects[nameof(DiscordRole)] = role;
-            }
-            
-            return this;
-        }
-        
+        public PlaceholderData AddRole(DiscordRole role) => Add(role);
+
         /// <summary>
         /// Adds a <see cref="DiscordChannel"/> by <see cref="DiscordClient"/>, ChannelId, and Optional GuildId
         /// </summary>
@@ -131,62 +102,43 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="channelId">Channel ID of the channel</param>
         /// <param name="guildId">Guild ID of the channel if channel is in a guild</param>
         /// <returns>This</returns>
-        public PlaceholderData AddDiscordChannel(DiscordClient client, Snowflake channelId, Snowflake? guildId = null)
-        {
-            return AddDiscordChannel(client.Bot?.GetChannel(channelId, guildId));
-        }
+        public PlaceholderData AddChannel(DiscordClient client, Snowflake channelId, Snowflake? guildId = null) => AddChannel(client.Bot?.GetChannel(channelId, guildId));
 
         /// <summary>
         /// Adds a <see cref="DiscordChannel"/>
         /// </summary>
         /// <param name="channel">Channel to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddDiscordChannel(DiscordChannel channel)
-        {
-            if (channel != null)
-            {
-                _objects[nameof(DiscordChannel)] = channel;
-            }
-            
-            return this;
-        }
-        
+        public PlaceholderData AddChannel(DiscordChannel channel) => Add(channel);
+
         /// <summary>
         /// Adds a <see cref="IPlayer"/>
         /// </summary>
         /// <param name="player">player to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddPlayer(IPlayer player)
-        {
-            if (player != null)
-            {
-                _objects[nameof(IPlayer)] = player;
-            }
-            
-            return this;
-        }
+        public PlaceholderData AddPlayer(IPlayer player) => Add(player);
 
         /// <summary>
         /// Adds a Unix Timestamp
         /// </summary>
         /// <param name="timestamp">Unix timestamp</param>
         /// <returns>This</returns>
-        public PlaceholderData AddTimestamp(ulong timestamp)
-        {
-            _objects[TimestampName] = timestamp;
-            return this;
-        }
-        
+        public PlaceholderData AddTimestamp(ulong timestamp) => Add(TimestampName, timestamp);
+
+        /// <summary>
+        /// Add a <see cref="RequestError"/>
+        /// </summary>
+        /// <param name="error">RequestError to add</param>
+        /// <returns>This</returns>
+        public PlaceholderData AddRequestError(RequestError error) => Add(error);
+
         /// <summary>
         /// Adds type {T} to the placeholder. Type name is used as the data key
         /// </summary>
         /// <param name="obj">Object to add</param>
         /// <typeparam name="T">Type of the data</typeparam>
         /// <returns>This</returns>
-        public PlaceholderData Add<T>(T obj)
-        {
-            return Add(typeof(T).Name, obj);
-        }
+        public PlaceholderData Add<T>(T obj) where T : class => obj != null ? Add(nameof(T), obj) : this;
 
         /// <summary>
         /// Adds the data with the given name
@@ -197,7 +149,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData Add<T>(string name, T obj)
         {
-            _objects[name] = obj;
+            _data[name] = obj;
             return this;
         }
 
@@ -210,7 +162,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>{T}</returns>
         public T Get<T>(string name)
         {
-            if (_objects.TryGetValue(name, out object obj))
+            if (_data.TryGetValue(name, out object obj))
             {
                 return (T)obj;
             }
