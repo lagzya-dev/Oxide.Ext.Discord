@@ -104,7 +104,7 @@ namespace Oxide.Ext.Discord
                 GlobalLogger.Exception("An unhandled exception was thrown!", exception?.ExceptionObject as System.Exception);
             };
             
-            DiscordUsersData.Load();
+            DiscordUserData.Load();
 
             DiscordAppCommand = new DiscordAppCommand(GlobalLogger);
             DiscordLink = new DiscordLink(GlobalLogger);
@@ -139,7 +139,7 @@ namespace Oxide.Ext.Discord
 
             GlobalLogger.Debug("Disconnected all clients - server shutdown.");
             
-            DiscordUsersData.Instance.Save(true);
+            DiscordUserData.Instance.Save(true);
             DiscordLogger.FileLogger.OnServerShutdown();
         }
     }

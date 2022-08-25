@@ -359,7 +359,7 @@ namespace Oxide.Ext.Discord
             if (_readyData == null)
             {
                 Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ready);
-                if (DiscordUsersData.Instance.Bots.TryGetValue(ready.User.Id, out BotData botData))
+                if (DiscordUserData.Instance.Bots.TryGetValue(ready.User.Id, out BotData botData))
                 {
                     foreach (UserData userData in botData.Users.Values)
                     {
@@ -503,7 +503,7 @@ namespace Oxide.Ext.Discord
             Logger.Verbose($"{nameof(BotClient)}.{nameof(AddDirectChannel)} Adding New Channel {{0}}", channel.Id);
             DirectMessagesByChannelId[channel.Id] = channel;
 
-            BotData data = DiscordUsersData.Instance.GetBotData(BotUser.Id);
+            BotData data = DiscordUserData.Instance.GetBotData(BotUser.Id);
 
             foreach (DiscordUser recipient in channel.Recipients.Values)
             {
@@ -516,7 +516,7 @@ namespace Oxide.Ext.Discord
                     if (userData.DmChannelId != channel.Id)
                     {
                         userData.DmChannelId = channel.Id;
-                        DiscordUsersData.Instance.OnDataChanged();
+                        DiscordUserData.Instance.OnDataChanged();
                     }
                 }
             }

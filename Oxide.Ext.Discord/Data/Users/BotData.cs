@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Data.Users
             {
                 data = new UserData(userId);
                 Users[userId] = data;
-                DiscordUsersData.Instance.OnDataChanged();
+                DiscordUserData.Instance.OnDataChanged();
             }
 
             return data;

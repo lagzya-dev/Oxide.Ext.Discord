@@ -5,7 +5,7 @@ using ProtoBuf;
 namespace Oxide.Ext.Discord.Data.Users
 {
     [ProtoContract]
-    internal class DiscordUsersData : BaseDataFile<DiscordUsersData>
+    internal class DiscordUserData : BaseDataFile<DiscordUserData>
     {
         [ProtoMember(1)]
         public Dictionary<Snowflake, BotData> Bots { get; set; } = new Dictionary<Snowflake, BotData>();
