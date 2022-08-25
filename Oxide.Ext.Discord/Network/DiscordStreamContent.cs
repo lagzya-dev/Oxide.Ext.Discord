@@ -13,14 +13,14 @@ namespace Oxide.Ext.Discord.Network
     /// </summary>
     public class DiscordStreamContent : HttpContent
     {
-        private readonly Stream _content;
+        private readonly MemoryStream _content;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="content">Stream content to send over HTTP</param>
         /// <exception cref="ArgumentNullException">Throws if content is null</exception>
-        public DiscordStreamContent(Stream content)
+        public DiscordStreamContent(MemoryStream content)
         {
             _content = content ?? throw new ArgumentNullException(nameof(content));
         }
@@ -40,6 +40,6 @@ namespace Oxide.Ext.Discord.Network
         }
 
         ///<inheritdoc/>
-        protected override Task<Stream> CreateContentReadStreamAsync() => Task.FromResult(_content);
+        protected override Task<Stream> CreateContentReadStreamAsync() => Task.FromResult<Stream>(_content);
     }
 }

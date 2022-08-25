@@ -1,11 +1,10 @@
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
-using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
@@ -201,7 +200,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 
                         ByteArrayContent file = new ByteArrayContent(fileAttachment.Data);
                         content.Add(file, $"files[{(index + 1).ToString()}]", fileAttachment.FileName);
-                        file.Headers.ContentType = new MediaTypeHeaderValue(fileAttachment.ContentType);
+                        file.Headers.ContentType = MediaTypeHeaderCache.Get(fileAttachment.ContentType);
                     }
 
                     request.Content = content;
@@ -226,9 +225,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
             
             DiscordStreamContent content = new DiscordStreamContent(_json.Stream);
-            MediaTypeHeaderValue header = MediaTypeHeaderValue.Parse("application/json");
-            header.CharSet = DiscordEncoding.Encoding.WebName;
-            content.Headers.ContentType = header;
+            content.Headers.ContentType = MediaTypeHeaderCache.Get("application/json");
             return content;
         }
 
