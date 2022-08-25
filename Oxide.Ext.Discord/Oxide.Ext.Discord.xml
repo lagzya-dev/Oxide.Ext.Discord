@@ -668,11 +668,6 @@
             Builds a new DiscordEmbed
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.Blank">
-            <summary>
-            Represents a blank character to be used in embeds for empty text
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddTitle(System.String)">
             <summary>
             Adds a title to the embed message
@@ -12809,6 +12804,11 @@
             Represents <a href="https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure">Embed Field Structure</a>
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField.Blank">
+            <summary>
+            Represents a blank character to be used in embeds for empty text
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField.Name">
             <summary>
             Name of the field
@@ -17584,7 +17584,7 @@
             </summary>
             <returns><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder(Oxide.Core.Plugins.Plugin,System.String,System.Action{System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder(Oxide.Core.Plugins.Plugin,System.String,System.Action{System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState})">
             <summary>
             Registers a placeholder
             </summary>
@@ -17602,7 +17602,7 @@
             <param name="value">Static string value</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``1(Oxide.Core.Plugins.Plugin,System.String,System.Action{System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,``0})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``1(Oxide.Core.Plugins.Plugin,System.String,System.Action{System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,``0})">
             <summary>
             Registers a placeholder of type {T}
             </summary>
@@ -17612,7 +17612,7 @@
             <typeparam name="T">Type of the data key</typeparam>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``1(Oxide.Core.Plugins.Plugin,System.String,System.String,System.Action{System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,``0})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``1(Oxide.Core.Plugins.Plugin,System.String,System.String,System.Action{System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,``0})">
             <summary>
             Registers a placeholder of type {T}
             </summary>
@@ -17712,6 +17712,13 @@
             <param name="player">player to add</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddPlugin(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Adds a <see cref="T:Oxide.Core.Plugins.Plugin"/>
+            </summary>
+            <param name="plugin">Plugin to add</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTimestamp(System.UInt64)">
             <summary>
             Adds a Unix Timestamp
@@ -17743,6 +17750,14 @@
             <typeparam name="T">Type of the data</typeparam>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Get``1">
+            <summary>
+            Returns the object with the given type of {T}
+            The key name used is <code>nameof(T)</code>
+            </summary>
+            <typeparam name="T">Type to return</typeparam>
+            <returns>{T}</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Get``1(System.String)">
             <summary>
             Returns the object with the given type of T
@@ -17762,12 +17777,12 @@
             Formatting Helpers for Placeholders
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.String)">
             <summary>
-            Replace the <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch"/> with the the string value
+            Replace the <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState"/> with the the string value
             </summary>
             <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
-            <param name="match"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch"/> for the placeholder</param>
+            <param name="state"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState"/> for the placeholder</param>
             <param name="value">Placeholder value to replace</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,System.Text.RegularExpressions.Match,System.String)">
@@ -17778,54 +17793,65 @@
             <param name="match"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
             <param name="value">Placeholder value to replace</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Replace the <see cref="T:System.Text.RegularExpressions.Match"/> with the the string value
             </summary>
             <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
-            <param name="match"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
+            <param name="state"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
             <param name="value">Snowflake value to replace</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,System.IFormattable)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.IFormattable)">
             <summary>
             Replace the <see cref="T:System.Text.RegularExpressions.Match"/> with the the string value
             </summary>
             <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
-            <param name="match"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
+            <param name="state"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
             <param name="value"><see cref="T:System.IFormattable"/> value to use with formatting</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,Oxide.Core.Libraries.Covalence.GenericPosition)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.GenericPosition)">
             <summary>
-            Replace the <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch"/> with the formatted position
+            Replace the <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState"/> with the formatted position
             </summary>
             <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
-            <param name="placeholderMatch"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch"/> for the placeholder</param>
+            <param name="placeholderState"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState"/> for the placeholder</param>
             <param name="position"><see cref="T:Oxide.Core.Libraries.Covalence.GenericPosition"/> position to format and replace</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch">
+        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState">
             <summary>
-            Represents a match for a placeholder
+            Represents the current state for a matched placeholder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch.Name">
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.Data">
+            <summary>
+            Placeholder Data for the state
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.Name">
             <summary>
             Name of the placeholder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch.Format">
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.Format">
             <summary>
             Format specified in the placeholder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch.Index">
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.Index">
             <summary>
             Index in the string of the placeholder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch.Length">
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.Length">
             <summary>
             Length of the placeholder
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.DisposeInternal">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription">
             <summary>

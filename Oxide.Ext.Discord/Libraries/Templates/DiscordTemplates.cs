@@ -165,7 +165,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             
             if (template == null)
             {
-                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetGlobalMessageTemplate)} API but message name '{{1}}' is not registered", plugin.FullName(), name);
+                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetGlobalMessageTemplate)} API but message template name '{{1}}' is not registered", plugin.FullName(), name);
                 return new DiscordMessageTemplate();
             }
             
@@ -207,7 +207,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             
             if (template == null)
             {
-                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetLocalizedMessageTemplate)} API but message name '{{1}}' is not registered", plugin.FullName(), name);
+                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetLocalizedMessageTemplate)} API but message template name '{{1}}' is not registered", plugin.FullName(), name);
                 return new DiscordMessageTemplate();
             }
             
@@ -253,7 +253,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
             if (template == null)
             {
-                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetMessageTemplate)} API but message name '{{1}}' is not registered", plugin.FullName(), name);
+                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetMessageTemplate)} API but message template name '{{1}}' is not registered", plugin.FullName(), name);
                 return new DiscordMessageTemplate();
             }
 
@@ -270,7 +270,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 return null;
             }
 
-            using (FileStream stream = new FileStream(path, FileMode.Open))
+            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
                 DiscordJsonReader reader = DiscordPool.Get<DiscordJsonReader>();
                 reader.CopyFrom(stream);

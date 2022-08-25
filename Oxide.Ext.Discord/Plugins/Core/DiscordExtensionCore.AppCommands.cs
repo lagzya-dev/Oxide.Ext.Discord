@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Plugins.Core.AppCommands;
 using Oxide.Ext.Discord.Plugins.Core.Templates;
 using Oxide.Plugins;
@@ -86,16 +87,16 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             command.Delete(client, () =>
             {
-                SendTemplateMessage(client, TemplateKeys.Commands.Delete.Success, interaction, DiscordExtension.DiscordPlaceholders.CreateData().AddCommand(command));
+                SendTemplateMessage(client, TemplateKeys.Commands.Delete.Success, interaction, GetPlaceholderData().AddCommand(command));
             }, error =>
             {
-                SendTemplateMessage(client, TemplateKeys.Commands.Delete.Errors.DeleteCommandError, interaction, DiscordExtension.DiscordPlaceholders.CreateData().AddCommand(command));
+                SendTemplateMessage(client, TemplateKeys.Commands.Delete.Errors.DeleteCommandError, interaction, GetPlaceholderData().AddCommand(command));
             });
         }
 
         public void DeleteGetError(DiscordClient client, DiscordInteraction interaction, RequestError error)
         {
-            SendTemplateMessage(client, TemplateKeys.Commands.Delete.Success, interaction, DiscordExtension.DiscordPlaceholders.CreateData().AddRequestError(error));
+            SendTemplateMessage(client, TemplateKeys.Commands.Delete.Success, interaction, GetPlaceholderData().AddRequestError(error));
         }
 
         [HookMethod(nameof(HandleDeleteApplicationAutoComplete))]
@@ -154,6 +155,11 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 _commandCache[bot.Application.Id] = cache;
                 callback.Invoke(cache);
             });
+        }
+
+        public PlaceholderData GetPlaceholderData()
+        {
+            return DiscordExtension.DiscordPlaceholders.CreateData().AddPlugin(this);
         }
     }
 }

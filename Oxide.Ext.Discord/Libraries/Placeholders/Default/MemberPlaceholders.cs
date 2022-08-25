@@ -3,11 +3,11 @@ using Oxide.Ext.Discord.Entities.Guilds;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    internal class MemberPlaceholders
+    internal static class MemberPlaceholders
     {
-        private static void Id(StringBuilder builder, PlaceholderMatch match, GuildMember member) => PlaceholderFormatting.Replace(builder, match, member.Id);
-        private static void Name(StringBuilder builder, PlaceholderMatch match, GuildMember member) => PlaceholderFormatting.Replace(builder, match, member.DisplayName);
-        private static void Mention(StringBuilder builder, PlaceholderMatch match, GuildMember member) => PlaceholderFormatting.Replace(builder, match, member.User.Mention);
+        private static void Id(StringBuilder builder, PlaceholderState state, GuildMember member) => PlaceholderFormatting.Replace(builder, state, member.Id);
+        private static void Name(StringBuilder builder, PlaceholderState state, GuildMember member) => PlaceholderFormatting.Replace(builder, state, member.DisplayName);
+        private static void Mention(StringBuilder builder, PlaceholderState state, GuildMember member) => PlaceholderFormatting.Replace(builder, state, member.User.Mention);
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {

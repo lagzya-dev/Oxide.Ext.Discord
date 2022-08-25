@@ -35,6 +35,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             ServerPlaceholders.RegisterPlaceholders(this);
             MemberPlaceholders.RegisterPlaceholders(this);
             PlayerPlaceholders.RegisterPlaceholders(this);
+            PluginPlaceholders.RegisterPlaceholders(this);
             RolePlaceholders.RegisterPlaceholders(this);
             TimestampPlaceholders.RegisterPlaceholders(this);
             UserPlaceholders.RegisterPlaceholders(this);
@@ -60,28 +61,30 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             {
                 StringBuilder builder = DiscordPool.GetStringBuilder();
                 builder.Append(text);
-                bool nonMatchedPlaceholder = false;
+                PlaceholderState state = PlaceholderState.Create(data);
+                bool hasNonMatchingPlaceholder = false;
                 for (int index = matches.Count - 1; index >= 0; index--)
                 {
                     Match match = matches[index];
-                    PlaceholderMatch placeholderMatch = new PlaceholderMatch(match);
-                    BasePlaceholder placeholder = _placeholders[placeholderMatch.Name];
+                    state.UpdateState(match);
+                    BasePlaceholder placeholder = _placeholders[state.Name];
                     if (placeholder == null)
                     {
-                        nonMatchedPlaceholder = true;
+                        hasNonMatchingPlaceholder = true;
                         continue;
                     }
 
-                    placeholder.Invoke(builder, placeholderMatch, data);
+                    placeholder.Invoke(builder, state);
                 }
 
-                if (nonMatchedPlaceholder)
+                if (hasNonMatchingPlaceholder)
                 {
-                    DiscordExtensionCore.Instance.GetReplacer()?.Invoke(data.Get<IPlayer>(nameof(IPlayer)), builder, true);
+                    DiscordExtensionCore.Instance.GetReplacer()?.Invoke(data.Get<IPlayer>(), builder, true);
                 }
 
                 text = builder.ToString();
                 DiscordPool.FreeStringBuilder(ref builder);
+                state.Dispose();
             }
 
             if (data.ShouldPool)
@@ -110,7 +113,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="placeholder">Placeholder string</param>
         /// <param name="callback">Callback Method for the placeholder</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public void RegisterPlaceholder(Plugin plugin, string placeholder, Action<StringBuilder, PlaceholderMatch> callback)
+        public void RegisterPlaceholder(Plugin plugin, string placeholder, Action<StringBuilder, PlaceholderState> callback)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
@@ -120,7 +123,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             BasePlaceholder existing = _placeholders[placeholder];
             if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("{0} Plugin has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
+                _logger.Warning("Plugin {0} has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
             }
             _placeholders[placeholder] = holder;
         }
@@ -142,7 +145,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             BasePlaceholder existing = _placeholders[placeholder];
             if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("{0} Plugin has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
+                _logger.Warning("Plugin {0} has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
             }
             _placeholders[placeholder] = holder;
         }
@@ -155,17 +158,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="callback">Callback Method for the placeholder</param>
         /// <typeparam name="T">Type of the data key</typeparam>
         /// <exception cref="ArgumentNullException"></exception>
-        public void RegisterPlaceholder<T>(Plugin plugin, string placeholder, Action<StringBuilder, PlaceholderMatch, T> callback)
+        public void RegisterPlaceholder<T>(Plugin plugin, string placeholder, Action<StringBuilder, PlaceholderState, T> callback)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (callback == null) throw new ArgumentNullException(nameof(callback));
             
-            Placeholder<T> holder = new Placeholder<T>(typeof(T).Name, plugin, callback);
+            Placeholder<T> holder = new Placeholder<T>(plugin, callback);
             BasePlaceholder existing = _placeholders[placeholder];
             if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("{0} Plugin has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
+                _logger.Warning("Plugin {0} has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
             }
             _placeholders[placeholder] = holder;
         }
@@ -179,7 +182,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="callback">Callback Method for the placeholder</param>
         /// <typeparam name="T">Type of the data key</typeparam>
         /// <exception cref="ArgumentNullException"></exception>
-        public void RegisterPlaceholder<T>(Plugin plugin, string placeholder, string dataKey, Action<StringBuilder, PlaceholderMatch, T> callback)
+        public void RegisterPlaceholder<T>(Plugin plugin, string placeholder, string dataKey, Action<StringBuilder, PlaceholderState, T> callback)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
             if (string.IsNullOrEmpty(dataKey)) throw new ArgumentNullException(nameof(dataKey));
@@ -190,12 +193,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             BasePlaceholder existing = _placeholders[placeholder];
             if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("{0} Plugin has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
+                _logger.Warning("Plugin {0} has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
             }
             _placeholders[placeholder] = holder;
         }
 
-        internal void RegisterInternalPlaceholder<T>(string placeholder, Action<StringBuilder, PlaceholderMatch, T> callback)
+        internal void RegisterInternalPlaceholder<T>(string placeholder, Action<StringBuilder, PlaceholderState, T> callback)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
             if (callback == null) throw new ArgumentNullException(nameof(callback));
@@ -205,7 +208,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             _internalPlaceholders[placeholder] = holder;
         }
         
-        internal void RegisterInternalPlaceholder<T>(string placeholder, string customDataKey, Action<StringBuilder, PlaceholderMatch, T> callback)
+        internal void RegisterInternalPlaceholder<T>(string placeholder, string customDataKey, Action<StringBuilder, PlaceholderState, T> callback)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
             if (string.IsNullOrEmpty(customDataKey)) throw new ArgumentNullException(nameof(customDataKey));

@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Logging
         {
             lock (_sync)
             {
-                _sb.Length = 0;
+                _sb.Clear();
                 _sb.Append("[Discord Extension] [");
                 _sb.Append(EnumCache<DiscordLogLevel>.ToString(level));
                 _sb.Append("]: ");

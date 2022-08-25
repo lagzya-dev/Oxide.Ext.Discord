@@ -1,4 +1,5 @@
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -119,6 +120,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         public PlaceholderData AddPlayer(IPlayer player) => Add(player);
 
         /// <summary>
+        /// Adds a <see cref="Plugin"/>
+        /// </summary>
+        /// <param name="plugin">Plugin to add</param>
+        /// <returns>This</returns>
+        public PlaceholderData AddPlugin(Plugin plugin) => Add(plugin);
+        
+        /// <summary>
         /// Adds a Unix Timestamp
         /// </summary>
         /// <param name="timestamp">Unix timestamp</param>
@@ -153,6 +161,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return this;
         }
 
+        /// <summary>
+        /// Returns the object with the given type of {T}
+        /// The key name used is <code>nameof(T)</code>
+        /// </summary>
+        /// <typeparam name="T">Type to return</typeparam>
+        /// <returns>{T}</returns>
+        public T Get<T>()
+        {
+            return Get<T>(nameof(T));
+        }
+        
         /// <summary>
         /// Returns the object with the given type of T
         /// If the object is not found the default(T) is returned

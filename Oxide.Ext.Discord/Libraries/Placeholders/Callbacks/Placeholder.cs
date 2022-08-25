@@ -6,18 +6,18 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
 {
     internal class Placeholder : BasePlaceholder
     {
-        private readonly Action<StringBuilder, PlaceholderMatch> _callback;
+        private readonly Action<StringBuilder, PlaceholderState> _callback;
         
-        public Placeholder(Plugin plugin, Action<StringBuilder, PlaceholderMatch> callback) : base(plugin) 
+        public Placeholder(Plugin plugin, Action<StringBuilder, PlaceholderState> callback) : base(plugin) 
         {
             _callback = callback;
         }
 
-        internal Placeholder(Action<StringBuilder, PlaceholderMatch> callback) : this(null, callback) {}
+        internal Placeholder(Action<StringBuilder, PlaceholderState> callback) : this(null, callback) {}
 
-        public override void Invoke(StringBuilder builder, PlaceholderMatch match, PlaceholderData data)
+        public override void Invoke(StringBuilder builder, PlaceholderState state)
         {
-            _callback.Invoke(builder, match);
+            _callback.Invoke(builder, state);
         }
     }
 }

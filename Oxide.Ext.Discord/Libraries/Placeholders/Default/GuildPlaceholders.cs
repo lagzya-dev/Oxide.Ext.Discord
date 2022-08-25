@@ -5,12 +5,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
     internal static class GuildPlaceholders
     {
-        private static void Id(StringBuilder builder, PlaceholderMatch match, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, match, guild.Id);
-        private static void Name(StringBuilder builder, PlaceholderMatch match, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, match, guild.Name);
-        private static void Description(StringBuilder builder, PlaceholderMatch match, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, match, guild.Description);
-        private static void Icon(StringBuilder builder, PlaceholderMatch match, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, match, guild.IconUrl);
-        private static void Banner(StringBuilder builder, PlaceholderMatch match, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, match, guild.BannerUrl);
-        private static void MemberCount(StringBuilder builder, PlaceholderMatch match, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, match, guild.Members.Count);
+        private static void Id(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.Id);
+        private static void Name(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.Name);
+        private static void Description(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.Description);
+        private static void Icon(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.IconUrl);
+        private static void Banner(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.BannerUrl);
+        private static void MemberCount(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.Members.Count);
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {

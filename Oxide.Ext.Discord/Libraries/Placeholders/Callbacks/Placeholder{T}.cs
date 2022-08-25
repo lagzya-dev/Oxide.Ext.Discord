@@ -7,28 +7,30 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
     internal class Placeholder<T> : BasePlaceholder
     {
         private readonly string _dataKey;
-        private readonly Action<StringBuilder, PlaceholderMatch, T> _callback;
+        private readonly Action<StringBuilder, PlaceholderState, T> _callback;
         
-        public Placeholder(string dataKey, Plugin plugin, Action<StringBuilder, PlaceholderMatch, T> callback) : base(plugin)
+        public Placeholder(Plugin plugin, Action<StringBuilder, PlaceholderState, T> callback) : this(nameof(T), plugin, callback) {}
+
+        public Placeholder(string dataKey, Plugin plugin, Action<StringBuilder, PlaceholderState, T> callback) : base(plugin)
         {
             _dataKey = dataKey;
             _callback = callback;
         }
 
-        internal Placeholder(string dataKey, Action<StringBuilder, PlaceholderMatch, T> callback) : this(dataKey, null, callback) {}
+        internal Placeholder(string dataKey, Action<StringBuilder, PlaceholderState, T> callback) : this(dataKey, null, callback) {}
 
-        public override void Invoke(StringBuilder builder, PlaceholderMatch match, PlaceholderData data)
+        public override void Invoke(StringBuilder builder, PlaceholderState state)
         {
-            T tData = data.Get<T>(_dataKey);
+            T tData = state.Data.Get<T>(_dataKey);
             if (tData != null)
             {
-                Invoke(builder, match, tData);
+                Invoke(builder, state, tData);
             }
         }
         
-        private void Invoke(StringBuilder builder, PlaceholderMatch match, T data)
+        private void Invoke(StringBuilder builder, PlaceholderState state, T data)
         {
-            _callback.Invoke(builder, match, data);
+            _callback.Invoke(builder, state, data);
         }
     }
 }

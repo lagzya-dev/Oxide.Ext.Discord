@@ -62,7 +62,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 message = new T();
             }
 
-            message.Content = ApplyPlaceholder(Content, data);
+            if (!string.IsNullOrEmpty(Content))
+            {
+                message.Content = ApplyPlaceholder(Content, data);
+            }
+
             if (Embeds != null && Embeds.Count != 0)
             {
                 message.Embeds = CreateEmbed(data);

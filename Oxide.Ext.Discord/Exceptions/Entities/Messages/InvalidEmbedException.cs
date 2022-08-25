@@ -47,21 +47,10 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Messages
                 throw new InvalidEmbedException("Embeds cannot have more than 25 fields");
             }
         }
-        
-        internal static void ThrowIfInvalidField(EmbedField field)
-        {
-            ThrowIfInvalidFieldName(field.Name);
-            ThrowIfInvalidFieldValue(field.Value);
-        }
-        
+
         internal static void ThrowIfInvalidFieldName(string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new InvalidEmbedException("Embed Field Name cannot be less than 1 character");
-            }
-            
-            if (name.Length > 256)
+            if (name != null && name.Length > 256)
             {
                 throw new InvalidEmbedException("Embed Field Name cannot be more than 256 characters");
             }
@@ -69,12 +58,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Messages
         
         internal static void ThrowIfInvalidFieldValue(string value)
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new InvalidEmbedException("Embed Field Value cannot be less than 1 character");
-            }
-            
-            if (value.Length > 1024)
+            if (value != null && value.Length > 1024)
             {
                 throw new InvalidEmbedException("Embed Field Value cannot be more than 1024 characters");
             }

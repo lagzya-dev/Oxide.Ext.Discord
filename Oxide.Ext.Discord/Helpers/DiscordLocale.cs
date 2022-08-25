@@ -31,8 +31,7 @@ namespace Oxide.Ext.Discord.Helpers
         private static readonly Hash<string, string> OxideToDiscord = new Hash<string, string>();
         private static readonly Hash<string, Hash<string, Hash<string, string>>> PluginLangCache = new Hash<string, Hash<string, Hash<string, string>>>();
         
-        private static Lang _lang;
-        private static Lang Lang => _lang ?? (_lang = Interface.Oxide.GetLibrary<Lang>());
+        private static readonly Lang Lang = Interface.Oxide.GetLibrary<Lang>();
 
         static DiscordLocale()
         {
@@ -112,7 +111,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// <returns>Locale for the given playerId</returns>
         public static string GetPlayerLanguage(string playerId)
         {
-            return _lang.GetLanguage(playerId);
+            return Lang.GetLanguage(playerId);
         }
 
         /// <summary>
@@ -176,9 +175,9 @@ namespace Oxide.Ext.Discord.Helpers
             // 4. Oxide Lang Language
             // 5. English
             string message = GetLanguageMessages(plugin, GetOxideLanguage(interaction.Locale))?[langKey]
-                             ?? (player != null ? GetLanguageMessages(plugin, _lang.GetLanguage(player.Id))?[langKey] : null)
+                             ?? (player != null ? GetLanguageMessages(plugin, Lang.GetLanguage(player.Id))?[langKey] : null)
                              ?? GetLanguageMessages(plugin, GetOxideLanguage(interaction.GuildLocale))?[langKey]
-                             ?? GetLanguageMessages(plugin, _lang.GetServerLanguage())?[langKey]
+                             ?? GetLanguageMessages(plugin, Lang.GetServerLanguage())?[langKey]
                              ?? GetLanguageMessages(plugin, DefaultOxideLanguage)?[langKey];
 
             return !string.IsNullOrEmpty(message) ? message : langKey;
@@ -226,7 +225,7 @@ namespace Oxide.Ext.Discord.Helpers
             {
                 langCache = new Hash<string, string>();
                 pluginCache[language] = langCache;
-                foreach (KeyValuePair<string, string> lang in _lang.GetMessages(language, plugin))
+                foreach (KeyValuePair<string, string> lang in Lang.GetMessages(language, plugin))
                 {
                     langCache[lang.Key] = lang.Value;
                 }

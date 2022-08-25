@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Pooling
         ///<inheritdoc/>
         protected override bool OnFreeItem(ref StringBuilder item)
         {
-            item.Length = 0;
+            item.Clear();
             return true;
         }
     }

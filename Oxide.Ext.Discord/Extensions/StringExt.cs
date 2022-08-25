@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.Extensions
                             argList.Add(arg);
                         }
 
-                        stringBuilder.Length = 0;
+                        stringBuilder.Clear();
                         inLongArg = false;
                     }
                     else
@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.Extensions
                         argList.Add(arg);
                     }
 
-                    stringBuilder.Length = 0;
+                    stringBuilder.Clear();
                 }
                 else
                 {

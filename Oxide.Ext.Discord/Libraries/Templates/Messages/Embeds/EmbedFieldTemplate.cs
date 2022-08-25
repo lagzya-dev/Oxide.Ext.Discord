@@ -13,13 +13,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// Title of the field
         /// </summary>
         [JsonProperty("Field Title")]
-        public string Name { get; set; } = DiscordEmbedBuilder.Blank;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Value of the field
         /// </summary>
         [JsonProperty("Field Value")]
-        public string Value { get; set; } = DiscordEmbedBuilder.Blank;
+        public string Value { get; set; } = string.Empty;
 
         /// <summary>
         /// Should the field be on the same row

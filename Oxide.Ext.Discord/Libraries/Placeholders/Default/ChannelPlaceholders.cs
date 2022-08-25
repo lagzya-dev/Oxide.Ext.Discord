@@ -3,13 +3,13 @@ using Oxide.Ext.Discord.Entities.Channels;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    internal class ChannelPlaceholders
+    internal static class ChannelPlaceholders
     {
-        private static void Id(StringBuilder builder, PlaceholderMatch match, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, match, channel.Id);
-        private static void Name(StringBuilder builder, PlaceholderMatch match, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, match, channel.Name);
-        private static void Icon(StringBuilder builder, PlaceholderMatch match, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, match, channel.IconUrl);
-        private static void Topic(StringBuilder builder, PlaceholderMatch match, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, match, channel.Topic);
-        private static void Mention(StringBuilder builder, PlaceholderMatch match, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, match, channel.Mention);
+        private static void Id(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Id);
+        private static void Name(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Name);
+        private static void Icon(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.IconUrl);
+        private static void Topic(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Topic);
+        private static void Mention(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Mention);
 
         public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
         {

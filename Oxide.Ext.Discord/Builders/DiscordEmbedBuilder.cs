@@ -13,12 +13,7 @@ namespace Oxide.Ext.Discord.Builders
     public class DiscordEmbedBuilder
     {
         private readonly DiscordEmbed _embed = new DiscordEmbed();
-        
-        /// <summary>
-        /// Represents a blank character to be used in embeds for empty text
-        /// </summary>
-        public const string Blank = "\u200b";
-        
+
         /// <summary>
         /// Adds a title to the embed message
         /// </summary>
@@ -202,7 +197,7 @@ namespace Oxide.Ext.Discord.Builders
         /// <returns>This</returns>
         public DiscordEmbedBuilder AddBlankField(bool inline)
         {
-            return AddField(Blank, Blank, inline);
+            return AddField(null, null, inline);
         }
 
         /// <summary>
@@ -237,11 +232,9 @@ namespace Oxide.Ext.Discord.Builders
         /// <param name="value">Value of the field</param>
         /// <param name="inline">If the field should be inlined</param>
         /// <returns>This</returns>
+        [Obsolete("Please use DiscordEmbedBuilder.AddField instead as blank values are now automatically added")]
         public DiscordEmbedBuilder AddFieldOrBlank(string name, string value, bool inline)
         {
-            name = string.IsNullOrEmpty(value) ? Blank : name;
-            value = string.IsNullOrEmpty(value) ? Blank : value;
-
             return AddField(name, value, inline);
         }
 

@@ -16,15 +16,15 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         private static readonly Regex GenericPositionRegex = new Regex(@"([xyz])(?::?([\d\.]*))", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         
         /// <summary>
-        /// Replace the <see cref="PlaceholderMatch"/> with the the string value
+        /// Replace the <see cref="PlaceholderState"/> with the the string value
         /// </summary>
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
-        /// <param name="match"><see cref="PlaceholderMatch"/> for the placeholder</param>
+        /// <param name="state"><see cref="PlaceholderState"/> for the placeholder</param>
         /// <param name="value">Placeholder value to replace</param>
-        public static void Replace(StringBuilder builder, PlaceholderMatch match, string value)
+        public static void Replace(StringBuilder builder, PlaceholderState state, string value)
         {
-            builder.Remove(match.Index, match.Length);
-            builder.Insert(match.Index, value);
+            builder.Remove(state.Index, state.Length);
+            builder.Insert(state.Index, value);
         }
 
         /// <summary>
@@ -43,46 +43,46 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// Replace the <see cref="Match"/> with the the string value
         /// </summary>
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
-        /// <param name="match"><see cref="Match"/> for the placeholder</param>
+        /// <param name="state"><see cref="Match"/> for the placeholder</param>
         /// <param name="value">Snowflake value to replace</param>
-        public static void Replace(StringBuilder builder, PlaceholderMatch match, Snowflake value)
+        public static void Replace(StringBuilder builder, PlaceholderState state, Snowflake value)
         {
-            Replace(builder, match, value.ToString());
+            Replace(builder, state, value.ToString());
         }
 
         /// <summary>
         /// Replace the <see cref="Match"/> with the the string value
         /// </summary>
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
-        /// <param name="match"><see cref="Match"/> for the placeholder</param>
+        /// <param name="state"><see cref="Match"/> for the placeholder</param>
         /// <param name="value"><see cref="IFormattable"/> value to use with formatting</param>
-        public static void Replace(StringBuilder builder, PlaceholderMatch match, IFormattable value)
+        public static void Replace(StringBuilder builder, PlaceholderState state, IFormattable value)
         {
-            if (string.IsNullOrEmpty(match.Format))
+            if (string.IsNullOrEmpty(state.Format))
             {
-                Replace(builder, match, value.ToString(null, CultureInfo.CurrentCulture));
+                Replace(builder, state, value.ToString(null, CultureInfo.CurrentCulture));
             }
             
-            Replace(builder, match, value.ToString(match.Format, CultureInfo.CurrentCulture));
+            Replace(builder, state, value.ToString(state.Format, CultureInfo.CurrentCulture));
         }
         
         /// <summary>
-        /// Replace the <see cref="PlaceholderMatch"/> with the formatted position
+        /// Replace the <see cref="PlaceholderState"/> with the formatted position
         /// </summary>
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
-        /// <param name="placeholderMatch"><see cref="PlaceholderMatch"/> for the placeholder</param>
+        /// <param name="placeholderState"><see cref="PlaceholderState"/> for the placeholder</param>
         /// <param name="position"><see cref="GenericPosition"/> position to format and replace</param>
-        public static void Replace(StringBuilder builder, PlaceholderMatch placeholderMatch, GenericPosition position)
+        public static void Replace(StringBuilder builder, PlaceholderState placeholderState, GenericPosition position)
         {
-            if (string.IsNullOrEmpty(placeholderMatch.Format))
+            if (string.IsNullOrEmpty(placeholderState.Format))
             {
-                Replace(builder, placeholderMatch, position.ToString());
+                Replace(builder, placeholderState, position.ToString());
                 return;
             }
 
             StringBuilder sb = DiscordPool.GetStringBuilder();
-            sb.Append(placeholderMatch.Format);
-            MatchCollection matches = GenericPositionRegex.Matches(placeholderMatch.Format);
+            sb.Append(placeholderState.Format);
+            MatchCollection matches = GenericPositionRegex.Matches(placeholderState.Format);
             for (int index = matches.Count - 1; index >= 0; index--)
             {
                 Match match = matches[index];
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 }
             }
             
-            Replace(builder, placeholderMatch, sb.ToString());
+            Replace(builder, placeholderState, sb.ToString());
             DiscordPool.FreeStringBuilder(ref sb);
         }
     }

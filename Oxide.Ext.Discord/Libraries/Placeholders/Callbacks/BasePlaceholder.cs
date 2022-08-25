@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
             Plugin = plugin;
         }
 
-        public abstract void Invoke(StringBuilder builder, PlaceholderMatch match, PlaceholderData data);
+        public abstract void Invoke(StringBuilder builder, PlaceholderState state);
 
         public bool IsExtensionPlaceholder()
         {
