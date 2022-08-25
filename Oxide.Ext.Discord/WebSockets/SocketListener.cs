@@ -895,6 +895,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 if (member != null)
                 {
                     guild.Members.Remove(remove.User.Id);
+                    _client.CallHook(DiscordExtHooks.OnDiscordGuildMemberRemoved, member, guild);
                 }
 
                 _logger.Verbose($"{nameof(SocketListener)}.{nameof(HandleDispatchGuildMemberRemove)} Guild ID: {remove.GuildId.ToString()} Guild Name: {guild.Name} User ID: {member?.User.Id.ToString()} User Name: {member?.User.GetFullUserName}");
