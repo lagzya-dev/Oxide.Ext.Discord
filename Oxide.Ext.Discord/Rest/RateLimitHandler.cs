@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         public RateLimitHandler()
         {
-            _timer = new Timer(ResetInterval);
+            _timer = new Timer(ResetInterval * 1000);
             _timer.Elapsed += ResetGlobal;
             _timer.Start();
             _lastReset = Time.TimeSinceEpoch();
