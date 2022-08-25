@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// The number of seconds to wait before submitting another request.
         /// </summary>
         [JsonProperty("retry_after")]
-        public int RetryAfter { get; set; }
+        public float RetryAfter { get; set; }
 
         /// <summary>
         /// A value indicating if you are being globally rate limited or not
