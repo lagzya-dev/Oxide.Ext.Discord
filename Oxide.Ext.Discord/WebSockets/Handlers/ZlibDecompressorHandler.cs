@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
 {
+    //Currently not used. Needs some work to get it working without so many allocations.
     internal class ZlibDecompressorHandler
     {
         //private readonly MemoryStream _input;
