@@ -62,7 +62,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// For components, the values for the select menu component
         /// </summary>
         [JsonProperty("values")]
-        public List<SelectMenuOption> Values { get; set; }
+        public List<string> Values { get; set; }
         
         /// <summary>
         /// Id the of user or message targeted by a user or message command
