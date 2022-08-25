@@ -22,12 +22,29 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis
         [JsonProperty("For Custom Emojis Is The Emoji Animated")]
         public bool Animated { get; set; } = false;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         [JsonConstructor]
         public EmojiTemplate() { }
 
-        public EmojiTemplate(string emoji, bool animated = false)
+        /// <summary>
+        /// Unicode emoji constructor
+        /// </summary>
+        /// <param name="emoji">Unicode Emoji</param>
+        public EmojiTemplate(string emoji)
         {
             Emoji = emoji;
+        }
+        
+        /// <summary>
+        /// Custom Emoji Constructor
+        /// </summary>
+        /// <param name="emojiId">ID of the emoji</param>
+        /// <param name="animated">Is the emoji animated?</param>
+        public EmojiTemplate(Snowflake emojiId, bool animated = false)
+        {
+            Emoji = emojiId.ToString();
             Animated = animated;
         }
         

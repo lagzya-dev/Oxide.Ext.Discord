@@ -55,6 +55,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             return new GroupSubCommandBuilder(_option.Options, name, description, this);
         }
 
+        /// <summary>
+        /// Returns the built <see cref="DiscordApplicationCommand"/>
+        /// </summary>
+        /// <returns></returns>
         public ApplicationCommandBuilder Build()
         {
             return _builder;

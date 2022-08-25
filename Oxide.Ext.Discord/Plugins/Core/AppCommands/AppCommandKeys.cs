@@ -1,6 +1,6 @@
 namespace Oxide.Ext.Discord.Plugins.Core.AppCommands
 {
-    public static class AppCommandKeys
+    internal static class AppCommandKeys
     {
         public const string DeCommand = "de";
 

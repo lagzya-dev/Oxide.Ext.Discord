@@ -1,6 +1,6 @@
 namespace Oxide.Ext.Discord.Plugins.Core.Templates
 {
-    public static class TemplateKeys
+    internal static class TemplateKeys
     {
         public static class Commands
         {

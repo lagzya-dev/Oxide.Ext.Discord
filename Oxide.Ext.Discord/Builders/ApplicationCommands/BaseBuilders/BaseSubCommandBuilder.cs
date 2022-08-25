@@ -5,18 +5,38 @@ using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
 {
+    /// <summary>
+    /// Base Subcommand Builder
+    /// </summary>
+    /// <typeparam name="TBuilder">Child Builder that inherits from this type</typeparam>
+    /// <typeparam name="TParent">Parent for this builder</typeparam>
     public abstract class BaseSubCommandBuilder<TBuilder, TParent> where TBuilder : BaseSubCommandBuilder<TBuilder, TParent>
     {
-        protected readonly TBuilder _builder;
-        private readonly TParent _parent;
-        protected readonly CommandOption _subCommand;
+        /// <summary>
+        /// The child builder for this type
+        /// </summary>
+        protected readonly TBuilder Builder;
 
+        /// <summary>
+        /// The subcommand for the builder
+        /// </summary>
+        protected readonly CommandOption SubCommand;
+        
+        private readonly TParent _parent;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="options">The options for the sub command</param>
+        /// <param name="name">Name of the sub command</param>
+        /// <param name="description">Description of the sub command</param>
+        /// <param name="parent">Parent for the sub command</param>
         protected BaseSubCommandBuilder(List<CommandOption> options, string name, string description, TParent parent)
          {
-             _builder = (TBuilder)this;
+             Builder = (TBuilder)this;
             _parent = parent;
-            _subCommand = new CommandOption(name, description, CommandOptionType.SubCommand, new List<CommandOption>());
-            options.Add(_subCommand);
+            SubCommand = new CommandOption(name, description, CommandOptionType.SubCommand, new List<CommandOption>());
+            options.Add(SubCommand);
         }
 
          /// <summary>
@@ -27,8 +47,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <returns></returns>
         public TBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            _subCommand.NameLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
-            return _builder;
+            SubCommand.NameLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
+            return Builder;
         }
         
         /// <summary>
@@ -39,10 +59,14 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <returns></returns>
         public TBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            _subCommand.DescriptionLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
-            return _builder;
+            SubCommand.DescriptionLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
+            return Builder;
         }
 
+        /// <summary>
+        /// Builds the sub command and returns the parent builder
+        /// </summary>
+        /// <returns></returns>
         public TParent Build()
         {
             return _parent;

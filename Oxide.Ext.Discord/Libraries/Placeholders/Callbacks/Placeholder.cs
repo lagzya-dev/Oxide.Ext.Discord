@@ -4,7 +4,7 @@ using Oxide.Core.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
 {
-    public class Placeholder : BasePlaceholder
+    internal class Placeholder : BasePlaceholder
     {
         private readonly Action<StringBuilder, PlaceholderMatch> _callback;
         

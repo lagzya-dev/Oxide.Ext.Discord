@@ -48,11 +48,31 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         [JsonProperty("Keep Button On Same Row")]
         public bool Inline { get; set; } = true;
 
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         [JsonConstructor]
         public ButtonTemplate() { }
 
+        /// <summary>
+        /// Constructor without emoji
+        /// </summary>
+        /// <param name="label">Button Label</param>
+        /// <param name="style"><see cref="ButtonStyle"/></param>
+        /// <param name="command">Button Command</param>
+        /// <param name="enabled">Is button enabled?</param>
+        /// <param name="inline">Should the button be on the same row or a new row?</param>
         public ButtonTemplate(string label, ButtonStyle style, string command, bool enabled = true, bool inline = true) : this(label, style, command, null, enabled, inline) { }
-        
+
+        /// <summary>
+        /// Constructor with emoji
+        /// </summary>
+        /// <param name="label">Button Label</param>
+        /// <param name="style"><see cref="ButtonStyle"/></param>
+        /// <param name="command">Button Command</param>
+        /// <param name="emoji">Emoji for the button</param>
+        /// <param name="enabled">Is button enabled?</param>
+        /// <param name="inline">Should the button be on the same row or a new row?</param>
         public ButtonTemplate(string label, ButtonStyle style, string command, string emoji, bool enabled = true, bool inline = true)
         {
             Label = label;

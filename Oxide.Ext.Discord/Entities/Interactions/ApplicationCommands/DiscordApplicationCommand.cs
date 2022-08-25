@@ -150,6 +150,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
 
         /// <summary>
         /// Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions">Get Application Command Permissions</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID of the guild to get permissions for</param>
@@ -165,6 +166,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// Edits command permissions for a specific command for your application in a guild.
         /// Warning: This endpoint will overwrite existing permissions for the command in that guild
         /// Warning: Deleting or renaming a command will permanently delete all permissions for that command
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions">Edit Application Command Permissions</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID of the guild to edit permissions for</param>

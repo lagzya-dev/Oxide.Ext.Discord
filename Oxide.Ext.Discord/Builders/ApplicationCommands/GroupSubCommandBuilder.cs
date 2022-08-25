@@ -11,6 +11,13 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// </summary>
     public class GroupSubCommandBuilder : BaseSubCommandBuilder<GroupSubCommandBuilder, SubCommandGroupBuilder>
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="options">The options for the Sub Command Group</param>
+        /// <param name="name">Name of the Sub Command Group</param>
+        /// <param name="description">Description of the Sub Command Group</param>
+        /// <param name="parent">The parent builder for this builder</param>
         public GroupSubCommandBuilder(List<CommandOption> options, string name, string description, SubCommandGroupBuilder parent) : base(options, name, description, parent) { }
         
         /// <summary>
@@ -24,7 +31,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         public GroupSubCommandOptionBuilder AddOption(CommandOptionType type, string name, string description)
         {
             ApplicationCommandBuilderException.ThrowIfInvalidCommandOptionType(type);
-            return new GroupSubCommandOptionBuilder(_subCommand.Options, type, name, description, _builder);
+            return new GroupSubCommandOptionBuilder(SubCommand.Options, type, name, description, Builder);
         }
     }
 }

@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
 {
-    public abstract class BasePlaceholder
+    internal abstract class BasePlaceholder
     {
         internal readonly Plugin Plugin;
 
