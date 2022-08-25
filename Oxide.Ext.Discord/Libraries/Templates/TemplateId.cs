@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
 {
-    internal struct TemplateId
+    internal struct TemplateId : IEquatable<TemplateId>
     {
         public readonly string TemplateName;
         public readonly string Lang;
-        
-        public static readonly IEqualityComparer<TemplateId> TemplateIdComparer = new PluginNameTemplateNameLangEqualityComparer();
 
         public TemplateId(string templateName, string lang)
         {
@@ -16,21 +13,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             Lang = lang ?? throw new ArgumentNullException(nameof(lang));
         }
         
-        private sealed class PluginNameTemplateNameLangEqualityComparer : IEqualityComparer<TemplateId>
+        public bool Equals(TemplateId other)
         {
-            public bool Equals(TemplateId x, TemplateId y)
+            return TemplateName == other.TemplateName && Lang == other.Lang;
+        }
+        
+        public override bool Equals(object obj)
+        {
+            return obj is TemplateId other && Equals(other);
+        }
+        
+        public override int GetHashCode()
+        {
+            unchecked
             {
-                return x.TemplateName == y.TemplateName && x.Lang == y.Lang;
-            }
-            
-            public int GetHashCode(TemplateId obj)
-            {
-                unchecked
-                {
-                    int hashCode = obj.TemplateName.GetHashCode();
-                    hashCode = obj.Lang != null ? (hashCode * 397) ^ obj.Lang.GetHashCode() : 0;
-                    return hashCode;
-                }
+                return ((TemplateName != null ? TemplateName.GetHashCode() : 0) * 397) ^ (Lang != null ? Lang.GetHashCode() : 0);
             }
         }
     }

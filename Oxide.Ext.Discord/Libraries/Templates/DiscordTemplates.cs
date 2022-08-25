@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Oxide.Core;
@@ -25,7 +24,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     {
         private readonly string _rootDir = Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "messages");
         private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
-        private readonly Hash<string, Dictionary<TemplateId, DiscordMessageTemplate>> _pluginTemplates = new Hash<string, Dictionary<TemplateId, DiscordMessageTemplate>>();
+        private readonly Hash<string, Hash<TemplateId, DiscordMessageTemplate>> _pluginTemplates = new Hash<string, Hash<TemplateId, DiscordMessageTemplate>>();
         private readonly ILogger _logger;
 
         /// <summary>
@@ -149,10 +148,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
-            Dictionary<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
+            Hash<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
             if (templates == null)
             {
-                templates = new Dictionary<TemplateId, DiscordMessageTemplate>(TemplateId.TemplateIdComparer);
+                templates = new Hash<TemplateId, DiscordMessageTemplate>();
                 _pluginTemplates[plugin.Name] = templates;
             }
 
@@ -182,10 +181,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (string.IsNullOrEmpty(language)) throw new ArgumentNullException(nameof(language));
 
-            Dictionary<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
+            Hash<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
             if (templates == null)
             {
-                templates = new Dictionary<TemplateId, DiscordMessageTemplate>(TemplateId.TemplateIdComparer);
+                templates = new Hash<TemplateId, DiscordMessageTemplate>();
                 _pluginTemplates[plugin.Name] = templates;
             }
 
@@ -217,10 +216,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
-            Dictionary<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
+            Hash<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
             if (templates == null)
             {
-                templates = new Dictionary<TemplateId, DiscordMessageTemplate>(TemplateId.TemplateIdComparer);
+                templates = new Hash<TemplateId, DiscordMessageTemplate>();
                 _pluginTemplates[plugin.Name] = templates;
             }
 

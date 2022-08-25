@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Pooling;
 

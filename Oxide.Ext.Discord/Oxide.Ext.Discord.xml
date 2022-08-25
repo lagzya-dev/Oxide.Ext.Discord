@@ -21,8 +21,8 @@
             Constructor
             </summary>
             <param name="command">Command for the Application Command</param>
-            <param name="group">Sub Command Group for the Application Command</param>
             <param name="subCommand">Sub Command for the Application Command</param>
+            <param name="group">Sub Command Group for the Application Command</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordAutoCompleteCommandAttribute">
             <summary>
@@ -42,8 +42,8 @@
             </summary>
             <param name="command">Command for the Auto Complete</param>
             <param name="argumentName">Argument Name for the Auto Complete</param>
-            <param name="group">Sub Command Group for the Auto Complete</param>
             <param name="subCommand">Sub Command for the Auto Complete</param>
+            <param name="group">Sub Command Group for the Auto Complete</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordMessageComponentCommandAttribute">
             <summary>
@@ -376,7 +376,7 @@
             </summary>
             <param name="name">Name of the sub command</param>
             <param name="description">Description for the sub command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/></returns>
             <exception cref="T:System.Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
@@ -397,6 +397,26 @@
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder">
             <summary>
             Represents a Subcommand Option Builder for Application Commands
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder">
+            <summary>
+            Application Sub Command Builder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
+            <summary>
+            Adds a new option
+            </summary>
+            <param name="type">Option data type (Cannot be SubCommand or SubCommandGroup)</param>
+            <param name="name">Name of the option</param>
+            <param name="description">Description of the option</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandOptionBuilder">
+            <summary>
+            Represents a Subcommand Option Builder for SubCommands
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2">
@@ -522,17 +542,28 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
-            Base Sub Command builder
+            Adds command name localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command description localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandBuilder">
+            <summary>
+            Application Sub Command Builder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder._options">
-            <summary>
-            Options list to have options added to
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
             <summary>
             Adds a new option
             </summary>
@@ -542,21 +573,10 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandOptionBuilder">
             <summary>
-            Adds command name localizations for a given plugin and lang key
+            Represents a Subcommand Option Builder for SubCommands
             </summary>
-            <param name="plugin">Plugin containing the localizations</param>
-            <param name="langKey">Lang Key containing the localized text</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
-            <summary>
-            Adds command description localizations for a given plugin and lang key
-            </summary>
-            <param name="plugin">Plugin containing the localizations</param>
-            <param name="langKey">Lang Key containing the localized text</param>
-            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder">
             <summary>
@@ -585,12 +605,7 @@
             </summary>
             <param name="name">Name of the command</param>
             <param name="description">Description of the command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandBuilder"/></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandOptionBuilder">
-            <summary>
-            Represents a Subcommand Option Builder for SubCommands
-            </summary>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder">
             <summary>
@@ -3742,20 +3757,10 @@
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGuildCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects.
+            See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command-permissions">Get Guild Application Command Permissions</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to get the permissions from</param>
-            <param name="callback">Callback with the list of permissions</param>
-            <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.BatchEditCommandPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
-            <summary>
-            Batch edits permissions for all commands in a guild.
-            Warning: This endpoint will overwrite all existing permissions for all commands in a guild
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="guildId">Guild ID to update the permissions for</param>
-            <param name="permissions">List of permissions for the commands</param>
             <param name="callback">Callback with the list of permissions</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -10712,7 +10717,7 @@
             <param name="callback">Callback with the permissions for the command</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.EditPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandPermissions},System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.EditPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdatePermissions,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Edits command permissions for a specific command for your application in a guild.
             Warning: This endpoint will overwrite existing permissions for the command in that guild
@@ -17503,13 +17508,41 @@
             </summary>
             <returns><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``1(System.String,System.String,Oxide.Core.Plugins.Plugin,System.Action{System.Text.StringBuilder,``0,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder(Oxide.Core.Plugins.Plugin,System.String,System.Action{System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch})">
+            <summary>
+            Registers a placeholder
+            </summary>
+            <param name="plugin">Plugin this placeholder is for</param>
+            <param name="placeholder">Placeholder string</param>
+            <param name="callback">Callback Method for the placeholder</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+            <summary>
+            Registers a placeholder static value placeholder
+            </summary>
+            <param name="plugin">Plugin this placeholder is for</param>
+            <param name="placeholder">Placeholder string</param>
+            <param name="value">Static string value</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``1(Oxide.Core.Plugins.Plugin,System.String,System.Action{System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,``0})">
             <summary>
             Registers a placeholder of type {T}
             </summary>
+            <param name="plugin">Plugin this placeholder is for</param>
+            <param name="placeholder">Placeholder string</param>
+            <param name="callback">Callback Method for the placeholder</param>
+            <typeparam name="T">Type of the data key</typeparam>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``1(Oxide.Core.Plugins.Plugin,System.String,System.String,System.Action{System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderMatch,``0})">
+            <summary>
+            Registers a placeholder of type {T}
+            </summary>
+            <param name="plugin">Plugin this placeholder is for</param>
             <param name="placeholder">Placeholder string</param>
             <param name="dataKey">The name of the data key in PlaceholderData</param>
-            <param name="plugin">Plugin this placeholder is for</param>
             <param name="callback">Callback Method for the placeholder</param>
             <typeparam name="T">Type of the data key</typeparam>
             <exception cref="T:System.ArgumentNullException"></exception>
@@ -18050,24 +18083,24 @@
             Embed Footer Icon
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate">
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.EmojiTemplate">
             <summary>
             Discord Template for Emoji
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate.Emoji">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.EmojiTemplate.Emoji">
             <summary>
             Emoji Name or ID
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate.Animated">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.EmojiTemplate.Animated">
             <summary>
             If the emoji is Animated
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate.ToEmoji">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.EmojiTemplate.ToEmoji">
             <summary>
-            Converts the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.DiscordEmojiTemplate"/> to a <see cref="T:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji"/>
+            Converts the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.EmojiTemplate"/> to a <see cref="T:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji"/>
             </summary>
             <returns></returns>
         </member>
@@ -18725,7 +18758,7 @@
             How long until the rate limit resets
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.#ctor(System.String,Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.Init(System.String,Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Creates a new bucket for the given <see cref="T:Oxide.Ext.Discord.Rest.RestHandler"/>
             </summary>
@@ -18738,6 +18771,15 @@
             Queues a new request for the buck
             </summary>
             <param name="handler"><see cref="T:Oxide.Ext.Discord.Rest.Requests.RequestHandler"/> to be queued</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.LeavePool">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.DisposeInternal">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator">
             <summary>

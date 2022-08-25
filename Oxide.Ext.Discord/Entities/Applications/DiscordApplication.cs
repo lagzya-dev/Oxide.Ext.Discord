@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Entities.Api;
@@ -8,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Teams;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Applications
 {
@@ -271,6 +273,43 @@ namespace Oxide.Ext.Discord.Entities.Applications
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             client.Bot.Rest.CreateRequest(client,$"applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.GET, null, callback, error);
+        }
+        
+        /// <summary>
+        /// Returns all commands registered to this application
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the list of all commands</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetAllCommands(DiscordClient client, Action<List<DiscordApplicationCommand>> callback, Action<RequestError> error = null)
+        {
+            bool globalDone = false;
+            Hash<Snowflake, bool> guildsDone = new Hash<Snowflake, bool>();
+            List<DiscordApplicationCommand> commands = new List<DiscordApplicationCommand>();
+
+            GetGlobalCommands(client, false, globalCommands =>
+            {
+                commands.AddRange(globalCommands);
+                globalDone = true;
+                if (globalDone && guildsDone.Values.All(g => g))
+                {
+                    callback.Invoke(commands);
+                }
+            }, error);
+            
+            foreach (Snowflake guildId in client.Bot.Servers.Keys)
+            {
+                guildsDone[guildId] = false;
+                GetGuildCommands(client, guildId, false, guildCommands =>
+                {
+                    commands.AddRange(guildCommands);
+                    guildsDone[guildId] = true;
+                    if (globalDone && guildsDone.Values.All(g => g))
+                    {
+                        callback.Invoke(commands);
+                    }
+                }, error);
+            }
         }
     }
 }

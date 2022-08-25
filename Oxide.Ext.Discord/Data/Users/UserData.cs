@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord.Data.Users
         public void SetDmBlock()
         {
             DmBlockedDate = DateTime.UtcNow;
-            DiscordUsersData.Instance.OnDataChanged();
+            DiscordUserData.Instance.OnDataChanged();
         }
 
         public void ClearBlockIfExpired()
@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord.Data.Users
             if (DmBlockedDate.HasValue && DmBlockedDate.Value < DateTime.UtcNow)
             {
                 DmBlockedDate = null;
-                DiscordUsersData.Instance.OnDataChanged();
+                DiscordUserData.Instance.OnDataChanged();
             }
         }
 

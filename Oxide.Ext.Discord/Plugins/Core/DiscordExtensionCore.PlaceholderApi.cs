@@ -8,10 +8,9 @@ namespace Oxide.Ext.Discord.Plugins.Core
 {
     internal partial class DiscordExtensionCore
     {
-        [PluginReference]
+        [PluginReference("PlaceholderAPI")]
 #pragma warning disable CS0649
-        // ReSharper disable once InconsistentNaming
-        private Plugin PlaceholderAPI;
+        private Plugin _placeholderApi;
 #pragma warning restore CS0649
         
         private Action<IPlayer, StringBuilder, bool> _replacer;
@@ -23,10 +22,10 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 return _replacer;
             }
             
-            return _replacer ?? (_replacer = PlaceholderAPI.Call("GetProcessPlaceholders", 1) as Action<IPlayer, StringBuilder, bool>);
+            return _replacer ?? (_replacer = _placeholderApi.Call("GetProcessPlaceholders", 1) as Action<IPlayer, StringBuilder, bool>);
         }
 
-        private bool IsPlaceholderApiLoaded() => PlaceholderAPI != null && PlaceholderAPI.IsLoaded;
+        private bool IsPlaceholderApiLoaded() => _placeholderApi != null && _placeholderApi.IsLoaded;
 
         private void HandlePlaceholderApiUnloaded() => _replacer = null;
     }

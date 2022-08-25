@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
     internal class AppCommands
     {
         public bool IsEmpty => _commands.Count == 0 && _componentCommands.Count == 0;
-        private readonly Hash<InteractionType, Dictionary<AppCommandId, AppCommand>> _commands = new Hash<InteractionType, Dictionary<AppCommandId, AppCommand>>();
+        private readonly Hash<InteractionType, Hash<AppCommandId, AppCommand>> _commands = new Hash<InteractionType, Hash<AppCommandId, AppCommand>>();
         private readonly List<ComponentCommand> _componentCommands = new List<ComponentCommand>();
         private readonly ILogger _logger;
 
@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             _logger = logger;
         }
 
-        public Dictionary<AppCommandId, AppCommand> GetCommandsByType(InteractionType type)
+        public Hash<AppCommandId, AppCommand> GetCommandsByType(InteractionType type)
         {
             return _commands[type];
         }
@@ -48,12 +48,12 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             return null;
         }
         
-        public Dictionary<AppCommandId, AppCommand> GetOrAddCommandsByType(InteractionType type)
+        public Hash<AppCommandId, AppCommand> GetOrAddCommandsByType(InteractionType type)
         {
-            Dictionary<AppCommandId, AppCommand> commands = _commands[type];
+            Hash<AppCommandId, AppCommand> commands = _commands[type];
             if (commands == null)
             {
-                commands = new Dictionary<AppCommandId, AppCommand>(AppCommandId.AppCommandIdComparer);
+                commands = new Hash<AppCommandId, AppCommand>();
                 _commands[type] = commands;
             }
 
@@ -62,13 +62,13 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
 
         public void AddAppCommand(AppCommand command)
         {
-            Dictionary<AppCommandId, AppCommand> commands = GetOrAddCommandsByType(command.Type);
+            Hash<AppCommandId, AppCommand> commands = GetOrAddCommandsByType(command.Type);
             commands[command.Command] = command;
         }
 
         public bool RemoveAppCommand(AppCommand command)
         {
-            Dictionary<AppCommandId, AppCommand> commands = GetCommandsByType(command.Type);
+            Hash<AppCommandId, AppCommand> commands = GetCommandsByType(command.Type);
             if (commands == null)
             {
                 return false;
@@ -124,7 +124,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
 
         public IEnumerable<AppCommand> GetCommandsForPlugin(Plugin plugin)
         {
-            foreach (Dictionary<AppCommandId, AppCommand> types in _commands.Values)
+            foreach (Hash<AppCommandId, AppCommand> types in _commands.Values)
             {
                 foreach (AppCommand command in types.Values)
                 {

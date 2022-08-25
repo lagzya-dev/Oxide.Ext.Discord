@@ -30,7 +30,8 @@ namespace Oxide.Ext.Discord.Plugins.Core
         #region Setup & Loading
         public DiscordExtensionCore()
         {
-            Title = "Discord Extension Core";
+            Name = "DiscordExtension";
+            Title = "Discord Extension";
         }
         
         [HookMethod(nameof(Init))]
@@ -48,12 +49,14 @@ namespace Oxide.Ext.Discord.Plugins.Core
             {
                 Lang.RegisterMessages(language.Value, this, language.Key);
             }
+
+            CreateTemplates();
         }
 
         [HookMethod(nameof(OnServerSave))]
         private void OnServerSave()
         {
-            DiscordUsersData.Instance.Save(false);
+            DiscordUserData.Instance.Save(false);
         }
         
         [HookMethod(nameof(OnServerShutdown))]
@@ -285,6 +288,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             player.Message(message);
             DiscordLogger.FileLogger.AddMessage(DiscordLogLevel.Info, message, null);
         }
+        
         private void DebugApplicationCommands(StringBuilder sb)
         {
             sb.AppendLine("\tApplication Commands:");
