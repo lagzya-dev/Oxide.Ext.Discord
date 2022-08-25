@@ -18,6 +18,7 @@ using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins.Core;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.WebSockets;
@@ -373,8 +374,10 @@ namespace Oxide.Ext.Discord
                 for (int index = 0; index < _clients.Count; index++)
                 {
                     DiscordClient client = _clients[index];
-                    DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(client, client.Plugin);
+                    DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(Application, client.Plugin);
                 }
+                
+                DiscordExtensionCore.Instance.RegisterApplicationCommands(this);
             }
             
             _readyData = ready;
@@ -549,5 +552,18 @@ namespace Oxide.Ext.Discord
             return false;
         }
         #endregion
+
+        internal static BotClient GetByApplicationId(Snowflake appId)
+        {
+            foreach (BotClient client in ActiveBots.Values)
+            {
+                if (client.Application?.Id == appId)
+                {
+                    return client;
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -345,9 +345,8 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             return true;
         }
         
-        internal void RegisterApplicationCommands(DiscordClient client, Plugin plugin)
+        internal void RegisterApplicationCommands(DiscordApplication app, Plugin plugin)
         {
-            DiscordApplication app = client.Bot?.Application;
             _logger.Debug("Registering application commands for {0}", plugin.FullName());
             
             foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))

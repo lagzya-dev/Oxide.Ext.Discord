@@ -138,9 +138,9 @@ namespace Oxide.Ext.Discord
         internal void OnBotAdded(BotClient bot)
         {
             Bot = bot;
-            if (Bot.Application != null)
+            if (bot.Application != null)
             {
-                DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(this, Plugin);
+                DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(bot.Application, Plugin);
             }
         }
 
