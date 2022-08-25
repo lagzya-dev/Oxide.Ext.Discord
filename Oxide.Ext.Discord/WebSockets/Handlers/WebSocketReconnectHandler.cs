@@ -1,5 +1,6 @@
-using System.Timers;
-using Oxide.Core;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
@@ -13,8 +14,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly DiscordWebSocket _webSocket;
         private readonly ILogger _logger;
         private int _reconnectRetries;
-        private readonly Timer _reconnectTimer;
-        
+        private CancellationTokenSource _source;
+
         internal bool AttemptGatewayUpdate => _reconnectRetries >= 3;
         
         /// <summary>
@@ -28,16 +29,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _client = client;
             _webSocket = webSocket;
             _logger = logger;
-
-            _reconnectTimer = new Timer();
-            _reconnectTimer.Elapsed += ReconnectWebsocket;
-            _reconnectTimer.AutoReset = false;
         }
 
         /// <summary>
         /// Starts the reconnect process
         /// </summary>
-        public void StartReconnect()
+        public async Task StartReconnect()
         {
             if (!_client.Initialized)
             {
@@ -51,34 +48,38 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
 
-            _webSocket.Handler.SocketState = SocketState.PendingReconnect;
-            
-            //If we haven't had any errors reconnect to the gateway
-            if (_reconnectRetries == 0)
+            CancelReconnect();
+            _source = new CancellationTokenSource();
+            CancellationToken token = _source.Token;
+
+            try
             {
+                _webSocket.Handler.SocketState = SocketState.PendingReconnect;
                 _reconnectRetries++;
-                Interface.Oxide.NextTick(Connect);
-                return;
+                int delay = GetReconnectDelay();
+                _logger.Warning("Attempting to reconnect to Discord. Retry: #{0} Delay: {1}", _reconnectRetries, delay);
+
+                await Task.Delay(delay, token).ConfigureAwait(false);
+                Connect();
             }
-
-            _reconnectTimer.Interval = GetReconnectDelay();
-            _reconnectTimer.Start();
-
-            _logger.Warning("Attempting to reconnect to Discord... [Retry={0}]", _reconnectRetries);
-            _reconnectRetries++;
-        }
-        
-        private void ReconnectWebsocket(object sender, ElapsedEventArgs e)
-        {
-            Connect();
+            catch (TaskCanceledException) { }
+            catch (OperationCanceledException) { }
+            finally
+            {
+                _source.Dispose();
+                _source = null;
+            }
         }
 
         private void Connect()
         {
-            if (!_webSocket.Handler.IsConnected() && !_webSocket.Handler.IsConnecting())
+            if (_webSocket.Handler.IsConnected() || _webSocket.Handler.IsConnecting())
             {
-                _webSocket.Connect();
+                _logger.Debug("Skipping Connect. Socket is: {0}", _webSocket.Handler.SocketState);
+                return;
             }
+            
+            _webSocket.Connect();
         }
         
         /// <summary>
@@ -86,7 +87,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         public void CancelReconnect()
         {
-            _reconnectTimer.Stop();
+            _source?.Cancel();
+            _source?.Dispose();
+            _source = null;
         }
 
         /// <summary>
@@ -102,12 +105,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         public void OnSocketShutdown()
         {
-            _reconnectTimer.Stop();
-            _reconnectTimer.Dispose();
+            CancelReconnect();
         }
 
-        private double GetReconnectDelay()
+        private int GetReconnectDelay()
         {
+            if (_reconnectRetries == 0) return 1000 / 60;
             if (_reconnectRetries <= 3) return 1 * 1000;
             if (_reconnectRetries <= 25) return 15 * 1000;
             return 60 * 1000;
