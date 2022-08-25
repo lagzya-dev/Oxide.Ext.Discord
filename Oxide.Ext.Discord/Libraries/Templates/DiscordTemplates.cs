@@ -162,6 +162,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
 
             template = DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, null);
+            
+            if (template == null)
+            {
+                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetGlobalMessageTemplate)} API but message name '{{1}}' is not registered", plugin.FullName(), name);
+                return new DiscordMessageTemplate();
+            }
+            
             templates[templateId] = template;
 
             return template;
@@ -197,6 +204,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             template = DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, language)
                                           ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.GameServerLanguage)
                                           ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.DefaultOxideLanguage);
+            
+            if (template == null)
+            {
+                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetLocalizedMessageTemplate)} API but message name '{{1}}' is not registered", plugin.FullName(), name);
+                return new DiscordMessageTemplate();
+            }
             
             templates[templateId] = template;
 
@@ -237,7 +250,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                                               ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.GetOxideLanguage(interaction.GuildLocale)) 
                                               ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.GameServerLanguage)
                                               ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.DefaultOxideLanguage);
-            
+
+            if (template == null)
+            {
+                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetMessageTemplate)} API but message name '{{1}}' is not registered", plugin.FullName(), name);
+                return new DiscordMessageTemplate();
+            }
+
             templates[templateId] = template;
 
             return template;
