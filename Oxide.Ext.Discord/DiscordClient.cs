@@ -1,397 +1,279 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using Oxide.Core;
+using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Logging;
+using Oxide.Plugins;
+
 namespace Oxide.Ext.Discord
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Timers;
-    using Newtonsoft.Json;
-    using Oxide.Core;
-    using Oxide.Core.Plugins;
-    using Oxide.Ext.Discord.Attributes;
-    using Oxide.Ext.Discord.DiscordEvents;
-    using Oxide.Ext.Discord.DiscordObjects;
-    using Oxide.Ext.Discord.Exceptions;
-    using Oxide.Ext.Discord.Gateway;
-    using Oxide.Ext.Discord.Helpers;
-    using Oxide.Ext.Discord.REST;
-    using Oxide.Ext.Discord.WebSockets;
-
+    /// <summary>
+    /// Represents the object a plugin uses to connects to discord
+    /// </summary>
     public class DiscordClient
     {
-        public List<Plugin> Plugins { get; private set; } = new List<Plugin>();
+        internal static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
 
-        public RESTHandler REST { get; private set; }
-
-        public string WSSURL { get; private set; }
-
-        public DiscordSettings Settings { get; set; } = new DiscordSettings();
-
-        public List<Guild> DiscordServers { get; set; } = new List<Guild>();
-        public List<Channel> DMs { get; set; } = new List<Channel>();
+        private static readonly Regex TokenValidator = new Regex(@"^[\w-]+\.[\w-]+\.[\w-]+$", RegexOptions.Compiled);
         
-        public Guild DiscordServer
+        /// <summary>
+        /// Which plugin is the owner of this client
+        /// </summary>
+        public Plugin Owner { get; private set; }
+        
+        /// <summary>
+        /// List of plugins that are registered to receive hook calls for this client
+        /// </summary>
+        public List<Plugin> RegisteredForHooks { get; } = new List<Plugin>();
+        
+        /// <summary>
+        /// The bot client that is unique to the Token used
+        /// </summary>
+        public BotClient Bot { get; private set; }
+        
+        /// <summary>
+        /// Settings used to connect to discord and configure the extension
+        /// </summary>
+        public DiscordSettings Settings { get; private set; }
+        
+        internal ILogger Logger;
+
+        /// <summary>
+        /// Constructor for a discord client
+        /// </summary>
+        /// <param name="plugin">Plugin that will own this discord client</param>
+        public DiscordClient(Plugin plugin)
         {
-            get
+            Owner = plugin;
+        }
+        
+        /// <summary>
+        /// Starts a connection to discord with the given apiKey and intents
+        /// </summary>
+        /// <param name="apiKey">API key for the connecting bot</param>
+        /// <param name="intents">Intents the bot needs in order to function</param>
+        public void Connect(string apiKey, GatewayIntents intents)
+        {
+            DiscordSettings settings = new DiscordSettings
             {
-                return this.DiscordServers?.FirstOrDefault();
+                ApiToken = apiKey,
+                LogLevel = DiscordLogLevel.Info,
+                Intents = intents
+            };
+            
+            Connect(settings);
+        }
+        
+        /// <summary>
+        /// Starts a connection to discord with the given discord settings
+        /// </summary>
+        /// <param name="settings">Discord connection settings</param>
+        public void Connect(DiscordSettings settings)
+        {
+            Settings = settings ?? throw new ArgumentNullException(nameof(settings));
+            Logger = new Logger(settings.LogLevel);
+            
+            if (string.IsNullOrEmpty(Settings.ApiToken))
+            {
+                Logger.Error("API Token is null or empty!");
+                return;
             }
+
+            if (!TokenValidator.IsMatch(Settings.ApiToken))
+            {
+                Logger.Warning($"API Token does not appear to be a valid discord bot token: {Settings.GetHiddenToken()}. " +
+                               "Please confirm you are using the correct bot token. " +
+                               "If the token is correct and this message is showing please let the Discord Extension Developers know.");
+            }
+
+            if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
+            {
+                Logger.Warning($"Using Discord Test Version: {DiscordExtension.GetExtensionVersion}");
+            }
+            
+            Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} GetOrCreate bot for {Owner.Name}");
+
+            Bot = BotClient.GetOrCreate(this);
+
+            RegisterPluginForHooks(Owner);
+            Interface.Call(DiscordExtHooks.OnDiscordClientConnected, Owner, this);
         }
 
-        public int Sequence;
+        /// <summary>
+        /// Disconnects this client from discord
+        /// </summary>
+        public void Disconnect()
+        {
+            Interface.Call(DiscordExtHooks.OnDiscordClientDisconnected, Owner, this);
+            Bot?.RemoveClient(this);
+        }
 
-        public string SessionID;
-
-        private Socket _webSocket;
-
-        private Timer _timer;
-
-        private double _lastHeartbeat;
-
-        public bool HeartbeatACK = false;
-
-        public bool requestReconnect = false;
-
-        public void Initialize(Plugin plugin, DiscordSettings settings)
+        /// <summary>
+        /// Registers a plugin to receive hook calls for this client
+        /// </summary>
+        /// <param name="plugin"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void RegisterPluginForHooks(Plugin plugin)
         {
             if (plugin == null)
             {
-                throw new PluginNullException();
+                throw new ArgumentNullException(nameof(plugin));
             }
+            
+            RemovePluginFromHooks(plugin);
+            RegisteredForHooks.Add(plugin);
+        }
 
-            if (settings == null)
+        /// <summary>
+        /// Remove a plugin from hooks
+        /// </summary>
+        /// <param name="plugin">Plugin to be removed from hooks</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void RemovePluginFromHooks(Plugin plugin)
+        {
+            if (plugin == null)
             {
-                throw new SettingsNullException();
+                throw new ArgumentNullException(nameof(plugin));
             }
+            
+            RegisteredForHooks.RemoveAll(p => p.Name == plugin.Name);
+        }
 
-            if (string.IsNullOrEmpty(settings.ApiToken))
+        /// <summary>
+        /// Call a hook for all plugins registered to receive hook calls for this client
+        /// </summary>
+        /// <param name="hookName"></param>
+        /// <param name="args"></param>
+        public void CallHook(string hookName, params object[] args)
+        {
+            //Run from next tick so we can be sure it's ran on the main thread.
+            Interface.Oxide.NextTick(() =>
             {
-                throw new APIKeyException();
-            }
-
-            /*if(Discord.PendingTokens.Contains(settings.ApiToken)) // Not efficient, will re-do later
-            {
-                Interface.Oxide.LogWarning($"[Discord Extension] Connection with same token in short period.. Connection delayed for {plugin.Name}");
-                Timer t = new Timer() { AutoReset = false, Interval = 5000f, Enabled = true};
-                t.Elapsed += (object sender, ElapsedEventArgs e) =>
+                for (int index = 0; index < RegisteredForHooks.Count; index++)
                 {
-                    // TODO: Check if the connection still persists or cancelled
-                    Interface.Oxide.LogWarning($"[Discord Extension] Delayed connection for {plugin.Name} is being resumed..");
-                    Initialize(plugin, settings);
-                };
-                return;
-            }*/
-
-            RegisterPlugin(plugin);
-            UpdatePluginReference(plugin);
-            CallHook("DiscordSocket_Initialized");
-
-            Settings = settings;
-
-            REST = new RESTHandler(Settings.ApiToken);
-            _webSocket = new Socket(this);
-
-            if (!string.IsNullOrEmpty(WSSURL))
-            {
-                _webSocket.Connect(WSSURL);
-                return;
-            }
-
-            this.GetURL(url =>
-            {
-                UpdateWSSURL(url);
-
-                _webSocket.Connect(WSSURL);
+                    Plugin plugin = RegisteredForHooks[index];
+                    plugin.CallHook(hookName, args);
+                }
             });
-
-            /*Discord.PendingTokens.Add(settings.ApiToken); // Not efficient, will re-do later
-            Timer t2 = new Timer() { AutoReset = false, Interval = 5000f, Enabled = true };
-            t2.Elapsed += (object sender, ElapsedEventArgs e) =>
-            {
-                if (Discord.PendingTokens.Contains(settings.ApiToken))
-                    Discord.PendingTokens.Remove(settings.ApiToken);
-            };*/
         }
 
-        public void Disconnect()
+        #region Plugin Handling
+        /// <summary>
+        /// Sets the client field on the plugin.
+        /// This should only be used if you need the client in the Init or Loaded hooks
+        /// The client field will automatically be set on the plugin before the OnDiscordClientCreated or OnServerInitialized hooks
+        /// </summary>
+        /// <param name="plugin">Plugin to get client for</param>
+        /// <returns>Discord client for the plugin</returns>
+        public static void CreateClient(Plugin plugin)
         {
-            _webSocket?.Disconnect();
-            DestroyHeartbeat();
-            _webSocket?.Dispose();
-            _webSocket = null;
+            if (plugin == null)
+            {
+                throw new ArgumentNullException(nameof(plugin));
+            }
 
-            WSSURL = string.Empty;
-
-            REST?.Shutdown();
+            OnPluginAdded(plugin);
         }
 
-        public void UpdatePluginReference(Plugin plugin = null)
+        /// <summary>
+        /// Gets the client for the given plugin
+        /// </summary>
+        /// <param name="plugin">Plugin to get client for</param>
+        /// <returns>Discord client for the plugin</returns>
+        public static DiscordClient GetClient(Plugin plugin)
         {
-            List<Plugin> affectedPlugins = (plugin == null) ? Plugins : new List<Plugin>() { plugin };
-
-            foreach (var pluginItem in affectedPlugins)
+            if (plugin == null)
             {
-                foreach (var field in pluginItem.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+                throw new ArgumentNullException(nameof(plugin));
+            }
+
+            return GetClient(plugin.Name);
+        } 
+
+        /// <summary>
+        /// Gets the client for the given plugin name
+        /// </summary>
+        /// <param name="pluginName">Plugin Name to get client for</param>
+        /// <returns>Discord client for the plugin name</returns>
+        public static DiscordClient GetClient(string pluginName)
+        {
+            return Clients[pluginName];
+        }
+        
+        internal static void OnPluginAdded(Plugin plugin)
+        {
+            OnPluginRemoved(plugin);
+            
+            foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+            {
+                if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
                 {
-                    if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Any())
+                    DiscordClient client = Clients[plugin.Name];
+                    if (client == null)
                     {
-                        field.SetValue(pluginItem, this);
+                        DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(OnPluginAdded)} Creating DiscordClient for plugin {plugin.Name}");
+                        client = new DiscordClient(plugin);
+                        Clients[plugin.Name] = client;
                     }
+                    
+                    field.SetValue(plugin, client);
+                    plugin.Call(DiscordExtHooks.OnDiscordClientCreated);
+                    break;
                 }
             }
+            
+            DiscordExtension.DiscordCommand.ProcessPluginCommands(plugin);
         }
 
-        public void RegisterPlugin(Plugin plugin)
+        internal static void OnPluginRemoved(Plugin plugin)
         {
-            var search = Plugins.Where(x => x.Title == plugin.Title);
-            search.ToList().ForEach(x => Plugins.Remove(x));
-
-            Plugins.Add(plugin);
-        }
-
-        public object CallHook(string hookname, Plugin specificPlugin = null, params object[] args)
-        {
-            if (specificPlugin != null)
+            DiscordClient client = Clients[plugin.Name];
+            if (client == null)
             {
-                if (!specificPlugin.IsLoaded) return null;
-
-                return specificPlugin.CallHook(hookname, args);
-            }
-
-            Dictionary<string, object> returnValues = new Dictionary<string, object>();
-
-            foreach (var plugin in Plugins.Where(x => x.IsLoaded))
-            {
-                var retVal = plugin.CallHook(hookname, args);
-                returnValues.Add(plugin.Title, retVal);
-            }
-
-            if (returnValues.Count(x => x.Value != null) > 1)
-            {
-                string conflicts = string.Join("\n", returnValues.Select(x => $"Plugin {x.Key} - {x.Value}").ToArray());
-                Interface.Oxide.LogWarning($"[Discord Extension] A hook conflict was triggered on {hookname} between:\n{conflicts}");
-                return null;
-            }
-
-            return returnValues.FirstOrDefault(x => x.Value != null).Value;
-        }
-
-        public string GetPluginNames(string delimiter = ", ") => string.Join(delimiter, Plugins.Select(x => x.Name).ToArray());
-
-        public void CreateHeartbeat(float heartbeatInterval)
-        {
-            if (_timer != null)
-            {
-                Interface.Oxide.LogWarning($"[Discord Extension] Warning: tried to create a heartbeat when one is already registered.");
                 return;
             }
 
-            _lastHeartbeat = Time.TimeSinceEpoch();
-            HeartbeatACK = true;
+            CloseClient(client);
 
-            _timer = new Timer()
+            foreach (DiscordClient existingClient in Clients.Values)
             {
-                Interval = heartbeatInterval
-            };
-            _timer.Elapsed += HeartbeatElapsed;
-            _timer.Start();
-        }
-
-        public void DestroyHeartbeat()
-        {
-            if(_timer != null)
-            {
-                _timer.Dispose();
-                _timer = null;
+                existingClient.RemovePluginFromHooks(plugin);
             }
-            return;
+            
+            DiscordExtension.DiscordLink.OnPluginUnloaded(plugin);
+            DiscordExtension.DiscordCommand.OnPluginUnloaded(plugin);
+            DiscordExtension.DiscordSubscriptions.OnPluginUnloaded(plugin);
         }
 
-        private void HeartbeatElapsed(object sender, ElapsedEventArgs e)
+        internal static void CloseClient(DiscordClient client)
         {
-            if (!_webSocket.IsAlive() ||
-                _webSocket.IsClosing() ||
-                _webSocket.IsClosed())
+            if (client == null)
             {
-                _timer.Dispose();
-                _timer = null;
                 return;
             }
-
-            SendHeartbeat();
-        }
-
-        private void GetURL(Action<string> callback)
-        {
-            DiscordObjects.Gateway.GetGateway(this, (gateway) =>
+            
+            client.Disconnect();
+            
+            DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {client.Owner.Name}");
+            foreach (FieldInfo field in client.Owner.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
-                // Example: wss://gateway.discord.gg/?v=6&encoding=json
-                string fullURL = $"{gateway.URL}/?{Connect.Serialize()}";
-
-                if (Settings.Debugging)
+                if (field.GetCustomAttributes(typeof(DiscordClientAttribute), true).Length != 0)
                 {
-                    Interface.Oxide.LogDebug($"Got Gateway url: {fullURL}");
+                    field.SetValue(client.Owner, null);
+                    break;
                 }
-
-                callback.Invoke(fullURL);
-            });
-        }
-
-        public void UpdateWSSURL(string fullURL)
-        {
-            WSSURL = fullURL;
-        }
-
-        #region Discord Events
-        
-        public void Identify()
-        {
-            // Sent immediately after connecting. Opcode 2: Identify
-            // Ref: https://discordapp.com/developers/docs/topics/gateway#identifying
-
-            Identify identify = new Identify()
-            {
-                Token = this.Settings.ApiToken,
-                Properties = new Properties()
-                {
-                    OS = "Oxide.Ext.Discord",
-                    Browser = "Oxide.Ext.Discord",
-                    Device = "Oxide.Ext.Discord"
-                },
-                Compress = false,
-                LargeThreshold = 50,
-                Shard = new List<int>() { 0, 1 }
-            };
-
-            var opcode = new SPayload()
-            {
-                OP = OpCodes.Identify,
-                Payload = identify
-            };
-            var payload = JsonConvert.SerializeObject(opcode);
-
-            _webSocket.Send(payload);
-        }
-        
-        public void Resume()
-        {
-            var resume = new Resume()
-            {
-                Sequence = this.Sequence,
-                SessionID = this.SessionID,
-                Token = Settings.ApiToken
-            };
-
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.Resume,
-                Data = resume
-            };
-
-            string payload = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(payload);
-        }
-        
-        public void SendHeartbeat()
-        {
-            if(!HeartbeatACK)
-            {
-                // Didn't receive an ACK, thus connection can be considered zombie, thus destructing.
-                Interface.Oxide.LogError("[Discord Extension] Discord did not respond to Heartbeat! Disconnecting..");
-                requestReconnect = true;
-                _webSocket.Disconnect(false);
-                return;
             }
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.Heartbeat,
-                Data = this.Sequence
-            };
 
-            HeartbeatACK = false;
-            string message = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(message);
-
-            _lastHeartbeat = Time.TimeSinceEpoch();
-
-            this.CallHook("DiscordSocket_HeartbeatSent");
-
-            if (Settings.Debugging)
-            {
-                Interface.Oxide.LogDebug($"[Discord Extension] Heartbeat sent - {_timer.Interval}ms interval.");
-            }
+            Clients.Remove(client.Owner.Name);
+            
+            client.Owner = null;
+            client.RegisteredForHooks.Clear();
         }
-        
-        public void RequestGuildMembers(string guild_id, string query = "", int limit = 0)
-        {
-            var requestGuildMembers = new GuildMembersRequest()
-            {
-                GuildID = guild_id,
-                Query = query,
-                Limit = limit
-            };
-
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.RequestGuildMembers,
-                Data = requestGuildMembers
-            };
-
-            string payload = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(payload);
-        }
-
-        public void RequestGuildMembers(Guild guild, string query = "", int limit = 0)
-        {
-            RequestGuildMembers(guild.id, query, limit);
-        }
-
-        public void UpdateVoiceState(string guildID, string channelId, bool selfDeaf, bool selfMute)
-        {
-            var voiceState = new VoiceStateUpdate()
-            {
-                ChannelID = channelId,
-                GuildID = guildID,
-                SelfDeaf = selfDeaf,
-                SelfMute = selfMute
-            };
-
-            var packet = new RPayload()
-            {
-                OpCode = OpCodes.VoiceStateUpdate,
-                Data = voiceState
-            };
-
-            string payload = JsonConvert.SerializeObject(packet);
-            _webSocket.Send(payload);
-        }
-
-        public void UpdateStatus(Presence presence)
-        {
-            var opcode = new SPayload()
-            {
-                OP = OpCodes.StatusUpdate,
-                Payload = presence
-            };
-
-            var payload = JsonConvert.SerializeObject(opcode);
-            _webSocket.Send(payload);
-        }
-
-        public Guild GetGuild(string id)
-        {
-            return this.DiscordServers?.FirstOrDefault(x => x.id == id);
-        }
-
-        public void UpdateGuild(string g_id, Guild newguild)
-        {
-            Guild g = this.GetGuild(g_id);
-            if (g == null) return;
-            int idx = DiscordServers?.IndexOf(g) ?? -1;
-            if (idx == -1) return;
-            this.DiscordServers[idx] = newguild;
-        }
-
         #endregion
     }
 }
