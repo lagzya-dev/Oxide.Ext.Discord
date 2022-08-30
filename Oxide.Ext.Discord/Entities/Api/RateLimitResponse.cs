@@ -80,6 +80,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             ResetAt = default(DateTimeOffset);
             Limit = 0;
             Remaining = 0;
+            Scope = null;
         }
 
         ///<inheritdoc/>
