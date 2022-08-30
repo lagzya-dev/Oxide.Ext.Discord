@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Callbacks.Async;
+using Oxide.Ext.Discord.Callbacks.Async.Templates;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Permissions;
@@ -10,6 +13,7 @@ using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
@@ -80,6 +84,19 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return message;
         }
 
+        public DiscordAsyncCallback<T> ToPlaceholderMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
+        {
+            DiscordAsyncCallback<T> callback = DiscordAsyncCallback<T>.Create();
+            ToPlaceholderMessageCallback<T> handler = ToPlaceholderMessageCallback<T>.Create(this, data, message, callback);
+            handler.Run();
+            return callback;
+        }
+
+        internal Task<T> ToPlaceholderMessageInternalAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
+        {
+            return Task.FromResult(ToPlaceholderMessage(data, message));
+        }
+
         private List<DiscordEmbed> CreateEmbed(PlaceholderData data)
         {
             List<DiscordEmbed> embeds = new List<DiscordEmbed>();
@@ -100,7 +117,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                     Color = !string.IsNullOrEmpty(template.Color) ? new DiscordColor(ApplyPlaceholder(template.Color, data)) : (DiscordColor?)null,
                     Timestamp = template.TimeStamp ? DateTime.UtcNow : (DateTime?)null
                 };
+                
                 embeds.Add(embed);
+                
                 if (!string.IsNullOrEmpty(template.ImageUrl))
                 {
                     embed.Image = new EmbedImage
@@ -108,6 +127,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                         Url = ApplyPlaceholder(template.Url, data)
                     };
                 }
+                
                 if (!string.IsNullOrEmpty(template.ThumbnailUrl))
                 {
                     embed.Thumbnail = new EmbedThumbnail
@@ -115,6 +135,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                         Url = ApplyPlaceholder(template.ThumbnailUrl, data)
                     };
                 }
+                
                 if (!string.IsNullOrEmpty(template.VideoUrl))
                 {
                     embed.Video = new EmbedVideo

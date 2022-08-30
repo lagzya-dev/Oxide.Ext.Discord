@@ -1703,6 +1703,12 @@
             Runs the callback using async
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.DisposeInternal">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback">
             <summary>
             Thread Pool Handler for Rest Requests

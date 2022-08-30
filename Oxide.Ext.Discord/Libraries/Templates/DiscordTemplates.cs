@@ -1,10 +1,13 @@
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Callbacks.Async;
+using Oxide.Ext.Discord.Callbacks.Async.Templates;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Extensions;
@@ -24,7 +27,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     {
         private readonly string _rootDir = Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "messages");
         private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
-        private readonly Hash<string, Hash<TemplateId, DiscordMessageTemplate>> _pluginTemplates = new Hash<string, Hash<TemplateId, DiscordMessageTemplate>>();
+        internal readonly Hash<string, Hash<TemplateId, DiscordMessageTemplate>> TemplateCache = new Hash<string, Hash<TemplateId, DiscordMessageTemplate>>();
         private readonly ILogger _logger;
 
         /// <summary>
@@ -55,21 +58,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            string path = GetTemplatePath(plugin, name, null);
-            if (!File.Exists(path))
-            {
-                CreateFile(path, template);
-                return;
-            }
-
-            DiscordMessageTemplate existingTemplate = GetGlobalMessageTemplate(plugin, name);
-            if (existingTemplate.Version >= minSupportedVersion)
-            {
-                return;
-            }
-            
-            MoveFile(plugin, name, null, existingTemplate.Version);
-            CreateFile(path, template);
+            RegisterMessageTemplateCallback callback = RegisterMessageTemplateCallback.Create(plugin, name, null, template, minSupportedVersion, _logger);
+            callback.Run();
         }
         
         /// <summary>
@@ -91,21 +81,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            string path = GetTemplatePath(plugin, name, language);
-            if (!File.Exists(path))
-            {
-                CreateFile(path, template);
-                return;
-            }
-
-            DiscordMessageTemplate existingTemplate = GetLocalizedMessageTemplate(plugin, name, language);
-            if (existingTemplate.Version >= minSupportedVersion)
-            {
-                return;
-            }
-            
-            MoveFile(plugin, name, language, existingTemplate.Version);
-            CreateFile(path, template);
+            RegisterMessageTemplateCallback callback = RegisterMessageTemplateCallback.Create(plugin, name, language, template, minSupportedVersion, _logger);
+            callback.Run();
         }
 
         /// <summary>
@@ -116,7 +93,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="player">IPlayer for the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public DiscordMessageTemplate GetMessageTemplateForPlayer(Plugin plugin, string name, IPlayer player)
+        public DiscordAsyncCallback<DiscordMessageTemplate> GetMessageTemplateForPlayer(Plugin plugin, string name, IPlayer player)
         {
             string locale = player != null ? DiscordLocale.GetPlayerLanguage(player) : DiscordLocale.GameServerLanguage;
             return GetLocalizedMessageTemplate(plugin, name, locale);
@@ -130,7 +107,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="playerId">PlayerId for the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public DiscordMessageTemplate GetMessageTemplateForPlayer(Plugin plugin, string name, string playerId)
+        public DiscordAsyncCallback<DiscordMessageTemplate> GetMessageTemplateForPlayer(Plugin plugin, string name, string playerId)
         {
             string locale = !string.IsNullOrEmpty(playerId) ? DiscordLocale.GetPlayerLanguage(playerId) : DiscordLocale.GameServerLanguage;
             return GetLocalizedMessageTemplate(plugin, name, locale);
@@ -143,35 +120,15 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="name">Name of the template</param>
         /// <returns><see cref="DiscordMessageTemplate"/></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public DiscordMessageTemplate GetGlobalMessageTemplate(Plugin plugin, string name)
+        public DiscordAsyncCallback<DiscordMessageTemplate> GetGlobalMessageTemplate(Plugin plugin, string name)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
-            Hash<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
-            if (templates == null)
-            {
-                templates = new Hash<TemplateId, DiscordMessageTemplate>();
-                _pluginTemplates[plugin.Name] = templates;
-            }
-
-            TemplateId templateId = new TemplateId(name, null);
-            if (templates.TryGetValue(templateId, out DiscordMessageTemplate template))
-            {
-                return template;
-            }
-
-            template = DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, null);
-            
-            if (template == null)
-            {
-                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetGlobalMessageTemplate)} API but message template name '{{1}}' is not registered", plugin.FullName(), name);
-                return new DiscordMessageTemplate();
-            }
-            
-            templates[templateId] = template;
-
-            return template;
+            DiscordAsyncCallback<DiscordMessageTemplate> callback = DiscordAsyncCallback<DiscordMessageTemplate>.Create();
+            LoadGlobalMessageTemplate load = LoadGlobalMessageTemplate.Create(plugin, name, callback, _logger);
+            load.Run();
+            return callback;
         }
         
         /// <summary>
@@ -182,38 +139,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="language">Oxide language of the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public DiscordMessageTemplate GetLocalizedMessageTemplate(Plugin plugin, string name, string language = DiscordLocale.DefaultOxideLanguage)
+        public DiscordAsyncCallback<DiscordMessageTemplate> GetLocalizedMessageTemplate(Plugin plugin, string name, string language = DiscordLocale.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (string.IsNullOrEmpty(language)) throw new ArgumentNullException(nameof(language));
 
-            Hash<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
-            if (templates == null)
-            {
-                templates = new Hash<TemplateId, DiscordMessageTemplate>();
-                _pluginTemplates[plugin.Name] = templates;
-            }
-
-            TemplateId templateId = new TemplateId(name, language);
-            if (templates.TryGetValue(templateId, out DiscordMessageTemplate template))
-            {
-                return template;
-            }
-            
-            template = DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, language)
-                                          ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.GameServerLanguage)
-                                          ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.DefaultOxideLanguage);
-            
-            if (template == null)
-            {
-                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetLocalizedMessageTemplate)} API but message template name '{{1}}' is not registered", plugin.FullName(), name);
-                return new DiscordMessageTemplate();
-            }
-            
-            templates[templateId] = template;
-
-            return template;
+            DiscordAsyncCallback<DiscordMessageTemplate> callback = DiscordAsyncCallback<DiscordMessageTemplate>.Create();
+            LoadLocalizedMessageTemplate load = LoadLocalizedMessageTemplate.Create(plugin, name, language, callback, _logger);
+            load.Run();
+            return callback;
         }
         
         /// <summary>
@@ -224,45 +159,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="interaction">Interaction to get the template for</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public DiscordMessageTemplate GetMessageTemplate(Plugin plugin, string name, DiscordInteraction interaction)
+        public DiscordAsyncCallback<DiscordMessageTemplate> GetMessageTemplate(Plugin plugin, string name, DiscordInteraction interaction)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
-            Hash<TemplateId, DiscordMessageTemplate> templates = _pluginTemplates[plugin.Name];
-            if (templates == null)
-            {
-                templates = new Hash<TemplateId, DiscordMessageTemplate>();
-                _pluginTemplates[plugin.Name] = templates;
-            }
-
-            string interactionLang = DiscordLocale.GetOxideLanguage(interaction.Locale);
-            TemplateId templateId = new TemplateId(name, interactionLang);
-            if (templates.TryGetValue(templateId, out DiscordMessageTemplate template))
-            {
-                return template;
-            }
-            
-            IPlayer player = interaction.User.Player;
-            
-            template = DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, interactionLang)
-                                              ?? (player != null ? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.GetPlayerLanguage(player)) : null)
-                                              ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.GetOxideLanguage(interaction.GuildLocale)) 
-                                              ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.GameServerLanguage)
-                                              ?? DiscordExtension.DiscordTemplates.LoadTemplate(plugin, name, DiscordLocale.DefaultOxideLanguage);
-
-            if (template == null)
-            {
-                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordTemplates)}.{nameof(GetMessageTemplate)} API but message template name '{{1}}' is not registered", plugin.FullName(), name);
-                return new DiscordMessageTemplate();
-            }
-
-            templates[templateId] = template;
-
-            return template;
+            DiscordAsyncCallback<DiscordMessageTemplate> callback = DiscordAsyncCallback<DiscordMessageTemplate>.Create();
+            LoadInteractionMessageTemplate load = LoadInteractionMessageTemplate.Create(plugin, name, interaction, callback, _logger);
+            load.Run();
+            return callback;
         }
 
-        private DiscordMessageTemplate LoadTemplate(Plugin plugin, string name, string language)
+        internal async Task<DiscordMessageTemplate> LoadTemplate(Plugin plugin, string name, string language)
         {
             string path = GetTemplatePath(plugin, name, language);
             if (!File.Exists(path))
@@ -273,14 +181,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
                 DiscordJsonReader reader = DiscordPool.Get<DiscordJsonReader>();
-                reader.CopyFrom(stream);
-                DiscordMessageTemplate template = reader.Deserialize<DiscordMessageTemplate>(_serializer);
+                await reader.CopyFromAsync(stream).ConfigureAwait(false);
+                DiscordMessageTemplate template = await reader.DeserializeAsync<DiscordMessageTemplate>(_serializer).ConfigureAwait(false);
                 reader.Dispose();
                 return template;
             }
         }
 
-        private void CreateFile(string path, DiscordMessageTemplate template)
+        internal Task CreateFile(string path, DiscordMessageTemplate template)
         {
             if (!Directory.Exists(path))
             {
@@ -296,14 +204,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 writer.Stream.CopyToPooled(stream);
                 writer.Dispose();
             }
+
+            return Task.CompletedTask;
         }
 
-        private void MoveFile(Plugin plugin, string name, string language, TemplateVersion version)
+        internal Task MoveFile(Plugin plugin, string name, string language, TemplateVersion version)
         {
             string oldPath = GetTemplatePath(plugin, name, language);
             if (!File.Exists(oldPath))
             {
-                return;
+                return Task.CompletedTask;
             }
 
             string newPath = GetRenamePath(plugin, name, language, version);
@@ -313,9 +223,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
             
             File.Move(oldPath, newPath);
+            return Task.CompletedTask;
         }
         
-        private string GetTemplatePath(Plugin plugin, string name, string language)
+        internal string GetTemplatePath(Plugin plugin, string name, string language)
         {
             DiscordTemplateException.ThrowIfInvalidTemplateName(name);
             if (string.IsNullOrEmpty(language))
@@ -332,7 +243,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
         internal void OnPluginUnloaded(Plugin plugin)
         {
-            _pluginTemplates.Remove(plugin.Name);
+            TemplateCache.Remove(plugin.Name);
         }
     }
 }

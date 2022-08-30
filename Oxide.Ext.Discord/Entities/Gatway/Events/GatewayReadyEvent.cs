@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Events
         /// See <a href="https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions">Gateway Version</a>
         /// </summary>
         [JsonProperty("v")]
-        public int Version { get; private set; }
+        public int Version { get; set; }
         
         /// <summary>
         /// Information about the user including email
