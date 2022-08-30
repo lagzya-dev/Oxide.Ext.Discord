@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// Constructor for RestRateLimit
         /// </summary>
-        public RestRateLimit(ILogger logger) : base(110, 60, logger)
+        public RestRateLimit(ILogger logger) : base(110, 60 * 1000L, logger)
         {
             
         }

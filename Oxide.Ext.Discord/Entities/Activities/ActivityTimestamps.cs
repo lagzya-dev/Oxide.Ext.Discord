@@ -1,6 +1,6 @@
 using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Activities
 {
@@ -13,23 +13,15 @@ namespace Oxide.Ext.Discord.Entities.Activities
         /// <summary>
         /// Unix time (in milliseconds) of when the activity started
         /// </summary>
+        [JsonConverter(typeof(UnixDateTimeConverter))]
         [JsonProperty("start")]
-        public long Start { get; set; }
+        public DateTimeOffset Start { get; set; }
         
         /// <summary>
         /// Unix time (in milliseconds) of when the activity ends
         /// </summary>
+        [JsonConverter(typeof(UnixDateTimeConverter))]
         [JsonProperty("end")]
-        public long End { get; set; }
-        
-        /// <summary>
-        /// DateTimeOffset when the activity starts
-        /// </summary>
-        public DateTimeOffset StartDateTime => Start.ToDateTimeOffsetFromMilliseconds();
-
-        /// <summary>
-        /// DateTime when the activity ends
-        /// </summary>
-        public DateTimeOffset EndDateTime => End.ToDateTimeOffsetFromMilliseconds();
+        public DateTimeOffset End { get; set; }
     }
 }

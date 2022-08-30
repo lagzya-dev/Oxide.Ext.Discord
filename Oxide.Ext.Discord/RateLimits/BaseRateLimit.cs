@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// The Last Reset Time
         /// </summary>
-        protected double LastReset;
+        protected long LastReset;
         
         /// <summary>
         /// The max number of requests this rate limit can handle per interval
@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// The interval in which this resets at
         /// </summary>
-        protected readonly double ResetInterval;
+        protected readonly long ResetInterval;
 
         /// <summary>
         /// Logger for the rate limit
@@ -43,25 +43,25 @@ namespace Oxide.Ext.Discord.RateLimits
         /// Base Rate Limit Constructor
         /// </summary>
         /// <param name="maxRequests">Max requests per interval</param>
-        /// <param name="interval">Reset Interval</param>
+        /// <param name="interval">Reset Interval in milliseconds</param>
         /// <param name="logger">Logger</param>
-        protected BaseRateLimit(int maxRequests, double interval, ILogger logger)
+        protected BaseRateLimit(int maxRequests, long interval, ILogger logger)
         {
             MaxRequests = maxRequests;
             ResetInterval = interval;
             Logger = logger;
             
-            _timer = new Timer(interval * 1000);
+            _timer = new Timer(interval);
             _timer.Elapsed += ResetRateLimit;
             _timer.Start();
-            LastReset = TimeHelpers.TimeSinceEpoch();
+            LastReset = TimeHelpers.MillisecondsSinceEpoch();
         }
         
         private void ResetRateLimit(object sender, ElapsedEventArgs e)
         {
             OnRateLimitReset();
             Interlocked.Exchange(ref NumRequests, 0);
-            Interlocked.Exchange(ref LastReset, TimeHelpers.TimeSinceEpoch());
+            Interlocked.Exchange(ref LastReset, TimeHelpers.SecondsSinceEpoch());
         }
         
         /// <summary>
@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// Returns how long until the current rate limit period will expire
         /// </summary>
-        public virtual DateTimeOffset NextReset() => (LastReset + ResetInterval).ToDateTimeOffsetFromSeconds();
+        public virtual DateTimeOffset NextReset() => (LastReset + ResetInterval).ToDateTimeOffsetFromMilliseconds();
 
         /// <summary>
         /// Called when a bot is shutting down

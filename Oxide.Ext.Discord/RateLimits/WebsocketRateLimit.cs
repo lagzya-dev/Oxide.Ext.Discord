@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.RateLimits
     {
         private readonly ConcurrentDictionary<string, int> _pluginRequests = new ConcurrentDictionary<string, int>();
         internal const int MaxRequestPerPlugin = 60;
-        internal const int RateLimitInterval = 60;
+        internal const long RateLimitInterval = 60 * 1000L;
 
         /// <summary>
         /// Constructor for WebsocketRateLimit

@@ -8,39 +8,27 @@ namespace Oxide.Ext.Discord.Helpers
     public static class TimeHelpers
     {
         /// <summary>
-        /// DateTime since linux epoch
+        /// Gets how many seconds since the linux epoch
         /// </summary>
-        public static readonly DateTimeOffset LinuxEpoch = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
-
+        /// <returns>Seconds since linux epoch</returns>
+        public static long SecondsSinceEpoch() => DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        
         /// <summary>
         /// Gets how many seconds since the linux epoch
         /// </summary>
         /// <returns>Seconds since linux epoch</returns>
-        public static double TimeSinceEpoch() => (DateTimeOffset.UtcNow - LinuxEpoch).TotalSeconds;
+        public static long MillisecondsSinceEpoch() => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+        /// <summary>
+        /// Converts the milliseconds since linux epoch to a <see cref="DateTimeOffset"/>
+        /// </summary>
+        /// <returns></returns>
+        public static DateTimeOffset ToDateTimeOffsetFromMilliseconds(this long milliseconds) => DateTimeOffset.FromUnixTimeMilliseconds(milliseconds);
 
         /// <summary>
         /// Converts the seconds since linux epoch to a DateTime
         /// </summary>
         /// <returns></returns>
-        public static DateTimeOffset ToDateTimeOffsetFromMilliseconds(this long milliseconds) => LinuxEpoch.AddMilliseconds(milliseconds);
-        
-        /// <summary>
-        /// Converts the seconds since linux epoch to a DateTime
-        /// </summary>
-        /// <returns></returns>
-        public static DateTimeOffset ToDateTimeOffsetFromSeconds(this double seconds) => LinuxEpoch.AddSeconds(seconds);
-        
-        /// <summary>
-        /// Converts the seconds since linux epoch to a DateTime
-        /// </summary>
-        /// <returns></returns>
-        public static double SecondsUntilTime(this DateTimeOffset time) => (time - DateTimeOffset.UtcNow).TotalSeconds;
-
-        /// <summary>
-        /// Gets the time since the linux epoch and the given date time
-        /// </summary>
-        /// <param name="date">DateTime to get total second for</param>
-        /// <returns>Total seconds since linux epoch for date time</returns>
-        public static double ToUnixTimeStamp(this DateTimeOffset date) => (date - LinuxEpoch).TotalSeconds;
+        public static DateTimeOffset ToDateTimeOffsetFromSeconds(this double seconds) => DateTimeOffset.FromUnixTimeSeconds(0).AddSeconds(seconds);
     }
 }

@@ -3190,16 +3190,6 @@
             Unix time (in milliseconds) of when the activity ends
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Activities.ActivityTimestamps.StartDateTime">
-            <summary>
-            DateTimeOffset when the activity starts
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Activities.ActivityTimestamps.EndDateTime">
-            <summary>
-            DateTime when the activity ends
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.ActivityType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-types">Activity Types</a>
@@ -3245,11 +3235,6 @@
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Activities.DiscordActivity.CreatedAt">
-            <summary>
-            Unix timestamp of when the activity was added to the user's session
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Activities.DiscordActivity.CreatedAtDateTime">
             <summary>
             Timestamp of when the activity was added to the user's session
             </summary>
@@ -3409,9 +3394,9 @@
             HTTP Content Type for the request
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.TimeSinceEpoch">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.ErrorDate">
             <summary>
-            How long it has been since the discord epoch in seconds
+            <see cref="T:System.DateTimeOffset"/> when the error occured
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.StringContents">
@@ -16616,12 +16601,13 @@
             Helper methods relating to time
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Helpers.TimeHelpers.LinuxEpoch">
+        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.SecondsSinceEpoch">
             <summary>
-            DateTime since linux epoch
+            Gets how many seconds since the linux epoch
             </summary>
+            <returns>Seconds since linux epoch</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.TimeSinceEpoch">
+        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.MillisecondsSinceEpoch">
             <summary>
             Gets how many seconds since the linux epoch
             </summary>
@@ -16629,7 +16615,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.ToDateTimeOffsetFromMilliseconds(System.Int64)">
             <summary>
-            Converts the seconds since linux epoch to a DateTime
+            Converts the milliseconds since linux epoch to a <see cref="T:System.DateTimeOffset"/>
             </summary>
             <returns></returns>
         </member>
@@ -16638,19 +16624,6 @@
             Converts the seconds since linux epoch to a DateTime
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.SecondsUntilTime(System.DateTimeOffset)">
-            <summary>
-            Converts the seconds since linux epoch to a DateTime
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.ToUnixTimeStamp(System.DateTimeOffset)">
-            <summary>
-            Gets the time since the linux epoch and the given date time
-            </summary>
-            <param name="date">DateTime to get total second for</param>
-            <returns>Total seconds since linux epoch for date time</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.TimestampStyles">
             <summary>
@@ -18811,12 +18784,12 @@
             Logger for the rate limit
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.#ctor(System.Int32,System.Double,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.#ctor(System.Int32,System.Int64,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Base Rate Limit Constructor
             </summary>
             <param name="maxRequests">Max requests per interval</param>
-            <param name="interval">Reset Interval</param>
+            <param name="interval">Reset Interval in milliseconds</param>
             <param name="logger">Logger</param>
         </member>
         <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.FiredRequestInternal">

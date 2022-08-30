@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Activities
 {
@@ -32,15 +33,11 @@ namespace Oxide.Ext.Discord.Entities.Activities
         public string Url { get; set; }
 
         /// <summary>
-        /// Unix timestamp of when the activity was added to the user's session
-        /// </summary>
-        [JsonProperty("created_at")]
-        public long CreatedAt { get; set; }
-        
-        /// <summary>
         /// Timestamp of when the activity was added to the user's session
         /// </summary>
-        public DateTimeOffset CreatedAtDateTime => CreatedAt.ToDateTimeOffsetFromMilliseconds();
+        [JsonConverter(typeof(UnixDateTimeConverter))]
+        [JsonProperty("created_at")]
+        public DateTimeOffset CreatedAt { get; set; }
         
         /// <summary>
         /// Unix timestamps for start and/or end of the game

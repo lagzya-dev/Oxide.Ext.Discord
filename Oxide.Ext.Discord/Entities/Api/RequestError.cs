@@ -48,9 +48,9 @@ namespace Oxide.Ext.Discord.Entities.Api
         public string ContentType { get; private set; }
 
         /// <summary>
-        /// How long it has been since the discord epoch in seconds
+        /// <see cref="DateTimeOffset"/> when the error occured
         /// </summary>
-        public readonly double TimeSinceEpoch;
+        public readonly DateTimeOffset ErrorDate;
 
         /// <summary>
         /// The string contents of the request
@@ -97,7 +97,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             Url = request.Route;
             RequestMethod = request.Method;
             Data = request.Data;
-            TimeSinceEpoch = TimeHelpers.TimeSinceEpoch();
+            ErrorDate = DateTimeOffset.UtcNow;
             ErrorType = type;
             _logLevel = log;
         }
@@ -178,7 +178,7 @@ namespace Oxide.Ext.Discord.Entities.Api
                 
                 case RequestErrorType.RateLimit:
                     _client.Logger.Warning("Rest Request Exception (Rate Limit) Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Remaining: {5} Limit: {6} Reset At: {7} Current Time: {8}",
-                        _client.PluginName, RequestId, RequestMethod, Url, ContentType, _bucket.Remaining, _bucket.Limit, _bucket.ResetAt, TimeSinceEpoch.ToDateTimeOffsetFromSeconds());
+                        _client.PluginName, RequestId, RequestMethod, Url, ContentType, _bucket.Remaining, _bucket.Limit, _bucket.ResetAt, ErrorDate);
                     break;
 
                 case RequestErrorType.ApiError:
