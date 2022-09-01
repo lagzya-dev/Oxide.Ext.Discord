@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Exceptions.Entities.Channels;
@@ -32,6 +33,12 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// </summary>
         [JsonProperty("message")]
         public MessageCreate Message { get; set; }
+        
+        /// <summary>
+        /// The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+        /// </summary>
+        [JsonProperty("applied_tags")]
+        public List<Snowflake> AppliedTags { get; set; }
         
         /// <summary>
         /// Validates the Thread Forum Create

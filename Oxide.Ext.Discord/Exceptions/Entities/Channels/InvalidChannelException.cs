@@ -29,11 +29,21 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
             }
         }
 
-        internal static void ThrowIfInvalidTopic(string topic, bool allowNullOrEmpty)
+        internal static void ThrowIfInvalidTopic(string topic, ChannelType type, bool allowNullOrEmpty)
         {
             if (!allowNullOrEmpty && string.IsNullOrEmpty(topic))
             {
                 throw new InvalidChannelException("Topic cannot be less than 1 character");
+            }
+
+            if (type == ChannelType.GuildForum)
+            {
+                if (topic.Length > 4096)
+                {
+                    throw new InvalidChannelException("Topic cannot be more than 4096 characters for Guild Forum Channels");
+                }
+
+                return;
             }
             
             if (topic.Length > 1024)

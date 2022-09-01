@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// the type of channel <see cref="ChannelType"/>
         /// </summary>
         [JsonProperty("type")]
-        public ChannelType? Type { get; set; }
+        public ChannelType Type { get; set; }
         
         /// <summary>
         /// The channel topic (0-1024 characters)
@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public void Validate()
         {
             InvalidChannelException.ThrowIfInvalidName(Name, false);
-            InvalidChannelException.ThrowIfInvalidTopic(Topic, true);
+            InvalidChannelException.ThrowIfInvalidTopic(Topic, Type, true);
             InvalidChannelException.ThrowIfInvalidUserLimit(UserLimit);
             InvalidChannelException.ThrowIfInvalidRateLimitPerUser(RateLimitPerUser);
             InvalidChannelException.ThrowIfInvalidBitRate(Bitrate);

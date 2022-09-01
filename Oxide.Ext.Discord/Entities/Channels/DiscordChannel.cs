@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.Callbacks.Api.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
+using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Invites;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
@@ -206,6 +207,30 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public int? TotalMessageSent { get; set; }
 
         private Hash<Snowflake, ThreadMember> _threadMembers;
+        
+        /// <summary>
+        /// The set of tags that can be used in a GUILD_FORUM channel
+        /// </summary>
+        [JsonProperty("available_tags")]
+        public List<ForumTag> AvailableTags { get; set; }
+        
+        /// <summary>
+        /// The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+        /// </summary>
+        [JsonProperty("applied_tags")]
+        public List<Snowflake> AppliedTags { get; set; }
+        
+        /// <summary>
+        /// The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+        /// </summary>
+        [JsonProperty("default_reaction_emoji")]
+        public DefaultReaction DefaultReactionEmoji { get; set; }
+        
+        /// <summary>
+        /// The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
+        /// </summary>
+        [JsonProperty("default_thread_rate_limit_per_user")]
+        public int? DefaultThreadRateLimitPerUser { get; set; }
 
         /// <summary>
         /// List of thread members if channel is thread; Null Otherwise.

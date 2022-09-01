@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Interfaces;
 
@@ -90,12 +91,30 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("default_auto_archive_duration")]
         public int? DefaultAutoArchiveDuration { get; set; }
+        
+        /// <summary>
+        /// The set of tags that can be used in a GUILD_FORUM channel
+        /// </summary>
+        [JsonProperty("available_tags")]
+        public List<ForumTag> AvailableTags { get; set; }
+
+        /// <summary>
+        /// The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+        /// </summary>
+        [JsonProperty("default_reaction_emoji")]
+        public DefaultReaction DefaultReactionEmoji { get; set; }
+        
+        /// <summary>
+        /// The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
+        /// </summary>
+        [JsonProperty("default_thread_rate_limit_per_user")]
+        public int? DefaultThreadRateLimitPerUser { get; set; }
 
         ///<inheritdoc/>
         public void Validate()
         {
             InvalidChannelException.ThrowIfInvalidName(Name, true);
-            InvalidChannelException.ThrowIfInvalidTopic(Topic, true);
+            InvalidChannelException.ThrowIfInvalidTopic(Topic, Type, true);
             InvalidChannelException.ThrowIfInvalidRateLimitPerUser(RateLimitPerUser);
             InvalidChannelException.ThrowIfInvalidBitRate(Bitrate);
             InvalidChannelException.ThrowIfInvalidUserLimit(UserLimit);
