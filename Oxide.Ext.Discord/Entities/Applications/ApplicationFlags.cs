@@ -54,5 +54,10 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// Intent required for bots in under 100 servers to receive message content, found in Bot Settings
         /// </summary>
         GatewayMessageContentLimited = 1 << 19,
+        
+        /// <summary>
+        /// Indicates if an app has registered global application commands
+        /// </summary>
+        ApplicationCommandBadge = 1 << 19,
     }
 }
