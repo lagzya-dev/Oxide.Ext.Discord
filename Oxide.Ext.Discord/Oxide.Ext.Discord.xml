@@ -3601,6 +3601,11 @@
             Intent required for bots in under 100 servers to receive message content, found in Bot Settings
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.ApplicationCommandBadge">
+            <summary>
+            Indicates if an app has registered global application commands
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/application#application-object">Application Structure</a>
@@ -4746,11 +4751,6 @@
             Check if content contains words from a user defined list of keywords
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.HarmfulLink">
-            <summary>
-            Check if content contains any harmful links
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.Spam">
             <summary>
             Check if content represents generic spam
@@ -4834,7 +4834,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelFlags.Pinned">
             <summary>
-            This thread is pinned to the top of its parent forum channel
+            This thread is pinned to the top of its parent GUILD_FORUM channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelFlags.RequireTag">
+            <summary>
+            Whether a tag is required to be specified when creating a thread in a GUILD_FORUM channel. Tags are specified in the applied_tags field.
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelInvite">
@@ -5151,6 +5156,26 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.TotalMessageSent">
             <summary>
             Number of messages ever sent in a thread, it's similar to message_count on message creation, but will not decrement the number when a message is deleted
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.AvailableTags">
+            <summary>
+            The set of tags that can be used in a GUILD_FORUM channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.AppliedTags">
+            <summary>
+            The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultReactionEmoji">
+            <summary>
+            The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultThreadRateLimitPerUser">
+            <summary>
+            The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ThreadMembers">
@@ -5623,6 +5648,36 @@
             Created target webhook ID
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.ForumTag">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure">Overwrite Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ForumTag.Id">
+            <summary>
+            The id of the tag
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ForumTag.Name">
+            <summary>
+            The name of the tag (0-20 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ForumTag.Moderated">
+            <summary>
+            Whether this tag can only be added to or removed from threads by a member with the MANAGE_THREADS permission
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ForumTag.EmojiId">
+            <summary>
+            The id of a guild's custom emoji
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ForumTag.EmojiName">
+            <summary>
+            The unicode character of the emoji
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.GroupDmChannelUpdate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm">Group DM Channel Update Structure</a>
@@ -5712,6 +5767,21 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.DefaultAutoArchiveDuration">
             <summary>
             The default duration for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.AvailableTags">
+            <summary>
+            The set of tags that can be used in a GUILD_FORUM channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.DefaultReactionEmoji">
+            <summary>
+            The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.DefaultThreadRateLimitPerUser">
+            <summary>
+            The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.Validate">
@@ -5972,6 +6042,11 @@
             Channel flags combined as a bitfield; PINNED can only be set for threads in forum channels
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.AppliedTags">
+            <summary>
+            The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.Validate">
             <inheritdoc/>
         </member>
@@ -6057,6 +6132,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.Message">
             <summary>
             Contents of the first message in the forum thread
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.AppliedTags">
+            <summary>
+            The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.Validate">
@@ -6162,6 +6242,21 @@
         <member name="F:Oxide.Ext.Discord.Entities.Channels.VideoQualityMode.Full">
             <summary>
             720p
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Emojis.DefaultReaction">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/channel#followed-channel-object">Default Reaction Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Emojis.DefaultReaction.EmojiId">
+            <summary>
+            The id of a guild's custom emoji
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Emojis.DefaultReaction.EmojiName">
+            <summary>
+            The unicode character of the emoji
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji">
@@ -8682,9 +8777,9 @@
             Number of days to delete messages for (0-7)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate.Reason">
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate.DeleteMessageSeconds">
             <summary>
-            Reason for the ban
+            Number of seconds to delete messages for, between 0 and 604800 (7 days)
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate.Validate">
@@ -14516,11 +14611,6 @@
             Connection type is Reddit
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.SamsungGalaxy">
-            <summary>
-            Connection type is Samsung Galaxy
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Spotify">
             <summary>
             Connection type is Spotify
@@ -15665,6 +15755,11 @@
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Channels.InvalidChannelInviteException">
             <summary>
             Represents an error in channel invite
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Channels.InvalidForumTagException">
+            <summary>
+            Represents an exception for channel threads
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Channels.InvalidThreadException">
