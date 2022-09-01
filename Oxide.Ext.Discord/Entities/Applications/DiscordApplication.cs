@@ -146,13 +146,24 @@ namespace Oxide.Ext.Discord.Entities.Applications
         
         /// <summary>
         /// Returns if the given application has the passed in application flag
-        /// If Flags is null false is returned
+        /// If <see cref="Flags"/>  is null false is returned
         /// </summary>
         /// <param name="flag">Flag to compare against</param>
         /// <returns>True of application has flag; False Otherwise</returns>
         public bool HasApplicationFlag(ApplicationFlags flag)
         {
             return Flags.HasValue && (Flags.Value & flag) == flag;
+        }
+        
+        /// <summary>
+        /// Returns if the given application has any of the passed in application flags
+        /// If <see cref="Flags"/> is null false is returned
+        /// </summary>
+        /// <param name="flag">Flag to compare against</param>
+        /// <returns>True of application has flag; False Otherwise</returns>
+        public bool HasAnyApplicationFlags(ApplicationFlags flag)
+        {
+            return Flags.HasValue && (Flags.Value & flag) != 0;
         }
 
         /// <summary>

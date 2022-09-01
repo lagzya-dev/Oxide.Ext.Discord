@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
             if (Before.HasValue)
             {
                 builder.Add("before", Before.Value.ToString("o"));

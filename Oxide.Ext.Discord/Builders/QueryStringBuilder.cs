@@ -11,6 +11,11 @@ namespace Oxide.Ext.Discord.Builders
     {
         private StringBuilder _builder;
 
+        public static QueryStringBuilder Create()
+        {
+            return DiscordPool.Get<QueryStringBuilder>();
+        }
+        
         /// <summary>
         /// Add a key value pair to the query string
         /// </summary>

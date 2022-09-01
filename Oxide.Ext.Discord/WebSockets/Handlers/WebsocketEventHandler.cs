@@ -566,7 +566,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _client.OnClientReady(ready);
 
             _logger.Info("Your bot was found in {0} Guilds!", ready.Guilds.Count);
-            if (_client.Settings.HasIntents(GatewayIntents.GuildMessages) && !_client.Application.HasApplicationFlag(ApplicationFlags.GatewayMessageContentLimited))
+            if (_client.Settings.HasIntents(GatewayIntents.GuildMessages) && !_client.Application.HasAnyApplicationFlags(ApplicationFlags.GatewayMessageContentLimited | ApplicationFlags.GatewayMessageContent))
             {
                 _logger.Error("You need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications or plugins using this intent will not function correctly", _client.BotUser.Username);
             }

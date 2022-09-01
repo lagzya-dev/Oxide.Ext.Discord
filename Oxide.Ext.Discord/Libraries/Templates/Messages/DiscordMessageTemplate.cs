@@ -9,11 +9,11 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
-using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
@@ -84,9 +84,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return message;
         }
 
-        public DiscordAsyncCallback<T> ToPlaceholderMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
+        public IDiscordAsyncCallback<T> ToPlaceholderMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
         {
-            DiscordAsyncCallback<T> callback = DiscordAsyncCallback<T>.Create();
+            return ToPlaceholderMessageAsyncInternal(data, message, DiscordAsyncCallback<T>.Create());
+        }
+        
+        internal IDiscordAsyncCallback<T> ToPlaceholderMessageAsyncInternal<T>(PlaceholderData data, T message = null, IDiscordAsyncCallback<T> callback = null) where T : class, IDiscordTemplateMessage, new()
+        {
+            if (callback == null)
+            {
+                callback = InternalAsyncCallback<T>.Create();
+            }
+            
             ToPlaceholderMessageCallback<T> handler = ToPlaceholderMessageCallback<T>.Create(this, data, message, callback);
             handler.Run();
             return callback;

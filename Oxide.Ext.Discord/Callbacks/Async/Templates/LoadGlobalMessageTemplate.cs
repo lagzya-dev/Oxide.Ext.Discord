@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
@@ -14,17 +15,17 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates
         private readonly DiscordTemplates _templates = DiscordExtension.DiscordTemplates;
         private Plugin _plugin;
         private string _name;
-        private DiscordAsyncCallback<DiscordMessageTemplate> _callback;
+        private IDiscordAsyncCallback<DiscordMessageTemplate> _callback;
         private ILogger _logger;
 
-        public static LoadGlobalMessageTemplate Create(Plugin plugin, string name, DiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
+        public static LoadGlobalMessageTemplate Create(Plugin plugin, string name, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
         {
             LoadGlobalMessageTemplate load = DiscordPool.Get<LoadGlobalMessageTemplate>();
             load.Init(plugin, name, callback, logger);
             return load;
         }
 
-        private void Init(Plugin plugin, string name, DiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
+        private void Init(Plugin plugin, string name, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
         {
             _plugin = plugin;
             _name = name;

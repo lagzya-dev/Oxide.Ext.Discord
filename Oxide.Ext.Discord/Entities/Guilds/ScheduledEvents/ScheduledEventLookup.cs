@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
             if (WithUserCount.HasValue)
             {
                 builder.Add("with_user_count", WithUserCount.Value.ToString());

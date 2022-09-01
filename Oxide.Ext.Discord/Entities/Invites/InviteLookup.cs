@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
             if (WithCounts.HasValue)
             {
                 builder.Add("with_counts", WithCounts.Value.ToString());

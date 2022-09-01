@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public override string ToQueryString()
         {
             Validate();
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
             
             builder.Add("days", Days.ToString());
             builder.Add("compute_prune_count", ComputePruneCount.ToString());

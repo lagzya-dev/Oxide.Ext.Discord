@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders.Messages;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
@@ -288,7 +291,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             if (executeParams == null)
             {
-                executeParams = new WebhookExecuteParams();
+                executeParams = WebhookExecuteParams.Default;
             }
 
             client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
@@ -321,10 +324,8 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             if (executeParams == null)
             {
-                executeParams = new WebhookExecuteParams();
+                executeParams = WebhookExecuteParams.DefaultWait;
             }
-
-            executeParams.Wait = true;
 
             client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
         }
@@ -342,6 +343,28 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             ExecuteWebhook(client, builder.Build(), executeParams, callback, error);
         }
+        
+        public void ExecuteWebhookGlobalTemplate(DiscordClient client, Plugin plugin, string templateKey, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    ExecuteWebhook(client, response, executeParams, callback, error);
+                });
+            });
+        }
+        
+        public void ExecuteWebhookTemplate(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    ExecuteWebhook(client, response, executeParams, callback, error);
+                });
+            });
+        }
 
         /// <summary>
         /// Gets a previously-sent webhook message from the same token.
@@ -355,12 +378,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public void GetWebhookMessage(DiscordClient client, Snowflake messageId, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            if (messageParams == null)
-            {
-                messageParams = new WebhookMessageParams();
-            }
-            
-            client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
         
         /// <summary>
@@ -375,12 +393,29 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditWebhookMessage(DiscordClient client, Snowflake messageId, DiscordMessage message, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            if (messageParams == null)
+            client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}", RequestMethod.PATCH, message, callback, error);
+        }
+        
+        public void EditWebhookMessageGlobalTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateKey, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
             {
-                messageParams = new WebhookMessageParams();
-            }
-            
-            client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams.ToQueryString()}", RequestMethod.PATCH, message, callback, error);
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    EditWebhookMessage(client, messageId, response, messageParams, callback, error);
+                });
+            });
+        }
+        
+        public void EditWebhookMessageTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    EditWebhookMessage(client, messageId, response, messageParams, callback, error);
+                });
+            });
         }
         
         /// <summary>

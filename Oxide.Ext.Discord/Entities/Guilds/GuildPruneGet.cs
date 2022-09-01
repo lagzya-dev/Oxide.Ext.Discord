@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public virtual string ToQueryString()
         {
             Validate();
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
             builder.Add("days", Days.ToString());
             if (IncludeRoles != null)
             {

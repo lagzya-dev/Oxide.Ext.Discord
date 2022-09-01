@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Api.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
@@ -16,6 +17,7 @@ using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 using UserData = Oxide.Ext.Discord.Data.Users.UserData;
@@ -475,6 +477,28 @@ namespace Oxide.Ext.Discord.Entities.Channels
             };
 
             CreateMessage(client, createMessage, callback, error);
+        }
+        
+        public void CreateGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateKey, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    CreateMessage(client, response, callback, error);
+                });
+            });
+        }
+        
+        public void CreateTemplateMessage(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    CreateMessage(client, response, callback, error);
+                });
+            });
         }
 
         /// <summary>

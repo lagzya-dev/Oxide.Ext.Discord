@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <inheritdoc/>
         public virtual string ToQueryString()
         {
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
             builder.Add("limit", Limit.ToString());
 
             if (Before.HasValue)

@@ -4,6 +4,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
@@ -18,17 +19,17 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates
         private Plugin _plugin;
         private string _name;
         private DiscordInteraction _interaction;
-        private DiscordAsyncCallback<DiscordMessageTemplate> _callback;
+        private IDiscordAsyncCallback<DiscordMessageTemplate> _callback;
         private ILogger _logger;
 
-        public static LoadInteractionMessageTemplate Create(Plugin plugin, string name, DiscordInteraction interaction, DiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
+        public static LoadInteractionMessageTemplate Create(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
         {
             LoadInteractionMessageTemplate load = DiscordPool.Get<LoadInteractionMessageTemplate>();
             load.Init(plugin, name, interaction, callback, logger);
             return load;
         }
 
-        private void Init(Plugin plugin, string name, DiscordInteraction interaction, DiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
+        private void Init(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
         {
             _plugin = plugin;
             _name = name;

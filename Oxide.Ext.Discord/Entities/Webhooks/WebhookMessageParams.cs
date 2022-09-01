@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
 
             if (ThreadId.HasValue)
             {

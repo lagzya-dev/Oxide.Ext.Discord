@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
@@ -11,16 +12,16 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates
         private DiscordMessageTemplate _template;
         private PlaceholderData _data;
         private T _message;
-        private DiscordAsyncCallback<T> _callback;
+        private IDiscordAsyncCallback<T> _callback;
 
-        public static ToPlaceholderMessageCallback<T> Create(DiscordMessageTemplate template, PlaceholderData data, T message, DiscordAsyncCallback<T> callback)
+        public static ToPlaceholderMessageCallback<T> Create(DiscordMessageTemplate template, PlaceholderData data, T message, IDiscordAsyncCallback<T> callback)
         {
             ToPlaceholderMessageCallback<T> handler = DiscordPool.Get<ToPlaceholderMessageCallback<T>>();
             handler.Init(template, data, message, callback);
             return handler;
         }
         
-        private void Init(DiscordMessageTemplate template, PlaceholderData data, T message, DiscordAsyncCallback<T> callback)
+        private void Init(DiscordMessageTemplate template, PlaceholderData data, T message, IDiscordAsyncCallback<T> callback)
         {
             _template = template;
             _data = data;

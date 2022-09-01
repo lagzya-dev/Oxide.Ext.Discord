@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
@@ -15,6 +16,7 @@ using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Users
@@ -216,6 +218,17 @@ namespace Oxide.Ext.Discord.Entities.Users
         {
             if (embeds == null) throw new ArgumentNullException(nameof(embeds));
             CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, embeds, callback, error); });
+        }
+
+        public void SendTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    SendDirectMessage(client, response, callback, error);
+                });
+            });
         }
 
         /// <summary>

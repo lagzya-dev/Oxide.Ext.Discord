@@ -16,6 +16,7 @@ using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
@@ -291,6 +292,20 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             CreateInteractionResponse(client, data, callback, error);
         }
 
+        public void CreateTemplateInteractionResponse(DiscordClient client, Plugin plugin, InteractionResponseType type, string templateKey, InteractionCallbackData message = null, PlaceholderData placeholders = null, Action callback = null, Action<RequestError> error = null)
+        {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(templateKey)) throw new ArgumentNullException(nameof(templateKey));
+            
+            DiscordExtension.DiscordTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    CreateInteractionResponse(client, type, response, callback, error);
+                });
+            });
+        }
+
         /// <summary>
         /// Create a response to an Interaction from the gateway.
         /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -373,6 +388,20 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
             client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.PATCH, message, callback, error);
+        }
+        
+        public void EditTemplateOriginalInteractionResponse(DiscordClient client, Plugin plugin, string templateKey, DiscordMessage message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(templateKey)) throw new ArgumentNullException(nameof(templateKey));
+            
+            DiscordExtension.DiscordTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    EditOriginalInteractionResponse(client, response, callback, error);
+                });
+            });
         }
 
         /// <summary>

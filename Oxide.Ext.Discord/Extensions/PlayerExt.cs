@@ -1,11 +1,16 @@
+using System;
 using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -20,14 +25,14 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="message">Message to send</param>
-        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, string message)
+        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, string message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             MessageCreate create = new MessageCreate
             {
                 Content = message
             };
             
-            player.SendDiscordMessage(client, create);
+            player.SendDiscordMessage(client, create, callback, error);
         }
 
         /// <summary>
@@ -36,14 +41,14 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="embed">Embed to send</param>
-        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, DiscordEmbed embed)
+        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             MessageCreate create = new MessageCreate
             {
                 Embeds = new List<DiscordEmbed> {embed}
             };
             
-            player.SendDiscordMessage(client, create);
+            player.SendDiscordMessage(client, create, callback, error);
         }
         
         /// <summary>
@@ -52,14 +57,14 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="embeds">Embeds to send</param>
-        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, List<DiscordEmbed> embeds)
+        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, List<DiscordEmbed> embeds, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             MessageCreate create = new MessageCreate
             {
                 Embeds = embeds
             };
             
-            player.SendDiscordMessage(client, create);
+            player.SendDiscordMessage(client, create, callback, error);
         }
         
         /// <summary>
@@ -68,12 +73,34 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="message">Message to send</param>
-        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, MessageCreate message)
+        public static void SendDiscordMessage(this IPlayer player, DiscordClient client, MessageCreate message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            SendMessage(client, player.GetDiscordUserId(), message);
+            SendMessage(client, player.GetDiscordUserId(), message, callback, error);
         }
         
-        private static void SendMessage(DiscordClient client, Snowflake? id, MessageCreate message)
+        public static void SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateKey, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    SendMessage(client, player.GetDiscordUserId(), response, callback, error);
+                });
+            });
+        }
+        
+        public static void SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    SendMessage(client, player.GetDiscordUserId(), response, callback, error);
+                });
+            });
+        }
+        
+        private static void SendMessage(DiscordClient client, Snowflake? id, MessageCreate message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             if (!client.IsConnected())
             {

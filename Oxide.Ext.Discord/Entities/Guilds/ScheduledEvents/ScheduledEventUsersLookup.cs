@@ -42,7 +42,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         public string ToQueryString()
         {
             Validate();
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
             if (Limit.HasValue)
             {
                 builder.Add("limit", Limit.Value.ToString());

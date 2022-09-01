@@ -1703,10 +1703,10 @@
             Runs the callback using async
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.DisposeInternal">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.DisposeInternal">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.InternalAsyncCallback`1.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback">
@@ -3714,7 +3714,15 @@
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.HasApplicationFlag(Oxide.Ext.Discord.Entities.Applications.ApplicationFlags)">
             <summary>
             Returns if the given application has the passed in application flag
-            If Flags is null false is returned
+            If <see cref="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Flags"/>  is null false is returned
+            </summary>
+            <param name="flag">Flag to compare against</param>
+            <returns>True of application has flag; False Otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.HasAnyApplicationFlags(Oxide.Ext.Discord.Entities.Applications.ApplicationFlags)">
+            <summary>
+            Returns if the given application has any of the passed in application flags
+            If <see cref="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Flags"/> is null false is returned
             </summary>
             <param name="flag">Flag to compare against</param>
             <returns>True of application has flag; False Otherwise</returns>
@@ -16026,7 +16034,7 @@
             IPlayer Extensions for sending Discord Message to an IPlayer
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,System.String)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,System.String,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Send a Discord Message to an IPlayer if they're registered
             </summary>
@@ -16034,7 +16042,7 @@
             <param name="client">Client to use for sending the message</param>
             <param name="message">Message to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Send a Discord Message to an IPlayer if they're registered
             </summary>
@@ -16042,7 +16050,7 @@
             <param name="client">Client to use for sending the message</param>
             <param name="embed">Embed to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed})">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed},System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Send a Discord Message to an IPlayer if they're registered
             </summary>
@@ -16050,7 +16058,7 @@
             <param name="client">Client to use for sending the message</param>
             <param name="embeds">Embeds to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageCreate,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Send a Discord Message to an IPlayer if they're registered
             </summary>
@@ -16131,18 +16139,6 @@
             <param name="argStr"></param>
             <param name="command"></param>
             <param name="args"></param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Extensions.TaskExt">
-            <summary>
-            Thread Extensions
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.TaskExt.SleepUntil(System.DateTimeOffset)">
-            <summary>
-            Sleep the thread until the given <see cref="T:System.DateTimeOffset"/>
-            If sleepTime is in the past no thread sleeping occurs
-            </summary>
-            <param name="sleepTime">Time to sleep until</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.DiscordCdn">
             <summary>
@@ -17046,6 +17042,36 @@
         <member name="M:Oxide.Ext.Discord.Json.Converters.SnowflakeConverter.CanConvert(System.Type)">
             <summary>
             Returns if we can convert this type
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Json.Converters.UnixDateTimeConverter">
+            <summary>
+            Converts a <see cref="T:System.DateTimeOffset"/> to and from a json long
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.UnixDateTimeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Write <see cref="T:System.DateTimeOffset"/> to UnixTimeMilliseconds 
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.UnixDateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Convert to <see cref="T:System.DateTimeOffset"/> from UnixTimeMilliseconds
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.UnixDateTimeConverter.CanConvert(System.Type)">
+            <summary>
+            Can the type be converted
             </summary>
             <param name="objectType"></param>
             <returns></returns>

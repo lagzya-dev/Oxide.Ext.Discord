@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public string ToQueryString()
         {
             Validate();
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
             builder.Add("query", Query);
             
             if (Limit.HasValue)

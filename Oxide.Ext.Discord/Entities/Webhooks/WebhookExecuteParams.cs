@@ -10,6 +10,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
     /// </summary>
     public class WebhookExecuteParams : IDiscordQueryString
     {
+        internal static readonly WebhookExecuteParams Default = new WebhookExecuteParams();
+        internal static readonly WebhookExecuteParams DefaultWait = new WebhookExecuteParams{Wait = true};
+        
         /// <summary>
         /// Which type of webhook are we trying to send (Discord, Slack, Github)
         /// Defaults to Discord
@@ -31,7 +34,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = DiscordPool.Get<QueryStringBuilder>();
+            QueryStringBuilder builder = QueryStringBuilder.Create();
             if (Wait)
             {
                 builder.Add("wait", "true");
