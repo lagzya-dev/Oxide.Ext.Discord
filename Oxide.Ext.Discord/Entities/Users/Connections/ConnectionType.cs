@@ -49,12 +49,7 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         /// Connection type is Reddit
         /// </summary>
         [Description("reddit")] Reddit,
-        
-        /// <summary>
-        /// Connection type is Samsung Galaxy
-        /// </summary>
-        [Description("samsunggalaxy")] SamsungGalaxy,   
-        
+
         /// <summary>
         /// Connection type is Spotify
         /// </summary>
