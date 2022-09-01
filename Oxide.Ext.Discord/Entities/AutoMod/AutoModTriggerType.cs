@@ -9,12 +9,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// Check if content contains words from a user defined list of keywords
         /// </summary>
         Keyword = 1,
-        
-        /// <summary>
-        /// Check if content contains any harmful links
-        /// </summary>
-        HarmfulLink = 2,
-        
+
         /// <summary>
         /// Check if content represents generic spam
         /// </summary>
