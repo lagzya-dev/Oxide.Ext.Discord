@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// The id of the channel the user is currently in
         /// </summary>
         [JsonProperty("channel_id")]
-        public Snowflake ChannelId { get; set; }
+        public Snowflake? ChannelId { get; set; }
         
         /// <summary>
         /// Toggles the user's suppress state

@@ -25,6 +25,14 @@ namespace Oxide.Ext.Discord.Exceptions.Entities
             }
         }
         
+        internal static void ThrowIfInvalid(Snowflake? snowflake, string paramName)
+        {
+            if (snowflake.HasValue && !snowflake.Value.IsValid())
+            {
+                throw new InvalidSnowflakeException($"Invalid Snowflake ID. Parameter Name: {paramName}");
+            }
+        }
+        
         internal static void ThrowIfInvalid(ICollection<Snowflake> snowflakes, string paramName)
         {
             int index = 0;
