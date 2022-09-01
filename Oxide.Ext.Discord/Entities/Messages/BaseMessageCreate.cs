@@ -78,6 +78,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public void AddAttachment(string filename, byte[] data, string contentType, string description = null)
         {
             InvalidFileNameException.ThrowIfInvalid(filename);
+            InvalidMessageException.ThrowIfInvalidAttachmentDescription(description);
 
             if (FileAttachments == null)
             {

@@ -61,5 +61,13 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Messages
                 throw new InvalidMessageException(message);
             }
         }
+        
+        internal static void ThrowIfInvalidAttachmentDescription(string description)
+        {
+            if (!string.IsNullOrEmpty(description) && description.Length > 1024)
+            {
+                throw new InvalidMessageException("Message attachment description cannot be more than 1024 characters");
+            }
+        }
     }
 }
