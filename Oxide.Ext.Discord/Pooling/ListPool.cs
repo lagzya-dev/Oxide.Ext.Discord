@@ -13,6 +13,7 @@ namespace Oxide.Ext.Discord.Pooling
         static ListPool()
         {
             Instance = new ListPool<T>();
+            DiscordPool.Pools.Add(Instance);
         }
 
         private ListPool() : base(128) { }

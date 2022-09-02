@@ -12,6 +12,7 @@ namespace Oxide.Ext.Discord.Pooling
         static MemoryStreamPool()
         {
             Instance = new MemoryStreamPool();
+            DiscordPool.Pools.Add(Instance);
         }
 
         private MemoryStreamPool() : base(128) { }

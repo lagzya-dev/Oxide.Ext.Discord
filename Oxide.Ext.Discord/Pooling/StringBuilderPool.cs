@@ -11,6 +11,7 @@ namespace Oxide.Ext.Discord.Pooling
         static StringBuilderPool()
         {
             Instance = new StringBuilderPool();
+            DiscordPool.Pools.Add(Instance);
         }
 
         private StringBuilderPool() : base(128) { }

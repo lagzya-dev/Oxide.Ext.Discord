@@ -223,7 +223,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             {
                 _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Creating JSON Body: {{0}}", await _json.ReadAsStringAsync().ConfigureAwait(false));
             }
-            
+
             DiscordStreamContent content = new DiscordStreamContent(_json.Stream);
             content.Headers.ContentType = MediaTypeHeaderCache.Get("application/json");
             return content;

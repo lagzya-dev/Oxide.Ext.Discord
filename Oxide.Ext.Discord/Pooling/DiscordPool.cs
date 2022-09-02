@@ -11,6 +11,8 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public static class DiscordPool
     {
+        internal static List<IPool> Pools = new List<IPool>();
+        
         /// <summary>
         /// Returns a pooled object of type T
         /// Must inherit from <see cref="BasePoolable"/> and have an empty default constructor
@@ -31,7 +33,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             ObjectPool<T>.Instance.Free(ref value);
         }
-        
+
         /// <summary>
         /// Returns a <see cref="BasePoolable"/> back into the pool
         /// </summary>
@@ -41,7 +43,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             ObjectPool<T>.Instance.Free(ref value);
         }
-        
+
         /// <summary>
         /// Returns a pooled <see cref="List{T}"/>
         /// </summary>
@@ -51,7 +53,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return ListPool<T>.Instance.Get();
         }
-        
+
         /// <summary>
         /// Returns a pooled <see cref="Hash{TKey, TValue}"/>
         /// </summary>
@@ -71,7 +73,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return StringBuilderPool.Instance.Get();
         }
-        
+
         /// <summary>
         /// Returns a pooled <see cref="MemoryStream"/>
         /// </summary>
@@ -80,7 +82,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return MemoryStreamPool.Instance.Get();
         }
-        
+
         /// <summary>
         /// Returns a pooled <see cref="PlaceholderData"/>
         /// </summary>
@@ -119,7 +121,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             StringBuilderPool.Instance.Free(ref sb);
         }
-        
+
         /// <summary>
         /// Frees a <see cref="StringBuilder"/> back to the pool returning the <see cref="string"/>
         /// </summary>
@@ -130,7 +132,7 @@ namespace Oxide.Ext.Discord.Pooling
             FreeStringBuilder(ref sb);
             return result;
         }
-        
+
         /// <summary>
         /// Frees a <see cref="MemoryStream"/> back to the pool
         /// </summary>
@@ -138,8 +140,8 @@ namespace Oxide.Ext.Discord.Pooling
         public static void FreeMemoryStream(ref MemoryStream stream)
         {
             MemoryStreamPool.Instance.Free(ref stream);
-        }        
-        
+        }
+
         /// <summary>
         /// Frees a <see cref="PlaceholderData"/> back to the pool
         /// </summary>
@@ -147,6 +149,15 @@ namespace Oxide.Ext.Discord.Pooling
         public static void FreePlaceholderData(ref PlaceholderData data)
         {
             PlaceholderDataPool.Instance.Free(ref data);
+        }
+
+        public static void Clear()
+        {
+            for (int index = 0; index < Pools.Count; index++)
+            {
+                IPool pool = Pools[index];
+                pool.Clear();
+            }
         }
     }
 }

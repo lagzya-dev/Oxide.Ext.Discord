@@ -7,6 +7,7 @@ namespace Oxide.Ext.Discord.Pooling
         static ObjectPool()
         {
             Instance = new ObjectPool<T>();
+            DiscordPool.Pools.Add(Instance);
         }
 
         private ObjectPool() : base(256) { }

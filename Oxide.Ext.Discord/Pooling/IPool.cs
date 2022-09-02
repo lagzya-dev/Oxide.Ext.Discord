@@ -5,6 +5,9 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public interface IPool
     {
-        
+        /// <summary>
+        /// Clears the pool
+        /// </summary>
+        void Clear();
     }
 }

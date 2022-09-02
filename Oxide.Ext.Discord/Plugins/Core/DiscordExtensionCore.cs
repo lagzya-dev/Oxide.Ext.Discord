@@ -14,6 +14,7 @@ using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -41,6 +42,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
             AddCovalenceCommand(new[] { "de.rws" }, nameof(ResetWebSocketCommand), "de.rws");
             AddCovalenceCommand(new[] { "de.rra" }, nameof(ResetRestApiCommand), "de.rra");
+            AddCovalenceCommand(new[] { "de.cp" }, nameof(ResetRestApiCommand), "de.cp");
             AddCovalenceCommand(new[] { "de.consolelog" }, nameof(ConsoleLogCommand), "de.consolelog");
             AddCovalenceCommand(new[] { "de.filelog" }, nameof(FileLogCommand), "de.filelog");
             AddCovalenceCommand(new[] { "de.debug" }, nameof(DiscordDebugCommand), "de.debug");
@@ -99,6 +101,14 @@ namespace Oxide.Ext.Discord.Plugins.Core
             {
                 client.ResetRestApi();
             }
+        }
+        
+        [HookMethod(nameof(ClearDiscordPool))]
+        private void ClearDiscordPool(IPlayer player, string cmd, string[] args)
+        {
+            Chat(player, LangKeys.ResetRestApi);
+            
+            DiscordPool.Clear();
         }
         
         [HookMethod(nameof(ConsoleLogCommand))]

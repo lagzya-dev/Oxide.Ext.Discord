@@ -1,3 +1,4 @@
+using System;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Pooling
@@ -84,6 +85,18 @@ namespace Oxide.Ext.Discord.Pooling
             }
             
             item = null;
+        }
+
+        public void Clear()
+        {
+            lock (_lock)
+            {
+                for (int i = Math.Min(_index, _pool.Length - 1); i >= 0; i--)
+                {
+                    _pool[i] = null;
+                }
+                _index = 0;
+            }
         }
 
         /// <summary>

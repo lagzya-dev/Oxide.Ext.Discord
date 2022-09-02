@@ -38,6 +38,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <returns></returns>
         public Task WriteAsync(JsonSerializer serializer, object payload)
         {
+            Stream.SetLength(0);
             serializer.Serialize(_writer, payload);
             _writer.Flush();
             return Task.CompletedTask;
@@ -50,6 +51,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <param name="payload">Payload to be serialized</param>
         public void Write(JsonSerializer serializer, object payload)
         {
+            Stream.SetLength(0);
             serializer.Serialize(_writer, payload);
             _writer.Flush();
         }

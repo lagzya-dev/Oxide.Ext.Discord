@@ -14,6 +14,7 @@ namespace Oxide.Ext.Discord.Pooling
         static HashPool()
         {
             Instance = new HashPool<TKey, TValue>();
+            DiscordPool.Pools.Add(Instance);
         }
 
         private HashPool() : base(128) { }

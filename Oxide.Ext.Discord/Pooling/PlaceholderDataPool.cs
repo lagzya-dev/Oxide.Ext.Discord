@@ -9,6 +9,7 @@ namespace Oxide.Ext.Discord.Pooling
         static PlaceholderDataPool()
         {
             Instance = new PlaceholderDataPool();
+            DiscordPool.Pools.Add(Instance);
         }
 
         private PlaceholderDataPool() : base(64) { }
