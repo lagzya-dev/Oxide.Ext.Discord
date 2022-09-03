@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// The choices in the select
         /// Max 25 options
         /// </summary>
-        [JsonProperty("custom_id")]
+        [JsonProperty("options")]
         public List<SelectMenuOption> Options { get; } = new List<SelectMenuOption>();
         
         /// <summary>
