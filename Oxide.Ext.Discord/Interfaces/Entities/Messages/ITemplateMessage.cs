@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Libraries.Templates;
 namespace Oxide.Ext.Discord.Interfaces.Entities.Messages
 {
     /// <summary>
-    /// Interfaces for <see cref="DiscordTemplates"/> Messages
+    /// Interfaces for <see cref="BaseTemplateLibrary"/> Messages
     /// </summary>
     public interface IDiscordTemplateMessage
     {

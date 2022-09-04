@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Callbacks.Async.Templates
+namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
 {
     public class ToPlaceholderMessageCallback<T> : BaseAsyncPoolableCallback where T : class, IDiscordTemplateMessage, new()
     {

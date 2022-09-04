@@ -2,30 +2,30 @@ using System.IO;
 using System.Threading.Tasks;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Libraries.Templates;
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
+using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Callbacks.Async.Templates
+namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Modals
 {
-    internal class RegisterMessageTemplateCallback : BaseAsyncPoolableCallback
+    internal class RegisterModalTemplateCallback : BaseAsyncPoolableCallback
     {
-        private readonly DiscordTemplates _templates = DiscordExtension.DiscordTemplates;
+        private readonly DiscordModalTemplates _templates = DiscordExtension.DiscordModalTemplates;
         private Plugin _plugin;
         private string _name;
         private string _language;
-        private DiscordMessageTemplate _template;
+        private DiscordModalTemplate _template;
         private TemplateVersion _minSupportedVersion;
         private ILogger _logger;
 
-        public static RegisterMessageTemplateCallback Create(Plugin plugin, string name, string language, DiscordMessageTemplate template, TemplateVersion minSupportedVersion, ILogger logger)
+        public static RegisterModalTemplateCallback Create(Plugin plugin, string name, string language, DiscordModalTemplate template, TemplateVersion minSupportedVersion, ILogger logger)
         {
-            RegisterMessageTemplateCallback callback = DiscordPool.Get<RegisterMessageTemplateCallback>();
+            RegisterModalTemplateCallback callback = DiscordPool.Get<RegisterModalTemplateCallback>();
             callback.Init(plugin, name, language, template, minSupportedVersion, logger);
             return callback;
         }
         
-        private void Init(Plugin plugin, string name, string language, DiscordMessageTemplate template, TemplateVersion minSupportedVersion, ILogger logger)
+        private void Init(Plugin plugin, string name, string language, DiscordModalTemplate template, TemplateVersion minSupportedVersion, ILogger logger)
         {
             _plugin = plugin;
             _name = name;
@@ -37,20 +37,20 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates
         
         protected override async Task HandleCallback()
         {
-            string path = _templates.GetTemplatePath(_plugin, _name, null);
+            string path = _templates.GetTemplatePath(_plugin, TemplateType.Message, _name, null);
             if (!File.Exists(path))
             {
                 await _templates.CreateFile(path, _template).ConfigureAwait(false);
                 return;
             }
 
-            DiscordMessageTemplate existingTemplate =  await _templates.LoadTemplate(_plugin, _name, _language).ConfigureAwait(false);
+            DiscordModalTemplate existingTemplate =  await _templates.LoadTemplate<DiscordModalTemplate>(_plugin, TemplateType.Modal, _name, _language).ConfigureAwait(false);
             if (existingTemplate.Version >= _minSupportedVersion)
             {
                 return;
             }
             
-            await _templates.MoveFile(_plugin, _name, null, existingTemplate.Version).ConfigureAwait(false);
+            await _templates.MoveFile(_plugin, TemplateType.Message, _name, null, existingTemplate.Version).ConfigureAwait(false);
             await _templates.CreateFile(path, _template).ConfigureAwait(false);
         }
 

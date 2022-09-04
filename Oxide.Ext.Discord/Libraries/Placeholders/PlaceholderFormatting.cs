@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using Oxide.Core.Libraries.Covalence;
@@ -102,6 +103,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             
             Replace(builder, placeholderState, sb.ToString());
             DiscordPool.FreeStringBuilder(ref sb);
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ApplyPlaceholder(string text, PlaceholderData value)
+        {
+            return value == null ? text : DiscordExtension.DiscordPlaceholders.ProcessPlaceholders(text, value);
         }
     }
 }

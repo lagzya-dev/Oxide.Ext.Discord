@@ -1,23 +1,16 @@
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
+namespace Oxide.Ext.Discord.Libraries.Templates.Components
 {
     /// <summary>
     /// Template for Button Components
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ButtonTemplate
+    public class ButtonTemplate : BaseComponentTemplate
     {
-        /// <summary>
-        /// If the button should be added to the message
-        /// </summary>
-        [JsonProperty("Button Enabled")]
-        public bool Enabled { get; set; } = true;
-
         /// <summary>
         /// Display label for the button
         /// </summary>
@@ -47,12 +40,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         /// </summary>
         [JsonProperty("Keep Button On Same Row")]
         public bool Inline { get; set; } = true;
+        
+        /// <summary>
+        /// If the Button is enabled
+        /// </summary>
+        [JsonProperty("Button Enabled")]
+        public bool Enabled { get; set; } = true;
 
         /// <summary>
         /// Default Constructor
         /// </summary>
         [JsonConstructor]
-        public ButtonTemplate() { }
+        public ButtonTemplate()
+        {
+            Type = MessageComponentType.Button;
+        }
 
         /// <summary>
         /// Constructor without emoji
@@ -94,7 +96,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         {
             ButtonComponent button = new ButtonComponent
             {
-                Label = ApplyPlaceholder(Label, data),
+                Label = PlaceholderFormatting.ApplyPlaceholder(Label, data),
                 Style = Style,
                 Disabled = !Enabled,
                 Emoji = Emoji?.ToEmoji()
@@ -102,20 +104,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
 
             if (Style == ButtonStyle.Link)
             {
-                button.Url = ApplyPlaceholder(Command, data);
+                button.Url = PlaceholderFormatting.ApplyPlaceholder(Command, data);
             }
             else
             {
-                button.CustomId = ApplyPlaceholder(Command, data);
+                button.CustomId = PlaceholderFormatting.ApplyPlaceholder(Command, data);
             }
 
             return button;
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private string ApplyPlaceholder(string text, PlaceholderData value)
-        {
-            return value == null ? text : DiscordExtension.DiscordPlaceholders.ProcessPlaceholders(text, value);
         }
     }
 }

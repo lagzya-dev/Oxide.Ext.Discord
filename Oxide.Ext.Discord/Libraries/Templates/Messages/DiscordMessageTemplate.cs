@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Callbacks.Async.Templates;
+using Oxide.Ext.Discord.Callbacks.Async.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Interfaces.Entities.Messages;
+using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
+using Oxide.Ext.Discord.Libraries.Templates.Components;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
@@ -38,8 +40,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <summary>
         /// Buttons for the message
         /// </summary>
-        [JsonProperty("Message Buttons")]
-        public List<ButtonTemplate> Buttons { get; set; } = new List<ButtonTemplate>();
+        [JsonConverter(typeof(TemplateComponentsConverter))]
+        [JsonProperty("Message Components")]
+        public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
 
         /// <summary>
         /// Converts the <see cref="DiscordMessageTemplate"/> to a {T} message
@@ -76,9 +79,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 message.Embeds = CreateEmbed(data);
             }
 
-            if (Buttons != null && Buttons.Count != 0)
+            if (Components != null && Components.Count != 0)
             {
-                message.Components = CreateButtons(data);
+                message.Components = CreateComponents(data);
             }
 
             return message;
@@ -172,22 +175,37 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return embeds;
         }
 
-        private List<ActionRowComponent> CreateButtons(PlaceholderData data)
+        private List<ActionRowComponent> CreateComponents(PlaceholderData data)
         {
             List<ActionRowComponent> rows = new List<ActionRowComponent>();
             ActionRowComponent active = new ActionRowComponent();
             rows.Add(active);
-            for (int index = 0; index < Buttons.Count; index++)
+            for (int index = 0; index < Components.Count; index++)
             {
-                ButtonTemplate button = Buttons[index];
-                if (index != 0 && !button.Inline || active.Components.Count == 5)
+                BaseComponentTemplate component = Components[index];
+                if (!component.Visible)
                 {
+                    continue;
+                }
+
+                if (component is ButtonTemplate button)
+                {
+                    active.Components.Add(button.ToButton(data));
+                    
+                    if (index != 0 && !button.Inline || active.Components.Count == 5)
+                    {
+                        InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(rows.Count);
+                        active = new ActionRowComponent();
+                        rows.Add(active);
+                    }
+                } 
+                else if (component is SelectMenuTemplate selectMenu)
+                {
+                    active.Components.Add(selectMenu.ToSelectMenu(data));
                     InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(rows.Count);
                     active = new ActionRowComponent();
                     rows.Add(active);
                 }
-                
-                active.Components.Add(button.ToButton(data));
             }
 
             return rows;

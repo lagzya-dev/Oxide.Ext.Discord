@@ -80,7 +80,7 @@ namespace Oxide.Ext.Discord.Extensions
         
         public static void SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateKey, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
             {
                 template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
                 {
@@ -91,7 +91,7 @@ namespace Oxide.Ext.Discord.Extensions
         
         public static void SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
                 template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
                 {

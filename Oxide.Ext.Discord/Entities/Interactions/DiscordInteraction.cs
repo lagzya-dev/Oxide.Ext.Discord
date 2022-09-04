@@ -297,11 +297,25 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateKey)) throw new ArgumentNullException(nameof(templateKey));
             
-            DiscordExtension.DiscordTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
             {
                 template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
                 {
                     CreateInteractionResponse(client, type, response, callback, error);
+                });
+            });
+        }
+        
+        public void CreateTemplateModalResponse(DiscordClient client, Plugin plugin, string templateKey, InteractionModalMessage message = null, PlaceholderData placeholders = null, Action callback = null, Action<RequestError> error = null)
+        {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(templateKey)) throw new ArgumentNullException(nameof(templateKey));
+            
+            DiscordExtension.DiscordModalTemplates.GetModalTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
+            {
+                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                {
+                    CreateInteractionResponse(client, response, callback, error);
                 });
             });
         }
@@ -395,7 +409,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateKey)) throw new ArgumentNullException(nameof(templateKey));
             
-            DiscordExtension.DiscordTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
             {
                 template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
                 {

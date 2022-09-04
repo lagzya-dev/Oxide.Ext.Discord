@@ -5,17 +5,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     internal struct TemplateId : IEquatable<TemplateId>
     {
         public readonly string TemplateName;
-        public readonly string Lang;
+        public readonly string Language;
 
         public TemplateId(string templateName, string lang)
         {
             TemplateName = templateName ?? throw new ArgumentNullException(nameof(templateName));
-            Lang = lang ?? throw new ArgumentNullException(nameof(lang));
+            Language = lang ?? throw new ArgumentNullException(nameof(lang));
         }
         
         public bool Equals(TemplateId other)
         {
-            return TemplateName == other.TemplateName && Lang == other.Lang;
+            return TemplateName == other.TemplateName && Language == other.Language;
         }
         
         public override bool Equals(object obj)
@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         {
             unchecked
             {
-                return ((TemplateName != null ? TemplateName.GetHashCode() : 0) * 397) ^ (Lang != null ? Lang.GetHashCode() : 0);
+                return ((TemplateName != null ? TemplateName.GetHashCode() : 0) * 397) ^ (Language != null ? Language.GetHashCode() : 0);
             }
         }
     }

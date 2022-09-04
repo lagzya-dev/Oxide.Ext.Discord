@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Builders;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
 {

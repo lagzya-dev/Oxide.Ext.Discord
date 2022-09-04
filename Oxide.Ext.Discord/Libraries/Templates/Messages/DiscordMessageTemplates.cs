@@ -1,49 +1,22 @@
 using System;
-using System.IO;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Oxide.Core;
-using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Async;
-using Oxide.Ext.Discord.Callbacks.Async.Templates;
+using Oxide.Ext.Discord.Callbacks.Async.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Exceptions.Libraries;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
-using Oxide.Ext.Discord.Json.Serialization;
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Templates
+namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
-    /// <summary>
-    /// Oxide Library for Discord Templates
-    /// </summary>
-    public class DiscordTemplates : Library
+    public class DiscordMessageTemplates : BaseTemplateLibrary
     {
-        private readonly string _rootDir = Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "messages");
-        private readonly JsonSerializer _serializer = JsonSerializer.CreateDefault();
         internal readonly Hash<string, Hash<TemplateId, DiscordMessageTemplate>> TemplateCache = new Hash<string, Hash<TemplateId, DiscordMessageTemplate>>();
-        private readonly ILogger _logger;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="logger"></param>
-        public DiscordTemplates(ILogger logger)
-        {
-            _logger = logger;
-            if (!Directory.Exists(_rootDir))
-            {
-                Directory.CreateDirectory(_rootDir);
-            }
-        }
-
+        public DiscordMessageTemplates(ILogger logger) : base(logger) { }
+        
         /// <summary>
         /// Registers a global message template
         /// Global Message templates cannot be localized
@@ -59,7 +32,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            RegisterMessageTemplateCallback callback = RegisterMessageTemplateCallback.Create(plugin, name, null, template, minSupportedVersion, _logger);
+            RegisterMessageTemplateCallback callback = RegisterMessageTemplateCallback.Create(plugin, name, null, template, minSupportedVersion, Logger);
             callback.Run();
         }
         
@@ -82,7 +55,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            RegisterMessageTemplateCallback callback = RegisterMessageTemplateCallback.Create(plugin, name, language, template, minSupportedVersion, _logger);
+            RegisterMessageTemplateCallback callback = RegisterMessageTemplateCallback.Create(plugin, name, language, template, minSupportedVersion, Logger);
             callback.Run();
         }
 
@@ -136,7 +109,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 callback = InternalAsyncCallback<DiscordMessageTemplate>.Create();
             }
             
-            LoadGlobalMessageTemplate load = LoadGlobalMessageTemplate.Create(plugin, name, callback, _logger);
+            LoadGlobalMessageTemplate load = LoadGlobalMessageTemplate.Create(plugin, name, callback, Logger);
             load.Run();
             return callback;
         }
@@ -165,7 +138,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 callback = InternalAsyncCallback<DiscordMessageTemplate>.Create();
             }
             
-            LoadLocalizedMessageTemplate load = LoadLocalizedMessageTemplate.Create(plugin, name, language, callback, _logger);
+            LoadLocalizedMessageTemplate load = LoadLocalizedMessageTemplate.Create(plugin, name, language, callback, Logger);
             load.Run();
             return callback;
         }
@@ -193,83 +166,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 callback = InternalAsyncCallback<DiscordMessageTemplate>.Create();
             }
             
-            LoadInteractionMessageTemplate load = LoadInteractionMessageTemplate.Create(plugin, name, interaction, callback, _logger);
+            LoadInteractionMessageTemplate load = LoadInteractionMessageTemplate.Create(plugin, name, interaction, callback, Logger);
             load.Run();
             return callback;
         }
 
-        internal async Task<DiscordMessageTemplate> LoadTemplate(Plugin plugin, string name, string language)
-        {
-            string path = GetTemplatePath(plugin, name, language);
-            if (!File.Exists(path))
-            {
-                return null;
-            }
-
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                DiscordJsonReader reader = DiscordPool.Get<DiscordJsonReader>();
-                await reader.CopyFromAsync(stream).ConfigureAwait(false);
-                DiscordMessageTemplate template = await reader.DeserializeAsync<DiscordMessageTemplate>(_serializer).ConfigureAwait(false);
-                reader.Dispose();
-                return template;
-            }
-        }
-
-        internal Task CreateFile(string path, DiscordMessageTemplate template)
-        {
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            
-            FileMode mode = File.Exists(path) ? FileMode.Truncate : FileMode.Create;
-
-            using (FileStream stream = new FileStream(path, mode))
-            {
-                DiscordJsonWriter writer = new DiscordJsonWriter();
-                writer.Write(_serializer, template);
-                writer.Stream.CopyToPooled(stream);
-                writer.Dispose();
-            }
-
-            return Task.CompletedTask;
-        }
-
-        internal Task MoveFile(Plugin plugin, string name, string language, TemplateVersion version)
-        {
-            string oldPath = GetTemplatePath(plugin, name, language);
-            if (!File.Exists(oldPath))
-            {
-                return Task.CompletedTask;
-            }
-
-            string newPath = GetRenamePath(plugin, name, language, version);
-            if (File.Exists(newPath))
-            {
-                File.Delete(newPath);
-            }
-            
-            File.Move(oldPath, newPath);
-            return Task.CompletedTask;
-        }
-        
-        internal string GetTemplatePath(Plugin plugin, string name, string language)
-        {
-            DiscordTemplateException.ThrowIfInvalidTemplateName(name);
-            if (string.IsNullOrEmpty(language))
-            {
-                return Path.Combine(_rootDir, plugin.Name, $"{name}.json");
-            }
-            return Path.Combine(_rootDir, plugin.Name, language, $"{name}.json");
-        }
-        
-        private string GetRenamePath(Plugin plugin, string name, string language, TemplateVersion version)
-        {
-            return Path.Combine(_rootDir, plugin.Name, language, $"{name}.{version.ToString()}.json");
-        }
-
-        internal void OnPluginUnloaded(Plugin plugin)
+        internal override void OnPluginUnloaded(Plugin plugin)
         {
             TemplateCache.Remove(plugin.Name);
         }

@@ -222,7 +222,7 @@ namespace Oxide.Ext.Discord.Entities.Users
 
         public void SendTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
                 template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
                 {
