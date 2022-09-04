@@ -12,6 +12,8 @@ using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Network;
 using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Rest.Buckets;
+using Oxide.Ext.Discord.Threading;
 using Oxide.Plugins;
 using HttpMethod = System.Net.Http.HttpMethod;
 
@@ -23,12 +25,20 @@ namespace Oxide.Ext.Discord.Rest.Requests
     public class RequestHandler : BasePoolable
     {
         internal BaseRequest Request;
-
+        
+        private Bucket _bucket;
+        private RestHandler _rest;
         private DiscordJsonWriter _json;
         private RequestResponse _response;
         private CancellationToken _token;
         private ILogger _logger;
+        private readonly Func<Task> _runner;
 
+        public RequestHandler()
+        {
+            _runner = StartRequest;
+        }
+        
         private static readonly Hash<RequestMethod, HttpMethod> HttpMethods = new Hash<RequestMethod, HttpMethod>
         {
             [RequestMethod.GET] = HttpMethod.Get,
@@ -42,11 +52,10 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// Creates a new <see cref="RequestHandler"/>
         /// </summary>
         /// <param name="request">Request to be handled by this handler</param>
-        public static RequestHandler CreateRequestHandler(BaseRequest request)
+        public static void StartRequest(RestHandler rest, BaseRequest request)
         {
             RequestHandler handler = DiscordPool.Get<RequestHandler>();
-            handler.Init(request, request.Client.Logger);
-            return handler;
+            handler.Init(rest, request, request.Client.Logger);
         }
         
         /// <summary>
@@ -54,21 +63,60 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         /// <param name="request">Request to be handled by this handler</param>
         /// <param name="logger">Logger for the request</param>
-        private void Init(BaseRequest request, ILogger logger)
+        private void Init(RestHandler rest, BaseRequest request, ILogger logger)
         {
+            _rest = rest;
             Request = request;
             _token = Request.Source.Token;
             _logger = logger;
+            Task.Run(_runner, _token);
         }
 
+        private async Task StartRequest()
+        {
+            AdjustableSemaphore semaphore = null;
+            try
+            {
+                //_handler = RequestHandler.CreateRequestHandler(_request);
+                _bucket = _rest.QueueBucket(this, Request);
+            
+                string bucketId = _bucket.Id;
+                semaphore = _bucket.Semaphore;
+                Request.Status = RequestStatus.PendingBucket;
+            
+                _logger.Debug("Waiting for bucket availability Bucket ID: {0} Request ID: {1}", _bucket.Id, Request.Id);
+                
+                await semaphore.WaitOneAsync().ConfigureAwait(false);
+                if (bucketId != _bucket.Id)
+                {
+                    _logger.Debug("Bucket ID Changed. Waiting for bucket availability again for ID: {0} Old Bucket ID: {1} New Bucket ID: {2}", Request.Id, bucketId, _bucket.Id);
+                    semaphore.Release();
+                    semaphore = _bucket.Semaphore;
+                    await semaphore.WaitOneAsync().ConfigureAwait(false);
+                }
+
+                _logger.Debug("Request callback started for Bucket ID: {0} Request ID: {1}", _bucket.Id, Request.Id);
+                await FireRequest().ConfigureAwait(false);
+                _logger.Debug("Request callback completed successfully for Bucket ID: {0} Request ID: {1}", _bucket.Id, Request.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.Exception("Request callback threw exception for Bucket ID: {0} Request ID: {1}", Request.Id, Request.Id, ex);
+            }
+            finally
+            {
+                semaphore?.Release();
+            }
+        }
+        
         /// <summary>
         /// Fires the request off
         /// </summary>
-        public async Task Run()
+        public async Task FireRequest()
         {
             try
             {
-                _response = await RunInternal().ConfigureAwait(false);
+                _response = await FireRequestInternal().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -80,9 +128,9 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
         }
         
-        private async Task<RequestResponse> RunInternal()
+        private async Task<RequestResponse> FireRequestInternal()
         {
-            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(RunInternal)} Starting REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}} Contents:\n{{3}}", Request.Id, Request.Method, Request.Route, /*_data.StringContents ??*/ "No Contents");
+            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(FireRequestInternal)} Starting REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}} Contents:\n{{3}}", Request.Id, Request.Method, Request.Route, /*_data.StringContents ??*/ "No Contents");
 
             RequestResponse response = null;
             byte retries = 0;
@@ -90,19 +138,19 @@ namespace Oxide.Ext.Discord.Rest.Requests
             while(retries < 3 && retries429 < 6) 
             {
                 Request.Status = RequestStatus.PendingStart;
-                await Request.Bucket.WaitUntilBucketAvailable(this, _token).ConfigureAwait(false);
+                await _bucket.WaitUntilBucketAvailable(this, _token).ConfigureAwait(false);
                 await Request.WaitUntilRequestCanStart(_token).ConfigureAwait(false);
                 Request.Status = RequestStatus.InProgress;
-                Request.Bucket.OnRequestStarted(this);
+                _bucket.OnRequestStarted(this);
                 
                 if (Request.IsCancelled)
                 {
                     return await RequestResponse.CreateCancelledResponse(Request.Client).ConfigureAwait(false);
                 }
 
-                response = await RunRequest().ConfigureAwait(false);
+                response = await SendRequest().ConfigureAwait(false);
                 
-                Request.Bucket.UpdateRateLimits(this, response);
+                _bucket.UpdateRateLimits(this, response);
                 
                 switch (response.Status)
                 {
@@ -125,7 +173,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             return response;
         }
 
-        private async Task<RequestResponse> RunRequest()
+        private async Task<RequestResponse> SendRequest()
         {
             try
             {
@@ -254,6 +302,8 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <inheritdoc/>
         protected override void EnterPool()
         {
+            _bucket = null;
+            _rest = null;
             _json = null;
             Request = null;
             _response = null;

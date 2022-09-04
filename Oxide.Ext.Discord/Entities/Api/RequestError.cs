@@ -6,7 +6,9 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
 
@@ -137,22 +139,30 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// </summary>
         /// <param name="code">HTTP Response Code</param>
         /// <param name="content">HTTP Response Body Stream</param>
-        internal async Task SetResponseData(int code, Stream content)
+        internal async Task SetResponse(int code, Stream content)
         {
             HttpStatusCode = code;
-            using (StreamReader reader = new StreamReader(content, DiscordEncoding.Encoding, false, 1024, true))
+            if (content.Length == 0)
             {
-                Message = await reader.ReadToEndAsync().ConfigureAwait(false);
-                if (!string.IsNullOrEmpty(Message) && Message.StartsWith("{"))
-                {
-                    DiscordError = JsonConvert.DeserializeObject<RequestErrorMessage>(Message, _client.Bot.JsonSettings);
-                    if (DiscordError != null)
-                    {
-                        ErrorType = RequestErrorType.ApiError;
-                        _logLevel = DiscordLogLevel.Error;
-                    }
-                }
+                return;
             }
+
+            DiscordJsonReader reader = await DiscordJsonReader.CreateFromStreamAsync(content).ConfigureAwait(false);
+
+            Message = await reader.ReadAsStringAsync().ConfigureAwait(false);
+            if (string.IsNullOrEmpty(Message) || !Message.StartsWith("{"))
+            {
+                return;
+            }
+            
+            DiscordError = await reader.DeserializeAsync<RequestErrorMessage>(_client.Bot.JsonSerializer).ConfigureAwait(false);
+            if (DiscordError == null)
+            {
+                return;
+            }
+            
+            ErrorType = RequestErrorType.ApiError;
+            _logLevel = DiscordLogLevel.Error;
         }
 
         /// <summary>

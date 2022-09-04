@@ -33,7 +33,6 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
-            base.DisposeInternal();
             DiscordPool.Free(this);
         }
 

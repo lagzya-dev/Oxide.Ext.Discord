@@ -15,13 +15,9 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
 
         protected override void EnterPool()
         {
+            ArrayPool.Free(Args);
             Hook = null;
             Args = null;
-        }
-
-        protected override void DisposeInternal()
-        {
-            ArrayPool.Free(Args);
         }
     }
 }

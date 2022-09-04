@@ -233,8 +233,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         public async Task SocketMessage(Snowflake webSocketId, DiscordJsonReader reader)
         {
             EventPayload payload = await reader.DeserializeAsync<EventPayload>(_client.JsonSerializer).ConfigureAwait(false);
-            //await reader.PopulateAsync(_client, payload);
-            //JsonConvert.PopulateObject(message, payload, _client.ClientSerializerSettings);
             _webSocket.OnSequenceUpdate(payload.Sequence);
 
             if (_logger.IsLogging(DiscordLogLevel.Verbose))

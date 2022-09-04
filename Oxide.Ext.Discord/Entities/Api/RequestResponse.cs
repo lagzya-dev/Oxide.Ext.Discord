@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         internal RateLimitResponse RateLimit;
         internal RequestError Error;
         internal int Code;
-        internal Stream Content;
+        internal MemoryStream Content;
         
         private DiscordClient _client;
 
@@ -35,12 +35,12 @@ namespace Oxide.Ext.Discord.Entities.Api
             if (response != null)
             {
                 Code = (int)response.StatusCode;
-                Content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                await response.Content.CopyToAsync(Content, null).ConfigureAwait(false);
                 RateLimit = DiscordPool.Get<RateLimitResponse>();
                 RateLimit.Init(response.Headers, _client.Logger);
                 if (error != null)
                 {
-                    await error.SetResponseData((int)response.StatusCode, Content).ConfigureAwait(false);
+                    await error.SetResponse((int)response.StatusCode, Content).ConfigureAwait(false);
                 }
             }
         }
@@ -91,17 +91,25 @@ namespace Oxide.Ext.Discord.Entities.Api
             RateLimit?.Dispose();
             DiscordPool.Free(this);
         }
-        
+
+        protected override void LeavePool()
+        {
+            base.LeavePool();
+            Content = DiscordPool.GetMemoryStream();
+        }
+
         ///<inheritdoc/>
         protected override void EnterPool()
         {
             Status = default(RequestCompletedStatus);
-            Content = null;
             RateLimit = null;
             Error = null;
             Code = 0;
             _client = null;
-            Content = null;
+            if (Content != null)
+            {
+                DiscordPool.FreeMemoryStream(ref Content);
+            }
         }
     }
 }

@@ -15,6 +15,26 @@ namespace Oxide.Ext.Discord.Json.Serialization
         internal readonly MemoryStream Stream;
         private readonly StreamReader _reader;
 
+        public static DiscordJsonReader Create()
+        {
+            return DiscordPool.Get<DiscordJsonReader>();
+        }
+        
+        public static async Task<DiscordJsonReader> CreateFromStreamAsync(Stream stream)
+        {
+            DiscordJsonReader reader = Create();
+            await reader.CopyFromAsync(stream).ConfigureAwait(false);
+            return reader;
+        }
+        
+        public static async Task<T> DeserializeFromAsync<T>(JsonSerializer serializer, Stream stream)
+        {
+            DiscordJsonReader reader = await CreateFromStreamAsync(stream).ConfigureAwait(false);
+            T result = await reader.DeserializeAsync<T>(serializer).ConfigureAwait(false);
+            reader.Dispose();
+            return result;
+        }
+        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -103,7 +123,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
                 return Task.CompletedTask;
             }
         }
-        
+
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {

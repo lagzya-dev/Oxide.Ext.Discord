@@ -49,6 +49,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api.Entities
 
         protected override void EnterPool()
         {
+            base.EnterPool();
             _channel = null;
         }
 

@@ -126,8 +126,7 @@ namespace Oxide.Ext.Discord.Rest
         public void StartRequest(BaseRequest request)
         {
             _logger.Debug($"{nameof(RestHandler)}.{nameof(StartRequest)} Method: {{0}} Route: {{1}}", request.Method, request.Route);
-            RestRequestCallback handler = RestRequestCallback.CreateRequestCallback(this, request, _logger);
-            handler.Run();
+            RequestHandler.StartRequest(this, request);
         }
         
         /// <summary>

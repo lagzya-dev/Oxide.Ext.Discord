@@ -46,11 +46,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
             using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                DiscordJsonReader reader = DiscordPool.Get<DiscordJsonReader>();
-                await reader.CopyFromAsync(stream).ConfigureAwait(false);
-                T template = await reader.DeserializeAsync<T>(_serializer).ConfigureAwait(false);
-                reader.Dispose();
-                return template;
+                return await DiscordJsonReader.DeserializeFromAsync<T>(_serializer, stream).ConfigureAwait(false);
             }
         }
         
