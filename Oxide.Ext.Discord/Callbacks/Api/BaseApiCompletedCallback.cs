@@ -1,6 +1,6 @@
 using Oxide.Ext.Discord.Entities.Api;
 
-namespace Oxide.Ext.Discord.Callbacks.Api.Entities
+namespace Oxide.Ext.Discord.Callbacks.Api
 {
     /// <summary>
     /// Represents a base callback when a request is completed

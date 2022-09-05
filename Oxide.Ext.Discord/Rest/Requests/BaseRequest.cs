@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
-using Oxide.Ext.Discord.Callbacks.Api.Entities;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
@@ -98,7 +97,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             Status = RequestStatus.Completed;
             
-            CompletedCallback?.Run(response);
+            CompletedCallback?.Start(response);
 
             if (response.Status == RequestCompletedStatus.Success)
             {
@@ -127,9 +126,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <param name="response">Response for the error</param>
         private void OnRequestError(RequestResponse response)
         {
-            ApiErrorCallback callback = DiscordPool.Get<ApiErrorCallback>();
-            callback.Init(this, response);
-            callback.Run();
+            ApiErrorCallback.Start(this, response);
         }
 
         internal void OnRequestErrored()

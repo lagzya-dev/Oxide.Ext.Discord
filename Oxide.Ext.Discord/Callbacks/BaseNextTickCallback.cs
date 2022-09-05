@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Callbacks
     public abstract class BaseNextTickCallback : BaseCallback
     {
         /// <inheritdoc/>
-        public sealed override void Run()
+        protected sealed override void Run()
         {
             Interface.Oxide.NextTick(Callback);
         }

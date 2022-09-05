@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Async
 {
-    public class DiscordAsyncCallback<T> : BaseAsyncCallback<T>
+    public class DiscordAsyncCallback<T> : BaseDiscordAsyncCallback<T>
     {
         private readonly Action _successCallback;
         

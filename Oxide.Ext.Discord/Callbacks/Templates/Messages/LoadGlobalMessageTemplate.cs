@@ -8,9 +8,9 @@ using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
+namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    internal class LoadGlobalMessageTemplate : BaseAsyncPoolableCallback
+    internal class LoadGlobalMessageTemplate : BaseAsyncCallback
     {
         private readonly DiscordMessageTemplates _templates = DiscordExtension.DiscordMessageTemplates;
         private Plugin _plugin;
@@ -18,11 +18,11 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
         private IDiscordAsyncCallback<DiscordMessageTemplate> _callback;
         private ILogger _logger;
 
-        public static LoadGlobalMessageTemplate Create(Plugin plugin, string name, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
+        public static void Start(Plugin plugin, string name, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
         {
             LoadGlobalMessageTemplate load = DiscordPool.Get<LoadGlobalMessageTemplate>();
             load.Init(plugin, name, callback, logger);
-            return load;
+            load.Run();
         }
 
         private void Init(Plugin plugin, string name, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)

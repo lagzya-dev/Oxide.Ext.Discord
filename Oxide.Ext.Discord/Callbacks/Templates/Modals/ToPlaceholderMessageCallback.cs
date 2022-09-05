@@ -10,18 +10,18 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Modals
 {
-    public class ToPlaceholderModalCallback : BaseAsyncPoolableCallback
+    public class ToPlaceholderModalCallback : BaseAsyncCallback
     {
         private DiscordModalTemplate _template;
         private PlaceholderData _data;
         private InteractionModalMessage _message;
         private IDiscordAsyncCallback<InteractionModalMessage> _callback;
 
-        public static ToPlaceholderModalCallback Create(DiscordModalTemplate template, PlaceholderData data, InteractionModalMessage message, IDiscordAsyncCallback<InteractionModalMessage> callback)
+        public static void Start(DiscordModalTemplate template, PlaceholderData data, InteractionModalMessage message, IDiscordAsyncCallback<InteractionModalMessage> callback)
         {
             ToPlaceholderModalCallback handler = DiscordPool.Get<ToPlaceholderModalCallback>();
             handler.Init(template, data, message, callback);
-            return handler;
+            handler.Run();
         }
         
         private void Init(DiscordModalTemplate template, PlaceholderData data, InteractionModalMessage message, IDiscordAsyncCallback<InteractionModalMessage> callback)

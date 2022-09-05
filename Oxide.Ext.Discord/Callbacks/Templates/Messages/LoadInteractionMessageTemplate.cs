@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
+using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
@@ -11,27 +13,27 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
 {
-    internal class LoadLocalizedMessageTemplate : BaseAsyncPoolableCallback
+    internal class LoadInteractionMessageTemplate : BaseAsyncCallback
     {
         private readonly DiscordMessageTemplates _templates = DiscordExtension.DiscordMessageTemplates;
         private Plugin _plugin;
         private string _name;
-        private string _language;
+        private DiscordInteraction _interaction;
         private IDiscordAsyncCallback<DiscordMessageTemplate> _callback;
         private ILogger _logger;
 
-        public static LoadLocalizedMessageTemplate Create(Plugin plugin, string name, string language, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
+        public static void Start(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
         {
-            LoadLocalizedMessageTemplate load = DiscordPool.Get<LoadLocalizedMessageTemplate>();
-            load.Init(plugin, name, language, callback, logger);
-            return load;
+            LoadInteractionMessageTemplate load = DiscordPool.Get<LoadInteractionMessageTemplate>();
+            load.Init(plugin, name, interaction, callback, logger);
+            load.Run();
         }
 
-        private void Init(Plugin plugin, string name, string language, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
+        private void Init(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
         {
             _plugin = plugin;
             _name = name;
-            _language = language;
+            _interaction = interaction;
             _callback = callback;
             _logger = logger;
         }
@@ -45,16 +47,21 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
                 _templates.TemplateCache[_plugin.Name] = pluginTemplates;
             }
 
-            TemplateId templateId = new TemplateId(_name, null);
+            string interactionLang = DiscordLocale.GetOxideLanguage(_interaction.Locale);
+            TemplateId templateId = new TemplateId(_name, interactionLang);
             if (pluginTemplates.TryGetValue(templateId, out DiscordMessageTemplate template))
             {
                 _callback.InvokeSuccess(template);
                 return;
             }
+            
+            IPlayer player = _interaction.User.Player;
 
-            template = await DiscordExtension.DiscordMessageTemplates.LoadTemplate<DiscordMessageTemplate>(_plugin, TemplateType.Message, _name, _language).ConfigureAwait(false)
-                       ?? await DiscordExtension.DiscordMessageTemplates.LoadTemplate<DiscordMessageTemplate>(_plugin, TemplateType.Message, _name, DiscordLocale.GameServerLanguage).ConfigureAwait(false)
-                       ?? await DiscordExtension.DiscordMessageTemplates.LoadTemplate<DiscordMessageTemplate>(_plugin, TemplateType.Message, _name, DiscordLocale.DefaultOxideLanguage).ConfigureAwait(false);
+            template = await _templates.LoadTemplate<DiscordMessageTemplate>(_plugin, TemplateType.Message, _name, interactionLang).ConfigureAwait(false)
+                       ?? (player != null ? await _templates.LoadTemplate<DiscordMessageTemplate>(_plugin, TemplateType.Message, _name, DiscordLocale.GetPlayerLanguage(player)).ConfigureAwait(false) : null)
+                       ?? await _templates.LoadTemplate<DiscordMessageTemplate>(_plugin, TemplateType.Message, _name, DiscordLocale.GetOxideLanguage(_interaction.GuildLocale)).ConfigureAwait(false) 
+                       ?? await _templates.LoadTemplate<DiscordMessageTemplate>(_plugin, TemplateType.Message, _name, DiscordLocale.GameServerLanguage).ConfigureAwait(false)
+                       ?? await _templates.LoadTemplate<DiscordMessageTemplate>(_plugin, TemplateType.Message, _name, DiscordLocale.DefaultOxideLanguage).ConfigureAwait(false);
             
             if (template == null)
             {
@@ -71,7 +78,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
         {
             _plugin = null;
             _name = null;
-            _language = null;
+            _interaction = null;
             _callback = null;
             _logger = null;
         }

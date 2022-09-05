@@ -3,8 +3,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
-using Oxide.Ext.Discord.Callbacks.Api.Entities;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Json.Serialization;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Rest.Requests
@@ -53,9 +54,21 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             if (OnSuccess != null)
             {
-                ApiSuccessCallback<T> callback = DiscordPool.Get<ApiSuccessCallback<T>>();
-                await callback.Init(this, response).ConfigureAwait(false);
-                callback.Run();
+                DiscordJsonReader reader = await DiscordJsonReader.CreateFromStreamAsync(response.Content).ConfigureAwait(false);
+                
+                try
+                {
+                    T data = await reader.DeserializeAsync<T>(Client.Bot.JsonSerializer).ConfigureAwait(false);
+                    ApiSuccessCallback<T>.Start(this, data);
+                }
+                catch (Exception ex)
+                {
+                    Client.Logger.Exception("An error occured deserializing JSON response. Method: {0} Route: {1}\nResponse:\n{2}", Method, Route, ex);
+                }
+                finally
+                {
+                    reader.Dispose();
+                }
             }
         }
 

@@ -207,14 +207,12 @@ namespace Oxide.Ext.Discord.Hooks
         
         private static void CallHookInternal(Plugin plugin, string hookName, object[] args)
         {
-            SinglePluginHookCallback call = SinglePluginHookCallback.CreateCallback(plugin, hookName, args);
-            call.Run();
+            SinglePluginHookCallback.Start(plugin, hookName, args);
         }
         
         private static void CallHookInternal(List<Plugin> plugins, string hookName, object[] args)
         {
-            MultiPluginHookCallback call = MultiPluginHookCallback.CreateCallback(plugins, hookName, args);
-            call.Run();
+            MultiPluginHookCallback.Start(plugins, hookName, args);
         }
         #endregion
     }

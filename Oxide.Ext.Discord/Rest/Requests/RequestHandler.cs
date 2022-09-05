@@ -107,6 +107,8 @@ namespace Oxide.Ext.Discord.Rest.Requests
             {
                 semaphore?.Release();
             }
+            
+            Dispose();
         }
         
         /// <summary>

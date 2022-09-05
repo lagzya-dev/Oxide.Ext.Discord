@@ -77,8 +77,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
                 callback = InternalAsyncCallback<InteractionModalMessage>.Create();
             }
             
-            ToPlaceholderModalCallback handler = ToPlaceholderModalCallback.Create(this, data, message, callback);
-            handler.Run();
+            ToPlaceholderModalCallback.Start(this, data, message, callback);
             return callback;
         }
         

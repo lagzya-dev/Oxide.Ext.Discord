@@ -1658,50 +1658,24 @@
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback`1.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback">
+        <member name="T:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback">
             <summary>
             Represents a base callback when a request is completed
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.Client">
+        <member name="F:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback.Client">
             <summary>
             <see cref="T:Oxide.Ext.Discord.DiscordClient"/> for the Api Completed Callback
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.Init(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback.Init(Oxide.Ext.Discord.DiscordClient)">
             <summary>
-            Initializes the <see cref="T:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback"/>
+            Initializes the <see cref="T:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback"/>
             </summary>
             <param name="client"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback.EnterPool">
             <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback">
-            <summary>
-            Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
-            This class is pooled to prevent allocations
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback._callback">
-            <summary>
-            The callback to be called by the delegate
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback.HandleCallback">
-            <summary>
-            Overridden in the child class to handle the callback
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.BaseAsyncPoolableCallback.Run">
-            <summary>
-            Runs the callback using async
-            </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.DisposeInternal">
             <inheritdoc/>
@@ -1709,28 +1683,31 @@
         <member name="M:Oxide.Ext.Discord.Callbacks.Async.InternalAsyncCallback`1.DisposeInternal">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback">
+        <member name="T:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback">
             <summary>
-            Thread Pool Handler for Rest Requests
+            Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
+            This class is pooled to prevent allocations
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback.CreateRequestCallback(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="F:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback._callback">
             <summary>
-            Creates a thread pooled rest request
+            The callback to be called by the delegate
             </summary>
-            <param name="rest"><see cref="T:Oxide.Ext.Discord.Rest.RestHandler"/> for the request</param>
-            <param name="request">Request to be ran</param>
-            <param name="logger">Logger</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback"/>Created Handler</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback.HandleCallback">
-            <inheritdoc/>
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback.#ctor">
+            <summary>
+            Constructor
+            </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback.DisposeInternal">
-            <inheritdoc/>
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback.HandleCallback">
+            <summary>
+            Overridden in the child class to handle the callback
+            </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.RestRequestCallback.EnterPool">
-            <inheritdoc/>
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback.Run">
+            <summary>
+            Runs the callback using async
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseCallback">
             <summary>
@@ -1779,7 +1756,7 @@
             Overridden in the child class to handle the callback
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.BaseCallback`1.Run(`0)">
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseCallback`1.Start(`0)">
             <summary>
             Run the callback
             </summary>
@@ -3437,7 +3414,7 @@
             Suppresses the error message from being logged
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetResponseData(System.Int32,System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetResponse(System.Int32,System.IO.Stream)">
             <summary>
             Sets the HTTP Response data
             </summary>
@@ -16765,7 +16742,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordTemplateMessage">
             <summary>
-            Interfaces for <see cref="T:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates"/> Messages
+            Interfaces for <see cref="T:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary"/> Messages
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordTemplateMessage.Content">
@@ -17140,6 +17117,43 @@
             </summary>
             <param name="objectType"></param>
             <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Json.Converters.TemplateComponentsConverter">
+            <summary>
+            Converter for list of message components
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.TemplateComponentsConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Ignored as we don't write JSON
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+            <exception cref="T:System.NotSupportedException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.TemplateComponentsConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Populate the correct types in components instead of just the BaseComponent
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.TemplateComponentsConverter.CanConvert(System.Type)">
+            <summary>
+            Returns if this can convert the value
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Json.Converters.TemplateComponentsConverter.CanWrite">
+            <summary>
+            Message Component Convert does not write JSON
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Json.Converters.UnixDateTimeConverter">
             <summary>
@@ -18029,139 +18043,79 @@
             Base Template used in Discord Templates
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate.TemplateType">
+            <summary>
+            The type of the Template
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate.Version">
             <summary>
             The version of the Template
             Used when Registering templates to determine if we need to backup a template and create a new template for the given version
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates">
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary">
             <summary>
             Oxide Library for Discord Templates
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.RegisterGlobalMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.BaseComponentTemplate.Visible">
             <summary>
-            Registers a global message template
-            Global Message templates cannot be localized
+            If the component should be added to the message
             </summary>
-            <param name="plugin">Plugin the template is for</param>
-            <param name="name">Unique name of the template</param>
-            <param name="template">Template to register</param>
-            <param name="minSupportedVersion">Min supported version for this template</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.RegisterLocalizedMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,System.String)">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.BaseComponentTemplate.Type">
             <summary>
-            Registers a message template with the given name and language
+            Type of the component
             </summary>
-            <param name="plugin">Plugin the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> is for</param>
-            <param name="name">Name of the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/></param>
-            <param name="template">Template to be registered</param>
-            <param name="minSupportedVersion">
-            The minimum supported template version.<br/>
-            If an existing template exists and it's version is >=  the minimum supported version then we will use that template.<br/>
-            If an existing template exists and it's version is &lt; the min supported version. The existing version is backed up and a new template is created 
-            </param>
-            <param name="language">Language for the template</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetMessageTemplateForPlayer(Oxide.Core.Plugins.Plugin,System.String,Oxide.Core.Libraries.Covalence.IPlayer)">
-            <summary>
-            Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player
-            </summary>
-            <param name="plugin">Plugin the template is for</param>
-            <param name="name">Name of the template</param>
-            <param name="player">IPlayer for the template</param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetMessageTemplateForPlayer(Oxide.Core.Plugins.Plugin,System.String,System.String)">
-            <summary>
-            Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player ID
-            </summary>
-            <param name="plugin">Plugin the template is for</param>
-            <param name="name">Name of the template</param>
-            <param name="playerId">PlayerId for the template</param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetGlobalMessageTemplate(Oxide.Core.Plugins.Plugin,System.String)">
-            <summary>
-            Returns a global message template for the plugin with the given name
-            </summary>
-            <param name="plugin">Plugin the template is for</param>
-            <param name="name">Name of the template</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/></returns>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetLocalizedMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,System.String)">
-            <summary>
-            Returns a message template for a given language
-            </summary>
-            <param name="plugin">Plugin the template is for</param>
-            <param name="name">Name of the template</param>
-            <param name="language">Oxide language of the template</param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.DiscordTemplates.GetMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
-            <summary>
-            Returns a message template for a given language
-            </summary>
-            <param name="plugin">Plugin the template is for</param>
-            <param name="name">Name of the template</param>
-            <param name="interaction">Interaction to get the template for</param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate">
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate">
             <summary>
             Template for Button Components
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Enabled">
-            <summary>
-            If the button should be added to the message
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Label">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.Label">
             <summary>
             Display label for the button
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Emoji">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.Emoji">
             <summary>
             Emoji for the button
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Style">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.Style">
             <summary>
             <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle"/> for the button
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Command">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.Command">
             <summary>
             Command for the button. If <see cref="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle.Link"/> then this will set the Url field; Else the CustomId field
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.Inline">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.Inline">
             <summary>
             Should the button be on the same or new row
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.#ctor">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.Enabled">
+            <summary>
+            If the Button is enabled
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.#ctor">
             <summary>
             Default Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.#ctor(System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle,System.String,System.Boolean,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.#ctor(System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle,System.String,System.Boolean,System.Boolean)">
             <summary>
             Constructor without emoji
             </summary>
@@ -18171,7 +18125,7 @@
             <param name="enabled">Is button enabled?</param>
             <param name="inline">Should the button be on the same row or a new row?</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.#ctor(System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle,System.String,System.String,System.Boolean,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.#ctor(System.String,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle,System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             Constructor with emoji
             </summary>
@@ -18182,9 +18136,127 @@
             <param name="enabled">Is button enabled?</param>
             <param name="inline">Should the button be on the same row or a new row?</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.ButtonTemplate.ToButton(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Components.ButtonTemplate.ToButton(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.InputTextTemplate.CustomId">
+            <summary>
+            Custom ID of the input text
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.InputTextTemplate.Style">
+            <summary>
+            The style of the input text
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.InputTextTemplate.Label">
+            <summary>
+            Text that appears on top of the input text field, max 80 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.InputTextTemplate.MinLength">
+            <summary>
+            The minimum length of the text input
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.InputTextTemplate.MaxLength">
+            <summary>
+            The maximum length of the text input
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.InputTextTemplate.Placeholder">
+            <summary>
+            The placeholder for the text input field
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.InputTextTemplate.Value">
+            <summary>
+            The pre-filled value for text input
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.InputTextTemplate.Required">
+            <summary>
+            Is the Input Text Required to be filled out
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuOptionTemplate">
+            <summary>
+            Template for Select Menu Options
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuOptionTemplate.Label">
+            <summary>
+            The user-facing name of the option,
+            Max 100 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuOptionTemplate.Value">
+            <summary>
+            The dev-define value of the option,
+            Max 100 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuOptionTemplate.Description">
+            <summary>
+            An additional description of the option,
+            Max 100 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuOptionTemplate.Emoji">
+            <summary>
+            Emoji in the option
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuOptionTemplate.Default">
+            <summary>
+            Will render this option as selected by default
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuTemplate">
+            <summary>
+            Template for Select Menu Component
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuTemplate.CustomId">
+            <summary>
+            Command for the Select Menu
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuTemplate.Options">
+            <summary>
+            The choices in the select
+            Max 25 options
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuTemplate.Placeholder">
+            <summary>
+            Custom placeholder text if nothing is selected
+            Max 150 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuTemplate.MinValues">
+            <summary>
+            the minimum number of items that must be chosen
+            Default 1, Min 0, Max 25
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuTemplate.MaxValues">
+            <summary>
+            the maximum  number of items that must be chosen
+            Default 1, Min 0, Max 25
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuTemplate.Enabled">
+            <summary>
+            If the Button is enabled
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Components.SelectMenuTemplate.ToSelectMenu(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+            <summary>
+            Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent"/>
             </summary>
             <returns></returns>
         </member>
@@ -18203,7 +18275,7 @@
             Embeds for the message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.Buttons">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.Components">
             <summary>
             Buttons for the message
             </summary>
@@ -18224,6 +18296,81 @@
             <param name="data">Placeholder Data for the template</param>
             <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
             <returns><see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> converted to type {T} message</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates.RegisterGlobalMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Registers a global message template
+            Global Message templates cannot be localized
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Unique name of the template</param>
+            <param name="template">Template to register</param>
+            <param name="minSupportedVersion">Min supported version for this template</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates.RegisterLocalizedMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,System.String)">
+            <summary>
+            Registers a message template with the given name and language
+            </summary>
+            <param name="plugin">Plugin the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> is for</param>
+            <param name="name">Name of the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/></param>
+            <param name="template">Template to be registered</param>
+            <param name="minSupportedVersion">
+            The minimum supported template version.<br/>
+            If an existing template exists and it's version is >=  the minimum supported version then we will use that template.<br/>
+            If an existing template exists and it's version is &lt; the min supported version. The existing version is backed up and a new template is created 
+            </param>
+            <param name="language">Language for the template</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates.GetMessageTemplateForPlayer(Oxide.Core.Plugins.Plugin,System.String,Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <param name="player">IPlayer for the template</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates.GetMessageTemplateForPlayer(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+            <summary>
+            Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player ID
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <param name="playerId">PlayerId for the template</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates.GetGlobalMessageTemplate(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Returns a global message template for the plugin with the given name
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates.GetLocalizedMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+            <summary>
+            Returns a message template for a given language
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <param name="language">Oxide language of the template</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates.GetMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+            <summary>
+            Returns a message template for a given language
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="name">Name of the template</param>
+            <param name="interaction">Interaction to get the template for</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate">
             <summary>
@@ -18363,6 +18510,21 @@
             Converts the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.EmojiTemplate"/> to a <see cref="T:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji"/>
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Modals.DiscordModalTemplate.Title">
+            <summary>
+            Title of the modal
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Modals.DiscordModalTemplate.CustomId">
+            <summary>
+            Title of the modal
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Modals.DiscordModalTemplate.Components">
+            <summary>
+            Components of the Modal
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion">
             <summary>
@@ -18832,6 +18994,11 @@
             Represents a pool
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.IPool.Clear">
+            <summary>
+            Clears the pool
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Pooling.IPool`1">
             <summary>
             Represents a pool of type T
@@ -19133,7 +19300,7 @@
             How long to wait before retrying request since there was a web exception
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.BaseRequest.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback)">
             <summary>
             Initializes the request
             </summary>
@@ -19166,7 +19333,7 @@
             Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback)">
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
@@ -19180,7 +19347,7 @@
             <param name="callback">Completed callback for the request</param>
             <returns>A <see cref="T:Oxide.Ext.Discord.Rest.Requests.Request"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback)">
             <summary>
             Initializes the Request
             </summary>
@@ -19224,20 +19391,20 @@
             Represent a Discord API request
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.CreateRequestHandler(Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.StartRequest(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest)">
             <summary>
             Creates a new <see cref="T:Oxide.Ext.Discord.Rest.Requests.RequestHandler"/>
             </summary>
             <param name="request">Request to be handled by this handler</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.Init(Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.Init(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Rest.Requests.BaseRequest,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Initializes a new request
             </summary>
             <param name="request">Request to be handled by this handler</param>
             <param name="logger">Logger for the request</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.Run">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.FireRequest">
             <summary>
             Fires the request off
             </summary>
@@ -19294,7 +19461,7 @@
             Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback)">
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
@@ -19308,7 +19475,7 @@
             <param name="callback">Completed callback for the request</param>
             <returns>A <see cref="T:Oxide.Ext.Discord.Rest.Requests.Request`1"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,System.Action{`0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback)">
             <summary>
             Initializes the Request
             </summary>
@@ -19359,7 +19526,7 @@
             <param name="client">Client the request is for</param>
             <param name="logger">Logger from the client</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback)">
             <summary>
             Creates a new request and queues it to be ran
             </summary>
@@ -19371,7 +19538,7 @@
             <param name="error">Error callback if an error occurs</param>
             <param name="callback">Completed callback for the request</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest``1(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.Entities.BaseApiCompletedCallback)">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest``1(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Action{``0},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError},Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback)">
             <summary>
             Creates a new request and queues it to be ran
             </summary>

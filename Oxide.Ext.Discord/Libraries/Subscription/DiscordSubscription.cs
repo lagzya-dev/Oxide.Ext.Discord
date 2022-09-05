@@ -15,6 +15,8 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         internal Plugin Plugin;
         internal readonly Action<DiscordMessage> Callback;
         internal readonly Snowflake ChannelId;
+        
+        private readonly string _pluginId;
 
         /// <summary>
         /// Constructor
@@ -24,6 +26,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <param name="callback">Callback when the channel message is sent</param>
         public DiscordSubscription(Snowflake channelId, Plugin plugin, Action<DiscordMessage> callback)
         {
+            _pluginId = plugin.Id();
             ChannelId = channelId;
             Plugin = plugin;
             Callback = callback;
@@ -37,7 +40,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <returns>True if same bot client; false otherwise</returns>
         public bool CanRun(BotClient client)
         {
-            return client != null && DiscordClient.Clients[Plugin.Id()]?.Bot == client;
+            return client != null && DiscordClient.Clients[_pluginId]?.Bot == client;
         }
 
         /// <summary>
@@ -46,8 +49,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <param name="message">Message that was sent in the given channel</param>
         public void Invoke(DiscordMessage message)
         {
-            SubscriptionCallback callback = SubscriptionCallback.CreateCallback(Plugin, message, Callback);
-            callback.Run();
+            SubscriptionCallback.Start(Plugin, message, Callback);
         }
 
         internal void OnRemoved()

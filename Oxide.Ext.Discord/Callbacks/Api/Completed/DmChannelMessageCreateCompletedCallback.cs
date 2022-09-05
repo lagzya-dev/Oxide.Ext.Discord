@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Callbacks.Api.Entities
+namespace Oxide.Ext.Discord.Callbacks.Api.Completed
 {
     internal class DmChannelMessageCreateCompletedCallback : BaseApiCompletedCallback
     {
@@ -14,14 +14,9 @@ namespace Oxide.Ext.Discord.Callbacks.Api.Entities
         public static DmChannelMessageCreateCompletedCallback Create(DiscordClient client, DiscordChannel channel)
         {
             DmChannelMessageCreateCompletedCallback callback = DiscordPool.Get<DmChannelMessageCreateCompletedCallback>();
-            callback.Init(client, channel);
+            callback.Init(client);
+            callback._channel = channel;
             return callback;
-        }
-
-        private void Init(DiscordClient client, DiscordChannel channel)
-        {
-            base.Init(client);
-            _channel = channel;
         }
         
         protected override void HandleCallback(RequestResponse response)

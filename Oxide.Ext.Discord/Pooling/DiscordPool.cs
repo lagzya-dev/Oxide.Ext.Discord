@@ -151,7 +151,7 @@ namespace Oxide.Ext.Discord.Pooling
             PlaceholderDataPool.Instance.Free(ref data);
         }
 
-        public static void Clear()
+        internal static void Clear()
         {
             for (int index = 0; index < Pools.Count; index++)
             {

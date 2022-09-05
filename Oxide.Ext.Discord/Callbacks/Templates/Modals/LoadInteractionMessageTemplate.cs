@@ -6,15 +6,14 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Templates;
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Modals
+namespace Oxide.Ext.Discord.Callbacks.Templates.Modals
 {
-    internal class LoadModalTemplate : BaseAsyncPoolableCallback
+    internal class LoadModalTemplateCallback : BaseAsyncCallback
     {
         private readonly DiscordModalTemplates _templates = DiscordExtension.DiscordModalTemplates;
         private Plugin _plugin;
@@ -23,11 +22,11 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Modals
         private IDiscordAsyncCallback<DiscordModalTemplate> _callback;
         private ILogger _logger;
 
-        public static LoadModalTemplate Create(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordModalTemplate> callback, ILogger logger)
+        public static void Start(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordModalTemplate> callback, ILogger logger)
         {
-            LoadModalTemplate load = DiscordPool.Get<LoadModalTemplate>();
+            LoadModalTemplateCallback load = DiscordPool.Get<LoadModalTemplateCallback>();
             load.Init(plugin, name, interaction, callback, logger);
-            return load;
+            load.Run();
         }
 
         private void Init(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordModalTemplate> callback, ILogger logger)

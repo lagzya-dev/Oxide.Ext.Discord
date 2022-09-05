@@ -3,6 +3,7 @@ using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Callbacks.Async.Templates.Messages;
+using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
@@ -32,8 +33,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            RegisterMessageTemplateCallback callback = RegisterMessageTemplateCallback.Create(plugin, name, null, template, minSupportedVersion, Logger);
-            callback.Run();
+            RegisterMessageTemplateCallback.Start(plugin, name, null, template, minSupportedVersion, Logger);
         }
         
         /// <summary>
@@ -55,8 +55,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            RegisterMessageTemplateCallback callback = RegisterMessageTemplateCallback.Create(plugin, name, language, template, minSupportedVersion, Logger);
-            callback.Run();
+            RegisterMessageTemplateCallback.Start(plugin, name, language, template, minSupportedVersion, Logger);
         }
 
         /// <summary>
@@ -109,8 +108,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 callback = InternalAsyncCallback<DiscordMessageTemplate>.Create();
             }
             
-            LoadGlobalMessageTemplate load = LoadGlobalMessageTemplate.Create(plugin, name, callback, Logger);
-            load.Run();
+            LoadGlobalMessageTemplate.Start(plugin, name, callback, Logger);
             return callback;
         }
         
@@ -138,8 +136,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 callback = InternalAsyncCallback<DiscordMessageTemplate>.Create();
             }
             
-            LoadLocalizedMessageTemplate load = LoadLocalizedMessageTemplate.Create(plugin, name, language, callback, Logger);
-            load.Run();
+            LoadLocalizedMessageTemplate.Start(plugin, name, language, callback, Logger);
             return callback;
         }
         
@@ -166,8 +163,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 callback = InternalAsyncCallback<DiscordMessageTemplate>.Create();
             }
             
-            LoadInteractionMessageTemplate load = LoadInteractionMessageTemplate.Create(plugin, name, interaction, callback, Logger);
-            load.Run();
+            LoadInteractionMessageTemplate.Start(plugin, name, interaction, callback, Logger);
             return callback;
         }
 

@@ -8,17 +8,12 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
     {
         private List<Plugin> _plugins;
 
-        public static MultiPluginHookCallback CreateCallback(List<Plugin> plugins, string hook, object[] args)
+        public static void Start(List<Plugin> plugins, string hook, object[] args)
         {
             MultiPluginHookCallback callback = DiscordPool.Get<MultiPluginHookCallback>();
-            callback.Init(plugins, hook, args);
-            return callback;
-        }
-        
-        private void Init(List<Plugin> plugins, string hook, object[] args)
-        {
-            base.Init(hook, args);
-            _plugins = plugins;
+            callback.Init(hook, args);
+            callback._plugins = plugins;
+            callback.Run();
         }
 
         protected override void HandleCallback()

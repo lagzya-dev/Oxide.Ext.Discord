@@ -1,7 +1,4 @@
 using System;
-using System.Threading.Tasks;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
 
@@ -12,12 +9,13 @@ namespace Oxide.Ext.Discord.Callbacks.Api
         private Action<T> _onSuccess;
         private T _data;
 
-        public async Task Init(Request<T> request, RequestResponse response)
+        public static void Start(Request<T> request, T data)
         {
-            base.Init(request);
-            _onSuccess = request.OnSuccess;
-            //DiscordExtension.GlobalLogger.Verbose($"{nameof(ApiSuccessCallback<T>)}.{nameof(Init)} Body: {await reader.ReadAsStringAsync()}");
-            _data = await DiscordJsonReader.DeserializeFromAsync<T>(Client.Bot.JsonSerializer, response.Content).ConfigureAwait(false);
+            ApiSuccessCallback<T> callback = DiscordPool.Get<ApiSuccessCallback<T>>();
+            callback.Init(request);
+            callback._onSuccess = request.OnSuccess;
+            callback._data = data;
+            callback.Run();
         }
 
         protected override void HandleApiCallback()

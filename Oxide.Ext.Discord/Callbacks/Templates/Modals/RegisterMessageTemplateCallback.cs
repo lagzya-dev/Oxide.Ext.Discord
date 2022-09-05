@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Modals
 {
-    internal class RegisterModalTemplateCallback : BaseAsyncPoolableCallback
+    internal class RegisterModalTemplateCallback : BaseAsyncCallback
     {
         private readonly DiscordModalTemplates _templates = DiscordExtension.DiscordModalTemplates;
         private Plugin _plugin;
@@ -18,11 +18,11 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Modals
         private TemplateVersion _minSupportedVersion;
         private ILogger _logger;
 
-        public static RegisterModalTemplateCallback Create(Plugin plugin, string name, string language, DiscordModalTemplate template, TemplateVersion minSupportedVersion, ILogger logger)
+        public static void Start(Plugin plugin, string name, string language, DiscordModalTemplate template, TemplateVersion minSupportedVersion, ILogger logger)
         {
             RegisterModalTemplateCallback callback = DiscordPool.Get<RegisterModalTemplateCallback>();
             callback.Init(plugin, name, language, template, minSupportedVersion, logger);
-            return callback;
+            callback.Run();
         }
         
         private void Init(Plugin plugin, string name, string language, DiscordModalTemplate template, TemplateVersion minSupportedVersion, ILogger logger)

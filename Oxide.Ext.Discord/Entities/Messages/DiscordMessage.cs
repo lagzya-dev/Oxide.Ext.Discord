@@ -4,7 +4,8 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders.Messages;
-using Oxide.Ext.Discord.Callbacks.Api.Entities;
+using Oxide.Ext.Discord.Callbacks.Api;
+using Oxide.Ext.Discord.Callbacks.Api.Completed;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -263,7 +264,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
             UserData userData = channel?.UserData;
             if (userData != null)
             {
-                if (channel.UserData.IsDmBlocked())
+                if (userData.IsDmBlocked())
                 {
                     DiscordUser user = userData.GetUser();
                     client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.GetFullUserName, user.Id, userData.GetBlockedUntil());

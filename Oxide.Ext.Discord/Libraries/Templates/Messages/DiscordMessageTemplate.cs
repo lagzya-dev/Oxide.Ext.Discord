@@ -99,8 +99,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 callback = InternalAsyncCallback<T>.Create();
             }
             
-            ToPlaceholderMessageCallback<T> handler = ToPlaceholderMessageCallback<T>.Create(this, data, message, callback);
-            handler.Run();
+            ToPlaceholderMessageCallback<T>.Start(this, data, message, callback);
             return callback;
         }
 

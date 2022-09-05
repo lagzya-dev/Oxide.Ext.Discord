@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
 {
-    internal class RegisterMessageTemplateCallback : BaseAsyncPoolableCallback
+    internal class RegisterMessageTemplateCallback : BaseAsyncCallback
     {
         private readonly DiscordMessageTemplates _templates = DiscordExtension.DiscordMessageTemplates;
         private Plugin _plugin;
@@ -18,11 +18,11 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
         private TemplateVersion _minSupportedVersion;
         private ILogger _logger;
 
-        public static RegisterMessageTemplateCallback Create(Plugin plugin, string name, string language, DiscordMessageTemplate template, TemplateVersion minSupportedVersion, ILogger logger)
+        public static void Start(Plugin plugin, string name, string language, DiscordMessageTemplate template, TemplateVersion minSupportedVersion, ILogger logger)
         {
             RegisterMessageTemplateCallback callback = DiscordPool.Get<RegisterMessageTemplateCallback>();
             callback.Init(plugin, name, language, template, minSupportedVersion, logger);
-            return callback;
+            callback.Run();
         }
         
         private void Init(Plugin plugin, string name, string language, DiscordMessageTemplate template, TemplateVersion minSupportedVersion, ILogger logger)

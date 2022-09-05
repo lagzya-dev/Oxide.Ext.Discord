@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Callbacks
         /// <summary>
         /// Run the callback
         /// </summary>
-        public virtual void Run()
+        protected virtual void Run()
         {
             Callback.Invoke();
         }

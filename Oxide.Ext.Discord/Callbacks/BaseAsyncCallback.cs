@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Callbacks.Async
+namespace Oxide.Ext.Discord.Callbacks
 {
     /// <summary>
     /// Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
     /// This class is pooled to prevent allocations
     /// </summary>
-    public abstract class BaseAsyncPoolableCallback : BasePoolable
+    public abstract class BaseAsyncCallback : BasePoolable
     {
         /// <summary>
         /// The callback to be called by the delegate
@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         /// <summary>
         /// Constructor
         /// </summary>
-        protected BaseAsyncPoolableCallback()
+        protected BaseAsyncCallback()
         {
             _callback = CallbackInternal;
         }
@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         /// <summary>
         /// Runs the callback using async
         /// </summary>
-        public void Run()
+        protected void Run()
         {
             Task.Run(_callback);
         }

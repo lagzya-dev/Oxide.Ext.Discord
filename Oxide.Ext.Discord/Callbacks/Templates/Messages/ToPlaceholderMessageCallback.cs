@@ -7,18 +7,18 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
 {
-    public class ToPlaceholderMessageCallback<T> : BaseAsyncPoolableCallback where T : class, IDiscordTemplateMessage, new()
+    public class ToPlaceholderMessageCallback<T> : BaseAsyncCallback where T : class, IDiscordTemplateMessage, new()
     {
         private DiscordMessageTemplate _template;
         private PlaceholderData _data;
         private T _message;
         private IDiscordAsyncCallback<T> _callback;
 
-        public static ToPlaceholderMessageCallback<T> Create(DiscordMessageTemplate template, PlaceholderData data, T message, IDiscordAsyncCallback<T> callback)
+        public static void Start(DiscordMessageTemplate template, PlaceholderData data, T message, IDiscordAsyncCallback<T> callback)
         {
             ToPlaceholderMessageCallback<T> handler = DiscordPool.Get<ToPlaceholderMessageCallback<T>>();
             handler.Init(template, data, message, callback);
-            return handler;
+            handler.Run();
         }
         
         private void Init(DiscordMessageTemplate template, PlaceholderData data, T message, IDiscordAsyncCallback<T> callback)

@@ -10,13 +10,15 @@ namespace Oxide.Ext.Discord.Callbacks.Api
         private Action<RequestError> _onError;
         private RequestError _error;
 
-        public void Init(BaseRequest request, RequestResponse response)
+        public static void Start(BaseRequest request, RequestResponse response)
         {
-            base.Init(request);
-            _onError = request.OnError;
-            _error = response.Error;
+            ApiErrorCallback callback = DiscordPool.Get<ApiErrorCallback>();
+            callback.Init(request);
+            callback._onError = request.OnError;
+            callback._error = response.Error;
+            callback.Run();
         }
-        
+
         protected override void HandleApiCallback()
         {
             _onError?.Invoke(_error);

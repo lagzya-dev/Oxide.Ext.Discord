@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
-using Oxide.Ext.Discord.Callbacks.Api.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Pooling;
 
@@ -52,9 +51,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             if (OnSuccess != null)
             {
-                ApiSuccessCallback callback = DiscordPool.Get<ApiSuccessCallback>();
-                callback.Init(this);
-                callback.Run();
+                ApiSuccessCallback.Start(this);
             }
 
             return Task.CompletedTask;

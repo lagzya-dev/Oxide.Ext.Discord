@@ -2,6 +2,7 @@ using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Callbacks.Async.Templates.Modals;
+using Oxide.Ext.Discord.Callbacks.Templates.Modals;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
@@ -22,8 +23,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            RegisterModalTemplateCallback callback = RegisterModalTemplateCallback.Create(plugin, name, language, template, minSupportedVersion, Logger);
-            callback.Run();
+            RegisterModalTemplateCallback.Start(plugin, name, language, template, minSupportedVersion, Logger);
         }
         
         public IDiscordAsyncCallback<DiscordModalTemplate> GetModalTemplate(Plugin plugin, string name, DiscordInteraction interaction)
@@ -41,8 +41,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
                 callback = InternalAsyncCallback<DiscordModalTemplate>.Create();
             }
             
-            LoadModalTemplate load = LoadModalTemplate.Create(plugin, name, interaction, callback, Logger);
-            load.Run();
+            LoadModalTemplateCallback.Start(plugin, name, interaction, callback, Logger);
             return callback;
         }
 

@@ -7,11 +7,13 @@ namespace Oxide.Ext.Discord.Callbacks.Api
     internal class ApiSuccessCallback : BaseApiCallback
     {
         private Action _onSuccess;
-        
-        public void Init(Request request)
+
+        public static void Start(Request request)
         {
-            base.Init(request);
-            _onSuccess = request.OnSuccess;
+            ApiSuccessCallback callback = DiscordPool.Get<ApiSuccessCallback>();
+            callback.Init(request);
+            callback._onSuccess = request.OnSuccess;
+            callback.Run();
         }
 
         protected override void HandleApiCallback()
