@@ -720,6 +720,44 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages/{Id}", RequestMethod.PATCH, this, callback, error);
         }
+        
+        /// <summary>
+        /// Edit a previously sent message.
+        /// The fields content, embed, allowed_mentions and flags can be edited by the original message author.
+        /// Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+        /// When specifying flags, ensure to include all previously set flags/bits in addition to ones that you are modifying.
+        /// Only flags documented in the table below may be modified by users (unsupported flag changes are currently ignored without error).
+        /// See <a href="https://discord.com/developers/docs/resources/channel#edit-message">Edit Message</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the updated message</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public static void EditMessage(DiscordClient client, DiscordMessage message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            client.Bot.Rest.CreateRequest(client,$"channels/{message.ChannelId}/messages/{message.Id}", RequestMethod.PATCH, message, callback, error);
+        }
+        
+        public void EditGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateKey, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            {
+                template.ToMessageInternalAsync(placeholders, this).OnSuccess(response =>
+                {
+                    EditMessage(client, response, callback, error);
+                });
+            });
+        }
+        
+        public void EditTemplateMessage(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            {
+                template.ToMessageInternalAsync(placeholders, this).OnSuccess(response =>
+                {
+                    EditMessage(client, response, callback, error);
+                });
+            });
+        }
 
         /// <summary>
         /// Delete a message.

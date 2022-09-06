@@ -189,7 +189,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 return null;
             }
 
-            return Players.FindPlayerById(id);
+            return ServerPlayerCache.GetPlayer(id);
         }
 
         /// <summary>
@@ -341,6 +341,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             _steamIdToDiscordId[player.Id] = discord.Id;
             _steamIds.Add(player.Id);
             _discordIds.Add(discord.Id);
+            ServerPlayerCache.SetPlayer(player);
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
         }
 

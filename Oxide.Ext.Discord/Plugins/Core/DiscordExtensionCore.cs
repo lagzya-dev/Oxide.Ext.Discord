@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -421,6 +422,15 @@ namespace Oxide.Ext.Discord.Plugins.Core
             if (plugin?.Name == "PlaceholderAPI")
             {
                 HandlePlaceholderApiUnloaded();
+            }
+        }
+
+        [HookMethod(nameof(OnUserConnected))]
+        private void OnUserConnected(IPlayer player)
+        {
+            if (player.IsLinked())
+            {
+                ServerPlayerCache.SetPlayer(player);
             }
         }
         #endregion

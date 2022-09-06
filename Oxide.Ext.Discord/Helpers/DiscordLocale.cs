@@ -101,7 +101,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// <returns>Locale for the given IPlayer</returns>
         public static string GetPlayerLanguage(IPlayer player)
         {
-            return GetPlayerLanguage(player.Id);
+            return GetPlayerLanguage(player?.Id);
         }
         
         /// <summary>

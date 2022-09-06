@@ -11110,6 +11110,17 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.DefferResponse(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Creates a response indicating that:
+            for application commands there will be an update in the future
+            for message component commands that you have acknowledged the command and there may be an update in the future
+            See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback once the action is completed</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Edits the initial Interaction response
@@ -12702,6 +12713,19 @@
             <param name="error">Callback when an error occurs with error information</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditMessage(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Edit a previously sent message.
+            The fields content, embed, allowed_mentions and flags can be edited by the original message author.
+            Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
+            When specifying flags, ensure to include all previously set flags/bits in addition to ones that you are modifying.
+            Only flags documented in the table below may be modified by users (unsupported flag changes are currently ignored without error).
+            See <a href="https://discord.com/developers/docs/resources/channel#edit-message">Edit Message</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with the updated message</param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Edit a previously sent message.
             The fields content, embed, allowed_mentions and flags can be edited by the original message author.
@@ -16049,6 +16073,15 @@
             Hash extensions
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.HashExt.RemoveAll``2(Oxide.Plugins.Hash{``0,``1},System.Func{``0,System.Boolean})">
+            <summary>
+            Remove all records from the hash with the given predicate filter
+            </summary>
+            <param name="hash">Hash to have data removed from</param>
+            <param name="predicate">Filter of which values to remove</param>
+            <typeparam name="TKey">Key type of the hash</typeparam>
+            <typeparam name="TValue">Value type of the hash</typeparam>
+        </member>
         <member name="M:Oxide.Ext.Discord.Extensions.HashExt.RemoveAll``2(Oxide.Plugins.Hash{``0,``1},System.Func{``1,System.Boolean},System.Action{``1})">
             <summary>
             Remove all records from the hash with the given predicate filter
@@ -18288,7 +18321,7 @@
             <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
             <returns><see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> converted to type {T} message</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.ToPlaceholderMessage``1(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,``0)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.ToMessage``1(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,``0)">
             <summary>
             Converts the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> to a {T} message
             {T} supports all message types
@@ -18553,12 +18586,6 @@
             <param name="major">Major Version</param>
             <param name="minor">Minor Version</param>
             <param name="revision">Revision Version</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.#ctor(System.String)">
-            <summary>
-            Parses a template version from a string
-            </summary>
-            <param name="version">String of a template version</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion.Equals(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
             <inheritdoc/>

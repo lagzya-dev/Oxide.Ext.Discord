@@ -48,5 +48,22 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions
                 throw new InvalidInteractionResponseException($"This interaction has expired as it has been longer than {MaxTokenLife.TotalMinutes:0} minutes");
             }
         }
+        
+        internal static void ThrowIfInvalidResponseType(InteractionType type, InteractionResponseType responseType)
+        {
+            switch (type)
+            {
+                case InteractionType.Ping when responseType != InteractionResponseType.Pong:
+                    throw new InvalidInteractionResponseException("You can only response to InteractionType.Ping with InteractionResponseType.Pong");
+                case InteractionType.ApplicationCommand when responseType != InteractionResponseType.ChannelMessageWithSource && responseType != InteractionResponseType.DeferredChannelMessageWithSource && responseType != InteractionResponseType.Modal:
+                    throw new InvalidInteractionResponseException("You can only response to InteractionType.ApplicationCommand with InteractionResponseType.ChannelMessageWithSource, InteractionResponseType.DeferredChannelMessageWithSource, or InteractionResponseType.Modal");
+                case InteractionType.MessageComponent when responseType != InteractionResponseType.UpdateMessage && responseType != InteractionResponseType.DeferredUpdateMessage && responseType != InteractionResponseType.Modal:
+                    throw new InvalidInteractionResponseException("You can only response to InteractionType.ApplicationCommand with InteractionResponseType.ChannelMessageWithSource, InteractionResponseType.DeferredChannelMessageWithSource, or InteractionResponseType.Modal");
+                case InteractionType.ApplicationCommandAutoComplete when responseType != InteractionResponseType.ApplicationCommandAutocompleteResult:
+                    throw new InvalidInteractionResponseException("You can only response to InteractionType.ApplicationCommandAutoComplete with InteractionResponseType.ApplicationCommandAutocompleteResult");
+                case InteractionType.ModalSubmit when (responseType == InteractionResponseType.Modal || responseType == InteractionResponseType.Pong):
+                    throw new InvalidInteractionResponseException("You can only response to InteractionType.ApplicationCommand with InteractionResponseType.ChannelMessageWithSource or InteractionResponseType.DeferredChannelMessageWithSource");
+            }
+        }
     }
 }

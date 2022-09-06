@@ -272,6 +272,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (response == null) throw new ArgumentNullException(nameof(response));
             InvalidInteractionResponseException.ThrowIfAlreadyResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfInitialResponseTimeElapsed(CreatedDate);
+            InvalidInteractionResponseException.ThrowIfInvalidResponseType(Type, response.Type);
 
             _hasResponded = true;
             client.Bot.Rest.CreateRequest(client, $"interactions/{Id}/{Token}/callback", RequestMethod.POST, response, callback, error);
@@ -286,7 +287,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="response">Interaction Callback Message Data</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionCallbackData response, Action callback = null, Action<RequestError> error = null)
+        public void CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionCallbackData response = null, Action callback = null, Action<RequestError> error = null)
         {
             InteractionResponse data = new InteractionResponse(type, response);
             CreateInteractionResponse(client, data, callback, error);
@@ -387,6 +388,21 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public void CreateInteractionResponse(DiscordClient client, InteractionModalBuilder builder, Action callback = null, Action<RequestError> error = null)
         {
             CreateInteractionResponse(client, builder.Build(), callback, error);
+        }
+        
+        /// <summary>
+        /// Creates a response indicating that:
+        /// for application commands there will be an update in the future
+        /// for message component commands that you have acknowledged the command and there may be an update in the future
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback once the action is completed</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void DefferResponse(DiscordClient client, Action callback = null, Action<RequestError> error = null)
+        {
+            InteractionResponseType type = Type == InteractionType.ApplicationCommand ? InteractionResponseType.DeferredChannelMessageWithSource : InteractionResponseType.DeferredUpdateMessage;
+            CreateInteractionResponse(client, type, (InteractionCallbackData)null, callback, error);
         }
 
         /// <summary>

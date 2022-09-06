@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -162,5 +163,7 @@ namespace Oxide.Ext.Discord.Extensions
         {
             return DiscordExtension.DiscordLink.GetLinkedMember(player, guild);
         }
+
+        public static bool IsDummyPlayer(this IPlayer player) => player is DiscordDummyPlayer;
     }
 }
