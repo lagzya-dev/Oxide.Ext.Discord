@@ -1,16 +1,13 @@
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Callbacks.Async.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
-using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Modals
+namespace Oxide.Ext.Discord.Callbacks.Templates.Modals
 {
-    public class ToPlaceholderModalCallback : BaseAsyncCallback
+    public class ToModalCallback : BaseAsyncCallback
     {
         private DiscordModalTemplate _template;
         private PlaceholderData _data;
@@ -19,7 +16,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Modals
 
         public static void Start(DiscordModalTemplate template, PlaceholderData data, InteractionModalMessage message, IDiscordAsyncCallback<InteractionModalMessage> callback)
         {
-            ToPlaceholderModalCallback handler = DiscordPool.Get<ToPlaceholderModalCallback>();
+            ToModalCallback handler = DiscordPool.Get<ToModalCallback>();
             handler.Init(template, data, message, callback);
             handler.Run();
         }
@@ -32,10 +29,9 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Modals
             _callback = callback;
         }
         
-        protected override async Task HandleCallback()
+        protected override Task HandleCallback()
         {
-            _message = await _template.ToPlaceholderModalInternalAsync(_data, _message).ConfigureAwait(false);
-            _callback.InvokeSuccess(_message);
+            return _template.HandleToModalAsync(_data, _message, _callback);
         }
 
         protected override void EnterPool()

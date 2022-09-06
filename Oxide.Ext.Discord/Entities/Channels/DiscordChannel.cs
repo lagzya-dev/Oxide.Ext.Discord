@@ -509,7 +509,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         {
             DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     CreateMessage(client, response, callback, error);
                 });
@@ -520,7 +520,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     CreateMessage(client, response, callback, error);
                 });

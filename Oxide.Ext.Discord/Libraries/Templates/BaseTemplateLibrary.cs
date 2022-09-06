@@ -35,10 +35,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 Directory.CreateDirectory(_rootDir);
             }
         }
-        
-        internal async Task<T> LoadTemplate<T>(Plugin plugin, TemplateType type, string name, string language) where T : BaseTemplate
+
+        internal async Task<T> LoadTemplate<T>(TemplateType type, TemplateId id) where T : BaseTemplate
         {
-            string path = GetTemplatePath(plugin, type, name, language);
+            string path = GetTemplatePath(type, id);
             if (!File.Exists(path))
             {
                 return null;
@@ -49,14 +49,19 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 return await DiscordJsonReader.DeserializeFromAsync<T>(_serializer, stream).ConfigureAwait(false);
             }
         }
-        
+
+        internal Task<T> LoadTemplate<T>(TemplateType type, TemplateId id, string language) where T : BaseTemplate
+        {
+            return LoadTemplate<T>(type, new TemplateId(id, language));
+        }
+
         internal Task CreateFile<T>(string path, T template) where T : BaseTemplate
         {
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
-            
+
             FileMode mode = File.Exists(path) ? FileMode.Truncate : FileMode.Create;
 
             using (FileStream stream = new FileStream(path, mode))
@@ -70,9 +75,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             return Task.CompletedTask;
         }
 
-        internal Task MoveFile(Plugin plugin, TemplateType type, string name, string language, TemplateVersion version)
+        internal Task MoveFile(TemplateType type, TemplateId id, TemplateVersion version)
         {
-            string oldPath = GetTemplatePath(plugin, type, name, language);
+            string oldPath = GetTemplatePath(type, id);
             if (!File.Exists(oldPath))
             {
                 return Task.CompletedTask;
@@ -83,22 +88,22 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             {
                 File.Delete(newPath);
             }
-            
+
             File.Move(oldPath, newPath);
             return Task.CompletedTask;
         }
-        
-        internal string GetTemplatePath(Plugin plugin, TemplateType type, string name, string language)
-        {
-            DiscordTemplateException.ThrowIfInvalidTemplateName(name);
 
-            if (string.IsNullOrEmpty(language))
+        internal string GetTemplatePath(TemplateType type, TemplateId id)
+        {
+            DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName);
+
+            if (string.IsNullOrEmpty(id.Language))
             {
-                return Path.Combine(_rootDir, plugin.Name, GetTemplateTypePath(type), $"{name}.json");
+                return Path.Combine(_rootDir, id.PluginName, GetTemplateTypePath(type), $"{id.TemplateName}.json");
             }
-            return Path.Combine(_rootDir, plugin.Name, GetTemplateTypePath(type), language, $"{name}.json");
+            return Path.Combine(_rootDir, id.PluginName, GetTemplateTypePath(type), id.Language, $"{id.TemplateName}.json");
         }
-        
+
         private string GetRenamePath(string path, TemplateVersion version)
         {
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));

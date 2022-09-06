@@ -224,7 +224,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     SendDirectMessage(client, response, callback, error);
                 });

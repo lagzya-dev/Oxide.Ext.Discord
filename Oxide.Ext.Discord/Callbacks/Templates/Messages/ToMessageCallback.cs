@@ -5,9 +5,9 @@ using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Pooling;
 
-namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
+namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    public class ToPlaceholderMessageCallback<T> : BaseAsyncCallback where T : class, IDiscordTemplateMessage, new()
+    public class ToMessageCallback<T> : BaseAsyncCallback where T : class, IDiscordTemplateMessage, new()
     {
         private DiscordMessageTemplate _template;
         private PlaceholderData _data;
@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
 
         public static void Start(DiscordMessageTemplate template, PlaceholderData data, T message, IDiscordAsyncCallback<T> callback)
         {
-            ToPlaceholderMessageCallback<T> handler = DiscordPool.Get<ToPlaceholderMessageCallback<T>>();
+            ToMessageCallback<T> handler = DiscordPool.Get<ToMessageCallback<T>>();
             handler.Init(template, data, message, callback);
             handler.Run();
         }
@@ -29,10 +29,9 @@ namespace Oxide.Ext.Discord.Callbacks.Async.Templates.Messages
             _callback = callback;
         }
         
-        protected override async Task HandleCallback()
+        protected override Task HandleCallback()
         {
-            _message = await _template.ToPlaceholderMessageInternalAsync(_data, _message).ConfigureAwait(false);
-            _callback.InvokeSuccess(_message);
+            return _template.HandleToMessageAsync(_data, _message, _callback);
         }
 
         protected override void EnterPool()

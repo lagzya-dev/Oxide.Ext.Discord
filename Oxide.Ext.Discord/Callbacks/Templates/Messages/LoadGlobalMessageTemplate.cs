@@ -1,73 +1,39 @@
 using System.Threading.Tasks;
-using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
-using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
     internal class LoadGlobalMessageTemplate : BaseAsyncCallback
     {
         private readonly DiscordMessageTemplates _templates = DiscordExtension.DiscordMessageTemplates;
-        private Plugin _plugin;
-        private string _name;
+        private TemplateId _id;
         private IDiscordAsyncCallback<DiscordMessageTemplate> _callback;
-        private ILogger _logger;
 
-        public static void Start(Plugin plugin, string name, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
+        public static void Start(TemplateId id, IDiscordAsyncCallback<DiscordMessageTemplate> callback)
         {
             LoadGlobalMessageTemplate load = DiscordPool.Get<LoadGlobalMessageTemplate>();
-            load.Init(plugin, name, callback, logger);
+            load.Init(id, callback);
             load.Run();
         }
-
-        private void Init(Plugin plugin, string name, IDiscordAsyncCallback<DiscordMessageTemplate> callback, ILogger logger)
+        
+        private void Init(TemplateId id, IDiscordAsyncCallback<DiscordMessageTemplate> callback)
         {
-            _plugin = plugin;
-            _name = name;
+            _id = id;
             _callback = callback;
-            _logger = logger;
         }
 
-        protected override async Task HandleCallback()
+        protected override Task HandleCallback()
         {
-            Hash<TemplateId, DiscordMessageTemplate> pluginTemplates =  _templates.TemplateCache[_plugin.Name];
-            if (pluginTemplates == null)
-            {
-                pluginTemplates = new Hash<TemplateId, DiscordMessageTemplate>();
-                _templates.TemplateCache[_plugin.Name] = pluginTemplates;
-            }
-
-            TemplateId templateId = new TemplateId(_name, null);
-            if (pluginTemplates.TryGetValue(templateId, out DiscordMessageTemplate template))
-            {
-                _callback.InvokeSuccess(template);
-                return;
-            }
-
-            template = await _templates.LoadTemplate<DiscordMessageTemplate>(_plugin, TemplateType.Message, _name, null).ConfigureAwait(false);
-            
-            if (template == null)
-            {
-                _logger.Warning($"Plugin {{0}} is using the {nameof(DiscordMessageTemplates)}.{nameof(DiscordMessageTemplates.LoadTemplate)} API but message template name '{{1}}' is not registered", _plugin.FullName(), _name);
-                _callback.InvokeSuccess(new DiscordMessageTemplate());
-                return;
-            }
-            
-            pluginTemplates[templateId] = template;
-            _callback.InvokeSuccess(template);
+            return _templates.HandleGetGlobalMessageTemplate(_id, _callback);
         }
 
         protected override void EnterPool()
         {
-            _plugin = null;
-            _name = null;
+            _id = default(TemplateId);
             _callback = null;
-            _logger = null;
         }
 
         protected override void DisposeInternal()

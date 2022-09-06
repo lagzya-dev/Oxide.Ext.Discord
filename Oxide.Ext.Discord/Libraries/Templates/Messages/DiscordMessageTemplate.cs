@@ -4,8 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Callbacks.Async;
-using Oxide.Ext.Discord.Callbacks.Async.Templates;
-using Oxide.Ext.Discord.Callbacks.Async.Templates.Messages;
+using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Permissions;
@@ -52,7 +51,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <returns><see cref="DiscordMessageTemplate"/> converted to type {T} message</returns>
         public T ToMessage<T>(T message = null) where T : class, IDiscordTemplateMessage, new()
         {
-            return ToPlaceholderMessage(null, message);
+            return ToMessage(null, message);
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <param name="data">Placeholder Data for the template</param>
         /// <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
         /// <returns><see cref="DiscordMessageTemplate"/> converted to type {T} message</returns>
-        public T ToPlaceholderMessage<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
+        public T ToMessage<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
         {
             if (message == null)
             {
@@ -87,25 +86,26 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return message;
         }
 
-        public IDiscordAsyncCallback<T> ToPlaceholderMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
+        public IDiscordAsyncCallback<T> ToMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
         {
-            return ToPlaceholderMessageAsyncInternal(data, message, DiscordAsyncCallback<T>.Create());
+            return ToMessageInternalAsync(data, message, DiscordAsyncCallback<T>.Create());
         }
         
-        internal IDiscordAsyncCallback<T> ToPlaceholderMessageAsyncInternal<T>(PlaceholderData data, T message = null, IDiscordAsyncCallback<T> callback = null) where T : class, IDiscordTemplateMessage, new()
+        internal IDiscordAsyncCallback<T> ToMessageInternalAsync<T>(PlaceholderData data, T message = null, IDiscordAsyncCallback<T> callback = null) where T : class, IDiscordTemplateMessage, new()
         {
             if (callback == null)
             {
                 callback = InternalAsyncCallback<T>.Create();
             }
             
-            ToPlaceholderMessageCallback<T>.Start(this, data, message, callback);
+            ToMessageCallback<T>.Start(this, data, message, callback);
             return callback;
         }
 
-        internal Task<T> ToPlaceholderMessageInternalAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
+        internal async Task HandleToMessageAsync<T>(PlaceholderData data, T message, IDiscordAsyncCallback<T> callback) where T : class, IDiscordTemplateMessage, new()
         {
-            return Task.FromResult(ToPlaceholderMessage(data, message));
+            T result = await Task.FromResult(ToMessage(data, message)).ConfigureAwait(false); 
+            callback.InvokeSuccess(result);
         }
 
         private List<DiscordEmbed> CreateEmbed(PlaceholderData data)

@@ -10,9 +10,14 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
         public static void Start(Plugin plugin, string hook, object[] args)
         {
             SinglePluginHookCallback callback = DiscordPool.Get<SinglePluginHookCallback>();
-            callback.Init(hook, args);
-            callback._plugin = plugin;
+            callback.Init(plugin, hook, args);
             callback.Run();
+        }
+
+        private void Init(Plugin plugin, string hook, object[] args)
+        {
+            Init(hook, args);
+            _plugin = plugin;
         }
 
         protected override void HandleCallback()

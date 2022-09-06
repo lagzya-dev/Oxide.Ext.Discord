@@ -20,16 +20,33 @@ namespace Oxide.Ext.Discord.Extensions
             string name = FullNameCache[plugin.Name];
             if (name == null)
             {
-                name = $"{plugin.Name} by {plugin.Author} v{plugin.Version}";
+                name = CreatePluginFullName(plugin);
                 FullNameCache[plugin.Name] = name;
             }
 
             return name;
         }
 
+        internal static string GetFullName(string pluginName)
+        {
+            if (string.IsNullOrEmpty(pluginName)) throw new ArgumentNullException(nameof(pluginName));
+            string name = FullNameCache[pluginName];
+            return name ?? pluginName;
+        }
+
+        internal static void OnPluginLoaded(Plugin plugin)
+        {
+            FullNameCache[plugin.Name] = CreatePluginFullName(plugin);
+        }
+
         internal static void OnPluginUnloaded(Plugin plugin)
         {
             FullNameCache.Remove(plugin.Name);
+        }
+
+        private static string CreatePluginFullName(Plugin plugin)
+        {
+            return $"{plugin.Name} by {plugin.Author} v{plugin.Version}";
         }
     }
 }

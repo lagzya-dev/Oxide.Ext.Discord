@@ -348,7 +348,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     ExecuteWebhook(client, response, executeParams, callback, error);
                 });
@@ -359,7 +359,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     ExecuteWebhook(client, response, executeParams, callback, error);
                 });
@@ -400,7 +400,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     EditWebhookMessage(client, messageId, response, messageParams, callback, error);
                 });
@@ -411,7 +411,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     EditWebhookMessage(client, messageId, response, messageParams, callback, error);
                 });

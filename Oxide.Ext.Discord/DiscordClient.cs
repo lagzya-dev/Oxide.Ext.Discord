@@ -247,6 +247,7 @@ namespace Oxide.Ext.Discord
                     }
                     
                     field.SetValue(plugin, client);
+                    PluginExt.OnPluginLoaded(plugin);
                     plugin.Call(DiscordExtHooks.OnDiscordClientCreated);
                     break;
                 }

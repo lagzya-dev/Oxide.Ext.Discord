@@ -16,10 +16,15 @@ namespace Oxide.Ext.Discord.Callbacks.Libraries
         public static void Start(Plugin plugin, DiscordMessage message, Action<DiscordMessage> callback)
         {
             SubscriptionCallback sub = DiscordPool.Get<SubscriptionCallback>();
-            sub._plugin = plugin;
-            sub._message = message;
-            sub._callback = callback;
+            sub.Init(plugin, message, callback);
             sub.Run();
+        }
+        
+        private void Init(Plugin plugin, DiscordMessage message, Action<DiscordMessage> callback)
+        {
+            _message = message;
+            _callback = callback;
+            _plugin = plugin;
         }
 
         protected override void HandleCallback()

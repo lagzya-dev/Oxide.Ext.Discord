@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Callbacks.Async;
-using Oxide.Ext.Discord.Callbacks.Async.Templates.Modals;
+using Oxide.Ext.Discord.Callbacks.Templates.Modals;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
@@ -65,25 +65,26 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
             return modal;
         }
         
-        public IDiscordAsyncCallback<InteractionModalMessage> ToPlaceholderMessageAsync(PlaceholderData data, InteractionModalMessage message = null)
+        public IDiscordAsyncCallback<InteractionModalMessage> ToModalAsync(PlaceholderData data, InteractionModalMessage message = null)
         {
-            return ToPlaceholderMessageAsyncInternal(data, message, DiscordAsyncCallback<InteractionModalMessage>.Create());
+            return ToModalInternalAsync(data, message, DiscordAsyncCallback<InteractionModalMessage>.Create());
         }
         
-        internal IDiscordAsyncCallback<InteractionModalMessage> ToPlaceholderMessageAsyncInternal(PlaceholderData data, InteractionModalMessage message = null, IDiscordAsyncCallback<InteractionModalMessage> callback = null)
+        internal IDiscordAsyncCallback<InteractionModalMessage> ToModalInternalAsync(PlaceholderData data, InteractionModalMessage message = null, IDiscordAsyncCallback<InteractionModalMessage> callback = null)
         {
             if (callback == null)
             {
                 callback = InternalAsyncCallback<InteractionModalMessage>.Create();
             }
             
-            ToPlaceholderModalCallback.Start(this, data, message, callback);
+            ToModalCallback.Start(this, data, message, callback);
             return callback;
         }
         
-        internal Task<InteractionModalMessage> ToPlaceholderModalInternalAsync(PlaceholderData data, InteractionModalMessage message)
+        internal async Task HandleToModalAsync(PlaceholderData data, InteractionModalMessage message, IDiscordAsyncCallback<InteractionModalMessage> callback)
         {
-            return Task.FromResult(ToModal(data, message));
+            InteractionModalMessage modal = await Task.FromResult(ToModal(data, message)).ConfigureAwait(false);
+            callback.InvokeSuccess(modal);
         }
     }
 }

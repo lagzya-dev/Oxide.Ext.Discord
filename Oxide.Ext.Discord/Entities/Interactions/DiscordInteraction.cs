@@ -299,7 +299,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             
             DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     CreateInteractionResponse(client, type, response, callback, error);
                 });
@@ -313,7 +313,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             
             DiscordExtension.DiscordModalTemplates.GetModalTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToModalInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     CreateInteractionResponse(client, response, callback, error);
                 });
@@ -411,7 +411,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             
             DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     EditOriginalInteractionResponse(client, response, callback, error);
                 });

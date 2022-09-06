@@ -1,10 +1,12 @@
 using System;
+using System.IO;
+using System.Threading.Tasks;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Async;
-using Oxide.Ext.Discord.Callbacks.Async.Templates.Messages;
 using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Logging;
@@ -14,7 +16,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
     public class DiscordMessageTemplates : BaseTemplateLibrary
     {
-        internal readonly Hash<string, Hash<TemplateId, DiscordMessageTemplate>> TemplateCache = new Hash<string, Hash<TemplateId, DiscordMessageTemplate>>();
+        private readonly Hash<TemplateId, DiscordMessageTemplate> _templateCache = new Hash<TemplateId, DiscordMessageTemplate>();
 
         public DiscordMessageTemplates(ILogger logger) : base(logger) { }
         
@@ -33,7 +35,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            RegisterMessageTemplateCallback.Start(plugin, name, null, template, minSupportedVersion, Logger);
+            TemplateId id = new TemplateId(plugin, name, null);
+            RegisterMessageTemplateCallback.Start(id, template, minSupportedVersion, Logger);
         }
         
         /// <summary>
@@ -55,7 +58,27 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            RegisterMessageTemplateCallback.Start(plugin, name, language, template, minSupportedVersion, Logger);
+            TemplateId id = new TemplateId(plugin, name, language);
+            RegisterMessageTemplateCallback.Start(id, template, minSupportedVersion, Logger);
+        }
+
+        internal async Task HandleRegisterMessageTemplate(TemplateId id, DiscordMessageTemplate template, TemplateVersion minSupportedVersion)
+        {
+            string path = GetTemplatePath(TemplateType.Message, id);
+            if (!File.Exists(path))
+            {
+                await CreateFile(path, template).ConfigureAwait(false);
+                return;
+            }
+
+            DiscordMessageTemplate existingTemplate =  await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id).ConfigureAwait(false);
+            if (existingTemplate.Version >= minSupportedVersion)
+            {
+                return;
+            }
+            
+            await MoveFile(TemplateType.Message, id, existingTemplate.Version).ConfigureAwait(false);
+            await CreateFile(path, template).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -107,9 +130,32 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             {
                 callback = InternalAsyncCallback<DiscordMessageTemplate>.Create();
             }
-            
-            LoadGlobalMessageTemplate.Start(plugin, name, callback, Logger);
+
+            TemplateId id = new TemplateId(plugin, name, null);
+            LoadGlobalMessageTemplate.Start(id, callback);
             return callback;
+        }
+        
+        internal async Task HandleGetGlobalMessageTemplate(TemplateId id, IDiscordAsyncCallback<DiscordMessageTemplate> callback)
+        {
+            DiscordMessageTemplate template = LoadFromCache(id);
+            if (template != null)
+            {
+                callback.InvokeSuccess(template);
+                return;
+            }
+            
+            template = await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id).ConfigureAwait(false);
+            
+            if (template == null)
+            {
+                Logger.Warning($"Plugin {{0}} is using the {nameof(DiscordMessageTemplates)}.{nameof(GetGlobalMessageTemplate)} API but message template name '{{1}}' is not registered", id.GetPluginName(), id.TemplateName);
+                callback.InvokeSuccess(new DiscordMessageTemplate());
+                return;
+            }
+            
+            SetCache(id, template);
+            callback.InvokeSuccess(template);
         }
         
         /// <summary>
@@ -136,8 +182,33 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 callback = InternalAsyncCallback<DiscordMessageTemplate>.Create();
             }
             
-            LoadLocalizedMessageTemplate.Start(plugin, name, language, callback, Logger);
+            TemplateId id = new TemplateId(plugin, name, language);
+            LoadLocalizedMessageTemplate.Start(id, callback);
             return callback;
+        }
+        
+        internal async Task HandleGetLocalizedMessageTemplate(TemplateId id, IDiscordAsyncCallback<DiscordMessageTemplate> callback)
+        {
+            DiscordMessageTemplate template = LoadFromCache(id);
+            if (template != null)
+            {
+                callback.InvokeSuccess(template);
+                return;
+            }
+            
+            template = await DiscordExtension.DiscordMessageTemplates.LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id).ConfigureAwait(false)
+                       ?? await DiscordExtension.DiscordMessageTemplates.LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id, DiscordLocale.GameServerLanguage).ConfigureAwait(false)
+                       ?? await DiscordExtension.DiscordMessageTemplates.LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id, DiscordLocale.DefaultOxideLanguage).ConfigureAwait(false);
+            
+            if (template == null)
+            {
+                Logger.Warning($"Plugin {{0}} is using the {nameof(DiscordMessageTemplates)}.{nameof(GetLocalizedMessageTemplate)} API but message template name '{{1}}' is not registered", id.GetPluginName(), id.TemplateName);
+                callback.InvokeSuccess(new DiscordMessageTemplate());
+                return;
+            }
+            
+            SetCache(id, template);
+            callback.InvokeSuccess(template);
         }
         
         /// <summary>
@@ -163,13 +234,51 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 callback = InternalAsyncCallback<DiscordMessageTemplate>.Create();
             }
             
-            LoadInteractionMessageTemplate.Start(plugin, name, interaction, callback, Logger);
+            string language = DiscordLocale.GetOxideLanguage(interaction.Locale);
+            TemplateId id = new TemplateId(plugin, name, language);
+            LoadInteractionMessageTemplate.Start(id, interaction, callback);
             return callback;
+        }
+        
+        internal async Task HandleGetMessageTemplate(TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordMessageTemplate> callback)
+        {
+            DiscordMessageTemplate template = LoadFromCache(id);
+            if (template != null)
+            {
+                callback.InvokeSuccess(template);
+                return;
+            }
+            
+            IPlayer player = interaction.User.Player;
+            
+            template = await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id).ConfigureAwait(false)
+                       ?? (player != null ? await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id, DiscordLocale.GetPlayerLanguage(player)).ConfigureAwait(false) : null)
+                       ?? await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id, DiscordLocale.GetOxideLanguage(interaction.GuildLocale)).ConfigureAwait(false) 
+                       ?? await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id, DiscordLocale.GameServerLanguage).ConfigureAwait(false)
+                       ?? await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id, DiscordLocale.DefaultOxideLanguage).ConfigureAwait(false);
+
+            
+            if (template == null)
+            {
+                Logger.Warning($"Plugin {{0}} is using the {nameof(DiscordMessageTemplates)}.{nameof(GetMessageTemplate)} API but message template name '{{1}}' is not registered", id.GetPluginName(), id.TemplateName);
+                callback.InvokeSuccess(new DiscordMessageTemplate());
+                return;
+            }
+            
+            SetCache(id, template);
+            callback.InvokeSuccess(template);
+        }
+
+        private DiscordMessageTemplate LoadFromCache(TemplateId id) => _templateCache.TryGetValue(id, out DiscordMessageTemplate template) ? template : null;
+
+        private void SetCache(TemplateId id, DiscordMessageTemplate template)
+        {
+            _templateCache[id] = template;
         }
 
         internal override void OnPluginUnloaded(Plugin plugin)
         {
-            TemplateCache.Remove(plugin.Name);
+            _templateCache.RemoveAll(t => t.PluginName == plugin.Name);
         }
     }
 }

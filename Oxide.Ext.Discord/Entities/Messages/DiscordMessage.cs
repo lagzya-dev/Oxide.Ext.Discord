@@ -363,7 +363,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     CreateMessage(client, channelId, response, callback, error);
                 });
@@ -374,7 +374,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     CreateMessage(client, channelId, response, callback, error);
                 });
@@ -483,7 +483,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     Reply(client, response, callback, error);
                 });
@@ -494,7 +494,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     Reply(client, response, callback, error);
                 });

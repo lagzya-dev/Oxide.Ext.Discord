@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.Extensions
         {
             DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     SendMessage(client, player.GetDiscordUserId(), response, callback, error);
                 });
@@ -93,7 +93,7 @@ namespace Oxide.Ext.Discord.Extensions
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
-                template.ToPlaceholderMessageAsyncInternal(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
                     SendMessage(client, player.GetDiscordUserId(), response, callback, error);
                 });

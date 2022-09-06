@@ -12,10 +12,15 @@ namespace Oxide.Ext.Discord.Callbacks.Api
         public static void Start(Request<T> request, T data)
         {
             ApiSuccessCallback<T> callback = DiscordPool.Get<ApiSuccessCallback<T>>();
-            callback.Init(request);
-            callback._onSuccess = request.OnSuccess;
-            callback._data = data;
+            callback.Init(request, data);
             callback.Run();
+        }
+
+        private void Init(Request<T> request, T data)
+        {
+            Init(request);
+            _onSuccess = request.OnSuccess;
+            _data = data;
         }
 
         protected override void HandleApiCallback()

@@ -38,20 +38,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             Revision = revision;
         }
 
-        /// <summary>
-        /// Parses a template version from a string
-        /// </summary>
-        /// <param name="version">String of a template version</param>
-        public TemplateVersion(string version)
-        {
-            int index = version.IndexOf(".", StringComparison.Ordinal);
-            Major = ushort.Parse(version.Substring(0, index));
-            int previousIndex = index;
-            index = version.IndexOf(".", index + 1, StringComparison.Ordinal);
-            Minor = ushort.Parse(version.Substring(previousIndex, index - previousIndex));
-            Revision = ushort.Parse(version.Substring(index, version.Length - 1 - index));
-        }
-
         ///<inheritdoc/>
         public bool Equals(TemplateVersion other)
         {
