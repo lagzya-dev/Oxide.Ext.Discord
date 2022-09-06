@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// <summary>
         /// 2-100 character thread name
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("name")]
         public string Name { get; set; } 
         
         /// <summary>
