@@ -1649,6 +1649,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="F:Oxide.Ext.Discord.Cache.ServerPlayerCache.Cache">
+            <summary>
+            Readonly Cache of <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/>
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback.DisposeInternal">
             <inheritdoc/>
         </member>
@@ -8112,7 +8117,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListActiveGuildThreads(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListActiveGuildThreads(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
             See <a href="https://discord.com/developers/docs/resources/guild#list-active-threads">List Active Threads</a>
@@ -17919,6 +17924,11 @@
             If you wish to keep the data for more than one placeholder use this to disable pooling
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.EnablePooling">
+            <summary>
+            If you would like to allow the placeholder to pool again
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting">
             <summary>
             Formatting Helpers for Placeholders
@@ -19000,7 +19010,7 @@
             </summary>
             <param name="stream"><see cref="T:System.IO.MemoryStream"/> being freed</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreePlaceholderData(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreePlaceholderData(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Frees a <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> back to the pool
             </summary>

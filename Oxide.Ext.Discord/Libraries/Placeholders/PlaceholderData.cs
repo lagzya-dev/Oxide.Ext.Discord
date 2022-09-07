@@ -1,3 +1,4 @@
+using System;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
@@ -7,6 +8,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
@@ -14,11 +16,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     /// <summary>
     /// Placeholder Data for placeholders
     /// </summary>
-    public class PlaceholderData
+    public class PlaceholderData : IDisposable
     {
         private readonly Hash<string, object> _data = new Hash<string, object>();
         internal const string TimestampName = "Timestamp";
-        internal bool ShouldPool = true;
+        private bool _shouldPool = true;
 
         internal PlaceholderData() { }
 
@@ -194,7 +196,23 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         public void DisablePooling()
         {
-            ShouldPool = false;
+            _shouldPool = false;
+        }
+        
+        /// <summary>
+        /// If you would like to allow the placeholder to pool again
+        /// </summary>
+        public void EnablePooling()
+        {
+            _shouldPool = true;
+        }
+
+        public void Dispose()
+        {
+            if (_shouldPool)
+            {
+                DiscordPool.FreePlaceholderData(this);
+            }
         }
     }
 }

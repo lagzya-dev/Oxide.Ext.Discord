@@ -146,7 +146,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// Frees a <see cref="PlaceholderData"/> back to the pool
         /// </summary>
         /// <param name="data"><see cref="PlaceholderData"/> being freed</param>
-        public static void FreePlaceholderData(ref PlaceholderData data)
+        public static void FreePlaceholderData(PlaceholderData data)
         {
             PlaceholderDataPool.Instance.Free(ref data);
         }

@@ -56,6 +56,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 return text;
             }
             
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            
             MatchCollection matches = _placeholderRegex.Matches(text);
             if (matches.Count != 0)
             {
@@ -87,10 +89,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 state.Dispose();
             }
 
-            if (data.ShouldPool)
-            {
-                DiscordPool.FreePlaceholderData(ref data);
-            }
+            data.Dispose();
             
             return text;
         }
