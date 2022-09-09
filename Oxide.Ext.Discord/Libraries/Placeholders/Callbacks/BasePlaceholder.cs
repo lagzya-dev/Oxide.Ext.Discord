@@ -1,6 +1,7 @@
 using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
 {
@@ -17,7 +18,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
 
         public bool IsExtensionPlaceholder()
         {
-            return Plugin == null;
+            return Plugin == DiscordExtensionCore.Instance;
         }
         
         public bool IsForPlugin(Plugin plugin)

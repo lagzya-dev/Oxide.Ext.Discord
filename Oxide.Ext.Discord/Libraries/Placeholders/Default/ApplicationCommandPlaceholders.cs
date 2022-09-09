@@ -1,21 +1,29 @@
 using System.Text;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    internal static class ApplicationCommandPlaceholders
+    public static class ApplicationCommandPlaceholders
     {
-        private static void Id(StringBuilder builder, PlaceholderState state, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, state, command.Id);
-        private static void Name(StringBuilder builder, PlaceholderState state, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, state, command.Name);
-        private static void Mention(StringBuilder builder, PlaceholderState state, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, state, command.Mention);
-        private static void MentionCustom(StringBuilder builder, PlaceholderState state, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, state, command.MentionCustom(state.Format));
+        public static void Id(StringBuilder builder, PlaceholderState state, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, state, command.Id);
+        public static void Name(StringBuilder builder, PlaceholderState state, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, state, command.Name);
+        public static void Mention(StringBuilder builder, PlaceholderState state, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, state, command.Mention);
+        public static void MentionCustom(StringBuilder builder, PlaceholderState state, DiscordApplicationCommand command) => PlaceholderFormatting.Replace(builder, state, command.MentionCustom(state.Format));
         
-        public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
+        internal static void RegisterPlaceholders()
         {
-            placeholders.RegisterInternalPlaceholder<DiscordApplicationCommand>("command.id", Id);
-            placeholders.RegisterInternalPlaceholder<DiscordApplicationCommand>("command.name", Name);
-            placeholders.RegisterInternalPlaceholder<DiscordApplicationCommand>("command.mention", Mention);
-            placeholders.RegisterInternalPlaceholder<DiscordApplicationCommand>("command.mention.custom", MentionCustom);
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "command", nameof(DiscordApplicationCommand));
+        }
+        
+        public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
+        {
+            DiscordPlaceholders placeholders = DiscordExtension.DiscordPlaceholders;
+            placeholders.RegisterPlaceholder<DiscordApplicationCommand>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
+            placeholders.RegisterPlaceholder<DiscordApplicationCommand>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<DiscordApplicationCommand>(plugin, $"{placeholderPrefix}.mention", dataKey, Mention);
+            placeholders.RegisterPlaceholder<DiscordApplicationCommand>(plugin, $"{placeholderPrefix}.mention.custom", dataKey, MentionCustom);
         }
     }
 }

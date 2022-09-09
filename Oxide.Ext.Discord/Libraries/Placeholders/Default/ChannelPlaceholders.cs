@@ -1,23 +1,31 @@
 using System.Text;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    internal static class ChannelPlaceholders
+    public static class ChannelPlaceholders
     {
-        private static void Id(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Id);
-        private static void Name(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Name);
-        private static void Icon(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.IconUrl);
-        private static void Topic(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Topic);
-        private static void Mention(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Mention);
+        public static void Id(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Id);
+        public static void Name(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Name);
+        public static void Icon(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.IconUrl);
+        public static void Topic(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Topic);
+        public static void Mention(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Mention);
 
-        public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
+        internal static void RegisterPlaceholders()
         {
-            placeholders.RegisterInternalPlaceholder<DiscordChannel>("channel.id", Id);
-            placeholders.RegisterInternalPlaceholder<DiscordChannel>("channel.name", Name);
-            placeholders.RegisterInternalPlaceholder<DiscordChannel>("channel.icon", Icon);
-            placeholders.RegisterInternalPlaceholder<DiscordChannel>("channel.topic", Topic);
-            placeholders.RegisterInternalPlaceholder<DiscordChannel>("channel.mention", Mention);
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "channel", nameof(DiscordChannel));
+        }
+        
+        public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
+        {
+            DiscordPlaceholders placeholders = DiscordExtension.DiscordPlaceholders;
+            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
+            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.icon", dataKey, Icon);
+            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.topic", dataKey, Topic);
+            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.mention", dataKey, Mention);
         }
     }
 }

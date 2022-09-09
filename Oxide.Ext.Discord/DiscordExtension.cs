@@ -116,6 +116,7 @@ namespace Oxide.Ext.Discord
             DiscordMessageTemplates = new DiscordMessageTemplates(GlobalLogger);
             DiscordModalTemplates = new DiscordModalTemplates(GlobalLogger);
             DiscordPlaceholders = new DiscordPlaceholders(GlobalLogger);
+            DiscordPlaceholders.RegisterPlaceholders();
 
             Manager.RegisterLibrary(nameof(DiscordAppCommand), DiscordAppCommand);
             Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);

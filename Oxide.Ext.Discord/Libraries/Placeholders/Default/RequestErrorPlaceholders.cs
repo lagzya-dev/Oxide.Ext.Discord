@@ -1,17 +1,25 @@
 using System.Text;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    internal static class RequestErrorPlaceholders
+    public static class RequestErrorPlaceholders
     {
-        private static void HttpCode(StringBuilder builder, PlaceholderState state, RequestError error) => PlaceholderFormatting.Replace(builder, state, error.HttpStatusCode);
-        private static void Message(StringBuilder builder, PlaceholderState state, RequestError error) => PlaceholderFormatting.Replace(builder, state, error.DiscordError?.Message ?? error.Message);
+        public static void HttpCode(StringBuilder builder, PlaceholderState state, RequestError error) => PlaceholderFormatting.Replace(builder, state, error.HttpStatusCode);
+        public static void Message(StringBuilder builder, PlaceholderState state, RequestError error) => PlaceholderFormatting.Replace(builder, state, error.DiscordError?.Message ?? error.Message);
 
-        public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
+        internal static void RegisterPlaceholders()
         {
-            placeholders.RegisterInternalPlaceholder<RequestError>("error.code", HttpCode);
-            placeholders.RegisterInternalPlaceholder<RequestError>("error.message", Message);
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "error", nameof(RequestError));
+        }
+        
+        public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
+        {
+            DiscordPlaceholders placeholders = DiscordExtension.DiscordPlaceholders;
+            placeholders.RegisterPlaceholder<RequestError>(plugin, $"{placeholderPrefix}.code", dataKey, HttpCode);
+            placeholders.RegisterPlaceholder<RequestError>(plugin, $"{placeholderPrefix}.message", dataKey, Message);
         }
     }
 }

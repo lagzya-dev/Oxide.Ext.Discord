@@ -46,6 +46,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="state"><see cref="Match"/> for the placeholder</param>
         /// <param name="value">Snowflake value to replace</param>
+        public static void Replace(StringBuilder builder, PlaceholderState state, bool value)
+        {
+            Replace(builder, state, value ? "true" : "false");
+        }
+        
+        /// <summary>
+        /// Replace the <see cref="Match"/> with the the <see cref="Snowflake"/> value
+        /// </summary>
+        /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
+        /// <param name="state"><see cref="Match"/> for the placeholder</param>
+        /// <param name="value">Snowflake value to replace</param>
         public static void Replace(StringBuilder builder, PlaceholderState state, Snowflake value)
         {
             Replace(builder, state, value.ToString());

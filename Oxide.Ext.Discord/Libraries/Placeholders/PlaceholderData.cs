@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     {
         private readonly Hash<string, object> _data = new Hash<string, object>();
         internal const string TimestampName = "Timestamp";
-        private bool _shouldPool = true;
+        internal bool ShouldPool = true;
 
         internal PlaceholderData() { }
 
@@ -136,6 +136,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         public PlaceholderData AddTimestamp(ulong timestamp) => Add(TimestampName, timestamp);
 
         /// <summary>
+        /// Adds a <see cref="Snowflake"/>
+        /// </summary>
+        /// <param name="id"><see cref="Snowflake"/> ID</param>
+        /// <returns>This</returns>
+        public PlaceholderData AddSnowflake(Snowflake id) => Add(nameof(Snowflake), id);
+        
+        /// <summary>
         /// Add a <see cref="RequestError"/>
         /// </summary>
         /// <param name="error">RequestError to add</param>
@@ -148,7 +155,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="obj">Object to add</param>
         /// <typeparam name="T">Type of the data</typeparam>
         /// <returns>This</returns>
-        public PlaceholderData Add<T>(T obj) where T : class => obj != null ? Add(nameof(T), obj) : this;
+        public PlaceholderData Add(object obj)
+        {
+            Type type = obj.GetType();
+            Add(type.Name, obj);
+            return this;
+        }
 
         /// <summary>
         /// Adds the data with the given name
@@ -157,7 +169,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="obj">Object to add</param>
         /// <typeparam name="T">Type of the data</typeparam>
         /// <returns>This</returns>
-        public PlaceholderData Add<T>(string name, T obj)
+        public PlaceholderData Add(string name, object obj)
         {
             _data[name] = obj;
             return this;
@@ -192,27 +204,16 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
 
         /// <summary>
-        /// If you wish to keep the data for more than one placeholder use this to disable pooling
+        /// Disable automatic pooling and handle manually by plugin
         /// </summary>
-        public void DisablePooling()
+        public void ManualPool()
         {
-            _shouldPool = false;
-        }
-        
-        /// <summary>
-        /// If you would like to allow the placeholder to pool again
-        /// </summary>
-        public void EnablePooling()
-        {
-            _shouldPool = true;
+            ShouldPool = false;
         }
 
         public void Dispose()
         {
-            if (_shouldPool)
-            {
-                DiscordPool.FreePlaceholderData(this);
-            }
+            DiscordPool.FreePlaceholderData(this);
         }
     }
 }

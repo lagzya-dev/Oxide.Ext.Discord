@@ -8,8 +8,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
     {
         private readonly string _dataKey;
         private readonly Action<StringBuilder, PlaceholderState, T> _callback;
-        
-        public Placeholder(Plugin plugin, Action<StringBuilder, PlaceholderState, T> callback) : this(nameof(T), plugin, callback) {}
 
         public Placeholder(string dataKey, Plugin plugin, Action<StringBuilder, PlaceholderState, T> callback) : base(plugin)
         {

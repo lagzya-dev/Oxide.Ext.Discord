@@ -1,23 +1,34 @@
 using System.Text;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
-    internal static class PlayerPlaceholders
+    public static class PlayerPlaceholders
     {
-        private static void Id(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Id);
-        private static void Name(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Name);
-        private static void Health(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Health);
-        private static void Position(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Position());
-        private static void Ping(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Ping);
+        public static void Id(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Id);
+        public static void Name(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Name);
+        public static void Health(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Health);
+        public static void Position(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Position());
+        public static void Ping(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.Ping);
+        public static void IsLinked(StringBuilder builder, PlaceholderState state, IPlayer player) => PlaceholderFormatting.Replace(builder, state, player.IsLinked());
 
-        public static void RegisterPlaceholders(DiscordPlaceholders placeholders)
+        internal static void RegisterPlaceholders()
         {
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.id", Id);
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.name", Name);
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.health", Health);
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.position", Position);
-            placeholders.RegisterInternalPlaceholder<IPlayer>("player.ping", Ping);
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "player", nameof(IPlayer));
+        }
+        
+        public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
+        {
+            DiscordPlaceholders placeholders = DiscordExtension.DiscordPlaceholders;
+            placeholders.RegisterPlaceholder<IPlayer>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
+            placeholders.RegisterPlaceholder<IPlayer>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<IPlayer>(plugin, $"{placeholderPrefix}.health", dataKey, Health);
+            placeholders.RegisterPlaceholder<IPlayer>(plugin, $"{placeholderPrefix}.position", dataKey, Position);
+            placeholders.RegisterPlaceholder<IPlayer>(plugin, $"{placeholderPrefix}.ping", dataKey, Ping);
+            placeholders.RegisterPlaceholder<IPlayer>(plugin, $"{placeholderPrefix}.islinked", dataKey, IsLinked);
         }
     }
 }
