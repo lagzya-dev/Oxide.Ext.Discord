@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (template == null) throw new ArgumentNullException(nameof(template));
 
             TemplateId id = new TemplateId(plugin, name, null);
-            RegisterMessageTemplateCallback.Start(id, template, minSupportedVersion, Logger);
+            RegisterMessageTemplateCallback.Start(id, template, minSupportedVersion);
         }
         
         /// <summary>
@@ -59,25 +59,23 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (template == null) throw new ArgumentNullException(nameof(template));
 
             TemplateId id = new TemplateId(plugin, name, language);
-            RegisterMessageTemplateCallback.Start(id, template, minSupportedVersion, Logger);
+            RegisterMessageTemplateCallback.Start(id, template, minSupportedVersion);
         }
 
         internal async Task HandleRegisterMessageTemplate(TemplateId id, DiscordMessageTemplate template, TemplateVersion minSupportedVersion)
         {
             string path = GetTemplatePath(TemplateType.Message, id);
-            if (!File.Exists(path))
+            if (File.Exists(path))
             {
-                await CreateFile(path, template).ConfigureAwait(false);
-                return;
-            }
+                DiscordMessageTemplate existingTemplate = await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id).ConfigureAwait(false);
+                if (existingTemplate.Version >= minSupportedVersion)
+                {
+                    return;
+                }
 
-            DiscordMessageTemplate existingTemplate =  await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id).ConfigureAwait(false);
-            if (existingTemplate.Version >= minSupportedVersion)
-            {
-                return;
+                await MoveFiles<DiscordMessageTemplate>(TemplateType.Message, id, minSupportedVersion).ConfigureAwait(false);
             }
             
-            await MoveFile(TemplateType.Message, id, existingTemplate.Version).ConfigureAwait(false);
             await CreateFile(path, template).ConfigureAwait(false);
         }
 

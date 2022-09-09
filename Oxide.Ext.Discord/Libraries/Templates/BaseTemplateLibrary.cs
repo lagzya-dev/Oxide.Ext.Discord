@@ -10,7 +10,6 @@ using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
 {
@@ -75,24 +74,45 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             return Task.CompletedTask;
         }
 
-        internal Task MoveFile(TemplateType type, TemplateId id, TemplateVersion version)
+        internal async Task MoveFiles<T>(TemplateType type, TemplateId id, TemplateVersion minSupportedVersion) where T : BaseTemplate
         {
-            string oldPath = GetTemplatePath(type, id);
-            if (!File.Exists(oldPath))
+            foreach (string dir in Directory.EnumerateDirectories(GetTemplateFolder(type, id.PluginName)))
             {
-                return Task.CompletedTask;
-            }
+                string lang = Path.GetDirectoryName(dir);
+                TemplateId langId = new TemplateId(id, lang);
+                
+                string oldPath = GetTemplatePath(type, langId);
+                if (!File.Exists(oldPath))
+                {
+                    continue;
+                }
+                
+                T template = await LoadTemplate<T>(type, langId).ConfigureAwait(false);
+                if (template == null)
+                {
+                    continue;
+                }
 
-            string newPath = GetRenamePath(oldPath, version);
-            if (File.Exists(newPath))
-            {
-                File.Delete(newPath);
-            }
+                if (template.Version >= minSupportedVersion)
+                {
+                    continue;
+                }
 
-            File.Move(oldPath, newPath);
-            return Task.CompletedTask;
+                string newPath = GetRenamePath(oldPath, template.Version);
+                if (File.Exists(newPath))
+                {
+                    File.Delete(newPath);
+                }
+                
+                File.Move(oldPath, newPath);
+            }
         }
 
+        internal string GetTemplateFolder(TemplateType type, string plugin)
+        {
+            return Path.Combine(_rootDir, plugin, GetTemplateTypePath(type));
+        }
+        
         internal string GetTemplatePath(TemplateType type, TemplateId id)
         {
             DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName);

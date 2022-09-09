@@ -9,7 +9,6 @@ using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -34,19 +33,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
         internal async Task HandleRegisterModalTemplate(TemplateId id, DiscordModalTemplate template, TemplateVersion minSupportedVersion)
         {
             string path = GetTemplatePath(TemplateType.Message, id);
-            if (!File.Exists(path))
+            if (File.Exists(path))
             {
-                await CreateFile(path, template).ConfigureAwait(false);
-                return;
+                DiscordModalTemplate existingTemplate = await LoadTemplate<DiscordModalTemplate>(TemplateType.Message, id).ConfigureAwait(false);
+                if (existingTemplate.Version >= minSupportedVersion)
+                {
+                    return;
+                }
+
+                await MoveFiles<DiscordModalTemplate>(TemplateType.Message, id, minSupportedVersion).ConfigureAwait(false);
             }
 
-            DiscordModalTemplate existingTemplate =  await LoadTemplate<DiscordModalTemplate>(TemplateType.Message, id).ConfigureAwait(false);
-            if (existingTemplate.Version >= minSupportedVersion)
-            {
-                return;
-            }
-            
-            await MoveFile(TemplateType.Message, id, existingTemplate.Version).ConfigureAwait(false);
             await CreateFile(path, template).ConfigureAwait(false);
         }
         
