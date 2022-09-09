@@ -17878,6 +17878,13 @@
             <param name="timestamp">Unix timestamp</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddSnowflake(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Snowflake"/>
+            </summary>
+            <param name="id"><see cref="T:Oxide.Ext.Discord.Entities.Snowflake"/> ID</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddRequestError(Oxide.Ext.Discord.Entities.Api.RequestError)">
             <summary>
             Add a <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestError"/>
@@ -17885,7 +17892,7 @@
             <param name="error">RequestError to add</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Add``1(``0)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Add(System.Object)">
             <summary>
             Adds type {T} to the placeholder. Type name is used as the data key
             </summary>
@@ -17919,14 +17926,9 @@
             <typeparam name="T">Type to return</typeparam>
             <returns>{T}</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.DisablePooling">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.ManualPool">
             <summary>
-            If you wish to keep the data for more than one placeholder use this to disable pooling
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.EnablePooling">
-            <summary>
-            If you would like to allow the placeholder to pool again
+            Disable automatic pooling and handle manually by plugin
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting">
@@ -17950,9 +17952,17 @@
             <param name="match"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
             <param name="value">Placeholder value to replace</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Boolean)">
             <summary>
             Replace the <see cref="T:System.Text.RegularExpressions.Match"/> with the the string value
+            </summary>
+            <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
+            <param name="state"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>
+            <param name="value">Snowflake value to replace</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Replace the <see cref="T:System.Text.RegularExpressions.Match"/> with the the <see cref="T:Oxide.Ext.Discord.Entities.Snowflake"/> value
             </summary>
             <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
             <param name="state"><see cref="T:System.Text.RegularExpressions.Match"/> for the placeholder</param>

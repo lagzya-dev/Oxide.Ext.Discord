@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// String contents of the message
         /// </summary>
         [JsonProperty("Message Content")]
-        public string Content { get; set; } = string.Empty;
+        public string Content { get; set; }
 
         /// <summary>
         /// Embeds for the message
@@ -42,6 +42,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         [JsonConverter(typeof(TemplateComponentsConverter))]
         [JsonProperty("Message Components")]
         public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
+
+        public DiscordMessageTemplate(string content = "")
+        {
+            Content = content;
+        }
 
         /// <summary>
         /// Converts the <see cref="DiscordMessageTemplate"/> to a {T} message

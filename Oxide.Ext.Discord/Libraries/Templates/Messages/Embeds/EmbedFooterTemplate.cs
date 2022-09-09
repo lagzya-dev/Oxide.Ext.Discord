@@ -11,18 +11,25 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// Show Embed Footer
         /// </summary>
         [JsonProperty("Show Footer")]
-        public bool Enabled { get; set; } = false;
+        public bool Enabled { get; set; }
 
         /// <summary>
         /// Embed Footer Text
         /// </summary>
         [JsonProperty("Footer Text")]
-        public string Text { get; set; } = string.Empty;
+        public string Text { get; set; }
 
         /// <summary>
         /// Embed Footer Icon
         /// </summary>
         [JsonProperty("Footer Icon URL")]
-        public string IconUrl { get; set; } = string.Empty;
+        public string IconUrl { get; set; }
+        
+        public EmbedFooterTemplate(string text = "", string iconUrl = "", bool enabled = false)
+        {
+            Text = text;
+            IconUrl = iconUrl;
+            Enabled = enabled;
+        }
     }
 }

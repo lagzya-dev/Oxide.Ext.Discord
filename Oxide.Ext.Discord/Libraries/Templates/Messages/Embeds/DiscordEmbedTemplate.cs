@@ -21,19 +21,19 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// The Tile for the embed
         /// </summary>
         [JsonProperty("Embed Title")]
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; }
         
         /// <summary>
         /// This Title Url for the embed
         /// </summary>
         [JsonProperty("Embed Title URL")]
-        public string Url { get; set; } = string.Empty;
+        public string Url { get; set; }
         
         /// <summary>
         /// The description of the embed
         /// </summary>
         [JsonProperty("Embed Description")]
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; }
 
         /// <summary>
         /// The Hex Color for the embed
@@ -76,5 +76,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// </summary>
         [JsonProperty("Embed Footer")]
         public EmbedFooterTemplate Footer { get; set; } = new EmbedFooterTemplate();
+
+        public DiscordEmbedTemplate(string title = "", string description = "", string titleUrl= "")
+        {
+            Title = title;
+            Description = description;
+            Url = titleUrl;
+        }
     }
 }
