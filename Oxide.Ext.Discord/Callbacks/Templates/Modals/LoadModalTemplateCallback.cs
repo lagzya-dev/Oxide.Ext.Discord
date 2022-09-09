@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Templates;

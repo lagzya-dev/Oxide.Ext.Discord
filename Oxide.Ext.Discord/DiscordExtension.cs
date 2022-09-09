@@ -11,7 +11,6 @@ using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Subscription;
-using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;

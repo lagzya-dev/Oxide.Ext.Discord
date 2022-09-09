@@ -1,5 +1,3 @@
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-
 namespace Oxide.Ext.Discord.Exceptions.Entities.Messages
 {
     /// <summary>

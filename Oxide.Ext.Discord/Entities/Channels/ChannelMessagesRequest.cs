@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {

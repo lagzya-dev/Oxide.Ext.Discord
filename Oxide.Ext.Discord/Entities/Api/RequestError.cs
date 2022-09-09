@@ -2,13 +2,9 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Oxide.Core.Libraries;
-using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
 
