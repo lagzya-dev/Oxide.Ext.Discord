@@ -23,17 +23,27 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         /// <summary>
         /// Connection type is Epic Games
         /// </summary>
+        [Description("ebay")] eBay,
+        
+        /// <summary>
+        /// Connection type is Epic Games
+        /// </summary>
         [Description("epicgames")] EpicGames,
         
         /// <summary>
         /// Connection type is Facebook
         /// </summary>
-        [Description("EpicGames")] Facebook,
+        [Description("facebook")] Facebook,
         
         /// <summary>
         /// Connection type is Youtube
         /// </summary>
         [Description("github")] GitHub,
+        
+        /// <summary>
+        /// Connection type is League of Legends
+        /// </summary>
+        [Description("paypal")] PayPal,
         
         /// <summary>
         /// Connection type is League of Legends
@@ -49,6 +59,11 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         /// Connection type is Reddit
         /// </summary>
         [Description("reddit")] Reddit,
+        
+        /// <summary>
+        /// Connection type is Reddit
+        /// </summary>
+        [Description("riotgames")] RiotGames,
 
         /// <summary>
         /// Connection type is Spotify
