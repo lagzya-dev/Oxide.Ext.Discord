@@ -9,6 +9,13 @@ namespace Oxide.Ext.Discord.Entities.Messages
     public class MessageCreate : BaseMessageCreate
     {
         /// <summary>
+        /// Can be used to verify a message was sent (up to 25 characters).
+        /// Value will appear in the Message Create event.
+        /// </summary>
+        [JsonProperty("content")]
+        public string Nonce { get; set; }
+        
+        /// <summary>
         /// Include to make your message a reply
         /// </summary>
         [JsonProperty("message_reference")]
