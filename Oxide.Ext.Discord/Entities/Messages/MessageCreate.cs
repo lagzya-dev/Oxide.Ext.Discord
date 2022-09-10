@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Can be used to verify a message was sent (up to 25 characters).
         /// Value will appear in the Message Create event.
         /// </summary>
-        [JsonProperty("content")]
+        [JsonProperty("nonce")]
         public string Nonce { get; set; }
         
         /// <summary>
