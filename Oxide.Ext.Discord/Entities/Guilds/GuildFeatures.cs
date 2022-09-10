@@ -58,6 +58,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         Featurable,
         
         /// <summary>
+        /// Guild has paused invites, preventing new users from joining
+        /// </summary>
+        [Description("INVITES_DISABLED")] 
+        InvitesDisabled,
+        
+        /// <summary>
         /// Guild has access to set an invite splash background
         /// </summary>
         [Description("INVITE_SPLASH")] 
