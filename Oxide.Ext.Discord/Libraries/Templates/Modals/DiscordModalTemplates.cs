@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Async;
+using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Modals;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
@@ -27,26 +28,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
             if (template == null) throw new ArgumentNullException(nameof(template));
 
             TemplateId id = new TemplateId(plugin, name, language);
-            RegisterModalTemplateCallback.Start(id, template, minSupportedVersion);
+            RegisterTemplateCallback<DiscordModalTemplate>.Start(this, id, template, minSupportedVersion);
         }
 
-        internal async Task HandleRegisterModalTemplate(TemplateId id, DiscordModalTemplate template, TemplateVersion minSupportedVersion)
-        {
-            string path = GetTemplatePath(TemplateType.Message, id);
-            if (File.Exists(path))
-            {
-                DiscordModalTemplate existingTemplate = await LoadTemplate<DiscordModalTemplate>(TemplateType.Message, id).ConfigureAwait(false);
-                if (existingTemplate.Version >= minSupportedVersion)
-                {
-                    return;
-                }
-
-                await MoveFiles<DiscordModalTemplate>(TemplateType.Message, id, minSupportedVersion).ConfigureAwait(false);
-            }
-
-            await CreateFile(path, template).ConfigureAwait(false);
-        }
-        
         public IDiscordAsyncCallback<DiscordModalTemplate> GetModalTemplate(Plugin plugin, string name, DiscordInteraction interaction)
         {
             return GetModalTemplateInternal(plugin, name, interaction, DiscordAsyncCallback<DiscordModalTemplate>.Create());

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Async;
+using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
@@ -36,7 +37,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (template == null) throw new ArgumentNullException(nameof(template));
 
             TemplateId id = new TemplateId(plugin, name, null);
-            RegisterMessageTemplateCallback.Start(id, template, minSupportedVersion);
+            RegisterTemplateCallback<DiscordMessageTemplate>.Start(this, id, template, minSupportedVersion);
         }
         
         /// <summary>
@@ -59,24 +60,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (template == null) throw new ArgumentNullException(nameof(template));
 
             TemplateId id = new TemplateId(plugin, name, language);
-            RegisterMessageTemplateCallback.Start(id, template, minSupportedVersion);
-        }
-
-        internal async Task HandleRegisterMessageTemplate(TemplateId id, DiscordMessageTemplate template, TemplateVersion minSupportedVersion)
-        {
-            string path = GetTemplatePath(TemplateType.Message, id);
-            if (File.Exists(path))
-            {
-                DiscordMessageTemplate existingTemplate = await LoadTemplate<DiscordMessageTemplate>(TemplateType.Message, id).ConfigureAwait(false);
-                if (existingTemplate.Version >= minSupportedVersion)
-                {
-                    return;
-                }
-
-                await MoveFiles<DiscordMessageTemplate>(TemplateType.Message, id, minSupportedVersion).ConfigureAwait(false);
-            }
-            
-            await CreateFile(path, template).ConfigureAwait(false);
+            RegisterTemplateCallback<DiscordMessageTemplate>.Start(this, id, template, minSupportedVersion);
         }
 
         /// <summary>

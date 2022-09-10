@@ -12,15 +12,15 @@ namespace Oxide.Ext.Discord.Extensions
         /// <summary>
         /// Copies one stream to another using a pooled byte[] buffer
         /// </summary>
-        /// <param name="stream">Stream to copy from</param>
+        /// <param name="from">Stream to copy from</param>
         /// <param name="to">Stream to copy to</param>
-        public static async Task CopyToPooledAsync(this Stream stream, Stream to)
+        public static async Task CopyToPooledAsync(this Stream from, Stream to)
         {
             byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(8196);
 
             while (true)
             {
-                int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
+                int bytesRead = await from.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
                 if (bytesRead == 0)
                 {
                     break;
@@ -35,15 +35,15 @@ namespace Oxide.Ext.Discord.Extensions
         /// <summary>
         /// Copies one stream to another using a pooled byte[] buffer
         /// </summary>
-        /// <param name="stream">Stream to copy from</param>
+        /// <param name="from">Stream to copy from</param>
         /// <param name="to">Stream to copy to</param>
-        public static void CopyToPooled(this Stream stream, Stream to)
+        public static void CopyToPooled(this Stream from, Stream to)
         {
             byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(8196);
             
             while (true)
             {
-                int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                int bytesRead = from.Read(buffer, 0, buffer.Length);
                 if (bytesRead == 0)
                 {
                     break;

@@ -9,7 +9,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         internal readonly string PluginName;
         public readonly string TemplateName;
         public readonly string Language;
-
+        
+        public bool IsGlobal => string.IsNullOrEmpty(Language);
+        
         public TemplateId(Plugin plugin, string templateName, string language)
         {
             PluginName = plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));;
@@ -24,6 +26,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             Language = language;
         }
 
+
+        
         public string GetPluginName()
         {
             return PluginExt.GetFullName(PluginName);
