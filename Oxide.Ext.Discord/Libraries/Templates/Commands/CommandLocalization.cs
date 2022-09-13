@@ -5,30 +5,57 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 {
+    /// <summary>
+    /// Localization for Application Commands
+    /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class CommandLocalization
     {
+        /// <summary>
+        /// Localization for <see cref="CommandCreate.Name"/> or <see cref="CommandOption.Name"/>
+        /// </summary>
         [JsonProperty("Command Name")]
         public string Name { get; set; }
         
+        /// <summary>
+        /// Localization for <see cref="CommandCreate.Description"/> or <see cref="CommandOption.Description"/>
+        /// </summary>
         [JsonProperty("Command Description")]
         public string Description { get; set; }
         
+        /// <summary>
+        /// Localized Options for the Command
+        /// </summary>
         [JsonProperty("Command Options")]
         public List<CommandLocalization> Options { get; set; }
         
+        /// <summary>
+        /// Localized Argument Options
+        /// </summary>
         [JsonProperty("Argument Localization")]
         public Hash<string, ArgumentLocalization> Arguments { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         [JsonConstructor]
         public CommandLocalization() { }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
         public CommandLocalization(string name, string description)
         {
             Name = name;
             Description = description;
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="create"></param>
         public CommandLocalization(CommandCreate create)
         {
             Name = create.Name;
@@ -44,6 +71,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             }
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="opt"></param>
         public CommandLocalization(CommandOption opt)
         {
             Name = opt.Name;
@@ -80,6 +111,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             Arguments[option.Name] = new ArgumentLocalization(option);
         }
         
+        /// <summary>
+        /// Apply Command Localizations to the <see cref="CommandCreate"/>
+        /// </summary>
+        /// <param name="create"></param>
+        /// <param name="language"></param>
         public void ApplyCommandLocalization(CommandCreate create, string language)
         {
             create.NameLocalizations[language] = Name;

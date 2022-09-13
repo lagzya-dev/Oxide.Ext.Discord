@@ -19,16 +19,24 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     /// </summary>
     public abstract class BaseTemplateLibrary : Library
     {
+        /// <summary>
+        /// Logger for the <see cref="BaseTemplateLibrary"/>
+        /// </summary>
         protected readonly ILogger Logger;
+        
+        /// <summary>
+        /// Root Directory for the library
+        /// </summary>
         protected readonly string RootDir;
         
         internal readonly HashSet<TemplateId> RegisteredTemplates = new HashSet<TemplateId>();
 
         private readonly JsonSerializer _serializer = JsonSerializer.Create(new JsonSerializerSettings{Formatting = Formatting.Indented});
-        
+
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="rootDir">Root Directory for the library</param>
         /// <param name="logger"></param>
         protected BaseTemplateLibrary(string rootDir, ILogger logger)
         {
@@ -199,6 +207,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             return Path.Combine(Path.GetDirectoryName(path), $"{Path.GetFileNameWithoutExtension(path)}.{version}.json");
         }
 
+        /// <summary>
+        /// Returns a pooled lowered string for the template type
+        /// </summary>
+        /// <param name="type"><see cref="TemplateType"/> to return the string for</param>
+        /// <returns></returns>
         protected string GetTemplateTypePath(TemplateType type) => EnumCache<TemplateType>.ToLower(type);
 
         internal abstract void OnPluginUnloaded(Plugin plugin);

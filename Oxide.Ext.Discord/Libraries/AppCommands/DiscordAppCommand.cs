@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         /// Constructor
         /// </summary>
         /// <param name="logger">Logger for the library</param>
-        public DiscordAppCommand(ILogger logger) 
+        internal DiscordAppCommand(ILogger logger) 
         {
             _logger = logger;
         }

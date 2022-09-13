@@ -221,9 +221,20 @@ namespace Oxide.Ext.Discord.Entities.Users
             CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, embeds, callback, error); });
         }
 
-        public void SendTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        /// <summary>
+        /// Send a message in a DM to the user using a localized message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void SendTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateName, language).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -232,9 +243,19 @@ namespace Oxide.Ext.Discord.Entities.Users
             });
         }
         
-        public void SendGlobalTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateKey, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        /// <summary>
+        /// Reply to a message using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void SendGlobalTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplate(plugin, templateKey).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplate(plugin, templateName).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {

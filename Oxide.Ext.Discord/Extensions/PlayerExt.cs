@@ -26,6 +26,8 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="message">Message to send</param>
+        /// <param name="callback">Callback with the created message</param>
+        /// <param name="error">Callback with error information</param>
         public static void SendDiscordMessage(this IPlayer player, DiscordClient client, string message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             MessageCreate create = new MessageCreate
@@ -42,6 +44,8 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="embed">Embed to send</param>
+        /// <param name="callback">Callback with the created message</param>
+        /// <param name="error">Callback with error information</param>
         public static void SendDiscordMessage(this IPlayer player, DiscordClient client, DiscordEmbed embed, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             MessageCreate create = new MessageCreate
@@ -58,6 +62,8 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="embeds">Embeds to send</param>
+        /// <param name="callback">Callback with the created message</param>
+        /// <param name="error">Callback with error information</param>
         public static void SendDiscordMessage(this IPlayer player, DiscordClient client, List<DiscordEmbed> embeds, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             MessageCreate create = new MessageCreate
@@ -74,14 +80,27 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="message">Message to send</param>
+        /// <param name="callback">Callback with the created message</param>
+        /// <param name="error">Callback with error information</param>
         public static void SendDiscordMessage(this IPlayer player, DiscordClient client, MessageCreate message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             SendMessage(client, player.GetDiscordUserId(), message, callback, error);
         }
-        
-        public static void SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateKey, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+
+        /// <summary>
+        /// Send a message in a DM to the linked user using a global message template
+        /// </summary>
+        /// <param name="player">Player to send the message to</param>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public static void SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateName).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -89,10 +108,22 @@ namespace Oxide.Ext.Discord.Extensions
                 });
             });
         }
-        
-        public static void SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+
+        /// <summary>
+        /// Send a message in a DM to the linked user using a localized message template
+        /// </summary>
+        /// <param name="player">Player to send the message to</param>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public static void SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateName, language).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -116,11 +147,11 @@ namespace Oxide.Ext.Discord.Extensions
             DiscordChannel channel = client.Bot.DirectMessagesByUserId[id.Value];
             if (channel != null)
             {
-                channel.CreateMessage(client, message);
+                channel.CreateMessage(client, message, callback, error);
                 return;
             }
             
-            DiscordUser.CreateDirectMessageChannel(client, id.Value, newChannel => newChannel.CreateMessage(client, message));
+            DiscordUser.CreateDirectMessageChannel(client, id.Value, newChannel => newChannel.CreateMessage(client, message, callback, error));
         }
 
         /// <summary>
@@ -164,6 +195,11 @@ namespace Oxide.Ext.Discord.Extensions
             return DiscordExtension.DiscordLink.GetLinkedMember(player, guild);
         }
 
+        /// <summary>
+        /// Returns if the IPlayer is a <see cref="DiscordDummyPlayer"/>
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         public static bool IsDummyPlayer(this IPlayer player) => player is DiscordDummyPlayer;
     }
 }

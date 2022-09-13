@@ -40,6 +40,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         [JsonProperty("emoji_name")]
         public string EmojiName { get; set; }
 
+        ///<inheritdoc/>
         public void Validate()
         {
             InvalidForumTagException.ThrowIfInvalidName(Name);

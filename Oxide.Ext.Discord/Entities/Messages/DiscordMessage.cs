@@ -359,9 +359,20 @@ namespace Oxide.Ext.Discord.Entities.Messages
             CreateMessage(client, channelId, createMessage, callback, error);
         }
         
-        public void CreateGlobalTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateKey, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        /// <summary>
+        /// Send a message in the channel with the given ID using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channelId">Channel ID to send the message in</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public static void CreateGlobalTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateName).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -369,10 +380,22 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 });
             });
         }
-        
-        public void CreateTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+
+        /// <summary>
+        /// Send a message in the channel with the given ID using a localized message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="channelId">Channel ID to send the message in</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public static void CreateTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateName, language).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -479,9 +502,19 @@ namespace Oxide.Ext.Discord.Entities.Messages
             Reply(client, newMessage, callback, error);
         }
         
-        public void ReplyWithGlobalTemplate(DiscordClient client, Plugin plugin, string templateKey, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        /// <summary>
+        /// Reply to a message using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ReplyWithGlobalTemplate(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateName).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -489,10 +522,21 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 });
             });
         }
-        
-        public void ReplyWithTemplate(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+
+        /// <summary>
+        /// Reply to a message using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ReplyWithTemplate(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateName, language).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -720,7 +764,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages/{Id}", RequestMethod.PATCH, this, callback, error);
         }
-        
+
         /// <summary>
         /// Edit a previously sent message.
         /// The fields content, embed, allowed_mentions and flags can be edited by the original message author.
@@ -730,6 +774,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#edit-message">Edit Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="message">Message to edit</param>
         /// <param name="callback">Callback with the updated message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void EditMessage(DiscordClient client, DiscordMessage message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
@@ -737,9 +782,18 @@ namespace Oxide.Ext.Discord.Entities.Messages
             client.Bot.Rest.CreateRequest(client,$"channels/{message.ChannelId}/messages/{message.Id}", RequestMethod.PATCH, message, callback, error);
         }
         
-        public void EditGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateKey, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        /// <summary>
+        /// Edit a message using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void EditGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateName, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateName).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, this).OnSuccess(response =>
                 {
@@ -748,9 +802,19 @@ namespace Oxide.Ext.Discord.Entities.Messages
             });
         }
         
-        public void EditTemplateMessage(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        /// <summary>
+        /// Edit a message using a localized message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void EditTemplateMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateName, language).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, this).OnSuccess(response =>
                 {

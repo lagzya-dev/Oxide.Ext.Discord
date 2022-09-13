@@ -31,16 +31,26 @@ namespace Oxide.Ext.Discord.Json.Serialization
             _writer.Formatting = Formatting.None;
         }
 
+        /// <summary>
+        /// Returns a pooled <see cref="DiscordJsonWriter"/>
+        /// </summary>
+        /// <returns></returns>
         public static DiscordJsonWriter Get()
         {
             return DiscordPool.Get<DiscordJsonWriter>();
         }
 
-        public static async Task WriteAndCopyAsync(JsonSerializer serializer, object payload, Stream to)
+        /// <summary>
+        /// Serializes the payload to the output stream
+        /// </summary>
+        /// <param name="serializer">Serializer to use</param>
+        /// <param name="payload">Payload to serialize</param>
+        /// <param name="output">Output stream to write to</param>
+        public static async Task WriteAndCopyAsync(JsonSerializer serializer, object payload, Stream output)
         {
             DiscordJsonWriter writer = Get();
             await writer.WriteAsync(serializer, payload).ConfigureAwait(false);
-            await writer.Stream.CopyToPooledAsync(to).ConfigureAwait(false);
+            await writer.Stream.CopyToPooledAsync(output).ConfigureAwait(false);
             writer.Dispose();
         }
 
@@ -96,6 +106,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
             Stream.SetLength(0);
         }
         
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             ClearStream();

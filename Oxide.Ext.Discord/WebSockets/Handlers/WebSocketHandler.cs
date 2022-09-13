@@ -236,23 +236,31 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             return Disconnect((WebSocketCloseStatus)code, reason);
         }
         
-        public Task Disconnect(WebSocketCloseStatus code, string reason)
-        {
-            return DisconnectInternal(WebsocketId, code, reason, false);
-        }
-        
         /// <summary>
         /// Disconnects from the websocket with the given code and reason
         /// </summary>
-        /// <param name="status">Status to close with</param>
+        /// <param name="status"><see cref="WebSocketCloseStatus"/>to close with</param>
         /// <param name="reason">Reason for the close</param>
         /// <returns></returns>
-        private async Task DisconnectInternal(Snowflake id, WebSocketCloseStatus status, string reason, bool closeRecieved)
+        public Task Disconnect(WebSocketCloseStatus status, string reason)
+        {
+            return DisconnectInternal(WebsocketId, status, reason, false);
+        }
+
+        /// <summary>
+        /// Disconnects from the websocket with the given code and reason
+        /// </summary>
+        /// <param name="id">ID of the websocket</param>
+        /// <param name="status">Status to close with</param>
+        /// <param name="reason">Reason for the close</param>
+        /// <param name="closeReceived">If we received a close from the websocket</param>
+        /// <returns></returns>
+        private async Task DisconnectInternal(Snowflake id, WebSocketCloseStatus status, string reason, bool closeReceived)
         {
             try
             {
                 _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Disconnect)} Status: {{0}} Reason: {{1}} Close Received: {{2}} Socket Is Disposed: {{3}} Is Connected {{4}} Cancel Requested {{5}}",
-                    status, reason, closeRecieved, _socket != null, IsConnected(), _source.IsCancellationRequested);
+                    status, reason, closeReceived, _socket != null, IsConnected(), _source.IsCancellationRequested);
 
                 if (id.IsValid() && id != WebsocketId)
                 {
@@ -264,7 +272,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     SocketState = SocketState.Disconnecting;
                     WebsocketId = default(Snowflake);
 
-                    if (closeRecieved)
+                    if (closeReceived)
                     {
                         await _socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, string.Empty, _token).ConfigureAwait(false);
                     }

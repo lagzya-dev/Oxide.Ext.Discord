@@ -26,6 +26,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
             _id = id;
             _template = template;
             _minVersion = minVersion;
+            _callback = callback;
         }
 
         protected override  Task HandleCallback()
@@ -39,6 +40,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
             _id = default(TemplateId);
             _template = null;
             _minVersion = default(TemplateVersion);
+            _callback = null;
         }
 
         protected override void DisposeInternal()

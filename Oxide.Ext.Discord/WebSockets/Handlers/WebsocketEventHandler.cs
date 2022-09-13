@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// Called when a socket is closed
         /// </summary>
         /// <param name="websocketId">ID of the web socket</param>
-        /// <param name="code">Close code for the web socket</param>
+        /// <param name="status"><see cref="WebSocketCloseStatus"/> for the web socket</param>
         /// <param name="message">Close message from the web socket</param>
         public Task SocketClosed(Snowflake websocketId, WebSocketCloseStatus status, string message)
         {

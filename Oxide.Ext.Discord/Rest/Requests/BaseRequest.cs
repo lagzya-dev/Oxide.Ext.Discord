@@ -64,6 +64,10 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// How long to wait before retrying request since there was a web exception
         /// </summary>
         private DateTimeOffset _errorResetAt;
+        
+        /// <summary>
+        /// Logger for the request
+        /// </summary>
         protected ILogger Logger;
 
         /// <summary>

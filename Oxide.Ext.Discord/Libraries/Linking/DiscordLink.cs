@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// DiscordLink Constructor
         /// </summary>
         /// <param name="logger">Logger for Discord Link</param>
-        public DiscordLink(ILogger logger)
+        internal DiscordLink(ILogger logger)
         {
             _logger = logger;
         }

@@ -25,6 +25,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         [JsonProperty("Footer Icon URL")]
         public string IconUrl { get; set; }
         
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="iconUrl"></param>
+        /// <param name="enabled"></param>
         public EmbedFooterTemplate(string text = "", string iconUrl = "", bool enabled = false)
         {
             Text = text;

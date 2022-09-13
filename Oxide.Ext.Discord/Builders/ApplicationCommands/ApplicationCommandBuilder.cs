@@ -155,6 +155,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             return Command;
         }
 
+        /// <summary>
+        /// Returns a built <see cref="DiscordCommandLocalization"/> using the provided name / descriptions as the default
+        /// </summary>
+        /// <returns></returns>
         public DiscordCommandLocalization BuildCommandLocalization()
         {
             return new DiscordCommandLocalization(Command);

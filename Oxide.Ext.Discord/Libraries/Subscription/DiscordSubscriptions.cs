@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// DiscordSubscriptions Constructor
         /// </summary>
         /// <param name="logger">Logger</param>
-        public DiscordSubscriptions(ILogger logger)
+        internal DiscordSubscriptions(ILogger logger)
         {
             _logger = logger;
         }

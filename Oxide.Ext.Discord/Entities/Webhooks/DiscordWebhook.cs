@@ -343,10 +343,21 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             ExecuteWebhook(client, builder.Build(), executeParams, callback, error);
         }
-        
-        public void ExecuteWebhookGlobalTemplate(DiscordClient client, Plugin plugin, string templateKey, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+
+        /// <summary>
+        /// Send a message to a webhook using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="executeParams">Webhook execution parameters</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ExecuteWebhookGlobalTemplate(DiscordClient client, Plugin plugin, string templateName, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateName).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -354,10 +365,22 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 });
             });
         }
-        
-        public void ExecuteWebhookTemplate(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+
+        /// <summary>
+        /// Send a message to a webhook using a localized message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="executeParams">Webhook execution parameters</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void ExecuteWebhookTemplate(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateName, language).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -395,10 +418,22 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         {
             client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}", RequestMethod.PATCH, message, callback, error);
         }
-        
-        public void EditWebhookMessageGlobalTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateKey, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+
+        /// <summary>
+        /// Edit a message from a webhook using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="messageId">Message ID of the message to edit</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="messageParams">Message Params</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void EditWebhookMessageGlobalTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateName, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateKey).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplateInternal(plugin, templateName).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -406,10 +441,23 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 });
             });
         }
-        
-        public void EditWebhookMessageTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+
+        /// <summary>
+        /// Edit a message from a webhook using a localized message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="messageId">Message ID of the message to edit</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="messageParams">Message Params</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void EditWebhookMessageTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateName, language).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {

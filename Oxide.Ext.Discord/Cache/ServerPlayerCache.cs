@@ -7,6 +7,9 @@ using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Cache
 {
+    /// <summary>
+    /// Cache for server <see cref="IPlayer"/>
+    /// </summary>
     public class ServerPlayerCache
     {
         private static readonly ConcurrentDictionary<string, IPlayer> InternalCache = new ConcurrentDictionary<string, IPlayer>();
@@ -18,6 +21,11 @@ namespace Oxide.Ext.Discord.Cache
 
         private static readonly IPlayerManager Players = Interface.Oxide.GetLibrary<Covalence>().Players;
 
+        /// <summary>
+        /// Returns the <see cref="IPlayer"/> for the given ID
+        /// </summary>
+        /// <param name="id">ID of the player</param>
+        /// <returns><see cref="IPlayer"/></returns>
         public static IPlayer GetPlayer(string id)
         {
             if (InternalCache.ContainsKey(id))

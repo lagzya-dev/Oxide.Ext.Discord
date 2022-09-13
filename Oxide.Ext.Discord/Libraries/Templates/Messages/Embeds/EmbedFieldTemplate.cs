@@ -26,6 +26,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         [JsonProperty("Keep Field On Same Row")]
         public bool Inline { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <param name="inline"></param>
         public EmbedFieldTemplate(string name = "", string value = "", bool inline = true)
         {
             Name = name;

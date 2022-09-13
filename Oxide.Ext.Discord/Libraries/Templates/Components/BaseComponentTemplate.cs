@@ -4,6 +4,9 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Components
 {
+    /// <summary>
+    /// Base Template for Message Components
+    /// </summary>
     public abstract class BaseComponentTemplate
     {
         /// <summary>

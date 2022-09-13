@@ -5,6 +5,9 @@ using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Components
 {
+    /// <summary>
+    /// Input Text Message Component Template
+    /// </summary>
     public class InputTextTemplate : BaseComponentTemplate
     {
         /// <summary>
@@ -56,12 +59,26 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         [JsonProperty("Input Text Required")]
         public bool Required { get; set; } = false;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         [JsonConstructor]
         public InputTextTemplate()
         {
             Type = MessageComponentType.InputText;
         }
         
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="customId"></param>
+        /// <param name="value"></param>
+        /// <param name="style"></param>
+        /// <param name="required"></param>
+        /// <param name="placeholder"></param>
+        /// <param name="minLength"></param>
+        /// <param name="maxLength"></param>
         public InputTextTemplate(string label, string customId, string value = "", InputTextStyles style = InputTextStyles.Short, bool required = false, string placeholder = "", int minLength = 0, int maxLength = 4000) : this()
         {
             Label = label;
@@ -74,6 +91,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
             MaxLength = maxLength;
         }
 
+        /// <summary>
+        /// Converts the template to a <see cref="InputTextComponent"/>
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public InputTextComponent ToInputText(PlaceholderData data)
         {
             InputTextComponent input = new InputTextComponent

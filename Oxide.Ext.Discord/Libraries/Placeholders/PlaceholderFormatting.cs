@@ -116,10 +116,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             DiscordPool.FreeStringBuilder(ref sb);
         }
         
+        /// <summary>
+        /// Applies the placeholder to the text
+        /// If <see cref="PlaceholderData"/> is null text is returned and no placeholders are processed
+        /// </summary>
+        /// <param name="text">Text to apply placeholders to</param>
+        /// <param name="data"><see cref="PlaceholderData"/> for the placeholder</param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ApplyPlaceholder(string text, PlaceholderData value)
+        public static string ApplyPlaceholder(string text, PlaceholderData data)
         {
-            return value == null ? text : DiscordExtension.DiscordPlaceholders.ProcessPlaceholders(text, value);
+            return data == null ? text : DiscordExtension.DiscordPlaceholders.ProcessPlaceholders(text, data);
         }
     }
 }

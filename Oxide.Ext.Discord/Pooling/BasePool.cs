@@ -87,6 +87,9 @@ namespace Oxide.Ext.Discord.Pooling
             item = null;
         }
 
+        /// <summary>
+        /// Clears the pool of all pooled objects and resets state to when the pool was first created
+        /// </summary>
         public void Clear()
         {
             lock (_lock)

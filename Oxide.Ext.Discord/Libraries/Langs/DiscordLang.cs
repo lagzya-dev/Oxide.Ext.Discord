@@ -34,7 +34,11 @@ namespace Oxide.Ext.Discord.Libraries.Langs
         private readonly Lang _lang = Interface.Oxide.GetLibrary<Lang>();
         private readonly ILogger _logger;
 
-        public DiscordLang(ILogger logger)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="logger"></param>
+        internal DiscordLang(ILogger logger)
         {
             _logger = logger;
             AddLocale("en","en-US");
@@ -86,6 +90,12 @@ namespace Oxide.Ext.Discord.Libraries.Langs
             return _discordToOxide[discordLocale];
         }
         
+        /// <summary>
+        /// Tries to get the oxide language from a discord locale
+        /// </summary>
+        /// <param name="discordLocale">Discord locale to get oxide language from</param>
+        /// <param name="oxideLanguage">Oxide Language if found</param>
+        /// <returns>True if locale exists; false otherwise</returns>
         public bool TryGetOxideLanguage(string discordLocale, out string oxideLanguage)
         {
             return _discordToOxide.TryGetValue(discordLocale, out oxideLanguage);
@@ -101,6 +111,12 @@ namespace Oxide.Ext.Discord.Libraries.Langs
             return _oxideToDiscord[oxideLanguage];
         }
         
+        /// <summary>
+        /// Tries to get the discord locale from a oxide language
+        /// </summary>
+        /// <param name="oxideLanguage">Oxide Language to get discord locale from</param>
+        /// <param name="discordLocale">Discord locale if found</param>
+        /// <returns>True if locale exists; false otherwise</returns>
         public bool TryGetDiscordLocale(string oxideLanguage, out string discordLocale)
         {
             return _oxideToDiscord.TryGetValue(oxideLanguage, out discordLocale);

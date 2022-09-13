@@ -11,6 +11,10 @@ namespace Oxide.Ext.Discord.Builders
     {
         private StringBuilder _builder;
 
+        /// <summary>
+        /// Creates a pooled <see cref="QueryStringBuilder"/>
+        /// </summary>
+        /// <returns><see cref="QueryStringBuilder"/></returns>
         public static QueryStringBuilder Create()
         {
             return DiscordPool.Get<QueryStringBuilder>();

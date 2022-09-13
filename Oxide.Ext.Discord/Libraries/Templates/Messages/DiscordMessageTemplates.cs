@@ -16,11 +16,14 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
+    /// <summary>
+    /// Library for Discord Message templates
+    /// </summary>
     public class DiscordMessageTemplates : BaseTemplateLibrary
     {
         private readonly Hash<TemplateId, DiscordMessageTemplate> _templateCache = new Hash<TemplateId, DiscordMessageTemplate>();
 
-        public DiscordMessageTemplates(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), logger) { }
+        internal DiscordMessageTemplates(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), logger) { }
         
         /// <summary>
         /// Registers a global message template
@@ -37,7 +40,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            IDiscordAsyncCallback callback = DiscordAsyncCallback.Create();
+            IDiscordAsyncCallback callback = PluginAsyncCallback.Create();
             
             TemplateId id = new TemplateId(plugin, name, null);
             RegisterTemplateCallback<DiscordMessageTemplate>.Start(this, id, template, minVersion, callback);
@@ -63,7 +66,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
             
-            IDiscordAsyncCallback callback = DiscordAsyncCallback.Create();
+            IDiscordAsyncCallback callback = PluginAsyncCallback.Create();
 
             TemplateId id = new TemplateId(plugin, name, language);
             RegisterTemplateCallback<DiscordMessageTemplate>.Start(this, id, template, minVersion, callback);
@@ -107,7 +110,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <exception cref="ArgumentNullException"></exception>
         public IDiscordAsyncCallback<DiscordMessageTemplate> GetGlobalMessageTemplate(Plugin plugin, string name)
         {
-            return GetGlobalMessageTemplateInternal(plugin, name, DiscordAsyncCallback<DiscordMessageTemplate>.Create());
+            return GetGlobalMessageTemplateInternal(plugin, name, PluginAsyncCallback<DiscordMessageTemplate>.Create());
         }
 
         internal IDiscordAsyncCallback<DiscordMessageTemplate> GetGlobalMessageTemplateInternal(Plugin plugin, string name, IDiscordAsyncCallback<DiscordMessageTemplate> callback = null)
@@ -157,7 +160,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         public IDiscordAsyncCallback<DiscordMessageTemplate> GetLocalizedMessageTemplate(Plugin plugin, string name, string language = DiscordLang.DefaultOxideLanguage)
         {
-            return GetLocalizedMessageTemplateInternal(plugin, name, language, DiscordAsyncCallback<DiscordMessageTemplate>.Create());
+            return GetLocalizedMessageTemplateInternal(plugin, name, language, PluginAsyncCallback<DiscordMessageTemplate>.Create());
         }
         
         internal IDiscordAsyncCallback<DiscordMessageTemplate> GetLocalizedMessageTemplateInternal(Plugin plugin, string name, string language, IDiscordAsyncCallback<DiscordMessageTemplate> callback = null)
@@ -210,7 +213,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         public IDiscordAsyncCallback<DiscordMessageTemplate> GetMessageTemplate(Plugin plugin, string name, DiscordInteraction interaction)
         {
-            return GetMessageTemplateInternal(plugin, name, interaction, DiscordAsyncCallback<DiscordMessageTemplate>.Create());
+            return GetMessageTemplateInternal(plugin, name, interaction, PluginAsyncCallback<DiscordMessageTemplate>.Create());
         }
         
         internal IDiscordAsyncCallback<DiscordMessageTemplate> GetMessageTemplateInternal(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordMessageTemplate> callback = null)

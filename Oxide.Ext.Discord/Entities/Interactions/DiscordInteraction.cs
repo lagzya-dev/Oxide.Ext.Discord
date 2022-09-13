@@ -309,12 +309,24 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             CreateInteractionResponse(client, data, callback, error);
         }
 
-        public void CreateTemplateInteractionResponse(DiscordClient client, Plugin plugin, InteractionResponseType type, string templateKey, InteractionCallbackData message = null, PlaceholderData placeholders = null, Action callback = null, Action<RequestError> error = null)
+        /// <summary>
+        /// Creates a interaction message response from a message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="type">Response type for the interaction</param>
+        /// <param name="templateName">Name of the template</param>
+        /// <param name="message">Message to send (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null</exception>
+        public void CreateTemplateInteractionResponse(DiscordClient client, Plugin plugin, InteractionResponseType type, string templateName, InteractionCallbackData message = null, PlaceholderData placeholders = null, Action callback = null, Action<RequestError> error = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateKey)) throw new ArgumentNullException(nameof(templateKey));
+            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateName, this).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -323,12 +335,23 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             });
         }
         
-        public void CreateTemplateModalResponse(DiscordClient client, Plugin plugin, string templateKey, InteractionModalMessage message = null, PlaceholderData placeholders = null, Action callback = null, Action<RequestError> error = null)
+        /// <summary>
+        /// Creates a interaction modal response from a modal template 
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName"></param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void CreateTemplateModalResponse(DiscordClient client, Plugin plugin, string templateName, InteractionModalMessage message = null, PlaceholderData placeholders = null, Action callback = null, Action<RequestError> error = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateKey)) throw new ArgumentNullException(nameof(templateKey));
+            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordModalTemplates.GetModalTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
+            DiscordExtension.DiscordModalTemplates.GetModalTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
             {
                 template.ToModalInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -436,12 +459,23 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.PATCH, message, callback, error);
         }
         
-        public void EditTemplateOriginalInteractionResponse(DiscordClient client, Plugin plugin, string templateKey, DiscordMessage message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        /// <summary>
+        /// Edit a interaction response with a message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="callback">Callback when the message is created</param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void EditTemplateOriginalInteractionResponse(DiscordClient client, Plugin plugin, string templateName, DiscordMessage message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateKey)) throw new ArgumentNullException(nameof(templateKey));
+            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateKey, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateName, this).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {

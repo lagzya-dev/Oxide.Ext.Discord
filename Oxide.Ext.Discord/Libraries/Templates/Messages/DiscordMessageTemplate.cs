@@ -43,6 +43,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         [JsonProperty("Message Components")]
         public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="content"></param>
         public DiscordMessageTemplate(string content = "") : base(new TemplateVersion(1, 0, 0))
         {
             Content = content;
@@ -91,9 +95,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return message;
         }
 
+        /// <summary>
+        /// Converts the template type {T} async
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="message"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public IDiscordAsyncCallback<T> ToMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
         {
-            return ToMessageInternalAsync(data, message, DiscordAsyncCallback<T>.Create());
+            return ToMessageInternalAsync(data, message, PluginAsyncCallback<T>.Create());
         }
         
         internal IDiscordAsyncCallback<T> ToMessageInternalAsync<T>(PlaceholderData data, T message = null, IDiscordAsyncCallback<T> callback = null) where T : class, IDiscordTemplateMessage, new()

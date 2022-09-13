@@ -17,37 +17,67 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 {
+    /// <summary>
+    /// Library for localizing <see cref="DiscordApplicationCommand"/>s
+    /// </summary>
     public class DiscordCommandLocalizations : BaseTemplateLibrary
     {
-        public DiscordCommandLocalizations(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "commands"), logger) { }
         
+        internal DiscordCommandLocalizations(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "commands"), logger) { }
+        
+        /// <summary>
+        /// Registers Application Command Localization for a given language
+        /// </summary>
+        /// <param name="plugin">Plugin the for the command localization</param>
+        /// <param name="fileNameSuffix">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
+        /// <param name="localization">Localization to register</param>
+        /// <param name="minVersion">Min supported registered version</param>
+        /// <param name="language">Language to register</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public IDiscordAsyncCallback RegisterCommandLocalization(Plugin plugin, string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (localization == null) throw new ArgumentNullException(nameof(localization));
 
-            IDiscordAsyncCallback callback = DiscordAsyncCallback.Create();
+            IDiscordAsyncCallback callback = PluginAsyncCallback.Create();
             
             TemplateId id = new TemplateId(plugin, fileNameSuffix, language);
             RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, minVersion, callback);
             return callback;
         }
         
+        /// <summary>
+        /// Registers multiple command localizations
+        /// </summary>
+        /// <param name="plugin">Plugin the for the command localization</param>
+        /// <param name="fileNameSuffix">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
+        /// <param name="commands">List of <see cref="DiscordCommandLocalization"/> to bulk register</param>
+        /// <param name="minVersion">Min supported registered version</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public IDiscordAsyncCallback BulkRegisterCommandLocalizations(Plugin plugin, string fileNameSuffix, List<BulkTemplateRegistration<DiscordCommandLocalization>> commands, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (commands == null) throw new ArgumentNullException(nameof(commands));
 
-            IDiscordAsyncCallback callback = DiscordAsyncCallback.Create();
+            IDiscordAsyncCallback callback = PluginAsyncCallback.Create();
             
             TemplateId id = new TemplateId(plugin, fileNameSuffix, null);
             BulkRegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, commands, minVersion, callback);
             return callback;
         }
 
-        public IDiscordAsyncCallback ApplyCommandLocalizations(Plugin plugin, CommandCreate create, string fileNameSuffix)
+        /// <summary>
+        /// Applies Command Localizations Async
+        /// </summary>
+        /// <param name="plugin">Plugin the localizations are for</param>
+        /// <param name="create">The command to apply the localizations to</param>
+        /// <param name="fileNameSuffix">fileName suffix used when registering</param>
+        /// <returns></returns>
+        public IDiscordAsyncCallback ApplyCommandLocalizationsAsync(Plugin plugin, CommandCreate create, string fileNameSuffix)
         {
-            return HandleApplyCommandLocalizations(plugin, fileNameSuffix, create, DiscordAsyncCallback.Create());
+            return HandleApplyCommandLocalizations(plugin, fileNameSuffix, create, PluginAsyncCallback.Create());
         }
         
         private IDiscordAsyncCallback HandleApplyCommandLocalizations(Plugin plugin, string fileNameSuffix, CommandCreate create, IDiscordAsyncCallback callback = null)

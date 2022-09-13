@@ -77,6 +77,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         [JsonProperty("Embed Footer")]
         public EmbedFooterTemplate Footer { get; set; } = new EmbedFooterTemplate();
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="titleUrl"></param>
         public DiscordEmbedTemplate(string title = "", string description = "", string titleUrl= "")
         {
             Title = title;

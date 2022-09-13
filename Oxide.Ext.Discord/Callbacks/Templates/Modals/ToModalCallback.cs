@@ -7,6 +7,9 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Modals
 {
+    /// <summary>
+    /// Parses modal template to a modal response
+    /// </summary>
     public class ToModalCallback : BaseAsyncCallback
     {
         private DiscordModalTemplate _template;
@@ -14,6 +17,13 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Modals
         private InteractionModalMessage _message;
         private IDiscordAsyncCallback<InteractionModalMessage> _callback;
 
+        /// <summary>
+        /// Starts the callback
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="data"></param>
+        /// <param name="message"></param>
+        /// <param name="callback"></param>
         public static void Start(DiscordModalTemplate template, PlaceholderData data, InteractionModalMessage message, IDiscordAsyncCallback<InteractionModalMessage> callback)
         {
             ToModalCallback handler = DiscordPool.Get<ToModalCallback>();
@@ -29,11 +39,13 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Modals
             _callback = callback;
         }
         
+        ///<inheritdoc/>
         protected override Task HandleCallback()
         {
             return _template.HandleToModalAsync(_data, _message, _callback);
         }
 
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             _template = null;
@@ -42,6 +54,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Modals
             _callback = null;
         }
 
+        ///<inheritdoc/>
         protected override void DisposeInternal()
         {
             DiscordPool.Free(this);

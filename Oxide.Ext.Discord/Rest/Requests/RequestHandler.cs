@@ -34,6 +34,9 @@ namespace Oxide.Ext.Discord.Rest.Requests
         private ILogger _logger;
         private readonly Func<Task> _runner;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public RequestHandler()
         {
             _runner = StartRequest;
@@ -51,6 +54,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Creates a new <see cref="RequestHandler"/>
         /// </summary>
+        /// <param name="rest">Rest handler for the request</param>
         /// <param name="request">Request to be handled by this handler</param>
         public static void StartRequest(RestHandler rest, BaseRequest request)
         {
@@ -58,11 +62,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
             handler.Init(rest, request, request.Client.Logger);
         }
         
-        /// <summary>
-        /// Initializes a new request
-        /// </summary>
-        /// <param name="request">Request to be handled by this handler</param>
-        /// <param name="logger">Logger for the request</param>
         private void Init(RestHandler rest, BaseRequest request, ILogger logger)
         {
             _rest = rest;

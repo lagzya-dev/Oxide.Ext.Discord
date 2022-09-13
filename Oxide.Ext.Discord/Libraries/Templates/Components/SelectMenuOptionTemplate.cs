@@ -42,12 +42,23 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         [JsonProperty("default")]
         public bool Default { get; set; } = false;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         [JsonConstructor]
         public SelectMenuOptionTemplate()
         {
             Emoji = new EmojiTemplate();
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="value"></param>
+        /// <param name="description"></param>
+        /// <param name="emoji"></param>
+        /// <param name="default"></param>
         public SelectMenuOptionTemplate(string label, string value, string description = "", string emoji = "", bool @default = false)
         {
             Label = label;

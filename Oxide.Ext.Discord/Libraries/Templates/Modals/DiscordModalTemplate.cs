@@ -12,6 +12,9 @@ using Oxide.Ext.Discord.Libraries.Templates.Components;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Modals
 {
+    /// <summary>
+    /// Template used for Modal Message Component
+    /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordModalTemplate : BaseTemplate
     {
@@ -33,11 +36,20 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
         [JsonProperty("Modal Components")]
         private List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
         
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public DiscordModalTemplate() : base(new TemplateVersion(1, 0, 0))
         {
             TemplateType = TemplateType.Modal;
         }
 
+        /// <summary>
+        /// Converts the template to a <see cref="InteractionModalMessage"/>
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="modal"></param>
+        /// <returns></returns>
         public InteractionModalMessage ToModal(PlaceholderData data = null, InteractionModalMessage modal = null)
         {
             if (modal == null)
@@ -65,9 +77,15 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
             return modal;
         }
         
+        /// <summary>
+        /// Converts the template to a <see cref="InteractionModalMessage"/> async
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public IDiscordAsyncCallback<InteractionModalMessage> ToModalAsync(PlaceholderData data, InteractionModalMessage message = null)
         {
-            return ToModalInternalAsync(data, message, DiscordAsyncCallback<InteractionModalMessage>.Create());
+            return ToModalInternalAsync(data, message, PluginAsyncCallback<InteractionModalMessage>.Create());
         }
         
         internal IDiscordAsyncCallback<InteractionModalMessage> ToModalInternalAsync(PlaceholderData data, InteractionModalMessage message = null, IDiscordAsyncCallback<InteractionModalMessage> callback = null)

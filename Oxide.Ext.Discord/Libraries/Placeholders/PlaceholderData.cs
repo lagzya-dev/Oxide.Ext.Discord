@@ -151,7 +151,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// Adds type {T} to the placeholder. Type name is used as the data key
         /// </summary>
         /// <param name="obj">Object to add</param>
-        /// <typeparam name="T">Type of the data</typeparam>
         /// <returns>This</returns>
         public PlaceholderData Add(object obj)
         {
@@ -168,7 +167,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="name">Name of the data key</param>
         /// <param name="obj">Object to add</param>
-        /// <typeparam name="T">Type of the data</typeparam>
         /// <returns>This</returns>
         public PlaceholderData Add(string name, object obj)
         {
@@ -208,6 +206,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return default(T);
         }
 
+        /// <summary>
+        /// Returns comma seperated string of all the registered key
+        /// Useful for debugging placeholders
+        /// </summary>
+        /// <returns></returns>
         public string GetKeys()
         {
             return string.Join(", ", _data.Keys);
@@ -221,6 +224,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             _shouldPool = false;
         }
 
+        ///<inheritdoc/>
         public void Dispose()
         {
             if (_shouldPool && !_disposed)

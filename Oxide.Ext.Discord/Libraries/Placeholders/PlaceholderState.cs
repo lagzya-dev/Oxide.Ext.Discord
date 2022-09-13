@@ -33,6 +33,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         public ushort Length;
 
+        /// <summary>
+        /// Creates a pooled <see cref="PlaceholderState"/>
+        /// </summary>
+        /// <param name="data">Data to be used in the state</param>
+        /// <returns></returns>
         public static PlaceholderState Create(PlaceholderData data)
         {
             PlaceholderState state = DiscordPool.Get<PlaceholderState>();

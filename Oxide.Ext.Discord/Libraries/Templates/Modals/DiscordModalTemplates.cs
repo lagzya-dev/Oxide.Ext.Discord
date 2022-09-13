@@ -16,31 +16,55 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Modals
 {
+    /// <summary>
+    /// Modal Templates Library
+    /// </summary>
     public class DiscordModalTemplates : BaseTemplateLibrary
     {
         private readonly Hash<TemplateId, DiscordModalTemplate> _templateCache = new Hash<TemplateId, DiscordModalTemplate>();
 
-        public DiscordModalTemplates(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), logger) { }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="logger"></param>
+        internal DiscordModalTemplates(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), logger) { }
         
+        /// <summary>
+        /// Register a Modal Template
+        /// </summary>
+        /// <param name="plugin">Plugin the template is for</param>
+        /// <param name="name">Name of the template</param>
+        /// <param name="template">Template to register</param>
+        /// <param name="minVersion">Minimum supported template version</param>
+        /// <param name="language">Language the template is for</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public IDiscordAsyncCallback RegisterModalTemplate(Plugin plugin, string name, DiscordModalTemplate template, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            IDiscordAsyncCallback callback = DiscordAsyncCallback.Create();
+            IDiscordAsyncCallback callback = PluginAsyncCallback.Create();
 
             TemplateId id = new TemplateId(plugin, name, language);
             RegisterTemplateCallback<DiscordModalTemplate>.Start(this, id, template, minVersion, callback);
             return callback;
         }
 
-        public IDiscordAsyncCallback<DiscordModalTemplate> GetModalTemplate(Plugin plugin, string name, DiscordInteraction interaction)
+        /// <summary>
+        /// Returns a Modal Template Async
+        /// </summary>
+        /// <param name="plugin">Plugin the modal is for</param>
+        /// <param name="name">Name of the template</param>
+        /// <param name="interaction">Interaction the template is for</param>
+        /// <returns></returns>
+        public IDiscordAsyncCallback<DiscordModalTemplate> GetModalTemplateAsync(Plugin plugin, string name, DiscordInteraction interaction)
         {
-            return GetModalTemplateInternal(plugin, name, interaction, DiscordAsyncCallback<DiscordModalTemplate>.Create());
+            return GetModalTemplateInternalAsync(plugin, name, interaction, PluginAsyncCallback<DiscordModalTemplate>.Create());
         }
         
-        internal IDiscordAsyncCallback<DiscordModalTemplate> GetModalTemplateInternal(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordModalTemplate> callback = null)
+        internal IDiscordAsyncCallback<DiscordModalTemplate> GetModalTemplateInternalAsync(Plugin plugin, string name, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordModalTemplate> callback = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
@@ -75,7 +99,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
 
             if (template == null)
             {
-                Logger.Warning($"Plugin {{0}} is using the {nameof(DiscordModalTemplates)}.{nameof(GetModalTemplate)} API but message template name '{{1}}' is not registered", id.GetPluginName(), id.TemplateName);
+                Logger.Warning($"Plugin {{0}} is using the {nameof(DiscordModalTemplates)}.{nameof(GetModalTemplateAsync)} API but message template name '{{1}}' is not registered", id.GetPluginName(), id.TemplateName);
                 callback.InvokeSuccess(new DiscordModalTemplate());
                 return;
             }

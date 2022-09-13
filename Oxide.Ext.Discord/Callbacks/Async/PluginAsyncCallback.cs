@@ -4,20 +4,29 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Async
 {
-    public class DiscordAsyncCallback : BaseDiscordAsyncCallback
+    /// <summary>
+    /// Represents a async callback for a plugin
+    /// </summary>
+    public class PluginAsyncCallback : BaseDiscordAsyncCallback
     {
         private readonly Action _successCallback;
         
-        public DiscordAsyncCallback()
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public PluginAsyncCallback()
         {
             _successCallback = InvokeSuccessInternal;
         }
         
-        internal static DiscordAsyncCallback Create()
+        internal static PluginAsyncCallback Create()
         {
-            return DiscordPool.Get<DiscordAsyncCallback>();
+            return DiscordPool.Get<PluginAsyncCallback>();
         }
 
+        /// <summary>
+        /// Invoke the callback
+        /// </summary>
         public override void InvokeSuccess()
         {
             Interface.Oxide.NextTick(_successCallback);

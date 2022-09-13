@@ -92,6 +92,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             DiscordPool.Free(this);
         }
 
+        ///<inheritdoc/>
         protected override void LeavePool()
         {
             base.LeavePool();

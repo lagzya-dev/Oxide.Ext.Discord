@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// </summary>
         /// <param name="prefixes">Command prefixes used by the extension</param>
         /// <param name="logger">Logger to use</param>
-        public DiscordCommand(char[] prefixes, ILogger logger)
+        internal DiscordCommand(char[] prefixes, ILogger logger)
         {
             CommandPrefixes = prefixes;
             _logger = logger;

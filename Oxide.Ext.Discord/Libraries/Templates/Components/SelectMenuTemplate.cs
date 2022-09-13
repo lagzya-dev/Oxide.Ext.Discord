@@ -51,6 +51,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         [JsonProperty("Select Menu Enabled")]
         public bool Enabled { get; set; } = true;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         [JsonConstructor]
         public SelectMenuTemplate()
         {
@@ -58,6 +61,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
             Options = new List<SelectMenuOptionTemplate>();
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="customId"></param>
+        /// <param name="options"></param>
+        /// <param name="placeholder"></param>
+        /// <param name="minValues"></param>
+        /// <param name="maxValues"></param>
         public SelectMenuTemplate(string customId, List<SelectMenuOptionTemplate> options, string placeholder = "", int minValues = 1, int maxValues = 1) : this()
         {
             CustomId = customId;
