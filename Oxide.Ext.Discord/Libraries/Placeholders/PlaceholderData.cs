@@ -8,6 +8,8 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Libraries.Placeholders.Default;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
@@ -19,15 +21,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     public class PlaceholderData : IDisposable
     {
         private readonly Hash<string, object> _data = new Hash<string, object>();
-        internal const string TimestampName = "Timestamp";
         internal bool ShouldPool = true;
 
         internal PlaceholderData() { }
 
-        internal void AddServer(IServer server)
-        {
-            Add(server);
-        }
+        internal void AddServer(IServer server) => Add(nameof(IServer), server);
+
         
         /// <summary>
         /// Add a <see cref="DiscordApplicationCommand"/>
@@ -119,21 +118,21 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="player">player to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddPlayer(IPlayer player) => Add(player);
+        public PlaceholderData AddPlayer(IPlayer player) => Add(nameof(IPlayer), player);
 
         /// <summary>
         /// Adds a <see cref="Plugin"/>
         /// </summary>
         /// <param name="plugin">Plugin to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddPlugin(Plugin plugin) => Add(plugin);
+        public PlaceholderData AddPlugin(Plugin plugin) => Add(nameof(Plugin), plugin);
         
         /// <summary>
         /// Adds a Unix Timestamp
         /// </summary>
         /// <param name="timestamp">Unix timestamp</param>
         /// <returns>This</returns>
-        public PlaceholderData AddTimestamp(ulong timestamp) => Add(TimestampName, timestamp);
+        public PlaceholderData AddTimestamp(ulong timestamp) => Add(TimestampPlaceholders.TimestampName, timestamp);
 
         /// <summary>
         /// Adds a <see cref="Snowflake"/>
@@ -157,8 +156,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData Add(object obj)
         {
-            Type type = obj.GetType();
-            Add(type.Name, obj);
+            if (obj != null)
+            {
+                Add(obj.GetType().Name, obj);
+            }
+            
             return this;
         }
 
@@ -171,7 +173,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData Add(string name, object obj)
         {
-            _data[name] = obj;
+            if (obj != null)
+            {
+                _data[name] = obj;
+            }
+           
             return this;
         }
 
@@ -201,6 +207,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
 
             return default(T);
+        }
+
+        public string GetKeys()
+        {
+            return string.Join(", ", _data.Keys);
         }
 
         /// <summary>

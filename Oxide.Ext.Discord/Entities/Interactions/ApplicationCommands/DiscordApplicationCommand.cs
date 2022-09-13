@@ -159,7 +159,15 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public void GetPermissions(DiscordClient client, Snowflake guildId, Action<GuildCommandPermissions> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            client.Bot.Rest.CreateRequest(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.CreateRequest(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET, null, callback, onError =>
+            {
+                if (onError.DiscordError?.Code == 10066)
+                {
+                    onError.SuppressErrorMessage();
+                    //If the command is synced we need to lookup by application ID instead
+                    client.Bot.Rest.CreateRequest(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{ApplicationId}/permissions", RequestMethod.GET, null, callback, error);
+                }
+            });
         }
 
         /// <summary>

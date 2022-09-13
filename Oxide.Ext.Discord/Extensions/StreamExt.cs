@@ -16,6 +16,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="to">Stream to copy to</param>
         public static async Task CopyToPooledAsync(this Stream from, Stream to)
         {
+            from.Position = 0;
             byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(8196);
 
             while (true)
@@ -39,6 +40,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="to">Stream to copy to</param>
         public static void CopyToPooled(this Stream from, Stream to)
         {
+            from.Position = 0;
             byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(8196);
             
             while (true)

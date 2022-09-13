@@ -32,14 +32,20 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Handlers
                 return command;
             }
 
-            foreach (KeyValuePair<InteractionType, Hash<AppCommandId,AppCommand>> pair in _commands)
+            if (_logger.IsLogging(DiscordLogLevel.Verbose))
             {
-                foreach (KeyValuePair<AppCommandId,AppCommand> appCommand in pair.Value)
+                foreach (KeyValuePair<InteractionType, Hash<AppCommandId,AppCommand>> pair in _commands)
                 {
-                    _logger.Verbose("Registered Commands. Type: {0} CommandId: {1} Plugin: {2} Callback {3}", pair.Key, appCommand.Key, appCommand.Value.Plugin.FullName(), appCommand.Value.Callback);
+                    foreach (KeyValuePair<AppCommandId,AppCommand> appCommand in pair.Value)
+                    {
+                        AppCommandId commandId = appCommand.Key;
+                        _logger.Verbose("Registered Commands. Type: {0} CommandId: {1} Plugin: {2} Callback {3} Equals: {4} Hash Code: {5} = {6}", 
+                            pair.Key, appCommand.Key, appCommand.Value.Plugin.FullName(), appCommand.Value.Callback, id == commandId, id.GetHashCode(), appCommand.Key.GetHashCode());
+                        _logger.Verbose("Command: {0} = {1} Group: {2} = {3} Sub Command: {4} = {5} Argument: {6} = {7}", id.Command, commandId.Command, id.Group, commandId.Group, id.SubCommand, commandId.SubCommand, id.Argument, commandId.Argument);
+                    }
                 }
             }
-            
+
             return null;
         }
         

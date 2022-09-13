@@ -34,12 +34,27 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// Emoji in the option
         /// </summary>
         [JsonProperty("Emoji")]
-        public EmojiTemplate Emoji { get; set; } = new EmojiTemplate();
+        public EmojiTemplate Emoji { get; set; }
 
         /// <summary>
         /// Will render this option as selected by default
         /// </summary>
         [JsonProperty("default")]
         public bool Default { get; set; } = false;
+
+        [JsonConstructor]
+        public SelectMenuOptionTemplate()
+        {
+            Emoji = new EmojiTemplate();
+        }
+
+        public SelectMenuOptionTemplate(string label, string value, string description = "", string emoji = "", bool @default = false)
+        {
+            Label = label;
+            Value = value;
+            Description = description;
+            Emoji = new EmojiTemplate(emoji);
+            Default = @default;
+        }
     }
 }

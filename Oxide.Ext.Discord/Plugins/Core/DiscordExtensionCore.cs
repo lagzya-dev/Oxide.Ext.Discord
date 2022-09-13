@@ -41,9 +41,10 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             Instance = this;
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
-            AddCovalenceCommand(new[] { "de.rws" }, nameof(ResetWebSocketCommand), "de.rws");
-            AddCovalenceCommand(new[] { "de.rra" }, nameof(ResetRestApiCommand), "de.rra");
-            AddCovalenceCommand(new[] { "de.cp" }, nameof(ResetRestApiCommand), "de.cp");
+            AddCovalenceCommand(new[] { "de.websocket.reset" }, nameof(ResetWebSocketCommand), "de.websocket.reset");
+            AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
+            AddCovalenceCommand(new[] { "de.rest.reset" }, nameof(ResetRestApiCommand), "de.rest.reset");
+            AddCovalenceCommand(new[] { "de.clearpool" }, nameof(ClearDiscordPool), "de.clearpool");
             AddCovalenceCommand(new[] { "de.consolelog" }, nameof(ConsoleLogCommand), "de.consolelog");
             AddCovalenceCommand(new[] { "de.filelog" }, nameof(FileLogCommand), "de.filelog");
             AddCovalenceCommand(new[] { "de.debug" }, nameof(DiscordDebugCommand), "de.debug");
@@ -54,6 +55,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             }
 
             CreateTemplates();
+            DiscordExtension.DiscordPlaceholders.RegisterPlaceholders();
         }
 
         [HookMethod(nameof(OnServerSave))]
@@ -90,6 +92,17 @@ namespace Oxide.Ext.Discord.Plugins.Core
             foreach (BotClient client in BotClient.ActiveBots.Values)
             {
                 client.ResetWebSocket();
+            }
+        }
+        
+        [HookMethod(nameof(ReconnectWebSocketCommand))]
+        private void ReconnectWebSocketCommand(IPlayer player, string cmd, string[] args)
+        {
+            Chat(player, LangKeys.ReconnectWebSocket);
+            
+            foreach (BotClient client in BotClient.ActiveBots.Values)
+            {
+                client.WebSocket.Disconnect(true, true, true);
             }
         }
         
@@ -164,8 +177,6 @@ namespace Oxide.Ext.Discord.Plugins.Core
             StringBuilder sb = new StringBuilder();
             foreach (BotClient bot in BotClient.ActiveBots.Values)
             {
-                DiscordWebSocket websocket = bot.WebSocket;
-                RestHandler rest = bot.Rest;
                 sb.Append('=', 50);
                 sb.AppendLine();
                 sb.Append("Client: ");
@@ -198,96 +209,8 @@ namespace Oxide.Ext.Discord.Plugins.Core
                     }
                 }
 
-                sb.Append("Websocket: ");
-                if (websocket != null)
-                {
-                    sb.AppendLine(websocket.Handler.SocketState.ToString());
-                    sb.Append("\tPending Commands: ");
-                    IReadOnlyCollection<WebSocketCommand> pendingCommands = websocket.Commands.GetPendingCommands();
-                    if (pendingCommands.Count == 0)
-                    {
-                        sb.AppendLine("None");
-                    }
-                    else
-                    {
-                        sb.AppendLine();
-                        foreach (WebSocketCommand command in pendingCommands)
-                        {
-                            sb.Append("\tCommand: ");
-                            sb.Append(command.Client.PluginName);
-                            sb.Append(' ');
-                            sb.AppendLine(command.Payload.OpCode.ToString());
-                        }
-                    }
-                }
-                else
-                {
-                    sb.AppendLine("Is NULL!");
-                }
-
-                sb.AppendLine("REST: ");
-                if (rest != null)
-                {
-                    sb.AppendLine("\tBuckets: ");
-                    Bucket[] buckets = rest.Buckets.Values.ToArray();
-                    if (buckets.Length == 0)
-                    {
-                        sb.AppendLine("\t\tNone");
-                    }
-                    else
-                    {
-                        for (int index = 0; index < buckets.Length; index++)
-                        {
-                            Bucket bucket = buckets[index];
-                            sb.Append("\t\tID: ");
-                            sb.Append(bucket.Id);
-                            sb.Append(" (Known Bucket: ");
-                            sb.AppendLine(bucket.IsKnowBucket ? "Yes)" : "No)");
-                            sb.Append("\t\tRemaining: ");
-                            sb.Append(bucket.Remaining.ToString());
-                            sb.Append(" Limit: ");
-                            sb.Append(bucket.Limit.ToString());
-                            sb.Append(" Reset In: ");
-                            double resetIn = bucket.ResetAt < DateTimeOffset.UtcNow ? 0 : (bucket.ResetAt - DateTimeOffset.UtcNow).TotalSeconds;
-                            sb.Append(resetIn.ToString());
-                            sb.AppendLine(" Seconds");
-                            sb.Append("\t\tRequest Queue Count: ");
-                            sb.AppendLine(bucket.Requests.Count.ToString());
-                            sb.Append("\t\tSemaphore: ");
-                            sb.Append(bucket.Semaphore.Available.ToString());
-                            sb.Append('/');
-                            sb.AppendLine(bucket.Semaphore.MaximumCount.ToString());
-                            sb.AppendLine("\t\tRoutes:");
-                            foreach (KeyValuePair<string, string> route in rest.RouteToHash)
-                            {
-                                if (route.Value == bucket.Id)
-                                {
-                                    sb.Append("\t\t\t");
-                                    sb.AppendLine(route.Key);
-                                }
-                            }
-                            sb.AppendLine("\t\tRequests:");
-                            foreach (RequestHandler handler in bucket.Requests.Values)
-                            {
-                                BaseRequest request = handler.Request;
-                                sb.Append("\t\t\tID: ");
-                                sb.AppendLine(request.Id.ToString());
-                                sb.Append("\t\t\tMethod: ");
-                                sb.AppendLine(request.Method.ToString());
-                                sb.Append("\t\t\tRoute: ");
-                                sb.AppendLine(request.Route);
-                                sb.Append("\t\t\tStatus: ");
-                                sb.AppendLine(request.Status.ToString());
-                                sb.AppendLine();
-                            }
-                            sb.AppendLine();
-                        }
-                    }
-                }
-                else
-                {
-                    sb.AppendLine("Is NULL!");
-                }
+                DebugWebsocket(bot, sb);
+                DebugRest(bot, sb);
             }
 
             sb.AppendLine("Libraries:");
@@ -300,6 +223,105 @@ namespace Oxide.Ext.Discord.Plugins.Core
             DiscordLogger.FileLogger.AddMessage(DiscordLogLevel.Info, message, null);
         }
         
+        private void DebugWebsocket(BotClient bot, StringBuilder sb)
+        {
+            DiscordWebSocket websocket = bot.WebSocket;
+            sb.Append("Websocket: ");
+            if (websocket != null)
+            {
+                sb.AppendLine(websocket.Handler.SocketState.ToString());
+                sb.Append("\tPending Commands: ");
+                IReadOnlyCollection<WebSocketCommand> pendingCommands = websocket.Commands.GetPendingCommands();
+                if (pendingCommands.Count == 0)
+                {
+                    sb.AppendLine("None");
+                }
+                else
+                {
+                    sb.AppendLine();
+                    foreach (WebSocketCommand command in pendingCommands)
+                    {
+                        sb.Append("\tCommand: ");
+                        sb.Append(command.Client.PluginName);
+                        sb.Append(' ');
+                        sb.AppendLine(command.Payload.OpCode.ToString());
+                    }
+                }
+            }
+            else
+            {
+                sb.AppendLine("Is NULL!");
+            }
+        }
+        
+        private void DebugRest(BotClient bot, StringBuilder sb)
+        {
+            RestHandler rest = bot.Rest;
+            sb.AppendLine("REST: ");
+            if (rest != null)
+            {
+                sb.AppendLine("\tBuckets: ");
+                Bucket[] buckets = rest.Buckets.Values.ToArray();
+                if (buckets.Length == 0)
+                {
+                    sb.AppendLine("\t\tNone");
+                }
+                else
+                {
+                    for (int index = 0; index < buckets.Length; index++)
+                    {
+                        Bucket bucket = buckets[index];
+                        sb.Append("\t\tID: ");
+                        sb.Append(bucket.Id);
+                        sb.Append(" (Known Bucket: ");
+                        sb.AppendLine(bucket.IsKnowBucket ? "Yes)" : "No)");
+                        sb.Append("\t\tRemaining: ");
+                        sb.Append(bucket.Remaining.ToString());
+                        sb.Append(" Limit: ");
+                        sb.Append(bucket.Limit.ToString());
+                        sb.Append(" Reset In: ");
+                        double resetIn = bucket.ResetAt < DateTimeOffset.UtcNow ? 0 : (bucket.ResetAt - DateTimeOffset.UtcNow).TotalSeconds;
+                        sb.Append(resetIn.ToString());
+                        sb.AppendLine(" Seconds");
+                        sb.Append("\t\tRequest Queue Count: ");
+                        sb.AppendLine(bucket.Requests.Count.ToString());
+                        sb.Append("\t\tSemaphore: ");
+                        sb.Append(bucket.Semaphore.Available.ToString());
+                        sb.Append('/');
+                        sb.AppendLine(bucket.Semaphore.MaximumCount.ToString());
+                        sb.AppendLine("\t\tRoutes:");
+                        foreach (KeyValuePair<string, string> route in rest.RouteToHash)
+                        {
+                            if (route.Value == bucket.Id)
+                            {
+                                sb.Append("\t\t\t");
+                                sb.AppendLine(route.Key);
+                            }
+                        }
+                        sb.AppendLine("\t\tRequests:");
+                        foreach (RequestHandler handler in bucket.Requests.Values)
+                        {
+                            BaseRequest request = handler.Request;
+                            sb.Append("\t\t\tID: ");
+                            sb.AppendLine(request.Id.ToString());
+                            sb.Append("\t\t\tMethod: ");
+                            sb.AppendLine(request.Method.ToString());
+                            sb.Append("\t\t\tRoute: ");
+                            sb.AppendLine(request.Route);
+                            sb.Append("\t\t\tStatus: ");
+                            sb.AppendLine(request.Status.ToString());
+                            sb.AppendLine();
+                        }
+                        sb.AppendLine();
+                    }
+                }
+            }
+            else
+            {
+                sb.AppendLine("Is NULL!");
+            }
+        }
+
         private void DebugApplicationCommands(StringBuilder sb)
         {
             sb.AppendLine("\tApplication Commands:");
@@ -368,6 +390,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 }
             }
         }
+        
         public void DebugSubscriptions(StringBuilder sb)
         {
             sb.AppendLine("\tDiscord Channel Subscriptions:");

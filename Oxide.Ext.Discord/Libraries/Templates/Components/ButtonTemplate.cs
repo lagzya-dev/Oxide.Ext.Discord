@@ -75,7 +75,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// <param name="emoji">Emoji for the button</param>
         /// <param name="enabled">Is button enabled?</param>
         /// <param name="inline">Should the button be on the same row or a new row?</param>
-        public ButtonTemplate(string label, ButtonStyle style, string command, string emoji, bool enabled = true, bool inline = true)
+        public ButtonTemplate(string label, ButtonStyle style, string command, string emoji, bool enabled = true, bool inline = true) : this()
         {
             Label = label;
             Style = style;

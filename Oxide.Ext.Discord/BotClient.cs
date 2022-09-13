@@ -79,22 +79,8 @@ namespace Oxide.Ext.Discord
         
         internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
-        
-        /// <summary>
-        /// The settings for this bot of all the combined clients
-        /// </summary>
         internal readonly DiscordSettings Settings;
-        
-        /// <summary>
-        /// Discord Extension JSON Serialization settings
-        /// </summary>
-        internal readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore
-        };
-
         internal readonly JsonSerializer JsonSerializer;
-
         internal DiscordWebSocket WebSocket;
 
         private readonly List<DiscordClient> _clients = new List<DiscordClient>();
@@ -123,7 +109,11 @@ namespace Oxide.Ext.Discord
             
             Initialized = true;
 
-            JsonSerializer = JsonSerializer.Create(JsonSettings);
+            JsonSerializer = JsonSerializer.Create(new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            
             JsonSerializer.Formatting = Formatting.None;
 
             Hooks = new DiscordHook(Logger);
@@ -186,15 +176,28 @@ namespace Oxide.Ext.Discord
 
         internal void ResetWebSocket()
         {
-            WebSocket?.Shutdown();
-            WebSocket = new DiscordWebSocket(this, Logger);
-            WebSocket.Connect();
+            try
+            {
+                WebSocket?.Shutdown();
+            }
+            finally
+            {
+                WebSocket = new DiscordWebSocket(this, Logger);
+                WebSocket.Connect();
+            }
+           
         }
         
         internal void ResetRestApi()
         {
-            Rest?.Shutdown();
-            Rest = new RestHandler(this, Logger);
+            try
+            {
+                Rest?.Shutdown();
+            }
+            finally
+            {
+                Rest = new RestHandler(this, Logger);
+            }
         }
 
         /// <summary>

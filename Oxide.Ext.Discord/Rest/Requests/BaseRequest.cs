@@ -64,7 +64,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// How long to wait before retrying request since there was a web exception
         /// </summary>
         private DateTimeOffset _errorResetAt;
-        private ILogger _logger;
+        protected ILogger Logger;
 
         /// <summary>
         /// Initializes the request
@@ -80,15 +80,15 @@ namespace Oxide.Ext.Discord.Rest.Requests
             OnError = onError;
             CompletedCallback = completedCallback;
             Source = new CancellationTokenSource();
-            _logger = client.Logger;
-            _logger.Debug($"{nameof(BaseRequest)}.{nameof(Init)} Request Created Plugin: {{0}} Request ID: {{1}} Method: {{2}} Route: {{3}}", client.PluginName, Id, Method, route);
+            Logger = client.Logger;
+            Logger.Debug($"{nameof(BaseRequest)}.{nameof(Init)} Request Created Plugin: {{0}} Request ID: {{1}} Method: {{2}} Route: {{3}}", client.PluginName, Id, Method, route);
         }
 
         internal async Task WaitUntilRequestCanStart(CancellationToken token)
         {
             if (_errorResetAt > DateTimeOffset.UtcNow)
             {
-                _logger.Debug($"{nameof(BaseRequest)}.{nameof(WaitUntilRequestCanStart)} Request ID: {{0}} Can't Start Request Due to Previous Error Reset Waiting For: {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                Logger.Debug($"{nameof(BaseRequest)}.{nameof(WaitUntilRequestCanStart)} Request ID: {{0}} Can't Start Request Due to Previous Error Reset Waiting For: {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
                 await Task.Delay(_errorResetAt - DateTimeOffset.UtcNow, token).ConfigureAwait(false);
             }
         }
@@ -132,7 +132,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         internal void OnRequestErrored()
         {
             _errorResetAt = MathExt.Max(_errorResetAt, DateTimeOffset.UtcNow + TimeSpan.FromSeconds(1)); 
-            _logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestErrored)} Request ID: {{0}} Waiting For {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
+            Logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestErrored)} Request ID: {{0}} Waiting For {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
         }
 
         ///<inheritdoc/>
@@ -149,7 +149,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Source = null;
             Bucket = null;
             _errorResetAt = DateTimeOffset.MinValue;
-            _logger = null;
+            Logger = null;
         }
 
         ///<inheritdoc/>

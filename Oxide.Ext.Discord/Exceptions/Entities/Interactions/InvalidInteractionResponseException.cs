@@ -54,15 +54,24 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions
             switch (type)
             {
                 case InteractionType.Ping when responseType != InteractionResponseType.Pong:
-                    throw new InvalidInteractionResponseException("You can only response to InteractionType.Ping with InteractionResponseType.Pong");
+                    throw new InvalidInteractionResponseException(
+                        $"You can only response to {nameof(InteractionType)}.{nameof(InteractionType.Ping)} with {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.Pong)}");
+                
                 case InteractionType.ApplicationCommand when responseType != InteractionResponseType.ChannelMessageWithSource && responseType != InteractionResponseType.DeferredChannelMessageWithSource && responseType != InteractionResponseType.Modal:
-                    throw new InvalidInteractionResponseException("You can only response to InteractionType.ApplicationCommand with InteractionResponseType.ChannelMessageWithSource, InteractionResponseType.DeferredChannelMessageWithSource, or InteractionResponseType.Modal");
-                case InteractionType.MessageComponent when responseType != InteractionResponseType.UpdateMessage && responseType != InteractionResponseType.DeferredUpdateMessage && responseType != InteractionResponseType.Modal:
-                    throw new InvalidInteractionResponseException("You can only response to InteractionType.ApplicationCommand with InteractionResponseType.ChannelMessageWithSource, InteractionResponseType.DeferredChannelMessageWithSource, or InteractionResponseType.Modal");
+                    throw new InvalidInteractionResponseException(
+                        $"You can only response to {nameof(InteractionType)}.{nameof(InteractionType.ApplicationCommand)} with {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.ChannelMessageWithSource)}, {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.DeferredChannelMessageWithSource)}, or {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.Modal)}");
+                
+                case InteractionType.MessageComponent when responseType != InteractionResponseType.ChannelMessageWithSource && responseType != InteractionResponseType.DeferredChannelMessageWithSource && responseType != InteractionResponseType.UpdateMessage && responseType != InteractionResponseType.DeferredUpdateMessage && responseType != InteractionResponseType.Modal:
+                    throw new InvalidInteractionResponseException(
+                        $"You can only response to {nameof(InteractionType)}.{nameof(InteractionType.MessageComponent)} with {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.ChannelMessageWithSource)}, {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.DeferredChannelMessageWithSource)}, {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.UpdateMessage)}, {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.DeferredUpdateMessage)}, or {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.Modal)}");
+                
                 case InteractionType.ApplicationCommandAutoComplete when responseType != InteractionResponseType.ApplicationCommandAutocompleteResult:
-                    throw new InvalidInteractionResponseException("You can only response to InteractionType.ApplicationCommandAutoComplete with InteractionResponseType.ApplicationCommandAutocompleteResult");
-                case InteractionType.ModalSubmit when (responseType == InteractionResponseType.Modal || responseType == InteractionResponseType.Pong):
-                    throw new InvalidInteractionResponseException("You can only response to InteractionType.ApplicationCommand with InteractionResponseType.ChannelMessageWithSource or InteractionResponseType.DeferredChannelMessageWithSource");
+                    throw new InvalidInteractionResponseException(
+                        $"You can only response to {nameof(InteractionType)}.{nameof(InteractionType.ApplicationCommandAutoComplete)} with {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.ApplicationCommandAutocompleteResult)}");
+                
+                case InteractionType.ModalSubmit when responseType == InteractionResponseType.Modal || responseType == InteractionResponseType.Pong:
+                    throw new InvalidInteractionResponseException(
+                        $"You can only response to {nameof(InteractionType)}.{nameof(InteractionType.ModalSubmit)} with {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.ChannelMessageWithSource)}, {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.DeferredChannelMessageWithSource)}, {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.UpdateMessage)}, or {nameof(InteractionResponseType)}.{nameof(InteractionResponseType.DeferredUpdateMessage)}");
             }
         }
     }

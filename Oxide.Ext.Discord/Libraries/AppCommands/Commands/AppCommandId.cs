@@ -20,6 +20,9 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
             SubCommand = subCommand;
             Argument = argument;
         }
+        
+        public static bool operator == (AppCommandId left, AppCommandId right) => left.Equals(right);
+        public static bool operator !=(AppCommandId left, AppCommandId right) => !(left == right);
 
         public override string ToString()
         {

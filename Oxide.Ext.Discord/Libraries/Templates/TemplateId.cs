@@ -26,12 +26,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             Language = language;
         }
 
-
-        
         public string GetPluginName()
         {
             return PluginExt.GetFullName(PluginName);
         }
+
+        public string GetLanguageName() => IsGlobal ? "Global" : Language;
         
         public bool Equals(TemplateId other)
         {
@@ -42,7 +42,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         {
             return obj is TemplateId other && Equals(other);
         }
-        
+
+        public override string ToString()
+        {
+            return $"{PluginName}/{GetLanguageName()}/{TemplateName}";
+        }
+
         public override int GetHashCode()
         {
             unchecked

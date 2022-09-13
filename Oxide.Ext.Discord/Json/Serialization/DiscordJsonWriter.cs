@@ -2,6 +2,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Json.Serialization
@@ -30,6 +31,19 @@ namespace Oxide.Ext.Discord.Json.Serialization
             _writer.Formatting = Formatting.None;
         }
 
+        public static DiscordJsonWriter Get()
+        {
+            return DiscordPool.Get<DiscordJsonWriter>();
+        }
+
+        public static async Task WriteAndCopyAsync(JsonSerializer serializer, object payload, Stream to)
+        {
+            DiscordJsonWriter writer = Get();
+            await writer.WriteAsync(serializer, payload).ConfigureAwait(false);
+            await writer.Stream.CopyToPooledAsync(to).ConfigureAwait(false);
+            writer.Dispose();
+        }
+
         /// <summary>
         /// Serializes the payload to the Stream
         /// </summary>
@@ -38,7 +52,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <returns></returns>
         public Task WriteAsync(JsonSerializer serializer, object payload)
         {
-            Stream.SetLength(0);
+            ClearStream();
             serializer.Serialize(_writer, payload);
             _writer.Flush();
             return Task.CompletedTask;
@@ -51,7 +65,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <param name="payload">Payload to be serialized</param>
         public void Write(JsonSerializer serializer, object payload)
         {
-            Stream.SetLength(0);
+            ClearStream();
             serializer.Serialize(_writer, payload);
             _writer.Flush();
         }
@@ -63,15 +77,33 @@ namespace Oxide.Ext.Discord.Json.Serialization
             {
                 _reader = new StreamReader(Stream, DiscordEncoding.Encoding, false, 2048, true);
             }
-            
-            Stream.Position = 0;
+
+            ResetStream();
             return _reader.ReadToEndAsync();
         }
+
+        private void ResetStream()
+        {
+            _writer.Flush();
+            _reader?.DiscardBufferedData();
+            Stream.Position = 0;
+        }
         
+        private void ClearStream()
+        {
+            _writer.Flush();
+            _reader?.DiscardBufferedData();
+            Stream.SetLength(0);
+        }
+        
+        protected override void EnterPool()
+        {
+            ClearStream();
+        }
+
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
-            Stream.SetLength(0);
             DiscordPool.Free(this);
         }
     }

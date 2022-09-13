@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     /// </summary>
     public class DiscordPlaceholders : Library
     {
-        private readonly Regex _placeholderRegex = new Regex(@"{([^\d][^!:{}""]+)(?::([^!{}""]+))*?}", RegexOptions.Compiled);
+        private readonly Regex _placeholderRegex = new Regex(@"{([^\d][^:{}""]+)(?::([^{}""]+))*?}", RegexOptions.Compiled);
         private readonly Hash<string, BasePlaceholder> _placeholders = new Hash<string, BasePlaceholder>();
         private readonly Hash<string, BasePlaceholder> _internalPlaceholders = new Hash<string, BasePlaceholder>();
         private readonly Covalence _covalence = Interface.Oxide.GetLibrary<Covalence>();
@@ -78,9 +78,18 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                     if (placeholder == null)
                     {
                         hasNonMatchingPlaceholder = true;
+                        if (_logger.IsLogging(DiscordLogLevel.Debug))
+                        {
+                            _logger.Debug("Failed to find placeholder: '{0}' Format: {1}", state.Name, state.Format);
+                        }
                         continue;
                     }
 
+                    if (_logger.IsLogging(DiscordLogLevel.Debug))
+                    {
+                        _logger.Debug("Invoking placeholder: '{0}' Format: {1}", state.Name, state.Format);
+                    }
+                    
                     placeholder.Invoke(builder, state);
                 }
 
@@ -146,7 +155,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             
             StaticPlaceholder holder = new StaticPlaceholder(plugin, value);
             BasePlaceholder existing = _placeholders[placeholder];
@@ -187,11 +196,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             if (callback == null) throw new ArgumentNullException(nameof(callback));
             
             Placeholder<T> holder = new Placeholder<T>(dataKey, plugin, callback);
-            BasePlaceholder existing = _placeholders[placeholder];
-            if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
+            if (!holder.IsExtensionPlaceholder() && !_internalPlaceholders.ContainsKey(placeholder) && !placeholder.StartsWith(plugin.Name, StringComparison.OrdinalIgnoreCase))
             {
-                _logger.Warning("Plugin {0} has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
+                _logger.Error("Plugin placeholder {0} must be prefixed with the plugin name {1} unless overriding a Discord Extension provided placeholder.", placeholder, plugin.Name.ToLower());
+                return;
             }
+
             _placeholders[placeholder] = holder;
             if (holder.IsExtensionPlaceholder())
             {

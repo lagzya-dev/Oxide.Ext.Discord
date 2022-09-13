@@ -15,6 +15,15 @@ namespace Oxide.Ext.Discord.Json.Serialization
         internal readonly MemoryStream Stream;
         private readonly StreamReader _reader;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public DiscordJsonReader()
+        {
+            Stream = new MemoryStream();
+            _reader = new StreamReader(Stream, DiscordEncoding.Encoding);
+        }
+        
         public static DiscordJsonReader Create()
         {
             return DiscordPool.Get<DiscordJsonReader>();
@@ -34,15 +43,6 @@ namespace Oxide.Ext.Discord.Json.Serialization
             reader.Dispose();
             return result;
         }
-        
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public DiscordJsonReader()
-        {
-            Stream = new MemoryStream();
-            _reader = new StreamReader(Stream, DiscordEncoding.Encoding);
-        }
 
         /// <summary>
         /// Copy from the given stream to our internal stream
@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <returns></returns>
         public Task CopyFromAsync(Stream stream)
         {
-            Stream.SetLength(0);
+            ClearStream();
             return stream.CopyToPooledAsync(Stream);
         }
         
@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <param name="stream">Stream to copy</param>
         public void CopyFrom(Stream stream)
         {
-            Stream.SetLength(0);
+            ClearStream();
             stream.CopyToPooled(Stream);
         }
         
@@ -71,7 +71,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <returns>String of the stream data</returns>
         public Task<string> ReadAsStringAsync()
         {
-            Stream.Position = 0;
+            ResetStream();
             return _reader.ReadToEndAsync();
         }
 
@@ -83,7 +83,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <returns>{T}</returns>
         public Task<T> DeserializeAsync<T>(JsonSerializer serializer)
         {
-            Stream.Position = 0;
+            ResetStream();
             using (JsonTextReader reader = new JsonTextReader(_reader))
             {
                 reader.CloseInput = false;
@@ -99,7 +99,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <returns>{T}</returns>
         public T Deserialize<T>(JsonSerializer serializer)
         {
-            Stream.Position = 0;
+            ResetStream();
             using (JsonTextReader reader = new JsonTextReader(_reader))
             {
                 reader.CloseInput = false;
@@ -115,7 +115,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <returns></returns>
         public Task PopulateAsync(BotClient client, object obj)
         {
-            Stream.Position = 0;
+            ResetStream();
             using (JsonTextReader reader = new JsonTextReader(_reader))
             {
                 reader.CloseInput = false;
@@ -124,10 +124,26 @@ namespace Oxide.Ext.Discord.Json.Serialization
             }
         }
 
+        private void ResetStream()
+        {
+            Stream.Position = 0;
+            _reader.DiscardBufferedData();
+        }
+
+        private void ClearStream()
+        {
+            _reader.DiscardBufferedData();
+            Stream.SetLength(0);
+        }
+
+        protected override void EnterPool()
+        {
+            ClearStream();
+        }
+
         ///<inheritdoc/>
         protected override void DisposeInternal()
         {
-            Stream.SetLength(0);
             DiscordPool.Free(this);
         }
     }

@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// Max 25 options
         /// </summary>
         [JsonProperty("Select Menu Options")]
-        public List<SelectMenuOptionTemplate> Options { get; } = new List<SelectMenuOptionTemplate>();
+        public List<SelectMenuOptionTemplate> Options { get; set; }
         
         /// <summary>
         /// Custom placeholder text if nothing is selected
@@ -55,6 +55,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         public SelectMenuTemplate()
         {
             Type = MessageComponentType.SelectMenu;
+            Options = new List<SelectMenuOptionTemplate>();
+        }
+
+        public SelectMenuTemplate(string customId, List<SelectMenuOptionTemplate> options, string placeholder = "", int minValues = 1, int maxValues = 1) : this()
+        {
+            CustomId = customId;
+            Options = options;
+            Placeholder = placeholder;
+            MinValues = minValues;
+            MaxValues = maxValues;
         }
 
         /// <summary>

@@ -6,6 +6,7 @@ namespace Oxide.Ext.Discord.Plugins
     {
         public const string Chat = nameof(Chat);
         public const string Version = nameof(Version);
+        public const string ReconnectWebSocket = nameof(ReconnectWebSocket);
         public const string ResetWebSocket = nameof(ResetWebSocket);
         public const string ResetRestApi = nameof(ResetRestApi);
         public const string ClearPool = nameof(ClearPool);
@@ -38,6 +39,7 @@ namespace Oxide.Ext.Discord.Plugins
             {
                 [LangKeys.Chat] = "[Discord Extension] {0}",
                 [LangKeys.Version] = "Server is running Discord Extension v{0}",
+                [LangKeys.ReconnectWebSocket] = "Requested reconnect for all web sockets",
                 [LangKeys.ResetWebSocket] = "All websockets have been reset",
                 [LangKeys.ResetRestApi] = "All REST API's have been reset",
                 [LangKeys.ClearPool] = "All Discord Pools have been cleared",

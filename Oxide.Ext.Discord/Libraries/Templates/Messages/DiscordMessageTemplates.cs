@@ -1,16 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
@@ -19,7 +21,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     {
         private readonly Hash<TemplateId, DiscordMessageTemplate> _templateCache = new Hash<TemplateId, DiscordMessageTemplate>();
 
-        public DiscordMessageTemplates(ILogger logger) : base(logger) { }
+        public DiscordMessageTemplates(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), logger) { }
         
         /// <summary>
         /// Registers a global message template
@@ -260,7 +262,23 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
         internal override void OnPluginUnloaded(Plugin plugin)
         {
-            _templateCache.RemoveAll(t => t.PluginName == plugin.Name);
+            List<TemplateId> ids = DiscordPool.GetList<TemplateId>();
+            foreach (TemplateId id in _templateCache.Keys)
+            {
+                if (plugin.Name == id.PluginName)
+                {
+                    ids.Add(id);
+                }
+            }
+
+            for (int index = 0; index < ids.Count; index++)
+            {
+                TemplateId id = ids[index];
+                RegisteredTemplates.Remove(id.TemplateName);
+                _templateCache.Remove(id);
+            }
+            
+            DiscordPool.FreeList(ref ids);
         }
     }
 }

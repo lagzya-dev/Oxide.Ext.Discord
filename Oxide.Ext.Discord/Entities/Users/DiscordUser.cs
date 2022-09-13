@@ -230,6 +230,17 @@ namespace Oxide.Ext.Discord.Entities.Users
                 });
             });
         }
+        
+        public void SendGlobalTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateKey, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        {
+            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplate(plugin, templateKey).OnSuccess(template =>
+            {
+                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
+                {
+                    SendDirectMessage(client, response, callback, error);
+                });
+            });
+        }
 
         /// <summary>
         /// Modify the currently logged in user with the currently set UserName and Avatar

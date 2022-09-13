@@ -7,6 +7,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
     public static class TimestampPlaceholders
     {
+        internal const string TimestampName = "Timestamp";
+        
         public static void Timestamp(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp));
         public static void ShorTime(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.ShortTime));
         public static void Longtime(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongTime));
@@ -18,7 +20,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         internal static void RegisterPlaceholders()
         {
-            RegisterPlaceholders(DiscordExtensionCore.Instance, "timestamp", GetDataKey());
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "timestamp", TimestampName);
         }
         
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
@@ -33,7 +35,5 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
             placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}.longdatetime", dataKey, LongDateTime);
             placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}.relativetime", dataKey, RelativeTime);
         }
-
-        private static string GetDataKey() => PlaceholderData.TimestampName;
     }
 }

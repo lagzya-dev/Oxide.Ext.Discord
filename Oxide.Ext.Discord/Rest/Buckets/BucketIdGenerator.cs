@@ -17,6 +17,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         private bool _isCompleted;
         private string _previous;
         private string _current;
+        private int _index;
         
         private const char SplitChar = '/';
         private const char QueryStringChar = '?';
@@ -73,6 +74,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 MoveNext();
                 bucket.Append("/");
                 bucket.Append(_current);
+                _index++;
             }
 
             return DiscordPool.ToStringAndFreeStringBuilder(ref bucket);
@@ -143,14 +145,18 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         //The Snowflake ID's for these routes should be included in the bucket ID
         private bool IsMajorId()
         {
-            switch (_previous)
+            //We should only use Major ID if the previous segment name is the first segment and the ID is the second.
+            if (_index == 1)
             {
-                case "guilds":
-                case "channels":
-                case "webhooks":
-                    return true;
+                switch (_previous)
+                {
+                    case "guilds":
+                    case "channels":
+                    case "webhooks":
+                        return true;
+                }
             }
-
+            
             return false;
         }
 
@@ -159,7 +165,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         {
             DiscordPool.Free(this);
         }
-        
+
         ///<inheritdoc/>
         protected override void EnterPool()
         {
@@ -170,6 +176,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             _isCompleted = false;
             _previous = null;
             _current = null;
+            _index = 0;
         }
     }
 }

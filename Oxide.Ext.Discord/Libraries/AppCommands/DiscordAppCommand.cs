@@ -356,8 +356,6 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                     continue;
                 }
 
-                _logger.Debug("Processing Method {0} For {1} With {2} Attributes", method.Name, plugin.FullName(), attributes.Length);
-                
                 for (int index = 0; index < attributes.Length; index++)
                 {
                     Attribute attribute = attributes[index];

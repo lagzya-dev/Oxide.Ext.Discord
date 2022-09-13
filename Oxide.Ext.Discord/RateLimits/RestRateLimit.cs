@@ -31,7 +31,10 @@ namespace Oxide.Ext.Discord.RateLimits
         ///<inheritdoc/>
         protected override void OnRateLimitReset()
         {
-            Logger.Debug($"{nameof(RestRateLimit)}.{nameof(OnRateLimitReset)} Num Requests: {{0}} Reached Rate Limit: {{1}}", NumRequests, HasReachedRateLimit);
+            if (NumRequests > 0)
+            {
+                Logger.Debug($"{nameof(RestRateLimit)}.{nameof(OnRateLimitReset)} Num Requests: {{0}} Reached Rate Limit: {{1}}", NumRequests, HasReachedRateLimit);
+            }
         }
 
         /// <summary>

@@ -61,11 +61,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 throw new DiscordWebSocketException("Socket is already running. Please disconnect before attempting to connect.");
             }
-            _logger.Debug("Connecting to Gateway URL: {0}", url);
 
             WebsocketId = SnowflakeIdGenerator.Generate();
             SocketState = SocketState.Connecting;
-            _source?.Dispose();
+            
+            CancelToken();
             _source = new CancellationTokenSource();
             _token = _source.Token;
             _socket = new ClientWebSocket();
@@ -82,14 +82,15 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private async Task RunWebsocket(string url)
         {
             Snowflake id = WebsocketId;
+            CancellationToken token = _token;
             try
             {
                 _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Connect)} Connecting Websocket To: {{0}}", url);
-                await _socket.ConnectAsync(new Uri(url), _token).ConfigureAwait(false);
+                await _socket.ConnectAsync(new Uri(url), token).ConfigureAwait(false);
                 SocketState = SocketState.Connected;
                 await _handler.SocketOpened(id).ConfigureAwait(false);
-                _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Connect)} Websocket Connected To: {{0}}", url);
-                await ReceiveHandler().ConfigureAwait(false);
+                _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Connect)} Websocket Connected");
+                await ReceiveHandlerAsync(id, _socket, token).ConfigureAwait(false);
                 if (IsConnected())
                 {
                     SocketState = SocketState.Disconnecting;
@@ -97,18 +98,25 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Connect)} Websocket Completed");
                 DisposeSocket();
             }
-            catch (TaskCanceledException) { }
-            catch (OperationCanceledException) { }
+            catch (TaskCanceledException)
+            {
+                DisposeSocket();
+            }
+            catch (OperationCanceledException)
+            {
+                DisposeSocket();
+            }
             catch (WebSocketException ex)
             {
                 DisposeSocket();
-                _logger.Debug("Disconnected Socket Because: {0} Error Code: {1} HResult:{2}\n{3}", ex.WebSocketErrorCode, ex.ErrorCode, ex.HResult, ex);
                 if (ex.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
                 {
-                    await _handler.SocketClosed(id, 1000, string.Empty).ConfigureAwait(false);
+                    _logger.Verbose("Disconnected Socket Because: {0} Error Code: {1} HResult:{2}\n{3}", ex.WebSocketErrorCode, ex.ErrorCode, ex.HResult, ex);
+                    await _handler.SocketClosed(id, WebSocketCloseStatus.NormalClosure, string.Empty).ConfigureAwait(false);
                 }
                 else
                 {
+                    _logger.Debug("Disconnected Socket Because: {0} Error Code: {1} HResult:{2}\n{3}", ex.WebSocketErrorCode, ex.ErrorCode, ex.HResult, ex);
                     await _handler.SocketErrored(id, ex).ConfigureAwait(false);
                 }
             }
@@ -120,33 +128,29 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
 
-        private async Task ReceiveHandler()
+        private async Task ReceiveHandlerAsync(Snowflake id, ClientWebSocket socket, CancellationToken token)
         {
-            Snowflake id = WebsocketId;
-            CancellationToken token = _token;
-            ClientWebSocket socket = _socket;
-
             DiscordJsonReader reader = new DiscordJsonReader();
             MemoryStream input = reader.Stream;
             byte[] array = _receiveBuffer.Array ?? throw new ArgumentNullException();
             
-            _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ReceiveHandler)} Start Receive");
+            _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ReceiveHandlerAsync)} Start Receive");
             while (!token.IsCancellationRequested && (socket.State == WebSocketState.Open || socket.State == WebSocketState.CloseSent))
             {
-                WebSocketReceiveResult result = await socket.ReceiveAsync(_receiveBuffer, _token).ConfigureAwait(false);
+                WebSocketReceiveResult result = await socket.ReceiveAsync(_receiveBuffer, token).ConfigureAwait(false);
                 if (token.IsCancellationRequested)
                 {
                     return;
                 }
 
-                await input.WriteAsync(array, 0, result.Count, _token).ConfigureAwait(false);
+                await input.WriteAsync(array, 0, result.Count, token).ConfigureAwait(false);
 
                 if (result.EndOfMessage)
                 {
                     try
                     {
                         input.Position = 0;
-                        await ProcessReceivedMessage(id, result, reader).ConfigureAwait(false);
+                        await ProcessReceivedMessageAsync(id, socket, result, reader).ConfigureAwait(false);
                     }
                     catch (Exception ex)
                     {
@@ -160,21 +164,16 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
 
-        private async Task ProcessReceivedMessage(Snowflake id, WebSocketReceiveResult result, DiscordJsonReader reader)
+        private async Task ProcessReceivedMessageAsync(Snowflake id, ClientWebSocket socket, WebSocketReceiveResult result, DiscordJsonReader reader)
         {
-            _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Processing Receive Message For: {{0}} Type: {{1}} Size: {{2}}", id, result.MessageType, reader.Stream.Length);
+            _logger.Verbose($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessageAsync)} Processing Receive Message For: {{0}} State: {{1}} Type: {{2}} Size: {{3}}", id, socket.State, result.MessageType, reader.Stream.Length);
 
-            if (_socket.State == WebSocketState.CloseReceived && result.MessageType == WebSocketMessageType.Close)
+            if (socket.State == WebSocketState.CloseReceived && result.MessageType == WebSocketMessageType.Close)
             {
                 if (!IsDisconnected() && !IsDisconnecting())
                 {
-                    int closeCode = result.CloseStatus.HasValue ? (int)result.CloseStatus : 1000;
-                    SocketState = SocketState.Disconnecting;
-                    string message = await reader.ReadAsStringAsync().ConfigureAwait(false);
-                    _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Close Code: {{0}} Message: {{1}}", closeCode, message);
-                    await _socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, string.Empty, _token).ConfigureAwait(false);
-                    await _handler.SocketClosed(id, closeCode, message).ConfigureAwait(false);
-                    SocketState = SocketState.Disconnected;
+                    WebSocketCloseStatus closeStatus = result.CloseStatus ?? WebSocketCloseStatus.NormalClosure;
+                    await DisconnectInternal(id, closeStatus, "Websocket closed by Discord", true).ConfigureAwait(false);
                 }
 
                 return;
@@ -237,23 +236,45 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             return Disconnect((WebSocketCloseStatus)code, reason);
         }
         
+        public Task Disconnect(WebSocketCloseStatus code, string reason)
+        {
+            return DisconnectInternal(WebsocketId, code, reason, false);
+        }
+        
         /// <summary>
         /// Disconnects from the websocket with the given code and reason
         /// </summary>
         /// <param name="status">Status to close with</param>
         /// <param name="reason">Reason for the close</param>
         /// <returns></returns>
-        public async Task Disconnect(WebSocketCloseStatus status, string reason)
+        private async Task DisconnectInternal(Snowflake id, WebSocketCloseStatus status, string reason, bool closeRecieved)
         {
             try
             {
-                if(_socket != null && IsConnected() && !_source.IsCancellationRequested)
+                _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Disconnect)} Status: {{0}} Reason: {{1}} Close Received: {{2}} Socket Is Disposed: {{3}} Is Connected {{4}} Cancel Requested {{5}}",
+                    status, reason, closeRecieved, _socket != null, IsConnected(), _source.IsCancellationRequested);
+
+                if (id.IsValid() && id != WebsocketId)
                 {
-                    Snowflake id = WebsocketId;
+                    return;
+                }
+
+                if (_socket != null && IsConnected() && !_source.IsCancellationRequested)
+                {
                     SocketState = SocketState.Disconnecting;
-                    await _socket.CloseAsync(status, reason, _token).ConfigureAwait(false);
-                    await _handler.SocketClosed(id, (int)status, reason).ConfigureAwait(false);
+                    WebsocketId = default(Snowflake);
+
+                    if (closeRecieved)
+                    {
+                        await _socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, string.Empty, _token).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        await _socket.CloseAsync(status, reason, _token).ConfigureAwait(false);
+                    }
+
                     DisposeSocket();
+                    await _handler.SocketClosed(id, status, reason).ConfigureAwait(false);
                 }
             }
             catch (Exception ex)
@@ -265,15 +286,25 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private void DisposeSocket()
         {
             SocketState = SocketState.Disconnected;
-            if (_source != null && _source.Token.CanBeCanceled)
-            {
-                _source.Cancel();
-                _source?.Dispose();
-                _source = null;
-            }
-
+            CancelToken();
             _socket?.Dispose();
             _socket = null;
+        }
+
+        private void CancelToken()
+        {
+            if (_source == null)
+            {
+                return;
+            }
+            
+            if (_source.Token.CanBeCanceled)
+            {
+                _source.Cancel();    
+            }
+                
+            _source.Dispose();
+            _source = null;
         }
 
         /// <summary>

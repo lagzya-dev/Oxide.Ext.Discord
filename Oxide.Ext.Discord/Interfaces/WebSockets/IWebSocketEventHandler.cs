@@ -1,4 +1,5 @@
 using System;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Json.Serialization;
@@ -24,7 +25,7 @@ namespace Oxide.Ext.Discord.Interfaces.WebSockets
         /// <param name="code">Web socket close code</param>
         /// <param name="message">Web socket close message</param>
         /// <returns></returns>
-        Task SocketClosed(Snowflake id, int code, string message);
+        Task SocketClosed(Snowflake id, WebSocketCloseStatus code, string message);
 
         /// <summary>
         /// Called when an error occurs on the web socket

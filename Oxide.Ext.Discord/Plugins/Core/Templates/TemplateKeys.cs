@@ -8,13 +8,13 @@ namespace Oxide.Ext.Discord.Plugins.Core.Templates
             
             public static class Delete
             {
-                private const string Base = Commands.Base + "." + nameof(Commands) + ".";
+                private const string Base = Commands.Base + nameof(Delete) + ".";
 
                 public const string Success = Base + nameof(Success);
 
                 public static class Errors
                 {
-                    private const string Base = Delete.Base + "." + nameof(Commands) + ".";
+                    private const string Base = Delete.Base + nameof(Errors) + ".";
 
                     public const string InvalidSelection = Base + nameof(InvalidSelection);
                     public const string CommandIdNotFound = Base + nameof(CommandIdNotFound);

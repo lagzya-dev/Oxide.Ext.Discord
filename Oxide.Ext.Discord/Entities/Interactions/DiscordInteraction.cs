@@ -162,13 +162,18 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         private InteractionDataOption GetFocusedOption()
         {
+            if (Type != InteractionType.ApplicationCommandAutoComplete)
+            {
+                return null;
+            }
+            
             List<InteractionDataOption> options = Data.Options;
             if (options == null)
             {
                 return null;
             }
             
-            for (int index = 0; index < options.Count; index++)
+            for (int index = 0; index < options.Count;)
             {
                 InteractionDataOption option = options[index];
                 if (option.Type == CommandOptionType.SubCommand || option.Type == CommandOptionType.SubCommandGroup)
@@ -182,6 +187,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 {
                     return option;
                 }
+
+                index++;
             }
 
             return null;
@@ -192,26 +199,34 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             string command = Data.Name;
             string group = null;
             string subCommand = null;
-            string argument = Focused?.Name;
+            string argument = null;
             
             List<InteractionDataOption> options = Data.Options;
             if (options != null)
             {
-                for (int index = 0; index < options.Count; index++)
+                for (int index = 0; index < options.Count;)
                 {
                     InteractionDataOption option = options[index];
-                    if (option.Type == CommandOptionType.SubCommandGroup)
+                    switch (option.Type)
                     {
-                        group = option.Name;
-                        options = option.Options;
-                        index = 0;
-                        continue;
-                    }
-                
-                    if (option.Type == CommandOptionType.SubCommand)
-                    {
-                        subCommand = option.Name;
-                        break;
+                        case CommandOptionType.SubCommandGroup:
+                            group = option.Name;
+                            options = option.Options;
+                            index = 0;
+                            break;
+                        case CommandOptionType.SubCommand:
+                            subCommand = option.Name;
+                            options = option.Options;
+                            index = 0;
+                            break;
+                        
+                        default:
+                            if (option.Focused.HasValue && option.Focused.Value)
+                            {
+                                argument = option.Name;
+                            }
+                            index++;
+                            break;
                     }
                 }
             }

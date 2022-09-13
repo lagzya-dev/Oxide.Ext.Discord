@@ -1,16 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Modals;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Modals
@@ -19,7 +21,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
     {
         private readonly Hash<TemplateId, DiscordModalTemplate> _templateCache = new Hash<TemplateId, DiscordModalTemplate>();
 
-        public DiscordModalTemplates(ILogger logger) : base(logger) { }
+        public DiscordModalTemplates(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), logger) { }
         
         public void RegisterModalTemplate(Plugin plugin, string name, DiscordModalTemplate template, TemplateVersion minSupportedVersion, string language = DiscordLocale.DefaultOxideLanguage)
         {
@@ -89,7 +91,23 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
 
         internal override void OnPluginUnloaded(Plugin plugin)
         {
-            _templateCache.RemoveAll(t => t.PluginName == plugin.Name);
+            List<TemplateId> ids = DiscordPool.GetList<TemplateId>();
+            foreach (TemplateId id in _templateCache.Keys)
+            {
+                if (plugin.Name == id.PluginName)
+                {
+                    ids.Add(id);
+                }
+            }
+
+            for (int index = 0; index < ids.Count; index++)
+            {
+                TemplateId id = ids[index];
+                RegisteredTemplates.Remove(id.TemplateName);
+                _templateCache.Remove(id);
+            }
+            
+            DiscordPool.FreeList(ref ids);
         }
     }
 }

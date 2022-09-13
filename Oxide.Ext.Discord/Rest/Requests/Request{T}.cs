@@ -52,23 +52,24 @@ namespace Oxide.Ext.Discord.Rest.Requests
         ///<inheritdoc/>
         protected override async Task OnRequestSuccess(RequestResponse response)
         {
-            if (OnSuccess != null)
+            if (OnSuccess == null)
             {
-                DiscordJsonReader reader = await DiscordJsonReader.CreateFromStreamAsync(response.Content).ConfigureAwait(false);
+                if (Logger.IsLogging(DiscordLogLevel.Verbose))
+                {
+                    Logger.Verbose("Skipping Callback for {0}. No Callback specified.", typeof(T).Name);
+                }
                 
-                try
-                {
-                    T data = await reader.DeserializeAsync<T>(Client.Bot.JsonSerializer).ConfigureAwait(false);
-                    ApiSuccessCallback<T>.Start(this, data);
-                }
-                catch (Exception ex)
-                {
-                    Client.Logger.Exception("An error occured deserializing JSON response. Method: {0} Route: {1}\nResponse:\n{2}", Method, Route, ex);
-                }
-                finally
-                {
-                    reader.Dispose();
-                }
+                return;
+            }
+
+            try
+            {
+                T data = await DiscordJsonReader.DeserializeFromAsync<T>(Client.Bot.JsonSerializer, response.Content).ConfigureAwait(false);
+                ApiSuccessCallback<T>.Start(this, data);
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception("An error occured deserializing JSON response. Method: {0} Route: {1}\nResponse:\n{2}", Method, Route, ex);
             }
         }
 

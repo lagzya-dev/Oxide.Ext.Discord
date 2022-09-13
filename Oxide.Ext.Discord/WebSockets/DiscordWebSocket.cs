@@ -8,7 +8,6 @@ using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.WebSockets.Handlers;
 
 namespace Oxide.Ext.Discord.WebSockets
@@ -141,7 +140,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 }
                 else
                 {
-                    await Handler.Disconnect(WebSocketCloseStatus.NormalClosure, string.Empty).ConfigureAwait(false);
+                    await Handler.Disconnect(WebSocketCloseStatus.NormalClosure, "Normal Websocket Disconnect Requested").ConfigureAwait(false);
                 }
             }
 
@@ -205,7 +204,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 return false;
             }
 
-            DiscordJsonWriter writer = DiscordPool.Get<DiscordJsonWriter>();
+            DiscordJsonWriter writer = DiscordJsonWriter.Get();
             await writer.WriteAsync(_client.JsonSerializer, payload).ConfigureAwait(false);
             writer.Stream.Position = 0;
 

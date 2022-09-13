@@ -55,10 +55,23 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// </summary>
         [JsonProperty("Input Text Required")]
         public bool Required { get; set; } = false;
-        
+
+        [JsonConstructor]
         public InputTextTemplate()
         {
             Type = MessageComponentType.InputText;
+        }
+        
+        public InputTextTemplate(string label, string customId, string value = "", InputTextStyles style = InputTextStyles.Short, bool required = false, string placeholder = "", int minLength = 0, int maxLength = 4000) : this()
+        {
+            Label = label;
+            CustomId = customId;
+            Value = value;
+            Style = style;
+            Required = required;
+            Placeholder = placeholder;
+            MinLength = minLength;
+            MaxLength = maxLength;
         }
 
         public InputTextComponent ToInputText(PlaceholderData data)

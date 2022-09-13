@@ -114,7 +114,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Fires the request off
         /// </summary>
-        public async Task FireRequest()
+        private async Task FireRequest()
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         private async Task<DiscordStreamContent> GetJsonContent(object data)
         {
-            _json = DiscordPool.Get<DiscordJsonWriter>();
+            _json = DiscordJsonWriter.Get();
             await _json.WriteAsync(Request.Client.Bot.JsonSerializer, data).ConfigureAwait(false);
             
             if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))

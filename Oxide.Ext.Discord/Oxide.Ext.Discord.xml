@@ -183,16 +183,6 @@
             All guilds are loaded and if <see cref="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMembers"/> is specified all guild members have been loaded
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.Settings">
-            <summary>
-            The settings for this bot of all the combined clients
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.JsonSettings">
-            <summary>
-            Discord Extension JSON Serialization settings
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.BotClient.Clients">
             <summary>
             List of all clients that are using this bot client
@@ -8941,6 +8931,11 @@
             Guild is able to be featured in the directory
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.InvitesDisabled">
+            <summary>
+            Guild has paused invites, preventing new users from joining
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.InviteSplash">
             <summary>
             Guild has access to set an invite splash background
@@ -13215,6 +13210,12 @@
             Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-jsonform-params">Message Create Structure</a> to be created in discord
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.Nonce">
+            <summary>
+            Can be used to verify a message was sent (up to 25 characters).
+            Value will appear in the Message Create event.
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageCreate.MessageReference">
             <summary>
             Include to make your message a reply
@@ -14587,6 +14588,11 @@
             Connection type is Battle.net
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.eBay">
+            <summary>
+            Connection type is Epic Games
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.EpicGames">
             <summary>
             Connection type is Epic Games
@@ -14602,6 +14608,11 @@
             Connection type is Youtube
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.PayPal">
+            <summary>
+            Connection type is League of Legends
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.LeagueOfLegends">
             <summary>
             Connection type is League of Legends
@@ -14613,6 +14624,11 @@
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Reddit">
+            <summary>
+            Connection type is Reddit
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.RiotGames">
             <summary>
             Connection type is Reddit
             </summary>
@@ -16214,14 +16230,14 @@
             <summary>
             Copies one stream to another using a pooled byte[] buffer
             </summary>
-            <param name="stream">Stream to copy from</param>
+            <param name="from">Stream to copy from</param>
             <param name="to">Stream to copy to</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.StreamExt.CopyToPooled(System.IO.Stream,System.IO.Stream)">
             <summary>
             Copies one stream to another using a pooled byte[] buffer
             </summary>
-            <param name="stream">Stream to copy from</param>
+            <param name="from">Stream to copy from</param>
             <param name="to">Stream to copy to</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.StringBuilderExt">
@@ -16848,7 +16864,7 @@
             <param name="id">ID of the web socket</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Int32,System.String)">
+        <member name="M:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Net.WebSockets.WebSocketCloseStatus,System.String)">
             <summary>
             Called when the web socket is closed
             </summary>
@@ -17900,7 +17916,7 @@
             <typeparam name="T">Type of the data</typeparam>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Add``1(System.String,``0)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Add(System.String,System.Object)">
             <summary>
             Adds the data with the given name
             </summary>
@@ -18112,7 +18128,7 @@
             Oxide Library for Discord Templates
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary.#ctor(System.String,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
@@ -20204,7 +20220,7 @@
             Called when a socket is open
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Int32,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Net.WebSockets.WebSocketCloseStatus,System.String)">
             <summary>
             Called when a socket is closed
             </summary>
@@ -20277,7 +20293,7 @@
             <param name="reason">Reason for the close</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.Disconnect(System.Net.WebSockets.WebSocketCloseStatus,System.String)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.DisconnectInternal(Oxide.Ext.Discord.Entities.Snowflake,System.Net.WebSockets.WebSocketCloseStatus,System.String,System.Boolean)">
             <summary>
             Disconnects from the websocket with the given code and reason
             </summary>

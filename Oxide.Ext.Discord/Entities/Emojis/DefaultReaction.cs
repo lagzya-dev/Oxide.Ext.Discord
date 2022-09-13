@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         /// The id of a guild's custom emoji
         /// </summary>
         [JsonProperty("emoji_id")]
-        public Snowflake EmojiId { get; set; }
+        public Snowflake? EmojiId { get; set; }
 
         /// <summary>
         /// The unicode character of the emoji

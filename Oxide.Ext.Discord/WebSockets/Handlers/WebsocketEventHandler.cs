@@ -71,20 +71,21 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="websocketId">ID of the web socket</param>
         /// <param name="code">Close code for the web socket</param>
         /// <param name="message">Close message from the web socket</param>
-        public Task SocketClosed(Snowflake websocketId, int code, string message)
+        public Task SocketClosed(Snowflake websocketId, WebSocketCloseStatus status, string message)
         {
             //If the socket close came from the extension then this will be true
             if (!_webSocket.IsCurrentSocket(websocketId))
             {
-                _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(SocketClosed)} Socket closed event for non matching socket. Code: {{0}}, reason: {{1}}", code, message);
+                _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(SocketClosed)} Socket closed event for non matching socket. Code: {{0}}, reason: {{1}}", status, message);
                 return Task.CompletedTask;
             }
-            
+
+            int code = (int)status;
             if(code >= 1000 && code < 2000)
             {
-                if ((WebSocketCloseStatus)code != WebSocketCloseStatus.NormalClosure)
+                if (status != WebSocketCloseStatus.NormalClosure)
                 {
-                    _logger.Warning($"{nameof(WebSocketEventHandler)}.{nameof(SocketClosed)} Discord WebSocket closed. Code: {{1}}, reason: {{2}}", (WebSocketCloseStatus)code, code, message);
+                    _logger.Warning($"{nameof(WebSocketEventHandler)}.{nameof(SocketClosed)} Discord WebSocket closed. Code: {{1}}, reason: {{2}}", status, code, message);
                 }
                 else
                 {

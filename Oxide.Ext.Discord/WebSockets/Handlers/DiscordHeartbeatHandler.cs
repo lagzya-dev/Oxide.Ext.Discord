@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private void HeartbeatElapsed(object sender, ElapsedEventArgs e)
         {
-            _logger.Debug($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed");
+            _logger.Verbose($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed");
 
             if (_initial)
             {
@@ -143,7 +143,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _heartbeatAcknowledged = false;
             _socket.SendHeartbeat();
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordHeartbeatSent);
-            _logger.Debug("Heartbeat sent - {0}ms interval.", _timer.Interval);
+            _logger.Verbose("Heartbeat sent - {0}ms interval.", _timer.Interval);
         }
         #endregion
     }
