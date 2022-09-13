@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         public TemplateId(Plugin plugin, string templateName, string language)
         {
             PluginName = plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));;
-            TemplateName = templateName ?? throw new ArgumentNullException(nameof(templateName));
+            TemplateName = templateName;
             Language = language;
         }
 
@@ -53,7 +53,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             unchecked
             {
                 int hashCode = PluginName.GetHashCode();
-                hashCode = (hashCode * 397) ^ TemplateName.GetHashCode();
+                hashCode = (hashCode * 397) ^ (TemplateName != null ? TemplateName.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Language != null ? Language.GetHashCode() : 0);
                 return hashCode;
             }

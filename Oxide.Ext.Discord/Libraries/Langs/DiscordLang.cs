@@ -10,12 +10,12 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Helpers
+namespace Oxide.Ext.Discord.Libraries.Langs
 {
     /// <summary>
     /// Converts discord locale codes into oxide locale codes
     /// </summary>
-    public static class DiscordLocale
+    public class DiscordLang
     {
         /// <summary>
         /// Default Oxide Lang (English)
@@ -25,16 +25,18 @@ namespace Oxide.Ext.Discord.Helpers
         /// <summary>
         /// Returns the Oxide Server language
         /// </summary>
-        public static string GameServerLanguage => Lang.GetServerLanguage();
+        public string GameServerLanguage => _lang.GetServerLanguage();
         
-        private static readonly Hash<string, string> DiscordToOxide = new Hash<string, string>();
-        private static readonly Hash<string, string> OxideToDiscord = new Hash<string, string>();
-        private static readonly Hash<string, Hash<string, Hash<string, string>>> PluginLangCache = new Hash<string, Hash<string, Hash<string, string>>>();
+        private readonly Hash<string, string> _discordToOxide = new Hash<string, string>();
+        private readonly Hash<string, string> _oxideToDiscord = new Hash<string, string>();
+        private readonly Hash<string, Hash<string, Hash<string, string>>> _pluginLangCache = new Hash<string, Hash<string, Hash<string, string>>>();
         
-        private static readonly Lang Lang = Interface.Oxide.GetLibrary<Lang>();
+        private readonly Lang _lang = Interface.Oxide.GetLibrary<Lang>();
+        private readonly ILogger _logger;
 
-        static DiscordLocale()
+        public DiscordLang(ILogger logger)
         {
+            _logger = logger;
             AddLocale("en","en-US");
             AddLocale("bg","bg");
             AddLocale("zh","zh-CN");
@@ -64,14 +66,14 @@ namespace Oxide.Ext.Discord.Helpers
             AddLocale("uk","uk");
             AddLocale("vi","vi");
             
-            DiscordToOxide["en-GB"] = "en";
-            DiscordToOxide["zh-TW"] = "zh";
+            _discordToOxide["en-GB"] = "en";
+            _discordToOxide["zh-TW"] = "zh";
         }
 
-        private static void AddLocale(string oxide, string discord)
+        private void AddLocale(string oxide, string discord)
         {
-            DiscordToOxide[discord] = oxide;
-            OxideToDiscord[oxide] = discord;
+            _discordToOxide[discord] = oxide;
+            _oxideToDiscord[oxide] = discord;
         }
 
         /// <summary>
@@ -79,19 +81,29 @@ namespace Oxide.Ext.Discord.Helpers
         /// </summary>
         /// <param name="discordLocale">Discord locale to get oxide locale for</param>
         /// <returns>Oxide locale if it exists; null otherwise</returns>
-        public static string GetOxideLanguage(string discordLocale)
+        public string GetOxideLanguage(string discordLocale)
         {
-            return !string.IsNullOrEmpty(discordLocale) ? DiscordToOxide[discordLocale] : string.Empty;
+            return _discordToOxide[discordLocale];
+        }
+        
+        public bool TryGetOxideLanguage(string discordLocale, out string oxideLanguage)
+        {
+            return _discordToOxide.TryGetValue(discordLocale, out oxideLanguage);
         }
         
         /// <summary>
         /// Returns the discord locale for a given oxide locale
         /// </summary>
-        /// <param name="oxideLocale">oxide locale to get discord locale for</param>
+        /// <param name="oxideLanguage">oxide locale to get discord locale for</param>
         /// <returns>Discord locale if it exists; null otherwise</returns>
-        public static string GetDiscordLocale(string oxideLocale)
+        public string GetDiscordLocale(string oxideLanguage)
         {
-            return !string.IsNullOrEmpty(oxideLocale) ? OxideToDiscord[oxideLocale] : string.Empty;
+            return _oxideToDiscord[oxideLanguage];
+        }
+        
+        public bool TryGetDiscordLocale(string oxideLanguage, out string discordLocale)
+        {
+            return _oxideToDiscord.TryGetValue(oxideLanguage, out discordLocale);
         }
         
         /// <summary>
@@ -99,7 +111,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// </summary>
         /// <param name="player"><see cref="IPlayer"/> to get the locale for</param>
         /// <returns>Locale for the given IPlayer</returns>
-        public static string GetPlayerLanguage(IPlayer player)
+        public string GetPlayerLanguage(IPlayer player)
         {
             return GetPlayerLanguage(player?.Id);
         }
@@ -109,9 +121,9 @@ namespace Oxide.Ext.Discord.Helpers
         /// </summary>
         /// <param name="playerId">PlayerId to get the locale for</param>
         /// <returns>Locale for the given playerId</returns>
-        public static string GetPlayerLanguage(string playerId)
+        public string GetPlayerLanguage(string playerId)
         {
-            return Lang.GetLanguage(playerId);
+            return _lang.GetLanguage(playerId);
         }
 
         /// <summary>
@@ -121,13 +133,14 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="plugin"></param>
         /// <param name="langKey"></param>
         /// <returns></returns>
-        public static Hash<string, string> GetCommandLocalization(Plugin plugin, string langKey)
+        [Obsolete("GetCommandLocalization has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
+        public Hash<string, string> GetCommandLocalization(Plugin plugin, string langKey)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (langKey == null) throw new ArgumentNullException(nameof(langKey));
             
             Hash<string, string> localization = new Hash<string, string>();
-            string[] languages = Lang.GetLanguages(plugin);
+            string[] languages = _lang.GetLanguages(plugin);
             for (int index = 0; index < languages.Length; index++)
             {
                 string language = languages[index];
@@ -160,7 +173,8 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="langKey">The lang key to lookup</param>
         /// <returns>Localized message if found; Empty string otherwise</returns>
         /// <exception cref="ArgumentNullException">Thrown if any of the input arguments are null</exception>
-        public static string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, string langKey)
+        [Obsolete("GetDiscordInteractionLangMessage has been deprecated and will be removed in the future. Please upgrade to DiscordMessageTemplates for DiscordInteraction localization")]
+        public string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, string langKey)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (interaction == null) throw new ArgumentNullException(nameof(interaction));
@@ -175,9 +189,9 @@ namespace Oxide.Ext.Discord.Helpers
             // 4. Oxide Lang Language
             // 5. English
             string message = GetLanguageMessages(plugin, GetOxideLanguage(interaction.Locale))?[langKey]
-                             ?? (player != null ? GetLanguageMessages(plugin, Lang.GetLanguage(player.Id))?[langKey] : null)
+                             ?? (player != null ? GetLanguageMessages(plugin, _lang.GetLanguage(player.Id))?[langKey] : null)
                              ?? GetLanguageMessages(plugin, GetOxideLanguage(interaction.GuildLocale))?[langKey]
-                             ?? GetLanguageMessages(plugin, Lang.GetServerLanguage())?[langKey]
+                             ?? GetLanguageMessages(plugin, _lang.GetServerLanguage())?[langKey]
                              ?? GetLanguageMessages(plugin, DefaultOxideLanguage)?[langKey];
 
             return !string.IsNullOrEmpty(message) ? message : langKey;
@@ -192,7 +206,8 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="args">Localization formatting args</param>
         /// <returns>Localized message if found; Empty string otherwise</returns>
         /// <exception cref="ArgumentNullException">Thrown if any of the input arguments are null</exception>
-        public static string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, string langKey, params object[] args)
+        [Obsolete("GetDiscordInteractionLangMessage has been deprecated and will be removed in the future. Please upgrade to DiscordMessageTemplates for DiscordInteraction localization")]
+        public string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, string langKey, params object[] args)
         {
             string message = GetDiscordInteractionLangMessage(plugin, interaction, langKey);
             if (string.IsNullOrEmpty(message))
@@ -211,13 +226,13 @@ namespace Oxide.Ext.Discord.Helpers
             }
         }
 
-        private static Hash<string, string> GetLanguageMessages(Plugin plugin, string language)
+        private Hash<string, string> GetLanguageMessages(Plugin plugin, string language)
         {
-            Hash<string, Hash<string, string>> pluginCache = PluginLangCache[plugin.Id()];
+            Hash<string, Hash<string, string>> pluginCache = _pluginLangCache[plugin.Id()];
             if (pluginCache == null)
             {
                 pluginCache = new Hash<string, Hash<string, string>>();
-                PluginLangCache[plugin.Id()] = pluginCache;
+                _pluginLangCache[plugin.Id()] = pluginCache;
             }
 
             Hash<string, string> langCache = pluginCache[language];
@@ -225,7 +240,7 @@ namespace Oxide.Ext.Discord.Helpers
             {
                 langCache = new Hash<string, string>();
                 pluginCache[language] = langCache;
-                foreach (KeyValuePair<string, string> lang in Lang.GetMessages(language, plugin))
+                foreach (KeyValuePair<string, string> lang in _lang.GetMessages(language, plugin))
                 {
                     langCache[lang.Key] = lang.Value;
                 }
@@ -234,9 +249,9 @@ namespace Oxide.Ext.Discord.Helpers
             return langCache;
         }
 
-        internal static void OnPluginUnloaded(Plugin plugin)
+        internal void OnPluginUnloaded(Plugin plugin)
         {
-            PluginLangCache.Remove(plugin.Id());
+            _pluginLangCache.Remove(plugin.Id());
         }
     }
 }

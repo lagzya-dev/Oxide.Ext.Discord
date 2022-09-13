@@ -27,7 +27,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         ///<inheritdoc/>
         public void Validate()
         {
+#pragma warning disable CS0618
             InvalidGuildBanException.ThrowIfInvalidDeleteMessageDays(DeleteMessageDays);
+#pragma warning restore CS0618
             InvalidGuildBanException.ThrowIfInvalidDeleteMessageSeconds(DeleteMessageSeconds);
         }
     }

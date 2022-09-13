@@ -103,10 +103,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 state.Dispose();
             }
 
-            if (data.ShouldPool)
-            {
-                data.Dispose();
-            }
+            data.Dispose();
 
             return text;
         }
@@ -115,10 +112,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// Creates Pooled <see cref="PlaceholderData"/>
         /// </summary>
         /// <returns><see cref="PlaceholderData"/></returns>
-        public PlaceholderData CreateData()
+        public PlaceholderData CreateData(Plugin plugin)
         {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            
             PlaceholderData data = DiscordPool.GetPlaceholderData();
             data.AddServer(_covalence.Server);
+            data.AddPlugin(plugin);
             return data;
         }
 

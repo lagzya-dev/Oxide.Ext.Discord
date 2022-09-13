@@ -9,7 +9,6 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
-using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
@@ -21,12 +20,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     public class PlaceholderData : IDisposable
     {
         private readonly Hash<string, object> _data = new Hash<string, object>();
-        internal bool ShouldPool = true;
+        private bool _shouldPool = true;
+        private bool _disposed;
 
         internal PlaceholderData() { }
 
         internal void AddServer(IServer server) => Add(nameof(IServer), server);
-
         
         /// <summary>
         /// Add a <see cref="DiscordApplicationCommand"/>
@@ -219,12 +218,16 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         public void ManualPool()
         {
-            ShouldPool = false;
+            _shouldPool = false;
         }
 
         public void Dispose()
         {
-            DiscordPool.FreePlaceholderData(this);
+            if (_shouldPool && !_disposed)
+            {
+                _disposed = true;
+                DiscordPool.FreePlaceholderData(this);
+            }
         }
     }
 }

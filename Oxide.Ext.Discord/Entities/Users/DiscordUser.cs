@@ -16,6 +16,7 @@ using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Plugins;
 
@@ -220,7 +221,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, embeds, callback, error); });
         }
 
-        public void SendTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        public void SendTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {

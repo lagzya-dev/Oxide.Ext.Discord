@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Libraries.Templates.Commands;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
@@ -48,9 +48,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="plugin">Plugin containing the localizations</param>
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
+        [Obsolete("AddNameLocalizations has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
         public ApplicationCommandBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            Command.NameLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
+            Command.NameLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
             return this;
         }
         
@@ -60,9 +61,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="plugin">Plugin containing the localizations</param>
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
+        [Obsolete("AddDescriptionLocalizations has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
         public ApplicationCommandBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            Command.DescriptionLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
+            Command.DescriptionLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
             return this;
         }
         
@@ -151,6 +153,11 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         public CommandCreate Build()
         {
             return Command;
+        }
+
+        public DiscordCommandLocalization BuildCommandLocalization()
+        {
+            return new DiscordCommandLocalization(Command);
         }
     }
 }

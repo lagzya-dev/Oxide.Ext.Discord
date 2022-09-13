@@ -7,7 +7,6 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -107,8 +106,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 return;
             }
 
-            UserOxideLocale = DiscordLocale.GetOxideLanguage(interaction.Locale);
-            GuildOxideLocale = DiscordLocale.GetOxideLanguage(interaction.GuildLocale);
+            UserOxideLocale = DiscordExtension.DiscordLang.GetOxideLanguage(interaction.Locale);
+            GuildOxideLocale = DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale);
             
             //Parse the arguments for the application command
             ParseCommand(Data.Options);

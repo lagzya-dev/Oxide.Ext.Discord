@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Helpers;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
 {
@@ -45,9 +45,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <param name="plugin">Plugin containing the localizations</param>
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
+        [Obsolete("AddNameLocalizations has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
         public TBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            SubCommand.NameLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
+            SubCommand.NameLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
             return Builder;
         }
         
@@ -57,9 +58,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <param name="plugin">Plugin containing the localizations</param>
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
+        [Obsolete("AddDescriptionLocalizations has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
         public TBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            SubCommand.DescriptionLocalizations = DiscordLocale.GetCommandLocalization(plugin, langKey);
+            SubCommand.DescriptionLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
             return Builder;
         }
 

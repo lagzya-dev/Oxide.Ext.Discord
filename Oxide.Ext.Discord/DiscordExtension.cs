@@ -8,9 +8,11 @@ using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Command;
+using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Subscription;
+using Oxide.Ext.Discord.Libraries.Templates.Commands;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;
@@ -50,8 +52,10 @@ namespace Oxide.Ext.Discord
         internal static DiscordLink DiscordLink;
         internal static DiscordCommand DiscordCommand;
         internal static DiscordSubscriptions DiscordSubscriptions;
+        internal static DiscordLang DiscordLang;
         internal static DiscordMessageTemplates DiscordMessageTemplates;
         internal static DiscordModalTemplates DiscordModalTemplates;
+        internal static DiscordCommandLocalizations DiscordCommandLocalizations;
         internal static DiscordPlaceholders DiscordPlaceholders;
         internal static DiscordConfig DiscordConfig;
 
@@ -112,8 +116,10 @@ namespace Oxide.Ext.Discord
             DiscordLink = new DiscordLink(GlobalLogger);
             DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes, GlobalLogger);
             DiscordSubscriptions = new DiscordSubscriptions(GlobalLogger);
+            DiscordLang = new DiscordLang(GlobalLogger);
             DiscordMessageTemplates = new DiscordMessageTemplates(GlobalLogger);
             DiscordModalTemplates = new DiscordModalTemplates(GlobalLogger);
+            DiscordCommandLocalizations = new DiscordCommandLocalizations(GlobalLogger);
             DiscordPlaceholders = new DiscordPlaceholders(GlobalLogger);
             
             Manager.RegisterLibrary(nameof(DiscordAppCommand), DiscordAppCommand);
@@ -122,6 +128,7 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);
             Manager.RegisterLibrary(nameof(DiscordMessageTemplates), DiscordMessageTemplates);
             Manager.RegisterLibrary(nameof(DiscordModalTemplates), DiscordModalTemplates);
+            Manager.RegisterLibrary(nameof(DiscordCommandLocalizations), DiscordCommandLocalizations);
             Manager.RegisterLibrary(nameof(DiscordPlaceholders), DiscordPlaceholders);
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
             Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClient.OnPluginRemoved;

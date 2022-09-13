@@ -43,7 +43,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         [JsonProperty("Message Components")]
         public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
 
-        public DiscordMessageTemplate(string content = "")
+        public DiscordMessageTemplate(string content = "") : base(new TemplateVersion(1, 0, 0))
         {
             Content = content;
         }

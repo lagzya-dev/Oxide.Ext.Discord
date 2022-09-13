@@ -11,7 +11,6 @@ using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Builders.Interactions
@@ -68,11 +67,12 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="plugin">Plugin to lookup the langkey for</param>
         /// <param name="langKey">Lang key for the name</param>
         /// <returns>This</returns>
+        [Obsolete("AddAutoCompleteChoice has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
         public InteractionAutoCompleteBuilder AddAutoCompleteChoice(string name, object value, Plugin plugin, string langKey)
         {
             InvalidAutoCompleteChoiceException.ThrowIfInvalidName(name);
             InvalidAutoCompleteChoiceException.ThrowIfInvalidValue(value);
-            return AddAutoCompleteChoice(new CommandOptionChoice(name, value, DiscordLocale.GetCommandLocalization(plugin, langKey)));
+            return AddAutoCompleteChoice(new CommandOptionChoice(name, value,  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey)));
         }
         
         /// <summary>

@@ -13,7 +13,6 @@ using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.Placeholders;
@@ -149,7 +148,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="plugin">Plugin the localization is for</param>
         /// <param name="langKey">Lang Key to return</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
-        public string GetLangMessage(Plugin plugin, string langKey) => DiscordLocale.GetDiscordInteractionLangMessage(plugin, this, langKey);
+        [Obsolete("GetLangMessage has been deprecated and will be removed in the future. Please upgrade to DiscordMessageTemplates for DiscordInteraction localization")]
+        public string GetLangMessage(Plugin plugin, string langKey) => DiscordExtension.DiscordLang.GetDiscordInteractionLangMessage(plugin, this, langKey);
         
         /// <summary>
         /// Returns a localized string for this interaction
@@ -158,7 +158,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="langKey">Lang Key to return</param>
         /// <param name="args">Localization args</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
-        public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordLocale.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
+        [Obsolete("GetLangMessage has been deprecated and will be removed in the future. Please upgrade to DiscordMessageTemplates for DiscordInteraction localization")]
+        public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordExtension.DiscordLang.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
         
         private InteractionDataOption GetFocusedOption()
         {

@@ -1672,7 +1672,13 @@
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback.EnterPool">
             <inheritdoc/>
         </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback.DisposeInternal">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.DisposeInternal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Async.InternalAsyncCallback.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Async.InternalAsyncCallback`1.DisposeInternal">
@@ -16634,79 +16640,6 @@
             <param name="message">Message to make block quote</param>
             <returns>Multiline block quote formatted message</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Helpers.DiscordLocale">
-            <summary>
-            Converts discord locale codes into oxide locale codes
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Helpers.DiscordLocale.DefaultOxideLanguage">
-            <summary>
-            Default Oxide Lang (English)
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Helpers.DiscordLocale.GameServerLanguage">
-            <summary>
-            Returns the Oxide Server language
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetOxideLanguage(System.String)">
-            <summary>
-            Returns the oxide locale for a given discord locale
-            </summary>
-            <param name="discordLocale">Discord locale to get oxide locale for</param>
-            <returns>Oxide locale if it exists; null otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetDiscordLocale(System.String)">
-            <summary>
-            Returns the discord locale for a given oxide locale
-            </summary>
-            <param name="oxideLocale">oxide locale to get discord locale for</param>
-            <returns>Discord locale if it exists; null otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetPlayerLanguage(Oxide.Core.Libraries.Covalence.IPlayer)">
-            <summary>
-            Returns the oxide locale for the given IPlayer
-            </summary>
-            <param name="player"><see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> to get the locale for</param>
-            <returns>Locale for the given IPlayer</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetPlayerLanguage(System.String)">
-            <summary>
-            Returns the oxide locale for the given playerId
-            </summary>
-            <param name="playerId">PlayerId to get the locale for</param>
-            <returns>Locale for the given playerId</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetCommandLocalization(Oxide.Core.Plugins.Plugin,System.String)">
-            <summary>
-            Returns the discord localization for a plugins oxide lang.
-            This is used for application command localization
-            </summary>
-            <param name="plugin"></param>
-            <param name="langKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetDiscordInteractionLangMessage(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,System.String)">
-            <summary>
-            Retrieves the lang message for a Discord Interaction
-            </summary>
-            <param name="plugin">Plugin the lang is from</param>
-            <param name="interaction">The interaction to be localized</param>
-            <param name="langKey">The lang key to lookup</param>
-            <returns>Localized message if found; Empty string otherwise</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordLocale.GetDiscordInteractionLangMessage(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,System.String,System.Object[])">
-            <summary>
-            Retrieves the lang message for a Discord Interaction
-            </summary>
-            <param name="plugin">Plugin the lang is from</param>
-            <param name="interaction">The interaction to be localized</param>
-            <param name="langKey">The lang key to lookup</param>
-            <param name="args">Localization formatting args</param>
-            <returns>Localized message if found; Empty string otherwise</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
-        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.SnowflakeIdGenerator">
             <summary>
             Generates a unique snowflake ID
@@ -17549,6 +17482,79 @@
             <param name="args"></param>
             <param name="message"></param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Langs.DiscordLang">
+            <summary>
+            Converts discord locale codes into oxide locale codes
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.DefaultOxideLanguage">
+            <summary>
+            Default Oxide Lang (English)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GameServerLanguage">
+            <summary>
+            Returns the Oxide Server language
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetOxideLanguage(System.String)">
+            <summary>
+            Returns the oxide locale for a given discord locale
+            </summary>
+            <param name="discordLocale">Discord locale to get oxide locale for</param>
+            <returns>Oxide locale if it exists; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetDiscordLocale(System.String)">
+            <summary>
+            Returns the discord locale for a given oxide locale
+            </summary>
+            <param name="oxideLanguage">oxide locale to get discord locale for</param>
+            <returns>Discord locale if it exists; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetPlayerLanguage(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns the oxide locale for the given IPlayer
+            </summary>
+            <param name="player"><see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> to get the locale for</param>
+            <returns>Locale for the given IPlayer</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetPlayerLanguage(System.String)">
+            <summary>
+            Returns the oxide locale for the given playerId
+            </summary>
+            <param name="playerId">PlayerId to get the locale for</param>
+            <returns>Locale for the given playerId</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetCommandLocalization(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Returns the discord localization for a plugins oxide lang.
+            This is used for application command localization
+            </summary>
+            <param name="plugin"></param>
+            <param name="langKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetDiscordInteractionLangMessage(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,System.String)">
+            <summary>
+            Retrieves the lang message for a Discord Interaction
+            </summary>
+            <param name="plugin">Plugin the lang is from</param>
+            <param name="interaction">The interaction to be localized</param>
+            <param name="langKey">The lang key to lookup</param>
+            <returns>Localized message if found; Empty string otherwise</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetDiscordInteractionLangMessage(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,System.String,System.Object[])">
+            <summary>
+            Retrieves the lang message for a Discord Interaction
+            </summary>
+            <param name="plugin">Plugin the lang is from</param>
+            <param name="interaction">The interaction to be localized</param>
+            <param name="langKey">The lang key to lookup</param>
+            <param name="args">Localization formatting args</param>
+            <returns>Localized message if found; Empty string otherwise</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Linking.DiscordLink">
             <summary>
             Represents a library for discord linking
@@ -17746,7 +17752,7 @@
             <param name="data">Placeholder Data for the placeholders</param>
             <returns>string with placeholders replaced. If no placeholders are found the original string is returned</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.CreateData">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.CreateData(Oxide.Core.Plugins.Plugin)">
             <summary>
             Creates Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/>
             </summary>
@@ -18123,6 +18129,12 @@
             Used when Registering templates to determine if we need to backup a template and create a new template for the given version
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate.InternalVersion">
+            <summary>
+            Internal Version of the Template
+            Reserved for future use
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary">
             <summary>
             Oxide Library for Discord Templates
@@ -18374,7 +18386,7 @@
             <param name="plugin">Plugin the template is for</param>
             <param name="name">Unique name of the template</param>
             <param name="template">Template to register</param>
-            <param name="minSupportedVersion">Min supported version for this template</param>
+            <param name="minVersion">Min supported version for this template</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates.RegisterLocalizedMessageTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,System.String)">
@@ -18384,7 +18396,7 @@
             <param name="plugin">Plugin the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> is for</param>
             <param name="name">Name of the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/></param>
             <param name="template">Template to be registered</param>
-            <param name="minSupportedVersion">
+            <param name="minVersion">
             The minimum supported template version.<br/>
             If an existing template exists and it's version is >=  the minimum supported version then we will use that template.<br/>
             If an existing template exists and it's version is &lt; the min supported version. The existing version is backed up and a new template is created 

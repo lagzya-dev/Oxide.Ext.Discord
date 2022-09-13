@@ -9,7 +9,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
@@ -355,7 +355,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             });
         }
         
-        public void ExecuteWebhookTemplate(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        public void ExecuteWebhookTemplate(DiscordClient client, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {
@@ -407,7 +407,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             });
         }
         
-        public void EditWebhookMessageTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateKey, string language = DiscordLocale.DefaultOxideLanguage, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        public void EditWebhookMessageTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateKey, string language = DiscordLang.DefaultOxideLanguage, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
             DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateKey, language).OnSuccess(template =>
             {

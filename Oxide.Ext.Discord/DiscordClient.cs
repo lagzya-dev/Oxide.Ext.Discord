@@ -7,7 +7,6 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
@@ -278,7 +277,7 @@ namespace Oxide.Ext.Discord
             DiscordExtension.DiscordMessageTemplates.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordModalTemplates.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordPlaceholders.OnPluginUnloaded(plugin);
-            DiscordLocale.OnPluginUnloaded(plugin);
+            DiscordExtension.DiscordLang.OnPluginUnloaded(plugin);
             PluginExt.OnPluginUnloaded(plugin);
         }
 

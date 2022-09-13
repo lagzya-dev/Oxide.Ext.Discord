@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Oxide.Core;
@@ -9,10 +8,10 @@ using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Modals;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
+using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Modals
@@ -23,14 +22,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
 
         public DiscordModalTemplates(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), logger) { }
         
-        public void RegisterModalTemplate(Plugin plugin, string name, DiscordModalTemplate template, TemplateVersion minSupportedVersion, string language = DiscordLocale.DefaultOxideLanguage)
+        public IDiscordAsyncCallback RegisterModalTemplate(Plugin plugin, string name, DiscordModalTemplate template, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
+            IDiscordAsyncCallback callback = DiscordAsyncCallback.Create();
+
             TemplateId id = new TemplateId(plugin, name, language);
-            RegisterTemplateCallback<DiscordModalTemplate>.Start(this, id, template, minSupportedVersion);
+            RegisterTemplateCallback<DiscordModalTemplate>.Start(this, id, template, minVersion, callback);
+            return callback;
         }
 
         public IDiscordAsyncCallback<DiscordModalTemplate> GetModalTemplate(Plugin plugin, string name, DiscordInteraction interaction)
@@ -48,7 +50,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
                 callback = InternalAsyncCallback<DiscordModalTemplate>.Create();
             }
             
-            string language = DiscordLocale.GetOxideLanguage(interaction.Locale);
+            string language = DiscordExtension.DiscordLang.GetOxideLanguage(interaction.Locale);
             TemplateId id = new TemplateId(plugin, name, language);
             LoadModalTemplateCallback.Start(id, interaction, callback);
             return callback;
@@ -66,10 +68,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
             IPlayer player = interaction.User.Player;
             
             template = await LoadTemplate<DiscordModalTemplate>(TemplateType.Modal, id).ConfigureAwait(false)
-                       ?? (player != null ? await LoadTemplate<DiscordModalTemplate>(TemplateType.Modal, id, DiscordLocale.GetPlayerLanguage(player)).ConfigureAwait(false) : null)
-                       ?? await LoadTemplate<DiscordModalTemplate>(TemplateType.Modal, id, DiscordLocale.GetOxideLanguage(interaction.GuildLocale)).ConfigureAwait(false) 
-                       ?? await LoadTemplate<DiscordModalTemplate>(TemplateType.Modal, id, DiscordLocale.GameServerLanguage).ConfigureAwait(false)
-                       ?? await LoadTemplate<DiscordModalTemplate>(TemplateType.Modal, id, DiscordLocale.DefaultOxideLanguage).ConfigureAwait(false);
+                       ?? (player != null ? await LoadTemplate<DiscordModalTemplate>(TemplateType.Modal, id, DiscordExtension.DiscordLang.GetPlayerLanguage(player)).ConfigureAwait(false) : null)
+                       ?? await LoadTemplate<DiscordModalTemplate>(TemplateType.Modal, id, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale)).ConfigureAwait(false) 
+                       ?? await LoadTemplate<DiscordModalTemplate>(TemplateType.Modal, id, DiscordExtension.DiscordLang.GameServerLanguage).ConfigureAwait(false)
+                       ?? await LoadTemplate<DiscordModalTemplate>(TemplateType.Modal, id, DiscordLang.DefaultOxideLanguage).ConfigureAwait(false);
 
             if (template == null)
             {
@@ -91,23 +93,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
 
         internal override void OnPluginUnloaded(Plugin plugin)
         {
-            List<TemplateId> ids = DiscordPool.GetList<TemplateId>();
-            foreach (TemplateId id in _templateCache.Keys)
-            {
-                if (plugin.Name == id.PluginName)
-                {
-                    ids.Add(id);
-                }
-            }
-
-            for (int index = 0; index < ids.Count; index++)
-            {
-                TemplateId id = ids[index];
-                RegisteredTemplates.Remove(id.TemplateName);
-                _templateCache.Remove(id);
-            }
-            
-            DiscordPool.FreeList(ref ids);
+            string name = plugin.Name;
+            _templateCache.RemoveAll(t => t.PluginName == name);
+            RegisteredTemplates.RemoveWhere(rt => rt.PluginName == name);
         }
     }
 }

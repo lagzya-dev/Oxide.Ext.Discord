@@ -9,6 +9,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public abstract class BaseTemplate
     {
+        public BaseTemplate(TemplateVersion internalVersion)
+        {
+            InternalVersion = internalVersion;
+        }
+        
         /// <summary>
         /// The type of the Template
         /// </summary>
@@ -22,5 +27,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </summary>
         [JsonProperty("Template Version (Do Not Edit)", Order = 1001)]
         public TemplateVersion Version { get; set; } = new TemplateVersion(1, 0, 0);
+        
+        /// <summary>
+        /// Internal Version of the Template
+        /// Reserved for future use
+        /// </summary>
+        [JsonProperty("Internal Template Version (Do Not Edit)", Order = 1002)]
+        public TemplateVersion InternalVersion { get; set; }
     }
 }

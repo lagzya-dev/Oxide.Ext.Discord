@@ -10,6 +10,8 @@ using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries.Templates;
+using Oxide.Ext.Discord.Libraries.Templates.Commands;
 using Oxide.Ext.Discord.Plugins.Core.AppCommands;
 using Oxide.Ext.Discord.Plugins.Core.Templates;
 using Oxide.Plugins;
@@ -24,27 +26,25 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             ApplicationCommandBuilder builder = new ApplicationCommandBuilder(AppCommandKeys.DeCommand, "Discord Extension Commands", ApplicationCommandType.ChatInput)
                                                 .AddDefaultPermissions(PermissionFlags.None)
-                                                .AddNameLocalizations(this, LangKeys.AppCommands.DeCommand)
-                                                .AddDescriptionLocalizations(this, LangKeys.AppCommands.DeCommandDescription)
-
                                                 .AddSubCommandGroup(AppCommandKeys.AppCommandGroup, "Application Commands")
-                                                .AddNameLocalizations(this, LangKeys.AppCommands.AppCommandGroup)
-                                                .AddDescriptionLocalizations(this, LangKeys.AppCommands.AppCommandGroupDescription)
-
                                                 .AddSubCommand(AppCommandKeys.DeleteAppCommand, "Delete a registered application command")
-                                                .AddNameLocalizations(this, LangKeys.AppCommands.DeleteAppCommand)
-                                                .AddDescriptionLocalizations(this, LangKeys.AppCommands.DeleteAppCommandDescription)
                                                 .AddOption(CommandOptionType.String, AppCommandKeys.DeleteAppCommandArgument, "Application Command To Delete")
                                                 .AutoComplete()
                                                 .Required()
-                                                .AddNameLocalizations(this, LangKeys.AppCommands.DeleteAppCommandArgument)
-                                                .AddDescriptionLocalizations(this, LangKeys.AppCommands.DeleteAppCommandArgumentDescription)
                                                 .Build()
                                                 .Build()
                                                 .Build();
 
-            client.Application.CreateGlobalCommand(client.GetFirstClient(), builder.Build());
-            DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(client.Application, this);
+            CommandCreate create = builder.Build();
+            DiscordCommandLocalization localization = builder.BuildCommandLocalization();
+            DiscordExtension.DiscordCommandLocalizations.RegisterCommandLocalization(this, null, localization, new TemplateVersion(1, 0, 0)).OnSuccess(() =>
+            {
+                DiscordExtension.DiscordCommandLocalizations.ApplyCommandLocalizations(this, create, null).OnSuccess(() =>
+                {
+                    client.Application.CreateGlobalCommand(client.GetFirstClient(), builder.Build());
+                    DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(client.Application, this);
+                });
+            });
         }
 
         [HookMethod(nameof(HandleDeleteApplicationCommand))]
@@ -159,7 +159,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         public PlaceholderData GetPlaceholderData()
         {
-            return DiscordExtension.DiscordPlaceholders.CreateData().AddPlugin(this);
+            return DiscordExtension.DiscordPlaceholders.CreateData(this);
         }
     }
 }

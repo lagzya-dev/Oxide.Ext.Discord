@@ -13,22 +13,6 @@ namespace Oxide.Ext.Discord.Plugins
         public const string ShowLog = nameof(ShowLog);
         public const string SetLog = nameof(SetLog);
         public const string InvalidLogEnum = nameof(InvalidLogEnum);
-
-        public static class AppCommands
-        {
-            private const string Base = nameof(AppCommands) + ".";
-
-            public const string DeCommand = Base + nameof(DeCommand);
-            public const string DeCommandDescription = Base + nameof(DeCommandDescription);
-            
-            public const string AppCommandGroup = Base + nameof(AppCommandGroup);
-            public const string AppCommandGroupDescription = Base + nameof(AppCommandGroupDescription);
-            
-            public const string DeleteAppCommand = Base + nameof(DeleteAppCommand);
-            public const string DeleteAppCommandDescription = Base + nameof(DeleteAppCommandDescription);            
-            public const string DeleteAppCommandArgument = Base + nameof(DeleteAppCommandArgument);
-            public const string DeleteAppCommandArgumentDescription = Base + nameof(DeleteAppCommandArgumentDescription);
-        }
     }
     
     internal static class Localization

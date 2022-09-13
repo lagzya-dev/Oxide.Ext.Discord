@@ -33,7 +33,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
         [JsonProperty("Modal Components")]
         private List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
         
-        public DiscordModalTemplate()
+        public DiscordModalTemplate() : base(new TemplateVersion(1, 0, 0))
         {
             TemplateType = TemplateType.Modal;
         }

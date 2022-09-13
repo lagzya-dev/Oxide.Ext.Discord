@@ -5,11 +5,12 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Async
 {
-    public abstract class BaseDiscordAsyncCallback : BasePoolable, IDiscordAsyncCallback
+    public abstract class BaseDiscordAsyncCallback<T> : BasePoolable, IDiscordAsyncCallback<T>
     {
-        private readonly List<Action> _success = new List<Action>();
-
-        public IDiscordAsyncCallback OnSuccess(Action complete)
+        private readonly List<Action<T>> _success = new List<Action<T>>();
+        protected T Data;
+        
+        public IDiscordAsyncCallback<T> OnSuccess(Action<T> complete)
         {
             _success.Add(complete);
             return this;
@@ -21,18 +22,19 @@ namespace Oxide.Ext.Discord.Callbacks.Async
             {
                 for (int index = 0; index < _success.Count; index++)
                 {
-                    Action callback = _success[index];
-                    callback.Invoke();
+                    Action<T> callback = _success[index];
+                    callback.Invoke(Data);
                 }
             }
             
             Dispose();
         }
 
-        public abstract void InvokeSuccess();
+        public abstract void InvokeSuccess(T data);
         
         protected override void EnterPool()
         {
+            Data = default(T);
             _success.Clear();
         }
     }
