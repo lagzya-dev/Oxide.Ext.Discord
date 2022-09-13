@@ -177,7 +177,6 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         public TBuilder AddChoice(string name, string value, Hash<string, string> nameLocalizations = null)
         {
             InvalidCommandOptionChoiceException.ThrowIfInvalidType(_option.Type, CommandOptionType.String);
-            InvalidCommandOptionChoiceException.ThrowIfInvalidName(name, false);
             InvalidCommandOptionChoiceException.ThrowIfInvalidStringValue(name);
             return AddChoiceInternal(name, value, nameLocalizations);
         }
@@ -193,7 +192,6 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         public TBuilder AddChoice(string name, int value, Hash<string, string> nameLocalizations = null)
         {
             InvalidCommandOptionChoiceException.ThrowIfInvalidType(_option.Type, CommandOptionType.Integer);
-            InvalidCommandOptionChoiceException.ThrowIfInvalidName(name, false);
             return AddChoiceInternal(name, value, nameLocalizations);
         }
         
@@ -208,16 +206,19 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         public TBuilder AddChoice(string name, double value, Hash<string, string> nameLocalizations = null)
         {
             InvalidCommandOptionChoiceException.ThrowIfInvalidType(_option.Type, CommandOptionType.Number);
-            InvalidCommandOptionChoiceException.ThrowIfInvalidName(name, false);
             return AddChoiceInternal(name, value, nameLocalizations);
         }
 
         private TBuilder AddChoiceInternal(string name, object value, Hash<string, string> nameLocalizations)
         {
+            InvalidCommandOptionChoiceException.ThrowIfInvalidName(name, false);
+            
             if (_option.Choices == null)
             {
                 _option.Choices = new List<CommandOptionChoice>();
             }
+            
+            InvalidCommandOptionChoiceException.ThrowIfMaxChoices(_option.Choices.Count);
             
             _option.Choices.Add(new CommandOptionChoice(name, value, nameLocalizations));
             
