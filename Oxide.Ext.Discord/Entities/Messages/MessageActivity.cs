@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Messages
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object">Message Activity Structure</a>
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure">Message Activity Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class MessageActivity
@@ -19,6 +19,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Party ID from a Rich Presence event
         /// </summary>
         [JsonProperty("party_id")]
-        public Snowflake PartyId { get; set; }
+        public string PartyId { get; set; }
     }
 }
