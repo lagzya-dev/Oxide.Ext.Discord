@@ -41,13 +41,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
 
         [JsonConstructor]
-        public DiscordMessageTemplate() : base(new TemplateVersion(1, 0, 0)) {}
+        public DiscordMessageTemplate() : base(TemplateType.Message, new TemplateVersion(1, 0, 0)) {}
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="content"></param>
-        public DiscordMessageTemplate(string content = "") : base(new TemplateVersion(1, 0, 0))
+        public DiscordMessageTemplate(string content = "") : this()
         {
             Content = content;
         }

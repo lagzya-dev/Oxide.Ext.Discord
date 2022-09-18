@@ -12,9 +12,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="type">Type of the template</param>
         /// <param name="internalVersion">Internal Template Version</param>
-        public BaseTemplate(TemplateVersion internalVersion)
+        public BaseTemplate(TemplateType type, TemplateVersion internalVersion)
         {
+            TemplateType = type;
             InternalVersion = internalVersion;
         }
         

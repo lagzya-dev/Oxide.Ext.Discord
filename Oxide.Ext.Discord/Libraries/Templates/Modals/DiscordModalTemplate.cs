@@ -39,10 +39,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
         /// <summary>
         /// Constructor
         /// </summary>
-        public DiscordModalTemplate() : base(new TemplateVersion(1, 0, 0))
-        {
-            TemplateType = TemplateType.Modal;
-        }
+        public DiscordModalTemplate() : base(TemplateType.Modal, new TemplateVersion(1, 0, 0)) {}
 
         /// <summary>
         /// Converts the template to a <see cref="InteractionModalMessage"/>
