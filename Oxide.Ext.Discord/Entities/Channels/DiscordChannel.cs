@@ -251,7 +251,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 return _threadMembers = new Hash<Snowflake, ThreadMember>();
             }
         }
-        
+
         internal UserData UserData { get; set; }
 
         /// <summary>

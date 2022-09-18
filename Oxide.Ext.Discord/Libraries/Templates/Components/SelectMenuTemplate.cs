@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// Converts the template to a <see cref="SelectMenuComponent"/>
         /// </summary>
         /// <returns></returns>
-        public SelectMenuComponent ToSelectMenu(PlaceholderData data)
+        public override BaseComponent ToComponent(PlaceholderData data)
         {
             SelectMenuComponent component = new SelectMenuComponent
             {
@@ -95,15 +95,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
 
             for (int index = 0; index < Options.Count; index++)
             {
-                SelectMenuOptionTemplate option = Options[index];
-                component.Options.Add(new SelectMenuOption
-                {
-                    Label = PlaceholderFormatting.ApplyPlaceholder(option.Label, data),
-                    Value = PlaceholderFormatting.ApplyPlaceholder(option.Value, data),
-                    Description = PlaceholderFormatting.ApplyPlaceholder(option.Description, data),
-                    Emoji = option.Emoji.ToEmoji(),
-                    Default = option.Default
-                });
+                component.Options.Add(Options[index].ToOption(data));
             }
 
             return component;

@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Components
 {
@@ -21,5 +22,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("Type")]
         public MessageComponentType Type { get; set; }
+
+        public abstract BaseComponent ToComponent(PlaceholderData data);
     }
 }

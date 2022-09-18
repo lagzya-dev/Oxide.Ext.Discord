@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
                     InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(modal.Components.Count);
                     modal.Components.Add(new ActionRowComponent
                     {
-                        Components = { input.ToInputText(data) }
+                        Components = { input.ToComponent(data) }
                     });
                 }
             }

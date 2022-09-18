@@ -33,7 +33,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// The minimum length of the text input
         /// </summary>
         [JsonProperty("Input Text Min Length")]
-        public int MinLength { get; set; } = 0;
+        public int MinLength { get; set; }
         
         /// <summary>
         /// The maximum length of the text input
@@ -57,7 +57,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// Is the Input Text Required to be filled out
         /// </summary>
         [JsonProperty("Input Text Required")]
-        public bool Required { get; set; } = false;
+        public bool Required { get; set; }
 
         /// <summary>
         /// Constructor
@@ -96,9 +96,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public InputTextComponent ToInputText(PlaceholderData data)
+        public override BaseComponent ToComponent(PlaceholderData data)
         {
-            InputTextComponent input = new InputTextComponent
+            return new InputTextComponent
             {
                 Label = PlaceholderFormatting.ApplyPlaceholder(Label, data),
                 Placeholder = PlaceholderFormatting.ApplyPlaceholder(Placeholder, data),
@@ -109,7 +109,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
                 MaxLength = MaxLength,
                 CustomId = CustomId
             };
-            return input;
         }
     }
 }

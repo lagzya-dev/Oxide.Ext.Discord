@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
@@ -21,9 +20,6 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     /// </summary>
     public class DiscordLink : Library
     {
-        private IPlayerManager Players => _players ?? (_players = Interface.Oxide.GetLibrary<Covalence>().Players);
-        private IPlayerManager _players;
-
         private readonly Hash<string, Snowflake> _steamIdToDiscordId = new Hash<string, Snowflake>();
         private readonly Hash<Snowflake, string> _discordIdToSteamId = new Hash<Snowflake, string>();
         private readonly HashSet<string> _steamIds = new HashSet<string>();

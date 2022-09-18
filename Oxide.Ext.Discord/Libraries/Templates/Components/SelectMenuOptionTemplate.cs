@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Components
@@ -40,7 +42,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// Will render this option as selected by default
         /// </summary>
         [JsonProperty("default")]
-        public bool Default { get; set; } = false;
+        public bool Default { get; set; }
 
         /// <summary>
         /// Constructor
@@ -66,6 +68,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
             Description = description;
             Emoji = new EmojiTemplate(emoji);
             Default = @default;
+        }
+
+        public SelectMenuOption ToOption(PlaceholderData data)
+        {
+            return new SelectMenuOption
+            {
+                Label = PlaceholderFormatting.ApplyPlaceholder(Label, data),
+                Value = PlaceholderFormatting.ApplyPlaceholder(Value, data),
+                Description = PlaceholderFormatting.ApplyPlaceholder(Description, data),
+                Emoji = Emoji.ToEmoji(),
+                Default = Default
+            };
         }
     }
 }

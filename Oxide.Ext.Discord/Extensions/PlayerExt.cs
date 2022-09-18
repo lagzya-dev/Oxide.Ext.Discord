@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Oxide.Core;
+using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
@@ -9,7 +11,6 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Plugins;
 
@@ -20,6 +21,8 @@ namespace Oxide.Ext.Discord.Extensions
     /// </summary>
     public static class PlayerExt
     {
+        private static readonly Lang Lang = Interface.Oxide.GetLibrary<Lang>();
+        
         /// <summary>
         /// Send a Discord Message to an IPlayer if they're registered
         /// </summary>
@@ -116,14 +119,13 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="client">Client to use</param>
         /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template Name</param>
-        /// <param name="language">Oxide language to use</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <param name="callback">Callback when the message is created</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        public static void SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateName, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedMessageTemplateInternal(plugin, templateName, Lang.GetLanguage(player.Id)).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {

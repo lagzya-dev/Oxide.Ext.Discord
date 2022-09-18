@@ -73,6 +73,18 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return StringBuilderPool.Instance.Get();
         }
+        
+        /// <summary>
+        /// Returns a pooled <see cref="StringBuilder"/>
+        /// </summary>
+        /// <param name="initial">Initial text for the builder</param>
+        /// <returns>Pooled <see cref="StringBuilder"/></returns>
+        public static StringBuilder GetStringBuilder(string initial)
+        {
+            StringBuilder builder = StringBuilderPool.Instance.Get();
+            builder.Append(initial);
+            return builder;
+        }
 
         /// <summary>
         /// Returns a pooled <see cref="MemoryStream"/>

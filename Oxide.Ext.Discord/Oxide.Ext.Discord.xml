@@ -13424,7 +13424,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageActivity">
             <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object">Message Activity Structure</a>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure">Message Activity Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageActivity.Type">
@@ -16607,7 +16607,7 @@
             <param name="callback">Callback when the message is created</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Send a message in a DM to the linked user using a localized message template
             </summary>
@@ -16615,7 +16615,6 @@
             <param name="client">Client to use</param>
             <param name="plugin">Plugin for the template</param>
             <param name="templateName">Template Name</param>
-            <param name="language">Oxide language to use</param>
             <param name="message">Message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
             <param name="callback">Callback when the message is created</param>
@@ -18383,6 +18382,24 @@
             <param name="placeholderPrefix">Prefix to use for the placeholders</param>
             <param name="dataKey">Data key in <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.Default.InteractionPlaceholders">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction"/> placeholders
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.InteractionPlaceholders.Lang(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+            <summary>
+            <see cref="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GetLangMessage(Oxide.Core.Plugins.Plugin,System.String)"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.InteractionPlaceholders.RegisterPlaceholders(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+            <summary>
+            Registers placeholders for the given plugin. 
+            </summary>
+            <param name="plugin">Plugin to register placeholders for</param>
+            <param name="placeholderPrefix">Prefix to use for the placeholders</param>
+            <param name="dataKey">Data key in <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.Default.MemberPlaceholders">
             <summary>
             <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/> placeholders
@@ -18404,6 +18421,29 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.MemberPlaceholders.RegisterPlaceholders(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+            <summary>
+            Registers placeholders for the given plugin. 
+            </summary>
+            <param name="plugin">Plugin to register placeholders for</param>
+            <param name="placeholderPrefix">Prefix to use for the placeholders</param>
+            <param name="dataKey">Data key in <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.Default.MessagePlaceholders">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Entities.Messages.DiscordMessage"/> placeholders
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.MessagePlaceholders.Id(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
+            <summary>
+            <see cref="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Id"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.MessagePlaceholders.Content(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
+            <summary>
+            <see cref="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Content"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.MessagePlaceholders.RegisterPlaceholders(Oxide.Core.Plugins.Plugin,System.String,System.String)">
             <summary>
             Registers placeholders for the given plugin. 
             </summary>
@@ -18875,6 +18915,13 @@
             <param name="channel">Channel to add</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddInteraction(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction"/>
+            </summary>
+            <param name="interaction">Interaction to add</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddPlayer(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             Adds a <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/>
@@ -18889,7 +18936,13 @@
             <param name="plugin">Plugin to add</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTimestamp(System.UInt64)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddNowTimestamp">
+            <summary>
+            Adds a Unix Timestamp for the current time
+            </summary>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTimestamp(System.Int64)">
             <summary>
             Adds a Unix Timestamp
             </summary>
@@ -20447,6 +20500,13 @@
             <summary>
             Returns a pooled <see cref="T:System.Text.StringBuilder"/>
             </summary>
+            <returns>Pooled <see cref="T:System.Text.StringBuilder"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetStringBuilder(System.String)">
+            <summary>
+            Returns a pooled <see cref="T:System.Text.StringBuilder"/>
+            </summary>
+            <param name="initial">Initial text for the builder</param>
             <returns>Pooled <see cref="T:System.Text.StringBuilder"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetMemoryStream">

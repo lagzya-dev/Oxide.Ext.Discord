@@ -36,8 +36,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         {
             ChannelPlaceholders.RegisterPlaceholders();
             GuildPlaceholders.RegisterPlaceholders();
+            InteractionPlaceholders.RegisterPlaceholders();
             ServerPlaceholders.RegisterPlaceholders();
             MemberPlaceholders.RegisterPlaceholders();
+            MessagePlaceholders.RegisterPlaceholders();
             PlayerPlaceholders.RegisterPlaceholders();
             PluginPlaceholders.RegisterPlaceholders();
             RolePlaceholders.RegisterPlaceholders();

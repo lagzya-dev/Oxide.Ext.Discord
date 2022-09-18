@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Interfaces.Entities.Messages;
@@ -42,6 +39,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         [JsonConverter(typeof(TemplateComponentsConverter))]
         [JsonProperty("Message Components")]
         public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
+
+        [JsonConstructor]
+        public DiscordMessageTemplate() : base(new TemplateVersion(1, 0, 0)) {}
 
         /// <summary>
         /// Constructor
@@ -79,7 +79,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             if (!string.IsNullOrEmpty(Content))
             {
-                message.Content = ApplyPlaceholder(Content, data);
+                message.Content = PlaceholderFormatting.ApplyPlaceholder(Content, data);
             }
 
             if (Embeds != null && Embeds.Count != 0)
@@ -131,60 +131,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             for (int index = 0; index < Embeds.Count; index++)
             {
                 DiscordEmbedTemplate template = Embeds[index];
-                if (!template.Enabled)
+                if (template.Enabled)
                 {
-                    continue;
+                    embeds.Add(template.ToEmbed(data));
                 }
-
-                DiscordEmbed embed = new DiscordEmbed
-                {
-                    Title = ApplyPlaceholder(template.Title, data),
-                    Url = ApplyPlaceholder(template.Url, data),
-                    Description = ApplyPlaceholder(template.Description, data),
-                    Color = !string.IsNullOrEmpty(template.Color) ? new DiscordColor(ApplyPlaceholder(template.Color, data)) : (DiscordColor?)null,
-                    Timestamp = template.TimeStamp ? DateTime.UtcNow : (DateTime?)null
-                };
-                
-                embeds.Add(embed);
-                
-                if (!string.IsNullOrEmpty(template.ImageUrl))
-                {
-                    embed.Image = new EmbedImage
-                    {
-                        Url = ApplyPlaceholder(template.Url, data)
-                    };
-                }
-                
-                if (!string.IsNullOrEmpty(template.ThumbnailUrl))
-                {
-                    embed.Thumbnail = new EmbedThumbnail
-                    {
-                        Url = ApplyPlaceholder(template.ThumbnailUrl, data)
-                    };
-                }
-                
-                if (!string.IsNullOrEmpty(template.VideoUrl))
-                {
-                    embed.Video = new EmbedVideo
-                    {
-                        Url = ApplyPlaceholder(template.ThumbnailUrl, data)
-                    };
-                }
-
-                if (template.Fields != null && template.Fields.Count != 0)
-                {
-                    embed.Fields = new List<EmbedField>();
-                    foreach (EmbedFieldTemplate field in template.Fields)
-                    {
-                        embed.Fields.Add(new EmbedField(ApplyPlaceholder(field.Name, data), ApplyPlaceholder(field.Value, data), field.Inline));
-                    }
-                }
-
-                if (template.Footer != null && template.Footer.Enabled)
-                {
-                    embed.Footer = new EmbedFooter(ApplyPlaceholder(template.Footer.Text, data), ApplyPlaceholder(template.Footer.IconUrl, data));
-                }
-
             }
 
             return embeds;
@@ -205,9 +155,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
                 if (component is ButtonTemplate button)
                 {
-                    active.Components.Add(button.ToButton(data));
+                    active.Components.Add(button.ToComponent(data));
                     
-                    if (index != 0 && !button.Inline || active.Components.Count == 5)
+                    if (!button.Inline || active.Components.Count == 5)
                     {
                         InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(rows.Count);
                         active = new ActionRowComponent();
@@ -216,7 +166,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 } 
                 else if (component is SelectMenuTemplate selectMenu)
                 {
-                    active.Components.Add(selectMenu.ToSelectMenu(data));
+                    active.Components.Add(selectMenu.ToComponent(data));
                     InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(rows.Count);
                     active = new ActionRowComponent();
                     rows.Add(active);
@@ -224,12 +174,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             }
 
             return rows;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private string ApplyPlaceholder(string text, PlaceholderData value)
-        {
-            return value == null ? text : DiscordExtension.DiscordPlaceholders.ProcessPlaceholders(text, value);
         }
     }
 }

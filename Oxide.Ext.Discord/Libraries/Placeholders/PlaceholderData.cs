@@ -5,9 +5,12 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
@@ -49,6 +52,18 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData AddGuild(DiscordGuild guild) => Add(guild);
 
+        public PlaceholderData AddMessage(DiscordMessage message)
+        {
+            if (message != null)
+            {
+                AddGuildMember(message.Member);
+                AddUser(message.Author);
+                Add(message);
+            }
+            
+            return this;
+        }
+
         /// <summary>
         /// Add a <see cref="GuildMember"/> by <see cref="DiscordClient"/>, GuildId, and UserId
         /// </summary>
@@ -65,8 +80,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns></returns>
         public PlaceholderData AddGuildMember(GuildMember member)
         {
-            AddUser(member?.User);
-            return Add(member);
+            if (member != null)
+            {
+                AddUser(member.User);
+                Add(member);
+            }
+
+            return this;
         }
 
         /// <summary>
@@ -76,8 +96,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData AddUser(DiscordUser user)
         {
-            AddPlayer(user?.Player);
-            return Add(user);
+            if (user != null)
+            {
+                AddPlayer(user.Player);
+                Add(user);
+            }
+
+            return this;
         }
 
         /// <summary>
@@ -111,6 +136,24 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="channel">Channel to add</param>
         /// <returns>This</returns>
         public PlaceholderData AddChannel(DiscordChannel channel) => Add(channel);
+        
+        /// <summary>
+        /// Adds a <see cref="DiscordInteraction"/>
+        /// </summary>
+        /// <param name="interaction">Interaction to add</param>
+        /// <returns>This</returns>
+        public PlaceholderData AddInteraction(DiscordInteraction interaction)
+        {
+            if (interaction != null)
+            {
+                AddGuildMember(interaction.Member);
+                AddUser(interaction.User);
+                AddMessage(interaction.Message);
+                Add(interaction);
+            }
+
+            return this;
+        }
 
         /// <summary>
         /// Adds a <see cref="IPlayer"/>
@@ -127,11 +170,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         public PlaceholderData AddPlugin(Plugin plugin) => Add(nameof(Plugin), plugin);
         
         /// <summary>
+        /// Adds a Unix Timestamp for the current time
+        /// </summary>
+        /// <returns>This</returns>
+        public PlaceholderData AddNowTimestamp() => AddTimestamp(TimeHelpers.SecondsSinceEpoch());
+        
+        /// <summary>
         /// Adds a Unix Timestamp
         /// </summary>
         /// <param name="timestamp">Unix timestamp</param>
         /// <returns>This</returns>
-        public PlaceholderData AddTimestamp(ulong timestamp) => Add(TimestampPlaceholders.TimestampName, timestamp);
+        public PlaceholderData AddTimestamp(long timestamp) => Add(TimestampPlaceholders.TimestampName, timestamp);
 
         /// <summary>
         /// Adds a <see cref="Snowflake"/>

@@ -427,6 +427,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             return null;
         }
 
+        public DiscordChannel GetChannel(Snowflake id)
+        {
+            return Channels[id] ?? Threads[id];
+        }
+
         /// <summary>
         /// Returns the parent channel for a channel if it exists
         /// </summary>

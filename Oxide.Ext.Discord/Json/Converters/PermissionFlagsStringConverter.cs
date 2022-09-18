@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                 return;
             }
             
-            writer.WriteValue(((ulong)value).ToString());
+            writer.WriteValue(value.ToString());
         }
 
         /// <summary>

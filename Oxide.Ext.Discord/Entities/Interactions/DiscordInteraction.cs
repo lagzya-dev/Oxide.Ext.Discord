@@ -148,7 +148,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="plugin">Plugin the localization is for</param>
         /// <param name="langKey">Lang Key to return</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
-        [Obsolete("GetLangMessage has been deprecated and will be removed in the future. Please upgrade to DiscordMessageTemplates for DiscordInteraction localization")]
         public string GetLangMessage(Plugin plugin, string langKey) => DiscordExtension.DiscordLang.GetDiscordInteractionLangMessage(plugin, this, langKey);
         
         /// <summary>
@@ -158,7 +157,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="langKey">Lang Key to return</param>
         /// <param name="args">Localization args</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
-        [Obsolete("GetLangMessage has been deprecated and will be removed in the future. Please upgrade to DiscordMessageTemplates for DiscordInteraction localization")]
         public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordExtension.DiscordLang.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
         
         private InteractionDataOption GetFocusedOption()

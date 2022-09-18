@@ -92,7 +92,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// Converts the template to a <see cref="ButtonComponent"/>
         /// </summary>
         /// <returns></returns>
-        public ButtonComponent ToButton(PlaceholderData data)
+        public override BaseComponent ToComponent(PlaceholderData data)
         {
             ButtonComponent button = new ButtonComponent
             {

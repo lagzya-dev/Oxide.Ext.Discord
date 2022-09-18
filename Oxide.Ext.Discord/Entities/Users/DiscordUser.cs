@@ -150,6 +150,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         public string GetFullUserName => $"{Username}#{Discriminator}";
 
+        public bool IsBot => Bot.HasValue && Bot.Value;
+        public bool IsSystem => System.HasValue && System.Value;
+
         /// <summary>
         /// Returns the IPlayer for the discord user if linked; null otherwise
         /// </summary>

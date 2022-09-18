@@ -17,14 +17,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// Embed Footer Text
         /// </summary>
         [JsonProperty("Footer Text")]
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
 
         /// <summary>
         /// Embed Footer Icon
         /// </summary>
         [JsonProperty("Footer Icon URL")]
-        public string IconUrl { get; set; }
-        
+        public string IconUrl { get; set; } = string.Empty;
+
+        [JsonConstructor]
+        public EmbedFooterTemplate() {}
+
         /// <summary>
         /// Constructor
         /// </summary>

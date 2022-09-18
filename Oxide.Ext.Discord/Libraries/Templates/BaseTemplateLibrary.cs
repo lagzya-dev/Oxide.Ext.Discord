@@ -10,7 +10,6 @@ using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
 {
@@ -80,15 +79,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         
         internal async Task HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateVersion minVersion, IDiscordAsyncCallback callback) where T : BaseTemplate
         {
-            List<Task> tasks = DiscordPool.GetList<Task>();
             foreach (BulkTemplateRegistration<T> registration in templates)
             {
                 T template = registration.Template;
-                tasks.Add( HandleRegisterTemplate(new TemplateId(id, registration.Language), template, minVersion, null));
+                await HandleRegisterTemplate(new TemplateId(id, registration.Language), template, minVersion, null).ConfigureAwait(false);
             }
-
-            await Task.WhenAll(tasks).ConfigureAwait(false);
-            DiscordPool.FreeList(ref tasks);
+            
             callback.InvokeSuccess();
         }
 

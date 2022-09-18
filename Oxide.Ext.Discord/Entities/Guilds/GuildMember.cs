@@ -105,6 +105,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Returns the display name show for the user in a guild
         /// </summary>
         public string DisplayName => string.IsNullOrEmpty(Nickname) ? User?.Username : Nickname;
+        
+        public bool IsBot => User.Bot.HasValue && User.Bot.Value;
         #endregion
         
         #region Helper Methods
