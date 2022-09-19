@@ -593,7 +593,15 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 DiscordGuild guild = _client.GetGuild(channel.GuildId);
                 if (guild != null && guild.IsAvailable)
                 {
-                    guild.Channels[channel.Id] = channel;
+                    if (channel.IsThreadChannel())
+                    {
+                        guild.Threads[channel.Id] = channel;
+                    }
+                    else
+                    {
+                        guild.Channels[channel.Id] = channel;
+                    }
+
                     _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildChannelCreated, channel, guild);
                 }
             }
@@ -623,7 +631,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 DiscordGuild guild = _client.GetGuild(update.GuildId);
                 if (guild != null && guild.IsAvailable)
                 {
-                    DiscordChannel channel = guild.Channels[update.Id];
+                    DiscordChannel channel = guild.GetChannel(update.Id);
                     if (channel != null)
                     {
                         DiscordChannel previous = channel.Update(update);
@@ -631,7 +639,15 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     }
                     else
                     {
-                        guild.Channels[update.Id] = update;
+                        if (update.IsThreadChannel())
+                        {
+                            guild.Threads[update.Id] = update;
+                        }
+                        else
+                        {
+                            guild.Channels[update.Id] = update;
+                        }
+                        
                         _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildChannelUpdated, update, update, guild);
                     }
                 }
@@ -651,6 +667,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             else
             {
                 guild.Channels.Remove(channel.Id);
+                guild.Threads.Remove(channel.Id);
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildChannelDeleted, channel, guild);
             }
         }
