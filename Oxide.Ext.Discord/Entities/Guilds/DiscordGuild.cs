@@ -427,6 +427,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             return null;
         }
 
+        /// <summary>
+        /// Returns the <see cref="DiscordGuild"/> channel or thread by ID
+        /// </summary>
+        /// <param name="id">ID of the thread of channel</param>
+        /// <returns><see cref="DiscordChannel"/></returns>
         public DiscordChannel GetChannel(Snowflake id)
         {
             return Channels[id] ?? Threads[id];

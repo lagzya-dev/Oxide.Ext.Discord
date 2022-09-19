@@ -106,6 +106,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         public string DisplayName => string.IsNullOrEmpty(Nickname) ? User?.Username : Nickname;
         
+        /// <summary>
+        /// Returns if the GuildMember is a bot
+        /// </summary>
         public bool IsBot => User.Bot.HasValue && User.Bot.Value;
         #endregion
         

@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Messages.Embeds;
+using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
 {
@@ -25,6 +27,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         [JsonProperty("Footer Icon URL")]
         public string IconUrl { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         [JsonConstructor]
         public EmbedFooterTemplate() {}
 
@@ -39,6 +44,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
             Text = text;
             IconUrl = iconUrl;
             Enabled = enabled;
+        }
+
+        /// <summary>
+        /// Converts the template to a <see cref="EmbedFooter"/>
+        /// </summary>
+        /// <param name="data">Data to use</param>
+        /// <returns><see cref="EmbedFooter"/></returns>
+        public EmbedFooter ToFooter(PlaceholderData data)
+        {
+            return new EmbedFooter(PlaceholderFormatting.ApplyPlaceholder(Text, data), PlaceholderFormatting.ApplyPlaceholder(IconUrl, data));
         }
     }
 }

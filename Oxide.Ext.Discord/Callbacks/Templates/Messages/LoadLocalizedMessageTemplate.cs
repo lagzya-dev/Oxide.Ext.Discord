@@ -6,21 +6,22 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    internal class LoadLocalizedMessageTemplate : BaseAsyncCallback
+    internal class LoadLocalizedMessageTemplate<TTemplate> : BaseAsyncCallback where TTemplate : BaseTemplate, new()
     {
-        private readonly DiscordMessageTemplates _templates = DiscordExtension.DiscordMessageTemplates;
+        private BaseMessageTemplatesLibrary<TTemplate> _templates;
         private TemplateId _id;
-        private IDiscordAsyncCallback<DiscordMessageTemplate> _callback;
+        private IDiscordAsyncCallback<TTemplate> _callback;
 
-        public static void Start(TemplateId id, IDiscordAsyncCallback<DiscordMessageTemplate> callback)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate> templates, TemplateId id, IDiscordAsyncCallback<TTemplate> callback)
         {
-            LoadLocalizedMessageTemplate load = DiscordPool.Get<LoadLocalizedMessageTemplate>();
-            load.Init(id, callback);
+            LoadLocalizedMessageTemplate<TTemplate> load = DiscordPool.Get<LoadLocalizedMessageTemplate<TTemplate>>();
+            load.Init(templates, id, callback);
             load.Run();
         }
         
-        private void Init(TemplateId id, IDiscordAsyncCallback<DiscordMessageTemplate> callback)
+        private void Init(BaseMessageTemplatesLibrary<TTemplate> templates, TemplateId id, IDiscordAsyncCallback<TTemplate> callback)
         {
+            _templates = templates;
             _id = id;
             _callback = callback;
         }
@@ -32,6 +33,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 
         protected override void EnterPool()
         {
+            _templates = null;
             _id = default(TemplateId);
             _callback = null;
         }

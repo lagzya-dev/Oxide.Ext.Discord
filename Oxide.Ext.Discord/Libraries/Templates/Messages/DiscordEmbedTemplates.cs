@@ -1,3 +1,4 @@
+using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
@@ -5,12 +6,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// <summary>
     /// Modal Templates Library
     /// </summary>
-    public class DiscordMessageTemplates : BaseMessageTemplatesLibrary<DiscordMessageTemplate>
+    public class DiscordEmbedTemplates : BaseMessageTemplatesLibrary<DiscordEmbedTemplate>
     {
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="logger"></param>
-        internal DiscordMessageTemplates(ILogger logger) : base(logger) { }
+        internal DiscordEmbedTemplates(ILogger logger) : base(logger) { }
     }
 }

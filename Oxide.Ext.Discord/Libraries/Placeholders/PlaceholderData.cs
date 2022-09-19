@@ -52,6 +52,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData AddGuild(DiscordGuild guild) => Add(guild);
 
+        /// <summary>
+        /// Add a <see cref="DiscordMessage"/>
+        /// </summary>
+        /// <param name="message">Message to add</param>
+        /// <returns>This</returns>
         public PlaceholderData AddMessage(DiscordMessage message)
         {
             if (message != null)

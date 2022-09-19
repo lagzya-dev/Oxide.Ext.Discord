@@ -29,11 +29,9 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <summary>
         /// Embed Footer Constructor
         /// </summary>
-        public EmbedFooter()
-        {
-            
-        }
-        
+        [JsonConstructor]
+        public EmbedFooter() {}
+
         /// <summary>
         /// Embed Footer Constructor
         /// </summary>

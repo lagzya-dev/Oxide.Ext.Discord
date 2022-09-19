@@ -69,13 +69,13 @@ namespace Oxide.Ext.Discord.Extensions
         }
 
         /// <summary>
-        /// Creates a copy of a hash with it's current key value pairs
+        /// Creates a clone of a hash with it's current key value pairs
         /// </summary>
         /// <param name="hash">Hash to be copied</param>
         /// <typeparam name="TKey"></typeparam>
         /// <typeparam name="TValue"></typeparam>
         /// <returns>Copied Hash</returns>
-        internal static Hash<TKey, TValue> Copy<TKey, TValue>(this Hash<TKey, TValue> hash)
+        internal static Hash<TKey, TValue> Clone<TKey, TValue>(this Hash<TKey, TValue> hash)
         {
             Hash<TKey, TValue> copy = new Hash<TKey, TValue>();
             foreach (KeyValuePair<TKey, TValue> value in hash)

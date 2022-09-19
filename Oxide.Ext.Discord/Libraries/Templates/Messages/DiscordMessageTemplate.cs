@@ -10,7 +10,7 @@ using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Components;
+using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// Embeds for the message
         /// </summary>
         [JsonProperty("Message Embeds")]
-        public List<DiscordEmbedTemplate> Embeds { get; set; } = new List<DiscordEmbedTemplate>();
+        public List<MessageEmbedTemplate> Embeds { get; set; } = new List<MessageEmbedTemplate>();
 
         /// <summary>
         /// Buttons for the message
@@ -40,6 +40,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         [JsonProperty("Message Components")]
         public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         [JsonConstructor]
         public DiscordMessageTemplate() : base(TemplateType.Message, new TemplateVersion(1, 0, 0)) {}
 
@@ -130,7 +133,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             for (int index = 0; index < Embeds.Count; index++)
             {
-                DiscordEmbedTemplate template = Embeds[index];
+                BaseEmbedTemplate template = Embeds[index];
                 if (template.Enabled)
                 {
                     embeds.Add(template.ToEmbed(data));

@@ -773,7 +773,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
             
-            Hash<Snowflake, DiscordEmoji> previous = guild.Emojis.Copy();
+            Hash<Snowflake, DiscordEmoji> previous = guild.Emojis.Clone();
 
             List<Snowflake> removedEmojis = DiscordPool.GetList<Snowflake>();
 
@@ -822,7 +822,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
             
-            Hash<Snowflake, DiscordSticker> previous = guild.Stickers.Copy();
+            Hash<Snowflake, DiscordSticker> previous = guild.Stickers.Clone();
 
             List<Snowflake> removedStickers = DiscordPool.GetList<Snowflake>();
 

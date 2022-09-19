@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Json.Utilities;
 
 namespace Oxide.Ext.Discord.Json.Converters
@@ -50,7 +51,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         {
             if (reader.TokenType == JsonToken.Null)
             {
-                if (!IsNullable(objectType))
+                if (!objectType.IsNullable())
                 {
                     throw new JsonException($"Cannot convert null value to {objectType}. Path: {reader.Path}");
                 }
@@ -65,7 +66,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                     return Enum.Parse(objectType, reader.Value.ToString());
                 }
 
-                return GetDefault(objectType);
+                return objectType.GetDefault();
             }
 
             if (reader.TokenType == JsonToken.String)
@@ -77,7 +78,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                     return Enum.Parse(objectType, enumName);
                 }
                 
-                return GetDefault(objectType);
+                return objectType.GetDefault();
             }
 
             throw new JsonException($"Unexpected token {reader.TokenType} when parsing enum. Path: {reader.Path}");
@@ -90,17 +91,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
-            return objectType != null && ((IsNullable(objectType) ? Nullable.GetUnderlyingType(objectType) : objectType)?.IsEnum ?? false);
-        }
-
-        private object GetDefault(Type type)
-        {
-            return type.IsValueType ? Activator.CreateInstance(type) : null;
-        }
-        
-        private bool IsNullable(Type objectType)
-        {
-            return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
+            return objectType != null && ((objectType.IsNullable() ? Nullable.GetUnderlyingType(objectType) : objectType)?.IsEnum ?? false);
         }
     }
 }

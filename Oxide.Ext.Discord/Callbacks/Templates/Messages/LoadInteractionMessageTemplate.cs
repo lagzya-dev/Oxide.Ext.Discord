@@ -7,22 +7,23 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    internal class LoadInteractionMessageTemplate : BaseAsyncCallback
+    internal class LoadInteractionMessageTemplate<TTemplate> : BaseAsyncCallback where TTemplate : BaseTemplate, new()
     {
-        private readonly DiscordMessageTemplates _templates = DiscordExtension.DiscordMessageTemplates;
+        private BaseMessageTemplatesLibrary<TTemplate> _templates;
         private TemplateId _id;
         private DiscordInteraction _interaction;
-        private IDiscordAsyncCallback<DiscordMessageTemplate> _callback;
+        private IDiscordAsyncCallback<TTemplate> _callback;
 
-        public static void Start(TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordMessageTemplate> callback)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate> templates, TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<TTemplate> callback)
         {
-            LoadInteractionMessageTemplate load = DiscordPool.Get<LoadInteractionMessageTemplate>();
-            load.Init(id, interaction, callback);
+            LoadInteractionMessageTemplate<TTemplate> load = DiscordPool.Get<LoadInteractionMessageTemplate<TTemplate>>();
+            load.Init(templates, id, interaction, callback);
             load.Run();
         }
         
-        private void Init(TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<DiscordMessageTemplate> callback)
+        private void Init(BaseMessageTemplatesLibrary<TTemplate> templates, TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<TTemplate> callback)
         {
+            _templates = templates;
             _id = id;
             _interaction = interaction;
             _callback = callback;
@@ -35,6 +36,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 
         protected override void EnterPool()
         {
+            _templates = null;
             _id = default(TemplateId);
             _interaction = null;
             _callback = null;

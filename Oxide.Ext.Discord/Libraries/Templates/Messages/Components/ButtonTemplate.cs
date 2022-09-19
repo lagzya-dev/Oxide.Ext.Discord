@@ -3,7 +3,7 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Components
+namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
 {
     /// <summary>
     /// Template for Button Components

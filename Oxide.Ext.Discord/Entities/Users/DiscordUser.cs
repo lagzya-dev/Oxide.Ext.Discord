@@ -150,7 +150,14 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         public string GetFullUserName => $"{Username}#{Discriminator}";
 
+        /// <summary>
+        /// Returns if the DiscordUser is a bot
+        /// </summary>
         public bool IsBot => Bot.HasValue && Bot.Value;
+        
+        /// <summary>
+        /// Returns if the DiscordUser is a system user
+        /// </summary>
         public bool IsSystem => System.HasValue && System.Value;
 
         /// <summary>
@@ -258,7 +265,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void SendGlobalTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalMessageTemplate(plugin, templateName).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {

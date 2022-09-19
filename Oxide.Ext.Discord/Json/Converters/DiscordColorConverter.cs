@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Json.Converters
 {
@@ -25,7 +26,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         {
             if (reader.TokenType == JsonToken.Null)
             {
-                if (!IsNullable(objectType))
+                if (!objectType.IsNullable())
                 {
                     throw new JsonException($"Cannot convert null value to {objectType}. Path: {reader.Path}");
                 }
@@ -46,12 +47,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// </summary>
         public override bool CanConvert(Type objectType)
         {
-            return objectType != null && (IsNullable(objectType) ? Nullable.GetUnderlyingType(objectType) : objectType) == typeof(DiscordColor);
-        }
-        
-        private bool IsNullable(Type objectType)
-        {
-            return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
+            return objectType != null && (objectType.IsNullable() ? Nullable.GetUnderlyingType(objectType) : objectType) == typeof(DiscordColor);
         }
     }
 }

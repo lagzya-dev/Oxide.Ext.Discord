@@ -14,7 +14,6 @@ using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Libraries.Templates.Commands;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
-using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using AppDomain = System.AppDomain;
@@ -54,6 +53,8 @@ namespace Oxide.Ext.Discord
         internal static DiscordSubscriptions DiscordSubscriptions;
         internal static DiscordLang DiscordLang;
         internal static DiscordMessageTemplates DiscordMessageTemplates;
+        internal static DiscordEmbedTemplates DiscordEmbedTemplates;
+        internal static DiscordEmbedFieldTemplates DiscordEmbedFieldTemplates;
         internal static DiscordModalTemplates DiscordModalTemplates;
         internal static DiscordCommandLocalizations DiscordCommandLocalizations;
         internal static DiscordPlaceholders DiscordPlaceholders;
@@ -118,6 +119,8 @@ namespace Oxide.Ext.Discord
             DiscordSubscriptions = new DiscordSubscriptions(GlobalLogger);
             DiscordLang = new DiscordLang(GlobalLogger);
             DiscordMessageTemplates = new DiscordMessageTemplates(GlobalLogger);
+            DiscordEmbedTemplates = new DiscordEmbedTemplates(GlobalLogger);
+            DiscordEmbedFieldTemplates = new DiscordEmbedFieldTemplates(GlobalLogger);
             DiscordModalTemplates = new DiscordModalTemplates(GlobalLogger);
             DiscordCommandLocalizations = new DiscordCommandLocalizations(GlobalLogger);
             DiscordPlaceholders = new DiscordPlaceholders(GlobalLogger);
@@ -127,6 +130,8 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordCommand), DiscordCommand);
             Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);
             Manager.RegisterLibrary(nameof(DiscordMessageTemplates), DiscordMessageTemplates);
+            Manager.RegisterLibrary(nameof(DiscordEmbedTemplates), DiscordEmbedTemplates);
+            Manager.RegisterLibrary(nameof(DiscordEmbedFieldTemplates), DiscordEmbedFieldTemplates);
             Manager.RegisterLibrary(nameof(DiscordModalTemplates), DiscordModalTemplates);
             Manager.RegisterLibrary(nameof(DiscordCommandLocalizations), DiscordCommandLocalizations);
             Manager.RegisterLibrary(nameof(DiscordPlaceholders), DiscordPlaceholders);

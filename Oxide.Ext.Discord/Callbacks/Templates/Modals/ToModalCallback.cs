@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Modals;
+using Oxide.Ext.Discord.Libraries.Templates.Messages.Modals;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Modals

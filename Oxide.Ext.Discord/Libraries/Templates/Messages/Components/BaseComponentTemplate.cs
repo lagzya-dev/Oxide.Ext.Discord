@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Components
+namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
 {
     /// <summary>
     /// Base Template for Message Components
@@ -23,6 +23,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         [JsonProperty("Type")]
         public MessageComponentType Type { get; set; }
 
+        /// <summary>
+        /// Returns the built component
+        /// </summary>
+        /// <param name="data"><see cref="PlaceholderData"/> to use</param>
+        /// <returns>Component</returns>
         public abstract BaseComponent ToComponent(PlaceholderData data);
     }
 }

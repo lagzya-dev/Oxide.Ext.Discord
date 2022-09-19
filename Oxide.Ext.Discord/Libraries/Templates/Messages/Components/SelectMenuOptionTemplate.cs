@@ -3,7 +3,7 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Components
+namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
 {
     /// <summary>
     /// Template for Select Menu Options
@@ -70,6 +70,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
             Default = @default;
         }
 
+        /// <summary>
+        /// Converts the template to <see cref="SelectMenuOption"/>
+        /// </summary>
+        /// <param name="data"><see cref="PlaceholderData"/> to use</param>
+        /// <returns><see cref="SelectMenuOption"/></returns>
         public SelectMenuOption ToOption(PlaceholderData data)
         {
             return new SelectMenuOption

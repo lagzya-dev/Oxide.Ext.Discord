@@ -349,7 +349,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordModalTemplates.GetModalTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordModalTemplates.GetMessageTemplateInternal(plugin, templateName, this).OnSuccess(template =>
             {
                 template.ToModalInternalAsync(placeholders, message).OnSuccess(response =>
                 {

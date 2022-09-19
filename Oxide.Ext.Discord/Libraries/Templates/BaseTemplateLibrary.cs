@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         
         internal readonly HashSet<TemplateId> RegisteredTemplates = new HashSet<TemplateId>();
 
-        private readonly JsonSerializer _serializer = JsonSerializer.Create(new JsonSerializerSettings{Formatting = Formatting.Indented});
+        private static readonly JsonSerializer Serializer = JsonSerializer.Create(new JsonSerializerSettings{Formatting = Formatting.Indented});
 
         /// <summary>
         /// Constructor
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             {
                 using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
-                    return await DiscordJsonReader.DeserializeFromAsync<T>(_serializer, stream).ConfigureAwait(false);
+                    return await DiscordJsonReader.DeserializeFromAsync<T>(Serializer, stream).ConfigureAwait(false);
                 }
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             FileMode mode = File.Exists(path) ? FileMode.Truncate : FileMode.Create;
 
             FileStream stream = new FileStream(path, mode);
-            await DiscordJsonWriter.WriteAndCopyAsync(_serializer, template, stream).ConfigureAwait(false);
+            await DiscordJsonWriter.WriteAndCopyAsync(Serializer, template, stream).ConfigureAwait(false);
             await stream.FlushAsync().ConfigureAwait(false);
             stream.Dispose();
         }
