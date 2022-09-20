@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// <summary>
     /// Represents a base message in discord
     /// </summary>
-    public abstract class BaseMessageCreate : IFileAttachments, IDiscordValidation, IDiscordTemplateMessage
+    public abstract class BaseMessageCreate : IFileAttachments, IDiscordValidation, IDiscordMessageTemplate
     {
         /// <summary>
         /// Contents of the message

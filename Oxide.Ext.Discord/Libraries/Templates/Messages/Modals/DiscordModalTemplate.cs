@@ -1,12 +1,8 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Callbacks.Async;
-using Oxide.Ext.Discord.Callbacks.Templates.Modals;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
 
@@ -16,7 +12,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
     /// Template used for Modal Message Component
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordModalTemplate : BaseTemplate
+    public class DiscordModalTemplate : BaseMessageTemplate<InteractionModalMessage>
     {
         /// <summary>
         /// Title of the modal
@@ -39,15 +35,27 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
         /// <summary>
         /// Constructor
         /// </summary>
+        [JsonConstructor]
         public DiscordModalTemplate() : base(TemplateType.Modal, new TemplateVersion(1, 0, 0)) {}
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="customId"></param>
+        public DiscordModalTemplate(string title, string customId) : this()
+        {
+            Title = title;
+            CustomId = customId;
+        }
+        
         /// <summary>
         /// Converts the template to a <see cref="InteractionModalMessage"/>
         /// </summary>
         /// <param name="data"></param>
         /// <param name="modal"></param>
         /// <returns></returns>
-        public InteractionModalMessage ToModal(PlaceholderData data = null, InteractionModalMessage modal = null)
+        public override InteractionModalMessage ToEntity(PlaceholderData data = null, InteractionModalMessage modal = null)
         {
             if (modal == null)
             {
@@ -72,34 +80,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
             }
 
             return modal;
-        }
-        
-        /// <summary>
-        /// Converts the template to a <see cref="InteractionModalMessage"/> async
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="message"></param>
-        /// <returns></returns>
-        public IDiscordAsyncCallback<InteractionModalMessage> ToModalAsync(PlaceholderData data, InteractionModalMessage message = null)
-        {
-            return ToModalInternalAsync(data, message, PluginAsyncCallback<InteractionModalMessage>.Create());
-        }
-        
-        internal IDiscordAsyncCallback<InteractionModalMessage> ToModalInternalAsync(PlaceholderData data, InteractionModalMessage message = null, IDiscordAsyncCallback<InteractionModalMessage> callback = null)
-        {
-            if (callback == null)
-            {
-                callback = InternalAsyncCallback<InteractionModalMessage>.Create();
-            }
-            
-            ToModalCallback.Start(this, data, message, callback);
-            return callback;
-        }
-        
-        internal async Task HandleToModalAsync(PlaceholderData data, InteractionModalMessage message, IDiscordAsyncCallback<InteractionModalMessage> callback)
-        {
-            InteractionModalMessage modal = await Task.FromResult(ToModal(data, message)).ConfigureAwait(false);
-            callback.InvokeSuccess(modal);
         }
     }
 }

@@ -324,7 +324,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -349,9 +349,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordModalTemplates.GetMessageTemplateInternal(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordModalTemplates.GetMessageTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
             {
-                template.ToModalInternalAsync(placeholders, message).OnSuccess(response =>
+                template.ToEntityAsync(placeholders, message).OnSuccess(response =>
                 {
                     CreateInteractionResponse(client, response, callback, error);
                 });
@@ -473,7 +473,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternal(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {

@@ -1,48 +1,46 @@
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
+using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    /// <summary>
-    /// Callback for parsing a <see cref="DiscordEmbedTemplate"/> to a <see cref="DiscordEmbed"/>
-    /// </summary>
-    public class ToEmbedCallback : BaseAsyncCallback
+    public class ToEntityCallback<TTemplate, TEntity> : BaseAsyncCallback 
+        where TTemplate : BaseMessageTemplate<TEntity> 
+        where TEntity : class 
     {
-        private DiscordEmbedTemplate _template;
+        private TTemplate _template;
         private PlaceholderData _data;
-        private DiscordEmbed _embed;
-        private IDiscordAsyncCallback<DiscordEmbed> _callback;
+        private TEntity _entity;
+        private IDiscordAsyncCallback<TEntity> _callback;
 
         /// <summary>
         /// Starts the callback
         /// </summary>
         /// <param name="template"></param>
         /// <param name="data"></param>
-        /// <param name="embed"></param>
+        /// <param name="entity"></param>
         /// <param name="callback"></param>
-        public static void Start(DiscordEmbedTemplate template, PlaceholderData data, DiscordEmbed embed, IDiscordAsyncCallback<DiscordEmbed> callback)
+        public static void Start(TTemplate template, PlaceholderData data, TEntity entity, IDiscordAsyncCallback<TEntity> callback)
         {
-            ToEmbedCallback handler = DiscordPool.Get<ToEmbedCallback>();
-            handler.Init(template, data, embed, callback);
+            ToEntityCallback<TTemplate, TEntity> handler = DiscordPool.Get<ToEntityCallback<TTemplate, TEntity>>();
+            handler.Init(template, data, entity, callback);
             handler.Run();
         }
         
-        private void Init(DiscordEmbedTemplate template, PlaceholderData data, DiscordEmbed embed, IDiscordAsyncCallback<DiscordEmbed> callback)
+        private void Init(TTemplate template, PlaceholderData data, TEntity entity, IDiscordAsyncCallback<TEntity> callback)
         {
             _template = template;
             _data = data;
-            _embed = embed;
+            _entity = entity;
             _callback = callback;
         }
         
         ///<inheritdoc/>
         protected override Task HandleCallback()
         {
-            return _template.HandleToEmbedAsync(_data, _embed, _callback);
+            return _template.HandleToEntityAsync(_data, _entity, _callback);
         }
 
         ///<inheritdoc/>
@@ -50,7 +48,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         {
             _template = null;
             _data = null;
-            _embed = null;
+            _entity = null;
             _callback = null;
         }
 

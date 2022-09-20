@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Callbacks.Async;
-using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
@@ -19,7 +17,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// Discord Message Template for sending localized Discord Messages
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordMessageTemplate : BaseTemplate
+    public class DiscordMessageTemplate : BaseMessageTemplate<IDiscordMessageTemplate>
     {
         /// <summary>
         /// String contents of the message
@@ -50,7 +48,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// Constructor
         /// </summary>
         /// <param name="content"></param>
-        public DiscordMessageTemplate(string content = "") : this()
+        public DiscordMessageTemplate(string content) : this()
         {
             Content = content;
         }
@@ -61,11 +59,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// </summary>
         /// <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
         /// <returns><see cref="DiscordMessageTemplate"/> converted to type {T} message</returns>
-        public T ToMessage<T>(T message = null) where T : class, IDiscordTemplateMessage, new()
+        public T ToMessage<T>(T message = null) where T : class, IDiscordMessageTemplate, new()
         {
             return ToMessage(null, message);
         }
-
+        
         /// <summary>
         /// Converts the <see cref="DiscordMessageTemplate"/> to a {T} message
         /// {T} supports all message types
@@ -73,13 +71,35 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <param name="data">Placeholder Data for the template</param>
         /// <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
         /// <returns><see cref="DiscordMessageTemplate"/> converted to type {T} message</returns>
-        public T ToMessage<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
+        public T ToMessage<T>(PlaceholderData data, T message = null) where T : class, IDiscordMessageTemplate, new()
         {
             if (message == null)
             {
                 message = new T();
             }
 
+            return (T)ToEntity(data, message);
+        }
+        
+
+        public IDiscordAsyncCallback<T> ToMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordMessageTemplate, new()
+        {
+            return ToMessageInternalAsync(data, message, PluginAsyncCallback<T>.Create());
+        }
+        
+        public IDiscordAsyncCallback<T> ToMessageInternalAsync<T>(PlaceholderData data, T message = null, IDiscordAsyncCallback<T> callback = null) where T : class, IDiscordMessageTemplate, new()
+        {
+            if (callback == null)
+            {
+                callback = InternalAsyncCallback<T>.Create();
+            }
+            
+            ToEntityInternalAsync(data, message, (IDiscordAsyncCallback<IDiscordMessageTemplate>)callback);
+            return callback;
+        }
+        
+        public override IDiscordMessageTemplate ToEntity(PlaceholderData data, IDiscordMessageTemplate message)
+        {
             if (!string.IsNullOrEmpty(Content))
             {
                 message.Content = PlaceholderFormatting.ApplyPlaceholder(Content, data);
@@ -98,35 +118,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return message;
         }
 
-        /// <summary>
-        /// Converts the template type {T} async
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="message"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public IDiscordAsyncCallback<T> ToMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordTemplateMessage, new()
-        {
-            return ToMessageInternalAsync(data, message, PluginAsyncCallback<T>.Create());
-        }
-        
-        internal IDiscordAsyncCallback<T> ToMessageInternalAsync<T>(PlaceholderData data, T message = null, IDiscordAsyncCallback<T> callback = null) where T : class, IDiscordTemplateMessage, new()
-        {
-            if (callback == null)
-            {
-                callback = InternalAsyncCallback<T>.Create();
-            }
-            
-            ToMessageCallback<T>.Start(this, data, message, callback);
-            return callback;
-        }
-
-        internal async Task HandleToMessageAsync<T>(PlaceholderData data, T message, IDiscordAsyncCallback<T> callback) where T : class, IDiscordTemplateMessage, new()
-        {
-            T result = await Task.FromResult(ToMessage(data, message)).ConfigureAwait(false); 
-            callback.InvokeSuccess(result);
-        }
-
         private List<DiscordEmbed> CreateEmbed(PlaceholderData data)
         {
             List<DiscordEmbed> embeds = new List<DiscordEmbed>();
@@ -136,7 +127,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 BaseEmbedTemplate template = Embeds[index];
                 if (template.Enabled)
                 {
-                    embeds.Add(template.ToEmbed(data));
+                    embeds.Add(template.ToEntity(data));
                 }
             }
 

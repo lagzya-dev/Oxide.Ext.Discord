@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Libraries.Templates;
+using Oxide.Ext.Discord.Libraries.Templates.Messages;
 
 namespace Oxide.Ext.Discord.Interfaces.Entities.Messages
 {
     /// <summary>
-    /// Interfaces for <see cref="BaseTemplateLibrary"/> Messages
+    /// Interfaces for <see cref="DiscordMessageTemplates"/> Messages
     /// </summary>
-    public interface IDiscordTemplateMessage
+    public interface IDiscordMessageTemplate
     {
         /// <summary>
         /// Content of the message

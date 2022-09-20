@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
     /// Discord Template for embed
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public abstract class BaseEmbedTemplate : BaseTemplate
+    public abstract class BaseEmbedTemplate : BaseMessageTemplate<DiscordEmbed>
     {
         /// <summary>
         /// If this embed is enabled
@@ -95,7 +95,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// <param name="data">Data to use</param>
         /// <param name="embed">Initial embed to use</param>
         /// <returns></returns>
-        public DiscordEmbed ToEmbed(PlaceholderData data, DiscordEmbed embed = null)
+        public override DiscordEmbed ToEntity(PlaceholderData data, DiscordEmbed embed = null)
         {
             if (embed == null)
             {
@@ -138,7 +138,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
                 embed.Fields = new List<EmbedField>();
                 for (int index = 0; index < Fields.Count; index++)
                 {
-                    embed.Fields.Add(Fields[index].ToField(data));
+                    embed.Fields.Add(Fields[index].ToEntity(data));
                 }
             }
 

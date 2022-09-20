@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
         
-        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateVersion minVersion, IDiscordAsyncCallback callback) where T : BaseTemplate
+        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordAsyncCallback callback) where T : BaseTemplate
         {
             if (template.Version < minVersion)
             {
@@ -60,16 +60,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 Logger.Warning("Trying to register id {0} from plugin {1} with language {2} multiple times.", id.TemplateName, id.GetPluginName(), id.GetLanguageName());
             }
             
-            string path = GetTemplatePath(TemplateType.Message, id);
+            string path = GetTemplatePath(type, id);
             if (File.Exists(path))
             {
-                T existingTemplate = await LoadTemplate<T>(TemplateType.Message, id).ConfigureAwait(false);
+                T existingTemplate = await LoadTemplate<T>(type, id).ConfigureAwait(false);
                 if (existingTemplate != null && existingTemplate.Version >= minVersion)
                 {
                     return;
                 }
 
-                await BackupTemplateFiles<T>(TemplateType.Message, id, minVersion).ConfigureAwait(false);
+                await BackupTemplateFiles<T>(type, id, minVersion).ConfigureAwait(false);
             }
             
             await CreateFile(path, template).ConfigureAwait(false);
@@ -77,12 +77,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             callback?.InvokeSuccess();
         }
         
-        internal async Task HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateVersion minVersion, IDiscordAsyncCallback callback) where T : BaseTemplate
+        internal async Task HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, IDiscordAsyncCallback callback) where T : BaseTemplate
         {
             foreach (BulkTemplateRegistration<T> registration in templates)
             {
                 T template = registration.Template;
-                await HandleRegisterTemplate(new TemplateId(id, registration.Language), template, minVersion, null).ConfigureAwait(false);
+                await HandleRegisterTemplate(new TemplateId(id, registration.Language), template, type, minVersion, null).ConfigureAwait(false);
             }
             
             callback.InvokeSuccess();

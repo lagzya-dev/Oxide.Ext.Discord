@@ -10,28 +10,30 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
         private BaseTemplateLibrary _library;
         private TemplateId _id;
         private T _template;
+        private TemplateType _type;
         private TemplateVersion _minVersion;
         private IDiscordAsyncCallback _callback;
         
-        public static void Start(BaseTemplateLibrary library, TemplateId id, T template, TemplateVersion minVersion, IDiscordAsyncCallback callback)
+        public static void Start(BaseTemplateLibrary library, TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordAsyncCallback callback)
         {
             RegisterTemplateCallback<T> register = DiscordPool.Get<RegisterTemplateCallback<T>>();
-            register.Init(library, id, template, minVersion, callback);
+            register.Init(library, id, template, type, minVersion, callback);
             register.Run();
         }
         
-        private void Init(BaseTemplateLibrary library, TemplateId id, T template, TemplateVersion minVersion, IDiscordAsyncCallback callback)
+        private void Init(BaseTemplateLibrary library, TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordAsyncCallback callback)
         {
             _library = library;
             _id = id;
             _template = template;
+            _type = type;
             _minVersion = minVersion;
             _callback = callback;
         }
 
         protected override  Task HandleCallback()
         {
-            return _library.HandleRegisterTemplate(_id, _template, _minVersion, _callback);
+            return _library.HandleRegisterTemplate(_id, _template, _type, _minVersion, _callback);
         }
 
         protected override void EnterPool()
@@ -39,6 +41,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
             _library = null;
             _id = default(TemplateId);
             _template = null;
+            _type = default(TemplateType);
             _minVersion = default(TemplateVersion);
             _callback = null;
         }

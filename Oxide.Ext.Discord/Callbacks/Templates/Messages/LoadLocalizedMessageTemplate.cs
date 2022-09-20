@@ -6,20 +6,22 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    internal class LoadLocalizedMessageTemplate<TTemplate> : BaseAsyncCallback where TTemplate : BaseTemplate, new()
+    internal class LoadLocalizedMessageTemplate<TTemplate, TEntity> : BaseAsyncCallback 
+        where TTemplate : BaseMessageTemplate<TEntity>, new()
+        where TEntity : class
     {
-        private BaseMessageTemplatesLibrary<TTemplate> _templates;
+        private BaseMessageTemplatesLibrary<TTemplate, TEntity> _templates;
         private TemplateId _id;
         private IDiscordAsyncCallback<TTemplate> _callback;
 
-        public static void Start(BaseMessageTemplatesLibrary<TTemplate> templates, TemplateId id, IDiscordAsyncCallback<TTemplate> callback)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, IDiscordAsyncCallback<TTemplate> callback)
         {
-            LoadLocalizedMessageTemplate<TTemplate> load = DiscordPool.Get<LoadLocalizedMessageTemplate<TTemplate>>();
+            LoadLocalizedMessageTemplate<TTemplate, TEntity> load = DiscordPool.Get<LoadLocalizedMessageTemplate<TTemplate, TEntity>>();
             load.Init(templates, id, callback);
             load.Run();
         }
         
-        private void Init(BaseMessageTemplatesLibrary<TTemplate> templates, TemplateId id, IDiscordAsyncCallback<TTemplate> callback)
+        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, IDiscordAsyncCallback<TTemplate> callback)
         {
             _templates = templates;
             _id = id;
@@ -28,7 +30,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 
         protected override Task HandleCallback()
         {
-            return _templates.HandleGetLocalizedMessageTemplate(_id, _callback);
+            return _templates.HandleGetLocalizedMessageTemplateAsync(_id, _callback);
         }
 
         protected override void EnterPool()

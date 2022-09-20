@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
 
         protected override Task HandleCallback()
         {
-            return _localizations.HandleApplyCommandLocalizations(_id, _create, _callback);
+            return _localizations.HandleApplyCommandLocalizationsAsync(_id, _create, _callback);
         }
 
         protected override void EnterPool()

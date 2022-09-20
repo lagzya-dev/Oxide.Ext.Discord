@@ -275,6 +275,8 @@ namespace Oxide.Ext.Discord
             DiscordExtension.DiscordCommand.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordSubscriptions.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordMessageTemplates.OnPluginUnloaded(plugin);
+            DiscordExtension.DiscordEmbedTemplates.OnPluginUnloaded(plugin);
+            DiscordExtension.DiscordEmbedFieldTemplates.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordModalTemplates.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordPlaceholders.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordLang.OnPluginUnloaded(plugin);

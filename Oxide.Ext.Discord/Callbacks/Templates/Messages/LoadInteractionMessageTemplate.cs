@@ -7,21 +7,23 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    internal class LoadInteractionMessageTemplate<TTemplate> : BaseAsyncCallback where TTemplate : BaseTemplate, new()
+    internal class LoadInteractionMessageTemplate<TTemplate, TEntity> : BaseAsyncCallback 
+        where TTemplate : BaseMessageTemplate<TEntity>, new()
+        where TEntity : class
     {
-        private BaseMessageTemplatesLibrary<TTemplate> _templates;
+        private BaseMessageTemplatesLibrary<TTemplate, TEntity> _templates;
         private TemplateId _id;
         private DiscordInteraction _interaction;
         private IDiscordAsyncCallback<TTemplate> _callback;
 
-        public static void Start(BaseMessageTemplatesLibrary<TTemplate> templates, TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<TTemplate> callback)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<TTemplate> callback)
         {
-            LoadInteractionMessageTemplate<TTemplate> load = DiscordPool.Get<LoadInteractionMessageTemplate<TTemplate>>();
+            LoadInteractionMessageTemplate<TTemplate, TEntity> load = DiscordPool.Get<LoadInteractionMessageTemplate<TTemplate, TEntity>>();
             load.Init(templates, id, interaction, callback);
             load.Run();
         }
         
-        private void Init(BaseMessageTemplatesLibrary<TTemplate> templates, TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<TTemplate> callback)
+        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<TTemplate> callback)
         {
             _templates = templates;
             _id = id;
@@ -31,7 +33,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 
         protected override Task HandleCallback()
         {
-            return _templates.HandleGetMessageTemplate(_id, _interaction, _callback);
+            return _templates.HandleGetMessageTemplateAsync(_id, _interaction, _callback);
         }
 
         protected override void EnterPool()

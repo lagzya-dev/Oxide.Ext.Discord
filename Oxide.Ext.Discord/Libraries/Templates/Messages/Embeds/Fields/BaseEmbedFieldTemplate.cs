@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields
     /// Discord Template for Embed Field
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public abstract class BaseEmbedFieldTemplate : BaseTemplate
+    public abstract class BaseEmbedFieldTemplate : BaseMessageTemplate<EmbedField>
     {
         /// <summary>
         /// Title of the field
@@ -42,7 +42,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields
         /// <param name="data">Data to use</param>
         /// <param name="field">Initial field (Optional)</param>
         /// <returns></returns>
-        public EmbedField ToField(PlaceholderData data, EmbedField field = null)
+        public override EmbedField ToEntity(PlaceholderData data, EmbedField field = null)
         {
             if (field == null)
             {
