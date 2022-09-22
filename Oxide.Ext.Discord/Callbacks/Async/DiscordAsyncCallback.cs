@@ -13,18 +13,14 @@ namespace Oxide.Ext.Discord.Callbacks.Async
     /// </summary>
     public class DiscordAsyncCallback : BasePoolable, IDiscordAsyncCallback
     {
-        public Snowflake Id { get; private set; }
-        public bool IsCompleted { get; private set; }
-        
         protected bool IsInternal;
         
-        private bool _isGrouped;
-        private readonly Action _successCallback;
+        private readonly Action _callback;
         private readonly List<Action> _success = new List<Action>();
 
         public DiscordAsyncCallback()
         {
-            _successCallback = InvokeSuccessInternal;
+            _callback = InvokeSuccessInternal;
         }
 
         internal static DiscordAsyncCallback Create(bool isInternal = false)
@@ -41,15 +37,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         /// <returns>this</returns>
         public IDiscordAsyncCallback OnSuccess(Action complete)
         {
-            if (!IsCompleted)
-            {
-                _success.Add(complete);
-            }
-            else
-            {
-                complete.Invoke();
-            }
-           
+            _success.Add(complete);
             return this;
         }
         
@@ -66,13 +54,8 @@ namespace Oxide.Ext.Discord.Callbacks.Async
                     callback.Invoke();
                 }
             }
-
-            IsCompleted = true;
-
-            if (!_isGrouped)
-            {
-                Dispose();
-            }
+            
+            Dispose();
         }
 
         /// <summary>
@@ -86,18 +69,13 @@ namespace Oxide.Ext.Discord.Callbacks.Async
                 return;
             }
             
-            Interface.Oxide.NextTick(_successCallback);
+            Interface.Oxide.NextTick(_callback);
         }
 
         ///<inheritdoc/>
         protected override void EnterPool()
         {
             _success.Clear();
-        }
-
-        protected override void LeavePool()
-        {
-            Id = SnowflakeIdGenerator.Generate();
         }
 
         protected override void DisposeInternal()

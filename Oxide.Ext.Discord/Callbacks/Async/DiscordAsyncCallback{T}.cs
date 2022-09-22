@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         /// <summary>
         /// The data to callback with
         /// </summary>
-        protected TResult Data;
+        private TResult _data;
         
         private readonly List<Action<TResult>> _success = new List<Action<TResult>>();
 
@@ -32,15 +32,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         /// <returns>This</returns>
         public IDiscordAsyncCallback<TResult> OnSuccess(Action<TResult> complete)
         {
-            if (IsCompleted)
-            {
-                _success.Add(complete);
-            }
-            else
-            {
-                complete.Invoke(Data);
-            }
-          
+            _success.Add(complete);
             return this;
         }
         
@@ -54,7 +46,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
                 for (int index = 0; index < _success.Count; index++)
                 {
                     Action<TResult> callback = _success[index];
-                    callback.Invoke(Data);
+                    callback.Invoke(_data);
                 }
             }
             
@@ -67,7 +59,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         /// <param name="data">Data to invoke with</param>
         internal void InvokeSuccess(TResult data)
         {
-            Data = data;
+            _data = data;
             InvokeSuccessInternal();
         }
 
@@ -75,7 +67,7 @@ namespace Oxide.Ext.Discord.Callbacks.Async
         protected override void EnterPool()
         {
             base.EnterPool();
-            Data = default(TResult);
+            _data = default(TResult);
             _success.Clear();
         }
 

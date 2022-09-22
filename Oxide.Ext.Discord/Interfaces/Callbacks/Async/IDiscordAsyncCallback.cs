@@ -8,11 +8,8 @@ namespace Oxide.Ext.Discord.Interfaces.Callbacks.Async
     /// </summary>
     public interface IDiscordAsyncCallback : IDisposable
     {
-        Snowflake Id { get; }
-        bool IsCompleted { get; }
-        
         /// <summary>
-        /// Adds a callback when <see cref="InvokeSuccess"/> is called
+        /// Adds a callback to be called when completed
         /// </summary>
         /// <param name="complete">Callback to call</param>
         /// <returns>this</returns>
