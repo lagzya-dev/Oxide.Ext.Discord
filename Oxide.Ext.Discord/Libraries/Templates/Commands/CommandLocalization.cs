@@ -56,18 +56,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         /// <param name="create"></param>
-        public CommandLocalization(CommandCreate create)
+        public CommandLocalization(CommandCreate create, string lang) : this(create.NameLocalizations[lang], create.DescriptionLocalizations[lang])
         {
-            Name = create.Name;
-            Description = create.Description;
-            if (create.Options == null)
+            if (create.Options != null)
             {
-                return;
-            }
-
-            for (int index = 0; index < create.Options.Count; index++)
-            {
-                ProcessOption(create.Options[index]);
+                for (int index = 0; index < create.Options.Count; index++)
+                {
+                    ProcessOption(create.Options[index], lang);
+                }
             }
         }
 
@@ -75,22 +71,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         /// <param name="opt"></param>
-        public CommandLocalization(CommandOption opt)
+        public CommandLocalization(CommandOption opt, string lang) : this(opt.NameLocalizations[lang], opt.DescriptionLocalizations[lang])
         {
-            Name = opt.Name;
-            Description = opt.Description;
-            if (opt.Options == null)
-            {
-                return;
-            }
-
-            for (int index = 0; index < opt.Options.Count; index++)
-            {
-                ProcessOption(opt.Options[index]);
+            if (opt.Options != null)
+            { 
+                for (int index = 0; index < opt.Options.Count; index++)
+                {
+                    ProcessOption(opt.Options[index], lang);
+                }
             }
         }
 
-        private void ProcessOption(CommandOption option)
+        private void ProcessOption(CommandOption option, string lang)
         {
             if (option.Type == CommandOptionType.SubCommand || option.Type == CommandOptionType.SubCommandGroup)
             {
@@ -99,7 +91,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                     Options = new List<CommandLocalization>();
                 }
                     
-                Options.Add(new CommandLocalization(option));
+                Options.Add(new CommandLocalization(option, lang));
                 return;
             }
 
@@ -108,7 +100,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 Arguments = new Hash<string, ArgumentLocalization>();
             }
 
-            Arguments[option.Name] = new ArgumentLocalization(option);
+            Arguments[option.Name] = new ArgumentLocalization(option, lang);
         }
         
         /// <summary>

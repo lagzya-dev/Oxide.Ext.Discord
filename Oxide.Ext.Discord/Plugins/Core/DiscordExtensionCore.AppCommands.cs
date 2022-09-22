@@ -25,6 +25,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         public void RegisterApplicationCommands(BotClient client)
         {
             ApplicationCommandBuilder builder = new ApplicationCommandBuilder(AppCommandKeys.DeCommand, "Discord Extension Commands", ApplicationCommandType.ChatInput)
+                                                .SetDefaultLocalization()
                                                 .AddDefaultPermissions(PermissionFlags.None)
                                                 .AddSubCommandGroup(AppCommandKeys.AppCommandGroup, "Application Commands")
                                                 .AddSubCommand(AppCommandKeys.DeleteAppCommand, "Delete a registered application command")

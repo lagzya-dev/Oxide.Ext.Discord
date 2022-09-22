@@ -17,8 +17,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         private readonly CommandOption _option;
         private readonly TBuilder _builder;
         private readonly TParent _parent;
-        
-        internal BaseCommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, TParent parentBuilder)
+
+        internal BaseCommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, TParent parentBuilder, string defaultLanguage)
         {
             InvalidCommandOptionException.ThrowIfInvalidName(name, false);
             InvalidCommandOptionException.ThrowIfInvalidDescription(description, false);
@@ -28,6 +28,11 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
             parent.Add(_option);
             _builder = (TBuilder)this;
             _parent = parentBuilder;
+            if (!string.IsNullOrEmpty(defaultLanguage))
+            {
+                AddNameLocalization(name, defaultLanguage);
+                AddDescriptionLocalization(description, defaultLanguage);
+            }
         }
         
         /// <summary>
@@ -43,6 +48,22 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
             return _builder;
         }
         
+        public TBuilder AddNameLocalization(string name, string lang)
+        {
+            if (_option.NameLocalizations == null)
+            {
+                _option.NameLocalizations = new Hash<string, string>();
+            }
+
+            if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
+            {
+                lang = discordLocale;
+            }
+            
+            _option.NameLocalizations[lang] = name;
+            return _builder;
+        }
+        
         /// <summary>
         /// Adds command description localizations for a given plugin and lang key
         /// </summary>
@@ -53,6 +74,22 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         public TBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
             _option.DescriptionLocalizations = DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
+            return _builder;
+        }
+        
+        public TBuilder AddDescriptionLocalization(string name, string lang)
+        {
+            if (_option.DescriptionLocalizations == null)
+            {
+                _option.DescriptionLocalizations = new Hash<string, string>();
+            }
+
+            if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
+            {
+                lang = discordLocale;
+            }
+            
+            _option.DescriptionLocalizations[lang] = name;
             return _builder;
         }
 

@@ -84,17 +84,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
         public IDiscordAsyncCallback<T> ToMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordMessageTemplate, new()
         {
-            return ToMessageInternalAsync(data, message, PluginAsyncCallback<T>.Create());
+            return ToMessageInternalAsync(data, message, DiscordAsyncCallback<T>.Create());
         }
         
-        public IDiscordAsyncCallback<T> ToMessageInternalAsync<T>(PlaceholderData data, T message = null, IDiscordAsyncCallback<T> callback = null) where T : class, IDiscordMessageTemplate, new()
+        internal DiscordAsyncCallback<T> ToMessageInternalAsync<T>(PlaceholderData data, T message = null, DiscordAsyncCallback<T> callback = null) where T : class, IDiscordMessageTemplate, new()
         {
             if (callback == null)
             {
-                callback = InternalAsyncCallback<T>.Create();
+                callback = DiscordAsyncCallback<T>.Create(true);
             }
             
-            ToEntityInternalAsync(data, message, (IDiscordAsyncCallback<IDiscordMessageTemplate>)callback);
+            ToEntityInternalAsync(data, message, (DiscordAsyncCallback<IDiscordMessageTemplate>)(IDiscordAsyncCallback<IDiscordMessageTemplate>)callback);
             return callback;
         }
         

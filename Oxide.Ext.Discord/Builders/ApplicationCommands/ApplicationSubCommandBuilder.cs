@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="name">Name of the sub command</param>
         /// <param name="description">Description of the sub command</param>
         /// <param name="parent">Parent for this builder</param>
-        public ApplicationSubCommandBuilder(List<CommandOption> options, string name, string description, ApplicationCommandBuilder parent) : base(options, name, description, parent) { }
+        public ApplicationSubCommandBuilder(List<CommandOption> options, string name, string description, ApplicationCommandBuilder parent, string defaultLanguage) : base(options, name, description, parent, defaultLanguage) { }
         
         /// <summary>
         /// Adds a new option
@@ -31,8 +31,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         public ApplicationSubCommandOptionBuilder AddOption(CommandOptionType type, string name, string description)
         {
             ApplicationCommandBuilderException.ThrowIfInvalidCommandOptionType(type);
-            
-            return new ApplicationSubCommandOptionBuilder(SubCommand.Options, type, name, description, Builder);
+            return new ApplicationSubCommandOptionBuilder(SubCommand.Options, type, name, description, Builder, DefaultLanguage);
         }
     }
 }

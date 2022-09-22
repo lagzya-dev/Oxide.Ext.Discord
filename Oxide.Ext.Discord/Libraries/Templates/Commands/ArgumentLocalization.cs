@@ -49,10 +49,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         /// <param name="option"></param>
-        public ArgumentLocalization(CommandOption option) : this(option.Name, option.Description)
+        public ArgumentLocalization(CommandOption option, string lang) : this(option.NameLocalizations[lang], option.DescriptionLocalizations[lang])
         {
             if (option.Choices != null)
             {
+                Choices = new Hash<string, ChoicesLocalization>();
                 for (int index = 0; index < option.Choices.Count; index++)
                 {
                     CommandOptionChoice choice = option.Choices[index];
@@ -71,15 +72,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             option.NameLocalizations[language] = Name;
             option.DescriptionLocalizations[language] = Description;
 
-            if (option.Choices == null)
+            if (option.Choices != null)
             {
-                return;
-            }
-
-            for (int index = 0; index < option.Choices.Count; index++)
-            {
-                CommandOptionChoice choice = option.Choices[index];
-                Choices?[choice.Name]?.ApplyChoiceLocalization(choice, language);
+                for (int index = 0; index < option.Choices.Count; index++)
+                {
+                    CommandOptionChoice choice = option.Choices[index];
+                    Choices?[choice.Name]?.ApplyChoiceLocalization(choice, language);
+                }
             }
         }
     }

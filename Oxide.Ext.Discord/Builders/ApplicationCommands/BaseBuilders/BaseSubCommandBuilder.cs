@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
 {
@@ -22,6 +23,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         protected readonly CommandOption SubCommand;
         
+        protected readonly string DefaultLanguage;
+        
         private readonly TParent _parent;
 
         /// <summary>
@@ -31,12 +34,18 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <param name="name">Name of the sub command</param>
         /// <param name="description">Description of the sub command</param>
         /// <param name="parent">Parent for the sub command</param>
-        protected BaseSubCommandBuilder(List<CommandOption> options, string name, string description, TParent parent)
-         {
-             Builder = (TBuilder)this;
+        protected BaseSubCommandBuilder(List<CommandOption> options, string name, string description, TParent parent, string defaultLanguage)
+        {
+            Builder = (TBuilder)this;
             _parent = parent;
             SubCommand = new CommandOption(name, description, CommandOptionType.SubCommand, new List<CommandOption>());
             options.Add(SubCommand);
+            DefaultLanguage = defaultLanguage;
+            if (!string.IsNullOrEmpty(DefaultLanguage))
+            {
+                AddNameLocalization(name, DefaultLanguage);
+                AddDescriptionLocalization(description, DefaultLanguage);
+            }
         }
 
          /// <summary>
@@ -51,6 +60,22 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
             SubCommand.NameLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
             return Builder;
         }
+         
+         public TBuilder AddNameLocalization(string name, string lang)
+         {
+             if (SubCommand.NameLocalizations == null)
+             {
+                 SubCommand.NameLocalizations = new Hash<string, string>();
+             }
+
+             if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
+             {
+                 lang = discordLocale;
+             }
+            
+             SubCommand.NameLocalizations[lang] = name;
+             return Builder;
+         }
         
         /// <summary>
         /// Adds command description localizations for a given plugin and lang key
@@ -62,6 +87,22 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         public TBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
             SubCommand.DescriptionLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
+            return Builder;
+        }
+        
+        public TBuilder AddDescriptionLocalization(string name, string lang)
+        {
+            if (SubCommand.DescriptionLocalizations == null)
+            {
+                SubCommand.DescriptionLocalizations = new Hash<string, string>();
+            }
+
+            if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
+            {
+                lang = discordLocale;
+            }
+            
+            SubCommand.DescriptionLocalizations[lang] = name;
             return Builder;
         }
 

@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
@@ -15,21 +16,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
         public IDiscordAsyncCallback<TEntity> ToEntityAsync(PlaceholderData data = null, TEntity entity = null)
         {
-            return ToEntityInternalAsync(data, entity, PluginAsyncCallback<TEntity>.Create());
+            return ToEntityInternalAsync(data, entity, DiscordAsyncCallback<TEntity>.Create());
         }
 
-        internal IDiscordAsyncCallback<TEntity> ToEntityInternalAsync(PlaceholderData data, TEntity message = null, IDiscordAsyncCallback<TEntity> callback = null)
+        internal DiscordAsyncCallback<TEntity> ToEntityInternalAsync(PlaceholderData data, TEntity message = null, DiscordAsyncCallback<TEntity> callback = null)
         {
             if (callback == null)
             {
-                callback = InternalAsyncCallback<TEntity>.Create();
+                callback = DiscordAsyncCallback<TEntity>.Create(true);
             }
             
             ToEntityCallback<BaseMessageTemplate<TEntity>, TEntity>.Start(this, data, message, callback);
             return callback;
         }
 
-        internal async Task HandleToEntityAsync(PlaceholderData data, TEntity entity, IDiscordAsyncCallback<TEntity> callback)
+        internal async Task HandleToEntityAsync(PlaceholderData data, TEntity entity, DiscordAsyncCallback<TEntity> callback)
         {
             callback.InvokeSuccess(await HandleToEntityAsync(data, entity).ConfigureAwait(false));
         }
@@ -39,52 +40,43 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return Task.FromResult(ToEntity(data, entity));
         }
 
-        public List<TEntity> ToBulkEntity(List<PlaceholderData> placeholders, List<TEntity> entities = null)
+        public List<TEntity> ToBulkEntity(BulkEntityRequest<TEntity> request)
         {
-            if (entities == null)
+            List<TEntity> entities =  new List<TEntity>();
+            List<BulkEntityItem<TEntity>> items = request.Items;
+            for (int index = 0; index < items.Count; index++)
             {
-                entities = new List<TEntity>();
-            }
-
-            for (int index = 0; index < placeholders.Count; index++)
-            {
-                PlaceholderData data = placeholders[index];
-                if (index < entities.Count)
-                {
-                    ToEntity(data, entities[index]);
-                    continue;
-                }
-                
-                entities.Add(ToEntity(data));
+                BulkEntityItem<TEntity> item = items[index];
+                entities.Add(ToEntity(item.Data, item.Entity));
             }
 
             return entities;
         }
         
-        public IDiscordAsyncCallback<List<TEntity>> ToBulkEntityAsync(List<PlaceholderData> placeholders, List<TEntity> entities = null)
+        public IDiscordAsyncCallback<List<TEntity>> ToBulkEntityAsync(BulkEntityRequest<TEntity> request)
         {
-            return ToBulkEntityInternalAsync(placeholders, entities, PluginAsyncCallback<List<TEntity>>.Create());
+            return ToBulkEntityInternalAsync(request, DiscordAsyncCallback<List<TEntity>>.Create());
         }
 
-        internal IDiscordAsyncCallback<List<TEntity>> ToBulkEntityInternalAsync(List<PlaceholderData> placeholders, List<TEntity> entities = null, IDiscordAsyncCallback<List<TEntity>> callback = null)
+        internal DiscordAsyncCallback<List<TEntity>> ToBulkEntityInternalAsync(BulkEntityRequest<TEntity> request, DiscordAsyncCallback<List<TEntity>> callback = null)
         {
             if (callback == null)
             {
-                callback = InternalAsyncCallback<List<TEntity>>.Create();
+                callback = DiscordAsyncCallback<List<TEntity>>.Create(true);
             }
             
-            ToBulkEntityCallback<BaseMessageTemplate<TEntity>, TEntity>.Start(this, placeholders, entities, callback);
+            ToBulkEntityCallback<BaseMessageTemplate<TEntity>, TEntity>.Start(this, request, callback);
             return callback;
         }
 
-        internal async Task HandleBulkToEntityAsync(List<PlaceholderData> placeholders, List<TEntity> entities, IDiscordAsyncCallback<List<TEntity>> callback)
+        internal async Task HandleBulkToEntityAsync(BulkEntityRequest<TEntity> request, DiscordAsyncCallback<List<TEntity>> callback)
         {
-            callback.InvokeSuccess(await HandleBulkToEntityAsync(placeholders, entities).ConfigureAwait(false));
+            callback.InvokeSuccess(await HandleBulkToEntityAsync(request).ConfigureAwait(false));
         }
         
-        internal Task<List<TEntity>> HandleBulkToEntityAsync(List<PlaceholderData> placeholders, List<TEntity> entities)
+        internal Task<List<TEntity>> HandleBulkToEntityAsync(BulkEntityRequest<TEntity> request)
         {
-            return Task.FromResult(ToBulkEntity(placeholders, entities));
+            return Task.FromResult(ToBulkEntity(request));
         }
     }
 }

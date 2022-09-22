@@ -26,9 +26,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         /// <param name="command"></param>
-        public DiscordCommandLocalization(CommandCreate command) : this()
+        public DiscordCommandLocalization(CommandCreate command, string lang) : this()
         {
-            Command = new CommandLocalization(command);
+            Command = new CommandLocalization(command, lang);
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
+using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Pooling;
 
@@ -12,16 +12,16 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
         private T _template;
         private TemplateType _type;
         private TemplateVersion _minVersion;
-        private IDiscordAsyncCallback _callback;
+        private DiscordAsyncCallback _callback;
         
-        public static void Start(BaseTemplateLibrary library, TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordAsyncCallback callback)
+        public static void Start(BaseTemplateLibrary library, TemplateId id, T template, TemplateType type, TemplateVersion minVersion, DiscordAsyncCallback callback)
         {
             RegisterTemplateCallback<T> register = DiscordPool.Get<RegisterTemplateCallback<T>>();
             register.Init(library, id, template, type, minVersion, callback);
             register.Run();
         }
         
-        private void Init(BaseTemplateLibrary library, TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordAsyncCallback callback)
+        private void Init(BaseTemplateLibrary library, TemplateId id, T template, TemplateType type, TemplateVersion minVersion, DiscordAsyncCallback callback)
         {
             _library = library;
             _id = id;

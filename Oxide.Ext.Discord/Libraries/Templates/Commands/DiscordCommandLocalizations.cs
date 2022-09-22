@@ -40,7 +40,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (localization == null) throw new ArgumentNullException(nameof(localization));
 
-            IDiscordAsyncCallback callback = PluginAsyncCallback.Create();
+            DiscordAsyncCallback callback = DiscordAsyncCallback.Create();
             
             TemplateId id = new TemplateId(plugin, fileNameSuffix, language);
             RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, TemplateType.Command, minVersion, callback);
@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (commands == null) throw new ArgumentNullException(nameof(commands));
 
-            IDiscordAsyncCallback callback = PluginAsyncCallback.Create();
+            DiscordAsyncCallback callback = DiscordAsyncCallback.Create();
             
             TemplateId id = new TemplateId(plugin, fileNameSuffix, null);
             BulkRegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, commands, TemplateType.Command, minVersion, callback);
@@ -77,16 +77,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <returns></returns>
         public IDiscordAsyncCallback ApplyCommandLocalizationsAsync(Plugin plugin, CommandCreate create, string fileNameSuffix)
         {
-            return HandleApplyCommandLocalizationsAsync(plugin, fileNameSuffix, create, PluginAsyncCallback.Create());
+            return HandleApplyCommandLocalizationsAsync(plugin, fileNameSuffix, create, DiscordAsyncCallback.Create());
         }
         
-        private IDiscordAsyncCallback HandleApplyCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, CommandCreate create, IDiscordAsyncCallback callback = null)
+        private IDiscordAsyncCallback HandleApplyCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, CommandCreate create, DiscordAsyncCallback callback = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
             if (callback == null)
             {
-                callback = InternalAsyncCallback.Create();
+                callback = DiscordAsyncCallback.Create(true);
             }
             
             TemplateId id = new TemplateId(plugin, fileNameSuffix, null);
@@ -94,7 +94,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             return callback;
         }
 
-        internal async Task HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, IDiscordAsyncCallback callback)
+        internal async Task HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, DiscordAsyncCallback callback)
         {
             await HandleApplyCommandLocalizationsAsync(id, create).ConfigureAwait(false);
             callback.InvokeSuccess();
@@ -177,7 +177,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
         private async Task HandleLoadAndApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, string lang)
         {
-            DiscordCommandLocalization localization = await LoadTemplate<DiscordCommandLocalization>(TemplateType.Command, new TemplateId(id, lang)).ConfigureAwait(false);
+            DiscordCommandLocalization localization = await LoadTemplate<DiscordCommandLocalization>(TemplateType.Command, id.WithLanguage(lang)).ConfigureAwait(false);
             if (localization != null)
             {
                 await localization.HandleApplyCommandLocalizationAsync(create, lang).ConfigureAwait(false);

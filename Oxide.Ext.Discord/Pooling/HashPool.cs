@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Pooling
             DiscordPool.Pools.Add(Instance);
         }
 
-        private HashPool() : base(128) { }
+        private HashPool() : base(512) { }
         
         protected override Hash<TKey, TValue> CreateNew() => new Hash<TKey, TValue>();
         

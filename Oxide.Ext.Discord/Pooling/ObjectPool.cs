@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Pooling
             DiscordPool.Pools.Add(Instance);
         }
 
-        private ObjectPool() : base(256) { }
+        private ObjectPool() : base(512) { }
 
         protected override T CreateNew() => new T();
 

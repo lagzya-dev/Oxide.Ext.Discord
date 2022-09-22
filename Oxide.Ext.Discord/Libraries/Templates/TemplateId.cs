@@ -19,16 +19,26 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             Language = language;
         }
 
-        public TemplateId(TemplateId id, string language)
+        public TemplateId(string pluginName, string templateName, string language)
         {
-            PluginName = id.PluginName;
-            TemplateName = id.TemplateName;
+            PluginName = pluginName ?? throw new ArgumentNullException(nameof(pluginName));;
+            TemplateName = templateName;
             Language = language;
         }
 
         public string GetPluginName()
         {
             return PluginExt.GetFullName(PluginName);
+        }
+
+        public TemplateId WithName(string templateName)
+        {
+            return new TemplateId(PluginName, templateName, Language);
+        }
+        
+        public TemplateId WithLanguage(string language)
+        {
+            return new TemplateId(PluginName, TemplateName, language);
         }
 
         public string GetLanguageName() => IsGlobal ? "Global" : Language;

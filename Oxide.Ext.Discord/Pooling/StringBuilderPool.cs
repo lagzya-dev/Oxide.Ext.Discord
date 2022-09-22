@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Pooling
             DiscordPool.Pools.Add(Instance);
         }
 
-        private StringBuilderPool() : base(128) { }
+        private StringBuilderPool() : base(512) { }
 
         protected override StringBuilder CreateNew() => new StringBuilder();
 

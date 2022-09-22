@@ -105,7 +105,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 state.Dispose();
             }
 
-            data.Dispose();
+            if (data.ShouldPool)
+            {
+                data.Dispose();
+            }
 
             return text;
         }

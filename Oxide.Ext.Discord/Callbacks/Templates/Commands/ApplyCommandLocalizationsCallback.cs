@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Commands;
 using Oxide.Ext.Discord.Pooling;
@@ -12,16 +12,16 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
         private readonly DiscordCommandLocalizations _localizations = DiscordExtension.DiscordCommandLocalizations;
         private TemplateId _id;
         private CommandCreate _create;
-        private IDiscordAsyncCallback _callback;
+        private DiscordAsyncCallback _callback;
 
-        public static void Start(TemplateId id, CommandCreate create, IDiscordAsyncCallback callback)
+        public static void Start(TemplateId id, CommandCreate create, DiscordAsyncCallback callback)
         {
             ApplyCommandLocalizationsCallback load = DiscordPool.Get<ApplyCommandLocalizationsCallback>();
             load.Init(id, create, callback);
             load.Run();
         }
 
-        private void Init(TemplateId id, CommandCreate create, IDiscordAsyncCallback callback)
+        private void Init(TemplateId id, CommandCreate create, DiscordAsyncCallback callback)
         {
             _id = id;
             _create = create;

@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Pooling
             DiscordPool.Pools.Add(Instance);
         }
 
-        private PlaceholderDataPool() : base(64) { }
+        private PlaceholderDataPool() : base(1024) { }
 
         protected override PlaceholderData CreateNew()
         {

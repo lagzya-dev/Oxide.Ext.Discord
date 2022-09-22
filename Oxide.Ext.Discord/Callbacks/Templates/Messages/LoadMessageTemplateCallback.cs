@@ -1,29 +1,36 @@
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    internal class LoadInteractionMessageTemplate<TTemplate, TEntity> : BaseAsyncCallback 
+    internal class LoadMessageTemplateCallback<TTemplate, TEntity> : BaseAsyncCallback 
         where TTemplate : BaseMessageTemplate<TEntity>, new()
         where TEntity : class
     {
         private BaseMessageTemplatesLibrary<TTemplate, TEntity> _templates;
         private TemplateId _id;
         private DiscordInteraction _interaction;
-        private IDiscordAsyncCallback<TTemplate> _callback;
+        private DiscordAsyncCallback<TTemplate> _callback;
 
-        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<TTemplate> callback)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordAsyncCallback<TTemplate> callback)
         {
-            LoadInteractionMessageTemplate<TTemplate, TEntity> load = DiscordPool.Get<LoadInteractionMessageTemplate<TTemplate, TEntity>>();
+            LoadMessageTemplateCallback<TTemplate, TEntity> load = DiscordPool.Get<LoadMessageTemplateCallback<TTemplate, TEntity>>();
+            load.Init(templates, id, null, callback);
+            load.Run();
+        }
+        
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id,  DiscordInteraction interaction, DiscordAsyncCallback<TTemplate> callback)
+        {
+            LoadMessageTemplateCallback<TTemplate, TEntity> load = DiscordPool.Get<LoadMessageTemplateCallback<TTemplate, TEntity>>();
             load.Init(templates, id, interaction, callback);
             load.Run();
         }
         
-        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, IDiscordAsyncCallback<TTemplate> callback)
+        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, DiscordAsyncCallback<TTemplate> callback)
         {
             _templates = templates;
             _id = id;
@@ -40,7 +47,6 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         {
             _templates = null;
             _id = default(TemplateId);
-            _interaction = null;
             _callback = null;
         }
 

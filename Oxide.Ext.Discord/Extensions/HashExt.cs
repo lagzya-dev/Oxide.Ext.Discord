@@ -78,12 +78,16 @@ namespace Oxide.Ext.Discord.Extensions
         internal static Hash<TKey, TValue> Clone<TKey, TValue>(this Hash<TKey, TValue> hash)
         {
             Hash<TKey, TValue> copy = new Hash<TKey, TValue>();
+            CopyTo(hash, copy);
+            return copy;
+        }
+
+        internal static void CopyTo<TKey, TValue>(this Hash<TKey, TValue> hash, Hash<TKey, TValue> target)
+        {
             foreach (KeyValuePair<TKey, TValue> value in hash)
             {
-                copy[value.Key] = value.Value;
+                target[value.Key] = value.Value;
             }
-
-            return copy;
         }
     }
 }

@@ -10,6 +10,7 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Pooling;
@@ -23,7 +24,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     public class PlaceholderData : IDisposable
     {
         private readonly Hash<string, object> _data = new Hash<string, object>();
-        private bool _shouldPool = true;
+        internal bool ShouldPool { get; private set; } = true;
         private bool _disposed;
 
         internal PlaceholderData() { }
@@ -275,13 +276,20 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         public void ManualPool()
         {
-            _shouldPool = false;
+            ShouldPool = false;
+        }
+
+        public PlaceholderData Clone()
+        {
+            PlaceholderData data = DiscordPool.GetPlaceholderData();
+            _data.CopyTo(data._data);
+            return data;
         }
 
         ///<inheritdoc/>
         public void Dispose()
         {
-            if (_shouldPool && !_disposed)
+            if (!_disposed)
             {
                 _disposed = true;
                 DiscordPool.FreePlaceholderData(this);

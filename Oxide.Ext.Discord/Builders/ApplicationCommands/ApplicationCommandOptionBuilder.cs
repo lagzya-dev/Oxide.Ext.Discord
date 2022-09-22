@@ -9,6 +9,6 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// </summary>
     public class ApplicationCommandOptionBuilder : BaseCommandOptionBuilder<ApplicationCommandOptionBuilder, ApplicationCommandBuilder>
     {
-        internal ApplicationCommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, ApplicationCommandBuilder builder) : base(parent, type, name, description, builder) { }
+        internal ApplicationCommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, ApplicationCommandBuilder builder, string defaultLanguage) : base(parent, type, name, description, builder, defaultLanguage) { }
     }
 }

@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Exceptions.Libraries;
-using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
 
@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
         
-        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordAsyncCallback callback) where T : BaseTemplate
+        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateType type, TemplateVersion minVersion, DiscordAsyncCallback callback) where T : BaseTemplate
         {
             if (template.Version < minVersion)
             {
@@ -77,12 +77,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             callback?.InvokeSuccess();
         }
         
-        internal async Task HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, IDiscordAsyncCallback callback) where T : BaseTemplate
+        internal async Task HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, DiscordAsyncCallback callback) where T : BaseTemplate
         {
             foreach (BulkTemplateRegistration<T> registration in templates)
             {
                 T template = registration.Template;
-                await HandleRegisterTemplate(new TemplateId(id, registration.Language), template, type, minVersion, null).ConfigureAwait(false);
+                await HandleRegisterTemplate(id.WithLanguage(registration.Language), template, type, minVersion, null).ConfigureAwait(false);
             }
             
             callback.InvokeSuccess();
@@ -112,7 +112,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
         internal Task<T> LoadTemplate<T>(TemplateType type, TemplateId id, string language) where T : BaseTemplate
         {
-            return LoadTemplate<T>(type, new TemplateId(id, language));
+            return LoadTemplate<T>(type, id.WithLanguage(language));
         }
 
         private async Task CreateFile<T>(string path, T template) where T : BaseTemplate
@@ -149,7 +149,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             {
                 string lang = Path.GetFileName(dir);
                 Logger.Debug("Processing Directory: {0} Lang: {1}", dir, lang);
-                await BackupTemplate<T>(type, minVersion, new TemplateId(id, lang)).ConfigureAwait(false);
+                await BackupTemplate<T>(type, minVersion, id.WithLanguage(lang)).ConfigureAwait(false);
             }
         }
         
