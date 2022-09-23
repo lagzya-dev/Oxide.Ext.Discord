@@ -40,7 +40,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 
         protected override Task HandleCallback()
         {
-            return _templates.HandleGetMessageTemplateAsync(_id, _interaction, _callback);
+            return _templates.HandleGetLocalizedTemplateAsync(_id, _interaction, _callback);
         }
 
         protected override void EnterPool()

@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Logging
     internal class DiscordConsoleLogger
     {
         private readonly StringBuilder _sb = new StringBuilder();
-        private readonly object[] _args = new object[0];
+        private readonly object[] _args = Array.Empty<object>();
         private readonly object _sync = new object();
         
         /// <summary>

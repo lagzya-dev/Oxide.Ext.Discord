@@ -1727,7 +1727,7 @@
             </summary>
             <typeparam name="TResult">Type to callback with</typeparam>
         </member>
-        <member name="F:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.Data">
+        <member name="F:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1._data">
             <summary>
             The data to callback with
             </summary>
@@ -1751,12 +1751,6 @@
             <param name="data">Data to invoke with</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.PluginCallbackGroup.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.PluginCallbackGroup`1.EnterPool">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback">
@@ -17156,7 +17150,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.Callbacks.Async.IDiscordAsyncCallback.OnSuccess(System.Action)">
             <summary>
-            Adds a callback when <see cref="!:InvokeSuccess"/> is called
+            Adds a callback to be called when completed
             </summary>
             <param name="complete">Callback to call</param>
             <returns>this</returns>
@@ -17173,16 +17167,6 @@
             </summary>
             <param name="complete">Callback to call</param>
             <returns>this</returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Interfaces.Callbacks.Async.IDiscordAsyncGroupCallback">
-            <summary>
-            Interface for Discord Async Callbacks
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Interfaces.Callbacks.Async.IDiscordAsyncGroupCallback`1">
-            <summary>
-            Interface for Discord Async Callbacks
-            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordMessageTemplate">
             <summary>
@@ -18331,6 +18315,59 @@
             <param name="placeholderPrefix">Prefix to use for the placeholders</param>
             <param name="dataKey">Data key in <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders">
+            <summary>
+            <see cref="T:System.DateTime"/> placeholders
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders.Date(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.DateTime)">
+            <summary>
+            <see cref="T:System.DateTime"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders.Year(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.DateTime)">
+            <summary>
+            <see cref="P:System.DateTime.Year"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders.Month(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.DateTime)">
+            <summary>
+            <see cref="P:System.DateTime.Month"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders.Day(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.DateTime)">
+            <summary>
+            <see cref="P:System.DateTime.Day"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders.Hour(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.DateTime)">
+            <summary>
+            <see cref="P:System.DateTime.Hour"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders.Minute(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.DateTime)">
+            <summary>
+            <see cref="P:System.DateTime.Minute"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders.Second(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.DateTime)">
+            <summary>
+            <see cref="P:System.DateTime.Second"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders.Millisecond(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.DateTime)">
+            <summary>
+            <see cref="P:System.DateTime.Millisecond"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.DateTimePlaceholders.RegisterPlaceholders(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+            <summary>
+            Registers placeholders for the given plugin. 
+            </summary>
+            <param name="plugin">Plugin to register placeholders for</param>
+            <param name="placeholderPrefix">Prefix to use for the placeholders</param>
+            <param name="dataKey">Data key in <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.Default.GuildPlaceholders">
             <summary>
             <see cref="T:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild"/> placeholders
@@ -18654,6 +18691,74 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.SnowflakePlaceholders.RegisterPlaceholders(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+            <summary>
+            Registers placeholders for the given plugin. 
+            </summary>
+            <param name="plugin">Plugin to register placeholders for</param>
+            <param name="placeholderPrefix">Prefix to use for the placeholders</param>
+            <param name="dataKey">Data key in <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders">
+            <summary>
+            <see cref="T:System.TimeSpan"/> placeholders
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.Time(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="T:System.TimeSpan"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.Days(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.Days"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.Hours(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.Hours"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.Minutes(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.Minutes"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.Seconds(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.Seconds"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.Milliseconds(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.Milliseconds"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.TotalDays(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.TotalDays"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.TotalHours(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.TotalHours"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.TotalMinutes(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.TotalMinutes"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.TotalSeconds(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.TotalSeconds"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.TotalMilliseconds(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.TotalMilliseconds"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimeSpanPlaceholders.RegisterPlaceholders(Oxide.Core.Plugins.Plugin,System.String,System.String)">
             <summary>
             Registers placeholders for the given plugin. 
             </summary>
@@ -19513,7 +19618,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplatesLibrary`2.GetLocalizedMessageTemplateAsync(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplatesLibrary`2.GetLocalizedTemplateAsync(Oxide.Core.Plugins.Plugin,System.String,System.String)">
             <summary>
             Returns a message template for a given language
             </summary>
@@ -19523,7 +19628,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplatesLibrary`2.GetMessageTemplateAsync(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplatesLibrary`2.GetLocalizedTemplateAsync(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
             <summary>
             Returns a message template for a given language
             </summary>

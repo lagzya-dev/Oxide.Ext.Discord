@@ -324,7 +324,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -349,7 +349,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordModalTemplates.GetMessageTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordModalTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
             {
                 template.ToEntityAsync(placeholders, message).OnSuccess(response =>
                 {
@@ -473,7 +473,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetMessageTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
             {
                 template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
                 {

@@ -116,6 +116,13 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// Darker Gray Role Color
         /// </summary>
         public static readonly DiscordColor DarkerGrey = new DiscordColor(0x546E7A);
+        
+        public static readonly DiscordColor Success = new DiscordColor(0x57F287);
+        public static readonly DiscordColor Warning = new DiscordColor(0xFEE75C);
+        public static readonly DiscordColor Danger = new DiscordColor(0xED4245);
+        public static readonly DiscordColor BlurpleOld = new DiscordColor(0x7289DA);
+        public static readonly DiscordColor Blurple = new DiscordColor(0x5865F2);
+        public static readonly DiscordColor Fuchsia = new DiscordColor(0xEB459E);
 
         /// <summary>
         /// uint value of the hex color code

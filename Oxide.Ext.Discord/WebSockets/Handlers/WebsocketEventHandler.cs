@@ -896,7 +896,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private void HandleDispatchGuildMemberAdd(GuildMemberAddedEvent member)
         {
             DiscordGuild guild = _client.GetGuild(member.GuildId);
-            
             if (guild == null || !guild.IsAvailable)
             {
                 return;
