@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Plugins.Core;
+using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Builders.Interactions
 {
@@ -252,7 +253,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="options"><see cref="AutoCompletePlayerSearchOptions"/> Search Options</param>
         public void AddOnlinePlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
         {
-            AddPlayerList(Covalence.Players.Connected, filter, comparison, search, options);
+            AddPlayerList(Covalence.Players.Connected, filter, comparison, search, options, null);
         }
         
         /// <summary>
@@ -264,7 +265,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="options"><see cref="AutoCompletePlayerSearchOptions"/> Search Options</param>
         public void AddOfflinePlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
         {
-            AddPlayerList(Covalence.Players.All.Where(p => !p.IsConnected), filter, comparison, search, options);
+            AddPlayerList(Covalence.Players.All.Where(p => !p.IsConnected), filter, comparison, search, options, null);
         }
         
         /// <summary>
@@ -277,8 +278,10 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="options"><see cref="AutoCompletePlayerSearchOptions"/> Search Options</param>
         public void AddAllOnlineFirstPlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
         {
-            AddPlayerList(Covalence.Players.Connected, filter, comparison, search, options);
-            AddPlayerList(Covalence.Players.All, filter, comparison, search, options);
+            HashSet<string> addedList = DiscordPool.GetHashSet<string>();
+            AddPlayerList(Covalence.Players.Connected, filter, comparison, search, options, addedList);
+            AddPlayerList(Covalence.Players.All, filter, comparison, search, options, addedList);
+            DiscordPool.FreeHashSet(ref addedList);
         }
         
         /// <summary>
@@ -290,7 +293,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="options"><see cref="AutoCompletePlayerSearchOptions"/> Search Options</param>
         public void AddAllPlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
         {
-            AddPlayerList(Covalence.Players.All, filter, comparison, search, options);
+            AddPlayerList(Covalence.Players.All, filter, comparison, search, options, null);
         }
 
         private void AddList(IEnumerable<string> list, string filter, StringComparison comparison, AutoCompleteSearchMode search)
@@ -314,7 +317,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
             }
         }
 
-        private void AddPlayerList(IEnumerable<IPlayer> list, string filter, StringComparison comparison, AutoCompleteSearchMode search, AutoCompletePlayerSearchOptions options)
+        private void AddPlayerList(IEnumerable<IPlayer> list, string filter, StringComparison comparison, AutoCompleteSearchMode search, AutoCompletePlayerSearchOptions options, HashSet<string> addedList)
         {
             if (!CanAddChoice())
             {
@@ -325,7 +328,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
             foreach (IPlayer player in list)
             {
                 string name = DiscordExtensionCore.Instance.GetPlayerName(player, options);
-                if (IsMatch(name, filter, comparison, search))
+                if (IsMatch(name, filter, comparison, search) && (addedList == null || addedList.Add(player.Id)))
                 {
                     choices.Add(new CommandOptionChoice(name, player.Id));
                     if (!CanAddChoice())
@@ -343,21 +346,17 @@ namespace Oxide.Ext.Discord.Builders.Interactions
                 return true;
             }
             
-            bool match = false;
             switch (search)
             {
                 case AutoCompleteSearchMode.StartsWith:
-                    match = value.StartsWith(filter, comparison);
-                    break;
+                    return value.StartsWith(filter, comparison);
                 case AutoCompleteSearchMode.Contains:
-                    match = value.IndexOf(filter, comparison) >= 0;
-                    break;
+                    return value.IndexOf(filter, comparison) != -1;
                 case AutoCompleteSearchMode.EndsWith:
-                    match = value.EndsWith(filter, comparison);
-                    break;
+                    return value.EndsWith(filter, comparison);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(search), search, null);
             }
-
-            return match;
         }
         #endregion
     }

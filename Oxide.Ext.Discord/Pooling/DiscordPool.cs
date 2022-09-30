@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public static class DiscordPool
     {
-        internal static List<IPool> Pools = new List<IPool>();
+        internal static readonly List<IPool> Pools = new List<IPool>();
         
         /// <summary>
         /// Returns a pooled object of type T
@@ -63,6 +63,16 @@ namespace Oxide.Ext.Discord.Pooling
         public static Hash<TKey, TValue> GetHash<TKey, TValue>()
         {
             return HashPool<TKey, TValue>.Instance.Get();
+        }
+        
+        /// <summary>
+        /// Returns a pooled <see cref="HashSet{T}"/>
+        /// </summary>
+        /// <typeparam name="T">Type for the HashSet</typeparam>
+        /// <returns>Pooled List</returns>
+        public static HashSet<T> GetHashSet<T>()
+        {
+            return HashSetPool<T>.Instance.Get();
         }
 
         /// <summary>
@@ -123,6 +133,16 @@ namespace Oxide.Ext.Discord.Pooling
         public static void FreeHash<TKey, TValue>(ref Hash<TKey, TValue> hash)
         {
             HashPool<TKey, TValue>.Instance.Free(ref hash);
+        }
+        
+        /// <summary>
+        /// Free's a pooled <see cref="HashSet{T}"/>
+        /// </summary>
+        /// <param name="list">HashSet to be freed</param>
+        /// <typeparam name="T">Type of the HashSet</typeparam>
+        public static void FreeHashSet<T>(ref HashSet<T> list)
+        {
+            HashSetPool<T>.Instance.Free(ref list);
         }
 
         /// <summary>
