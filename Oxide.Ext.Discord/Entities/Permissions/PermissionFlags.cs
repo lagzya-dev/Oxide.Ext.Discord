@@ -15,6 +15,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         None = 0,
         
         /// <summary>
+        /// Represents all possible Permissions Flags
+        /// </summary>
+        All = ulong.MaxValue,
+        
+        /// <summary>
         /// Allows creation of instant invites
         /// Channel Type (Text, Voice, Stage)
         /// </summary>

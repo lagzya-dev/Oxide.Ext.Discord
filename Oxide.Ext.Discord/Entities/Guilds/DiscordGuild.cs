@@ -532,9 +532,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="userId">User ID of the guild member to get</param>
         /// <returns><see cref="GuildMember"/> For the UserId </returns>
-        public GuildMember GetMemberIncludingLeft(Snowflake userId)
+        public GuildMember GetMember(Snowflake userId, bool includeLeft = false)
         {
-            return Members[userId] ?? LeftMembers[userId];
+            return Members[userId] ?? (includeLeft ? LeftMembers[userId] : null);
         }
         
         /// <summary>
@@ -556,6 +556,33 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             }
 
             return null;
+        }
+        
+        public PermissionFlags GetUserPermissions(Snowflake userId)
+        {
+            GuildMember member = Members[userId];
+            if (member == null)
+            {
+                return PermissionFlags.None;
+            }
+            
+            PermissionFlags permissions = EveryoneRole.Permissions;
+
+            for (int index = 0; index < member.Roles.Count; index++)
+            {
+                DiscordRole role = Roles[member.Roles[index]];
+                if (role != null)
+                {
+                    permissions |= role.Permissions;
+                }
+            }
+
+            if ((permissions & PermissionFlags.Administrator) == PermissionFlags.Administrator)
+            {
+                return PermissionFlags.All;
+            }
+
+            return permissions;
         }
         #endregion
 
