@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord
         public void Connect(DiscordSettings settings)
         {
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
-            Logger = new DiscordLogger(settings.LogLevel);
+            Logger = DiscordLoggerFactory.GetExtensionLogger(settings.LogLevel);
             
             if (string.IsNullOrEmpty(Settings.ApiToken))
             {
@@ -281,6 +281,7 @@ namespace Oxide.Ext.Discord
             DiscordExtension.DiscordPlaceholders.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordLang.OnPluginUnloaded(plugin);
             PluginExt.OnPluginUnloaded(plugin);
+            DiscordLoggerFactory.OnPluginUnloaded(plugin);
         }
 
         internal static void CloseClient(DiscordClient client)

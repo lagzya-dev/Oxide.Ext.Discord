@@ -27,6 +27,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
     {
         #region Fields
         public static DiscordExtensionCore Instance;
+        private ILogger _logger;
         #endregion
         
         #region Setup & Loading
@@ -40,6 +41,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         private void Init()
         {
             Instance = this;
+            _logger = DiscordLoggerFactory.GetExtensionLogger(DiscordLogLevel.Info);
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
             AddCovalenceCommand(new[] { "de.websocket.reset" }, nameof(ResetWebSocketCommand), "de.websocket.reset");
             AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
@@ -184,7 +186,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 sb.Append("Initialized: ");
                 sb.AppendLine(bot.Initialized ? "Yes" : "No");
                 sb.Append("Bot: ");
-                sb.AppendLine(bot.BotUser?.GetFullUserName ?? "Unknown");
+                sb.AppendLine(bot.BotUser?.FullUserName ?? "Unknown");
                 sb.Append("Log Level: ");
                 sb.AppendLine(bot.Settings.LogLevel.ToString());
                 sb.Append("Intents: ");
@@ -220,7 +222,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
             string message = sb.ToString();
             player.Message(message);
-            DiscordLogger.FileLogger.AddMessage(DiscordLogLevel.Info, message, null);
+            _logger.Info(message);
         }
         
         private void DebugWebsocket(BotClient bot, StringBuilder sb)

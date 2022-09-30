@@ -67,7 +67,9 @@ namespace Oxide.Ext.Discord.Configuration
             {
                 HideDiscordErrorCodes = Logging?.HideDiscordErrorCodes ?? new HashSet<int>(),
                 ConsoleLogLevel = Logging?.ConsoleLogLevel ?? DiscordLogLevel.Info,
-                FileLogLevel = Logging?.FileLogLevel ?? DiscordLogLevel.Off
+                FileLogLevel = Logging?.FileLogLevel ?? DiscordLogLevel.Off,
+                ConsoleLogFormat = Logging?.ConsoleLogFormat ?? "[DiscordExtension] [{0}]: {1}",
+                FileLogFormat = Logging?.FileLogFormat ?? "{0:HH:mm:ss} [{1}]: {2}"
             };
             Users = new DiscordUsersConfig
             {

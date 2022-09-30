@@ -3,7 +3,7 @@ using Oxide.Core;
 
 namespace Oxide.Ext.Discord.Logging
 {
-    internal static class LoggerExt
+    public static class LoggerExt
     {
         #region Verbose
         public static void Verbose(this ILogger logger, string message)

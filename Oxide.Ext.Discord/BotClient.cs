@@ -105,7 +105,7 @@ namespace Oxide.Ext.Discord
                 Intents = settings.Intents
             };
 
-            Logger = new DiscordLogger(Settings.LogLevel);
+            Logger = DiscordLoggerFactory.GetExtensionLogger(Settings.LogLevel);
             
             Initialized = true;
 
@@ -141,7 +141,7 @@ namespace Oxide.Ext.Discord
                 }
 
                 bot.AddClient(client);
-                DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding {{0}} client to bot {{1}}", client.PluginName, bot.BotUser?.GetFullUserName);
+                DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding {{0}} client to bot {{1}}", client.PluginName, bot.BotUser?.FullUserName);
             }
             catch (Exception ex)
             {

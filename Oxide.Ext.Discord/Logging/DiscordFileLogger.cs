@@ -1,10 +1,10 @@
 using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Logging
 {
@@ -13,48 +13,53 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     internal class DiscordFileLogger
     {
-        private readonly StringBuilder _sb = new StringBuilder();
-        private readonly Thread _writerThread;
-        private readonly object _syncRoot = new object();
+        private readonly StreamWriter _writer = new StreamWriter(new MemoryStream());
+        private readonly object _sync = new object();
         private readonly string _logFileName;
+        private readonly string _fileLogFormat;
+        
+        private static readonly Thread WriterThread;
+        private static readonly List<DiscordFileLogger> Loggers = new List<DiscordFileLogger>();
 
-        internal DiscordFileLogger()
+        static DiscordFileLogger()
         {
-            _writerThread = new Thread(WriteLogThread)
+            WriterThread = new Thread(WriteLogThread)
             {
                 IsBackground = true,
                 Name = nameof(DiscordFileLogger)
             };
-            _writerThread.Start();
-            
-            string logPath = Path.Combine(Interface.Oxide.LogDirectory, "DiscordExtension");
+            WriterThread.Start();
+        }
+        
+        internal DiscordFileLogger(string pluginName, string fileLogFormat)
+        {
+            _fileLogFormat = fileLogFormat;
+            string logPath = Path.Combine(Interface.Oxide.LogDirectory, pluginName);
             if (!Directory.Exists(logPath))
             {
                 Directory.CreateDirectory(logPath);
             }
             
-            _logFileName = Path.Combine(logPath, $"DiscordExtension-{DateTime.Now:yyyy-MM-dd h-mm-ss-tt}.txt");
+            _logFileName = Path.Combine(logPath, $"{pluginName}-{DateTime.Now:yyyy-MM-dd_h-mm-ss-tt}.txt");
+            Loggers.Add(this);
         }
 
         internal void AddMessage(DiscordLogLevel level, string message, Exception ex)
         {
-            lock (_syncRoot)
+            lock (_sync)
             {
-                _sb.Append(DateTime.Now.ToString(CultureInfo.CurrentCulture));
-                _sb.Append(" [");
-                _sb.Append(EnumCache<DiscordLogLevel>.ToString(level));
-                _sb.Append("] ");
-                _sb.Append(message);
+                _writer.Write(_fileLogFormat, DateTime.Now, EnumCache<DiscordLogLevel>.ToString(level), message);
+                
                 if (ex != null)
                 {
-                    _sb.AppendLine();
-                    _sb.Append(ex);
+                    _writer.WriteLine();
+                    _writer.Write(ex.ToString());
                 }
-                _sb.AppendLine();
+                _writer.WriteLine();
             }
         }
 
-        private void WriteLogThread()
+        private static void WriteLogThread()
         {
             try
             {
@@ -62,7 +67,11 @@ namespace Oxide.Ext.Discord.Logging
                 {
                     try
                     {
-                        WriteLog();
+                        for (int index = 0; index < Loggers.Count; index++)
+                        {
+                            DiscordFileLogger logger = Loggers[index];
+                            logger.WriteLog();
+                        }
                     }
                     finally
                     {
@@ -70,36 +79,39 @@ namespace Oxide.Ext.Discord.Logging
                     }
                 }
             }
-            catch (ThreadAbortException)
-            {
-                
-            }
+            catch (ThreadAbortException) { }
         }
 
         private void WriteLog()
         {
-            string log;
-            lock (_syncRoot)
+            lock (_sync)
             {
-                if (_sb.Length == 0)
+                if (_writer.BaseStream.Position == 0)
                 {
                     return;
                 }
-
-                log = _sb.ToString();
-                _sb.Clear();
-            }
-
-            using (StreamWriter streamWriter = new StreamWriter(_logFileName, true))
-            {
-                streamWriter.WriteLine(log);
+                
+                using (StreamWriter streamWriter = File.AppendText(_logFileName))
+                {
+                    _writer.BaseStream.CopyToPooled(streamWriter.BaseStream);
+                    _writer.Flush();
+                }
             }
         }
 
-        internal void OnServerShutdown()
+        internal static void OnServerShutdown()
         {
-            _writerThread.Abort();
+            WriterThread.Abort();
+        }
+
+        internal void OnShutdown()
+        {
             WriteLog();
+            Loggers.Remove(this);
+            lock (_sync)
+            {
+                _writer.Dispose();
+            }
         }
     }
 }

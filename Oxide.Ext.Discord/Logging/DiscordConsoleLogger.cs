@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
 
@@ -10,9 +9,14 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     internal class DiscordConsoleLogger
     {
-        private readonly StringBuilder _sb = new StringBuilder();
-        private readonly object[] _args = Array.Empty<object>();
+        private readonly object[] _args = new object[2];
         private readonly object _sync = new object();
+        private readonly string _format;
+
+        public DiscordConsoleLogger(string format)
+        {
+            _format = format;
+        }
         
         /// <summary>
         /// Adds a message to the server console
@@ -24,25 +28,24 @@ namespace Oxide.Ext.Discord.Logging
         {
             lock (_sync)
             {
-                _sb.Clear();
-                _sb.Append("[Discord Extension] [");
-                _sb.Append(EnumCache<DiscordLogLevel>.ToString(level));
-                _sb.Append("]: ");
-                _sb.Append(message);
+                _args[0] = EnumCache<DiscordLogLevel>.ToString(level);
+                _args[1] = message;
+                message = string.Format(_format, _args);
+                
                 switch (level)
                 {
                     case DiscordLogLevel.Debug:
                     case DiscordLogLevel.Warning:
-                        Interface.Oxide.LogWarning(_sb.ToString(), _args);
+                        Interface.Oxide.LogWarning(message, _args);
                         break;
                     case DiscordLogLevel.Error:
-                        Interface.Oxide.LogError(_sb.ToString(), _args);
+                        Interface.Oxide.LogError(message, _args);
                         break;
                     case DiscordLogLevel.Exception:
-                        Interface.Oxide.LogException(_sb.ToString(), ex);
+                        Interface.Oxide.LogException(message, ex);
                         break;
                     default:
-                        Interface.Oxide.LogInfo(_sb.ToString(), _args);
+                        Interface.Oxide.LogInfo(message, _args);
                         break;
                 }
             }

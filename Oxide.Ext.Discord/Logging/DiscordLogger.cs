@@ -1,26 +1,25 @@
 using System;
-using Oxide.Ext.Discord.Configuration;
 
 namespace Oxide.Ext.Discord.Logging
 {
     /// <summary>
     /// Represents a discord extension logger
     /// </summary>
-    internal class DiscordLogger : ILogger
+    public class DiscordLogger : ILogger
     {
         private DiscordLogLevel _logLevel;
-        private readonly DiscordLoggingConfig _config;
-        internal static readonly DiscordConsoleLogger ConsoleLogger = new DiscordConsoleLogger();
-        internal static readonly DiscordFileLogger FileLogger = new DiscordFileLogger();
+        private readonly IDiscordLoggingConfig _config;
+        private readonly DiscordLogHandler _handler;
         
         /// <summary>
         /// Creates a new logger with the given log level
         /// </summary>
         /// <param name="logLevel">Log level of the logger</param>
-        public DiscordLogger(DiscordLogLevel logLevel)
+        internal DiscordLogger(DiscordLogLevel logLevel, IDiscordLoggingConfig config, DiscordLogHandler handler)
         {
             _logLevel = logLevel;
-            _config = DiscordExtension.DiscordConfig.Logging;
+            _config = config;
+            _handler = handler;
         }
 
         /// <inheritdoc/>
@@ -28,12 +27,12 @@ namespace Oxide.Ext.Discord.Logging
         {
             if (IsConsoleLogging(level))
             {
-                ConsoleLogger.AddMessage(level, message, exception);
+                _handler.LogConsole(level, message, exception);
             }
 
             if (IsFileLogging(level))
             {
-                FileLogger.AddMessage(level, message, exception);
+                _handler.LogFile(level, message, exception);
             }
         }
 
@@ -57,6 +56,11 @@ namespace Oxide.Ext.Discord.Logging
         public bool IsFileLogging(DiscordLogLevel level)
         {
             return level >= _logLevel && level >= _config.FileLogLevel;
+        }
+        
+        public void Shutdown()
+        {
+            _handler.Shutdown();
         }
     }
 }
