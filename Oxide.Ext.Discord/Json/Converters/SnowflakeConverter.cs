@@ -46,7 +46,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                         return null;
                     }
 
-                    DiscordExtension.GlobalLogger.Warning("Snowflake tried to parse null to non nullable field: {{0}}. Please give this message to the discord extension authors.", reader.Path);
+                    DiscordExtension.GlobalLogger.Warning("Snowflake tried to parse null to non nullable field: {0}. Please give this message to the discord extension authors.", reader.Path);
                     return default(Snowflake);
                 
                 default:

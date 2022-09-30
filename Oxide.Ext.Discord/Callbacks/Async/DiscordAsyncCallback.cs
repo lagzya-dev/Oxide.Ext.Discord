@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Core;
-using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Pooling;
 

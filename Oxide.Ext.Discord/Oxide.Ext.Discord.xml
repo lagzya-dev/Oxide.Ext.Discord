@@ -3394,6 +3394,66 @@
             Returns the small image url for the presence asset
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.OK">
+            <summary>
+            The request completed successfully.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.Created">
+            <summary>
+            The entity was created successfully.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.NoContent">
+            <summary>
+            The request completed successfully but returned no content.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.NotModified">
+            <summary>
+            The entity was not modified (no action was taken).
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.BadRequest">
+            <summary>
+            The request was improperly formatted, or the server couldn't understand it.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.Unauthorized">
+            <summary>
+            The Authorization header was missing or invalid.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.Forbidden">
+            <summary>
+            The Authorization token you passed did not have permission to the resource.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.NotFound">
+            <summary>
+            The resource at the location specified doesn't exist.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.MethodNotAllowed">
+            <summary>
+            The HTTP method used is not valid for the location specified.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.TooManyRequests">
+            <summary>
+            You are being rate limited, see Rate Limits.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.InternalServerError">
+            <summary>
+            Server Error
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.GatewayUnavailable">
+            <summary>
+            There was not a gateway available to process your request. Wait a bit and retry.
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Api.RateLimitResponse">
             <summary>
             Represents a rate limit response from an API request
@@ -3520,7 +3580,7 @@
             Suppresses the error message from being logged
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetResponse(System.Int32,System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetResponse(Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode,System.IO.Stream)">
             <summary>
             Sets the HTTP Response data
             </summary>
@@ -8157,7 +8217,7 @@
             <param name="userName">Username of the GuildMember</param>
             <returns>GuildMember with the given username; Null otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetMemberIncludingLeft(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetMember(Oxide.Ext.Discord.Entities.Snowflake,System.Boolean)">
             <summary>
             Returns the  <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/> for the given <see cref="T:Oxide.Ext.Discord.Entities.Snowflake"/> User ID including members who are no longer in the guild
             Left members only include <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/>s who have left the guild since the bot was connected
@@ -14037,6 +14097,11 @@
             Represents No Permissions
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.All">
+            <summary>
+            Represents all possible Permissions Flags
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.CreateInstantInvite">
             <summary>
             Allows creation of instant invites
@@ -15057,7 +15122,7 @@
             Banner Url for the user
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetFullUserName">
+        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.FullUserName">
             <summary>
             Returns the username#discriminator for the user
             </summary>
@@ -18841,7 +18906,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.UserPlaceholders.FullName(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Users.DiscordUser)">
             <summary>
-            <see cref="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetFullUserName"/> placeholder
+            <see cref="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.FullUserName"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.UserPlaceholders.AvatarUrl(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Users.DiscordUser)">
@@ -20454,7 +20519,7 @@
             Represents a discord extension logger
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.#ctor(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.#ctor(Oxide.Ext.Discord.Logging.DiscordLogLevel,Oxide.Ext.Discord.Logging.IDiscordLoggingConfig,Oxide.Ext.Discord.Logging.DiscordLogHandler)">
             <summary>
             Creates a new logger with the given log level
             </summary>
@@ -20735,6 +20800,13 @@
             <typeparam name="TValue">Type for the value</typeparam>
             <returns>Pooled Hash</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetHashSet``1">
+            <summary>
+            Returns a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <typeparam name="T">Type for the HashSet</typeparam>
+            <returns>Pooled List</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetStringBuilder">
             <summary>
             Returns a pooled <see cref="T:System.Text.StringBuilder"/>
@@ -20775,6 +20847,13 @@
             <typeparam name="TKey">Type for key</typeparam>
             <typeparam name="TValue">Type for value</typeparam>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeHashSet``1(System.Collections.Generic.HashSet{``0}@)">
+            <summary>
+            Free's a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <param name="list">HashSet to be freed</param>
+            <typeparam name="T">Type of the HashSet</typeparam>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeStringBuilder(System.Text.StringBuilder@)">
             <summary>
             Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool
@@ -20807,6 +20886,15 @@
             <typeparam name="TValue"></typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.HashPool`2.OnFreeItem(Oxide.Plugins.Hash{`0,`1}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Pooling.HashSetPool`1">
+            <summary>
+            Represents a pool for Hash&lt;TKey, TValue&gt;
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.HashSetPool`1.OnFreeItem(System.Collections.Generic.HashSet{`0}@)">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.IPool">
