@@ -148,7 +148,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         /// Returns the username#discriminator for the user
         /// </summary>
-        public string GetFullUserName => $"{Username}#{Discriminator}";
+        public string FullUserName => $"{Username}#{Discriminator}";
 
         /// <summary>
         /// Returns if the DiscordUser is a bot

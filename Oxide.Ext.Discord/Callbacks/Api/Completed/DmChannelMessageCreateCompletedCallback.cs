@@ -37,7 +37,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api.Completed
             {
                 userData.SetDmBlock();
                 DiscordUser user = userData.GetUser();
-                Client.Logger.Debug("We're unable to send DM's to {0} ({1}). We are blocking attempts until {2}.", user.GetFullUserName, user.Id, userData.GetBlockedUntil());
+                Client.Logger.Debug("We're unable to send DM's to {0} ({1}). We are blocking attempts until {2}.", user.FullUserName, user.Id, userData.GetBlockedUntil());
                 response.Error.SuppressErrorMessage();
             }
         }

@@ -267,7 +267,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 if (userData.IsDmBlocked())
                 {
                     DiscordUser user = userData.GetUser();
-                    client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.GetFullUserName, user.Id, userData.GetBlockedUntil());
+                    client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.FullUserName, user.Id, userData.GetBlockedUntil());
                     return;
                 }
 

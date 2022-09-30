@@ -27,9 +27,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void Discriminator(StringBuilder builder, PlaceholderState state, DiscordUser user) => PlaceholderFormatting.Replace(builder, state, user.Discriminator);
         
         /// <summary>
-        /// <see cref="DiscordUser.GetFullUserName"/> placeholder
+        /// <see cref="DiscordUser.FullUserName"/> placeholder
         /// </summary>
-        public static void FullName(StringBuilder builder, PlaceholderState state, DiscordUser user) => PlaceholderFormatting.Replace(builder, state, user.GetFullUserName);
+        public static void FullName(StringBuilder builder, PlaceholderState state, DiscordUser user) => PlaceholderFormatting.Replace(builder, state, user.FullUserName);
         
         /// <summary>
         /// <see cref="DiscordUser.GetAvatarUrl"/> placeholder
