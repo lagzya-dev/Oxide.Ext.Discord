@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         internal RequestCompletedStatus Status;
         internal RateLimitResponse RateLimit;
         internal RequestError Error;
-        internal int Code;
+        internal DiscordHttpStatusCode Code;
         internal MemoryStream Content;
         
         private DiscordClient _client;
@@ -34,13 +34,13 @@ namespace Oxide.Ext.Discord.Entities.Api
 
             if (response != null)
             {
-                Code = (int)response.StatusCode;
+                Code = (DiscordHttpStatusCode)response.StatusCode;
                 await response.Content.CopyToAsync(Content, null).ConfigureAwait(false);
                 RateLimit = DiscordPool.Get<RateLimitResponse>();
                 RateLimit.Init(response.Headers, _client.Logger);
                 if (error != null)
                 {
-                    await error.SetResponse((int)response.StatusCode, Content).ConfigureAwait(false);
+                    await error.SetResponse(Code, Content).ConfigureAwait(false);
                 }
             }
         }

@@ -135,8 +135,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
             RequestResponse response = null;
             byte retries = 0;
-            byte retries429 = 0;
-            while(retries < 3 && retries429 < 6) 
+            while(CanSendRequest(response, retries)) 
             {
                 Request.Status = RequestStatus.PendingStart;
                 await _bucket.WaitUntilBucketAvailable(this, _token).ConfigureAwait(false);
@@ -161,17 +160,30 @@ namespace Oxide.Ext.Discord.Rest.Requests
                         return response;
                 }
 
-                if (response.Code != 429)
+                if (response.Code == DiscordHttpStatusCode.BadRequest)
                 {
-                    retries++;
+                    return response;
                 }
-                else
-                {
-                    retries429++;
-                }
+                
+                retries++;
             }
             
             return response;
+        }
+
+        private bool CanSendRequest(RequestResponse response, byte retries)
+        {
+            if (retries >= 6)
+            {
+                return false;
+            }
+            
+            if (response != null && response.Code != DiscordHttpStatusCode.TooManyRequests)
+            {
+                return retries < 3;
+            }
+            
+            return true;
         }
 
         private async Task<RequestResponse> SendRequest()
@@ -209,8 +221,8 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             RequestResponse response;
             
-            int statusCode = (int)webResponse.StatusCode;
-            if (statusCode == 429)
+            DiscordHttpStatusCode statusCode = (DiscordHttpStatusCode)webResponse.StatusCode;
+            if (statusCode == DiscordHttpStatusCode.TooManyRequests)
             {
                 response = await RequestResponse.CreateExceptionResponse(Request.Client, await GetRequestError(RequestErrorType.RateLimit, DiscordLogLevel.Warning).WithRequest(request).ConfigureAwait(false), webResponse, RequestCompletedStatus.ErrorRetry).ConfigureAwait(false);
             }

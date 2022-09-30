@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// HTTP Status code
         /// </summary>
-        public int HttpStatusCode { get; private set; }
+        public DiscordHttpStatusCode HttpStatusCode { get; private set; }
 
         /// <summary>
         /// If discord returned an error this will contain that error message
@@ -135,7 +135,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// </summary>
         /// <param name="code">HTTP Response Code</param>
         /// <param name="content">HTTP Response Body Stream</param>
-        internal async Task SetResponse(int code, Stream content)
+        internal async Task SetResponse(DiscordHttpStatusCode code, Stream content)
         {
             HttpStatusCode = code;
             if (content.Length == 0)
