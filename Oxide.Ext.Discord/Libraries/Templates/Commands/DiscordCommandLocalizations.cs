@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (localization == null) throw new ArgumentNullException(nameof(localization));
 
-            DiscordPromise promise = DiscordPromise.Create();
+            IDiscordPromise promise = DiscordPromise.Create();
             
             TemplateId id = new TemplateId(plugin, fileNameSuffix, language);
             RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, TemplateType.Command, minVersion, promise);
@@ -60,7 +60,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (commands == null) throw new ArgumentNullException(nameof(commands));
 
-            DiscordPromise promise = DiscordPromise.Create();
+            IDiscordPromise promise = DiscordPromise.Create();
             
             TemplateId id = new TemplateId(plugin, fileNameSuffix, null);
             BulkRegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, commands, TemplateType.Command, minVersion, promise);
@@ -79,7 +79,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             return HandleApplyCommandLocalizationsAsync(plugin, fileNameSuffix, create, DiscordPromise.Create());
         }
         
-        private IDiscordPromise HandleApplyCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, CommandCreate create, DiscordPromise promise = null)
+        private IDiscordPromise HandleApplyCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, CommandCreate create, IDiscordPromise promise = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
@@ -93,7 +93,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             return promise;
         }
 
-        internal async Task HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, DiscordPromise promise)
+        internal async Task HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, IDiscordPromise promise)
         {
             await HandleApplyCommandLocalizationsAsync(id, create).ConfigureAwait(false);
             promise.Resolve();

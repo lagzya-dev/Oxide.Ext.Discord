@@ -12,16 +12,16 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
         private readonly DiscordCommandLocalizations _localizations = DiscordExtension.DiscordCommandLocalizations;
         private TemplateId _id;
         private CommandCreate _create;
-        private DiscordPromise _promise;
+        private IDiscordPromise _promise;
 
-        public static void Start(TemplateId id, CommandCreate create, DiscordPromise promise)
+        public static void Start(TemplateId id, CommandCreate create, IDiscordPromise promise)
         {
             ApplyCommandLocalizationsCallback load = DiscordPool.Get<ApplyCommandLocalizationsCallback>();
             load.Init(id, create, promise);
             load.Run();
         }
 
-        private void Init(TemplateId id, CommandCreate create, DiscordPromise promise)
+        private void Init(TemplateId id, CommandCreate create, IDiscordPromise promise)
         {
             _id = id;
             _create = create;

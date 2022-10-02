@@ -17,23 +17,23 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         private TemplateId _id;
         private DiscordInteraction _interaction;
         private BulkTemplateRequest _request;
-        private DiscordPromise<List<TEntity>> _promise;
+        private IDiscordPromise<List<TEntity>> _promise;
 
-        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, BulkTemplateRequest request, DiscordPromise<List<TEntity>> promise)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> promise)
         {
             BulkTemplateToEntityCallback<TTemplate, TEntity> load = DiscordPool.Get<BulkTemplateToEntityCallback<TTemplate, TEntity>>();
             load.Init(templates, id, null, request, promise);
             load.Run();
         }
         
-        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, BulkTemplateRequest request, DiscordPromise<List<TEntity>> promise)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> promise)
         {
             BulkTemplateToEntityCallback<TTemplate, TEntity> load = DiscordPool.Get<BulkTemplateToEntityCallback<TTemplate, TEntity>>();
             load.Init(templates, id, interaction, request, promise);
             load.Run();
         }
         
-        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, BulkTemplateRequest request, DiscordPromise<List<TEntity>> promise)
+        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> promise)
         {
             _templates = templates;
             _id = id;

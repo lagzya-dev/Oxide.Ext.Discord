@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
         
-        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateType type, TemplateVersion minVersion, DiscordPromise promise) where T : BaseTemplate
+        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordPromise promise) where T : BaseTemplate
         {
             if (template.Version < minVersion)
             {

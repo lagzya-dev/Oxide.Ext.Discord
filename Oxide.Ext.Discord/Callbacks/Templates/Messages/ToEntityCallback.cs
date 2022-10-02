@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         private TTemplate _template;
         private PlaceholderData _data;
         private TEntity _entity;
-        private DiscordPromise<TEntity> _promise;
+        private IDiscordPromise<TEntity> _promise;
 
         /// <summary>
         /// Starts the callback
@@ -22,14 +22,14 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         /// <param name="data"></param>
         /// <param name="entity"></param>
         /// <param name="callback"></param>
-        public static void Start(TTemplate template, PlaceholderData data, TEntity entity, DiscordPromise<TEntity> promise)
+        public static void Start(TTemplate template, PlaceholderData data, TEntity entity, IDiscordPromise<TEntity> promise)
         {
             ToEntityCallback<TTemplate, TEntity> handler = DiscordPool.Get<ToEntityCallback<TTemplate, TEntity>>();
             handler.Init(template, data, entity, promise);
             handler.Run();
         }
         
-        private void Init(TTemplate template, PlaceholderData data, TEntity entity, DiscordPromise<TEntity> promise)
+        private void Init(TTemplate template, PlaceholderData data, TEntity entity, IDiscordPromise<TEntity> promise)
         {
             _template = template;
             _data = data;

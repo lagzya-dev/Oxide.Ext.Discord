@@ -14,23 +14,23 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         private BaseMessageTemplatesLibrary<TTemplate, TEntity> _templates;
         private TemplateId _id;
         private DiscordInteraction _interaction;
-        private DiscordPromise<TTemplate> _promise;
+        private IDiscordPromise<TTemplate> _promise;
 
-        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordPromise<TTemplate> promise)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, IDiscordPromise<TTemplate> promise)
         {
             LoadMessageTemplateCallback<TTemplate, TEntity> load = DiscordPool.Get<LoadMessageTemplateCallback<TTemplate, TEntity>>();
             load.Init(templates, id, null, promise);
             load.Run();
         }
         
-        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id,  DiscordInteraction interaction, DiscordPromise<TTemplate> promise)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id,  DiscordInteraction interaction, IDiscordPromise<TTemplate> promise)
         {
             LoadMessageTemplateCallback<TTemplate, TEntity> load = DiscordPool.Get<LoadMessageTemplateCallback<TTemplate, TEntity>>();
             load.Init(templates, id, interaction, promise);
             load.Run();
         }
         
-        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, DiscordPromise<TTemplate> promise)
+        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, IDiscordPromise<TTemplate> promise)
         {
             _templates = templates;
             _id = id;

@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return ToEntityInternalAsync(data, entity, DiscordPromise<TEntity>.Create());
         }
 
-        internal DiscordPromise<TEntity> ToEntityInternalAsync(PlaceholderData data, TEntity message = null, DiscordPromise<TEntity> promise = null)
+        internal IDiscordPromise<TEntity> ToEntityInternalAsync(PlaceholderData data, TEntity message = null, IDiscordPromise<TEntity> promise = null)
         {
             if (promise == null)
             {
@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return promise;
         }
 
-        internal async Task HandleToEntityAsync(PlaceholderData data, TEntity entity, DiscordPromise<TEntity> promise)
+        internal async Task HandleToEntityAsync(PlaceholderData data, TEntity entity, IDiscordPromise<TEntity> promise)
         {
             promise.Resolve(await HandleToEntityAsync(data, entity).ConfigureAwait(false));
         }

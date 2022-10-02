@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Promise
 
         private readonly List<Action> _resolves = new List<Action>();
 
-        private readonly List<DiscordPromise> _children = new List<DiscordPromise>();
+        private readonly List<IDiscordPromise> _children = new List<IDiscordPromise>();
 
         public DiscordPromise()
         {
@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Promise
             _dispose = Dispose;
         }
 
-        internal static DiscordPromise Create(bool isInternal = false)
+        internal static IDiscordPromise Create(bool isInternal = false)
         {
             DiscordPromise promise = DiscordPool.Get<DiscordPromise>();
             promise.IsInternal = isInternal;
@@ -99,7 +99,7 @@ namespace Oxide.Ext.Discord.Promise
 
             for (int index = 0; index < _children.Count; index++)
             {
-                DiscordPromise child = _children[index];
+                IDiscordPromise child = _children[index];
                 child.Fail(Exception);
             }
             
@@ -135,7 +135,7 @@ namespace Oxide.Ext.Discord.Promise
             Interface.Oxide.NextTick(_fail);
         }
 
-        protected void AddChild(DiscordPromise child)
+        protected void AddChild(IDiscordPromise child)
         {
             if (State == PromiseState.Failed)
             {

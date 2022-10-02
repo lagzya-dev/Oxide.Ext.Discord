@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            DiscordPromise promise = DiscordPromise.Create();
+            IDiscordPromise promise = DiscordPromise.Create();
             
             TemplateId id = new TemplateId(plugin, templateName, null);
             RegisterTemplateCallback<TTemplate>.Start(this, id, template, _templateType, minVersion, promise);
@@ -75,7 +75,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             if (template == null) throw new ArgumentNullException(nameof(template));
             
-            DiscordPromise promise = DiscordPromise.Create();
+            IDiscordPromise promise = DiscordPromise.Create();
 
             TemplateId id = new TemplateId(plugin, templateName, language);
             RegisterTemplateCallback<TTemplate>.Start(this, id, template, _templateType, minVersion, promise);
@@ -91,7 +91,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <exception cref="ArgumentNullException"></exception>
         public IDiscordPromise<TTemplate> GetGlobalTemplateAsync(Plugin plugin, string templateName) => GetGlobalTemplateInternalAsync(plugin, templateName, DiscordPromise<TTemplate>.Create());
 
-        internal DiscordPromise<TTemplate> GetGlobalTemplateInternalAsync(Plugin plugin, string templateName, DiscordPromise<TTemplate> promise = null)
+        internal IDiscordPromise<TTemplate> GetGlobalTemplateInternalAsync(Plugin plugin, string templateName, IDiscordPromise<TTemplate> promise = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
@@ -111,14 +111,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
         public IDiscordPromise<TEntity> GetGlobalEntityAsync(Plugin plugin, string templateName, PlaceholderData data = null, TEntity entity = null) => GetGlobalEntityInternalAsync(plugin, templateName, data, entity, DiscordPromise<TEntity>.Create());
 
-        internal DiscordPromise<TEntity> GetGlobalEntityInternalAsync(Plugin plugin, string templateName, PlaceholderData data = null, TEntity entity = null, DiscordPromise<TEntity> promise = null)
+        internal IDiscordPromise<TEntity> GetGlobalEntityInternalAsync(Plugin plugin, string templateName, PlaceholderData data = null, TEntity entity = null, IDiscordPromise<TEntity> promise = null)
         {
             if (promise == null)
             {
                 promise = DiscordPromise<TEntity>.Create(true);
             }
             
-            DiscordPromise<TTemplate> load = GetGlobalTemplateInternalAsync(plugin, templateName);
+            IDiscordPromise<TTemplate> load = GetGlobalTemplateInternalAsync(plugin, templateName);
             load.Then(template => template.ToEntityInternalAsync(data, entity, promise));
             return promise;
         }
@@ -128,7 +128,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
         public IDiscordPromise<List<TEntity>> GetGlobalBulkEntityAsync(Plugin plugin, BulkTemplateRequest request) => GetGlobalBulkEntityInternalAsync(plugin, request, DiscordPromise<List<TEntity>>.Create());
 
-        internal DiscordPromise<List<TEntity>> GetGlobalBulkEntityInternalAsync(Plugin plugin, BulkTemplateRequest request, DiscordPromise<List<TEntity>> promise = null)
+        internal IDiscordPromise<List<TEntity>> GetGlobalBulkEntityInternalAsync(Plugin plugin, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> promise = null)
         {
             if (promise == null)
             {
@@ -176,7 +176,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         public IDiscordPromise<TTemplate> GetLocalizedTemplateAsync(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage) => GetLocalizedTemplateInternalAsync(plugin, templateName, language, DiscordPromise<TTemplate>.Create());
 
-        internal DiscordPromise<TTemplate> GetLocalizedTemplateInternalAsync(Plugin plugin, string templateName, string language, DiscordPromise<TTemplate> callback = null)
+        internal IDiscordPromise<TTemplate> GetLocalizedTemplateInternalAsync(Plugin plugin, string templateName, string language, IDiscordPromise<TTemplate> callback = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
@@ -198,14 +198,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         public IDiscordPromise<TEntity> GetLocalizedEntityAsync(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData data = null, TEntity entity = null) 
             => GetLocalizedEntityInternalAsync(plugin, templateName, language, data, entity, DiscordPromise<TEntity>.Create());
 
-        internal DiscordPromise<TEntity> GetLocalizedEntityInternalAsync(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData data = null, TEntity entity = null, DiscordPromise<TEntity> callback = null)
+        internal IDiscordPromise<TEntity> GetLocalizedEntityInternalAsync(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData data = null, TEntity entity = null, IDiscordPromise<TEntity> callback = null)
         {
             if (callback == null)
             {
                 callback = DiscordPromise<TEntity>.Create(true);
             }
             
-            DiscordPromise<TTemplate> load = GetLocalizedTemplateInternalAsync(plugin, templateName, language);
+            IDiscordPromise<TTemplate> load = GetLocalizedTemplateInternalAsync(plugin, templateName, language);
             load.Then(template => template.ToEntityInternalAsync(data, entity, callback));
             return callback;
         }
@@ -218,7 +218,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         public IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityAsync(Plugin plugin, BulkTemplateRequest request, string language = DiscordLang.DefaultOxideLanguage) 
             => GetLocalizedBulkEntityInternalAsync(plugin, request, language, DiscordPromise<List<TEntity>>.Create());
 
-        internal DiscordPromise<List<TEntity>> GetLocalizedBulkEntityInternalAsync(Plugin plugin, BulkTemplateRequest request, string language = DiscordLang.DefaultOxideLanguage, DiscordPromise<List<TEntity>> callback = null)
+        internal IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityInternalAsync(Plugin plugin, BulkTemplateRequest request, string language = DiscordLang.DefaultOxideLanguage, IDiscordPromise<List<TEntity>> callback = null)
         {
             if (callback == null)
             {
@@ -240,7 +240,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         public IDiscordPromise<TTemplate> GetLocalizedTemplateAsync(Plugin plugin, string templateName, DiscordInteraction interaction) => GetLocalizedTemplateInternalAsync(plugin, templateName, interaction, DiscordPromise<TTemplate>.Create());
 
-        internal DiscordPromise<TTemplate> GetLocalizedTemplateInternalAsync(Plugin plugin, string templateName, DiscordInteraction interaction, DiscordPromise<TTemplate> callback = null)
+        internal IDiscordPromise<TTemplate> GetLocalizedTemplateInternalAsync(Plugin plugin, string templateName, DiscordInteraction interaction, IDiscordPromise<TTemplate> callback = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
@@ -255,7 +255,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return callback;
         }
         
-        internal async Task HandleGetLocalizedTemplateAsync(TemplateId id, DiscordInteraction interaction, DiscordPromise<TTemplate> callback)
+        internal async Task HandleGetLocalizedTemplateAsync(TemplateId id, DiscordInteraction interaction, IDiscordPromise<TTemplate> callback)
         {
             callback.Resolve(await HandleGetLocalizedTemplateAsync(id, interaction).ConfigureAwait(false));
         }
@@ -265,23 +265,23 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         public IDiscordPromise<TEntity> GetLocalizedEntityAsync(Plugin plugin, string templateName, DiscordInteraction interaction, PlaceholderData data = null, TEntity entity = null) 
             => GetLocalizedEntityInternalAsync(plugin, templateName, interaction, data, entity, DiscordPromise<TEntity>.Create());
 
-        internal DiscordPromise<TEntity> GetLocalizedEntityInternalAsync(Plugin plugin, string templateName, DiscordInteraction interaction, PlaceholderData data = null, TEntity entity = null, DiscordPromise<TEntity> callback = null)
+        internal IDiscordPromise<TEntity> GetLocalizedEntityInternalAsync(Plugin plugin, string templateName, DiscordInteraction interaction, PlaceholderData data = null, TEntity entity = null, IDiscordPromise<TEntity> callback = null)
         {
             if (callback == null)
             {
                 callback = DiscordPromise<TEntity>.Create(true);
             }
             
-            DiscordPromise<TTemplate> load = GetLocalizedTemplateInternalAsync(plugin, templateName, interaction);
+            IDiscordPromise<TTemplate> load = GetLocalizedTemplateInternalAsync(plugin, templateName, interaction);
             load.Then(template => template.ToEntityInternalAsync(data, entity, callback));
             return callback;
         }
 
         public IDiscordPromise<List<T>> GetLocalizedBulkEntityAsync<T>(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request) where T : class, TEntity 
-            => (IDiscordPromise<List<T>>)GetLocalizedBulkEntityInternalAsync(plugin, interaction, request, DiscordPromise<List<T>>.Create() as DiscordPromise<List<TEntity>>);
+            => GetLocalizedBulkEntityInternalAsync(plugin, interaction, request, DiscordPromise<List<TEntity>>.Create()).Then(r => r.ConvertAll(ConverterExt.Convert<T, TEntity>));
         public IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityAsync(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request) => GetLocalizedBulkEntityInternalAsync(plugin, interaction, request, DiscordPromise<List<TEntity>>.Create());
 
-        internal DiscordPromise<List<TEntity>> GetLocalizedBulkEntityInternalAsync(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request, DiscordPromise<List<TEntity>> callback)
+        internal IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityInternalAsync(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> callback)
         {
             if (callback == null)
             {
@@ -293,7 +293,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return callback;
         }
 
-        internal async Task HandleGetLocalizedBulkEntityAsync(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction, DiscordPromise<List<TEntity>> callback)
+        internal async Task HandleGetLocalizedBulkEntityAsync(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction, IDiscordPromise<List<TEntity>> callback)
         {
             List<TEntity> entities = await HandleGetLocalizedBulkEntityAsync(id, request, interaction).ConfigureAwait(false);
             callback.Resolve(entities);
