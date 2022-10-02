@@ -344,7 +344,7 @@ namespace Oxide.Ext.Discord
                 }
             }
 
-            return DiscordPool.ToStringAndFreeStringBuilder(ref sb);
+            return DiscordPool.FreeStringBuilderToString(sb);
         }
 
         private void UpdateLogLevel(DiscordLogLevel level)

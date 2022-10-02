@@ -58,12 +58,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
         }
 
         ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
-        }
-        
-        ///<inheritdoc/>
         protected override void EnterPool()
         {
             base.EnterPool();

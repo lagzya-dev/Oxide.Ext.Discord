@@ -9,11 +9,10 @@ namespace Oxide.Ext.Discord.Pooling
     /// <typeparam name="TValue"></typeparam>
     internal class HashPool<TKey, TValue> : BasePool<Hash<TKey, TValue>>
     {
-        internal static readonly IPool<Hash<TKey, TValue>> Instance;
+        internal static readonly IPool<Hash<TKey, TValue>> Instance = new HashPool<TKey, TValue>();
         
         static HashPool()
         {
-            Instance = new HashPool<TKey, TValue>();
             DiscordPool.Pools.Add(Instance);
         }
 

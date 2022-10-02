@@ -47,10 +47,5 @@ namespace Oxide.Ext.Discord.Callbacks.Api.Completed
             base.EnterPool();
             _channel = null;
         }
-
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
-        }
     }
 }

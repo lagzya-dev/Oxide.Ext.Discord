@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.Extensions
                 hash.Remove(key);
             }
             
-            DiscordPool.FreeList(ref removeKeys);
+            DiscordPool.FreeList(removeKeys);
         }
         
         /// <summary>
@@ -65,7 +65,7 @@ namespace Oxide.Ext.Discord.Extensions
                 hash.Remove(key);
             }
             
-            DiscordPool.FreeList(ref removeKeys);
+            DiscordPool.FreeList(removeKeys);
         }
 
         /// <summary>

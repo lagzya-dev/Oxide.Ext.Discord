@@ -82,11 +82,5 @@ namespace Oxide.Ext.Discord.Entities.Api
             Remaining = 0;
             Scope = null;
         }
-
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
-        }
     }
 }

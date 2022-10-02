@@ -16,6 +16,6 @@ namespace Oxide.Ext.Discord.Pooling
         /// Returns the pooled type back to the pool
         /// </summary>
         /// <param name="poolable"></param>
-        void Free(ref T poolable);
+        void Free(T poolable);
     }
 }

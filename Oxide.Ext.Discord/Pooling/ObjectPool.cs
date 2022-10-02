@@ -1,25 +1,29 @@
 namespace Oxide.Ext.Discord.Pooling
 {
-    internal class ObjectPool<T> : BasePool<T> where T : BasePoolable, new()
+    internal class ObjectPool<T> : BasePool<BasePoolable> where T : BasePoolable, new()
     {
-        internal static readonly IPool<T> Instance;
+        internal static readonly IPool<BasePoolable> Instance = new ObjectPool<T>();
         
         static ObjectPool()
         {
-            Instance = new ObjectPool<T>();
             DiscordPool.Pools.Add(Instance);
         }
 
         private ObjectPool() : base(512) { }
 
-        protected override T CreateNew() => new T();
+        protected override BasePoolable CreateNew()
+        {
+            T obj = new T();
+            obj.OnInit(this);
+            return obj;
+        }
 
-        protected override void OnGetItem(T item)
+        protected override void OnGetItem(BasePoolable item)
         {
             item.LeavePoolInternal();
         }
         
-        protected override bool OnFreeItem(ref T item)
+        protected override bool OnFreeItem(ref BasePoolable item)
         {
             if (item.Disposed)
             {

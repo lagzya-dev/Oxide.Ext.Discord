@@ -69,11 +69,5 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             Index = default(ushort);
             Length = default(ushort);
         }
-
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
-        }
     }
 }

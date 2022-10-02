@@ -40,15 +40,9 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         ///<inheritdoc/>
         protected override void EnterPool()
         {
+            Payload?.Dispose();
             Client = null;
             Payload = null;
-        }
-
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            Payload?.Dispose();
-            DiscordPool.Free(this);
         }
     }
 }

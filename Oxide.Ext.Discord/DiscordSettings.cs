@@ -50,7 +50,7 @@ namespace Oxide.Ext.Discord
             sb.Append('.');
             sb.Append(ApiToken.Substring(second + 1));
 
-            _hiddenToken = DiscordPool.ToStringAndFreeStringBuilder(ref sb);
+            _hiddenToken = DiscordPool.FreeStringBuilderToString(sb);
             return _hiddenToken;
         }
 

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Oxide.Ext.Discord.Pooling
 {
@@ -16,6 +15,12 @@ namespace Oxide.Ext.Discord.Pooling
         /// If the object instantiated using new() outside the pool it will be false
         /// </summary>
         private bool _shouldPool;
+        private IPool<BasePoolable> _pool;
+
+        internal void OnInit(IPool<BasePoolable> pool)
+        {
+            _pool = pool;
+        }
 
         internal void EnterPoolInternal()
         {
@@ -50,42 +55,19 @@ namespace Oxide.Ext.Discord.Pooling
         }
 
         /// <summary>
-        /// Frees a pooled object that is part of a field on this object
-        /// </summary>
-        /// <param name="obj">Object to free</param>
-        /// <typeparam name="T">Type of object being freed</typeparam>
-        protected void Free<T>(ref T obj) where T : BasePoolable, new()
-        {
-            if (obj != null && obj._shouldPool)
-            {
-                DiscordPool.Free(ref obj);
-            }
-        }
-        
-        /// <summary>
-        /// Frees a pooled list that is part of a field on this object
-        /// </summary>
-        /// <param name="obj">List to be freed</param>
-        /// <typeparam name="T">Type of the list</typeparam>
-        protected void FreeList<T>(ref List<T> obj)
-        {
-            DiscordPool.FreeList(ref obj);
-        }
-
-        /// <summary>
         /// Disposes the object when used in a using statement
         /// </summary>
         public void Dispose()
         {
             if (_shouldPool)
             {
-                DisposeInternal();
+                if (Disposed)
+                {
+                    throw new ObjectDisposedException(GetType().Name);
+                }
+                
+                _pool.Free(this);
             }
         }
-
-        /// <summary>
-        /// Handles returning the poolable back to the pool
-        /// </summary>
-        protected abstract void DisposeInternal();
     }
 }

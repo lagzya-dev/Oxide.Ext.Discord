@@ -808,7 +808,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 guild.Emojis.Remove(id);
             }
             
-            DiscordPool.FreeList(ref removedEmojis);
+            DiscordPool.FreeList(removedEmojis);
 
             guild.Emojis.RemoveAll(e => e.EmojiId.HasValue && !emojis.Emojis.ContainsKey(e.EmojiId.Value));
                     
@@ -857,7 +857,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 guild.Emojis.Remove(id);
             }
             
-            DiscordPool.FreeList(ref removedStickers);
+            DiscordPool.FreeList(removedStickers);
 
             guild.Emojis.RemoveAll(e => e.EmojiId.HasValue && !stickers.Stickers.ContainsKey(e.EmojiId.Value));
                     
@@ -1686,7 +1686,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 guild.Threads.Remove(threadId);
             }
             
-            DiscordPool.FreeList(ref deleteThreadIds);
+            DiscordPool.FreeList(deleteThreadIds);
             
             //Add threads to the guild
             foreach (DiscordChannel thread in sync.Threads.Values)

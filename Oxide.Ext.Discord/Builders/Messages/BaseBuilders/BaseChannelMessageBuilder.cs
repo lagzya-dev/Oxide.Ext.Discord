@@ -86,7 +86,7 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
                 ids.Add(sticker.Id);
             }
             AddStickers(ids);
-            DiscordPool.FreeList(ref ids);
+            DiscordPool.FreeList(ids);
                 
             return Builder;
         }

@@ -113,7 +113,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
             
             Replace(builder, placeholderState, sb.ToString());
-            DiscordPool.FreeStringBuilder(ref sb);
+            DiscordPool.FreeStringBuilder(sb);
         }
         
         /// <summary>

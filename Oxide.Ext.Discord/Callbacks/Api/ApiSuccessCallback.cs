@@ -26,12 +26,6 @@ namespace Oxide.Ext.Discord.Callbacks.Api
             _onSuccess.Invoke();
         }
 
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
-        }
-
         protected override void EnterPool()
         {
             base.EnterPool();

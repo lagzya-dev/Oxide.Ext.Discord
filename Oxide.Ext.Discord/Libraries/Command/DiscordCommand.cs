@@ -260,8 +260,8 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 RemoveGuildCommand(cmd);
             }
             
-            DiscordPool.FreeList(ref dmCommands);
-            DiscordPool.FreeList(ref guildCommands);
+            DiscordPool.FreeList(dmCommands);
+            DiscordPool.FreeList(guildCommands);
         }
 
         /// <summary>

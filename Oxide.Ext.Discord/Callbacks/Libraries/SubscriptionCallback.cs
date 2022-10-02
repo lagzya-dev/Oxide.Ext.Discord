@@ -49,12 +49,6 @@ namespace Oxide.Ext.Discord.Callbacks.Libraries
             }
         }
 
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
-        }
-        
         protected override void EnterPool()
         {
             _plugin = null;

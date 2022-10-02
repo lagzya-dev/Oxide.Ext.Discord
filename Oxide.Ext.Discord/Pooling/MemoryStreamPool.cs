@@ -7,11 +7,10 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     internal class MemoryStreamPool : BasePool<MemoryStream>
     {
-        internal static readonly IPool<MemoryStream> Instance;
+        internal static readonly IPool<MemoryStream> Instance = new MemoryStreamPool();
         
         static MemoryStreamPool()
         {
-            Instance = new MemoryStreamPool();
             DiscordPool.Pools.Add(Instance);
         }
 

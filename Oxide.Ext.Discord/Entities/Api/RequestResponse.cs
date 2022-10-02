@@ -86,13 +86,6 @@ namespace Oxide.Ext.Discord.Entities.Api
         }
 
         ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            RateLimit?.Dispose();
-            DiscordPool.Free(this);
-        }
-
-        ///<inheritdoc/>
         protected override void LeavePool()
         {
             base.LeavePool();
@@ -102,6 +95,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         ///<inheritdoc/>
         protected override void EnterPool()
         {
+            RateLimit?.Dispose();
             Status = default(RequestCompletedStatus);
             RateLimit = null;
             Error = null;
@@ -109,7 +103,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             _client = null;
             if (Content != null)
             {
-                DiscordPool.FreeMemoryStream(ref Content);
+                DiscordPool.FreeMemoryStream(Content);
             }
         }
     }

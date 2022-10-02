@@ -281,7 +281,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
             HashSet<string> addedList = DiscordPool.GetHashSet<string>();
             AddPlayerList(Covalence.Players.Connected, filter, comparison, search, options, addedList);
             AddPlayerList(Covalence.Players.All, filter, comparison, search, options, addedList);
-            DiscordPool.FreeHashSet(ref addedList);
+            DiscordPool.FreeHashSet(addedList);
         }
         
         /// <summary>

@@ -50,11 +50,5 @@ namespace Oxide.Ext.Discord.Entities.Gatway
             Data = null;
             Sequence = null;
         }
-        
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
-        }
     }
 }

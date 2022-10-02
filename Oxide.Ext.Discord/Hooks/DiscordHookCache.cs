@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Hooks
                 _hookCache.Remove(hooksToRemove[index]);
             }
             
-            DiscordPool.FreeList(ref hooksToRemove);
+            DiscordPool.FreeList(hooksToRemove);
         }
         
         internal void UnsubscribeHook(Plugin plugin, string hook)

@@ -82,17 +82,11 @@ namespace Oxide.Ext.Discord.Builders
             Dispose();
             return query;
         }
-        
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
-        }
-        
+
         /// <inheritdoc/>
         protected override void EnterPool()
         {
-            DiscordPool.FreeStringBuilder(ref _builder);
+            DiscordPool.FreeStringBuilder(_builder);
         }
 
         /// <inheritdoc/>

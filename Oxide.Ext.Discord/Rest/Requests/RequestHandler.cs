@@ -303,18 +303,12 @@ namespace Oxide.Ext.Discord.Rest.Requests
             return new RequestError(Request, type, log);
         }
 
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
+        /// <inheritdoc/>
+        protected override void EnterPool()
         {
             _json?.Dispose();
             Request.Dispose();
             _response.Dispose();
-            DiscordPool.Free(this);
-        }
-        
-        /// <inheritdoc/>
-        protected override void EnterPool()
-        {
             _bucket = null;
             _rest = null;
             _json = null;

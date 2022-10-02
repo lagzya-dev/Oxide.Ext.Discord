@@ -157,11 +157,5 @@ namespace Oxide.Ext.Discord.Json.Serialization
         {
             ClearStream();
         }
-
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
-        }
     }
 }

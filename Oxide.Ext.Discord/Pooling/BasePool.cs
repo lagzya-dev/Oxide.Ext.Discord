@@ -62,7 +62,9 @@ namespace Oxide.Ext.Discord.Pooling
         /// Frees an item back to the pool
         /// </summary>
         /// <param name="item">Item being freed</param>
-        public void Free(ref T item)
+        public void Free(T item) => Free(ref item);
+
+        private void Free(ref T item)
         {
             if (item == null)
             {
@@ -94,7 +96,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             lock (_lock)
             {
-                for (int i = Math.Min(_index, _pool.Length - 1); i >= 0; i--)
+                for (int i = _index; i >= 0; i--)
                 {
                     _pool[i] = null;
                 }

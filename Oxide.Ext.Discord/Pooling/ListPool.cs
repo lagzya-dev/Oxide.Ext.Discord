@@ -8,11 +8,10 @@ namespace Oxide.Ext.Discord.Pooling
     /// <typeparam name="T">Type that will be in the list</typeparam>
     internal class ListPool<T> : BasePool<List<T>>
     {
-        internal static readonly IPool<List<T>> Instance;
+        internal static readonly IPool<List<T>> Instance = new ListPool<T>();
         
         static ListPool()
         {
-            Instance = new ListPool<T>();
             DiscordPool.Pools.Add(Instance);
         }
 

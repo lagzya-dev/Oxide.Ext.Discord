@@ -4,11 +4,10 @@ namespace Oxide.Ext.Discord.Pooling
 {
     internal class PlaceholderDataPool : BasePool<PlaceholderData>
     {
-        internal static readonly IPool<PlaceholderData> Instance;
+        internal static readonly IPool<PlaceholderData> Instance = new PlaceholderDataPool();
         
         static PlaceholderDataPool()
         {
-            Instance = new PlaceholderDataPool();
             DiscordPool.Pools.Add(Instance);
         }
 

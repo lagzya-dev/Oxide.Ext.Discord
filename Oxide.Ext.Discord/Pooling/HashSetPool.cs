@@ -8,15 +8,14 @@ namespace Oxide.Ext.Discord.Pooling
     /// <typeparam name="T"></typeparam>
     internal class HashSetPool<T> : BasePool<HashSet<T>>
     {
-        internal static readonly IPool<HashSet<T>> Instance;
+        internal static readonly IPool<HashSet<T>> Instance = new HashSetPool<T>();
         
         static HashSetPool()
         {
-            Instance = new HashSetPool<T>();
             DiscordPool.Pools.Add(Instance);
         }
 
-        private HashSetPool() : base(512) { }
+        private HashSetPool() : base(256) { }
         
         protected override HashSet<T> CreateNew() => new HashSet<T>();
         

@@ -104,7 +104,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 QueueRequest(handler);
             }
             
-            DiscordPool.FreeList(ref handlers);
+            DiscordPool.FreeList(handlers);
             
             data.Requests.Clear();
         }
@@ -281,12 +281,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             _isShutdown = true;
             _requestSync.Set();
             _completedSync.Set();
-        }
-
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
         }
     }
 }

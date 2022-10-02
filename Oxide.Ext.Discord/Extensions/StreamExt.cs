@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Extensions
     /// <summary>
     /// Stream Extension Methods
     /// </summary>
-    internal static class StreamExt
+    public static class StreamExt
     {
         /// <summary>
         /// Copies one stream to another using a pooled byte[] buffer

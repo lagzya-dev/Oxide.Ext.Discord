@@ -101,7 +101,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 }
 
                 text = builder.ToString();
-                DiscordPool.FreeStringBuilder(ref builder);
+                DiscordPool.FreeStringBuilder(builder);
                 state.Dispose();
             }
 

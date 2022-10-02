@@ -77,7 +77,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 _index++;
             }
 
-            return DiscordPool.ToStringAndFreeStringBuilder(ref bucket);
+            return DiscordPool.FreeStringBuilderToString(bucket);
         }
 
         /// <summary>
@@ -158,12 +158,6 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             }
             
             return false;
-        }
-
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
         }
 
         ///<inheritdoc/>
