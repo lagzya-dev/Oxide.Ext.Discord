@@ -1592,9 +1592,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.EnterPool">
             <inheritdoc/>
         </member>
@@ -1668,12 +1665,6 @@
             <param name="id">ID of the player</param>
             <returns><see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback`1.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback`1.EnterPool">
             <inheritdoc/>
         </member>
@@ -1694,63 +1685,6 @@
             <param name="client"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback">
-            <summary>
-            Represents the base class for Discord Async Callbacks
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback.OnSuccess(System.Action)">
-            <summary>
-            Registers a callback once the async call is completed
-            </summary>
-            <param name="complete">Callback to register</param>
-            <returns>this</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback.InvokeSuccessInternal">
-            <summary>
-            Handles calling the callbacks and disposing of the object
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback.InvokeSuccess">
-            <summary>
-            Invokes the <see cref="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback.InvokeSuccessInternal"/> method
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1">
-            <summary>
-            Represents the base class for Discord Async Callbacks of {T}
-            </summary>
-            <typeparam name="TResult">Type to callback with</typeparam>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1._data">
-            <summary>
-            The data to callback with
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.OnSuccess(System.Action{`0})">
-            <summary>
-            Registers a callback once the async call is completed with {T} type
-            </summary>
-            <param name="complete">Callback to register</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.InvokeSuccessInternal">
-            <summary>
-            Handles calling the callbacks and disposing of the object
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.InvokeSuccess(`0)">
-            <summary>
-            Invokes the <see cref="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.InvokeSuccessInternal"/> method
-            </summary>
-            <param name="data">Data to invoke with</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback`1.EnterPool">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback">
@@ -1839,34 +1773,7 @@
         <member name="M:Oxide.Ext.Discord.Callbacks.BaseNextTickCallback.Run">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Hooks.MultiPluginHookCallback.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Hooks.SinglePluginHookCallback.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Libraries.SubscriptionCallback.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToBulkEntityCallback`2.Start(`0,Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkEntityRequest{`1},Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback{System.Collections.Generic.List{`1}})">
-            <summary>
-            Starts the callback
-            </summary>
-            <param name="template"></param>
-            <param name="placeholder"></param>
-            <param name="entities"></param>
-            <param name="callback"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToBulkEntityCallback`2.HandleCallback">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToBulkEntityCallback`2.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToBulkEntityCallback`2.DisposeInternal">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.Start(`0,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,`1,Oxide.Ext.Discord.Callbacks.Async.DiscordAsyncCallback{`1})">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.Start(`0,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,`1,Oxide.Ext.Discord.Promise.DiscordPromise{`1})">
             <summary>
             Starts the callback
             </summary>
@@ -1879,9 +1786,6 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig">
@@ -3499,9 +3403,6 @@
         <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Api.RequestError">
             <summary>
             Error object that is returned to the caller when a request fails
@@ -3685,9 +3586,6 @@
             </summary>
             <param name="client">Client the request was for</param>
             <returns>A cancelled <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestResponse"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.DisposeInternal">
-            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.LeavePool">
             <inheritdoc/>
@@ -6569,9 +6467,6 @@
             <param name="code">OP Code for the command</param>
             <param name="payload">Payload for the command</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.EnterPool">
             <inheritdoc/>
         </member>
@@ -6827,9 +6722,6 @@
         <member name="M:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.EventPayload">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#payloads">Gateway Payload Structure</a>
@@ -6863,9 +6755,6 @@
             <returns>Data converted to {T}</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent">
@@ -17208,31 +17097,6 @@
             Ex: 2 months ago
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Interfaces.Callbacks.Async.IDiscordAsyncCallback">
-            <summary>
-            Interface for Discord Async Callbacks
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Interfaces.Callbacks.Async.IDiscordAsyncCallback.OnSuccess(System.Action)">
-            <summary>
-            Adds a callback to be called when completed
-            </summary>
-            <param name="complete">Callback to call</param>
-            <returns>this</returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Interfaces.Callbacks.Async.IDiscordAsyncCallback`1">
-            <summary>
-            Interface for Discord Async Callbacks of {T}
-            </summary>
-            <typeparam name="T">Type to callback with</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Interfaces.Callbacks.Async.IDiscordAsyncCallback`1.OnSuccess(System.Action{`0})">
-            <summary>
-            Registers a callback of {T}
-            </summary>
-            <param name="complete">Callback to call</param>
-            <returns>this</returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordMessageTemplate">
             <summary>
             Interfaces for <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates"/> Messages
@@ -17756,9 +17620,6 @@
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter">
             <summary>
             This is a pooled JSON writer that can write JSON to a stream
@@ -17804,9 +17665,6 @@
             <param name="payload">Payload to be serialized</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.AppCommands.Commands.BaseAppCommand">
@@ -19281,9 +19139,6 @@
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription">
             <summary>
             Represents a channel subscription for a plugin
@@ -20660,7 +20515,7 @@
             </summary>
             <returns>Newly created type of T</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Free(`0@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Free(`0)">
             <summary>
             Frees an item back to the pool
             </summary>
@@ -20708,28 +20563,9 @@
             Can be overriden in child classes to set the initial object state
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePoolable.Free``1(``0@)">
-            <summary>
-            Frees a pooled object that is part of a field on this object
-            </summary>
-            <param name="obj">Object to free</param>
-            <typeparam name="T">Type of object being freed</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePoolable.FreeList``1(System.Collections.Generic.List{``0}@)">
-            <summary>
-            Frees a pooled list that is part of a field on this object
-            </summary>
-            <param name="obj">List to be freed</param>
-            <typeparam name="T">Type of the list</typeparam>
-        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePoolable.Dispose">
             <summary>
             Disposes the object when used in a using statement
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePoolable.DisposeInternal">
-            <summary>
-            Handles returning the poolable back to the pool
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1">
@@ -20770,13 +20606,6 @@
             </summary>
             <typeparam name="T">Type to be returned</typeparam>
             <returns>Pooled object of type T</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.Free``1(``0@)">
-            <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Pooling.BasePoolable"/> back into the pool
-            </summary>
-            <param name="value">Object to free</param>
-            <typeparam name="T">Type of object being freed</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.Free``1(``0)">
             <summary>
@@ -20832,14 +20661,14 @@
             </summary>
             <returns>Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeList``1(System.Collections.Generic.List{``0}@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeList``1(System.Collections.Generic.List{``0})">
             <summary>
             Free's a pooled <see cref="T:System.Collections.Generic.List`1"/>
             </summary>
             <param name="list">List to be freed</param>
             <typeparam name="T">Type of the list</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeHash``2(Oxide.Plugins.Hash{``0,``1}@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeHash``2(Oxide.Plugins.Hash{``0,``1})">
             <summary>
             Frees a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
             </summary>
@@ -20847,26 +20676,26 @@
             <typeparam name="TKey">Type for key</typeparam>
             <typeparam name="TValue">Type for value</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeHashSet``1(System.Collections.Generic.HashSet{``0}@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeHashSet``1(System.Collections.Generic.HashSet{``0})">
             <summary>
             Free's a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
             </summary>
             <param name="list">HashSet to be freed</param>
             <typeparam name="T">Type of the HashSet</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeStringBuilder(System.Text.StringBuilder@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeStringBuilder(System.Text.StringBuilder)">
             <summary>
             Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool
             </summary>
             <param name="sb">StringBuilder being freed</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.ToStringAndFreeStringBuilder(System.Text.StringBuilder@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeStringBuilderToString(System.Text.StringBuilder)">
             <summary>
-            Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool returning the <see cref="T:System.String"/>
+            Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool returning the built <see cref="T:System.String"/>
             </summary>
             <param name="sb"><see cref="T:System.Text.StringBuilder"/> being freed</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeMemoryStream(System.IO.MemoryStream@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeMemoryStream(System.IO.MemoryStream)">
             <summary>
             Frees a <see cref="T:System.IO.MemoryStream"/> back to the pool
             </summary>
@@ -20919,7 +20748,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool`1.Free(`0@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.IPool`1.Free(`0)">
             <summary>
             Returns the pooled type back to the pool
             </summary>
@@ -20949,6 +20778,88 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.StringBuilderPool.OnFreeItem(System.Text.StringBuilder@)">
             <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Promise.DiscordPromise">
+            <summary>
+            Represents the base class for Discord Async Callbacks
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.Then(System.Action)">
+            <summary>
+            Registers a callback once the async call is completed
+            </summary>
+            <param name="onResolved">Callback to register</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.InvokeResolveInternal">
+            <summary>
+            Handles calling the callbacks and disposing of the object
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.Resolve">
+            <summary>
+            Invokes the <see cref="M:Oxide.Ext.Discord.Promise.DiscordPromise.InvokeResolveInternal"/> method
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Promise.DiscordPromise`1">
+            <summary>
+            Represents a DiscordPromise {TResult}
+            </summary>
+            <typeparam name="TResult">Callback type of the promise</typeparam>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promise.DiscordPromise`1._data">
+            <summary>
+            The data to callback with
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.Then(System.Action{`0})">
+            <summary>
+            Registers a Promise callback once the async call is completed with {T} type
+            </summary>
+            <param name="onResolved">Callback to register</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.InvokeResolveInternal">
+            <summary>
+            Handles calling the callbacks and disposing of the object
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.Resolve(`0)">
+            <summary>
+            Invokes the <see cref="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.InvokeResolveInternal"/> method
+            </summary>
+            <param name="data">Data to invoke with</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Promise.IDiscordPromise">
+            <summary>
+            Interface for Discord Async Callbacks
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise.Then(System.Action)">
+            <summary>
+            Adds a callback to be called when completed
+            </summary>
+            <param name="onResolved">Callback to call</param>
+            <returns>this</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Promise.IDiscordPromise`1">
+            <summary>
+            Interface for Discord Async Callbacks of {T}
+            </summary>
+            <typeparam name="TResult">Type to callback with</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise`1.Then(System.Action{`0})">
+            <summary>
+            Registers a callback of {T}
+            </summary>
+            <param name="onResolved">Callback to call</param>
+            <returns>this</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.RateLimits.BaseRateLimit">
             <summary>
@@ -21113,9 +21024,6 @@
         <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator">
             <summary>
             Represents a type that splits string by a specific char
@@ -21156,9 +21064,6 @@
             If the current route is now reactions we stop processing the bucket ID
             </summary>
             <param name="lastIndex"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.DisposeInternal">
-            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.EnterPool">
             <inheritdoc/>
@@ -21268,9 +21173,6 @@
         <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.OnRequestSuccess(Oxide.Ext.Discord.Entities.Api.RequestResponse)">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.DisposeInternal">
-            <inheritdoc/>
-        </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.EnterPool">
             <inheritdoc/>
         </member>
@@ -21325,9 +21227,6 @@
             <summary>
             Aborts a currently running request
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.DisposeInternal">
-            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.RequestHandler.EnterPool">
             <inheritdoc/>
@@ -21393,9 +21292,6 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.OnRequestSuccess(Oxide.Ext.Discord.Entities.Api.RequestResponse)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.DisposeInternal">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.EnterPool">
