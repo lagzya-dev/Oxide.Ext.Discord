@@ -12,8 +12,18 @@ namespace Oxide.Ext.Discord.Builders
     /// </summary>
     public class DiscordEmbedBuilder
     {
-        private readonly DiscordEmbed _embed = new DiscordEmbed();
+        private readonly DiscordEmbed _embed;
 
+        public DiscordEmbedBuilder()
+        {
+            _embed = new DiscordEmbed();
+        }
+
+        public DiscordEmbedBuilder(DiscordEmbed embed)
+        {
+            _embed = embed;
+        }
+        
         /// <summary>
         /// Adds a title to the embed message
         /// </summary>
