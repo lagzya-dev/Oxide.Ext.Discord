@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Promise
         IDiscordPromise<TConvert> Then<TConvert>(Func<TResult, TConvert> onResolved);
         IDiscordPromise<TConvert> Then<TConvert>(Func<TResult, IDiscordPromise<TConvert>> onResolved);
 
-        IDiscordPromise<TResult> Fail(Action<Exception> onFail);
+        IDiscordPromise<TResult> Catch(Action<Exception> onFail);
 
         IDiscordPromise<TResult> Done(Action<TResult> onResolved, Action<Exception> onFail);
         

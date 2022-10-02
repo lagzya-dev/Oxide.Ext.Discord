@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Promise
         /// <returns>this</returns>
         IDiscordPromise Then(Action onResolved);
 
-        IDiscordPromise Fail(Action<Exception> onFail);
+        IDiscordPromise Catch(Action<Exception> onFail);
 
         IDiscordPromise Done(Action onResolved, Action<Exception> onFail);
         

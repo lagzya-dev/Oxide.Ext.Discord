@@ -1773,7 +1773,7 @@
         <member name="M:Oxide.Ext.Discord.Callbacks.BaseNextTickCallback.Run">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.Start(`0,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,`1,Oxide.Ext.Discord.Promise.DiscordPromise{`1})">
+        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.Start(`0,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,`1,Oxide.Ext.Discord.Promise.IDiscordPromise{`1})">
             <summary>
             Starts the callback
             </summary>

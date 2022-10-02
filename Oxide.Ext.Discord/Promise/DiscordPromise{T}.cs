@@ -70,7 +70,7 @@ namespace Oxide.Ext.Discord.Promise
             return promise;
         }
         
-        public IDiscordPromise<TResult> Fail(Action<Exception> onFail)
+        public IDiscordPromise<TResult> Catch(Action<Exception> onFail)
         {
             if (State == PromiseState.Failed)
             {
@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.Promise
         public IDiscordPromise<TResult> Done(Action<TResult> onResolved, Action<Exception> onFail)
         {
             Then(onResolved);
-            Fail(onFail);
+            Catch(onFail);
             return this;
         }
         
