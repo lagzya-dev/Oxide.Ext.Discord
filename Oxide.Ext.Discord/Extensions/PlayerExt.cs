@@ -103,9 +103,9 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateInternalAsync(plugin, templateName).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateInternalAsync(plugin, templateName).Then(template =>
             {
-                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).Then(response =>
                 {
                     SendMessage(client, player.GetDiscordUserId(), response, callback, error);
                 });
@@ -125,9 +125,9 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, Lang.GetLanguage(player.Id)).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, Lang.GetLanguage(player.Id)).Then(template =>
             {
-                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).Then(response =>
                 {
                     SendMessage(client, player.GetDiscordUserId(), response, callback, error);
                 });

@@ -1,15 +1,14 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Interfaces.Callbacks.Async;
 using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
@@ -80,22 +79,15 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             return (T)ToEntity(data, message);
         }
-        
 
-        public IDiscordAsyncCallback<T> ToMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordMessageTemplate, new()
+        public IDiscordPromise<T> ToMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordMessageTemplate, new()
         {
-            return ToMessageInternalAsync(data, message, DiscordAsyncCallback<T>.Create());
+            return ToEntityInternalAsync(data, message).Then(r => (T)r);
         }
         
-        internal DiscordAsyncCallback<T> ToMessageInternalAsync<T>(PlaceholderData data, T message = null, DiscordAsyncCallback<T> callback = null) where T : class, IDiscordMessageTemplate, new()
+        internal IDiscordPromise<T> ToMessageInternalAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordMessageTemplate, new()
         {
-            if (callback == null)
-            {
-                callback = DiscordAsyncCallback<T>.Create(true);
-            }
-            
-            ToEntityInternalAsync(data, message, (DiscordAsyncCallback<IDiscordMessageTemplate>)(IDiscordAsyncCallback<IDiscordMessageTemplate>)callback);
-            return callback;
+            return ToEntityInternalAsync(data, message).Then(r => (T)r);
         }
         
         public override IDiscordMessageTemplate ToEntity(PlaceholderData data, IDiscordMessageTemplate message)

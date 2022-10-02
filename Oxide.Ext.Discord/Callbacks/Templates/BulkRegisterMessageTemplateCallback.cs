@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates
 {
@@ -13,28 +13,28 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
         private List<BulkTemplateRegistration<T>> _templates;
         private TemplateType _type;
         private TemplateVersion _minVersion;
-        private DiscordAsyncCallback _callback;
+        private IDiscordPromise _promise;
         
-        public static void Start(BaseTemplateLibrary library, TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, DiscordAsyncCallback callback)
+        public static void Start(BaseTemplateLibrary library, TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, IDiscordPromise promise)
         {
             BulkRegisterTemplateCallback<T> register = DiscordPool.Get<BulkRegisterTemplateCallback<T>>();
-            register.Init(library, id, templates, type, minVersion, callback);
+            register.Init(library, id, templates, type, minVersion, promise);
             register.Run();
         }
         
-        private void Init(BaseTemplateLibrary library, TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, DiscordAsyncCallback callback)
+        private void Init(BaseTemplateLibrary library, TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, IDiscordPromise promise)
         {
             _library = library;
             _id = id;
             _templates = templates;
             _type = type;
             _minVersion = minVersion;
-            _callback = callback;
+            _promise = promise;
         }
 
         protected override  Task HandleCallback()
         {
-            return _library.HandleBulkRegisterTemplate(_id, _templates, _type, _minVersion, _callback);
+            return _library.HandleBulkRegisterTemplate(_id, _templates, _type, _minVersion, _promise);
         }
 
         protected override void EnterPool()
@@ -44,12 +44,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
             _templates = null;
             _type = default(TemplateType);
             _minVersion = default(TemplateVersion);
-            _callback = null;
-        }
-
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
+            _promise = null;
         }
     }
 }

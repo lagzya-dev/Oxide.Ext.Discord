@@ -518,9 +518,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateInternalAsync(plugin, templateName).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateInternalAsync(plugin, templateName).Then(template =>
             {
-                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).Then(response =>
                 {
                     CreateMessage(client, response, callback, error);
                 });
@@ -540,9 +540,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateTemplateMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, language).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, language).Then(template =>
             {
-                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).Then(response =>
                 {
                     CreateMessage(client, response, callback, error);
                 });

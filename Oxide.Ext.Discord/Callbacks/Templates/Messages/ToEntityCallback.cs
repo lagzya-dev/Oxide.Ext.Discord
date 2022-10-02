@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         private TTemplate _template;
         private PlaceholderData _data;
         private TEntity _entity;
-        private DiscordAsyncCallback<TEntity> _callback;
+        private DiscordPromise<TEntity> _promise;
 
         /// <summary>
         /// Starts the callback
@@ -22,25 +22,25 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         /// <param name="data"></param>
         /// <param name="entity"></param>
         /// <param name="callback"></param>
-        public static void Start(TTemplate template, PlaceholderData data, TEntity entity, DiscordAsyncCallback<TEntity> callback)
+        public static void Start(TTemplate template, PlaceholderData data, TEntity entity, DiscordPromise<TEntity> promise)
         {
             ToEntityCallback<TTemplate, TEntity> handler = DiscordPool.Get<ToEntityCallback<TTemplate, TEntity>>();
-            handler.Init(template, data, entity, callback);
+            handler.Init(template, data, entity, promise);
             handler.Run();
         }
         
-        private void Init(TTemplate template, PlaceholderData data, TEntity entity, DiscordAsyncCallback<TEntity> callback)
+        private void Init(TTemplate template, PlaceholderData data, TEntity entity, DiscordPromise<TEntity> promise)
         {
             _template = template;
             _data = data;
             _entity = entity;
-            _callback = callback;
+            _promise = promise;
         }
         
         ///<inheritdoc/>
         protected override Task HandleCallback()
         {
-            return _template.HandleToEntityAsync(_data, _entity, _callback);
+            return _template.HandleToEntityAsync(_data, _entity, _promise);
         }
 
         ///<inheritdoc/>
@@ -49,13 +49,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
             _template = null;
             _data = null;
             _entity = null;
-            _callback = null;
-        }
-
-        ///<inheritdoc/>
-        protected override void DisposeInternal()
-        {
-            DiscordPool.Free(this);
+            _promise = null;
         }
     }
 }

@@ -324,9 +324,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).Then(template =>
             {
-                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).Then(response =>
                 {
                     CreateInteractionResponse(client, type, response, callback, error);
                 });
@@ -349,9 +349,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordModalTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordModalTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).Then(template =>
             {
-                template.ToEntityAsync(placeholders, message).OnSuccess(response =>
+                template.ToEntityAsync(placeholders, message).Then(response =>
                 {
                     CreateInteractionResponse(client, response, callback, error);
                 });
@@ -473,9 +473,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).OnSuccess(template =>
+            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).Then(template =>
             {
-                template.ToMessageInternalAsync(placeholders, message).OnSuccess(response =>
+                template.ToMessageInternalAsync(placeholders, message).Then(response =>
                 {
                     EditOriginalInteractionResponse(client, response, callback, error);
                 });

@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
@@ -14,46 +14,40 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         private BaseMessageTemplatesLibrary<TTemplate, TEntity> _templates;
         private TemplateId _id;
         private DiscordInteraction _interaction;
-        private DiscordAsyncCallback<TTemplate> _callback;
+        private DiscordPromise<TTemplate> _promise;
 
-        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordAsyncCallback<TTemplate> callback)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordPromise<TTemplate> promise)
         {
             LoadMessageTemplateCallback<TTemplate, TEntity> load = DiscordPool.Get<LoadMessageTemplateCallback<TTemplate, TEntity>>();
-            load.Init(templates, id, null, callback);
+            load.Init(templates, id, null, promise);
             load.Run();
         }
         
-        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id,  DiscordInteraction interaction, DiscordAsyncCallback<TTemplate> callback)
+        public static void Start(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id,  DiscordInteraction interaction, DiscordPromise<TTemplate> promise)
         {
             LoadMessageTemplateCallback<TTemplate, TEntity> load = DiscordPool.Get<LoadMessageTemplateCallback<TTemplate, TEntity>>();
-            load.Init(templates, id, interaction, callback);
+            load.Init(templates, id, interaction, promise);
             load.Run();
         }
         
-        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, DiscordAsyncCallback<TTemplate> callback)
+        private void Init(BaseMessageTemplatesLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, DiscordPromise<TTemplate> promise)
         {
             _templates = templates;
             _id = id;
             _interaction = interaction;
-            _callback = callback;
+            _promise = promise;
         }
 
         protected override Task HandleCallback()
         {
-            return _templates.HandleGetLocalizedTemplateAsync(_id, _interaction, _callback);
+            return _templates.HandleGetLocalizedTemplateAsync(_id, _interaction, _promise);
         }
 
         protected override void EnterPool()
         {
             _templates = null;
             _id = default(TemplateId);
-            _callback = null;
-        }
-
-        protected override void DisposeInternal()
-        {
-            _callback?.Dispose();
-            DiscordPool.Free(this);
+            _promise = null;
         }
     }
 }

@@ -6,10 +6,10 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Callbacks.Async;
 using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
 {
@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
         
-        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateType type, TemplateVersion minVersion, DiscordAsyncCallback callback) where T : BaseTemplate
+        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateType type, TemplateVersion minVersion, DiscordPromise promise) where T : BaseTemplate
         {
             if (template.Version < minVersion)
             {
@@ -74,10 +74,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             
             await CreateFile(path, template).ConfigureAwait(false);
             RegisteredTemplates.Add(id);
-            callback?.InvokeSuccess();
+            promise?.Resolve();
         }
         
-        internal async Task HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, DiscordAsyncCallback callback) where T : BaseTemplate
+        internal async Task HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, IDiscordPromise promise) where T : BaseTemplate
         {
             foreach (BulkTemplateRegistration<T> registration in templates)
             {
@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 await HandleRegisterTemplate(id.WithLanguage(registration.Language), template, type, minVersion, null).ConfigureAwait(false);
             }
             
-            callback.InvokeSuccess();
+            promise.Resolve();
         }
 
         internal async Task<T> LoadTemplate<T>(TemplateType type, TemplateId id) where T : BaseTemplate
