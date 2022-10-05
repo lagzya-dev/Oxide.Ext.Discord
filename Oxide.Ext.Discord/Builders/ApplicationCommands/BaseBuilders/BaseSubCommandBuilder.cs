@@ -41,11 +41,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
             SubCommand = new CommandOption(name, description, CommandOptionType.SubCommand, new List<CommandOption>());
             options.Add(SubCommand);
             DefaultLanguage = defaultLanguage;
-            if (!string.IsNullOrEmpty(DefaultLanguage))
-            {
-                AddNameLocalization(name, DefaultLanguage);
-                AddDescriptionLocalization(description, DefaultLanguage);
-            }
+            AddNameLocalization(name, DefaultLanguage);
+            AddDescriptionLocalization(description, DefaultLanguage);
         }
 
          /// <summary>
@@ -54,7 +51,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <param name="plugin">Plugin containing the localizations</param>
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
-        [Obsolete("AddNameLocalizations has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
+        [Obsolete("AddNameLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddNameLocalization(string name, string lang) instead.")]
         public TBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
             SubCommand.NameLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
@@ -63,11 +60,6 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
          
          public TBuilder AddNameLocalization(string name, string lang)
          {
-             if (SubCommand.NameLocalizations == null)
-             {
-                 SubCommand.NameLocalizations = new Hash<string, string>();
-             }
-
              if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
              {
                  lang = discordLocale;
@@ -83,7 +75,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <param name="plugin">Plugin containing the localizations</param>
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
-        [Obsolete("AddDescriptionLocalizations has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
+        [Obsolete("AddDescriptionLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddDescriptionLocalization(string name, string lang) instead.")]
         public TBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
             SubCommand.DescriptionLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
@@ -92,11 +84,6 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         
         public TBuilder AddDescriptionLocalization(string name, string lang)
         {
-            if (SubCommand.DescriptionLocalizations == null)
-            {
-                SubCommand.DescriptionLocalizations = new Hash<string, string>();
-            }
-
             if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;

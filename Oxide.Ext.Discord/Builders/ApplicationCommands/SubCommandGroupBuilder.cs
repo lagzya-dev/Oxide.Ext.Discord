@@ -21,67 +21,54 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             _option = new CommandOption(name, description, CommandOptionType.SubCommandGroup, new List<CommandOption>());
             _builder = builder;
             builder.Command.Options.Add(_option);
-            if (!string.IsNullOrEmpty(_defaultLanguage))
-            {
-                AddNameLocalization(name, _defaultLanguage);
-                AddDescriptionLocalization(description, _defaultLanguage);
-            }
+            AddNameLocalization(name, _defaultLanguage);
+            AddDescriptionLocalization(description, _defaultLanguage);
         }
-        
+
         /// <summary>
         /// Adds command name localizations for a given plugin and lang key
         /// </summary>
         /// <param name="plugin">Plugin containing the localizations</param>
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
-        [Obsolete("AddDescriptionLocalizations has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
+        [Obsolete("AddNameLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddNameLocalization(string name, string lang) instead.")]
         public SubCommandGroupBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            _option.NameLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
+            _option.NameLocalizations = DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
             return this;
         }
-        
+
         public SubCommandGroupBuilder AddNameLocalization(string name, string lang)
         {
-            if (_option.NameLocalizations == null)
-            {
-                _option.NameLocalizations = new Hash<string, string>();
-            }
-
             if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }
-            
+
             _option.NameLocalizations[lang] = name;
             return this;
         }
-        
+
         /// <summary>
         /// Adds command description localizations for a given plugin and lang key
         /// </summary>
         /// <param name="plugin">Plugin containing the localizations</param>
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
-        [Obsolete("AddDescriptionLocalizations has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
+        [Obsolete("AddDescriptionLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddDescriptionLocalization(string name, string lang) instead.")]
         public SubCommandGroupBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            _option.DescriptionLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
+            _option.DescriptionLocalizations = DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
             return this;
         }
-        
+
         public SubCommandGroupBuilder AddDescriptionLocalization(string name, string lang)
         {
-            if (_option.DescriptionLocalizations == null)
-            {
-                _option.DescriptionLocalizations = new Hash<string, string>();
-            }
-
             if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }
-            
+
             _option.DescriptionLocalizations[lang] = name;
             return this;
         }

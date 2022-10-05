@@ -26,13 +26,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <summary>
         /// Localized Options for the Command
         /// </summary>
-        [JsonProperty("Command Options")]
+        [JsonProperty("Command Options", NullValueHandling = NullValueHandling.Ignore)]
         public List<CommandLocalization> Options { get; set; }
         
         /// <summary>
         /// Localized Argument Options
         /// </summary>
-        [JsonProperty("Argument Localization")]
+        [JsonProperty("Argument Localization", NullValueHandling = NullValueHandling.Ignore)]
         public Hash<string, ArgumentLocalization> Arguments { get; set; }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
             for (int index = 0; index < create.Options.Count; index++)
             {
-                ApplyOptionLocalization(create.Options[index], language);
+                Options[index].ApplyOptionLocalization(create.Options[index], language);
             }
         }
 
@@ -140,11 +140,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 opt.NameLocalizations[language] = Name;
                 opt.DescriptionLocalizations[language] = Description;
 
-                if (opt.Options != null)
+                if (Options != null)
                 {
                     for (int index = 0; index < opt.Options.Count; index++)
                     {
-                        ApplyOptionLocalization(opt.Options[index], language);
+                        Options[index].ApplyOptionLocalization(opt.Options[index], language);
                     }
                 }
 

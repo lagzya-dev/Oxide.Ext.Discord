@@ -114,6 +114,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
             Description = description;
             Type = type;
             Options = options;
+            NameLocalizations = new Hash<string, string>();
+            DescriptionLocalizations = new Hash<string, string>();
         }
     }
 }
