@@ -5,6 +5,7 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
@@ -21,6 +22,9 @@ namespace Oxide.Ext.Discord.Builders.Interactions
     /// </summary>
     public class InteractionAutoCompleteBuilder
     {
+        private static readonly Permission Permissions = Interface.Oxide.GetLibrary<Permission>();
+        private static readonly Covalence Covalence = Interface.Oxide.GetLibrary<Covalence>();
+        
         private readonly InteractionAutoCompleteMessage _message;
 
         /// <summary>
@@ -43,9 +47,6 @@ namespace Oxide.Ext.Discord.Builders.Interactions
                 _message.Choices = new List<CommandOptionChoice>();
             }
         }
-
-        private static readonly Permission Permissions = Interface.Oxide.GetLibrary<Permission>();
-        private static readonly Covalence Covalence = Interface.Oxide.GetLibrary<Covalence>();
 
         /// <summary>
         /// Adds a <see cref="CommandOptionChoice"/> to the response
@@ -201,7 +202,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="filter">String to filter by</param>
         /// <param name="comparison"><see cref="StringComparison"/> to use</param>
         /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        public void AddGroupsUserIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        public void AddGroupsPlayerIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             AddList(Permissions.GetUserGroups(playerId), filter, comparison, search);
         }
@@ -213,7 +214,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="filter">String to filter by</param>
         /// <param name="comparison"><see cref="StringComparison"/> to use</param>
         /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        public void AddGroupsUserNotIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        public void AddGroupsPlayerNotIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             string[] groups = Permissions.GetGroups();
             AddList(Permissions.GetUserGroups(playerId).Except(groups), filter, comparison, search);
@@ -226,7 +227,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="filter">String to filter by</param>
         /// <param name="comparison"><see cref="StringComparison"/> to use</param>
         /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        public void AddPermissionsUserIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        public void AddPermissionsPlayerIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             AddList(Permissions.GetUserPermissions(playerId), filter, comparison, search);
         }
@@ -238,7 +239,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="filter">String to filter by</param>
         /// <param name="comparison"><see cref="StringComparison"/> to use</param>
         /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        public void AddPermissionsUserNotIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        public void AddPermissionsPlayerNotIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             string[] perms = Permissions.GetPermissions();
             AddList(Permissions.GetUserPermissions(playerId).Except(perms), filter, comparison, search);
@@ -294,6 +295,16 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         public void AddAllPlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
         {
             AddPlayerList(Covalence.Players.All, filter, comparison, search, options, null);
+        }
+
+        public void AddLoadablePlugins(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        {
+            AddList(DiscordPluginCache.GetLoadablePlugins(), filter, comparison, search);
+        }
+
+        public void AddLoadedPlugins(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        {
+            AddList(DiscordPluginCache.GetLoadedPlugins(), filter, comparison, search);
         }
 
         private void AddList(IEnumerable<string> list, string filter, StringComparison comparison, AutoCompleteSearchMode search)

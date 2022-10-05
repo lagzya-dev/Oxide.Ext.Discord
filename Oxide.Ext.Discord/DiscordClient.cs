@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
@@ -232,6 +233,7 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
+            DiscordPluginCache.OnPluginLoaded(plugin);
             OnPluginRemoved(plugin);
             
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
@@ -257,17 +259,21 @@ namespace Oxide.Ext.Discord
 
         internal static void OnPluginRemoved(Plugin plugin)
         {
+            if (DiscordExtension.IsShuttingDown)
+            {
+                return;
+            }
+            
+            PluginExt.OnPluginUnloaded(plugin);
+            DiscordLoggerFactory.OnPluginUnloaded(plugin);
+            DiscordPluginCache.OnPluginUnloaded(plugin);
+            
             DiscordClient client = Clients[plugin.Id()];
             if (client == null)
             {
                 return;
             }
-
-            if (DiscordExtension.IsShuttingDown)
-            {
-                return;
-            }
-
+            
             CloseClient(client);
 
             DiscordExtension.DiscordAppCommand.OnPluginUnloaded(plugin);
@@ -278,10 +284,9 @@ namespace Oxide.Ext.Discord
             DiscordExtension.DiscordEmbedTemplates.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordEmbedFieldTemplates.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordModalTemplates.OnPluginUnloaded(plugin);
+            DiscordExtension.DiscordCommandLocalizations.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordPlaceholders.OnPluginUnloaded(plugin);
             DiscordExtension.DiscordLang.OnPluginUnloaded(plugin);
-            PluginExt.OnPluginUnloaded(plugin);
-            DiscordLoggerFactory.OnPluginUnloaded(plugin);
         }
 
         internal static void CloseClient(DiscordClient client)
