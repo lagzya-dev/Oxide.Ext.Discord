@@ -32,6 +32,11 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
         {
             return _localizations.HandleApplyCommandLocalizationsAsync(_id, _create, _promise);
         }
+        
+        protected override string ExceptionData()
+        {
+            return $"Plugin: {_id.PluginName} Name: {_id.TemplateName} Language: {_id.Language}";
+        }
 
         protected override void EnterPool()
         {

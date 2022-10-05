@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         /// <param name="template"></param>
         /// <param name="data"></param>
         /// <param name="entity"></param>
-        /// <param name="callback"></param>
+        /// <param name="promise"></param>
         public static void Start(TTemplate template, PlaceholderData data, TEntity entity, IDiscordPromise<TEntity> promise)
         {
             ToEntityCallback<TTemplate, TEntity> handler = DiscordPool.Get<ToEntityCallback<TTemplate, TEntity>>();
@@ -41,6 +41,11 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         protected override Task HandleCallback()
         {
             return _template.HandleToEntityAsync(_data, _entity, _promise);
+        }
+        
+        protected override string ExceptionData()
+        {
+            return $"Type: {typeof(TEntity).Name} Placeholders: {_data.GetKeys()}";
         }
 
         ///<inheritdoc/>

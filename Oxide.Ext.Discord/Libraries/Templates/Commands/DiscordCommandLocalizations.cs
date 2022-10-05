@@ -21,8 +21,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
     /// </summary>
     public class DiscordCommandLocalizations : BaseTemplateLibrary
     {
-        
-        internal DiscordCommandLocalizations(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "commands"), logger) { }
+        internal DiscordCommandLocalizations(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "commands"), TemplateType.Command, logger) { }
         
         /// <summary>
         /// Registers Application Command Localization for a given language
@@ -42,7 +41,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             IDiscordPromise promise = DiscordPromise.Create();
             
             TemplateId id = new TemplateId(plugin, fileNameSuffix, language);
-            RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, TemplateType.Command, minVersion, promise);
+            RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, minVersion, promise);
             return promise;
         }
         
@@ -63,7 +62,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             IDiscordPromise promise = DiscordPromise.Create();
             
             TemplateId id = new TemplateId(plugin, fileNameSuffix, null);
-            BulkRegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, commands, TemplateType.Command, minVersion, promise);
+            BulkRegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, commands, minVersion, promise);
             return promise;
         }
 
@@ -104,7 +103,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             await HandlePrepareCommandLocalizationsAsync(create).ConfigureAwait(false);
 
             List<Task> tasks = DiscordPool.GetList<Task>();
-            foreach (string dir in Directory.EnumerateDirectories(GetTemplateFolder(TemplateType.Command, id.PluginName)))
+            foreach (string dir in Directory.EnumerateDirectories(GetTemplateFolder(id.PluginName)))
             {
                 string lang = Path.GetFileName(dir);
                 tasks.Add(HandleLoadAndApplyCommandLocalizationsAsync(id, create, lang));
@@ -176,21 +175,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
         private async Task HandleLoadAndApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, string lang)
         {
-            DiscordCommandLocalization localization = await LoadTemplate<DiscordCommandLocalization>(TemplateType.Command, id.WithLanguage(lang)).ConfigureAwait(false);
+            DiscordCommandLocalization localization = await LoadTemplate<DiscordCommandLocalization>(id.WithLanguage(lang)).ConfigureAwait(false);
             if (localization != null)
             {
                 await localization.HandleApplyCommandLocalizationAsync(create, lang).ConfigureAwait(false);
             }
         }
 
-        internal override string GetTemplateFolder(TemplateType type, string plugin)
+        internal override string GetTemplateFolder(string plugin)
         {
             return RootDir;
         }
         
-        internal override string GetTemplatePath(TemplateType type, TemplateId id)
+        internal override string GetTemplatePath(TemplateId id)
         {
-            DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName);
+            DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName, TemplateType);
             string fileName = !string.IsNullOrEmpty(id.TemplateName) ? $"{id.PluginName}.{id.TemplateName}.json" : $"{id.PluginName}.json";
             return Path.Combine(RootDir, id.Language, fileName);
         }

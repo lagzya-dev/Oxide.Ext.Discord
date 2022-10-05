@@ -55,7 +55,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
         public override string ToString()
         {
-            return $"{PluginName}/{GetLanguageName()}/{TemplateName}";
+            return $"Plugin: {PluginName} Template: {TemplateName} Language: {GetLanguageName()}";
         }
 
         public override int GetHashCode()

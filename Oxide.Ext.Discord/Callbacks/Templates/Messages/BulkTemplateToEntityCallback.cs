@@ -46,6 +46,11 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         {
             return _templates.HandleGetLocalizedBulkEntityAsync(_id, _request, _interaction, _promise);
         }
+        
+        protected override string ExceptionData()
+        {
+            return $"Template ID: {_id.ToString()} ";
+        }
 
         protected override void EnterPool()
         {

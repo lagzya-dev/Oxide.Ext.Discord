@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
@@ -28,7 +29,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </summary>
         protected readonly string RootDir;
         
-        internal readonly HashSet<TemplateId> RegisteredTemplates = new HashSet<TemplateId>();
+        protected readonly TemplateType TemplateType;
+        
+        internal readonly Types.ConcurrentHashSet<TemplateId> RegisteredTemplates = new Types.ConcurrentHashSet<TemplateId>();
 
         private static readonly JsonSerializer Serializer = JsonSerializer.Create(new JsonSerializerSettings{Formatting = Formatting.Indented});
 
@@ -37,17 +40,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </summary>
         /// <param name="rootDir">Root Directory for the library</param>
         /// <param name="logger"></param>
-        protected BaseTemplateLibrary(string rootDir, ILogger logger)
+        protected BaseTemplateLibrary(string rootDir, TemplateType type, ILogger logger)
         {
             RootDir = rootDir;
             Logger = logger;
+            TemplateType = type;
             if (!Directory.Exists(RootDir))
             {
                 Directory.CreateDirectory(RootDir);
             }
         }
         
-        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordPromise promise) where T : BaseTemplate
+        internal async Task HandleRegisterTemplate<T>(TemplateId id, T template, TemplateVersion minVersion, IDiscordPromise promise) where T : BaseTemplate
         {
             if (template.Version < minVersion)
             {
@@ -57,40 +61,43 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             
             if (RegisteredTemplates.Contains(id))
             {
-                Logger.Warning("Trying to register id {0} from plugin {1} with language {2} multiple times.", id.TemplateName, id.GetPluginName(), id.GetLanguageName());
+                Logger.Warning("Trying to register template multiple times. Type: {0} {1}", TemplateType, id);
             }
             
-            string path = GetTemplatePath(type, id);
+            RegisteredTemplates.Add(id);
+            
+            string path = GetTemplatePath(id);
             if (File.Exists(path))
             {
-                T existingTemplate = await LoadTemplate<T>(type, id).ConfigureAwait(false);
-                if (existingTemplate != null && existingTemplate.Version >= minVersion)
+                T existingTemplate = await LoadTemplate<T>(id).ConfigureAwait(false);
+                if (existingTemplate != null && existingTemplate.Version < minVersion)
                 {
-                    return;
+                    await BackupTemplateFiles<T>(id, minVersion).ConfigureAwait(false);
+                    await CreateFile(path, template).ConfigureAwait(false);
                 }
-
-                await BackupTemplateFiles<T>(type, id, minVersion).ConfigureAwait(false);
+            }
+            else
+            {
+                await CreateFile(path, template).ConfigureAwait(false);
             }
             
-            await CreateFile(path, template).ConfigureAwait(false);
-            RegisteredTemplates.Add(id);
-            promise?.Resolve();
+            promise.Resolve();
         }
         
-        internal async Task HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateType type, TemplateVersion minVersion, IDiscordPromise promise) where T : BaseTemplate
+        internal async Task HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateVersion minVersion, IDiscordPromise promise) where T : BaseTemplate
         {
             foreach (BulkTemplateRegistration<T> registration in templates)
             {
                 T template = registration.Template;
-                await HandleRegisterTemplate(id.WithLanguage(registration.Language), template, type, minVersion, null).ConfigureAwait(false);
+                await HandleRegisterTemplate(id.WithLanguage(registration.Language), template, minVersion, null).ConfigureAwait(false);
             }
             
             promise.Resolve();
         }
 
-        internal async Task<T> LoadTemplate<T>(TemplateType type, TemplateId id) where T : BaseTemplate
+        internal async Task<T> LoadTemplate<T>(TemplateId id) where T : BaseTemplate
         {
-            string path = GetTemplatePath(type, id);
+            string path = GetTemplatePath(id);
             if (!File.Exists(path))
             {
                 return null;
@@ -105,14 +112,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
             catch (Exception ex)
             {
-                Logger.Exception("Failed to load template from file: {0} Path: {1}", id.ToString(), path, ex);
+                Logger.Exception("Failed to load template from file: {0} Path: {1}", id.ToString(), path.Substring(0, Interface.Oxide.RootDirectory.Length), ex);
                 return null;
             }
         }
 
-        internal Task<T> LoadTemplate<T>(TemplateType type, TemplateId id, string language) where T : BaseTemplate
+        internal Task<T> LoadTemplate<T>(TemplateId id, string language) where T : BaseTemplate
         {
-            return LoadTemplate<T>(type, id.WithLanguage(language));
+            return LoadTemplate<T>(id.WithLanguage(language));
         }
 
         private async Task CreateFile<T>(string path, T template) where T : BaseTemplate
@@ -131,15 +138,15 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             stream.Dispose();
         }
 
-        private async Task BackupTemplateFiles<T>(TemplateType type, TemplateId id, TemplateVersion minVersion) where T : BaseTemplate
+        private async Task BackupTemplateFiles<T>(TemplateId id, TemplateVersion minVersion) where T : BaseTemplate
         {
             if (id.IsGlobal)
             {
-                await BackupTemplate<T>(type, minVersion, id).ConfigureAwait(false);
+                await BackupTemplate<T>(minVersion, id).ConfigureAwait(false);
                 return;
             }
 
-            string path = GetTemplateFolder(type, id.PluginName);
+            string path = GetTemplateFolder(id.PluginName);
             if (Logger.IsLogging(DiscordLogLevel.Debug))
             {
                 Logger.Debug("Backup Template files for: {0} Path: {1}", id.ToString(), path);
@@ -149,19 +156,19 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             {
                 string lang = Path.GetFileName(dir);
                 Logger.Debug("Processing Directory: {0} Lang: {1}", dir, lang);
-                await BackupTemplate<T>(type, minVersion, id.WithLanguage(lang)).ConfigureAwait(false);
+                await BackupTemplate<T>(minVersion, id.WithLanguage(lang)).ConfigureAwait(false);
             }
         }
         
-        private async Task BackupTemplate<T>(TemplateType type, TemplateVersion minVersion, TemplateId langId) where T : BaseTemplate
+        private async Task BackupTemplate<T>(TemplateVersion minVersion, TemplateId langId) where T : BaseTemplate
         {
-            string oldPath = GetTemplatePath(type, langId);
+            string oldPath = GetTemplatePath(langId);
             if (!File.Exists(oldPath))
             {
                 return;
             }
 
-            T template = await LoadTemplate<T>(type, langId).ConfigureAwait(false);
+            T template = await LoadTemplate<T>(langId).ConfigureAwait(false);
             if (template == null)
             {
                 return;
@@ -181,20 +188,20 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             File.Move(oldPath, newPath);
         }
 
-        internal virtual string GetTemplateFolder(TemplateType type, string plugin)
+        internal virtual string GetTemplateFolder(string plugin)
         {
-            return Path.Combine(RootDir, plugin, GetTemplateTypePath(type));
+            return Path.Combine(RootDir, plugin, GetTemplateTypePath());
         }
 
-        internal virtual string GetTemplatePath(TemplateType type, TemplateId id)
+        internal virtual string GetTemplatePath(TemplateId id)
         {
-            DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName);
+            DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName, TemplateType);
 
             if (id.IsGlobal)
             {
-                return Path.Combine(RootDir, id.PluginName, GetTemplateTypePath(type), $"{id.TemplateName}.json");
+                return Path.Combine(RootDir, id.PluginName, GetTemplateTypePath(), $"{id.TemplateName}.json");
             }
-            return Path.Combine(RootDir, id.PluginName, GetTemplateTypePath(type), id.Language, $"{id.TemplateName}.json");
+            return Path.Combine(RootDir, id.PluginName, GetTemplateTypePath(), id.Language, $"{id.TemplateName}.json");
         }
 
         private string GetRenamePath(string path, TemplateVersion version)
@@ -202,13 +209,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             return Path.Combine(Path.GetDirectoryName(path), $"{Path.GetFileNameWithoutExtension(path)}.{version}.json");
         }
-
-        /// <summary>
-        /// Returns a pooled lowered string for the template type
-        /// </summary>
-        /// <param name="type"><see cref="TemplateType"/> to return the string for</param>
-        /// <returns></returns>
-        protected string GetTemplateTypePath(TemplateType type) => EnumCache<TemplateType>.ToLower(type);
+        
+        private string GetTemplateTypePath() => EnumCache<TemplateType>.ToLower(TemplateType);
 
         internal abstract void OnPluginUnloaded(Plugin plugin);
     }

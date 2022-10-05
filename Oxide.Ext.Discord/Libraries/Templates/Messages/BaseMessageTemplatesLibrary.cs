@@ -27,11 +27,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         where TEntity : class
     {
         private readonly Hash<TemplateId, TTemplate> _templateCache = new Hash<TemplateId, TTemplate>();
-        private readonly TemplateType _templateType;
 
-        internal BaseMessageTemplatesLibrary(TemplateType type, ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), logger)
+        internal BaseMessageTemplatesLibrary(TemplateType type, ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), type, logger)
         {
-            _templateType = type;
+            
         }
         
         /// <summary>
@@ -52,7 +51,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             IDiscordPromise promise = DiscordPromise.Create();
             
             TemplateId id = new TemplateId(plugin, templateName, null);
-            RegisterTemplateCallback<TTemplate>.Start(this, id, template, _templateType, minVersion, promise);
+            RegisterTemplateCallback<TTemplate>.Start(this, id, template, minVersion, promise);
             return promise;
         }
         
@@ -78,7 +77,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             IDiscordPromise promise = DiscordPromise.Create();
 
             TemplateId id = new TemplateId(plugin, templateName, language);
-            RegisterTemplateCallback<TTemplate>.Start(this, id, template, _templateType, minVersion, promise);
+            RegisterTemplateCallback<TTemplate>.Start(this, id, template, minVersion, promise);
             return promise;
         }
 
@@ -333,21 +332,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (interaction != null)
             {
                 IPlayer player = interaction.User.Player;
-                template = await LoadTemplate<TTemplate>(_templateType, id).ConfigureAwait(false)
-                           ?? (player != null ? await LoadTemplate<TTemplate>(_templateType, id, DiscordExtension.DiscordLang.GetPlayerLanguage(player)).ConfigureAwait(false) : null)
-                           ?? await LoadTemplate<TTemplate>(_templateType, id, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale)).ConfigureAwait(false) 
-                           ?? await LoadTemplate<TTemplate>(_templateType, id, DiscordExtension.DiscordLang.GameServerLanguage).ConfigureAwait(false)
-                           ?? await LoadTemplate<TTemplate>(_templateType, id, DiscordLang.DefaultOxideLanguage).ConfigureAwait(false);
+                template = await LoadTemplate<TTemplate>(id).ConfigureAwait(false)
+                           ?? (player != null ? await LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GetPlayerLanguage(player)).ConfigureAwait(false) : null)
+                           ?? await LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale)).ConfigureAwait(false) 
+                           ?? await LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GameServerLanguage).ConfigureAwait(false)
+                           ?? await LoadTemplate<TTemplate>(id, DiscordLang.DefaultOxideLanguage).ConfigureAwait(false);
             }
             else if (!id.IsGlobal)
             {
-                template = await LoadTemplate<TTemplate>(_templateType, id).ConfigureAwait(false)
-                           ?? await LoadTemplate<TTemplate>(_templateType, id, DiscordExtension.DiscordLang.GameServerLanguage).ConfigureAwait(false)
-                           ?? await LoadTemplate<TTemplate>(_templateType, id, DiscordLang.DefaultOxideLanguage).ConfigureAwait(false);
+                template = await LoadTemplate<TTemplate>(id).ConfigureAwait(false)
+                           ?? await LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GameServerLanguage).ConfigureAwait(false)
+                           ?? await LoadTemplate<TTemplate>(id, DiscordLang.DefaultOxideLanguage).ConfigureAwait(false);
             }
             else
             {
-                template = await LoadTemplate<TTemplate>(_templateType, id).ConfigureAwait(false);
+                template = await LoadTemplate<TTemplate>(id).ConfigureAwait(false);
             }
 
             if (template == null)
