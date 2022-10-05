@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Promise
         
         private readonly List<Action<TResult>> _success = new List<Action<TResult>>();
 
-        internal static DiscordPromise<TResult> Create(bool isInternal = false)
+        internal new static DiscordPromise<TResult> Create(bool isInternal = false)
         {
             DiscordPromise<TResult> promise = DiscordPool.Get<DiscordPromise<TResult>>();
             promise.IsInternal = isInternal;
@@ -70,7 +70,7 @@ namespace Oxide.Ext.Discord.Promise
             return promise;
         }
         
-        public IDiscordPromise<TResult> Catch(Action<Exception> onFail)
+        public new IDiscordPromise<TResult> Catch(Action<Exception> onFail)
         {
             if (State == PromiseState.Failed)
             {
@@ -78,7 +78,7 @@ namespace Oxide.Ext.Discord.Promise
                 return this;
             }
 
-            Fails.Add(onFail);
+            base.Catch(onFail);
             return this;
         }
         

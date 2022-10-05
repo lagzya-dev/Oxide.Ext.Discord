@@ -14,15 +14,13 @@ namespace Oxide.Ext.Discord.Promise
         protected bool IsInternal;
         internal PromiseState State { get; private set; }
         protected Exception Exception;
-        
-        protected readonly List<Action<Exception>> Fails = new List<Action<Exception>>();
-        
+
         private readonly Action _resolve;
         private readonly Action _fail;
         private readonly Action _dispose;
 
         private readonly List<Action> _resolves = new List<Action>();
-
+        private readonly List<Action<Exception>> _fails = new List<Action<Exception>>();
         private readonly List<IDiscordPromise> _children = new List<IDiscordPromise>();
 
         public DiscordPromise()
@@ -64,7 +62,7 @@ namespace Oxide.Ext.Discord.Promise
                 return this;
             }
 
-            Fails.Add(onFail);
+            _fails.Add(onFail);
             return this;
         }
 
@@ -91,9 +89,9 @@ namespace Oxide.Ext.Discord.Promise
 
         private void InvokeFailInternal()
         {
-            for (int index = 0; index < Fails.Count; index++)
+            for (int index = 0; index < _fails.Count; index++)
             {
-                Action<Exception> callback = Fails[index];
+                Action<Exception> callback = _fails[index];
                 callback.Invoke(Exception);
             }
 
@@ -169,8 +167,7 @@ namespace Oxide.Ext.Discord.Promise
         protected override void EnterPool()
         {
             IsInternal = false;
-            State = PromiseState.Pending;
-            Fails.Clear();
+            _fails.Clear();
             _resolves.Clear();
             _children.Clear();
         }
