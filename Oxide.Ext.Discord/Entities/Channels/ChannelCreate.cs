@@ -79,6 +79,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("default_auto_archive_duration")]
         public int DefaultAutoArchiveDuration { get; set; }
+        
+        /// <summary>
+        /// The default <see cref="SortOrderType"/> used to order posts in `GUILD_FORUM` channels
+        /// </summary>
+        [JsonProperty("default_sort_order")]
+        public SortOrderType? DefaultSortOrder { get; set; }
 
         /// <inheritdoc/>
         public void Validate()
