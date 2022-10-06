@@ -54,7 +54,13 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         /// Whether friend sync is enabled for this connection
         /// </summary>
         [JsonProperty("friend_sync")]
-        public bool FriendSync { get; set; }        
+        public bool FriendSync { get; set; }      
+        
+        /// <summary>
+        /// Whether this connection has a corresponding third party OAuth2 token
+        /// </summary>
+        [JsonProperty("two_way_link")]
+        public bool TwoWayLink { get; set; }  
         
         /// <summary>
         /// Whether activities related to this connection will be shown in presence updates
