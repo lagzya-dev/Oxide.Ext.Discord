@@ -8,10 +8,11 @@ namespace Oxide.Ext.Discord.Cache
     /// Represents a cache of enum strings
     /// </summary>
     /// <typeparam name="T">Enum type</typeparam>
-    public static class EnumCache<T>
+    public static class EnumCache<T> where T : struct, IConvertible
     {
         private static readonly Dictionary<T, string> CachedStrings = new Dictionary<T, string>();
         private static readonly Dictionary<T, string> LoweredStrings = new Dictionary<T, string>();
+        private static readonly Dictionary<T, string> NumberString = new Dictionary<T, string>();
         private static readonly T[] Values; 
 
         static EnumCache()
@@ -33,7 +34,13 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns>Enum value as string</returns>
         public static string ToString(T value)
         {
-            return CachedStrings[value];
+            if (CachedStrings.TryGetValue(value, out string str))
+            {
+                return str;
+            }
+            str = value.ToString();
+            CachedStrings[value] = str;
+            return str;
         }
         
         /// <summary>
@@ -43,7 +50,25 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns>Enum value as lowered string</returns>
         public static string ToLower(T value)
         {
-            return LoweredStrings[value];
+            if (LoweredStrings.TryGetValue(value, out string str))
+            {
+                return str;
+            }
+            str = value.ToString().ToLower();
+            LoweredStrings[value] = str;
+            return str;
+        }
+
+        public static string ToNumber(T value)
+        {
+            if (NumberString.TryGetValue(value, out string str))
+            {
+                return str;
+            }
+            
+            str = value.ToType(Enum.GetUnderlyingType(typeof(T)), null).ToString();
+            NumberString[value] = str;
+            return str;
         }
 
         /// <summary>
