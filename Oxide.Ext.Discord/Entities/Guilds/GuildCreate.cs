@@ -72,6 +72,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
                 
         /// <summary>
         /// Afk timeout in seconds
+        /// Can be set to: null, 60, 300, 900, 1800, 3600
         /// </summary>
         [JsonProperty("afk_timeout")]
         public int? AfkTimeout { get; set; }
