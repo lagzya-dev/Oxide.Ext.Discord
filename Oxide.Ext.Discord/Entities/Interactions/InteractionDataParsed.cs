@@ -180,7 +180,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             return (string)GetArg(name, CommandOptionType.String)?.Value ?? @default;
         }
-
+        
         /// <summary>
         /// Returns the int value supplied to command option matching the name.
         /// If the arg was optional and wasn't supplied default supplied value will be used.
@@ -193,7 +193,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             return (int?)GetArg(name, CommandOptionType.Integer)?.Value ?? @default;
         }
-        
+
         /// <summary>
         /// Returns the bool value supplied to command option matching the name.
         /// If the arg was optional and wasn't supplied default supplied value will be used.
@@ -248,9 +248,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="default">Default value to return if not supplied</param>
         /// <returns>double for the matching command option name</returns>
         /// <exception cref="Exception">Thrown if the option type is not a double</exception>
-        public double GetNumber(string name, double @default)
+        public double GetNumber(string name, double @default = default(double))
         {
             return (double?)GetArg(name, CommandOptionType.Number)?.Value ?? @default;
+        }
+        
+        public float GetFloat(string name, float @default = default(float))
+        {
+            return (float?)GetArg(name, CommandOptionType.Number)?.Value ?? @default;
         }
 
         private InteractionDataOption GetArg(string name, CommandOptionType requested)
