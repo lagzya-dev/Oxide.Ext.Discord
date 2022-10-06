@@ -1,15 +1,34 @@
-﻿namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Messages.Embeds;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Libraries.Placeholders;
+
+namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields
 {
     /// <summary>
-    /// Represents a template that can be used by the <see cref="DiscordEmbedFieldTemplates"/> Library
+    /// Discord Template for Embed Field
     /// </summary>
-    public class DiscordEmbedFieldTemplate : BaseEmbedFieldTemplate
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class DiscordEmbedFieldTemplate : BaseMessageTemplate<EmbedField>, IEmbedFieldTemplate
     {
+        ///<inheritdoc/>
+        [JsonProperty("Field Title")]
+        public string Name { get; set; } = string.Empty;
+
+        ///<inheritdoc/>
+        [JsonProperty("Field Value")]
+        public string Value { get; set; } = string.Empty;
+
+        ///<inheritdoc/>
+        [JsonProperty("Keep Field On Same Row")]
+        public bool Inline { get; set; } = true;
+
         /// <summary>
         /// Constructor
         /// </summary>
-        public DiscordEmbedFieldTemplate() : base(TemplateType.EmbedField, new TemplateVersion(1, 0, 0)) {}
-
+        [JsonConstructor]
+        public DiscordEmbedFieldTemplate() : base(TemplateType.EmbedField, new TemplateVersion(1, 0, 0)) { }
+        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -21,6 +40,26 @@
             Name = name;
             Value = value;
             Inline = inline;
+        }
+
+        ///<inheritdoc cref="IEmbedFieldTemplate.ToEntity"/>
+        public override EmbedField ToEntity(PlaceholderData data, EmbedField field = null)
+        {
+            return ToEntityInternal(this, data, field);
+        }
+
+        internal static EmbedField ToEntityInternal(IEmbedFieldTemplate template, PlaceholderData data, EmbedField field = null)
+        {
+            if (field == null)
+            {
+                field = new EmbedField();
+            }
+
+            field.Name = PlaceholderFormatting.ApplyPlaceholder(template.Name, data);
+            field.Value = PlaceholderFormatting.ApplyPlaceholder(template.Value, data);
+            field.Inline = template.Inline;
+
+            return field;
         }
     }
 }

@@ -116,7 +116,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             for (int index = 0; index < Embeds.Count; index++)
             {
-                BaseEmbedTemplate template = Embeds[index];
+                MessageEmbedTemplate template = Embeds[index];
                 if (template.Enabled)
                 {
                     embeds.Add(template.ToEntity(data));

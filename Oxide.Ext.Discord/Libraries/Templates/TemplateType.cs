@@ -6,11 +6,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     public enum TemplateType : byte
     {
         /// <summary>
-        /// Type is not a template type
-        /// </summary>
-        None,
-        
-        /// <summary>
         /// Message Template Type
         /// </summary>
         Message,

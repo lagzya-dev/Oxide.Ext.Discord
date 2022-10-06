@@ -40,9 +40,5 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </summary>
         [JsonProperty("Internal Template Version (DO NOT EDIT)", Order = 1002)]
         internal TemplateVersion InternalVersion { get; set; }
-
-        private bool ShouldSerializeTemplateType() => TemplateType != TemplateType.None;
-        private bool ShouldSerializeVersion() => TemplateType != TemplateType.None;
-        private bool ShouldSerializeInternalVersion() => TemplateType != TemplateType.None;
     }
 }
