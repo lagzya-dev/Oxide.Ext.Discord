@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Users
     /// </summary>
     [JsonConverter(typeof(DiscordUserConverter))]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordUser : ISnowflakeEntity
+    public class DiscordUser : ISnowflakeEntity, IDiscordUser
     {
         #region Discord Fields
         /// <summary>
@@ -485,9 +485,19 @@ namespace Oxide.Ext.Discord.Entities.Users
         #endregion
 
         #region Entity Update
-        internal DiscordUser Update(DiscordUser update)
+        internal static DiscordUser FromInterface(IDiscordUser iUser)
         {
-            DiscordUser previous = (DiscordUser) MemberwiseClone();
+            DiscordUser user = new DiscordUser
+            {
+                Id = iUser.Id
+            };
+            
+            user.Update(iUser);
+            return user;
+        }
+        
+        internal void Update(IDiscordUser update)
+        {
             if (update.Username != null)
             {
                 Username = update.Username;
@@ -508,6 +518,11 @@ namespace Oxide.Ext.Discord.Entities.Users
                 Bot = update.Bot;
             }
 
+            if (update.System != null)
+            {
+                System = update.System;
+            }
+            
             if (update.MfaEnabled != null)
             {
                 MfaEnabled = update.MfaEnabled;
@@ -552,8 +567,6 @@ namespace Oxide.Ext.Discord.Entities.Users
             {
                 PublicFlags = update.PublicFlags;
             }
-
-            return previous;
         }
         #endregion
     }

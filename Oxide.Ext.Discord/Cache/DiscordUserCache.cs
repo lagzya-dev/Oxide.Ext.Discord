@@ -48,12 +48,19 @@ namespace Oxide.Ext.Discord.Cache
         /// </summary>
         /// <param name="user">User to lookup in the cache</param>
         /// <returns>Cached <see cref="DiscordUser"/></returns>
-        public DiscordUser GetOrCreate(DiscordUser user)
+        public DiscordUser GetOrCreate(IDiscordUser user)
         {
             if (!InternalCache.TryGetValue(user.Id, out DiscordUser existingUser))
             {
-                InternalCache[user.Id] = user;
-                existingUser = user;
+                if (user is DiscordUser)
+                {
+                    existingUser = (DiscordUser)user;
+                }
+                else
+                {
+                    existingUser = DiscordUser.FromInterface(user);
+                }
+                InternalCache[user.Id] = existingUser;
             }
             else
             {
