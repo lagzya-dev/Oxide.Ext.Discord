@@ -259,34 +259,38 @@ namespace Oxide.Ext.Discord
 
         internal static void OnPluginRemoved(Plugin plugin)
         {
-            if (DiscordExtension.IsShuttingDown)
+            if (DiscordExtension.IsShuttingDown || plugin.IsExtensionPlugin())
             {
                 return;
             }
-            
-            PluginExt.OnPluginUnloaded(plugin);
-            DiscordLoggerFactory.OnPluginUnloaded(plugin);
-            DiscordPluginCache.OnPluginUnloaded(plugin);
+
+            string id = plugin.Id();
+            if (id == nameof(DiscordExtension))
+            {
+                return;
+            }
             
             DiscordClient client = Clients[plugin.Id()];
-            if (client == null)
+            if (client != null)
             {
-                return;
-            }
-            
-            CloseClient(client);
+                CloseClient(client);
 
-            DiscordExtension.DiscordAppCommand.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordLink.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordCommand.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordSubscriptions.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordMessageTemplates.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordEmbedTemplates.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordEmbedFieldTemplates.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordModalTemplates.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordCommandLocalizations.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordPlaceholders.OnPluginUnloaded(plugin);
-            DiscordExtension.DiscordLang.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordAppCommand.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordLink.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordCommand.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordSubscriptions.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordMessageTemplates.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordEmbedTemplates.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordEmbedFieldTemplates.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordModalTemplates.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordCommandLocalizations.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordPlaceholders.OnPluginUnloaded(plugin);
+                DiscordExtension.DiscordLang.OnPluginUnloaded(plugin);
+            }
+
+            PluginExt.OnPluginUnloaded(plugin);
+            DiscordPluginCache.OnPluginUnloaded(plugin);
+            DiscordLoggerFactory.OnPluginUnloaded(plugin);
         }
 
         internal static void CloseClient(DiscordClient client)

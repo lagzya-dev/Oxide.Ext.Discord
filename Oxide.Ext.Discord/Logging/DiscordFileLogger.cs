@@ -13,7 +13,8 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     internal class DiscordFileLogger
     {
-        private readonly StreamWriter _writer = new StreamWriter(new MemoryStream());
+        private readonly MemoryStream _stream = new MemoryStream();
+        private StreamWriter _writer;
         private readonly object _sync = new object();
         private readonly string _logFileName;
         private readonly string _fileLogFormat;
@@ -33,6 +34,7 @@ namespace Oxide.Ext.Discord.Logging
         
         internal DiscordFileLogger(string pluginName, string fileLogFormat)
         {
+            _writer = new StreamWriter(_stream);
             _fileLogFormat = fileLogFormat;
             string logPath = Path.Combine(Interface.Oxide.LogDirectory, pluginName);
             if (!Directory.Exists(logPath))
@@ -80,22 +82,29 @@ namespace Oxide.Ext.Discord.Logging
                 }
             }
             catch (ThreadAbortException) { }
+            catch (Exception ex)
+            {
+                DiscordExtension.GlobalLogger.Exception("An exception occured writing log file.", ex);
+                WriteLogThread();
+            }
         }
 
         private void WriteLog()
         {
             lock (_sync)
             {
-                if (_writer.BaseStream.Position == 0)
+                _writer.Flush();
+                if (_stream.Position == 0)
                 {
                     return;
                 }
-                
-                using (StreamWriter streamWriter = File.AppendText(_logFileName))
+
+                using (StreamWriter fileWriter = File.AppendText(_logFileName))
                 {
-                    _writer.BaseStream.CopyToPooled(streamWriter.BaseStream);
-                    _writer.Flush();
+                    _stream.CopyToPooled(fileWriter.BaseStream);
                 }
+                
+                _stream.SetLength(0);
             }
         }
 
@@ -111,6 +120,7 @@ namespace Oxide.Ext.Discord.Logging
             lock (_sync)
             {
                 _writer.Dispose();
+                _writer = null;
             }
         }
     }

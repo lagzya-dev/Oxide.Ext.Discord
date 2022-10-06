@@ -15,12 +15,12 @@ namespace Oxide.Ext.Discord.Logging
 
         public void LogConsole(DiscordLogLevel level, string message, Exception exception = null)
         {
-            _consoleLogger.AddMessage(level, message, exception);
+            _consoleLogger?.AddMessage(level, message, exception);
         }
 
         public void LogFile(DiscordLogLevel level, string message, Exception exception = null)
         {
-            _fileLogger.AddMessage(level, message, exception);
+            _fileLogger?.AddMessage(level, message, exception);
         }
 
         public void Shutdown()

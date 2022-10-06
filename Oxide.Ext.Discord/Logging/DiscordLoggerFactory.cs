@@ -34,8 +34,9 @@ namespace Oxide.Ext.Discord.Logging
 
         internal static void OnPluginUnloaded(Plugin plugin)
         {
-            Handlers[plugin.Id()]?.Shutdown();
-            Handlers.Remove(plugin.Id());
+            string id = plugin.Id();
+            Handlers[id]?.Shutdown();
+            Handlers.Remove(id);
         }
         
         internal static void OnServerShutdown()
