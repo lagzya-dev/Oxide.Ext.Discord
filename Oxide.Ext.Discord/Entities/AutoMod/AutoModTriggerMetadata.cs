@@ -29,5 +29,13 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// </summary>
         [JsonProperty("allow_list")]
         public List<string> AllowList { get; set; }
+        
+        /// <summary>
+        /// Associated Trigger Types: <see cref="AutoModTriggerType.MentionSpam"/>
+        /// Total number of unique role and user mentions allowed per message
+        /// Maximum of 50
+        /// </summary>
+        [JsonProperty("mention_total_limit")]
+        public int MentionTotalLimit { get; set; }
     }
 }

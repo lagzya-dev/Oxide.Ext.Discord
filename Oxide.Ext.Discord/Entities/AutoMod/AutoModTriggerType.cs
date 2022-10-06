@@ -19,5 +19,10 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// Check if content contains words from internal pre-defined wordsets
         /// </summary>
         KeywordPreset = 4,
+        
+        /// <summary>
+        /// Check if content contains more unique mentions than allowed
+        /// </summary>
+        MentionSpam = 5,
     }
 }
