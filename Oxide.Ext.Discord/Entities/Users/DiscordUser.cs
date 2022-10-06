@@ -30,96 +30,63 @@ namespace Oxide.Ext.Discord.Entities.Users
     public class DiscordUser : ISnowflakeEntity, IDiscordUser
     {
         #region Discord Fields
-        /// <summary>
-        /// The user's id
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Id"/>
         [JsonProperty("id")]
         public Snowflake Id { get; set; }
 
-        /// <summary>
-        /// The user's username, not unique across the platform
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Username"/>
         [JsonProperty("username")]
         public string Username { get; set; }
 
-        /// <summary>
-        /// The user's 4-digit discord-tag
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Discriminator"/>
         [JsonProperty("discriminator")]
         public string Discriminator { get; set; }
 
-        /// <summary>
-        /// The user's avatar hash
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Avatar"/>
         [JsonProperty("avatar")]
         public string Avatar { get; set; }
 
-        /// <summary>
-        /// Whether the user belongs to an OAuth2 application
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Bot"/>
         [JsonProperty("bot")]
         public bool? Bot { get; set; }
 
-        /// <summary>
-        /// Whether the user is an Official Discord System user (part of the urgent message system)
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.System"/>
         [JsonProperty("system")]
         public bool? System { get; set; }
 
-        /// <summary>
-        /// Whether the user has two factor enabled on their account
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.MfaEnabled"/>
         [JsonProperty("mfa_enabled")]
         public bool? MfaEnabled { get; set; }
         
-        /// <summary>
-        /// The user's banner, or null if unset
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Banner"/>
         [JsonProperty("banner")]
         public string Banner { get; set; }
         
-        /// <summary>
-        /// The user's banner color encoded as an integer representation of hexadecimal color code
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.AccentColor"/>
         [JsonProperty("accent_color")]
         public DiscordColor? AccentColor { get; set; }
         
-        /// <summary>
-        /// The user's chosen language option
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Locale"/>
         [JsonProperty("locale")]
         public string Locale { get; set; }
 
-        /// <summary>
-        /// Whether the email on this account has been verified
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Verified"/>
         [JsonProperty("verified")]
         public bool? Verified { get; set; }
 
-        /// <summary>
-        /// The user's email
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Email"/>
         [JsonProperty("email")]
         public string Email { get; set; }
 
-        /// <summary>
-        /// The flags on a user's account
-        /// <see cref="UserFlags"/>
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.Flags"/>
         [JsonProperty("flags")]
         public UserFlags? Flags { get; set; }
 
-        /// <summary>
-        /// The type of Nitro subscription on a user's account
-        /// <see cref="UserPremiumType"/>
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.PremiumType"/>
         [JsonProperty("premium_type")]
         public UserPremiumType? PremiumType { get; set; }
 
-        /// <summary>
-        /// The public flags on a user's account
-        /// <see cref="UserFlags"/>
-        /// </summary>
+        ///<inheritdoc cref="IDiscordUser.PublicFlags"/>
         [JsonProperty("public_flags")]
         public UserFlags? PublicFlags { get; set; }
         #endregion
