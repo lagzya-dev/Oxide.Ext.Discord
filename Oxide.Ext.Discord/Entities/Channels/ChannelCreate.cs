@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Interfaces;
 
@@ -79,6 +80,18 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("default_auto_archive_duration")]
         public int DefaultAutoArchiveDuration { get; set; }
+        
+        /// <summary>
+        /// Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` channel
+        /// </summary>
+        [JsonProperty("default_reaction_emoji")]
+        public DefaultReaction DefaultReactionEmoji { get; set; }
+        
+        /// <summary>
+        /// Set of tags that can be used in a `GUILD_FORUM` channel
+        /// </summary>
+        [JsonProperty("available_tags")]
+        public List<ForumTag> AvailableTags { get; set; }
         
         /// <summary>
         /// The default <see cref="SortOrderType"/> used to order posts in `GUILD_FORUM` channels
