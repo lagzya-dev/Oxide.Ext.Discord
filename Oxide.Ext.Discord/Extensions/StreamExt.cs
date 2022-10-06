@@ -19,14 +19,9 @@ namespace Oxide.Ext.Discord.Extensions
             from.Position = 0;
             byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(8196);
 
-            while (true)
+            int bytesRead;
+            while ((bytesRead = await from.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false)) != 0)
             {
-                int bytesRead = await from.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
-                if (bytesRead == 0)
-                {
-                    break;
-                }
-                
                 await to.WriteAsync(buffer, 0, bytesRead).ConfigureAwait(false);
             }
             
@@ -43,14 +38,9 @@ namespace Oxide.Ext.Discord.Extensions
             from.Position = 0;
             byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(8196);
             
-            while (true)
+            int bytesRead;
+            while ((bytesRead = from.Read(buffer, 0, buffer.Length)) != 0)
             {
-                int bytesRead = from.Read(buffer, 0, buffer.Length);
-                if (bytesRead == 0)
-                {
-                    break;
-                }
-
                 to.Write(buffer, 0, bytesRead);
             }
             
