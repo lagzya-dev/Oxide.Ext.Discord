@@ -83,7 +83,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
         public bool SelfVideo { get; set; }
 
         /// <summary>
-        /// Whether this user is muted by the current user
+        /// whether this user's permission to speak is denied
         /// </summary>
         [JsonProperty("suppress")]
         public bool Suppress { get; set; }
