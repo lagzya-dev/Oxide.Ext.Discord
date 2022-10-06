@@ -10,30 +10,33 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
         private BaseTemplateLibrary _library;
         private TemplateId _id;
         private T _template;
-        private TemplateType _type;
         private TemplateVersion _minVersion;
         private IDiscordPromise _promise;
         
-        public static void Start(BaseTemplateLibrary library, TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordPromise promise)
+        public static void Start(BaseTemplateLibrary library, TemplateId id, T template, TemplateVersion minVersion, IDiscordPromise promise)
         {
             RegisterTemplateCallback<T> register = DiscordPool.Get<RegisterTemplateCallback<T>>();
-            register.Init(library, id, template, type, minVersion, promise);
+            register.Init(library, id, template, minVersion, promise);
             register.Run();
         }
         
-        private void Init(BaseTemplateLibrary library, TemplateId id, T template, TemplateType type, TemplateVersion minVersion, IDiscordPromise promise)
+        private void Init(BaseTemplateLibrary library, TemplateId id, T template, TemplateVersion minVersion, IDiscordPromise promise)
         {
             _library = library;
             _id = id;
             _template = template;
-            _type = type;
             _minVersion = minVersion;
             _promise = promise;
         }
 
         protected override  Task HandleCallback()
         {
-            return _library.HandleRegisterTemplate(_id, _template, _type, _minVersion, _promise);
+            return _library.HandleRegisterTemplate(_id, _template, _minVersion, _promise);
+        }
+
+        protected override string ExceptionData()
+        {
+            return $"Template ID: {_id.ToString()} Type: {_library.GetType().Name}";
         }
 
         protected override void EnterPool()
@@ -41,7 +44,6 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
             _library = null;
             _id = default(TemplateId);
             _template = null;
-            _type = default(TemplateType);
             _minVersion = default(TemplateVersion);
             _promise = null;
         }

@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Oxide.Ext.Discord.Libraries.Templates;
 
 namespace Oxide.Ext.Discord.Exceptions.Libraries
 {
@@ -12,8 +13,18 @@ namespace Oxide.Ext.Discord.Exceptions.Libraries
         
         private DiscordTemplateException(string message) : base(message) { }
 
-        internal static void ThrowIfInvalidTemplateName(string name)
+        internal static void ThrowIfInvalidTemplateName(string name, TemplateType type)
         {
+            if (type == TemplateType.Command && string.IsNullOrEmpty(name))
+            {
+                return;
+            }
+            
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new DiscordTemplateException($"{name} cannot contain be null or empty");
+            }
+            
             if (!FileNameRegex.IsMatch(name))
             {
                 throw new DiscordTemplateException($"{name} is not a valid template name. Only Letters, Numbers, _, ., and spaces are allowed");

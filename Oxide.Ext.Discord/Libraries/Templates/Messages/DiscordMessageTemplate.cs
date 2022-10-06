@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// String contents of the message
         /// </summary>
         [JsonProperty("Message Content")]
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
 
         /// <summary>
         /// Embeds for the message
@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <param name="content"></param>
         public DiscordMessageTemplate(string content) : this()
         {
-            Content = content;
+            Content = content ?? string.Empty;
         }
 
         /// <summary>

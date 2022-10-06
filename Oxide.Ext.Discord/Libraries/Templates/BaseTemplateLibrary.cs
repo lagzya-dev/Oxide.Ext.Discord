@@ -112,7 +112,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
             catch (Exception ex)
             {
-                Logger.Exception("Failed to load template from file: {0} Path: {1}", id.ToString(), path.Substring(0, Interface.Oxide.RootDirectory.Length), ex);
+                Logger.Exception("Failed to load template from file: {0} Path: {1}", id.ToString(), path.Substring(Interface.Oxide.RootDirectory.Length), ex);
                 return null;
             }
         }
@@ -132,10 +132,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
             FileMode mode = File.Exists(path) ? FileMode.Truncate : FileMode.Create;
 
-            FileStream stream = new FileStream(path, mode);
-            await DiscordJsonWriter.WriteAndCopyAsync(Serializer, template, stream).ConfigureAwait(false);
-            await stream.FlushAsync().ConfigureAwait(false);
-            stream.Dispose();
+            using (FileStream stream = new FileStream(path, mode))
+            {
+                await DiscordJsonWriter.WriteAndCopyAsync(Serializer, template, stream).ConfigureAwait(false);
+                await stream.FlushAsync().ConfigureAwait(false);
+            }
         }
 
         private async Task BackupTemplateFiles<T>(TemplateId id, TemplateVersion minVersion) where T : BaseTemplate
