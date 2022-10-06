@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Messages;
 
@@ -68,6 +69,24 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Messages
             if (!string.IsNullOrEmpty(description) && description.Length > 1024)
             {
                 throw new InvalidMessageException("Message attachment description cannot be more than 1024 characters");
+            }
+        }
+
+        internal static void ThrowIfCantBeDeleted(DiscordMessage message)
+        {
+            switch (message.Type)
+            {
+                case MessageType.RecipientAdd:
+                case MessageType.RecipientRemove:
+                case MessageType.Call:
+                case MessageType.ChannelNameChange:
+                case MessageType.ChannelIconChange:
+                case MessageType.GuildDiscoveryDisqualified:
+                case MessageType.GuildDiscoveryRequalified:
+                case MessageType.GuildDiscoveryGracePeriodInitialWarning:
+                case MessageType.GuildDiscoveryGracePeriodFinalWarning:
+                case MessageType.ThreadStarterMessage:
+                    throw new InvalidMessageException($"This message cannot be deleted because it is of type {message.Type}");
             }
         }
     }

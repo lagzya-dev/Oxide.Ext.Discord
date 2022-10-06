@@ -18,6 +18,7 @@ using Oxide.Ext.Discord.Entities.Stickers;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Emojis;
+using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 using Oxide.Ext.Discord.Json.Converters;
@@ -833,6 +834,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void DeleteMessage(DiscordClient client, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
+            InvalidMessageException.ThrowIfCantBeDeleted(this);
             client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages/{Id}", RequestMethod.DELETE, null, callback, error);
         }
 
