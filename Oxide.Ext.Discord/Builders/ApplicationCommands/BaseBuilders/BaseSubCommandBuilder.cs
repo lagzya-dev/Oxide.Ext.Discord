@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
 {

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
@@ -18,7 +17,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     /// <summary>
     /// Represents a library for discord linking
     /// </summary>
-    public class DiscordLink : Library
+    public class DiscordLink : BaseDiscordLibrary
     {
         private readonly Hash<string, Snowflake> _steamIdToDiscordId = new Hash<string, Snowflake>();
         private readonly Hash<Snowflake, string> _discordIdToSteamId = new Hash<Snowflake, string>();
@@ -104,7 +103,9 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             _linkPlugins.Remove(plugin);
         }
 
-        internal void OnPluginUnloaded(Plugin plugin)
+        protected override void OnPluginLoaded(Plugin plugin) { }
+
+        protected override void  OnPluginUnloaded(Plugin plugin)
         {
             if (plugin is IDiscordLinkPlugin link)
             {
@@ -185,7 +186,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 return null;
             }
 
-            return ServerPlayerCache.GetPlayer(id);
+            return ServerPlayerCache.Instance.GetPlayer(id);
         }
 
         /// <summary>
@@ -221,7 +222,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 return null;
             }
 
-            return DiscordUserCache.GetOrCreate(discordId.Value);
+            return DiscordUserCache.Instance.GetOrCreate(discordId.Value);
         }
         
         /// <summary>
@@ -337,7 +338,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             _steamIdToDiscordId[player.Id] = discord.Id;
             _steamIds.Add(player.Id);
             _discordIds.Add(discord.Id);
-            ServerPlayerCache.SetPlayer(player);
+            ServerPlayerCache.Instance.SetPlayer(player);
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
         }
 

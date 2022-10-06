@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Users;
 
@@ -37,9 +38,11 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            JObject obj = JObject.Load(reader);
+            obj.ToObject<DiscordUser>();
             DiscordUser user = new DiscordUser();
             serializer.Populate(reader, user);
-            return DiscordUserCache.GetOrCreate(user);
+            return DiscordUserCache.Instance.GetOrCreate(user);
         }
 
         /// <summary>

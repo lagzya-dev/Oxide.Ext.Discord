@@ -261,7 +261,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 
                         ByteArrayContent file = new ByteArrayContent(fileAttachment.Data);
                         content.Add(file, $"files[{(index + 1).ToString()}]", fileAttachment.FileName);
-                        file.Headers.ContentType = MediaTypeHeaderCache.Get(fileAttachment.ContentType);
+                        file.Headers.ContentType = MediaTypeHeaderCache.Instance.Get(fileAttachment.ContentType);
                     }
 
                     request.Content = content;
@@ -286,7 +286,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
 
             DiscordStreamContent content = new DiscordStreamContent(_json.Stream);
-            content.Headers.ContentType = MediaTypeHeaderCache.Get("application/json");
+            content.Headers.ContentType = MediaTypeHeaderCache.Instance.Get("application/json");
             return content;
         }
 

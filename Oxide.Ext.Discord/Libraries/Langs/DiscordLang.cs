@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Libraries.Langs
     /// <summary>
     /// Converts discord locale codes into oxide locale codes
     /// </summary>
-    public class DiscordLang : Library
+    public class DiscordLang : BaseDiscordLibrary
     {
         /// <summary>
         /// Default Oxide Lang (English)
@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Libraries.Langs
         
         private readonly Hash<string, string> _discordToOxide = new Hash<string, string>();
         private readonly Hash<string, string> _oxideToDiscord = new Hash<string, string>();
-        private readonly Hash<string, Hash<string, Hash<string, string>>> _pluginLangCache = new Hash<string, Hash<string, Hash<string, string>>>();
+        private readonly Hash<LangId, Hash<string, string>> _pluginLangCache = new Hash<LangId, Hash<string, string>>();
         
         private readonly Lang _lang = Interface.Oxide.GetLibrary<Lang>();
         private readonly ILogger _logger;
@@ -242,18 +242,13 @@ namespace Oxide.Ext.Discord.Libraries.Langs
 
         private Hash<string, string> GetLanguageMessages(Plugin plugin, string language)
         {
-            Hash<string, Hash<string, string>> pluginCache = _pluginLangCache[plugin.Id()];
-            if (pluginCache == null)
-            {
-                pluginCache = new Hash<string, Hash<string, string>>();
-                _pluginLangCache[plugin.Id()] = pluginCache;
-            }
-
-            Hash<string, string> langCache = pluginCache[language];
+            LangId id = new LangId(plugin, language);
+            Hash<string, string> langCache = _pluginLangCache[id];
+            
             if (langCache == null)
             {
                 langCache = new Hash<string, string>();
-                pluginCache[language] = langCache;
+                _pluginLangCache[id] = langCache;
                 foreach (KeyValuePair<string, string> lang in _lang.GetMessages(language, plugin))
                 {
                     langCache[lang.Key] = lang.Value;
@@ -263,9 +258,11 @@ namespace Oxide.Ext.Discord.Libraries.Langs
             return langCache;
         }
 
-        internal void OnPluginUnloaded(Plugin plugin)
+        protected override void OnPluginLoaded(Plugin plugin) { }
+
+        protected override void OnPluginUnloaded(Plugin plugin)
         {
-            _pluginLangCache.Remove(plugin.Id());
+            _pluginLangCache.RemoveAll(p => plugin.Name == p.PluginName);
         }
     }
 }

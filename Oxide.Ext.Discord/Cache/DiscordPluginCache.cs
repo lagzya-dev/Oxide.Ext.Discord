@@ -3,50 +3,51 @@ using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Singleton;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Cache
 {
-    public static class DiscordPluginCache
+    public class DiscordPluginCache : Singleton<DiscordPluginCache>
     {
-        private static readonly CSharpPluginLoader PluginLoader = Interface.Oxide.GetPluginLoaders().OfType<CSharpPluginLoader>().FirstOrDefault();
+        private readonly CSharpPluginLoader _pluginLoader = Interface.Oxide.GetPluginLoaders().OfType<CSharpPluginLoader>().FirstOrDefault();
 
-        private static readonly List<string> LoadablePlugins = new List<string>();
-        private static readonly List<string> LoadedPlugins = new List<string>();
-        private static DateTime _lastUpdated = DateTime.MinValue;
+        private readonly List<string> _loadablePlugins = new List<string>();
+        private readonly List<string> _loadedPlugins = new List<string>();
+        private DateTime _lastUpdated = DateTime.MinValue;
 
-        public static IReadOnlyList<string> GetLoadedPlugins()
+        public IReadOnlyList<string> GetLoadedPlugins()
         {
-            if (LoadedPlugins.Count != 0)
+            if (_loadedPlugins.Count != 0)
             {
-                return LoadedPlugins;
+                return _loadedPlugins;
             }
 
-            LoadedPlugins.AddRange(Interface.Oxide.RootPluginManager.GetPlugins().Select(p => p.Name).OrderBy(p => p));
-            return LoadedPlugins;
+            _loadedPlugins.AddRange(Interface.Oxide.RootPluginManager.GetPlugins().Select(p => p.Name).OrderBy(p => p));
+            return _loadedPlugins;
         }
         
-        public static IReadOnlyList<string> GetLoadablePlugins()
+        public IReadOnlyList<string> GetLoadablePlugins()
         {
             if (_lastUpdated + TimeSpan.FromMinutes(1) < DateTime.UtcNow)
             {
-                return LoadablePlugins;
+                return _loadablePlugins;
             }
             
-            LoadablePlugins.Clear();
-            LoadablePlugins.AddRange(PluginLoader.ScanDirectory(Interface.Oxide.PluginDirectory).Except(GetLoadedPlugins()).OrderBy(p => p));
+            _loadablePlugins.Clear();
+            _loadablePlugins.AddRange(_pluginLoader.ScanDirectory(Interface.Oxide.PluginDirectory).Except(GetLoadedPlugins()).OrderBy(p => p));
             _lastUpdated = DateTime.UtcNow;
-            return LoadablePlugins;
+            return _loadablePlugins;
         }
 
-        internal static void OnPluginLoaded(Plugin plugin)
+        internal void OnPluginLoaded(Plugin plugin)
         {
-            LoadedPlugins.Clear();
+            _loadedPlugins.Clear();
         }
 
-        internal static void OnPluginUnloaded(Plugin plugin)
+        internal void OnPluginUnloaded(Plugin plugin)
         {
-            LoadedPlugins.Remove(plugin.Name);
+            _loadedPlugins.Remove(plugin.Name);
         }
     }
 }

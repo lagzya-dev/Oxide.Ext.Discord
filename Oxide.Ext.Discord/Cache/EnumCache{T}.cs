@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Oxide.Ext.Discord.Singleton;
 
 namespace Oxide.Ext.Discord.Cache
 {
@@ -8,22 +9,22 @@ namespace Oxide.Ext.Discord.Cache
     /// Represents a cache of enum strings
     /// </summary>
     /// <typeparam name="T">Enum type</typeparam>
-    public static class EnumCache<T> where T : struct, IConvertible
+    public class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, IConvertible
     {
-        private static readonly Dictionary<T, string> CachedStrings = new Dictionary<T, string>();
-        private static readonly Dictionary<T, string> LoweredStrings = new Dictionary<T, string>();
-        private static readonly Dictionary<T, string> NumberString = new Dictionary<T, string>();
-        private static readonly T[] Values; 
+        private readonly Dictionary<T, string> _cachedStrings = new Dictionary<T, string>();
+        private readonly Dictionary<T, string> _loweredStrings = new Dictionary<T, string>();
+        private readonly Dictionary<T, string> _numberString = new Dictionary<T, string>();
+        private readonly T[] _values; 
 
-        static EnumCache()
+        public EnumCache()
         {
-            Values = Enum.GetValues(typeof(T)).Cast<T>().ToArray();
-            for (int index = 0; index < Values.Length; index++)
+            _values = Enum.GetValues(typeof(T)).Cast<T>().ToArray();
+            for (int index = 0; index < _values.Length; index++)
             {
-                T value = Values[index];
+                T value = _values[index];
                 string enumString = value.ToString();
-                CachedStrings[value] = enumString;
-                LoweredStrings[value] = enumString.ToLower();
+                _cachedStrings[value] = enumString;
+                _loweredStrings[value] = enumString.ToLower();
             }
         }
         
@@ -32,14 +33,14 @@ namespace Oxide.Ext.Discord.Cache
         /// </summary>
         /// <param name="value">Enum value</param>
         /// <returns>Enum value as string</returns>
-        public static string ToString(T value)
+        public string ToString(T value)
         {
-            if (CachedStrings.TryGetValue(value, out string str))
+            if (_cachedStrings.TryGetValue(value, out string str))
             {
                 return str;
             }
             str = value.ToString();
-            CachedStrings[value] = str;
+            _cachedStrings[value] = str;
             return str;
         }
         
@@ -48,26 +49,26 @@ namespace Oxide.Ext.Discord.Cache
         /// </summary>
         /// <param name="value">Enum value</param>
         /// <returns>Enum value as lowered string</returns>
-        public static string ToLower(T value)
+        public string ToLower(T value)
         {
-            if (LoweredStrings.TryGetValue(value, out string str))
+            if (_loweredStrings.TryGetValue(value, out string str))
             {
                 return str;
             }
             str = value.ToString().ToLower();
-            LoweredStrings[value] = str;
+            _loweredStrings[value] = str;
             return str;
         }
 
-        public static string ToNumber(T value)
+        public string ToNumber(T value)
         {
-            if (NumberString.TryGetValue(value, out string str))
+            if (_numberString.TryGetValue(value, out string str))
             {
                 return str;
             }
             
             str = value.ToType(Enum.GetUnderlyingType(typeof(T)), null).ToString();
-            NumberString[value] = str;
+            _numberString[value] = str;
             return str;
         }
 
@@ -75,9 +76,9 @@ namespace Oxide.Ext.Discord.Cache
         /// Returns a cached list of Enum Values
         /// </summary>
         /// <returns></returns>
-        public static IReadOnlyList<T> GetList()
+        public IReadOnlyList<T> GetList()
         {
-            return Values;
+            return _values;
         }
     }
 }

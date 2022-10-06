@@ -65,7 +65,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             MoveNext();
             
             StringBuilder bucket = DiscordPool.GetStringBuilder();
-            bucket.Append(EnumCache<RequestMethod>.ToString(_method));
+            bucket.Append(EnumCache<RequestMethod>.Instance.ToString(_method));
             bucket.Append(':');
             bucket.Append(_current);
 

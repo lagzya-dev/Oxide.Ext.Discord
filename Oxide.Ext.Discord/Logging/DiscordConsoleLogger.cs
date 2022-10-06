@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Logging
         {
             lock (_sync)
             {
-                _args[0] = EnumCache<DiscordLogLevel>.ToString(level);
+                _args[0] = EnumCache<DiscordLogLevel>.Instance.ToString(level);
                 _args[1] = message;
                 message = string.Format(_format, _args);
                 

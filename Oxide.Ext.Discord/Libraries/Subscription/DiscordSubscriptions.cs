@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     /// Represents Discord Subscriptions Oxide Library
     /// Allows for plugins to subscribe to discord channels
     /// </summary>
-    public class DiscordSubscriptions : Library
+    public class DiscordSubscriptions : BaseDiscordLibrary
     {
         private readonly Hash<Snowflake, Hash<string, DiscordSubscription>> _subscriptions = new Hash<Snowflake, Hash<string, DiscordSubscription>>();
 
@@ -97,7 +97,9 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemoveChannelSubscription)} {{0}} removed subscription to channel {{1}}", plugin.Id(), channelId);
         }
 
-        internal void OnPluginUnloaded(Plugin plugin)
+        protected override void OnPluginLoaded(Plugin plugin) { }
+
+        protected override void OnPluginUnloaded(Plugin plugin)
         {
             RemovePluginSubscriptions(plugin);
         }

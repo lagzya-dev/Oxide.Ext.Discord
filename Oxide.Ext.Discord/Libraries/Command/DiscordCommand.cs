@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
     /// <summary>
     /// Represents a library for discord commands
     /// </summary>
-    public class DiscordCommand : Library
+    public class DiscordCommand : BaseDiscordLibrary
     {
         /// <summary>
         /// Available command prefixes used by the extension
@@ -224,47 +224,6 @@ namespace Oxide.Ext.Discord.Libraries.Command
         }
 
         /// <summary>
-        /// Called when a plugin has been unloaded
-        /// </summary>
-        /// <param name="sender"></param>
-        internal void OnPluginUnloaded(Plugin sender)
-        {
-            List<DirectMessageCommand> dmCommands = DiscordPool.GetList<DirectMessageCommand>();
-            List<GuildCommand> guildCommands = DiscordPool.GetList<GuildCommand>();
-            // Remove all discord commands which were registered by the plugin
-            foreach (DirectMessageCommand cmd in _directMessageCommands.Values)
-            {
-                if (cmd.Plugin.Id() == sender.Id())
-                {
-                    dmCommands.Add(cmd);
-                }
-            }
-            
-            foreach (GuildCommand cmd in _guildCommands.Values)
-            {
-                if (cmd.Plugin.Id() == sender.Id())
-                {
-                    guildCommands.Add(cmd);
-                }
-            }
-
-            for (int index = 0; index < dmCommands.Count; index++)
-            {
-                DirectMessageCommand cmd = dmCommands[index];
-                RemoveDmCommand(cmd);
-            }
-            
-            for (int index = 0; index < guildCommands.Count; index++)
-            {
-                GuildCommand cmd = guildCommands[index];
-                RemoveGuildCommand(cmd);
-            }
-            
-            DiscordPool.FreeList(dmCommands);
-            DiscordPool.FreeList(guildCommands);
-        }
-
-        /// <summary>
         /// Handles the specified direct message command
         /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L361)
         /// </summary>
@@ -344,8 +303,21 @@ namespace Oxide.Ext.Discord.Libraries.Command
             _logger.Debug("Handling command");
             return true;
         }
+
+        internal IEnumerable<BaseCommand> GetCommands()
+        {
+            foreach (GuildCommand command in _guildCommands.Values)
+            {
+                yield return command;
+            }
+            
+            foreach (DirectMessageCommand command in _directMessageCommands.Values)
+            {
+                yield return command;
+            }
+        }
         
-        internal void ProcessPluginCommands(Plugin plugin)
+                protected override void OnPluginLoaded(Plugin plugin)
         {
             foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
             {
@@ -383,17 +355,45 @@ namespace Oxide.Ext.Discord.Libraries.Command
             }
         }
 
-        internal IEnumerable<BaseCommand> GetCommands()
+        /// <summary>
+        /// Called when a plugin has been unloaded
+        /// </summary>
+        /// <param name="sender"></param>
+        protected override void OnPluginUnloaded(Plugin sender)
         {
-            foreach (GuildCommand command in _guildCommands.Values)
+            List<DirectMessageCommand> dmCommands = DiscordPool.GetList<DirectMessageCommand>();
+            List<GuildCommand> guildCommands = DiscordPool.GetList<GuildCommand>();
+            // Remove all discord commands which were registered by the plugin
+            foreach (DirectMessageCommand cmd in _directMessageCommands.Values)
             {
-                yield return command;
+                if (cmd.Plugin.Id() == sender.Id())
+                {
+                    dmCommands.Add(cmd);
+                }
             }
             
-            foreach (DirectMessageCommand command in _directMessageCommands.Values)
+            foreach (GuildCommand cmd in _guildCommands.Values)
             {
-                yield return command;
+                if (cmd.Plugin.Id() == sender.Id())
+                {
+                    guildCommands.Add(cmd);
+                }
             }
+
+            for (int index = 0; index < dmCommands.Count; index++)
+            {
+                DirectMessageCommand cmd = dmCommands[index];
+                RemoveDmCommand(cmd);
+            }
+            
+            for (int index = 0; index < guildCommands.Count; index++)
+            {
+                GuildCommand cmd = guildCommands[index];
+                RemoveGuildCommand(cmd);
+            }
+            
+            DiscordPool.FreeList(dmCommands);
+            DiscordPool.FreeList(guildCommands);
         }
     }
 }

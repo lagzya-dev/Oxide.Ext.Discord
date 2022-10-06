@@ -56,7 +56,7 @@ namespace Oxide.Ext.Discord.Hooks
             {
                 _logger.Warning("{0} is trying to add hook {1} which requires GatewayIntent.{2} but was not specified. " +
                                 "This hook will not work correctly until it is corrected. " +
-                                "Please contact the plugin author with this message.", client.PluginName, hook, EnumCache<GatewayIntents>.ToString(intent));
+                                "Please contact the plugin author with this message.", client.PluginName, hook, EnumCache<GatewayIntents>.Instance.ToString(intent));
             }
 
             List<Plugin> hooks = _hookCache[hook];

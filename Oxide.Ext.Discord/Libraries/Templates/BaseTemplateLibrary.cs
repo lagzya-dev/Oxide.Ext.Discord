@@ -4,7 +4,6 @@ using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Core;
-using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Exceptions.Libraries;
@@ -17,7 +16,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     /// <summary>
     /// Oxide Library for Discord Templates
     /// </summary>
-    public abstract class BaseTemplateLibrary : Library
+    public abstract class BaseTemplateLibrary : BaseDiscordLibrary
     {
         /// <summary>
         /// Logger for the <see cref="BaseTemplateLibrary"/>
@@ -211,8 +210,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             return Path.Combine(Path.GetDirectoryName(path), $"{Path.GetFileNameWithoutExtension(path)}.{version}.json");
         }
         
-        private string GetTemplateTypePath() => EnumCache<TemplateType>.ToLower(TemplateType);
-
-        internal abstract void OnPluginUnloaded(Plugin plugin);
+        private string GetTemplateTypePath() => EnumCache<TemplateType>.Instance.ToLower(TemplateType);
     }
 }

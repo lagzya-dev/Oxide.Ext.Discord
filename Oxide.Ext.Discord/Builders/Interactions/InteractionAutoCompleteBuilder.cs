@@ -299,12 +299,12 @@ namespace Oxide.Ext.Discord.Builders.Interactions
 
         public void AddLoadablePlugins(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
-            AddList(DiscordPluginCache.GetLoadablePlugins(), filter, comparison, search);
+            AddList(DiscordPluginCache.Instance.GetLoadablePlugins(), filter, comparison, search);
         }
 
         public void AddLoadedPlugins(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
-            AddList(DiscordPluginCache.GetLoadedPlugins(), filter, comparison, search);
+            AddList(DiscordPluginCache.Instance.GetLoadedPlugins(), filter, comparison, search);
         }
 
         private void AddList(IEnumerable<string> list, string filter, StringComparison comparison, AutoCompleteSearchMode search)

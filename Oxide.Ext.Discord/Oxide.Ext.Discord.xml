@@ -304,7 +304,7 @@
             Builder to use when building application commands
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType,System.String)">
             <summary>
             Creates a new Application Command Builder
             </summary>
@@ -1066,7 +1066,7 @@
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsUserIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsPlayerIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Groups that playerId has
             </summary>
@@ -1075,7 +1075,7 @@
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsUserNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsPlayerNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Groups that playerId has
             </summary>
@@ -1084,7 +1084,7 @@
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsUserIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsPlayerIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Permissions that playerId has
             </summary>
@@ -1093,7 +1093,7 @@
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsUserNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsPlayerNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Permissions that playerId has
             </summary>
@@ -1780,7 +1780,7 @@
             <param name="template"></param>
             <param name="data"></param>
             <param name="entity"></param>
-            <param name="callback"></param>
+            <param name="promise"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.HandleCallback">
             <inheritdoc/>
@@ -17860,12 +17860,6 @@
             </summary>
             <param name="command"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
-            <summary>
-            Called when a plugin has been unloaded
-            </summary>
-            <param name="sender"></param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.HandleDirectMessageCommand(Oxide.Ext.Discord.BotClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Entities.Channels.DiscordChannel,System.String,System.String[])">
             <summary>
             Handles the specified direct message command
@@ -17887,6 +17881,12 @@
             <param name="name"></param>
             <param name="args"></param>
             <param name="message"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Called when a plugin has been unloaded
+            </summary>
+            <param name="sender"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Langs.DiscordLang">
             <summary>
@@ -19254,19 +19254,12 @@
             Root Directory for the library
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary.#ctor(System.String,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary.#ctor(System.String,Oxide.Ext.Discord.Libraries.Templates.TemplateType,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
             <param name="rootDir">Root Directory for the library</param>
             <param name="logger"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary.GetTemplateTypePath(Oxide.Ext.Discord.Libraries.Templates.TemplateType)">
-            <summary>
-            Returns a pooled lowered string for the template type
-            </summary>
-            <param name="type"><see cref="T:Oxide.Ext.Discord.Libraries.Templates.TemplateType"/> to return the string for</param>
-            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.BulkTemplateRegistration`1">
             <summary>

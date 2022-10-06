@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                 return;
             }
             
-            writer.WriteValue(EnumCache<PermissionFlags>.ToNumber((PermissionFlags)value));
+            writer.WriteValue(EnumCache<PermissionFlags>.Instance.ToNumber((PermissionFlags)value));
         }
 
         /// <summary>

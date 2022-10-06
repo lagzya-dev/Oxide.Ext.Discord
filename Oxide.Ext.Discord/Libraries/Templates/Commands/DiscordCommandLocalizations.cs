@@ -193,8 +193,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             string fileName = !string.IsNullOrEmpty(id.TemplateName) ? $"{id.PluginName}.{id.TemplateName}.json" : $"{id.PluginName}.json";
             return Path.Combine(RootDir, id.Language, fileName);
         }
-        
-        internal override void OnPluginUnloaded(Plugin plugin)
+
+        protected override void OnPluginLoaded(Plugin plugin) { }
+
+        protected override void OnPluginUnloaded(Plugin plugin)
         {
             string name = plugin.Name;
             RegisteredTemplates.RemoveWhere(rt => rt.PluginName == name);

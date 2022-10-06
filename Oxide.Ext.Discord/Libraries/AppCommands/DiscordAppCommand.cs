@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes.ApplicationCommands;
 using Oxide.Ext.Discord.Entities;
@@ -20,7 +19,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
     /// Application Command Oxide Library handler
     /// Routes Application Commands to their respective hook method handlers instead of having to manually handle it.
     /// </summary>
-    public class DiscordAppCommand : Library
+    public class DiscordAppCommand : BaseDiscordLibrary
     {
         private readonly Hash<Snowflake, ApplicationCommandHandler> _slashCommands = new Hash<Snowflake, ApplicationCommandHandler>();
         private readonly Hash<Snowflake, MessageComponentHandler> _componentCommands = new Hash<Snowflake, MessageComponentHandler>();
@@ -261,7 +260,9 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
         }
 
-        internal void OnPluginUnloaded(Plugin plugin)
+        protected override void OnPluginLoaded(Plugin plugin) { }
+
+        protected override void OnPluginUnloaded(Plugin plugin)
         {
             List<AppCommand> appCommands = DiscordPool.GetList<AppCommand>();
             foreach (ApplicationCommandHandler handler in _slashCommands.Values)

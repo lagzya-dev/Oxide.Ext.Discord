@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -233,7 +234,7 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
-            DiscordPluginCache.OnPluginLoaded(plugin);
+            DiscordPluginCache.Instance.OnPluginLoaded(plugin);
             OnPluginRemoved(plugin);
             
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
@@ -254,7 +255,7 @@ namespace Oxide.Ext.Discord
                 }
             }
             
-            DiscordExtension.DiscordCommand.ProcessPluginCommands(plugin);
+            BaseDiscordLibrary.ProcessPluginLoaded(plugin);
         }
 
         internal static void OnPluginRemoved(Plugin plugin)
@@ -264,32 +265,15 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            string id = plugin.Id();
-            if (id == nameof(DiscordExtension))
-            {
-                return;
-            }
-            
             DiscordClient client = Clients[plugin.Id()];
             if (client != null)
             {
                 CloseClient(client);
-
-                DiscordExtension.DiscordAppCommand.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordLink.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordCommand.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordSubscriptions.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordMessageTemplates.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordEmbedTemplates.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordEmbedFieldTemplates.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordModalTemplates.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordCommandLocalizations.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordPlaceholders.OnPluginUnloaded(plugin);
-                DiscordExtension.DiscordLang.OnPluginUnloaded(plugin);
+                BaseDiscordLibrary.ProcessPluginUnloaded(plugin);
             }
 
             PluginExt.OnPluginUnloaded(plugin);
-            DiscordPluginCache.OnPluginUnloaded(plugin);
+            DiscordPluginCache.Instance.OnPluginUnloaded(plugin);
             DiscordLoggerFactory.OnPluginUnloaded(plugin);
         }
 

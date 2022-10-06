@@ -3,30 +3,37 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Singleton;
 
 namespace Oxide.Ext.Discord.Cache
 {
     /// <summary>
     /// Cache for server <see cref="IPlayer"/>
     /// </summary>
-    public class ServerPlayerCache
+    public class ServerPlayerCache : Singleton<ServerPlayerCache>
     {
-        private static readonly ConcurrentDictionary<string, IPlayer> InternalCache = new ConcurrentDictionary<string, IPlayer>();
-        
+        private readonly ConcurrentDictionary<string, IPlayer> InternalCache = new ConcurrentDictionary<string, IPlayer>();
+
         /// <summary>
         /// Readonly Cache of <see cref="IPlayer"/>
         /// </summary>
-        public static readonly IReadOnlyDictionary<string, IPlayer> Cache = new ReadOnlyDictionary<string, IPlayer>(InternalCache);
+        public readonly IReadOnlyDictionary<string, IPlayer> Cache;
 
-        private static readonly IPlayerManager Players = Interface.Oxide.GetLibrary<Covalence>().Players;
+        private readonly IPlayerManager Players = Interface.Oxide.GetLibrary<Covalence>().Players;
 
+        public ServerPlayerCache()
+        {
+            Cache = new ReadOnlyDictionary<string, IPlayer>(InternalCache);
+        }
+        
         /// <summary>
         /// Returns the <see cref="IPlayer"/> for the given ID
         /// </summary>
         /// <param name="id">ID of the player</param>
         /// <returns><see cref="IPlayer"/></returns>
-        public static IPlayer GetPlayer(string id)
+        public IPlayer GetPlayer(string id)
         {
             if (InternalCache.ContainsKey(id))
             {
@@ -43,9 +50,12 @@ namespace Oxide.Ext.Discord.Cache
             return player;
         }
 
-        internal static void SetPlayer(IPlayer player)
+        internal void SetPlayer(IPlayer player)
         {
-            
+            if (!InternalCache.TryGetValue(player.Id, out IPlayer cached) || cached.IsDummyPlayer())
+            {
+                InternalCache[player.Id] = player;
+            }
         }
     }
 }

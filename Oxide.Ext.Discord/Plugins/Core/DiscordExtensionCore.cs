@@ -455,7 +455,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             if (player.IsLinked())
             {
-                ServerPlayerCache.SetPlayer(player);
+                ServerPlayerCache.Instance.SetPlayer(player);
             }
         }
         #endregion

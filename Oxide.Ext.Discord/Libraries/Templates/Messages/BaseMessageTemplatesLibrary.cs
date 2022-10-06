@@ -368,7 +368,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             _templateCache[id] = template;
         }
 
-        internal override void OnPluginUnloaded(Plugin plugin)
+        protected override void OnPluginLoaded(Plugin plugin) { }
+
+        protected override void OnPluginUnloaded(Plugin plugin)
         {
             string name = plugin.Name;
             _templateCache.RemoveAll(t => t.PluginName == name);

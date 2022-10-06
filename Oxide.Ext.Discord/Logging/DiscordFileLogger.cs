@@ -50,7 +50,7 @@ namespace Oxide.Ext.Discord.Logging
         {
             lock (_sync)
             {
-                _writer.Write(_fileLogFormat, DateTime.Now, EnumCache<DiscordLogLevel>.ToString(level), message);
+                _writer.Write(_fileLogFormat, DateTime.Now, EnumCache<DiscordLogLevel>.Instance.ToString(level), message);
                 
                 if (ex != null)
                 {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using Oxide.Core;
-using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
@@ -19,7 +18,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     /// <summary>
     /// Discord Placeholders Library
     /// </summary>
-    public class DiscordPlaceholders : Library
+    public class DiscordPlaceholders : BaseDiscordLibrary
     {
         private readonly Regex _placeholderRegex = new Regex(@"{([^\d][^:{}""]+)(?::([^{}""]+))*?}", RegexOptions.Compiled);
         private readonly Hash<string, BasePlaceholder> _placeholders = new Hash<string, BasePlaceholder>();
@@ -214,7 +213,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
         }
 
-        internal void OnPluginUnloaded(Plugin plugin)
+        protected override void OnPluginLoaded(Plugin plugin) { }
+
+        protected override void OnPluginUnloaded(Plugin plugin)
         {
             _placeholders.RemoveAll(p => p.IsForPlugin(plugin));
             foreach (KeyValuePair<string, BasePlaceholder> placeholder in _internalPlaceholders)
