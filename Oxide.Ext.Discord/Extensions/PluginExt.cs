@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Oxide.Core.Plugins;
 using Oxide.Plugins;
 
@@ -8,10 +9,10 @@ namespace Oxide.Ext.Discord.Extensions
     {
         private static readonly Hash<string, string> FullNameCache = new Hash<string, string>();
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static string Id(this Plugin plugin)
         {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            return plugin.Name;
+            return plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));
         }
         
         internal static string FullName(this Plugin plugin)
@@ -33,6 +34,8 @@ namespace Oxide.Ext.Discord.Extensions
             string name = FullNameCache[pluginName];
             return name ?? pluginName;
         }
+
+        internal static bool IsExtensionPlugin(this Plugin plugin) => plugin.Id() == nameof(DiscordExtension);
 
         internal static void OnPluginLoaded(Plugin plugin)
         {
