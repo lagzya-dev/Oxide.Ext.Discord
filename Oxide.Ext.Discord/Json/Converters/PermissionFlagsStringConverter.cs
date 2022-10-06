@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Permissions;
 
 namespace Oxide.Ext.Discord.Json.Converters
@@ -23,7 +24,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                 return;
             }
             
-            writer.WriteValue(value.ToString());
+            writer.WriteValue(EnumCache<PermissionFlags>.ToNumber((PermissionFlags)value));
         }
 
         /// <summary>
