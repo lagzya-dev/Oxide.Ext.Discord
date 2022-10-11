@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             _heartbeatAcknowledged = true;
         }
-        
+
         /// <summary>
         /// Destroy the heartbeat timer on this bot
         /// </summary>
@@ -88,13 +88,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
             
-            if (_socket.Handler.IsPendingReconnect())
+            if (_socket.IsPendingReconnect())
             {
                 _logger.Debug($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Websocket is offline and is waiting to connect.");
                 return;
             }
 
-            if (_socket.Handler.IsDisconnected())
+            if (_socket.IsDisconnected())
             {
                 _logger.Debug($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Websocket is offline and is NOT connecting. Attempt Reconnect.");
                 _socket.ShouldReconnect = true;
@@ -102,7 +102,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
 
-            if (_socket.Handler.IsDisconnecting())
+            if (_socket.IsDisconnecting())
             {
                 _logger.Debug($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Websocket is currently in the process of disconnecting");
                 return;
@@ -111,7 +111,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             if(!_heartbeatAcknowledged)
             {
                 //Discord did not acknowledge our last sent heartbeat. This is a zombie connection we should reconnect.
-                if (_socket.Handler.IsConnected())
+                if (_socket.IsConnected())
                 {
                     _logger.Debug($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and WebSocket is connected. Forcing reconnect.");
                     _socket.Disconnect(true, true, true);
@@ -119,7 +119,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 }
 
                 //Websocket isn't connected or waiting to reconnect. We should reconnect.
-                if (!_socket.Handler.IsConnecting() && !_socket.Handler.IsPendingReconnect())
+                if (!_socket.IsConnecting() && !_socket.IsPendingReconnect())
                 {
                     _logger.Debug($"{nameof(DiscordHeartbeatHandler)}.{nameof(HeartbeatElapsed)} Heartbeat Elapsed and bot is not online or connecting.");
                     _socket.ShouldReconnect = true;

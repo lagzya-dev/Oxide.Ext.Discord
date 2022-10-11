@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Callbacks.Websockets;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -101,20 +102,13 @@ namespace Oxide.Ext.Discord.WebSockets
             ShouldResume = false;
 
             Intents = _client.Settings.Intents;
-
             Handler.Connect(url);
         }
 
         private void OnGatewayUrlUpdateFailed(RequestError error)
         {
             _logger.Warning("Failed to update gateway url. Attempting reconnect.");
-
-            //Set as disconnected if we're in pending reconnect state we reconnect goes through.
-            if (Handler.SocketState == SocketState.PendingReconnect)
-            {
-                Handler.SocketState = SocketState.Disconnected;
-            }
-            Task.Run(async () => await _reconnect.StartReconnect().ConfigureAwait(false));
+            StartReconnectCallback.Start(_reconnect);
         }
 
         /// <summary>
@@ -130,7 +124,7 @@ namespace Oxide.Ext.Discord.WebSockets
             ShouldResume = resume;
             _reconnect.CancelReconnect();
 
-            if (!Handler.IsDisconnected() && !Handler.IsDisconnecting())
+            if (!IsDisconnected() && !IsDisconnecting())
             {
                 OnSocketDisconnected();
 
@@ -153,10 +147,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         /// <param name="webSocketId">ID of the socket</param>
         /// <returns>True if current socket is not null and socket matches current socket; False otherwise.</returns>
-        internal bool IsCurrentSocket(Snowflake webSocketId)
-        {
-            return Handler.WebsocketId == webSocketId;
-        }
+        internal bool IsCurrentSocket(Snowflake webSocketId) => !Handler.WebsocketId.IsValid() || Handler.WebsocketId == webSocketId;
 
         /// <summary>
         /// Shutdowns the websocket completely. Used when bot is being shutdown
@@ -335,7 +326,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         internal Task SendHeartbeat()
         {
-            if (Handler.IsConnected())
+            if (IsConnected())
             {
                 return SendImmediatelyAsync(GatewayCommandCode.Heartbeat, _sequence);
             }
@@ -368,5 +359,51 @@ namespace Oxide.Ext.Discord.WebSockets
             //If we disconnect normally our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
             Disconnect(true, true, true);
         }
+        
+        /// <summary>
+        /// Returns if the websocket is in the connecting state
+        /// </summary>
+        /// <returns>Returns if the websocket is in connecting state</returns>
+        public bool IsConnecting()
+        {
+            return Handler.SocketState == SocketState.Connecting;
+        }
+        
+        /// <summary>
+        /// Returns if the websocket is in the open state
+        /// </summary>
+        /// <returns>Returns if the websocket is in open state</returns>
+        public bool IsConnected()
+        {
+            return Handler.SocketState == SocketState.Connected;
+        }
+        
+        /// <summary>
+        /// Returns if the socket is waiting to reconnect
+        /// </summary>
+        /// <returns>Returns if the socket is waiting to reconnect</returns>
+        public bool IsPendingReconnect()
+        {
+            return _reconnect.IsPendingReconnect;
+        }
+        
+        /// <summary>
+        /// Returns if the websocket is null or is currently closing / closed
+        /// </summary>
+        /// <returns>Returns if the websocket is null or is currently closing / closed</returns>
+        public bool IsDisconnecting()
+        {
+            return Handler.SocketState == SocketState.Disconnecting;
+        }
+
+        /// <summary>
+        /// Returns if the websocket is null or is currently closing / closed
+        /// </summary>
+        /// <returns>Returns if the websocket is null or is currently closing / closed</returns>
+        public bool IsDisconnected()
+        {
+            return Handler.SocketState == SocketState.Disconnected;
+        }
+
     }
 }

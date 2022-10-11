@@ -11,13 +11,15 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
     public class WebSocketReconnectHandler
     {
         private readonly BotClient _client;
-        private readonly DiscordWebSocket _webSocket;
+        internal readonly DiscordWebSocket _webSocket;
         private readonly ILogger _logger;
         private int _reconnectRetries;
         private CancellationTokenSource _source;
 
-        internal bool AttemptGatewayUpdate => _reconnectRetries >= 3;
+        public bool IsPendingReconnect { get; private set; }
         
+        internal bool AttemptGatewayUpdate => _reconnectRetries >= 3;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -42,23 +44,22 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
 
-            if (!_webSocket.Handler.IsDisconnected() && !_webSocket.Handler.IsDisconnecting())
+            if (!_webSocket.IsDisconnected() && !_webSocket.IsDisconnecting())
             {
                 _logger.Debug("Skipping reconnect. Websocket is not Disconnected or Disconnecting");
                 return;
             }
-
+            
             CancelReconnect();
             _source = new CancellationTokenSource();
-            CancellationToken token = _source.Token;
 
             try
             {
-                _webSocket.Handler.SocketState = SocketState.PendingReconnect;
                 int delay = GetReconnectDelay();
                 _reconnectRetries++;
                 _logger.Info("Reconnecting to Discord. Retry: #{0} Delay: {1}ms", _reconnectRetries, delay);
-                await Task.Delay(delay, token).ConfigureAwait(false);
+                await Task.Delay(delay, _source.Token).ConfigureAwait(false);
+                IsPendingReconnect = false;
                 Connect();
             }
             catch (TaskCanceledException) { }
@@ -72,7 +73,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private void Connect()
         {
-            if (_webSocket.Handler.IsConnected() || _webSocket.Handler.IsConnecting())
+            if (_webSocket.IsConnected() || _webSocket.IsConnecting())
             {
                 _logger.Debug("Skipping Connect. Socket is: {0}", _webSocket.Handler.SocketState);
                 return;
@@ -86,8 +87,17 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         public void CancelReconnect()
         {
-            _source?.Cancel();
-            _source?.Dispose();
+            if (_source == null)
+            {
+                return;
+            }
+            
+            if (!_source.IsCancellationRequested)
+            {
+                _source.Cancel();
+            }
+            
+            _source.Dispose();
             _source = null;
         }
 

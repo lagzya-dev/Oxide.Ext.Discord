@@ -1615,7 +1615,7 @@
             <param name="userId">User ID to lookup in the cache</param>
             <returns>Cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Cache.DiscordUserCache.GetOrCreate(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+        <member name="M:Oxide.Ext.Discord.Cache.DiscordUserCache.GetOrCreate(Oxide.Ext.Discord.Entities.Users.IDiscordUser)">
             <summary>
             Returns a cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> for the given user or returns the passed in DiscordUser that is now cached
             </summary>
@@ -4785,6 +4785,13 @@
             Substrings which will be exempt from triggering the preset trigger type
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata.MentionTotalLimit">
+            <summary>
+            Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.MentionSpam"/>
+            Total number of unique role and user mentions allowed per message
+            Maximum of 50
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types">Auto Mod Trigger Types</a>
@@ -4803,6 +4810,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.KeywordPreset">
             <summary>
             Check if content contains words from internal pre-defined wordsets
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.MentionSpam">
+            <summary>
+            Check if content contains more unique mentions than allowed
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelCreate">
@@ -4866,6 +4878,21 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultAutoArchiveDuration">
             <summary>
             The default duration that the clients use (not the API) for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultReactionEmoji">
+            <summary>
+            Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.AvailableTags">
+            <summary>
+            Set of tags that can be used in a `GUILD_FORUM` channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultSortOrder">
+            <summary>
+            The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.SortOrderType"/> used to order posts in `GUILD_FORUM` channels
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Validate">
@@ -5220,6 +5247,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultThreadRateLimitPerUser">
             <summary>
             The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultSortOrder">
+            <summary>
+            The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.SortOrderType"/> used to order posts in `GUILD_FORUM` channels
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ThreadMembers">
@@ -5897,6 +5929,21 @@
         <member name="F:Oxide.Ext.Discord.Entities.Channels.PermissionType.Member">
             <summary>
             This permission belongs to a member
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.SortOrderType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/channel#channel-object-sort-order-types">Sort Order Types</a> in Discord
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.SortOrderType.LatestActivity">
+            <summary>
+            Sort forum posts by activity
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.SortOrderType.CreationDate">
+            <summary>
+            Sort forum posts by creation time (from most recent to oldest)
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Stages.PrivacyLevel">
@@ -8946,6 +8993,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildCreate.AfkTimeout">
             <summary>
             Afk timeout in seconds
+            Can be set to: null, 60, 300, 900, 1800, 3600
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildCreate.SystemChannelId">
@@ -14787,6 +14835,11 @@
             Whether friend sync is enabled for this connection
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.Connections.Connection.TwoWayLink">
+            <summary>
+            Whether this connection has a corresponding third party OAuth2 token
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.Connections.Connection.ShowActivity">
             <summary>
             Whether activities related to this connection will be shown in presence updates
@@ -14914,82 +14967,49 @@
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Id">
-            <summary>
-            The user's id
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Id"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Username">
-            <summary>
-            The user's username, not unique across the platform
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Username"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Discriminator">
-            <summary>
-            The user's 4-digit discord-tag
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Discriminator"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Avatar">
-            <summary>
-            The user's avatar hash
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Avatar"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Bot">
-            <summary>
-            Whether the user belongs to an OAuth2 application
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Bot"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.System">
-            <summary>
-            Whether the user is an Official Discord System user (part of the urgent message system)
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.System"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.MfaEnabled">
-            <summary>
-            Whether the user has two factor enabled on their account
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.MfaEnabled"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Banner">
-            <summary>
-            The user's banner, or null if unset
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Banner"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.AccentColor">
-            <summary>
-            The user's banner color encoded as an integer representation of hexadecimal color code
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.AccentColor"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Locale">
-            <summary>
-            The user's chosen language option
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Locale"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Verified">
-            <summary>
-            Whether the email on this account has been verified
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Verified"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Email">
-            <summary>
-            The user's email
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Email"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Flags">
-            <summary>
-            The flags on a user's account
-            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Flags"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.PremiumType">
-            <summary>
-            The type of Nitro subscription on a user's account
-            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserPremiumType"/>
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.PremiumType"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.PublicFlags">
-            <summary>
-            The public flags on a user's account
-            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
-            </summary>
+            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.PublicFlags"/>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Mention">
             <summary>
@@ -15240,6 +15260,84 @@
             <param name="channelId">Channel ID to remove recipient from</param>
             <param name="callback">callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Id">
+            <summary>
+            The user's id
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Username">
+            <summary>
+            The user's username, not unique across the platform
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Discriminator">
+            <summary>
+            The user's 4-digit discord-tag
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Avatar">
+            <summary>
+            The user's avatar hash
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Bot">
+            <summary>
+            Whether the user belongs to an OAuth2 application
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.System">
+            <summary>
+            Whether the user is an Official Discord System user (part of the urgent message system)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.MfaEnabled">
+            <summary>
+            Whether the user has two factor enabled on their account
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Banner">
+            <summary>
+            The user's banner, or null if unset
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.AccentColor">
+            <summary>
+            The user's banner color encoded as an integer representation of hexadecimal color code
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Locale">
+            <summary>
+            The user's chosen language option
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Verified">
+            <summary>
+            Whether the email on this account has been verified
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Email">
+            <summary>
+            The user's email
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Flags">
+            <summary>
+            The flags on a user's account
+            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.PremiumType">
+            <summary>
+            The type of Nitro subscription on a user's account
+            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserPremiumType"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.PublicFlags">
+            <summary>
+            The public flags on a user's account
+            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserFlags">
             <summary>
@@ -15573,7 +15671,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Voice.VoiceState.Suppress">
             <summary>
-            Whether this user is muted by the current user
+            whether this user's permission to speak is denied
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Voice.VoiceState.RequestToSpeakTimestamp">
@@ -19917,85 +20015,43 @@
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate">
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate">
             <summary>
             Discord Template for embed
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.Enabled">
-            <summary>
-            If this embed is enabled
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Enabled">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.Title">
-            <summary>
-            The Tile for the embed
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Title">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.Url">
-            <summary>
-            This Title Url for the embed
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Url">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.Description">
-            <summary>
-            The description of the embed
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Description">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.Color">
-            <summary>
-            The Hex Color for the embed
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Color">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.ImageUrl">
-            <summary>
-            Image URL to show in the embed
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.ImageUrl">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.ThumbnailUrl">
-            <summary>
-            Thumbnail url to show in the embed
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.ThumbnailUrl">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.VideoUrl">
-            <summary>
-            Video url to show in the embed
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.VideoUrl">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.TimeStamp">
-            <summary>
-            Show timestamp in the embed
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.TimeStamp">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.Fields">
-            <summary>
-            Fields for the embed
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Fields">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.Footer">
-            <summary>
-            Footer for the embed
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.#ctor(Oxide.Ext.Discord.Libraries.Templates.TemplateType,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="type"></param>
-            <param name="version"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.BaseEmbedTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
-            <summary>
-            Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/>
-            </summary>
-            <param name="data">Data to use</param>
-            <param name="embed">Initial embed to use</param>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate">
-            <summary>
-            Represents a template that can be used by the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordEmbedTemplates"/>
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.Footer">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.#ctor">
             <summary>
@@ -20009,6 +20065,17 @@
             <param name="title"></param>
             <param name="description"></param>
             <param name="titleUrl"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
+            <inheritdoc cref="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.DiscordEmbedTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
+            <summary>
+            Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/>
+            </summary>
+            <param name="data">Data to use</param>
+            <param name="embed">Initial embed to use</param>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.EmbedFooterTemplate">
             <summary>
@@ -20050,45 +20117,19 @@
             <param name="data">Data to use</param>
             <returns><see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedFooter"/></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.BaseEmbedFieldTemplate">
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.DiscordEmbedFieldTemplate">
             <summary>
             Discord Template for Embed Field
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.BaseEmbedFieldTemplate.Name">
-            <summary>
-            Title of the field
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.DiscordEmbedFieldTemplate.Name">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.BaseEmbedFieldTemplate.Value">
-            <summary>
-            Value of the field
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.DiscordEmbedFieldTemplate.Value">
+            <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.BaseEmbedFieldTemplate.Inline">
-            <summary>
-            Should the field be on the same row
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.BaseEmbedFieldTemplate.#ctor(Oxide.Ext.Discord.Libraries.Templates.TemplateType,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="type"></param>
-            <param name="version"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.BaseEmbedFieldTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField)">
-            <summary>
-            Converts the template to an <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField"/>
-            </summary>
-            <param name="data">Data to use</param>
-            <param name="field">Initial field (Optional)</param>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.DiscordEmbedFieldTemplate">
-            <summary>
-            Represents a template that can be used by the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordEmbedFieldTemplates"/> Library
-            </summary>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.DiscordEmbedFieldTemplate.Inline">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.DiscordEmbedFieldTemplate.#ctor">
             <summary>
@@ -20103,10 +20144,45 @@
             <param name="value"></param>
             <param name="inline"></param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.DiscordEmbedFieldTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField)">
+            <inheritdoc cref="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.IEmbedFieldTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField)"/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.IEmbedFieldTemplate.Name">
+            <summary>
+            Title of the field
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.IEmbedFieldTemplate.Value">
+            <summary>
+            Value of the field
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.IEmbedFieldTemplate.Inline">
+            <summary>
+            Should the field be on the same row
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.IEmbedFieldTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField)">
+            <summary>
+            Converts the template to an <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField"/>
+            </summary>
+            <param name="data">Data to use</param>
+            <param name="field">Initial field (Optional)</param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.MessageEmbedFieldTemplate">
             <summary>
             Represents a Embed Field template for <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/>
             </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.MessageEmbedFieldTemplate.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.MessageEmbedFieldTemplate.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.MessageEmbedFieldTemplate.Inline">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.MessageEmbedFieldTemplate.#ctor">
             <summary>
@@ -20121,10 +20197,114 @@
             <param name="value"></param>
             <param name="inline"></param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.MessageEmbedFieldTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField)">
+            <summary>
+            Converts the template to an <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField"/>
+            </summary>
+            <param name="data">Data to use</param>
+            <param name="field">Initial field (Optional)</param>
+            <returns></returns>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.Enabled">
+            <summary>
+            If this embed is enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.Title">
+            <summary>
+            The Tile for the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.Url">
+            <summary>
+            This Title Url for the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.Description">
+            <summary>
+            The description of the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.Color">
+            <summary>
+            The Hex Color for the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.ImageUrl">
+            <summary>
+            Image URL to show in the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.ThumbnailUrl">
+            <summary>
+            Thumbnail url to show in the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.VideoUrl">
+            <summary>
+            Video url to show in the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.TimeStamp">
+            <summary>
+            Show timestamp in the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.Fields">
+            <summary>
+            Fields for the embed
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.Footer">
+            <summary>
+            Footer for the embed
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
+            <summary>
+            Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/>
+            </summary>
+            <param name="data">Data to use</param>
+            <param name="embed">Initial embed to use</param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate">
             <summary>
             Represents a Embed for <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/>
             </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.Enabled">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.Title">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.Url">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.Description">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.Color">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.ImageUrl">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.ThumbnailUrl">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.VideoUrl">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.TimeStamp">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.Fields">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.Footer">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.#ctor">
             <summary>
@@ -20221,11 +20401,6 @@
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.TemplateType">
             <summary>
             Represents available template type
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Libraries.Templates.TemplateType.None">
-            <summary>
-            Type is not a template type
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Libraries.Templates.TemplateType.Message">
@@ -21484,6 +21659,36 @@
             Sends a heartbeat to Discord
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.IsConnecting">
+            <summary>
+            Returns if the websocket is in the connecting state
+            </summary>
+            <returns>Returns if the websocket is in connecting state</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.IsConnected">
+            <summary>
+            Returns if the websocket is in the open state
+            </summary>
+            <returns>Returns if the websocket is in open state</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.IsPendingReconnect">
+            <summary>
+            Returns if the socket is waiting to reconnect
+            </summary>
+            <returns>Returns if the socket is waiting to reconnect</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.IsDisconnecting">
+            <summary>
+            Returns if the websocket is null or is currently closing / closed
+            </summary>
+            <returns>Returns if the websocket is null or is currently closing / closed</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.IsDisconnected">
+            <summary>
+            Returns if the websocket is null or is currently closing / closed
+            </summary>
+            <returns>Returns if the websocket is null or is currently closing / closed</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes">Socket Close Event Codes</a>
@@ -22039,7 +22244,7 @@
             <param name="reason">Reason for the close</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.DisconnectInternal(Oxide.Ext.Discord.Entities.Snowflake,System.Net.WebSockets.WebSocketCloseStatus,System.String,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.DisconnectInternal(Oxide.Ext.Discord.WebSockets.DiscordWebsocketClient,System.Net.WebSockets.WebSocketCloseStatus,System.String,System.Boolean)">
             <summary>
             Disconnects from the websocket with the given code and reason
             </summary>
@@ -22048,36 +22253,6 @@
             <param name="reason">Reason for the close</param>
             <param name="closeReceived">If we received a close from the websocket</param>
             <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsConnected">
-            <summary>
-            Returns if the websocket is in the open state
-            </summary>
-            <returns>Returns if the websocket is in open state</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsConnecting">
-            <summary>
-            Returns if the websocket is in the connecting state
-            </summary>
-            <returns>Returns if the websocket is in connecting state</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsPendingReconnect">
-            <summary>
-            Returns if the socket is waiting to reconnect
-            </summary>
-            <returns>Returns if the socket is waiting to reconnect</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsDisconnecting">
-            <summary>
-            Returns if the websocket is null or is currently closing / closed
-            </summary>
-            <returns>Returns if the websocket is null or is currently closing / closed</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketHandler.IsDisconnected">
-            <summary>
-            Returns if the websocket is null or is currently closing / closed
-            </summary>
-            <returns>Returns if the websocket is null or is currently closing / closed</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketReconnectHandler">
             <summary>
@@ -22117,9 +22292,9 @@
             Represents our current state for the websocket
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Disconnected">
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Connecting">
             <summary>
-            Websocket is currently disconnect and not waiting to connect
+            Socket is in the process of connecting
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Connected">
@@ -22127,19 +22302,14 @@
             Socket is connect and functioning normally
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Connecting">
-            <summary>
-            Socket is in the process of connecting
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Disconnecting">
             <summary>
             Websocket is currently disconnecting from a connected web socket
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.PendingReconnect">
+        <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Disconnected">
             <summary>
-            Socket is waiting to reconnect to the websocket
+            Websocket is currently disconnect and not waiting to connect
             </summary>
         </member>
     </members>
