@@ -104,7 +104,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
             try
             {
-                using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 1024, FileOptions.Asynchronous))
                 {
                     return await DiscordJsonReader.DeserializeFromAsync<T>(Serializer, stream).ConfigureAwait(false);
                 }
@@ -131,7 +131,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
             FileMode mode = File.Exists(path) ? FileMode.Truncate : FileMode.Create;
 
-            using (FileStream stream = new FileStream(path, mode))
+            using (FileStream stream = new FileStream(path, mode, FileAccess.Write, FileShare.Write, 1024, FileOptions.Asynchronous))
             {
                 await DiscordJsonWriter.WriteAndCopyAsync(Serializer, template, stream).ConfigureAwait(false);
                 await stream.FlushAsync().ConfigureAwait(false);

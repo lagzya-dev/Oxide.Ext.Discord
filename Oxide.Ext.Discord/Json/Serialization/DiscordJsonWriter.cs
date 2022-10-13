@@ -16,7 +16,8 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// Stream that is written to
         /// </summary>
         public readonly MemoryStream Stream;
-        
+
+        private readonly StreamWriter _streamWriter;
         private readonly JsonTextWriter _writer;
         private StreamReader _reader;
 
@@ -26,8 +27,8 @@ namespace Oxide.Ext.Discord.Json.Serialization
         public DiscordJsonWriter()
         {
             Stream = new MemoryStream();
-            StreamWriter sWriter = new StreamWriter(Stream, DiscordEncoding.Encoding, 2048, true);
-            _writer = new JsonTextWriter(sWriter);
+            _streamWriter = new StreamWriter(Stream, DiscordEncoding.Encoding, 2048, true);
+            _writer = new JsonTextWriter(_streamWriter);
             _writer.Formatting = Formatting.None;
         }
 
@@ -65,7 +66,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
             ClearStream();
             serializer.Serialize(_writer, payload);
             _writer.Flush();
-            return Task.CompletedTask;
+            return _streamWriter.FlushAsync();
         }
         
         /// <summary>
