@@ -1,6 +1,7 @@
 using System;
+using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 
 namespace Oxide.Ext.Discord.Builders.MessageComponents
@@ -10,10 +11,10 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
     /// </summary>
     public class SelectMenuComponentBuilder
     {
-        private readonly SelectMenuComponent _menu;
+        private readonly BaseSelectMenuComponent _menu;
         private readonly MessageComponentBuilder _builder;
         
-        internal SelectMenuComponentBuilder(SelectMenuComponent menu, MessageComponentBuilder builder)
+        internal SelectMenuComponentBuilder(BaseSelectMenuComponent menu, MessageComponentBuilder builder)
         {
             _menu = menu;
             _builder = builder;
@@ -30,12 +31,16 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <exception cref="Exception">Throw is more than 25 options are added</exception>
         public SelectMenuComponentBuilder AddOption(string label, string value, string description, bool @default = false, DiscordEmoji emoji = null)
         {
-            InvalidMessageComponentException.ThrowIfInvalidSelectMenuOptionLabel(label);
-            InvalidMessageComponentException.ThrowIfInvalidSelectMenuOptionValue(value);
-            InvalidMessageComponentException.ThrowIfInvalidSelectMenuOptionDescription(description);
-            InvalidMessageComponentException.ThrowIfInvalidSelectMenuOptionCount(_menu.Options.Count);
+            InvalidSelectMenuComponentException.ThrowIfTypeCantAddOptions(_menu.Type);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionLabel(label);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionValue(value);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionDescription(description);
 
-            _menu.Options.Add(new SelectMenuOption
+            TextSelectComponent text = (TextSelectComponent)_menu;
+            
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionCount(text.Options.Count);
+
+            text.Options.Add(new SelectMenuOption
             {
                 Label = label,
                 Value = value,
@@ -43,6 +48,15 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
                 Default = @default,
                 Emoji = emoji
             });
+            return this;
+        }
+        
+        public SelectMenuComponentBuilder AddChannelType(ChannelType type)
+        {
+            InvalidSelectMenuComponentException.ThrowIfTypeCantAddChannelTypes(_menu.Type);
+
+            ChannelSelectComponent text = (ChannelSelectComponent)_menu;
+            text.ChannelTypes.Add(type);
             return this;
         }
 

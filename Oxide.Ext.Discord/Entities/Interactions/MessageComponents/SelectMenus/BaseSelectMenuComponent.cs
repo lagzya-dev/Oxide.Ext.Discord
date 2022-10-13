@@ -1,21 +1,14 @@
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class SelectMenuComponent : BaseInteractableComponent
+    public abstract class BaseSelectMenuComponent : BaseInteractableComponent
     {
-        /// <summary>
-        /// The choices in the select
-        /// Max 25 options
-        /// </summary>
-        [JsonProperty("options")]
-        public List<SelectMenuOption> Options { get; } = new List<SelectMenuOption>();
-        
         /// <summary>
         /// Custom placeholder text if nothing is selected
         /// Max 150 characters
@@ -47,9 +40,18 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         /// <summary>
         /// Select Menu Component Constructor
         /// </summary>
-        public SelectMenuComponent()
+        protected BaseSelectMenuComponent(MessageComponentType type)
         {
-            Type = MessageComponentType.SelectMenu;
+            Type = type;
+        }
+
+        public override void Validate()
+        {
+            base.Validate();
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuPlaceholder(Placeholder);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuMinValues(MinValues);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuMaxValues(MaxValues);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuValueRange(MinValues, MaxValues);
         }
     }
 }

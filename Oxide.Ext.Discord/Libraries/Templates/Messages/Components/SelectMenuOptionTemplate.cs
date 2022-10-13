@@ -1,9 +1,9 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
+namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus
 {
     /// <summary>
     /// Template for Select Menu Options

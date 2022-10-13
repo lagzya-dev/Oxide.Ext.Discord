@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Emojis;
+using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
 {
@@ -10,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
     public class ButtonComponent : BaseInteractableComponent
     {
         /// <summary>
-        /// Style for the component
+        /// Style for the button component
         /// </summary>
         [JsonProperty("style")]
         public ButtonStyle Style { get; set; }
@@ -29,13 +30,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         public DiscordEmoji Emoji { get; set; }
 
         /// <summary>
-        /// A url for link-style buttons
+        /// URL for link-style buttons
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; }
 
         /// <summary>
-        /// whether the button is disabled
+        /// Whether the button is disabled
         /// Default false
         /// </summary>
         [JsonProperty("disabled")]
@@ -48,6 +49,16 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         public ButtonComponent()
         {
             Type = MessageComponentType.Button;
+        }
+
+        public override void Validate()
+        {
+            base.Validate();
+            InvalidMessageComponentException.ThrowIfInvalidButtonLabel(Label);
+            if (Style == ButtonStyle.Link)
+            {
+                InvalidMessageComponentException.ThrowIfInvalidButtonUrl(Url);
+            }
         }
     }
 }

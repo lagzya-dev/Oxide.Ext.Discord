@@ -1,14 +1,14 @@
+﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
 {
-    /// <summary>
-    /// Template for Select Menu Component
-    /// </summary>
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class SelectMenuTemplate : BaseComponentTemplate
     {
         /// <summary>
@@ -18,6 +18,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         public string CustomId { get; set; } = string.Empty;
         
         /// <summary>
+        /// Custom placeholder text if nothing is selected
+        /// Max 150 characters
+        /// </summary>
+        [JsonProperty("Select Menu Placeholder Text")]
+        public string Placeholder { get; set; }
+        
+        /// <summary>
         /// The choices in the select
         /// Max 25 options
         /// </summary>
@@ -25,11 +32,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         public List<SelectMenuOptionTemplate> Options { get; set; }
         
         /// <summary>
-        /// Custom placeholder text if nothing is selected
-        /// Max 150 characters
+        /// <see cref="MessageComponentType.ChannelSelect"/> <see cref="ChannelType"/> to show
+        /// Max 25 options
         /// </summary>
-        [JsonProperty("Select Menu Placeholder Text")]
-        public string Placeholder { get; set; }
+        [JsonProperty("Select Menu Channel Types")]
+        public List<ChannelType> ChannelTypes { get; set; }
 
         /// <summary>
         /// the minimum number of items that must be chosen
@@ -51,54 +58,57 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         [JsonProperty("Select Menu Enabled")]
         public bool Enabled { get; set; } = true;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        [JsonConstructor]
-        public SelectMenuTemplate()
-        {
-            Type = MessageComponentType.SelectMenu;
-            Options = new List<SelectMenuOptionTemplate>();
-        }
+        public SelectMenuTemplate(MessageComponentType type) : base(type) { }
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="customId"></param>
-        /// <param name="options"></param>
-        /// <param name="placeholder"></param>
-        /// <param name="minValues"></param>
-        /// <param name="maxValues"></param>
-        public SelectMenuTemplate(string customId, List<SelectMenuOptionTemplate> options, string placeholder = "", int minValues = 1, int maxValues = 1) : this()
-        {
-            CustomId = customId;
-            Options = options;
-            Placeholder = placeholder;
-            MinValues = minValues;
-            MaxValues = maxValues;
-        }
-
-        /// <summary>
-        /// Converts the template to a <see cref="SelectMenuComponent"/>
-        /// </summary>
-        /// <returns></returns>
         public override BaseComponent ToComponent(PlaceholderData data)
         {
-            SelectMenuComponent component = new SelectMenuComponent
+            BaseSelectMenuComponent component = null;
+            switch (Type)
             {
-                CustomId = PlaceholderFormatting.ApplyPlaceholder(CustomId, data),
-                Placeholder = PlaceholderFormatting.ApplyPlaceholder(Placeholder, data),
-                MinValues = MinValues,
-                MaxValues = MaxValues,
-                Disabled = !Enabled,
-            };
-
-            for (int index = 0; index < Options.Count; index++)
-            {
-                component.Options.Add(Options[index].ToOption(data));
+                case MessageComponentType.TextSelect:
+                    var text = new TextSelectComponent();
+                    component = text;
+                    if (Options != null)
+                    {
+                        for (int index = 0; index < Options.Count; index++)
+                        {
+                            text.Options.Add(Options[index].ToOption(data));
+                        }
+                    }
+                    break;
+                
+                case MessageComponentType.UserSelect:
+                    component = new UserSelectComponent();
+                    break;
+                
+                case MessageComponentType.RoleSelect:
+                    component = new RoleSelectComponent();
+                    break;
+                
+                case MessageComponentType.MentionableSelect:
+                    component = new MentionableSelectComponent();
+                    break;
+                
+                case MessageComponentType.ChannelSelect:
+                    var channel = new ChannelSelectComponent();
+                    component = channel;
+                    channel.ChannelTypes = ChannelTypes = ChannelTypes != null && ChannelTypes.Count != 0 ? ChannelTypes : null;
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
+            component.CustomId = PlaceholderFormatting.ApplyPlaceholder(CustomId, data);
+            component.Placeholder = PlaceholderFormatting.ApplyPlaceholder(Placeholder, data);
+            component.MinValues = MinValues;
+            component.MaxValues = MaxValues;
+            component.Disabled = !Enabled;
+            
             return component;
         }
+
+        private bool ShouldSerializeOptions() => Type == MessageComponentType.TextSelect;
+        private bool ShouldSerializeChannelTypes() => Type == MessageComponentType.ChannelSelect;
     }
 }

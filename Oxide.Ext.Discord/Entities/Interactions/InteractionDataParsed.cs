@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
@@ -66,7 +67,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public readonly string TriggeredComponentId;
         
         /// <summary>
-        /// If a <see cref="SelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
+        /// If a <see cref="BaseSelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
         /// </summary>
         public readonly List<SelectMenuOption> SelectMenuValues;
 
@@ -92,7 +93,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (Data.ComponentType.HasValue)
             {
                 TriggeredComponentId = Data.CustomId;
-                if (Data.ComponentType == MessageComponentType.SelectMenu)
+                if (Data.ComponentType == MessageComponentType.TextSelect)
                 {
                     SelectMenuValues = Data.Values;
                 }

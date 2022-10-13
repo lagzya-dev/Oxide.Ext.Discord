@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
 using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 
@@ -36,13 +37,13 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <exception cref="Exception">
         ///     Throw if the button style is link or if the button goes outside the max number of action rows
         /// </exception>
-        public MessageComponentBuilder AddActionButton(ButtonStyle style, string label, string customId, bool disabled = false, DiscordEmoji emoji = null)
+        public MessageComponentBuilder AddActionButton(ButtonStyle style, string label, string customId, bool disabled = false, bool addToNewRow = false, DiscordEmoji emoji = null)
         {
             InvalidMessageComponentException.ThrowIfInvalidButtonLabel(label);
             MessageComponentBuilderException.ThrowIfInvalidActionButtonStyle(style);
             InvalidMessageComponentException.ThrowIfInvalidCustomId(customId);
 
-            UpdateActionRow<ButtonComponent>();
+            UpdateActionRow<ButtonComponent>(addToNewRow);
             _current.Components.Add(new ButtonComponent
             {
                 Style = style,
@@ -75,11 +76,11 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <param name="emoji">Emoji to display on the button</param>
         /// <returns><see cref="MessageComponentBuilder"/></returns>
         /// <exception cref="Exception">Thrown if the button goes outside the max number of action rows</exception>
-        public MessageComponentBuilder AddLinkButton(string label, string url, bool disabled = false, DiscordEmoji emoji = null)
+        public MessageComponentBuilder AddLinkButton(string label, string url, bool disabled = false, bool addToNewRow = false, DiscordEmoji emoji = null)
         {
             InvalidMessageComponentException.ThrowIfInvalidButtonUrl(url);
             
-            UpdateActionRow<ButtonComponent>();
+            UpdateActionRow<ButtonComponent>(addToNewRow);
             _current.Components.Add(new ButtonComponent
             {
                 Style = ButtonStyle.Link,
@@ -100,24 +101,51 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <param name="maxValues">The max number of options you can select</param>
         /// <param name="disabled">If the select menu should be disabled</param>
         /// <returns><see cref="SelectMenuComponentBuilder"/></returns>
-        public SelectMenuComponentBuilder AddSelectMenu(string customId, string placeholder, int minValues = 1, int maxValues = 1, bool disabled = false)
+        public SelectMenuComponentBuilder AddSelectMenu(MessageComponentType type, string customId, string placeholder, int minValues = 1, int maxValues = 1, bool disabled = false)
         {
             InvalidMessageComponentException.ThrowIfInvalidCustomId(customId);
-            InvalidMessageComponentException.ThrowIfInvalidSelectMenuPlaceholder(placeholder);
-            InvalidMessageComponentException.ThrowIfInvalidSelectMenuMinValues(minValues);
-            InvalidMessageComponentException.ThrowIfInvalidSelectMenuMaxValues(minValues, maxValues);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuPlaceholder(placeholder);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuMinValues(minValues);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuMaxValues(maxValues);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuValueRange(minValues, maxValues);
             
-            UpdateActionRow<SelectMenuComponent>();
-            SelectMenuComponent menu = new SelectMenuComponent
+            UpdateActionRow<BaseSelectMenuComponent>(false);
+
+            BaseSelectMenuComponent select;
+            switch (type)
             {
-                CustomId = customId,
-                Placeholder = placeholder,
-                MinValues = minValues,
-                MaxValues = maxValues,
-                Disabled = disabled
-            };
-            _current.Components.Add(menu);
-            return new SelectMenuComponentBuilder(menu, this);
+                case MessageComponentType.TextSelect:
+                    select = new TextSelectComponent();
+                    break;
+                
+                case MessageComponentType.UserSelect:
+                    select = new UserSelectComponent();
+                    break;
+                
+                case MessageComponentType.RoleSelect:
+                    select = new RoleSelectComponent();
+                    break;
+                
+                case MessageComponentType.MentionableSelect:
+                    select = new MentionableSelectComponent();
+                    break;
+                
+                case MessageComponentType.ChannelSelect:
+                    select = new ChannelSelectComponent();
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+            
+            select.CustomId = customId;
+            select.Placeholder = placeholder;
+            select.MinValues = minValues;
+            select.MaxValues = maxValues;
+            select.Disabled = disabled;
+            
+            _current.Components.Add(select);
+            return new SelectMenuComponentBuilder(select, this);
         }
 
         /// <summary>
@@ -139,7 +167,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             InvalidMessageComponentException.ThrowIfInvalidTextInputValue(value);
             InvalidMessageComponentException.ThrowIfInvalidTextInputLength(minLength, maxLength);
 
-            UpdateActionRow<InputTextComponent>();
+            UpdateActionRow<InputTextComponent>(false);
             InputTextComponent menu = new InputTextComponent
             {
                 CustomId = customId,
@@ -155,7 +183,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             return this;
         }
 
-        private void UpdateActionRow<T>() where T : BaseComponent
+        private void UpdateActionRow<T>(bool forceRow) where T : BaseComponent
         {
             if (_current.Components.Count == 0)
             {
@@ -163,16 +191,15 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             }
 
             //5 buttons allowed per row
-            if (typeof(T) == typeof(ButtonComponent) && _current.Components.Count < 5)
+            if (!forceRow && typeof(T) == typeof(ButtonComponent) && _current.Components.Count < 5)
             {
                 return;
             }
 
-            InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(_components.Count);
-
             //All other components are only 1 per action row so add a new row.
             _current = new ActionRowComponent();
             _components.Add(_current);
+            InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(_components.Count);
         }
 
         /// <summary>

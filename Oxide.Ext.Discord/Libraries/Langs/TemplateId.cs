@@ -1,6 +1,5 @@
 using System;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Libraries.Langs
 {

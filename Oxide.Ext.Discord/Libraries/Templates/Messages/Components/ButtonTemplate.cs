@@ -51,10 +51,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         /// Default Constructor
         /// </summary>
         [JsonConstructor]
-        public ButtonTemplate()
-        {
-            Type = MessageComponentType.Button;
-        }
+        public ButtonTemplate() : base(MessageComponentType.Button) { }
 
         /// <summary>
         /// Constructor without emoji

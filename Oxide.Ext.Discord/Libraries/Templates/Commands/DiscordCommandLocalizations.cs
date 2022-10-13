@@ -9,7 +9,6 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Promise;
 using Oxide.Plugins;
 

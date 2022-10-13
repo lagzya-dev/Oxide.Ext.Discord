@@ -1,30 +1,32 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Emojis;
+using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-option-structure">Select Menu Option Structure</a> within discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class SelectMenuOption
+    public class SelectMenuOption : IDiscordValidation
     {
         /// <summary>
-        /// The user-facing name of the option,
+        /// User-facing name of the option,
         /// Max 100 characters
         /// </summary>
         [JsonProperty("label")]
         public string Label { get; set; }
         
         /// <summary>
-        /// The dev-define value of the option,
+        /// Dev-define value of the option,
         /// Max 100 characters
         /// </summary>
         [JsonProperty("value")]
         public string Value { get; set; }
         
         /// <summary>
-        /// An additional description of the option,
+        /// Additional description of the option,
         /// Max 100 characters
         /// </summary>
         [JsonProperty("description")]
@@ -37,9 +39,16 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         public DiscordEmoji Emoji { get; set; }
         
         /// <summary>
-        /// Will render this option as selected by default
+        /// Will show this option as selected by default
         /// </summary>
         [JsonProperty("default")]
         public bool? Default { get; set; }
+
+        public void Validate()
+        {
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionLabel(Label);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionValue(Value);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionDescription(Description);
+        }
     }
 }

@@ -63,10 +63,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public InputTextTemplate()
-        {
-            Type = MessageComponentType.InputText;
-        }
+        public InputTextTemplate() : base(MessageComponentType.InputText) { }
         
         /// <summary>
         /// Constructor

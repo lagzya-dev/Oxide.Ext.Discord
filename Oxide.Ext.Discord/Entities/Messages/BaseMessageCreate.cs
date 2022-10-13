@@ -100,6 +100,14 @@ namespace Oxide.Ext.Discord.Entities.Messages
             ValidateRequiredFields();
             InvalidMessageException.ThrowIfInvalidContent(Content);
             ValidateFlags();
+            if (Components != null)
+            {
+                for (int index = 0; index < Components.Count; index++)
+                {
+                    ActionRowComponent component = Components[index];
+                    component.Validate();
+                }
+            }
         }
 
         /// <summary>

@@ -6,12 +6,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
     public enum InputTextStyles
     {
         /// <summary>
-        /// Intended for short single-line text
+        /// Single-line input
         /// </summary>
         Short = 1,
         
         /// <summary>
-        /// Intended for much longer inputs
+        /// Multi-line input
         /// </summary>
         Paragraph = 2
     }

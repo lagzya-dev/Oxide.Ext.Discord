@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
 
 namespace Oxide.Ext.Discord.Json.Converters
 {
@@ -49,8 +50,24 @@ namespace Oxide.Ext.Discord.Json.Converters
                         components.Add(token.ToObject<ButtonComponent>());
                         break;
                         
-                    case MessageComponentType.SelectMenu:
-                        components.Add(token.ToObject<SelectMenuComponent>());
+                    case MessageComponentType.TextSelect:
+                        components.Add(token.ToObject<TextSelectComponent>());
+                        break;
+                    
+                    case MessageComponentType.UserSelect:
+                        components.Add(token.ToObject<UserSelectComponent>());
+                        break;
+                    
+                    case MessageComponentType.RoleSelect:
+                        components.Add(token.ToObject<RoleSelectComponent>());
+                        break;
+                    
+                    case MessageComponentType.MentionableSelect:
+                        components.Add(token.ToObject<MentionableSelectComponent>());
+                        break;
+                    
+                    case MessageComponentType.ChannelSelect:
+                        components.Add(token.ToObject<ChannelSelectComponent>());
                         break;
                     
                     case MessageComponentType.InputText:

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
@@ -24,6 +25,16 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         public ActionRowComponent()
         {
             Type = MessageComponentType.ActionRow;
+        }
+
+        public override void Validate()
+        {
+            InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(Components.Count);
+            for (int index = 0; index < Components.Count; index++)
+            {
+                BaseComponent component = Components[index];
+                component.Validate();
+            }
         }
     }
 }

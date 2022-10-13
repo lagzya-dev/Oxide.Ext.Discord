@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Exceptions.Libraries;
-using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Promise;
 

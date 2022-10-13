@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
 {
@@ -6,12 +7,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
     /// Represents <a href="https://discord.com/developers/docs/interactions/message-components#component-object">Message Component</a> within discord
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class BaseComponent
+    public abstract class BaseComponent : IDiscordValidation
     {
         /// <summary>
         /// Message component type
         /// </summary>
         [JsonProperty("type")]
         public MessageComponentType Type { get; protected set; }
+
+        public abstract void Validate();
     }
 }
