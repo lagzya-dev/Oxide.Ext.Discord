@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Entities.Api;
@@ -50,7 +51,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         }
 
         ///<inheritdoc/>
-        protected override async Task OnRequestSuccess(RequestResponse response)
+        protected override void OnRequestSuccess(RequestResponse response)
         {
             if (OnSuccess == null)
             {
@@ -61,15 +62,15 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 
                 return;
             }
-
+            
             try
             {
-                T data = await DiscordJsonReader.DeserializeFromAsync<T>(Client.Bot.JsonSerializer, response.Content).ConfigureAwait(false);
+                T data = JsonConvert.DeserializeObject<T>(response.Content, Client.Bot.JsonSettings);
                 ApiSuccessCallback<T>.Start(this, data);
             }
             catch (Exception ex)
             {
-                Logger.Exception("An error occured deserializing JSON response. Method: {0} Route: {1}\nResponse:\n{2}", Method, Route, ex);
+                Logger.Exception("An error occured deserializing JSON response. Method: {0} Route: {1}\nResponse:\n{2}", Method, Route, response.Content, ex);
             }
         }
 

@@ -80,6 +80,7 @@ namespace Oxide.Ext.Discord
         internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
         internal readonly DiscordSettings Settings;
+        internal readonly JsonSerializerSettings JsonSettings;
         internal readonly JsonSerializer JsonSerializer;
         internal DiscordWebSocket WebSocket;
 
@@ -109,10 +110,11 @@ namespace Oxide.Ext.Discord
             
             Initialized = true;
 
-            JsonSerializer = JsonSerializer.Create(new JsonSerializerSettings
+            JsonSettings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
-            });
+            };
+            JsonSerializer = JsonSerializer.Create(JsonSettings);
             
             JsonSerializer.Formatting = Formatting.None;
 

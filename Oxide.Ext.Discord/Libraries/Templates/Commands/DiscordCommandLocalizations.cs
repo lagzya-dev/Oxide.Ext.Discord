@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Templates;
@@ -92,25 +91,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             return promise;
         }
 
-        internal async Task HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, IDiscordPromise promise)
+        internal void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, IDiscordPromise promise)
         {
-            await HandleApplyCommandLocalizationsAsync(id, create).ConfigureAwait(false);
+            HandleApplyCommandLocalizationsAsync(id, create);
             promise.Resolve();
         }
 
-        internal async Task HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create)
+        internal void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create)
         {
-            await HandlePrepareCommandLocalizationsAsync(create).ConfigureAwait(false);
-
-            List<Task> tasks = DiscordPool.GetList<Task>();
+            HandlePrepareCommandLocalizationsAsync(create);
+            
             foreach (string dir in Directory.EnumerateDirectories(GetTemplateFolder(id.PluginName)))
             {
                 string lang = Path.GetFileName(dir);
-                tasks.Add(HandleLoadAndApplyCommandLocalizationsAsync(id, create, lang));
+                HandleLoadAndApplyCommandLocalizationsAsync(id, create, lang);
             }
-
-            await Task.WhenAll(tasks).ConfigureAwait(false);
-            DiscordPool.FreeList(tasks);
         }
         
         private void PrepareCommandLocalizations(CommandCreate create)
@@ -167,18 +162,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 }
             }
         }
-        private Task HandlePrepareCommandLocalizationsAsync(CommandCreate create)
+        private void HandlePrepareCommandLocalizationsAsync(CommandCreate create)
         {
             PrepareCommandLocalizations(create);
-            return Task.CompletedTask;
         }
 
-        private async Task HandleLoadAndApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, string lang)
+        private void HandleLoadAndApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, string lang)
         {
-            DiscordCommandLocalization localization = await LoadTemplate<DiscordCommandLocalization>(id.WithLanguage(lang)).ConfigureAwait(false);
+            DiscordCommandLocalization localization = LoadTemplate<DiscordCommandLocalization>(id.WithLanguage(lang));
             if (localization != null)
             {
-                await localization.HandleApplyCommandLocalizationAsync(create, lang).ConfigureAwait(false);
+                localization.HandleApplyCommandLocalizationAsync(create, lang).ConfigureAwait(false);
             }
         }
 

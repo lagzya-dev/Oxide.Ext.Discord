@@ -40,7 +40,8 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
         ///<inheritdoc/>
         protected override Task HandleCallback()
         {
-            return _template.HandleToEntityAsync(_data, _entity, _promise);
+            _template.HandleToEntityAsync(_data, _entity, _promise);
+            return Task.CompletedTask;
         }
         
         protected override string ExceptionData()

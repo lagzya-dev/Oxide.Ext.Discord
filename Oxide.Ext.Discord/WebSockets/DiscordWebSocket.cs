@@ -108,7 +108,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private void OnGatewayUrlUpdateFailed(RequestError error)
         {
             _logger.Warning("Failed to update gateway url. Attempting reconnect.");
-            StartReconnectCallback.Start(_reconnect);
+            WebsocketReconnectCallback.Start(_reconnect);
         }
 
         /// <summary>
@@ -196,12 +196,12 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             DiscordJsonWriter writer = DiscordJsonWriter.Get();
-            await writer.WriteAsync(_client.JsonSerializer, payload).ConfigureAwait(false);
+            writer.Write(_client.JsonSerializer, payload);
             writer.Stream.Position = 0;
 
             if (_client.Logger.IsLogging(DiscordLogLevel.Verbose))
             {
-                _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, await writer.ReadAsStringAsync().ConfigureAwait(false));
+                _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, writer.ReadAsString());
             }
             
             bool sent = await Handler.SendAsync(writer.Stream).ConfigureAwait(false);
@@ -218,7 +218,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Disconnect)} Attempting Reconnect");
                 ShouldReconnect = false;
-                Task.Run(() => _reconnect.StartReconnect());
+                WebsocketReconnectCallback.Start(_reconnect);
             }
         }
 

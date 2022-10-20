@@ -1,5 +1,4 @@
 using System.IO;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
@@ -47,28 +46,14 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <param name="serializer">Serializer to use</param>
         /// <param name="payload">Payload to serialize</param>
         /// <param name="output">Output stream to write to</param>
-        public static async Task WriteAndCopyAsync(JsonSerializer serializer, object payload, Stream output)
+        public static void WriteAndCopy(JsonSerializer serializer, object payload, Stream output)
         {
             DiscordJsonWriter writer = Get();
-            await writer.WriteAsync(serializer, payload).ConfigureAwait(false);
-            await writer.Stream.CopyToPooledAsync(output).ConfigureAwait(false);
+            writer.Write(serializer, payload);
+            writer.Stream.CopyToPooled(output);
             writer.Dispose();
         }
 
-        /// <summary>
-        /// Serializes the payload to the Stream
-        /// </summary>
-        /// <param name="serializer"><see cref="JsonSerializer"/> to serialize with</param>
-        /// <param name="payload">Payload to be serialized</param>
-        /// <returns></returns>
-        public Task WriteAsync(JsonSerializer serializer, object payload)
-        {
-            ClearStream();
-            serializer.Serialize(_writer, payload);
-            _writer.Flush();
-            return _streamWriter.FlushAsync();
-        }
-        
         /// <summary>
         /// Writes the payload to the Stream
         /// </summary>
@@ -79,9 +64,10 @@ namespace Oxide.Ext.Discord.Json.Serialization
             ClearStream();
             serializer.Serialize(_writer, payload);
             _writer.Flush();
+            _streamWriter.Flush();
         }
 
-        internal Task<string> ReadAsStringAsync()
+        internal string ReadAsString()
         {
             //DiscordExtension.GlobalLogger.Debug($"{nameof(JsonWriterPoolable)}.{nameof(ReadAsStringAsync)} Read: {{0}} Position: {{1}}", Stream.Length, Stream.Position);
             if (_reader == null)
@@ -90,21 +76,26 @@ namespace Oxide.Ext.Discord.Json.Serialization
             }
 
             ResetStream();
-            return _reader.ReadToEndAsync();
+            return _reader.ReadToEnd();
         }
 
         private void ResetStream()
         {
-            _writer.Flush();
-            _reader?.DiscardBufferedData();
+            Flush();
             Stream.Position = 0;
         }
         
         private void ClearStream()
         {
-            _writer.Flush();
-            _reader?.DiscardBufferedData();
+            Flush();
             Stream.SetLength(0);
+        }
+
+        private void Flush()
+        {
+            _writer.Flush();
+            _streamWriter.Flush();
+            _reader?.DiscardBufferedData();
         }
         
         ///<inheritdoc/>

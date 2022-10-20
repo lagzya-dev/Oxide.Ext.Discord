@@ -28,8 +28,8 @@ namespace Oxide.Ext.Discord.Network
         ///<inheritdoc/>
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
-            _content.Position = 0;
-            return _content.CopyToPooledAsync(stream);
+            _content.CopyToPooled(stream);
+            return Task.CompletedTask;
         }
 
         ///<inheritdoc/>

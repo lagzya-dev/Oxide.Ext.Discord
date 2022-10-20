@@ -10,13 +10,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields
     public class MessageEmbedFieldTemplate : IEmbedFieldTemplate
     {
         ///<inheritdoc/>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         
         ///<inheritdoc/>
-        public string Value { get; set; }
-        
+        public string Value { get; set; }= string.Empty;
+
         ///<inheritdoc/>
-        public bool Inline { get; set; }
+        public bool Inline { get; set; } = true;
 
         /// <summary>
         /// Constructor

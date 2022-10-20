@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
@@ -254,9 +253,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return callback;
         }
         
-        internal async Task HandleGetLocalizedTemplateAsync(TemplateId id, DiscordInteraction interaction, IDiscordPromise<TTemplate> callback)
+        internal void HandleGetLocalizedTemplateAsync(TemplateId id, DiscordInteraction interaction, IDiscordPromise<TTemplate> callback)
         {
-            callback.Resolve(await HandleGetLocalizedTemplateAsync(id, interaction).ConfigureAwait(false));
+            callback.Resolve(HandleGetLocalizedTemplateAsync(id, interaction));
         }
         
         public IDiscordPromise<T> GetLocalizedEntityAsync<T>(Plugin plugin, string templateName, DiscordInteraction interaction, PlaceholderData data = null, T entity = null) where T : class, TEntity 
@@ -292,13 +291,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return callback;
         }
 
-        internal async Task HandleGetLocalizedBulkEntityAsync(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction, IDiscordPromise<List<TEntity>> callback)
+        internal void HandleGetLocalizedBulkEntityAsync(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction, IDiscordPromise<List<TEntity>> callback)
         {
-            List<TEntity> entities = await HandleGetLocalizedBulkEntityAsync(id, request, interaction).ConfigureAwait(false);
+            List<TEntity> entities = HandleGetLocalizedBulkEntityAsync(id, request, interaction);
             callback.Resolve(entities);
         }
         
-        internal async Task<List<TEntity>> HandleGetLocalizedBulkEntityAsync(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction)
+        internal List<TEntity> HandleGetLocalizedBulkEntityAsync(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction)
         {
             List<TEntity> entities = new List<TEntity>();
             Hash<string, TTemplate> cache = DiscordPool.GetHash<string, TTemplate>();
@@ -309,11 +308,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 TTemplate template = cache[item.TemplateName];
                 if (template == null)
                 {
-                    template = await HandleGetLocalizedTemplateAsync(id.WithName(item.TemplateName), interaction).ConfigureAwait(false);
+                    template = HandleGetLocalizedTemplateAsync(id.WithName(item.TemplateName), interaction);
                     cache[item.TemplateName] = template;
                 }
 
-                entities.Add(await template.HandleToEntityAsync(item.Data, null).ConfigureAwait(false));
+                entities.Add(template.ToEntity(item.Data));
             }
             
             DiscordPool.FreeHash(cache);
@@ -321,7 +320,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return entities;
         }
 
-        private async Task<TTemplate> HandleGetLocalizedTemplateAsync(TemplateId id, DiscordInteraction interaction)
+        private TTemplate HandleGetLocalizedTemplateAsync(TemplateId id, DiscordInteraction interaction)
         {
             TTemplate template = LoadFromCache(id);
             if (template != null)
@@ -332,21 +331,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (interaction != null)
             {
                 IPlayer player = interaction.User.Player;
-                template = await LoadTemplate<TTemplate>(id).ConfigureAwait(false)
-                           ?? (player != null ? await LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GetPlayerLanguage(player)).ConfigureAwait(false) : null)
-                           ?? await LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale)).ConfigureAwait(false) 
-                           ?? await LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GameServerLanguage).ConfigureAwait(false)
-                           ?? await LoadTemplate<TTemplate>(id, DiscordLang.DefaultOxideLanguage).ConfigureAwait(false);
+                template = LoadTemplate<TTemplate>(id)
+                           ?? (player != null ? LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GetPlayerLanguage(player)) : null)
+                           ?? LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale))
+                           ?? LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GameServerLanguage)
+                           ?? LoadTemplate<TTemplate>(id, DiscordLang.DefaultOxideLanguage);
             }
             else if (!id.IsGlobal)
             {
-                template = await LoadTemplate<TTemplate>(id).ConfigureAwait(false)
-                           ?? await LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GameServerLanguage).ConfigureAwait(false)
-                           ?? await LoadTemplate<TTemplate>(id, DiscordLang.DefaultOxideLanguage).ConfigureAwait(false);
+                template = LoadTemplate<TTemplate>(id)
+                           ?? LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GameServerLanguage)
+                           ?? LoadTemplate<TTemplate>(id, DiscordLang.DefaultOxideLanguage);
             }
             else
             {
-                template = await LoadTemplate<TTemplate>(id).ConfigureAwait(false);
+                template = LoadTemplate<TTemplate>(id);
             }
 
             if (template == null)

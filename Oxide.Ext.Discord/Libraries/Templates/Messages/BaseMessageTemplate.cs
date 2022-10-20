@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Oxide.Ext.Discord.Callbacks.Templates.Messages;
+﻿using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Promise;
 
@@ -26,15 +25,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             ToEntityCallback<BaseMessageTemplate<TEntity>, TEntity>.Start(this, data, message, promise);
             return promise;
         }
-
-        internal async Task HandleToEntityAsync(PlaceholderData data, TEntity entity, IDiscordPromise<TEntity> promise)
-        {
-            promise.Resolve(await HandleToEntityAsync(data, entity).ConfigureAwait(false));
-        }
         
-        internal Task<TEntity> HandleToEntityAsync(PlaceholderData data, TEntity entity)
+        internal void HandleToEntityAsync(PlaceholderData data, TEntity entity, IDiscordPromise<TEntity> promise)
         {
-            return Task.FromResult(ToEntity(data, entity));
+            promise.Resolve(ToEntity(data, entity));
         }
     }
 }

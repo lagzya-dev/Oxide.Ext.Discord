@@ -4,13 +4,13 @@ using Oxide.Ext.Discord.WebSockets.Handlers;
 
 namespace Oxide.Ext.Discord.Callbacks.Websockets
 {
-    public class StartReconnectCallback : BaseAsyncCallback
+    public class WebsocketReconnectCallback : BaseAsyncCallback
     {
         private WebSocketReconnectHandler _reconnect;
 
         public static void Start(WebSocketReconnectHandler reconnect)
         {
-            StartReconnectCallback callback = DiscordPool.Get<StartReconnectCallback>();
+            WebsocketReconnectCallback callback = DiscordPool.Get<WebsocketReconnectCallback>();
             callback.Init(reconnect);
             callback.Run();
         }

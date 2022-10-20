@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
@@ -135,7 +136,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// </summary>
         /// <param name="code">HTTP Response Code</param>
         /// <param name="content">HTTP Response Body Stream</param>
-        internal async Task SetResponse(DiscordHttpStatusCode code, Stream content)
+        internal void SetResponse(DiscordHttpStatusCode code, string content)
         {
             HttpStatusCode = code;
             if (content.Length == 0)
@@ -143,15 +144,13 @@ namespace Oxide.Ext.Discord.Entities.Api
                 return;
             }
 
-            DiscordJsonReader reader = await DiscordJsonReader.CreateFromStreamAsync(content).ConfigureAwait(false);
-
-            Message = await reader.ReadAsStringAsync().ConfigureAwait(false);
+            Message = content;
             if (string.IsNullOrEmpty(Message) || !Message.StartsWith("{"))
             {
                 return;
             }
             
-            DiscordError = await reader.DeserializeAsync<RequestErrorMessage>(_client.Bot.JsonSerializer).ConfigureAwait(false);
+            DiscordError = JsonConvert.DeserializeObject<RequestErrorMessage>(content, _client.Bot.JsonSettings);
             if (DiscordError == null)
             {
                 return;

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
+using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields;
 
@@ -13,27 +15,27 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
     {
         ///<inheritdoc/>
         public bool Enabled { get; set; }
+
+        ///<inheritdoc/>
+        public string Title { get; set; } = string.Empty;
         
         ///<inheritdoc/>
-        public string Title { get; set; }
+        public string Url { get; set; } = string.Empty;
         
         ///<inheritdoc/>
-        public string Url { get; set; }
+        public string Description { get; set; } = string.Empty;
+
+        ///<inheritdoc/>
+        public string Color { get; set; } = DiscordColor.Default.ToHex();
         
         ///<inheritdoc/>
-        public string Description { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
         
         ///<inheritdoc/>
-        public string Color { get; set; }
+        public string ThumbnailUrl { get; set; } = string.Empty;
         
         ///<inheritdoc/>
-        public string ImageUrl { get; set; }
-        
-        ///<inheritdoc/>
-        public string ThumbnailUrl { get; set; }
-        
-        ///<inheritdoc/>
-        public string VideoUrl { get; set; }
+        public string VideoUrl { get; set; } = string.Empty;
         
         ///<inheritdoc/>
         public bool TimeStamp { get; set; }

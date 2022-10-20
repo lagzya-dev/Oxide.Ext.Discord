@@ -233,12 +233,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="reader">Json Reader containing the message</param>
         public async Task SocketMessage(Snowflake webSocketId, DiscordJsonReader reader)
         {
-            EventPayload payload = await reader.DeserializeAsync<EventPayload>(_client.JsonSerializer).ConfigureAwait(false);
+            EventPayload payload = reader.Deserialize<EventPayload>(_client.JsonSerializer);
             _webSocket.OnSequenceUpdate(payload.Sequence);
 
             if (_logger.IsLogging(DiscordLogLevel.Verbose))
             {
-                _logger.Verbose("Received socket message, OpCode: {0} Payload: {1}", payload.OpCode, await reader.ReadAsStringAsync().ConfigureAwait(false));
+                _logger.Verbose("Received socket message, OpCode: {0} Payload: {1}", payload.OpCode, reader.ReadAsString());
             }
             else
             {

@@ -30,7 +30,8 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
 
         protected override Task HandleCallback()
         {
-            return _localizations.HandleApplyCommandLocalizationsAsync(_id, _create, _promise);
+            _localizations.HandleApplyCommandLocalizationsAsync(_id, _create, _promise);
+            return Task.CompletedTask;
         }
         
         protected override string ExceptionData()

@@ -31,7 +31,8 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
 
         protected override  Task HandleCallback()
         {
-            return _library.HandleRegisterTemplate(_id, _template, _minVersion, _promise);
+            _library.HandleRegisterTemplate(_id, _template, _minVersion, _promise);
+            return Task.CompletedTask;
         }
 
         protected override string ExceptionData()

@@ -125,7 +125,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
             finally
             {
-                await Request.OnRequestCompleted(this, _response).ConfigureAwait(false);
+                Request.OnRequestCompleted(this, _response);
             }
         }
         
@@ -190,7 +190,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             try
             {
-                using (HttpRequestMessage request = await CreateRequest().ConfigureAwait(false))
+                using (HttpRequestMessage request = CreateRequest())
                 {
                     using (HttpResponseMessage webResponse = await Request.HttpClient.SendAsync(request, _token).ConfigureAwait(false))
                     {
@@ -242,7 +242,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             return response;
         }
 
-        private async Task<HttpRequestMessage> CreateRequest()
+        private HttpRequestMessage CreateRequest()
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethods[Request.Method], Request.Route);
             object data = Request.Data;
@@ -252,7 +252,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 {
                     MultipartFormDataContent content = new MultipartFormDataContent();
                     
-                    DiscordStreamContent json = await GetJsonContent(data).ConfigureAwait(false);
+                    DiscordStreamContent json = GetJsonContent(data);
                     content.Add(json, "payload_json");
 
                     for (int index = 0; index < attachments.FileAttachments.Count; index++)
@@ -268,21 +268,21 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 }
                 else
                 {
-                    request.Content = await GetJsonContent(data).ConfigureAwait(false);
+                    request.Content = GetJsonContent(data);
                 }
             }
 
             return request;
         }
 
-        private async Task<DiscordStreamContent> GetJsonContent(object data)
+        private DiscordStreamContent GetJsonContent(object data)
         {
             _json = DiscordJsonWriter.Get();
-            await _json.WriteAsync(Request.Client.Bot.JsonSerializer, data).ConfigureAwait(false);
+            _json.Write(Request.Client.Bot.JsonSerializer, data);
             
             if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))
             {
-                _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Creating JSON Body: {{0}}", await _json.ReadAsStringAsync().ConfigureAwait(false));
+                _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Creating JSON Body: {{0}}", _json.ReadAsString());
             }
 
             DiscordStreamContent content = new DiscordStreamContent(_json.Stream);

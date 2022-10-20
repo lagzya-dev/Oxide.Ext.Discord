@@ -3481,7 +3481,7 @@
             Suppresses the error message from being logged
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetResponse(Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode,System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetResponse(Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode,System.String)">
             <summary>
             Sets the HTTP Response data
             </summary>
@@ -3586,9 +3586,6 @@
             </summary>
             <param name="client">Client the request was for</param>
             <returns>A cancelled <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestResponse"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.LeavePool">
-            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.EnterPool">
             <inheritdoc/>
@@ -16681,14 +16678,7 @@
             Stream Extension Methods
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.StreamExt.CopyToPooledAsync(System.IO.Stream,System.IO.Stream)">
-            <summary>
-            Copies one stream to another using a pooled byte[] buffer
-            </summary>
-            <param name="from">Stream to copy from</param>
-            <param name="to">Stream to copy to</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.StreamExt.CopyToPooled(System.IO.Stream,System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Extensions.StreamExt.CopyToPooled(System.IO.Stream,System.IO.Stream,System.Boolean)">
             <summary>
             Copies one stream to another using a pooled byte[] buffer
             </summary>
@@ -17656,14 +17646,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CreateFromStreamAsync(System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CreateFromStream(System.IO.Stream)">
             <summary>
             Returns a pooled <see cref="T:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader"/> with stream loaded into it
             </summary>
             <param name="stream">Stream to load</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.DeserializeFromAsync``1(Newtonsoft.Json.JsonSerializer,System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.DeserializeFrom``1(Newtonsoft.Json.JsonSerializer,System.IO.Stream)">
             <summary>
             Deserialize from stream to type {T}
             </summary>
@@ -17672,32 +17662,17 @@
             <typeparam name="T">Type to return</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CopyFromAsync(System.IO.Stream)">
-            <summary>
-            Copy from the given stream to our internal stream
-            </summary>
-            <param name="stream">Stream to copy</param>
-            <returns></returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CopyFrom(System.IO.Stream)">
             <summary>
             Copy from the given stream to our internal stream
             </summary>
             <param name="stream">Stream to copy</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.ReadAsStringAsync">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.ReadAsString">
             <summary>
             Returns the Stream data as a string
             </summary>
             <returns>String of the stream data</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.DeserializeAsync``1(Newtonsoft.Json.JsonSerializer)">
-            <summary>
-            Deserializes the stream data to {T}
-            </summary>
-            <param name="serializer"><see cref="T:Newtonsoft.Json.JsonSerializer"/> to use with the Deserialization</param>
-            <typeparam name="T">Type to deserialize to</typeparam>
-            <returns>{T}</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.Deserialize``1(Newtonsoft.Json.JsonSerializer)">
             <summary>
@@ -17706,14 +17681,6 @@
             <param name="serializer"><see cref="T:Newtonsoft.Json.JsonSerializer"/> to use with the Deserialization</param>
             <typeparam name="T">Type to deserialize to</typeparam>
             <returns>{T}</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.PopulateAsync(Oxide.Ext.Discord.BotClient,System.Object)">
-            <summary>
-            Populates the given object from the Stream
-            </summary>
-            <param name="client">Client to use with the Population</param>
-            <param name="obj">Object to populate</param>
-            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.EnterPool">
             <inheritdoc/>
@@ -17739,21 +17706,13 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.WriteAndCopyAsync(Newtonsoft.Json.JsonSerializer,System.Object,System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.WriteAndCopy(Newtonsoft.Json.JsonSerializer,System.Object,System.IO.Stream)">
             <summary>
             Serializes the payload to the output stream
             </summary>
             <param name="serializer">Serializer to use</param>
             <param name="payload">Payload to serialize</param>
             <param name="output">Output stream to write to</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.WriteAsync(Newtonsoft.Json.JsonSerializer,System.Object)">
-            <summary>
-            Serializes the payload to the Stream
-            </summary>
-            <param name="serializer"><see cref="T:Newtonsoft.Json.JsonSerializer"/> to serialize with</param>
-            <param name="payload">Payload to be serialized</param>
-            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.Write(Newtonsoft.Json.JsonSerializer,System.Object)">
             <summary>
