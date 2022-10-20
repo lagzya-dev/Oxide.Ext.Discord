@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         {
             if (string.IsNullOrEmpty(defaultLanguage)) throw new ArgumentNullException(nameof(defaultLanguage));
             InvalidApplicationCommandException.ThrowIfInvalidName(name, false);
-            InvalidApplicationCommandException.ThrowIfInvalidDescription(description, false);
+            InvalidApplicationCommandException.ThrowIfInvalidDescription(description, type);
             
             Command = new CommandCreate(name, description, type, new List<CommandOption>());
             _defaultLanguage = defaultLanguage;

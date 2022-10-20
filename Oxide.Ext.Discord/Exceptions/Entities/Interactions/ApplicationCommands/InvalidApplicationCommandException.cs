@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+
 namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
 {
     /// <summary>
@@ -27,16 +29,26 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
             }
         }
         
-        internal static void ThrowIfInvalidDescription(string description, bool allowNullOrEmpty)
+        internal static void ThrowIfInvalidDescription(string description, ApplicationCommandType type)
         {
-            if (!allowNullOrEmpty && string.IsNullOrEmpty(description))
+            if (type == ApplicationCommandType.ChatInput)
             {
-                throw new InvalidApplicationCommandException("Description cannot be less than 1 character");
+                if (description.Length < 1)
+                {
+                    throw new InvalidApplicationCommandException($"Description cannot be less than 1 characters for {nameof(ApplicationCommandType)}.{type}");
+                }
+                
+                if (description.Length > 100)
+                {
+                    throw new InvalidApplicationCommandException($"Description cannot be more than 100 characters for {nameof(ApplicationCommandType)}.{type}");
+                }
             }
-            
-            if (description.Length > 100)
+            else
             {
-                throw new InvalidApplicationCommandException("Description cannot be more than 100 characters");
+                if (!string.IsNullOrEmpty(description))
+                {
+                    throw new InvalidApplicationCommandException($"Description must be null for {nameof(ApplicationCommandType)}.{type}");
+                }
             }
         }
     }

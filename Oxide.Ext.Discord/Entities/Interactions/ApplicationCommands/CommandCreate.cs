@@ -66,10 +66,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public bool? DefaultPermissions { get; set; }
         
         /// <summary>
-        /// The type of command, defaults Slash Command if not set
+        /// The <see cref="ApplicationCommandType"/> of the command
         /// </summary>
         [JsonProperty("type")]
-        public ApplicationCommandType? Type { get; set; }
+        public ApplicationCommandType Type { get; set; }
 
         /// <summary>
         /// Constructor
@@ -93,7 +93,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public void Validate()
         {
             InvalidApplicationCommandException.ThrowIfInvalidName(Name, false);
-            InvalidApplicationCommandException.ThrowIfInvalidDescription(Description, false);
+            InvalidApplicationCommandException.ThrowIfInvalidDescription(Description, Type);
         }
     }
 }
