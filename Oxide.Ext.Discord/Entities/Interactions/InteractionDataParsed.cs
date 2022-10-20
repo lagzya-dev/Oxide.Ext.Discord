@@ -93,7 +93,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (Data.ComponentType.HasValue)
             {
                 TriggeredComponentId = Data.CustomId;
-                if (Data.ComponentType == MessageComponentType.TextSelect)
+                if (Data.ComponentType == MessageComponentType.StringSelect)
                 {
                     SelectMenuValues = Data.Values;
                 }

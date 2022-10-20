@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class TextSelectComponent : BaseSelectMenuComponent
+    public class StringSelectComponent : BaseSelectMenuComponent
     {
         /// <summary>
         /// The choices in the select
@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
         /// <summary>
         /// Select Menu Component Constructor
         /// </summary>
-        public TextSelectComponent() : base(MessageComponentType.TextSelect) { }
+        public StringSelectComponent() : base(MessageComponentType.StringSelect) { }
 
         public override void Validate()
         {

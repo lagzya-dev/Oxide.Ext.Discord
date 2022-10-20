@@ -50,7 +50,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                         components.Add(token.ToObject<ButtonTemplate>());
                         break;
                         
-                    case MessageComponentType.TextSelect:
+                    case MessageComponentType.StringSelect:
                     case MessageComponentType.UserSelect:
                     case MessageComponentType.RoleSelect:
                     case MessageComponentType.MentionableSelect:

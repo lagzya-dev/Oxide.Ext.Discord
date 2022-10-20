@@ -65,8 +65,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
             BaseSelectMenuComponent component = null;
             switch (Type)
             {
-                case MessageComponentType.TextSelect:
-                    var text = new TextSelectComponent();
+                case MessageComponentType.StringSelect:
+                    var text = new StringSelectComponent();
                     component = text;
                     if (Options != null)
                     {
@@ -108,7 +108,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
             return component;
         }
 
-        private bool ShouldSerializeOptions() => Type == MessageComponentType.TextSelect;
+        private bool ShouldSerializeOptions() => Type == MessageComponentType.StringSelect;
         private bool ShouldSerializeChannelTypes() => Type == MessageComponentType.ChannelSelect;
     }
 }

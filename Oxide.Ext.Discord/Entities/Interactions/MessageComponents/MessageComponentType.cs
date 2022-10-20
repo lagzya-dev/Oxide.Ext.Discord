@@ -16,9 +16,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         Button = 2,
         
         /// <summary>
-        /// Select menu for picking from choices
+        /// Select menu for picking from defined text options
         /// </summary>
-        TextSelect = 3,
+        StringSelect = 3,
         
         /// <summary>
         /// Text box for inserting written responses

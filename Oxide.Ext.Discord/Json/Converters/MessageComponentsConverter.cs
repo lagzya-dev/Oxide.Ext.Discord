@@ -50,8 +50,8 @@ namespace Oxide.Ext.Discord.Json.Converters
                         components.Add(token.ToObject<ButtonComponent>());
                         break;
                         
-                    case MessageComponentType.TextSelect:
-                        components.Add(token.ToObject<TextSelectComponent>());
+                    case MessageComponentType.StringSelect:
+                        components.Add(token.ToObject<StringSelectComponent>());
                         break;
                     
                     case MessageComponentType.UserSelect:

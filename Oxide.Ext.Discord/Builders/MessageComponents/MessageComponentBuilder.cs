@@ -114,8 +114,8 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             BaseSelectMenuComponent select;
             switch (type)
             {
-                case MessageComponentType.TextSelect:
-                    select = new TextSelectComponent();
+                case MessageComponentType.StringSelect:
+                    select = new StringSelectComponent();
                     break;
                 
                 case MessageComponentType.UserSelect:

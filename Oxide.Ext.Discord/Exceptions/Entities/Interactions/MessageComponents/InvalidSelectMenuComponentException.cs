@@ -102,9 +102,9 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
 
         internal static void ThrowIfTypeCantAddOptions(MessageComponentType type)
         {
-            if (type != MessageComponentType.TextSelect)
+            if (type != MessageComponentType.StringSelect)
             {
-                throw new InvalidSelectMenuComponentException($"Select Menu Type '{type}' is not allowed to add Options. Options can only be added on {nameof(MessageComponentType)}{MessageComponentType.TextSelect}");
+                throw new InvalidSelectMenuComponentException($"Select Menu Type '{type}' is not allowed to add Options. Options can only be added on {nameof(MessageComponentType)}{MessageComponentType.StringSelect}");
             }
         }
         

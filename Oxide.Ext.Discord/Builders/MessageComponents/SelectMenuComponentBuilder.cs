@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionValue(value);
             InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionDescription(description);
 
-            TextSelectComponent text = (TextSelectComponent)_menu;
+            StringSelectComponent text = (StringSelectComponent)_menu;
             
             InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionCount(text.Options.Count);
 
