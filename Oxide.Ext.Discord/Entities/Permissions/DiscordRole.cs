@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions.Entities.Guild;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 
@@ -8,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordRole : ISnowflakeEntity
+    public class DiscordRole : ISnowflakeEntity, IDiscordValidation
     {
         #region Discord Fields
         /// <summary>
@@ -133,5 +134,10 @@ namespace Oxide.Ext.Discord.Entities.Permissions
             return previous;
         }
         #endregion
+
+        public void Validate()
+        {
+            InvalidGuildRoleException.ThrowIfInvalidRoleName(Name);
+        }
     }
 }
