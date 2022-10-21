@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Templates;
@@ -21,13 +19,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// <summary>
     /// Library for Discord Message templates
     /// </summary>
-    public abstract class BaseMessageTemplatesLibrary<TTemplate, TEntity> : BaseTemplateLibrary 
+    public abstract class BaseMessageTemplateLibrary<TTemplate, TEntity> : BaseTemplateLibrary 
         where TTemplate : BaseMessageTemplate<TEntity>, new()
         where TEntity : class
     {
         private readonly Hash<TemplateId, TTemplate> _templateCache = new Hash<TemplateId, TTemplate>();
 
-        internal BaseMessageTemplatesLibrary(TemplateType type, ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), type, logger) { }
+        internal BaseMessageTemplateLibrary(TemplateType type, ILogger logger) : base(type, logger) { }
         
         /// <summary>
         /// Registers a global message template
@@ -356,7 +354,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return template;
         }
 
-
         private TTemplate LoadFromCache(TemplateId id) => _templateCache.TryGetValue(id, out TTemplate template) ? template : null;
 
         private void SetCache(TemplateId id, TTemplate template)
@@ -368,6 +365,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
         protected override void OnPluginUnloaded(Plugin plugin)
         {
+            base.OnPluginUnloaded(plugin);
             string name = plugin.Name;
             _templateCache.RemoveAll(t => t.PluginName == name);
             RegisteredTemplates.RemoveWhere(rt => rt.PluginName == name);

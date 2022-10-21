@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Oxide.Core;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Exceptions.Libraries;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Types;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
 {
@@ -23,14 +27,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <summary>
         /// Root Directory for the library
         /// </summary>
-        protected readonly string RootDir;
+        protected readonly string RootDirectory;
+
+        protected readonly string TemplateTypeDirectory;
         
         /// <summary>
         /// The template type of this template library
         /// </summary>
         protected readonly TemplateType TemplateType;
         
-        internal readonly Types.ConcurrentHashSet<TemplateId> RegisteredTemplates = new Types.ConcurrentHashSet<TemplateId>();
+        internal readonly DiscordConcurrentHashSet<TemplateId> RegisteredTemplates = new DiscordConcurrentHashSet<TemplateId>();
+        private readonly Hash<string, string> _pluginTemplatePath = new Hash<string, string>();
 
 
         private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings {Formatting = Formatting.Indented};
@@ -38,17 +45,20 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="rootDir">Root Directory for the library</param>
+        /// <param name="rootDirectory">Root Directory for the library</param>
+        /// <param name="templateTypeDirectory">The directory for the template type</param>
         /// <param name="type">The template type of this library</param>
         /// <param name="logger"></param>
-        protected BaseTemplateLibrary(string rootDir, TemplateType type, ILogger logger)
+        protected BaseTemplateLibrary(TemplateType type, ILogger logger)
         {
-            RootDir = rootDir;
+            RootDirectory = Path.Combine(Interface.Oxide.InstanceDirectory, "discord");
             Logger = logger;
             TemplateType = type;
-            if (!Directory.Exists(RootDir))
+            TemplateTypeDirectory = EnumCache<TemplateType>.Instance.ToLower(TemplateType);
+
+            if (!Directory.Exists(RootDirectory))
             {
-                Directory.CreateDirectory(RootDir);
+                Directory.CreateDirectory(RootDirectory);
             }
         }
         
@@ -181,9 +191,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             File.Move(oldPath, newPath);
         }
 
-        internal virtual string GetTemplateFolder(string plugin)
+        protected string GetTemplateFolder(string plugin)
         {
-            return Path.Combine(RootDir, plugin, GetTemplateTypePath());
+            string folder = _pluginTemplatePath[plugin];
+            if (string.IsNullOrEmpty(folder))
+            {
+                folder = Path.Combine(RootDirectory, plugin, TemplateTypeDirectory);
+                _pluginTemplatePath[plugin] = folder;
+            }
+            
+            return folder;
         }
 
         internal virtual string GetTemplatePath(TemplateId id)
@@ -192,9 +209,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
             if (id.IsGlobal)
             {
-                return Path.Combine(RootDir, id.PluginName, GetTemplateTypePath(), $"{id.TemplateName}.json");
+                return Path.Combine(GetTemplateFolder(id.PluginName), $"{id.TemplateName}.json");
             }
-            return Path.Combine(RootDir, id.PluginName, GetTemplateTypePath(), id.Language, $"{id.TemplateName}.json");
+            return Path.Combine(GetTemplateFolder(id.PluginName), id.Language, $"{id.TemplateName}.json");
         }
 
         private string GetRenamePath(string path, TemplateVersion version)
@@ -202,7 +219,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             return Path.Combine(Path.GetDirectoryName(path), $"{Path.GetFileNameWithoutExtension(path)}.{version}.json");
         }
-        
-        private string GetTemplateTypePath() => EnumCache<TemplateType>.Instance.ToLower(TemplateType);
+
+        protected override void OnPluginUnloaded(Plugin plugin)
+        {
+            _pluginTemplatePath.Remove(plugin.Id());
+        }
     }
 }

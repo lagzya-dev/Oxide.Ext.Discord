@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Oxide.Ext.Discord.Types
 {
-    public class ConcurrentHashSet<T> : IDisposable
+    public class DiscordConcurrentHashSet<T> : IDisposable
     {
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
         private readonly HashSet<T> _hashSet = new HashSet<T>();

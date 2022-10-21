@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
     /// </summary>
     public class DiscordCommandLocalizations : BaseTemplateLibrary
     {
-        internal DiscordCommandLocalizations(ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "commands"), TemplateType.Command, logger) { }
+        internal DiscordCommandLocalizations(ILogger logger) : base(TemplateType.Command, logger) { }
         
         /// <summary>
         /// Registers Application Command Localization for a given language
@@ -175,16 +175,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             }
         }
 
-        internal override string GetTemplateFolder(string plugin)
-        {
-            return RootDir;
-        }
-        
         internal override string GetTemplatePath(TemplateId id)
         {
             DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName, TemplateType);
             string fileName = !string.IsNullOrEmpty(id.TemplateName) ? $"{id.PluginName}.{id.TemplateName}.json" : $"{id.PluginName}.json";
-            return Path.Combine(RootDir, id.Language, fileName);
+            return Path.Combine(GetTemplateFolder(id.PluginName), id.Language, fileName);
         }
 
         ///<inheritdoc/>
@@ -193,6 +188,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
+            base.OnPluginUnloaded(plugin);
             string name = plugin.Name;
             RegisteredTemplates.RemoveWhere(rt => rt.PluginName == name);
         }
