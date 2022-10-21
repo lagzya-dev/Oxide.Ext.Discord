@@ -260,8 +260,10 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
         }
 
+        ///<inheritdoc/>
         protected override void OnPluginLoaded(Plugin plugin) { }
 
+        ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             List<AppCommand> appCommands = DiscordPool.GetList<AppCommand>();

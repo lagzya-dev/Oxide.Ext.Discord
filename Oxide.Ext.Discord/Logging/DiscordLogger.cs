@@ -48,16 +48,19 @@ namespace Oxide.Ext.Discord.Logging
             return level >= _logLevel && (level >= _config.ConsoleLogLevel || level >= _config.FileLogLevel);
         }
         
+        /// <inheritdoc/>
         public bool IsConsoleLogging(DiscordLogLevel level)
         {
             return level >= _logLevel && level >= _config.ConsoleLogLevel;
         }
         
+        /// <inheritdoc/>
         public bool IsFileLogging(DiscordLogLevel level)
         {
             return level >= _logLevel && level >= _config.FileLogLevel;
         }
         
+        /// <inheritdoc/>
         public void Shutdown()
         {
             _handler.Shutdown();

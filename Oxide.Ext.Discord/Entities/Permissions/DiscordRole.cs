@@ -135,6 +135,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         }
         #endregion
 
+        ///<inheritdoc />
         public void Validate()
         {
             InvalidGuildRoleException.ThrowIfInvalidRoleName(Name);

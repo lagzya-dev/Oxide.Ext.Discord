@@ -15,6 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         [JsonProperty("type")]
         public MessageComponentType Type { get; protected set; }
 
+        ///<inheritdoc />
         public abstract void Validate();
     }
 }

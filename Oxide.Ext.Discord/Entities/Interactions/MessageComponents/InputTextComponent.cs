@@ -61,6 +61,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
             Type = MessageComponentType.InputText;
         }
 
+        ///<inheritdoc />
         public override void Validate()
         {
             base.Validate();

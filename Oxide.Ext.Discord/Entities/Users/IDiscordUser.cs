@@ -2,6 +2,9 @@
 
 namespace Oxide.Ext.Discord.Entities.Users
 {
+    /// <summary>
+    /// Represents the fields for a DiscordUser
+    /// </summary>
     public interface IDiscordUser
     {
         /// <summary>

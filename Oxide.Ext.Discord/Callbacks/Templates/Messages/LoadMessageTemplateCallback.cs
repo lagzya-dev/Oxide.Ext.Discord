@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
             return Task.CompletedTask;
         }
         
-        protected override string ExceptionData()
+        protected override string GetExceptionMessage()
         {
             return $"Template ID: {_id.ToString()} ";
         }

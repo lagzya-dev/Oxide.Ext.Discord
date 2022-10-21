@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Cache
         /// </summary>
         public readonly IReadOnlyDictionary<Snowflake, DiscordUser> Cache;
 
-        public DiscordUserCache()
+        private DiscordUserCache()
         {
             Cache = new ReadOnlyDictionary<Snowflake, DiscordUser>(InternalCache);
         }

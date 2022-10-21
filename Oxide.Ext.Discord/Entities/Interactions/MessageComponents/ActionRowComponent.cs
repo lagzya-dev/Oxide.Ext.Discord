@@ -27,6 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
             Type = MessageComponentType.ActionRow;
         }
 
+        ///<inheritdoc />
         public override void Validate()
         {
             InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(Components.Count);

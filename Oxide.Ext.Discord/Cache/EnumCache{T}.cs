@@ -16,7 +16,10 @@ namespace Oxide.Ext.Discord.Cache
         private readonly Dictionary<T, string> _numberString = new Dictionary<T, string>();
         private readonly T[] _values; 
 
-        public EnumCache()
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        private EnumCache()
         {
             _values = Enum.GetValues(typeof(T)).Cast<T>().ToArray();
             for (int index = 0; index < _values.Length; index++)
@@ -60,6 +63,11 @@ namespace Oxide.Ext.Discord.Cache
             return str;
         }
 
+        /// <summary>
+        /// Converts the enum to it's number form as a string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public string ToNumber(T value)
         {
             if (_numberString.TryGetValue(value, out string str))

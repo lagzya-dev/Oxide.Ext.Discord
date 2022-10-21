@@ -14,11 +14,15 @@ namespace Oxide.Ext.Discord.Builders
     {
         private readonly DiscordEmbed _embed;
 
-        public DiscordEmbedBuilder()
-        {
-            _embed = new DiscordEmbed();
-        }
+        /// <summary>
+        /// Constructor for the builder creating a new embed
+        /// </summary>
+        public DiscordEmbedBuilder() : this(new DiscordEmbed()) { }
 
+        /// <summary>
+        /// Constructor for the builder using an existing embed
+        /// </summary>
+        /// <param name="embed"></param>
         public DiscordEmbedBuilder(DiscordEmbed embed)
         {
             _embed = embed;

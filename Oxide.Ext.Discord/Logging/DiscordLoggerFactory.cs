@@ -1,52 +1,56 @@
 ﻿using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Singleton;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Logging
 {
-    public static class DiscordLoggerFactory
+    /// <summary>
+    /// Factory for creating DiscordLoggers
+    /// </summary>
+    public class DiscordLoggerFactory : Singleton<DiscordLoggerFactory>
     {
-        private static readonly Hash<string, DiscordLogHandler> Handlers = new Hash<string, DiscordLogHandler>();
+        private readonly Hash<string, DiscordLogHandler> _handlers = new Hash<string, DiscordLogHandler>();
 
-        public static DiscordLogger GetLogger(Plugin plugin, DiscordLogLevel logLevel, IDiscordLoggingConfig config)
+        private DiscordLoggerFactory() {}
+        
+        /// <summary>
+        /// Returns a newly created <see cref="DiscordLogger"/> for a given plugin
+        /// </summary>
+        /// <param name="plugin">Plugin the logger is for</param>
+        /// <param name="logLevel">The current LogLevel for the logger</param>
+        /// <param name="config">The config for the logger</param>
+        /// <returns><see cref="DiscordLogger"/></returns>
+        public DiscordLogger GetLogger(Plugin plugin, DiscordLogLevel logLevel, IDiscordLoggingConfig config) => GetLoggerInternal(plugin.Id(), logLevel, config, false);
+        internal DiscordLogger GetExtensionLogger(DiscordLogLevel logLevel) =>  GetLoggerInternal(nameof(DiscordExtension), logLevel, DiscordExtension.DiscordConfig.Logging, true);
+
+        private DiscordLogger GetLoggerInternal(string pluginName, DiscordLogLevel logLevel, IDiscordLoggingConfig config, bool isExtension)
         {
-            DiscordLogHandler handler = Handlers[plugin.Id()];
+            DiscordLogHandler handler = _handlers[pluginName];
             if (handler == null)
             {
-                handler = new DiscordLogHandler(plugin.Id(), config, false);
-                Handlers[plugin.Id()] = handler;
+                handler = new DiscordLogHandler(pluginName, config, isExtension);
+                _handlers[pluginName] = handler;
             }
 
             return new DiscordLogger(logLevel, config, handler);
         }
 
-        internal static DiscordLogger GetExtensionLogger(DiscordLogLevel logLevel)
-        {
-            DiscordLogHandler handler = Handlers[nameof(DiscordExtension)];
-            if (handler == null)
-            {
-                handler = new DiscordLogHandler(nameof(DiscordExtension), DiscordExtension.DiscordConfig.Logging, true);
-                Handlers[nameof(DiscordExtension)] = handler;
-            }
-
-            return new DiscordLogger(logLevel,  DiscordExtension.DiscordConfig.Logging, handler);
-        }
-
-        internal static void OnPluginUnloaded(Plugin plugin)
+        internal void OnPluginUnloaded(Plugin plugin)
         {
             string id = plugin.Id();
-            Handlers[id]?.Shutdown();
-            Handlers.Remove(id);
+            _handlers[id]?.Shutdown();
+            _handlers.Remove(id);
         }
         
-        internal static void OnServerShutdown()
+        internal void OnServerShutdown()
         {
-            foreach (DiscordLogHandler handler in Handlers.Values)
+            foreach (DiscordLogHandler handler in _handlers.Values)
             {
                 handler.Shutdown();
             }
             
-            Handlers.Clear();
+            _handlers.Clear();
             DiscordFileLogger.OnServerShutdown();
         }
     }

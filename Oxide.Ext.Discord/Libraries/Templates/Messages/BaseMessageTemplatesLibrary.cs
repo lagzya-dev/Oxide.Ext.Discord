@@ -27,10 +27,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     {
         private readonly Hash<TemplateId, TTemplate> _templateCache = new Hash<TemplateId, TTemplate>();
 
-        internal BaseMessageTemplatesLibrary(TemplateType type, ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), type, logger)
-        {
-            
-        }
+        internal BaseMessageTemplatesLibrary(TemplateType type, ILogger logger) : base(Path.Combine(Interface.Oxide.InstanceDirectory, "discord", "templates"), type, logger) { }
         
         /// <summary>
         /// Registers a global message template

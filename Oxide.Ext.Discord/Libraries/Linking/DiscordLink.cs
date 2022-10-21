@@ -103,9 +103,11 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             _linkPlugins.Remove(plugin);
         }
 
+        ///<inheritdoc/>
         protected override void OnPluginLoaded(Plugin plugin) { }
 
-        protected override void  OnPluginUnloaded(Plugin plugin)
+        ///<inheritdoc/>
+        protected override void OnPluginUnloaded(Plugin plugin)
         {
             if (plugin is IDiscordLinkPlugin link)
             {

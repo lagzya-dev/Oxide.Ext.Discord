@@ -55,7 +55,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="create"></param>
+        /// <param name="create">Command to be created</param>
+        /// <param name="lang">Oxide lang of the localization</param>
         public CommandLocalization(CommandCreate create, string lang) : this(create.NameLocalizations[lang], create.DescriptionLocalizations[lang])
         {
             if (create.Options != null)
@@ -71,6 +72,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         /// <param name="opt"></param>
+        /// <param name="lang"></param>
         public CommandLocalization(CommandOption opt, string lang) : this(opt.NameLocalizations[lang], opt.DescriptionLocalizations[lang])
         {
             if (opt.Options != null)

@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         public DiscordJsonReader()
         {
             Stream = new MemoryStream();
-            _reader = new StreamReader(Stream, DiscordEncoding.Encoding);
+            _reader = new StreamReader(Stream, DiscordEncoding.Instance.Encoding);
         }
         
         /// <summary>
@@ -71,7 +71,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
             ClearStream();
             //stream.Position = 0;
             //stream.CopyTo(Stream);
-            stream.CopyToPooled(Stream, true);
+            stream.CopyToPooled(Stream);
         }
         
         /// <summary>
@@ -106,7 +106,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
                 Interface.Oxide.LogException($"Failed to Deserialize. Pos: {Stream.Position} Length: {Stream.Length}", ex);
                 ResetStream();
                 Interface.Oxide.LogDebug($"A:{ReadAsString()}");
-                Interface.Oxide.LogDebug($"B:{DiscordEncoding.Encoding.GetString(Stream.ToArray(), 0, (int)Stream.Length)}");
+                Interface.Oxide.LogDebug($"B:{DiscordEncoding.Instance.Encoding.GetString(Stream.ToArray(), 0, (int)Stream.Length)}");
                 throw;
             }
         }

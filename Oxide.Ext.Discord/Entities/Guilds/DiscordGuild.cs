@@ -531,6 +531,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Left members only include <see cref="GuildMember"/>s who have left the guild since the bot was connected
         /// </summary>
         /// <param name="userId">User ID of the guild member to get</param>
+        /// <param name="includeLeft">If we should include guild members who have left the guild</param>
         /// <returns><see cref="GuildMember"/> For the UserId </returns>
         public GuildMember GetMember(Snowflake userId, bool includeLeft = false)
         {
@@ -558,6 +559,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             return null;
         }
         
+        /// <summary>
+        /// Returns the user permissions for the given user ID
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public PermissionFlags GetUserPermissions(Snowflake userId)
         {
             GuildMember member = Members[userId];

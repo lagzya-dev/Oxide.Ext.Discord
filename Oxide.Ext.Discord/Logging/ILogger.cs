@@ -42,6 +42,9 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="exception">Exception for the log</param>
         void Log(DiscordLogLevel level, string message, Exception exception = null);
 
+        /// <summary>
+        /// Shuts down the logger
+        /// </summary>
         void Shutdown();
     }
 }

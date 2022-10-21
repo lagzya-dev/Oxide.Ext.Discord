@@ -32,6 +32,7 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <param name="label">The text of the button</param>
         /// <param name="customId">The unique id of the button. Used to identify which button was clicked</param>
         /// <param name="disabled">If this button is disabled</param>
+        /// <param name="addToNewRow">Should the button be added to a new row</param>
         /// <param name="emoji">Emoji to display with the button</param>
         /// <returns><see cref="MessageComponentBuilder"/></returns>
         /// <exception cref="Exception">
@@ -66,13 +67,14 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         {
             return AddActionButton(ButtonStyle.Secondary, label, $"DUMMY_{_components.Count * 5 + _current.Components.Count}", disabled);
         }
-        
+
         /// <summary>
         /// Adds a link button to the current action row
         /// </summary>
         /// <param name="label">Text on the button</param>
         /// <param name="url">URL for the button</param>
         /// <param name="disabled">if the button should be disabled</param>
+        /// <param name="addToNewRow">Show the button be added to a new row</param>
         /// <param name="emoji">Emoji to display on the button</param>
         /// <returns><see cref="MessageComponentBuilder"/></returns>
         /// <exception cref="Exception">Thrown if the button goes outside the max number of action rows</exception>
@@ -91,10 +93,11 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             });
             return this;
         }
-        
+
         /// <summary>
         /// Adds a select menu to a new action row
         /// </summary>
+        /// <param name="type">Select Menu Message Component Type</param>
         /// <param name="customId">Unique ID for the select menu</param>
         /// <param name="placeholder">Text to display if no value is selected yet</param>
         /// <param name="minValues">The min number of options you must select</param>

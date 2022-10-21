@@ -8,6 +8,9 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Cache
 {
+    /// <summary>
+    /// Represents a cache for Loaded and Loadable plugins
+    /// </summary>
     public class DiscordPluginCache : Singleton<DiscordPluginCache>
     {
         private readonly CSharpPluginLoader _pluginLoader = Interface.Oxide.GetPluginLoaders().OfType<CSharpPluginLoader>().FirstOrDefault();
@@ -16,6 +19,12 @@ namespace Oxide.Ext.Discord.Cache
         private readonly List<string> _loadedPlugins = new List<string>();
         private DateTime _lastUpdated = DateTime.MinValue;
 
+        private DiscordPluginCache() {}
+        
+        /// <summary>
+        /// Returns a list of plugins loaded by oxide
+        /// </summary>
+        /// <returns></returns>
         public IReadOnlyList<string> GetLoadedPlugins()
         {
             if (_loadedPlugins.Count != 0)
@@ -27,6 +36,11 @@ namespace Oxide.Ext.Discord.Cache
             return _loadedPlugins;
         }
         
+        /// <summary>
+        /// Returns a list of plugins that can be loaded by oxide
+        /// Already loaded plugins are excluded from the list
+        /// </summary>
+        /// <returns></returns>
         public IReadOnlyList<string> GetLoadablePlugins()
         {
             if (_lastUpdated + TimeSpan.FromMinutes(1) < DateTime.UtcNow)

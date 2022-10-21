@@ -2,6 +2,9 @@
 
 namespace Oxide.Ext.Discord.Exceptions.Promise
 {
+    /// <summary>
+    /// Represents an exception related to promises
+    /// </summary>
     public class PromiseResolvedException : BaseDiscordException
     {
         private PromiseResolvedException(string message) : base(message) { }

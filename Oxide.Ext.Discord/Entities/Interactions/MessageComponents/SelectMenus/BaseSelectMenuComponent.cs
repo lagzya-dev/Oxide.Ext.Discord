@@ -45,6 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
             Type = type;
         }
 
+        ///<inheritdoc />
         public override void Validate()
         {
             base.Validate();

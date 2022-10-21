@@ -48,7 +48,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="option"></param>
+        /// <param name="option">Option to create the localization for</param>
+        /// <param name="lang">The oxide lang for the localization</param>
         public ArgumentLocalization(CommandOption option, string lang) : this(option.NameLocalizations[lang], option.DescriptionLocalizations[lang])
         {
             if (option.Choices != null)

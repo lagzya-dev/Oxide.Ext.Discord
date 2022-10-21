@@ -187,8 +187,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             return Path.Combine(RootDir, id.Language, fileName);
         }
 
+        ///<inheritdoc/>
         protected override void OnPluginLoaded(Plugin plugin) { }
 
+        ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             string name = plugin.Name;

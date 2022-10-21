@@ -25,6 +25,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </summary>
         protected readonly string RootDir;
         
+        /// <summary>
+        /// The template type of this template library
+        /// </summary>
         protected readonly TemplateType TemplateType;
         
         internal readonly Types.ConcurrentHashSet<TemplateId> RegisteredTemplates = new Types.ConcurrentHashSet<TemplateId>();
@@ -36,6 +39,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// Constructor
         /// </summary>
         /// <param name="rootDir">Root Directory for the library</param>
+        /// <param name="type">The template type of this library</param>
         /// <param name="logger"></param>
         protected BaseTemplateLibrary(string rootDir, TemplateType type, ILogger logger)
         {
@@ -56,13 +60,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 return;
             }
             
-            if (RegisteredTemplates.Contains(id))
+            if (!RegisteredTemplates.Add(id))
             {
                 Logger.Warning("Trying to register template multiple times. Type: {0} {1}", TemplateType, id);
             }
-            
-            RegisteredTemplates.Add(id);
-            
+
             string path = GetTemplatePath(id);
             if (File.Exists(path))
             {

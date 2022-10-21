@@ -18,7 +18,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="name">Name of the Sub Command Group</param>
         /// <param name="description">Description of the Sub Command Group</param>
         /// <param name="parent">The parent builder for this builder</param>
-        public GroupSubCommandBuilder(List<CommandOption> options, string name, string description, SubCommandGroupBuilder parent, string defaultLanguage) : base(options, name, description, parent, defaultLanguage) { }
+        /// <param name="defaultLanguage">Default language for the builder</param>
+        internal GroupSubCommandBuilder(List<CommandOption> options, string name, string description, SubCommandGroupBuilder parent, string defaultLanguage) : base(options, name, description, parent, defaultLanguage) { }
         
         /// <summary>
         /// Adds a new option

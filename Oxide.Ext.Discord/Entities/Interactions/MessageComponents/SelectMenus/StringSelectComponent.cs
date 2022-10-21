@@ -22,6 +22,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
         /// </summary>
         public StringSelectComponent() : base(MessageComponentType.StringSelect) { }
 
+        ///<inheritdoc />
         public override void Validate()
         {
             base.Validate();

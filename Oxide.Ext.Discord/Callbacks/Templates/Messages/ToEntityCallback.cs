@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    public class ToEntityCallback<TTemplate, TEntity> : BaseAsyncCallback 
+    internal class ToEntityCallback<TTemplate, TEntity> : BaseAsyncCallback 
         where TTemplate : BaseMessageTemplate<TEntity> 
         where TEntity : class 
     {
@@ -44,7 +44,8 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
             return Task.CompletedTask;
         }
         
-        protected override string ExceptionData()
+        ///<inheritdoc/>
+        protected override string GetExceptionMessage()
         {
             return $"Type: {typeof(TEntity).Name} Placeholders: {_data.GetKeys()}";
         }

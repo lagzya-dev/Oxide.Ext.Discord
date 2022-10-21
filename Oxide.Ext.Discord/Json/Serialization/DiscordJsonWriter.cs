@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         public DiscordJsonWriter()
         {
             Stream = new MemoryStream();
-            _streamWriter = new StreamWriter(Stream, DiscordEncoding.Encoding, 2048, true);
+            _streamWriter = new StreamWriter(Stream, DiscordEncoding.Instance.Encoding, 2048, true);
             _writer = new JsonTextWriter(_streamWriter);
             _writer.Formatting = Formatting.None;
         }
@@ -72,7 +72,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
             //DiscordExtension.GlobalLogger.Debug($"{nameof(JsonWriterPoolable)}.{nameof(ReadAsStringAsync)} Read: {{0}} Position: {{1}}", Stream.Length, Stream.Position);
             if (_reader == null)
             {
-                _reader = new StreamReader(Stream, DiscordEncoding.Encoding, false, 2048, true);
+                _reader = new StreamReader(Stream, DiscordEncoding.Instance.Encoding, false, 2048, true);
             }
 
             ResetStream();

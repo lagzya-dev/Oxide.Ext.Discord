@@ -254,6 +254,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             return (double?)GetArg(name, CommandOptionType.Number)?.Value ?? @default;
         }
         
+        /// <summary>
+        /// Returns the float value supplied to command option matching the name.
+        /// If the arg was optional and wasn't supplied default supplied value will be used.
+        /// </summary>
+        /// <param name="name">Name of the command option</param>
+        /// <param name="default">Default value to return if not supplied</param>
+        /// <returns>double for the matching command option name</returns>
+        /// <exception cref="Exception">Thrown if the option type is not a double</exception>
         public float GetFloat(string name, float @default = default(float))
         {
             return (float?)GetArg(name, CommandOptionType.Number)?.Value ?? @default;

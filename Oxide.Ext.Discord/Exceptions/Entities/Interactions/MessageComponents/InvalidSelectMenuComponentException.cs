@@ -2,6 +2,9 @@
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
 {
+    /// <summary>
+    /// Represents an exception for select menu components
+    /// </summary>
     public class InvalidSelectMenuComponentException : BaseDiscordException
     {
         private InvalidSelectMenuComponentException(string message) : base(message) { }

@@ -1,5 +1,6 @@
 using System;
 using Oxide.Core;
+#pragma warning disable CS1591
 
 namespace Oxide.Ext.Discord.Logging
 {

@@ -11,6 +11,8 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Plugins.Core;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord
@@ -23,6 +25,8 @@ namespace Oxide.Ext.Discord
         internal static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
 
         private static readonly Regex TokenValidator = new Regex(@"^[\w-]+\.[\w-]+\.[\w-]+$", RegexOptions.Compiled);
+
+        private static DeferredPluginLoadHandler DeferredLoader = new DeferredPluginLoadHandler();
 
         /// <summary>
         /// Which plugin is the owner of this client
@@ -89,7 +93,7 @@ namespace Oxide.Ext.Discord
         public void Connect(DiscordSettings settings)
         {
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
-            Logger = DiscordLoggerFactory.GetExtensionLogger(settings.LogLevel);
+            Logger = DiscordLoggerFactory.Instance.GetExtensionLogger(settings.LogLevel);
             
             if (string.IsNullOrEmpty(Settings.ApiToken))
             {
@@ -236,13 +240,30 @@ namespace Oxide.Ext.Discord
         
         internal static void OnPluginAdded(Plugin plugin)
         {
+            if (plugin.IsCorePlugin)
+            {
+                return;
+            }
+            
+            DiscordExtensionCore core = DiscordExtensionCore.Instance;
+            if (core == null || !core.IsServerLoaded)
+            {
+                DeferredLoader.AddPlugin(plugin);
+                return;
+            }
+            
+            OnPluginLoadedInternal(plugin);
+        }
+        
+        internal static void OnPluginLoadedInternal(Plugin plugin)
+        {
             DiscordPluginCache.Instance.OnPluginLoaded(plugin);
             OnPluginRemoved(plugin);
 
-            Type type = typeof(DiscordClientAttribute);
+            Type clientAttribute = typeof(DiscordClientAttribute);
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
-                if (field.GetCustomAttributes(type, true).Length != 0)
+                if (field.GetCustomAttributes(clientAttribute, true).Length != 0)
                 {
                     DiscordClient client = Clients[plugin.Id()];
                     if (client == null)
@@ -253,7 +274,7 @@ namespace Oxide.Ext.Discord
                             _clientField = field
                         };
                     }
-                    
+
                     field.SetValue(plugin, client);
                     PluginExt.OnPluginLoaded(plugin);
                     BaseDiscordLibrary.ProcessPluginLoaded(plugin);
@@ -263,9 +284,20 @@ namespace Oxide.Ext.Discord
             }
         }
 
+        internal static void OnDeferredLoadedCompleted()
+        {
+            DiscordExtension.GlobalLogger.Debug(nameof(OnDeferredLoadedCompleted));
+            DeferredLoader = null;
+        }
+
         internal static void OnPluginRemoved(Plugin plugin)
         {
-            if (DiscordExtension.IsShuttingDown || plugin.IsExtensionPlugin())
+            if (plugin.IsCorePlugin)
+            {
+                return;
+            }
+            
+            if (DiscordExtension.IsShuttingDown)
             {
                 return;
             }
@@ -279,7 +311,7 @@ namespace Oxide.Ext.Discord
 
             PluginExt.OnPluginUnloaded(plugin);
             DiscordPluginCache.Instance.OnPluginUnloaded(plugin);
-            DiscordLoggerFactory.OnPluginUnloaded(plugin);
+            DiscordLoggerFactory.Instance.OnPluginUnloaded(plugin);
         }
 
         internal static void CloseClient(DiscordClient client)

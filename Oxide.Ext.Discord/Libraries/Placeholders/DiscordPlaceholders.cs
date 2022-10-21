@@ -213,8 +213,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
         }
 
+        ///<inheritdoc/>
         protected override void OnPluginLoaded(Plugin plugin) { }
 
+        ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             _placeholders.RemoveAll(p => p.IsForPlugin(plugin));

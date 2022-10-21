@@ -22,6 +22,9 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         protected readonly CommandOption SubCommand;
         
+        /// <summary>
+        /// Default language being built
+        /// </summary>
         protected readonly string DefaultLanguage;
         
         private readonly TParent _parent;
@@ -33,6 +36,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <param name="name">Name of the sub command</param>
         /// <param name="description">Description of the sub command</param>
         /// <param name="parent">Parent for the sub command</param>
+        /// <param name="defaultLanguage">Default language being built</param>
         protected BaseSubCommandBuilder(List<CommandOption> options, string name, string description, TParent parent, string defaultLanguage)
         {
             Builder = (TBuilder)this;
@@ -57,6 +61,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
             return Builder;
         }
          
+         /// <summary>
+         /// Adds Application Sub Command Name Localization
+         /// </summary>
+         /// <param name="name">Localized name value</param>
+         /// <param name="lang">Oxide lang the value is in</param>
+         /// <returns>This</returns>
          public TBuilder AddNameLocalization(string name, string lang)
          {
              if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
@@ -81,14 +91,20 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
             return Builder;
         }
         
-        public TBuilder AddDescriptionLocalization(string name, string lang)
+        /// <summary>
+        /// Adds Application Sub Command Description Localizations
+        /// </summary>
+        /// <param name="description">Localized description value</param>
+        /// <param name="lang">Oxide lang the value is in</param>
+        /// <returns>This</returns>
+        public TBuilder AddDescriptionLocalization(string description, string lang)
         {
             if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }
             
-            SubCommand.DescriptionLocalizations[lang] = name;
+            SubCommand.DescriptionLocalizations[lang] = description;
             return Builder;
         }
 

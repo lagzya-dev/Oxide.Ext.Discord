@@ -37,6 +37,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             return this;
         }
 
+        /// <summary>
+        /// Adds Application Sub Command Group Name Localizations
+        /// </summary>
+        /// <param name="name">Localized name value</param>
+        /// <param name="lang">Oxide lang the value is in</param>
+        /// <returns>This</returns>
         public SubCommandGroupBuilder AddNameLocalization(string name, string lang)
         {
             if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
@@ -61,14 +67,20 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             return this;
         }
 
-        public SubCommandGroupBuilder AddDescriptionLocalization(string name, string lang)
+        /// <summary>
+        /// Adds Application Command Description Localizations
+        /// </summary>
+        /// <param name="description">Localized description value</param>
+        /// <param name="lang">Oxide lang the value is in</param>
+        /// <returns>This</returns>
+        public SubCommandGroupBuilder AddDescriptionLocalization(string description, string lang)
         {
             if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }
 
-            _option.DescriptionLocalizations[lang] = name;
+            _option.DescriptionLocalizations[lang] = description;
             return this;
         }
 

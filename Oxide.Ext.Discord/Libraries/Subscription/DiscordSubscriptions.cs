@@ -97,8 +97,10 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemoveChannelSubscription)} {{0}} removed subscription to channel {{1}}", plugin.Id(), channelId);
         }
 
+        ///<inheritdoc/>
         protected override void OnPluginLoaded(Plugin plugin) { }
 
+        ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             RemovePluginSubscriptions(plugin);

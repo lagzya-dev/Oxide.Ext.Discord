@@ -26,6 +26,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="name">Name of the command</param>
         /// <param name="description">Description of the command</param>
         /// <param name="type">Command type</param>
+        /// <param name="defaultLanguage">Language the application command is being created in</param>
         public ApplicationCommandBuilder(string name, string description, ApplicationCommandType type, string defaultLanguage = DiscordLang.DefaultOxideLanguage)
         {
             if (string.IsNullOrEmpty(defaultLanguage)) throw new ArgumentNullException(nameof(defaultLanguage));
@@ -86,6 +87,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             return this;
         }
 
+        /// <summary>
+        /// Adds Application Command Name Localizations
+        /// </summary>
+        /// <param name="name">Localized name value</param>
+        /// <param name="lang">Oxide lang the value is in</param>
+        /// <returns>This</returns>
         public ApplicationCommandBuilder AddNameLocalization(string name, string lang)
         {
             if (Command.NameLocalizations == null)
@@ -115,7 +122,13 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             return this;
         }
         
-        public ApplicationCommandBuilder AddDescriptionLocalization(string name, string lang)
+        /// <summary>
+        /// Adds Application Command Description Localizations
+        /// </summary>
+        /// <param name="description">Localized description value</param>
+        /// <param name="lang">Oxide lang the value is in</param>
+        /// <returns>This</returns>
+        public ApplicationCommandBuilder AddDescriptionLocalization(string description, string lang)
         {
             if (Command.DescriptionLocalizations == null)
             {
@@ -127,7 +140,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
                 lang = discordLocale;
             }
             
-            Command.DescriptionLocalizations[lang] = name;
+            Command.DescriptionLocalizations[lang] = description;
             return this;
         }
 

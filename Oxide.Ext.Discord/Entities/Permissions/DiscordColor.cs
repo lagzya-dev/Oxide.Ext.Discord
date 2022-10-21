@@ -117,11 +117,34 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         public static readonly DiscordColor DarkerGrey = new DiscordColor(0x546E7A);
         
+        /// <summary>
+        /// Discord Success Color
+        /// </summary>
         public static readonly DiscordColor Success = new DiscordColor(0x57F287);
+        
+        /// <summary>
+        /// Discord Warning Color
+        /// </summary>
         public static readonly DiscordColor Warning = new DiscordColor(0xFEE75C);
+        
+        /// <summary>
+        /// Discord Danger Color
+        /// </summary>
         public static readonly DiscordColor Danger = new DiscordColor(0xED4245);
+        
+        /// <summary>
+        /// Discord Old Blurple Color
+        /// </summary>
         public static readonly DiscordColor BlurpleOld = new DiscordColor(0x7289DA);
+        
+        /// <summary>
+        /// Discord Blurple Color
+        /// </summary>
         public static readonly DiscordColor Blurple = new DiscordColor(0x5865F2);
+        
+        /// <summary>
+        /// Discord Fuchsia Color
+        /// </summary>
         public static readonly DiscordColor Fuchsia = new DiscordColor(0xEB459E);
 
         /// <summary>

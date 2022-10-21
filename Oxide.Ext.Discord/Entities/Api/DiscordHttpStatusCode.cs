@@ -1,5 +1,8 @@
 ﻿namespace Oxide.Ext.Discord.Entities.Api
 {
+    /// <summary>
+    /// Represents possible HTTP Codes sent from discord
+    /// </summary>
     public enum DiscordHttpStatusCode : ushort
     {
         /// <summary>

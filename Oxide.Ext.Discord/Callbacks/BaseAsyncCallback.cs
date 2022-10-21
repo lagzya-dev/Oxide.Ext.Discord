@@ -29,7 +29,11 @@ namespace Oxide.Ext.Discord.Callbacks
         /// </summary>
         protected abstract Task HandleCallback();
 
-        protected abstract string ExceptionData();
+        /// <summary>
+        /// Returns Exception message if an error occurs 
+        /// </summary>
+        /// <returns></returns>
+        protected abstract string GetExceptionMessage();
         
         /// <summary>
         /// Runs the callback using async
@@ -47,7 +51,7 @@ namespace Oxide.Ext.Discord.Callbacks
             }
             catch (Exception ex)
             {
-                DiscordExtension.GlobalLogger.Exception("{0}.CallbackInternal had exception. Callback Data: {1}", GetType().Name, ExceptionData(), ex);
+                DiscordExtension.GlobalLogger.Exception("{0}.CallbackInternal had exception. Callback Data: {1}", GetType().Name, GetExceptionMessage(), ex);
             }
             finally
             {

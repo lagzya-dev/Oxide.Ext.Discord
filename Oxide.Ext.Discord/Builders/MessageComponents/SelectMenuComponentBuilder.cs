@@ -1,6 +1,7 @@
 using System;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Emojis;
+using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 
@@ -51,6 +52,11 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
             return this;
         }
         
+        /// <summary>
+        /// Adds an allow channel type for <see cref="MessageComponentType.ChannelSelect"/>
+        /// </summary>
+        /// <param name="type">Channel Type to add</param>
+        /// <returns>This</returns>
         public SelectMenuComponentBuilder AddChannelType(ChannelType type)
         {
             InvalidSelectMenuComponentException.ThrowIfTypeCantAddChannelTypes(_menu.Type);

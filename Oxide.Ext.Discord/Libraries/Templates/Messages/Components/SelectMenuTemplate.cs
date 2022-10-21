@@ -9,6 +9,9 @@ using Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
 {
+    /// <summary>
+    /// Represents a template for select menus
+    /// </summary>
     public class SelectMenuTemplate : BaseComponentTemplate
     {
         /// <summary>
@@ -58,11 +61,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         [JsonProperty("Select Menu Enabled")]
         public bool Enabled { get; set; } = true;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="type"></param>
         public SelectMenuTemplate(MessageComponentType type) : base(type) { }
 
+        ///<inheritdoc/>
         public override BaseComponent ToComponent(PlaceholderData data)
         {
-            BaseSelectMenuComponent component = null;
+            BaseSelectMenuComponent component;
             switch (Type)
             {
                 case MessageComponentType.StringSelect:

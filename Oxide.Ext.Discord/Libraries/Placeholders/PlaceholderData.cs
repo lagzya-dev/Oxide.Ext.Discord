@@ -279,6 +279,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             ShouldPool = false;
         }
 
+        /// <summary>
+        /// Clones the current placeholder data into a new <see cref="PlaceholderData"/>
+        /// </summary>
+        /// <returns></returns>
         public PlaceholderData Clone()
         {
             PlaceholderData data = DiscordPool.GetPlaceholderData();

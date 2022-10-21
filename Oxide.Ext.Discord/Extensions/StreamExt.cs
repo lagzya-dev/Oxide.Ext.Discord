@@ -17,28 +17,17 @@ namespace Oxide.Ext.Discord.Extensions
         /// </summary>
         /// <param name="from">Stream to copy from</param>
         /// <param name="to">Stream to copy to</param>
-        public static void CopyToPooled(this Stream from, Stream to, bool debug = false)
+        public static void CopyToPooled(this Stream from, Stream to)
         {
             from.Position = 0;
             byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(1024);
-
-            Snowflake id = SnowflakeIdGenerator.Generate();
-            if (debug)
-            {
-                Interface.Oxide.LogDebug($"{id} Start Copy To Pooled: {from.Length}");
-            }
 
             int bytesRead;
             while ((bytesRead = from.Read(buffer, 0, buffer.Length)) != 0)
             {
                 to.Write(buffer, 0, bytesRead);
-                if (debug)
-                Interface.Oxide.LogDebug($"{id} Writing Bytes: {bytesRead} Total: {to.Length}\n{DiscordEncoding.Encoding.GetString(buffer, 0, bytesRead)}");
             }
-            
-            if (debug)
-            Interface.Oxide.LogDebug($"{id} Finish Copy To Pooled: {from.Length} -> {to.Length}");
-            
+
             DiscordArrayPool<byte>.Shared.Return(buffer);
         }
     }

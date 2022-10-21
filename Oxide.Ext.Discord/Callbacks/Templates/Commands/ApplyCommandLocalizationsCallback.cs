@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
             return Task.CompletedTask;
         }
         
-        protected override string ExceptionData()
+        protected override string GetExceptionMessage()
         {
             return $"Plugin: {_id.PluginName} Name: {_id.TemplateName} Language: {_id.Language}";
         }

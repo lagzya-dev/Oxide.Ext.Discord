@@ -10,10 +10,10 @@ namespace Oxide.Ext.Discord.Cache
         private static readonly Hash<string, MediaTypeHeaderValue> Cache = new Hash<string, MediaTypeHeaderValue>();
         private const string JsonHeader = "application/json";
 
-        public MediaTypeHeaderCache()
+        private MediaTypeHeaderCache()
         {
             MediaTypeHeaderValue header = MediaTypeHeaderValue.Parse(JsonHeader);
-            header.CharSet = DiscordEncoding.Encoding.WebName;
+            header.CharSet = DiscordEncoding.Instance.Encoding.WebName;
             Cache[JsonHeader] = header;
         }
 

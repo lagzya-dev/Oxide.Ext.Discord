@@ -15,6 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         [JsonProperty("custom_id")]
         public string CustomId { get; set; }
 
+        ///<inheritdoc />
         public override void Validate()
         {
             InvalidMessageComponentException.ThrowIfInvalidCustomId(CustomId);

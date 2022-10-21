@@ -297,11 +297,23 @@ namespace Oxide.Ext.Discord.Builders.Interactions
             AddPlayerList(Covalence.Players.All, filter, comparison, search, options, null);
         }
 
+        /// <summary>
+        /// Adds a list of plugins that can be loaded
+        /// </summary>
+        /// <param name="filter">String to filter by</param>
+        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
+        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
         public void AddLoadablePlugins(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             AddList(DiscordPluginCache.Instance.GetLoadablePlugins(), filter, comparison, search);
         }
 
+        /// <summary>
+        /// Adds a list of plugins that are currently loaded
+        /// </summary>
+        /// <param name="filter">String to filter by</param>
+        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
+        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
         public void AddLoadedPlugins(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             AddList(DiscordPluginCache.Instance.GetLoadedPlugins(), filter, comparison, search);

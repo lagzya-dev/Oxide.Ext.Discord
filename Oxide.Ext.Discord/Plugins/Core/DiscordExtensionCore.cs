@@ -28,6 +28,8 @@ namespace Oxide.Ext.Discord.Plugins.Core
         #region Fields
         public static DiscordExtensionCore Instance;
         private ILogger _logger;
+
+        internal bool IsServerLoaded;
         #endregion
         
         #region Setup & Loading
@@ -41,7 +43,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         private void Init()
         {
             Instance = this;
-            _logger = DiscordLoggerFactory.GetExtensionLogger(DiscordLogLevel.Info);
+            _logger = DiscordLoggerFactory.Instance.GetExtensionLogger(DiscordLogLevel.Info);
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
             AddCovalenceCommand(new[] { "de.websocket.reset" }, nameof(ResetWebSocketCommand), "de.websocket.reset");
             AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
@@ -58,6 +60,12 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
             CreateTemplates();
             DiscordExtension.DiscordPlaceholders.RegisterPlaceholders();
+        }
+
+        [HookMethod(nameof(OnServerInitialized))]
+        private void OnServerInitialized()
+        {
+            IsServerLoaded = true;
         }
 
         [HookMethod(nameof(OnServerSave))]

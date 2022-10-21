@@ -21,15 +21,20 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         [JsonConstructor]
         public ChoicesLocalization() { }
 
+        /// <summary>
+        /// Constructor for command option choice localization
+        /// </summary>
+        /// <param name="name">Localized choice name</param>
         public ChoicesLocalization(string name)
         {
             Name = name;
         }
-        
+
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="option">Option to localize</param>
+        /// <param name="lang">Oxide lang of the localization</param>
         public ChoicesLocalization(CommandOption option, string lang) : this(option.NameLocalizations[lang]) { }
         
         /// <summary>

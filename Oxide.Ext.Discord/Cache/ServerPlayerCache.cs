@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Cache
 
         private readonly IPlayerManager Players = Interface.Oxide.GetLibrary<Covalence>().Players;
 
-        public ServerPlayerCache()
+        private ServerPlayerCache()
         {
             Cache = new ReadOnlyDictionary<string, IPlayer>(InternalCache);
         }

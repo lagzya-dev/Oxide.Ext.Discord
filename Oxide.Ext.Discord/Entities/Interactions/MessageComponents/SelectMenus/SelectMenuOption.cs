@@ -44,6 +44,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
         [JsonProperty("default")]
         public bool? Default { get; set; }
 
+        ///<inheritdoc />
         public void Validate()
         {
             InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionLabel(Label);

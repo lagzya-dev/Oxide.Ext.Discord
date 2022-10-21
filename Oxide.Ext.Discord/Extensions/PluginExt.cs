@@ -35,8 +35,6 @@ namespace Oxide.Ext.Discord.Extensions
             return name ?? pluginName;
         }
 
-        internal static bool IsExtensionPlugin(this Plugin plugin) => plugin.Id() == nameof(DiscordExtension);
-
         internal static void OnPluginLoaded(Plugin plugin)
         {
             FullNameCache[plugin.Name] = CreatePluginFullName(plugin);

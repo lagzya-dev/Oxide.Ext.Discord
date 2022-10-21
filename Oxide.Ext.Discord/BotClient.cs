@@ -106,7 +106,7 @@ namespace Oxide.Ext.Discord
                 Intents = settings.Intents
             };
 
-            Logger = DiscordLoggerFactory.GetExtensionLogger(Settings.LogLevel);
+            Logger = DiscordLoggerFactory.Instance.GetExtensionLogger(Settings.LogLevel);
             
             Initialized = true;
 

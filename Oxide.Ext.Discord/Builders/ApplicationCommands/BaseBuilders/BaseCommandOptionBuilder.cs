@@ -18,6 +18,15 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         private readonly TBuilder _builder;
         private readonly TParent _parent;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="parentBuilder"></param>
+        /// <param name="defaultLanguage"></param>
         internal BaseCommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, TParent parentBuilder, string defaultLanguage)
         {
             InvalidCommandOptionException.ThrowIfInvalidName(name, false);
@@ -47,6 +56,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
             return _builder;
         }
         
+        /// <summary>
+        /// Adds Application Command Option Name Localization
+        /// </summary>
+        /// <param name="name">Localized name value</param>
+        /// <param name="lang">Oxide lang the value is in</param>
+        /// <returns>This</returns>
         public TBuilder AddNameLocalization(string name, string lang)
         {
             if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
@@ -71,14 +86,20 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
             return _builder;
         }
         
-        public TBuilder AddDescriptionLocalization(string name, string lang)
+        /// <summary>
+        /// Adds Application Command Option Description Localization
+        /// </summary>
+        /// <param name="description">Localized description value</param>
+        /// <param name="lang">Oxide lang the value is in</param>
+        /// <returns>This</returns>
+        public TBuilder AddDescriptionLocalization(string description, string lang)
         {
             if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }
             
-            _option.DescriptionLocalizations[lang] = name;
+            _option.DescriptionLocalizations[lang] = description;
             return _builder;
         }
 

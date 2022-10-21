@@ -103,7 +103,7 @@ namespace Oxide.Ext.Discord
             DiscordConfig = ConfigFile.Load<DiscordConfig>(configPath);
             DiscordConfig.Save();
             
-            GlobalLogger = DiscordLoggerFactory.GetExtensionLogger(string.IsNullOrEmpty(TestVersion) ? DiscordLogLevel.Warning : DiscordLogLevel.Verbose);
+            GlobalLogger = DiscordLoggerFactory.Instance.GetExtensionLogger(string.IsNullOrEmpty(TestVersion) ? DiscordLogLevel.Warning : DiscordLogLevel.Verbose);
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
 
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
@@ -157,7 +157,7 @@ namespace Oxide.Ext.Discord
             GlobalLogger.Debug("Disconnected all clients - server shutdown.");
             
             DiscordUserData.Instance.Save(true);
-            DiscordLoggerFactory.OnServerShutdown();
+            DiscordLoggerFactory.Instance.OnServerShutdown();
         }
     }
 }

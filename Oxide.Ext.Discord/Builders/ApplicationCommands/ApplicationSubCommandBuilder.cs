@@ -18,7 +18,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="name">Name of the sub command</param>
         /// <param name="description">Description of the sub command</param>
         /// <param name="parent">Parent for this builder</param>
-        public ApplicationSubCommandBuilder(List<CommandOption> options, string name, string description, ApplicationCommandBuilder parent, string defaultLanguage) : base(options, name, description, parent, defaultLanguage) { }
+        /// <param name="defaultLanguage"></param>
+        internal ApplicationSubCommandBuilder(List<CommandOption> options, string name, string description, ApplicationCommandBuilder parent, string defaultLanguage) : base(options, name, description, parent, defaultLanguage) { }
         
         /// <summary>
         /// Adds a new option

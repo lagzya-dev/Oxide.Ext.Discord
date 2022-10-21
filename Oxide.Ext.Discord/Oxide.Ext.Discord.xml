@@ -311,6 +311,7 @@
             <param name="name">Name of the command</param>
             <param name="description">Description of the command</param>
             <param name="type">Command type</param>
+            <param name="defaultLanguage">Language the application command is being created in</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDefaultPermissions(Oxide.Ext.Discord.Entities.Permissions.PermissionFlags)">
             <summary>
@@ -341,6 +342,14 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddNameLocalization(System.String,System.String)">
+            <summary>
+            Adds Application Command Name Localizations
+            </summary>
+            <param name="name">Localized name value</param>
+            <param name="lang">Oxide lang the value is in</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
@@ -348,6 +357,14 @@
             <param name="plugin">Plugin containing the localizations</param>
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDescriptionLocalization(System.String,System.String)">
+            <summary>
+            Adds Application Command Description Localizations
+            </summary>
+            <param name="description">Localized description value</param>
+            <param name="lang">Oxide lang the value is in</param>
+            <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String)">
             <summary>
@@ -408,6 +425,7 @@
             <param name="name">Name of the sub command</param>
             <param name="description">Description of the sub command</param>
             <param name="parent">Parent for this builder</param>
+            <param name="defaultLanguage"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
             <summary>
@@ -429,6 +447,17 @@
             Builder for command options
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,`1,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="parent"></param>
+            <param name="type"></param>
+            <param name="name"></param>
+            <param name="description"></param>
+            <param name="parentBuilder"></param>
+            <param name="defaultLanguage"></param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command name localizations for a given plugin and lang key
@@ -437,6 +466,14 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddNameLocalization(System.String,System.String)">
+            <summary>
+            Adds Application Command Option Name Localization
+            </summary>
+            <param name="name">Localized name value</param>
+            <param name="lang">Oxide lang the value is in</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
@@ -444,6 +481,14 @@
             <param name="plugin">Plugin containing the localizations</param>
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddDescriptionLocalization(System.String,System.String)">
+            <summary>
+            Adds Application Command Option Description Localization
+            </summary>
+            <param name="description">Localized description value</param>
+            <param name="lang">Oxide lang the value is in</param>
+            <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.Required(System.Boolean)">
             <summary>
@@ -564,6 +609,11 @@
             The subcommand for the builder
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.DefaultLanguage">
+            <summary>
+            Default language being built
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,`1,System.String)">
             <summary>
             Constructor
@@ -572,6 +622,7 @@
             <param name="name">Name of the sub command</param>
             <param name="description">Description of the sub command</param>
             <param name="parent">Parent for the sub command</param>
+            <param name="defaultLanguage">Default language being built</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
@@ -581,6 +632,14 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddNameLocalization(System.String,System.String)">
+            <summary>
+            Adds Application Sub Command Name Localization
+            </summary>
+            <param name="name">Localized name value</param>
+            <param name="lang">Oxide lang the value is in</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
@@ -588,6 +647,14 @@
             <param name="plugin">Plugin containing the localizations</param>
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddDescriptionLocalization(System.String,System.String)">
+            <summary>
+            Adds Application Sub Command Description Localizations
+            </summary>
+            <param name="description">Localized description value</param>
+            <param name="lang">Oxide lang the value is in</param>
+            <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.Build">
             <summary>
@@ -608,6 +675,7 @@
             <param name="name">Name of the Sub Command Group</param>
             <param name="description">Description of the Sub Command Group</param>
             <param name="parent">The parent builder for this builder</param>
+            <param name="defaultLanguage">Default language for the builder</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
             <summary>
@@ -637,6 +705,14 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddNameLocalization(System.String,System.String)">
+            <summary>
+            Adds Application Sub Command Group Name Localizations
+            </summary>
+            <param name="name">Localized name value</param>
+            <param name="lang">Oxide lang the value is in</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
@@ -644,6 +720,14 @@
             <param name="plugin">Plugin containing the localizations</param>
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddDescriptionLocalization(System.String,System.String)">
+            <summary>
+            Adds Application Command Description Localizations
+            </summary>
+            <param name="description">Localized description value</param>
+            <param name="lang">Oxide lang the value is in</param>
+            <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddSubCommand(System.String,System.String)">
             <summary>
@@ -663,6 +747,17 @@
             <summary>
             Builds a new DiscordEmbed
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.#ctor">
+            <summary>
+            Constructor for the builder creating a new embed
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.#ctor(Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
+            <summary>
+            Constructor for the builder using an existing embed
+            </summary>
+            <param name="embed"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddTitle(System.String)">
             <summary>
@@ -1139,6 +1234,22 @@
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
             <param name="options"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompletePlayerSearchOptions"/> Search Options</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddLoadablePlugins(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds a list of plugins that can be loaded
+            </summary>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddLoadedPlugins(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+            <summary>
+            Adds a list of plugins that are currently loaded
+            </summary>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupCreate"/>
@@ -1235,7 +1346,7 @@
             Creates a new MessageComponentBuilder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddActionButton(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle,System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddActionButton(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle,System.String,System.String,System.Boolean,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
             <summary>
             Adds an action button to the current action row
             </summary>
@@ -1243,6 +1354,7 @@
             <param name="label">The text of the button</param>
             <param name="customId">The unique id of the button. Used to identify which button was clicked</param>
             <param name="disabled">If this button is disabled</param>
+            <param name="addToNewRow">Should the button be added to a new row</param>
             <param name="emoji">Emoji to display with the button</param>
             <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
             <exception cref="T:System.Exception">
@@ -1258,21 +1370,23 @@
             <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
             <exception cref="T:System.Exception"> Throw if the button goes outside the max number of action rows</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddLinkButton(System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddLinkButton(System.String,System.String,System.Boolean,System.Boolean,Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji)">
             <summary>
             Adds a link button to the current action row
             </summary>
             <param name="label">Text on the button</param>
             <param name="url">URL for the button</param>
             <param name="disabled">if the button should be disabled</param>
+            <param name="addToNewRow">Show the button be added to a new row</param>
             <param name="emoji">Emoji to display on the button</param>
             <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
             <exception cref="T:System.Exception">Thrown if the button goes outside the max number of action rows</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddSelectMenu(System.String,System.String,System.Int32,System.Int32,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddSelectMenu(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType,System.String,System.String,System.Int32,System.Int32,System.Boolean)">
             <summary>
             Adds a select menu to a new action row
             </summary>
+            <param name="type">Select Menu Message Component Type</param>
             <param name="customId">Unique ID for the select menu</param>
             <param name="placeholder">Text to display if no value is selected yet</param>
             <param name="minValues">The min number of options you must select</param>
@@ -1315,6 +1429,13 @@
             <param name="default">Default selected option</param>
             <param name="emoji">Emoji to display with the option</param>
             <exception cref="T:System.Exception">Throw is more than 25 options are added</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.AddChannelType(Oxide.Ext.Discord.Entities.Channels.ChannelType)">
+            <summary>
+            Adds an allow channel type for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.ChannelSelect"/>
+            </summary>
+            <param name="type">Channel Type to add</param>
+            <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.Build">
             <summary>
@@ -1598,6 +1719,24 @@
         <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.LeavePool">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Cache.DiscordPluginCache">
+            <summary>
+            Represents a cache for Loaded and Loadable plugins
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.DiscordPluginCache.GetLoadedPlugins">
+            <summary>
+            Returns a list of plugins loaded by oxide
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.DiscordPluginCache.GetLoadablePlugins">
+            <summary>
+            Returns a list of plugins that can be loaded by oxide
+            Already loaded plugins are excluded from the list
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Cache.DiscordUserCache">
             <summary>
             <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> Cache 
@@ -1628,6 +1767,11 @@
             </summary>
             <typeparam name="T">Enum type</typeparam>
         </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.ToString(`0)">
             <summary>
             Returns the string representation of the enum
@@ -1641,6 +1785,13 @@
             </summary>
             <param name="value">Enum value</param>
             <returns>Enum value as lowered string</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.ToNumber(`0)">
+            <summary>
+            Converts the enum to it's number form as a string
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.GetList">
             <summary>
@@ -1707,6 +1858,12 @@
             <summary>
             Overridden in the child class to handle the callback
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback.GetExceptionMessage">
+            <summary>
+            Returns Exception message if an error occurs 
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback.Run">
             <summary>
@@ -1783,6 +1940,9 @@
             <param name="promise"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.HandleCallback">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.GetExceptionMessage">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Templates.Messages.ToEntityCallback`2.EnterPool">
@@ -3296,6 +3456,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Activities.DiscordActivity.GetSmallImageUrl">
             <summary>
             Returns the small image url for the presence asset
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode">
+            <summary>
+            Represents possible HTTP Codes sent from discord
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode.OK">
@@ -8156,6 +8321,7 @@
             Left members only include <see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/>s who have left the guild since the bot was connected
             </summary>
             <param name="userId">User ID of the guild member to get</param>
+            <param name="includeLeft">If we should include guild members who have left the guild</param>
             <returns><see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildMember"/> For the UserId </returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetEmoji(System.String)">
@@ -8165,6 +8331,13 @@
             <param name="name">Name of the emoji</param>
             <returns>Emoji if found; null otherwise</returns>
             <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetUserPermissions(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns the user permissions for the given user ID
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCreate,System.Action{Oxide.Ext.Discord.Entities.Guilds.DiscordGuild},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
@@ -10568,7 +10741,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.Type">
             <summary>
-            The type of command, defaults Slash Command if not set
+            The <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType"/> of the command
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.#ctor">
@@ -11518,7 +11691,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.SelectMenuValues">
             <summary>
-            If a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
+            If a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed.UserOxideLocale">
@@ -11606,6 +11779,16 @@
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetNumber(System.String,System.Double)">
             <summary>
             Returns the double value supplied to command option matching the name.
+            If the arg was optional and wasn't supplied default supplied value will be used.
+            </summary>
+            <param name="name">Name of the command option</param>
+            <param name="default">Default value to return if not supplied</param>
+            <returns>double for the matching command option name</returns>
+            <exception cref="T:System.Exception">Thrown if the option type is not a double</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataArgs.GetFloat(System.String,System.Single)">
+            <summary>
+            Returns the float value supplied to command option matching the name.
             If the arg was optional and wasn't supplied default supplied value will be used.
             </summary>
             <param name="name">Name of the command option</param>
@@ -11736,6 +11919,9 @@
             Sets the Type to ActionRow
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent.Validate">
+            <inheritdoc />
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseComponent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/message-components#component-object">Message Component</a> within discord
@@ -11746,6 +11932,9 @@
             Message component type
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseComponent.Validate">
+            <inheritdoc />
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseInteractableComponent">
             <summary>
             Represent a MessageComponent that can be interacted with
@@ -11753,9 +11942,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseInteractableComponent.CustomId">
             <summary>
-            A developer-defined identifier for the interactable component
+            Developer-defined identifier for the interactable component
             Max 100 characters
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.BaseInteractableComponent.Validate">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent">
             <summary>
@@ -11764,7 +11956,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent.Style">
             <summary>
-            Style for the component
+            Style for the button component
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent.Label">
@@ -11780,12 +11972,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent.Url">
             <summary>
-            A url for link-style buttons
+            URL for link-style buttons
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent.Disabled">
             <summary>
-            whether the button is disabled
+            Whether the button is disabled
             Default false
             </summary>
         </member>
@@ -11794,6 +11986,9 @@
             Constructor for button
             Sets type to button
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonComponent.Validate">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ButtonStyle">
             <summary>
@@ -11838,7 +12033,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Style">
             <summary>
-            The style of the input text
+            Style of the input text
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Label">
@@ -11848,33 +12043,38 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.MinLength">
             <summary>
-            The minimum length of the text input
+            Minimum length of the text input
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.MaxLength">
             <summary>
-            The maximum length of the text input
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Placeholder">
-            <summary>
-            The placeholder for the text input field
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Value">
-            <summary>
-            The pre-filled value for text input
+            Maximum length of the text input
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Required">
             <summary>
-            Is the Input Text Required to be filled out
+            Whether this component is required to be filled
+            defaults to true
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Value">
+            <summary>
+            Pre-filled value for text input
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Placeholder">
+            <summary>
+            Custom placeholder text if the input is empty
+            Max 100 characters
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.#ctor">
             <summary>
             Input Text Constructor
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextComponent.Validate">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles">
             <summary>
@@ -11883,12 +12083,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles.Short">
             <summary>
-            Intended for short single-line text
+            Single-line input
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.InputTextStyles.Paragraph">
             <summary>
-            Intended for much longer inputs
+            Multi-line input
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType">
@@ -11898,95 +12098,179 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.ActionRow">
             <summary>
-            A container for other components
+            Container for other components
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.Button">
             <summary>
-            A clickable button
+            Clickable button
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.SelectMenu">
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.StringSelect">
             <summary>
-            A select menu for picking from choices
+            Select menu for picking from defined text options
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.InputText">
             <summary>
-            A text box for inserting written responses
+            Text box for inserting written responses
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent">
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.UserSelect">
+            <summary>
+            Select menu for users
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.RoleSelect">
+            <summary>
+            Select menu for roles
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.MentionableSelect">
+            <summary>
+            Select menu for mentionables (users and roles)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.ChannelSelect">
+            <summary>
+            Select menu for channels
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.Options">
-            <summary>
-            The choices in the select
-            Max 25 options
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.Placeholder">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent.Placeholder">
             <summary>
             Custom placeholder text if nothing is selected
             Max 150 characters
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.MinValues">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent.MinValues">
             <summary>
             the minimum number of items that must be chosen;
             Default 1, Min 0, Max 25
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.MaxValues">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent.MaxValues">
             <summary>
             the maximum  number of items that must be chosen;
             Default 1, Min 0, Max 25
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.Disabled">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent.Disabled">
             <summary>
             Disable the select
             Default false
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent.#ctor">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent.#ctor(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType)">
             <summary>
             Select Menu Component Constructor
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent.Validate">
+            <inheritdoc />
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.ChannelSelectComponent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.ChannelSelectComponent.ChannelTypes">
+            <summary>
+            List of channel types to include in the channel select component
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.ChannelSelectComponent.#ctor">
+            <summary>
+            Select Menu Component Constructor
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.MentionableSelectComponent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.MentionableSelectComponent.#ctor">
+            <summary>
+            Select Menu Component Constructor
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.RoleSelectComponent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.RoleSelectComponent.#ctor">
+            <summary>
+            Select Menu Component Constructor
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-option-structure">Select Menu Option Structure</a> within discord.
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Label">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption.Label">
             <summary>
-            The user-facing name of the option,
+            User-facing name of the option,
             Max 100 characters
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Value">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption.Value">
             <summary>
-            The dev-define value of the option,
+            Dev-define value of the option,
             Max 100 characters
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Description">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption.Description">
             <summary>
-            An additional description of the option,
+            Additional description of the option,
             Max 100 characters
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Emoji">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption.Emoji">
             <summary>
             Emoji in the option
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption.Default">
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption.Default">
             <summary>
-            Will render this option as selected by default
+            Will show this option as selected by default
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption.Validate">
+            <inheritdoc />
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.StringSelectComponent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.StringSelectComponent.Options">
+            <summary>
+            The choices in the select
+            Max 25 options
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.StringSelectComponent.#ctor">
+            <summary>
+            Select Menu Component Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.StringSelectComponent.Validate">
+            <inheritdoc />
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.UserSelectComponent">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menus">Select Menus Component</a> within discord.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.UserSelectComponent.#ctor">
+            <summary>
+            Select Menu Component Constructor
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.Response.BaseInteractionMessage">
@@ -13876,6 +14160,36 @@
             Darker Gray Role Color
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Success">
+            <summary>
+            Discord Success Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Warning">
+            <summary>
+            Discord Warning Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Danger">
+            <summary>
+            Discord Danger Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.BlurpleOld">
+            <summary>
+            Discord Old Blurple Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Blurple">
+            <summary>
+            Discord Blurple Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Fuchsia">
+            <summary>
+            Discord Fuchsia Color
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Color">
             <summary>
             uint value of the hex color code
@@ -14020,6 +14334,9 @@
             Returns if this role is the booster
             </summary>
             <returns>True if booster role. False otherwise;</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Validate">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags">
             <summary>
@@ -16253,6 +16570,11 @@
             Represents an exception in guild prune requests
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Guild.InvalidGuildRoleException">
+            <summary>
+            Represents an exception for invalid guild roles
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Guild.InvalidGuildSearchMembersException">
             <summary>
             Represents an exception in guild member search requests
@@ -16331,6 +16653,11 @@
             Constructor
             </summary>
             <param name="message">Exception message</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents.InvalidSelectMenuComponentException">
+            <summary>
+            Represents an exception for select menu components
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.InvalidSnowflakeException">
             <summary>
@@ -16446,6 +16773,11 @@
             Exception for Discord Templates
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Promise.PromiseResolvedException">
+            <summary>
+            Represents an exception related to promises
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.TokenMismatchException">
             <summary>
             Represents a bot token mismatch
@@ -16532,6 +16864,42 @@
             <typeparam name="TKey"></typeparam>
             <typeparam name="TValue"></typeparam>
             <returns>Copied Hash</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.IEnumerableExt">
+            <summary>
+            Represents Extension to IEnumerable
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.IEnumerableExt.ToPooledList``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Converts an IEnumerable{TSource} to a pooled List
+            </summary>
+            <param name="source">IEnumerable to convert</param>
+            <typeparam name="TSource">Type of the list</typeparam>
+            <returns>Pooled List{TSource}</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if source is null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.IEnumerableExt.ToHash``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Func{``0,``2})">
+            <summary>
+            Converts an IEnumerable{TSource} to a Hash{TKey, TElement}
+            </summary>
+            <param name="source">IEnumerable to convert</param>
+            <typeparam name="TSource">Type of the source</typeparam>
+            <typeparam name="TKey">Key type for the hash</typeparam>
+            <typeparam name="TElement">Value type for the hash</typeparam>
+            <returns>Pooled Hash{TKey, TElement}</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if source is null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.IEnumerableExt.ToPooledHash``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Func{``0,``2})">
+            <summary>
+            Converts an IEnumerable{TSource} to a pooled Hash{TKey, TElement}
+            </summary>
+            <param name="source">IEnumerable to convert</param>
+            <typeparam name="TSource">Type of the source</typeparam>
+            <typeparam name="TKey">Key type for the hash</typeparam>
+            <typeparam name="TElement">Value type for the hash</typeparam>
+            <returns>Pooled Hash{TKey, TElement}</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if source is null</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.MathExt">
             <summary>
@@ -16678,7 +17046,7 @@
             Stream Extension Methods
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.StreamExt.CopyToPooled(System.IO.Stream,System.IO.Stream,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Extensions.StreamExt.CopyToPooled(System.IO.Stream,System.IO.Stream)">
             <summary>
             Copies one stream to another using a pooled byte[] buffer
             </summary>
@@ -17816,6 +18184,34 @@
             <param name="type"><see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType"/> of the command</param>
             <param name="customId">CustomId to match StartsWith for</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary">
+            <summary>
+            Represents the base class for Discord Libraries
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Called on the library when a plugin is loaded
+            </summary>
+            <param name="plugin">Plugin that was loaded</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Called on the library when a plugin is unloaded
+            </summary>
+            <param name="plugin">Plugin that was unloaded</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Command.BaseCommand">
             <summary>
             Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L76)
@@ -17939,6 +18335,9 @@
             <param name="args"></param>
             <param name="message"></param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <summary>
             Called when a plugin has been unloaded
@@ -18040,6 +18439,12 @@
             <returns>Localized message if found; Empty string otherwise</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Linking.DiscordLink">
             <summary>
             Represents a library for discord linking
@@ -18068,6 +18473,12 @@
             Removes a link plugin from the Discord Link library
             </summary>
             <param name="plugin"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(System.String)">
             <summary>
@@ -18910,6 +19321,12 @@
             <typeparam name="T">Type of the data key</typeparam>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData">
             <summary>
             Placeholder Data for placeholders
@@ -19091,6 +19508,12 @@
             Disable automatic pooling and handle manually by plugin
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Clone">
+            <summary>
+            Clones the current placeholder data into a new <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/>
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Dispose">
             <inheritdoc/>
         </member>
@@ -19260,6 +19683,12 @@
             <exception cref="T:System.ArgumentNullException">Exception if plugin is null</exception>
             <exception cref="T:System.ArgumentException">Exception if channel ID is not valid</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.RemovePluginSubscriptions(Oxide.Core.Plugins.Plugin)">
             <summary>
             Remove all subscriptions for a plugin
@@ -19311,11 +19740,17 @@
             Root Directory for the library
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary.TemplateType">
+            <summary>
+            The template type of this template library
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary.#ctor(System.String,Oxide.Ext.Discord.Libraries.Templates.TemplateType,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
             <param name="rootDir">Root Directory for the library</param>
+            <param name="type">The template type of this library</param>
             <param name="logger"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.BulkTemplateRegistration`1">
@@ -19370,7 +19805,8 @@
             <summary>
             Constructor
             </summary>
-            <param name="option"></param>
+            <param name="option">Option to create the localization for</param>
+            <param name="lang">The oxide lang for the localization</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ArgumentLocalization.ApplyArgumentLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,System.String)">
             <summary>
@@ -19394,11 +19830,18 @@
             Constructor
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ChoicesLocalization.#ctor(System.String)">
+            <summary>
+            Constructor for command option choice localization
+            </summary>
+            <param name="name">Localized choice name</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ChoicesLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,System.String)">
             <summary>
             Constructor
             </summary>
-            <param name="name"></param>
+            <param name="option">Option to localize</param>
+            <param name="lang">Oxide lang of the localization</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ChoicesLocalization.ApplyChoiceLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice,System.String)">
             <summary>
@@ -19448,13 +19891,15 @@
             <summary>
             Constructor
             </summary>
-            <param name="create"></param>
+            <param name="create">Command to be created</param>
+            <param name="lang">Oxide lang of the localization</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,System.String)">
             <summary>
             Constructor
             </summary>
             <param name="opt"></param>
+            <param name="lang"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.ApplyCommandLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.String)">
             <summary>
@@ -19526,6 +19971,41 @@
             <param name="plugin">Plugin the localizations are for</param>
             <param name="create">The command to apply the localizations to</param>
             <param name="fileNameSuffix">fileName suffix used when registering</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalizations.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalizations.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplate`1">
+            <summary>
+            Represents the base class for Message Templates
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplate`1.#ctor(Oxide.Ext.Discord.Libraries.Templates.TemplateType,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="type"></param>
+            <param name="internalVersion"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplate`1.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,`0)">
+            <summary>
+            Converts the template to the given entity
+            </summary>
+            <param name="data">(Optional) Placeholder Data to apply</param>
+            <param name="entity">(Optional) Entity to apply to</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplate`1.ToEntityAsync(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,`0)">
+            <summary>
+            Converts the template to the given entity asynchronously 
+            </summary>
+            <param name="data">(Optional) Placeholder Data to apply</param>
+            <param name="entity">(Optional) Entity to apply to</param>
             <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplatesLibrary`2">
@@ -19767,45 +20247,45 @@
             <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate">
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus.SelectMenuOptionTemplate">
             <summary>
             Template for Select Menu Options
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate.Label">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus.SelectMenuOptionTemplate.Label">
             <summary>
             The user-facing name of the option,
             Max 100 characters
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate.Value">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus.SelectMenuOptionTemplate.Value">
             <summary>
             The dev-define value of the option,
             Max 100 characters
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate.Description">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus.SelectMenuOptionTemplate.Description">
             <summary>
             An additional description of the option,
             Max 100 characters
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate.Emoji">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus.SelectMenuOptionTemplate.Emoji">
             <summary>
             Emoji in the option
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate.Default">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus.SelectMenuOptionTemplate.Default">
             <summary>
             Will render this option as selected by default
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate.#ctor">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus.SelectMenuOptionTemplate.#ctor">
             <summary>
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate.#ctor(System.String,System.String,System.String,System.String,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus.SelectMenuOptionTemplate.#ctor(System.String,System.String,System.String,System.String,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -19815,21 +20295,27 @@
             <param name="emoji"></param>
             <param name="default"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate.ToOption(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus.SelectMenuOptionTemplate.ToOption(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
-            Converts the template to <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption"/>
+            Converts the template to <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption"/>
             </summary>
             <param name="data"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> to use</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuOption"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption"/></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate">
             <summary>
-            Template for Select Menu Component
+            Represents a template for select menus
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.CustomId">
             <summary>
             Command for the Select Menu
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.Placeholder">
+            <summary>
+            Custom placeholder text if nothing is selected
+            Max 150 characters
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.Options">
@@ -19838,10 +20324,10 @@
             Max 25 options
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.Placeholder">
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.ChannelTypes">
             <summary>
-            Custom placeholder text if nothing is selected
-            Max 150 characters
+            <see cref="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.ChannelSelect"/> <see cref="T:Oxide.Ext.Discord.Entities.Channels.ChannelType"/> to show
+            Max 25 options
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.MinValues">
@@ -19861,26 +20347,14 @@
             If the Button is enabled
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.#ctor">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.#ctor(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType)">
             <summary>
             Constructor
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.#ctor(System.String,System.Collections.Generic.List{Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuOptionTemplate},System.String,System.Int32,System.Int32)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="customId"></param>
-            <param name="options"></param>
-            <param name="placeholder"></param>
-            <param name="minValues"></param>
-            <param name="maxValues"></param>
+            <param name="type"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenuTemplate.ToComponent(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
-            <summary>
-            Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenuComponent"/>
-            </summary>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordEmbedFieldTemplates">
             <summary>
@@ -20516,6 +20990,29 @@
         <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.IsLogging(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
             <inheritdoc/>
         </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.IsConsoleLogging(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.IsFileLogging(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.Shutdown">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Logging.DiscordLoggerFactory">
+            <summary>
+            Factory for creating DiscordLoggers
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLoggerFactory.GetLogger(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Logging.DiscordLogLevel,Oxide.Ext.Discord.Logging.IDiscordLoggingConfig)">
+            <summary>
+            Returns a newly created <see cref="T:Oxide.Ext.Discord.Logging.DiscordLogger"/> for a given plugin
+            </summary>
+            <param name="plugin">Plugin the logger is for</param>
+            <param name="logLevel">The current LogLevel for the logger</param>
+            <param name="config">The config for the logger</param>
+            <returns><see cref="T:Oxide.Ext.Discord.Logging.DiscordLogger"/></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Logging.DiscordLogLevel">
             <summary>
             Represents the log level for a logger
@@ -20595,6 +21092,11 @@
             <param name="level">Log Level for the message</param>
             <param name="message">Message to log</param>
             <param name="exception">Exception for the log</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Shutdown">
+            <summary>
+            Shuts down the logger
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Network.DiscordStreamContent">
             <summary>
@@ -21508,6 +22010,23 @@
             <summary>
             Shutdown the REST handler
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Singleton.Singleton`1">
+            <summary>
+            Represents a singleton of type {T}
+            </summary>
+            <typeparam name="T">Type of the singleton</typeparam>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Singleton.Singleton`1.Instance">
+            <summary>
+            Retrieves the instance of the singleton
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Singleton.Singleton`1.#ctor">
+            <summary>
+            Constructor
+            </summary>
+            <exception cref="T:System.Exception"></exception>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.DiscordWebSocket">
             <summary>

@@ -1,5 +1,8 @@
 ﻿namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 {
+    /// <summary>
+    /// Represents an exception for invalid guild roles
+    /// </summary>
     public class InvalidGuildRoleException : BaseDiscordException
     {
         private InvalidGuildRoleException(string message) : base(message) { }

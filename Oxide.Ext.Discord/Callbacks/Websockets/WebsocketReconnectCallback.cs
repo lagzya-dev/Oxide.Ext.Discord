@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.WebSockets.Handlers;
 
 namespace Oxide.Ext.Discord.Callbacks.Websockets
 {
-    public class WebsocketReconnectCallback : BaseAsyncCallback
+    internal class WebsocketReconnectCallback : BaseAsyncCallback
     {
         private WebSocketReconnectHandler _reconnect;
 
@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Callbacks.Websockets
             return _reconnect.StartReconnect();
         }
 
-        protected override string ExceptionData()
+        protected override string GetExceptionMessage()
         {
             return $"Websocket: {_reconnect._webSocket.Handler.WebsocketId}";
         }

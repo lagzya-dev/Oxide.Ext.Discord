@@ -258,8 +258,10 @@ namespace Oxide.Ext.Discord.Libraries.Langs
             return langCache;
         }
 
+        ///<inheritdoc/>
         protected override void OnPluginLoaded(Plugin plugin) { }
 
+        ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             _pluginLangCache.RemoveAll(p => plugin.Name == p.PluginName);

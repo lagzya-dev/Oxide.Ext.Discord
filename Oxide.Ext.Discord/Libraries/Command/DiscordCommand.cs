@@ -317,7 +317,8 @@ namespace Oxide.Ext.Discord.Libraries.Command
             }
         }
         
-                protected override void OnPluginLoaded(Plugin plugin)
+        ///<inheritdoc/>
+        protected override void OnPluginLoaded(Plugin plugin)
         {
             foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
             {
