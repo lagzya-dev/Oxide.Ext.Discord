@@ -56,40 +56,19 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// Converts the <see cref="DiscordMessageTemplate"/> to a {T} message
         /// {T} supports all message types
         /// </summary>
-        /// <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
-        /// <returns><see cref="DiscordMessageTemplate"/> converted to type {T} message</returns>
-        public T ToMessage<T>(T message = null) where T : class, IDiscordMessageTemplate, new()
-        {
-            return ToMessage(null, message);
-        }
-        
-        /// <summary>
-        /// Converts the <see cref="DiscordMessageTemplate"/> to a {T} message
-        /// {T} supports all message types
-        /// </summary>
         /// <param name="data">Placeholder Data for the template</param>
         /// <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
         /// <returns><see cref="DiscordMessageTemplate"/> converted to type {T} message</returns>
-        public T ToMessage<T>(PlaceholderData data, T message = null) where T : class, IDiscordMessageTemplate, new()
+        public T ToMessage<T>(PlaceholderData data = null, T message = null) where T : class, IDiscordMessageTemplate, new()
         {
             if (message == null)
             {
                 message = new T();
             }
 
-            return (T)ToEntity(data, message);
+            return ToEntity(data, message);
         }
 
-        public IDiscordPromise<T> ToMessageAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordMessageTemplate, new()
-        {
-            return ToEntityInternalAsync(data, message).Then(r => (T)r);
-        }
-        
-        internal IDiscordPromise<T> ToMessageInternalAsync<T>(PlaceholderData data, T message = null) where T : class, IDiscordMessageTemplate, new()
-        {
-            return ToEntityInternalAsync(data, message).Then(r => (T)r);
-        }
-        
         public override IDiscordMessageTemplate ToEntity(PlaceholderData data, IDiscordMessageTemplate message)
         {
             if (!string.IsNullOrEmpty(Content))
@@ -99,7 +78,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             if (Embeds != null && Embeds.Count != 0)
             {
-                message.Embeds = CreateEmbed(data);
+                message.Embeds = CreateEmbeds(data);
             }
 
             if (Components != null && Components.Count != 0)
@@ -110,7 +89,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return message;
         }
 
-        private List<DiscordEmbed> CreateEmbed(PlaceholderData data)
+        private List<DiscordEmbed> CreateEmbeds(PlaceholderData data)
         {
             List<DiscordEmbed> embeds = new List<DiscordEmbed>();
 

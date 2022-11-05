@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     /// <summary>
     /// Oxide Library for Discord Templates
     /// </summary>
-    public abstract class BaseTemplateLibrary : BaseDiscordLibrary
+    public abstract class BaseTemplateLibrary<TTemplate> : BaseDiscordLibrary where TTemplate : BaseTemplate
     {
         /// <summary>
         /// Logger for the <see cref="BaseTemplateLibrary"/>
@@ -62,7 +62,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
         
-        internal void HandleRegisterTemplate<T>(TemplateId id, T template, TemplateVersion minVersion, IDiscordPromise promise) where T : BaseTemplate
+        internal void HandleRegisterTemplate(TemplateId id, TTemplate template, TemplateVersion minVersion, IDiscordPromise promise)
         {
             if (template.Version < minVersion)
             {
@@ -78,33 +78,39 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             string path = GetTemplatePath(id);
             if (File.Exists(path))
             {
-                T existingTemplate = LoadTemplate<T>(id);
+                TTemplate existingTemplate = LoadTemplate(id);
                 if (existingTemplate != null && existingTemplate.Version < minVersion)
                 {
-                    BackupTemplateFiles<T>(id, minVersion);
+                    BackupTemplateFiles(id, minVersion);
                     CreateFile(path, template);
+                    OnTemplateRegistered(id, template);
+                }
+                else
+                {
+                    OnTemplateRegistered(id, existingTemplate);
                 }
             }
             else
             {
                 CreateFile(path, template);
+                OnTemplateRegistered(id, template);
             }
             
             promise.Resolve();
         }
         
-        internal void HandleBulkRegisterTemplate<T>(TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateVersion minVersion, IDiscordPromise promise) where T : BaseTemplate
+        internal void HandleBulkRegisterTemplate(TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IDiscordPromise promise)
         {
-            foreach (BulkTemplateRegistration<T> registration in templates)
+            foreach (BulkTemplateRegistration<TTemplate> registration in templates)
             {
-                T template = registration.Template;
+                TTemplate template = registration.Template;
                 HandleRegisterTemplate(id.WithLanguage(registration.Language), template, minVersion, null);
             }
             
             promise.Resolve();
         }
 
-        internal T LoadTemplate<T>(TemplateId id) where T : BaseTemplate
+        internal TTemplate LoadTemplate(TemplateId id)
         {
             string path = GetTemplatePath(id);
             if (!File.Exists(path))
@@ -115,7 +121,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             try
             {
                 string json = File.ReadAllText(path);
-                return JsonConvert.DeserializeObject<T>(json, Settings);
+                return JsonConvert.DeserializeObject<TTemplate>(json, Settings);
             }
             catch (Exception ex)
             {
@@ -124,12 +130,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
 
-        internal T LoadTemplate<T>(TemplateId id, string language) where T : BaseTemplate
+        internal TTemplate LoadTemplate(TemplateId id, string language)
         {
-            return LoadTemplate<T>(id.WithLanguage(language));
+            return LoadTemplate(id.WithLanguage(language));
         }
 
-        private void CreateFile<T>(string path, T template) where T : BaseTemplate
+        private void CreateFile(string path, TTemplate template)
         {
             string dir = Path.GetDirectoryName(path);
             if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
@@ -141,11 +147,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             File.WriteAllText(path, json);
         }
 
-        private void BackupTemplateFiles<T>(TemplateId id, TemplateVersion minVersion) where T : BaseTemplate
+        private void BackupTemplateFiles(TemplateId id, TemplateVersion minVersion)
         {
             if (id.IsGlobal)
             {
-                BackupTemplate<T>(minVersion, id);
+                BackupTemplate(minVersion, id);
                 return;
             }
 
@@ -159,11 +165,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             {
                 string lang = Path.GetFileName(dir);
                 Logger.Debug("Processing Directory: {0} Lang: {1}", dir, lang);
-                BackupTemplate<T>(minVersion, id.WithLanguage(lang));
+                BackupTemplate(minVersion, id.WithLanguage(lang));
             }
         }
         
-        private void BackupTemplate<T>(TemplateVersion minVersion, TemplateId langId) where T : BaseTemplate
+        private void BackupTemplate(TemplateVersion minVersion, TemplateId langId)
         {
             string oldPath = GetTemplatePath(langId);
             if (!File.Exists(oldPath))
@@ -171,7 +177,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 return;
             }
 
-            T template = LoadTemplate<T>(langId);
+            TTemplate template = LoadTemplate(langId);
             if (template == null)
             {
                 return;
@@ -220,6 +226,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             return Path.Combine(Path.GetDirectoryName(path), $"{Path.GetFileNameWithoutExtension(path)}.{version}.json");
         }
 
+        internal virtual void OnTemplateRegistered(TemplateId id, TTemplate template) { }
+        
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             _pluginTemplatePath.Remove(plugin.Id());

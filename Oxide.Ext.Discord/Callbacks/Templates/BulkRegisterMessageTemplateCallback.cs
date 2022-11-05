@@ -6,22 +6,22 @@ using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates
 {
-    internal class BulkRegisterTemplateCallback<T> : BaseAsyncCallback where T : BaseTemplate
+    internal class BulkRegisterTemplateCallback<TTemplate> : BaseAsyncCallback where TTemplate : BaseTemplate
     {
-        private BaseTemplateLibrary _library;
+        private BaseTemplateLibrary<TTemplate> _library;
         private TemplateId _id;
-        private List<BulkTemplateRegistration<T>> _templates;
+        private List<BulkTemplateRegistration<TTemplate>> _templates;
         private TemplateVersion _minVersion;
         private IDiscordPromise _promise;
         
-        public static void Start(BaseTemplateLibrary library, TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateVersion minVersion, IDiscordPromise promise)
+        public static void Start(BaseTemplateLibrary<TTemplate> library, TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IDiscordPromise promise)
         {
-            BulkRegisterTemplateCallback<T> register = DiscordPool.Get<BulkRegisterTemplateCallback<T>>();
+            BulkRegisterTemplateCallback<TTemplate> register = DiscordPool.Get<BulkRegisterTemplateCallback<TTemplate>>();
             register.Init(library, id, templates, minVersion, promise);
             register.Run();
         }
         
-        private void Init(BaseTemplateLibrary library, TemplateId id, List<BulkTemplateRegistration<T>> templates, TemplateVersion minVersion, IDiscordPromise promise)
+        private void Init(BaseTemplateLibrary<TTemplate> library, TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IDiscordPromise promise)
         {
             _library = library;
             _id = id;

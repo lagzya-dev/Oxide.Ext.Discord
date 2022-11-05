@@ -324,13 +324,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    CreateInteractionResponse(client, type, response, callback, error);
-                });
-            });
+            InteractionCallbackData template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, this, placeholders, message);
+            CreateInteractionResponse(client, type, template, callback, error);
         }
         
         /// <summary>
@@ -349,13 +344,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordModalTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).Then(template =>
-            {
-                template.ToEntityAsync(placeholders, message).Then(response =>
-                {
-                    CreateInteractionResponse(client, response, callback, error);
-                });
-            });
+            InteractionModalMessage template = DiscordExtension.DiscordModalTemplates.GetLocalizedEntity(plugin, templateName, this, placeholders, message);
+            CreateInteractionResponse(client, template, callback, error);
         }
 
         /// <summary>
@@ -473,13 +463,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, this).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    EditOriginalInteractionResponse(client, response, callback, error);
-                });
-            });
+            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, this, placeholders, message);
+            EditOriginalInteractionResponse(client, template, callback, error);
         }
 
         /// <summary>

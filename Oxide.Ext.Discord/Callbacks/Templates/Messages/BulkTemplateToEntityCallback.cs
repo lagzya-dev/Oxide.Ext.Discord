@@ -9,42 +9,45 @@ using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
-    internal class BulkTemplateToEntityCallback<TTemplate, TEntity> : BaseAsyncCallback 
+    internal class BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget> : BaseAsyncCallback 
         where TTemplate : BaseMessageTemplate<TEntity>, new()
         where TEntity : class
+        where TTarget : class, TEntity
     {
         private BaseMessageTemplateLibrary<TTemplate, TEntity> _templates;
         private TemplateId _id;
         private DiscordInteraction _interaction;
         private BulkTemplateRequest _request;
-        private IDiscordPromise<List<TEntity>> _promise;
+        private List<TTarget> _entities;
+        private IDiscordPromise<List<TTarget>> _promise;
 
-        public static void Start(BaseMessageTemplateLibrary<TTemplate, TEntity> templates, TemplateId id, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> promise)
+        public static void Start(BaseMessageTemplateLibrary<TTemplate, TEntity> templates, TemplateId id, BulkTemplateRequest request, List<TTarget> entities, IDiscordPromise<List<TTarget>> promise)
         {
-            BulkTemplateToEntityCallback<TTemplate, TEntity> load = DiscordPool.Get<BulkTemplateToEntityCallback<TTemplate, TEntity>>();
-            load.Init(templates, id, null, request, promise);
+            BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget> load = DiscordPool.Get<BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget>>();
+            load.Init(templates, id, null, request, entities, promise);
             load.Run();
         }
         
-        public static void Start(BaseMessageTemplateLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> promise)
+        public static void Start(BaseMessageTemplateLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, BulkTemplateRequest request, List<TTarget> entities, IDiscordPromise<List<TTarget>> promise)
         {
-            BulkTemplateToEntityCallback<TTemplate, TEntity> load = DiscordPool.Get<BulkTemplateToEntityCallback<TTemplate, TEntity>>();
-            load.Init(templates, id, interaction, request, promise);
+            BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget> load = DiscordPool.Get<BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget>>();
+            load.Init(templates, id, interaction, request, entities, promise);
             load.Run();
         }
         
-        private void Init(BaseMessageTemplateLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> promise)
+        private void Init(BaseMessageTemplateLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, BulkTemplateRequest request, List<TTarget> entities, IDiscordPromise<List<TTarget>> promise)
         {
             _templates = templates;
             _id = id;
             _interaction = interaction;
             _request = request;
+            _entities = entities;
             _promise = promise;
         }
         
         protected override Task HandleCallback()
         {
-            _templates.HandleGetLocalizedBulkEntityAsync(_id, _request, _interaction, _promise);
+            _templates.HandleGetLocalizedBulkEntity(_id, _request, _interaction, _entities, _promise);
             return Task.CompletedTask;
         }
         

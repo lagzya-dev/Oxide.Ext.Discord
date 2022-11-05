@@ -524,13 +524,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateInternalAsync(plugin, templateName).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    CreateMessage(client, response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, message);
+            CreateMessage(client, template, callback, error);
         }
 
         /// <summary>
@@ -546,13 +541,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public void CreateTemplateMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, language).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    CreateMessage(client, response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, message);
+            CreateMessage(client, template, callback, error);
         }
 
         /// <summary>

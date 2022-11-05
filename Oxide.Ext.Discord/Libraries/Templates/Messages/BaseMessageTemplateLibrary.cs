@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
@@ -19,11 +20,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// <summary>
     /// Library for Discord Message templates
     /// </summary>
-    public abstract class BaseMessageTemplateLibrary<TTemplate, TEntity> : BaseTemplateLibrary 
+    public abstract class BaseMessageTemplateLibrary<TTemplate, TEntity> : BaseTemplateLibrary<TTemplate>
         where TTemplate : BaseMessageTemplate<TEntity>, new()
         where TEntity : class
     {
-        private readonly Hash<TemplateId, TTemplate> _templateCache = new Hash<TemplateId, TTemplate>();
+        private readonly ConcurrentDictionary<TemplateId, TTemplate> _templateCache = new ConcurrentDictionary<TemplateId, TTemplate>();
 
         internal BaseMessageTemplateLibrary(TemplateType type, ILogger logger) : base(type, logger) { }
         
@@ -44,7 +45,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             IDiscordPromise promise = DiscordPromise.Create();
             
-            TemplateId id = new TemplateId(plugin, templateName, null);
+            TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
             RegisterTemplateCallback<TTemplate>.Start(this, id, template, minVersion, promise);
             return promise;
         }
@@ -70,7 +71,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             
             IDiscordPromise promise = DiscordPromise.Create();
 
-            TemplateId id = new TemplateId(plugin, templateName, language);
+            TemplateId id = TemplateId.CreateLocalized(plugin, templateName, language);
             RegisterTemplateCallback<TTemplate>.Start(this, id, template, minVersion, promise);
             return promise;
         }
@@ -82,57 +83,28 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <param name="templateName">Name of the template</param>
         /// <returns><see cref="DiscordMessageTemplate"/></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public IDiscordPromise<TTemplate> GetGlobalTemplateAsync(Plugin plugin, string templateName) => GetGlobalTemplateInternalAsync(plugin, templateName, DiscordPromise<TTemplate>.Create());
+        public TTemplate GetGlobalTemplate(Plugin plugin, string templateName) => HandleGetLocalizedTemplate(TemplateId.CreateGlobal(plugin, templateName), null);
 
-        internal IDiscordPromise<TTemplate> GetGlobalTemplateInternalAsync(Plugin plugin, string templateName, IDiscordPromise<TTemplate> promise = null)
-        {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
-            
-            if (promise == null)
-            {
-                promise = DiscordPromise<TTemplate>.Create(true);
-            }
+        public T GetGlobalEntity<T>(Plugin plugin, string templateName, PlaceholderData data = null, T entity = null) where T : class, TEntity => GetGlobalTemplate(plugin, templateName).ToEntity<T>(data, entity);
 
-            TemplateId id = new TemplateId(plugin, templateName, null);
-            LoadMessageTemplateCallback<TTemplate, TEntity>.Start(this, id, promise);
-            return promise;
-        }
+        public TEntity GetGlobalEntity(Plugin plugin, string templateName, PlaceholderData data = null, TEntity entity = null) => GetGlobalTemplate(plugin, templateName).ToEntity(data, entity);
 
-        public IDiscordPromise<T> GetGlobalEntityAsync<T>(Plugin plugin, string templateName, PlaceholderData data = null, T entity = null) where T : class, TEntity 
-            => GetGlobalEntityInternalAsync(plugin, templateName, data, entity, DiscordPromise<TEntity>.Create()).Then(r => (T)r);
+        public IDiscordPromise<List<T>> GetGlobalBulkEntityAsync<T>(Plugin plugin, BulkTemplateRequest request, List<T> entities = null) where T : class, TEntity => GetGlobalBulkEntityInternalAsync(plugin, request, entities, DiscordPromise<List<T>>.Create());
 
-        public IDiscordPromise<TEntity> GetGlobalEntityAsync(Plugin plugin, string templateName, PlaceholderData data = null, TEntity entity = null) => GetGlobalEntityInternalAsync(plugin, templateName, data, entity, DiscordPromise<TEntity>.Create());
+        public IDiscordPromise<List<TEntity>> GetGlobalBulkEntityAsync(Plugin plugin, BulkTemplateRequest request, List<TEntity> entities = null) => GetGlobalBulkEntityInternalAsync(plugin, request, entities, DiscordPromise<List<TEntity>>.Create());
 
-        internal IDiscordPromise<TEntity> GetGlobalEntityInternalAsync(Plugin plugin, string templateName, PlaceholderData data = null, TEntity entity = null, IDiscordPromise<TEntity> promise = null)
+        internal IDiscordPromise<List<T>> GetGlobalBulkEntityInternalAsync<T>(Plugin plugin, BulkTemplateRequest request, List<T> entities = null, IDiscordPromise<List<T>> promise = null) where T : class, TEntity
         {
             if (promise == null)
             {
-                promise = DiscordPromise<TEntity>.Create(true);
-            }
-            
-            IDiscordPromise<TTemplate> load = GetGlobalTemplateInternalAsync(plugin, templateName);
-            load.Then(template => template.ToEntityInternalAsync(data, entity, promise));
-            return promise;
-        }
-        
-        public IDiscordPromise<List<T>> GetGlobalBulkEntityAsync<T>(Plugin plugin, BulkTemplateRequest request) where T : class, TEntity 
-            => GetGlobalBulkEntityInternalAsync(plugin, request, DiscordPromise<List<TEntity>>.Create()).Then(r => r.ConvertAll(ConverterExt.Convert<T, TEntity>));
-
-        public IDiscordPromise<List<TEntity>> GetGlobalBulkEntityAsync(Plugin plugin, BulkTemplateRequest request) => GetGlobalBulkEntityInternalAsync(plugin, request, DiscordPromise<List<TEntity>>.Create());
-
-        internal IDiscordPromise<List<TEntity>> GetGlobalBulkEntityInternalAsync(Plugin plugin, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> promise = null)
-        {
-            if (promise == null)
-            {
-                promise = DiscordPromise<List<TEntity>>.Create(true);
+                promise = DiscordPromise<List<T>>.Create(true);
             }
 
-            TemplateId id = new TemplateId(plugin, string.Empty, null);
-            BulkTemplateToEntityCallback<TTemplate, TEntity>.Start(this, id, request, promise);
+            TemplateId id = TemplateId.CreateGlobalBulk(plugin);
+            BulkTemplateToEntityCallback<TTemplate, TEntity, T>.Start(this, id, request, entities, promise);
             return promise;
         }
-        
+
         /// <summary>
         /// Returns a message template for a given <see cref="IPlayer"/> player
         /// </summary>
@@ -141,24 +113,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <param name="player">IPlayer for the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public IDiscordPromise<TTemplate> GetTemplateForPlayerAsync(Plugin plugin, string templateName, IPlayer player) => GetTemplateForPlayerAsync(plugin, templateName, player?.Id);
-        public IDiscordPromise<TEntity> GetEntityForPlayerAsync(Plugin plugin, string templateName, IPlayer player, PlaceholderData data = null, TEntity entity = null) => GetEntityForPlayerAsync(plugin, templateName, player?.Id, data, entity);
-        public IDiscordPromise<List<TEntity>> GetBulkEntityForPlayerAsync(Plugin plugin, BulkTemplateRequest request, IPlayer player) => GetBulkEntityForPlayerAsync(plugin, request, player?.Id);
-
-        /// <summary>
-        /// Returns a message template for a given <see cref="IPlayer"/> player ID
-        /// </summary>
-        /// <param name="plugin">Plugin the template is for</param>
-        /// <param name="templateName">Name of the template</param>
-        /// <param name="playerId">PlayerId for the template</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public IDiscordPromise<TTemplate> GetTemplateForPlayerAsync(Plugin plugin, string templateName, string playerId) => GetLocalizedTemplateAsync(plugin, templateName, DiscordExtension.DiscordLang.GetPlayerLanguage(playerId));
-
-        public IDiscordPromise<TEntity> GetEntityForPlayerAsync(Plugin plugin, string templateName, string playerId, PlaceholderData data = null, TEntity entity = null) 
-            => GetLocalizedEntityAsync(plugin, templateName, DiscordExtension.DiscordLang.GetPlayerLanguage(playerId), data, entity);
-
-        public IDiscordPromise<List<TEntity>> GetBulkEntityForPlayerAsync(Plugin plugin, BulkTemplateRequest request, string playerId) => GetLocalizedBulkEntityAsync(plugin, request, DiscordExtension.DiscordLang.GetPlayerLanguage(playerId));
+        public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, IPlayer player) => GetPlayerTemplate(plugin, templateName, player?.Id);
+        public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, string playerId) => HandleGetLocalizedTemplate(TemplateId.CreatePlayer(plugin, templateName, playerId), null);
+        
+        public T GetPlayerEntity<T>(Plugin plugin, string templateName, string playerId, PlaceholderData data = null, T entity = null) where T : class, TEntity => GetPlayerTemplate(plugin, templateName, playerId).ToEntity(data, entity);
+        public TEntity GetPlayerEntity(Plugin plugin, string templateName, string playerId, PlaceholderData data = null, TEntity entity = null) => GetPlayerTemplate(plugin, templateName, playerId).ToEntity(data, entity);
+        public IDiscordPromise<List<T>> GetBulkEntityForPlayerAsync<T>(Plugin plugin, BulkTemplateRequest request, string playerId, List<T> entities = null) where T : class, TEntity 
+            => GetLocalizedBulkEntityAsync<T>(plugin, request, entities, DiscordExtension.DiscordLang.GetPlayerLanguage(playerId));
+        public IDiscordPromise<List<TEntity>> GetBulkEntityForPlayerAsync(Plugin plugin, BulkTemplateRequest request, string playerId, List<TEntity> entities = null) 
+            => GetLocalizedBulkEntityAsync(plugin, request, entities, DiscordExtension.DiscordLang.GetPlayerLanguage(playerId));
+        
         /// <summary>
         /// Returns a message template for a given language
         /// </summary>
@@ -167,59 +131,29 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <param name="language">Oxide language of the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public IDiscordPromise<TTemplate> GetLocalizedTemplateAsync(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage) => GetLocalizedTemplateInternalAsync(plugin, templateName, language, DiscordPromise<TTemplate>.Create());
+        public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage) => HandleGetLocalizedTemplate(TemplateId.CreateLocalized(plugin, templateName, language), null);
 
-        internal IDiscordPromise<TTemplate> GetLocalizedTemplateInternalAsync(Plugin plugin, string templateName, string language, IDiscordPromise<TTemplate> callback = null)
-        {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
-            if (string.IsNullOrEmpty(language)) throw new ArgumentNullException(nameof(language));
+        public T GetLocalizedEntity<T>(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData data = null, T entity = null) where T : class, TEntity 
+            => GetLocalizedTemplate(plugin, templateName, language).ToEntity<T>(data, entity);
 
-            if (callback == null)
-            {
-                callback = DiscordPromise<TTemplate>.Create(true);
-            }
-            
-            TemplateId id = new TemplateId(plugin, templateName, language);
-            LoadMessageTemplateCallback<TTemplate, TEntity>.Start(this, id, callback);
-            return callback;
-        }
+        public TEntity GetLocalizedEntity(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData data = null, TEntity entity = null) 
+            => GetLocalizedTemplate(plugin, templateName, language).ToEntity(data, entity);
 
-        public IDiscordPromise<T> GetLocalizedEntityAsync<T>(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData data = null, T entity = null) where T : class, TEntity 
-            => GetLocalizedEntityInternalAsync(plugin, templateName, language, data, entity).Then(result => (T)result);
+        public IDiscordPromise<List<T>> GetLocalizedBulkEntityAsync<T>(Plugin plugin, BulkTemplateRequest request, List<T> entities = null, string language = DiscordLang.DefaultOxideLanguage) where T : class, TEntity 
+            => GetLocalizedBulkEntityInternalAsync(plugin, request, entities, language, DiscordPromise<List<T>>.Create());
 
-        public IDiscordPromise<TEntity> GetLocalizedEntityAsync(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData data = null, TEntity entity = null) 
-            => GetLocalizedEntityInternalAsync(plugin, templateName, language, data, entity, DiscordPromise<TEntity>.Create());
+        public IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityAsync(Plugin plugin, BulkTemplateRequest request, List<TEntity> entities = null, string language = DiscordLang.DefaultOxideLanguage) 
+            => GetLocalizedBulkEntityInternalAsync(plugin, request, entities, language, DiscordPromise<List<TEntity>>.Create());
 
-        internal IDiscordPromise<TEntity> GetLocalizedEntityInternalAsync(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData data = null, TEntity entity = null, IDiscordPromise<TEntity> callback = null)
+        internal IDiscordPromise<List<T>> GetLocalizedBulkEntityInternalAsync<T>(Plugin plugin, BulkTemplateRequest request, List<T> entities = null, string language = DiscordLang.DefaultOxideLanguage, IDiscordPromise<List<T>> callback = null) where T : class, TEntity
         {
             if (callback == null)
             {
-                callback = DiscordPromise<TEntity>.Create(true);
+                callback = DiscordPromise<List<T>>.Create(true);
             }
-            
-            IDiscordPromise<TTemplate> load = GetLocalizedTemplateInternalAsync(plugin, templateName, language);
-            load.Then(template => template.ToEntityInternalAsync(data, entity, callback));
-            return callback;
-        }
         
-        public IDiscordPromise<List<T>> GetLocalizedBulkEntityAsync<T>(Plugin plugin, BulkTemplateRequest request, string language = DiscordLang.DefaultOxideLanguage) where T : class, TEntity
-        {
-            return GetLocalizedBulkEntityInternalAsync(plugin, request, language, DiscordPromise<List<TEntity>>.Create()).Then(r => r.ConvertAll(ConverterExt.Convert<T, TEntity>));
-        }
-
-        public IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityAsync(Plugin plugin, BulkTemplateRequest request, string language = DiscordLang.DefaultOxideLanguage) 
-            => GetLocalizedBulkEntityInternalAsync(plugin, request, language, DiscordPromise<List<TEntity>>.Create());
-
-        internal IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityInternalAsync(Plugin plugin, BulkTemplateRequest request, string language = DiscordLang.DefaultOxideLanguage, IDiscordPromise<List<TEntity>> callback = null)
-        {
-            if (callback == null)
-            {
-                callback = DiscordPromise<List<TEntity>>.Create(true);
-            }
-
-            TemplateId id = new TemplateId(plugin, string.Empty, language);
-            BulkTemplateToEntityCallback<TTemplate, TEntity>.Start(this, id, request, callback);
+            TemplateId id = TemplateId.CreateLocalizedBulk(plugin, language);
+            BulkTemplateToEntityCallback<TTemplate, TEntity, T>.Start(this, id, request, entities, callback);
             return callback;
         }
         
@@ -231,91 +165,60 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <param name="interaction">Interaction to get the template for</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public IDiscordPromise<TTemplate> GetLocalizedTemplateAsync(Plugin plugin, string templateName, DiscordInteraction interaction) => GetLocalizedTemplateInternalAsync(plugin, templateName, interaction, DiscordPromise<TTemplate>.Create());
+        public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, DiscordInteraction interaction) => HandleGetLocalizedTemplate(TemplateId.CreateInteraction(plugin, templateName, interaction), interaction);
 
-        internal IDiscordPromise<TTemplate> GetLocalizedTemplateInternalAsync(Plugin plugin, string templateName, DiscordInteraction interaction, IDiscordPromise<TTemplate> callback = null)
+        public T GetLocalizedEntity<T>(Plugin plugin, string templateName, DiscordInteraction interaction, PlaceholderData data = null, T entity = null) where T : class, TEntity => GetLocalizedTemplate(plugin, templateName, interaction).ToEntity(data, entity);
+        public TEntity GetLocalizedEntity(Plugin plugin, string templateName, DiscordInteraction interaction, PlaceholderData data = null, TEntity entity = null) => GetLocalizedTemplate(plugin, templateName, interaction).ToEntity(data, entity);
+
+        public IDiscordPromise<List<T>> GetLocalizedBulkEntityAsync<T>(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request, List<T> entities) where T : class, TEntity 
+            => GetLocalizedBulkEntityInternalAsync<T>(plugin, interaction, request, entities, DiscordPromise<List<T>>.Create());
+        public IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityAsync(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request, List<TEntity> entities) => GetLocalizedBulkEntityInternalAsync(plugin, interaction, request, entities, DiscordPromise<List<TEntity>>.Create());
+
+        internal IDiscordPromise<List<T>> GetLocalizedBulkEntityInternalAsync<T>(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request, List<T> entities, IDiscordPromise<List<T>> callback) where T : class, TEntity
         {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
-
             if (callback == null)
             {
-                callback = DiscordPromise<TTemplate>.Create(true);
+                callback = DiscordPromise<List<T>>.Create(true);
             }
-            
-            TemplateId id = new TemplateId(plugin, templateName, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.Locale));
-            LoadMessageTemplateCallback<TTemplate, TEntity>.Start(this, id, interaction, callback);
-            return callback;
-        }
         
-        internal void HandleGetLocalizedTemplateAsync(TemplateId id, DiscordInteraction interaction, IDiscordPromise<TTemplate> callback)
-        {
-            callback.Resolve(HandleGetLocalizedTemplateAsync(id, interaction));
-        }
-        
-        public IDiscordPromise<T> GetLocalizedEntityAsync<T>(Plugin plugin, string templateName, DiscordInteraction interaction, PlaceholderData data = null, T entity = null) where T : class, TEntity 
-            => GetLocalizedEntityInternalAsync(plugin, templateName, interaction, data, entity, DiscordPromise<TEntity>.Create()).Then(r => (T)r);
-        public IDiscordPromise<TEntity> GetLocalizedEntityAsync(Plugin plugin, string templateName, DiscordInteraction interaction, PlaceholderData data = null, TEntity entity = null) 
-            => GetLocalizedEntityInternalAsync(plugin, templateName, interaction, data, entity, DiscordPromise<TEntity>.Create());
-
-        internal IDiscordPromise<TEntity> GetLocalizedEntityInternalAsync(Plugin plugin, string templateName, DiscordInteraction interaction, PlaceholderData data = null, TEntity entity = null, IDiscordPromise<TEntity> callback = null)
-        {
-            if (callback == null)
-            {
-                callback = DiscordPromise<TEntity>.Create(true);
-            }
-            
-            IDiscordPromise<TTemplate> load = GetLocalizedTemplateInternalAsync(plugin, templateName, interaction);
-            load.Then(template => template.ToEntityInternalAsync(data, entity, callback));
+            TemplateId id = TemplateId.CreateInteractionBulk(plugin, interaction);
+            BulkTemplateToEntityCallback<TTemplate, TEntity, T>.Start(this, id, interaction, request, entities, callback);
             return callback;
         }
 
-        public IDiscordPromise<List<T>> GetLocalizedBulkEntityAsync<T>(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request) where T : class, TEntity 
-            => GetLocalizedBulkEntityInternalAsync(plugin, interaction, request, DiscordPromise<List<TEntity>>.Create()).Then(r => r.ConvertAll(ConverterExt.Convert<T, TEntity>));
-        public IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityAsync(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request) => GetLocalizedBulkEntityInternalAsync(plugin, interaction, request, DiscordPromise<List<TEntity>>.Create());
-
-        internal IDiscordPromise<List<TEntity>> GetLocalizedBulkEntityInternalAsync(Plugin plugin, DiscordInteraction interaction, BulkTemplateRequest request, IDiscordPromise<List<TEntity>> callback)
+        internal void HandleGetLocalizedBulkEntity<T>(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction, List<T> entities, IDiscordPromise<List<T>> callback) where T : class, TEntity
         {
-            if (callback == null)
-            {
-                callback = DiscordPromise<List<TEntity>>.Create(true);
-            }
-
-            TemplateId id = new TemplateId(plugin, string.Empty, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.Locale));
-            BulkTemplateToEntityCallback<TTemplate, TEntity>.Start(this, id, interaction, request, callback);
-            return callback;
-        }
-
-        internal void HandleGetLocalizedBulkEntityAsync(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction, IDiscordPromise<List<TEntity>> callback)
-        {
-            List<TEntity> entities = HandleGetLocalizedBulkEntityAsync(id, request, interaction);
+            HandleGetLocalizedBulkEntity<T>(id, request, interaction, entities);
             callback.Resolve(entities);
         }
         
-        internal List<TEntity> HandleGetLocalizedBulkEntityAsync(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction)
+        internal List<T> HandleGetLocalizedBulkEntity<T>(TemplateId id, BulkTemplateRequest request, DiscordInteraction interaction, List<T> entities) where T : class, TEntity
         {
-            List<TEntity> entities = new List<TEntity>();
+            if (entities == null)
+            {
+                entities = new List<T>();
+            }
             Hash<string, TTemplate> cache = DiscordPool.GetHash<string, TTemplate>();
-
+        
             for (int index = 0; index < request.Items.Count; index++)
             {
                 BulkTemplateItem item = request.Items[index];
                 TTemplate template = cache[item.TemplateName];
                 if (template == null)
                 {
-                    template = HandleGetLocalizedTemplateAsync(id.WithName(item.TemplateName), interaction);
+                    template = HandleGetLocalizedTemplate(id.WithName(item.TemplateName), interaction);
                     cache[item.TemplateName] = template;
                 }
-
-                entities.Add(template.ToEntity(item.Data));
+        
+                entities.Add(template.ToEntity<T>(item.Data));
             }
             
             DiscordPool.FreeHash(cache);
-
+        
             return entities;
         }
 
-        private TTemplate HandleGetLocalizedTemplateAsync(TemplateId id, DiscordInteraction interaction)
+        private TTemplate HandleGetLocalizedTemplate(TemplateId id, DiscordInteraction interaction)
         {
             TTemplate template = LoadFromCache(id);
             if (template != null)
@@ -326,21 +229,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             if (interaction != null)
             {
                 IPlayer player = interaction.User.Player;
-                template = LoadTemplate<TTemplate>(id)
-                           ?? (player != null ? LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GetPlayerLanguage(player)) : null)
-                           ?? LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale))
-                           ?? LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GameServerLanguage)
-                           ?? LoadTemplate<TTemplate>(id, DiscordLang.DefaultOxideLanguage);
+                template = LoadTemplate(id)
+                           ?? (player != null ? LoadTemplate(id, DiscordExtension.DiscordLang.GetPlayerLanguage(player)) : null)
+                           ?? LoadTemplate(id, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale))
+                           ?? LoadTemplate(id, DiscordExtension.DiscordLang.GameServerLanguage)
+                           ?? LoadTemplate(id, DiscordLang.DefaultOxideLanguage);
             }
             else if (!id.IsGlobal)
             {
-                template = LoadTemplate<TTemplate>(id)
-                           ?? LoadTemplate<TTemplate>(id, DiscordExtension.DiscordLang.GameServerLanguage)
-                           ?? LoadTemplate<TTemplate>(id, DiscordLang.DefaultOxideLanguage);
+                template = LoadTemplate(id)
+                           ?? LoadTemplate(id, DiscordExtension.DiscordLang.GameServerLanguage)
+                           ?? LoadTemplate(id, DiscordLang.DefaultOxideLanguage);
             }
             else
             {
-                template = LoadTemplate<TTemplate>(id);
+                template = LoadTemplate(id);
             }
 
             if (template == null)
@@ -361,6 +264,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             _templateCache[id] = template;
         }
 
+        internal override void OnTemplateRegistered(TemplateId id, TTemplate template)
+        {
+            SetCache(id, template);
+        }
+        
         protected override void OnPluginLoaded(Plugin plugin) { }
 
         protected override void OnPluginUnloaded(Plugin plugin)

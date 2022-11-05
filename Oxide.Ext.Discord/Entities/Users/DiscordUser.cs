@@ -211,13 +211,8 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void SendTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, language).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    SendDirectMessage(client, response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, message);
+            SendDirectMessage(client, template, callback, error);
         }
         
         /// <summary>
@@ -232,13 +227,8 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="error">Callback when an error occurs with error information</param>
         public void SendGlobalTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateAsync(plugin, templateName).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    SendDirectMessage(client, response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, message);
+            SendDirectMessage(client, template, callback, error);
         }
 
         /// <summary>

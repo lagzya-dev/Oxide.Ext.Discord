@@ -5,22 +5,22 @@ using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates
 {
-    internal class RegisterTemplateCallback<T> : BaseAsyncCallback where T : BaseTemplate
+    internal class RegisterTemplateCallback<TTemplate> : BaseAsyncCallback where TTemplate : BaseTemplate
     {
-        private BaseTemplateLibrary _library;
+        private BaseTemplateLibrary<TTemplate> _library;
         private TemplateId _id;
-        private T _template;
+        private TTemplate _template;
         private TemplateVersion _minVersion;
         private IDiscordPromise _promise;
         
-        public static void Start(BaseTemplateLibrary library, TemplateId id, T template, TemplateVersion minVersion, IDiscordPromise promise)
+        public static void Start(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion minVersion, IDiscordPromise promise)
         {
-            RegisterTemplateCallback<T> register = DiscordPool.Get<RegisterTemplateCallback<T>>();
+            RegisterTemplateCallback<TTemplate> register = DiscordPool.Get<RegisterTemplateCallback<TTemplate>>();
             register.Init(library, id, template, minVersion, promise);
             register.Run();
         }
         
-        private void Init(BaseTemplateLibrary library, TemplateId id, T template, TemplateVersion minVersion, IDiscordPromise promise)
+        private void Init(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion minVersion, IDiscordPromise promise)
         {
             _library = library;
             _id = id;

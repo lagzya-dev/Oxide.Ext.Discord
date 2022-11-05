@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
     /// <summary>
     /// Library for localizing <see cref="DiscordApplicationCommand"/>s
     /// </summary>
-    public class DiscordCommandLocalizations : BaseTemplateLibrary
+    public class DiscordCommandLocalizations : BaseTemplateLibrary<DiscordCommandLocalization>
     {
         internal DiscordCommandLocalizations(ILogger logger) : base(TemplateType.Command, logger) { }
         
@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
             IDiscordPromise promise = DiscordPromise.Create();
             
-            TemplateId id = new TemplateId(plugin, fileNameSuffix, language);
+            TemplateId id = TemplateId.CreateLocalized(plugin, fileNameSuffix, language);
             RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, minVersion, promise);
             return promise;
         }
@@ -59,7 +59,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
             IDiscordPromise promise = DiscordPromise.Create();
             
-            TemplateId id = new TemplateId(plugin, fileNameSuffix, null);
+            TemplateId id = TemplateId.CreateGlobal(plugin, fileNameSuffix);
             BulkRegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, commands, minVersion, promise);
             return promise;
         }
@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 promise = DiscordPromise.Create(true);
             }
             
-            TemplateId id = new TemplateId(plugin, fileNameSuffix, null);
+            TemplateId id = TemplateId.CreateGlobal(plugin, fileNameSuffix);
             ApplyCommandLocalizationsCallback.Start(id, create, promise);
             return promise;
         }
@@ -168,7 +168,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
         private void HandleLoadAndApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, string lang)
         {
-            DiscordCommandLocalization localization = LoadTemplate<DiscordCommandLocalization>(id.WithLanguage(lang));
+            DiscordCommandLocalization localization = LoadTemplate(id.WithLanguage(lang));
             if (localization != null)
             {
                 localization.HandleApplyCommandLocalizationAsync(create, lang).ConfigureAwait(false);

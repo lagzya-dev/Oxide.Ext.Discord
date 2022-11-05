@@ -373,13 +373,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateGlobalTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateInternalAsync(plugin, templateName).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    CreateMessage(client, channelId, response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, message);
+            CreateMessage(client, channelId, template, callback, error);
         }
 
         /// <summary>
@@ -396,13 +391,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, language).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    CreateMessage(client, channelId, response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, message);
+            CreateMessage(client, channelId, template, callback, error);
         }
 
         /// <summary>
@@ -515,13 +505,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ReplyWithGlobalTemplate(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateInternalAsync(plugin, templateName).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    Reply(client, response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, message);
+            Reply(client, template, callback, error);
         }
 
         /// <summary>
@@ -537,13 +522,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ReplyWithTemplate(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, language).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    Reply(client, response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, message);
+            Reply(client, template, callback, error);
         }
         
         /// <summary>
@@ -794,13 +774,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateName, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateInternalAsync(plugin, templateName).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, this).Then(response =>
-                {
-                    EditMessage(client, response, callback, error);
-                });
-            });
+            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, this);
+            EditMessage(client, template, callback, error);
         }
         
         /// <summary>
@@ -815,13 +790,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditTemplateMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, language).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, this).Then(response =>
-                {
-                    EditMessage(client, response, callback, error);
-                });
-            });
+            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, this);
+            EditMessage(client, template, callback, error);
         }
 
         /// <summary>

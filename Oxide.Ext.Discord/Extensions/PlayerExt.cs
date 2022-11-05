@@ -103,13 +103,8 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetGlobalTemplateInternalAsync(plugin, templateName).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    SendMessage(client, player.GetDiscordUserId(), response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerEntity(plugin, templateName, player?.Id, placeholders, message);
+            SendMessage(client, player.GetDiscordUserId(), template, callback, error);
         }
 
         /// <summary>
@@ -125,13 +120,8 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplateInternalAsync(plugin, templateName, Lang.GetLanguage(player.Id)).Then(template =>
-            {
-                template.ToMessageInternalAsync(placeholders, message).Then(response =>
-                {
-                    SendMessage(client, player.GetDiscordUserId(), response, callback, error);
-                });
-            });
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerEntity(plugin, templateName, player?.Id, placeholders, message);
+            SendMessage(client, player.GetDiscordUserId(), template, callback, error);
         }
         
         private static void SendMessage(DiscordClient client, Snowflake? id, MessageCreate message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
