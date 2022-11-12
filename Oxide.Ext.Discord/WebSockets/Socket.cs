@@ -66,7 +66,7 @@ namespace Oxide.Ext.Discord.WebSockets
             //We haven't gotten the websocket url. Get url then attempt to connect.
             if (string.IsNullOrEmpty(url))
             {
-                Gateway.UpdateGatewayUrl(_client, Connect);
+                Gateway.UpdateGatewayUrl(_client, Connect, _ => Reconnect());
                 return;
             }
 
@@ -275,11 +275,9 @@ namespace Oxide.Ext.Discord.WebSockets
             }
 
             //We had an error trying to reconnect. Perform Delayed Reconnects
-            float delay = _reconnectRetries <= 3 ? 1f : 15f;
-
             _reconnectTimer = new Timer
             {
-                Interval = delay * 1000,
+                Interval = GetReconnectDelay(),
                 AutoReset = false
             };
 
@@ -294,7 +292,7 @@ namespace Oxide.Ext.Discord.WebSockets
             //There has been more than 3 tries to reconnect. Discord suggests trying to update gateway url.
             if (_reconnectRetries > 3)
             {
-                Gateway.UpdateGatewayUrl(_client, Connect);
+                Gateway.UpdateGatewayUrl(_client, Connect, _ => Reconnect());
             }
             else
             {
@@ -306,6 +304,13 @@ namespace Oxide.Ext.Discord.WebSockets
         internal void ResetRetries()
         {
             _reconnectRetries = 0;
+        }
+        
+        private int GetReconnectDelay()
+        {
+            if (_reconnectRetries <= 3) return 1 * 1000;
+            if (_reconnectRetries <= 25) return 15 * 1000;
+            return 60 * 1000;
         }
     }
 }
