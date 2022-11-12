@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// <summary>
     /// Modal Templates Library
     /// </summary>
-    public class DiscordEmbedFieldTemplates : BaseMessageTemplateLibrary<DiscordEmbedFieldTemplate, EmbedField>
+    public class DiscordEmbedFieldTemplates : BaseExplicitMessageTemplateLibrary<DiscordEmbedFieldTemplate, EmbedField>
     {
         /// <summary>
         /// Constructor

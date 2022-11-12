@@ -1,8 +1,4 @@
 using System.IO;
-using Oxide.Core;
-using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Extensions

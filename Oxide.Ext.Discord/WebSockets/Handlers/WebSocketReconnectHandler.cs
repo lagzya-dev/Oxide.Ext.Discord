@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
     /// <summary>
     /// Handles reconnecting to the web socket
     /// </summary>
-    public class WebSocketReconnectHandler
+    internal class WebSocketReconnectHandler
     {
         private readonly BotClient _client;
         internal readonly DiscordWebSocket _webSocket;

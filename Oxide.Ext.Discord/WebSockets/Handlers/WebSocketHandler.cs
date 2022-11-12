@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
     /// <summary>
     /// Handles the web socket connection and events
     /// </summary>
-    public class WebSocketHandler
+    internal class WebSocketHandler
     {
         private readonly IWebSocketEventHandler _handler;
         private readonly ILogger _logger;

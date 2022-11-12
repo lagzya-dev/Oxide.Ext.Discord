@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets
 {
-    public class DiscordWebsocketClient : IDisposable
+    internal class DiscordWebsocketClient : IDisposable
     {
         public readonly Snowflake WebsocketId;
         public SocketState SocketState { get; private set; }

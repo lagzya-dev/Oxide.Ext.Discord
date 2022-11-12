@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Commands;

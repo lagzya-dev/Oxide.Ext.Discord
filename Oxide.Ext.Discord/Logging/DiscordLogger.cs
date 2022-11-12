@@ -10,11 +10,13 @@ namespace Oxide.Ext.Discord.Logging
         private DiscordLogLevel _logLevel;
         private readonly IDiscordLoggingConfig _config;
         private readonly DiscordLogHandler _handler;
-        
+
         /// <summary>
         /// Creates a new logger with the given log level
         /// </summary>
         /// <param name="logLevel">Log level of the logger</param>
+        /// <param name="config">Configuration for the logger</param>
+        /// <param name="handler">Handler for the logger</param>
         internal DiscordLogger(DiscordLogLevel logLevel, IDiscordLoggingConfig config, DiscordLogHandler handler)
         {
             _logLevel = logLevel;

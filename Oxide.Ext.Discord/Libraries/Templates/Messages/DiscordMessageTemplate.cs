@@ -3,12 +3,11 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Interfaces.Entities.Messages;
+using Oxide.Ext.Discord.Interfaces.Entities.Templates;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
-using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
@@ -66,7 +65,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 message = new T();
             }
 
-            return ToEntity(data, message);
+            ToEntity(data, message);
+            return message;
         }
 
         public override IDiscordMessageTemplate ToEntity(PlaceholderData data, IDiscordMessageTemplate message)

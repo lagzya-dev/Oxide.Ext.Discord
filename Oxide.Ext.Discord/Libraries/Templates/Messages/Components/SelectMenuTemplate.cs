@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
                     break;
                 
                 case MessageComponentType.ChannelSelect:
-                    var channel = new ChannelSelectComponent();
+                    ChannelSelectComponent channel = new ChannelSelectComponent();
                     component = channel;
                     channel.ChannelTypes = ChannelTypes = ChannelTypes != null && ChannelTypes.Count != 0 ? ChannelTypes : null;
                     break;

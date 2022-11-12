@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
     internal class BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget> : BaseAsyncCallback 
         where TTemplate : BaseMessageTemplate<TEntity>, new()
         where TEntity : class
-        where TTarget : class, TEntity
+        where TTarget : class, TEntity, new()
     {
         private BaseMessageTemplateLibrary<TTemplate, TEntity> _templates;
         private TemplateId _id;

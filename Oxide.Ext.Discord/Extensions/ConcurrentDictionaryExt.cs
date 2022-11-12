@@ -5,6 +5,9 @@ using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Extensions
 {
+    /// <summary>
+    /// Extension for <see cref="ConcurrentDictionary{TKey,TValue}"/>
+    /// </summary>
     public static class ConcurrentDictionaryExt
     {
         /// <summary>

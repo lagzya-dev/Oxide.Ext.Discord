@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// <summary>
     /// Modal Templates Library
     /// </summary>
-    public class DiscordModalTemplates : BaseMessageTemplateLibrary<DiscordModalTemplate, InteractionModalMessage>
+    public class DiscordModalTemplates : BaseExplicitMessageTemplateLibrary<DiscordModalTemplate, InteractionModalMessage>
     {
         /// <summary>
         /// Constructor
