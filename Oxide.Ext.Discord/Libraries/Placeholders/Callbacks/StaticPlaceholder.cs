@@ -12,11 +12,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
             _value = value;
         }
 
-        internal StaticPlaceholder(string value) : this(null, value) {}
-
-        public override void Invoke(StringBuilder builder, PlaceholderState state)
-        {
-            PlaceholderFormatting.Replace(builder, state, _value);
-        }
+        public override void Invoke(StringBuilder builder, PlaceholderState state) => PlaceholderFormatting.Replace(builder, state, _value);
     }
 }

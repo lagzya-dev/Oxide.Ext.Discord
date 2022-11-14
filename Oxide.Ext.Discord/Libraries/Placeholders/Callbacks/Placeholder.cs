@@ -13,11 +13,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
             _callback = callback;
         }
 
-        internal Placeholder(Action<StringBuilder, PlaceholderState> callback) : this(null, callback) {}
-
-        public override void Invoke(StringBuilder builder, PlaceholderState state)
-        {
-            _callback.Invoke(builder, state);
-        }
+        public override void Invoke(StringBuilder builder, PlaceholderState state) => _callback.Invoke(builder, state);
     }
 }

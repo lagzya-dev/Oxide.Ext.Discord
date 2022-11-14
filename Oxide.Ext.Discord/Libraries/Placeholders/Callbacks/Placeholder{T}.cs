@@ -15,20 +15,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
             _callback = callback;
         }
 
-        internal Placeholder(string dataKey, Action<StringBuilder, PlaceholderState, T> callback) : this(dataKey, null, callback) {}
-
         public override void Invoke(StringBuilder builder, PlaceholderState state)
         {
-            T tData = state.Data.Get<T>(_dataKey);
-            if (tData != null)
+            T data = state.Data.Get<T>(_dataKey);
+            if (data != null)
             {
-                Invoke(builder, state, tData);
+                _callback.Invoke(builder, state, data);
             }
-        }
-        
-        private void Invoke(StringBuilder builder, PlaceholderState state, T data)
-        {
-            _callback.Invoke(builder, state, data);
         }
     }
 }

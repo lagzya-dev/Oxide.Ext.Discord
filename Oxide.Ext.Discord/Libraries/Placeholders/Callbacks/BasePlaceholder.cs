@@ -16,14 +16,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
 
         public abstract void Invoke(StringBuilder builder, PlaceholderState state);
 
-        public bool IsExtensionPlaceholder()
-        {
-            return Plugin == DiscordExtensionCore.Instance;
-        }
-        
-        public bool IsForPlugin(Plugin plugin)
-        {
-            return !IsExtensionPlaceholder() && plugin.Id() == Plugin.Id();
-        }
+        public bool IsExtensionPlaceholder() => Plugin == DiscordExtensionCore.Instance;
+        public bool IsForPlugin(Plugin plugin) => !IsExtensionPlaceholder() && plugin.Id() == Plugin.Id();
     }
 }
