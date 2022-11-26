@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
 
         public GuildCommand(string name, Plugin plugin, List<Snowflake> allowedChannels, Action<DiscordMessage, string, string[]> callback) : base(name, plugin, callback)
         {
-            _allowedChannels = allowedChannels ?? new List<Snowflake>();
+            _allowedChannels = allowedChannels;
         }
 
         public override bool CanHandle(DiscordMessage message, DiscordChannel channel)
@@ -23,12 +23,22 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 return false;
             }
 
-            if (_allowedChannels.Count != 0 && !_allowedChannels.Contains(channel.Id) && (!channel.ParentId.HasValue || !_allowedChannels.Contains(channel.ParentId.Value)))
+            if (channel == null)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            if (_allowedChannels == null || _allowedChannels.Count == 0 || _allowedChannels.Contains(channel.Id))
+            {
+                return true;
+            }
+
+            if (channel.ParentId.HasValue && _allowedChannels.Contains(channel.ParentId.Value))
+            {
+                return true;
+            }
+            
+            return false;
         }
     }
 }
