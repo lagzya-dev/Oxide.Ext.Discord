@@ -257,7 +257,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
             lock (_lock)
             {
-                if (SocketState != SocketState.Disconnected)
+                if (!IsDisconnected() && !IsPendingReconnect())
                 {
                     return;
                 }
