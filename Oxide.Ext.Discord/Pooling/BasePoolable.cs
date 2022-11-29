@@ -59,15 +59,17 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         public void Dispose()
         {
-            if (_shouldPool)
+            if (!_shouldPool)
             {
-                if (Disposed)
-                {
-                    throw new ObjectDisposedException(GetType().Name);
-                }
-                
-                _pool.Free(this);
+                return;
             }
+            
+            if (Disposed)
+            {
+                throw new ObjectDisposedException(GetType().Name);
+            }
+                
+            _pool.Free(this);
         }
     }
 }
