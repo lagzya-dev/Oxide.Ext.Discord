@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         /// </summary>
         internal DateTimeOffset ResetAt;
 
-        internal bool IsKnowBucket;
+        internal bool IsKnownBucket;
 
         private RestRateLimit _rateLimit;
         private ILogger _logger;
@@ -182,10 +182,10 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             {
                 _completedSync.WaitOne();
                 
-                if (!IsKnowBucket && rateLimit != null && !string.IsNullOrEmpty(rateLimit.BucketId))
+                if (!IsKnownBucket && rateLimit != null && !string.IsNullOrEmpty(rateLimit.BucketId))
                 {
                     _rest.UpgradeToKnownBucket(this, rateLimit.BucketId);
-                    if (!IsKnowBucket)
+                    if (!IsKnownBucket)
                     {
                         Semaphore.AllowAllThrough();
                     }
@@ -254,7 +254,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
 
         private void OnBucketCompleted()
         {
-            if (!IsKnowBucket)
+            if (!IsKnownBucket)
             {
                 _logger.Debug($"{nameof(Bucket)}.{nameof(OnBucketCompleted)} Bucket Completed: {{0}}", Id);
                 _rest.RemoveBucket(this);

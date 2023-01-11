@@ -154,7 +154,7 @@ namespace Oxide.Ext.Discord.Rest
 
             Buckets.TryRemove(bucket.Id, out Bucket _);
             bucket.Id = newBucketId;
-            bucket.IsKnowBucket = true;
+            bucket.IsKnownBucket = true;
             Buckets[newBucketId] = bucket;
         }
 

@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities
@@ -139,7 +140,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <returns>ID as a string</returns>
         public override string ToString()
         {
-            return Id.ToString();
+            return StringCache<ulong>.Instance.ToString(Id);
         }
 
         /// <summary>

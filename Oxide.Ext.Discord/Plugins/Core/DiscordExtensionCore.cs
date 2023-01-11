@@ -284,7 +284,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                         sb.Append("\t\tID: ");
                         sb.Append(bucket.Id);
                         sb.Append(" (Known Bucket: ");
-                        sb.AppendLine(bucket.IsKnowBucket ? "Yes)" : "No)");
+                        sb.AppendLine(bucket.IsKnownBucket ? "Yes)" : "No)");
                         sb.Append("\t\tRemaining: ");
                         sb.Append(bucket.Remaining.ToString());
                         sb.Append(" Limit: ");

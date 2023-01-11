@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -14,19 +15,19 @@ namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
         /// <see cref="AllowedMentionTypes"/>
         /// </summary>
         [JsonProperty("parse")]
-        public List<AllowedMentionTypes> AllowedTypes { get; set; }
+        public IList<AllowedMentionTypes> AllowedTypes { get; set; }
         
         /// <summary>
         /// Array of Role IDs to mention (Max size of 100)
         /// </summary>
         [JsonProperty("roles")]
-        public List<Snowflake> Roles { get; set; }
+        public IList<Snowflake> Roles { get; set; }
         
         /// <summary>
         /// Array of User IDs to mention (Max size of 100)
         /// </summary>
         [JsonProperty("users")]
-        public List<Snowflake> Users { get; set; }
+        public IList<Snowflake> Users { get; set; }
         
         /// <summary>
         /// For replies, whether to mention the author of the message being replied to (default false)
@@ -39,9 +40,9 @@ namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
         /// </summary>
         public static readonly AllowedMention None = new AllowedMention
         {
-            AllowedTypes = new List<AllowedMentionTypes>(),
-            Roles = new List<Snowflake>(),
-            Users = new List<Snowflake>()
+            AllowedTypes = Array.Empty<AllowedMentionTypes>(),
+            Roles = Array.Empty<Snowflake>(),
+            Users = Array.Empty<Snowflake>()
         };
     }
 }
