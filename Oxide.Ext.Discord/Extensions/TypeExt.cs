@@ -17,6 +17,11 @@ namespace Oxide.Ext.Discord.Extensions
             return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
         
+        public static bool IsStruct(this Type source) 
+        {
+            return source.IsValueType && !source.IsPrimitive && !source.IsEnum;
+        }
+        
         /// <summary>
         /// Returns the default value for <see cref="Type"/>
         /// </summary>

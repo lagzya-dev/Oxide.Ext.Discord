@@ -13,6 +13,12 @@ namespace Oxide.Ext.Discord.Pooling
 
         private PlaceholderDataPool() : base(1024) { }
 
+        protected override bool OnFreeItem(ref PlaceholderData item)
+        {
+            item.EnterPool();
+            return base.OnFreeItem(ref item);
+        }
+
         protected override PlaceholderData CreateNew()
         {
             return new PlaceholderData();

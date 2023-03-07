@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Pooling.Entities;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Pooling
@@ -103,6 +104,18 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return PlaceholderDataPool.Instance.Get();
         }
+        
+        /// <summary>
+        /// Returns a pooled <see cref="Boxed{T}"/>
+        /// </summary>
+        /// <typeparam name="T">Type for the Boxed</typeparam>
+        /// <returns>Pooled Boxed</returns>
+        internal static Boxed<T> GetBoxed<T>(T value)
+        {
+            Boxed<T> boxed = BoxedPool<T>.Instance.Get();
+            boxed.Value = value;
+            return boxed;
+        }
 
         /// <summary>
         /// Free's a pooled <see cref="List{T}"/>
@@ -171,6 +184,16 @@ namespace Oxide.Ext.Discord.Pooling
         public static void FreePlaceholderData(PlaceholderData data)
         {
             PlaceholderDataPool.Instance.Free(data);
+        }
+        
+        /// <summary>
+        /// Free's a pooled <see cref="BoxedPool{T}"/>
+        /// </summary>
+        /// <param name="boxed">Boxed to be freed</param>
+        /// <typeparam name="T">Type of the Boxed</typeparam>
+        internal static void FreeBoxed<T>(Boxed<T> boxed)
+        {
+            BoxedPool<T>.Instance.Free(boxed);
         }
 
         internal static void Clear()

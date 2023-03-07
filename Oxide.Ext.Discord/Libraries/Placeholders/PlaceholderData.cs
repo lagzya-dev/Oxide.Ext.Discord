@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
@@ -14,6 +15,7 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Pooling.Entities;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
@@ -24,6 +26,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     public class PlaceholderData : IDisposable
     {
         private readonly Hash<string, object> _data = new Hash<string, object>();
+        private readonly List<IBoxed> _boxed = new List<IBoxed>();
         internal bool ShouldPool { get; private set; } = true;
         private bool _disposed;
 
@@ -36,7 +39,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="command">Application Command to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddCommand(DiscordApplicationCommand command) => Add(command);
+        public PlaceholderData AddCommand(DiscordApplicationCommand command) => Add(nameof(DiscordApplicationCommand), command);
 
         /// <summary>
         /// Add a <see cref="DiscordGuild"/> by <see cref="DiscordClient"/> and GuildId
@@ -51,7 +54,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="guild">Guild to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddGuild(DiscordGuild guild) => Add(guild);
+        public PlaceholderData AddGuild(DiscordGuild guild) => Add(nameof(DiscordGuild), guild);
 
         /// <summary>
         /// Add a <see cref="DiscordMessage"/>
@@ -64,7 +67,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             {
                 AddGuildMember(message.Member);
                 AddUser(message.Author);
-                Add(message);
+                Add(nameof(DiscordMessage), message);
             }
             
             return this;
@@ -89,7 +92,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             if (member != null)
             {
                 AddUser(member.User);
-                Add(member);
+                Add(nameof(GuildMember), member);
             }
 
             return this;
@@ -105,7 +108,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             if (user != null)
             {
                 AddPlayer(user.Player);
-                Add(user);
+                Add(nameof(DiscordUser), user);
             }
 
             return this;
@@ -125,7 +128,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="role">Role to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddRole(DiscordRole role) => Add(role);
+        public PlaceholderData AddRole(DiscordRole role) => Add(nameof(DiscordRole), role);
 
         /// <summary>
         /// Adds a <see cref="DiscordChannel"/> by <see cref="DiscordClient"/>, ChannelId, and Optional GuildId
@@ -141,7 +144,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="channel">Channel to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddChannel(DiscordChannel channel) => Add(channel);
+        public PlaceholderData AddChannel(DiscordChannel channel) => Add(nameof(DiscordChannel), channel);
         
         /// <summary>
         /// Adds a <see cref="DiscordInteraction"/>
@@ -155,7 +158,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 AddGuildMember(interaction.Member);
                 AddUser(interaction.User);
                 AddMessage(interaction.Message);
-                Add(interaction);
+                Add(nameof(DiscordInteraction), interaction);
             }
 
             return this;
@@ -200,22 +203,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="error">RequestError to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddRequestError(RequestError error) => Add(error);
-
-        /// <summary>
-        /// Adds type {T} to the placeholder. Type name is used as the data key
-        /// </summary>
-        /// <param name="obj">Object to add</param>
-        /// <returns>This</returns>
-        public PlaceholderData Add(object obj)
-        {
-            if (obj != null)
-            {
-                Add(obj.GetType().Name, obj);
-            }
-            
-            return this;
-        }
+        public PlaceholderData AddRequestError(RequestError error) => Add(nameof(RequestError), error);
 
         /// <summary>
         /// Adds the data with the given name
@@ -223,13 +211,22 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="name">Name of the data key</param>
         /// <param name="obj">Object to add</param>
         /// <returns>This</returns>
-        public PlaceholderData Add(string name, object obj)
+        public PlaceholderData Add<T>(string name, T obj)
         {
-            if (obj != null)
+            if (typeof(T).IsStruct())
             {
-                _data[name] = obj;
+                Boxed<T> boxed = DiscordPool.GetBoxed(obj);
+                _data[name] = boxed;
+                _boxed.Add(boxed);
+                return this;
             }
-           
+            
+            object value = obj;
+            if (value != null)
+            {
+                _data[name] = value;
+            }
+
             return this;
         }
 
@@ -241,7 +238,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>{T}</returns>
         public T Get<T>()
         {
-            return Get<T>(nameof(T));
+            return Get<T>(typeof(T).Name);
         }
         
         /// <summary>
@@ -255,6 +252,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         {
             if (_data.TryGetValue(name, out object obj))
             {
+                if (obj is Boxed<T> boxed)
+                {
+                    return boxed.Value;
+                }
+                
                 return (T)obj;
             }
 
@@ -290,14 +292,26 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return data;
         }
 
+        internal void EnterPool()
+        {
+            _data.Clear();
+            _boxed.Clear();
+        }
+        
         ///<inheritdoc/>
         public void Dispose()
         {
-            if (!_disposed)
+            if (_disposed)
             {
-                _disposed = true;
-                DiscordPool.FreePlaceholderData(this);
+                throw new ObjectDisposedException(nameof(PlaceholderData));
             }
+            
+            _disposed = true;
+            for (int index = 0; index < _boxed.Count; index++)
+            {
+                _boxed[index].Dispose();
+            }
+            DiscordPool.FreePlaceholderData(this);
         }
     }
 }

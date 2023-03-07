@@ -13683,7 +13683,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageAttachment">
             <summary>
-            Represents a message <a href="https://discord.com/developers/docs/resources/channel#message-object">Attachment Structure</a>
+            Represents a message <a href="https://discord.com/developers/docs/resources/channel#attachment-object">Attachment Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Id">
@@ -19479,14 +19479,7 @@
             <param name="error">RequestError to add</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Add(System.Object)">
-            <summary>
-            Adds type {T} to the placeholder. Type name is used as the data key
-            </summary>
-            <param name="obj">Object to add</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Add(System.String,System.Object)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Add``1(System.String,``0)">
             <summary>
             Adds the data with the given name
             </summary>
@@ -21190,6 +21183,12 @@
             Disposes the object when used in a using statement
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Pooling.BoxedPool`1">
+            <summary>
+            Represents a pool for <see cref="T:Oxide.Ext.Discord.Pooling.Entities.Boxed`1"/>;
+            </summary>
+            <typeparam name="T">Type that will be in the boxed object</typeparam>
+        </member>
         <member name="T:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1">
             <summary>
             Represents a <see cref="T:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1"/>
@@ -21283,6 +21282,13 @@
             </summary>
             <returns>Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.GetBoxed``1(``0)">
+            <summary>
+            Returns a pooled <see cref="T:Oxide.Ext.Discord.Pooling.Entities.Boxed`1"/>
+            </summary>
+            <typeparam name="T">Type for the Boxed</typeparam>
+            <returns>Pooled Boxed</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeList``1(System.Collections.Generic.List{``0})">
             <summary>
             Free's a pooled <see cref="T:System.Collections.Generic.List`1"/>
@@ -21328,6 +21334,13 @@
             Frees a <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> back to the pool
             </summary>
             <param name="data"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPool.FreeBoxed``1(Oxide.Ext.Discord.Pooling.Entities.Boxed{``0})">
+            <summary>
+            Free's a pooled <see cref="T:Oxide.Ext.Discord.Pooling.BoxedPool`1"/>
+            </summary>
+            <param name="boxed">Boxed to be freed</param>
+            <typeparam name="T">Type of the Boxed</typeparam>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.HashPool`2">
             <summary>
