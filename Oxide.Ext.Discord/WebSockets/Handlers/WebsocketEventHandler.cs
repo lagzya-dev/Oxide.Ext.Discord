@@ -784,7 +784,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private void HandleDispatchGuildEmojisUpdate(GuildEmojisUpdatedEvent emojis)
         {
             DiscordGuild guild = _client.GetGuild(emojis.GuildId);
-            
             if (guild == null || !guild.IsAvailable)
             {
                 return;

@@ -30,11 +30,12 @@ namespace Oxide.Ext.Discord.Extensions
                 }
             }
 
-            foreach (TKey key in removeKeys)
+            for (int index = 0; index < removeKeys.Count; index++)
             {
+                TKey key = removeKeys[index];
                 dic.TryRemove(key, out TValue _);
             }
-            
+
             DiscordPool.FreeList(removeKeys);
         }
         
@@ -60,11 +61,12 @@ namespace Oxide.Ext.Discord.Extensions
                 }
             }
 
-            foreach (TKey key in removeKeys)
+            for (int index = 0; index < removeKeys.Count; index++)
             {
+                TKey key = removeKeys[index];
                 dic.TryRemove(key, out TValue _);
             }
-            
+
             DiscordPool.FreeList(removeKeys);
         }
     }

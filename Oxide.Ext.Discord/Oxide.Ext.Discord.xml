@@ -16794,18 +16794,6 @@
             <typeparam name="TKey">Key type of the dictionary</typeparam>
             <typeparam name="TValue">Value type of the dictionary</typeparam>
         </member>
-        <member name="T:Oxide.Ext.Discord.Extensions.DiscordColorExt">
-            <summary>
-            Discord Color Extension Methods
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.DiscordColorExt.ToHex(Oxide.Ext.Discord.Entities.Permissions.DiscordColor)">
-            <summary>
-            Converter the Discord Color to a string hex color
-            </summary>
-            <param name="color">Color to convert</param>
-            <returns>Hex string color of the <see cref="T:Oxide.Ext.Discord.Entities.Permissions.DiscordColor"/></returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.DiscordUserExt">
             <summary>
             Adds extension methods to Discord User to allow sending server chat commands to the player

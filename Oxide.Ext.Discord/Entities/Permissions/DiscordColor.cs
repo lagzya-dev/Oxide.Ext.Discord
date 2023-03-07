@@ -243,5 +243,8 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         {
 
         }
+
+        public override string ToString() => Color.ToString();
+        public string ToHex() => $"#{Color.ToString("X6")}";
     }
 }

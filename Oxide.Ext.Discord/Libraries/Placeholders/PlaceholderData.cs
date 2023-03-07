@@ -213,7 +213,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData Add<T>(string name, T obj)
         {
-            if (typeof(T).IsStruct())
+            if (typeof(T).IsValueType())
             {
                 Boxed<T> boxed = DiscordPool.GetBoxed(obj);
                 _data[name] = boxed;
