@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordCommandLocalization() : base(TemplateType.Command, new TemplateVersion(1, 0, 0)) { }
+        public DiscordCommandLocalization() : base(new TemplateVersion(1, 0, 0)) { }
 
         /// <summary>
         /// Constructor

@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordModalTemplate() : base(TemplateType.Modal, new TemplateVersion(1, 0, 0)) {}
+        public DiscordModalTemplate() : base(new TemplateVersion(1, 0, 0)) {}
 
         /// <summary>
         /// Constructor

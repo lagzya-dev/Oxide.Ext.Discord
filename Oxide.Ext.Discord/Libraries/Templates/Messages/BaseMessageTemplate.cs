@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// </summary>
         /// <param name="type"></param>
         /// <param name="internalVersion"></param>
-        protected BaseMessageTemplate(TemplateType type, TemplateVersion internalVersion) : base(type, internalVersion) { }
+        protected BaseMessageTemplate(TemplateVersion internalVersion) : base(internalVersion) { }
 
         /// <summary>
         /// Converts the template to the given entity

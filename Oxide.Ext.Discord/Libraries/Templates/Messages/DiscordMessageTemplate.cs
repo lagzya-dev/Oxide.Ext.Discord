@@ -40,7 +40,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordMessageTemplate() : base(TemplateType.Message, new TemplateVersion(1, 0, 0)) {}
+        public DiscordMessageTemplate() : base(new TemplateVersion(1, 0, 0)) {}
 
         /// <summary>
         /// Constructor

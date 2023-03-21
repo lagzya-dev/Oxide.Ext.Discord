@@ -19694,17 +19694,12 @@
             Base Template used in Discord Templates
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate.#ctor(Oxide.Ext.Discord.Libraries.Templates.TemplateType,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate.#ctor(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
             <summary>
             Constructor
             </summary>
             <param name="type">Type of the template</param>
             <param name="internalVersion">Internal Template Version</param>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate.TemplateType">
-            <summary>
-            The type of the Template
-            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate.Version">
             <summary>
@@ -19980,7 +19975,7 @@
             </summary>
             <typeparam name="TEntity"></typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplate`1.#ctor(Oxide.Ext.Discord.Libraries.Templates.TemplateType,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplate`1.#ctor(Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
             <summary>
             Constructor
             </summary>

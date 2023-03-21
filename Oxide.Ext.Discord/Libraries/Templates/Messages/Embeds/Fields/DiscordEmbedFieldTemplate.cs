@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordEmbedFieldTemplate() : base(TemplateType.EmbedField, new TemplateVersion(1, 0, 0)) { }
+        public DiscordEmbedFieldTemplate() : base(new TemplateVersion(1, 0, 0)) { }
         
         /// <summary>
         /// Constructor

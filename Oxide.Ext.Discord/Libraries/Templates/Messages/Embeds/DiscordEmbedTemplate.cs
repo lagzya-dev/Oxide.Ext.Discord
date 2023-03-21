@@ -63,7 +63,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordEmbedTemplate() : base(TemplateType.Embed, new TemplateVersion(1, 0, 0)) { }
+        public DiscordEmbedTemplate() : base(new TemplateVersion(1, 0, 0)) { }
 
         /// <summary>
         /// Constructor
