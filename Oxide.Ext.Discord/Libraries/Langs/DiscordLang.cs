@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Libraries.Langs
     /// <summary>
     /// Converts discord locale codes into oxide locale codes
     /// </summary>
-    public class DiscordLang : BaseDiscordLibrary
+    public class DiscordLang : BaseDiscordLibrary<DiscordLang>
     {
         /// <summary>
         /// Default Oxide Lang (English)

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Libraries.Langs;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 {
@@ -39,7 +40,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <param name="language"></param>
         public void ApplyCommandLocalization(CommandCreate create, string language)
         {
-            if (DiscordExtension.DiscordLang.TryGetDiscordLocale(language, out string discordLocale))
+            if (DiscordLang.Instance.TryGetDiscordLocale(language, out string discordLocale))
             {
                 language = discordLocale;
             }

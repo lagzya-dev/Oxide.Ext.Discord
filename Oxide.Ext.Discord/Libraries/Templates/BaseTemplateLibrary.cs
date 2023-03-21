@@ -38,8 +38,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         
         internal readonly DiscordConcurrentHashSet<TemplateId> RegisteredTemplates = new DiscordConcurrentHashSet<TemplateId>();
         private readonly Hash<string, string> _pluginTemplatePath = new Hash<string, string>();
-
-
+        
         private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings {Formatting = Formatting.Indented};
 
         /// <summary>

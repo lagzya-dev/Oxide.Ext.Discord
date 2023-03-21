@@ -194,15 +194,15 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             {
                 IPlayer player = interaction.User.Player;
                 template = LoadTemplate(id)
-                           ?? (player != null ? LoadTemplate(id, DiscordExtension.DiscordLang.GetPlayerLanguage(player)) : null)
-                           ?? LoadTemplate(id, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale))
-                           ?? LoadTemplate(id, DiscordExtension.DiscordLang.GameServerLanguage)
+                           ?? (player != null ? LoadTemplate(id, DiscordLang.Instance.GetPlayerLanguage(player)) : null)
+                           ?? LoadTemplate(id, DiscordLang.Instance.GetOxideLanguage(interaction.GuildLocale))
+                           ?? LoadTemplate(id, DiscordLang.Instance.GameServerLanguage)
                            ?? LoadTemplate(id, DiscordLang.DefaultOxideLanguage);
             }
             else if (!id.IsGlobal)
             {
                 template = LoadTemplate(id)
-                           ?? LoadTemplate(id, DiscordExtension.DiscordLang.GameServerLanguage)
+                           ?? LoadTemplate(id, DiscordLang.Instance.GameServerLanguage)
                            ?? LoadTemplate(id, DiscordLang.DefaultOxideLanguage);
             }
             else
@@ -212,7 +212,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             if (template == null)
             {
-                Logger.Warning("Plugin {0} is using the {1} Template API but message template name '{2}' is not registered", id.GetPluginName(), this.GetType().Name, id.TemplateName);
+                Logger.Error("Plugin {0} is using the {1} Template API but message template name '{2}' is not registered", id.GetPluginName(), this.GetType().Name, id.TemplateName);
                 return new TTemplate();
             }
             

@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -168,7 +169,7 @@ namespace Oxide.Ext.Discord.Entities.Api
                 return;
             }
 
-            if (DiscordError != null && DiscordExtension.DiscordConfig.Logging.HideDiscordErrorCodes.Contains(DiscordError.Code))
+            if (DiscordError != null && DiscordConfig.Instance.Logging.HideDiscordErrorCodes.Contains(DiscordError.Code))
             {
                 return;
             }

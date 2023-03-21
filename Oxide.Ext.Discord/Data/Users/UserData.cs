@@ -1,5 +1,6 @@
 using System;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Users;
@@ -58,7 +59,7 @@ namespace Oxide.Ext.Discord.Data.Users
 
         public DateTime? GetBlockedUntil()
         {
-            return DmBlockedDate.HasValue ? DmBlockedDate.Value + TimeSpan.FromHours(DiscordExtension.DiscordConfig.Users.DmBlockedDuration) : (DateTime?)null;
+            return DmBlockedDate.HasValue ? DmBlockedDate.Value + TimeSpan.FromHours(DiscordConfig.Instance.Users.DmBlockedDuration) : (DateTime?)null;
         }
         
         public bool IsDmBlocked()

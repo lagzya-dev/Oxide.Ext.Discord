@@ -17,6 +17,7 @@ using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Plugins;
 
@@ -130,7 +131,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         /// Returns the IPlayer for the discord user if linked; null otherwise
         /// </summary>
-        public IPlayer Player => DiscordExtension.DiscordLink.GetPlayer(Id);
+        public IPlayer Player => DiscordLink.Instance.GetPlayer(Id);
         #endregion
 
         #region API Methods

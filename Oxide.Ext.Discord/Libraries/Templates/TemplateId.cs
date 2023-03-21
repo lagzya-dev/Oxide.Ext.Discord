@@ -2,6 +2,7 @@ using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Libraries.Langs;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
 {
@@ -29,11 +30,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
         public static TemplateId CreateGlobal(Plugin plugin, string templateName) => new TemplateId(plugin, templateName, null);
         public static TemplateId CreateLocalized(Plugin plugin, string templateName, string language) => new TemplateId(plugin, templateName, language);
-        public static TemplateId CreateInteraction(Plugin plugin, string templateName, DiscordInteraction interaction) => new TemplateId(plugin, templateName, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.Locale));
-        public static TemplateId CreatePlayer(Plugin plugin, string templateName, string playerId) => new TemplateId(plugin, templateName, DiscordExtension.DiscordLang.GetPlayerLanguage(playerId));
+        public static TemplateId CreateInteraction(Plugin plugin, string templateName, DiscordInteraction interaction) => new TemplateId(plugin, templateName, DiscordLang.Instance.GetOxideLanguage(interaction.Locale));
+        public static TemplateId CreatePlayer(Plugin plugin, string templateName, string playerId) => new TemplateId(plugin, templateName, DiscordLang.Instance.GetPlayerLanguage(playerId));
         public static TemplateId CreateGlobalBulk(Plugin plugin) => new TemplateId(plugin, string.Empty, null);
         public static TemplateId CreateLocalizedBulk(Plugin plugin, string language) => new TemplateId(plugin, string.Empty, language);
-        public static TemplateId CreateInteractionBulk(Plugin plugin, DiscordInteraction interaction) => new TemplateId(plugin, string.Empty, DiscordExtension.DiscordLang.GetOxideLanguage(interaction.Locale));
+        public static TemplateId CreateInteractionBulk(Plugin plugin, DiscordInteraction interaction) => new TemplateId(plugin, string.Empty, DiscordLang.Instance.GetOxideLanguage(interaction.Locale));
 
         public string GetPluginName()
         {

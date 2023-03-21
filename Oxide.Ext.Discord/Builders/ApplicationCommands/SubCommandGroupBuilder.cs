@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Libraries.Langs;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
@@ -33,7 +34,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         [Obsolete("AddNameLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddNameLocalization(string name, string lang) instead.")]
         public SubCommandGroupBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            _option.NameLocalizations = DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
+            _option.NameLocalizations = DiscordLang.Instance.GetCommandLocalization(plugin, langKey);
             return this;
         }
 
@@ -45,7 +46,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <returns>This</returns>
         public SubCommandGroupBuilder AddNameLocalization(string name, string lang)
         {
-            if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
+            if (DiscordLang.Instance.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }
@@ -63,7 +64,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         [Obsolete("AddDescriptionLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddDescriptionLocalization(string name, string lang) instead.")]
         public SubCommandGroupBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            _option.DescriptionLocalizations = DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
+            _option.DescriptionLocalizations = DiscordLang.Instance.GetCommandLocalization(plugin, langKey);
             return this;
         }
 
@@ -75,7 +76,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <returns>This</returns>
         public SubCommandGroupBuilder AddDescriptionLocalization(string description, string lang)
         {
-            if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
+            if (DiscordLang.Instance.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }

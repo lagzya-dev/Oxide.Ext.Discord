@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ApplyPlaceholder(string text, PlaceholderData data)
         {
-            return data == null ? text : DiscordExtension.DiscordPlaceholders.ProcessPlaceholders(text, data);
+            return data == null ? text : DiscordPlaceholders.Instance.ProcessPlaceholders(text, data);
         }
     }
 }

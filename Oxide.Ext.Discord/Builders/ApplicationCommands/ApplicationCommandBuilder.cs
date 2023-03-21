@@ -83,7 +83,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         [Obsolete("AddNameLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddNameLocalization(string name, string lang) instead")]
         public ApplicationCommandBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            Command.NameLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
+            Command.NameLocalizations =  DiscordLang.Instance.GetCommandLocalization(plugin, langKey);
             return this;
         }
 
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
                 Command.NameLocalizations = new Hash<string, string>();
             }
 
-            if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
+            if (DiscordLang.Instance.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }
@@ -118,7 +118,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         [Obsolete("AddDescriptionLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddDescriptionLocalization(string name, string lang) instead")]
         public ApplicationCommandBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            Command.DescriptionLocalizations =  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey);
+            Command.DescriptionLocalizations =  DiscordLang.Instance.GetCommandLocalization(plugin, langKey);
             return this;
         }
         
@@ -135,7 +135,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
                 Command.DescriptionLocalizations = new Hash<string, string>();
             }
 
-            if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
+            if (DiscordLang.Instance.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }
@@ -215,7 +215,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <returns></returns>
         public DiscordCommandLocalization BuildCommandLocalization(string lang = DiscordLang.DefaultOxideLanguage)
         {
-            if (DiscordExtension.DiscordLang.TryGetDiscordLocale(lang, out string discordLocale))
+            if (DiscordLang.Instance.TryGetDiscordLocale(lang, out string discordLocale))
             {
                 lang = discordLocale;
             }

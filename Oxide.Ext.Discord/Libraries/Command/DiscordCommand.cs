@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
     /// <summary>
     /// Represents a library for discord commands
     /// </summary>
-    public class DiscordCommand : BaseDiscordLibrary
+    public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>
     {
         /// <summary>
         /// Available command prefixes used by the extension
@@ -328,12 +328,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
                     DirectMessageCommandAttribute command = (DirectMessageCommandAttribute)customAttributes[0];
                     if (command.IsLocalized)
                     {
-                        DiscordExtension.DiscordCommand.AddDirectMessageLocalizedCommand(command.Name, plugin, method.Name);
+                        AddDirectMessageLocalizedCommand(command.Name, plugin, method.Name);
                         _logger.Debug("Adding Localized Direct Message Command {0} Method: {1}", command.Name, method.Name);
                     }
                     else
                     {
-                        DiscordExtension.DiscordCommand.AddDirectMessageCommand(command.Name, plugin, method.Name);
+                        AddDirectMessageCommand(command.Name, plugin, method.Name);
                         _logger.Debug("Adding Direct Message Command {0} Method: {1}", command.Name, method.Name);
                     }
                 }
@@ -344,12 +344,12 @@ namespace Oxide.Ext.Discord.Libraries.Command
                     GuildCommandAttribute command = (GuildCommandAttribute)customAttributes[0];
                     if (command.IsLocalized)
                     {
-                        DiscordExtension.DiscordCommand.AddGuildLocalizedCommand(command.Name, plugin, null, method.Name);
+                        AddGuildLocalizedCommand(command.Name, plugin, null, method.Name);
                         _logger.Debug("Adding Localized Guild Command {0} Method: {1}", command.Name, method.Name);
                     }
                     else
                     {
-                        DiscordExtension.DiscordCommand.AddGuildCommand(command.Name, plugin, null, method.Name);
+                        AddGuildCommand(command.Name, plugin, null, method.Name);
                         _logger.Debug("Adding Guild Command {0} Method: {1}", command.Name, method.Name);
                     }
                 }

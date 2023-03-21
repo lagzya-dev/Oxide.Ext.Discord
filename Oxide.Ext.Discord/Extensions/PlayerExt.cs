@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Plugins;
 
@@ -153,7 +154,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <returns>True if linked; False otherwise</returns>
         public static bool IsLinked(this IPlayer player)
         {
-            return DiscordExtension.DiscordLink.IsLinked(player.Id);
+            return DiscordLink.Instance.IsLinked(player.Id);
         }
 
         /// <summary>
@@ -163,7 +164,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <returns>Discord ID if linked; null otherwise</returns>
         public static Snowflake? GetDiscordUserId(this IPlayer player)
         {
-            return DiscordExtension.DiscordLink.GetDiscordId(player);
+            return DiscordLink.Instance.GetDiscordId(player);
         }
         
         /// <summary>
@@ -173,7 +174,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <returns>Discord User if linked; null otherwise</returns>
         public static DiscordUser GetDiscordUser(this IPlayer player)
         {
-            return DiscordExtension.DiscordLink.GetDiscordUser(player);
+            return DiscordLink.Instance.GetDiscordUser(player);
         }
 
         /// <summary>
@@ -184,7 +185,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <returns>GuildMember if linked and in guild; null otherwise</returns>
         public static GuildMember GetGuildMember(this IPlayer player, DiscordGuild guild)
         {
-            return DiscordExtension.DiscordLink.GetLinkedMember(player, guild);
+            return DiscordLink.Instance.GetLinkedMember(player, guild);
         }
 
         /// <summary>

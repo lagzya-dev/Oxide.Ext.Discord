@@ -15,6 +15,7 @@ using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
+using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -148,7 +149,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="plugin">Plugin the localization is for</param>
         /// <param name="langKey">Lang Key to return</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
-        public string GetLangMessage(Plugin plugin, string langKey) => DiscordExtension.DiscordLang.GetDiscordInteractionLangMessage(plugin, this, langKey);
+        public string GetLangMessage(Plugin plugin, string langKey) => DiscordLang.Instance.GetDiscordInteractionLangMessage(plugin, this, langKey);
         
         /// <summary>
         /// Returns a localized string for this interaction
@@ -157,7 +158,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="langKey">Lang Key to return</param>
         /// <param name="args">Localization args</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
-        public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordExtension.DiscordLang.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
+        public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordLang.Instance.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
         
         private InteractionDataOption GetFocusedOption()
         {

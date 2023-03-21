@@ -47,21 +47,13 @@ namespace Oxide.Ext.Discord
         /// Global logger for areas that aren't part of a client connection
         /// </summary>
         internal static ILogger GlobalLogger;
-
-        internal static DiscordAppCommand DiscordAppCommand;
-        internal static DiscordLink DiscordLink;
-        internal static DiscordCommand DiscordCommand;
-        internal static DiscordSubscriptions DiscordSubscriptions;
-        internal static DiscordLang DiscordLang;
+        
         internal static DiscordMessageTemplates DiscordMessageTemplates;
         internal static DiscordEmbedTemplates DiscordEmbedTemplates;
         internal static DiscordEmbedFieldTemplates DiscordEmbedFieldTemplates;
         internal static DiscordModalTemplates DiscordModalTemplates;
         internal static DiscordCommandLocalizations DiscordCommandLocalizations;
-        internal static DiscordPlaceholders DiscordPlaceholders;
-        internal static DiscordPool DiscordPool;
-        internal static DiscordConfig DiscordConfig;
-
+        
         internal static bool IsShuttingDown;
 
         /// <summary>
@@ -95,15 +87,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnModLoad()
         {
-            string configPath = Path.Combine(Interface.Oxide.InstanceDirectory, "discord.config.json");
-            if (!File.Exists(configPath))
-            {
-                DiscordConfig = new DiscordConfig(configPath);
-                DiscordConfig.Save();
-            }
-
-            DiscordConfig = ConfigFile.Load<DiscordConfig>(configPath);
-            DiscordConfig.Save();
+            DiscordConfig.Load();
             
             GlobalLogger = DiscordLoggerFactory.Instance.GetExtensionLogger(string.IsNullOrEmpty(TestVersion) ? DiscordLogLevel.Warning : DiscordLogLevel.Verbose);
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
@@ -113,32 +97,28 @@ namespace Oxide.Ext.Discord
                 GlobalLogger.Exception("An unhandled exception was thrown!", exception?.ExceptionObject as System.Exception);
             };
             
-            DiscordPool = new DiscordPool(GlobalLogger);
-            
-            DiscordUserData.Load();
+            Manager.RegisterLibrary(nameof(DiscordPool), new DiscordPool(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordAppCommand),  new DiscordAppCommand(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordLink), new DiscordLink(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordCommand), new DiscordCommand(DiscordConfig.Instance.Commands.CommandPrefixes, GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordSubscriptions), new DiscordSubscriptions(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordLang), new DiscordLang(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordPlaceholders), new DiscordPlaceholders(GlobalLogger));
 
-            DiscordAppCommand = new DiscordAppCommand(GlobalLogger);
-            DiscordLink = new DiscordLink(GlobalLogger);
-            DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes, GlobalLogger);
-            DiscordSubscriptions = new DiscordSubscriptions(GlobalLogger);
-            DiscordLang = new DiscordLang(GlobalLogger);
+            DiscordUserData.Load();
+            
             DiscordMessageTemplates = new DiscordMessageTemplates(GlobalLogger);
             DiscordEmbedTemplates = new DiscordEmbedTemplates(GlobalLogger);
             DiscordEmbedFieldTemplates = new DiscordEmbedFieldTemplates(GlobalLogger);
             DiscordModalTemplates = new DiscordModalTemplates(GlobalLogger);
             DiscordCommandLocalizations = new DiscordCommandLocalizations(GlobalLogger);
-            DiscordPlaceholders = new DiscordPlaceholders(GlobalLogger);
 
-            Manager.RegisterLibrary(nameof(DiscordAppCommand), DiscordAppCommand);
-            Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
-            Manager.RegisterLibrary(nameof(DiscordCommand), DiscordCommand);
-            Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);
             Manager.RegisterLibrary(nameof(DiscordMessageTemplates), DiscordMessageTemplates);
             Manager.RegisterLibrary(nameof(DiscordEmbedTemplates), DiscordEmbedTemplates);
             Manager.RegisterLibrary(nameof(DiscordEmbedFieldTemplates), DiscordEmbedFieldTemplates);
             Manager.RegisterLibrary(nameof(DiscordModalTemplates), DiscordModalTemplates);
             Manager.RegisterLibrary(nameof(DiscordCommandLocalizations), DiscordCommandLocalizations);
-            Manager.RegisterLibrary(nameof(DiscordPlaceholders), DiscordPlaceholders);
+            
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
             Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClient.OnPluginRemoved;
             

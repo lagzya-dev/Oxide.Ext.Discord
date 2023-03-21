@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         
         public TEntity GetPlayerEntity(Plugin plugin, string templateName, string playerId, PlaceholderData data = null, TEntity entity = null) => GetPlayerTemplate(plugin, templateName, playerId).ToEntity(data, entity);
         public IDiscordPromise<List<TEntity>> GetBulkEntityForPlayerAsync(Plugin plugin, BulkTemplateRequest request, string playerId, List<TEntity> entities = null) 
-            => GetLocalizedBulkEntityAsync(plugin, request, entities, DiscordExtension.DiscordLang.GetPlayerLanguage(playerId));
+            => GetLocalizedBulkEntityAsync(plugin, request, entities, DiscordLang.Instance.GetPlayerLanguage(playerId));
         
         public TEntity GetLocalizedEntity(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData data = null, TEntity entity = null) 
             => GetLocalizedTemplate(plugin, templateName, language).ToEntity(data, entity);

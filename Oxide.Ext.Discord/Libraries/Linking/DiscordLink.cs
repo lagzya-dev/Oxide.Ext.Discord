@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     /// <summary>
     /// Represents a library for discord linking
     /// </summary>
-    public class DiscordLink : BaseDiscordLibrary
+    public class DiscordLink : BaseDiscordLibrary<DiscordLink>
     {
         private readonly Hash<string, Snowflake> _steamIdToDiscordId = new Hash<string, Snowflake>();
         private readonly Hash<Snowflake, string> _discordIdToSteamId = new Hash<Snowflake, string>();

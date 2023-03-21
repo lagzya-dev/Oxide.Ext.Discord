@@ -10,6 +10,7 @@ using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Plugins.Core;
@@ -147,7 +148,7 @@ namespace Oxide.Ext.Discord
             Bot = bot;
             if (bot.Application != null)
             {
-                DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(bot.Application, Plugin);
+                DiscordAppCommand.Instance.RegisterApplicationCommands(bot.Application, Plugin);
             }
         }
 

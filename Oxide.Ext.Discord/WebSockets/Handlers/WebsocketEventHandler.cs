@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
@@ -25,7 +26,10 @@ using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.WebSockets;
 using Oxide.Ext.Discord.Json.Serialization;
+using Oxide.Ext.Discord.Libraries.AppCommands;
+using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -1256,27 +1260,27 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
             if (!message.Author.Bot.HasValue || !message.Author.Bot.Value)
             {
-                if(!string.IsNullOrEmpty(message.Content) && DiscordExtension.DiscordCommand.HasCommands() && DiscordExtension.DiscordConfig.Commands.CommandPrefixes.Contains(message.Content[0]))
+                if(!string.IsNullOrEmpty(message.Content) && DiscordCommand.Instance.HasCommands() && DiscordConfig.Instance.Commands.CommandPrefixes.Contains(message.Content[0]))
                 {
-                    message.Content.TrimStart(DiscordExtension.DiscordConfig.Commands.CommandPrefixes).ParseCommand(out string command, out string[] args);
+                    message.Content.TrimStart(DiscordConfig.Instance.Commands.CommandPrefixes).ParseCommand(out string command, out string[] args);
                     _logger.Debug($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchMessageCreate)} Cmd: {{0}}", message.Content);
 
-                    if (message.GuildId.HasValue && message.GuildId.Value.IsValid() && DiscordExtension.DiscordCommand.HandleGuildCommand(_client, message, channel, command, args))
+                    if (message.GuildId.HasValue && message.GuildId.Value.IsValid() && DiscordCommand.Instance.HandleGuildCommand(_client, message, channel, command, args))
                     {
                         _logger.Debug($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchMessageCreate)} Guild Handled Cmd: {{0}}", command);
                         return;
                     }
 
-                    if (!message.GuildId.HasValue && DiscordExtension.DiscordCommand.HandleDirectMessageCommand(_client, message, channel, command, args))
+                    if (!message.GuildId.HasValue && DiscordCommand.Instance.HandleDirectMessageCommand(_client, message, channel, command, args))
                     {
                         _logger.Debug($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchMessageCreate)} Direct Handled Cmd: {{0}}", command);
                         return;
                     }
                 }
 
-                if (DiscordExtension.DiscordSubscriptions.HasSubscriptions() && channel != null && message.GuildId.HasValue)
+                if (DiscordSubscriptions.Instance.HasSubscriptions() && channel != null && message.GuildId.HasValue)
                 {
-                    DiscordExtension.DiscordSubscriptions.HandleMessage(message, channel, _client);
+                    DiscordSubscriptions.Instance.HandleMessage(message, channel, _client);
                 }
             }
 
@@ -1584,7 +1588,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         //https://discord.com/developers/docs/topics/gateway#interaction-create
         private void HandleDispatchInteractionCreate(DiscordInteraction interaction)
         {
-            if (DiscordExtension.DiscordAppCommand.HandleInteraction(interaction))
+            if (DiscordAppCommand.Instance.HandleInteraction(interaction))
             {
                 _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchInteractionCreate)} Handled. Guild ID: {{0}} Channel ID: {{1}} Interaction ID: {{2}}", interaction.GuildId, interaction.ChannelId, interaction.Id);
                 return;

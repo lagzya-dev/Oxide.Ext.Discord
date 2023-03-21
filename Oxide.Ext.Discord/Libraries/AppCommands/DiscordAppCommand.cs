@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
     /// Application Command Oxide Library handler
     /// Routes Application Commands to their respective hook method handlers instead of having to manually handle it.
     /// </summary>
-    public class DiscordAppCommand : BaseDiscordLibrary
+    public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>
     {
         private readonly Hash<Snowflake, ApplicationCommandHandler> _slashCommands = new Hash<Snowflake, ApplicationCommandHandler>();
         private readonly Hash<Snowflake, MessageComponentHandler> _componentCommands = new Hash<Snowflake, MessageComponentHandler>();
@@ -365,16 +365,16 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                     switch (attribute)
                     {
                         case DiscordAutoCompleteCommandAttribute autoComplete:
-                            DiscordExtension.DiscordAppCommand.AddAutoCompleteCommand(plugin, app, method.Name, autoComplete.Command, autoComplete.ArgumentName, autoComplete.Group, autoComplete.SubCommand);
+                            AddAutoCompleteCommand(plugin, app, method.Name, autoComplete.Command, autoComplete.ArgumentName, autoComplete.Group, autoComplete.SubCommand);
                             break;
                         case DiscordApplicationCommandAttribute appCommand:
-                            DiscordExtension.DiscordAppCommand.AddApplicationCommand(plugin, app, method.Name, appCommand.Command, appCommand.Group, appCommand.SubCommand);
+                            AddApplicationCommand(plugin, app, method.Name, appCommand.Command, appCommand.Group, appCommand.SubCommand);
                             break;
                         case DiscordMessageComponentCommandAttribute component:
-                            DiscordExtension.DiscordAppCommand.AddMessageComponentCommand(plugin, app, component.CustomId, method.Name);
+                            AddMessageComponentCommand(plugin, app, component.CustomId, method.Name);
                             break;
                         case DiscordModalSubmitAttribute modal:
-                            DiscordExtension.DiscordAppCommand.AddModalSubmitCommand(plugin, app, modal.CustomId, method.Name);
+                            AddModalSubmitCommand(plugin, app, modal.CustomId, method.Name);
                             break;
                     }
                 }

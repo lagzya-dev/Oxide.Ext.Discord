@@ -72,7 +72,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <param name="dataKey">Data key in <see cref="PlaceholderData"/></param>
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
         {
-            DiscordPlaceholders placeholders = DiscordExtension.DiscordPlaceholders;
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             placeholders.RegisterPlaceholder<TimeSpan>(plugin, $"{placeholderPrefix}.time", dataKey, Time);
             placeholders.RegisterPlaceholder<TimeSpan>(plugin, $"{placeholderPrefix}.days", dataKey, Days);
             placeholders.RegisterPlaceholder<TimeSpan>(plugin, $"{placeholderPrefix}.hours", dataKey, Hours);

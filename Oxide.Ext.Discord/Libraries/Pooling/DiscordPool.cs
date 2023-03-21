@@ -7,7 +7,7 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Pooling
 {
-    public class DiscordPool : BaseDiscordLibrary
+    public class DiscordPool : BaseDiscordLibrary<DiscordPool>
     {
         private readonly Hash<string, DiscordPluginPool> _pluginPools = new Hash<string, DiscordPluginPool>();
         internal static DiscordPluginPool Internal;

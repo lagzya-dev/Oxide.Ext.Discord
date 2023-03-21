@@ -48,7 +48,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <param name="dataKey">Data key in <see cref="PlaceholderData"/></param>
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(IServer))
         {
-            DiscordPlaceholders placeholders = DiscordExtension.DiscordPlaceholders;
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             placeholders.RegisterPlaceholder<IServer>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
             placeholders.RegisterPlaceholder<IServer>(plugin, $"{placeholderPrefix}.players", dataKey, Players);
             placeholders.RegisterPlaceholder<IServer>(plugin, $"{placeholderPrefix}.players.max", dataKey, MaxPlayers);

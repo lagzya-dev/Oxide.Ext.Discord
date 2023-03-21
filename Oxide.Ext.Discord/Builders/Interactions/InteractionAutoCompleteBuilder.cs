@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Plugins.Core;
 
@@ -74,7 +75,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         {
             InvalidAutoCompleteChoiceException.ThrowIfInvalidName(name);
             InvalidAutoCompleteChoiceException.ThrowIfInvalidValue(value);
-            return AddAutoCompleteChoice(new CommandOptionChoice(name, value,  DiscordExtension.DiscordLang.GetCommandLocalization(plugin, langKey)));
+            return AddAutoCompleteChoice(new CommandOptionChoice(name, value,  DiscordLang.Instance.GetCommandLocalization(plugin, langKey)));
         }
         
         /// <summary>

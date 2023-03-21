@@ -5,14 +5,18 @@ using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.Command;
+using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest;
@@ -58,8 +62,8 @@ namespace Oxide.Ext.Discord.Plugins.Core
             }
 
             CreateTemplates();
-            DiscordExtension.DiscordPlaceholders.RegisterPlaceholders();
-            DiscordExtension.DiscordPool.CreateInternal(this);
+            DiscordPlaceholders.Instance.RegisterPlaceholders();
+            DiscordPool.Instance.CreateInternal(this);
         }
 
         [HookMethod(nameof(OnServerInitialized))]
@@ -131,14 +135,14 @@ namespace Oxide.Ext.Discord.Plugins.Core
         private void ClearDiscordPool(IPlayer player, string cmd, string[] args)
         {
             Chat(player, LangKeys.ClearPool);
-            DiscordExtension.DiscordPool.Clear();
+            DiscordPool.Instance.Clear();
         }
         
         [HookMethod(nameof(WipeDiscordPool))]
         private void WipeDiscordPool(IPlayer player, string cmd, string[] args)
         {
             Chat(player, LangKeys.WipePool);
-            DiscordExtension.DiscordPool.Wipe();
+            DiscordPool.Instance.Wipe();
         }
         
         [HookMethod(nameof(ConsoleLogCommand))]
@@ -146,15 +150,15 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             if (args.Length == 0)
             {
-                Chat(player, LangKeys.ShowLog, "Console", DiscordExtension.DiscordConfig.Logging.ConsoleLogLevel);
+                Chat(player, LangKeys.ShowLog, "Console", DiscordConfig.Instance.Logging.ConsoleLogLevel);
                 return;
             }
 
             try
             {
                 DiscordLogLevel log = (DiscordLogLevel)Enum.Parse(typeof(DiscordLogLevel), args[0], true);
-                DiscordExtension.DiscordConfig.Logging.ConsoleLogLevel = log;
-                DiscordExtension.DiscordConfig.Save();
+                DiscordConfig.Instance.Logging.ConsoleLogLevel = log;
+                DiscordConfig.Instance.Save();
 
                 Chat(player, LangKeys.SetLog, "Console", log);
             }
@@ -169,15 +173,15 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             if (args.Length == 0)
             {
-                Chat(player, LangKeys.ShowLog, "File", DiscordExtension.DiscordConfig.Logging.FileLogLevel);
+                Chat(player, LangKeys.ShowLog, "File", DiscordConfig.Instance.Logging.FileLogLevel);
                 return;
             }
             
             try
             {
                 DiscordLogLevel log = (DiscordLogLevel)Enum.Parse(typeof(DiscordLogLevel), args[0], true);
-                DiscordExtension.DiscordConfig.Logging.FileLogLevel = log;
-                DiscordExtension.DiscordConfig.Save();
+                DiscordConfig.Instance.Logging.FileLogLevel = log;
+                DiscordConfig.Instance.Save();
 
                 Chat(player, LangKeys.SetLog, "Console", log);
             }
@@ -346,7 +350,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             {
                 sb.Append("\t\tApplication ID: ");
                 sb.AppendLine(client.Application.Id);
-                foreach (BaseAppCommand command in DiscordExtension.DiscordAppCommand.GetCommands(client.Application.Id))
+                foreach (BaseAppCommand command in DiscordAppCommand.Instance.GetCommands(client.Application.Id))
                 {
                     if (command is ComponentCommand componentCommand)
                     {
@@ -384,7 +388,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         public void DebugDiscordCommands(StringBuilder sb)
         {
             sb.AppendLine("\tDiscord Commands:");
-            foreach (BaseCommand command in DiscordExtension.DiscordCommand.GetCommands())
+            foreach (BaseCommand command in DiscordCommand.Instance.GetCommands())
             {
                 if (command is GuildCommand guildCommand)
                 {
@@ -410,7 +414,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         public void DebugSubscriptions(StringBuilder sb)
         {
             sb.AppendLine("\tDiscord Channel Subscriptions:");
-            foreach (DiscordSubscription sub in DiscordExtension.DiscordSubscriptions.GetSubscriptions())
+            foreach (DiscordSubscription sub in DiscordSubscriptions.Instance.GetSubscriptions())
             {
                 DiscordChannel channel = null;
                 DiscordChannel parent = null;

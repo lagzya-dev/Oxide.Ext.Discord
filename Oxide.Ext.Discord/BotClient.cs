@@ -17,6 +17,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
+using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Core;
@@ -215,7 +216,7 @@ namespace Oxide.Ext.Discord
             Rest?.Shutdown();
             Rest = null;
             _readyData = null;
-            DiscordExtension.DiscordAppCommand.OnBotShutdown(this);
+            DiscordAppCommand.Instance.OnBotShutdown(this);
         }
 
         /// <summary>
@@ -379,7 +380,7 @@ namespace Oxide.Ext.Discord
                 for (int index = 0; index < _clients.Count; index++)
                 {
                     DiscordClient client = _clients[index];
-                    DiscordExtension.DiscordAppCommand.RegisterApplicationCommands(Application, client.Plugin);
+                    DiscordAppCommand.Instance.RegisterApplicationCommands(Application, client.Plugin);
                 }
                 
                 DiscordExtensionCore.Instance.RegisterApplicationCommands(this);

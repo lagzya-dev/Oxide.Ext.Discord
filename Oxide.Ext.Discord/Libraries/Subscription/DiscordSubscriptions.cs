@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     /// Represents Discord Subscriptions Oxide Library
     /// Allows for plugins to subscribe to discord channels
     /// </summary>
-    public class DiscordSubscriptions : BaseDiscordLibrary
+    public class DiscordSubscriptions : BaseDiscordLibrary<DiscordSubscriptions>
     {
         private readonly Hash<Snowflake, Hash<string, DiscordSubscription>> _subscriptions = new Hash<Snowflake, Hash<string, DiscordSubscription>>();
 

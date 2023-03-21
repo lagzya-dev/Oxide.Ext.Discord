@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
+using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -107,8 +108,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 return;
             }
 
-            UserOxideLocale = DiscordExtension.DiscordLang.GetOxideLanguage(interaction.Locale);
-            GuildOxideLocale = DiscordExtension.DiscordLang.GetOxideLanguage(interaction.GuildLocale);
+            UserOxideLocale = DiscordLang.Instance.GetOxideLanguage(interaction.Locale);
+            GuildOxideLocale = DiscordLang.Instance.GetOxideLanguage(interaction.GuildLocale);
             
             //Parse the arguments for the application command
             ParseCommand(Data.Options);
