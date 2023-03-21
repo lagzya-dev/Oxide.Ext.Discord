@@ -15,7 +15,6 @@ using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -60,6 +59,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
             CreateTemplates();
             DiscordExtension.DiscordPlaceholders.RegisterPlaceholders();
+            DiscordExtension.DiscordPool.CreateInternal(this);
         }
 
         [HookMethod(nameof(OnServerInitialized))]
@@ -130,9 +130,15 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [HookMethod(nameof(ClearDiscordPool))]
         private void ClearDiscordPool(IPlayer player, string cmd, string[] args)
         {
-            Chat(player, LangKeys.ResetRestApi);
-            
-            DiscordPool.Clear();
+            Chat(player, LangKeys.ClearPool);
+            DiscordExtension.DiscordPool.Clear();
+        }
+        
+        [HookMethod(nameof(WipeDiscordPool))]
+        private void WipeDiscordPool(IPlayer player, string cmd, string[] args)
+        {
+            Chat(player, LangKeys.WipePool);
+            DiscordExtension.DiscordPool.Wipe();
         }
         
         [HookMethod(nameof(ConsoleLogCommand))]

@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public abstract class BasePoolable : IDisposable
     {
-        internal bool Disposed;
+        internal DiscordPluginPool PluginPool { get; private set; }
 
         /// <summary>
         /// Returns if the object should be pooled.
@@ -15,10 +15,13 @@ namespace Oxide.Ext.Discord.Pooling
         /// If the object instantiated using new() outside the pool it will be false
         /// </summary>
         private bool _shouldPool;
+        internal bool Disposed;
+        
         private IPool<BasePoolable> _pool;
 
-        internal void OnInit(IPool<BasePoolable> pool)
+        internal void OnInit(DiscordPluginPool pluginPool, IPool<BasePoolable> pool)
         {
+            PluginPool = pluginPool;
             _pool = pool;
         }
 

@@ -9,8 +9,8 @@ using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.AppCommands.Handlers;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands
@@ -266,23 +266,23 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
-            List<AppCommand> appCommands = DiscordPool.GetList<AppCommand>();
+            List<AppCommand> appCommands = DiscordPool.Internal.GetList<AppCommand>();
             foreach (ApplicationCommandHandler handler in _slashCommands.Values)
             {
                 appCommands.AddRange(handler.GetCommandsForPlugin(plugin));
             }
             
             RemoveAppCommandsInternal(appCommands);
-            DiscordPool.FreeList(appCommands);
+            DiscordPool.Internal.FreeList(appCommands);
 
-            List<ComponentCommand> componentCommands = DiscordPool.GetList<ComponentCommand>();
+            List<ComponentCommand> componentCommands = DiscordPool.Internal.GetList<ComponentCommand>();
             foreach (MessageComponentHandler handler in _componentCommands.Values)
             {
                 componentCommands.AddRange(handler.GetCommandsForPlugin(plugin));
             }
             
             RemoveComponentsInternal(componentCommands);
-            DiscordPool.FreeList(componentCommands);
+            DiscordPool.Internal.FreeList(componentCommands);
         }
         
         internal void OnBotShutdown(BotClient client)
@@ -297,7 +297,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         
         private void RemoveComponentsInternal(IEnumerable<ComponentCommand> commandList)
         {
-            List<ComponentCommand> componentCommands = DiscordPool.GetList<ComponentCommand>();
+            List<ComponentCommand> componentCommands = DiscordPool.Internal.GetList<ComponentCommand>();
             componentCommands.AddRange(commandList);
 
             for (int index = 0; index < componentCommands.Count; index++)
@@ -306,12 +306,12 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                 RemoveMessageComponentCommandInternal(command);
             }
 
-            DiscordPool.FreeList(componentCommands);
+            DiscordPool.Internal.FreeList(componentCommands);
         }
         
         private void RemoveAppCommandsInternal(IEnumerable<AppCommand> commandList)
         {
-            List<AppCommand> commands = DiscordPool.GetList<AppCommand>();
+            List<AppCommand> commands = DiscordPool.Internal.GetList<AppCommand>();
             commands.AddRange(commandList);
 
             for (int index = 0; index < commands.Count; index++)
@@ -320,7 +320,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                 RemoveApplicationCommandInternal(command);
             }
 
-            DiscordPool.FreeList(commands);
+            DiscordPool.Internal.FreeList(commands);
         }
 
         internal bool HandleInteraction(DiscordInteraction interaction)

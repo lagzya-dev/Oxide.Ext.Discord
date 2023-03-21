@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
@@ -14,6 +13,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Pooling.Entities;
 using Oxide.Plugins;
@@ -23,12 +23,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     /// <summary>
     /// Placeholder Data for placeholders
     /// </summary>
-    public class PlaceholderData : IDisposable
+    public class PlaceholderData : BasePoolable
     {
         private readonly Hash<string, object> _data = new Hash<string, object>();
         private readonly List<IBoxed> _boxed = new List<IBoxed>();
-        internal bool ShouldPool { get; private set; } = true;
-        private bool _disposed;
+        internal bool AutoPool { get; private set; } = true;
 
         internal PlaceholderData() { }
 
@@ -215,7 +214,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         {
             if (typeof(T).IsValueType())
             {
-                Boxed<T> boxed = DiscordPool.GetBoxed(obj);
+                Boxed<T> boxed = DiscordPool.Internal.GetBoxed(obj);
                 _data[name] = boxed;
                 _boxed.Add(boxed);
                 return this;
@@ -278,7 +277,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         public void ManualPool()
         {
-            ShouldPool = false;
+            AutoPool = false;
         }
 
         /// <summary>
@@ -287,31 +286,19 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns></returns>
         public PlaceholderData Clone()
         {
-            PlaceholderData data = DiscordPool.GetPlaceholderData();
+            PlaceholderData data = PluginPool.GetPlaceholderData();
             _data.CopyTo(data._data);
             return data;
         }
 
-        internal void EnterPool()
+        protected override void EnterPool()
         {
-            _data.Clear();
-            _boxed.Clear();
-        }
-        
-        ///<inheritdoc/>
-        public void Dispose()
-        {
-            if (_disposed)
-            {
-                throw new ObjectDisposedException(nameof(PlaceholderData));
-            }
-            
-            _disposed = true;
             for (int index = 0; index < _boxed.Count; index++)
             {
                 _boxed[index].Dispose();
             }
-            DiscordPool.FreePlaceholderData(this);
+            _data.Clear();
+            _boxed.Clear();
         }
     }
 }

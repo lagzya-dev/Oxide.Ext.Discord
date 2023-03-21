@@ -12,8 +12,8 @@ using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Plugins.Core;
-using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Builders.Interactions
 {
@@ -279,10 +279,10 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="options"><see cref="AutoCompletePlayerSearchOptions"/> Search Options</param>
         public void AddAllOnlineFirstPlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
         {
-            HashSet<string> addedList = DiscordPool.GetHashSet<string>();
+            HashSet<string> addedList = DiscordPool.Internal.GetHashSet<string>();
             AddPlayerList(Covalence.Players.Connected, filter, comparison, search, options, addedList);
             AddPlayerList(Covalence.Players.All, filter, comparison, search, options, addedList);
-            DiscordPool.FreeHashSet(addedList);
+            DiscordPool.Internal.FreeHashSet(addedList);
         }
         
         /// <summary>

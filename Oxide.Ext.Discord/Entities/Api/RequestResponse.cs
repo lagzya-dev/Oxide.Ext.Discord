@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
 
@@ -35,7 +36,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             {
                 Code = (DiscordHttpStatusCode)response.StatusCode;
                 Content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                RateLimit = DiscordPool.Get<RateLimitResponse>();
+                RateLimit = DiscordPool.Internal.Get<RateLimitResponse>();
                 RateLimit.Init(response.Headers, _client.Logger);
                 error?.SetResponse(Code, Content);
             }
@@ -49,7 +50,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <returns>A success <see cref="RequestResponse"/></returns>
         public static async Task<RequestResponse> CreateSuccessResponse(DiscordClient client, HttpResponseMessage httpResponse)
         {
-            RequestResponse response = DiscordPool.Get<RequestResponse>();
+            RequestResponse response = DiscordPool.Internal.Get<RequestResponse>();
             await response.Init(client, httpResponse, RequestCompletedStatus.Success).ConfigureAwait(false);
             return response;
         }
@@ -64,7 +65,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <returns>A web exception <see cref="RequestResponse"/></returns>
         public static async Task<RequestResponse> CreateExceptionResponse(DiscordClient client, RequestError error, HttpResponseMessage httpResponse, RequestCompletedStatus status)
         {
-            RequestResponse response = DiscordPool.Get<RequestResponse>();
+            RequestResponse response = DiscordPool.Internal.Get<RequestResponse>();
             await response.Init(client, httpResponse, status, error).ConfigureAwait(false);
             return response;
         }
@@ -76,7 +77,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <returns>A cancelled <see cref="RequestResponse"/></returns>
         public static async Task<RequestResponse> CreateCancelledResponse(DiscordClient client)
         {
-            RequestResponse response = DiscordPool.Get<RequestResponse>();
+            RequestResponse response = DiscordPool.Internal.Get<RequestResponse>();
             await response.Init(client, null, RequestCompletedStatus.Cancelled).ConfigureAwait(false);
             return response;
         }

@@ -15,11 +15,8 @@ namespace Oxide.Ext.Discord.Builders
         /// Creates a pooled <see cref="QueryStringBuilder"/>
         /// </summary>
         /// <returns><see cref="QueryStringBuilder"/></returns>
-        public static QueryStringBuilder Create()
-        {
-            return DiscordPool.Get<QueryStringBuilder>();
-        }
-        
+        public static QueryStringBuilder Create(DiscordPluginPool pool) => pool.Get<QueryStringBuilder>();
+
         /// <summary>
         /// Add a key value pair to the query string
         /// </summary>
@@ -86,13 +83,13 @@ namespace Oxide.Ext.Discord.Builders
         /// <inheritdoc/>
         protected override void EnterPool()
         {
-            DiscordPool.FreeStringBuilder(_builder);
+            PluginPool.FreeStringBuilder(_builder);
         }
 
         /// <inheritdoc/>
         protected override void LeavePool()
         {
-            _builder = DiscordPool.GetStringBuilder();
+            _builder = PluginPool.GetStringBuilder();
             _builder.Append("?");
         }
     }

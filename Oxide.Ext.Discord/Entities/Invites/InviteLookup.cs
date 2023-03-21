@@ -1,5 +1,6 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Invites
 {
@@ -26,7 +27,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = QueryStringBuilder.Create();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             if (WithCounts.HasValue)
             {
                 builder.Add("with_counts", WithCounts.Value.ToString());

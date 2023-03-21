@@ -1,4 +1,5 @@
 ﻿using System;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Pooling.Entities
 {
@@ -22,7 +23,7 @@ namespace Oxide.Ext.Discord.Pooling.Entities
             }
             
             _disposed = true;
-            DiscordPool.FreeBoxed(this);
+            DiscordPool.Internal.FreeBoxed(this);
         }
     }
 

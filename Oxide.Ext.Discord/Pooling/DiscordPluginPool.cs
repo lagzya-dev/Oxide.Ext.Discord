@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Pooling.Entities;
 using Oxide.Plugins;
@@ -10,9 +11,17 @@ namespace Oxide.Ext.Discord.Pooling
     /// <summary>
     /// Built in pooling for discord entities
     /// </summary>
-    public static class DiscordPool
+    public class DiscordPluginPool
     {
-        internal static readonly List<IPool> Pools = new List<IPool>();
+        internal readonly Plugin Plugin;
+        private readonly List<IPool> _pools = new List<IPool>();
+
+        public DiscordPluginPool(Plugin plugin)
+        {
+            Plugin = plugin;
+        }
+
+        internal void AddPool(IPool pool) => _pools.Add(pool);
         
         /// <summary>
         /// Returns a pooled object of type T
@@ -20,9 +29,9 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <typeparam name="T">Type to be returned</typeparam>
         /// <returns>Pooled object of type T</returns>
-        public static T Get<T>() where T : BasePoolable, new()
+        public T Get<T>() where T : BasePoolable, new()
         {
-            return (T)ObjectPool<T>.Instance.Get();
+            return (T)ObjectPool<T>.ForPlugin(this).Get();
         }
 
         /// <summary>
@@ -30,9 +39,9 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <param name="value">Object to free</param>
         /// <typeparam name="T">Type of object being freed</typeparam>
-        internal static void Free<T>(T value) where T : BasePoolable, new()
+        internal void Free<T>(T value) where T : BasePoolable, new()
         {
-            ObjectPool<T>.Instance.Free(value);
+            ObjectPool<T>.ForPlugin(this).Free(value);
         }
 
         /// <summary>
@@ -40,9 +49,9 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <typeparam name="T">Type for the list</typeparam>
         /// <returns>Pooled List</returns>
-        public static List<T> GetList<T>()
+        public List<T> GetList<T>()
         {
-            return ListPool<T>.Instance.Get();
+            return ListPool<T>.ForPlugin(this).Get();
         }
 
         /// <summary>
@@ -51,9 +60,9 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="TKey">Type for the key</typeparam>
         /// <typeparam name="TValue">Type for the value</typeparam>
         /// <returns>Pooled Hash</returns>
-        public static Hash<TKey, TValue> GetHash<TKey, TValue>()
+        public Hash<TKey, TValue> GetHash<TKey, TValue>()
         {
-            return HashPool<TKey, TValue>.Instance.Get();
+            return HashPool<TKey, TValue>.ForPlugin(this).Get();
         }
         
         /// <summary>
@@ -61,18 +70,18 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <typeparam name="T">Type for the HashSet</typeparam>
         /// <returns>Pooled List</returns>
-        public static HashSet<T> GetHashSet<T>()
+        public HashSet<T> GetHashSet<T>()
         {
-            return HashSetPool<T>.Instance.Get();
+            return HashSetPool<T>.ForPlugin(this).Get();
         }
 
         /// <summary>
         /// Returns a pooled <see cref="StringBuilder"/>
         /// </summary>
         /// <returns>Pooled <see cref="StringBuilder"/></returns>
-        public static StringBuilder GetStringBuilder()
+        public StringBuilder GetStringBuilder()
         {
-            return StringBuilderPool.Instance.Get();
+            return StringBuilderPool.ForPlugin(this).Get();
         }
         
         /// <summary>
@@ -80,9 +89,9 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <param name="initial">Initial text for the builder</param>
         /// <returns>Pooled <see cref="StringBuilder"/></returns>
-        public static StringBuilder GetStringBuilder(string initial)
+        public StringBuilder GetStringBuilder(string initial)
         {
-            StringBuilder builder = StringBuilderPool.Instance.Get();
+            StringBuilder builder = StringBuilderPool.ForPlugin(this).Get();
             builder.Append(initial);
             return builder;
         }
@@ -91,18 +100,18 @@ namespace Oxide.Ext.Discord.Pooling
         /// Returns a pooled <see cref="MemoryStream"/>
         /// </summary>
         /// <returns>Pooled <see cref="MemoryStream"/></returns>
-        public static MemoryStream GetMemoryStream()
+        public MemoryStream GetMemoryStream()
         {
-            return MemoryStreamPool.Instance.Get();
+            return MemoryStreamPool.ForPlugin(this).Get();
         }
 
         /// <summary>
         /// Returns a pooled <see cref="PlaceholderData"/>
         /// </summary>
         /// <returns>Pooled <see cref="PlaceholderData"/></returns>
-        public static PlaceholderData GetPlaceholderData()
+        public PlaceholderData GetPlaceholderData()
         {
-            return PlaceholderDataPool.Instance.Get();
+            return (PlaceholderData)PlaceholderDataPool.ForPlugin(this).Get();
         }
         
         /// <summary>
@@ -110,9 +119,9 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <typeparam name="T">Type for the Boxed</typeparam>
         /// <returns>Pooled Boxed</returns>
-        internal static Boxed<T> GetBoxed<T>(T value)
+        internal Boxed<T> GetBoxed<T>(T value)
         {
-            Boxed<T> boxed = BoxedPool<T>.Instance.Get();
+            Boxed<T> boxed = BoxedPool<T>.ForPlugin(this).Get();
             boxed.Value = value;
             return boxed;
         }
@@ -122,9 +131,9 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <param name="list">List to be freed</param>
         /// <typeparam name="T">Type of the list</typeparam>
-        public static void FreeList<T>(List<T> list)
+        public void FreeList<T>(List<T> list)
         {
-            ListPool<T>.Instance.Free(list);
+            ListPool<T>.ForPlugin(this).Free(list);
         }
 
         /// <summary>
@@ -133,9 +142,9 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="hash">Hash to be freed</param>
         /// <typeparam name="TKey">Type for key</typeparam>
         /// <typeparam name="TValue">Type for value</typeparam>
-        public static void FreeHash<TKey, TValue>(Hash<TKey, TValue> hash)
+        public void FreeHash<TKey, TValue>(Hash<TKey, TValue> hash)
         {
-            HashPool<TKey, TValue>.Instance.Free(hash);
+            HashPool<TKey, TValue>.ForPlugin(this).Free(hash);
         }
         
         /// <summary>
@@ -143,25 +152,25 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <param name="list">HashSet to be freed</param>
         /// <typeparam name="T">Type of the HashSet</typeparam>
-        public static void FreeHashSet<T>(HashSet<T> list)
+        public void FreeHashSet<T>(HashSet<T> list)
         {
-            HashSetPool<T>.Instance.Free(list);
+            HashSetPool<T>.ForPlugin(this).Free(list);
         }
 
         /// <summary>
         /// Frees a <see cref="StringBuilder"/> back to the pool
         /// </summary>
         /// <param name="sb">StringBuilder being freed</param>
-        public static void FreeStringBuilder(StringBuilder sb)
+        public void FreeStringBuilder(StringBuilder sb)
         {
-            StringBuilderPool.Instance.Free(sb);
+            StringBuilderPool.ForPlugin(this).Free(sb);
         }
 
         /// <summary>
         /// Frees a <see cref="StringBuilder"/> back to the pool returning the built <see cref="string"/>
         /// </summary>
         /// <param name="sb"><see cref="StringBuilder"/> being freed</param>
-        public static string FreeStringBuilderToString(StringBuilder sb)
+        public string FreeStringBuilderToString(StringBuilder sb)
         {
             string result = sb?.ToString();
             FreeStringBuilder(sb);
@@ -172,18 +181,18 @@ namespace Oxide.Ext.Discord.Pooling
         /// Frees a <see cref="MemoryStream"/> back to the pool
         /// </summary>
         /// <param name="stream"><see cref="MemoryStream"/> being freed</param>
-        public static void FreeMemoryStream(MemoryStream stream)
+        public void FreeMemoryStream(MemoryStream stream)
         {
-            MemoryStreamPool.Instance.Free(stream);
+            MemoryStreamPool.ForPlugin(this).Free(stream);
         }
 
         /// <summary>
         /// Frees a <see cref="PlaceholderData"/> back to the pool
         /// </summary>
         /// <param name="data"><see cref="PlaceholderData"/> being freed</param>
-        public static void FreePlaceholderData(PlaceholderData data)
+        public void FreePlaceholderData(PlaceholderData data)
         {
-            PlaceholderDataPool.Instance.Free(data);
+            PlaceholderDataPool.ForPlugin(this).Free(data);
         }
         
         /// <summary>
@@ -191,17 +200,35 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <param name="boxed">Boxed to be freed</param>
         /// <typeparam name="T">Type of the Boxed</typeparam>
-        internal static void FreeBoxed<T>(Boxed<T> boxed)
+        internal void FreeBoxed<T>(Boxed<T> boxed)
         {
-            BoxedPool<T>.Instance.Free(boxed);
+            BoxedPool<T>.ForPlugin(this).Free(boxed);
         }
 
-        internal static void Clear()
+        internal void OnPluginUnloaded(Plugin plugin)
         {
-            for (int index = 0; index < Pools.Count; index++)
+            for (int index = 0; index < _pools.Count; index++)
             {
-                IPool pool = Pools[index];
+                IPool pool = _pools[index];
+                pool.OnPluginUnloaded(plugin);
+            }
+        }
+        
+        internal void Clear()
+        {
+            for (int index = 0; index < _pools.Count; index++)
+            {
+                IPool pool = _pools[index];
                 pool.Clear();
+            }
+        }
+
+        internal void Wipe()
+        {
+            for (int index = 0; index < _pools.Count; index++)
+            {
+                IPool pool = _pools[index];
+                pool.Wipe();
             }
         }
     }

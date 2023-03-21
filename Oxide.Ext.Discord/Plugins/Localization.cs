@@ -10,6 +10,7 @@ namespace Oxide.Ext.Discord.Plugins
         public const string ResetWebSocket = nameof(ResetWebSocket);
         public const string ResetRestApi = nameof(ResetRestApi);
         public const string ClearPool = nameof(ClearPool);
+        public const string WipePool = nameof(WipePool);
         public const string ShowLog = nameof(ShowLog);
         public const string SetLog = nameof(SetLog);
         public const string InvalidLogEnum = nameof(InvalidLogEnum);
@@ -27,6 +28,7 @@ namespace Oxide.Ext.Discord.Plugins
                 [LangKeys.ResetWebSocket] = "All websockets have been reset",
                 [LangKeys.ResetRestApi] = "All REST API's have been reset",
                 [LangKeys.ClearPool] = "All Discord Pools have been cleared",
+                [LangKeys.WipePool] = "All Discord Pools have been wiped",
                 [LangKeys.ShowLog] = "{0} log is currently set to {1}",
                 [LangKeys.SetLog] = "{0} log has been set to {1}",
                 [LangKeys.InvalidLogEnum] = "'{0}' is not a valid DiscordLogLevel enum. Valid values are Off, Error, Warning, Info, Debug, Verbose"

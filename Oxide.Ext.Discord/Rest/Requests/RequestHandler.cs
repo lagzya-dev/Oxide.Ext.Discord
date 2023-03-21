@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <param name="request">Request to be handled by this handler</param>
         public static void StartRequest(RestHandler rest, BaseRequest request)
         {
-            RequestHandler handler = DiscordPool.Get<RequestHandler>();
+            RequestHandler handler = request.PluginPool.Get<RequestHandler>();
             handler.Init(rest, request, request.Client.Logger);
         }
         
@@ -277,7 +277,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         private DiscordStreamContent GetJsonContent(object data)
         {
-            _json = DiscordJsonWriter.Get();
+            _json = DiscordJsonWriter.Get(PluginPool);
             _json.Write(Request.Client.Bot.JsonSerializer, data);
             
             if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))

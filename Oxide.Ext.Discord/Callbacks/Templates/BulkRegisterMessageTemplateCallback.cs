@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Templates;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates
@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
         
         public static void Start(BaseTemplateLibrary<TTemplate> library, TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IDiscordPromise promise)
         {
-            BulkRegisterTemplateCallback<TTemplate> register = DiscordPool.Get<BulkRegisterTemplateCallback<TTemplate>>();
+            BulkRegisterTemplateCallback<TTemplate> register = DiscordPool.Internal.Get<BulkRegisterTemplateCallback<TTemplate>>();
             register.Init(library, id, templates, minVersion, promise);
             register.Run();
         }

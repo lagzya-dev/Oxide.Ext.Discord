@@ -29,9 +29,9 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// Returns a pooled <see cref="DiscordJsonReader"/>
         /// </summary>
         /// <returns></returns>
-        public static DiscordJsonReader Create()
+        public static DiscordJsonReader Create(DiscordPluginPool pluginPool)
         {
-            return DiscordPool.Get<DiscordJsonReader>();
+            return pluginPool.Get<DiscordJsonReader>();
         }
         
         /// <summary>
@@ -39,9 +39,9 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// </summary>
         /// <param name="stream">Stream to load</param>
         /// <returns></returns>
-        public static DiscordJsonReader CreateFromStream(Stream stream)
+        public static DiscordJsonReader CreateFromStream(DiscordPluginPool pluginPool, Stream stream)
         {
-            DiscordJsonReader reader = Create();
+            DiscordJsonReader reader = Create(pluginPool);
             reader.CopyFrom(stream);
             return reader;
         }

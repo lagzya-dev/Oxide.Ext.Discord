@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Libraries.Templates.Commands;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
@@ -58,6 +59,7 @@ namespace Oxide.Ext.Discord
         internal static DiscordModalTemplates DiscordModalTemplates;
         internal static DiscordCommandLocalizations DiscordCommandLocalizations;
         internal static DiscordPlaceholders DiscordPlaceholders;
+        internal static DiscordPool DiscordPool;
         internal static DiscordConfig DiscordConfig;
 
         internal static bool IsShuttingDown;
@@ -111,6 +113,8 @@ namespace Oxide.Ext.Discord
                 GlobalLogger.Exception("An unhandled exception was thrown!", exception?.ExceptionObject as System.Exception);
             };
             
+            DiscordPool = new DiscordPool(GlobalLogger);
+            
             DiscordUserData.Load();
 
             DiscordAppCommand = new DiscordAppCommand(GlobalLogger);
@@ -124,7 +128,7 @@ namespace Oxide.Ext.Discord
             DiscordModalTemplates = new DiscordModalTemplates(GlobalLogger);
             DiscordCommandLocalizations = new DiscordCommandLocalizations(GlobalLogger);
             DiscordPlaceholders = new DiscordPlaceholders(GlobalLogger);
-            
+
             Manager.RegisterLibrary(nameof(DiscordAppCommand), DiscordAppCommand);
             Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
             Manager.RegisterLibrary(nameof(DiscordCommand), DiscordCommand);

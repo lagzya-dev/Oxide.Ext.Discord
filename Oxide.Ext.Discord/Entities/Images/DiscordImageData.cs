@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Exceptions.Entities.Images;
 using Oxide.Ext.Discord.Json.Converters;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Images
 {
@@ -45,12 +45,12 @@ namespace Oxide.Ext.Discord.Entities.Images
             InvalidImageDataException.ThrowIfInvalidImageBytes(image);
             Type = GetType(image);
             Image = image;
-            StringBuilder sb = DiscordPool.GetStringBuilder();
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
             sb.Append("data:image/");
             sb.Append(EnumCache<DiscordImageFormat>.Instance.ToLower(Type));
             sb.Append(";base64,");
             sb.Append(Convert.ToBase64String(Image));
-            Base64Image = DiscordPool.FreeStringBuilderToString(sb);
+            Base64Image = DiscordPool.Internal.FreeStringBuilderToString(sb);
         }
 
         /// <summary>

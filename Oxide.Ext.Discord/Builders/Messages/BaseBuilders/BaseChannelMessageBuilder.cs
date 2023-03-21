@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Stickers;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
 {
@@ -80,13 +80,13 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
         public TBuilder AddStickers(ICollection<DiscordSticker> stickerIds)
         {
             if (stickerIds == null) throw new ArgumentNullException(nameof(stickerIds));
-            List<Snowflake> ids = DiscordPool.GetList<Snowflake>();
+            List<Snowflake> ids = DiscordPool.Internal.GetList<Snowflake>();
             foreach (DiscordSticker sticker in stickerIds)
             {
                 ids.Add(sticker.Id);
             }
             AddStickers(ids);
-            DiscordPool.FreeList(ids);
+            DiscordPool.Internal.FreeList(ids);
                 
             return Builder;
         }

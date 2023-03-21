@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Promise
 {
@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Promise
 
         internal new static DiscordPromise<TResult> Create(bool isInternal = false)
         {
-            DiscordPromise<TResult> promise = DiscordPool.Get<DiscordPromise<TResult>>();
+            DiscordPromise<TResult> promise = DiscordPool.Internal.Get<DiscordPromise<TResult>>();
             promise.IsInternal = isInternal;
             return promise;
         }

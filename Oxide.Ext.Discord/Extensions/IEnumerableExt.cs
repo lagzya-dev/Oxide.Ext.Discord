@@ -17,11 +17,11 @@ namespace Oxide.Ext.Discord.Extensions
         /// <typeparam name="TSource">Type of the list</typeparam>
         /// <returns>Pooled List{TSource}</returns>
         /// <exception cref="ArgumentNullException">Thrown if source is null</exception>
-        public static List<TSource> ToPooledList<TSource>(this IEnumerable<TSource> source)
+        public static List<TSource> ToPooledList<TSource>(this IEnumerable<TSource> source, DiscordPluginPool pluginPool)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
 
-            List<TSource> list = DiscordPool.GetList<TSource>();
+            List<TSource> list = pluginPool.GetList<TSource>();
             list.AddRange(source);
             return list;
         }
@@ -63,13 +63,13 @@ namespace Oxide.Ext.Discord.Extensions
         /// <typeparam name="TElement">Value type for the hash</typeparam>
         /// <returns>Pooled Hash{TKey, TElement}</returns>
         /// <exception cref="ArgumentNullException">Thrown if source is null</exception>
-        public static Hash<TKey, TElement> ToPooledHash<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
+        public static Hash<TKey, TElement> ToPooledHash<TSource, TKey, TElement>(this IEnumerable<TSource> source, DiscordPluginPool pluginPool, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
             if (elementSelector == null) throw new ArgumentNullException(nameof(elementSelector));
 
-            Hash<TKey, TElement> hash = DiscordPool.GetHash<TKey, TElement>();
+            Hash<TKey, TElement> hash = pluginPool.GetHash<TKey, TElement>();
             foreach (TSource element in source)
             {
                 hash.Add(keySelector(element), elementSelector(element));

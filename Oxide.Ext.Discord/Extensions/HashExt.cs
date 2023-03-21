@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Extensions
@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Extensions
         {
             if (hash == null) throw new ArgumentNullException(nameof(hash));
 
-            List<TKey> removeKeys = DiscordPool.GetList<TKey>();
+            List<TKey> removeKeys = DiscordPool.Internal.GetList<TKey>();
             foreach (KeyValuePair<TKey, TValue> key in hash)
             {
                 if (predicate(key.Key))
@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.Extensions
                 hash.Remove(key);
             }
             
-            DiscordPool.FreeList(removeKeys);
+            DiscordPool.Internal.FreeList(removeKeys);
         }
         
         /// <summary>
@@ -50,7 +50,7 @@ namespace Oxide.Ext.Discord.Extensions
         {
             if (hash == null) throw new ArgumentNullException(nameof(hash));
 
-            List<TKey> removeKeys = DiscordPool.GetList<TKey>();
+            List<TKey> removeKeys = DiscordPool.Internal.GetList<TKey>();
             foreach (KeyValuePair<TKey, TValue> key in hash)
             {
                 if (predicate(key.Value))
@@ -65,7 +65,7 @@ namespace Oxide.Ext.Discord.Extensions
                 hash.Remove(key);
             }
             
-            DiscordPool.FreeList(removeKeys);
+            DiscordPool.Internal.FreeList(removeKeys);
         }
 
         /// <summary>

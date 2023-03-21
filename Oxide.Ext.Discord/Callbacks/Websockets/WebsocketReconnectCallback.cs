@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.WebSockets.Handlers;
 
 namespace Oxide.Ext.Discord.Callbacks.Websockets
@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Callbacks.Websockets
 
         public static void Start(WebSocketReconnectHandler reconnect)
         {
-            WebsocketReconnectCallback callback = DiscordPool.Get<WebsocketReconnectCallback>();
+            WebsocketReconnectCallback callback = DiscordPool.Internal.Get<WebsocketReconnectCallback>();
             callback.Init(reconnect);
             callback.Run();
         }

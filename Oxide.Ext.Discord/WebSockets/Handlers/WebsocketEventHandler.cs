@@ -25,8 +25,8 @@ using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.WebSockets;
 using Oxide.Ext.Discord.Json.Serialization;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
@@ -791,7 +791,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             
             Hash<Snowflake, DiscordEmoji> previous = guild.Emojis.Clone();
 
-            List<Snowflake> removedEmojis = DiscordPool.GetList<Snowflake>();
+            List<Snowflake> removedEmojis = DiscordPool.Internal.GetList<Snowflake>();
 
             foreach (Snowflake id in guild.Emojis.Keys)
             {
@@ -807,7 +807,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 guild.Emojis.Remove(id);
             }
             
-            DiscordPool.FreeList(removedEmojis);
+            DiscordPool.Internal.FreeList(removedEmojis);
 
             guild.Emojis.RemoveAll(e => e.EmojiId.HasValue && !emojis.Emojis.ContainsKey(e.EmojiId.Value));
                     
@@ -840,7 +840,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             
             Hash<Snowflake, DiscordSticker> previous = guild.Stickers.Clone();
 
-            List<Snowflake> removedStickers = DiscordPool.GetList<Snowflake>();
+            List<Snowflake> removedStickers = DiscordPool.Internal.GetList<Snowflake>();
 
             foreach (Snowflake id in guild.Stickers.Keys)
             {
@@ -856,7 +856,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 guild.Emojis.Remove(id);
             }
             
-            DiscordPool.FreeList(removedStickers);
+            DiscordPool.Internal.FreeList(removedStickers);
 
             guild.Emojis.RemoveAll(e => e.EmojiId.HasValue && !stickers.Stickers.ContainsKey(e.EmojiId.Value));
                     
@@ -1668,7 +1668,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             DiscordGuild guild = _client.GetGuild(sync.GuildId);
 
             //We clear all threads from the guild if ChannelIds is null or the ChannelId exists in ChannelIds
-            List<Snowflake> deleteThreadIds = DiscordPool.GetList<Snowflake>();
+            List<Snowflake> deleteThreadIds = DiscordPool.Internal.GetList<Snowflake>();
             foreach (DiscordChannel thread in guild.Threads.Values)
             {
                 if (thread.ParentId.HasValue 
@@ -1685,7 +1685,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 guild.Threads.Remove(threadId);
             }
             
-            DiscordPool.FreeList(deleteThreadIds);
+            DiscordPool.Internal.FreeList(deleteThreadIds);
             
             //Add threads to the guild
             foreach (DiscordChannel thread in sync.Threads.Values)

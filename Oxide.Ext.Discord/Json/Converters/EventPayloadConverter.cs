@@ -13,7 +13,7 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Entities.Voice;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.WebSockets.Handlers;
 
 namespace Oxide.Ext.Discord.Json.Converters
@@ -57,7 +57,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject obj = JObject.Load(reader);
-            EventPayload payload = DiscordPool.Get<EventPayload>();
+            EventPayload payload = DiscordPool.Internal.Get<EventPayload>();
             payload.OpCode = obj[EventCode].ToObject<GatewayEventCode>();
             payload.Sequence = obj[Sequence]?.ToObject<int?>();
 

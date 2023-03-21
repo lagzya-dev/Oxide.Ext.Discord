@@ -5,8 +5,8 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Hooks
@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Hooks
 
         internal void RemovePlugin(Plugin plugin)
         {
-            List<string> hooksToRemove = DiscordPool.GetList<string>();
+            List<string> hooksToRemove = DiscordPool.Internal.GetList<string>();
             foreach (KeyValuePair<string, List<Plugin>> cache in _hookCache)
             {
                 if (cache.Value.Remove(plugin) && cache.Value.Count == 0)
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Hooks
                 _hookCache.Remove(hooksToRemove[index]);
             }
             
-            DiscordPool.FreeList(hooksToRemove);
+            DiscordPool.Internal.FreeList(hooksToRemove);
         }
         
         internal void UnsubscribeHook(Plugin plugin, string hook)

@@ -8,9 +8,9 @@ using Oxide.Ext.Discord.Callbacks.Templates.Messages;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Promise;
 using Oxide.Plugins;
 
@@ -163,7 +163,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 entities = new List<T>();
             }
             
-            Hash<string, TTemplate> cache = DiscordPool.GetHash<string, TTemplate>();
+            Hash<string, TTemplate> cache = DiscordPool.Internal.GetHash<string, TTemplate>();
             for (int index = 0; index < request.Items.Count; index++)
             {
                 BulkTemplateItem item = request.Items[index];
@@ -177,7 +177,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 entities.Add((T)template.ToEntity(item.Data));
             }
             
-            DiscordPool.FreeHash(cache);
+            DiscordPool.Internal.FreeHash(cache);
         
             return entities;
         }

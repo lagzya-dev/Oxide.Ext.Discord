@@ -1,6 +1,7 @@
 using System.Text;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Rest.Buckets
@@ -47,9 +48,9 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         /// <param name="method">Request method for the request</param>
         /// <param name="route">API Route</param>
         /// <returns>Bucket ID for route</returns>
-        public static string GetBucketId(RequestMethod method, string route)
+        internal static string GetBucketId(RequestMethod method, string route)
         {
-            BucketIdGenerator gen = DiscordPool.Get<BucketIdGenerator>();
+            BucketIdGenerator gen = DiscordPool.Internal.Get<BucketIdGenerator>();
             gen.Init(method, route);
             string bucketId = gen.GetBucketId();
             gen.Dispose();
@@ -64,7 +65,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         {
             MoveNext();
             
-            StringBuilder bucket = DiscordPool.GetStringBuilder();
+            StringBuilder bucket = DiscordPool.Internal.GetStringBuilder();
             bucket.Append(EnumCache<RequestMethod>.Instance.ToString(_method));
             bucket.Append(':');
             bucket.Append(_current);
@@ -77,7 +78,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 _index++;
             }
 
-            return DiscordPool.FreeStringBuilderToString(bucket);
+            return DiscordPool.Internal.FreeStringBuilderToString(bucket);
         }
 
         /// <summary>

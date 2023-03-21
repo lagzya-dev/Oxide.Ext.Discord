@@ -1,6 +1,6 @@
 using System;
 using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
 
 namespace Oxide.Ext.Discord.Callbacks.Api
@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api
 
         public static void Start(BaseRequest request, RequestResponse response)
         {
-            ApiErrorCallback callback = DiscordPool.Get<ApiErrorCallback>();
+            ApiErrorCallback callback = DiscordPool.Internal.Get<ApiErrorCallback>();
             callback.Init(request, response);
             callback.Run();
         }

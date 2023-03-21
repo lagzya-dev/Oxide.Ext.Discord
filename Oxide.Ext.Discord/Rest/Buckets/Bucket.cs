@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
@@ -96,7 +97,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         
         internal void Merge(Bucket data)
         {
-            List<RequestHandler> handlers = DiscordPool.GetList<RequestHandler>();
+            List<RequestHandler> handlers = DiscordPool.Internal.GetList<RequestHandler>();
             handlers.AddRange(data.Requests.Values);
 
             foreach (RequestHandler handler in handlers)
@@ -104,7 +105,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 QueueRequest(handler);
             }
             
-            DiscordPool.FreeList(handlers);
+            DiscordPool.Internal.FreeList(handlers);
             
             data.Requests.Clear();
         }

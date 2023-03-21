@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -18,8 +18,8 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="args"></param>
         public static void ParseCommand(this string argStr, out string command, out string[] args)
         {
-            List<string> argList = DiscordPool.GetList<string>();
-            StringBuilder stringBuilder = DiscordPool.GetStringBuilder();
+            List<string> argList = DiscordPool.Internal.GetList<string>();
+            StringBuilder stringBuilder = DiscordPool.Internal.GetStringBuilder();
             bool inLongArg = false;
 
             for (int index = 0; index < argStr.Length; index++)
@@ -78,8 +78,8 @@ namespace Oxide.Ext.Discord.Extensions
             command = argList[0].ToLower();
             argList.RemoveAt(0);
             args = argList.ToArray();
-            DiscordPool.FreeStringBuilder(stringBuilder);
-            DiscordPool.FreeList(argList);
+            DiscordPool.Internal.FreeStringBuilder(stringBuilder);
+            DiscordPool.Internal.FreeList(argList);
         }
     }
 }

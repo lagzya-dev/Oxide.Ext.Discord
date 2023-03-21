@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
@@ -23,14 +23,14 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 
         public static void Start(BaseMessageTemplateLibrary<TTemplate, TEntity> templates, TemplateId id, BulkTemplateRequest request, List<TTarget> entities, IDiscordPromise<List<TTarget>> promise)
         {
-            BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget> load = DiscordPool.Get<BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget>>();
+            BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget> load = DiscordPool.Internal.Get<BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget>>();
             load.Init(templates, id, null, request, entities, promise);
             load.Run();
         }
         
         public static void Start(BaseMessageTemplateLibrary<TTemplate, TEntity> templates, TemplateId id, DiscordInteraction interaction, BulkTemplateRequest request, List<TTarget> entities, IDiscordPromise<List<TTarget>> promise)
         {
-            BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget> load = DiscordPool.Get<BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget>>();
+            BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget> load = DiscordPool.Internal.Get<BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget>>();
             load.Init(templates, id, interaction, request, entities, promise);
             load.Run();
         }

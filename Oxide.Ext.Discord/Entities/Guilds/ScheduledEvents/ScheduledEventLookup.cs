@@ -1,5 +1,6 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
 {
@@ -16,7 +17,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = QueryStringBuilder.Create();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             if (WithUserCount.HasValue)
             {
                 builder.Add("with_user_count", WithUserCount.Value.ToString());

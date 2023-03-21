@@ -9,9 +9,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk
     {
         public List<BulkTemplateItem> Items = new List<BulkTemplateItem>();
 
-        public static BulkTemplateRequest Create()
+        public static BulkTemplateRequest Create(DiscordPluginPool pluginPool)
         {
-            return DiscordPool.Get<BulkTemplateRequest>();
+            return pluginPool.Get<BulkTemplateRequest>();
         }
         
         public void AddItem(string templateName, PlaceholderData data = null)

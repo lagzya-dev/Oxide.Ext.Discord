@@ -1,3 +1,5 @@
+using Oxide.Core.Plugins;
+
 namespace Oxide.Ext.Discord.Pooling
 {
     /// <summary>
@@ -5,9 +7,10 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public interface IPool
     {
-        /// <summary>
-        /// Clears the pool
-        /// </summary>
+        void OnPluginUnloaded(Plugin plugin);
+
         void Clear();
+
+        void Wipe();
     }
 }

@@ -17,9 +17,9 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Core;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.WebSockets;
 using Oxide.Plugins;
@@ -333,7 +333,7 @@ namespace Oxide.Ext.Discord
         /// <returns></returns>
         public string GetClientPluginList()
         {
-            StringBuilder sb = DiscordPool.GetStringBuilder();
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
             for (int index = 0; index < _clients.Count; index++)
             {
                 DiscordClient client = _clients[index];
@@ -346,7 +346,7 @@ namespace Oxide.Ext.Discord
                 }
             }
 
-            return DiscordPool.FreeStringBuilderToString(sb);
+            return DiscordPool.Internal.FreeStringBuilderToString(sb);
         }
 
         private void UpdateLogLevel(DiscordLogLevel level)

@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
@@ -38,9 +39,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="data">Data to be used in the state</param>
         /// <returns></returns>
-        public static PlaceholderState Create(PlaceholderData data)
+        internal static PlaceholderState Create(PlaceholderData data)
         {
-            PlaceholderState state = DiscordPool.Get<PlaceholderState>();
+            PlaceholderState state = DiscordPool.Internal.Get<PlaceholderState>();
             state.Init(data);
             return state;
         }

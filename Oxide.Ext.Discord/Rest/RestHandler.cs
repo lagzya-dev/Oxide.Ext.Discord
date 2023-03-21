@@ -9,8 +9,8 @@ using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -92,7 +92,7 @@ namespace Oxide.Ext.Discord.Rest
                 validate.Validate();
             }
             
-            Request request = Request.CreateRequest(client, Client, method, url, data, success, error, callback);
+            Request request = Request.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, success, error, callback);
             StartRequest(request);
         }
 
@@ -114,7 +114,7 @@ namespace Oxide.Ext.Discord.Rest
                 validate.Validate();
             }
 
-            Request<T> request = Request<T>.CreateRequest(client, Client, method, url, data, success, error, callback);
+            Request<T> request = Request<T>.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, success, error, callback);
             StartRequest(request);
         }
 
@@ -178,7 +178,7 @@ namespace Oxide.Ext.Discord.Rest
 
             if (!Buckets.TryGetValue(bucketId, out Bucket bucket))
             {
-                bucket = DiscordPool.Get<Bucket>();
+                bucket = DiscordPool.Internal.Get<Bucket>();
                 bucket.Init(bucketId, this, _logger);
                 Buckets[bucketId] = bucket;
             }

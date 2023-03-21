@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Commands;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
 
         public static void Start(TemplateId id, CommandCreate create, IDiscordPromise promise)
         {
-            ApplyCommandLocalizationsCallback load = DiscordPool.Get<ApplyCommandLocalizationsCallback>();
+            ApplyCommandLocalizationsCallback load = DiscordPool.Internal.Get<ApplyCommandLocalizationsCallback>();
             load.Init(id, create, promise);
             load.Run();
         }

@@ -1,5 +1,5 @@
 using System;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
 
 namespace Oxide.Ext.Discord.Callbacks.Api
@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api
 
         public static void Start(Request request)
         {
-            ApiSuccessCallback callback = DiscordPool.Get<ApiSuccessCallback>();
+            ApiSuccessCallback callback = DiscordPool.Internal.Get<ApiSuccessCallback>();
             callback.Init(request);
             callback.Run();
         }

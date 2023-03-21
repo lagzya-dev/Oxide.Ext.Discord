@@ -29,9 +29,9 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
         /// <param name="callback">Completed callback for the request</param>
         /// <returns>A <see cref="Request"/></returns>
-        public static Request CreateRequest(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action onSuccess, Action<RequestError> onError, BaseApiCompletedCallback callback)
+        public static Request CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action onSuccess, Action<RequestError> onError, BaseApiCompletedCallback callback)
         {
-            Request request = DiscordPool.Get<Request>();
+            Request request = pluginPool.Get<Request>();
             request.Init(client, httpClient, method, route, data, onSuccess, onError, callback);
             return request;
         }

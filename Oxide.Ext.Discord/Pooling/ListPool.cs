@@ -6,16 +6,9 @@ namespace Oxide.Ext.Discord.Pooling
     /// Represents a pool for list&lt;T&gt;
     /// </summary>
     /// <typeparam name="T">Type that will be in the list</typeparam>
-    internal class ListPool<T> : BasePool<List<T>>
+    internal class ListPool<T> : BasePool<ListPool<T>, List<T>>
     {
-        internal static readonly IPool<List<T>> Instance = new ListPool<T>();
-        
-        static ListPool()
-        {
-            DiscordPool.Pools.Add(Instance);
-        }
-
-        private ListPool() : base(512) { }
+        public ListPool() : base(512) { }
         
         protected override List<T> CreateNew() => new List<T>();
         

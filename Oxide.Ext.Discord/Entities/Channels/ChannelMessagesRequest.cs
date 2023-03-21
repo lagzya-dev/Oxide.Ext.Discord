@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Channels
 {
@@ -36,7 +37,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = QueryStringBuilder.Create();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
 
             //Per Documentation "The before, after, and around keys are mutually exclusive, only one may be passed at a time."
             if (Around.HasValue)

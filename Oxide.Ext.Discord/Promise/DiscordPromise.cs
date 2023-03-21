@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core;
 using Oxide.Ext.Discord.Exceptions.Promise;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Promise
@@ -32,7 +33,7 @@ namespace Oxide.Ext.Discord.Promise
 
         internal static IDiscordPromise Create(bool isInternal = false)
         {
-            DiscordPromise promise = DiscordPool.Get<DiscordPromise>();
+            DiscordPromise promise = DiscordPool.Internal.Get<DiscordPromise>();
             promise.IsInternal = isInternal;
             return promise;
         }

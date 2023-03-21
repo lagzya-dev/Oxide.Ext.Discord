@@ -1,6 +1,6 @@
 using System;
 using System.Text;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
 {
@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
 
         public override string ToString()
         {
-            StringBuilder sb = DiscordPool.GetStringBuilder();
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
             sb.Append(Command);
             if (!string.IsNullOrEmpty(Group))
             {
@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
             }
 
             string cmd = sb.ToString();
-            DiscordPool.FreeStringBuilder(sb);
+            DiscordPool.Internal.FreeStringBuilder(sb);
 
             return cmd;
         }

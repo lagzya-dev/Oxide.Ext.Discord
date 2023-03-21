@@ -8,9 +8,9 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Placeholders.Callbacks;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Core;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
@@ -67,7 +67,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             MatchCollection matches = _placeholderRegex.Matches(text);
             if (matches.Count != 0)
             {
-                StringBuilder builder = DiscordPool.GetStringBuilder();
+                StringBuilder builder = DiscordPool.Internal.GetStringBuilder();
                 builder.Append(text);
                 PlaceholderState state = PlaceholderState.Create(data);
                 bool hasNonMatchingPlaceholder = false;
@@ -100,11 +100,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 }
 
                 text = builder.ToString();
-                DiscordPool.FreeStringBuilder(builder);
+                DiscordPool.Internal.FreeStringBuilder(builder);
                 state.Dispose();
             }
 
-            if (data.ShouldPool)
+            if (data.AutoPool)
             {
                 data.Dispose();
             }
@@ -120,7 +120,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             
-            PlaceholderData data = DiscordPool.GetPlaceholderData();
+            PlaceholderData data = DiscordExtension.DiscordPool.GetOrCreate(plugin).GetPlaceholderData();;
             data.AddServer(_covalence.Server);
             data.AddPlugin(plugin);
             return data;

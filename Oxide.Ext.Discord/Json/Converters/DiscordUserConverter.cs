@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling.Entities;
 
 namespace Oxide.Ext.Discord.Json.Converters
@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            PooledDiscordUser pooledUser = DiscordPool.Get<PooledDiscordUser>();
+            PooledDiscordUser pooledUser = DiscordPool.Internal.Get<PooledDiscordUser>();
             serializer.Populate(reader, pooledUser);
             DiscordUser user = DiscordUserCache.Instance.GetOrCreate(pooledUser);
             pooledUser.Dispose();

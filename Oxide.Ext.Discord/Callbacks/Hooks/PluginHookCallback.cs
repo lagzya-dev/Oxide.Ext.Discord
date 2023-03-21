@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks.Hooks
 {
@@ -13,14 +13,14 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
 
         public static void Start(Plugin plugin, string hook, object[] args)
         {
-            PluginHookCallback callback = DiscordPool.Get<PluginHookCallback>();
+            PluginHookCallback callback = DiscordPool.Internal.Get<PluginHookCallback>();
             callback.Init(plugin, hook, args);
             callback.Run();
         }
         
         public static void Start(List<Plugin> plugins, string hook, object[] args)
         {
-            PluginHookCallback callback = DiscordPool.Get<PluginHookCallback>();
+            PluginHookCallback callback = DiscordPool.Internal.Get<PluginHookCallback>();
             callback.Init(plugins, hook, args);
             callback.Run();
         }

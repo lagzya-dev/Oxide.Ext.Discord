@@ -1,6 +1,7 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Guild;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -24,7 +25,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public string ToQueryString()
         {
             Validate();
-            QueryStringBuilder builder = QueryStringBuilder.Create();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             builder.Add("query", Query);
             
             if (Limit.HasValue)

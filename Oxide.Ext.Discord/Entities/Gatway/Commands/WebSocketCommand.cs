@@ -1,3 +1,4 @@
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Gatway.Commands
@@ -24,9 +25,9 @@ namespace Oxide.Ext.Discord.Entities.Gatway.Commands
         /// <param name="code"><see cref="GatewayCommandCode"/> For the command</param>
         /// <param name="payload">Payload for the command</param>
         /// <returns></returns>
-        public static WebSocketCommand CreateCommand(DiscordClient client, GatewayCommandCode code, object payload)
+        internal static WebSocketCommand CreateCommand(DiscordClient client, GatewayCommandCode code, object payload)
         {
-            WebSocketCommand command = DiscordPool.Get<WebSocketCommand>();
+            WebSocketCommand command = DiscordPool.Internal.Get<WebSocketCommand>();
             command.Init(client, code, payload);
             return command;
         }

@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
 {
@@ -30,7 +31,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public override string ToQueryString()
         {
             Validate();
-            QueryStringBuilder builder = QueryStringBuilder.Create();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             
             builder.Add("days", Days.ToString());
             builder.Add("compute_prune_count", ComputePruneCount.ToString());

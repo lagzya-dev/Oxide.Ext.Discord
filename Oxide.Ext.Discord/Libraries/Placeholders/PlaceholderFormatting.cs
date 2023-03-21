@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
 {
@@ -92,7 +92,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 return;
             }
 
-            StringBuilder sb = DiscordPool.GetStringBuilder();
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
             sb.Append(placeholderState.Format);
             MatchCollection matches = GenericPositionRegex.Matches(placeholderState.Format);
             for (int index = matches.Count - 1; index >= 0; index--)
@@ -113,7 +113,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
             
             Replace(builder, placeholderState, sb.ToString());
-            DiscordPool.FreeStringBuilder(sb);
+            DiscordPool.Internal.FreeStringBuilder(sb);
         }
         
         /// <summary>

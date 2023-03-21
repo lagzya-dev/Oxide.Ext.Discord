@@ -9,8 +9,8 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Command
@@ -362,8 +362,8 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <param name="sender"></param>
         protected override void OnPluginUnloaded(Plugin sender)
         {
-            List<DirectMessageCommand> dmCommands = DiscordPool.GetList<DirectMessageCommand>();
-            List<GuildCommand> guildCommands = DiscordPool.GetList<GuildCommand>();
+            List<DirectMessageCommand> dmCommands = DiscordPool.Internal.GetList<DirectMessageCommand>();
+            List<GuildCommand> guildCommands = DiscordPool.Internal.GetList<GuildCommand>();
             // Remove all discord commands which were registered by the plugin
             foreach (DirectMessageCommand cmd in _directMessageCommands.Values)
             {
@@ -393,8 +393,8 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 RemoveGuildCommand(cmd);
             }
             
-            DiscordPool.FreeList(dmCommands);
-            DiscordPool.FreeList(guildCommands);
+            DiscordPool.Internal.FreeList(dmCommands);
+            DiscordPool.Internal.FreeList(guildCommands);
         }
     }
 }

@@ -35,9 +35,9 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// Returns a pooled <see cref="DiscordJsonWriter"/>
         /// </summary>
         /// <returns></returns>
-        public static DiscordJsonWriter Get()
+        public static DiscordJsonWriter Get(DiscordPluginPool pluginPool)
         {
-            return DiscordPool.Get<DiscordJsonWriter>();
+            return pluginPool.Get<DiscordJsonWriter>();
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <param name="serializer">Serializer to use</param>
         /// <param name="payload">Payload to serialize</param>
         /// <param name="output">Output stream to write to</param>
-        public static void WriteAndCopy(JsonSerializer serializer, object payload, Stream output)
+        public static void WriteAndCopy(DiscordPluginPool pluginPool, JsonSerializer serializer, object payload, Stream output)
         {
-            DiscordJsonWriter writer = Get();
+            DiscordJsonWriter writer = Get(pluginPool);
             writer.Write(serializer, payload);
             writer.Stream.CopyToPooled(output);
             writer.Dispose();

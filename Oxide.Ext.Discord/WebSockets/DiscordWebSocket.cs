@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
 using Oxide.Ext.Discord.Json.Serialization;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.WebSockets.Handlers;
 
@@ -195,7 +196,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 return false;
             }
 
-            DiscordJsonWriter writer = DiscordJsonWriter.Get();
+            DiscordJsonWriter writer = DiscordJsonWriter.Get(DiscordPool.Internal);
             writer.Write(_client.JsonSerializer, payload);
             writer.Stream.Position = 0;
 

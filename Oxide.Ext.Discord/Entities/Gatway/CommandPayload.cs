@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Gatway
@@ -30,7 +31,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// <returns></returns>
         public static CommandPayload CreatePayload(GatewayCommandCode code, object payload)
         {
-            CommandPayload command = DiscordPool.Get<CommandPayload>();
+            CommandPayload command = DiscordPool.Internal.Get<CommandPayload>();
             command.Init(code, payload);
             return command;
         }
