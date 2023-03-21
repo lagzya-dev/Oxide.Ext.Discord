@@ -7,6 +7,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Promise;
 using Oxide.Ext.Discord.Types;
@@ -38,8 +39,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         
         internal readonly DiscordConcurrentHashSet<TemplateId> RegisteredTemplates = new DiscordConcurrentHashSet<TemplateId>();
         private readonly Hash<string, string> _pluginTemplatePath = new Hash<string, string>();
-        
-        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings {Formatting = Formatting.Indented};
 
         /// <summary>
         /// Constructor
@@ -120,7 +119,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             try
             {
                 string json = File.ReadAllText(path);
-                return JsonConvert.DeserializeObject<TTemplate>(json, Settings);
+                return JsonConvert.DeserializeObject<TTemplate>(json, JsonSettings.Indented);
             }
             catch (Exception ex)
             {
@@ -142,7 +141,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 Directory.CreateDirectory(dir);
             }
 
-            string json = JsonConvert.SerializeObject(template, Settings);
+            string json = JsonConvert.SerializeObject(template, JsonSettings.Indented);
             File.WriteAllText(path, json);
         }
 
