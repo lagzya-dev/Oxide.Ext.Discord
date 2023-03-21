@@ -6,9 +6,7 @@ using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Promise;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
