@@ -43,8 +43,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="rootDirectory">Root Directory for the library</param>
-        /// <param name="templateTypeDirectory">The directory for the template type</param>
         /// <param name="type">The template type of this library</param>
         /// <param name="logger"></param>
         protected BaseTemplateLibrary(TemplateType type, ILogger logger)

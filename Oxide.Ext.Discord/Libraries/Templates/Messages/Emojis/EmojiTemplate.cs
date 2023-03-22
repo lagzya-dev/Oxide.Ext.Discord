@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis
         /// If the emoji is Animated
         /// </summary>
         [JsonProperty("For Custom Emojis Is The Emoji Animated")]
-        public bool Animated { get; set; } = false;
+        public bool Animated { get; set; }
 
         /// <summary>
         /// Default constructor

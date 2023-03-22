@@ -13,36 +13,47 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
     public class MessageEmbedTemplate : IEmbedTemplate
     {
         ///<inheritdoc/>
+        [JsonProperty("Show Embed")]
         public bool Enabled { get; set; }
 
         ///<inheritdoc/>
+        [JsonProperty("Embed Title")]
         public string Title { get; set; } = string.Empty;
         
         ///<inheritdoc/>
+        [JsonProperty("Embed Title URL")]
         public string Url { get; set; } = string.Empty;
         
         ///<inheritdoc/>
+        [JsonProperty("Embed Description")]
         public string Description { get; set; } = string.Empty;
 
         ///<inheritdoc/>
+        [JsonProperty("Embed Hex Color")]
         public string Color { get; set; } = DiscordColor.Default.ToHex();
         
         ///<inheritdoc/>
+        [JsonProperty("Embed Image URL")]
         public string ImageUrl { get; set; } = string.Empty;
         
         ///<inheritdoc/>
+        [JsonProperty("Embed Thumbnail URL")]
         public string ThumbnailUrl { get; set; } = string.Empty;
         
         ///<inheritdoc/>
+        [JsonProperty("Embed View Url")]
         public string VideoUrl { get; set; } = string.Empty;
         
         ///<inheritdoc/>
-        public bool TimeStamp { get; set; }
+        [JsonProperty("Show Embed TimeStamp")]
+        public bool TimeStamp { get; set; } = false;
         
         ///<inheritdoc/>
+        [JsonProperty("Embed Fields")]
         public List<MessageEmbedFieldTemplate> Fields { get; set; }
         
         ///<inheritdoc/>
+        [JsonProperty("Embed Footer")]
         public EmbedFooterTemplate Footer { get; set; }
 
         /// <summary>

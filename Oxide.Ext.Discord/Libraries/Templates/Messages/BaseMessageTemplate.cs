@@ -11,7 +11,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="type"></param>
         /// <param name="internalVersion"></param>
         protected BaseMessageTemplate(TemplateVersion internalVersion) : base(internalVersion) { }
 

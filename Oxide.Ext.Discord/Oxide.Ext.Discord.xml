@@ -19698,7 +19698,6 @@
             <summary>
             Constructor
             </summary>
-            <param name="type">Type of the template</param>
             <param name="internalVersion">Internal Template Version</param>
         </member>
         <member name="P:Oxide.Ext.Discord.Libraries.Templates.BaseTemplate.Version">
@@ -19737,8 +19736,6 @@
             <summary>
             Constructor
             </summary>
-            <param name="rootDirectory">Root Directory for the library</param>
-            <param name="templateTypeDirectory">The directory for the template type</param>
             <param name="type">The template type of this library</param>
             <param name="logger"></param>
         </member>
@@ -19979,7 +19976,6 @@
             <summary>
             Constructor
             </summary>
-            <param name="type"></param>
             <param name="internalVersion"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.BaseMessageTemplate`1.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,`0)">

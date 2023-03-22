@@ -4,8 +4,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk
 {
     public struct BulkTemplateItem
     {
-        public string TemplateName;
-        public PlaceholderData Data;
+        public readonly string TemplateName;
+        public readonly PlaceholderData Data;
 
         public BulkTemplateItem(string templateName, PlaceholderData data)
         {
