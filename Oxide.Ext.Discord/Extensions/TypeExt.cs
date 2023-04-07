@@ -17,6 +17,11 @@ namespace Oxide.Ext.Discord.Extensions
             return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
         
+        /// <summary>
+        /// Returns if a type is a value type
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static bool IsValueType(this Type source) 
         {
             return source.IsValueType;

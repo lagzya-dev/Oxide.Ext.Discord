@@ -23,12 +23,8 @@ namespace Oxide.Ext.Discord.Promise
             promise.IsInternal = isInternal;
             return promise;
         }
-        
-        /// <summary>
-        /// Registers a Promise callback once the async call is completed with {T} type
-        /// </summary>
-        /// <param name="onResolved">Callback to register</param>
-        /// <returns>This</returns>
+
+        ///<inheritdoc/>
         public IDiscordPromise<TResult> Then(Action<TResult> onResolved)
         {
             if (State == PromiseState.Resolved)
@@ -40,7 +36,8 @@ namespace Oxide.Ext.Discord.Promise
             _success.Add(onResolved);
             return this;
         }
-        
+
+        ///<inheritdoc/>
         public IDiscordPromise<TConvert> Then<TConvert>(Func<TResult, TConvert> onResolved)
         {
             DiscordPromise<TConvert> promise = DiscordPromise<TConvert>.Create(IsInternal);
@@ -55,7 +52,8 @@ namespace Oxide.Ext.Discord.Promise
             IsInternal = true;
             return promise;
         }
-        
+
+        ///<inheritdoc/>
         public IDiscordPromise<TConvert> Then<TConvert>(Func<TResult, IDiscordPromise<TConvert>> onResolved)
         {
             DiscordPromise<TConvert> promise = DiscordPromise<TConvert>.Create(IsInternal);
@@ -69,19 +67,8 @@ namespace Oxide.Ext.Discord.Promise
             IsInternal = true;
             return promise;
         }
-        
-        public new IDiscordPromise<TResult> Catch(Action<Exception> onFail)
-        {
-            if (State == PromiseState.Failed)
-            {
-                onFail(Exception);
-                return this;
-            }
 
-            base.Catch(onFail);
-            return this;
-        }
-        
+        ///<inheritdoc/>
         public IDiscordPromise<TResult> Done(Action<TResult> onResolved, Action<Exception> onFail)
         {
             Then(onResolved);
@@ -103,10 +90,7 @@ namespace Oxide.Ext.Discord.Promise
             base.InvokeResolveInternal();
         }
 
-        /// <summary>
-        /// Invokes the <see cref="InvokeResolveInternal"/> method
-        /// </summary>
-        /// <param name="data">Data to invoke with</param>
+        ///<inheritdoc/>
         public void Resolve(TResult data)
         {
             SetState(PromiseState.Resolved);

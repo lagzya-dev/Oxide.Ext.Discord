@@ -87,6 +87,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// <summary>
         /// Converts the template to a <see cref="DiscordEmbed"/>
         /// </summary>
+        /// <param name="template">Template to create the entity for</param>
         /// <param name="data">Data to use</param>
         /// <param name="embed">Initial embed to use</param>
         /// <returns></returns>

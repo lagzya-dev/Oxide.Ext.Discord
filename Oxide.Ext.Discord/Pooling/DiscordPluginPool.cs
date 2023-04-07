@@ -16,6 +16,10 @@ namespace Oxide.Ext.Discord.Pooling
         internal readonly Plugin Plugin;
         private readonly List<IPool> _pools = new List<IPool>();
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="plugin">Plugin the pool is for</param>
         public DiscordPluginPool(Plugin plugin)
         {
             Plugin = plugin;

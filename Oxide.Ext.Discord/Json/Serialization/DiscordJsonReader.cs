@@ -33,10 +33,11 @@ namespace Oxide.Ext.Discord.Json.Serialization
         {
             return pluginPool.Get<DiscordJsonReader>();
         }
-        
+
         /// <summary>
         /// Returns a pooled <see cref="DiscordJsonReader"/> with stream loaded into it
         /// </summary>
+        /// <param name="pluginPool">The <see cref="DiscordPluginPool"/> to pool from</param>
         /// <param name="stream">Stream to load</param>
         /// <returns></returns>
         public static DiscordJsonReader CreateFromStream(DiscordPluginPool pluginPool, Stream stream)

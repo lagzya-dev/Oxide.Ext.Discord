@@ -12,10 +12,18 @@ namespace Oxide.Ext.Discord.Promise
     /// </summary>
     public class DiscordPromise : BasePoolable, IDiscordPromise
     {
+        /// <summary>
+        /// If the promise is for an internal extension request
+        /// </summary>
         protected bool IsInternal;
-        internal PromiseState State { get; private set; }
+        
+        /// <summary>
+        /// The exception for the promise
+        /// </summary>
         protected Exception Exception;
 
+        internal PromiseState State { get; private set; }
+        
         private readonly Action _resolve;
         private readonly Action _fail;
         private readonly Action _dispose;
@@ -24,6 +32,9 @@ namespace Oxide.Ext.Discord.Promise
         private readonly List<Action<Exception>> _fails = new List<Action<Exception>>();
         private readonly List<IDiscordPromise> _children = new List<IDiscordPromise>();
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public DiscordPromise()
         {
             _resolve = InvokeResolveInternal;
@@ -55,6 +66,7 @@ namespace Oxide.Ext.Discord.Promise
             return this;
         }
 
+        ///<inheritdoc/>
         public IDiscordPromise Catch(Action<Exception> onFail)
         {
             if (State == PromiseState.Failed)
@@ -67,6 +79,7 @@ namespace Oxide.Ext.Discord.Promise
             return this;
         }
 
+        ///<inheritdoc/>
         public IDiscordPromise Done(Action onResolved, Action<Exception> onFail)
         {
             Then(onResolved);
@@ -105,9 +118,7 @@ namespace Oxide.Ext.Discord.Promise
             DelayedDispose();
         }
 
-        /// <summary>
-        /// Invokes the <see cref="InvokeResolveInternal"/> method
-        /// </summary>
+        ///<inheritdoc/>
         public void Resolve()
         {
             SetState(PromiseState.Resolved);
@@ -121,6 +132,7 @@ namespace Oxide.Ext.Discord.Promise
             Interface.Oxide.NextTick(_resolve);
         }
 
+        ///<inheritdoc/>
         public void Fail(Exception ex)
         {
             SetState(PromiseState.Failed);
@@ -134,6 +146,10 @@ namespace Oxide.Ext.Discord.Promise
             Interface.Oxide.NextTick(_fail);
         }
 
+        /// <summary>
+        /// Adds a child callback to the promise
+        /// </summary>
+        /// <param name="child"></param>
         protected void AddChild(IDiscordPromise child)
         {
             if (State == PromiseState.Failed)
@@ -148,6 +164,10 @@ namespace Oxide.Ext.Discord.Promise
             }
         }
 
+        /// <summary>
+        /// Sets the current state of the promise
+        /// </summary>
+        /// <param name="state"></param>
         protected void SetState(PromiseState state)
         {
             PromiseResolvedException.ThrowIfNotPending(this);
@@ -159,6 +179,7 @@ namespace Oxide.Ext.Discord.Promise
             Interface.Oxide.NextTick(_dispose);
         }
 
+        ///<inheritdoc/>
         protected override void LeavePool()
         {
             State = PromiseState.Pending;

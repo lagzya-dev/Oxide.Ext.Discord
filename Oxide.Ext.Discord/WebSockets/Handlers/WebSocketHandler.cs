@@ -245,7 +245,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <summary>
         /// Disconnects from the websocket with the given code and reason
         /// </summary>
-        /// <param name="id">ID of the websocket</param>
+        /// <param name="client">Client for the websockk</param>
         /// <param name="status">Status to close with</param>
         /// <param name="reason">Reason for the close</param>
         /// <param name="closeReceived">If we received a close from the websocket</param>

@@ -21,16 +21,19 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     public abstract class BaseTemplateLibrary<TTemplate> : BaseDiscordLibrary where TTemplate : BaseTemplate
     {
         /// <summary>
-        /// Logger for the <see cref="BaseTemplateLibrary"/>
+        /// Logger for the <see cref="BaseTemplateLibrary{TTemplate}"/>
         /// </summary>
         protected readonly ILogger Logger;
         
         /// <summary>
         /// Root Directory for the library
         /// </summary>
-        protected readonly string RootDirectory;
+        private readonly string _rootDirectory;
 
-        protected readonly string TemplateTypeDirectory;
+        /// <summary>
+        /// Template Type Directory
+        /// </summary>
+        private readonly string _templateTypeDirectory;
         
         /// <summary>
         /// The template type of this template library
@@ -47,14 +50,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="logger"></param>
         protected BaseTemplateLibrary(TemplateType type, ILogger logger)
         {
-            RootDirectory = Path.Combine(Interface.Oxide.InstanceDirectory, "discord");
+            _rootDirectory = Path.Combine(Interface.Oxide.InstanceDirectory, "discord");
             Logger = logger;
             TemplateType = type;
-            TemplateTypeDirectory = EnumCache<TemplateType>.Instance.ToLower(TemplateType);
+            _templateTypeDirectory = EnumCache<TemplateType>.Instance.ToLower(TemplateType);
 
-            if (!Directory.Exists(RootDirectory))
+            if (!Directory.Exists(_rootDirectory))
             {
-                Directory.CreateDirectory(RootDirectory);
+                Directory.CreateDirectory(_rootDirectory);
             }
         }
         
@@ -193,12 +196,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             File.Move(oldPath, newPath);
         }
 
+        /// <summary>
+        /// Returns the template folder for a given plugin
+        /// </summary>
+        /// <param name="plugin">Plugin Name the template is for</param>
+        /// <returns></returns>
         protected string GetTemplateFolder(string plugin)
         {
             string folder = _pluginTemplatePath[plugin];
             if (string.IsNullOrEmpty(folder))
             {
-                folder = Path.Combine(RootDirectory, plugin, TemplateTypeDirectory);
+                folder = Path.Combine(_rootDirectory, plugin, _templateTypeDirectory);
                 _pluginTemplatePath[plugin] = folder;
             }
             
@@ -223,7 +231,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         }
 
         internal virtual void OnTemplateRegistered(TemplateId id, TTemplate template) { }
-        
+
+        ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             _pluginTemplatePath.Remove(plugin.Id());

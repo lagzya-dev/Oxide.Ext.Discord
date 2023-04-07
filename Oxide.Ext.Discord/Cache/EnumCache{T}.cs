@@ -70,13 +70,12 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns></returns>
         public string ToNumber(T value)
         {
-            if (_numberString.TryGetValue(value, out string str))
+            if (!_numberString.TryGetValue(value, out string str))
             {
-                return str;
+                str = value.ToType(Enum.GetUnderlyingType(typeof(T)), null).ToString();
+                _numberString[value] = str;
             }
-            
-            str = value.ToType(Enum.GetUnderlyingType(typeof(T)), null).ToString();
-            _numberString[value] = str;
+
             return str;
         }
 

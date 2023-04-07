@@ -14,6 +14,9 @@ namespace Oxide.Ext.Discord.Pooling
         where TPool : BasePool<TPool, TPooled>, new()
         where TPooled : class
     {
+        /// <summary>
+        /// Plugin Pool for this pool
+        /// </summary>
         protected DiscordPluginPool PluginPool;
         
         private readonly TPooled[] _pool;
@@ -30,6 +33,11 @@ namespace Oxide.Ext.Discord.Pooling
             _pool = new TPooled[maxSize];
         }
 
+        /// <summary>
+        /// Returns a pool for the given plugin pool
+        /// </summary>
+        /// <param name="pluginPool"><see cref="DiscordPluginPool"/> to get the pool from</param>
+        /// <returns></returns>
         public static TPool ForPlugin(DiscordPluginPool pluginPool)
         {
             Plugin plugin = pluginPool.Plugin;
@@ -115,6 +123,7 @@ namespace Oxide.Ext.Discord.Pooling
             item = null;
         }
 
+        ///<inheritdoc/>
         public void OnPluginUnloaded(Plugin plugin)
         {
             Pools.Remove(plugin.Id());
@@ -135,6 +144,9 @@ namespace Oxide.Ext.Discord.Pooling
             }
         }
 
+        /// <summary>
+        /// Wipes all the pools for this type
+        /// </summary>
         public void Wipe()
         {
             Pools.Clear();

@@ -5,6 +5,9 @@ using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
 {
+    /// <summary>
+    /// Embed Template
+    /// </summary>
     public interface IEmbedTemplate
     {
         /// <summary>

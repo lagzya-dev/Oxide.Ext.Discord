@@ -23,6 +23,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         [JsonProperty("Type")]
         public MessageComponentType Type { get; set; }
 
+        /// <summary>
+        /// Represents a base Message Component Template
+        /// </summary>
+        /// <param name="type"></param>
         protected BaseComponentTemplate(MessageComponentType type)
         {
             Type = type;

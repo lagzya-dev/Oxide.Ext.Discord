@@ -43,6 +43,7 @@ namespace Oxide.Ext.Discord.Json.Serialization
         /// <summary>
         /// Serializes the payload to the output stream
         /// </summary>
+        /// <param name="pluginPool">The <see cref="DiscordPluginPool"/> to pool from</param>
         /// <param name="serializer">Serializer to use</param>
         /// <param name="payload">Payload to serialize</param>
         /// <param name="output">Output stream to write to</param>

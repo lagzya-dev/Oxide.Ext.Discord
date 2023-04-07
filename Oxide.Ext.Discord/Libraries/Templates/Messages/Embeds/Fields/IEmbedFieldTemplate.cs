@@ -3,6 +3,9 @@ using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields
 {
+    /// <summary>
+    /// Embed Field Template
+    /// </summary>
     public interface IEmbedFieldTemplate
     {
         /// <summary>

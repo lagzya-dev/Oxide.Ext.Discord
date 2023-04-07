@@ -291,6 +291,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return data;
         }
 
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             for (int index = 0; index < _boxed.Count; index++)

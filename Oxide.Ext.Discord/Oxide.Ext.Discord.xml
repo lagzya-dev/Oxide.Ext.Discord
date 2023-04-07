@@ -1816,6 +1816,19 @@
             <param name="id">ID of the player</param>
             <returns><see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Cache.StringCache`1">
+            <summary>
+            Caches strings from {T} ToString method
+            </summary>
+            <typeparam name="T">Type for the cache</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.StringCache`1.ToString(`0)">
+            <summary>
+            Returns a cached ToString call of type {T}
+            </summary>
+            <param name="value">value to ToString</param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback`1.EnterPool">
             <inheritdoc/>
         </member>
@@ -14234,6 +14247,18 @@
             <param name="blue">Blue color (0.0 - 1.0)</param>
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.ToString">
+            <summary>
+            Returns the color as a string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.ToHex">
+            <summary>
+            Returns the color as a hex color code
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>
@@ -16874,6 +16899,7 @@
             Converts an IEnumerable{TSource} to a pooled List
             </summary>
             <param name="source">IEnumerable to convert</param>
+            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to pool from</param>
             <typeparam name="TSource">Type of the list</typeparam>
             <returns>Pooled List{TSource}</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if source is null</exception>
@@ -16896,6 +16922,7 @@
             Converts an IEnumerable{TSource} to a pooled Hash{TKey, TElement}
             </summary>
             <param name="source">IEnumerable to convert</param>
+            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to pool from</param>
             <param name="keySelector">Selector for the key</param>
             <param name="elementSelector">Selector for the value</param>
             <typeparam name="TSource">Type of the source</typeparam>
@@ -17093,6 +17120,13 @@
             </summary>
             <param name="objectType">Type to check</param>
             <returns>True if type is <see cref="T:System.Nullable"/>; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.TypeExt.IsValueType(System.Type)">
+            <summary>
+            Returns if a type is a value type
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.TypeExt.GetDefault(System.Type)">
             <summary>
@@ -18021,6 +18055,7 @@
             <summary>
             Returns a pooled <see cref="T:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader"/> with stream loaded into it
             </summary>
+            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to pool from</param>
             <param name="stream">Stream to load</param>
             <returns></returns>
         </member>
@@ -18081,6 +18116,7 @@
             <summary>
             Serializes the payload to the output stream
             </summary>
+            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to pool from</param>
             <param name="serializer">Serializer to use</param>
             <param name="payload">Payload to serialize</param>
             <param name="output">Output stream to write to</param>
@@ -18214,6 +18250,18 @@
             Called on the library when a plugin is unloaded
             </summary>
             <param name="plugin">Plugin that was unloaded</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary`1">
+            <summary>
+            Base Discord Library for Oxide Libraries 
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary`1.#ctor">
+            <summary>
+            Constructor
+            </summary>
+            <exception cref="T:System.Exception">Thrown if the Library has already been initialized</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Command.BaseCommand">
             <summary>
@@ -19510,6 +19558,9 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.EnterPool">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting">
             <summary>
             Formatting Helpers for Placeholders
@@ -19610,6 +19661,25 @@
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool">
+            <summary>
+            Discord Pool Library
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.GetOrCreate(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Returns an existing <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> for the given plugin or returns a new one
+            </summary>
+            <param name="plugin">The pool the plugin is for</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the plugin is null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription">
@@ -19719,12 +19789,17 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.Logger">
             <summary>
-            Logger for the <see cref="!:BaseTemplateLibrary"/>
+            Logger for the <see cref="T:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1"/>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.RootDirectory">
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1._rootDirectory">
             <summary>
             Root Directory for the library
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1._templateTypeDirectory">
+            <summary>
+            Template Type Directory
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.TemplateType">
@@ -19738,6 +19813,16 @@
             </summary>
             <param name="type">The template type of this library</param>
             <param name="logger"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.GetTemplateFolder(System.String)">
+            <summary>
+            Returns the template folder for a given plugin
+            </summary>
+            <param name="plugin">Plugin Name the template is for</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.BulkTemplateRegistration`1">
             <summary>
@@ -20056,6 +20141,56 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkTemplateItem">
+            <summary>
+            Represents an item in a bulk template request
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkTemplateItem.TemplateName">
+            <summary>
+            Name of the template
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkTemplateItem.Data">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> for the template
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkTemplateItem.#ctor(System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="templateName"></param>
+            <param name="data"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkTemplateRequest">
+            <summary>
+            Represents a Bulk Template Request
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkTemplateRequest.Items">
+            <summary>
+            Items for the bulk template request
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkTemplateRequest.Create(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Returns a pooled request for the given plugin
+            </summary>
+            <param name="plugin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkTemplateRequest.AddItem(System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+            <summary>
+            Adds an item to the request
+            </summary>
+            <param name="templateName">Name of the template</param>
+            <param name="data"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> for the template</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Bulk.BulkTemplateRequest.EnterPool">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.BaseComponentTemplate">
             <summary>
             Base Template for Message Components
@@ -20070,6 +20205,12 @@
             <summary>
             Type of the component
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.BaseComponentTemplate.#ctor(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType)">
+            <summary>
+            Represents a base Message Component Template
+            </summary>
+            <param name="type"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Components.BaseComponentTemplate.ToComponent(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
@@ -20386,6 +20527,14 @@
             <param name="message">{T} message to use when creating the message; if null a new {T} will be created</param>
             <returns><see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate"/> converted to type {T} message</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Interfaces.Entities.Templates.IDiscordMessageTemplate)">
+            <summary>
+            Returns a <see cref="T:Oxide.Ext.Discord.Interfaces.Entities.Templates.IDiscordMessageTemplate"/> entity for the given template
+            </summary>
+            <param name="data"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> for the template</param>
+            <param name="message">Entity to apply the template to</param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates">
             <summary>
             Modal Templates Library
@@ -20466,6 +20615,7 @@
             <summary>
             Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/>
             </summary>
+            <param name="template">Template to create the entity for</param>
             <param name="data">Data to use</param>
             <param name="embed">Initial embed to use</param>
             <returns></returns>
@@ -20540,6 +20690,11 @@
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.DiscordEmbedFieldTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField)">
             <inheritdoc cref="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.IEmbedFieldTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedField)"/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.IEmbedFieldTemplate">
+            <summary>
+            Embed Field Template
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields.IEmbedFieldTemplate.Name">
             <summary>
             Title of the field
@@ -20597,6 +20752,11 @@
             <param name="data">Data to use</param>
             <param name="field">Initial field (Optional)</param>
             <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate">
+            <summary>
+            Embed Template
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.IEmbedTemplate.Enabled">
             <summary>
@@ -20711,6 +20871,14 @@
             <param name="title"></param>
             <param name="description"></param>
             <param name="titleUrl"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.MessageEmbedTemplate.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
+            <summary>
+            Returns a <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/> for the given template
+            </summary>
+            <param name="data"></param>
+            <param name="embed"></param>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis.EmojiTemplate">
             <summary>
@@ -21015,6 +21183,31 @@
             Disables all logging
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Logging.IDiscordLoggingConfig">
+            <summary>
+            Interface for Discord Logging Configuration
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Logging.IDiscordLoggingConfig.ConsoleLogLevel">
+            <summary>
+            Log Level for the Console
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Logging.IDiscordLoggingConfig.FileLogLevel">
+            <summary>
+            Log Level for file Logging
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Logging.IDiscordLoggingConfig.ConsoleLogFormat">
+            <summary>
+            Format for console logging
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Logging.IDiscordLoggingConfig.FileLogFormat">
+            <summary>
+            Format for file logging
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Logging.ILogger">
             <summary>
             Represents an interface for a logger
@@ -21089,11 +21282,23 @@
             <typeparam name="TPooled">Type being pooled</typeparam>
             <typeparam name="TPool">Type of the pool</typeparam>
         </member>
+        <member name="F:Oxide.Ext.Discord.Pooling.BasePool`2.PluginPool">
+            <summary>
+            Plugin Pool for this pool
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.#ctor(System.Int32)">
             <summary>
             Base Pool Constructor
             </summary>
             <param name="maxSize">Max Size of the pool</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.ForPlugin(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
+            <summary>
+            Returns a pool for the given plugin pool
+            </summary>
+            <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to get the pool from</param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Get">
             <summary>
@@ -21113,9 +21318,17 @@
             </summary>
             <param name="item">Item being freed</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Clear">
             <summary>
             Clears the pool of all pooled objects and resets state to when the pool was first created
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Wipe">
+            <summary>
+            Wipes all the pools for this type
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnGetItem(`1)">
@@ -21196,6 +21409,12 @@
             <summary>
             Built in pooling for discord entities
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.#ctor(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="plugin">Plugin the pool is for</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.Get``1">
             <summary>
@@ -21343,6 +21562,22 @@
             Represents a pool
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.IPool.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Called on a pool when a plugin is unloaded
+            </summary>
+            <param name="plugin"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.IPool.Clear">
+            <summary>
+            Clears the pool of all items
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.IPool.Wipe">
+            <summary>
+            Wipes all pools of the given type
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Pooling.IPool`1">
             <summary>
             Represents a pool of type T
@@ -21391,6 +21626,21 @@
             Represents the base class for Discord Async Callbacks
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Promise.DiscordPromise.IsInternal">
+            <summary>
+            If the promise is for an internal extension request
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promise.DiscordPromise.Exception">
+            <summary>
+            The exception for the promise
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.Then(System.Action)">
             <summary>
             Registers a callback once the async call is completed
@@ -21398,15 +21648,37 @@
             <param name="onResolved">Callback to register</param>
             <returns>this</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.Catch(System.Action{System.Exception})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.Done(System.Action,System.Action{System.Exception})">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.InvokeResolveInternal">
             <summary>
             Handles calling the callbacks and disposing of the object
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.Resolve">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.Fail(System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.AddChild(Oxide.Ext.Discord.Promise.IDiscordPromise)">
             <summary>
-            Invokes the <see cref="M:Oxide.Ext.Discord.Promise.DiscordPromise.InvokeResolveInternal"/> method
+            Adds a child callback to the promise
             </summary>
+            <param name="child"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.SetState(Oxide.Ext.Discord.Promise.PromiseState)">
+            <summary>
+            Sets the current state of the promise
+            </summary>
+            <param name="state"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.LeavePool">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise.EnterPool">
             <inheritdoc/>
@@ -21423,11 +21695,16 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.Then(System.Action{`0})">
-            <summary>
-            Registers a Promise callback once the async call is completed with {T} type
-            </summary>
-            <param name="onResolved">Callback to register</param>
-            <returns>This</returns>
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.Then``1(System.Func{`0,``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.Then``1(System.Func{`0,Oxide.Ext.Discord.Promise.IDiscordPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.Done(System.Action{`0},System.Action{System.Exception})">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.InvokeResolveInternal">
             <summary>
@@ -21435,10 +21712,7 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.Resolve(`0)">
-            <summary>
-            Invokes the <see cref="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.InvokeResolveInternal"/> method
-            </summary>
-            <param name="data">Data to invoke with</param>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promise.DiscordPromise`1.EnterPool">
             <inheritdoc/>
@@ -21455,6 +21729,32 @@
             <param name="onResolved">Callback to call</param>
             <returns>this</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise.Catch(System.Action{System.Exception})">
+            <summary>
+            Adds exception callback to the promise
+            </summary>
+            <param name="onFail">Exception callback to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise.Done(System.Action,System.Action{System.Exception})">
+            <summary>
+            Adds Then and Catch callbacks to the promise
+            </summary>
+            <param name="onResolved">Callback when the promise is completed</param>
+            <param name="onFail">Callback when an exception occurs</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise.Resolve">
+            <summary>
+            Resolves the promise
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise.Fail(System.Exception)">
+            <summary>
+            Fails the promise with the given exception
+            </summary>
+            <param name="ex">Exception to fail with</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Promise.IDiscordPromise`1">
             <summary>
             Interface for Discord Async Callbacks of {T}
@@ -21463,10 +21763,60 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise`1.Then(System.Action{`0})">
             <summary>
-            Registers a callback of {T}
+            Registers a Promise callback once the async call is completed with {T} type
             </summary>
-            <param name="onResolved">Callback to call</param>
+            <param name="onResolved">Callback to register</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise`1.Then``1(System.Func{`0,``0})">
+            <summary>
+            Callback to convert the promise results to the {TConvert} type
+            </summary>
+            <param name="onResolved">Callback to resolve</param>
+            <typeparam name="TConvert">Type to convert to</typeparam>
+            <returns>Promise with the {TConvert} type</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise`1.Then``1(System.Func{`0,Oxide.Ext.Discord.Promise.IDiscordPromise{``0}})">
+            <summary>
+            Callback to convert the promise results to the {TConvert} using a promise
+            </summary>
+            <param name="onResolved">Promise to resolve</param>
+            <typeparam name="TConvert">Type to convert to</typeparam>
+            <returns>Promise with the {TConvert} type</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise`1.Done(System.Action{`0},System.Action{System.Exception})">
+            <summary>
+            Callbacks when the promise completes
+            </summary>
+            <param name="onResolved">Callback on promise success</param>
+            <param name="onFail">Callback on promise fail</param>
             <returns>this</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promise.IDiscordPromise`1.Resolve(`0)">
+            <summary>
+            Resolves the promise
+            </summary>
+            <param name="data">Data to invoke with</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Promise.PromiseState">
+            <summary>
+            Represents the current promise state
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promise.PromiseState.Pending">
+            <summary>
+            Promise is waiting to be resolve or failed
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promise.PromiseState.Resolved">
+            <summary>
+            Promise was resolved
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promise.PromiseState.Failed">
+            <summary>
+            Promise failed
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.RateLimits.BaseRateLimit">
             <summary>
@@ -21762,6 +22112,7 @@
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
+            <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> for the request</param>
             <param name="client">Client making the request</param>
             <param name="httpClient"><see cref="T:System.Net.Http.HttpClient"/> for the request</param>
             <param name="method">HTTP web method</param>
@@ -21883,6 +22234,7 @@
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
+            <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> for the request</param>
             <param name="client">Client making the request</param>
             <param name="httpClient"><see cref="T:System.Net.Http.HttpClient"/> for the request</param>
             <param name="method">HTTP web method</param>
@@ -22704,7 +23056,7 @@
             <summary>
             Disconnects from the websocket with the given code and reason
             </summary>
-            <param name="id">ID of the websocket</param>
+            <param name="client">Client for the websockk</param>
             <param name="status">Status to close with</param>
             <param name="reason">Reason for the close</param>
             <param name="closeReceived">If we received a close from the websocket</param>

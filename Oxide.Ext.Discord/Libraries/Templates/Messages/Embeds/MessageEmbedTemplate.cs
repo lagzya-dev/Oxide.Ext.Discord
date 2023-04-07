@@ -75,6 +75,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
             Url = titleUrl;
         }
         
+        /// <summary>
+        /// Returns a <see cref="DiscordEmbed"/> for the given template
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="embed"></param>
+        /// <returns></returns>
         public DiscordEmbed ToEntity(PlaceholderData data, DiscordEmbed embed = null)
         {
             return DiscordEmbedTemplate.ToEntity(this, data, embed);

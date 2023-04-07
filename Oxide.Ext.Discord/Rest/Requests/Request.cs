@@ -20,6 +20,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <summary>
         /// Creates a REST API request that returns type of T from the response
         /// </summary>
+        /// <param name="pluginPool"><see cref="DiscordPluginPool"/> for the request</param>
         /// <param name="client">Client making the request</param>
         /// <param name="httpClient"><see cref="HttpClient"/> for the request</param>
         /// <param name="method">HTTP web method</param>

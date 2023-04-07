@@ -69,6 +69,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             return message;
         }
 
+        /// <summary>
+        /// Returns a <see cref="IDiscordMessageTemplate"/> entity for the given template
+        /// </summary>
+        /// <param name="data"><see cref="PlaceholderData"/> for the template</param>
+        /// <param name="message">Entity to apply the template to</param>
+        /// <returns></returns>
         public override IDiscordMessageTemplate ToEntity(PlaceholderData data, IDiscordMessageTemplate message)
         {
             if (!string.IsNullOrEmpty(Content))

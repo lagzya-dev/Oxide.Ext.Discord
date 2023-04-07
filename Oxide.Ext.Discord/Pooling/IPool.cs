@@ -7,10 +7,20 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public interface IPool
     {
+        /// <summary>
+        /// Called on a pool when a plugin is unloaded
+        /// </summary>
+        /// <param name="plugin"></param>
         void OnPluginUnloaded(Plugin plugin);
 
+        /// <summary>
+        /// Clears the pool of all items
+        /// </summary>
         void Clear();
 
+        /// <summary>
+        /// Wipes all pools of the given type
+        /// </summary>
         void Wipe();
     }
 }

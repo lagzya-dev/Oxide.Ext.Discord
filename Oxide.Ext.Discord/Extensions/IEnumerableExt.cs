@@ -14,6 +14,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// Converts an IEnumerable{TSource} to a pooled List
         /// </summary>
         /// <param name="source">IEnumerable to convert</param>
+        /// <param name="pluginPool">The <see cref="DiscordPluginPool"/> to pool from</param>
         /// <typeparam name="TSource">Type of the list</typeparam>
         /// <returns>Pooled List{TSource}</returns>
         /// <exception cref="ArgumentNullException">Thrown if source is null</exception>
@@ -51,11 +52,12 @@ namespace Oxide.Ext.Discord.Extensions
             
             return hash;
         }
-        
+
         /// <summary>
         /// Converts an IEnumerable{TSource} to a pooled Hash{TKey, TElement}
         /// </summary>
         /// <param name="source">IEnumerable to convert</param>
+        /// <param name="pluginPool">The <see cref="DiscordPluginPool"/> to pool from</param>
         /// <param name="keySelector">Selector for the key</param>
         /// <param name="elementSelector">Selector for the value</param>
         /// <typeparam name="TSource">Type of the source</typeparam>
