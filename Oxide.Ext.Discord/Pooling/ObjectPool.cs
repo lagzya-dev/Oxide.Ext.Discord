@@ -1,7 +1,7 @@
 
 namespace Oxide.Ext.Discord.Pooling
 {
-    internal class ObjectPool<T> : BasePool<ObjectPool<T>, BasePoolable> where T : BasePoolable, new()
+    internal class ObjectPool<T> : BasePool<BasePoolable> where T : BasePoolable, new()
     {
         public ObjectPool() : base(512) { }
 

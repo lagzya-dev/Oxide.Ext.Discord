@@ -7,6 +7,8 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public interface IPool
     {
+        void Resize(int newSize);
+        
         /// <summary>
         /// Called on a pool when a plugin is unloaded
         /// </summary>

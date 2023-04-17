@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// Represents a pool for <see cref="Boxed{T}"/>;
     /// </summary>
     /// <typeparam name="T">Type that will be in the boxed object</typeparam>
-    internal class BoxedPool<T> : BasePool<BoxedPool<T>, Boxed<T>>
+    internal class BoxedPool<T> : BasePool<Boxed<T>>
     {
         public BoxedPool() : base(512) { }
 

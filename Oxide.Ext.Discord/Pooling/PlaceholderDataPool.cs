@@ -2,7 +2,7 @@ using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Pooling
 {
-    internal class PlaceholderDataPool : BasePool<PlaceholderDataPool, BasePoolable>
+    internal class PlaceholderDataPool : BasePool<BasePoolable>
     {
         public PlaceholderDataPool() : base(512) { }
 

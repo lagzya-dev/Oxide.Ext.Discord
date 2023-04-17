@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled object of type T</returns>
         public T Get<T>() where T : BasePoolable, new()
         {
-            return (T)ObjectPool<T>.ForPlugin(this).Get();
+            return (T)ObjectPool<T>.ForPlugin<ObjectPool<T>>(this).Get();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="T">Type of object being freed</typeparam>
         internal void Free<T>(T value) where T : BasePoolable, new()
         {
-            ObjectPool<T>.ForPlugin(this).Free(value);
+            ObjectPool<T>.ForPlugin<ObjectPool<T>>(this).Free(value);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled List</returns>
         public List<T> GetList<T>()
         {
-            return ListPool<T>.ForPlugin(this).Get();
+            return ListPool<T>.ForPlugin<ListPool<T>>(this).Get();
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled Hash</returns>
         public Hash<TKey, TValue> GetHash<TKey, TValue>()
         {
-            return HashPool<TKey, TValue>.ForPlugin(this).Get();
+            return HashPool<TKey, TValue>.ForPlugin<HashPool<TKey, TValue>>(this).Get();
         }
         
         /// <summary>
@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled List</returns>
         public HashSet<T> GetHashSet<T>()
         {
-            return HashSetPool<T>.ForPlugin(this).Get();
+            return HashSetPool<T>.ForPlugin<HashSetPool<T>>(this).Get();
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled <see cref="StringBuilder"/></returns>
         public StringBuilder GetStringBuilder()
         {
-            return StringBuilderPool.ForPlugin(this).Get();
+            return StringBuilderPool.ForPlugin<StringBuilderPool>(this).Get();
         }
         
         /// <summary>
@@ -95,7 +95,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled <see cref="StringBuilder"/></returns>
         public StringBuilder GetStringBuilder(string initial)
         {
-            StringBuilder builder = StringBuilderPool.ForPlugin(this).Get();
+            StringBuilder builder = StringBuilderPool.ForPlugin<StringBuilderPool>(this).Get();
             builder.Append(initial);
             return builder;
         }
@@ -106,7 +106,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled <see cref="MemoryStream"/></returns>
         public MemoryStream GetMemoryStream()
         {
-            return MemoryStreamPool.ForPlugin(this).Get();
+            return MemoryStreamPool.ForPlugin<MemoryStreamPool>(this).Get();
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled <see cref="PlaceholderData"/></returns>
         public PlaceholderData GetPlaceholderData()
         {
-            return (PlaceholderData)PlaceholderDataPool.ForPlugin(this).Get();
+            return (PlaceholderData)PlaceholderDataPool.ForPlugin<PlaceholderDataPool>(this).Get();
         }
         
         /// <summary>
@@ -125,7 +125,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns>Pooled Boxed</returns>
         internal Boxed<T> GetBoxed<T>(T value)
         {
-            Boxed<T> boxed = BoxedPool<T>.ForPlugin(this).Get();
+            Boxed<T> boxed = BoxedPool<T>.ForPlugin<BoxedPool<T>>(this).Get();
             boxed.Value = value;
             return boxed;
         }
@@ -137,7 +137,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="T">Type of the list</typeparam>
         public void FreeList<T>(List<T> list)
         {
-            ListPool<T>.ForPlugin(this).Free(list);
+            ListPool<T>.ForPlugin<ListPool<T>>(this).Free(list);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="TValue">Type for value</typeparam>
         public void FreeHash<TKey, TValue>(Hash<TKey, TValue> hash)
         {
-            HashPool<TKey, TValue>.ForPlugin(this).Free(hash);
+            HashPool<TKey, TValue>.ForPlugin<HashPool<TKey, TValue>>(this).Free(hash);
         }
         
         /// <summary>
@@ -158,7 +158,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="T">Type of the HashSet</typeparam>
         public void FreeHashSet<T>(HashSet<T> list)
         {
-            HashSetPool<T>.ForPlugin(this).Free(list);
+            HashSetPool<T>.ForPlugin<HashSetPool<T>>(this).Free(list);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="sb">StringBuilder being freed</param>
         public void FreeStringBuilder(StringBuilder sb)
         {
-            StringBuilderPool.ForPlugin(this).Free(sb);
+            StringBuilderPool.ForPlugin<StringBuilderPool>(this).Free(sb);
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="stream"><see cref="MemoryStream"/> being freed</param>
         public void FreeMemoryStream(MemoryStream stream)
         {
-            MemoryStreamPool.ForPlugin(this).Free(stream);
+            MemoryStreamPool.ForPlugin<MemoryStreamPool>(this).Free(stream);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="data"><see cref="PlaceholderData"/> being freed</param>
         public void FreePlaceholderData(PlaceholderData data)
         {
-            PlaceholderDataPool.ForPlugin(this).Free(data);
+            PlaceholderDataPool.ForPlugin<PlaceholderDataPool>(this).Free(data);
         }
         
         /// <summary>
@@ -206,7 +206,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <typeparam name="T">Type of the Boxed</typeparam>
         internal void FreeBoxed<T>(Boxed<T> boxed)
         {
-            BoxedPool<T>.ForPlugin(this).Free(boxed);
+            BoxedPool<T>.ForPlugin<BoxedPool<T>>(this).Free(boxed);
         }
 
         internal void OnPluginUnloaded(Plugin plugin)

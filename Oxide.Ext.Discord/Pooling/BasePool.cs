@@ -1,3 +1,4 @@
+using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
@@ -9,9 +10,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// Represents a BasePool in Discord
     /// </summary>
     /// <typeparam name="TPooled">Type being pooled</typeparam>
-    /// <typeparam name="TPool">Type of the pool</typeparam>
-    public abstract class BasePool<TPool, TPooled> : IPool<TPooled>
-        where TPool : BasePool<TPool, TPooled>, new()
+    public abstract class BasePool<TPooled> : IPool<TPooled>
         where TPooled : class
     {
         /// <summary>
@@ -19,18 +18,24 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         protected DiscordPluginPool PluginPool;
         
-        private readonly TPooled[] _pool;
+        private TPooled[] _pool;
         private int _index;
         private readonly object _lock = new object();
-        private static readonly Hash<string, TPool> Pools = new Hash<string, TPool>();
+        private static readonly Hash<Plugin, BasePool<TPooled>> Pools = new Hash<Plugin, BasePool<TPooled>>();
 
         /// <summary>
         /// Base Pool Constructor
         /// </summary>
-        /// <param name="maxSize">Max Size of the pool</param>
-        protected BasePool(int maxSize)
+        /// <param name="size">Max Size of the pool</param>
+        protected BasePool(int size)
         {
-            _pool = new TPooled[maxSize];
+            _pool = new TPooled[size];
+        }
+
+        private void InitPool(DiscordPluginPool pluginPool)
+        {
+            PluginPool = pluginPool;
+            pluginPool.AddPool(this);
         }
 
         /// <summary>
@@ -38,19 +43,15 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <param name="pluginPool"><see cref="DiscordPluginPool"/> to get the pool from</param>
         /// <returns></returns>
-        public static TPool ForPlugin(DiscordPluginPool pluginPool)
+        public static BasePool<TPooled> ForPlugin<T>(DiscordPluginPool pluginPool) where T : BasePool<TPooled>, new()
         {
             Plugin plugin = pluginPool.Plugin;
-            string id = plugin.Id();
-            TPool pool = Pools[id];
+            BasePool<TPooled> pool = Pools[plugin];
             if (pool == null)
             {
-                pool = new TPool
-                {
-                    PluginPool = pluginPool
-                };
-                pluginPool.AddPool(pool);
-                Pools[id] = pool;
+                pool = new T();
+                pool.InitPool(pluginPool);
+                Pools[plugin] = pool;
             }
 
             return pool;
@@ -123,10 +124,20 @@ namespace Oxide.Ext.Discord.Pooling
             item = null;
         }
 
+        public void Resize(int newSize)
+        {
+            if (_index > newSize)
+            {
+                throw new ArgumentOutOfRangeException($"newSize: {newSize} is less than the current index: {_index}");
+            }
+            
+            Array.Resize(ref _pool, newSize);
+        }
+
         ///<inheritdoc/>
         public void OnPluginUnloaded(Plugin plugin)
         {
-            Pools.Remove(plugin.Id());
+            Pools.Remove(plugin);
         }
 
         /// <summary>
