@@ -28,6 +28,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         
         /// <summary>
         /// Embeds for the message
+        /// Embeds are deduplicated by URL. If a message contains multiple embeds with the same URL, only the first is shown.
         /// </summary>
         [JsonProperty("embeds")]
         public List<DiscordEmbed> Embeds { get; set; }
