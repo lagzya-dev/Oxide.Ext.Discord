@@ -53,9 +53,10 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Stickers
         
         internal static void ThrowIfImageTooLarge(byte[] sticker)
         {
-            if (sticker.Length > 500 * 1024)
+            const int maxStickerSizeKb = 512;
+            if (sticker.Length > maxStickerSizeKb * 1024)
             {
-                throw new InvalidGuildStickerException("sticker image size cannot be larger than 500KB");
+                throw new InvalidGuildStickerException($"sticker image size cannot be larger than {maxStickerSizeKb}KB");
             }
         }
         
