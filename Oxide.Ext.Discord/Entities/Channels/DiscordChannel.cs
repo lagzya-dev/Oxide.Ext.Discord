@@ -212,6 +212,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// The set of tags that can be used in a GUILD_FORUM channel
+        /// Limited to 20
         /// </summary>
         [JsonProperty("available_tags")]
         public List<ForumTag> AvailableTags { get; set; }
