@@ -135,6 +135,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public Snowflake? ApplicationId { get; set; }
         
         /// <summary>
+        /// For group DM channels: whether the channel is managed by an application via the `gdm.join` OAuth2 scope
+        /// </summary>
+        [JsonProperty("managed")]
+        public bool? Managed { get; set; }
+        
+        /// <summary>
         /// ID of the parent category for a channel (each parent category can contain up to 50 channels)
         /// </summary>
         [JsonProperty("parent_id")]
