@@ -83,6 +83,11 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         BotHttpInteractions = 1 << 19,
         
+        /// <summary>
+        /// User is an <a href="https://support-dev.discord.com/hc/articles/10113997751447">Active Developer</a>
+        /// </summary>
+        ActiveDeveloper = 1 << 22,
+        
         #region Obsolete
         /// <summary>
         /// Flag given to users who are a Discord employee.
