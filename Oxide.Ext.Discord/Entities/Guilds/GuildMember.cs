@@ -74,6 +74,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("mute")]
         public bool Mute { get; set; }
+        
+        /// <summary>
+        /// Flags for the GuildMember
+        /// </summary>
+        [JsonProperty("flags")]
+        public GuildMemberFlags Flags { get; set; }
 
         /// <summary>
         /// Whether the user has not yet passed the guild's Membership Screening requirements
