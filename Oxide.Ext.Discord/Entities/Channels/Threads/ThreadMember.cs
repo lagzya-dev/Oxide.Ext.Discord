@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Entities.Guilds;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Threads
 {
@@ -33,6 +34,13 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         //TODO: Move to Enum if one becomes public
         [JsonProperty("flags")]
         public int Flags { get; set; }
+        
+        /// <summary>
+        /// The time the current user last joined the thread
+        /// * field is only present when withMember is set to true when calling List Thread Members or Get Thread Member.
+        /// </summary>
+        [JsonProperty("member")]
+        public GuildMember Member { get; set; } 
 
         internal void Update(ThreadMember update)
         {

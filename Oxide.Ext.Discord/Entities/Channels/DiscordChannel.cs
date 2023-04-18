@@ -862,7 +862,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
             client.Bot.Rest.CreateRequest(client,$"channels/{Id}/thread-members/{userId}", RequestMethod.DELETE, null, callback, error);
         }
-        
+
         /// <summary>
         /// Returns a thread member object for the specified user if they are a member of the thread
         /// returns a 404 response otherwise.
@@ -870,23 +870,25 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">ID of the user to thread</param>
+        /// <param name="queryString">Query String Arguments</param>
         /// <param name="callback">Callback with the thread member</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetThreadMember(DiscordClient client, Snowflake userId, Action<ThreadMember> callback = null, Action<RequestError> error = null)
+        public void GetThreadMember(DiscordClient client, Snowflake userId, GetThreadMember queryString = null, Action<ThreadMember> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
-            client.Bot.Rest.CreateRequest(client,$"channels/{Id}/thread-members/{userId}", RequestMethod.GET, null, callback, error);
+            client.Bot.Rest.CreateRequest(client,$"channels/{Id}/thread-members/{userId}{queryString?.ToQueryString()}", RequestMethod.GET, null, callback, error);
         }
-        
+
         /// <summary>
         /// Returns array of thread members objects that are members of the thread.
         /// This endpoint is restricted according to whether the GUILD_MEMBERS Privileged Intent is enabled for your application.
         /// See <a href="https://discord.com/developers/docs/resources/channel#list-thread-members">List Thread Members</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="queryString">Query string for the List Thread Members</param>
         /// <param name="callback">Callback with the list of thread members</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ListThreadMembers(DiscordClient client, Action<List<ThreadMember>> callback = null, Action<RequestError> error = null)
+        public void ListThreadMembers(DiscordClient client, ListThreadMembers queryString = null, Action<List<ThreadMember>> callback = null, Action<RequestError> error = null)
         {
             client.Bot.Rest.CreateRequest(client,$"channels/{Id}/thread-members", RequestMethod.GET, null, callback, error);
         }
