@@ -18,6 +18,11 @@
         /// <summary>
         /// User has nitro premium
         /// </summary>
-        Nitro = 2
+        Nitro = 2,
+        
+        /// <summary>
+        /// User has nitro basic
+        /// </summary>
+        NitroBasic = 3
     }
 }
