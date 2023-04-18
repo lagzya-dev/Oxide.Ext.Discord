@@ -14,6 +14,7 @@ using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
+using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Stickers;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
@@ -236,10 +237,16 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public Hash<Snowflake, DiscordSticker> StickerItems { get; set; }       
         
         /// <summary>
-        /// A generally increasing integer (there may be gaps or duplicates) that represents the approximate position of the message in a thread, it can be used to estimate the relative position of the messsage in a thread in company with total_message_sent on parent thread
+        /// A generally increasing integer (there may be gaps or duplicates) that represents the approximate position of the message in a thread, it can be used to estimate the relative position of the message in a thread in company with total_message_sent on parent thread
         /// </summary>
         [JsonProperty("position")]
         public int? Position { get; set; }
+        
+        /// <summary>
+        /// The data of the role subscription purchase or renewal that prompted this ROLE_SUBSCRIPTION_PURCHASE message
+        /// </summary>
+        [JsonProperty("role_subscription_data")]
+        public RoleSubscription RoleSubscriptionData { get; set; }
         
         /// <summary>
         /// File Attachments to add to the message on edit
