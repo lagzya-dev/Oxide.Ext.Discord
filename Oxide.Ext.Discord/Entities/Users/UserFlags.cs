@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         VerifiedDeveloper = 1 << 17,
         
         /// <summary>
-        /// Flag given to users that are discord certified moderators
+        /// Flag given to users that are Moderator Programs Alumni
         /// </summary>
         CertifiedModerator = 1 << 18,
         
