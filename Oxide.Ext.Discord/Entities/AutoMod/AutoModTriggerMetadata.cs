@@ -17,6 +17,14 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         public List<string> KeywordFilter { get; set; }
         
         /// <summary>
+        /// Associated Trigger Types: <see cref="AutoModTriggerType.Keyword"/>
+        /// Regular expression patterns which will be matched against content (Maximum of 10)
+        /// * Only Rust flavored regex is currently supported, which can be tested in online editors such as <a href="https://rustexp.lpil.uk/">Rustexp</a>. Each regex pattern must be 75 characters or less.
+        /// </summary>
+        [JsonProperty("regex_patterns")]
+        public List<string> RegexPatterns { get; set; }
+        
+        /// <summary>
         /// Associated Trigger Types: <see cref="AutoModTriggerType.KeywordPreset"/>
         /// The internally pre-defined wordsets which will be searched for in content
         /// </summary>
