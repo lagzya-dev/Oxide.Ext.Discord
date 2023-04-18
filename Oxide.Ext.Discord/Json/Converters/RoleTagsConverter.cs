@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Json.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            throw new JsonSerializationException($"{nameof(RoleTagsConverter)} does not support writing.");
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
