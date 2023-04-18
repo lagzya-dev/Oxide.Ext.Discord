@@ -223,9 +223,16 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         ManageWebhooks = 1 << 29,
         
         /// <summary>
+        /// Allows management and editing of emojis, stickers, and soundboard sounds
+        /// </summary>
+        [Description("MANAGE_GUILD_EXPRESSIONS")]
+        ManageGuildExpressions = 1 << 30,
+        
+        /// <summary>
         /// Allows management and editing of emojis
         /// </summary>
         [Description("MANAGE_EMOJIS_AND_STICKERS")]
+        [Obsolete("Replace with ManageGuildExpressions")]
         ManageEmojisAndStickers = 1 << 30,
         
         /// <summary>
@@ -320,5 +327,17 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         [Description("MODERATE_MEMBERS")]
         ModerateMembers = 1ul << 40,
+        
+        /// <summary>
+        /// Allows for viewing role subscription insights
+        /// </summary>
+        [Description("VIEW_CREATOR_MONETIZATION_ANALYTICS")]
+        ViewCreatorMonetizationAnalytics = 1ul << 41,
+        
+        /// <summary>
+        /// Allows for using soundboard in a voice channel
+        /// </summary>
+        [Description("USE_SOUNDBOARD")]
+        UseSoundboard = 1ul << 42,
     }
 }
