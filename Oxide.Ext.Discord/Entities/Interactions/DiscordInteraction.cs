@@ -5,6 +5,7 @@ using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders.Interactions;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
@@ -57,6 +58,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake? GuildId { get; set; }
+        
+        /// <summary>
+        /// Channel that the interaction was sent from
+        /// </summary>
+        [JsonProperty("channel")]
+        public DiscordChannel Channel { get; set; }
 
         /// <summary>
         /// Channel that the interaction was sent from
