@@ -14,6 +14,11 @@ namespace Oxide.Ext.Discord.Entities.Applications
         None = 0,
         
         /// <summary>
+        /// Indicates if an app uses the Auto Moderation API
+        /// </summary>
+        ApplicationAutoModerationRuleCreateBadge = 1 << 6,
+        
+        /// <summary>
         /// Intent required for bots in 100 or more servers to receive presence_update events
         /// </summary>
         GatewayPresence = 1 << 12,
