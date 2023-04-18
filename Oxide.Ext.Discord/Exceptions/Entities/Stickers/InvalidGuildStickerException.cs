@@ -67,10 +67,11 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Stickers
                 case "png":
                 case "apng":
                 case "json":
-                break;
+                case "gif":
+                    break;
                 
                 default:
-                    throw new InvalidGuildStickerException("Sticker can only be of type png, apng, or lottie json");
+                    throw new InvalidGuildStickerException("Sticker can only be of type png, apng, gif, or lottie json");
             }
         }
     }

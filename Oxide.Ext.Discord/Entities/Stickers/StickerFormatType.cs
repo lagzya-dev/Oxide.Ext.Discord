@@ -23,6 +23,12 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// Sticker format type LOTTIE
         /// </summary>
         [Description("LOTTIE")]
-        Lottie = 3
+        Lottie = 3,
+        
+        /// <summary>
+        /// Sticker format type GIF
+        /// </summary>
+        [Description("GIF")]
+        Gif = 4
     }
 }

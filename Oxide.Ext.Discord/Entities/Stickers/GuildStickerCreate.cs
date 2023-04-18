@@ -46,7 +46,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <exception cref="Exception">
         /// Throw if more than 1 sticker is added.
         /// Thrown if the data is more than 500KB
-        /// Thrown if the file extension is not .png, .apng, or .json
+        /// Thrown if the file extension is not .png, .apng, .gif, or .json
         /// </exception>
         public void AddSticker(string fileName, string contentType, byte[] sticker)
         {

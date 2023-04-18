@@ -353,6 +353,7 @@ namespace Oxide.Ext.Discord.Helpers
                 case DiscordImageFormat.Auto:
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.Lottie:
+                case DiscordImageFormat.Gif:
                     return $"{CdnUrl}/stickers/{stickerId.ToString()}.{GetExtension(format, stickerId)}";
 
                 default:
