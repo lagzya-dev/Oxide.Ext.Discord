@@ -81,6 +81,11 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         [Description("steam")] Steam, 
         
         /// <summary>
+        /// Connection type is TikTok
+        /// </summary>
+        [Description("tiktok")] TikTok, 
+        
+        /// <summary>
         /// Connection type is Twitch
         /// </summary>
         [Description("twitch")] Twitch,      
