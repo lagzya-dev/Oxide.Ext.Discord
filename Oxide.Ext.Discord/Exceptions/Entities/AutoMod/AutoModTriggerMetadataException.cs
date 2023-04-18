@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.AutoMod
         internal static void ThrowIfKeywordFilterInvalid(List<string> filter)
         {
             const int maxKeywordFilterLength = 1000;
-            const int maxKeywordLength = 30;
+            const int maxKeywordLength = 60;
             
             if (filter == null)
             {
@@ -78,7 +78,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.AutoMod
         private static void ThrowIfAllowListKeywordInvalid(List<string> allowList)
         {
             const int maxAllowListLength = 100;
-            const int maxAllowLength = 30;
+            const int maxAllowLength = 60;
             
             if (allowList.Count > maxAllowListLength)
             {
@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.AutoMod
         private static void ThrowIfAllowListKeywordPresetInvalid(List<string> allowList)
         {
             const int maxAllowListLength = 1000;
-            const int maxAllowLength = 30;
+            const int maxAllowLength = 60;
             
             if (allowList.Count > maxAllowListLength)
             {
