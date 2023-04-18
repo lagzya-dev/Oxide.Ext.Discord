@@ -155,6 +155,48 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Message is a role subscription purchase
         /// </summary>
         [Description("ROLE_SUBSCRIPTION_PURCHASE")]
-        RoleSubscriptionPurchase = 25
+        RoleSubscriptionPurchase = 25,
+        
+        /// <summary>
+        /// Message is a interaction premium upsell
+        /// </summary>
+        [Description("INTERACTION_PREMIUM_UPSELL")]
+        InteractionPremiumUpsell = 26,
+        
+        /// <summary>
+        /// Message is a stage start
+        /// </summary>
+        [Description("STAGE_START")]
+        StageStart = 27,
+        
+        /// <summary>
+        /// Message is a stage end
+        /// </summary>
+        [Description("STAGE_END")]
+        StageEnd = 28,
+        
+        /// <summary>
+        /// Message is a stage speaker
+        /// </summary>
+        [Description("STAGE_SPEAKER")]
+        StageSpeaker = 29,
+        
+        /// <summary>
+        /// Message is a stage raise hand
+        /// </summary>
+        [Description("STAGE_RAISE_HAND")]
+        StageRaiseHand = 30,
+        
+        /// <summary>
+        /// Message is a stage topic
+        /// </summary>
+        [Description("STAGE_TOPIC")]
+        StageTopic = 31,
+        
+        /// <summary>
+        /// Message is a Guild Application Premium Subscription
+        /// </summary>
+        [Description("GUILD_APPLICATION_PREMIUM_SUBSCRIPTION")]
+        GuildApplicationPremiumSubscription = 32,
     }
 }
