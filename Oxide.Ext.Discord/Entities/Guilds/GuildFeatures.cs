@@ -28,6 +28,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         AnimatedIcon,
         
         /// <summary>
+        /// Guild is using the old permissions configuration behavior
+        /// </summary>
+        [Description("APPLICATION_COMMAND_PERMISSIONS_V2")] 
+        ApplicationCommandPermissionsV2,
+        
+        /// <summary>
         /// Guild has set up auto moderation rules
         /// </summary>
         [Description("AUTO_MODERATION")] 
