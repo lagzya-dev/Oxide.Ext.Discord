@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Json.Converters;
@@ -120,6 +121,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Guild has access to create private threads
         /// </summary>
+        [Obsolete("All guilds now have access to PrivateThreads")]
         [Description("PRIVATE_THREADS")] 
         PrivateThreads,
         
