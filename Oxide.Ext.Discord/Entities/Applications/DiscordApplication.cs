@@ -4,10 +4,12 @@ using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Entities.Applications.RoleConnection;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Teams;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Exceptions.Entities.Applications;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Plugins;
 
@@ -138,6 +140,12 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         [JsonProperty("custom_install_url")]
         public string CustomInstallUrl { get; set; } 
+        
+        /// <summary>
+        /// The application's role connection verification entry point, which when configured will render the app as a verification method in the guild role verification configuration
+        /// </summary>
+        [JsonProperty("role_connections_verification_url")]
+        public string RoleConnectionsVerificationUrl { get; set; } 
 
         /// <summary>
         /// Returns the URL for the applications Icon
@@ -321,6 +329,32 @@ namespace Oxide.Ext.Discord.Entities.Applications
                     }
                 }, error);
             }
+        }
+        
+        /// <summary>
+        /// Returns a list of application role connection metadata objects for the given application.
+        /// See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#get-application-role-connection-metadata-records">Get Application Role Connection Metadata Records</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the list of <see cref="ApplicationRoleConnectionMetadata"/></param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void GetApplicationRoleConnectionMetadataRecords(DiscordClient client, Action<List<ApplicationRoleConnectionMetadata>> callback = null, Action<RequestError> error = null)
+        {
+            client.Bot.Rest.CreateRequest(client,$"applications/{Id}/role-connections/metadata", RequestMethod.GET, null, callback, error);
+        }
+
+        /// <summary>
+        /// Updates and returns a list of application role connection metadata objects for the given application.
+        /// See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records">Update Application Role Connection Metadata Records</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="records">The records to update on the application</param>
+        /// <param name="callback">Callback with the updated list of <see cref="ApplicationRoleConnectionMetadata"/></param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        public void UpdateApplicationRoleConnectionMetadataRecords(DiscordClient client, List<ApplicationRoleConnectionMetadata> records, Action<List<ApplicationRoleConnectionMetadata>> callback = null, Action<RequestError> error = null)
+        {
+            DiscordApplicationException.ThrowIfInvalidApplicationRoleConnectionMetadataLength(records);
+            client.Bot.Rest.CreateRequest(client,$"applications/{Id}/role-connections/metadata", RequestMethod.PUT, records, callback, error);
         }
     }
 }
