@@ -125,7 +125,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <exception cref="InvalidMessageException"></exception>
         protected virtual void ValidateFlags()
         {
-            InvalidMessageException.ThrowIfInvalidFlags(Flags, MessageFlags.SuppressEmbeds, "Invalid Message Flags Used for Channel Message. Only supported flags are MessageFlags.SuppressEmbeds");
+            InvalidMessageException.ThrowIfInvalidFlags(Flags, MessageFlags.SuppressEmbeds | MessageFlags.SuppressNotifications, "Invalid Message Flags Used for Channel Message. Only supported flags are MessageFlags.SuppressEmbeds or MessageFlags.SuppressNotifications");
         }
     }
 }

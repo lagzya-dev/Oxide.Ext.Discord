@@ -60,6 +60,18 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// This message is an Interaction Response and the bot is "thinking"
         /// </summary>
         [Description("LOADING")]
-        Loading = 1 << 7
+        Loading = 1 << 7,
+        
+        /// <summary>
+        /// This message failed to mention some roles and add their members to the thread
+        /// </summary>
+        [Description("FAILED_TO_MENTION_SOME_ROLES_IN_THREAD")]
+        FailedToMentionSomeRolesInThread = 1 << 8,
+        
+        /// <summary>
+        /// This message will not trigger push and desktop notifications
+        /// </summary>
+        [Description("SUPPRESS_NOTIFICATIONS")]
+        SuppressNotifications = 1 << 12,
     }
 }

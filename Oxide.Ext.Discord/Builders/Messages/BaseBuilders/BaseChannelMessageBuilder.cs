@@ -130,5 +130,16 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
             Message.MessageReference = reference;
             return Builder;
         }
+        
+        /// <summary>
+        /// Adds a sticker to the message
+        /// </summary>
+        /// <param name="sticker">Sticker to be added</param>
+        /// <returns>This</returns>
+        public TBuilder SuppressNotifications(DiscordSticker sticker)
+        {
+            Message.Flags |= MessageFlags.SuppressNotifications;
+            return Builder;
+        }
     }
 }
