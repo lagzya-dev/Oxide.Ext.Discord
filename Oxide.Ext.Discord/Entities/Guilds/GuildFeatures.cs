@@ -46,6 +46,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         Community,
         
         /// <summary>
+        /// Guild has been set as a support server on the App Directory
+        /// </summary>
+        [Description("DEVELOPER_SUPPORT_SERVER")] 
+        DeveloperSupportServer,
+        
+        /// <summary>
         /// Guild is lurkable and able to be discovered in the directory
         /// </summary>
         [Description("DISCOVERABLE")] 
