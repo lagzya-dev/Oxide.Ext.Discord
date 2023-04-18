@@ -1,4 +1,5 @@
 using System;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Images;
 
@@ -286,6 +287,29 @@ namespace Oxide.Ext.Discord.Helpers
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
                     return $"{CdnUrl}/app-assets/{applicationId.ToString()}/achievements/{achievementId.ToString()}/icons/{iconHash}.{GetExtension(format, iconHash)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Achievement Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+            }
+        }
+        
+        /// <summary>
+        /// Returns the Store Page Asset Url
+        /// </summary>
+        /// <param name="applicationId">Application ID of the icon</param>
+        /// <param name="assetId">Asset ID</param>
+        /// <param name="format">Format the icon is in</param>
+        /// <returns>Url of the achievement icon</returns>
+        /// <exception cref="ArgumentException">Throw if format is Gif</exception>
+        public static string GetStorePageAssetUrl(Snowflake applicationId, ulong assetId, DiscordImageFormat format = DiscordImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case DiscordImageFormat.Auto:
+                case DiscordImageFormat.Jpg:
+                case DiscordImageFormat.Png:
+                case DiscordImageFormat.WebP:
+                    return $"{CdnUrl}/app-assets/{applicationId.ToString()}/store/{StringCache<ulong>.Instance.ToString(assetId)}.{GetExtension(format, null)}";
 
                 default:
                     throw new ArgumentException("ImageFormat is not valid for Achievement Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
