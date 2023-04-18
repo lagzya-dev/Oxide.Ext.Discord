@@ -16,6 +16,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
 
         /// <summary>
         /// Url of author
+        /// * Only supports http(s)
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; }
@@ -35,10 +36,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <summary>
         /// Embed Author Constructor
         /// </summary>
-        public EmbedAuthor()
-        {
-            
-        }
+        public EmbedAuthor() { }
         
         /// <summary>
         /// Embed Author Constructor
