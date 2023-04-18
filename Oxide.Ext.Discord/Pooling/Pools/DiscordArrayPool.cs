@@ -1,7 +1,7 @@
 ﻿using System;
 using Oxide.Ext.Discord.Extensions;
 
-namespace Oxide.Ext.Discord.Pooling
+namespace Oxide.Ext.Discord.Pooling.Pools
 {
     /// <summary>
     /// Represents a <see cref="DiscordArrayPool{T}"/>

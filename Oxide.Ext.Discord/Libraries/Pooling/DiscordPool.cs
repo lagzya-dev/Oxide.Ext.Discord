@@ -1,6 +1,5 @@
 ﻿using System;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
@@ -12,7 +11,7 @@ namespace Oxide.Ext.Discord.Libraries.Pooling
     /// </summary>
     public class DiscordPool : BaseDiscordLibrary<DiscordPool>
     {
-        private readonly Hash<string, DiscordPluginPool> _pluginPools = new Hash<string, DiscordPluginPool>();
+        private readonly Hash<Plugin, DiscordPluginPool> _pluginPools = new Hash<Plugin, DiscordPluginPool>();
         internal static DiscordPluginPool Internal;
         private readonly ILogger _logger;
         
@@ -36,16 +35,25 @@ namespace Oxide.Ext.Discord.Libraries.Pooling
         internal void CreateInternal(Plugin plugin)
         {
             Internal = CreatePoolInternal(plugin);
+            Internal.SetSettings(new PoolSettings
+            {
+                HashPoolSize = 256,
+                HashSetPoolSize = 128,
+                MemoryStreamPoolSize = 256,
+                PlaceholderDataPoolSize = 256,
+                ListPoolSize = 128,
+                ObjectPoolSize = 256,
+                StringBuilderPoolSize = 128
+            });
         }
         
         private DiscordPluginPool CreatePoolInternal(Plugin plugin)
         {
-            string id = plugin.Id();
-            DiscordPluginPool pool = _pluginPools[id];
+            DiscordPluginPool pool = _pluginPools[plugin];
             if (pool == null)
             {
                 pool = new DiscordPluginPool(plugin);
-                _pluginPools[id] = pool;
+                _pluginPools[plugin] = pool;
             }
 
             return pool;
@@ -57,12 +65,11 @@ namespace Oxide.Ext.Discord.Libraries.Pooling
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
-            string id = plugin.Id();
-            DiscordPluginPool pool = _pluginPools[id];
+            DiscordPluginPool pool = _pluginPools[plugin];
             if (pool != null)
             {
                 pool.OnPluginUnloaded(plugin);
-                _pluginPools.Remove(id);
+                _pluginPools.Remove(plugin);
             }
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Oxide.Ext.Discord.Singleton;
 
 namespace Oxide.Ext.Discord.Cache
@@ -8,9 +7,10 @@ namespace Oxide.Ext.Discord.Cache
     /// Caches strings from {T} ToString method
     /// </summary>
     /// <typeparam name="T">Type for the cache</typeparam>
-    public class StringCache<T> : Singleton<StringCache<T>> where T : struct, IConvertible
+    public class StringCache<T> : Singleton<StringCache<T>>
     {
         private readonly Dictionary<T, string> _cachedStrings = new Dictionary<T, string>();
+        private readonly Dictionary<T, string> _loweredStrings = new Dictionary<T, string>();
         
         /// <summary>
         /// Returns a cached ToString call of type {T}
@@ -25,6 +25,21 @@ namespace Oxide.Ext.Discord.Cache
                 _cachedStrings[value] = str;
             }
             
+            return str;
+        }
+        
+        /// <summary>
+        /// Returns the lowered string representation of type {T}
+        /// </summary>
+        /// <param name="value">value to lower</param>
+        /// <returns></returns>
+        public string ToLower(T value)
+        {
+            if (!_loweredStrings.TryGetValue(value, out string str))
+            {
+                str = value.ToString().ToLower();
+                _loweredStrings[value] = str;
+            }
             return str;
         }
     }

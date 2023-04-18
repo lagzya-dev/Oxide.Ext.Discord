@@ -1829,6 +1829,13 @@
             <param name="value">value to ToString</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Cache.StringCache`1.ToLower(`0)">
+            <summary>
+            Returns the lowered string representation of type {T}
+            </summary>
+            <param name="value">value to lower</param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Callbacks.Api.ApiSuccessCallback`1.EnterPool">
             <inheritdoc/>
         </member>
@@ -21275,69 +21282,68 @@
         <member name="M:Oxide.Ext.Discord.Network.DiscordStreamContent.CreateContentReadStreamAsync">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.BasePool`2">
+        <member name="T:Oxide.Ext.Discord.Pooling.BasePool`1">
             <summary>
             Represents a BasePool in Discord
             </summary>
             <typeparam name="TPooled">Type being pooled</typeparam>
-            <typeparam name="TPool">Type of the pool</typeparam>
         </member>
-        <member name="F:Oxide.Ext.Discord.Pooling.BasePool`2.PluginPool">
+        <member name="F:Oxide.Ext.Discord.Pooling.BasePool`1.PluginPool">
             <summary>
             Plugin Pool for this pool
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.#ctor(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.#ctor(System.Int32)">
             <summary>
             Base Pool Constructor
             </summary>
-            <param name="maxSize">Max Size of the pool</param>
+            <param name="size">Max Size of the pool</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.ForPlugin(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.ForPlugin``1(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
             <summary>
             Returns a pool for the given plugin pool
             </summary>
             <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to get the pool from</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Get">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Get">
             <summary>
             Returns an element from the pool if it exists else it creates a new one
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.CreateNew">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.CreateNew">
             <summary>
             Creates new type of T
             </summary>
             <returns>Newly created type of T</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Free(`1)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Free(`0)">
             <summary>
             Frees an item back to the pool
             </summary>
             <param name="item">Item being freed</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Clear">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Clear">
             <summary>
             Clears the pool of all pooled objects and resets state to when the pool was first created
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Wipe">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Wipe">
             <summary>
             Wipes all the pools for this type
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnGetItem(`1)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnGetItem(`0)">
             <summary>
             Called when an item is retrieved from the pool
             </summary>
             <param name="item">Item being retrieved</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnFreeItem(`1@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnFreeItem(`0@)">
             <summary>
             Returns if an item can be freed to the pool
             </summary>

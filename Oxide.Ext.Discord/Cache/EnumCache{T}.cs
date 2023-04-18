@@ -54,12 +54,11 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns>Enum value as lowered string</returns>
         public string ToLower(T value)
         {
-            if (_loweredStrings.TryGetValue(value, out string str))
+            if (!_loweredStrings.TryGetValue(value, out string str))
             {
-                return str;
+                str = value.ToString().ToLower();
+                _loweredStrings[value] = str;
             }
-            str = value.ToString().ToLower();
-            _loweredStrings[value] = str;
             return str;
         }
 

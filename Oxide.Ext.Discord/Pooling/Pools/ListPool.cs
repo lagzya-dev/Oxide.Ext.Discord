@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Oxide.Ext.Discord.Pooling
+namespace Oxide.Ext.Discord.Pooling.Pools
 {
     /// <summary>
     /// Represents a pool for list&lt;T&gt;
@@ -8,7 +8,9 @@ namespace Oxide.Ext.Discord.Pooling
     /// <typeparam name="T">Type that will be in the list</typeparam>
     internal class ListPool<T> : BasePool<List<T>>
     {
-        public ListPool() : base(512) { }
+        public static ListPool<T> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<ListPool<T>>(pluginPool);
+        
+        protected override int GetPoolSize(PoolSettings settings) => settings.ListPoolSize;
         
         protected override List<T> CreateNew() => new List<T>();
         

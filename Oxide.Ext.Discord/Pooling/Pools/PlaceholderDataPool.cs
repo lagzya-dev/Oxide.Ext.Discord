@@ -1,11 +1,13 @@
 using Oxide.Ext.Discord.Libraries.Placeholders;
 
-namespace Oxide.Ext.Discord.Pooling
+namespace Oxide.Ext.Discord.Pooling.Pools
 {
     internal class PlaceholderDataPool : BasePool<BasePoolable>
     {
-        public PlaceholderDataPool() : base(512) { }
-
+        public static PlaceholderDataPool ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<PlaceholderDataPool>(pluginPool);
+        
+        protected override int GetPoolSize(PoolSettings settings) => settings.PlaceholderDataPoolSize;
+        
         protected override BasePoolable CreateNew()
         {
             PlaceholderData data = new PlaceholderData();

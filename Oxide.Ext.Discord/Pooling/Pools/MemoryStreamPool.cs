@@ -1,14 +1,16 @@
 using System.IO;
 
-namespace Oxide.Ext.Discord.Pooling
+namespace Oxide.Ext.Discord.Pooling.Pools
 {
     /// <summary>
     /// Represents a pool for MemoryStream
     /// </summary>
     internal class MemoryStreamPool : BasePool<MemoryStream>
     {
-        public MemoryStreamPool() : base(256) { }
-
+        public static MemoryStreamPool ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<MemoryStreamPool>(pluginPool);
+        
+        protected override int GetPoolSize(PoolSettings settings) => settings.MemoryStreamPoolSize;
+        
         protected override MemoryStream CreateNew() => new MemoryStream();
 
         ///<inheritdoc/>

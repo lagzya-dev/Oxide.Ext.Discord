@@ -22,19 +22,13 @@ namespace Oxide.Ext.Discord.Extensions
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static bool IsValueType(this Type source) 
-        {
-            return source.IsValueType;
-        }
-        
+        public static bool IsValueType(this Type source) => source.IsValueType;
+
         /// <summary>
         /// Returns the default value for <see cref="Type"/>
         /// </summary>
         /// <param name="type">Type to get default value for</param>
         /// <returns>default value for <see cref="Type"/></returns>
-        public static object GetDefault(this Type type)
-        {
-            return type.IsValueType ? Activator.CreateInstance(type) : null;
-        }
+        public static object GetDefault(this Type type) => type.IsValueType ? Activator.CreateInstance(type) : null;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Pooling.Entities
@@ -8,7 +9,7 @@ namespace Oxide.Ext.Discord.Pooling.Entities
         public T Value;
         private bool _disposed;
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => StringCache<T>.Instance.ToString(Value);
 
         internal void LeavePool()
         {

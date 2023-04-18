@@ -1,10 +1,12 @@
 
-namespace Oxide.Ext.Discord.Pooling
+namespace Oxide.Ext.Discord.Pooling.Pools
 {
     internal class ObjectPool<T> : BasePool<BasePoolable> where T : BasePoolable, new()
     {
-        public ObjectPool() : base(512) { }
-
+        public static ObjectPool<T> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<ObjectPool<T>>(pluginPool);
+        
+        protected override int GetPoolSize(PoolSettings settings) => settings.ObjectPoolSize;
+        
         protected override BasePoolable CreateNew()
         {
             T obj = new T();

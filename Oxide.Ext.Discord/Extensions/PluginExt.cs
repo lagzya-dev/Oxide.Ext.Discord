@@ -1,6 +1,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Extensions
@@ -39,6 +41,8 @@ namespace Oxide.Ext.Discord.Extensions
         {
             FullNameCache[plugin.Name] = CreatePluginFullName(plugin);
         }
+
+        public static DiscordPluginPool GetPool(this Plugin plugin) => DiscordPool.Instance.GetOrCreate(plugin);
 
         internal static void OnPluginUnloaded(Plugin plugin)
         {

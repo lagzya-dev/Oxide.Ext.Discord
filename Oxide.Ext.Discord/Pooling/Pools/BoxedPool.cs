@@ -1,6 +1,6 @@
 using Oxide.Ext.Discord.Pooling.Entities;
 
-namespace Oxide.Ext.Discord.Pooling
+namespace Oxide.Ext.Discord.Pooling.Pools
 {
     /// <summary>
     /// Represents a pool for <see cref="Boxed{T}"/>;
@@ -8,8 +8,10 @@ namespace Oxide.Ext.Discord.Pooling
     /// <typeparam name="T">Type that will be in the boxed object</typeparam>
     internal class BoxedPool<T> : BasePool<Boxed<T>>
     {
-        public BoxedPool() : base(512) { }
+        public static BoxedPool<T> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<BoxedPool<T>>(pluginPool);
 
+        protected override int GetPoolSize(PoolSettings settings) => 512;
+        
         protected override void OnGetItem(Boxed<T> item)
         {
             item.LeavePool();

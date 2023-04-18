@@ -1,8 +1,6 @@
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using Oxide.Core;
-using Oxide.Core.Configuration;
 using Oxide.Core.Extensions;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Users;
