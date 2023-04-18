@@ -21,5 +21,13 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// </summary>
         [JsonProperty("duration_seconds")]
         public int DurationSeconds { get; set; }
+        
+        /// <summary>
+        /// Associated Action Type: <see cref="AutoModActionType.BlockMessage"/>
+        /// Additional explanation that will be shown to members whenever their message is blocked
+        /// Max 150 characters
+        /// </summary>
+        [JsonProperty("custom_message")]
+        public int CustomMessage { get; set; }
     }
 }
