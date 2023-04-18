@@ -24,7 +24,8 @@ namespace Oxide.Ext.Discord.Json.Converters
                 IntegrationId = obj["integration_id"].ToObject<Snowflake?>(),
                 SubscriptionListingId = obj["subscription_listing_id"].ToObject<Snowflake?>(),
                 PremiumSubscriber = obj["premium_subscriber"] != null,
-                AvailableForPurchase = obj["available_for_purchase"] != null
+                AvailableForPurchase = obj["available_for_purchase"] != null,
+                GuildConnections = obj["guild_connections"] != null
             };
 
             return tags;
