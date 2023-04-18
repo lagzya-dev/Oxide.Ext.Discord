@@ -240,6 +240,13 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         [JsonProperty("default_sort_order")]
         public SortOrderType? DefaultSortOrder { get; set; }
+        
+        /// <summary>
+        /// The default <see cref="ForumLayoutTypes"/> used to display posts in GUILD_FORUM channels.
+        /// Defaults to <see cref="ForumLayoutTypes.NotSet"/>, which indicates a layout view has not been set by a channel admin
+        /// </summary>
+        [JsonProperty("default_forum_layout")]
+        public ForumLayoutTypes? DefaultForumLayout { get; set; }
 
         /// <summary>
         /// List of thread members if channel is thread; Null Otherwise.
