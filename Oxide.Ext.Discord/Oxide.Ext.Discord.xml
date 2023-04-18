@@ -1508,6 +1508,13 @@
             <param name="failIfNotExists">Should the API call error if the message does not exist (Default true)</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseChannelMessageBuilder`2.SuppressNotifications(Oxide.Ext.Discord.Entities.Stickers.DiscordSticker)">
+            <summary>
+            Adds a sticker to the message
+            </summary>
+            <param name="sticker">Sticker to be added</param>
+            <returns>This</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseMessageBuilder`2">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.Messages.BaseMessageCreate"/>
@@ -3767,6 +3774,11 @@
             This application has no flags
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.ApplicationAutoModerationRuleCreateBadge">
+            <summary>
+            Indicates if an app uses the Auto Moderation API
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags.GatewayPresence">
             <summary>
             Intent required for bots in 100 or more servers to receive presence_update events
@@ -3919,6 +3931,11 @@
             The application's default custom authorization link, if enabled
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.RoleConnectionsVerificationUrl">
+            <summary>
+            The application's role connection verification entry point, which when configured will render the app as a verification method in the guild role verification configuration
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetApplicationIconUrl">
             <summary>
             Returns the URL for the applications Icon
@@ -4035,6 +4052,25 @@
             <param name="callback">Callback with the list of all commands</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetApplicationRoleConnectionMetadataRecords(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Returns a list of application role connection metadata objects for the given application.
+            See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#get-application-role-connection-metadata-records">Get Application Role Connection Metadata Records</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with the list of <see cref="T:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata"/></param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.UpdateApplicationRoleConnectionMetadataRecords(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata},System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Updates and returns a list of application role connection metadata objects for the given application.
+            See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records">Update Application Role Connection Metadata Records</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="records">The records to update on the application</param>
+            <param name="callback">Callback with the updated list of <see cref="T:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata"/></param>
+            <param name="error">Callback when an error occurs with error information</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.InstallParams">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/application#install-params-object">Install Params Structure</a>
@@ -4048,6 +4084,89 @@
         <member name="P:Oxide.Ext.Discord.Entities.Applications.InstallParams.Permissions">
             <summary>
             The permissions to request for the bot role
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object-application-role-connection-metadata-structure">Application Role Connection Metadata Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata.Type">
+            <summary>
+            Type of metadata value
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata.Key">
+            <summary>
+            Dictionary key for the metadata field (must be a-z, 0-9, or _ characters; 1-50 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata.Name">
+            <summary>
+            Name of the metadata field (1-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata.NameLocalizations">
+            <summary>
+            Translations of the name
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata.Description">
+            <summary>
+            Description of the metadata field (1-200 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata.DescriptionLocalizations">
+            <summary>
+            Translations of the description
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata.Validate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadataType">
+            <summary>
+            Represents <a href="Application Role Connection Metadata Structure">Application Role Connection Metadata Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadataType.IntegerLessThanOrEqual">
+            <summary>
+            The metadata value (integer) is less than or equal to the guild's configured value (integer)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadataType.IntegerGreaterThanOrEqual">
+            <summary>
+            The metadata value (integer) is greater than or equal to the guild's configured value (integer)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadataType.IntegerEqual">
+            <summary>
+            The metadata value (integer) is equal to the guild's configured value (integer)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadataType.IntegerNotEqual">
+            <summary>
+            The metadata value (integer) is not equal to the guild's configured value (integer)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadataType.DatetimeLessThanOrEqual">
+            <summary>
+            The metadata value (ISO8601 string) is less than or equal to the guild's configured value (integer; days before current date)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadataType.DatetimeGreaterThanOrEqual">
+            <summary>
+            The metadata value (ISO8601 string) is greater than or equal to the guild's configured value (integer; days before current date)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadataType.BooleanEqual">
+            <summary>
+            The metadata value (integer) is equal to the guild's configured value (integer; 1)
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadataType.BooleanNotEqual">
+            <summary>
+            The metadata value (integer) is not equal to the guild's configured value (integer; 1)
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.AuditLogs.AuditLog">
@@ -4673,6 +4792,13 @@
             Timeout duration in seconds
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionMetadata.CustomMessage">
+            <summary>
+            Associated Action Type: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionType.BlockMessage"/>
+            Additional explanation that will be shown to members whenever their message is blocked
+            Max 150 characters
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModActionType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-types">Auto Mod Action Types</a>
@@ -4886,10 +5012,19 @@
             Channel ids that should not be affected by the rule (Maximum of 50)
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate.Validate">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule-json-params">Auto Mod Rule Modify</a>
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.#ctor(Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="triggerType">Trigger type being modified</param>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.Name">
             <summary>
@@ -4926,6 +5061,14 @@
             Channel ids that should not be affected by the rule (Maximum of 50)
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.TriggerType">
+            <summary>
+            Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType"/>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.Validate">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-metadata">Auto Mod Trigger Metadata</a>
@@ -4937,6 +5080,13 @@
             Substrings which will be searched for in content
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata.RegexPatterns">
+            <summary>
+            Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.Keyword"/>
+            Regular expression patterns which will be matched against content (Maximum of 10)
+            * Only Rust flavored regex is currently supported, which can be tested in online editors such as <a href="https://rustexp.lpil.uk/">Rustexp</a>. Each regex pattern must be 260 characters or less.
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata.Presets">
             <summary>
             Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.KeywordPreset"/>
@@ -4945,8 +5095,8 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata.AllowList">
             <summary>
-            Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.KeywordPreset"/>
-            Substrings which will be exempt from triggering the preset trigger type
+            Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.KeywordPreset"/> and <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.Keyword"/>
+            Substrings which should not trigger the rule (Maximum of 100 or 1000)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata.MentionTotalLimit">
@@ -5057,6 +5207,12 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultSortOrder">
             <summary>
             The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.SortOrderType"/> used to order posts in `GUILD_FORUM` channels
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultForumLayout">
+            <summary>
+            The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes"/> used to display posts in GUILD_FORUM channels.
+            Defaults to <see cref="F:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes.NotSet"/>, which indicates a layout view has not been set by a channel admin
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Validate">
@@ -5220,7 +5376,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildPublicThread">
             <summary>
-            A temporary sub-channel within a GUILD_TEXT channel
+            A temporary sub-channel within a GUILD_TEXT or GUILD_FORUM channel
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildPrivateThread">
@@ -5331,6 +5487,11 @@
             Application id of the group DM creator if it is bot-created
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Managed">
+            <summary>
+            For group DM channels: whether the channel is managed by an application via the `gdm.join` OAuth2 scope
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ParentId">
             <summary>
             ID of the parent category for a channel (each parent category can contain up to 50 channels)
@@ -5396,6 +5557,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.AvailableTags">
             <summary>
             The set of tags that can be used in a GUILD_FORUM channel
+            Limited to 20
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.AppliedTags">
@@ -5416,6 +5578,12 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultSortOrder">
             <summary>
             The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.SortOrderType"/> used to order posts in `GUILD_FORUM` channels
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultForumLayout">
+            <summary>
+            The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes"/> used to display posts in GUILD_FORUM channels.
+            Defaults to <see cref="F:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes.NotSet"/>, which indicates a layout view has not been set by a channel admin
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ThreadMembers">
@@ -5832,7 +6000,7 @@
             <param name="callback">Callback with the thread once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetThreadMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetThreadMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.Threads.GetThreadMember,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Returns a thread member object for the specified user if they are a member of the thread
             returns a 404 response otherwise.
@@ -5840,16 +6008,18 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="userId">ID of the user to thread</param>
+            <param name="queryString">Query String Arguments</param>
             <param name="callback">Callback with the thread member</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ListThreadMembers(Oxide.Ext.Discord.DiscordClient,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ListThreadMembers(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ListThreadMembers,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Returns array of thread members objects that are members of the thread.
             This endpoint is restricted according to whether the GUILD_MEMBERS Privileged Intent is enabled for your application.
             See <a href="https://discord.com/developers/docs/resources/channel#list-thread-members">List Thread Members</a>
             </summary>
             <param name="client">Client to use</param>
+            <param name="queryString">Query string for the List Thread Members</param>
             <param name="callback">Callback with the list of thread members</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
@@ -5911,6 +6081,26 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.FollowedChannel.WebhookId">
             <summary>
             Created target webhook ID
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-forum-layout-types">Forum Layout Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes.NotSet">
+            <summary>
+            No default has been set for forum channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes.ListView">
+            <summary>
+            Display posts as a list
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes.GalleryView">
+            <summary>
+            Display posts as a collection of tiles
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ForumTag">
@@ -6261,6 +6451,32 @@
             The privacy level of the Stage instance
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.GetThreadMember.WithMember">
+            <summary>
+            Whether to include a guild member object for the thread member
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.GetThreadMember.ToQueryString">
+            <inheritdoc/>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ListThreadMembers.WithMember">
+            <summary>
+            Whether to include a guild member object for the thread member
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ListThreadMembers.After">
+            <summary>
+            Get thread members after this user ID
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ListThreadMembers.Limit">
+            <summary>
+            Max number of thread members to return (1-100). Defaults to 100.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ListThreadMembers.ToQueryString">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#list-public-archived-threads-query-string-params">Thread Archive Lookup Structure</a> within Discord.
@@ -6473,6 +6689,12 @@
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember.Flags">
             <summary>
             Any user-thread settings, currently only used for notifications
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMember.Member">
+            <summary>
+            The time the current user last joined the thread
+            * field is only present when withMember is set to true when calling List Thread Members or Get Thread Member.
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadMetadata">
@@ -8185,6 +8407,11 @@
             The maximum amount of users in a video channel
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.MaxStageVideoChannelUsers">
+            <summary>
+            The maximum amount of users in a stage video channel
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.MaxVideoChannelUsers">
             <summary>
             The maximum amount of users in a video channel
@@ -9224,6 +9451,11 @@
             Guild has access to set an animated guild icon
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.ApplicationCommandPermissionsV2">
+            <summary>
+            Guild is using the old permissions configuration behavior
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.AutoModeration">
             <summary>
             Guild has set up auto moderation rules
@@ -9237,6 +9469,21 @@
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Community">
             <summary>
             Guild can enable welcome screen and discovery, and receives community updates
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.CreatorMonetizableProvisional">
+            <summary>
+            Guild has enabled monetization
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.CreatorStorePage">
+            <summary>
+            Guild has enabled the role subscription promo page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.DeveloperSupportServer">
+            <summary>
+            Guild has been set as a support server on the App Directory
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.Discoverable">
@@ -9297,6 +9544,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.RoleIcons">
             <summary>
             Guild can be previewed before joining via Membership Screening or the directory
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.RoleSubscriptionsAvailableForPurchase">
+            <summary>
+            Guild has role subscriptions that can be purchased
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.RoleSubscriptionsEnabled">
+            <summary>
+            Guild has enabled role subscriptions
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.TicketedEventsEnabled">
@@ -9401,6 +9658,11 @@
             Whether the user is muted in voice channels
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Flags">
+            <summary>
+            Flags for the GuildMember
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.Pending">
             <summary>
             Whether the user has not yet passed the guild's Membership Screening requirements
@@ -9478,6 +9740,40 @@
             <summary>
             Whether the user is deafened in voice channels
             Requires permission DEAFEN_MEMBERS
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMemberFlags">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-flags">Guild Member Flags</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildMemberFlags.None">
+            <summary>
+            No Flags
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildMemberFlags.DidRejoin">
+            <summary>
+            Member has left and rejoined the guild
+            Editable: False
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildMemberFlags.CompletedOnboarding">
+            <summary>
+            Member has completed onboarding
+            Editable: False
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildMemberFlags.BypassesVerification">
+            <summary>
+            Member is exempt from guild verification requirements
+            Editable: True
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildMemberFlags.StartedOnboarding">
+            <summary>
+            Member has started onboarding
+            Editable: False
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildMemberUpdate">
@@ -10321,6 +10617,16 @@
             Hide member join sticker reply buttons
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags.SuppressRoleSubscriptionPurchaseNotifications">
+            <summary>
+            Suppress role subscription purchase and renewal notifications
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags.SuppressRoleSubscriptionPurchaseNotificationReplies">
+            <summary>
+            Hide role subscription sticker reply buttons
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen"></a>
@@ -10603,6 +10909,11 @@
             integration is for discord
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Integrations.IntegrationType.GuildSubscription">
+            <summary>
+            integration is for guild subscription
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Integrations.IntegrationUpdate">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-integration-json-params">Integration Update Structure</a> 
@@ -10694,6 +11005,11 @@
             Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandBulkOverwrite.Nsfw">
+            <summary>
+            Indicates whether the command is age-restricted
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/application-commands#create-global-application-command-json-params">Application Command Create</a>
@@ -10739,6 +11055,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.DefaultPermissions">
             <summary>
             Whether the command is enabled by default when the app is added to a guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.Nsfw">
+            <summary>
+            Indicates whether the command is age-restricted
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.Type">
@@ -11062,6 +11383,11 @@
             Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate.Nsfw">
+            <summary>
+            Indicates whether the command is age-restricted
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdatePermissions">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions-json-params">Edit Application Command Permissions</a>
@@ -11131,6 +11457,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.DmPermission">
             <summary>
             Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Nsfw">
+            <summary>
+            Indicates whether the command is age-restricted
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Version">
@@ -11250,6 +11581,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.GuildId">
             <summary>
             Guild that the interaction was sent from
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Channel">
+            <summary>
+            Channel that the interaction was sent from
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.ChannelId">
@@ -11623,7 +11959,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Value">
             <summary>
             The value of the option resulting from user input
-            Value can be string, integer, or double type
+            Value can be string, integer, or double, or boolean type
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Options">
@@ -12673,6 +13009,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.BaseMessageCreate.Embeds">
             <summary>
             Embeds for the message
+            Embeds are deduplicated by URL. If a message contains multiple embeds with the same URL, only the first is shown.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.BaseMessageCreate.AllowedMention">
@@ -12901,7 +13238,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Position">
             <summary>
-            A generally increasing integer (there may be gaps or duplicates) that represents the approximate position of the message in a thread, it can be used to estimate the relative position of the messsage in a thread in company with total_message_sent on parent thread
+            A generally increasing integer (there may be gaps or duplicates) that represents the approximate position of the message in a thread, it can be used to estimate the relative position of the message in a thread in company with total_message_sent on parent thread
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.RoleSubscriptionData">
+            <summary>
+            The data of the role subscription purchase or renewal that prompted this ROLE_SUBSCRIPTION_PURCHASE message
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.FileAttachments">
@@ -13419,6 +13761,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedAuthor.Url">
             <summary>
             Url of author
+            * Only supports http(s)
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.Embeds.EmbedAuthor.IconUrl">
@@ -13850,6 +14193,16 @@
             This message is an Interaction Response and the bot is "thinking"
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.FailedToMentionSomeRolesInThread">
+            <summary>
+            This message failed to mention some roles and add their members to the thread
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageFlags.SuppressNotifications">
+            <summary>
+            This message will not trigger push and desktop notifications
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageInteraction">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object">Message Interaction Structure</a> within Discord.
@@ -14050,6 +14403,46 @@
         <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.AutoModerationAction">
             <summary>
             Message is an auto mod action
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.RoleSubscriptionPurchase">
+            <summary>
+            Message is a role subscription purchase
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.InteractionPremiumUpsell">
+            <summary>
+            Message is a interaction premium upsell
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.StageStart">
+            <summary>
+            Message is a stage start
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.StageEnd">
+            <summary>
+            Message is a stage end
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.StageSpeaker">
+            <summary>
+            Message is a stage speaker
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.StageRaiseHand">
+            <summary>
+            Message is a stage raise hand
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.StageTopic">
+            <summary>
+            Message is a stage topic
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.MessageType.GuildApplicationPremiumSubscription">
+            <summary>
+            Message is a Guild Application Premium Subscription
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordColor">
@@ -14540,6 +14933,11 @@
             Channel Type (Text)
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuildExpressions">
+            <summary>
+            Allows management and editing of emojis, stickers, and soundboard sounds
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageEmojisAndStickers">
             <summary>
             Allows management and editing of emojis
@@ -14622,6 +15020,41 @@
             Allows for timing out users to prevent them from sending or reacting to messages in chat and threads, and from speaking in voice and stage channels
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ViewCreatorMonetizationAnalytics">
+            <summary>
+            Allows for viewing role subscription insights
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseSoundboard">
+            <summary>
+            Allows for using soundboard in a voice channel
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Permissions.RoleSubscription">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/channel#role-subscription-data-object-role-subscription-data-object-structure">Role Subscription Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleSubscription.RoleSubscriptionListingId">
+            <summary>
+            The id of the sku and listing that the user is subscribed to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleSubscription.TierName">
+            <summary>
+            The name of the tier that the user is subscribed to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleSubscription.TotalMonthsSubscribed">
+            <summary>
+            The cumulative number of months that the user has been subscribed for
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleSubscription.IsRenewal">
+            <summary>
+            Whether this notification is for a renewal rather than a new purchase
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.RoleTags">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure">Role Tags Structure</a>
@@ -14640,6 +15073,21 @@
         <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleTags.PremiumSubscriber">
             <summary>
             Whether this is the guild's premium subscriber role
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleTags.SubscriptionListingId">
+            <summary>
+            The id of this role's subscription sku and listing
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleTags.AvailableForPurchase">
+            <summary>
+            whether this role is available for purchase
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.RoleTags.GuildConnections">
+            <summary>
+            Whether this role is a guild's linked role
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Snowflake">
@@ -15003,7 +15451,7 @@
             <exception cref="T:System.Exception">
             Throw if more than 1 sticker is added.
             Thrown if the data is more than 500KB
-            Thrown if the file extension is not .png, .apng, or .json
+            Thrown if the file extension is not .png, .apng, .gif, or .json
             </exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate.Validate">
@@ -15027,6 +15475,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerFormatType.Lottie">
             <summary>
             Sticker format type LOTTIE
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerFormatType.Gif">
+            <summary>
+            Sticker format type GIF
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Stickers.StickerType">
@@ -15211,7 +15664,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.GitHub">
             <summary>
-            Connection type is Youtube
+            Connection type is GitHub
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Instagram">
+            <summary>
+            Connection type is Instagram
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.PayPal">
@@ -15252,6 +15710,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Steam">
             <summary>
             Connection type is Steam
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.TikTok">
+            <summary>
+            Connection type is TikTok
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Twitch">
@@ -15744,12 +16207,17 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.CertifiedModerator">
             <summary>
-            Flag given to users that are discord certified moderators
+            Flag given to users that are Moderator Programs Alumni
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.BotHttpInteractions">
             <summary>
             User is a Bot uses only HTTP interactions and is shown in the online member list
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.ActiveDeveloper">
+            <summary>
+            User is an <a href="https://support-dev.discord.com/hc/articles/10113997751447">Active Developer</a>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserFlags.DiscordEmployee">
@@ -15861,6 +16329,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Users.UserPremiumType.Nitro">
             <summary>
             User has nitro premium
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.UserPremiumType.NitroBasic">
+            <summary>
+            User has nitro basic
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserStatusType">
@@ -17271,6 +17744,16 @@
             <param name="applicationId">Application ID of the icon</param>
             <param name="achievementId">Achievement ID</param>
             <param name="iconHash">Achievement Icon Hash</param>
+            <param name="format">Format the icon is in</param>
+            <returns>Url of the achievement icon</returns>
+            <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetStorePageAssetUrl(Oxide.Ext.Discord.Entities.Snowflake,System.UInt64,Oxide.Ext.Discord.Entities.Images.DiscordImageFormat)">
+            <summary>
+            Returns the Store Page Asset Url
+            </summary>
+            <param name="applicationId">Application ID of the icon</param>
+            <param name="assetId">Asset ID</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the achievement icon</returns>
             <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
@@ -21293,12 +21776,6 @@
             Plugin Pool for this pool
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.#ctor(System.Int32)">
-            <summary>
-            Base Pool Constructor
-            </summary>
-            <param name="size">Max Size of the pool</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.ForPlugin``1(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
             <summary>
             Returns a pool for the given plugin pool
@@ -21323,6 +21800,13 @@
             Frees an item back to the pool
             </summary>
             <param name="item">Item being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Resize(System.Int32)">
+            <summary>
+            Resizes the pool
+            </summary>
+            <param name="newSize">New size for the pool</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the new size is &lt;= 0 or &lt;= the current index </exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <inheritdoc/>
@@ -21379,38 +21863,6 @@
             Disposes the object when used in a using statement
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.BoxedPool`1">
-            <summary>
-            Represents a pool for <see cref="T:Oxide.Ext.Discord.Pooling.Entities.Boxed`1"/>;
-            </summary>
-            <typeparam name="T">Type that will be in the boxed object</typeparam>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1">
-            <summary>
-            Represents a <see cref="T:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1"/>
-            </summary>
-            <typeparam name="T">Type of the array pool</typeparam>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1.Shared">
-            <summary>
-            <see cref="T:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1"/> Instance
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1.Rent(System.Int32)">
-            <summary>
-            Rents an array from the pool
-            </summary>
-            <param name="minimumLength"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordArrayPool`1.Return(`0[])">
-            <summary>
-            Returns an array to the pool
-            </summary>
-            <param name="array"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
         <member name="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool">
             <summary>
             Built in pooling for discord entities
@@ -21424,11 +21876,18 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.Get``1">
             <summary>
-            Returns a pooled object of type T
+            Returns a pooled object of type <see cref="!:T"/>
             Must inherit from <see cref="T:Oxide.Ext.Discord.Pooling.BasePoolable"/> and have an empty default constructor
             </summary>
             <typeparam name="T">Type to be returned</typeparam>
             <returns>Pooled object of type T</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizePool``1(System.Int32)">
+            <summary>
+            Resizes the pool for <see cref="!:T"/>
+            </summary>
+            <param name="newSize">New size for the pool</param>
+            <typeparam name="T">Type of {T} where T : BasePoolable, new()</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.Free``1(``0)">
             <summary>
@@ -21444,6 +21903,20 @@
             <typeparam name="T">Type for the list</typeparam>
             <returns>Pooled List</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeListPool``1(System.Int32)">
+            <summary>
+            Resizes the pool for <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <param name="newSize">New size for the pool</param>
+            <typeparam name="T">Type of {T} for the list</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeList``1(System.Collections.Generic.List{``0})">
+            <summary>
+            Free's a pooled <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <param name="list">List to be freed</param>
+            <typeparam name="T">Type of the list</typeparam>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetHash``2">
             <summary>
             Returns a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
@@ -21452,12 +21925,42 @@
             <typeparam name="TValue">Type for the value</typeparam>
             <returns>Pooled Hash</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeHashPool``2(System.Int32)">
+            <summary>
+            Resizes the <see cref="T:Oxide.Plugins.Hash`2"/>
+            </summary>
+            <param name="newSize">New size for the pool</param>
+            <typeparam name="TKey">Type for the key</typeparam>
+            <typeparam name="TValue">Type for the value</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeHash``2(Oxide.Plugins.Hash{``0,``1})">
+            <summary>
+            Frees a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
+            </summary>
+            <param name="hash">Hash to be freed</param>
+            <typeparam name="TKey">Type for key</typeparam>
+            <typeparam name="TValue">Type for value</typeparam>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetHashSet``1">
             <summary>
             Returns a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
             </summary>
             <typeparam name="T">Type for the HashSet</typeparam>
             <returns>Pooled List</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeHashSetPool``1(System.Int32)">
+            <summary>
+            Resizes a <see cref="T:Oxide.Ext.Discord.Pooling.Pools.HashSetPool`1"/>
+            </summary>
+            <param name="newSize">New size for the pool</param>
+            <typeparam name="T">Type of the hashset pool</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeHashSet``1(System.Collections.Generic.HashSet{``0})">
+            <summary>
+            Free's a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <param name="list">HashSet to be freed</param>
+            <typeparam name="T">Type of the HashSet</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetStringBuilder">
             <summary>
@@ -21472,46 +21975,11 @@
             <param name="initial">Initial text for the builder</param>
             <returns>Pooled <see cref="T:System.Text.StringBuilder"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetMemoryStream">
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeStringBuilderPool(System.Int32)">
             <summary>
-            Returns a pooled <see cref="T:System.IO.MemoryStream"/>
+            Resizes the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.StringBuilderPool"/>
             </summary>
-            <returns>Pooled <see cref="T:System.IO.MemoryStream"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetPlaceholderData">
-            <summary>
-            Returns a pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/>
-            </summary>
-            <returns>Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetBoxed``1(``0)">
-            <summary>
-            Returns a pooled <see cref="T:Oxide.Ext.Discord.Pooling.Entities.Boxed`1"/>
-            </summary>
-            <typeparam name="T">Type for the Boxed</typeparam>
-            <returns>Pooled Boxed</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeList``1(System.Collections.Generic.List{``0})">
-            <summary>
-            Free's a pooled <see cref="T:System.Collections.Generic.List`1"/>
-            </summary>
-            <param name="list">List to be freed</param>
-            <typeparam name="T">Type of the list</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeHash``2(Oxide.Plugins.Hash{``0,``1})">
-            <summary>
-            Frees a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
-            </summary>
-            <param name="hash">Hash to be freed</param>
-            <typeparam name="TKey">Type for key</typeparam>
-            <typeparam name="TValue">Type for value</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeHashSet``1(System.Collections.Generic.HashSet{``0})">
-            <summary>
-            Free's a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
-            </summary>
-            <param name="list">HashSet to be freed</param>
-            <typeparam name="T">Type of the HashSet</typeparam>
+            <param name="newSize">New size for the pool</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeStringBuilder(System.Text.StringBuilder)">
             <summary>
@@ -21525,11 +21993,35 @@
             </summary>
             <param name="sb"><see cref="T:System.Text.StringBuilder"/> being freed</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetMemoryStream">
+            <summary>
+            Returns a pooled <see cref="T:System.IO.MemoryStream"/>
+            </summary>
+            <returns>Pooled <see cref="T:System.IO.MemoryStream"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeMemoryStreamPool(System.Int32)">
+            <summary>
+            Resizes the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.MemoryStreamPool"/>
+            </summary>
+            <param name="newSize">New size for the pool</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeMemoryStream(System.IO.MemoryStream)">
             <summary>
             Frees a <see cref="T:System.IO.MemoryStream"/> back to the pool
             </summary>
             <param name="stream"><see cref="T:System.IO.MemoryStream"/> being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetPlaceholderData">
+            <summary>
+            Returns a pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/>
+            </summary>
+            <returns>Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizePlaceholderDataPool(System.Int32)">
+            <summary>
+            Resizes the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.PlaceholderDataPool"/>
+            </summary>
+            <param name="newSize">New size for the pool</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreePlaceholderData(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
@@ -21537,31 +22029,19 @@
             </summary>
             <param name="data"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> being freed</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetBoxed``1(``0)">
+            <summary>
+            Returns a pooled <see cref="T:Oxide.Ext.Discord.Pooling.Entities.Boxed`1"/>
+            </summary>
+            <typeparam name="T">Type for the Boxed</typeparam>
+            <returns>Pooled Boxed</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeBoxed``1(Oxide.Ext.Discord.Pooling.Entities.Boxed{``0})">
             <summary>
-            Free's a pooled <see cref="T:Oxide.Ext.Discord.Pooling.BoxedPool`1"/>
+            Free's a pooled <see cref="T:Oxide.Ext.Discord.Pooling.Pools.BoxedPool`1"/>
             </summary>
             <param name="boxed">Boxed to be freed</param>
             <typeparam name="T">Type of the Boxed</typeparam>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.HashPool`2">
-            <summary>
-            Represents a pool for Hash&lt;TKey, TValue&gt;
-            </summary>
-            <typeparam name="TKey"></typeparam>
-            <typeparam name="TValue"></typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.HashPool`2.OnFreeItem(Oxide.Plugins.Hash{`0,`1}@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.HashSetPool`1">
-            <summary>
-            Represents a pool for Hash&lt;TKey, TValue&gt;
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.HashSetPool`1.OnFreeItem(System.Collections.Generic.HashSet{`0}@)">
-            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.IPool">
             <summary>
@@ -21602,29 +22082,80 @@
             </summary>
             <param name="poolable"></param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.ListPool`1">
+        <member name="T:Oxide.Ext.Discord.Pooling.Pools.BoxedPool`1">
+            <summary>
+            Represents a pool for <see cref="T:Oxide.Ext.Discord.Pooling.Entities.Boxed`1"/>;
+            </summary>
+            <typeparam name="T">Type that will be in the boxed object</typeparam>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1">
+            <summary>
+            Represents a <see cref="T:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1"/>
+            </summary>
+            <typeparam name="T">Type of the array pool</typeparam>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1.Shared">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1"/> Instance
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1.Rent(System.Int32)">
+            <summary>
+            Rents an array from the pool
+            </summary>
+            <param name="minimumLength"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1.Return(`0[])">
+            <summary>
+            Returns an array to the pool
+            </summary>
+            <param name="array"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Pooling.Pools.HashPool`2">
+            <summary>
+            Represents a pool for Hash&lt;TKey, TValue&gt;
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.Pools.HashPool`2.OnFreeItem(Oxide.Plugins.Hash{`0,`1}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Pooling.Pools.HashSetPool`1">
+            <summary>
+            Represents a pool for Hash&lt;TKey, TValue&gt;
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.Pools.HashSetPool`1.OnFreeItem(System.Collections.Generic.HashSet{`0}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Pooling.Pools.ListPool`1">
             <summary>
             Represents a pool for list&lt;T&gt;
             </summary>
             <typeparam name="T">Type that will be in the list</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.ListPool`1.OnFreeItem(System.Collections.Generic.List{`0}@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.Pools.ListPool`1.OnFreeItem(System.Collections.Generic.List{`0}@)">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.MemoryStreamPool">
+        <member name="T:Oxide.Ext.Discord.Pooling.Pools.MemoryStreamPool">
             <summary>
             Represents a pool for MemoryStream
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.MemoryStreamPool.OnFreeItem(System.IO.MemoryStream@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.Pools.MemoryStreamPool.OnFreeItem(System.IO.MemoryStream@)">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.StringBuilderPool">
+        <member name="T:Oxide.Ext.Discord.Pooling.Pools.StringBuilderPool">
             <summary>
             Pool for StringBuilders
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.StringBuilderPool.OnFreeItem(System.Text.StringBuilder@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.Pools.StringBuilderPool.OnFreeItem(System.Text.StringBuilder@)">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Promise.DiscordPromise">
