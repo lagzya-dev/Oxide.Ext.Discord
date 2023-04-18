@@ -41,7 +41,7 @@
         GuildNewsThread = 10,
         
         /// <summary>
-        /// A temporary sub-channel within a GUILD_TEXT channel
+        /// A temporary sub-channel within a GUILD_TEXT or GUILD_FORUM channel
         /// </summary>
         GuildPublicThread = 11,
         
