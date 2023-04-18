@@ -66,6 +66,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public bool? DefaultPermissions { get; set; }
         
         /// <summary>
+        /// Indicates whether the command is age-restricted
+        /// </summary>
+        [JsonProperty("nsfw")]
+        public bool? Nsfw { get; set; }
+        
+        /// <summary>
         /// The <see cref="ApplicationCommandType"/> of the command
         /// </summary>
         [JsonProperty("type")]

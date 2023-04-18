@@ -90,6 +90,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public bool? DmPermission { get; set; }
 
         /// <summary>
+        /// Indicates whether the command is age-restricted
+        /// </summary>
+        [JsonProperty("nsfw")]
+        public bool? Nsfw { get; set; }
+        
+        /// <summary>
         /// Auto incrementing version identifier updated during substantial record changes
         /// </summary>
         [JsonProperty("version")]
