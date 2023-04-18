@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions.Entities.AutoMod;
 
 namespace Oxide.Ext.Discord.Entities.AutoMod
 {
@@ -19,7 +20,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <summary>
         /// Associated Trigger Types: <see cref="AutoModTriggerType.Keyword"/>
         /// Regular expression patterns which will be matched against content (Maximum of 10)
-        /// * Only Rust flavored regex is currently supported, which can be tested in online editors such as <a href="https://rustexp.lpil.uk/">Rustexp</a>. Each regex pattern must be 75 characters or less.
+        /// * Only Rust flavored regex is currently supported, which can be tested in online editors such as <a href="https://rustexp.lpil.uk/">Rustexp</a>. Each regex pattern must be 260 characters or less.
         /// </summary>
         [JsonProperty("regex_patterns")]
         public List<string> RegexPatterns { get; set; }
@@ -32,8 +33,8 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         public List<AutoModKeywordPresetType> Presets { get; set; }
         
         /// <summary>
-        /// Associated Trigger Types: <see cref="AutoModTriggerType.KeywordPreset"/>
-        /// Substrings which will be exempt from triggering the preset trigger type
+        /// Associated Trigger Types: <see cref="AutoModTriggerType.KeywordPreset"/> and <see cref="AutoModTriggerType.Keyword"/>
+        /// Substrings which should not trigger the rule (Maximum of 100 or 1000)
         /// </summary>
         [JsonProperty("allow_list")]
         public List<string> AllowList { get; set; }
@@ -45,5 +46,13 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// </summary>
         [JsonProperty("mention_total_limit")]
         public int MentionTotalLimit { get; set; }
+        
+        internal void Validate(AutoModTriggerType type)
+        {
+            AutoModTriggerMetadataException.ThrowIfKeywordFilterInvalid(KeywordFilter);
+            AutoModTriggerMetadataException.ThrowIfRegexPatternsInvalid(RegexPatterns);
+            AutoModTriggerMetadataException.ThrowIfAllowListInvalid(RegexPatterns, type);
+            AutoModTriggerMetadataException.ThrowIfInvalidMentionTotalLimit(MentionTotalLimit);
+        }
     }
 }

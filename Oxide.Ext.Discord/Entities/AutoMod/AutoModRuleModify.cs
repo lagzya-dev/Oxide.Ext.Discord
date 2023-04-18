@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.AutoMod
 {
@@ -7,8 +8,17 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
     /// Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule-json-params">Auto Mod Rule Modify</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class AutoModRuleModify
+    public class AutoModRuleModify : IDiscordValidation
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="triggerType">Trigger type being modified</param>
+        public AutoModRuleModify(AutoModTriggerType triggerType)
+        {
+            TriggerType = triggerType;
+        }
+        
         /// <summary>
         /// Rule name
         /// </summary>
@@ -50,5 +60,17 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// </summary>
         [JsonProperty("exempt_channels")]
         public List<Snowflake> ExemptChannels { get; set; }
+        
+        /// <summary>
+        /// Rule <see cref="AutoModTriggerType"/>
+        /// </summary>
+        [JsonIgnore]
+        public AutoModTriggerType TriggerType { get; private set; }
+        
+        ///<inheritdoc/>
+        public void Validate()
+        {
+            TriggerMetadata?.Validate(TriggerType);
+        }
     }
 }

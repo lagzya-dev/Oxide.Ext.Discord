@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.AutoMod
 {
@@ -7,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
     /// Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#create-auto-moderation-rule-json-params">Auto Mod Rule Create</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class AutoModRuleCreate
+    public class AutoModRuleCreate : IDiscordValidation
     {
         /// <summary>
         /// Rule name
@@ -56,5 +57,11 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// </summary>
         [JsonProperty("exempt_channels")]
         public List<Snowflake> ExemptChannels { get; set; }
+
+        ///<inheritdoc/>
+        public void Validate()
+        {
+            TriggerMetadata?.Validate(TriggerType);
+        }
     }
 }

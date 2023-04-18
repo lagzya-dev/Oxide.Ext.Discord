@@ -1,5 +1,4 @@
 using System.IO;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Pooling.Pools;
 
 namespace Oxide.Ext.Discord.Extensions
