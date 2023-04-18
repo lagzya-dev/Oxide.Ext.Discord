@@ -47,6 +47,7 @@ namespace Oxide.Ext.Discord.Libraries.Langs
             AddLocale("hr","hr");
             AddLocale("cs","cs");
             AddLocale("da","da");
+            AddLocale("id","id-Id");
             AddLocale("nl","nl");
             AddLocale("fi","fi");
             AddLocale("fr","fr");
