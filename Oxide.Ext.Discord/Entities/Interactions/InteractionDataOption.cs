@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         /// <summary>
         /// The value of the option resulting from user input
-        /// Value can be string, integer, or double type
+        /// Value can be string, integer, or double, or boolean type
         /// </summary>
         [JsonProperty("value")]
         public JToken Value { get; set; }
