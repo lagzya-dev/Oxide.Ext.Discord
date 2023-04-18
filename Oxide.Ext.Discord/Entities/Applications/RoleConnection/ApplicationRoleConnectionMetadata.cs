@@ -51,8 +51,8 @@ namespace Oxide.Ext.Discord.Entities.Applications.RoleConnection
         public void Validate()
         {
             ApplicationRoleConnectionMetadataException.ThrowIfInvalidKeyException(Key);
-            ApplicationRoleConnectionMetadataException.ThrowIfInvalidKeyException(Name);
-            ApplicationRoleConnectionMetadataException.ThrowIfInvalidKeyException(Description);
+            ApplicationRoleConnectionMetadataException.ThrowIfInvalidNameException(Name);
+            ApplicationRoleConnectionMetadataException.ThrowIfInvalidDescriptionException(Description);
         }
     }
 }
