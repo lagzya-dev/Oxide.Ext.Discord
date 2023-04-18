@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Permissions
 {
@@ -6,6 +7,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure">Role Tags Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    [JsonConverter(typeof(RoleTagsConverter))]
     public class RoleTags
     {
         /// <summary>
@@ -25,5 +27,17 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         [JsonProperty("premium_subscriber")]
         public bool? PremiumSubscriber { get; set; }
+        
+        /// <summary>
+        /// The id of this role's subscription sku and listing
+        /// </summary>
+        [JsonProperty("subscription_listing_id")]
+        public Snowflake? SubscriptionListingId { get; set; }
+        
+        /// <summary>
+        /// whether this role is available for purchase
+        /// </summary>
+        [JsonProperty("available_for_purchase")]
+        public bool? AvailableForPurchase { get; set; }
     }
 }

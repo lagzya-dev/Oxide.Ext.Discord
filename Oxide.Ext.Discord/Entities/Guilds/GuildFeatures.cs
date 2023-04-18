@@ -53,6 +53,18 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         Community,
         
         /// <summary>
+        /// Guild has enabled monetization
+        /// </summary>
+        [Description("CREATOR_MONETIZABLE_PROVISIONAL")] 
+        CreatorMonetizableProvisional,
+        
+        /// <summary>
+        /// Guild has enabled the role subscription promo page
+        /// </summary>
+        [Description("CREATOR_STORE_PAGE")] 
+        CreatorStorePage,
+        
+        /// <summary>
         /// Guild has been set as a support server on the App Directory
         /// </summary>
         [Description("DEVELOPER_SUPPORT_SERVER")] 
@@ -91,6 +103,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Guild has enabled monetization
         /// </summary>
+        [Obsolete("Has been replaced with CreatorMonetizableProvisional")]
         [Description("MONETIZATION_ENABLED")] 
         MonetizationEnabled,
 
@@ -131,6 +144,18 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [Description("ROLE_ICONS")] 
         RoleIcons,
 
+        /// <summary>
+        /// Guild has role subscriptions that can be purchased
+        /// </summary>
+        [Description("ROLE_SUBSCRIPTIONS_AVAILABLE_FOR_PURCHASE")] 
+        RoleSubscriptionsAvailableForPurchase,
+        
+        /// <summary>
+        /// Guild has enabled role subscriptions
+        /// </summary>
+        [Description("ROLE_SUBSCRIPTIONS_ENABLED")] 
+        RoleSubscriptionsEnabled,
+        
         /// <summary>
         /// Guild has enabled ticketed events
         /// </summary>

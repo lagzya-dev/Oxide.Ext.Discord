@@ -23,6 +23,12 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// integration is for discord
         /// </summary>
         [Description("discord")] 
-        Discord
+        Discord,
+        
+        /// <summary>
+        /// integration is for guild subscription
+        /// </summary>
+        [Description("guild_subscription")] 
+        GuildSubscription
     }
 }

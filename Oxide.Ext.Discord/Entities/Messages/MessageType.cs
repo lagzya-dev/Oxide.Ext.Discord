@@ -149,6 +149,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Message is an auto mod action
         /// </summary>
         [Description("AUTO_MODERATION_ACTION")]
-        AutoModerationAction = 24
+        AutoModerationAction = 24,
+        
+        /// <summary>
+        /// Message is a role subscription purchase
+        /// </summary>
+        [Description("ROLE_SUBSCRIPTION_PURCHASE")]
+        RoleSubscriptionPurchase = 25
     }
 }
