@@ -36,9 +36,14 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         [Description("facebook")] Facebook,
         
         /// <summary>
-        /// Connection type is Youtube
+        /// Connection type is GitHub
         /// </summary>
         [Description("github")] GitHub,
+        
+        /// <summary>
+        /// Connection type is Instagram
+        /// </summary>
+        [Description("instagram")] Instagram,
         
         /// <summary>
         /// Connection type is League of Legends
