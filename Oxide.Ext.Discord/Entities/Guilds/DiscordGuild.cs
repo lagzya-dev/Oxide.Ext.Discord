@@ -299,6 +299,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public Snowflake? PublicUpdatesChannelId { get; set; }
         
         /// <summary>
+        /// The maximum amount of users in a stage video channel
+        /// </summary>
+        [JsonProperty("max_stage_video_channel_users")]
+        public int? MaxStageVideoChannelUsers { get; set; }
+        
+        /// <summary>
         /// The maximum amount of users in a video channel
         /// </summary>
         [JsonProperty("max_video_channel_users")]
