@@ -9,12 +9,9 @@ using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
-using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Plugins.Core;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord
@@ -27,6 +24,7 @@ namespace Oxide.Ext.Discord
         internal static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
 
         private static readonly Regex TokenValidator = new Regex(@"^[\w-]+\.[\w-]+\.[\w-]+$", RegexOptions.Compiled);
+        private static readonly Type ClientAttribute = typeof(DiscordClientAttribute);
 
         /// <summary>
         /// Which plugin is the owner of this client
@@ -251,10 +249,9 @@ namespace Oxide.Ext.Discord
             DiscordPluginCache.Instance.OnPluginLoaded(plugin);
             OnPluginRemoved(plugin);
             
-            Type clientAttribute = typeof(DiscordClientAttribute);
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {
-                if (field.GetCustomAttributes(clientAttribute, true).Length != 0)
+                if (field.GetCustomAttributes(ClientAttribute, true).Length != 0)
                 {
                     DiscordClient client = Clients[plugin.Id()];
                     if (client == null)
