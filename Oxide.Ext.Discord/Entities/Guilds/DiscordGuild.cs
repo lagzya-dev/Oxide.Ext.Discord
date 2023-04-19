@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Entities.Guilds.Onboarding;
 using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
 using Oxide.Ext.Discord.Entities.Integrations;
 using Oxide.Ext.Discord.Entities.Invites;
@@ -1522,6 +1523,19 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <inheritdoc cref="AutoModRule.CreateRule"/>
         public void CreateAutoModRule(DiscordClient client, AutoModRuleCreate create, Action<AutoModRule> callback = null, Action<RequestError> error = null)
             => AutoModRule.CreateRule(client, Id, create, callback, error);
+        
+        /// <summary>
+        /// Returns the <see cref="GuildOnboarding"/> for the guild.
+        /// 
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="callback">Callback with the <see cref="GuildOnboarding"/></param>
+        /// <param name="error">Callback when an error occurs with error information</param>
+        /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-onboarding">Get Guild Onboarding</a>
+        public void GetGuildOnboarding(DiscordClient client, Action<GuildOnboarding> callback = null, Action<RequestError> error = null)
+        {
+            client.Bot.Rest.CreateRequest(client,$"guilds/{Id}/onboarding", RequestMethod.GET, null, callback, error);
+        }
         #endregion
 
         #region Entity Update Methods
