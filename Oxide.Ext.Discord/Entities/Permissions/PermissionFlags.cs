@@ -339,5 +339,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         [Description("USE_SOUNDBOARD")]
         UseSoundboard = 1ul << 42,
+        
+        /// <summary>
+        /// Allows sending voice messages
+        /// </summary>
+        [Description("SEND_VOICE_MESSAGES")]
+        SendVoiceMessages = 1ul << 46,
     }
 }

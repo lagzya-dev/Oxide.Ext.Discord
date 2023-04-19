@@ -73,5 +73,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [Description("SUPPRESS_NOTIFICATIONS")]
         SuppressNotifications = 1 << 12,
+        
+        /// <summary>
+        /// This message is a voice message
+        /// </summary>
+        [Description("IS_VOICE_MESSAGE")]
+        IsVoiceMessage = 1 << 13,
     }
 }

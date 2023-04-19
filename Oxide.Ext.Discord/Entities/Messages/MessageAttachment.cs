@@ -68,5 +68,17 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("ephemeral")]
         public bool? Ephemeral { get; set; }
+        
+        /// <summary>
+        /// The duration of the audio file (currently for voice messages)
+        /// </summary>
+        [JsonProperty("duration_secs")]
+        public float? DurationSecs { get; set; }
+        
+        /// <summary>
+        /// base64 encoded bytearray representing a sampled waveform (currently for voice messages)
+        /// </summary>
+        [JsonProperty("waveform")]
+        public string Waveform { get; set; }
     }
 }
