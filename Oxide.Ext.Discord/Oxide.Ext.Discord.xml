@@ -6451,6 +6451,11 @@
             The privacy level of the Stage instance
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.GetThreadMember">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/channel#get-thread-member-query-string-params">Get Thread Member Query String Params</a>
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.GetThreadMember.WithMember">
             <summary>
             Whether to include a guild member object for the thread member
@@ -6458,6 +6463,11 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.GetThreadMember.ToQueryString">
             <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Channels.Threads.ListThreadMembers">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/channel#list-thread-members-query-string-params">List Thread Member Query String Params</a>
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ListThreadMembers.WithMember">
             <summary>
@@ -9248,6 +9258,16 @@
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateAutoModRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate,System.Action{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.CreateRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate,System.Action{Oxide.Ext.Discord.Entities.AutoMod.AutoModRule},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})"/>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildOnboarding(Oxide.Ext.Discord.DiscordClient,System.Action{Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+            <summary>
+            Returns the <see cref="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding"/> for the guild.
+            
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="callback">Callback with the <see cref="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding"/></param>
+            <param name="error">Callback when an error occurs with error information</param>
+            See <a href="https://discord.com/developers/docs/resources/guild#get-guild-onboarding">Get Guild Onboarding</a>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.ExplicitContentFilterLevel">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level">Explicit Content Filter Level</a>
@@ -10185,6 +10205,122 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildWidgetSettings.ChannelId">
             <summary>
             The widget channel id
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#guild-onboarding-object-guild-onboarding-structure">Guild Onboarding Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding.GuildId">
+            <summary>
+            ID of the guild this onboarding is part of
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding.Prompts">
+            <summary>
+            Prompts shown during onboarding and in customize community
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding.DefaultChannelIds">
+            <summary>
+            Channel IDs that members get opted into automatically
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding.Enabled">
+            <summary>
+            Whether onboarding is enabled in the guild
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPrompt">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-prompt-structure">Onboarding Prompt Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPrompt.Id">
+            <summary>
+            ID of the prompt
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPrompt.Type">
+            <summary>
+            Type of prompt
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPrompt.Options">
+            <summary>
+            Options available within the prompt
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPrompt.Title">
+            <summary>
+            Title of the prompt
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPrompt.SingleSelect">
+            <summary>
+            Indicates whether users are limited to selecting one option for the prompt
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPrompt.Required">
+            <summary>
+            Indicates whether the prompt is required before a user completes the onboarding flow
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPrompt.InOnboarding">
+            <summary>
+            Indicates whether the prompt is present in the onboarding flow.
+            If false, the prompt will only appear in the Channels and Roles tab
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptOption">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-option-structure">Prompt Option Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptOption.Id">
+            <summary>
+            ID of the prompt option
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptOption.ChannelIds">
+            <summary>
+            IDs for channels a member is added to when the option is selected
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptOption.RoleIds">
+            <summary>
+            IDs for roles assigned to a member when the option is selected
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptOption.Emoji">
+            <summary>
+            Emoji of the option
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptOption.Title">
+            <summary>
+            Title of the option
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptOption.Description">
+            <summary>
+            Description of the option
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types">Prompt Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptType.MultipleChoice">
+            <summary>
+            Multiple Choice Prompt Type
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPromptType.Dropdown">
+            <summary>
+            Dropdown Prompt Type
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">
@@ -16983,6 +17119,21 @@
             Represents an exception in Message Component Builder
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Applications.ApplicationRoleConnectionMetadataException">
+            <summary>
+            Exceptions for <see cref="T:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata"/>
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Applications.DiscordApplicationException">
+            <summary>
+            Exceptions for <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/>
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Entities.AutoMod.AutoModTriggerMetadataException">
+            <summary>
+            Exceptions for <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata"/>
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Channels.InvalidChannelException">
             <summary>
             Represents using an invalid channel
@@ -18423,6 +18574,43 @@
         <member name="M:Oxide.Ext.Discord.Json.Converters.PermissionFlagsStringConverter.CanConvert(System.Type)">
             <summary>
             Returns if the type equals PermissionFlags
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Json.Converters.RoleTagsConverter">
+            <summary>
+            Handles converting <see cref="T:Oxide.Ext.Discord.Entities.Permissions.RoleTags"/>
+            This type contains special deserialization types
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Json.Converters.RoleTagsConverter.CanWrite">
+            <summary>
+            Cannot write
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.RoleTagsConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Cannot Write
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+            <exception cref="T:Newtonsoft.Json.JsonSerializationException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.RoleTagsConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Converts the JSON to a <see cref="T:Oxide.Ext.Discord.Entities.Permissions.RoleTags"/>
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.Converters.RoleTagsConverter.CanConvert(System.Type)">
+            <summary>
+            Returns if the type can be converter
             </summary>
             <param name="objectType"></param>
             <returns></returns>
@@ -21776,6 +21964,13 @@
             Plugin Pool for this pool
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.GetPoolSize(Oxide.Ext.Discord.Pooling.PoolSettings)">
+            <summary>
+            Returns the pool size from the pool settings for the pool
+            </summary>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.ForPlugin``1(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
             <summary>
             Returns a pool for the given plugin pool
@@ -21874,9 +22069,15 @@
             </summary>
             <param name="plugin">Plugin the pool is for</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.SetSettings(Oxide.Ext.Discord.Pooling.PoolSettings)">
+            <summary>
+            Sets the settings for the pools
+            </summary>
+            <param name="settings"></param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.Get``1">
             <summary>
-            Returns a pooled object of type <see cref="!:T"/>
+            Returns a pooled object of {T} type
             Must inherit from <see cref="T:Oxide.Ext.Discord.Pooling.BasePoolable"/> and have an empty default constructor
             </summary>
             <typeparam name="T">Type to be returned</typeparam>
@@ -21884,7 +22085,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizePool``1(System.Int32)">
             <summary>
-            Resizes the pool for <see cref="!:T"/>
+            Resizes the pool for {T} type
             </summary>
             <param name="newSize">New size for the pool</param>
             <typeparam name="T">Type of {T} where T : BasePoolable, new()</typeparam>
@@ -22048,6 +22249,12 @@
             Represents a pool
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Pooling.IPool.Resize(System.Int32)">
+            <summary>
+            Resizes the pool
+            </summary>
+            <param name="newSize"></param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.IPool.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <summary>
             Called on a pool when a plugin is unloaded
@@ -22081,6 +22288,46 @@
             Returns the pooled type back to the pool
             </summary>
             <param name="poolable"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Pooling.PoolSettings">
+            <summary>
+            Settings for the pools
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.HashPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.HashPool`2"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.HashSetPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.HashSetPool`1"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.ListPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.ListPool`1"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.MemoryStreamPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.MemoryStreamPool"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.ObjectPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.ObjectPool`1"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.PlaceholderDataPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.PlaceholderDataPool"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.StringBuilderPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.StringBuilderPool"/>
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.Pools.BoxedPool`1">
             <summary>

@@ -3,6 +3,9 @@ using Oxide.Ext.Discord.Entities.AutoMod;
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.AutoMod
 {
+    /// <summary>
+    /// Exceptions for <see cref="AutoModTriggerMetadata"/>
+    /// </summary>
     public class AutoModTriggerMetadataException : BaseDiscordException
     {
         private AutoModTriggerMetadataException(string message) : base(message) { }

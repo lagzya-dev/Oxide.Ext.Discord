@@ -7,6 +7,10 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public interface IPool
     {
+        /// <summary>
+        /// Resizes the pool
+        /// </summary>
+        /// <param name="newSize"></param>
         void Resize(int newSize);
         
         /// <summary>

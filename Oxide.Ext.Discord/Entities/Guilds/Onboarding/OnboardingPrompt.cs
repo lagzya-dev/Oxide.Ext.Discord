@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.Onboarding
         
         /// <summary>
         /// Indicates whether the prompt is present in the onboarding flow.
-        /// If false, the prompt will only appear in the Channels & Roles tab
+        /// If false, the prompt will only appear in the Channels and Roles tab
         /// </summary>
         [JsonProperty("in_onboarding")]
         public bool InOnboarding { get; set; }

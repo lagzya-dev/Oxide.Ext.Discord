@@ -6,6 +6,9 @@ using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Threads
 {
+    /// <summary>
+    /// Represents <a href="https://discord.com/developers/docs/resources/channel#list-thread-members-query-string-params">List Thread Member Query String Params</a>
+    /// </summary>
     public class ListThreadMembers : IDiscordQueryString
     {
         /// <summary>

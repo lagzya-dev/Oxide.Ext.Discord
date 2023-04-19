@@ -30,6 +30,11 @@ namespace Oxide.Ext.Discord.Pooling
             _pool = new TPooled[GetPoolSize(pluginPool.Settings)];
         }
 
+        /// <summary>
+        /// Returns the pool size from the pool settings for the pool
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         protected abstract int GetPoolSize(PoolSettings settings);
 
         /// <summary>

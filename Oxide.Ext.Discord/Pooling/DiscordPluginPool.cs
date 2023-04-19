@@ -31,6 +31,10 @@ namespace Oxide.Ext.Discord.Pooling
             Plugin = plugin;
         }
 
+        /// <summary>
+        /// Sets the settings for the pools
+        /// </summary>
+        /// <param name="settings"></param>
         public void SetSettings(PoolSettings settings)
         {
             _settings = settings;
@@ -39,7 +43,7 @@ namespace Oxide.Ext.Discord.Pooling
         internal void AddPool(IPool pool) => _pools.Add(pool);
         
         /// <summary>
-        /// Returns a pooled object of type <see cref="T"/>
+        /// Returns a pooled object of {T} type
         /// Must inherit from <see cref="BasePoolable"/> and have an empty default constructor
         /// </summary>
         /// <typeparam name="T">Type to be returned</typeparam>
@@ -50,7 +54,7 @@ namespace Oxide.Ext.Discord.Pooling
         }
 
         /// <summary>
-        /// Resizes the pool for <see cref="T"/>
+        /// Resizes the pool for {T} type
         /// </summary>
         /// <param name="newSize">New size for the pool</param>
         /// <typeparam name="T">Type of {T} where T : BasePoolable, new()</typeparam>

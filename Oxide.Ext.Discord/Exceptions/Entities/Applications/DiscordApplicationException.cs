@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
+using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Applications.RoleConnection;
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
 {
+    /// <summary>
+    /// Exceptions for <see cref="DiscordApplication"/>
+    /// </summary>
     public class DiscordApplicationException : BaseDiscordException
     {
         private DiscordApplicationException(string message) : base(message) { }
@@ -16,9 +20,9 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
                 throw new DiscordApplicationException($"{nameof(records)} cannot be null");
             }
 
-            if (records.Count > 5)
+            if (records.Count > maxLength)
             {
-                throw new DiscordApplicationException($"{nameof(records)} cannot have more than 5 records");
+                throw new DiscordApplicationException($"{nameof(records)} cannot have more than {maxLength} records");
             }
         }
     }

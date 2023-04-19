@@ -3,6 +3,9 @@ using Oxide.Ext.Discord.Entities.Applications.RoleConnection;
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
 {
+    /// <summary>
+    /// Exceptions for <see cref="ApplicationRoleConnectionMetadata"/>
+    /// </summary>
     public class ApplicationRoleConnectionMetadataException : BaseDiscordException
     {
         private static readonly Regex _keyRegex = new Regex(@"^\w+$", RegexOptions.Compiled);
