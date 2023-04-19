@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Libraries.Linking
 {
