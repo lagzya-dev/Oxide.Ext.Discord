@@ -10,7 +10,7 @@ using Oxide.Ext.Discord.Promise;
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
     public abstract class BaseExplicitMessageTemplateLibrary<TTemplate, TEntity> : BaseMessageTemplateLibrary<TTemplate, TEntity>
-        where TTemplate : BaseMessageTemplate<TEntity>, new()
+        where TTemplate : BaseMessageTemplate<TEntity>, IDiscordTemplate, new()
         where TEntity : class, new()
     {
         protected BaseExplicitMessageTemplateLibrary(TemplateType type, ILogger logger) : base(type, logger) { }

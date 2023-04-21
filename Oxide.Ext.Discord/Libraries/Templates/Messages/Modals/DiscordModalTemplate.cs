@@ -12,8 +12,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
     /// Template used for Modal Message Component
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordModalTemplate : BaseMessageTemplate<InteractionModalMessage>
+    public class DiscordModalTemplate : BaseMessageTemplate<InteractionModalMessage>, IDiscordTemplate
     {
+        private static readonly TemplateVersion InternalVersion = new TemplateVersion(1, 0, 0);
+        
         /// <summary>
         /// Title of the modal
         /// </summary>
@@ -36,7 +38,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordModalTemplate() : base(new TemplateVersion(1, 0, 0)) {}
+        public DiscordModalTemplate() {}
 
         /// <summary>
         /// Constructor
@@ -81,5 +83,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
 
             return modal;
         }
+
+        public TemplateVersion GetInternalVersion() => InternalVersion;
     }
 }

@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates
 {
-    internal class BulkRegisterTemplateCallback<TTemplate> : BaseAsyncCallback where TTemplate : BaseTemplate
+    internal class BulkRegisterTemplateCallback<TTemplate> : BaseAsyncCallback where TTemplate : class, IDiscordTemplate
     {
         private BaseTemplateLibrary<TTemplate> _library;
         private TemplateId _id;

@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
@@ -6,17 +7,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     /// Base Template used in Discord Templates
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public abstract class BaseTemplate
+    public class DiscordTemplate<TTemplate> where TTemplate : class, IDiscordTemplate
     {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="internalVersion">Internal Template Version</param>
-        public BaseTemplate(TemplateVersion internalVersion)
-        {
-            InternalVersion = internalVersion;
-        }
-
+        [JsonProperty("Template", Order = 1)]
+        public TTemplate Template { get; private set;}
+        
         /// <summary>
         /// The version of the Template
         /// Used when Registering templates to determine if we need to backup a template and create a new template for the given version
@@ -29,6 +24,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// Reserved for future use
         /// </summary>
         [JsonProperty("Internal Template Version (DO NOT EDIT)", Order = 1001)]
-        internal TemplateVersion InternalVersion { get; set; }
+        internal TemplateVersion InternalVersion { get; private set; }
+
+        [JsonConstructor]
+        private DiscordTemplate() { }
+        
+        public DiscordTemplate(TTemplate template, TemplateVersion version)
+        {
+            Template = template ?? throw new ArgumentNullException(nameof(template));
+            Version = version;
+            InternalVersion = template.GetInternalVersion();
+        }
     }
 }

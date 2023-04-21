@@ -6,14 +6,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// Represents the base class for Message Templates
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public abstract class BaseMessageTemplate<TEntity> : BaseTemplate where TEntity : class
+    public abstract class BaseMessageTemplate<TEntity> where TEntity : class
     {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="internalVersion"></param>
-        protected BaseMessageTemplate(TemplateVersion internalVersion) : base(internalVersion) { }
-
         /// <summary>
         /// Converts the template to the given entity
         /// </summary>

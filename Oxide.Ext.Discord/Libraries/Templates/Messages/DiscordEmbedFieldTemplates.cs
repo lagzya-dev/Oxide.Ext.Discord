@@ -1,5 +1,5 @@
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields;
+using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages

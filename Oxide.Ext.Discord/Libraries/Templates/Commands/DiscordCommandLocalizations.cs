@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <param name="language">Language to register</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public IDiscordPromise RegisterCommandLocalizationAsync(Plugin plugin, string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
+        public IDiscordPromise RegisterCommandLocalizationAsync(Plugin plugin, string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (localization == null) throw new ArgumentNullException(nameof(localization));
@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             IDiscordPromise promise = DiscordPromise.Create();
             
             TemplateId id = TemplateId.CreateLocalized(plugin, fileNameSuffix, language);
-            RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, minVersion, promise);
+            RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, version, minVersion, promise);
             return promise;
         }
         
@@ -167,11 +167,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
         private void HandleLoadAndApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, string lang)
         {
-            DiscordCommandLocalization localization = LoadTemplate(id.WithLanguage(lang));
-            if (localization != null)
-            {
-                localization.HandleApplyCommandLocalizationAsync(create, lang).ConfigureAwait(false);
-            }
+            DiscordTemplate<DiscordCommandLocalization> localization = LoadTemplate(id.WithLanguage(lang));
+            localization?.Template.HandleApplyCommandLocalizationAsync(create, lang).ConfigureAwait(false);
         }
 
         internal override string GetTemplatePath(TemplateId id)

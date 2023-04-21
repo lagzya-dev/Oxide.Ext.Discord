@@ -15,8 +15,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// Discord Message Template for sending localized Discord Messages
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordMessageTemplate : BaseMessageTemplate<IDiscordMessageTemplate>
+    public class DiscordMessageTemplate : BaseMessageTemplate<IDiscordMessageTemplate>, IDiscordTemplate
     {
+        private static readonly TemplateVersion InternalVersion = new TemplateVersion(1, 0, 0);
+
         /// <summary>
         /// String contents of the message
         /// </summary>
@@ -27,7 +29,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// Embeds for the message
         /// </summary>
         [JsonProperty("Message Embeds")]
-        public List<MessageEmbedTemplate> Embeds { get; set; } = new List<MessageEmbedTemplate>();
+        public List<DiscordEmbedTemplate> Embeds { get; set; } = new List<DiscordEmbedTemplate>();
 
         /// <summary>
         /// Buttons for the message
@@ -40,7 +42,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordMessageTemplate() : base(new TemplateVersion(1, 0, 0)) {}
+        public DiscordMessageTemplate() {}
 
         /// <summary>
         /// Constructor
@@ -101,7 +103,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             for (int index = 0; index < Embeds.Count; index++)
             {
-                MessageEmbedTemplate template = Embeds[index];
+                DiscordEmbedTemplate template = Embeds[index];
                 if (template.Enabled)
                 {
                     embeds.Add(template.ToEntity(data));
@@ -146,5 +148,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             return rows;
         }
+        
+        public TemplateVersion GetInternalVersion() => InternalVersion;
     }
 }

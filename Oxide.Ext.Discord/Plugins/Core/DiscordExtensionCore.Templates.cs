@@ -17,32 +17,31 @@ namespace Oxide.Ext.Discord.Plugins.Core
         
         public void CreateTemplates()
         {
-            DiscordMessageTemplate success = CreateTemplateEmbed("You have successfully deleted application command {command.name}", DiscordSuccess, new TemplateVersion(1, 0, 0));
-            DiscordExtension.DiscordMessageTemplates.RegisterLocalizedTemplateAsync(this, TemplateKeys.Commands.Delete.Success, success, new TemplateVersion(1, 0, 0));
+            DiscordMessageTemplate success = CreateTemplateEmbed("You have successfully deleted application command {command.name}", DiscordSuccess);
+            DiscordExtension.DiscordMessageTemplates.RegisterLocalizedTemplateAsync(this, TemplateKeys.Commands.Delete.Success, success, new TemplateVersion(1, 0, 0), new TemplateVersion(1, 0, 0));
             
-            DiscordMessageTemplate deleteError = CreateTemplateEmbed("An error occured deleting command {command.name}. Please try the command again. \nError: {error.message}", DiscordDanger, new TemplateVersion(1, 0, 0));
-            DiscordExtension.DiscordMessageTemplates.RegisterLocalizedTemplateAsync(this, TemplateKeys.Commands.Delete.Errors.DeleteCommandError, deleteError, new TemplateVersion(1, 0, 0));
+            DiscordMessageTemplate deleteError = CreateTemplateEmbed("An error occured deleting command {command.name}. Please try the command again. \nError: {error.message}", DiscordDanger);
+            DiscordExtension.DiscordMessageTemplates.RegisterLocalizedTemplateAsync(this, TemplateKeys.Commands.Delete.Errors.DeleteCommandError, deleteError, new TemplateVersion(1, 0, 0), new TemplateVersion(1, 0, 0));
             
-            DiscordMessageTemplate commandNotFound = CreateTemplateEmbed("We failed to find a matching command. Please make sure you select a command from the drop down.", DiscordDanger, new TemplateVersion(1, 0, 0));
-            DiscordExtension.DiscordMessageTemplates.RegisterLocalizedTemplateAsync(this, TemplateKeys.Commands.Delete.Errors.CommandIdNotFound, commandNotFound, new TemplateVersion(1, 0, 0));
+            DiscordMessageTemplate commandNotFound = CreateTemplateEmbed("We failed to find a matching command. Please make sure you select a command from the drop down.", DiscordDanger);
+            DiscordExtension.DiscordMessageTemplates.RegisterLocalizedTemplateAsync(this, TemplateKeys.Commands.Delete.Errors.CommandIdNotFound, commandNotFound, new TemplateVersion(1, 0, 0), new TemplateVersion(1, 0, 0));
             
-            DiscordMessageTemplate invalidSelection = CreateTemplateEmbed("You have selected an invalid command. Please try the command again and be sure to select an option from the drop down.", DiscordDanger, new TemplateVersion(1, 0, 0));
-            DiscordExtension.DiscordMessageTemplates.RegisterLocalizedTemplateAsync(this, TemplateKeys.Commands.Delete.Errors.InvalidSelection, invalidSelection, new TemplateVersion(1, 0, 0));
+            DiscordMessageTemplate invalidSelection = CreateTemplateEmbed("You have selected an invalid command. Please try the command again and be sure to select an option from the drop down.", DiscordDanger);
+            DiscordExtension.DiscordMessageTemplates.RegisterLocalizedTemplateAsync(this, TemplateKeys.Commands.Delete.Errors.InvalidSelection, invalidSelection, new TemplateVersion(1, 0, 0), new TemplateVersion(1, 0, 0));
         }
         
-        public DiscordMessageTemplate CreateTemplateEmbed(string description, string color, TemplateVersion version)
+        public DiscordMessageTemplate CreateTemplateEmbed(string description, string color)
         {
             return new DiscordMessageTemplate
             {
-                Embeds = new List<MessageEmbedTemplate>
+                Embeds = new List<DiscordEmbedTemplate>
                 {
-                    new MessageEmbedTemplate
+                    new DiscordEmbedTemplate
                     {
                         Description = description,
                         Color = $"#{color}"
                     }
                 },
-                Version = version
             };
         }
 

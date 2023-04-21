@@ -5,7 +5,6 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds.Fields;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
 {
@@ -13,49 +12,73 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
     /// Discord Template for embed
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordEmbedTemplate : BaseMessageTemplate<DiscordEmbed>, IEmbedTemplate
+    public class DiscordEmbedTemplate : BaseMessageTemplate<DiscordEmbed>, IDiscordTemplate
     {
-        ///<inheritdoc/>
+        private static readonly TemplateVersion InternalVersion = new TemplateVersion(1, 0, 0);
+        
+        /// <summary>
+        /// If this embed is enabled
+        /// </summary>
         [JsonProperty("Show Embed")]
         public bool Enabled { get; set; } = true;
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// The Tile for the embed
+        /// </summary>
         [JsonProperty("Embed Title")]
         public string Title { get; set; } = string.Empty;
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// This Title Url for the embed
+        /// </summary>
         [JsonProperty("Embed Title URL")]
         public string Url { get; set; } = string.Empty;
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// The description of the embed
+        /// </summary>
         [JsonProperty("Embed Description")]
         public string Description { get; set; } = string.Empty;
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// The Hex Color for the embed
+        /// </summary>
         [JsonProperty("Embed Hex Color")]
         public string Color { get; set; } = DiscordColor.Default.ToHex();
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// Image URL to show in the embed
+        /// </summary>
         [JsonProperty("Embed Image URL")]
         public string ImageUrl { get; set; } = string.Empty;
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// Thumbnail url to show in the embed
+        /// </summary>
         [JsonProperty("Embed Thumbnail URL")]
         public string ThumbnailUrl { get; set; } = string.Empty;
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// Video url to show in the embed
+        /// </summary>
         [JsonProperty("Embed View Url")]
         public string VideoUrl { get; set; } = string.Empty;
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// Show timestamp in the embed
+        /// </summary>
         [JsonProperty("Show Embed TimeStamp")]
         public bool TimeStamp { get; set; } = false;
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// Fields for the embed
+        /// </summary>
         [JsonProperty("Embed Fields")]
-        public List<MessageEmbedFieldTemplate> Fields { get; set; } = new List<MessageEmbedFieldTemplate>();
+        public List<DiscordEmbedFieldTemplate> Fields { get; set; } = new List<DiscordEmbedFieldTemplate>();
 
-        ///<inheritdoc/>
+        /// <summary>
+        /// Footer for the embed
+        /// </summary>
         [JsonProperty("Embed Footer")]
         public EmbedFooterTemplate Footer { get; set; } = new EmbedFooterTemplate();
         
@@ -63,7 +86,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordEmbedTemplate() : base(new TemplateVersion(1, 0, 0)) { }
+        public DiscordEmbedTemplate() { }
 
         /// <summary>
         /// Constructor
@@ -87,11 +110,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// <summary>
         /// Converts the template to a <see cref="DiscordEmbed"/>
         /// </summary>
-        /// <param name="template">Template to create the entity for</param>
         /// <param name="data">Data to use</param>
         /// <param name="embed">Initial embed to use</param>
         /// <returns></returns>
-        internal static DiscordEmbed ToEntity(IEmbedTemplate template, PlaceholderData data, DiscordEmbed embed = null)
+        internal static DiscordEmbed ToEntity(DiscordEmbedTemplate template, PlaceholderData data, DiscordEmbed embed = null)
         {
             if (embed == null)
             {
@@ -145,5 +167,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
 
             return embed;
         }
+        
+        public TemplateVersion GetInternalVersion() => InternalVersion;
     }
 }

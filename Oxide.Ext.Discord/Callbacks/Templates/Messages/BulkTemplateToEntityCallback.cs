@@ -10,7 +10,7 @@ using Oxide.Ext.Discord.Promise;
 namespace Oxide.Ext.Discord.Callbacks.Templates.Messages
 {
     internal class BulkTemplateToEntityCallback<TTemplate, TEntity, TTarget> : BaseAsyncCallback 
-        where TTemplate : BaseMessageTemplate<TEntity>, new()
+        where TTemplate : BaseMessageTemplate<TEntity>, IDiscordTemplate, new()
         where TEntity : class
         where TTarget : class, TEntity, new()
     {

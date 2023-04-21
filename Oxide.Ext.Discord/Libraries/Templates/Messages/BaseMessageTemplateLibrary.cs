@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// Library for Discord Message templates
     /// </summary>
     public abstract class BaseMessageTemplateLibrary<TTemplate, TEntity> : BaseTemplateLibrary<TTemplate>
-        where TTemplate : BaseMessageTemplate<TEntity>, new()
+        where TTemplate : BaseMessageTemplate<TEntity>, IDiscordTemplate, new()
         where TEntity : class
     {
         private readonly ConcurrentDictionary<TemplateId, TTemplate> _templateCache = new ConcurrentDictionary<TemplateId, TTemplate>();
@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// <param name="template">Template to register</param>
         /// <param name="minVersion">Min supported version for this template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IDiscordPromise RegisterGlobalTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion minVersion)
+        public IDiscordPromise RegisterGlobalTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             IDiscordPromise promise = DiscordPromise.Create();
             
             TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
-            RegisterTemplateCallback<TTemplate>.Start(this, id, template, minVersion, promise);
+            RegisterTemplateCallback<TTemplate>.Start(this, id, template, version, minVersion, promise);
             return promise;
         }
         
@@ -62,7 +62,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// </param>
         /// <param name="language">Language for the template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IDiscordPromise RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
+        public IDiscordPromise RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
@@ -71,7 +71,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             IDiscordPromise promise = DiscordPromise.Create();
 
             TemplateId id = TemplateId.CreateLocalized(plugin, templateName, language);
-            RegisterTemplateCallback<TTemplate>.Start(this, id, template, minVersion, promise);
+            RegisterTemplateCallback<TTemplate>.Start(this, id, template, version, minVersion, promise);
             return promise;
         }
 
@@ -184,12 +184,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
         internal TTemplate HandleGetLocalizedTemplate(TemplateId id, DiscordInteraction interaction)
         {
-            TTemplate template = LoadFromCache(id);
-            if (template != null)
+            TTemplate cachedTemplate = LoadFromCache(id);
+            if (cachedTemplate != null)
             {
-                return template;
+                return cachedTemplate;
             }
 
+
+            DiscordTemplate<TTemplate> template;
             if (interaction != null)
             {
                 IPlayer player = interaction.User.Player;
@@ -216,9 +218,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 return new TTemplate();
             }
             
-            SetCache(id, template);
+            SetCache(id, template.Template);
 
-            return template;
+            return template.Template;
         }
 
         private TTemplate LoadFromCache(TemplateId id) => _templateCache.TryGetValue(id, out TTemplate template) ? template : null;

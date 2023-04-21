@@ -9,8 +9,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
     /// Command Localizations for Application Commands
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordCommandLocalization : BaseTemplate
+    public class DiscordCommandLocalization : IDiscordTemplate
     {
+        private static readonly TemplateVersion InternalVersion = new TemplateVersion(1, 0, 0);
+        
         /// <summary>
         /// Localized Command
         /// </summary>
@@ -21,7 +23,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordCommandLocalization() : base(new TemplateVersion(1, 0, 0)) { }
+        public DiscordCommandLocalization() { }
 
         /// <summary>
         /// Constructor
@@ -53,5 +55,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             ApplyCommandLocalization(create, language);
             return Task.CompletedTask;
         }
+
+        public TemplateVersion GetInternalVersion() => InternalVersion;
     }
 }
