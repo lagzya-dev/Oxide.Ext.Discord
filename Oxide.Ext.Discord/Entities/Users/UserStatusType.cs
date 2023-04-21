@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         /// User has Do Not Disturb
         /// </summary>
-        [Description("dnd")] DND,
+        [Description("dnd")] Dnd,
         
         /// <summary>
         /// User is idle

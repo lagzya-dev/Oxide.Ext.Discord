@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
     internal class WebSocketReconnectHandler
     {
         private readonly BotClient _client;
-        internal readonly DiscordWebSocket _webSocket;
+        internal readonly DiscordWebSocket WebSocket;
         private readonly ILogger _logger;
         private int _reconnectRetries;
         private CancellationTokenSource _source;
@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         public WebSocketReconnectHandler(BotClient client, DiscordWebSocket webSocket, ILogger logger)
         {
             _client = client;
-            _webSocket = webSocket;
+            WebSocket = webSocket;
             _logger = logger;
         }
 
@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 return;
             }
 
-            if (!_webSocket.IsDisconnected() && !_webSocket.IsDisconnecting())
+            if (!WebSocket.IsDisconnected() && !WebSocket.IsDisconnecting())
             {
                 _logger.Debug("Skipping reconnect. Websocket is not Disconnected or Disconnecting");
                 return;
@@ -73,13 +73,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private void Connect()
         {
-            if (_webSocket.IsConnected() || _webSocket.IsConnecting())
+            if (WebSocket.IsConnected() || WebSocket.IsConnecting())
             {
-                _logger.Debug("Skipping Connect. Socket is: {0}", _webSocket.Handler.SocketState);
+                _logger.Debug("Skipping Connect. Socket is: {0}", WebSocket.Handler.SocketState);
                 return;
             }
             
-            _webSocket.Connect();
+            WebSocket.Connect();
         }
         
         /// <summary>

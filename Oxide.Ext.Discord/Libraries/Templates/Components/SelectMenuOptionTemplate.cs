@@ -61,12 +61,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// <param name="description"></param>
         /// <param name="emoji"></param>
         /// <param name="default"></param>
-        public SelectMenuOptionTemplate(string label, string value, string description = "", string emoji = "", bool @default = false)
+        public SelectMenuOptionTemplate(string label, string value, string description = "", EmojiTemplate emoji = null, bool @default = false)
         {
             Label = label;
             Value = value;
             Description = description;
-            Emoji = new EmojiTemplate(emoji);
+            Emoji = emoji ?? new EmojiTemplate();
             Default = @default;
         }
 

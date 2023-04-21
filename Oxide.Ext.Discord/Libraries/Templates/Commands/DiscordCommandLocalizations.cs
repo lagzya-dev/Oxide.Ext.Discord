@@ -96,7 +96,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             promise.Resolve();
         }
 
-        internal void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create)
+        private void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create)
         {
             HandlePrepareCommandLocalizationsAsync(create);
             

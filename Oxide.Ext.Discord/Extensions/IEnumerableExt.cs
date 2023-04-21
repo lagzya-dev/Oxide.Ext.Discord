@@ -8,6 +8,7 @@ namespace Oxide.Ext.Discord.Extensions
     /// <summary>
     /// Represents Extension to IEnumerable
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     public static class IEnumerableExt
     {
         /// <summary>

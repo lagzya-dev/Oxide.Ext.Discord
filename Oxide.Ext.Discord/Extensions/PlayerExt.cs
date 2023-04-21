@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Oxide.Core;
-using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;

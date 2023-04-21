@@ -14,18 +14,18 @@ namespace Oxide.Ext.Discord.Cache
     /// </summary>
     public class ServerPlayerCache : Singleton<ServerPlayerCache>
     {
-        private readonly ConcurrentDictionary<string, IPlayer> InternalCache = new ConcurrentDictionary<string, IPlayer>();
+        private readonly ConcurrentDictionary<string, IPlayer> _internalCache = new ConcurrentDictionary<string, IPlayer>();
 
         /// <summary>
         /// Readonly Cache of <see cref="IPlayer"/>
         /// </summary>
         public readonly IReadOnlyDictionary<string, IPlayer> Cache;
 
-        private readonly IPlayerManager Players = Interface.Oxide.GetLibrary<Covalence>().Players;
+        private readonly IPlayerManager _players = Interface.Oxide.GetLibrary<Covalence>().Players;
 
         private ServerPlayerCache()
         {
-            Cache = new ReadOnlyDictionary<string, IPlayer>(InternalCache);
+            Cache = new ReadOnlyDictionary<string, IPlayer>(_internalCache);
         }
         
         /// <summary>
@@ -35,26 +35,26 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns><see cref="IPlayer"/></returns>
         public IPlayer GetPlayer(string id)
         {
-            if (InternalCache.ContainsKey(id))
+            if (_internalCache.TryGetValue(id, out IPlayer player))
             {
-                return InternalCache[id];
+                return player;
             }
 
-            IPlayer player = Players.FindPlayerById(id);
+            player = _players.FindPlayerById(id);
             if (player == null)
             {
                 player = new DiscordDummyPlayer(id);
             }
 
-            InternalCache[id] = player;
+            _internalCache[id] = player;
             return player;
         }
 
         internal void SetPlayer(IPlayer player)
         {
-            if (!InternalCache.TryGetValue(player.Id, out IPlayer cached) || cached.IsDummyPlayer())
+            if (!_internalCache.TryGetValue(player.Id, out IPlayer cached) || cached.IsDummyPlayer())
             {
-                InternalCache[player.Id] = player;
+                _internalCache[player.Id] = player;
             }
         }
     }

@@ -168,10 +168,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         /// <param name="color">string hex color code</param>
         /// <exception cref="Exception">Throw if color is greater than #FFFFFF</exception>
-        public DiscordColor(string color) : this(uint.Parse(color.TrimStart('#'), NumberStyles.AllowHexSpecifier))
-        {
-
-        }
+        public DiscordColor(string color) : this(uint.Parse(color.TrimStart('#'), NumberStyles.AllowHexSpecifier)) { }
 
         /// <summary>
         /// DiscordColor Constructor
@@ -239,21 +236,12 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// <param name="green">Green color (0.0 - 1.0)</param>
         /// <param name="blue">Blue color (0.0 - 1.0)</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
-        public DiscordColor(double red, double green, double blue) : this((float)red, (float)green, (float)blue)
-        {
-
-        }
+        public DiscordColor(double red, double green, double blue) : this((float)red, (float)green, (float)blue) { }
 
         /// <summary>
         /// Returns the color as a string
         /// </summary>
         /// <returns></returns>
         public override string ToString() => Color.ToString();
-        
-        /// <summary>
-        /// Returns the color as a hex color code
-        /// </summary>
-        /// <returns></returns>
-        public string ToHex() => $"#{Color.ToString("X6")}";
     }
 }

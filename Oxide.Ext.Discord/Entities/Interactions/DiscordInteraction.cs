@@ -76,12 +76,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("member")]
         public GuildMember Member { get; set; }
-        
+
         [JsonProperty("user")]
-        private DiscordUser _user { get; set; }
+#pragma warning disable CS0649
+        private DiscordUser _user;
+#pragma warning restore CS0649
 
         /// <summary>
-        /// User object for the invoking user, if invoked in a DM
+        /// User object. If in DM then DM user else GuildMember.User
         /// </summary>
         public DiscordUser User => _user ?? Member?.User;
 

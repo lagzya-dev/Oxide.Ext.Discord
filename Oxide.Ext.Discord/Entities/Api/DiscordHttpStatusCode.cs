@@ -8,7 +8,7 @@
         /// <summary>
         /// The request completed successfully.
         /// </summary>
-        OK = 200,
+        Ok = 200,
         
         /// <summary>
         /// The entity was created successfully.

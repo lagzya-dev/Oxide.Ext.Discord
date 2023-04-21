@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Cache
     /// </summary>
     public class DiscordUserCache : Singleton<DiscordUserCache>
     {
-        private readonly ConcurrentDictionary<Snowflake, DiscordUser> InternalCache = new ConcurrentDictionary<Snowflake, DiscordUser>();
+        private readonly ConcurrentDictionary<Snowflake, DiscordUser> _internalCache = new ConcurrentDictionary<Snowflake, DiscordUser>();
         
         /// <summary>
         /// Readonly Cache of <see cref="DiscordUser"/>
@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Cache
 
         private DiscordUserCache()
         {
-            Cache = new ReadOnlyDictionary<Snowflake, DiscordUser>(InternalCache);
+            Cache = new ReadOnlyDictionary<Snowflake, DiscordUser>(_internalCache);
         }
         
         /// <summary>
@@ -31,13 +31,13 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns>Cached <see cref="DiscordUser"/></returns>
         public DiscordUser GetOrCreate(Snowflake userId)
         {
-            if (!InternalCache.TryGetValue(userId, out DiscordUser user))
+            if (!_internalCache.TryGetValue(userId, out DiscordUser user))
             {
                 user = new DiscordUser
                 {
                     Id = userId
                 };
-                InternalCache[userId] = user;
+                _internalCache[userId] = user;
             }
 
             return user;
@@ -50,7 +50,7 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns>Cached <see cref="DiscordUser"/></returns>
         public DiscordUser GetOrCreate(IDiscordUser user)
         {
-            if (!InternalCache.TryGetValue(user.Id, out DiscordUser existingUser))
+            if (!_internalCache.TryGetValue(user.Id, out DiscordUser existingUser))
             {
                 if (user is DiscordUser)
                 {
@@ -60,7 +60,7 @@ namespace Oxide.Ext.Discord.Cache
                 {
                     existingUser = DiscordUser.FromInterface(user);
                 }
-                InternalCache[user.Id] = existingUser;
+                _internalCache[user.Id] = existingUser;
             }
             else
             {

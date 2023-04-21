@@ -1,4 +1,3 @@
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Embeds

@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.Entities.Images
                 case DiscordImageSize.MegaBytes:
                     return Image.Length / 1024 / 1024;
                 case DiscordImageSize.GigaBytes:
-                    return Image.Length / 1024 / 1024 / 1024; ;
+                    return Image.Length / 1024 / 1024 / 1024;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(size), size, null);
             }

@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
     /// </summary>
     public class ApplicationRoleConnectionMetadataException : BaseDiscordException
     {
-        private static readonly Regex _keyRegex = new Regex(@"^\w+$", RegexOptions.Compiled);
+        private static readonly Regex KeyRegex = new Regex(@"^\w+$", RegexOptions.Compiled);
         
         private ApplicationRoleConnectionMetadataException(string message) : base(message) { }
 
@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
                 throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Key)} cannot be more than {maxLength} characters");
             }
 
-            if (!_keyRegex.IsMatch(key))
+            if (!KeyRegex.IsMatch(key))
             {
                 throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Key)} can only be the following characters a-z, 0-9, or _");
             }

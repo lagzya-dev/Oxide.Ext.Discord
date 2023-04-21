@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Callbacks.Websockets
 
         protected override string GetExceptionMessage()
         {
-            return $"Websocket: {_reconnect._webSocket.Handler.WebsocketId}";
+            return $"Websocket: {_reconnect.WebSocket.Handler.WebsocketId}";
         }
 
         protected override void EnterPool()

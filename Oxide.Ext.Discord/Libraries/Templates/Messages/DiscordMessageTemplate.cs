@@ -34,6 +34,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// </summary>
         [JsonConverter(typeof(TemplateComponentsConverter))]
         [JsonProperty("Message Components")]
+        // ReSharper disable once MemberCanBePrivate.Global
         public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
 
         /// <summary>

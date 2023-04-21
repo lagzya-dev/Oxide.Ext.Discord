@@ -262,7 +262,7 @@ namespace Oxide.Ext.Discord.Helpers
                 case DiscordImageFormat.Jpg:
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
-                    return $"{CdnUrl}/app-assets/{applicationId.ToString()}/{assetId}.{GetExtension(format, assetId.ToString())}";
+                    return $"{CdnUrl}/app-assets/{applicationId.ToString()}/{assetId}.{GetExtension(format, assetId)}";
 
                 default:
                     throw new ArgumentException("ImageFormat is not valid for Application Asset. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));

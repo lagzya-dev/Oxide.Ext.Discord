@@ -120,7 +120,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             
-            PlaceholderData data = DiscordPool.Instance.GetOrCreate(plugin).GetPlaceholderData();;
+            PlaceholderData data = DiscordPool.Instance.GetOrCreate(plugin).GetPlaceholderData();
             data.AddServer(_covalence.Server);
             data.AddPlugin(plugin);
             return data;

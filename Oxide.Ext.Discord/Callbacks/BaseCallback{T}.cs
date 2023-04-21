@@ -12,14 +12,14 @@ namespace Oxide.Ext.Discord.Callbacks
         /// <summary>
         /// The callback to be called by the delegate
         /// </summary>
-        private readonly Action<T> Callback;
+        private readonly Action<T> _callback;
         
         /// <summary>
         /// Constructor
         /// </summary>
         protected BaseCallback()
         {
-            Callback = CallbackInternal;
+            _callback = CallbackInternal;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Callbacks
         /// </summary>
         public virtual void Start(T data)
         {
-            Callback.Invoke(data);
+            _callback.Invoke(data);
         }
 
         private void CallbackInternal(T data)

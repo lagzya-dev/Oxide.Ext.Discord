@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api
 
         private void Init(Request request)
         {
-            Init(request);
+            base.Init(request);
             _onSuccess = request.OnSuccess;
         }
 

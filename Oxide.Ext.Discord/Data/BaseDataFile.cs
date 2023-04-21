@@ -7,9 +7,9 @@ using ProtoBuf;
 
 namespace Oxide.Ext.Discord.Data
 {
-    internal abstract class BaseDataFile<T> where T : BaseDataFile<T>, new()
+    internal abstract class BaseDataFile<TData> where TData : BaseDataFile<TData>, new()
     {
-        internal static T Instance;
+        internal static TData Instance;
         
         private readonly string _dataPath;
         private bool DataUpdated { get; set; }
@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Data
 
         public static void Load()
         {
-            T data = new T();
+            TData data = new TData();
             int index = 0;
             while (true)
             {
@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Data
                     
                     using (FileStream file = File.OpenRead(path))
                     {
-                        T deserialize = Serializer.Deserialize<T>(file);
+                        TData deserialize = Serializer.Deserialize<TData>(file);
                         if (deserialize != null)
                         {
                             Instance = deserialize;
@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Data
                 }
                 catch (Exception ex)
                 {
-                    DiscordExtension.GlobalLogger.Exception("An error occured loading the {0} Data File of type {1}", data._dataPath, typeof(T), ex);
+                    DiscordExtension.GlobalLogger.Exception("An error occured loading the {0} Data File of type {1}", data._dataPath, typeof(TData), ex);
                 }
                 finally
                 {

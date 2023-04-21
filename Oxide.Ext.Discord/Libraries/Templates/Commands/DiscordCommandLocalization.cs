@@ -21,14 +21,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public DiscordCommandLocalization() { }
+        private DiscordCommandLocalization() { }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="command">Command to create the localization for</param>
         /// <param name="lang">Oxide Lang for the command</param>
-        public DiscordCommandLocalization(CommandCreate command, string lang) : this()
+        public DiscordCommandLocalization(CommandCreate command, string lang)
         {
             Command = new CommandLocalization(command, lang);
         }

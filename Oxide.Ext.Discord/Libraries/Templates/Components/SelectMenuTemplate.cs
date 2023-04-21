@@ -77,7 +77,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
             switch (Type)
             {
                 case MessageComponentType.StringSelect:
-                    var text = new StringSelectComponent();
+                    StringSelectComponent text = new StringSelectComponent();
                     component = text;
                     if (Options != null)
                     {
