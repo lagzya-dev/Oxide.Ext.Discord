@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
+using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Components.SelectMenus;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
+namespace Oxide.Ext.Discord.Libraries.Templates.Components
 {
     /// <summary>
     /// Represents a template for select menus
@@ -33,13 +33,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         /// </summary>
         [JsonProperty("Select Menu Options")]
         public List<SelectMenuOptionTemplate> Options { get; set; }
-        
+
         /// <summary>
         /// <see cref="MessageComponentType.ChannelSelect"/> <see cref="ChannelType"/> to show
         /// Max 25 options
         /// </summary>
         [JsonProperty("Select Menu Channel Types")]
-        public List<ChannelType> ChannelTypes { get; set; }
+        public List<ChannelType> ChannelTypes { get; set; } = new List<ChannelType>();
 
         /// <summary>
         /// the minimum number of items that must be chosen
@@ -65,7 +65,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
         /// Constructor
         /// </summary>
         /// <param name="type"></param>
-        public SelectMenuTemplate(MessageComponentType type) : base(type) { }
+        public SelectMenuTemplate(MessageComponentType type) : base(type)
+        {
+            InvalidSelectMenuComponentException.ThrowIfInvalidComponentType(type);
+        }
 
         ///<inheritdoc/>
         public override BaseComponent ToComponent(PlaceholderData data)

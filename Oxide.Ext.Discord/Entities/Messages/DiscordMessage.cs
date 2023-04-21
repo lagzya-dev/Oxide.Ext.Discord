@@ -380,7 +380,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateGlobalTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, message);
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
             CreateMessage(client, channelId, template, callback, error);
         }
 
@@ -398,7 +398,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void CreateTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, message);
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
             CreateMessage(client, channelId, template, callback, error);
         }
 
@@ -512,7 +512,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ReplyWithGlobalTemplate(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, message);
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
             Reply(client, template, callback, error);
         }
 
@@ -529,7 +529,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ReplyWithTemplate(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, message);
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
             Reply(client, template, callback, error);
         }
         
@@ -781,7 +781,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateName, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, this);
+            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, this);
             EditMessage(client, template, callback, error);
         }
         
@@ -797,7 +797,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditTemplateMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, this);
+            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, this);
             EditMessage(client, template, callback, error);
         }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
+using Oxide.Ext.Discord.Libraries.Templates.Components;
 
 namespace Oxide.Ext.Discord.Json.Converters
 {

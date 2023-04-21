@@ -1,13 +1,12 @@
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
+using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages
+namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
 {
     /// <summary>
     /// Modal Templates Library
     /// </summary>
-    public class DiscordEmbedFieldTemplates : BaseExplicitMessageTemplateLibrary<DiscordEmbedFieldTemplate, EmbedField>
+    public class DiscordEmbedFieldTemplates : BaseMessageTemplateLibrary<DiscordEmbedFieldTemplate>
     {
         /// <summary>
         /// Constructor

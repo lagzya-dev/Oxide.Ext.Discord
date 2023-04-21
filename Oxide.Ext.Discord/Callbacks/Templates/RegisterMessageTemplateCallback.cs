@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates
 {
-    internal class RegisterTemplateCallback<TTemplate> : BaseAsyncCallback where TTemplate : class, IDiscordTemplate
+    internal class RegisterTemplateCallback<TTemplate> : BaseAsyncCallback where TTemplate : class
     {
         private BaseTemplateLibrary<TTemplate> _library;
         private TemplateId _id;
@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
             _promise = promise;
         }
 
-        protected override  Task HandleCallback()
+        protected override Task HandleCallback()
         {
             _library.HandleRegisterTemplate(_id, _template, _version, _minVersion, _promise);
             return Task.CompletedTask;

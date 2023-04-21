@@ -16,14 +16,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         
         private TemplateId(Plugin plugin, string templateName, string language)
         {
-            PluginName = plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));;
+            PluginName = plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));
             TemplateName = templateName;
             Language = language;
         }
 
         private TemplateId(string pluginName, string templateName, string language)
         {
-            PluginName = pluginName ?? throw new ArgumentNullException(nameof(pluginName));;
+            PluginName = pluginName ?? throw new ArgumentNullException(nameof(pluginName));
             TemplateName = templateName;
             Language = language;
         }
@@ -32,20 +32,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         public static TemplateId CreateLocalized(Plugin plugin, string templateName, string language) => new TemplateId(plugin, templateName, language);
         public static TemplateId CreateInteraction(Plugin plugin, string templateName, DiscordInteraction interaction) => new TemplateId(plugin, templateName, DiscordLang.Instance.GetOxideLanguage(interaction.Locale));
         public static TemplateId CreatePlayer(Plugin plugin, string templateName, string playerId) => new TemplateId(plugin, templateName, DiscordLang.Instance.GetPlayerLanguage(playerId));
-        public static TemplateId CreateGlobalBulk(Plugin plugin) => new TemplateId(plugin, string.Empty, null);
-        public static TemplateId CreateLocalizedBulk(Plugin plugin, string language) => new TemplateId(plugin, string.Empty, language);
-        public static TemplateId CreateInteractionBulk(Plugin plugin, DiscordInteraction interaction) => new TemplateId(plugin, string.Empty, DiscordLang.Instance.GetOxideLanguage(interaction.Locale));
 
         public string GetPluginName()
         {
             return PluginExt.GetFullName(PluginName);
         }
 
-        public TemplateId WithName(string templateName)
-        {
-            return new TemplateId(PluginName, templateName, Language);
-        }
-        
         public TemplateId WithLanguage(string language)
         {
             return new TemplateId(PluginName, TemplateName, language);

@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
+namespace Oxide.Ext.Discord.Libraries.Templates.Components
 {
     /// <summary>
     /// Base Template for Message Components

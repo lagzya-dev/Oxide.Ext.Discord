@@ -1,13 +1,11 @@
-using Oxide.Ext.Discord.Entities.Interactions.Response;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Modals;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages
+namespace Oxide.Ext.Discord.Libraries.Templates.Modals
 {
     /// <summary>
     /// Modal Templates Library
     /// </summary>
-    public class DiscordModalTemplates : BaseExplicitMessageTemplateLibrary<DiscordModalTemplate, InteractionModalMessage>
+    public class DiscordModalTemplates : BaseMessageTemplateLibrary<DiscordModalTemplate>
     {
         /// <summary>
         /// Constructor

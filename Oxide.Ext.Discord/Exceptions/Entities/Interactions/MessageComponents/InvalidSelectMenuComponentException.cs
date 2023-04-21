@@ -37,11 +37,6 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
         
         internal static void ThrowIfInvalidSelectMenuMaxValues(int? maxValues)
         {
-            if (!maxValues.HasValue)
-            {
-                return;
-            }
-
             if (maxValues > 25)
             {
                 throw new InvalidSelectMenuComponentException("Select Menu Max Values cannot be more than 25");
@@ -103,6 +98,18 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
             }
         }
 
+        internal static void ThrowIfInvalidComponentType(MessageComponentType type)
+        {
+            switch (type)
+            {
+                case MessageComponentType.ActionRow:
+                case MessageComponentType.Button:
+                case MessageComponentType.StringSelect:
+                case MessageComponentType.InputText:
+                    throw new InvalidSelectMenuComponentException($"'{type}' is not a valid type for a SelectMenu.");
+            }
+        }
+        
         internal static void ThrowIfTypeCantAddOptions(MessageComponentType type)
         {
             if (type != MessageComponentType.StringSelect)

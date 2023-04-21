@@ -8,8 +8,7 @@ namespace Oxide.Ext.Discord.Types
     {
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
         private readonly HashSet<T> _hashSet = new HashSet<T>();
-
-        #region
+        
         public bool Add(T item)
         {
             _lock.EnterWriteLock();
@@ -90,13 +89,10 @@ namespace Oxide.Ext.Discord.Types
                 }
             }
         }
-        #endregion
 
-        #region Dispose
         public void Dispose()
         {
             _lock?.Dispose();
         }
-        #endregion
     }
 }

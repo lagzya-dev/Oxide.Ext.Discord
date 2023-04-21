@@ -357,7 +357,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ExecuteWebhookGlobalTemplate(DiscordClient client, Plugin plugin, string templateName, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, message);
+            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
             ExecuteWebhook(client, template, executeParams, callback, error);
         }
 
@@ -375,7 +375,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public void ExecuteWebhookTemplate(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, message);
+            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
             ExecuteWebhook(client, template, executeParams, callback, error);
         }
 
@@ -423,7 +423,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditWebhookMessageGlobalTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateName, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalEntity(plugin, templateName, placeholders, message);
+            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
             EditWebhookMessage(client, messageId, template, messageParams, callback, error);
         }
 
@@ -442,7 +442,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public void EditWebhookMessageTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, DiscordMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, language, placeholders, message);
+            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
             EditWebhookMessage(client, messageId, template, messageParams, callback, error);
         }
         

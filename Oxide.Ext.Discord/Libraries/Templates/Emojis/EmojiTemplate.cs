@@ -3,7 +3,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Exceptions.Entities.Emojis;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Emojis
+namespace Oxide.Ext.Discord.Libraries.Templates.Emojis
 {
     /// <summary>
     /// Discord Template for Emoji

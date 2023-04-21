@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     /// <summary>
     /// Oxide Library for Discord Templates
     /// </summary>
-    public abstract class BaseTemplateLibrary<TTemplate> : BaseDiscordLibrary where TTemplate : class, IDiscordTemplate
+    public abstract class BaseTemplateLibrary<TTemplate> : BaseDiscordLibrary where TTemplate : class
     {
         /// <summary>
         /// Logger for the <see cref="BaseTemplateLibrary{TTemplate}"/>

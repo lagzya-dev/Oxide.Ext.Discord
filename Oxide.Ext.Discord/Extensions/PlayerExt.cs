@@ -22,8 +22,6 @@ namespace Oxide.Ext.Discord.Extensions
     /// </summary>
     public static class PlayerExt
     {
-        private static readonly Lang Lang = Interface.Oxide.GetLibrary<Lang>();
-        
         /// <summary>
         /// Send a Discord Message to an IPlayer if they're registered
         /// </summary>
@@ -104,7 +102,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerEntity(plugin, templateName, player?.Id, placeholders, message);
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(plugin, templateName, player).ToMessage(placeholders, message);
             SendMessage(client, player.GetDiscordUserId(), template, callback, error);
         }
 
@@ -121,7 +119,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="error">Callback when an error occurs with error information</param>
         public static void SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
         {
-            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerEntity(plugin, templateName, player?.Id, placeholders, message);
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(plugin, templateName, player).ToMessage(placeholders, message);
             SendMessage(client, player.GetDiscordUserId(), template, callback, error);
         }
         

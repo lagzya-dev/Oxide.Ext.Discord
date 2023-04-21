@@ -4,18 +4,16 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
+using Oxide.Ext.Discord.Libraries.Templates.Components;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
+namespace Oxide.Ext.Discord.Libraries.Templates.Modals
 {
     /// <summary>
     /// Template used for Modal Message Component
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordModalTemplate : BaseMessageTemplate<InteractionModalMessage>, IDiscordTemplate
+    public class DiscordModalTemplate
     {
-        private static readonly TemplateVersion InternalVersion = new TemplateVersion(1, 0, 0);
-        
         /// <summary>
         /// Title of the modal
         /// </summary>
@@ -32,7 +30,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
         /// Components of the Modal
         /// </summary>
         [JsonProperty("Modal Components")]
-        private List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
+        public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
         
         /// <summary>
         /// Constructor
@@ -45,7 +43,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
         /// </summary>
         /// <param name="title"></param>
         /// <param name="customId"></param>
-        public DiscordModalTemplate(string title, string customId) : this()
+        public DiscordModalTemplate(string title, string customId)
         {
             Title = title;
             CustomId = customId;
@@ -57,7 +55,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
         /// <param name="data"></param>
         /// <param name="modal"></param>
         /// <returns></returns>
-        public override InteractionModalMessage ToEntity(PlaceholderData data = null, InteractionModalMessage modal = null)
+        public InteractionModalMessage ToModal(PlaceholderData data = null, InteractionModalMessage modal = null)
         {
             if (modal == null)
             {
@@ -83,7 +81,5 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Modals
 
             return modal;
         }
-
-        public TemplateVersion GetInternalVersion() => InternalVersion;
     }
 }

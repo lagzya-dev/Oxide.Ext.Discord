@@ -332,7 +332,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            InteractionCallbackData template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, this, placeholders, message);
+            InteractionCallbackData template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, this).ToMessage(placeholders, message);
             CreateInteractionResponse(client, type, template, callback, error);
         }
         
@@ -352,7 +352,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            InteractionModalMessage template = DiscordExtension.DiscordModalTemplates.GetLocalizedEntity(plugin, templateName, this, placeholders, message);
+            InteractionModalMessage template = DiscordExtension.DiscordModalTemplates.GetLocalizedTemplate(plugin, templateName, this).ToModal(placeholders, message);
             CreateInteractionResponse(client, template, callback, error);
         }
 
@@ -471,7 +471,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedEntity(plugin, templateName, this, placeholders, message);
+            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, this).ToMessage(placeholders, message);
             EditOriginalInteractionResponse(client, template, callback, error);
         }
 

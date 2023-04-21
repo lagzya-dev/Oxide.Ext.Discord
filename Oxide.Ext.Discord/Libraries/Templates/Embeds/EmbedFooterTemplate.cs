@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
+namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
 {
     /// <summary>
     /// Discord Template for Embed Footer

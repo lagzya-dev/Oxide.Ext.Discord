@@ -7,8 +7,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
     /// Base Template used in Discord Templates
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordTemplate<TTemplate> where TTemplate : class, IDiscordTemplate
+    internal sealed class DiscordTemplate<TTemplate> where TTemplate : class
     {
+        /// <summary>
+        /// Template Data for the template
+        /// </summary>
         [JsonProperty("Template", Order = 1)]
         public TTemplate Template { get; private set;}
         
@@ -16,15 +19,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// The version of the Template
         /// Used when Registering templates to determine if we need to backup a template and create a new template for the given version
         /// </summary>
-        [JsonProperty("Template Version (DO NOT EDIT)", Order = 1000)]
+        [JsonProperty("Template Version", Order = 1000)]
         public TemplateVersion Version { get; set; } = new TemplateVersion(1, 0, 0);
-        
-        /// <summary>
-        /// Internal Version of the Template
-        /// Reserved for future use
-        /// </summary>
-        [JsonProperty("Internal Template Version (DO NOT EDIT)", Order = 1001)]
-        internal TemplateVersion InternalVersion { get; private set; }
 
         [JsonConstructor]
         private DiscordTemplate() { }
@@ -33,7 +29,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         {
             Template = template ?? throw new ArgumentNullException(nameof(template));
             Version = version;
-            InternalVersion = template.GetInternalVersion();
         }
     }
 }

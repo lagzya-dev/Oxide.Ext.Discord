@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Components
+namespace Oxide.Ext.Discord.Libraries.Templates.Components
 {
     /// <summary>
     /// Input Text Message Component Template

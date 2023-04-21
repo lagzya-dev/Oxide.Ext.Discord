@@ -9,10 +9,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
     /// Command Localizations for Application Commands
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordCommandLocalization : IDiscordTemplate
+    public class DiscordCommandLocalization
     {
-        private static readonly TemplateVersion InternalVersion = new TemplateVersion(1, 0, 0);
-        
         /// <summary>
         /// Localized Command
         /// </summary>
@@ -55,7 +53,5 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             ApplyCommandLocalization(create, language);
             return Task.CompletedTask;
         }
-
-        public TemplateVersion GetInternalVersion() => InternalVersion;
     }
 }

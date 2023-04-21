@@ -19,13 +19,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
     public class DiscordCommandLocalizations : BaseTemplateLibrary<DiscordCommandLocalization>
     {
         internal DiscordCommandLocalizations(ILogger logger) : base(TemplateType.Command, logger) { }
-        
+
         /// <summary>
         /// Registers Application Command Localization for a given language
         /// </summary>
         /// <param name="plugin">Plugin the for the command localization</param>
         /// <param name="fileNameSuffix">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
         /// <param name="localization">Localization to register</param>
+        /// <param name="version">Version of the template</param>
         /// <param name="minVersion">Min supported registered version</param>
         /// <param name="language">Language to register</param>
         /// <returns></returns>

@@ -4,8 +4,8 @@ using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates;
+using Oxide.Ext.Discord.Libraries.Templates.Embeds;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
 using Oxide.Ext.Discord.Plugins.Core.Templates;
 
 namespace Oxide.Ext.Discord.Plugins.Core

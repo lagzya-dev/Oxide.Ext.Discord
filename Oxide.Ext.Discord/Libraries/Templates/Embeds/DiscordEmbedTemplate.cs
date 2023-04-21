@@ -6,16 +6,14 @@ using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
+namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
 {
     /// <summary>
     /// Discord Template for embed
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordEmbedTemplate : BaseMessageTemplate<DiscordEmbed>, IDiscordTemplate
+    public class DiscordEmbedTemplate
     {
-        private static readonly TemplateVersion InternalVersion = new TemplateVersion(1, 0, 0);
-        
         /// <summary>
         /// If this embed is enabled
         /// </summary>
@@ -94,17 +92,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <param name="titleUrl"></param>
-        public DiscordEmbedTemplate(string title, string description, string titleUrl = "") : this()
+        public DiscordEmbedTemplate(string title, string description, string titleUrl = "")
         {
             Title = title;
             Description = description;
             Url = titleUrl;
-        }
-
-        ///<inheritdoc cref="IEmbedTemplate.ToEntity"/>
-        public override DiscordEmbed ToEntity(PlaceholderData data = null, DiscordEmbed entity = null)
-        {
-            return ToEntity(this, data, entity);
         }
 
         /// <summary>
@@ -113,61 +105,59 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds
         /// <param name="data">Data to use</param>
         /// <param name="embed">Initial embed to use</param>
         /// <returns></returns>
-        internal static DiscordEmbed ToEntity(DiscordEmbedTemplate template, PlaceholderData data, DiscordEmbed embed = null)
+        public DiscordEmbed ToEntity(PlaceholderData data = null, DiscordEmbed embed = null)
         {
             if (embed == null)
             {
                 embed = new DiscordEmbed();
             }
 
-            embed.Title = PlaceholderFormatting.ApplyPlaceholder(template.Title, data);
-            embed.Url = PlaceholderFormatting.ApplyPlaceholder(template.Url, data);
-            embed.Description = PlaceholderFormatting.ApplyPlaceholder(template.Description, data);
-            embed.Color = !string.IsNullOrEmpty(template.Color) ? new DiscordColor(PlaceholderFormatting.ApplyPlaceholder(template.Color, data)) : (DiscordColor?)null;
-            embed.Timestamp = template.TimeStamp ? DateTime.UtcNow : (DateTime?)null;
+            embed.Title = PlaceholderFormatting.ApplyPlaceholder(Title, data);
+            embed.Url = PlaceholderFormatting.ApplyPlaceholder(Url, data);
+            embed.Description = PlaceholderFormatting.ApplyPlaceholder(Description, data);
+            embed.Color = !string.IsNullOrEmpty(Color) ? new DiscordColor(PlaceholderFormatting.ApplyPlaceholder(Color, data)) : (DiscordColor?)null;
+            embed.Timestamp = TimeStamp ? DateTime.UtcNow : (DateTime?)null;
 
-            if (!string.IsNullOrEmpty(template.ImageUrl))
+            if (!string.IsNullOrEmpty(ImageUrl))
             {
                 embed.Image = new EmbedImage
                 {
-                    Url = PlaceholderFormatting.ApplyPlaceholder(template.Url, data)
+                    Url = PlaceholderFormatting.ApplyPlaceholder(Url, data)
                 };
             }
 
-            if (!string.IsNullOrEmpty(template.ThumbnailUrl))
+            if (!string.IsNullOrEmpty(ThumbnailUrl))
             {
                 embed.Thumbnail = new EmbedThumbnail
                 {
-                    Url = PlaceholderFormatting.ApplyPlaceholder(template.ThumbnailUrl, data)
+                    Url = PlaceholderFormatting.ApplyPlaceholder(ThumbnailUrl, data)
                 };
             }
 
-            if (!string.IsNullOrEmpty(template.VideoUrl))
+            if (!string.IsNullOrEmpty(VideoUrl))
             {
                 embed.Video = new EmbedVideo
                 {
-                    Url = PlaceholderFormatting.ApplyPlaceholder(template.ThumbnailUrl, data)
+                    Url = PlaceholderFormatting.ApplyPlaceholder(ThumbnailUrl, data)
                 };
             }
 
-            if (template.Fields != null && template.Fields.Count != 0)
+            if (Fields != null && Fields.Count != 0)
             {
-                InvalidEmbedException.ThrowIfInvalidFieldCount(template.Fields.Count);
+                InvalidEmbedException.ThrowIfInvalidFieldCount(Fields.Count);
                 embed.Fields = new List<EmbedField>();
-                for (int index = 0; index < template.Fields.Count; index++)
+                for (int index = 0; index < Fields.Count; index++)
                 {
-                    embed.Fields.Add(template.Fields[index].ToEntity(data));
+                    embed.Fields.Add(Fields[index].ToEntity(data));
                 }
             }
 
-            if (template.Footer != null && template.Footer.Enabled)
+            if (Footer != null && Footer.Enabled)
             {
-                embed.Footer = template.Footer.ToFooter(data);
+                embed.Footer = Footer.ToFooter(data);
             }
 
             return embed;
         }
-        
-        public TemplateVersion GetInternalVersion() => InternalVersion;
     }
 }

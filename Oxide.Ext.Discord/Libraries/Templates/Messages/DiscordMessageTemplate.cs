@@ -6,8 +6,8 @@ using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Interfaces.Entities.Templates;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Components;
-using Oxide.Ext.Discord.Libraries.Templates.Messages.Embeds;
+using Oxide.Ext.Discord.Libraries.Templates.Components;
+using Oxide.Ext.Discord.Libraries.Templates.Embeds;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 {
@@ -15,10 +15,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
     /// Discord Message Template for sending localized Discord Messages
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordMessageTemplate : BaseMessageTemplate<IDiscordMessageTemplate>, IDiscordTemplate
+    public class DiscordMessageTemplate
     {
-        private static readonly TemplateVersion InternalVersion = new TemplateVersion(1, 0, 0);
-
         /// <summary>
         /// String contents of the message
         /// </summary>
@@ -48,7 +46,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         /// Constructor
         /// </summary>
         /// <param name="content"></param>
-        public DiscordMessageTemplate(string content) : this()
+        public DiscordMessageTemplate(string content)
         {
             Content = content ?? string.Empty;
         }
@@ -67,18 +65,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 message = new T();
             }
 
-            ToEntity(data, message);
-            return message;
-        }
-
-        /// <summary>
-        /// Returns a <see cref="IDiscordMessageTemplate"/> entity for the given template
-        /// </summary>
-        /// <param name="data"><see cref="PlaceholderData"/> for the template</param>
-        /// <param name="message">Entity to apply the template to</param>
-        /// <returns></returns>
-        public override IDiscordMessageTemplate ToEntity(PlaceholderData data, IDiscordMessageTemplate message)
-        {
             if (!string.IsNullOrEmpty(Content))
             {
                 message.Content = PlaceholderFormatting.ApplyPlaceholder(Content, data);
@@ -148,7 +134,5 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
 
             return rows;
         }
-        
-        public TemplateVersion GetInternalVersion() => InternalVersion;
     }
 }
