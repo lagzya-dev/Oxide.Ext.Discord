@@ -13,6 +13,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
     {
         internal readonly string Name;
         private readonly string _hook;
+        private readonly string _pluginId;
         internal Plugin Plugin;
 
         protected BaseCommand(Plugin plugin, string name, string hook)
@@ -20,6 +21,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             Name = name;
             _hook = hook;
             Plugin = plugin;
+            _pluginId = plugin.Id();
         }
         
         public void HandleCommand(DiscordMessage message, string name, string[] args)
@@ -35,7 +37,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <returns>True if same bot client; false otherwise</returns>
         public bool CanRun(BotClient client)
         {
-            return client != null && DiscordClient.Clients[Plugin.Id()]?.Bot == client;
+            return client != null && DiscordClientFactory.GetClient(_pluginId)?.Bot == client;
         }
 
         public abstract bool CanHandle(DiscordMessage message, DiscordChannel channel);

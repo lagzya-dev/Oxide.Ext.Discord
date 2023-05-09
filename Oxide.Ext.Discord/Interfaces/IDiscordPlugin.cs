@@ -9,5 +9,10 @@
         /// Name of the plugin
         /// </summary>
         string Name { get; }
+        
+        /// <summary>
+        /// Gets / Sets the DiscordClient on a plugin
+        /// </summary>
+        DiscordClient Client { get; set; }
     }
 }

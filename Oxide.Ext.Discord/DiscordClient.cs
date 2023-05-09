@@ -1,19 +1,14 @@
 using System;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Attributes;
-using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord
 {
@@ -22,10 +17,7 @@ namespace Oxide.Ext.Discord
     /// </summary>
     public class DiscordClient
     {
-        internal static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
-
         private static readonly Regex TokenValidator = new Regex(@"^[\w-]+\.[\w-]+\.[\w-]+$", RegexOptions.Compiled);
-        private static readonly Type ClientAttribute = typeof(DiscordClientAttribute);
 
         /// <summary>
         /// Which plugin is the owner of this client
@@ -54,18 +46,18 @@ namespace Oxide.Ext.Discord
 
         internal ILogger Logger;
 
-        private FieldInfo _clientField;
-
         /// <summary>
         /// Constructor for a discord client
         /// </summary>
         /// <param name="plugin">Plugin that will own this discord client</param>
-        public DiscordClient(Plugin plugin)
+        internal DiscordClient(Plugin plugin)
         {
             Plugin = plugin;
             PluginId = plugin.Id();
             PluginName = Plugin.FullName();
-            Clients[PluginId] = this;
+            PluginExt.OnPluginLoaded(plugin);
+            BaseDiscordLibrary.ProcessPluginLoaded(plugin);
+            plugin.Call(DiscordExtHooks.OnDiscordClientCreated);
         }
         
         /// <summary>
@@ -119,7 +111,6 @@ namespace Oxide.Ext.Discord
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
             
             BotClient.AddDiscordClient(this);
-            DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordClientConnected, Plugin, this);
         }
 
         /// <summary>
@@ -127,7 +118,6 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public void Disconnect()
         {
-            DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordClientDisconnected, Plugin, this);
             Bot?.Rest.OnClientClosed(this);
             Bot?.RemoveClient(this);
         }
@@ -153,24 +143,6 @@ namespace Oxide.Ext.Discord
         internal void OnBotRemoved()
         {
             Bot = null;
-        }
-
-        /// <summary>
-        /// Subscribe the owner plugin to the given hook
-        /// </summary>
-        /// <param name="hook">Hook to subscribe to</param>
-        public void SubscribeHook(string hook)
-        {
-            Bot?.Hooks.SubscribeHook(this, hook);
-        }
-        
-        /// <summary>
-        /// Unsubscribe the owner plugin to the given hook
-        /// </summary>
-        /// <param name="hook">Hook to unsubscribe to</param>
-        public void UnsubscribeHook(string hook)
-        {
-            Bot?.Hooks.UnsubscribeHook(Plugin, hook);
         }
         #region Websocket Commands
         /// <summary>
@@ -201,136 +173,28 @@ namespace Oxide.Ext.Discord
         }
         #endregion
         
-        #region Plugin Handling
-        /// <summary>
-        /// Sets the client field on the plugin.
-        /// This should only be used if you need the client in the Init or Loaded hooks
-        /// The client field will automatically be set on the plugin before the OnDiscordClientCreated or OnServerInitialized hooks
-        /// </summary>
-        /// <param name="plugin">Plugin to get client for</param>
-        /// <returns>Discord client for the plugin</returns>
-        public static void CreateClient(Plugin plugin)
+        internal void CloseClient()
         {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            OnPluginAdded(plugin);
-        }
-
-        /// <summary>
-        /// Gets the client for the given plugin
-        /// </summary>
-        /// <param name="plugin">Plugin to get client for</param>
-        /// <returns>Discord client for the plugin</returns>
-        public static DiscordClient GetClient(Plugin plugin)
-        {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            return GetClient(plugin.Id());
-        }
-
-        /// <summary>
-        /// Gets the client for the given plugin name
-        /// </summary>
-        /// <param name="pluginName">Plugin Name to get client for</param>
-        /// <returns>Discord client for the plugin name</returns>
-        public static DiscordClient GetClient(string pluginName)
-        {
-            if (pluginName == null) throw new ArgumentNullException(nameof(pluginName));
-            return Clients[pluginName];
-        }
-        
-        internal static void OnPluginAdded(Plugin plugin)
-        {
-            if (!plugin.IsCorePlugin)
-            {
-                OnPluginLoadedInternal(plugin);
-            }
-        }
-        
-        internal static void OnPluginLoadedInternal(Plugin plugin)
-        {
-            DiscordPluginCache.Instance.OnPluginLoaded(plugin);
-            OnPluginRemoved(plugin);
-            
-#pragma warning disable CS0184
-            if (!plugin is IDiscordPlugin)
-#pragma warning restore CS0184
-            {
-                return;
-            }
-            
-            foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
-            {
-                if (field.GetCustomAttributes(ClientAttribute, true).Length != 0)
-                {
-                    DiscordClient client = Clients[plugin.Id()];
-                    if (client == null)
-                    {
-                        DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(OnPluginAdded)} Creating DiscordClient for plugin {{0}}", plugin.FullName());
-                        client = new DiscordClient(plugin)
-                        {
-                            _clientField = field
-                        };
-                    }
-
-                    field.SetValue(plugin, client);
-                    PluginExt.OnPluginLoaded(plugin);
-                    BaseDiscordLibrary.ProcessPluginLoaded(plugin);
-                    plugin.Call(DiscordExtHooks.OnDiscordClientCreated);
-                    break;
-                }
-            }
-        }
-
-        internal static void OnPluginRemoved(Plugin plugin)
-        {
-            if (plugin.IsCorePlugin)
-            {
-                return;
-            }
-            
-            if (DiscordExtension.IsShuttingDown)
-            {
-                return;
-            }
-
-            DiscordClient client = Clients[plugin.Id()];
-            if (client != null)
-            {
-                CloseClient(client);
-                BaseDiscordLibrary.ProcessPluginUnloaded(plugin);
-            }
-
-            PluginExt.OnPluginUnloaded(plugin);
-            DiscordPluginCache.Instance.OnPluginUnloaded(plugin);
-            DiscordLoggerFactory.Instance.OnPluginUnloaded(plugin);
-        }
-
-        internal static void CloseClient(DiscordClient client)
-        {
-            if (client == null)
-            {
-                return;
-            }
-
             try
             {
-                client.Disconnect();
+                Disconnect();
 
-                DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {{0}}", client.PluginName);
-                if (client.Plugin != null && client.Plugin.IsLoaded && client._clientField != null)
+                DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {{0}}", PluginName);
+                // ReSharper disable once SuspiciousTypeConversion.Global
+                if (Plugin != null && Plugin.IsLoaded && Plugin is IDiscordPlugin discordPlugin)
                 {
-                    client._clientField.SetValue(client.Plugin, null);
+                    discordPlugin.Client = null;
                 }
             }
             catch (Exception ex)
             {
-                client.Logger.Exception($"Failed to close the {nameof(DiscordClient)} for {{0}}", client.PluginName, ex);
+                Logger.Exception($"Failed to close the {nameof(DiscordClient)} for {{0}}", PluginName, ex);
             }
             finally
             {
-                Clients.Remove(client.PluginId);
-                client.Plugin = null;
+                DiscordClientFactory.RemoveClient(this);
+                Plugin = null;
             }
         }
-        #endregion
     }
 }

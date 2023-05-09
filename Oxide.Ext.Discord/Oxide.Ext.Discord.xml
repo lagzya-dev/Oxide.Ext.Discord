@@ -115,11 +115,6 @@
             <param name="name">Name of the command</param>
             <param name="isLocalized">If the command name is the localization key for the command</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Attributes.DiscordClientAttribute">
-            <summary>
-            Used to identify which field in a plugin to create a discord client for and set the client to.
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Attributes.GuildCommandAttribute">
             <summary>
             Used to identify guild bot commands
@@ -2090,9 +2085,14 @@
             Represents all hooks available in the discord extension
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.AllHooks">
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.PluginHooks">
             <summary>
-            Hashset containing all hooks names in the Discord Extension
+            Hooks that are called on Discord Plugins
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.GlobalHooks">
+            <summary>
+            Hooks that are call globally
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.GatewayIntentHooks">
@@ -2110,22 +2110,6 @@
             void OnDiscordClientCreated()
             {
                 Puts("OnDiscordClientCreated Works!");
-            }
-            </code>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientConnected">
-            <code>
-            void OnDiscordClientConnected(Plugin owner, DiscordClient client)
-            {
-                Puts("OnDiscordClientConnected Works!");
-            }
-            </code>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientDisconnected">
-            <code>
-            void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
-            {
-                Puts("OnDiscordClientDisconnected Works!");
             }
             </code>
         </member>
@@ -3047,18 +3031,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.SubscribeHook(System.String)">
-            <summary>
-            Subscribe the owner plugin to the given hook
-            </summary>
-            <param name="hook">Hook to subscribe to</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.UnsubscribeHook(System.String)">
-            <summary>
-            Unsubscribe the owner plugin to the given hook
-            </summary>
-            <param name="hook">Hook to unsubscribe to</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.DiscordClient.RequestGuildMembers(Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand)">
             <summary>
             Used to request guild members from discord for a specific guild
@@ -3077,7 +3049,7 @@
             </summary>
             <param name="presenceUpdate"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.CreateClient(Oxide.Core.Plugins.Plugin)">
+        <member name="M:Oxide.Ext.Discord.DiscordClientFactory.CreateClient(Oxide.Core.Plugins.Plugin)">
             <summary>
             Sets the client field on the plugin.
             This should only be used if you need the client in the Init or Loaded hooks
@@ -3086,14 +3058,14 @@
             <param name="plugin">Plugin to get client for</param>
             <returns>Discord client for the plugin</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.GetClient(Oxide.Core.Plugins.Plugin)">
+        <member name="M:Oxide.Ext.Discord.DiscordClientFactory.GetClient(Oxide.Core.Plugins.Plugin)">
             <summary>
             Gets the client for the given plugin
             </summary>
             <param name="plugin">Plugin to get client for</param>
             <returns>Discord client for the plugin</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.GetClient(System.String)">
+        <member name="M:Oxide.Ext.Discord.DiscordClientFactory.GetClient(System.String)">
             <summary>
             Gets the client for the given plugin name
             </summary>
@@ -3190,6 +3162,13 @@
             </summary>
             <param name="intents">Intents to be compared against</param>
             <returns>True if settings has the given intents; False otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.DiscordSettings.HasAnyIntent(Oxide.Ext.Discord.Entities.Gatway.GatewayIntents)">
+            <summary>
+            Returns if the settings has any intent specified
+            </summary>
+            <param name="intents">Intents to compare against</param>
+            <returns>True if settings has at least one of the given intents</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.ActivityAssets">
             <summary>
@@ -18301,6 +18280,11 @@
         <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Name">
             <summary>
             Name of the plugin
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Client">
+            <summary>
+            Gets / Sets the DiscordClient on a plugin
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordQueryString">

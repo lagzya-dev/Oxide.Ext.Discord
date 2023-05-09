@@ -40,7 +40,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <returns>True if same bot client; false otherwise</returns>
         public bool CanRun(BotClient client)
         {
-            return client != null && DiscordClient.Clients[_pluginId]?.Bot == client;
+            return client != null && DiscordClientFactory.GetClient(_pluginId)?.Bot == client;
         }
 
         /// <summary>

@@ -119,8 +119,8 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordModalTemplates), DiscordModalTemplates);
             Manager.RegisterLibrary(nameof(DiscordCommandLocalizations), DiscordCommandLocalizations);
             
-            Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
-            Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClient.OnPluginRemoved;
+            Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClientFactory.OnPluginAdded;
+            Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClientFactory.OnPluginRemoved;
             
             Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
         }
@@ -130,13 +130,13 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnShutdown()
         {
-            foreach (DiscordClient client in DiscordClient.Clients.Values.ToList())
+            foreach (DiscordClient client in DiscordClientFactory.GetClients.ToList())
             {
-                DiscordClient.CloseClient(client);
+                client.CloseClient();
             }
             
-            Interface.Oxide.RootPluginManager.OnPluginAdded -= DiscordClient.OnPluginAdded;
-            Interface.Oxide.RootPluginManager.OnPluginRemoved -=  DiscordClient.OnPluginRemoved;
+            Interface.Oxide.RootPluginManager.OnPluginAdded -= DiscordClientFactory.OnPluginAdded;
+            Interface.Oxide.RootPluginManager.OnPluginRemoved -=  DiscordClientFactory.OnPluginRemoved;
 
             GlobalLogger.Debug("Disconnected all clients - server shutdown.");
             
