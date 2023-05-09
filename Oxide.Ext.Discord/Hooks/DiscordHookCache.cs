@@ -15,9 +15,13 @@ namespace Oxide.Ext.Discord.Hooks
     {
         private readonly Hash<string, List<Plugin>> _hookCache = new Hash<string, List<Plugin>>();
         private readonly ILogger _logger;
+        private readonly ICollection<string> _supportedHooks;
+        
+        private static readonly Type HookMethodAttribute = typeof(HookMethodAttribute);
 
-        internal DiscordHookCache(ILogger logger) 
+        internal DiscordHookCache(ICollection<string> supportedHooks, ILogger logger)
         {
+            _supportedHooks = supportedHooks;
             _logger = logger;
         }
 
@@ -31,32 +35,37 @@ namespace Oxide.Ext.Discord.Hooks
                 {
                     continue;
                 }
+                
+                object[] attributes = method.GetCustomAttributes(HookMethodAttribute, false);
+                if (!method.IsPrivate && attributes.Length == 0)
+                {
+                    continue;
+                }
 
                 string name = method.Name;
-                object[] attributes = method.GetCustomAttributes(typeof(HookMethodAttribute), false);
                 if (attributes.Length != 0)
                 {
                     name = ((HookMethodAttribute)attributes[0]).Name;
                 }
 
-                SubscribeHook(client, name);
+                AddPluginHook(client, name);
             }
         }
-        
-        internal void SubscribeHook(DiscordClient client, string hook)
+
+        private void AddPluginHook(DiscordClient client, string hook)
         {
-            if (!DiscordExtHooks.AllHooks.Contains(hook))
+            if (!_supportedHooks.Contains(hook))
             {
                 return;
             }
 
             DiscordSettings settings = client.Bot.Settings;
             GatewayIntents intent = DiscordExtHooks.HookGatewayIntent[hook];
-            if (intent != GatewayIntents.None && !settings.HasIntents(intent))
+            if (intent != GatewayIntents.None && !settings.HasAnyIntent(intent))
             {
-                _logger.Warning("{0} is trying to add hook {1} which requires GatewayIntent.{2} but was not specified. " +
+                _logger.Warning("{0} is trying to add hook {1} which requires one of the following GatewayIntents \"{2}\", but was not specified. " +
                                 "This hook will not work correctly until it is corrected. " +
-                                "Please contact the plugin author with this message.", client.PluginName, hook, EnumCache<GatewayIntents>.Instance.ToString(intent));
+                                "Please contact the plugin author {3} with this message.", client.PluginName, hook, EnumCache<GatewayIntents>.Instance.ToString(intent), client.Plugin?.Author);
             }
 
             List<Plugin> hooks = _hookCache[hook];
@@ -89,19 +98,6 @@ namespace Oxide.Ext.Discord.Hooks
             }
             
             DiscordPool.Internal.FreeList(hooksToRemove);
-        }
-        
-        internal void UnsubscribeHook(Plugin plugin, string hook)
-        {
-            if (!TryGetHook(hook, out List<Plugin> plugins) || !plugins.Remove(plugin))
-            {
-                return;
-            }
-
-            if (plugins.Count == 0)
-            {
-                _hookCache.Remove(hook);
-            }
         }
 
         internal bool TryGetHook(string hook, out List<Plugin> plugins)

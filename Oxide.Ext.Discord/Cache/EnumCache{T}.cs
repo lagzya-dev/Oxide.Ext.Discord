@@ -9,19 +9,21 @@ namespace Oxide.Ext.Discord.Cache
     /// Represents a cache of enum strings
     /// </summary>
     /// <typeparam name="T">Enum type</typeparam>
-    public class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, IConvertible
+    public class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, IComparable, IFormattable, IConvertible
     {
         private readonly Dictionary<T, string> _cachedStrings = new Dictionary<T, string>();
         private readonly Dictionary<T, string> _loweredStrings = new Dictionary<T, string>();
         private readonly Dictionary<T, string> _numberString = new Dictionary<T, string>();
-        private readonly T[] _values; 
+        private readonly Type _type;
+        private readonly T[] _values;
 
         /// <summary>
         /// Constructor
         /// </summary>
         private EnumCache()
         {
-            _values = Enum.GetValues(typeof(T)).Cast<T>().ToArray();
+            _type = typeof(T);
+            _values = Enum.GetValues(_type).Cast<T>().ToArray();
             for (int index = 0; index < _values.Length; index++)
             {
                 T value = _values[index];
@@ -71,7 +73,7 @@ namespace Oxide.Ext.Discord.Cache
         {
             if (!_numberString.TryGetValue(value, out string str))
             {
-                str = value.ToType(Enum.GetUnderlyingType(typeof(T)), null).ToString();
+                str = value.ToType(Enum.GetUnderlyingType(_type), null).ToString();
                 _numberString[value] = str;
             }
 

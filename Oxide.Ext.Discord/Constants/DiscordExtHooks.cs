@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Ext.Discord.Entities.Gatway;
@@ -11,9 +12,19 @@ namespace Oxide.Ext.Discord.Constants
     public static class DiscordExtHooks
     {
         /// <summary>
-        /// Hashset containing all hooks names in the Discord Extension
+        /// Hooks that are called on Discord Plugins
         /// </summary>
-        public static readonly HashSet<string> AllHooks = new HashSet<string>();
+        public static readonly HashSet<string> PluginHooks = new HashSet<string>();
+        
+        /// <summary>
+        /// Hooks that are call globally
+        /// </summary>
+        public static readonly HashSet<string> GlobalHooks = new HashSet<string>
+        {
+            OnDiscordPlayerLinked,
+            OnDiscordPlayerUnlink,
+            OnDiscordPlayerUnlinked,
+        };
 
         /// <summary>
         /// A mapping of Gateway Intent to Hooks
@@ -59,6 +70,7 @@ namespace Oxide.Ext.Discord.Constants
                 OnDiscordGuildMemberUnmuted,
                 OnDiscordGuildMemberTimeout,
                 OnDiscordGuildMemberTimeoutEnded,
+                OnDiscordGuildThreadMembersUpdated
             },
             [GatewayIntents.GuildBans] = new List<string>
             {
@@ -157,11 +169,16 @@ namespace Oxide.Ext.Discord.Constants
 
         static DiscordExtHooks()
         {
+            Type stringType = typeof(string);
             foreach (FieldInfo field in typeof(DiscordExtHooks).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
             {
-                if (field.IsLiteral && !field.IsInitOnly && field.FieldType == typeof(string))
+                if (field.IsLiteral && !field.IsInitOnly && field.FieldType == stringType)
                 {
-                    AllHooks.Add((string)field.GetRawConstantValue());
+                    string hook = (string)field.GetRawConstantValue();
+                    if (!GlobalHooks.Contains(hook))
+                    {
+                        PluginHooks.Add(hook);
+                    }
                 }
             }
 
@@ -169,7 +186,7 @@ namespace Oxide.Ext.Discord.Constants
             {
                 foreach (string hook in intentHooks.Value)
                 {
-                    HookGatewayIntent[hook] = intentHooks.Key;
+                    HookGatewayIntent[hook] |= intentHooks.Key;
                 }
             }
         }
@@ -183,23 +200,6 @@ namespace Oxide.Ext.Discord.Constants
         /// </code>
         public const string OnDiscordClientCreated = nameof(OnDiscordClientCreated);
         
-        /// <code>
-        /// void OnDiscordClientConnected(Plugin owner, DiscordClient client)
-        /// {
-        ///     Puts("OnDiscordClientConnected Works!");
-        /// }
-        /// </code>
-        public const string OnDiscordClientConnected = nameof(OnDiscordClientConnected);
-        
-        /// <code>
-        /// void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
-        /// {
-        ///     Puts("OnDiscordClientDisconnected Works!");
-        /// }
-        /// </code>
-        public const string OnDiscordClientDisconnected = nameof(OnDiscordClientDisconnected);
-        
-                
         /// <code>
         /// void OnDiscordBotFullyLoaded()
         /// {

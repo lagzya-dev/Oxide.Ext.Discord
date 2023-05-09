@@ -63,5 +63,15 @@ namespace Oxide.Ext.Discord
         {
             return (Intents & intents) == intents;
         }
+        
+        /// <summary>
+        /// Returns if the settings has any intent specified
+        /// </summary>
+        /// <param name="intents">Intents to compare against</param>
+        /// <returns>True if settings has at least one of the given intents</returns>
+        public bool HasAnyIntent(GatewayIntents intents)
+        {
+            return (Intents & intents) != 0;
+        }
     }
 }
