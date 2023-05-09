@@ -440,7 +440,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 {
                     sb.Append(parent.Name);
                     sb.Append('/');
-                    sb.AppendLine(channel.Name);
+                    sb.AppendLine(channel?.Name);
                 }
                 else
                 {
@@ -450,7 +450,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 sb.Append("\t\tPlugin: ");
                 sb.Append(sub.Plugin.FullName());
                 sb.Append("\t\tMethod: ");
-                sb.Append(sub.Callback.Method.DeclaringType.Name);
+                sb.Append(sub.Callback.Method.DeclaringType?.Name ?? "Unknown Type");
                 sb.Append('.');
                 sb.AppendLine(sub.Callback.Method.Name);
                 sb.AppendLine();

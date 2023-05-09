@@ -4,6 +4,7 @@ using Oxide.Core;
 using Oxide.Core.Extensions;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Users;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Langs;
@@ -87,7 +88,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnModLoad()
         {
-            DiscordConfig.Load();
+            DiscordConfig.LoadConfig();
             
             GlobalLogger = DiscordLoggerFactory.Instance.GetExtensionLogger(string.IsNullOrEmpty(TestVersion) ? DiscordLogLevel.Warning : DiscordLogLevel.Verbose);
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
@@ -119,8 +120,8 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordModalTemplates), DiscordModalTemplates);
             Manager.RegisterLibrary(nameof(DiscordCommandLocalizations), DiscordCommandLocalizations);
             
-            Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClientFactory.OnPluginAdded;
-            Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClientFactory.OnPluginRemoved;
+            Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClientFactory.Instance.OnPluginAdded;
+            Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClientFactory.Instance.OnPluginRemoved;
             
             Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
         }
@@ -130,13 +131,10 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnShutdown()
         {
-            foreach (DiscordClient client in DiscordClientFactory.GetClients.ToList())
-            {
-                client.CloseClient();
-            }
+            DiscordClientFactory.Instance.OnShutdown();
             
-            Interface.Oxide.RootPluginManager.OnPluginAdded -= DiscordClientFactory.OnPluginAdded;
-            Interface.Oxide.RootPluginManager.OnPluginRemoved -=  DiscordClientFactory.OnPluginRemoved;
+            Interface.Oxide.RootPluginManager.OnPluginAdded -= DiscordClientFactory.Instance.OnPluginAdded;
+            Interface.Oxide.RootPluginManager.OnPluginRemoved -=  DiscordClientFactory.Instance.OnPluginRemoved;
 
             GlobalLogger.Debug("Disconnected all clients - server shutdown.");
             

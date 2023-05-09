@@ -14,13 +14,13 @@ namespace Oxide.Ext.Discord.Entities.Gatway
     /// See <a href="https://discord.com/developers/docs/topics/gateway#get-gateway">Get Gateway</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    class Gateway
+    internal class Gateway
     {
         /// <summary>
         /// Gatway URL to use
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; private set; }
+        public string Url { get; set; }
         
         /// <summary>
         /// Saved Gateway URL
@@ -41,7 +41,7 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the Gateway response</param>
         /// <param name="error">API error callback</param>
-        public static void GetGateway(BotClient client, Action<Gateway> callback, Action<RequestError> error = null)
+        private static void GetGateway(BotClient client, Action<Gateway> callback, Action<RequestError> error = null)
         {
             client.Rest.CreateRequest(client.GetFirstClient(),"gateway", RequestMethod.GET, null, callback, error);
         }

@@ -48,7 +48,7 @@ namespace Oxide.Ext.Discord.Configuration
             ApplyDefaults();
         }
 
-        public static void Load()
+        public static void LoadConfig()
         {
             string configPath = Path.Combine(Interface.Oxide.InstanceDirectory, "discord.config.json");
             DiscordConfig config = File.Exists(configPath) ? ConfigFile.Load<DiscordConfig>(configPath) : new DiscordConfig(configPath);

@@ -40,7 +40,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp"/> placeholder
         /// </summary>
-        public static void ShortDateTime(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.ShortDateTime));
+        public static void ShortDateTime(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp));
         
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp"/> placeholder

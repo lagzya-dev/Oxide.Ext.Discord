@@ -109,6 +109,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
+            // ReSharper disable once SuspiciousTypeConversion.Global
             if (plugin is IDiscordLinkPlugin link)
             {
                 RemoveLinkPlugin(link);
@@ -320,9 +321,9 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         {
             if (player == null) throw new ArgumentNullException(nameof(player));
             if (discord == null) throw new ArgumentNullException(nameof(discord));
-            
-            IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
-            if (link == null)
+
+            // ReSharper disable once SuspiciousTypeConversion.Global
+            if (!(plugin is IDiscordLinkPlugin link))
             {
                 _logger.Error($"{{0}} tried to link but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.FullName());
                 return;
@@ -355,8 +356,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             if (player == null) throw new ArgumentNullException(nameof(player));
             if (discord == null) throw new ArgumentNullException(nameof(discord));
             
-            IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
-            if (link == null)
+            // ReSharper disable once SuspiciousTypeConversion.Global
+            if (!(plugin is IDiscordLinkPlugin link))
             {
                 _logger.Error($"{{0}} tried to unlink but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.FullName());
                 return;

@@ -1,29 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Singleton;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord
+namespace Oxide.Ext.Discord.Factory
 {
-    internal static class DiscordClientFactory
+    /// <summary>
+    /// Factory for creating <see cref="DiscordClient"/>
+    /// </summary>
+    public class DiscordClientFactory : Singleton<DiscordClientFactory>
     {
-        private static readonly Hash<string, DiscordClient> Clients = new Hash<string, DiscordClient>();
-        internal static IEnumerable<DiscordClient> GetClients => Clients.Values;
-
-        #region Plugin Handling
+        private readonly Hash<string, DiscordClient> _clients = new Hash<string, DiscordClient>();
+        internal IEnumerable<DiscordClient> Clients => _clients.Values;
+        
+        private DiscordClientFactory() { }
+        
+        #region Client Handling
         /// <summary>
-        /// Sets the client field on the plugin.
-        /// This should only be used if you need the client in the Init or Loaded hooks
-        /// The client field will automatically be set on the plugin before the OnDiscordClientCreated or OnServerInitialized hooks
+        /// Creates the client for the given plugin. If one already exist the existing one is returned
         /// </summary>
-        /// <param name="plugin">Plugin to get client for</param>
-        /// <returns>Discord client for the plugin</returns>
-        public static DiscordClient CreateClient(Plugin plugin)
+        /// <param name="plugin">Plugin the client is for</param>
+        /// <returns>DiscordClient for plugin</returns>
+        /// <exception cref="ArgumentNullException">Thrown is plugin is null</exception>
+        public DiscordClient CreateClient(Plugin plugin)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             DiscordPluginCache.Instance.OnPluginLoaded(plugin);
@@ -35,12 +41,12 @@ namespace Oxide.Ext.Discord
                 return null;
             }
 
-            DiscordClient client = Clients[plugin.Id()];
+            DiscordClient client = _clients[plugin.Id()];
             if (client == null)
             {
                 DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(OnPluginAdded)} Creating DiscordClient for plugin {{0}}", plugin.FullName());
                 client = new DiscordClient(plugin);
-                Clients[plugin.Id()] = client;
+                _clients[plugin.Id()] = client;
             }
 
             discordPlugin.Client = client;
@@ -52,7 +58,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         /// <param name="plugin">Plugin to get client for</param>
         /// <returns>Discord client for the plugin</returns>
-        public static DiscordClient GetClient(Plugin plugin)
+        public DiscordClient GetClient(Plugin plugin)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             return GetClient(plugin.Id());
@@ -63,13 +69,15 @@ namespace Oxide.Ext.Discord
         /// </summary>
         /// <param name="pluginName">Plugin Name to get client for</param>
         /// <returns>Discord client for the plugin name</returns>
-        public static DiscordClient GetClient(string pluginName)
+        public DiscordClient GetClient(string pluginName)
         {
             if (pluginName == null) throw new ArgumentNullException(nameof(pluginName));
-            return Clients[pluginName];
+            return _clients[pluginName];
         }
-
-        internal static void OnPluginAdded(Plugin plugin)
+        #endregion
+        
+        #region Plugin Handling
+        internal void OnPluginAdded(Plugin plugin)
         {
             if (!plugin.IsCorePlugin)
             {
@@ -77,7 +85,7 @@ namespace Oxide.Ext.Discord
             }
         }
 
-        internal static void OnPluginRemoved(Plugin plugin)
+        internal void OnPluginRemoved(Plugin plugin)
         {
             if (plugin.IsCorePlugin)
             {
@@ -89,7 +97,7 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            DiscordClient client = Clients[plugin.Id()];
+            DiscordClient client = _clients[plugin.Id()];
             if (client != null)
             {
                 client.CloseClient();
@@ -101,9 +109,17 @@ namespace Oxide.Ext.Discord
             DiscordLoggerFactory.Instance.OnPluginUnloaded(plugin);
         }
 
-        internal static void RemoveClient(DiscordClient client)
+        internal void RemoveClient(DiscordClient client)
         {
-            Clients.Remove(client.PluginId);
+            _clients.Remove(client.PluginId);
+        }
+
+        internal void OnShutdown()
+        {
+            foreach (DiscordClient client in Clients.ToList())
+            {
+                client.CloseClient();
+            }
         }
         #endregion
     }

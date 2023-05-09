@@ -2,6 +2,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Hooks;
 
 namespace Oxide.Ext.Discord.Libraries.Command
@@ -37,7 +38,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <returns>True if same bot client; false otherwise</returns>
         public bool CanRun(BotClient client)
         {
-            return client != null && DiscordClientFactory.GetClient(_pluginId)?.Bot == client;
+            return client != null && DiscordClientFactory.Instance.GetClient(_pluginId)?.Bot == client;
         }
 
         public abstract bool CanHandle(DiscordMessage message, DiscordChannel channel);

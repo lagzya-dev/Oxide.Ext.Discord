@@ -23,6 +23,7 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         /// <summary>
         /// Connection type is Epic Games
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         [Description("ebay")] eBay,
         
         /// <summary>

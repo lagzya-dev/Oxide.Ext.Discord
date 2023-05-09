@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Libraries.AppCommands;
@@ -192,7 +193,7 @@ namespace Oxide.Ext.Discord
             }
             finally
             {
-                DiscordClientFactory.RemoveClient(this);
+                DiscordClientFactory.Instance.RemoveClient(this);
                 Plugin = null;
             }
         }
