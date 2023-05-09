@@ -17732,6 +17732,18 @@
             <param name="player"></param>
             <returns></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Extensions.PluginExt">
+            <summary>
+            Extension methods for plugins
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.PluginExt.GetPool(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Returns a pool for the given plugin
+            </summary>
+            <param name="plugin">Plugin the pool is for</param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.StreamExt">
             <summary>
             Stream Extension Methods
@@ -18279,6 +18291,16 @@
         <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Templates.IDiscordMessageTemplate.Components">
             <summary>
             Components for the message
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordPlugin">
+            <summary>
+            Represents a plugin that uses the Discord Extension
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Name">
+            <summary>
+            Name of the plugin
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordQueryString">
@@ -19381,11 +19403,6 @@
         <member name="T:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin">
             <summary>
             Represents a plugin that supports Discord Link library
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.Name">
-            <summary>
-            Name of the plugin
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin.GetSteamToDiscordIds">

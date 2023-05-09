@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Logging;
@@ -248,6 +249,13 @@ namespace Oxide.Ext.Discord
         {
             DiscordPluginCache.Instance.OnPluginLoaded(plugin);
             OnPluginRemoved(plugin);
+            
+#pragma warning disable CS0184
+            if (!plugin is IDiscordPlugin)
+#pragma warning restore CS0184
+            {
+                return;
+            }
             
             foreach (FieldInfo field in plugin.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
             {

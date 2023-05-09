@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Cache
 
         private readonly List<string> _loadablePlugins = new List<string>();
         private readonly List<string> _loadedPlugins = new List<string>();
-        private DateTime _lastUpdated = DateTime.MinValue;
+        private DateTime _nextUpdate = DateTime.MinValue;
 
         private DiscordPluginCache() {}
         
@@ -43,20 +43,24 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns></returns>
         public IReadOnlyList<string> GetLoadablePlugins()
         {
-            if (_lastUpdated + TimeSpan.FromMinutes(1) < DateTime.UtcNow)
+            if (_nextUpdate < DateTime.UtcNow)
             {
                 return _loadablePlugins;
             }
             
             _loadablePlugins.Clear();
             _loadablePlugins.AddRange(_pluginLoader.ScanDirectory(Interface.Oxide.PluginDirectory).Except(GetLoadedPlugins()).OrderBy(p => p));
-            _lastUpdated = DateTime.UtcNow;
+            _nextUpdate = DateTime.UtcNow + TimeSpan.FromMinutes(1);
             return _loadablePlugins;
         }
 
         internal void OnPluginLoaded(Plugin plugin)
         {
-            _loadedPlugins.Clear();
+            _loadablePlugins.Remove(plugin.Name);
+            if (!_loadedPlugins.Contains(plugin.Name))
+            {
+                _loadedPlugins.Add(plugin.Name);
+            }
         }
 
         internal void OnPluginUnloaded(Plugin plugin)
