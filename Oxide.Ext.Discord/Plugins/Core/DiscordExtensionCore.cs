@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
@@ -47,6 +48,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             Instance = this;
             _logger = DiscordLoggerFactory.Instance.GetExtensionLogger(DiscordLogLevel.Info);
+            DiscordPool.Instance.CreateInternal(this);
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
             AddCovalenceCommand(new[] { "de.websocket.reset" }, nameof(ResetWebSocketCommand), "de.websocket.reset");
             AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
@@ -63,7 +65,6 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
             CreateTemplates();
             DiscordPlaceholders.Instance.RegisterPlaceholders();
-            DiscordPool.Instance.CreateInternal(this);
         }
 
         [HookMethod(nameof(OnServerInitialized))]

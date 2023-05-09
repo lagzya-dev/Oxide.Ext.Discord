@@ -133,6 +133,12 @@ namespace Oxide.Ext.Discord.Entities.Gatway
         MessageContent = 1 << 15,
         
         /// <summary>
+        /// Old name for GatewayIntents.MessageContent
+        /// </summary>
+        [Obsolete("Please use GatewayIntents.MessageContent instead")]
+        MessageContentIntent = 1 << 15,
+        
+        /// <summary>
         /// - GUILD_SCHEDULED_EVENT_CREATE
         /// - GUILD_SCHEDULED_EVENT_UPDATE
         /// - GUILD_SCHEDULED_EVENT_DELETE

@@ -11,7 +11,9 @@ namespace Oxide.Ext.Discord.Cache
     {
         private readonly Dictionary<T, string> _cachedStrings = new Dictionary<T, string>();
         private readonly Dictionary<T, string> _loweredStrings = new Dictionary<T, string>();
-        
+
+        private StringCache() { }
+
         /// <summary>
         /// Returns a cached ToString call of type {T}
         /// </summary>

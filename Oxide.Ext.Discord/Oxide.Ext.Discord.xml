@@ -8159,6 +8159,11 @@
             - Guild Message.Content
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.MessageContentIntent">
+            <summary>
+            Old name for GatewayIntents.MessageContent
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildScheduledEvents">
             <summary>
             - GUILD_SCHEDULED_EVENT_CREATE

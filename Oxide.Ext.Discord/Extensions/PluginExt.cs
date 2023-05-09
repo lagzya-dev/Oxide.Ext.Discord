@@ -7,7 +7,10 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Extensions
 {
-    internal static class PluginExt
+    /// <summary>
+    /// Extension methods for plugins
+    /// </summary>
+    public static class PluginExt
     {
         private static readonly Hash<string, string> FullNameCache = new Hash<string, string>();
         
@@ -42,6 +45,11 @@ namespace Oxide.Ext.Discord.Extensions
             FullNameCache[plugin.Name] = CreatePluginFullName(plugin);
         }
 
+        /// <summary>
+        /// Returns a pool for the given plugin
+        /// </summary>
+        /// <param name="plugin">Plugin the pool is for</param>
+        /// <returns></returns>
         public static DiscordPluginPool GetPool(this Plugin plugin) => DiscordPool.Instance.GetOrCreate(plugin);
 
         internal static void OnPluginUnloaded(Plugin plugin)
