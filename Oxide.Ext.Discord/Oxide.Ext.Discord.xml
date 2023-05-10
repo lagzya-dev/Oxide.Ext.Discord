@@ -21824,7 +21824,7 @@
             <param name="newSize">New size for the pool</param>
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the new size is &lt;= 0 or &lt;= the current index </exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnPluginUnloaded(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Clear">
@@ -22076,11 +22076,11 @@
             </summary>
             <param name="newSize"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+        <member name="M:Oxide.Ext.Discord.Pooling.IPool.OnPluginUnloaded(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
             <summary>
             Called on a pool when a plugin is unloaded
             </summary>
-            <param name="plugin"></param>
+            <param name="pluginPool"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.IPool.Clear">
             <summary>

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Pooling.Pools;
 
 namespace Oxide.Ext.Discord.Callbacks.Hooks
 {
@@ -59,6 +60,8 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
                     plugin.CallHook(_hook, _args);
                 }
             }
+            
+            ArrayPool<object>.Instance.Free(ref _args);
         }
 
         protected override void EnterPool()

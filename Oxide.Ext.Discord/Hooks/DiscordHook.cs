@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Hooks;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Pooling.Pools;
 
 namespace Oxide.Ext.Discord.Hooks
 {
@@ -126,14 +126,14 @@ namespace Oxide.Ext.Discord.Hooks
         
         private static object[] GetArgs<T0>( T0 arg0)
         {
-            object[] args = ArrayPool.Get(1);
+            object[] args = ArrayPool<object>.Instance.Get(1);
             args[0] = arg0;
             return args;
         }
 
         private static object[] GetArgs<T0, T1>(T0 arg0, T1 arg1)
         {
-            object[] args = ArrayPool.Get(2);
+            object[] args = ArrayPool<object>.Instance.Get(2);
             args[0] = arg0;
             args[1] = arg1;
             return args;
@@ -141,7 +141,7 @@ namespace Oxide.Ext.Discord.Hooks
 
         private static object[] GetArgs<T0, T1, T2>(T0 arg0, T1 arg1, T2 arg2)
         {
-            object[] args = ArrayPool.Get(3);
+            object[] args = ArrayPool<object>.Instance.Get(3);
             args[0] = arg0;
             args[1] = arg1;
             args[2] = arg2;
@@ -150,7 +150,7 @@ namespace Oxide.Ext.Discord.Hooks
 
         private static object[] GetArgs<T0, T1, T2, T3>( T0 arg0, T1 arg1, T2 arg2, T3 arg3)
         {
-            object[] args = ArrayPool.Get(4);
+            object[] args = ArrayPool<object>.Instance.Get(4);
             args[0] = arg0;
             args[1] = arg1;
             args[2] = arg2;
@@ -160,7 +160,7 @@ namespace Oxide.Ext.Discord.Hooks
         
         private static object[] GetArgs<T0, T1, T2, T3, T4>( T0 arg0, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
         {
-            object[] args = ArrayPool.Get(5);
+            object[] args = ArrayPool<object>.Instance.Get(5);
             args[0] = arg0;
             args[1] = arg1;
             args[2] = arg2;

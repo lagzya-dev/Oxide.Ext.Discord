@@ -19,7 +19,6 @@ namespace Oxide.Ext.Discord.Pooling
         private PoolSettings _settings;
 
         internal PoolSettings Settings => _settings ?? DefaultSettings;
-        internal readonly string PluginId;
         internal readonly string PluginName; 
 
         private static readonly PoolSettings DefaultSettings = new PoolSettings();
@@ -30,7 +29,6 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="plugin">Plugin the pool is for</param>
         public DiscordPluginPool(Plugin plugin)
         {
-            PluginId = plugin.Id();
             PluginName = plugin.FullName();
         }
 
