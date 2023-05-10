@@ -47,6 +47,13 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         [JsonProperty("mention_total_limit")]
         public int MentionTotalLimit { get; set; }
         
+        /// <summary>
+        /// Associated Trigger Types: <see cref="AutoModTriggerType.MentionSpam"/>
+        /// Whether to automatically detect mention raids
+        /// </summary>
+        [JsonProperty("mention_raid_protection_enabled")]
+        public bool MentionRaidProtectionEnabled { get; set; }
+        
         internal void Validate(AutoModTriggerType type)
         {
             AutoModTriggerMetadataException.ThrowIfKeywordFilterInvalid(KeywordFilter);

@@ -366,6 +366,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("premium_progress_bar_enabled")]
         public bool PremiumProgressBarEnabled { get; set; }
+        
+        /// <summary>
+        /// The ID of the channel where admins and moderators of Community guilds receive safety alerts from Discord
+        /// </summary>
+        [JsonProperty("safety_alerts_channel_id")]
+        public Snowflake? SafetyAlertsChannelId { get; set; }
         #endregion
 
         #region Extension Fields
@@ -1632,6 +1638,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             if (updatedGuild.ScheduledEvents != null)
                 ScheduledEvents = updatedGuild.ScheduledEvents;
             PremiumProgressBarEnabled = updatedGuild.PremiumProgressBarEnabled;
+            if (updatedGuild.SafetyAlertsChannelId != null)
+                SafetyAlertsChannelId = updatedGuild.SafetyAlertsChannelId;
             return previous;
         }
         #endregion

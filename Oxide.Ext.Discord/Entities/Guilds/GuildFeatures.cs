@@ -132,6 +132,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         PreviewEnabled,
         
         /// <summary>
+        /// Guild has disabled alerts for join raids in the configured safety alerts channel
+        /// </summary>
+        [Description("RAID_ALERTS_DISABLED")] 
+        RaidAlertsDisabled,
+        
+        /// <summary>
         /// Guild has access to create private threads
         /// </summary>
         [Obsolete("All guilds now have access to PrivateThreads")]
