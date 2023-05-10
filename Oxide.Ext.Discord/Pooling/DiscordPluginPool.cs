@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Pooling.Entities;
 using Oxide.Ext.Discord.Pooling.Pools;
@@ -14,13 +15,14 @@ namespace Oxide.Ext.Discord.Pooling
     /// </summary>
     public class DiscordPluginPool
     {
-        internal readonly Plugin Plugin;
         private readonly List<IPool> _pools = new List<IPool>();
         private PoolSettings _settings;
 
         internal PoolSettings Settings => _settings ?? DefaultSettings;
+        internal readonly string PluginId;
+        internal readonly string PluginName; 
 
-        internal static readonly PoolSettings DefaultSettings = new PoolSettings();
+        private static readonly PoolSettings DefaultSettings = new PoolSettings();
 
         /// <summary>
         /// Constructor
@@ -28,7 +30,8 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="plugin">Plugin the pool is for</param>
         public DiscordPluginPool(Plugin plugin)
         {
-            Plugin = plugin;
+            PluginId = plugin.Id();
+            PluginName = plugin.FullName();
         }
 
         /// <summary>
@@ -297,12 +300,12 @@ namespace Oxide.Ext.Discord.Pooling
             BoxedPool<T>.ForPlugin(this).Free(boxed);
         }
 
-        internal void OnPluginUnloaded(Plugin plugin)
+        internal void OnPluginUnloaded()
         {
             for (int index = 0; index < _pools.Count; index++)
             {
                 IPool pool = _pools[index];
-                pool.OnPluginUnloaded(plugin);
+                pool.OnPluginUnloaded(this);
             }
         }
         

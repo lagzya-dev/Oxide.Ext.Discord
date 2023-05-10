@@ -1,5 +1,3 @@
-using Oxide.Core.Plugins;
-
 namespace Oxide.Ext.Discord.Pooling
 {
     /// <summary>
@@ -16,8 +14,8 @@ namespace Oxide.Ext.Discord.Pooling
         /// <summary>
         /// Called on a pool when a plugin is unloaded
         /// </summary>
-        /// <param name="plugin"></param>
-        void OnPluginUnloaded(Plugin plugin);
+        /// <param name="pluginPool"></param>
+        void OnPluginUnloaded(DiscordPluginPool pluginPool);
 
         /// <summary>
         /// Clears the pool of all items

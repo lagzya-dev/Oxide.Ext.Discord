@@ -1,6 +1,4 @@
 using System;
-using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -20,13 +18,13 @@ namespace Oxide.Ext.Discord.Pooling
         private TPooled[] _pool;
         private int _index;
         private readonly object _lock = new object();
-        private static readonly Hash<Plugin, BasePool<TPooled>> Pools = new Hash<Plugin, BasePool<TPooled>>();
+        private static readonly Hash<DiscordPluginPool, BasePool<TPooled>> Pools = new Hash<DiscordPluginPool, BasePool<TPooled>>();
 
         private void InitPool(DiscordPluginPool pluginPool)
         {
             PluginPool = pluginPool;
             pluginPool.AddPool(this);
-            Pools[pluginPool.Plugin] = this;
+            Pools[pluginPool] = this;
             _pool = new TPooled[GetPoolSize(pluginPool.Settings)];
         }
 
@@ -44,8 +42,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns></returns>
         protected static T ForPlugin<T>(DiscordPluginPool pluginPool) where T : BasePool<TPooled>, new()
         {
-            Plugin plugin = pluginPool.Plugin;
-            if (!(Pools[plugin] is T pool))
+            if (!(Pools[pluginPool] is T pool))
             {
                 pool = new T();
                 pool.InitPool(pluginPool);
@@ -71,7 +68,7 @@ namespace Oxide.Ext.Discord.Pooling
                 }
                 else
                 {
-                    DiscordExtension.GlobalLogger.Warning("{0} Pool {1} is leaking entities!!! {2}/{3}", PluginPool.Plugin.FullName(), GetType(), _index, _pool.Length);
+                    DiscordExtension.GlobalLogger.Warning("{0} Pool {1} is leaking entities!!! {2}/{3}", PluginPool.PluginName, GetType(), _index, _pool.Length);
                 }
             }
             
@@ -150,9 +147,9 @@ namespace Oxide.Ext.Discord.Pooling
         }
 
         ///<inheritdoc/>
-        public void OnPluginUnloaded(Plugin plugin)
+        public void OnPluginUnloaded(DiscordPluginPool pluginPool)
         {
-            Pools.Remove(plugin);
+            Pools.Remove(pluginPool);
         }
 
         /// <summary>
