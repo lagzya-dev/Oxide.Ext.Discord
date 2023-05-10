@@ -42,6 +42,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             Title = "Discord Extension";
         }
         
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(Init))]
         private void Init()
         {
@@ -53,6 +54,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
             AddCovalenceCommand(new[] { "de.rest.reset" }, nameof(ResetRestApiCommand), "de.rest.reset");
             AddCovalenceCommand(new[] { "de.clearpool" }, nameof(ClearDiscordPool), "de.clearpool");
+            AddCovalenceCommand(new[] { "de.wipepool" }, nameof(WipeDiscordPool), "de.wipepool");
             AddCovalenceCommand(new[] { "de.consolelog" }, nameof(ConsoleLogCommand), "de.consolelog");
             AddCovalenceCommand(new[] { "de.filelog" }, nameof(FileLogCommand), "de.filelog");
             AddCovalenceCommand(new[] { "de.debug" }, nameof(DiscordDebugCommand), "de.debug");
@@ -66,24 +68,28 @@ namespace Oxide.Ext.Discord.Plugins.Core
             DiscordPlaceholders.Instance.RegisterPlaceholders();
         }
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnServerInitialized))]
         private void OnServerInitialized()
         {
             IsServerLoaded = true;
         }
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnServerSave))]
         private void OnServerSave()
         {
             DiscordUserData.Instance.Save(false);
         }
         
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnServerShutdown))]
         private void OnServerShutdown()
         {
             DiscordExtension.IsShuttingDown = true;
         }
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(Unload))]
         private void Unload()
         {
@@ -459,6 +465,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         #endregion
 
         #region Hooks
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnPluginUnloaded))]
         private void OnPluginUnloaded(Plugin plugin)
         {
@@ -468,6 +475,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             }
         }
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnUserConnected))]
         private void OnUserConnected(IPlayer player)
         {

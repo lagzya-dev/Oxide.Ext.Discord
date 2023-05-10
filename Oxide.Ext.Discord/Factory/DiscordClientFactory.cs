@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
@@ -18,8 +17,7 @@ namespace Oxide.Ext.Discord.Factory
     public class DiscordClientFactory : Singleton<DiscordClientFactory>
     {
         private readonly Hash<string, DiscordClient> _clients = new Hash<string, DiscordClient>();
-        internal IEnumerable<DiscordClient> Clients => _clients.Values;
-        
+
         private DiscordClientFactory() { }
         
         #region Client Handling
@@ -116,7 +114,7 @@ namespace Oxide.Ext.Discord.Factory
 
         internal void OnShutdown()
         {
-            foreach (DiscordClient client in Clients.ToList())
+            foreach (DiscordClient client in _clients.Values.ToList())
             {
                 client.CloseClient();
             }

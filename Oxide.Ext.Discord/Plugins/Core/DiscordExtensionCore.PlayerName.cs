@@ -17,24 +17,28 @@ namespace Oxide.Ext.Discord.Plugins.Core
         private readonly Hash<AutoCompletePlayerSearchOptions, Hash<string, string>> _playerNameCache = new Hash<AutoCompletePlayerSearchOptions, Hash<string, string>>();
         private readonly StringBuilder _sb = new StringBuilder();
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnClanCreate))]
         private void OnClanCreate(string tag)
         {
             ClearClanCache();
         }
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnClanUpdate))]
         private void OnClanUpdate(string tag)
         {
             ClearClanCache();
         }
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnClanDestroy))]
         private void OnClanDestroy(string tag)
         {
             ClearClanCache();
         }
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnUserNameUpdated))]
         private void OnUserNameUpdated(string playerId, string oldName, string newName)
         {

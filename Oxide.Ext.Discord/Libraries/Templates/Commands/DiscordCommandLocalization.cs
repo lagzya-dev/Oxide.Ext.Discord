@@ -21,6 +21,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         [JsonConstructor]
+        // ReSharper disable once UnusedMember.Local
         private DiscordCommandLocalization() { }
 
         /// <summary>

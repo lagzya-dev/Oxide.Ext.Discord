@@ -48,6 +48,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             });
         }
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(HandleDeleteApplicationCommand))]
         [DiscordApplicationCommand(AppCommandKeys.DeCommand, AppCommandKeys.DeleteAppCommand, AppCommandKeys.AppCommandGroup)]
         private void HandleDeleteApplicationCommand(DiscordInteraction interaction, InteractionDataParsed parsed)
@@ -100,6 +101,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             SendTemplateMessage(client, TemplateKeys.Commands.Delete.Success, interaction, GetPlaceholderData().AddRequestError(error));
         }
 
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(HandleDeleteApplicationAutoComplete))]
         [DiscordAutoCompleteCommand(AppCommandKeys.DeCommand, AppCommandKeys.DeleteAppCommandArgument, AppCommandKeys.DeleteAppCommand, AppCommandKeys.AppCommandGroup)]
         private void HandleDeleteApplicationAutoComplete(DiscordInteraction interaction, InteractionDataOption focused)

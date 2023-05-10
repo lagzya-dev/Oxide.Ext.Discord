@@ -5062,6 +5062,12 @@
             Maximum of 50
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerMetadata.MentionRaidProtectionEnabled">
+            <summary>
+            Associated Trigger Types: <see cref="F:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType.MentionSpam"/>
+            Whether to automatically detect mention raids
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types">Auto Mod Trigger Types</a>
@@ -8433,6 +8439,11 @@
             The scheduled events in the guild
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.SafetyAlertsChannelId">
+            <summary>
+            The ID of the channel where admins and moderators of Community guilds receive safety alerts from Discord
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.HasLoadedAllMembers">
             <summary>
             Returns true if all guild members have been loaded
@@ -9515,6 +9526,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.PreviewEnabled">
             <summary>
             Guild can be previewed before joining via Membership Screening or the directory
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.RaidAlertsDisabled">
+            <summary>
+            Guild has disabled alerts for join raids in the configured safety alerts channel
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildFeatures.PrivateThreads">

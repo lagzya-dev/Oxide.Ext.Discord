@@ -82,6 +82,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
 
+        // ReSharper disable once UnusedMember.Local
         private bool IsValidZlibStream(ArraySegment<byte> bytes)
         {
             byte[] array = bytes.Array ?? throw new InvalidOperationException();
