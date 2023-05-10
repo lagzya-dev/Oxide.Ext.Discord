@@ -47,13 +47,12 @@ namespace Oxide.Ext.Discord.Pooling.Pools
                 throw new ArgumentOutOfRangeException(nameof(array), $"Array length cannot be greater than {MaxArraySize}");
             }
             
-            InternalArrayPool pool = _pool[--size];
-            pool?.Free(ref array);
+            _pool[--size]?.Free(ref array);
         }
 
         private class InternalArrayPool
         {
-            private int _index;
+            private ushort _index;
             private readonly TPooled[][] _pool = new TPooled[MaxArraySize][];
             private readonly object _lock = new object();
             private readonly int _arraySize;
@@ -71,7 +70,8 @@ namespace Oxide.Ext.Discord.Pooling.Pools
                     if (_index < _pool.Length)
                     {
                         array = _pool[_index];
-                        _pool[_index++] = null;
+                        _pool[_index] = null;
+                        _index++;
                     }
                     else
                     {
