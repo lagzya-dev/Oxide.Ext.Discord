@@ -3049,29 +3049,6 @@
             </summary>
             <param name="presenceUpdate"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClientFactory.CreateClient(Oxide.Core.Plugins.Plugin)">
-            <summary>
-            Sets the client field on the plugin.
-            This should only be used if you need the client in the Init or Loaded hooks
-            The client field will automatically be set on the plugin before the OnDiscordClientCreated or OnServerInitialized hooks
-            </summary>
-            <param name="plugin">Plugin to get client for</param>
-            <returns>Discord client for the plugin</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClientFactory.GetClient(Oxide.Core.Plugins.Plugin)">
-            <summary>
-            Gets the client for the given plugin
-            </summary>
-            <param name="plugin">Plugin to get client for</param>
-            <returns>Discord client for the plugin</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClientFactory.GetClient(System.String)">
-            <summary>
-            Gets the client for the given plugin name
-            </summary>
-            <param name="pluginName">Plugin Name to get client for</param>
-            <returns>Discord client for the plugin name</returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.DiscordExtension">
             <summary>
             Discord Extension that is loaded by Oxide
@@ -17786,6 +17763,33 @@
             </summary>
             <param name="type">Type to get default value for</param>
             <returns>default value for <see cref="T:System.Type"/></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Factory.DiscordClientFactory">
+            <summary>
+            Factory for creating <see cref="T:Oxide.Ext.Discord.DiscordClient"/>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.DiscordClientFactory.CreateClient(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Creates the client for the given plugin. If one already exist the existing one is returned
+            </summary>
+            <param name="plugin">Plugin the client is for</param>
+            <returns>DiscordClient for plugin</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown is plugin is null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.DiscordClientFactory.GetClient(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Gets the client for the given plugin
+            </summary>
+            <param name="plugin">Plugin to get client for</param>
+            <returns>Discord client for the plugin</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.DiscordClientFactory.GetClient(System.String)">
+            <summary>
+            Gets the client for the given plugin name
+            </summary>
+            <param name="pluginName">Plugin Name to get client for</param>
+            <returns>Discord client for the plugin name</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.DiscordCdn">
             <summary>
