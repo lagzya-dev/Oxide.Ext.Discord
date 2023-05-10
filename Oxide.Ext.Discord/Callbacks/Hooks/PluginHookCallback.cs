@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
 
         protected override void HandleCallback()
         {
-            if (_plugin != null)
+            if (_plugin != null && _plugin.IsLoaded)
             {
                 _plugin.CallHook(_hook, _args);
                 return;
@@ -54,7 +54,10 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
             for (int index = 0; index < _plugins.Count; index++)
             {
                 Plugin plugin = _plugins[index];
-                plugin.CallHook(_hook, _args);
+                if (plugin.IsLoaded)
+                {
+                    plugin.CallHook(_hook, _args);
+                }
             }
         }
 
