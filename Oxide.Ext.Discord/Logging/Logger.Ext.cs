@@ -1,5 +1,6 @@
 using System;
-using Oxide.Core;
+using Oxide.Ext.Discord.Pooling.Pools;
+
 #pragma warning disable CS1591
 
 namespace Oxide.Ext.Discord.Logging
@@ -569,30 +570,30 @@ namespace Oxide.Ext.Discord.Logging
         
         private static void HandleLog<T1, T2, T3, T4>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, T3 arg2, T4 arg3, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(4);
+            object[] array = ArrayPool<object>.Instance.Get(4);
             array[0] = arg0;
             array[1] = arg1;
             array[2] = arg2;
             array[3] = arg3;
             logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            ArrayPool<object>.Instance.Free(ref array);
         }
         
         private static void HandleLog<T1, T2, T3, T4, T5>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, T3 arg2, T4 arg3, T5 arg4, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(5);
+            object[] array = ArrayPool<object>.Instance.Get(5);
             array[0] = arg0;
             array[1] = arg1;
             array[2] = arg2;
             array[3] = arg3;
             array[4] = arg4;
             logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            ArrayPool<object>.Instance.Free(ref array);
         }
         
         private static void HandleLog<T1, T2, T3, T4, T5, T6>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, T3 arg2, T4 arg3, T5 arg4, T6 arg5, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(6);
+            object[] array = ArrayPool<object>.Instance.Get(6);
             array[0] = arg0;
             array[1] = arg1;
             array[2] = arg2;
@@ -600,12 +601,12 @@ namespace Oxide.Ext.Discord.Logging
             array[4] = arg4;
             array[5] = arg5;
             logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            ArrayPool<object>.Instance.Free(ref array);
         }
         
         private static void HandleLog<T1, T2, T3, T4, T5, T6, T7>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, T3 arg2, T4 arg3, T5 arg4, T6 arg5, T7 arg6, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(7);
+            object[] array = ArrayPool<object>.Instance.Get(7);
             array[0] = arg0;
             array[1] = arg1;
             array[2] = arg2;
@@ -614,12 +615,12 @@ namespace Oxide.Ext.Discord.Logging
             array[5] = arg5;
             array[6] = arg6;
             logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            ArrayPool<object>.Instance.Free(ref array);
         }
         
         private static void HandleLog<T1, T2, T3, T4, T5, T6, T7, T8>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, T3 arg2, T4 arg3, T5 arg4, T6 arg5, T7 arg6, T8 arg7, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(8);
+            object[] array = ArrayPool<object>.Instance.Get(8);
             array[0] = arg0;
             array[1] = arg1;
             array[2] = arg2;
@@ -629,12 +630,12 @@ namespace Oxide.Ext.Discord.Logging
             array[6] = arg6;
             array[7] = arg7;
             logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            ArrayPool<object>.Instance.Free(ref array);
         }
         
         private static void HandleLog<T1, T2, T3, T4, T5, T6, T7, T8, T9>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, T3 arg2, T4 arg3, T5 arg4, T6 arg5, T7 arg6, T8 arg7, T9 arg8, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(9);
+            object[] array = ArrayPool<object>.Instance.Get(9);
             array[0] = arg0;
             array[1] = arg1;
             array[2] = arg2;
@@ -645,12 +646,12 @@ namespace Oxide.Ext.Discord.Logging
             array[7] = arg7;
             array[8] = arg8;
             logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            ArrayPool<object>.Instance.Free(ref array);
         }
         
         private static void HandleLog<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(ILogger logger, DiscordLogLevel level, string message, T1 arg0, T2 arg1, T3 arg2, T4 arg3, T5 arg4, T6 arg5, T7 arg6, T8 arg7, T9 arg8, T10 arg9, Exception exception = null)
         {
-            object[] array = ArrayPool.Get(10);
+            object[] array = ArrayPool<object>.Instance.Get(10);
             array[0] = arg0;
             array[1] = arg1;
             array[2] = arg2;
@@ -662,7 +663,7 @@ namespace Oxide.Ext.Discord.Logging
             array[8] = arg8;
             array[9] = arg9;
             logger.Log(level, string.Format(message, array), exception);
-            ArrayPool.Free(array);
+            ArrayPool<object>.Instance.Free(ref array);
         }
         #endregion
     }

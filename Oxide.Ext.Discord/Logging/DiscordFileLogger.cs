@@ -1,10 +1,10 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Logging
 {
@@ -13,14 +13,14 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     internal class DiscordFileLogger
     {
-        private readonly MemoryStream _stream = new MemoryStream();
-        private StreamWriter _writer;
-        private readonly object _sync = new object();
+        private readonly ConcurrentQueue<string> _messages = new ConcurrentQueue<string>();
         private readonly string _logFileName;
         private readonly string _fileLogFormat;
-        
+
         private static readonly Thread WriterThread;
         private static readonly List<DiscordFileLogger> Loggers = new List<DiscordFileLogger>();
+        private static readonly AutoResetEvent Reset = new AutoResetEvent(false);
+        private static bool _exit;
 
         static DiscordFileLogger()
         {
@@ -34,7 +34,6 @@ namespace Oxide.Ext.Discord.Logging
         
         internal DiscordFileLogger(string pluginName, string fileLogFormat)
         {
-            _writer = new StreamWriter(_stream);
             _fileLogFormat = fileLogFormat;
             string logPath = Path.Combine(Interface.Oxide.LogDirectory, pluginName);
             if (!Directory.Exists(logPath))
@@ -48,16 +47,10 @@ namespace Oxide.Ext.Discord.Logging
 
         internal void AddMessage(DiscordLogLevel level, string message, Exception ex)
         {
-            lock (_sync)
+            _messages.Enqueue(string.Format(_fileLogFormat, DateTime.Now, EnumCache<DiscordLogLevel>.Instance.ToString(level), message));
+            if (ex != null)
             {
-                _writer.Write(_fileLogFormat, DateTime.Now, EnumCache<DiscordLogLevel>.Instance.ToString(level), message);
-                
-                if (ex != null)
-                {
-                    _writer.WriteLine();
-                    _writer.Write(ex.ToString());
-                }
-                _writer.WriteLine();
+                _messages.Enqueue(ex.ToString());
             }
         }
 
@@ -65,19 +58,13 @@ namespace Oxide.Ext.Discord.Logging
         {
             try
             {
-                while (true)
+                while (!_exit)
                 {
-                    try
+                    Reset.WaitOne();
+                    for (int index = 0; index < Loggers.Count; index++)
                     {
-                        for (int index = 0; index < Loggers.Count; index++)
-                        {
-                            DiscordFileLogger logger = Loggers[index];
-                            logger.WriteLog();
-                        }
-                    }
-                    finally
-                    {
-                        Thread.Sleep(1000);
+                        DiscordFileLogger logger = Loggers[index];
+                        logger.WriteLog();
                     }
                 }
             }
@@ -91,37 +78,31 @@ namespace Oxide.Ext.Discord.Logging
 
         private void WriteLog()
         {
-            lock (_sync)
+            if (_messages.IsEmpty)
             {
-                _writer.Flush();
-                if (_stream.Position == 0)
+                return;
+            }
+            
+            using (StreamWriter fileWriter = File.AppendText(_logFileName))
+            {
+                while (_messages.TryDequeue(out string message))
                 {
-                    return;
+                    fileWriter.WriteLine(message);
                 }
-
-                using (StreamWriter fileWriter = File.AppendText(_logFileName))
-                {
-                    _stream.CopyToPooled(fileWriter.BaseStream);
-                }
-                
-                _stream.SetLength(0);
             }
         }
 
         internal static void OnServerShutdown()
         {
-            WriterThread.Abort();
+            _exit = true;
+            Reset.Set();
+            WriterThread.Join();
         }
 
         internal void OnShutdown()
         {
             WriteLog();
             Loggers.Remove(this);
-            lock (_sync)
-            {
-                _writer.Dispose();
-                _writer = null;
-            }
         }
     }
 }

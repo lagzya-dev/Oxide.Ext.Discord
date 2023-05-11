@@ -9,9 +9,9 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     internal class DiscordConsoleLogger
     {
-        private readonly object[] _args = new object[2];
         private readonly object _sync = new object();
         private readonly string _format;
+        private readonly object[] _empty = Array.Empty<object>();
 
         public DiscordConsoleLogger(string format)
         {
@@ -28,24 +28,22 @@ namespace Oxide.Ext.Discord.Logging
         {
             lock (_sync)
             {
-                _args[0] = EnumCache<DiscordLogLevel>.Instance.ToString(level);
-                _args[1] = message;
-                message = string.Format(_format, _args);
+                message = string.Format(_format, EnumCache<DiscordLogLevel>.Instance.ToString(level), message);
                 
                 switch (level)
                 {
                     case DiscordLogLevel.Debug:
                     case DiscordLogLevel.Warning:
-                        Interface.Oxide.LogWarning(message, Array.Empty<object>());
+                        Interface.Oxide.LogWarning(message, _empty);
                         break;
                     case DiscordLogLevel.Error:
-                        Interface.Oxide.LogError(message, Array.Empty<object>());
+                        Interface.Oxide.LogError(message, _empty);
                         break;
                     case DiscordLogLevel.Exception:
                         Interface.Oxide.LogException(message, ex);
                         break;
                     default:
-                        Interface.Oxide.LogInfo(message, Array.Empty<object>());
+                        Interface.Oxide.LogInfo(message, _empty);
                         break;
                 }
             }
