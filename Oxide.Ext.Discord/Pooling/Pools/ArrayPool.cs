@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     internal class ArrayPool<TPooled> : Singleton<ArrayPool<TPooled>>
     {
         private const int MaxArraySize = 64;
-        private readonly InternalArrayPool[] _pool = new InternalArrayPool[MaxArraySize];
+        private readonly ArrayPoolInternal[] _pool = new ArrayPoolInternal[MaxArraySize + 1];
         
         private ArrayPool() { }
 
@@ -24,10 +24,10 @@ namespace Oxide.Ext.Discord.Pooling.Pools
                 throw new ArgumentOutOfRangeException(nameof(size), $"Cannot be greater than {MaxArraySize}");
             }
             
-            InternalArrayPool pool = _pool[--size];
+            ArrayPoolInternal pool = _pool[size];
             if (pool == null)
             {
-                pool = new InternalArrayPool(size);
+                pool = new ArrayPoolInternal(size);
                 _pool[size] = pool;
             }
 
@@ -47,17 +47,18 @@ namespace Oxide.Ext.Discord.Pooling.Pools
                 throw new ArgumentOutOfRangeException(nameof(array), $"Array length cannot be greater than {MaxArraySize}");
             }
             
-            _pool[--size]?.Free(ref array);
+            _pool[size]?.Free(ref array);
         }
 
-        private class InternalArrayPool
+        private class ArrayPoolInternal
         {
+            private const int MaxArrays = 64;
             private ushort _index;
-            private readonly TPooled[][] _pool = new TPooled[MaxArraySize][];
+            private readonly TPooled[][] _pool = new TPooled[MaxArrays][];
             private readonly object _lock = new object();
             private readonly int _arraySize;
 
-            public InternalArrayPool(int arraySize)
+            public ArrayPoolInternal(int arraySize)
             {
                 _arraySize = arraySize;
             }
