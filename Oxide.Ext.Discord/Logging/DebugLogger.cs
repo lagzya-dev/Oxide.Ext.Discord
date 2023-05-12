@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Text;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Extensions;
@@ -40,6 +41,18 @@ namespace Oxide.Ext.Discord.Logging
         public void AppendField(string name, float value) => AppendField(name, StringCache<float>.Instance.ToString(value));
         public void AppendField(string name, ulong value) => AppendField(name, StringCache<ulong>.Instance.ToString(value));
         public void AppendField(string name, long value) => AppendField(name, StringCache<long>.Instance.ToString(value));
+        public void AppendField(string name, Snowflake value) => AppendField(name, value.ToString());
+        public void AppendField(string name, Snowflake? value)
+        {
+            if (value.HasValue)
+            {
+                AppendField(name, value.Value);
+                return;
+            }
+            
+            AppendField(name, "Invalid ID");
+        }
+
         public void AppendFieldEnum<T>(string name, T value)  where T : struct, IComparable, IFormattable, IConvertible => AppendField(name, EnumCache<T>.Instance.ToString(value));
         
         public void AppendFieldOutOf(string name, int amount, int total)

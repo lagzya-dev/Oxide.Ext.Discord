@@ -361,7 +361,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
 
         public void LogDebug(DebugLogger logger)
         {
-            logger.AppendField("ID", Id.ToString());
+            logger.AppendField("ID", Id);
             logger.AppendField("Name", Name);
             logger.AppendFieldEnum("Flags", Flags ?? ApplicationFlags.None);
         }

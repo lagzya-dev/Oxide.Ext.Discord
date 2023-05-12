@@ -165,10 +165,10 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         public void LogDebug(DebugLogger logger)
         {
-            logger.AppendField("ID", Id.ToString());
+            logger.AppendField("ID", Id);
             logger.AppendFieldEnum("Method", Method);
             logger.AppendField("Route", Route);
-            logger.AppendFieldEnum("Method", Status);
+            logger.AppendFieldEnum("Status", Status);
             logger.AppendField("Type", GetType().Name);
         }
     }

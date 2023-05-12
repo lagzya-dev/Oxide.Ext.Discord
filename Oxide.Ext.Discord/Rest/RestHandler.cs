@@ -223,8 +223,7 @@ namespace Oxide.Ext.Discord.Rest
             logger.StartArray("Buckets");
             for (int index = 0; index < buckets.Length; index++)
             {
-                Bucket bucket = buckets[index];
-                bucket.LogDebug(logger);
+                logger.AppendObject(string.Empty, buckets[index]);
             }
             logger.EndArray();
         }

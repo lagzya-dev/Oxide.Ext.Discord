@@ -532,7 +532,7 @@ namespace Oxide.Ext.Discord.Entities.Users
 
         public void LogDebug(DebugLogger logger)
         {
-            logger.AppendField("Id", Id.ToString());
+            logger.AppendField("Id", Id);
             logger.AppendField("Name", FullUserName);
             logger.AppendField("Bot", IsBot);
         }

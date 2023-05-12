@@ -412,7 +412,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                 DiscordApplication application = client.Application;
                 if (application != null)
                 {
-                    logger.AppendField("Application ID", application.Id.ToString());
+                    logger.AppendField("Application ID", application.Id);
                     logger.StartArray("Application Commands");
                     foreach (BaseAppCommand command in GetCommands(application.Id))
                     {

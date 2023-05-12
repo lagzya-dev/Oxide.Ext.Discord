@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
@@ -18,7 +19,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
     /// <summary>
     /// Contains bucket information for a REST API Bucket
     /// </summary>
-    public class Bucket : BasePoolable
+    public class Bucket : BasePoolable, IDebugLoggable
     {
         /// <summary>
         /// The ID of this bucket which is based on the route

@@ -1030,7 +1030,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
 
         public void LogDebug(DebugLogger logger)
         {
-            logger.AppendField("ID", Id.ToString());
+            logger.AppendField("ID", Id);
             logger.AppendField("Name", Name);
             logger.AppendFieldEnum("Type", Type);
         }

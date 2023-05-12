@@ -8,7 +8,6 @@ using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Network;
@@ -23,7 +22,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// <summary>
     /// Represent a Discord API request
     /// </summary>
-    public class RequestHandler : BasePoolable, IDebugLoggable
+    public class RequestHandler : BasePoolable
     {
         internal BaseRequest Request;
         
@@ -316,11 +315,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Request = null;
             _response = null;
             _logger = null;
-        }
-
-        public void LogDebug(DebugLogger logger)
-        {
-            throw new NotImplementedException();
         }
     }
 }
