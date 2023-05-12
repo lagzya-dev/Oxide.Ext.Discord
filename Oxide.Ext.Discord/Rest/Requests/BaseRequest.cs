@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
@@ -17,7 +18,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// <summary>
     /// Represents a base request class for REST API calls
     /// </summary>
-    public abstract class BaseRequest : BasePoolable
+    public abstract class BaseRequest : BasePoolable, IDebugLoggable
     {
         /// <summary>
         /// ID of the request. Generated from the DateTimeOffset when the request was created
@@ -160,6 +161,15 @@ namespace Oxide.Ext.Discord.Rest.Requests
         protected override void LeavePool()
         {
             Status = RequestStatus.InQueue;
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("ID", Id.ToString());
+            logger.AppendFieldEnum("Method", Method);
+            logger.AppendField("Route", Route);
+            logger.AppendFieldEnum("Method", Status);
+            logger.AppendField("Type", GetType().Name);
         }
     }
 }

@@ -3,6 +3,8 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.Command
 {
@@ -33,6 +35,13 @@ namespace Oxide.Ext.Discord.Libraries.Command
             }
             
             return false;
+        }
+
+        public override void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Name", Name);
+            logger.AppendField("Plugin", Plugin.FullName());
+            logger.AppendField("Type", "Guild Command");
         }
     }
 }

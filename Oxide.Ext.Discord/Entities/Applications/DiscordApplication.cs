@@ -11,6 +11,8 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Applications;
 using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Applications
@@ -19,7 +21,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
     /// Represents <a href="https://discord.com/developers/docs/resources/application#application-object">Application Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordApplication
+    public class DiscordApplication : IDebugLoggable
     {
         /// <summary>
         /// The id of the app
@@ -355,6 +357,13 @@ namespace Oxide.Ext.Discord.Entities.Applications
         {
             DiscordApplicationException.ThrowIfInvalidApplicationRoleConnectionMetadataLength(records);
             client.Bot.Rest.CreateRequest(client,$"applications/{Id}/role-connections/metadata", RequestMethod.PUT, records, callback, error);
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("ID", Id.ToString());
+            logger.AppendField("Name", Name);
+            logger.AppendFieldEnum("Flags", Flags ?? ApplicationFlags.None);
         }
     }
 }

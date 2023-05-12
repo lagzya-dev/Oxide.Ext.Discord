@@ -1,28 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Users;
-using Oxide.Ext.Discord.Entities.Applications;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Gatway.Commands;
-using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Libraries.AppCommands;
-using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Rest;
-using Oxide.Ext.Discord.Rest.Buckets;
-using Oxide.Ext.Discord.Rest.Requests;
-using Oxide.Ext.Discord.WebSockets;
 
 namespace Oxide.Ext.Discord.Plugins.Core
 {
@@ -47,7 +37,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         private void Init()
         {
             Instance = this;
-            _logger = DiscordLoggerFactory.Instance.GetExtensionLogger(DiscordLogLevel.Info);
+            _logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(DiscordLogLevel.Info);
             DiscordPool.Instance.CreateInternal(this);
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
             AddCovalenceCommand(new[] { "de.websocket.reset" }, nameof(ResetWebSocketCommand), "de.websocket.reset");
@@ -107,34 +97,22 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [HookMethod(nameof(ResetWebSocketCommand))]
         private void ResetWebSocketCommand(IPlayer player, string cmd, string[] args)
         {
+            BotClientFactory.Instance.ResetAllWebSockets();
             Chat(player, LangKeys.ResetWebSocket);
-            
-            foreach (BotClient client in BotClient.ActiveBots.Values)
-            {
-                client.ResetWebSocket();
-            }
         }
         
         [HookMethod(nameof(ReconnectWebSocketCommand))]
         private void ReconnectWebSocketCommand(IPlayer player, string cmd, string[] args)
         {
+            BotClientFactory.Instance.ReconnectAllWebSockets();
             Chat(player, LangKeys.ReconnectWebSocket);
-            
-            foreach (BotClient client in BotClient.ActiveBots.Values)
-            {
-                client.WebSocket.Disconnect(true, true, true);
-            }
         }
         
         [HookMethod(nameof(ResetRestApiCommand))]
         private void ResetRestApiCommand(IPlayer player, string cmd, string[] args)
         {
+            BotClientFactory.Instance.ResetAllRestApis();
             Chat(player, LangKeys.ResetRestApi);
-            
-            foreach (BotClient client in BotClient.ActiveBots.Values)
-            {
-                client.ResetRestApi();
-            }
         }
         
         [HookMethod(nameof(ClearDiscordPool))]
@@ -200,267 +178,24 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [HookMethod(nameof(DiscordDebugCommand))]
         private void DiscordDebugCommand(IPlayer player, string cmd, string[] args)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (BotClient bot in BotClient.ActiveBots.Values)
+            DebugLogger logger = new DebugLogger();
+            foreach (BotClient bot in BotClientFactory.Instance.Clients)
             {
-                sb.Append('=', 50);
-                sb.AppendLine();
-                sb.Append("Client: ");
-                sb.AppendLine(bot.Settings.GetHiddenToken());
-                sb.Append("Initialized: ");
-                sb.AppendLine(bot.Initialized ? "Yes" : "No");
-                sb.Append("Bot: ");
-                sb.AppendLine(bot.BotUser?.FullUserName ?? "Unknown");
-                sb.Append("Log Level: ");
-                sb.AppendLine(bot.Settings.LogLevel.ToString());
-                sb.Append("Intents: ");
-                sb.AppendLine(bot.Settings.Intents.ToString());
-                sb.Append("Plugins: ");
-                sb.AppendLine(bot.GetClientPluginList());
-                sb.AppendLine("Application Flags: ");
-                if (bot.Application?.Flags == null || (int)bot.Application.Flags == 0)
-                {
-                    sb.Append("\t");
-                    sb.AppendLine(ApplicationFlags.None.ToString());
-                }
-                else
-                {
-                    foreach (ApplicationFlags flag in Enum.GetValues(typeof(ApplicationFlags)).Cast<ApplicationFlags>())
-                    {
-                        if (flag != ApplicationFlags.None && bot.Application.HasApplicationFlag(flag))
-                        {
-                            sb.Append("\t");
-                            sb.AppendLine(flag.ToString());
-                        }
-                    }
-                }
-
-                DebugWebsocket(bot, sb);
-                DebugRest(bot, sb);
+                bot.LogDebug(logger);
             }
 
-            sb.AppendLine("Libraries:");
-            DebugApplicationCommands(sb);
-            DebugDiscordCommands(sb);
-            DebugSubscriptions(sb);
+            logger.StartObject("Libraries");
+            logger.AppendObject("Discord Application Command", DiscordAppCommand.Instance);
+            logger.AppendObject("Discord Command", DiscordCommand.Instance);
+            logger.AppendObject("Discord Subscriptions", DiscordSubscriptions.Instance);
+            DiscordAppCommand.Instance.LogDebug(logger);
+            DiscordCommand.Instance.LogDebug(logger);
+            DiscordSubscriptions.Instance.LogDebug(logger);
+            logger.EndObject();
 
-            string message = sb.ToString();
+            string message = logger.ToString();
             player.Message(message);
             _logger.Info(message);
-        }
-        
-        private void DebugWebsocket(BotClient bot, StringBuilder sb)
-        {
-            DiscordWebSocket websocket = bot.WebSocket;
-            sb.Append("Websocket: ");
-            if (websocket != null)
-            {
-                sb.AppendLine(websocket.Handler.SocketState.ToString());
-                sb.Append("\tPending Commands: ");
-                IReadOnlyCollection<WebSocketCommand> pendingCommands = websocket.Commands.GetPendingCommands();
-                if (pendingCommands.Count == 0)
-                {
-                    sb.AppendLine("None");
-                }
-                else
-                {
-                    sb.AppendLine();
-                    foreach (WebSocketCommand command in pendingCommands)
-                    {
-                        sb.Append("\tCommand: ");
-                        sb.Append(command.Client.PluginName);
-                        sb.Append(' ');
-                        sb.AppendLine(command.Payload.OpCode.ToString());
-                    }
-                }
-            }
-            else
-            {
-                sb.AppendLine("Is NULL!");
-            }
-        }
-        
-        private void DebugRest(BotClient bot, StringBuilder sb)
-        {
-            RestHandler rest = bot.Rest;
-            sb.AppendLine("REST: ");
-            if (rest != null)
-            {
-                sb.AppendLine("\tBuckets: ");
-                Bucket[] buckets = rest.Buckets.Values.ToArray();
-                if (buckets.Length == 0)
-                {
-                    sb.AppendLine("\t\tNone");
-                }
-                else
-                {
-                    for (int index = 0; index < buckets.Length; index++)
-                    {
-                        Bucket bucket = buckets[index];
-                        sb.Append("\t\tID: ");
-                        sb.Append(bucket.Id);
-                        sb.Append(" (Known Bucket: ");
-                        sb.AppendLine(bucket.IsKnownBucket ? "Yes)" : "No)");
-                        sb.Append("\t\tRemaining: ");
-                        sb.Append(bucket.Remaining.ToString());
-                        sb.Append(" Limit: ");
-                        sb.Append(bucket.Limit.ToString());
-                        sb.Append(" Reset In: ");
-                        double resetIn = bucket.ResetAt < DateTimeOffset.UtcNow ? 0 : (bucket.ResetAt - DateTimeOffset.UtcNow).TotalSeconds;
-                        sb.Append(resetIn.ToString());
-                        sb.AppendLine(" Seconds");
-                        sb.Append("\t\tRequest Queue Count: ");
-                        sb.AppendLine(bucket.Requests.Count.ToString());
-                        sb.Append("\t\tSemaphore: ");
-                        sb.Append(bucket.Semaphore.Available.ToString());
-                        sb.Append('/');
-                        sb.AppendLine(bucket.Semaphore.MaximumCount.ToString());
-                        sb.AppendLine("\t\tRoutes:");
-                        foreach (KeyValuePair<string, string> route in rest.RouteToHash)
-                        {
-                            if (route.Value == bucket.Id)
-                            {
-                                sb.Append("\t\t\t");
-                                sb.AppendLine(route.Key);
-                            }
-                        }
-                        sb.AppendLine("\t\tRequests:");
-                        foreach (RequestHandler handler in bucket.Requests.Values)
-                        {
-                            BaseRequest request = handler.Request;
-                            sb.Append("\t\t\tID: ");
-                            sb.AppendLine(request.Id.ToString());
-                            sb.Append("\t\t\tMethod: ");
-                            sb.AppendLine(request.Method.ToString());
-                            sb.Append("\t\t\tRoute: ");
-                            sb.AppendLine(request.Route);
-                            sb.Append("\t\t\tStatus: ");
-                            sb.AppendLine(request.Status.ToString());
-                            sb.AppendLine();
-                        }
-                        sb.AppendLine();
-                    }
-                }
-            }
-            else
-            {
-                sb.AppendLine("Is NULL!");
-            }
-        }
-
-        private void DebugApplicationCommands(StringBuilder sb)
-        {
-            sb.AppendLine("\tApplication Commands:");
-
-            foreach (BotClient client in BotClient.ActiveBots.Values)
-            {
-                sb.Append("\t\tApplication ID: ");
-                sb.AppendLine(client.Application.Id);
-                foreach (BaseAppCommand command in DiscordAppCommand.Instance.GetCommands(client.Application.Id))
-                {
-                    if (command is ComponentCommand componentCommand)
-                    {
-                        sb.Append("\t\t\tCommand Name: ");
-                        sb.AppendLine(componentCommand.CustomId);
-                        sb.Append("\t\t\tInteraction Type: ");
-                        sb.AppendLine(componentCommand.Type.ToString());
-                        sb.Append("\t\t\tPlugin: ");
-                        sb.Append(componentCommand.Plugin.FullName());
-                        sb.AppendLine();
-                    }
-                    else if (command is AutoCompleteCommand autoCompleteCommand)
-                    {
-                        sb.Append("\t\t\tCommand Name: ");
-                        sb.AppendLine(autoCompleteCommand.Command.ToString());
-                        sb.Append("\t\t\tInteraction Type: ");
-                        sb.AppendLine(autoCompleteCommand.Type.ToString());
-                        sb.Append("\t\t\tPlugin: ");
-                        sb.Append(autoCompleteCommand.Plugin.FullName());
-                        sb.AppendLine();
-                    }
-                    else if (command is AppCommand appCommand)
-                    {
-                        sb.Append("\t\t\tCommand Name: ");
-                        sb.AppendLine(appCommand.Command.ToString());
-                        sb.Append("\t\t\tInteraction Type: ");
-                        sb.AppendLine(appCommand.Type.ToString());
-                        sb.Append("\t\t\tPlugin: ");
-                        sb.Append(appCommand.Plugin.FullName());
-                        sb.AppendLine();
-                    }
-                }
-            }
-        }
-        public void DebugDiscordCommands(StringBuilder sb)
-        {
-            sb.AppendLine("\tDiscord Commands:");
-            foreach (BaseCommand command in DiscordCommand.Instance.GetCommands())
-            {
-                if (command is GuildCommand guildCommand)
-                {
-                    sb.Append("\t\tCommand Name: ");
-                    sb.AppendLine(guildCommand.Name);
-                    sb.Append("\t\tPlugin: ");
-                    sb.Append(guildCommand.Plugin.FullName());
-                    sb.AppendLine("\t\tType: Guild Command");
-                    sb.AppendLine();
-                }
-                else if (command is DirectMessageCommand directMessageCommand)
-                {
-                    sb.Append("\t\tCommand Name: ");
-                    sb.AppendLine(directMessageCommand.Name);
-                    sb.Append("\t\tPlugin: ");
-                    sb.Append(directMessageCommand.Plugin.FullName());
-                    sb.AppendLine("\t\tType: Direct Message Command");
-                    sb.AppendLine();
-                }
-            }
-        }
-        
-        public void DebugSubscriptions(StringBuilder sb)
-        {
-            sb.AppendLine("\tDiscord Channel Subscriptions:");
-            foreach (DiscordSubscription sub in DiscordSubscriptions.Instance.GetSubscriptions())
-            {
-                DiscordChannel channel = null;
-                DiscordChannel parent = null;
-                foreach (BotClient client in BotClient.ActiveBots.Values)
-                {
-                    foreach (DiscordGuild guild in client.Servers.Values)
-                    {
-                        channel = guild.Channels[sub.ChannelId];
-                        if (channel != null)
-                        {
-                            if (channel.ParentId.HasValue)
-                            {
-                                parent = guild.Channels[channel.ParentId.Value];
-                            }
-                            break;
-                        }
-                    }
-                }
-
-                sb.Append("\t\tChannel Name: ");
-
-                if (parent != null)
-                {
-                    sb.Append(parent.Name);
-                    sb.Append('/');
-                    sb.AppendLine(channel?.Name);
-                }
-                else
-                {
-                    sb.AppendLine(channel?.Name ?? "Unknown Channel");
-                }
-
-                sb.Append("\t\tPlugin: ");
-                sb.Append(sub.Plugin.FullName());
-                sb.Append("\t\tMethod: ");
-                sb.Append(sub.Callback.Method.DeclaringType?.Name ?? "Unknown Type");
-                sb.Append('.');
-                sb.AppendLine(sub.Callback.Method.Name);
-                sb.AppendLine();
-            }
         }
         #endregion
 

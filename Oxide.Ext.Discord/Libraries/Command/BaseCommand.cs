@@ -4,13 +4,15 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Hooks;
+using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.Command
 {
     /// <summary>
     /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L76)
     /// </summary>
-    internal abstract class BaseCommand
+    internal abstract class BaseCommand : IDebugLoggable
     {
         internal readonly string Name;
         private readonly string _hook;
@@ -42,6 +44,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         }
 
         public abstract bool CanHandle(DiscordMessage message, DiscordChannel channel);
+        public abstract void LogDebug(DebugLogger logger);
 
         internal void OnRemoved()
         {

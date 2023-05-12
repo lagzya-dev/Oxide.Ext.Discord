@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -9,6 +10,7 @@ using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.RateLimits;
@@ -20,7 +22,7 @@ namespace Oxide.Ext.Discord.Rest
     /// <summary>
     /// Represents a REST handler for a bot
     /// </summary>
-    public class RestHandler
+    public class RestHandler : IDebugLoggable
     {
         /// <summary>
         /// <see cref="HttpClient"/> for API Requests
@@ -38,9 +40,9 @@ namespace Oxide.Ext.Discord.Rest
         public readonly ConcurrentDictionary<string, Bucket> Buckets = new ConcurrentDictionary<string, Bucket>();
 
         /// <summary>
-        /// Route to Bucket Hash
+        /// Route to Bucket ID
         /// </summary>
-        public readonly ConcurrentDictionary<string, string> RouteToHash = new ConcurrentDictionary<string, string>();
+        public readonly ConcurrentDictionary<string, string> RouteToBucketId = new ConcurrentDictionary<string, string>();
 
         /// <summary>
         /// The authorization header value
@@ -143,7 +145,7 @@ namespace Oxide.Ext.Discord.Rest
         internal void UpgradeToKnownBucket(Bucket bucket, string newBucketId)
         {
             _logger.Debug("RestHandler Upgrading To Known Bucket for Old ID: {0} New ID: {1}", bucket.Id, newBucketId);
-            RouteToHash[bucket.Id] = newBucketId;
+            RouteToBucketId[bucket.Id] = newBucketId;
 
             if (Buckets.TryGetValue(newBucketId, out Bucket existing))
             {
@@ -171,9 +173,9 @@ namespace Oxide.Ext.Discord.Rest
         /// <returns></returns>
         public Bucket GetBucket(string bucketId)
         {
-            if (RouteToHash.ContainsKey(bucketId))
+            if (RouteToBucketId.ContainsKey(bucketId))
             {
-                bucketId = RouteToHash[bucketId];
+                bucketId = RouteToBucketId[bucketId];
             }
 
             if (!Buckets.TryGetValue(bucketId, out Bucket bucket))
@@ -204,9 +206,27 @@ namespace Oxide.Ext.Discord.Rest
                 bucket.Value.Dispose();
             }
             
-            RouteToHash.Clear();
+            RouteToBucketId.Clear();
             Buckets.Clear();
             RateLimit.Shutdown();
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            Bucket[] buckets = Buckets.Values.ToArray();
+            if (buckets.Length == 0)
+            {
+                logger.AppendField("Buckets", "None");
+                return;
+            }
+
+            logger.StartArray("Buckets");
+            for (int index = 0; index < buckets.Length; index++)
+            {
+                Bucket bucket = buckets[index];
+                bucket.LogDebug(logger);
+            }
+            logger.EndArray();
         }
     }
 }

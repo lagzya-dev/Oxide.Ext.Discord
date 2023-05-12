@@ -5,10 +5,10 @@ namespace Oxide.Ext.Discord.Libraries
     /// <summary>
     /// Base Discord Library for Oxide Libraries 
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class BaseDiscordLibrary<T> : BaseDiscordLibrary where T : BaseDiscordLibrary<T>
+    /// <typeparam name="TLibrary"></typeparam>
+    public abstract class BaseDiscordLibrary<TLibrary> : BaseDiscordLibrary where TLibrary : BaseDiscordLibrary<TLibrary>
     {
-        internal static T Instance;
+        internal static TLibrary Instance;
         
         /// <summary>
         /// Constructor
@@ -18,10 +18,10 @@ namespace Oxide.Ext.Discord.Libraries
         {
             if (Instance != null)
             {
-                throw new Exception($"Duplicate Library Instances for type {typeof(T).FullName}");
+                throw new Exception($"Duplicate Library Instances for type {typeof(TLibrary).FullName}");
             }
             
-            Instance = (T)this;
+            Instance = (TLibrary)this;
         }
     }
 }

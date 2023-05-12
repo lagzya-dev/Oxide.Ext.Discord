@@ -15,10 +15,12 @@ using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Users
@@ -28,7 +30,7 @@ namespace Oxide.Ext.Discord.Entities.Users
     /// </summary>
     [JsonConverter(typeof(DiscordUserConverter))]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordUser : ISnowflakeEntity, IDiscordUser
+    public class DiscordUser : ISnowflakeEntity, IDiscordUser, IDebugLoggable
     {
         #region Discord Fields
         ///<inheritdoc cref="IDiscordUser.Id"/>
@@ -527,5 +529,12 @@ namespace Oxide.Ext.Discord.Entities.Users
             }
         }
         #endregion
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Id", Id.ToString());
+            logger.AppendField("Name", FullUserName);
+            logger.AppendField("Bot", IsBot);
+        }
     }
 }

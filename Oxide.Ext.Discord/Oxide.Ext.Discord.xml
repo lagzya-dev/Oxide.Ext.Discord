@@ -132,11 +132,6 @@
             Represents a bot that is connected to discord
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.BotClient.ActiveBots">
-            <summary>
-            List of active bots by bot API key
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.BotClient.Servers">
             <summary>
             All the servers that this bot is in
@@ -188,13 +183,6 @@
             Creates a new bot client for the given settings
             </summary>
             <param name="settings"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.AddDiscordClient(Oxide.Ext.Discord.DiscordClient)">
-            <summary>
-            Gets or creates a new bot client for the given discord client
-            </summary>
-            <param name="client">Client to use for creating / loading the bot client</param>
-            <returns>Bot client that is created or already exists</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.ConnectWebSocket">
             <summary>
@@ -17780,6 +17768,18 @@
             <param name="type">Type to get default value for</param>
             <returns>default value for <see cref="T:System.Type"/></returns>
         </member>
+        <member name="F:Oxide.Ext.Discord.Factory.BotClientFactory._activeBots">
+            <summary>
+            List of active bots by bot API key
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.BotClientFactory.InitializeBotClient(Oxide.Ext.Discord.DiscordClient)">
+            <summary>
+            Gets or creates a new bot client for the given discord client
+            </summary>
+            <param name="client">Client to use for creating / loading the bot client</param>
+            <returns>Bot client that is created or already exists</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Factory.DiscordClientFactory">
             <summary>
             Factory for creating <see cref="T:Oxide.Ext.Discord.DiscordClient"/>
@@ -18989,7 +18989,7 @@
             <summary>
             Base Discord Library for Oxide Libraries 
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="TLibrary"></typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary`1.#ctor">
             <summary>
@@ -19364,27 +19364,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamIds">
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamIdsEnumerable">
             <summary>
             Returns Steam ID's for all linked players
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetDiscordIds">
-            <summary>
-            Returns Discord ID's for all linked players
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamToDiscordIds">
-            <summary>
-            Returns a Hash with a Steam ID key and Discord ID value
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetDiscordToSteamIds">
-            <summary>
-            Returns a Hash with a Discord ID key and Steam ID value
             </summary>
             <returns></returns>
         </member>
@@ -20416,12 +20398,12 @@
             Represents a channel subscription for a plugin
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription.#ctor(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription.#ctor(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage})">
             <summary>
             Constructor
             </summary>
+            <param name="client">Discord Client for the subscription</param>
             <param name="channelId">ID of the channel</param>
-            <param name="plugin">Plugin the subscription is for</param>
             <param name="callback">Callback when the channel message is sent</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscription.CanRun(Oxide.Ext.Discord.BotClient)">
@@ -20456,7 +20438,7 @@
             </summary>
             <returns>True if there are any subscriptions; False otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.AddChannelSubscription(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage})">
+        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.AddChannelSubscription(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Messages.DiscordMessage})">
             <summary>
             Allows a plugin to add a subscription to a discord channel
             </summary>
@@ -21649,7 +21631,7 @@
             Factory for creating DiscordLoggers
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.DiscordLoggerFactory.GetLogger(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Logging.DiscordLogLevel,Oxide.Ext.Discord.Logging.IDiscordLoggingConfig)">
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLoggerFactory.CreateLogger(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Logging.DiscordLogLevel,Oxide.Ext.Discord.Logging.IDiscordLoggingConfig)">
             <summary>
             Returns a newly created <see cref="T:Oxide.Ext.Discord.Logging.DiscordLogger"/> for a given plugin
             </summary>
@@ -22897,9 +22879,9 @@
             Buckets with Routes we don't know the Hash of yet
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.RouteToHash">
+        <member name="F:Oxide.Ext.Discord.Rest.RestHandler.RouteToBucketId">
             <summary>
-            Route to Bucket Hash
+            Route to Bucket ID
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.RestHandler._logger">

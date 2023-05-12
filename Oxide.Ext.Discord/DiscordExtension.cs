@@ -89,7 +89,7 @@ namespace Oxide.Ext.Discord
         {
             DiscordConfig.LoadConfig();
             
-            GlobalLogger = DiscordLoggerFactory.Instance.GetExtensionLogger(string.IsNullOrEmpty(TestVersion) ? DiscordLogLevel.Warning : DiscordLogLevel.Verbose);
+            GlobalLogger = DiscordLoggerFactory.Instance.CreateExtensionLogger(string.IsNullOrEmpty(TestVersion) ? DiscordLogLevel.Warning : DiscordLogLevel.Verbose);
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
 
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>

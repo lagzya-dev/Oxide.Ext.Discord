@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates;
@@ -53,7 +54,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [DiscordApplicationCommand(AppCommandKeys.DeCommand, AppCommandKeys.DeleteAppCommand, AppCommandKeys.AppCommandGroup)]
         private void HandleDeleteApplicationCommand(DiscordInteraction interaction, InteractionDataParsed parsed)
         {
-            DiscordClient client = BotClient.GetByApplicationId(interaction.ApplicationId)?.GetFirstClient();
+            DiscordClient client = BotClientFactory.Instance.GetByApplicationId(interaction.ApplicationId)?.GetFirstClient();
             if (client == null)
             {
                 return;
@@ -109,7 +110,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             string search = (string)focused.Value;
             CommandCache cache = _commandCache[interaction.ApplicationId];
             InteractionAutoCompleteBuilder builder = new InteractionAutoCompleteBuilder(interaction);
-            BotClient client = BotClient.GetByApplicationId(interaction.ApplicationId);
+            BotClient client = BotClientFactory.Instance.GetByApplicationId(interaction.ApplicationId);
             if (client == null)
             {
                 return;
@@ -160,7 +161,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             });
         }
 
-        public PlaceholderData GetPlaceholderData()
+        private PlaceholderData GetPlaceholderData()
         {
             return DiscordPlaceholders.Instance.CreateData(this);
         }

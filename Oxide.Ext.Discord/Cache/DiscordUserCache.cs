@@ -31,6 +31,11 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns>Cached <see cref="DiscordUser"/></returns>
         public DiscordUser GetOrCreate(Snowflake userId)
         {
+            if (!userId.IsValid())
+            {
+                return null;
+            }
+            
             if (!_internalCache.TryGetValue(userId, out DiscordUser user))
             {
                 user = new DiscordUser

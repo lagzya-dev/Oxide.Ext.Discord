@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
@@ -18,7 +19,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
     /// <summary>
     /// Represents a library for discord commands
     /// </summary>
-    public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>
+    public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>, IDebugLoggable
     {
         /// <summary>
         /// Available command prefixes used by the extension
@@ -395,6 +396,16 @@ namespace Oxide.Ext.Discord.Libraries.Command
             
             DiscordPool.Internal.FreeList(dmCommands);
             DiscordPool.Internal.FreeList(guildCommands);
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.StartArray("Commands");
+            foreach (BaseCommand command in GetCommands())
+            {
+                logger.AppendObject(string.Empty, command);
+            }
+            logger.EndArray();
         }
     }
 }

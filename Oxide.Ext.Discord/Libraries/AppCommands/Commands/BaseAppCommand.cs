@@ -2,13 +2,15 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
 {
     /// <summary>
     /// Represents a Base Registered Application Command
     /// </summary>
-    internal abstract class BaseAppCommand
+    internal abstract class BaseAppCommand : IDebugLoggable
     {
         internal Plugin Plugin;
         internal Snowflake AppId;
@@ -31,7 +33,9 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
         }
         
         public abstract void HandleCommand(DiscordInteraction interaction);
-        
+
+        public abstract void LogDebug(DebugLogger logger);
+
         public bool IsForPlugin(Plugin plugin)
         {
             return Plugin == null || !Plugin.IsLoaded || Plugin == plugin;

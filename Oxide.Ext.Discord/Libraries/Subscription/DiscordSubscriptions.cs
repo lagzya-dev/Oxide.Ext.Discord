@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
@@ -16,7 +17,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     /// Represents Discord Subscriptions Oxide Library
     /// Allows for plugins to subscribe to discord channels
     /// </summary>
-    public class DiscordSubscriptions : BaseDiscordLibrary<DiscordSubscriptions>
+    public class DiscordSubscriptions : BaseDiscordLibrary<DiscordSubscriptions>, IDebugLoggable
     {
         private readonly Hash<Snowflake, Hash<string, DiscordSubscription>> _subscriptions = new Hash<Snowflake, Hash<string, DiscordSubscription>>();
 
@@ -50,12 +51,13 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <exception cref="ArgumentNullException">Exception if plugin or message is null</exception>
         /// <exception cref="ArgumentException">Exception if Channel ID is not valid</exception>
         [LibraryFunction(nameof(AddChannelSubscription))]
-        public void AddChannelSubscription(Plugin plugin, Snowflake channelId, Action<DiscordMessage> message)
+        public void AddChannelSubscription(DiscordClient client, Snowflake channelId, Action<DiscordMessage> message)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (client == null) throw new ArgumentNullException(nameof(client));
             if (message == null) throw new ArgumentNullException(nameof(message));
-            
+
+            Plugin plugin = client.Plugin;
             _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(AddChannelSubscription)} {{0}} added subscription to channel {{1}}", plugin.FullName(), channelId);
 
             Hash<string, DiscordSubscription> channelSubs = _subscriptions[channelId];
@@ -65,7 +67,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
                 _subscriptions[channelId] = channelSubs;
             }
 
-            channelSubs[plugin.Id()] = new DiscordSubscription(channelId, plugin, message);
+            channelSubs[plugin.Id()] = new DiscordSubscription(client, channelId, message);
         }
         
         /// <summary>
@@ -171,9 +173,19 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             }
         }
 
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.StartArray("Subscriptions");
+            foreach (DiscordSubscription sub in Instance.GetSubscriptions())
+            {
+                logger.AppendObject(string.Empty, sub);
+            }
+            logger.EndArray();
+        }
+        
         internal IEnumerable<DiscordSubscription> GetSubscriptions()
         {
-            foreach (Hash<string,DiscordSubscription> pluginSubscriptions in _subscriptions.Values)
+            foreach (Hash<string, DiscordSubscription> pluginSubscriptions in _subscriptions.Values)
             {
                 foreach (DiscordSubscription subscription in pluginSubscriptions.Values)
                 {

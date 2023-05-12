@@ -7,6 +7,8 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Factory;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.AppCommands.Handlers;
 using Oxide.Ext.Discord.Libraries.Pooling;
@@ -19,7 +21,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
     /// Application Command Oxide Library handler
     /// Routes Application Commands to their respective hook method handlers instead of having to manually handle it.
     /// </summary>
-    public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>
+    public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>, IDebugLoggable
     {
         private readonly Hash<Snowflake, ApplicationCommandHandler> _slashCommands = new Hash<Snowflake, ApplicationCommandHandler>();
         private readonly Hash<Snowflake, MessageComponentHandler> _componentCommands = new Hash<Snowflake, MessageComponentHandler>();
@@ -400,6 +402,30 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                     yield return command;
                 }
             }
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.StartArray("Application Commands");
+            foreach (BotClient client in BotClientFactory.Instance.Clients)
+            {
+                DiscordApplication application = client.Application;
+                if (application != null)
+                {
+                    logger.AppendField("Application ID", application.Id.ToString());
+                    logger.StartArray("Application Commands");
+                    foreach (BaseAppCommand command in GetCommands(application.Id))
+                    {
+                        logger.AppendObject(string.Empty, command);
+                    }
+                    logger.EndArray();
+                }
+                else
+                {
+                    logger.AppendNullField("Application ID");
+                }
+            }
+            logger.EndArray();
         }
     }
 }

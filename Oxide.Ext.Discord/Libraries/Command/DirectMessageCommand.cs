@@ -1,6 +1,8 @@
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.Command
 {
@@ -14,6 +16,13 @@ namespace Oxide.Ext.Discord.Libraries.Command
         public override bool CanHandle(DiscordMessage message, DiscordChannel channel)
         {
             return !message.GuildId.HasValue;
+        }
+
+        public override void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Name", Name);
+            logger.AppendField("Plugin", Plugin.FullName());
+            logger.AppendField("Type", "DM Command");
         }
     }
 }

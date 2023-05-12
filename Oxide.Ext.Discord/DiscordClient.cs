@@ -2,6 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Extensions;
@@ -85,7 +86,7 @@ namespace Oxide.Ext.Discord
         public void Connect(DiscordSettings settings)
         {
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
-            Logger = DiscordLoggerFactory.Instance.GetExtensionLogger(settings.LogLevel);
+            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(settings.LogLevel);
             
             if (string.IsNullOrEmpty(Settings.ApiToken))
             {
@@ -111,7 +112,7 @@ namespace Oxide.Ext.Discord
             
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
             
-            BotClient.AddDiscordClient(this);
+            BotClientFactory.Instance.InitializeBotClient(this);
         }
 
         /// <summary>
@@ -119,8 +120,8 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public void Disconnect()
         {
-            Bot?.Rest.OnClientClosed(this);
             Bot?.RemoveClient(this);
+            Bot = null;
         }
 
         /// <summary>
@@ -135,16 +136,13 @@ namespace Oxide.Ext.Discord
         internal void OnBotAdded(BotClient bot)
         {
             Bot = bot;
-            if (bot.Application != null)
-            {
-                DiscordAppCommand.Instance.RegisterApplicationCommands(bot.Application, Plugin);
-            }
         }
 
-        internal void OnBotRemoved()
+        internal void RegisterApplicationCommands(DiscordApplication application)
         {
-            Bot = null;
+            DiscordAppCommand.Instance.RegisterApplicationCommands(application, Plugin);
         }
+        
         #region Websocket Commands
         /// <summary>
         /// Used to request guild members from discord for a specific guild
@@ -178,14 +176,8 @@ namespace Oxide.Ext.Discord
         {
             try
             {
-                Disconnect();
-
                 DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CloseClient)} Closing DiscordClient for plugin {{0}}", PluginName);
-                // ReSharper disable once SuspiciousTypeConversion.Global
-                if (Plugin != null && Plugin.IsLoaded && Plugin is IDiscordPlugin discordPlugin)
-                {
-                    discordPlugin.Client = null;
-                }
+                Disconnect();
             }
             catch (Exception ex)
             {
@@ -194,6 +186,13 @@ namespace Oxide.Ext.Discord
             finally
             {
                 DiscordClientFactory.Instance.RemoveClient(this);
+                
+                // ReSharper disable once SuspiciousTypeConversion.Global
+                if (Plugin != null && Plugin.IsLoaded && Plugin is IDiscordPlugin discordPlugin)
+                {
+                    discordPlugin.Client = null;
+                }
+                
                 Plugin = null;
             }
         }

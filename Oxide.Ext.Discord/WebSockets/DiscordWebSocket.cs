@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Callbacks.Websockets;
@@ -7,6 +8,7 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gatway;
 using Oxide.Ext.Discord.Entities.Gatway.Commands;
 using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
@@ -17,7 +19,7 @@ namespace Oxide.Ext.Discord.WebSockets
     /// <summary>
     /// Represents a websocket that connects to discord
     /// </summary>
-    public class DiscordWebSocket
+    public class DiscordWebSocket : IDebugLoggable
     {
         /// <summary>
         /// The current session ID for the connected bot
@@ -404,6 +406,20 @@ namespace Oxide.Ext.Discord.WebSockets
         public bool IsDisconnected()
         {
             return Handler.SocketState == SocketState.Disconnected;
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendFieldEnum("State", Handler.SocketState);
+
+            IReadOnlyCollection<WebSocketCommand> pendingCommands = Commands.GetPendingCommands();
+            logger.StartArray("Pending Commands");
+            foreach (WebSocketCommand command in pendingCommands)
+            {
+                logger.AppendField("Plugin", command.Client.PluginName);
+                logger.AppendFieldEnum("Code", command.Payload.OpCode);
+            }
+            logger.EndArray();
         }
 
     }

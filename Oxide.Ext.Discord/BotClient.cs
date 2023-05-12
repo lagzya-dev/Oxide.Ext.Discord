@@ -16,7 +16,9 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Hooks;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
@@ -30,13 +32,8 @@ namespace Oxide.Ext.Discord
     /// <summary>
     /// Represents a bot that is connected to discord
     /// </summary>
-    public class BotClient
+    public class BotClient : IDebugLoggable
     {
-        /// <summary>
-        /// List of active bots by bot API key
-        /// </summary>
-        public static readonly Hash<string, BotClient> ActiveBots = new Hash<string, BotClient>();
-
         /// <summary>
         /// All the servers that this bot is in
         /// </summary>
@@ -107,49 +104,23 @@ namespace Oxide.Ext.Discord
                 Intents = settings.Intents
             };
 
-            Logger = DiscordLoggerFactory.Instance.GetExtensionLogger(Settings.LogLevel);
+            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(Settings.LogLevel);
             
             Initialized = true;
 
             JsonSettings = new JsonSerializerSettings
             {
-                NullValueHandling = NullValueHandling.Ignore
+                NullValueHandling = NullValueHandling.Ignore,
+                Formatting = Formatting.None
             };
-            JsonSerializer = JsonSerializer.Create(JsonSettings);
             
-            JsonSerializer.Formatting = Formatting.None;
+            JsonSerializer = JsonSerializer.Create(JsonSettings);
 
             Hooks = new DiscordHook(Logger);
             Rest = new RestHandler(this, Logger);
             WebSocket = new DiscordWebSocket(this, Logger);
             
             Clients = new ReadOnlyCollection<DiscordClient>(_clients);
-        }
-
-        /// <summary>
-        /// Gets or creates a new bot client for the given discord client
-        /// </summary>
-        /// <param name="client">Client to use for creating / loading the bot client</param>
-        /// <returns>Bot client that is created or already exists</returns>
-        public static void AddDiscordClient(DiscordClient client)
-        {
-            try
-            {
-                BotClient bot = ActiveBots[client.Settings.ApiToken];
-                if (bot == null)
-                {
-                    DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Creating new BotClient");
-                    bot = new BotClient(client.Settings);
-                    ActiveBots[client.Settings.ApiToken] = bot;
-                }
-
-                bot.AddClient(client);
-                DiscordExtension.GlobalLogger.Debug($"{nameof(BotClient)}.{nameof(AddDiscordClient)} Adding {{0}} client to bot {{1}}", client.PluginName, bot.BotUser?.FullUserName);
-            }
-            catch (Exception ex)
-            {
-                DiscordExtension.GlobalLogger.Exception($"{nameof(BotClient)}.{nameof(AddDiscordClient)} An error occured adding {{0}} client", client.PluginName, ex);
-            }
         }
 
         /// <summary>
@@ -188,7 +159,6 @@ namespace Oxide.Ext.Discord
                 WebSocket = new DiscordWebSocket(this, Logger);
                 WebSocket.Connect();
             }
-           
         }
         
         internal void ResetRestApi()
@@ -209,14 +179,22 @@ namespace Oxide.Ext.Discord
         internal void ShutdownBot()
         {
             Logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
-            ActiveBots.Remove(Settings.ApiToken);
+            BotClientFactory.Instance.RemoveBot(this);
             Initialized = false;
-            WebSocket?.Shutdown();
-            WebSocket = null;
-            Rest?.Shutdown();
-            Rest = null;
+            try
+            {
+                DiscordAppCommand.Instance.OnBotShutdown(this);
+                WebSocket?.Shutdown();
+                WebSocket = null;
+                Rest?.Shutdown();
+                Rest = null;
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception($"{nameof(BotClient)}.{nameof(ShutdownBot)} An error occured shutting down the bot.", ex);
+            }
+                
             _readyData = null;
-            DiscordAppCommand.Instance.OnBotShutdown(this);
         }
 
         /// <summary>
@@ -230,6 +208,11 @@ namespace Oxide.Ext.Discord
             _clients.RemoveAll(c => c == client);
             _clients.Add(client);
             client.OnBotAdded(this);
+            if (Application != null)
+            {
+                client.RegisterApplicationCommands(Application);
+            }
+
             Hooks.AddPlugin(client);
             
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
@@ -291,7 +274,7 @@ namespace Oxide.Ext.Discord
         /// <param name="client">Client to remove from bot client</param>
         public void RemoveClient(DiscordClient client)
         {
-            client.OnBotRemoved();
+            Rest.OnClientClosed(client);
             _clients.Remove(client);
             Hooks.RemovePlugin(client.Plugin);
             Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} {{0}} Client Removed", client.PluginName);
@@ -361,6 +344,7 @@ namespace Oxide.Ext.Discord
         {
             Application = ready.Application;
             BotUser = ready.User;
+            BotClientFactory.Instance.SetApplicationId(this, Application.Id);
             
             if (_readyData == null)
             {
@@ -377,13 +361,12 @@ namespace Oxide.Ext.Discord
                     }
                 }
 
+                DiscordExtensionCore.Instance.RegisterApplicationCommands(this);
+                
                 for (int index = 0; index < _clients.Count; index++)
                 {
-                    DiscordClient client = _clients[index];
-                    DiscordAppCommand.Instance.RegisterApplicationCommands(Application, client.Plugin);
+                    _clients[index].RegisterApplicationCommands(Application);
                 }
-                
-                DiscordExtensionCore.Instance.RegisterApplicationCommands(this);
             }
             
             _readyData = ready;
@@ -559,17 +542,18 @@ namespace Oxide.Ext.Discord
         }
         #endregion
 
-        internal static BotClient GetByApplicationId(Snowflake appId)
+        public void LogDebug(DebugLogger logger)
         {
-            foreach (BotClient client in ActiveBots.Values)
-            {
-                if (client.Application?.Id == appId)
-                {
-                    return client;
-                }
-            }
-
-            return null;
+            logger.AppendField("Client", Settings.GetHiddenToken());
+            logger.AppendField("Initialized", Initialized);
+            logger.AppendFieldEnum("Log Level", Settings.LogLevel);
+            logger.AppendFieldEnum("Intents", Settings.Intents);
+            logger.AppendField("Plugins", GetClientPluginList());
+            
+            logger.AppendObject("Bot", BotUser);
+            logger.AppendObject("Application", Application);
+            logger.AppendObject("Websocket", WebSocket);
+            logger.AppendObject("REST API", Rest);
         }
     }
 }
