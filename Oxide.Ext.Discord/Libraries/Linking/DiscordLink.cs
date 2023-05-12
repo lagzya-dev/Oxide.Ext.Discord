@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
@@ -9,7 +10,9 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Linking
@@ -17,11 +20,16 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     /// <summary>
     /// Represents a library for discord linking
     /// </summary>
-    public class DiscordLink : BaseDiscordLibrary<DiscordLink>
+    public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
     {
-        private readonly Hash<string, Snowflake> _steamIdToDiscordId = new Hash<string, Snowflake>();
-        private readonly Hash<Snowflake, string> _discordIdToSteamId = new Hash<Snowflake, string>();
-        private readonly HashSet<string> _steamIds = new HashSet<string>();
+        public readonly ReadOnlyDictionary<PlayerId, Snowflake> SteamToDiscordIds;
+        public readonly ReadOnlyDictionary<Snowflake, PlayerId> DiscordIdToSteamId;
+        public readonly ReadonlyHashSet<PlayerId> SteamIds;
+        public readonly ReadonlyHashSet<Snowflake> DiscordIds;
+        
+        private readonly Hash<PlayerId, Snowflake> _steamIdToDiscordId = new Hash<PlayerId, Snowflake>();
+        private readonly Hash<Snowflake, PlayerId> _discordIdToSteamId = new Hash<Snowflake, PlayerId>();
+        private readonly HashSet<PlayerId> _steamIds = new HashSet<PlayerId>();
         private readonly HashSet<Snowflake> _discordIds = new HashSet<Snowflake>();
         private readonly Hash<string, IDictionary<string, Snowflake>> _pluginLinks = new Hash<string, IDictionary<string, Snowflake>>();
 
@@ -36,6 +44,10 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         internal DiscordLink(ILogger logger)
         {
             _logger = logger;
+            SteamToDiscordIds = new ReadOnlyDictionary<PlayerId, Snowflake>(_steamIdToDiscordId);
+            DiscordIdToSteamId = new ReadOnlyDictionary<Snowflake, PlayerId>(_discordIdToSteamId);
+            SteamIds = new ReadonlyHashSet<PlayerId>(_steamIds);
+            DiscordIds = new ReadonlyHashSet<Snowflake>(_discordIds);
         }
 
         /// <summary>
@@ -71,9 +83,10 @@ namespace Oxide.Ext.Discord.Libraries.Linking
 
             foreach (KeyValuePair<string,Snowflake> pair in data)
             {
-                _steamIdToDiscordId[pair.Key] = pair.Value;
-                _discordIdToSteamId[pair.Value] = pair.Key;
-                _steamIds.Add(pair.Key);
+                PlayerId id = new PlayerId(pair.Key);
+                _steamIdToDiscordId[id] = pair.Value;
+                _discordIdToSteamId[pair.Value] = id;
+                _steamIds.Add(id);
                 _discordIds.Add(pair.Value);
             }
             
@@ -93,9 +106,10 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             {
                 foreach (KeyValuePair<string,Snowflake> linkData in pluginData)
                 {
-                    _steamIdToDiscordId.Remove(linkData.Key);
+                    PlayerId id = new PlayerId(linkData.Key);
+                    _steamIdToDiscordId.Remove(id);
                     _discordIdToSteamId.Remove(linkData.Value);
-                    _steamIds.Remove(linkData.Key);
+                    _steamIds.Remove(id);
                     _discordIds.Remove(linkData.Value);
                 }
             }
@@ -121,60 +135,42 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="steamId">Steam ID of the player</param>
         /// <returns>True if the ID is linked; false otherwise</returns>
-        public bool IsLinked(string steamId)
-        {
-            return GetSteamToDiscordIds()?.ContainsKey(steamId) ?? false;
-        }
-        
+        public bool IsLinked(string steamId) => _steamIdToDiscordId.ContainsKey(new PlayerId(steamId));
+
         /// <summary>
         /// Returns if the specified ID is linked
         /// </summary>
         /// <param name="discordId">Discord ID of the player</param>
         /// <returns>True if the ID is linked; false otherwise</returns>
-        public bool IsLinked(Snowflake discordId)
-        {
-            return GetDiscordToSteamIds()?.ContainsKey(discordId) ?? false;
-        }
-        
+        public bool IsLinked(Snowflake discordId) => _discordIdToSteamId.ContainsKey(discordId);
+
         /// <summary>
         /// Returns if the specified ID is linked
         /// </summary>
         /// <param name="player">Player to check if linked</param>
         /// <returns>True if the player is linked; false otherwise</returns>
-        public bool IsLinked(IPlayer player)
-        {
-            return IsLinked(player.Id);
-        }
-        
+        public bool IsLinked(IPlayer player) => IsLinked(player.Id);
+
         /// <summary>
         /// Returns if the specified ID is linked
         /// </summary>
         /// <param name="user">Discord user to check</param>
         /// <returns>True if the user is linked; false otherwise</returns>
-        public bool IsLinked(DiscordUser user)
-        {
-            return IsLinked(user.Id);
-        }
+        public bool IsLinked(DiscordUser user) => IsLinked(user.Id);
 
         /// <summary>
         /// Returns the Steam ID of the given Discord ID if there is a link
         /// </summary>
         /// <param name="discordId">Discord ID to get steam ID for</param>
         /// <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
-        public string GetSteamId(Snowflake discordId)
-        {
-            return GetDiscordToSteamIds()?[discordId];
-        }
-        
+        public string GetSteamId(Snowflake discordId) => _discordIdToSteamId[discordId].Id;
+
         /// <summary>
         /// Returns the Steam ID of the given Discord ID if there is a link
         /// </summary>
         /// <param name="user"><see cref="DiscordUser"/> to get steam Id for</param>
         /// <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
-        public string GetSteamId(DiscordUser user)
-        {
-            return GetSteamId(user.Id);
-        }
+        public string GetSteamId(DiscordUser user) => GetSteamId(user.Id);
 
         /// <summary>
         /// Returns the IPlayer for the given Discord ID
@@ -199,7 +195,13 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
         public Snowflake? GetDiscordId(string steamId)
         {
-            return GetSteamToDiscordIds()?[steamId];
+            Snowflake id = _steamIdToDiscordId[new PlayerId(steamId)];
+            if (!id.IsValid())
+            {
+                return new Snowflake?();
+            }
+
+            return id;
         }
 
         /// <summary>
@@ -207,10 +209,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="player">Player to get Discord ID for</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        public Snowflake? GetDiscordId(IPlayer player)
-        {
-            return GetDiscordId(player.Id);
-        }
+        public Snowflake? GetDiscordId(IPlayer player) => GetDiscordId(player.Id);
 
         /// <summary>
         /// Returns a minimal Discord User
@@ -233,10 +232,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="player">Player to get the Discord User for</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        public DiscordUser GetDiscordUser(IPlayer player)
-        {
-            return GetDiscordUser(player.Id);
-        }
+        public DiscordUser GetDiscordUser(IPlayer player) => GetDiscordUser(player.Id);
 
         /// <summary>
         /// Returns a linked guild member for the matching steam id in the given guild
@@ -270,45 +266,18 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// Returns the number of linked players
         /// </summary>
         /// <returns></returns>
-        public int GetLinkedCount()
-        {
-            return GetSteamToDiscordIds()?.Count ?? 0;
-        }
+        public int GetLinkedCount() => _steamIds.Count;
 
         /// <summary>
         /// Returns Steam ID's for all linked players
         /// </summary>
         /// <returns></returns>
-        public HashSet<string> GetSteamIds()
+        public IEnumerable<string> GetSteamIdsEnumerable()
         {
-            return _steamIds;
-        }
-
-        /// <summary>
-        /// Returns Discord ID's for all linked players
-        /// </summary>
-        /// <returns></returns>
-        public HashSet<Snowflake> GetDiscordIds()
-        {
-            return _discordIds;
-        }
-
-        /// <summary>
-        /// Returns a Hash with a Steam ID key and Discord ID value
-        /// </summary>
-        /// <returns></returns>
-        public Hash<string, Snowflake> GetSteamToDiscordIds()
-        {
-            return _steamIdToDiscordId;
-        }
-
-        /// <summary>
-        /// Returns a Hash with a Discord ID key and Steam ID value
-        /// </summary>
-        /// <returns></returns>
-        public Hash<Snowflake, string> GetDiscordToSteamIds()
-        {
-            return _discordIdToSteamId;
+            foreach (PlayerId id in _steamIds)
+            {
+                yield return id.Id;
+            }
         }
 
         /// <summary>
@@ -337,9 +306,10 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             
             _pluginLinks[plugin.Id()][player.Id] = discord.Id;
 
-            _discordIdToSteamId[discord.Id] = player.Id;
-            _steamIdToDiscordId[player.Id] = discord.Id;
-            _steamIds.Add(player.Id);
+            PlayerId id = new PlayerId(player);
+            _discordIdToSteamId[discord.Id] = id;
+            _steamIdToDiscordId[id] = discord.Id;
+            _steamIds.Add(id);
             _discordIds.Add(discord.Id);
             ServerPlayerCache.Instance.SetPlayer(player);
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
@@ -372,12 +342,24 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlink, player, discord);
 
             _pluginLinks[plugin.Id()].Remove(player.Id);
-            
+
+            PlayerId id = new PlayerId(player);
             _discordIdToSteamId.Remove(discord.Id);
-            _steamIdToDiscordId.Remove(player.Id);
-            _steamIds.Remove(player.Id);
+            _steamIdToDiscordId.Remove(id);
+            _steamIds.Remove(id);
             _discordIds.Remove(discord.Id);
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlinked, player, discord);
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Total Links", _steamIds.Count);
+            logger.StartArray("Plugins");
+            foreach (string plugin in _pluginLinks.Keys)
+            {
+                logger.AppendField("Plugin", plugin);
+            }
+            logger.EndArray();
         }
     }
 }
