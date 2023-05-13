@@ -2,6 +2,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
 
@@ -34,8 +35,6 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
         
         public abstract void HandleCommand(DiscordInteraction interaction);
 
-        public abstract void LogDebug(DebugLogger logger);
-
         public bool IsForPlugin(Plugin plugin)
         {
             return Plugin == null || !Plugin.IsLoaded || Plugin == plugin;
@@ -44,6 +43,16 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
         internal void OnRemoved()
         {
             Plugin = null;
+        }
+
+        protected abstract string GetCommandType();
+
+        public virtual void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Type", GetCommandType());
+            logger.AppendFieldEnum("Interaction Type", Type);
+            logger.AppendField("Plugin", Plugin.FullName());
+            logger.AppendField("Callback", Callback);
         }
     }
 }

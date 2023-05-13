@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Logging
         private int _indent;
 
         public void IncrementIndent() => _indent++;
-        public void DecrementIndent() => _indent = MathExt.Max(_indent, 0);
+        public void DecrementIndent() => _indent = MathExt.Max(_indent - 1, 0);
 
         public void AppendIndent() => _logger.Append(IndentCharacter, _indent);
 
@@ -194,10 +194,10 @@ namespace Oxide.Ext.Discord.Logging
 
         public void EndArray()
         {
+            DecrementIndent();
             AppendIndent();
             _logger.Append("]");
             _logger.AppendLine();
-            DecrementIndent();
         }
         
         public void StartObject(string name)
@@ -215,10 +215,10 @@ namespace Oxide.Ext.Discord.Logging
 
         public void EndObject()
         {
+            DecrementIndent();
             AppendIndent();
             _logger.Append("}");
             _logger.AppendLine();
-            DecrementIndent();
         }
 
         public string ToString() => DiscordPool.Internal.FreeStringBuilderToString(_logger);

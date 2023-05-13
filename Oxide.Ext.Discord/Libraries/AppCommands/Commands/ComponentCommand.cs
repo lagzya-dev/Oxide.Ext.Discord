@@ -1,8 +1,6 @@
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
 
@@ -22,12 +20,12 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
             DiscordHook.CallPluginHook(Plugin, Callback, interaction);
         }
 
+        protected override string GetCommandType() => "Component Command";
+
         public override void LogDebug(DebugLogger logger)
         {
-            logger.AppendField("Type", "Component Command");
+            base.LogDebug(logger);
             logger.AppendField("Command Name", CustomId);
-            logger.AppendField("Interaction Type", EnumCache<InteractionType>.Instance.ToString(Type));
-            logger.AppendField("Plugin", Plugin.FullName());
         }
     }
 }
