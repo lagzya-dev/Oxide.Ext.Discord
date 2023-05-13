@@ -41,14 +41,10 @@ namespace Oxide.Ext.Discord
             }
 
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
-            int first = ApiToken.IndexOf('.');
-            int second = ApiToken.IndexOf('.', first + 1);
 
-            sb.Append('#', first);
-            sb.Append('.');
-            sb.Append('#', second - first);
-            sb.Append('.');
-            sb.Append(ApiToken.Substring(second + 1));
+            int last = ApiToken.LastIndexOf('.') + 1;
+            sb.Append(ApiToken.Substring(0, last));
+            sb.Append('#', ApiToken.Length - last);
 
             _hiddenToken = DiscordPool.Internal.FreeStringBuilderToString(sb);
             return _hiddenToken;
