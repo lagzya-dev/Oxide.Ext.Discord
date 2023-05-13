@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord.Logging
             }
             
             _handlers.Clear();
-            DiscordFileLogger.OnServerShutdown();
+            DiscordFileLoggerFactory.Instance.OnServerShutdown();
         }
     }
 }
