@@ -63,6 +63,6 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <summary>
         /// Indicates if an app has registered global application commands
         /// </summary>
-        ApplicationCommandBadge = 1 << 19,
+        ApplicationCommandBadge = 1 << 23,
     }
 }
