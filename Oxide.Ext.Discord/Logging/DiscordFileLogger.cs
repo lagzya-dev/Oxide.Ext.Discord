@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Oxide.Core;
@@ -16,25 +15,12 @@ namespace Oxide.Ext.Discord.Logging
         private readonly ConcurrentQueue<string> _messages = new ConcurrentQueue<string>();
         private readonly string _logFileName;
         private readonly string _fileLogFormat;
+        private readonly AutoResetEvent _reset;
 
-        private static readonly Thread WriterThread;
-        private static readonly List<DiscordFileLogger> Loggers = new List<DiscordFileLogger>();
-        private static readonly AutoResetEvent Reset = new AutoResetEvent(false);
-        private static bool _exit;
-
-        static DiscordFileLogger()
-        {
-            WriterThread = new Thread(WriteLogThread)
-            {
-                IsBackground = true,
-                Name = nameof(DiscordFileLogger)
-            };
-            WriterThread.Start();
-        }
-        
-        internal DiscordFileLogger(string pluginName, string fileLogFormat)
+        internal DiscordFileLogger(string pluginName, string fileLogFormat, AutoResetEvent reset)
         {
             _fileLogFormat = fileLogFormat;
+            _reset = reset;
             string logPath = Path.Combine(Interface.Oxide.LogDirectory, pluginName);
             if (!Directory.Exists(logPath))
             {
@@ -42,7 +28,6 @@ namespace Oxide.Ext.Discord.Logging
             }
             
             _logFileName = Path.Combine(logPath, $"{pluginName}-{DateTime.Now:yyyy-MM-dd_h-mm-ss-tt}.txt");
-            Loggers.Add(this);
         }
 
         internal void AddMessage(DiscordLogLevel level, string message, Exception ex)
@@ -52,31 +37,10 @@ namespace Oxide.Ext.Discord.Logging
             {
                 _messages.Enqueue(ex.ToString());
             }
+            _reset.Set();
         }
-
-        private static void WriteLogThread()
-        {
-            try
-            {
-                while (!_exit)
-                {
-                    Reset.WaitOne();
-                    for (int index = 0; index < Loggers.Count; index++)
-                    {
-                        DiscordFileLogger logger = Loggers[index];
-                        logger.WriteLog();
-                    }
-                }
-            }
-            catch (ThreadAbortException) { }
-            catch (Exception ex)
-            {
-                DiscordExtension.GlobalLogger.Exception("An exception occured writing log file.", ex);
-                WriteLogThread();
-            }
-        }
-
-        private void WriteLog()
+        
+        internal void WriteLog()
         {
             if (_messages.IsEmpty)
             {
@@ -92,17 +56,10 @@ namespace Oxide.Ext.Discord.Logging
             }
         }
 
-        internal static void OnServerShutdown()
-        {
-            _exit = true;
-            Reset.Set();
-            WriterThread.Join();
-        }
-
         internal void OnShutdown()
         {
             WriteLog();
-            Loggers.Remove(this);
+            
         }
     }
 }
