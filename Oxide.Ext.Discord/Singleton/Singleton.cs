@@ -13,10 +13,21 @@ namespace Oxide.Ext.Discord.Singleton
         /// <summary>
         /// Retrieves the instance of the singleton
         /// </summary>
-        public static T Instance => LazyInit.Value;
+        public static readonly T Instance;
 
-        private static readonly Lazy<T> LazyInit = new Lazy<T>(Create, true);
-        
+        static Singleton()
+        {
+            try 
+            {
+                ConstructorInfo[] constructors = typeof(T).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+                Instance = (T)constructors.Single().Invoke(null);
+            }
+            catch 
+            {
+                throw new Exception($"{typeof(T)} {ErrorMessage}");
+            }
+        }
+
         private const string ErrorMessage = "must have a parameterless constructor and all constructors have to be NonPublic.";
 
         /// <summary>
@@ -27,19 +38,6 @@ namespace Oxide.Ext.Discord.Singleton
         {
             ConstructorInfo[] constructors = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
             if (constructors.Length != 0)
-            {
-                throw new Exception($"{typeof(T)} {ErrorMessage}");
-            }
-        }
-
-        private static T Create() 
-        {
-            try 
-            {
-                ConstructorInfo[] constructors = typeof(T).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                return (T)constructors.Single().Invoke(null);
-            }
-            catch 
             {
                 throw new Exception($"{typeof(T)} {ErrorMessage}");
             }
