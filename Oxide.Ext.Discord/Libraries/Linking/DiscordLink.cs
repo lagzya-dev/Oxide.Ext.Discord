@@ -24,8 +24,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     {
         public readonly ReadOnlyDictionary<PlayerId, Snowflake> SteamToDiscordIds;
         public readonly ReadOnlyDictionary<Snowflake, PlayerId> DiscordIdToSteamId;
-        public readonly ReadonlyHashSet<PlayerId> SteamIds;
-        public readonly ReadonlyHashSet<Snowflake> DiscordIds;
+        public readonly ReadonlySet<PlayerId> SteamIds;
+        public readonly ReadonlySet<Snowflake> DiscordIds;
         
         private readonly Hash<PlayerId, Snowflake> _steamIdToDiscordId = new Hash<PlayerId, Snowflake>();
         private readonly Hash<Snowflake, PlayerId> _discordIdToSteamId = new Hash<Snowflake, PlayerId>();
@@ -46,8 +46,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             _logger = logger;
             SteamToDiscordIds = new ReadOnlyDictionary<PlayerId, Snowflake>(_steamIdToDiscordId);
             DiscordIdToSteamId = new ReadOnlyDictionary<Snowflake, PlayerId>(_discordIdToSteamId);
-            SteamIds = new ReadonlyHashSet<PlayerId>(_steamIds);
-            DiscordIds = new ReadonlyHashSet<Snowflake>(_discordIds);
+            SteamIds = new ReadonlySet<PlayerId>(_steamIds);
+            DiscordIds = new ReadonlySet<Snowflake>(_discordIds);
         }
 
         /// <summary>

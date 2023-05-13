@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 namespace Oxide.Ext.Discord.Types
 {
-    public class ReadonlyHashSet<T> : ISet<T>, IReadOnlyCollection<T>
+    public class ReadonlySet<T> : ISet<T>, IReadOnlyCollection<T>
     {
         private readonly HashSet<T> _set;
 
@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Types
 
         public int Count => _set.Count;
 
-        public ReadonlyHashSet(HashSet<T> set)
+        public ReadonlySet(HashSet<T> set)
         {
             _set = set;
         }
