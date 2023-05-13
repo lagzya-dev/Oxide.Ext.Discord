@@ -9,6 +9,11 @@ namespace Oxide.Ext.Discord.Entities.Channels
     public enum ChannelFlags
     {
         /// <summary>
+        /// Represents no channel flags
+        /// </summary>
+        None = 0,
+        
+        /// <summary>
         /// This thread is pinned to the top of its parent GUILD_FORUM channel
         /// </summary>
         Pinned = 1 << 1,
