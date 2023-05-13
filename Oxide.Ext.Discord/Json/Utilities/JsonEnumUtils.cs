@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Linq;
 using System.Reflection;
 using Oxide.Plugins;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
@@ -66,9 +65,7 @@ namespace Oxide.Ext.Discord.Json.Utilities
             foreach (FieldInfo field in type.GetFields())
             {
                 string name = field.Name;
-                string propertyName = field.GetCustomAttributes(typeof (DescriptionAttribute), true)
-                                           .Cast<DescriptionAttribute>()
-                                           .Select(f => f.Description).SingleOrDefault() ?? field.Name;
+                string propertyName = field.GetCustomAttribute<DescriptionAttribute>()?.Description ?? field.Name;
                 Add(name, propertyName);
             }
         }

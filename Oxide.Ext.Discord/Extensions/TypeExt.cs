@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -30,5 +31,8 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="type">Type to get default value for</param>
         /// <returns>default value for <see cref="Type"/></returns>
         public static object GetDefault(this Type type) => type.IsValueType ? Activator.CreateInstance(type) : null;
+
+        public static T GetAttribute<T>(this Type type, bool inherit) where T : Attribute => type.GetCustomAttribute(typeof(T), inherit) as T;
+        internal static bool HasAttribute<T>(this Type type, bool inherit) where T : Attribute => GetAttribute<T>(type, inherit) != null;
     }
 }

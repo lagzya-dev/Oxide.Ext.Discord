@@ -35,20 +35,14 @@ namespace Oxide.Ext.Discord.Hooks
                 {
                     continue;
                 }
-                
-                object[] attributes = method.GetCustomAttributes(HookMethodAttribute, false);
-                if (!method.IsPrivate && attributes.Length == 0)
+
+                HookMethodAttribute hookMethod = method.GetCustomAttribute<HookMethodAttribute>();
+                if (!method.IsPrivate && hookMethod == null)
                 {
                     continue;
                 }
-
-                string name = method.Name;
-                if (attributes.Length != 0)
-                {
-                    name = ((HookMethodAttribute)attributes[0]).Name;
-                }
-
-                AddPluginHook(client, name);
+                
+                AddPluginHook(client, hookMethod?.Name ?? method.Name);
             }
         }
 

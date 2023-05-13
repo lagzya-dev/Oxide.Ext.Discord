@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Singleton;
 
 namespace Oxide.Ext.Discord.Cache
@@ -11,11 +15,14 @@ namespace Oxide.Ext.Discord.Cache
     /// <typeparam name="T">Enum type</typeparam>
     public class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, IComparable, IFormattable, IConvertible
     {
+        public readonly ReadOnlyCollection<T> Values;
+        
         private readonly Dictionary<T, string> _cachedStrings = new Dictionary<T, string>();
         private readonly Dictionary<T, string> _loweredStrings = new Dictionary<T, string>();
         private readonly Dictionary<T, string> _numberString = new Dictionary<T, string>();
         private readonly Type _type;
-        private readonly T[] _values;
+        private readonly bool _isFlagsEnum;
+        private readonly TypeCode _typeCode;
 
         /// <summary>
         /// Constructor
@@ -23,14 +30,17 @@ namespace Oxide.Ext.Discord.Cache
         private EnumCache()
         {
             _type = typeof(T);
-            _values = Enum.GetValues(_type).Cast<T>().ToArray();
-            for (int index = 0; index < _values.Length; index++)
+            _isFlagsEnum = _type.HasAttribute<FlagsAttribute>(false);
+            T[] values = Enum.GetValues(_type).Cast<T>().ToArray();
+            _typeCode = Convert.GetTypeCode(values[0]);
+            for (int index = 0; index < values.Length; index++)
             {
-                T value = _values[index];
+                T value = values[index];
                 string enumString = value.ToString();
                 _cachedStrings[value] = enumString;
                 _loweredStrings[value] = enumString.ToLower();
             }
+            Values = new ReadOnlyCollection<T>(values);
         }
         
         /// <summary>
@@ -44,7 +54,9 @@ namespace Oxide.Ext.Discord.Cache
             {
                 return str;
             }
-            str = value.ToString();
+
+            str = _isFlagsEnum ? CreateFlagsString(value) : value.ToString();
+            
             _cachedStrings[value] = str;
             return str;
         }
@@ -58,7 +70,7 @@ namespace Oxide.Ext.Discord.Cache
         {
             if (!_loweredStrings.TryGetValue(value, out string str))
             {
-                str = value.ToString().ToLower();
+                str = ToString(value).ToLower();
                 _loweredStrings[value] = str;
             }
             return str;
@@ -80,13 +92,60 @@ namespace Oxide.Ext.Discord.Cache
             return str;
         }
 
-        /// <summary>
-        /// Returns a cached list of Enum Values
-        /// </summary>
-        /// <returns></returns>
-        public IReadOnlyList<T> GetList()
+        private int GetTypeSize()
         {
-            return _values;
+            switch (_typeCode)
+            {
+                case TypeCode.SByte:
+                case TypeCode.Byte:
+                    return 8;
+                case TypeCode.Int16:
+                case TypeCode.UInt16:
+                    return 16;
+                case TypeCode.Int32:
+                case TypeCode.UInt32:
+                    return 32;
+                case TypeCode.Int64:
+                case TypeCode.UInt64:
+                    return 64;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
+        
+        private string CreateFlagsString(T value)
+        {
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+            bool initial = true;
+            int length = GetTypeSize();
+            for (int index = 0; index < length; index++)
+            {
+                ulong enumValue = 1ul << index;
+                if ((value.ToUInt64(null) & enumValue) != 0ul)
+                {
+                    if (!initial)
+                    {
+                        sb.Append(", ");
+                    }
+
+                    initial = false;
+
+                    object converted = Convert.ChangeType(enumValue, _typeCode);
+                    if (Enum.IsDefined(_type, converted))
+                    {
+                        sb.Append(Enum.GetName(_type, converted));
+                    }
+                    else
+                    {
+                        sb.Append("Unknown Value (1 << ");
+                        sb.Append(index);
+                        sb.Append(')');
+                    }
+                }
+            }
+
+            return DiscordPool.Internal.FreeStringBuilderToString(sb);
+        }
+
     }
 }

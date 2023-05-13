@@ -323,35 +323,38 @@ namespace Oxide.Ext.Discord.Libraries.Command
         {
             foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
             {
-                object[] customAttributes = method.GetCustomAttributes(typeof(DirectMessageCommandAttribute), false);
-                if (customAttributes.Length != 0)
+                if (!method.IsPrivate && method.GetCustomAttribute<HookMethodAttribute>() == null)
                 {
-                    DirectMessageCommandAttribute command = (DirectMessageCommandAttribute)customAttributes[0];
-                    if (command.IsLocalized)
+                    continue;
+                }
+                
+                DirectMessageCommandAttribute directCommand = method.GetCustomAttribute<DirectMessageCommandAttribute>(false);
+                if (directCommand != null)
+                {
+                    if (directCommand.IsLocalized)
                     {
-                        AddDirectMessageLocalizedCommand(command.Name, plugin, method.Name);
-                        _logger.Debug("Adding Localized Direct Message Command {0} Method: {1}", command.Name, method.Name);
+                        AddDirectMessageLocalizedCommand(directCommand.Name, plugin, method.Name);
+                        _logger.Debug("Adding Localized Direct Message Command {0} Method: {1}", directCommand.Name, method.Name);
                     }
                     else
                     {
-                        AddDirectMessageCommand(command.Name, plugin, method.Name);
-                        _logger.Debug("Adding Direct Message Command {0} Method: {1}", command.Name, method.Name);
+                        AddDirectMessageCommand(directCommand.Name, plugin, method.Name);
+                        _logger.Debug("Adding Direct Message Command {0} Method: {1}", directCommand.Name, method.Name);
                     }
                 }
                 
-                customAttributes = method.GetCustomAttributes(typeof(GuildCommandAttribute), false);
-                if (customAttributes.Length != 0)
+                GuildCommandAttribute guildCommand = method.GetCustomAttribute<GuildCommandAttribute>(false);
+                if (guildCommand != null)
                 {
-                    GuildCommandAttribute command = (GuildCommandAttribute)customAttributes[0];
-                    if (command.IsLocalized)
+                    if (guildCommand.IsLocalized)
                     {
-                        AddGuildLocalizedCommand(command.Name, plugin, null, method.Name);
-                        _logger.Debug("Adding Localized Guild Command {0} Method: {1}", command.Name, method.Name);
+                        AddGuildLocalizedCommand(guildCommand.Name, plugin, null, method.Name);
+                        _logger.Debug("Adding Localized Guild Command {0} Method: {1}", guildCommand.Name, method.Name);
                     }
                     else
                     {
-                        AddGuildCommand(command.Name, plugin, null, method.Name);
-                        _logger.Debug("Adding Guild Command {0} Method: {1}", command.Name, method.Name);
+                        AddGuildCommand(guildCommand.Name, plugin, null, method.Name);
+                        _logger.Debug("Adding Guild Command {0} Method: {1}", guildCommand.Name, method.Name);
                     }
                 }
             }
