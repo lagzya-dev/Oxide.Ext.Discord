@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
 
             foreach (KeyValuePair<string,Snowflake> pair in data)
             {
-                AddLink(pair.Key, pair.Value);
+                AddLink(new PlayerId(pair.Key), pair.Value);
             }
             
             _logger.Debug("{0} has been registered as a DiscordLink plugin", plugin.Name);
@@ -99,9 +99,9 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             IDictionary<string, Snowflake> pluginData = _pluginLinks[plugin.Name];
             if (pluginData != null)
             {
-                foreach (KeyValuePair<string,Snowflake> linkData in pluginData)
+                foreach (KeyValuePair<string,Snowflake> link in pluginData)
                 {
-                    RemoveLink(link.Key, link.Value);
+                    RemoveLink(new PlayerId(link.Key), link.Value);
                 }
             }
             
@@ -128,7 +128,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <returns>True if the ID is linked; false otherwise</returns>
         public bool IsLinked(string steamId)
         {
-            return _steamIds.Contains(steamId);
+            return _steamIds.Contains(new PlayerId(steamId));
         }
         
         /// <summary>
@@ -192,7 +192,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
         public Snowflake? GetDiscordId(string steamId)
         {
-            return _steamIdToDiscordId.TryGetValue(steamId, out Snowflake id) ? id : new Snowflake?();
+            return _steamIdToDiscordId.TryGetValue(new PlayerId(steamId), out Snowflake id) ? id : new Snowflake?();
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// Returns Steam ID's for all linked players
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetSteamIdsEnumerable()
+        public IEnumerable<string> GetSteamIds()
         {
             foreach (PlayerId id in _steamIds)
             {
@@ -286,12 +286,11 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             {
                 return;
             }
-
-            _pluginLinks[plugin.Title][player.Id] = discord.Id;
             
-            AddLink(player.Id, discord.Id);
-
-            Interface.Oxide.CallHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
+            _pluginLinks[plugin.Title][player.Id] = discord.Id;
+            AddLink(new PlayerId(player.Id), discord.Id);
+            
+            DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
         }
 
         /// <summary>
@@ -311,15 +310,12 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             }
             
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlink, player, discord);
-
+            RemoveLink(new PlayerId(player.Id), discord.Id);
             _pluginLinks[plugin.Title].Remove(player.Id);
-
-            RemoveLink(player.Id, discord.Id);
-
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlinked, player, discord);
         }
         
-        private void AddLink(string playerId, Snowflake userId)
+        private void AddLink(PlayerId playerId, Snowflake userId)
         {
             _steamIdToDiscordId[playerId] = userId;
             _discordIdToSteamId[userId] = playerId;
@@ -327,7 +323,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             _discordIds.Add(userId);
         }
         
-        private void RemoveLink(string playerId, Snowflake userId)
+        private void RemoveLink(PlayerId playerId, Snowflake userId)
         {
             _steamIdToDiscordId.Remove(playerId);
             _discordIdToSteamId.Remove(userId);
@@ -351,6 +347,17 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             }
             
             return true;
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Total Links", _steamIds.Count);
+            logger.StartArray("Plugins");
+            foreach (string plugin in _pluginLinks.Keys)
+            {
+                logger.AppendField("Plugin", plugin);
+            }
+            logger.EndArray();
         }
     }
 }

@@ -782,7 +782,7 @@
             <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(Oxide.Ext.Discord.Entities.Permissions.DiscordColor)">
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddColor(Oxide.Ext.Discord.Entities.DiscordColor)">
             <summary>
             Adds a Discord Color to the embed
             </summary>
@@ -6712,6 +6712,214 @@
             <summary>
             720p
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.DiscordColor">
+            <summary>
+            Represents a Discord Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Default">
+            <summary>
+            Default Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Teal">
+            <summary>
+            Teal Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.DarkTeal">
+            <summary>
+            Dark Teal Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Green">
+            <summary>
+            Green Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.DarkGreen">
+            <summary>
+            Dark Green Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Blue">
+            <summary>
+            Blue Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.DarkBlue">
+            <summary>
+            Dark Blue Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Purple">
+            <summary>
+            Purple Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.DarkPurple">
+            <summary>
+            Dark Purple Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Magenta">
+            <summary>
+            Magenta Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.DarkMagenta">
+            <summary>
+            Dark Magenta Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Gold">
+            <summary>
+            Gold Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.LightOrange">
+            <summary>
+            Light Orange Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Orange">
+            <summary>
+            Orange Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.DarkOrange">
+            <summary>
+            Dark Orange Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Red">
+            <summary>
+            Red Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.DarkRed">
+            <summary>
+            Dark Red Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.LightGrey">
+            <summary>
+            Light Gray Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.LighterGrey">
+            <summary>
+            Lighter Gray Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.DarkGrey">
+            <summary>
+            Dark Gray Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.DarkerGrey">
+            <summary>
+            Darker Gray Role Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Success">
+            <summary>
+            Discord Success Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Warning">
+            <summary>
+            Discord Warning Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Danger">
+            <summary>
+            Discord Danger Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.BlurpleOld">
+            <summary>
+            Discord Old Blurple Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Blurple">
+            <summary>
+            Discord Blurple Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Fuchsia">
+            <summary>
+            Discord Fuchsia Color
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordColor.Color">
+            <summary>
+            uint value of the hex color code
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.#ctor(System.UInt32)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="color">uint value of hex color code</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.#ctor(System.String)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="color">string hex color code</param>
+            <exception cref="T:System.Exception">Throw if color is greater than #FFFFFF</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.#ctor(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="red">Red color (0-255)</param>
+            <param name="green">Green color (0-255)</param>
+            <param name="blue">Blue color (0-255)</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="red">Red color (0-255)</param>
+            <param name="green">Green color (0-255)</param>
+            <param name="blue">Blue color (0-255)</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0 or &gt; 255</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.#ctor(System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="red">Red color (0-255)</param>
+            <param name="green">Green color (0-255)</param>
+            <param name="blue">Blue color (0-255)</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &gt; 255</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="red">Red color (0.0 - 1.0)</param>
+            <param name="green">Green color (0.0 - 1.0)</param>
+            <param name="blue">Blue color (0.0 - 1.0)</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            DiscordColor Constructor
+            </summary>
+            <param name="red">Red color (0.0 - 1.0)</param>
+            <param name="green">Green color (0.0 - 1.0)</param>
+            <param name="blue">Blue color (0.0 - 1.0)</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.ToString">
+            <summary>
+            Returns the color as a string
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Emojis.DefaultReaction">
             <summary>
@@ -14565,214 +14773,6 @@
             Message is a Guild Application Premium Subscription
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordColor">
-            <summary>
-            Represents a Discord Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Default">
-            <summary>
-            Default Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Teal">
-            <summary>
-            Teal Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkTeal">
-            <summary>
-            Dark Teal Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Green">
-            <summary>
-            Green Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkGreen">
-            <summary>
-            Dark Green Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Blue">
-            <summary>
-            Blue Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkBlue">
-            <summary>
-            Dark Blue Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Purple">
-            <summary>
-            Purple Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkPurple">
-            <summary>
-            Dark Purple Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Magenta">
-            <summary>
-            Magenta Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkMagenta">
-            <summary>
-            Dark Magenta Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Gold">
-            <summary>
-            Gold Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.LightOrange">
-            <summary>
-            Light Orange Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Orange">
-            <summary>
-            Orange Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkOrange">
-            <summary>
-            Dark Orange Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Red">
-            <summary>
-            Red Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkRed">
-            <summary>
-            Dark Red Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.LightGrey">
-            <summary>
-            Light Gray Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.LighterGrey">
-            <summary>
-            Lighter Gray Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkGrey">
-            <summary>
-            Dark Gray Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.DarkerGrey">
-            <summary>
-            Darker Gray Role Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Success">
-            <summary>
-            Discord Success Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Warning">
-            <summary>
-            Discord Warning Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Danger">
-            <summary>
-            Discord Danger Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.BlurpleOld">
-            <summary>
-            Discord Old Blurple Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Blurple">
-            <summary>
-            Discord Blurple Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Fuchsia">
-            <summary>
-            Discord Fuchsia Color
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.Color">
-            <summary>
-            uint value of the hex color code
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.UInt32)">
-            <summary>
-            DiscordColor Constructor
-            </summary>
-            <param name="color">uint value of hex color code</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.String)">
-            <summary>
-            DiscordColor Constructor
-            </summary>
-            <param name="color">string hex color code</param>
-            <exception cref="T:System.Exception">Throw if color is greater than #FFFFFF</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Byte,System.Byte,System.Byte)">
-            <summary>
-            DiscordColor Constructor
-            </summary>
-            <param name="red">Red color (0-255)</param>
-            <param name="green">Green color (0-255)</param>
-            <param name="blue">Blue color (0-255)</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            DiscordColor Constructor
-            </summary>
-            <param name="red">Red color (0-255)</param>
-            <param name="green">Green color (0-255)</param>
-            <param name="blue">Blue color (0-255)</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0 or &gt; 255</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.UInt32,System.UInt32,System.UInt32)">
-            <summary>
-            DiscordColor Constructor
-            </summary>
-            <param name="red">Red color (0-255)</param>
-            <param name="green">Green color (0-255)</param>
-            <param name="blue">Blue color (0-255)</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &gt; 255</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Single,System.Single,System.Single)">
-            <summary>
-            DiscordColor Constructor
-            </summary>
-            <param name="red">Red color (0.0 - 1.0)</param>
-            <param name="green">Green color (0.0 - 1.0)</param>
-            <param name="blue">Blue color (0.0 - 1.0)</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.#ctor(System.Double,System.Double,System.Double)">
-            <summary>
-            DiscordColor Constructor
-            </summary>
-            <param name="red">Red color (0.0 - 1.0)</param>
-            <param name="green">Green color (0.0 - 1.0)</param>
-            <param name="blue">Blue color (0.0 - 1.0)</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if any of the colors are &lt; 0.0 or &gt; 1.0</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Permissions.DiscordColor.ToString">
-            <summary>
-            Returns the color as a string
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>
@@ -17438,7 +17438,7 @@
             Extensions for Discord Color
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.DiscordColorExt.ToHex(Oxide.Ext.Discord.Entities.Permissions.DiscordColor)">
+        <member name="M:Oxide.Ext.Discord.Extensions.DiscordColorExt.ToHex(Oxide.Ext.Discord.Entities.DiscordColor)">
             <summary>
             Returns the color as a hex color code
             </summary>
@@ -19375,7 +19375,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamIdsEnumerable">
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamIds">
             <summary>
             Returns Steam ID's for all linked players
             </summary>
