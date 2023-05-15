@@ -1,5 +1,5 @@
 using System.Collections.Concurrent;
-using Oxide.Ext.Discord.Entities.Gatway.Commands;
+using Oxide.Ext.Discord.Entities.Gateway.Commands;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.RateLimits

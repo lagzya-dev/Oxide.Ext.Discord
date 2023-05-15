@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Entities.Gateway.Events;
 using Oxide.Ext.Discord.Entities.Guilds.Onboarding;
 using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
 using Oxide.Ext.Discord.Entities.Integrations;

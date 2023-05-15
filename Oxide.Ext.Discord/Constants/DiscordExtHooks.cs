@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Oxide.Ext.Discord.Entities.Gatway;
+using Oxide.Ext.Discord.Entities.Gateway;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Constants
