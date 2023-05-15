@@ -8,9 +8,9 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Interfaces.Types;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
@@ -22,10 +22,10 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     /// </summary>
     public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
     {
-        public readonly ReadOnlyDictionary<PlayerId, Snowflake> SteamToDiscordIds;
-        public readonly ReadOnlyDictionary<Snowflake, PlayerId> DiscordIdToSteamId;
-        public readonly ReadonlySet<PlayerId> SteamIds;
-        public readonly ReadonlySet<Snowflake> DiscordIds;
+        public readonly IReadOnlyDictionary<PlayerId, Snowflake> SteamToDiscordIds;
+        public readonly IReadOnlyDictionary<Snowflake, PlayerId> DiscordIdToSteamId;
+        public readonly IReadonlySet<PlayerId> SteamIds;
+        public readonly IReadonlySet<Snowflake> DiscordIds;
         
         private readonly Hash<PlayerId, Snowflake> _steamIdToDiscordId = new Hash<PlayerId, Snowflake>();
         private readonly Hash<Snowflake, PlayerId> _discordIdToSteamId = new Hash<Snowflake, PlayerId>();
@@ -126,21 +126,15 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="steamId">Steam ID of the player</param>
         /// <returns>True if the ID is linked; false otherwise</returns>
-        public bool IsLinked(string steamId)
-        {
-            return _steamIds.Contains(new PlayerId(steamId));
-        }
-        
+        public bool IsLinked(string steamId) => _steamIds.Contains(new PlayerId(steamId));
+
         /// <summary>
         /// Returns if the specified ID is linked
         /// </summary>
         /// <param name="discordId">Discord ID of the player</param>
         /// <returns>True if the ID is linked; false otherwise</returns>
-        public bool IsLinked(Snowflake discordId)
-        {
-            return _discordIds.Contains(discordId);
-        }
-        
+        public bool IsLinked(Snowflake discordId) => _discordIds.Contains(discordId);
+
         /// <summary>
         /// Returns if the specified ID is linked
         /// </summary>

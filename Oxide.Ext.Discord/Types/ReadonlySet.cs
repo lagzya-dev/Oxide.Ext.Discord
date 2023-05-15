@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Oxide.Ext.Discord.Interfaces.Types;
+
 namespace Oxide.Ext.Discord.Types
 {
-    public class ReadonlySet<T> : ISet<T>, IReadOnlyCollection<T>
+    public class ReadonlySet<T> : IReadonlySet<T>
     {
-        private readonly HashSet<T> _set;
-
-        private const string ReadonlyError = "Readonly HashSet cannot be modifed";
-        
         public bool IsReadOnly => true;
 
         public int Count => _set.Count;
+        
+        private readonly HashSet<T> _set;
 
         public ReadonlySet(HashSet<T> set)
         {
@@ -34,24 +33,8 @@ namespace Oxide.Ext.Discord.Types
 
         public bool SetEquals(IEnumerable<T> other) => _set.SetEquals(other);
 
-        public void Clear() => throw new NotSupportedException(ReadonlyError);
-
         public bool Contains(T item) => _set.Contains(item);
 
         public void CopyTo(T[] array, int arrayIndex) => _set.CopyTo(array, arrayIndex);
-
-        public bool Add(T item) => throw new NotSupportedException(ReadonlyError);
-
-        void ICollection<T>.Add(T item) => throw new NotSupportedException(ReadonlyError);
-
-        public void UnionWith(IEnumerable<T> other) => throw new NotSupportedException(ReadonlyError);
-
-        public void IntersectWith(IEnumerable<T> other) => throw new NotSupportedException(ReadonlyError);
-
-        public void ExceptWith(IEnumerable<T> other) => throw new NotSupportedException(ReadonlyError);
-
-        public void SymmetricExceptWith(IEnumerable<T> other) => throw new NotSupportedException(ReadonlyError);
-        
-        public bool Remove(T item) => throw new NotSupportedException(ReadonlyError);
     }
 }
