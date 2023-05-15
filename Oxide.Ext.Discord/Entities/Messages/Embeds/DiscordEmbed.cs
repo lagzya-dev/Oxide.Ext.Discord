@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Permissions;
 
 namespace Oxide.Ext.Discord.Entities.Messages.Embeds
 {

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 
 namespace Oxide.Ext.Discord.Builders

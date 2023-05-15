@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Exceptions.Entities.Permissions;
 using Oxide.Ext.Discord.Json.Converters;
 
-namespace Oxide.Ext.Discord.Entities.Permissions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a Discord Color

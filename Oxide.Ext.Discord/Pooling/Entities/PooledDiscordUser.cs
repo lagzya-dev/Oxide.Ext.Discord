@@ -1,5 +1,4 @@
 ﻿using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 
 namespace Oxide.Ext.Discord.Pooling.Entities

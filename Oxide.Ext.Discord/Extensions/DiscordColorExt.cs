@@ -1,4 +1,4 @@
-﻿using Oxide.Ext.Discord.Entities.Permissions;
+﻿using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Extensions
 {

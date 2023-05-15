@@ -1,6 +1,4 @@
-﻿using Oxide.Ext.Discord.Entities.Permissions;
-
-namespace Oxide.Ext.Discord.Entities.Users
+﻿namespace Oxide.Ext.Discord.Entities.Users
 {
     /// <summary>
     /// Represents the fields for a DiscordUser
