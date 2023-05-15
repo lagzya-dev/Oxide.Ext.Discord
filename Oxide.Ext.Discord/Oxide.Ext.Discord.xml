@@ -170,7 +170,7 @@
         <member name="P:Oxide.Ext.Discord.BotClient.IsFullyLoaded">
             <summary>
             Returns if the bot has fully loaded.
-            All guilds are loaded and if <see cref="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMembers"/> is specified all guild members have been loaded
+            All guilds are loaded and if <see cref="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildMembers"/> is specified all guild members have been loaded
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.BotClient.Clients">
@@ -227,12 +227,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.BotClient.SendWebSocketCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+        <member name="M:Oxide.Ext.Discord.BotClient.SendWebSocketCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode,System.Object)">
             <summary>
             Sends a websocket command
             </summary>
             <param name="client">Client sending the command</param>
-            <param name="opCode"><see cref="T:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode"/> OP Code for the command</param>
+            <param name="opCode"><see cref="T:Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode"/> OP Code for the command</param>
             <param name="data">Command Payload</param>
         </member>
         <member name="M:Oxide.Ext.Discord.BotClient.GetGuild(System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
@@ -1783,12 +1783,6 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.GetList">
-            <summary>
-            Returns a cached list of Enum Values
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Cache.ServerPlayerCache">
             <summary>
             Cache for server <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/>
@@ -2995,7 +2989,7 @@
             </summary>
             <param name="plugin">Plugin that will own this discord client</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.Connect(System.String,Oxide.Ext.Discord.Entities.Gatway.GatewayIntents)">
+        <member name="M:Oxide.Ext.Discord.DiscordClient.Connect(System.String,Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
             <summary>
             Starts a connection to discord with the given apiKey and intents
             </summary>
@@ -3019,19 +3013,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.RequestGuildMembers(Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand)">
+        <member name="M:Oxide.Ext.Discord.DiscordClient.RequestGuildMembers(Oxide.Ext.Discord.Entities.Gateway.Commands.GuildMembersRequestCommand)">
             <summary>
             Used to request guild members from discord for a specific guild
             </summary>
             <param name="request">Request for guild members</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.UpdateVoiceState(Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateVoiceStatusCommand)">
+        <member name="M:Oxide.Ext.Discord.DiscordClient.UpdateVoiceState(Oxide.Ext.Discord.Entities.Gateway.Commands.UpdateVoiceStatusCommand)">
             <summary>
             Used to update the voice state for the bot
             </summary>
             <param name="voiceState"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.UpdateStatus(Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand)">
+        <member name="M:Oxide.Ext.Discord.DiscordClient.UpdateStatus(Oxide.Ext.Discord.Entities.Gateway.Commands.UpdatePresenceCommand)">
             <summary>
             Used to update the bots status in discord
             </summary>
@@ -3112,7 +3106,7 @@
         <member name="F:Oxide.Ext.Discord.DiscordSettings.Intents">
             <summary>
             Intents that your bot needs to work
-            See <see cref="T:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents"/>
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.DiscordSettings.GetHiddenToken">
@@ -3121,14 +3115,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordSettings.HasIntents(Oxide.Ext.Discord.Entities.Gatway.GatewayIntents)">
+        <member name="M:Oxide.Ext.Discord.DiscordSettings.HasIntents(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
             <summary>
             Returns if the settings has the given intents
             </summary>
             <param name="intents">Intents to be compared against</param>
             <returns>True if settings has the given intents; False otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordSettings.HasAnyIntent(Oxide.Ext.Discord.Entities.Gatway.GatewayIntents)">
+        <member name="M:Oxide.Ext.Discord.DiscordSettings.HasAnyIntent(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
             <summary>
             Returns if the settings has any intent specified
             </summary>
@@ -3883,6 +3877,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetApplicationIconUrl">
             <summary>
             Returns the URL for the applications Icon
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetApplicationCoverUrl">
+            <summary>
+            Returns the URL for the application cover
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.HasApplicationFlag(Oxide.Ext.Discord.Entities.Applications.ApplicationFlags)">
@@ -5171,6 +5170,11 @@
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelFlags">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/channel#channel-object-channel-flags">Channel Flags</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelFlags.None">
+            <summary>
+            Represents no channel flags
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelFlags.Pinned">
@@ -6830,1146 +6834,1146 @@
         <member name="M:Oxide.Ext.Discord.Entities.Emojis.EmojiUpdate.Validate">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.CommandPayload">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.CommandPayload">
             <summary>
             Represents a command payload
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.OpCode">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.CommandPayload.OpCode">
             <summary>
             Command Code for the payload
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.Payload">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.CommandPayload.Payload">
             <summary>
             Payload data
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.CreatePayload(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+        <member name="M:Oxide.Ext.Discord.Entities.Gateway.CommandPayload.CreatePayload(Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode,System.Object)">
             <summary>
-            Creates a <see cref="T:Oxide.Ext.Discord.Entities.Gatway.CommandPayload"/> for the web socket
+            Creates a <see cref="T:Oxide.Ext.Discord.Entities.Gateway.CommandPayload"/> for the web socket
             </summary>
             <param name="code">OP Code for the command</param>
             <param name="payload">Payload for the command</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.Init(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+        <member name="M:Oxide.Ext.Discord.Entities.Gateway.CommandPayload.Init(Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode,System.Object)">
             <summary>
             Initializes the pooled command payload
             </summary>
             <param name="code">OP Code for the command</param>
             <param name="payload">Payload for the command</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.CommandPayload.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Entities.Gateway.CommandPayload.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.ClientStatus">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Commands.ClientStatus">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#client-status-object">Client Status Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.ClientStatus.Desktop">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.ClientStatus.Desktop">
             <summary>
             The user's status set for an active desktop (Windows, Linux, Mac) application session
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.ClientStatus.Mobile">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.ClientStatus.Mobile">
             <summary>
             The user's status set for an active mobile (iOS, Android) application session
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.ClientStatus.Web">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.ClientStatus.Web">
             <summary>
             The user's status set for an active web (browser, bot account) application session
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes">Gateway Opcodes</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode.Heartbeat">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode.Heartbeat">
             <summary>
             Maintains an active gateway connection
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode.Identify">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode.Identify">
             <summary>
             Starts a new session during the initial handshake.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode.PresenceUpdate">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode.PresenceUpdate">
             <summary>
             Update the client's status.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode.VoiceStateUpdate">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode.VoiceStateUpdate">
             <summary>
             Used to join/leave or move between voice channels.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode.Resume">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode.Resume">
             <summary>
             Resume a previous session that was disconnected.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode.RequestGuildMembers">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode.RequestGuildMembers">
             <summary>
             Request information about offline guild members in a large guild.
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Commands.GuildMembersRequestCommand">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#request-guild-members">Request Guild Members</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.GuildMembersRequestCommand.GuildId">
             <summary>
             ID of the guild to get members for
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand.Query">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.GuildMembersRequestCommand.Query">
             <summary>
             String that username starts with, or an empty string to return all members
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand.Limit">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.GuildMembersRequestCommand.Limit">
             <summary>
             Maximum number of members to send matching the query;
             a limit of 0 can be used with an empty string query to return all members
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand.Presences">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.GuildMembersRequestCommand.Presences">
             <summary>
             Used to specify if we want the presences of the matched members
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand.UserIds">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.GuildMembersRequestCommand.UserIds">
             <summary>
             Used to specify which users you wish to fetch
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.GuildMembersRequestCommand.Nonce">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.GuildMembersRequestCommand.Nonce">
             <summary>
             Nonce to identify the Guild Members Chunk response (Up to 25 characters)
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Commands.IdentifyCommand">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#identify">Identify</a> Command
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.Token">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.IdentifyCommand.Token">
             <summary>
             Authentication token
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.Properties">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.IdentifyCommand.Properties">
             <summary>
             Connection properties
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.Compress">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.IdentifyCommand.Compress">
             <summary>
             Whether this connection supports compression of packets
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.LargeThreshold">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.IdentifyCommand.LargeThreshold">
             <summary>
             Value between 50 and 250, total number of members where the gateway will stop sending offline members in the guild member list
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.Shard">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.IdentifyCommand.Shard">
             <summary>
             Used for Guild Sharding
             See <a href="https://discord.com/developers/docs/topics/gateway#sharding">Guild Sharding</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.PresenceUpdate">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.IdentifyCommand.PresenceUpdate">
             <summary>
             Presence structure for initial presence information
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.IdentifyCommand.Intents">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.IdentifyCommand.Intents">
             <summary>
             The Gateway Intents you wish to receive
             See <a href="https://discord.com/developers/docs/topics/gateway#gateway-intents">Gateway Intents</a>
-            See <see cref="T:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents"/>
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.ConnectionProperties">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Commands.ConnectionProperties">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties">Identify Connection Properties</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.ConnectionProperties.OperatingSystem">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.ConnectionProperties.OperatingSystem">
             <summary>
             Your operating system
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.ConnectionProperties.Browser">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.ConnectionProperties.Browser">
             <summary>
             Your library name
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.ConnectionProperties.Device">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.ConnectionProperties.Device">
             <summary>
             Your library name
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.ResumeSessionCommand">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Commands.ResumeSessionCommand">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#resume">Resume</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.ResumeSessionCommand.Token">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.ResumeSessionCommand.Token">
             <summary>
             Session token
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.ResumeSessionCommand.SessionId">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.ResumeSessionCommand.SessionId">
             <summary>
             Session ID
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.ResumeSessionCommand.Sequence">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.ResumeSessionCommand.Sequence">
             <summary>
             Last sequence number received
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdatePresenceCommand">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#update-presence">Update Status</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand.Status">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdatePresenceCommand.Status">
             <summary>
             The user's new status
             <see cref="T:Oxide.Ext.Discord.Entities.Users.UserStatusType"/>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand.Activities">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdatePresenceCommand.Activities">
             <summary>
             The user's activities (Required)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand.Since">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdatePresenceCommand.Since">
             <summary>
             Unix time (in milliseconds) of when the client went idle, or null if the client is not idle
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdatePresenceCommand.Afk">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdatePresenceCommand.Afk">
             <summary>
             Whether or not the client is afk
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateVoiceStatusCommand">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdateVoiceStatusCommand">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#update-voice-state">Update Voice State</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateVoiceStatusCommand.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdateVoiceStatusCommand.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateVoiceStatusCommand.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdateVoiceStatusCommand.ChannelId">
             <summary>
             ID of the voice channel client wants to join (null if disconnecting)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateVoiceStatusCommand.SelfMute">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdateVoiceStatusCommand.SelfMute">
             <summary>
             Is the client muted
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Commands.UpdateVoiceStatusCommand.SelfDeaf">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Commands.UpdateVoiceStatusCommand.SelfDeaf">
             <summary>
             Is the client deafened
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand">
             <summary>
             Represents a command to be sent over the web socket
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.Client">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand.Client">
             <summary>
             Client requesting the command
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.Payload">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand.Payload">
             <summary>
             Payload for the command
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.CreateCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+        <member name="M:Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand.CreateCommand(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode,System.Object)">
             <summary>
-            Creates a new <see cref="T:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand"/>
+            Creates a new <see cref="T:Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand"/>
             </summary>
             <param name="client">Client for the command</param>
-            <param name="code"><see cref="T:Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode"/> For the command</param>
+            <param name="code"><see cref="T:Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode"/> For the command</param>
             <param name="payload">Payload for the command</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.EventPayload">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.EventPayload">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#payloads">Gateway Payload Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.OpCode">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.EventPayload.OpCode">
             <summary>
             Op Code for the payload
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.DispatchCode">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.EventPayload.DispatchCode">
             <summary>
             The event name for this payload
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.Data">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.EventPayload.Data">
             <summary>
             Event data
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.EventPayload.Sequence">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.EventPayload.Sequence">
             <summary>
             Sequence number, used for resuming sessions and heartbeats
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.GetData``1">
+        <member name="M:Oxide.Ext.Discord.Entities.Gateway.EventPayload.GetData``1">
             <summary>
             Returns the Data as {T}
             </summary>
             <typeparam name="T">Type to convert Data to</typeparam>
             <returns>Data converted to {T}</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.EventPayload.EnterPool">
+        <member name="M:Oxide.Ext.Discord.Entities.Gateway.EventPayload.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution-auto-moderation-action-execution-event-fields">Auto Moderation Action Execution Event</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.GuildId">
             <summary>
             Id of the guild in which action was executed
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.Action">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.Action">
             <summary>
             The action which was executed
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.RuleId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.RuleId">
             <summary>
             Id of the rule which action belongs to
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.RuleTriggerType">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.RuleTriggerType">
             <summary>
             The <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType"/> of rule which was triggered
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.UserId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.UserId">
             <summary>
             Id of the user which generated the content which triggered the rule
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.MessageId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.MessageId">
             <summary>
             Id of any user message which content belongs to
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.AlertSystemMessageId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.AlertSystemMessageId">
             <summary>
             The id of any system auto moderation messages posted as a result of this action
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.Content">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.Content">
             <summary>
             The user generated text content
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.MatchedKeyword">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.MatchedKeyword">
             <summary>
             The word or phrase configured in the rule that triggered the rule
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.AutoModActionExecutionEvent.MatchedContent">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.AutoModActionExecutionEvent.MatchedContent">
             <summary>
             The substring in content that triggered the rule
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ChannelPinsUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.ChannelPinsUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#channel-pins-update">Channel Pins Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ChannelPinsUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ChannelPinsUpdatedEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ChannelPinsUpdatedEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ChannelPinsUpdatedEvent.ChannelId">
             <summary>
             The id of the channel
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ChannelPinsUpdatedEvent.LastPinTimestamp">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ChannelPinsUpdatedEvent.LastPinTimestamp">
             <summary>
             The time at which the most recent pinned message was pinned
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayEventCode">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayEventCode">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes">Gateway Opcodes</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayEventCode.Dispatch">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayEventCode.Dispatch">
             <summary>
             An event was dispatched.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayEventCode.Heartbeat">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayEventCode.Heartbeat">
             <summary>
             Fired periodically by the client to keep the connection alive.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayEventCode.Reconnect">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayEventCode.Reconnect">
             <summary>
             You should attempt to reconnect and resume immediately.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayEventCode.InvalidSession">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayEventCode.InvalidSession">
             <summary>
             The session has been invalidated. You should reconnect and identify/resume accordingly.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayEventCode.Hello">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayEventCode.Hello">
             <summary>
             Sent immediately after connecting, contains the heartbeat_interval to use.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayEventCode.HeartbeatAcknowledge">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayEventCode.HeartbeatAcknowledge">
             <summary>
             Sent in response to receiving a heartbeat to acknowledge that it has been received.
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayHelloEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayHelloEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#hello">Hello</a>
             Sent on connection to the websocket. Defines the heartbeat interval that the client should heartbeat to.
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayHelloEvent.HeartbeatInterval">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayHelloEvent.HeartbeatInterval">
             <summary>
             The interval (in milliseconds) the client should heartbeat with
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#ready">Ready</a>
             The ready event is dispatched when a client has completed the initial handshake with the gateway (for new sessions)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.Version">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.Version">
             <summary>
             Gateway version
             See <a href="https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions">Gateway Version</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.User">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.User">
             <summary>
             Information about the user including email
             See <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.Guilds">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.Guilds">
             <summary>
             The guilds the user is in
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.SessionId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.SessionId">
             <summary>
             Used for resuming connections
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.ResumeSessionUrl">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.ResumeSessionUrl">
             <summary>
             Websocket URL to use when resuming the session
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.Shard">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.Shard">
             <summary>
             The shard information associated with this session, if sent when identifying
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.Application">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.Application">
             <summary>
             Contains id and flags
-            See <see cref="P:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayReadyEvent.Application"/>
+            See <see cref="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.Application"/>
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GatewayResumedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayResumedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#resumed">Resumed</a>
             The resumed event is dispatched when a client has sent a resume payload to the gateway (for resuming existing sessions).
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildEmojisUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildEmojisUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-emojis-update">Guild Emojis Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildEmojisUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildEmojisUpdatedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildEmojisUpdatedEvent.Emojis">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildEmojisUpdatedEvent.Emojis">
             <summary>
             List of emojis
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildIntegrationsUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildIntegrationsUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-integrations-update">Guild Integrations Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildIntegrationsUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildIntegrationsUpdatedEvent.GuildId">
             <summary>
             ID of the guild whose integrations were updated
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberAddedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberAddedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-member-add">Guild Member Add</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberAddedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberAddedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberBannedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberBannedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-ban-add">Guild Ban Add</a> Event
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-ban-remove">Guild Ban Remove</a> Event
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberBannedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberBannedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberBannedEvent.User">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberBannedEvent.User">
             <summary>
             The banned / unbanned user
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberRemovedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberRemovedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-member-remove">Guild Member Remove</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberRemovedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberRemovedEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberRemovedEvent.User">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberRemovedEvent.User">
             <summary>
             The user who was removed
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMembersChunkEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMembersChunkEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-members-chunk">Guild Members Chunk</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMembersChunkEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMembersChunkEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMembersChunkEvent.Members">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMembersChunkEvent.Members">
             <summary>
             Set of guild members
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMembersChunkEvent.ChunkIndex">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMembersChunkEvent.ChunkIndex">
             <summary>
             The chunk index in the expected chunks for this response (0 &lt;= chunk_index &lt; chunk_count)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMembersChunkEvent.ChunkCount">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMembersChunkEvent.ChunkCount">
             <summary>
             The total number of expected chunks for this response
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMembersChunkEvent.NotFound">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMembersChunkEvent.NotFound">
             <summary>
             If passing an invalid id to REQUEST_GUILD_MEMBERS, it will be returned here
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMembersChunkEvent.Presences">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMembersChunkEvent.Presences">
             <summary>
             If passing true to REQUEST_GUILD_MEMBERS, presences of the returned members will be here
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMembersChunkEvent.Nonce">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMembersChunkEvent.Nonce">
             <summary>
             The nonce used in the Guild Members Request
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-member-update">Guild Member Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildMemberUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildMemberUpdatedEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleCreatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildRoleCreatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-role-create">Guild Role Create</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleCreatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildRoleCreatedEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleCreatedEvent.Role">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildRoleCreatedEvent.Role">
             <summary>
             The role created
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleDeletedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildRoleDeletedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-role-delete">Guild Role Delete</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleDeletedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildRoleDeletedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleDeletedEvent.RoleId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildRoleDeletedEvent.RoleId">
             <summary>
             ID of the role
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildRoleUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-role-update">Guild Role Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildRoleUpdatedEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildRoleUpdatedEvent.Role">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildRoleUpdatedEvent.Role">
             <summary>
             The role updated
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildScheduleEventUserAddedEvent">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add-guild-scheduled-event-user-add-event-fields">Guild Scheduled Event User Add Event Fields</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent.GuildScheduledEventId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildScheduleEventUserAddedEvent.GuildScheduledEventId">
             <summary>
             ID of the guild scheduled event
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent.UserId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildScheduleEventUserAddedEvent.UserId">
             <summary>
             ID of the user
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserAddedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildScheduleEventUserAddedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildScheduleEventUserRemovedEvent">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove">Guild Scheduled Event User Remove Event Fields</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent.GuildScheduledEventId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildScheduleEventUserRemovedEvent.GuildScheduledEventId">
             <summary>
             ID of the guild scheduled event
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent.UserId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildScheduleEventUserRemovedEvent.UserId">
             <summary>
             ID of the user
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildScheduleEventUserRemovedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildScheduleEventUserRemovedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.GuildStickersUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GuildStickersUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-stickers-update">Guild Stickers Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildStickersUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildStickersUpdatedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.GuildStickersUpdatedEvent.Stickers">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GuildStickersUpdatedEvent.Stickers">
             <summary>
             List of emojis
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationCreatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.IntegrationCreatedEvent">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/topics/gateway#integration-create-integration-create-event-additional-fields">Integration Create Structure</a> 
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationCreatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.IntegrationCreatedEvent.GuildId">
             <summary>
             Guild Id the Integration was created in
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDeletedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.IntegrationDeletedEvent">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/topics/gateway#integration-delete-integration-delete-event-fields">Integration Delete Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDeletedEvent.Id">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.IntegrationDeletedEvent.Id">
             <summary>
             ID of the integration
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDeletedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.IntegrationDeletedEvent.GuildId">
             <summary>
             Guild ID the integration was in
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationDeletedEvent.ApplicationId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.IntegrationDeletedEvent.ApplicationId">
             <summary>
             Application ID of the integration
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.IntegrationUpdatedEvent">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/topics/gateway#integration-update-integration-update-event-additional-fields">Integration Update Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.IntegrationUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.IntegrationUpdatedEvent.GuildId">
             <summary>
             Guild ID the integration was updated In
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#invite-create">Invite Create</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.ChannelId">
             <summary>
             The channel the invite is for
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.Code">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.Code">
             <summary>
             The unique invite code
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.CreatedAt">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.CreatedAt">
             <summary>
             The time at which the invite was created
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.GuildId">
             <summary>
             The guild of the invite
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.Inviter">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.Inviter">
             <summary>
             The user that created the invite
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.MaxAge">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.MaxAge">
             <summary>
             How long the invite is valid for (in seconds)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.MaxUses">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.MaxUses">
             <summary>
             The maximum number of times the invite can be use
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.TargetUser">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.TargetUser">
             <summary>
             The target user for this invite
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.TargetUserType">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.TargetUserType">
             <summary>
             The type of user target for this invite
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.Temporary">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.Temporary">
             <summary>
             Whether or not the invite is temporary (invited users will be kicked on disconnect unless they're assigned a role)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteCreatedEvent.Uses">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteCreatedEvent.Uses">
             <summary>
             How many times the invite has been used (always will be 0)
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.InviteDeletedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.InviteDeletedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#invite-delete">Invite Delete</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteDeletedEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteDeletedEvent.ChannelId">
             <summary>
             The channel of the invite
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteDeletedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteDeletedEvent.GuildId">
             <summary>
             The guild of the invite
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.InviteDeletedEvent.Code">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.InviteDeletedEvent.Code">
             <summary>
             The unique invite code
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.MessageBulkDeletedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.MessageBulkDeletedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#message-delete-bulk">Message Delete Bulk</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageBulkDeletedEvent.Ids">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageBulkDeletedEvent.Ids">
             <summary>
             The ids of the messages
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageBulkDeletedEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageBulkDeletedEvent.ChannelId">
             <summary>
             The id of the channel
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageBulkDeletedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageBulkDeletedEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.MessageDeletedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.MessageDeletedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#message-delete">Message Delete</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageDeletedEvent.Id">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageDeletedEvent.Id">
             <summary>
             The id of the message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageDeletedEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageDeletedEvent.ChannelId">
             <summary>
             The id of the channel
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageDeletedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageDeletedEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionAddedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionAddedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-add">Message Reaction Add</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionAddedEvent.UserId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionAddedEvent.UserId">
             <summary>
             The id of the user
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionAddedEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionAddedEvent.ChannelId">
             <summary>
             The id of the channel
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionAddedEvent.MessageId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionAddedEvent.MessageId">
             <summary>
             The id of the message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionAddedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionAddedEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionAddedEvent.Member">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionAddedEvent.Member">
             <summary>
             The member who reacted if this happened in a guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionAddedEvent.Emoji">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionAddedEvent.Emoji">
             <summary>
             The emoji used to react
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedAllEmojiEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedAllEmojiEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji-message-reaction-remove-emoji">Message Reaction Remove All</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedAllEmojiEvent.Emoji">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedAllEmojiEvent.Emoji">
             <summary>
             Emoji that was removed from the message
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedAllEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedAllEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all">Message Reaction Remove All</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedAllEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedAllEvent.ChannelId">
             <summary>
             The id of the channel
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedAllEvent.MessageId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedAllEvent.MessageId">
             <summary>
             The id of the message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedAllEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedAllEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove">Message Reaction Remove</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedEvent.UserId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedEvent.UserId">
             <summary>
             The id of the user
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedEvent.ChannelId">
             <summary>
             The id of the channel
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedEvent.MessageId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedEvent.MessageId">
             <summary>
             The id of the message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedEvent.GuildId">
             <summary>
             The id of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.MessageReactionRemovedEvent.Emoji">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedEvent.Emoji">
             <summary>
             The emoji removed
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.PresenceUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.PresenceUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#presence-update">Presence Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.PresenceUpdatedEvent.User">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.PresenceUpdatedEvent.User">
             <summary>
             The user presence is being updated for
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.PresenceUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.PresenceUpdatedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.PresenceUpdatedEvent.Status">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.PresenceUpdatedEvent.Status">
             <summary>
             Users status
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.PresenceUpdatedEvent.Activities">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.PresenceUpdatedEvent.Activities">
             <summary>
             User's current activities
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.PresenceUpdatedEvent.ClientStatus">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.PresenceUpdatedEvent.ClientStatus">
             <summary>
             User's platform-dependent status
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadListSyncEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#thread-list-sync-thread-list-sync-event-fields">Thread List Sync</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadListSyncEvent.GuildId">
             <summary>
             The ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.ChannelIds">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadListSyncEvent.ChannelIds">
             <summary>
             The parent channel ids whose threads are being synced. If omitted, then threads were synced for the entire guild. This array may contain channel_ids that have no active threads as well, so you know to clear that data.
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.Threads">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadListSyncEvent.Threads">
             <summary>
             All active threads in the given channels that the current user can access
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadListSyncEvent.Members">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadListSyncEvent.Members">
             <summary>
             All thread member objects from the synced threads for the current user, indicating which threads the current user has been added to
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadMembersUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#thread-members-update-thread-members-update-event-fields">Thread Members Update Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.Id">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadMembersUpdatedEvent.Id">
             <summary>
             The id of the thread
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadMembersUpdatedEvent.GuildId">
             <summary>
             The ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.MemberCount">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadMembersUpdatedEvent.MemberCount">
             <summary>
             The approximate number of members in the thread, capped at 50
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.AddedMembers">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadMembersUpdatedEvent.AddedMembers">
             <summary>
             The users who were added to the thread
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMembersUpdatedEvent.RemovedMemberIds">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadMembersUpdatedEvent.RemovedMemberIds">
             <summary>
             The id of the users who were removed from the thread
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMemberUpdateEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadMemberUpdateEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#thread-member-update">Thread Member Update Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.ThreadMemberUpdateEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.ThreadMemberUpdateEvent.GuildId">
             <summary>
             The ID of the guild
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.TypingStartedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.TypingStartedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#typing-start">Typing Start</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.TypingStartedEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.TypingStartedEvent.ChannelId">
             <summary>
             ID of the channel
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.TypingStartedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.TypingStartedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.TypingStartedEvent.UserId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.TypingStartedEvent.UserId">
             <summary>
             ID of the user
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.TypingStartedEvent.Timestamp">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.TypingStartedEvent.Timestamp">
             <summary>
             Unix time (in seconds) of when the user started typing
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.TypingStartedEvent.Member">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.TypingStartedEvent.Member">
             <summary>
             The member who started typing if this happened in a guild
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.VoiceServerUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.VoiceServerUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#voice-server-update">Voice Server Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.VoiceServerUpdatedEvent.Token">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.VoiceServerUpdatedEvent.Token">
             <summary>
             Voice connection token
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.VoiceServerUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.VoiceServerUpdatedEvent.GuildId">
             <summary>
             The guild this voice server update is for
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.VoiceServerUpdatedEvent.Endpoint">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.VoiceServerUpdatedEvent.Endpoint">
             <summary>
             The voice server host
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Events.WebhooksUpdatedEvent">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.WebhooksUpdatedEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#webhooks-update">Webhooks Update</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.WebhooksUpdatedEvent.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.WebhooksUpdatedEvent.GuildId">
             <summary>
             ID of the guild
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Events.WebhooksUpdatedEvent.ChannelId">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.WebhooksUpdatedEvent.ChannelId">
             <summary>
             ID of the channel
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.Gateway">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.Gateway">
             <summary>
             Represents Discord Gatway Connection Url
             See <a href="https://discord.com/developers/docs/topics/gateway#get-gateway">Get Gateway</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Gateway.Url">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Gateway.Url">
             <summary>
             Gatway URL to use
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Gatway.Gateway.WebsocketUrl">
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Gateway.WebsocketUrl">
             <summary>
             Saved Gateway URL
             Example: wss://gateway.discord.gg/?v=8&amp;encoding=json
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gatway.Gateway.GetGateway(Oxide.Ext.Discord.BotClient,System.Action{Oxide.Ext.Discord.Entities.Gatway.Gateway},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Gateway.Gateway.GetGateway(Oxide.Ext.Discord.BotClient,System.Action{Oxide.Ext.Discord.Entities.Gateway.Gateway},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
             <summary>
             Returns an object with a single valid WSS URL, which the client can use for Connecting.
             Clients should cache this value and only call this endpoint to retrieve a new URL if they are unable to properly establish a connection using the cached version of the URL.
@@ -7979,18 +7983,18 @@
             <param name="callback">Callback with the Gateway response</param>
             <param name="error">API error callback</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents">
+        <member name="T:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#gateway-intents">Gateway Intents</a>
             These are used to indicate which events your bot / application wants to listen to / have access to
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.None">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.None">
             <summary>
             Represents No Intents
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.Guilds">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.Guilds">
             <summary>
             - GUILD_CREATE
             - GUILD_UPDATE
@@ -8013,7 +8017,7 @@
             - STAGE_INSTANCE_DELETE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMembers">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildMembers">
             <summary>
             - GUILD_MEMBER_ADD
             - GUILD_MEMBER_UPDATE
@@ -8021,19 +8025,19 @@
             - THREAD_MEMBERS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildBans">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildBans">
             <summary>
             - GUILD_BAN_ADD
             - GUILD_BAN_REMOVE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildEmojisAndStickers">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildEmojisAndStickers">
             <summary>
             - GUILD_EMOJIS_UPDATE
             - GUILD_STICKERS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildIntegrations">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildIntegrations">
             <summary>
             - GUILD_INTEGRATIONS_UPDATE
             - INTEGRATION_CREATE
@@ -8041,28 +8045,28 @@
             - INTEGRATION_DELETE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildWebhooks">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildWebhooks">
             <summary>
             - WEBHOOKS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildInvites">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildInvites">
             <summary>
             - INVITE_CREATE
             - INVITE_DELETE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildVoiceStates">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildVoiceStates">
             <summary>
             - VOICE_STATE_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildPresences">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildPresences">
             <summary>
             - PRESENCE_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMessages">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildMessages">
             <summary>
             - MESSAGE_CREATE
             - MESSAGE_UPDATE
@@ -8070,7 +8074,7 @@
             - MESSAGE_DELETE_BULK
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMessageReactions">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildMessageReactions">
             <summary>
             - MESSAGE_REACTION_ADD
             - MESSAGE_REACTION_REMOVE
@@ -8078,12 +8082,12 @@
             - MESSAGE_REACTION_REMOVE_EMOJI
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildMessageTyping">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildMessageTyping">
             <summary>
             - TYPING_START
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.DirectMessages">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.DirectMessages">
             <summary>
             - MESSAGE_CREATE
             - MESSAGE_UPDATE
@@ -8091,7 +8095,7 @@
             - CHANNEL_PINS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.DirectMessageReactions">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.DirectMessageReactions">
             <summary>
             - MESSAGE_REACTION_ADD
             - MESSAGE_REACTION_REMOVE
@@ -8099,22 +8103,22 @@
             - MESSAGE_REACTION_REMOVE_EMOJI
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.DirectMessageTyping">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.DirectMessageTyping">
             <summary>
             - TYPING_START
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.MessageContent">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.MessageContent">
             <summary>
             - Guild Message.Content
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.MessageContentIntent">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.MessageContentIntent">
             <summary>
             Old name for GatewayIntents.MessageContent
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.GuildScheduledEvents">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildScheduledEvents">
             <summary>
             - GUILD_SCHEDULED_EVENT_CREATE
             - GUILD_SCHEDULED_EVENT_UPDATE
@@ -8123,14 +8127,14 @@
             - GUILD_SCHEDULED_EVENT_USER_REMOVE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.AutoModerationConfiguration">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.AutoModerationConfiguration">
             <summary>
             - AUTO_MODERATION_RULE_CREATE
             - AUTO_MODERATION_RULE_UPDATE
             - AUTO_MODERATION_RULE_DELETE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gatway.GatewayIntents.AutoModerationExecution">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.AutoModerationExecution">
             <summary>
             - AUTO_MODERATION_ACTION_EXECUTION
             </summary>
@@ -17875,14 +17879,6 @@
             <returns>Url of the User banner</returns>
             <exception cref="T:System.ArgumentException">Thrown if format is Gif</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetChannelIcon(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
-            <summary>
-            Returns the icon for a given channel
-            </summary>
-            <param name="channelId">Channel ID for the Icon</param>
-            <param name="icon">Icon hash for the channel</param>
-            <returns></returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetUserDefaultAvatarUrl(System.String)">
             <summary>
             Returns the Url of the users default avatar
@@ -17919,6 +17915,16 @@
             <returns>Url of the application icon</returns>
             <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetApplicationCoverUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.Images.DiscordImageFormat)">
+            <summary>
+            Returns the url to the application cover
+            </summary>
+            <param name="applicationId">Application ID</param>
+            <param name="coverImage">Icon field from application</param>
+            <param name="format">Format the icon is in</param>
+            <returns>Url of the application icon</returns>
+            <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
+        </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetApplicationAssetUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.Images.DiscordImageFormat)">
             <summary>
             Returns the applications asset icon url
@@ -17929,14 +17935,13 @@
             <returns>Url of the application asset icon</returns>
             <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetAchievementIconUrl(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.Images.DiscordImageFormat)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetAchievementIconUrl(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.String)">
             <summary>
             Returns the Url of the Achievement Icon
             </summary>
             <param name="applicationId">Application ID of the icon</param>
             <param name="achievementId">Achievement ID</param>
             <param name="iconHash">Achievement Icon Hash</param>
-            <param name="format">Format the icon is in</param>
             <returns>Url of the achievement icon</returns>
             <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
         </member>
@@ -17970,14 +17975,12 @@
             <returns>Url to the sticker pack banner</returns>
             <exception cref="T:System.ArgumentException">Thrown if image type is not PNG,JPEG, or WebP</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetSticker(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Images.DiscordImageFormat)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetSticker(Oxide.Ext.Discord.Entities.Stickers.DiscordSticker)">
             <summary>
             Returns the sticker url with the given ID
             </summary>
-            <param name="stickerId">ID of the sticker</param>
-            <param name="format">Format for the sticker to be returned in</param>
+            <param name="sticker">Sticker to get the url for</param>
             <returns>Return url for the sticker</returns>
-            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetRoleIcon(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Images.DiscordImageFormat)">
             <summary>
@@ -18006,6 +18009,14 @@
             <param name="format">Format for the icon to be returned in</param>
             <returns>Return url for the guild member banner</returns>
             <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetChannelIcon(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+            <summary>
+            Returns the icon for a given channel
+            </summary>
+            <param name="channelId">Channel ID for the Icon</param>
+            <param name="icon">Icon hash for the channel</param>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetExtension(Oxide.Ext.Discord.Entities.Images.DiscordImageFormat,System.String)">
             <summary>
@@ -18501,7 +18512,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Json.Converters.EventPayloadConverter">
             <summary>
-            JSON converter for <see cref="T:Oxide.Ext.Discord.Entities.Gatway.EventPayload"/>
+            JSON converter for <see cref="T:Oxide.Ext.Discord.Entities.Gateway.EventPayload"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Json.Converters.EventPayloadConverter.CanWrite">
@@ -18520,7 +18531,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Json.Converters.EventPayloadConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
             <summary>
-            Reads the JSON into a pooled <see cref="T:Oxide.Ext.Discord.Entities.Gatway.EventPayload"/>
+            Reads the JSON into a pooled <see cref="T:Oxide.Ext.Discord.Entities.Gateway.EventPayload"/>
             Populates the Data field with the correct type during deserialization
             </summary>
             <param name="reader"></param>
@@ -22523,12 +22534,12 @@
             Constructor for WebsocketRateLimit
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.FiredRequest(Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand)">
+        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.FiredRequest(Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand)">
             <summary>
             Called when an API request is fired
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.CanFireRequest(Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand)">
+        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.CanFireRequest(Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand)">
             <summary>
             Returns if the client can return the given command.
             This is used to limit plugins to a certain number of websocket commands per rate limit tick
@@ -22950,7 +22961,7 @@
             </summary>
             <typeparam name="T">Type of the singleton</typeparam>
         </member>
-        <member name="P:Oxide.Ext.Discord.Singleton.Singleton`1.Instance">
+        <member name="F:Oxide.Ext.Discord.Singleton.Singleton`1.Instance">
             <summary>
             Retrieves the instance of the singleton
             </summary>
@@ -23030,7 +23041,7 @@
             Shutdowns the websocket completely. Used when bot is being shutdown
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Send(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.Send(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode,System.Object)">
             <summary>
             Send a command to discord over the websocket
             </summary>
@@ -23038,7 +23049,7 @@
             <param name="opCode">Command code to send</param>
             <param name="data">Data to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.SendImmediatelyAsync(Oxide.Ext.Discord.Entities.Gatway.Commands.GatewayCommandCode,System.Object)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.SendImmediatelyAsync(Oxide.Ext.Discord.Entities.Gateway.Commands.GatewayCommandCode,System.Object)">
             <summary>
             Send a command to discord over the websocket
             </summary>
@@ -23548,7 +23559,7 @@
             <param name="webSocket">Websocket to handle commands for</param>
             <param name="logger">Logger for this handler</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gatway.Commands.WebSocketCommand)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketCommandHandler.Enqueue(Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand)">
             <summary>
             Enqueue a payload to be sent over the websocket
             If the websocket is connected it will be sent immediately
@@ -23604,7 +23615,7 @@
             <param name="webSocketId">ID of the web socket</param>
             <param name="reader">Json Reader containing the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gatway.Events.PresenceUpdatedEvent)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.Handlers.WebSocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.Gateway.Events.PresenceUpdatedEvent)">
             <summary>
              * From Discord API docs:
              * The user object within this event can be partial, the only field which must be sent is the id field, everything else is optional.
