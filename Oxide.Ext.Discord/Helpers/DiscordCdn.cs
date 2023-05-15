@@ -2,6 +2,7 @@ using System;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Images;
+using Oxide.Ext.Discord.Entities.Stickers;
 
 namespace Oxide.Ext.Discord.Helpers
 {
@@ -22,16 +23,15 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="format">The format the emoji is in</param>
         /// <returns>Url of the emoji</returns>
         /// <exception cref="ArgumentException">Thrown if format is Jpg or WebP</exception>
-        public static string GetCustomEmojiUrl(Snowflake emojiId, DiscordImageFormat format = DiscordImageFormat.Auto)
+        public static string GetCustomEmojiUrl(Snowflake emojiId, DiscordImageFormat format)
         {
             switch (format)
             {
-                case DiscordImageFormat.Auto:
                 case DiscordImageFormat.Jpg:
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
                 case DiscordImageFormat.Gif:
-                    return $"{CdnUrl}/emojis/{emojiId.ToString()}.{GetExtension(format, emojiId.ToString())}";
+                    return $"{CdnUrl}/emojis/{emojiId.ToString()}.{GetExtension(format)}";
 
                 default:
                     throw new ArgumentException("ImageFormat is not valid for Custom Emoji. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
@@ -73,14 +73,13 @@ namespace Oxide.Ext.Discord.Helpers
         {
             switch (format)
             {
-                case DiscordImageFormat.Auto:
                 case DiscordImageFormat.Jpg:
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
-                    return $"{CdnUrl}/splashes/{guildId.ToString()}/{guildSplash}.{GetExtension(format, guildSplash)}";
+                    return $"{CdnUrl}/splashes/{guildId.ToString()}/{guildSplash}.{GetExtension(format)}";
                 
                 default:
-                    throw new ArgumentException("ImageFormat is not valid for Guild Splash. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                    throw new ArgumentException("ImageFormat is not valid for Guild Splash. Valid types are (Png, Jpeg, WebP)", nameof(format));
             }
         }
         
@@ -147,24 +146,14 @@ namespace Oxide.Ext.Discord.Helpers
                 case DiscordImageFormat.Jpg:
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
+                case DiscordImageFormat.Gif:
                     return $"{CdnUrl}/banners/{userId.ToString()}/{userBanner}.{GetExtension(format, userBanner)}";
                 
                 default:
-                    throw new ArgumentException("ImageFormat is not valid for User Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                    throw new ArgumentException("ImageFormat is not valid for User Banner. Valid types are (Auto, Png, Jpeg, WebP, GIF)", nameof(format));
             }
         }
 
-        /// <summary>
-        /// Returns the icon for a given channel
-        /// </summary>
-        /// <param name="channelId">Channel ID for the Icon</param>
-        /// <param name="icon">Icon hash for the channel</param>
-        /// <returns></returns>
-        public static string GetChannelIcon(Snowflake channelId, string icon)
-        {
-            return $"{CdnUrl}/channel-icons/{channelId.ToString()}/{icon}.png";
-        }
-        
         /// <summary>
         /// Returns the Url of the users default avatar
         /// </summary>
@@ -247,6 +236,29 @@ namespace Oxide.Ext.Discord.Helpers
         }
         
         /// <summary>
+        /// Returns the url to the application cover
+        /// </summary>
+        /// <param name="applicationId">Application ID</param>
+        /// <param name="coverImage">Icon field from application</param>
+        /// <param name="format">Format the icon is in</param>
+        /// <returns>Url of the application icon</returns>
+        /// <exception cref="ArgumentException">Throw if format is Gif</exception>
+        public static string GetApplicationCoverUrl(Snowflake applicationId, string coverImage, DiscordImageFormat format = DiscordImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case DiscordImageFormat.Auto:
+                case DiscordImageFormat.Jpg:
+                case DiscordImageFormat.Png:
+                case DiscordImageFormat.WebP:
+                    return $"{CdnUrl}/app-icons/{applicationId.ToString()}/{coverImage}.{GetExtension(format, coverImage)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for Application Cover. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+            }
+        }
+        
+        /// <summary>
         /// Returns the applications asset icon url
         /// </summary>
         /// <param name="applicationId">Application ID of the icon</param>
@@ -275,22 +287,11 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="applicationId">Application ID of the icon</param>
         /// <param name="achievementId">Achievement ID</param>
         /// <param name="iconHash">Achievement Icon Hash</param>
-        /// <param name="format">Format the icon is in</param>
         /// <returns>Url of the achievement icon</returns>
         /// <exception cref="ArgumentException">Throw if format is Gif</exception>
-        public static string GetAchievementIconUrl(Snowflake applicationId, Snowflake achievementId, string iconHash, DiscordImageFormat format = DiscordImageFormat.Auto)
+        public static string GetAchievementIconUrl(Snowflake applicationId, Snowflake achievementId, string iconHash)
         {
-            switch (format)
-            {
-                case DiscordImageFormat.Auto:
-                case DiscordImageFormat.Jpg:
-                case DiscordImageFormat.Png:
-                case DiscordImageFormat.WebP:
-                    return $"{CdnUrl}/app-assets/{applicationId.ToString()}/achievements/{achievementId.ToString()}/icons/{iconHash}.{GetExtension(format, iconHash)}";
-
-                default:
-                    throw new ArgumentException("ImageFormat is not valid for Achievement Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-            }
+            return $"{CdnUrl}/app-assets/{applicationId.ToString()}/achievements/{achievementId.ToString()}/icons/{iconHash}.png";
         }
         
         /// <summary>
@@ -309,10 +310,10 @@ namespace Oxide.Ext.Discord.Helpers
                 case DiscordImageFormat.Jpg:
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
-                    return $"{CdnUrl}/app-assets/{applicationId.ToString()}/store/{StringCache<ulong>.Instance.ToString(assetId)}.{GetExtension(format, null)}";
+                    return $"{CdnUrl}/app-assets/{applicationId.ToString()}/store/{StringCache<ulong>.Instance.ToString(assetId)}.{GetExtension(format)}";
 
                 default:
-                    throw new ArgumentException("ImageFormat is not valid for Achievement Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                    throw new ArgumentException("ImageFormat is not valid for Store Page Asset Url. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
         }
         
@@ -356,7 +357,7 @@ namespace Oxide.Ext.Discord.Helpers
                 case DiscordImageFormat.Jpg:
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
-                    return $"{CdnUrl}/app-assets/{applicationId.ToString()}/store/{bannerAssetId.ToString()}.{GetExtension(format, bannerAssetId)}";
+                    return $"{CdnUrl}/app-assets/{applicationId.ToString()}/store/{bannerAssetId.ToString()}.{GetExtension(format)}";
 
                 default:
                     throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
@@ -366,22 +367,22 @@ namespace Oxide.Ext.Discord.Helpers
         /// <summary>
         /// Returns the sticker url with the given ID
         /// </summary>
-        /// <param name="stickerId">ID of the sticker</param>
-        /// <param name="format">Format for the sticker to be returned in</param>
+        /// <param name="sticker">Sticker to get the url for</param>
         /// <returns>Return url for the sticker</returns>
-        /// <exception cref="ArgumentException">Thrown if image type is not PNG or Lottie</exception>
-        public static string GetSticker(Snowflake stickerId, DiscordImageFormat format = DiscordImageFormat.Auto)
+        public static string GetSticker(DiscordSticker sticker)
         {
-            switch (format)
+            if (sticker == null) throw new ArgumentNullException(nameof(sticker));
+            switch (sticker.FormatType)
             {
-                case DiscordImageFormat.Auto:
-                case DiscordImageFormat.Png:
-                case DiscordImageFormat.Lottie:
-                case DiscordImageFormat.Gif:
-                    return $"{CdnUrl}/stickers/{stickerId.ToString()}.{GetExtension(format, stickerId)}";
-
+                case StickerFormatType.Png:
+                case StickerFormatType.Apng:
+                    return $"{CdnUrl}/stickers/{sticker.Id.ToString()}.{GetExtension(DiscordImageFormat.Png)}";
+                case StickerFormatType.Lottie:
+                    return $"{CdnUrl}/stickers/{sticker.Id.ToString()}.{GetExtension(DiscordImageFormat.Lottie)}";
+                case StickerFormatType.Gif:
+                    return $"{CdnUrl}/stickers/{sticker.Id.ToString()}.{GetExtension(DiscordImageFormat.Gif)}";
                 default:
-                    throw new ArgumentException("ImageFormat is not valid for Sticker. Valid types are (Auto, Png, Lottie)", nameof(format));
+                    throw new ArgumentException("Sticker does not container a valid format type", nameof(sticker.FormatType));
             }
         }
         
@@ -400,10 +401,10 @@ namespace Oxide.Ext.Discord.Helpers
                 case DiscordImageFormat.Jpg:
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
-                    return $"{CdnUrl}/role-icons/{roleId.ToString()}.{GetExtension(format, roleId)}";
+                    return $"{CdnUrl}/role-icons/{roleId.ToString()}.{GetExtension(format)}";
 
                 default:
-                    throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
+                    throw new ArgumentException("ImageFormat is not valid for Role Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
             }
         }
         
@@ -422,7 +423,7 @@ namespace Oxide.Ext.Discord.Helpers
                 case DiscordImageFormat.Jpg:
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
-                    return $"{CdnUrl}/guild-events/{scheduledEventId.ToString()}/scheduled_event_cover_image.{GetExtension(format, scheduledEventId)}";
+                    return $"{CdnUrl}/guild-events/{scheduledEventId.ToString()}/scheduled_event_cover_image.{GetExtension(format)}";
 
                 default:
                     throw new ArgumentException("ImageFormat is not valid for Guild Scheduled Event Cover. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
@@ -446,11 +447,22 @@ namespace Oxide.Ext.Discord.Helpers
                 case DiscordImageFormat.Png:
                 case DiscordImageFormat.WebP:
                 case DiscordImageFormat.Gif:
-                    return $"{CdnUrl}/guilds/{guildId}/users/{userId}/banners/member_banner.{GetExtension(format, userId)}";
+                    return $"{CdnUrl}/guilds/{guildId.ToString()}/users/{userId.ToString()}/banners/member_banner.{GetExtension(format)}";
 
                 default:
                     throw new ArgumentException("ImageFormat is not valid for Guild Member Banner. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
             }
+        }
+        
+        /// <summary>
+        /// Returns the icon for a given channel
+        /// </summary>
+        /// <param name="channelId">Channel ID for the Icon</param>
+        /// <param name="icon">Icon hash for the channel</param>
+        /// <returns></returns>
+        public static string GetChannelIcon(Snowflake channelId, string icon)
+        {
+            return $"{CdnUrl}/channel-icons/{channelId.ToString()}/{icon}.png";
         }
 
         /// <summary>
@@ -467,10 +479,16 @@ namespace Oxide.Ext.Discord.Helpers
                 format = image.StartsWith("a_") ? DiscordImageFormat.Gif : DiscordImageFormat.Png;
             }
 
+            return GetExtension(format);
+        }
+
+        private static string GetExtension(DiscordImageFormat format)
+        {
             switch (format)
             {
                 case DiscordImageFormat.Jpg:
                     return "jpeg";
+                case DiscordImageFormat.Auto:
                 case DiscordImageFormat.Png:
                     return "png";
                 case DiscordImageFormat.WebP:

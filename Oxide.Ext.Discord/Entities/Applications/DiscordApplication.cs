@@ -155,6 +155,11 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public string GetApplicationIconUrl => DiscordCdn.GetApplicationIconUrl(Id, Icon);
         
         /// <summary>
+        /// Returns the URL for the application cover
+        /// </summary>
+        public string GetApplicationCoverUrl => DiscordCdn.GetApplicationIconUrl(Id, CoverImage);
+        
+        /// <summary>
         /// Returns if the given application has the passed in application flag
         /// If <see cref="Flags"/>  is null false is returned
         /// </summary>

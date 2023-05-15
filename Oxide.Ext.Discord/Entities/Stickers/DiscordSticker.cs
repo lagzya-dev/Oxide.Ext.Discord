@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <summary>
         /// Returns the Url for the sticker
         /// </summary>
-        public string StickerUrl => DiscordCdn.GetSticker(Id);
+        public string StickerUrl => DiscordCdn.GetSticker(this);
         
         /// <summary>
         /// Returns a sticker object for the given sticker ID.
