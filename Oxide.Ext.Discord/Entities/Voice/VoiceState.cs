@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
                 ChannelId = state.ChannelId;
 
             if (state.SessionId != SessionId)
-                SessionId = state.Id;
+                SessionId = state.SessionId;
 
             Deaf = state.Deaf;
             Mute = state.Mute;
