@@ -32,7 +32,6 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         private readonly HashSet<PlayerId> _steamIds = new HashSet<PlayerId>();
         private readonly HashSet<Snowflake> _discordIds = new HashSet<Snowflake>();
         private readonly Hash<string, IDictionary<string, Snowflake>> _pluginLinks = new Hash<string, IDictionary<string, Snowflake>>();
-
         private readonly List<IDiscordLinkPlugin> _linkPlugins = new List<IDiscordLinkPlugin>();
 
         private readonly ILogger _logger;
@@ -83,11 +82,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
 
             foreach (KeyValuePair<string,Snowflake> pair in data)
             {
-                PlayerId id = new PlayerId(pair.Key);
-                _steamIdToDiscordId[id] = pair.Value;
-                _discordIdToSteamId[pair.Value] = id;
-                _steamIds.Add(id);
-                _discordIds.Add(pair.Value);
+                AddLink(pair.Key, pair.Value);
             }
             
             _logger.Debug("{0} has been registered as a DiscordLink plugin", plugin.Name);
@@ -106,11 +101,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             {
                 foreach (KeyValuePair<string,Snowflake> linkData in pluginData)
                 {
-                    PlayerId id = new PlayerId(linkData.Key);
-                    _steamIdToDiscordId.Remove(id);
-                    _discordIdToSteamId.Remove(linkData.Value);
-                    _steamIds.Remove(id);
-                    _discordIds.Remove(linkData.Value);
+                    RemoveLink(link.Key, link.Value);
                 }
             }
             
@@ -135,15 +126,21 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="steamId">Steam ID of the player</param>
         /// <returns>True if the ID is linked; false otherwise</returns>
-        public bool IsLinked(string steamId) => _steamIdToDiscordId.ContainsKey(new PlayerId(steamId));
-
+        public bool IsLinked(string steamId)
+        {
+            return _steamIds.Contains(steamId);
+        }
+        
         /// <summary>
         /// Returns if the specified ID is linked
         /// </summary>
         /// <param name="discordId">Discord ID of the player</param>
         /// <returns>True if the ID is linked; false otherwise</returns>
-        public bool IsLinked(Snowflake discordId) => _discordIdToSteamId.ContainsKey(discordId);
-
+        public bool IsLinked(Snowflake discordId)
+        {
+            return _discordIds.Contains(discordId);
+        }
+        
         /// <summary>
         /// Returns if the specified ID is linked
         /// </summary>
@@ -195,13 +192,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
         public Snowflake? GetDiscordId(string steamId)
         {
-            Snowflake id = _steamIdToDiscordId[new PlayerId(steamId)];
-            if (!id.IsValid())
-            {
-                return new Snowflake?();
-            }
-
-            return id;
+            return _steamIdToDiscordId.TryGetValue(steamId, out Snowflake id) ? id : new Snowflake?();
         }
 
         /// <summary>
@@ -291,28 +282,16 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             if (player == null) throw new ArgumentNullException(nameof(player));
             if (discord == null) throw new ArgumentNullException(nameof(discord));
 
-            // ReSharper disable once SuspiciousTypeConversion.Global
-            if (!(plugin is IDiscordLinkPlugin link))
+            if (!IsValidLinkPlugin(plugin))
             {
-                _logger.Error($"{{0}} tried to link but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.FullName());
                 return;
             }
-            
-            if (!_linkPlugins.Contains(link))
-            {
-                _logger.Error("{0} has not been added as a link plugin and cannot set a link", plugin.FullName());
-                return;
-            }
-            
-            _pluginLinks[plugin.Id()][player.Id] = discord.Id;
 
-            PlayerId id = new PlayerId(player);
-            _discordIdToSteamId[discord.Id] = id;
-            _steamIdToDiscordId[id] = discord.Id;
-            _steamIds.Add(id);
-            _discordIds.Add(discord.Id);
-            ServerPlayerCache.Instance.SetPlayer(player);
-            DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
+            _pluginLinks[plugin.Title][player.Id] = discord.Id;
+            
+            AddLink(player.Id, discord.Id);
+
+            Interface.Oxide.CallHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
         }
 
         /// <summary>
@@ -326,40 +305,52 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             if (player == null) throw new ArgumentNullException(nameof(player));
             if (discord == null) throw new ArgumentNullException(nameof(discord));
             
-            // ReSharper disable once SuspiciousTypeConversion.Global
-            if (!(plugin is IDiscordLinkPlugin link))
+            if (!IsValidLinkPlugin(plugin))
             {
-                _logger.Error($"{{0}} tried to unlink but does not inherit from interface {nameof(IDiscordLinkPlugin)}", plugin.FullName());
-                return;
-            }
-            
-            if (!_linkPlugins.Contains(link))
-            {
-                _logger.Error("{0} has not been added as a link plugin and cannot unlink", plugin.FullName());
                 return;
             }
             
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlink, player, discord);
 
-            _pluginLinks[plugin.Id()].Remove(player.Id);
+            _pluginLinks[plugin.Title].Remove(player.Id);
 
-            PlayerId id = new PlayerId(player);
-            _discordIdToSteamId.Remove(discord.Id);
-            _steamIdToDiscordId.Remove(id);
-            _steamIds.Remove(id);
-            _discordIds.Remove(discord.Id);
+            RemoveLink(player.Id, discord.Id);
+
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlinked, player, discord);
         }
-
-        public void LogDebug(DebugLogger logger)
+        
+        private void AddLink(string playerId, Snowflake userId)
         {
-            logger.AppendField("Total Links", _steamIds.Count);
-            logger.StartArray("Plugins");
-            foreach (string plugin in _pluginLinks.Keys)
+            _steamIdToDiscordId[playerId] = userId;
+            _discordIdToSteamId[userId] = playerId;
+            _steamIds.Add(playerId);
+            _discordIds.Add(userId);
+        }
+        
+        private void RemoveLink(string playerId, Snowflake userId)
+        {
+            _steamIdToDiscordId.Remove(playerId);
+            _discordIdToSteamId.Remove(userId);
+            _steamIds.Remove(playerId);
+            _discordIds.Remove(userId);
+        }
+        
+        private bool IsValidLinkPlugin(Plugin plugin)
+        {
+            IDiscordLinkPlugin link = plugin as IDiscordLinkPlugin;
+            if (link == null)
             {
-                logger.AppendField("Plugin", plugin);
+                _logger.Error($"{plugin.Name} tried to link but is not registered as a link plugin");
+                return false;
             }
-            logger.EndArray();
+
+            if (!_linkPlugins.Contains(link))
+            {
+                _logger.Error($"{plugin.Name} has not been added as a link plugin and cannot set a link");
+                return false;
+            }
+            
+            return true;
         }
     }
 }

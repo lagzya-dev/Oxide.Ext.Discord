@@ -23,6 +23,11 @@ namespace Oxide.Ext.Discord.Libraries.Command
             {
                 return false;
             }
+            
+            if (channel == null)
+            {
+                return true;
+            }
 
             if (_allowedChannels == null || _allowedChannels.Count == 0 || _allowedChannels.Contains(channel.Id))
             {

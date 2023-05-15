@@ -437,7 +437,18 @@ namespace Oxide.Ext.Discord
         /// <returns></returns>
         public DiscordChannel GetChannel(Snowflake channelId, Snowflake? guildId)
         {
-            return guildId.HasValue ? GetGuild(guildId)?.Channels?[channelId] : DirectMessagesByChannelId[channelId];
+            if (guildId.HasValue)
+            {
+                DiscordGuild guild = GetGuild(guildId);
+                if (guild != null)
+                {
+                    return guild.Channels[channelId] ?? guild.Threads[channelId];
+                }
+
+                return null;
+            }
+
+            return DirectMessagesByChannelId[channelId];
         }
 
         /// <summary>
