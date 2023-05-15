@@ -9,9 +9,9 @@ using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Entities.Gatway.Commands;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Entities.Gateway;
+using Oxide.Ext.Discord.Entities.Gateway.Commands;
+using Oxide.Ext.Discord.Entities.Gateway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions;
@@ -179,8 +179,8 @@ namespace Oxide.Ext.Discord
         internal void ShutdownBot()
         {
             Logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
-            BotClientFactory.Instance.RemoveBot(this);
             Initialized = false;
+            BotClientFactory.Instance.RemoveBot(this);
             try
             {
                 DiscordAppCommand.Instance.OnBotShutdown(this);
