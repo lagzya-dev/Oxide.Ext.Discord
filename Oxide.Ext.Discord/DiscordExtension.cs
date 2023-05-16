@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using Oxide.Core;
 using Oxide.Core.Extensions;
@@ -17,7 +18,6 @@ using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using AppDomain = System.AppDomain;
 
 namespace Oxide.Ext.Discord
 {
@@ -94,7 +94,7 @@ namespace Oxide.Ext.Discord
 
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
-                GlobalLogger.Exception("An unhandled exception was thrown!", exception?.ExceptionObject as System.Exception);
+                GlobalLogger.Exception("An unhandled exception was thrown!", exception?.ExceptionObject as Exception);
             };
             
             Manager.RegisterLibrary(nameof(DiscordPool), new DiscordPool(GlobalLogger));

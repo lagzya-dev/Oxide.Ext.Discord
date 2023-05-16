@@ -383,7 +383,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
         }
 
-        internal IEnumerable<BaseAppCommand> GetCommands(Snowflake applicationId)
+        private IEnumerable<BaseAppCommand> GetCommands(Snowflake applicationId)
         {
             ApplicationCommandHandler appHandler = _slashCommands[applicationId];
             if (appHandler != null)
@@ -413,12 +413,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                 if (application != null)
                 {
                     logger.AppendField("Application ID", application.Id);
-                    logger.StartArray("Application Commands");
-                    foreach (BaseAppCommand command in GetCommands(application.Id))
-                    {
-                        logger.AppendObject(string.Empty, command);
-                    }
-                    logger.EndArray();
+                    logger.AppendList("Application Commands", GetCommands(application.Id));
                 }
                 else
                 {

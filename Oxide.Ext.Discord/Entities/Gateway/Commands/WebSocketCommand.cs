@@ -1,4 +1,6 @@
+using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Gateway.Commands
@@ -6,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Gateway.Commands
     /// <summary>
     /// Represents a command to be sent over the web socket
     /// </summary>
-    public class WebSocketCommand : BasePoolable
+    public class WebSocketCommand : BasePoolable, IDebugLoggable
     {
         /// <summary>
         /// Client requesting the command
@@ -44,6 +46,12 @@ namespace Oxide.Ext.Discord.Entities.Gateway.Commands
             Payload?.Dispose();
             Client = null;
             Payload = null;
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Plugin", Client.PluginName);
+            logger.AppendFieldEnum("Code", Payload.OpCode);
         }
     }
 }

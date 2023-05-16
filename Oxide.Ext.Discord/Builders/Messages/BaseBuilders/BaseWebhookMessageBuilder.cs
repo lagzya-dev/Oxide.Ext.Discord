@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
         /// Constructor
         /// </summary>
         /// <param name="message">Message being created</param>
-        public BaseWebhookMessageBuilder(TMessage message) : base(message) { }
+        protected BaseWebhookMessageBuilder(TMessage message) : base(message) { }
         
         /// <summary>
         /// Adds a custom username for the sender

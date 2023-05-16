@@ -16,10 +16,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// Constructor for WebsocketRateLimit
         /// </summary>
-        public WebsocketRateLimit(ILogger logger) : base(110, RateLimitInterval, logger)
-        {
-            
-        }
+        public WebsocketRateLimit(ILogger logger) : base(110, RateLimitInterval, logger) { }
         
         /// <summary>
         /// Called when an API request is fired

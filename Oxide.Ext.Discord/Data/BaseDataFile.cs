@@ -17,11 +17,12 @@ namespace Oxide.Ext.Discord.Data
 
         protected BaseDataFile()
         {
+            // ReSharper disable once VirtualMemberCallInConstructor
             _dataPath = Path.Combine(Interface.Oxide.DataDirectory, GetFileName());
         }
 
-        public abstract string GetFileName();
-        public abstract int GetNumBackups();
+        protected abstract string GetFileName();
+        protected abstract int GetNumBackups();
 
         public static void Load()
         {

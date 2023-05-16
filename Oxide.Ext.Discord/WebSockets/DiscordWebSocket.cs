@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Callbacks.Websockets;
@@ -411,15 +410,7 @@ namespace Oxide.Ext.Discord.WebSockets
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendFieldEnum("State", Handler.SocketState);
-
-            IReadOnlyCollection<WebSocketCommand> pendingCommands = Commands.GetPendingCommands();
-            logger.StartArray("Pending Commands");
-            foreach (WebSocketCommand command in pendingCommands)
-            {
-                logger.AppendField("Plugin", command.Client.PluginName);
-                logger.AppendFieldEnum("Code", command.Payload.OpCode);
-            }
-            logger.EndArray();
+            logger.AppendList("Pending Commands", Commands.GetPendingCommands());
         }
 
     }

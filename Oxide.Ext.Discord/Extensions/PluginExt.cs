@@ -14,12 +14,16 @@ namespace Oxide.Ext.Discord.Extensions
     {
         private static readonly Hash<string, string> FullNameCache = new Hash<string, string>();
         
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static string Id(this Plugin plugin)
-        {
-            return plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));
-        }
+        /// <summary>
+        /// Returns a pool for the given plugin
+        /// </summary>
+        /// <param name="plugin">Plugin the pool is for</param>
+        /// <returns></returns>
+        public static DiscordPluginPool GetPool(this Plugin plugin) => DiscordPool.Instance.GetOrCreate(plugin);
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static string Id(this Plugin plugin) => plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));
+
         internal static string FullName(this Plugin plugin)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
@@ -45,21 +49,11 @@ namespace Oxide.Ext.Discord.Extensions
             FullNameCache[plugin.Name] = CreatePluginFullName(plugin);
         }
 
-        /// <summary>
-        /// Returns a pool for the given plugin
-        /// </summary>
-        /// <param name="plugin">Plugin the pool is for</param>
-        /// <returns></returns>
-        public static DiscordPluginPool GetPool(this Plugin plugin) => DiscordPool.Instance.GetOrCreate(plugin);
-
         internal static void OnPluginUnloaded(Plugin plugin)
         {
             FullNameCache.Remove(plugin.Name);
         }
 
-        private static string CreatePluginFullName(Plugin plugin)
-        {
-            return $"{plugin.Name} by {plugin.Author} v{plugin.Version}";
-        }
+        private static string CreatePluginFullName(Plugin plugin) => $"{plugin.Name} by {plugin.Author} v{plugin.Version}";
     }
 }

@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Extensions
     /// <summary>
     /// Extension for <see cref="ConcurrentDictionary{TKey,TValue}"/>
     /// </summary>
-    public static class ConcurrentDictionaryExt
+    internal static class ConcurrentDictionaryExt
     {
         /// <summary>
         /// Remove all records from the dictionary with the given predicate filter

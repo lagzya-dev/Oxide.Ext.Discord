@@ -179,12 +179,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         private void DiscordDebugCommand(IPlayer player, string cmd, string[] args)
         {
             DebugLogger logger = new DebugLogger();
-            logger.StartArray("Bot Clients");
-            foreach (BotClient bot in BotClientFactory.Instance.Clients)
-            {
-                bot.LogDebug(logger);
-            }
-            logger.EndArray();
+            logger.AppendList("Bot Clients", BotClientFactory.Instance.Clients);
 
             logger.StartObject("Libraries");
             logger.AppendObject("Discord Application Command", DiscordAppCommand.Instance);

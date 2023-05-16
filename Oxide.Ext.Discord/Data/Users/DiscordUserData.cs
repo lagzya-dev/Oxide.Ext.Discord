@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Data.Users
             return data;
         }
 
-        public override string GetFileName() => "discord.users.data";
-        public override int GetNumBackups() => 2;
+        protected override string GetFileName() => "discord.users.data";
+        protected override int GetNumBackups() => 2;
     }
 }

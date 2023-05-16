@@ -175,12 +175,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
 
         public void LogDebug(DebugLogger logger)
         {
-            logger.StartArray("Subscriptions");
-            foreach (DiscordSubscription sub in Instance.GetSubscriptions())
-            {
-                logger.AppendObject(string.Empty, sub);
-            }
-            logger.EndArray();
+            logger.AppendList("Subscriptions", GetSubscriptions());
         }
         
         internal IEnumerable<DiscordSubscription> GetSubscriptions()

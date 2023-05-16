@@ -302,19 +302,8 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             logger.AppendField("Queue Count", _requests.Count);
             logger.AppendFieldOutOf("Semaphore", Semaphore.Available, Semaphore.MaximumCount);
             
-            logger.StartArray("Routes");
-            foreach (string route in _routes)
-            {
-                logger.AppendLine(route);
-            }
-            logger.EndArray();
-
-            logger.StartArray("Requests");
-            foreach (RequestHandler handler in _requests.Values)
-            {
-                logger.AppendObject(string.Empty, handler.Request);
-            }
-            logger.EndArray();
+            logger.AppendList("Routes", _routes);
+            logger.AppendList("Requests", _requests.Values);
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -213,19 +212,7 @@ namespace Oxide.Ext.Discord.Rest
 
         public void LogDebug(DebugLogger logger)
         {
-            Bucket[] buckets = Buckets.Values.ToArray();
-            if (buckets.Length == 0)
-            {
-                logger.AppendField("Buckets", "None");
-                return;
-            }
-
-            logger.StartArray("Buckets");
-            for (int index = 0; index < buckets.Length; index++)
-            {
-                logger.AppendObject(string.Empty, buckets[index]);
-            }
-            logger.EndArray();
+            logger.AppendList("Buckets", Buckets.Values);
         }
     }
 }

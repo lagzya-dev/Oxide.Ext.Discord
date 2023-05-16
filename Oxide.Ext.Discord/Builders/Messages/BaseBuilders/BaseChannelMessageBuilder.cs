@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
         /// Constructor
         /// </summary>
         /// <param name="message">Message being created</param>
-        public BaseChannelMessageBuilder(TMessage message) : base(message) { }
+        protected BaseChannelMessageBuilder(TMessage message) : base(message) { }
         
         /// <summary>
         /// Adds a sticker to the message
