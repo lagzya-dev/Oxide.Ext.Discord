@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using Oxide.Ext.Discord.Cache;
@@ -178,6 +179,52 @@ namespace Oxide.Ext.Discord.Logging
             StartObject(name);
             obj.LogDebug(this);
             EndObject();
+        }
+        
+        public void AppendList(string name, IEnumerable<string> items)
+        {
+            List<string> list = items.ToPooledList(DiscordPool.Internal);
+            AppendList(name, list);
+            DiscordPool.Internal.FreeList(list);
+        }
+
+        public void AppendList(string name, List<string> items)
+        {
+            if (items.Count == 0)
+            {
+                AppendField(name, "[]");
+                return;
+            }
+            
+            StartArray(name);
+            for (int index = 0; index < items.Count; index++)
+            {
+                AppendLine(items[index]);
+            }
+            EndArray();
+        }
+
+        public void AppendList<T>(string name, IEnumerable<T> items) where T : class, IDebugLoggable
+        {
+            List<T> list = items.ToPooledList(DiscordPool.Internal);
+            AppendList(name, list);
+            DiscordPool.Internal.FreeList(list);
+        }
+        
+        public void AppendList<T>(string name, List<T> items) where T : class, IDebugLoggable
+        {
+            if (items.Count == 0)
+            {
+                AppendField(name, "[]");
+                return;
+            }
+            
+            StartArray(name);
+            for (int index = 0; index < items.Count; index++)
+            {
+                AppendObject(string.Empty, items[index]);
+            }
+            EndArray();
         }
 
         public void StartArray(string name)
