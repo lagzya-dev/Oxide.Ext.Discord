@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.RateLimits
 {
@@ -9,7 +10,7 @@ namespace Oxide.Ext.Discord.RateLimits
     /// </summary>
     public class WebsocketRateLimit : BaseRateLimit
     {
-        private readonly ConcurrentDictionary<string, int> _pluginRequests = new ConcurrentDictionary<string, int>();
+        private readonly ConcurrentDictionary<PluginId, int> _pluginRequests = new ConcurrentDictionary<PluginId, int>();
         internal const int MaxRequestPerPlugin = 60;
         internal const long RateLimitInterval = 60 * 1000L;
 

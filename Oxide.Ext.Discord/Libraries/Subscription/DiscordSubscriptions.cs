@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription
@@ -19,7 +20,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     /// </summary>
     public class DiscordSubscriptions : BaseDiscordLibrary<DiscordSubscriptions>, IDebugLoggable
     {
-        private readonly Hash<Snowflake, Hash<string, DiscordSubscription>> _subscriptions = new Hash<Snowflake, Hash<string, DiscordSubscription>>();
+        private readonly Hash<Snowflake, Hash<PluginId, DiscordSubscription>> _subscriptions = new Hash<Snowflake, Hash<PluginId, DiscordSubscription>>();
 
         private readonly ILogger _logger;
         
@@ -60,10 +61,10 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             Plugin plugin = client.Plugin;
             _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(AddChannelSubscription)} {{0}} added subscription to channel {{1}}", plugin.FullName(), channelId);
 
-            Hash<string, DiscordSubscription> channelSubs = _subscriptions[channelId];
+            Hash<PluginId, DiscordSubscription> channelSubs = _subscriptions[channelId];
             if (channelSubs == null)
             {
-                channelSubs = new Hash<string, DiscordSubscription>();
+                channelSubs = new Hash<PluginId, DiscordSubscription>();
                 _subscriptions[channelId] = channelSubs;
             }
 
@@ -83,7 +84,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             
-            Hash<string, DiscordSubscription> pluginSubs = _subscriptions[channelId];
+            Hash<PluginId, DiscordSubscription> pluginSubs = _subscriptions[channelId];
             if (pluginSubs == null)
             {
                 return;
@@ -120,7 +121,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             List<Snowflake> emptySubs = new List<Snowflake>();
 
             int removed = 0;
-            foreach (KeyValuePair<Snowflake, Hash<string, DiscordSubscription>> hash in _subscriptions)
+            foreach (KeyValuePair<Snowflake, Hash<PluginId, DiscordSubscription>> hash in _subscriptions)
             {
                 DiscordSubscription sub = hash.Value[plugin.Id()];
                 if (sub != null)
@@ -157,7 +158,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             }
         }
 
-        private void RunSubs(Hash<string, DiscordSubscription> subs, DiscordMessage message, BotClient client)
+        private void RunSubs(Hash<PluginId, DiscordSubscription> subs, DiscordMessage message, BotClient client)
         {
             if (subs == null)
             {
@@ -180,7 +181,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         
         internal IEnumerable<DiscordSubscription> GetSubscriptions()
         {
-            foreach (Hash<string, DiscordSubscription> pluginSubscriptions in _subscriptions.Values)
+            foreach (Hash<PluginId, DiscordSubscription> pluginSubscriptions in _subscriptions.Values)
             {
                 foreach (DiscordSubscription subscription in pluginSubscriptions.Values)
                 {

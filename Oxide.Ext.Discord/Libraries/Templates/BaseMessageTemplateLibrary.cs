@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
@@ -180,9 +181,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             base.OnPluginUnloaded(plugin);
-            string name = plugin.Name;
-            _templateCache.RemoveAll(t => t.PluginName == name);
-            RegisteredTemplates.RemoveWhere(rt => rt.PluginName == name);
+            PluginId pluginId = plugin.Id();
+            _templateCache.RemoveAll(t => t.PluginId == pluginId);
+            RegisteredTemplates.RemoveWhere(rt => rt.PluginId == pluginId);
         }
     }
 }

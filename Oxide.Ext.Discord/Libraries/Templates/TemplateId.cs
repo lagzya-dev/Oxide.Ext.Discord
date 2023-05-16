@@ -3,12 +3,13 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
 {
     internal struct TemplateId : IEquatable<TemplateId>
     {
-        internal readonly string PluginName;
+        internal readonly PluginId PluginId;
         public readonly string TemplateName;
         public readonly string Language;
         
@@ -16,14 +17,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         
         private TemplateId(Plugin plugin, string templateName, string language)
         {
-            PluginName = plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));
+            PluginId = plugin?.Id() ?? throw new ArgumentNullException(nameof(plugin));
             TemplateName = templateName;
             Language = language;
         }
 
-        private TemplateId(string pluginName, string templateName, string language)
+        private TemplateId(PluginId pluginName, string templateName, string language)
         {
-            PluginName = pluginName ?? throw new ArgumentNullException(nameof(pluginName));
+            PluginId = pluginName;
             TemplateName = templateName;
             Language = language;
         }
@@ -35,19 +36,19 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
         public string GetPluginName()
         {
-            return PluginExt.GetFullName(PluginName);
+            return PluginExt.GetFullName(PluginId);
         }
 
         public TemplateId WithLanguage(string language)
         {
-            return new TemplateId(PluginName, TemplateName, language);
+            return new TemplateId(PluginId, TemplateName, language);
         }
 
         public string GetLanguageName() => IsGlobal ? "Global" : Language;
         
         public bool Equals(TemplateId other)
         {
-            return PluginName == other.PluginName && TemplateName == other.TemplateName && Language == other.Language;
+            return PluginId == other.PluginId && TemplateName == other.TemplateName && Language == other.Language;
         }
         
         public override bool Equals(object obj)
@@ -57,14 +58,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
         public override string ToString()
         {
-            return $"Plugin: {PluginName} Template: {TemplateName} Language: {GetLanguageName()}";
+            return $"Plugin: {PluginId} Template: {TemplateName} Language: {GetLanguageName()}";
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                int hashCode = PluginName.GetHashCode();
+                int hashCode = PluginId.GetHashCode();
                 hashCode = (hashCode * 397) ^ (TemplateName != null ? TemplateName.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Language != null ? Language.GetHashCode() : 0);
                 return hashCode;

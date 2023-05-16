@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord
 {
@@ -29,7 +30,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// The name of the plugin used as an ID
         /// </summary>
-        public readonly string PluginId;
+        public readonly PluginId PluginId;
         
         /// <summary>
         /// The full plugin name including author and version

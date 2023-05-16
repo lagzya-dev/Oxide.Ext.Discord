@@ -17,14 +17,11 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     /// </summary>
     public class DiscordSubscription : IDebugLoggable
     {
-        internal readonly Snowflake ChannelId;
-        
+        private readonly Snowflake _channelId;
         private readonly DiscordClient _client;
         private readonly Action<DiscordMessage> _callback;
         
         private Plugin _plugin;
-        
-        private readonly string _pluginId;
 
         /// <summary>
         /// Constructor
@@ -36,8 +33,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         {
             _client = client;
             _plugin = client.Plugin;
-            _pluginId = _plugin.Id();
-            ChannelId = channelId;
+            _channelId = channelId;
             _callback = callback;
         }
 
@@ -66,14 +62,14 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             logger.AppendField("Plugin", _plugin.FullName());
             logger.AppendMethod("Method", _callback.Method);
             
-            DiscordGuild guild = _client?.Bot.Servers.Values.FirstOrDefault(g => g.Channels.ContainsKey(ChannelId));
+            DiscordGuild guild = _client?.Bot.Servers.Values.FirstOrDefault(g => g.Channels.ContainsKey(_channelId));
             if (guild == null)
             {
                 logger.AppendField("Guild", "Unknown Guild");
                 return;
             }
             
-            DiscordChannel channel = guild.Channels[ChannelId];
+            DiscordChannel channel = guild.Channels[_channelId];
             if (channel == null)
             {
                 logger.AppendField("Channel", "Unknown Channel");

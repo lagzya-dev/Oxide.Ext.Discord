@@ -3505,12 +3505,11 @@
             The scope the rate limit is for
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Init(System.Net.Http.Headers.HttpResponseHeaders,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Init(System.Net.Http.Headers.HttpResponseHeaders)">
             <summary>
             Initialize the RateLimitResponse
             </summary>
             <param name="headers">Headers for the rate limit</param>
-            <param name="logger">Logger</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.EnterPool">
             <inheritdoc/>
@@ -17784,6 +17783,44 @@
             <param name="client">Client to use for creating / loading the bot client</param>
             <returns>Bot client that is created or already exists</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.GenerateId(Oxide.Core.Libraries.RequestMethod,System.String)">
+            <summary>
+            Returns the Rate Limit Bucket for the given route
+            https://discord.com/developers/docs/topics/rate-limits#rate-limits
+            </summary>
+            <param name="method">Request method for the request</param>
+            <param name="route">API Route</param>
+            <returns>Bucket ID for route</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.GenerateId(Oxide.Core.Libraries.RequestMethod,Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState)">
+            <summary>
+            Creates the bucket ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState.Init(System.String)">
+            <summary>
+            Constructor for string splitter
+            </summary>
+            <param name="route">String to be split</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState.MoveNext">
+            <summary>
+            Returns the next string in the split
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState.NextIndex(System.Int32)">
+            <summary>
+            Updates the _lastIndex processed.
+            If the _lastIndex >= _length then we are done processing the Bucket ID
+            If the current route is now reactions we stop processing the bucket ID
+            </summary>
+            <param name="lastIndex"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState.EnterPool">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Factory.DiscordClientFactory">
             <summary>
             Factory for creating <see cref="T:Oxide.Ext.Discord.DiscordClient"/>
@@ -17802,6 +17839,13 @@
             Gets the client for the given plugin
             </summary>
             <param name="plugin">Plugin to get client for</param>
+            <returns>Discord client for the plugin</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.DiscordClientFactory.GetClient(Oxide.Ext.Discord.Plugins.PluginId)">
+            <summary>
+            Gets the client for the given plugin
+            </summary>
+            <param name="pluginId">Plugin to get client for</param>
             <returns>Discord client for the plugin</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Factory.DiscordClientFactory.GetClient(System.String)">
@@ -18096,6 +18140,14 @@
             <param name="animated">If the emoji is animated</param>
             <returns>Custom emoji formatted string</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.DateTimeOffset,Oxide.Ext.Discord.Helpers.TimestampStyles)">
+            <summary>
+            Displays a timestamp 
+            </summary>
+            <param name="time">Time to display</param>
+            <param name="style">Style of the timestamp</param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)">
             <summary>
             Displays a timestamp 
@@ -18195,6 +18247,59 @@
             </summary>
             <param name="message">Message to make block quote</param>
             <returns>Multiline block quote formatted message</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Spoiler(System.String)">
+            <summary>
+            Will display the text as a spoiler
+            </summary>
+            <param name="message">Message to make Spoiler</param>
+            <returns>Spoiler message</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Header1(System.String)">
+            <summary>
+            Creates a Big Header
+            </summary>
+            <param name="header">text for the header</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Header2(System.String)">
+            <summary>
+            Creates a Medium Header
+            </summary>
+            <param name="header">text for the header</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Header3(System.String)">
+            <summary>
+            Creates a Small Header
+            </summary>
+            <param name="header">text for the header</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MaskLink(System.String,System.String)">
+            <summary>
+            Creates a clickable link displayed as the mask text
+            </summary>
+            <param name="mask">Text to display the link as</param>
+            <param name="url">Url for the link</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.List(System.String,System.Boolean)">
+            <summary>
+            Creates a list item for the given message
+            </summary>
+            <param name="message">Text for the list</param>
+            <param name="indent">If the list should be indented a level</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.NumberedList(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Creates a list item for the given message
+            </summary>
+            <param name="message">Text for the list</param>
+            <param name="number">Number to display</param>
+            <param name="indent">If the list should be indented a level</param>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.SnowflakeIdGenerator">
             <summary>
@@ -18355,6 +18460,36 @@
             Returns the unique ID for this entity
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1">
+            <summary>
+            Represents a ReadOnly interface for <see cref="T:System.Collections.Generic.ISet`1"/>
+            </summary>
+            <typeparam name="T">Type of the set</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Generic.HashSet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Generic.HashSet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Generic.HashSet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Generic.HashSet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1.Overlaps(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Generic.HashSet`1.Overlaps(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1.SetEquals(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc cref="M:System.Collections.Generic.HashSet`1.SetEquals(System.Collections.Generic.IEnumerable{`0})"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1.Contains(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.HashSet`1.Contains(`0)"/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1.CopyTo(`0[],System.Int32)">
+            <inheritdoc cref="M:System.Collections.Generic.HashSet`1.CopyTo(`0[],System.Int32)"/>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.WebSockets.IWebSocketEventHandler">
             <summary>
@@ -20595,7 +20730,7 @@
             <param name="type">The template type of this library</param>
             <param name="logger"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.GetTemplateFolder(System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.GetTemplateFolder(Oxide.Ext.Discord.Plugins.PluginId)">
             <summary>
             Returns the template folder for a given plugin
             </summary>
@@ -22569,7 +22704,7 @@
             How long until the rate limit resets
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.Init(System.String,Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Logging.ILogger)">
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.Init(Oxide.Ext.Discord.Rest.Buckets.BucketId,Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Creates a new bucket for the given <see cref="T:Oxide.Ext.Discord.Rest.RestHandler"/>
             </summary>
@@ -22587,50 +22722,6 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator">
-            <summary>
-            Represents a type that splits string by a specific char
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.Init(Oxide.Core.Libraries.RequestMethod,System.String)">
-            <summary>
-            Constructor for string splitter
-            </summary>
-            <param name="method">HTTP request method</param>
-            <param name="route">String to be split</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.GetBucketId(Oxide.Core.Libraries.RequestMethod,System.String)">
-            <summary>
-            Returns the Rate Limit Bucket for the given route
-            https://discord.com/developers/docs/topics/rate-limits#rate-limits
-            </summary>
-            <param name="method">Request method for the request</param>
-            <param name="route">API Route</param>
-            <returns>Bucket ID for route</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.GetBucketId">
-            <summary>
-            Creates the bucket ID
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.MoveNext">
-            <summary>
-            Returns the next string in the split
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.NextIndex(System.Int32)">
-            <summary>
-            Updates the _lastIndex processed.
-            If the _lastIndex >= _length then we are done processing the Bucket ID
-            If the current route is now reactions we stop processing the bucket ID
-            </summary>
-            <param name="lastIndex"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Buckets.BucketIdGenerator.EnterPool">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Requests.BaseRequest">
@@ -22937,7 +23028,7 @@
             Queues the request for the bucket
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.GetBucket(System.String)">
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.GetBucket(Oxide.Ext.Discord.Rest.Buckets.BucketId)">
             <summary>
             Returns the bucket with the given ID
             </summary>

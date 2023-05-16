@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Promise;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
@@ -41,7 +42,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         protected readonly TemplateType TemplateType;
         
         internal readonly DiscordConcurrentSet<TemplateId> RegisteredTemplates = new DiscordConcurrentSet<TemplateId>();
-        private readonly Hash<string, string> _pluginTemplatePath = new Hash<string, string>();
+        private readonly Hash<PluginId, string> _pluginTemplatePath = new Hash<PluginId, string>();
 
         /// <summary>
         /// Constructor
@@ -157,7 +158,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 return;
             }
 
-            string path = GetTemplateFolder(id.PluginName);
+            string path = GetTemplateFolder(id.PluginId);
             if (Logger.IsLogging(DiscordLogLevel.Debug))
             {
                 Logger.Debug("Backup Template files for: {0} Path: {1}", id.ToString(), path);
@@ -204,12 +205,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </summary>
         /// <param name="plugin">Plugin Name the template is for</param>
         /// <returns></returns>
-        protected string GetTemplateFolder(string plugin)
+        protected string GetTemplateFolder(PluginId plugin)
         {
             string folder = _pluginTemplatePath[plugin];
             if (string.IsNullOrEmpty(folder))
             {
-                folder = Path.Combine(_rootDirectory, plugin, _templateTypeDirectory);
+                folder = Path.Combine(_rootDirectory, plugin.PluginName(), _templateTypeDirectory);
                 _pluginTemplatePath[plugin] = folder;
             }
             
@@ -222,9 +223,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
             if (id.IsGlobal)
             {
-                return Path.Combine(GetTemplateFolder(id.PluginName), $"{id.TemplateName}.json");
+                return Path.Combine(GetTemplateFolder(id.PluginId), $"{id.TemplateName}.json");
             }
-            return Path.Combine(GetTemplateFolder(id.PluginName), id.Language, $"{id.TemplateName}.json");
+            return Path.Combine(GetTemplateFolder(id.PluginId), id.Language, $"{id.TemplateName}.json");
         }
 
         private string GetRenamePath(string path, TemplateVersion version)

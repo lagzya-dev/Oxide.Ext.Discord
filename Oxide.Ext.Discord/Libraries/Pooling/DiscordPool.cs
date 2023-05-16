@@ -2,6 +2,7 @@
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
@@ -12,7 +13,7 @@ namespace Oxide.Ext.Discord.Libraries.Pooling
     /// </summary>
     public class DiscordPool : BaseDiscordLibrary<DiscordPool>
     {
-        private readonly Hash<string, DiscordPluginPool> _pluginPools = new Hash<string, DiscordPluginPool>();
+        private readonly Hash<PluginId, DiscordPluginPool> _pluginPools = new Hash<PluginId, DiscordPluginPool>();
         internal static DiscordPluginPool Internal;
         private readonly ILogger _logger;
         
@@ -50,7 +51,7 @@ namespace Oxide.Ext.Discord.Libraries.Pooling
         
         private DiscordPluginPool CreatePoolInternal(Plugin plugin)
         {
-            string id = plugin.Id();
+            PluginId id = plugin.Id();
             DiscordPluginPool pool = _pluginPools[id];
             if (pool == null)
             {
@@ -67,7 +68,7 @@ namespace Oxide.Ext.Discord.Libraries.Pooling
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
-            string id = plugin.Id();
+            PluginId id = plugin.Id();
             DiscordPluginPool pool = _pluginPools[id];
             if (pool != null)
             {

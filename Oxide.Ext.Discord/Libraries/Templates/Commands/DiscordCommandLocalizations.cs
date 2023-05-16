@@ -6,8 +6,10 @@ using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Commands;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Libraries;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Promise;
 using Oxide.Plugins;
 
@@ -100,7 +102,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         {
             HandlePrepareCommandLocalizationsAsync(create);
             
-            foreach (string dir in Directory.EnumerateDirectories(GetTemplateFolder(id.PluginName)))
+            foreach (string dir in Directory.EnumerateDirectories(GetTemplateFolder(id.PluginId)))
             {
                 string lang = Path.GetFileName(dir);
                 HandleLoadAndApplyCommandLocalizationsAsync(id, create, lang);
@@ -175,8 +177,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         internal override string GetTemplatePath(TemplateId id)
         {
             DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName, TemplateType);
-            string fileName = !string.IsNullOrEmpty(id.TemplateName) ? $"{id.PluginName}.{id.TemplateName}.json" : $"{id.PluginName}.json";
-            return Path.Combine(GetTemplateFolder(id.PluginName), id.Language, fileName);
+            string fileName = !string.IsNullOrEmpty(id.TemplateName) ? $"{id.PluginId}.{id.TemplateName}.json" : $"{id.PluginId}.json";
+            return Path.Combine(GetTemplateFolder(id.PluginId), id.Language, fileName);
         }
 
         ///<inheritdoc/>
@@ -186,8 +188,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             base.OnPluginUnloaded(plugin);
-            string name = plugin.Name;
-            RegisteredTemplates.RemoveWhere(rt => rt.PluginName == name);
+            PluginId pluginId = plugin.Id();
+            RegisteredTemplates.RemoveWhere(rt => rt.PluginId == pluginId);
         }
     }
 }

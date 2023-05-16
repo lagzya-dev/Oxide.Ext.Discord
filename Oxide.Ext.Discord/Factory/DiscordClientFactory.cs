@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Singleton;
 using Oxide.Plugins;
 
@@ -16,7 +17,7 @@ namespace Oxide.Ext.Discord.Factory
     /// </summary>
     public class DiscordClientFactory : Singleton<DiscordClientFactory>
     {
-        private readonly Hash<string, DiscordClient> _clients = new Hash<string, DiscordClient>();
+        private readonly Hash<PluginId, DiscordClient> _clients = new Hash<PluginId, DiscordClient>();
 
         private DiscordClientFactory() { }
         
@@ -61,6 +62,16 @@ namespace Oxide.Ext.Discord.Factory
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             return GetClient(plugin.Id());
         }
+        
+        /// <summary>
+        /// Gets the client for the given plugin
+        /// </summary>
+        /// <param name="pluginId">Plugin to get client for</param>
+        /// <returns>Discord client for the plugin</returns>
+        internal DiscordClient GetClient(PluginId pluginId)
+        {
+            return _clients[pluginId];
+        }
 
         /// <summary>
         /// Gets the client for the given plugin name
@@ -70,7 +81,7 @@ namespace Oxide.Ext.Discord.Factory
         public DiscordClient GetClient(string pluginName)
         {
             if (pluginName == null) throw new ArgumentNullException(nameof(pluginName));
-            return _clients[pluginName];
+            return _clients[new PluginId(pluginName)];
         }
         #endregion
         

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Commands;
@@ -36,7 +37,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
         
         protected override string GetExceptionMessage()
         {
-            return $"Plugin: {_id.PluginName} Name: {_id.TemplateName} Language: {_id.Language}";
+            return $"Plugin: {_id.PluginId.FullName()} Name: {_id.TemplateName} Language: {_id.Language}";
         }
 
         protected override void EnterPool()

@@ -201,7 +201,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [HookMethod(nameof(OnPluginUnloaded))]
         private void OnPluginUnloaded(Plugin plugin)
         {
-            if (plugin.Id() == "PlaceholderAPI")
+            if (plugin.Name == "PlaceholderAPI")
             {
                 HandlePlaceholderApiUnloaded();
             }
