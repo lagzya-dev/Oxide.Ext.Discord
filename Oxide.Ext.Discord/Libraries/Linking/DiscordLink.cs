@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
@@ -8,10 +7,11 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Interfaces.Types;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
@@ -24,15 +24,11 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     {
         public readonly IReadOnlyDictionary<PlayerId, Snowflake> PlayerToDiscordIds;
         public readonly IReadOnlyDictionary<Snowflake, PlayerId> DiscordToPlayerIds;
-        public readonly IReadonlySet<PlayerId> PlayerIds;
-        public readonly IReadonlySet<Snowflake> DiscordIds;
-        
-        private readonly Hash<PlayerId, Snowflake> _playerIdToDiscordId = new Hash<PlayerId, Snowflake>();
-        private readonly Hash<Snowflake, PlayerId> _discordIdToPlayerId = new Hash<Snowflake, PlayerId>();
-        private readonly HashSet<PlayerId> _playerIds = new HashSet<PlayerId>();
-        private readonly HashSet<Snowflake> _discordIds = new HashSet<Snowflake>();
-        private readonly Hash<string, IDictionary<string, Snowflake>> _pluginLinks = new Hash<string, IDictionary<string, Snowflake>>();
-        private readonly List<IDiscordLinkPlugin> _linkPlugins = new List<IDiscordLinkPlugin>();
+        public readonly ICollection<PlayerId> PlayerIds;
+        public readonly ICollection<Snowflake> DiscordIds;
+
+        private readonly BidirectionalDictionary<PlayerId, Snowflake> _links = new BidirectionalDictionary<PlayerId, Snowflake>();
+        private readonly Hash<PluginId, IDictionary<string, Snowflake>> _linkPlugins = new Hash<PluginId, IDictionary<string, Snowflake>>();
 
         private readonly ILogger _logger;
 
@@ -43,20 +39,17 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         internal DiscordLink(ILogger logger)
         {
             _logger = logger;
-            PlayerToDiscordIds = new ReadOnlyDictionary<PlayerId, Snowflake>(_playerIdToDiscordId);
-            DiscordToPlayerIds = new ReadOnlyDictionary<Snowflake, PlayerId>(_discordIdToPlayerId);
-            PlayerIds = new ReadonlySet<PlayerId>(_playerIds);
-            DiscordIds = new ReadonlySet<Snowflake>(_discordIds);
+            PlayerToDiscordIds = _links.AsReadOnlyKeyToValue();
+            DiscordToPlayerIds = _links.AsReadOnlyValueToKey();
+            PlayerIds = _links.AsKeyCollection();
+            DiscordIds = _links.AsValueCollection();
         }
 
         /// <summary>
         /// Returns if there is a registered link plugin
         /// </summary>
         /// <returns></returns>
-        public bool IsEnabled()
-        {
-            return _linkPlugins.Count != 0;
-        }
+        public bool IsEnabled() => _linkPlugins.Count != 0;
 
         /// <summary>
         /// Adds a link plugin to be the plugin used with the Discord Link library
@@ -66,19 +59,14 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
-            if (!_linkPlugins.Contains(plugin))
-            {
-                _linkPlugins.Add(plugin);
-            }
-
             IDictionary<string, Snowflake> data = plugin.GetSteamToDiscordIds();
             if (data == null)
             {
                 _logger.Error($"{{0}} returned null when {nameof(plugin.GetSteamToDiscordIds)} was called", plugin.Name);
                 return;
             }
-
-            _pluginLinks[plugin.Name] = data;
+            
+            _linkPlugins[plugin.Id()] = data;
 
             foreach (KeyValuePair<string,Snowflake> pair in data)
             {
@@ -96,16 +84,29 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
-            IDictionary<string, Snowflake> pluginData = _pluginLinks[plugin.Name];
+            PluginId pluginId = plugin.Id();
+            IDictionary<string, Snowflake> pluginData = _linkPlugins[pluginId];
             if (pluginData != null)
             {
+                _linkPlugins.Remove(pluginId);
                 foreach (KeyValuePair<string,Snowflake> link in pluginData)
                 {
-                    RemoveLink(new PlayerId(link.Key), link.Value);
+                    bool keepLink = false;
+                    foreach (IDictionary<string, Snowflake> links in _linkPlugins.Values)
+                    {
+                        if (links.ContainsKey(link.Key))
+                        {
+                            keepLink = true;
+                            break;
+                        }
+                    }
+
+                    if (!keepLink)
+                    {
+                        RemoveLink(new PlayerId(link.Key), link.Value);
+                    }
                 }
             }
-            
-            _linkPlugins.Remove(plugin);
         }
 
         ///<inheritdoc/>
@@ -126,14 +127,14 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="playerId">Steam ID of the player</param>
         /// <returns>True if the ID is linked; false otherwise</returns>
-        public bool IsLinked(string playerId) => _playerIds.Contains(new PlayerId(playerId));
+        public bool IsLinked(string playerId) => _links.ContainsKey(new PlayerId(playerId));
 
         /// <summary>
         /// Returns if the specified ID is linked
         /// </summary>
         /// <param name="discordId">Discord ID of the player</param>
         /// <returns>True if the ID is linked; false otherwise</returns>
-        public bool IsLinked(Snowflake discordId) => _discordIds.Contains(discordId);
+        public bool IsLinked(Snowflake discordId) => _links.ContainsKey(discordId);
 
         /// <summary>
         /// Returns if the specified ID is linked
@@ -154,7 +155,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="discordId">Discord ID to get steam ID for</param>
         /// <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
-        public string GetPlayerId(Snowflake discordId) => _discordIdToPlayerId[discordId].Id;
+        public string GetPlayerId(Snowflake discordId) => _links.TryGetValue(discordId, out PlayerId playerId) ? playerId.Id : null;
 
         /// <summary>
         /// Returns the Steam ID of the given Discord ID if there is a link
@@ -168,26 +169,14 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="discordId">Discord ID to get IPlayer for</param>
         /// <returns>IPlayer for the given Discord ID; null otherwise</returns>
-        public IPlayer GetPlayer(Snowflake discordId)
-        {
-            string id = GetPlayerId(discordId);
-            if (string.IsNullOrEmpty(id))
-            {
-                return null;
-            }
-
-            return ServerPlayerCache.Instance.GetPlayer(id);
-        }
+        public IPlayer GetPlayer(Snowflake discordId) => _links.TryGetValue(discordId, out PlayerId playerId) ? ServerPlayerCache.Instance.GetPlayer(playerId.Id) : null;
 
         /// <summary>
         /// Returns the Discord ID for the given Steam ID
         /// </summary>
         /// <param name="playerId">Steam ID to get Discord ID for</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        public Snowflake? GetDiscordId(string playerId)
-        {
-            return _playerIdToDiscordId.TryGetValue(new PlayerId(playerId), out Snowflake id) ? id : new Snowflake?();
-        }
+        public Snowflake? GetDiscordId(string playerId) => _links.TryGetValue(new PlayerId(playerId), out Snowflake id) ? id : new Snowflake?();
 
         /// <summary>
         /// Returns the Discord ID for the given IPlayer
@@ -201,17 +190,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="playerId">ID of the in game player</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        public DiscordUser GetDiscordUser(string playerId)
-        {
-            Snowflake? discordId = GetDiscordId(playerId);
-            if (!discordId.HasValue)
-            {
-                return null;
-            }
+        public DiscordUser GetDiscordUser(string playerId) => _links.TryGetValue(new PlayerId(playerId), out Snowflake discordId) && discordId.IsValid() ? DiscordUserCache.Instance.GetOrCreate(discordId) : null;
 
-            return DiscordUserCache.Instance.GetOrCreate(discordId.Value);
-        }
-        
         /// <summary>
         /// Returns a minimal Discord User
         /// </summary>
@@ -227,6 +207,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
         public GuildMember GetLinkedMember(string playerId, DiscordGuild guild)
         {
+            if (guild == null) throw new ArgumentNullException(nameof(guild));
             Snowflake? discordId = GetDiscordId(playerId);
             if (!discordId.HasValue || !guild.IsAvailable)
             {
@@ -242,16 +223,13 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <param name="player">Player to get the Discord User for</param>
         /// <param name="guild">Guild the member is in</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        public GuildMember GetLinkedMember(IPlayer player, DiscordGuild guild)
-        {
-            return GetLinkedMember(player.Id, guild);
-        }
+        public GuildMember GetLinkedMember(IPlayer player, DiscordGuild guild) => GetLinkedMember(player.Id, guild);
 
         /// <summary>
         /// Returns the number of linked players
         /// </summary>
         /// <returns></returns>
-        public int GetLinkedCount() => _playerIds.Count;
+        public int GetLinkedCount() => _links.Count;
 
         /// <summary>
         /// Called by a link plugin when a link occured
@@ -269,7 +247,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 return;
             }
             
-            _pluginLinks[plugin.Title][player.Id] = discord.Id;
+            _linkPlugins[plugin.Id()][player.Id] = discord.Id;
             AddLink(new PlayerId(player.Id), discord.Id);
             
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerLinked, player, discord);
@@ -293,24 +271,19 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlink, player, discord);
             RemoveLink(new PlayerId(player.Id), discord.Id);
-            _pluginLinks[plugin.Title].Remove(player.Id);
+            _linkPlugins[plugin.Id()].Remove(player.Id);
             DiscordHook.CallGlobalHook(DiscordExtHooks.OnDiscordPlayerUnlinked, player, discord);
         }
         
-        private void AddLink(PlayerId playerId, Snowflake userId)
+        private void AddLink(PlayerId playerId, Snowflake discordId)
         {
-            _playerIdToDiscordId[playerId] = userId;
-            _discordIdToPlayerId[userId] = playerId;
-            _playerIds.Add(playerId);
-            _discordIds.Add(userId);
+            _links[playerId] = discordId;
         }
         
-        private void RemoveLink(PlayerId playerId, Snowflake userId)
+        private void RemoveLink(PlayerId playerId, Snowflake discordId)
         {
-            _playerIdToDiscordId.Remove(playerId);
-            _discordIdToPlayerId.Remove(userId);
-            _playerIds.Remove(playerId);
-            _discordIds.Remove(userId);
+            _links.Remove(playerId);
+            _links.Remove(discordId);
         }
         
         private bool IsValidLinkPlugin(Plugin plugin)
@@ -322,7 +295,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
                 return false;
             }
 
-            if (!_linkPlugins.Contains(link))
+            if (!_linkPlugins.ContainsKey(link.Id()))
             {
                 _logger.Error($"{plugin.Name} has not been added as a link plugin and cannot set a link");
                 return false;
@@ -333,8 +306,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
 
         public void LogDebug(DebugLogger logger)
         {
-            logger.AppendField("Total Links", _playerIds.Count);
-            logger.AppendList("Plugins", _pluginLinks.Keys);
+            logger.AppendField("Total Links", _links.Count);
+            logger.AppendList("Plugins", _linkPlugins.Keys);
         }
     }
 }

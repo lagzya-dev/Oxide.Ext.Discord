@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord
         public Plugin Plugin { get; private set; }
 
         /// <summary>
-        /// The name of the plugin used as an ID
+        /// The ID of the plugin
         /// </summary>
         public readonly PluginId PluginId;
         

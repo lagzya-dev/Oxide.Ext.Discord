@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Oxide.Ext.Discord.Types
 {
@@ -81,5 +82,11 @@ namespace Oxide.Ext.Discord.Types
             _keyToValue.Clear();
             _valueToKey.Clear();
         }
+
+        public ReadOnlyDictionary<TKey, TValue> AsReadOnlyKeyToValue() => new ReadOnlyDictionary<TKey, TValue>(_keyToValue);
+        public ReadOnlyDictionary<TValue, TKey> AsReadOnlyValueToKey() => new ReadOnlyDictionary<TValue, TKey>(_valueToKey);
+
+        public ICollection<TKey> AsKeyCollection() => _keyToValue.Keys;
+        public ICollection<TValue> AsValueCollection() => _valueToKey.Keys;
     }
 }

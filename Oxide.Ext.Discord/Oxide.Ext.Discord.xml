@@ -2965,7 +2965,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.DiscordClient.PluginId">
             <summary>
-            The name of the plugin used as an ID
+            The ID of the plugin
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.DiscordClient.PluginName">

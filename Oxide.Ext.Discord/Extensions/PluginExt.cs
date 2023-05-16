@@ -1,6 +1,6 @@
 using System;
-using System.Runtime.CompilerServices;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Pooling;
@@ -24,7 +24,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// <returns></returns>
         public static DiscordPluginPool GetPool(this Plugin plugin) => DiscordPool.Instance.GetOrCreate(plugin);
         
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static PluginId Id(this Plugin plugin)
         {
             if (PluginIds.TryGetValue(plugin, out PluginId id))
@@ -36,6 +35,9 @@ namespace Oxide.Ext.Discord.Extensions
             PluginIds[plugin] = id;
             return id;
         }
+
+        // ReSharper disable once SuspiciousTypeConversion.Global
+        internal static PluginId Id(this IDiscordPlugin plugin) => ((Plugin)plugin).Id();
 
         internal static string PluginName(this Plugin plugin) => plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));
         internal static string PluginName(this PluginId pluginId)

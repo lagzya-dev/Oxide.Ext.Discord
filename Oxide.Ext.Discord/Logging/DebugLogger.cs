@@ -204,14 +204,14 @@ namespace Oxide.Ext.Discord.Logging
             EndArray();
         }
 
-        public void AppendList<T>(string name, IEnumerable<T> items) where T : class, IDebugLoggable
+        public void AppendList<T>(string name, IEnumerable<T> items) where T : IDebugLoggable
         {
             List<T> list = items.ToPooledList(DiscordPool.Internal);
             AppendList(name, list);
             DiscordPool.Internal.FreeList(list);
         }
         
-        public void AppendList<T>(string name, List<T> items) where T : class, IDebugLoggable
+        public void AppendList<T>(string name, List<T> items) where T : IDebugLoggable
         {
             if (items.Count == 0)
             {
@@ -268,6 +268,6 @@ namespace Oxide.Ext.Discord.Logging
             _logger.AppendLine();
         }
 
-        public string ToString() => DiscordPool.Internal.FreeStringBuilderToString(_logger);
+        public override string ToString() => DiscordPool.Internal.FreeStringBuilderToString(_logger);
     }
 }
