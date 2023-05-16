@@ -1,4 +1,5 @@
 using System;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Exceptions.Entities;
@@ -102,6 +103,14 @@ namespace Oxide.Ext.Discord.Helpers
         /// <summary>
         /// Displays a timestamp 
         /// </summary>
+        /// <param name="time">Time to display</param>
+        /// <param name="style">Style of the timestamp</param>
+        /// <returns></returns>
+        public static string UnixTimestamp(DateTimeOffset time, TimestampStyles style = TimestampStyles.ShortDateTime) => UnixTimestamp((ulong)time.ToUnixTimeSeconds(), style);
+        
+        /// <summary>
+        /// Displays a timestamp 
+        /// </summary>
         /// <param name="timestamp">UNIX Timestamp</param>
         /// <param name="style">Display style for the timestamp</param>
         /// <returns></returns>
@@ -110,27 +119,27 @@ namespace Oxide.Ext.Discord.Helpers
             return $"<t:{timestamp.ToString()}:{GetTimestampFlag(style)}>";
         }
 
-        private static string GetTimestampFlag(TimestampStyles style)
+        private static char GetTimestampFlag(TimestampStyles style)
         {
             switch (style)
             {
                 case TimestampStyles.ShortTime:
-                    return "t";
+                    return 't';
                 case TimestampStyles.LongTime:
-                    return "T";
+                    return 'T';
                 case TimestampStyles.ShortDate:
-                    return "d";
+                    return 'd';
                 case TimestampStyles.LongDate:
-                    return "D";
+                    return 'D';
                 case TimestampStyles.ShortDateTime:
-                    return "f";
+                    return 'f';
                 case TimestampStyles.LongDateTime:
-                    return "F";
+                    return 'F';
                 case TimestampStyles.RelativeTime:
-                    return "R";
+                    return 'R';
             }
 
-            return "f";
+            return 'f';
         }
         
         /// <summary>
@@ -224,5 +233,58 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="message">Message to make block quote</param>
         /// <returns>Multiline block quote formatted message</returns>
         public static string BlockQuoteMultiLine(string message) => $">>> {message}";
+
+        /// <summary>
+        /// Will display the text as a spoiler
+        /// </summary>
+        /// <param name="message">Message to make Spoiler</param>
+        /// <returns>Spoiler message</returns>
+        public static string Spoiler(string message) => $"||{message}||";
+        
+        /// <summary>
+        /// Creates a Big Header
+        /// </summary>
+        /// <param name="header">text for the header</param>
+        /// <returns></returns>
+        public static string Header1(string header) => $"# {header}";
+        
+        /// <summary>
+        /// Creates a Medium Header
+        /// </summary>
+        /// <param name="header">text for the header</param>
+        /// <returns></returns>
+        public static string Header2(string header) => $"## {header}";
+        
+        /// <summary>
+        /// Creates a Small Header
+        /// </summary>
+        /// <param name="header">text for the header</param>
+        /// <returns></returns>
+        public static string Header3(string header) => $"### {header}";
+
+        /// <summary>
+        /// Creates a clickable link displayed as the mask text
+        /// </summary>
+        /// <param name="mask">Text to display the link as</param>
+        /// <param name="url">Url for the link</param>
+        /// <returns></returns>
+        public static string MaskLink(string mask, string url) => $"[{mask}]({url})";
+        
+        /// <summary>
+        /// Creates a list item for the given message
+        /// </summary>
+        /// <param name="message">Text for the list</param>
+        /// <param name="indent">If the list should be indented a level</param>
+        /// <returns></returns>
+        public static string List(string message, bool indent) => $"{(indent ? " " : string.Empty)}- {message}";
+
+        /// <summary>
+        /// Creates a list item for the given message
+        /// </summary>
+        /// <param name="message">Text for the list</param>
+        /// <param name="number">Number to display</param>
+        /// <param name="indent">If the list should be indented a level</param>
+        /// <returns></returns>
+        public static string NumberedList(string message, int number, bool indent) => $"{(indent ? " " : string.Empty)}{StringCache<int>.Instance.ToString(number)} {message}";
     }
 }
