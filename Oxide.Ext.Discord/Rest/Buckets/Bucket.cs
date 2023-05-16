@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         /// <summary>
         /// The ID of this bucket which is based on the route
         /// </summary>
-        internal string Id;
+        internal BucketId Id;
 
         /// <summary>
         /// The number of requests that can be made per rate limit reset
@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         /// <param name="bucketId">ID of the bucket. If not a known bucket then will be part of the route. If know bucket will be the Discord bucket ID</param>
         /// <param name="rest">The handler that owns this Bucket</param>
         /// <param name="logger">Logger for this bucket</param>
-        public void Init(string bucketId, RestHandler rest, ILogger logger)
+        public void Init(BucketId bucketId, RestHandler rest, ILogger logger)
         {
             Id = bucketId;
             _rest = rest;
@@ -72,7 +72,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             Limit = 1;
             Remaining = 1;
             ResetAt = DateTimeOffset.MinValue;
-            _routes.Add(bucketId);
+            _routes.Add(bucketId.Id);
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             {
                 _completedSync.WaitOne();
                 
-                if (!IsKnownBucket && rateLimit != null && !string.IsNullOrEmpty(rateLimit.BucketId))
+                if (!IsKnownBucket && rateLimit != null && rateLimit.BucketId.IsValid)
                 {
                     _rest.UpgradeToKnownBucket(this, rateLimit.BucketId);
                     if (!IsKnownBucket)
@@ -294,7 +294,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
 
         public void LogDebug(DebugLogger logger)
         {
-            logger.AppendField("ID", Id);
+            logger.AppendField("ID", Id.Id);
             logger.AppendField("Known Bucket", IsKnownBucket);
             logger.AppendField("Remaining", Remaining);
             logger.AppendField("Limit", Limit);

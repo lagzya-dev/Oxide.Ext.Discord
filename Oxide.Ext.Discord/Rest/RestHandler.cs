@@ -8,6 +8,7 @@ using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
@@ -36,12 +37,12 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Buckets with Routes we don't know the Hash of yet
         /// </summary>
-        public readonly ConcurrentDictionary<string, Bucket> Buckets = new ConcurrentDictionary<string, Bucket>();
+        public readonly ConcurrentDictionary<BucketId, Bucket> Buckets = new ConcurrentDictionary<BucketId, Bucket>();
 
         /// <summary>
         /// Route to Bucket ID
         /// </summary>
-        public readonly ConcurrentDictionary<string, string> RouteToBucketId = new ConcurrentDictionary<string, string>();
+        public readonly ConcurrentDictionary<BucketId, BucketId> RouteToBucketId = new ConcurrentDictionary<BucketId, BucketId>();
 
         /// <summary>
         /// The authorization header value
@@ -134,14 +135,14 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         public Bucket QueueBucket(RequestHandler handler, BaseRequest request)
         {
-            string bucketId = BucketIdGenerator.GetBucketId(request.Method, request.Route);
+            BucketId bucketId = BucketIdFactory.Instance.GenerateId(request.Method, request.Route);
             _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}",  request.Route, bucketId);
             Bucket bucket = GetBucket(bucketId);
             bucket.QueueRequest(handler);
             return bucket;
         }
 
-        internal void UpgradeToKnownBucket(Bucket bucket, string newBucketId)
+        internal void UpgradeToKnownBucket(Bucket bucket, BucketId newBucketId)
         {
             _logger.Debug("RestHandler Upgrading To Known Bucket for Old ID: {0} New ID: {1}", bucket.Id, newBucketId);
             RouteToBucketId[bucket.Id] = newBucketId;
@@ -170,7 +171,7 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         /// <param name="bucketId"></param>
         /// <returns></returns>
-        public Bucket GetBucket(string bucketId)
+        public Bucket GetBucket(BucketId bucketId)
         {
             if (RouteToBucketId.ContainsKey(bucketId))
             {
@@ -189,7 +190,7 @@ namespace Oxide.Ext.Discord.Rest
 
         internal void OnClientClosed(DiscordClient client)
         {
-            foreach (KeyValuePair<string, Bucket> bucket in Buckets)
+            foreach (KeyValuePair<BucketId, Bucket> bucket in Buckets)
             {
                 bucket.Value.AbortClientRequests(client);
             }
@@ -200,7 +201,7 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         public void Shutdown()
         {
-            foreach (KeyValuePair<string, Bucket> bucket in Buckets)
+            foreach (KeyValuePair<BucketId, Bucket> bucket in Buckets)
             {
                 bucket.Value.Dispose();
             }

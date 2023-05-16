@@ -2,8 +2,8 @@ using System;
 using System.Net.Http.Headers;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Rest.Buckets;
 
 namespace Oxide.Ext.Discord.Entities.Api
 {
@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// The Bucket ID of the rate limit
         /// </summary>
-        public string BucketId;
+        public BucketId BucketId;
         
         /// <summary>
         /// If we hit the global rate limit with this request
@@ -41,13 +41,12 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// The scope the rate limit is for
         /// </summary>
         public string Scope;
-        
+
         /// <summary>
         /// Initialize the RateLimitResponse
         /// </summary>
         /// <param name="headers">Headers for the rate limit</param>
-        /// <param name="logger">Logger</param>
-        public void Init(HttpResponseHeaders headers, ILogger logger)
+        public void Init(HttpResponseHeaders headers)
         {
             IsGlobalRateLimit = headers.GetBool(RateLimitHeaders.IsGlobal);
             Scope = headers.Get(RateLimitHeaders.Scope);
@@ -58,13 +57,15 @@ namespace Oxide.Ext.Discord.Entities.Api
                 return;
             }
 
-            BucketId = headers.Get(RateLimitHeaders.BucketId);
-            if (!string.IsNullOrEmpty(BucketId))
+            BucketId = headers.GetBucketId(RateLimitHeaders.BucketId);
+            if (!BucketId.IsValid)
             {
-                Limit = headers.GetInt(RateLimitHeaders.BucketLimit);
-                Remaining =  headers.GetInt(RateLimitHeaders.BucketRemaining);
-                ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(GetBucketReset(headers));
+                return;
             }
+            
+            Limit = headers.GetInt(RateLimitHeaders.BucketLimit);
+            Remaining =  headers.GetInt(RateLimitHeaders.BucketRemaining);
+            ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(GetBucketReset(headers));
         }
 
         private double GetBucketReset(HttpResponseHeaders headers)
@@ -75,7 +76,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         ///<inheritdoc/>
         protected override void EnterPool()
         {
-            BucketId = null;
+            BucketId = default(BucketId);
             IsGlobalRateLimit = false;
             ResetAt = default(DateTimeOffset);
             Limit = 0;

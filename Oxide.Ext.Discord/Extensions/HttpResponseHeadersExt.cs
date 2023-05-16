@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using Oxide.Ext.Discord.Rest.Buckets;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -42,6 +43,13 @@ namespace Oxide.Ext.Discord.Extensions
             }
 
             return result;
+        }
+        
+        internal static BucketId GetBucketId(this HttpResponseHeaders headers, string key)
+        {
+            string value = headers.Get(key);
+            return !string.IsNullOrEmpty(value) ? new BucketId(value) : default(BucketId);
+
         }
     }
 }

@@ -80,7 +80,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 //_handler = RequestHandler.CreateRequestHandler(_request);
                 _bucket = _rest.QueueBucket(this, Request);
             
-                string bucketId = _bucket.Id;
+                BucketId bucketId = _bucket.Id;
                 semaphore = _bucket.Semaphore;
                 Request.Status = RequestStatus.PendingBucket;
             

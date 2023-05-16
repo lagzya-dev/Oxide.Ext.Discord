@@ -19280,7 +19280,7 @@
             <summary>
             Returns if the specified ID is linked
             </summary>
-            <param name="steamId">Steam ID of the player</param>
+            <param name="playerId">Steam ID of the player</param>
             <returns>True if the ID is linked; false otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsLinked(Oxide.Ext.Discord.Entities.Snowflake)">
@@ -19304,14 +19304,14 @@
             <param name="user">Discord user to check</param>
             <returns>True if the user is linked; false otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamId(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetPlayerId(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns the Steam ID of the given Discord ID if there is a link
             </summary>
             <param name="discordId">Discord ID to get steam ID for</param>
             <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamId(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetPlayerId(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
             <summary>
             Returns the Steam ID of the given Discord ID if there is a link
             </summary>
@@ -19329,7 +19329,7 @@
             <summary>
             Returns the Discord ID for the given Steam ID
             </summary>
-            <param name="steamId">Steam ID to get Discord ID for</param>
+            <param name="playerId">Steam ID to get Discord ID for</param>
             <returns>Discord ID for the given Steam ID; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetDiscordId(Oxide.Core.Libraries.Covalence.IPlayer)">
@@ -19343,7 +19343,7 @@
             <summary>
             Returns a minimal Discord User
             </summary>
-            <param name="steamId">ID of the in game player</param>
+            <param name="playerId">ID of the in game player</param>
             <returns>Discord ID for the given Steam ID; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetDiscordUser(Oxide.Core.Libraries.Covalence.IPlayer)">
@@ -19351,13 +19351,13 @@
             Returns a minimal Discord User
             </summary>
             <param name="player">Player to get the Discord User for</param>
-            <returns>Discord ID for the given Steam ID; null otherwise</returns>
+            <returns>Discord ID for the given IPlayer; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedMember(System.String,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild)">
             <summary>
             Returns a linked guild member for the matching steam id in the given guild
             </summary>
-            <param name="steamId">ID of the in game player</param>
+            <param name="playerId">ID of the in game player</param>
             <param name="guild">Guild the member is in</param>
             <returns>Discord ID for the given Steam ID; null otherwise</returns>
         </member>
@@ -19372,12 +19372,6 @@
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedCount">
             <summary>
             Returns the number of linked players
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetSteamIds">
-            <summary>
-            Returns Steam ID's for all linked players
             </summary>
             <returns></returns>
         </member>
