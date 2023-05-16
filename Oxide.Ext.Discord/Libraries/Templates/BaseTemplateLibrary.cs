@@ -40,7 +40,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </summary>
         protected readonly TemplateType TemplateType;
         
-        internal readonly DiscordConcurrentHashSet<TemplateId> RegisteredTemplates = new DiscordConcurrentHashSet<TemplateId>();
+        internal readonly DiscordConcurrentSet<TemplateId> RegisteredTemplates = new DiscordConcurrentSet<TemplateId>();
         private readonly Hash<string, string> _pluginTemplatePath = new Hash<string, string>();
 
         /// <summary>
