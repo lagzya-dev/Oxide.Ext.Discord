@@ -6,6 +6,7 @@ namespace Oxide.Ext.Discord.Attributes
     /// Used to identify direct message bot commands
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
+    [Obsolete("Direct Message Command is deprecated and will be removed in a future update. Please upgrade to application commands")]
     public class DirectMessageCommandAttribute : BaseCommandAttribute
     {
         /// <summary>

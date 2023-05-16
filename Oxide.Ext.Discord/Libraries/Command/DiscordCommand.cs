@@ -19,6 +19,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
     /// <summary>
     /// Represents a library for discord commands
     /// </summary>
+    [Obsolete("DiscordCommand is deprecated and will be removed in a future update. Please upgrade to DiscordAppCommand")]
     public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>, IDebugLoggable
     {
         /// <summary>
@@ -403,12 +404,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
 
         public void LogDebug(DebugLogger logger)
         {
-            logger.StartArray("Commands");
-            foreach (BaseCommand command in GetCommands())
-            {
-                logger.AppendObject(string.Empty, command);
-            }
-            logger.EndArray();
+            logger.AppendList("Commands", GetCommands());
         }
     }
 }
