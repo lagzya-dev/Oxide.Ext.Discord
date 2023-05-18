@@ -183,7 +183,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             base.OnPluginUnloaded(plugin);
             PluginId pluginId = plugin.Id();
             _templateCache.RemoveAll(t => t.PluginId == pluginId);
-            RegisteredTemplates.RemoveWhere(rt => rt.PluginId == pluginId);
         }
     }
 }

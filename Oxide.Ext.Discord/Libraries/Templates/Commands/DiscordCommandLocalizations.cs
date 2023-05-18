@@ -6,10 +6,8 @@ using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Commands;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Libraries;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Promise;
 using Oxide.Plugins;
 
@@ -183,13 +181,5 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
         ///<inheritdoc/>
         protected override void OnPluginLoaded(Plugin plugin) { }
-
-        ///<inheritdoc/>
-        protected override void OnPluginUnloaded(Plugin plugin)
-        {
-            base.OnPluginUnloaded(plugin);
-            PluginId pluginId = plugin.Id();
-            RegisteredTemplates.RemoveWhere(rt => rt.PluginId == pluginId);
-        }
     }
 }

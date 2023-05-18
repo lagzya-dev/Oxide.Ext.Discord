@@ -239,7 +239,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
-            _pluginTemplatePath.Remove(plugin.Id());
+            PluginId id = plugin.Id();
+            RegisteredTemplates.RemoveWhere(t => t.PluginId == id);
+            _pluginTemplatePath.Remove(id);
         }
     }
 }
