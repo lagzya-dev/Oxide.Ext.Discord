@@ -4,6 +4,7 @@ using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Pooling.Entities;
 using Oxide.Ext.Discord.Pooling.Pools;
 using Oxide.Plugins;
@@ -19,7 +20,8 @@ namespace Oxide.Ext.Discord.Pooling
         private PoolSettings _settings;
 
         internal PoolSettings Settings => _settings ?? DefaultSettings;
-        internal readonly string PluginName; 
+        internal readonly PluginId PluginId;
+        internal readonly string PluginName;
 
         private static readonly PoolSettings DefaultSettings = new PoolSettings();
 
@@ -29,6 +31,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <param name="plugin">Plugin the pool is for</param>
         public DiscordPluginPool(Plugin plugin)
         {
+            PluginId = plugin.Id();
             PluginName = plugin.FullName();
         }
 

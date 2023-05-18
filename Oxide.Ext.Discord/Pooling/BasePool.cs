@@ -1,5 +1,6 @@
 using System;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Pooling
@@ -18,13 +19,13 @@ namespace Oxide.Ext.Discord.Pooling
         private TPooled[] _pool;
         private int _index;
         private readonly object _lock = new object();
-        private static readonly Hash<DiscordPluginPool, BasePool<TPooled>> Pools = new Hash<DiscordPluginPool, BasePool<TPooled>>();
+        private static readonly Hash<PluginId, BasePool<TPooled>> Pools = new Hash<PluginId, BasePool<TPooled>>();
 
         private void InitPool(DiscordPluginPool pluginPool)
         {
             PluginPool = pluginPool;
             pluginPool.AddPool(this);
-            Pools[pluginPool] = this;
+            Pools[pluginPool.PluginId] = this;
             _pool = new TPooled[GetPoolSize(pluginPool.Settings)];
         }
 
@@ -42,7 +43,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <returns></returns>
         protected static T ForPlugin<T>(DiscordPluginPool pluginPool) where T : BasePool<TPooled>, new()
         {
-            if (!(Pools[pluginPool] is T pool))
+            if (!(Pools[pluginPool.PluginId] is T pool))
             {
                 pool = new T();
                 pool.InitPool(pluginPool);
@@ -149,7 +150,7 @@ namespace Oxide.Ext.Discord.Pooling
         ///<inheritdoc/>
         public void OnPluginUnloaded(DiscordPluginPool pluginPool)
         {
-            Pools.Remove(pluginPool);
+            Pools.Remove(pluginPool.PluginId);
         }
 
         /// <summary>
