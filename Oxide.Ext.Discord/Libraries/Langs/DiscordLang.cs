@@ -8,6 +8,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Langs
@@ -97,51 +98,36 @@ namespace Oxide.Ext.Discord.Libraries.Langs
         /// <param name="discordLocale">Discord locale to get oxide language from</param>
         /// <param name="oxideLanguage">Oxide Language if found</param>
         /// <returns>True if locale exists; false otherwise</returns>
-        public bool TryGetOxideLanguage(string discordLocale, out string oxideLanguage)
-        {
-            return _discordToOxide.TryGetValue(discordLocale, out oxideLanguage);
-        }
-        
+        public bool TryGetOxideLanguage(string discordLocale, out string oxideLanguage) => _discordToOxide.TryGetValue(discordLocale, out oxideLanguage);
+
         /// <summary>
         /// Returns the discord locale for a given oxide locale
         /// </summary>
         /// <param name="oxideLanguage">oxide locale to get discord locale for</param>
         /// <returns>Discord locale if it exists; null otherwise</returns>
-        public string GetDiscordLocale(string oxideLanguage)
-        {
-            return _oxideToDiscord[oxideLanguage];
-        }
-        
+        public string GetDiscordLocale(string oxideLanguage) => _oxideToDiscord[oxideLanguage];
+
         /// <summary>
         /// Tries to get the discord locale from a oxide language
         /// </summary>
         /// <param name="oxideLanguage">Oxide Language to get discord locale from</param>
         /// <param name="discordLocale">Discord locale if found</param>
         /// <returns>True if locale exists; false otherwise</returns>
-        public bool TryGetDiscordLocale(string oxideLanguage, out string discordLocale)
-        {
-            return _oxideToDiscord.TryGetValue(oxideLanguage, out discordLocale);
-        }
-        
+        public bool TryGetDiscordLocale(string oxideLanguage, out string discordLocale) => _oxideToDiscord.TryGetValue(oxideLanguage, out discordLocale);
+
         /// <summary>
         /// Returns the oxide locale for the given IPlayer
         /// </summary>
         /// <param name="player"><see cref="IPlayer"/> to get the locale for</param>
         /// <returns>Locale for the given IPlayer</returns>
-        public string GetPlayerLanguage(IPlayer player)
-        {
-            return GetPlayerLanguage(player?.Id);
-        }
-        
+        public string GetPlayerLanguage(IPlayer player) => GetPlayerLanguage(player?.Id);
+
         /// <summary>
         /// Returns the oxide locale for the given playerId
         /// </summary>
         /// <param name="playerId">PlayerId to get the locale for</param>
         /// <returns>Locale for the given playerId</returns>
-        public string GetPlayerLanguage(string playerId)
-        {
-            return _lang.GetLanguage(playerId);
-        }
+        public string GetPlayerLanguage(string playerId) => _lang.GetLanguage(playerId);
 
         /// <summary>
         /// Returns the discord localization for a plugins oxide lang.
@@ -190,6 +176,7 @@ namespace Oxide.Ext.Discord.Libraries.Langs
         /// <param name="langKey">The lang key to lookup</param>
         /// <returns>Localized message if found; Empty string otherwise</returns>
         /// <exception cref="ArgumentNullException">Thrown if any of the input arguments are null</exception>
+        [Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
         public string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, string langKey)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
@@ -222,6 +209,7 @@ namespace Oxide.Ext.Discord.Libraries.Langs
         /// <param name="args">Localization formatting args</param>
         /// <returns>Localized message if found; Empty string otherwise</returns>
         /// <exception cref="ArgumentNullException">Thrown if any of the input arguments are null</exception>
+        [Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
         public string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, string langKey, params object[] args)
         {
             string message = GetDiscordInteractionLangMessage(plugin, interaction, langKey);
@@ -265,7 +253,8 @@ namespace Oxide.Ext.Discord.Libraries.Langs
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
-            _pluginLangCache.RemoveAll(p => plugin.Name == p.PluginName);
+            PluginId pluginId = plugin.Id();
+            _pluginLangCache.RemoveAll(p => pluginId == p.PluginId);
         }
     }
 }

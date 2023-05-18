@@ -1,23 +1,25 @@
 using System;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Langs
 {
     internal struct LangId : IEquatable<LangId>
     {
-        internal readonly string PluginName;
+        internal readonly PluginId PluginId;
         private readonly string _language;
 
         public LangId(Plugin plugin, string language)
         {
             if(string.IsNullOrEmpty(language)) throw new ArgumentNullException(nameof(language));
-            PluginName = plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));
+            PluginId = plugin?.Id() ?? throw new ArgumentNullException(nameof(plugin));
             _language = language;
         }
 
         public bool Equals(LangId other)
         {
-            return PluginName == other.PluginName && _language == other._language;
+            return PluginId == other.PluginId && _language == other._language;
         }
         
         public override bool Equals(object obj)
@@ -27,14 +29,14 @@ namespace Oxide.Ext.Discord.Libraries.Langs
 
         public override string ToString()
         {
-            return $"Plugin: {PluginName} Language: {_language}";
+            return $"Plugin: {PluginId.ToString()} Language: {_language}";
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                int hashCode = PluginName.GetHashCode();
+                int hashCode = PluginId.GetHashCode();
                 hashCode = (hashCode * 397) ^ _language.GetHashCode();
                 return hashCode;
             }
