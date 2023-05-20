@@ -12,26 +12,14 @@ namespace Oxide.Ext.Discord.Types
         
         public bool IsReadOnly => false;
 
-        public bool ContainsKey(TKey key)
-        {
-            return _keyToValue.ContainsKey(key);
-        }
-        
-        public bool ContainsKey(TValue key)
-        {
-            return _valueToKey.ContainsKey(key);
-        }
-        
-        public bool TryGetValue(TKey key, out TValue value)
-        {
-            return _keyToValue.TryGetValue(key, out value);
-        }
-        
-        public bool TryGetValue(TValue key, out TKey value)
-        {
-            return _valueToKey.TryGetValue(key, out value);
-        }
-        
+        public bool ContainsKey(TKey key) => _keyToValue.ContainsKey(key);
+
+        public bool ContainsKey(TValue key) => _valueToKey.ContainsKey(key);
+
+        public bool TryGetValue(TKey key, out TValue value) => _keyToValue.TryGetValue(key, out value);
+
+        public bool TryGetValue(TValue key, out TKey value) => _valueToKey.TryGetValue(key, out value);
+
         public TValue this[TKey key]
         {
             get => _keyToValue[key];
@@ -58,11 +46,20 @@ namespace Oxide.Ext.Discord.Types
             _keyToValue.Add(key, value);
         }
         
-        
         public void Add(TValue key, TKey value)
         {
             _keyToValue.Add(value, key);
             _valueToKey.Add(key, value);
+        }
+
+        public void AddKey(TKey key, TValue value)
+        {
+            _keyToValue[key] = value;
+        }
+        
+        public void AddValue(TValue key, TKey value)
+        {
+            _valueToKey[key] = value;
         }
 
         public bool Remove(TKey key)
