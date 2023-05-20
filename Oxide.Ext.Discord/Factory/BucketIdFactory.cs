@@ -45,7 +45,7 @@ namespace Oxide.Ext.Discord.Factory
             while (!state.IsCompleted)
             {
                 state.MoveNext();
-                bucket.Append("/");
+                bucket.Append('/');
                 bucket.Append(state.Current);
             }
 

@@ -712,8 +712,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 if (!existing.HasLoadedAllMembers)
                 {
-                    //Request all guild members so we can be sure we have them all.
-                    await _webSocket.RequestAllGuildMembers(guild.Id).ConfigureAwait(false);
+                    _client.GetFirstClient().RequestGuildMembers(new GuildMembersRequestCommand
+                    {
+                        Nonce = "DiscordExtension",
+                        GuildId = guild.Id,
+                    });
+                    
                     _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildCreate)} Guild is now requesting all guild members.");
                 }
             }

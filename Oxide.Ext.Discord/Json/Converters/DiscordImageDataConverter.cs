@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                     return new DiscordImageData(value);
 
                 default:
-                    throw new JsonException($"Token type {reader.TokenType.ToString()} does not match DiscordImageData valid types of string or null. Path: {reader.Path}");
+                    throw new JsonException($"Token type {reader.TokenType} does not match DiscordImageData valid types of string or null. Path: {reader.Path}");
             }
         }
 

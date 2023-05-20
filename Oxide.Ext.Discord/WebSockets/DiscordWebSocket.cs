@@ -335,18 +335,6 @@ namespace Oxide.Ext.Discord.WebSockets
             
             return Task.CompletedTask;
         }
-        
-        /// <summary>
-        /// Sends a heartbeat to Discord
-        /// </summary>
-        internal Task RequestAllGuildMembers(Snowflake guildId)
-        {
-            return SendImmediatelyAsync(GatewayCommandCode.RequestGuildMembers, new GuildMembersRequestCommand
-            {
-                Nonce = "DiscordExtension",
-                GuildId = guildId,
-            });
-        }
 
         internal void OnInvalidSession(bool resume)
         {

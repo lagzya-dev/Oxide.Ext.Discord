@@ -6,6 +6,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     public struct PlayerId : IEquatable<PlayerId>
     {
         public readonly string Id;
+        public bool IsValid => !string.IsNullOrEmpty(Id);
 
         public PlayerId(string id)
         {

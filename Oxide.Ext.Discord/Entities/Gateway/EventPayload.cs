@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Gateway.Events;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Pooling;
@@ -33,13 +34,20 @@ namespace Oxide.Ext.Discord.Entities.Gateway
         public int? Sequence { get; internal set; }
 
         /// <summary>
+        /// If the websocket should resume on reconnect.
+        /// </summary>
+        public bool ShouldResume { get; internal set; }
+
+        internal JToken JsonData { get; set; }
+        
+        /// <summary>
         /// Returns the Data as {T}
         /// </summary>
         /// <typeparam name="T">Type to convert Data to</typeparam>
         /// <returns>Data converted to {T}</returns>
         public T GetData<T>()
         {
-            return (T)Data;
+            return JsonData.ToObject<T>();
         }
         
         /// <inheritdoc/>

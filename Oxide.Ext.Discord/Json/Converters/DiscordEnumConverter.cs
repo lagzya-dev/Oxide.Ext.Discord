@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Json.Utilities;
 namespace Oxide.Ext.Discord.Json.Converters
 {
     /// <summary>
-    /// Handles deserializing JSON values as strings. If they value doesn't exist return the default value.
+    /// Handles deserializing JSON values as strings. If the value doesn't exist return the default value.
     /// </summary>
     public class DiscordEnumConverter : JsonConverter
     {
@@ -59,26 +59,16 @@ namespace Oxide.Ext.Discord.Json.Converters
                 return null;
             }
 
+            string value = reader.Value.ToString();
             if (reader.TokenType == JsonToken.Integer)
             {
-                if (Enum.IsDefined(objectType, reader.Value.ToString()))
-                {
-                    return Enum.Parse(objectType, reader.Value.ToString());
-                }
-
-                return objectType.GetDefault();
+                return Enum.IsDefined(objectType, value) ? Enum.Parse(objectType, value) : objectType.GetDefault();
             }
 
             if (reader.TokenType == JsonToken.String)
             {
-                string enumValue = reader.Value.ToString();
-                string enumName = JsonEnumUtils.FromEnumName(objectType, enumValue) ?? enumValue;
-                if (Enum.IsDefined(objectType, enumName))
-                {
-                    return Enum.Parse(objectType, enumName);
-                }
-                
-                return objectType.GetDefault();
+                string enumName = JsonEnumUtils.FromEnumName(objectType, value) ?? value;
+                return Enum.IsDefined(objectType, enumName) ? Enum.Parse(objectType, enumName) : objectType.GetDefault();
             }
 
             throw new JsonException($"Unexpected token {reader.TokenType} when parsing enum. Path: {reader.Path}");

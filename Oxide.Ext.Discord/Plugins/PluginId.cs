@@ -30,11 +30,8 @@ namespace Oxide.Ext.Discord.Plugins
         public static bool operator == (PluginId left, PluginId right) => left.Equals(right);
         public static bool operator !=(PluginId left, PluginId right) => !(left == right);
 
-        public override string ToString()
-        {
-            return this.PluginName();
-        }
-        
+        public override string ToString() => this.PluginName();
+
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendField("ID", Id);

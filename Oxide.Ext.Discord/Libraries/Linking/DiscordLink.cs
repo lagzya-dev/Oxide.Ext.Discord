@@ -27,6 +27,12 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         public readonly ICollection<PlayerId> PlayerIds;
         public readonly ICollection<Snowflake> DiscordIds;
 
+        /// <summary>
+        /// Returns if there is a registered link plugin
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEnabled => _linkPlugins.Count != 0;
+        
         private readonly BidirectionalDictionary<PlayerId, Snowflake> _links = new BidirectionalDictionary<PlayerId, Snowflake>();
         private readonly Hash<PluginId, IDictionary<string, Snowflake>> _linkPlugins = new Hash<PluginId, IDictionary<string, Snowflake>>();
 
@@ -44,13 +50,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             PlayerIds = _links.AsKeyCollection();
             DiscordIds = _links.AsValueCollection();
         }
-
-        /// <summary>
-        /// Returns if there is a registered link plugin
-        /// </summary>
-        /// <returns></returns>
-        public bool IsEnabled() => _linkPlugins.Count != 0;
-
+        
         /// <summary>
         /// Adds a link plugin to be the plugin used with the Discord Link library
         /// </summary>
@@ -86,25 +86,27 @@ namespace Oxide.Ext.Discord.Libraries.Linking
 
             PluginId pluginId = plugin.Id();
             IDictionary<string, Snowflake> pluginData = _linkPlugins[pluginId];
-            if (pluginData != null)
+            if (pluginData == null)
             {
-                _linkPlugins.Remove(pluginId);
-                foreach (KeyValuePair<string,Snowflake> link in pluginData)
+                return;
+            }
+            
+            _linkPlugins.Remove(pluginId);
+            foreach (KeyValuePair<string, Snowflake> link in pluginData)
+            {
+                bool keepLink = false;
+                foreach (IDictionary<string, Snowflake> links in _linkPlugins.Values)
                 {
-                    bool keepLink = false;
-                    foreach (IDictionary<string, Snowflake> links in _linkPlugins.Values)
+                    if (links.ContainsKey(link.Key))
                     {
-                        if (links.ContainsKey(link.Key))
-                        {
-                            keepLink = true;
-                            break;
-                        }
+                        keepLink = true;
+                        break;
                     }
+                }
 
-                    if (!keepLink)
-                    {
-                        RemoveLink(new PlayerId(link.Key), link.Value);
-                    }
+                if (!keepLink)
+                {
+                    RemoveLink(new PlayerId(link.Key), link.Value);
                 }
             }
         }
@@ -176,14 +178,14 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="playerId">Steam ID to get Discord ID for</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        public Snowflake? GetDiscordId(string playerId) => _links.TryGetValue(new PlayerId(playerId), out Snowflake id) ? id : new Snowflake?();
+        public Snowflake GetDiscordId(string playerId) => _links.TryGetValue(new PlayerId(playerId), out Snowflake id) ? id : default(Snowflake);
 
         /// <summary>
         /// Returns the Discord ID for the given IPlayer
         /// </summary>
         /// <param name="player">Player to get Discord ID for</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        public Snowflake? GetDiscordId(IPlayer player) => GetDiscordId(player.Id);
+        public Snowflake GetDiscordId(IPlayer player) => GetDiscordId(player.Id);
 
         /// <summary>
         /// Returns a minimal Discord User
@@ -208,13 +210,13 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         public GuildMember GetLinkedMember(string playerId, DiscordGuild guild)
         {
             if (guild == null) throw new ArgumentNullException(nameof(guild));
-            Snowflake? discordId = GetDiscordId(playerId);
-            if (!discordId.HasValue || !guild.IsAvailable)
+            Snowflake discordId = GetDiscordId(playerId);
+            if (!discordId.IsValid() || !guild.IsAvailable)
             {
                 return null;
             }
 
-            return guild.Members[discordId.Value];
+            return guild.Members[discordId];
         }
 
         /// <summary>

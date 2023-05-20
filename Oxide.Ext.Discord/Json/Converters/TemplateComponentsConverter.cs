@@ -19,10 +19,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <param name="value"></param>
         /// <param name="serializer"></param>
         /// <exception cref="NotSupportedException"></exception>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            throw new NotSupportedException();
-        }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 
         /// <summary>
         /// Populate the correct types in components instead of just the BaseComponent
@@ -72,10 +69,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// </summary>
         /// <param name="objectType"></param>
         /// <returns></returns>
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(List<BaseComponentTemplate>);
-        }
+        public override bool CanConvert(Type objectType) => objectType == typeof(List<BaseComponentTemplate>);
 
         /// <summary>
         /// Message Component Convert does not write JSON
