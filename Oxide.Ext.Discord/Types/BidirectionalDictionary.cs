@@ -64,14 +64,34 @@ namespace Oxide.Ext.Discord.Types
 
         public bool Remove(TKey key)
         {
-            TValue value = _keyToValue[key];
-            return _valueToKey.Remove(value) && _keyToValue.Remove(key);
+            if (!_keyToValue.TryGetValue(key, out TValue valueKey))
+            {
+                return false;
+            }
+            
+            _keyToValue.Remove(key);
+            if (_valueToKey.TryGetValue(valueKey, out TKey _))
+            {
+                _valueToKey.Remove(valueKey);
+            }
+
+            return true;
         }
         
         public bool Remove(TValue key)
         {
-            TKey valueKey = _valueToKey[key];
-            return _valueToKey.Remove(key) && _keyToValue.Remove(valueKey);
+            if (!_valueToKey.TryGetValue(key, out TKey valueKey))
+            {
+                return false;
+            }
+            
+            _valueToKey.Remove(key);
+            if (_keyToValue.TryGetValue(valueKey, out TValue _))
+            {
+                _keyToValue.Remove(valueKey);
+            }
+
+            return true;
         }
 
         public void Clear()
