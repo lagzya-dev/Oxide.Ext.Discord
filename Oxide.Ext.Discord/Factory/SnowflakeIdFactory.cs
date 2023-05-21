@@ -1,23 +1,26 @@
 using System;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Singleton;
 
-namespace Oxide.Ext.Discord.Helpers
+namespace Oxide.Ext.Discord.Factory
 {
     /// <summary>
     /// Generates a unique snowflake ID
     /// </summary>
-    public static class SnowflakeIdGenerator
+    public class SnowflakeIdFactory : Singleton<SnowflakeIdFactory>
     {
-        private static DateTimeOffset _currentTime;
-        private static ulong _increment;
-        private static readonly TimeSpan DiffCompare = TimeSpan.FromMilliseconds(1);
-        private static readonly object Sync = new object();
+        private DateTimeOffset _currentTime;
+        private ulong _increment;
+        private readonly TimeSpan DiffCompare = TimeSpan.FromMilliseconds(1);
+        private readonly object Sync = new object();
+
+        private SnowflakeIdFactory() { }
         
         /// <summary>
         /// Returns the generated snowflake ID
         /// </summary>
         /// <returns></returns>
-        public static Snowflake Generate()
+        public Snowflake Generate()
         {
             lock (Sync)
             {

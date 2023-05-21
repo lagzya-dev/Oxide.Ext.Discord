@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         protected void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<RequestError> onError, BaseApiCompletedCallback completedCallback)
         {
-            Id = SnowflakeIdGenerator.Generate();
+            Id = SnowflakeIdFactory.Instance.Generate();
             Client = client;
             HttpClient = httpClient;
             Method = method;

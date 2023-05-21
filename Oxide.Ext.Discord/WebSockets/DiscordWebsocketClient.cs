@@ -3,7 +3,7 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets
@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.WebSockets
         public DiscordWebsocketClient(ILogger logger)
         {
             _logger = logger;
-            WebsocketId = SnowflakeIdGenerator.Generate();
+            WebsocketId = SnowflakeIdFactory.Instance.Generate();
             SocketState = SocketState.Connecting;
             _socket.Options.KeepAliveInterval = TimeSpan.Zero;
         }
