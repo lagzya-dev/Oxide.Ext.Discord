@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Json.Converters
             }
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotImplementedException();
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
         
 
         public override bool CanConvert(Type objectType) => objectType == _type;

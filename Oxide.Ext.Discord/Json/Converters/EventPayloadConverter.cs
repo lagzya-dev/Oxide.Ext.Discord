@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <param name="value"></param>
         /// <param name="serializer"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotImplementedException();
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) => throw new NotSupportedException();
 
         /// <summary>
         /// Reads the JSON into a pooled <see cref="EventPayload"/>
