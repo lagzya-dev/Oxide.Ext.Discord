@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                 switch (type)
                 {
                     case MessageComponentType.Button:
-                        components.Add(token.ToObject<ButtonTemplate>());
+                        components.Add(token.ToObject<ButtonTemplate>(serializer));
                         break;
                         
                     case MessageComponentType.StringSelect:
@@ -52,11 +52,11 @@ namespace Oxide.Ext.Discord.Json.Converters
                     case MessageComponentType.RoleSelect:
                     case MessageComponentType.MentionableSelect:
                     case MessageComponentType.ChannelSelect:
-                        components.Add(token.ToObject<SelectMenuTemplate>());
+                        components.Add(token.ToObject<SelectMenuTemplate>(serializer));
                         break;
                     
                     case MessageComponentType.InputText:
-                        components.Add(token.ToObject<InputTextTemplate>());
+                        components.Add(token.ToObject<InputTextTemplate>(serializer));
                         break;
                 }
             }

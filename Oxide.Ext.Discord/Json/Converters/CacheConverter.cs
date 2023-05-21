@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject obj = JObject.Load(reader);
-            Snowflake id = obj.Value<Snowflake>("id");
+            Snowflake id = new Snowflake(obj.Value<string>("id"));
             T entity = EntityCache<T>.Instance.GetOrCreate(id);
             using (JsonReader objReader = obj.CreateReader())
             {

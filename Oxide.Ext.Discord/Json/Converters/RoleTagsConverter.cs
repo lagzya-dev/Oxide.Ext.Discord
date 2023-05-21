@@ -42,9 +42,9 @@ namespace Oxide.Ext.Discord.Json.Converters
             JObject obj = JObject.Load(reader);
             RoleTags tags = new RoleTags
             {
-                BotId = obj["bot_id"]?.ToObject<Snowflake?>(),
-                IntegrationId = obj["integration_id"]?.ToObject<Snowflake?>(),
-                SubscriptionListingId = obj["subscription_listing_id"]?.ToObject<Snowflake?>(),
+                BotId = obj["bot_id"]?.ToObject<Snowflake?>(serializer),
+                IntegrationId = obj["integration_id"]?.ToObject<Snowflake?>(serializer),
+                SubscriptionListingId = obj["subscription_listing_id"]?.ToObject<Snowflake?>(serializer),
                 PremiumSubscriber = obj["premium_subscriber"] != null,
                 AvailableForPurchase = obj["available_for_purchase"] != null,
                 GuildConnections = obj["guild_connections"] != null

@@ -278,7 +278,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
                     // Hello (sent immediately after connecting, contains heartbeat and server debug information)
                     case GatewayEventCode.Hello:
-                        await HandleHello(payload.GetData<GatewayHelloEvent>()).ConfigureAwait(false);
+                        await HandleHello(payload.GetData<GatewayHelloEvent>(_client)).ConfigureAwait(false);
                         break;
 
                     // Heartbeat ACK (sent immediately following a client heartbeat
@@ -309,243 +309,243 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             switch (payload.DispatchCode)
             {
                 case DiscordDispatchCode.Ready:
-                    HandleDispatchReady(payload.GetData<GatewayReadyEvent>());
+                    HandleDispatchReady(payload.GetData<GatewayReadyEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.Resumed:
-                    HandleDispatchResumed(payload.GetData<GatewayResumedEvent>());
+                    HandleDispatchResumed(payload.GetData<GatewayResumedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.ChannelCreated:
-                    HandleDispatchChannelCreate(payload.GetData<DiscordChannel>());
+                    HandleDispatchChannelCreate(payload.GetData<DiscordChannel>(_client));
                     break;
 
                 case DiscordDispatchCode.ChannelUpdated:
-                    HandleDispatchChannelUpdate(payload.GetData<DiscordChannel>());
+                    HandleDispatchChannelUpdate(payload.GetData<DiscordChannel>(_client));
                     break;
 
                 case DiscordDispatchCode.ChannelDeleted:
-                    HandleDispatchChannelDelete(payload.GetData<DiscordChannel>());
+                    HandleDispatchChannelDelete(payload.GetData<DiscordChannel>(_client));
                     break;
 
                 case DiscordDispatchCode.ChannelPinsUpdate:
-                    HandleDispatchChannelPinUpdate(payload.GetData<ChannelPinsUpdatedEvent>());
+                    HandleDispatchChannelPinUpdate(payload.GetData<ChannelPinsUpdatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildCreated:
-                    HandleDispatchGuildCreate(payload.GetData<DiscordGuild>());
+                    HandleDispatchGuildCreate(payload.GetData<DiscordGuild>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildUpdated:
-                    HandleDispatchGuildUpdate(payload.GetData<DiscordGuild>());
+                    HandleDispatchGuildUpdate(payload.GetData<DiscordGuild>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildDeleted:
-                    HandleDispatchGuildDelete(payload.GetData<DiscordGuild>());
+                    HandleDispatchGuildDelete(payload.GetData<DiscordGuild>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildBanAdded:
-                    HandleDispatchGuildBanAdd(payload.GetData<GuildMemberBannedEvent>());
+                    HandleDispatchGuildBanAdd(payload.GetData<GuildMemberBannedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildBanRemoved:
-                    HandleDispatchGuildBanRemove(payload.GetData<GuildMemberBannedEvent>());
+                    HandleDispatchGuildBanRemove(payload.GetData<GuildMemberBannedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildEmojisUpdated:
-                    HandleDispatchGuildEmojisUpdate(payload.GetData<GuildEmojisUpdatedEvent>());
+                    HandleDispatchGuildEmojisUpdate(payload.GetData<GuildEmojisUpdatedEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.GuildStickersUpdate:
-                    HandleDispatchGuildStickersUpdate(payload.GetData<GuildStickersUpdatedEvent>());
+                    HandleDispatchGuildStickersUpdate(payload.GetData<GuildStickersUpdatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildIntegrationsUpdated:
-                    HandleDispatchGuildIntegrationsUpdate(payload.GetData<GuildIntegrationsUpdatedEvent>());
+                    HandleDispatchGuildIntegrationsUpdate(payload.GetData<GuildIntegrationsUpdatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildMemberAdded:
-                    HandleDispatchGuildMemberAdd(payload.GetData<GuildMemberAddedEvent>());
+                    HandleDispatchGuildMemberAdd(payload.GetData<GuildMemberAddedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildMemberRemoved:
-                    HandleDispatchGuildMemberRemove(payload.GetData<GuildMemberRemovedEvent>());
+                    HandleDispatchGuildMemberRemove(payload.GetData<GuildMemberRemovedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildMemberUpdated:
-                    HandleDispatchGuildMemberUpdate(payload.GetData<GuildMemberUpdatedEvent>());
+                    HandleDispatchGuildMemberUpdate(payload.GetData<GuildMemberUpdatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildMembersChunk:
-                    HandleDispatchGuildMembersChunk(payload.GetData<GuildMembersChunkEvent>());
+                    HandleDispatchGuildMembersChunk(payload.GetData<GuildMembersChunkEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildRoleCreated:
-                    HandleDispatchGuildRoleCreate(payload.GetData<GuildRoleCreatedEvent>());
+                    HandleDispatchGuildRoleCreate(payload.GetData<GuildRoleCreatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildRoleUpdated:
-                    HandleDispatchGuildRoleUpdate(payload.GetData<GuildRoleUpdatedEvent>());
+                    HandleDispatchGuildRoleUpdate(payload.GetData<GuildRoleUpdatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.GuildRoleDeleted:
-                    HandleDispatchGuildRoleDelete(payload.GetData<GuildRoleDeletedEvent>());
+                    HandleDispatchGuildRoleDelete(payload.GetData<GuildRoleDeletedEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.GuildScheduledEventCreate:
-                    HandleDispatchGuildScheduledEventCreate(payload.GetData<GuildScheduledEvent>());
+                    HandleDispatchGuildScheduledEventCreate(payload.GetData<GuildScheduledEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.GuildScheduledEventUpdate:
-                    HandleDispatchGuildScheduledEventUpdate(payload.GetData<GuildScheduledEvent>());
+                    HandleDispatchGuildScheduledEventUpdate(payload.GetData<GuildScheduledEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.GuildScheduledEventDelete:
-                    HandleDispatchGuildScheduledEventDelete(payload.GetData<GuildScheduledEvent>());
+                    HandleDispatchGuildScheduledEventDelete(payload.GetData<GuildScheduledEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.GuildScheduledEventUserAdd:
-                    HandleDispatchGuildScheduledEventUserAdd(payload.GetData<GuildScheduleEventUserAddedEvent>());
+                    HandleDispatchGuildScheduledEventUserAdd(payload.GetData<GuildScheduleEventUserAddedEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.GuildScheduledEventUserRemove:
-                    HandleDispatchGuildScheduledEventUserRemove(payload.GetData<GuildScheduleEventUserRemovedEvent>());
+                    HandleDispatchGuildScheduledEventUserRemove(payload.GetData<GuildScheduleEventUserRemovedEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.IntegrationCreated:
-                    HandleDispatchIntegrationCreate(payload.GetData<IntegrationCreatedEvent>());
+                    HandleDispatchIntegrationCreate(payload.GetData<IntegrationCreatedEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.IntegrationUpdated:
-                    HandleDispatchIntegrationUpdate(payload.GetData<IntegrationUpdatedEvent>());
+                    HandleDispatchIntegrationUpdate(payload.GetData<IntegrationUpdatedEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.IntegrationDeleted:
-                    HandleDispatchIntegrationDelete(payload.GetData<IntegrationDeletedEvent>());
+                    HandleDispatchIntegrationDelete(payload.GetData<IntegrationDeletedEvent>(_client));
                     break;    
 
                 case DiscordDispatchCode.MessageCreated:
-                    HandleDispatchMessageCreate(payload.GetData<DiscordMessage>());
+                    HandleDispatchMessageCreate(payload.GetData<DiscordMessage>(_client));
                     break;
 
                 case DiscordDispatchCode.MessageUpdated:
-                    HandleDispatchMessageUpdate(payload.GetData<DiscordMessage>());
+                    HandleDispatchMessageUpdate(payload.GetData<DiscordMessage>(_client));
                     break;
 
                 case DiscordDispatchCode.MessageDeleted:
-                    HandleDispatchMessageDelete(payload.GetData<MessageDeletedEvent>());
+                    HandleDispatchMessageDelete(payload.GetData<MessageDeletedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.MessageBulkDeleted:
-                    HandleDispatchMessageDeleteBulk(payload.GetData<MessageBulkDeletedEvent>());
+                    HandleDispatchMessageDeleteBulk(payload.GetData<MessageBulkDeletedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.MessageReactionAdded:
-                    HandleDispatchMessageReactionAdd(payload.GetData<MessageReactionAddedEvent>());
+                    HandleDispatchMessageReactionAdd(payload.GetData<MessageReactionAddedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.MessageReactionRemoved:
-                    HandleDispatchMessageReactionRemove(payload.GetData<MessageReactionRemovedEvent>());
+                    HandleDispatchMessageReactionRemove(payload.GetData<MessageReactionRemovedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.MessageReactionAllRemoved:
-                    HandleDispatchMessageReactionRemoveAll(payload.GetData<MessageReactionRemovedAllEvent>());
+                    HandleDispatchMessageReactionRemoveAll(payload.GetData<MessageReactionRemovedAllEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.MessageReactionEmojiRemoved:
-                    HandleDispatchMessageReactionRemoveEmoji(payload.GetData<MessageReactionRemovedAllEmojiEvent>());
+                    HandleDispatchMessageReactionRemoveEmoji(payload.GetData<MessageReactionRemovedAllEmojiEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.PresenceUpdated:
-                    HandleDispatchPresenceUpdate(payload.GetData<PresenceUpdatedEvent>());
+                    HandleDispatchPresenceUpdate(payload.GetData<PresenceUpdatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.TypingStarted:
-                    HandleDispatchTypingStart(payload.GetData<TypingStartedEvent>());
+                    HandleDispatchTypingStart(payload.GetData<TypingStartedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.UserUpdated:
-                    HandleDispatchUserUpdate(payload.GetData<DiscordUser>());
+                    HandleDispatchUserUpdate(payload.GetData<DiscordUser>(_client));
                     break;
 
                 case DiscordDispatchCode.VoiceStateUpdated:
-                    HandleDispatchVoiceStateUpdate(payload.GetData<VoiceState>());
+                    HandleDispatchVoiceStateUpdate(payload.GetData<VoiceState>(_client));
                     break;
 
                 case DiscordDispatchCode.VoiceServerUpdated:
-                    HandleDispatchVoiceServerUpdate(payload.GetData<VoiceServerUpdatedEvent>());
+                    HandleDispatchVoiceServerUpdate(payload.GetData<VoiceServerUpdatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.WebhooksUpdated:
-                    HandleDispatchWebhooksUpdate(payload.GetData<WebhooksUpdatedEvent>());
+                    HandleDispatchWebhooksUpdate(payload.GetData<WebhooksUpdatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.InviteCreated:
-                    HandleDispatchInviteCreate(payload.GetData<InviteCreatedEvent>());
+                    HandleDispatchInviteCreate(payload.GetData<InviteCreatedEvent>(_client));
                     break;
 
                 case DiscordDispatchCode.InviteDeleted:
-                    HandleDispatchInviteDelete(payload.GetData<InviteDeletedEvent>());
+                    HandleDispatchInviteDelete(payload.GetData<InviteDeletedEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.ApplicationCommandsPermissionsUpdate:
-                    HandleApplicationCommandsPermissionsUpdate(payload.GetData<CommandPermissions>());
+                    HandleApplicationCommandsPermissionsUpdate(payload.GetData<CommandPermissions>(_client));
                     break;
                 
                 case DiscordDispatchCode.InteractionCreated:
-                    HandleDispatchInteractionCreate(payload.GetData<DiscordInteraction>());
+                    HandleDispatchInteractionCreate(payload.GetData<DiscordInteraction>(_client));
                     break;
 
                 case DiscordDispatchCode.ThreadCreated:
-                    HandleDispatchThreadCreated(payload.GetData<DiscordChannel>());
+                    HandleDispatchThreadCreated(payload.GetData<DiscordChannel>(_client));
                     break;
                 
                 case DiscordDispatchCode.ThreadUpdated:
-                    HandleDispatchThreadUpdated(payload.GetData<DiscordChannel>());
+                    HandleDispatchThreadUpdated(payload.GetData<DiscordChannel>(_client));
                     break;
                 
                 case DiscordDispatchCode.ThreadDeleted:
-                    HandleDispatchThreadDeleted(payload.GetData<DiscordChannel>());
+                    HandleDispatchThreadDeleted(payload.GetData<DiscordChannel>(_client));
                     break;
                 
                 case DiscordDispatchCode.ThreadListSync:
-                    HandleDispatchThreadListSync(payload.GetData<ThreadListSyncEvent>());
+                    HandleDispatchThreadListSync(payload.GetData<ThreadListSyncEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.ThreadMemberUpdated:
-                    HandleDispatchThreadMemberUpdated(payload.GetData<ThreadMemberUpdateEvent>());
+                    HandleDispatchThreadMemberUpdated(payload.GetData<ThreadMemberUpdateEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.ThreadMembersUpdated:
-                    HandleDispatchThreadMembersUpdated(payload.GetData<ThreadMembersUpdatedEvent>());
+                    HandleDispatchThreadMembersUpdated(payload.GetData<ThreadMembersUpdatedEvent>(_client));
                     break;
                 
                 case DiscordDispatchCode.StageInstanceCreated:
-                    HandleDispatchStageInstanceCreated(payload.GetData<StageInstance>());
+                    HandleDispatchStageInstanceCreated(payload.GetData<StageInstance>(_client));
                     break;
                 
                 case DiscordDispatchCode.StageInstanceUpdated:
-                    HandleDispatchStageInstanceUpdated(payload.GetData<StageInstance>());
+                    HandleDispatchStageInstanceUpdated(payload.GetData<StageInstance>(_client));
                     break;
                 
                 case DiscordDispatchCode.StageInstanceDeleted:
-                    HandleDispatchStageInstanceDeleted(payload.GetData<StageInstance>());
+                    HandleDispatchStageInstanceDeleted(payload.GetData<StageInstance>(_client));
                     break;
                 
                 case DiscordDispatchCode.AutoModerationRuleCreate:
-                    HandleDispatchAutoModRuleCreated(payload.GetData<AutoModRule>());
+                    HandleDispatchAutoModRuleCreated(payload.GetData<AutoModRule>(_client));
                     break;
                 
                 case DiscordDispatchCode.AutoModerationRuleUpdate:
-                    HandleDispatchAutoModRuleUpdated(payload.GetData<AutoModRule>());
+                    HandleDispatchAutoModRuleUpdated(payload.GetData<AutoModRule>(_client));
                     break;
                 
                 case DiscordDispatchCode.AutoModerationRuleDelete:
-                    HandleDispatchAutoModRuleDeleted(payload.GetData<AutoModRule>());
+                    HandleDispatchAutoModRuleDeleted(payload.GetData<AutoModRule>(_client));
                     break;
                 
                 case DiscordDispatchCode.AutoModerationActionExecution:
-                    HandleDispatchAutoModActionExecuted(payload.GetData<AutoModActionExecutionEvent>());
+                    HandleDispatchAutoModActionExecuted(payload.GetData<AutoModActionExecutionEvent>(_client));
                     break;
                 
                 // Bots should ignore this

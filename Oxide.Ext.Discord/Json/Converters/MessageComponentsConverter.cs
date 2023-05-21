@@ -47,31 +47,31 @@ namespace Oxide.Ext.Discord.Json.Converters
                 switch (type)
                 {
                     case MessageComponentType.Button:
-                        components.Add(token.ToObject<ButtonComponent>());
+                        components.Add(token.ToObject<ButtonComponent>(serializer));
                         break;
                         
                     case MessageComponentType.StringSelect:
-                        components.Add(token.ToObject<StringSelectComponent>());
+                        components.Add(token.ToObject<StringSelectComponent>(serializer));
                         break;
                     
                     case MessageComponentType.UserSelect:
-                        components.Add(token.ToObject<UserSelectComponent>());
+                        components.Add(token.ToObject<UserSelectComponent>(serializer));
                         break;
                     
                     case MessageComponentType.RoleSelect:
-                        components.Add(token.ToObject<RoleSelectComponent>());
+                        components.Add(token.ToObject<RoleSelectComponent>(serializer));
                         break;
                     
                     case MessageComponentType.MentionableSelect:
-                        components.Add(token.ToObject<MentionableSelectComponent>());
+                        components.Add(token.ToObject<MentionableSelectComponent>(serializer));
                         break;
                     
                     case MessageComponentType.ChannelSelect:
-                        components.Add(token.ToObject<ChannelSelectComponent>());
+                        components.Add(token.ToObject<ChannelSelectComponent>(serializer));
                         break;
                     
                     case MessageComponentType.InputText:
-                        components.Add(token.ToObject<InputTextComponent>());
+                        components.Add(token.ToObject<InputTextComponent>(serializer));
                         break;
                 }
             }

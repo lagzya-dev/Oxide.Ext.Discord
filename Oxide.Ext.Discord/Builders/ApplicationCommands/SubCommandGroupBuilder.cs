@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         [Obsolete("AddNameLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddNameLocalization(string name, string lang) instead.")]
         public SubCommandGroupBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            _option.NameLocalizations = DiscordLang.Instance.GetCommandLocalization(plugin, langKey);
+            _option.NameLocalizations = DiscordLang.Instance.GetDiscordLocalizations(plugin, langKey);
             return this;
         }
 
@@ -64,7 +64,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         [Obsolete("AddDescriptionLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddDescriptionLocalization(string name, string lang) instead.")]
         public SubCommandGroupBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            _option.DescriptionLocalizations = DiscordLang.Instance.GetCommandLocalization(plugin, langKey);
+            _option.DescriptionLocalizations = DiscordLang.Instance.GetDiscordLocalizations(plugin, langKey);
             return this;
         }
 

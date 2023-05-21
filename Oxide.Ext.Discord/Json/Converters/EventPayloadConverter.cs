@@ -45,17 +45,17 @@ namespace Oxide.Ext.Discord.Json.Converters
         {
             JObject obj = JObject.Load(reader);
             EventPayload payload = DiscordPool.Internal.Get<EventPayload>();
-            payload.OpCode = obj[EventCode].ToObject<GatewayEventCode>();
-            payload.Sequence = obj[Sequence]?.ToObject<int?>();
+            payload.OpCode = obj[EventCode].ToObject<GatewayEventCode>(serializer);
+            payload.Sequence = obj[Sequence]?.ToObject<int?>(serializer);
 
             switch (payload.OpCode)
             {
                 case GatewayEventCode.Dispatch:
-                    payload.DispatchCode = obj[DiscordCode].ToObject<DiscordDispatchCode>();
+                    payload.DispatchCode = obj[DiscordCode].ToObject<DiscordDispatchCode>(serializer);
                     payload.JsonData = obj[Data];
                     break;
                 case GatewayEventCode.InvalidSession:
-                    payload.ShouldResume = obj[Data]?.ToObject<bool?>() ?? false;
+                    payload.ShouldResume = obj[Data]?.ToObject<bool?>(serializer) ?? false;
                     break;
                 case GatewayEventCode.Hello:
                     payload.JsonData = obj[Data];

@@ -45,9 +45,9 @@ namespace Oxide.Ext.Discord.Entities.Gateway
         /// </summary>
         /// <typeparam name="T">Type to convert Data to</typeparam>
         /// <returns>Data converted to {T}</returns>
-        public T GetData<T>()
+        public T GetData<T>(BotClient client)
         {
-            return JsonData.ToObject<T>();
+            return JsonData.ToObject<T>(client.JsonSerializer);
         }
         
         /// <inheritdoc/>

@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            long value = JToken.ReadFrom(reader).ToObject<long>();
+            long value = JToken.ReadFrom(reader).ToObject<long>(serializer);
             return DateTimeOffset.FromUnixTimeMilliseconds(value);
         }
 
