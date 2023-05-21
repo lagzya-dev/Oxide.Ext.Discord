@@ -236,21 +236,6 @@ namespace Oxide.Ext.Discord.Builders
             _embed.Fields.Add(new EmbedField(name, value, inline));
             return this;
         }
-        
-        /// <summary>
-        /// Adds a new field with the name as the title and value as the value.
-        /// If inline will add a new column. If row will add in a new row.
-        /// If name or value is null or empty they will be replaced with a blank character
-        /// </summary>
-        /// <param name="name">Name of the field</param>
-        /// <param name="value">Value of the field</param>
-        /// <param name="inline">If the field should be inlined</param>
-        /// <returns>This</returns>
-        [Obsolete("Please use DiscordEmbedBuilder.AddField instead as blank values are now automatically added")]
-        public DiscordEmbedBuilder AddFieldOrBlank(string name, string value, bool inline)
-        {
-            return AddField(name, value, inline);
-        }
 
         /// <summary>
         /// Adds an image to the embed. The url should point to the url of the image.
