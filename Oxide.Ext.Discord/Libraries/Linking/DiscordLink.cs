@@ -157,14 +157,14 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="discordId">Discord ID to get steam ID for</param>
         /// <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
-        public string GetPlayerId(Snowflake discordId) => _links.TryGetValue(discordId, out PlayerId playerId) ? playerId.Id : null;
+        public PlayerId GetPlayerId(Snowflake discordId) => _links.TryGetValue(discordId, out PlayerId playerId) ? playerId : default(PlayerId);
 
         /// <summary>
         /// Returns the Steam ID of the given Discord ID if there is a link
         /// </summary>
         /// <param name="user"><see cref="DiscordUser"/> to get steam Id for</param>
         /// <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
-        public string GetPlayerId(DiscordUser user) => GetPlayerId(user.Id);
+        public PlayerId GetPlayerId(DiscordUser user) => GetPlayerId(user.Id);
 
         /// <summary>
         /// Returns the IPlayer for the given Discord ID
