@@ -10,9 +10,9 @@ namespace Oxide.Ext.Discord.Types
 
         public int Count => _set.Count;
         
-        private readonly HashSet<T> _set;
+        private readonly ISet<T> _set;
 
-        public ReadonlySet(HashSet<T> set)
+        public ReadonlySet(ISet<T> set)
         {
             _set = set;
         }
