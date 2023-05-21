@@ -1,9 +1,11 @@
 using System;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Exceptions.Entities.Images;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Pooling;
 
@@ -24,12 +26,7 @@ namespace Oxide.Ext.Discord.Entities.Images
         /// The image data
         /// </summary>
         public readonly byte[] Image;
-        
-        /// <summary>
-        /// Base64 of the image bytes
-        /// </summary>
-        public readonly string Base64Image;
-        
+
         private static readonly Regex ImageDataRegex = new Regex("^data:image\\/(jpeg|png|gif){1};base64,([A-Za-z\\d+\\/]+)$", RegexOptions.Compiled);
         private static readonly byte[] Gif = Encoding.ASCII.GetBytes("GIF");
         private static readonly byte[] Png = {137, 80, 78, 71};
@@ -45,12 +42,17 @@ namespace Oxide.Ext.Discord.Entities.Images
             InvalidImageDataException.ThrowIfInvalidImageBytes(image);
             Type = GetType(image);
             Image = image;
-            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
-            sb.Append("data:image/");
-            sb.Append(EnumCache<DiscordImageFormat>.Instance.ToLower(Type));
-            sb.Append(";base64,");
-            sb.Append(Convert.ToBase64String(Image));
-            Base64Image = DiscordPool.Internal.FreeStringBuilderToString(sb);
+        }
+
+        public DiscordImageData(Stream stream)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                stream.CopyToPooled(memoryStream);
+                byte[] image = memoryStream.ToArray();
+                Type = GetType(image);
+                Image = image;
+            }
         }
 
         /// <summary>
@@ -63,8 +65,17 @@ namespace Oxide.Ext.Discord.Entities.Images
             Match match = ImageDataRegex.Match(image);
             InvalidImageDataException.ThrowIfInvalidBase64String(match, image);
             Type = (DiscordImageFormat)Enum.Parse(typeof(DiscordImageFormat), match.Groups[0].Value, true);
-            Base64Image = image;
             Image = Convert.FromBase64String(match.Groups[1].Value);
+        }
+        
+        public string GetBase64Image()
+        {
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+            sb.Append("data:image/");
+            sb.Append(EnumCache<DiscordImageFormat>.Instance.ToLower(Type));
+            sb.Append(";base64,");
+            sb.Append(Convert.ToBase64String(Image));
+            return DiscordPool.Internal.FreeStringBuilderToString(sb);
         }
 
         /// <summary>
@@ -104,7 +115,7 @@ namespace Oxide.Ext.Discord.Entities.Images
         /// </summary>
         /// <param name="image">byte[] of the image</param>
         /// <returns></returns>
-        /// <exception cref="InvalidImageDataException">Thrown if the byte[] image is not a valid supproted type</exception>
+        /// <exception cref="InvalidImageDataException">Thrown if the byte[] image is not a valid supported type</exception>
         private static DiscordImageFormat GetType(byte[] image)
         {
             byte first = image[0];

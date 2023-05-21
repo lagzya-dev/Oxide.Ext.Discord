@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             DiscordImageData image = (DiscordImageData)value;
-            writer.WriteValue(image.Base64Image);
+            writer.WriteValue(image.GetBase64Image());
         }
 
         /// <summary>
