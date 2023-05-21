@@ -1,5 +1,6 @@
 ﻿using System;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Ext.Discord.Cache;
 
 namespace Oxide.Ext.Discord.Libraries.Linking
 {
@@ -7,7 +8,8 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     {
         public readonly string Id;
         public bool IsValid => !string.IsNullOrEmpty(Id);
-
+        public IPlayer Player => ServerPlayerCache.Instance.GetPlayer(Id);
+        
         public PlayerId(string id)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
@@ -17,7 +19,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         {
             Id = player?.Id ?? throw new ArgumentNullException(nameof(player));
         }
-        
+
         public bool Equals(PlayerId other) => Id == other.Id;
 
         public override bool Equals(object obj) => obj is PlayerId other && Equals(other);
