@@ -15,6 +15,8 @@ namespace Oxide.Ext.Discord.Factory
         private const string IdReplacement = "id";
         private const string ReactionsRoute =  "reactions";
 
+        private BucketIdFactory() { }
+        
         /// <summary>
         /// Returns the Rate Limit Bucket for the given route
         /// https://discord.com/developers/docs/topics/rate-limits#rate-limits
