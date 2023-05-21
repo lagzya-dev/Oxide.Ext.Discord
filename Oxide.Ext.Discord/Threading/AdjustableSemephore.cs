@@ -73,7 +73,11 @@ namespace Oxide.Ext.Discord.Threading
         public void AllowAllThrough()
         {
             MaximumCount = int.MaxValue;
-            Monitor.PulseAll(_syncRoot);
+            //Needs to be in a lock or an exception is thrown
+            lock (_syncRoot)
+            {
+                Monitor.PulseAll(_syncRoot);
+            }
         }
 
         public void Reset()
