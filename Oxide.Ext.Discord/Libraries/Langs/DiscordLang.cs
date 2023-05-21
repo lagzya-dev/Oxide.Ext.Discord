@@ -130,14 +130,12 @@ namespace Oxide.Ext.Discord.Libraries.Langs
         public string GetPlayerLanguage(string playerId) => _lang.GetLanguage(playerId);
 
         /// <summary>
-        /// Returns the discord localization for a plugins oxide lang.
-        /// This is used for application command localization
+        /// Returns all the discord localizations for a specific lang key in a plugin
         /// </summary>
         /// <param name="plugin"></param>
         /// <param name="langKey"></param>
         /// <returns></returns>
-        [Obsolete("GetCommandLocalization has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
-        public Hash<string, string> GetCommandLocalization(Plugin plugin, string langKey)
+        public Hash<string, string> GetDiscordLocalizations(Plugin plugin, string langKey)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (langKey == null) throw new ArgumentNullException(nameof(langKey));

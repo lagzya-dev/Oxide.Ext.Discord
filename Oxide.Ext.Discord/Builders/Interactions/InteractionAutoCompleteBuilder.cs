@@ -70,12 +70,11 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="plugin">Plugin to lookup the langkey for</param>
         /// <param name="langKey">Lang key for the name</param>
         /// <returns>This</returns>
-        [Obsolete("AddAutoCompleteChoice has been deprecated and will be removed in the future. Please upgrade to DiscordCommandLocalizations for Application Command localization")]
         public InteractionAutoCompleteBuilder AddAutoCompleteChoice(string name, object value, Plugin plugin, string langKey)
         {
             InvalidAutoCompleteChoiceException.ThrowIfInvalidName(name);
             InvalidAutoCompleteChoiceException.ThrowIfInvalidValue(value);
-            return AddAutoCompleteChoice(new CommandOptionChoice(name, value,  DiscordLang.Instance.GetCommandLocalization(plugin, langKey)));
+            return AddAutoCompleteChoice(new CommandOptionChoice(name, value,  DiscordLang.Instance.GetDiscordLocalizations(plugin, langKey)));
         }
         
         /// <summary>
@@ -109,19 +108,13 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// Returns if the Auto Complete can add any more choices
         /// </summary>
         /// <returns></returns>
-        public bool CanAddChoice()
-        {
-            return (_message.Choices?.Count ?? 0) < 25;
-        }
+        public bool CanAddChoice() => _message.Choices.Count < 25;
 
         /// <summary>
         /// Returns the built message
         /// </summary>
         /// <returns><see cref="InteractionAutoCompleteMessage"/></returns>
-        public InteractionAutoCompleteMessage Build()
-        {
-            return _message;
-        }
+        public InteractionAutoCompleteMessage Build() => _message;
 
         #region Oxide
         /// <summary>
