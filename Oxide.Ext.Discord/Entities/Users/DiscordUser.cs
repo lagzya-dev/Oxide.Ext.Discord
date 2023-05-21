@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
@@ -27,68 +28,105 @@ namespace Oxide.Ext.Discord.Entities.Users
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/user#user-object">User Structure</a>
     /// </summary>
-    [JsonConverter(typeof(DiscordUserConverter))]
+    [JsonConverter(typeof(CacheConverter<DiscordUser>))]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordUser : ISnowflakeEntity, IDiscordUser, IDebugLoggable
+    public class DiscordUser : ISnowflakeEntity, IDiscordCacheable, IDebugLoggable
     {
         #region Discord Fields
-        ///<inheritdoc cref="IDiscordUser.Id"/>
+        /// <summary>
+        /// The user's id
+        /// </summary>
         [JsonProperty("id")]
         public Snowflake Id { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.Username"/>
+        /// <summary>
+        /// The user's username, not unique across the platform
+        /// </summary>
         [JsonProperty("username")]
         public string Username { get; set; }
+        
+        [JsonProperty("global_name")]
+        public string GlobalName { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.Discriminator"/>
+        /// <summary>
+        /// The user's 4-digit discord-tag
+        /// </summary>
         [JsonProperty("discriminator")]
+        [Obsolete("This field will be removed by discord in a future API version")]
         public string Discriminator { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.Avatar"/>
+        /// <summary>
+        /// The user's avatar hash
+        /// </summary>
         [JsonProperty("avatar")]
         public string Avatar { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.Bot"/>
+        /// <summary>
+        /// Whether the user belongs to an OAuth2 application
+        /// </summary>
         [JsonProperty("bot")]
         public bool? Bot { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.System"/>
+        /// <summary>
+        /// Whether the user is an Official Discord System user (part of the urgent message system)
+        /// </summary>
         [JsonProperty("system")]
         public bool? System { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.MfaEnabled"/>
+        /// <summary>
+        /// Whether the user has two factor enabled on their account
+        /// </summary>
         [JsonProperty("mfa_enabled")]
         public bool? MfaEnabled { get; set; }
         
-        ///<inheritdoc cref="IDiscordUser.Banner"/>
+        /// <summary>
+        /// The user's banner, or null if unset
+        /// </summary>
         [JsonProperty("banner")]
         public string Banner { get; set; }
         
-        ///<inheritdoc cref="IDiscordUser.AccentColor"/>
+        /// <summary>
+        /// The user's banner color encoded as an integer representation of hexadecimal color code
+        /// </summary>
         [JsonProperty("accent_color")]
         public DiscordColor? AccentColor { get; set; }
         
-        ///<inheritdoc cref="IDiscordUser.Locale"/>
+        /// <summary>
+        /// The user's chosen language option
+        /// </summary>
         [JsonProperty("locale")]
         public string Locale { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.Verified"/>
+        /// <summary>
+        /// Whether the email on this account has been verified
+        /// </summary>
         [JsonProperty("verified")]
         public bool? Verified { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.Email"/>
+        /// <summary>
+        /// The user's email
+        /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.Flags"/>
+        /// <summary>
+        /// The flags on a user's account
+        /// <see cref="UserFlags"/>
+        /// </summary>
         [JsonProperty("flags")]
         public UserFlags? Flags { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.PremiumType"/>
+        /// <summary>
+        /// The type of Nitro subscription on a user's account
+        /// <see cref="UserPremiumType"/>
+        /// </summary>
         [JsonProperty("premium_type")]
         public UserPremiumType? PremiumType { get; set; }
 
-        ///<inheritdoc cref="IDiscordUser.PublicFlags"/>
+        /// <summary>
+        /// The public flags on a user's account
+        /// <see cref="UserFlags"/>
+        /// </summary>
         [JsonProperty("public_flags")]
         public UserFlags? PublicFlags { get; set; }
         #endregion
@@ -117,7 +155,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         /// Returns the username#discriminator for the user
         /// </summary>
-        public string FullUserName => $"{Username}#{Discriminator}";
+        public string FullUserName => Discriminator == "0" ? Username : $"{Username}#{Discriminator}";
+
+        public string DisplayName => GlobalName ?? Username;
 
         /// <summary>
         /// Returns if the DiscordUser is a bot
@@ -133,6 +173,8 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Returns the IPlayer for the discord user if linked; null otherwise
         /// </summary>
         public IPlayer Player => DiscordLink.Instance.GetPlayer(Id);
+        
+        public static DiscordUser FromCache(Snowflake id) => EntityCache<DiscordUser>.Instance.Get(id);
         #endregion
 
         #region API Methods
@@ -440,92 +482,6 @@ namespace Oxide.Ext.Discord.Entities.Users
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             client.Bot.Rest.CreateRequest(client,$"channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, error);
-        }
-        #endregion
-
-        #region Entity Update
-        internal static DiscordUser FromInterface(IDiscordUser iUser)
-        {
-            DiscordUser user = new DiscordUser
-            {
-                Id = iUser.Id
-            };
-            
-            user.Update(iUser);
-            return user;
-        }
-        
-        internal void Update(IDiscordUser update)
-        {
-            if (update.Username != null)
-            {
-                Username = update.Username;
-            }
-
-            if (update.Discriminator != null)
-            {
-                Discriminator = update.Discriminator;
-            }
-
-            if (update.Avatar != null)
-            {
-                Avatar = update.Avatar;
-            }
-
-            if (update.Bot != null)
-            {
-                Bot = update.Bot;
-            }
-
-            if (update.System != null)
-            {
-                System = update.System;
-            }
-            
-            if (update.MfaEnabled != null)
-            {
-                MfaEnabled = update.MfaEnabled;
-            }
-            
-            if (update.Banner != null)
-            {
-                Banner = update.Banner;
-            }
-            
-            if (update.AccentColor != null)
-            {
-                AccentColor = update.AccentColor;
-            }
-
-            if (update.Locale != null)
-            {
-                Locale = update.Locale;
-            }
-
-            if (update.Verified != null)
-            {
-                Verified = update.Verified;
-            }
-
-            if (update.Email != null)
-            {
-                Email = update.Email;
-            }
-
-            if (update.Flags != null)
-            {
-                Flags = update.Flags;
-            }
-
-            if (update.PremiumType != null)
-            {
-                PremiumType = update.PremiumType;
-            }
-
-            if (update.PublicFlags != null)
-            {
-                PublicFlags = update.PublicFlags;
-            }
         }
         #endregion
 

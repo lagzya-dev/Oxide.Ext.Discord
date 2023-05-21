@@ -96,7 +96,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
         #region Extension Fields
         /// <summary>
-        /// When the Nickname was last updated. Null if we haven't seen a nickname update yet
+        /// When the Nickname was last updated UTC. Null if we haven't seen a nickname update yet
         /// </summary>
         public DateTime? NickNameLastUpdated { get; internal set; }
         
@@ -110,7 +110,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Returns the display name show for the user in a guild
         /// </summary>
-        public string DisplayName => string.IsNullOrEmpty(Nickname) ? User?.Username : Nickname;
+        public string DisplayName => string.IsNullOrEmpty(Nickname) ? User?.DisplayName : Nickname;
         
         /// <summary>
         /// Returns if the GuildMember is a bot
@@ -140,18 +140,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="roleId">Role ID to check</param>
         /// <returns>Return true if has role; False otherwise;</returns>
-        public bool HasRole(Snowflake roleId)
-        {
-            return Roles.Contains(roleId);
-        }
-        #endregion
-        
-        #region Entity Update
-        internal void Update(GuildMember update)
-        {
-            if (update.Pending != null)
-                Pending = update.Pending;
-        }
+        public bool HasRole(Snowflake roleId) => Roles.Contains(roleId);
         #endregion
     }
 }

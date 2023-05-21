@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Json.Converters
     /// Converts to and from a list in JSON to a hash
     /// </summary>
     /// <typeparam name="TValue"></typeparam>
-    public class HashListConverter<TValue> : JsonConverter where TValue : ISnowflakeEntity
+    public class HashListConverter<TValue> : JsonConverter where TValue : class, ISnowflakeEntity
     {
         /// <summary>
         /// Read an array in JSON as a hash
@@ -24,10 +24,12 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            JArray array = JArray.Load(reader);
-
-            Hash<Snowflake, TValue> data = new Hash<Snowflake, TValue>();
-            foreach (JToken token in array)
+            if (!(existingValue is Hash<Snowflake, TValue> data))
+            {
+                data = new Hash<Snowflake, TValue>();
+            }
+            
+            foreach (JToken token in JArray.Load(reader))
             {
                 TValue value = token.ToObject<TValue>();
                 data[value.Id] = value;

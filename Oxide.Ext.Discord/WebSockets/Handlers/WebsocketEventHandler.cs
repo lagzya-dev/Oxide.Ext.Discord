@@ -13,6 +13,7 @@ using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Gateway;
+using Oxide.Ext.Discord.Entities.Gateway.Commands;
 using Oxide.Ext.Discord.Entities.Gateway.Events;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
@@ -255,7 +256,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 {
                     // Dispatch (dispatches an event)
                     case GatewayEventCode.Dispatch:
-                        await HandleDispatch(payload).ConfigureAwait(false);
+                        HandleDispatch(payload);
                         break;
 
                     // Heartbeat
@@ -272,7 +273,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
                     // Invalid Session (used to notify client they have an invalid session ID)
                     case GatewayEventCode.InvalidSession:
-                        HandleInvalidSession(payload.GetData<bool>());
+                        HandleInvalidSession(payload.ShouldResume);
                         break;
 
                     // Hello (sent immediately after connecting, contains heartbeat and server debug information)
@@ -300,7 +301,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         #endregion
 
         #region Discord Events
-        private async Task HandleDispatch(EventPayload payload)
+        private void HandleDispatch(EventPayload payload)
         {
             _logger.Debug("Received OpCode: Dispatch, event: {0}", payload.DispatchCode);
 
@@ -332,7 +333,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     break;
 
                 case DiscordDispatchCode.GuildCreated:
-                    await HandleDispatchGuildCreate(payload.GetData<DiscordGuild>()).ConfigureAwait(false);
+                    HandleDispatchGuildCreate(payload.GetData<DiscordGuild>());
                     break;
 
                 case DiscordDispatchCode.GuildUpdated:
@@ -695,7 +696,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         // NOTE: Some elements of Guild object is only sent with GUILD_CREATE
         //https://discord.com/developers/docs/topics/gateway#guild-create
-        private async Task HandleDispatchGuildCreate(DiscordGuild guild)
+        private void HandleDispatchGuildCreate(DiscordGuild guild)
         {
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildCreate)} Guild ID: {{0}} Name: {{1}}", guild.Id, guild.Name);
             
@@ -733,7 +734,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         //https://discord.com/developers/docs/topics/gateway#guild-update
         private void HandleDispatchGuildUpdate(DiscordGuild guild)
         {
-            DiscordGuild previous = _client.GetGuild(guild.Id)?.Update(guild);
+            DiscordGuild previous =_client.GetGuild(guild.Id)?.Update(guild);
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildUpdated, guild, previous);
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildUpdate)} Guild ID: {{0}}", guild.Id);
         }
@@ -1032,6 +1033,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildMemberRoleAdded, current, role, guild);
                 }
             }
+
+            current.Flags = update.Flags;
         }
 
         //https://discord.com/developers/docs/topics/gateway#guild-members-chunk

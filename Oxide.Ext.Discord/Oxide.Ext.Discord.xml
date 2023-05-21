@@ -1727,28 +1727,21 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Cache.DiscordUserCache">
+        <member name="T:Oxide.Ext.Discord.Cache.EntityCache`1">
             <summary>
-            <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> Cache 
+            Cache for <see cref="!:T"/> Cache 
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Cache.DiscordUserCache.Cache">
+        <member name="F:Oxide.Ext.Discord.Cache.EntityCache`1.Cache">
             <summary>
             Readonly Cache of <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Cache.DiscordUserCache.GetOrCreate(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Cache.EntityCache`1.GetOrCreate(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
-            Returns a cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> for the given user ID or creates a new <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> with that ID
+            Returns a cached <see cref="!:T"/> for the given user ID or creates a new <see cref="!:T"/> with that ID
             </summary>
-            <param name="userId">User ID to lookup in the cache</param>
-            <returns>Cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Cache.DiscordUserCache.GetOrCreate(Oxide.Ext.Discord.Entities.Users.IDiscordUser)">
-            <summary>
-            Returns a cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> for the given user or returns the passed in DiscordUser that is now cached
-            </summary>
-            <param name="user">User to lookup in the cache</param>
+            <param name="id">User ID to lookup in the cache</param>
             <returns>Cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Cache.EnumCache`1">
@@ -7351,6 +7344,11 @@
             Sequence number, used for resuming sessions and heartbeats
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.EventPayload.ShouldResume">
+            <summary>
+            If the websocket should resume on reconnect.
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Gateway.EventPayload.GetData``1">
             <summary>
             Returns the Data as {T}
@@ -9871,7 +9869,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.NickNameLastUpdated">
             <summary>
-            When the Nickname was last updated. Null if we haven't seen a nickname update yet
+            When the Nickname was last updated UTC. Null if we haven't seen a nickname update yet
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildMember.HasLeftGuild">
@@ -15876,49 +15874,82 @@
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Id">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Id"/>
+            <summary>
+            The user's id
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Username">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Username"/>
+            <summary>
+            The user's username, not unique across the platform
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Discriminator">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Discriminator"/>
+            <summary>
+            The user's 4-digit discord-tag
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Avatar">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Avatar"/>
+            <summary>
+            The user's avatar hash
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Bot">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Bot"/>
+            <summary>
+            Whether the user belongs to an OAuth2 application
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.System">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.System"/>
+            <summary>
+            Whether the user is an Official Discord System user (part of the urgent message system)
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.MfaEnabled">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.MfaEnabled"/>
+            <summary>
+            Whether the user has two factor enabled on their account
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Banner">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Banner"/>
+            <summary>
+            The user's banner, or null if unset
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.AccentColor">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.AccentColor"/>
+            <summary>
+            The user's banner color encoded as an integer representation of hexadecimal color code
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Locale">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Locale"/>
+            <summary>
+            The user's chosen language option
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Verified">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Verified"/>
+            <summary>
+            Whether the email on this account has been verified
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Email">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Email"/>
+            <summary>
+            The user's email
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Flags">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Flags"/>
+            <summary>
+            The flags on a user's account
+            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.PremiumType">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.PremiumType"/>
+            <summary>
+            The type of Nitro subscription on a user's account
+            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserPremiumType"/>
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.PublicFlags">
-            <inheritdoc cref="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.PublicFlags"/>
+            <summary>
+            The public flags on a user's account
+            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Mention">
             <summary>
@@ -16169,89 +16200,6 @@
             <param name="channelId">Channel ID to remove recipient from</param>
             <param name="callback">callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Users.IDiscordUser">
-            <summary>
-            Represents the fields for a DiscordUser
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Id">
-            <summary>
-            The user's id
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Username">
-            <summary>
-            The user's username, not unique across the platform
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Discriminator">
-            <summary>
-            The user's 4-digit discord-tag
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Avatar">
-            <summary>
-            The user's avatar hash
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Bot">
-            <summary>
-            Whether the user belongs to an OAuth2 application
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.System">
-            <summary>
-            Whether the user is an Official Discord System user (part of the urgent message system)
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.MfaEnabled">
-            <summary>
-            Whether the user has two factor enabled on their account
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Banner">
-            <summary>
-            The user's banner, or null if unset
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.AccentColor">
-            <summary>
-            The user's banner color encoded as an integer representation of hexadecimal color code
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Locale">
-            <summary>
-            The user's chosen language option
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Verified">
-            <summary>
-            Whether the email on this account has been verified
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Email">
-            <summary>
-            The user's email
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.Flags">
-            <summary>
-            The flags on a user's account
-            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.PremiumType">
-            <summary>
-            The type of Nitro subscription on a user's account
-            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserPremiumType"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Users.IDiscordUser.PublicFlags">
-            <summary>
-            The public flags on a user's account
-            <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
-            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.UserFlags">
             <summary>
@@ -18550,7 +18498,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Json.Converters.DiscordEnumConverter">
             <summary>
-            Handles deserializing JSON values as strings. If they value doesn't exist return the default value.
+            Handles deserializing JSON values as strings. If the value doesn't exist return the default value.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.Converters.DiscordEnumConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
@@ -18605,42 +18553,6 @@
         <member name="M:Oxide.Ext.Discord.Json.Converters.DiscordImageDataConverter.CanConvert(System.Type)">
             <summary>
             
-            </summary>
-            <param name="objectType"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter">
-            <summary>
-            Json Converter for <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> Returns the user from the <see cref="T:Oxide.Ext.Discord.Cache.DiscordUserCache"/> or Caches a new user.
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter.CanWrite">
-            <summary>
-            We do not write with this converter
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
-            <summary>
-            We do not write with this converter
-            </summary>
-            <param name="writer"></param>
-            <param name="value"></param>
-            <param name="serializer"></param>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
-            <summary>
-            Reads the JSON and populates it on a cached <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> or Caches a new DiscordUser
-            </summary>
-            <param name="reader"></param>
-            <param name="objectType"></param>
-            <param name="existingValue"></param>
-            <param name="serializer"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Json.Converters.DiscordUserConverter.CanConvert(System.Type)">
-            <summary>
-            Returns if this converts is for this type
             </summary>
             <param name="objectType"></param>
             <returns></returns>
@@ -19381,17 +19293,17 @@
             Represents a library for discord linking
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsEnabled">
+            <summary>
+            Returns if there is a registered link plugin
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             DiscordLink Constructor
             </summary>
             <param name="logger">Logger for Discord Link</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.IsEnabled">
-            <summary>
-            Returns if there is a registered link plugin
-            </summary>
-            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.AddLinkPlugin(Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin)">
             <summary>
@@ -20976,9 +20888,6 @@
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalizations.OnPluginLoaded(Oxide.Core.Plugins.Plugin)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalizations.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Components.BaseComponentTemplate">
@@ -23157,11 +23066,6 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.SendHeartbeat">
-            <summary>
-            Sends a heartbeat to Discord
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.RequestAllGuildMembers(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Sends a heartbeat to Discord
             </summary>

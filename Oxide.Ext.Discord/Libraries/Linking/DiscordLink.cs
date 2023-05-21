@@ -192,7 +192,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="playerId">ID of the in game player</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        public DiscordUser GetDiscordUser(string playerId) => _links.TryGetValue(new PlayerId(playerId), out Snowflake discordId) && discordId.IsValid() ? DiscordUserCache.Instance.GetOrCreate(discordId) : null;
+        public DiscordUser GetDiscordUser(string playerId) => _links.TryGetValue(new PlayerId(playerId), out Snowflake discordId) && discordId.IsValid() ? EntityCache<DiscordUser>.Instance.GetOrCreate(discordId) : null;
 
         /// <summary>
         /// Returns a minimal Discord User

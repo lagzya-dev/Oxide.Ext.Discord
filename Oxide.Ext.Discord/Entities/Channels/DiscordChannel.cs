@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Callbacks.Api.Completed;
 using Oxide.Ext.Discord.Entities.Api;
@@ -31,8 +32,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// <summary>
     /// Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#channel-object">Channel Structure</a> within Discord.
     /// </summary>
+    [JsonConverter(typeof(CacheConverter<DiscordUser>))]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordChannel : ISnowflakeEntity, IDebugLoggable
+    public class DiscordChannel : ISnowflakeEntity, IDiscordCacheable, IDebugLoggable
     {
         /// <summary>
         /// The ID of this channel
@@ -255,6 +257,8 @@ namespace Oxide.Ext.Discord.Entities.Channels
         [JsonProperty("default_forum_layout")]
         public ForumLayoutTypes? DefaultForumLayout { get; set; }
 
+        public static DiscordChannel FromCache(Snowflake id) => EntityCache<DiscordChannel>.Instance.Get(id);
+        
         /// <summary>
         /// List of thread members if channel is thread; Null Otherwise.
         /// </summary>

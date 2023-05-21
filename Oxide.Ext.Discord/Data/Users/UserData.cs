@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Data.Users
 
         public DiscordUser GetUser()
         {
-            return DiscordUserCache.Instance.GetOrCreate(UserId);
+            return EntityCache<DiscordUser>.Instance.GetOrCreate(UserId);
         }
     }
 }

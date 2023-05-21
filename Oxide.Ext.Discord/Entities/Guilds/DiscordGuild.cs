@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.AutoMod;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -29,8 +30,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object">Guild Structure</a>
     /// </summary>
+    [JsonConverter(typeof(CacheConverter<DiscordGuild>))]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordGuild : ISnowflakeEntity
+    public class DiscordGuild : ISnowflakeEntity, IDiscordCacheable
     {
         #region Discord Fields
         /// <summary>
@@ -135,15 +137,15 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonConverter(typeof(HashListConverter<DiscordRole>))]
         [JsonProperty("roles")]
-        public Hash<Snowflake, DiscordRole> Roles { get; set; }
-  
+        public Hash<Snowflake, DiscordRole> Roles { get; set; } = new Hash<Snowflake, DiscordRole>();
+
         /// <summary>
         /// Custom guild emojis
         /// </summary>
         [JsonConverter(typeof(HashListConverter<DiscordEmoji>))]
         [JsonProperty("emojis")]
 
-        public Hash<Snowflake, DiscordEmoji> Emojis { get; set; }
+        public Hash<Snowflake, DiscordEmoji> Emojis { get; set; } = new Hash<Snowflake, DiscordEmoji>();
 
         /// <summary>
         /// Enabled guild features
@@ -213,35 +215,35 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonConverter(typeof(HashListConverter<VoiceState>))]
         [JsonProperty("voice_states")]
-        public Hash<Snowflake, VoiceState> VoiceStates { get; set; }
-  
+        public Hash<Snowflake, VoiceState> VoiceStates { get; set; } = new Hash<Snowflake, VoiceState>();
+
         /// <summary>
         /// Users in the guild
         /// </summary>
         [JsonConverter(typeof(HashListConverter<GuildMember>))]
         [JsonProperty("members")]
-        public Hash<Snowflake, GuildMember> Members { get; set; }
+        public Hash<Snowflake, GuildMember> Members { get; set; } = new Hash<Snowflake, GuildMember>();
 
         /// <summary>
         /// Channels in the guild
         /// </summary>
         [JsonConverter(typeof(HashListConverter<DiscordChannel>))]
         [JsonProperty("channels")]
-        public Hash<Snowflake, DiscordChannel> Channels { get; set; }
-        
+        public Hash<Snowflake, DiscordChannel> Channels { get; set; } = new Hash<Snowflake, DiscordChannel>();
+
         /// <summary>
         /// All active threads in the guild that current user has permission to view
         /// </summary>
         [JsonConverter(typeof(HashListConverter<DiscordChannel>))]
         [JsonProperty("threads")]
-        public Hash<Snowflake, DiscordChannel> Threads { get; set; }
+        public Hash<Snowflake, DiscordChannel> Threads { get; set; } = new Hash<Snowflake, DiscordChannel>();
 
         /// <summary>
         /// Presences of the members in the guild
         /// will only include non-offline members if the size is greater than large threshold
         /// </summary>
         [JsonProperty("presences")]
-        public List<PresenceUpdatedEvent> Presences { get; set; }
+        public List<PresenceUpdatedEvent> Presences { get; set; } = new List<PresenceUpdatedEvent>();
   
         /// <summary>
         /// The maximum number of presences for the guild (the default value, currently 25000, is in effect when null is returned)
@@ -336,22 +338,22 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("nsfw_level")]
         public GuildNsfwLevel NsfwLevel { get; set; }
-        
+
         /// <summary>
         /// Stage instances in the guild
         /// <see cref="StageInstance"/>
         /// </summary>
         [JsonConverter(typeof(HashListConverter<StageInstance>))]
         [JsonProperty("stage_instances")]
-        public Hash<Snowflake, StageInstance> StageInstances { get; set; }
-        
+        public Hash<Snowflake, StageInstance> StageInstances { get; set; } = new Hash<Snowflake, StageInstance>();
+
         /// <summary>
         /// Custom guild stickers
         /// <see cref="DiscordSticker"/>
         /// </summary>
         [JsonConverter(typeof(HashListConverter<DiscordSticker>))]
         [JsonProperty("stickers")]
-        public Hash<Snowflake, DiscordSticker> Stickers { get; set; }
+        public Hash<Snowflake, DiscordSticker> Stickers { get; set; } = new Hash<Snowflake, DiscordSticker>();
         
         /// <summary>
         /// The scheduled events in the guild
@@ -385,6 +387,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// This list will contain members who have left the guild since the initial bot connection
         /// </summary>
         public Hash<Snowflake, GuildMember> LeftMembers { get; } = new Hash<Snowflake, GuildMember>();
+
+        public static DiscordGuild FromCache(Snowflake id) => EntityCache<DiscordGuild>.Instance.Get(id);
         #endregion
 
         #region Helper Properties
