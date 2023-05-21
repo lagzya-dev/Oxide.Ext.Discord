@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
     /// <summary>
     /// Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#channel-object">Channel Structure</a> within Discord.
     /// </summary>
-    [JsonConverter(typeof(CacheConverter<DiscordUser>))]
+    [JsonConverter(typeof(CacheConverter<DiscordChannel>))]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordChannel : ISnowflakeEntity, IDiscordCacheable, IDebugLoggable
     {
