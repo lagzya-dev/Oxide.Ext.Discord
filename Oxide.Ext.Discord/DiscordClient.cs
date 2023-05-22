@@ -60,7 +60,6 @@ namespace Oxide.Ext.Discord
             PluginName = Plugin.FullName();
             PluginExt.OnPluginLoaded(plugin);
             BaseDiscordLibrary.ProcessPluginLoaded(plugin);
-            plugin.Call(DiscordExtHooks.OnDiscordClientCreated);
         }
         
         /// <summary>

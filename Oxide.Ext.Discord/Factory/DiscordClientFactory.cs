@@ -2,6 +2,7 @@
 using System.Linq;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
@@ -49,6 +50,7 @@ namespace Oxide.Ext.Discord.Factory
             }
 
             discordPlugin.Client = client;
+            plugin.Call(DiscordExtHooks.OnDiscordClientCreated);
             return client;
         }
 
