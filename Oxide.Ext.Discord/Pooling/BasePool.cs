@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
@@ -20,6 +21,7 @@ namespace Oxide.Ext.Discord.Pooling
         private int _index;
         private readonly object _lock = new object();
         private static readonly Hash<PluginId, BasePool<TPooled>> Pools = new Hash<PluginId, BasePool<TPooled>>();
+        private readonly StringBuilder _sb = new StringBuilder();
 
         private void InitPool(DiscordPluginPool pluginPool)
         {
@@ -56,30 +58,51 @@ namespace Oxide.Ext.Discord.Pooling
         /// Returns an element from the pool if it exists else it creates a new one
         /// </summary>
         /// <returns></returns>
+        /// TODO: Remove after issue is found
         public TPooled Get()
         {
-            TPooled item = null;
-            lock (_lock)
+            try
             {
-                if (_index < _pool.Length)
+                _sb.Clear();
+                _sb.Append($"A: {PluginPool == null} {_pool == null}");
+                TPooled item = null;
+                lock (_lock)
                 {
-                    item = _pool[_index];
-                    _pool[_index] = null;
-                    _index++;
+                    _sb.Append("B");
+                    if (_index < _pool.Length)
+                    {
+                        _sb.Append("C");
+                        item = _pool[_index];
+                        _pool[_index] = null;
+                        _index++;
+                        _sb.Append("D");
+                    }
+                    else
+                    {
+                        _sb.Append("E");
+                        DiscordExtension.GlobalLogger.Warning("{0} Pool {1} is leaking entities!!! {2}/{3}", PluginPool.PluginName, GetType(), _index, _pool.Length);
+                        _sb.Append("F");
+                    }
                 }
-                else
-                {
-                    DiscordExtension.GlobalLogger.Warning("{0} Pool {1} is leaking entities!!! {2}/{3}", PluginPool.PluginName, GetType(), _index, _pool.Length);
-                }
-            }
-            
-            if (item == null)
-            {
-                item = CreateNew();
-            }
 
-            OnGetItem(item);
-            return item;
+                _sb.Append("G");
+                if (item == null)
+                {
+                    _sb.Append("H");
+                    item = CreateNew();
+                    _sb.Append("I");
+                }
+
+                _sb.Append("J");
+                OnGetItem(item);
+                _sb.Append("K");
+                return item;
+            }
+            catch (Exception ex)
+            {
+                DiscordExtension.GlobalLogger.Error($"{_sb.ToString()}\n{ex.ToString()}");
+                throw;
+            }
         }
 
         /// <summary>
