@@ -165,7 +165,7 @@ namespace Oxide.Ext.Discord.Logging
             _logger.Append(channel?.Name ?? "Unknown Channel");
             _logger.Append(" (");
             _logger.Append(channel?.Id.ToString());
-            _logger.Append(")");
+            _logger.AppendLine(")");
         }
 
         public void AppendObject(string name, IDebugLoggable obj)

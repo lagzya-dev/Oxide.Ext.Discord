@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.RateLimits
         {
             OnRateLimitReset();
             Interlocked.Exchange(ref NumRequests, 0);
-            Interlocked.Exchange(ref LastReset, TimeHelpers.SecondsSinceEpoch());
+            Interlocked.Exchange(ref LastReset, TimeHelpers.MillisecondsSinceEpoch());
         }
         
         /// <summary>
