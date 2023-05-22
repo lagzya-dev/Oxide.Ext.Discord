@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
+﻿using Oxide.Ext.Discord.Entities.Permissions;
+
+namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 {
     /// <summary>
     /// Represents an exception for invalid guild roles
@@ -9,14 +11,16 @@
 
         internal static void ThrowIfInvalidRoleName(string name)
         {
+            const int maxLength = 100;
+            
             if (string.IsNullOrEmpty(name))
             {
-                throw new InvalidGuildRoleException("Role name cannot be null or empty");
+                throw new InvalidGuildRoleException($"{nameof(DiscordRole)}.{nameof(DiscordRole.Name)} cannot be null or empty");
             }
             
-            if (name.Length > 100)
+            if (name.Length > maxLength)
             {
-                throw new InvalidGuildRoleException("Role name cannot be more than 100 characters");
+                throw new InvalidGuildRoleException($"{nameof(DiscordRole)}.{nameof(DiscordRole.Name)} cannot be more than {maxLength} characters");
             }
         }
     }

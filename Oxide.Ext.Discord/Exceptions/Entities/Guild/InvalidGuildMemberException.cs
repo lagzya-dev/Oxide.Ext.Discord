@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Entities.Guilds;
+
 namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 {
     /// <summary>
@@ -9,9 +11,11 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 
         internal static void ThrowIfInvalidNickname(string nickname)
         {
-            if (!string.IsNullOrEmpty(nickname) && nickname.Length > 32)
+            const int maxLength = 32;
+            
+            if (!string.IsNullOrEmpty(nickname) && nickname.Length > maxLength)
             {
-                throw new InvalidGuildMemberException($"Nickname '{nickname}' cannot be more than 32 characters");
+                throw new InvalidGuildMemberException($"{nameof(GuildMemberUpdate)}.{nameof(GuildMemberUpdate.Nick)} cannot be more than {maxLength} characters");
             }
         }
     }

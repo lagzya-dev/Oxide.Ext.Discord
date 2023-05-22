@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Oxide.Ext.Discord.Entities.Images;
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.Images
 {
@@ -22,6 +23,22 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Images
             if (image == null || image.Length == 0)
             {
                 throw new InvalidImageDataException("Image Byte[] cannot be null or empty");
+            }
+        }
+        
+        internal static void ThrowIfInvalidImageData(DiscordImageData image)
+        {
+            if (!image.IsValid())
+            {
+                throw new InvalidImageDataException("ImageData is not a valid image");
+            }
+        }
+        
+        internal static void ThrowIfInvalidImageData(DiscordImageData? image)
+        {
+            if (image.HasValue)
+            {
+                ThrowIfInvalidImageData(image.Value);
             }
         }
     }

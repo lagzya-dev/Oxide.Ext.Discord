@@ -13,14 +13,16 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions
 
         internal static void ThrowIfInvalidName(string name)
         {
+            const int maxLength = 100;
+            
             if (string.IsNullOrEmpty(name))
             {
                 throw new InvalidAutoCompleteChoiceException("Name must contain at least 1 character");
             }
 
-            if (name.Length > 100)
+            if (name.Length > maxLength)
             {
-                throw new InvalidAutoCompleteChoiceException("Name cannot be greater than 100 characters");
+                throw new InvalidAutoCompleteChoiceException($"Name cannot be greater than {maxLength} characters");
             }
         }
 

@@ -875,17 +875,6 @@
             <param name="inline">If the field should be inlined</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddFieldOrBlank(System.String,System.String,System.Boolean)">
-            <summary>
-            Adds a new field with the name as the title and value as the value.
-            If inline will add a new column. If row will add in a new row.
-            If name or value is null or empty they will be replaced with a blank character
-            </summary>
-            <param name="name">Name of the field</param>
-            <param name="value">Value of the field</param>
-            <param name="inline">If the field should be inlined</param>
-            <returns>This</returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddImage(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
             <summary>
             Adds an image to the embed. The url should point to the url of the image.
@@ -985,11 +974,6 @@
             <typeparam name="TMessage"></typeparam>
             <typeparam name="TBuilder"></typeparam>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.Interaction">
-            <summary>
-            Interaction this interaction builder is for
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.#ctor(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,`0)">
             <summary>
             Constructor
@@ -1002,33 +986,6 @@
             Marks the response as Ephemeral so only the person who executed the command can see
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.SuppressEmbeds">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AsTts(System.Boolean)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddContent(System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddEmbed(Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddEmbeds(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddAllowedMentions(Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddActionRow(Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddComponents(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Interactions.MessageComponents.ActionRowComponent})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AddAttachment(System.String,System.Byte[],System.String,System.String)">
-            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder">
             <summary>
@@ -7349,7 +7306,7 @@
             If the websocket should resume on reconnect.
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Gateway.EventPayload.GetData``1">
+        <member name="M:Oxide.Ext.Discord.Entities.Gateway.EventPayload.GetData``1(Oxide.Ext.Discord.BotClient)">
             <summary>
             Returns the Data as {T}
             </summary>
@@ -10973,11 +10930,6 @@
             The image data
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Images.DiscordImageData.Base64Image">
-            <summary>
-            Base64 of the image bytes
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Images.DiscordImageData.#ctor(System.Byte[])">
             <summary>
             Constructor from a byte[] of the image
@@ -11011,7 +10963,7 @@
             </summary>
             <param name="image">byte[] of the image</param>
             <returns></returns>
-            <exception cref="T:Oxide.Ext.Discord.Exceptions.Entities.Images.InvalidImageDataException">Thrown if the byte[] image is not a valid supproted type</exception>
+            <exception cref="T:Oxide.Ext.Discord.Exceptions.Entities.Images.InvalidImageDataException">Thrown if the byte[] image is not a valid supported type</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Images.DiscordImageFormat">
             <summary>
@@ -17069,12 +17021,6 @@
             Represents using an invalid channel
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Exceptions.Entities.Channels.InvalidChannelException.#ctor(System.String)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="message">Exception message</param>
-        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Channels.InvalidChannelInviteException">
             <summary>
             Represents an error in channel invite
@@ -17100,13 +17046,6 @@
             Regex emoji validation matching discord emoji formatting standards
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Exceptions.Entities.Emojis.InvalidEmojiException.#ctor(System.String,System.String)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="emojiValue">Value for the emoji</param>
-            <param name="validationError">Validation error message</param>
-        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Guild.InvalidGuildBanException">
             <summary>
             Represents an error in channel ban
@@ -17126,17 +17065,6 @@
             <summary>
             Represents an exception in guild member
             </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Guild.InvalidGuildMemberSearch">
-            <summary>
-            Represents using an invalid guild member search
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Exceptions.Entities.Guild.InvalidGuildMemberSearch.#ctor(System.String)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="message">Exception message</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Guild.InvalidGuildPruneException">
             <summary>
@@ -17803,6 +17731,17 @@
             <param name="pluginName">Plugin Name to get client for</param>
             <returns>Discord client for the plugin name</returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Factory.SnowflakeIdFactory">
+            <summary>
+            Generates a unique snowflake ID
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.SnowflakeIdFactory.Generate">
+            <summary>
+            Returns the generated snowflake ID
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.DiscordCdn">
             <summary>
             Represents Discord <a href="https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints">CDN Endpoints</a>
@@ -18247,17 +18186,6 @@
             <param name="message">Text for the list</param>
             <param name="number">Number to display</param>
             <param name="indent">If the list should be indented a level</param>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Helpers.SnowflakeIdGenerator">
-            <summary>
-            Generates a unique snowflake ID
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.SnowflakeIdGenerator.Generate">
-            <summary>
-            Returns the generated snowflake ID
-            </summary>
             <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.TimeHelpers">
@@ -19252,10 +19180,9 @@
             <param name="playerId">PlayerId to get the locale for</param>
             <returns>Locale for the given playerId</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetCommandLocalization(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetDiscordLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
-            Returns the discord localization for a plugins oxide lang.
-            This is used for application command localization
+            Returns all the discord localizations for a specific lang key in a plugin
             </summary>
             <param name="plugin"></param>
             <param name="langKey"></param>

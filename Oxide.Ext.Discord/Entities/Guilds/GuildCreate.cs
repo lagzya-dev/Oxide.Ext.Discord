@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Images;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities.Guild;
+using Oxide.Ext.Discord.Exceptions.Entities.Images;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Guilds
@@ -93,7 +94,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public void Validate()
         {
             InvalidGuildException.ThrowIfInvalidName(Name, false);
-            InvalidGuildException.ThrowIfInvalidImageData(Icon);
+            InvalidImageDataException.ThrowIfInvalidImageData(Icon);
         }
     }
 }

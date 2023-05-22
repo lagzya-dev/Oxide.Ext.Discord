@@ -34,7 +34,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
         
         internal static void ThrowIfInvalidNameException(string name)
         {
-            const int maxLength = 50;
+            const int maxLength = 100;
             
             if (string.IsNullOrEmpty(name))
             {
@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
         
         internal static void ThrowIfInvalidDescriptionException(string name)
         {
-            const int maxLength = 50;
+            const int maxLength = 200;
             
             if (string.IsNullOrEmpty(name))
             {

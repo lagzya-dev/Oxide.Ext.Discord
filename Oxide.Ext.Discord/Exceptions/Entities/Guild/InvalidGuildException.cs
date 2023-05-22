@@ -1,5 +1,4 @@
-using Oxide.Ext.Discord.Entities.Images;
-using Oxide.Ext.Discord.Exceptions.Entities.Emojis;
+using Oxide.Ext.Discord.Entities.Guilds;
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 {
@@ -12,30 +11,17 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
         
         internal static void ThrowIfInvalidName(string name, bool allowNullOrEmpty)
         {
-            if (!allowNullOrEmpty && (string.IsNullOrEmpty(name) || name.Length < 2))
+            const int minLength = 2;
+            const int maxLength = 100;
+            
+            if (!allowNullOrEmpty && (string.IsNullOrEmpty(name) || name.Length < minLength))
             {
-                throw new InvalidGuildException("Name cannot be less than 2 character");
+                throw new InvalidGuildException($"{nameof(GuildCreate)}.{nameof(GuildCreate.Name)} cannot be less than {minLength} character");
             }
             
-            if (name.Length > 100)
+            if (name.Length > maxLength)
             {
-                throw new InvalidGuildException("Name cannot be more than 100 characters");
-            }
-        }
-        
-        internal static void ThrowIfInvalidImageData(DiscordImageData image)
-        {
-            if (!image.IsValid())
-            {
-                throw new InvalidEmojiException("ImageData is not a valid image");
-            }
-        }
-        
-        internal static void ThrowIfInvalidImageData(DiscordImageData? image)
-        {
-            if (image.HasValue)
-            {
-                ThrowIfInvalidImageData(image.Value);
+                throw new InvalidGuildException($"{nameof(GuildCreate)}.{nameof(GuildCreate.Name)} cannot be more than {maxLength} characters");
             }
         }
     }

@@ -12,18 +12,20 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
 
         internal static void ThrowIfInvalidAutoArchiveDuration(int? autoArchiveDuration)
         {
-            if (autoArchiveDuration.HasValue)
+            if (!autoArchiveDuration.HasValue)
             {
-                switch (autoArchiveDuration.Value)
-                {
-                    case 60:
-                        case 1440:
-                        case 4320:
-                        case 10080:
-                        break;
-                    default:
-                        throw new InvalidThreadException("AutoArchiveDuration must be one of 60, 1440, 4320, or 10080");
-                }
+                return;
+            }
+            
+            switch (autoArchiveDuration.Value)
+            {
+                case 60:
+                case 1440:
+                case 4320:
+                case 10080:
+                    break;
+                default:
+                    throw new InvalidThreadException("AutoArchiveDuration must be one of 60, 1440, 4320, or 10080");
             }
         }
 
@@ -37,7 +39,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
                     break;
                 
                 default:
-                    throw new InvalidThreadException("Thread ChannelType must be one of GuildNewsThread, GuildPublicThread, or GuildPrivateThread");
+                    throw new InvalidThreadException("Type must be one of GuildNewsThread, GuildPublicThread, or GuildPrivateThread");
             }
         }
 

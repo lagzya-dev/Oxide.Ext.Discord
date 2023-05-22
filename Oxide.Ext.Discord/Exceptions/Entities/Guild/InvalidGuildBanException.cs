@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Entities.Guilds;
+
 namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 {
     /// <summary>
@@ -7,19 +9,45 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
     {
         private InvalidGuildBanException(string message) : base(message) { }
         
-        internal static void ThrowIfInvalidDeleteMessageDays(int? deleteMessageDays)
+        internal static void ThrowIfInvalidDeleteMessageDays(int? days)
         {
-            if (deleteMessageDays.HasValue && (deleteMessageDays.Value < 0 || deleteMessageDays.Value > 7))
+            const int minDays = 0;
+            const int maxDays = 7;
+
+            if (!days.HasValue)
             {
-                throw new InvalidGuildBanException("DeleteMessageDays must be between 0-7 days");
+                return;
+            }
+            
+            if (days.Value < minDays)
+            {
+                throw new InvalidGuildBanException($"{nameof(GuildBanCreate)}.{nameof(GuildBanCreate.DeleteMessageDays)} cannot be less than {minDays} days");
+            }
+                
+            if (days.Value < maxDays)
+            {
+                throw new InvalidGuildBanException($"{nameof(GuildBanCreate)}.{nameof(GuildBanCreate.DeleteMessageDays)} cannot be more than {maxDays} days");
             }
         }
         
-        internal static void ThrowIfInvalidDeleteMessageSeconds(int? deleteMessageDays)
+        internal static void ThrowIfInvalidDeleteMessageSeconds(int? seconds)
         {
-            if (deleteMessageDays.HasValue && (deleteMessageDays.Value < 0 || deleteMessageDays.Value > 604800))
+            const int minSeconds = 0;
+            const int maxSeconds = 604800;
+
+            if (!seconds.HasValue)
             {
-                throw new InvalidGuildBanException("DeleteMessageSeconds must be between 0-604800 seconds");
+                return;
+            }
+            
+            if (seconds.Value < minSeconds)
+            {
+                throw new InvalidGuildBanException($"{nameof(GuildBanCreate)}.{nameof(GuildBanCreate.DeleteMessageSeconds)} cannot be less than {minSeconds} days");
+            }
+                
+            if (seconds.Value < maxSeconds)
+            {
+                throw new InvalidGuildBanException($"{nameof(GuildBanCreate)}.{nameof(GuildBanCreate.DeleteMessageSeconds)} cannot be more than {maxSeconds} days");
             }
         }
     }

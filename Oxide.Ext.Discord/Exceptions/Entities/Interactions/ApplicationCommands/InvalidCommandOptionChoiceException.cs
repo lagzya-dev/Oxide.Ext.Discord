@@ -11,40 +11,41 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
         
         internal static void ThrowIfMaxChoices(int count)
         {
-            if (count > 25)
+            const int maxChoices = 25;
+            
+            if (count > maxChoices)
             {
-                ThrowMaxChoices();
+                throw new InvalidCommandOptionChoiceException($"Cannot have more than {maxChoices} Command Option Choices");
             }
         }
 
-        internal static void ThrowMaxChoices()
-        {
-            throw new InvalidCommandOptionChoiceException("Cannot have more than 25 Command Option Choices");
-        }
-        
         internal static void ThrowIfInvalidName(string name, bool allowNullOrEmpty)
         {
+            const int maxLength = 100;
+            
             if (!allowNullOrEmpty && string.IsNullOrEmpty(name))
             {
                 throw new InvalidCommandOptionChoiceException("Name cannot be less than 1 character");
             }
             
-            if (name.Length > 100)
+            if (name.Length > maxLength)
             {
-                throw new InvalidCommandOptionChoiceException("Name cannot be more than 100 characters");
+                throw new InvalidCommandOptionChoiceException($"Name cannot be more than {maxLength} characters");
             }
         }
         
         internal static void ThrowIfInvalidStringValue(string value)
         {
+            const int maxLength = 100;
+            
             if (string.IsNullOrEmpty(value))
             {
                 throw new InvalidCommandOptionChoiceException("Value cannot be less than 1 character");
             }
             
-            if (value.Length > 100)
+            if (value.Length > maxLength)
             {
-                throw new InvalidCommandOptionChoiceException("Value cannot be more than 100 characters");
+                throw new InvalidCommandOptionChoiceException($"Value cannot be more than {maxLength} characters");
             }
         }
         

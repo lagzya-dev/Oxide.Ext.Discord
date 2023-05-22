@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Entities.Guilds;
+
 namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 {
     /// <summary>
@@ -11,20 +13,23 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
         {
             if (string.IsNullOrEmpty(query))
             {
-                throw new InvalidGuildSearchMembersException("Query cannot be less than 1 character");
+                throw new InvalidGuildSearchMembersException($"{nameof(GuildSearchMembers)}.{nameof(GuildSearchMembers.Query)} cannot be less than 1 character");
             }
         }
         
         internal static void ThrowIfInvalidLimit(int? limit)
         {
-            if (limit < 0)
+            const int minLimit = 0;
+            const int maxLimit = 1000;
+            
+            if (limit < minLimit)
             {
-                throw new InvalidGuildSearchMembersException("Limit cannot be less than 0");
+                throw new InvalidGuildSearchMembersException($"{nameof(GuildSearchMembers)}.{nameof(GuildSearchMembers.Limit)} cannot be less than {minLimit}");
             }
             
-            if (limit > 1000)
+            if (limit > maxLimit)
             {
-                throw new InvalidGuildSearchMembersException("Limit cannot be more than 1000");
+                throw new InvalidGuildSearchMembersException($"{nameof(GuildSearchMembers)}.{nameof(GuildSearchMembers.Limit)} cannot be more than {maxLimit}");
             }
         }
     }

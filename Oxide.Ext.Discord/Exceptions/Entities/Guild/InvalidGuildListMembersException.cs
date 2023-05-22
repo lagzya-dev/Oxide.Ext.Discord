@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Entities.Guilds;
+
 namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 {
     /// <summary>
@@ -9,14 +11,17 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
         
         internal static void ThrowIfInvalidLimit(int? limit)
         {
-            if (limit < 0)
+            const int minLimit = 0;
+            const int maxLimit = 1000;
+            
+            if (limit < minLimit)
             {
-                throw new InvalidGuildListMembersException("Limit cannot be less than 0");
+                throw new InvalidGuildListMembersException($"{nameof(GuildListMembers)}.{nameof(GuildListMembers.Limit)} cannot be less than {minLimit}");
             }
             
-            if (limit > 1000)
+            if (limit > maxLimit)
             {
-                throw new InvalidGuildListMembersException("Limit cannot be more than 1000");
+                throw new InvalidGuildListMembersException($"{nameof(GuildListMembers)}.{nameof(GuildListMembers.Limit)} cannot be more than {maxLimit}");
             }
         }
     }

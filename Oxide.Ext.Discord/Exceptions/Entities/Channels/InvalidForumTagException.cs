@@ -1,4 +1,6 @@
 
+using Oxide.Ext.Discord.Entities.Channels;
+
 namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
 {
     /// <summary>
@@ -10,9 +12,11 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
 
         internal static void ThrowIfInvalidName(string name)
         {
-            if (!string.IsNullOrEmpty(name) && name.Length > 20)
+            const int maxLength = 20;
+            
+            if (!string.IsNullOrEmpty(name) && name.Length > maxLength)
             {
-                throw new InvalidForumTagException("Forum Tag Name cannot be more than 20 characters");
+                throw new InvalidForumTagException($"{nameof(ForumTag)}.{nameof(ForumTag.Name)} cannot be more than {maxLength} characters");
             }
         }
     }

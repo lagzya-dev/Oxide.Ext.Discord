@@ -1,3 +1,6 @@
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Channels;
+
 namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
 {
     /// <summary>
@@ -9,25 +12,51 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
         
         internal static void ThrowIfInvalidMaxAge(int? maxAage)
         {
-            if (maxAage.HasValue && (maxAage.Value < 0 || maxAage.Value > 604800))
+            const int minAge = 0;
+            const int maxAge = 604800;
+
+            if (!maxAage.HasValue)
             {
-                throw new InvalidChannelInviteException("MaxAge cannot be less than 0 or more than 604800");
+                return;
+            }
+            
+            if (maxAage.Value < minAge)
+            {
+                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxAge)} cannot be less than {minAge}");
+            }
+                
+            if (maxAage.Value > maxAge)
+            {
+                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxAge)}  cannot be more than {maxAge}");
             }
         }
         
         internal static void ThrowIfInvalidMaxUses(int? maxUses)
         {
-            if (maxUses.HasValue && (maxUses.Value < 0 || maxUses.Value > 100))
+            const int minUse = 0;
+            const int maxUse = 100;
+
+            if (!maxUses.HasValue)
             {
-                throw new InvalidChannelInviteException("MaxUses cannot be less than 0 or more than 100");
+                return;
+            }
+            
+            if (maxUses.Value < minUse)
+            {
+                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxUses)} cannot be less than {minUse}");
+            }
+                
+            if (maxUses.Value > maxUse)
+            {
+                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxUses)} cannot be more than {maxUse}");
             }
         }
         
-        internal static void ThrowIfInvalidTargetUser(Discord.Entities.Snowflake? targetUser)
+        internal static void ThrowIfInvalidTargetUser(Snowflake? targetUser)
         {
             if (targetUser.HasValue && !targetUser.Value.IsValid())
             {
-                throw new InvalidChannelInviteException("TargetUser is not a valid snowflake ID");
+                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.TargetUser)} is not a valid snowflake ID");
             }
         }
     }
