@@ -36,10 +36,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// </summary>
         /// <param name="command">Command that is to be ran</param>
         /// <returns>True if the command can run; False otherwise</returns>
-        public bool CanFireRequest(WebSocketCommand command)
-        {
-            return !_pluginRequests.TryGetValue(command.Client.PluginId, out int numRequest) || numRequest < MaxRequestPerPlugin;
-        }
+        public bool CanFireRequest(WebSocketCommand command) => !_pluginRequests.TryGetValue(command.Client.PluginId, out int numRequest) || numRequest < MaxRequestPerPlugin;
 
         ///<inheritdoc/>
         protected override void OnRateLimitReset()

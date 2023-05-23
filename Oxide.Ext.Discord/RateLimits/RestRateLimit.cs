@@ -37,9 +37,9 @@ namespace Oxide.Ext.Discord.RateLimits
         /// <summary>
         /// Returns how long until the current rate limit period will expire
         /// </summary>
-        public override DateTimeOffset NextReset()
+        protected override DateTimeOffset GetNextReset()
         {
-            DateTimeOffset nextReset = base.NextReset();
+            DateTimeOffset nextReset = base.GetNextReset();
             return nextReset > _retryAfter ? nextReset : _retryAfter;
         }
         

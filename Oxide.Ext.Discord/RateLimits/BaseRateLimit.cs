@@ -18,9 +18,9 @@ namespace Oxide.Ext.Discord.RateLimits
         protected int NumRequests;
         
         /// <summary>
-        /// The Last Reset Time
+        /// Returns how long until the current rate limit period will expire
         /// </summary>
-        protected long LastReset;
+        public DateTimeOffset NextReset { get; private set; }
         
         /// <summary>
         /// The max number of requests this rate limit can handle per interval
@@ -54,14 +54,20 @@ namespace Oxide.Ext.Discord.RateLimits
             _timer = new Timer(interval);
             _timer.Elapsed += ResetRateLimit;
             _timer.Start();
-            LastReset = TimeHelpers.MillisecondsSinceEpoch();
+            // ReSharper disable once VirtualMemberCallInConstructor
+            NextReset = GetNextReset();
         }
         
         private void ResetRateLimit(object sender, ElapsedEventArgs e)
         {
             OnRateLimitReset();
+            NextReset = GetNextReset();
             Interlocked.Exchange(ref NumRequests, 0);
-            Interlocked.Exchange(ref LastReset, TimeHelpers.MillisecondsSinceEpoch());
+        }
+
+        protected virtual DateTimeOffset GetNextReset()
+        {
+            return (TimeHelpers.MillisecondsSinceEpoch() + ResetInterval).ToDateTimeOffsetFromMilliseconds();
         }
         
         /// <summary>
@@ -81,12 +87,7 @@ namespace Oxide.Ext.Discord.RateLimits
         /// Returns true if we have reached the global rate limit 
         /// </summary>
         public bool HasReachedRateLimit => NumRequests >= MaxRequests;
-
-        /// <summary>
-        /// Returns how long until the current rate limit period will expire
-        /// </summary>
-        public virtual DateTimeOffset NextReset() => (LastReset + ResetInterval).ToDateTimeOffsetFromMilliseconds();
-
+        
         /// <summary>
         /// Called when a bot is shutting down
         /// </summary>
