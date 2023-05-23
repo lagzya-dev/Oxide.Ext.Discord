@@ -71,7 +71,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
                     if (_rateLimit.HasReachedRateLimit)
                     {
-                        DateTimeOffset reset = _rateLimit.NextReset();
+                        DateTimeOffset reset = _rateLimit.NextReset;
                         if (reset > DateTimeOffset.UtcNow)
                         {
                             await Task.Delay(reset - DateTimeOffset.UtcNow, _token).ConfigureAwait(false);
@@ -95,7 +95,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
                     if (!_rateLimit.CanFireRequest(command))
                     {
-                        _logger.Warning($"{nameof(WebSocketCommandHandler)}.{nameof(SendCommandsInternal)} Skipping websocket command for plugin {{0}} Exceeded Rate Limit of {{1}} Requests in {{2}} Seconds! Report this error to the plugin author.", command.Client.PluginName, WebsocketRateLimit.MaxRequestPerPlugin, WebsocketRateLimit.RateLimitInterval);
+                        _logger.Warning($"{nameof(WebSocketCommandHandler)}.{nameof(SendCommandsInternal)} Skipping websocket command for plugin {{0}} Exceeded Rate Limit of {{1}} Requests in {{2}} Seconds! Report this error to the plugin author.", command.Client.PluginName, WebsocketRateLimit.MaxRequestPerPlugin, WebsocketRateLimit.RateLimitInterval / 1000);
                         RemoveCommand(command);
                         continue;
                     }
