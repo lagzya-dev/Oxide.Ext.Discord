@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
@@ -16,7 +17,6 @@ using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
@@ -28,9 +28,8 @@ namespace Oxide.Ext.Discord.Entities.Users
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/user#user-object">User Structure</a>
     /// </summary>
-    [JsonConverter(typeof(CacheConverter<DiscordUser>))]
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordUser : ISnowflakeEntity, IDiscordCacheable, IDebugLoggable
+    public class DiscordUser : ISnowflakeEntity, IDiscordCacheable<DiscordUser>, IDebugLoggable
     {
         #region Discord Fields
         /// <summary>
@@ -173,8 +172,6 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Returns the IPlayer for the discord user if linked; null otherwise
         /// </summary>
         public IPlayer Player => DiscordLink.Instance.GetPlayer(Id);
-        
-        public static DiscordUser FromCache(Snowflake id) => EntityCache<DiscordUser>.Instance.Get(id);
         #endregion
 
         #region API Methods
@@ -485,6 +482,31 @@ namespace Oxide.Ext.Discord.Entities.Users
         }
         #endregion
 
+                
+        [OnDeserialized]
+        internal void OnDeserializedMethod(StreamingContext context)
+        {
+            DiscordUser update = EntityCache<DiscordUser>.Instance.Update(this);
+            Update(update);
+        }
+        
+        public void Update(DiscordUser update)
+        {
+            if (update.Username != null) Username = update.Username;
+            if (update.GlobalName != null) GlobalName = update.GlobalName;
+            if (update.Discriminator != null) Discriminator = update.Discriminator;
+            if (update.Avatar != null) Avatar = update.Avatar;
+            if (update.MfaEnabled.HasValue) MfaEnabled = update.MfaEnabled;
+            if (update.Banner != null) Banner = update.Banner;
+            if (update.AccentColor.HasValue) AccentColor = update.AccentColor;
+            if (update.Locale != null) Locale = update.Locale;
+            if (update.Verified.HasValue) Verified = update.Verified;
+            if (update.Email != null) Email = update.Email;
+            if (update.Flags.HasValue) Flags = update.Flags;
+            if (update.PremiumType.HasValue) PremiumType = update.PremiumType;
+            if (update.PublicFlags.HasValue) PublicFlags = update.PublicFlags;
+        }
+        
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendField("Id", Id);

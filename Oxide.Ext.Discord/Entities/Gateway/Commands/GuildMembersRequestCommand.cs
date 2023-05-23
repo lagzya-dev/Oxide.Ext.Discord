@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Gateway.Commands
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#request-guild-members">Request Guild Members</a>
+    /// Represents <a href="https://discord.com/developers/docs/topics/gateway-events#request-guild-members">Request Guild Members</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class GuildMembersRequestCommand
@@ -33,13 +33,13 @@ namespace Oxide.Ext.Discord.Entities.Gateway.Commands
         /// </summary>
         [JsonProperty("presences")]
         public bool? Presences { get; set; }
-        
+
         /// <summary>
         /// Used to specify which users you wish to fetch
         /// </summary>
         [JsonProperty("user_ids")]
-        public List<Snowflake> UserIds { get; set; }        
-        
+        public List<Snowflake> UserIds { get; set; }
+
         /// <summary>
         /// Nonce to identify the Guild Members Chunk response (Up to 25 characters)
         /// </summary>

@@ -24,10 +24,7 @@ namespace Oxide.Ext.Discord.Json.Converters
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (!(existingValue is Hash<Snowflake, TValue> data))
-            {
-                data = new Hash<Snowflake, TValue>();
-            }
+            Hash<Snowflake, TValue> data = new Hash<Snowflake, TValue>();
             
             foreach (JToken token in JArray.Load(reader))
             {

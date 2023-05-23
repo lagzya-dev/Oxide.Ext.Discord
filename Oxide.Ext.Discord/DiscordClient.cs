@@ -1,7 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Gateway;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
@@ -106,8 +105,7 @@ namespace Oxide.Ext.Discord
 
             if (settings.HasIntents(GatewayIntents.GuildMessages) && !settings.HasIntents(GatewayIntents.MessageContent))
             {
-                settings.Intents |= GatewayIntents.MessageContent;
-                Logger.Warning("Plugin {0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContent", Plugin.FullName());
+                Logger.Debug("Plugin {0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContent", Plugin.FullName());
             }
             
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
