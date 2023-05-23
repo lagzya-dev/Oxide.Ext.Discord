@@ -1489,9 +1489,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         //https://discord.com/developers/docs/topics/gateway-events#user-update
         private void HandleDispatchUserUpdate(DiscordUser user)
         {
-            DiscordUser existing = EntityCache<DiscordUser>.Instance.Get(user.Id);
-            existing?.Update(user);
-            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordUserUpdated, existing ?? user);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordUserUpdated, user);
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchUserUpdate)} User ID: {{0}}", user.Id);
         }
 
