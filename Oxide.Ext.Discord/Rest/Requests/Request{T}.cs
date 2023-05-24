@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <param name="route">Route for the request</param>
         /// <param name="data">Data being passed into the request. Null if no data is passed</param>
         /// <returns>A <see cref="Request{T}"/></returns>
-        public static Request<T> CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data)
+        public new static Request<T> CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data)
         {
             Request<T> request = pluginPool.Get<Request<T>>();
             request.Init(client, httpClient, method, route, data);

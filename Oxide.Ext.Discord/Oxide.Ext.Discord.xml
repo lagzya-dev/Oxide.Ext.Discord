@@ -1770,25 +1770,6 @@
             <param name="value">value to lower</param>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback">
-            <summary>
-            Represents a base callback when a request is completed
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback.Client">
-            <summary>
-            <see cref="T:Oxide.Ext.Discord.DiscordClient"/> for the Api Completed Callback
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback.Init(Oxide.Ext.Discord.DiscordClient)">
-            <summary>
-            Initializes the <see cref="T:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback"/>
-            </summary>
-            <param name="client"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Callbacks.Api.BaseApiCompletedCallback.EnterPool">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Callbacks.BaseAsyncCallback">
             <summary>
             Represents a base callback to be used when needing a lambda callback so no delegate or class is generated
@@ -3461,116 +3442,6 @@
         <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.EnterPool">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Api.RequestError">
-            <summary>
-            Error object that is returned to the caller when a request fails
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.RequestId">
-            <summary>
-            ID of the request
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.RequestMethod">
-            <summary>
-            The request method that was called
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.Exception">
-            <summary>
-            The exception from the request
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.Url">
-            <summary>
-            The URI that was called
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.Data">
-            <summary>
-            What data was passed to the request
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.ContentType">
-            <summary>
-            HTTP Content Type for the request
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError.ErrorDate">
-            <summary>
-            <see cref="T:System.DateTimeOffset"/> when the error occured
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.StringContents">
-            <summary>
-            The string contents of the request
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.HttpStatusCode">
-            <summary>
-            HTTP Status code
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.DiscordError">
-            <summary>
-            If discord returned an error this will contain that error message
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestError.Message">
-            <summary>
-            Full string response if we received one
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Api.RequestError._showErrorMessage">
-            <summary>
-            Should we display the error message
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.#ctor(Oxide.Ext.Discord.Rest.Requests.Request,Oxide.Ext.Discord.Entities.Api.RequestErrorType,Oxide.Ext.Discord.Logging.DiscordLogLevel)">
-            <summary>
-            Creates a new rest error
-            </summary>
-            <param name="request">Request the error is for</param>
-            <param name="type"><see cref="T:Oxide.Ext.Discord.Entities.Api.RequestErrorType"/> of the error</param>
-            <param name="log"><see cref="T:Oxide.Ext.Discord.Logging.DiscordLogLevel"/> log level of the error</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SuppressErrorMessage">
-            <summary>
-            Suppresses the error message from being logged
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.SetResponse(Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode,System.String)">
-            <summary>
-            Sets the HTTP Response data
-            </summary>
-            <param name="code">HTTP Response Code</param>
-            <param name="content">HTTP Response Body Stream</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestError.LogError">
-            <summary>
-            Performs the error logging for the request
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage">
-            <summary>
-            Represents an <a href="https://discord.com/developers/docs/reference#error-messages">error from the discord API</a> 
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage.Code">
-            <summary>
-            Error code from the discord API
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage.Message">
-            <summary>
-            Error message from the discord API
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Api.RequestErrorMessage.Errors">
-            <summary>
-            An JObject containing the errors that occured
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Api.RequestErrorType">
             <summary>
             Represents a Discord Request Error Type
@@ -3611,7 +3482,7 @@
             Represents a REST response from discord
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.Requests.RequestCompletedStatus,Oxide.Ext.Discord.Entities.Api.RequestError)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.Init(Oxide.Ext.Discord.DiscordClient,System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.Requests.RequestCompletedStatus,Oxide.Ext.Discord.Entities.Api.ResponseError)">
             <summary>
             Create new REST response with the given data
             </summary>
@@ -3628,7 +3499,7 @@
             <param name="httpResponse">The Web Response for the request</param>
             <returns>A success <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestResponse"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.CreateExceptionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.RequestError,System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.Requests.RequestCompletedStatus)">
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.CreateExceptionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Api.ResponseError,System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.Requests.RequestCompletedStatus)">
             <summary>
             Creates a Web Exception REST API response
             </summary>
@@ -3647,6 +3518,116 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RequestResponse.EnterPool">
             <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Api.ResponseError">
+            <summary>
+            Error object that is returned to the caller when a request fails
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.ResponseError.RequestId">
+            <summary>
+            ID of the request
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.ResponseError.RequestMethod">
+            <summary>
+            The request method that was called
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseError.Exception">
+            <summary>
+            The exception from the request
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.ResponseError.Url">
+            <summary>
+            The URI that was called
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.ResponseError.Data">
+            <summary>
+            What data was passed to the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseError.ContentType">
+            <summary>
+            HTTP Content Type for the request
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.ResponseError.ErrorDate">
+            <summary>
+            <see cref="T:System.DateTimeOffset"/> when the error occured
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseError.StringContents">
+            <summary>
+            The string contents of the request
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseError.HttpStatusCode">
+            <summary>
+            HTTP Status code
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseError.DiscordError">
+            <summary>
+            If discord returned an error this will contain that error message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseError.Message">
+            <summary>
+            Full string response if we received one
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.ResponseError._showErrorMessage">
+            <summary>
+            Should we display the error message
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.ResponseError.#ctor(Oxide.Ext.Discord.Rest.Requests.Request,Oxide.Ext.Discord.Entities.Api.RequestErrorType,Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+            <summary>
+            Creates a new rest error
+            </summary>
+            <param name="request">Request the error is for</param>
+            <param name="type"><see cref="T:Oxide.Ext.Discord.Entities.Api.RequestErrorType"/> of the error</param>
+            <param name="log"><see cref="T:Oxide.Ext.Discord.Logging.DiscordLogLevel"/> log level of the error</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.ResponseError.SuppressErrorMessage">
+            <summary>
+            Suppresses the error message from being logged
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.ResponseError.SetResponse(Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode,System.String)">
+            <summary>
+            Sets the HTTP Response data
+            </summary>
+            <param name="code">HTTP Response Code</param>
+            <param name="content">HTTP Response Body Stream</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.ResponseError.LogError">
+            <summary>
+            Performs the error logging for the request
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Api.ResponseErrorMessage">
+            <summary>
+            Represents an <a href="https://discord.com/developers/docs/reference#error-messages">error from the discord API</a> 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseErrorMessage.Code">
+            <summary>
+            Error code from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseErrorMessage.Message">
+            <summary>
+            Error message from the discord API
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseErrorMessage.Errors">
+            <summary>
+            An JObject containing the errors that occured
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.ApplicationFlags">
             <summary>
@@ -19049,17 +19030,17 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.Default.RequestErrorPlaceholders">
             <summary>
-            <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestError"/> placeholders
+            <see cref="T:Oxide.Ext.Discord.Entities.Api.ResponseError"/> placeholders
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.RequestErrorPlaceholders.HttpCode(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Api.RequestError)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.RequestErrorPlaceholders.HttpCode(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Api.ResponseError)">
             <summary>
-            <see cref="P:Oxide.Ext.Discord.Entities.Api.RequestError.HttpStatusCode"/> placeholder
+            <see cref="P:Oxide.Ext.Discord.Entities.Api.ResponseError.HttpStatusCode"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.RequestErrorPlaceholders.Message(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Api.RequestError)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.RequestErrorPlaceholders.Message(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Ext.Discord.Entities.Api.ResponseError)">
             <summary>
-            <see cref="P:Oxide.Ext.Discord.Entities.Api.RequestError.Message"/> placeholder
+            <see cref="P:Oxide.Ext.Discord.Entities.Api.ResponseError.Message"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.RequestErrorPlaceholders.RegisterPlaceholders(Oxide.Core.Plugins.Plugin,System.String,System.String)">
@@ -19532,9 +19513,9 @@
             <param name="id"><see cref="T:Oxide.Ext.Discord.Entities.Snowflake"/> ID</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddRequestError(Oxide.Ext.Discord.Entities.Api.RequestError)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddRequestError(Oxide.Ext.Discord.Entities.Api.ResponseError)">
             <summary>
-            Add a <see cref="T:Oxide.Ext.Discord.Entities.Api.RequestError"/>
+            Add a <see cref="T:Oxide.Ext.Discord.Entities.Api.ResponseError"/>
             </summary>
             <param name="error">RequestError to add</param>
             <returns>This</returns>
