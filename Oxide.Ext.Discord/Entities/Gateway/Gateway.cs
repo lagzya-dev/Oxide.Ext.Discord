@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Promise;

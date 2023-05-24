@@ -1,9 +1,6 @@
-using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Callbacks.Api.Completed
 {

@@ -2,7 +2,6 @@ using System;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
-using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;

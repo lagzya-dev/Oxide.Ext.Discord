@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Newtonsoft.Json;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Entities;

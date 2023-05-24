@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Core.Libraries;
-using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.AutoMod;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
