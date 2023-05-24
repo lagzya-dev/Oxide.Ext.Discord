@@ -146,6 +146,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <param name="response">Response for the error</param>
         private void OnRequestError(RequestResponse response)
         {
+            Promise.Finally(response.Error.LogError);
             Promise.Fail(response.Error);
         }
 

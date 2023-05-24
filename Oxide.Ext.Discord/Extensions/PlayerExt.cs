@@ -125,12 +125,12 @@ namespace Oxide.Ext.Discord.Extensions
         {
             if (!client.IsConnected())
             {
-                return DiscordPromise<DiscordMessage>.FromResult(null);
+                return DiscordPromise<DiscordMessage>.FromResolve(null);
             }
             
             if (!id.HasValue)
             {
-                return DiscordPromise<DiscordMessage>.FromResult(null);;
+                return DiscordPromise<DiscordMessage>.FromResolve(null);;
             }
             
             DiscordChannel channel = client.Bot.DirectMessagesByUserId[id.Value];

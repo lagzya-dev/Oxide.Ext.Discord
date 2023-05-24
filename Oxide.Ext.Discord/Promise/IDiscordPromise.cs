@@ -35,6 +35,8 @@ namespace Oxide.Ext.Discord.Promise
         /// <param name="onFail">Callback when an exception occurs</param>
         /// <returns>This</returns>
         IDiscordPromise Done(Action onResolved, Action<Exception> onFail);
+
+        IDiscordPromise Finally(Action onCompleted);
         
         /// <summary>
         /// Resolves the promise

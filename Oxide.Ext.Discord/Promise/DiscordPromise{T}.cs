@@ -25,14 +25,14 @@ namespace Oxide.Ext.Discord.Promise
             return promise;
         }
 
-        internal static IDiscordPromise<TResult> FromResult(TResult result)
+        internal static IDiscordPromise<TResult> FromResolve(TResult result)
         {
             DiscordPromise<TResult> promise = DiscordPool.Internal.Get<DiscordPromise<TResult>>();
             promise.Resolve(result);
             return promise;
         }
         
-        internal static IDiscordPromise<TResult> FromException(Exception ex)
+        internal static IDiscordPromise<TResult> FromFail(Exception ex)
         {
             DiscordPromise<TResult> promise = DiscordPool.Internal.Get<DiscordPromise<TResult>>();
             promise.Fail(ex);

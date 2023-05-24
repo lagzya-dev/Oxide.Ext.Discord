@@ -25,20 +25,21 @@ namespace Oxide.Ext.Discord.Promise
 
         internal PromiseState State { get; private set; }
         
-        private readonly Action _resolve;
-        private readonly Action _fail;
+        private readonly Action _onResolve;
+        private readonly Action _onFail;
         private readonly Action _dispose;
 
         private readonly List<Action> _resolves = new List<Action>(0);
         private readonly List<Action<Exception>> _fails = new List<Action<Exception>>(0);
+        private readonly List<Action> _finally = new List<Action>();
 
         /// <summary>
         /// Constructor
         /// </summary>
         public DiscordPromise()
         {
-            _resolve = InvokeResolveInternal;
-            _fail = InvokeFailInternal;
+            _onResolve = InvokeResolveInternal;
+            _onFail = InvokeFailInternal;
             _dispose = Dispose;
         }
 
@@ -139,6 +140,12 @@ namespace Oxide.Ext.Discord.Promise
             return this;
         }
 
+        public IDiscordPromise Finally(Action onCompleted)
+        {
+            _finally.Add(onCompleted);
+            return this;
+        }
+
         /// <summary>
         /// Handles calling the callbacks and disposing of the object
         /// </summary>
@@ -149,6 +156,8 @@ namespace Oxide.Ext.Discord.Promise
                 Action callback = _resolves[index];
                 callback.Invoke();
             }
+
+            InvokeFinally();
             
             DelayedDispose();
         }
@@ -161,7 +170,18 @@ namespace Oxide.Ext.Discord.Promise
                 callback.Invoke(Exception);
             }
 
+            InvokeFinally();
+
             DelayedDispose();
+        }
+
+        private void InvokeFinally()
+        {
+            for (int index = 0; index < _finally.Count; index++)
+            {
+                Action action = _finally[index];
+                action.Invoke();
+            }
         }
 
         ///<inheritdoc/>
@@ -175,7 +195,7 @@ namespace Oxide.Ext.Discord.Promise
                 return;
             }
             
-            Interface.Oxide.NextTick(_resolve);
+            Interface.Oxide.NextTick(_onResolve);
         }
 
         ///<inheritdoc/>
@@ -190,7 +210,7 @@ namespace Oxide.Ext.Discord.Promise
                 return;
             }
             
-            Interface.Oxide.NextTick(_fail);
+            Interface.Oxide.NextTick(_onFail);
         }
 
         /// <summary>

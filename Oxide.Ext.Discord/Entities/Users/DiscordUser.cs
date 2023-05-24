@@ -338,7 +338,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             DiscordChannel channel = client.Bot.DirectMessagesByUserId[userId];
             if (channel != null)
             {
-                return DiscordPromise<DiscordChannel>.FromResult(channel);
+                return DiscordPromise<DiscordChannel>.FromResolve(channel);
             }
 
             Dictionary<string, object> data = new Dictionary<string, object>

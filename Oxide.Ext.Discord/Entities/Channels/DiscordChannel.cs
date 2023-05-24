@@ -457,7 +457,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
             
             DiscordUser user = UserData.GetUser();
             client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.FullUserName, user.Id, blockedUntil.Value);
-            return DiscordPromise<DiscordMessage>.FromException(new BlockedUserException(user, blockedUntil.Value));
+            return DiscordPromise<DiscordMessage>.FromFail(new BlockedUserException(user, blockedUntil.Value));
         }
 
         /// <summary>
