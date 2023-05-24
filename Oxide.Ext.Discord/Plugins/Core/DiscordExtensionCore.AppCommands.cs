@@ -80,13 +80,13 @@ namespace Oxide.Ext.Discord.Plugins.Core
             {
                 client.Bot.Application.GetGuildCommand(client, guildId, commandId)
                       .Then(command => DeleteGetSuccess(client, interaction, command))
-                      .Catch<RequestError>(ex => DeleteGetError(client, interaction, ex));
+                      .Catch<ResponseError>(ex => DeleteGetError(client, interaction, ex));
             }
             else
             {
                 client.Bot.Application.GetGlobalCommand(client, commandId)                     
                       .Then(command => DeleteGetSuccess(client, interaction, command))
-                      .Catch<RequestError>(ex => DeleteGetError(client, interaction, ex));
+                      .Catch<ResponseError>(ex => DeleteGetError(client, interaction, ex));
             }
         }
 
@@ -101,7 +101,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             });
         }
 
-        public void DeleteGetError(DiscordClient client, DiscordInteraction interaction, RequestError error)
+        public void DeleteGetError(DiscordClient client, DiscordInteraction interaction, ResponseError error)
         {
             SendTemplateMessage(client, TemplateKeys.Commands.Delete.Success, interaction, GetPlaceholderData().AddRequestError(error));
         }

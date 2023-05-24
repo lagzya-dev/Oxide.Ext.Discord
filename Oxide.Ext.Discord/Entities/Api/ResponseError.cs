@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Api
     /// <summary>
     /// Error object that is returned to the caller when a request fails
     /// </summary>
-    public class RequestError : BaseDiscordException
+    public class ResponseError : BaseDiscordException
     {
         /// <summary>
         /// ID of the request
@@ -64,7 +64,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// If discord returned an error this will contain that error message
         /// </summary>
-        public RequestErrorMessage DiscordError { get; private set; }
+        public ResponseErrorMessage DiscordError { get; private set; }
 
         /// <summary>
         /// Full string response if we received one
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="request">Request the error is for</param>
         /// <param name="type"><see cref="RequestErrorType"/> of the error</param>
         /// <param name="log"><see cref="DiscordLogLevel"/> log level of the error</param>
-        internal RequestError(Request request, RequestErrorType type, DiscordLogLevel log)
+        internal ResponseError(Request request, RequestErrorType type, DiscordLogLevel log)
         {
             RequestId = request.Id;
             _client = request.Client;
@@ -101,7 +101,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             _logLevel = log;
         }
 
-        internal async Task<RequestError> WithRequest(HttpRequestMessage request)
+        internal async Task<ResponseError> WithRequest(HttpRequestMessage request)
         {
             if (request.Content != null)
             {
@@ -117,7 +117,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             return this;
         }
 
-        internal RequestError WithException(Exception ex)
+        internal ResponseError WithException(Exception ex)
         {
             Exception = ex;
             return this;
@@ -150,7 +150,7 @@ namespace Oxide.Ext.Discord.Entities.Api
                 return;
             }
             
-            DiscordError = JsonConvert.DeserializeObject<RequestErrorMessage>(content, _client.Bot.JsonSettings);
+            DiscordError = JsonConvert.DeserializeObject<ResponseErrorMessage>(content, _client.Bot.JsonSettings);
             if (DiscordError == null)
             {
                 return;

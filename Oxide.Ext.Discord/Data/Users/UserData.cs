@@ -31,9 +31,9 @@ namespace Oxide.Ext.Discord.Data.Users
             UserId = userId;
         }
 
-        public void ProcessError(DiscordClient client, RequestError request)
+        public void ProcessError(DiscordClient client, ResponseError request)
         {
-            RequestErrorMessage error = request?.DiscordError;
+            ResponseErrorMessage error = request?.DiscordError;
             if (error != null && error.Code == 50007)
             {
                 SetDmBlock();

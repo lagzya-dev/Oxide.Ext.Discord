@@ -299,9 +299,9 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Request.Source?.Cancel();
         }
 
-        private RequestError GetRequestError(RequestErrorType type, DiscordLogLevel log)
+        private ResponseError GetRequestError(RequestErrorType type, DiscordLogLevel log)
         {
-            return new RequestError(Request, type, log);
+            return new ResponseError(Request, type, log);
         }
 
         /// <inheritdoc/>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Oxide.Core;
 using Oxide.Ext.Discord.Exceptions.Promise;
 using Oxide.Ext.Discord.Libraries.Pooling;
@@ -46,6 +47,43 @@ namespace Oxide.Ext.Discord.Promise
             DiscordPromise promise = DiscordPool.Internal.Get<DiscordPromise>();
             promise.IsInternal = isInternal;
             return promise;
+        }
+        
+        internal static IDiscordPromise FromException(Exception ex)
+        {
+            DiscordPromise promise = DiscordPool.Internal.Get<DiscordPromise>();
+            promise.Fail(ex);
+            return promise;
+        }
+
+        internal static IDiscordPromise WhenAll(params IDiscordPromise[] promises) => WhenAll((IList<IDiscordPromise>)promises);
+
+        internal static IDiscordPromise WhenAll(IList<IDiscordPromise> promises)
+        {
+            int numSuccess = 0;
+            bool failure = false;
+            DiscordPromise allPromise = DiscordPool.Internal.Get<DiscordPromise>();
+            int count = promises.Count;
+            for (int index = 0; index < promises.Count; index++)
+            {
+                IDiscordPromise promise = promises[index];
+                promise.Done(() =>
+                {
+                    if (!failure && ++numSuccess == count)
+                    {
+                        allPromise.Resolve();
+                    }
+                }, error =>
+                {
+                    if (!failure)
+                    {
+                        failure = true;
+                        allPromise.Fail(error);
+                    }
+                });
+            }
+
+            return allPromise;
         }
 
         /// <summary>

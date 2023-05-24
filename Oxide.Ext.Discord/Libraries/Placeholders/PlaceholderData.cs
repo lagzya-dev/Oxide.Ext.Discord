@@ -198,11 +198,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         public PlaceholderData AddSnowflake(Snowflake id) => Add(nameof(Snowflake), id);
         
         /// <summary>
-        /// Add a <see cref="RequestError"/>
+        /// Add a <see cref="ResponseError"/>
         /// </summary>
         /// <param name="error">RequestError to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddRequestError(RequestError error) => Add(nameof(RequestError), error);
+        public PlaceholderData AddRequestError(ResponseError error) => Add(nameof(ResponseError), error);
 
         /// <summary>
         /// Adds the data with the given name

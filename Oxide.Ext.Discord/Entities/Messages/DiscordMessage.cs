@@ -277,7 +277,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
             IDiscordPromise<DiscordMessage> response = client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{channelId}/messages", message);
             if (userData != null)
             {
-                response.Catch<RequestError>(ex => userData.ProcessError(client, ex));
+                response.Catch<ResponseError>(ex => userData.ProcessError(client, ex));
             }
             
             return response;

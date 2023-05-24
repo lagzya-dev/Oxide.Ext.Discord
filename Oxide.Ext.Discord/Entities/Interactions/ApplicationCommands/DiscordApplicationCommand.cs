@@ -163,11 +163,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public IDiscordPromise<GuildCommandPermissions> GetPermissions(DiscordClient client, Snowflake guildId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            DiscordPromise<GuildCommandPermissions> promise = DiscordPromise<GuildCommandPermissions>.Create();
+            IDiscordPromise<GuildCommandPermissions> promise = DiscordPromise<GuildCommandPermissions>.Create();
 
             client.Bot.Rest.Get<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions")
                   .Then(perms => promise.Resolve(perms))
-                  .Catch<RequestError>(ex =>
+                  .Catch<ResponseError>(ex =>
                   {
                       if (ex.DiscordError?.Code != 10066)
                       {
@@ -179,7 +179,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
                       //If the command is synced we need to lookup by application ID instead
                       client.Bot.Rest.Get<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{ApplicationId}/permissions")
                             .Then(perms => promise.Resolve(perms))
-                            .Catch<RequestError>(ex1 => promise.Fail(ex1));
+                            .Catch<ResponseError>(ex1 => promise.Fail(ex1));
                   });
             return promise;
         }

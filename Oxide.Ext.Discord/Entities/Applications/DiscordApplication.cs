@@ -308,37 +308,13 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<List<DiscordApplicationCommand>> GetAllCommands(DiscordClient client, bool withLocalizations = false)
         {
-            bool globalDone = false;
-            Hash<Snowflake, bool> guildsDone = new Hash<Snowflake, bool>();
-            List<DiscordApplicationCommand> commands = new List<DiscordApplicationCommand>();
-            DiscordPromise<List<DiscordApplicationCommand>> promise = DiscordPromise<List<DiscordApplicationCommand>>.Create();
+            List<IDiscordPromise<List<DiscordApplicationCommand>>> requests = new List<IDiscordPromise<List<DiscordApplicationCommand>>>();
+            requests.Add(GetGlobalCommands(client, withLocalizations));
+            requests.AddRange(client.Bot.Servers.Keys.Select(id => GetGuildCommands(client, id, withLocalizations)));
 
-            //TODO: Fix Design as a failure could call the promise multiple times
-            GetGlobalCommands(client, withLocalizations).Done(globalCommands =>
-            {
-                commands.AddRange(globalCommands);
-                globalDone = true;
-                if (globalDone && guildsDone.Values.All(g => g))
-                {
-                    promise.Resolve(commands);
-                }
-            }, ex => promise.Fail(ex));
-            
-            foreach (Snowflake guildId in client.Bot.Servers.Keys)
-            {
-                guildsDone[guildId] = false;
-                GetGuildCommands(client, guildId, withLocalizations).Done(guildCommands =>
-                {
-                    commands.AddRange(guildCommands);
-                    guildsDone[guildId] = true;
-                    if (globalDone && guildsDone.Values.All(g => g))
-                    {
-                        promise.Resolve(commands);
-                    }
-                }, ex => promise.Fail(ex));
-            }
-            
-            return promise;
+            return DiscordPromise<List<DiscordApplicationCommand>>.WhenAll(requests)
+                                                                  .Then(commands => commands
+                                                                                    .SelectMany(c => c).ToList());
         }
         
         /// <summary>

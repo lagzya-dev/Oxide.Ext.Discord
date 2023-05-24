@@ -455,11 +455,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 return client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{Id}/messages", message);
             }
             
-            DiscordPromise<DiscordMessage> promise = DiscordPromise<DiscordMessage>.Create();
             DiscordUser user = UserData.GetUser();
             client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.FullUserName, user.Id, blockedUntil.Value);
-            promise.Fail(new BlockedUserException(user, blockedUntil.Value));
-            return promise;
+            return DiscordPromise<DiscordMessage>.FromException(new BlockedUserException(user, blockedUntil.Value));
         }
 
         /// <summary>

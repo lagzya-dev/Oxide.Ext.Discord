@@ -18,25 +18,63 @@ namespace Oxide.Ext.Discord.Promise
         
         private readonly List<Action<TResult>> _success = new List<Action<TResult>>(0);
 
-        internal new static DiscordPromise<TResult> Create(bool isInternal = false)
+        internal new static IDiscordPromise<TResult> Create(bool isInternal = false)
         {
             DiscordPromise<TResult> promise = DiscordPool.Internal.Get<DiscordPromise<TResult>>();
             promise.IsInternal = isInternal;
             return promise;
         }
 
-        internal static DiscordPromise<TResult> FromResult(TResult result)
+        internal static IDiscordPromise<TResult> FromResult(TResult result)
         {
             DiscordPromise<TResult> promise = DiscordPool.Internal.Get<DiscordPromise<TResult>>();
             promise.Resolve(result);
             return promise;
         }
         
-        internal static DiscordPromise<TResult> FromException(Exception ex)
+        internal static IDiscordPromise<TResult> FromException(Exception ex)
         {
             DiscordPromise<TResult> promise = DiscordPool.Internal.Get<DiscordPromise<TResult>>();
             promise.Fail(ex);
             return promise;
+        }
+        
+        internal static IDiscordPromise WhenAll(params IDiscordPromise<TResult>[] promises) => WhenAll((IList<IDiscordPromise<TResult>>)promises);
+
+        internal static IDiscordPromise<TResult[]> WhenAll(IList<IDiscordPromise<TResult>> promises)
+        {
+            int numSuccess = 0;
+            bool failure = false;
+            DiscordPromise<TResult[]> allPromise = DiscordPool.Internal.Get<DiscordPromise<TResult[]>>();
+            int count = promises.Count;
+            TResult[] results = new TResult[count];
+            for (int index = 0; index < promises.Count; index++)
+            {
+                IDiscordPromise<TResult> promise = promises[index];
+                promise.Done(result =>
+                {
+                    if (failure)
+                    {
+                        return;
+                    }
+
+                    results[index] = result;
+                    
+                    if (++numSuccess == count)
+                    {
+                        allPromise.Resolve(results);
+                    }
+                }, error =>
+                {
+                    if (!failure)
+                    {
+                        failure = true;
+                        allPromise.Fail(error);
+                    }
+                });
+            }
+
+            return allPromise;
         }
 
         ///<inheritdoc/>
@@ -57,7 +95,7 @@ namespace Oxide.Ext.Discord.Promise
         public IDiscordPromise<TConvert> Then<TConvert>(Func<TResult, TConvert> onResolved)
         {
             PromiseException.ThrowIfDisposed(this);
-            DiscordPromise<TConvert> promise = DiscordPromise<TConvert>.Create(IsInternal);
+            IDiscordPromise<TConvert> promise = DiscordPromise<TConvert>.Create(IsInternal);
             if (State == PromiseState.Resolved)
             {
                 promise.Resolve(onResolved(_data));
@@ -73,7 +111,7 @@ namespace Oxide.Ext.Discord.Promise
         public IDiscordPromise<TConvert> Then<TConvert>(Func<TResult, IDiscordPromise<TConvert>> onResolved)
         {
             PromiseException.ThrowIfDisposed(this);
-            DiscordPromise<TConvert> promise = DiscordPromise<TConvert>.Create(IsInternal);
+            IDiscordPromise<TConvert> promise = DiscordPromise<TConvert>.Create(IsInternal);
             if (State == PromiseState.Resolved)
             {
                 return onResolved(_data);

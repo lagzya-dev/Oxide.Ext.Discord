@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 Gateway.UpdateGatewayUrl(_client)
                        .Then(Connect)
-                       .Catch<RequestError>(OnGatewayUrlUpdateFailed);
+                       .Catch<ResponseError>(OnGatewayUrlUpdateFailed);
                 return;
             }
 
@@ -109,7 +109,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Handler.Connect(url);
         }
 
-        private void OnGatewayUrlUpdateFailed(RequestError error)
+        private void OnGatewayUrlUpdateFailed(ResponseError error)
         {
             _logger.Warning("Failed to update gateway url. Attempting reconnect.");
             WebsocketReconnectCallback.Start(_reconnect);

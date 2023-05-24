@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Api
     {
         internal RequestCompletedStatus Status;
         internal RateLimitResponse RateLimit;
-        internal RequestError Error;
+        internal ResponseError Error;
         internal DiscordHttpStatusCode Code;
         internal string Content;
         
@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="response">The Web Response for the request</param>
         /// <param name="status">The status of the request indicating if it was successful</param>
         /// <param name="error">If the request had an error the error created from the request</param>
-        private async Task Init(DiscordClient client, HttpResponseMessage response, RequestCompletedStatus status, RequestError error = null)
+        private async Task Init(DiscordClient client, HttpResponseMessage response, RequestCompletedStatus status, ResponseError error = null)
         {
             _client = client;
             Status = status;
@@ -63,7 +63,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="httpResponse">Web Response for the request</param>
         /// <param name="status">The request status containing the fail reason</param>
         /// <returns>A web exception <see cref="RequestResponse"/></returns>
-        public static async Task<RequestResponse> CreateExceptionResponse(DiscordClient client, RequestError error, HttpResponseMessage httpResponse, RequestCompletedStatus status)
+        public static async Task<RequestResponse> CreateExceptionResponse(DiscordClient client, ResponseError error, HttpResponseMessage httpResponse, RequestCompletedStatus status)
         {
             RequestResponse response = DiscordPool.Internal.Get<RequestResponse>();
             await response.Init(client, httpResponse, status, error).ConfigureAwait(false);
