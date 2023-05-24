@@ -78,20 +78,24 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
             if (guildId.IsValid())
             {
-                client.Bot.Application.GetGuildCommand(client, guildId, commandId, command => DeleteGetSuccess(client, interaction, command), error => DeleteGetError(client, interaction, error));
+                client.Bot.Application.GetGuildCommand(client, guildId, commandId)
+                      .Then(command => DeleteGetSuccess(client, interaction, command))
+                      .Catch<RequestError>(ex => DeleteGetError(client, interaction, ex));
             }
             else
             {
-                client.Bot.Application.GetGlobalCommand(client, commandId, command => DeleteGetSuccess(client, interaction, command), error => DeleteGetError(client, interaction, error));
+                client.Bot.Application.GetGlobalCommand(client, commandId)                     
+                      .Then(command => DeleteGetSuccess(client, interaction, command))
+                      .Catch<RequestError>(ex => DeleteGetError(client, interaction, ex));
             }
         }
 
         public void DeleteGetSuccess(DiscordClient client, DiscordInteraction interaction, DiscordApplicationCommand command)
         {
-            command.Delete(client, () =>
+            command.Delete(client).Then(() =>
             {
                 SendTemplateMessage(client, TemplateKeys.Commands.Delete.Success, interaction, GetPlaceholderData().AddCommand(command));
-            }, error =>
+            }).Catch(error =>
             {
                 SendTemplateMessage(client, TemplateKeys.Commands.Delete.Errors.DeleteCommandError, interaction, GetPlaceholderData().AddCommand(command));
             });
@@ -153,12 +157,13 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         private void CacheCommands(BotClient bot, Action<CommandCache> callback)
         {
-            bot.Application.GetAllCommands(bot.GetFirstClient(), commands =>
-            {
-                CommandCache cache = new CommandCache(commands);
-                _commandCache[bot.Application.Id] = cache;
-                callback.Invoke(cache);
-            });
+            bot.Application.GetAllCommands(bot.GetFirstClient())
+               .Then(commands =>
+               {
+                   CommandCache cache = new CommandCache(commands);
+                   _commandCache[bot.Application.Id] = cache;
+                   callback.Invoke(cache);
+               });
         }
 
         private PlaceholderData GetPlaceholderData()

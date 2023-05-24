@@ -18,6 +18,7 @@ using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
 {
@@ -293,7 +294,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="response">Response to respond with</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, BaseInteractionResponse response, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise CreateInteractionResponse(DiscordClient client, BaseInteractionResponse response)
         {
             if (response == null) throw new ArgumentNullException(nameof(response));
             InvalidInteractionResponseException.ThrowIfAlreadyResponded(_hasResponded);
@@ -301,7 +302,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             InvalidInteractionResponseException.ThrowIfInvalidResponseType(Type, response.Type);
 
             _hasResponded = true;
-            client.Bot.Rest.CreateRequest(client, $"interactions/{Id}/{Token}/callback", RequestMethod.POST, response, callback, error);
+            return client.Bot.Rest.CreateRequest(client, $"interactions/{Id}/{Token}/callback", RequestMethod.POST, response);
         }
 
         /// <summary>
@@ -313,10 +314,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="response">Interaction Callback Message Data</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionCallbackData response = null, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionCallbackData response = null)
         {
             InteractionResponse data = new InteractionResponse(type, response);
-            CreateInteractionResponse(client, data, callback, error);
+            return CreateInteractionResponse(client, data);
         }
 
         /// <summary>
@@ -331,13 +332,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="callback">Callback when the message is created</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null</exception>
-        public void CreateTemplateInteractionResponse(DiscordClient client, Plugin plugin, InteractionResponseType type, string templateName, InteractionCallbackData message = null, PlaceholderData placeholders = null, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise CreateTemplateInteractionResponse(DiscordClient client, Plugin plugin, InteractionResponseType type, string templateName, InteractionCallbackData message = null, PlaceholderData placeholders = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
             InteractionCallbackData template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, this).ToMessage(placeholders, message);
-            CreateInteractionResponse(client, type, template, callback, error);
+            return CreateInteractionResponse(client, type, template);
         }
         
         /// <summary>
@@ -351,13 +352,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="callback">Callback when the message is created</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public void CreateTemplateModalResponse(DiscordClient client, Plugin plugin, string templateName, InteractionModalMessage message = null, PlaceholderData placeholders = null, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise CreateTemplateModalResponse(DiscordClient client, Plugin plugin, string templateName, InteractionModalMessage message = null, PlaceholderData placeholders = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
             InteractionModalMessage template = DiscordExtension.DiscordModalTemplates.GetLocalizedTemplate(plugin, templateName, this).ToModal(placeholders, message);
-            CreateInteractionResponse(client, template, callback, error);
+            return CreateInteractionResponse(client, template);
         }
 
         /// <summary>
@@ -369,10 +370,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="builder">Builder for this response</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionResponseBuilder builder, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionResponseBuilder builder)
         {
             InteractionResponse data = new InteractionResponse(type, builder.Build());
-            CreateInteractionResponse(client, data, callback, error);
+            return CreateInteractionResponse(client, data);
         }
         
         /// <summary>
@@ -383,10 +384,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message for this response</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionAutoCompleteMessage message, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise CreateInteractionResponse(DiscordClient client, InteractionAutoCompleteMessage message)
         {
             InteractionAutoCompleteResponse data = new InteractionAutoCompleteResponse(message);
-            CreateInteractionResponse(client, data, callback, error);
+            return CreateInteractionResponse(client, data);
         }
         
         /// <summary>
@@ -397,9 +398,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="builder">Auto Complete Builder for this response</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionAutoCompleteBuilder builder, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise CreateInteractionResponse(DiscordClient client, InteractionAutoCompleteBuilder builder)
         {
-            CreateInteractionResponse(client, builder.Build(), callback, error);
+            return CreateInteractionResponse(client, builder.Build());
         }
         
         /// <summary>
@@ -410,10 +411,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message for this response</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionModalMessage message, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise CreateInteractionResponse(DiscordClient client, InteractionModalMessage message)
         {
             InteractionModalResponse data = new InteractionModalResponse(message);
-            CreateInteractionResponse(client, data, callback, error);
+            return CreateInteractionResponse(client, data);
         }
         
         /// <summary>
@@ -424,9 +425,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="builder">Modal Builder for this response</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateInteractionResponse(DiscordClient client, InteractionModalBuilder builder, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise CreateInteractionResponse(DiscordClient client, InteractionModalBuilder builder)
         {
-            CreateInteractionResponse(client, builder.Build(), callback, error);
+            return CreateInteractionResponse(client, builder.Build());
         }
         
         /// <summary>
@@ -438,10 +439,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DefferResponse(DiscordClient client, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise DefferResponse(DiscordClient client)
         {
             InteractionResponseType type = Type == InteractionType.ApplicationCommand ? InteractionResponseType.DeferredChannelMessageWithSource : InteractionResponseType.DeferredUpdateMessage;
-            CreateInteractionResponse(client, type, (InteractionCallbackData)null, callback, error);
+            return CreateInteractionResponse(client, type);
         }
 
         /// <summary>
@@ -452,11 +453,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// /// <param name="message">Updated message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditOriginalInteractionResponse(DiscordClient client, DiscordMessage message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<DiscordMessage> EditOriginalInteractionResponse(DiscordClient client, DiscordMessage message)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.PATCH, message, callback, error);
+            return client.Bot.Rest.CreateRequest<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.PATCH, message);
         }
         
         /// <summary>
@@ -470,13 +471,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="callback">Callback when the message is created</param>
         /// <param name="error">Callback when an error occurs with error information</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public void EditTemplateOriginalInteractionResponse(DiscordClient client, Plugin plugin, string templateName, DiscordMessage message = null, PlaceholderData placeholders = null, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<DiscordMessage> EditTemplateOriginalInteractionResponse(DiscordClient client, Plugin plugin, string templateName, DiscordMessage message = null, PlaceholderData placeholders = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
             DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, this).ToMessage(placeholders, message);
-            EditOriginalInteractionResponse(client, template, callback, error);
+            return EditOriginalInteractionResponse(client, template);
         }
 
         /// <summary>
@@ -486,11 +487,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteOriginalInteractionResponse(DiscordClient client, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise DeleteOriginalInteractionResponse(DiscordClient client)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.DELETE);
         }
 
         /// <summary>
@@ -501,11 +502,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message to follow up with</param>
         /// <param name="callback">Callback with the message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateFollowUpMessage(DiscordClient client, CommandFollowupCreate message, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<DiscordMessage> CreateFollowUpMessage(DiscordClient client, CommandFollowupCreate message)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}", RequestMethod.POST, message, callback, error);
+            return client.Bot.Rest.CreateRequest<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}", RequestMethod.POST, message);
         }
         
         /// <summary>
@@ -516,9 +517,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="builder">Builder for the follow up</param>
         /// <param name="callback">Callback with the message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateFollowUpMessage(DiscordClient client, InteractionFollowupBuilder builder, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<DiscordMessage> CreateFollowUpMessage(DiscordClient client, InteractionFollowupBuilder builder)
         {
-            CreateFollowUpMessage(client, builder.Build(), callback, error);
+            return CreateFollowUpMessage(client, builder.Build());
         }
 
         /// <summary>
@@ -530,12 +531,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="edit">Updated message</param>
         /// <param name="callback">Callback with the updated message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditFollowUpMessage(DiscordClient client, Snowflake messageId, CommandFollowupUpdate edit, Action<DiscordMessage> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<DiscordMessage> EditFollowUpMessage(DiscordClient client, Snowflake messageId, CommandFollowupUpdate edit)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.PATCH, edit, callback, error);
+            return client.Bot.Rest.CreateRequest<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.PATCH, edit);
         }
 
         /// <summary>
@@ -546,12 +547,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="messageId">Message ID to delete</param>
         /// <param name="callback">Callback with the updated message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteFollowUpMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise DeleteFollowUpMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RequestError> error = null)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.DELETE);
         }
     }
 }

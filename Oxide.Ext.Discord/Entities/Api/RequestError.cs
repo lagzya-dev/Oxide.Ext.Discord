@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Configuration;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -13,7 +14,7 @@ namespace Oxide.Ext.Discord.Entities.Api
     /// <summary>
     /// Error object that is returned to the caller when a request fails
     /// </summary>
-    public class RequestError
+    public class RequestError : BaseDiscordException
     {
         /// <summary>
         /// ID of the request
@@ -87,7 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="request">Request the error is for</param>
         /// <param name="type"><see cref="RequestErrorType"/> of the error</param>
         /// <param name="log"><see cref="DiscordLogLevel"/> log level of the error</param>
-        internal RequestError(BaseRequest request, RequestErrorType type, DiscordLogLevel log)
+        internal RequestError(Request request, RequestErrorType type, DiscordLogLevel log)
         {
             RequestId = request.Id;
             _client = request.Client;

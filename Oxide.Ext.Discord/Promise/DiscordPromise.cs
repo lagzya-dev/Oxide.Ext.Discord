@@ -28,9 +28,8 @@ namespace Oxide.Ext.Discord.Promise
         private readonly Action _fail;
         private readonly Action _dispose;
 
-        private readonly List<Action> _resolves = new List<Action>();
-        private readonly List<Action<Exception>> _fails = new List<Action<Exception>>();
-        private readonly List<IDiscordPromise> _children = new List<IDiscordPromise>();
+        private readonly List<Action> _resolves = new List<Action>(0);
+        private readonly List<Action<Exception>> _fails = new List<Action<Exception>>(0);
 
         /// <summary>
         /// Constructor
@@ -56,6 +55,7 @@ namespace Oxide.Ext.Discord.Promise
         /// <returns>this</returns>
         public IDiscordPromise Then(Action onResolved)
         {
+            PromiseException.ThrowIfDisposed(this);
             if (State == PromiseState.Resolved)
             {
                 onResolved();
@@ -69,6 +69,7 @@ namespace Oxide.Ext.Discord.Promise
         ///<inheritdoc/>
         public IDiscordPromise Catch(Action<Exception> onFail)
         {
+            PromiseException.ThrowIfDisposed(this);
             if (State == PromiseState.Failed)
             {
                 onFail(Exception);
@@ -79,9 +80,22 @@ namespace Oxide.Ext.Discord.Promise
             return this;
         }
 
+        public IDiscordPromise Catch<TException>(Action<TException> onFail) where TException : Exception
+        {
+            Catch(ex =>
+            {
+                if (ex is TException exception)
+                {
+                    onFail(exception);
+                }
+            });
+            return this;
+        }
+
         ///<inheritdoc/>
         public IDiscordPromise Done(Action onResolved, Action<Exception> onFail)
         {
+            PromiseException.ThrowIfDisposed(this);
             Then(onResolved);
             Catch(onFail);
             return this;
@@ -109,20 +123,14 @@ namespace Oxide.Ext.Discord.Promise
                 callback.Invoke(Exception);
             }
 
-            for (int index = 0; index < _children.Count; index++)
-            {
-                IDiscordPromise child = _children[index];
-                child.Fail(Exception);
-            }
-            
             DelayedDispose();
         }
 
         ///<inheritdoc/>
         public void Resolve()
         {
+            PromiseException.ThrowIfDisposed(this);
             SetState(PromiseState.Resolved);
-            State = PromiseState.Resolved;
             if (IsInternal)
             {
                 InvokeResolveInternal();
@@ -135,6 +143,7 @@ namespace Oxide.Ext.Discord.Promise
         ///<inheritdoc/>
         public void Fail(Exception ex)
         {
+            PromiseException.ThrowIfDisposed(this);
             SetState(PromiseState.Failed);
             Exception = ex;
             if (IsInternal)
@@ -147,30 +156,12 @@ namespace Oxide.Ext.Discord.Promise
         }
 
         /// <summary>
-        /// Adds a child callback to the promise
-        /// </summary>
-        /// <param name="child"></param>
-        protected void AddChild(IDiscordPromise child)
-        {
-            if (State == PromiseState.Failed)
-            {
-                child.Fail(Exception);
-                return;
-            }
-            
-            if (!_children.Contains(child))
-            {
-                _children.Add(child);
-            }
-        }
-
-        /// <summary>
         /// Sets the current state of the promise
         /// </summary>
         /// <param name="state"></param>
         protected void SetState(PromiseState state)
         {
-            PromiseResolvedException.ThrowIfNotPending(this);
+            PromiseException.ThrowIfNotPending(this);
             State = state;
         }
 
@@ -191,7 +182,6 @@ namespace Oxide.Ext.Discord.Promise
             IsInternal = false;
             _fails.Clear();
             _resolves.Clear();
-            _children.Clear();
         }
     }
 }

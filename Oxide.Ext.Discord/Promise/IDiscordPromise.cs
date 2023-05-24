@@ -20,6 +20,13 @@ namespace Oxide.Ext.Discord.Promise
         /// <param name="onFail">Exception callback to add</param>
         /// <returns>This</returns>
         IDiscordPromise Catch(Action<Exception> onFail);
+        
+        /// <summary>
+        /// Adds exception callback to the promise
+        /// </summary>
+        /// <param name="onFail">Exception callback to add</param>
+        /// <returns>This</returns>
+        IDiscordPromise Catch<TException>(Action<TException> onFail) where TException : Exception;
 
         /// <summary>
         /// Adds Then and Catch callbacks to the promise

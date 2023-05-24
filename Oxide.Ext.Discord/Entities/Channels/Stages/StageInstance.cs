@@ -4,6 +4,7 @@ using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Stages
 {
@@ -62,38 +63,14 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// See <a href="https://discord.com/developers/docs/resources/stage-instance#create-stage-instance">Create Stage Instance</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="channelId">Channel ID to create a stage in</param>
-        /// <param name="topic">The topic for the stage instance</param>
-        /// <param name="privacyLevel">Privacy level for the stage instance</param>
-        /// <param name="callback">Callback with the new stage instance</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        [Obsolete("Replaced with CreateStageInstance(DiscordClient client, StageInstanceCreate create, Action<StageInstance> callback = null, Action<RestError> error = null)")]
-        public static void CreateStageInstance(DiscordClient client, Snowflake channelId, string topic, PrivacyLevel privacyLevel = PrivacyLevel.GuildOnly, Action<StageInstance> callback = null, Action<RequestError> error = null)
-        {
-            StageInstanceCreate create = new StageInstanceCreate
-            {
-                ChannelId = channelId,
-                Topic = topic,
-                PrivacyLevel = privacyLevel
-            };
-
-            CreateStageInstance(client, create, callback, error);
-        }
-
-        /// <summary>
-        /// Creates a new Stage instance associated to a Stage channel.
-        /// Requires the user to be a moderator of the Stage channel.
-        /// See <a href="https://discord.com/developers/docs/resources/stage-instance#create-stage-instance">Create Stage Instance</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
         /// <param name="create">Create Stage Instance Object</param>
         /// <param name="callback">Callback with the new stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateStageInstance(DiscordClient client, StageInstanceCreate create, Action<StageInstance> callback = null, Action<RequestError> error = null)
+        public static IDiscordPromise<StageInstance> CreateStageInstance(DiscordClient client, StageInstanceCreate create)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
             InvalidSnowflakeException.ThrowIfInvalid(create.ChannelId, nameof(create.ChannelId));
-            client.Bot.Rest.CreateRequest(client,"stage-instances", RequestMethod.POST, create, callback, error);
+            return client.Bot.Rest.CreateRequest<StageInstance>(client,"stage-instances", RequestMethod.POST, create);
         }
         
         /// <summary>
@@ -104,10 +81,10 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="channelId">Channel ID to get the stage instance for</param>
         /// <param name="callback">Callback with the new stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetStageInstance(DiscordClient client, Snowflake channelId, Action<StageInstance> callback = null, Action<RequestError> error = null)
+        public static IDiscordPromise<StageInstance> GetStageInstance(DiscordClient client, Snowflake channelId, Action<StageInstance> callback = null, Action<RequestError> error = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            client.Bot.Rest.CreateRequest(client,$"stage-instances/{channelId}", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.CreateRequest<StageInstance>(client,$"stage-instances/{channelId}", RequestMethod.GET);
         }
 
         /// <summary>
@@ -119,10 +96,10 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="update">Update for the stage instance</param>
         /// <param name="callback">Callback when the updated stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyStageInstance(DiscordClient client, StageInstanceUpdate update, Action<StageInstance> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<StageInstance> ModifyStageInstance(DiscordClient client, StageInstanceUpdate update, Action<StageInstance> callback = null, Action<RequestError> error = null)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
-            client.Bot.Rest.CreateRequest(client,$"stage-instances/{ChannelId}", RequestMethod.PATCH, update, callback, error);
+            return client.Bot.Rest.CreateRequest<StageInstance>(client,$"stage-instances/{ChannelId}", RequestMethod.PATCH, update);
         }
         
         /// <summary>
@@ -133,9 +110,9 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback when the stage instance is deleted</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteStageInstance(DiscordClient client, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise DeleteStageInstance(DiscordClient client, Action callback = null, Action<RequestError> error = null)
         {
-            client.Bot.Rest.CreateRequest(client,$"stage-instances/{ChannelId}", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.CreateRequest(client,$"stage-instances/{ChannelId}", RequestMethod.DELETE);
         }
 
         internal StageInstance Update(StageInstance stage)

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Entities.AutoMod
 {
@@ -88,9 +89,9 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="guildId">Guild ID to list the rules for</param>
         /// <param name="callback">Callback once the action is completed with the list of <see cref="AutoModRule"/></param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void ListRules(DiscordClient client, Snowflake guildId, Action<List<AutoModRule>> callback = null, Action<RequestError> error = null)
+        public static IDiscordPromise<List<AutoModRule>> ListRules(DiscordClient client, Snowflake guildId)
         {
-            client.Bot.Rest.CreateRequest(client,$"guilds/{guildId}/auto-moderation/rules", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.CreateRequest<List<AutoModRule>>(client,$"guilds/{guildId}/auto-moderation/rules", RequestMethod.GET);
         }
         
         /// <summary>
@@ -103,9 +104,9 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="ruleId">Rule ID to get the rule for</param>
         /// <param name="callback">Callback once the action is completed with <see cref="AutoModRule"/> with the matching ID</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetRule(DiscordClient client, Snowflake guildId, Snowflake ruleId, Action<AutoModRule> callback = null, Action<RequestError> error = null)
+        public static IDiscordPromise<AutoModRule> GetRule(DiscordClient client, Snowflake guildId, Snowflake ruleId)
         {
-            client.Bot.Rest.CreateRequest(client,$"guilds/{guildId}/auto-moderation/rules/{ruleId}", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.CreateRequest<AutoModRule>(client,$"guilds/{guildId}/auto-moderation/rules/{ruleId}", RequestMethod.GET);
         }
         
         /// <summary>
@@ -118,9 +119,9 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="create">Rule to be created</param>
         /// <param name="callback">Callback once the action is completed with <see cref="AutoModRule"/> with the matching ID</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateRule(DiscordClient client, Snowflake guildId, AutoModRuleCreate create, Action<AutoModRule> callback = null, Action<RequestError> error = null)
+        public static IDiscordPromise<AutoModRule> CreateRule(DiscordClient client, Snowflake guildId, AutoModRuleCreate create)
         {
-            client.Bot.Rest.CreateRequest(client,$"guilds/{guildId}/auto-moderation/rules", RequestMethod.POST, create, callback, error);
+            return client.Bot.Rest.CreateRequest<AutoModRule>(client,$"guilds/{guildId}/auto-moderation/rules", RequestMethod.POST, create);
         }
         
         /// <summary>
@@ -132,9 +133,9 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="modify"><see cref="AutoModRuleModify"/></param>
         /// <param name="callback">Callback once the action is completed with the created <see cref="AutoModRule"/></param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void Modify(DiscordClient client, AutoModRuleModify modify, Action<AutoModRule> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<AutoModRule> Modify(DiscordClient client, AutoModRuleModify modify)
         {
-            client.Bot.Rest.CreateRequest(client,$"guilds/{GuildId}/auto-moderation/rules/{Id}", RequestMethod.PATCH, modify, callback, error);
+            return client.Bot.Rest.CreateRequest<AutoModRule>(client,$"guilds/{GuildId}/auto-moderation/rules/{Id}", RequestMethod.PATCH, modify);
         }
         
         /// <summary>
@@ -145,9 +146,9 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void Delete(DiscordClient client, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise Delete(DiscordClient client)
         {
-            client.Bot.Rest.CreateRequest(client,$"guilds/{GuildId}/auto-moderation/rules/{Id}", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.CreateRequest(client,$"guilds/{GuildId}/auto-moderation/rules/{Id}", RequestMethod.DELETE);
         }
     }
 }

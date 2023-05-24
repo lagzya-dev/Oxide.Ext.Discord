@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Oxide.Ext.Discord.Exceptions.Promise;
 using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Promise
@@ -15,7 +16,7 @@ namespace Oxide.Ext.Discord.Promise
         /// </summary>
         private TResult _data;
         
-        private readonly List<Action<TResult>> _success = new List<Action<TResult>>();
+        private readonly List<Action<TResult>> _success = new List<Action<TResult>>(0);
 
         internal new static DiscordPromise<TResult> Create(bool isInternal = false)
         {
@@ -24,9 +25,24 @@ namespace Oxide.Ext.Discord.Promise
             return promise;
         }
 
+        internal static DiscordPromise<TResult> FromResult(TResult result)
+        {
+            DiscordPromise<TResult> promise = DiscordPool.Internal.Get<DiscordPromise<TResult>>();
+            promise.Resolve(result);
+            return promise;
+        }
+        
+        internal static DiscordPromise<TResult> FromException(Exception ex)
+        {
+            DiscordPromise<TResult> promise = DiscordPool.Internal.Get<DiscordPromise<TResult>>();
+            promise.Fail(ex);
+            return promise;
+        }
+
         ///<inheritdoc/>
         public IDiscordPromise<TResult> Then(Action<TResult> onResolved)
         {
+            PromiseException.ThrowIfDisposed(this);
             if (State == PromiseState.Resolved)
             {
                 onResolved(_data);
@@ -40,6 +56,7 @@ namespace Oxide.Ext.Discord.Promise
         ///<inheritdoc/>
         public IDiscordPromise<TConvert> Then<TConvert>(Func<TResult, TConvert> onResolved)
         {
+            PromiseException.ThrowIfDisposed(this);
             DiscordPromise<TConvert> promise = DiscordPromise<TConvert>.Create(IsInternal);
             if (State == PromiseState.Resolved)
             {
@@ -47,8 +64,7 @@ namespace Oxide.Ext.Discord.Promise
                 return promise;
             }
             
-            Then(result => promise.Resolve(onResolved(result)));
-            AddChild(promise);
+            Done(result => promise.Resolve(onResolved(result)), ex => promise.Fail(ex));
             IsInternal = true;
             return promise;
         }
@@ -56,14 +72,14 @@ namespace Oxide.Ext.Discord.Promise
         ///<inheritdoc/>
         public IDiscordPromise<TConvert> Then<TConvert>(Func<TResult, IDiscordPromise<TConvert>> onResolved)
         {
+            PromiseException.ThrowIfDisposed(this);
             DiscordPromise<TConvert> promise = DiscordPromise<TConvert>.Create(IsInternal);
             if (State == PromiseState.Resolved)
             {
                 return onResolved(_data);
             }
-            
-            Then(result => onResolved(result).Then(r => promise.Resolve(r)));
-            AddChild(promise);
+
+            Done(result => onResolved(result).Then(r => promise.Resolve(r)), ex => promise.Fail(ex));
             IsInternal = true;
             return promise;
         }
@@ -71,6 +87,7 @@ namespace Oxide.Ext.Discord.Promise
         ///<inheritdoc/>
         public IDiscordPromise<TResult> Done(Action<TResult> onResolved, Action<Exception> onFail)
         {
+            PromiseException.ThrowIfDisposed(this);
             Then(onResolved);
             Catch(onFail);
             return this;
@@ -93,9 +110,9 @@ namespace Oxide.Ext.Discord.Promise
         ///<inheritdoc/>
         public void Resolve(TResult data)
         {
-            SetState(PromiseState.Resolved);
+            PromiseException.ThrowIfDisposed(this);
             _data = data;
-            InvokeResolveInternal();
+            base.Resolve();
         }
 
         ///<inheritdoc/>

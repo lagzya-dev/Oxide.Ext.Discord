@@ -96,7 +96,9 @@ namespace Oxide.Ext.Discord.WebSockets
             //There has been more than 3 tries to reconnect. Discord suggests trying to update gateway url.
             if (string.IsNullOrEmpty(url) || (_reconnect.AttemptGatewayUpdate && Gateway.LastUpdate + TimeSpan.FromMinutes(5) <= DateTime.UtcNow))
             {
-                Gateway.UpdateGatewayUrl(_client, Connect, OnGatewayUrlUpdateFailed);
+                Gateway.UpdateGatewayUrl(_client)
+                       .Then(Connect)
+                       .Catch<RequestError>(OnGatewayUrlUpdateFailed);
                 return;
             }
 

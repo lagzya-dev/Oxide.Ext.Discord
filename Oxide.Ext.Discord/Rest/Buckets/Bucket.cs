@@ -81,7 +81,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         /// <param name="handler"><see cref="RequestHandler"/> to be queued</param>
         public void QueueRequest(RequestHandler handler)
         {
-            BaseRequest request = handler.Request;
+            Request request = handler.Request;
             request.Bucket?.DequeueRequest(handler);
             _requests[request.Id] = handler;
             request.Bucket = this;
@@ -120,7 +120,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
 
         internal async Task WaitUntilBucketAvailable(RequestHandler handler, CancellationToken token)
         {
-            BaseRequest request = handler.Request;
+            Request request = handler.Request;
             DiscordClient client = request.Client;
 
             if (_isShutdown)
@@ -213,7 +213,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         
         internal void UpdateRateLimits(RequestHandler handler, RequestResponse response)
         {
-            BaseRequest request = handler.Request;
+            Request request = handler.Request;
             RateLimitResponse rateLimit = response.RateLimit;
             
             if (rateLimit == null)

@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Entities.Gateway
 {
@@ -41,20 +42,19 @@ namespace Oxide.Ext.Discord.Entities.Gateway
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the Gateway response</param>
         /// <param name="error">API error callback</param>
-        private static void GetGateway(BotClient client, Action<Gateway> callback, Action<RequestError> error = null)
+        private static IDiscordPromise<Gateway> GetGateway(BotClient client)
         {
-            client.Rest.CreateRequest(client.GetFirstClient(),"gateway", RequestMethod.GET, null, callback, error);
+            return client.Rest.CreateRequest<Gateway>(client.GetFirstClient(),"gateway", RequestMethod.GET);
         }
 
-        public static void UpdateGatewayUrl(BotClient client, Action callback, Action<RequestError> error = null)
+        public static IDiscordPromise UpdateGatewayUrl(BotClient client)
         {
-            GetGateway(client, gateway =>
+            return GetGateway(client).Then(gateway =>
             {
                 WebsocketUrl = $"{gateway.Url}/?{DiscordEndpoints.Websocket.WebsocketArgs}";
                 LastUpdate = DateTime.UtcNow;
                 client.Logger.Debug($"{nameof(Gateway)}.{nameof(UpdateGatewayUrl)} Updated Gateway Url: {{0}}", WebsocketUrl);
-                callback.Invoke();
-            }, error);
+            });
         }
     }
 }

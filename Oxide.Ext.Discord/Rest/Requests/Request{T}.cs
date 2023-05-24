@@ -6,6 +6,7 @@ using Oxide.Ext.Discord.Callbacks.Api;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Rest.Requests
 {
@@ -13,12 +14,12 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// Represents a REST API request that returns {T} data
     /// </summary>
     /// <typeparam name="T">Data to be returned</typeparam>
-    public class Request<T> : BaseRequest
+    public class Request<T> : Request
     {
         /// <summary>
         /// Callback to call if the request completed successfully
         /// </summary>
-        internal Action<T> OnSuccess;
+        internal new IDiscordPromise<T> Promise;
 
         /// <summary>
         /// Creates a REST API request that returns type of T from the response
@@ -29,43 +30,30 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <param name="method">HTTP web method</param>
         /// <param name="route">Route for the request</param>
         /// <param name="data">Data being passed into the request. Null if no data is passed</param>
-        /// <param name="onSuccess">Callback when the web request finishes successfully</param>
-        /// <param name="onError">Callback when the web request fails to complete successfully and encounters an error</param>
-        /// <param name="callback">Completed callback for the request</param>
         /// <returns>A <see cref="Request{T}"/></returns>
-        public static Request<T> CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RequestError> onError, BaseApiCompletedCallback callback)
+        public static Request<T> CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data)
         {
             Request<T> request = pluginPool.Get<Request<T>>();
-            request.Init(client, httpClient, method, route, data, onSuccess, onError, callback);
+            request.Init(client, httpClient, method, route, data);
             return request;
         }
         
         /// <summary>
         /// Initializes the Request
         /// </summary>
-        private void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, Action<T> onSuccess, Action<RequestError> onError, BaseApiCompletedCallback callback)
+        private void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data)
         {
-            base.Init(client, httpClient, method, route, data, onError, callback);
-            OnSuccess = onSuccess;
+            Promise = DiscordPromise<T>.Create();
+            base.Init(client, httpClient, method, route, data, Promise);
         }
 
         ///<inheritdoc/>
         protected override void OnRequestSuccess(RequestResponse response)
         {
-            if (OnSuccess == null)
-            {
-                if (Logger.IsLogging(DiscordLogLevel.Verbose))
-                {
-                    Logger.Verbose("Skipping Callback for {0}. No Callback specified.", typeof(T).Name);
-                }
-                
-                return;
-            }
-            
             try
             {
                 T data = JsonConvert.DeserializeObject<T>(response.Content, Client.Bot.JsonSettings);
-                ApiSuccessCallback<T>.Start(this, data);
+                Promise.Resolve(data);
             }
             catch (Exception ex)
             {
@@ -77,7 +65,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         protected override void EnterPool()
         {
             base.EnterPool();
-            OnSuccess = null;
+            Promise = null;
         }
     }
 }

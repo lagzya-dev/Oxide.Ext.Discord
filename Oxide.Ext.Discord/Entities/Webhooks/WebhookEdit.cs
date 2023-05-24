@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Images;
+using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Images;
 using Oxide.Ext.Discord.Exceptions.Entities.Webhooks;
 using Oxide.Ext.Discord.Interfaces;
@@ -9,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/webhook#create-webhook-json-params">Webhook Create Structure</a>
     /// </summary>
-    public class WebhookCreate : IDiscordValidation
+    public class WebhookEdit : IDiscordValidation
     {
         /// <summary>
         /// Name of the webhook (1-80 characters)
@@ -23,11 +24,18 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         [JsonProperty("avatar")]
         public DiscordImageData? Avatar { get; set; }
         
+        /// <summary>
+        /// Channel ID of the webhook
+        /// </summary>
+        [JsonProperty("channel_id")]
+        public Snowflake? ChannelId { get; set; }
+        
         /// <inheritdoc/>
         public void Validate()
         {
             InvalidWebhookException.ThrowIfInvalidName(Name);
             InvalidImageDataException.ThrowIfInvalidImageData(Avatar);
+            InvalidSnowflakeException.ThrowIfInvalid(ChannelId, false, nameof(ChannelId));
         }
     }
 }

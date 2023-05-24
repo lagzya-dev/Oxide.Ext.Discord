@@ -21,25 +21,7 @@ namespace Oxide.Ext.Discord.Callbacks.Api.Completed
         
         protected override void HandleCallback(RequestResponse response)
         {
-            RequestErrorMessage error = response.Error?.DiscordError;
-            if (error == null)
-            {
-                return;
-            }
-
-            UserData userData = _channel.UserData;
-            if (userData == null)
-            {
-                return;
-            }
-
-            if (error.Code == 50007)
-            {
-                userData.SetDmBlock();
-                DiscordUser user = userData.GetUser();
-                Client.Logger.Debug("We're unable to send DM's to {0} ({1}). We are blocking attempts until {2}.", user.FullUserName, user.Id, userData.GetBlockedUntil());
-                response.Error.SuppressErrorMessage();
-            }
+           
         }
 
         protected override void EnterPool()

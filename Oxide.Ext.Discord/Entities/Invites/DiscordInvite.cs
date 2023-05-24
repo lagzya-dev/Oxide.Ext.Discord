@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Entities.Invites
 {
@@ -95,9 +96,9 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <param name="lookup">Lookup query string parameters for the request</param>
         /// <param name="callback">Callback with the invite</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetInvite(DiscordClient client, string inviteCode, InviteLookup lookup = null, Action<DiscordInvite> callback = null, Action<RequestError> error = null)
+        public static IDiscordPromise<DiscordInvite> GetInvite(DiscordClient client, string inviteCode, InviteLookup lookup = null)
         {
-            client.Bot.Rest.CreateRequest(client,$"invites/{inviteCode}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.CreateRequest<DiscordInvite>(client,$"invites/{inviteCode}{lookup?.ToQueryString()}", RequestMethod.GET);
         }
 
         /// <summary>
@@ -109,9 +110,9 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the deleted invite</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteInvite(DiscordClient client, Action<DiscordInvite> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<DiscordInvite> DeleteInvite(DiscordClient client)
         {
-            client.Bot.Rest.CreateRequest(client,$"invites/{Code}", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.CreateRequest<DiscordInvite>(client,$"invites/{Code}", RequestMethod.DELETE);
         }
     }
 }
