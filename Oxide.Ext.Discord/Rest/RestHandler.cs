@@ -78,6 +78,16 @@ namespace Oxide.Ext.Discord.Rest
             RateLimit = new RestRateLimit(logger);
         }
 
+        public IDiscordPromise<TResult> Get<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.GET);
+        public IDiscordPromise Post(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.POST, data);
+        public IDiscordPromise<TResult> Post<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.POST, data);
+        public IDiscordPromise Put(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PUT, data);
+        public IDiscordPromise<TResult> Put<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PUT, data);
+        public IDiscordPromise Patch(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PATCH, data);
+        public IDiscordPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PATCH, data);
+        public IDiscordPromise Delete(DiscordClient client, string url) => CreateRequest(client, url, RequestMethod.DELETE);
+        public IDiscordPromise<TResult> Delete<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.DELETE);
+
         /// <summary>
         /// Creates a new request and queues it to be ran
         /// </summary>
@@ -85,7 +95,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="url">URL of the request</param>
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
-        public IDiscordPromise CreateRequest(DiscordClient client, string url, RequestMethod method, object data = null)
+        private IDiscordPromise CreateRequest(DiscordClient client, string url, RequestMethod method, object data = null)
         {
             if (data is IDiscordValidation validate)
             {
@@ -105,7 +115,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
-        public IDiscordPromise<T> CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data = null)
+        private IDiscordPromise<T> CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data = null)
         {
             if (data is IDiscordValidation validate)
             {

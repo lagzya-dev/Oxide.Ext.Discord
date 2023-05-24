@@ -277,7 +277,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 return DiscordPromise<DiscordMessage>.FromException(new BlockedUserException(userData.GetUser(), userData.GetBlockedUntil().Value));
             }
 
-            IDiscordPromise<DiscordMessage> response = client.Bot.Rest.CreateRequest<DiscordMessage>(client, $"channels/{channelId}/messages", RequestMethod.POST, message);
+            IDiscordPromise<DiscordMessage> response = client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{channelId}/messages", message);
             if (userData != null)
             {
                 response.Catch<RequestError>(ex => userData.ProcessError(client, ex));
@@ -417,7 +417,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client,$"channels/{channelId}/messages/{messageId}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordMessage>(client,$"channels/{channelId}/messages/{messageId}");
         }
         
         /// <summary>
@@ -546,7 +546,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public IDiscordPromise<DiscordMessage> CrossPostMessage(DiscordClient client, Snowflake messageId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client,$"channels/{Id}/messages/{messageId}/crosspost", RequestMethod.POST);
+            return client.Bot.Rest.Post<DiscordMessage>(client,$"channels/{Id}/messages/{messageId}/crosspost", null);
         }
         
         /// <summary>
@@ -595,7 +595,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public IDiscordPromise CreateReaction(DiscordClient client, string emoji)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
-            return client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", RequestMethod.PUT);
+            return client.Bot.Rest.Put(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", null);
         }
 
         /// <summary>
@@ -625,7 +625,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public IDiscordPromise DeleteOwnReaction(DiscordClient client, string emoji)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
-            return client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me");
         }
 
         /// <summary>
@@ -660,7 +660,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
-            return client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}");
         }
 
         /// <summary>
@@ -690,7 +690,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public IDiscordPromise<List<DiscordUser>> GetReactions(DiscordClient client, string emoji)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
-            return client.Bot.Rest.CreateRequest<List<DiscordUser>>(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<DiscordUser>>(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}");
         }
 
         /// <summary>
@@ -702,7 +702,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise DeleteAllReactions(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}/reactions");
         }
         
         /// <summary>
@@ -734,7 +734,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public IDiscordPromise DeleteAllReactionsForEmoji(DiscordClient client, string emoji)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
-            return client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}");
         }
 
         /// <summary>
@@ -750,7 +750,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<DiscordMessage> EditMessage(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client,$"channels/{ChannelId}/messages/{Id}", RequestMethod.PATCH, this);
+            return client.Bot.Rest.Patch<DiscordMessage>(client,$"channels/{ChannelId}/messages/{Id}", this);
         }
 
         /// <summary>
@@ -767,7 +767,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public static IDiscordPromise<DiscordMessage> EditMessage(DiscordClient client, DiscordMessage message)
         {
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client,$"channels/{message.ChannelId}/messages/{message.Id}", RequestMethod.PATCH, message);
+            return client.Bot.Rest.Patch<DiscordMessage>(client,$"channels/{message.ChannelId}/messages/{message.Id}", message);
         }
         
         /// <summary>
@@ -812,7 +812,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public IDiscordPromise DeleteMessage(DiscordClient client)
         {
             InvalidMessageException.ThrowIfCantBeDeleted(this);
-            return client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/messages/{Id}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}");
         }
 
         /// <summary>
@@ -825,7 +825,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise PinMessage(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/pins/{Id}", RequestMethod.PUT);
+            return client.Bot.Rest.Put(client,$"channels/{ChannelId}/pins/{Id}", null);
         }
 
         /// <summary>
@@ -838,7 +838,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise UnpinMessage(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest(client,$"channels/{ChannelId}/pins/{Id}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/pins/{Id}");
         }
         
         /// <summary>
@@ -849,10 +849,10 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="create">Data to use when creating the thread</param>
         /// <param name="callback">Callback with the thread once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordChannel> StartThread(DiscordClient client, ThreadCreateFromMessage create, Action<DiscordChannel> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<DiscordChannel> StartThread(DiscordClient client, ThreadCreateFromMessage create)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"channels/{ChannelId}/messages/{Id}/threads", RequestMethod.POST, create);
+            return client.Bot.Rest.Post<DiscordChannel>(client,$"channels/{ChannelId}/messages/{Id}/threads", create);
         }
     }
 }

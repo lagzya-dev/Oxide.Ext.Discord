@@ -103,7 +103,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public static IDiscordPromise<DiscordWebhook> CreateWebhook(DiscordClient client, Snowflake channelId, WebhookCreate create)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            return client.Bot.Rest.CreateRequest<DiscordWebhook>(client,$"channels/{channelId}/webhooks", RequestMethod.POST, create);
+            return client.Bot.Rest.Post<DiscordWebhook>(client,$"channels/{channelId}/webhooks", create);
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public static IDiscordPromise<List<DiscordWebhook>> GetChannelWebhooks(DiscordClient client, Snowflake channelId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            return client.Bot.Rest.CreateRequest<List<DiscordWebhook>>(client,$"channels/{channelId}/webhooks", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<DiscordWebhook>>(client,$"channels/{channelId}/webhooks");
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public static IDiscordPromise<List<DiscordWebhook>> GetGuildWebhooks(DiscordClient client, Snowflake guildId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            return client.Bot.Rest.CreateRequest<List<DiscordWebhook>>(client,$"guilds/{guildId}/webhooks", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<DiscordWebhook>>(client,$"guilds/{guildId}/webhooks");
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public static IDiscordPromise<DiscordWebhook> GetWebhook(DiscordClient client, Snowflake webhookId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(webhookId, nameof(webhookId));
-            return client.Bot.Rest.CreateRequest<DiscordWebhook>(client,$"webhooks/{webhookId}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordWebhook>(client,$"webhooks/{webhookId}");
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public static IDiscordPromise<DiscordWebhook> GetWebhookWithToken(DiscordClient client, Snowflake webhookId, string webhookToken)
         {
             InvalidSnowflakeException.ThrowIfInvalid(webhookId, nameof(webhookId));
-            return client.Bot.Rest.CreateRequest<DiscordWebhook>(client,$"webhooks/{webhookId}/{webhookToken}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordWebhook>(client,$"webhooks/{webhookId}/{webhookToken}");
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             string id = webhookInfo[webhookInfo.Length - 2];
             string token = webhookInfo[webhookInfo.Length - 1];
             
-            return client.Bot.Rest.CreateRequest<DiscordWebhook>(client,$"webhooks/{id}/{token}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordWebhook>(client,$"webhooks/{id}/{token}");
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<DiscordWebhook> EditWebhook(DiscordClient client, WebhookEdit edit)
         {
-            return client.Bot.Rest.CreateRequest<DiscordWebhook>(client,$"webhooks/{Id}", RequestMethod.PATCH, edit);
+            return client.Bot.Rest.Patch<DiscordWebhook>(client,$"webhooks/{Id}", edit);
         }
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<DiscordWebhook> ModifyWebhookWithToken(DiscordClient client, WebhookEdit edit)
         {
-            return client.Bot.Rest.CreateRequest<DiscordWebhook>(client,$"webhooks/{Id}/{Token}", RequestMethod.PATCH, edit);
+            return client.Bot.Rest.Patch<DiscordWebhook>(client,$"webhooks/{Id}/{Token}", edit);
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="client">Client to use</param>
         public IDiscordPromise DeleteWebhook(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"webhooks/{Id}");
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise DeleteWebhookWithToken(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"webhooks/{Id}/{Token}");
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 executeParams = WebhookExecuteParams.Default;
             }
 
-            return client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message);
+            return client.Bot.Rest.Post(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", message);
         }
         
         /// <summary>
@@ -288,7 +288,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 executeParams = WebhookExecuteParams.DefaultWait;
             }
 
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message);
+            return client.Bot.Rest.Post<DiscordMessage>(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", message);
         }
         
         /// <summary>
@@ -352,7 +352,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public IDiscordPromise<DiscordMessage> GetWebhookMessage(DiscordClient client, Snowflake messageId, WebhookMessageParams messageParams = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}");
         }
         
         /// <summary>
@@ -367,7 +367,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<DiscordMessage> EditWebhookMessage(DiscordClient client, Snowflake messageId, DiscordMessage message, WebhookMessageParams messageParams = null)
         {
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}", RequestMethod.PATCH, message);
+            return client.Bot.Rest.Patch<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}", message);
         }
 
         /// <summary>
@@ -417,7 +417,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         public IDiscordPromise DeleteWebhookMessage(DiscordClient client, Snowflake messageId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.CreateRequest(client,$"webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"webhooks/{Id}/{Token}/messages/{messageId}");
         }
     }
 }

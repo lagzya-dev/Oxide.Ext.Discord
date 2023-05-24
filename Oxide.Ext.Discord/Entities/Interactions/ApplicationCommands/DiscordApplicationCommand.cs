@@ -129,10 +129,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
             if (update == null) throw new ArgumentNullException(nameof(update));
             if (GuildId.HasValue)
             {
-                return client.Bot.Rest.CreateRequest<DiscordApplicationCommand>(client,$"applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.PATCH, update);
+                return client.Bot.Rest.Patch<DiscordApplicationCommand>(client,$"applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", update);
             }
             
-            return client.Bot.Rest.CreateRequest<DiscordApplicationCommand>(client,$"applications/{ApplicationId}/commands/{Id}", RequestMethod.PATCH, update);
+            return client.Bot.Rest.Patch<DiscordApplicationCommand>(client,$"applications/{ApplicationId}/commands/{Id}", update);
         }
         
         /// <summary>
@@ -147,10 +147,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         {
             if (GuildId.HasValue)
             {
-                return client.Bot.Rest.CreateRequest(client,$"applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.DELETE);
+                return client.Bot.Rest.Delete(client,$"applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}");
             }
             
-            return client.Bot.Rest.CreateRequest(client,$"applications/{ApplicationId}/commands/{Id}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"applications/{ApplicationId}/commands/{Id}");
         }
 
         /// <summary>
@@ -161,12 +161,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="guildId">Guild ID of the guild to get permissions for</param>
         /// <param name="callback">Callback with the permissions for the command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<GuildCommandPermissions> GetPermissions(DiscordClient client, Snowflake guildId, Action<GuildCommandPermissions> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<GuildCommandPermissions> GetPermissions(DiscordClient client, Snowflake guildId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             DiscordPromise<GuildCommandPermissions> promise = DiscordPromise<GuildCommandPermissions>.Create();
 
-            client.Bot.Rest.CreateRequest<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET)
+            client.Bot.Rest.Get<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions")
                   .Then(perms => promise.Resolve(perms))
                   .Catch<RequestError>(ex =>
                   {
@@ -178,7 +178,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
                       
                       ex.SuppressErrorMessage();
                       //If the command is synced we need to lookup by application ID instead
-                      client.Bot.Rest.CreateRequest<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{ApplicationId}/permissions", RequestMethod.GET)
+                      client.Bot.Rest.Get<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{ApplicationId}/permissions")
                             .Then(perms => promise.Resolve(perms))
                             .Catch<RequestError>(ex1 => promise.Fail(ex1));
                   });
@@ -199,7 +199,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public IDiscordPromise EditPermissions(DiscordClient client, Snowflake guildId, CommandUpdatePermissions permissions)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            return client.Bot.Rest.CreateRequest(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.PUT, permissions);
+            return client.Bot.Rest.Put(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", permissions);
         }
     }
 }

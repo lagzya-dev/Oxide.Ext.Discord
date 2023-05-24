@@ -193,7 +193,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<List<DiscordApplicationCommand>> GetGlobalCommands(DiscordClient client, bool withLocalizations = false)
         {
-            return client.Bot.Rest.CreateRequest<List<DiscordApplicationCommand>>(client,$"applications/{Id}/commands?with_localizations={withLocalizations}", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<DiscordApplicationCommand>>(client,$"applications/{Id}/commands?with_localizations={withLocalizations}");
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public IDiscordPromise<DiscordApplicationCommand> GetGlobalCommand(DiscordClient client, Snowflake commandId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(commandId, nameof(commandId));
-            return client.Bot.Rest.CreateRequest<DiscordApplicationCommand>(client,$"applications/{Id}/commands/{commandId}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordApplicationCommand>(client,$"applications/{Id}/commands/{commandId}");
         }
         
         /// <summary>
@@ -223,7 +223,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public IDiscordPromise<DiscordApplicationCommand> CreateGlobalCommand(DiscordClient client, CommandCreate create)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
-            return client.Bot.Rest.CreateRequest<DiscordApplicationCommand>(client,$"applications/{Id}/commands", RequestMethod.POST, create);
+            return client.Bot.Rest.Post<DiscordApplicationCommand>(client,$"applications/{Id}/commands", create);
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public IDiscordPromise<List<DiscordApplicationCommand>> BulkOverwriteGlobalCommands(DiscordClient client, List<CommandBulkOverwrite> commands)
         {
             if (commands == null) throw new ArgumentNullException(nameof(commands));
-            return client.Bot.Rest.CreateRequest<List<DiscordApplicationCommand>>(client,$"applications/{Id}/commands", RequestMethod.PUT, commands);
+            return client.Bot.Rest.Put<List<DiscordApplicationCommand>>(client,$"applications/{Id}/commands", commands);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public IDiscordPromise<List<DiscordApplicationCommand>> GetGuildCommands(DiscordClient client, Snowflake guildId, bool withLocalizations = false)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            return client.Bot.Rest.CreateRequest<List<DiscordApplicationCommand>>(client,$"applications/{Id}/guilds/{guildId}/commands?with_localizations={withLocalizations}", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<DiscordApplicationCommand>>(client,$"applications/{Id}/guilds/{guildId}/commands?with_localizations={withLocalizations}");
         }
 
         /// <summary>
@@ -268,7 +268,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(commandId, nameof(commandId));
-            return client.Bot.Rest.CreateRequest<DiscordApplicationCommand>(client,$"applications/{Id}/guilds/{guildId}/commands/{commandId}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordApplicationCommand>(client,$"applications/{Id}/guilds/{guildId}/commands/{commandId}");
         }
 
         /// <summary>
@@ -285,7 +285,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            return client.Bot.Rest.CreateRequest<DiscordApplicationCommand>(client,$"applications/{Id}/guilds/{guildId}/commands", RequestMethod.POST, create);
+            return client.Bot.Rest.Post<DiscordApplicationCommand>(client,$"applications/{Id}/guilds/{guildId}/commands", create);
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public IDiscordPromise<List<GuildCommandPermissions>> GetGuildCommandPermissions(DiscordClient client, Snowflake guildId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            return client.Bot.Rest.CreateRequest<List<GuildCommandPermissions>>(client,$"applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<GuildCommandPermissions>>(client,$"applications/{Id}/guilds/{guildId}/commands/permissions");
         }
         
         /// <summary>
@@ -352,7 +352,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<List<ApplicationRoleConnectionMetadata>> GetApplicationRoleConnectionMetadataRecords(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest<List<ApplicationRoleConnectionMetadata>>(client,$"applications/{Id}/role-connections/metadata", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<ApplicationRoleConnectionMetadata>>(client,$"applications/{Id}/role-connections/metadata");
         }
 
         /// <summary>
@@ -366,7 +366,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public IDiscordPromise<List<ApplicationRoleConnectionMetadata>> UpdateApplicationRoleConnectionMetadataRecords(DiscordClient client, List<ApplicationRoleConnectionMetadata> records)
         {
             DiscordApplicationException.ThrowIfInvalidApplicationRoleConnectionMetadataLength(records);
-            return client.Bot.Rest.CreateRequest<List<ApplicationRoleConnectionMetadata>>(client,$"applications/{Id}/role-connections/metadata", RequestMethod.PUT, records);
+            return client.Bot.Rest.Put<List<ApplicationRoleConnectionMetadata>>(client,$"applications/{Id}/role-connections/metadata", records);
         }
 
         public void LogDebug(DebugLogger logger)

@@ -59,7 +59,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// <param name="error">Callback when an error occurs with error information</param>
         public static IDiscordPromise<List<VoiceRegion>> ListVoiceRegions(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest<List<VoiceRegion>>(client,"voice/regions", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<VoiceRegion>>(client,"voice/regions");
         }
     }
 }

@@ -4940,7 +4940,7 @@
             <param name="callback">Callback with created channel</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.DiscordChannel},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Get a channel by ID
             See <a href="https://discord.com/developers/docs/resources/channel#get-channel">Get Channel</a>
@@ -5164,7 +5164,7 @@
             <summary>
             Follow a News Channel to send messages to a target channel.
             Requires the MANAGE_WEBHOOKS permission in the target channel.
-            See <a href="https://discord.com/developers/docs/resources/channel#follow-news-channel">Delete Channel Permission</a>
+            See <a href="https://discord.com/developers/docs/resources/channel#follow-announcement-channel">Follow Announcement Channel</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="webhookChannelId">ID of target channel</param>
@@ -5341,7 +5341,7 @@
             <param name="callback">Callback with the thread list information</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ListJoinedPrivateArchivedThreads(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup,System.Action{Oxide.Ext.Discord.Entities.Channels.Threads.ThreadList},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ListJoinedPrivateArchivedThreads(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadArchivedLookup)">
             <summary>
             Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD, and the user has joined.
             Threads are ordered by their id, in descending order.
@@ -5660,7 +5660,7 @@
             <param name="callback">Callback with the new stage instance</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.GetStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.GetStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Gets the stage instance associated with the Stage channel, if it exists.
             See <a href="https://discord.com/developers/docs/resources/stage-instance#get-stage-instance">Get Stage Instance</a>
@@ -5670,7 +5670,7 @@
             <param name="callback">Callback with the new stage instance</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.ModifyStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceUpdate,System.Action{Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.ModifyStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceUpdate)">
             <summary>
             Modifies fields of an existing Stage instance.
             Requires the user to be a moderator of the Stage channel.
@@ -5681,7 +5681,7 @@
             <param name="callback">Callback when the updated stage instance</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.DeleteStageInstance(Oxide.Ext.Discord.DiscordClient,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.DeleteStageInstance(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Deletes the Stage instance.
             Requires the user to be a moderator of the Stage channel.
@@ -9890,7 +9890,7 @@
             The number of users subscribed to the scheduled event
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ListForGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup,System.Action{System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent}},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ListForGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup)">
             <summary>
             Returns a list of guild scheduled event objects for the given guild.
             See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild">List Scheduled Events for Guild</a>
@@ -9926,7 +9926,7 @@
             <param name="callback">Callback with the scheduled event</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Modify(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate,System.Action{Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Modify(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate)">
             <summary>
             Modify a guild scheduled event.
             Returns the modified <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">guild scheduled event</see> object on success.
@@ -11121,7 +11121,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.GetPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.GuildCommandPermissions},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.GetPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
             See <a href="https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions">Get Application Command Permissions</a>
@@ -11489,7 +11489,7 @@
             <param name="callback">Callback with the updated message</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.DeleteFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Action,System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.DeleteFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Deletes a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message">Delete Followup Message</a>
@@ -13279,7 +13279,7 @@
             <param name="callback">Callback once the action is completed</param>
             <param name="error">Callback when an error occurs with error information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.StartThread(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreateFromMessage,System.Action{Oxide.Ext.Discord.Entities.Channels.DiscordChannel},System.Action{Oxide.Ext.Discord.Entities.Api.RequestError})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.StartThread(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadCreateFromMessage)">
             <summary>
             Creates a new public thread this message
             See <a href="https://discord.com/developers/docs/resources/channel#start-thread-from-message"></a>

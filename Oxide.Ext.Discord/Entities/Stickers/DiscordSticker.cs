@@ -102,7 +102,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         public static IDiscordPromise<DiscordSticker> GetSticker(DiscordClient client, Snowflake stickerId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(stickerId, nameof(stickerId));
-            return client.Bot.Rest.CreateRequest<DiscordSticker>(client,$"stickers/{stickerId}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordSticker>(client,$"stickers/{stickerId}");
         }
         
         /// <summary>
@@ -117,7 +117,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         public IDiscordPromise<DiscordSticker> ModifyGuildSticker(DiscordClient client)
         {
             InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");
-            return client.Bot.Rest.CreateRequest<DiscordSticker>(client,$"guilds/{GuildId}/stickers/{Id}", RequestMethod.PATCH, this);
+            return client.Bot.Rest.Patch<DiscordSticker>(client,$"guilds/{GuildId}/stickers/{Id}", this);
         }
         
         /// <summary>
@@ -131,7 +131,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         public IDiscordPromise DeleteGuildSticker(DiscordClient client)
         {
             InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");
-            return client.Bot.Rest.CreateRequest(client,$"guilds/{GuildId}/stickers/{Id}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"guilds/{GuildId}/stickers/{Id}");
         }
         
         internal void Update(DiscordSticker sticker)

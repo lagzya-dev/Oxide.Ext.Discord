@@ -91,7 +91,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="error">Callback when an error occurs with error information</param>
         public static IDiscordPromise<List<AutoModRule>> ListRules(DiscordClient client, Snowflake guildId)
         {
-            return client.Bot.Rest.CreateRequest<List<AutoModRule>>(client,$"guilds/{guildId}/auto-moderation/rules", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<AutoModRule>>(client,$"guilds/{guildId}/auto-moderation/rules");
         }
         
         /// <summary>
@@ -106,7 +106,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="error">Callback when an error occurs with error information</param>
         public static IDiscordPromise<AutoModRule> GetRule(DiscordClient client, Snowflake guildId, Snowflake ruleId)
         {
-            return client.Bot.Rest.CreateRequest<AutoModRule>(client,$"guilds/{guildId}/auto-moderation/rules/{ruleId}", RequestMethod.GET);
+            return client.Bot.Rest.Get<AutoModRule>(client,$"guilds/{guildId}/auto-moderation/rules/{ruleId}");
         }
         
         /// <summary>
@@ -121,7 +121,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="error">Callback when an error occurs with error information</param>
         public static IDiscordPromise<AutoModRule> CreateRule(DiscordClient client, Snowflake guildId, AutoModRuleCreate create)
         {
-            return client.Bot.Rest.CreateRequest<AutoModRule>(client,$"guilds/{guildId}/auto-moderation/rules", RequestMethod.POST, create);
+            return client.Bot.Rest.Post<AutoModRule>(client,$"guilds/{guildId}/auto-moderation/rules", create);
         }
         
         /// <summary>
@@ -135,7 +135,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<AutoModRule> Modify(DiscordClient client, AutoModRuleModify modify)
         {
-            return client.Bot.Rest.CreateRequest<AutoModRule>(client,$"guilds/{GuildId}/auto-moderation/rules/{Id}", RequestMethod.PATCH, modify);
+            return client.Bot.Rest.Patch<AutoModRule>(client,$"guilds/{GuildId}/auto-moderation/rules/{Id}", modify);
         }
         
         /// <summary>
@@ -148,7 +148,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise Delete(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest(client,$"guilds/{GuildId}/auto-moderation/rules/{Id}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"guilds/{GuildId}/auto-moderation/rules/{Id}");
         }
     }
 }

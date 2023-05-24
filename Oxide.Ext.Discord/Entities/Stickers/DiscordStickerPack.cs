@@ -64,7 +64,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <param name="error">Callback when an error occurs with error information</param>
         public static IDiscordPromise<List<DiscordStickerPack>> GetNitroStickerPacks(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest<List<DiscordStickerPack>>(client,"sticker-packs", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<DiscordStickerPack>>(client,"sticker-packs");
         }
     }
 }

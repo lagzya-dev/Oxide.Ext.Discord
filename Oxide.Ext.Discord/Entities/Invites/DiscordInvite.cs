@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <param name="error">Callback when an error occurs with error information</param>
         public static IDiscordPromise<DiscordInvite> GetInvite(DiscordClient client, string inviteCode, InviteLookup lookup = null)
         {
-            return client.Bot.Rest.CreateRequest<DiscordInvite>(client,$"invites/{inviteCode}{lookup?.ToQueryString()}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordInvite>(client,$"invites/{inviteCode}{lookup?.ToQueryString()}");
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<DiscordInvite> DeleteInvite(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest<DiscordInvite>(client,$"invites/{Code}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete<DiscordInvite>(client,$"invites/{Code}");
         }
     }
 }

@@ -337,7 +337,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public static IDiscordPromise<DiscordChannel> CreateGuildChannel(DiscordClient client, Snowflake guildId, ChannelCreate channel)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"guilds/{guildId}/channels", RequestMethod.POST, channel);
+            return client.Bot.Rest.Post<DiscordChannel>(client,$"guilds/{guildId}/channels", channel);
         }
 
         /// <summary>
@@ -349,10 +349,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="channelId">ID of the channel to get</param>
         /// <param name="callback">Callback with the channel object</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<DiscordChannel> GetChannel(DiscordClient client, Snowflake channelId, Action<DiscordChannel> callback = null, Action<RequestError> error = null)
+        public static IDiscordPromise<DiscordChannel> GetChannel(DiscordClient client, Snowflake channelId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"channels/{channelId}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordChannel>(client,$"channels/{channelId}");
         }
         
         /// <summary>
@@ -366,7 +366,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<DiscordChannel> ModifyGroupDmChannel(DiscordClient client, GroupDmChannelUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"channels/{Id}", RequestMethod.PATCH, update);
+            return client.Bot.Rest.Patch<DiscordChannel>(client,$"channels/{Id}", update);
         }
 
         /// <summary>
@@ -381,7 +381,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<DiscordChannel> ModifyGuildChannel(DiscordClient client, GuildChannelUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"channels/{Id}", RequestMethod.PATCH, update);
+            return client.Bot.Rest.Patch<DiscordChannel>(client,$"channels/{Id}", update);
         }
         
         /// <summary>
@@ -396,7 +396,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<DiscordChannel> ModifyThreadChannel(DiscordClient client, ThreadChannelUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"channels/{Id}", RequestMethod.PATCH, update);
+            return client.Bot.Rest.Patch<DiscordChannel>(client,$"channels/{Id}", update);
         }
 
         /// <summary>
@@ -409,7 +409,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<DiscordChannel> DeleteChannel(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"channels/{Id}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete<DiscordChannel>(client,$"channels/{Id}");
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<List<DiscordMessage>> GetChannelMessages(DiscordClient client, ChannelMessagesRequest request = null)
         {
-            return client.Bot.Rest.CreateRequest<List<DiscordMessage>>(client,$"channels/{Id}/messages{request?.ToQueryString()}", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<DiscordMessage>>(client,$"channels/{Id}/messages{request?.ToQueryString()}");
         }
         
         /// <summary>
@@ -439,7 +439,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<DiscordMessage> GetChannelMessage(DiscordClient client, Snowflake messageId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client,$"channels/{Id}/messages/{messageId}", RequestMethod.GET);
+            return client.Bot.Rest.Get<DiscordMessage>(client,$"channels/{Id}/messages/{messageId}");
         }
 
         /// <summary>
@@ -458,7 +458,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
             DateTime? blockedUntil = UserData?.GetBlockedUntil();
             if (!blockedUntil.HasValue)
             {
-                return client.Bot.Rest.CreateRequest<DiscordMessage>(client, $"channels/{Id}/messages", RequestMethod.POST, message);
+                return client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{Id}/messages", message);
             }
             
             DiscordPromise<DiscordMessage> promise = DiscordPromise<DiscordMessage>.Create();
@@ -580,7 +580,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 ["messages"] = messageIds 
             };
 
-            return client.Bot.Rest.CreateRequest(client,$"channels/{Id}/messages/bulk-delete", RequestMethod.POST, data);
+            return client.Bot.Rest.Post(client,$"channels/{Id}/messages/bulk-delete", data);
         }
 
         /// <summary>
@@ -597,7 +597,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         {
             if (overwrite == null) throw new ArgumentNullException(nameof(overwrite));
             InvalidSnowflakeException.ThrowIfInvalid(overwrite.Id, nameof(overwrite.Id));
-            return client.Bot.Rest.CreateRequest(client,$"channels/{Id}/permissions/{overwrite.Id}", RequestMethod.PUT, overwrite);
+            return client.Bot.Rest.Put(client,$"channels/{Id}/permissions/{overwrite.Id}", overwrite);
         }
 
         /// <summary>
@@ -625,7 +625,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise DeleteChannelPermission(DiscordClient client, Snowflake overwriteId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(overwriteId, nameof(overwriteId));
-            return client.Bot.Rest.CreateRequest(client,$"channels/{Id}/permissions/{overwriteId}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"channels/{Id}/permissions/{overwriteId}");
         }
         
         /// <summary>
@@ -641,7 +641,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<List<DiscordInvite>> GetChannelInvites(DiscordClient client)
         {
             InvalidChannelException.ThrowIfNotGuildChannel(this, "You can only get channel invites for guild channels");
-            return client.Bot.Rest.CreateRequest<List<DiscordInvite>>(client,$"channels/{Id}/invites", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<DiscordInvite>>(client,$"channels/{Id}/invites");
         }
 
         /// <summary>
@@ -657,13 +657,13 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<DiscordInvite> CreateChannelInvite(DiscordClient client, ChannelInvite invite)
         {
             if (invite == null) throw new ArgumentNullException(nameof(invite));
-            return client.Bot.Rest.CreateRequest<DiscordInvite>(client,$"channels/{Id}/invites", RequestMethod.POST, invite);
+            return client.Bot.Rest.Post<DiscordInvite>(client,$"channels/{Id}/invites", invite);
         }
 
         /// <summary>
         /// Follow a News Channel to send messages to a target channel.
         /// Requires the MANAGE_WEBHOOKS permission in the target channel.
-        /// See <a href="https://discord.com/developers/docs/resources/channel#follow-news-channel">Delete Channel Permission</a>
+        /// See <a href="https://discord.com/developers/docs/resources/channel#follow-announcement-channel">Follow Announcement Channel</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="webhookChannelId">ID of target channel</param>
@@ -672,7 +672,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<FollowedChannel> FollowNewsChannel(DiscordClient client, Snowflake webhookChannelId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(webhookChannelId, nameof(webhookChannelId));
-            return client.Bot.Rest.CreateRequest<FollowedChannel>(client,$"channels/{Id}/followers?webhook_channel_id={webhookChannelId}", RequestMethod.POST);
+            return client.Bot.Rest.Post<FollowedChannel>(client,$"channels/{Id}/followers?webhook_channel_id={webhookChannelId}", null);
         }
 
         /// <summary>
@@ -685,7 +685,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise TriggerTypingIndicator(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest(client,$"channels/{Id}/typing", RequestMethod.POST);
+            return client.Bot.Rest.Post(client,$"channels/{Id}/typing", null);
         }
 
         /// <summary>
@@ -697,7 +697,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<List<DiscordMessage>> GetPinnedMessages(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest<List<DiscordMessage>>(client,$"channels/{Id}/pins", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<DiscordMessage>>(client,$"channels/{Id}/pins");
         }
 
         /// <summary>
@@ -730,7 +730,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 ["nick"] = nick
             };
 
-            return client.Bot.Rest.CreateRequest(client,$"channels/{Id}/recipients/{userId}", RequestMethod.PUT, data);
+            return client.Bot.Rest.Put(client,$"channels/{Id}/recipients/{userId}", data);
         }
         
         /// <summary>
@@ -744,7 +744,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise GroupDmRemoveRecipient(DiscordClient client, Snowflake userId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
-            return client.Bot.Rest.CreateRequest(client,$"channels/{Id}/recipients/{userId}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"channels/{Id}/recipients/{userId}");
         }
 
         /// <summary>
@@ -759,7 +759,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<DiscordChannel> StartThreadFromMessage(DiscordClient client, Snowflake messageId, ThreadCreateFromMessage create)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"channels/{Id}/messages/{messageId}/threads", RequestMethod.POST, create);
+            return client.Bot.Rest.Post<DiscordChannel>(client,$"channels/{Id}/messages/{messageId}/threads", create);
         }
         
         /// <summary>
@@ -773,7 +773,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<DiscordChannel> StartThreadWithoutMessage(DiscordClient client, ThreadCreate create)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"channels/{Id}/threads", RequestMethod.POST, create);
+            return client.Bot.Rest.Post<DiscordChannel>(client,$"channels/{Id}/threads", create);
         }
         
         /// <summary>
@@ -787,7 +787,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<DiscordChannel> StartThreadInForumChannel(DiscordClient client, ThreadForumCreate create)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
-            return client.Bot.Rest.CreateRequest<DiscordChannel>(client,$"channels/{Id}/threads", RequestMethod.POST, create);
+            return client.Bot.Rest.Post<DiscordChannel>(client,$"channels/{Id}/threads", create);
         }
         
         /// <summary>
@@ -799,7 +799,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise JoinThread(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest(client,$"channels/{Id}/thread-members/@me", RequestMethod.PUT);
+            return client.Bot.Rest.Put(client,$"channels/{Id}/thread-members/@me", null);
         }
 
         /// <summary>
@@ -814,7 +814,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise AddThreadMember(DiscordClient client, Snowflake userId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
-            return client.Bot.Rest.CreateRequest(client,$"channels/{Id}/thread-members/{userId}", RequestMethod.PUT);
+            return client.Bot.Rest.Put(client, $"channels/{Id}/thread-members/{userId}", null);
         }
         
         /// <summary>
@@ -826,7 +826,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise LeaveThread(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest(client,$"channels/{Id}/thread-members/@me", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client,$"channels/{Id}/thread-members/@me");
         }
         
         /// <summary>
@@ -841,7 +841,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise RemoveThreadMember(DiscordClient client, Snowflake userId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
-            return client.Bot.Rest.CreateRequest(client, $"channels/{Id}/thread-members/{userId}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client, $"channels/{Id}/thread-members/{userId}");
         }
 
         /// <summary>
@@ -857,7 +857,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public IDiscordPromise<ThreadMember> GetThreadMember(DiscordClient client, Snowflake userId, GetThreadMember request = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
-            return client.Bot.Rest.CreateRequest<ThreadMember>(client,$"channels/{Id}/thread-members/{userId}{request?.ToQueryString()}", RequestMethod.GET);
+            return client.Bot.Rest.Get<ThreadMember>(client,$"channels/{Id}/thread-members/{userId}{request?.ToQueryString()}");
         }
 
         /// <summary>
@@ -871,7 +871,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<List<ThreadMember>> ListThreadMembers(DiscordClient client, ListThreadMembers request = null)
         {
-            return client.Bot.Rest.CreateRequest<List<ThreadMember>>(client,$"channels/{Id}/thread-members{request?.ToQueryString()}", RequestMethod.GET);
+            return client.Bot.Rest.Get<List<ThreadMember>>(client,$"channels/{Id}/thread-members{request?.ToQueryString()}");
         }
 
         /// <summary>
@@ -886,7 +886,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<ThreadList> ListPublicArchivedThreads(DiscordClient client, ThreadArchivedLookup request = null)
         {
-            return client.Bot.Rest.CreateRequest<ThreadList>(client,$"channels/{Id}/threads/archived/public{request?.ToQueryString()}", RequestMethod.GET);
+            return client.Bot.Rest.Get<ThreadList>(client,$"channels/{Id}/threads/archived/public{request?.ToQueryString()}");
         }
         
         /// <summary>
@@ -901,7 +901,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<ThreadList> ListPrivateArchivedThreads(DiscordClient client, ThreadArchivedLookup request = null)
         {
-            return client.Bot.Rest.CreateRequest<ThreadList>(client,$"channels/{Id}/threads/archived/public{request?.ToQueryString()}", RequestMethod.GET);
+            return client.Bot.Rest.Get<ThreadList>(client,$"channels/{Id}/threads/archived/public{request?.ToQueryString()}");
         }
         
         /// <summary>
@@ -914,9 +914,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="lookup">The options to use when looking up the archived threads</param>
         /// <param name="callback">Callback with the thread list information</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<ThreadList> ListJoinedPrivateArchivedThreads(DiscordClient client, ThreadArchivedLookup lookup = null, Action<ThreadList> callback = null, Action<RequestError> error = null)
+        public IDiscordPromise<ThreadList> ListJoinedPrivateArchivedThreads(DiscordClient client, ThreadArchivedLookup lookup = null)
         {
-            return client.Bot.Rest.CreateRequest<ThreadList>(client,$"channels/{Id}/users/@me/threads/archived/private{lookup?.ToQueryString()}", RequestMethod.GET);
+            return client.Bot.Rest.Get<ThreadList>(client,$"channels/{Id}/users/@me/threads/archived/private{lookup?.ToQueryString()}");
         }
 
         /// <summary>
@@ -928,7 +928,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="error">Callback when an error occurs with error information</param>
         public IDiscordPromise<StageInstance> GetStageInstance(DiscordClient client)
         {
-            return client.Bot.Rest.CreateRequest<StageInstance>(client,$"stage-instances/{Id}", RequestMethod.GET);
+            return client.Bot.Rest.Get<StageInstance>(client,$"stage-instances/{Id}");
         }
 
         internal DiscordChannel Update(DiscordChannel channel)

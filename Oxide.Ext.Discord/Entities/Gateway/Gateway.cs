@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord.Entities.Gateway
         /// <param name="error">API error callback</param>
         private static IDiscordPromise<Gateway> GetGateway(BotClient client)
         {
-            return client.Rest.CreateRequest<Gateway>(client.GetFirstClient(),"gateway", RequestMethod.GET);
+            return client.Rest.Get<Gateway>(client.GetFirstClient(),"gateway");
         }
 
         public static IDiscordPromise UpdateGatewayUrl(BotClient client)

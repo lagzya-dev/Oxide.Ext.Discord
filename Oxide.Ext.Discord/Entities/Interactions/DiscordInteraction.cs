@@ -302,7 +302,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             InvalidInteractionResponseException.ThrowIfInvalidResponseType(Type, response.Type);
 
             _hasResponded = true;
-            return client.Bot.Rest.CreateRequest(client, $"interactions/{Id}/{Token}/callback", RequestMethod.POST, response);
+            return client.Bot.Rest.Post(client, $"interactions/{Id}/{Token}/callback", response);
         }
 
         /// <summary>
@@ -457,7 +457,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.PATCH, message);
+            return client.Bot.Rest.Patch<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", message);
         }
         
         /// <summary>
@@ -491,7 +491,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            return client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client, $"webhooks/{ApplicationId}/{Token}/messages/@original");
         }
 
         /// <summary>
@@ -506,7 +506,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}", RequestMethod.POST, message);
+            return client.Bot.Rest.Post<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}", message);
         }
         
         /// <summary>
@@ -536,7 +536,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.CreateRequest<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.PATCH, edit);
+            return client.Bot.Rest.Patch<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", edit);
         }
 
         /// <summary>
@@ -547,12 +547,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="messageId">Message ID to delete</param>
         /// <param name="callback">Callback with the updated message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise DeleteFollowUpMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RequestError> error = null)
+        public IDiscordPromise DeleteFollowUpMessage(DiscordClient client, Snowflake messageId)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.CreateRequest(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestMethod.DELETE);
+            return client.Bot.Rest.Delete(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}");
         }
     }
 }
