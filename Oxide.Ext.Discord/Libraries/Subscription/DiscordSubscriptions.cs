@@ -46,7 +46,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <summary>
         /// Allows a plugin to add a subscription to a discord channel
         /// </summary>
-        /// <param name="plugin">Plugin that is subscribing</param>
+        /// <param name="client">Client that is subscribing</param>
         /// <param name="channelId">Channel ID of the channel</param>
         /// <param name="message">Callback with the message that was created in the channel</param>
         /// <exception cref="ArgumentNullException">Exception if plugin or message is null</exception>
@@ -174,6 +174,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             }
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendList("Subscriptions", GetSubscriptions());

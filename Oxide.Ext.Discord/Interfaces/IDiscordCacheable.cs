@@ -2,10 +2,21 @@
 
 namespace Oxide.Ext.Discord.Interfaces
 {
-    public interface IDiscordCacheable<T>
+    /// <summary>
+    /// Represents entities that are cachable by the DiscordExtension
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IDiscordCacheable<in T>
     {
+        /// <summary>
+        /// Id of the entity
+        /// </summary>
         Snowflake Id { get; set; }
 
+        /// <summary>
+        /// Method to update the entity
+        /// </summary>
+        /// <param name="update">Update data to apply</param>
         void Update(T update);
     }
 }

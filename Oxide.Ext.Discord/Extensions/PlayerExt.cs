@@ -30,8 +30,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="message">Message to send</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback with error information</param>
         public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, string message)
         {
             MessageCreate create = new MessageCreate
@@ -48,8 +46,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="embed">Embed to send</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback with error information</param>
         public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, DiscordEmbed embed)
         {
             MessageCreate create = new MessageCreate
@@ -66,8 +62,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="embeds">Embeds to send</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback with error information</param>
         public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, List<DiscordEmbed> embeds)
         {
             MessageCreate create = new MessageCreate
@@ -84,8 +78,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to send the discord message to</param>
         /// <param name="client">Client to use for sending the message</param>
         /// <param name="message">Message to send</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback with error information</param>
         public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, MessageCreate message)
         {
             return SendMessage(client, player.GetDiscordUserId(), message);
@@ -100,8 +92,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        /// <param name="callback">Callback when the message is created</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(plugin, templateName, player).ToMessage(placeholders, message);
@@ -117,8 +107,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        /// <param name="callback">Callback when the message is created</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(plugin, templateName, player).ToMessage(placeholders, message);

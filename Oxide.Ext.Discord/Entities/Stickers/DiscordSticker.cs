@@ -94,8 +94,6 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="stickerId">ID of the sticker</param>
-        /// <param name="callback">Callback with the DiscordSticker</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordSticker> GetSticker(DiscordClient client, Snowflake stickerId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(stickerId, nameof(stickerId));
@@ -109,8 +107,6 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// See <a href="https://discord.com/developers/docs/resources/sticker#modify-guild-sticker">Modify Guild Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the updated discord sticker</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordSticker> ModifyGuildSticker(DiscordClient client)
         {
             InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");
@@ -123,8 +119,6 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// See <a href="https://discord.com/developers/docs/resources/sticker#delete-guild-sticker">Delete Guild Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise DeleteGuildSticker(DiscordClient client)
         {
             InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");

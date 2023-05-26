@@ -26,12 +26,19 @@ namespace Oxide.Ext.Discord.Promises
         private readonly Action _onResolve;
         private readonly Action _onResolveInternal;
         
+        /// <summary>
+        /// Constructor for the promise
+        /// </summary>
         public Promise()
         {
             _onResolve = Resolve;
             _onResolveInternal = InvokeResolveHandlersInternal;
         }
 
+        /// <summary>
+        /// Returns a promise that is currently pending
+        /// </summary>
+        /// <returns></returns>
         public static IPendingPromise Create() => Create(false);
 
         internal static Promise Create(bool isInternal)
@@ -41,6 +48,10 @@ namespace Oxide.Ext.Discord.Promises
             return promise;
         }
         
+        /// <summary>
+        /// Returns a promise that has been resolved
+        /// </summary>
+        /// <returns></returns>
         public static IPromise Resolved()
         {
             Promise promise = Create(false);

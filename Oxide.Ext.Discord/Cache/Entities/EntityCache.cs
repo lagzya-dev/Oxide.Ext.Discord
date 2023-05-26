@@ -10,7 +10,7 @@ using Oxide.Ext.Discord.Singleton;
 namespace Oxide.Ext.Discord.Cache.Entities
 {
     /// <summary>
-    /// Cache for <see cref="T"/> Cache 
+    /// Cache for {T} 
     /// </summary>
     public class EntityCache<T> : Singleton<EntityCache<T>> where T : class, IDiscordCacheable<T>, new()
     {
@@ -21,21 +21,30 @@ namespace Oxide.Ext.Discord.Cache.Entities
         /// Readonly Cache of <see cref="DiscordUser"/>
         /// </summary>
         public readonly IReadOnlyDictionary<Snowflake, T> Cache;
-
-        protected EntityCache()
+        
+        private EntityCache()
         {
             Cache = new ReadOnlyDictionary<Snowflake, T>(_cache);
         }
 
+        /// <summary>
+        /// Returns the cached entity with the given ID; default(T) otherwise
+        /// </summary>
+        /// <param name="id">ID of the entity</param>
         public T Get(Snowflake id) => _cache.TryGetValue(id, out T value) ? value : default(T);
 
         /// <summary>
-        /// Returns a cached <see cref="T"/> for the given user ID or creates a new <see cref="T"/> with that ID
+        /// Returns a cached for the given user ID or creates a new with that ID
         /// </summary>
         /// <param name="id">User ID to lookup in the cache</param>
         /// <returns>Cached <see cref="DiscordUser"/></returns>
         public T GetOrCreate(Snowflake id) => id.IsValid() ? _cache.GetOrAdd(id, _valueFactory) : default(T);
         
+        /// <summary>
+        /// Updates the cached entity
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public T Update(T entity)
         {
             if (entity == null || !entity.Id.IsValid())

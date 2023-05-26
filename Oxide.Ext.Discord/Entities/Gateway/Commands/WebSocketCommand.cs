@@ -48,6 +48,7 @@ namespace Oxide.Ext.Discord.Entities.Gateway.Commands
             Payload = null;
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendField("Plugin", Client.PluginName);

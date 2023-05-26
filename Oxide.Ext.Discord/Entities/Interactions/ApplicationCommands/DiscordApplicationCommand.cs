@@ -122,8 +122,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="update">Command Update</param>
-        /// <param name="callback">Callback with updated command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordApplicationCommand> Edit(DiscordClient client, CommandUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
@@ -141,8 +139,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise Delete(DiscordClient client)
         {
             if (GuildId.HasValue)
@@ -159,8 +155,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID of the guild to get permissions for</param>
-        /// <param name="callback">Callback with the permissions for the command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<GuildCommandPermissions> GetPermissions(DiscordClient client, Snowflake guildId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
@@ -194,8 +188,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID of the guild to edit permissions for</param>
         /// <param name="permissions">List of permissions for the command</param>
-        /// <param name="callback">Callback with the list of permissions</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise EditPermissions(DiscordClient client, Snowflake guildId, CommandUpdatePermissions permissions)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));

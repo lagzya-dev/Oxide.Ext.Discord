@@ -39,8 +39,6 @@ namespace Oxide.Ext.Discord.Entities.Gateway
         /// See <a href="https://discord.com/developers/docs/topics/gateway#get-gateway">Get Gateway</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the Gateway response</param>
-        /// <param name="error">API error callback</param>
         private static IPromise<Gateway> GetGateway(BotClient client)
         {
             return client.Rest.Get<Gateway>(client.GetFirstClient(),"gateway");

@@ -111,8 +111,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild to get events for</param>
         /// <param name="lookup">Query string parameters</param>
-        /// <param name="callback">Callback with the list of scheduled events</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<List<GuildScheduledEvent>> ListForGuild(DiscordClient client, Snowflake guildId, ScheduledEventLookup lookup = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
@@ -127,8 +125,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild to create event in</param>
         /// <param name="create">Guild Scheduled Event to create</param>
-        /// <param name="callback">Callback with the created scheduled events</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<GuildScheduledEvent> Create(DiscordClient client, Snowflake guildId, ScheduledEventCreate create)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
@@ -144,8 +140,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="guildId">Guild to get events for</param>
         /// <param name="eventId">Id of the scheduled event</param>
         /// <param name="lookup">Query string parameters</param>
-        /// <param name="callback">Callback with the scheduled event</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<GuildScheduledEvent> Get(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventLookup lookup = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
@@ -162,8 +156,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="guildId">Guild to modify event in</param>
         /// <param name="eventId">Id of the event to update</param>
         /// <param name="update">Guild Scheduled Event to update</param>
-        /// <param name="callback">Callback with the updated scheduled events</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<GuildScheduledEvent> Modify(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventUpdate update)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
@@ -178,8 +170,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild to modify event in</param>
         /// <param name="eventId">Id of the event to delete</param>
-        /// <param name="callback">Callback with the updated scheduled events</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise Delete(DiscordClient client, Snowflake guildId, Snowflake eventId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
@@ -197,8 +187,6 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="guildId">Guild to get event users for</param>
         /// <param name="eventId">Id of the event to get users for</param>
         /// <param name="lookup">Query string parameters</param>
-        /// <param name="callback">Callback with the list of scheduled event users</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<List<ScheduledEventUser>> GetUsers(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventUsersLookup lookup = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));

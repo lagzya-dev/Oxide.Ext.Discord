@@ -219,6 +219,7 @@ namespace Oxide.Ext.Discord.Rest
             RateLimit.Shutdown();
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendList("Buckets", Buckets.Values);

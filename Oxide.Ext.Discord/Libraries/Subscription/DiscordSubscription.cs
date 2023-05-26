@@ -57,6 +57,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             SubscriptionCallback.Start(_plugin, message, _callback);
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendField("Plugin", _plugin.FullName());

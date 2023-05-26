@@ -8,8 +8,13 @@ namespace Oxide.Ext.Discord.Promises
     /// </summary>
     public enum PromiseState : byte
     {
-        Pending,    // The promise is in-flight.
-        Rejected,   // The promise has been rejected.
-        Resolved    // The promise has been resolved.
+        /// The promise is in-flight.
+        Pending,
+        
+        /// The promise has been rejected.
+        Rejected,
+        
+        /// The promise has been resolved.
+        Resolved
     };
 }

@@ -42,7 +42,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void Description(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, plugin.Description);
         
         /// <summary>
-        /// <see cref="PluginExt.FullName"/> placeholder
+        /// <see cref="PluginExt.FullName(Oxide.Core.Plugins.Plugin)"/> placeholder
         /// </summary>
         public static void FullName(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, plugin.FullName());
         

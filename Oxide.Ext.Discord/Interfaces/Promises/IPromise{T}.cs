@@ -14,11 +14,6 @@ namespace Oxide.Ext.Discord.Interfaces.Promises
     public interface IPromise<TPromised>
     {
         /// <summary>
-        /// Gets the id of the promise, useful for referencing the promise during runtime.
-        /// </summary>
-        Snowflake Id { get; }
-
-        /// <summary>
         /// Set the name of the promise, useful for debugging.
         /// </summary>
         IPromise<TPromised> WithName(string name);
@@ -54,6 +49,10 @@ namespace Oxide.Ext.Discord.Interfaces.Promises
         /// </summary>
         IPromise<TConvert> Then<TConvert>(Func<TPromised, IPromise<TConvert>> onResolved, Func<Exception, IPromise<TConvert>> onRejected);
 
+        /// <summary>
+        /// Adds a callback from the given promise
+        /// </summary>
+        /// <param name="promise">Promise to use for the callback</param>
         IPromise<TPromised> Then(IPromise<TPromised> promise);
         
         /// <summary>

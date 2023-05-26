@@ -21,13 +21,13 @@ namespace Oxide.Ext.Discord.Promises
         /// </summary>
         private readonly IRejectable _rejectable;
         
-        public RejectHandler(Action<Exception> callback, IRejectable rejectable)
+        internal RejectHandler(Action<Exception> callback, IRejectable rejectable)
         {
             _callback = callback;
             _rejectable = rejectable;
         }
 
-        public void Reject(Exception exception)
+        internal void Reject(Exception exception)
         {
             try
             {

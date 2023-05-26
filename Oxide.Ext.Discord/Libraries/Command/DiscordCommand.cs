@@ -402,6 +402,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
             DiscordPool.Internal.FreeList(guildCommands);
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendList("Commands", GetCommands());

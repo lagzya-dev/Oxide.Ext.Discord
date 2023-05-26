@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// What data was passed to the request
         /// </summary>
-        public readonly object Data;
+        public readonly object RequestData;
 
         /// <summary>
         /// HTTP Content Type for the request
@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <summary>
         /// Full string response if we received one
         /// </summary>
-        public string Message { get; private set; }
+        public string ResponseMessage { get; private set; }
         
         internal RequestErrorType ErrorType { get; private set; }
         
@@ -95,7 +95,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             _bucket = request.Bucket;
             Url = request.Route;
             RequestMethod = request.Method;
-            Data = request.Data;
+            RequestData = request.Data;
             ErrorDate = DateTimeOffset.UtcNow;
             ErrorType = type;
             _logLevel = log;
@@ -144,8 +144,8 @@ namespace Oxide.Ext.Discord.Entities.Api
                 return;
             }
 
-            Message = content;
-            if (string.IsNullOrEmpty(Message) || !Message.StartsWith("{"))
+            ResponseMessage = content;
+            if (string.IsNullOrEmpty(ResponseMessage) || !ResponseMessage.StartsWith("{"))
             {
                 return;
             }
@@ -195,15 +195,15 @@ namespace Oxide.Ext.Discord.Entities.Api
                     break;
 
                 case RequestErrorType.GenericWeb:
-                    _client.Logger.Error("Rest Request Exception (Web Error). Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Http Response Code: {5} Message: {6}", _client.PluginName, RequestId, RequestMethod, Url, ContentType, HttpStatusCode, Message);
+                    _client.Logger.Error("Rest Request Exception (Web Error). Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Http Response Code: {5} Message: {6}", _client.PluginName, RequestId, RequestMethod, Url, ContentType, HttpStatusCode, ResponseMessage);
                     break;
 
                 case RequestErrorType.Serialization:
-                    _client.Logger.Exception("Rest Request Exception (JSON Serialization). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, Data?.GetType().Name ?? "None", Exception);
+                    _client.Logger.Exception("Rest Request Exception (JSON Serialization). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, RequestData?.GetType().Name ?? "None", Exception);
                     break;
 
                 case RequestErrorType.Generic:
-                    _client.Logger.Exception("Rest Request Exception (Generic Error). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, Data?.GetType().Name ?? "None", Exception);
+                    _client.Logger.Exception("Rest Request Exception (Generic Error). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, RequestData?.GetType().Name ?? "None", Exception);
                     break;
             }
         }

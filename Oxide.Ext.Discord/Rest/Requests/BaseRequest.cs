@@ -149,6 +149,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Status = RequestStatus.InQueue;
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendField("ID", Id);

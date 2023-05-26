@@ -2,6 +2,9 @@
 
 namespace Oxide.Ext.Discord.Exceptions.Pooling
 {
+    /// <summary>
+    /// An exception when something is invalid with a pool
+    /// </summary>
     public class InvalidPoolException : BaseDiscordException
     {
         private InvalidPoolException(string message) : base(message) {}

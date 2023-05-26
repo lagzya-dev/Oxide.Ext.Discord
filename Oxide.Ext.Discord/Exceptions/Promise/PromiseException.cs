@@ -3,6 +3,9 @@ using Oxide.Ext.Discord.Promises;
 
 namespace Oxide.Ext.Discord.Exceptions.Promise
 {
+    /// <summary>
+    /// Exceptions for promises
+    /// </summary>
     public class PromiseException : BaseDiscordException
     {
         private PromiseException(string message) : base(message) { }

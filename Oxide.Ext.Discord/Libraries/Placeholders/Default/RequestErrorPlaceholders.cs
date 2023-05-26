@@ -16,9 +16,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void HttpCode(StringBuilder builder, PlaceholderState state, ResponseError error) => PlaceholderFormatting.Replace(builder, state, error.HttpStatusCode);
         
         /// <summary>
-        /// <see cref="ResponseError.Message"/> placeholder
+        /// <see cref="ResponseError.ResponseMessage"/> placeholder
         /// </summary>
-        public static void Message(StringBuilder builder, PlaceholderState state, ResponseError error) => PlaceholderFormatting.Replace(builder, state, error.DiscordError?.Message ?? error.Message);
+        public static void Message(StringBuilder builder, PlaceholderState state, ResponseError error) => PlaceholderFormatting.Replace(builder, state, error.DiscordError?.Message ?? error.ResponseMessage);
 
         internal static void RegisterPlaceholders()
         {

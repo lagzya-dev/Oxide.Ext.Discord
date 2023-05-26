@@ -14,11 +14,6 @@ namespace Oxide.Ext.Discord.Interfaces.Promises
     public interface IPromise
     {
         /// <summary>
-        /// ID of the promise, useful for debugging.
-        /// </summary>
-        Snowflake Id { get; }
-
-        /// <summary>
         /// Set the name of the promise, useful for debugging.
         /// </summary>
         IPromise WithName(string name);
@@ -60,6 +55,10 @@ namespace Oxide.Ext.Discord.Interfaces.Promises
         /// </summary>
         IPromise Then(Func<IPromise> onResolved, Action<Exception> onRejected);
 
+        /// <summary>
+        /// Adds a promise to use as the callback
+        /// </summary>
+        /// <param name="promise">Promise to use for callback</param>
         IPromise Then(IPromise promise);
         
         /// <summary>

@@ -262,8 +262,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="message">Message to be created</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, MessageCreate message)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
@@ -293,8 +291,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="builder">Builder for the message</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, DiscordMessageBuilder builder)
         {
             return CreateMessage(client, channelId, builder.Build());
@@ -309,8 +305,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="message">Content of the message</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, string message)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
@@ -331,8 +325,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="embed">Embed to be send in the message</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, DiscordEmbed embed)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
@@ -353,8 +345,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="embeds">Embeds to be send in the message</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, List<DiscordEmbed> embeds)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
@@ -375,8 +365,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        /// <param name="callback">Callback when the message is created</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
@@ -393,8 +381,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="language">Oxide language to use</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        /// <param name="callback">Callback when the message is created</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
@@ -409,8 +395,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID where the message is</param>
         /// <param name="messageId">Message ID of the message</param>
-        /// <param name="callback">Callback with the message for the ID</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> GetChannelMessage(DiscordClient client, Snowflake channelId, Snowflake messageId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
@@ -424,8 +408,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="message">Message to send</param>
-        /// <param name="callback">Callback with the message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> Reply(DiscordClient client, MessageCreate message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
@@ -443,8 +425,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="builder">Builder for the message</param>
-        /// <param name="callback">Callback with the message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> Reply(DiscordClient client, DiscordMessageBuilder builder)
         {
             return Reply(client, builder.Build());
@@ -456,8 +436,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="message">Message text to send</param>
-        /// <param name="callback">Callback with the message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> Reply(DiscordClient client, string message)
         {
             MessageCreate newMessage = new MessageCreate
@@ -474,8 +452,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="embed">Embed to send</param>
-        /// <param name="callback">Callback with the message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> Reply(DiscordClient client, DiscordEmbed embed)
         {
             return Reply(client, new List<DiscordEmbed> {embed});
@@ -487,8 +463,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="embeds">Embeds to send</param>
-        /// <param name="callback">Callback with the message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> Reply(DiscordClient client, List<DiscordEmbed> embeds)
         {
             MessageCreate newMessage = new MessageCreate
@@ -507,8 +481,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        /// <param name="callback">Callback when the message is created</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> ReplyWithGlobalTemplate(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
@@ -524,8 +496,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="language">Oxide language to use</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        /// <param name="callback">Callback when the message is created</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> ReplyWithTemplate(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
@@ -539,8 +509,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID to cross post</param>
-        /// <param name="callback">Callback with the cross posted message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> CrossPostMessage(DiscordClient client, Snowflake messageId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
@@ -554,8 +522,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="message">Message to cross post</param>
-        /// <param name="callback">Callback with the cross posted message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> CrossPostMessage(DiscordClient client, DiscordMessage message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
@@ -571,8 +537,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to react with.</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise CreateReaction(DiscordClient client, DiscordEmoji emoji)
         {
             if (emoji == null) throw new ArgumentNullException(nameof(emoji));
@@ -588,8 +552,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to react with.</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise CreateReaction(DiscordClient client, string emoji)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
@@ -603,8 +565,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise DeleteOwnReaction(DiscordClient client, DiscordEmoji emoji)
         {
             if (emoji == null) throw new ArgumentNullException(nameof(emoji));
@@ -618,8 +578,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise DeleteOwnReaction(DiscordClient client, string emoji)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
@@ -635,8 +593,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to delete</param>
         /// <param name="userId">User ID who add the reaction</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise DeleteUserReaction(DiscordClient client, DiscordEmoji emoji, Snowflake userId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
@@ -652,8 +608,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to delete</param>
         /// <param name="userId">User ID who add the reaction</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise DeleteUserReaction(DiscordClient client, string emoji, Snowflake userId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
@@ -668,8 +622,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to get the list for</param>
-        /// <param name="callback">Callback with a list of users who reacted</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<List<DiscordUser>> GetReactions(DiscordClient client, DiscordEmoji emoji)
         {
             if (emoji == null) throw new ArgumentNullException(nameof(emoji));
@@ -683,8 +635,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to get the list for</param>
-        /// <param name="callback">Callback with a list of users who reacted</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<List<DiscordUser>> GetReactions(DiscordClient client, string emoji)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
@@ -696,8 +646,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// This endpoint requires the 'MANAGE_MESSAGES' permission to be present on the current user.
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise DeleteAllReactions(DiscordClient client)
         {
             return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}/reactions");
@@ -711,8 +659,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to delete all reactions for</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise DeleteAllReactionsForEmoji(DiscordClient client, DiscordEmoji emoji)
         {
             if (emoji == null) throw new ArgumentNullException(nameof(emoji));
@@ -727,8 +673,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to delete all reactions for</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise DeleteAllReactionsForEmoji(DiscordClient client, string emoji)
         {
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
@@ -744,8 +688,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#edit-message">Edit Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the updated message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> EditMessage(DiscordClient client)
         {
             return client.Bot.Rest.Patch<DiscordMessage>(client,$"channels/{ChannelId}/messages/{Id}", this);
@@ -761,8 +703,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="message">Message to edit</param>
-        /// <param name="callback">Callback with the updated message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordMessage> EditMessage(DiscordClient client, DiscordMessage message)
         {
             return client.Bot.Rest.Patch<DiscordMessage>(client,$"channels/{message.ChannelId}/messages/{message.Id}", message);
@@ -775,8 +715,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template Name</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        /// <param name="callback">Callback when the message is created</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateName, PlaceholderData placeholders = null)
         {
             DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, this);
@@ -791,8 +729,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="templateName">Template Name</param>
         /// <param name="language">Oxide language to use</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        /// <param name="callback">Callback when the message is created</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData placeholders = null)
         {
             DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, this);
@@ -805,8 +741,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#delete-message">Delete Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the delete message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise DeleteMessage(DiscordClient client)
         {
             InvalidMessageException.ThrowIfCantBeDeleted(this);
@@ -819,8 +753,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#add-pinned-channel-message">Add Pinned Channel Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback when the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise PinMessage(DiscordClient client)
         {
             return client.Bot.Rest.Put(client,$"channels/{ChannelId}/pins/{Id}", null);
@@ -832,8 +764,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message">Unpin Pinned Channel Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise UnpinMessage(DiscordClient client)
         {
             return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/pins/{Id}");
@@ -845,8 +775,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="create">Data to use when creating the thread</param>
-        /// <param name="callback">Callback with the thread once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordChannel> StartThread(DiscordClient client, ThreadCreateFromMessage create)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));

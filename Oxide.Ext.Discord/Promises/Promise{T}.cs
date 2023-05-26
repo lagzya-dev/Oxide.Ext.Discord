@@ -31,12 +31,19 @@ namespace Oxide.Ext.Discord.Promises
         private readonly Action<TPromised> _onResolve;
         private readonly Action _onResolveInternal;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Promise()
         {
             _onResolve = Resolve;
             _onResolveInternal = InvokeResolveHandlersInternal;
         }
 
+        /// <summary>
+        /// Returns a promise that is currently pending
+        /// </summary>
+        /// <returns></returns>
         public static IPendingPromise<TPromised> Create() => Create(false);
 
         internal static Promise<TPromised> Create(bool isInternal) => Create<TPromised>(isInternal);
@@ -48,6 +55,11 @@ namespace Oxide.Ext.Discord.Promises
             return promise;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resolver"></param>
+        /// <returns></returns>
         public static IPromise<TPromised> Create(Action<Action<TPromised>, Action<Exception>> resolver)
         {
             Promise<TPromised> promise = Create(false);
@@ -314,6 +326,7 @@ namespace Oxide.Ext.Discord.Promises
             return resultPromise;
         }
 
+        ///<inheritdoc/>
         public IPromise<TPromised> Then(IPromise<TPromised> promise)
         {
             Promise<TPromised> prom = (Promise<TPromised>)promise;

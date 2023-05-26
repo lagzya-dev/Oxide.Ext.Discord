@@ -553,6 +553,7 @@ namespace Oxide.Ext.Discord
         }
         #endregion
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendField("Client", Settings.GetHiddenToken());

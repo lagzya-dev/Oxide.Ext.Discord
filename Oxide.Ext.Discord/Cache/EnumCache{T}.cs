@@ -15,6 +15,9 @@ namespace Oxide.Ext.Discord.Cache
     /// <typeparam name="T">Enum type</typeparam>
     public class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, IComparable, IFormattable, IConvertible
     {
+        /// <summary>
+        /// Readonly Collection of Enum Values
+        /// </summary>
         public readonly ReadOnlyCollection<T> Values;
         
         private readonly Dictionary<T, string> _cachedStrings = new Dictionary<T, string>();

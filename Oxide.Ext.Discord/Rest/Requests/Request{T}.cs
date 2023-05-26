@@ -29,8 +29,9 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <param name="method">HTTP web method</param>
         /// <param name="route">Route for the request</param>
         /// <param name="data">Data being passed into the request. Null if no data is passed</param>
+        /// <param name="promise">Promise for the request</param>
         /// <returns>A <see cref="Request{T}"/></returns>
-        public new static Request<T> CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, IPendingPromise<T> promise)
+        public static Request<T> CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, IPendingPromise<T> promise)
         {
             Request<T> request = pluginPool.Get<Request<T>>();
             request.Init(client, httpClient, method, route, data);
@@ -52,6 +53,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             }
         }
 
+        ///<inheritdoc/>
         protected override void OnRequestError(RequestResponse response)
         {
             _promise.Finally(response.Error.LogError);

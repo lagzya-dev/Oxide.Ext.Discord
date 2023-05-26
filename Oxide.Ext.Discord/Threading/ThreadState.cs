@@ -3,7 +3,7 @@ using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Threading
 {
-    public static class ThreadState
+    internal static class ThreadState
     {
         /// <summary>
         /// Main thread
@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Threading
         /// <summary>
         /// Determine if current thread is main thread
         /// </summary>
-        public static bool IsMain => MainThreadId == Thread.CurrentThread.ManagedThreadId;
+        internal static bool IsMain => MainThreadId == Thread.CurrentThread.ManagedThreadId;
 
         internal static void Initialize()
         {

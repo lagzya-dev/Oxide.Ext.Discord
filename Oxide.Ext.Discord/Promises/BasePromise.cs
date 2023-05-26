@@ -13,6 +13,9 @@ using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord.Promises
 {
+    /// <summary>
+    /// Represents the base class for all promises
+    /// </summary>
     public class BasePromise : BasePoolable, IRejectable
     {
         ///<inheritdoc/>
@@ -31,14 +34,24 @@ namespace Oxide.Ext.Discord.Promises
         /// </summary>
         protected Exception Exception;
 
+        /// <summary>
+        /// If this promise is an promise internal to the DiscordExtension only.
+        /// This promise and all child promises are allowed to run off the main thread
+        /// </summary>
         protected bool IsInternal;
         
+        /// <summary>
+        /// Collection of handlers for rejected promises
+        /// </summary>
         protected readonly List<RejectHandler> Rejects = new List<RejectHandler>();
 
         internal readonly Action<Exception> OnReject;
         private readonly Action _onRejectInternal;
         private readonly Action _dispose;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         protected BasePromise()
         {
             OnReject = Reject;
@@ -83,6 +96,10 @@ namespace Oxide.Ext.Discord.Promises
             ClearHandlers();
         }
         
+        /// <summary>
+        /// Clears all the handlers for the promises
+        /// Called after completion
+        /// </summary>
         protected virtual void ClearHandlers()
         {
             Rejects.Clear();

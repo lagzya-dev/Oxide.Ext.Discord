@@ -44,6 +44,10 @@ namespace Oxide.Ext.Discord.Entities.Images
             Image = image;
         }
 
+        /// <summary>
+        /// Creates DiscordImageData from a stream
+        /// </summary>
+        /// <param name="stream"></param>
         public DiscordImageData(Stream stream)
         {
             using (MemoryStream memoryStream = new MemoryStream())
@@ -68,6 +72,10 @@ namespace Oxide.Ext.Discord.Entities.Images
             Image = Convert.FromBase64String(match.Groups[1].Value);
         }
         
+        /// <summary>
+        /// Returns the Base64 Image string for the image.
+        /// </summary>
+        /// <returns></returns>
         public string GetBase64Image()
         {
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();

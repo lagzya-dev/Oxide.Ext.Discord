@@ -404,6 +404,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.StartArray("Application Commands");

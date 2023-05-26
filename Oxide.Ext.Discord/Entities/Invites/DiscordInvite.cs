@@ -92,8 +92,6 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <param name="client">Client to use</param>
         /// <param name="inviteCode">Invite code</param>
         /// <param name="lookup">Lookup query string parameters for the request</param>
-        /// <param name="callback">Callback with the invite</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public static IPromise<DiscordInvite> GetInvite(DiscordClient client, string inviteCode, InviteLookup lookup = null)
         {
             return client.Bot.Rest.Get<DiscordInvite>(client,$"invites/{inviteCode}{lookup?.ToQueryString()}");
@@ -106,8 +104,6 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// See <a href="https://discord.com/developers/docs/resources/invite#delete-invite">Delete Invite</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the deleted invite</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         public IPromise<DiscordInvite> DeleteInvite(DiscordClient client)
         {
             return client.Bot.Rest.Delete<DiscordInvite>(client,$"invites/{Code}");

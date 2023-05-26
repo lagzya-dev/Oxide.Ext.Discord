@@ -23,9 +23,24 @@ namespace Oxide.Ext.Discord.Libraries.Linking
     /// </summary>
     public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
     {
+        /// <summary>
+        /// Readonly Dictionary of Player ID's to Discord ID's
+        /// </summary>
         public readonly IReadOnlyDictionary<PlayerId, Snowflake> PlayerToDiscordIds;
+        
+        /// <summary>
+        /// Readonly Dictionary of Discord ID's to Player ID's
+        /// </summary>
         public readonly IReadOnlyDictionary<Snowflake, PlayerId> DiscordToPlayerIds;
+        
+        /// <summary>
+        /// Readonly Collection of all Player ID's
+        /// </summary>
         public readonly ICollection<PlayerId> PlayerIds;
+        
+        /// <summary>
+        /// Readonly Collection of all Discord ID's
+        /// </summary>
         public readonly ICollection<Snowflake> DiscordIds;
 
         /// <summary>

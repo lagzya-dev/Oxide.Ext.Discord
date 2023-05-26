@@ -3,12 +3,23 @@ using Oxide.Ext.Discord.Entities.Users;
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.Users
 {
+    /// <summary>
+    /// Exception when a user has blocked receving messages from a bot
+    /// </summary>
     public class BlockedUserException : BaseDiscordException
     {
+        /// <summary>
+        /// User who has blocked messages
+        /// </summary>
         public readonly DiscordUser User;
+        
+        /// <summary>
+        /// Time until we try sending a message again
+        /// </summary>
         public readonly DateTime BlockedUntil;
 
-        public BlockedUserException(DiscordUser user, DateTime blockedUntil)
+        
+        internal BlockedUserException(DiscordUser user, DateTime blockedUntil)
         {
             User = user;
             BlockedUntil = blockedUntil;

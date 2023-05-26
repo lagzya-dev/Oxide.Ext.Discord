@@ -6,7 +6,10 @@ namespace Oxide.Ext.Discord.Exceptions
     /// </summary>
     public abstract class BaseDiscordException : Exception
     {
-        protected BaseDiscordException() : base() {}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        protected BaseDiscordException() {}
         
         /// <summary>
         /// Constructor

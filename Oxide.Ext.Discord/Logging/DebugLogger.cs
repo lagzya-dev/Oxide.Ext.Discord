@@ -12,6 +12,9 @@ using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Logging
 {
+    /// <summary>
+    /// Debug Logger used for logging debug information
+    /// </summary>
     public class DebugLogger
     {
         private readonly StringBuilder _logger = DiscordPool.Internal.GetStringBuilder();
@@ -19,11 +22,25 @@ namespace Oxide.Ext.Discord.Logging
 
         private int _indent;
 
+        /// <summary>
+        /// Increments the Indent
+        /// </summary>
         public void IncrementIndent() => _indent++;
+        
+        /// <summary>
+        /// Decrements the Indent
+        /// </summary>
         public void DecrementIndent() => _indent = MathExt.Max(_indent - 1, 0);
-
+        
+        /// <summary>
+        /// Appends the current indent into the logger
+        /// </summary>
         public void AppendIndent() => _logger.Append(IndentCharacter, _indent);
 
+        /// <summary>
+        /// Appends the field name into the logger
+        /// </summary>
+        /// <param name="name">Name of the field</param>
         public void AppendFieldPrefix(string name)
         {
             AppendIndent();
@@ -31,6 +48,11 @@ namespace Oxide.Ext.Discord.Logging
             _logger.Append(": ");
         }
         
+        /// <summary>
+        /// Appends a field into the logger
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
         public void AppendField(string name, string value)
         {
             AppendFieldPrefix(name);
