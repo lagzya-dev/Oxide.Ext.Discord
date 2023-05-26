@@ -10,36 +10,36 @@ namespace Oxide.Ext.Discord.Pooling
         /// <summary>
         /// Size of the <see cref="HashPool{TKey,TValue}"/>
         /// </summary>
-        public int HashPoolSize { get; set; } = 64;
+        public PoolSize HashPoolSize = new PoolSize(32, 512);
         
         /// <summary>
         /// Size of the <see cref="HashSetPool{T}"/>
         /// </summary>
-        public int HashSetPoolSize { get; set; } = 64;
+        public PoolSize HashSetPoolSize { get; set; } = new PoolSize(32, 512);
         
         /// <summary>
         /// Size of the <see cref="ListPool{T}"/>
         /// </summary>
-        public int ListPoolSize { get; set; } = 64;
+        public PoolSize ListPoolSize { get; set; } = new PoolSize(32, 512);
         
         /// <summary>
         /// Size of the <see cref="MemoryStreamPool"/>
         /// </summary>
-        public int MemoryStreamPoolSize { get; set; } = 64;
+        public PoolSize MemoryStreamPoolSize { get; set; } = new PoolSize(32, 512);
         
         /// <summary>
         /// Size of the <see cref="ObjectPool{T}"/>
         /// </summary>
-        public int ObjectPoolSize { get; set; } = 64;
+        public PoolSize ObjectPoolSize { get; set; } = new PoolSize(32, 512);
         
         /// <summary>
         /// Size of the <see cref="PlaceholderDataPool"/>
         /// </summary>
-        public int PlaceholderDataPoolSize { get; set; } = 64;
+        public PoolSize PlaceholderDataPoolSize { get; set; } = new PoolSize(32, 512);
         
         /// <summary>
         /// Size of the <see cref="StringBuilderPool"/>
         /// </summary>
-        public int StringBuilderPoolSize { get; set; } = 64;
+        public PoolSize StringBuilderPoolSize { get; set; } = new PoolSize(32, 512);
     }
 }

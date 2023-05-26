@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     {
         public static BoxedPool<T> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<BoxedPool<T>>(pluginPool);
 
-        protected override int GetPoolSize(PoolSettings settings) => 512;
+        protected override PoolSize GetPoolSize(PoolSettings settings) => new PoolSize(32, 512);
         
         protected override void OnGetItem(Boxed<T> item)
         {

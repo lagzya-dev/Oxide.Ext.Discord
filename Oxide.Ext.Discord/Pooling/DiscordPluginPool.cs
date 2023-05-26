@@ -58,16 +58,6 @@ namespace Oxide.Ext.Discord.Pooling
         }
 
         /// <summary>
-        /// Resizes the pool for {T} type
-        /// </summary>
-        /// <param name="newSize">New size for the pool</param>
-        /// <typeparam name="T">Type of {T} where T : BasePoolable, new()</typeparam>
-        public void ResizePool<T>(int newSize) where T : BasePoolable, new()
-        {
-            ObjectPool<T>.ForPlugin(this).Resize(newSize);
-        }
-
-        /// <summary>
         /// Returns a <see cref="BasePoolable"/> back into the pool
         /// </summary>
         /// <param name="value">Object to free</param>
@@ -86,17 +76,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return ListPool<T>.ForPlugin(this).Get();
         }
-        
-        /// <summary>
-        /// Resizes the pool for <see cref="List{T}"/>
-        /// </summary>
-        /// <param name="newSize">New size for the pool</param>
-        /// <typeparam name="T">Type of {T} for the list</typeparam>
-        public void ResizeListPool<T>(int newSize)
-        {
-            ListPool<T>.ForPlugin(this).Resize(newSize);
-        }
-        
+
         /// <summary>
         /// Free's a pooled <see cref="List{T}"/>
         /// </summary>
@@ -117,18 +97,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return HashPool<TKey, TValue>.ForPlugin(this).Get();
         }
-        
-        /// <summary>
-        /// Resizes the <see cref="Hash{TKey, TValue}"/>
-        /// </summary>
-        /// <param name="newSize">New size for the pool</param>
-        /// <typeparam name="TKey">Type for the key</typeparam>
-        /// <typeparam name="TValue">Type for the value</typeparam>
-        public void ResizeHashPool<TKey, TValue>(int newSize)
-        {
-            HashPool<TKey, TValue>.ForPlugin(this).Resize(newSize);
-        }
-        
+
         /// <summary>
         /// Frees a pooled <see cref="Hash{TKey, TValue}"/>
         /// </summary>
@@ -149,17 +118,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return HashSetPool<T>.ForPlugin(this).Get();
         }
-        
-        /// <summary>
-        /// Resizes a <see cref="HashSetPool{T}"/>
-        /// </summary>
-        /// <param name="newSize">New size for the pool</param>
-        /// <typeparam name="T">Type of the hashset pool</typeparam>
-        public void ResizeHashSetPool<T>(int newSize)
-        {
-            HashSetPool<T>.ForPlugin(this).Resize(newSize);
-        }
-        
+
         /// <summary>
         /// Free's a pooled <see cref="HashSet{T}"/>
         /// </summary>
@@ -190,16 +149,7 @@ namespace Oxide.Ext.Discord.Pooling
             builder.Append(initial);
             return builder;
         }
-        
-        /// <summary>
-        /// Resizes the <see cref="StringBuilderPool"/>
-        /// </summary>
-        /// <param name="newSize">New size for the pool</param>
-        public void ResizeStringBuilderPool(int newSize)
-        {
-            StringBuilderPool.ForPlugin(this).Resize(newSize);
-        }
-        
+
         /// <summary>
         /// Frees a <see cref="StringBuilder"/> back to the pool
         /// </summary>
@@ -228,16 +178,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return MemoryStreamPool.ForPlugin(this).Get();
         }
-        
-        /// <summary>
-        /// Resizes the <see cref="MemoryStreamPool"/>
-        /// </summary>
-        /// <param name="newSize">New size for the pool</param>
-        public void ResizeMemoryStreamPool(int newSize)
-        {
-            MemoryStreamPool.ForPlugin(this).Resize(newSize);
-        }
-        
+
         /// <summary>
         /// Frees a <see cref="MemoryStream"/> back to the pool
         /// </summary>
@@ -255,16 +196,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             return (PlaceholderData)PlaceholderDataPool.ForPlugin(this).Get();
         }
-        
-        /// <summary>
-        /// Resizes the <see cref="PlaceholderDataPool"/>
-        /// </summary>
-        /// <param name="newSize">New size for the pool</param>
-        public void ResizePlaceholderDataPool(int newSize)
-        {
-            PlaceholderDataPool.ForPlugin(this).Resize(newSize);
-        }
-        
+
         /// <summary>
         /// Frees a <see cref="PlaceholderData"/> back to the pool
         /// </summary>
@@ -284,11 +216,6 @@ namespace Oxide.Ext.Discord.Pooling
             Boxed<T> boxed = BoxedPool<T>.ForPlugin(this).Get();
             boxed.Value = value;
             return boxed;
-        }
-        
-        internal void ResizeBoxedPool<T>(int newSize)
-        {
-            BoxedPool<T>.ForPlugin(this).Resize(newSize);
         }
 
         /// <summary>
@@ -315,7 +242,7 @@ namespace Oxide.Ext.Discord.Pooling
             for (int index = 0; index < _pools.Count; index++)
             {
                 IPool pool = _pools[index];
-                pool.Clear();
+                pool.ClearPoolEntities();
             }
         }
 
@@ -324,7 +251,7 @@ namespace Oxide.Ext.Discord.Pooling
             for (int index = 0; index < _pools.Count; index++)
             {
                 IPool pool = _pools[index];
-                pool.Wipe();
+                pool.RemoveAllPools();
             }
         }
     }

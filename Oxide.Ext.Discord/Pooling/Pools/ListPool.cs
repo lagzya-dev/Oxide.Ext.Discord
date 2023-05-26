@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     {
         public static ListPool<T> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<ListPool<T>>(pluginPool);
         
-        protected override int GetPoolSize(PoolSettings settings) => settings.ListPoolSize;
+        protected override PoolSize GetPoolSize(PoolSettings settings) => settings.ListPoolSize;
         
         protected override List<T> CreateNew() => new List<T>();
         

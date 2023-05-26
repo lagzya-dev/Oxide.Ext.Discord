@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     {
         public static HashSetPool<T> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<HashSetPool<T>>(pluginPool);
         
-        protected override int GetPoolSize(PoolSettings settings) => settings.HashSetPoolSize;
+        protected override PoolSize GetPoolSize(PoolSettings settings) => settings.HashSetPoolSize;
         
         protected override HashSet<T> CreateNew() => new HashSet<T>();
         

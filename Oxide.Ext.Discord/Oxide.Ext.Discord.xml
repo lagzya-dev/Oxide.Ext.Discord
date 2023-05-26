@@ -21325,22 +21325,15 @@
             </summary>
             <param name="item">Item being freed</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Resize(System.Int32)">
-            <summary>
-            Resizes the pool
-            </summary>
-            <param name="newSize">New size for the pool</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if the new size is &lt;= 0 or &lt;= the current index </exception>
-        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnPluginUnloaded(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Clear">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.ClearPoolEntities">
             <summary>
             Clears the pool of all pooled objects and resets state to when the pool was first created
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Wipe">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.RemoveAllPools">
             <summary>
             Wipes all the pools for this type
             </summary>
@@ -21412,13 +21405,6 @@
             <typeparam name="T">Type to be returned</typeparam>
             <returns>Pooled object of type T</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizePool``1(System.Int32)">
-            <summary>
-            Resizes the pool for {T} type
-            </summary>
-            <param name="newSize">New size for the pool</param>
-            <typeparam name="T">Type of {T} where T : BasePoolable, new()</typeparam>
-        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.Free``1(``0)">
             <summary>
             Returns a <see cref="T:Oxide.Ext.Discord.Pooling.BasePoolable"/> back into the pool
@@ -21432,13 +21418,6 @@
             </summary>
             <typeparam name="T">Type for the list</typeparam>
             <returns>Pooled List</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeListPool``1(System.Int32)">
-            <summary>
-            Resizes the pool for <see cref="T:System.Collections.Generic.List`1"/>
-            </summary>
-            <param name="newSize">New size for the pool</param>
-            <typeparam name="T">Type of {T} for the list</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeList``1(System.Collections.Generic.List{``0})">
             <summary>
@@ -21455,14 +21434,6 @@
             <typeparam name="TValue">Type for the value</typeparam>
             <returns>Pooled Hash</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeHashPool``2(System.Int32)">
-            <summary>
-            Resizes the <see cref="T:Oxide.Plugins.Hash`2"/>
-            </summary>
-            <param name="newSize">New size for the pool</param>
-            <typeparam name="TKey">Type for the key</typeparam>
-            <typeparam name="TValue">Type for the value</typeparam>
-        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeHash``2(Oxide.Plugins.Hash{``0,``1})">
             <summary>
             Frees a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
@@ -21477,13 +21448,6 @@
             </summary>
             <typeparam name="T">Type for the HashSet</typeparam>
             <returns>Pooled List</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeHashSetPool``1(System.Int32)">
-            <summary>
-            Resizes a <see cref="T:Oxide.Ext.Discord.Pooling.Pools.HashSetPool`1"/>
-            </summary>
-            <param name="newSize">New size for the pool</param>
-            <typeparam name="T">Type of the hashset pool</typeparam>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeHashSet``1(System.Collections.Generic.HashSet{``0})">
             <summary>
@@ -21505,12 +21469,6 @@
             <param name="initial">Initial text for the builder</param>
             <returns>Pooled <see cref="T:System.Text.StringBuilder"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeStringBuilderPool(System.Int32)">
-            <summary>
-            Resizes the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.StringBuilderPool"/>
-            </summary>
-            <param name="newSize">New size for the pool</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeStringBuilder(System.Text.StringBuilder)">
             <summary>
             Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool
@@ -21529,12 +21487,6 @@
             </summary>
             <returns>Pooled <see cref="T:System.IO.MemoryStream"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizeMemoryStreamPool(System.Int32)">
-            <summary>
-            Resizes the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.MemoryStreamPool"/>
-            </summary>
-            <param name="newSize">New size for the pool</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeMemoryStream(System.IO.MemoryStream)">
             <summary>
             Frees a <see cref="T:System.IO.MemoryStream"/> back to the pool
@@ -21546,12 +21498,6 @@
             Returns a pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/>
             </summary>
             <returns>Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.ResizePlaceholderDataPool(System.Int32)">
-            <summary>
-            Resizes the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.PlaceholderDataPool"/>
-            </summary>
-            <param name="newSize">New size for the pool</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreePlaceholderData(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
@@ -21578,24 +21524,18 @@
             Represents a pool
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool.Resize(System.Int32)">
-            <summary>
-            Resizes the pool
-            </summary>
-            <param name="newSize"></param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Pooling.IPool.OnPluginUnloaded(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
             <summary>
             Called on a pool when a plugin is unloaded
             </summary>
             <param name="pluginPool"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool.Clear">
+        <member name="M:Oxide.Ext.Discord.Pooling.IPool.ClearPoolEntities">
             <summary>
             Clears the pool of all items
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool.Wipe">
+        <member name="M:Oxide.Ext.Discord.Pooling.IPool.RemoveAllPools">
             <summary>
             Wipes all pools of the given type
             </summary>
@@ -21623,7 +21563,7 @@
             Settings for the pools
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.HashPoolSize">
+        <member name="F:Oxide.Ext.Discord.Pooling.PoolSettings.HashPoolSize">
             <summary>
             Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.HashPool`2"/>
             </summary>

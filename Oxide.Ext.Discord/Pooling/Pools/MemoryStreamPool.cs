@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     {
         public static MemoryStreamPool ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<MemoryStreamPool>(pluginPool);
         
-        protected override int GetPoolSize(PoolSettings settings) => settings.MemoryStreamPoolSize;
+        protected override PoolSize GetPoolSize(PoolSettings settings) => settings.MemoryStreamPoolSize;
         
         protected override MemoryStream CreateNew() => new MemoryStream();
 

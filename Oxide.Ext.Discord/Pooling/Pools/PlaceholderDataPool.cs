@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     {
         public static PlaceholderDataPool ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<PlaceholderDataPool>(pluginPool);
         
-        protected override int GetPoolSize(PoolSettings settings) => settings.PlaceholderDataPoolSize;
+        protected override PoolSize GetPoolSize(PoolSettings settings) => settings.PlaceholderDataPoolSize;
         
         protected override BasePoolable CreateNew()
         {

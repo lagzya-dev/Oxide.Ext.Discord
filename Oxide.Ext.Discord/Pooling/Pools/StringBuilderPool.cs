@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     {
         public static StringBuilderPool ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<StringBuilderPool>(pluginPool);
         
-        protected override int GetPoolSize(PoolSettings settings) => settings.StringBuilderPoolSize;
+        protected override PoolSize GetPoolSize(PoolSettings settings) => settings.StringBuilderPoolSize;
         
         protected override StringBuilder CreateNew() => new StringBuilder();
 

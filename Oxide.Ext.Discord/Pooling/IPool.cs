@@ -6,12 +6,6 @@ namespace Oxide.Ext.Discord.Pooling
     public interface IPool
     {
         /// <summary>
-        /// Resizes the pool
-        /// </summary>
-        /// <param name="newSize"></param>
-        void Resize(int newSize);
-        
-        /// <summary>
         /// Called on a pool when a plugin is unloaded
         /// </summary>
         /// <param name="pluginPool"></param>
@@ -20,11 +14,11 @@ namespace Oxide.Ext.Discord.Pooling
         /// <summary>
         /// Clears the pool of all items
         /// </summary>
-        void Clear();
+        void ClearPoolEntities();
 
         /// <summary>
         /// Wipes all pools of the given type
         /// </summary>
-        void Wipe();
+        void RemoveAllPools();
     }
 }

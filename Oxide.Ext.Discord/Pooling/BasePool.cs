@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Oxide.Ext.Discord.Exceptions.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
@@ -20,15 +21,18 @@ namespace Oxide.Ext.Discord.Pooling
         private TPooled[] _pool;
         private int _index;
         private readonly object _lock = new object();
+        private PoolSize _size;
         private static readonly Hash<PluginId, BasePool<TPooled>> Pools = new Hash<PluginId, BasePool<TPooled>>();
         private readonly StringBuilder _sb = new StringBuilder();
-
+        
         private void InitPool(DiscordPluginPool pluginPool)
         {
             PluginPool = pluginPool;
             pluginPool.AddPool(this);
             Pools[pluginPool.PluginId] = this;
-            _pool = new TPooled[GetPoolSize(pluginPool.Settings)];
+            _size = GetPoolSize(pluginPool.Settings);
+            InvalidPoolException.ThrowIfInvalidPoolSize(_size);
+            _pool = new TPooled[_size.StartingSize];
         }
 
         /// <summary>
@@ -36,7 +40,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <param name="settings"></param>
         /// <returns></returns>
-        protected abstract int GetPoolSize(PoolSettings settings);
+        protected abstract PoolSize GetPoolSize(PoolSettings settings);
 
         /// <summary>
         /// Returns a pool for the given plugin pool
@@ -69,6 +73,14 @@ namespace Oxide.Ext.Discord.Pooling
                 lock (_lock)
                 {
                     _sb.Append("B");
+                    if (_index == _pool.Length && _size.CanResize(_pool.Length))
+                    {
+                        _sb.Append("B1");
+                        int nextSize = _size.GetNextSize(_pool.Length);
+                        DiscordExtension.GlobalLogger.Debug("{0} Resizing Pool {1} Current Size: {2} Next Size: {3}", PluginPool.PluginName, GetType(), _pool.Length, nextSize);
+                        Array.Resize(ref _pool, nextSize);
+                    }
+
                     if (_index < _pool.Length)
                     {
                         _sb.Append("C");
@@ -141,35 +153,7 @@ namespace Oxide.Ext.Discord.Pooling
             
             item = null;
         }
-
-        /// <summary>
-        /// Resizes the pool
-        /// </summary>
-        /// <param name="newSize">New size for the pool</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if the new size is &lt;= 0 or &lt;= the current index </exception>
-        public void Resize(int newSize)
-        {
-            if (newSize <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(newSize), "Cannot be less than or equal to 0");
-            }
-
-            if (newSize == _pool.Length)
-            {
-                return;
-            }
-            
-            lock (_lock)
-            {
-                if (_index > newSize)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(newSize),$"newSize: {newSize} is less than the current index: {_index}");
-                }
-            
-                Array.Resize(ref _pool, newSize);
-            }
-        }
-
+        
         ///<inheritdoc/>
         public void OnPluginUnloaded(DiscordPluginPool pluginPool)
         {
@@ -179,7 +163,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <summary>
         /// Clears the pool of all pooled objects and resets state to when the pool was first created
         /// </summary>
-        public void Clear()
+        public void ClearPoolEntities()
         {
             lock (_lock)
             {
@@ -194,7 +178,7 @@ namespace Oxide.Ext.Discord.Pooling
         /// <summary>
         /// Wipes all the pools for this type
         /// </summary>
-        public void Wipe()
+        public void RemoveAllPools()
         {
             Pools.Clear();
         }

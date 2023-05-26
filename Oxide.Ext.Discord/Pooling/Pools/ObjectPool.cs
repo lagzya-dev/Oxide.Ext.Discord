@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     {
         public static ObjectPool<T> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<ObjectPool<T>>(pluginPool);
         
-        protected override int GetPoolSize(PoolSettings settings) => settings.ObjectPoolSize;
+        protected override PoolSize GetPoolSize(PoolSettings settings) => settings.ObjectPoolSize;
         
         protected override BasePoolable CreateNew()
         {
