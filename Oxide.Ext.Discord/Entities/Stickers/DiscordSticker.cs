@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Stickers;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Interfaces.Promises;
 
 namespace Oxide.Ext.Discord.Entities.Stickers
 {
@@ -96,7 +96,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <param name="stickerId">ID of the sticker</param>
         /// <param name="callback">Callback with the DiscordSticker</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<DiscordSticker> GetSticker(DiscordClient client, Snowflake stickerId)
+        public static IPromise<DiscordSticker> GetSticker(DiscordClient client, Snowflake stickerId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(stickerId, nameof(stickerId));
             return client.Bot.Rest.Get<DiscordSticker>(client,$"stickers/{stickerId}");
@@ -111,7 +111,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the updated discord sticker</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordSticker> ModifyGuildSticker(DiscordClient client)
+        public IPromise<DiscordSticker> ModifyGuildSticker(DiscordClient client)
         {
             InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");
             return client.Bot.Rest.Patch<DiscordSticker>(client,$"guilds/{GuildId}/stickers/{Id}", this);
@@ -125,7 +125,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise DeleteGuildSticker(DiscordClient client)
+        public IPromise DeleteGuildSticker(DiscordClient client)
         {
             InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");
             return client.Bot.Rest.Delete(client,$"guilds/{GuildId}/stickers/{Id}");

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Interfaces.Promises;
 
 namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
 {
@@ -113,7 +113,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="lookup">Query string parameters</param>
         /// <param name="callback">Callback with the list of scheduled events</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<List<GuildScheduledEvent>> ListForGuild(DiscordClient client, Snowflake guildId, ScheduledEventLookup lookup = null)
+        public static IPromise<List<GuildScheduledEvent>> ListForGuild(DiscordClient client, Snowflake guildId, ScheduledEventLookup lookup = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             return client.Bot.Rest.Get<List<GuildScheduledEvent>>(client,$"guilds/{guildId}/scheduled-events{lookup?.ToQueryString()}");
@@ -129,7 +129,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="create">Guild Scheduled Event to create</param>
         /// <param name="callback">Callback with the created scheduled events</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<GuildScheduledEvent> Create(DiscordClient client, Snowflake guildId, ScheduledEventCreate create)
+        public static IPromise<GuildScheduledEvent> Create(DiscordClient client, Snowflake guildId, ScheduledEventCreate create)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             return client.Bot.Rest.Post<GuildScheduledEvent>(client,$"guilds/{guildId}/scheduled-events", create);
@@ -146,7 +146,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="lookup">Query string parameters</param>
         /// <param name="callback">Callback with the scheduled event</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<GuildScheduledEvent> Get(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventLookup lookup = null)
+        public static IPromise<GuildScheduledEvent> Get(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventLookup lookup = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(eventId, nameof(eventId));
@@ -164,7 +164,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="update">Guild Scheduled Event to update</param>
         /// <param name="callback">Callback with the updated scheduled events</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<GuildScheduledEvent> Modify(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventUpdate update)
+        public IPromise<GuildScheduledEvent> Modify(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventUpdate update)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(eventId, nameof(eventId));
@@ -180,7 +180,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="eventId">Id of the event to delete</param>
         /// <param name="callback">Callback with the updated scheduled events</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise Delete(DiscordClient client, Snowflake guildId, Snowflake eventId)
+        public IPromise Delete(DiscordClient client, Snowflake guildId, Snowflake eventId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(eventId, nameof(eventId));
@@ -199,7 +199,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// <param name="lookup">Query string parameters</param>
         /// <param name="callback">Callback with the list of scheduled event users</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<List<ScheduledEventUser>> GetUsers(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventUsersLookup lookup = null)
+        public static IPromise<List<ScheduledEventUser>> GetUsers(DiscordClient client, Snowflake guildId, Snowflake eventId, ScheduledEventUsersLookup lookup = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             InvalidSnowflakeException.ThrowIfInvalid(eventId, nameof(eventId));

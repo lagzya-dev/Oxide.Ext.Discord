@@ -18,6 +18,7 @@ using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord
 {
@@ -91,6 +92,8 @@ namespace Oxide.Ext.Discord
             
             GlobalLogger = DiscordLoggerFactory.Instance.CreateExtensionLogger(string.IsNullOrEmpty(TestVersion) ? DiscordLogLevel.Warning : DiscordLogLevel.Verbose);
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
+            
+            ThreadState.Initialize();
 
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {

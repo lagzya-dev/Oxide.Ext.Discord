@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Cache.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
@@ -15,11 +16,12 @@ using Oxide.Ext.Discord.Exceptions.Entities.Channels;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Promises;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Users
@@ -181,7 +183,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the logged in user</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<DiscordUser> GetCurrentUser(DiscordClient client)
+        public static IPromise<DiscordUser> GetCurrentUser(DiscordClient client)
         {
             return client.Bot.Rest.Get<DiscordUser>(client,"users/@me");
         }
@@ -194,7 +196,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="userId">User ID to lookup</param>
         /// <param name="callback">Callback with the looked up user</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<DiscordUser> GetUser(DiscordClient client, Snowflake userId)
+        public static IPromise<DiscordUser> GetUser(DiscordClient client, Snowflake userId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
             return client.Bot.Rest.Get<DiscordUser>(client,$"users/{userId}");
@@ -207,7 +209,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="message">Message to be created</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordMessage> SendDirectMessage(DiscordClient client, MessageCreate message)
+        public IPromise<DiscordMessage> SendDirectMessage(DiscordClient client, MessageCreate message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
             return CreateDirectMessageChannel(client, Id)
@@ -221,7 +223,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="message">Content of the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordMessage> SendDirectMessage(DiscordClient client, string message)
+        public IPromise<DiscordMessage> SendDirectMessage(DiscordClient client, string message)
         {
             return SendDirectMessage(client, new MessageCreate{Content = message});
         }
@@ -233,7 +235,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="embeds">Embeds to be send in the message</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordMessage> SendDirectMessage(DiscordClient client, List<DiscordEmbed> embeds)
+        public IPromise<DiscordMessage> SendDirectMessage(DiscordClient client, List<DiscordEmbed> embeds)
         {
             if (embeds == null) throw new ArgumentNullException(nameof(embeds));
             return SendDirectMessage(client, new MessageCreate{Embeds = embeds});
@@ -250,7 +252,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <param name="callback">Callback when the message is created</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordMessage> SendTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> SendTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
             return SendDirectMessage(client, template);
@@ -266,7 +268,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <param name="callback">Callback when the message is created</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordMessage> SendGlobalTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> SendGlobalTemplateDirectMessage(DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
             return SendDirectMessage(client, template);
@@ -280,7 +282,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="current">The updated current user information</param>
         /// <param name="callback">Callback with the updated user</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordUser> ModifyCurrentUser(DiscordClient client, UserModifyCurrent current)
+        public IPromise<DiscordUser> ModifyCurrentUser(DiscordClient client, UserModifyCurrent current)
         {
             if (current == null) throw new ArgumentNullException(nameof(current));
             return client.Bot.Rest.Patch<DiscordUser>(client,"users/@me", current);
@@ -294,7 +296,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="request">Request parameters for filtering guilds</param>
         /// <param name="callback">Callback with the list of guilds</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<List<DiscordGuild>> GetCurrentUserGuilds(DiscordClient client, UserGuildsRequest request = null)
+        public IPromise<List<DiscordGuild>> GetCurrentUserGuilds(DiscordClient client, UserGuildsRequest request = null)
         {
             return client.Bot.Rest.Get<List<DiscordGuild>>(client,$"users/@me/guilds{request?.ToQueryString()}");
         }
@@ -307,7 +309,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="guildId">Guild ID to leave</param>
         /// <param name="callback">callback when the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise LeaveGuild(DiscordClient client, Snowflake guildId)
+        public IPromise LeaveGuild(DiscordClient client, Snowflake guildId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             return client.Bot.Rest.Delete(client,$"users/@me/guilds/{guildId}");
@@ -320,7 +322,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the direct message channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordChannel> CreateDirectMessageChannel(DiscordClient client) => CreateDirectMessageChannel(client, Id);
+        public IPromise<DiscordChannel> CreateDirectMessageChannel(DiscordClient client) => CreateDirectMessageChannel(client, Id);
 
         /// <summary>
         /// Create a Direct Message to the current User
@@ -330,7 +332,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="userId">User ID to send the message to</param>
         /// <param name="callback">Callback with the direct message channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<DiscordChannel> CreateDirectMessageChannel(DiscordClient client, Snowflake userId)
+        public static IPromise<DiscordChannel> CreateDirectMessageChannel(DiscordClient client, Snowflake userId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
             InvalidChannelException.ThrowIfChannelToSelf(userId, client);
@@ -338,7 +340,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             DiscordChannel channel = client.Bot.DirectMessagesByUserId[userId];
             if (channel != null)
             {
-                return DiscordPromise<DiscordChannel>.FromResolve(channel);
+                return Promise<DiscordChannel>.Resolved(channel);
             }
 
             Dictionary<string, object> data = new Dictionary<string, object>
@@ -360,7 +362,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="nicks">a list of user ids to their respective nicknames</param>
         /// <param name="callback">Callback with the direct message channel</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordChannel> CreateGroupDm(DiscordClient client, string[] accessTokens, Hash<Snowflake, string> nicks)
+        public IPromise<DiscordChannel> CreateGroupDm(DiscordClient client, string[] accessTokens, Hash<Snowflake, string> nicks)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -378,7 +380,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the list of connections</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<List<Connection>> GetUserConnections(DiscordClient client)
+        public IPromise<List<Connection>> GetUserConnections(DiscordClient client)
         {
             return client.Bot.Rest.Get<List<Connection>>(client,"users/@me/connections");
         }
@@ -392,7 +394,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="accessToken">Users access token</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise GroupDmAddRecipient(DiscordClient client, DiscordChannel channel, string accessToken) => GroupDmAddRecipient(client, channel.Id, accessToken, Username);
+        public IPromise GroupDmAddRecipient(DiscordClient client, DiscordChannel channel, string accessToken) => GroupDmAddRecipient(client, channel.Id, accessToken, Username);
 
         /// <summary>
         /// Adds a recipient to a Group DM using their access token
@@ -404,7 +406,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="nick">User nickname</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise GroupDmAddRecipient(DiscordClient client, Snowflake channelId, string accessToken, string nick)
+        public IPromise GroupDmAddRecipient(DiscordClient client, Snowflake channelId, string accessToken, string nick)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             Dictionary<string, string> data = new Dictionary<string, string>
@@ -423,7 +425,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="channel">Channel to remove recipient from</param>
         /// <param name="callback">callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise GroupDmRemoveRecipient(DiscordClient client, DiscordChannel channel) => GroupDmRemoveRecipient(client, channel.Id);
+        public IPromise GroupDmRemoveRecipient(DiscordClient client, DiscordChannel channel) => GroupDmRemoveRecipient(client, channel.Id);
 
         /// <summary>
         /// Removes a recipient from a Group DM
@@ -432,7 +434,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="channelId">Channel ID to remove recipient from</param>
         /// <param name="callback">callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId)
+        public IPromise GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             return client.Bot.Rest.Delete(client,$"channels/{channelId}/recipients/{Id}");

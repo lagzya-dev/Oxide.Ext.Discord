@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// <param name="request">Request the error is for</param>
         /// <param name="type"><see cref="RequestErrorType"/> of the error</param>
         /// <param name="log"><see cref="DiscordLogLevel"/> log level of the error</param>
-        internal ResponseError(Request request, RequestErrorType type, DiscordLogLevel log)
+        internal ResponseError(BaseRequest request, RequestErrorType type, DiscordLogLevel log)
         {
             RequestId = request.Id;
             _client = request.Client;

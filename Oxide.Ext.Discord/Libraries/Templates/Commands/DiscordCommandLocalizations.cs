@@ -6,9 +6,10 @@ using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Commands;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Libraries;
+using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Promises;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands
@@ -31,12 +32,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <param name="language">Language to register</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public IDiscordPromise RegisterCommandLocalizationAsync(Plugin plugin, string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
+        public IPromise RegisterCommandLocalizationAsync(Plugin plugin, string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (localization == null) throw new ArgumentNullException(nameof(localization));
 
-            IDiscordPromise promise = DiscordPromise.Create();
+            IPendingPromise promise = Promise.Create();
             
             TemplateId id = TemplateId.CreateLocalized(plugin, fileNameSuffix, language);
             RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, version, minVersion, promise);
@@ -52,12 +53,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <param name="minVersion">Min supported registered version</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public IDiscordPromise BulkRegisterCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, List<BulkTemplateRegistration<DiscordCommandLocalization>> commands, TemplateVersion minVersion)
+        public IPromise BulkRegisterCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, List<BulkTemplateRegistration<DiscordCommandLocalization>> commands, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (commands == null) throw new ArgumentNullException(nameof(commands));
 
-            IDiscordPromise promise = DiscordPromise.Create();
+            IPendingPromise promise = Promise.Create();
             
             TemplateId id = TemplateId.CreateGlobal(plugin, fileNameSuffix);
             BulkRegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, commands, minVersion, promise);
@@ -71,18 +72,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <param name="create">The command to apply the localizations to</param>
         /// <param name="fileNameSuffix">fileName suffix used when registering</param>
         /// <returns></returns>
-        public IDiscordPromise ApplyCommandLocalizationsAsync(Plugin plugin, CommandCreate create, string fileNameSuffix)
+        public IPromise ApplyCommandLocalizationsAsync(Plugin plugin, CommandCreate create, string fileNameSuffix)
         {
-            return HandleApplyCommandLocalizationsAsync(plugin, fileNameSuffix, create, DiscordPromise.Create());
+            return HandleApplyCommandLocalizationsAsync(plugin, fileNameSuffix, create, Promise.Create());
         }
         
-        private IDiscordPromise HandleApplyCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, CommandCreate create, IDiscordPromise promise = null)
+        private IPromise HandleApplyCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, CommandCreate create, IPendingPromise promise = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
             if (promise == null)
             {
-                promise = DiscordPromise.Create(true);
+                promise = Promise.Create();
             }
             
             TemplateId id = TemplateId.CreateGlobal(plugin, fileNameSuffix);
@@ -90,7 +91,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             return promise;
         }
 
-        internal void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, IDiscordPromise promise)
+        internal void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, IPendingPromise promise)
         {
             HandleApplyCommandLocalizationsAsync(id, create);
             promise.Resolve();

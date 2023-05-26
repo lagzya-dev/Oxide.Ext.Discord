@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
+using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Promises;
 
 namespace Oxide.Ext.Discord.Entities.Gateway
 {
@@ -40,12 +41,12 @@ namespace Oxide.Ext.Discord.Entities.Gateway
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with the Gateway response</param>
         /// <param name="error">API error callback</param>
-        private static IDiscordPromise<Gateway> GetGateway(BotClient client)
+        private static IPromise<Gateway> GetGateway(BotClient client)
         {
             return client.Rest.Get<Gateway>(client.GetFirstClient(),"gateway");
         }
 
-        public static IDiscordPromise UpdateGatewayUrl(BotClient client)
+        public static IPromise<Gateway> UpdateGatewayUrl(BotClient client)
         {
             return GetGateway(client).Then(gateway =>
             {

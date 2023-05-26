@@ -5,11 +5,12 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Promises;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
 {
@@ -33,13 +34,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="version">Version of the template</param>
         /// <param name="minVersion">Min supported version for this template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IDiscordPromise RegisterGlobalTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion)
+        public IPromise RegisterGlobalTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            IDiscordPromise promise = DiscordPromise.Create();
+            IPendingPromise promise = Promise.Create();
             
             TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
             RegisterTemplateCallback<TTemplate>.Start(this, id, template, version, minVersion, promise);
@@ -60,13 +61,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </param>
         /// <param name="language">Language for the template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IDiscordPromise RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
+        public IPromise RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             if (template == null) throw new ArgumentNullException(nameof(template));
             
-            IDiscordPromise promise = DiscordPromise.Create();
+            IPendingPromise promise = Promise.Create();
 
             TemplateId id = TemplateId.CreateLocalized(plugin, templateName, language);
             RegisterTemplateCallback<TTemplate>.Start(this, id, template, version, minVersion, promise);

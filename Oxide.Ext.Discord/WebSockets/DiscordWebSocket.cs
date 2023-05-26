@@ -97,7 +97,7 @@ namespace Oxide.Ext.Discord.WebSockets
             if (string.IsNullOrEmpty(url) || (_reconnect.AttemptGatewayUpdate && Gateway.LastUpdate + TimeSpan.FromMinutes(5) <= DateTime.UtcNow))
             {
                 Gateway.UpdateGatewayUrl(_client)
-                       .Then(Connect)
+                       .Then(_ => Connect())
                        .Catch<ResponseError>(OnGatewayUrlUpdateFailed);
                 return;
             }

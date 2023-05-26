@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Templates;
-using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates
 {
@@ -12,16 +12,16 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
         private TTemplate _template;
         private TemplateVersion _version;
         private TemplateVersion _minVersion;
-        private IDiscordPromise _promise;
+        private IPendingPromise _promise;
         
-        public static void Start(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IDiscordPromise promise)
+        public static void Start(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise promise)
         {
             RegisterTemplateCallback<TTemplate> register = DiscordPool.Internal.Get<RegisterTemplateCallback<TTemplate>>();
             register.Init(library, id, template, version, minVersion, promise);
             register.Run();
         }
         
-        private void Init(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IDiscordPromise promise)
+        private void Init(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise promise)
         {
             _library = library;
             _id = id;

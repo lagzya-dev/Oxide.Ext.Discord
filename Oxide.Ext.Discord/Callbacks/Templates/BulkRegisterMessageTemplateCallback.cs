@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Templates;
-using Oxide.Ext.Discord.Promise;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates
 {
@@ -12,16 +12,16 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
         private TemplateId _id;
         private List<BulkTemplateRegistration<TTemplate>> _templates;
         private TemplateVersion _minVersion;
-        private IDiscordPromise _promise;
+        private IPendingPromise _promise;
         
-        public static void Start(BaseTemplateLibrary<TTemplate> library, TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IDiscordPromise promise)
+        public static void Start(BaseTemplateLibrary<TTemplate> library, TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IPendingPromise promise)
         {
             BulkRegisterTemplateCallback<TTemplate> register = DiscordPool.Internal.Get<BulkRegisterTemplateCallback<TTemplate>>();
             register.Init(library, id, templates, minVersion, promise);
             register.Run();
         }
         
-        private void Init(BaseTemplateLibrary<TTemplate> library, TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IDiscordPromise promise)
+        private void Init(BaseTemplateLibrary<TTemplate> library, TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IPendingPromise promise)
         {
             _library = library;
             _id = id;

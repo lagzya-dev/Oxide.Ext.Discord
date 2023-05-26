@@ -5,7 +5,8 @@ using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Promises;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
@@ -123,7 +124,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="update">Command Update</param>
         /// <param name="callback">Callback with updated command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<DiscordApplicationCommand> Edit(DiscordClient client, CommandUpdate update)
+        public IPromise<DiscordApplicationCommand> Edit(DiscordClient client, CommandUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
             if (GuildId.HasValue)
@@ -142,7 +143,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback once the action is completed</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise Delete(DiscordClient client)
+        public IPromise Delete(DiscordClient client)
         {
             if (GuildId.HasValue)
             {
@@ -160,10 +161,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="guildId">Guild ID of the guild to get permissions for</param>
         /// <param name="callback">Callback with the permissions for the command</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<GuildCommandPermissions> GetPermissions(DiscordClient client, Snowflake guildId)
+        public IPromise<GuildCommandPermissions> GetPermissions(DiscordClient client, Snowflake guildId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            IDiscordPromise<GuildCommandPermissions> promise = DiscordPromise<GuildCommandPermissions>.Create();
+            IPendingPromise<GuildCommandPermissions> promise = Promise<GuildCommandPermissions>.Create();
 
             client.Bot.Rest.Get<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions")
                   .Then(perms => promise.Resolve(perms))
@@ -171,7 +172,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
                   {
                       if (ex.DiscordError?.Code != 10066)
                       {
-                          promise.Fail(ex);
+                          promise.Reject(ex);
                           return;
                       }
                       
@@ -179,7 +180,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
                       //If the command is synced we need to lookup by application ID instead
                       client.Bot.Rest.Get<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{ApplicationId}/permissions")
                             .Then(perms => promise.Resolve(perms))
-                            .Catch<ResponseError>(ex1 => promise.Fail(ex1));
+                            .Catch<ResponseError>(ex1 => promise.Reject(ex1));
                   });
             return promise;
         }
@@ -195,7 +196,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <param name="permissions">List of permissions for the command</param>
         /// <param name="callback">Callback with the list of permissions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise EditPermissions(DiscordClient client, Snowflake guildId, CommandUpdatePermissions permissions)
+        public IPromise EditPermissions(DiscordClient client, Snowflake guildId, CommandUpdatePermissions permissions)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             return client.Bot.Rest.Put(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", permissions);

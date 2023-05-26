@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Singleton;
 
-namespace Oxide.Ext.Discord.Cache
+namespace Oxide.Ext.Discord.Cache.Entities
 {
     /// <summary>
     /// Cache for <see cref="T"/> Cache 

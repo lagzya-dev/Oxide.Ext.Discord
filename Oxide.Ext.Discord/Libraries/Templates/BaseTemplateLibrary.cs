@@ -7,10 +7,10 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Promise;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
@@ -62,7 +62,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
         
-        internal void HandleRegisterTemplate(TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IDiscordPromise promise)
+        internal void HandleRegisterTemplate(TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise promise)
         {
             if (version < minVersion)
             {
@@ -103,7 +103,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             promise.Resolve();
         }
         
-        internal void HandleBulkRegisterTemplate(TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IDiscordPromise promise)
+        internal void HandleBulkRegisterTemplate(TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IPendingPromise promise)
         {
             foreach (BulkTemplateRegistration<TTemplate> registration in templates)
             {

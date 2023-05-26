@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Interfaces.Promises;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Stages
 {
@@ -64,7 +64,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="create">Create Stage Instance Object</param>
         /// <param name="callback">Callback with the new stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<StageInstance> CreateStageInstance(DiscordClient client, StageInstanceCreate create)
+        public static IPromise<StageInstance> CreateStageInstance(DiscordClient client, StageInstanceCreate create)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
             InvalidSnowflakeException.ThrowIfInvalid(create.ChannelId, nameof(create.ChannelId));
@@ -79,7 +79,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="channelId">Channel ID to get the stage instance for</param>
         /// <param name="callback">Callback with the new stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<StageInstance> GetStageInstance(DiscordClient client, Snowflake channelId)
+        public static IPromise<StageInstance> GetStageInstance(DiscordClient client, Snowflake channelId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             return client.Bot.Rest.Get<StageInstance>(client,$"stage-instances/{channelId}");
@@ -94,7 +94,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="update">Update for the stage instance</param>
         /// <param name="callback">Callback when the updated stage instance</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise<StageInstance> ModifyStageInstance(DiscordClient client, StageInstanceUpdate update)
+        public IPromise<StageInstance> ModifyStageInstance(DiscordClient client, StageInstanceUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
             return client.Bot.Rest.Patch<StageInstance>(client,$"stage-instances/{ChannelId}", update);
@@ -108,7 +108,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback when the stage instance is deleted</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public IDiscordPromise DeleteStageInstance(DiscordClient client)
+        public IPromise DeleteStageInstance(DiscordClient client)
         {
             return client.Bot.Rest.Delete(client,$"stage-instances/{ChannelId}");
         }

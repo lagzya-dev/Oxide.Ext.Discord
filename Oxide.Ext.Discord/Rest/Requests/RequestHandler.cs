@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// </summary>
     public class RequestHandler : BasePoolable, IDebugLoggable
     {
-        internal Request Request;
+        internal BaseRequest Request;
         
         private Bucket _bucket;
         private RestHandler _rest;
@@ -57,13 +57,13 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         /// <param name="rest">Rest handler for the request</param>
         /// <param name="request">Request to be handled by this handler</param>
-        public static void StartRequest(RestHandler rest, Request request)
+        public static void StartRequest(RestHandler rest, BaseRequest request)
         {
             RequestHandler handler = request.PluginPool.Get<RequestHandler>();
             handler.Init(rest, request, request.Client.Logger);
         }
         
-        private void Init(RestHandler rest, Request request, ILogger logger)
+        private void Init(RestHandler rest, BaseRequest request, ILogger logger)
         {
             _rest = rest;
             Request = request;

@@ -56,8 +56,18 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             try
             {
                 int delay = GetReconnectDelay();
+
+                if (_reconnectRetries == 0)
+                {
+                    _logger.Info("Reconnecting to Discord.");
+                }
+                else
+                {
+                    _logger.Info("Reconnecting to Discord. Retry: #{0} Delay: {1}ms", _reconnectRetries, delay);
+                }
+                
                 _reconnectRetries++;
-                _logger.Info("Reconnecting to Discord. Retry: #{0} Delay: {1}ms", _reconnectRetries, delay);
+                
                 await Task.Delay(delay, _source.Token).ConfigureAwait(false);
                 IsPendingReconnect = false;
                 Connect();

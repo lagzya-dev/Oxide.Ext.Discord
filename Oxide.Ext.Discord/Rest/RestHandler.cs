@@ -9,9 +9,10 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Promises;
 using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
@@ -76,15 +77,15 @@ namespace Oxide.Ext.Discord.Rest
             RateLimit = new RestRateLimit(logger);
         }
 
-        public IDiscordPromise<TResult> Get<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.GET);
-        public IDiscordPromise Post(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.POST, data);
-        public IDiscordPromise<TResult> Post<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.POST, data);
-        public IDiscordPromise Put(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PUT, data);
-        public IDiscordPromise<TResult> Put<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PUT, data);
-        public IDiscordPromise Patch(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PATCH, data);
-        public IDiscordPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PATCH, data);
-        public IDiscordPromise Delete(DiscordClient client, string url) => CreateRequest(client, url, RequestMethod.DELETE);
-        public IDiscordPromise<TResult> Delete<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.DELETE);
+        public IPromise<TResult> Get<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.GET);
+        public IPromise Post(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.POST, data);
+        public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.POST, data);
+        public IPromise Put(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PUT, data);
+        public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PUT, data);
+        public IPromise Patch(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PATCH, data);
+        public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PATCH, data);
+        public IPromise Delete(DiscordClient client, string url) => CreateRequest(client, url, RequestMethod.DELETE);
+        public IPromise<TResult> Delete<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.DELETE);
 
         /// <summary>
         /// Creates a new request and queues it to be ran
@@ -93,16 +94,17 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="url">URL of the request</param>
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
-        private IDiscordPromise CreateRequest(DiscordClient client, string url, RequestMethod method, object data = null)
+        private IPromise CreateRequest(DiscordClient client, string url, RequestMethod method, object data = null)
         {
             if (data is IDiscordValidation validate)
             {
                 validate.Validate();
             }
-            
-            Request request = Request.CreateRequest(DiscordPool.Internal, client, Client, method, url, data);
+
+            IPendingPromise promise = Promise.Create();
+            Request request = Request.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, promise);
             StartRequest(request);
-            return request.Promise;
+            return promise;
         }
 
         /// <summary>
@@ -113,23 +115,24 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
-        private IDiscordPromise<T> CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data = null)
+        private IPromise<T> CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data = null)
         {
             if (data is IDiscordValidation validate)
             {
                 validate.Validate();
             }
 
-            Request<T> request = Request<T>.CreateRequest(DiscordPool.Internal, client, Client, method, url, data);
+            IPendingPromise<T> promise = Promise<T>.Create();
+            Request<T> request = Request<T>.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, promise);
             StartRequest(request);
-            return request.Promise;
+            return promise;
         }
 
         /// <summary>
         /// Starts the request
         /// </summary>
         /// <param name="request">Request to be started</param>
-        public void StartRequest(Request request)
+        public void StartRequest(BaseRequest request)
         {
             _logger.Debug($"{nameof(RestHandler)}.{nameof(StartRequest)} Method: {{0}} Route: {{1}}", request.Method, request.Route);
             RequestHandler.StartRequest(this, request);
@@ -138,7 +141,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Queues the request for the bucket
         /// </summary>
-        public Bucket QueueBucket(RequestHandler handler, Request request)
+        public Bucket QueueBucket(RequestHandler handler, BaseRequest request)
         {
             BucketId bucketId = BucketIdFactory.Instance.GenerateId(request.Method, request.Route);
             _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}",  request.Route, bucketId);

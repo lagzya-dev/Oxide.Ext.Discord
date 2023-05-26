@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Interfaces.Promises;
 
 namespace Oxide.Ext.Discord.Entities.Voice
 {
@@ -55,7 +55,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with a list of voice regions</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<List<VoiceRegion>> ListVoiceRegions(DiscordClient client)
+        public static IPromise<List<VoiceRegion>> ListVoiceRegions(DiscordClient client)
         {
             return client.Bot.Rest.Get<List<VoiceRegion>>(client,"voice/regions");
         }

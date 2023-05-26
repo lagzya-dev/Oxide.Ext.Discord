@@ -12,16 +12,15 @@ namespace Oxide.Ext.Discord.Exceptions.Entities
         /// Constructor
         /// </summary>
         /// <param name="message">Exception message</param>
-        private InvalidSnowflakeException(string message) : base(message)
-        {
-            
-        }
+        private InvalidSnowflakeException(string message) : base(message) { }
 
+        internal static InvalidSnowflakeException InvalidException(string paramName) => new InvalidSnowflakeException($"Invalid Snowflake ID. Parameter Name: {paramName}");
+        
         internal static void ThrowIfInvalid(Snowflake snowflake, string paramName)
         {
             if (!snowflake.IsValid())
             {
-                throw new InvalidSnowflakeException($"Invalid Snowflake ID. Parameter Name: {paramName}");
+                throw InvalidException(paramName);
             }
         }
         

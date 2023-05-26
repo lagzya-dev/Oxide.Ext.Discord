@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Interfaces.Promises;
 
 namespace Oxide.Ext.Discord.Entities.Stickers
 {
@@ -59,7 +59,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <param name="client">Client to use</param>
         /// <param name="callback">Callback with a list of Nitro sticker packs</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<List<DiscordStickerPack>> GetNitroStickerPacks(DiscordClient client)
+        public static IPromise<List<DiscordStickerPack>> GetNitroStickerPacks(DiscordClient client)
         {
             return client.Bot.Rest.Get<List<DiscordStickerPack>>(client,"sticker-packs");
         }

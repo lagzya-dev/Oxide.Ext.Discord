@@ -2,16 +2,20 @@ using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Cache.Entities;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Promise;
+using Oxide.Ext.Discord.Promises;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -28,7 +32,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="message">Message to send</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback with error information</param>
-        public static IDiscordPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, string message)
+        public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, string message)
         {
             MessageCreate create = new MessageCreate
             {
@@ -46,7 +50,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="embed">Embed to send</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback with error information</param>
-        public static IDiscordPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, DiscordEmbed embed)
+        public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, DiscordEmbed embed)
         {
             MessageCreate create = new MessageCreate
             {
@@ -64,7 +68,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="embeds">Embeds to send</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback with error information</param>
-        public static IDiscordPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, List<DiscordEmbed> embeds)
+        public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, List<DiscordEmbed> embeds)
         {
             MessageCreate create = new MessageCreate
             {
@@ -82,7 +86,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="message">Message to send</param>
         /// <param name="callback">Callback with the created message</param>
         /// <param name="error">Callback with error information</param>
-        public static IDiscordPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, MessageCreate message)
+        public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, DiscordClient client, MessageCreate message)
         {
             return SendMessage(client, player.GetDiscordUserId(), message);
         }
@@ -98,7 +102,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <param name="callback">Callback when the message is created</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<DiscordMessage> SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+        public static IPromise<DiscordMessage> SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(plugin, templateName, player).ToMessage(placeholders, message);
             return SendMessage(client, player.GetDiscordUserId(), template);
@@ -115,22 +119,22 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <param name="callback">Callback when the message is created</param>
         /// <param name="error">Callback when an error occurs with error information</param>
-        public static IDiscordPromise<DiscordMessage> SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+        public static IPromise<DiscordMessage> SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(plugin, templateName, player).ToMessage(placeholders, message);
             return SendMessage(client, player.GetDiscordUserId(), template);
         }
         
-        private static IDiscordPromise<DiscordMessage> SendMessage(DiscordClient client, Snowflake? id, MessageCreate message)
+        private static IPromise<DiscordMessage> SendMessage(DiscordClient client, Snowflake? id, MessageCreate message)
         {
             if (!client.IsConnected())
             {
-                return DiscordPromise<DiscordMessage>.FromResolve(null);
+                return Promise<DiscordMessage>.Rejected(DiscordClientException.NotConnected());
             }
             
             if (!id.HasValue)
             {
-                return DiscordPromise<DiscordMessage>.FromResolve(null);;
+                return Promise<DiscordMessage>.Rejected(InvalidSnowflakeException.InvalidException(nameof(id)));
             }
             
             DiscordChannel channel = client.Bot.DirectMessagesByUserId[id.Value];
