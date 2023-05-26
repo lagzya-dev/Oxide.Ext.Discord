@@ -32,11 +32,8 @@ namespace Oxide.Ext.Discord.Promises
             _onResolveInternal = InvokeResolveHandlersInternal;
         }
 
-        public static IPendingPromise Create()
-        {
-            return Create(false);
-        }
-        
+        public static IPendingPromise Create() => Create(false);
+
         internal static Promise Create(bool isInternal)
         {
             Promise promise = DiscordPool.Internal.Get<Promise>();
@@ -98,9 +95,7 @@ namespace Oxide.Ext.Discord.Promises
             ClearHandlers();
         }
         
-        /// <summary>
-        /// Resolve the promise with a particular value.
-        /// </summary>
+        ///<inheritdoc/>
         public void Resolve()
         {
             PromiseException.ThrowIfDisposed(this);
@@ -109,18 +104,14 @@ namespace Oxide.Ext.Discord.Promises
             InvokeResolveHandlers();
         }
 
-        /// <summary>
-        /// Set the name of the promise, useful for debugging.
-        /// </summary>
+        ///<inheritdoc/>
         public IPromise WithName(string name)
         {
             Name = name;
             return this;
         }
 
-        /// <summary>
-        /// Handle errors for the promise. 
-        /// </summary>
+        ///<inheritdoc/>
         public IPromise Catch(Action<Exception> onRejected)
         {
             if (State == PromiseState.Resolved)
@@ -149,6 +140,7 @@ namespace Oxide.Ext.Discord.Promises
             return resultPromise;
         }
 
+        ///<inheritdoc/>
         public IPromise Catch<TException>(Action<TException> onRejected) where TException : Exception
         {
             return Catch(ex =>
@@ -160,34 +152,16 @@ namespace Oxide.Ext.Discord.Promises
             });
         }
         
-        /// <summary>
-        /// Add a resolved callback that chains a value promise (optionally converting to a different value type).
-        /// </summary>
-        public IPromise<TConvert> Then<TConvert>(Func<IPromise<TConvert>> onResolved)
-        {
-            return Then(onResolved, null);
-        }
+        ///<inheritdoc/>
+        public IPromise<TConvert> Then<TConvert>(Func<IPromise<TConvert>> onResolved) => Then(onResolved, null);
 
-        /// <summary>
-        /// Add a resolved callback that chains a non-value promise.
-        /// </summary>
-        public IPromise Then(Func<IPromise> onResolved)
-        {
-            return Then(onResolved, null);
-        }
+        ///<inheritdoc/>
+        public IPromise Then(Func<IPromise> onResolved) => Then(onResolved, null);
 
-        /// <summary>
-        /// Add a resolved callback.
-        /// </summary>
-        public IPromise Then(Action onResolved)
-        {
-            return Then(onResolved, null);
-        }
+        ///<inheritdoc/>
+        public IPromise Then(Action onResolved) => Then(onResolved, null);
 
-        /// <summary>
-        /// Add a resolved callback and a rejected callback.
-        /// The resolved callback chains a value promise (optionally converting to a different value type).
-        /// </summary>
+        ///<inheritdoc/>
         public IPromise<TConvert> Then<TConvert>(Func<IPromise<TConvert>> onResolved, Func<Exception, IPromise<TConvert>> onRejected)
         {
             if (State == PromiseState.Resolved)
@@ -235,10 +209,7 @@ namespace Oxide.Ext.Discord.Promises
             return resultPromise;
         }
 
-        /// <summary>
-        /// Add a resolved callback and a rejected callback.
-        /// The resolved callback chains a non-value promise.
-        /// </summary>
+        ///<inheritdoc/>
         public IPromise Then(Func<IPromise> onResolved, Action<Exception> onRejected)
         {
             if (State == PromiseState.Resolved)
@@ -290,15 +261,14 @@ namespace Oxide.Ext.Discord.Promises
             return resultPromise;
         }
 
+        ///<inheritdoc/>
         public IPromise Then(IPromise promise)
         {
             Promise prom = (Promise)promise;
             return Then(prom._onResolve, prom.OnReject);
         }
         
-        /// <summary>
-        /// Add a resolved callback and a rejected callback.
-        /// </summary>
+        ///<inheritdoc/>
         public IPromise Then(Action onResolved, Action<Exception> onRejected)
         {
             if (State == PromiseState.Resolved)
@@ -374,35 +344,17 @@ namespace Oxide.Ext.Discord.Promises
             }
         }
 
-        /// <summary>
-        /// Chain an enumerable of promises, all of which must resolve.
-        /// The resulting promise is resolved when all of the promises have resolved.
-        /// It is rejected as soon as any of the promises have been rejected.
-        /// </summary>
-        public IPromise ThenAll(Func<IEnumerable<IPromise>> chain)
-        {
-            return Then( All(chain()));
-        }
+        ///<inheritdoc/>
+        public IPromise ThenAll(Func<IEnumerable<IPromise>> chain) => Then( All(chain()));
 
-        /// <summary>
-        /// Chain an enumerable of promises, all of which must resolve.
-        /// Converts to a non-value promise.
-        /// The resulting promise is resolved when all of the promises have resolved.
-        /// It is rejected as soon as any of the promises have been rejected.
-        /// </summary>
-        public IPromise<IEnumerable<TConvert>> ThenAll<TConvert>(Func<IEnumerable<IPromise<TConvert>>> chain)
-        {
-            return Then(() => Promise<TConvert>.All(chain()));
-        }
+        ///<inheritdoc/>
+        public IPromise<IEnumerable<TConvert>> ThenAll<TConvert>(Func<IEnumerable<IPromise<TConvert>>> chain) => Then(() => Promise<TConvert>.All(chain()));
 
         /// <summary>
         /// Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
         /// Returns a promise of a collection of the resolved results.
         /// </summary>
-        public static IPromise All(params IPromise[] promises)
-        {
-            return All((IEnumerable<IPromise>)promises); // Cast is required to force use of the other All function.
-        }
+        public static IPromise All(params IPromise[] promises) => All((IEnumerable<IPromise>)promises); // Cast is required to force use of the other All function.
 
         /// <summary>
         /// Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
@@ -446,25 +398,14 @@ namespace Oxide.Ext.Discord.Promises
             return resultPromise;
         }
 
-        /// <summary>
-        /// Chain a sequence of operations using promises.
-        /// Return a collection of functions each of which starts an async operation and yields a promise.
-        /// Each function will be called and each promise resolved in turn.
-        /// The resulting promise is resolved after each promise is resolved in sequence.
-        /// </summary>
-        public IPromise ThenSequence(Func<IEnumerable<Func<IPromise>>> chain)
-        {
-            return Then( Sequence(chain()));
-        }
+        ///<inheritdoc/>
+        public IPromise ThenSequence(Func<IEnumerable<Func<IPromise>>> chain) => Then( Sequence(chain()));
 
         /// <summary>
         /// Chain a number of operations using promises.
         /// Takes a number of functions each of which starts an async operation and yields a promise.
         /// </summary>
-        public static IPromise Sequence(params Func<IPromise>[] fns)
-        {
-            return Sequence((IEnumerable<Func<IPromise>>)fns);
-        }
+        public static IPromise Sequence(params Func<IPromise>[] fns) => Sequence((IEnumerable<Func<IPromise>>)fns);
 
         /// <summary>
         /// Chain a sequence of operations using promises.
@@ -477,6 +418,7 @@ namespace Oxide.Ext.Discord.Promises
             return promise;
         }
 
+        ///<inheritdoc/>
         public IPromise Finally(Action onComplete)
         {
             if (State == PromiseState.Resolved)
@@ -512,6 +454,7 @@ namespace Oxide.Ext.Discord.Promises
             return promise.Then(onComplete);
         }
 
+        ///<inheritdoc/>
         public IPromise ContinueWith(Func<IPromise> onComplete)
         {
             Promise promise = Create(IsInternal);
@@ -523,6 +466,7 @@ namespace Oxide.Ext.Discord.Promises
             return promise.Then(onComplete);
         }
 
+        ///<inheritdoc/>
         public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComplete)
         {
             Promise promise = Create(IsInternal);
@@ -534,6 +478,7 @@ namespace Oxide.Ext.Discord.Promises
             return promise.Then(onComplete);
         }
 
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             base.EnterPool();

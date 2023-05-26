@@ -17855,6 +17855,16 @@
             Interface for a promise that can be rejected.
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.Promises.IRejectable.Id">
+            <summary>
+            ID of the promise, useful for debugging.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.Promises.IRejectable.Name">
+            <summary>
+            Name of the promise, when set, useful for debugging.
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.Promises.IRejectable.Reject(System.Exception)">
             <summary>
             Reject the promise with an exception.
@@ -21725,14 +21735,10 @@
             <inheritdoc/>
         </member>
         <member name="P:Oxide.Ext.Discord.Promises.BasePromise.Id">
-            <summary>
-            ID of the promise, useful for debugging.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:Oxide.Ext.Discord.Promises.BasePromise.Name">
-            <summary>
-            Name of the promise, when set, useful for debugging.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:Oxide.Ext.Discord.Promises.BasePromise.State">
             <summary>
@@ -21745,14 +21751,18 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.BasePromise.Reject(System.Exception)">
-            <summary>
-            Reject the promise with an exception.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.BasePromise.InvokeRejectHandlers(System.Exception)">
             <summary>
             Invoke all resolve handlers.
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.LeavePool">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.EnterPool">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Promises.Promise">
             <summary>
@@ -21781,51 +21791,37 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Resolve">
-            <summary>
-            Resolve the promise with a particular value.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.WithName(System.String)">
-            <summary>
-            Set the name of the promise, useful for debugging.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Catch(System.Action{System.Exception})">
-            <summary>
-            Handle errors for the promise. 
-            </summary>
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise.Catch``1(System.Action{``0})">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Then``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <summary>
-            Add a resolved callback that chains a value promise (optionally converting to a different value type).
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
-            <summary>
-            Add a resolved callback that chains a non-value promise.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(System.Action)">
-            <summary>
-            Add a resolved callback.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Then``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}},System.Func{System.Exception,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <summary>
-            Add a resolved callback and a rejected callback.
-            The resolved callback chains a value promise (optionally converting to a different value type).
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise},System.Action{System.Exception})">
-            <summary>
-            Add a resolved callback and a rejected callback.
-            The resolved callback chains a non-value promise.
-            </summary>
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(Oxide.Ext.Discord.Interfaces.Promises.IPromise)">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(System.Action,System.Action{System.Exception})">
-            <summary>
-            Add a resolved callback and a rejected callback.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.AddHandlers(Oxide.Ext.Discord.Promises.ResolveHandler,Oxide.Ext.Discord.Promises.RejectHandler)">
             <summary>
@@ -21833,19 +21829,10 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.ThenAll(System.Func{System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise}})">
-            <summary>
-            Chain an enumerable of promises, all of which must resolve.
-            The resulting promise is resolved when all of the promises have resolved.
-            It is rejected as soon as any of the promises have been rejected.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.ThenAll``1(System.Func{System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}}})">
-            <summary>
-            Chain an enumerable of promises, all of which must resolve.
-            Converts to a non-value promise.
-            The resulting promise is resolved when all of the promises have resolved.
-            It is rejected as soon as any of the promises have been rejected.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.All(Oxide.Ext.Discord.Interfaces.Promises.IPromise[])">
             <summary>
@@ -21860,12 +21847,7 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.ThenSequence(System.Func{System.Collections.Generic.IEnumerable{System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise}}})">
-            <summary>
-            Chain a sequence of operations using promises.
-            Return a collection of functions each of which starts an async operation and yields a promise.
-            Each function will be called and each promise resolved in turn.
-            The resulting promise is resolved after each promise is resolved in sequence.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Sequence(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise}[])">
             <summary>
@@ -21878,6 +21860,18 @@
             Chain a sequence of operations using promises.
             Takes a collection of functions each of which starts an async operation and yields a promise.
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise.Finally(System.Action)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise.ContinueWith(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise.EnterPool">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Promises.PromiseState">
             <summary>
@@ -21911,9 +21905,7 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ClearHandlers">
-            <summary>
-            Helper function clear out all handlers after resolution or rejection.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.InvokeResolveHandlers(`0)">
             <summary>
@@ -21921,57 +21913,37 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Resolve(`0)">
-            <summary>
-            Resolve the promise with a particular value.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.WithName(System.String)">
-            <summary>
-            Set the name of the promise, useful for debugging.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Catch(System.Action{System.Exception})">
-            <summary>
-            Handle errors for the promise. 
-            </summary>
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Catch``1(System.Action{``0})">
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Catch(System.Func{System.Exception,`0})">
-            <summary>
-            Handle errors for the promise.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then``1(System.Func{`0,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <summary>
-            Add a resolved callback that chains a value promise (optionally converting to a different value type).
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then(System.Action{`0})">
-            <summary>
-            Add a resolved callback.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then``1(System.Func{`0,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}},System.Func{System.Exception,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <summary>
-            Add a resolved callback and a rejected callback.
-            The resolved callback chains a value promise (optionally converting to a different value type).
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then(System.Func{`0,Oxide.Ext.Discord.Interfaces.Promises.IPromise},System.Action{System.Exception})">
-            <summary>
-            Add a resolved callback and a rejected callback.
-            The resolved callback chains a non-value promise.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then(System.Action{`0},System.Action{System.Exception})">
-            <summary>
-            Add a resolved callback and a rejected callback.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then``1(System.Func{`0,``0})">
-            <summary>
-            Return a new promise with a different value.
-            May also change the type of the value.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.AddHandlers(Oxide.Ext.Discord.Promises.ResolveHandler{`0},Oxide.Ext.Discord.Promises.RejectHandler)">
             <summary>
@@ -21979,20 +21951,10 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ThenAll``1(System.Func{`0,System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}}})">
-            <summary>
-            Chain an enumerable of promises, all of which must resolve.
-            Returns a promise for a collection of the resolved results.
-            The resulting promise is resolved when all of the promises have resolved.
-            It is rejected as soon as any of the promises have been rejected.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ThenAll(System.Func{`0,System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise}})">
-            <summary>
-            Chain an enumerable of promises, all of which must resolve.
-            Converts to a non-value promise.
-            The resulting promise is resolved when all of the promises have resolved.
-            It is rejected as soon as any of the promises have been rejected.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.All(Oxide.Ext.Discord.Interfaces.Promises.IPromise{`0}[])">
             <summary>
@@ -22006,17 +21968,29 @@
             Returns a promise of a collection of the resolved results.
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Finally(System.Action)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ContinueWith(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.EnterPool">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Promises.RejectHandler">
             <summary>
             Represents a handler invoked when the promise is rejected.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Promises.RejectHandler.Callback">
+        <member name="F:Oxide.Ext.Discord.Promises.RejectHandler._callback">
             <summary>
             Callback fn.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Promises.RejectHandler.Rejectable">
+        <member name="F:Oxide.Ext.Discord.Promises.RejectHandler._rejectable">
             <summary>
             The promise that is rejected when there is an error while invoking the handler.
             </summary>

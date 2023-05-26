@@ -9,18 +9,12 @@ namespace Oxide.Ext.Discord.Exceptions.Promise
 
         internal static void ThrowIfNotPending(PromiseState state)
         {
-            if (state != PromiseState.Pending)
-            {
-                throw new PromiseException($"Attempt to reject a promise that is already in state: {state}, a promise can only be rejected when it is still in state: {PromiseState.Pending}");
-            }
+            if (state != PromiseState.Pending) throw new PromiseException($"Attempt to reject a promise that is already in state: {state}, a promise can only be rejected when it is still in state: {PromiseState.Pending}");
         }
 
         internal static void ThrowIfDisposed(BasePromise promise)
         {
-            if (promise.Disposed)
-            {
-                throw new ObjectDisposedException($"{promise.GetType().Name}");
-            }
+            if (promise.Disposed) throw new ObjectDisposedException($"{promise.GetType().Name}");
         }
     }
 }

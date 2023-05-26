@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Promises
     /// <summary>
     /// Represents a handler invoked when the promise is resolved.
     /// </summary>
-    public struct ResolveHandler
+    internal struct ResolveHandler
     {
         /// <summary>
         /// Callback fn.

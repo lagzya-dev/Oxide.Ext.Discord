@@ -15,14 +15,10 @@ namespace Oxide.Ext.Discord.Promises
 {
     public class BasePromise : BasePoolable, IRejectable
     {
-        /// <summary>
-        /// ID of the promise, useful for debugging.
-        /// </summary>
+        ///<inheritdoc/>
         public Snowflake Id { get; private set; }
 
-        /// <summary>
-        /// Name of the promise, when set, useful for debugging.
-        /// </summary>
+        ///<inheritdoc/>
         public string Name { get; protected set; }
 
         /// <summary>
@@ -42,17 +38,15 @@ namespace Oxide.Ext.Discord.Promises
         internal readonly Action<Exception> OnReject;
         private readonly Action _onRejectInternal;
         private readonly Action _dispose;
-        
-        public BasePromise()
+
+        protected BasePromise()
         {
             OnReject = Reject;
             _onRejectInternal = InvokeRejectHandlersInternal;
             _dispose = Dispose;
         }
-
-        /// <summary>
-        /// Reject the promise with an exception.
-        /// </summary>
+        
+        ///<inheritdoc/>
         public void Reject(Exception ex)
         {
             PromiseException.ThrowIfDisposed(this);
@@ -95,12 +89,14 @@ namespace Oxide.Ext.Discord.Promises
             Interface.Oxide.NextTick(_dispose);
         }
 
+        ///<inheritdoc/>
         protected override void LeavePool()
         {
             Id = SnowflakeIdFactory.Instance.Generate();
             base.LeavePool();
         }
 
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             Id = default(Snowflake);

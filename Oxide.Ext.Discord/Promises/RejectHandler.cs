@@ -14,28 +14,28 @@ namespace Oxide.Ext.Discord.Promises
         /// <summary>
         /// Callback fn.
         /// </summary>
-        public readonly Action<Exception> Callback;
+        private readonly Action<Exception> _callback;
 
         /// <summary>
         /// The promise that is rejected when there is an error while invoking the handler.
         /// </summary>
-        public readonly IRejectable Rejectable;
+        private readonly IRejectable _rejectable;
         
         public RejectHandler(Action<Exception> callback, IRejectable rejectable)
         {
-            Callback = callback;
-            Rejectable = rejectable;
+            _callback = callback;
+            _rejectable = rejectable;
         }
 
         public void Reject(Exception exception)
         {
             try
             {
-                Callback(exception);
+                _callback(exception);
             }
             catch (Exception ex)
             {
-                Rejectable.Reject(ex);
+                _rejectable.Reject(ex);
             }
         }
     }
