@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -42,7 +43,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         protected readonly TemplateType TemplateType;
         
         internal readonly DiscordConcurrentSet<TemplateId> RegisteredTemplates = new DiscordConcurrentSet<TemplateId>();
-        private readonly Hash<PluginId, string> _pluginTemplatePath = new Hash<PluginId, string>();
+        private readonly ConcurrentDictionary<PluginId, string> _pluginTemplatePath = new ConcurrentDictionary<PluginId, string>();
 
         /// <summary>
         /// Constructor
@@ -207,14 +208,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <returns></returns>
         protected string GetTemplateFolder(PluginId plugin)
         {
-            string folder = _pluginTemplatePath[plugin];
-            if (string.IsNullOrEmpty(folder))
+            if (!_pluginTemplatePath.TryGetValue(plugin, out string path))
             {
-                folder = Path.Combine(_rootDirectory, plugin.PluginName(), _templateTypeDirectory);
-                _pluginTemplatePath[plugin] = folder;
+                path = Path.Combine(_rootDirectory, plugin.PluginName(), _templateTypeDirectory);
+                _pluginTemplatePath[plugin] = path;
             }
-            
-            return folder;
+
+            return path;
         }
 
         internal virtual string GetTemplatePath(TemplateId id)
@@ -241,7 +241,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         {
             PluginId id = plugin.Id();
             RegisteredTemplates.RemoveWhere(t => t.PluginId == id);
-            _pluginTemplatePath.Remove(id);
+            _pluginTemplatePath.TryRemove(id, out string _);
         }
     }
 }
