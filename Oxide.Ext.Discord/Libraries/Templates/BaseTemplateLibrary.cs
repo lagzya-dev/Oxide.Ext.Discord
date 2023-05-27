@@ -13,7 +13,6 @@ using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Types;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates
 {
@@ -41,8 +40,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// The template type of this template library
         /// </summary>
         protected readonly TemplateType TemplateType;
-        
-        internal readonly DiscordConcurrentSet<TemplateId> RegisteredTemplates = new DiscordConcurrentSet<TemplateId>();
+
+        private readonly DiscordConcurrentSet<TemplateId> _registeredTemplates = new DiscordConcurrentSet<TemplateId>();
         private readonly ConcurrentDictionary<PluginId, string> _pluginTemplatePath = new ConcurrentDictionary<PluginId, string>();
 
         /// <summary>
@@ -71,7 +70,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 return;
             }
             
-            if (!RegisteredTemplates.Add(id))
+            if (!_registeredTemplates.Add(id))
             {
                 Logger.Warning("Trying to register template multiple times. Type: {0} {1}", TemplateType, id);
             }
@@ -240,7 +239,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             PluginId id = plugin.Id();
-            RegisteredTemplates.RemoveWhere(t => t.PluginId == id);
+            _registeredTemplates.RemoveWhere(t => t.PluginId == id);
             _pluginTemplatePath.TryRemove(id, out string _);
         }
     }
