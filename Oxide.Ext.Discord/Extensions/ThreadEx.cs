@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Threading
+namespace Oxide.Ext.Discord.Extensions
 {
-    internal static class ThreadState
+    internal static class ThreadEx
     {
         /// <summary>
         /// Main thread

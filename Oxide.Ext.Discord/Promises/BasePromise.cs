@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using Oxide.Core;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions.Promise;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Pooling;
-using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord.Promises
 {
@@ -77,7 +77,7 @@ namespace Oxide.Ext.Discord.Promises
         private void InvokeRejectHandlers(Exception ex)
         {
             Exception = ex;
-            if (ThreadState.IsMain || IsInternal)
+            if (ThreadEx.IsMain || IsInternal)
             {
                 InvokeRejectHandlersInternal();
                 return;
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Promises
 
         private void InvokeRejectHandlersInternal()
         {
-            for (int i = 0, maxI = Rejects.Count; i < maxI; ++i)
+            for (int i = 0; i < Rejects.Count; ++i)
             {
                 Rejects[i].Reject(Exception);
             }

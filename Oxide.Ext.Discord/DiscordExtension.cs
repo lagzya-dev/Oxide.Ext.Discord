@@ -4,6 +4,7 @@ using Oxide.Core;
 using Oxide.Core.Extensions;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Users;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Command;
@@ -18,7 +19,6 @@ using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord
 {
@@ -93,7 +93,7 @@ namespace Oxide.Ext.Discord
             GlobalLogger = DiscordLoggerFactory.Instance.CreateExtensionLogger(string.IsNullOrEmpty(TestVersion) ? DiscordLogLevel.Warning : DiscordLogLevel.Verbose);
             GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
             
-            ThreadState.Initialize();
+            ThreadEx.Initialize();
 
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {

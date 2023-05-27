@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Images;
-using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Guild;
 using Oxide.Ext.Discord.Exceptions.Entities.Images;

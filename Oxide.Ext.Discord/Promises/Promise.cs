@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
 using Oxide.Ext.Discord.Exceptions.Promise;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord.Promises
 {
@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.Promises
         /// </summary>
         private void InvokeResolveHandlers()
         {
-            if (ThreadState.IsMain || IsInternal)
+            if (ThreadEx.IsMain || IsInternal)
             {
                 InvokeResolveHandlersInternal();
                 return;
@@ -97,7 +97,7 @@ namespace Oxide.Ext.Discord.Promises
         {
             if (_resolves != null)
             {
-                for (int i = 0, maxI = _resolves.Count; i < maxI; i++)
+                for (int i = 0; i < _resolves.Count; i++)
                 {
                     _resolves[i].Resolve();
                 }
@@ -118,6 +118,7 @@ namespace Oxide.Ext.Discord.Promises
         ///<inheritdoc/>
         public IPromise WithName(string name)
         {
+            PromiseException.ThrowIfDisposed(this);
             Name = name;
             return this;
         }
@@ -125,6 +126,7 @@ namespace Oxide.Ext.Discord.Promises
         ///<inheritdoc/>
         public IPromise Catch(Action<Exception> onRejected)
         {
+            PromiseException.ThrowIfDisposed(this);
             if (State == PromiseState.Resolved)
             {
                 return this;
@@ -175,6 +177,7 @@ namespace Oxide.Ext.Discord.Promises
         ///<inheritdoc/>
         public IPromise<TConvert> Then<TConvert>(Func<IPromise<TConvert>> onResolved, Func<Exception, IPromise<TConvert>> onRejected)
         {
+            PromiseException.ThrowIfDisposed(this);
             if (State == PromiseState.Resolved)
             {
                 try
@@ -223,6 +226,7 @@ namespace Oxide.Ext.Discord.Promises
         ///<inheritdoc/>
         public IPromise Then(Func<IPromise> onResolved, Action<Exception> onRejected)
         {
+            PromiseException.ThrowIfDisposed(this);
             if (State == PromiseState.Resolved)
             {
                 try
@@ -282,6 +286,7 @@ namespace Oxide.Ext.Discord.Promises
         ///<inheritdoc/>
         public IPromise Then(Action onResolved, Action<Exception> onRejected)
         {
+            PromiseException.ThrowIfDisposed(this);
             if (State == PromiseState.Resolved)
             {
                 try
@@ -373,7 +378,7 @@ namespace Oxide.Ext.Discord.Promises
         /// </summary>
         public static IPromise All(IEnumerable<IPromise> promisesEnumerable)
         {
-            List<IPromise> promises = new List<IPromise>();
+            List<IPromise> promises = DiscordPool.Internal.GetList<IPromise>();
             promises.AddRange(promisesEnumerable);
             if (promises.Count == 0)
             {
@@ -405,6 +410,8 @@ namespace Oxide.Ext.Discord.Promises
                            }
                        });
             }
+            
+            DiscordPool.Internal.FreeList(promises);
 
             return resultPromise;
         }

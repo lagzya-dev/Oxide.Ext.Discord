@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
 using Oxide.Ext.Discord.Exceptions.Promise;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Threading;
 
 namespace Oxide.Ext.Discord.Promises
 {
@@ -98,41 +98,6 @@ namespace Oxide.Ext.Discord.Promises
         }
 
         ///<inheritdoc/>
-        protected override void ClearHandlers()
-        {
-            _resolves.Clear();
-            base.ClearHandlers();
-        }
-
-        /// <summary>
-        /// Invoke all resolve handlers.
-        /// </summary>
-        private void InvokeResolveHandlers(TPromised value)
-        {
-            _resolveValue = value;
-            if (ThreadState.IsMain || IsInternal)
-            {
-                InvokeResolveHandlersInternal();
-                return;
-            }
-            
-            Interface.Oxide.NextTick(_onResolveInternal);
-        }
-
-        private void InvokeResolveHandlersInternal()
-        {
-            if (_resolves != null)
-            {
-                for (int i = 0, maxI = _resolves.Count; i < maxI; i++)
-                {
-                    _resolves[i].Resolve(_resolveValue);
-                }
-            }
-
-            ClearHandlers();
-        }
-
-        ///<inheritdoc/>
         public void Resolve(TPromised value)
         {
             PromiseException.ThrowIfDisposed(this);
@@ -149,6 +114,31 @@ namespace Oxide.Ext.Discord.Promises
         {
             Name = name;
             return this;
+        }
+        
+        /// <summary>
+        /// Invoke all resolve handlers.
+        /// </summary>
+        private void InvokeResolveHandlers(TPromised value)
+        {
+            _resolveValue = value;
+            if (ThreadEx.IsMain || IsInternal)
+            {
+                InvokeResolveHandlersInternal();
+                return;
+            }
+            
+            Interface.Oxide.NextTick(_onResolveInternal);
+        }
+
+        private void InvokeResolveHandlersInternal()
+        {
+            for (int i = 0; i < _resolves.Count; i++)
+            {
+                _resolves[i].Resolve(_resolveValue);
+            }
+
+            ClearHandlers();
         }
 
         ///<inheritdoc/>
@@ -420,7 +410,7 @@ namespace Oxide.Ext.Discord.Promises
         /// </summary>
         public static IPromise<IEnumerable<TPromised>> All(IEnumerable<IPromise<TPromised>> promisesEnumerable)
         {
-            List<IPromise<TPromised>> promises = new List<IPromise<TPromised>>();
+            List<IPromise<TPromised>> promises = DiscordPool.Internal.GetList<IPromise<TPromised>>();
             promises.AddRange(promisesEnumerable);
             
             if (promises.Count == 0)
@@ -458,6 +448,8 @@ namespace Oxide.Ext.Discord.Promises
                         }
                     });
             }
+            
+            DiscordPool.Internal.FreeList(promises);
 
             return resultPromise;
         }
@@ -524,6 +516,14 @@ namespace Oxide.Ext.Discord.Promises
             Catch(e => promise.Resolve());
 
             return promise.Then(onComplete);
+        }
+        
+        
+        ///<inheritdoc/>
+        protected override void ClearHandlers()
+        {
+            _resolves.Clear();
+            base.ClearHandlers();
         }
         
         ///<inheritdoc/>
