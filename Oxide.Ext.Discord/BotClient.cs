@@ -470,7 +470,7 @@ namespace Oxide.Ext.Discord
             if (existing != null)
             {
                 Logger.Verbose($"{nameof(BotClient)}.{nameof(AddGuildOrUpdate)} Updating Existing Guild {{0}}", guild.Id);
-                existing.Update(guild);
+                existing.Edit(guild);
             }
             else
             {

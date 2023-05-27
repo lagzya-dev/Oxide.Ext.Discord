@@ -11,15 +11,6 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
     public class AutoModRuleModify : IDiscordValidation
     {
         /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="triggerType">Trigger type being modified</param>
-        public AutoModRuleModify(AutoModTriggerType triggerType)
-        {
-            TriggerType = triggerType;
-        }
-        
-        /// <summary>
         /// Rule name
         /// </summary>
         [JsonProperty("name")]
@@ -66,6 +57,15 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// </summary>
         [JsonIgnore]
         public AutoModTriggerType TriggerType { get; private set; }
+        
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="triggerType">Trigger type being modified</param>
+        public AutoModRuleModify(AutoModTriggerType triggerType)
+        {
+            TriggerType = triggerType;
+        }
         
         ///<inheritdoc/>
         public void Validate()

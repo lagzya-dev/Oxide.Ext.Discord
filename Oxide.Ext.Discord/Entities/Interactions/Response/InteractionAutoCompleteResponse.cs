@@ -14,9 +14,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.Response
         /// Constructor with initial message
         /// </summary>
         /// <param name="message">Message to use for the response</param>
-        public InteractionAutoCompleteResponse(InteractionAutoCompleteMessage message) : base(InteractionResponseType.ApplicationCommandAutocompleteResult, message)
-        {
-            
-        }
+        public InteractionAutoCompleteResponse(InteractionAutoCompleteMessage message) : base(InteractionResponseType.ApplicationCommandAutocompleteResult, message) { }
     }
 }

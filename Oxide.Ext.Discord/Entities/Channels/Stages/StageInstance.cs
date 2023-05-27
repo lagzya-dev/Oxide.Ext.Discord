@@ -62,7 +62,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="create">Create Stage Instance Object</param>
-        public static IPromise<StageInstance> CreateStageInstance(DiscordClient client, StageInstanceCreate create)
+        public static IPromise<StageInstance> Create(DiscordClient client, StageInstanceCreate create)
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
             InvalidSnowflakeException.ThrowIfInvalid(create.ChannelId, nameof(create.ChannelId));
@@ -75,7 +75,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to get the stage instance for</param>
-        public static IPromise<StageInstance> GetStageInstance(DiscordClient client, Snowflake channelId)
+        public static IPromise<StageInstance> Get(DiscordClient client, Snowflake channelId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             return client.Bot.Rest.Get<StageInstance>(client,$"stage-instances/{channelId}");
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="update">Update for the stage instance</param>
-        public IPromise<StageInstance> ModifyStageInstance(DiscordClient client, StageInstanceUpdate update)
+        public IPromise<StageInstance> Edit(DiscordClient client, StageInstanceUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
             return client.Bot.Rest.Patch<StageInstance>(client,$"stage-instances/{ChannelId}", update);
@@ -100,12 +100,12 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// See <a href="https://discord.com/developers/docs/resources/stage-instance#delete-stage-instance">Delete Stage Instance</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        public IPromise DeleteStageInstance(DiscordClient client)
+        public IPromise Delete(DiscordClient client)
         {
             return client.Bot.Rest.Delete(client,$"stage-instances/{ChannelId}");
         }
 
-        internal StageInstance Update(StageInstance stage)
+        internal StageInstance Edit(StageInstance stage)
         {
             StageInstance previous = (StageInstance)MemberwiseClone();
             if (stage.Topic != null)

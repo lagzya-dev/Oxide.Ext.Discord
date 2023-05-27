@@ -290,7 +290,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="response">Response to respond with</param>
-        public IPromise CreateInteractionResponse(DiscordClient client, BaseInteractionResponse response)
+        public IPromise CreateResponse(DiscordClient client, BaseInteractionResponse response)
         {
             if (response == null) throw new ArgumentNullException(nameof(response));
             InvalidInteractionResponseException.ThrowIfAlreadyResponded(_hasResponded);
@@ -308,10 +308,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="type">Type of the interaction response</param>
         /// <param name="response">Interaction Callback Message Data</param>
-        public IPromise CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionCallbackData response = null)
+        public IPromise CreateResponse(DiscordClient client, InteractionResponseType type, InteractionCallbackData response = null)
         {
             InteractionResponse data = new InteractionResponse(type, response);
-            return CreateInteractionResponse(client, data);
+            return CreateResponse(client, data);
         }
 
         /// <summary>
@@ -324,13 +324,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message to send (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null</exception>
-        public IPromise CreateTemplateInteractionResponse(DiscordClient client, Plugin plugin, InteractionResponseType type, string templateName, InteractionCallbackData message = null, PlaceholderData placeholders = null)
+        public IPromise CreateTemplateResponse(DiscordClient client, Plugin plugin, InteractionResponseType type, string templateName, InteractionCallbackData message = null, PlaceholderData placeholders = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
             InteractionCallbackData template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, this).ToMessage(placeholders, message);
-            return CreateInteractionResponse(client, type, template);
+            return CreateResponse(client, type, template);
         }
         
         /// <summary>
@@ -342,13 +342,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise CreateTemplateModalResponse(DiscordClient client, Plugin plugin, string templateName, InteractionModalMessage message = null, PlaceholderData placeholders = null)
+        public IPromise CreateModalResponse(DiscordClient client, Plugin plugin, string templateName, InteractionModalMessage message = null, PlaceholderData placeholders = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
             InteractionModalMessage template = DiscordExtension.DiscordModalTemplates.GetLocalizedTemplate(plugin, templateName, this).ToModal(placeholders, message);
-            return CreateInteractionResponse(client, template);
+            return CreateResponse(client, template);
         }
 
         /// <summary>
@@ -358,10 +358,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="client">Client to use</param>
         /// <param name="type">Type of the interaction response</param>
         /// <param name="builder">Builder for this response</param>
-        public IPromise CreateInteractionResponse(DiscordClient client, InteractionResponseType type, InteractionResponseBuilder builder)
+        public IPromise CreateResponse(DiscordClient client, InteractionResponseType type, InteractionResponseBuilder builder)
         {
             InteractionResponse data = new InteractionResponse(type, builder.Build());
-            return CreateInteractionResponse(client, data);
+            return CreateResponse(client, data);
         }
         
         /// <summary>
@@ -370,10 +370,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="message">Message for this response</param>
-        public IPromise CreateInteractionResponse(DiscordClient client, InteractionAutoCompleteMessage message)
+        public IPromise CreateResponse(DiscordClient client, InteractionAutoCompleteMessage message)
         {
             InteractionAutoCompleteResponse data = new InteractionAutoCompleteResponse(message);
-            return CreateInteractionResponse(client, data);
+            return CreateResponse(client, data);
         }
         
         /// <summary>
@@ -382,9 +382,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="builder">Auto Complete Builder for this response</param>
-        public IPromise CreateInteractionResponse(DiscordClient client, InteractionAutoCompleteBuilder builder)
+        public IPromise CreateResponse(DiscordClient client, InteractionAutoCompleteBuilder builder)
         {
-            return CreateInteractionResponse(client, builder.Build());
+            return CreateResponse(client, builder.Build());
         }
         
         /// <summary>
@@ -393,10 +393,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="message">Message for this response</param>
-        public IPromise CreateInteractionResponse(DiscordClient client, InteractionModalMessage message)
+        public IPromise CreateResponse(DiscordClient client, InteractionModalMessage message)
         {
             InteractionModalResponse data = new InteractionModalResponse(message);
-            return CreateInteractionResponse(client, data);
+            return CreateResponse(client, data);
         }
         
         /// <summary>
@@ -405,9 +405,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="builder">Modal Builder for this response</param>
-        public IPromise CreateInteractionResponse(DiscordClient client, InteractionModalBuilder builder)
+        public IPromise CreateResponse(DiscordClient client, InteractionModalBuilder builder)
         {
-            return CreateInteractionResponse(client, builder.Build());
+            return CreateResponse(client, builder.Build());
         }
         
         /// <summary>
@@ -420,7 +420,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public IPromise DefferResponse(DiscordClient client)
         {
             InteractionResponseType type = Type == InteractionType.ApplicationCommand ? InteractionResponseType.DeferredChannelMessageWithSource : InteractionResponseType.DeferredUpdateMessage;
-            return CreateInteractionResponse(client, type);
+            return CreateResponse(client, type);
         }
 
         /// <summary>
@@ -429,7 +429,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         /// <param name="client">Client to use</param>
         /// /// <param name="message">Updated message</param>
-        public IPromise<DiscordMessage> EditOriginalInteractionResponse(DiscordClient client, DiscordMessage message)
+        public IPromise<DiscordMessage> EditOriginalResponse(DiscordClient client, DiscordMessage message)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
@@ -445,13 +445,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise<DiscordMessage> EditTemplateOriginalInteractionResponse(DiscordClient client, Plugin plugin, string templateName, DiscordMessage message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> EditTemplateOriginalResponse(DiscordClient client, Plugin plugin, string templateName, DiscordMessage message = null, PlaceholderData placeholders = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
             DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, this).ToMessage(placeholders, message);
-            return EditOriginalInteractionResponse(client, template);
+            return EditOriginalResponse(client, template);
         }
 
         /// <summary>
@@ -459,7 +459,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response">Delete Original Interaction Response</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        public IPromise DeleteOriginalInteractionResponse(DiscordClient client)
+        public IPromise DeleteOriginalResponse(DiscordClient client)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);

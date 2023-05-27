@@ -734,7 +734,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         //https://discord.com/developers/docs/topics/gateway-events#guild-update
         private void HandleDispatchGuildUpdate(DiscordGuild guild)
         {
-            DiscordGuild previous =_client.GetGuild(guild.Id)?.Update(guild);
+            DiscordGuild previous =_client.GetGuild(guild.Id)?.Edit(guild);
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildUpdated, guild, previous);
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(HandleDispatchGuildUpdate)} Guild ID: {{0}}", guild.Id);
         }
@@ -1830,7 +1830,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
             else
             {
-                StageInstance previous = existing.Update(stage);
+                StageInstance previous = existing.Edit(stage);
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordStageInstanceUpdated, stage, previous, guild);
             }
         }

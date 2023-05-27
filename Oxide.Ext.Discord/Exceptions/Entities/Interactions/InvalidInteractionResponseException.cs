@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions
         {
             if (!responded)
             {
-                throw new InvalidInteractionResponseException($"You cannot use this endpoint because {nameof(DiscordInteraction)}.{nameof(DiscordInteraction.CreateInteractionResponse)} hasn't been called yet");
+                throw new InvalidInteractionResponseException($"You cannot use this endpoint because {nameof(DiscordInteraction)}.{nameof(DiscordInteraction.CreateResponse)} hasn't been called yet");
             }
         }
         

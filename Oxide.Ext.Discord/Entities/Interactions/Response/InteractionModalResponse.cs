@@ -14,9 +14,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.Response
         /// Constructor with message
         /// </summary>
         /// <param name="message">Message to use for the response</param>
-        public InteractionModalResponse(InteractionModalMessage message) : base(InteractionResponseType.Modal, message)
-        {
-            
-        }
+        public InteractionModalResponse(InteractionModalMessage message) : base(InteractionResponseType.Modal, message) { }
     }
 }

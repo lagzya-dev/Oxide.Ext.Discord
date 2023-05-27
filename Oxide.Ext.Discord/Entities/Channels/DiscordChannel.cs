@@ -327,7 +327,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild to create the channel in</param>
         /// <param name="channel">Channel to create</param>
-        public static IPromise<DiscordChannel> CreateGuildChannel(DiscordClient client, Snowflake guildId, ChannelCreate channel)
+        public static IPromise<DiscordChannel> Create(DiscordClient client, Snowflake guildId, ChannelCreate channel)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
             return client.Bot.Rest.Post<DiscordChannel>(client,$"guilds/{guildId}/channels", channel);
@@ -340,7 +340,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channelId">ID of the channel to get</param>
-        public static IPromise<DiscordChannel> GetChannel(DiscordClient client, Snowflake channelId)
+        public static IPromise<DiscordChannel> Get(DiscordClient client, Snowflake channelId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             return client.Bot.Rest.Get<DiscordChannel>(client,$"channels/{channelId}");
@@ -352,7 +352,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="update">Update to be made to the channel. All fields are optional</param>
-        public IPromise<DiscordChannel> ModifyGroupDmChannel(DiscordClient client, GroupDmChannelUpdate update)
+        public IPromise<DiscordChannel> EditGroupDmChannel(DiscordClient client, GroupDmChannelUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
             return client.Bot.Rest.Patch<DiscordChannel>(client,$"channels/{Id}", update);
@@ -365,7 +365,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="update">Update to be made to the channel. All fields are optional</param>
-        public IPromise<DiscordChannel> ModifyGuildChannel(DiscordClient client, GuildChannelUpdate update)
+        public IPromise<DiscordChannel> EditGuildChannel(DiscordClient client, GuildChannelUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
             return client.Bot.Rest.Patch<DiscordChannel>(client,$"channels/{Id}", update);
@@ -378,7 +378,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="update">Update to be made to the channel. All fields are optional</param>
-        public IPromise<DiscordChannel> ModifyThreadChannel(DiscordClient client, ThreadChannelUpdate update)
+        public IPromise<DiscordChannel> EditThreadChannel(DiscordClient client, ThreadChannelUpdate update)
         {
             if (update == null) throw new ArgumentNullException(nameof(update));
             return client.Bot.Rest.Patch<DiscordChannel>(client,$"channels/{Id}", update);
@@ -390,7 +390,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// See <a href="https://discord.com/developers/docs/resources/channel#deleteclose-channel">Delete/Close Channel</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        public IPromise<DiscordChannel> DeleteChannel(DiscordClient client)
+        public IPromise<DiscordChannel> Delete(DiscordClient client)
         {
             return client.Bot.Rest.Delete<DiscordChannel>(client,$"channels/{Id}");
         }
@@ -403,7 +403,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="request">Optional request filters</param>
-        public IPromise<List<DiscordMessage>> GetChannelMessages(DiscordClient client, ChannelMessagesRequest request = null)
+        public IPromise<List<DiscordMessage>> GetMessages(DiscordClient client, ChannelMessagesRequest request = null)
         {
             return client.Bot.Rest.Get<List<DiscordMessage>>(client,$"channels/{Id}/messages{request?.ToQueryString()}");
         }
@@ -415,7 +415,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID of the message</param>
-        public IPromise<DiscordMessage> GetChannelMessage(DiscordClient client, Snowflake messageId)
+        public IPromise<DiscordMessage> GetMessage(DiscordClient client, Snowflake messageId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
             return client.Bot.Rest.Get<DiscordMessage>(client,$"channels/{Id}/messages/{messageId}");
@@ -554,7 +554,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="overwrite">Overwrite to edit with changes</param>
-        public IPromise EditChannelPermissions(DiscordClient client, Overwrite overwrite)
+        public IPromise EditPermissions(DiscordClient client, Overwrite overwrite)
         {
             if (overwrite == null) throw new ArgumentNullException(nameof(overwrite));
             InvalidSnowflakeException.ThrowIfInvalid(overwrite.Id, nameof(overwrite.Id));
@@ -569,7 +569,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="overwrite">Overwrite to delete</param>
-        public IPromise DeleteChannelPermission(DiscordClient client, Overwrite overwrite) => DeleteChannelPermission(client, overwrite.Id);
+        public IPromise DeletePermission(DiscordClient client, Overwrite overwrite) => DeletePermission(client, overwrite.Id);
 
         /// <summary>
         /// Delete a channel permission overwrite for a user or role in a channel.
@@ -579,7 +579,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="overwriteId">Overwrite ID to delete</param>
-        public IPromise DeleteChannelPermission(DiscordClient client, Snowflake overwriteId)
+        public IPromise DeletePermission(DiscordClient client, Snowflake overwriteId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(overwriteId, nameof(overwriteId));
             return client.Bot.Rest.Delete(client,$"channels/{Id}/permissions/{overwriteId}");
@@ -593,7 +593,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <exception cref="Exception">Thrown when the channel type is Dm or GroupDm</exception>
-        public IPromise<List<DiscordInvite>> GetChannelInvites(DiscordClient client)
+        public IPromise<List<DiscordInvite>> GetInvites(DiscordClient client)
         {
             InvalidChannelException.ThrowIfNotGuildChannel(this, "You can only get channel invites for guild channels");
             return client.Bot.Rest.Get<List<DiscordInvite>>(client,$"channels/{Id}/invites");
@@ -607,7 +607,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="invite">Invite to create</param>
-        public IPromise<DiscordInvite> CreateChannelInvite(DiscordClient client, ChannelInvite invite)
+        public IPromise<DiscordInvite> CreateInvite(DiscordClient client, ChannelInvite invite)
         {
             if (invite == null) throw new ArgumentNullException(nameof(invite));
             return client.Bot.Rest.Post<DiscordInvite>(client,$"channels/{Id}/invites", invite);

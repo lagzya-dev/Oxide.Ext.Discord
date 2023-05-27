@@ -94,7 +94,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="stickerId">ID of the sticker</param>
-        public static IPromise<DiscordSticker> GetSticker(DiscordClient client, Snowflake stickerId)
+        public static IPromise<DiscordSticker> Get(DiscordClient client, Snowflake stickerId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(stickerId, nameof(stickerId));
             return client.Bot.Rest.Get<DiscordSticker>(client,$"stickers/{stickerId}");

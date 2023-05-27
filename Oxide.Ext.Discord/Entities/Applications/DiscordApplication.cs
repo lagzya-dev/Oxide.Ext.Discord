@@ -13,7 +13,6 @@ using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Promises;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Applications
 {
@@ -306,7 +305,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#get-application-role-connection-metadata-records">Get Application Role Connection Metadata Records</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        public IPromise<List<ApplicationRoleConnectionMetadata>> GetApplicationRoleConnectionMetadataRecords(DiscordClient client)
+        public IPromise<List<ApplicationRoleConnectionMetadata>> GetRoleConnectionMetadata(DiscordClient client)
         {
             return client.Bot.Rest.Get<List<ApplicationRoleConnectionMetadata>>(client,$"applications/{Id}/role-connections/metadata");
         }
@@ -317,7 +316,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="records">The records to update on the application</param>
-        public IPromise<List<ApplicationRoleConnectionMetadata>> UpdateApplicationRoleConnectionMetadataRecords(DiscordClient client, List<ApplicationRoleConnectionMetadata> records)
+        public IPromise<List<ApplicationRoleConnectionMetadata>> EditRoleConnectionMetadata(DiscordClient client, List<ApplicationRoleConnectionMetadata> records)
         {
             DiscordApplicationException.ThrowIfInvalidApplicationRoleConnectionMetadataLength(records);
             return client.Bot.Rest.Put<List<ApplicationRoleConnectionMetadata>>(client,$"applications/{Id}/role-connections/metadata", records);

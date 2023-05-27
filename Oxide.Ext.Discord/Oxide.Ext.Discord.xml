@@ -3926,14 +3926,14 @@
             <param name="client">Client to use</param>
             <param name="withLocalizations">Should the response include localizations</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetApplicationRoleConnectionMetadataRecords(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetRoleConnectionMetadata(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a list of application role connection metadata objects for the given application.
             See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#get-application-role-connection-metadata-records">Get Application Role Connection Metadata Records</a>
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.UpdateApplicationRoleConnectionMetadataRecords(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.UpdateRoleConnectionMetadata(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata})">
             <summary>
             Updates and returns a list of application role connection metadata objects for the given application.
             See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records">Update Application Role Connection Metadata Records</a>
@@ -4193,7 +4193,7 @@
             Channel ids that should not be affected by the rule (Maximum of 50)
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.ListRules(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.GetAll(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Modify an existing rule
             Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
@@ -4202,7 +4202,7 @@
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to list the rules for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.GetRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Get(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Get a single rule
             Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
@@ -4212,7 +4212,7 @@
             <param name="guildId">Guild ID of the rule</param>
             <param name="ruleId">Rule ID to get the rule for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.CreateRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate)">
             <summary>
             Create a new rule
             Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
@@ -4222,7 +4222,7 @@
             <param name="guildId">Guild ID of the rule</param>
             <param name="create">Rule to be created</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Modify(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify)">
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify)">
             <summary>
             Modify an existing rule
             Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
@@ -4292,12 +4292,6 @@
             Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule-json-params">Auto Mod Rule Modify</a>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.#ctor(Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="triggerType">Trigger type being modified</param>
-        </member>
         <member name="P:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.Name">
             <summary>
             Rule name
@@ -4337,6 +4331,12 @@
             <summary>
             Rule <see cref="T:Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType"/>
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.#ctor(Oxide.Ext.Discord.Entities.AutoMod.AutoModTriggerType)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="triggerType">Trigger type being modified</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify.Validate">
             <inheritdoc/>
@@ -4902,7 +4902,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.ChannelCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.ChannelCreate)">
             <summary>
             Create a new channel object for the guild.
             Requires the MANAGE_CHANNELS permission.
@@ -4912,7 +4912,7 @@
             <param name="guildId">Guild to create the channel in</param>
             <param name="channel">Channel to create</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Get(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Get a channel by ID
             See <a href="https://discord.com/developers/docs/resources/channel#get-channel">Get Channel</a>
@@ -4921,7 +4921,7 @@
             <param name="client">Client to use</param>
             <param name="channelId">ID of the channel to get</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ModifyGroupDmChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GroupDmChannelUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.UpdateGroupDmChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GroupDmChannelUpdate)">
             <summary>
             Update a group dm channel's settings.
             See <a href="https://discord.com/developers/docs/resources/channel#modify-channel">Modify Channel</a>
@@ -4929,7 +4929,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to be made to the channel. All fields are optional</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ModifyGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.UpdateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate)">
             <summary>
             Update a guild channel's settings.
             Requires the MANAGE_CHANNELS permission for the guild.
@@ -4938,7 +4938,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to be made to the channel. All fields are optional</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.ModifyThreadChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.UpdateThreadChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate)">
             <summary>
             Update a thread channel's settings.
             Requires the MANAGE_THREADS permission for the guild.
@@ -4947,7 +4947,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to be made to the channel. All fields are optional</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DeleteChannel(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Delete(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Delete a channel, or close a private message.
             Requires the MANAGE_CHANNELS or MANAGE_THREADS permission for the guild depending on the channel type.
@@ -4955,7 +4955,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetChannelMessages(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelMessagesRequest)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetMessages(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelMessagesRequest)">
             <summary>
             Returns the messages for a channel.
             If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user.
@@ -4965,7 +4965,7 @@
             <param name="client">Client to use</param>
             <param name="request">Optional request filters</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetChannelMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns a specific message in the channel.
             If operating on a guild channel, this endpoint requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user.
@@ -5044,7 +5044,7 @@
             <param name="client">Client to use</param>
             <param name="messageIds">Collect of message ids to delete (Between 2 - 100)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.EditChannelPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.EditPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite)">
             <summary>
             Edit the channel permission overwrites for a user or role in a channel.
             Only usable for guild channels.
@@ -5054,7 +5054,7 @@
             <param name="client">Client to use</param>
             <param name="overwrite">Overwrite to edit with changes</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DeleteChannelPermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DeletePermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Overwrite)">
             <summary>
             Delete a channel permission overwrite for a user or role in a channel.
             Only usable for guild channels.
@@ -5064,7 +5064,7 @@
             <param name="client">Client to use</param>
             <param name="overwrite">Overwrite to delete</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DeleteChannelPermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DeletePermission(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Delete a channel permission overwrite for a user or role in a channel.
             Only usable for guild channels.
@@ -5074,7 +5074,7 @@
             <param name="client">Client to use</param>
             <param name="overwriteId">Overwrite ID to delete</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetChannelInvites(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.GetInvites(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a list of invite objects (with invite metadata) for the channel.
             Only usable for guild channels.
@@ -5084,7 +5084,7 @@
             <param name="client">Client to use</param>
             <exception cref="T:System.Exception">Thrown when the channel type is Dm or GroupDm</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateChannelInvite(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelInvite)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateInvite(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelInvite)">
             <summary>
             Create a new invite object for the channel.
             Only usable for guild channels.
@@ -5548,7 +5548,7 @@
             The id of the scheduled event for this Stage instance
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.CreateStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceCreate)">
             <summary>
             Creates a new Stage instance associated to a Stage channel.
             Requires the user to be a moderator of the Stage channel.
@@ -5557,7 +5557,7 @@
             <param name="client">Client to use</param>
             <param name="create">Create Stage Instance Object</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.GetStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.Get(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Gets the stage instance associated with the Stage channel, if it exists.
             See <a href="https://discord.com/developers/docs/resources/stage-instance#get-stage-instance">Get Stage Instance</a>
@@ -5565,7 +5565,7 @@
             <param name="client">Client to use</param>
             <param name="channelId">Channel ID to get the stage instance for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.ModifyStageInstance(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceUpdate)">
             <summary>
             Modifies fields of an existing Stage instance.
             Requires the user to be a moderator of the Stage channel.
@@ -5574,7 +5574,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update for the stage instance</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.DeleteStageInstance(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.Delete(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Deletes the Stage instance.
             Requires the user to be a moderator of the Stage channel.
@@ -7974,7 +7974,7 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCreate)">
             <summary>
             Create a new guild.
             See <a href="https://discord.com/developers/docs/resources/guild#create-guild">Create Guild</a>
@@ -7982,7 +7982,7 @@
             <param name="client">Client to use</param>
             <param name="create">Guild Create Object</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Get(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns the guild object for the given id
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild">Get Guild</a>
@@ -7998,7 +7998,7 @@
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to get preview for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuild(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Update(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Modify a guild's settings.
             Requires the MANAGE_GUILD permission.
@@ -8006,7 +8006,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuild(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Delete(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Delete a guild permanently.
             User must be owner
@@ -8014,7 +8014,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildChannels(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetChannels(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a list of guild channel objects.
             Does not include threads
@@ -8022,7 +8022,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.ChannelCreate)">
             <summary>
             Create a new channel object for the guild.
             Requires the MANAGE_CHANNELS permission.
@@ -8031,7 +8031,7 @@
             <param name="client">Client to use</param>
             <param name="channel">Channel to create</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildChannelPosition})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildChannelPosition})">
             <summary>
             Modify the positions of a set of channel objects for the guild.
             Requires MANAGE_CHANNELS permission.
@@ -8041,14 +8041,14 @@
             <param name="client">Client to use</param>
             <param name="positions">List new channel positions for each channel</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListActiveGuildThreads(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListActiveThreads(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order.
             See <a href="https://discord.com/developers/docs/resources/guild#list-active-threads">List Active Threads</a>
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns a guild member object for the specified user.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-member">Get Guild Member</a>
@@ -8056,7 +8056,7 @@
             <param name="client">Client to use</param>
             <param name="userId">UserID to get guild member for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListGuildMembers(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildListMembers)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Listembers(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildListMembers)">
             <summary>
             Returns a list of guild member objects that are members of the guild.
             In the future, this endpoint will be restricted in line with our Privileged Intents
@@ -8064,14 +8064,14 @@
             <param name="client">Client to use</param>
             <param name="list">Query string request for the list</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.SearchGuildMembers(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildSearchMembers)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.SearchMembers(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildSearchMembers)">
             <summary>
             Searches for guild members by username or nickname
             </summary>
             <param name="client">Client to use</param>
             <param name="search">Username or nickname to match</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberAdd)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberAdd)">
             <summary>
             Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. 
             See <a href="https://discord.com/developers/docs/resources/guild#add-guild-member">Add Guild Member</a>
@@ -8080,7 +8080,7 @@
             <param name="userId">User ID of the user to add</param>
             <param name="member">Member to copy from</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberUpdate)">
             <summary>
             Modify attributes of a guild member
             See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member">Modify Guild Member</a>
@@ -8089,7 +8089,7 @@
             <param name="userId">User ID of the user to update</param>
             <param name="update">Changes to make to the user</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyUsersNick(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateMemberNick(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String)">
             <summary>
             Modify attributes of a guild member
             See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member">Modify Guild Member</a>
@@ -8098,7 +8098,7 @@
             <param name="userId">User ID of the user to update</param>
             <param name="nick">Nickname for the user</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyCurrentMember(Oxide.Ext.Discord.DiscordClient,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateCurrentMember(Oxide.Ext.Discord.DiscordClient,System.String)">
             <summary>
             Modifies the current members nickname in the guild
             See <a href="https://discord.com/developers/docs/resources/guild#modify-current-member">Modify Current Member</a>
@@ -8106,7 +8106,7 @@
             <param name="client">Client to use</param>
             <param name="nick">New members nickname (1-32 characters)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
             <summary>
             Adds a role to a guild member.
             Requires the MANAGE_ROLES permission.
@@ -8116,7 +8116,7 @@
             <param name="user">User to add role to</param>
             <param name="role">Role to add</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.AddMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Adds a role to a guild member.
             Requires the MANAGE_ROLES permission.
@@ -8126,7 +8126,7 @@
             <param name="userId">User ID to add role to</param>
             <param name="roleId">Role ID to add</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Users.DiscordUser,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
             <summary>
             Removes a role from a guild member.
             Requires the MANAGE_ROLES permission.
@@ -8136,7 +8136,7 @@
             <param name="user">User to remove role form</param>
             <param name="role">Role to remove</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveGuildMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveMemberRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Removes a role from a guild member.
             Requires the MANAGE_ROLES permission.
@@ -8146,7 +8146,7 @@
             <param name="userId">User ID to remove role form</param>
             <param name="roleId">Role ID to remove</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember)">
             <summary>
             Remove a member from a guild.
             Requires KICK_MEMBERS permission.
@@ -8155,7 +8155,7 @@
             <param name="client">Client to use</param>
             <param name="member">Guild Member to remove</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveGuildMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Remove a member from a guild.
             Requires KICK_MEMBERS permission.
@@ -8164,7 +8164,7 @@
             <param name="client">Client to use</param>
             <param name="userId">User ID of the user to remove</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildBans(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildBansRequest)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetBans(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildBansRequest)">
             <summary>
             Returns a list of ban objects for the users banned from this guild.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-bans">Get Guild Bans</a>
@@ -8172,7 +8172,7 @@
             <param name="client">Client to use</param>
             <param name="request">Request params for retrieving guild bans</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns a guild ban for a specific user
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-ban">Get Guild Ban</a>
@@ -8181,7 +8181,7 @@
             <param name="client">Client to use</param>
             <param name="userId">User ID to get guild ban for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildMember,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate)">
             <summary>
             Create a guild ban, and optionally delete previous messages sent by the banned user.
             Requires the BAN_MEMBERS permission.
@@ -8191,7 +8191,7 @@
             <param name="member">Guild Member to ban</param>
             <param name="ban">User ban information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildBanCreate)">
             <summary>
             Create a guild ban, and optionally delete previous messages sent by the banned user.
             Requires the BAN_MEMBERS permission.
@@ -8201,7 +8201,7 @@
             <param name="userId">User ID to ban</param>
             <param name="ban">User ban information</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveGuildBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RemoveBan(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Remove the ban for a user.
             Requires the BAN_MEMBERS permissions.
@@ -8210,14 +8210,14 @@
             <param name="client">Client to use</param>
             <param name="userId">User ID of the user to unban</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildRoles(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetRoles(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a list of role objects for the guild.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-roles">Get Guild Roles</a>
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
             <summary>
             Create a new role for the guild.
             Requires the MANAGE_ROLES permission.
@@ -8227,7 +8227,7 @@
             <param name="client">Client to use</param>
             <param name="role">New role to create</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition})">
             <summary>
             Modify the positions of a set of role objects for the guild.
             Requires the MANAGE_ROLES permission.
@@ -8237,7 +8237,7 @@
             <param name="client">Client to use</param>
             <param name="positions">List of role with updated positions</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
             <summary>
             Modify a guild role.
             Requires the MANAGE_ROLES permission.
@@ -8247,7 +8247,7 @@
             <param name="client">Client to use</param>
             <param name="role">Role to update</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
             <summary>
             Modify a guild role.
             Requires the MANAGE_ROLES permission.
@@ -8258,7 +8258,7 @@
             <param name="roleId">Role ID to update</param>
             <param name="role">Role to update</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildMfaLevel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateMfaLevel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel)">
             <summary>
             Modify a guild's MFA level.
             Requires guild ownership.
@@ -8267,7 +8267,7 @@
             <param name="client">Client to use</param>
             <param name="level"><see cref="T:Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel"/> to set</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
             <summary>
             Delete a guild role.
             Requires the MANAGE_ROLES permission
@@ -8276,7 +8276,7 @@
             <param name="client">Client to use</param>
             <param name="role">Role to Delete</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Delete a guild role.
             Requires the MANAGE_ROLES permission
@@ -8285,7 +8285,7 @@
             <param name="client">Client to use</param>
             <param name="roleId">Role ID to Delete</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildPruneCount(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneGet)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetPruneCount(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneGet)">
             <summary>
             Returns an object with one 'pruned' key indicating the number of members that would be removed in a prune operation.
             Requires the KICK_MEMBERS permission.
@@ -8294,7 +8294,7 @@
             <param name="client">Client to use</param>
             <param name="prune">Prune get request</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.BeginGuildPrune(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneBegin)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.BeginPrune(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildPruneBegin)">
             <summary>
             Begin a prune operation.
             Requires the KICK_MEMBERS permission.
@@ -8303,7 +8303,7 @@
             <param name="client">Client to use</param>
             <param name="prune">Prune begin request</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildVoiceRegions(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetVoiceRegions(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a list of voice region objects for the guild.
             Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled.
@@ -8311,7 +8311,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildInvites(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetInvites(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a list of invite objects (with invite metadata) for the guild.
             Requires the MANAGE_GUILD permission.
@@ -8319,7 +8319,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildIntegrations(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetIntegrations(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a list of integration objects for the guild.
             Requires the MANAGE_GUILD permission.
@@ -8327,7 +8327,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Integrations.Integration)">
             <summary>
             Delete the attached integration object for the guild.
             Deletes any associated webhooks and kicks the associated bot if there is one.
@@ -8337,7 +8337,7 @@
             <param name="client">Client to use</param>
             <param name="integration">Integration to delete</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteIntegration(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Delete the attached integration object for the guild.
             Deletes any associated webhooks and kicks the associated bot if there is one.
@@ -8347,7 +8347,7 @@
             <param name="client">Client to use</param>
             <param name="integrationId">Integration ID to delete</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildWidgetSettings(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetWidgetSettings(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a guild widget object.
             Requires the MANAGE_GUILD permission.
@@ -8355,7 +8355,7 @@
             </summary>
             <param name="client">client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildWidget(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildWidget)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateWidget(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildWidget)">
             <summary>
             Modify a guild widget object for the guild.
             Requires the MANAGE_GUILD permission.
@@ -8364,21 +8364,21 @@
             <param name="client">Client to use</param>
             <param name="widget">Updated widget</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildWidget(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetWidget(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns the widget for the guild.
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-widget">Get Guild Widget</a>
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildWelcomeScreen(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetWelcomeScreen(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns the Welcome Screen object for the guild.
             Requires the `MANAGE_GUILD` permission.
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyWelcomeScreen(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateWelcomeScreen(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate)">
             <summary>
             Modify the guild's Welcome Screen.
             Requires the MANAGE_GUILD permission.
@@ -8387,7 +8387,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to be made to the welcome screen</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildVanityUrl(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetVanityUrl(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a partial invite object for guilds with that feature enabled.
             Requires the MANAGE_GUILD permission.
@@ -8395,14 +8395,14 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListGuildEmojis(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListEmojis(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns a list of emoji objects for the given guild.
             See <a href="https://discord.com/developers/docs/resources/emoji#list-guild-emojis">List Guild Emojis</a>
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns an emoji object for the given guild and emoji IDs.
             See <a href="https://discord.com/developers/docs/resources/emoji#get-guild-emoji">Get Guild Emoji</a>
@@ -8410,7 +8410,7 @@
             <param name="client">Client to use</param>
             <param name="emojiId">Emoji to lookup</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuildEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.EmojiCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Emojis.EmojiCreate)">
             <summary>
             Create a new emoji for the guild.
             Requires the MANAGE_EMOJIS permission.
@@ -8420,7 +8420,7 @@
             <param name="client">Client to use</param>
             <param name="emoji">Emoji to create</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateGuildEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Emojis.EmojiUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Emojis.EmojiUpdate)">
             <summary>
             Modify the given emoji.
             Requires the MANAGE_EMOJIS permission.
@@ -8431,7 +8431,7 @@
             <param name="emojiId">Emoji ID to update</param>
             <param name="emoji">Emoji update</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Delete the given emoji.
             Requires the MANAGE_EMOJIS permission.
@@ -8440,7 +8440,7 @@
             <param name="client">Client to use</param>
             <param name="emojiId">Emoji ID to delete</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyCurrentUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateCurrentUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate)">
             <summary>
             Modifies the current user's voice state.
             See <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state">Update Current User Voice State</a>
@@ -8448,7 +8448,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to the guild voice state</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate)">
             <summary>
             Modifies another user's voice state.
             See <a href="https://discord.com/developers/docs/resources/guild#modify-user-voice-state">Update Users Voice State</a>
@@ -8457,7 +8457,7 @@
             <param name="userId">User to modify</param>
             <param name="update">Update to the guild voice state</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListGuildStickers(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListStickers(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns an array of sticker objects for the given guild.
             Includes user fields if the bot has the MANAGE_EMOJIS_AND_STICKERS permission.
@@ -8465,7 +8465,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns a sticker object for the given guild and sticker IDs.
             Includes the user field if the bot has the MANAGE_EMOJIS_AND_STICKERS permission.
@@ -8474,7 +8474,7 @@
             <param name="client">Client to use</param>
             <param name="stickerId">ID of the sticker to get</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateGuildSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Stickers.GuildStickerCreate)">
             <summary>
             Create a new sticker for the guild.
             Requires the MANAGE_EMOJIS_AND_STICKERS permission.
@@ -8484,7 +8484,7 @@
             <param name="client">Client to use</param>
             <param name="sticker">Sticker to create</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ModifyGuildSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Stickers.DiscordSticker)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Stickers.DiscordSticker)">
             <summary>
             Modify the given sticker.
             Requires the MANAGE_EMOJIS_AND_STICKERS permission.
@@ -8494,7 +8494,7 @@
             <param name="client">Client to use</param>
             <param name="sticker">Sticker to modify</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteGuildSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.DeleteSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Delete the given sticker.
             Requires the MANAGE_EMOJIS_AND_STICKERS permission.
@@ -8504,15 +8504,15 @@
             See <a href="https://discord.com/developers/docs/resources/sticker#delete-guild-sticker">Delete Guild Sticker</a>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.ListAutoModRules(Oxide.Ext.Discord.DiscordClient)">
-            <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.ListRules(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)"/>
+            <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.GetAll(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)"/>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetAutoModRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
-            <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.GetRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)"/>
+            <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Get(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)"/>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.CreateAutoModRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate)">
-            <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.CreateRule(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate)"/>
+            <inheritdoc cref="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleCreate)"/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetGuildOnboarding(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetOnboarding(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Returns the <see cref="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding"/> for the guild.
             
@@ -9660,7 +9660,7 @@
             The number of users subscribed to the scheduled event
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.ListForGuild(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.GetGuildEvents(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventLookup)">
             <summary>
             Returns a list of guild scheduled event objects for the given guild.
             See <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild">List Scheduled Events for Guild</a>
@@ -9690,7 +9690,7 @@
             <param name="eventId">Id of the scheduled event</param>
             <param name="lookup">Query string parameters</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Modify(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate)">
             <summary>
             Modify a guild scheduled event.
             Returns the modified <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">guild scheduled event</see> object on success.
@@ -10869,7 +10869,7 @@
             <param name="command">Custom commands string</param>
             <returns>Mentioned Custom Command string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate)">
             <summary>
             Edit a command.
             Updates will be available in all guilds after 1 hour.
@@ -10895,7 +10895,7 @@
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID of the guild to get permissions for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.EditPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdatePermissions)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.UpdatePermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdatePermissions)">
             <summary>
             Edits command permissions for a specific command for your application in a guild.
             Warning: This endpoint will overwrite existing permissions for the command in that guild
@@ -11078,7 +11078,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Response.BaseInteractionResponse)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Response.BaseInteractionResponse)">
             <summary>
             Create a response to an Interaction from the gateway.
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11086,7 +11086,7 @@
             <param name="client">Client to use</param>
             <param name="response">Response to respond with</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData)">
             <summary>
             Create a response to an Interaction from the gateway.
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11095,7 +11095,7 @@
             <param name="type">Type of the interaction response</param>
             <param name="response">Interaction Callback Message Data</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateTemplateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,System.String,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateTemplateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,System.String,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Creates a interaction message response from a message template
             </summary>
@@ -11107,7 +11107,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <exception cref="T:System.ArgumentNullException">Thrown if plugin or templateName is null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateTemplateModalResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateModalResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Creates a interaction modal response from a modal template 
             </summary>
@@ -11118,7 +11118,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder)">
             <summary>
             Create a response to an Interaction from the gateway.
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11127,7 +11127,7 @@
             <param name="type">Type of the interaction response</param>
             <param name="builder">Builder for this response</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionAutoCompleteMessage)">
             <summary>
             Create a Auto Complete response to an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11135,7 +11135,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message for this response</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder)">
             <summary>
             Create a Auto Complete response to an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11143,7 +11143,7 @@
             <param name="client">Client to use</param>
             <param name="builder">Auto Complete Builder for this response</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage)">
             <summary>
             Create a Modal response to an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11151,7 +11151,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message for this response</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder)">
             <summary>
             Create a Modal response to an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11168,7 +11168,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.UpdateOriginalResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
             <summary>
             Edits the initial Interaction response
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response">Edit Original Interaction Response</a>
@@ -11176,7 +11176,7 @@
             <param name="client">Client to use</param>
             /// <param name="message">Updated message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditTemplateOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.UpdateTemplateOriginalResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Edit a interaction response with a message template
             </summary>
@@ -11187,7 +11187,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.DeleteOriginalInteractionResponse(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.DeleteOriginalResponse(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Deletes the initial Interaction response
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response">Delete Original Interaction Response</a>
@@ -11210,7 +11210,7 @@
             <param name="client">Client to use</param>
             <param name="builder">Builder for the follow up</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.UpdateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupUpdate)">
             <summary>
             Edits a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message">Edit Followup Message</a>
@@ -12166,7 +12166,7 @@
             Guild scheduled event data, only included if guild_scheduled_event_id contains a valid guild scheduled event id
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.GetInvite(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Invites.InviteLookup)">
+        <member name="M:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.Get(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Invites.InviteLookup)">
             <summary>
             Returns an invite object for the given code.
             See <a href="https://discord.com/developers/docs/resources/invite#get-invite">Get Invite</a>
@@ -12175,7 +12175,7 @@
             <param name="inviteCode">Invite code</param>
             <param name="lookup">Lookup query string parameters for the request</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.DeleteInvite(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.Delete(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Delete an invite.
             Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild.
@@ -12593,7 +12593,7 @@
             File Attachments to add to the message on edit
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.MessageCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.MessageCreate)">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -12604,7 +12604,7 @@
             <param name="channelId">Channel ID to send the message to</param>
             <param name="message">Message to be created</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Builders.Messages.DiscordMessageBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Builders.Messages.DiscordMessageBuilder)">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -12615,7 +12615,7 @@
             <param name="channelId">Channel ID to send the message to</param>
             <param name="builder">Builder for the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String)">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -12626,7 +12626,7 @@
             <param name="channelId">Channel ID to send the message to</param>
             <param name="message">Content of the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -12637,7 +12637,7 @@
             <param name="channelId">Channel ID to send the message to</param>
             <param name="embed">Embed to be send in the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.CreateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed})">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed})">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -12671,7 +12671,7 @@
             <param name="message">Message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.GetChannelMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.GetMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns a specific message in the channel.
             If operating on a guild channel, this endpoint requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user.
@@ -12867,7 +12867,7 @@
             <param name="client">Client to use</param>
             <param name="emoji">Emoji to delete all reactions for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditMessage(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Update(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Edit a previously sent message.
             The fields content, embed, allowed_mentions and flags can be edited by the original message author.
@@ -12878,7 +12878,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
             <summary>
             Edit a previously sent message.
             The fields content, embed, allowed_mentions and flags can be edited by the original message author.
@@ -12890,7 +12890,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message to edit</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditGlobalTemplateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.UpdateGlobalTemplateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Edit a message using a global message template
             </summary>
@@ -12899,7 +12899,7 @@
             <param name="templateName">Template Name</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditTemplateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.UpdateTemplateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Edit a message using a localized message template
             </summary>
@@ -12909,7 +12909,7 @@
             <param name="language">Oxide language to use</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.DeleteMessage(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Delete(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Delete a message.
             If operating on a guild channel and trying to delete a message that was not sent by the current user, this endpoint requires the MANAGE_MESSAGES permission.
@@ -12917,7 +12917,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.PinMessage(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Pin(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Pin a message in a channel.
             Requires the MANAGE_MESSAGES permission.
@@ -12925,7 +12925,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.UnpinMessage(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Unpin(Oxide.Ext.Discord.DiscordClient)">
             <summary>
             Delete a pinned message in a channel.
             Requires the MANAGE_MESSAGES permission.
@@ -14411,7 +14411,7 @@
             Returns the Url for the sticker
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.GetSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Entities.Stickers.DiscordSticker.Get(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns a sticker object for the given sticker ID.
             See <a href="https://discord.com/developers/docs/resources/sticker#get-sticker">Get Sticker</a>

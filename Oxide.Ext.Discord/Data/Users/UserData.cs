@@ -1,5 +1,4 @@
 using System;
-using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Cache.Entities;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Entities;

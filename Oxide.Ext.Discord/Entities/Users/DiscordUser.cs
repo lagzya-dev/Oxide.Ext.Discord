@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Cache.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;

@@ -5,7 +5,6 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Promises;
 
 namespace Oxide.Ext.Discord.Entities.Gateway
 {

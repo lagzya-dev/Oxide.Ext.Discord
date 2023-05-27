@@ -9,10 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.Response
     public abstract class BaseInteractionMessage : BaseMessageCreate
     {
         ///<inheritdoc/>
-        protected override void ValidateRequiredFields()
-        {
-            
-        }
+        protected override void ValidateRequiredFields() { }
 
         ///<inheritdoc/>
         protected override void ValidateFlags()

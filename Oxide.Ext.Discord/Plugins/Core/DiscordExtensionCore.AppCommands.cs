@@ -123,14 +123,14 @@ namespace Oxide.Ext.Discord.Plugins.Core
             if (cache != null && !cache.IsExpired)
             {
                 AddCommands(builder, search, cache.Commands);
-                interaction.CreateInteractionResponse(client.GetFirstClient(), builder.Build());
+                interaction.CreateResponse(client.GetFirstClient(), builder.Build());
                 return;
             }
 
             CacheCommands(client, commandCache =>
             {
                 AddCommands(builder, search, commandCache.Commands);
-                interaction.CreateInteractionResponse(client.GetFirstClient(), builder.Build());
+                interaction.CreateResponse(client.GetFirstClient(), builder.Build());
             });
         }
         

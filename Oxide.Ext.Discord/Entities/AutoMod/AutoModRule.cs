@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to list the rules for</param>
-        public static IPromise<List<AutoModRule>> ListRules(DiscordClient client, Snowflake guildId)
+        public static IPromise<List<AutoModRule>> GetAll(DiscordClient client, Snowflake guildId)
         {
             return client.Bot.Rest.Get<List<AutoModRule>>(client,$"guilds/{guildId}/auto-moderation/rules");
         }
@@ -97,7 +97,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID of the rule</param>
         /// <param name="ruleId">Rule ID to get the rule for</param>
-        public static IPromise<AutoModRule> GetRule(DiscordClient client, Snowflake guildId, Snowflake ruleId)
+        public static IPromise<AutoModRule> Get(DiscordClient client, Snowflake guildId, Snowflake ruleId)
         {
             return client.Bot.Rest.Get<AutoModRule>(client,$"guilds/{guildId}/auto-moderation/rules/{ruleId}");
         }
@@ -110,7 +110,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID of the rule</param>
         /// <param name="create">Rule to be created</param>
-        public static IPromise<AutoModRule> CreateRule(DiscordClient client, Snowflake guildId, AutoModRuleCreate create)
+        public static IPromise<AutoModRule> Create(DiscordClient client, Snowflake guildId, AutoModRuleCreate create)
         {
             return client.Bot.Rest.Post<AutoModRule>(client,$"guilds/{guildId}/auto-moderation/rules", create);
         }
@@ -122,7 +122,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="modify"><see cref="AutoModRuleModify"/></param>
-        public IPromise<AutoModRule> Modify(DiscordClient client, AutoModRuleModify modify)
+        public IPromise<AutoModRule> Edit(DiscordClient client, AutoModRuleModify modify)
         {
             return client.Bot.Rest.Patch<AutoModRule>(client,$"guilds/{GuildId}/auto-moderation/rules/{Id}", modify);
         }

@@ -262,7 +262,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="message">Message to be created</param>
-        public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, MessageCreate message)
+        public static IPromise<DiscordMessage> Create(DiscordClient client, Snowflake channelId, MessageCreate message)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             UserData userData = client.Bot.DirectMessagesByChannelId[channelId]?.UserData;
@@ -291,9 +291,9 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="builder">Builder for the message</param>
-        public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, DiscordMessageBuilder builder)
+        public static IPromise<DiscordMessage> Create(DiscordClient client, Snowflake channelId, DiscordMessageBuilder builder)
         {
-            return CreateMessage(client, channelId, builder.Build());
+            return Create(client, channelId, builder.Build());
         }
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="message">Content of the message</param>
-        public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, string message)
+        public static IPromise<DiscordMessage> Create(DiscordClient client, Snowflake channelId, string message)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             MessageCreate createMessage = new MessageCreate
@@ -313,7 +313,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 Content = message
             };
 
-            return CreateMessage(client, channelId, createMessage);
+            return Create(client, channelId, createMessage);
         }
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="embed">Embed to be send in the message</param>
-        public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, DiscordEmbed embed)
+        public static IPromise<DiscordMessage> Create(DiscordClient client, Snowflake channelId, DiscordEmbed embed)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             MessageCreate createMessage = new MessageCreate
@@ -333,7 +333,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 Embeds = new List<DiscordEmbed> {embed}
             };
 
-            return CreateMessage(client, channelId, createMessage);
+            return Create(client, channelId, createMessage);
         }
         
         /// <summary>
@@ -345,7 +345,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to send the message to</param>
         /// <param name="embeds">Embeds to be send in the message</param>
-        public static IPromise<DiscordMessage> CreateMessage(DiscordClient client, Snowflake channelId, List<DiscordEmbed> embeds)
+        public static IPromise<DiscordMessage> Create(DiscordClient client, Snowflake channelId, List<DiscordEmbed> embeds)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             MessageCreate createMessage = new MessageCreate
@@ -353,7 +353,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 Embeds = embeds
             };
 
-            return CreateMessage(client, channelId, createMessage);
+            return Create(client, channelId, createMessage);
         }
         
         /// <summary>
@@ -368,7 +368,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public static IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
-            return CreateMessage(client, channelId, template);
+            return Create(client, channelId, template);
         }
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         public static IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
-            return CreateMessage(client, channelId, template);
+            return Create(client, channelId, template);
         }
 
         /// <summary>
@@ -395,7 +395,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID where the message is</param>
         /// <param name="messageId">Message ID of the message</param>
-        public static IPromise<DiscordMessage> GetChannelMessage(DiscordClient client, Snowflake channelId, Snowflake messageId)
+        public static IPromise<DiscordMessage> GetMessage(DiscordClient client, Snowflake channelId, Snowflake messageId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
@@ -416,7 +416,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
                 message.MessageReference = new MessageReference {MessageId = Id, GuildId = GuildId};
             }
             
-            return CreateMessage(client, ChannelId, message);
+            return Create(client, ChannelId, message);
         }
         
         /// <summary>
@@ -688,26 +688,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#edit-message">Edit Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        public IPromise<DiscordMessage> EditMessage(DiscordClient client)
+        public IPromise<DiscordMessage> Edit(DiscordClient client, MessageUpdate update)
         {
-            return client.Bot.Rest.Patch<DiscordMessage>(client,$"channels/{ChannelId}/messages/{Id}", this);
+            return client.Bot.Rest.Patch<DiscordMessage>(client,$"channels/{ChannelId}/messages/{Id}", update);
         }
 
-        /// <summary>
-        /// Edit a previously sent message.
-        /// The fields content, embed, allowed_mentions and flags can be edited by the original message author.
-        /// Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
-        /// When specifying flags, ensure to include all previously set flags/bits in addition to ones that you are modifying.
-        /// Only flags documented in the table below may be modified by users (unsupported flag changes are currently ignored without error).
-        /// See <a href="https://discord.com/developers/docs/resources/channel#edit-message">Edit Message</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="message">Message to edit</param>
-        public static IPromise<DiscordMessage> EditMessage(DiscordClient client, DiscordMessage message)
-        {
-            return client.Bot.Rest.Patch<DiscordMessage>(client,$"channels/{message.ChannelId}/messages/{message.Id}", message);
-        }
-        
         /// <summary>
         /// Edit a message using a global message template
         /// </summary>
@@ -715,10 +700,10 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template Name</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateName, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateName, PlaceholderData placeholders = null, MessageUpdate update = null)
         {
-            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, this);
-            return EditMessage(client, template);
+            MessageUpdate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, update);
+            return Edit(client, template);
         }
         
         /// <summary>
@@ -729,10 +714,10 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="templateName">Template Name</param>
         /// <param name="language">Oxide language to use</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData placeholders = null, MessageUpdate update = null)
         {
-            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, this);
-            return EditMessage(client, template);
+            MessageUpdate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, update);
+            return Edit(client, template);
         }
 
         /// <summary>
@@ -741,7 +726,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#delete-message">Delete Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        public IPromise DeleteMessage(DiscordClient client)
+        public IPromise Delete(DiscordClient client)
         {
             InvalidMessageException.ThrowIfCantBeDeleted(this);
             return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}");
@@ -753,7 +738,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#add-pinned-channel-message">Add Pinned Channel Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        public IPromise PinMessage(DiscordClient client)
+        public IPromise Pin(DiscordClient client)
         {
             return client.Bot.Rest.Put(client,$"channels/{ChannelId}/pins/{Id}", null);
         }
@@ -764,7 +749,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message">Unpin Pinned Channel Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        public IPromise UnpinMessage(DiscordClient client)
+        public IPromise Unpin(DiscordClient client)
         {
             return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/pins/{Id}");
         }

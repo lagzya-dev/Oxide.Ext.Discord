@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         public void SendTemplateMessage(DiscordClient client, string key, DiscordInteraction interaction, PlaceholderData placeholders = null)
         {
-            interaction.CreateTemplateInteractionResponse(client, this, InteractionResponseType.ChannelMessageWithSource, key, new InteractionCallbackData
+            interaction.CreateTemplateResponse(client, this, InteractionResponseType.ChannelMessageWithSource, key, new InteractionCallbackData
             {
                 Flags = interaction.GuildId.HasValue ? MessageFlags.Ephemeral : (MessageFlags?)null
             }, placeholders);

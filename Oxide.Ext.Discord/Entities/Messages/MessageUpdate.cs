@@ -1,33 +1,38 @@
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Interfaces.Entities.Templates;
 
-namespace Oxide.Ext.Discord.Entities.Webhooks
+namespace Oxide.Ext.Discord.Entities.Messages
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/resources/webhook#edit-webhook-message-jsonform-params">Webhook Edit Message Structure</a>
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params">Message Update Structure</a> sent in a channel within Discord..
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class WebhookEditMessage : IFileAttachments, IDiscordValidation, IDiscordMessageTemplate
+    public class MessageUpdate : IFileAttachments, IDiscordValidation, IDiscordMessageTemplate
     {
         /// <summary>
-        /// The message contents (up to 2000 characters)
+        /// Contents of the message up to 2000 characters
         /// </summary>
         [JsonProperty("content")]
         public string Content { get; set; }
         
         /// <summary>
-        /// Embedded rich content (Up to 10 embeds)
+        /// Up to 10 rich embeds (up to 6000 characters)
         /// </summary>
         [JsonProperty("embeds")]
         public List<DiscordEmbed> Embeds { get; set; }
+        
+        /// <summary>
+        /// Edit the flags of a message (only SUPPRESS_EMBEDS can currently be set/unset)
+        /// </summary>
+        [JsonProperty("flags")]
+        public MessageFlags? Flags { get; set; }
         
         /// <summary>
         /// Allowed mentions for the message
@@ -40,7 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         [JsonProperty("components")]
         public List<ActionRowComponent> Components { get; set; }
-        
+
         /// <summary>
         /// Attachments for the message
         /// </summary>
@@ -51,20 +56,20 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// Attachments for a discord message
         /// </summary>
         public List<MessageFileAttachment> FileAttachments { get; set; }
-        
-        /// <summary>
-        /// Adds a new embed to the list of embed to send
-        /// </summary>
-        /// <param name="embed">Embed to add</param>
-        /// <returns>This</returns>
-        /// <exception cref="IndexOutOfRangeException">Thrown if more than 10 embeds are added in a send as that is the discord limit</exception>
-        public WebhookEditMessage AddEmbed(DiscordEmbed embed)
-        {
-            if (Embeds == null) Embeds = new List<DiscordEmbed>();
-            if (Embeds.Count >= 10) throw new IndexOutOfRangeException("Only 10 embed are allowed per message");
 
-            Embeds.Add(embed);
-            return this;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public MessageUpdate() { }
+
+        /// <summary>
+        /// Constructor for message to be edited
+        /// Only sets the Attachments field
+        /// </summary>
+        /// <param name="message"></param>
+        public MessageUpdate(DiscordMessage message)
+        {
+            Attachments = message.Attachments?.Values.ToList();
         }
         
         /// <summary>
@@ -92,10 +97,12 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             FileAttachments.Add(new MessageFileAttachment(filename, data, contentType));
             Attachments.Add(new MessageAttachment {Id = new Snowflake((ulong)FileAttachments.Count), Filename = filename, Description = description});
         }
-
+        
+        ///<inheritdoc/>
         public void Validate()
         {
             InvalidMessageException.ThrowIfInvalidContent(Content);
+            InvalidMessageException.ThrowIfInvalidFlags(Flags, MessageFlags.SuppressEmbeds, "Invalid Message Flags Used for Channel Message. Only supported flags are MessageFlags.SuppressEmbeds");
         }
     }
 }
