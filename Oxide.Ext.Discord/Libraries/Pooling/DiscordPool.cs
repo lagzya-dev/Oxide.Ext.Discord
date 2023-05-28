@@ -37,7 +37,7 @@ namespace Oxide.Ext.Discord.Libraries.Pooling
         internal void CreateInternal(Plugin plugin)
         {
             Internal = CreatePoolInternal(plugin);
-            Internal.SetSettings(new PoolSettings());
+            Internal.SetSettings(PoolSettings.CreateInternal());
         }
         
         private DiscordPluginPool CreatePoolInternal(Plugin plugin)
