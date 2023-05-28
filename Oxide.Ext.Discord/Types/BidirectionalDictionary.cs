@@ -1,21 +1,38 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Types
 {
-    public class BidirectionalDictionary<TKey, TValue>
+    /// <summary>
+    /// A Dictionary that stores the keys -> values and values -> keys
+    /// </summary>
+    /// <typeparam name="TKey">Type of the key</typeparam>
+    /// <typeparam name="TValue">Type of the value</typeparam>
+    internal class BidirectionalDictionary<TKey, TValue>
     {
         private readonly Dictionary<TKey, TValue> _keyToValue = new Dictionary<TKey, TValue>();
         private readonly Dictionary<TValue, TKey> _valueToKey = new Dictionary<TValue, TKey>();
 
-        public int Count => _keyToValue.Count;
-        
-        public bool IsReadOnly => false;
+        /// <summary>
+        /// Count of the 
+        /// </summary>
+        public int Count => MathExt.Min(_keyToValue.Count, _valueToKey.Count);
 
+        /// <summary>
+        /// Returns true of the dictionary contains the given key
+        /// </summary>
+        /// <param name="key">Key to check for</param>
+        /// <returns></returns>
         public bool ContainsKey(TKey key) => _keyToValue.ContainsKey(key);
 
+        /// <summary>
+        /// Returns true of the dictionary contains the given key
+        /// </summary>
+        /// <param name="key">Key to check for</param>
+        /// <returns></returns>
         public bool ContainsKey(TValue key) => _valueToKey.ContainsKey(key);
-
+        
         public bool TryGetValue(TKey key, out TValue value) => _keyToValue.TryGetValue(key, out value);
 
         public bool TryGetValue(TValue key, out TKey value) => _valueToKey.TryGetValue(key, out value);

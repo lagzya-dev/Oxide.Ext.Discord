@@ -10,45 +10,45 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
     {
         private InvalidChannelInviteException(string message) : base(message) { }
         
-        internal static void ThrowIfInvalidMaxAge(int? maxAage)
+        internal static void ThrowIfInvalidMaxAge(int? maxAge)
         {
-            const int minAge = 0;
-            const int maxAge = 604800;
+            const int MinAge = 0;
+            const int MaxAge = 604800;
 
-            if (!maxAage.HasValue)
+            if (!maxAge.HasValue)
             {
                 return;
             }
             
-            if (maxAage.Value < minAge)
+            if (maxAge.Value < MinAge)
             {
-                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxAge)} cannot be less than {minAge}");
+                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxAge)} cannot be less than {MinAge}");
             }
                 
-            if (maxAage.Value > maxAge)
+            if (maxAge.Value > MaxAge)
             {
-                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxAge)}  cannot be more than {maxAge}");
+                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxAge)}  cannot be more than {MaxAge}");
             }
         }
         
         internal static void ThrowIfInvalidMaxUses(int? maxUses)
         {
-            const int minUse = 0;
-            const int maxUse = 100;
+            const int MinUse = 0;
+            const int MaxUse = 100;
 
             if (!maxUses.HasValue)
             {
                 return;
             }
             
-            if (maxUses.Value < minUse)
+            if (maxUses.Value < MinUse)
             {
-                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxUses)} cannot be less than {minUse}");
+                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxUses)} cannot be less than {MinUse}");
             }
                 
-            if (maxUses.Value > maxUse)
+            if (maxUses.Value > MaxUse)
             {
-                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxUses)} cannot be more than {maxUse}");
+                throw new InvalidChannelInviteException($"{nameof(ChannelInvite)}.{nameof(ChannelInvite.MaxUses)} cannot be more than {MaxUse}");
             }
         }
         

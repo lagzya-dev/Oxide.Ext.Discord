@@ -383,7 +383,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Members who have left the guild
         /// This list will contain members who have left the guild since the initial bot connection
         /// </summary>
-        public Hash<Snowflake, GuildMember> LeftMembers { get; }
+        public Hash<Snowflake, GuildMember> LeftMembers { get; } = new Hash<Snowflake, GuildMember>();
         #endregion
 
         #region Helper Properties
@@ -647,6 +647,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#modify-guild">Modify Guild</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="update">Update to be applied to the guild</param>
         public IPromise<DiscordGuild> Edit(DiscordClient client, GuildUpdate update)
         {
             return client.Bot.Rest.Patch<DiscordGuild>(client,$"guilds/{Id}", update);

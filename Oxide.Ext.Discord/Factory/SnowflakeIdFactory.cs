@@ -11,8 +11,8 @@ namespace Oxide.Ext.Discord.Factory
     {
         private DateTimeOffset _currentTime;
         private ulong _increment;
-        private readonly TimeSpan DiffCompare = TimeSpan.FromMilliseconds(1);
-        private readonly object Sync = new object();
+        private readonly TimeSpan _diffCompare = TimeSpan.FromMilliseconds(1);
+        private readonly object _sync = new object();
 
         private SnowflakeIdFactory() { }
         
@@ -22,9 +22,9 @@ namespace Oxide.Ext.Discord.Factory
         /// <returns></returns>
         public Snowflake Generate()
         {
-            lock (Sync)
+            lock (_sync)
             {
-                if (DateTimeOffset.UtcNow - _currentTime >= DiffCompare)
+                if (DateTimeOffset.UtcNow - _currentTime >= _diffCompare)
                 {
                     _currentTime = DateTimeOffset.UtcNow;
                     _increment = 0;

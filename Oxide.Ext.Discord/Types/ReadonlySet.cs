@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.Interfaces.Types;
 
 namespace Oxide.Ext.Discord.Types
 {
-    public class ReadonlySet<T> : IReadonlySet<T>
+    internal class ReadonlySet<T> : IReadonlySet<T>
     {
         public bool IsReadOnly => true;
 

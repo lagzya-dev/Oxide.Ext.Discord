@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels.Stages;
 using Oxide.Ext.Discord.Entities.Channels.Threads;
 using Oxide.Ext.Discord.Entities.Emojis;
@@ -435,7 +436,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
             DateTime? blockedUntil = UserData?.GetBlockedUntil();
             if (!blockedUntil.HasValue)
             {
-                return client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{Id}/messages", message);
+                IPromise<DiscordMessage> response = client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{Id}/messages", message);
+                if (UserData != null)
+                {
+                    response.Catch<ResponseError>(ex => UserData.ProcessError(client, ex));
+                }
+                return response;
             }
             
             DiscordUser user = UserData.GetUser();

@@ -19,17 +19,17 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
         
         internal static void ThrowIfInvalidLimit(int? limit)
         {
-            const int minLimit = 0;
-            const int maxLimit = 1000;
+            const int MinLimit = 0;
+            const int MaxLimit = 1000;
             
-            if (limit < minLimit)
+            if (limit < MinLimit)
             {
-                throw new InvalidGuildSearchMembersException($"{nameof(GuildSearchMembers)}.{nameof(GuildSearchMembers.Limit)} cannot be less than {minLimit}");
+                throw new InvalidGuildSearchMembersException($"{nameof(GuildSearchMembers)}.{nameof(GuildSearchMembers.Limit)} cannot be less than {MinLimit}");
             }
             
-            if (limit > maxLimit)
+            if (limit > MaxLimit)
             {
-                throw new InvalidGuildSearchMembersException($"{nameof(GuildSearchMembers)}.{nameof(GuildSearchMembers.Limit)} cannot be more than {maxLimit}");
+                throw new InvalidGuildSearchMembersException($"{nameof(GuildSearchMembers)}.{nameof(GuildSearchMembers.Limit)} cannot be more than {MaxLimit}");
             }
         }
     }

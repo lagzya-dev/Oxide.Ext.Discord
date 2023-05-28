@@ -11,31 +11,31 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
         
         internal static void ThrowIfInvalidName(string name, bool allowNullOrEmpty)
         {
-            const int maxLength = 32;
+            const int MaxLength = 32;
             
             if (!allowNullOrEmpty && string.IsNullOrEmpty(name))
             {
                 throw new InvalidCommandOptionException("Name cannot be less than 1 character");
             }
             
-            if (name.Length > maxLength)
+            if (name.Length > MaxLength)
             {
-                throw new InvalidCommandOptionException($"Name cannot be more than {maxLength} characters");
+                throw new InvalidCommandOptionException($"Name cannot be more than {MaxLength} characters");
             }
         }
         
         internal static void ThrowIfInvalidDescription(string description, bool allowNullOrEmpty)
         {
-            const int maxLength = 100;
+            const int MaxLength = 100;
             
             if (!allowNullOrEmpty && string.IsNullOrEmpty(description))
             {
                 throw new InvalidCommandOptionException("Description cannot be less than 1 character");
             }
             
-            if (description.Length > maxLength)
+            if (description.Length > MaxLength)
             {
-                throw new InvalidCommandOptionException($"Description cannot be more than {maxLength} characters");
+                throw new InvalidCommandOptionException($"Description cannot be more than {MaxLength} characters");
             }
         }
         
@@ -97,33 +97,33 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
         
         internal static void ThrowIfInvalidMinLength(int minLength)
         {
-            const int min = 0;
-            const int maxLength = 6000;
+            const int MinLength = 0;
+            const int MaxLength = 6000;
             
-            if (minLength < min)
+            if (minLength < MinLength)
             {
-                throw new InvalidCommandOptionException($"Min length cannot be less than {min}");
+                throw new InvalidCommandOptionException($"Min length cannot be less than {MinLength}");
             }
 
-            if (minLength > maxLength)
+            if (minLength > MaxLength)
             {
-                throw new InvalidCommandOptionException($"Min length cannot be more than {maxLength}");
+                throw new InvalidCommandOptionException($"Min length cannot be more than {MaxLength}");
             }
         }
         
         internal static void ThrowIfInvalidMaxLength(int maxLength)
         {
-            const int minLength = 1;
-            const int max = 6000;
+            const int MinLength = 1;
+            const int MaxLength = 6000;
             
-            if (maxLength < minLength)
+            if (maxLength < MinLength)
             {
-                throw new InvalidCommandOptionException($"Max length cannot be less than {minLength}");
+                throw new InvalidCommandOptionException($"Max length cannot be less than {MinLength}");
             }
 
-            if (maxLength > max)
+            if (maxLength > MaxLength)
             {
-                throw new InvalidCommandOptionException($"Max length cannot be more than {max}");
+                throw new InvalidCommandOptionException($"Max length cannot be more than {MaxLength}");
             }
         }
         

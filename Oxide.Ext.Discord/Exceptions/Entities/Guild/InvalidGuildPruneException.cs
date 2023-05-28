@@ -11,17 +11,17 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 
         internal static void ThrowIfInvalidDays(int days)
         {
-            const int minDays = 1;
-            const int maxDays = 30;
+            const int MinDays = 1;
+            const int MaxDays = 30;
 
-            if (days < minDays)
+            if (days < MinDays)
             {
-                throw new InvalidGuildPruneException($"{nameof(GuildPruneGet)}.{nameof(GuildPruneGet.Days)} cannot be less than {minDays}");
+                throw new InvalidGuildPruneException($"{nameof(GuildPruneGet)}.{nameof(GuildPruneGet.Days)} cannot be less than {MinDays}");
             }
             
-            if (days > maxDays)
+            if (days > MaxDays)
             {
-                throw new InvalidGuildPruneException($"{nameof(GuildPruneGet)}.{nameof(GuildPruneGet.Days)} cannot be more than {maxDays}");
+                throw new InvalidGuildPruneException($"{nameof(GuildPruneGet)}.{nameof(GuildPruneGet.Days)} cannot be more than {MaxDays}");
             }
         }
     }

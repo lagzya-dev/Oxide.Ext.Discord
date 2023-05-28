@@ -89,41 +89,41 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         #region Commands
         [HookMethod(nameof(VersionCommand))]
-        private void VersionCommand(IPlayer player, string cmd, string[] args)
+        private void VersionCommand(IPlayer player)
         {
             Chat(player, LangKeys.Version, DiscordExtension.FullExtensionVersion);
         }
 
         [HookMethod(nameof(ResetWebSocketCommand))]
-        private void ResetWebSocketCommand(IPlayer player, string cmd, string[] args)
+        private void ResetWebSocketCommand(IPlayer player)
         {
             BotClientFactory.Instance.ResetAllWebSockets();
             Chat(player, LangKeys.ResetWebSocket);
         }
         
         [HookMethod(nameof(ReconnectWebSocketCommand))]
-        private void ReconnectWebSocketCommand(IPlayer player, string cmd, string[] args)
+        private void ReconnectWebSocketCommand(IPlayer player)
         {
             BotClientFactory.Instance.ReconnectAllWebSockets();
             Chat(player, LangKeys.ReconnectWebSocket);
         }
         
         [HookMethod(nameof(ResetRestApiCommand))]
-        private void ResetRestApiCommand(IPlayer player, string cmd, string[] args)
+        private void ResetRestApiCommand(IPlayer player)
         {
             BotClientFactory.Instance.ResetAllRestApis();
             Chat(player, LangKeys.ResetRestApi);
         }
         
         [HookMethod(nameof(ClearDiscordPool))]
-        private void ClearDiscordPool(IPlayer player, string cmd, string[] args)
+        private void ClearDiscordPool(IPlayer player)
         {
             Chat(player, LangKeys.ClearPool);
             DiscordPool.Instance.Clear();
         }
         
         [HookMethod(nameof(WipeDiscordPool))]
-        private void WipeDiscordPool(IPlayer player, string cmd, string[] args)
+        private void WipeDiscordPool(IPlayer player)
         {
             Chat(player, LangKeys.WipePool);
             DiscordPool.Instance.Wipe();
@@ -176,7 +176,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         }
 
         [HookMethod(nameof(DiscordDebugCommand))]
-        private void DiscordDebugCommand(IPlayer player, string cmd, string[] args)
+        private void DiscordDebugCommand(IPlayer player)
         {
             DebugLogger logger = new DebugLogger();
             logger.AppendList("Bot Clients", BotClientFactory.Instance.Clients);

@@ -65,6 +65,10 @@ namespace Oxide.Ext.Discord.RateLimits
             Interlocked.Exchange(ref NumRequests, 0);
         }
 
+        /// <summary>
+        /// Returns the next reset for the rate limit
+        /// </summary>
+        /// <returns></returns>
         protected virtual DateTimeOffset GetNextReset()
         {
             return (TimeHelpers.MillisecondsSinceEpoch() + ResetInterval).ToDateTimeOffsetFromMilliseconds();

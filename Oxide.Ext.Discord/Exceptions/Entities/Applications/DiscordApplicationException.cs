@@ -13,16 +13,16 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
 
         internal static void ThrowIfInvalidApplicationRoleConnectionMetadataLength(List<ApplicationRoleConnectionMetadata> records)
         {
-            const int maxLength = 5;
+            const int MaxLength = 5;
             
             if (records == null)
             {
                 throw new DiscordApplicationException($"{nameof(records)} cannot be null");
             }
 
-            if (records.Count > maxLength)
+            if (records.Count > MaxLength)
             {
-                throw new DiscordApplicationException($"{nameof(records)} cannot have more than {maxLength} records");
+                throw new DiscordApplicationException($"{nameof(records)} cannot have more than {MaxLength} records");
             }
         }
     }

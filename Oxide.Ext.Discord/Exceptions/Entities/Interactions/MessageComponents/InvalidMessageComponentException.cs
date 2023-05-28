@@ -16,20 +16,20 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
         
         internal static void ThrowIfInvalidCustomId(string customId)
         {
-            const int maxLength = 100;
+            const int MaxLength = 100;
             
-            if (!string.IsNullOrEmpty(customId) && customId.Length > maxLength)
+            if (!string.IsNullOrEmpty(customId) && customId.Length > MaxLength)
             {
-                throw new InvalidMessageComponentException($"CustomID cannot be more than {maxLength} characters");
+                throw new InvalidMessageComponentException($"CustomID cannot be more than {MaxLength} characters");
             }
         }
         
         internal static void ThrowIfInvalidButtonLabel(string label)
         {
-            const int maxLength = 80;
+            const int MaxLength = 80;
             if (!string.IsNullOrEmpty(label) && label.Length > 80)
             {
-                throw new InvalidMessageComponentException($"Button Label cannot be more than {maxLength} characters");
+                throw new InvalidMessageComponentException($"Button Label cannot be more than {MaxLength} characters");
             }
         }
         
@@ -43,59 +43,59 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
 
         internal static void ThrowIfInvalidTextInputLabel(string label)
         {
-            const int maxLength = 45;
+            const int MaxLength = 45;
             
             if (string.IsNullOrEmpty(label))
             {
                 throw new InvalidMessageComponentException("Text Input Label cannot be less than 1 character");
             }
             
-            if (label.Length > maxLength)
+            if (label.Length > MaxLength)
             {
-                throw new InvalidMessageComponentException($"Text Input Label cannot be more than {maxLength} characters");
+                throw new InvalidMessageComponentException($"Text Input Label cannot be more than {MaxLength} characters");
             }
         }
         
         internal static void ThrowIfInvalidTextInputValue(string value)
         {
-            const int maxLength = 4000;
+            const int MaxLength = 4000;
             
-            if (!string.IsNullOrEmpty(value) && value.Length > maxLength)
+            if (!string.IsNullOrEmpty(value) && value.Length > MaxLength)
             {
-                throw new InvalidMessageComponentException($"Text Input Value cannot be more than {maxLength} characters");
+                throw new InvalidMessageComponentException($"Text Input Value cannot be more than {MaxLength} characters");
             }
         }
         
         internal static void ThrowIfInvalidTextInputLength(int? minLength, int? maxLength)
         {
-            const int minMinLength = 0;
-            const int maxMinLength = 4000;
-            const int minMaxLength = 1;
-            const int maxMaxLength = 4000;
+            const int MinMinLength = 0;
+            const int MaxMinLength = 4000;
+            const int MinMaxLength = 1;
+            const int MaxMaxLength = 4000;
             
             if (!minLength.HasValue && !maxLength.HasValue)
             {
                 return;
             }
 
-            if (minLength < minMinLength)
+            if (minLength < MinMinLength)
             {
-                throw new InvalidMessageComponentException($"Text Input Min Length cannot be less than {minMinLength}");
+                throw new InvalidMessageComponentException($"Text Input Min Length cannot be less than {MinMinLength}");
             }
 
-            if (minLength > maxMinLength)
+            if (minLength > MaxMinLength)
             {
-                throw new InvalidMessageComponentException($"Text Input Min Length cannot be greater than {maxMinLength}");
+                throw new InvalidMessageComponentException($"Text Input Min Length cannot be greater than {MaxMinLength}");
             }
 
-            if (maxLength < minMaxLength)
+            if (maxLength < MinMaxLength)
             {
-                throw new InvalidMessageComponentException($"Text Input Max Length cannot be less than {minMaxLength}");
+                throw new InvalidMessageComponentException($"Text Input Max Length cannot be less than {MinMaxLength}");
             }
             
-            if (maxLength > maxMaxLength)
+            if (maxLength > MaxMaxLength)
             {
-                throw new InvalidMessageComponentException($"Text Input Max Length cannot be greater than {maxMaxLength}");
+                throw new InvalidMessageComponentException($"Text Input Max Length cannot be greater than {MaxMaxLength}");
             }
 
             if (maxLength < minLength)

@@ -14,16 +14,16 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
 
         internal static void ThrowIfInvalidKeyException(string key)
         {
-            const int maxLength = 50;
+            const int MaxLength = 50;
             
             if (string.IsNullOrEmpty(key))
             {
                 throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Key)} cannot be null or empty");
             }
 
-            if (key.Length > maxLength)
+            if (key.Length > MaxLength)
             {
-                throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Key)} cannot be more than {maxLength} characters");
+                throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Key)} cannot be more than {MaxLength} characters");
             }
 
             if (!KeyRegex.IsMatch(key))
@@ -34,31 +34,31 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
         
         internal static void ThrowIfInvalidNameException(string name)
         {
-            const int maxLength = 100;
+            const int MaxLength = 100;
             
             if (string.IsNullOrEmpty(name))
             {
                 throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Name)} cannot be null or empty");
             }
 
-            if (name.Length > maxLength)
+            if (name.Length > MaxLength)
             {
-                throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Name)} cannot be more than {maxLength} characters");
+                throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Name)} cannot be more than {MaxLength} characters");
             }
         }
         
         internal static void ThrowIfInvalidDescriptionException(string name)
         {
-            const int maxLength = 200;
+            const int MaxLength = 200;
             
             if (string.IsNullOrEmpty(name))
             {
                 throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Description)} cannot be null or empty");
             }
 
-            if (name.Length > maxLength)
+            if (name.Length > MaxLength)
             {
-                throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Description)} cannot be more than {maxLength} characters");
+                throw new ApplicationRoleConnectionMetadataException($"{nameof(ApplicationRoleConnectionMetadata)}.{nameof(ApplicationRoleConnectionMetadata.Description)} cannot be more than {MaxLength} characters");
             }
         }
     }

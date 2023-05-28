@@ -77,14 +77,78 @@ namespace Oxide.Ext.Discord.Rest
             RateLimit = new RestRateLimit(logger);
         }
 
+        /// <summary>
+        /// Performs a HTTP Get Request with TResult response
+        /// </summary>
+        /// <param name="client">Client for the request</param>
+        /// <param name="url">Url for the request</param>
+        /// <typeparam name="TResult">Result to be returned from the request</typeparam>
         public IPromise<TResult> Get<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.GET);
+
+        /// <summary>
+        /// Performs a HTTP Post Request
+        /// </summary>
+        /// <param name="client">Client for the request</param>
+        /// <param name="url">Url for the request</param>
+        /// <param name="data">Data to post</param>
         public IPromise Post(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.POST, data);
+
+        /// <summary>
+        /// Performs a HTTP Post Request with TResult response
+        /// </summary>
+        /// <param name="client">Client for the request</param>
+        /// <param name="url">Url for the request</param>
+        /// <param name="data">Data to post</param>
+        /// <typeparam name="TResult">Result to be returned from the request</typeparam>
         public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.POST, data);
+
+        /// <summary>
+        /// Performs a HTTP Put Request
+        /// </summary>
+        /// <param name="client">Client for the request</param>
+        /// <param name="url">Url for the request</param>
+        /// <param name="data">Data to put</param>
         public IPromise Put(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PUT, data);
+
+        /// <summary>
+        /// Performs a HTTP Put Request with TResult response
+        /// </summary>
+        /// <param name="client">Client for the request</param>
+        /// <param name="url">Url for the request</param>
+        /// <param name="data">Data to put</param>
+        /// <typeparam name="TResult">Result to be returned from the request</typeparam>
         public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PUT, data);
+
+        /// <summary>
+        /// Performs a HTTP Patch Request
+        /// </summary>
+        /// <param name="client">Client for the request</param>
+        /// <param name="url">Url for the request</param>
+        /// <param name="data">Data to patch</param>
         public IPromise Patch(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PATCH, data);
+
+        /// <summary>
+        /// Performs a HTTP Patch Request with TResult response
+        /// </summary>
+        /// <param name="client">Client for the request</param>
+        /// <param name="url">Url for the request</param>
+        /// <param name="data">Data to patch</param>
+        /// <typeparam name="TResult">Result to be returned from the request</typeparam>
         public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PATCH, data);
+        
+        /// <summary>
+        /// Performs a HTTP Delete Request
+        /// </summary>
+        /// <param name="client">Client for the request</param>
+        /// <param name="url">Url for the request</param>
         public IPromise Delete(DiscordClient client, string url) => CreateRequest(client, url, RequestMethod.DELETE);
+        
+        /// <summary>
+        /// Performs a HTTP Delete Request with TResult response
+        /// </summary>
+        /// <param name="client">Client for the request</param>
+        /// <param name="url">Url for the request</param>
+        /// <typeparam name="TResult">Result to be returned from the request</typeparam>
         public IPromise<TResult> Delete<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.DELETE);
 
         /// <summary>

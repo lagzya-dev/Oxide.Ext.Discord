@@ -55,7 +55,7 @@ namespace Oxide.Ext.Discord.WebSockets
         private readonly BotClient _client;
         internal readonly WebSocketHandler Handler;
         private readonly WebSocketEventHandler _listener;
-        internal readonly WebSocketCommandHandler Commands;
+        private readonly WebSocketCommandHandler _commands;
         private readonly DiscordHeartbeatHandler _heartbeat;
         private readonly WebSocketReconnectHandler _reconnect;
         private readonly ILogger _logger;
@@ -73,7 +73,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _logger = logger;
 
             _reconnect = new WebSocketReconnectHandler(client, this, logger);
-            Commands = new WebSocketCommandHandler(client, this, logger);
+            _commands = new WebSocketCommandHandler(client, this, logger);
             _heartbeat = new DiscordHeartbeatHandler(client, this, logger);
             _listener = new WebSocketEventHandler(client, this, logger);
             Handler = new WebSocketHandler(_listener, logger);
@@ -162,7 +162,7 @@ namespace Oxide.Ext.Discord.WebSockets
             Disconnect(false, false);
             _reconnect.OnSocketShutdown();
             _heartbeat.OnSocketShutdown();
-            Commands.OnSocketShutdown();
+            _commands.OnSocketShutdown();
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace Oxide.Ext.Discord.WebSockets
         public void Send(DiscordClient client, GatewayCommandCode opCode, object data)
         {
             WebSocketCommand command = WebSocketCommand.CreateCommand(client, opCode, data);
-            Commands.Enqueue(command);
+            _commands.Enqueue(command);
         }
         
         /// <summary>
@@ -238,12 +238,12 @@ namespace Oxide.Ext.Discord.WebSockets
             SocketHasConnected = true;
             ShouldResume = true;
             _reconnect.OnWebsocketReady();
-            Commands.OnWebSocketReady();
+            _commands.OnWebSocketReady();
         }
 
         internal void OnSocketDisconnected()
         {
-            Commands.OnSocketDisconnected();
+            _commands.OnSocketDisconnected();
         }
 
         internal void OnSequenceUpdate(int? sequence)
@@ -397,10 +397,11 @@ namespace Oxide.Ext.Discord.WebSockets
             return Handler.SocketState == SocketState.Disconnected;
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendFieldEnum("State", Handler.SocketState);
-            logger.AppendList("Pending Commands", Commands.GetPendingCommands());
+            logger.AppendList("Pending Commands", _commands.GetPendingCommands());
         }
 
     }

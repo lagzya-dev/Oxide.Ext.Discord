@@ -16,8 +16,6 @@ namespace Oxide.Ext.Discord.Hooks
         private readonly Hash<string, List<Plugin>> _hookCache = new Hash<string, List<Plugin>>();
         private readonly ILogger _logger;
         private readonly ICollection<string> _supportedHooks;
-        
-        private static readonly Type HookMethodAttribute = typeof(HookMethodAttribute);
 
         internal DiscordHookCache(ICollection<string> supportedHooks, ILogger logger)
         {

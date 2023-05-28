@@ -11,41 +11,41 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
         
         internal static void ThrowIfMaxChoices(int count)
         {
-            const int maxChoices = 25;
+            const int MaxChoices = 25;
             
-            if (count > maxChoices)
+            if (count > MaxChoices)
             {
-                throw new InvalidCommandOptionChoiceException($"Cannot have more than {maxChoices} Command Option Choices");
+                throw new InvalidCommandOptionChoiceException($"Cannot have more than {MaxChoices} Command Option Choices");
             }
         }
 
         internal static void ThrowIfInvalidName(string name, bool allowNullOrEmpty)
         {
-            const int maxLength = 100;
+            const int MaxLength = 100;
             
             if (!allowNullOrEmpty && string.IsNullOrEmpty(name))
             {
                 throw new InvalidCommandOptionChoiceException("Name cannot be less than 1 character");
             }
             
-            if (name.Length > maxLength)
+            if (name.Length > MaxLength)
             {
-                throw new InvalidCommandOptionChoiceException($"Name cannot be more than {maxLength} characters");
+                throw new InvalidCommandOptionChoiceException($"Name cannot be more than {MaxLength} characters");
             }
         }
         
         internal static void ThrowIfInvalidStringValue(string value)
         {
-            const int maxLength = 100;
+            const int MaxLength = 100;
             
             if (string.IsNullOrEmpty(value))
             {
                 throw new InvalidCommandOptionChoiceException("Value cannot be less than 1 character");
             }
             
-            if (value.Length > maxLength)
+            if (value.Length > MaxLength)
             {
-                throw new InvalidCommandOptionChoiceException($"Value cannot be more than {maxLength} characters");
+                throw new InvalidCommandOptionChoiceException($"Value cannot be more than {MaxLength} characters");
             }
         }
         

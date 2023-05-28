@@ -11,10 +11,10 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents
 
         internal static void ThrowIfInvalidLimit(int? limit)
         {
-            const int maxLimit = 100;
-            if (limit > maxLimit)
+            const int MaxLimit = 100;
+            if (limit > MaxLimit)
             {
-                throw new InvalidGuildScheduledEventLookupException($"{nameof(ScheduledEventUsersLookup)}.{nameof(ScheduledEventUsersLookup.Limit)} cannot be greater than {maxLimit}");
+                throw new InvalidGuildScheduledEventLookupException($"{nameof(ScheduledEventUsersLookup)}.{nameof(ScheduledEventUsersLookup.Limit)} cannot be greater than {MaxLimit}");
             }
         }
     }

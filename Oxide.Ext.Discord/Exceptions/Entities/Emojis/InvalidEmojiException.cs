@@ -48,16 +48,16 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Emojis
         
         internal static void ThrowIfInvalidImageData(DiscordImageData image)
         {
-            const int maxSize = 256;
+            const int MaxSize = 256;
             
             if (!image.IsValid())
             {
                 throw new InvalidEmojiException("ImageData is required");
             }
 
-            if (image.GetImageSize(DiscordImageSize.KiloBytes) > maxSize)
+            if (image.GetImageSize(DiscordImageSize.KiloBytes) > MaxSize)
             {
-                throw new InvalidEmojiException($"ImageData cannot be more than {maxSize} kilobytes");
+                throw new InvalidEmojiException($"ImageData cannot be more than {MaxSize} kilobytes");
             }
         }
         

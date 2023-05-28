@@ -3933,7 +3933,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.UpdateRoleConnectionMetadata(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata})">
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.EditRoleConnectionMetadata(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata})">
             <summary>
             Updates and returns a list of application role connection metadata objects for the given application.
             See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records">Update Application Role Connection Metadata Records</a>
@@ -4222,7 +4222,7 @@
             <param name="guildId">Guild ID of the rule</param>
             <param name="create">Rule to be created</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify)">
+        <member name="M:Oxide.Ext.Discord.Entities.AutoMod.AutoModRule.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.AutoMod.AutoModRuleModify)">
             <summary>
             Modify an existing rule
             Requires <see cref="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuild"/> permissions.
@@ -4902,7 +4902,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.ChannelCreate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.Create(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Channels.ChannelCreate)">
             <summary>
             Create a new channel object for the guild.
             Requires the MANAGE_CHANNELS permission.
@@ -4921,7 +4921,7 @@
             <param name="client">Client to use</param>
             <param name="channelId">ID of the channel to get</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.UpdateGroupDmChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GroupDmChannelUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.EditGroupDmChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GroupDmChannelUpdate)">
             <summary>
             Update a group dm channel's settings.
             See <a href="https://discord.com/developers/docs/resources/channel#modify-channel">Modify Channel</a>
@@ -4929,7 +4929,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to be made to the channel. All fields are optional</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.UpdateGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.EditGuildChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate)">
             <summary>
             Update a guild channel's settings.
             Requires the MANAGE_CHANNELS permission for the guild.
@@ -4938,7 +4938,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to be made to the channel. All fields are optional</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.UpdateThreadChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.EditThreadChannel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate)">
             <summary>
             Update a thread channel's settings.
             Requires the MANAGE_THREADS permission for the guild.
@@ -5565,7 +5565,7 @@
             <param name="client">Client to use</param>
             <param name="channelId">Channel ID to get the stage instance for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstance.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceUpdate)">
             <summary>
             Modifies fields of an existing Stage instance.
             Requires the user to be a moderator of the Stage channel.
@@ -7998,13 +7998,14 @@
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID to get preview for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Update(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildUpdate)">
             <summary>
             Modify a guild's settings.
             Requires the MANAGE_GUILD permission.
             See <a href="https://discord.com/developers/docs/resources/guild#modify-guild">Modify Guild</a>
             </summary>
             <param name="client">Client to use</param>
+            <param name="update">Update to be applied to the guild</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.Delete(Oxide.Ext.Discord.DiscordClient)">
             <summary>
@@ -8031,7 +8032,7 @@
             <param name="client">Client to use</param>
             <param name="channel">Channel to create</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildChannelPosition})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditChannelPositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildChannelPosition})">
             <summary>
             Modify the positions of a set of channel objects for the guild.
             Requires MANAGE_CHANNELS permission.
@@ -8080,7 +8081,7 @@
             <param name="userId">User ID of the user to add</param>
             <param name="member">Member to copy from</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditMember(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildMemberUpdate)">
             <summary>
             Modify attributes of a guild member
             See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member">Modify Guild Member</a>
@@ -8089,7 +8090,7 @@
             <param name="userId">User ID of the user to update</param>
             <param name="update">Changes to make to the user</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateMemberNick(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditMemberNick(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.String)">
             <summary>
             Modify attributes of a guild member
             See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member">Modify Guild Member</a>
@@ -8098,7 +8099,7 @@
             <param name="userId">User ID of the user to update</param>
             <param name="nick">Nickname for the user</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateCurrentMember(Oxide.Ext.Discord.DiscordClient,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditCurrentMember(Oxide.Ext.Discord.DiscordClient,System.String)">
             <summary>
             Modifies the current members nickname in the guild
             See <a href="https://discord.com/developers/docs/resources/guild#modify-current-member">Modify Current Member</a>
@@ -8227,7 +8228,7 @@
             <param name="client">Client to use</param>
             <param name="role">New role to create</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition})">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditRolePositions(Oxide.Ext.Discord.DiscordClient,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Guilds.GuildRolePosition})">
             <summary>
             Modify the positions of a set of role objects for the guild.
             Requires the MANAGE_ROLES permission.
@@ -8237,7 +8238,7 @@
             <param name="client">Client to use</param>
             <param name="positions">List of role with updated positions</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
             <summary>
             Modify a guild role.
             Requires the MANAGE_ROLES permission.
@@ -8247,7 +8248,7 @@
             <param name="client">Client to use</param>
             <param name="role">Role to update</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditRole(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Permissions.DiscordRole)">
             <summary>
             Modify a guild role.
             Requires the MANAGE_ROLES permission.
@@ -8258,7 +8259,7 @@
             <param name="roleId">Role ID to update</param>
             <param name="role">Role to update</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateMfaLevel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditMfaLevel(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel)">
             <summary>
             Modify a guild's MFA level.
             Requires guild ownership.
@@ -8355,7 +8356,7 @@
             </summary>
             <param name="client">client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateWidget(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildWidget)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditWidget(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildWidget)">
             <summary>
             Modify a guild widget object for the guild.
             Requires the MANAGE_GUILD permission.
@@ -8378,7 +8379,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateWelcomeScreen(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditWelcomeScreen(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.WelcomeScreenUpdate)">
             <summary>
             Modify the guild's Welcome Screen.
             Requires the MANAGE_GUILD permission.
@@ -8420,7 +8421,7 @@
             <param name="client">Client to use</param>
             <param name="emoji">Emoji to create</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Emojis.EmojiUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditEmoji(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Emojis.EmojiUpdate)">
             <summary>
             Modify the given emoji.
             Requires the MANAGE_EMOJIS permission.
@@ -8440,7 +8441,7 @@
             <param name="client">Client to use</param>
             <param name="emojiId">Emoji ID to delete</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateCurrentUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditCurrentUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.GuildCurrentUserVoiceStateUpdate)">
             <summary>
             Modifies the current user's voice state.
             See <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state">Update Current User Voice State</a>
@@ -8448,7 +8449,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to the guild voice state</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditUserVoiceState(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.GuildUserVoiceStateUpdate)">
             <summary>
             Modifies another user's voice state.
             See <a href="https://discord.com/developers/docs/resources/guild#modify-user-voice-state">Update Users Voice State</a>
@@ -8484,7 +8485,7 @@
             <param name="client">Client to use</param>
             <param name="sticker">Sticker to create</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.UpdateSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Stickers.DiscordSticker)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditSticker(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Stickers.DiscordSticker)">
             <summary>
             Modify the given sticker.
             Requires the MANAGE_EMOJIS_AND_STICKERS permission.
@@ -9315,6 +9316,120 @@
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildSearchMembers.Validate">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild">Update Guild Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.Name">
+            <summary>
+            Name of the guild (2-100 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.Region">
+            <summary>
+            Voice region id
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.VerificationLevel">
+            <summary>
+            Verification level
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.DefaultMessageNotifications">
+            <summary>
+            Default message notification level
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.ExplicitContentFilter">
+            <summary>
+            Explicit content filter level
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.AfkChannelId">
+            <summary>
+            ID of afk channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.AfkTimeout">
+            <summary>
+            Afk timeout in seconds
+            Can be set to: null, 60, 300, 900, 1800, 3600
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.Icon">
+            <summary>
+            Base64 128x128 image for the guild icon
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.OwnerId">
+            <summary>
+            User id to transfer guild ownership to (must be owner)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.Splash">
+            <summary>
+            Image for the guild splash (when the server has the INVITE_SPLASH feature)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.DiscoverySplash">
+            <summary>
+            Image for the guild discovery splash (when the server has the DISCOVERABLE feature)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.Banner">
+            <summary>
+            Image for the guild banner (when the server has the BANNER feature; can be animated gif when the server has the ANIMATED_BANNER feature)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.SystemChannelId">
+            <summary>
+            The id of the channel where guild notices such as welcome messages and boost events are posted
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.SystemChannelFlags">
+            <summary>
+            System channel flags
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.RulesChannelId">
+            <summary>
+            The id of the channel where Community guilds display rules and/or guidelines
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.PublicUpdatesChannelId">
+            <summary>
+            The id of the channel where admins and moderators of Community guilds receive notices from Discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.PreferredLocale">
+            <summary>
+            The preferred locale of a Community guild used in server discovery and notices from Discord; defaults to "en-US"
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.Features">
+            <summary>
+            Enabled guild features
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.Description">
+            <summary>
+            The description for the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.PremiumProgressBarEnabled">
+            <summary>
+            Whether the guild's boost progress bar should be enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.SafetyAlertsChannelId">
+            <summary>
+            The id of the channel where admins and moderators of Community guilds receive safety alerts from Discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.GuildUpdate.Validate">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildUpdateMfaLevel">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level-json-params">Guild MFA Level Update</a>
@@ -9690,7 +9805,7 @@
             <param name="eventId">Id of the scheduled event</param>
             <param name="lookup">Query string parameters</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.ScheduledEventUpdate)">
             <summary>
             Modify a guild scheduled event.
             Returns the modified <see cref="T:Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents.GuildScheduledEvent">guild scheduled event</see> object on success.
@@ -10869,7 +10984,7 @@
             <param name="command">Custom commands string</param>
             <returns>Mentioned Custom Command string</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdate)">
             <summary>
             Edit a command.
             Updates will be available in all guilds after 1 hour.
@@ -10895,7 +11010,7 @@
             <param name="client">Client to use</param>
             <param name="guildId">Guild ID of the guild to get permissions for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.UpdatePermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdatePermissions)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand.EditPermissions(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandUpdatePermissions)">
             <summary>
             Edits command permissions for a specific command for your application in a guild.
             Warning: This endpoint will overwrite existing permissions for the command in that guild
@@ -11168,7 +11283,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.UpdateOriginalResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditOriginalResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
             <summary>
             Edits the initial Interaction response
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response">Edit Original Interaction Response</a>
@@ -11176,7 +11291,7 @@
             <param name="client">Client to use</param>
             /// <param name="message">Updated message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.UpdateTemplateOriginalResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditTemplateOriginalResponse(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Edit a interaction response with a message template
             </summary>
@@ -11210,7 +11325,7 @@
             <param name="client">Client to use</param>
             <param name="builder">Builder for the follow up</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.UpdateFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditFollowUpMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandFollowupUpdate)">
             <summary>
             Edits a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message">Edit Followup Message</a>
@@ -12867,7 +12982,7 @@
             <param name="client">Client to use</param>
             <param name="emoji">Emoji to delete all reactions for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Update(Oxide.Ext.Discord.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Edit(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageUpdate)">
             <summary>
             Edit a previously sent message.
             The fields content, embed, allowed_mentions and flags can be edited by the original message author.
@@ -12877,20 +12992,9 @@
             See <a href="https://discord.com/developers/docs/resources/channel#edit-message">Edit Message</a>
             </summary>
             <param name="client">Client to use</param>
+            <param name="update">Update to be applied to the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Update(Oxide.Ext.Discord.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
-            <summary>
-            Edit a previously sent message.
-            The fields content, embed, allowed_mentions and flags can be edited by the original message author.
-            Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel.
-            When specifying flags, ensure to include all previously set flags/bits in addition to ones that you are modifying.
-            Only flags documented in the table below may be modified by users (unsupported flag changes are currently ignored without error).
-            See <a href="https://discord.com/developers/docs/resources/channel#edit-message">Edit Message</a>
-            </summary>
-            <param name="client">Client to use</param>
-            <param name="message">Message to edit</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.UpdateGlobalTemplateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditGlobalTemplateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.MessageUpdate)">
             <summary>
             Edit a message using a global message template
             </summary>
@@ -12898,8 +13002,9 @@
             <param name="plugin">Plugin for the template</param>
             <param name="templateName">Template Name</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
+            <param name="update">Update to be applied to the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.UpdateTemplateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditTemplateMessage(Oxide.Ext.Discord.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.MessageUpdate)">
             <summary>
             Edit a message using a localized message template
             </summary>
@@ -12908,6 +13013,7 @@
             <param name="templateName">Template Name</param>
             <param name="language">Oxide language to use</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
+            <param name="update">Update to be applied tothe message</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Delete(Oxide.Ext.Discord.DiscordClient)">
             <summary>
@@ -13730,6 +13836,70 @@
             Message is a Guild Application Premium Subscription
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageUpdate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params">Message Update Structure</a> sent in a channel within Discord..
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.Content">
+            <summary>
+            Contents of the message up to 2000 characters
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.Embeds">
+            <summary>
+            Up to 10 rich embeds (up to 6000 characters)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.Flags">
+            <summary>
+            Edit the flags of a message (only SUPPRESS_EMBEDS can currently be set/unset)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.AllowedMentions">
+            <summary>
+            Allowed mentions for the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.Components">
+            <summary>
+            Components to include with the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.Attachments">
+            <summary>
+            Attachments for the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.FileAttachments">
+            <summary>
+            Attachments for a discord message
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.#ctor(Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
+            <summary>
+            Constructor for message to be edited
+            Only sets the Attachments field
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            Adds an attachment to the message
+            </summary>
+            <param name="filename">Name of the file</param>
+            <param name="data">byte[] of the attachment</param>
+            <param name="contentType">Attachment content type</param>
+            <param name="description">Description for the attachment</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.Validate">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>
@@ -14099,6 +14269,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseSoundboard">
             <summary>
             Allows for using soundboard in a voice channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseExternalSounds">
+            <summary>
+            Allows the usage of custom soundboard sounds from other servers
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.SendVoiceMessages">
@@ -15801,6 +15976,21 @@
             Allowed mentions for the message
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage.Components">
+            <summary>
+            Components to include with the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage.Attachments">
+            <summary>
+            Attachments for the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage.FileAttachments">
+            <summary>
+            Attachments for a discord message
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage.AddEmbed(Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed)">
             <summary>
             Adds a new embed to the list of embed to send
@@ -15808,6 +15998,18 @@
             <param name="embed">Embed to add</param>
             <returns>This</returns>
             <exception cref="T:System.IndexOutOfRangeException">Thrown if more than 10 embeds are added in a send as that is the discord limit</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            Adds an attachment to the message
+            </summary>
+            <param name="filename">Name of the file</param>
+            <param name="data">byte[] of the attachment</param>
+            <param name="contentType">Attachment content type</param>
+            <param name="description">Description for the attachment</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage.Validate">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams">
             <summary>
@@ -16555,12 +16757,29 @@
             <param name="command"></param>
             <param name="args"></param>
         </member>
+        <member name="F:Oxide.Ext.Discord.Extensions.ThreadEx.MainThreadId">
+            <summary>
+            Main thread
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Extensions.ThreadEx.IsMain">
+            <summary>
+            Determine if current thread is main thread
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.TypeExt">
             <summary>
             Extensions for <see cref="T:System.Type"/>
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.TypeExt.IsNullable(System.Type)">
+            <summary>
+            Returns if the type is <see cref="T:System.Nullable"/>
+            </summary>
+            <param name="objectType">Type to check</param>
+            <returns>True if type is <see cref="T:System.Nullable"/>; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.TypeExt.GetNullableType(System.Type)">
             <summary>
             Returns if the type is <see cref="T:System.Nullable"/>
             </summary>
@@ -18619,6 +18838,9 @@
             <param name="plugin">Plugin that is unlinking</param>
             <param name="player">Player being unlinked</param>
             <param name="discord">DiscordUser being unlinked</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Linking.IDiscordLinkPlugin">
             <summary>
@@ -20890,6 +21112,196 @@
             <param name="name">Name of the field</param>
             <param name="value">Value of the field</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.Int32)">
+            <summary>
+            Appends a field with the given name and int value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value">Value of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.Double)">
+            <summary>
+            Appends a field with the given name and double value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value">Value of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.Single)">
+            <summary>
+            Appends a field with the given name and float value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value">Value of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.UInt64)">
+            <summary>
+            Appends a field with the given name and ulong value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value">Value of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.Int64)">
+            <summary>
+            Appends a field with the given name and long value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value">Value of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.Boolean)">
+            <summary>
+            Appends a field with the given name and bool value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value">Value of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Appends a field with the given name and Snowflake value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value">Value of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
+            <summary>
+            Appends a field with the given name and Snowflake? value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value">Value of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendFieldEnum``1(System.String,``0)">
+            <summary>
+            Appends a field with the given name and enum value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value">Value of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendFieldOutOf(System.String,System.Int32,System.Int32)">
+            <summary>
+            Appends a field with the given name and int amount over int total value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="amount">Amount / Top value</param>
+            <param name="total">Total / Bottom Value</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendMethod(System.String,System.Reflection.MethodInfo)">
+            <summary>
+            Appends a field with the given name and method info
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="info">Method info to append</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.String,System.String)">
+            <summary>
+            Appends a field with the given name and values seperated by a space
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="value1">First value</param>
+            <param name="value2">Second value</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.TimeSpan)">
+            <summary>
+            Appends a field with the given name and TimeSpan value
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="time">TimeSpan value</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendNullField(System.String)">
+            <summary>
+            Appends a field with the given name and Null value
+            </summary>
+            <param name="name">Name of the field</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendLine">
+            <summary>
+            Appends a line to the logger
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendLine(System.Char,System.Int32)">
+            <summary>
+            Appends a line to the logger with the given character repeated amount time
+            </summary>
+            <param name="character">Character to repeat</param>
+            <param name="amount">Amount of times to repeat the character</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendLine(System.String)">
+            <summary>
+            Appends a line to the logger with the given string value
+            </summary>
+            <param name="value">Value of the line</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendChannelPath(System.String,Oxide.Ext.Discord.Entities.Guilds.DiscordGuild,Oxide.Ext.Discord.Entities.Channels.DiscordChannel,Oxide.Ext.Discord.Entities.Channels.DiscordChannel)">
+            <summary>
+            Appends a channel path to the logger.
+            This path will include the guild name / Parent Channel Name (Optional) / Channel Name
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="guild">Guild for the name</param>
+            <param name="channel">Channel for the channel name</param>
+            <param name="parent">Parent for the Parent Channel Name</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendObject(System.String,Oxide.Ext.Discord.Interfaces.Logging.IDebugLoggable)">
+            <summary>
+            Appends a <see cref="T:Oxide.Ext.Discord.Interfaces.Logging.IDebugLoggable"/> object to the logger with the given name
+            </summary>
+            <param name="name">Name of the object</param>
+            <param name="obj">Object to be logged</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendList(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Appends an <see cref="T:System.Collections.Generic.IEnumerable`1"/> where T is string items to add to the logger
+            </summary>
+            <param name="name">Name of the list</param>
+            <param name="items">String items to add</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendList(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Appends an <see cref="T:System.Collections.Generic.List`1"/> where T is string items to add to the logger
+            </summary>
+            <param name="name">Name of the list</param>
+            <param name="items">String items to add</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendList``1(System.String,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Appends an <see cref="T:System.Collections.Generic.IEnumerable`1"/> where T is <see cref="T:Oxide.Ext.Discord.Interfaces.Logging.IDebugLoggable"/> items to add to the logger
+            </summary>
+            <param name="name">Name of the list</param>
+            <param name="items">Loggable items to add</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendList``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            Appends an <see cref="T:System.Collections.Generic.List`1"/> where T is <see cref="T:Oxide.Ext.Discord.Interfaces.Logging.IDebugLoggable"/> items to add to the logger
+            </summary>
+            <param name="name">Name of the list</param>
+            <param name="items">Loggable items to add</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.StartArray(System.String)">
+            <summary>
+            Starts an array on the logger with the given name
+            </summary>
+            <param name="name">Name of the array</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.EndArray">
+            <summary>
+            Ends an array on the logger
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.StartObject(System.String)">
+            <summary>
+            Starts an object on the logger with the given name
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.EndObject">
+            <summary>
+            Ends an object on the logger
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.ToString">
+            <summary>
+            Returns the logged data as a string
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Logging.DiscordConsoleLogger">
             <summary>
             Represents a Console Logger for Discord
@@ -21164,7 +21576,6 @@
             Returns an element from the pool if it exists else it creates a new one
             </summary>
             <returns></returns>
-            TODO: Remove after issue is found
         </member>
         <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.CreateNew">
             <summary>
@@ -21619,6 +22030,11 @@
             Called after completion
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.DelayedDispose">
+            <summary>
+            Delays disposing the promise till NextTick
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Promises.BasePromise.LeavePool">
             <inheritdoc/>
         </member>
@@ -21809,19 +22225,16 @@
             Convert an exception directly into a rejected promise.
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ClearHandlers">
+        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Resolve(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.WithName(System.String)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.InvokeResolveHandlers(`0)">
             <summary>
             Invoke all resolve handlers.
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Resolve(`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.WithName(System.String)">
-            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Catch(System.Action{System.Exception})">
             <inheritdoc/>
@@ -21883,6 +22296,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ClearHandlers">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.EnterPool">
@@ -21970,6 +22386,12 @@
             <param name="maxRequests">Max requests per interval</param>
             <param name="interval">Reset Interval in milliseconds</param>
             <param name="logger">Logger</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.GetNextReset">
+            <summary>
+            Returns the next reset for the rate limit
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.FiredRequestInternal">
             <summary>
@@ -22089,6 +22511,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.Buckets.Bucket.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Buckets.BucketId">
@@ -22397,6 +22822,80 @@
             <param name="client">Client the request is for</param>
             <param name="logger">Logger from the client</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Get``1(Oxide.Ext.Discord.DiscordClient,System.String)">
+            <summary>
+            Performs a HTTP Get Request with TResult response
+            </summary>
+            <param name="client">Client for the request</param>
+            <param name="url">Url for the request</param>
+            <typeparam name="TResult">Result to be returned from the request</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Post(Oxide.Ext.Discord.DiscordClient,System.String,System.Object)">
+            <summary>
+            Performs a HTTP Post Request
+            </summary>
+            <param name="client">Client for the request</param>
+            <param name="url">Url for the request</param>
+            <param name="data">Data to post</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Post``1(Oxide.Ext.Discord.DiscordClient,System.String,System.Object)">
+            <summary>
+            Performs a HTTP Post Request with TResult response
+            </summary>
+            <param name="client">Client for the request</param>
+            <param name="url">Url for the request</param>
+            <param name="data">Data to post</param>
+            <typeparam name="TResult">Result to be returned from the request</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Put(Oxide.Ext.Discord.DiscordClient,System.String,System.Object)">
+            <summary>
+            Performs a HTTP Put Request
+            </summary>
+            <param name="client">Client for the request</param>
+            <param name="url">Url for the request</param>
+            <param name="data">Data to put</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Put``1(Oxide.Ext.Discord.DiscordClient,System.String,System.Object)">
+            <summary>
+            Performs a HTTP Put Request with TResult response
+            </summary>
+            <param name="client">Client for the request</param>
+            <param name="url">Url for the request</param>
+            <param name="data">Data to put</param>
+            <typeparam name="TResult">Result to be returned from the request</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Patch(Oxide.Ext.Discord.DiscordClient,System.String,System.Object)">
+            <summary>
+            Performs a HTTP Patch Request
+            </summary>
+            <param name="client">Client for the request</param>
+            <param name="url">Url for the request</param>
+            <param name="data">Data to patch</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Patch``1(Oxide.Ext.Discord.DiscordClient,System.String,System.Object)">
+            <summary>
+            Performs a HTTP Patch Request with TResult response
+            </summary>
+            <param name="client">Client for the request</param>
+            <param name="url">Url for the request</param>
+            <param name="data">Data to patch</param>
+            <typeparam name="TResult">Result to be returned from the request</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Delete(Oxide.Ext.Discord.DiscordClient,System.String)">
+            <summary>
+            Performs a HTTP Delete Request
+            </summary>
+            <param name="client">Client for the request</param>
+            <param name="url">Url for the request</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Delete``1(Oxide.Ext.Discord.DiscordClient,System.String)">
+            <summary>
+            Performs a HTTP Delete Request with TResult response
+            </summary>
+            <param name="client">Client for the request</param>
+            <param name="url">Url for the request</param>
+            <typeparam name="TResult">Result to be returned from the request</typeparam>
+        </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest(Oxide.Ext.Discord.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object)">
             <summary>
             Creates a new request and queues it to be ran
@@ -22459,15 +22958,31 @@
             </summary>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="F:Oxide.Ext.Discord.Threading.ThreadState.MainThreadId">
+        <member name="T:Oxide.Ext.Discord.Types.BidirectionalDictionary`2">
             <summary>
-            Main thread
+            A Dictionary that stores the keys -> values and values -> keys
+            </summary>
+            <typeparam name="TKey">Type of the key</typeparam>
+            <typeparam name="TValue">Type of the value</typeparam>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.BidirectionalDictionary`2.Count">
+            <summary>
+            Count of the 
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Threading.ThreadState.IsMain">
+        <member name="M:Oxide.Ext.Discord.Types.BidirectionalDictionary`2.ContainsKey(`0)">
             <summary>
-            Determine if current thread is main thread
+            Returns true of the dictionary contains the given key
             </summary>
+            <param name="key">Key to check for</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.BidirectionalDictionary`2.ContainsKey(`1)">
+            <summary>
+            Returns true of the dictionary contains the given key
+            </summary>
+            <param name="key">Key to check for</param>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.DiscordWebSocket">
             <summary>
@@ -22602,6 +23117,9 @@
             Returns if the websocket is null or is currently closing / closed
             </summary>
             <returns>Returns if the websocket is null or is currently closing / closed</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.WebSockets.DiscordWebSocket.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode">
             <summary>

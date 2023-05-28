@@ -56,6 +56,7 @@ namespace Oxide.Ext.Discord.Promises
         {
             Promise promise = Create(false);
             promise.State = PromiseState.Resolved;
+            promise.DelayedDispose();
             return promise;
         }
 
@@ -67,6 +68,7 @@ namespace Oxide.Ext.Discord.Promises
             Promise promise = Create(false);
             promise.State = PromiseState.Rejected;
             promise.Exception = ex;
+            promise.DelayedDispose();
             return promise;
         }
 

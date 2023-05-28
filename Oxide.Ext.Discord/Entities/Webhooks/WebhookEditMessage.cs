@@ -93,6 +93,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
             Attachments.Add(new MessageAttachment {Id = new Snowflake((ulong)FileAttachments.Count), Filename = filename, Description = description});
         }
 
+        ///<inheritdoc/>
         public void Validate()
         {
             InvalidMessageException.ThrowIfInvalidContent(Content);

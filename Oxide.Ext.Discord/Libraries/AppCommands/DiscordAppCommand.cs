@@ -100,14 +100,14 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             ApplicationCommandHandler handler = GetOrAddSlashCommandHandler(app);
             AppCommandId commandId = new AppCommandId(command, group, subCommand);
 
-            const InteractionType type = InteractionType.ApplicationCommand;
-            AppCommand existing = handler.GetCommandById(type, commandId);
+            const InteractionType Type = InteractionType.ApplicationCommand;
+            AppCommand existing = handler.GetCommandById(Type, commandId);
             if (existing != null && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.FullName(), command, type, existing.Plugin?.FullName());
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.FullName(), command, Type, existing.Plugin?.FullName());
             }
             
-            handler.AddAppCommand(new AppCommand(plugin, app, type, commandId, callback));
+            handler.AddAppCommand(new AppCommand(plugin, app, Type, commandId, callback));
             _logger.Debug("Adding App Command For: {0} Command: {1} Callback: {2}", plugin.FullName(), commandId, callback);
         }
 
@@ -133,11 +133,11 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             ApplicationCommandHandler handler = GetOrAddSlashCommandHandler(app);
             AppCommandId commandId = new AppCommandId(command, group, subCommand, argument);
 
-            const InteractionType type = InteractionType.ApplicationCommandAutoComplete;
-            AppCommand existing = handler.GetCommandById(type, commandId);
+            const InteractionType Type = InteractionType.ApplicationCommandAutoComplete;
+            AppCommand existing = handler.GetCommandById(Type, commandId);
             if (existing != null && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.FullName(), command, type, existing.Plugin?.FullName());
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.FullName(), command, Type, existing.Plugin?.FullName());
             }
             
             handler.AddAppCommand(new AutoCompleteCommand(plugin, app, commandId, callback));
@@ -179,9 +179,9 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             if (string.IsNullOrEmpty(customId)) throw new ArgumentNullException(nameof(customId));
             if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
             
-            const InteractionType type = InteractionType.ModalSubmit;
+            const InteractionType Type = InteractionType.ModalSubmit;
             MessageComponentHandler handler = GetOrAddComponentHandler(app);
-            handler.AddComponentCommand(new ComponentCommand(plugin, app, type, customId, callback));
+            handler.AddComponentCommand(new ComponentCommand(plugin, app, Type, customId, callback));
             _logger.Debug("Adding Modal Submit Command For: {0} CustomId: {1} Callback: {2}", plugin.FullName(), customId, callback);
         }
 

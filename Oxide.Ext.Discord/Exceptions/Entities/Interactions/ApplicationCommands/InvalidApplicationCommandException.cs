@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
         
         internal static void ThrowIfInvalidName(string name, bool allowNullOrEmpty)
         {
-            const int maxLength = 32;
+            const int MaxLength = 32;
             
             if (!allowNullOrEmpty && string.IsNullOrEmpty(name))
             {
@@ -27,18 +27,18 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
             
             if (name.Length > 32)
             {
-                throw new InvalidApplicationCommandException($"Name cannot be more than {maxLength} characters");
+                throw new InvalidApplicationCommandException($"Name cannot be more than {MaxLength} characters");
             }
         }
         
         internal static void ThrowIfInvalidDescription(string description, ApplicationCommandType type)
         {
-            const int maxLength = 100;
+            const int MaxLength = 100;
             if (type == ApplicationCommandType.ChatInput)
             {
-                if (!string.IsNullOrEmpty(description) && description.Length > maxLength)
+                if (!string.IsNullOrEmpty(description) && description.Length > MaxLength)
                 {
-                    throw new InvalidApplicationCommandException($"Description cannot be more than {maxLength} characters for {nameof(ApplicationCommandType)}.{type}");
+                    throw new InvalidApplicationCommandException($"Description cannot be more than {MaxLength} characters for {nameof(ApplicationCommandType)}.{type}");
                 }
             }
             else

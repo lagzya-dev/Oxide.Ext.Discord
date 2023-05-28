@@ -19,21 +19,21 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnClanCreate))]
-        private void OnClanCreate(string tag)
+        private void OnClanCreate()
         {
             ClearClanCache();
         }
 
         // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnClanUpdate))]
-        private void OnClanUpdate(string tag)
+        private void OnClanUpdate()
         {
             ClearClanCache();
         }
 
         // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnClanDestroy))]
-        private void OnClanDestroy(string tag)
+        private void OnClanDestroy()
         {
             ClearClanCache();
         }

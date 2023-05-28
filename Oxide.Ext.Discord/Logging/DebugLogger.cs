@@ -59,12 +59,64 @@ namespace Oxide.Ext.Discord.Logging
             _logger.AppendLine(value);
         }
 
+        /// <summary>
+        /// Appends a field with the given name and int value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
         public void AppendField(string name, int value) => AppendField(name, StringCache<int>.Instance.ToString(value));
+        
+        /// <summary>
+        /// Appends a field with the given name and double value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
         public void AppendField(string name, double value) => AppendField(name, StringCache<double>.Instance.ToString(value));
+        
+        /// <summary>
+        /// Appends a field with the given name and float value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
         public void AppendField(string name, float value) => AppendField(name, StringCache<float>.Instance.ToString(value));
+        
+        /// <summary>
+        /// Appends a field with the given name and ulong value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
         public void AppendField(string name, ulong value) => AppendField(name, StringCache<ulong>.Instance.ToString(value));
+        
+        /// <summary>
+        /// Appends a field with the given name and long value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
         public void AppendField(string name, long value) => AppendField(name, StringCache<long>.Instance.ToString(value));
+        
+        /// <summary>
+        /// Appends a field with the given name and bool value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
+        public void AppendField(string name, bool value)
+        {
+            AppendFieldPrefix(name);
+            _logger.AppendLine(value ? "Yes" : "No");
+        }
+        
+        /// <summary>
+        /// Appends a field with the given name and Snowflake value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
         public void AppendField(string name, Snowflake value) => AppendField(name, value.ToString());
+        
+        /// <summary>
+        /// Appends a field with the given name and Snowflake? value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
         public void AppendField(string name, Snowflake? value)
         {
             if (value.HasValue)
@@ -76,8 +128,19 @@ namespace Oxide.Ext.Discord.Logging
             AppendField(name, "Invalid ID");
         }
 
+        /// <summary>
+        /// Appends a field with the given name and enum value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
         public void AppendFieldEnum<T>(string name, T value)  where T : struct, IComparable, IFormattable, IConvertible => AppendField(name, EnumCache<T>.Instance.ToString(value));
-        
+
+        /// <summary>
+        /// Appends a field with the given name and int amount over int total value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="amount">Amount / Top value</param>
+        /// <param name="total">Total / Bottom Value</param>
         public void AppendFieldOutOf(string name, int amount, int total)
         {
             AppendFieldPrefix(name);
@@ -86,6 +149,11 @@ namespace Oxide.Ext.Discord.Logging
             _logger.AppendLine(StringCache<int>.Instance.ToString(total));
         }
 
+        /// <summary>
+        /// Appends a field with the given name and method info
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="info">Method info to append</param>
         public void AppendMethod(string name, MethodInfo info)
         {
             AppendFieldPrefix(name);
@@ -94,6 +162,12 @@ namespace Oxide.Ext.Discord.Logging
             _logger.AppendLine(info.Name);
         }
 
+        /// <summary>
+        /// Appends a field with the given name and values seperated by a space
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value1">First value</param>
+        /// <param name="value2">Second value</param>
         public void AppendField(string name, string value1, string value2)
         {
             AppendFieldPrefix(name);
@@ -102,6 +176,11 @@ namespace Oxide.Ext.Discord.Logging
             _logger.AppendLine(value2);
         }
 
+        /// <summary>
+        /// Appends a field with the given name and TimeSpan value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="time">TimeSpan value</param>
         public void AppendField(string name, TimeSpan time)
         {
             AppendFieldPrefix(name);
@@ -139,24 +218,30 @@ namespace Oxide.Ext.Discord.Logging
             _logger.Append(suffix);
             return true;
         }
-        
-        public void AppendField(string name, bool value)
-        {
-            AppendFieldPrefix(name);
-            _logger.AppendLine(value ? "Yes" : "No");
-        }
-        
+
+        /// <summary>
+        /// Appends a field with the given name and Null value
+        /// </summary>
+        /// <param name="name">Name of the field</param>
         public void AppendNullField(string name)
         {
             AppendFieldPrefix(name);
             _logger.AppendLine("IS NULL");
         }
 
+        /// <summary>
+        /// Appends a line to the logger
+        /// </summary>
         public void AppendLine()
         {
             _logger.AppendLine();
         }
-        
+
+        /// <summary>
+        /// Appends a line to the logger with the given character repeated amount time
+        /// </summary>
+        /// <param name="character">Character to repeat</param>
+        /// <param name="amount">Amount of times to repeat the character</param>
         public void AppendLine(char character, int amount)
         {
             AppendIndent();
@@ -164,12 +249,24 @@ namespace Oxide.Ext.Discord.Logging
             _logger.AppendLine();
         }
         
+        /// <summary>
+        /// Appends a line to the logger with the given string value
+        /// </summary>
+        /// <param name="value">Value of the line</param>
         public void AppendLine(string value)
         {
             AppendIndent();
             _logger.AppendLine(value);
         }
 
+        /// <summary>
+        /// Appends a channel path to the logger.
+        /// This path will include the guild name / Parent Channel Name (Optional) / Channel Name
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="guild">Guild for the name</param>
+        /// <param name="channel">Channel for the channel name</param>
+        /// <param name="parent">Parent for the Parent Channel Name</param>
         public void AppendChannelPath(string name, DiscordGuild guild, DiscordChannel channel, DiscordChannel parent = null)
         {
             AppendFieldPrefix(name);
@@ -190,6 +287,11 @@ namespace Oxide.Ext.Discord.Logging
             _logger.AppendLine(")");
         }
 
+        /// <summary>
+        /// Appends a <see cref="IDebugLoggable"/> object to the logger with the given name
+        /// </summary>
+        /// <param name="name">Name of the object</param>
+        /// <param name="obj">Object to be logged</param>
         public void AppendObject(string name, IDebugLoggable obj)
         {
             if (obj == null)
@@ -203,6 +305,11 @@ namespace Oxide.Ext.Discord.Logging
             EndObject();
         }
         
+        /// <summary>
+        /// Appends an <see cref="IEnumerable{T}"/> where T is string items to add to the logger
+        /// </summary>
+        /// <param name="name">Name of the list</param>
+        /// <param name="items">String items to add</param>
         public void AppendList(string name, IEnumerable<string> items)
         {
             List<string> list = items.ToPooledList(DiscordPool.Internal);
@@ -210,6 +317,11 @@ namespace Oxide.Ext.Discord.Logging
             DiscordPool.Internal.FreeList(list);
         }
 
+        /// <summary>
+        /// Appends an <see cref="List{T}"/> where T is string items to add to the logger
+        /// </summary>
+        /// <param name="name">Name of the list</param>
+        /// <param name="items">String items to add</param>
         public void AppendList(string name, List<string> items)
         {
             if (items.Count == 0)
@@ -226,6 +338,11 @@ namespace Oxide.Ext.Discord.Logging
             EndArray();
         }
 
+        /// <summary>
+        /// Appends an <see cref="IEnumerable{T}"/> where T is <see cref="IDebugLoggable"/> items to add to the logger
+        /// </summary>
+        /// <param name="name">Name of the list</param>
+        /// <param name="items">Loggable items to add</param>
         public void AppendList<T>(string name, IEnumerable<T> items) where T : IDebugLoggable
         {
             List<T> list = items.ToPooledList(DiscordPool.Internal);
@@ -233,6 +350,11 @@ namespace Oxide.Ext.Discord.Logging
             DiscordPool.Internal.FreeList(list);
         }
         
+        /// <summary>
+        /// Appends an <see cref="List{T}"/> where T is <see cref="IDebugLoggable"/> items to add to the logger
+        /// </summary>
+        /// <param name="name">Name of the list</param>
+        /// <param name="items">Loggable items to add</param>
         public void AppendList<T>(string name, List<T> items) where T : IDebugLoggable
         {
             if (items.Count == 0)
@@ -249,6 +371,10 @@ namespace Oxide.Ext.Discord.Logging
             EndArray();
         }
 
+        /// <summary>
+        /// Starts an array on the logger with the given name
+        /// </summary>
+        /// <param name="name">Name of the array</param>
         public void StartArray(string name)
         {
             if (!string.IsNullOrEmpty(name))
@@ -261,6 +387,9 @@ namespace Oxide.Ext.Discord.Logging
             IncrementIndent();
         }
 
+        /// <summary>
+        /// Ends an array on the logger
+        /// </summary>
         public void EndArray()
         {
             DecrementIndent();
@@ -269,6 +398,10 @@ namespace Oxide.Ext.Discord.Logging
             _logger.AppendLine();
         }
         
+        /// <summary>
+        /// Starts an object on the logger with the given name
+        /// </summary>
+        /// <param name="name"></param>
         public void StartObject(string name)
         {
             if (!string.IsNullOrEmpty(name))
@@ -282,6 +415,9 @@ namespace Oxide.Ext.Discord.Logging
             IncrementIndent();
         }
 
+        /// <summary>
+        /// Ends an object on the logger
+        /// </summary>
         public void EndObject()
         {
             DecrementIndent();
@@ -290,6 +426,10 @@ namespace Oxide.Ext.Discord.Logging
             _logger.AppendLine();
         }
 
+        /// <summary>
+        /// Returns the logged data as a string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() => DiscordPool.Internal.FreeStringBuilderToString(_logger);
     }
 }

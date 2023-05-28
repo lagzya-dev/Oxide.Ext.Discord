@@ -100,11 +100,12 @@ namespace Oxide.Ext.Discord.Promises
         /// Clears all the handlers for the promises
         /// Called after completion
         /// </summary>
-        protected virtual void ClearHandlers()
-        {
-            Rejects.Clear();
-            Interface.Oxide.NextTick(_dispose);
-        }
+        protected virtual void ClearHandlers() => Rejects.Clear();
+
+        /// <summary>
+        /// Delays disposing the promise till NextTick
+        /// </summary>
+        protected void DelayedDispose() => Interface.Oxide.NextTick(_dispose);
 
         ///<inheritdoc/>
         protected override void LeavePool()

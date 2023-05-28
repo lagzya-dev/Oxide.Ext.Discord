@@ -11,11 +11,11 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
 
         internal static void ThrowIfInvalidNickname(string nickname)
         {
-            const int maxLength = 32;
+            const int MaxLength = 32;
             
-            if (!string.IsNullOrEmpty(nickname) && nickname.Length > maxLength)
+            if (!string.IsNullOrEmpty(nickname) && nickname.Length > MaxLength)
             {
-                throw new InvalidGuildMemberException($"{nameof(GuildMemberUpdate)}.{nameof(GuildMemberUpdate.Nick)} cannot be more than {maxLength} characters");
+                throw new InvalidGuildMemberException($"{nameof(GuildMemberUpdate)}.{nameof(GuildMemberUpdate.Nick)} cannot be more than {MaxLength} characters");
             }
         }
     }

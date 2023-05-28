@@ -14,6 +14,13 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="objectType">Type to check</param>
         /// <returns>True if type is <see cref="Nullable"/>; false otherwise</returns>
         public static bool IsNullable(this Type objectType) => objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>);
+        
+        /// <summary>
+        /// Returns if the type is <see cref="Nullable"/>
+        /// </summary>
+        /// <param name="objectType">Type to check</param>
+        /// <returns>True if type is <see cref="Nullable"/>; false otherwise</returns>
+        public static Type GetNullableType(this Type objectType) => Nullable.GetUnderlyingType(objectType);
 
         /// <summary>
         /// Returns if a type is a value type

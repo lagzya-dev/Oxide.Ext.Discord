@@ -1,9 +1,8 @@
 using System;
-using System.Text;
+using System.Collections.Concurrent;
 using Oxide.Ext.Discord.Exceptions.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Pooling
 {
@@ -22,17 +21,19 @@ namespace Oxide.Ext.Discord.Pooling
         private int _index;
         private readonly object _lock = new object();
         private PoolSize _size;
-        private static readonly Hash<PluginId, BasePool<TPooled>> Pools = new Hash<PluginId, BasePool<TPooled>>();
-        private readonly StringBuilder _sb = new StringBuilder();
         
+        private static readonly ConcurrentDictionary<PluginId, BasePool<TPooled>> Pools = new ConcurrentDictionary<PluginId, BasePool<TPooled>>();
+
         private void InitPool(DiscordPluginPool pluginPool)
         {
-            PluginPool = pluginPool;
-            pluginPool.AddPool(this);
-            Pools[pluginPool.PluginId] = this;
-            _size = GetPoolSize(pluginPool.Settings);
-            InvalidPoolException.ThrowIfInvalidPoolSize(_size);
-            _pool = new TPooled[_size.StartingSize];
+            lock (_lock)
+            {
+                _size = GetPoolSize(pluginPool.Settings);
+                InvalidPoolException.ThrowIfInvalidPoolSize(_size);
+                PluginPool = pluginPool;
+                pluginPool.AddPool(this);
+                _pool = new TPooled[_size.StartingSize];
+            }
         }
 
         /// <summary>
@@ -52,6 +53,7 @@ namespace Oxide.Ext.Discord.Pooling
             if (!(Pools[pluginPool.PluginId] is T pool))
             {
                 pool = new T();
+                Pools[pluginPool.PluginId] = pool;
                 pool.InitPool(pluginPool);
             }
 
@@ -62,59 +64,37 @@ namespace Oxide.Ext.Discord.Pooling
         /// Returns an element from the pool if it exists else it creates a new one
         /// </summary>
         /// <returns></returns>
-        /// TODO: Remove after issue is found
         public TPooled Get()
         {
-            try
+            TPooled item = null;
+            lock (_lock)
             {
-                _sb.Clear();
-                _sb.Append($"A: {PluginPool == null} {_pool == null}");
-                TPooled item = null;
-                lock (_lock)
+                if (_index == _pool.Length && _size.CanResize(_pool.Length))
                 {
-                    _sb.Append("B");
-                    if (_index == _pool.Length && _size.CanResize(_pool.Length))
-                    {
-                        _sb.Append("B1");
-                        int nextSize = _size.GetNextSize(_pool.Length);
-                        DiscordExtension.GlobalLogger.Debug("{0} Resizing Pool {1} Current Size: {2} Next Size: {3}", PluginPool.PluginName, GetType(), _pool.Length, nextSize);
-                        Array.Resize(ref _pool, nextSize);
-                    }
-
-                    if (_index < _pool.Length)
-                    {
-                        _sb.Append("C");
-                        item = _pool[_index];
-                        _pool[_index] = null;
-                        _index++;
-                        _sb.Append("D");
-                    }
-                    else
-                    {
-                        _sb.Append("E");
-                        DiscordExtension.GlobalLogger.Warning("{0} Pool {1} is leaking entities!!! {2}/{3}", PluginPool.PluginName, GetType(), _index, _pool.Length);
-                        _sb.Append("F");
-                    }
+                    int nextSize = _size.GetNextSize(_pool.Length);
+                    DiscordExtension.GlobalLogger.Debug("{0} Resizing Pool {1} Current Size: {2} Next Size: {3}", PluginPool.PluginName, GetType(), _pool.Length, nextSize);
+                    Array.Resize(ref _pool, nextSize);
                 }
 
-                _sb.Append("G");
-                if (item == null)
+                if (_index < _pool.Length)
                 {
-                    _sb.Append("H");
-                    item = CreateNew();
-                    _sb.Append("I");
+                    item = _pool[_index];
+                    _pool[_index] = null;
+                    _index++;
                 }
-
-                _sb.Append("J");
-                OnGetItem(item);
-                _sb.Append("K");
-                return item;
+                else
+                {
+                    DiscordExtension.GlobalLogger.Warning("{0} Pool {1} is leaking entities!!! {2}/{3}", PluginPool.PluginName, GetType(), _index, _pool.Length);
+                }
             }
-            catch (Exception ex)
+                
+            if (item == null)
             {
-                DiscordExtension.GlobalLogger.Error($"{_sb.ToString()}\n{ex.ToString()}");
-                throw;
+                item = CreateNew();
             }
+                
+            OnGetItem(item);
+            return item;
         }
 
         /// <summary>
@@ -157,7 +137,7 @@ namespace Oxide.Ext.Discord.Pooling
         ///<inheritdoc/>
         public void OnPluginUnloaded(DiscordPluginPool pluginPool)
         {
-            Pools.Remove(pluginPool.PluginId);
+            Pools.TryRemove(pluginPool.PluginId, out BasePool<TPooled> _);
         }
 
         /// <summary>

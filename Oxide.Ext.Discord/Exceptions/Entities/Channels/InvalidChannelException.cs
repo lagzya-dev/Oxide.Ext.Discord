@@ -12,23 +12,23 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
 
         internal static void ThrowIfInvalidName(string name, bool allowNullOrEmpty)
         {
-            const int maxLength = 100;
+            const int MaxLength = 100;
             
             if (!allowNullOrEmpty && string.IsNullOrEmpty(name))
             {
                 throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Name)} cannot be less than 1 character");
             }
             
-            if (name.Length > maxLength)
+            if (name.Length > MaxLength)
             {
-                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Name)} cannot be more than {maxLength} characters");
+                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Name)} cannot be more than {MaxLength} characters");
             }
         }
 
         internal static void ThrowIfInvalidTopic(string topic, ChannelType type, bool allowNullOrEmpty)
         {
-            const int maxForumLength = 4096;
-            const int maxTopicLength = 1024;
+            const int MaxForumLength = 4096;
+            const int MaxTopicLength = 1024;
             
             if (!allowNullOrEmpty && string.IsNullOrEmpty(topic))
             {
@@ -37,78 +37,78 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
 
             if (type == ChannelType.GuildForum)
             {
-                if (topic.Length > maxForumLength)
+                if (topic.Length > MaxForumLength)
                 {
-                    throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Topic)} cannot be more than {maxForumLength} characters for Guild Forum Channels");
+                    throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Topic)} cannot be more than {MaxForumLength} characters for Guild Forum Channels");
                 }
 
                 return;
             }
             
-            if (topic.Length > maxTopicLength)
+            if (topic.Length > MaxTopicLength)
             {
-                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Topic)} cannot be more than {maxTopicLength} characters");
+                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Topic)} cannot be more than {MaxTopicLength} characters");
             }
         }
         
         internal static void ThrowIfInvalidRateLimitPerUser(int? rateLimitPerUser)
         {
-            const int minRateLimit = 0;
-            const int maxRateLimit = 21600;
+            const int MinRateLimit = 0;
+            const int MaxRateLimit = 21600;
             if (!rateLimitPerUser.HasValue)
             {
                 return;
             }
             
-            if (rateLimitPerUser.Value < minRateLimit)
+            if (rateLimitPerUser.Value < MinRateLimit)
             {
-                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.RateLimitPerUser)} cannot be less than {minRateLimit}");
+                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.RateLimitPerUser)} cannot be less than {MinRateLimit}");
             }
                 
-            if (rateLimitPerUser.Value > maxRateLimit)
+            if (rateLimitPerUser.Value > MaxRateLimit)
             {
-                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.RateLimitPerUser)} cannot be more than {maxRateLimit}");
+                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.RateLimitPerUser)} cannot be more than {MaxRateLimit}");
             }
         }
         
         internal static void ThrowIfInvalidBitRate(int? bitRate)
         {
-            const int minBitRate = 8000;
-            const int maxBitRate = 128000;
+            const int MinBitRate = 8000;
+            const int MaxBitRate = 128000;
             if (!bitRate.HasValue)
             {
                 return;
             }
             
-            if (bitRate.Value < minBitRate)
+            if (bitRate.Value < MinBitRate)
             {
-                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Bitrate)} cannot be less than {minBitRate}");
+                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Bitrate)} cannot be less than {MinBitRate}");
             }
                 
-            if (bitRate.Value > maxBitRate)
+            if (bitRate.Value > MaxBitRate)
             {
-                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Bitrate)} cannot be more than {maxBitRate}");
+                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Bitrate)} cannot be more than {MaxBitRate}");
             }
         }
         
         internal static void ThrowIfInvalidUserLimit(int? userLimit)
         {
-            const int minUserLimit = 0;
-            const int maxUserLimit = 99;
+            const int MinUserLimit = 0;
+            const int MaxUserLimit = 99;
 
             if (!userLimit.HasValue)
             {
                 return;
             }
             
-            if (userLimit.Value < minUserLimit)
+            if (userLimit.Value < MinUserLimit)
             {
-                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.UserLimit)} cannot be less than {minUserLimit}");
+                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.UserLimit)} cannot be less than {MinUserLimit}");
             }
                 
-            if (userLimit.Value > maxUserLimit)
+            if (userLimit.Value > MaxUserLimit)
             {
-                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.UserLimit)} cannot be more than {maxUserLimit}");
+                throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.UserLimit)} cannot be more than {MaxUserLimit}");
             }
         }
         

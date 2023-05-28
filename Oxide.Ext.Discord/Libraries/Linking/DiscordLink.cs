@@ -322,6 +322,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
             return true;
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendField("Total Links", _links.Count);

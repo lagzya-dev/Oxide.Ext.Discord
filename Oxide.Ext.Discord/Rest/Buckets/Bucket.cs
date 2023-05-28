@@ -292,6 +292,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             _completedSync.Set();
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendField("ID", Id.Id);

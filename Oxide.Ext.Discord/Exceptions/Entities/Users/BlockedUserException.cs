@@ -18,7 +18,6 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Users
         /// </summary>
         public readonly DateTime BlockedUntil;
 
-        
         internal BlockedUserException(DiscordUser user, DateTime blockedUntil)
         {
             User = user;

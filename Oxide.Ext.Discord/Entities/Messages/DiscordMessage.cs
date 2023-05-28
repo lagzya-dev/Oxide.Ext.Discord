@@ -266,11 +266,13 @@ namespace Oxide.Ext.Discord.Entities.Messages
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             UserData userData = client.Bot.DirectMessagesByChannelId[channelId]?.UserData;
-            if (userData != null && userData.IsDmBlocked())
+            DateTime? isBlocked = userData?.GetBlockedUntil();
+            
+            if (isBlocked.HasValue && isBlocked.Value > DateTime.UtcNow)
             {
                 DiscordUser user = userData.GetUser();
                 client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.FullUserName, user.Id, userData.GetBlockedUntil());
-                return Promise<DiscordMessage>.Rejected(new BlockedUserException(userData.GetUser(), userData.GetBlockedUntil().Value));
+                return Promise<DiscordMessage>.Rejected(new BlockedUserException(userData.GetUser(), isBlocked.Value));
             }
 
             IPromise<DiscordMessage> response = client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{channelId}/messages", message);
@@ -688,6 +690,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// See <a href="https://discord.com/developers/docs/resources/channel#edit-message">Edit Message</a>
         /// </summary>
         /// <param name="client">Client to use</param>
+        /// <param name="update">Update to be applied to the message</param>
         public IPromise<DiscordMessage> Edit(DiscordClient client, MessageUpdate update)
         {
             return client.Bot.Rest.Patch<DiscordMessage>(client,$"channels/{ChannelId}/messages/{Id}", update);
@@ -700,12 +703,13 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template Name</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="update">Update to be applied to the message</param>
         public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client, Plugin plugin, string templateName, PlaceholderData placeholders = null, MessageUpdate update = null)
         {
             MessageUpdate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, update);
             return Edit(client, template);
         }
-        
+
         /// <summary>
         /// Edit a message using a localized message template
         /// </summary>
@@ -714,6 +718,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="templateName">Template Name</param>
         /// <param name="language">Oxide language to use</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="update">Update to be applied tothe message</param>
         public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage, PlaceholderData placeholders = null, MessageUpdate update = null)
         {
             MessageUpdate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, update);

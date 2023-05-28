@@ -11,17 +11,17 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
         
         internal static void ThrowIfInvalidName(string name, bool allowNullOrEmpty)
         {
-            const int minLength = 2;
-            const int maxLength = 100;
+            const int MinLength = 2;
+            const int MaxLength = 100;
             
-            if (!allowNullOrEmpty && (string.IsNullOrEmpty(name) || name.Length < minLength))
+            if (!allowNullOrEmpty && (string.IsNullOrEmpty(name) || name.Length < MinLength))
             {
-                throw new InvalidGuildException($"{nameof(GuildCreate)}.{nameof(GuildCreate.Name)} cannot be less than {minLength} character");
+                throw new InvalidGuildException($"{nameof(GuildCreate)}.{nameof(GuildCreate.Name)} cannot be less than {MinLength} character");
             }
             
-            if (name.Length > maxLength)
+            if (name.Length > MaxLength)
             {
-                throw new InvalidGuildException($"{nameof(GuildCreate)}.{nameof(GuildCreate.Name)} cannot be more than {maxLength} characters");
+                throw new InvalidGuildException($"{nameof(GuildCreate)}.{nameof(GuildCreate.Name)} cannot be more than {MaxLength} characters");
             }
         }
     }
