@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Entities.Templates;
+using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 
 namespace Oxide.Ext.Discord.Entities.Webhooks
 {
