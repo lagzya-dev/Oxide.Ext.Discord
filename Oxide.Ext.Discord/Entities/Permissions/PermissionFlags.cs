@@ -341,6 +341,12 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         UseSoundboard = 1ul << 42,
         
         /// <summary>
+        /// Allows the usage of custom soundboard sounds from other servers
+        /// </summary>
+        [Description("USE_EXTERNAL_SOUNDS")]
+        UseExternalSounds = 1ul << 45,
+        
+        /// <summary>
         /// Allows sending voice messages
         /// </summary>
         [Description("SEND_VOICE_MESSAGES")]
