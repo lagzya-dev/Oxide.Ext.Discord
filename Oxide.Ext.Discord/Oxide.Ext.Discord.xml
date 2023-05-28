@@ -11423,6 +11423,28 @@
             Value can be string, integer, or double, or boolean type
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.GetValue``1">
+            <summary>
+            Returns the Value of the option casted to T
+            Supported Conversions
+            CommandOptionType.String => string
+            CommandOptionType.Integer => byte, sbyte, short, ushort, int, uint, long, ulong
+            CommandOptionType.Number => float, double
+            CommandOptionType.Boolean => bool
+            CommandOptionType.User => ulong
+            CommandOptionType.Channel => ulong
+            CommandOptionType.Role => ulong
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if type isn't in a valid range for Type</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.GetValueAsSnowflake">
+            <summary>
+            Returns the value type
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Options">
             <summary>
             Present if this option is a group or subcommand
@@ -15123,6 +15145,11 @@
             Returns if the DiscordUser is a system user
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.HasUpdatedUsername">
+            <summary>
+            Returns true if the user has upgraded their username to the new username format
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Player">
             <summary>
             Returns the IPlayer for the discord user if linked; null otherwise
@@ -17417,22 +17444,22 @@
             Ex: 2 months ago
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Interfaces.Entities.Templates.IDiscordMessageTemplate">
+        <member name="T:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordMessageTemplate">
             <summary>
             Interfaces for <see cref="T:Oxide.Ext.Discord.Libraries.Templates.Messages.DiscordMessageTemplates"/> Messages
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Templates.IDiscordMessageTemplate.Content">
+        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordMessageTemplate.Content">
             <summary>
             Content of the message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Templates.IDiscordMessageTemplate.Embeds">
+        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordMessageTemplate.Embeds">
             <summary>
             Embeds for the message
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Templates.IDiscordMessageTemplate.Components">
+        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordMessageTemplate.Components">
             <summary>
             Components for the message
             </summary>
@@ -21546,69 +21573,69 @@
         <member name="M:Oxide.Ext.Discord.Plugins.PluginId.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.BasePool`1">
+        <member name="T:Oxide.Ext.Discord.Pooling.BasePool`2">
             <summary>
             Represents a BasePool in Discord
             </summary>
             <typeparam name="TPooled">Type being pooled</typeparam>
         </member>
-        <member name="F:Oxide.Ext.Discord.Pooling.BasePool`1.PluginPool">
+        <member name="F:Oxide.Ext.Discord.Pooling.BasePool`2.PluginPool">
             <summary>
             Plugin Pool for this pool
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.GetPoolSize(Oxide.Ext.Discord.Pooling.PoolSettings)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.GetPoolSize(Oxide.Ext.Discord.Pooling.PoolSettings)">
             <summary>
             Returns the pool size from the pool settings for the pool
             </summary>
             <param name="settings"></param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.ForPlugin``1(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.ForPlugin(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
             <summary>
             Returns a pool for the given plugin pool
             </summary>
             <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to get the pool from</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Get">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Get">
             <summary>
             Returns an element from the pool if it exists else it creates a new one
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.CreateNew">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.CreateNew">
             <summary>
             Creates new type of T
             </summary>
             <returns>Newly created type of T</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.Free(`0)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Free(`0)">
             <summary>
             Frees an item back to the pool
             </summary>
             <param name="item">Item being freed</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnPluginUnloaded(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnPluginUnloaded(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.ClearPoolEntities">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.ClearPoolEntities">
             <summary>
             Clears the pool of all pooled objects and resets state to when the pool was first created
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.RemoveAllPools">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.RemoveAllPools">
             <summary>
             Wipes all the pools for this type
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnGetItem(`0)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnGetItem(`0)">
             <summary>
             Called when an item is retrieved from the pool
             </summary>
             <param name="item">Item being retrieved</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`1.OnFreeItem(`0@)">
+        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnFreeItem(`0@)">
             <summary>
             Returns if an item can be freed to the pool
             </summary>

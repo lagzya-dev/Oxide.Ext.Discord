@@ -6,10 +6,8 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     /// Represents a pool for Hash&lt;TKey, TValue&gt;
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class HashSetPool<T> : BasePool<HashSet<T>>
+    internal class HashSetPool<T> : BasePool<HashSet<T>, HashSetPool<T>>
     {
-        public static HashSetPool<T> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<HashSetPool<T>>(pluginPool);
-        
         protected override PoolSize GetPoolSize(PoolSettings settings) => settings.HashSetPoolSize;
         
         protected override HashSet<T> CreateNew() => new HashSet<T>();

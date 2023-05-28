@@ -6,10 +6,8 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     /// Represents a pool for <see cref="Boxed{T}"/>;
     /// </summary>
     /// <typeparam name="T">Type that will be in the boxed object</typeparam>
-    internal class BoxedPool<T> : BasePool<Boxed<T>>
+    internal class BoxedPool<T> : BasePool<Boxed<T>, BoxedPool<T>>
     {
-        public static BoxedPool<T> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<BoxedPool<T>>(pluginPool);
-
         protected override PoolSize GetPoolSize(PoolSettings settings) => new PoolSize(32, 512);
         
         protected override void OnGetItem(Boxed<T> item)

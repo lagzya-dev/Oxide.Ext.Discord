@@ -175,6 +175,11 @@ namespace Oxide.Ext.Discord.Entities.Users
         public bool IsSystem => System.HasValue && System.Value;
 
         /// <summary>
+        /// Returns true if the user has upgraded their username to the new username format
+        /// </summary>
+        public bool HasUpdatedUsername => !string.IsNullOrEmpty(Discriminator) && Discriminator == "0";
+
+        /// <summary>
         /// Returns the IPlayer for the discord user if linked; null otherwise
         /// </summary>
         public IPlayer Player => DiscordLink.Instance.GetPlayer(Id);

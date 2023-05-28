@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Pooling
     /// Represents a BasePool in Discord
     /// </summary>
     /// <typeparam name="TPooled">Type being pooled</typeparam>
-    public abstract class BasePool<TPooled> : IPool<TPooled> where TPooled : class
+    public abstract class BasePool<TPooled, TPool> : IPool<TPooled> where TPooled : class where TPool : BasePool<TPooled, TPool>, new()
     {
         /// <summary>
         /// Plugin Pool for this pool
@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Pooling
         private readonly object _lock = new object();
         private PoolSize _size;
         
-        private static readonly ConcurrentDictionary<PluginId, BasePool<TPooled>> Pools = new ConcurrentDictionary<PluginId, BasePool<TPooled>>();
+        private static readonly ConcurrentDictionary<PluginId, TPool> Pools = new ConcurrentDictionary<PluginId, TPool>();
 
         private void InitPool(DiscordPluginPool pluginPool)
         {
@@ -48,11 +48,11 @@ namespace Oxide.Ext.Discord.Pooling
         /// </summary>
         /// <param name="pluginPool"><see cref="DiscordPluginPool"/> to get the pool from</param>
         /// <returns></returns>
-        protected static T ForPlugin<T>(DiscordPluginPool pluginPool) where T : BasePool<TPooled>, new()
+        public static TPool ForPlugin(DiscordPluginPool pluginPool)
         {
-            if (!(Pools[pluginPool.PluginId] is T pool))
+            if (!Pools.TryGetValue(pluginPool.PluginId, out TPool pool))
             {
-                pool = new T();
+                pool = new TPool();
                 Pools[pluginPool.PluginId] = pool;
                 pool.InitPool(pluginPool);
             }
@@ -137,7 +137,7 @@ namespace Oxide.Ext.Discord.Pooling
         ///<inheritdoc/>
         public void OnPluginUnloaded(DiscordPluginPool pluginPool)
         {
-            Pools.TryRemove(pluginPool.PluginId, out BasePool<TPooled> _);
+            Pools.TryRemove(pluginPool.PluginId, out TPool _);
         }
 
         /// <summary>

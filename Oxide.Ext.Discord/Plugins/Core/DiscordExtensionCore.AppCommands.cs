@@ -111,7 +111,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [DiscordAutoCompleteCommand(AppCommandKeys.DeCommand, AppCommandKeys.DeleteAppCommandArgument, AppCommandKeys.DeleteAppCommand, AppCommandKeys.AppCommandGroup)]
         private void HandleDeleteApplicationAutoComplete(DiscordInteraction interaction, InteractionDataOption focused)
         {
-            string search = (string)focused.Value;
+            string search = focused.GetValue<string>();
             CommandCache cache = _commandCache[interaction.ApplicationId];
             InteractionAutoCompleteBuilder builder = new InteractionAutoCompleteBuilder(interaction);
             BotClient client = BotClientFactory.Instance.GetByApplicationId(interaction.ApplicationId);

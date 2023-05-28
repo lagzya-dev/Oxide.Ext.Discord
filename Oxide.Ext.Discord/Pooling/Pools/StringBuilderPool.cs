@@ -5,10 +5,8 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     /// <summary>
     /// Pool for StringBuilders
     /// </summary>
-    internal class StringBuilderPool : BasePool<StringBuilder>
+    internal class StringBuilderPool : BasePool<StringBuilder, StringBuilderPool>
     {
-        public static StringBuilderPool ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<StringBuilderPool>(pluginPool);
-        
         protected override PoolSize GetPoolSize(PoolSettings settings) => settings.StringBuilderPoolSize;
         
         protected override StringBuilder CreateNew() => new StringBuilder();

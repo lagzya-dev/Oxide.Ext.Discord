@@ -7,10 +7,8 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
-    internal class HashPool<TKey, TValue> : BasePool<Hash<TKey, TValue>>
+    internal class HashPool<TKey, TValue> : BasePool<Hash<TKey, TValue>, HashPool<TKey, TValue>>
     {
-        public static HashPool<TKey, TValue> ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<HashPool<TKey, TValue>>(pluginPool);
-
         protected override PoolSize GetPoolSize(PoolSettings settings) => settings.HashPoolSize;
 
         protected override Hash<TKey, TValue> CreateNew() => new Hash<TKey, TValue>();

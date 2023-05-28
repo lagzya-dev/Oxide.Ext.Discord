@@ -5,10 +5,8 @@ namespace Oxide.Ext.Discord.Pooling.Pools
     /// <summary>
     /// Represents a pool for MemoryStream
     /// </summary>
-    internal class MemoryStreamPool : BasePool<MemoryStream>
+    internal class MemoryStreamPool : BasePool<MemoryStream, MemoryStreamPool>
     {
-        public static MemoryStreamPool ForPlugin(DiscordPluginPool pluginPool) => ForPlugin<MemoryStreamPool>(pluginPool);
-        
         protected override PoolSize GetPoolSize(PoolSettings settings) => settings.MemoryStreamPoolSize;
         
         protected override MemoryStream CreateNew() => new MemoryStream();
