@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Reflection;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Plugins;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
@@ -9,6 +10,8 @@ namespace Oxide.Ext.Discord.Json.Utilities
     internal static class JsonEnumUtils
     {
         private static readonly ConcurrentDictionary<Type, EnumData> EnumData = new ConcurrentDictionary<Type, EnumData>();
+
+        internal static object GetDefault(Type enumType) => GetEnumData(enumType).Default;
 
         internal static string ToEnumName(Type enumType, string enumText)
         {
@@ -57,11 +60,13 @@ namespace Oxide.Ext.Discord.Json.Utilities
 
     internal class EnumData
     {
+        public readonly object Default;
         public readonly Hash<string, string> NameToProperty = new Hash<string, string>();
         public readonly Hash<string, string> PropertyToName = new Hash<string, string>();
 
         public EnumData(Type type)
         {
+            Default = type.GetDefault();
             foreach (FieldInfo field in type.GetFields())
             {
                 string name = field.Name;

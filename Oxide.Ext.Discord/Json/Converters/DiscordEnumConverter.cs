@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Json.Converters
                 writer.WriteNull();
                 return;
             }
-            
+
             Enum enumValue = (Enum) value;
             string enumText = enumValue.ToString("G");
             if (char.IsNumber(enumText[0]) || enumText[0] == '-')
@@ -62,13 +62,13 @@ namespace Oxide.Ext.Discord.Json.Converters
             string value = reader.Value.ToString();
             if (reader.TokenType == JsonToken.Integer)
             {
-                return Enum.IsDefined(objectType, value) ? Enum.Parse(objectType, value) : objectType.GetDefault();
+                return Enum.IsDefined(objectType, value) ? Enum.Parse(objectType, value) : JsonEnumUtils.GetDefault(objectType);
             }
 
             if (reader.TokenType == JsonToken.String)
             {
                 string enumName = JsonEnumUtils.FromEnumName(objectType, value) ?? value;
-                return Enum.IsDefined(objectType, enumName) ? Enum.Parse(objectType, enumName) : objectType.GetDefault();
+                return Enum.IsDefined(objectType, enumName) ? Enum.Parse(objectType, enumName) : JsonEnumUtils.GetDefault(objectType);
             }
 
             throw new JsonException($"Unexpected token {reader.TokenType} when parsing enum. Path: {reader.Path}");
