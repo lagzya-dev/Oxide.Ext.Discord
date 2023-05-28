@@ -14,6 +14,11 @@ namespace Oxide.Ext.Discord.Plugins
         public const string ShowLog = nameof(ShowLog);
         public const string SetLog = nameof(SetLog);
         public const string InvalidLogEnum = nameof(InvalidLogEnum);
+        public const string ShowValidation = nameof(ShowValidation);
+        public const string SetValidation = nameof(SetValidation);
+        public const string InvalidValidation = nameof(InvalidValidation);
+        public const string Enabled = nameof(Enabled);
+        public const string Disabled = nameof(Disabled);
     }
     
     internal static class Localization
@@ -31,7 +36,12 @@ namespace Oxide.Ext.Discord.Plugins
                 [LangKeys.WipePool] = "All Discord Pools have been wiped",
                 [LangKeys.ShowLog] = "{0} log is currently set to {1}",
                 [LangKeys.SetLog] = "{0} log has been set to {1}",
-                [LangKeys.InvalidLogEnum] = "'{0}' is not a valid DiscordLogLevel enum. Valid values are Off, Error, Warning, Info, Debug, Verbose"
+                [LangKeys.InvalidLogEnum] = "'{0}' is not a valid DiscordLogLevel enum. Valid values are Off, Error, Warning, Info, Debug, Verbose",
+                [LangKeys.ShowValidation] = "Discord Validation is currently set to {0}",
+                [LangKeys.SetValidation] = "Discord Validation has been set to {0}",
+                [LangKeys.InvalidValidation] = "'{0}' is not a valid boolean value. Valid values are false, true, 0, or 1",
+                [LangKeys.Enabled] = "Enabled",
+                [LangKeys.Disabled] = "Disabled"
             }
         };
     }

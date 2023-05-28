@@ -45,8 +45,9 @@ namespace Oxide.Ext.Discord.Plugins.Core
             AddCovalenceCommand(new[] { "de.rest.reset" }, nameof(ResetRestApiCommand), "de.rest.reset");
             AddCovalenceCommand(new[] { "de.clearpool" }, nameof(ClearDiscordPool), "de.clearpool");
             AddCovalenceCommand(new[] { "de.wipepool" }, nameof(WipeDiscordPool), "de.wipepool");
-            AddCovalenceCommand(new[] { "de.consolelog" }, nameof(ConsoleLogCommand), "de.consolelog");
-            AddCovalenceCommand(new[] { "de.filelog" }, nameof(FileLogCommand), "de.filelog");
+            AddCovalenceCommand(new[] { "de.log.console" }, nameof(ConsoleLogCommand), "de.log.console");
+            AddCovalenceCommand(new[] { "de.log.file" }, nameof(FileLogCommand), "de.log.file");
+            AddCovalenceCommand(new[] { "de.validation.enable" }, nameof(ValidationEnableCommand), "de.validation.enable");
             AddCovalenceCommand(new[] { "de.debug" }, nameof(DiscordDebugCommand), "de.debug");
             
             foreach (KeyValuePair<string, Dictionary<string, string>> language in Localization.Languages)
@@ -173,6 +174,34 @@ namespace Oxide.Ext.Discord.Plugins.Core
             {
                 Chat(player, LangKeys.InvalidLogEnum, args[0]);
             }
+        }
+
+        [HookMethod(nameof(ValidationEnableCommand))]
+        private void ValidationEnableCommand(IPlayer player, string cmd, string[] args)
+        {
+            if (args.Length == 0)
+            {
+                Chat(player, LangKeys.ShowValidation, GetLang(DiscordConfig.Instance.Validation.EnableValidation ? LangKeys.Enabled : LangKeys.Disabled));
+                return;
+            }
+
+            string arg = args[0];
+            if (bool.TryParse(arg, out bool state))
+            {
+                DiscordConfig.Instance.Validation.EnableValidation = state;
+                Chat(player, LangKeys.SetValidation, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
+                DiscordConfig.Instance.Save();
+            }
+
+            if (char.IsNumber(arg[0]))
+            {
+                state = arg[0] == '0';
+                DiscordConfig.Instance.Validation.EnableValidation = state;
+                Chat(player, LangKeys.SetValidation, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
+                DiscordConfig.Instance.Save();
+            }
+            
+            Chat(player, LangKeys.InvalidValidation, arg);
         }
 
         [HookMethod(nameof(DiscordDebugCommand))]

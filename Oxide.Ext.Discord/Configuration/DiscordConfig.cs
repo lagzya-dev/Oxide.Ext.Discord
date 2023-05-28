@@ -32,6 +32,12 @@ namespace Oxide.Ext.Discord.Configuration
         /// </summary>
         [JsonProperty("Users")]
         public DiscordUsersConfig Users { get; set; }
+        
+        /// <summary>
+        /// Discord Logging Options
+        /// </summary>
+        [JsonProperty("Validation")]
+        public DiscordValidationConfig Validation { get; set; }
 
         /// <summary>
         /// Constructor for discord config
@@ -90,6 +96,10 @@ namespace Oxide.Ext.Discord.Configuration
             Users = new DiscordUsersConfig
             {
                 DmBlockedDuration = Users?.DmBlockedDuration ?? 24f
+            };
+            Validation = new DiscordValidationConfig
+            {
+                EnableValidation = Validation?.EnableValidation ?? true
             };
         }
     }

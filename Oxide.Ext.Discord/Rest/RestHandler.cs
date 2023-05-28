@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
@@ -160,11 +161,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="data">Data to be sent with the request</param>
         private IPromise CreateRequest(DiscordClient client, string url, RequestMethod method, object data = null)
         {
-            if (data is IDiscordValidation validate)
-            {
-                validate.Validate();
-            }
-
+            PerformValidation(data);
             IPendingPromise promise = Promise.Create();
             Request request = Request.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, promise);
             StartRequest(request);
@@ -181,15 +178,19 @@ namespace Oxide.Ext.Discord.Rest
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
         private IPromise<T> CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data = null)
         {
-            if (data is IDiscordValidation validate)
-            {
-                validate.Validate();
-            }
-
+            PerformValidation(data);
             IPendingPromise<T> promise = Promise<T>.Create();
             Request<T> request = Request<T>.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, promise);
             StartRequest(request);
             return promise;
+        }
+
+        private void PerformValidation(object data)
+        {
+            if (DiscordConfig.Instance.Validation.EnableValidation && data is IDiscordValidation validate)
+            {
+                validate.Validate();
+            }
         }
 
         /// <summary>
