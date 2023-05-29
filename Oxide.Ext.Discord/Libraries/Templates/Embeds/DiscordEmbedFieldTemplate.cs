@@ -1,6 +1,11 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
+using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Interfaces.Templates;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Promises;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
 {
@@ -8,7 +13,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
     /// Discord Template for Embed Field
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordEmbedFieldTemplate
+    public class DiscordEmbedFieldTemplate : IBulkTemplate<EmbedField>
     {
         /// <summary>
         /// Title of the field
@@ -53,7 +58,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
         /// <param name="data">Data to use</param>
         /// <param name="field">Initial field (Optional)</param>
         /// <returns></returns>
-        public EmbedField ToEntity(PlaceholderData data, EmbedField field = null)
+        public EmbedField ToEntity(PlaceholderData data = null, EmbedField field = null)
         {
             if (field == null)
             {
@@ -65,6 +70,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
             field.Inline = Inline;
 
             return field;
+        }
+
+        ///<inheritdoc/>
+        public IPromise<List<EmbedField>> ToEntityBulk(List<PlaceholderData> data)
+        {
+            IPendingPromise<List<EmbedField>> promise = Promise<List<EmbedField>>.Create();
+
+            BulkToEntityCallback<DiscordEmbedFieldTemplate, EmbedField>.Start(this, data, promise);
+            
+            return promise;
         }
     }
 }

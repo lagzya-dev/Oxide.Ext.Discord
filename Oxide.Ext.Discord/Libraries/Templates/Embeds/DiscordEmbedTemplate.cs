@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Interfaces.Templates;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Promises;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
 {
@@ -13,7 +17,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
     /// Discord Template for embed
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordEmbedTemplate
+    public class DiscordEmbedTemplate : IBulkTemplate<DiscordEmbed>
     {
         /// <summary>
         /// If this embed is enabled
@@ -159,6 +163,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
             }
 
             return embed;
+        }
+
+        ///<inheritdoc/>
+        public IPromise<List<DiscordEmbed>> ToEntityBulk(List<PlaceholderData> data = null)
+        {
+            IPendingPromise<List<DiscordEmbed>> promise = Promise<List<DiscordEmbed>>.Create();
+
+            BulkToEntityCallback<DiscordEmbedTemplate, DiscordEmbed>.Start(this, data, promise);
+            
+            return promise;
         }
     }
 }

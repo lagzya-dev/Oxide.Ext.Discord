@@ -17812,6 +17812,28 @@
             Reject the promise with an exception.
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.Templates.IBulkTemplate`1">
+            <summary>
+            Represents a Template that supports bulk operations
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Templates.IBulkTemplate`1.ToEntity(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,`0)">
+            <summary>
+            return the {T} entity with the given placeholder data
+            If entity is not specified a new one will be created
+            </summary>
+            <param name="data">Placeholder Data to apply</param>
+            <param name="entity">Initial entity</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.Templates.IBulkTemplate`1.ToEntityBulk(System.Collections.Generic.List{Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData})">
+            <summary>
+            Returns a promise that returns a bulk to entity.
+            </summary>
+            <param name="data">List of data to be bulk converter</param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.Types.IReadonlySet`1">
             <summary>
             Represents a ReadOnly interface for <see cref="T:System.Collections.Generic.ISet`1"/>
@@ -20701,6 +20723,9 @@
             <param name="field">Initial field (Optional)</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Embeds.DiscordEmbedFieldTemplate.ToEntityBulk(System.Collections.Generic.List{Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData})">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Embeds.DiscordEmbedFieldTemplates">
             <summary>
             Modal Templates Library
@@ -20792,6 +20817,9 @@
             <param name="data">Data to use</param>
             <param name="embed">Initial embed to use</param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Embeds.DiscordEmbedTemplate.ToEntityBulk(System.Collections.Generic.List{Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData})">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Embeds.DiscordEmbedTemplates">
             <summary>
