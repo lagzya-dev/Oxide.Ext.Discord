@@ -7,6 +7,9 @@ namespace Oxide.Ext.Discord.Configuration
     /// </summary>
     public class DiscordValidationConfig
     {
+        /// <summary>
+        /// Enables request validation
+        /// </summary>
         [JsonProperty("Enable Request Validation")]
         public bool EnableValidation { get; set; }
     }

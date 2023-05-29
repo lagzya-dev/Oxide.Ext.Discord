@@ -1913,6 +1913,11 @@
             Discord Logging Options
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Validation">
+            <summary>
+            Discord Logging Options
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Configuration.DiscordConfig.#ctor(System.String)">
             <summary>
             Constructor for discord config
@@ -1953,6 +1958,16 @@
         <member name="P:Oxide.Ext.Discord.Configuration.DiscordUsersConfig.DmBlockedDuration">
             <summary>
             How long to block DM's after we receive a 50007 Discord API Error code
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Configuration.DiscordValidationConfig">
+            <summary>
+            Discord Validation Config
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordValidationConfig.EnableValidation">
+            <summary>
+            Enables request validation
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Constants.DiscordEncoding">
@@ -21578,6 +21593,7 @@
             Represents a BasePool in Discord
             </summary>
             <typeparam name="TPooled">Type being pooled</typeparam>
+            <typeparam name="TPool">Type of the pool</typeparam>
         </member>
         <member name="F:Oxide.Ext.Discord.Pooling.BasePool`2.PluginPool">
             <summary>
