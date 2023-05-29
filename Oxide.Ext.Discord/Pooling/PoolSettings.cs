@@ -44,13 +44,13 @@ namespace Oxide.Ext.Discord.Pooling
 
         internal static PoolSettings CreateInternal() => new PoolSettings
         {
-            HashPoolSize = new PoolSize(64, 1024),
-            HashSetPoolSize = new PoolSize(64, 1024),
-            ListPoolSize = new PoolSize(64, 1024),
-            MemoryStreamPoolSize = new PoolSize(64, 1024),
-            ObjectPoolSize = new PoolSize(64, 1024),
-            PlaceholderDataPoolSize = new PoolSize(64, 1024),
-            StringBuilderPoolSize = new PoolSize(64, 1024),
+            HashPoolSize = new PoolSize(128, 1024),
+            HashSetPoolSize = new PoolSize(128, 1024),
+            ListPoolSize = new PoolSize(128, 1024),
+            MemoryStreamPoolSize = new PoolSize(128, 1024),
+            ObjectPoolSize = new PoolSize(128, 1024),
+            PlaceholderDataPoolSize = new PoolSize(128, 1024),
+            StringBuilderPoolSize = new PoolSize(128, 1024),
         };
     }
 }
