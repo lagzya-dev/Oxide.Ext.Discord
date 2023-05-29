@@ -21,9 +21,6 @@ namespace Oxide.Ext.Discord.Promises
         ///<inheritdoc/>
         public Snowflake Id { get; private set; }
 
-        ///<inheritdoc/>
-        public string Name { get; protected set; }
-
         /// <summary>
         /// Tracks the current state of the promise.
         /// </summary>
@@ -118,7 +115,6 @@ namespace Oxide.Ext.Discord.Promises
         protected override void EnterPool()
         {
             Id = default(Snowflake);
-            Name = null;
             State = PromiseState.Pending;
             Exception = null;
             Rejects.Clear();

@@ -15,12 +15,7 @@ namespace Oxide.Ext.Discord.Interfaces.Promises
         /// ID of the promise, useful for debugging.
         /// </summary>
         Snowflake Id { get; }
-        
-        /// <summary>
-        /// Name of the promise, when set, useful for debugging.
-        /// </summary>
-        string Name { get; }
-        
+
         /// <summary>
         /// Reject the promise with an exception.
         /// </summary>

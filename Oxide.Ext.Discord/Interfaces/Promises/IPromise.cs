@@ -13,11 +13,6 @@ namespace Oxide.Ext.Discord.Interfaces.Promises
     public interface IPromise
     {
         /// <summary>
-        /// Set the name of the promise, useful for debugging.
-        /// </summary>
-        IPromise WithName(string name);
-
-        /// <summary>
         /// Handle errors for the promise. 
         /// </summary>
         IPromise Catch(Action<Exception> onRejected);

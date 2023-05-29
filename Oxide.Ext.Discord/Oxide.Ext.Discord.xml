@@ -17608,11 +17608,6 @@
             https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Interfaces.Promises.IPromise.WithName(System.String)">
-            <summary>
-            Set the name of the promise, useful for debugging.
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.Promises.IPromise.Catch(System.Action{System.Exception})">
             <summary>
             Handle errors for the promise. 
@@ -17709,11 +17704,6 @@
             <summary>
             Implements a C# promise.
             https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Interfaces.Promises.IPromise`1.WithName(System.String)">
-            <summary>
-            Set the name of the promise, useful for debugging.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.Promises.IPromise`1.Catch(System.Action{System.Exception})">
@@ -17815,11 +17805,6 @@
         <member name="P:Oxide.Ext.Discord.Interfaces.Promises.IRejectable.Id">
             <summary>
             ID of the promise, useful for debugging.
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.Promises.IRejectable.Name">
-            <summary>
-            Name of the promise, when set, useful for debugging.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.Promises.IRejectable.Reject(System.Exception)">
@@ -22030,9 +22015,6 @@
         <member name="P:Oxide.Ext.Discord.Promises.BasePromise.Id">
             <inheritdoc/>
         </member>
-        <member name="P:Oxide.Ext.Discord.Promises.BasePromise.Name">
-            <inheritdoc/>
-        </member>
         <member name="P:Oxide.Ext.Discord.Promises.BasePromise.State">
             <summary>
             Tracks the current state of the promise.
@@ -22128,9 +22110,6 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Resolve">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.WithName(System.String)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Catch(System.Action{System.Exception})">
@@ -22269,9 +22248,6 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Resolve(`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.WithName(System.String)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.InvokeResolveHandlers(`0)">

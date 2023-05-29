@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
+using Oxide.Ext.Discord.Callbacks.Promises;
 using Oxide.Ext.Discord.Exceptions.Promise;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
@@ -118,14 +119,6 @@ namespace Oxide.Ext.Discord.Promises
         }
 
         ///<inheritdoc/>
-        public IPromise WithName(string name)
-        {
-            PromiseException.ThrowIfDisposed(this);
-            Name = name;
-            return this;
-        }
-
-        ///<inheritdoc/>
         public IPromise Catch(Action<Exception> onRejected)
         {
             PromiseException.ThrowIfDisposed(this);
@@ -135,7 +128,6 @@ namespace Oxide.Ext.Discord.Promises
             }
 
             Promise resultPromise = Create(IsInternal);
-            resultPromise.WithName(Name);
 
             void RejectHandler(Exception exception)
             {
@@ -195,7 +187,6 @@ namespace Oxide.Ext.Discord.Promises
             // This version of the function must supply an onResolved.
             // Otherwise there is now way to get the converted value to pass to the resulting promise.
             Promise<TConvert> resultPromise = Promise<TConvert>.Create(IsInternal);
-            resultPromise.WithName(Name);
 
             void ResolveHandler()
             {
@@ -242,7 +233,6 @@ namespace Oxide.Ext.Discord.Promises
             }
 
             Promise resultPromise = Create(IsInternal);
-            resultPromise.WithName(Name);
 
             Action resolveHandler;
             if (onResolved != null)
@@ -303,41 +293,10 @@ namespace Oxide.Ext.Discord.Promises
             }
 
             Promise resultPromise = Create(IsInternal);
-            resultPromise.WithName(Name);
 
-            Action resolveHandler;
-            if (onResolved != null)
-            {
-                void ResolveHandler()
-                {
-                    onResolved();
-                    resultPromise.Resolve();
-                }
+            PromiseCallback callback = PromiseCallback.Create(resultPromise, onResolved, onRejected);
 
-                resolveHandler = ResolveHandler;
-            }
-            else
-            {
-                resolveHandler = resultPromise._onResolve;
-            }
-
-            Action<Exception> rejectHandler;
-            if (onRejected != null)
-            {
-                void RejectHandler(Exception ex)
-                {
-                    onRejected(ex);
-                    resultPromise.Resolve();
-                }
-
-                rejectHandler = RejectHandler;
-            }
-            else
-            {
-                rejectHandler = resultPromise.OnReject;
-            }
-
-            AddHandlers(new ResolveHandler(resolveHandler, resultPromise), new RejectHandler(rejectHandler, resultPromise));
+            AddHandlers(new ResolveHandler(callback.RunResolve, resultPromise), new RejectHandler(callback.RunRejected, resultPromise));
 
             return resultPromise;
         }
@@ -389,7 +348,6 @@ namespace Oxide.Ext.Discord.Promises
 
             int remainingCount = promises.Count;
             Promise resultPromise = Create(false);
-            resultPromise.WithName("All");
 
             for (int index = 0; index < promises.Count; index++)
             {
@@ -455,7 +413,6 @@ namespace Oxide.Ext.Discord.Promises
             }
 
             Promise promise = Create(IsInternal);
-            promise.WithName(Name);
 
             Then(promise._onResolve);
             Catch(exception => 
@@ -478,7 +435,6 @@ namespace Oxide.Ext.Discord.Promises
         public IPromise ContinueWith(Func<IPromise> onComplete)
         {
             Promise promise = Create(IsInternal);
-            promise.WithName(Name);
 
             Then(promise._onResolve);
             Catch(e => promise.Resolve());
@@ -490,7 +446,6 @@ namespace Oxide.Ext.Discord.Promises
         public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComplete)
         {
             Promise promise = Create(IsInternal);
-            promise.WithName(Name);
 
             Then(promise._onResolve);
             Catch(e => promise.Resolve());
