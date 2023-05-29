@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         //private readonly ZlibDecompressorHandler _decompressor;
         
         private const int SendChunkSize = 1024;
-        private const int ReceiveChunkSize = 1024;
+        private const int ReceiveChunkSize = 2048;
 
         /// <summary>
         /// Constructor
