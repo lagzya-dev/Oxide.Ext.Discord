@@ -15,6 +15,8 @@ namespace Oxide.Ext.Discord.Singleton
         /// </summary>
         public static readonly T Instance;
 
+        private const string ErrorMessage = "must have a parameterless constructor and all constructors have to be NonPublic.";
+        
         static Singleton()
         {
             try 
@@ -27,8 +29,6 @@ namespace Oxide.Ext.Discord.Singleton
                 throw new Exception($"{typeof(T)} {ErrorMessage}");
             }
         }
-
-        private const string ErrorMessage = "must have a parameterless constructor and all constructors have to be NonPublic.";
 
         /// <summary>
         /// Constructor
