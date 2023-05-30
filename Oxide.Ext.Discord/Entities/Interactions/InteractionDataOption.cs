@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 
 namespace Oxide.Ext.Discord.Entities.Interactions

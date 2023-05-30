@@ -16464,6 +16464,12 @@
             An exception when something is invalid with a pool
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.Promise.PromiseCancelledException.#ctor(System.String)">
+            <summary>
+            Create the exception with description
+            </summary>
+            <param name="message">Exception description</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Promise.PromiseException">
             <summary>
             Exceptions for promises
@@ -17608,6 +17614,11 @@
             https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.Promises.IPromise.Id">
+            <summary>
+            ID of the promise, useful for debugging.
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.Promises.IPromise.Catch(System.Action{System.Exception})">
             <summary>
             Handle errors for the promise. 
@@ -17706,6 +17717,11 @@
             https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.Promises.IPromise`1.Id">
+            <summary>
+            ID of the promise, useful for debugging.
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.Promises.IPromise`1.Catch(System.Action{System.Exception})">
             <summary>
             Handle errors for the promise. 
@@ -17800,11 +17816,6 @@
         <member name="T:Oxide.Ext.Discord.Interfaces.Promises.IRejectable">
             <summary>
             Interface for a promise that can be rejected.
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.Promises.IRejectable.Id">
-            <summary>
-            ID of the promise, useful for debugging.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.Promises.IRejectable.Reject(System.Exception)">
@@ -22394,6 +22405,61 @@
         <member name="F:Oxide.Ext.Discord.Promises.ResolveHandler`1._rejectable">
             <summary>
             The promise that is rejected when there is an error while invoking the handler.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promises.Timer.BaseTimerInstance.PendingPromise">
+            <summary>
+            The pending promise which is an interface for a promise that can be rejected or resolved.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promises.Timer.EventTimerInstance._predicate">
+            <summary>
+            Predicate for resolving the promise
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promises.Timer.EventTimerInstance._timeStarted">
+            <summary>
+            The time the promise was started
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Promises.Timer.PromiseTimer">
+            <summary>
+            Timer Implementation using promises
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promises.Timer.PromiseTimer._currentTime">
+            <summary>
+            The current running total for time that this PromiseTimer has run for
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Promises.Timer.PromiseTimer._waiting">
+            <summary>
+            Currently pending promises
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.WaitFor(System.Single)">
+            <summary>
+            Resolve the returned promise once the time has elapsed
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.WaitWhile(System.Func{System.Single,System.Boolean})">
+            <summary>
+            Resolve the returned promise once the predicate evaluates to false
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.WaitUntil(System.Func{System.Single,System.Boolean})">
+            <summary>
+            Resolve the returned promise once the predicate evaluates to true
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.Cancel(Oxide.Ext.Discord.Interfaces.Promises.IPromise)">
+            <summary>
+            Cancel a waiting promise and reject it immediately.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.Update(System.Single)">
+            <summary>
+            Update all pending promises. Must be called for the promises to progress and resolve at all.
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.RateLimits.BaseRateLimit">
