@@ -74,7 +74,6 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Handlers
                 }
             }
             
-            _logger.Debug("Adding App Message Component Command For: {0} Command: {1} Callback: {2}", command.Plugin.FullName(), command.CustomId, command.Callback);
             commands.Add(command);
         }
 
