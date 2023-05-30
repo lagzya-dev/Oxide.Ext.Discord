@@ -19,6 +19,7 @@ using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Promises.Timer;
 
 namespace Oxide.Ext.Discord
 {
@@ -126,6 +127,7 @@ namespace Oxide.Ext.Discord
             Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClientFactory.Instance.OnPluginRemoved;
             
             Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
+            Interface.Oxide.OnFrame(PromiseTimer.Instance.Update);
         }
 
         /// <summary>

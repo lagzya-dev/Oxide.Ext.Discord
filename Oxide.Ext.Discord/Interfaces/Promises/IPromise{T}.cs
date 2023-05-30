@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Interfaces.Promises
 {
@@ -12,6 +13,11 @@ namespace Oxide.Ext.Discord.Interfaces.Promises
     /// </summary>
     public interface IPromise<TPromised>
     {
+        /// <summary>
+        /// ID of the promise, useful for debugging.
+        /// </summary>
+        Snowflake Id { get; }
+        
         /// <summary>
         /// Handle errors for the promise. 
         /// </summary>
