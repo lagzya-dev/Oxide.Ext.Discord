@@ -205,7 +205,13 @@ namespace Oxide.Ext.Discord.WebSockets
 
             if (_client.Logger.IsLogging(DiscordLogLevel.Verbose))
             {
-                _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, writer.ReadAsString());
+                string json = writer.ReadAsString();
+                if (payload.OpCode == GatewayCommandCode.Identify)
+                {
+                    json = json.Replace(_client.Settings.ApiToken, _client.Settings.GetHiddenToken());
+                }
+
+                _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, json);
             }
             
             bool sent = await Handler.SendAsync(writer.Stream).ConfigureAwait(false);
