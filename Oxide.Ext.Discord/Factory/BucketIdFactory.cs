@@ -44,9 +44,8 @@ namespace Oxide.Ext.Discord.Factory
             bucket.Append(':');
             bucket.Append(state.Current);
 
-            while (!state.IsCompleted)
+            while (state.MoveNext())
             {
-                state.MoveNext();
                 bucket.Append('/');
                 bucket.Append(state.Current);
             }
@@ -57,8 +56,8 @@ namespace Oxide.Ext.Discord.Factory
         private class BucketGeneratorState : BasePoolable
         {
             public string Current;
-            public bool IsCompleted;
             
+            private bool _isCompleted;
             private string _string;
             private int _length;
             private int _lastIndex;
@@ -85,9 +84,14 @@ namespace Oxide.Ext.Discord.Factory
             /// Returns the next string in the split
             /// </summary>
             /// <returns></returns>
-            public void MoveNext()
+            public bool MoveNext()
             {
-                while (!IsCompleted)
+                if (_isCompleted)
+                {
+                    return false;
+                }
+                
+                while (!_isCompleted)
                 {
                     int nextIndex = _string.IndexOf(SplitChar, _lastIndex);
                     if (nextIndex == -1 || nextIndex >= _length)
@@ -108,6 +112,7 @@ namespace Oxide.Ext.Discord.Factory
                 }
 
                 _index++;
+                return true;
             }
 
             /// <summary>
@@ -121,13 +126,13 @@ namespace Oxide.Ext.Discord.Factory
                 _lastIndex = lastIndex + 1;
                 if (_lastIndex >= _length)
                 {
-                    IsCompleted = true;
+                    _isCompleted = true;
                 }
 
                 //All Reactions belong to the same bucket
                 if (Current == ReactionsRoute)
                 {
-                    IsCompleted = true;
+                    _isCompleted = true;
                 }
             }
 
@@ -172,7 +177,7 @@ namespace Oxide.Ext.Discord.Factory
                 _string = null;
                 _length = 0;
                 _lastIndex = 0;
-                IsCompleted = false;
+                _isCompleted = false;
                 _previous = null;
                 Current = null;
                 _index = 0;
