@@ -92,18 +92,22 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             Status = RequestStatus.Completed;
 
-            if (response.Status == RequestCompletedStatus.Success)
+            BaseRequest request = handler.Request;
+            switch (response.Status)
             {
-                OnRequestSuccess(response);
-            }
-            else if (response.Status != RequestCompletedStatus.Cancelled)
-            {
-                OnRequestError(response);
+                case RequestCompletedStatus.Success:
+                    OnRequestSuccess(response);
+                    break;
+                case RequestCompletedStatus.Cancelled:
+                    Client.Logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestCompleted)} Request Cancelled Bucket ID: {{0}} Request ID: {{1}} Plugin: {{2}} Method: {{3}} Route: {{4}}", Bucket.Id, request.Id, request.Client.PluginName, request.Method, request.Route);
+                    break;
+                case RequestCompletedStatus.ErrorFatal:
+                case RequestCompletedStatus.ErrorRetry:
+                    OnRequestError(response);
+                    break;
             }
             
             Bucket.OnRequestCompleted(handler, response);
-            
-            BaseRequest request = handler.Request;
             Client.Logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestCompleted)} Bucket ID: {{0}} Request ID: {{1}} Plugin: {{2}} Method: {{3}} Route: {{4}}", Bucket.Id, request.Id, request.Client.PluginName, request.Method, request.Route);
         }
 

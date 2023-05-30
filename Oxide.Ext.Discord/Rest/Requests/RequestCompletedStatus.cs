@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// <summary>
     /// Represents the completed status for the request
     /// </summary>
-    public enum RequestCompletedStatus
+    public enum RequestCompletedStatus : byte
     {
         /// <summary>
         /// The request completed successfully

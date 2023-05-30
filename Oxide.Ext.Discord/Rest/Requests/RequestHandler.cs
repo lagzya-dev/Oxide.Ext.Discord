@@ -77,7 +77,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
             AdjustableSemaphore semaphore = null;
             try
             {
-                //_handler = RequestHandler.CreateRequestHandler(_request);
                 _bucket = _rest.QueueBucket(this, Request);
             
                 BucketId bucketId = _bucket.Id;
@@ -132,7 +131,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         
         private async Task<RequestResponse> FireRequestInternal()
         {
-            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(FireRequestInternal)} Starting REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}} Contents:\n{{3}}", Request.Id, Request.Method, Request.Route, /*_data.StringContents ??*/ "No Contents");
+            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(FireRequestInternal)} Starting REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}}", Request.Id, Request.Method, Request.Route);
 
             RequestResponse response = null;
             byte retries = 0;
@@ -146,6 +145,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                 
                 if (Request.IsCancelled)
                 {
+                    _logger.Verbose($"{nameof(RequestHandler)}.{nameof(FireRequestInternal)} Cancel REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}}", Request.Id, Request.Method, Request.Route);
                     return await RequestResponse.CreateCancelledResponse(Request.Client).ConfigureAwait(false);
                 }
 
@@ -296,6 +296,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// </summary>
         public void Abort()
         {
+            Request.Client.Logger.Debug($"{nameof(RequestHandler)}.{nameof(Abort)} Abort Request Bucket ID: {{0}} Request ID: {{1}} Plugin: {{2}} Method: {{3}} Route: {{4}}", _bucket.Id, Request.Id, Request.Client.PluginName, Request.Method, Request.Route);
             Request.Source?.Cancel();
         }
 
