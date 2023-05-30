@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Cache.Entities
     /// <summary>
     /// Cache for {T} 
     /// </summary>
-    public class EntityCache<T> : Singleton<EntityCache<T>> where T : class, IDiscordCacheable<T>, new()
+    public sealed class EntityCache<T> : Singleton<EntityCache<T>> where T : class, IDiscordCacheable<T>, new()
     {
         private readonly ConcurrentDictionary<Snowflake, T> _cache = new ConcurrentDictionary<Snowflake, T>();
         private readonly Func<Snowflake, T> _valueFactory = id => new T { Id = id }; 

@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Factory
     /// <summary>
     /// Generates a unique snowflake ID
     /// </summary>
-    public class SnowflakeIdFactory : Singleton<SnowflakeIdFactory>
+    public sealed class SnowflakeIdFactory : Singleton<SnowflakeIdFactory>
     {
         private DateTimeOffset _currentTime;
         private ulong _increment;

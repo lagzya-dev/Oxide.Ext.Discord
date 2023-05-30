@@ -5,7 +5,7 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Cache
 {
-    internal class MediaTypeHeaderCache : Singleton<MediaTypeHeaderCache>
+    internal sealed class MediaTypeHeaderCache : Singleton<MediaTypeHeaderCache>
     {
         private static readonly Hash<string, MediaTypeHeaderValue> Cache = new Hash<string, MediaTypeHeaderValue>();
         private const string JsonHeader = "application/json";

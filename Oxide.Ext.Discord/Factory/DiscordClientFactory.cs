@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Factory
     /// <summary>
     /// Factory for creating <see cref="DiscordClient"/>
     /// </summary>
-    public class DiscordClientFactory : Singleton<DiscordClientFactory>
+    public sealed class DiscordClientFactory : Singleton<DiscordClientFactory>
     {
         private readonly Hash<PluginId, DiscordClient> _clients = new Hash<PluginId, DiscordClient>();
 

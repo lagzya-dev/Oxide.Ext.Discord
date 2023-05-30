@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Cache
     /// Represents a cache of enum strings
     /// </summary>
     /// <typeparam name="T">Enum type</typeparam>
-    public class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, IComparable, IFormattable, IConvertible
+    public sealed class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, IComparable, IFormattable, IConvertible
     {
         /// <summary>
         /// Readonly Collection of Enum Values

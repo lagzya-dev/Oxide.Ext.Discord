@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Promises.Timer
 {
-    internal class DelayTimerInstance : BaseTimerInstance
+    internal sealed class DelayTimerInstance : BaseTimerInstance
     {
         private float _endTime;
 

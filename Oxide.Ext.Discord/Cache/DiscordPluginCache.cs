@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Cache
     /// <summary>
     /// Represents a cache for Loaded and Loadable plugins
     /// </summary>
-    public class DiscordPluginCache : Singleton<DiscordPluginCache>
+    public sealed class DiscordPluginCache : Singleton<DiscordPluginCache>
     {
         private readonly CSharpPluginLoader _pluginLoader = Interface.Oxide.GetPluginLoaders().OfType<CSharpPluginLoader>().FirstOrDefault();
 

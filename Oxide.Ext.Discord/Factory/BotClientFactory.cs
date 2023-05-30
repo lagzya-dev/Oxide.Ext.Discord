@@ -6,7 +6,7 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Factory
 {
-    internal class BotClientFactory : Singleton<BotClientFactory>
+    internal sealed class BotClientFactory : Singleton<BotClientFactory>
     {
         /// <summary>
         /// List of active bots by bot API key

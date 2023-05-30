@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Singleton;
 
 namespace Oxide.Ext.Discord.Logging
 {
-    internal class DiscordFileLoggerFactory : Singleton<DiscordFileLoggerFactory>
+    internal sealed class DiscordFileLoggerFactory : Singleton<DiscordFileLoggerFactory>
     {
         private readonly Thread _writerThread;
         private readonly List<DiscordFileLogger> _loggers = new List<DiscordFileLogger>();

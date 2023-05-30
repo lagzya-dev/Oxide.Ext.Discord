@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.Singleton;
 
 namespace Oxide.Ext.Discord.Pooling.Pools
 {
-    internal class ArrayPool<TPooled> : Singleton<ArrayPool<TPooled>>
+    internal sealed class ArrayPool<TPooled> : Singleton<ArrayPool<TPooled>>
     {
         private const int MaxArraySize = 64;
         private readonly ArrayPoolInternal[] _pool = new ArrayPoolInternal[MaxArraySize + 1];

@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Constants
     /// <summary>
     /// Encoding format the Discord Uses
     /// </summary>
-    public class DiscordEncoding : Singleton<DiscordEncoding>
+    public sealed class DiscordEncoding : Singleton<DiscordEncoding>
     {
         /// <summary>
         /// Encoding format used by Discord

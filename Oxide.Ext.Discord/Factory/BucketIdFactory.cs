@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Singleton;
 
 namespace Oxide.Ext.Discord.Factory
 {
-    internal class BucketIdFactory : Singleton<BucketIdFactory>
+    internal sealed class BucketIdFactory : Singleton<BucketIdFactory>
     {
         private const char SplitChar = '/';
         private const char QueryStringChar = '?';

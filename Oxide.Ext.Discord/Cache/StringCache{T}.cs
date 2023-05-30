@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Cache
     /// Caches strings from {T} ToString method
     /// </summary>
     /// <typeparam name="T">Type for the cache</typeparam>
-    public class StringCache<T> : Singleton<StringCache<T>>
+    public sealed class StringCache<T> : Singleton<StringCache<T>>
     {
         private readonly Dictionary<T, string> _cachedStrings = new Dictionary<T, string>();
         private readonly Dictionary<T, string> _loweredStrings = new Dictionary<T, string>();

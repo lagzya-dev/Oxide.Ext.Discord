@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Promises.Timer
 {
-    internal class EventTimerInstance : BaseTimerInstance
+    internal sealed class EventTimerInstance : BaseTimerInstance
     {
         /// <summary>
         /// Predicate for resolving the promise
