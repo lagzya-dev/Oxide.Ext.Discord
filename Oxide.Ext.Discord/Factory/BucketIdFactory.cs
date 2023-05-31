@@ -2,9 +2,9 @@
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Factory
 {
@@ -26,162 +26,60 @@ namespace Oxide.Ext.Discord.Factory
         /// <returns>Bucket ID for route</returns>
         internal BucketId GenerateId(RequestMethod method, string route)
         {
-            BucketGeneratorState state = DiscordPool.Internal.Get<BucketGeneratorState>();
-            state.Init(route);
-            string id = GenerateId(method, state);
-            state.Dispose();
-            return new BucketId(id);
-        }
-        
-        /// <summary>
-        /// Creates the bucket ID
-        /// </summary>
-        /// <returns></returns>
-        private static string GenerateId(RequestMethod method, BucketGeneratorState state)
-        {
+            int routeLength = route.LastIndexOf(QueryStringChar);
+            if (routeLength == -1)
+            {
+                routeLength = route.Length;
+            }
+            
+            StringTokenizer tokenizer = StringTokenizer.Create(route, SplitChar, routeLength);
+            tokenizer.MoveNext();
+            string previous = tokenizer.Current;
+            
             StringBuilder bucket = DiscordPool.Internal.GetStringBuilder();
             bucket.Append(EnumCache<RequestMethod>.Instance.ToString(method));
             bucket.Append(':');
-            bucket.Append(state.Current);
-
-            while (state.MoveNext())
+            bucket.Append(previous);
+            
+            while (tokenizer.MoveNext())
             {
                 bucket.Append('/');
-                bucket.Append(state.Current);
+
+                string current = GetCurrent(tokenizer.Index, previous, tokenizer.Current);
+
+                bucket.Append(current);
+                if (current == ReactionsRoute)
+                {
+                    break;
+                }
+                
+                previous = current;
             }
 
-            return DiscordPool.Internal.FreeStringBuilderToString(bucket);
+            return new BucketId(DiscordPool.Internal.FreeStringBuilderToString(bucket));
+        }
+        
+        private static string GetCurrent(int index, string previous, string token)
+        {
+            //If previous is not a major ID we don't want to include the ID in the bucket ID so use "id" string instead
+            return char.IsNumber(token[0]) && !IsMajorId(index, previous) ? IdReplacement : token;
         }
 
-        private class BucketGeneratorState : BasePoolable
+        private static bool IsMajorId(int index, string previous)
         {
-            public string Current;
-            
-            private bool _isCompleted;
-            private string _string;
-            private int _length;
-            private int _lastIndex;
-            private string _previous;
-            private int _index;
-
-            /// <summary>
-            /// Constructor for string splitter
-            /// </summary>
-            /// <param name="route">String to be split</param>
-            public void Init(string route)
+            //We should only use Major ID if the previous segment name is the first segment and the ID is the second.
+            if (index == 1)
             {
-                _string = route;
-                _length = _string.LastIndexOf(QueryStringChar);
-                if (_length == -1)
+                switch (previous)
                 {
-                    _length = _string.Length;
-                }
-                
-                MoveNext();
-            }
-
-            /// <summary>
-            /// Returns the next string in the split
-            /// </summary>
-            /// <returns></returns>
-            public bool MoveNext()
-            {
-                if (_isCompleted)
-                {
-                    return false;
-                }
-                
-                while (!_isCompleted)
-                {
-                    int nextIndex = _string.IndexOf(SplitChar, _lastIndex);
-                    if (nextIndex == -1 || nextIndex >= _length)
-                    {
-                        nextIndex = _length;
-                    }
-
-                    int length = nextIndex - _lastIndex;
-                    //If the length is > 0 update the string else we move to the next string
-                    if (length > 0)
-                    {
-                        UpdateCurrent(length);
-                        NextIndex(nextIndex);
-                        break;
-                    }
-
-                    NextIndex(nextIndex);
-                }
-
-                _index++;
-                return true;
-            }
-
-            /// <summary>
-            /// Updates the _lastIndex processed.
-            /// If the _lastIndex >= _length then we are done processing the Bucket ID
-            /// If the current route is now reactions we stop processing the bucket ID
-            /// </summary>
-            /// <param name="lastIndex"></param>
-            private void NextIndex(int lastIndex)
-            {
-                _lastIndex = lastIndex + 1;
-                if (_lastIndex >= _length)
-                {
-                    _isCompleted = true;
-                }
-
-                //All Reactions belong to the same bucket
-                if (Current == ReactionsRoute)
-                {
-                    _isCompleted = true;
+                    case "guilds":
+                    case "channels":
+                    case "webhooks":
+                        return true;
                 }
             }
 
-            //Updates the current route segment
-            private void UpdateCurrent(int length)
-            {
-                _previous = Current;
-                
-                //If previous is not a major ID we don't want to include the ID in the bucket ID so use "id" string instead
-                if (!IsMajorId() && char.IsNumber(_string[_lastIndex]) && ulong.TryParse(Current, out ulong _))
-                {
-                    Current = IdReplacement;
-                }
-                else
-                {
-                    Current = _string.Substring(_lastIndex, length);
-                }
-            }
-
-            //Returns if the previous route segment was guild, channel, or webhook.
-            //The Snowflake ID's for these routes should be included in the bucket ID
-            private bool IsMajorId()
-            {
-                //We should only use Major ID if the previous segment name is the first segment and the ID is the second.
-                if (_index == 1)
-                {
-                    switch (_previous)
-                    {
-                        case "guilds":
-                        case "channels":
-                        case "webhooks":
-                            return true;
-                    }
-                }
-
-                return false;
-            }
-
-            ///<inheritdoc/>
-            protected override void EnterPool()
-            {
-                _string = null;
-                _length = 0;
-                _lastIndex = 0;
-                _isCompleted = false;
-                _previous = null;
-                Current = null;
-                _index = 0;
-            }
+            return false;
         }
     }
 }
