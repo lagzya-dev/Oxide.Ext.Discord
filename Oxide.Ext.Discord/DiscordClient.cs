@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Applications;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities.Gateway;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
 using Oxide.Ext.Discord.Extensions;
@@ -19,8 +19,6 @@ namespace Oxide.Ext.Discord
     /// </summary>
     public class DiscordClient
     {
-        private static readonly Regex TokenValidator = new Regex(@"^[\w-]+\.[\w-]+\.[\w-]+$", RegexOptions.Compiled);
-
         /// <summary>
         /// Which plugin is the owner of this client
         /// </summary>
@@ -35,6 +33,8 @@ namespace Oxide.Ext.Discord
         /// The full plugin name including author and version
         /// </summary>
         public readonly string PluginName;
+        
+        internal readonly PluginData Data;
 
         /// <summary>
         /// The bot client that is unique to the Token used
@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Settings used to connect to discord and configure the extension
         /// </summary>
-        internal DiscordSettings Settings { get; private set; }
+        internal ClientSettings Settings { get; private set; }
 
         internal ILogger Logger;
 
@@ -56,9 +56,10 @@ namespace Oxide.Ext.Discord
         {
             Plugin = plugin;
             PluginId = plugin.Id();
-            PluginName = Plugin.FullName();
+            PluginName = plugin.FullName();
+            Data = new PluginData(plugin, this);
             PluginExt.OnPluginLoaded(plugin);
-            BaseDiscordLibrary.ProcessPluginLoaded(plugin);
+            BaseDiscordLibrary.ProcessPluginLoaded(Data);
         }
         
         /// <summary>
@@ -68,13 +69,7 @@ namespace Oxide.Ext.Discord
         /// <param name="intents">Intents the bot needs in order to function</param>
         public void Connect(string apiKey, GatewayIntents intents)
         {
-            DiscordSettings settings = new DiscordSettings
-            {
-                ApiToken = apiKey,
-                LogLevel = DiscordLogLevel.Info,
-                Intents = intents
-            };
-            
+            ClientSettings settings = new ClientSettings(apiKey, intents);
             Connect(settings);
         }
         
@@ -82,7 +77,7 @@ namespace Oxide.Ext.Discord
         /// Starts a connection to discord with the given discord settings
         /// </summary>
         /// <param name="settings">Discord connection settings</param>
-        public void Connect(DiscordSettings settings)
+        public void Connect(ClientSettings settings)
         {
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
             Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(settings.LogLevel);
@@ -93,23 +88,11 @@ namespace Oxide.Ext.Discord
                 return;
             }
 
-            if (!TokenValidator.IsMatch(Settings.ApiToken))
-            {
-                Logger.Warning("API Token does not appear to be a valid discord bot token: {0} for plugin {1}. " +
-                               "Please confirm you are using the correct bot token. " +
-                               "If the token is correct and this message is showing please let the Discord Extension Developers know.", Settings.GetHiddenToken(), PluginName);
-            }
-
             if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
             {
                 Logger.Warning("Using Discord Test Version: {0}", DiscordExtension.FullExtensionVersion);
             }
 
-            if (settings.HasIntents(GatewayIntents.GuildMessages) && !settings.HasIntents(GatewayIntents.MessageContent))
-            {
-                Logger.Debug("Plugin {0} is using GatewayIntent.GuildMessages and did not specify GatewayIntents.MessageContent", Plugin.FullName());
-            }
-            
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
             
             BotClientFactory.Instance.InitializeBotClient(this);
@@ -138,11 +121,6 @@ namespace Oxide.Ext.Discord
             Bot = bot;
         }
 
-        internal void RegisterApplicationCommands(DiscordApplication application)
-        {
-            DiscordAppCommand.Instance.RegisterApplicationCommands(application, Plugin);
-        }
-        
         #region Websocket Commands
         /// <summary>
         /// Used to request guild members from discord for a specific guild

@@ -179,8 +179,5 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             string fileName = !string.IsNullOrEmpty(id.TemplateName) ? $"{id.PluginId}.{id.TemplateName}.json" : $"{id.PluginId}.json";
             return Path.Combine(GetTemplateFolder(id.PluginId), id.Language, fileName);
         }
-
-        ///<inheritdoc/>
-        protected override void OnPluginLoaded(Plugin plugin) { }
     }
 }

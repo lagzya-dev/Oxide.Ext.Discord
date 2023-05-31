@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
     /// </code>
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-    public sealed class DiscordMessageComponentCommandAttribute : Attribute
+    public sealed class DiscordMessageComponentCommandAttribute : BaseApplicationCommandAttribute
     {
         internal readonly string CustomId;
         

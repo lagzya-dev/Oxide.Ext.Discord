@@ -128,7 +128,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         }
 
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(Plugin plugin) { }
+        protected override void OnPluginLoaded(PluginData data) { }
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)

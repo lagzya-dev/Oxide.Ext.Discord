@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
     /// </code>
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-    public sealed class DiscordModalSubmitAttribute : Attribute
+    public sealed class DiscordModalSubmitAttribute : BaseApplicationCommandAttribute
     {
         internal readonly string CustomId;
 

@@ -1,5 +1,5 @@
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Applications;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Logging;
@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
     {
         public readonly string CustomId;
         
-        public ComponentCommand(Plugin plugin, DiscordApplication app, InteractionType type, string customId, string callback) : base(plugin, app, type, callback)
+        public ComponentCommand(Plugin plugin, Snowflake appId, InteractionType type, string customId, string callback) : base(plugin, appId, type, callback)
         {
             CustomId = customId;
         }

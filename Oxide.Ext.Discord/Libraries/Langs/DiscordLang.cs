@@ -246,7 +246,7 @@ namespace Oxide.Ext.Discord.Libraries.Langs
         }
 
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(Plugin plugin) { }
+        protected override void OnPluginLoaded(PluginData data) { }
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)

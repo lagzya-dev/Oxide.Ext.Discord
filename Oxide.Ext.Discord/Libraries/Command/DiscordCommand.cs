@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
@@ -12,6 +11,7 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Command
@@ -320,43 +320,45 @@ namespace Oxide.Ext.Discord.Libraries.Command
         }
         
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(Plugin plugin)
+        protected override void OnPluginLoaded(PluginData data)
         {
-            foreach (MethodInfo method in plugin.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
+            foreach (PluginHookResult<DirectMessageCommandAttribute> result in data.GetHooksWithAttribute<DirectMessageCommandAttribute>())
             {
-                if (!method.IsPrivate && method.GetCustomAttribute<HookMethodAttribute>() == null)
+                if (!result.IsValid)
                 {
                     continue;
                 }
-                
-                DirectMessageCommandAttribute directCommand = method.GetCustomAttribute<DirectMessageCommandAttribute>(false);
-                if (directCommand != null)
+
+                DirectMessageCommandAttribute command = result.Attribute;
+                if (command.IsLocalized)
                 {
-                    if (directCommand.IsLocalized)
-                    {
-                        AddDirectMessageLocalizedCommand(directCommand.Name, plugin, method.Name);
-                        _logger.Debug("Adding Localized Direct Message Command {0} Method: {1}", directCommand.Name, method.Name);
-                    }
-                    else
-                    {
-                        AddDirectMessageCommand(directCommand.Name, plugin, method.Name);
-                        _logger.Debug("Adding Direct Message Command {0} Method: {1}", directCommand.Name, method.Name);
-                    }
+                    AddDirectMessageLocalizedCommand(command.Name, data.Plugin, result.Name);
+                    _logger.Debug("Adding Localized Direct Message Command {0} Method: {1}", command.Name, result.Name);
                 }
-                
-                GuildCommandAttribute guildCommand = method.GetCustomAttribute<GuildCommandAttribute>(false);
-                if (guildCommand != null)
+                else
                 {
-                    if (guildCommand.IsLocalized)
-                    {
-                        AddGuildLocalizedCommand(guildCommand.Name, plugin, null, method.Name);
-                        _logger.Debug("Adding Localized Guild Command {0} Method: {1}", guildCommand.Name, method.Name);
-                    }
-                    else
-                    {
-                        AddGuildCommand(guildCommand.Name, plugin, null, method.Name);
-                        _logger.Debug("Adding Guild Command {0} Method: {1}", guildCommand.Name, method.Name);
-                    }
+                    AddDirectMessageCommand(command.Name, data.Plugin, result.Name);
+                    _logger.Debug("Adding Direct Message Command {0} Method: {1}", command.Name, result.Name);
+                }
+            }
+            
+            foreach (PluginHookResult<GuildCommandAttribute> result in data.GetHooksWithAttribute<GuildCommandAttribute>())
+            {
+                if (!result.IsValid)
+                {
+                    continue;
+                }
+
+                GuildCommandAttribute command = result.Attribute;
+                if (command.IsLocalized)
+                {
+                    AddGuildLocalizedCommand(command.Name, data.Plugin, null, result.Name);
+                    _logger.Debug("Adding Localized Direct Message Command {0} Method: {1}", command.Name, result.Name);
+                }
+                else
+                {
+                    AddGuildCommand(command.Name, data.Plugin, null, result.Name);
+                    _logger.Debug("Adding Direct Message Command {0} Method: {1}", command.Name, result.Name);
                 }
             }
         }

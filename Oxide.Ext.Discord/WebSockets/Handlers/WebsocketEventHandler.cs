@@ -158,7 +158,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     break;
                 
                 case DiscordWebsocketCloseCode.AuthenticationFailed: 
-                    _logger.Error("The given bot token is invalid. Please enter a valid token. Token: {0} Plugins: {1} Reason: {2}", _client.Settings.GetHiddenToken(), _client.GetClientPluginList(), reason);
+                    _logger.Error("The given bot token is invalid. Please enter a valid token. Token: {0} Plugins: {1} Reason: {2}", _client.Settings.HiddenToken, _client.GetClientPluginList(), reason);
                     shouldReconnect = false;
                     break;
                 

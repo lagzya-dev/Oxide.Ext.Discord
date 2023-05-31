@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Gateway;
 using Oxide.Ext.Discord.Libraries.Pooling;
@@ -51,7 +52,7 @@ namespace Oxide.Ext.Discord.Hooks
                 return;
             }
 
-            DiscordSettings settings = client.Bot.Settings;
+            BotSettings settings = client.Bot.Settings;
             GatewayIntents intent = DiscordExtHooks.HookGatewayIntent[hook];
             if (intent != GatewayIntents.None && !settings.HasAnyIntent(intent))
             {

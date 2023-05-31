@@ -208,7 +208,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 string json = writer.ReadAsString();
                 if (payload.OpCode == GatewayCommandCode.Identify)
                 {
-                    json = json.Replace(_client.Settings.ApiToken, _client.Settings.GetHiddenToken());
+                    json = json.Replace(_client.Settings.ApiToken, _client.Settings.HiddenToken);
                 }
 
                 _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, json);

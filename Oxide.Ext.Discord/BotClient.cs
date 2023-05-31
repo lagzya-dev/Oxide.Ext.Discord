@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Newtonsoft.Json;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Entities;
@@ -77,7 +78,7 @@ namespace Oxide.Ext.Discord
         
         internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
-        internal readonly DiscordSettings Settings;
+        internal readonly BotSettings Settings;
         internal readonly JsonSerializerSettings JsonSettings;
         internal readonly JsonSerializer JsonSerializer;
         internal DiscordWebSocket WebSocket;
@@ -95,15 +96,9 @@ namespace Oxide.Ext.Discord
         /// Creates a new bot client for the given settings
         /// </summary>
         /// <param name="settings"></param>
-        public BotClient(DiscordSettings settings)
+        public BotClient(DiscordClient client)
         {
-            Settings = new DiscordSettings
-            {
-                ApiToken = settings.ApiToken,
-                LogLevel = settings.LogLevel,
-                Intents = settings.Intents
-            };
-
+            Settings = new BotSettings(client);
             Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(Settings.LogLevel);
             
             Initialized = true;
@@ -205,15 +200,15 @@ namespace Oxide.Ext.Discord
         {
             TokenMismatchException.ThrowIfMismatchedToken(client, Settings);
 
-            _clients.RemoveAll(c => c == client);
+            if (_clients.Contains(client))
+            {
+                throw new Exception("Duplicate Client Exception");
+            }
+            
             _clients.Add(client);
             client.OnBotAdded(this);
-            if (Application != null)
-            {
-                client.RegisterApplicationCommands(Application);
-            }
-
             Hooks.AddPlugin(client);
+            DiscordAppCommand.Instance.RegisterApplicationCommands(client.Data, Settings);
             
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
             
@@ -362,11 +357,6 @@ namespace Oxide.Ext.Discord
                 }
 
                 DiscordExtensionCore.Instance.RegisterApplicationCommands(this);
-                
-                for (int index = 0; index < _clients.Count; index++)
-                {
-                    _clients[index].RegisterApplicationCommands(Application);
-                }
             }
             
             _readyData = ready;
@@ -556,7 +546,7 @@ namespace Oxide.Ext.Discord
         ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
-            logger.AppendField("Client", Settings.GetHiddenToken());
+            logger.AppendField("Client", Settings.HiddenToken);
             logger.AppendField("Initialized", Initialized);
             logger.AppendFieldEnum("Log Level", Settings.LogLevel);
             logger.AppendFieldEnum("Intents", Settings.Intents);

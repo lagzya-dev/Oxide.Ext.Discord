@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Factory
                 if (bot == null)
                 {
                     DiscordExtension.GlobalLogger.Debug($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} Creating new BotClient");
-                    bot = new BotClient(client.Settings);
+                    bot = new BotClient(client);
                     _activeBots[client.Settings.ApiToken] = bot;
                 }
 

@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
     /// </code>
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-    public class DiscordApplicationCommandAttribute : Attribute
+    public class DiscordApplicationCommandAttribute : BaseApplicationCommandAttribute
     {
         internal readonly string Command;
         internal readonly string Group;
