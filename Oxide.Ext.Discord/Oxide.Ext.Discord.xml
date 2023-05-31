@@ -22448,9 +22448,9 @@
             The number of requests that have executed since the last reset
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NextReset">
+        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.LastReset">
             <summary>
-            Returns how long until the current rate limit period will expire
+            Returns when the last reset occured
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.MaxRequests">
@@ -22476,7 +22476,7 @@
             <param name="interval">Reset Interval in milliseconds</param>
             <param name="logger">Logger</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.GetNextReset">
+        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NextReset">
             <summary>
             Returns the next reset for the rate limit
             </summary>
@@ -22521,7 +22521,7 @@
         <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.OnRateLimitReset">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.GetNextReset">
+        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.NextReset">
             <summary>
             Returns how long until the current rate limit period will expire
             </summary>

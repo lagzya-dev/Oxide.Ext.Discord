@@ -16,11 +16,11 @@ namespace Oxide.Ext.Discord.RateLimits
         /// The number of requests that have executed since the last reset
         /// </summary>
         protected int NumRequests;
-        
+
         /// <summary>
-        /// Returns how long until the current rate limit period will expire
+        /// Returns when the last reset occured
         /// </summary>
-        public DateTimeOffset NextReset { get; private set; }
+        protected DateTimeOffset LastReset;
         
         /// <summary>
         /// The max number of requests this rate limit can handle per interval
@@ -54,14 +54,13 @@ namespace Oxide.Ext.Discord.RateLimits
             _timer = new Timer(interval);
             _timer.Elapsed += ResetRateLimit;
             _timer.Start();
-            // ReSharper disable once VirtualMemberCallInConstructor
-            NextReset = GetNextReset();
+            LastReset = DateTimeOffset.UtcNow;
         }
         
         private void ResetRateLimit(object sender, ElapsedEventArgs e)
         {
             OnRateLimitReset();
-            NextReset = GetNextReset();
+            LastReset = DateTimeOffset.UtcNow;
             Interlocked.Exchange(ref NumRequests, 0);
         }
 
@@ -69,11 +68,8 @@ namespace Oxide.Ext.Discord.RateLimits
         /// Returns the next reset for the rate limit
         /// </summary>
         /// <returns></returns>
-        protected virtual DateTimeOffset GetNextReset()
-        {
-            return (TimeHelpers.MillisecondsSinceEpoch() + ResetInterval).ToDateTimeOffsetFromMilliseconds();
-        }
-        
+        public virtual DateTimeOffset NextReset() => (TimeHelpers.MillisecondsSinceEpoch() + ResetInterval).ToDateTimeOffsetFromMilliseconds();
+
         /// <summary>
         /// Called when an API request is fired
         /// </summary>

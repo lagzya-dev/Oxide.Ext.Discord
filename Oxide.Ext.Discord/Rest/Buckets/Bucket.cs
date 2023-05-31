@@ -136,7 +136,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                 {
                     if (_rateLimit.HasReachedRateLimit)
                     {
-                        DateTimeOffset resetAt = _rateLimit.NextReset;
+                        DateTimeOffset resetAt = _rateLimit.NextReset();
                         _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Global Rate Limit Method: {{3}} Url: {{4}} Waiting For: {{5}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
                         if (resetAt > DateTimeOffset.UtcNow)
                         {

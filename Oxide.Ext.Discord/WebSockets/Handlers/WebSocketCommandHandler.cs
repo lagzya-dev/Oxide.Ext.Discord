@@ -71,7 +71,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
                     if (_rateLimit.HasReachedRateLimit)
                     {
-                        DateTimeOffset reset = _rateLimit.NextReset;
+                        DateTimeOffset reset = _rateLimit.NextReset();
                         if (reset > DateTimeOffset.UtcNow)
                         {
                             await Task.Delay(reset - DateTimeOffset.UtcNow, _token).ConfigureAwait(false);
