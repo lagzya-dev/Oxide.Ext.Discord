@@ -24,6 +24,8 @@ namespace Oxide.Ext.Discord.Promises.Timer
         /// </summary>
         private readonly List<BaseTimerInstance> _waiting = new List<BaseTimerInstance>();
 
+        private PromiseTimer() { }
+
         /// <summary>
         /// Resolve the returned promise once the time has elapsed
         /// </summary>

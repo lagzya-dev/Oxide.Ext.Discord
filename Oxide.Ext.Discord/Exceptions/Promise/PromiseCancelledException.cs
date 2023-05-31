@@ -1,14 +1,14 @@
 ﻿namespace Oxide.Ext.Discord.Exceptions.Promise
 {
+    /// <summary>
+    /// Exception when a promised is cancelled
+    /// </summary>
     public class PromiseCancelledException : BaseDiscordException
     {
         /// <summary>
         /// Create the exception with description
         /// </summary>
         /// <param name="message">Exception description</param>
-        public PromiseCancelledException(string message) : base(message)
-        {
-
-        }
+        internal PromiseCancelledException(string message) : base(message) { }
     }
 }
