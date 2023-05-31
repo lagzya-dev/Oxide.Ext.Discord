@@ -95,7 +95,9 @@ namespace Oxide.Ext.Discord
 
             if (!TokenValidator.IsMatch(Settings.ApiToken))
             {
-                Logger.Warning("API Token does not appear to be a valid discord bot token: {0} for plugin {1}. Please confirm you are using the correct bot token. If the token is correct and this message is showing please let the Discord Extension Developers know.", Settings.GetHiddenToken(), PluginName);
+                Logger.Warning("API Token does not appear to be a valid discord bot token: {0} for plugin {1}. " +
+                               "Please confirm you are using the correct bot token. " +
+                               "If the token is correct and this message is showing please let the Discord Extension Developers know.", Settings.GetHiddenToken(), PluginName);
             }
 
             if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))

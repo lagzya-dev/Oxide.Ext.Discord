@@ -70,8 +70,6 @@ namespace Oxide.Ext.Discord.Json.Serialization
         public void CopyFrom(Stream stream)
         {
             ClearStream();
-            //stream.Position = 0;
-            //stream.CopyTo(Stream);
             stream.CopyToPooled(Stream);
         }
         

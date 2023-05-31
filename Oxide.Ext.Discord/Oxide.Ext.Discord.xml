@@ -16464,6 +16464,11 @@
             An exception when something is invalid with a pool
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Promise.PromiseCancelledException">
+            <summary>
+            Exception when a promised is cancelled
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Exceptions.Promise.PromiseCancelledException.#ctor(System.String)">
             <summary>
             Create the exception with description
@@ -16868,35 +16873,6 @@
             <param name="method">Request method for the request</param>
             <param name="route">API Route</param>
             <returns>Bucket ID for route</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.GenerateId(Oxide.Core.Libraries.RequestMethod,Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState)">
-            <summary>
-            Creates the bucket ID
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState.Init(System.String)">
-            <summary>
-            Constructor for string splitter
-            </summary>
-            <param name="route">String to be split</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState.MoveNext">
-            <summary>
-            Returns the next string in the split
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState.NextIndex(System.Int32)">
-            <summary>
-            Updates the _lastIndex processed.
-            If the _lastIndex >= _length then we are done processing the Bucket ID
-            If the current route is now reactions we stop processing the bucket ID
-            </summary>
-            <param name="lastIndex"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.BucketGeneratorState.EnterPool">
-            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Factory.DiscordClientFactory">
             <summary>
