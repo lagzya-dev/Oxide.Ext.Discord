@@ -49,6 +49,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             AddCovalenceCommand(new[] { "de.log.file" }, nameof(FileLogCommand), "de.log.file");
             AddCovalenceCommand(new[] { "de.validation.enable" }, nameof(ValidationEnableCommand), "de.validation.enable");
             AddCovalenceCommand(new[] { "de.debug" }, nameof(DiscordDebugCommand), "de.debug");
+            AddCovalenceCommand(new[] { "de.help" }, nameof(DiscordHelpCommand), "de.debug");
             
             foreach (KeyValuePair<string, Dictionary<string, string>> language in Localization.Languages)
             {
@@ -222,6 +223,12 @@ namespace Oxide.Ext.Discord.Plugins.Core
             string message = logger.ToString();
             player.Message(message);
             _logger.Info(message);
+        }
+
+        [HookMethod(nameof(DiscordHelpCommand))]
+        private void DiscordHelpCommand(IPlayer player)
+        {
+            Chat(player, LangKeys.Help, DiscordExtension.FullExtensionVersion);
         }
         #endregion
 

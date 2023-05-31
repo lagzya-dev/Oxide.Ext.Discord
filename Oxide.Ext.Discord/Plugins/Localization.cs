@@ -19,6 +19,7 @@ namespace Oxide.Ext.Discord.Plugins
         public const string InvalidValidation = nameof(InvalidValidation);
         public const string Enabled = nameof(Enabled);
         public const string Disabled = nameof(Disabled);
+        public const string Help = nameof(Help);
     }
     
     internal static class Localization
@@ -41,7 +42,16 @@ namespace Oxide.Ext.Discord.Plugins
                 [LangKeys.SetValidation] = "Discord Validation has been set to {0}",
                 [LangKeys.InvalidValidation] = "'{0}' is not a valid boolean value. Valid values are false, true, 0, or 1",
                 [LangKeys.Enabled] = "Enabled",
-                [LangKeys.Disabled] = "Disabled"
+                [LangKeys.Disabled] = "Disabled",
+                [LangKeys.Help] = "Discord Extension v{0} Commands:\n" +
+                                  " * de.version - displays the current Discord Extension version\n" +
+                                  " * de.reset.reset - resets all rest handlers\n" +
+                                  " * de.websocket.reset - resets all websockets\n" +
+                                  " * de.websocket.reconnect - reconnects all websockets\n" +
+                                  " * de.log.console - sets the console log level. Options (Verbose, Debug, Info, Warning, Error, Exception, Off)\n" +
+                                  " * de.log.file - sets the file log level. Options (Verbose, Debug, Info, Warning, Error, Exception, Off)\n" +
+                                  " * de.validation.enabled - sets if request validation is enabled\n" +
+                                  " * de.debug - prints debug information about the state of the Discord Extension"
             }
         };
     }
