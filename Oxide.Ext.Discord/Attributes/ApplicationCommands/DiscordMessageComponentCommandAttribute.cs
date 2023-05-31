@@ -7,9 +7,10 @@ namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
     /// Discord Message Component Command Attribute for <see cref="InteractionType.MessageComponent"/>
     /// Callback Hook Format:
     /// <code>
-    /// private void Callback(DiscordInteraction interaction)
+    /// [DiscordMessageComponentCommandAttribute("CustomId")]
+    /// private void MessageComponentCommand(DiscordInteraction interaction)
     /// {
-    ///     Puts("Callback Works!");
+    ///     Puts("MessageComponentCommand Works!");
     /// }
     /// </code>
     /// </summary>

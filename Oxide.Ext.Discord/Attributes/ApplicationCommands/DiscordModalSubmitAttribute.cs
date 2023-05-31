@@ -7,9 +7,10 @@ namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
     /// Discord Message Component Command Attribute for <see cref="InteractionType.ModalSubmit"/>
     /// Callback Hook Format:
     /// <code>
-    /// private void Callback(DiscordInteraction interaction)
+    /// [DiscordModalSubmitAttribute("CustomId")]
+    /// private void ModalSubmitCommand(DiscordInteraction interaction)
     /// {
-    ///     Puts("Callback Works!");
+    ///     Puts("ModalSubmitCommand Works!");
     /// }
     /// </code>
     /// </summary>

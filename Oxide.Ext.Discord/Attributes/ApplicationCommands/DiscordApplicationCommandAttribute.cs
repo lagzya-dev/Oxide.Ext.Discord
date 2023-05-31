@@ -7,9 +7,10 @@ namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
     /// Discord Application Command Attribute for <see cref="InteractionType.ApplicationCommand"/>
     /// Callback Hook Format:
     /// <code>
-    /// private void Callback(DiscordInteraction interaction, InteractionDataParsed parsed)
+    /// [DiscordApplicationCommandAttribute("Command", "Sub Command", "Group")]
+    /// private void ApplicationCommandMethod(DiscordInteraction interaction, InteractionDataParsed parsed)
     /// {
-    ///     Puts("Callback Works!");
+    ///     Puts("ApplicationCommandMethod Works!");
     /// }
     /// </code>
     /// </summary>

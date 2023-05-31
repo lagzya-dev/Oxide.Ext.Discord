@@ -7,9 +7,10 @@ namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
     /// Discord Auto Complete Command Attribute for <see cref="InteractionType.ApplicationCommandAutoComplete"/>
     /// Callback Hook Format:
     /// <code>
-    /// private void Callback(DiscordInteraction interaction, InteractionDataOption focused)
+    /// [DiscordAutoCompleteCommandAttribute("ArgumentName")]
+    /// private void AutoCompleteCommand(DiscordInteraction interaction, InteractionDataOption focused)
     /// {
-    ///     Puts("Callback Works!");
+    ///     Puts("AutoCompleteCommand Works!");
     /// }
     /// </code>
     /// </summary>
