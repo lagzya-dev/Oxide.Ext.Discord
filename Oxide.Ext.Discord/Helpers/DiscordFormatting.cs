@@ -106,7 +106,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="time">Time to display</param>
         /// <param name="style">Style of the timestamp</param>
         /// <returns></returns>
-        public static string UnixTimestamp(DateTimeOffset time, TimestampStyles style = TimestampStyles.ShortDateTime) => UnixTimestamp((ulong)time.ToUnixTimeSeconds(), style);
+        public static string UnixTimestamp(DateTimeOffset time, TimestampStyles style = TimestampStyles.ShortDateTime) => UnixTimestamp(time.ToUnixTimeSeconds(), style);
         
         /// <summary>
         /// Displays a timestamp 
@@ -114,7 +114,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="timestamp">UNIX Timestamp</param>
         /// <param name="style">Display style for the timestamp</param>
         /// <returns></returns>
-        public static string UnixTimestamp(ulong timestamp, TimestampStyles style = TimestampStyles.ShortDateTime)
+        public static string UnixTimestamp(long timestamp, TimestampStyles style = TimestampStyles.ShortDateTime)
         {
             return $"<t:{timestamp.ToString()}:{GetTimestampFlag(style)}>";
         }

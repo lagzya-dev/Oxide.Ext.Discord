@@ -176,13 +176,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="plugin">Plugin to add</param>
         /// <returns>This</returns>
         public PlaceholderData AddPlugin(Plugin plugin) => Add(nameof(Plugin), plugin);
-        
-        /// <summary>
-        /// Adds a Unix Timestamp for the current time
-        /// </summary>
-        /// <returns>This</returns>
-        public PlaceholderData AddNowTimestamp() => AddTimestamp(TimeHelpers.SecondsSinceEpoch());
-        
+
         /// <summary>
         /// Adds a Unix Timestamp
         /// </summary>

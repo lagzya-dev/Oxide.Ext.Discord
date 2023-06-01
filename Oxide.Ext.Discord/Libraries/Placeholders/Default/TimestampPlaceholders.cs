@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Helpers;
@@ -15,44 +16,48 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
-        public static void Timestamp(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp));
+        public static void Timestamp(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp));
         
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
-        public static void ShortTime(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.ShortTime));
+        public static void ShortTime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.ShortTime));
         
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
-        public static void Longtime(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongTime));
+        public static void Longtime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongTime));
         
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
-        public static void ShortDate(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.ShortDate));
+        public static void ShortDate(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.ShortDate));
         
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
-        public static void LongDate(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongDate));
+        public static void LongDate(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongDate));
         
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
-        public static void ShortDateTime(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp));
+        public static void ShortDateTime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp));
         
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
-        public static void LongDateTime(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongDateTime));
+        public static void LongDateTime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongDateTime));
         
         /// <summary>
         /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
-        public static void RelativeTime(StringBuilder builder, PlaceholderState state, ulong timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.RelativeTime));
+        public static void RelativeTime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.RelativeTime));
 
-        internal static void RegisterPlaceholders() => RegisterPlaceholders(DiscordExtensionCore.Instance, "timestamp");
+        internal static void RegisterPlaceholders()
+        {
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "timestamp");
+            RegisterPlaceholders(DiscordExtensionCore.Instance);
+        }
 
         /// <summary>
         /// Registers placeholders for the given plugin. 
@@ -63,14 +68,27 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = TimestampName)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}", dataKey, Timestamp);
-            placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}.shortime", dataKey, ShortTime);
-            placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}.longtime", dataKey, Longtime);
-            placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}.shortdate", dataKey, ShortDate);
-            placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}.longdate", dataKey, LongDate);
-            placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}.shortdatetime", dataKey, ShortDateTime);
-            placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}.longdatetime", dataKey, LongDateTime);
-            placeholders.RegisterPlaceholder<ulong>(plugin, $"{placeholderPrefix}.relativetime", dataKey, RelativeTime);
+            placeholders.RegisterPlaceholder<long>(plugin, $"{placeholderPrefix}", dataKey, Timestamp);
+            placeholders.RegisterPlaceholder<long>(plugin, $"{placeholderPrefix}.shortime", dataKey, ShortTime);
+            placeholders.RegisterPlaceholder<long>(plugin, $"{placeholderPrefix}.longtime", dataKey, Longtime);
+            placeholders.RegisterPlaceholder<long>(plugin, $"{placeholderPrefix}.shortdate", dataKey, ShortDate);
+            placeholders.RegisterPlaceholder<long>(plugin, $"{placeholderPrefix}.longdate", dataKey, LongDate);
+            placeholders.RegisterPlaceholder<long>(plugin, $"{placeholderPrefix}.shortdatetime", dataKey, ShortDateTime);
+            placeholders.RegisterPlaceholder<long>(plugin, $"{placeholderPrefix}.longdatetime", dataKey, LongDateTime);
+            placeholders.RegisterPlaceholder<long>(plugin, $"{placeholderPrefix}.relativetime", dataKey, RelativeTime);
+        }
+
+        private static void RegisterPlaceholders(Plugin plugin)
+        {
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            placeholders.RegisterPlaceholder(plugin, "timestamp.now", (builder, state) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow)));
+            placeholders.RegisterPlaceholder(plugin, "timestamp.now.shortime", (builder, state) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.ShortTime)));
+            placeholders.RegisterPlaceholder(plugin, "timestamp.now.longtime", (builder, state) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.LongTime)));
+            placeholders.RegisterPlaceholder(plugin, "timestamp.now.shortdate", (builder, state) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.ShortDate)));
+            placeholders.RegisterPlaceholder(plugin, "timestamp.now.longdate", (builder, state) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.LongDate)));
+            placeholders.RegisterPlaceholder(plugin, "timestamp.now.shortdatetime", (builder, state) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.ShortDateTime)));
+            placeholders.RegisterPlaceholder(plugin, "timestamp.now.longdatetime", (builder, state) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.LongDateTime)));
+            placeholders.RegisterPlaceholder(plugin, "timestamp.now.relativetime", (builder, state) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.RelativeTime)));
         }
     }
 }
