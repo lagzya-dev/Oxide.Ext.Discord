@@ -9,9 +9,10 @@
             Discord Application Command Attribute for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommand"/>
             Callback Hook Format:
             <code>
-            private void Callback(DiscordInteraction interaction, InteractionDataParsed parsed)
+            [DiscordApplicationCommandAttribute("Command", "Sub Command", "Group")]
+            private void ApplicationCommandMethod(DiscordInteraction interaction, InteractionDataParsed parsed)
             {
-                Puts("Callback Works!");
+                Puts("ApplicationCommandMethod Works!");
             }
             </code>
             </summary>
@@ -29,9 +30,10 @@
             Discord Auto Complete Command Attribute for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommandAutoComplete"/>
             Callback Hook Format:
             <code>
-            private void Callback(DiscordInteraction interaction, InteractionDataOption focused)
+            [DiscordAutoCompleteCommandAttribute("ArgumentName")]
+            private void AutoCompleteCommand(DiscordInteraction interaction, InteractionDataOption focused)
             {
-                Puts("Callback Works!");
+                Puts("AutoCompleteCommand Works!");
             }
             </code>
             </summary>
@@ -50,9 +52,10 @@
             Discord Message Component Command Attribute for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent"/>
             Callback Hook Format:
             <code>
-            private void Callback(DiscordInteraction interaction)
+            [DiscordMessageComponentCommandAttribute("CustomId")]
+            private void MessageComponentCommand(DiscordInteraction interaction)
             {
-                Puts("Callback Works!");
+                Puts("MessageComponentCommand Works!");
             }
             </code>
             </summary>
@@ -68,9 +71,10 @@
             Discord Message Component Command Attribute for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ModalSubmit"/>
             Callback Hook Format:
             <code>
-            private void Callback(DiscordInteraction interaction)
+            [DiscordModalSubmitAttribute("CustomId")]
+            private void ModalSubmitCommand(DiscordInteraction interaction)
             {
-                Puts("Callback Works!");
+                Puts("ModalSubmitCommand Works!");
             }
             </code>
             </summary>
