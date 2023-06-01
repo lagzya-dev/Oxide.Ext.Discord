@@ -5,8 +5,6 @@ namespace Oxide.Ext.Discord.Connections
 {
     public class ClientSettings : BaseConnectSettings
     {
-        public string HiddenToken => GenerateHiddenToken();
-        
         public ClientSettings() { }
 
         public ClientSettings(string apiToken, GatewayIntents intents = GatewayIntents.None, DiscordLogLevel logLevel = DiscordLogLevel.Info) : base(apiToken, intents, logLevel) {}

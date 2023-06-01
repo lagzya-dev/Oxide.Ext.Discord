@@ -1,6 +1,4 @@
-﻿using System.Text;
-using Oxide.Ext.Discord.Entities.Gateway;
-using Oxide.Ext.Discord.Libraries.Pooling;
+﻿using Oxide.Ext.Discord.Entities.Gateway;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Connections
@@ -10,7 +8,7 @@ namespace Oxide.Ext.Discord.Connections
         /// <summary>
         /// API token for the bot
         /// </summary>
-        public readonly string ApiToken;
+        public string ApiToken { get; set; }
         
         /// <summary>
         /// Discord Extension Logging Level.
@@ -24,6 +22,14 @@ namespace Oxide.Ext.Discord.Connections
         /// </summary>
         public GatewayIntents Intents { get; set; }
         
+        protected BaseConnectSettings(){}
+        
+        protected BaseConnectSettings(string apiToken, GatewayIntents intents, DiscordLogLevel logLevel)
+        {
+            ApiToken = apiToken;
+            Intents = intents;
+            LogLevel = logLevel;
+        }
         
         /// <summary>
         /// Returns if the settings has the given intents
@@ -43,26 +49,6 @@ namespace Oxide.Ext.Discord.Connections
         public bool HasAnyIntent(GatewayIntents intents)
         {
             return (Intents & intents) != 0;
-        }
-
-        protected BaseConnectSettings(){}
-        
-        protected BaseConnectSettings(string apiToken, GatewayIntents intents, DiscordLogLevel logLevel)
-        {
-            ApiToken = apiToken;
-            Intents = intents;
-            LogLevel = logLevel;
-        }
-        
-        protected string GenerateHiddenToken()
-        {
-            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
-
-            int last = ApiToken.LastIndexOf('.') + 1;
-            sb.Append(ApiToken.Substring(0, last));
-            sb.Append('#', ApiToken.Length - last);
-
-            return DiscordPool.Internal.FreeStringBuilderToString(sb);
         }
     }
 }

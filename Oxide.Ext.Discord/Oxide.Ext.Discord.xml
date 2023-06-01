@@ -1974,7 +1974,7 @@
             Enables request validation
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Connections.BaseConnectSettings.ApiToken">
+        <member name="P:Oxide.Ext.Discord.Connections.BaseConnectSettings.ApiToken">
             <summary>
             API token for the bot
             </summary>
@@ -16471,11 +16471,6 @@
         <member name="T:Oxide.Ext.Discord.Exceptions.Promise.PromiseException">
             <summary>
             Exceptions for promises
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Exceptions.TokenMismatchException">
-            <summary>
-            Represents a bot token mismatch
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.ConcurrentDictionaryExt">

@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Factory
         /// </summary>
         /// <param name="client">Client to use for creating / loading the bot client</param>
         /// <returns>Bot client that is created or already exists</returns>
-        public void InitializeBotClient(DiscordClient client)
+        public BotClient InitializeBotClient(DiscordClient client)
         {
             try
             {
@@ -33,25 +33,20 @@ namespace Oxide.Ext.Discord.Factory
                     DiscordExtension.GlobalLogger.Debug($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} Creating new BotClient");
                     bot = new BotClient(client);
                     _activeBots[client.Settings.ApiToken] = bot;
+                    _applicationBots[bot.Settings.ApplicationId] = bot;
                 }
 
                 bot.AddClient(client);
                 DiscordExtension.GlobalLogger.Debug($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} Adding {{0}} client to bot {{1}}", client.PluginName, bot.BotUser?.FullUserName);
+                return bot;
             }
             catch (System.Exception ex)
             {
                 DiscordExtension.GlobalLogger.Exception($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} An error occured adding {{0}} client", client.PluginName, ex);
+                return null;
             }
         }
 
-        internal void SetApplicationId(BotClient client, Snowflake applicationId)
-        {
-            if (_activeBots.ContainsKey(client.Settings.ApiToken))
-            {
-                _applicationBots[applicationId] = client;
-            }
-        }
-        
         internal BotClient GetByApplicationId(Snowflake appId)
         {
             return _applicationBots[appId];

@@ -57,7 +57,7 @@ namespace Oxide.Ext.Discord
             Plugin = plugin;
             PluginId = plugin.Id();
             PluginName = plugin.FullName();
-            Data = new PluginData(plugin, this);
+            Data = new PluginData(plugin);
             PluginExt.OnPluginLoaded(plugin);
             BaseDiscordLibrary.ProcessPluginLoaded(Data);
         }
@@ -95,7 +95,7 @@ namespace Oxide.Ext.Discord
 
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
             
-            BotClientFactory.Instance.InitializeBotClient(this);
+            Bot = BotClientFactory.Instance.InitializeBotClient(this);
         }
 
         /// <summary>
@@ -114,11 +114,6 @@ namespace Oxide.Ext.Discord
         public bool IsConnected()
         {
             return Bot?.Initialized ?? false;
-        }
-
-        internal void OnBotAdded(BotClient bot)
-        {
-            Bot = bot;
         }
 
         #region Websocket Commands

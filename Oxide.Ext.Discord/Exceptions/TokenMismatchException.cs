@@ -1,4 +1,5 @@
 using Oxide.Ext.Discord.Connections;
+using Oxide.Ext.Discord.Factory;
 
 namespace Oxide.Ext.Discord.Exceptions
 {
@@ -11,8 +12,11 @@ namespace Oxide.Ext.Discord.Exceptions
 
         internal static void ThrowIfMismatchedToken(DiscordClient client, BotSettings expected)
         {
-            if (client.Settings.ApiToken != expected.ApiToken) 
-                throw new TokenMismatchException($"Failed to add client for plugin {client.PluginName}. Token {client.Settings.HiddenToken} does not match BotClient {expected.HiddenToken}");
+            if (client.Settings.ApiToken != expected.ApiToken)
+            {
+                BotToken token = BotTokenFactory.Instance.CreateFromToken(client.Settings.ApiToken, client.PluginName);
+                throw new TokenMismatchException($"Failed to add client for plugin {client.PluginName}. Token {token.HiddenToken} does not match BotClient {expected.HiddenToken}");
+            }
         }
     }
 }

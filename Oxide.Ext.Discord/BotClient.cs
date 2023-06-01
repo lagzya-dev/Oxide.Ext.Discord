@@ -98,7 +98,8 @@ namespace Oxide.Ext.Discord
         /// <param name="settings"></param>
         public BotClient(DiscordClient client)
         {
-            Settings = new BotSettings(client);
+            BotToken token = BotTokenFactory.Instance.CreateFromToken(client.Settings.ApiToken, client.PluginName);
+            Settings = new BotSettings(client.Settings, token);
             Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(Settings.LogLevel);
             
             Initialized = true;
@@ -178,7 +179,6 @@ namespace Oxide.Ext.Discord
             BotClientFactory.Instance.RemoveBot(this);
             try
             {
-                DiscordAppCommand.Instance.OnBotShutdown(this);
                 WebSocket?.Shutdown();
                 WebSocket = null;
                 Rest?.Shutdown();
@@ -206,7 +206,6 @@ namespace Oxide.Ext.Discord
             }
             
             _clients.Add(client);
-            client.OnBotAdded(this);
             Hooks.AddPlugin(client);
             DiscordAppCommand.Instance.RegisterApplicationCommands(client.Data, Settings);
             
@@ -269,10 +268,10 @@ namespace Oxide.Ext.Discord
         /// <param name="client">Client to remove from bot client</param>
         public void RemoveClient(DiscordClient client)
         {
-            Rest.OnClientClosed(client);
+            Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Removing Client {{0}}", client.PluginName);
             _clients.Remove(client);
+            Rest.OnClientClosed(client);
             Hooks.RemovePlugin(client.Plugin);
-            Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} {{0}} Client Removed", client.PluginName);
             if (_clients.Count == 0)
             {
                 ShutdownBot();
@@ -339,8 +338,7 @@ namespace Oxide.Ext.Discord
         {
             Application = ready.Application;
             BotUser = ready.User;
-            BotClientFactory.Instance.SetApplicationId(this, Application.Id);
-            
+
             if (_readyData == null)
             {
                 Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ready);

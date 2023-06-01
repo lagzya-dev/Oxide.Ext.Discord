@@ -9,15 +9,15 @@ namespace Oxide.Ext.Discord.Plugins
     public class PluginData
     {
         public readonly Plugin Plugin;
-        public readonly DiscordClient Client;
+        public readonly string PluginName;
 
         public List<PluginHook> Hooks = new List<PluginHook>();
         public List<PluginField> Fields = new List<PluginField>();
         
-        public PluginData(Plugin plugin, DiscordClient client)
+        public PluginData(Plugin plugin)
         {
             Plugin = plugin;
-            Client = client;
+            PluginName = Plugin.Name;
             Type type = plugin.GetType();
             MemberInfo[] methods = type.GetMembers(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             for (int index = 0; index < methods.Length; index++)

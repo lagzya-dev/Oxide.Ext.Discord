@@ -256,7 +256,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
 
         internal void RegisterApplicationCommands(PluginData data, BotSettings settings)
         {
-            _logger.Debug("Registering application commands for {0}", data.Client.PluginName);
+            _logger.Debug("Registering application commands for {0}", data.PluginName);
 
             Plugin plugin = data.Plugin;
             Snowflake appId = settings.ApplicationId;
@@ -310,17 +310,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             RemoveComponentsInternal(componentCommands);
             DiscordPool.Internal.FreeList(componentCommands);
         }
-        
-        internal void OnBotShutdown(BotClient client)
-        {
-            DiscordApplication app = client.Application;
-            if (app != null)
-            {
-                _slashCommands.Remove(app.Id);
-                _componentCommands.Remove(app.Id);
-            }
-        }
-        
+
         private void RemoveComponentsInternal(IEnumerable<ComponentCommand> commandList)
         {
             List<ComponentCommand> componentCommands = DiscordPool.Internal.GetList<ComponentCommand>();

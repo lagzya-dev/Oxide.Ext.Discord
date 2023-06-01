@@ -10,6 +10,7 @@ using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Factory;
+using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Commands;
@@ -43,7 +44,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 DiscordExtension.DiscordCommandLocalizations.ApplyCommandLocalizationsAsync(this, create, null).Then(() =>
                 {
                     client.Application.CreateGlobalCommand(client.GetFirstClient(), builder.Build());
-                    //TODO: Register Application Commands For Extension
+                    DiscordAppCommand.Instance.RegisterApplicationCommands(new PluginData(this), client.Settings);
                 });
             });
         }
