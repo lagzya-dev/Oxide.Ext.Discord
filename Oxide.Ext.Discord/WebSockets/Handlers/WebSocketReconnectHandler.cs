@@ -97,18 +97,28 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         public void CancelReconnect()
         {
-            if (_source == null)
+            try
             {
-                return;
+                if (_source == null)
+                {
+                    return;
+                }
+
+                if (!_source.IsCancellationRequested)
+                {
+                    _source.Cancel();
+                }
+
+                _source.Dispose();
             }
-            
-            if (!_source.IsCancellationRequested)
+            catch (Exception ex)
             {
-                _source.Cancel();
+                _logger.Exception("An error occured cancelling reconnect", ex);
             }
-            
-            _source.Dispose();
-            _source = null;
+            finally
+            {
+                _source = null;
+            }
         }
 
         /// <summary>
