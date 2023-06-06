@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Callbacks.Templates.Commands;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Promises;
 using Oxide.Plugins;
@@ -32,14 +32,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <param name="language">Language to register</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise RegisterCommandLocalizationAsync(Plugin plugin, string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
+        public IPromise RegisterCommandLocalizationAsync(Plugin plugin, string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (localization == null) throw new ArgumentNullException(nameof(localization));
 
             IPendingPromise promise = Promise.Create();
             
-            TemplateId id = TemplateId.CreateLocalized(plugin, fileNameSuffix, language);
+            TemplateId id = TemplateId.CreateLocalized(plugin, fileNameSuffix, ServerLocale.Parse(language));
             RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, version, minVersion, promise);
             return promise;
         }
@@ -74,18 +74,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <returns></returns>
         public IPromise ApplyCommandLocalizationsAsync(Plugin plugin, CommandCreate create, string fileNameSuffix)
         {
-            return HandleApplyCommandLocalizationsAsync(plugin, fileNameSuffix, create, Promise.Create());
-        }
-        
-        private IPromise HandleApplyCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, CommandCreate create, IPendingPromise promise = null)
-        {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
-            if (promise == null)
-            {
-                promise = Promise.Create();
-            }
-            
+            IPendingPromise promise = Promise.Create();
             TemplateId id = TemplateId.CreateGlobal(plugin, fileNameSuffix);
             ApplyCommandLocalizationsCallback.Start(id, create, promise);
             return promise;
@@ -93,21 +84,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
         internal void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, IPendingPromise promise)
         {
-            HandleApplyCommandLocalizationsAsync(id, create);
-            promise.Resolve();
-        }
-
-        private void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create)
-        {
-            HandlePrepareCommandLocalizationsAsync(create);
+            PrepareCommandLocalizations(create);
             
             foreach (string dir in Directory.EnumerateDirectories(GetTemplateFolder(id.PluginId)))
             {
-                string lang = Path.GetFileName(dir);
+                ServerLocale lang = ServerLocale.Parse(Path.GetFileName(dir));
                 HandleLoadAndApplyCommandLocalizationsAsync(id, create, lang);
             }
+            
+            promise.Resolve();
         }
-        
+
         private void PrepareCommandLocalizations(CommandCreate create)
         {
             if (create.NameLocalizations == null)
@@ -130,6 +117,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 PrepareOptionLocalizations(create.Options[index]);
             }
         }
+        
         private void PrepareOptionLocalizations(CommandOption opt)
         {
             if (opt.NameLocalizations == null)
@@ -162,22 +150,22 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 }
             }
         }
-        private void HandlePrepareCommandLocalizationsAsync(CommandCreate create)
-        {
-            PrepareCommandLocalizations(create);
-        }
 
-        private void HandleLoadAndApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, string lang)
+        private void HandleLoadAndApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, ServerLocale locale)
         {
-            DiscordTemplate<DiscordCommandLocalization> localization = LoadTemplate(id.WithLanguage(lang));
-            localization?.Template.HandleApplyCommandLocalizationAsync(create, lang).ConfigureAwait(false);
+            DiscordLocale discordLocale = locale.GetDiscordLocale();
+            if (discordLocale.IsValid)
+            {
+                DiscordTemplate<DiscordCommandLocalization> localization = LoadTemplate(id.WithLanguage(locale));
+                localization?.Template.ApplyCommandLocalization(create, discordLocale);
+            }
         }
 
         internal override string GetTemplatePath(TemplateId id)
         {
             DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName, TemplateType);
             string fileName = !string.IsNullOrEmpty(id.TemplateName) ? $"{id.PluginId}.{id.TemplateName}.json" : $"{id.PluginId}.json";
-            return Path.Combine(GetTemplateFolder(id.PluginId), id.Language, fileName);
+            return Path.Combine(GetTemplateFolder(id.PluginId), id.Language.Id, fileName);
         }
     }
 }

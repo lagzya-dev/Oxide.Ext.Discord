@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Exceptions.Libraries.DiscordLang;
+using Oxide.Ext.Discord.Libraries.Locale;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 {
@@ -28,31 +29,20 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         /// <param name="command">Command to create the localization for</param>
-        /// <param name="lang">Oxide Lang for the command</param>
-        public DiscordCommandLocalization(CommandCreate command, string lang)
+        /// <param name="locale">Oxide Lang for the command</param>
+        public DiscordCommandLocalization(CommandCreate command, ServerLocale locale)
         {
-            Command = new CommandLocalization(command, lang);
+            Command = new CommandLocalization(command, locale);
         }
 
         /// <summary>
         /// Apply localizations to <see cref="CommandCreate"/> for language
         /// </summary>
         /// <param name="create"></param>
-        /// <param name="language"></param>
-        public void ApplyCommandLocalization(CommandCreate create, string language)
+        /// <param name="locale"></param>
+        public void ApplyCommandLocalization(CommandCreate create, DiscordLocale locale)
         {
-            if (DiscordLang.Instance.TryGetDiscordLocale(language, out string discordLocale))
-            {
-                language = discordLocale;
-            }
-            
-            Command.ApplyCommandLocalization(create, language);
-        }
-
-        internal Task HandleApplyCommandLocalizationAsync(CommandCreate create, string language)
-        {
-            ApplyCommandLocalization(create, language);
-            return Task.CompletedTask;
+            Command.ApplyCommandLocalization(create, locale);
         }
     }
 }

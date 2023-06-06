@@ -103,6 +103,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <summary>
         /// Constructor
         /// </summary>
+        [JsonConstructor]
         public CommandOption() { }
 
         /// <summary>

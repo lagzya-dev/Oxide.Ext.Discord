@@ -10,6 +10,7 @@ using Oxide.Ext.Discord.Exceptions.Libraries;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Json;
+using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Types;
@@ -107,7 +108,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         {
             foreach (BulkTemplateRegistration<TTemplate> registration in templates)
             {
-                HandleRegisterTemplate(id.WithLanguage(registration.Language), registration.Template, registration.Version, minVersion, null);
+                HandleRegisterTemplate(id.WithLanguage(ServerLocale.Parse(registration.Language)), registration.Template, registration.Version, minVersion, null);
             }
             
             promise.Resolve();
@@ -133,7 +134,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
 
-        internal DiscordTemplate<TTemplate> LoadTemplate(TemplateId id, string language)
+        internal DiscordTemplate<TTemplate> LoadTemplate(TemplateId id, ServerLocale language)
         {
             return LoadTemplate(id.WithLanguage(language));
         }
@@ -166,7 +167,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             
             foreach (string dir in Directory.EnumerateDirectories(path))
             {
-                string lang = Path.GetFileName(dir);
+                ServerLocale lang = ServerLocale.Parse(Path.GetFileName(dir));
                 Logger.Debug("Processing Directory: {0} Lang: {1}", dir, lang);
                 BackupTemplate(minVersion, id.WithLanguage(lang));
             }
@@ -224,7 +225,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             {
                 return Path.Combine(GetTemplateFolder(id.PluginId), $"{id.TemplateName}.json");
             }
-            return Path.Combine(GetTemplateFolder(id.PluginId), id.Language, $"{id.TemplateName}.json");
+            
+            return Path.Combine(GetTemplateFolder(id.PluginId), id.Language.Id, $"{id.TemplateName}.json");
         }
 
         private string GetRenamePath(string path, TemplateVersion version)

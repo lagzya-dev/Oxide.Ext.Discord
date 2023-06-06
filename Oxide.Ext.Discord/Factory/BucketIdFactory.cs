@@ -55,6 +55,8 @@ namespace Oxide.Ext.Discord.Factory
                 
                 previous = current;
             }
+            
+            tokenizer.Dispose();
 
             return new BucketId(DiscordPool.Internal.FreeStringBuilderToString(bucket));
         }

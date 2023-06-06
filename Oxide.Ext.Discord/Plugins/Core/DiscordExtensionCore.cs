@@ -43,8 +43,8 @@ namespace Oxide.Ext.Discord.Plugins.Core
             AddCovalenceCommand(new[] { "de.websocket.reset" }, nameof(ResetWebSocketCommand), "de.websocket.reset");
             AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
             AddCovalenceCommand(new[] { "de.rest.reset" }, nameof(ResetRestApiCommand), "de.rest.reset");
-            AddCovalenceCommand(new[] { "de.clearpool" }, nameof(ClearDiscordPool), "de.clearpool");
-            AddCovalenceCommand(new[] { "de.wipepool" }, nameof(WipeDiscordPool), "de.wipepool");
+            AddCovalenceCommand(new[] { "de.pool.clear" }, nameof(ClearDiscordPool), "de.clearpool");
+            AddCovalenceCommand(new[] { "de.pool.wipe" }, nameof(WipeDiscordPool), "de.wipepool");
             AddCovalenceCommand(new[] { "de.log.console" }, nameof(ConsoleLogCommand), "de.log.console");
             AddCovalenceCommand(new[] { "de.log.file" }, nameof(FileLogCommand), "de.log.file");
             AddCovalenceCommand(new[] { "de.validation.enable" }, nameof(ValidationEnableCommand), "de.validation.enable");

@@ -148,7 +148,7 @@ namespace Oxide.Ext.Discord.Pooling
         {
             lock (_lock)
             {
-                for (int i = _index; i >= 0; i--)
+                for (int i = _pool.Length - 1; i >= 0; i--)
                 {
                     _pool[i] = null;
                 }

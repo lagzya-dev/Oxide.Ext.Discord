@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
         internal static void ThrowIfInvalidButtonLabel(string label)
         {
             const int MaxLength = 80;
-            if (!string.IsNullOrEmpty(label) && label.Length > 80)
+            if (!string.IsNullOrEmpty(label) && label.Length > MaxLength)
             {
                 throw new InvalidMessageComponentException($"Button Label cannot be more than {MaxLength} characters");
             }

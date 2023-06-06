@@ -32,6 +32,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <summary>
         /// Default Constructor
         /// </summary>
+        [JsonConstructor]
         public CommandOptionChoice() { }
 
         /// <summary>
