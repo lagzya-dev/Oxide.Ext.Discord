@@ -4,7 +4,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <param name="description"></param>
         /// <param name="parentBuilder"></param>
         /// <param name="defaultLanguage"></param>
-        internal BaseCommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, TParent parentBuilder, string defaultLanguage)
+        internal BaseCommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, TParent parentBuilder, ServerLocale defaultLanguage)
         {
             InvalidCommandOptionException.ThrowIfInvalidName(name, false);
             InvalidCommandOptionException.ThrowIfInvalidDescription(description, false);
@@ -53,7 +53,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         [Obsolete("AddNameLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddNameLocalization(string name, string lang) instead.")]
         public TBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            _option.NameLocalizations = DiscordLang.Instance.GetDiscordLocalizations(plugin, langKey);
+            _option.NameLocalizations = DiscordLocales.Instance.GetDiscordLocalizations(plugin, langKey);
             return _builder;
         }
         
@@ -61,16 +61,16 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// Adds Application Command Option Name Localization
         /// </summary>
         /// <param name="name">Localized name value</param>
-        /// <param name="lang">Oxide lang the value is in</param>
+        /// <param name="serverLocale">Oxide lang the value is in</param>
         /// <returns>This</returns>
-        public TBuilder AddNameLocalization(string name, string lang)
+        public TBuilder AddNameLocalization(string name, ServerLocale serverLocale)
         {
-            if (DiscordLang.Instance.TryGetDiscordLocale(lang, out string discordLocale))
+            DiscordLocale discordLocale = serverLocale.GetDiscordLocale();
+            if (discordLocale.IsValid)
             {
-                lang = discordLocale;
+                _option.NameLocalizations[discordLocale.Id] = name;
             }
             
-            _option.NameLocalizations[lang] = name;
             return _builder;
         }
         
@@ -83,7 +83,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         [Obsolete("AddDescriptionLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddDescriptionLocalization(string name, string lang) instead.")]
         public TBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            _option.DescriptionLocalizations = DiscordLang.Instance.GetDiscordLocalizations(plugin, langKey);
+            _option.DescriptionLocalizations = DiscordLocales.Instance.GetDiscordLocalizations(plugin, langKey);
             return _builder;
         }
         
@@ -91,16 +91,16 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// Adds Application Command Option Description Localization
         /// </summary>
         /// <param name="description">Localized description value</param>
-        /// <param name="lang">Oxide lang the value is in</param>
+        /// <param name="serverLocale">Oxide lang the value is in</param>
         /// <returns>This</returns>
-        public TBuilder AddDescriptionLocalization(string description, string lang)
+        public TBuilder AddDescriptionLocalization(string description, ServerLocale serverLocale)
         {
-            if (DiscordLang.Instance.TryGetDiscordLocale(lang, out string discordLocale))
+            DiscordLocale discordLocale = serverLocale.GetDiscordLocale();
+            if (discordLocale.IsValid)
             {
-                lang = discordLocale;
+                _option.DescriptionLocalizations[discordLocale.Id] = description;
             }
-            
-            _option.DescriptionLocalizations[lang] = description;
+
             return _builder;
         }
 

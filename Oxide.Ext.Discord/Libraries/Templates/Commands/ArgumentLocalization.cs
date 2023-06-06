@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands
@@ -49,8 +50,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         /// <param name="option">Option to create the localization for</param>
-        /// <param name="lang">The oxide lang for the localization</param>
-        public ArgumentLocalization(CommandOption option, string lang) : this(option.NameLocalizations[lang], option.DescriptionLocalizations[lang])
+        /// <param name="locale">The oxide lang for the localization</param>
+        public ArgumentLocalization(CommandOption option, ServerLocale locale) : this(option.NameLocalizations[locale.Id], option.DescriptionLocalizations[locale.Id])
         {
             if (option.Choices != null)
             {
@@ -67,18 +68,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Apply localizations to the command option
         /// </summary>
         /// <param name="option"></param>
-        /// <param name="language"></param>
-        public void ApplyArgumentLocalization(CommandOption option, string language)
+        /// <param name="locale"></param>
+        public void ApplyArgumentLocalization(CommandOption option, DiscordLocale locale)
         {
-            option.NameLocalizations[language] = Name;
-            option.DescriptionLocalizations[language] = Description;
+            option.NameLocalizations[locale.Id] = Name;
+            option.DescriptionLocalizations[locale.Id] = Description;
 
             if (option.Choices != null)
             {
                 for (int index = 0; index < option.Choices.Count; index++)
                 {
                     CommandOptionChoice choice = option.Choices[index];
-                    Choices?[choice.Name]?.ApplyChoiceLocalization(choice, language);
+                    Choices?[choice.Name]?.ApplyChoiceLocalization(choice, locale);
                 }
             }
         }

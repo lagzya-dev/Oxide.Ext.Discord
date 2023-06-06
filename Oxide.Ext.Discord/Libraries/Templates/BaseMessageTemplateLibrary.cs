@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </param>
         /// <param name="language">Language for the template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLang.DefaultOxideLanguage)
+        public IPromise RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             
             IPendingPromise promise = Promise.Create();
 
-            TemplateId id = TemplateId.CreateLocalized(plugin, templateName, language);
+            TemplateId id = TemplateId.CreateLocalized(plugin, templateName, ServerLocale.Parse(language));
             RegisterTemplateCallback<TTemplate>.Start(this, id, template, version, minVersion, promise);
             return promise;
         }
@@ -111,7 +111,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="language">Oxide language of the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, string language = DiscordLang.DefaultOxideLanguage) => HandleGetLocalizedTemplate(TemplateId.CreateLocalized(plugin, templateName, language), null);
+        public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, string language = DiscordLocales.DefaultServerLanguage) => HandleGetLocalizedTemplate(TemplateId.CreateLocalized(plugin, templateName, ServerLocale.Parse(language)), null);
 
         /// <summary>
         /// Returns a message template for a given language
@@ -136,16 +136,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             {
                 IPlayer player = interaction.User.Player;
                 template = LoadTemplate(id)
-                           ?? (player != null ? LoadTemplate(id, DiscordLang.Instance.GetPlayerLanguage(player)) : null)
-                           ?? LoadTemplate(id, DiscordLang.Instance.GetOxideLanguage(interaction.GuildLocale))
-                           ?? LoadTemplate(id, DiscordLang.Instance.GameServerLanguage)
-                           ?? LoadTemplate(id, DiscordLang.DefaultOxideLanguage);
+                           ?? (player != null ? LoadTemplate(id, DiscordLocales.Instance.GetPlayerLanguage(player)) : null)
+                           ?? (interaction.GuildLocale.HasValue ? LoadTemplate(id, interaction.GuildLocale.Value.GetServerLocale()) : null)
+                           ?? LoadTemplate(id, DiscordLocales.Instance.ServerLanguage)
+                           ?? LoadTemplate(id, ServerLocale.Default);
             }
             else if (!id.IsGlobal)
             {
                 template = LoadTemplate(id)
-                           ?? LoadTemplate(id, DiscordLang.Instance.GameServerLanguage)
-                           ?? LoadTemplate(id, DiscordLang.DefaultOxideLanguage);
+                           ?? LoadTemplate(id, DiscordLocales.Instance.ServerLanguage)
+                           ?? LoadTemplate(id, ServerLocale.Default);
             }
             else
             {

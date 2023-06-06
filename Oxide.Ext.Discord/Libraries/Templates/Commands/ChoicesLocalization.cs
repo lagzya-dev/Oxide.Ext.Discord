@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Libraries.Locale;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 {
@@ -41,10 +42,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Apply Choice Localizations
         /// </summary>
         /// <param name="choice"></param>
-        /// <param name="language"></param>
-        public void ApplyChoiceLocalization(CommandOptionChoice choice, string language)
+        /// <param name="locale"></param>
+        public void ApplyChoiceLocalization(CommandOptionChoice choice, DiscordLocale locale)
         {
-            choice.NameLocalizations[language] = Name;
+            choice.NameLocalizations[locale.Id] = Name;
         }
     }
 }

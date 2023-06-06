@@ -8,8 +8,8 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Command;
-using Oxide.Ext.Discord.Libraries.Langs;
 using Oxide.Ext.Discord.Libraries.Linking;
+using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Subscription;
@@ -106,7 +106,7 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordLink), new DiscordLink(GlobalLogger));
             Manager.RegisterLibrary(nameof(DiscordCommand), new DiscordCommand(DiscordConfig.Instance.Commands.CommandPrefixes, GlobalLogger));
             Manager.RegisterLibrary(nameof(DiscordSubscriptions), new DiscordSubscriptions(GlobalLogger));
-            Manager.RegisterLibrary(nameof(DiscordLang), new DiscordLang(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordLocales), new DiscordLocales(GlobalLogger));
             Manager.RegisterLibrary(nameof(DiscordPlaceholders), new DiscordPlaceholders(GlobalLogger));
 
             DiscordUserData.Load();

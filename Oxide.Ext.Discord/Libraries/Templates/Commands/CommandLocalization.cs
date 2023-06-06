@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands
@@ -56,14 +57,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         /// <param name="create">Command to be created</param>
-        /// <param name="lang">Oxide lang of the localization</param>
-        public CommandLocalization(CommandCreate create, string lang) : this(create.NameLocalizations[lang], create.DescriptionLocalizations[lang])
+        /// <param name="locale">Oxide lang of the localization</param>
+        public CommandLocalization(CommandCreate create, ServerLocale locale) : this(create.NameLocalizations[locale.Id], create.DescriptionLocalizations[locale.Id])
         {
             if (create.Options != null)
             {
                 for (int index = 0; index < create.Options.Count; index++)
                 {
-                    ProcessOption(create.Options[index], lang);
+                    ProcessOption(create.Options[index], locale);
                 }
             }
         }
@@ -72,19 +73,19 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         /// <param name="opt"></param>
-        /// <param name="lang"></param>
-        public CommandLocalization(CommandOption opt, string lang) : this(opt.NameLocalizations[lang], opt.DescriptionLocalizations[lang])
+        /// <param name="locale"></param>
+        public CommandLocalization(CommandOption opt, ServerLocale locale) : this(opt.NameLocalizations[locale.Id], opt.DescriptionLocalizations[locale.Id])
         {
             if (opt.Options != null)
             { 
                 for (int index = 0; index < opt.Options.Count; index++)
                 {
-                    ProcessOption(opt.Options[index], lang);
+                    ProcessOption(opt.Options[index], locale);
                 }
             }
         }
 
-        private void ProcessOption(CommandOption option, string lang)
+        private void ProcessOption(CommandOption option, ServerLocale locale)
         {
             if (option.Type == CommandOptionType.SubCommand || option.Type == CommandOptionType.SubCommandGroup)
             {
@@ -93,7 +94,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                     Options = new List<CommandLocalization>();
                 }
                     
-                Options.Add(new CommandLocalization(option, lang));
+                Options.Add(new CommandLocalization(option, locale));
                 return;
             }
 
@@ -102,18 +103,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 Arguments = new Hash<string, ArgumentLocalization>();
             }
 
-            Arguments[option.Name] = new ArgumentLocalization(option, lang);
+            Arguments[option.Name] = new ArgumentLocalization(option, locale);
         }
         
         /// <summary>
         /// Apply Command Localizations to the <see cref="CommandCreate"/>
         /// </summary>
         /// <param name="create"></param>
-        /// <param name="language"></param>
-        public void ApplyCommandLocalization(CommandCreate create, string language)
+        /// <param name="locale"></param>
+        public void ApplyCommandLocalization(CommandCreate create, DiscordLocale locale)
         {
-            create.NameLocalizations[language] = Name;
-            create.DescriptionLocalizations[language] = Description;
+            create.NameLocalizations[locale.Id] = Name;
+            create.DescriptionLocalizations[locale.Id] = Description;
             if (create.Options == null)
             {
                 return;
@@ -121,11 +122,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
 
             for (int index = 0; index < create.Options.Count; index++)
             {
-                Options[index].ApplyOptionLocalization(create.Options[index], language);
+                Options[index].ApplyOptionLocalization(create.Options[index], locale);
             }
         }
 
-        private void ApplyOptionLocalization(CommandOption opt, string language)
+        private void ApplyOptionLocalization(CommandOption opt, DiscordLocale locale)
         {
             if (opt.NameLocalizations == null)
             {
@@ -139,21 +140,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             
             if (opt.Type == CommandOptionType.SubCommand || opt.Type == CommandOptionType.SubCommandGroup)
             {
-                opt.NameLocalizations[language] = Name;
-                opt.DescriptionLocalizations[language] = Description;
+                opt.NameLocalizations[locale.Id] = Name;
+                opt.DescriptionLocalizations[locale.Id] = Description;
 
                 if (Options != null)
                 {
                     for (int index = 0; index < opt.Options.Count; index++)
                     {
-                        Options[index].ApplyOptionLocalization(opt.Options[index], language);
+                        Options[index].ApplyOptionLocalization(opt.Options[index], locale);
                     }
                 }
 
                 return;
             }
 
-            Arguments?[opt.Name]?.ApplyArgumentLocalization(opt, language);
+            Arguments?[opt.Name]?.ApplyArgumentLocalization(opt, locale);
         }
     }
 }

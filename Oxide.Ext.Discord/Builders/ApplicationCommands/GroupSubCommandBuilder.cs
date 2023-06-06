@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Exceptions.Builders;
+using Oxide.Ext.Discord.Libraries.Locale;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 {
@@ -19,7 +20,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="description">Description of the Sub Command Group</param>
         /// <param name="parent">The parent builder for this builder</param>
         /// <param name="defaultLanguage">Default language for the builder</param>
-        internal GroupSubCommandBuilder(List<CommandOption> options, string name, string description, SubCommandGroupBuilder parent, string defaultLanguage) : base(options, name, description, parent, defaultLanguage) { }
+        internal GroupSubCommandBuilder(List<CommandOption> options, string name, string description, SubCommandGroupBuilder parent, ServerLocale defaultLanguage) : base(options, name, description, parent, defaultLanguage) { }
         
         /// <summary>
         /// Adds a new option

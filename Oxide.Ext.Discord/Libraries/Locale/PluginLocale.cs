@@ -3,28 +3,28 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Langs
+namespace Oxide.Ext.Discord.Libraries.Locale
 {
-    internal struct LangId : IEquatable<LangId>
+    internal struct PluginLocale : IEquatable<PluginLocale>
     {
         internal readonly PluginId PluginId;
-        private readonly string _language;
+        private readonly ServerLocale _language;
 
-        public LangId(Plugin plugin, string language)
+        public PluginLocale(Plugin plugin, ServerLocale language)
         {
-            if(string.IsNullOrEmpty(language)) throw new ArgumentNullException(nameof(language));
+            if(!language.IsValid) throw new ArgumentNullException(nameof(language));
             PluginId = plugin?.Id() ?? throw new ArgumentNullException(nameof(plugin));
             _language = language;
         }
 
-        public bool Equals(LangId other)
+        public bool Equals(PluginLocale other)
         {
             return PluginId == other.PluginId && _language == other._language;
         }
         
         public override bool Equals(object obj)
         {
-            return obj is LangId other && Equals(other);
+            return obj is PluginLocale other && Equals(other);
         }
 
         public override string ToString()

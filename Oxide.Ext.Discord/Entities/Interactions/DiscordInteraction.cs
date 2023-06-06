@@ -15,7 +15,7 @@ using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
-using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -118,14 +118,14 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <a href="https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales">Discord Locale Values</a>
         /// </summary>
         [JsonProperty("locale")]
-        public string Locale { get; set; }
+        public DiscordLocale Locale { get; set; }
 
         /// <summary>
         /// The guild's preferred locale, if invoked in a guild
         /// <a href="https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales">Discord Locale Values</a>
         /// </summary>
         [JsonProperty("guild_locale")]
-        public string GuildLocale { get; set; }
+        public DiscordLocale? GuildLocale { get; set; }
 
         private InteractionDataParsed _parsed;
 
@@ -158,7 +158,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="langKey">Lang Key to return</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
         [Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
-        public string GetLangMessage(Plugin plugin, string langKey) => DiscordLang.Instance.GetDiscordInteractionLangMessage(plugin, this, langKey);
+        public string GetLangMessage(Plugin plugin, string langKey) => DiscordLocales.Instance.GetDiscordInteractionLangMessage(plugin, this, langKey);
         
         /// <summary>
         /// Returns a localized string for this interaction
@@ -168,7 +168,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="args">Localization args</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
         [Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
-        public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordLang.Instance.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
+        public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordLocales.Instance.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
         
         private InteractionDataOption GetFocusedOption()
         {

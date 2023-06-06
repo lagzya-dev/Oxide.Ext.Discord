@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
-using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions
@@ -74,12 +74,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// Discord User's locale converted to oxide lang locale
         /// </summary>
-        public readonly string UserOxideLocale;
+        public readonly ServerLocale UserOxideLocale;
 
         /// <summary>
         /// Discord Guild's locale converted to oxide lang locale
         /// </summary>
-        public readonly string GuildOxideLocale;
+        public readonly ServerLocale GuildOxideLocale;
 
         /// <summary>
         /// Constructor for the data parser.
@@ -99,6 +99,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 }
                 return;
             }
+            
             Type = Data.Type;
             Command = Data.Name;
             //If ApplicationCommand is Message or User it can't have arguments
@@ -107,10 +108,10 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 return;
             }
 
-            UserOxideLocale = DiscordLang.Instance.GetOxideLanguage(interaction.Locale);
-            if (!string.IsNullOrEmpty(interaction.GuildLocale))
+            UserOxideLocale = DiscordLocales.Instance.GetServerLanguage(interaction.Locale);
+            if (interaction.GuildLocale.HasValue && interaction.GuildLocale.Value.IsValid)
             {
-                GuildOxideLocale = DiscordLang.Instance.GetOxideLanguage(interaction.GuildLocale);
+                GuildOxideLocale = DiscordLocales.Instance.GetServerLanguage(interaction.GuildLocale.Value);
             }
 
             //Parse the arguments for the application command

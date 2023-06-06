@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Libraries.Langs;
+using Oxide.Ext.Discord.Libraries.Locale;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
 {
@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <summary>
         /// Default language being built
         /// </summary>
-        protected readonly string DefaultLanguage;
+        protected readonly ServerLocale DefaultLanguage;
         
         private readonly TParent _parent;
 
@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <param name="description">Description of the sub command</param>
         /// <param name="parent">Parent for the sub command</param>
         /// <param name="defaultLanguage">Default language being built</param>
-        protected BaseSubCommandBuilder(List<CommandOption> options, string name, string description, TParent parent, string defaultLanguage)
+        protected BaseSubCommandBuilder(List<CommandOption> options, string name, string description, TParent parent, ServerLocale defaultLanguage)
         {
             Builder = (TBuilder)this;
             _parent = parent;
@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         [Obsolete("AddNameLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddNameLocalization(string name, string lang) instead.")]
         public TBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
-            SubCommand.NameLocalizations = DiscordLang.Instance.GetDiscordLocalizations(plugin, langKey);
+            SubCommand.NameLocalizations = DiscordLocales.Instance.GetDiscordLocalizations(plugin, langKey);
             return Builder;
         }
          
@@ -66,16 +66,16 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
          /// Adds Application Sub Command Name Localization
          /// </summary>
          /// <param name="name">Localized name value</param>
-         /// <param name="lang">Oxide lang the value is in</param>
+         /// <param name="serverLocale">Oxide lang the value is in</param>
          /// <returns>This</returns>
-         public TBuilder AddNameLocalization(string name, string lang)
+         public TBuilder AddNameLocalization(string name, ServerLocale serverLocale)
          {
-             if (DiscordLang.Instance.TryGetDiscordLocale(lang, out string discordLocale))
+             DiscordLocale discordLocale = serverLocale.GetDiscordLocale();
+             if (discordLocale.IsValid)
              {
-                 lang = discordLocale;
+                 SubCommand.NameLocalizations[discordLocale.Id] = name;
              }
-            
-             SubCommand.NameLocalizations[lang] = name;
+             
              return Builder;
          }
         
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         [Obsolete("AddDescriptionLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddDescriptionLocalization(string name, string lang) instead.")]
         public TBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
-            SubCommand.DescriptionLocalizations = DiscordLang.Instance.GetDiscordLocalizations(plugin, langKey);
+            SubCommand.DescriptionLocalizations = DiscordLocales.Instance.GetDiscordLocalizations(plugin, langKey);
             return Builder;
         }
         
@@ -96,16 +96,16 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// Adds Application Sub Command Description Localizations
         /// </summary>
         /// <param name="description">Localized description value</param>
-        /// <param name="lang">Oxide lang the value is in</param>
+        /// <param name="serverLocale">Oxide lang the value is in</param>
         /// <returns>This</returns>
-        public TBuilder AddDescriptionLocalization(string description, string lang)
+        public TBuilder AddDescriptionLocalization(string description, ServerLocale serverLocale)
         {
-            if (DiscordLang.Instance.TryGetDiscordLocale(lang, out string discordLocale))
-            {
-                lang = discordLocale;
+            DiscordLocale discordLocale = serverLocale.GetDiscordLocale();
+            if (discordLocale.IsValid)
+            { 
+                SubCommand.DescriptionLocalizations[discordLocale.Id] = description;
             }
             
-            SubCommand.DescriptionLocalizations[lang] = description;
             return Builder;
         }
 
