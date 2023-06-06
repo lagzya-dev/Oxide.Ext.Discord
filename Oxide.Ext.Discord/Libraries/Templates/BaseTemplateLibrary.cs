@@ -238,6 +238,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         internal virtual void OnTemplateRegistered(TemplateId id, TTemplate template) { }
 
         ///<inheritdoc/>
+        protected override void OnPluginLoaded(Plugin plugin) { }
+
+        ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             PluginId id = plugin.Id();

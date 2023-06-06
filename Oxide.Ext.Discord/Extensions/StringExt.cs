@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Oxide.Ext.Discord.Libraries.Pooling;
 
@@ -7,8 +8,11 @@ namespace Oxide.Ext.Discord.Extensions
     /// <summary>
     /// String Extension methods
     /// </summary>
-    public static class StringExt
+    internal static class StringExt
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string TrimIfLargerThan(this string str, int maxCharacters) => str.Length <= maxCharacters ? str : str.Substring(0, maxCharacters);
+
         /// <summary>
         /// Parses the specified command into uMod command format
         /// Sourced from CommandHandler.cs of uMod (https://gitlab.com/umod/core/core/-/blob/develop/src/Command/CommandHandler.cs)

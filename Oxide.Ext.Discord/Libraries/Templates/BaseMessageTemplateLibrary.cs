@@ -174,9 +174,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         {
             SetCache(id, template);
         }
-        
-        ///<inheritdoc/>
-        protected override void OnPluginLoaded(Plugin plugin) { }
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)

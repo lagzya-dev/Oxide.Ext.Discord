@@ -10,6 +10,7 @@ namespace Oxide.Ext.Discord.Libraries.Locale
     {
         public readonly string Id;
         public bool IsValid => !string.IsNullOrEmpty(Id);
+        public bool IsDefault => IsValid && this == Default;
         public DiscordLocale GetDiscordLocale() => DiscordLocales.Instance.GetDiscordLocale(this);
 
         public static readonly ServerLocale Default = new ServerLocale(DiscordLocales.DefaultServerLanguage); 

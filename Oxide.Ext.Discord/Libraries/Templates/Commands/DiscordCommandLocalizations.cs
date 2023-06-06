@@ -74,30 +74,15 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <returns></returns>
         public IPromise ApplyCommandLocalizationsAsync(Plugin plugin, CommandCreate create, string fileNameSuffix)
         {
-            return HandleApplyCommandLocalizationsAsync(plugin, fileNameSuffix, create);
-        }
-        
-        private IPromise HandleApplyCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, CommandCreate create, IPendingPromise promise = null)
-        {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
-            if (promise == null)
-            {
-                promise = Promise.Create();
-            }
-            
+            IPendingPromise promise = Promise.Create();
             TemplateId id = TemplateId.CreateGlobal(plugin, fileNameSuffix);
             ApplyCommandLocalizationsCallback.Start(id, create, promise);
             return promise;
         }
 
         internal void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create, IPendingPromise promise)
-        {
-            HandleApplyCommandLocalizationsAsync(id, create);
-            promise.Resolve();
-        }
-
-        private void HandleApplyCommandLocalizationsAsync(TemplateId id, CommandCreate create)
         {
             PrepareCommandLocalizations(create);
             
@@ -106,8 +91,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 ServerLocale lang = ServerLocale.Parse(Path.GetFileName(dir));
                 HandleLoadAndApplyCommandLocalizationsAsync(id, create, lang);
             }
+            
+            promise.Resolve();
         }
-        
+
         private void PrepareCommandLocalizations(CommandCreate create)
         {
             if (create.NameLocalizations == null)
@@ -180,8 +167,5 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             string fileName = !string.IsNullOrEmpty(id.TemplateName) ? $"{id.PluginId}.{id.TemplateName}.json" : $"{id.PluginId}.json";
             return Path.Combine(GetTemplateFolder(id.PluginId), id.Language.Id, fileName);
         }
-
-        ///<inheritdoc/>
-        protected override void OnPluginLoaded(Plugin plugin) { }
     }
 }

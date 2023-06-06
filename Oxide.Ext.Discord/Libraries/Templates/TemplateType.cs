@@ -28,6 +28,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <summary>
         /// Command Template Type
         /// </summary>
-        Command
+        Command,
+
+        /// <summary>
+        /// Auto Complete Choice Template Type
+        /// </summary>
+        AutoCompleteChoice
     }
 }
