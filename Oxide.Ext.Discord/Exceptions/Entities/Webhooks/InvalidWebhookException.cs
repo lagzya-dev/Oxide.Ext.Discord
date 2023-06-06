@@ -18,9 +18,10 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Webhooks
 
         internal static void ThrowIfInvalidName(string name)
         {
-            if (string.IsNullOrEmpty(name) || name.Length > 80)
+            const int MaxLength = 80;
+            if (string.IsNullOrEmpty(name) || name.Length > MaxLength)
             {
-                throw new InvalidWebhookException($"Name '{name}' cannot be less than 1 character or more than 80 characters");
+                throw new InvalidWebhookException($"Name '{name}' cannot be less than 1 character or more than {MaxLength} characters");
             }
 
             if (name.IndexOfAny(InvalidUserNameCharacters) != -1)
