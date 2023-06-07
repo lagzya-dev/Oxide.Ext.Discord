@@ -27,13 +27,13 @@ namespace Oxide.Ext.Discord.Factory
         {
             try
             {
-                BotClient bot = _activeBots[client.Settings.ApiToken];
+                BotClient bot = _activeBots[client.Connection.ApiToken];
                 if (bot == null)
                 {
                     DiscordExtension.GlobalLogger.Debug($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} Creating new BotClient");
                     bot = new BotClient(client);
-                    _activeBots[client.Settings.ApiToken] = bot;
-                    _applicationBots[bot.Settings.ApplicationId] = bot;
+                    _activeBots[client.Connection.ApiToken] = bot;
+                    _applicationBots[bot.Connection.ApplicationId] = bot;
                 }
 
                 bot.AddClient(client);
@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord.Factory
 
         public void RemoveBot(BotClient bot)
         {
-            _activeBots.Remove(bot.Settings.ApiToken);
+            _activeBots.Remove(bot.Connection.ApiToken);
         }
 
         public void ResetAllWebSockets()

@@ -254,12 +254,12 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
         }
 
-        internal void RegisterApplicationCommands(PluginData data, BotSettings settings)
+        internal void RegisterApplicationCommands(PluginData data, BotConnection connection)
         {
             _logger.Debug("Registering application commands for {0}", data.PluginName);
 
             Plugin plugin = data.Plugin;
-            Snowflake appId = settings.ApplicationId;
+            Snowflake appId = connection.ApplicationId;
             foreach (PluginHookResult<BaseApplicationCommandAttribute> hook in data.GetHooksWithAttribute<BaseApplicationCommandAttribute>())
             {
                 BaseApplicationCommandAttribute attribute = hook.Attribute;

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Factory;
 
 namespace Oxide.Ext.Discord.Connections
 {
-    public class BotSettings : BaseConnectSettings
+    public class BotConnection : BaseConnection
     {
         public readonly string HiddenToken;
         
@@ -14,8 +12,9 @@ namespace Oxide.Ext.Discord.Connections
         
         internal readonly DateTimeOffset CreationDate;
 
-        public BotSettings(ClientSettings settings, BotToken token) : base(settings.ApiToken, settings.Intents, settings.LogLevel)
+        public BotConnection(DiscordClient client) : base(client.Connection)
         {
+            BotToken token = BotTokenFactory.Instance.CreateFromClient(client);
             HiddenToken = token.HiddenToken;
             ApplicationId = token.ApplicationId;
             CreationDate = token.CreationDate;

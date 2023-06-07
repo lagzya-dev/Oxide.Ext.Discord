@@ -294,7 +294,15 @@
             Builder to use when building application commands
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType)">
+            <summary>
+            Creates a new Application Command Builder
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="description">Description of the command</param>
+            <param name="type">Command type</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.ApplicationCommandType,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Creates a new Application Command Builder
             </summary>
@@ -332,12 +340,12 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddNameLocalization(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Command Name Localizations
             </summary>
             <param name="name">Localized name value</param>
-            <param name="lang">Oxide lang the value is in</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
@@ -348,12 +356,12 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDescriptionLocalization(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Command Description Localizations
             </summary>
             <param name="description">Localized description value</param>
-            <param name="lang">Oxide lang the value is in</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String)">
@@ -407,7 +415,7 @@
             Application Sub Command Builder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
@@ -437,7 +445,7 @@
             Builder for command options
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,`1,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,`1,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
@@ -456,12 +464,12 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddNameLocalization(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Command Option Name Localization
             </summary>
             <param name="name">Localized name value</param>
-            <param name="lang">Oxide lang the value is in</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
@@ -472,12 +480,12 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddDescriptionLocalization(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Command Option Description Localization
             </summary>
             <param name="description">Localized description value</param>
-            <param name="lang">Oxide lang the value is in</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.Required(System.Boolean)">
@@ -604,7 +612,7 @@
             Default language being built
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,`1,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,`1,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
@@ -622,12 +630,12 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddNameLocalization(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Sub Command Name Localization
             </summary>
             <param name="name">Localized name value</param>
-            <param name="lang">Oxide lang the value is in</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
@@ -638,12 +646,12 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddDescriptionLocalization(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Sub Command Description Localizations
             </summary>
             <param name="description">Localized description value</param>
-            <param name="lang">Oxide lang the value is in</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.Build">
@@ -657,7 +665,7 @@
             Application Sub Command Builder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
@@ -695,12 +703,12 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddNameLocalization(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Sub Command Group Name Localizations
             </summary>
             <param name="name">Localized name value</param>
-            <param name="lang">Oxide lang the value is in</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
@@ -711,12 +719,12 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddDescriptionLocalization(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Command Description Localizations
             </summary>
             <param name="description">Localized description value</param>
-            <param name="lang">Oxide lang the value is in</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddSubCommand(System.String,System.String)">
@@ -1974,31 +1982,31 @@
             Enables request validation
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Connections.BaseConnectSettings.ApiToken">
+        <member name="P:Oxide.Ext.Discord.Connections.BaseConnection.ApiToken">
             <summary>
             API token for the bot
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Connections.BaseConnectSettings.LogLevel">
+        <member name="P:Oxide.Ext.Discord.Connections.BaseConnection.LogLevel">
             <summary>
             Discord Extension Logging Level.
-            See <see cref="P:Oxide.Ext.Discord.Connections.BaseConnectSettings.LogLevel"/>
+            See <see cref="P:Oxide.Ext.Discord.Connections.BaseConnection.LogLevel"/>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Connections.BaseConnectSettings.Intents">
+        <member name="P:Oxide.Ext.Discord.Connections.BaseConnection.Intents">
             <summary>
             Intents that your bot needs to work
             See <see cref="T:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents"/>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Connections.BaseConnectSettings.HasIntents(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
+        <member name="M:Oxide.Ext.Discord.Connections.BaseConnection.HasIntents(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
             <summary>
             Returns if the settings has the given intents
             </summary>
             <param name="intents">Intents to be compared against</param>
             <returns>True if settings has the given intents; False otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Connections.BaseConnectSettings.HasAnyIntent(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
+        <member name="M:Oxide.Ext.Discord.Connections.BaseConnection.HasAnyIntent(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
             <summary>
             Returns if the settings has any intent specified
             </summary>
@@ -2977,7 +2985,7 @@
             The bot client that is unique to the Token used
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.DiscordClient.Settings">
+        <member name="P:Oxide.Ext.Discord.DiscordClient.Connection">
             <summary>
             Settings used to connect to discord and configure the extension
             </summary>
@@ -2995,11 +3003,11 @@
             <param name="apiKey">API key for the connecting bot</param>
             <param name="intents">Intents the bot needs in order to function</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.DiscordClient.Connect(Oxide.Ext.Discord.Connections.ClientSettings)">
+        <member name="M:Oxide.Ext.Discord.DiscordClient.Connect(Oxide.Ext.Discord.Connections.ClientConnection)">
             <summary>
             Starts a connection to discord with the given discord settings
             </summary>
-            <param name="settings">Discord connection settings</param>
+            <param name="connection">Discord connection settings</param>
         </member>
         <member name="M:Oxide.Ext.Discord.DiscordClient.Disconnect">
             <summary>
@@ -16473,6 +16481,11 @@
             Exceptions for promises
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.TokenMismatchException">
+            <summary>
+            Represents a bot token mismatch
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Extensions.ConcurrentDictionaryExt">
             <summary>
             Extension for <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2"/>
@@ -17200,7 +17213,7 @@
             <param name="style">Style of the timestamp</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int64,Oxide.Ext.Discord.Helpers.TimestampStyles)">
             <summary>
             Displays a timestamp 
             </summary>
@@ -18593,106 +18606,6 @@
         <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.Langs.DiscordLang">
-            <summary>
-            Converts discord locale codes into oxide locale codes
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.DefaultOxideLanguage">
-            <summary>
-            Default Oxide Lang (English)
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GameServerLanguage">
-            <summary>
-            Returns the Oxide Server language
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="logger"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetOxideLanguage(System.String)">
-            <summary>
-            Returns the oxide locale for a given discord locale
-            </summary>
-            <param name="discordLocale">Discord locale to get oxide locale for</param>
-            <returns>Oxide locale if it exists; null otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.TryGetOxideLanguage(System.String,System.String@)">
-            <summary>
-            Tries to get the oxide language from a discord locale
-            </summary>
-            <param name="discordLocale">Discord locale to get oxide language from</param>
-            <param name="oxideLanguage">Oxide Language if found</param>
-            <returns>True if locale exists; false otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetDiscordLocale(System.String)">
-            <summary>
-            Returns the discord locale for a given oxide locale
-            </summary>
-            <param name="oxideLanguage">oxide locale to get discord locale for</param>
-            <returns>Discord locale if it exists; null otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.TryGetDiscordLocale(System.String,System.String@)">
-            <summary>
-            Tries to get the discord locale from a oxide language
-            </summary>
-            <param name="oxideLanguage">Oxide Language to get discord locale from</param>
-            <param name="discordLocale">Discord locale if found</param>
-            <returns>True if locale exists; false otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetPlayerLanguage(Oxide.Core.Libraries.Covalence.IPlayer)">
-            <summary>
-            Returns the oxide locale for the given IPlayer
-            </summary>
-            <param name="player"><see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> to get the locale for</param>
-            <returns>Locale for the given IPlayer</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetPlayerLanguage(System.String)">
-            <summary>
-            Returns the oxide locale for the given playerId
-            </summary>
-            <param name="playerId">PlayerId to get the locale for</param>
-            <returns>Locale for the given playerId</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetDiscordLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
-            <summary>
-            Returns all the discord localizations for a specific lang key in a plugin
-            </summary>
-            <param name="plugin"></param>
-            <param name="langKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetDiscordInteractionLangMessage(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,System.String)">
-            <summary>
-            Retrieves the lang message for a Discord Interaction
-            </summary>
-            <param name="plugin">Plugin the lang is from</param>
-            <param name="interaction">The interaction to be localized</param>
-            <param name="langKey">The lang key to lookup</param>
-            <returns>Localized message if found; Empty string otherwise</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.GetDiscordInteractionLangMessage(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,System.String,System.Object[])">
-            <summary>
-            Retrieves the lang message for a Discord Interaction
-            </summary>
-            <param name="plugin">Plugin the lang is from</param>
-            <param name="interaction">The interaction to be localized</param>
-            <param name="langKey">The lang key to lookup</param>
-            <param name="args">Localization formatting args</param>
-            <returns>Localized message if found; Empty string otherwise</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Langs.DiscordLang.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Linking.DiscordLink">
             <summary>
             Represents a library for discord linking
@@ -18918,6 +18831,83 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.PlayerId.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales">
+            <summary>
+            Converts discord locale codes into oxide locale codes
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.DefaultServerLanguage">
+            <summary>
+            Default Oxide Lang (English)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.ServerLanguage">
+            <summary>
+            Returns the Oxide Server language
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.GetDiscordLocale(Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+            <summary>
+            Returns the discord locale for a given oxide locale
+            </summary>
+            <param name="serverLocale">oxide locale to get discord locale for</param>
+            <returns>Discord locale if it exists; null otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.GetPlayerLanguage(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Returns the oxide locale for the given IPlayer
+            </summary>
+            <param name="player"><see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> to get the locale for</param>
+            <returns>Locale for the given IPlayer</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.GetPlayerLanguage(System.String)">
+            <summary>
+            Returns the oxide locale for the given playerId
+            </summary>
+            <param name="playerId">PlayerId to get the locale for</param>
+            <returns>Locale for the given playerId</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.GetDiscordLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Returns all the discord localizations for a specific lang key in a plugin
+            </summary>
+            <param name="plugin"></param>
+            <param name="langKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.GetDiscordInteractionLangMessage(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,System.String)">
+            <summary>
+            Retrieves the lang message for a Discord Interaction
+            </summary>
+            <param name="plugin">Plugin the lang is from</param>
+            <param name="interaction">The interaction to be localized</param>
+            <param name="langKey">The lang key to lookup</param>
+            <returns>Localized message if found; Empty string otherwise</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.GetDiscordInteractionLangMessage(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,System.String,System.Object[])">
+            <summary>
+            Retrieves the lang message for a Discord Interaction
+            </summary>
+            <param name="plugin">Plugin the lang is from</param>
+            <param name="interaction">The interaction to be localized</param>
+            <param name="langKey">The lang key to lookup</param>
+            <param name="args">Localization formatting args</param>
+            <returns>Localized message if found; Empty string otherwise</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.Default.ApplicationCommandPlaceholders">
@@ -19447,44 +19437,44 @@
             Timestamp placeholders
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.Timestamp(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.UInt64)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.Timestamp(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.ShortTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.UInt64)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.ShortTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.Longtime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.UInt64)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.Longtime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.ShortDate(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.UInt64)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.ShortDate(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.LongDate(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.UInt64)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.LongDate(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.ShortDateTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.UInt64)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.ShortDateTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.LongDateTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.UInt64)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.LongDateTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.RelativeTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.UInt64)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.RelativeTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.UInt64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.RegisterPlaceholders(Oxide.Core.Plugins.Plugin,System.String,System.String)">
@@ -19720,12 +19710,6 @@
             Adds a <see cref="T:Oxide.Core.Plugins.Plugin"/>
             </summary>
             <param name="plugin">Plugin to add</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddNowTimestamp">
-            <summary>
-            Adds a Unix Timestamp for the current time
-            </summary>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTimestamp(System.Int64)">
@@ -19999,6 +19983,11 @@
         <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
         </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplate.Name">
+            <summary>
+            Choice Text (1-100 characters)
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.BaseMessageTemplateLibrary`1">
             <summary>
             Library for Discord Message templates
@@ -20080,9 +20069,6 @@
             <param name="interaction">Interaction to get the template for</param>
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseMessageTemplateLibrary`1.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
-            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseMessageTemplateLibrary`1.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <inheritdoc/>
@@ -20193,19 +20179,19 @@
             <param name="name"></param>
             <param name="description"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ArgumentLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ArgumentLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
             <param name="option">Option to create the localization for</param>
-            <param name="lang">The oxide lang for the localization</param>
+            <param name="locale">The oxide lang for the localization</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ArgumentLocalization.ApplyArgumentLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ArgumentLocalization.ApplyArgumentLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
             <summary>
             Apply localizations to the command option
             </summary>
             <param name="option"></param>
-            <param name="language"></param>
+            <param name="locale"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Commands.ChoicesLocalization">
             <summary>
@@ -20235,12 +20221,12 @@
             <param name="option">Option to localize</param>
             <param name="lang">Oxide lang of the localization</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ChoicesLocalization.ApplyChoiceLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ChoicesLocalization.ApplyChoiceLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
             <summary>
             Apply Choice Localizations
             </summary>
             <param name="choice"></param>
-            <param name="language"></param>
+            <param name="locale"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization">
             <summary>
@@ -20279,26 +20265,26 @@
             <param name="name"></param>
             <param name="description"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
             <param name="create">Command to be created</param>
-            <param name="lang">Oxide lang of the localization</param>
+            <param name="locale">Oxide lang of the localization</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
             <param name="opt"></param>
-            <param name="lang"></param>
+            <param name="locale"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.ApplyCommandLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.ApplyCommandLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
             <summary>
             Apply Command Localizations to the <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate"/>
             </summary>
             <param name="create"></param>
-            <param name="language"></param>
+            <param name="locale"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalization">
             <summary>
@@ -20315,19 +20301,19 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
             <param name="command">Command to create the localization for</param>
-            <param name="lang">Oxide Lang for the command</param>
+            <param name="locale">Oxide Lang for the command</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalization.ApplyCommandLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalization.ApplyCommandLocalization(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
             <summary>
             Apply localizations to <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate"/> for language
             </summary>
             <param name="create"></param>
-            <param name="language"></param>
+            <param name="locale"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.Commands.DiscordCommandLocalizations">
             <summary>
@@ -21016,6 +21002,11 @@
         <member name="F:Oxide.Ext.Discord.Libraries.Templates.TemplateType.Command">
             <summary>
             Command Template Type
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Templates.TemplateType.AutoCompleteChoice">
+            <summary>
+            Auto Complete Choice Template Type
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.TemplateVersion">

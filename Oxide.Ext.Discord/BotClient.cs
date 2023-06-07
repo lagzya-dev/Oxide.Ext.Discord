@@ -78,7 +78,7 @@ namespace Oxide.Ext.Discord
         
         internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
-        internal readonly BotSettings Settings;
+        internal readonly BotConnection Connection;
         internal readonly JsonSerializerSettings JsonSettings;
         internal readonly JsonSerializer JsonSerializer;
         internal DiscordWebSocket WebSocket;
@@ -98,9 +98,8 @@ namespace Oxide.Ext.Discord
         /// <param name="settings"></param>
         public BotClient(DiscordClient client)
         {
-            BotToken token = BotTokenFactory.Instance.CreateFromToken(client.Settings.ApiToken, client.PluginName);
-            Settings = new BotSettings(client.Settings, token);
-            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(Settings.LogLevel);
+            Connection = new BotConnection(client);
+            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(Connection.LogLevel);
             
             Initialized = true;
 
@@ -198,7 +197,7 @@ namespace Oxide.Ext.Discord
         /// <param name="client">Client to add to the bot</param>
         public void AddClient(DiscordClient client)
         {
-            TokenMismatchException.ThrowIfMismatchedToken(client, Settings);
+            TokenMismatchException.ThrowIfMismatchedToken(client, Connection);
 
             if (_clients.Contains(client))
             {
@@ -207,7 +206,7 @@ namespace Oxide.Ext.Discord
             
             _clients.Add(client);
             Hooks.AddPlugin(client);
-            DiscordAppCommand.Instance.RegisterApplicationCommands(client.Data, Settings);
+            DiscordAppCommand.Instance.RegisterApplicationCommands(client.Data, Connection);
             
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
             
@@ -218,18 +217,18 @@ namespace Oxide.Ext.Discord
                 return;
             }
             
-            if (client.Settings.LogLevel < Settings.LogLevel)
+            if (client.Connection.LogLevel < Connection.LogLevel)
             {
-                UpdateLogLevel(client.Settings.LogLevel);
+                UpdateLogLevel(client.Connection.LogLevel);
             }
 
-            GatewayIntents intents = Settings.Intents | client.Settings.Intents;
+            GatewayIntents intents = Connection.Intents | client.Connection.Intents;
                 
             //Our intents have changed. Disconnect websocket and reconnect with new intents.
-            if (intents != Settings.Intents)
+            if (intents != Connection.Intents)
             {
-                Settings.Intents = intents;
-                if (WebSocket.Intents != Settings.Intents && WebSocket.IsConnected())
+                Connection.Intents = intents;
+                if (WebSocket.Intents != Connection.Intents && WebSocket.IsConnected())
                 {
                     Logger.Debug("New intents have been requested for the a connected bot. Reconnecting with updated intents.");
                     DisconnectWebsocket(true);
@@ -283,13 +282,13 @@ namespace Oxide.Ext.Discord
             for (int index = 0; index < _clients.Count; index++)
             {
                 DiscordClient remainingClient = _clients[index];
-                if (remainingClient.Settings.LogLevel < level)
+                if (remainingClient.Connection.LogLevel < level)
                 {
-                    level = remainingClient.Settings.LogLevel;
+                    level = remainingClient.Connection.LogLevel;
                 }
             }
 
-            if (level > Settings.LogLevel)
+            if (level > Connection.LogLevel)
             {
                 UpdateLogLevel(level);
             }
@@ -298,11 +297,11 @@ namespace Oxide.Ext.Discord
             for (int index = 0; index < _clients.Count; index++)
             {
                 DiscordClient exitingClients = _clients[index];
-                intents |= exitingClients.Settings.Intents;
+                intents |= exitingClients.Connection.Intents;
             }
 
             //Update Intents so the next reconnect we supply the correct GatewayIntents for connected plugins
-            Settings.Intents = intents;
+            Connection.Intents = intents;
         }
 
         /// <summary>
@@ -330,8 +329,8 @@ namespace Oxide.Ext.Discord
         private void UpdateLogLevel(DiscordLogLevel level)
         {
             Logger.UpdateLogLevel(level);
-            Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {{0}} to: {{1}}", Settings.LogLevel, level);
-            Settings.LogLevel = level;
+            Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {{0}} to: {{1}}", Connection.LogLevel, level);
+            Connection.LogLevel = level;
         }
 
         internal void OnClientReady(GatewayReadyEvent ready)
@@ -360,7 +359,7 @@ namespace Oxide.Ext.Discord
             _readyData = ready;
             _readyData.Guilds = Servers;
 
-            if (Settings.Intents != WebSocket.Intents)
+            if (Connection.Intents != WebSocket.Intents)
             {
                 DisconnectWebsocket(true);
             }
@@ -544,10 +543,10 @@ namespace Oxide.Ext.Discord
         ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
-            logger.AppendField("Client", Settings.HiddenToken);
+            logger.AppendField("Client", Connection.HiddenToken);
             logger.AppendField("Initialized", Initialized);
-            logger.AppendFieldEnum("Log Level", Settings.LogLevel);
-            logger.AppendFieldEnum("Intents", Settings.Intents);
+            logger.AppendFieldEnum("Log Level", Connection.LogLevel);
+            logger.AppendFieldEnum("Intents", Connection.Intents);
             logger.AppendField("Plugins", GetClientPluginList());
             
             logger.AppendObject("Bot", BotUser);

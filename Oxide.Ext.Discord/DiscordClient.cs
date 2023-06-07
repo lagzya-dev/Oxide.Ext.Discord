@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Settings used to connect to discord and configure the extension
         /// </summary>
-        internal ClientSettings Settings { get; private set; }
+        internal ClientConnection Connection { get; private set; }
 
         internal ILogger Logger;
 
@@ -69,20 +69,20 @@ namespace Oxide.Ext.Discord
         /// <param name="intents">Intents the bot needs in order to function</param>
         public void Connect(string apiKey, GatewayIntents intents)
         {
-            ClientSettings settings = new ClientSettings(apiKey, intents);
-            Connect(settings);
+            ClientConnection connection = new ClientConnection(apiKey, intents);
+            Connect(connection);
         }
         
         /// <summary>
         /// Starts a connection to discord with the given discord settings
         /// </summary>
-        /// <param name="settings">Discord connection settings</param>
-        public void Connect(ClientSettings settings)
+        /// <param name="connection">Discord connection settings</param>
+        public void Connect(ClientConnection connection)
         {
-            Settings = settings ?? throw new ArgumentNullException(nameof(settings));
-            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(settings.LogLevel);
+            Connection = connection ?? throw new ArgumentNullException(nameof(connection));
+            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
             
-            if (string.IsNullOrEmpty(Settings.ApiToken))
+            if (string.IsNullOrEmpty(Connection.ApiToken))
             {
                 Logger.Error("API Token is null or empty!");
                 return;

@@ -105,7 +105,7 @@ namespace Oxide.Ext.Discord.WebSockets
             ShouldReconnect = false;
             ShouldResume = false;
 
-            Intents = _client.Settings.Intents;
+            Intents = _client.Connection.Intents;
             Handler.Connect(url);
         }
 
@@ -208,7 +208,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 string json = writer.ReadAsString();
                 if (payload.OpCode == GatewayCommandCode.Identify)
                 {
-                    json = json.Replace(_client.Settings.ApiToken, _client.Settings.HiddenToken);
+                    json = json.Replace(_client.Connection.ApiToken, _client.Connection.HiddenToken);
                 }
 
                 _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, json);
@@ -293,9 +293,9 @@ namespace Oxide.Ext.Discord.WebSockets
 
             IdentifyCommand identify = new IdentifyCommand
             {
-                Token = _client.Settings.ApiToken,
+                Token = _client.Connection.ApiToken,
                 Properties = Gateway.Properties,
-                Intents = _client.Settings.Intents,
+                Intents = _client.Connection.Intents,
                 Compress = false,
                 LargeThreshold = 50,
                 Shard = Gateway.Shard
@@ -318,7 +318,7 @@ namespace Oxide.Ext.Discord.WebSockets
             {
                 Sequence = _sequence,
                 SessionId = _sessionId,
-                Token = _client.Settings.ApiToken
+                Token = _client.Connection.ApiToken
             };
             
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Resume)} Attempting to resume session with ID: {{0}} Sequence: {{1}}", _sessionId, _sequence);

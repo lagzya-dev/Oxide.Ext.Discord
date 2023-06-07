@@ -19,43 +19,24 @@ namespace Oxide.Ext.Discord.Factory
         
         private BotTokenFactory() { }
 
-        internal BotToken CreateFromToken(string token, string pluginName)
+        internal BotToken CreateFromClient(DiscordClient client)
         {
-            BotToken existingToken = _tokens[token];
-            if (existingToken != null)
+            string token = client.Connection.ApiToken;
+            
+            BotToken botToken = _tokens[token];
+            if (botToken == null)
             {
-                return existingToken;
+                botToken = ParseToken(token, client.PluginName);
+                _tokens[token] = botToken;
             }
             
-            string hiddenToken = GenerateHiddenToken(token);
             if (!_tokenValidator.IsMatch(token))
             {
                 DiscordExtension.GlobalLogger.Warning("API Token does not appear to be a valid discord bot token: {0} for plugin {1}. " +
-                                      "Please confirm you are using the correct bot token. " +
-                                      "If the token is correct and this message is showing please let the Discord Extension Developers know.", hiddenToken, pluginName);
+                                                      "Please confirm you are using the correct bot token. " +
+                                                      "If the token is correct and this message is showing please let the Discord Extension Developers know.", botToken.HiddenToken, client.PluginName);
             }
 
-            BotToken botToken;
-            if (!ParseToken(token, out string base64AppId, out string base64CreationDate))
-            {
-                DiscordExtension.GlobalLogger.Error("Failed to parse token {0} for plugin {1}", hiddenToken, pluginName);
-                botToken = new BotToken(token, hiddenToken, default(Snowflake), default(DateTimeOffset));
-                _tokens[token] = botToken;
-                return botToken;
-            }
-
-            if (!TryParseApplicationId(base64AppId, out Snowflake applicationId))
-            {
-                DiscordExtension.GlobalLogger.Error("Failed to parse application ID from bot token. Bot token is invalid. Token: {0}", hiddenToken);
-            }
-            
-            if (!TryParseCreationDate(base64CreationDate, out DateTimeOffset creationDate))
-            {
-                DiscordExtension.GlobalLogger.Error($"Failed to parse Token Creation Date from bot token. Bot token is invalid. Token: {hiddenToken}");
-            }
-            
-            botToken = new BotToken(token, hiddenToken, applicationId, creationDate);
-            _tokens[token] = botToken;
             return botToken;
         }
         
@@ -70,19 +51,27 @@ namespace Oxide.Ext.Discord.Factory
             return DiscordPool.Internal.FreeStringBuilderToString(sb);
         }
         
-        private bool ParseToken(string token, out string base64AppId, out string base64CreationDate)
+        private BotToken ParseToken(string token, string pluginName)
         {
+            string hiddenToken = GenerateHiddenToken(token);
             string[] args = token.Split(_splitArgs);
             if (args.Length != 3)
             {
-                base64AppId = null;
-                base64CreationDate = null;
-                return false;
+                DiscordExtension.GlobalLogger.Error("Failed to parse token {0} for plugin {1}", hiddenToken, pluginName);
+                return new BotToken(token, hiddenToken, default(Snowflake), default(DateTimeOffset));
             }
 
-            base64AppId = args[0];
-            base64CreationDate = args[1];
-            return true;
+            if (!TryParseApplicationId(args[0], out Snowflake appId))
+            {
+                DiscordExtension.GlobalLogger.Error("Failed to parse application ID from bot token. Bot token is invalid. Token: {0}", hiddenToken);
+            }
+            
+            if (!TryParseCreationDate(args[1], out DateTimeOffset createdDate))
+            {
+                DiscordExtension.GlobalLogger.Error("Failed to parse Token Creation Date from bot token. Bot token is invalid. Token: {0}", hiddenToken);
+            }
+            
+            return new BotToken(token, hiddenToken, appId, createdDate);
         }
 
         private bool TryParseApplicationId(string base64AppId, out Snowflake id)

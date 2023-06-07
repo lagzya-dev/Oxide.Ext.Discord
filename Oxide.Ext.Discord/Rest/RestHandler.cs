@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Rest
                 Timeout = TimeSpan.FromSeconds(15),
                 BaseAddress = new Uri(DiscordEndpoints.Rest.ApiUrl)
             };
-            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", client.Settings.ApiToken);
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", client.Connection.ApiToken);
             Client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
             Client.DefaultRequestHeaders.AcceptEncoding.Add( StringWithQualityHeaderValue.Parse("gzip"));
             Client.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("deflate"));

@@ -52,9 +52,9 @@ namespace Oxide.Ext.Discord.Hooks
                 return;
             }
 
-            BotSettings settings = client.Bot.Settings;
+            BotConnection connection = client.Bot.Connection;
             GatewayIntents intent = DiscordExtHooks.HookGatewayIntent[hook];
-            if (intent != GatewayIntents.None && !settings.HasAnyIntent(intent))
+            if (intent != GatewayIntents.None && !connection.HasAnyIntent(intent))
             {
                 _logger.Warning("{0} is trying to add hook {1} which requires one of the following GatewayIntents \"{2}\", but was not specified. " +
                                 "This hook will not work correctly until it is corrected. " +

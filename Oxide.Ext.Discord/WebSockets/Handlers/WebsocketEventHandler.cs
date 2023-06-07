@@ -158,7 +158,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     break;
                 
                 case DiscordWebsocketCloseCode.AuthenticationFailed: 
-                    _logger.Error("The given bot token is invalid. Please enter a valid token. Token: {0} Plugins: {1} Reason: {2}", _client.Settings.HiddenToken, _client.GetClientPluginList(), reason);
+                    _logger.Error("The given bot token is invalid. Please enter a valid token. Token: {0} Plugins: {1} Reason: {2}", _client.Connection.HiddenToken, _client.GetClientPluginList(), reason);
                     shouldReconnect = false;
                     break;
                 
@@ -570,7 +570,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _client.OnClientReady(ready);
 
             _logger.Info("Your bot was found in {0} Guilds!", ready.Guilds.Count);
-            if (_client.Settings.HasIntents(GatewayIntents.GuildMessages) && !_client.Application.HasAnyApplicationFlags(ApplicationFlags.GatewayMessageContentLimited | ApplicationFlags.GatewayMessageContent))
+            if (_client.Connection.HasIntents(GatewayIntents.GuildMessages) && !_client.Application.HasAnyApplicationFlags(ApplicationFlags.GatewayMessageContentLimited | ApplicationFlags.GatewayMessageContent))
             {
                 _logger.Error("You need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications or plugins using this intent will not function correctly", _client.BotUser.Username);
             }
@@ -709,7 +709,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordGuildCreated, existing);
             }
 
-            if (_client.Settings.HasIntents(GatewayIntents.GuildMembers))
+            if (_client.Connection.HasIntents(GatewayIntents.GuildMembers))
             {
                 if (!existing.HasLoadedAllMembers)
                 {
