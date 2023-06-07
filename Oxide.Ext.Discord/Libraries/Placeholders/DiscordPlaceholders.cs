@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Plugins.Core;
+using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
@@ -215,7 +216,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
 
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginData data) { }
+        protected override void OnPluginLoaded(PluginSetupData data) { }
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)

@@ -4,6 +4,7 @@ using Oxide.Ext.Discord.Attributes.Pooling;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Plugins;
 
@@ -55,13 +56,13 @@ namespace Oxide.Ext.Discord.Libraries.Pooling
         }
 
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginData data)
+        protected override void OnPluginLoaded(PluginSetupData data)
         {
             PluginFieldResult<DiscordPoolAttribute> field = data.GetFieldWthAttribute<DiscordPoolAttribute>();
             if (field.IsValid)
             {
-                var plugin = data.Plugin;
-                field.SetValue(plugin, plugin);
+                Plugin plugin = data.Plugin;
+                field.SetValue(plugin, GetOrCreate(data.Plugin));
             }
         }
 

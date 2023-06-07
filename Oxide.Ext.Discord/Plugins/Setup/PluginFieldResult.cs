@@ -2,7 +2,7 @@
 using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Extensions;
 
-namespace Oxide.Ext.Discord.Plugins
+namespace Oxide.Ext.Discord.Plugins.Setup
 {
     public struct PluginFieldResult<T> where T : BaseDiscordAttribute
     {

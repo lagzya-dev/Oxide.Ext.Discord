@@ -13,6 +13,7 @@ using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
@@ -128,7 +129,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         }
 
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginData data) { }
+        protected override void OnPluginLoaded(PluginSetupData data) { }
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)

@@ -1,6 +1,6 @@
 ﻿using Oxide.Ext.Discord.Attributes;
 
-namespace Oxide.Ext.Discord.Plugins
+namespace Oxide.Ext.Discord.Plugins.Setup
 {
     public struct PluginHookResult<T> where T : BaseDiscordAttribute
     {

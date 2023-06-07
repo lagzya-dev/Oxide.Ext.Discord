@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Command
@@ -320,7 +321,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         }
         
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginData data)
+        protected override void OnPluginLoaded(PluginSetupData data)
         {
             foreach (PluginHookResult<DirectMessageCommandAttribute> result in data.GetHooksWithAttribute<DirectMessageCommandAttribute>())
             {

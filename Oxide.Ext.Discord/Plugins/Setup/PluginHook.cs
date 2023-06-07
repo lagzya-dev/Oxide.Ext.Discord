@@ -4,7 +4,7 @@ using System.Reflection;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
 
-namespace Oxide.Ext.Discord.Plugins
+namespace Oxide.Ext.Discord.Plugins.Setup
 {
     public struct PluginHook
     {
@@ -23,6 +23,7 @@ namespace Oxide.Ext.Discord.Plugins
                     case HookMethodAttribute hook:
                         Name = hook.Name;
                         break;
+                    
                     case BaseDiscordAttribute _:
                         Attributes.Add(attribute);
                         break;

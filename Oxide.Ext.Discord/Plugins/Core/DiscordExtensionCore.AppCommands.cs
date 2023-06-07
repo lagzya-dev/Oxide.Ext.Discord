@@ -16,6 +16,7 @@ using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Commands;
 using Oxide.Ext.Discord.Plugins.Core.AppCommands;
 using Oxide.Ext.Discord.Plugins.Core.Templates;
+using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins.Core
@@ -44,7 +45,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 DiscordExtension.DiscordCommandLocalizations.ApplyCommandLocalizationsAsync(this, create, null).Then(() =>
                 {
                     client.Application.CreateGlobalCommand(client.GetFirstClient(), builder.Build());
-                    DiscordAppCommand.Instance.RegisterApplicationCommands(new PluginData(this), client.Connection);
+                    DiscordAppCommand.Instance.RegisterApplicationCommands(new PluginSetupData(this), client.Connection);
                 });
             });
         }

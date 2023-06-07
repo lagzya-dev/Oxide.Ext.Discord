@@ -15,6 +15,7 @@ using Oxide.Ext.Discord.Libraries.AppCommands.Handlers;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands
@@ -254,7 +255,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
         }
 
-        internal void RegisterApplicationCommands(PluginData data, BotConnection connection)
+        internal void RegisterApplicationCommands(PluginSetupData data, ClientConnection connection)
         {
             _logger.Debug("Registering application commands for {0}", data.PluginName);
 
@@ -284,7 +285,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         }
         
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginData data)
+        protected override void OnPluginLoaded(PluginSetupData data)
         {
            
         }

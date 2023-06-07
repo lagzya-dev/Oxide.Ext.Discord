@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Exceptions
     {
         private TokenMismatchException(string message) : base(message) { }
 
-        internal static void ThrowIfMismatchedToken(DiscordClient client, BotConnection expected)
+        internal static void ThrowIfMismatchedToken(DiscordClient client, ClientConnection expected)
         {
             if (client.Connection.ApiToken != expected.ApiToken)
             {

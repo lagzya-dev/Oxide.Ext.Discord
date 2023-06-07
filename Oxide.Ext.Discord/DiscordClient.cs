@@ -11,6 +11,7 @@ using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Plugins.Setup;
 
 namespace Oxide.Ext.Discord
 {
@@ -34,7 +35,7 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public readonly string PluginName;
         
-        internal readonly PluginData Data;
+        internal readonly PluginSetupData Data;
 
         /// <summary>
         /// The bot client that is unique to the Token used
@@ -57,7 +58,7 @@ namespace Oxide.Ext.Discord
             Plugin = plugin;
             PluginId = plugin.Id();
             PluginName = plugin.FullName();
-            Data = new PluginData(plugin);
+            Data = new PluginSetupData(plugin);
             PluginExt.OnPluginLoaded(plugin);
             BaseDiscordLibrary.ProcessPluginLoaded(Data);
         }
@@ -67,12 +68,8 @@ namespace Oxide.Ext.Discord
         /// </summary>
         /// <param name="apiKey">API key for the connecting bot</param>
         /// <param name="intents">Intents the bot needs in order to function</param>
-        public void Connect(string apiKey, GatewayIntents intents)
-        {
-            ClientConnection connection = new ClientConnection(apiKey, intents);
-            Connect(connection);
-        }
-        
+        public void Connect(string apiKey, GatewayIntents intents) => Connect(new ClientConnection(apiKey, intents));
+
         /// <summary>
         /// Starts a connection to discord with the given discord settings
         /// </summary>
@@ -94,7 +91,8 @@ namespace Oxide.Ext.Discord
             }
 
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
-            
+
+            Connection.Token = BotTokenFactory.Instance.CreateFromClient(this);
             Bot = BotClientFactory.Instance.InitializeBotClient(this);
         }
 

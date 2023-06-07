@@ -1982,31 +1982,31 @@
             Enables request validation
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Connections.BaseConnection.ApiToken">
+        <member name="P:Oxide.Ext.Discord.Connections.ClientConnection.ApiToken">
             <summary>
             API token for the bot
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Connections.BaseConnection.LogLevel">
-            <summary>
-            Discord Extension Logging Level.
-            See <see cref="P:Oxide.Ext.Discord.Connections.BaseConnection.LogLevel"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Connections.BaseConnection.Intents">
+        <member name="P:Oxide.Ext.Discord.Connections.ClientConnection.Intents">
             <summary>
             Intents that your bot needs to work
             See <see cref="T:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents"/>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Connections.BaseConnection.HasIntents(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
+        <member name="P:Oxide.Ext.Discord.Connections.ClientConnection.LogLevel">
+            <summary>
+            Discord Extension Logging Level.
+            See <see cref="P:Oxide.Ext.Discord.Connections.ClientConnection.LogLevel"/>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Connections.ClientConnection.HasIntents(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
             <summary>
             Returns if the settings has the given intents
             </summary>
             <param name="intents">Intents to be compared against</param>
             <returns>True if settings has the given intents; False otherwise</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Connections.BaseConnection.HasAnyIntent(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
+        <member name="M:Oxide.Ext.Discord.Connections.ClientConnection.HasAnyIntent(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
             <summary>
             Returns if the settings has any intent specified
             </summary>
@@ -18428,7 +18428,7 @@
             <param name="type"><see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType"/> of the command</param>
             <param name="customId">CustomId to match StartsWith for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -18447,7 +18447,7 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
             <summary>
             Called on the library when a plugin is loaded
             </summary>
@@ -18594,7 +18594,7 @@
             <param name="args"></param>
             <param name="message"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -18655,7 +18655,7 @@
             </summary>
             <param name="plugin"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -18904,7 +18904,7 @@
             <returns>Localized message if found; Empty string otherwise</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if any of the input arguments are null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -19596,7 +19596,7 @@
             <typeparam name="T">Type of the data key</typeparam>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -19894,7 +19894,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the plugin is null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -19967,7 +19967,7 @@
             <exception cref="T:System.ArgumentNullException">Exception if plugin is null</exception>
             <exception cref="T:System.ArgumentException">Exception if channel ID is not valid</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -20112,7 +20112,7 @@
             <param name="plugin">Plugin Name the template is for</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.BaseTemplateLibrary`1.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">

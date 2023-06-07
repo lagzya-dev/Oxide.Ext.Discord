@@ -2,6 +2,7 @@
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Plugins.Setup;
 
 namespace Oxide.Ext.Discord.Libraries
 {
@@ -20,7 +21,7 @@ namespace Oxide.Ext.Discord.Libraries
             Libraries.Add(this);
         }
 
-        internal static void ProcessPluginLoaded(PluginData plugin)
+        internal static void ProcessPluginLoaded(PluginSetupData plugin)
         {
             for (int index = 0; index < Libraries.Count; index++)
             {
@@ -42,7 +43,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// Called on the library when a plugin is loaded
         /// </summary>
         /// <param name="data">Plugin that was loaded</param>
-        protected abstract void OnPluginLoaded(PluginData data);
+        protected abstract void OnPluginLoaded(PluginSetupData data);
         
         /// <summary>
         /// Called on the library when a plugin is unloaded

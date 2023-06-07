@@ -4,31 +4,39 @@ using System.Reflection;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
 
-namespace Oxide.Ext.Discord.Plugins
+namespace Oxide.Ext.Discord.Plugins.Setup
 {
-    public class PluginData
+    public class PluginSetupData
     {
         public readonly Plugin Plugin;
         public readonly string PluginName;
 
-        public List<PluginHook> Hooks = new List<PluginHook>();
-        public List<PluginField> Fields = new List<PluginField>();
-        
-        public PluginData(Plugin plugin)
+        public readonly List<PluginHook> Hooks = new List<PluginHook>();
+        public readonly List<PluginField> Fields = new List<PluginField>();
+
+        public PluginSetupData(Plugin plugin)
         {
             Plugin = plugin;
             PluginName = Plugin.Name;
-            Type type = plugin.GetType();
-            MemberInfo[] methods = type.GetMembers(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            MemberInfo[] methods = plugin.GetType().GetMembers(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             for (int index = 0; index < methods.Length; index++)
             {
                 MemberInfo member = methods[index];
+                Attribute[] attributes = Attribute.GetCustomAttributes(member);
+                if (attributes.Length == 0)
+                {
+                    continue;
+                }
+                
                 switch (member)
                 {
                     case MethodInfo hook:
                     {
-                        Attribute[] attributes = Attribute.GetCustomAttributes(hook);
-                        if (!hook.IsPublic || HasAttribute<HookMethodAttribute>(attributes))
+                        if (!hook.IsPublic)
+                        {
+                            Hooks.Add(new PluginHook(hook, attributes));
+                        }
+                        else if (HasAttribute<HookMethodAttribute>(attributes) && attributes.Length > 1)
                         {
                             Hooks.Add(new PluginHook(hook, attributes));
                         }
@@ -38,6 +46,7 @@ namespace Oxide.Ext.Discord.Plugins
                     case FieldInfo field:
                         Fields.Add(new PluginField(field));
                         break;
+                    
                     case PropertyInfo property:
                         Fields.Add(new PluginField(property));
                         break;

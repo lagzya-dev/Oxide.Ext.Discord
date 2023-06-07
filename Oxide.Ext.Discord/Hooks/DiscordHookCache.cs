@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord.Hooks
                 return;
             }
 
-            BotConnection connection = client.Bot.Connection;
+            ClientConnection connection = client.Bot.Connection;
             GatewayIntents intent = DiscordExtHooks.HookGatewayIntent[hook];
             if (intent != GatewayIntents.None && !connection.HasAnyIntent(intent))
             {
