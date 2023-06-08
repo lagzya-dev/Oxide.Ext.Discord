@@ -38,11 +38,11 @@
         /// <summary>
         /// The metadata value (integer) is equal to the guild's configured value (integer; 1)
         /// </summary>
-        BooleanEqual = 2,
+        BooleanEqual = 7,
         
         /// <summary>
         /// The metadata value (integer) is not equal to the guild's configured value (integer; 1)
         /// </summary>
-        BooleanNotEqual = 2,
+        BooleanNotEqual = 8,
     }
 }
