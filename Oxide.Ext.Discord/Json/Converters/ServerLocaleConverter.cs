@@ -1,7 +1,6 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Templates;
 
 namespace Oxide.Ext.Discord.Json.Converters
 {

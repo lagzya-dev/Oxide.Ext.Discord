@@ -7,7 +7,6 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
-using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Plugins.Setup;
@@ -45,8 +44,6 @@ namespace Oxide.Ext.Discord.Clients
         internal BotConnection Connection { get; private set; }
 
         internal ILogger Logger;
-        
-        private PluginSetupData _data;
 
         /// <summary>
         /// Constructor for a discord client
@@ -57,9 +54,7 @@ namespace Oxide.Ext.Discord.Clients
             Plugin = plugin;
             PluginId = plugin.Id();
             PluginName = plugin.FullName();
-            _data = new PluginSetupData(plugin);
-            PluginExt.OnPluginLoaded(plugin);
-            BaseDiscordLibrary.ProcessPluginLoaded(_data);
+            PluginExt.OnPluginLoaded(Plugin);
         }
         
         /// <summary>
@@ -93,8 +88,8 @@ namespace Oxide.Ext.Discord.Clients
 
             Connection.Initialize(this);
             Bot = BotClientFactory.Instance.InitializeBotClient(this);
-            DiscordAppCommand.Instance.RegisterApplicationCommands(_data, Connection);
-            _data = null;
+            PluginSetupData setup = new PluginSetupData(Plugin);
+            BaseDiscordLibrary.ProcessPluginLoaded(setup, Connection);
         }
 
         /// <summary>

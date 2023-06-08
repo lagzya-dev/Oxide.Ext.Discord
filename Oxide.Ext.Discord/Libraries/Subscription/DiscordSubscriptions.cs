@@ -11,7 +11,6 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription
@@ -101,9 +100,6 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             
             _logger.Debug($"{nameof(DiscordSubscriptions)}.{nameof(RemoveChannelSubscription)} {{0}} removed subscription to channel {{1}}", plugin.Id(), channelId);
         }
-
-        ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginSetupData data) { }
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)

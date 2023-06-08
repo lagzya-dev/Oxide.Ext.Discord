@@ -5,6 +5,7 @@ using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
@@ -12,7 +13,6 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Plugins;
 
@@ -322,7 +322,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         }
         
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginSetupData data)
+        protected override void OnPluginLoaded(PluginSetupData data, BotConnection connection)
         {
             foreach (PluginHookResult<DirectMessageCommandAttribute> result in data.GetHooksWithAttribute<DirectMessageCommandAttribute>())
             {

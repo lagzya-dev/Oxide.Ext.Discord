@@ -46,11 +46,6 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         public readonly ConcurrentDictionary<BucketId, BucketId> RouteToBucketId = new ConcurrentDictionary<BucketId, BucketId>();
 
-        /// <summary>
-        /// The authorization header value
-        /// </summary>
-        //internal readonly string AuthHeader;
-        
         private readonly ILogger _logger;
         
         /// <summary>

@@ -10,9 +10,7 @@ using Oxide.Ext.Discord.Libraries.Placeholders.Callbacks;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Plugins.Core;
-using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
@@ -214,9 +212,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 _internalPlaceholders[placeholder] = holder;
             }
         }
-
-        ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginSetupData data) { }
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)

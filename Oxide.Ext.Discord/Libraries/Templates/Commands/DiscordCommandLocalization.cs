@@ -1,7 +1,5 @@
-﻿using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Exceptions.Libraries.DiscordLang;
 using Oxide.Ext.Discord.Libraries.Locale;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands

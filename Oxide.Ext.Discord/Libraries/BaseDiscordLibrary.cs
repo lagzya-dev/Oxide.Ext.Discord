@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Plugins.Setup;
 
 namespace Oxide.Ext.Discord.Libraries
@@ -21,12 +21,12 @@ namespace Oxide.Ext.Discord.Libraries
             Libraries.Add(this);
         }
 
-        internal static void ProcessPluginLoaded(PluginSetupData plugin)
+        internal static void ProcessPluginLoaded(PluginSetupData plugin, BotConnection connection)
         {
             for (int index = 0; index < Libraries.Count; index++)
             {
                 BaseDiscordLibrary library = Libraries[index];
-                library.OnPluginLoaded(plugin);
+                library.OnPluginLoaded(plugin, connection);
             }
         }
         
@@ -43,12 +43,12 @@ namespace Oxide.Ext.Discord.Libraries
         /// Called on the library when a plugin is loaded
         /// </summary>
         /// <param name="data">Plugin that was loaded</param>
-        protected abstract void OnPluginLoaded(PluginSetupData data);
+        protected virtual void OnPluginLoaded(PluginSetupData data, BotConnection connection) {}
         
         /// <summary>
         /// Called on the library when a plugin is unloaded
         /// </summary>
         /// <param name="plugin">Plugin that was unloaded</param>
-        protected abstract void OnPluginUnloaded(Plugin plugin);
+        protected virtual void OnPluginUnloaded(Plugin plugin) {}
     }
 }

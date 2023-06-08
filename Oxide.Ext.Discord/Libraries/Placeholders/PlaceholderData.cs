@@ -12,7 +12,6 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;

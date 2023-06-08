@@ -277,9 +277,9 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                 }
             }
         }
-        
+
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginSetupData data) { }
+        protected override void OnPluginLoaded(PluginSetupData data, BotConnection connection) => RegisterApplicationCommands(data, connection);
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
