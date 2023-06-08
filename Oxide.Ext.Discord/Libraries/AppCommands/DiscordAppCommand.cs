@@ -14,7 +14,6 @@ using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.AppCommands.Handlers;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Plugins;
 
@@ -39,10 +38,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             _logger = logger;
         }
 
-        private ApplicationCommandHandler GetSlashCommandHandler(Snowflake appId)
-        {
-            return _slashCommands[appId];
-        }
+        private ApplicationCommandHandler GetSlashCommandHandler(Snowflake appId) => _slashCommands[appId];
 
         private ApplicationCommandHandler GetOrAddSlashCommandHandler(Snowflake appId)
         {
@@ -255,40 +251,34 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
         }
 
-        internal void RegisterApplicationCommands(PluginSetupData data, ClientConnection connection)
+        internal void RegisterApplicationCommands(PluginSetupData data, BotConnection connection)
         {
             _logger.Debug("Registering application commands for {0}", data.PluginName);
 
             Plugin plugin = data.Plugin;
-            Snowflake appId = connection.ApplicationId;
+            Snowflake applicationId = connection.ApplicationId;
             foreach (PluginHookResult<BaseApplicationCommandAttribute> hook in data.GetHooksWithAttribute<BaseApplicationCommandAttribute>())
             {
-                BaseApplicationCommandAttribute attribute = hook.Attribute;
-                string name = hook.Name;
-                
-                switch (attribute)
+                switch (hook.Attribute)
                 {
                     case DiscordAutoCompleteCommandAttribute autoComplete:
-                        AddAutoCompleteCommand(plugin, appId, name, autoComplete.Command, autoComplete.ArgumentName, autoComplete.Group, autoComplete.SubCommand);
+                        AddAutoCompleteCommand(plugin, applicationId, hook.Name, autoComplete.Command, autoComplete.ArgumentName, autoComplete.Group, autoComplete.SubCommand);
                         break;
                     case DiscordApplicationCommandAttribute appCommand:
-                        AddApplicationCommand(plugin, appId, name, appCommand.Command, appCommand.Group, appCommand.SubCommand);
+                        AddApplicationCommand(plugin, applicationId, hook.Name, appCommand.Command, appCommand.Group, appCommand.SubCommand);
                         break;
                     case DiscordMessageComponentCommandAttribute component:
-                        AddMessageComponentCommand(plugin, appId, component.CustomId, name);
+                        AddMessageComponentCommand(plugin, applicationId, component.CustomId, hook.Name);
                         break;
                     case DiscordModalSubmitAttribute modal:
-                        AddModalSubmitCommand(plugin, appId, modal.CustomId, name);
+                        AddModalSubmitCommand(plugin, applicationId, modal.CustomId, hook.Name);
                         break;
                 }
             }
         }
         
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginSetupData data)
-        {
-           
-        }
+        protected override void OnPluginLoaded(PluginSetupData data) { }
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)

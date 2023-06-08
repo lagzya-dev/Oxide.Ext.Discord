@@ -15,15 +15,15 @@ namespace Oxide.Ext.Discord.Factory
         private readonly Regex _tokenValidator = new Regex(@"^[\w-]+\.[\w-]+\.[\w-]+$", RegexOptions.Compiled);
         private readonly char[] _splitArgs = {'.'};
 
-        private readonly Hash<string, BotToken> _tokens = new Hash<string, BotToken>();
+        private readonly Hash<string, BotTokenData> _tokens = new Hash<string, BotTokenData>();
         
         private BotTokenFactory() { }
 
-        internal BotToken CreateFromClient(DiscordClient client)
+        internal BotTokenData CreateFromClient(DiscordClient client)
         {
             string token = client.Connection.ApiToken;
             
-            BotToken botToken = _tokens[token];
+            BotTokenData botToken = _tokens[token];
             if (botToken == null)
             {
                 botToken = ParseToken(token, client.PluginName);
@@ -51,14 +51,14 @@ namespace Oxide.Ext.Discord.Factory
             return DiscordPool.Internal.FreeStringBuilderToString(sb);
         }
         
-        private BotToken ParseToken(string token, string pluginName)
+        private BotTokenData ParseToken(string token, string pluginName)
         {
             string hiddenToken = GenerateHiddenToken(token);
             string[] args = token.Split(_splitArgs);
             if (args.Length != 3)
             {
                 DiscordExtension.GlobalLogger.Error("Failed to parse token {0} for plugin {1}", hiddenToken, pluginName);
-                return new BotToken(token, hiddenToken, default(Snowflake), default(DateTimeOffset));
+                return new BotTokenData(hiddenToken, default(Snowflake), default(DateTimeOffset));
             }
 
             if (!TryParseApplicationId(args[0], out Snowflake appId))
@@ -71,7 +71,7 @@ namespace Oxide.Ext.Discord.Factory
                 DiscordExtension.GlobalLogger.Error("Failed to parse Token Creation Date from bot token. Bot token is invalid. Token: {0}", hiddenToken);
             }
             
-            return new BotToken(token, hiddenToken, appId, createdDate);
+            return new BotTokenData(hiddenToken, appId, createdDate);
         }
 
         private bool TryParseApplicationId(string base64AppId, out Snowflake id)

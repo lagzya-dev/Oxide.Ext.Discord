@@ -78,7 +78,7 @@ namespace Oxide.Ext.Discord
         
         internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
-        internal readonly ClientConnection Connection;
+        internal readonly BotConnection Connection;
         internal readonly JsonSerializerSettings JsonSettings;
         internal readonly JsonSerializer JsonSerializer;
         internal DiscordWebSocket WebSocket;
@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord
         /// <param name="settings"></param>
         public BotClient(DiscordClient client)
         {
-            Connection = new ClientConnection(client.Connection);
+            Connection = new BotConnection(client.Connection);
             Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(Connection.LogLevel);
 
             JsonSettings = new JsonSerializerSettings
@@ -206,8 +206,7 @@ namespace Oxide.Ext.Discord
             
             _clients.Add(client);
             Hooks.AddPlugin(client);
-            DiscordAppCommand.Instance.RegisterApplicationCommands(client.Data, Connection);
-            
+
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
             
             if (_clients.Count == 1)

@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Connections
 {
-    public class ClientConnection
+    public class BotConnection
     {
         /// <summary>
         /// API token for the bot
@@ -27,20 +27,28 @@ namespace Oxide.Ext.Discord.Connections
         public string HiddenToken => Token?.HiddenToken ?? "Unknown Token";
         public Snowflake ApplicationId => Token?.ApplicationId ?? default(Snowflake);
 
-        internal BotToken Token { get; set; }
+        internal BotTokenData Token { get; set; }
         
-        public ClientConnection() { }
+        public BotConnection() { }
 
-        public ClientConnection(string apiToken, GatewayIntents intents = GatewayIntents.None, DiscordLogLevel logLevel = DiscordLogLevel.Info)
+        public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None, DiscordLogLevel logLevel = DiscordLogLevel.Info)
         {
             ApiToken = apiToken;
             Intents = intents;
             LogLevel = logLevel;
         }
 
-        internal ClientConnection(ClientConnection connection) : this(connection.ApiToken, connection.Intents, connection.LogLevel)
+        internal BotConnection(BotConnection connection) : this(connection.ApiToken, connection.Intents, connection.LogLevel)
         {
             Token = connection.Token;
+        }
+
+        internal void Initialize(DiscordClient client)
+        {
+            if (Token == null)
+            {
+                Token = BotTokenFactory.Instance.CreateFromClient(client);
+            }
         }
 
         /// <summary>

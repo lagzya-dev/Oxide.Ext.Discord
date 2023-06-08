@@ -10,11 +10,11 @@ namespace Oxide.Ext.Discord.Exceptions
     {
         private TokenMismatchException(string message) : base(message) { }
 
-        internal static void ThrowIfMismatchedToken(DiscordClient client, ClientConnection expected)
+        internal static void ThrowIfMismatchedToken(DiscordClient client, BotConnection expected)
         {
             if (client.Connection.ApiToken != expected.ApiToken)
             {
-                BotToken token = BotTokenFactory.Instance.CreateFromClient(client);
+                BotTokenData token = BotTokenFactory.Instance.CreateFromClient(client);
                 throw new TokenMismatchException($"Failed to add client for plugin {client.PluginName}. Token {token.HiddenToken} does not match BotClient {expected.HiddenToken}");
             }
         }
