@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Clients;
+
 namespace Oxide.Ext.Discord.Rest.Requests
 {
     /// <summary>

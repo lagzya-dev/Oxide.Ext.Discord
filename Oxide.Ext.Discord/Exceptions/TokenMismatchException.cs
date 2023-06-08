@@ -1,3 +1,4 @@
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Factory;
 

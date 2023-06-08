@@ -1,3 +1,4 @@
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;

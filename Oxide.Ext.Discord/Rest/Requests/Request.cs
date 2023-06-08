@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using Oxide.Core.Libraries;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Pooling;

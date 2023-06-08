@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Libraries;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;

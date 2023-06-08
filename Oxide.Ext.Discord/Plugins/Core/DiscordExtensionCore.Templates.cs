@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Entities.Messages;

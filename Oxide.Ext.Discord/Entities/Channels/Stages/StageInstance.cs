@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Interfaces.Promises;

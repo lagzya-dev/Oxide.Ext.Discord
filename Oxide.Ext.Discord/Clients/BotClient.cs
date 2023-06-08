@@ -20,7 +20,6 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Core;
@@ -28,7 +27,7 @@ using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.WebSockets;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord
+namespace Oxide.Ext.Discord.Clients
 {
     /// <summary>
     /// Represents a bot that is connected to discord

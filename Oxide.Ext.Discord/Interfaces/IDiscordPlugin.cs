@@ -1,4 +1,5 @@
 ﻿using Oxide.Core;
+using Oxide.Ext.Discord.Clients;
 
 namespace Oxide.Ext.Discord.Interfaces
 {

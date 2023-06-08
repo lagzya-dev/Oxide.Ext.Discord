@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;

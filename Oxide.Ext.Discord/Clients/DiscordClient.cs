@@ -1,5 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities.Gateway;
@@ -13,7 +12,7 @@ using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Plugins.Setup;
 
-namespace Oxide.Ext.Discord
+namespace Oxide.Ext.Discord.Clients
 {
     /// <summary>
     /// Represents the object a plugin uses to connects to discord

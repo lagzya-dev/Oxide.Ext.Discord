@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.Exceptions
+﻿using Oxide.Ext.Discord.Clients;
+
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exceptions for the <see cref="DiscordClient"/>

@@ -1,5 +1,6 @@
 using System;
 using Oxide.Ext.Discord.Cache.Entities;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
