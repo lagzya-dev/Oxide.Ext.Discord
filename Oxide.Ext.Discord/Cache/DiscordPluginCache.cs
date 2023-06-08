@@ -65,6 +65,7 @@ namespace Oxide.Ext.Discord.Cache
 
         internal void OnPluginUnloaded(Plugin plugin)
         {
+            _nextUpdate = DateTime.UtcNow;
             _loadedPlugins.Remove(plugin.Name);
         }
     }
