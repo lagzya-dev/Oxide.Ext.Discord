@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
     /// <summary>
     /// Discord API Request Status
     /// </summary>
-    public enum RequestStatus
+    public enum RequestStatus : byte
     {
         /// <summary>
         /// Request is in the queue waiting to be processed

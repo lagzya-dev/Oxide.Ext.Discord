@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level">Stage Privacy Level</a> within Discord.
     /// </summary>
-    public enum PrivacyLevel
+    public enum PrivacyLevel : byte
     {
         /// <summary>
         /// The Stage instance is visible publicly. (deprecated)

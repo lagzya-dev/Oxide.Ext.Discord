@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-forum-layout-types">Forum Layout Types</a>
     /// </summary>
-    public enum ForumLayoutTypes
+    public enum ForumLayoutTypes : byte
     {
         /// <summary>
         /// No default has been set for forum channel

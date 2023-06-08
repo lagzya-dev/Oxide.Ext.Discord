@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type">InteractionResponseType</a>
     /// </summary>
-    public enum InteractionResponseType
+    public enum InteractionResponseType : byte
     {
         /// <summary>
         /// Acknowledges a Ping

@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#input-text-styles">Input Text Styles</a> within discord.
     /// </summary>
-    public enum InputTextStyles
+    public enum InputTextStyles : byte
     {
         /// <summary>
         /// Single-line input

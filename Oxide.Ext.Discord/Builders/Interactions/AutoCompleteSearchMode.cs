@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
     /// <summary>
     /// AutoComplete Search Mode for <see cref="InteractionAutoCompleteBuilder"/>
     /// </summary>
-    public enum AutoCompleteSearchMode
+    public enum AutoCompleteSearchMode : byte
     {
         /// <summary>
         /// Filter using StartsWith

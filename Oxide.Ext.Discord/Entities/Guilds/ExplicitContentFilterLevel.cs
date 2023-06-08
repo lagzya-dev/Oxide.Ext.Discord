@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-explicit-content-filter-level">Explicit Content Filter Level</a>
     /// </summary>
-    public enum ExplicitContentFilterLevel
+    public enum ExplicitContentFilterLevel : byte
     {
         /// <summary>
         /// Disable explicit content filter

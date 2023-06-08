@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object-message-activity-types">Message Activity Types</a>
     /// </summary>
-    public enum MessageActivityType
+    public enum MessageActivityType : byte
     {
         /// <summary>
         /// Message Activity Join

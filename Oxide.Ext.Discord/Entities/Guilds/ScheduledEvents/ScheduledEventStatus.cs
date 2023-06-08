@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status">Guild Scheduled Event Status</a>
     /// </summary>
-    public enum ScheduledEventStatus
+    public enum ScheduledEventStatus : byte
     {
         /// <summary>
         /// Scheduled Event is scheduled and has not happened yet.

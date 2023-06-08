@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents <a href="Application Role Connection Metadata Structure">Application Role Connection Metadata Type</a>
     /// </summary>
-    public enum ApplicationRoleConnectionMetadataType
+    public enum ApplicationRoleConnectionMetadataType : byte
     {
         /// <summary>
         /// The metadata value (integer) is less than or equal to the guild's configured value (integer)

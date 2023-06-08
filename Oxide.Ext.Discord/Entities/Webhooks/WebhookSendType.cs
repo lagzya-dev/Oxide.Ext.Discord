@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
     /// <summary>
     /// Use to control which webhook execute url to call
     /// </summary>
-    public enum WebhookSendType
+    public enum WebhookSendType : byte
     {
         /// <summary>
         /// Webhook is for Discord

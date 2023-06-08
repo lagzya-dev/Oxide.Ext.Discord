@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-guild-features">Guild Features</a>
     /// </summary>
     [JsonConverter(typeof(DiscordEnumConverter))]
-    public enum GuildFeatures
+    public enum GuildFeatures : byte
     {
         /// <summary>
         /// Discord Extension doesn't currently support a guild features

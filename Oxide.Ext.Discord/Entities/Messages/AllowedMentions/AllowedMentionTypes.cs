@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
     ///  Represents a <a href="https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types">Allowed Mention Types</a> for a message
     /// </summary>
     [JsonConverter(typeof(DiscordEnumConverter))]
-    public enum AllowedMentionTypes
+    public enum AllowedMentionTypes : byte
     {
         /// <summary>
         /// Discord Extension doesn't currently support this allowed mention type.

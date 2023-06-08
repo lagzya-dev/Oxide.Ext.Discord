@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#message-object-message-types">Message Types</a>
     /// </summary>
-    public enum MessageType
+    public enum MessageType : byte
     {
         /// <summary>
         /// The default message type

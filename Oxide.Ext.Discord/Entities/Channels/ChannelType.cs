@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-channel-types">Types of Channels</a>
     /// </summary>
-    public enum ChannelType
+    public enum ChannelType : byte
     {
         /// <summary>
         /// A text channel within a server

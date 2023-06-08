@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/message-components#buttons-button-styles">Button Styles</a> within Discord..
     /// </summary>
-    public enum ButtonStyle
+    public enum ButtonStyle : byte
     {
         /// <summary>
         /// Color blurple

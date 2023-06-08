@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types">Auto Mod Trigger Types</a>
     /// </summary>
-    public enum AutoModTriggerType
+    public enum AutoModTriggerType : byte
     {
         /// <summary>
         /// Check if content contains words from a user defined list of keywords

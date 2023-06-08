@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents Discord User <a href="https://discord.com/developers/docs/resources/user#user-object-premium-types">Premium Types</a>
     /// </summary>
-    public enum UserPremiumType
+    public enum UserPremiumType : byte
     {
         /// <summary>
         /// User has no premium

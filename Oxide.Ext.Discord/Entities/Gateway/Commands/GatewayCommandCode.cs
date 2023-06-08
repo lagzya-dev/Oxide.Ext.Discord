@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Gateway.Commands
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes">Gateway Opcodes</a>
     /// </summary>
-    public enum GatewayCommandCode
+    public enum GatewayCommandCode : byte
     {
         /// <summary>
         /// Maintains an active gateway connection

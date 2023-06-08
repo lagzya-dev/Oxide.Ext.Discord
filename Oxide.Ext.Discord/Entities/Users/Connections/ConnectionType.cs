@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
     /// Represents a <a href="https://discord.com/developers/docs/resources/user#connection-object-connection-structure">Connection Type</a> for a connection
     /// </summary>
     [JsonConverter(typeof(DiscordEnumConverter))]
-    public enum ConnectionType
+    public enum ConnectionType : byte
     {
         /// <summary>
         /// Discord Extension doesn't currently support this connection type

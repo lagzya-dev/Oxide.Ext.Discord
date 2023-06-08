@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-types">Sticker Types</a>
     /// </summary>
-    public enum StickerType
+    public enum StickerType : byte
     {
         /// <summary>
         /// An official sticker in a pack, part of Nitro or in a removed purchasable pack

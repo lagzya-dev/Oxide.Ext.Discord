@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
     /// <summary>
     /// Represents Integrations types
     /// </summary>
-    public enum IntegrationType
+    public enum IntegrationType : byte
     {
         /// <summary>
         /// Integration is for twitch

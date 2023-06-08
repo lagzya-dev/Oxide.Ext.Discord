@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.AutoMod
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-types">Auto Mod Action Types</a>
     /// </summary>
-    public enum AutoModActionType
+    public enum AutoModActionType : byte
     {
         /// <summary>
         /// Blocks the content of a message according to the rule

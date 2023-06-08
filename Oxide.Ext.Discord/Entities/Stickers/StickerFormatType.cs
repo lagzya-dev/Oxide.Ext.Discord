@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/sticker#sticker-format-types">Sticker Format Types</a>
     /// </summary>
-    public enum StickerFormatType
+    public enum StickerFormatType : byte
     {
         /// <summary>
         /// Sticker format type PNG

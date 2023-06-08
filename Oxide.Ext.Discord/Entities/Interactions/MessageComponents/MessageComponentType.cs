@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#component-types">Message Component Type</a> within Discord..
     /// </summary>
-    public enum MessageComponentType
+    public enum MessageComponentType : byte
     {
         /// <summary>
         /// Container for other components

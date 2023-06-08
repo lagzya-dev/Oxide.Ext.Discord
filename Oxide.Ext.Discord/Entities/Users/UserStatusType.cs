@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Users
     /// <summary>
     /// Represents Discord User <a href="https://discord.com/developers/docs/topics/gateway#update-status-status-types">Status Types</a> 
     /// </summary>
-    public enum UserStatusType
+    public enum UserStatusType : byte
     {
         /// <summary>
         /// User is online
