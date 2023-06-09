@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Templates;
+using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
@@ -16,13 +17,30 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
 {
+    /// <summary>
+    /// Auto Complete Choice Templates Library
+    /// </summary>
     public class DiscordAutoCompleteChoiceTemplates : BaseTemplateLibrary<DiscordAutoCompleteChoiceTemplate>
     {
         private readonly ConcurrentDictionary<TemplateId, DiscordAutoCompleteChoiceTemplate> _globalCache = new ConcurrentDictionary<TemplateId, DiscordAutoCompleteChoiceTemplate>();
         private readonly ConcurrentDictionary<TemplateId, List<LocalizedTemplate>> _localizedCache = new ConcurrentDictionary<TemplateId, List<LocalizedTemplate>>();
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="logger"></param>
         public DiscordAutoCompleteChoiceTemplates(ILogger logger) : base(TemplateType.AutoCompleteChoice, logger) { }
 
+        /// <summary>
+        /// Registers a global template for Auto Complete Choices
+        /// </summary>
+        /// <param name="plugin">Plugin the template is for</param>
+        /// <param name="templateName">Name of the template</param>
+        /// <param name="template">The template to register</param>
+        /// <param name="version">Current version of the template</param>
+        /// <param name="minVersion">Minimum supported version of the template</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Throw if plugin or templateName is null</exception>
         public IPromise RegisterGlobalTemplate(Plugin plugin, string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
@@ -31,7 +49,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
             TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
             return RegisterTemplate(id, template, version, minVersion);
         }
-        
+
+        /// <summary>
+        /// Registers a global template for Auto Complete Choices
+        /// </summary>
+        /// <param name="plugin">Plugin the template is for</param>
+        /// <param name="templateName">Name of the template</param>
+        /// <param name="template">The template to register</param>
+        /// <param name="version">Current version of the template</param>
+        /// <param name="minVersion">Minimum supported version of the template</param>
+        /// <param name="language">Server Language for the localized template</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Throw if plugin, templateName, or language is null/empty</exception>
         public IPromise RegisterLocalizedTemplate(Plugin plugin, string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
@@ -50,6 +79,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
             return promise;
         }
 
+        /// <summary>
+        /// Returns a global Auto Complete Template for the given plugin and template name
+        /// </summary>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Name of the template</param>
+        /// <returns></returns>
         public DiscordAutoCompleteChoiceTemplate GetGlobalTemplate(Plugin plugin, string templateName)
         {
             TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
@@ -71,6 +106,15 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
             return template.Template;
         }
 
+        /// <summary>
+        /// Applies a Global Template to a <see cref="CommandOptionChoice"/> with optional placeholders
+        /// </summary>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Name of the template</param>
+        /// <param name="choice">Choice to be applied to</param>
+        /// <param name="placeholders">Placeholders to apply</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
         public CommandOptionChoice ApplyGlobal(Plugin plugin, string templateName, CommandOptionChoice choice = null, PlaceholderData placeholders = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
@@ -91,7 +135,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
             LoadTemplate(id)?.Template.ApplyName(choice, placeholders);
         }
 
-        public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName, CommandOptionChoice choice = null, PlaceholderData placeholders = null)
+        /// <summary>
+        /// Applies a Localized Template to a <see cref="CommandOptionChoice"/> with optional placeholders
+        /// </summary>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Name of the template</param>
+        /// <param name="choice">Choice to be applied to</param>
+        /// <param name="placeholders">Placeholders to apply</param>
+        /// <param name="language">Server Language to apply</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
+        public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName, CommandOptionChoice choice = null, PlaceholderData placeholders = null, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
@@ -101,7 +155,33 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
                 choice = new CommandOptionChoice();
             }
             
-            TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
+            ServerLocale locale = ServerLocale.Parse(language);
+            TemplateId id = TemplateId.CreateLocalized(plugin, templateName, locale);
+            ApplyLocalizations(id, choice, placeholders);
+            return choice;
+        }
+
+        /// <summary>
+        /// Applies a Localized Template to a <see cref="CommandOptionChoice"/> with optional placeholders
+        /// </summary>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Name of the template</param>
+        /// <param name="interaction">Interaction for the localization</param>
+        /// <param name="choice">Choice to be applied to</param>
+        /// <param name="placeholders">Placeholders to apply</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
+        public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName, DiscordInteraction interaction, CommandOptionChoice choice = null, PlaceholderData placeholders = null)
+        {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+
+            if (choice == null)
+            {
+                choice = new CommandOptionChoice();
+            }
+            
+            TemplateId id = TemplateId.CreateInteraction(plugin, templateName, interaction);
             ApplyLocalizations(id, choice, placeholders);
             return choice;
         }
@@ -174,6 +254,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
             }
         }
         
+        ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             base.OnPluginUnloaded(plugin);

@@ -1,7 +1,10 @@
 ﻿using Oxide.Ext.Discord.Libraries.Locale;
 
-namespace Oxide.Ext.Discord.Exceptions.Libraries.DiscordLang
+namespace Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale
 {
+    /// <summary>
+    /// Exception thrown when Discord Locale is not found
+    /// </summary>
     public class DiscordLocaleNotFoundException : BaseDiscordException
     {
         private DiscordLocaleNotFoundException(string message) : base(message) { }

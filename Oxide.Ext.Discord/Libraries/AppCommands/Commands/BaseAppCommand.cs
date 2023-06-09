@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
         /// Constructor
         /// </summary>
         /// <param name="plugin">Plugin for the command</param>
-        /// <param name="app"><see cref="DiscordApplication"/> for the command</param>
+        /// <param name="appId">ID of the <see cref="DiscordApplication"/> for the command</param>
         /// <param name="type">Interaction type for the command</param>
         /// <param name="callback">Hook callback method name</param>
         protected BaseAppCommand(Plugin plugin, Snowflake appId, InteractionType type, string callback)

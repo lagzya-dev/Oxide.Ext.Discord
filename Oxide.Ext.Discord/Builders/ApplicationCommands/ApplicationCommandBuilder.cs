@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Builders;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Exceptions.Libraries.DiscordLang;
+using Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale;
 using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Libraries.Templates.Commands;
 using Oxide.Plugins;

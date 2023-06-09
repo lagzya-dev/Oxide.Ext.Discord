@@ -93,12 +93,12 @@ namespace Oxide.Ext.Discord.Clients
         private GatewayReadyEvent _readyData;
 
         /// <summary>
-        /// Creates a new bot client for the given settings
+        /// Connection settings to use for the bot
         /// </summary>
-        /// <param name="settings"></param>
-        public BotClient(DiscordClient client)
+        /// <param name="connection"></param>
+        public BotClient(BotConnection connection)
         {
-            Connection = new BotConnection(client.Connection);
+            Connection = new BotConnection(connection);
             Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(Connection.LogLevel);
 
             JsonSettings = new JsonSerializerSettings
@@ -195,6 +195,7 @@ namespace Oxide.Ext.Discord.Clients
         /// Add a client to this bot client
         /// </summary>
         /// <param name="client">Client to add to the bot</param>
+        /// <param name="setup">Setup data for the plugin</param>
         public void AddClient(DiscordClient client, PluginSetup setup)
         {
             TokenMismatchException.ThrowIfMismatchedToken(client, Connection);

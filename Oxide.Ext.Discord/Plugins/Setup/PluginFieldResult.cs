@@ -4,18 +4,18 @@ using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Plugins.Setup
 {
-    public struct PluginFieldResult<T> where T : BaseDiscordAttribute
+    internal struct PluginFieldResult<T> where T : BaseDiscordAttribute
     {
-        public readonly MemberInfo Member;
-        public readonly T Attribute;
-        public bool IsValid => Member != null && Attribute != null;
+        private readonly MemberInfo _member;
+        private readonly T _attribute;
+        public bool IsValid => _member != null && _attribute != null;
 
         public PluginFieldResult(MemberInfo member, T attribute)
         {
-            Member = member;
-            Attribute = attribute;
+            _member = member;
+            _attribute = attribute;
         }
 
-        public void SetValue(object instance, object value) => Member.SetMemberValue(instance, value);
+        public void SetValue(object instance, object value) => _member.SetMemberValue(instance, value);
     }
 }

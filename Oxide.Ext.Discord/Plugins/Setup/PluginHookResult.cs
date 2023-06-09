@@ -2,7 +2,7 @@
 
 namespace Oxide.Ext.Discord.Plugins.Setup
 {
-    public struct PluginHookResult<T> where T : BaseDiscordAttribute
+    internal struct PluginHookResult<T> where T : BaseDiscordAttribute
     {
         public readonly string Name;
         public readonly T Attribute;

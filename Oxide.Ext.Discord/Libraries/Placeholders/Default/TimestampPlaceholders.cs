@@ -14,42 +14,42 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         internal const string TimestampName = "Timestamp";
         
         /// <summary>
-        /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+        /// <see cref="DiscordFormatting.UnixTimestamp(long,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
         public static void Timestamp(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp));
         
         /// <summary>
-        /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+        /// <see cref="DiscordFormatting.UnixTimestamp(long,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
         public static void ShortTime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.ShortTime));
         
         /// <summary>
-        /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+        /// <see cref="DiscordFormatting.UnixTimestamp(long,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
         public static void Longtime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongTime));
         
         /// <summary>
-        /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+        /// <see cref="DiscordFormatting.UnixTimestamp(long,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
         public static void ShortDate(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.ShortDate));
         
         /// <summary>
-        /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+        /// <see cref="DiscordFormatting.UnixTimestamp(long,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
         public static void LongDate(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongDate));
         
         /// <summary>
-        /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+        /// <see cref="DiscordFormatting.UnixTimestamp(long,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
         public static void ShortDateTime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp));
         
         /// <summary>
-        /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+        /// <see cref="DiscordFormatting.UnixTimestamp(long,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
         public static void LongDateTime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.LongDateTime));
         
         /// <summary>
-        /// <see cref="DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+        /// <see cref="DiscordFormatting.UnixTimestamp(long,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
         /// </summary>
         public static void RelativeTime(StringBuilder builder, PlaceholderState state, long timestamp) => PlaceholderFormatting.Replace(builder, state, DiscordFormatting.UnixTimestamp(timestamp, TimestampStyles.RelativeTime));
 

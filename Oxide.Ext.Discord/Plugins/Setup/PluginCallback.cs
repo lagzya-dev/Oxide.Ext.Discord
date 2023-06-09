@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Plugins.Setup
 {
-    public struct PluginCallback
+    internal struct PluginCallback
     {
         public readonly string Name;
         public readonly List<Attribute> Attributes;

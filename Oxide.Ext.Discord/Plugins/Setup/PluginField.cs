@@ -5,31 +5,31 @@ using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Plugins.Setup
 {
-    public struct PluginField
+    internal struct PluginField
     {
         public readonly MemberInfo Member;
-        public readonly List<Attribute> Attributes;
+        private readonly List<Attribute> _attributes;
 
         public PluginField(MemberInfo member)
         {
             Member = member;
-            Attributes = new List<Attribute>(0);
+            _attributes = new List<Attribute>(0);
             Attribute[] attributes = Attribute.GetCustomAttributes(member);
             for (int index = 0; index < attributes.Length; index++)
             {
                 Attribute attribute = attributes[index];
                 if (attribute is BaseDiscordAttribute)
                 {
-                    Attributes.Add(attribute);
+                    _attributes.Add(attribute);
                 }
             }
         }
         
         public T GetAttribute<T>() where T : Attribute
         {
-            for (int index = 0; index < Attributes.Count; index++)
+            for (int index = 0; index < _attributes.Count; index++)
             {
-                Attribute attribute = Attributes[index];
+                Attribute attribute = _attributes[index];
                 if (attribute is T tAttribute)
                 {
                     return tAttribute;

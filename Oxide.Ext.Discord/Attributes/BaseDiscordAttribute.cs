@@ -2,8 +2,8 @@
 
 namespace Oxide.Ext.Discord.Attributes
 {
-    public class BaseDiscordAttribute : Attribute
-    {
-        
-    }
+    /// <summary>
+    /// Base Attribute for all Discord Extension Attributes
+    /// </summary>
+    public abstract class BaseDiscordAttribute : Attribute { }
 }

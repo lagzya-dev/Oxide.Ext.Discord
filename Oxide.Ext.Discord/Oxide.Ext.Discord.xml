@@ -4,6 +4,11 @@
         <name>Oxide.Ext.Discord</name>
     </assembly>
     <members>
+        <member name="T:Oxide.Ext.Discord.Attributes.ApplicationCommands.BaseApplicationCommandAttribute">
+            <summary>
+            Base attribute for Application Commands
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Attributes.ApplicationCommands.DiscordApplicationCommandAttribute">
             <summary>
             Discord Application Command Attribute for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ApplicationCommand"/>
@@ -107,6 +112,11 @@
             <param name="name">Name of the command</param>
             <param name="isLocalized">If the command name is the localization key for the command</param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Attributes.BaseDiscordAttribute">
+            <summary>
+            Base Attribute for all Discord Extension Attributes
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Attributes.DirectMessageCommandAttribute">
             <summary>
             Used to identify direct message bot commands
@@ -130,6 +140,11 @@
             </summary>
             <param name="name">Name of the command</param>
             <param name="isLocalized">If the command name is the localization key for the command</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Attributes.Pooling.DiscordPoolAttribute">
+            <summary>
+            Attribute for setting <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> on a plugin
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder">
             <summary>
@@ -1788,11 +1803,11 @@
             List of all clients that are using this bot client
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Clients.BotClient.#ctor(Oxide.Ext.Discord.Clients.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Clients.BotClient.#ctor(Oxide.Ext.Discord.Connections.BotConnection)">
             <summary>
-            Creates a new bot client for the given settings
+            Connection settings to use for the bot
             </summary>
-            <param name="settings"></param>
+            <param name="connection"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.ConnectWebSocket">
             <summary>
@@ -1811,11 +1826,12 @@
             Called when bot client is no longer used by any client and can be shutdown.
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Clients.BotClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Plugins.Setup.PluginSetupData)">
+        <member name="M:Oxide.Ext.Discord.Clients.BotClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Plugins.Setup.PluginSetup)">
             <summary>
             Add a client to this bot client
             </summary>
             <param name="client">Client to add to the bot</param>
+            <param name="setup">Setup data for the plugin</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.RemoveClient(Oxide.Ext.Discord.Clients.DiscordClient)">
             <summary>
@@ -2060,6 +2076,11 @@
             Enables request validation
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Connections.BotConnection">
+            <summary>
+            Bot Connection Settings
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Connections.BotConnection.ApiToken">
             <summary>
             API token for the bot
@@ -2077,6 +2098,26 @@
             See <see cref="P:Oxide.Ext.Discord.Connections.BotConnection.LogLevel"/>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Connections.BotConnection.HiddenToken">
+            <summary>
+            Hidden Bot Token. Used when needing to display the token.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Connections.BotConnection.ApplicationId">
+            <summary>
+            Application ID of the Bot Token
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Connections.BotConnection.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Connections.BotConnection.#ctor(System.String,Oxide.Ext.Discord.Entities.Gateway.GatewayIntents,Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Connections.BotConnection.HasIntents(Oxide.Ext.Discord.Entities.Gateway.GatewayIntents)">
             <summary>
             Returns if the settings has the given intents
@@ -2090,6 +2131,34 @@
             </summary>
             <param name="intents">Intents to compare against</param>
             <returns>True if settings has at least one of the given intents</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Connections.BotTokenData">
+            <summary>
+            Represents the parsed Bot Token data
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Connections.BotTokenData.HiddenToken">
+            <summary>
+            Hidden Token. Used when Displaying
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Connections.BotTokenData.ApplicationId">
+            <summary>
+            Application ID of the token
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Connections.BotTokenData.CreationDate">
+            <summary>
+            Creation Date of the token
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Connections.BotTokenData.#ctor(System.String,Oxide.Ext.Discord.Entities.Snowflake,System.DateTimeOffset)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="hiddenToken"></param>
+            <param name="applicationId"></param>
+            <param name="creationDate"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Constants.DiscordEncoding">
             <summary>
@@ -2176,6 +2245,27 @@
             <summary>
             A mapping of Hooks required Gateway Intent
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Constants.DiscordExtHooks.IsGlobalHook(System.String)">
+            <summary>
+            Returns true if the hook is a Discord Extension Global Hook
+            </summary>
+            <param name="hook">Name of the hook</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Constants.DiscordExtHooks.IsPluginHook(System.String)">
+            <summary>
+            Returns true if the hook is a Discord Extension Plugin Hook
+            </summary>
+            <param name="hook">Name of the hook</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Constants.DiscordExtHooks.IsDiscordHook(System.String)">
+            <summary>
+            Returns true if the hook is a Discord Extension Hook
+            </summary>
+            <param name="hook">Name of the hook</param>
+            <returns></returns>
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordClientCreated">
             <code>
@@ -16460,6 +16550,16 @@
             Represents an exception that occured with the websocket
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale.DiscordLocaleNotFoundException">
+            <summary>
+            Exception thrown when Discord Locale is not found
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale.ServerLocaleNotFoundException">
+            <summary>
+            Exception thrown when Server Locale is not found
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Libraries.DiscordTemplateException">
             <summary>
             Exception for Discord Templates
@@ -18344,7 +18444,7 @@
             Constructor
             </summary>
             <param name="plugin">Plugin for the command</param>
-            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="appId">ID of the <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="type">Interaction type for the command</param>
             <param name="callback">Hook callback method name</param>
         </member>
@@ -18365,7 +18465,7 @@
             Registers a new Application Command for the given plugin
             </summary>
             <param name="plugin"><see cref="T:Oxide.Core.Plugins.Plugin"/> the Application Command is for</param>
-            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="appId">ID of the <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="callback">Callback for the command</param>
             <param name="command">Command name</param>
             <param name="group">Sub Command Group for the command</param>
@@ -18377,7 +18477,7 @@
             Registers a new Application Command for the given plugin
             </summary>
             <param name="plugin"><see cref="T:Oxide.Core.Plugins.Plugin"/> the Application Command is for</param>
-            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> For the command</param>
+            <param name="appId">ID of <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> For the command</param>
             <param name="callback">Callback for the command</param>
             <param name="command">Command name</param>
             <param name="argument">Command Argument name for the Auto Complete</param>
@@ -18391,7 +18491,7 @@
             This matches CustomId with starts with
             </summary>
             <param name="plugin">Plugin the command is for</param>
-            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="appId">ID of <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="customId">Command to match with Starts with</param>
             <param name="callback">Callback for the command</param>
         </member>
@@ -18401,7 +18501,7 @@
             This matches CustomId with starts with
             </summary>
             <param name="plugin">Plugin the command is for</param>
-            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="appId">ID of <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="customId">Command to match with Starts with</param>
             <param name="callback">Callback for the command</param>
         </member>
@@ -18426,7 +18526,7 @@
             <param name="type"><see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType"/> of the command</param>
             <param name="customId">CustomId to match StartsWith for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData,Oxide.Ext.Discord.Connections.BotConnection)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetup,Oxide.Ext.Discord.Connections.BotConnection)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -18445,11 +18545,12 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData,Oxide.Ext.Discord.Connections.BotConnection)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetup,Oxide.Ext.Discord.Connections.BotConnection)">
             <summary>
             Called on the library when a plugin is loaded
             </summary>
             <param name="data">Plugin that was loaded</param>
+            <param name="connection">Connection for the plugin</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <summary>
@@ -18592,7 +18693,7 @@
             <param name="args"></param>
             <param name="message"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData,Oxide.Ext.Discord.Connections.BotConnection)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetup,Oxide.Ext.Discord.Connections.BotConnection)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Command.DiscordCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -18828,6 +18929,65 @@
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.PlayerId.GetHashCode">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale">
+            <summary>
+            Represents a Locale in Discord
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.Id">
+            <summary>
+            ID of the locale
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.IsValid">
+            <summary>
+            Is the Locale Valid
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.GetServerLocale">
+            <summary>
+            Returns the Server Locale for this Discord Locale
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.Parse(System.String)">
+            <summary>
+            Parses a Discord Locale
+            </summary>
+            <param name="locale">Locale to Parse</param>
+            <returns>Parsed Discord Locale</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.Equals(Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.op_Equality(Oxide.Ext.Discord.Libraries.Locale.DiscordLocale,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
+            <summary>
+            Returns if two Discord Locales are equal to each other
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.op_Inequality(Oxide.Ext.Discord.Libraries.Locale.DiscordLocale,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
+            <summary>
+            Returns if two Discord Locales are not equal to each other
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale.ToString">
+            <summary>
+            Returns the ID of the Locale
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales">
             <summary>
             Converts discord locale codes into oxide locale codes
@@ -18848,6 +19008,41 @@
             Constructor
             </summary>
             <param name="logger"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.AddOxideLocale(Oxide.Ext.Discord.Libraries.Locale.ServerLocale,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
+            <summary>
+            Adds a one way <see cref="T:Oxide.Ext.Discord.Libraries.Locale.ServerLocale"/> -> <see cref="T:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale"/> mapping
+            </summary>
+            <param name="serverLang"></param>
+            <param name="discordLang"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.AddDiscordLocale(Oxide.Ext.Discord.Libraries.Locale.DiscordLocale,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+            <summary>
+            Adds a one way <see cref="T:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale"/> -> <see cref="T:Oxide.Ext.Discord.Libraries.Locale.ServerLocale"/> mapping
+            </summary>
+            <param name="discordLang"></param>
+            <param name="serverLang"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.Contains(Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+            <summary>
+            Returns if the <see cref="T:Oxide.Ext.Discord.Libraries.Locale.ServerLocale"/> mapping exists
+            </summary>
+            <param name="locale"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.Contains(Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
+            <summary>
+            Returns if the <see cref="T:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale"/> mapping exists
+            </summary>
+            <param name="locale"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.GetServerLanguage(Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
+            <summary>
+            Returns the oxide locale for a given discord locale
+            </summary>
+            <param name="discordLocale">Discord locale to get oxide locale for</param>
+            <returns>Oxide locale if it exists; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.GetDiscordLocale(Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
@@ -18901,6 +19096,75 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Locale.DiscordLocales.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Locale.ServerLocale">
+            <summary>
+            Represents a Server Locale
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.Id">
+            <summary>
+            ID of the Locale
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.IsValid">
+            <summary>
+            Returns if the Locale is valid
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.IsDefault">
+            <summary>
+            Returns if the Locale is the default server language "en"
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.GetDiscordLocale">
+            <summary>
+            Returns the <see cref="T:Oxide.Ext.Discord.Libraries.Locale.DiscordLocale"/> for this server locale
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.Default">
+            <summary>
+            The default locale for servers
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.Parse(System.String)">
+            <summary>
+            Parses a locale returning a <see cref="T:Oxide.Ext.Discord.Libraries.Locale.ServerLocale"/>
+            </summary>
+            <param name="locale"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.Equals(Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.op_Equality(Oxide.Ext.Discord.Libraries.Locale.ServerLocale,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+            <summary>
+            Returns if two Server Locales are equal to each other
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.op_Inequality(Oxide.Ext.Discord.Libraries.Locale.ServerLocale,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+            <summary>
+            Returns if two Server Locales are not equal to each other
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Locale.ServerLocale.ToString">
+            <summary>
+            Returns the ID of the ServerLocale
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Placeholders.Default.ApplicationCommandPlaceholders">
             <summary>
@@ -19431,42 +19695,42 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.Timestamp(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.ShortTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.Longtime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.ShortDate(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.LongDate(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.ShortDateTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.LongDateTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.RelativeTime(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.Int64)">
             <summary>
-            <see cref="!:DiscordFormatting.UnixTimestamp(ulong,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
+            <see cref="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.UnixTimestamp(System.Int64,Oxide.Ext.Discord.Helpers.TimestampStyles)"/> placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.TimestampPlaceholders.RegisterPlaceholders(Oxide.Core.Plugins.Plugin,System.String,System.String)">
@@ -19883,7 +20147,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the plugin is null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetupData,Oxide.Ext.Discord.Connections.BotConnection)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetup,Oxide.Ext.Discord.Connections.BotConnection)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -19969,10 +20233,112 @@
         <member name="M:Oxide.Ext.Discord.Libraries.Subscription.DiscordSubscriptions.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplate">
+            <summary>
+            Template for Discord Auto Completes
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplate.Name">
             <summary>
             Choice Text (1-100 characters)
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplate.ApplyLocalization(Oxide.Ext.Discord.Libraries.Locale.DiscordLocale,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+            <summary>
+            Apply localizations to the auto complete choice
+            </summary>
+            <param name="locale">DiscordLocale being applied</param>
+            <param name="choice">Choice to apply the template to</param>
+            <param name="placeholders">Placeholders for be applied</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplate.ApplyName(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+            <summary>
+            Apply the name to the auto complete choice
+            </summary>
+            <param name="choice">Choice to apply the template to</param>
+            <param name="placeholders">Placeholders for be applied</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates">
+            <summary>
+            Auto Complete Choice Templates Library
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates.RegisterGlobalTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion)">
+            <summary>
+            Registers a global template for Auto Complete Choices
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="templateName">Name of the template</param>
+            <param name="template">The template to register</param>
+            <param name="version">Current version of the template</param>
+            <param name="minVersion">Minimum supported version of the template</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Throw if plugin or templateName is null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates.RegisterLocalizedTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplate,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,Oxide.Ext.Discord.Libraries.Templates.TemplateVersion,System.String)">
+            <summary>
+            Registers a global template for Auto Complete Choices
+            </summary>
+            <param name="plugin">Plugin the template is for</param>
+            <param name="templateName">Name of the template</param>
+            <param name="template">The template to register</param>
+            <param name="version">Current version of the template</param>
+            <param name="minVersion">Minimum supported version of the template</param>
+            <param name="language">Server Language for the localized template</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Throw if plugin, templateName, or language is null/empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates.GetGlobalTemplate(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Returns a global Auto Complete Template for the given plugin and template name
+            </summary>
+            <param name="plugin">Plugin for the template</param>
+            <param name="templateName">Name of the template</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates.ApplyGlobal(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+            <summary>
+            Applies a Global Template to a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> with optional placeholders
+            </summary>
+            <param name="plugin">Plugin for the template</param>
+            <param name="templateName">Name of the template</param>
+            <param name="choice">Choice to be applied to</param>
+            <param name="placeholders">Placeholders to apply</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates.ApplyLocalized(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,System.String)">
+            <summary>
+            Applies a Localized Template to a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> with optional placeholders
+            </summary>
+            <param name="plugin">Plugin for the template</param>
+            <param name="templateName">Name of the template</param>
+            <param name="choice">Choice to be applied to</param>
+            <param name="placeholders">Placeholders to apply</param>
+            <param name="language">Server Language to apply</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates.ApplyLocalized(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+            <summary>
+            Applies a Localized Template to a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice"/> with optional placeholders
+            </summary>
+            <param name="plugin">Plugin for the template</param>
+            <param name="templateName">Name of the template</param>
+            <param name="interaction">Interaction for the localization</param>
+            <param name="choice">Choice to be applied to</param>
+            <param name="placeholders">Placeholders to apply</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.BaseMessageTemplateLibrary`1">
             <summary>
@@ -21549,6 +21915,17 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Plugins.PluginId.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Plugins.Setup.PluginSetup">
+            <summary>
+            Build Discord Extension Setup Data for a plugin
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Plugins.Setup.PluginSetup.#ctor(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="plugin">Plugin the data is for</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.BasePool`2">
             <summary>

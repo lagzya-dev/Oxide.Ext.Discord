@@ -79,17 +79,39 @@ namespace Oxide.Ext.Discord.Libraries.Locale
             AddDiscordLocale(DiscordLocale.Create("zh-TW"), ServerLocale.Create("zh"));
         }
 
+        /// <summary>
+        /// Adds a one way <see cref="ServerLocale"/> -> <see cref="DiscordLocale"/> mapping
+        /// </summary>
+        /// <param name="serverLang"></param>
+        /// <param name="discordLang"></param>
         public void AddOxideLocale(ServerLocale serverLang, DiscordLocale discordLang) => _locales.AddKey(serverLang, discordLang);
+        
+        /// <summary>
+        /// Adds a one way <see cref="DiscordLocale"/> -> <see cref="ServerLocale"/> mapping
+        /// </summary>
+        /// <param name="discordLang"></param>
+        /// <param name="serverLang"></param>
         public void AddDiscordLocale(DiscordLocale discordLang, ServerLocale serverLang) => _locales.AddValue(discordLang, serverLang);
 
+        /// <summary>
+        /// Returns if the <see cref="ServerLocale"/> mapping exists
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <returns></returns>
         public bool Contains(ServerLocale locale) => _locales.ContainsKey(locale);
+        
+        /// <summary>
+        /// Returns if the <see cref="DiscordLocale"/> mapping exists
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <returns></returns>
         public bool Contains(DiscordLocale locale) => _locales.ContainsKey(locale);
 
-        // /// <summary>
-        // /// Returns the oxide locale for a given discord locale
-        // /// </summary>
-        // /// <param name="langId">Discord locale to get oxide locale for</param>
-        // /// <returns>Oxide locale if it exists; null otherwise</returns>
+        /// <summary>
+        /// Returns the oxide locale for a given discord locale
+        /// </summary>
+        /// <param name="discordLocale">Discord locale to get oxide locale for</param>
+        /// <returns>Oxide locale if it exists; null otherwise</returns>
         public ServerLocale GetServerLanguage(DiscordLocale discordLocale) => _locales.TryGetValue(discordLocale, out ServerLocale serverLocale) ? serverLocale : default(ServerLocale);
 
         /// <summary>

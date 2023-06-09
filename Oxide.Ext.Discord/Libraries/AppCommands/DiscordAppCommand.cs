@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         /// Registers a new Application Command for the given plugin
         /// </summary>
         /// <param name="plugin"><see cref="Plugin"/> the Application Command is for</param>
-        /// <param name="app"><see cref="DiscordApplication"/> for the command</param>
+        /// <param name="appId">ID of the <see cref="DiscordApplication"/> for the command</param>
         /// <param name="callback">Callback for the command</param>
         /// <param name="command">Command name</param>
         /// <param name="group">Sub Command Group for the command</param>
@@ -105,7 +105,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         /// Registers a new Application Command for the given plugin
         /// </summary>
         /// <param name="plugin"><see cref="Plugin"/> the Application Command is for</param>
-        /// <param name="app"><see cref="DiscordApplication"/> For the command</param>
+        /// <param name="appId">ID of <see cref="DiscordApplication"/> For the command</param>
         /// <param name="callback">Callback for the command</param>
         /// <param name="command">Command name</param>
         /// <param name="argument">Command Argument name for the Auto Complete</param>
@@ -139,7 +139,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         /// This matches CustomId with starts with
         /// </summary>
         /// <param name="plugin">Plugin the command is for</param>
-        /// <param name="app"><see cref="DiscordApplication"/> for the command</param>
+        /// <param name="appId">ID of <see cref="DiscordApplication"/> for the command</param>
         /// <param name="customId">Command to match with Starts with</param>
         /// <param name="callback">Callback for the command</param>
         public void AddMessageComponentCommand(Plugin plugin, Snowflake appId, string customId, string callback)
@@ -159,7 +159,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         /// This matches CustomId with starts with
         /// </summary>
         /// <param name="plugin">Plugin the command is for</param>
-        /// <param name="app"><see cref="DiscordApplication"/> for the command</param>
+        /// <param name="appId">ID of <see cref="DiscordApplication"/> for the command</param>
         /// <param name="customId">Command to match with Starts with</param>
         /// <param name="callback">Callback for the command</param>
         public void AddModalSubmitCommand(Plugin plugin, Snowflake appId, string customId, string callback)

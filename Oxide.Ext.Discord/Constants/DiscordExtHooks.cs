@@ -197,8 +197,25 @@ namespace Oxide.Ext.Discord.Constants
             }
         }
 
+        /// <summary>
+        /// Returns true if the hook is a Discord Extension Global Hook
+        /// </summary>
+        /// <param name="hook">Name of the hook</param>
+        /// <returns></returns>
         public static bool IsGlobalHook(string hook) => _globalHooks.Contains(hook);
+        
+        /// <summary>
+        /// Returns true if the hook is a Discord Extension Plugin Hook
+        /// </summary>
+        /// <param name="hook">Name of the hook</param>
+        /// <returns></returns>
         public static bool IsPluginHook(string hook) => _pluginHooks.Contains(hook);
+        
+        /// <summary>
+        /// Returns true if the hook is a Discord Extension Hook
+        /// </summary>
+        /// <param name="hook">Name of the hook</param>
+        /// <returns></returns>
         public static bool IsDiscordHook(string hook) => _allHooks.Contains(hook);
 
         #region Bot Client Hooks

@@ -7,19 +7,26 @@ using Oxide.Ext.Discord.Constants;
 
 namespace Oxide.Ext.Discord.Plugins.Setup
 {
+    /// <summary>
+    /// Build Discord Extension Setup Data for a plugin
+    /// </summary>
     public class PluginSetup
     {
-        public readonly Plugin Plugin;
-        public readonly string PluginName;
+        internal readonly Plugin Plugin;
+        internal readonly string PluginName;
 
-        public readonly List<string> PluginHooks = new List<string>(0);
-        public readonly List<string> GlobalHooks = new List<string>(0);
-        public readonly List<PluginCallback> Callbacks = new List<PluginCallback>(0);
-        public readonly List<PluginField> Fields = new List<PluginField>(0);
+        internal readonly List<string> PluginHooks = new List<string>(0);
+        internal readonly List<string> GlobalHooks = new List<string>(0);
+        private readonly List<PluginCallback> _callbacks = new List<PluginCallback>(0);
+        private readonly List<PluginField> _fields = new List<PluginField>(0);
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="plugin">Plugin the data is for</param>
         public PluginSetup(Plugin plugin)
         {
-            Plugin = plugin;
+            Plugin = plugin ?? throw new ArgumentNullException(nameof(plugin));
             PluginName = Plugin.Name;
             MemberInfo[] methods = plugin.GetType().GetMembers(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             for (int index = 0; index < methods.Length; index++)
@@ -51,18 +58,18 @@ namespace Oxide.Ext.Discord.Plugins.Setup
                            
                             if (IsCallbackMethod(attributes))
                             {
-                                Callbacks.Add(new PluginCallback(name, attributes));
+                                _callbacks.Add(new PluginCallback(name, attributes));
                             }
                         }
                         break;
                     }
 
                     case FieldInfo field:
-                        Fields.Add(new PluginField(field));
+                        _fields.Add(new PluginField(field));
                         break;
                     
                     case PropertyInfo property:
-                        Fields.Add(new PluginField(property));
+                        _fields.Add(new PluginField(property));
                         break;
                 }
             }
@@ -106,11 +113,11 @@ namespace Oxide.Ext.Discord.Plugins.Setup
             }
         }
 
-        public IEnumerable<PluginHookResult<T>> GetHooksWithAttribute<T>() where T : BaseDiscordAttribute
+        internal IEnumerable<PluginHookResult<T>> GetHooksWithAttribute<T>() where T : BaseDiscordAttribute
         {
-            for (int index = 0; index < Callbacks.Count; index++)
+            for (int index = 0; index < _callbacks.Count; index++)
             {
-                PluginCallback callback = Callbacks[index];
+                PluginCallback callback = _callbacks[index];
                 T attribute = callback.GetAttribute<T>();
                 if (attribute != null)
                 {
@@ -119,11 +126,11 @@ namespace Oxide.Ext.Discord.Plugins.Setup
             }
         }
         
-        public PluginFieldResult<T> GetFieldWthAttribute<T>() where T : BaseDiscordAttribute
+        internal PluginFieldResult<T> GetFieldWthAttribute<T>() where T : BaseDiscordAttribute
         {
-            for (int index = 0; index < Fields.Count; index++)
+            for (int index = 0; index < _fields.Count; index++)
             {
-                PluginField field = Fields[index];
+                PluginField field = _fields[index];
                 T attribute = field.GetAttribute<T>();
                 if (attribute != null)
                 {

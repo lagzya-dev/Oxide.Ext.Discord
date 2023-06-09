@@ -3,9 +3,9 @@ using System.Reflection;
 
 namespace Oxide.Ext.Discord.Extensions
 {
-    public static class MemberInfoExt
+    internal static class MemberInfoExt
     {
-        public static void SetMemberValue(this MemberInfo info, object instance, object value)
+        internal static void SetMemberValue(this MemberInfo info, object instance, object value)
         {
             switch (info.MemberType)
             {

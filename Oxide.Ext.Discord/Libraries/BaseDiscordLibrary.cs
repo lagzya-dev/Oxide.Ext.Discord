@@ -38,11 +38,12 @@ namespace Oxide.Ext.Discord.Libraries
                 library.OnPluginUnloaded(plugin);
             }
         }
-        
+
         /// <summary>
         /// Called on the library when a plugin is loaded
         /// </summary>
         /// <param name="data">Plugin that was loaded</param>
+        /// <param name="connection">Connection for the plugin</param>
         protected virtual void OnPluginLoaded(PluginSetup data, BotConnection connection) {}
         
         /// <summary>

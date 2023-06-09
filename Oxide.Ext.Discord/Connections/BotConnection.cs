@@ -6,6 +6,9 @@ using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Connections
 {
+    /// <summary>
+    /// Bot Connection Settings
+    /// </summary>
     public class BotConnection
     {
         /// <summary>
@@ -25,13 +28,26 @@ namespace Oxide.Ext.Discord.Connections
         /// </summary>
         public DiscordLogLevel LogLevel { get; set; }
 
+        /// <summary>
+        /// Hidden Bot Token. Used when needing to display the token.
+        /// </summary>
         public string HiddenToken => Token?.HiddenToken ?? "Unknown Token";
+        
+        /// <summary>
+        /// Application ID of the Bot Token
+        /// </summary>
         public Snowflake ApplicationId => Token?.ApplicationId ?? default(Snowflake);
 
-        internal BotTokenData Token { get; set; }
+        private BotTokenData Token { get; set; }
         
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public BotConnection() { }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None, DiscordLogLevel logLevel = DiscordLogLevel.Info)
         {
             ApiToken = apiToken;

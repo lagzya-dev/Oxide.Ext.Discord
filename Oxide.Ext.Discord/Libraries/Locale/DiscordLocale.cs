@@ -5,12 +5,26 @@ using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.Locale
 {
+    /// <summary>
+    /// Represents a Locale in Discord
+    /// </summary>
     [JsonConverter(typeof(DiscordLocaleConverter))]
     public struct DiscordLocale : IEquatable<DiscordLocale>
     {
+        /// <summary>
+        /// ID of the locale
+        /// </summary>
         public readonly string Id;
+        
+        /// <summary>
+        /// Is the Locale Valid
+        /// </summary>
         public bool IsValid => !string.IsNullOrEmpty(Id);
 
+        /// <summary>
+        /// Returns the Server Locale for this Discord Locale
+        /// </summary>
+        /// <returns></returns>
         public ServerLocale GetServerLocale() => DiscordLocales.Instance.GetServerLanguage(this);
         
         private DiscordLocale(string id) 
@@ -18,6 +32,11 @@ namespace Oxide.Ext.Discord.Libraries.Locale
             Id = id;
         }
 
+        /// <summary>
+        /// Parses a Discord Locale
+        /// </summary>
+        /// <param name="locale">Locale to Parse</param>
+        /// <returns>Parsed Discord Locale</returns>
         public static DiscordLocale Parse(string locale)
         {
             DiscordLocale discordLocale = new DiscordLocale(locale);
@@ -32,16 +51,35 @@ namespace Oxide.Ext.Discord.Libraries.Locale
 
         internal static DiscordLocale Create(string locale) => new DiscordLocale(locale);
         
+        ///<inheritdoc/>
         public bool Equals(DiscordLocale other) => Id == other.Id;
 
+        ///<inheritdoc/>
         public override bool Equals(object obj) => obj is DiscordLocale other && Equals(other);
 
+        ///<inheritdoc/>
         public override int GetHashCode() => Id != null ? Id.GetHashCode() : 0;
 
+        /// <summary>
+        /// Returns if two Discord Locales are equal to each other
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator == (DiscordLocale left, DiscordLocale right) => left.Equals(right);
         
+        /// <summary>
+        /// Returns if two Discord Locales are not equal to each other
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator != (DiscordLocale left, DiscordLocale right) => !(left == right);
         
+        /// <summary>
+        /// Returns the ID of the Locale
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() => Id;
     }
 }
