@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
@@ -17,42 +15,23 @@ namespace Oxide.Ext.Discord.Hooks
     {
         private readonly Hash<string, List<Plugin>> _hookCache = new Hash<string, List<Plugin>>();
         private readonly ILogger _logger;
-        private readonly ICollection<string> _supportedHooks;
 
-        internal DiscordHookCache(ICollection<string> supportedHooks, ILogger logger)
+        internal DiscordHookCache(ILogger logger)
         {
-            _supportedHooks = supportedHooks;
             _logger = logger;
         }
 
-        internal void AddPlugin(DiscordClient client)
+        internal void AddPlugin(DiscordClient client, List<string> hooks)
         {
-            Plugin plugin = client.Plugin;
-            Type pluginType = plugin.GetType();
-            foreach (MethodInfo method in pluginType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+            for (int index = 0; index < hooks.Count; index++)
             {
-                if (method.DeclaringType != pluginType)
-                {
-                    continue;
-                }
-
-                HookMethodAttribute hookMethod = method.GetCustomAttribute<HookMethodAttribute>();
-                if (!method.IsPrivate && hookMethod == null)
-                {
-                    continue;
-                }
-                
-                AddPluginHook(client, hookMethod?.Name ?? method.Name);
+                string hook = hooks[index];
+                AddPluginHook(client, hook);
             }
         }
 
         private void AddPluginHook(DiscordClient client, string hook)
         {
-            if (!_supportedHooks.Contains(hook))
-            {
-                return;
-            }
-
             BotConnection connection = client.Bot.Connection;
             GatewayIntents intent = DiscordExtHooks.HookGatewayIntent[hook];
             if (intent != GatewayIntents.None && !connection.HasAnyIntent(intent))

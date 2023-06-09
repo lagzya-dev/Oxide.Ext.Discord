@@ -57,7 +57,7 @@ namespace Oxide.Ext.Discord.Libraries.Pooling
         }
 
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginSetupData data, BotConnection connection)
+        protected override void OnPluginLoaded(PluginSetup data, BotConnection connection)
         {
             PluginFieldResult<DiscordPoolAttribute> field = data.GetFieldWthAttribute<DiscordPoolAttribute>();
             if (field.IsValid)

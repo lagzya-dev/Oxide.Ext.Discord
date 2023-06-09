@@ -23,6 +23,7 @@ using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Core;
+using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.WebSockets;
 using Oxide.Plugins;
@@ -194,7 +195,7 @@ namespace Oxide.Ext.Discord.Clients
         /// Add a client to this bot client
         /// </summary>
         /// <param name="client">Client to add to the bot</param>
-        public void AddClient(DiscordClient client)
+        public void AddClient(DiscordClient client, PluginSetup setup)
         {
             TokenMismatchException.ThrowIfMismatchedToken(client, Connection);
 
@@ -204,7 +205,7 @@ namespace Oxide.Ext.Discord.Clients
             }
             
             _clients.Add(client);
-            Hooks.AddPlugin(client);
+            Hooks.AddPlugin(client, setup);
 
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
             

@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Libraries
             Libraries.Add(this);
         }
 
-        internal static void ProcessPluginLoaded(PluginSetupData plugin, BotConnection connection)
+        internal static void ProcessPluginLoaded(PluginSetup plugin, BotConnection connection)
         {
             for (int index = 0; index < Libraries.Count; index++)
             {
@@ -43,7 +43,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// Called on the library when a plugin is loaded
         /// </summary>
         /// <param name="data">Plugin that was loaded</param>
-        protected virtual void OnPluginLoaded(PluginSetupData data, BotConnection connection) {}
+        protected virtual void OnPluginLoaded(PluginSetup data, BotConnection connection) {}
         
         /// <summary>
         /// Called on the library when a plugin is unloaded

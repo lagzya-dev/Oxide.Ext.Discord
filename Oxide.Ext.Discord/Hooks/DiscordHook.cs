@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Hooks;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Ext.Discord.Pooling.Pools;
 
 namespace Oxide.Ext.Discord.Hooks
@@ -14,19 +14,19 @@ namespace Oxide.Ext.Discord.Hooks
         private readonly DiscordHookCache _cache;
         private readonly ILogger _logger;
 
-        private static readonly DiscordHookCache Global = new DiscordHookCache(DiscordExtHooks.GlobalHooks, DiscordExtension.GlobalLogger);
+        private static readonly DiscordHookCache Global = new DiscordHookCache(DiscordExtension.GlobalLogger);
 
         internal DiscordHook(ILogger logger) 
         {
             _logger = logger;
-            _cache = new DiscordHookCache(DiscordExtHooks.PluginHooks, logger);
+            _cache = new DiscordHookCache(logger);
         }
 
         #region Plugin Handling
-        internal void AddPlugin(DiscordClient client)
+        internal void AddPlugin(DiscordClient client, PluginSetup setup)
         {
-            _cache.AddPlugin(client);
-            Global.AddPlugin(client);
+            _cache.AddPlugin(client, setup.PluginHooks);
+            Global.AddPlugin(client, setup.GlobalHooks);
         }
 
         internal void RemovePlugin(Plugin plugin)

@@ -252,7 +252,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
         }
 
-        internal void RegisterApplicationCommands(PluginSetupData data, BotConnection connection)
+        internal void RegisterApplicationCommands(PluginSetup data, BotConnection connection)
         {
             _logger.Debug("Registering application commands for {0}", data.PluginName);
 
@@ -279,7 +279,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         }
 
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginSetupData data, BotConnection connection) => RegisterApplicationCommands(data, connection);
+        protected override void OnPluginLoaded(PluginSetup data, BotConnection connection) => RegisterApplicationCommands(data, connection);
 
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)

@@ -1,32 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Plugins.Setup
 {
-    public struct PluginHook
+    public struct PluginCallback
     {
         public readonly string Name;
         public readonly List<Attribute> Attributes;
 
-        public PluginHook(MethodInfo info, Attribute[] attributes)
+        public PluginCallback(string name, Attribute[] attributes)
         {
-            Name = info.Name;
+            Name = name;
             Attributes = new List<Attribute>(0);
             for (int index = 0; index < attributes.Length; index++)
             {
                 Attribute attribute = attributes[index];
-                switch (attribute)
+                if (attribute is BaseDiscordAttribute)
                 {
-                    case HookMethodAttribute hook:
-                        Name = hook.Name;
-                        break;
-                    
-                    case BaseDiscordAttribute _:
-                        Attributes.Add(attribute);
-                        break;
+                    Attributes.Add(attribute);
                 }
             }
         }

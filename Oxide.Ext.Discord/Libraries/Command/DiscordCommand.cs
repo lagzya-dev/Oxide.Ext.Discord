@@ -322,7 +322,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         }
         
         ///<inheritdoc/>
-        protected override void OnPluginLoaded(PluginSetupData data, BotConnection connection)
+        protected override void OnPluginLoaded(PluginSetup data, BotConnection connection)
         {
             foreach (PluginHookResult<DirectMessageCommandAttribute> result in data.GetHooksWithAttribute<DirectMessageCommandAttribute>())
             {

@@ -1,9 +1,7 @@
 using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
@@ -17,13 +15,6 @@ namespace Oxide.Ext.Discord.Extensions
         private static readonly Hash<PluginId, string> FullNameCache = new Hash<PluginId, string>();
         private static readonly BidirectionalDictionary<PluginId, Plugin> PluginIds = new BidirectionalDictionary<PluginId, Plugin>();
 
-        /// <summary>
-        /// Returns a pool for the given plugin
-        /// </summary>
-        /// <param name="plugin">Plugin the pool is for</param>
-        /// <returns></returns>
-        public static DiscordPluginPool GetPool(this Plugin plugin) => DiscordPool.Instance.GetOrCreate(plugin);
-        
         internal static PluginId Id(this Plugin plugin)
         {
             if (PluginIds.TryGetValue(plugin, out PluginId id))

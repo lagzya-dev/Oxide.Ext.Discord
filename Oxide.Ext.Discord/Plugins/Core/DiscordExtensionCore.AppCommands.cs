@@ -46,7 +46,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 DiscordExtension.DiscordCommandLocalizations.ApplyCommandLocalizationsAsync(this, create, null).Then(() =>
                 {
                     client.Application.CreateGlobalCommand(client.GetFirstClient(), builder.Build());
-                    DiscordAppCommand.Instance.RegisterApplicationCommands(new PluginSetupData(this), client.Connection);
+                    DiscordAppCommand.Instance.RegisterApplicationCommands(new PluginSetup(this), client.Connection);
                 });
             });
         }

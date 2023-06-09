@@ -36,8 +36,7 @@ namespace Oxide.Ext.Discord.Factory
                     _activeBots[client.Connection.ApiToken] = bot;
                     _applicationBots[bot.Connection.ApplicationId] = bot;
                 }
-
-                bot.AddClient(client);
+                
                 DiscordExtension.GlobalLogger.Debug($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} Adding {{0}} client to bot {{1}}", client.PluginName, bot.BotUser?.FullUserName);
                 return bot;
             }
