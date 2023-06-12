@@ -11,8 +11,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
     /// </summary>
     internal class WebSocketReconnectHandler
     {
-        private readonly BotClient _client;
         internal readonly DiscordWebSocket WebSocket;
+        private readonly BotClient _client;
         private readonly ILogger _logger;
         private int _reconnectRetries;
         private CancellationTokenSource _source;
@@ -125,18 +125,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <summary>
         /// Called when the websocket received a ready event from discord
         /// </summary>
-        public void OnWebsocketReady()
-        {
-            _reconnectRetries = 0;
-        }
+        public void OnWebsocketReady() => _reconnectRetries = 0;
 
         /// <summary>
         /// Called when the bot is shutting down
         /// </summary>
-        public void OnSocketShutdown()
-        {
-            CancelReconnect();
-        }
+        public void OnSocketShutdown() => CancelReconnect();
 
         private int GetReconnectDelay()
         {

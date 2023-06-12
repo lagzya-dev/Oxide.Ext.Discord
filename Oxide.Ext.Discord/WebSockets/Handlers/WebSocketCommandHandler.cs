@@ -195,11 +195,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
 
             _isDisposed = true;
-            _source?.Cancel();
             _online.Reset();
             _commands.Reset();
             _online?.Dispose();
             _commands?.Dispose();
+            _source?.Cancel();
+            _source?.Dispose();
         }
 
         internal IReadOnlyCollection<WebSocketCommand> GetPendingCommands()

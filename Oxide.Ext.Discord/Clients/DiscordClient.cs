@@ -106,38 +106,26 @@ namespace Oxide.Ext.Discord.Clients
         /// Returns if the client is connected to a bot and if the bot is initialized
         /// </summary>
         /// <returns></returns>
-        public bool IsConnected()
-        {
-            return Bot?.Initialized ?? false;
-        }
+        public bool IsConnected() => Bot?.Initialized ?? false;
 
         #region Websocket Commands
         /// <summary>
         /// Used to request guild members from discord for a specific guild
         /// </summary>
         /// <param name="request">Request for guild members</param>
-        public void RequestGuildMembers(GuildMembersRequestCommand request)
-        {
-            Bot?.SendWebSocketCommand(this, GatewayCommandCode.RequestGuildMembers, request);
-        }
+        public void RequestGuildMembers(GuildMembersRequestCommand request) => Bot?.SendWebSocketCommand(this, GatewayCommandCode.RequestGuildMembers, request);
 
         /// <summary>
         /// Used to update the voice state for the bot
         /// </summary>
         /// <param name="voiceState"></param>
-        public void UpdateVoiceState(UpdateVoiceStatusCommand voiceState)
-        {
-            Bot?.SendWebSocketCommand(this, GatewayCommandCode.VoiceStateUpdate, voiceState);
-        }
+        public void UpdateVoiceState(UpdateVoiceStatusCommand voiceState) => Bot?.SendWebSocketCommand(this, GatewayCommandCode.VoiceStateUpdate, voiceState);
 
         /// <summary>
         /// Used to update the bots status in discord
         /// </summary>
         /// <param name="presenceUpdate"></param>
-        public void UpdateStatus(UpdatePresenceCommand presenceUpdate)
-        {
-            Bot?.SendWebSocketCommand(this, GatewayCommandCode.PresenceUpdate, presenceUpdate);
-        }
+        public void UpdateStatus(UpdatePresenceCommand presenceUpdate) => Bot?.SendWebSocketCommand(this, GatewayCommandCode.PresenceUpdate, presenceUpdate);
         #endregion
         
         internal void CloseClient()

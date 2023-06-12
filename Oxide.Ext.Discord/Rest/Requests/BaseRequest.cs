@@ -130,6 +130,15 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestErrored)} Request ID: {{0}} Waiting For {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
         }
 
+        internal void Abort()
+        {
+            if (!Source.IsCancellationRequested)
+            {
+                Source.Cancel();
+                Source.Dispose();
+            }
+        }
+        
         ///<inheritdoc/>
         protected override void EnterPool()
         {
@@ -140,6 +149,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
             HttpClient = null;
             Data = null;
             Client = null;
+            Source?.Dispose();
             Source = null;
             Bucket = null;
             _errorResetAt = DateTimeOffset.MinValue;
