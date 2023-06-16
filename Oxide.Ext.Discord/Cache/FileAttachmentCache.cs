@@ -6,13 +6,13 @@ namespace Oxide.Ext.Discord.Cache
     /// <summary>
     /// Caches file names when sending attachments
     /// </summary>
-    public sealed class FileAttachmentCache : Singleton<FileAttachmentCache>
+    internal sealed class FileAttachmentCache : Singleton<FileAttachmentCache>
     {
         private readonly List<string> _cache = new List<string>();
 
         private FileAttachmentCache() { }
-        
-        public string GetName(int index)
+
+        internal string GetName(int index)
         {
             if (index >= _cache.Count)
             {

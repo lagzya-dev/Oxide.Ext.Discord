@@ -148,11 +148,11 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
                 if (command.GuildId.HasValue && command.GuildId.Value.IsValid())
                 {
-                    builder.AddAutoCompleteChoice($"[Guild] {command.Name}", $"{command.GuildId.Value}:{command.Id}");
+                    builder.AddChoice($"[Guild] {command.Name}", $"{command.GuildId.Value}:{command.Id}");
                 }
                 else
                 {
-                    builder.AddAutoCompleteChoice($"[Global] {command.Name}", command.Id.ToString());
+                    builder.AddChoice($"[Global] {command.Name}", command.Id.ToString());
                 }
             }
         }

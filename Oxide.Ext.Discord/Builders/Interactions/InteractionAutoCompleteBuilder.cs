@@ -32,17 +32,11 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// Constructor
         /// </summary>
         /// <param name="interaction">Interaction this build is for</param>
-        public InteractionAutoCompleteBuilder(DiscordInteraction interaction) : this(interaction, new InteractionAutoCompleteMessage()) { }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="interaction">Interaction this build is for</param>
         /// <param name="message">Starting <see cref="InteractionAutoCompleteMessage"/></param>
-        public InteractionAutoCompleteBuilder(DiscordInteraction interaction, InteractionAutoCompleteMessage message)
+        public InteractionAutoCompleteBuilder(DiscordInteraction interaction, InteractionAutoCompleteMessage message = null)
         {
             InteractionResponseBuilderException.ThrowIfInteractionIsNotAutoComplete(interaction.Type);
-            _message = message;
+            _message = message ?? new InteractionAutoCompleteMessage();
             if (_message.Choices == null)
             {
                 _message.Choices = new List<CommandOptionChoice>();
@@ -55,11 +49,11 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="name">Name of the choice</param>
         /// <param name="value">Value of the choice</param>
         /// <returns>This</returns>
-        public InteractionAutoCompleteBuilder AddAutoCompleteChoice(string name, object value)
+        public InteractionAutoCompleteBuilder AddChoice(string name, object value)
         {
             InvalidAutoCompleteChoiceException.ThrowIfInvalidName(name);
             InvalidAutoCompleteChoiceException.ThrowIfInvalidValue(value);
-            return AddAutoCompleteChoice(new CommandOptionChoice(name, value));
+            return AddChoice(new CommandOptionChoice(name, value));
         }
 
         /// <summary>
@@ -70,11 +64,11 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="plugin">Plugin to lookup the langkey for</param>
         /// <param name="langKey">Lang key for the name</param>
         /// <returns>This</returns>
-        public InteractionAutoCompleteBuilder AddAutoCompleteChoice(string name, object value, Plugin plugin, string langKey)
+        public InteractionAutoCompleteBuilder AddChoice(string name, object value, Plugin plugin, string langKey)
         {
             InvalidAutoCompleteChoiceException.ThrowIfInvalidName(name);
             InvalidAutoCompleteChoiceException.ThrowIfInvalidValue(value);
-            return AddAutoCompleteChoice(new CommandOptionChoice(name, value,  DiscordLocales.Instance.GetDiscordLocalizations(plugin, langKey)));
+            return AddChoice(new CommandOptionChoice(name, value,  DiscordLocales.Instance.GetDiscordLocalizations(plugin, langKey)));
         }
         
         /// <summary>
@@ -82,7 +76,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// </summary>
         /// <param name="choice">Choice to be added</param>
         /// <returns>This</returns>
-        public InteractionAutoCompleteBuilder AddAutoCompleteChoice(CommandOptionChoice choice)
+        public InteractionAutoCompleteBuilder AddChoice(CommandOptionChoice choice)
         {
             if (choice == null) throw new ArgumentNullException(nameof(choice));
             InvalidCommandOptionChoiceException.ThrowIfMaxChoices(_message.Choices.Count + 1);
@@ -95,7 +89,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// </summary>
         /// <param name="choices">Choices to be added</param>
         /// <returns>This</returns>
-        public InteractionAutoCompleteBuilder AddAutoCompleteChoices(ICollection<CommandOptionChoice> choices)
+        public InteractionAutoCompleteBuilder AddChoices(ICollection<CommandOptionChoice> choices)
         {
             if (choices == null) throw new ArgumentNullException(nameof(choices));
 
