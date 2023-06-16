@@ -59,20 +59,15 @@ namespace Oxide.Ext.Discord.Factory
             if (args.Length != 3)
             {
                 DiscordExtension.GlobalLogger.Error("Failed to parse token {0} for plugin {1}", hiddenToken, pluginName);
-                return new BotTokenData(hiddenToken, default(Snowflake), default(DateTimeOffset));
+                return new BotTokenData(hiddenToken, default(Snowflake));
             }
 
             if (!TryParseApplicationId(args[0], out Snowflake appId))
             {
                 DiscordExtension.GlobalLogger.Error("Failed to parse application ID from bot token. Bot token is invalid. Token: {0}", hiddenToken);
             }
-            
-            if (!TryParseCreationDate(args[1], out DateTimeOffset createdDate))
-            {
-                DiscordExtension.GlobalLogger.Error("Failed to parse Token Creation Date from bot token. Bot token is invalid. Token: {0}", hiddenToken);
-            }
-            
-            return new BotTokenData(hiddenToken, appId, createdDate);
+
+            return new BotTokenData(hiddenToken, appId);
         }
 
         private bool TryParseApplicationId(string base64AppId, out Snowflake id)
@@ -83,24 +78,10 @@ namespace Oxide.Ext.Discord.Factory
                 id = new Snowflake(appId);
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
+                DiscordExtension.GlobalLogger.Exception("An error occured parsing Token Application ID: {0}", base64AppId, ex);
                 id = default(Snowflake);
-                return false;
-            }
-        }
-        
-        private bool TryParseCreationDate(string base64CreationDate, out DateTimeOffset createdDate)
-        {
-            try
-            {
-                long timestamp = Convert.ToInt64(Convert.FromBase64String(base64CreationDate));
-                createdDate = DateTimeOffset.FromUnixTimeSeconds(timestamp);
-                return true;
-            }
-            catch
-            {
-                createdDate = default(DateTimeOffset);
                 return false;
             }
         }
