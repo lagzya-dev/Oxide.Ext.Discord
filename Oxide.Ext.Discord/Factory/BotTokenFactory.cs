@@ -41,12 +41,12 @@ namespace Oxide.Ext.Discord.Factory
             return botToken;
         }
         
-        private string GenerateHiddenToken(string token)
+        private static string GenerateHiddenToken(string token)
         {
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
 
             int last = token.LastIndexOf('.') + 1;
-            sb.Append(token.Substring(0, last));
+            sb.Append(token, 0, last);
             sb.Append('#', token.Length - last);
 
             return DiscordPool.Internal.FreeStringBuilderToString(sb);

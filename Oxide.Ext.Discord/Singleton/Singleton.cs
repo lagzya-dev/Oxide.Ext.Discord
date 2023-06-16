@@ -15,29 +15,27 @@ namespace Oxide.Ext.Discord.Singleton
         /// </summary>
         public static readonly T Instance;
 
-        private const string ErrorMessage = "must have a parameterless constructor and all constructors have to be NonPublic.";
+        private const string ErrorMessage = "must have only one constructor that is parameterless and private.";
         
         static Singleton()
         {
-            try 
-            {
-                ConstructorInfo[] constructors = typeof(T).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
-                Instance = (T)constructors.Single().Invoke(null);
-            }
-            catch 
+            ConstructorInfo[] constructors = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (constructors.Length != 1)
             {
                 throw new Exception($"{typeof(T)} {ErrorMessage}");
             }
-        }
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <exception cref="Exception"></exception>
-        protected Singleton() 
-        {
-            ConstructorInfo[] constructors = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
-            if (constructors.Length != 0)
+            ConstructorInfo constructor = constructors[0];
+            if (constructor.IsPublic)
+            {
+                throw new Exception($"{typeof(T)} {ErrorMessage}");
+            }
+            
+            try 
+            {
+                Instance = (T)constructor.Invoke(null);
+            }
+            catch 
             {
                 throw new Exception($"{typeof(T)} {ErrorMessage}");
             }

@@ -23410,12 +23410,6 @@
             Retrieves the instance of the singleton
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Singleton.Singleton`1.#ctor">
-            <summary>
-            Constructor
-            </summary>
-            <exception cref="T:System.Exception"></exception>
-        </member>
         <member name="M:Oxide.Ext.Discord.Trie.Node`1.GetData">
             <summary>
             Gets the data of the whole sub-tree rooted on this node.
