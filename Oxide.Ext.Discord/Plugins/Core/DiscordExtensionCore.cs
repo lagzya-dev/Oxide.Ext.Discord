@@ -43,6 +43,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             AddCovalenceCommand(new[] { "de.websocket.reset" }, nameof(ResetWebSocketCommand), "de.websocket.reset");
             AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
             AddCovalenceCommand(new[] { "de.rest.reset" }, nameof(ResetRestApiCommand), "de.rest.reset");
+            AddCovalenceCommand(new[] { "de.search.highperformance.enable" }, nameof(SearchHighPerformanceEnabled), "de.search.highperformance.enable");
             AddCovalenceCommand(new[] { "de.pool.clear" }, nameof(ClearDiscordPool), "de.clearpool");
             AddCovalenceCommand(new[] { "de.pool.wipe" }, nameof(WipeDiscordPool), "de.wipepool");
             AddCovalenceCommand(new[] { "de.log.console" }, nameof(ConsoleLogCommand), "de.log.console");
@@ -58,6 +59,8 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
             CreateTemplates();
             DiscordPlaceholders.Instance.RegisterPlaceholders();
+
+            ServerPlayerCache.Instance.SetSearchService();
         }
 
         // ReSharper disable once UnusedMember.Local
@@ -115,6 +118,32 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             BotClientFactory.Instance.ResetAllRestApis();
             Chat(player, LangKeys.ResetRestApi);
+        }
+        
+        [HookMethod(nameof(SearchHighPerformanceEnabled))]
+        private void SearchHighPerformanceEnabled(IPlayer player, string cmd, string[] args)
+        {
+            DiscordSearchConfig config = DiscordConfig.Instance.Search;
+            if (args.Length == 0)
+            {
+                Chat(player, LangKeys.ShowSearchHighPerformance, GetLang(config.HighPerformancePlayerSearchEnabled ? LangKeys.Enabled : LangKeys.Disabled));
+                return;
+            }
+
+            if (!args[0].ParseBool(out bool state))
+            {
+                Chat(player, LangKeys.InvalidSearchHighPerformance, args[0]);
+                return;
+            }
+            
+            Chat(player, LangKeys.SetSearchHighPerformance, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
+            
+            if (config.HighPerformancePlayerSearchEnabled != state)
+            {
+                config.HighPerformancePlayerSearchEnabled = state;
+                ServerPlayerCache.Instance.SetSearchService();
+                DiscordConfig.Instance.Save();
+            }
         }
         
         [HookMethod(nameof(ClearDiscordPool))]
@@ -186,23 +215,15 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 return;
             }
 
-            string arg = args[0];
-            if (bool.TryParse(arg, out bool state))
+            if (!args[0].ParseBool(out bool state))
             {
-                DiscordConfig.Instance.Validation.EnableValidation = state;
-                Chat(player, LangKeys.SetValidation, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
-                DiscordConfig.Instance.Save();
-            }
-
-            if (char.IsNumber(arg[0]))
-            {
-                state = arg[0] == '0';
-                DiscordConfig.Instance.Validation.EnableValidation = state;
-                Chat(player, LangKeys.SetValidation, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
-                DiscordConfig.Instance.Save();
+                Chat(player, LangKeys.InvalidValidation, args[0]);
+                return;
             }
             
-            Chat(player, LangKeys.InvalidValidation, arg);
+            DiscordConfig.Instance.Validation.EnableValidation = state;
+            Chat(player, LangKeys.SetValidation, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
+            DiscordConfig.Instance.Save();
         }
 
         [HookMethod(nameof(DiscordDebugCommand))]
@@ -247,10 +268,21 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [HookMethod(nameof(OnUserConnected))]
         private void OnUserConnected(IPlayer player)
         {
-            if (player.IsLinked())
-            {
-                ServerPlayerCache.Instance.SetPlayer(player);
-            }
+            ServerPlayerCache.Instance.OnUserConnected(player);
+        }
+        
+        // ReSharper disable once UnusedMember.Local
+        [HookMethod(nameof(OnUserDisconnected))]
+        private void OnUserDisconnected(IPlayer player)
+        {
+            ServerPlayerCache.Instance.OnUserDisconnected(player);
+        }
+        
+        // ReSharper disable once UnusedMember.Local
+        [HookMethod(nameof(OnUserDisconnected))]
+        private void OnUserNameUpdated(IPlayer player, string oldName, string newName)
+        {
+            ServerPlayerCache.Instance.OnUserNameUpdated(player, oldName, newName);
         }
         #endregion
     }

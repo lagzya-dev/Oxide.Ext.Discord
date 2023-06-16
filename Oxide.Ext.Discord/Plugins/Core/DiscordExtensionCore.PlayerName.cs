@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Builders.Interactions;
+using Oxide.Ext.Discord.Builders.Interactions.AutoComplete;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins.Core
@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         private Plugin _clans;
 #pragma warning restore CS0649
 
-        private readonly Hash<AutoCompletePlayerSearchOptions, Hash<string, string>> _playerNameCache = new Hash<AutoCompletePlayerSearchOptions, Hash<string, string>>();
+        private readonly Hash<PlayerDisplayNameMode, Hash<string, string>> _playerNameCache = new Hash<PlayerDisplayNameMode, Hash<string, string>>();
         private readonly StringBuilder _sb = new StringBuilder();
 
         // ReSharper disable once UnusedMember.Local
@@ -47,7 +47,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 return;
             }
             
-            foreach (KeyValuePair<AutoCompletePlayerSearchOptions, Hash<string,string>> cache in _playerNameCache)
+            foreach (KeyValuePair<PlayerDisplayNameMode, Hash<string,string>> cache in _playerNameCache)
             {
                 cache.Value.Remove(playerId);
             }
@@ -55,16 +55,16 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         private void ClearClanCache()
         {
-            foreach (KeyValuePair<AutoCompletePlayerSearchOptions, Hash<string,string>> cache in _playerNameCache)
+            foreach (KeyValuePair<PlayerDisplayNameMode, Hash<string,string>> cache in _playerNameCache)
             {
-                if (HasFlag(cache.Key, AutoCompletePlayerSearchOptions.IncludeClanName))
+                if (HasFlag(cache.Key, PlayerDisplayNameMode.IncludeClanName))
                 {
                     cache.Value.Clear();
                 }
             }
         }
         
-        public string GetPlayerName(IPlayer player, AutoCompletePlayerSearchOptions options)
+        public string GetPlayerName(IPlayer player, PlayerDisplayNameMode options)
         {
             Hash<string, string> cache = _playerNameCache[options];
             if (cache == null)
@@ -80,7 +80,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             }
 
             _sb.Clear();
-            if (_clans != null && _clans.IsLoaded && HasFlag(options, AutoCompletePlayerSearchOptions.IncludeClanName))
+            if (_clans != null && _clans.IsLoaded && HasFlag(options, PlayerDisplayNameMode.IncludeClanName))
             {
                 _sb.Append('[');
                 _sb.Append(_clans.Call<string>("GetClanOf", player.Id));
@@ -89,7 +89,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
             _sb.Append(player.Name);
 
-            if (HasFlag(options, AutoCompletePlayerSearchOptions.IncludeSteamId))
+            if (HasFlag(options, PlayerDisplayNameMode.IncludeSteamId))
             {
                 _sb.Append(" (");
                 _sb.Append(player.Id);
@@ -101,7 +101,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             return name;
         }
         
-        private bool HasFlag(AutoCompletePlayerSearchOptions options, AutoCompletePlayerSearchOptions flag)
+        private bool HasFlag(PlayerDisplayNameMode options, PlayerDisplayNameMode flag)
         {
             return (options & flag) == flag;
         }

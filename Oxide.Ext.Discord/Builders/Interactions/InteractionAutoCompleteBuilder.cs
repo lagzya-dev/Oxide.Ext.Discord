@@ -5,6 +5,7 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Builders.Interactions.AutoComplete;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
@@ -14,7 +15,6 @@ using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Builders.Interactions
 {
@@ -24,8 +24,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
     public class InteractionAutoCompleteBuilder
     {
         private static readonly Permission Permissions = Interface.Oxide.GetLibrary<Permission>();
-        private static readonly Covalence Covalence = Interface.Oxide.GetLibrary<Covalence>();
-        
+
         private readonly InteractionAutoCompleteMessage _message;
 
         /// <summary>
@@ -221,7 +220,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         }
         
         /// <summary>
-        /// Adds The List of Permissions that playerId has
+        /// Adds The List of Permissions that playerId does not have
         /// </summary>
         /// <param name="playerId">Player ID to get permissions for</param>
         /// <param name="filter">String to filter by</param>
@@ -237,24 +236,20 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// Adds Online Players to the list
         /// </summary>
         /// <param name="filter">String to filter by</param>
-        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
-        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        /// <param name="options"><see cref="AutoCompletePlayerSearchOptions"/> Search Options</param>
-        public void AddOnlinePlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
+        /// <param name="formatter">Formatter for the player name</param>
+        public void AddOnlinePlayers(string filter = null, PlayerNameFormatter formatter = null)
         {
-            AddPlayerList(Covalence.Players.Connected, filter, comparison, search, options, null);
+            AddPlayerList(ServerPlayerCache.Instance.GetOnlinePlayers(filter), formatter ?? PlayerNameFormatter.Default, null);
         }
         
         /// <summary>
         /// Adds Online Players to the list
         /// </summary>
         /// <param name="filter">String to filter by</param>
-        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
-        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        /// <param name="options"><see cref="AutoCompletePlayerSearchOptions"/> Search Options</param>
-        public void AddOfflinePlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
+        /// <param name="formatter">Formatter for the player name</param>
+        public void AddOfflinePlayers(string filter = null, PlayerNameFormatter formatter = null)
         {
-            AddPlayerList(Covalence.Players.All.Where(p => !p.IsConnected), filter, comparison, search, options, null);
+            AddPlayerList(ServerPlayerCache.Instance.GetAllPlayers(filter).Where(p => !p.IsConnected), formatter ?? PlayerNameFormatter.Default, null);
         }
         
         /// <summary>
@@ -262,27 +257,23 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// If there is still space add Offline Players
         /// </summary>
         /// <param name="filter">String to filter by</param>
-        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
-        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        /// <param name="options"><see cref="AutoCompletePlayerSearchOptions"/> Search Options</param>
-        public void AddAllOnlineFirstPlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
+        /// <param name="formatter">Formatter for the player name</param>
+        public void AddAllOnlineFirstPlayers(string filter = null, PlayerNameFormatter formatter = null)
         {
             HashSet<string> addedList = DiscordPool.Internal.GetHashSet<string>();
-            AddPlayerList(Covalence.Players.Connected, filter, comparison, search, options, addedList);
-            AddPlayerList(Covalence.Players.All, filter, comparison, search, options, addedList);
+            AddPlayerList(ServerPlayerCache.Instance.GetOnlinePlayers(filter), formatter ?? PlayerNameFormatter.Default, addedList);
+            AddPlayerList(ServerPlayerCache.Instance.GetAllPlayers(filter), formatter ?? PlayerNameFormatter.Default, addedList);
             DiscordPool.Internal.FreeHashSet(addedList);
         }
-        
+
         /// <summary>
         /// Adds Any Player to the list
         /// </summary>
         /// <param name="filter">String to filter by</param>
-        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
-        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        /// <param name="options"><see cref="AutoCompletePlayerSearchOptions"/> Search Options</param>
-        public void AddAllPlayers(string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains, AutoCompletePlayerSearchOptions options = AutoCompletePlayerSearchOptions.Default)
+        /// <param name="formatter">Formatter for the player name</param>
+        public void AddAllPlayers(string filter = null, PlayerNameFormatter formatter = null)
         {
-            AddPlayerList(Covalence.Players.All, filter, comparison, search, options, null);
+            AddPlayerList(ServerPlayerCache.Instance.GetAllPlayers(filter), formatter ?? PlayerNameFormatter.Default, null);
         }
 
         /// <summary>
@@ -328,7 +319,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
             }
         }
 
-        private void AddPlayerList(IEnumerable<IPlayer> list, string filter, StringComparison comparison, AutoCompleteSearchMode search, AutoCompletePlayerSearchOptions options, HashSet<string> addedList)
+        private void AddPlayerList(IEnumerable<IPlayer> list, PlayerNameFormatter formatter, HashSet<string> addedList)
         {
             if (!CanAddChoice())
             {
@@ -338,8 +329,8 @@ namespace Oxide.Ext.Discord.Builders.Interactions
             List<CommandOptionChoice> choices = _message.Choices;
             foreach (IPlayer player in list)
             {
-                string name = DiscordExtensionCore.Instance.GetPlayerName(player, options);
-                if (IsMatch(name, filter, comparison, search) && (addedList == null || addedList.Add(player.Id)))
+                string name = formatter.Format(player);
+                if (addedList == null || addedList.Add(player.Id))
                 {
                     choices.Add(new CommandOptionChoice(name, player.Id));
                     if (!CanAddChoice())

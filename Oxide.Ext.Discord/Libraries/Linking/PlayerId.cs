@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <summary>
         /// Returns the IPlayer for the Player ID
         /// </summary>
-        public IPlayer Player => ServerPlayerCache.Instance.GetPlayer(Id);
+        public IPlayer Player => ServerPlayerCache.Instance.GetPlayerById(Id);
         
         /// <summary>
         /// Constructor

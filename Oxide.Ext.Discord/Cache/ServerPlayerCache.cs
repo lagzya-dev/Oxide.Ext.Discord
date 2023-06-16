@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Services.PlayerSearch;
 using Oxide.Ext.Discord.Singleton;
 
 namespace Oxide.Ext.Discord.Cache
@@ -17,6 +19,7 @@ namespace Oxide.Ext.Discord.Cache
     {
         private readonly ConcurrentDictionary<string, IPlayer> _cache = new ConcurrentDictionary<string, IPlayer>();
         private readonly Func<string, IPlayer> _valueFactory = id => Players.FindPlayerById(id) ?? new DiscordDummyPlayer(id);
+        private IPlayerSearchService _search;
 
         /// <summary>
         /// Readonly Cache of <see cref="IPlayer"/>
@@ -35,9 +38,47 @@ namespace Oxide.Ext.Discord.Cache
         /// </summary>
         /// <param name="id">ID of the player</param>
         /// <returns><see cref="IPlayer"/></returns>
-        public IPlayer GetPlayer(string id) => _cache.GetOrAdd(id, _valueFactory);
+        public IPlayer GetPlayerById(string id) => _cache.GetOrAdd(id, _valueFactory);
 
-        internal void SetPlayer(IPlayer player)
+        /// <summary>
+        /// Returns an <see cref="IEnumerable{T}"/> matching player names that are online
+        /// </summary>
+        /// <param name="name">Name to match on</param>
+        /// <returns></returns>
+        public IEnumerable<IPlayer> GetOnlinePlayers(string name) => _search.GetOnlinePlayers(name);
+        
+        /// <summary>
+        /// Returns an <see cref="IEnumerable{T}"/> matching player names
+        /// </summary>
+        /// <param name="name">Name to match on</param>
+        /// <returns></returns>
+        public IEnumerable<IPlayer> GetAllPlayers(string name) => _search.GetAllPlayers(name);
+
+        internal void SetSearchService()
+        {
+            if (DiscordConfig.Instance.Search.HighPerformancePlayerSearchEnabled)
+            {
+                _search = new UkkonenTrieService();
+            }
+            else
+            {
+                _search = new CovalenceSearchService();
+            }
+        }
+
+        internal void OnUserConnected(IPlayer player)
+        {
+            _search.OnUserConnected(player);
+            if (player.IsLinked())
+            {
+                SetPlayer(player);
+            }
+        }
+
+        internal void OnUserDisconnected(IPlayer player) => _search.OnUserDisconnected(player);
+        internal void OnUserNameUpdated(IPlayer player, string oldName, string newName) => _search.OnUserNameUpdated(player, oldName, newName);
+        
+        private void SetPlayer(IPlayer player)
         {
             if (!_cache.TryGetValue(player.Id, out IPlayer cached) || cached.IsDummyPlayer())
             {

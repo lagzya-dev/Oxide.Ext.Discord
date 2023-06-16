@@ -10,6 +10,22 @@ namespace Oxide.Ext.Discord.Extensions
     /// </summary>
     internal static class StringExt
     {
+        public static bool ParseBool(this string input, out bool value)
+        {
+            if (bool.TryParse(input, out value))
+            {
+                return true;
+            }
+
+            if (char.IsNumber(input[0]))
+            {
+                value = input[0] == '0';
+                return true;
+            }
+
+            return false;
+        }
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string TrimIfLargerThan(this string str, int maxCharacters) => str.Length <= maxCharacters ? str : str.Substring(0, maxCharacters);
 

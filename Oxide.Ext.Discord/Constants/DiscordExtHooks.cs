@@ -14,17 +14,17 @@ namespace Oxide.Ext.Discord.Constants
         /// <summary>
         /// Hooks that are called on Discord Plugins
         /// </summary>
-        private static readonly HashSet<string> _allHooks = new HashSet<string>();
+        private static readonly HashSet<string> AllHooks = new HashSet<string>();
         
         /// <summary>
         /// Hooks that are called on Discord Plugins
         /// </summary>
-        private static readonly HashSet<string> _pluginHooks = new HashSet<string>();
+        private static readonly HashSet<string> PluginHooks = new HashSet<string>();
         
         /// <summary>
         /// Hooks that are call globally
         /// </summary>
-        private static readonly HashSet<string> _globalHooks = new HashSet<string>
+        private static readonly HashSet<string> GlobalHooks = new HashSet<string>
         {
             OnDiscordPlayerLinked,
             OnDiscordPlayerUnlink,
@@ -180,10 +180,10 @@ namespace Oxide.Ext.Discord.Constants
                 if (field.IsLiteral && !field.IsInitOnly && field.FieldType == stringType)
                 {
                     string hook = (string)field.GetRawConstantValue();
-                    _allHooks.Add(hook);
-                    if (!_globalHooks.Contains(hook))
+                    AllHooks.Add(hook);
+                    if (!GlobalHooks.Contains(hook))
                     {
-                        _pluginHooks.Add(hook);
+                        PluginHooks.Add(hook);
                     }
                 }
             }
@@ -202,21 +202,21 @@ namespace Oxide.Ext.Discord.Constants
         /// </summary>
         /// <param name="hook">Name of the hook</param>
         /// <returns></returns>
-        public static bool IsGlobalHook(string hook) => _globalHooks.Contains(hook);
+        public static bool IsGlobalHook(string hook) => GlobalHooks.Contains(hook);
         
         /// <summary>
         /// Returns true if the hook is a Discord Extension Plugin Hook
         /// </summary>
         /// <param name="hook">Name of the hook</param>
         /// <returns></returns>
-        public static bool IsPluginHook(string hook) => _pluginHooks.Contains(hook);
+        public static bool IsPluginHook(string hook) => PluginHooks.Contains(hook);
         
         /// <summary>
         /// Returns true if the hook is a Discord Extension Hook
         /// </summary>
         /// <param name="hook">Name of the hook</param>
         /// <returns></returns>
-        public static bool IsDiscordHook(string hook) => _allHooks.Contains(hook);
+        public static bool IsDiscordHook(string hook) => AllHooks.Contains(hook);
 
         #region Bot Client Hooks
         /// <code>

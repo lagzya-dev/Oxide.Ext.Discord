@@ -1,12 +1,12 @@
 using System;
 
-namespace Oxide.Ext.Discord.Builders.Interactions
+namespace Oxide.Ext.Discord.Builders.Interactions.AutoComplete
 {
     /// <summary>
     /// AutoComplete Player Search Options for <see cref="InteractionAutoCompleteBuilder"/>
     /// </summary>
     [Flags]
-    public enum AutoCompletePlayerSearchOptions : byte
+    public enum PlayerDisplayNameMode : sbyte
     {
         /// <summary>
         /// Defaults search options
@@ -22,5 +22,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// Include Steam ID
         /// </summary>
         IncludeSteamId = 1 << 1
+        
+        
     }
 }

@@ -28,10 +28,16 @@ namespace Oxide.Ext.Discord.Configuration
         public DiscordLoggingConfig Logging { get; set; }
         
         /// <summary>
-        /// Discord Logging Options
+        /// Discord Users Options
         /// </summary>
         [JsonProperty("Users")]
         public DiscordUsersConfig Users { get; set; }
+        
+        /// <summary>
+        /// Discord Logging Options
+        /// </summary>
+        [JsonProperty("Search")]
+        public DiscordSearchConfig Search { get; set; }
         
         /// <summary>
         /// Discord Logging Options
@@ -96,6 +102,10 @@ namespace Oxide.Ext.Discord.Configuration
             Users = new DiscordUsersConfig
             {
                 DmBlockedDuration = Users?.DmBlockedDuration ?? 24f
+            };
+            Search = new DiscordSearchConfig
+            {
+                HighPerformancePlayerSearchEnabled = true
             };
             Validation = new DiscordValidationConfig
             {

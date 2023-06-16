@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Configuration
     /// <summary>
     /// Discord Validation Config
     /// </summary>
-    public class DiscordValidationConfig
+    internal class DiscordValidationConfig
     {
         /// <summary>
         /// Enables request validation

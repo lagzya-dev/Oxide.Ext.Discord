@@ -17,6 +17,9 @@ namespace Oxide.Ext.Discord.Plugins
         public const string ShowValidation = nameof(ShowValidation);
         public const string SetValidation = nameof(SetValidation);
         public const string InvalidValidation = nameof(InvalidValidation);
+        public const string ShowSearchHighPerformance = nameof(ShowSearchHighPerformance);
+        public const string SetSearchHighPerformance = nameof(SetSearchHighPerformance);
+        public const string InvalidSearchHighPerformance = nameof(InvalidSearchHighPerformance);
         public const string Enabled = nameof(Enabled);
         public const string Disabled = nameof(Disabled);
         public const string Help = nameof(Help);
@@ -41,6 +44,9 @@ namespace Oxide.Ext.Discord.Plugins
                 [LangKeys.ShowValidation] = "Discord Validation is currently set to {0}",
                 [LangKeys.SetValidation] = "Discord Validation has been set to {0}",
                 [LangKeys.InvalidValidation] = "'{0}' is not a valid boolean value. Valid values are false, true, 0, or 1",
+                [LangKeys.ShowSearchHighPerformance] = "Discord Search High Performance is currently set to {0}",
+                [LangKeys.SetSearchHighPerformance] = "Discord Search High Performance has been set to {0}",
+                [LangKeys.InvalidSearchHighPerformance] = "'{0}' is not a valid boolean value. Valid values are false, true, 0, or 1",
                 [LangKeys.Enabled] = "Enabled",
                 [LangKeys.Disabled] = "Disabled",
                 [LangKeys.Help] = "Discord Extension v{0} Commands:\n" +
