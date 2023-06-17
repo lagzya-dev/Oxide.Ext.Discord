@@ -46,8 +46,8 @@ namespace Oxide.Ext.Discord.Plugins.Core
             AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
             AddCovalenceCommand(new[] { "de.rest.reset" }, nameof(ResetRestApiCommand), "de.rest.reset");
             AddCovalenceCommand(new[] { "de.search.highperformance.enable" }, nameof(SearchHighPerformanceEnabled), "de.search.highperformance.enable");
-            AddCovalenceCommand(new[] { "de.pool.clear" }, nameof(ClearDiscordPool), "de.clearpool");
-            AddCovalenceCommand(new[] { "de.pool.wipe" }, nameof(WipeDiscordPool), "de.wipepool");
+            AddCovalenceCommand(new[] { "de.pool.clearentities" }, nameof(ClearEntitiesDiscordPool), "de.pool.clearentities");
+            AddCovalenceCommand(new[] { "de.pool.remove" }, nameof(RemoveDiscordPool), "de.pool.remove");
             AddCovalenceCommand(new[] { "de.log.console" }, nameof(ConsoleLogCommand), "de.log.console");
             AddCovalenceCommand(new[] { "de.log.file" }, nameof(FileLogCommand), "de.log.file");
             AddCovalenceCommand(new[] { "de.validation.enable" }, nameof(ValidationEnableCommand), "de.validation.enable");
@@ -105,21 +105,21 @@ namespace Oxide.Ext.Discord.Plugins.Core
         private void ResetWebSocketCommand(IPlayer player)
         {
             BotClientFactory.Instance.ResetAllWebSockets();
-            Chat(player, LangKeys.ResetWebSocket);
+            Chat(player, LangKeys.Websocket.Reset);
         }
         
         [HookMethod(nameof(ReconnectWebSocketCommand))]
         private void ReconnectWebSocketCommand(IPlayer player)
         {
             BotClientFactory.Instance.ReconnectAllWebSockets();
-            Chat(player, LangKeys.ReconnectWebSocket);
+            Chat(player, LangKeys.Websocket.Reconnect);
         }
         
         [HookMethod(nameof(ResetRestApiCommand))]
         private void ResetRestApiCommand(IPlayer player)
         {
             BotClientFactory.Instance.ResetAllRestApis();
-            Chat(player, LangKeys.ResetRestApi);
+            Chat(player, LangKeys.RestApi.Reset);
         }
         
         [HookMethod(nameof(SearchHighPerformanceEnabled))]
@@ -128,37 +128,37 @@ namespace Oxide.Ext.Discord.Plugins.Core
             DiscordSearchConfig config = DiscordConfig.Instance.Search;
             if (args.Length == 0)
             {
-                Chat(player, LangKeys.ShowSearchHighPerformance, GetLang(config.HighPerformancePlayerSearchEnabled ? LangKeys.Enabled : LangKeys.Disabled));
+                Chat(player, LangKeys.Search.HighPerformance.Show, GetLang(config.EnablePlayerNameSearchTrie ? LangKeys.Enabled : LangKeys.Disabled));
                 return;
             }
 
             if (!args[0].ParseBool(out bool state))
             {
-                Chat(player, LangKeys.InvalidSearchHighPerformance, args[0]);
+                Chat(player, LangKeys.Search.HighPerformance.Invalid, args[0]);
                 return;
             }
             
-            Chat(player, LangKeys.SetSearchHighPerformance, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
+            Chat(player, LangKeys.Search.HighPerformance.Set, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
             
-            if (config.HighPerformancePlayerSearchEnabled != state)
+            if (config.EnablePlayerNameSearchTrie != state)
             {
-                config.HighPerformancePlayerSearchEnabled = state;
+                config.EnablePlayerNameSearchTrie = state;
                 ServerPlayerCache.Instance.SetSearchService();
                 DiscordConfig.Instance.Save();
             }
         }
         
-        [HookMethod(nameof(ClearDiscordPool))]
-        private void ClearDiscordPool(IPlayer player)
+        [HookMethod(nameof(ClearEntitiesDiscordPool))]
+        private void ClearEntitiesDiscordPool(IPlayer player)
         {
-            Chat(player, LangKeys.ClearPool);
+            Chat(player, LangKeys.Pool.ClearEntities);
             DiscordPool.Instance.Clear();
         }
         
-        [HookMethod(nameof(WipeDiscordPool))]
-        private void WipeDiscordPool(IPlayer player)
+        [HookMethod(nameof(RemoveDiscordPool))]
+        private void RemoveDiscordPool(IPlayer player)
         {
-            Chat(player, LangKeys.WipePool);
+            Chat(player, LangKeys.Pool.Remove);
             DiscordPool.Instance.Wipe();
         }
         
@@ -167,7 +167,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             if (args.Length == 0)
             {
-                Chat(player, LangKeys.ShowLog, "Console", DiscordConfig.Instance.Logging.ConsoleLogLevel);
+                Chat(player, LangKeys.Log.Show, "Console", DiscordConfig.Instance.Logging.ConsoleLogLevel);
                 return;
             }
 
@@ -177,11 +177,11 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 DiscordConfig.Instance.Logging.ConsoleLogLevel = log;
                 DiscordConfig.Instance.Save();
 
-                Chat(player, LangKeys.SetLog, "Console", log);
+                Chat(player, LangKeys.Log.Set, "Console", log);
             }
             catch
             {
-                Chat(player, LangKeys.InvalidLogEnum, args[0]);
+                Chat(player, LangKeys.Log.InvalidEnum, args[0]);
             }
         }
         
@@ -190,7 +190,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             if (args.Length == 0)
             {
-                Chat(player, LangKeys.ShowLog, "File", DiscordConfig.Instance.Logging.FileLogLevel);
+                Chat(player, LangKeys.Log.Show, "File", DiscordConfig.Instance.Logging.FileLogLevel);
                 return;
             }
             
@@ -200,11 +200,11 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 DiscordConfig.Instance.Logging.FileLogLevel = log;
                 DiscordConfig.Instance.Save();
 
-                Chat(player, LangKeys.SetLog, "Console", log);
+                Chat(player, LangKeys.Log.Set, "Console", log);
             }
             catch
             {
-                Chat(player, LangKeys.InvalidLogEnum, args[0]);
+                Chat(player, LangKeys.Log.InvalidEnum, args[0]);
             }
         }
 
@@ -213,18 +213,18 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             if (args.Length == 0)
             {
-                Chat(player, LangKeys.ShowValidation, GetLang(DiscordConfig.Instance.Validation.EnableValidation ? LangKeys.Enabled : LangKeys.Disabled));
+                Chat(player, LangKeys.Validation.Show, GetLang(DiscordConfig.Instance.Validation.EnableValidation ? LangKeys.Enabled : LangKeys.Disabled));
                 return;
             }
 
             if (!args[0].ParseBool(out bool state))
             {
-                Chat(player, LangKeys.InvalidValidation, args[0]);
+                Chat(player, LangKeys.Validation.InvalidEnum, args[0]);
                 return;
             }
             
             DiscordConfig.Instance.Validation.EnableValidation = state;
-            Chat(player, LangKeys.SetValidation, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
+            Chat(player, LangKeys.Validation.Set, GetLang(state ? LangKeys.Enabled : LangKeys.Disabled));
             DiscordConfig.Instance.Save();
         }
 

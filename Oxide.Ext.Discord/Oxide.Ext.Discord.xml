@@ -175,19 +175,12 @@
             <param name="permissions">Default Permissions for the command</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDirectMessagePermission(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AllowInDirectMessages(System.Boolean)">
             <summary>
             Allows the command to be used in a direct message
             </summary>
-            <param name="allowInDm">Allows a command to be used in a direct message</param>
+            <param name="allow">Allows a command to be used in a direct message</param>
             <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.SetEnabled(System.Boolean)">
-            <summary>
-            Set whether the command is enabled by default when the app is added to a guild
-            </summary>
-            <param name="enabled">If the command is enabled</param>
-            <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
@@ -359,35 +352,35 @@
             <param name="autoComplete">If the option support auto complete (Default: true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetMinValue(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MinValue(System.Int32)">
             <summary>
             Min Value for Integer Option
             </summary>
             <param name="minValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetMinValue(System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MinValue(System.Double)">
             <summary>
             Min Value for Number Option
             </summary>
             <param name="minValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetMaxValue(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MaxValue(System.Int32)">
             <summary>
             Max Value for Integer Option
             </summary>
             <param name="maxValue">Max Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetMaxValue(System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MaxValue(System.Double)">
             <summary>
             Max Value for Number Option
             </summary>
             <param name="maxValue">Max Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetMinLength(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MinLength(System.Int32)">
             <summary>
             Min Length for String Option
             Max Of 6000
@@ -395,7 +388,7 @@
             <param name="minLength">Min Length for the string</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetMaxLength(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MaxLength(System.Int32)">
             <summary>
             Max Length for String Option
             Max Of 6000
@@ -403,7 +396,7 @@
             <param name="maxLength">Max Length</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.SetChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.ChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
             <summary>
             Set's the channel types for the option
             </summary>
@@ -10478,17 +10471,17 @@
             The bot/OAuth2 application for discord integrations
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Integrations.Account">
+        <member name="T:Oxide.Ext.Discord.Entities.Integrations.IntegrationAccount">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#integration-account-object">Integration Account Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Integrations.Account.Id">
+        <member name="P:Oxide.Ext.Discord.Entities.Integrations.IntegrationAccount.Id">
             <summary>
             ID of the account
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Integrations.Account.Name">
+        <member name="P:Oxide.Ext.Discord.Entities.Integrations.IntegrationAccount.Name">
             <summary>
             Name of the account
             </summary>
@@ -10699,11 +10692,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.DmPermission">
             <summary>
             Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.DefaultPermissions">
-            <summary>
-            Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate.Nsfw">

@@ -1,10 +1,13 @@
 using System.ComponentModel;
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Json.Converters;
 
 namespace Oxide.Ext.Discord.Entities.Integrations
 {
     /// <summary>
     /// Represents Integrations types
     /// </summary>
+    [JsonConverter(typeof(DiscordEnumConverter))]
     public enum IntegrationType : byte
     {
         /// <summary>

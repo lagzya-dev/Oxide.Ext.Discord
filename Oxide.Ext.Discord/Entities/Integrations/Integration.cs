@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// Integration account information
         /// </summary>
         [JsonProperty("account")]
-        public Account Account { get; set; }
+        public IntegrationAccount Account { get; set; }
 
         /// <summary>
         /// When this integration was last synced

@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#integration-account-object">Integration Account Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class Account
+    public class IntegrationAccount
     {
         /// <summary>
         /// ID of the account

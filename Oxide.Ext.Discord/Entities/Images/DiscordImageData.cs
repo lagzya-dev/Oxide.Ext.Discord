@@ -31,7 +31,11 @@ namespace Oxide.Ext.Discord.Entities.Images
         private static readonly byte[] Gif = Encoding.ASCII.GetBytes("GIF");
         private static readonly byte[] Png = {137, 80, 78, 71};
         private static readonly byte[] Jpeg = {255, 216, 255, 224};
-        private static readonly byte[] Jpeg2 = {255, 216, 255, 225}; 
+        private static readonly byte[] Jpeg2 = {255, 216, 255, 225};
+
+        private const double KiloBytes = 1024;
+        private const double MegaBytes = KiloBytes * 1024;
+        private const double Gigabytes = MegaBytes * 1024;
         
         /// <summary>
         /// Constructor from a byte[] of the image
@@ -50,13 +54,12 @@ namespace Oxide.Ext.Discord.Entities.Images
         /// <param name="stream"></param>
         public DiscordImageData(Stream stream)
         {
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                stream.CopyToPooled(memoryStream);
-                byte[] image = memoryStream.ToArray();
-                Type = GetType(image);
-                Image = image;
-            }
+            MemoryStream memoryStream = DiscordPool.Internal.GetMemoryStream();
+            stream.CopyToPooled(memoryStream);
+            byte[] image = memoryStream.ToArray();
+            Type = GetType(image);
+            Image = image;
+            DiscordPool.Internal.FreeMemoryStream(memoryStream);
         }
 
         /// <summary>
@@ -92,18 +95,18 @@ namespace Oxide.Ext.Discord.Entities.Images
         /// <param name="size"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public int GetImageSize(DiscordImageSize size)
+        public double GetImageSize(DiscordImageSize size)
         {
             switch (size)
             {
                 case DiscordImageSize.Bytes:
                     return Image.Length;
                 case DiscordImageSize.KiloBytes:
-                    return Image.Length / 1024;
+                    return Image.Length / KiloBytes;
                 case DiscordImageSize.MegaBytes:
-                    return Image.Length / 1024 / 1024;
+                    return Image.Length / MegaBytes;
                 case DiscordImageSize.GigaBytes:
-                    return Image.Length / 1024 / 1024 / 1024;
+                    return Image.Length / Gigabytes;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(size), size, null);
             }
@@ -113,10 +116,7 @@ namespace Oxide.Ext.Discord.Entities.Images
         /// Returns if this struct has a valid image
         /// </summary>
         /// <returns></returns>
-        public bool IsValid()
-        {
-            return Image != null && Image.Length != 0;
-        }
+        public bool IsValid() => Image != null && Image.Length != 0;
 
         /// <summary>
         /// Returns the type of image for the given bytes[]

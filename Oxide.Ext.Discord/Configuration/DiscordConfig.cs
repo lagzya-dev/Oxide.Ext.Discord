@@ -105,7 +105,7 @@ namespace Oxide.Ext.Discord.Configuration
             };
             Search = new DiscordSearchConfig
             {
-                HighPerformancePlayerSearchEnabled = true
+                EnablePlayerNameSearchTrie = true
             };
             Validation = new DiscordValidationConfig
             {

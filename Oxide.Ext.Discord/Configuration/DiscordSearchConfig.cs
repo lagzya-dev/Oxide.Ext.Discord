@@ -4,7 +4,7 @@ namespace Oxide.Ext.Discord.Configuration
 {
     internal class DiscordSearchConfig
     {
-        [JsonProperty("High Performance Player Search")]
-        public bool HighPerformancePlayerSearchEnabled { get; set; }
+        [JsonProperty("Enable Player Name Trie Search (High Performance / High Memory Usage)")]
+        public bool EnablePlayerNameSearchTrie { get; set; }
     }
 }

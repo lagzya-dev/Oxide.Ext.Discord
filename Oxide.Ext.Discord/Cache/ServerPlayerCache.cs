@@ -56,7 +56,7 @@ namespace Oxide.Ext.Discord.Cache
 
         internal void SetSearchService()
         {
-            if (DiscordConfig.Instance.Search.HighPerformancePlayerSearchEnabled)
+            if (DiscordConfig.Instance.Search.EnablePlayerNameSearchTrie)
             {
                 _search = new UkkonenTrieService();
             }

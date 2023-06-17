@@ -1,6 +1,5 @@
 namespace Oxide.Ext.Discord.WebSockets
 {
-    //https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes">Socket Close Event Codes</a>
     /// </summary>

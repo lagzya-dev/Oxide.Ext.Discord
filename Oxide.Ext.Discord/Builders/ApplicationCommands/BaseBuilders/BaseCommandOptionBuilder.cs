@@ -131,7 +131,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         /// <param name="minValue">Min Value</param>
         /// <returns>This</returns>
-        public TBuilder SetMinValue(int minValue)
+        public TBuilder MinValue(int minValue)
         {
             InvalidCommandOptionException.ThrowIfInvalidMinIntegerType(_option.Type);
             _option.MinValue = minValue;
@@ -143,7 +143,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         /// <param name="minValue">Min Value</param>
         /// <returns>This</returns>
-        public TBuilder SetMinValue(double minValue)
+        public TBuilder MinValue(double minValue)
         {
             InvalidCommandOptionException.ThrowIfInvalidMinNumberType(_option.Type);
             _option.MinValue = minValue;
@@ -155,7 +155,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         /// <param name="maxValue">Max Value</param>
         /// <returns>This</returns>
-        public TBuilder SetMaxValue(int maxValue)
+        public TBuilder MaxValue(int maxValue)
         {
             InvalidCommandOptionException.ThrowIfInvalidMaxIntegerType(_option.Type);
             _option.MaxValue = maxValue;
@@ -167,7 +167,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         /// <param name="maxValue">Max Value</param>
         /// <returns>This</returns>
-        public TBuilder SetMaxValue(double maxValue)
+        public TBuilder MaxValue(double maxValue)
         {
             InvalidCommandOptionException.ThrowIfInvalidMaxNumberType(_option.Type);
             _option.MaxValue = maxValue;
@@ -180,7 +180,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         /// <param name="minLength">Min Length for the string</param>
         /// <returns>This</returns>
-        public TBuilder SetMinLength(int minLength)
+        public TBuilder MinLength(int minLength)
         {
             InvalidCommandOptionException.ThrowIfInvalidMinLengthType(_option.Type);
             InvalidCommandOptionException.ThrowIfInvalidMinLength(minLength);
@@ -194,7 +194,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// </summary>
         /// <param name="maxLength">Max Length</param>
         /// <returns>This</returns>
-        public TBuilder SetMaxLength(int maxLength)
+        public TBuilder MaxLength(int maxLength)
         {
             InvalidCommandOptionException.ThrowIfInvalidMaxLengthType(_option.Type);
             InvalidCommandOptionException.ThrowIfInvalidMaxLength(maxLength);
@@ -208,7 +208,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders
         /// <param name="types">Types of channels the option allows</param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if <see cref="CommandOptionType"/> is not Channel</exception>
-        public TBuilder SetChannelTypes(List<ChannelType> types)
+        public TBuilder ChannelTypes(List<ChannelType> types)
         {
             InvalidCommandOptionException.ThrowIfInvalidChannelType(_option.Type);
             _option.ChannelTypes = types;

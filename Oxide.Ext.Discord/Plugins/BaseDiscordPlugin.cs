@@ -23,11 +23,8 @@ namespace Oxide.Ext.Discord.Plugins
         protected void Chat(IPlayer player, string key) => player.Reply(GetLang(LangKeys.Chat, player, player.IsServer ? Formatter.ToPlaintext(GetLang(key, player)) : GetLang(key, player)));
         protected void Chat(IPlayer player, string key, params object[] args) => player.Reply(GetLang(LangKeys.Chat, player, player.IsServer ? Formatter.ToPlaintext(GetLang(key, player, args)) : GetLang(key, player, args)));
         
-        protected string GetLang(string key, IPlayer player = null)
-        {
-            return Lang.GetMessage(key, this, player?.Id);
-        }
-        
+        protected string GetLang(string key, IPlayer player = null) => Lang.GetMessage(key, this, player?.Id);
+
         protected string GetLang(string key, IPlayer player = null, params object[] args)
         {
             try

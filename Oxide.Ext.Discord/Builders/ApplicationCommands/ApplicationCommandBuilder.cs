@@ -63,23 +63,11 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <summary>
         /// Allows the command to be used in a direct message
         /// </summary>
-        /// <param name="allowInDm">Allows a command to be used in a direct message</param>
+        /// <param name="allow">Allows a command to be used in a direct message</param>
         /// <returns></returns>
-        public ApplicationCommandBuilder AddDirectMessagePermission(bool allowInDm)
+        public ApplicationCommandBuilder AllowInDirectMessages(bool allow)
         {
-            Command.DmPermission = allowInDm;
-            return this;
-        }
-        
-        /// <summary>
-        /// Set whether the command is enabled by default when the app is added to a guild
-        /// </summary>
-        /// <param name="enabled">If the command is enabled</param>
-        /// <returns>This</returns>
-        [Obsolete("This field has been deprecated by discord and will be removed in a future update. Please use AddDefaultPermissions instead.")]
-        public ApplicationCommandBuilder SetEnabled(bool enabled)
-        {
-            Command.DefaultPermissions = enabled;
+            Command.DmPermission = allow;
             return this;
         }
 

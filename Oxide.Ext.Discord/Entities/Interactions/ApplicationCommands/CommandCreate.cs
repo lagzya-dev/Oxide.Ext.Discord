@@ -58,13 +58,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("dm_permission")]
         public bool? DmPermission { get; set; }
-        
-        /// <summary>
-        /// Whether the command is enabled by default when the app is added to a guild
-        /// </summary>
-        [JsonProperty("default_permission")]
-        public bool? DefaultPermissions { get; set; }
-        
+
         /// <summary>
         /// Indicates whether the command is age-restricted
         /// </summary>
