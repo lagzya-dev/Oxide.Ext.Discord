@@ -16,11 +16,12 @@
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup />
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DocumentationFile>Oxide.Ext.Discord.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Oxide.Ext.Discord.xml</DocumentationFile>
     <NoWarn>1701;1702;0618</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <Optimize>true</Optimize>
+    <DocumentationFile>bin\Debug\Oxide.Ext.Discord.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Oxide.Core" Version="2.0.4054">
@@ -33,4 +34,7 @@
   <ItemGroup>
     <Reference Include="System.Net.Http" />
   </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(ProjectDir)bin\$(Configuration)\Oxide.Ext.Discord.xml&quot; &quot;$(ProjectDir)Oxide.Ext.Discord.xml&quot;" />
+  </Target>
 </Project>
