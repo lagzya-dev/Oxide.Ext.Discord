@@ -72,8 +72,18 @@ namespace Oxide.Ext.Discord.Entities.Api
         /// </summary>
         public string ResponseMessage { get; private set; }
         
-        internal RequestErrorType ErrorType { get; private set; }
+        /// <summary>
+        /// If error was a rate limit the message from the rate limit
+        /// </summary>
+        public string RateLimitMessage { get; private set; }
         
+        /// <summary>
+        /// If error was a rate limit the code from the rate limit
+        /// </summary>
+        public int? RateLimitCode { get; private set; }
+        
+        internal RequestErrorType ErrorType { get; private set; }
+
         private DiscordLogLevel _logLevel;
         private readonly DiscordClient _client;
         private readonly Bucket _bucket;
@@ -161,6 +171,12 @@ namespace Oxide.Ext.Discord.Entities.Api
             _logLevel = DiscordLogLevel.Error;
         }
 
+        internal void SetRateLimitResponse(string message, int? code)
+        {
+            RateLimitMessage = message;
+            RateLimitCode = code;
+        }
+
         /// <summary>
         /// Performs the error logging for the request
         /// </summary>
@@ -183,8 +199,8 @@ namespace Oxide.Ext.Discord.Entities.Api
                     break;
                 
                 case RequestErrorType.RateLimit:
-                    _client.Logger.Warning("Rest Request Exception (Rate Limit) Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Remaining: {5} Limit: {6} Reset At: {7} Current Time: {8}",
-                        _client.PluginName, RequestId, RequestMethod, Url, ContentType, _bucket.Remaining, _bucket.Limit, _bucket.ResetAt, ErrorDate);
+                    _client.Logger.Warning("Rest Request Exception (Rate Limit) Plugin: {0} ID: {1} Request URL: [{2}] {3} Content-Type: {4} Remaining: {5} Limit: {6} Reset At: {7} Current Time: {8} Code: {9} Message: {10}",
+                        _client.PluginName, RequestId, RequestMethod, Url, ContentType, _bucket.Remaining, _bucket.Limit, _bucket.ResetAt, ErrorDate, RateLimitCode, RateLimitMessage);
                     break;
 
                 case RequestErrorType.ApiError:

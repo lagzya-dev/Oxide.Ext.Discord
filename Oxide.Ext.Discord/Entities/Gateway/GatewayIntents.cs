@@ -46,10 +46,11 @@ namespace Oxide.Ext.Discord.Entities.Gateway
         GuildMembers = 1 << 1,
         
         /// <summary>
+        /// - GUILD_AUDIT_LOG_ENTRY_CREATE
         /// - GUILD_BAN_ADD
         /// - GUILD_BAN_REMOVE
         /// </summary>
-        GuildBans = 1 << 2,
+        GuildModeration = 1 << 2,
         
         /// <summary>
         /// - GUILD_EMOJIS_UPDATE

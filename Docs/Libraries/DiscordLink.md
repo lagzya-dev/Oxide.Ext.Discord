@@ -18,6 +18,11 @@ To register your plugin you first need to inherit the `IDiscordLinkPlugin` inter
 The interface can be seen below and you must implement those methods on your plugin.
 
 ```c#
+public class MyDiscordPlugin : CovalencePlugin, IDiscordLinkPlugin 
+{
+
+}
+
 public interface IDiscordLinkPlugin
 {
     IDictionary<string, Snowflake> GetSteamToDiscordIds();
@@ -52,16 +57,49 @@ private void HandleUnlink(IPlayer player, DiscordUser user)
 
 The plugin will automatically be removed as the link plugin when unloaded
 
+## Player IDs
+Player IDs are a struct used by Discord Link to represent Player ID's. Player ID's contain a string ID and some helper properties
+
+```csharp
+public struct PlayerId : IEquatable<PlayerId>
+{
+    // ID of the player
+    public readonly string Id;
+    
+    // Returns true if the ID is valid; false otherwise
+    public bool IsValid { get; }
+       
+    // Returns the IPlayer for the Player ID
+    public IPlayer Player { get; }
+}
+```
+
+
 ## Accessing Information
 
 Once you have a reference to discord link you gain access to all the API's that are on it.
 Before accessing information from DiscordLink it is recommended to call IsEnabled() to make sure a link plugin has been registered for the server.
 
-```c#
-// Returns if Discord Link has a registered link plugin
-bool IsEnabled()
+### Fields
+```csharp
+IReadOnlyDictionary<PlayerId, Snowflake> PlayerToDiscordIds
+IReadOnlyDictionary<Snowflake, PlayerId> DiscordToPlayerIds
+ICollection<PlayerId> PlayerIds
+ICollection<Snowflake> DiscordIds
+```
 
-// Registeres the passed in plugin as the link plugin for the server
+### Properties
+```csharp
+// Returns if Discord Link has a registered link plugin
+bool IsEnabled
+
+// Returns the number of linked accounts
+int LinkedCount
+```
+
+### Methods
+```c#
+// Registers the passed in plugin as the link plugin for the server
 // Only 1 link plugin can be registered at a time
 // If your plugin provides more than just Link functionality it is recommended to have a configuartion option to enable linking for your pluguin
 void AddLinkPlugin(IDiscordLinkPlugin plugin)
@@ -75,15 +113,40 @@ bool IsLinked(string steamId)
 // Returns true if the discord Id is linked with a steam account
 bool IsLinked(Snowflake discordId)
 
-// Returns a Steam ID for a given Discord ID
-// If the Discord ID is not linked then the result will be null
-string GetSteamId(Snowflake discordId)
-
-//Returns if the given IPlayer is linked
+// Returns true if the IPlayer is linked with a discord account
 bool IsLinked(IPlayer player)
 
-//Returns if the given DiscordUser is linked
+// Returns true if the DiscordUser is linked with a steam account
 bool IsLinked(DiscordUser user)
+
+// Returns a Player Id for a given Discord ID
+// If the Discord ID is not linked then the PlayerId.IsValid property will be false
+PlayerId GetPlayerId(Snowflake discordId)
+
+// Returns a Player Id for a given DiscordUser
+// If the Discord ID is not linked then the PlayerId.IsValid property will be false
+PlayerId GetPlayerId(DiscordUser user)
+
+// Returns the IPlayer for the given Discord ID
+IPlayer GetPlayer(Snowflake discordId)
+
+// Returns the Discord ID for the given Steam ID
+Snowflake GetDiscordId(string playerId)
+
+// Returns the Discord ID for the given IPlayer
+Snowflake GetDiscordId(IPlayer player)
+
+// Returns a minimal Discord User
+DiscordUser GetDiscordUser(string playerId)
+
+// Returns a minimal Discord User
+DiscordUser GetDiscordUser(IPlayer player)
+
+// Returns a linked guild member for the matching steam id in the given guild
+GuildMember GetLinkedMember(string playerId, DiscordGuild guild)
+
+//Returns a linked guild member for the matching Player in the given guild
+GuildMember GetLinkedMember(IPlayer player, DiscordGuild guild)
 
 //Returns the steam ID for the given Discord ID. Null if not found
 string GetSteamId(Snowflake discordId)
@@ -118,21 +181,6 @@ GuildMember GetLinkedMember(string steamId, Guild guild)
 // Returns a guild member for a given player
 // If the Steam ID is not link then the result will be null
 GuildMember GetLinkedMember(IPlayer player, Guild guild)
-
-// Returns the number of linked accounts
-int GetLinkedCount()
-
-// Returns a list of all Steam Ids that are linked
-HashSet<string> GetLinkedSteamIds()
-
-// Returns a list of all snowflakes that are linked
-HashSet<Snowflake> GetLinkedDiscordIds()
-
-// Returns a Hash of key SteamId and value Discord ID
-Hash<string, Snowflake> GetSteamToDiscordIds()
-
-// Returns a Hash of key Discord ID and value Steam ID
-Hash<Snowflake, string> GetDiscordToSteamIds()
 ```
 
 ## Extension Methods

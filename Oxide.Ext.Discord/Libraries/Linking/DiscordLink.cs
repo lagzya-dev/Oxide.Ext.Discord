@@ -49,6 +49,12 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <returns></returns>
         public bool IsEnabled => _linkPlugins.Count != 0;
         
+        /// <summary>
+        /// Returns the number of linked players
+        /// </summary>
+        /// <returns></returns>
+        public int LinkedCount => _links.Count;
+        
         private readonly BidirectionalDictionary<PlayerId, Snowflake> _links = new BidirectionalDictionary<PlayerId, Snowflake>();
         private readonly Hash<PluginId, IDictionary<string, Snowflake>> _linkPlugins = new Hash<PluginId, IDictionary<string, Snowflake>>();
 
@@ -166,14 +172,14 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         public bool IsLinked(DiscordUser user) => IsLinked(user.Id);
 
         /// <summary>
-        /// Returns the Steam ID of the given Discord ID if there is a link
+        /// Returns the Player ID of the given Discord ID if there is a link
         /// </summary>
         /// <param name="discordId">Discord ID to get steam ID for</param>
         /// <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
         public PlayerId GetPlayerId(Snowflake discordId) => _links.TryGetValue(discordId, out PlayerId playerId) ? playerId : default(PlayerId);
 
         /// <summary>
-        /// Returns the Steam ID of the given Discord ID if there is a link
+        /// Returns the Player ID of the given Discord ID if there is a link
         /// </summary>
         /// <param name="user"><see cref="DiscordUser"/> to get steam Id for</param>
         /// <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
@@ -239,12 +245,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// <param name="guild">Guild the member is in</param>
         /// <returns>Discord ID for the given Steam ID; null otherwise</returns>
         public GuildMember GetLinkedMember(IPlayer player, DiscordGuild guild) => GetLinkedMember(player.Id, guild);
-
-        /// <summary>
-        /// Returns the number of linked players
-        /// </summary>
-        /// <returns></returns>
-        public int GetLinkedCount() => _links.Count;
+        
 
         /// <summary>
         /// Called by a link plugin when a link occured

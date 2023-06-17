@@ -1,7 +1,10 @@
 using System;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
 
@@ -43,16 +46,28 @@ namespace Oxide.Ext.Discord.Entities.Api
         public string Scope;
 
         /// <summary>
+        /// Rate Limit Message
+        /// </summary>
+        public string Message;
+
+        /// <summary>
+        /// Rate Limit Code
+        /// </summary>
+        public int? Code;
+
+        /// <summary>
         /// Initialize the RateLimitResponse
         /// </summary>
+        /// <param name="client">Client for the rate limit</param>
         /// <param name="headers">Headers for the rate limit</param>
-        public void Init(HttpResponseHeaders headers)
+        /// <param name="code">Http code for the request</param>
+        /// <param name="content">Request response content</param>
+        public void Init(DiscordClient client, HttpResponseHeaders headers, DiscordHttpStatusCode code, string content)
         {
             IsGlobalRateLimit = headers.GetBool(RateLimitHeaders.IsGlobal);
             Scope = headers.Get(RateLimitHeaders.Scope);
             if (IsGlobalRateLimit)
             {
-                IsGlobalRateLimit = true;
                 ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(GetBucketReset(headers));
                 return;
             }
@@ -66,6 +81,15 @@ namespace Oxide.Ext.Discord.Entities.Api
             Limit = headers.GetInt(RateLimitHeaders.BucketLimit);
             Remaining =  headers.GetInt(RateLimitHeaders.BucketRemaining);
             ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(GetBucketReset(headers));
+
+            if (code == DiscordHttpStatusCode.TooManyRequests)
+            {
+                RateLimitContent rateContent = DiscordPool.Internal.Get<RateLimitContent>();
+                JsonConvert.PopulateObject(content, rateContent);
+                Message = rateContent.Message;
+                Code = rateContent.Code;
+                DiscordPool.Internal.Free(rateContent);
+            }
         }
 
         private double GetBucketReset(HttpResponseHeaders headers)
@@ -82,6 +106,8 @@ namespace Oxide.Ext.Discord.Entities.Api
             Limit = 0;
             Remaining = 0;
             Scope = null;
+            Message = null;
+            Code = null;
         }
     }
 }

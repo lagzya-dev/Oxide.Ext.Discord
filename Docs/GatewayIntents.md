@@ -26,10 +26,8 @@ This is a list of all intents and which hooks become available when using a spec
     * [OnDiscordGuildThreadListSynced](Hooks.md#ondiscordguildthreadlistsynced)
     * [OnDiscordGuildThreadMemberUpdated](Hooks.md#ondiscordguildthreadmemberupdated)
     * [OnDiscordGuildThreadMembersUpdated](Hooks.md#ondiscordguildthreadmembersupdated)
-    * [OnDiscordGuildThreadMembersUpdated](Hooks.md#ondiscordguildthreadmembersupdated)
     * [OnDiscordStageInstanceCreated](Hooks.md#ondiscordstageinstancecreated)
     * [OnDiscordStageInstanceUpdated](Hooks.md#ondiscordstageinstanceupdated)
-    * [OnDiscordStageInstanceDeleted](Hooks.md#ondiscordstageinstancedeleted)
     * [OnDiscordStageInstanceDeleted](Hooks.md#ondiscordstageinstancedeleted)
     
 
@@ -38,12 +36,25 @@ This is a list of all intents and which hooks become available when using a spec
     * [OnDiscordGuildMemberUpdated](Hooks.md#ondiscordguildmemberupdated)
     * [OnDiscordGuildMemberRemoved](Hooks.md#ondiscordguildmemberremoved)
     * [OnDiscordGuildThreadMembersUpdated](Hooks.md#ondiscordguildthreadmembersupdated)
+    * [OnDiscordGuildMemberRoleAdded](Hooks.md#OnDiscordGuildMemberRoleAdded)
+    * [OnDiscordGuildMemberRoleRemoved](Hooks.md#OnDiscordGuildMemberRoleRemoved)
+    * [OnDiscordGuildMemberBoosted](Hooks.md#OnDiscordGuildMemberBoosted)
+    * [OnDiscordGuildMemberBoostExtended](Hooks.md#OnDiscordGuildMemberBoostExtended)
+    * [OnDiscordGuildMemberBoostEnded](Hooks.md#OnDiscordGuildMemberBoostEnded)
+    * [OnDiscordGuildMemberNicknameUpdated](Hooks.md#OnDiscordGuildMemberNicknameUpdated)
+    * [OnDiscordGuildMemberAvatarUpdated](Hooks.md#OnDiscordGuildMemberAvatarUpdated)
+    * [OnDiscordGuildMemberDeafened](Hooks.md#OnDiscordGuildMemberDeafened)
+    * [OnDiscordGuildMemberUndeafened](Hooks.md#OnDiscordGuildMemberUndeafened)
+    * [OnDiscordGuildMemberMuted](Hooks.md#OnDiscordGuildMemberMuted)
+    * [OnDiscordGuildMemberUnmuted](Hooks.md#OnDiscordGuildMemberUnmuted)
+    * [OnDiscordGuildMemberTimeout](Hooks.md#OnDiscordGuildMemberTimeout)
+    * [OnDiscordGuildMemberTimeoutEnded](Hooks.md#OnDiscordGuildMemberTimeoutEnded)
     
-* Guild Bans (`GatewayIntents.GuildBans`)
+* Guild Moderation (`GatewayIntents.Moderation`)
     * [OnDiscordGuildMemberBanned](Hooks.md#ondiscordguildmemberbanned)
     * [OnDiscordGuildMemberUnbanned](Hooks.md#ondiscordguildmemberunbanned)
     
-* Guild Emojis (`GatewayIntents.GuildEmojis`)
+* Guild GuildEmojis And Stickers (`GatewayIntents.GuildEmojisAndStickers`)
     * [OnDiscordGuildEmojisUpdated](Hooks.md#ondiscordguildemojisupdated)
     * [OnDiscordGuildStickersUpdated](Hooks.md#ondiscordguildstickersupdated)
     

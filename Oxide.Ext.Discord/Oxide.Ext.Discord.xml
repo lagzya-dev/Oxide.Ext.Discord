@@ -3593,11 +3593,24 @@
             The scope the rate limit is for
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Init(System.Net.Http.Headers.HttpResponseHeaders)">
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Message">
+            <summary>
+            Rate Limit Message
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Code">
+            <summary>
+            Rate Limit Code
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.Init(Oxide.Ext.Discord.Clients.DiscordClient,System.Net.Http.Headers.HttpResponseHeaders,Oxide.Ext.Discord.Entities.Api.DiscordHttpStatusCode,System.String)">
             <summary>
             Initialize the RateLimitResponse
             </summary>
+            <param name="client">Client for the rate limit</param>
             <param name="headers">Headers for the rate limit</param>
+            <param name="code">Http code for the request</param>
+            <param name="content">Request response content</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Api.RateLimitResponse.EnterPool">
             <inheritdoc/>
@@ -3737,6 +3750,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseError.ResponseMessage">
             <summary>
             Full string response if we received one
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseError.RateLimitMessage">
+            <summary>
+            If error was a rate limit the message from the rate limit
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Api.ResponseError.RateLimitCode">
+            <summary>
+            If error was a rate limit the code from the rate limit
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Api.ResponseError._showErrorMessage">
@@ -7596,8 +7619,9 @@
             - THREAD_MEMBERS_UPDATE
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildBans">
+        <member name="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildModeration">
             <summary>
+            - GUILD_AUDIT_LOG_ENTRY_CREATE
             - GUILD_BAN_ADD
             - GUILD_BAN_REMOVE
             </summary>
@@ -18759,6 +18783,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.LinkedCount">
+            <summary>
+            Returns the number of linked players
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             DiscordLink Constructor
@@ -18810,14 +18840,14 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetPlayerId(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
-            Returns the Steam ID of the given Discord ID if there is a link
+            Returns the Player ID of the given Discord ID if there is a link
             </summary>
             <param name="discordId">Discord ID to get steam ID for</param>
             <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetPlayerId(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
             <summary>
-            Returns the Steam ID of the given Discord ID if there is a link
+            Returns the Player ID of the given Discord ID if there is a link
             </summary>
             <param name="user"><see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/> to get steam Id for</param>
             <returns>Steam ID of the given given discord ID if linked; null otherwise</returns>
@@ -18872,12 +18902,6 @@
             <param name="player">Player to get the Discord User for</param>
             <param name="guild">Guild the member is in</param>
             <returns>Discord ID for the given Steam ID; null otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.GetLinkedCount">
-            <summary>
-            Returns the number of linked players
-            </summary>
-            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Linking.DiscordLink.OnLinked(Oxide.Core.Plugins.Plugin,Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.Users.DiscordUser)">
             <summary>

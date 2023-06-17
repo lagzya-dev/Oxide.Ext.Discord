@@ -1,20 +1,7 @@
 # Hooks
 
-Hooks within the discord extension are only called on plugins that are registered to receive them and also will only be called on plugins the information is related to. 
-By default all plugins with a connected DiscordClient will be registered to receive hooks for the bot they're connect for.
-A list of all hooks can be found in the DiscordHooks.cs file.
-If a plugin wishes to receive hooks for a specific client they need to get access to that client either by the plugin passing the client in a hook or a plugin can lookup a client for a specific plugin.
-To lookup a client for a plugin you can do the following:
-
-```c#
-DiscordClient client = DiscordClient.GetClient(plugin);
-```
-
-or
-
-```c#
-DiscordClient client = DiscordClient.GetClient(pluginName);
-```
+Hooks within the discord extension are only called on plugins that are registered to receive them and also will only be called on plugins for the bot the event occured. 
+By default all plugins with a connected DiscordClient will be registered to receive hooks for the bot they're connect to.
 
 ## Table of Contents
 
@@ -22,7 +9,6 @@ DiscordClient client = DiscordClient.GetClient(pluginName);
   * [Discord Client](#discord-client)
     + [OnDiscordClientCreated](#ondiscordclientcreated)
     + [OnDiscordClientConnected](#ondiscordclientconnected)
-    + [OnDiscordClientDisconnected](#ondiscordclientdisconnected)
   * [Discord Bot](#discord-bot)
     + [OnDiscordBotFullyLoaded](#ondiscordbotfullyloaded)
   * [Discord Link](#discord-link)
@@ -160,16 +146,6 @@ void OnDiscordClientConnected(Plugin owner, DiscordClient client)
 }
 ```
 
-### OnDiscordClientDisconnected
-- Called when the Disconnect() is called on the DiscordClient
-
-```c#
-void OnDiscordClientDisconnected(Plugin owner, DiscordClient client)
-{
-    Puts("OnDiscordClientDisconnected Works!");
-}
-```
-
 ## Discord Bot
 
 ### OnDiscordBotFullyLoaded
@@ -187,7 +163,8 @@ void OnDiscordBotFullyLoaded()
 
 These hooks are called when a player is linked or unlinked using discord link.
 It will be called for every plugins registered to receive hooks.  
-**Note:** If your plugin supports discord link you should not supply any other hooks as the extension provides them for you.
+**Note:** If your plugin supports discord link you should not supply any other hooks as the extension provides them for you.  
+**Note:** Discord Link hooks are considered global hooks and will be called on all plugins regardless of bot
 
 ### OnDiscordPlayerLinked
 - Called when a player has linked their discord and player together using the DiscordLink library

@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Entities.Api
                 Code = (DiscordHttpStatusCode)response.StatusCode;
                 Content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 RateLimit = DiscordPool.Internal.Get<RateLimitResponse>();
-                RateLimit.Init(response.Headers);
+                RateLimit.Init(client, response.Headers, Code, Content);
                 error?.SetResponse(Code, Content);
             }
         }

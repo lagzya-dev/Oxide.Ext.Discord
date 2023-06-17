@@ -1,5 +1,7 @@
 # Discord Command
 
+## Discord Command is deprecated. Please use [Discord App Command](DiscordAppCommand.md) instead
+
 DiscordCommand is a library that allows plugin to register Discord Command callback similar to Oxide Chat Commands.
 DiscordCommand will be called for any message created by a non bot.
 When a plugin that has registered commands is unloaded then the commands will be removed.

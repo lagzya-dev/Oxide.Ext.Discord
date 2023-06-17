@@ -66,6 +66,7 @@ namespace Oxide.Ext.Discord.Constants
                 OnDiscordGuildMemberRoleAdded,
                 OnDiscordGuildMemberRoleRemoved,
                 OnDiscordGuildMemberBoosted,
+                OnDiscordGuildMemberBoostExtended,
                 OnDiscordGuildMemberBoostEnded,
                 OnDiscordGuildMemberNicknameUpdated,
                 OnDiscordGuildMemberAvatarUpdated,
@@ -77,7 +78,7 @@ namespace Oxide.Ext.Discord.Constants
                 OnDiscordGuildMemberTimeoutEnded,
                 OnDiscordGuildThreadMembersUpdated
             },
-            [GatewayIntents.GuildBans] = new List<string>
+            [GatewayIntents.GuildModeration] = new List<string>
             {
                 OnDiscordGuildMemberBanned,
                 OnDiscordGuildMemberUnbanned
