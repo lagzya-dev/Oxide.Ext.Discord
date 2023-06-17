@@ -4,7 +4,7 @@
 
 | public type | description |
 | --- | --- |
-| class [DiscordExtension](./Oxide.Ext.Discord//DiscordExtension.md) | Discord Extension that is loaded by Oxide |
+| class [DiscordExtension](./Oxide.Ext.Discord/DiscordExtension.md) | Discord Extension that is loaded by Oxide |
 
 ## Oxide.Ext.Discord.Attributes namespace
 
