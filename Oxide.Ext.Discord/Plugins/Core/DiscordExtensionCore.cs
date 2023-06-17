@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
@@ -227,7 +229,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         }
 
         [HookMethod(nameof(DiscordDebugCommand))]
-        private void DiscordDebugCommand(IPlayer player)
+        private void DiscordDebugCommand(IPlayer player, string cmd, string[] args)
         {
             DebugLogger logger = new DebugLogger();
             logger.AppendList("Bot Clients", BotClientFactory.Instance.Clients);
@@ -240,10 +242,26 @@ namespace Oxide.Ext.Discord.Plugins.Core
             DiscordCommand.Instance.LogDebug(logger);
             DiscordSubscriptions.Instance.LogDebug(logger);
             logger.EndObject();
-
+            
             string message = logger.ToString();
-            player.Message(message);
-            _logger.Info(message);
+
+            if (args.Length != 0 && args[0].Equals("file", StringComparison.OrdinalIgnoreCase))
+            {
+                string path = Path.Combine(Interface.Oxide.LogDirectory, "DiscordExtension");
+                string filePath = Path.Combine(path, $"DEBUG-{DateTime.Now:yyyy-MM-dd_h-mm-ss-tt}.txt");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                
+                File.WriteAllText(path, message);
+                player.Message($"Debug Saved to File. Path: {filePath.Replace(Interface.Oxide.RootDirectory, "").Substring(1)}");
+            }
+            else
+            {
+                player.Message(message);
+                _logger.Info(message);
+            }
         }
 
         [HookMethod(nameof(DiscordHelpCommand))]
