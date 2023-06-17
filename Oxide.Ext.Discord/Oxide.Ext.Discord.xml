@@ -24257,5 +24257,100 @@
             Websocket is currently disconnect and not waiting to connect
             </summary>
         </member>
+        <member name="F:ThisAssembly.Git.IsDirty">
+            <summary>
+            Gets whether the current repository is dirty.
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.IsDirtyString">
+            <summary>
+            => @"true"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.RepositoryUrl">
+            <summary>
+            => @"https://github.com/dassjosh/Oxide.Ext.Discord.git"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.Branch">
+            <summary>
+            => @"develop"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.Commit">
+            <summary>
+            => @"0968b003"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.Sha">
+            <summary>
+            => @"0968b00312589ffda1aba9b6546f13d888398ba5"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.CommitDate">
+            <summary>
+            => @"2023-06-17T14:56:57-05:00"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.Commits">
+            <summary>
+            => @"560"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.Tag">
+            <summary>
+            => @"2.1.9-560-g0968b003"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.BaseTag">
+            <summary>
+            => @"2.1.9"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.BaseVersion.Major">
+            <summary>
+            => @"2"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.BaseVersion.Minor">
+            <summary>
+            => @"1"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.BaseVersion.Patch">
+            <summary>
+            => @"9"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Major">
+            <summary>
+            => @"2"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Minor">
+            <summary>
+            => @"1"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Patch">
+            <summary>
+            => @"569"
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Label">
+            <summary>
+            => @""
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.DashLabel">
+            <summary>
+            => @""
+            </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Source">
+            <summary>
+            => @"Tag"
+            </summary>
+        </member>
     </members>
 </doc>

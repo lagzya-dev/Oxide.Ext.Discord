@@ -7,7 +7,7 @@
     <Authors>Kirollos</Authors>
     <Description>An Oxide extension for Discord.</Description>
     <RepositoryUrl>https://github.com/Kirollos/Oxide.Ext.Discord</RepositoryUrl>
-    <TargetFrameworks>net461;net48</TargetFrameworks>
+    <TargetFrameworks>net461;</TargetFrameworks>
     <LangVersion>7.0</LangVersion>
     <PackageVersion>2.5.0.0</PackageVersion>
     <AssemblyVersion>3.0.0</AssemblyVersion>
@@ -24,6 +24,10 @@
     <DocumentationFile>$(outdir)Oxide.Ext.Discord.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="GitInfo" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Oxide.Core" Version="2.0.4054">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
@@ -35,6 +39,6 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(outdir)Oxide.Ext.Discord.xml&quot; &quot;$(ProjectDir)Oxide.Ext.Discord.xml&quot;&#xA;&#xA;xmldocmd &quot;$(outdir)Oxide.Ext.Discord.dll&quot; &quot;$(ProjectDir)..\Docs\Generated&quot; --source &quot;https://github.com/dassjosh/Oxide.Ext.Discord&quot; --namespace &quot;Oxide.Ext.Discord&quot; --visibility &quot;protected&quot; --obsolete --clean --namespace-pages --skip-compiler-generated --external &quot;Oxide.Core&quot; --external &quot;Oxide.CSharp&quot; --external &quot;Oxide.References&quot;&#xA;" />
+    <Exec Command="copy &quot;$(outdir)Oxide.Ext.Discord.xml&quot; &quot;$(ProjectDir)Oxide.Ext.Discord.xml&quot;&#xA;&#xA;xmldocmd &quot;$(outdir)Oxide.Ext.Discord.dll&quot; &quot;$(ProjectDir)..\Docs\Generated&quot; --source &quot;https://github.com/dassjosh/Oxide.Ext.Discord/blob/$(GitBranch)/Oxide.Ext.Discord&quot; --namespace &quot;Oxide.Ext.Discord&quot; --visibility &quot;protected&quot; --obsolete --clean --namespace-pages --skip-compiler-generated --external &quot;Oxide.Core&quot; --external &quot;Oxide.CSharp&quot; --external &quot;Oxide.References&quot;&#xA;" />
   </Target>
 </Project>
