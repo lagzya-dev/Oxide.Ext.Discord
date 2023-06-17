@@ -17,7 +17,7 @@ public class InteractionFollowupBuilder :
 
 * class [BaseInteractionMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseInteractionMessageBuilder-2.md)
 * class [CommandFollowupCreate](../../Entities/Interactions/ApplicationCommands/CommandFollowupCreate.md)
-* namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [InteractionFollowupBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Interactions/InteractionFollowupBuilder.cs)
 

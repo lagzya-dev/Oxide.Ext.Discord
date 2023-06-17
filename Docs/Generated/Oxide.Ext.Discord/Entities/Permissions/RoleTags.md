@@ -20,7 +20,7 @@ public class RoleTags
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Permissions](./PermissionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Permissions](./PermissionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [RoleTags.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Permissions/RoleTags.cs)
 

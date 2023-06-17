@@ -28,7 +28,7 @@ public class DiscordAutoCompleteChoiceTemplates :
 
 * class [BaseTemplateLibrary&lt;TTemplate&gt;](../BaseTemplateLibrary-1.md)
 * class [DiscordAutoCompleteChoiceTemplate](./DiscordAutoCompleteChoiceTemplate.md)
-* namespace [Oxide.Ext.Discord.Libraries.Templates.AutoComplete](./AutoCompleteNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.AutoComplete](./AutoCompleteNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordAutoCompleteChoiceTemplates.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/AutoComplete/DiscordAutoCompleteChoiceTemplates.cs)
 

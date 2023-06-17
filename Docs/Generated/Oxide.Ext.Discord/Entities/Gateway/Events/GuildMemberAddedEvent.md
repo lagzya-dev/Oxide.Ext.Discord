@@ -16,7 +16,7 @@ public class GuildMemberAddedEvent : GuildMember
 ## See Also
 
 * class [GuildMember](../../Guilds/GuildMember.md)
-* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [GuildMemberAddedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/GuildMemberAddedEvent.cs)
 

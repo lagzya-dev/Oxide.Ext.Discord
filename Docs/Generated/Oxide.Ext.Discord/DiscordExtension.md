@@ -19,7 +19,7 @@ public class DiscordExtension : Extension
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord](../../Oxide.Ext.DiscordNamespace.md.md)
+* namespace [Oxide.Ext.Discord](../../Oxide.Ext.DiscordNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordExtension.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/DiscordExtension.cs)
 

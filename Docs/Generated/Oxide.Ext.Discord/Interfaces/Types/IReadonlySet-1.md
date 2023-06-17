@@ -25,7 +25,7 @@ public interface IReadonlySet<T> : IReadOnlyCollection<T>
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Interfaces.Types](./TypesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Interfaces.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [IReadonlySet.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/Types/IReadonlySet.cs)
 

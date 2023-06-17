@@ -20,7 +20,7 @@ public class ThreadMetadata
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ThreadMetadata.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Threads/ThreadMetadata.cs)
 

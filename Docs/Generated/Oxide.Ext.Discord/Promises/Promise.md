@@ -39,7 +39,7 @@ public sealed class Promise : BasePromise, IPendingPromise
 
 * class [BasePromise](./BasePromise.md)
 * interface [IPendingPromise](../Interfaces/Promises/IPendingPromise.md)
-* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [Promise.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Promises/Promise.cs)
 

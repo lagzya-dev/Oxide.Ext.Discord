@@ -9,7 +9,7 @@ public class PromiseCancelledException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Promise](./PromiseNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Promise](./PromiseNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [PromiseCancelledException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Promise/PromiseCancelledException.cs)
 

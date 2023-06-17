@@ -33,7 +33,7 @@ public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IEquatable
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [Snowflake.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Snowflake.cs)
 

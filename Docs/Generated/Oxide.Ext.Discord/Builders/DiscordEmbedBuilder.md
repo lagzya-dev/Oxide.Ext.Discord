@@ -31,7 +31,7 @@ public class DiscordEmbedBuilder
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordEmbedBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/DiscordEmbedBuilder.cs)
 

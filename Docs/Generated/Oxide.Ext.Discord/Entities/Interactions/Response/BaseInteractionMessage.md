@@ -17,7 +17,7 @@ public abstract class BaseInteractionMessage : BaseMessageCreate
 ## See Also
 
 * class [BaseMessageCreate](../../Messages/BaseMessageCreate.md)
-* namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [BaseInteractionMessage.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/Response/BaseInteractionMessage.cs)
 

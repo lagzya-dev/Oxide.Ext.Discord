@@ -9,7 +9,7 @@ public class InvalidGuildStickerException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Stickers](./StickersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Stickers](./StickersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InvalidGuildStickerException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Stickers/InvalidGuildStickerException.cs)
 

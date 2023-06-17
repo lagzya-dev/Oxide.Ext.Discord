@@ -16,7 +16,7 @@ public class ThreadMemberUpdateEvent : ThreadMember
 ## See Also
 
 * class [ThreadMember](../../Channels/Threads/ThreadMember.md)
-* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ThreadMemberUpdateEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/ThreadMemberUpdateEvent.cs)
 

@@ -16,7 +16,7 @@ public interface IPool
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [IPool.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Pooling/IPool.cs)
 

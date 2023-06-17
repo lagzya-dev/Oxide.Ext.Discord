@@ -18,7 +18,7 @@ public class EventPayloadConverter : JsonConverter
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [EventPayloadConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/EventPayloadConverter.cs)
 

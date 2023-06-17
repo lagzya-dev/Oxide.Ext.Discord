@@ -29,7 +29,7 @@ public class DiscordWebSocket : IDebugLoggable
 ## See Also
 
 * interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
-* namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordWebSocket.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/DiscordWebSocket.cs)
 

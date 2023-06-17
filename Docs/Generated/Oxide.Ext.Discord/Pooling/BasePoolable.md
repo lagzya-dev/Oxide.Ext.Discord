@@ -22,7 +22,7 @@ public abstract class BasePoolable : IDisposable
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BasePoolable.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Pooling/BasePoolable.cs)
 

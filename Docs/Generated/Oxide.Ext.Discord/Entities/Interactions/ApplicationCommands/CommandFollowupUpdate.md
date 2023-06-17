@@ -16,7 +16,7 @@ public class CommandFollowupUpdate : WebhookEditMessage
 ## See Also
 
 * class [WebhookEditMessage](../../Webhooks/WebhookEditMessage.md)
-* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [CommandFollowupUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandFollowupUpdate.cs)
 

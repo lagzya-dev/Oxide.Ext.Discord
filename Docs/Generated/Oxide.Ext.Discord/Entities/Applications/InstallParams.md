@@ -16,7 +16,7 @@ public class InstallParams
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [InstallParams.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Applications/InstallParams.cs)
 

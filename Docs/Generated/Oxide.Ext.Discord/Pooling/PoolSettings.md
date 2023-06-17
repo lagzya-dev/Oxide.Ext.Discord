@@ -21,7 +21,7 @@ public class PoolSettings
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [PoolSettings.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Pooling/PoolSettings.cs)
 

@@ -15,7 +15,7 @@ public enum TeamMembershipState : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Teams](./TeamsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Teams](./TeamsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [TeamMembershipState.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Teams/TeamMembershipState.cs)
 

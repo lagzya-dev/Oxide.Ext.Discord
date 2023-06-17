@@ -33,7 +33,7 @@ public class RestHandler : IDebugLoggable
 ## See Also
 
 * interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
-* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [RestHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Rest/RestHandler.cs)
 

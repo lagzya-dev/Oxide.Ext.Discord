@@ -15,7 +15,7 @@ public class InvalidEmojiException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Emojis](./EmojisNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Emojis](./EmojisNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InvalidEmojiException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Emojis/InvalidEmojiException.cs)
 

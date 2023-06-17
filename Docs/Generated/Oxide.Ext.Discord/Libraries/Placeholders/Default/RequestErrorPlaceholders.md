@@ -16,7 +16,7 @@ public static class RequestErrorPlaceholders
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [RequestErrorPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/RequestErrorPlaceholders.cs)
 

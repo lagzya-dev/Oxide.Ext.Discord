@@ -18,7 +18,7 @@ public class InteractionModalBuilder
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [InteractionModalBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Interactions/InteractionModalBuilder.cs)
 

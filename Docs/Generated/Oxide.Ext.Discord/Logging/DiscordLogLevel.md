@@ -20,7 +20,7 @@ public enum DiscordLogLevel : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordLogLevel.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Logging/DiscordLogLevel.cs)
 

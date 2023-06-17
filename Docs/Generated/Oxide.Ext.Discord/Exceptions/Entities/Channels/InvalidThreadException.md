@@ -9,7 +9,7 @@ public class InvalidThreadException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Channels](./ChannelsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Channels](./ChannelsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InvalidThreadException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Channels/InvalidThreadException.cs)
 

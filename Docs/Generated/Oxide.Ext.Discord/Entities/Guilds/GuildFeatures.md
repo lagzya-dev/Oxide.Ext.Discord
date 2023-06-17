@@ -43,7 +43,7 @@ public enum GuildFeatures : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [GuildFeatures.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildFeatures.cs)
 

@@ -22,7 +22,7 @@ public class BotConnection
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BotConnection.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Connections/BotConnection.cs)
 

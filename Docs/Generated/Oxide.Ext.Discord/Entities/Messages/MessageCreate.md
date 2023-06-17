@@ -17,7 +17,7 @@ public class MessageCreate : BaseMessageCreate
 ## See Also
 
 * class [BaseMessageCreate](./BaseMessageCreate.md)
-* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [MessageCreate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/MessageCreate.cs)
 

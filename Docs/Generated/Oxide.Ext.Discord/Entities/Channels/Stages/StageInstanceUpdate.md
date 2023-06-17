@@ -16,7 +16,7 @@ public class StageInstanceUpdate
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Channels.Stages](./StagesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Stages](./StagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [StageInstanceUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Stages/StageInstanceUpdate.cs)
 

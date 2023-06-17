@@ -9,7 +9,7 @@ public class InvalidSnowflakeException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities](./EntitiesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [InvalidSnowflakeException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/InvalidSnowflakeException.cs)
 

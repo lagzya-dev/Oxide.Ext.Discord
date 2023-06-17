@@ -16,7 +16,7 @@ public abstract class BaseApplicationCommandAttribute : BaseDiscordAttribute
 ## See Also
 
 * class [BaseDiscordAttribute](../BaseDiscordAttribute.md)
-* namespace [Oxide.Ext.Discord.Attributes.ApplicationCommands](./ApplicationCommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Attributes.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [BaseApplicationCommandAttribute.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Attributes/ApplicationCommands/BaseApplicationCommandAttribute.cs)
 

@@ -22,7 +22,7 @@ public class DiscordPool : BaseDiscordLibrary<DiscordPool>
 ## See Also
 
 * class [BaseDiscordLibrary&lt;TLibrary&gt;](../BaseDiscordLibrary-1.md)
-* namespace [Oxide.Ext.Discord.Libraries.Pooling](./PoolingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordPool.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Pooling/DiscordPool.cs)
 

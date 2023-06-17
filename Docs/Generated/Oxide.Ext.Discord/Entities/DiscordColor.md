@@ -43,7 +43,7 @@ public struct DiscordColor
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordColor.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/DiscordColor.cs)
 

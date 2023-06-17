@@ -25,7 +25,7 @@ public class GuildPreview
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [GuildPreview.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildPreview.cs)
 

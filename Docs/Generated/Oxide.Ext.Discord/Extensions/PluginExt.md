@@ -8,7 +8,7 @@ public static class PluginExt
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [PluginExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/PluginExt.cs)
 

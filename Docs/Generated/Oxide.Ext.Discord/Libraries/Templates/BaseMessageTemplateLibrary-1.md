@@ -26,7 +26,7 @@ public abstract class BaseMessageTemplateLibrary<TTemplate> : BaseTemplateLibrar
 ## See Also
 
 * class [BaseTemplateLibrary&lt;TTemplate&gt;](./BaseTemplateLibrary-1.md)
-* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [BaseMessageTemplateLibrary.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/BaseMessageTemplateLibrary.cs)
 

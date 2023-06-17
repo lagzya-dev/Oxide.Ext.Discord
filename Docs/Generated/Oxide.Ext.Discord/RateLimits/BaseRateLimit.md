@@ -29,7 +29,7 @@ public abstract class BaseRateLimit
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.RateLimits](./RateLimitsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.RateLimits](./RateLimitsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BaseRateLimit.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/RateLimits/BaseRateLimit.cs)
 

@@ -11,7 +11,7 @@ public class GroupSubCommandOptionBuilder :
 
 * class [BaseCommandOptionBuilder&lt;TBuilder,TParent&gt;](./BaseBuilders/BaseCommandOptionBuilder-2.md)
 * class [GroupSubCommandBuilder](./GroupSubCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [GroupSubCommandOptionBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/GroupSubCommandOptionBuilder.cs)
 

@@ -15,7 +15,7 @@ public static class PlaceholderFormatting
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [PlaceholderFormatting.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderFormatting.cs)
 

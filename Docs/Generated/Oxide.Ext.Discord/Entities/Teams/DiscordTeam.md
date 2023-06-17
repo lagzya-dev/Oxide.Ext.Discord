@@ -20,7 +20,7 @@ public class DiscordTeam
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Teams](./TeamsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Teams](./TeamsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordTeam.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Teams/DiscordTeam.cs)
 

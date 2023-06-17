@@ -17,7 +17,7 @@ public class ChoicesLocalization
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ChoicesLocalization.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Commands/ChoicesLocalization.cs)
 

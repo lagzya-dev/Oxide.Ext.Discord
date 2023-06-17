@@ -23,7 +23,7 @@ public class WebsocketRateLimit : BaseRateLimit
 ## See Also
 
 * class [BaseRateLimit](./BaseRateLimit.md)
-* namespace [Oxide.Ext.Discord.RateLimits](./RateLimitsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.RateLimits](./RateLimitsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [WebsocketRateLimit.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/RateLimits/WebsocketRateLimit.cs)
 

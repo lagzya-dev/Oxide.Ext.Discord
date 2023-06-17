@@ -28,7 +28,7 @@ public struct TemplateVersion : IComparable<TemplateVersion>, IEquatable<Templat
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [TemplateVersion.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/TemplateVersion.cs)
 

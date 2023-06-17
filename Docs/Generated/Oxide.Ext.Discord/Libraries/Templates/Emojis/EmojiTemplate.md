@@ -18,7 +18,7 @@ public class EmojiTemplate
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Emojis](./EmojisNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Emojis](./EmojisNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [EmojiTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Emojis/EmojiTemplate.cs)
 

@@ -20,7 +20,7 @@ public interface IBulkTemplate<T>
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Interfaces.Templates](./TemplatesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Interfaces.Templates](./TemplatesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [IBulkTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/Templates/IBulkTemplate.cs)
 

@@ -17,7 +17,7 @@ public class PermissionFlagsStringConverter : JsonConverter
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [PermissionFlagsStringConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/PermissionFlagsStringConverter.cs)
 

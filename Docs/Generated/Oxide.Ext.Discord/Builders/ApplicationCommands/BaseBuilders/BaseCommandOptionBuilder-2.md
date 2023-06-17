@@ -27,7 +27,7 @@ public abstract class BaseCommandOptionBuilder<TBuilder, TParent>
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders](./BaseBuildersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders](./BaseBuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [BaseCommandOptionBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/BaseBuilders/BaseCommandOptionBuilder.cs)
 

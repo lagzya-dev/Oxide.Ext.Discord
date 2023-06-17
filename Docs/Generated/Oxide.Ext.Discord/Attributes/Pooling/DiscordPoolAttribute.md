@@ -16,7 +16,7 @@ public class DiscordPoolAttribute : BaseDiscordAttribute
 ## See Also
 
 * class [BaseDiscordAttribute](../BaseDiscordAttribute.md)
-* namespace [Oxide.Ext.Discord.Attributes.Pooling](./PoolingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Attributes.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordPoolAttribute.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Attributes/Pooling/DiscordPoolAttribute.cs)
 

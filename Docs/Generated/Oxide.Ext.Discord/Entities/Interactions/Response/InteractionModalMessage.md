@@ -17,7 +17,7 @@ public class InteractionModalMessage
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InteractionModalMessage.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/Response/InteractionModalMessage.cs)
 

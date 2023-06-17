@@ -16,7 +16,7 @@ public class SelectMenuComponentBuilder
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [SelectMenuComponentBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/MessageComponents/SelectMenuComponentBuilder.cs)
 

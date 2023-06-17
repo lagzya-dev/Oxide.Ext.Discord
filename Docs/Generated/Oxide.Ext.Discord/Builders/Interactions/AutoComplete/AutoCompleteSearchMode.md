@@ -16,7 +16,7 @@ public enum AutoCompleteSearchMode : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Builders.Interactions.AutoComplete](./AutoCompleteNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.Interactions.AutoComplete](./AutoCompleteNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [AutoCompleteSearchMode.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Interactions/AutoComplete/AutoCompleteSearchMode.cs)
 

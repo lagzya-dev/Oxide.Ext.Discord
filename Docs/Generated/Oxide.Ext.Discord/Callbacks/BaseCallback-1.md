@@ -22,7 +22,7 @@ public abstract class BaseCallback<T> : BasePoolable
 ## See Also
 
 * class [BasePoolable](../Pooling/BasePoolable.md)
-* namespace [Oxide.Ext.Discord.Callbacks](./CallbacksNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Callbacks](./CallbacksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BaseCallback.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Callbacks/BaseCallback.cs)
 

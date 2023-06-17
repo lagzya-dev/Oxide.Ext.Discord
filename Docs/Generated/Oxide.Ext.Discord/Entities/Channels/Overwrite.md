@@ -19,7 +19,7 @@ public class Overwrite : ISnowflakeEntity
 ## See Also
 
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
-* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [Overwrite.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Overwrite.cs)
 

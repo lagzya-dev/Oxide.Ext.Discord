@@ -15,7 +15,7 @@ public enum TargetUserType : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Invites](./InvitesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Invites](./InvitesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [TargetUserType.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Invites/TargetUserType.cs)
 

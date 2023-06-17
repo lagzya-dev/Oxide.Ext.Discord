@@ -75,7 +75,7 @@ public enum DiscordDispatchCode : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.WebSockets.Handlers](./HandlersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.WebSockets.Handlers](./HandlersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordDispatchCode.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/Handlers/DiscordDispatchCode.cs)
 

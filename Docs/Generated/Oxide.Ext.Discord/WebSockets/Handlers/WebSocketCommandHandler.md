@@ -15,7 +15,7 @@ public class WebSocketCommandHandler
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.WebSockets.Handlers](./HandlersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.WebSockets.Handlers](./HandlersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [WebSocketCommandHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/Handlers/WebSocketCommandHandler.cs)
 

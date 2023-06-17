@@ -17,7 +17,7 @@ public class EmojiUpdate
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Emojis](./EmojisNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Emojis](./EmojisNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [EmojiUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Emojis/EmojiUpdate.cs)
 

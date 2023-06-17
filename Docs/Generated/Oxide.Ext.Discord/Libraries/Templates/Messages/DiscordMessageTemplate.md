@@ -19,7 +19,7 @@ public class DiscordMessageTemplate
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Messages](./MessagesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordMessageTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Messages/DiscordMessageTemplate.cs)
 

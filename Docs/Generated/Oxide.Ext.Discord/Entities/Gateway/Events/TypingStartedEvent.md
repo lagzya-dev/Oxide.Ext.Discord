@@ -19,7 +19,7 @@ public class TypingStartedEvent
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [TypingStartedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/TypingStartedEvent.cs)
 

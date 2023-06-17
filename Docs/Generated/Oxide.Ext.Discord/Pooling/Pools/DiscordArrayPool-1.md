@@ -20,7 +20,7 @@ public class DiscordArrayPool<T>
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Pooling.Pools](./PoolsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Pooling.Pools](./PoolsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordArrayPool.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Pooling/Pools/DiscordArrayPool.cs)
 

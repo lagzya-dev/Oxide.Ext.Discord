@@ -9,7 +9,7 @@ public class ApplicationRoleConnectionMetadataException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Applications](./ApplicationsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Applications](./ApplicationsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ApplicationRoleConnectionMetadataException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Applications/ApplicationRoleConnectionMetadataException.cs)
 

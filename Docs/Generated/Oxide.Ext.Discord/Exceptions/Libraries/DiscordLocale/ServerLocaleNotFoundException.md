@@ -9,7 +9,7 @@ public class ServerLocaleNotFoundException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale](./DiscordLocaleNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale](./DiscordLocaleNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ServerLocaleNotFoundException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Libraries/DiscordLocale/ServerLocaleNotFoundException.cs)
 

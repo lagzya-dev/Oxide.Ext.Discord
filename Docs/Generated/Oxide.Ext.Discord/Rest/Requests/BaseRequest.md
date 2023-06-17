@@ -33,7 +33,7 @@ public abstract class BaseRequest : BasePoolable, IDebugLoggable
 
 * class [BasePoolable](../../Pooling/BasePoolable.md)
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
-* namespace [Oxide.Ext.Discord.Rest.Requests](./RequestsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Rest.Requests](./RequestsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [BaseRequest.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Rest/Requests/BaseRequest.cs)
 

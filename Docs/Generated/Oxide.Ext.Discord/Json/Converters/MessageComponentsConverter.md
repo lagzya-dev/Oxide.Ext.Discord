@@ -18,7 +18,7 @@ public class MessageComponentsConverter : JsonConverter
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [MessageComponentsConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/MessageComponentsConverter.cs)
 

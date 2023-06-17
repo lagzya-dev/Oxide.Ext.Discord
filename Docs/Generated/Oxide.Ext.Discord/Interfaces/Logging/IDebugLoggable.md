@@ -14,7 +14,7 @@ public interface IDebugLoggable
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Interfaces.Logging](./LoggingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Interfaces.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [IDebugLoggable.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/Logging/IDebugLoggable.cs)
 

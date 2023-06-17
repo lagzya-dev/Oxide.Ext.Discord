@@ -24,7 +24,7 @@ public class Connection
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [Connection.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Users/Connections/Connection.cs)
 

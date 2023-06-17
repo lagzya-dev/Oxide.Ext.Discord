@@ -17,7 +17,7 @@ public class ResumeSessionCommand
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ResumeSessionCommand.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Commands/ResumeSessionCommand.cs)
 

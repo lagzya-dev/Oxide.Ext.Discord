@@ -23,7 +23,7 @@ public struct PluginId : IDebugLoggable, IEquatable<PluginId>
 ## See Also
 
 * interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
-* namespace [Oxide.Ext.Discord.Plugins](./PluginsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Plugins](./PluginsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [PluginId.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Plugins/PluginId.cs)
 

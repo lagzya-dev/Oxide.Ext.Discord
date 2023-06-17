@@ -23,7 +23,7 @@ public class AutoModRuleModify
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.AutoMod](./AutoModNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.AutoMod](./AutoModNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [AutoModRuleModify.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/AutoMod/AutoModRuleModify.cs)
 

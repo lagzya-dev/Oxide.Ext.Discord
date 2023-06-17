@@ -9,7 +9,7 @@ public class DiscordClientException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](./BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions](./ExceptionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions](./ExceptionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordClientException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/DiscordClientException.cs)
 

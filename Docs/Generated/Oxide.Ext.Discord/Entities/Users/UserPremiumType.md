@@ -17,7 +17,7 @@ public enum UserPremiumType : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [UserPremiumType.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Users/UserPremiumType.cs)
 

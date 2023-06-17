@@ -23,7 +23,7 @@ public class ButtonTemplate : BaseComponentTemplate
 ## See Also
 
 * class [BaseComponentTemplate](./BaseComponentTemplate.md)
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ButtonTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Components/ButtonTemplate.cs)
 

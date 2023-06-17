@@ -31,7 +31,7 @@ public class BasePromise : BasePoolable, IRejectable
 
 * class [BasePoolable](../Pooling/BasePoolable.md)
 * interface [IRejectable](../Interfaces/Promises/IRejectable.md)
-* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BasePromise.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Promises/BasePromise.cs)
 

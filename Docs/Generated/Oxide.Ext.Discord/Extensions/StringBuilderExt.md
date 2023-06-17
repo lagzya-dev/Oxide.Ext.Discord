@@ -14,7 +14,7 @@ public static class StringBuilderExt
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [StringBuilderExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/StringBuilderExt.cs)
 

@@ -28,7 +28,7 @@ public class ResponseError : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../Exceptions/BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Entities.Api](./ApiNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Api](./ApiNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ResponseError.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Api/ResponseError.cs)
 

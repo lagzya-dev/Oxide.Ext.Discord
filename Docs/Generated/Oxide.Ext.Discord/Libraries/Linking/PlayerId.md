@@ -20,7 +20,7 @@ public struct PlayerId : IEquatable<PlayerId>
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [PlayerId.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Linking/PlayerId.cs)
 

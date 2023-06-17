@@ -14,7 +14,7 @@ public interface IFileAttachments
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [IFileAttachments.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/IFileAttachments.cs)
 

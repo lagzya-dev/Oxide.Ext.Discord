@@ -17,7 +17,7 @@ public enum SocketState : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [SocketState.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/SocketState.cs)
 

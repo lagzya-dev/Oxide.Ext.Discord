@@ -22,7 +22,7 @@ public class DiscordEmbedFieldTemplate : IBulkTemplate<EmbedField>
 
 * interface [IBulkTemplate&lt;T&gt;](../../../Interfaces/Templates/IBulkTemplate-1.md)
 * class [EmbedField](../../../Entities/Messages/Embeds/EmbedField.md)
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordEmbedFieldTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Embeds/DiscordEmbedFieldTemplate.cs)
 

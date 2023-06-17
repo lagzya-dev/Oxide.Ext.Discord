@@ -17,7 +17,7 @@ public class ApplicationSubCommandBuilder :
 
 * class [BaseSubCommandBuilder&lt;TBuilder,TParent&gt;](./BaseBuilders/BaseSubCommandBuilder-2.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ApplicationSubCommandBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationSubCommandBuilder.cs)
 

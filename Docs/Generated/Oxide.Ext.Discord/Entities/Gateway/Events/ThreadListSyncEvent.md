@@ -18,7 +18,7 @@ public class ThreadListSyncEvent
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ThreadListSyncEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/ThreadListSyncEvent.cs)
 

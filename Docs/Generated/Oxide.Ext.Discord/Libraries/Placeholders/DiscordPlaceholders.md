@@ -24,7 +24,7 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 ## See Also
 
 * class [BaseDiscordLibrary&lt;TLibrary&gt;](../BaseDiscordLibrary-1.md)
-* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/DiscordPlaceholders.cs)
 

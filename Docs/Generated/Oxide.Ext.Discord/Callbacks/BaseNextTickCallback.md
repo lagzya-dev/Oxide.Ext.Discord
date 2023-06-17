@@ -16,7 +16,7 @@ public abstract class BaseNextTickCallback : BaseCallback
 ## See Also
 
 * class [BaseCallback](./BaseCallback.md)
-* namespace [Oxide.Ext.Discord.Callbacks](./CallbacksNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Callbacks](./CallbacksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BaseNextTickCallback.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Callbacks/BaseNextTickCallback.cs)
 

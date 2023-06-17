@@ -17,7 +17,7 @@ public interface IWebSocketEventHandler
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Interfaces.WebSockets](./WebSocketsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Interfaces.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [IWebSocketEventHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/WebSockets/IWebSocketEventHandler.cs)
 

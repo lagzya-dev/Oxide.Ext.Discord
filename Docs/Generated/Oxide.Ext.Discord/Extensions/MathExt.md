@@ -16,7 +16,7 @@ public static class MathExt
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [MathExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/MathExt.cs)
 

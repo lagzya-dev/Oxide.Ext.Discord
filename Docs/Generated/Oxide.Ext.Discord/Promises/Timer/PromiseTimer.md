@@ -18,7 +18,7 @@ public sealed class PromiseTimer : Singleton<PromiseTimer>
 ## See Also
 
 * class [Singleton&lt;T&gt;](../../Singleton/Singleton-1.md)
-* namespace [Oxide.Ext.Discord.Promises.Timer](./TimerNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Promises.Timer](./TimerNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [PromiseTimer.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Promises/Timer/PromiseTimer.cs)
 

@@ -9,7 +9,7 @@ public class InvalidSelectMenuComponentException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
 * [InvalidSelectMenuComponentException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Interactions/MessageComponents/InvalidSelectMenuComponentException.cs)
 

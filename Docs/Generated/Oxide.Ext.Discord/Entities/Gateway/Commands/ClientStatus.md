@@ -17,7 +17,7 @@ public class ClientStatus
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ClientStatus.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Commands/ClientStatus.cs)
 

@@ -18,7 +18,7 @@ public class DiscordSubscription : IDebugLoggable
 ## See Also
 
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
-* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordSubscription.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Subscription/DiscordSubscription.cs)
 

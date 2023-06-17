@@ -10,7 +10,7 @@ public class DiscordModalTemplates : BaseMessageTemplateLibrary<DiscordModalTemp
 
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](../BaseMessageTemplateLibrary-1.md)
 * class [DiscordModalTemplate](./DiscordModalTemplate.md)
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Modals](./ModalsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Modals](./ModalsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordModalTemplates.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Modals/DiscordModalTemplates.cs)
 

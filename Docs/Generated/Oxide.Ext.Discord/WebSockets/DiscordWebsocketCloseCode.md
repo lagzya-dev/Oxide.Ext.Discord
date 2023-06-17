@@ -29,7 +29,7 @@ public enum DiscordWebsocketCloseCode
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordWebsocketCloseCode.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/DiscordWebsocketCloseCode.cs)
 

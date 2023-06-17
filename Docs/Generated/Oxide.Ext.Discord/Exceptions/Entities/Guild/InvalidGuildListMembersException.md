@@ -9,7 +9,7 @@ public class InvalidGuildListMembersException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Guild](./GuildNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Guild](./GuildNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InvalidGuildListMembersException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Guild/InvalidGuildListMembersException.cs)
 

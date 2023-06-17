@@ -9,7 +9,7 @@ public class DiscordTemplateException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Libraries](./LibrariesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordTemplateException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Libraries/DiscordTemplateException.cs)
 

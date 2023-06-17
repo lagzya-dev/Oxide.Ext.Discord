@@ -9,7 +9,7 @@ public class InvalidGuildScheduledEventLookupException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents](./ScheduledEventsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents](./ScheduledEventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
 * [InvalidGuildScheduledEventLookupException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Guild/ScheduledEvents/InvalidGuildScheduledEventLookupException.cs)
 

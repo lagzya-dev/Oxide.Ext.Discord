@@ -17,7 +17,7 @@ public static class TimeHelpers
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [TimeHelpers.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Helpers/TimeHelpers.cs)
 

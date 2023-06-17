@@ -42,7 +42,7 @@ public static class DiscordFormatting
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordFormatting.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Helpers/DiscordFormatting.cs)
 

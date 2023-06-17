@@ -16,7 +16,7 @@ public sealed class DiscordPluginCache : Singleton<DiscordPluginCache>
 ## See Also
 
 * class [Singleton&lt;T&gt;](../Singleton/Singleton-1.md)
-* namespace [Oxide.Ext.Discord.Cache](./CacheNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Cache](./CacheNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordPluginCache.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Cache/DiscordPluginCache.cs)
 

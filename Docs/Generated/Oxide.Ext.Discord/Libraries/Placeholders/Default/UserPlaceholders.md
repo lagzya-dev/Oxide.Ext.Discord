@@ -22,7 +22,7 @@ public static class UserPlaceholders
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [UserPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/UserPlaceholders.cs)
 

@@ -15,7 +15,7 @@ public abstract class BaseDiscordException : Exception
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Exceptions](./ExceptionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions](./ExceptionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BaseDiscordException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/BaseDiscordException.cs)
 

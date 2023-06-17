@@ -16,7 +16,7 @@ public class IntegrationAccount
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Integrations](./IntegrationsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Integrations](./IntegrationsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [IntegrationAccount.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Integrations/IntegrationAccount.cs)
 

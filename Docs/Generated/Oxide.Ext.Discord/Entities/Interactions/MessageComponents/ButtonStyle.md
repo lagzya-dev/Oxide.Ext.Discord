@@ -18,7 +18,7 @@ public enum ButtonStyle : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ButtonStyle.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/ButtonStyle.cs)
 

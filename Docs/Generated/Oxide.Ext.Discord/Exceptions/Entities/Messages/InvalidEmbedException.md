@@ -9,7 +9,7 @@ public class InvalidEmbedException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Messages](./MessagesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InvalidEmbedException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Messages/InvalidEmbedException.cs)
 

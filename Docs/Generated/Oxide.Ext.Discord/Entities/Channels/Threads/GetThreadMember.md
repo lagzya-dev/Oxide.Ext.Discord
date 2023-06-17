@@ -17,7 +17,7 @@ public class GetThreadMember : IDiscordQueryString
 ## See Also
 
 * interface [IDiscordQueryString](../../../Interfaces/IDiscordQueryString.md)
-* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [GetThreadMember.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Threads/GetThreadMember.cs)
 

@@ -34,7 +34,7 @@ public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> :
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder-2.md)
 * class [MessageCreate](../../../Entities/Messages/MessageCreate.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [BaseChannelMessageBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseChannelMessageBuilder.cs)
 

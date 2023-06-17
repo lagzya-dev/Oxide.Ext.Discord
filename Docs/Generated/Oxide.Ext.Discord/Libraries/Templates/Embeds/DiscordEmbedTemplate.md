@@ -30,7 +30,7 @@ public class DiscordEmbedTemplate : IBulkTemplate<DiscordEmbed>
 
 * interface [IBulkTemplate&lt;T&gt;](../../../Interfaces/Templates/IBulkTemplate-1.md)
 * class [DiscordEmbed](../../../Entities/Messages/Embeds/DiscordEmbed.md)
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordEmbedTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Embeds/DiscordEmbedTemplate.cs)
 

@@ -119,7 +119,7 @@ public static class DiscordExtHooks
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordExtHooks.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Constants/DiscordExtHooks.cs)
 

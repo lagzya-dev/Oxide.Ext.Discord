@@ -10,7 +10,7 @@ public class DiscordEmbedFieldTemplates : BaseMessageTemplateLibrary<DiscordEmbe
 
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](../BaseMessageTemplateLibrary-1.md)
 * class [DiscordEmbedFieldTemplate](./DiscordEmbedFieldTemplate.md)
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordEmbedFieldTemplates.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Embeds/DiscordEmbedFieldTemplates.cs)
 

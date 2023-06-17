@@ -15,7 +15,7 @@ public class DiscordHeartbeatHandler
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.WebSockets.Handlers](./HandlersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.WebSockets.Handlers](./HandlersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordHeartbeatHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/Handlers/DiscordHeartbeatHandler.cs)
 

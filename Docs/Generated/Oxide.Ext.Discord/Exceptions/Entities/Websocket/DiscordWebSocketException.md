@@ -9,7 +9,7 @@ public class DiscordWebSocketException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Websocket](./WebsocketNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Websocket](./WebsocketNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordWebSocketException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Websocket/DiscordWebSocketException.cs)
 

@@ -9,7 +9,7 @@ public class InvalidGuildScheduledEventException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents](./ScheduledEventsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents](./ScheduledEventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
 * [InvalidGuildScheduledEventException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Guild/ScheduledEvents/InvalidGuildScheduledEventException.cs)
 

@@ -15,7 +15,7 @@ public interface IDiscordLinkPlugin : IDiscordPlugin
 ## See Also
 
 * interface [IDiscordPlugin](../../Interfaces/IDiscordPlugin.md)
-* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [IDiscordLinkPlugin.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Linking/IDiscordLinkPlugin.cs)
 

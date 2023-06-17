@@ -25,7 +25,7 @@ public class DiscordJsonWriter : BasePoolable
 ## See Also
 
 * class [BasePoolable](../../Pooling/BasePoolable.md)
-* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordJsonWriter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Serialization/DiscordJsonWriter.cs)
 

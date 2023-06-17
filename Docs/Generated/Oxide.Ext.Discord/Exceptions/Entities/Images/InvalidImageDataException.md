@@ -9,7 +9,7 @@ public class InvalidImageDataException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Images](./ImagesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Images](./ImagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InvalidImageDataException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Images/InvalidImageDataException.cs)
 

@@ -33,7 +33,7 @@ public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>, IDebugLoggable
 
 * class [BaseDiscordLibrary&lt;TLibrary&gt;](../BaseDiscordLibrary-1.md)
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
-* namespace [Oxide.Ext.Discord.Libraries.Command](./CommandNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Command](./CommandNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordCommand.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Command/DiscordCommand.cs)
 

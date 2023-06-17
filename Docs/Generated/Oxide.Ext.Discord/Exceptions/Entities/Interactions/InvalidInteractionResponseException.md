@@ -9,7 +9,7 @@ public class InvalidInteractionResponseException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Interactions](./InteractionsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InvalidInteractionResponseException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Interactions/InvalidInteractionResponseException.cs)
 

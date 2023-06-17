@@ -19,7 +19,7 @@ public interface IDiscordCacheable<in T>
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [IDiscordCacheable.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/IDiscordCacheable.cs)
 

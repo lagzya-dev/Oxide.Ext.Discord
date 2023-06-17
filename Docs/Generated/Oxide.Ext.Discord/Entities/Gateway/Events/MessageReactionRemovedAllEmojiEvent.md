@@ -16,7 +16,7 @@ public class MessageReactionRemovedAllEmojiEvent : MessageReactionRemovedAllEven
 ## See Also
 
 * class [MessageReactionRemovedAllEvent](./MessageReactionRemovedAllEvent.md)
-* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [MessageReactionRemovedAllEmojiEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/MessageReactionRemovedAllEmojiEvent.cs)
 

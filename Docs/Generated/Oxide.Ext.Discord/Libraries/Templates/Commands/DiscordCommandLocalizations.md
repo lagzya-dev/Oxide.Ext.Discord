@@ -18,7 +18,7 @@ public class DiscordCommandLocalizations : BaseTemplateLibrary<DiscordCommandLoc
 
 * class [BaseTemplateLibrary&lt;TTemplate&gt;](../BaseTemplateLibrary-1.md)
 * class [DiscordCommandLocalization](./DiscordCommandLocalization.md)
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordCommandLocalizations.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Commands/DiscordCommandLocalizations.cs)
 

@@ -38,7 +38,7 @@ public abstract class BasePool<TPooled, TPool> : IPool<TPooled>
 ## See Also
 
 * interface [IPool&lt;T&gt;](./IPool-1.md)
-* namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BasePool.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Pooling/BasePool.cs)
 

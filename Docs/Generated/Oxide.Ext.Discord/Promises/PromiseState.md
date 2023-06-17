@@ -16,7 +16,7 @@ public enum PromiseState : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [PromiseState.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Promises/PromiseState.cs)
 

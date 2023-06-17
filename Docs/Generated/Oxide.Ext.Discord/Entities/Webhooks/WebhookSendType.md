@@ -16,7 +16,7 @@ public enum WebhookSendType : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Webhooks](./WebhooksNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Webhooks](./WebhooksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [WebhookSendType.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Webhooks/WebhookSendType.cs)
 

@@ -24,7 +24,7 @@ public class CommandPayload : BasePoolable
 ## See Also
 
 * class [BasePoolable](../../Pooling/BasePoolable.md)
-* namespace [Oxide.Ext.Discord.Entities.Gateway](./GatewayNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway](./GatewayNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [CommandPayload.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/CommandPayload.cs)
 

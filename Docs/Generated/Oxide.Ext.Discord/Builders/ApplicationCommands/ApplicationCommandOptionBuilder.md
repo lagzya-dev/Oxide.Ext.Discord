@@ -11,7 +11,7 @@ public class ApplicationCommandOptionBuilder :
 
 * class [BaseCommandOptionBuilder&lt;TBuilder,TParent&gt;](./BaseBuilders/BaseCommandOptionBuilder-2.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ApplicationCommandOptionBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandOptionBuilder.cs)
 

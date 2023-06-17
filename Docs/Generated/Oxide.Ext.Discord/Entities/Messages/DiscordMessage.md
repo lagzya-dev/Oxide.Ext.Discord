@@ -70,7 +70,7 @@ public class DiscordMessage : IDiscordMessageTemplate, IFileAttachments
 
 * interface [IDiscordMessageTemplate](../../Interfaces/Entities/Messages/IDiscordMessageTemplate.md)
 * interface [IFileAttachments](../../Interfaces/IFileAttachments.md)
-* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordMessage.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/DiscordMessage.cs)
 

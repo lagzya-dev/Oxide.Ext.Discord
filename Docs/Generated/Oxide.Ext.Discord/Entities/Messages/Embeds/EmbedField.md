@@ -19,7 +19,7 @@ public class EmbedField
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [EmbedField.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedField.cs)
 

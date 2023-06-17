@@ -19,7 +19,7 @@ public struct DiscordImageData
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Images](./ImagesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Images](./ImagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordImageData.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Images/DiscordImageData.cs)
 

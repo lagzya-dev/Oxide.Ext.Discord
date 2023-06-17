@@ -27,7 +27,7 @@ public class QueryStringBuilder : BasePoolable
 ## See Also
 
 * class [BasePoolable](../Pooling/BasePoolable.md)
-* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [QueryStringBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/QueryStringBuilder.cs)
 

@@ -25,7 +25,7 @@ public enum DiscordHttpStatusCode : ushort
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Api](./ApiNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Api](./ApiNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordHttpStatusCode.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Api/DiscordHttpStatusCode.cs)
 

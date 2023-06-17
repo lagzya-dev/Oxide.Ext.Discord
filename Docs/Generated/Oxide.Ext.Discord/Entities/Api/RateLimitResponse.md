@@ -30,7 +30,7 @@ public class RateLimitResponse : BasePoolable
 ## See Also
 
 * class [BasePoolable](../../Pooling/BasePoolable.md)
-* namespace [Oxide.Ext.Discord.Entities.Api](./ApiNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Api](./ApiNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [RateLimitResponse.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Api/RateLimitResponse.cs)
 

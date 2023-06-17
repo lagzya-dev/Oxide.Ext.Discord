@@ -19,7 +19,7 @@ public enum DiscordImageFormat : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Images](./ImagesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Images](./ImagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordImageFormat.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Images/DiscordImageFormat.cs)
 

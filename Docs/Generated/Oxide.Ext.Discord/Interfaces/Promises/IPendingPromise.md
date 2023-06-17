@@ -16,7 +16,7 @@ public interface IPendingPromise : IPromise, IRejectable
 
 * interface [IPromise](./IPromise.md)
 * interface [IRejectable](./IRejectable.md)
-* namespace [Oxide.Ext.Discord.Interfaces.Promises](./PromisesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Interfaces.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [IPendingPromise.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/Promises/IPendingPromise.cs)
 

@@ -18,7 +18,7 @@ public abstract class BaseAsyncCallback : BasePoolable
 ## See Also
 
 * class [BasePoolable](../Pooling/BasePoolable.md)
-* namespace [Oxide.Ext.Discord.Callbacks](./CallbacksNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Callbacks](./CallbacksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BaseAsyncCallback.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Callbacks/BaseAsyncCallback.cs)
 

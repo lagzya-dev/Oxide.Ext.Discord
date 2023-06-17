@@ -22,7 +22,7 @@ public abstract class BaseComponentTemplate
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [BaseComponentTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Components/BaseComponentTemplate.cs)
 

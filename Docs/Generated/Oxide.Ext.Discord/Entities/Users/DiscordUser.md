@@ -59,7 +59,7 @@ public class DiscordUser : IDebugLoggable, IDiscordCacheable<DiscordUser>, ISnow
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
 * interface [IDiscordCacheable&lt;T&gt;](../../Interfaces/IDiscordCacheable-1.md)
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
-* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordUser.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Users/DiscordUser.cs)
 

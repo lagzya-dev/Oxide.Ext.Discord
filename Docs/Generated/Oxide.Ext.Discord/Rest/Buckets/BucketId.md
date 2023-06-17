@@ -22,7 +22,7 @@ public struct BucketId : IEquatable<BucketId>
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Rest.Buckets](./BucketsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Rest.Buckets](./BucketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [BucketId.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Rest/Buckets/BucketId.cs)
 

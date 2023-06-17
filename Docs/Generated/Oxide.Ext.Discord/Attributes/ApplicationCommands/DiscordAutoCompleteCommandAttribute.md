@@ -24,7 +24,7 @@ public sealed class DiscordAutoCompleteCommandAttribute : DiscordApplicationComm
 ## See Also
 
 * class [DiscordApplicationCommandAttribute](./DiscordApplicationCommandAttribute.md)
-* namespace [Oxide.Ext.Discord.Attributes.ApplicationCommands](./ApplicationCommandsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Attributes.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordAutoCompleteCommandAttribute.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Attributes/ApplicationCommands/DiscordAutoCompleteCommandAttribute.cs)
 

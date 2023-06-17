@@ -9,7 +9,7 @@ public class InvalidPoolException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Pooling](./PoolingNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [InvalidPoolException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Pooling/InvalidPoolException.cs)
 

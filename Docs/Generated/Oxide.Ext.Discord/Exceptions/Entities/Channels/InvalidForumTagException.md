@@ -9,7 +9,7 @@ public class InvalidForumTagException : BaseDiscordException
 ## See Also
 
 * class [BaseDiscordException](../../BaseDiscordException.md)
-* namespace [Oxide.Ext.Discord.Exceptions.Entities.Channels](./ChannelsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Exceptions.Entities.Channels](./ChannelsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InvalidForumTagException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Channels/InvalidForumTagException.cs)
 

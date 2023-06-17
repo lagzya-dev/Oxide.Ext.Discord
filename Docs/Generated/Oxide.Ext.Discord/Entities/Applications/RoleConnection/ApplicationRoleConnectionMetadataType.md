@@ -21,7 +21,7 @@ public enum ApplicationRoleConnectionMetadataType : byte
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ApplicationRoleConnectionMetadataType.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Applications/RoleConnection/ApplicationRoleConnectionMetadataType.cs)
 

@@ -23,7 +23,7 @@ public class DiscordClient
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordClient.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Clients/DiscordClient.cs)
 

@@ -25,7 +25,7 @@ public enum ApplicationFlags
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ApplicationFlags.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Applications/ApplicationFlags.cs)
 

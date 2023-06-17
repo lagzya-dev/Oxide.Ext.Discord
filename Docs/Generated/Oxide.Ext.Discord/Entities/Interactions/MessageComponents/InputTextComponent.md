@@ -23,7 +23,7 @@ public class InputTextComponent : BaseInteractableComponent
 ## See Also
 
 * class [BaseInteractableComponent](./BaseInteractableComponent.md)
-* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InputTextComponent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/InputTextComponent.cs)
 

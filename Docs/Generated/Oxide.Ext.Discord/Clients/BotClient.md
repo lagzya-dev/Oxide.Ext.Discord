@@ -37,7 +37,7 @@ public class BotClient : IDebugLoggable
 ## See Also
 
 * interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
-* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BotClient.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Clients/BotClient.cs)
 

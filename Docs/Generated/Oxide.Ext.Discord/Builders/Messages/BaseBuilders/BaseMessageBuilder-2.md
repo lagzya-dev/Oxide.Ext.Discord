@@ -39,7 +39,7 @@ public abstract class BaseMessageBuilder<TMessage, TBuilder>
 ## See Also
 
 * class [BaseMessageCreate](../../../Entities/Messages/BaseMessageCreate.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [BaseMessageBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseMessageBuilder.cs)
 

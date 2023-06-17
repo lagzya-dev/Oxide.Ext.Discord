@@ -24,7 +24,7 @@ public enum ActivityFlags
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Entities.Activities](./ActivitiesNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Entities.Activities](./ActivitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ActivityFlags.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Activities/ActivityFlags.cs)
 

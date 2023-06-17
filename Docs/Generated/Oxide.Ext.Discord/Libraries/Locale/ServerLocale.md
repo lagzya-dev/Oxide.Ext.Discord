@@ -25,7 +25,7 @@ public struct ServerLocale : IEquatable<ServerLocale>
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ServerLocale.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Locale/ServerLocale.cs)
 
