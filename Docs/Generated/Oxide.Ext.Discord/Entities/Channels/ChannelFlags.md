@@ -11,9 +11,9 @@ public enum ChannelFlags
 
 | name | value | description |
 | --- | --- | --- |
-| None | `0x00000000` | Represents no channel flags |
-| Pinned | `0x00000002` | This thread is pinned to the top of its parent GUILD_FORUM channel |
-| RequireTag | `0x00000010` | Whether a tag is required to be specified when creating a thread in a GUILD_FORUM channel. Tags are specified in the applied_tags field. |
+| None | `0` | Represents no channel flags |
+| Pinned | `1 << 1` | This thread is pinned to the top of its parent GUILD_FORUM channel |
+| RequireTag | `1 << 4` | Whether a tag is required to be specified when creating a thread in a GUILD_FORUM channel. Tags are specified in the applied_tags field. |
 
 ## See Also
 

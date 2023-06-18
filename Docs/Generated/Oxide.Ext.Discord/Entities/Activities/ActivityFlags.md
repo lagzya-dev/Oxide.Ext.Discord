@@ -11,16 +11,16 @@ public enum ActivityFlags
 
 | name | value | description |
 | --- | --- | --- |
-| None | `0x00000000` | No Actions can be done to this activity |
-| Instance | `0x00000001` | No Actions can be done to this activity |
-| Join | `0x00000002` | Activity can be joined |
-| Spectate | `0x00000004` | Activity can be spectated |
-| JoinRequest | `0x00000008` | User may request to join activity |
-| Sync | `0x00000010` | User can listen along in spotify |
-| Play | `0x00000020` | User can play this song |
-| PartyPrivacyFriends | `0x00000040` | User is playing an activity in a voice channel with friends |
-| PartyPrivacyVoiceChannel | `0x00000080` | User is playing an activity in a voice channel |
-| Embedded | `0x00000100` | User is playing embedded activity |
+| None | `0` | No Actions can be done to this activity |
+| Instance | `1 << 0` | No Actions can be done to this activity |
+| Join | `1 << 1` | Activity can be joined |
+| Spectate | `1 << 2` | Activity can be spectated |
+| JoinRequest | `1 << 3` | User may request to join activity |
+| Sync | `1 << 4` | User can listen along in spotify |
+| Play | `1 << 5` | User can play this song |
+| PartyPrivacyFriends | `1 << 6` | User is playing an activity in a voice channel with friends |
+| PartyPrivacyVoiceChannel | `1 << 7` | User is playing an activity in a voice channel |
+| Embedded | `1 << 8` | User is playing embedded activity |
 
 ## See Also
 

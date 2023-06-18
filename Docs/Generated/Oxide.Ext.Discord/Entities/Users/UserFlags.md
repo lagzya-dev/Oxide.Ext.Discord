@@ -11,32 +11,32 @@ public enum UserFlags
 
 | name | value | description |
 | --- | --- | --- |
-| None | `0x00000000` | Default value for flags, when none are given to an account. |
-| Staff | `0x00000001` | Flag given to users who are a Discord employee |
-| Partner | `0x00000002` | Flag given to users who are owners of a partnered Discord server |
-| HypeSquad | `0x00000004` | Flag given to users who are HypeSquad Events Member |
-| BugHunterLevel1 | `0x00000008` | Flag given to users who have participated in the 𝐁ug report program and are level 1. |
-| HypeSquadOnlineHouse1 | `0x00000040` | Flag given to users who are in the HypeSquad House of Bravery. |
-| HypeSquadOnlineHouse2 | `0x00000080` | Flag given to users who are in the HypeSquad House of Brilliance. |
-| HypeSquadOnlineHouse3 | `0x00000100` | Flag given to users who are in the HypeSquad House of Balance. |
-| PremiumEarlySupporter | `0x00000200` | Flag given to users who subscribed to Nitro before games were added. |
-| TeamPseudoUser | `0x00000400` | Flag given to users who are part of a team. |
-| BugHunterLevel2 | `0x00004000` | Flag given to users who have participated in the 𝐁ug report program and are level 2. |
-| VerifiedBot | `0x00010000` | Flag given to users who are verified bots. |
-| VerifiedDeveloper | `0x00020000` | Flag given to users that developed bots and early verified their accounts. |
-| CertifiedModerator | `0x00040000` | Flag given to users that are Moderator Programs Alumni |
-| BotHttpInteractions | `0x00080000` | User is a Bot uses only HTTP interactions and is shown in the online member list |
-| ActiveDeveloper | `0x00400000` | User is an [Active Developer](https://support-dev.discord.com/hc/articles/10113997751447) |
-| DiscordEmployee | `0x00000001` | Flag given to users who are a Discord employee. |
-| PartneredServerOwner | `0x00000002` | Flag given to users who are owners of a partnered Discord server. |
-| HyperSquadEvents | `0x00000004` | Flag given to users in HypeSquad events. |
-| HouseBravery | `0x00000040` | Flag given to users who are in the HypeSquad House of Bravery. |
-| HouseBrilliance | `0x00000080` | Flag given to users who are in the HypeSquad House of Brilliance. |
-| HouseBalance | `0x00000100` | Flag given to users who are in the HypeSquad House of Balance. |
-| EarlySupporter | `0x00000200` | Flag given to users who subscribed to Nitro before games were added. |
-| TeamUser | `0x00000400` | Flag given to users who are part of a team. |
-| EarlyVerifiedBotDeveloper | `0x00020000` | Flag given to users that developed bots and early verified their accounts. |
-| DiscordCertifiedModerator | `0x00040000` | Flag given to users that are discord certified moderators |
+| None | `0` | Default value for flags, when none are given to an account. |
+| Staff | `1 << 0` | Flag given to users who are a Discord employee |
+| Partner | `1 << 1` | Flag given to users who are owners of a partnered Discord server |
+| HypeSquad | `1 << 2` | Flag given to users who are HypeSquad Events Member |
+| BugHunterLevel1 | `1 << 3` | Flag given to users who have participated in the 𝐁ug report program and are level 1. |
+| HypeSquadOnlineHouse1 | `1 << 6` | Flag given to users who are in the HypeSquad House of Bravery. |
+| HypeSquadOnlineHouse2 | `1 << 7` | Flag given to users who are in the HypeSquad House of Brilliance. |
+| HypeSquadOnlineHouse3 | `1 << 8` | Flag given to users who are in the HypeSquad House of Balance. |
+| PremiumEarlySupporter | `1 << 9` | Flag given to users who subscribed to Nitro before games were added. |
+| TeamPseudoUser | `1 << 10` | Flag given to users who are part of a team. |
+| BugHunterLevel2 | `1 << 14` | Flag given to users who have participated in the 𝐁ug report program and are level 2. |
+| VerifiedBot | `1 << 16` | Flag given to users who are verified bots. |
+| VerifiedDeveloper | `1 << 17` | Flag given to users that developed bots and early verified their accounts. |
+| CertifiedModerator | `1 << 18` | Flag given to users that are Moderator Programs Alumni |
+| BotHttpInteractions | `1 << 19` | User is a Bot uses only HTTP interactions and is shown in the online member list |
+| ActiveDeveloper | `1 << 22` | User is an [Active Developer](https://support-dev.discord.com/hc/articles/10113997751447) |
+| DiscordEmployee | `1 << 0` | Flag given to users who are a Discord employee. |
+| PartneredServerOwner | `1 << 1` | Flag given to users who are owners of a partnered Discord server. |
+| HyperSquadEvents | `1 << 2` | Flag given to users in HypeSquad events. |
+| HouseBravery | `1 << 6` | Flag given to users who are in the HypeSquad House of Bravery. |
+| HouseBrilliance | `1 << 7` | Flag given to users who are in the HypeSquad House of Brilliance. |
+| HouseBalance | `1 << 8` | Flag given to users who are in the HypeSquad House of Balance. |
+| EarlySupporter | `1 << 9` | Flag given to users who subscribed to Nitro before games were added. |
+| TeamUser | `1 << 10` | Flag given to users who are part of a team. |
+| EarlyVerifiedBotDeveloper | `1 << 17` | Flag given to users that developed bots and early verified their accounts. |
+| DiscordCertifiedModerator | `1 << 18` | Flag given to users that are discord certified moderators |
 
 ## See Also
 

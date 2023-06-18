@@ -1,4 +1,4 @@
-# PlayerNameFormatter.Create method (1 of 2)
+# PlayerNameFormatter.Create method
 
 Create a new Player Name formatter with the given Custom Name Function
 
@@ -16,31 +16,6 @@ A new [`PlayerNameFormatter`](../PlayerNameFormatter.md)
 
 ## See Also
 
-* class [PlayerNameFormatter](../PlayerNameFormatter.md)
-* namespace [Oxide.Ext.Discord.Builders.Interactions.AutoComplete](../PlayerNameFormatter.md)
-* assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
-
----
-
-# PlayerNameFormatter.Create method (2 of 2)
-
-Create a new Player Name formatter with the given [`PlayerDisplayNameMode`](../PlayerDisplayNameMode.md)
-
-```csharp
-public static PlayerNameFormatter Create(PlayerDisplayNameMode mode)
-```
-
-| parameter | description |
-| --- | --- |
-| mode | Mode to use for Player Display Name |
-
-## Return Value
-
-A new [`PlayerNameFormatter`](../PlayerNameFormatter.md)
-
-## See Also
-
-* enum [PlayerDisplayNameMode](../PlayerDisplayNameMode.md)
 * class [PlayerNameFormatter](../PlayerNameFormatter.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions.AutoComplete](../PlayerNameFormatter.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

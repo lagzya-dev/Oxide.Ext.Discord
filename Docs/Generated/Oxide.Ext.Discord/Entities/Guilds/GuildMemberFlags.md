@@ -11,11 +11,11 @@ public enum GuildMemberFlags
 
 | name | value | description |
 | --- | --- | --- |
-| None | `0x00000000` | No Flags |
-| DidRejoin | `0x00000001` | Member has left and rejoined the guild Editable: False |
-| CompletedOnboarding | `0x00000002` | Member has completed onboarding Editable: False |
-| BypassesVerification | `0x00000004` | Member is exempt from guild verification requirements Editable: True |
-| StartedOnboarding | `0x00000008` | Member has started onboarding Editable: False |
+| None | `0` | No Flags |
+| DidRejoin | `1 << 0` | Member has left and rejoined the guild Editable: False |
+| CompletedOnboarding | `1 << 1` | Member has completed onboarding Editable: False |
+| BypassesVerification | `1 << 2` | Member is exempt from guild verification requirements Editable: True |
+| StartedOnboarding | `1 << 3` | Member has started onboarding Editable: False |
 
 ## See Also
 

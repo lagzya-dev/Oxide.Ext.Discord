@@ -11,12 +11,12 @@ public enum SystemChannelFlags
 
 | name | value | description |
 | --- | --- | --- |
-| SuppressJoinNotifications | `0x00000001` | Suppress member join notifications |
-| SuppressPremiumSubscriptions | `0x00000002` | Suppress server boost notifications |
-| SuppressGuildReminderNotifications | `0x00000004` | Suppress server setup tips |
-| SuppressJoinNotificationReplies | `0x00000008` | Hide member join sticker reply buttons |
-| SuppressRoleSubscriptionPurchaseNotifications | `0x00000010` | Suppress role subscription purchase and renewal notifications |
-| SuppressRoleSubscriptionPurchaseNotificationReplies | `0x00000020` | Hide role subscription sticker reply buttons |
+| SuppressJoinNotifications | `1 << 0` | Suppress member join notifications |
+| SuppressPremiumSubscriptions | `1 << 1` | Suppress server boost notifications |
+| SuppressGuildReminderNotifications | `1 << 2` | Suppress server setup tips |
+| SuppressJoinNotificationReplies | `1 << 3` | Hide member join sticker reply buttons |
+| SuppressRoleSubscriptionPurchaseNotifications | `1 << 4` | Suppress role subscription purchase and renewal notifications |
+| SuppressRoleSubscriptionPurchaseNotificationReplies | `1 << 5` | Hide role subscription sticker reply buttons |
 
 ## See Also
 

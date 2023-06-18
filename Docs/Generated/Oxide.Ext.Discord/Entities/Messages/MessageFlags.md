@@ -11,18 +11,18 @@ public enum MessageFlags
 
 | name | value | description |
 | --- | --- | --- |
-| None | `0x00000000` | This message has no flags |
-| CrossPosted | `0x00000001` | This message has been published to subscribed channels (via Channel Following) |
-| IsCrossPost | `0x00000002` | This message originated from a message in another channel (via Channel Following) |
-| SuppressEmbeds | `0x00000004` | Do not include any embeds when serializing this message |
-| SourceMessageDeleted | `0x00000008` | The source message for this crosspost has been deleted (via Channel Following) |
-| Urgent | `0x00000010` | This message came from the urgent message system |
-| HasThread | `0x00000020` | This message has an associated thread, with the same id as the message |
-| Ephemeral | `0x00000040` | This message is only visible to the user who invoked the Interaction |
-| Loading | `0x00000080` | This message is an Interaction Response and the bot is "thinking" |
-| FailedToMentionSomeRolesInThread | `0x00000100` | This message failed to mention some roles and add their members to the thread |
-| SuppressNotifications | `0x00001000` | This message will not trigger push and desktop notifications |
-| IsVoiceMessage | `0x00002000` | This message is a voice message |
+| None | `0` | This message has no flags |
+| CrossPosted | `1 << 0` | This message has been published to subscribed channels (via Channel Following) |
+| IsCrossPost | `1 << 1` | This message originated from a message in another channel (via Channel Following) |
+| SuppressEmbeds | `1 << 2` | Do not include any embeds when serializing this message |
+| SourceMessageDeleted | `1 << 3` | The source message for this crosspost has been deleted (via Channel Following) |
+| Urgent | `1 << 4` | This message came from the urgent message system |
+| HasThread | `1 << 5` | This message has an associated thread, with the same id as the message |
+| Ephemeral | `1 << 6` | This message is only visible to the user who invoked the Interaction |
+| Loading | `1 << 7` | This message is an Interaction Response and the bot is "thinking" |
+| FailedToMentionSomeRolesInThread | `1 << 8` | This message failed to mention some roles and add their members to the thread |
+| SuppressNotifications | `1 << 12` | This message will not trigger push and desktop notifications |
+| IsVoiceMessage | `1 << 13` | This message is a voice message |
 
 ## See Also
 
