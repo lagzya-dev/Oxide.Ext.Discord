@@ -277,6 +277,20 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         }
 
         /// <summary>
+        /// Adds a player by player Id to the list
+        /// </summary>
+        /// <param name="playerId">Player ID to add</param>
+        /// <param name="formatter">Formatter for the player name</param>
+        public void AddByPlayerId(string playerId, PlayerNameFormatter formatter = null)
+        {
+            IPlayer player = ServerPlayerCache.Instance.GetPlayerById(playerId);
+            if (player != null)
+            {
+                AddPlayer(player, formatter ?? PlayerNameFormatter.Default, null);
+            }
+        }
+
+        /// <summary>
         /// Adds a list of plugins that can be loaded
         /// </summary>
         /// <param name="filter">String to filter by</param>
@@ -326,21 +340,35 @@ namespace Oxide.Ext.Discord.Builders.Interactions
                 return;
             }
             
-            List<CommandOptionChoice> choices = _message.Choices;
             foreach (IPlayer player in list)
             {
-                string name = formatter.Format(player);
-                if (addedList == null || addedList.Add(player.Id))
+                if (!AddPlayer(player, formatter, addedList))
                 {
-                    choices.Add(new CommandOptionChoice(name, player.Id));
-                    if (!CanAddChoice())
-                    {
-                        return;
-                    }
+                    return;
                 }
             }
         }
         
+        private bool AddPlayer(IPlayer player, PlayerNameFormatter formatter, HashSet<string> addedList)
+        {
+            if (!CanAddChoice())
+            {
+                return false;
+            }
+            
+            string name = formatter.Format(player);
+            if (addedList == null || addedList.Add(player.Id))
+            {
+                _message.Choices.Add(new CommandOptionChoice(name, player.Id));
+                if (!CanAddChoice())
+                {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
         private static bool IsMatch(string value, string filter, StringComparison comparison, AutoCompleteSearchMode search)
         {
             if (string.IsNullOrEmpty(filter))

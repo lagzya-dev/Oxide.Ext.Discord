@@ -13,6 +13,7 @@ public class InteractionAutoCompleteBuilder
 | [InteractionAutoCompleteBuilder](InteractionAutoCompleteBuilder/InteractionAutoCompleteBuilder.md)(…) | Constructor |
 | [AddAllOnlineFirstPlayers](InteractionAutoCompleteBuilder/AddAllOnlineFirstPlayers.md)(…) | Adds Online Players to the list first If there is still space add Offline Players |
 | [AddAllPlayers](InteractionAutoCompleteBuilder/AddAllPlayers.md)(…) | Adds Any Player to the list |
+| [AddByPlayerId](InteractionAutoCompleteBuilder/AddByPlayerId.md)(…) | Adds a player by player Id to the list |
 | [AddChoice](InteractionAutoCompleteBuilder/AddChoice.md)(…) | Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response (3 methods) |
 | [AddChoices](InteractionAutoCompleteBuilder/AddChoices.md)(…) | Adds a collection of [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response |
 | [AddGroups](InteractionAutoCompleteBuilder/AddGroups.md)(…) | Adds Oxide Groups to the AutoComplete |

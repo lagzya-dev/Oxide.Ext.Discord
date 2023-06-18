@@ -190,7 +190,7 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// </summary>
         /// <param name="discordId">Discord ID to get IPlayer for</param>
         /// <returns>IPlayer for the given Discord ID; null otherwise</returns>
-        public IPlayer GetPlayer(Snowflake discordId) => _links.TryGetValue(discordId, out PlayerId playerId) ? ServerPlayerCache.Instance.GetPlayerById(playerId.Id) : null;
+        public IPlayer GetPlayer(Snowflake discordId) => _links.TryGetValue(discordId, out PlayerId playerId) ? ServerPlayerCache.Instance.GetOrAddPlayerById(playerId.Id) : null;
 
         /// <summary>
         /// Returns the Discord ID for the given Steam ID

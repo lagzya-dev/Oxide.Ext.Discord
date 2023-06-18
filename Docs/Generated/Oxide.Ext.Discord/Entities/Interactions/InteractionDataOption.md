@@ -15,8 +15,11 @@ public class InteractionDataOption
 | [Name](InteractionDataOption/Name.md) { get; set; } | The name of the parameter |
 | [Options](InteractionDataOption/Options.md) { get; set; } | Present if this option is a group or subcommand See [`InteractionDataOption`](./InteractionDataOption.md) |
 | [Type](InteractionDataOption/Type.md) { get; set; } | Value of ApplicationCommandOptionType |
-| [GetValue&lt;T&gt;](InteractionDataOption/GetValue.md)() | Returns the Value of the option casted to T Supported Conversions CommandOptionType.String =&gt; string CommandOptionType.Integer =&gt; byte, sbyte, short, ushort, int, uint, long, ulong CommandOptionType.Number =&gt; float, double CommandOptionType.Boolean =&gt; bool CommandOptionType.User =&gt; ulong CommandOptionType.Channel =&gt; ulong CommandOptionType.Role =&gt; ulong |
-| [GetValueAsSnowflake](InteractionDataOption/GetValueAsSnowflake.md)() | Returns the value type |
+| [GetBool](InteractionDataOption/GetBool.md)() |  |
+| [GetInt](InteractionDataOption/GetInt.md)() |  |
+| [GetNumber](InteractionDataOption/GetNumber.md)() |  |
+| [GetSnowflake](InteractionDataOption/GetSnowflake.md)() |  |
+| [GetString](InteractionDataOption/GetString.md)() |  |
 
 ## See Also
 

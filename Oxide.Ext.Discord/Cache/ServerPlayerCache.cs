@@ -32,13 +32,20 @@ namespace Oxide.Ext.Discord.Cache
         {
             Cache = new ReadOnlyDictionary<string, IPlayer>(_cache);
         }
+
+        /// <summary>
+        /// Returns the <see cref="IPlayer"/> for the given ID
+        /// </summary>
+        /// <param name="id">ID of the player</param>
+        /// <returns><see cref="IPlayer"/></returns>
+        public IPlayer GetPlayerById(string id) => _cache.TryGetValue(id, out IPlayer player) ? player : null;
         
         /// <summary>
         /// Returns the <see cref="IPlayer"/> for the given ID
         /// </summary>
         /// <param name="id">ID of the player</param>
         /// <returns><see cref="IPlayer"/></returns>
-        public IPlayer GetPlayerById(string id) => _cache.GetOrAdd(id, _valueFactory);
+        internal IPlayer GetOrAddPlayerById(string id) => _cache.GetOrAdd(id, _valueFactory);
 
         /// <summary>
         /// Returns an <see cref="IEnumerable{T}"/> matching player names that are online

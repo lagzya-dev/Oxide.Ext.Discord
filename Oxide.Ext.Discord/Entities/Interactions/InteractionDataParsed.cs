@@ -183,7 +183,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not a string</exception>
         public string GetString(string name, string @default = default(string))
         {
-            return GetArg(name, CommandOptionType.String)?.GetValue<string>() ?? @default;
+            return GetArg(name, CommandOptionType.String)?.GetString() ?? @default;
         }
         
         /// <summary>
@@ -196,7 +196,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not an int</exception>
         public int GetInt(string name, int @default = default(int))
         {
-            return GetArg(name, CommandOptionType.Integer)?.GetValue<int>() ?? @default;
+            return GetArg(name, CommandOptionType.Integer)?.GetInt() ?? @default;
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not a bool</exception>
         public bool GetBool(string name, bool @default = default(bool))
         {
-            return GetArg(name, CommandOptionType.Boolean)?.GetValue<bool>() ?? @default;
+            return GetArg(name, CommandOptionType.Boolean)?.GetBool() ?? @default;
         }
         
         /// <summary>
@@ -221,7 +221,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public DiscordUser GetUser(string name)
         {
             InteractionDataOption arg = GetArg(name, CommandOptionType.User);
-            return arg != null ? _interaction.Data.Resolved.Users[arg.GetValueAsSnowflake()] : null;
+            return arg != null ? _interaction.Data.Resolved.Users[arg.GetSnowflake()] : null;
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public DiscordChannel GetChannel(string name)
         {
             InteractionDataOption arg = GetArg(name, CommandOptionType.Channel);
-            return arg != null ? _interaction.Data.Resolved.Channels[arg.GetValueAsSnowflake()] : null;
+            return arg != null ? _interaction.Data.Resolved.Channels[arg.GetSnowflake()] : null;
         }
         
         /// <summary>
@@ -245,7 +245,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public DiscordRole GetRole(string name)
         {
             InteractionDataOption arg = GetArg(name, CommandOptionType.Role);
-            return arg != null ? _interaction.Data.Resolved.Roles[arg.GetValueAsSnowflake()] : null;
+            return arg != null ? _interaction.Data.Resolved.Roles[arg.GetSnowflake()] : null;
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not a double</exception>
         public double GetNumber(string name, double @default = default(double))
         {
-            return GetArg(name, CommandOptionType.Number)?.GetValue<double>() ?? @default;
+            return GetArg(name, CommandOptionType.Number)?.GetNumber() ?? @default;
         }
         
         /// <summary>
@@ -271,7 +271,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not a double</exception>
         public float GetFloat(string name, float @default = default(float))
         {
-            return GetArg(name, CommandOptionType.Number)?.GetValue<float>() ?? @default;
+            return (float?)GetArg(name, CommandOptionType.Number)?.GetNumber() ?? @default;
         }
 
         private InteractionDataOption GetArg(string name, CommandOptionType requested)

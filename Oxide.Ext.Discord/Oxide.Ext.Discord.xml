@@ -1061,6 +1061,13 @@
             <param name="filter">String to filter by</param>
             <param name="formatter">Formatter for the player name</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddByPlayerId(System.String,Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerNameFormatter)">
+            <summary>
+            Adds a player by player Id to the list
+            </summary>
+            <param name="playerId">Player ID to add</param>
+            <param name="formatter">Formatter for the player name</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddLoadablePlugins(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode)">
             <summary>
             Adds a list of plugins that can be loaded
@@ -1654,6 +1661,13 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Cache.ServerPlayerCache.GetPlayerById(System.String)">
+            <summary>
+            Returns the <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> for the given ID
+            </summary>
+            <param name="id">ID of the player</param>
+            <returns><see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.ServerPlayerCache.GetOrAddPlayerById(System.String)">
             <summary>
             Returns the <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> for the given ID
             </summary>
@@ -11585,28 +11599,6 @@
             The value of the option resulting from user input
             Value can be string, integer, or double, or boolean type
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.GetValue``1">
-            <summary>
-            Returns the Value of the option casted to T
-            Supported Conversions
-            CommandOptionType.String => string
-            CommandOptionType.Integer => byte, sbyte, short, ushort, int, uint, long, ulong
-            CommandOptionType.Number => float, double
-            CommandOptionType.Boolean => bool
-            CommandOptionType.User => ulong
-            CommandOptionType.Channel => ulong
-            CommandOptionType.Role => ulong
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if type isn't in a valid range for Type</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.GetValueAsSnowflake">
-            <summary>
-            Returns the value type
-            </summary>
-            <returns></returns>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Options">
             <summary>
@@ -24290,27 +24282,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"9c855ce3"
+            => @"4f3d5d4a"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"9c855ce3d1ca1b12cf8ce0fd5ec1f90cc1c686b7"
+            => @"4f3d5d4a1f4107eed7d5a104ce5146668052be21"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-18T11:00:14-05:00"
+            => @"2023-06-18T11:09:45-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"565"
+            => @"566"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-565-g9c855ce3"
+            => @"2.1.9-566-g4f3d5d4a"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24345,7 +24337,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"574"
+            => @"575"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
