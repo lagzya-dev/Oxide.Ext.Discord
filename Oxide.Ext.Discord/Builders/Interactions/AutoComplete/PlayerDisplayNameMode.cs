@@ -21,8 +21,11 @@ namespace Oxide.Ext.Discord.Builders.Interactions.AutoComplete
         /// <summary>
         /// Include Steam ID
         /// </summary>
-        IncludeSteamId = 1 << 1
+        IncludeSteamId = 1 << 1,
         
-        
+        /// <summary>
+        /// All display name options
+        /// </summary>
+        All = Default | IncludeClanName | IncludeSteamId
     }
 }

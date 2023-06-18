@@ -832,6 +832,11 @@
             Include Steam ID
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode.All">
+            <summary>
+            All display name options
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerNameFormatter">
             <summary>
             Formatter for player names
@@ -20019,6 +20024,12 @@
             <param name="timestamp">Unix timestamp</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddNowTimestamp">
+            <summary>
+            Adds a Now Unix Timestamp
+            </summary>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddSnowflake(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.Snowflake"/>
@@ -24279,27 +24290,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"533c7bf4"
+            => @"af7a0dac"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"533c7bf4d5d9b6a07010c5d37002653c64ed97ed"
+            => @"af7a0dacd15886a22bb3cdc5a5f353dd80d6369a"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-17T15:17:47-05:00"
+            => @"2023-06-17T15:51:00-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"562"
+            => @"563"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-562-g533c7bf4"
+            => @"2.1.9-563-gaf7a0dac"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24334,7 +24345,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"571"
+            => @"572"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">

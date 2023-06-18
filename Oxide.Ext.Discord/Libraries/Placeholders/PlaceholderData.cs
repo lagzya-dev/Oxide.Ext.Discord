@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Pooling;
@@ -183,6 +184,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="timestamp">Unix timestamp</param>
         /// <returns>This</returns>
         public PlaceholderData AddTimestamp(long timestamp) => Add(TimestampPlaceholders.TimestampName, timestamp);
+        
+        /// <summary>
+        /// Adds a Now Unix Timestamp
+        /// </summary>
+        /// <returns>This</returns>
+        public PlaceholderData AddNowTimestamp() => Add(TimestampPlaceholders.TimestampName, TimeHelpers.SecondsSinceEpoch());
 
         /// <summary>
         /// Adds a <see cref="Snowflake"/>
