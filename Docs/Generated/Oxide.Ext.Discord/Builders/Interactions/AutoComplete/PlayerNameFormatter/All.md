@@ -1,5 +1,7 @@
 # PlayerNameFormatter.All field
 
+Include all name options in the player name
+
 ```csharp
 public static readonly PlayerNameFormatter All;
 ```

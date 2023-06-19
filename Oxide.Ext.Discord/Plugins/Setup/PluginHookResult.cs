@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using Oxide.Core.Plugins;
+﻿using System.Reflection;
 using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Plugins.Setup

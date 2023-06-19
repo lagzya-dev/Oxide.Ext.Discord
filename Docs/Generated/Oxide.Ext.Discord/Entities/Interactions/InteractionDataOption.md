@@ -15,11 +15,11 @@ public class InteractionDataOption
 | [Name](InteractionDataOption/Name.md) { get; set; } | The name of the parameter |
 | [Options](InteractionDataOption/Options.md) { get; set; } | Present if this option is a group or subcommand See [`InteractionDataOption`](./InteractionDataOption.md) |
 | [Type](InteractionDataOption/Type.md) { get; set; } | Value of ApplicationCommandOptionType |
-| [GetBool](InteractionDataOption/GetBool.md)() |  |
-| [GetInt](InteractionDataOption/GetInt.md)() |  |
-| [GetNumber](InteractionDataOption/GetNumber.md)() |  |
-| [GetSnowflake](InteractionDataOption/GetSnowflake.md)() |  |
-| [GetString](InteractionDataOption/GetString.md)() |  |
+| [GetBool](InteractionDataOption/GetBool.md)() | Returns the value as a bool |
+| [GetInt](InteractionDataOption/GetInt.md)() | Returns the value as an int |
+| [GetNumber](InteractionDataOption/GetNumber.md)() | Returns the value as a double |
+| [GetSnowflake](InteractionDataOption/GetSnowflake.md)() | Returns the value as a Snowflake |
+| [GetString](InteractionDataOption/GetString.md)() | Returns the value as a string |
 
 ## See Also
 

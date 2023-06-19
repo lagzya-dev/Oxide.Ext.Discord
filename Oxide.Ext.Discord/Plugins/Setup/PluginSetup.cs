@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
-using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
 
 namespace Oxide.Ext.Discord.Plugins.Setup

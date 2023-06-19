@@ -16,23 +16,23 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
     /// </summary>
     internal abstract class BaseAppCommand : IDebugLoggable
     {
-        internal Plugin Plugin;
-        internal readonly PluginId PluginId;
         internal readonly Snowflake AppId;
         internal readonly AppCommandId CommandId;
-        protected readonly ILogger _logger;
-        public bool IsValid => Plugin != null && Plugin.IsLoaded;
+        internal readonly string PluginName;
+        private readonly PluginId _pluginId;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="plugin">Plugin for the command</param>
         /// <param name="appId">ID of the <see cref="DiscordApplication"/> for the command</param>
-        /// <param name="type">Interaction type for the command</param>
+        /// <param name="commandId">Command ID for the command</param>
+        /// <param name="logger">Logger for the command</param>
         protected BaseAppCommand(Plugin plugin, Snowflake appId, AppCommandId commandId, ILogger logger)
         {
-            Plugin = plugin;
-            PluginId = plugin.Id();
+            PluginName = plugin.FullName();
+            _pluginId = plugin.Id();
             AppId = appId;
             CommandId = commandId;
             _logger = logger;
@@ -62,7 +62,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
             }
         }
 
-        public bool IsForPlugin(PluginId id) => Plugin == null || !Plugin.IsLoaded || PluginId == id;
+        public bool IsForPlugin(PluginId id) => _pluginId == id;
 
         protected abstract string GetCommandType();
 
@@ -73,7 +73,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
         public virtual void LogDebug(DebugLogger logger)
         {
             logger.AppendField("Type", GetCommandType());
-            logger.AppendField("Plugin", Plugin?.FullName() ?? "Unknown Plugin");
+            logger.AppendField("Plugin", PluginName);
             logger.AppendField("Command", CommandId.ToString());
 
         }

@@ -29,14 +29,34 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         [JsonProperty("value")]
         private object Value { get; set; }
 
+        /// <summary>
+        /// Returns the value as a string
+        /// </summary>
+        /// <returns></returns>
         public string GetString() => (string)Value;
 
+        /// <summary>
+        /// Returns the value as an int
+        /// </summary>
+        /// <returns></returns>
         public int GetInt() => (int)Value;
 
+        /// <summary>
+        /// Returns the value as a bool
+        /// </summary>
+        /// <returns></returns>
         public bool GetBool() => (bool)Value;
 
+        /// <summary>
+        /// Returns the value as a double
+        /// </summary>
+        /// <returns></returns>
         public double GetNumber() => (double)Value;
 
+        /// <summary>
+        /// Returns the value as a Snowflake
+        /// </summary>
+        /// <returns></returns>
         public Snowflake GetSnowflake() => new Snowflake((ulong)Value);
 
         /// <summary>

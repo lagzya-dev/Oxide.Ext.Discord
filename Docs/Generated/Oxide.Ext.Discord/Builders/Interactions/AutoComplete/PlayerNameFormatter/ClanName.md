@@ -1,5 +1,7 @@
 # PlayerNameFormatter.ClanName field
 
+Include clan name in the player name
+
 ```csharp
 public static readonly PlayerNameFormatter ClanName;
 ```

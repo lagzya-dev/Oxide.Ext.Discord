@@ -1,4 +1,4 @@
-# DebugLogger.AppendMethod method (1 of 2)
+# DebugLogger.AppendMethod method
 
 Appends a field with the given name and method info
 
@@ -9,28 +9,6 @@ public void AppendMethod(string name, MethodInfo info)
 | parameter | description |
 | --- | --- |
 | name | Name of the field |
-| info | Method info to append |
-
-## See Also
-
-* class [DebugLogger](../DebugLogger.md)
-* namespace [Oxide.Ext.Discord.Logging](../DebugLogger.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-
----
-
-# DebugLogger.AppendMethod method (2 of 2)
-
-Appends a field with the given name and method info
-
-```csharp
-public void AppendMethod(string name, Plugin plugin, MethodInfo info)
-```
-
-| parameter | description |
-| --- | --- |
-| name | Name of the field |
-| client | Client for the method |
 | info | Method info to append |
 
 ## See Also

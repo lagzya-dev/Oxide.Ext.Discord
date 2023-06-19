@@ -1,7 +1,9 @@
-# PlayerNameFormatter.SteamId field
+# PlayerNameFormatter.PlayerId field
+
+Include Player Id in the player name
 
 ```csharp
-public static readonly PlayerNameFormatter SteamId;
+public static readonly PlayerNameFormatter PlayerId;
 ```
 
 ## See Also

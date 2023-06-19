@@ -10,10 +10,10 @@ public class PlayerNameFormatter
 
 | name | description |
 | --- | --- |
-| static readonly [All](PlayerNameFormatter/All.md) |  |
-| static readonly [ClanName](PlayerNameFormatter/ClanName.md) |  |
+| static readonly [All](PlayerNameFormatter/All.md) | Include all name options in the player name |
+| static readonly [ClanName](PlayerNameFormatter/ClanName.md) | Include clan name in the player name |
 | static readonly [Default](PlayerNameFormatter/Default.md) | Default Player Name Formatter |
-| static readonly [SteamId](PlayerNameFormatter/SteamId.md) |  |
+| static readonly [PlayerId](PlayerNameFormatter/PlayerId.md) | Include Player Id in the player name |
 | static [Create](PlayerNameFormatter/Create.md)(…) | Create a new Player Name formatter with the given Custom Name Function |
 | [Format](PlayerNameFormatter/Format.md)(…) | Formats the player name |
 

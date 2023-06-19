@@ -2,14 +2,12 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes.ApplicationCommands;
-using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.Pooling;
@@ -75,7 +73,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             BaseAppCommand existing = handler.GetCommandById(commandId);
             if (existing != null && !existing.IsForPlugin(plugin.Id()))
             {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.PluginName(), command, Type, existing.Plugin?.FullName());
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.PluginName(), command, Type, existing.PluginName);
             }
 
             handler.AddAppCommand(new AppCommand(plugin, applicationId, commandId, callback, _logger));
@@ -108,7 +106,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             BaseAppCommand existing = handler.GetCommandById(commandId);
             if (existing != null && !existing.IsForPlugin(plugin.Id()))
             {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord auto complete command previously registered by {3}", plugin.PluginName(), command, Type, existing.Plugin?.FullName());
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord auto complete command previously registered by {3}", plugin.PluginName(), command, Type, existing.PluginName);
             }
             
             handler.AddAppCommand(new AutoCompleteCommand(plugin, applicationId, commandId, callback, _logger));
@@ -137,7 +135,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             BaseAppCommand existing = handler.GetCommandById(commandId);
             if (existing != null && !existing.IsForPlugin(plugin.Id()))
             {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord message component command previously registered by {3}", plugin.PluginName(), customId, Type, existing.Plugin?.FullName());
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord message component command previously registered by {3}", plugin.PluginName(), customId, Type, existing.PluginName);
             }
             
             handler.AddAppCommand(new ComponentCommand(plugin, applicationId, commandId, callback, _logger));
@@ -166,7 +164,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             BaseAppCommand existing = handler.GetCommandById(commandId);
             if (existing != null && !existing.IsForPlugin(plugin.Id()))
             {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord modal submit command previously registered by {3}", plugin.PluginName(), customId, Type, existing.Plugin?.FullName());
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord modal submit command previously registered by {3}", plugin.PluginName(), customId, Type, existing.PluginName);
             }
             
             handler.AddAppCommand(new ComponentCommand(plugin, applicationId, commandId, callback, _logger));
@@ -307,12 +305,6 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                 return false;
             }
 
-            if (!command.IsValid)
-            {
-                RemoveApplicationCommandInternal(command);
-                return false;
-            }
-            
             command.HandleCommand(interaction);
             return true;
         }

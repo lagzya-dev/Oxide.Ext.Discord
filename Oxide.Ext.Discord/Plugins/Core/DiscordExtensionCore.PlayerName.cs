@@ -89,7 +89,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
             _sb.Append(player.Name);
 
-            if (HasFlag(options, PlayerDisplayNameMode.IncludeSteamId))
+            if (HasFlag(options, PlayerDisplayNameMode.IncludePlayerId))
             {
                 _sb.Append(" (");
                 _sb.Append(player.Id);

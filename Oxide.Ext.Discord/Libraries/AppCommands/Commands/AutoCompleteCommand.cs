@@ -2,7 +2,6 @@ using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
@@ -20,6 +19,6 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
         
         protected override void RunCommand(DiscordInteraction interaction) => _callback(interaction, interaction.Focused);
 
-        protected override string GetExceptionMessage() => $"An error occured during callback. Plugin: {Plugin?.PluginName()} Method: {_callback.Method.DeclaringType.Name}.{_callback.Method.Name}";
+        protected override string GetExceptionMessage() => $"An error occured during callback. Plugin: {PluginName} Method: {_callback.Method.DeclaringType.Name}.{_callback.Method.Name}";
     }
 }

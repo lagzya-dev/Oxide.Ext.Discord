@@ -16,8 +16,20 @@ namespace Oxide.Ext.Discord.Builders.Interactions.AutoComplete
         /// Default Player Name Formatter
         /// </summary>
         public static readonly PlayerNameFormatter Default = Create(PlayerDisplayNameMode.Default);
+        
+        /// <summary>
+        /// Include clan name in the player name
+        /// </summary>
         public static readonly PlayerNameFormatter ClanName = Create(PlayerDisplayNameMode.IncludeClanName);
-        public static readonly PlayerNameFormatter SteamId = Create(PlayerDisplayNameMode.IncludeSteamId);
+        
+        /// <summary>
+        /// Include Player Id in the player name
+        /// </summary>
+        public static readonly PlayerNameFormatter PlayerId = Create(PlayerDisplayNameMode.IncludePlayerId);
+        
+        /// <summary>
+        /// Include all name options in the player name
+        /// </summary>
         public static readonly PlayerNameFormatter All = Create(PlayerDisplayNameMode.All);
 
         private PlayerNameFormatter(PlayerDisplayNameMode mode, Func<IPlayer, string> customNameFunc)

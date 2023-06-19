@@ -827,7 +827,7 @@
             Include Clan Name in search
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode.IncludeSteamId">
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode.IncludePlayerId">
             <summary>
             Include Steam ID
             </summary>
@@ -845,6 +845,21 @@
         <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerNameFormatter.Default">
             <summary>
             Default Player Name Formatter
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerNameFormatter.ClanName">
+            <summary>
+            Include clan name in the player name
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerNameFormatter.PlayerId">
+            <summary>
+            Include Player Id in the player name
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerNameFormatter.All">
+            <summary>
+            Include all name options in the player name
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerNameFormatter.Create(Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode)">
@@ -11600,6 +11615,36 @@
             Value can be string, integer, or double, or boolean type
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.GetString">
+            <summary>
+            Returns the value as a string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.GetInt">
+            <summary>
+            Returns the value as an int
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.GetBool">
+            <summary>
+            Returns the value as a bool
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.GetNumber">
+            <summary>
+            Returns the value as a double
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.GetSnowflake">
+            <summary>
+            Returns the value as a Snowflake
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption.Options">
             <summary>
             Present if this option is a group or subcommand
@@ -18489,7 +18534,8 @@
             </summary>
             <param name="plugin">Plugin for the command</param>
             <param name="appId">ID of the <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
-            <param name="type">Interaction type for the command</param>
+            <param name="commandId">Command ID for the command</param>
+            <param name="logger">Logger for the command</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand">
             <summary>
@@ -21600,14 +21646,6 @@
             <param name="name">Name of the field</param>
             <param name="info">Method info to append</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendMethod(System.String,Oxide.Core.Plugins.Plugin,System.Reflection.MethodInfo)">
-            <summary>
-            Appends a field with the given name and method info
-            </summary>
-            <param name="name">Name of the field</param>
-            <param name="client">Client for the method</param>
-            <param name="info">Method info to append</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.String,System.String)">
             <summary>
             Appends a field with the given name and values seperated by a space
@@ -24280,27 +24318,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"66b3c672"
+            => @"442e27e9"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"66b3c67206339b3da5d9f248c159ba959a843580"
+            => @"442e27e9c1af8999d6dacac6c8161e601eac5f69"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-18T12:20:54-05:00"
+            => @"2023-06-19T09:46:42-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"567"
+            => @"568"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-567-g66b3c672"
+            => @"2.1.9-568-g442e27e9"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24335,7 +24373,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"576"
+            => @"577"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
