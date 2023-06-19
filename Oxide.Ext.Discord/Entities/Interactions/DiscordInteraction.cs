@@ -211,6 +211,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions
             string group = null;
             string subCommand = null;
             string argument = null;
+
+            switch (Type)
+            {
+                case InteractionType.MessageComponent:
+                case InteractionType.ModalSubmit:
+                    return new AppCommandId(Type, Data.CustomId);
+            }
             
             List<InteractionDataOption> options = Data.Options;
             if (options != null)
@@ -242,7 +249,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 }
             }
 
-            return new AppCommandId(command, group, subCommand, argument);
+            return new AppCommandId(Type, command, group, subCommand, argument);
         }
         
         /// <summary>

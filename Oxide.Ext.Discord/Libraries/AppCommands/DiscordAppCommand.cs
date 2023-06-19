@@ -12,7 +12,6 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
-using Oxide.Ext.Discord.Libraries.AppCommands.Handlers;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Setup;
@@ -26,8 +25,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
     /// </summary>
     public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>, IDebugLoggable
     {
-        private readonly Hash<Snowflake, ApplicationCommandHandler> _slashCommands = new Hash<Snowflake, ApplicationCommandHandler>();
-        private readonly Hash<Snowflake, MessageComponentHandler> _componentCommands = new Hash<Snowflake, MessageComponentHandler>();
+        private readonly Hash<Snowflake, AppCommandHandler> _handlers = new Hash<Snowflake, AppCommandHandler>();
         private readonly ILogger _logger;
 
         /// <summary>
@@ -39,32 +37,15 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             _logger = logger;
         }
 
-        private ApplicationCommandHandler GetSlashCommandHandler(Snowflake appId) => _slashCommands[appId];
+        private AppCommandHandler GetCommandHandler(Snowflake applicationId) => _handlers[applicationId];
 
-        private ApplicationCommandHandler GetOrAddSlashCommandHandler(Snowflake appId)
+        private AppCommandHandler GetOrAddCommandHandler(Snowflake applicationId)
         {
-            ApplicationCommandHandler handler = _slashCommands[appId];
+            AppCommandHandler handler = _handlers[applicationId];
             if (handler == null)
             {
-                handler = new ApplicationCommandHandler(_logger);
-                _slashCommands[appId] = handler;
-            }
-
-            return handler;
-        }
-        
-        private MessageComponentHandler GetComponentHandler(Snowflake appId)
-        {
-            return _componentCommands[appId];
-        }
-
-        private MessageComponentHandler GetOrAddComponentHandler(Snowflake appId)
-        {
-            MessageComponentHandler handler = _componentCommands[appId];
-            if (handler == null)
-            {
-                handler = new MessageComponentHandler(_logger);
-                _componentCommands[appId] = handler;
+                handler = new AppCommandHandler(_logger);
+                _handlers[applicationId] = handler;
             }
 
             return handler;
@@ -74,64 +55,64 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         /// Registers a new Application Command for the given plugin
         /// </summary>
         /// <param name="plugin"><see cref="Plugin"/> the Application Command is for</param>
-        /// <param name="appId">ID of the <see cref="DiscordApplication"/> for the command</param>
+        /// <param name="applicationId">ID of the <see cref="DiscordApplication"/> for the command</param>
         /// <param name="callback">Callback for the command</param>
         /// <param name="command">Command name</param>
         /// <param name="group">Sub Command Group for the command</param>
         /// <param name="subCommand">Sub Command for the command</param>
         /// <exception cref="ArgumentNullException">Thrown if inputs are null</exception>
-        public void AddApplicationCommand(Plugin plugin, Snowflake appId, string callback, string command, string group = null, string subCommand = null)
+        public void AddApplicationCommand(Plugin plugin, Snowflake applicationId, Action<DiscordInteraction, InteractionDataParsed> callback, string command, string group = null, string subCommand = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            InvalidSnowflakeException.ThrowIfInvalid(appId, nameof(appId));
+            InvalidSnowflakeException.ThrowIfInvalid(applicationId, nameof(applicationId));
             if (string.IsNullOrEmpty(command)) throw new ArgumentNullException(nameof(command));
-            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
+            if (callback == null) throw new ArgumentNullException(nameof(callback));
             
-            ApplicationCommandHandler handler = GetOrAddSlashCommandHandler(appId);
-            AppCommandId commandId = new AppCommandId(command, group, subCommand);
-
+            AppCommandHandler handler = GetOrAddCommandHandler(applicationId);
             const InteractionType Type = InteractionType.ApplicationCommand;
-            AppCommand existing = handler.GetCommandById(Type, commandId);
-            if (existing != null && !existing.IsForPlugin(plugin))
-            {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.FullName(), command, Type, existing.Plugin?.FullName());
-            }
+            AppCommandId commandId = new AppCommandId(Type, command, group, subCommand);
             
-            handler.AddAppCommand(new AppCommand(plugin, appId, Type, commandId, callback));
-            _logger.Debug("Adding App Command For: {0} Command: {1} Callback: {2}", plugin.FullName(), commandId, callback);
+            BaseAppCommand existing = handler.GetCommandById(commandId);
+            if (existing != null && !existing.IsForPlugin(plugin.Id()))
+            {
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.PluginName(), command, Type, existing.Plugin?.FullName());
+            }
+
+            handler.AddAppCommand(new AppCommand(plugin, applicationId, commandId, callback, _logger));
+            _logger.Debug("Adding App Command For: {0} Command: {1} Callback: {2}", plugin.PluginName(), commandId, callback);
         }
 
         /// <summary>
         /// Registers a new Application Command for the given plugin
         /// </summary>
         /// <param name="plugin"><see cref="Plugin"/> the Application Command is for</param>
-        /// <param name="appId">ID of <see cref="DiscordApplication"/> For the command</param>
+        /// <param name="applicationId">ID of <see cref="DiscordApplication"/> For the command</param>
         /// <param name="callback">Callback for the command</param>
         /// <param name="command">Command name</param>
         /// <param name="argument">Command Argument name for the Auto Complete</param>
         /// <param name="group">Sub Command Group for the command</param>
         /// <param name="subCommand">Sub Command for the command</param>
         /// <exception cref="ArgumentNullException">Thrown if inputs are null</exception>
-        public void AddAutoCompleteCommand(Plugin plugin, Snowflake appId, string callback, string command, string argument, string group = null, string subCommand = null)
+        public void AddAutoCompleteCommand(Plugin plugin, Snowflake applicationId, Action<DiscordInteraction,InteractionDataOption> callback, string command, string argument, string group = null, string subCommand = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            InvalidSnowflakeException.ThrowIfInvalid(appId, nameof(appId));
-            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
+            InvalidSnowflakeException.ThrowIfInvalid(applicationId, nameof(applicationId));
+            if (callback == null) throw new ArgumentNullException(nameof(callback));
             if (string.IsNullOrEmpty(command)) throw new ArgumentNullException(nameof(command));
             if (string.IsNullOrEmpty(argument)) throw new ArgumentNullException(nameof(argument));
             
-            ApplicationCommandHandler handler = GetOrAddSlashCommandHandler(appId);
-            AppCommandId commandId = new AppCommandId(command, group, subCommand, argument);
-
+            AppCommandHandler handler = GetOrAddCommandHandler(applicationId);
             const InteractionType Type = InteractionType.ApplicationCommandAutoComplete;
-            AppCommand existing = handler.GetCommandById(Type, commandId);
-            if (existing != null && !existing.IsForPlugin(plugin))
+            AppCommandId commandId = new AppCommandId(Type, command, group, subCommand, argument);
+
+            BaseAppCommand existing = handler.GetCommandById(commandId);
+            if (existing != null && !existing.IsForPlugin(plugin.Id()))
             {
-                _logger.Warning("{0} has replaced the '{1}' ({2}) discord application command previously registered by {3}", plugin.FullName(), command, Type, existing.Plugin?.FullName());
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord auto complete command previously registered by {3}", plugin.PluginName(), command, Type, existing.Plugin?.FullName());
             }
             
-            handler.AddAppCommand(new AutoCompleteCommand(plugin, appId, commandId, callback));
-            _logger.Debug("Adding Auto Complete Command For: {0} Command: {1} Callback: {2}", plugin.FullName(), commandId, callback);
+            handler.AddAppCommand(new AutoCompleteCommand(plugin, applicationId, commandId, callback, _logger));
+            _logger.Debug("Adding Auto Complete Command For: {0} Command: {1} Callback: {2}", plugin.PluginName(), commandId, callback);
         }
 
         /// <summary>
@@ -139,19 +120,28 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         /// This matches CustomId with starts with
         /// </summary>
         /// <param name="plugin">Plugin the command is for</param>
-        /// <param name="appId">ID of <see cref="DiscordApplication"/> for the command</param>
+        /// <param name="applicationId">ID of <see cref="DiscordApplication"/> for the command</param>
         /// <param name="customId">Command to match with Starts with</param>
         /// <param name="callback">Callback for the command</param>
-        public void AddMessageComponentCommand(Plugin plugin, Snowflake appId, string customId, string callback)
+        public void AddMessageComponentCommand(Plugin plugin, Snowflake applicationId, string customId, Action<DiscordInteraction> callback)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            InvalidSnowflakeException.ThrowIfInvalid(appId, nameof(appId));
+            InvalidSnowflakeException.ThrowIfInvalid(applicationId, nameof(applicationId));
             if (string.IsNullOrEmpty(customId)) throw new ArgumentNullException(nameof(customId));
-            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
+            if (callback == null) throw new ArgumentNullException(nameof(callback));
             
-            MessageComponentHandler handler = GetOrAddComponentHandler(appId);
-            handler.AddComponentCommand(new ComponentCommand(plugin, appId, InteractionType.MessageComponent, customId, callback));
-            _logger.Debug("Adding Message Component Command For: {0} CustomId: {1} Callback: {2}", plugin.FullName(), customId, callback);
+            AppCommandHandler handler = GetOrAddCommandHandler(applicationId);
+            const InteractionType Type = InteractionType.MessageComponent;
+            AppCommandId commandId = new AppCommandId(Type, customId);
+            
+            BaseAppCommand existing = handler.GetCommandById(commandId);
+            if (existing != null && !existing.IsForPlugin(plugin.Id()))
+            {
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord message component command previously registered by {3}", plugin.PluginName(), customId, Type, existing.Plugin?.FullName());
+            }
+            
+            handler.AddAppCommand(new ComponentCommand(plugin, applicationId, commandId, callback, _logger));
+            _logger.Debug("Adding Message Component Command For: {0} CustomId: {1} Callback: {2}", plugin.PluginName(), customId, callback);
         }
 
         /// <summary>
@@ -159,20 +149,28 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         /// This matches CustomId with starts with
         /// </summary>
         /// <param name="plugin">Plugin the command is for</param>
-        /// <param name="appId">ID of <see cref="DiscordApplication"/> for the command</param>
+        /// <param name="applicationId">ID of <see cref="DiscordApplication"/> for the command</param>
         /// <param name="customId">Command to match with Starts with</param>
         /// <param name="callback">Callback for the command</param>
-        public void AddModalSubmitCommand(Plugin plugin, Snowflake appId, string customId, string callback)
+        public void AddModalSubmitCommand(Plugin plugin, Snowflake applicationId, string customId, Action<DiscordInteraction> callback)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            InvalidSnowflakeException.ThrowIfInvalid(appId, nameof(appId));
+            InvalidSnowflakeException.ThrowIfInvalid(applicationId, nameof(applicationId));
             if (string.IsNullOrEmpty(customId)) throw new ArgumentNullException(nameof(customId));
-            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
+            if (callback == null) throw new ArgumentNullException(nameof(callback));
             
             const InteractionType Type = InteractionType.ModalSubmit;
-            MessageComponentHandler handler = GetOrAddComponentHandler(appId);
-            handler.AddComponentCommand(new ComponentCommand(plugin, appId, Type, customId, callback));
-            _logger.Debug("Adding Modal Submit Command For: {0} CustomId: {1} Callback: {2}", plugin.FullName(), customId, callback);
+            AppCommandHandler handler = GetOrAddCommandHandler(applicationId);
+            AppCommandId commandId = new AppCommandId(Type, customId);
+            
+            BaseAppCommand existing = handler.GetCommandById(commandId);
+            if (existing != null && !existing.IsForPlugin(plugin.Id()))
+            {
+                _logger.Warning("{0} has replaced the '{1}' ({2}) discord modal submit command previously registered by {3}", plugin.PluginName(), customId, Type, existing.Plugin?.FullName());
+            }
+            
+            handler.AddAppCommand(new ComponentCommand(plugin, applicationId, commandId, callback, _logger));
+            _logger.Debug("Adding Modal Submit Command For: {0} CustomId: {1} Callback: {2}", plugin.PluginName(), customId, callback);
         }
 
         /// <summary>
@@ -189,16 +187,16 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         {
             if (string.IsNullOrEmpty(command)) throw new ArgumentNullException(nameof(command));
 
-            AppCommand appCommand = GetSlashCommandHandler(app.Id).GetCommandById(type, new AppCommandId(command, group, subCommand));
-            if (appCommand != null && appCommand.IsForPlugin(plugin))
+            BaseAppCommand appCommand = GetCommandHandler(app.Id).GetCommandById(new AppCommandId(type, command, group, subCommand));
+            if (appCommand != null && appCommand.IsForPlugin(plugin.Id()))
             {
                 RemoveApplicationCommandInternal(appCommand);
             }
         }
         
-        private void RemoveApplicationCommandInternal(AppCommand appCommand)
+        private void RemoveApplicationCommandInternal(BaseAppCommand appCommand)
         {
-            ApplicationCommandHandler handler = GetSlashCommandHandler(appCommand.AppId);
+            AppCommandHandler handler = GetCommandHandler(appCommand.AppId);
             if (handler == null)
             {
                 return;
@@ -211,44 +209,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
 
             if (handler.IsEmpty)
             {
-                _slashCommands.Remove(appCommand.AppId);
-            }
-        }
-
-        /// <summary>
-        /// Remove a message component command or a modal submit command
-        /// </summary>
-        /// <param name="plugin"><see cref="Plugin"/> the command is for</param>
-        /// <param name="app"><see cref="DiscordApplication"/> for the command</param>
-        /// <param name="type"><see cref="InteractionType"/> of the command</param>
-        /// <param name="customId">CustomId to match StartsWith for</param>
-        public void RemoveMessageComponentCommand(Plugin plugin, DiscordApplication app, InteractionType type, string customId)
-        {
-            ComponentCommand command = GetComponentHandler(app.Id)?.GetCommandById(plugin, type, customId);
-            if (command == null)
-            {
-                return;
-            }
-            
-            RemoveMessageComponentCommandInternal(command);
-        }
-
-        private void RemoveMessageComponentCommandInternal(ComponentCommand command)
-        {
-            MessageComponentHandler handler = GetComponentHandler(command.AppId);
-            if (handler == null)
-            {
-                return;
-            }
-
-            if (!handler.RemoveComponentCommand(command))
-            {
-                return;
-            }
-
-            if (handler.IsEmpty)
-            {
-                _slashCommands.Remove(command.AppId);
+                _handlers.Remove(appCommand.AppId);
             }
         }
 
@@ -263,17 +224,48 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                 switch (hook.Attribute)
                 {
                     case DiscordAutoCompleteCommandAttribute autoComplete:
-                        AddAutoCompleteCommand(plugin, applicationId, hook.Name, autoComplete.Command, autoComplete.ArgumentName, autoComplete.Group, autoComplete.SubCommand);
+                    {
+                        Action<DiscordInteraction, InteractionDataOption> callback = hook.Method.CreateDelegate<DiscordInteraction, InteractionDataOption>(plugin);
+                        if (callback != null)
+                        {
+                            AddAutoCompleteCommand(plugin, applicationId, callback, autoComplete.Command, autoComplete.ArgumentName, autoComplete.Group, autoComplete.SubCommand);
+                        }
                         break;
+
+                    }
+                    
                     case DiscordApplicationCommandAttribute appCommand:
-                        AddApplicationCommand(plugin, applicationId, hook.Name, appCommand.Command, appCommand.Group, appCommand.SubCommand);
+                    {
+                        Action<DiscordInteraction, InteractionDataParsed> callback = hook.Method.CreateDelegate<DiscordInteraction,InteractionDataParsed>(plugin);
+                        if (callback != null)
+                        {
+                            AddApplicationCommand(plugin, applicationId, callback, appCommand.Command, appCommand.Group, appCommand.SubCommand);
+                        }
+                        
                         break;
+                    }
+                       
                     case DiscordMessageComponentCommandAttribute component:
-                        AddMessageComponentCommand(plugin, applicationId, component.CustomId, hook.Name);
+                    {
+                        Action<DiscordInteraction> callback = hook.Method.CreateDelegate<DiscordInteraction>(plugin);
+                        if (callback != null)
+                        {
+                            AddMessageComponentCommand(plugin, applicationId, component.CustomId, callback);
+                        }
+                        
                         break;
+                    }
+                    
                     case DiscordModalSubmitAttribute modal:
-                        AddModalSubmitCommand(plugin, applicationId, modal.CustomId, hook.Name);
+                    {
+                        Action<DiscordInteraction> callback = hook.Method.CreateDelegate<DiscordInteraction>(plugin);
+                        if (callback != null)
+                        {
+                            AddModalSubmitCommand(plugin, applicationId, modal.CustomId, callback);
+                        }
+                        
                         break;
+                    }
                 }
             }
         }
@@ -284,47 +276,23 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
-            List<AppCommand> appCommands = DiscordPool.Internal.GetList<AppCommand>();
-            foreach (ApplicationCommandHandler handler in _slashCommands.Values)
+            List<BaseAppCommand> appCommands = DiscordPool.Internal.GetList<BaseAppCommand>();
+            foreach (AppCommandHandler handler in _handlers.Values)
             {
                 appCommands.AddRange(handler.GetCommandsForPlugin(plugin));
             }
             
             RemoveAppCommandsInternal(appCommands);
-            DiscordPool.Internal.FreeList(appCommands);
-
-            List<ComponentCommand> componentCommands = DiscordPool.Internal.GetList<ComponentCommand>();
-            foreach (MessageComponentHandler handler in _componentCommands.Values)
-            {
-                componentCommands.AddRange(handler.GetCommandsForPlugin(plugin));
-            }
-            
-            RemoveComponentsInternal(componentCommands);
-            DiscordPool.Internal.FreeList(componentCommands);
         }
 
-        private void RemoveComponentsInternal(IEnumerable<ComponentCommand> commandList)
+        private void RemoveAppCommandsInternal(IEnumerable<BaseAppCommand> commandList)
         {
-            List<ComponentCommand> componentCommands = DiscordPool.Internal.GetList<ComponentCommand>();
-            componentCommands.AddRange(commandList);
-
-            for (int index = 0; index < componentCommands.Count; index++)
-            {
-                ComponentCommand command = componentCommands[index];
-                RemoveMessageComponentCommandInternal(command);
-            }
-
-            DiscordPool.Internal.FreeList(componentCommands);
-        }
-        
-        private void RemoveAppCommandsInternal(IEnumerable<AppCommand> commandList)
-        {
-            List<AppCommand> commands = DiscordPool.Internal.GetList<AppCommand>();
+            List<BaseAppCommand> commands = DiscordPool.Internal.GetList<BaseAppCommand>();
             commands.AddRange(commandList);
 
             for (int index = 0; index < commands.Count; index++)
             {
-                AppCommand command = commands[index];
+                BaseAppCommand command = commands[index];
                 RemoveApplicationCommandInternal(command);
             }
 
@@ -333,21 +301,15 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
 
         internal bool HandleInteraction(DiscordInteraction interaction)
         {
-            BaseAppCommand command = null;
-            switch (interaction.Type)
-            {
-                case InteractionType.ApplicationCommand:
-                case InteractionType.ApplicationCommandAutoComplete:
-                    command = GetSlashCommandHandler(interaction.ApplicationId)?.GetInteractionCommand(interaction);
-                    break;
-                case InteractionType.MessageComponent:
-                case InteractionType.ModalSubmit:
-                    command = GetComponentHandler(interaction.ApplicationId)?.GetInteractionCommand(interaction);
-                    break;
-            }
-
+            BaseAppCommand command = GetCommandHandler(interaction.ApplicationId)?.GetCommandById(interaction.GetCommandId());
             if (command == null)
             {
+                return false;
+            }
+
+            if (!command.IsValid)
+            {
+                RemoveApplicationCommandInternal(command);
                 return false;
             }
             
@@ -355,43 +317,14 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             return true;
         }
 
-        private IEnumerable<BaseAppCommand> GetCommands(Snowflake applicationId)
-        {
-            ApplicationCommandHandler appHandler = _slashCommands[applicationId];
-            if (appHandler != null)
-            {
-                foreach (AppCommand command in appHandler.GetCommands())
-                {
-                    yield return command;
-                }
-            }
-            
-            MessageComponentHandler componentHandler = _componentCommands[applicationId];
-            if (componentHandler != null)
-            {
-                foreach (ComponentCommand command in componentHandler.GetCommands())
-                {
-                    yield return command;
-                }
-            }
-        }
-
         ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.StartArray("Application Commands");
-            foreach (BotClient client in BotClientFactory.Instance.Clients)
+            foreach (KeyValuePair<Snowflake, AppCommandHandler> handler in _handlers)
             {
-                DiscordApplication application = client.Application;
-                if (application != null)
-                {
-                    logger.AppendField("Application ID", application.Id);
-                    logger.AppendList("Application Commands", GetCommands(application.Id));
-                }
-                else
-                {
-                    logger.AppendNullField("Application ID");
-                }
+                logger.AppendField("Application ID", handler.Key);
+                logger.AppendList("Application Commands", handler.Value.GetCommands());
             }
             logger.EndArray();
         }

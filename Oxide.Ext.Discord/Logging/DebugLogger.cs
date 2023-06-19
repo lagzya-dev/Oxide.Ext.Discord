@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -158,6 +159,28 @@ namespace Oxide.Ext.Discord.Logging
         {
             AppendFieldPrefix(name);
             _logger.Append(info.DeclaringType?.Name ?? "Unknown Type");
+            _logger.Append('.');
+            _logger.AppendLine(info.Name);
+        }
+
+        /// <summary>
+        /// Appends a field with the given name and method info
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="client">Client for the method</param>
+        /// <param name="info">Method info to append</param>
+        public void AppendMethod(string name, Plugin plugin, MethodInfo info)
+        {
+            AppendFieldPrefix(name);
+            
+            string type = info.DeclaringType?.Name ?? "Unknown Type";
+            if (plugin != null && type != plugin.Name)
+            {
+                _logger.Append(plugin.Name);
+                _logger.Append('.');
+            }
+            
+            _logger.Append(type);
             _logger.Append('.');
             _logger.AppendLine(info.Name);
         }

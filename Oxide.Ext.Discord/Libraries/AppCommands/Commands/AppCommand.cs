@@ -1,31 +1,31 @@
+using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Hooks;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
 {
     internal class AppCommand : BaseAppCommand
     {
-        internal readonly AppCommandId Command;
+        private readonly Action<DiscordInteraction, InteractionDataParsed> _callback;
 
-        public AppCommand(Plugin plugin, Snowflake appId, InteractionType type, AppCommandId command, string callback) : base(plugin, appId, type, callback)
+        public AppCommand(Plugin plugin, Snowflake appId, AppCommandId command, Action<DiscordInteraction, InteractionDataParsed> callback, ILogger logger) : base(plugin, appId, command, logger)
         {
-            Command = command;
-        }
-        
-        public override void HandleCommand(DiscordInteraction interaction)
-        {
-            DiscordHook.CallPluginHook(Plugin, Callback, interaction, interaction.Parsed);
+            _callback = callback;
         }
         
         protected override string GetCommandType() => "Application Command";
+        
+        protected override void RunCommand(DiscordInteraction interaction) => _callback(interaction, interaction.Parsed);
+
+        protected override string GetExceptionMessage() => $"An error occured during callback. Plugin: {Plugin?.PluginName()} Method: {_callback.Method.DeclaringType.Name}.{_callback.Method.Name}";
 
         public override void LogDebug(DebugLogger logger)
         {
             base.LogDebug(logger);
-            logger.AppendField("Command Name", Command.ToString());
+            logger.AppendMethod("Callback", Plugin, _callback.Method);
         }
     }
 }

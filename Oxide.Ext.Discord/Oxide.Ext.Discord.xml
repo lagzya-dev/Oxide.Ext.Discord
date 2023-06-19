@@ -18483,14 +18483,13 @@
             Represents a Base Registered Application Command
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.Commands.BaseAppCommand.#ctor(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.InteractionType,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.Commands.BaseAppCommand.#ctor(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Libraries.AppCommands.Commands.AppCommandId,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>
             <param name="plugin">Plugin for the command</param>
             <param name="appId">ID of the <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="type">Interaction type for the command</param>
-            <param name="callback">Hook callback method name</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand">
             <summary>
@@ -18504,24 +18503,24 @@
             </summary>
             <param name="logger">Logger for the library</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddApplicationCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddApplicationCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.InteractionDataParsed},System.String,System.String,System.String)">
             <summary>
             Registers a new Application Command for the given plugin
             </summary>
             <param name="plugin"><see cref="T:Oxide.Core.Plugins.Plugin"/> the Application Command is for</param>
-            <param name="appId">ID of the <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="applicationId">ID of the <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="callback">Callback for the command</param>
             <param name="command">Command name</param>
             <param name="group">Sub Command Group for the command</param>
             <param name="subCommand">Sub Command for the command</param>
             <exception cref="T:System.ArgumentNullException">Thrown if inputs are null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddAutoCompleteCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddAutoCompleteCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,System.Action{Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction,Oxide.Ext.Discord.Entities.Interactions.InteractionDataOption},System.String,System.String,System.String,System.String)">
             <summary>
             Registers a new Application Command for the given plugin
             </summary>
             <param name="plugin"><see cref="T:Oxide.Core.Plugins.Plugin"/> the Application Command is for</param>
-            <param name="appId">ID of <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> For the command</param>
+            <param name="applicationId">ID of <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> For the command</param>
             <param name="callback">Callback for the command</param>
             <param name="command">Command name</param>
             <param name="argument">Command Argument name for the Auto Complete</param>
@@ -18529,23 +18528,23 @@
             <param name="subCommand">Sub Command for the command</param>
             <exception cref="T:System.ArgumentNullException">Thrown if inputs are null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddMessageComponentCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddMessageComponentCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Action{Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction})">
             <summary>
             Adds a <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent"/> Command type.
             This matches CustomId with starts with
             </summary>
             <param name="plugin">Plugin the command is for</param>
-            <param name="appId">ID of <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="applicationId">ID of <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="customId">Command to match with Starts with</param>
             <param name="callback">Callback for the command</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddModalSubmitCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.AddModalSubmitCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Snowflake,System.String,System.Action{Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction})">
             <summary>
             Adds a <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.MessageComponent"/> Command type.
             This matches CustomId with starts with
             </summary>
             <param name="plugin">Plugin the command is for</param>
-            <param name="appId">ID of <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
+            <param name="applicationId">ID of <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
             <param name="customId">Command to match with Starts with</param>
             <param name="callback">Callback for the command</param>
         </member>
@@ -18560,15 +18559,6 @@
             <param name="group">Sub Command Group for the command</param>
             <param name="subCommand">Sub Command for the command</param>
             <exception cref="T:System.ArgumentNullException">Thrown if command is null or empty</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.RemoveMessageComponentCommand(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Applications.DiscordApplication,Oxide.Ext.Discord.Entities.Interactions.InteractionType,System.String)">
-            <summary>
-            Remove a message component command or a modal submit command
-            </summary>
-            <param name="plugin"><see cref="T:Oxide.Core.Plugins.Plugin"/> the command is for</param>
-            <param name="app"><see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/> for the command</param>
-            <param name="type"><see cref="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType"/> of the command</param>
-            <param name="customId">CustomId to match StartsWith for</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.AppCommands.DiscordAppCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.Setup.PluginSetup,Oxide.Ext.Discord.Connections.BotConnection)">
             <inheritdoc/>
@@ -21610,6 +21600,14 @@
             <param name="name">Name of the field</param>
             <param name="info">Method info to append</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendMethod(System.String,Oxide.Core.Plugins.Plugin,System.Reflection.MethodInfo)">
+            <summary>
+            Appends a field with the given name and method info
+            </summary>
+            <param name="name">Name of the field</param>
+            <param name="client">Client for the method</param>
+            <param name="info">Method info to append</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Logging.DebugLogger.AppendField(System.String,System.String,System.String)">
             <summary>
             Appends a field with the given name and values seperated by a space
@@ -24282,27 +24280,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"4f3d5d4a"
+            => @"66b3c672"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"4f3d5d4a1f4107eed7d5a104ce5146668052be21"
+            => @"66b3c67206339b3da5d9f248c159ba959a843580"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-18T11:09:45-05:00"
+            => @"2023-06-18T12:20:54-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"566"
+            => @"567"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-566-g4f3d5d4a"
+            => @"2.1.9-567-g66b3c672"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24337,7 +24335,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"575"
+            => @"576"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">

@@ -3,20 +3,21 @@
 Adds a MessageComponent Command type. This matches CustomId with starts with
 
 ```csharp
-public void AddMessageComponentCommand(Plugin plugin, Snowflake appId, string customId, 
-    string callback)
+public void AddMessageComponentCommand(Plugin plugin, Snowflake applicationId, string customId, 
+    Action<DiscordInteraction> callback)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin the command is for |
-| appId | ID of [`DiscordApplication`](../../../Entities/Applications/DiscordApplication.md) for the command |
+| applicationId | ID of [`DiscordApplication`](../../../Entities/Applications/DiscordApplication.md) for the command |
 | customId | Command to match with Starts with |
 | callback | Callback for the command |
 
 ## See Also
 
 * struct [Snowflake](../../../Entities/Snowflake.md)
+* class [DiscordInteraction](../../../Entities/Interactions/DiscordInteraction.md)
 * class [DiscordAppCommand](../DiscordAppCommand.md)
 * namespace [Oxide.Ext.Discord.Libraries.AppCommands](../DiscordAppCommand.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

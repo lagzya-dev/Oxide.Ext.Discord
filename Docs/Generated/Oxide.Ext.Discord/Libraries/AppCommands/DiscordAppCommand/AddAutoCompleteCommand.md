@@ -3,14 +3,15 @@
 Registers a new Application Command for the given plugin
 
 ```csharp
-public void AddAutoCompleteCommand(Plugin plugin, Snowflake appId, string callback, string command, 
-    string argument, string group = null, string subCommand = null)
+public void AddAutoCompleteCommand(Plugin plugin, Snowflake applicationId, 
+    Action<DiscordInteraction, InteractionDataOption> callback, string command, string argument, 
+    string group = null, string subCommand = null)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin the Application Command is for |
-| appId | ID of [`DiscordApplication`](../../../Entities/Applications/DiscordApplication.md) For the command |
+| applicationId | ID of [`DiscordApplication`](../../../Entities/Applications/DiscordApplication.md) For the command |
 | callback | Callback for the command |
 | command | Command name |
 | argument | Command Argument name for the Auto Complete |
@@ -26,6 +27,8 @@ public void AddAutoCompleteCommand(Plugin plugin, Snowflake appId, string callba
 ## See Also
 
 * struct [Snowflake](../../../Entities/Snowflake.md)
+* class [DiscordInteraction](../../../Entities/Interactions/DiscordInteraction.md)
+* class [InteractionDataOption](../../../Entities/Interactions/InteractionDataOption.md)
 * class [DiscordAppCommand](../DiscordAppCommand.md)
 * namespace [Oxide.Ext.Discord.Libraries.AppCommands](../DiscordAppCommand.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

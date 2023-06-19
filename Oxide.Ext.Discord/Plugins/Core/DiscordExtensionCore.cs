@@ -52,7 +52,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             AddCovalenceCommand(new[] { "de.log.file" }, nameof(FileLogCommand), "de.log.file");
             AddCovalenceCommand(new[] { "de.validation.enable" }, nameof(ValidationEnableCommand), "de.validation.enable");
             AddCovalenceCommand(new[] { "de.debug" }, nameof(DiscordDebugCommand), "de.debug");
-            AddCovalenceCommand(new[] { "de.help" }, nameof(DiscordHelpCommand), "de.debug");
+            AddCovalenceCommand(new[] { "de.help" }, nameof(DiscordHelpCommand), "de.help");
             
             foreach (KeyValuePair<string, Dictionary<string, string>> language in Localization.Languages)
             {
@@ -254,7 +254,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                     Directory.CreateDirectory(path);
                 }
                 
-                File.WriteAllText(path, message);
+                File.WriteAllText(filePath, message);
                 player.Message($"Debug Saved to File. Path: {filePath.Replace(Interface.Oxide.RootDirectory, "").Substring(1)}");
             }
             else

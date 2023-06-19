@@ -1,16 +1,21 @@
-﻿using Oxide.Ext.Discord.Attributes;
+﻿using System;
+using System.Reflection;
+using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Plugins.Setup
 {
     internal struct PluginHookResult<T> where T : BaseDiscordAttribute
     {
         public readonly string Name;
+        public readonly MethodInfo Method;
         public readonly T Attribute;
         public bool IsValid => !string.IsNullOrEmpty(Name) && Attribute != null;
 
-        public PluginHookResult(string name, T attribute)
+        public PluginHookResult(PluginCallback callback, T attribute)
         {
-            Name = name;
+            Name = callback.Name;
+            Method = callback.Method;
             Attribute = attribute;
         }
     }

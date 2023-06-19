@@ -16,7 +16,6 @@ public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>, IDebugLo
 | [AddModalSubmitCommand](DiscordAppCommand/AddModalSubmitCommand.md)(…) | Adds a MessageComponent Command type. This matches CustomId with starts with |
 | [LogDebug](DiscordAppCommand/LogDebug.md)(…) |  |
 | [RemoveApplicationCommand](DiscordAppCommand/RemoveApplicationCommand.md)(…) | Removes an application command |
-| [RemoveMessageComponentCommand](DiscordAppCommand/RemoveMessageComponentCommand.md)(…) | Remove a message component command or a modal submit command |
 
 ## Protected Members
 

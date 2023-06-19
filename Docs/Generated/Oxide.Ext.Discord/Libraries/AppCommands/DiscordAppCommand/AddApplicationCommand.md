@@ -3,14 +3,15 @@
 Registers a new Application Command for the given plugin
 
 ```csharp
-public void AddApplicationCommand(Plugin plugin, Snowflake appId, string callback, string command, 
+public void AddApplicationCommand(Plugin plugin, Snowflake applicationId, 
+    Action<DiscordInteraction, InteractionDataParsed> callback, string command, 
     string group = null, string subCommand = null)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin the Application Command is for |
-| appId | ID of the [`DiscordApplication`](../../../Entities/Applications/DiscordApplication.md) for the command |
+| applicationId | ID of the [`DiscordApplication`](../../../Entities/Applications/DiscordApplication.md) for the command |
 | callback | Callback for the command |
 | command | Command name |
 | group | Sub Command Group for the command |
@@ -25,6 +26,8 @@ public void AddApplicationCommand(Plugin plugin, Snowflake appId, string callbac
 ## See Also
 
 * struct [Snowflake](../../../Entities/Snowflake.md)
+* class [DiscordInteraction](../../../Entities/Interactions/DiscordInteraction.md)
+* class [InteractionDataParsed](../../../Entities/Interactions/InteractionDataParsed.md)
 * class [DiscordAppCommand](../DiscordAppCommand.md)
 * namespace [Oxide.Ext.Discord.Libraries.AppCommands](../DiscordAppCommand.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

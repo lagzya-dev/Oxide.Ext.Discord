@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Plugins.Setup
@@ -7,11 +8,13 @@ namespace Oxide.Ext.Discord.Plugins.Setup
     internal struct PluginCallback
     {
         public readonly string Name;
+        public readonly MethodInfo Method;
         public readonly List<Attribute> Attributes;
 
-        public PluginCallback(string name, Attribute[] attributes)
+        public PluginCallback(string name, MethodInfo method, Attribute[] attributes)
         {
             Name = name;
+            Method = method;
             Attributes = new List<Attribute>(0);
             for (int index = 0; index < attributes.Length; index++)
             {

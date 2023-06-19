@@ -1,10 +1,13 @@
+using System;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Callbacks.Libraries;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
 {
@@ -14,9 +17,11 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
     internal abstract class BaseAppCommand : IDebugLoggable
     {
         internal Plugin Plugin;
-        internal Snowflake AppId;
-        internal readonly InteractionType Type;
-        internal readonly string Callback;
+        internal readonly PluginId PluginId;
+        internal readonly Snowflake AppId;
+        internal readonly AppCommandId CommandId;
+        protected readonly ILogger _logger;
+        public bool IsValid => Plugin != null && Plugin.IsLoaded;
 
         /// <summary>
         /// Constructor
@@ -24,35 +29,53 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
         /// <param name="plugin">Plugin for the command</param>
         /// <param name="appId">ID of the <see cref="DiscordApplication"/> for the command</param>
         /// <param name="type">Interaction type for the command</param>
-        /// <param name="callback">Hook callback method name</param>
-        protected BaseAppCommand(Plugin plugin, Snowflake appId, InteractionType type, string callback)
+        protected BaseAppCommand(Plugin plugin, Snowflake appId, AppCommandId commandId, ILogger logger)
         {
             Plugin = plugin;
+            PluginId = plugin.Id();
             AppId = appId;
-            Type = type;
-            Callback = callback;
+            CommandId = commandId;
+            _logger = logger;
         }
-        
-        public abstract void HandleCommand(DiscordInteraction interaction);
 
-        public bool IsForPlugin(Plugin plugin)
+        public void HandleCommand(DiscordInteraction interaction)
         {
-            return Plugin == null || !Plugin.IsLoaded || Plugin == plugin;
+            if (ThreadEx.IsMain)
+            {
+                HandleCommandInternal(interaction);
+            }
+            else
+            {
+                AppCommandCallback.Start(this, interaction);
+            }
         }
-        
-        internal void OnRemoved()
+
+        internal void HandleCommandInternal(DiscordInteraction interaction)
         {
-            Plugin = null;
+            try
+            {
+                RunCommand(interaction);
+            }
+            catch (Exception ex)
+            {
+                _logger.Exception(GetExceptionMessage(), ex);
+            }
         }
+
+        public bool IsForPlugin(PluginId id) => Plugin == null || !Plugin.IsLoaded || PluginId == id;
 
         protected abstract string GetCommandType();
+
+        protected abstract string GetExceptionMessage();
+
+        protected abstract void RunCommand(DiscordInteraction interaction);
 
         public virtual void LogDebug(DebugLogger logger)
         {
             logger.AppendField("Type", GetCommandType());
-            logger.AppendFieldEnum("Interaction Type", Type);
-            logger.AppendField("Plugin", Plugin.FullName());
-            logger.AppendField("Callback", Callback);
+            logger.AppendField("Plugin", Plugin?.FullName() ?? "Unknown Plugin");
+            logger.AppendField("Command", CommandId.ToString());
+
         }
     }
 }

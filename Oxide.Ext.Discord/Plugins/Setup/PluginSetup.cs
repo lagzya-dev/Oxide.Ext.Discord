@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
 
 namespace Oxide.Ext.Discord.Plugins.Setup
@@ -58,7 +59,7 @@ namespace Oxide.Ext.Discord.Plugins.Setup
                            
                             if (IsCallbackMethod(attributes))
                             {
-                                _callbacks.Add(new PluginCallback(name, attributes));
+                                _callbacks.Add(new PluginCallback(name, hook, attributes));
                             }
                         }
                         break;
@@ -121,7 +122,7 @@ namespace Oxide.Ext.Discord.Plugins.Setup
                 T attribute = callback.GetAttribute<T>();
                 if (attribute != null)
                 {
-                    yield return new PluginHookResult<T>(callback.Name, attribute);
+                    yield return new PluginHookResult<T>(callback, attribute);
                 }
             }
         }

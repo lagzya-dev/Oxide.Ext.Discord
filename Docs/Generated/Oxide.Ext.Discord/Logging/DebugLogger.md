@@ -21,7 +21,7 @@ public class DebugLogger
 | [AppendLine](DebugLogger/AppendLine.md)(…) | Appends a line to the logger with the given character repeated amount time (2 methods) |
 | [AppendList](DebugLogger/AppendList.md)(…) | Appends an IEnumerable where T is string items to add to the logger (2 methods) |
 | [AppendList&lt;T&gt;](DebugLogger/AppendList.md)(…) | Appends an IEnumerable where T is [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) items to add to the logger (2 methods) |
-| [AppendMethod](DebugLogger/AppendMethod.md)(…) | Appends a field with the given name and method info |
+| [AppendMethod](DebugLogger/AppendMethod.md)(…) | Appends a field with the given name and method info (2 methods) |
 | [AppendNullField](DebugLogger/AppendNullField.md)(…) | Appends a field with the given name and Null value |
 | [AppendObject](DebugLogger/AppendObject.md)(…) | Appends a [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) object to the logger with the given name |
 | [DecrementIndent](DebugLogger/DecrementIndent.md)() | Decrements the Indent |
