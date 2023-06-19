@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             placeholders.RegisterPlaceholder<Snowflake>(plugin,$"{placeholderPrefix}.id", dataKey, Id);
-            placeholders.RegisterPlaceholder<Snowflake>(plugin,$"{placeholderPrefix}.Created", dataKey, Created);
+            placeholders.RegisterPlaceholder<Snowflake>(plugin,$"{placeholderPrefix}.created", dataKey, Created);
         }
     }
 }

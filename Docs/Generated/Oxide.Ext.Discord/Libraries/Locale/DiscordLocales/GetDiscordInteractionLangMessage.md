@@ -3,7 +3,6 @@
 Retrieves the lang message for a Discord Interaction
 
 ```csharp
-[Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
 public string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, 
     string langKey)
 ```
@@ -38,7 +37,6 @@ Localized message if found; Empty string otherwise
 Retrieves the lang message for a Discord Interaction
 
 ```csharp
-[Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
 public string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, 
     string langKey, params object[] args)
 ```

@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
         public void ApplyName(CommandOptionChoice choice, PlaceholderData placeholders = null)
         {
             string name = PlaceholderFormatting.ApplyPlaceholder(Name, placeholders);
-            choice.Name = name.TrimIfLargerThan(100);;
+            choice.Name = name.TrimIfLargerThan(100);
         }
     }
 }

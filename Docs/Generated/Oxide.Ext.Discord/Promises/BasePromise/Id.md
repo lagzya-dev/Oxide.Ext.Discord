@@ -1,5 +1,7 @@
 # BasePromise.Id property
 
+ID of the promise
+
 ```csharp
 public Snowflake Id { get; }
 ```

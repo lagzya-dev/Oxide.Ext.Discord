@@ -179,7 +179,6 @@ namespace Oxide.Ext.Discord.Libraries.Locale
         /// <param name="langKey">The lang key to lookup</param>
         /// <returns>Localized message if found; Empty string otherwise</returns>
         /// <exception cref="ArgumentNullException">Thrown if any of the input arguments are null</exception>
-        [Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
         public string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, string langKey)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
@@ -212,7 +211,6 @@ namespace Oxide.Ext.Discord.Libraries.Locale
         /// <param name="args">Localization formatting args</param>
         /// <returns>Localized message if found; Empty string otherwise</returns>
         /// <exception cref="ArgumentNullException">Thrown if any of the input arguments are null</exception>
-        [Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
         public string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, string langKey, params object[] args)
         {
             string message = GetDiscordInteractionLangMessage(plugin, interaction, langKey);

@@ -9,8 +9,6 @@ namespace Oxide.Ext.Discord.Services.PlayerSearch
     {
         private readonly Covalence _covalence = Interface.Oxide.GetLibrary<Covalence>();
 
-        internal CovalenceSearchService() { }
-        
         public IEnumerable<IPlayer> GetOnlinePlayers(string name)
         {
             foreach (IPlayer player in _covalence.Players.Connected)

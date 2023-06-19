@@ -158,7 +158,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="plugin">Plugin the localization is for</param>
         /// <param name="langKey">Lang Key to return</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
-        [Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
         public string GetLangMessage(Plugin plugin, string langKey) => DiscordLocales.Instance.GetDiscordInteractionLangMessage(plugin, this, langKey);
         
         /// <summary>
@@ -168,7 +167,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="langKey">Lang Key to return</param>
         /// <param name="args">Localization args</param>
         /// <returns>Localized string if it is found; Empty string otherwise</returns>
-        [Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
         public string GetLangMessage(Plugin plugin, string langKey, params object[] args) => DiscordLocales.Instance.GetDiscordInteractionLangMessage(plugin, this, langKey, args);
         
         private InteractionDataOption GetFocusedOption()

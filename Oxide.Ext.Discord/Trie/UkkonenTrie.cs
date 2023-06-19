@@ -91,7 +91,7 @@ namespace Oxide.Ext.Discord.Trie
                 inputState.Text.EndIndex += 1;
 
                 //update the tree with the new transitions due to this new char
-                inputState = Update(inputState, keySlice.Slice(i), value, size);
+                inputState = Update(inputState, keySlice.Slice(i), value);
                 //make sure the active state is canonical
                 inputState = GetFurthestNode(inputState);
             }
@@ -172,7 +172,7 @@ namespace Oxide.Ext.Discord.Trie
             return null;
         }
         
-        private SplitResult<T> TestAndSplit(AddState<T> input, char character, StringSlice remainder, T value, int size)
+        private SplitResult<T> TestAndSplit(AddState<T> input, char character, StringSlice remainder, T value)
         {
             // descend the tree as far as possible
             input = GetFurthestNode(input);
@@ -257,7 +257,7 @@ namespace Oxide.Ext.Discord.Trie
             return input;
         }
         
-        private AddState<T> Update(AddState<T> input, StringSlice rest, T value, int length)
+        private AddState<T> Update(AddState<T> input, StringSlice rest, T value)
         {
             char newChar = input.Text[input.Text.Length - 1];
 
@@ -265,7 +265,7 @@ namespace Oxide.Ext.Discord.Trie
             Node<T> oldRoot = _root;
 
             // line 1b
-            SplitResult<T> result = TestAndSplit(input.SliceLastChar(), newChar, rest, value, length);
+            SplitResult<T> result = TestAndSplit(input.SliceLastChar(), newChar, rest, value);
 
             // line 2
             while (!result.Endpoint)
@@ -315,7 +315,7 @@ namespace Oxide.Ext.Discord.Trie
                     input.Text.EndIndex += 1;
                 }
                 
-                result = TestAndSplit(input.SliceLastChar(), newChar, rest, value, length);
+                result = TestAndSplit(input.SliceLastChar(), newChar, rest, value);
             }
             
             if (oldRoot != _root)

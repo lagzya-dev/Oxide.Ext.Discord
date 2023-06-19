@@ -10,7 +10,7 @@ public class BasePromise : BasePoolable, IRejectable
 
 | name | description |
 | --- | --- |
-| [Id](BasePromise/Id.md) { get; } |  |
+| [Id](BasePromise/Id.md) { get; } | ID of the promise |
 | [State](BasePromise/State.md) { get; protected set; } | Tracks the current state of the promise. |
 | [Reject](BasePromise/Reject.md)(…) |  |
 

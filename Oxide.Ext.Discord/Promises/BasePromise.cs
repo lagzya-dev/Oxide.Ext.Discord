@@ -18,7 +18,9 @@ namespace Oxide.Ext.Discord.Promises
     /// </summary>
     public class BasePromise : BasePoolable, IRejectable
     {
-        ///<inheritdoc/>
+        /// <summary>
+        /// ID of the promise
+        /// </summary>
         public Snowflake Id { get; private set; }
 
         /// <summary>

@@ -3,7 +3,6 @@
 Returns a localized string for this interaction
 
 ```csharp
-[Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
 public string GetLangMessage(Plugin plugin, string langKey)
 ```
 
@@ -29,7 +28,6 @@ Localized string if it is found; Empty string otherwise
 Returns a localized string for this interaction
 
 ```csharp
-[Obsolete("This feature is deprecated and will be removed in the future. Please switch to Discord Templates instead.")]
 public string GetLangMessage(Plugin plugin, string langKey, params object[] args)
 ```
 

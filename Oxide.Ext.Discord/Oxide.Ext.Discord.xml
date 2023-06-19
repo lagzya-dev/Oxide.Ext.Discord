@@ -20052,12 +20052,6 @@
             <param name="timestamp">Unix timestamp</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddNowTimestamp">
-            <summary>
-            Adds a Now Unix Timestamp
-            </summary>
-            <returns>This</returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddSnowflake(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.Snowflake"/>
@@ -22453,7 +22447,9 @@
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Promises.BasePromise.Id">
-            <inheritdoc/>
+            <summary>
+            ID of the promise
+            </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Promises.BasePromise.State">
             <summary>
@@ -24318,27 +24314,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"442e27e9"
+            => @"ffc7f167"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"442e27e9c1af8999d6dacac6c8161e601eac5f69"
+            => @"ffc7f167e0c371de8a1e65047089907f04ddf6bf"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-19T09:46:42-05:00"
+            => @"2023-06-19T10:14:21-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"568"
+            => @"569"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-568-g442e27e9"
+            => @"2.1.9-569-gffc7f167"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24373,7 +24369,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"577"
+            => @"578"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">

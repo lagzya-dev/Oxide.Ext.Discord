@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
         
         protected override void RunCommand(DiscordInteraction interaction) => _callback(interaction, interaction.Parsed);
 
-        protected override string GetExceptionMessage() => $"An error occured during callback. Plugin: {PluginName} Method: {_callback.Method.DeclaringType.Name}.{_callback.Method.Name}";
+        protected override string GetExceptionMessage() => $"An error occured during callback. Plugin: {PluginName} Method: {_callback.Method.DeclaringType?.Name}.{_callback.Method.Name}";
 
         public override void LogDebug(DebugLogger logger)
         {

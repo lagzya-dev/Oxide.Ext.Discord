@@ -17,7 +17,6 @@ public class PlaceholderData : BasePoolable
 | [AddGuildMember](PlaceholderData/AddGuildMember.md)(…) | Add a [`GuildMember`](../../Entities/Guilds/GuildMember.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and UserId (2 methods) |
 | [AddInteraction](PlaceholderData/AddInteraction.md)(…) | Adds a [`DiscordInteraction`](../../Entities/Interactions/DiscordInteraction.md) |
 | [AddMessage](PlaceholderData/AddMessage.md)(…) | Add a [`DiscordMessage`](../../Entities/Messages/DiscordMessage.md) |
-| [AddNowTimestamp](PlaceholderData/AddNowTimestamp.md)() | Adds a Now Unix Timestamp |
 | [AddPlayer](PlaceholderData/AddPlayer.md)(…) | Adds a IPlayer |
 | [AddPlugin](PlaceholderData/AddPlugin.md)(…) | Adds a Plugin |
 | [AddRequestError](PlaceholderData/AddRequestError.md)(…) | Add a [`ResponseError`](../../Entities/Api/ResponseError.md) |
