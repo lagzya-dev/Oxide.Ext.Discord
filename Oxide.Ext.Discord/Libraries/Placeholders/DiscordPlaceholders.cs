@@ -48,7 +48,15 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             RequestErrorPlaceholders.RegisterPlaceholders();
             SnowflakePlaceholders.RegisterPlaceholders();
         }
-        
+
+        internal IEnumerable<KeyValuePair<string, BasePlaceholder>> GetPlaceholders()
+        {
+            foreach (KeyValuePair<string, BasePlaceholder> placeholder in _placeholders)
+            {
+                yield return placeholder;
+            }
+        }
+
         /// <summary>
         /// Process placeholders for the given Text
         /// </summary>
@@ -141,9 +149,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             
             Placeholder holder = new Placeholder(plugin, callback);
             BasePlaceholder existing = _placeholders[placeholder];
-            if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
+            if (existing != null && !existing.IsExtensionPlaceholder && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("Plugin {0} has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
+                _logger.Warning("Plugin {0} has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.PluginName);
             }
             _placeholders[placeholder] = holder;
         }
@@ -163,9 +171,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             
             StaticPlaceholder holder = new StaticPlaceholder(plugin, value);
             BasePlaceholder existing = _placeholders[placeholder];
-            if (existing != null && !existing.IsExtensionPlaceholder() && !existing.IsForPlugin(plugin))
+            if (existing != null && !existing.IsExtensionPlaceholder && !existing.IsForPlugin(plugin))
             {
-                _logger.Warning("Plugin {0} has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.Plugin.FullName());
+                _logger.Warning("Plugin {0} has replaced placeholder '{1}' previously registered by plugin {2}", plugin.FullName(), placeholder, existing.PluginName);
             }
             _placeholders[placeholder] = holder;
         }
@@ -200,14 +208,14 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             if (callback == null) throw new ArgumentNullException(nameof(callback));
             
             Placeholder<T> holder = new Placeholder<T>(dataKey, plugin, callback);
-            if (!holder.IsExtensionPlaceholder() && !_internalPlaceholders.ContainsKey(placeholder) && !placeholder.StartsWith(plugin.Name, StringComparison.OrdinalIgnoreCase))
+            if (!holder.IsExtensionPlaceholder && !_internalPlaceholders.ContainsKey(placeholder) && !placeholder.StartsWith(plugin.Name, StringComparison.OrdinalIgnoreCase))
             {
                 _logger.Error("Plugin placeholder {0} must be prefixed with the plugin name {1} unless overriding a Discord Extension provided placeholder.", placeholder, plugin.Name.ToLower());
                 return;
             }
 
             _placeholders[placeholder] = holder;
-            if (holder.IsExtensionPlaceholder())
+            if (holder.IsExtensionPlaceholder)
             {
                 _internalPlaceholders[placeholder] = holder;
             }

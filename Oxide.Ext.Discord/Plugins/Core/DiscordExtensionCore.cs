@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
@@ -12,6 +14,7 @@ using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries.Placeholders.Callbacks;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
@@ -46,6 +49,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
             AddCovalenceCommand(new[] { "de.rest.reset" }, nameof(ResetRestApiCommand), "de.rest.reset");
             AddCovalenceCommand(new[] { "de.search.highperformance.enable" }, nameof(SearchHighPerformanceEnabled), "de.search.highperformance.enable");
+            AddCovalenceCommand(new[] { "de.placeholders.list" }, nameof(PlaceholdersList), "de.placeholders.list");
             AddCovalenceCommand(new[] { "de.pool.clearentities" }, nameof(ClearEntitiesDiscordPool), "de.pool.clearentities");
             AddCovalenceCommand(new[] { "de.pool.remove" }, nameof(RemoveDiscordPool), "de.pool.remove");
             AddCovalenceCommand(new[] { "de.log.console" }, nameof(ConsoleLogCommand), "de.log.console");
@@ -146,6 +150,22 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 ServerPlayerCache.Instance.SetSearchService();
                 DiscordConfig.Instance.Save();
             }
+        }
+
+        [HookMethod(nameof(PlaceholdersList))]
+        private void PlaceholdersList(IPlayer player)
+        {
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+            string extensionName = this.PluginName();
+            foreach (KeyValuePair<string, BasePlaceholder> placeholder in DiscordPlaceholders.Instance.GetPlaceholders().OrderBy(p => p.Key))
+            {
+                sb.Append('{');
+                sb.Append(placeholder.Key);
+                sb.Append("} - ");
+                sb.AppendLine(placeholder.Value.IsExtensionPlaceholder ? extensionName : placeholder.Value.PluginName);
+            }
+            
+            Chat(player, LangKeys.Placeholders.List, DiscordPool.Internal.FreeStringBuilderToString(sb));
         }
         
         [HookMethod(nameof(ClearEntitiesDiscordPool))]
