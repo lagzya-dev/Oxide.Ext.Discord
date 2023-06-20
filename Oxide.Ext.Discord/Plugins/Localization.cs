@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Plugins
 
         internal static class Websocket
         {
-            private const string Base = "Websocket.";
+            private const string Base = nameof(Websocket) + ".";
             
             public const string Reconnect = Base + nameof(Reconnect);
             public const string Reset = Base + nameof(Reset);
@@ -20,22 +20,29 @@ namespace Oxide.Ext.Discord.Plugins
 
         internal static class RestApi
         {
-            private const string Base = "RestApi.";
+            private const string Base = nameof(RestApi) + ".";
             
             public const string Reset = Base + nameof(Reset);
         }        
        
         internal static class Pool
         {
-            private const string Base = "Pool.";
+            private const string Base = nameof(Pool) + ".";
             
             public const string ClearEntities = Base + nameof(ClearEntities);
             public const string Remove = Base + nameof(Remove);
         }
+        
+        internal static class Placeholders
+        {
+            private const string Base = nameof(Placeholders) + ".";
+            
+            public const string List = Base + nameof(List);
+        }
 
         internal static class Log
         {
-            private const string Base = "Log.";
+            private const string Base = nameof(Log) + ".";
             
             public const string Show = Base + nameof(Show);
             public const string Set = Base + nameof(Set);
@@ -44,7 +51,7 @@ namespace Oxide.Ext.Discord.Plugins
         
         internal static class Validation
         {
-            private const string Base = "Validation.";
+            private const string Base = nameof(Validation) + ".";
 
             public const string Show = Base + nameof(Show);
             public const string Set = Base + nameof(Set);
@@ -53,11 +60,11 @@ namespace Oxide.Ext.Discord.Plugins
 
         internal static class Search
         {
-            private const string Base = "Search.";
+            private const string Base = nameof(Search) + ".";
             
             internal static class HighPerformance
             {
-                private const string Base = Search.Base + "HighPerformance.";
+                private const string Base = Search.Base + nameof(HighPerformance) + ".";
                 
                 public const string Show = Base + nameof(Show);
                 public const string Set = Base + nameof(Set);
@@ -80,6 +87,7 @@ namespace Oxide.Ext.Discord.Plugins
                 [LangKeys.RestApi.Reset] = "All REST API's have been reset",
                 [LangKeys.Pool.ClearEntities] = "All Discord Pool Entities have been cleared",
                 [LangKeys.Pool.Remove] = "All Discord Pools have been removed",
+                [LangKeys.Placeholders.List] = "Placeholders:\n{0}",
                 [LangKeys.Log.Show] = "{0} log is currently set to {1}",
                 [LangKeys.Log.Set] = "{0} log has been set to {1}",
                 [LangKeys.Log.InvalidEnum] = "'{0}' is not a valid DiscordLogLevel enum. Valid values are Off, Error, Warning, Info, Debug, Verbose",
