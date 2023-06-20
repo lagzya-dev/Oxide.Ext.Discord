@@ -3,12 +3,11 @@
 [`Members`](../../../../Entities/Guilds/DiscordGuild/Members.md) count placeholder
 
 ```csharp
-public static void MemberCount(StringBuilder builder, PlaceholderState state, DiscordGuild guild)
+public static int MemberCount(DiscordGuild guild)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordGuild](../../../../Entities/Guilds/DiscordGuild.md)
 * class [GuildPlaceholders](../GuildPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../GuildPlaceholders.md)

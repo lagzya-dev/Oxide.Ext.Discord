@@ -3,12 +3,11 @@
 Second placeholder
 
 ```csharp
-public static void Second(StringBuilder builder, PlaceholderState state, DateTime date)
+public static int Second(DateTime date)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DateTimePlaceholders](../DateTimePlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../DateTimePlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

@@ -3,7 +3,7 @@
 Name placeholder
 
 ```csharp
-public static void Name(StringBuilder builder, PlaceholderState state, IPlayer player)
+public static string Name(PlaceholderState state, IPlayer player)
 ```
 
 ## See Also

@@ -1,4 +1,3 @@
-using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Plugins.Core;
@@ -13,7 +12,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="DiscordInteraction.GetLangMessage(Oxide.Core.Plugins.Plugin,string)"/> placeholder
         /// </summary>
-        public static void Lang(StringBuilder builder, PlaceholderState state, DiscordInteraction interaction) => PlaceholderFormatting.Replace(builder, state, interaction.GetLangMessage(state.Data.Get<Plugin>(), state.Format));
+        public static string Lang(PlaceholderState state, DiscordInteraction interaction) => interaction.GetLangMessage(state.Data.Get<Plugin>(), state.Format);
 
         internal static void RegisterPlaceholders()
         {
@@ -29,7 +28,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(DiscordInteraction))
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<DiscordInteraction>(plugin, $"{placeholderPrefix}.lang", dataKey, Lang);
+            placeholders.RegisterPlaceholder<DiscordInteraction, string>(plugin, $"{placeholderPrefix}.lang", dataKey, Lang);
         }
     }
 }

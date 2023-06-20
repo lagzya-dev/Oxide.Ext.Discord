@@ -1,9 +1,8 @@
-using System.Text;
 using Oxide.Core.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
 {
-    internal class StaticPlaceholder : BasePlaceholder
+    internal class StaticPlaceholder : BasePlaceholder<string>
     {
         private readonly string _value;
         
@@ -12,6 +11,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
             _value = value;
         }
 
-        public override void Invoke(StringBuilder builder, PlaceholderState state) => PlaceholderFormatting.Replace(builder, state, _value);
+        public override string InvokeInternal(PlaceholderState state) => _value;
     }
 }

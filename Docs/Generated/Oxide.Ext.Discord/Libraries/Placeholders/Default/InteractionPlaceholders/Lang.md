@@ -3,8 +3,7 @@
 [`GetLangMessage`](../../../../Entities/Interactions/DiscordInteraction/GetLangMessage.md) placeholder
 
 ```csharp
-public static void Lang(StringBuilder builder, PlaceholderState state, 
-    DiscordInteraction interaction)
+public static string Lang(PlaceholderState state, DiscordInteraction interaction)
 ```
 
 ## See Also

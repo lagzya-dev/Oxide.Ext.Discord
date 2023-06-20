@@ -3,12 +3,11 @@
 [`GetCreationDate`](../../../../Entities/Snowflake/GetCreationDate.md) placeholder
 
 ```csharp
-public static void Created(StringBuilder builder, PlaceholderState state, Snowflake id)
+public static DateTimeOffset Created(Snowflake id)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * struct [Snowflake](../../../../Entities/Snowflake.md)
 * class [SnowflakePlaceholders](../SnowflakePlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../SnowflakePlaceholders.md)

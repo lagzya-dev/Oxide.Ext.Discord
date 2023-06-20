@@ -157,7 +157,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
             string extensionName = this.PluginName();
-            foreach (KeyValuePair<string, BasePlaceholder> placeholder in DiscordPlaceholders.Instance.GetPlaceholders().OrderBy(p => p.Key))
+            foreach (KeyValuePair<string, IPlaceholder> placeholder in DiscordPlaceholders.Instance.GetPlaceholders().OrderBy(p => p.Key))
             {
                 sb.Append('{');
                 sb.Append(placeholder.Key);

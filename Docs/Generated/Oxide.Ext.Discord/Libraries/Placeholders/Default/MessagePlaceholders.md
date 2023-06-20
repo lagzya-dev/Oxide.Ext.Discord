@@ -10,6 +10,7 @@ public static class MessagePlaceholders
 
 | name | description |
 | --- | --- |
+| static [ChannelId](MessagePlaceholders/ChannelId.md)(…) | [`ChannelId`](../../../Entities/Messages/DiscordMessage/ChannelId.md) placeholder |
 | static [Content](MessagePlaceholders/Content.md)(…) | [`Content`](../../../Entities/Messages/DiscordMessage/Content.md) placeholder |
 | static [Id](MessagePlaceholders/Id.md)(…) | [`Id`](../../../Entities/Messages/DiscordMessage/Id.md) placeholder |
 | static [RegisterPlaceholders](MessagePlaceholders/RegisterPlaceholders.md)(…) | Registers placeholders for the given plugin. |

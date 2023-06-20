@@ -3,12 +3,11 @@
 [`GetBannerUrl`](../../../../Entities/Users/DiscordUser/GetBannerUrl.md) placeholder
 
 ```csharp
-public static void BannerUrl(StringBuilder builder, PlaceholderState state, DiscordUser user)
+public static string BannerUrl(DiscordUser user)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordUser](../../../../Entities/Users/DiscordUser.md)
 * class [UserPlaceholders](../UserPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../UserPlaceholders.md)

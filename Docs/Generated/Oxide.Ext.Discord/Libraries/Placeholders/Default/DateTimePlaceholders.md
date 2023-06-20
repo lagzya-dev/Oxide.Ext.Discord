@@ -10,7 +10,6 @@ public static class DateTimePlaceholders
 
 | name | description |
 | --- | --- |
-| static [Date](DateTimePlaceholders/Date.md)(…) | DateTime placeholder |
 | static [Day](DateTimePlaceholders/Day.md)(…) | Day placeholder |
 | static [Hour](DateTimePlaceholders/Hour.md)(…) | Hour placeholder |
 | static [Millisecond](DateTimePlaceholders/Millisecond.md)(…) | Millisecond placeholder |

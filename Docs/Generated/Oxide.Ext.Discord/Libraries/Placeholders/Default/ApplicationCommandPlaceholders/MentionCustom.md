@@ -3,8 +3,7 @@
 [`MentionCustom`](../../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/MentionCustom.md) placeholder
 
 ```csharp
-public static void MentionCustom(StringBuilder builder, PlaceholderState state, 
-    DiscordApplicationCommand command)
+public static string MentionCustom(PlaceholderState state, DiscordApplicationCommand command)
 ```
 
 ## See Also

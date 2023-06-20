@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
@@ -12,7 +13,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     /// <summary>
     /// Formatting Helpers for Placeholders
     /// </summary>
-    public static class PlaceholderFormatting
+    internal static class PlaceholderFormatting
     {
         private static readonly Regex GenericPositionRegex = new Regex(@"([xyz])(?::?([\d\.]*))", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         
@@ -25,6 +26,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         public static void Replace(StringBuilder builder, PlaceholderState state, string value)
         {
             builder.Remove(state.Index, state.Length);
+            if (value == null)
+            {
+                value = string.Empty;
+            }
             builder.Insert(state.Index, value);
         }
 
@@ -127,6 +132,33 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         public static string ApplyPlaceholder(string text, PlaceholderData data)
         {
             return data == null ? text : DiscordPlaceholders.Instance.ProcessPlaceholders(text, data);
+        }
+
+        public static Action<StringBuilder, PlaceholderState, TResult> CreatePlaceholderCallback<TResult>()
+        {
+            Type type = typeof(TResult);
+            if (type == typeof(string))
+            {
+                return (builder, state, value) => Replace(builder, state, value as string);
+            }
+            if (type == typeof(bool))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, bool>());
+            }
+            if (typeof(IFormattable).IsAssignableFrom(type))
+            {
+                return (builder, state, value) => Replace(builder, state, value as IFormattable);
+            }
+            if (type == typeof(Snowflake))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, Snowflake>());
+            }
+            if (type == typeof(GenericPosition))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, GenericPosition>());
+            }
+            
+            return (builder, state, value) => Replace(builder, state, value.ToString());
         }
     }
 }

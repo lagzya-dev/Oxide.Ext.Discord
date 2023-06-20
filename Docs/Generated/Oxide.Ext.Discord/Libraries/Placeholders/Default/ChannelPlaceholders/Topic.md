@@ -3,12 +3,11 @@
 [`Topic`](../../../../Entities/Channels/DiscordChannel/Topic.md) placeholder
 
 ```csharp
-public static void Topic(StringBuilder builder, PlaceholderState state, DiscordChannel channel)
+public static string Topic(DiscordChannel channel)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordChannel](../../../../Entities/Channels/DiscordChannel.md)
 * class [ChannelPlaceholders](../ChannelPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ChannelPlaceholders.md)

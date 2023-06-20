@@ -3,12 +3,11 @@
 [`IconUrl`](../../../../Entities/Channels/DiscordChannel/IconUrl.md) placeholder
 
 ```csharp
-public static void Icon(StringBuilder builder, PlaceholderState state, DiscordChannel channel)
+public static string Icon(DiscordChannel channel)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordChannel](../../../../Entities/Channels/DiscordChannel.md)
 * class [ChannelPlaceholders](../ChannelPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ChannelPlaceholders.md)

@@ -3,7 +3,7 @@
 Position placeholder
 
 ```csharp
-public static void Position(StringBuilder builder, PlaceholderState state, IPlayer player)
+public static GenericPosition Position(PlaceholderState state, IPlayer player)
 ```
 
 ## See Also

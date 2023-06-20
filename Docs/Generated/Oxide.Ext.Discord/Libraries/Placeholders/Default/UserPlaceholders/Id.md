@@ -3,12 +3,12 @@
 [`Id`](../../../../Entities/Users/DiscordUser/Id.md) placeholder
 
 ```csharp
-public static void Id(StringBuilder builder, PlaceholderState state, DiscordUser user)
+public static Snowflake Id(DiscordUser user)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
+* struct [Snowflake](../../../../Entities/Snowflake.md)
 * class [DiscordUser](../../../../Entities/Users/DiscordUser.md)
 * class [UserPlaceholders](../UserPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../UserPlaceholders.md)

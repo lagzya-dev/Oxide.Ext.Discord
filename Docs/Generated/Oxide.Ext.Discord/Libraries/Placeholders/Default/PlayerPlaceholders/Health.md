@@ -3,7 +3,7 @@
 Health placeholder
 
 ```csharp
-public static void Health(StringBuilder builder, PlaceholderState state, IPlayer player)
+public static float Health(PlaceholderState state, IPlayer player)
 ```
 
 ## See Also

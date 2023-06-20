@@ -11,7 +11,6 @@ public static class SnowflakePlaceholders
 | name | description |
 | --- | --- |
 | static [Created](SnowflakePlaceholders/Created.md)(…) | [`GetCreationDate`](../../../Entities/Snowflake/GetCreationDate.md) placeholder |
-| static [Id](SnowflakePlaceholders/Id.md)(…) | [`Id`](../../../Entities/Snowflake/Id.md) placeholder |
 | static [RegisterPlaceholders](SnowflakePlaceholders/RegisterPlaceholders.md)(…) | Registers placeholders for the given plugin. |
 
 ## See Also

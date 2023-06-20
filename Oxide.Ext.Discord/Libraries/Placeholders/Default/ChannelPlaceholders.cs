@@ -1,5 +1,5 @@
-using System.Text;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Plugins.Core;
 
@@ -13,27 +13,27 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="DiscordChannel.Id"/> placeholder
         /// </summary>
-        public static void Id(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Id);
+        public static Snowflake Id(DiscordChannel channel) => channel.Id;
         
         /// <summary>
         /// <see cref="DiscordChannel.Name"/> placeholder
         /// </summary>
-        public static void Name(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Name);
+        public static string Name(DiscordChannel channel) => channel.Name;
         
         /// <summary>
         /// <see cref="DiscordChannel.IconUrl"/> placeholder
         /// </summary>
-        public static void Icon(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.IconUrl);
+        public static string Icon(DiscordChannel channel) => channel.IconUrl;
         
         /// <summary>
         /// <see cref="DiscordChannel.Topic"/> placeholder
         /// </summary>
-        public static void Topic(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Topic);
+        public static string Topic(DiscordChannel channel) => channel.Topic;
         
         /// <summary>
         /// <see cref="DiscordChannel.Mention"/> placeholder
         /// </summary>
-        public static void Mention(StringBuilder builder, PlaceholderState state, DiscordChannel channel) => PlaceholderFormatting.Replace(builder, state, channel.Mention);
+        public static string Mention(DiscordChannel channel) => channel.Mention;
 
         internal static void RegisterPlaceholders()
         {
@@ -49,11 +49,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(DiscordChannel))
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
-            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
-            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.icon", dataKey, Icon);
-            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.topic", dataKey, Topic);
-            placeholders.RegisterPlaceholder<DiscordChannel>(plugin, $"{placeholderPrefix}.mention", dataKey, Mention);
+            placeholders.RegisterPlaceholder<DiscordChannel, Snowflake>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
+            placeholders.RegisterPlaceholder<DiscordChannel, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<DiscordChannel, string>(plugin, $"{placeholderPrefix}.icon", dataKey, Icon);
+            placeholders.RegisterPlaceholder<DiscordChannel, string>(plugin, $"{placeholderPrefix}.topic", dataKey, Topic);
+            placeholders.RegisterPlaceholder<DiscordChannel, string>(plugin, $"{placeholderPrefix}.mention", dataKey, Mention);
         }
     }
 }

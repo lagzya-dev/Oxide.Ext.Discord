@@ -11,11 +11,9 @@ public class PlaceholderState : BasePoolable
 | name | description |
 | --- | --- |
 | [PlaceholderState](PlaceholderState/PlaceholderState.md)() | The default constructor. |
-| [Data](PlaceholderState/Data.md) | Placeholder Data for the state |
-| [Format](PlaceholderState/Format.md) | Format specified in the placeholder |
-| [Index](PlaceholderState/Index.md) | Index in the string of the placeholder |
-| [Length](PlaceholderState/Length.md) | Length of the placeholder |
-| [Name](PlaceholderState/Name.md) | Name of the placeholder |
+| [Data](PlaceholderState/Data.md) { get; } | Placeholder Data for the state |
+| [Format](PlaceholderState/Format.md) { get; } | Format specified in the placeholder |
+| [Name](PlaceholderState/Name.md) { get; } | Name of the placeholder |
 
 ## Protected Members
 

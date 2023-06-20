@@ -12,27 +12,27 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <summary>
         /// Placeholder Data for the state
         /// </summary>
-        public PlaceholderData Data;
+        public PlaceholderData Data { get; private set; }
         
         /// <summary>
         /// Name of the placeholder
         /// </summary>
-        public string Name;
+        public string Name { get; private set; }
         
         /// <summary>
         /// Format specified in the placeholder
         /// </summary>
-        public string Format;
+        public string Format { get; private set; }
         
         /// <summary>
         /// Index in the string of the placeholder
         /// </summary>
-        public ushort Index;
+        internal ushort Index;
         
         /// <summary>
         /// Length of the placeholder
         /// </summary>
-        public ushort Length;
+        internal ushort Length;
 
         /// <summary>
         /// Creates a pooled <see cref="PlaceholderState"/>

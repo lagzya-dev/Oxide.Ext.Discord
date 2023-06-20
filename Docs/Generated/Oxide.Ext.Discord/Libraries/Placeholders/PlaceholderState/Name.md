@@ -1,9 +1,9 @@
-# PlaceholderState.Name field
+# PlaceholderState.Name property
 
 Name of the placeholder
 
 ```csharp
-public string Name;
+public string Name { get; }
 ```
 
 ## See Also

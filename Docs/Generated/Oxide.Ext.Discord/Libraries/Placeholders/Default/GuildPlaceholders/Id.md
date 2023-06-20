@@ -3,12 +3,12 @@
 [`Id`](../../../../Entities/Guilds/DiscordGuild/Id.md) placeholder
 
 ```csharp
-public static void Id(StringBuilder builder, PlaceholderState state, DiscordGuild guild)
+public static Snowflake Id(DiscordGuild guild)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
+* struct [Snowflake](../../../../Entities/Snowflake.md)
 * class [DiscordGuild](../../../../Entities/Guilds/DiscordGuild.md)
 * class [GuildPlaceholders](../GuildPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../GuildPlaceholders.md)

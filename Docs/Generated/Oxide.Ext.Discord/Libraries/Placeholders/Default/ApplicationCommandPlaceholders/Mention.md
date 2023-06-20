@@ -3,13 +3,11 @@
 [`Mention`](../../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Mention.md) placeholder
 
 ```csharp
-public static void Mention(StringBuilder builder, PlaceholderState state, 
-    DiscordApplicationCommand command)
+public static string Mention(DiscordApplicationCommand command)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordApplicationCommand](../../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md)
 * class [ApplicationCommandPlaceholders](../ApplicationCommandPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ApplicationCommandPlaceholders.md)

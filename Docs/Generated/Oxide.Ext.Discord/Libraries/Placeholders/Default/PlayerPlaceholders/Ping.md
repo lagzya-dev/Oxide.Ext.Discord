@@ -3,7 +3,7 @@
 Ping placeholder
 
 ```csharp
-public static void Ping(StringBuilder builder, PlaceholderState state, IPlayer player)
+public static int Ping(PlaceholderState state, IPlayer player)
 ```
 
 ## See Also

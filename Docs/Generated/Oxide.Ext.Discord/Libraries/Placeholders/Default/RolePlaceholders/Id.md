@@ -3,12 +3,12 @@
 [`Id`](../../../../Entities/Permissions/DiscordRole/Id.md) placeholder
 
 ```csharp
-public static void Id(StringBuilder builder, PlaceholderState state, DiscordRole role)
+public static Snowflake Id(DiscordRole role)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
+* struct [Snowflake](../../../../Entities/Snowflake.md)
 * class [DiscordRole](../../../../Entities/Permissions/DiscordRole.md)
 * class [RolePlaceholders](../RolePlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../RolePlaceholders.md)

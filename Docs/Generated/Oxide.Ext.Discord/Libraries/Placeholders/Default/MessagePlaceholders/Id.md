@@ -3,11 +3,12 @@
 [`Id`](../../../../Entities/Messages/DiscordMessage/Id.md) placeholder
 
 ```csharp
-public static void Id(StringBuilder builder, PlaceholderState state, DiscordMessage message)
+public static Snowflake Id(PlaceholderState state, DiscordMessage message)
 ```
 
 ## See Also
 
+* struct [Snowflake](../../../../Entities/Snowflake.md)
 * class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordMessage](../../../../Entities/Messages/DiscordMessage.md)
 * class [MessagePlaceholders](../MessagePlaceholders.md)

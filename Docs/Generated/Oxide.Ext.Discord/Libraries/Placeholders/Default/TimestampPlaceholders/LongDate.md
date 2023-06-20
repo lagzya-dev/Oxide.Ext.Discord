@@ -3,12 +3,11 @@
 [`UnixTimestamp`](../../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder
 
 ```csharp
-public static void LongDate(StringBuilder builder, PlaceholderState state, long timestamp)
+public static string LongDate(long timestamp)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [TimestampPlaceholders](../TimestampPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../TimestampPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

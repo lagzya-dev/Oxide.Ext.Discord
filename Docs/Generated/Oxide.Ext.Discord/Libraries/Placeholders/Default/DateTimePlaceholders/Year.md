@@ -3,12 +3,11 @@
 Year placeholder
 
 ```csharp
-public static void Year(StringBuilder builder, PlaceholderState state, DateTime date)
+public static int Year(DateTime date)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DateTimePlaceholders](../DateTimePlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../DateTimePlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

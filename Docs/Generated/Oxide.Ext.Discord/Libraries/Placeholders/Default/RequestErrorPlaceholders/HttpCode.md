@@ -3,12 +3,12 @@
 [`HttpStatusCode`](../../../../Entities/Api/ResponseError/HttpStatusCode.md) placeholder
 
 ```csharp
-public static void HttpCode(StringBuilder builder, PlaceholderState state, ResponseError error)
+public static DiscordHttpStatusCode HttpCode(ResponseError error)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
+* enum [DiscordHttpStatusCode](../../../../Entities/Api/DiscordHttpStatusCode.md)
 * class [ResponseError](../../../../Entities/Api/ResponseError.md)
 * class [RequestErrorPlaceholders](../RequestErrorPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../RequestErrorPlaceholders.md)

@@ -16,7 +16,6 @@ public static class TimeSpanPlaceholders
 | static [Minutes](TimeSpanPlaceholders/Minutes.md)(…) | Minutes placeholder |
 | static [RegisterPlaceholders](TimeSpanPlaceholders/RegisterPlaceholders.md)(…) | Registers placeholders for the given plugin. |
 | static [Seconds](TimeSpanPlaceholders/Seconds.md)(…) | Seconds placeholder |
-| static [Time](TimeSpanPlaceholders/Time.md)(…) | TimeSpan placeholder |
 | static [TotalDays](TimeSpanPlaceholders/TotalDays.md)(…) | TotalDays placeholder |
 | static [TotalHours](TimeSpanPlaceholders/TotalHours.md)(…) | TotalHours placeholder |
 | static [TotalMilliseconds](TimeSpanPlaceholders/TotalMilliseconds.md)(…) | TotalMilliseconds placeholder |

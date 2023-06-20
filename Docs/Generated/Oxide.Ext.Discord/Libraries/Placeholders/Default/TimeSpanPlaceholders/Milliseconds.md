@@ -3,12 +3,11 @@
 Milliseconds placeholder
 
 ```csharp
-public static void Milliseconds(StringBuilder builder, PlaceholderState state, TimeSpan time)
+public static int Milliseconds(TimeSpan time)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [TimeSpanPlaceholders](../TimeSpanPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../TimeSpanPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

@@ -12,8 +12,10 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 | --- | --- |
 | [CreateData](DiscordPlaceholders/CreateData.md)(…) | Creates Pooled [`PlaceholderData`](./PlaceholderData.md) |
 | [ProcessPlaceholders](DiscordPlaceholders/ProcessPlaceholders.md)(…) | Process placeholders for the given Text |
-| [RegisterPlaceholder](DiscordPlaceholders/RegisterPlaceholder.md)(…) | Registers a placeholder (2 methods) |
-| [RegisterPlaceholder&lt;T&gt;](DiscordPlaceholders/RegisterPlaceholder.md)(…) | Registers a placeholder of type {T} (2 methods) |
+| [RegisterPlaceholder](DiscordPlaceholders/RegisterPlaceholder.md)(…) | Registers a placeholder static value placeholder |
+| [RegisterPlaceholder&lt;TResult&gt;](DiscordPlaceholders/RegisterPlaceholder.md)(…) | Registers a placeholder |
+| [RegisterPlaceholder&lt;TData&gt;](DiscordPlaceholders/RegisterPlaceholder.md)(…) | Registers a placeholder |
+| [RegisterPlaceholder&lt;TData,TResult&gt;](DiscordPlaceholders/RegisterPlaceholder.md)(…) | Registers a placeholder of type {T} (4 methods) |
 
 ## Protected Members
 

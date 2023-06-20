@@ -3,12 +3,11 @@
 [`IconUrl`](../../../../Entities/Guilds/DiscordGuild/IconUrl.md) placeholder
 
 ```csharp
-public static void Icon(StringBuilder builder, PlaceholderState state, DiscordGuild guild)
+public static string Icon(DiscordGuild guild)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordGuild](../../../../Entities/Guilds/DiscordGuild.md)
 * class [GuildPlaceholders](../GuildPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../GuildPlaceholders.md)

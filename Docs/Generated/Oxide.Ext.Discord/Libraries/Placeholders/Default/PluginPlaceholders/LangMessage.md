@@ -3,7 +3,7 @@
 Lang message for a plugin
 
 ```csharp
-public static void LangMessage(StringBuilder builder, PlaceholderState state, Plugin plugin)
+public static string LangMessage(PlaceholderState state, Plugin plugin)
 ```
 
 ## See Also

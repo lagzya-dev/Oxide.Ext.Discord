@@ -3,7 +3,7 @@
 Id placeholder
 
 ```csharp
-public static void Id(StringBuilder builder, PlaceholderState state, IPlayer player)
+public static string Id(PlaceholderState state, IPlayer player)
 ```
 
 ## See Also

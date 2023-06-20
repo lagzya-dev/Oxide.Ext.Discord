@@ -3,12 +3,11 @@
 Description placeholder
 
 ```csharp
-public static void Description(StringBuilder builder, PlaceholderState state, Plugin plugin)
+public static string Description(Plugin plugin)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [PluginPlaceholders](../PluginPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../PluginPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

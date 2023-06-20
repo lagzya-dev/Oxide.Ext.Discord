@@ -3,12 +3,11 @@
 [`Name`](../../../../Entities/Permissions/DiscordRole/Name.md) placeholder
 
 ```csharp
-public static void Name(StringBuilder builder, PlaceholderState state, DiscordRole role)
+public static string Name(DiscordRole role)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordRole](../../../../Entities/Permissions/DiscordRole.md)
 * class [RolePlaceholders](../RolePlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../RolePlaceholders.md)

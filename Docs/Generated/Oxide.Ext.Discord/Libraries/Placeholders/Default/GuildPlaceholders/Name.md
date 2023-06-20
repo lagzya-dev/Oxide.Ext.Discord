@@ -3,12 +3,11 @@
 [`Name`](../../../../Entities/Guilds/DiscordGuild/Name.md) placeholder
 
 ```csharp
-public static void Name(StringBuilder builder, PlaceholderState state, DiscordGuild guild)
+public static string Name(DiscordGuild guild)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordGuild](../../../../Entities/Guilds/DiscordGuild.md)
 * class [GuildPlaceholders](../GuildPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../GuildPlaceholders.md)

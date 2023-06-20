@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
@@ -19,42 +18,42 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="Plugin.Name"/> placeholder
         /// </summary>
-        public static void Name(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, plugin.Name);
+        public static string Name(Plugin plugin) => plugin.Name;
         
         /// <summary>
         /// <see cref="Plugin.Title"/> placeholder
         /// </summary>
-        public static void Title(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, plugin.Title);
+        public static string Title(Plugin plugin) => plugin.Title;
         
         /// <summary>
         /// <see cref="Plugin.Author"/> placeholder
         /// </summary>
-        public static void Author(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, plugin.Author);
+        public static string Author(Plugin plugin) => plugin.Author;
         
         /// <summary>
         /// <see cref="Plugin.Version"/> placeholder
         /// </summary>
-        public static void Version(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, plugin.Version.ToString());
+        public static string Version(Plugin plugin) => plugin.Version.ToString();
         
         /// <summary>
         /// <see cref="Plugin.Description"/> placeholder
         /// </summary>
-        public static void Description(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, plugin.Description);
+        public static string Description(Plugin plugin) => plugin.Description;
         
         /// <summary>
         /// <see cref="PluginExt.FullName(Oxide.Core.Plugins.Plugin)"/> placeholder
         /// </summary>
-        public static void FullName(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, plugin.FullName());
+        public static string FullName(Plugin plugin) => plugin.FullName();
         
         /// <summary>
         /// <see cref="Plugin.TotalHookTime"/> placeholder
         /// </summary>
-        public static void HookTime(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, TimeSpan.FromSeconds(plugin.TotalHookTime));
+        public static TimeSpan HookTime(Plugin plugin) => TimeSpan.FromSeconds(plugin.TotalHookTime);
         
         /// <summary>
         /// Lang message for a plugin
         /// </summary>
-        public static void LangMessage(StringBuilder builder, PlaceholderState state, Plugin plugin) => PlaceholderFormatting.Replace(builder, state, Lang.GetMessage(state.Format, plugin, state.Data.Get<IPlayer>()?.Id));
+        public static string LangMessage(PlaceholderState state, Plugin plugin) => Lang.GetMessage(state.Format, plugin, state.Data.Get<IPlayer>()?.Id);
 
         internal static void RegisterPlaceholders()
         {
@@ -70,14 +69,14 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(Plugin))
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<Plugin>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
-            placeholders.RegisterPlaceholder<Plugin>(plugin, $"{placeholderPrefix}.title", dataKey, Title);
-            placeholders.RegisterPlaceholder<Plugin>(plugin, $"{placeholderPrefix}.author", dataKey, Author);
-            placeholders.RegisterPlaceholder<Plugin>(plugin, $"{placeholderPrefix}.version", dataKey, Version);
-            placeholders.RegisterPlaceholder<Plugin>(plugin, $"{placeholderPrefix}.description", dataKey, Description);
-            placeholders.RegisterPlaceholder<Plugin>(plugin, $"{placeholderPrefix}.fullname", dataKey, FullName);
-            placeholders.RegisterPlaceholder<Plugin>(plugin, $"{placeholderPrefix}.hooktime", dataKey, HookTime);
-            placeholders.RegisterPlaceholder<Plugin>(plugin, $"{placeholderPrefix}.lang", dataKey, LangMessage);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.title", dataKey, Title);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.author", dataKey, Author);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.version", dataKey, Version);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.description", dataKey, Description);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.fullname", dataKey, FullName);
+            placeholders.RegisterPlaceholder<Plugin, TimeSpan>(plugin, $"{placeholderPrefix}.hooktime", dataKey, HookTime);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.lang", dataKey, LangMessage);
         }
     }
 }

@@ -1,4 +1,4 @@
-using System.Text;
+using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Plugins.Core;
@@ -11,14 +11,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
     public static class SnowflakePlaceholders
     {
         /// <summary>
-        /// <see cref="Snowflake.Id"/> placeholder
-        /// </summary>
-        public static void Id(StringBuilder builder, PlaceholderState state, Snowflake id) => PlaceholderFormatting.Replace(builder, state, id);
-        
-        /// <summary>
         /// <see cref="Snowflake.GetCreationDate"/> placeholder
         /// </summary>
-        public static void Created(StringBuilder builder, PlaceholderState state, Snowflake id) => PlaceholderFormatting.Replace(builder, state, id.GetCreationDate());
+        public static DateTimeOffset Created(Snowflake id) => id.GetCreationDate();
 
         internal static void RegisterPlaceholders()
         {
@@ -34,8 +29,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<Snowflake>(plugin,$"{placeholderPrefix}.id", dataKey, Id);
-            placeholders.RegisterPlaceholder<Snowflake>(plugin,$"{placeholderPrefix}.created", dataKey, Created);
+            placeholders.RegisterPlaceholder<Snowflake>(plugin,$"{placeholderPrefix}.id", dataKey);
+            placeholders.RegisterPlaceholder<Snowflake, DateTimeOffset>(plugin,$"{placeholderPrefix}.created", dataKey, Created);
         }
     }
 }

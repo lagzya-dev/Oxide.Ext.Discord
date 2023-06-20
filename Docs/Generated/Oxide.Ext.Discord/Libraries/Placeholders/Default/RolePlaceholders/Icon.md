@@ -3,12 +3,11 @@
 [`Icon`](../../../../Entities/Permissions/DiscordRole/Icon.md) placeholder
 
 ```csharp
-public static void Icon(StringBuilder builder, PlaceholderState state, DiscordRole role)
+public static string Icon(DiscordRole role)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordRole](../../../../Entities/Permissions/DiscordRole.md)
 * class [RolePlaceholders](../RolePlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../RolePlaceholders.md)

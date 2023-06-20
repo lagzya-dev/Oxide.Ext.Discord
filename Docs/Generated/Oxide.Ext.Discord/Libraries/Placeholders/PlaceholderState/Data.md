@@ -1,9 +1,9 @@
-# PlaceholderState.Data field
+# PlaceholderState.Data property
 
 Placeholder Data for the state
 
 ```csharp
-public PlaceholderData Data;
+public PlaceholderData Data { get; }
 ```
 
 ## See Also

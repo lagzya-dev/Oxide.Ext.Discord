@@ -1,9 +1,9 @@
-# PlaceholderState.Format field
+# PlaceholderState.Format property
 
 Format specified in the placeholder
 
 ```csharp
-public string Format;
+public string Format { get; }
 ```
 
 ## See Also

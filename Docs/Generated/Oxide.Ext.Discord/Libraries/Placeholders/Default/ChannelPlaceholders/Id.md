@@ -3,12 +3,12 @@
 [`Id`](../../../../Entities/Channels/DiscordChannel/Id.md) placeholder
 
 ```csharp
-public static void Id(StringBuilder builder, PlaceholderState state, DiscordChannel channel)
+public static Snowflake Id(DiscordChannel channel)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
+* struct [Snowflake](../../../../Entities/Snowflake.md)
 * class [DiscordChannel](../../../../Entities/Channels/DiscordChannel.md)
 * class [ChannelPlaceholders](../ChannelPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ChannelPlaceholders.md)

@@ -3,12 +3,11 @@
 Name placeholder
 
 ```csharp
-public static void Name(StringBuilder builder, PlaceholderState state, IServer server)
+public static string Name(IServer server)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [ServerPlaceholders](../ServerPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ServerPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

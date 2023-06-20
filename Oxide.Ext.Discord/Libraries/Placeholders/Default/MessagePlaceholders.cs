@@ -1,5 +1,5 @@
-using System.Text;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Plugins.Core;
 
@@ -13,12 +13,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="DiscordMessage.Id"/> placeholder
         /// </summary>
-        public static void Id(StringBuilder builder, PlaceholderState state, DiscordMessage message) => PlaceholderFormatting.Replace(builder, state, message.Id);
+        public static Snowflake Id(PlaceholderState state, DiscordMessage message) => message.Id;
+        
+        /// <summary>
+        /// <see cref="DiscordMessage.ChannelId"/> placeholder
+        /// </summary>
+        public static Snowflake ChannelId(PlaceholderState state, DiscordMessage message) => message.ChannelId;
         
         /// <summary>
         /// <see cref="DiscordMessage.Content"/> placeholder
         /// </summary>
-        public static void Content(StringBuilder builder, PlaceholderState state, DiscordMessage message) => PlaceholderFormatting.Replace(builder, state, message.Content);
+        public static string Content(PlaceholderState state, DiscordMessage message) => message.Content;
 
         internal static void RegisterPlaceholders()
         {
@@ -34,8 +39,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(DiscordMessage))
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<DiscordMessage>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
-            placeholders.RegisterPlaceholder<DiscordMessage>(plugin, $"{placeholderPrefix}.content", dataKey, Content);
+            placeholders.RegisterPlaceholder<DiscordMessage, Snowflake>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
+            placeholders.RegisterPlaceholder<DiscordMessage, Snowflake>(plugin, $"{placeholderPrefix}.channel.id", dataKey, ChannelId);
+            placeholders.RegisterPlaceholder<DiscordMessage, string>(plugin, $"{placeholderPrefix}.content", dataKey, Content);
         }
     }
 }

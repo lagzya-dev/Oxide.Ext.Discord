@@ -1,4 +1,3 @@
-using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Plugins.Core;
@@ -13,27 +12,27 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="IServer.Name"/> placeholder
         /// </summary>
-        public static void Name(StringBuilder builder, PlaceholderState state, IServer server) => PlaceholderFormatting.Replace(builder, state, server.Name);
+        public static string Name(IServer server) => server.Name;
         
         /// <summary>
         /// <see cref="IServer.Players"/> placeholder
         /// </summary>
-        public static void Players(StringBuilder builder, PlaceholderState state, IServer server) => PlaceholderFormatting.Replace(builder, state, server.Players);
+        public static int Players(IServer server) => server.Players;
         
         /// <summary>
         /// <see cref="IServer.MaxPlayers"/> placeholder
         /// </summary>
-        public static void MaxPlayers(StringBuilder builder, PlaceholderState state, IServer server) => PlaceholderFormatting.Replace(builder, state, server.MaxPlayers);
+        public static int MaxPlayers(IServer server) => server.MaxPlayers;
         
         /// <summary>
         /// <see cref="IServer.Version"/> placeholder
         /// </summary>
-        public static void Version(StringBuilder builder, PlaceholderState state, IServer server) => PlaceholderFormatting.Replace(builder, state, server.Version);
+        public static string Version(IServer server) => server.Version;
         
         /// <summary>
         /// <see cref="IServer.Protocol"/> placeholder
         /// </summary>
-        public static void Protocol(StringBuilder builder, PlaceholderState state, IServer server) => PlaceholderFormatting.Replace(builder, state, server.Protocol);
+        public static string Protocol(IServer server) => server.Protocol;
         
         internal static void RegisterPlaceholders()
         {
@@ -49,11 +48,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(IServer))
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<IServer>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
-            placeholders.RegisterPlaceholder<IServer>(plugin, $"{placeholderPrefix}.players", dataKey, Players);
-            placeholders.RegisterPlaceholder<IServer>(plugin, $"{placeholderPrefix}.players.max", dataKey, MaxPlayers);
-            placeholders.RegisterPlaceholder<IServer>(plugin, $"{placeholderPrefix}.version", dataKey, Version);
-            placeholders.RegisterPlaceholder<IServer>(plugin, $"{placeholderPrefix}.protocol", dataKey, Protocol);
+            placeholders.RegisterPlaceholder<IServer, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<IServer, int>(plugin, $"{placeholderPrefix}.players", dataKey, Players);
+            placeholders.RegisterPlaceholder<IServer, int>(plugin, $"{placeholderPrefix}.players.max", dataKey, MaxPlayers);
+            placeholders.RegisterPlaceholder<IServer, string>(plugin, $"{placeholderPrefix}.version", dataKey, Version);
+            placeholders.RegisterPlaceholder<IServer, string>(plugin, $"{placeholderPrefix}.protocol", dataKey, Protocol);
         }
     }
 }

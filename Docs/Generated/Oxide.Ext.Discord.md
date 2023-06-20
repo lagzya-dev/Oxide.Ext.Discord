@@ -897,7 +897,6 @@
 | --- | --- |
 | class [DiscordPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/DiscordPlaceholders.md) | Discord Placeholders Library |
 | class [PlaceholderData](./Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.md) | Placeholder Data for placeholders |
-| static class [PlaceholderFormatting](./Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderFormatting.md) | Formatting Helpers for Placeholders |
 | class [PlaceholderState](./Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderState.md) | Represents the current state for a matched placeholder |
 
 ## Oxide.Ext.Discord.Libraries.Placeholders.Default namespace

@@ -1,4 +1,3 @@
-using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Plugins.Core;
@@ -13,12 +12,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="ResponseError.HttpStatusCode"/> placeholder
         /// </summary>
-        public static void HttpCode(StringBuilder builder, PlaceholderState state, ResponseError error) => PlaceholderFormatting.Replace(builder, state, error.HttpStatusCode);
+        public static DiscordHttpStatusCode HttpCode(ResponseError error) => error.HttpStatusCode;
         
         /// <summary>
         /// <see cref="ResponseError.ResponseMessage"/> placeholder
         /// </summary>
-        public static void Message(StringBuilder builder, PlaceholderState state, ResponseError error) => PlaceholderFormatting.Replace(builder, state, error.DiscordError?.Message ?? error.ResponseMessage);
+        public static string Message(ResponseError error) => error.DiscordError?.Message ?? error.ResponseMessage;
 
         internal static void RegisterPlaceholders()
         {
@@ -34,8 +33,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(ResponseError))
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<ResponseError>(plugin, $"{placeholderPrefix}.code", dataKey, HttpCode);
-            placeholders.RegisterPlaceholder<ResponseError>(plugin, $"{placeholderPrefix}.message", dataKey, Message);
+            placeholders.RegisterPlaceholder<ResponseError, DiscordHttpStatusCode>(plugin, $"{placeholderPrefix}.code", dataKey, HttpCode);
+            placeholders.RegisterPlaceholder<ResponseError, string>(plugin, $"{placeholderPrefix}.message", dataKey, Message);
         }
     }
 }

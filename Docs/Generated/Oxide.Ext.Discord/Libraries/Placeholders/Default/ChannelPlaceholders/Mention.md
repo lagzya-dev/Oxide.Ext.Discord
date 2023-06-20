@@ -3,12 +3,11 @@
 [`Mention`](../../../../Entities/Channels/DiscordChannel/Mention.md) placeholder
 
 ```csharp
-public static void Mention(StringBuilder builder, PlaceholderState state, DiscordChannel channel)
+public static string Mention(DiscordChannel channel)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordChannel](../../../../Entities/Channels/DiscordChannel.md)
 * class [ChannelPlaceholders](../ChannelPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ChannelPlaceholders.md)

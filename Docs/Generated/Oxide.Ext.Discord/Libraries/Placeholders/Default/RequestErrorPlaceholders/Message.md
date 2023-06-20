@@ -3,12 +3,11 @@
 [`ResponseMessage`](../../../../Entities/Api/ResponseError/ResponseMessage.md) placeholder
 
 ```csharp
-public static void Message(StringBuilder builder, PlaceholderState state, ResponseError error)
+public static string Message(ResponseError error)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [ResponseError](../../../../Entities/Api/ResponseError.md)
 * class [RequestErrorPlaceholders](../RequestErrorPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../RequestErrorPlaceholders.md)

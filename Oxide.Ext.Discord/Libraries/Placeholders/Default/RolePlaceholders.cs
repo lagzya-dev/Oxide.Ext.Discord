@@ -1,5 +1,5 @@
-using System.Text;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Plugins.Core;
 
@@ -13,22 +13,22 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="DiscordRole.Id"/> placeholder
         /// </summary>
-        public static void Id(StringBuilder builder, PlaceholderState state, DiscordRole role) => PlaceholderFormatting.Replace(builder, state, role.Id);
+        public static Snowflake Id(DiscordRole role) => role.Id;
         
         /// <summary>
         /// <see cref="DiscordRole.Name"/> placeholder
         /// </summary>
-        public static void Name(StringBuilder builder, PlaceholderState state, DiscordRole role) => PlaceholderFormatting.Replace(builder, state, role.Name);
+        public static string Name(DiscordRole role) => role.Name;
         
         /// <summary>
         /// <see cref="DiscordRole.Mention"/> placeholder
         /// </summary>
-        public static void Mention(StringBuilder builder, PlaceholderState state, DiscordRole role) => PlaceholderFormatting.Replace(builder, state, role.Mention);
+        public static string Mention(DiscordRole role) => role.Mention;
         
         /// <summary>
         /// <see cref="DiscordRole.Icon"/> placeholder
         /// </summary>
-        public static void Icon(StringBuilder builder, PlaceholderState state, DiscordRole role) => PlaceholderFormatting.Replace(builder, state, role.Icon);
+        public static string Icon(DiscordRole role) => role.Icon;
 
         internal static void RegisterPlaceholders()
         {
@@ -44,10 +44,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(DiscordRole))
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<DiscordRole>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
-            placeholders.RegisterPlaceholder<DiscordRole>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
-            placeholders.RegisterPlaceholder<DiscordRole>(plugin, $"{placeholderPrefix}.mention", dataKey, Mention);
-            placeholders.RegisterPlaceholder<DiscordRole>(plugin, $"{placeholderPrefix}.icon", dataKey, Icon);
+            placeholders.RegisterPlaceholder<DiscordRole, Snowflake>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
+            placeholders.RegisterPlaceholder<DiscordRole, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<DiscordRole, string>(plugin, $"{placeholderPrefix}.mention", dataKey, Mention);
+            placeholders.RegisterPlaceholder<DiscordRole, string>(plugin, $"{placeholderPrefix}.icon", dataKey, Icon);
         }
     }
 }

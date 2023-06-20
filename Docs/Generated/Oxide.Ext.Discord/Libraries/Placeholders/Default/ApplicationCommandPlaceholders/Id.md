@@ -3,13 +3,12 @@
 [`Id`](../../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Id.md) placeholder
 
 ```csharp
-public static void Id(StringBuilder builder, PlaceholderState state, 
-    DiscordApplicationCommand command)
+public static Snowflake Id(DiscordApplicationCommand command)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
+* struct [Snowflake](../../../../Entities/Snowflake.md)
 * class [DiscordApplicationCommand](../../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md)
 * class [ApplicationCommandPlaceholders](../ApplicationCommandPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ApplicationCommandPlaceholders.md)

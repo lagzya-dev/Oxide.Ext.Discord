@@ -3,12 +3,11 @@
 [`Name`](../../../../Entities/Channels/DiscordChannel/Name.md) placeholder
 
 ```csharp
-public static void Name(StringBuilder builder, PlaceholderState state, DiscordChannel channel)
+public static string Name(DiscordChannel channel)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordChannel](../../../../Entities/Channels/DiscordChannel.md)
 * class [ChannelPlaceholders](../ChannelPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ChannelPlaceholders.md)

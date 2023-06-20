@@ -3,7 +3,7 @@
 [`IsLinked`](../../../../Extensions/PlayerExt/IsLinked.md) placeholder
 
 ```csharp
-public static void IsLinked(StringBuilder builder, PlaceholderState state, IPlayer player)
+public static bool IsLinked(PlaceholderState state, IPlayer player)
 ```
 
 ## See Also

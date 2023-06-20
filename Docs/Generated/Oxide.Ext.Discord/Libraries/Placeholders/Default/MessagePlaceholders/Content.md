@@ -3,7 +3,7 @@
 [`Content`](../../../../Entities/Messages/DiscordMessage/Content.md) placeholder
 
 ```csharp
-public static void Content(StringBuilder builder, PlaceholderState state, DiscordMessage message)
+public static string Content(PlaceholderState state, DiscordMessage message)
 ```
 
 ## See Also

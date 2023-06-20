@@ -3,12 +3,11 @@
 Plugin) placeholder
 
 ```csharp
-public static void FullName(StringBuilder builder, PlaceholderState state, Plugin plugin)
+public static string FullName(Plugin plugin)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [PluginPlaceholders](../PluginPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../PluginPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

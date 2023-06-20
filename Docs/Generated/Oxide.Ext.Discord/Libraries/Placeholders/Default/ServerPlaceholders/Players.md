@@ -3,12 +3,11 @@
 Players placeholder
 
 ```csharp
-public static void Players(StringBuilder builder, PlaceholderState state, IServer server)
+public static int Players(IServer server)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [ServerPlaceholders](../ServerPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ServerPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

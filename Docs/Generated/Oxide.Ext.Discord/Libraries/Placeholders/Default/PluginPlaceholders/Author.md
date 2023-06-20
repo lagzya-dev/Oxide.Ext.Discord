@@ -3,12 +3,11 @@
 Author placeholder
 
 ```csharp
-public static void Author(StringBuilder builder, PlaceholderState state, Plugin plugin)
+public static string Author(Plugin plugin)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [PluginPlaceholders](../PluginPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../PluginPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

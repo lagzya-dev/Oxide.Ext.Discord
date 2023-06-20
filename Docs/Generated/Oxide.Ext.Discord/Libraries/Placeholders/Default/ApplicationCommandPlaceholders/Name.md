@@ -3,13 +3,11 @@
 [`Name`](../../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Name.md) placeholder
 
 ```csharp
-public static void Name(StringBuilder builder, PlaceholderState state, 
-    DiscordApplicationCommand command)
+public static string Name(DiscordApplicationCommand command)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [DiscordApplicationCommand](../../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md)
 * class [ApplicationCommandPlaceholders](../ApplicationCommandPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ApplicationCommandPlaceholders.md)

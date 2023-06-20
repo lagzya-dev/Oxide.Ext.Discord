@@ -1,5 +1,5 @@
-using System.Text;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Plugins.Core;
 
@@ -13,17 +13,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="GuildMember.Id"/> placeholder
         /// </summary>
-        public static void Id(StringBuilder builder, PlaceholderState state, GuildMember member) => PlaceholderFormatting.Replace(builder, state, member.Id);
+        public static Snowflake Id(GuildMember member) =>  member.Id;
         
         /// <summary>
         /// <see cref="GuildMember.Id"/> placeholder
         /// </summary>
-        public static void Name(StringBuilder builder, PlaceholderState state, GuildMember member) => PlaceholderFormatting.Replace(builder, state, member.DisplayName);
+        public static string Name(GuildMember member) => member.DisplayName;
         
         /// <summary>
         /// <see cref="GuildMember.Id"/> placeholder
         /// </summary>
-        public static void Mention(StringBuilder builder, PlaceholderState state, GuildMember member) => PlaceholderFormatting.Replace(builder, state, member.User.Mention);
+        public static string Mention(GuildMember member) => member.User.Mention;
 
         internal static void RegisterPlaceholders()
         {
@@ -39,9 +39,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(GuildMember))
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<GuildMember>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
-            placeholders.RegisterPlaceholder<GuildMember>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
-            placeholders.RegisterPlaceholder<GuildMember>(plugin, $"{placeholderPrefix}.mention", dataKey, Mention);
+            placeholders.RegisterPlaceholder<GuildMember, Snowflake>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
+            placeholders.RegisterPlaceholder<GuildMember, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<GuildMember, string>(plugin, $"{placeholderPrefix}.mention", dataKey, Mention);
         }
     }
 }

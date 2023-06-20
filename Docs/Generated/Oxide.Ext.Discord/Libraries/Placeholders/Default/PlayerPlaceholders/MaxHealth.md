@@ -3,7 +3,7 @@
 MaxHealth placeholder
 
 ```csharp
-public static void MaxHealth(StringBuilder builder, PlaceholderState state, IPlayer player)
+public static float MaxHealth(PlaceholderState state, IPlayer player)
 ```
 
 ## See Also

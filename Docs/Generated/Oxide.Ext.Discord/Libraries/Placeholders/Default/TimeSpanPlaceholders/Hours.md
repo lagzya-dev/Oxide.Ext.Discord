@@ -3,12 +3,11 @@
 Hours placeholder
 
 ```csharp
-public static void Hours(StringBuilder builder, PlaceholderState state, TimeSpan time)
+public static int Hours(TimeSpan time)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [TimeSpanPlaceholders](../TimeSpanPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../TimeSpanPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

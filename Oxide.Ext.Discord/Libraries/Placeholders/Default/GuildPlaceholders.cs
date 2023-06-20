@@ -1,5 +1,5 @@
-using System.Text;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Plugins.Core;
 
@@ -13,32 +13,32 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="DiscordGuild.Id"/> placeholder
         /// </summary>
-        public static void Id(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.Id);
+        public static Snowflake Id(DiscordGuild guild) => guild.Id;
         
         /// <summary>
         /// <see cref="DiscordGuild.Name"/> placeholder
         /// </summary>
-        public static void Name(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.Name);
+        public static string Name(DiscordGuild guild) => guild.Name;
         
         /// <summary>
         /// <see cref="DiscordGuild.Description"/> placeholder
         /// </summary>
-        public static void Description(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.Description);
+        public static string Description(DiscordGuild guild) => guild.Description;
         
         /// <summary>
         /// <see cref="DiscordGuild.IconUrl"/> placeholder
         /// </summary>
-        public static void Icon(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.IconUrl);
+        public static string Icon(DiscordGuild guild) => guild.IconUrl;
         
         /// <summary>
         /// <see cref="DiscordGuild.BannerUrl"/> placeholder
         /// </summary>
-        public static void Banner(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.BannerUrl);
+        public static string Banner(DiscordGuild guild) => guild.BannerUrl;
         
         /// <summary>
         /// <see cref="DiscordGuild.Members"/> count placeholder
         /// </summary>
-        public static void MemberCount(StringBuilder builder, PlaceholderState state, DiscordGuild guild) => PlaceholderFormatting.Replace(builder, state, guild.Members.Count);
+        public static int MemberCount(DiscordGuild guild) => guild.Members.Count;
 
         internal static void RegisterPlaceholders()
         {
@@ -54,12 +54,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(DiscordGuild))
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<DiscordGuild>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
-            placeholders.RegisterPlaceholder<DiscordGuild>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
-            placeholders.RegisterPlaceholder<DiscordGuild>(plugin, $"{placeholderPrefix}.description", dataKey, Description);
-            placeholders.RegisterPlaceholder<DiscordGuild>(plugin, $"{placeholderPrefix}.icon", dataKey, Icon);
-            placeholders.RegisterPlaceholder<DiscordGuild>(plugin, $"{placeholderPrefix}.banner", dataKey, Banner);
-            placeholders.RegisterPlaceholder<DiscordGuild>(plugin, $"{placeholderPrefix}.members.count", dataKey, MemberCount);
+            placeholders.RegisterPlaceholder<DiscordGuild, Snowflake>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
+            placeholders.RegisterPlaceholder<DiscordGuild, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<DiscordGuild, string>(plugin, $"{placeholderPrefix}.description", dataKey, Description);
+            placeholders.RegisterPlaceholder<DiscordGuild, string>(plugin, $"{placeholderPrefix}.icon", dataKey, Icon);
+            placeholders.RegisterPlaceholder<DiscordGuild, string>(plugin, $"{placeholderPrefix}.banner", dataKey, Banner);
+            placeholders.RegisterPlaceholder<DiscordGuild, int>(plugin, $"{placeholderPrefix}.members.count", dataKey, MemberCount);
         }
     }
 }

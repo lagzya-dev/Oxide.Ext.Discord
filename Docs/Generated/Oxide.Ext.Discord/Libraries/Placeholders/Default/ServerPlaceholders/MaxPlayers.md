@@ -3,12 +3,11 @@
 MaxPlayers placeholder
 
 ```csharp
-public static void MaxPlayers(StringBuilder builder, PlaceholderState state, IServer server)
+public static int MaxPlayers(IServer server)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [ServerPlaceholders](../ServerPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../ServerPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
